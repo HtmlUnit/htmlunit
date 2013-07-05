@@ -45,9 +45,22 @@ import org.w3c.css.sac.Selector;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlButton;
+import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
+import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlHiddenInput;
+import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
+import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlPasswordInput;
+import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
+import com.gargoylesoftware.htmlunit.html.HtmlResetInput;
+import com.gargoylesoftware.htmlunit.html.HtmlSelect;
+import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
+import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
+import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Text;
@@ -55,8 +68,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definit
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement;
 
 /**
  * A JavaScript object for a ComputedCSSStyleDeclaration.
@@ -152,7 +163,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         map.put("I", "inline");
         map.put("IFRAME", "inline");
         map.put("IMG", "inline");
-        // map.put("INPUT", "inline-block");
+        map.put("INPUT", "inline-block");
         map.put("INS", "inline");
         map.put("KBD", "inline");
         map.put("KEYGEN", "inline");
@@ -183,7 +194,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         map.put("FIGURE", "block");
         map.put("FOOTER", "block");
         map.put("HEADER", "block");
-        // map.put("INPUT", "inline");
+        map.put("INPUT", "inline");
         map.put("LEGEND", "block");
         map.put("METER", "inline-block");
 
@@ -1161,7 +1172,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             final String cssFloat = getCssFloat();
             if ("right".equals(cssFloat) || "left".equals(cssFloat)) {
                 // We're floating; simplistic approximation: text content * pixels per character.
-                width = getDomNodeOrDie().getTextContent().length() * PIXELS_PER_CHAR;
+                width = node.getTextContent().length() * PIXELS_PER_CHAR;
             }
             else if ("block".equals(display)) {
                 // Block elements take up 100% of the parent's width.
@@ -1179,6 +1190,23 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     });
                 }
                 width -= (getBorderHorizontal() + getPaddingHorizontal());
+            }
+            else if (node instanceof HtmlSubmitInput || node instanceof HtmlResetInput
+                        || node instanceof HtmlButtonInput || node instanceof HtmlButton) {
+                final String text = node.asText();
+                width = 10 + (text.length() * PIXELS_PER_CHAR);
+            }
+            else if (node instanceof HtmlTextInput || node instanceof HtmlPasswordInput) {
+                width = 50; // wild guess
+            }
+            else if (node instanceof HtmlRadioButtonInput || node instanceof HtmlCheckBoxInput) {
+                width = 20; // wild guess
+            }
+            else if (node instanceof HtmlTextInput || node instanceof HtmlPasswordInput) {
+                width = 50; // wild guess
+            }
+            else if (node instanceof HtmlTextArea) {
+                width = 100; // wild guess
             }
             else {
                 // Inline elements take up however much space is required by their children.
@@ -1310,11 +1338,18 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
         final int defaultHeight;
         if (getElement().getFirstChild() == null) {
-            if (getElement() instanceof HTMLIFrameElement) {
-                defaultHeight = 154;
+            if (node instanceof HtmlButton
+                    || (node instanceof HtmlInput && !(node instanceof HtmlHiddenInput))) {
+                defaultHeight = 20;
             }
-            else if (getElement() instanceof HTMLTextAreaElement) {
+            else if (node instanceof HtmlSelect) {
+                defaultHeight = 20;
+            }
+            else if (node instanceof HtmlTextArea) {
                 defaultHeight = 49;
+            }
+            else if (node instanceof HtmlInlineFrame) {
+                defaultHeight = 154;
             }
             else {
                 defaultHeight = 0;

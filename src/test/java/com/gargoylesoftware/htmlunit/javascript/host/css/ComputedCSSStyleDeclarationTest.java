@@ -535,7 +535,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
                         "inline", "inline", "inline", "inline" },
             IE = { "inline", "inline", "inline", "inline-block", "inline-block",
                     "inline-block", "inline-block", "inline-block", "inline-block", "inline" })
-    @NotYetImplemented
     public void defaultDisplayValues_I() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p id='p'>\n"
@@ -897,6 +896,51 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  alert(h.offsetWidth > 0);\n"
             + "  alert(h.offsetHeight > 0);\n"
             + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "true", "true", "true", "true", "true", "true", "true", "true",
+                "true", "true", "true", "true", "false", "false",
+                "true", "true", "true", "true" })
+    public void widthAndHeightInputElements() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <form id='form'>\n"
+            + "    <input id='submit' type='submit'>\n"
+            + "    <input id='reset' type='reset'>\n"
+            + "    <input id='text' type='text'>\n"
+            + "    <input id='password' type='password'>\n"
+            + "    <input id='checkbox' type='checkbox'>\n"
+            + "    <input id='radio' type='radio'>\n"
+            + "    <input id='hidden' type='hidden'>\n"
+            + "    <button id='button' type='button'></button>\n"
+            + "    <textarea id='myTextarea'></textarea>\n"
+            + "  </form>\n"
+
+            + "  <script>\n"
+            + "    function x(id) {\n"
+            + "      var e = document.getElementById(id);\n"
+            + "      alert(e.offsetWidth > 0);\n"
+            + "      alert(e.offsetHeight > 0);\n"
+            + "    }\n"
+            + "  </script>\n"
+
+            + "  <script>\n"
+            + "    x('submit');\n"
+            + "    x('reset');\n"
+            + "    x('text');\n"
+            + "    x('password');\n"
+            + "    x('checkbox');\n"
+            + "    x('radio');\n"
+            + "    x('hidden');\n"
+            + "    x('button');\n"
+            + "    x('myTextarea');\n"
+            + "  </script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
