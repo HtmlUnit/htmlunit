@@ -249,6 +249,17 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
+     * Returns the page that contains this node.
+     * @return the page that contains this node
+     */
+    public HtmlPage getHtmlPageOrNull() {
+        if (page_ == null || !page_.isHtmlPage()) {
+            return null;
+        }
+        return (HtmlPage) page_;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public Document getOwnerDocument() {
@@ -683,8 +694,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         if (!mayBeDisplayed()) {
             return false;
         }
-        final Page page = getPage();
-        if (page instanceof HtmlPage && page.getEnclosingWindow().getWebClient().getOptions().isCssEnabled()) {
+        final HtmlPage htmlPage = getHtmlPageOrNull();
+        if (htmlPage != null && htmlPage.getEnclosingWindow().getWebClient().getOptions().isCssEnabled()) {
             final LinkedList<CSSStyleDeclaration> styles = new LinkedList<CSSStyleDeclaration>();
 
             // display: iterate top to bottom, because if a parent is display:none,
@@ -760,9 +771,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public String asXml() {
         String charsetName = null;
-        final SgmlPage page = getPage();
-        if (page != null && page.isHtmlPage()) {
-            charsetName = ((HtmlPage) page).getPageEncoding();
+        final HtmlPage htmlPage = getHtmlPageOrNull();
+        if (htmlPage != null) {
+            charsetName = htmlPage.getPageEncoding();
         }
         final StringWriter stringWriter = new StringWriter();
         final PrintWriter printWriter = new PrintWriter(stringWriter);
@@ -1114,9 +1125,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         final DomNode exParent = parent_;
         basicRemove();
 
-        final SgmlPage page = getPage();
-        if (page != null && page.isHtmlPage()) {
-            ((HtmlPage) page).notifyNodeRemoved(this);
+        final HtmlPage htmlPage = getHtmlPageOrNull();
+        if (htmlPage != null) {
+            htmlPage.notifyNodeRemoved(this);
         }
 
         if (exParent != null) {

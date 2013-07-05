@@ -89,9 +89,9 @@ public class HtmlImage extends HtmlElement {
      */
     @Override
     public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String value) {
-        final SgmlPage page = getPage();
+        final HtmlPage htmlPage = getHtmlPageOrNull();
         if ("src".equals(qualifiedName) && value != ATTRIBUTE_NOT_DEFINED
-                && page != null && page.isHtmlPage()) {
+                && htmlPage != null) {
             final String oldValue = getAttributeNS(namespaceURI, qualifiedName);
             if (!oldValue.equals(value)) {
                 super.setAttributeNS(namespaceURI, qualifiedName, value);
@@ -100,7 +100,6 @@ public class HtmlImage extends HtmlElement {
                 onloadInvoked_ = false;
                 downloaded_ = false;
 
-                final HtmlPage htmlPage = (HtmlPage) page;
                 final String readyState = htmlPage.getReadyState();
                 if (READY_STATE_LOADING.equals(readyState)) {
                     final PostponedAction action = new PostponedAction(getPage()) {
@@ -140,12 +139,12 @@ public class HtmlImage extends HtmlElement {
             return;
         }
 
-        final SgmlPage page = getPage();
-        if (page == null || !page.isHtmlPage()) {
+        final HtmlPage htmlPage = getHtmlPageOrNull();
+        if (htmlPage == null) {
             return; // nothing to do if embedded in XML code
         }
 
-        final WebClient client = page.getWebClient();
+        final WebClient client = htmlPage.getWebClient();
         if (!client.getOptions().isJavaScriptEnabled()) {
             onloadInvoked_ = true;
             return;
@@ -168,7 +167,6 @@ public class HtmlImage extends HtmlElement {
                 final Event event = new Event(this, Event.TYPE_LOAD);
                 final Node scriptObject = (Node) getScriptObject();
 
-                final HtmlPage htmlPage = (HtmlPage) getPage();
                 final String readyState = htmlPage.getReadyState();
                 if (READY_STATE_LOADING.equals(readyState)) {
                     final PostponedAction action = new PostponedAction(getPage()) {

@@ -455,7 +455,8 @@ public class HtmlScript extends HtmlElement {
         }
 
         // If innerHTML or outerHTML is being parsed
-        if (page.isHtmlPage() && ((HtmlPage) page).isParsingHtmlSnippet()) {
+        final HtmlPage htmlPage = getHtmlPageOrNull();
+        if (htmlPage != null && htmlPage.isParsingHtmlSnippet()) {
             return false;
         }
 

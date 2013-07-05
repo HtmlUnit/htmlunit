@@ -133,8 +133,7 @@ public abstract class HtmlElement extends DomElement {
             final String attributeValue) {
 
         // TODO: Clean up; this is a hack for HtmlElement living within an XmlPage.
-        final SgmlPage page = getPage();
-        if (page == null || !page.isHtmlPage()) {
+        if (null == getHtmlPageOrNull()) {
             super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
             return;
         }
@@ -211,10 +210,8 @@ public abstract class HtmlElement extends DomElement {
     public final void removeAttribute(final String attributeName) {
         final String value = getAttribute(attributeName);
 
-        final Page page = getPage();
-        HtmlPage htmlPage = null;
-        if (page != null && page.isHtmlPage()) {
-            htmlPage = (HtmlPage) page;
+        final HtmlPage htmlPage = getHtmlPageOrNull();
+        if (htmlPage != null) {
             htmlPage.removeMappedElement(this);
         }
 

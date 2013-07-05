@@ -28,7 +28,6 @@ import java.util.Map;
 
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -151,9 +150,9 @@ public class Element extends EventNode {
     @JsxFunction
     public Object getAttribute(String attributeName, final Integer flags) {
         attributeName = fixAttributeName(attributeName);
-        final Page page = getDomNodeOrDie().getPage();
+        final HtmlPage htmlPage = getDomNodeOrDie().getHtmlPageOrNull();
         final boolean supportsFlags = getBrowserVersion().hasFeature(JS_GET_ATTRIBUTE_SUPPORTS_FLAGS_IN_QUIRKS_MODE)
-                && page != null && page.isHtmlPage() && ((HtmlPage) page).isQuirksMode();
+                && htmlPage != null && htmlPage.isQuirksMode();
 
         Object value;
         if (supportsFlags && flags != null && flags == 2 && "style".equalsIgnoreCase(attributeName)) {

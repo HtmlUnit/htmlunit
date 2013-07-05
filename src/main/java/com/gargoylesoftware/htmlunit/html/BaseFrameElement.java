@@ -73,11 +73,12 @@ public abstract class BaseFrameElement extends HtmlElement {
     private void init() {
         FrameWindow enclosedWindow = null;
         try {
-            if (getPage() instanceof HtmlPage) { // if loaded as part of XHR.responseXML, don't load content
+            final HtmlPage htmlPage = getHtmlPageOrNull();
+            if (null != htmlPage) { // if loaded as part of XHR.responseXML, don't load content
                 enclosedWindow = new FrameWindow(this);
                 // put about:blank in the window to allow JS to run on this frame before the
                 // real content is loaded
-                final WebClient webClient = getPage().getWebClient();
+                final WebClient webClient = htmlPage.getWebClient();
                 final HtmlPage temporaryPage = webClient.getPage(enclosedWindow,
                     new WebRequest(WebClient.URL_ABOUT_BLANK));
                 temporaryPage.setReadyState(READY_STATE_LOADING);
