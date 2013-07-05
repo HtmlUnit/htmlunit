@@ -39,6 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
  * @author Brad Clarke
  * @author David K. Taylor
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public abstract class WebWindowImpl implements WebWindow {
     private static final long serialVersionUID = 1272747208915903553L;
@@ -188,7 +189,7 @@ public abstract class WebWindowImpl implements WebWindow {
             window.setClosed();
             window.getJobManager().shutdown();
             final Page page = window.getEnclosedPage();
-            if (page instanceof HtmlPage) {
+            if (page != null && page.isHtmlPage()) {
                 ((HtmlPage) page).cleanUp();
             }
             window.destroyChildren();

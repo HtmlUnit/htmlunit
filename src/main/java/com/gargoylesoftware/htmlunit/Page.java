@@ -25,6 +25,7 @@ import java.net.URL;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public interface Page extends Serializable {
 
@@ -60,4 +61,10 @@ public interface Page extends Serializable {
      * @return the URL of this page
      */
     URL getUrl();
+
+    /**
+     * Returns true if this page is a HtmlPage.
+     * @return true or false
+     */
+    boolean isHtmlPage();
 }

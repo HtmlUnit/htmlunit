@@ -23,6 +23,7 @@ import java.net.URL;
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
+ * @author Ronald Brill
  */
 public class JavaScriptPage implements Page {
 
@@ -46,6 +47,7 @@ public class JavaScriptPage implements Page {
      * Initializes this page.
      */
     public void initialize() {
+        // nothing to do
     }
 
     /**
@@ -88,5 +90,10 @@ public class JavaScriptPage implements Page {
      */
     public URL getUrl() {
         return getWebResponse().getWebRequest().getUrl();
+    }
+
+    @Override
+    public boolean isHtmlPage() {
+        return false;
     }
 }

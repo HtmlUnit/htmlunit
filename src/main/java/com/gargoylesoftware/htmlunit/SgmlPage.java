@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public abstract class SgmlPage extends DomNode implements Page, Document {
 
@@ -72,6 +73,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
      * {@inheritDoc}
      */
     public void initialize() throws IOException {
+        // nothing to do here
     }
 
     /**
@@ -247,5 +249,10 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
      */
     public URL getUrl() {
         return getWebResponse().getWebRequest().getUrl();
+    }
+
+    @Override
+    public boolean isHtmlPage() {
+        return false;
     }
 }

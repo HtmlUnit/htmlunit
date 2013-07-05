@@ -45,6 +45,7 @@ public class BinaryPage implements Page {
      * {@inheritDoc}
      */
     public void initialize() {
+        // nothing to do here
     }
 
     /**
@@ -84,5 +85,10 @@ public class BinaryPage implements Page {
      */
     public URL getUrl() {
         return getWebResponse().getWebRequest().getUrl();
+    }
+
+    @Override
+    public boolean isHtmlPage() {
+        return false;
     }
 }

@@ -278,15 +278,15 @@ public class WebClient implements Serializable {
                 webWindow.getHistory().addPage(page);
                 return (P) page;
             }
-        }
 
-        if (page instanceof HtmlPage) {
-            final HtmlPage htmlPage = (HtmlPage) page;
-            if (!htmlPage.isOnbeforeunloadAccepted()) {
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("The registered OnbeforeunloadHandler rejected to load a new page.");
+            if (page.isHtmlPage()) {
+                final HtmlPage htmlPage = (HtmlPage) page;
+                if (!htmlPage.isOnbeforeunloadAccepted()) {
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("The registered OnbeforeunloadHandler rejected to load a new page.");
+                    }
+                    return (P) page;
                 }
-                return (P) page;
             }
         }
 
@@ -443,7 +443,7 @@ public class WebClient implements Serializable {
                     newPage.initialize();
                     // hack: onload should be fired the same way for all type of pages
                     // here is a hack to handle non HTML pages
-                    if (webWindow instanceof FrameWindow && !(newPage instanceof HtmlPage)) {
+                    if (webWindow instanceof FrameWindow && !newPage.isHtmlPage()) {
                         final FrameWindow fw = (FrameWindow) webWindow;
                         final BaseFrameElement frame = fw.getFrameElement();
                         if (frame.hasEventHandlers("onload")) {
@@ -686,7 +686,7 @@ public class WebClient implements Serializable {
         //onBlur event is triggered for focused element of old current window
         if (currentWindow_ != null && !currentWindow_.isClosed()) {
             final Page enclosedPage = currentWindow_.getEnclosedPage();
-            if (enclosedPage instanceof HtmlPage) {
+            if (enclosedPage != null && enclosedPage.isHtmlPage()) {
                 final HtmlElement focusedElement = ((HtmlPage) enclosedPage).getFocusedElement();
                 if (focusedElement != null) {
                     focusedElement.fireEvent(Event.TYPE_BLUR);
@@ -697,7 +697,7 @@ public class WebClient implements Serializable {
         //1. In IE activeElement becomes focused element for new current window
         //2. onFocus event is triggered for focusedElement of new current window
         final Page enclosedPage = currentWindow_.getEnclosedPage();
-        if (enclosedPage instanceof HtmlPage) {
+        if (enclosedPage != null && enclosedPage.isHtmlPage()) {
             final Window jsWindow = (Window) currentWindow_.getScriptObject();
             if (jsWindow != null) {
                 if (getBrowserVersion().hasFeature(WINDOW_ACTIVE_ELEMENT_FOCUSED)) {
@@ -1934,7 +1934,7 @@ public class WebClient implements Serializable {
 
         if (win != null && HttpMethod.POST != request.getHttpMethod()) {
             final Page page = win.getEnclosedPage();
-            if (page instanceof HtmlPage && !((HtmlPage) page).isOnbeforeunloadAccepted()) {
+            if (page != null && page.isHtmlPage() && !((HtmlPage) page).isOnbeforeunloadAccepted()) {
                 return;
             }
             final URL current = page.getUrl();

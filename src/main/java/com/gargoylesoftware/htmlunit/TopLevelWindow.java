@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author David K. Taylor
  * @author David D. Kilzer
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class TopLevelWindow extends WebWindowImpl {
 
@@ -107,18 +108,19 @@ public class TopLevelWindow extends WebWindowImpl {
     public void close() {
         setClosed();
         final Page page = getEnclosedPage();
-        if (page instanceof HtmlPage) {
-            final HtmlPage htmlPage = (HtmlPage) page;
-            if (!htmlPage.isOnbeforeunloadAccepted()) {
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("The registered OnbeforeunloadHandler rejected the window close event.");
-                }
-                return;
-            }
-        }
         if (page != null) {
+            if (page.isHtmlPage()) {
+                final HtmlPage htmlPage = (HtmlPage) page;
+                if (!htmlPage.isOnbeforeunloadAccepted()) {
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("The registered OnbeforeunloadHandler rejected the window close event.");
+                    }
+                    return;
+                }
+            }
             page.cleanUp();
         }
+
         getJobManager().shutdown();
         destroyChildren();
         getWebClient().deregisterWebWindow(this);

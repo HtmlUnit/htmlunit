@@ -47,6 +47,7 @@ public class UnexpectedPage implements Page {
      * Initialize this page.
      */
     public void initialize() {
+        // nothing to do here
     }
 
     /**
@@ -90,5 +91,10 @@ public class UnexpectedPage implements Page {
      */
     public URL getUrl() {
         return getWebResponse().getWebRequest().getUrl();
+    }
+
+    @Override
+    public boolean isHtmlPage() {
+        return false;
     }
 }
