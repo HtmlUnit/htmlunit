@@ -405,6 +405,7 @@ public class HtmlImage extends HtmlElement {
             final ImageInputStream iis = ImageIO.createImageInputStream(imageWebResponse_.getContentAsStream());
             final Iterator<ImageReader> iter = ImageIO.getImageReaders(iis);
             if (!iter.hasNext()) {
+                iis.close();
                 throw new IOException("No image detected in response");
             }
             imageReader_ = iter.next();
