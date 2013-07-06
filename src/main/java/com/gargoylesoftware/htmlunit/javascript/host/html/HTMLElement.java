@@ -501,7 +501,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         if (getBrowserVersion().hasFeature(GENERATED_65)) {
             return domNode.getNamespaceURI();
         }
-        if (domNode.getPage() instanceof HtmlPage) {
+        if (domNode.getHtmlPageOrNull() != null) {
             return null;
         }
         return domNode.getNamespaceURI();
@@ -513,7 +513,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     @Override
     public String getLocalName() {
         final DomNode domNode = getDomNodeOrDie();
-        if (domNode.getPage() instanceof HtmlPage) {
+        if (domNode.getHtmlPageOrNull() != null) {
             final String prefix = domNode.getPrefix();
             if (prefix != null) {
                 // create string builder only if needed (performance)
@@ -2076,7 +2076,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public String getNodeName() {
         final DomNode domNode = getDomNodeOrDie();
         String nodeName = domNode.getNodeName();
-        if (domNode.getPage() instanceof HtmlPage) {
+        if (domNode.getHtmlPageOrNull() != null) {
             nodeName = nodeName.toUpperCase(Locale.ENGLISH);
         }
         return nodeName;

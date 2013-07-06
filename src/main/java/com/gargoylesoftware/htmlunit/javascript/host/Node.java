@@ -900,7 +900,7 @@ public class Node extends SimpleScriptable {
         final DomNode domNode = getDomNodeOrDie();
         final String prefix = domNode.getPrefix();
         if (getBrowserVersion().hasFeature(GENERATED_125)
-                && (prefix == null || domNode.getPage() instanceof HtmlPage)) {
+                && (prefix == null || domNode.getHtmlPageOrNull() != null)) {
             return "";
         }
         return prefix;
@@ -935,7 +935,7 @@ public class Node extends SimpleScriptable {
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
         if (getBrowserVersion().hasFeature(JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)
-                && !(getDomNodeOrDie().getPage() instanceof HtmlPage)) {
+                && null == getDomNodeOrDie().getHtmlPageOrNull()) {
             ActiveXObject.addProperty(this, "namespaceURI", true, false);
             ActiveXObject.addProperty(this, "prefix", true, false);
         }
