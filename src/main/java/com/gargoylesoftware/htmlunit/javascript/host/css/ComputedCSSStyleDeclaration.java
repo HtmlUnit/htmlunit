@@ -173,6 +173,12 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         map.put("MAP", "inline");
         map.put("MARK", "inline");
         map.put("METER", "inline");
+        map.put("NAV", "inline");
+        // map.put("NOSCRIPT", "inline");
+        map.put("OBJECT", "inline");
+        map.put("OPTGROUP", "inline");
+        map.put("OPTION", "inline");
+        map.put("OUTPUT", "inline");
 
         map.put("SPAN", "inline");
 
@@ -197,6 +203,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         map.put("INPUT", "inline");
         map.put("LEGEND", "block");
         map.put("METER", "inline-block");
+        map.put("NAV", "block");
+        // map.put("NOSCRIPT", "none");
+        map.put("OPTGROUP", "block");
+        map.put("OPTION", "block");
 
         DEFAULT_DISPLAYS_CSS = Collections.unmodifiableMap(map);
     }
