@@ -179,6 +179,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         map.put("OPTGROUP", "inline");
         map.put("OPTION", "inline");
         map.put("OUTPUT", "inline");
+        map.put("PARAM", "inline");
+        map.put("PROGRESS", "inline");
+        map.put("Q", "inline");
 
         map.put("SPAN", "inline");
 
@@ -207,6 +210,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         // map.put("NOSCRIPT", "none");
         map.put("OPTGROUP", "block");
         map.put("OPTION", "block");
+        map.put("PARAM", "none");
+        map.put("PROGRESS", "inline-block");
 
         DEFAULT_DISPLAYS_CSS = Collections.unmodifiableMap(map);
     }

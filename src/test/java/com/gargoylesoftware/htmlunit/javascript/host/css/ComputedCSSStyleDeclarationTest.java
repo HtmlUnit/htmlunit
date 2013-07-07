@@ -729,6 +729,43 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = { "block", "none", "block", "inline-block", "inline" },
+            IE = { "block", "inline", "block", "inline", "inline" })
+    public void defaultDisplayValues_PQ() throws Exception {
+        // this fails in real IE8 but works in IE9
+        final String html = "<!DOCTYPE HTML>\n<html><body>\n"
+            + "  <p id='p'><q id='q'></q></p>\n"
+
+            + "  <object>\n"
+            + "    <param id='param' name='movie' value=''></param>\n"
+            + "  </object> "
+
+            + "  <pre id='pre'></pre>\n"
+            + "  <progress id='progress'></progress>\n"
+
+            + "  <script>\n"
+            + "    function x(id) {\n"
+            + "      var e = document.getElementById(id);\n"
+            + "      var disp = e.currentStyle ? e.currentStyle.display : window.getComputedStyle(e, '').display;\n"
+            + "      alert(disp);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "  <script>\n"
+            + "    x('p');\n"
+            + "    x('param');\n"
+            + "    x('pre');\n"
+            + "    x('progress');\n"
+
+            + "    x('q');\n"
+            + "  </script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts("table table-header-group table-row-group table-cell table-row table-cell block list-item")
     public void defaultDisplayValuesTable() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
