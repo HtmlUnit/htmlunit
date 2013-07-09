@@ -182,8 +182,23 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         map.put("PARAM", "inline");
         map.put("PROGRESS", "inline");
         map.put("Q", "inline");
-
+        map.put("RUBY", "ruby");
+        map.put("RT", "ruby-text");
+        map.put("RP", "inline");
+        map.put("S", "inline");
+        map.put("SAMP", "inline");
+        map.put("SCRIPT", "inline");
+        map.put("SECTION", "inline");
+        map.put("SELECT", "inline-block");
+        map.put("SMALL", "inline");
+        map.put("SUP", "inline");
+        map.put("SOURCE", "inline");
         map.put("SPAN", "inline");
+        map.put("STRIKE", "inline");
+        map.put("STRONG", "inline");
+        map.put("SUB", "inline");
+        map.put("SUMMARY", "inline");
+        map.put("SUP", "inline");
 
         map.put("TABLE", "table");
         map.put("TBODY", "table-row-group");
@@ -212,6 +227,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         map.put("OPTION", "block");
         map.put("PARAM", "none");
         map.put("PROGRESS", "inline-block");
+        map.put("RUBY", "inline");
+        map.put("RT", "inline");
+        map.put("SCRIPT", "none");
+        map.put("SECTION", "block");
+        map.put("SELECT", "inline");
 
         DEFAULT_DISPLAYS_CSS = Collections.unmodifiableMap(map);
     }

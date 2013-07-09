@@ -766,6 +766,96 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = { "inline", "inline", "inline" },
+            IE = { "ruby", "ruby-text", "inline" })
+    public void defaultDisplayValues_R() throws Exception {
+        final String html = "<!DOCTYPE HTML>\n<html><body>\n"
+            + "  <ruby id='ruby'>\n"
+            + "    <rt id='rt'>\n"
+            + "      <rp id='rp'></rp>\n"
+            + "    </rt>\n"
+            + "  </ruby> \n"
+
+            + "  <script>\n"
+            + "    function x(id) {\n"
+            + "      var e = document.getElementById(id);\n"
+            + "      var disp = e.currentStyle ? e.currentStyle.display : window.getComputedStyle(e, '').display;\n"
+            + "      alert(disp);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "  <script>\n"
+            + "    x('ruby');\n"
+            + "    x('rt');\n"
+            + "    x('rp');\n"
+            + "  </script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "inline", "inline", "none", "block", "inline", "inline",
+                        "inline", "inline", "inline", "inline", "inline", "inline", "inline" },
+            IE = { "inline", "inline", "inline", "inline", "inline-block", "inline",
+                        "inline", "inline", "inline", "inline", "inline", "inline", "inline" })
+    public void defaultDisplayValues_S() throws Exception {
+        final String html = "<!DOCTYPE HTML>\n<html><body>\n"
+            + "  <p>\n"
+            + "    <s id='s'></s>\n"
+            + "    <small id='small'></small>\n"
+            + "    <span id='span'></span>\n"
+            + "    <strike id='strike'></strike>\n"
+            + "    <strong id='strong'></strong>\n"
+            + "    <sub id='sub'></sub>\n"
+            + "    <sup id='sup'></sup>\n"
+            + "  </p> \n"
+
+            + "  <samp id='samp'></samp>\n"
+            + "  <section id='section'></section>\n"
+            + "  <summary id='summary'></summary>\n"
+
+            + "  <audio>\n"
+            + "    <source id='source'>\n"
+            + "  </audio>\n"
+
+            + "  <form>\n"
+            + "    <select id='select'>\n"
+            + "      <option></option>\n"
+            + "    </select>\n"
+            + "  </form>\n"
+
+            + "  <script id='script'>\n"
+            + "    function x(id) {\n"
+            + "      var e = document.getElementById(id);\n"
+            + "      var disp = e.currentStyle ? e.currentStyle.display : window.getComputedStyle(e, '').display;\n"
+            + "      alert(disp);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "  <script>\n"
+            + "    x('s');\n"
+            + "    x('samp');\n"
+            + "    x('script');\n"
+            + "    x('section');\n"
+            + "    x('select');\n"
+            + "    x('small');\n"
+            + "    x('source');\n"
+            + "    x('span');\n"
+            + "    x('strike');\n"
+            + "    x('strong');\n"
+            + "    x('sub');\n"
+            + "    x('summary');\n"
+            + "    x('sup');\n"
+            + "  </script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts("table table-header-group table-row-group table-cell table-row table-cell block list-item")
     public void defaultDisplayValuesTable() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
