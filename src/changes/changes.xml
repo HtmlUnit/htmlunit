@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem">
+                JavaScript: add basic support for window.navigator.security (FF only).
+            </action>
             <action type="fix" dev="rbri" issue="1510">
                 Make the handling of empty responses more error proof.
             </action>

@@ -1939,6 +1939,15 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
+     * Returns the value of "netscape" property.
+     * @return the value of "netscape" property
+     */
+    @JsxGetter(@WebBrowser(FF))
+    public Netscape getNetscape() {
+        return new Netscape(this);
+    }
+
+    /**
      * Executes the event on this object only (needed for instance for onload on (i)frame tags).
      * @param event the event
      * @return the result
