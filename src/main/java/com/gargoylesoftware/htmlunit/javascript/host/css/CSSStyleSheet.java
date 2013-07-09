@@ -118,6 +118,7 @@ import com.steadystate.css.parser.selectors.SuffixAttributeConditionImpl;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Guy Burton
  */
 @JsxClass
 public class CSSStyleSheet extends SimpleScriptable {
@@ -242,20 +243,23 @@ public class CSSStyleSheet extends SimpleScriptable {
             }
             else if (CSSRule.IMPORT_RULE == ruleType) {
                 final CSSImportRuleImpl importRule = (CSSImportRuleImpl) rule;
-                CSSStyleSheet sheet = imports_.get(importRule);
-                if (sheet == null) {
-                    // TODO: surely wrong: in which case is it null and why?
-                    final String uri = (uri_ != null) ? uri_ : e.getPage().getUrl().toExternalForm();
-                    final String href = importRule.getHref();
-                    final String url = UrlUtils.resolveUrl(uri, href);
-                    sheet = loadStylesheet(getWindow(), ownerNode_, null, url);
-                    imports_.put(importRule, sheet);
-                }
+                final String media = importRule.getMedia().getMediaText();
+                if (isActive(media)) {
+                    CSSStyleSheet sheet = imports_.get(importRule);
+                    if (sheet == null) {
+                        // TODO: surely wrong: in which case is it null and why?
+                        final String uri = (uri_ != null) ? uri_ : e.getPage().getUrl().toExternalForm();
+                        final String href = importRule.getHref();
+                        final String url = UrlUtils.resolveUrl(uri, href);
+                        sheet = loadStylesheet(getWindow(), ownerNode_, null, url);
+                        imports_.put(importRule, sheet);
+                    }
 
-                if (!alreadyProcessing.contains(sheet.getUri())) {
-                    final CSSRuleList sheetRules = sheet.getWrappedSheet().getCssRules();
-                    alreadyProcessing.add(getUri());
-                    sheet.modifyIfNecessary(style, element, sheetRules, alreadyProcessing);
+                    if (!alreadyProcessing.contains(sheet.getUri())) {
+                        final CSSRuleList sheetRules = sheet.getWrappedSheet().getCssRules();
+                        alreadyProcessing.add(getUri());
+                        sheet.modifyIfNecessary(style, element, sheetRules, alreadyProcessing);
+                    }
                 }
             }
             else if (CSSRule.MEDIA_RULE == ruleType) {

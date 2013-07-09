@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Ronald Brill
+ * @author Guy Burton
  */
 @RunWith(BrowserRunner.class)
 public class CSSImportRuleTest extends WebDriverTestCase {
@@ -43,17 +44,17 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      */
     @Test
     @Browsers(FF)
-    public void testGetImportFromCssRulesCollection() throws Exception {
+    public void getImportFromCssRulesCollection() throws Exception {
         // with absolute URL
-        testGetImportFromCssRulesCollection(getDefaultUrl(), URL_SECOND.toExternalForm(), URL_SECOND);
+        getImportFromCssRulesCollection(getDefaultUrl(), URL_SECOND.toExternalForm(), URL_SECOND);
 
         // with relative URL
         final URL urlPage = new URL(URL_FIRST, "/dir1/dir2/foo.html");
         final URL urlCss = new URL(URL_FIRST, "/dir1/dir2/foo.css");
-        testGetImportFromCssRulesCollection(urlPage, "foo.css", urlCss);
+        getImportFromCssRulesCollection(urlPage, "foo.css", urlCss);
     }
 
-    private void testGetImportFromCssRulesCollection(final URL pageUrl, final String cssRef, final URL cssUrl)
+    private void getImportFromCssRulesCollection(final URL pageUrl, final String cssRef, final URL cssUrl)
         throws Exception {
         final String html
             = "<html><body>\n"
@@ -81,7 +82,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    public void testImportedStylesheetsLoaded() throws Exception {
+    public void importedStylesheetsLoaded() throws Exception {
         final String html
             = "<html><body>\n"
             + "<style>@import url('" + URL_SECOND + "');</style>\n"
@@ -104,7 +105,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    public void testImportedStylesheetsURLResolution() throws Exception {
+    public void importedStylesheetsURLResolution() throws Exception {
         final String html = "<html><head>\n"
             + "<link rel='stylesheet' type='text/css' href='dir1/dir2/file1.css'></link>\n"
             + "<body>\n"
@@ -132,7 +133,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    public void testCircularImportedStylesheets() throws Exception {
+    public void circularImportedStylesheets() throws Exception {
         final String html = "<html><head>\n"
             + "<link rel='stylesheet' type='text/css' href='dir1/dir2/file1.css'></link>\n"
             + "<body>\n"
@@ -161,7 +162,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "true", "true", "true" })
-    public void testCircularImportedStylesheetsComplexCase() throws Exception {
+    public void circularImportedStylesheetsComplexCase() throws Exception {
         final String html = "<html><head>\n"
             + "<link rel='stylesheet' type='text/css' href='dir1/dir2/file1.css'></link>\n"
             + "<body>\n"
@@ -202,5 +203,38 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(urlCss5, css5, "text/css");
 
         loadPageWithAlerts2(html, urlPage);
+    }
+
+    /**
+     * Test that media specific imports work correctly.
+     * Should import the first stylesheet and not the second
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("42px")
+    public void importedStylesheetsLoadedAccordingToMediaType() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "  <style>\n"
+            + "    @import url('" + URL_SECOND  + "');\n"
+            + "    @import url('" + URL_THIRD + "') print;\n"
+            + "  </style>\n"
+            + "</head>\n"
+
+            + "<body>\n"
+            + "  <div id='d'>foo</div>\n"
+            + "  <script>\n"
+            + "    var d = document.getElementById('d');\n"
+            + "    var s = window.getComputedStyle ? window.getComputedStyle(d,null) : d.currentStyle;\n"
+            + "    alert(s.fontSize);\n"
+            + "</script>\n"
+            + "</body></html>";
+        final String screenCss = "#d { font-size: 42px; }";
+        final String printCss  = "#d { font-size: 13px; }";
+
+        getMockWebConnection().setResponse(URL_SECOND,  screenCss, "text/css");
+        getMockWebConnection().setResponse(URL_THIRD, printCss,  "text/css");
+
+        loadPageWithAlerts2(html);
     }
 }

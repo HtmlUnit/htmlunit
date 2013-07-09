@@ -719,6 +719,9 @@
         <contributor>
             <name>John J Murdoch</name>
         </contributor>
+        <contributor>
+            <name>Guy Burton</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
