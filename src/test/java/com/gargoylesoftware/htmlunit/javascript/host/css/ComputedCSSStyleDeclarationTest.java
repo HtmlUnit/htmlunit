@@ -856,25 +856,50 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("table table-header-group table-row-group table-cell table-row table-cell block list-item")
-    public void defaultDisplayValuesTable() throws Exception {
+    @Alerts(DEFAULT = { "table", "table-row-group", "table-cell", "inline", "table-footer-group",
+                        "table-cell", "table-header-group", "inline", "table-row", "inline", "inline" },
+            IE = { "table", "table-row-group", "table-cell", "inline-block", "table-footer-group",
+                        "table-cell", "table-header-group", "inline", "table-row", "inline", "inline" })
+    public void defaultDisplayValues_T() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <table id='table'>\n"
             + "    <thead id='thead'><tr id='tr'><th id='th'>header</th></tr></thead>\n"
+            + "    <tfoot id='tfoot'><tr><td>footer</td></tr></tfoot>\n"
             + "    <tbody id='tbody'><tr><td id='td'>body</td></tr></tbody>\n"
             + "  </table>\n"
 
-            + "  <ul id='ul'><li id='li'>blah</li></ul>\n"
+            + "  <form>\n"
+            + "    <textarea id='textarea'></textarea>\n"
+            + "  </form>\n"
 
-            + "  <script>\n"
+            + "  <p>\n"
+            + "    <time id='time'></time>\n"
+            + "    <tt id='tt'></tt>\n"
+            + "  </p> \n"
+
+            + "  <video>\n"
+            + "    <track id='track'>\n"
+            + "  </video>\n"
+
+            + "  <script id='script'>\n"
             + "    function x(id) {\n"
             + "      var e = document.getElementById(id);\n"
-            + "      return e.currentStyle ? e.currentStyle.display : window.getComputedStyle(e, '').display;\n"
+            + "      var disp = e.currentStyle ? e.currentStyle.display : window.getComputedStyle(e, '').display;\n"
+            + "      alert(disp);\n"
             + "    }\n"
             + "  </script>\n"
             + "  <script>\n"
-            + "    alert(x('table') + ' ' + x('thead') + ' ' + x('tbody') + ' ' + x('th') + ' ' + x('tr') +\n"
-            + "      ' ' + x('td') + ' ' + x('ul') + ' ' + x('li'));\n"
+            + "    x('table');\n"
+            + "    x('tbody');\n"
+            + "    x('td');\n"
+            + "    x('textarea');\n"
+            + "    x('tfoot');\n"
+            + "    x('th');\n"
+            + "    x('thead');\n"
+            + "    x('time');\n"
+            + "    x('tr');\n"
+            + "    x('track');\n"
+            + "    x('tt');\n"
             + "  </script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);

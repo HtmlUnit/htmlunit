@@ -203,9 +203,15 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         map.put("TABLE", "table");
         map.put("TBODY", "table-row-group");
         map.put("TD", "table-cell");
+        map.put("TEXTAREA", "inline-block");
+        map.put("TFOOT", "table-footer-group");
         map.put("TH", "table-cell");
         map.put("THEAD", "table-header-group");
+        map.put("THEAD", "table-header-group");
+        map.put("TIME", "inline");
         map.put("TR", "table-row");
+        map.put("TRACK", "inline");
+        map.put("TT", "inline");
         DEFAULT_DISPLAYS = Collections.unmodifiableMap(map);
 
         map = new HashMap<String, String>(map);
@@ -232,6 +238,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         map.put("SCRIPT", "none");
         map.put("SECTION", "block");
         map.put("SELECT", "inline");
+        map.put("TEXTAREA", "inline");
 
         DEFAULT_DISPLAYS_CSS = Collections.unmodifiableMap(map);
     }
