@@ -909,6 +909,43 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = { "inline", "block", "inline", "inline", "inline" })
+    public void defaultDisplayValues_UVW() throws Exception {
+        final String html = "<!DOCTYPE HTML>\n<html><body>\n"
+            + "  <p>\n"
+            + "    <u id='u'></u>\n"
+            + "    <wbr id='wbr'></wbr>\n"
+            + "  </p> \n"
+
+            + "  <ul id='ul'>\n"
+            + "    <li></li>\n"
+            + "  </ul>\n"
+
+            + "  <var id='var'></var>\n"
+            + "  <video id='video'></video>\n"
+
+            + "  <script id='script'>\n"
+            + "    function x(id) {\n"
+            + "      var e = document.getElementById(id);\n"
+            + "      var disp = e.currentStyle ? e.currentStyle.display : window.getComputedStyle(e, '').display;\n"
+            + "      alert(disp);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "  <script>\n"
+            + "    x('u');\n"
+            + "    x('ul');\n"
+            + "    x('var');\n"
+            + "    x('video');\n"
+            + "    x('wbr');\n"
+            + "  </script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(IE = { "transparent", "red", "white" },
             FF = { "transparent", "rgb(255, 0, 0)", "rgb(255, 255, 255)" })
     public void backgroundColor() throws Exception {

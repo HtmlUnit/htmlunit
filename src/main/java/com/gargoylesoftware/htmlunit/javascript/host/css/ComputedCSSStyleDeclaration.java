@@ -212,6 +212,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         map.put("TR", "table-row");
         map.put("TRACK", "inline");
         map.put("TT", "inline");
+        map.put("U", "inline");
+        map.put("VAR", "inline");
+        map.put("VIDEO", "inline");
+        map.put("WBR", "inline");
         DEFAULT_DISPLAYS = Collections.unmodifiableMap(map);
 
         map = new HashMap<String, String>(map);
