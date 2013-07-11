@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @JsxClass(domClasses = HtmlProgress.class, browsers = @WebBrowser(value = FF, minVersion = 10))
 public class HTMLProgressElement extends HTMLElement {
@@ -56,5 +57,14 @@ public class HTMLProgressElement extends HTMLElement {
         catch (final NumberFormatException e) {
             return defaultValue;
         }
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * {@inheritDoc}
+    */
+    @Override
+    public String getDefaultStyleDisplay() {
+        return "inline-block";
     }
 }

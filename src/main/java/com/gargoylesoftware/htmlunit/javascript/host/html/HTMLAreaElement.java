@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import com.gargoylesoftware.htmlunit.html.HtmlArea;
@@ -28,7 +29,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @version $Revision$
  * @author Ahmed Ashour
- */
+ * @author Ronald Brill
+*/
 @JsxClass(domClasses = HtmlArea.class)
 public class HTMLAreaElement extends HTMLElement {
 
@@ -90,5 +92,17 @@ public class HTMLAreaElement extends HTMLElement {
     @Override
     protected boolean isEndTagForbidden() {
         return true;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * {@inheritDoc}
+    */
+    @Override
+    public String getDefaultStyleDisplay() {
+        if (getBrowserVersion().hasFeature(CSS_DISPLAY_DEFAULT)) {
+            return "none";
+        }
+        return "inline";
     }
 }

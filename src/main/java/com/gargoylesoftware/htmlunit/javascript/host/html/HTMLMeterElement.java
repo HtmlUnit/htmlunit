@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
@@ -27,6 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @JsxClass(domClasses = HtmlMeter.class, browsers = { @WebBrowser(value = FF, minVersion = 16), @WebBrowser(CHROME) })
 public class HTMLMeterElement extends HTMLElement {
@@ -104,5 +106,17 @@ public class HTMLMeterElement extends HTMLElement {
         catch (final NumberFormatException e) {
             return defaultValue;
         }
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * {@inheritDoc}
+    */
+    @Override
+    public String getDefaultStyleDisplay() {
+        if (getBrowserVersion().hasFeature(CSS_DISPLAY_DEFAULT)) {
+            return "inline-block";
+        }
+        return "inline";
     }
 }

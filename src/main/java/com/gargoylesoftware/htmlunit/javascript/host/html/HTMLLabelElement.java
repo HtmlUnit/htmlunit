@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(domClasses = HtmlLabel.class)
 public class HTMLLabelElement extends FormChild {
@@ -69,4 +70,12 @@ public class HTMLLabelElement extends FormChild {
         super.setAccessKey(accessKey);
     }
 
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * {@inheritDoc}
+    */
+    @Override
+    public String getDefaultStyleDisplay() {
+        return "inline";
+    }
 }

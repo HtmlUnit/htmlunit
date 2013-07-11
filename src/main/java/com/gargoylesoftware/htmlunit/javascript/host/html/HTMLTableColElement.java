@@ -101,4 +101,17 @@ public class HTMLTableColElement extends HTMLTableComponent {
     protected boolean isEndTagForbidden() {
         return getDomNodeOrDie() instanceof HtmlTableColumn;
     }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * {@inheritDoc}
+    */
+    @Override
+    public String getDefaultStyleDisplay() {
+        final String tagName = getTagName();
+        if ("COLGROUP".equals(tagName)) {
+            return "table-column-group";
+        }
+        return "table-column";
+    }
 }

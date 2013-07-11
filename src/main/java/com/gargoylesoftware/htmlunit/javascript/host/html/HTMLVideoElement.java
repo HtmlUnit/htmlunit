@@ -26,8 +26,17 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(domClasses = HtmlVideo.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
 public class HTMLVideoElement extends HTMLMediaElement {
 
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * {@inheritDoc}
+    */
+    @Override
+    public String getDefaultStyleDisplay() {
+        return "inline";
+    }
 }

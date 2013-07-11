@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import com.gargoylesoftware.htmlunit.html.HtmlLegend;
@@ -28,6 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(domClasses = HtmlLegend.class)
 public class HTMLLegendElement extends FormChild {
@@ -50,4 +52,15 @@ public class HTMLLegendElement extends FormChild {
         super.setAccessKey(accessKey);
     }
 
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * {@inheritDoc}
+    */
+    @Override
+    public String getDefaultStyleDisplay() {
+        if (getBrowserVersion().hasFeature(CSS_DISPLAY_DEFAULT)) {
+            return "block";
+        }
+        return "inline";
+    }
 }

@@ -45,6 +45,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.RowContainer;
  * @author Chris Erskine
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(domClasses = HtmlTable.class)
 public class HTMLTableElement extends RowContainer {
@@ -372,4 +373,12 @@ public class HTMLTableElement extends RowContainer {
         setColorAttribute("bgColor", bgColor);
     }
 
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * {@inheritDoc}
+    */
+    @Override
+    public String getDefaultStyleDisplay() {
+        return "table";
+    }
 }

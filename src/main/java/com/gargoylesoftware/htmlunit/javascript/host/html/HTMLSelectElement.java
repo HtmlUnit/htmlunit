@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_ADD_SECOND_PARAM_IS_INDEX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_ADD_SECOND_PARAM_IS_REQUIRED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_ITEM_THROWS_IF_NEGATIVE;
@@ -44,6 +45,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormField;
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(domClasses = HtmlSelect.class)
 public class HTMLSelectElement extends FormField {
@@ -429,4 +431,15 @@ public class HTMLSelectElement extends FormField {
         }
     }
 
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * {@inheritDoc}
+    */
+    @Override
+    public String getDefaultStyleDisplay() {
+        if (getBrowserVersion().hasFeature(CSS_DISPLAY_DEFAULT)) {
+            return "inline";
+        }
+        return "inline-block";
+    }
 }

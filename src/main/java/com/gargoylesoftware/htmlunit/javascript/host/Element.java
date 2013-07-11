@@ -544,4 +544,15 @@ public class Element extends EventNode {
     public ComputedCSSStyleDeclaration getCurrentStyle() {
         return getWindow().getComputedStyle(this, null);
     }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Returns the default display style.
+     *
+     * @return the default display style.
+     */
+    public String getDefaultStyleDisplay() {
+        return "block";
+    }
 }

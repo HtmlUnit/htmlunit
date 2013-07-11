@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(domClasses = HtmlWordBreak.class, browsers = { @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 4) })
 public class HTMLWBRElement extends HTMLElement {
@@ -36,5 +37,14 @@ public class HTMLWBRElement extends HTMLElement {
     @Override
     protected boolean isEndTagForbidden() {
         return true;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * {@inheritDoc}
+    */
+    @Override
+    public String getDefaultStyleDisplay() {
+        return "inline";
     }
 }

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_170;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_UNSELECT_SELECTS_FIRST;
 
@@ -40,6 +41,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
  * @author Chris Erskine
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(domClasses = HtmlOption.class)
 public class HTMLOptionElement extends FormChild {
@@ -196,5 +198,17 @@ public class HTMLOptionElement extends FormChild {
     @JsxSetter
     public void setDisabled(final boolean disabled) {
         super.setDisabled(disabled);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * {@inheritDoc}
+    */
+    @Override
+    public String getDefaultStyleDisplay() {
+        if (getBrowserVersion().hasFeature(CSS_DISPLAY_DEFAULT)) {
+            return "block";
+        }
+        return "inline";
     }
 }

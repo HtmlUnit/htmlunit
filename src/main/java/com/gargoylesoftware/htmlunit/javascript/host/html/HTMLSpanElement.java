@@ -60,6 +60,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 @JsxClass(domClasses = { HtmlAbbreviated.class, HtmlAcronym.class, HtmlAddress.class,
         HtmlBidirectionalOverride.class, HtmlBig.class, HtmlBold.class, HtmlBlink.class, HtmlCenter.class,
@@ -175,5 +176,21 @@ public class HTMLSpanElement extends HTMLElement {
      */
     protected boolean isEndTagForbidden() {
         return endTagForbidden_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * {@inheritDoc}
+    */
+    @Override
+    public String getDefaultStyleDisplay() {
+        final String tagName = getTagName();
+        if ("ADDRESS".equals(tagName)
+                || "CENTER".equals(tagName)
+                || "DD".equals(tagName)
+                || "DT".equals(tagName)) {
+            return super.getDefaultStyleDisplay();
+        }
+        return "inline";
     }
 }

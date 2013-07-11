@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(domClasses = { HtmlInlineQuotation.class, HtmlBlockQuote.class })
 public class HTMLQuoteElement extends HTMLElement {
@@ -68,5 +69,18 @@ public class HTMLQuoteElement extends HTMLElement {
     @JsxSetter(@WebBrowser(IE))
     public void setDateTime(final String dateTime) {
         getDomNodeOrDie().setAttribute("datetime", dateTime);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * {@inheritDoc}
+    */
+    @Override
+    public String getDefaultStyleDisplay() {
+        final String tagName = getTagName();
+        if ("BLOCKQUOTE".equals(tagName)) {
+            return super.getDefaultStyleDisplay();
+        }
+        return "inline";
     }
 }

@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(domClasses = HtmlCaption.class)
 public class HTMLTableCaptionElement extends HTMLElement {
@@ -91,4 +92,12 @@ public class HTMLTableCaptionElement extends HTMLElement {
         return valid;
     }
 
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * {@inheritDoc}
+    */
+    @Override
+    public String getDefaultStyleDisplay() {
+        return "table-caption";
+    }
 }

@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CAN_INHERIT_C
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_15;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_MARKS_MIN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_WIDTH_AUTO;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONT_STRECH_DEFAULT_NORMAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_TEXT_SHADOW_DEFAULT_NONE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_WORD_SPACING_DEFAULT_NORMAL;
@@ -28,10 +27,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.TREATS_POSITI
 import static org.apache.commons.lang3.StringUtils.defaultIfEmpty;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -126,125 +122,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         "white-space",
         "widows",
         "word-spacing"));
-
-    /** Maps element types to custom display types (display types that are not "block". */
-    private static final Map<String, String> DEFAULT_DISPLAYS;
-    private static final Map<String, String> DEFAULT_DISPLAYS_CSS;
-
-    static {
-        HashMap<String, String> map = new HashMap<String, String>();
-        map.put("A", "inline");
-        map.put("ABBR", "inline");
-        map.put("ACRONYM", "inline");
-        map.put("AREA", "inline");
-        map.put("ARTICLE", "inline");
-        map.put("ASIDE", "inline");
-        map.put("AUDIO", "inline");
-        map.put("B", "inline");
-        map.put("BDO", "inline");
-        map.put("BIG", "inline");
-        map.put("BR", "inline");
-        map.put("BUTTON", "inline-block");
-        map.put("CANVAS", "inline");
-        map.put("CAPTION", "table-caption");
-        map.put("CITE", "inline");
-        map.put("CODE", "inline");
-        map.put("COL", "table-column");
-        map.put("COLGROUP", "table-column-group");
-        map.put("DEL", "inline");
-        map.put("DFN", "inline");
-        map.put("EM", "inline");
-        map.put("EMBED", "inline");
-        map.put("FIGCAPTION", "inline");
-        map.put("FIGURE", "inline");
-        map.put("FONT", "inline");
-        map.put("FOOTER", "inline");
-        map.put("HEADER", "inline");
-        map.put("I", "inline");
-        map.put("IFRAME", "inline");
-        map.put("IMG", "inline");
-        map.put("INPUT", "inline-block");
-        map.put("INS", "inline");
-        map.put("KBD", "inline");
-        map.put("KEYGEN", "inline");
-        map.put("LABEL", "inline");
-        map.put("LEGEND", "inline");
-        map.put("LI", "list-item");
-        map.put("MAP", "inline");
-        map.put("MARK", "inline");
-        map.put("METER", "inline");
-        map.put("NAV", "inline");
-        map.put("NOSCRIPT", "inline");
-        map.put("OBJECT", "inline");
-        map.put("OPTGROUP", "inline");
-        map.put("OPTION", "inline");
-        map.put("OUTPUT", "inline");
-        map.put("PARAM", "inline");
-        map.put("PROGRESS", "inline");
-        map.put("Q", "inline");
-        map.put("RUBY", "ruby");
-        map.put("RT", "ruby-text");
-        map.put("RP", "inline");
-        map.put("S", "inline");
-        map.put("SAMP", "inline");
-        map.put("SCRIPT", "inline");
-        map.put("SECTION", "inline");
-        map.put("SELECT", "inline-block");
-        map.put("SMALL", "inline");
-        map.put("SUP", "inline");
-        map.put("SOURCE", "inline");
-        map.put("SPAN", "inline");
-        map.put("STRIKE", "inline");
-        map.put("STRONG", "inline");
-        map.put("SUB", "inline");
-        map.put("SUMMARY", "inline");
-        map.put("SUP", "inline");
-
-        map.put("TABLE", "table");
-        map.put("TBODY", "table-row-group");
-        map.put("TD", "table-cell");
-        map.put("TEXTAREA", "inline-block");
-        map.put("TFOOT", "table-footer-group");
-        map.put("TH", "table-cell");
-        map.put("THEAD", "table-header-group");
-        map.put("TIME", "inline");
-        map.put("TR", "table-row");
-        map.put("TRACK", "inline");
-        map.put("TT", "inline");
-        map.put("U", "inline");
-        map.put("VAR", "inline");
-        map.put("VIDEO", "inline");
-        map.put("WBR", "inline");
-        DEFAULT_DISPLAYS = Collections.unmodifiableMap(map);
-
-        map = new HashMap<String, String>(map);
-        map.put("AREA", "none");
-        map.put("ARTICLE", "block");
-        map.put("ASIDE", "block");
-        map.put("AUDIO", "none");
-        map.put("CODE", "inline");
-        map.put("FIGCAPTION", "block");
-        map.put("FIGURE", "block");
-        map.put("FOOTER", "block");
-        map.put("HEADER", "block");
-        map.put("INPUT", "inline");
-        map.put("LEGEND", "block");
-        map.put("METER", "inline-block");
-        map.put("NAV", "block");
-        map.put("NOSCRIPT", "none");
-        map.put("OPTGROUP", "block");
-        map.put("OPTION", "block");
-        map.put("PARAM", "none");
-        map.put("PROGRESS", "inline-block");
-        map.put("RUBY", "inline");
-        map.put("RT", "inline");
-        map.put("SCRIPT", "none");
-        map.put("SECTION", "block");
-        map.put("SELECT", "inline");
-        map.put("TEXTAREA", "inline");
-
-        DEFAULT_DISPLAYS_CSS = Collections.unmodifiableMap(map);
-    }
 
     /**
      * Local modifications maintained here rather than in the element. We use a sorted
@@ -679,28 +556,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getDisplay() {
-        return defaultIfEmpty(super.getDisplay(), getDefaultStyleDisplay());
-    }
-
-    private String getDefaultStyleDisplay() {
-        final String tagName = getElement().getTagName();
-        if ("NOSCRIPT".equals(tagName)) {
-            final DomNode node = getDomNodeOrNull();
-            if (node != null && !node.getPage().getWebClient().getOptions().isJavaScriptEnabled()) {
-                return "block";
-            }
-        }
-
-        Map<String, String> map = DEFAULT_DISPLAYS;
-        if (getBrowserVersion().hasFeature(CSS_DISPLAY_DEFAULT)) {
-            map = DEFAULT_DISPLAYS_CSS;
-        }
-
-        final String defaultValue = map.get(tagName);
-        if (defaultValue == null) {
-            return "block";
-        }
-        return defaultValue;
+        return defaultIfEmpty(super.getDisplay(), getElement().getDefaultStyleDisplay());
     }
 
     /**

@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(domClasses = HtmlDeletedText.class)
 public class HTMLDelElement extends HTMLElement {
@@ -64,5 +65,14 @@ public class HTMLDelElement extends HTMLElement {
     @JsxSetter
     public void setDateTime(final String dateTime) {
         getDomNodeOrDie().setAttribute("datetime", dateTime);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * {@inheritDoc}
+    */
+    @Override
+    public String getDefaultStyleDisplay() {
+        return "inline";
     }
 }

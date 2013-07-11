@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.RowContainer;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(domClasses = { HtmlTableBody.class, HtmlTableHeader.class, HtmlTableFooter.class })
 public class HTMLTableSectionElement extends RowContainer {
@@ -114,4 +115,19 @@ public class HTMLTableSectionElement extends RowContainer {
         super.setChOff(chOff);
     }
 
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * {@inheritDoc}
+    */
+    @Override
+    public String getDefaultStyleDisplay() {
+        final String tagName = getTagName();
+        if ("TFOOT".equals(tagName)) {
+            return "table-footer-group";
+        }
+        if ("THEAD".equals(tagName)) {
+            return "table-header-group";
+        }
+        return "table-row-group";
+    }
 }

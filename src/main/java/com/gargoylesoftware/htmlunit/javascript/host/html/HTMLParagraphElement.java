@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 @JsxClass(domClasses = HtmlParagraph.class)
 public class HTMLParagraphElement extends HTMLElement {
@@ -47,4 +48,16 @@ public class HTMLParagraphElement extends HTMLElement {
         setAlign(align, false);
     }
 
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * {@inheritDoc}
+    */
+    @Override
+    public String getDefaultStyleDisplay() {
+        final String tagName = getTagName();
+        if ("PROGRESS".equals(tagName)) {
+            return "inline";
+        }
+        return super.getDefaultStyleDisplay();
+    }
 }

@@ -40,6 +40,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(domClasses = HtmlTableRow.class)
 public class HTMLTableRowElement extends HTMLTableComponent {
@@ -187,5 +188,14 @@ public class HTMLTableRowElement extends HTMLTableComponent {
         }
 
         htmlRow.getCell(position).remove();
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * {@inheritDoc}
+    */
+    @Override
+    public String getDefaultStyleDisplay() {
+        return "table-row";
     }
 }

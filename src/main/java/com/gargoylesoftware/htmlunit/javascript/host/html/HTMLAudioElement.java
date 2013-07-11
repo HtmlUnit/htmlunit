@@ -25,9 +25,18 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * The JavaScript object "HTMLAudioElement".
  *
  * @version $Revision$
+ * @author Ronald Brill
  * @author Ahmed Ashour
  */
 @JsxClass(domClasses = HtmlAudio.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
 public class HTMLAudioElement extends HTMLMediaElement {
 
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * {@inheritDoc}
+    */
+    @Override
+    public String getDefaultStyleDisplay() {
+        return "none";
+    }
 }
