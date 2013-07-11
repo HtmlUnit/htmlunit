@@ -82,6 +82,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.TreeWalker;
 import com.gargoylesoftware.htmlunit.javascript.host.UIEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.WebSocket;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.XPathEvaluator;
 import com.gargoylesoftware.htmlunit.javascript.host.XPathNSResolver;
 import com.gargoylesoftware.htmlunit.javascript.host.XPathResult;
 import com.gargoylesoftware.htmlunit.javascript.host.XSLTProcessor;
@@ -338,8 +339,8 @@ public final class JavaScriptConfiguration {
         StaticNodeList.class, Storage.class, StyleSheetList.class, Text.class, TextRange.class, TreeWalker.class,
         UIEvent.class, Uint16Array.class, Uint32Array.class, Uint8Array.class, Uint8ClampedArray.class,
         WebSocket.class, Window.class, XMLAttr.class, XMLDocument.class, XMLDOMParseError.class,
-        XMLHttpRequest.class, XMLSerializer.class, XPathNSResolver.class, XPathResult.class, XSLTProcessor.class,
-        XSLTemplate.class};
+        XMLHttpRequest.class, XMLSerializer.class, XPathEvaluator.class, XPathNSResolver.class, XPathResult.class,
+        XSLTProcessor.class, XSLTemplate.class};
 
     /** Cache of browser versions and their corresponding JavaScript configurations. */
     private static final Map<BrowserVersion, JavaScriptConfiguration> ConfigurationMap_ =

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="update" dev="mguillem" issue="1516">
+                JavaScript: add support for XPathEvaluator (FF &amp; Chrome).
+            </action>
             <action type="fix" dev="rbri">
                 The display property now returns the correct default value for all html tags.
             </action>
