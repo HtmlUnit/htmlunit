@@ -207,7 +207,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         map.put("TFOOT", "table-footer-group");
         map.put("TH", "table-cell");
         map.put("THEAD", "table-header-group");
-        map.put("THEAD", "table-header-group");
         map.put("TIME", "inline");
         map.put("TR", "table-row");
         map.put("TRACK", "inline");
