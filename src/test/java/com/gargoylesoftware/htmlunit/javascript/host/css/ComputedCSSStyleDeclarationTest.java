@@ -680,7 +680,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "block", "none", "inline", "block", "block", "block", "inline" },
             IE = { "inline", "inline", "inline", "block", "inline", "inline", "inline" })
-    @NotYetImplemented
     public void defaultDisplayValues_NO() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <nav id='nav'>\n"

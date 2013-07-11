@@ -174,7 +174,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         map.put("MARK", "inline");
         map.put("METER", "inline");
         map.put("NAV", "inline");
-        // map.put("NOSCRIPT", "inline");
+        map.put("NOSCRIPT", "inline");
         map.put("OBJECT", "inline");
         map.put("OPTGROUP", "inline");
         map.put("OPTION", "inline");
@@ -231,7 +231,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         map.put("LEGEND", "block");
         map.put("METER", "inline-block");
         map.put("NAV", "block");
-        // map.put("NOSCRIPT", "none");
+        map.put("NOSCRIPT", "none");
         map.put("OPTGROUP", "block");
         map.put("OPTION", "block");
         map.put("PARAM", "none");
@@ -683,12 +683,19 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     private String getDefaultStyleDisplay() {
+        final String tagName = getElement().getTagName();
+        if ("NOSCRIPT".equals(tagName)) {
+            final DomNode node = getDomNodeOrNull();
+            if (node != null && !node.getPage().getWebClient().getOptions().isJavaScriptEnabled()) {
+                return "block";
+            }
+        }
+
         Map<String, String> map = DEFAULT_DISPLAYS;
         if (getBrowserVersion().hasFeature(CSS_DISPLAY_DEFAULT)) {
             map = DEFAULT_DISPLAYS_CSS;
         }
 
-        final String tagName = getElement().getTagName();
         final String defaultValue = map.get(tagName);
         if (defaultValue == null) {
             return "block";
