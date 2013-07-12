@@ -36,8 +36,6 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
  */
 public class HtmlTextInput extends HtmlInput implements SelectableTextInput {
 
-    private String valueAtFocus_;
-
     private final SelectionDelegate selectionDelegate_ = new SelectionDelegate(this);
 
     private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor() {
@@ -151,28 +149,6 @@ public class HtmlTextInput extends HtmlInput implements SelectableTextInput {
                 setSelectionEnd(attributeValue.length());
             }
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void focus() {
-        super.focus();
-        // store current value to trigger onchange when needed at focus lost
-        valueAtFocus_ = getValueAttribute();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    void removeFocus() {
-        super.removeFocus();
-        if (!valueAtFocus_.equals(getValueAttribute())) {
-            executeOnChangeHandlerIfAppropriate(this);
-        }
-        valueAtFocus_ = null;
     }
 
     /**

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="update" dev="mguillem" issue="1518">
+                Ensure that onchange event isn't called at focus lost after usage of HtmlInput.setValueAttribute.
+            </action>
             <action type="update" dev="mguillem" issue="1516">
                 JavaScript: add support for XPathEvaluator (FF &amp; Chrome).
             </action>

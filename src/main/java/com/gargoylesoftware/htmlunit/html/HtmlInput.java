@@ -53,6 +53,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     private String originalName_;
     private Collection<String> previousNames_ = Collections.emptySet();
     private boolean createdByJavascript_ = false;
+    private Object valueAtFocus_;
 
     /**
      * Creates an instance.
@@ -90,7 +91,9 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         WebAssert.notNull("newValue", newValue);
         setAttribute("value", newValue);
 
-        return executeOnChangeHandlerIfAppropriate(this);
+        final Page page = executeOnChangeHandlerIfAppropriate(this);
+        valueAtFocus_ = getInternalValue();
+        return page;
     }
 
     /**
@@ -555,5 +558,33 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     public boolean wasCreatedByJavascript() {
         return createdByJavascript_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void focus() {
+        super.focus();
+        // store current value to trigger onchange when needed at focus lost
+        valueAtFocus_ = getInternalValue();
+    }
+
+    @Override
+    final void removeFocus() {
+        super.removeFocus();
+
+        if (!valueAtFocus_.equals(getInternalValue())) {
+            handleFocusLostValueChanged();
+        }
+        valueAtFocus_ = null;
+    }
+
+    void handleFocusLostValueChanged() {
+        executeOnChangeHandlerIfAppropriate(this);
+    }
+
+    Object getInternalValue() {
+        return getValueAttribute();
     }
 }

@@ -51,7 +51,6 @@ public class HtmlRadioButtonInput extends HtmlInput {
     private static final String DEFAULT_VALUE = "on";
 
     private boolean defaultCheckedState_;
-    private boolean valueAtFocus_;
     private boolean forceChecked_;
 
     /**
@@ -316,27 +315,16 @@ public class HtmlRadioButtonInput extends HtmlInput {
         return clone;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public void focus() {
-        super.focus();
-        valueAtFocus_ = isChecked();
+    Object getInternalValue() {
+        return isChecked();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    void removeFocus() {
-        super.removeFocus();
-
+    void handleFocusLostValueChanged() {
         final boolean fireOnChange = hasFeature(EVENT_ONCHANGE_LOSING_FOCUS);
-        if (fireOnChange && valueAtFocus_ != isChecked()) {
+        if (fireOnChange) {
             executeOnChangeHandlerIfAppropriate(this);
         }
-        valueAtFocus_ = isChecked();
     }
 
     /**

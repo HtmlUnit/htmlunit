@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
@@ -456,5 +457,26 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("changed")
+    public void firingOnchange() throws Exception {
+        final String html = "<html><body>\n"
+            + "<form onchange='alert(\"changed\")'>\n"
+            + "  <input type='file' id='file1'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final File tmpFile = File.createTempFile("htmlunit-test", ".txt");
+        driver.findElement(By.id("file1")).sendKeys(tmpFile.getAbsolutePath());
+        tmpFile.delete();
+        driver.findElement(By.tagName("body")).click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 }
