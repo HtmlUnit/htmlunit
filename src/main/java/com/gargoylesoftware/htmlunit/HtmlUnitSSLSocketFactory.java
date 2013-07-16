@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
@@ -58,8 +57,9 @@ import org.apache.http.params.HttpParams;
  * @author Ahmed Ashour
  * @author Martin Huber
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
-class HtmlUnitSSLSocketFactory extends SSLSocketFactory {
+final class HtmlUnitSSLSocketFactory extends SSLSocketFactory {
     private static final String SSL3ONLY = "htmlunit.SSL3Only";
 
     static void setUseSSL3Only(final HttpParams parameters, final boolean ssl3Only) {
@@ -74,11 +74,10 @@ class HtmlUnitSSLSocketFactory extends SSLSocketFactory {
         try {
             if (!options.isUseInsecureSSL()) {
                 if (options.getSSLClientCertificateUrl() == null) {
-                    return new HtmlUnitSSLSocketFactory(); // only SOCKS awareness
+                    return new HtmlUnitSSLSocketFactory((KeyStore) null, null); // only SOCKS awareness
                 }
                 // SOCKS + keystore
-                return new HtmlUnitSSLSocketFactory(getKeyStore(options), options.getSSLClientCertificatePassword(),
-                        SSLSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
+                return new HtmlUnitSSLSocketFactory(getKeyStore(options), options.getSSLClientCertificatePassword());
             }
 
             // we need insecure SSL + SOCKS awareness
@@ -94,30 +93,13 @@ class HtmlUnitSSLSocketFactory extends SSLSocketFactory {
         }
     }
 
-    HtmlUnitSSLSocketFactory(final SSLContext sslContext, final X509HostnameVerifier hostnameVerifier) {
+    private HtmlUnitSSLSocketFactory(final SSLContext sslContext, final X509HostnameVerifier hostnameVerifier) {
         super(sslContext, hostnameVerifier);
     }
 
-    HtmlUnitSSLSocketFactory() {
-        super(createSSLContext());
-    }
-
-    HtmlUnitSSLSocketFactory(final KeyStore keystore, final String keystorePassword,
-            final X509HostnameVerifier hostnameVerifier)
+    private HtmlUnitSSLSocketFactory(final KeyStore keystore, final String keystorePassword)
         throws NoSuchAlgorithmException, KeyManagementException, KeyStoreException, UnrecoverableKeyException {
-        super(TLS, keystore, keystorePassword, null, null, null, hostnameVerifier);
-    }
-
-    private static SSLContext createSSLContext() {
-        try {
-            final Method m = org.apache.http.conn.ssl.SSLSocketFactory.class.
-                    getDeclaredMethod("createDefaultSSLContext");
-            m.setAccessible(true);
-            return (SSLContext) m.invoke(null);
-        }
-        catch (final Exception e) {
-            throw new RuntimeException(e);
-        }
+        super(keystore, keystorePassword);
     }
 
     /**
