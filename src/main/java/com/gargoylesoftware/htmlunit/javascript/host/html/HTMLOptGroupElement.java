@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
 
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlOptionGroup;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -47,6 +48,28 @@ public class HTMLOptGroupElement extends HTMLElement {
     @JsxSetter
     public void setDisabled(final boolean disabled) {
         super.setDisabled(disabled);
+    }
+
+    /**
+     * Returns the value of the "label" property.
+     * @return the value of the "label" property
+     */
+    @JsxGetter
+    public String getLabel() {
+        final String label = getDomNodeOrDie().getAttribute("label");
+        if (DomElement.ATTRIBUTE_NOT_DEFINED == label) {
+            return "";
+        }
+        return label;
+    }
+
+    /**
+     * Updates the value of the "label" property.
+     * @param newLabel the new value
+     */
+    @JsxSetter
+    public void setLabel(final String newLabel) {
+        getDomNodeOrDie().setAttribute("label", newLabel);
     }
 
     /**

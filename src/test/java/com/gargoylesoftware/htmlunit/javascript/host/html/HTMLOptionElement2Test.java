@@ -363,4 +363,40 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "false", "true", "true", "false", "true" })
+    public void disabledAttribute() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var test1 = document.getElementById('test1');\n"
+            + "        alert(test1.disabled);\n"
+            + "        test1.disabled = true;\n"
+            + "        alert(test1.disabled);\n"
+            + "        test1.disabled = true;\n"
+            + "        alert(test1.disabled);\n"
+            + "        test1.disabled = false;\n"
+            + "        alert(test1.disabled);\n"
+
+            + "        var test2 = document.getElementById('test2');\n"
+            + "        alert(test2.disabled);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <form name='form1'>\n"
+            + "      <select>\n"
+            + "        <option id='test1' value='option1'>Option1</option>\n"
+            + "        <option id='test2' value='option2' disabled>Option2</option>\n"
+            + "      </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

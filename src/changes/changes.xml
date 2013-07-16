@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Support for the label property added to the optgroup element.
+            </action>
             <action type="update" dev="mguillem" issue="1518">
                 Ensure that onchange event isn't called at focus lost after usage of HtmlInput.setValueAttribute.
             </action>
