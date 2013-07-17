@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="update" dev="rbri">
+                Upgrade Apache HttpClient to 4.2.5.
+            </action>
             <action type="fix" dev="rbri">
                 Support for the label property added to the optgroup element.
             </action>
