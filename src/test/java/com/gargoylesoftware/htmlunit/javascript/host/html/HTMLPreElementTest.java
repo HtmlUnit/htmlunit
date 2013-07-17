@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Unit tests for {@link HTMLPreElement}.
  *
- * @version $Revision: 7931 $
+ * @version $Revision$
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
