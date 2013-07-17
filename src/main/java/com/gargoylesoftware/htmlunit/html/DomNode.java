@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DISPLAYED_COL
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOM_NORMALIZE_REMOVE_CHILDREN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.NODE_APPEND_CHILD_SELF_IGNORE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XPATH_SELECTION_NAMESPACES;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,16 +27,19 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
+import org.apache.xml.utils.PrefixResolver;
 import org.w3c.css.sac.CSSException;
 import org.w3c.css.sac.CSSParseException;
 import org.w3c.css.sac.ErrorHandler;
@@ -61,6 +65,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.gargoylesoftware.htmlunit.xml.XmlPage;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.parser.SACParserCSS3;
 
@@ -83,6 +88,7 @@ import com.steadystate.css.parser.SACParserCSS3;
  * @author Sudhan Moghe
  * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
  * @author Ronald Brill
+ * @author Chuck Dumont
  */
 public abstract class DomNode implements Cloneable, Serializable, Node {
 
@@ -1434,6 +1440,29 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
+     * Parses the SelectionNamespaces property into a map of prefix/namespace pairs.
+     * The default namespace (specified by xmlns=) is placed in the map using the
+     * empty string ("") key.
+     *
+     * @param selectionNS the value of the SelectionNamespaces property
+     * @return map of prefix/namespace value pairs
+     */
+    private static Map<String, String> parseSelectionNamespaces(final String selectionNS) {
+        final Map<String, String> result = new HashMap<String, String>();
+        final String[] toks = selectionNS.split("\\s");
+        for (String tok : toks) {
+            if (tok.startsWith("xmlns=")) {
+                result.put("", tok.substring(7, tok.length() - 7));
+            }
+            else if (tok.startsWith("xmlns:")) {
+                final String prefix[] = tok.substring(6).split("=");
+                result.put(prefix[0], prefix[1].substring(1, prefix[1].length() - 1));
+            }
+        }
+        return result.size() > 0 ? result : null;
+    }
+
+    /**
      * Evaluates the specified XPath expression from this node, returning the matching elements.
      *
      * @param xpathExpr the XPath expression to evaluate
@@ -1442,7 +1471,61 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @see #getCanonicalXPath()
      */
     public List<?> getByXPath(final String xpathExpr) {
-        return XPathUtils.getByXPath(this, xpathExpr);
+        PrefixResolver prefixResolver = null;
+        if (hasFeature(XPATH_SELECTION_NAMESPACES)) {
+            /*
+             * See if the document has the SelectionNamespaces property defined.  If so, then
+             * create a PrefixResolver that resolves the defined namespaces.
+             */
+            final Document doc = getOwnerDocument();
+            if (doc instanceof XmlPage) {
+                final ScriptableObject scriptable = ((XmlPage) doc).getScriptObject();
+                if (ScriptableObject.hasProperty(scriptable, "getProperty")) {
+                    final Object selectionNS =
+                            ScriptableObject.callMethod(scriptable, "getProperty", new Object[]{"SelectionNamespaces"});
+                    if (selectionNS != null && selectionNS.toString().length() > 0) {
+                        final Map<String, String> namespaces = parseSelectionNamespaces(selectionNS.toString());
+                        if (namespaces != null) {
+                            prefixResolver = new PrefixResolver() {
+                                @Override
+                                public String getBaseIdentifier() {
+                                    return namespaces.get("");
+                                }
+
+                                @Override
+                                public String getNamespaceForPrefix(final String prefix) {
+                                    return namespaces.get(prefix);
+                                }
+
+                                @Override
+                                public String getNamespaceForPrefix(final String prefix, final Node node) {
+                                    throw new UnsupportedOperationException();
+                                }
+
+                                @Override
+                                public boolean handlesNullPrefixes() {
+                                    return false;
+                                }
+                            };
+                        }
+                    }
+                }
+            }
+        }
+        return XPathUtils.getByXPath(this, xpathExpr, prefixResolver);
+    }
+
+    /**
+     * Evaluates the specified XPath expression from this node, returning the matching elements.
+     *
+     * @param xpathExpr the XPath expression to evaluate
+     * @param resolver the prefix resolver to use for resolving namespace prefixes, or null
+     * @return the elements which match the specified XPath expression
+     * @see #getFirstByXPath(String)
+     * @see #getCanonicalXPath()
+     */
+    public List<?> getByXPath(final String xpathExpr, final PrefixResolver resolver) {
+        return XPathUtils.getByXPath(this, xpathExpr, resolver);
     }
 
     /**
@@ -1455,9 +1538,24 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @see #getByXPath(String)
      * @see #getCanonicalXPath()
      */
-    @SuppressWarnings("unchecked")
     public <X> X getFirstByXPath(final String xpathExpr) {
-        final List<?> results = getByXPath(xpathExpr);
+        return getFirstByXPath(xpathExpr, null);
+    }
+
+    /**
+     * Evaluates the specified XPath expression from this node, returning the first matching element,
+     * or <tt>null</tt> if no node matches the specified XPath expression.
+     *
+     * @param xpathExpr the XPath expression
+     * @param <X> the expression type
+     * @param resolver the prefix resolver to use for resolving namespace prefixes, or null
+     * @return the first element matching the specified XPath expression
+     * @see #getByXPath(String)
+     * @see #getCanonicalXPath()
+     */
+    @SuppressWarnings("unchecked")
+    public <X> X getFirstByXPath(final String xpathExpr, final PrefixResolver resolver) {
+        final List<?> results = getByXPath(xpathExpr, resolver);
         if (results.isEmpty()) {
             return null;
         }

@@ -1369,5 +1369,9 @@ public enum BrowserVersionFeatures {
 
     /** Indicates if XUL is supported (FF only). */
     @BrowserFeature(@WebBrowser(value = FF, maxVersion = 3.6f))
-    XUL_SUPPORT;
+    XUL_SUPPORT,
+
+    /** Indicates that the 'SelectionNamespaces' property is supported by XPath expressions. */
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    XPATH_SELECTION_NAMESPACES;
 }

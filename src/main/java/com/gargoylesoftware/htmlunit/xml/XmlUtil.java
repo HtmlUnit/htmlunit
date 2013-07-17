@@ -65,6 +65,7 @@ import com.gargoylesoftware.htmlunit.html.HTMLParser;
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  * @author Ronald Brill
+ * @author Chuck Dumont
  */
 public final class XmlUtil {
 
@@ -301,12 +302,19 @@ public final class XmlUtil {
 
     /**
      * Search for the namespace URI of the given prefix, starting from the specified element.
+     * The default namespace can be searched for by specifying "" as the prefix.
      * @param element the element to start searching from
      * @param prefix the namespace prefix
      * @return the namespace URI bound to the prefix; or null if there is no such namespace
      */
     public static String lookupNamespaceURI(final DomElement element, final String prefix) {
-        String uri = element.getAttribute("xmlns:" + prefix);
+        String uri = DomElement.ATTRIBUTE_NOT_DEFINED;
+        if (prefix.length() == 0) {
+            uri = element.getAttribute("xmlns");
+        }
+        else {
+            uri = element.getAttribute("xmlns:" + prefix);
+        }
         if (uri == DomElement.ATTRIBUTE_NOT_DEFINED) {
             final DomNode parentNode = element.getParentNode();
             if (parentNode instanceof DomElement) {

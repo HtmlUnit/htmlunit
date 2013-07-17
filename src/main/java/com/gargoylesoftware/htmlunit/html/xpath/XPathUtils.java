@@ -37,6 +37,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Chuck Dumont
  */
 public final class XPathUtils {
 
@@ -59,9 +60,10 @@ public final class XPathUtils {
      *
      * @param node the node to start searching from
      * @param xpathExpr the XPath expression
+     * @param resolver the prefix resolver to use for resolving namespace prefixes, or null
      * @return the list of objects found
      */
-    public static List<Object> getByXPath(final DomNode node, final String xpathExpr) {
+    public static List<Object> getByXPath(final DomNode node, final String xpathExpr, final PrefixResolver resolver) {
         if (xpathExpr == null) {
             throw new NullPointerException("Null is not a valid XPath expression");
         }
@@ -69,7 +71,7 @@ public final class XPathUtils {
         PROCESS_XPATH_.set(Boolean.TRUE);
         final List<Object> list = new ArrayList<Object>();
         try {
-            final XObject result = evaluateXPath(node, xpathExpr);
+            final XObject result = evaluateXPath(node, xpathExpr, resolver);
 
             if (result instanceof XNodeSet) {
                 final NodeList nodelist = ((XNodeSet) result).nodelist();
@@ -111,10 +113,12 @@ public final class XPathUtils {
      * Evaluates an XPath expression to an XObject.
      * @param contextNode the node to start searching from
      * @param str a valid XPath string
+     * @param a prefix resolver to use for resolving namespace prefixes, or null
      * @return an XObject, which can be used to obtain a string, number, nodelist, etc (should never be <tt>null</tt>)
      * @throws TransformerException if a syntax or other error occurs
      */
-    private static XObject evaluateXPath(final DomNode contextNode, final String str) throws TransformerException {
+    private static XObject evaluateXPath(final DomNode contextNode,
+            final String str, final PrefixResolver prefixResolver) throws TransformerException {
         final XPathContext xpathSupport = new XPathContext();
         final Node xpathExpressionContext;
         if (contextNode.getNodeType() == Node.DOCUMENT_NODE) {
@@ -123,9 +127,14 @@ public final class XPathUtils {
         else {
             xpathExpressionContext = contextNode;
         }
-        final PrefixResolver prefixResolver = new HtmlUnitPrefixResolver(xpathExpressionContext);
+
+        PrefixResolver resolver = prefixResolver;
+        if (resolver == null) {
+            resolver = new HtmlUnitPrefixResolver(xpathExpressionContext);
+        }
+
         final boolean caseSensitive = contextNode.getPage().hasCaseSensitiveTagNames();
-        final XPathAdapter xpath = new XPathAdapter(str, null, prefixResolver, null, caseSensitive);
+        final XPathAdapter xpath = new XPathAdapter(str, null, resolver, null, caseSensitive);
         final int ctxtNode = xpathSupport.getDTMHandleFromNode(contextNode);
         return xpath.execute(xpathSupport, ctxtNode, prefixResolver);
     }

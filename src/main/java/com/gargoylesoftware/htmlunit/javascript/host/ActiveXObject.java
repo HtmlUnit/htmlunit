@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest;
  * @version $Revision$
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  * @author Ahmed Ashour
+ * @author Chuck Dumont
  */
 @JsxClass(browsers = @WebBrowser(IE))
 public class ActiveXObject extends SimpleScriptable {
@@ -230,6 +231,7 @@ public class ActiveXObject extends SimpleScriptable {
         addFunction(document, "createCDATASection");
         addFunction(document, "createProcessingInstruction");
         addFunction(document, "getElementsByTagName");
+        addFunction(document, "getProperty");
         addFunction(document, "load");
         addFunction(document, "loadXML");
         addFunction(document, "nodeFromID");

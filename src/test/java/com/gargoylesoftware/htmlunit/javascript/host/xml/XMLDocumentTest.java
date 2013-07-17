@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Chuck Dumont
  */
 @RunWith(BrowserRunner.class)
 public class XMLDocumentTest extends WebDriverTestCase {
@@ -695,7 +696,6 @@ public class XMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = "1", FF = "0")
-    @NotYetImplemented(IE)
     public void xpathWithNamespaces() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -703,7 +703,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "    doc.async = false;\n"
             + "    doc.load('" + URL_SECOND + "');\n"
             + "    try {\n"
-            + "      alert(doc.selectNodes('//book').length);\n"
+            + "      alert(doc.selectNodes('//soap:book').length);\n"
             + "    } catch (e) {\n"
             + "      alert(doc.evaluate('count(//book)', doc.documentElement, "
             + "null, XPathResult.NUMBER_TYPE, null).numberValue);\n"
@@ -714,6 +714,46 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "      return document.implementation.createDocument('', '', null);\n"
             + "    else if (window.ActiveXObject)\n"
             + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String xml
+            = "<soap:Envelope xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/'>\n"
+            + "  <books xmlns='http://www.example.com/ns1'>\n"
+            + "    <soap:book>\n"
+            + "      <title>Immortality</title>\n"
+            + "      <author>John Smith</author>\n"
+            + "    </soap:book>\n"
+            + "  </books>\n"
+            + "</soap:Envelope>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(IE)
+    @Alerts("1")
+    public void selectionNamespaces() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  var selectionNamespaces = 'xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" "
+                            + "xmlns:ns1=\"http://www.example.com/ns1\"';\n"
+            + "  function test() {\n"
+            + "  if (window.ActiveXObject) {"
+            + "    var doc = new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "    doc.setProperty('SelectionNamespaces', selectionNamespaces);"
+            + "    doc.async = false;\n"
+            + "    doc.load('" + URL_SECOND + "');\n"
+            + "    try {\n"
+            + "      alert(doc.selectNodes('/s:Envelope/ns1:books/s:book').length);\n"
+            + "    } catch (e) {\n"
+            + "      alert(doc.evaluate('count(//book)', doc.documentElement, "
+            + "null, XPathResult.NUMBER_TYPE, null).numberValue);\n"
+            + "    }}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

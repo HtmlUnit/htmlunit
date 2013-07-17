@@ -21,7 +21,9 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -60,6 +62,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Marc Guillemot
  * @author Sudhan Moghe
  * @author Ronald Brill
+ * @author Chuck Dumont
  */
 @JsxClass(browsers = @WebBrowser(FF))
 public class XMLDocument extends Document {
@@ -69,6 +72,7 @@ public class XMLDocument extends Document {
     private boolean async_ = true;
     private boolean preserveWhiteSpace_;
     private XMLDOMParseError parseError_;
+    private Map<String, String> properties_ = new HashMap<String, String>();
 
     /**
      * Creates a new instance. JavaScript objects must have a default constructor.
@@ -266,7 +270,18 @@ public class XMLDocument extends Document {
      */
     @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public void setProperty(final String name, final String value) {
-        //empty implementation
+        properties_.put(name, value);
+    }
+
+    /**
+     * Returns the value of the property set by {@link #setProperty(String, String)}.
+     *
+     * @param name the name of the property to get
+     * @return the property value
+     */
+    @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    public String getProperty(final String name) {
+        return properties_.get(name);
     }
 
     /**

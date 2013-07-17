@@ -26,9 +26,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.xml.utils.PrefixResolver;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
@@ -73,6 +75,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
  * @author Ahmed Ashour
  * @author Rob Di Marco
  * @author Ronald Brill
+ * @author Chuck Dumont
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms531073.aspx">MSDN documentation</a>
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919">W3C Dom Level 1</a>
  */
@@ -393,7 +396,15 @@ public class Document extends EventNode {
             xPathResult.setParentScope(getParentScope());
             xPathResult.setPrototype(getPrototype(xPathResult.getClass()));
         }
-        xPathResult.init(contextNode.getDomNodeOrDie().getByXPath(expression), type);
+
+        PrefixResolver prefixResolver = null;
+        if (resolver instanceof NativeFunction) {
+            prefixResolver = new NativeFunctionPrefixResolver((NativeFunction) resolver, contextNode.getParentScope());
+        }
+        else if (resolver instanceof PrefixResolver) {
+            prefixResolver = (PrefixResolver) resolver;
+        }
+        xPathResult.init(contextNode.getDomNodeOrDie().getByXPath(expression, prefixResolver), type);
         return xPathResult;
     }
 

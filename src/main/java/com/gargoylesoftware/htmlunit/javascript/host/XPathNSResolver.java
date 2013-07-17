@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
+import org.apache.xml.utils.PrefixResolver;
+
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -28,9 +30,10 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Chuck Dumont
  */
 @JsxClass(browsers = @WebBrowser(FF))
-public class XPathNSResolver extends SimpleScriptable {
+public class XPathNSResolver extends SimpleScriptable implements PrefixResolver {
 
     private Object element_;
 
@@ -53,4 +56,35 @@ public class XPathNSResolver extends SimpleScriptable {
         return XmlUtil.lookupNamespaceURI((DomElement) ((SimpleScriptable) element_).getDomNodeOrDie(), prefix);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getBaseIdentifier() {
+        return XmlUtil.lookupNamespaceURI((DomElement) ((SimpleScriptable) element_).getDomNodeOrDie(), "");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getNamespaceForPrefix(final String prefix) {
+        return lookupNamespaceURI(prefix);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getNamespaceForPrefix(final String prefix, final org.w3c.dom.Node context) {
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean handlesNullPrefixes() {
+        return false;
+    }
 }
