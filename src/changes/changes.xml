@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="update" dev="rbri" issue="1519, 1522" due-to="Chuck Dumont">
+                Improved namespace support for XPath expressions.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache HttpClient to 4.2.5.
             </action>
