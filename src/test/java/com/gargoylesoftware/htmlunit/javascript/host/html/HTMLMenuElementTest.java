@@ -19,16 +19,17 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Unit tests for {@link HTMLMenuElement}.
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HTMLMenuElementTest extends SimpleWebTestCase {
+public class HTMLMenuElementTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if an error occurs
@@ -36,38 +37,45 @@ public class HTMLMenuElementTest extends SimpleWebTestCase {
     @Test
     @Alerts(FF = { "false", "true", "true", "true", "null", "", "blah", "2",
                    "true", "false", "true", "false", "", "null", "", "null" },
-        IE = { "false", "true", "true", "true", "false", "true", "true", "true",
-               "true", "false", "true", "false", "true", "false", "true", "false" })
+	        IE = { "false", "true", "true", "true", "false", "true", "true", "true",
+	               "true", "false", "true", "false", "true", "false", "true", "false" })
     public void compact() throws Exception {
-        final String html = "<html><body>\n"
-            + "<menu id='menu1'><li>a</li><li>b</li></menu>\n"
-            + "<menu compact='' id='menu2'><li>a</li><li>b</li></menu>\n"
-            + "<menu compact='blah' id='menu3'><li>a</li><li>b</li></menu>\n"
-            + "<menu compact='2' id='menu4'><li>a</li><li>b</li></menu>\n"
-            + "<script>\n"
-            + "alert(document.getElementById('menu1').compact);\n"
-            + "alert(document.getElementById('menu2').compact);\n"
-            + "alert(document.getElementById('menu3').compact);\n"
-            + "alert(document.getElementById('menu4').compact);\n"
-            + "alert(document.getElementById('menu1').getAttribute('compact'));\n"
-            + "alert(document.getElementById('menu2').getAttribute('compact'));\n"
-            + "alert(document.getElementById('menu3').getAttribute('compact'));\n"
-            + "alert(document.getElementById('menu4').getAttribute('compact'));\n"
-            + "document.getElementById('menu1').compact = true;\n"
-            + "document.getElementById('menu2').compact = false;\n"
-            + "document.getElementById('menu3').compact = 'xyz';\n"
-            + "document.getElementById('menu4').compact = null;\n"
-            + "alert(document.getElementById('menu1').compact);\n"
-            + "alert(document.getElementById('menu2').compact);\n"
-            + "alert(document.getElementById('menu3').compact);\n"
-            + "alert(document.getElementById('menu4').compact);\n"
-            + "alert(document.getElementById('menu1').getAttribute('compact'));\n"
-            + "alert(document.getElementById('menu2').getAttribute('compact'));\n"
-            + "alert(document.getElementById('menu3').getAttribute('compact'));\n"
-            + "alert(document.getElementById('menu4').getAttribute('compact'));\n"
-            + "</script>\n"
-            + "</body></html>";
-        loadPageWithAlerts(html);
-    }
+        final String html =
+                "<html>\n"
+                + "  <head>\n"
+                + "    <script>\n"
+                + "      function test() {\n"
+                + "        alert(document.getElementById('menu1').compact);\n"
+                + "        alert(document.getElementById('menu2').compact);\n"
+                + "        alert(document.getElementById('menu3').compact);\n"
+                + "        alert(document.getElementById('menu4').compact);\n"
+                + "        alert(document.getElementById('menu1').getAttribute('compact'));\n"
+                + "        alert(document.getElementById('menu2').getAttribute('compact'));\n"
+                + "        alert(document.getElementById('menu3').getAttribute('compact'));\n"
+                + "        alert(document.getElementById('menu4').getAttribute('compact'));\n"
 
+                + "        document.getElementById('menu1').compact = true;\n"
+                + "        document.getElementById('menu2').compact = false;\n"
+                + "        document.getElementById('menu3').compact = 'xyz';\n"
+                + "        document.getElementById('menu4').compact = null;\n"
+                + "        alert(document.getElementById('menu1').compact);\n"
+                + "        alert(document.getElementById('menu2').compact);\n"
+                + "        alert(document.getElementById('menu3').compact);\n"
+                + "        alert(document.getElementById('menu4').compact);\n"
+                + "        alert(document.getElementById('menu1').getAttribute('compact'));\n"
+                + "        alert(document.getElementById('menu2').getAttribute('compact'));\n"
+                + "        alert(document.getElementById('menu3').getAttribute('compact'));\n"
+                + "        alert(document.getElementById('menu4').getAttribute('compact'));\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body onload='test()'>\n"
+                + "    <menu id='menu1'><li>a</li><li>b</li></menu>\n"
+                + "    <menu compact='' id='menu2'><li>a</li><li>b</li></menu>\n"
+                + "    <menu compact='blah' id='menu3'><li>a</li><li>b</li></menu>\n"
+                + "    <menu compact='2' id='menu4'><li>a</li><li>b</li></menu>\n"
+                + "  </body>\n"
+                + "</html>";
+        loadPageWithAlerts2(html);
+    }
 }

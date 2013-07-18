@@ -19,16 +19,17 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Unit tests for {@link HTMLMetaElement}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HTMLMetaElementTest extends SimpleWebTestCase {
+public class HTMLMetaElementTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if an error occurs
@@ -55,7 +56,7 @@ public class HTMLMetaElementTest extends SimpleWebTestCase {
             + "  </head>\n"
             + "  <body onload='test()'></body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
 }

@@ -19,15 +19,16 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Unit tests for {@link HTMLTitleElement}.
  * @version $Revision$
  * @author Sudhan Moghe
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HTMLTitleElementTest extends SimpleWebTestCase {
+public class HTMLTitleElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
@@ -50,6 +51,6 @@ public class HTMLTitleElementTest extends SimpleWebTestCase {
             + "  <body onload='test()'>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }
