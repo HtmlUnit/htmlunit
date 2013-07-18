@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Locale;
 import java.util.Map;
@@ -37,6 +38,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest;
@@ -52,6 +56,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest;
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  * @author Ahmed Ashour
  * @author Chuck Dumont
+ * @author Ronald Brill
  */
 @JsxClass(browsers = @WebBrowser(IE))
 public class ActiveXObject extends SimpleScriptable {
@@ -260,7 +265,7 @@ public class ActiveXObject extends SimpleScriptable {
     }
 
     private static void addFunction(final SimpleScriptable scriptable, final String methodName) {
-        final Method javaFunction = getMethod(scriptable.getClass(), methodName);
+        final Method javaFunction = getMethod(scriptable.getClass(), methodName, JsxFunction.class);
         final FunctionObject fo = new FunctionObject(null, javaFunction, scriptable);
         scriptable.defineProperty(methodName, fo, READONLY);
     }
@@ -289,26 +294,37 @@ public class ActiveXObject extends SimpleScriptable {
     static void addProperty(final SimpleScriptable scriptable, final String propertyName,
             final String getterMethodName, final String setterMethodName) {
         scriptable.defineProperty(propertyName, null,
-                getMethod(scriptable.getClass(), getterMethodName),
-                getMethod(scriptable.getClass(), setterMethodName), PERMANENT);
+                getMethod(scriptable.getClass(), getterMethodName, JsxGetter.class),
+                getMethod(scriptable.getClass(), setterMethodName, JsxSetter.class), PERMANENT);
     }
 
     /**
      * Gets the first method found of the class with the given name
+     * and the correct annotation
      * @param clazz the class to search on
      * @param name the name of the searched method
+     * @param annotationClass the class of the annotation required
      * @return <code>null</code> if not found
      */
-    static Method getMethod(final Class<? extends SimpleScriptable> clazz, final String name) {
+    static Method getMethod(final Class<? extends SimpleScriptable> clazz,
+            final String name, final Class<? extends Annotation> annotationClass) {
         if (name == null) {
             return null;
         }
+        Method foundByNameOnly = null;
         for (final Method method : clazz.getMethods()) {
             if (method.getName().equals(name)) {
-                return method;
+                if (null != method.getAnnotation(annotationClass)) {
+                    return method;
+                }
+                if (null != foundByNameOnly) {
+                    throw new IllegalArgumentException("Found at least two methods for name '"
+                            + name + "' in class '" + clazz + "'.");
+                }
+                foundByNameOnly = method;
             }
         }
-        return null;
+        return foundByNameOnly;
     }
 
     /**

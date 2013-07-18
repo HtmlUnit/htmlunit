@@ -8,7 +8,11 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
-            <action type="update" dev="rbri" issue="1519, 1522" due-to="Chuck Dumont">
+            <action type="fix" dev="rbri" issue="1521">
+                Fix the way we search for some java methods when creating a XML document from ActiveXObject.
+                This should work with all JavaVMs now.
+            </action>
+            <action type="fix" dev="rbri" issue="1519, 1522" due-to="Chuck Dumont">
                 Improved namespace support for XPath expressions.
             </action>
             <action type="update" dev="rbri">
