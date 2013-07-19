@@ -19,6 +19,9 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -26,6 +29,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class XMLDocument2Test extends WebDriverTestCase {
@@ -175,4 +179,29 @@ public class XMLDocument2Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * Test for issue #1523.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "content", "content" })
+    @Browsers(Browser.IE)
+    @NotYetImplemented
+    public void text() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    var xmldoc = new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "    var xml = '<Envelope><Body>content</Body></Envelope>';\n"
+            + "    xmldoc.loadXML(xml);\n"
+
+            + "    var expression = '/Envelope/Body';\n"
+            + "    var body = xmldoc.documentElement.selectSingleNode(expression);\n"
+            + "    alert(body.text);\n"
+            + "    alert(body.firstChild.text);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }
