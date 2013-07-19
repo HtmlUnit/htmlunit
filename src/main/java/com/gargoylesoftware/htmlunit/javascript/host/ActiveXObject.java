@@ -311,20 +311,23 @@ public class ActiveXObject extends SimpleScriptable {
         if (name == null) {
             return null;
         }
-        Method foundByNameOnly = null;
+
+        Method foundMethod = null;
+        int foundByNameOnlyCount = 0;
         for (final Method method : clazz.getMethods()) {
             if (method.getName().equals(name)) {
                 if (null != method.getAnnotation(annotationClass)) {
                     return method;
                 }
-                if (null != foundByNameOnly) {
-                    throw new IllegalArgumentException("Found at least two methods for name '"
-                            + name + "' in class '" + clazz + "'.");
-                }
-                foundByNameOnly = method;
+                foundByNameOnlyCount++;
+                foundMethod = method;
             }
         }
-        return foundByNameOnly;
+        if (foundByNameOnlyCount > 1) {
+            throw new IllegalArgumentException("Found " + foundByNameOnlyCount + " methods for name '"
+                    + name + "' in class '" + clazz + "'.");
+        }
+        return foundMethod;
     }
 
     /**
