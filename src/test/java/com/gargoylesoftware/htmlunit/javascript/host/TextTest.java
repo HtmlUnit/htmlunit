@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class TextTest extends WebDriverTestCase {
@@ -58,7 +59,29 @@ public class TextTest extends WebDriverTestCase {
             + "  var div = document.getElementById('myId');\n"
             + "  alert(div.firstChild.wholeText);\n"
             + "}\n"
-            + "</script></head><body onload='test()'><div id='myId'>abcd</></body></html>";
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myId'>abcd</div>"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void text() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var div = document.getElementById('myId');\n"
+            + "  alert(div.firstChild.text);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myId'>abcd</div>"
+            + "</body></html>";
         loadPageWithAlerts2(html);
     }
 }
