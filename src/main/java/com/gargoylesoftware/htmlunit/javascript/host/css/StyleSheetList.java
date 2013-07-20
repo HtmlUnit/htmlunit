@@ -45,6 +45,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass
 public class StyleSheetList extends SimpleScriptable {
@@ -78,7 +79,7 @@ public class StyleSheetList extends SimpleScriptable {
                 protected boolean isMatching(final DomNode node) {
                     return node instanceof HtmlStyle
                         || (node instanceof HtmlLink
-                            && "stylesheet".equalsIgnoreCase(((HtmlLink) node).getAttribute("rel")));
+                            && "stylesheet".equalsIgnoreCase(((HtmlLink) node).getRelAttribute()));
                 }
 
                 @Override
