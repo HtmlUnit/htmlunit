@@ -42,7 +42,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("4")
-    public void testLength() throws Exception {
+    public void length() throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -65,7 +65,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "rgb(255, 0, 0)", "rgb(255, 0, 0)" }, IE = "exception")
-    public void testGetComputedStyle_Link() throws Exception {
+    public void getComputedStyle_Link() throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -114,7 +114,6 @@ public class StyleSheetListTest extends WebDriverTestCase {
             + "          alert('exception for 0');\n"
             + "        }\n"
 
-
             + "        try {\n"
             + "          alert(document.styleSheets[46]);\n"
             + "        }\n"
@@ -144,7 +143,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = {"1", "[object CSSStyleSheet]", "[object CSSStyleSheet]" }, IE = { "1", "[object]", "[object]" })
-    public void testNonExistentStylesheet() throws Exception {
+    public void nonExistentStylesheet() throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -170,7 +169,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = {"1", "[object CSSStyleSheet]", "[object CSSStyleSheet]" }, IE = { "1", "[object]", "[object]" })
-    public void testEmptyGZipEncodedStylesheet() throws Exception {
+    public void emptyGZipEncodedStylesheet() throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -203,7 +202,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = {"1", "[object CSSStyleSheet]", "[object CSSStyleSheet]" }, IE = { "1", "[object]", "[object]" })
-    public void testBrokenGZipEncodedStylesheet() throws Exception {
+    public void brokenGZipEncodedStylesheet() throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
