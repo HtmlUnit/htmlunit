@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Using a wrong index when addressing an StyleSheetList always throws an Exception
+                in IE.
+            </action>
             <action type="fix" dev="rbri" issue="1521">
                 Fix the way we search for some java methods when creating a XML document from ActiveXObject.
                 This should work with all JavaVMs now.

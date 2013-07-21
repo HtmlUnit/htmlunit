@@ -22,7 +22,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -32,9 +32,10 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class StyleSheetListTest extends SimpleWebTestCase {
+public class StyleSheetListTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if an error occurs
@@ -56,7 +57,7 @@ public class StyleSheetListTest extends SimpleWebTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -89,14 +90,15 @@ public class StyleSheetListTest extends SimpleWebTestCase {
         final String css = "div {color:red}";
 
         getMockWebConnection().setDefaultResponse(css, "text/css");
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "0", "undefined", "undefined", "exception for -2" })
+    @Alerts(DEFAULT = { "0", "undefined", "undefined", "exception for -2" },
+            IE = { "0", "exception for 0", "exception for 46", "exception for -2" })
     public void arrayIndexOutOfBoundAccess() throws Exception {
         final String html =
               "<html>\n"
@@ -104,8 +106,22 @@ public class StyleSheetListTest extends SimpleWebTestCase {
             + "    <script>\n"
             + "      function test() {\n"
             + "        alert(document.styleSheets.length);\n"
-            + "        alert(document.styleSheets[0]);\n"
-            + "        alert(document.styleSheets[46]);\n"
+
+            + "        try {\n"
+            + "          alert(document.styleSheets[0]);\n"
+            + "        }\n"
+            + "        catch (e) {\n"
+            + "          alert('exception for 0');\n"
+            + "        }\n"
+
+
+            + "        try {\n"
+            + "          alert(document.styleSheets[46]);\n"
+            + "        }\n"
+            + "        catch (e) {\n"
+            + "          alert('exception for 46');\n"
+            + "        }\n"
+
             + "        try {\n"
             + "          alert(document.styleSheets[-2]);\n"
             + "        }\n"
@@ -119,7 +135,7 @@ public class StyleSheetListTest extends SimpleWebTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -145,7 +161,7 @@ public class StyleSheetListTest extends SimpleWebTestCase {
             + "</html>";
 
         getMockWebConnection().setDefaultResponse("Not Found", 404, "Not Found", "text/html");
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -178,7 +194,7 @@ public class StyleSheetListTest extends SimpleWebTestCase {
         headers.add(new NameValuePair("Content-Encoding", "gzip"));
         getMockWebConnection().setDefaultResponse(css, 200, "OK", "text/css", headers);
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -210,6 +226,6 @@ public class StyleSheetListTest extends SimpleWebTestCase {
         headers.add(new NameValuePair("Content-Encoding", "gzip"));
         getMockWebConnection().setDefaultResponse(css, 200, "OK", "text/css", headers);
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }

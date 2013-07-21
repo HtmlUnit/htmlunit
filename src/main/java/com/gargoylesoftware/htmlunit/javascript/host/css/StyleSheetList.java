@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -119,6 +120,10 @@ public class StyleSheetList extends SimpleScriptable {
             throw Context.reportRuntimeError("Invalid negative index: " + index);
         }
         else if (index >= nodes_.getLength()) {
+            if (getWindow().getWebWindow().getWebClient().getBrowserVersion().hasFeature(
+                    BrowserVersionFeatures.JS_STYLESHEET_LIST_EXEPTION_FOR_ALL_INVALID_INDEXES)) {
+                throw Context.reportRuntimeError("Invalid index: " + index);
+            }
             return Context.getUndefinedValue();
         }
 

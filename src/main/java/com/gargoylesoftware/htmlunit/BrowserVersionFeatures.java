@@ -1093,6 +1093,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_SET_ATTRIBUTE_SUPPORTS_EVENT_HANDLERS,
 
+    @BrowserFeature(@WebBrowser(IE))
+    JS_STYLESHEET_LIST_EXEPTION_FOR_ALL_INVALID_INDEXES,
+
     /** IE supports accessing unsupported style elements via getter
      * like val = elem.style.htmlunit;.
      */
