@@ -46,6 +46,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -69,12 +70,14 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 import net.sourceforge.htmlunit.corejs.javascript.UniqueTag;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.css.sac.CSSException;
+import org.w3c.css.sac.InputSource;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.DocumentType;
 
@@ -97,6 +100,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlArea;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlHead;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
@@ -1222,11 +1226,41 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the newly created stylesheet
      */
     @JsxFunction(@WebBrowser(IE))
-    public CSSStyleSheet createStyleSheet(final String url, final int index) {
-        // minimal implementation
-        final CSSStyleSheet stylesheet = new CSSStyleSheet();
+    public CSSStyleSheet createStyleSheet(final String url, final Object index) {
+        final HTMLLinkElement link = (HTMLLinkElement) createElement("link");
+        link.setHref(url);
+        link.setRel("stylesheet");
+
+        int insertPos = Integer.MAX_VALUE;
+        if (Undefined.instance != index) {
+            try {
+                insertPos = ((Double) index).intValue();
+            }
+            catch (final NumberFormatException e) {
+                // ignore
+            }
+        }
+        final InputSource source = new InputSource(new StringReader(""));
+        final CSSStyleSheet stylesheet = new CSSStyleSheet(link, source, url);
         stylesheet.setPrototype(getPrototype(CSSStyleSheet.class));
         stylesheet.setParentScope(getWindow());
+
+        final HTMLCollection heads = getElementsByTagName("head");
+        if (heads.getLength() > 0) {
+            final HtmlHead head = (HtmlHead) heads.item(0);
+
+            int stylesheetPos = -1;
+            for (DomNode domNode : head.getChildNodes()) {
+                if (StyleSheetList.isStyleSheetLink(domNode)) {
+                    stylesheetPos++;
+                    if (insertPos <= stylesheetPos) {
+                        domNode.insertBefore(link.getDomNodeOrDie());
+                        return stylesheet;
+                    }
+                }
+            }
+            head.appendChild(link.getDomNodeOrDie());
+        }
         return stylesheet;
     }
 

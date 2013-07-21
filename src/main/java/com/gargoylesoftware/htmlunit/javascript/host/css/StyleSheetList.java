@@ -58,6 +58,19 @@ public class StyleSheetList extends SimpleScriptable {
     private HTMLCollection nodes_;
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Verifies if the provided node is a link node pointing to a stylesheet.
+     *
+     * @param domNode the mode to check
+     * @return true if the provided node is a stylesheet link
+     */
+    public static boolean isStyleSheetLink(final DomNode domNode) {
+        return domNode instanceof HtmlLink
+                && "stylesheet".equalsIgnoreCase(((HtmlLink) domNode).getRelAttribute());
+    }
+
+    /**
      * Rhino requires default constructors.
      */
     public StyleSheetList() {
@@ -79,8 +92,7 @@ public class StyleSheetList extends SimpleScriptable {
                 @Override
                 protected boolean isMatching(final DomNode node) {
                     return node instanceof HtmlStyle
-                        || (node instanceof HtmlLink
-                            && "stylesheet".equalsIgnoreCase(((HtmlLink) node).getRelAttribute()));
+                        || isStyleSheetLink(node);
                 }
 
                 @Override

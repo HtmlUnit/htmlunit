@@ -465,4 +465,89 @@ public class Document2Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "style.css", "LINK" },
+            DEFAULT = { })
+    public void createStyleSheet() throws Exception {
+        final String html
+            = "<html><head><title>First</title>\n"
+            + "<script>\n"
+            + "  function doTest() {\n"
+            + "    if (document.createStyleSheet) {\n"
+            + "      document.createStyleSheet('style.css');\n"
+            + "      for (var si = 0; si < document.styleSheets.length; si++) {\n"
+            + "        var sheet = document.styleSheets[si];\n"
+            + "        alert(sheet.href);\n"
+            + "        alert(sheet.owningElement.tagName);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <div id='id1'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "null", "" },
+            DEFAULT = { })
+    public void createStyleSheet_emptyUrl() throws Exception {
+        final String html
+            = "<html><head><title>First</title>\n"
+            + "<script>\n"
+            + "  function doTest() {\n"
+            + "    if (document.createStyleSheet) {\n"
+            + "      document.createStyleSheet(null);\n"
+            + "      document.createStyleSheet('');\n"
+            + "      for (var si = 0; si < document.styleSheets.length; si++) {\n"
+            + "        var sheet = document.styleSheets[si];\n"
+            + "        alert(sheet.href);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <div id='id1'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "zero.css", "minus1.css", "seven.css", "none.css" },
+            DEFAULT = { })
+    public void createStyleSheet_insertAt() throws Exception {
+        final String html
+            = "<html><head><title>First</title>\n"
+            + "<script>\n"
+            + "  function doTest() {\n"
+            + "    if (document.createStyleSheet) {\n"
+            + "      document.createStyleSheet('minus1.css', -1);\n"
+            + "      document.createStyleSheet('zero.css', 0);\n"
+            + "      document.createStyleSheet('seven.css', 7);\n"
+            + "      document.createStyleSheet('none.css');\n"
+            + "      for (var si = 0; si < document.styleSheets.length; si++) {\n"
+            + "        var sheet = document.styleSheets[si];\n"
+            + "        alert(sheet.href);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <div id='id1'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
