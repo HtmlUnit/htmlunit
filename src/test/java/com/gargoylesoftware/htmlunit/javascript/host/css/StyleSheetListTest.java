@@ -227,4 +227,40 @@ public class StyleSheetListTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "1", "2" })
+    public void dynamicAddedStyleSheet() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <link rel='stylesheet' type='text/css' href='" + URL_SECOND + "'/>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        alert(document.styleSheets.length);\n"
+
+            + "        var linkTag = document.createElement ('link');\n"
+            + "        linkTag.href = 'new.css'\n"
+            + "        linkTag.rel = 'stylesheet';\n"
+            + "        var head = document.getElementsByTagName ('head')[0];\n"
+            + "        head.appendChild (linkTag);\n"
+
+            + "        alert(document.styleSheets.length);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <div id='myDiv'></div>\n"
+            + "    <div id='myDiv2'></div>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String css = "div {color:red}";
+
+        getMockWebConnection().setDefaultResponse(css, "text/css");
+        loadPageWithAlerts2(html);
+    }
 }
