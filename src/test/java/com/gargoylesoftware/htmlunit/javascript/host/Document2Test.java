@@ -525,7 +525,7 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "zero.css", "minus1.css", "seven.css", "none.css" },
+    @Alerts(IE = { "dotseven.css", "zero.css", "minus1.css", "seven.css", "none.css" },
             DEFAULT = { })
     public void createStyleSheet_insertAt() throws Exception {
         final String html
@@ -535,6 +535,7 @@ public class Document2Test extends WebDriverTestCase {
             + "    if (document.createStyleSheet) {\n"
             + "      document.createStyleSheet('minus1.css', -1);\n"
             + "      document.createStyleSheet('zero.css', 0);\n"
+            + "      document.createStyleSheet('dotseven.css', 0.7);\n"
             + "      document.createStyleSheet('seven.css', 7);\n"
             + "      document.createStyleSheet('none.css');\n"
             + "      for (var si = 0; si < document.styleSheets.length; si++) {\n"
