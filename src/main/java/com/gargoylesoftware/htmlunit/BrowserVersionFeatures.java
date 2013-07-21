@@ -1093,6 +1093,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_SET_ATTRIBUTE_SUPPORTS_EVENT_HANDLERS,
 
+    /** When addressing an item in a stylesheet list, IE throws an exception for all
+     * invalid indexes not only for negative ones like FF does.
+     */
     @BrowserFeature(@WebBrowser(IE))
     JS_STYLESHEET_LIST_EXEPTION_FOR_ALL_INVALID_INDEXES,
 
