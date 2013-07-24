@@ -465,6 +465,26 @@ public class ElementTest extends WebDriverTestCase {
                 "[object],undefined",
                 "[object],undefined"
                 },
+            DEFAULT = {"[object HTMLDivElement],undefined",
+                "[object HTMLUnknownElement],undefined",
+                "[object Element],undefined",
+                "[object HTMLDivElement],undefined",
+                "[object HTMLUnknownElement],undefined"
+                })
+    public void html_baseName() throws Exception {
+        html("baseName");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = {"[object],undefined",
+                "[object],undefined",
+                "createElementNS() is not defined",
+                "[object],undefined",
+                "[object],undefined"
+                },
             DEFAULT = {"[object HTMLDivElement],http://www.w3.org/1999/xhtml",
                 "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml",
                 "[object Element],http://www.appcelerator.org",
@@ -729,6 +749,24 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(IE = {"[object]", "dIv",
+            "[object]", "html",
+            "[object]", "div",
+            "[object]", "dIv"
+            },
+        DEFAULT = {"[object Element]", "undefined",
+            "[object HTMLHtmlElement]", "undefined",
+            "[object HTMLDivElement]", "undefined",
+            "[object HTMLUnknownElement]", "undefined"
+            })
+    public void xml_baseName() throws Exception {
+        xml("baseName");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(IE = {"[object]", "",
             "[object]", "http://www.w3.org/1999/xhtml",
             "[object]", "http://www.w3.org/1999/xhtml",
@@ -763,7 +801,9 @@ public class ElementTest extends WebDriverTestCase {
             + "        debug(doc.documentElement.childNodes[1].childNodes[1]);\n"
             + "      }\n"
             + "      function debug(e) {\n"
-            + "        alert(e);\n"
+            + "        try {\n"
+            + "          alert(e);\n"
+            + "        } catch(ex) {alert(ex)};\n"
             + "        alert(e." + methodName + ");\n"
             + "      }\n"
             + "    </script>\n"

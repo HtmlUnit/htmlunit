@@ -929,6 +929,20 @@ public class Node extends SimpleScriptable {
     }
 
     /**
+     * Returns the base name of this element.
+     * @return the base name of this element
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public Object getBaseName() {
+        final DomElement domElem = getDomNodeOrDie();
+        final boolean isXmlPage = domElem.getOwnerDocument() instanceof XmlPage;
+        if (isXmlPage) {
+            return domElem.getLocalName();
+        }
+        return Undefined.instance;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
