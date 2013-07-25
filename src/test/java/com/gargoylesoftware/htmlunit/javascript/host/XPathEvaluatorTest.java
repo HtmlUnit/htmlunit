@@ -26,6 +26,8 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Chuck Dumont
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class XPathEvaluatorTest extends WebDriverTestCase {
@@ -55,6 +57,70 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
             + "  }\n"
             + "} catch(e) { alert('exception'); }\n"
             + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "Immortality" }, IE = { }, FF3_6 = { })
+    public void namespacesWithNodeInArray() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  var xml = "
+            + "  '<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">"
+            + "    <soap:books>"
+            + "      <soap:book>"
+            + "        <title>Immortality</title>"
+            + "        <author>John Smith</author>"
+            + "      </soap:book>"
+            + "    </soap:books>"
+            + "  </soap:Envelope>';\n"
+            + "  function test() {\n"
+            + "    if (window.XPathEvaluator) {"
+            + "    var doc = (new DOMParser).parseFromString(xml);"
+            + "    var xpe = new XPathEvaluator();\n"
+            + "    var nsResolver = xpe.createNSResolver(doc.documentElement);\n"
+            + "    var result = xpe.evaluate('/soap:Envelope/soap:books/soap:book/title/text()', "
+                            + "[doc.documentElement], nsResolver, XPathResult.STRING_TYPE, null);\n"
+            + "    alert(result.stringValue);\n"
+            + "  }}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "Immortality" }, IE = { }, FF3_6 = { })
+    public void namespacesWithCustomNSResolver() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "     function nsResolver(prefix) {"
+            + "    return {s : 'http://schemas.xmlsoap.org/soap/envelope/'}[prefix] || null;"
+            + "  }"
+            + "  var xml = "
+            + "  '<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">"
+            + "    <soap:books>"
+            + "      <soap:book>"
+            + "        <title>Immortality</title>"
+            + "        <author>John Smith</author>"
+            + "      </soap:book>"
+            + "    </soap:books>"
+            + "  </soap:Envelope>';\n"
+            + "  function test() {\n"
+            + "    if (window.XPathEvaluator) {"
+            + "    var doc = (new DOMParser).parseFromString(xml);"
+            + "    var xpe = new XPathEvaluator();\n"
+            + "    var result = xpe.evaluate('/s:Envelope/s:books/s:book/title/text()', "
+                            + "doc.documentElement, nsResolver, XPathResult.STRING_TYPE, null);\n"
+            + "    alert(result.stringValue);\n"
+            + "  }}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
 
         loadPageWithAlerts2(html);
     }

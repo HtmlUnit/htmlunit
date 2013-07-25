@@ -15,6 +15,10 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
+import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
+
+import org.apache.xml.utils.PrefixResolver;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -27,6 +31,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Chuck Dumont
+ * @author Ronald Brill
  */
 @JsxClass(browsers = @WebBrowser(value = FF, minVersion = 17))
 public class XPathEvaluator extends SimpleScriptable {
@@ -58,7 +64,7 @@ public class XPathEvaluator extends SimpleScriptable {
     /**
      * Evaluates an XPath expression string and returns a result of the specified type if possible.
      * @param expression the XPath expression string to be parsed and evaluated
-     * @param contextNode the context node for the evaluation of this XPath expression
+     * @param contextNodeObj the context node for the evaluation of this XPath expression
      * @param resolver the resolver permits translation of all prefixes, including the XML namespace prefix,
      *        within the XPath expression into appropriate namespace URIs.
      * @param type If a specific type is specified, then the result will be returned as the corresponding type
@@ -66,7 +72,7 @@ public class XPathEvaluator extends SimpleScriptable {
      * @return the result of the evaluation of the XPath expression
      */
     @JsxFunction(@WebBrowser(FF))
-    public XPathResult evaluate(final String expression, final Node contextNode,
+    public XPathResult evaluate(final String expression, final Object contextNodeObj,
             final Object resolver, final int type, final Object result) {
         XPathResult xPathResult = (XPathResult) result;
         if (xPathResult == null) {
@@ -74,7 +80,23 @@ public class XPathEvaluator extends SimpleScriptable {
             xPathResult.setParentScope(getParentScope());
             xPathResult.setPrototype(getPrototype(xPathResult.getClass()));
         }
-        xPathResult.init(contextNode.getDomNodeOrDie().getByXPath(expression), type);
+        // contextNodeObj can be either a node or an array with the node as the first element.
+        Node contextNode = null;
+        if (contextNodeObj instanceof NativeArray) {
+            contextNode = (Node) ((NativeArray) contextNodeObj).get(0);
+        }
+        else {
+            contextNode = (Node) contextNodeObj;
+        }
+        PrefixResolver prefixResolver = null;
+        if (resolver instanceof PrefixResolver) {
+            prefixResolver = (PrefixResolver) resolver;
+        }
+        else if (resolver instanceof NativeFunction) {
+            prefixResolver = new NativeFunctionPrefixResolver((NativeFunction) resolver, contextNode.getParentScope());
+        }
+        xPathResult.init(contextNode.getDomNodeOrDie().getByXPath(expression, prefixResolver), type);
         return xPathResult;
     }
+
 }
