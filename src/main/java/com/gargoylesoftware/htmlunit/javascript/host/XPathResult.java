@@ -20,6 +20,7 @@ import java.util.List;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
+import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -33,6 +34,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Chuck Dumont
+ * @author Ronald Brill
  */
 @JsxClass(browsers = @WebBrowser(FF))
 public class XPathResult extends SimpleScriptable {
@@ -222,7 +225,15 @@ public class XPathResult extends SimpleScriptable {
         if (resultType_ != NUMBER_TYPE) {
             throw Context.reportRuntimeError("Cannot get numberValue for type: " + resultType_);
         }
-        return ((Number) result_.get(0)).doubleValue();
+        final String asString = asString();
+        Double answer;
+        try {
+            answer = Double.parseDouble(asString);
+        }
+        catch (final NumberFormatException e) {
+            answer = Double.NaN;
+        }
+        return answer;
     }
 
     /**
@@ -234,7 +245,7 @@ public class XPathResult extends SimpleScriptable {
         if (resultType_ != BOOLEAN_TYPE) {
             throw Context.reportRuntimeError("Cannot get booleanValue for type: " + resultType_);
         }
-        return ((Boolean) result_.get(0)).booleanValue();
+        return Boolean.parseBoolean(asString());
     }
 
     /**
@@ -246,6 +257,17 @@ public class XPathResult extends SimpleScriptable {
         if (resultType_ != STRING_TYPE) {
             throw Context.reportRuntimeError("Cannot get stringValue for type: " + resultType_);
         }
-        return (String) result_.get(0);
+        return asString();
+    }
+
+    private String asString() {
+        final Object resultObj = result_.get(0);
+        if (resultObj instanceof DomAttr) {
+            return ((DomAttr) resultObj).getValue();
+        }
+        if (resultObj instanceof DomNode) {
+            return ((DomNode) resultObj).asText();
+        }
+        return resultObj.toString();
     }
 }

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1527" due-to="Chuck Dumont">
+                XPathResult types STRING_TYPE, NUMBER_TYPE and BOOLEAN_TYPE don't work.
+            </action>
             <action type="fix" dev="rbri" issue="1520">
                 Method document.createStyleSheet is more compatible with the IE; now the associated
                 link node is also created and inserted at the right place in the header. The new link

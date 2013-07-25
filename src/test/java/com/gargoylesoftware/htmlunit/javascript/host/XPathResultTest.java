@@ -30,6 +30,8 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Chuck Dumont
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class XPathResultTest extends SimpleWebTestCase {
@@ -187,6 +189,84 @@ public class XPathResultTest extends SimpleWebTestCase {
             + "    var result = document.evaluate(expression, document, null, "
             + "XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);\n"
             + "    alert(result.resultType);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(FF)
+    @Alerts({"bar", "foo", "foo" })
+    public void stringType() throws Exception {
+        final String html = "<html><head><title attr=\"bar\">foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var result = document.evaluate('//title/@attr', document, null, "
+            + "XPathResult.STRING_TYPE, null);\n"
+            + "    alert(result.stringValue);\n"
+            + "    result = document.evaluate('//title', document, null, "
+            + "XPathResult.STRING_TYPE, null);\n"
+            + "    alert(result.stringValue);\n"
+            + "    var result = document.evaluate('//title/text()', document, null, "
+            + "XPathResult.STRING_TYPE, null);\n"
+            + "    alert(result.stringValue);\n"
+            + "}"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(FF)
+    @Alerts({ "true", "true", "true", "true" })
+    public void numberType() throws Exception {
+        final String html = "<html><head><title attr=\"1234\">4321.5</title><span>foo</span><script>\n"
+            + "  function test() {\n"
+            + "    var result = document.evaluate('//title/@attr', document, null, "
+            + "XPathResult.NUMBER_TYPE, null);\n"
+            + "    alert(result.numberValue === 1234);\n"
+            + "    result = document.evaluate('//title', document, null, "
+            + "XPathResult.NUMBER_TYPE, null);\n"
+            + "    alert(result.numberValue === 4321.5);\n"
+            + "    result = document.evaluate('//title/text()', document, null, "
+            + "XPathResult.NUMBER_TYPE, null);\n"
+            + "    alert(result.numberValue === 4321.5);\n"
+            + "    result = document.evaluate('//span', document, null, "
+            + "XPathResult.NUMBER_TYPE, null);\n"
+            + "    alert(isNaN(result.numberValue));\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(FF)
+    @Alerts({ "true", "true", "true" })
+    public void booleanType() throws Exception {
+        final String html = "<html><head><title>foo</title><span attr=\"true\">true</span><script>\n"
+            + "  function test() {\n"
+            + "    var result = document.evaluate('//title', document, null, "
+            + "XPathResult.BOOLEAN_TYPE, null);\n"
+            + "    alert(result.booleanValue === false);\n"
+            + "    result = document.evaluate('//span', document, null, "
+            + "XPathResult.BOOLEAN_TYPE, null);\n"
+            + "    alert(result.booleanValue === true);\n"
+            + "    result = document.evaluate('//span/@attr', document, null, "
+            + "XPathResult.BOOLEAN_TYPE, null);\n"
+            + "    alert(result.booleanValue === true);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
