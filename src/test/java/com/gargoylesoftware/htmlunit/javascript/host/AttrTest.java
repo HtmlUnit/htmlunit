@@ -278,4 +278,102 @@ public class AttrTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = {"[object], undefined" },
+            DEFAULT = {"[object Attr], undefined" })
+    public void html_baseName() throws Exception {
+        html("baseName");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = {"[object], undefined" },
+            DEFAULT = {"[object Attr], undefined" })
+    public void html_baseURI() throws Exception {
+        html("baseURI");
+    }
+
+    private void html(final String methodName) throws Exception {
+        final String html
+            = "<html>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    debug(document.getElementById('tester').attributes.item(0));\n"
+            + "  }\n"
+            + "  function debug(e) {\n"
+            + "    alert(e);\n"
+            + "    alert(e." + methodName + ");\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<div id='tester' testAttr='test'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = {"[object]", "testAttr" },
+            DEFAULT = {"[object Attr]", "undefined" })
+    public void xml_baseName() throws Exception {
+        xml("baseName");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = {"[object]", "testAttr" },
+            DEFAULT = {"[object Attr]", "undefined" })
+    public void xml_baseURI() throws Exception {
+        xml("baseURI");
+    }
+
+    private void xml(final String methodName) throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var request;\n"
+            + "        if (window.XMLHttpRequest) {\n"
+            + "          request = new XMLHttpRequest();\n"
+            + "        } else if (window.ActiveXObject) {\n"
+            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        }\n"
+            + "        request.open('GET', 'foo.xml', false);\n"
+            + "        request.send('');\n"
+            + "        var doc = request.responseXML;\n"
+            + "        debug(doc.documentElement.childNodes[0].attributes.item(0));\n"
+            + "      }\n"
+            + "      function debug(e) {\n"
+            + "        try {\n"
+            + "          alert(e);\n"
+            + "        } catch(ex) {alert(ex)};\n"
+            + "        alert(e." + methodName + ");\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+              "<xml>"
+            + "<div testAttr='test'></div>"
+            + "</xml>";
+
+        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        loadPageWithAlerts2(html);
+    }
 }

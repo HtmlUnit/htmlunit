@@ -58,6 +58,15 @@ public class XMLAttr extends Attr {
     }
 
     /**
+     * Returns the base name of this element.
+     * @return the base name of this element
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public Object getBaseName() {
+        return getDomNodeOrDie().getLocalName();
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

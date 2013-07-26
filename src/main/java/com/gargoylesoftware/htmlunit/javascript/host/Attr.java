@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -177,5 +178,13 @@ public class Attr extends Node {
     @SuppressWarnings("unchecked")
     public DomAttr getDomNodeOrDie() throws IllegalStateException {
         return super.getDomNodeOrDie();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getBaseName() {
+        return Undefined.instance;
     }
 }
