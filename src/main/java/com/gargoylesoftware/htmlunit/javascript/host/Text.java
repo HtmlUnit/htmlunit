@@ -16,12 +16,16 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
  * A JavaScript object for Text.
@@ -30,6 +34,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author David K. Taylor
  * @author Chris Erskine
  * @author Ahmed Ashour
+ * @author Chuck Dumont
+ * @author Ronald Brill
  */
 @JsxClass(domClasses = DomText.class)
 public class Text extends CharacterDataImpl {
@@ -38,12 +44,6 @@ public class Text extends CharacterDataImpl {
      * Creates an instance. JavaScript objects must have a default constructor.
      */
     public Text() {
-    }
-
-    /**
-     * Initialize this object.
-     */
-    public void initialize() {
     }
 
     /**
@@ -64,5 +64,18 @@ public class Text extends CharacterDataImpl {
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public String getWholeText() {
         return ((DomText) getDomNodeOrDie()).getWholeText();
+    }
+
+    /**
+     * Returns the value of the node.
+     * @return the value of the node
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public Object getText() {
+        final DomNode node = getDomNodeOrDie();
+        if (node.getPage() instanceof XmlPage) {
+            return ((DomText) node).getWholeText();
+        }
+        return Undefined.instance;
     }
 }

@@ -21,7 +21,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -187,7 +186,6 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts({ "content", "content" })
     @Browsers(Browser.IE)
-    @NotYetImplemented
     public void text() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
