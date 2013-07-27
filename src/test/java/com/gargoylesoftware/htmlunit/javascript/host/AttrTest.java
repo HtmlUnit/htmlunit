@@ -299,6 +299,16 @@ public class AttrTest extends WebDriverTestCase {
         html("baseURI");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = {"[object], undefined" },
+            DEFAULT = {"[object Attr], null" })
+    public void html_namespaceURI() throws Exception {
+        html("namespaceURI");
+    }
+
     private void html(final String methodName) throws Exception {
         final String html
             = "<html>\n"
@@ -333,10 +343,20 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"[object]", "testAttr" },
+    @Alerts(IE = {"[object]", "undefined" },
             DEFAULT = {"[object Attr]", "undefined" })
     public void xml_baseURI() throws Exception {
         xml("baseURI");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = {"[object]", "" },
+            DEFAULT = {"[object Attr]", "null" })
+    public void xml_namespaceURI() throws Exception {
+        xml("namespaceURI");
     }
 
     private void xml(final String methodName) throws Exception {
