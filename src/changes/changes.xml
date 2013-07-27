@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                attr.baseURI not supported for FF.
+            </action>
             <action type="fix" dev="rbri" issue="1525">
                 node.baseName not supported for XML nodes (IE).
             </action>

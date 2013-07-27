@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ATTR_FIRST_LAST_CHILD_RETURNS_NULL;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -186,5 +187,14 @@ public class Attr extends Node {
     @Override
     public Object getBaseName() {
         return Undefined.instance;
+    }
+
+    /**
+     * Returns the Base URI as a string.
+     * @return the Base URI as a string
+     */
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    public String getBaseURI() {
+        return getDomNodeOrDie().getPage().getUrl().toExternalForm();
     }
 }

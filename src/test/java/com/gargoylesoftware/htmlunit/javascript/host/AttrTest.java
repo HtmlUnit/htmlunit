@@ -283,8 +283,8 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"[object], undefined" },
-            DEFAULT = {"[object Attr], undefined" })
+    @Alerts(IE = {"[object]", "undefined" },
+            DEFAULT = {"[object Attr]", "undefined" })
     public void html_baseName() throws Exception {
         html("baseName");
     }
@@ -293,8 +293,8 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"[object], undefined" },
-            DEFAULT = {"[object Attr], undefined" })
+    @Alerts(IE = {"[object]", "undefined" },
+            DEFAULT = {"[object Attr]", "http://localhost:12345/" })
     public void html_baseURI() throws Exception {
         html("baseURI");
     }
@@ -303,10 +303,30 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"[object], undefined" },
-            DEFAULT = {"[object Attr], null" })
+    @Alerts(IE = {"[object]", "undefined" },
+            DEFAULT = {"[object Attr]", "null" })
     public void html_namespaceURI() throws Exception {
         html("namespaceURI");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = {"[object]", "undefined" },
+            DEFAULT = {"[object Attr]", "testattr" })
+    public void html_localName() throws Exception {
+        html("localName");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = {"[object]", "undefined" },
+            DEFAULT = {"[object Attr]", "null" })
+    public void html_prefix() throws Exception {
+        html("prefix");
     }
 
     private void html(final String methodName) throws Exception {
@@ -314,7 +334,7 @@ public class AttrTest extends WebDriverTestCase {
             = "<html>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    debug(document.getElementById('tester').attributes.item(0));\n"
+            + "    debug(document.getElementById('tester').attributes.getNamedItem('testAttr'));\n"
             + "  }\n"
             + "  function debug(e) {\n"
             + "    alert(e);\n"
@@ -344,7 +364,7 @@ public class AttrTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = {"[object]", "undefined" },
-            DEFAULT = {"[object Attr]", "undefined" })
+            DEFAULT = {"[object Attr]", "http://localhost:12345/foo.xml" })
     public void xml_baseURI() throws Exception {
         xml("baseURI");
     }
@@ -357,6 +377,26 @@ public class AttrTest extends WebDriverTestCase {
             DEFAULT = {"[object Attr]", "null" })
     public void xml_namespaceURI() throws Exception {
         xml("namespaceURI");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = {"[object]", "undefined" },
+            DEFAULT = {"[object Attr]", "testAttr" })
+    public void xml_localName() throws Exception {
+        xml("localName");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = {"[object]", "" },
+            DEFAULT = {"[object Attr]", "null" })
+    public void xml_prefix() throws Exception {
+        xml("prefix");
     }
 
     private void xml(final String methodName) throws Exception {
