@@ -34,13 +34,13 @@ import java.io.StringReader;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -248,9 +248,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         Pattern.compile("(top|bottom|center)\\s*(\\d+\\s*(%|px|cm|mm|in|pt|pc|em|ex)|left|right|center)");
 
     private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
-    private static final Map<String, String> CSSColors_ = new HashMap<String, String>();
-    private static final Map<String, String> CamelizeCache_ = new HashMap<String, String>();
-    private static final Map<String, Integer> pixelValuesCache_ = new HashMap<String, Integer>();
+    private static final Map<String, String> CSSColors_ = new ConcurrentHashMap<String, String>();
+    private static final Map<String, String> CamelizeCache_ = new ConcurrentHashMap<String, String>(1000);
+    private static final Map<String, Integer> PixelValuesCache_ = new ConcurrentHashMap<String, Integer>(1000);
 
     /** The different types of shorthand values. */
     private enum Shorthand {
@@ -4335,7 +4335,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @see #pixelValue(HTMLElement, CssValue)
      */
     protected static int pixelValue(final String value) {
-        final Integer result = pixelValuesCache_.get(value);
+        final Integer result = PixelValuesCache_.get(value);
         if (null != result) {
             return result.intValue();
         }
@@ -4366,7 +4366,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             i = i * 24;
         }
 
-        pixelValuesCache_.put(value, Integer.valueOf(i));
+        PixelValuesCache_.put(value, Integer.valueOf(i));
         return i;
     }
 
