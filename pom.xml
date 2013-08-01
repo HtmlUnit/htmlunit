@@ -725,6 +725,9 @@
         <contributor>
             <name>Chuck Dumont</name>
         </contributor>
+        <contributor>
+            <name>Sebastian Cato</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

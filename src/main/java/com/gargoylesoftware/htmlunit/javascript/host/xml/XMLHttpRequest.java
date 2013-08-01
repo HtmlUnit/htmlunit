@@ -85,6 +85,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Ahmed Ashour
  * @author Stuart Begg
  * @author Ronald Brill
+ * @author Sebastian Cato
  *
  * @see <a href="http://www.w3.org/TR/XMLHttpRequest/">W3C XMLHttpRequest</a>
  * @see <a href="http://developer.apple.com/internet/webcontent/xmlhttpreq.html">Safari documentation</a>
@@ -507,7 +508,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                     userCred = user.toString();
                 }
                 if (Undefined.instance != password) {
-                    passwordCred = user.toString();
+                    passwordCred = password.toString();
                 }
 
                 // password is ignored if no user defined

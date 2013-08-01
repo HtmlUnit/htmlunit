@@ -48,6 +48,8 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ahmed Ashour
  * @author Stuart Begg
  * @author Sudhan Moghe
+ * @author Sebastian Cato
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class XMLHttpRequestTest extends WebDriverTestCase {
@@ -727,6 +729,48 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             }
             catch (final InterruptedException e) {
                 throw new RuntimeException(e);
+            }
+        }
+    }
+
+    /**
+     * Servlet for testing XMLHttpRequest basic authentication.
+     */
+    public static final class BasicAuthenticationServlet extends HttpServlet {
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
+            handleRequest(req, resp);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
+            handleRequest(req, resp);
+        }
+
+        private void handleRequest(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
+            final String authHdr = req.getHeader("Authorization");
+            if (null == authHdr) {
+                resp.setStatus(401);
+                resp.setHeader("WWW-Authenticate", "Basic realm=\"someRealm\"");
+            }
+            else {
+                final String[] authHdrTokens = authHdr.split("\\s+");
+                String authToken = "";
+                if (authHdrTokens.length == 2) {
+                    authToken += authHdrTokens[0] + ':' + authHdrTokens[1];
+                }
+
+                resp.setStatus(200);
+                resp.addHeader("Content-Type", "text/plain");
+                resp.getOutputStream().print(authToken);
+                resp.flushBuffer();
             }
         }
     }

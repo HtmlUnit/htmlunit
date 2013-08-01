@@ -42,10 +42,12 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase.MockWebConnectionServlet;
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequestTest.BasicAuthenticationServlet;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequestTest.StreamingServlet;
 
 /**
@@ -57,6 +59,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequestTest.Stre
  * @author Ahmed Ashour
  * @author Stuart Begg
  * @author Sudhan Moghe
+ * @author Sebastian Cato
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class XMLHttpRequest3Test extends WebServerTestCase {
@@ -489,6 +493,45 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         client.getPage(URL_FIRST);
 
         assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
+
+    /**
+     * Test XMLHttpRequest with basic authentication.
+     * @throws Exception on failure
+     */
+    @Test
+    @Alerts("Basic:Zm9vOmJhcg==")
+    public void basicAuthenticationRequest() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        servlets.put("/protected/token", BasicAuthenticationServlet.class);
+        servlets.put("/*", MockWebConnectionServlet.class);
+
+        startWebServer("./src/test/resources/", null, servlets);
+
+        final String html =
+                "<html>\n"
+                        + "  <head>\n"
+                        + "    <title>XMLHttpRequest Test</title>\n"
+                        + "    <script>\n"
+                        + "      var request;\n"
+                        + "      function testBasicAuth() {\n"
+                        + "        if (window.XMLHttpRequest) {\n"
+                        + "          request = new XMLHttpRequest();\n"
+                        + "        } else if (window.ActiveXObject) {\n"
+                        + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+                        + "        }\n"
+                        + "        request.open('GET', '/protected/token', "
+                        + "                false, 'foo', 'bar');\n"
+                        + "        request.send();\n"
+                        + "        alert(request.responseText);\n"
+                        + "      }\n"
+                        + "    </script>\n"
+                        + "  </head>\n"
+                        + "  <body onload='testBasicAuth()'>\n"
+                        + "  </body>\n"
+                        + "</html>";
+
+        loadPageWithAlerts(html, URL_FIRST);
     }
 
 }
