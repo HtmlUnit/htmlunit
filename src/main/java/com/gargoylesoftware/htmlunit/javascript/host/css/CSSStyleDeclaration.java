@@ -249,8 +249,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
 
     private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
     private static final Map<String, String> CSSColors_ = new ConcurrentHashMap<String, String>();
-    private static final Map<String, String> CamelizeCache_ = new ConcurrentHashMap<String, String>(1000);
-    private static final Map<String, Integer> PixelValuesCache_ = new ConcurrentHashMap<String, Integer>(1000);
+    private static final Map<String, String> CamelizeCache_ = new ConcurrentHashMap<String, String>(1000, 0.75f, 2);
+    private static final Map<String, Integer> PixelValuesCache_
+        = new ConcurrentHashMap<String, Integer>(1000, 0.75f, 2);
 
     /** The different types of shorthand values. */
     private enum Shorthand {
