@@ -506,7 +506,8 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         servlets.put("/protected/token", BasicAuthenticationServlet.class);
         servlets.put("/*", MockWebConnectionServlet.class);
 
-        startWebServer("./src/test/resources/", null, servlets);
+        stopWebServer();
+        startWebServer("./", null, servlets);
 
         final String html =
                 "<html>\n"
@@ -520,8 +521,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
                         + "        } else if (window.ActiveXObject) {\n"
                         + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
                         + "        }\n"
-                        + "        request.open('GET', '/protected/token', "
-                        + "                false, 'foo', 'bar');\n"
+                        + "        request.open('GET', '/protected/token', false, 'foo', 'bar');\n"
                         + "        request.send();\n"
                         + "        alert(request.responseText);\n"
                         + "      }\n"
