@@ -504,10 +504,12 @@ public class XMLHttpRequest extends SimpleScriptable {
             if (Undefined.instance != user || Undefined.instance != password) {
                 String userCred = null;
                 String passwordCred = "";
-                if (Undefined.instance != user) {
+                final boolean userIsNull = null == user || Undefined.instance == user;
+                final boolean passwordIsNull = null == password || Undefined.instance == password;
+                if (!userIsNull) {
                     userCred = user.toString();
                 }
-                if (Undefined.instance != password) {
+                if (!passwordIsNull) {
                     passwordCred = password.toString();
                 }
 

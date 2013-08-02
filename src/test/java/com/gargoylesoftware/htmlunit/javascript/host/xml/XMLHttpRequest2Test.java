@@ -671,4 +671,38 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html, servlets);
     }
+
+    /**
+     * Test XMLHttpRequest with basic authentication.
+     * @throws Exception on failure
+     */
+    @Test
+    @Alerts("<xml></xml>")
+    public void openNullUserIdNullPassword() throws Exception {
+        final String html =
+                "<html>\n"
+                        + "  <head>\n"
+                        + "    <title>XMLHttpRequest Test</title>\n"
+                        + "    <script>\n"
+                        + "      var request;\n"
+                        + "      function testBasicAuth() {\n"
+                        + "        if (window.XMLHttpRequest) {\n"
+                        + "          request = new XMLHttpRequest();\n"
+                        + "        } else if (window.ActiveXObject) {\n"
+                        + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+                        + "        }\n"
+                        + "        request.open('GET', '" + URL_SECOND + "', false, null, null);\n"
+                        + "        request.send();\n"
+                        + "        alert(request.responseText);\n"
+                        + "      }\n"
+                        + "    </script>\n"
+                        + "  </head>\n"
+                        + "  <body onload='testBasicAuth()'>\n"
+                        + "  </body>\n"
+                        + "</html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "<xml></xml>", "text/xml");
+
+        loadPageWithAlerts2(html);
+    }
 }

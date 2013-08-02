@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1532" due-to="Sebastian Cato">
+                XMLHttpRequest open(..) methods failed when called with null for userid/password.
+            </action>
             <action type="fix" dev="rbri" issue="1531" due-to="Sebastian Cato">
                 XMLHttpRequest open(..) methods delivers wrong credentials.
             </action>
