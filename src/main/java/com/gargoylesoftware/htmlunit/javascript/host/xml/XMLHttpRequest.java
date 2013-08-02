@@ -501,22 +501,19 @@ public class XMLHttpRequest extends SimpleScriptable {
             }
 
             request.setHttpMethod(HttpMethod.valueOf(method.toUpperCase(Locale.ENGLISH)));
-            if (Undefined.instance != user || Undefined.instance != password) {
-                String userCred = null;
-                String passwordCred = "";
-                final boolean userIsNull = null == user || Undefined.instance == user;
+
+            // password is ignored if no user defined
+            final boolean userIsNull = null == user || Undefined.instance == user;
+            if (!userIsNull) {
+                final String userCred = user.toString();
+
                 final boolean passwordIsNull = null == password || Undefined.instance == password;
-                if (!userIsNull) {
-                    userCred = user.toString();
-                }
+                String passwordCred = "";
                 if (!passwordIsNull) {
                     passwordCred = password.toString();
                 }
 
-                // password is ignored if no user defined
-                if (null != userCred) {
-                    request.setCredentials(new UsernamePasswordCredentials(userCred, passwordCred));
-                }
+                request.setCredentials(new UsernamePasswordCredentials(userCred, passwordCred));
             }
             webRequest_ = request;
         }
