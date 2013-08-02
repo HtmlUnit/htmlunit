@@ -37,6 +37,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebRequest;
+import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequestTest.BasicAuthenticationServlet;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -46,6 +47,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Sebastian Cato
  */
 @RunWith(BrowserRunner.class)
 public class XMLHttpRequest2Test extends WebDriverTestCase {
@@ -633,5 +635,40 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Override
     protected boolean needThreeConnections() {
         return true;
+    }
+
+    /**
+     * Test XMLHttpRequest with basic authentication.
+     * @throws Exception on failure
+     */
+    @Test
+    @Alerts("Basic:Zm9vOmJhcg==")
+    public void basicAuthenticationRequest() throws Exception {
+        final String html =
+                "<html>\n"
+                        + "  <head>\n"
+                        + "    <title>XMLHttpRequest Test</title>\n"
+                        + "    <script>\n"
+                        + "      var request;\n"
+                        + "      function testBasicAuth() {\n"
+                        + "        if (window.XMLHttpRequest) {\n"
+                        + "          request = new XMLHttpRequest();\n"
+                        + "        } else if (window.ActiveXObject) {\n"
+                        + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+                        + "        }\n"
+                        + "        request.open('GET', '/protected/token', false, 'foo', 'bar');\n"
+                        + "        request.send();\n"
+                        + "        alert(request.responseText);\n"
+                        + "      }\n"
+                        + "    </script>\n"
+                        + "  </head>\n"
+                        + "  <body onload='testBasicAuth()'>\n"
+                        + "  </body>\n"
+                        + "</html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        servlets.put("/protected/token", BasicAuthenticationServlet.class);
+
+        loadPageWithAlerts2(html, servlets);
     }
 }
