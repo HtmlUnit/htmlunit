@@ -34,6 +34,7 @@ import java.io.StringReader;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -248,10 +249,11 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         Pattern.compile("(top|bottom|center)\\s*(\\d+\\s*(%|px|cm|mm|in|pt|pc|em|ex)|left|right|center)");
 
     private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
-    private static final Map<String, String> CSSColors_ = new ConcurrentHashMap<String, String>();
-    private static final Map<String, String> CamelizeCache_ = new ConcurrentHashMap<String, String>(1000, 0.75f, 2);
+    private static final Map<String, String> CSSColors_ = new HashMap<String, String>();
+    private static final Map<String, String> CamelizeCache_ = new ConcurrentHashMap<String, String>(400, 0.75f, 2);
     private static final Map<String, Integer> PixelValuesCache_
         = new ConcurrentHashMap<String, Integer>(1000, 0.75f, 2);
+    private static final int MaxPixelValuesCacheSize = 20000;
 
     /** The different types of shorthand values. */
     private enum Shorthand {
@@ -4367,6 +4369,10 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             i = i * 24;
         }
 
+        // refresh in case of overflow
+        if (PixelValuesCache_.size() > MaxPixelValuesCacheSize) {
+            PixelValuesCache_.clear();
+        }
         PixelValuesCache_.put(value, Integer.valueOf(i));
         return i;
     }
