@@ -1168,7 +1168,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "type: message", "data: hello" },
-            IE6 = { }, IE7 = { }, IE8 = { })
+            IE6 = "exception", IE7 = "exception", IE8 = "exception")
     public void postMessage() throws Exception {
         final String html
             = "<html><body><script>\n"
@@ -1176,13 +1176,20 @@ public class Window2Test extends WebDriverTestCase {
             + "  alert('type: ' + event.type);\n"
             + "  alert('data: ' + event.data);\n"
             + "}\n"
-            + "window.addEventListener('message', receiveMessage, false);\n"
+            + "if (window.addEventListener) {\n"
+            + "  window.addEventListener('message', receiveMessage, false);\n"
+            + "}\n"
+            + "else {\n"
+            + "  window.attachEvent('onmessage', receiveMessage);\n"
+            + "}\n"
             + "</script>\n"
             + "<iframe src='" + URL_SECOND + "'></iframe>\n"
             + "</body></html>";
 
         final String iframe = "<html><body><script>\n"
+            + "try {\n"
             + "top.postMessage('hello', '*');\n"
+            + "} catch(e) { alert('exception') }\n"
             + "</script></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, iframe);
