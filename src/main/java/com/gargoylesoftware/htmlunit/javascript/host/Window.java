@@ -2045,7 +2045,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param targetOrigin the origin this window must be for the event to be dispatched
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.postMessage">MDN documentation</a>
      */
-    @JsxFunction({@WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 9) })
+    @JsxFunction({@WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 8) })
     public void postMessage(final String message, final String targetOrigin) {
         final MessageEvent event = new MessageEvent(message);
         event.setParentScope(this);

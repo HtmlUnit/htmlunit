@@ -1168,13 +1168,16 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "type: message", "data: hello" },
-            IE6 = "exception", IE7 = "exception", IE8 = "exception")
+            IE6 = "exception", IE7 = "exception")
     public void postMessage() throws Exception {
         final String html
             = "<html><body><script>\n"
             + "function receiveMessage(event) {\n"
             + "  alert('type: ' + event.type);\n"
             + "  alert('data: ' + event.data);\n"
+            // + "  alert('origin: ' + event.origin);\n"
+            // + "  alert('source: ' + event.source);\n"
+            // + "  alert('lastEventId: ' + event.lastEventId);\n"
             + "}\n"
             + "if (window.addEventListener) {\n"
             + "  window.addEventListener('message', receiveMessage, false);\n"
@@ -1188,7 +1191,7 @@ public class Window2Test extends WebDriverTestCase {
 
         final String iframe = "<html><body><script>\n"
             + "try {\n"
-            + "top.postMessage('hello', '*');\n"
+            + "  top.postMessage('hello', '*');\n"
             + "} catch(e) { alert('exception') }\n"
             + "</script></body></html>";
 
