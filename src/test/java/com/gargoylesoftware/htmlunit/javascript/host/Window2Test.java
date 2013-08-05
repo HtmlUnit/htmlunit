@@ -38,6 +38,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class Window2Test extends WebDriverTestCase {
@@ -1171,27 +1172,68 @@ public class Window2Test extends WebDriverTestCase {
             IE6 = "exception", IE7 = "exception")
     public void postMessage() throws Exception {
         final String html
-            = "<html><body><script>\n"
-            + "function receiveMessage(event) {\n"
-            + "  alert('type: ' + event.type);\n"
-            + "  alert('data: ' + event.data);\n"
-            // + "  alert('origin: ' + event.origin);\n"
-            // + "  alert('source: ' + event.source);\n"
-            // + "  alert('lastEventId: ' + event.lastEventId);\n"
-            + "}\n"
-            + "if (window.addEventListener) {\n"
-            + "  window.addEventListener('message', receiveMessage, false);\n"
-            + "}\n"
-            + "else {\n"
-            + "  window.attachEvent('onmessage', receiveMessage);\n"
-            + "}\n"
+            = "<html>"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  function receiveMessage(event) {\n"
+            + "    alert('type: ' + event.type);\n"
+            + "    alert('data: ' + event.data);\n"
+            // + "    alert('origin: ' + event.origin);\n"
+            // + "    alert('source: ' + event.source);\n"
+            // + "    alert('lastEventId: ' + event.lastEventId);\n"
+            + "  }\n"
+
+            + "  if (window.addEventListener) {\n"
+            + "    window.addEventListener('message', receiveMessage, false);\n"
+            + "  } else {\n"
+            + "    window.attachEvent('onmessage', receiveMessage);\n"
+            + "  }\n"
             + "</script>\n"
-            + "<iframe src='" + URL_SECOND + "'></iframe>\n"
+            + "  <iframe src='" + URL_SECOND + "'></iframe>\n"
             + "</body></html>";
 
         final String iframe = "<html><body><script>\n"
             + "try {\n"
             + "  top.postMessage('hello', '*');\n"
+            + "} catch(e) { alert('exception') }\n"
+            + "</script></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, iframe);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT =  "sync: false",
+            IE6 = "exception",
+            IE7 = "exception",
+            IE = "sync: true")
+    public void postMessageSyncOrAsync() throws Exception {
+        final String html
+            = "<html>"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  var sync = true;\n"
+            + "  function receiveMessage(event) {\n"
+            + "    alert('sync: ' + sync);\n"
+            + "  }\n"
+            + "  if (window.addEventListener) {\n"
+            + "    window.addEventListener('message', receiveMessage, false);\n"
+            + "  } else {\n"
+            + "    window.attachEvent('onmessage', receiveMessage);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "  <iframe src='" + URL_SECOND + "'></iframe>\n"
+            + "</body></html>";
+
+        final String iframe = "<html><body><script>\n"
+            + "try {\n"
+            + "  top.postMessage('hello', '*');\n"
+            + "  top.sync = false;\n"
             + "} catch(e) { alert('exception') }\n"
             + "</script></body></html>";
 

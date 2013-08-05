@@ -1170,6 +1170,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_WINDOW_IS_NOT_A_FUNCTION,
 
+    /** Window.postMessage is synchronouse. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_WINDOW_POST_MESSAGE_SYNCHRONOUSE,
+
     /** Supports XML. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_XML,
