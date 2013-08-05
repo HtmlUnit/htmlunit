@@ -2038,6 +2038,21 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     public void setOnchange(final Object onchange) {
         setHandlerForJavaScript(Event.TYPE_CHANGE, onchange);
     }
+
+    /**
+     * Posts a message.
+     * @param message the object passed to the window
+     * @param targetOrigin the origin this window must be for the event to be dispatched
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.postMessage">MDN documentation</a>
+     */
+    @JsxFunction({@WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 9) })
+    public void postMessage(final String message, final String targetOrigin) {
+        final MessageEvent event = new MessageEvent(message);
+        event.setParentScope(this);
+        event.setPrototype(getPrototype(event.getClass()));
+
+        dispatchEvent(event);
+    }
 }
 
 class HTMLCollectionFrames extends HTMLCollection {

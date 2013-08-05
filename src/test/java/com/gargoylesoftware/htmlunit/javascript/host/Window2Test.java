@@ -1162,4 +1162,30 @@ public class Window2Test extends WebDriverTestCase {
 
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "type: message", "data: hello" },
+            IE6 = { }, IE7 = { }, IE8 = { })
+    public void postMessage() throws Exception {
+        final String html
+            = "<html><body><script>\n"
+            + "function receiveMessage(event) {\n"
+            + "  alert('type: ' + event.type);\n"
+            + "  alert('data: ' + event.data);\n"
+            + "}\n"
+            + "window.addEventListener('message', receiveMessage, false);\n"
+            + "</script>\n"
+            + "<iframe src='" + URL_SECOND + "'></iframe>\n"
+            + "</body></html>";
+
+        final String iframe = "<html><body><script>\n"
+            + "top.postMessage('hello', '*');\n"
+            + "</script></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, iframe);
+        loadPageWithAlerts2(html);
+    }
 }

@@ -125,6 +125,9 @@ public class Event extends SimpleScriptable {
     /** The event type triggered by "onerror" event handlers. */
     public static final String TYPE_ERROR = "error";
 
+    /** The message event type, triggered by postMessage. */
+    public static final String TYPE_MESSAGE = "message";
+
     /** The first event phase: the capturing phase. */
     @JsxConstant(@WebBrowser(FF))
     public static final short CAPTURING_PHASE = 1;
