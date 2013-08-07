@@ -1968,9 +1968,6 @@ public class WebClient implements Serializable {
         else {
             try {
                 final WebResponse response = loadWebResponse(request);
-                // check and report problems if needed
-                throwFailingHttpStatusCodeExceptionIfNecessary(response);
-
                 loadJob = new LoadJob(request, requestingWindow, target, response);
             }
             catch (final IOException e) {
@@ -2040,6 +2037,9 @@ public class WebClient implements Serializable {
                     if (pageBeforeLoad != win.getEnclosedPage()) {
                         updatedWindows.add(win);
                     }
+
+                    // check and report problems if needed
+                    throwFailingHttpStatusCodeExceptionIfNecessary(downloadedResponse.response_);
                 }
                 else {
                     LOG.info("No usage of download: " + downloadedResponse);

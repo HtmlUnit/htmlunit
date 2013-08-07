@@ -8,6 +8,11 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                In case the server reports an error via http error code, the curretn page content
+                was not replaced with the content of that error page if the error was the result
+                of a form submit or an anchor click.
+            </action>
             <action type="fix" dev="mguillem" issue="1481">
                 JavaScript: added (simple) support for window.postMessage.
             </action>

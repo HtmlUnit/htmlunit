@@ -26,7 +26,6 @@ import java.net.URL;
 import java.nio.CharBuffer;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
@@ -50,9 +49,9 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 public class NoHttpResponseTest {
     private static final String html
         = "<html><body><script>\n"
-        + "function fillField(){\n"
-        + "  document.forms.loginform.textfield.value = 'new value';\n"
-        + "}\n"
+        + "  function fillField(){\n"
+        + "    document.forms.loginform.textfield.value = 'new value';\n"
+        + "  }\n"
         + "</script>\n"
         + "<form name='loginform' action='page2' method='get'>\n"
         + "  <input type='text' name='textfield' value='' />\n"
@@ -114,9 +113,6 @@ public class NoHttpResponseTest {
             try {
                 final HtmlPage page = getWebClient().getPage(getDefaultUrl());
                 ((HtmlElement) page.getElementById("loginButton")).click();
-            }
-            catch (final Exception e) {
-                throw ExceptionUtils.getRootCause(e);
             }
             finally {
                 miniServer.shutDown();

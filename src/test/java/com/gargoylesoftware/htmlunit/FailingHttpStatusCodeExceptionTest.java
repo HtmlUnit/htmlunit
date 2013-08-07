@@ -19,9 +19,11 @@ import java.util.List;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.http.HttpStatus;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -30,6 +32,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public final class FailingHttpStatusCodeExceptionTest extends SimpleWebTestCase {
@@ -55,20 +58,62 @@ public final class FailingHttpStatusCodeExceptionTest extends SimpleWebTestCase 
     /**
      * @throws Exception if the test fails
      */
-    @Test(expected = FailingHttpStatusCodeException.class)
+    @Test
     public void failureByGetPage() throws Exception {
-        getMockWebConnection().setDefaultResponse("", 404, "Not Found", "text/html");
-        getWebClientWithMockWebConnection().getPage(getDefaultUrl());
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", "text/html");
+        final WebClient client = getWebClientWithMockWebConnection();
+        try {
+            client.getPage(getDefaultUrl());
+            Assert.fail("FailingHttpStatusCodeException expected");
+        }
+        catch (final FailingHttpStatusCodeException e) {
+            // expected
+        }
+        assertEquals("Error: not found",
+                client.getCurrentWindow().getEnclosedPage().getWebResponse().getContentAsString());
     }
 
     /**
      * @throws Exception if the test fails
      */
-    @Test(expected = FailingHttpStatusCodeException.class)
+    @Test
     public void failureByClickLink() throws Exception {
         final String html = "<html><body><a href='doesntExist'>go</a></body></html>";
-        getMockWebConnection().setDefaultResponse("", 404, "Not Found", "text/html");
-        final HtmlPage page = loadPageWithAlerts(html);
-        page.getAnchors().get(0).click();
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", "text/html");
+
+        final WebClient client = getWebClientWithMockWebConnection();
+        try {
+            final HtmlPage page = loadPageWithAlerts(html);
+            page.getAnchors().get(0).click();
+        }
+        catch (final FailingHttpStatusCodeException e) {
+            // expected
+        }
+        assertEquals("Error: not found",
+                client.getCurrentWindow().getEnclosedPage().getWebResponse().getContentAsString());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void failureBySubmit() throws Exception {
+        final String html = "<html><body>\n"
+                + "<form name='form1' method='get' action='foo.html'>\n"
+                + "  <input name='button' type='submit' id='mySubmit'/>\n"
+                + "</form>\n"
+                + "</body></html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", "text/html");
+
+        final WebClient client = getWebClientWithMockWebConnection();
+        try {
+            final HtmlPage page = loadPageWithAlerts(html);
+            ((HtmlElement) page.getElementById("mySubmit")).click();
+        }
+        catch (final FailingHttpStatusCodeException e) {
+            // expected
+        }
+        assertEquals("Error: not found",
+                client.getCurrentWindow().getEnclosedPage().getWebResponse().getContentAsString());
     }
 }
