@@ -106,6 +106,14 @@ public class XMLHttpRequest extends SimpleScriptable {
     /** All the data has been received; the complete data is available in responseBody and responseText. */
     public static final int STATE_DONE = 4;
 
+    private static final String HEADER_ORIGIN = "Origin";
+    private static final char REQUEST_HEADERS_SEPARATOR = ',';
+
+    private static final String HEADER_ACCESS_CONTROL_REQUEST_METHOD = "Access-Control-Request-Method";
+    private static final String HEADER_ACCESS_CONTROL_REQUEST_HEADERS = "Access-Control-Request-Headers";
+    private static final String HEADER_ACCESS_CONTROL_ALLOW_ORIGIN = "Access-Control-Allow-Origin";
+    private static final String HEADER_ACCESS_CONTROL_ALLOW_HEADERS = "Access-Control-Allow-Headers";
+
     private static final String[] ALL_PROPERTIES_ = {"onreadystatechange", "readyState", "responseText", "responseXML",
         "status", "statusText", "abort", "getAllResponseHeaders", "getResponseHeader", "open", "send",
         "setRequestHeader"};
@@ -497,7 +505,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                 if (originUrl.getPort() != -1) {
                     origin.append(':').append(originUrl.getPort());
                 }
-                request.setAdditionalHeader("Origin", origin.toString());
+                request.setAdditionalHeader(HEADER_ORIGIN, origin.toString());
             }
 
             request.setHttpMethod(HttpMethod.valueOf(method.toUpperCase(Locale.ENGLISH)));
@@ -635,24 +643,33 @@ public class XMLHttpRequest extends SimpleScriptable {
     private void doSend(final Context context) {
         final WebClient wc = getWindow().getWebWindow().getWebClient();
         try {
-            final boolean crossOriginResourceSharing = webRequest_.getAdditionalHeaders().get("Origin") != null;
+            final String originHeaderValue = webRequest_.getAdditionalHeaders().get(HEADER_ORIGIN);
+            final boolean crossOriginResourceSharing = originHeaderValue != null;
             if (crossOriginResourceSharing && isPreflight()) {
                 final WebRequest preflightRequest = new WebRequest(webRequest_.getUrl(), HttpMethod.OPTIONS);
-                preflightRequest.setAdditionalHeader("Origin", webRequest_.getAdditionalHeaders().get("Origin"));
-                preflightRequest.setAdditionalHeader("Access-Control-Request-Method",
+
+                // header origin
+                preflightRequest.setAdditionalHeader(HEADER_ORIGIN, originHeaderValue);
+
+                // header request-method
+                preflightRequest.setAdditionalHeader(
+                        HEADER_ACCESS_CONTROL_REQUEST_METHOD,
                         webRequest_.getHttpMethod().name());
+
+                // header request-headers
                 final StringBuilder builder = new StringBuilder();
                 for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
                     final String name = header.getKey().toLowerCase(Locale.ENGLISH);
-                    final String value = header.getValue().toLowerCase(Locale.ENGLISH);
-                    if (isPreflightHeader(name, value)) {
+                    if (isPreflightHeader(name, header.getValue())) {
                         if (builder.length() != 0) {
-                            builder.append(' ');
+                            builder.append(REQUEST_HEADERS_SEPARATOR);
                         }
                         builder.append(name);
                     }
                 }
-                preflightRequest.setAdditionalHeader("Access-Control-Request-Headers", builder.toString());
+                preflightRequest.setAdditionalHeader(HEADER_ACCESS_CONTROL_REQUEST_HEADERS, builder.toString());
+
+                // do the preflight request
                 final WebResponse preflightResponse = wc.loadWebResponse(preflightRequest);
                 if (!isPreflightAuthorized(preflightResponse)) {
                     setState(STATE_HEADERS_RECEIVED, context);
@@ -672,9 +689,8 @@ public class XMLHttpRequest extends SimpleScriptable {
             }
             boolean allowOriginResponse = true;
             if (crossOriginResourceSharing) {
-                final String value = webResponse.getResponseHeaderValue("Access-Control-Allow-Origin");
-                allowOriginResponse = "*".equals(value)
-                        || webRequest_.getAdditionalHeaders().get("Origin").equals(value);
+                final String value = webResponse.getResponseHeaderValue(HEADER_ACCESS_CONTROL_ALLOW_ORIGIN);
+                allowOriginResponse = "*".equals(value) || originHeaderValue.equals(value);
             }
             if (allowOriginResponse) {
                 if (overriddenMimeType_ == null) {
@@ -722,7 +738,7 @@ public class XMLHttpRequest extends SimpleScriptable {
         }
         for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
             if (isPreflightHeader(header.getKey().toLowerCase(Locale.ENGLISH),
-                    header.getValue().toLowerCase(Locale.ENGLISH))) {
+                    header.getValue())) {
                 return true;
             }
         }
@@ -730,11 +746,11 @@ public class XMLHttpRequest extends SimpleScriptable {
     }
 
     private boolean isPreflightAuthorized(final WebResponse preflightResponse) {
-        final String originHeader = preflightResponse.getResponseHeaderValue("Access-Control-Allow-Origin");
-        if (!"*".equals(originHeader) && !webRequest_.getAdditionalHeaders().get("Origin").equals(originHeader)) {
+        final String originHeader = preflightResponse.getResponseHeaderValue(HEADER_ACCESS_CONTROL_ALLOW_ORIGIN);
+        if (!"*".equals(originHeader) && !webRequest_.getAdditionalHeaders().get(HEADER_ORIGIN).equals(originHeader)) {
             return false;
         }
-        String headersHeader = preflightResponse.getResponseHeaderValue("Access-Control-Allow-Headers");
+        String headersHeader = preflightResponse.getResponseHeaderValue(HEADER_ACCESS_CONTROL_ALLOW_HEADERS);
         if (headersHeader == null) {
             headersHeader = "";
         }
@@ -743,7 +759,7 @@ public class XMLHttpRequest extends SimpleScriptable {
         }
         for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
             final String key = header.getKey().toLowerCase(Locale.ENGLISH);
-            if (isPreflightHeader(key, header.getValue().toLowerCase(Locale.ENGLISH))
+            if (isPreflightHeader(key, header.getValue())
                     && !headersHeader.contains(key)) {
                 return false;
             }
@@ -752,15 +768,16 @@ public class XMLHttpRequest extends SimpleScriptable {
     }
 
     /**
-     * @param name header name (MUST be lower-case), for performance reasons
-     * @param value header value (MUST be lower-case), for performance reasons
+     * @param name header name (MUST be lower-case for performance reasons)
+     * @param value header value
      */
     private boolean isPreflightHeader(final String name, final String value) {
         if ("content-type".equals(name)) {
-            if ("application/x-www-form-urlencoded".equals(value)
-                || "multipart/form-data".equals(value)
-                || "text/plain".equals(value)
-                || value.startsWith("text/plain;charset=")) {
+            final String lcValue = value.toLowerCase(Locale.ENGLISH);
+            if ("application/x-www-form-urlencoded".equals(lcValue)
+                || "multipart/form-data".equals(lcValue)
+                || "text/plain".equals(lcValue)
+                || lcValue.startsWith("text/plain;charset=")) {
                 return false;
             }
             return true;

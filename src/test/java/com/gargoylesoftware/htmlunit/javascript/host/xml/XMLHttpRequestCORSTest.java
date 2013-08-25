@@ -38,6 +38,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class XMLHttpRequestCORSTest extends WebDriverTestCase {
@@ -317,6 +318,45 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "http://localhost:" + PORT;
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_METHODS_ = "POST, GET, OPTIONS";
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_HEADERS_ = null;
+        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<String, Class<? extends Servlet>>();
+        servlets2.put("/preflight2", PreflightServerServlet.class);
+        startWebServer2(".", null, servlets2);
+
+        loadPageWithAlerts2(html, new URL(getDefaultUrl(), "/preflight1"));
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(DEFAULT = { "4", "200", "options_headers", "x-ping,x-pong" },
+            IE = { "4", "200", "options_headers", "null" })
+    public void preflight_many_header_values() throws Exception {
+        expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
+
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "var xhr = " + XHRInstantiation_ + ";\n"
+                + "function test() {\n"
+                + "  try {\n"
+                + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/preflight2';\n"
+                + "    xhr.open('GET',  url, false);\n"
+                + "    xhr.setRequestHeader('X-PING', 'ping');\n"
+                + "    xhr.setRequestHeader('X-PONG', 'pong');\n"
+                + "    xhr.send();\n"
+                + "  } catch(e) { alert('exception') }\n"
+                + "  alert(xhr.readyState);\n"
+                + "  alert(xhr.status);\n"
+                + "  alert(xhr.responseXML.firstChild.childNodes[3].tagName);"
+                + "  alert(xhr.responseXML.firstChild.childNodes[3].firstChild.nodeValue);"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        PreflightServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "http://localhost:" + PORT;
+        PreflightServerServlet.ACCESS_CONTROL_ALLOW_METHODS_ = "POST, GET, OPTIONS";
+        PreflightServerServlet.ACCESS_CONTROL_ALLOW_HEADERS_ = "X-PING, X-PONG";
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<String, Class<? extends Servlet>>();
         servlets2.put("/preflight2", PreflightServerServlet.class);
         startWebServer2(".", null, servlets2);
