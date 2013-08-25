@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @JsxClass(domClasses = HtmlStyle.class)
 public class HTMLStyleElement extends HTMLElement {
@@ -87,5 +88,15 @@ public class HTMLStyleElement extends HTMLElement {
     public String getType() {
         final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
         return style.getTypeAttribute();
+    }
+
+    /**
+     * Returns the media of this style.
+     * @return the media
+     */
+    @JsxGetter()
+    public String getMedia() {
+        final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
+        return style.getAttribute("media");
     }
 }

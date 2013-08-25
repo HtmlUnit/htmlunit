@@ -89,9 +89,9 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title>\n"
 
-            + "<style id='style_none'>my { }</style>\n"
-            + "<style type='text/test' id='style_text'>my { }</style>\n"
-            + "<style type='text/html' id='style_html'>my { }</style>\n"
+            + "<style id='style_none'>.a > .t { }</style>\n"
+            + "<style type='text/test' id='style_text'>.b > .t { }</style>\n"
+            + "<style type='text/html' id='style_html'>.c > .t { }</style>\n"
 
             + "<script>\n"
             + "function doTest() {\n"
@@ -118,9 +118,9 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title>\n"
 
-            + "<style id='style_none'>.a > .t { }</style>\n"
-            + "<style type='text/test' id='style_text'>.b > .t { }</style>\n"
-            + "<style type='text/css' id='style_css'>.c > .t { }</style>\n"
+            + "<style id='style_none'>my { }</style>\n"
+            + "<style type='text/test' id='style_text'>my { }</style>\n"
+            + "<style type='text/css' id='style_css'>my { }</style>\n"
 
             + "<script>\n"
             + "function doTest() {\n"
@@ -130,6 +130,35 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
             + "  alert(style.type);\n"
             + "  style = document.getElementById('style_css');\n"
             + "  alert(style.type);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "", "all", "screen, print,test" })
+    public void media() throws Exception {
+        final String html
+            = "<html><head><title>foo</title>\n"
+
+            + "<style id='style_none'>my { }</style>\n"
+            + "<style media='all' id='style_all'>my { }</style>\n"
+            + "<style media='screen, print,test' id='style_some'>my { }</style>\n"
+
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  style = document.getElementById('style_none');\n"
+            + "  alert(style.media);\n"
+            + "  style = document.getElementById('style_all');\n"
+            + "  alert(style.media);\n"
+            + "  style = document.getElementById('style_some');\n"
+            + "  alert(style.media);\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='doTest()'>\n"
