@@ -490,10 +490,12 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         }
         final ScriptResult scriptResult = htmlElement.fireEvent(Event.TYPE_CHANGE);
 
-        if (page.getWebClient().getWebWindows().contains(page.getEnclosingWindow())) {
-            return page.getEnclosingWindow().getEnclosedPage(); // may be itself or a newly loaded one
+        if (page.getWebClient().containsWebWindow(page.getEnclosingWindow())) {
+            // may be itself or a newly loaded one
+            return page.getEnclosingWindow().getEnclosedPage();
         }
-        else if (scriptResult != null) {
+
+        if (scriptResult != null) {
             // current window doesn't exist anymore
             return scriptResult.getNewPage();
         }
