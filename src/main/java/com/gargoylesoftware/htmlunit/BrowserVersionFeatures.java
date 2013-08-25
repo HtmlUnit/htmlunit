@@ -432,10 +432,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
-    GENERATED_70,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
     GENERATED_71,
 
     /** Was originally .isIE(). */
@@ -971,6 +967,19 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature(@WebBrowser(IE))
     JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30x1,
+
+    /** Indicates that innerHTML adds the child also for null values. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE,
+
+    /** Indicates that innerHTML creates a document fragment as parent node
+     * if the receiver node has no parent at all. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_INNER_HTML_CREATES_DOC_FRAGMENT_AS_PARENT,
+
+    /** Indicates that innerHTML is readonly for some tags. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_INNER_HTML_READONLY_FOR_SOME_TAGS,
 
     /** Indicates if multiple spaces are replaced by a single one when accessing innerHTML. */
     @BrowserFeature(@WebBrowser(IE))

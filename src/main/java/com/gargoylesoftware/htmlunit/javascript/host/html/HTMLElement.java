@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_65;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_70;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_71;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_72;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_73;
@@ -31,6 +30,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CHAR_OFF_I
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CHAR_UNDEFINED_DOT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENT_LEFT_TOP_ZERO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_EXTENT_WITHOUT_PADDING;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_CREATES_DOC_FRAGMENT_AS_PARENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_READONLY_FOR_SOME_TAGS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_REDUCE_WHITESPACES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_THROWS_NOT_ATTACHED;
@@ -975,9 +977,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     @JsxSetter
     public void setInnerHTML(final Object value) {
         final DomNode domNode = getDomNodeOrDie();
-        final boolean ie = getBrowserVersion().hasFeature(GENERATED_70);
+        final boolean readonly = getBrowserVersion().hasFeature(JS_INNER_HTML_READONLY_FOR_SOME_TAGS);
 
-        if (ie && INNER_HTML_READONLY_IN_IE.contains(domNode.getNodeName())) {
+        if (readonly && INNER_HTML_READONLY_IN_IE.contains(domNode.getNodeName())) {
             throw Context.reportRuntimeError("innerHTML is read-only for tag " + domNode.getNodeName());
         }
 
@@ -986,14 +988,16 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         // null && IE     -> add child
         // null && non-IE -> Don't add
         // ''             -> Don't add
-        if ((value == null && ie) || (value != null && !"".equals(value))) {
+        final boolean addChildForNull = getBrowserVersion().hasFeature(JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE);
+        if ((value == null && addChildForNull) || (value != null && !"".equals(value))) {
 
             final String valueAsString = Context.toString(value);
             parseHtmlSnippet(domNode, true, valueAsString);
 
-            //if the parentNode has null parentNode in IE,
-            //create a DocumentFragment to be the parentNode's parentNode.
-            if (domNode.getParentNode() == null && ie) {
+            final boolean createFragment = getBrowserVersion().hasFeature(JS_INNER_HTML_CREATES_DOC_FRAGMENT_AS_PARENT);
+            // if the parentNode has null parentNode in IE,
+            // create a DocumentFragment to be the parentNode's parentNode.
+            if (domNode.getParentNode() == null && createFragment) {
                 final DomDocumentFragment fragment = ((HtmlPage) domNode.getPage()).createDomDocumentFragment();
                 fragment.appendChild(domNode);
             }
@@ -2241,33 +2245,33 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      *        if <tt>null</tt>, this method returns <tt>0</tt> in lieu of negative values
      */
     protected String getWidthOrHeight(final String attributeName, final Boolean returnNegativeValues) {
-        String s = getDomNodeOrDie().getAttribute(attributeName);
-        if (!PERCENT_VALUE.matcher(s).matches()) {
+        String value = getDomNodeOrDie().getAttribute(attributeName);
+        if (!PERCENT_VALUE.matcher(value).matches()) {
             try {
-                final Float f = Float.valueOf(s);
+                final Float f = Float.valueOf(value);
                 final int i = f.intValue();
                 if (i < 0) {
                     if (returnNegativeValues == null) {
-                        s = "0";
+                        value = "0";
                     }
                     else if (!returnNegativeValues.booleanValue()) {
-                        s = "";
+                        value = "";
                     }
                     else {
-                        s = Integer.toString(i);
+                        value = Integer.toString(i);
                     }
                 }
                 else {
-                    s = Integer.toString(i);
+                    value = Integer.toString(i);
                 }
             }
             catch (final NumberFormatException e) {
                 if (getBrowserVersion().hasFeature(GENERATED_74)) {
-                    s = "";
+                    value = "";
                 }
             }
         }
-        return s;
+        return value;
     }
 
     /**
