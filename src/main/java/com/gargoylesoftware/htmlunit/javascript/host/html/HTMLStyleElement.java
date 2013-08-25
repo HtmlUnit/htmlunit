@@ -78,4 +78,14 @@ public class HTMLStyleElement extends HTMLElement {
     public CSSStyleSheet getStyleSheet() {
         return getSheet();
     }
+
+    /**
+     * Returns the type of this style.
+     * @return the type
+     */
+    @JsxGetter()
+    public String getType() {
+        final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
+        return style.getTypeAttribute();
+    }
 }

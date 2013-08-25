@@ -89,9 +89,9 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
         final String html
             = "<html><head><title>foo</title>\n"
 
-            + "<style id='style_none'>.a > .t { }</style>\n"
-            + "<style type='text/test' id='style_text'>.b > .t { }</style>\n"
-            + "<style type='text/html' id='style_html'>.c > .t { }</style>\n"
+            + "<style id='style_none'>my { }</style>\n"
+            + "<style type='text/test' id='style_text'>my { }</style>\n"
+            + "<style type='text/html' id='style_html'>my { }</style>\n"
 
             + "<script>\n"
             + "function doTest() {\n"
@@ -101,6 +101,35 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
             + "  alert(style.innerHTML);\n"
             + "  style = document.getElementById('style_html');\n"
             + "  alert(style.innerHTML);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "", "text/test", "text/css" })
+    public void type() throws Exception {
+        final String html
+            = "<html><head><title>foo</title>\n"
+
+            + "<style id='style_none'>.a > .t { }</style>\n"
+            + "<style type='text/test' id='style_text'>.b > .t { }</style>\n"
+            + "<style type='text/css' id='style_css'>.c > .t { }</style>\n"
+
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  style = document.getElementById('style_none');\n"
+            + "  alert(style.type);\n"
+            + "  style = document.getElementById('style_text');\n"
+            + "  alert(style.type);\n"
+            + "  style = document.getElementById('style_css');\n"
+            + "  alert(style.type);\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='doTest()'>\n"

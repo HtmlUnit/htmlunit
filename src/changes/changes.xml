@@ -8,8 +8,8 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
-            <action type="fix" dev="rbri" issue="1535">
-                Use the correct separator for headers in the preflight CORS request.
+            <action type="add" dev="rbri">
+                JavaScript: support for the type property of style elements added.
             </action>
             <action type="fix" dev="rbri" issue="1534">
                 WebClient.getTopLevelWindows() returns a snapshot of the list of open top level windows.
