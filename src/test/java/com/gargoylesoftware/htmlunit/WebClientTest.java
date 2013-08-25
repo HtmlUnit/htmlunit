@@ -82,6 +82,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Sudhan Moghe
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class WebClientTest extends SimpleWebTestCase {
@@ -1627,7 +1628,7 @@ public class WebClientTest extends SimpleWebTestCase {
     @Test
     public void testUrlEncoding() throws Exception {
         final URL url = new URL("http://host/x+y\u00E9/a\u00E9 b?c \u00E9 d");
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_3_6, "<html></html>", new ArrayList<String>(), url);
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_17, "<html></html>", new ArrayList<String>(), url);
         final WebRequest wrs = page.getWebResponse().getWebRequest();
         assertEquals("http://host/x+y%C3%A9/a%C3%A9%20b?c%20%E9%20d", wrs.getUrl());
     }
@@ -2155,6 +2156,35 @@ public class WebClientTest extends SimpleWebTestCase {
 
         assertEquals(1, client.getWebWindows().size());
         assertEquals(1, client.getTopLevelWindows().size());
+    }
+
+    /**
+     * Test that the result of getTopLevelWindows() is usable without
+     * getting a ConcurrentModificationException.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void getTopLevelWindowsJSConcurrency() throws Exception {
+        final String html = "<html><head><title>Toplevel</title></head>\n<body>\n"
+                + "<script>\n"
+                + "  setInterval(function() {\n"
+                + "    window.open('');\n"
+                + "  }, 10);\n"
+                + "</script>\n"
+                + "</body></html>\n";
+
+        final WebClient client = getWebClientWithMockWebConnection();
+        getMockWebConnection().setResponse(URL_FIRST, html);
+
+        client.getPage(URL_FIRST);
+        final List<TopLevelWindow> windows = client.getTopLevelWindows();
+        for (int i = 0; i < 100; i++) {
+            for (TopLevelWindow window : windows) {
+                Thread.sleep(13);
+                window.getName();
+            }
+        }
     }
 
     /**

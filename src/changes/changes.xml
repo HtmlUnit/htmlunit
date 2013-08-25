@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1534">
+                WebClient.getTopLevelWindows() returns a snapshot of the list of open top level windows.
+                This avoids ConcurrentModificationExceptions when using this list by a client.
+            </action>
             <action type="fix" dev="rbri">
                 In case the server reports an error via http error code, the curretn page content
                 was not replaced with the content of that error page if the error was the result

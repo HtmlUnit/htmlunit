@@ -954,7 +954,7 @@ public class WebClient implements Serializable {
         WebAssert.notNull("name", name);
 
         for (final WebWindow webWindow : windows_) {
-            if (webWindow.getName().equals(name)) {
+            if (name.equals(webWindow.getName())) {
                 return webWindow;
             }
         }
@@ -1362,6 +1362,8 @@ public class WebClient implements Serializable {
 
     /**
      * Returns an immutable list of open web windows (whether they are top level windows or not).
+     * This is a snapshot; future changes are not reflected by this list.
+     *
      * @return an immutable list of open web windows (whether they are top level windows or not)
      * @see #getWebWindowByName(String)
      * @see #getTopLevelWindows()
@@ -1386,12 +1388,14 @@ public class WebClient implements Serializable {
 
     /**
      * Returns an immutable list of open top level windows.
+     * This is a snapshot; future changes are not reflected by this list.
+     *
      * @return an immutable list of open top level windows
      * @see #getWebWindowByName(String)
      * @see #getWebWindows()
      */
     public List<TopLevelWindow> getTopLevelWindows() {
-        return Collections.unmodifiableList(topLevelWindows_);
+        return Collections.unmodifiableList(new ArrayList<TopLevelWindow>(topLevelWindows_));
     }
 
     /**
@@ -1701,12 +1705,7 @@ public class WebClient implements Serializable {
         }
         // NB: this implementation is too simple as a new TopLevelWindow may be opened by
         // some JS script while we are closing the others
-        final List<TopLevelWindow> topWindows = new ArrayList<TopLevelWindow>();
-        for (final WebWindow window : topLevelWindows_) {
-            if (window instanceof TopLevelWindow) {
-                topWindows.add((TopLevelWindow) window);
-            }
-        }
+        final List<TopLevelWindow> topWindows = new ArrayList<TopLevelWindow>(topLevelWindows_);
         for (final TopLevelWindow topWindow : topWindows) {
             if (topLevelWindows_.contains(topWindow)) {
                 topWindow.close();
