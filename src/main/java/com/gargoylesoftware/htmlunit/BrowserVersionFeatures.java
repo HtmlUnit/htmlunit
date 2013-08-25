@@ -452,10 +452,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
-    GENERATED_75,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
     GENERATED_80,
 
     /** Was originally .isIE(). */
@@ -1153,6 +1149,10 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature(@WebBrowser(value = FF, minVersion = 17))
     JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE,
+
+    /** Setting the property width/heigth to arbitrary values is allowed. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES,
 
     /** Changing the opener of an window to something not null
      * is not valid (in FF).

@@ -327,12 +327,12 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     }
 
     /**
-     * Sets the value of the "width" property.
-     * @param width the value of the "width" property
+     * Sets the value of the "height" property.
+     * @param height the value of the "height" property
      */
     @JsxSetter
-    public void setHeight(final String width) {
-        setWidthOrHeight("height", width, !getBrowserVersion().hasFeature(GENERATED_101));
+    public void setHeight(final String height) {
+        setWidthOrHeight("height", height, !getBrowserVersion().hasFeature(GENERATED_101));
     }
 
     /**

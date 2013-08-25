@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_71;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_72;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_73;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_74;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_75;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ATTRIBUTE_FIX_IN_QUIRKS_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_OUTER_HTML_UPPER_CASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_RESTRICT;
@@ -37,6 +36,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NATIVE_FUN
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_THROWS_NOT_ATTACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SET_ATTRIBUTE_CONSIDERS_ATTR_FOR_CLASS_AS_REAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SET_ATTRIBUTE_SUPPORTS_EVENT_HANDLERS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -2275,24 +2275,22 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param attributeName the name of the attribute to set (<tt>"width"</tt> or <tt>"height"</tt>)
      * @param value the value of the specified attribute (width or height)
      * @param allowNegativeValues if <tt>true</tt>, negative values will be stored;
-     *        if <tt>false</tt>, negative values cause an exception to be thrown;
-     *        if <tt>null</tt>, negative values set the value to <tt>0</tt>
+     *        if <tt>false</tt>, negative values cause an exception to be thrown;<br>
+     *        this check/conversion is only done if the feature JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES
+     *        is set for the simulated browser
      */
-    protected void setWidthOrHeight(final String attributeName, String value, final Boolean allowNegativeValues) {
+    protected void setWidthOrHeight(final String attributeName, String value, final boolean allowNegativeValues) {
         if (value.endsWith("px")) {
             value = value.substring(0, value.length() - 2);
         }
-        if (getBrowserVersion().hasFeature(GENERATED_75) && value.length() > 0) {
+        if (!getBrowserVersion().hasFeature(JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES) && value.length() > 0) {
             boolean error = false;
             if (!PERCENT_VALUE.matcher(value).matches()) {
                 try {
                     final Float f = Float.valueOf(value);
                     final int i = f.intValue();
                     if (i < 0) {
-                        if (allowNegativeValues == null) {
-                            value = "0";
-                        }
-                        else if (!allowNegativeValues.booleanValue()) {
+                        if (!allowNegativeValues) {
                             error = true;
                         }
                     }
@@ -2302,7 +2300,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 }
             }
             if (error) {
-                final Exception e = new Exception("Cannot set the width property to invalid value: " + value);
+                final Exception e = new Exception("Cannot set the '" + attributeName
+                        + "' property to invalid value: '" + value + "'");
                 Context.throwAsScriptRuntimeEx(e);
             }
         }

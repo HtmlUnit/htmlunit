@@ -91,7 +91,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
      */
     @JsxSetter
     public void setWidth(final Object width) {
-        setWidthOrHeight("width", (width == null ? "" : Context.toString(width)), Boolean.FALSE);
+        setWidthOrHeight("width", (width == null ? "" : Context.toString(width)), false);
     }
 
     /**

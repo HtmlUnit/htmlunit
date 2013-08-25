@@ -173,7 +173,7 @@ public class HTMLIFrameElement extends HTMLElement {
      */
     @JsxSetter
     public void setWidth(final String width) {
-        setWidthOrHeight("width", width, Boolean.TRUE);
+        setWidthOrHeight("width", width, true);
     }
 
     /**
@@ -188,12 +188,12 @@ public class HTMLIFrameElement extends HTMLElement {
     }
 
     /**
-     * Sets the value of the "width" property.
-     * @param width the value of the "width" property
+     * Sets the value of the "height" property.
+     * @param height the value of the "height" property
      */
     @JsxSetter
-    public void setHeight(final String width) {
-        setWidthOrHeight("height", width, Boolean.TRUE);
+    public void setHeight(final String height) {
+        setWidthOrHeight("height", height, true);
     }
 
     /**
