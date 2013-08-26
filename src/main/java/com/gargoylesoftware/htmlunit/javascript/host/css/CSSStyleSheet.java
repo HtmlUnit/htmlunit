@@ -277,15 +277,15 @@ public class CSSStyleSheet extends SimpleScriptable {
      * Loads the stylesheet at the specified link or href.
      * @param window the current window
      * @param element the parent DOM element
-     * @param link the stylesheet's link (may be <tt>null</tt> if an <tt>href</tt> is specified)
+     * @param link the stylesheet's link (may be <tt>null</tt> if an <tt>url</tt> is specified)
      * @param url the stylesheet's url (may be <tt>null</tt> if a <tt>link</tt> is specified)
      * @return the loaded stylesheet
      */
     public static CSSStyleSheet loadStylesheet(final Window window, final HTMLElement element,
         final HtmlLink link, final String url) {
         CSSStyleSheet sheet;
-        final HtmlPage page = (HtmlPage) element.getDomNodeOrDie().getPage(); // fallback uri for exceptions
-        String uri = page.getUrl().toExternalForm();
+        final HtmlPage page = (HtmlPage) element.getDomNodeOrDie().getPage();
+        String uri = page.getUrl().toExternalForm(); // fallback uri for exceptions
         try {
             // Retrieve the associated content and respect client settings regarding failing HTTP status codes.
             final WebRequest request;
@@ -322,24 +322,24 @@ public class CSSStyleSheet extends SimpleScriptable {
         }
         catch (final FailingHttpStatusCodeException e) {
             // Got a 404 response or something like that; behave nicely.
-            LOG.error("Exception loading " + url, e);
+            LOG.error("Exception loading " + uri, e);
             final InputSource source = new InputSource(new StringReader(""));
             sheet = new CSSStyleSheet(element, source, uri);
         }
         catch (final IOException e) {
             // Got a basic IO error; behave nicely.
-            LOG.error("IOException loading " + url, e);
+            LOG.error("IOException loading " + uri, e);
             final InputSource source = new InputSource(new StringReader(""));
             sheet = new CSSStyleSheet(element, source, uri);
         }
         catch (final RuntimeException e) {
             // Got something unexpected; we can throw an exception in this case.
-            LOG.error("RuntimeException loading " + url, e);
+            LOG.error("RuntimeException loading " + uri, e);
             throw Context.reportRuntimeError("Exception: " + e);
         }
         catch (final Exception e) {
             // Got something unexpected; we can throw an exception in this case.
-            LOG.error("Exception loading " + url, e);
+            LOG.error("Exception loading " + uri, e);
             throw Context.reportRuntimeError("Exception: " + e);
         }
         return sheet;
