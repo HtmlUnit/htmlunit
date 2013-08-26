@@ -16,8 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_65;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_72;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_73;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_74;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ATTRIBUTE_FIX_IN_QUIRKS_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_OUTER_HTML_UPPER_CASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_RESTRICT;
@@ -35,6 +33,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_REDUCE_WHITESPACES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_THROWS_NOT_ATTACHED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PREFIX_RETURNS_EMPTY_WHEN_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SET_ATTRIBUTE_CONSIDERS_ATTR_FOR_CLASS_AS_REAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SET_ATTRIBUTE_SUPPORTS_EVENT_HANDLERS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES;
@@ -2091,7 +2090,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @Override
     public String getPrefix() {
-        if (getBrowserVersion().hasFeature(GENERATED_73)) {
+        if (getBrowserVersion().hasFeature(JS_PREFIX_RETURNS_EMPTY_WHEN_UNDEFINED)) {
             return "";
         }
         return null;
@@ -2266,7 +2265,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 }
             }
             catch (final NumberFormatException e) {
-                if (getBrowserVersion().hasFeature(GENERATED_74)) {
+                if (!getBrowserVersion().hasFeature(JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES)) {
                     value = "";
                 }
             }

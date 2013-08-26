@@ -292,10 +292,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
-    GENERATED_125,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
     GENERATED_13,
 
     /** Was originally .isIE(). */
@@ -433,14 +429,6 @@ public enum BrowserVersionFeatures {
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
     GENERATED_72,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_73,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_74,
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
@@ -1023,6 +1011,10 @@ public enum BrowserVersionFeatures {
     /** If <tt>true</tt>, then treat <tt>__parent__</tt> and <tt>__proto__</tt> as special properties. */
     @BrowserFeature(@WebBrowser(IE))
     JS_PARENT_PROTO_PROPERTIES,
+
+    /** Indicates that the prefix property returns an empty string if no prefix defined. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_PREFIX_RETURNS_EMPTY_WHEN_UNDEFINED,
 
     /** Indicates that document.queryCommandSupported(..) is only available in design mode. */
     @BrowserFeature(@WebBrowser(value = FF, maxVersion = 3.6f))

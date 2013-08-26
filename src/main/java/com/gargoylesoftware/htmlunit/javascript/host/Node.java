@@ -16,11 +16,11 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_121;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_124;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_125;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_45;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NOTE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLONE_NODE_COPIES_EVENT_LISTENERS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PREFIX_RETURNS_EMPTY_WHEN_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_APPENDS_CRLF;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
@@ -899,7 +899,7 @@ public class Node extends SimpleScriptable {
     public String getPrefix() {
         final DomNode domNode = getDomNodeOrDie();
         final String prefix = domNode.getPrefix();
-        if (getBrowserVersion().hasFeature(GENERATED_125)
+        if (getBrowserVersion().hasFeature(JS_PREFIX_RETURNS_EMPTY_WHEN_UNDEFINED)
                 && (prefix == null || domNode.getHtmlPageOrNull() != null)) {
             return "";
         }
