@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_65;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_71;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_72;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_73;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_74;
@@ -1026,9 +1025,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             domNode.appendChild(new DomText(domNode.getPage(), Context.toString(value)));
         }
 
-        //if the parentNode has null parentNode in IE,
-        //create a DocumentFragment to be the parentNode's parentNode.
-        if (domNode.getParentNode() == null && getBrowserVersion().hasFeature(GENERATED_71)) {
+        final boolean createFragment = getBrowserVersion().hasFeature(JS_INNER_HTML_CREATES_DOC_FRAGMENT_AS_PARENT);
+        // if the parentNode has null parentNode in IE,
+        // create a DocumentFragment to be the parentNode's parentNode.
+        if (domNode.getParentNode() == null && createFragment) {
             final DomDocumentFragment fragment = ((HtmlPage) domNode.getPage()).createDomDocumentFragment();
             fragment.appendChild(domNode);
         }
