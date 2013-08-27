@@ -555,9 +555,10 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         if (thisObj instanceof HTMLDocument && thisObj.getPrototype() instanceof HTMLDocument) {
             return (HTMLDocument) thisObj;
         }
-        else if (thisObj instanceof DocumentProxy && thisObj.getPrototype() instanceof HTMLDocument) {
+        if (thisObj instanceof DocumentProxy && thisObj.getPrototype() instanceof HTMLDocument) {
             return (HTMLDocument) ((DocumentProxy) thisObj).getDelegee();
         }
+
         final Window window = getWindow(thisObj);
         final BrowserVersion browser = window.getWebWindow().getWebClient().getBrowserVersion();
         if (browser.hasFeature(GENERATED_53)) {
