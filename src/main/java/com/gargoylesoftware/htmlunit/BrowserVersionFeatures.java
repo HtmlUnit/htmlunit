@@ -576,6 +576,12 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTMLELEMENT_OUTER_HTML_UPPER_CASE,
 
+    /**
+     * Indicates outer/innerHtml quotes attributes.
+     **/
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    HTMLELEMENT_OUTER_INNER_HTML_QUOTE_ATTRIBUTES,
+
     /** */
     HTMLELEMENT_TRIM_CLASS_ATTRIBUTE,
 

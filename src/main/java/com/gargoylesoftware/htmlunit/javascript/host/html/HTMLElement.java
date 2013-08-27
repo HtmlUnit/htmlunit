@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_65;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_72;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ATTRIBUTE_FIX_IN_QUIRKS_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_OUTER_HTML_UPPER_CASE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_OUTER_INNER_HTML_QUOTE_ATTRIBUTES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_RESTRICT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BOUNDING_CLIENT_RECT_OFFSET_TWO;
@@ -934,10 +935,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             }
             buffer.append("<").append(tag);
             // Add the attributes. IE does not use quotes, FF does.
+            final boolean doQoute = getBrowserVersion().hasFeature(HTMLELEMENT_OUTER_INNER_HTML_QUOTE_ATTRIBUTES);
             for (final DomAttr attr : element.getAttributesMap().values()) {
                 final String name = attr.getName();
                 final String value = PRINT_NODE_QUOTE_PATTERN.matcher(attr.getValue()).replaceAll("&quot;");
-                final boolean quote = !isUpperCase
+                final boolean quote = doQoute
                     || com.gargoylesoftware.htmlunit.util.StringUtils.containsWhitespace(value)
                     || value.isEmpty()
                     || (element instanceof HtmlAnchor && "href".equals(name));
