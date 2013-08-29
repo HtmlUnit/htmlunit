@@ -262,4 +262,23 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
         assertEquals(new URL(getDefaultUrl(), "page2.html").toString(), driver.getCurrentUrl());
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void clickBlankTargetHashOnly() throws Exception {
+        final String html =
+                "<html>\n"
+                        + "<head><title>foo</title></head>\n"
+                        + "<body>\n"
+                        + "<a id='a' target='_blank' href='#'>Foo</a>\n"
+                        + "</body></html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        assertEquals(1, driver.getWindowHandles().size());
+
+        final WebElement tester = driver.findElement(By.id("a"));
+        tester.click();
+        assertEquals(2, driver.getWindowHandles().size());
+    }
 }

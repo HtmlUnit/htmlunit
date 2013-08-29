@@ -1962,7 +1962,7 @@ public class WebClient implements Serializable {
 
         final LoadJob loadJob;
         if (justHashJump) {
-            loadJob = new LoadJob(request, win, target, url);
+            loadJob = new LoadJob(request, requestingWindow, target, url);
         }
         else {
             try {
@@ -2006,25 +2006,24 @@ public class WebClient implements Serializable {
                 LOG.info("No usage of download: " + downloadedResponse);
                 continue;
             }
-            if (downloadedResponse.urlWithOnlyHashChange_ != null) {
-                final WebWindow window = downloadedResponse.requestingWindow_;
-                final HtmlPage page = (HtmlPage) window.getEnclosedPage();
-                page.getWebResponse().getWebRequest().setUrl(downloadedResponse.urlWithOnlyHashChange_);
-                window.getHistory().addPage(page);
-
-                // update location.hash
-                final Window jsWindow = (Window) window.getScriptObject();
-                if (null != jsWindow) {
-                    final Location location = jsWindow.getLocation();
-                    location.setHash(downloadedResponse.urlWithOnlyHashChange_.getRef());
-                }
-            }
-            else {
-                final WebWindow window = resolveWindow(downloadedResponse.requestingWindow_,
+            final WebWindow window = resolveWindow(downloadedResponse.requestingWindow_,
                     downloadedResponse.target_);
-                if (!updatedWindows.contains(window)) {
-                    final WebWindow win = openTargetWindow(downloadedResponse.requestingWindow_,
-                            downloadedResponse.target_, "_self");
+            if (!updatedWindows.contains(window)) {
+                final WebWindow win = openTargetWindow(downloadedResponse.requestingWindow_,
+                        downloadedResponse.target_, "_self");
+                if (downloadedResponse.urlWithOnlyHashChange_ != null) {
+                    final HtmlPage page = (HtmlPage) downloadedResponse.requestingWindow_.getEnclosedPage();
+                    page.getWebResponse().getWebRequest().setUrl(downloadedResponse.urlWithOnlyHashChange_);
+                    win.getHistory().addPage(page);
+
+                    // update location.hash
+                    final Window jsWindow = (Window) win.getScriptObject();
+                    if (null != jsWindow) {
+                        final Location location = jsWindow.getLocation();
+                        location.setHash(downloadedResponse.urlWithOnlyHashChange_.getRef());
+                    }
+                }
+                else {
                     final Page pageBeforeLoad = win.getEnclosedPage();
                     loadWebResponseInto(downloadedResponse.response_, win);
 
@@ -2040,9 +2039,9 @@ public class WebClient implements Serializable {
                     // check and report problems if needed
                     throwFailingHttpStatusCodeExceptionIfNecessary(downloadedResponse.response_);
                 }
-                else {
-                    LOG.info("No usage of download: " + downloadedResponse);
-                }
+            }
+            else {
+                LOG.info("No usage of download: " + downloadedResponse);
             }
         }
     }

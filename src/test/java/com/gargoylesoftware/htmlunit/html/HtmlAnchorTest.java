@@ -592,10 +592,19 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
      */
     @Test
     public void testHashAnchor() throws Exception {
-        final String html = "<html><body><a id='a' href='#a'>a</a></body></html>";
+        final String html = "<html><body>"
+                + "<a id='a' href='#a'>a</a>"
+                + "<a id='a_target' href='#target' target='_blank'>target</a>"
+                + "</body></html>";
         HtmlPage page = loadPage(html);
-        page = page.getHtmlElementById("a").click();
+        HtmlPage targetPage = page.getHtmlElementById("a").click();
         assertEquals(new URL(getDefaultUrl(), "#a"), page.getUrl());
+        assertEquals(page.getEnclosingWindow(), targetPage.getEnclosingWindow());
+
+        page = loadPage(html);
+        targetPage = page.getHtmlElementById("a_target").click();
+        assertEquals(new URL(getDefaultUrl(), "#target"), targetPage.getUrl());
+        assertFalse(page.getEnclosingWindow().equals(targetPage.getEnclosingWindow()));
     }
 
     /**
