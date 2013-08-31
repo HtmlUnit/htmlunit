@@ -251,9 +251,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
     private static final Map<String, String> CSSColors_ = new HashMap<String, String>();
     private static final Map<String, String> CamelizeCache_ = new ConcurrentHashMap<String, String>(400, 0.75f, 2);
-    private static final Map<String, Integer> PixelValuesCache_
-        = new ConcurrentHashMap<String, Integer>(1000, 0.75f, 2);
-    private static final int MaxPixelValuesCacheSize = 20000;
 
     /** The different types of shorthand values. */
     private enum Shorthand {
@@ -4322,7 +4319,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             final int absoluteValue = (parent == null) ? value.getWindowDefaultValue() : pixelValue(parent, value);
             return (int) ((i / 100D) * absoluteValue);
         }
-        else if (s.isEmpty() && element instanceof HTMLCanvasElement) {
+        if (s.isEmpty() && element instanceof HTMLCanvasElement) {
             return value.getWindowDefaultValue();
         }
         return pixelValue(s);
@@ -4338,12 +4335,11 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @see #pixelValue(HTMLElement, CssValue)
      */
     protected static int pixelValue(final String value) {
-        final Integer result = PixelValuesCache_.get(value);
-        if (null != result) {
-            return result.intValue();
+        int i = NumberUtils.toInt(TO_INT_PATTERN.matcher(value).replaceAll("$1"), 0);
+        if (value.length() < 2) {
+            return i;
         }
 
-        int i = NumberUtils.toInt(TO_INT_PATTERN.matcher(value).replaceAll("$1"), 0);
         if (value.endsWith("px")) {
             // nothing to do
         }
@@ -4368,12 +4364,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         else if (value.endsWith("pc")) {
             i = i * 24;
         }
-
-        // refresh in case of overflow
-        if (PixelValuesCache_.size() > MaxPixelValuesCacheSize) {
-            PixelValuesCache_.clear();
-        }
-        PixelValuesCache_.put(value, Integer.valueOf(i));
         return i;
     }
 
