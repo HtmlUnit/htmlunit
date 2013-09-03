@@ -9,17 +9,17 @@
     <body>
         <release version="2.13" date="???" description="Bugfixes">
             <action type="add" dev="rbri" issue="1537">
-                Correct processing of the target when for anchors with hash-only href.
+                Correct processing of the target window for anchors with hash-only href attribute.
             </action>
             <action type="add" dev="rbri">
-                JavaScript: support for the 'type' and 'media' property of style elements added.
+                JavaScript: added support for the 'type' and 'media' property of style elements.
             </action>
             <action type="fix" dev="rbri" issue="1534">
-                WebClient.getTopLevelWindows() returns a snapshot of the list of open top level windows.
-                This avoids ConcurrentModificationExceptions when using this list by a client.
+                WebClient.getTopLevelWindows() now returns a snapshot of the list of top level windows
+                to avoid ConcurrentModificationExceptions while using this list.
             </action>
             <action type="fix" dev="rbri">
-                In case the server reports an error via http error code, the curretn page content
+                In case the server reports an error via HTTP error code, the current page content
                 was not replaced with the content of that error page if the error was the result
                 of a form submit or an anchor click.
             </action>
@@ -39,7 +39,7 @@
                 node.baseName not supported for XML nodes (IE).
             </action>
             <action type="fix" dev="rbri" issue="1523" due-to="Chuck Dumont">
-                node.text is unsupported for text nodes in xml documents.
+                node.text is unsupported for text nodes in XML documents.
             </action>
             <action type="fix" dev="rbri" issue="1528" due-to="Chuck Dumont">
                 XPathEvaluator.evaluate() ignores namespace resolver.
@@ -75,10 +75,10 @@
                 JavaScript: add support for XPathEvaluator (FF &amp; Chrome).
             </action>
             <action type="fix" dev="rbri">
-                The display property now returns the correct default value for all html tags.
+                The display property now returns the correct default value for all HTML tags.
             </action>
             <action type="fix" dev="rbri" issue="1515" due-to="Guy Burton">
-                Respect the media type when processing the import rules from a css style sheet.
+                Respect the media type when processing the import rules from a CSS style sheet.
             </action>
             <action type="fix" dev="mguillem">
                 JavaScript: add basic support for window.navigator.security (FF only).
@@ -105,16 +105,16 @@
                 The default value of input-file is no longer empty in IE8ff.
             </action>
             <action type="fix" dev="rbri">
-                Checked state of radio buttons and checkboxes changes when setting defaultChecked in IE8ff.
+                Checked state of radio buttons and checkboxes changes when setting defaultChecked in IE8.
             </action>
             <action type="update" dev="rbri">
-                Upgrade commons-codec to 1.8
+                Upgrade commons-codec to 1.8.
             </action>
             <action type="fix" dev="rbri">
-                JavaScript: Fix the mousedown/mouseup events triggered when clicking on an option.
+                JavaScript: fix the mousedown/mouseup events triggered when clicking on an option.
             </action>
             <action type="fix" dev="rbri">
-                JavaScript: Starting with IE8 the radio button checked state is reseted to false
+                JavaScript: starting with IE8 the radio button checked state is reseted to false
                 when adding to page.
             </action>
             <action type="fix" dev="mguillem">
