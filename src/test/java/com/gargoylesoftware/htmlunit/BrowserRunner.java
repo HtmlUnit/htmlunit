@@ -223,7 +223,13 @@ public class BrowserRunner extends Suite {
     }
 
     /**
-     * Expected alerts.
+     * Allows to express the expected alerts (i.e. the messages passed to the
+     * window.alert function) for the different browsers for a unit test.
+     * Expected alerts can be retrieved within a unit test with {@link SimpleWebTestCase#getExpectedAlerts()}
+     * (resp. {@link WebDriverTestCase#getExpectedAlerts}) to be compared with the actual alerts but most of the time
+     * utility functions like {@link SimpleWebTestCase#loadPageWithAlerts(String)}
+     * (resp. {@link WebDriverTestCase#loadPageWithAlerts2(String)}) are used which do it
+     * after having loaded the page.
      */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)
