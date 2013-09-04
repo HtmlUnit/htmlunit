@@ -273,7 +273,9 @@ public class BrowserRunner extends Suite {
     }
 
     /**
-     * Browsers with which the case is not yet implemented, default value is all.
+     * Marks a test as not yet working for a particular browser (default value is all).
+     * This will cause a failure to be considered as success and a success as failure forcing
+     * us to remove this annotation when a feature has been implemented even unintentionally.
      * @see Browser
      */
     @Retention(RetentionPolicy.RUNTIME)
