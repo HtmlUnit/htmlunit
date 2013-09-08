@@ -143,11 +143,10 @@ public class HTMLCollection extends NodeList {
         if (domNode == null) {
             return response;
         }
+        final boolean commentIsElement = getBrowserVersion().hasFeature(HTMLCOLLECTION_COMMENT_IS_ELEMENT);
         for (final DomNode node : getCandidates()) {
-            final boolean commentIncluded = node instanceof DomComment
-                    && getBrowserVersion().hasFeature(HTMLCOLLECTION_COMMENT_IS_ELEMENT);
-
-            if ((node instanceof DomElement || commentIncluded) && isMatching(node)) {
+            if ((node instanceof DomElement
+                    || (commentIsElement && node instanceof DomComment)) && isMatching(node)) {
                 response.add(node);
             }
         }
