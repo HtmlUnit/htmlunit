@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 @JsxClass(isJSObject = false, browsers = { @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
 public class ArrayBufferViewBase extends ArrayBufferView {
@@ -43,7 +44,7 @@ public class ArrayBufferViewBase extends ArrayBufferView {
      * @param byteOffset optional byteOffset
      * @param length optional length
      */
-    public void constructor(final Object object, Object byteOffset, Object length) {
+    public void constructor(final Object object, final Object byteOffset, final Object length) {
         if (object instanceof Number) {
             constructor(((Number) object).intValue());
         }
