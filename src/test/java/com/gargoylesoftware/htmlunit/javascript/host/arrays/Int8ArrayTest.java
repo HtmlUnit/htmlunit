@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
 public class Int8ArrayTest extends WebDriverTestCase {
@@ -68,6 +69,31 @@ public class Int8ArrayTest extends WebDriverTestCase {
             + "    alert(array[0]);\n"
             + "    alert(array[1]);\n"
             + "    alert(array.length);\n"
+            + "  } catch(e) {\n"
+            + "    alert('exception');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "exception", FF3_6 = "exception", DEFAULT = { "2", "-45", "52" })
+    public void bufferConstructor() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var array = new Int8Array([17, -45.3, 52, 123]);\n"
+            + "    var array2 = new Int8Array(array.buffer, 1, 2);\n"
+            + "    alert(array2.length);\n"
+            + "    for (var i = 0; i < array2.length; i++)\n"
+            + "      alert(array2[i]);\n"
             + "  } catch(e) {\n"
             + "    alert('exception');\n"
             + "  }\n"

@@ -55,13 +55,17 @@ public class ArrayBufferViewBase extends ArrayBufferView {
         }
         else if (object instanceof ArrayBuffer) {
             final ArrayBuffer array = (ArrayBuffer) object;
-            if (byteOffset == Undefined.instance) {
-                byteOffset = 0;
+
+            double dbByteOffset = Context.toNumber(byteOffset);
+            if (dbByteOffset != dbByteOffset) { // test if == NaN
+                dbByteOffset = 0;
             }
-            if (length == Undefined.instance) {
-                length = array.getByteLength();
+
+            double dbLength = Context.toNumber(length);
+            if (dbLength != dbLength) { // test if == NaN
+                dbLength = array.getByteLength();
             }
-            super.constructor(array, (Integer) byteOffset, (Integer) length);
+            super.constructor(array, (int) dbByteOffset, (int) dbLength);
         }
         else {
             Context.reportRuntimeError("Invalid type " + object.getClass().getName());

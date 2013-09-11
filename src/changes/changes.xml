@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="1542">
+                JavaScript: fixed ClassCastException on TypedArray creation with start offset specified.
+            </action>
             <action type="add" dev="rbri" issue="1537">
                 Correct processing of the target window for anchors with hash-only href attribute.
             </action>
