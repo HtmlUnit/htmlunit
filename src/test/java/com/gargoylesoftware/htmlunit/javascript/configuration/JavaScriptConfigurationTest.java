@@ -182,6 +182,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
                         list.add(entryName.replace('/', '.').replace('\\', '.').replace(".class", ""));
                     }
                 }
+                jarFile.close();
             }
             catch (final IOException e) {
                 throw new RuntimeException(packageName + " does not appear to be a valid package", e);

@@ -55,7 +55,9 @@ public class Geolocation extends SimpleScriptable {
     /* Do not use this URL without Google permission! */
     private static String PROVIDER_URL_ = "https://maps.googleapis.com/maps/api/browserlocation/json";
     private Function successHandler_;
-    private Function errorHandler_;
+
+    @SuppressWarnings("unused")
+	private Function errorHandler_;
 
     /**
      * Creates an instance. JavaScript objects must have a default constructor.

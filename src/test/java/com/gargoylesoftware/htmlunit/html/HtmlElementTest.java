@@ -451,7 +451,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(htmlContent);
         final HtmlForm form = page.getHtmlElementById("form1");
 
-        final HtmlInput input = form.getElementById("foo");
+        final HtmlInput input = page.getHtmlElementById("foo");
         assertSame(form, input.getEnclosingForm());
     }
 
