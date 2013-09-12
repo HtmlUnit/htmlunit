@@ -26,14 +26,6 @@
             </p>
         </section>
 
-        <section name="JavaScriptConfiguration.xml">
-            <p>
-                Different browsers and versions of browsers support different JavaScript properties and functions.
-                The file JavaScriptConfiguration.xml contains all of this browser specific information.  The plan
-                is to have properties and functions present or not based on the information in this file.  Today
-                not all of that support is present.
-            </p>
-        </section>
         <section name="Debugging JavaScript Errors">
             <p>
                 Testing pages with JavaScript on them can produce a number of errors.  These errors occur for
