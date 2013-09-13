@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import javax.net.ssl.SSLHandshakeException;
+import javax.net.ssl.SSLPeerUnverifiedException;
 
 import org.junit.After;
 import org.junit.Before;
@@ -57,7 +57,7 @@ public class HttpWebConnectionInsecureSSLTest extends SimpleWebTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    @Test(expected = SSLHandshakeException.class)
+    @Test(expected = SSLPeerUnverifiedException.class)
     public void normal() throws Exception {
         final WebClient webClient = getWebClient();
         webClient.getPage("https://" + localServer_.getHostName()
