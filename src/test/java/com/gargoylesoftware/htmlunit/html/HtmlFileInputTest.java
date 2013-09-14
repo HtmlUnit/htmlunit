@@ -28,7 +28,6 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,6 +43,7 @@ import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -164,10 +164,10 @@ public class HtmlFileInputTest extends WebServerTestCase {
         makeHttpMethod.setAccessible(true);
         final HttpPost httpPost = (HttpPost) makeHttpMethod
             .invoke(new HttpWebConnection(client), webConnection.getLastWebRequest());
-        final MultipartEntity multipartEntity = (MultipartEntity) httpPost.getEntity();
+        final HttpEntity httpEntity = httpPost.getEntity();
 
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        multipartEntity.writeTo(out);
+        httpEntity.writeTo(out);
         out.close();
 
         Assert.assertTrue(
@@ -212,10 +212,10 @@ public class HtmlFileInputTest extends WebServerTestCase {
         makeHttpMethod.setAccessible(true);
         final HttpPost httpPost = (HttpPost) makeHttpMethod
             .invoke(new HttpWebConnection(client), webConnection.getLastWebRequest());
-        final MultipartEntity multipartEntity = (MultipartEntity) httpPost.getEntity();
+        final HttpEntity httpEntity = httpPost.getEntity();
 
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        multipartEntity.writeTo(out);
+        httpEntity.writeTo(out);
         out.close();
 
         if (getBrowserVersion().isIE()) {
@@ -266,10 +266,10 @@ public class HtmlFileInputTest extends WebServerTestCase {
         makeHttpMethod.setAccessible(true);
         final HttpPost httpPost = (HttpPost) makeHttpMethod
             .invoke(new HttpWebConnection(client), webConnection.getLastWebRequest());
-        final MultipartEntity multipartEntity = (MultipartEntity) httpPost.getEntity();
+        final HttpEntity httpEntity = httpPost.getEntity();
 
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        multipartEntity.writeTo(out);
+        httpEntity.writeTo(out);
         out.close();
 
         assertTrue(out.toString()
@@ -336,13 +336,13 @@ public class HtmlFileInputTest extends WebServerTestCase {
         f.getInputByName("mysubmit").click();
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
         assertNotNull(pair.getFile());
-        Assert.assertFalse("Content type: " + pair.getContentType(), "text/webtest".equals(pair.getContentType()));
+        Assert.assertFalse("Content type: " + pair.getMimeType(), "text/webtest".equals(pair.getMimeType()));
 
         fileInput.setContentType("text/webtest");
         f.getInputByName("mysubmit").click();
         final KeyDataPair pair2 = (KeyDataPair) webConnection.getLastParameters().get(0);
         assertNotNull(pair2.getFile());
-        assertEquals("text/webtest", pair2.getContentType());
+        assertEquals("text/webtest", pair2.getMimeType());
     }
 
     /**
@@ -463,7 +463,6 @@ public class HtmlFileInputTest extends WebServerTestCase {
          * {@inheritDoc}
          */
         @Override
-        @SuppressWarnings("unchecked")
         protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
             request.setCharacterEncoding("UTF-8");
@@ -472,7 +471,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
             if (ServletFileUpload.isMultipartContent(request)) {
                 try {
                     final ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
-                    for (final FileItem item : (List<FileItem>) upload.parseRequest(request)) {
+                    for (final FileItem item : upload.parseRequest(request)) {
                         if ("myInput".equals(item.getFieldName())) {
                             final String path = item.getName();
                             for (final char ch : path.toCharArray()) {

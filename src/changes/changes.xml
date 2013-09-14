@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="update" dev="asashour">
+                KeyDataPair: deprecate getContentType().
+            </action>
             <action type="update" dev="rbri">
                 CSS: cssparser updated to 0.9.10.
             </action>

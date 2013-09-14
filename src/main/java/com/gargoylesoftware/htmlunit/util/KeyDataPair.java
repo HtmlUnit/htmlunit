@@ -23,11 +23,12 @@ import java.io.File;
  * @author Brad Clarke
  * @author David D. Kilzer
  * @author Mike Bowler
+ * @author Ahmed Ashour
  */
 public class KeyDataPair extends NameValuePair {
 
     private final File fileObject_;
-    private final String contentType_;
+    private final String mimeType_;
     private final String charset_;
     private byte[] data_;
 
@@ -36,10 +37,10 @@ public class KeyDataPair extends NameValuePair {
      *
      * @param key the key
      * @param file the file
-     * @param contentType the content type
+     * @param mimeType the MIME type
      * @param charset the charset encoding
      */
-    public KeyDataPair(final String key, final File file, final String contentType,
+    public KeyDataPair(final String key, final File file, final String mimeType,
             final String charset) {
 
         super(key, file.getName());
@@ -51,7 +52,7 @@ public class KeyDataPair extends NameValuePair {
             fileObject_ = null;
         }
 
-        contentType_ = contentType;
+        mimeType_ = mimeType;
         charset_ = charset;
     }
 
@@ -95,9 +96,19 @@ public class KeyDataPair extends NameValuePair {
     /**
      * Gets the content type for this file upload.
      * @return the content type
+     * @deprecated as of 2.13, please use {@link #getMimeType()}
      */
+    @Deprecated
     public String getContentType() {
-        return contentType_;
+        return getMimeType();
+    }
+
+    /**
+     * Gets the MIME type for this file upload.
+     * @return the MIME type
+     */
+    public String getMimeType() {
+        return mimeType_;
     }
 
     /**

@@ -417,9 +417,9 @@ public class HttpWebConnection implements WebConnection {
     }
 
     ContentBody buildFilePart(final KeyDataPair pairWithFile) {
-        String contentType = pairWithFile.getContentType();
-        if (contentType == null) {
-            contentType = "application/octet-stream";
+        String mimeType = pairWithFile.getMimeType();
+        if (mimeType == null) {
+            mimeType = "application/octet-stream";
         }
 
         final File file = pairWithFile.getFile();
@@ -427,20 +427,20 @@ public class HttpWebConnection implements WebConnection {
         if (pairWithFile.getData() != null) {
             if (file == null) {
                 return new InputStreamBody(
-                        new ByteArrayInputStream(pairWithFile.getData()), contentType, pairWithFile.getValue());
+                        new ByteArrayInputStream(pairWithFile.getData()), mimeType, pairWithFile.getValue());
             }
 
             if (webClient_.getBrowserVersion().hasFeature(HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH)) {
                 return new InputStreamBody(
-                        new ByteArrayInputStream(pairWithFile.getData()), contentType, file.getAbsolutePath());
+                        new ByteArrayInputStream(pairWithFile.getData()), mimeType, file.getAbsolutePath());
             }
 
             return new InputStreamBody(
-                    new ByteArrayInputStream(pairWithFile.getData()), contentType, file.getName());
+                    new ByteArrayInputStream(pairWithFile.getData()), mimeType, file.getName());
         }
 
         if (file == null) {
-            return new InputStreamBody(new ByteArrayInputStream(new byte[0]), contentType, pairWithFile.getValue()) {
+            return new InputStreamBody(new ByteArrayInputStream(new byte[0]), mimeType, pairWithFile.getValue()) {
                 // Overridden in order not to have a chunked response.
                 @Override
                 public long getContentLength() {
@@ -449,7 +449,7 @@ public class HttpWebConnection implements WebConnection {
             };
         }
 
-        return new FileBody(pairWithFile.getFile(), contentType) {
+        return new FileBody(pairWithFile.getFile(), mimeType) {
             @Override
             public String getFilename() {
                 if (getFile() == null) {

@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -106,7 +105,6 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
          * {@inheritDoc}
          */
         @Override
-        @SuppressWarnings("unchecked")
         protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
             request.setCharacterEncoding("UTF-8");
@@ -115,7 +113,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
             if (ServletFileUpload.isMultipartContent(request)) {
                 try {
                     final ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
-                    for (final FileItem item : (List<FileItem>) upload.parseRequest(request)) {
+                    for (final FileItem item : upload.parseRequest(request)) {
                         if ("myInput".equals(item.getFieldName())) {
                             writer.write("CONTENT_TYPE:" + item.getContentType());
                         }
