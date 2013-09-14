@@ -496,8 +496,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
             // write WebResponse to HttpServletResponse
             response.setStatus(resp.getStatusCode());
 
+            boolean charsetInContentType = false;
             for (final NameValuePair responseHeader : resp.getHeaders()) {
-                response.addHeader(responseHeader.getName(), responseHeader.getValue());
+                final String headerName = responseHeader.getName();
+                if ("Content-Type".equals(headerName) && responseHeader.getValue().contains("charset=")) {
+                    charsetInContentType = true;
+                }
+                response.addHeader(headerName, responseHeader.getValue());
             }
 
             if (resp.getByteContent() != null) {
@@ -505,8 +510,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
             else {
                 final String newContent = getModifiedContent(resp.getStringContent());
-                final String contentCharset = resp.getCharset();
-                response.setCharacterEncoding(contentCharset);
+                if (!charsetInContentType) {
+                    response.setCharacterEncoding(resp.getCharset());
+                }
                 response.getWriter().print(newContent);
             }
             response.flushBuffer();
