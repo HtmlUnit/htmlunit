@@ -57,7 +57,7 @@ public class Geolocation extends SimpleScriptable {
     private Function successHandler_;
 
     @SuppressWarnings("unused")
-	private Function errorHandler_;
+    private Function errorHandler_;
 
     /**
      * Creates an instance. JavaScript objects must have a default constructor.

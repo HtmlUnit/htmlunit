@@ -540,7 +540,7 @@ public abstract class HtmlElement extends DomElement {
         final Event keyDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, keyCode, shiftKey, ctrlKey, altKey);
 
         @SuppressWarnings("unused")
-		final ScriptResult keyDownResult = fireEvent(keyDown);
+        final ScriptResult keyDownResult = fireEvent(keyDown);
 
         final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
         if (browserVersion.hasFeature(KEYBOARD_EVENT_SPECIAL_KEYPRESS)) {
