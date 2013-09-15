@@ -34,6 +34,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_REDUCE_WHITESPACES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_THROWS_NOT_ATTACHED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_BODY_HEAD_READONLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PREFIX_RETURNS_EMPTY_WHEN_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SET_ATTRIBUTE_CONSIDERS_ATTR_FOR_CLASS_AS_REAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SET_ATTRIBUTE_SUPPORTS_EVENT_HANDLERS;
@@ -361,11 +362,13 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         Arrays.asList(new String[] {"html", "table", "tbody", "tfoot", "thead", "tr"});
 
     /**
-     * The tag names of the objects for which outerHTML is read only
+     * The tag names of the objects for which outerHTML is read only.
+     * Note: IE additionally handles the body and head tag as read only.
+     *       see feature JS_OUTER_HTML_BODY_READONLY
      */
     private static final List<String> OUTER_HTML_READONLY =
         Arrays.asList(new String[] {
-            "body", "caption", "col", "colgroup", "frameset", "head",
+            "caption", "col", "colgroup", "frameset",
             "html", "tbody", "td", "tfoot", "th", "thead", "tr"});
 
     /**
@@ -1053,9 +1056,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     @JsxSetter({ @WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 11) })
     public void setOuterHTML(final String value) {
         final DomNode domNode = getDomNodeOrDie();
+        final String nodeName = domNode.getNodeName();
 
-        if (OUTER_HTML_READONLY.contains(domNode.getNodeName())) {
-            throw Context.reportRuntimeError("outerHTML is read-only for tag " + domNode.getNodeName());
+        if (OUTER_HTML_READONLY.contains(nodeName)
+                || (getBrowserVersion().hasFeature(JS_OUTER_HTML_BODY_HEAD_READONLY)
+                        && ("body".equals(nodeName) || "head".equals(nodeName)))) {
+            throw Context.reportRuntimeError("outerHTML is read-only for tag " + nodeName);
         }
 
         final DomDocumentFragment fragment = (DomDocumentFragment) domNode.getPage().createDocumentFragment();

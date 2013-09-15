@@ -1114,7 +1114,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(IE = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11" },
             FF17 = { "-0", "1", "2", "3", "-4", "5", "6", "7", "8", "9", "10", "11" },
             DEFAULT = { "-0", "-1", "-2", "-3", "-4", "-5", "-6", "-7", "-8", "-9", "-10", "-11" })
-    @NotYetImplemented(FF17)
     public void setOuterHTMLToReadOnly() throws Exception {
         final String html =  "<html>\n"
             + "<head>\n"

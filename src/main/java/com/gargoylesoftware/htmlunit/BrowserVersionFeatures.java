@@ -1014,6 +1014,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_OPACITY_ACCEPTS_ARBITRARY_VALUES,
 
+    /** element.outerHTML handles the body and head tag as readonly (IE). */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_OUTER_HTML_BODY_HEAD_READONLY,
+
     /** If <tt>true</tt>, then treat <tt>__parent__</tt> and <tt>__proto__</tt> as special properties. */
     @BrowserFeature(@WebBrowser(IE))
     JS_PARENT_PROTO_PROPERTIES,
