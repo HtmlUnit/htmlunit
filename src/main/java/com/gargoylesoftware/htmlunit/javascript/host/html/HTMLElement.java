@@ -1050,7 +1050,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param value the new value for replacing this node
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534310.aspx">MSDN documentation</a>
      */
-    @JsxSetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxSetter({ @WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 11) })
     public void setOuterHTML(final String value) {
         final DomNode domNode = getDomNodeOrDie();
 

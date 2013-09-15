@@ -812,6 +812,28 @@ public class HTMLElementTest extends WebDriverTestCase {
     }
 
     /**
+     * Verifies outerHTML, innerHTML and innerText for newly created div.
+     * @throws Exception if the test fails
+     */
+    @Alerts(DEFAULT = { "true", "true", "false" },
+            FF3_6 = { "false", "true", "false" },
+            IE = { "true", "true", "true" })
+    @Test
+    public void outerHTMLinNewDiv() throws Exception {
+        final String html = "<html><body onload='test()'><script>\n"
+            + "   function test() {\n"
+            + "      var div = document.createElement('div');\n"
+            + "      alert('outerHTML' in div);\n"
+            + "      alert('innerHTML' in div);\n"
+            + "      alert('innerText' in div);\n"
+            + "   }\n"
+            + "</script>\n"
+            + "<div id='div'><span class='a b'></span></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Verifies that empty tags are not abbreviated into their &lt;tag/&gt; form.
      * @throws Exception if the test fails
      */
@@ -983,7 +1005,6 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
-    @NotYetImplemented(FF17)
     public void setOuterHTMLAddTextToBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "New  cell value");
         loadPageWithAlerts2(html);
@@ -1000,7 +1021,6 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
-    @NotYetImplemented(FF17)
     public void setOuterHTMLAddTextToInline() throws Exception {
         final String html = createPageForSetOuterHTML("span", "New  cell value");
         loadPageWithAlerts2(html);
@@ -1017,7 +1037,6 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
-    @NotYetImplemented(FF17)
     public void setOuterHTMLAddBlockToBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div>test</div>");
         loadPageWithAlerts2(html);
@@ -1034,7 +1053,6 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
-    @NotYetImplemented(FF17)
     public void setOuterHTMLAddBlockToInline() throws Exception {
         final String html = createPageForSetOuterHTML("span", "<div>test</div>");
         loadPageWithAlerts2(html);
@@ -1051,7 +1069,6 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
-    @NotYetImplemented(FF17)
     public void setOuterHTMLAddInlineToInline() throws Exception {
         final String html = createPageForSetOuterHTML("span", "<span>test</span>");
         loadPageWithAlerts2(html);
@@ -1068,7 +1085,6 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
-    @NotYetImplemented(FF17)
     public void setOuterHTMLAddInlineToBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<span>test</span>");
         loadPageWithAlerts2(html);
@@ -1085,7 +1101,6 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
-    @NotYetImplemented(FF17)
     public void setOuterHTMLAddEmpty() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<br>");
         loadPageWithAlerts2(html);
@@ -1183,7 +1198,6 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
-    @NotYetImplemented(FF17)
     public void setOuterHTMLAddUnclosedParagraph() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<p>test");
         loadPageWithAlerts2(html);
@@ -1219,7 +1233,6 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
-    @NotYetImplemented(FF17)
     public void setOuterHTMLAddSelfClosingBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div/>");
         loadPageWithAlerts2(html);
@@ -1255,7 +1268,6 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
-    @NotYetImplemented(FF17)
     public void setOuterHTMLAddSelfClosingInline() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<span/>");
         loadPageWithAlerts2(html);
@@ -1272,7 +1284,6 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
-    @NotYetImplemented(FF17)
     public void setOuterHTMLAddSelfClosingEmpty() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<br/>");
         loadPageWithAlerts2(html);
