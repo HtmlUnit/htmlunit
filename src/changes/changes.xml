@@ -9,6 +9,9 @@
     <body>
         <release version="2.13" date="???" description="Bugfixes">
             <action type="update" dev="asashour">
+                Upgrade Apache HttpClient to 4.3.
+            </action>
+            <action type="update" dev="asashour">
                 KeyDataPair: deprecate getContentType().
             </action>
             <action type="update" dev="rbri">

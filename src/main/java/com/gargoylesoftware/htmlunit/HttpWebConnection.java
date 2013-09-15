@@ -81,13 +81,10 @@ import org.apache.http.cookie.CookieSpecFactory;
 import org.apache.http.cookie.MalformedCookieException;
 import org.apache.http.cookie.SetCookie;
 import org.apache.http.cookie.params.CookieSpecPNames;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.entity.mime.content.ContentBody;
-import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.InputStreamBody;
-import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.DefaultRedirectStrategy;
@@ -298,22 +295,19 @@ public class HttpWebConnection implements WebConnection {
                     boundary.append(chars[rand.nextInt(chars.length)]);
                 }
                 final Charset c = getCharset(charset, webRequest.getRequestParameters());
-                final MultipartEntity multipartEntity =
-                    new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE, boundary.toString(), c);
+                final MultipartEntityBuilder builder = MultipartEntityBuilder.create().setLaxMode();
+                builder.setCharset(c);
 
                 for (final NameValuePair pair : webRequest.getRequestParameters()) {
                     if (pair instanceof KeyDataPair) {
-                        final KeyDataPair pairWithFile = (KeyDataPair) pair;
-                        final ContentBody contentBody = buildFilePart(pairWithFile);
-                        multipartEntity.addPart(pair.getName(), contentBody);
+                        buildFilePart((KeyDataPair) pair, builder);
                     }
                     else {
-                        final StringBody stringBody =
-                            new StringBody(pair.getValue(), Charset.forName(webRequest.getCharset()));
-                        multipartEntity.addPart(pair.getName(), stringBody);
+                        builder.addTextBody(pair.getName(), pair.getValue(),
+                                ContentType.create(webRequest.getCharset()));
                     }
                 }
-                method.setEntity(multipartEntity);
+                method.setEntity(builder.build());
             }
             else { // for instance a PUT request
                 final String body = webRequest.getRequestBody();
@@ -416,53 +410,57 @@ public class HttpWebConnection implements WebConnection {
         return null;
     }
 
-    ContentBody buildFilePart(final KeyDataPair pairWithFile) {
+    void buildFilePart(final KeyDataPair pairWithFile, final MultipartEntityBuilder builder)
+        throws IOException {
         String mimeType = pairWithFile.getMimeType();
         if (mimeType == null) {
             mimeType = "application/octet-stream";
         }
 
+        final ContentType contentType = ContentType.create(mimeType, pairWithFile.getCharset());
         final File file = pairWithFile.getFile();
 
         if (pairWithFile.getData() != null) {
+            final String filename;
             if (file == null) {
-                return new InputStreamBody(
-                        new ByteArrayInputStream(pairWithFile.getData()), mimeType, pairWithFile.getValue());
+                filename = pairWithFile.getValue();
+            }
+            else if (webClient_.getBrowserVersion().hasFeature(HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH)) {
+                filename = file.getAbsolutePath();
+            }
+            else {
+                filename = file.getName();
             }
 
-            if (webClient_.getBrowserVersion().hasFeature(HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH)) {
-                return new InputStreamBody(
-                        new ByteArrayInputStream(pairWithFile.getData()), mimeType, file.getAbsolutePath());
-            }
-
-            return new InputStreamBody(
-                    new ByteArrayInputStream(pairWithFile.getData()), mimeType, file.getName());
+            builder.addBinaryBody(pairWithFile.getName(), new ByteArrayInputStream(pairWithFile.getData()),
+                    contentType, filename);
+            return;
         }
 
         if (file == null) {
-            return new InputStreamBody(new ByteArrayInputStream(new byte[0]), mimeType, pairWithFile.getValue()) {
-                // Overridden in order not to have a chunked response.
-                @Override
-                public long getContentLength() {
-                    return 0;
-                }
-            };
+            builder.addPart(pairWithFile.getName(),
+                    // Overridden in order not to have a chunked response.
+                    new InputStreamBody(new ByteArrayInputStream(new byte[0]), contentType, pairWithFile.getValue()) {
+                    @Override
+                    public long getContentLength() {
+                        return 0;
+                    }
+                });
+            return;
         }
 
-        return new FileBody(pairWithFile.getFile(), mimeType) {
-            @Override
-            public String getFilename() {
-                if (getFile() == null) {
-                    return pairWithFile.getValue();
-                }
-                else if (webClient_.getBrowserVersion().hasFeature(HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH)) {
-                    return getFile().getAbsolutePath();
-                }
-                else {
-                    return super.getFilename();
-                }
-            }
-        };
+        String filename;
+        if (pairWithFile.getFile() == null) {
+            filename = pairWithFile.getValue();
+        }
+        else if (webClient_.getBrowserVersion().hasFeature(HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH)) {
+            filename = pairWithFile.getFile().getAbsolutePath();
+        }
+        else {
+            filename = pairWithFile.getFile().getName();
+        }
+        filename = new String(filename.getBytes(pairWithFile.getCharset()));
+        builder.addBinaryBody(pairWithFile.getName(), pairWithFile.getFile(), contentType, filename);
     }
 
     /**
