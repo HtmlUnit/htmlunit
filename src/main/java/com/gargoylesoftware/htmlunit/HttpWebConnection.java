@@ -287,13 +287,6 @@ public class HttpWebConnection implements WebConnection {
                 }
             }
             else if (FormEncodingType.MULTIPART == webRequest.getEncodingType()) {
-                final StringBuilder boundary = new StringBuilder();
-                boundary.append("---------------------------");
-                final Random rand = new Random();
-                final char[] chars = "-_1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
-                for (int i = 0; i < 14; i++) {
-                    boundary.append(chars[rand.nextInt(chars.length)]);
-                }
                 final Charset c = getCharset(charset, webRequest.getRequestParameters());
                 final MultipartEntityBuilder builder = MultipartEntityBuilder.create().setLaxMode();
                 builder.setCharset(c);
