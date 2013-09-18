@@ -370,9 +370,9 @@
                     </reportSet>
                 </reportSets>
                 <configuration>
-                    <issueLinkTemplate>
-                        http://sourceforge.net/support/tracker.php?aid=%ISSUE%
-                    </issueLinkTemplate>
+                    <issueLinkTemplatePerSystem>
+                        <features>http://sourceforge.net/p/htmlunit/feature-requests/%ISSUE%</features>
+                    </issueLinkTemplatePerSystem>
                 </configuration>
             </plugin>
             <plugin>
@@ -391,8 +391,8 @@
         </plugins>
     </reporting>
     <issueManagement>
-        <system>sourceforge</system>
-        <url>http://sourceforge.net/tracker/?group_id=47038</url>
+        <system>SourceForge2</system>
+        <url>http://sourceforge.net/p/htmlunit/bugs/</url>
     </issueManagement>
     <inceptionYear>2002</inceptionYear>
     <licenses>
