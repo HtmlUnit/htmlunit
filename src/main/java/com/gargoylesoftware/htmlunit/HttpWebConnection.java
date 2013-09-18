@@ -64,6 +64,7 @@ import org.apache.http.client.methods.HttpTrace;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.params.ClientPNames;
 import org.apache.http.client.params.HttpClientParams;
+import org.apache.http.client.utils.DateUtils;
 import org.apache.http.client.utils.URIUtils;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.conn.params.ConnRoutePNames;
@@ -91,8 +92,6 @@ import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.impl.cookie.BasicPathHandler;
 import org.apache.http.impl.cookie.BrowserCompatSpec;
-import org.apache.http.impl.cookie.DateParseException;
-import org.apache.http.impl.cookie.DateUtils;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreConnectionPNames;
@@ -787,12 +786,7 @@ class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
                     value = value.substring(1, value.length() - 1);
                 }
                 value = value.replaceAll("[ ,:-]+", " ");
-                try {
-                    cookie.setExpiryDate(DateUtils.parseDate(value, DEFAULT_DATE_PATTERNS, DATE_1_1_1970));
-                }
-                catch (final DateParseException e) {
-                    incorrectnessListener.notify("Incorrect cookie expiration time: " + value, this);
-                }
+                cookie.setExpiryDate(DateUtils.parseDate(value, DEFAULT_DATE_PATTERNS, DATE_1_1_1970));
             }
 
             public boolean match(final Cookie cookie, final CookieOrigin origin) {

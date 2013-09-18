@@ -19,10 +19,7 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.http.impl.cookie.DateParseException;
-import org.apache.http.impl.cookie.DateUtils;
+import org.apache.http.client.utils.DateUtils;
 
 import com.gargoylesoftware.htmlunit.WebAssert;
 
@@ -40,7 +37,6 @@ public final class StringUtils {
     private static final Pattern HEX_COLOR = Pattern.compile("#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})");
     private static final Pattern RGB_COLOR =
         Pattern.compile("rgb\\s*?\\(\\s*?(\\d{1,3})\\s*?,\\s*?(\\d{1,3})\\s*?,\\s*?(\\d{1,3})\\s*?\\)");
-    private static final Log LOG = LogFactory.getLog(StringUtils.class);
 
     /**
      * Disallow instantiation of this class.
@@ -145,13 +141,7 @@ public final class StringUtils {
         if (s == null) {
             return null;
         }
-        try {
-            return DateUtils.parseDate(s);
-        }
-        catch (final DateParseException e) {
-            LOG.warn("Unable to parse http date: '" + s + "'");
-            return null;
-        }
+        return DateUtils.parseDate(s);
     }
 
     /**
