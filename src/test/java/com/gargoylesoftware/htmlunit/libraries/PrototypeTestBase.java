@@ -107,7 +107,8 @@ public abstract class PrototypeTestBase extends WebServerTestCase {
         if (expectationsFile == null) {
             expectationsFile = new File(baseName + ".txt");
             if (!expectationsFile.exists()) {
-                throw new FileNotFoundException("Can't find expectations file for test " + filename
+                throw new FileNotFoundException("Can't find expectations file ("
+                        + expectationsFile.getName() + ") for test " + filename
                         + "(" + browserVersion.getNickname() + ")");
             }
         }
