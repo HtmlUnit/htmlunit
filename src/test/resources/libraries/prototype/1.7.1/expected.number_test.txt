@@ -1,0 +1,6 @@
+4 tests, 19 assertions, 0 failures, 0 errors
+Status	Test	Message
+testNumberMathMethods	passed	7 assertions, 0 failures, 0 errors
+testNumberToColorPart	passed	3 assertions, 0 failures, 0 errors
+testNumberToPaddedString	passed	7 assertions, 0 failures, 0 errors
+testNumberTimes	passed	2 assertions, 0 failures, 0 errors

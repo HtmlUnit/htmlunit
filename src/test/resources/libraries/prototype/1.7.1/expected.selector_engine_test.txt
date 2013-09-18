@@ -1,0 +1,8 @@
+6 tests, 14 assertions, 0 failures, 0 errors
+Status	Test	Message
+testEngine	passed	1 assertions, 0 failures, 0 errors
+testSelect	passed	4 assertions, 0 failures, 0 errors
+testSelectWithContext	passed	3 assertions, 0 failures, 0 errors
+testSelectWithEmptyResult	passed	2 assertions, 0 failures, 0 errors
+testMatch	passed	2 assertions, 0 failures, 0 errors
+testFind	passed	2 assertions, 0 failures, 0 errors

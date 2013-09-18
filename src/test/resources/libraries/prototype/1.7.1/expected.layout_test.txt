@@ -1,0 +1,16 @@
+13 tests, 68 assertions, 0 failures, 0 errors
+Status	Test	Message
+test preCompute argument of layout	passed	24 assertions, 0 failures, 0 errors
+test layout on absolutely-positioned elements	passed	6 assertions, 0 failures, 0 errors
+test layout on elements with display: none and exact width	passed	6 assertions, 0 failures, 0 errors
+test layout on elements with negative margins	passed	3 assertions, 0 failures, 0 errors
+test layout on elements with display: none and width: auto	passed	7 assertions, 0 failures, 0 errors
+test layout on elements with display: none ancestors	passed	6 assertions, 0 failures, 0 errors
+test positioning on absolutely-positioned elements	passed	3 assertions, 0 failures, 0 errors
+test positioning on absolutely-positioned element with top=0 and left=0	passed	2 assertions, 0 failures, 0 errors
+test layout on statically-positioned element with percentage width	passed	1 assertions, 0 failures, 0 errors
+test layout on absolutely-positioned element with percentage width	passed	1 assertions, 0 failures, 0 errors
+test layout on fixed-position element with percentage width	passed	2 assertions, 0 failures, 0 errors
+Info: NOTE: IE6 WILL fail these tests because it doesn't support position: fixed. This is expected.
+test #toCSS, #toObject, #toHash	passed	5 assertions, 0 failures, 0 errors
+test dimensions on absolutely-positioned, hidden elements	passed	2 assertions, 0 failures, 0 errors
