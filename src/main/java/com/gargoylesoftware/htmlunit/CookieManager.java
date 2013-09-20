@@ -27,7 +27,7 @@ import java.util.Set;
 
 import org.apache.commons.collections.set.ListOrderedSet;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.client.params.CookiePolicy;
+import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.cookie.CookieSpec;
 import org.apache.http.cookie.CookieSpecRegistry;
@@ -48,9 +48,9 @@ public class CookieManager implements Serializable {
     /**
      * HtmlUnit's cookie policy is to be browser-compatible. Code which requires access to
      * HtmlUnit's cookie policy should use this constant, rather than making assumptions and using
-     * one of the HttpClient {@link CookiePolicy} constants directly.
+     * one of the HttpClient {@link CookieSpecs} constants directly.
      */
-    public static final String HTMLUNIT_COOKIE_POLICY = CookiePolicy.BROWSER_COMPATIBILITY;
+    public static final String HTMLUNIT_COOKIE_POLICY = CookieSpecs.BROWSER_COMPATIBILITY;
 
     /** Whether or not cookies are enabled. */
     private boolean cookiesEnabled_;

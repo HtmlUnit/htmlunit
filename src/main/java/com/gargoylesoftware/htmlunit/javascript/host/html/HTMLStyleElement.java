@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 
@@ -88,6 +89,16 @@ public class HTMLStyleElement extends HTMLElement {
     public String getType() {
         final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
         return style.getTypeAttribute();
+    }
+
+    /**
+     * Sets the type of this style.
+     * @param type the new type
+     */
+    @JsxSetter()
+    public void setType(final String type) {
+        final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
+        style.setTypeAttribute(type);
     }
 
     /**

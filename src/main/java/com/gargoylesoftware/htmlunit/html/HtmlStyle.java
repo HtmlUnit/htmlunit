@@ -57,6 +57,15 @@ public class HtmlStyle extends HtmlElement {
     }
 
     /**
+     * Sets the value of the attribute "type".
+     *
+     * @param type the new type
+     */
+    public final void setTypeAttribute(final String type) {
+        setAttribute("type", type);
+    }
+
+    /**
      * Returns the value of the attribute "media". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.

@@ -166,4 +166,28 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "", "text/css" })
+    public void type_setter() throws Exception {
+        final String html
+            = "<html><head><title>foo</title>\n"
+            + "<style id='style_none'></style>\n"
+
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  style = document.getElementById('style_none');\n"
+            + "  alert(style.type);\n"
+            + "  style.type = 'text/css';\n"
+            + "  alert(style.type);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
