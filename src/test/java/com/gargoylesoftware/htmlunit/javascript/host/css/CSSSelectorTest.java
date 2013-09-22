@@ -915,6 +915,67 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = { "2", "item_2", "item_3" }, IE8 = "exception")
+    public void childNot() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    try {\n"
+            + "      var res = document.querySelectorAll('#list li:not(#item_1)');\n"
+            + "      alert(res.length);\n"
+            + "      alert(res[0].id);\n"
+            + "      alert(res[1].id);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <ul id='list'>\n"
+            + "    <li id='item_1'>1</li>\n"
+            + "    <li id='item_2'>2</li>\n"
+            + "    <li id='item_3'>3</li>\n"
+            + "  </ul>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "1", "item_2" }, IE8 = "exception")
+    public void childNotNot() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    try {\n"
+            + "      var res = document.querySelectorAll('#list li:not(#item_1):not(#item_3)');\n"
+            + "      alert(res.length);\n"
+            + "      alert(res[0].id);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <ul id='list'>\n"
+            + "    <li id='item_1'>1</li>\n"
+            + "    <li id='item_2'>2</li>\n"
+            + "    <li id='item_3'>3</li>\n"
+            + "  </ul>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(FF = { "0", "undefined", "1", "[object HTMLInputElement]", "id2" },
             DEFAULT = { "1", "[object HTMLHtmlElement]", "1", "[object HTMLInputElement]", "id2" })
     @BuggyWebDriver({ Browser.FF10, Browser.FF17 })

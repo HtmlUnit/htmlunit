@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                CSS: Support seclectors with more than one pseudo element (like '#list li:not(#item_1):not(#item_3)').
+                This was a problem with CSSParser and is fixed in version 0.9.11.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: HTMLStyleElement.type is writable.
             </action>
@@ -21,7 +25,7 @@
                 KeyDataPair: deprecate getContentType().
             </action>
             <action type="update" dev="rbri">
-                CSS: cssparser updated to 0.9.10.
+                CSS: cssparser updated to 0.9.11.
             </action>
             <action type="fix" dev="mguillem" issue="1542">
                 JavaScript: fixed ClassCastException on TypedArray creation with start offset specified.
