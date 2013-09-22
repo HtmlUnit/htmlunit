@@ -181,11 +181,11 @@ public class BrowserVersion implements Serializable, Cloneable {
 
     /** Latest Chrome. Work In Progress!!! */
     public static final BrowserVersion CHROME = new BrowserVersion(
-        "Netscape", "5.0 (Windows NT 6.1) AppleWebKit/537.11"
-        + " (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11",
-        "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11"
-        + " (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11",
-        23, "Chrome", null);
+        "Netscape", "5.0 (Windows NT 6.1) AppleWebKit/537.36"
+        + " (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36",
+        "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36"
+        + " (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36",
+        29, "Chrome", null);
 
     /** The default browser version. */
     private static BrowserVersion DefaultBrowserVersion_ = INTERNET_EXPLORER_8;
