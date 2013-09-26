@@ -894,4 +894,29 @@ public class NodeTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Verifies that listeners are copied only for IE.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "true", "true" }, IE = { "false", "false" })
+    public void addEventListener() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "  <script type='text/javascript'>\n"
+            + "    function test() {\n"
+            + "        var node = document.createElement('button');\n"
+            + "        alert(node.addEventListener !== undefined);\n"
+            + "        alert(node.removeEventListener !== undefined);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
