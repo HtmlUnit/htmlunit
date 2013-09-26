@@ -255,6 +255,42 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     }
 
     /**
+     * Test case for issue ##1544.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "createIFrame", "loaded" })
+    @NotYetImplemented
+    public void documentCreateElement_iFrameInsideDiv() throws Exception {
+        final String html =
+                "<html>\n"
+              + "<head><script type='text/javascript'>\n"
+              + "  function createIFrame() {\n"
+              + "      alert('createIFrame');\n"
+              + "      var content = document.getElementById('content');\n"
+              + "      var newContent = document.createElement('div');\n"
+              + "      newContent.innerHTML = '<iframe name=\"iFrame\" src=\"" + URL_SECOND + "\"></iframe>';\n"
+              + "      content.appendChild(newContent);\n"
+              + "  }\n"
+              + "</script></head>\n"
+
+              + "  <body>\n"
+              + "    <div id='content'>content</div>"
+              + "    <a id='test' onclick='createIFrame();'>insert frame</a>"
+              + "  </body>\n"
+              + "</html>";
+        final String html2 = "<html><body><script>alert('loaded')</script></body></html>";
+        getMockWebConnection().setResponse(URL_SECOND, html2);
+
+        final WebDriver driver = loadPage2(html);
+
+        driver.findElement(By.id("test")).click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        assertEquals(2, getMockWebConnection().getRequestCount());
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
