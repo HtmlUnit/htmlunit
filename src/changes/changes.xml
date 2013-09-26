@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="add" dev="asashour" issue="1539">
+                JavaScript: window.localStorage and .sessionStorage are supported in Chrome.
+            </action>
             <action type="add" dev="asashour" issue="1545">
                 JavaScript: node and window.addEventListener() and .removeEventListener() are supported in Chrome.
             </action>

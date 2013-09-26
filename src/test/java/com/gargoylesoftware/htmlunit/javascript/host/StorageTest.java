@@ -44,7 +44,8 @@ public class StorageTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = { "undefined", "undefined", "undefined" }, IE8 = { "undefined", "[object]", "[object]" },
             FF = { "[object StorageList]", "[object Storage]", "[object Storage]" },
-            FF17 = { "undefined", "[object Storage]", "[object Storage]" })
+            FF17 = { "undefined", "[object Storage]", "[object Storage]" },
+            CHROME = { "undefined", "[object Storage]", "[object Storage]" })
     @NotYetImplemented(FF3_6)
     public void storage() throws Exception {
         final String html
@@ -77,8 +78,7 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE8 = { "string", "1" },
-            FF = { "string", "1" })
+    @Alerts({ "string", "1" })
     public void localStorage() throws Exception {
         final String firstHtml
             = "<html><head></head><body>\n"
@@ -111,8 +111,7 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE8 = { "0", "2", "there", "world", "1", "0" },
-            FF = { "0", "2", "there", "world", "1", "0" })
+    @Alerts({ "0", "2", "there", "world", "1", "0" })
     public void sessionStorage() throws Exception {
         final String html
             = "<html><head></head><body>\n"

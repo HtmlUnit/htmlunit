@@ -539,7 +539,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the localStorage property.
      * @return the localStorage property
      */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF), @WebBrowser(CHROME) })
     public Storage getLocalStorage() {
         return getStorage(Type.LOCAL_STORAGE);
     }
@@ -548,7 +548,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the sessionStorage property.
      * @return the sessionStorage property
      */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF), @WebBrowser(CHROME) })
     public Storage getSessionStorage() {
         return getStorage(Type.SESSION_STORAGE);
     }

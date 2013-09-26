@@ -1269,7 +1269,7 @@ public enum BrowserVersionFeatures {
     SET_READONLY_PROPERTIES,
 
     /** Indicates [object StorageObsolete] instead of [object Storage]. */
-    @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 10), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 10) })
     STORAGE_OBSOLETE,
 
     /** Indicates that string.trim() is supported. */
