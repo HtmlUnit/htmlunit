@@ -9,7 +9,7 @@
     <body>
         <release version="2.13" date="???" description="Bugfixes">
             <action type="add" dev="asashour" issue="1545">
-                JavaScript: node and window.addEventListener() and .removeEventListener() are supported in Chrome. 
+                JavaScript: node and window.addEventListener() and .removeEventListener() are supported in Chrome.
             </action>
             <action type="fix" dev="rbri">
                 CSS: Support seclectors with more than one pseudo element (like '#list li:not(#item_1):not(#item_3)').
