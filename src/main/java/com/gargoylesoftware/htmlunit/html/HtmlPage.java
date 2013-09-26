@@ -1450,7 +1450,7 @@ public class HtmlPage extends SgmlPage {
      * @return a list of {@link FrameWindow}
      */
     public List<FrameWindow> getFrames() {
-        final List<FrameWindow> list = new ArrayList<FrameWindow>();
+        final List<FrameWindow> list = new ArrayList<FrameWindow>(frameElements_.size());
         for (final BaseFrameElement frameElement : frameElements_) {
             list.add(frameElement.getEnclosedWindow());
         }
@@ -1811,6 +1811,11 @@ public class HtmlPage extends SgmlPage {
 
             if (node instanceof BaseFrameElement) {
                 frameElements_.add((BaseFrameElement) node);
+            }
+            for (final DomElement child : ((DomElement) node).getChildElements()) {
+                if (child instanceof BaseFrameElement) {
+                    frameElements_.add((BaseFrameElement) child);
+                }
             }
 
             if ("base".equals(node.getNodeName())) {
