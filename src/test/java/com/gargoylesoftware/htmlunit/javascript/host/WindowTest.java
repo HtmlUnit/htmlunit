@@ -1389,7 +1389,7 @@ public class WindowTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "false", "false", "test1", "test2", "onload" },
+    @Alerts(DEFAULT = { "false", "false", "test1", "test2", "onload" },
             IE = { "true", "true", "exception", "onload" })
     public void addOnLoadEventListener() throws Exception {
         final String html = "<html>\n"

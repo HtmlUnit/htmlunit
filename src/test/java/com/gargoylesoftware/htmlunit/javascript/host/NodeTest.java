@@ -896,7 +896,6 @@ public class NodeTest extends WebDriverTestCase {
     }
 
     /**
-     * Verifies that listeners are copied only for IE.
      * @throws Exception if an error occurs
      */
     @Test
