@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.assertSame;
 
 import java.net.MalformedURLException;
@@ -27,14 +26,12 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
-import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -141,40 +138,6 @@ public class HTMLAnchorElementTest extends SimpleWebTestCase {
         final Page page2 = page1.getAnchorByHref("#").click();
 
         assertEquals(getDefaultUrl() + "foo.html", page2.getUrl());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Browsers(IE)
-    public void javaScriptAnchorClick() throws Exception {
-        final String html
-            = "<html><head><title>First</title><script>\n"
-            + "</script></head><body>\n"
-            + "<a id='link1' href='#' onclick='document.form1.submit()'>link 1</a>\n"
-            + "<form name='form1' action='" + URL_SECOND + "' method='post'>\n"
-            + "<input type=button id='button1' value='Test' onclick='document.getElementById(\"link1\").click()'>\n"
-            + "<input name='testText'>\n"
-            + "</form>\n"
-            + "</body></html>";
-
-        final String secondHtml
-            = "<html>\n"
-            + "<head><title>Second</title></head>\n"
-            + "</html>";
-
-        final WebClient client = getWebClient();
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
-        conn.setResponse(URL_SECOND, secondHtml);
-        client.setWebConnection(conn);
-
-        final HtmlPage page = client.getPage(URL_FIRST);
-        final HtmlButtonInput button = page.getHtmlElementById("button1");
-        final HtmlPage page2 = button.click();
-
-        assertEquals("Second", page2.getTitleText());
     }
 
     /**

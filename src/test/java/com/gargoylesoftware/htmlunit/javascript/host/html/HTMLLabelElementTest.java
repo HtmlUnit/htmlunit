@@ -14,19 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
-import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
-import com.gargoylesoftware.htmlunit.html.HtmlLabel;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link HTMLLabelElement}.
@@ -34,9 +30,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Daniel Gredler
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class HTMLLabelElementTest extends SimpleWebTestCase {
+public class HTMLLabelElementTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -53,12 +50,11 @@ public class HTMLLabelElementTest extends SimpleWebTestCase {
             + "<input type='checkbox' id='checkbox1'><br>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(html);
-        final HtmlLabel label = page.getHtmlElementById("label1");
-        final HtmlCheckBoxInput checkbox = page.getHtmlElementById("checkbox1");
-        assertFalse(checkbox.isChecked());
-        label.click();
-        assertTrue(checkbox.isChecked());
+        final WebDriver driver = loadPage2(html);
+        final WebElement checkbox = driver.findElement(By.id("checkbox1"));
+        assertFalse(checkbox.isSelected());
+        driver.findElement(By.id("label1")).click();
+        assertTrue(checkbox.isSelected());
     }
 
     /**
@@ -67,27 +63,30 @@ public class HTMLLabelElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "true", FF3_6 = "false") // in fact not used as JS alerts...
     public void htmlFor_click() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    document.getElementById('label1').htmlFor = 'checkbox1';\n"
             + "}\n"
+            + "function delegateClick() {"
+            + "  try {\n"
+            + "    document.getElementById('label1').click();\n"
+            + "  } catch (e) {}\n"
+            + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<label id='label1'>My Label</label>\n"
             + "<input type='checkbox' id='checkbox1'><br>\n"
-            + "<input type=button id='button1' value='Test' onclick='document.getElementById(\"label1\").click()'>\n"
+            + "<input type=button id='button1' value='Test' onclick='delegateClick()'>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(html);
-        final HtmlCheckBoxInput checkbox = page.getHtmlElementById("checkbox1");
-        final HtmlButtonInput button = page.getHtmlElementById("button1");
-        assertFalse(checkbox.isChecked());
-        button.click();
+        final WebDriver driver = loadPage2(html);
+        final WebElement checkbox = driver.findElement(By.id("checkbox1"));
+        assertFalse(checkbox.isSelected());
+        driver.findElement(By.id("button1")).click();
 
-        final boolean changedByClick = getWebClient().getBrowserVersion().isIE();
-        assertTrue(checkbox.isChecked() == changedByClick);
+        assertEquals(getExpectedAlerts()[0], "" + checkbox.isSelected());
     }
 
     /**
@@ -114,7 +113,7 @@ public class HTMLLabelElementTest extends SimpleWebTestCase {
             + "alert(a1.accessKey);\n"
             + "alert(a2.accessKey);\n"
             + "</script></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -127,7 +126,6 @@ public class HTMLLabelElementTest extends SimpleWebTestCase {
             = "<html><body><form><label id='a'>a</label></form><script>\n"
             + "alert(document.getElementById('a').form);\n"
             + "</script></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
-
 }

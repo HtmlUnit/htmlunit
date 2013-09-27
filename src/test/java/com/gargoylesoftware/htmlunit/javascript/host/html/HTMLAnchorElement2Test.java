@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
 public class HTMLAnchorElement2Test extends WebDriverTestCase {
@@ -147,4 +148,39 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Second", FF3_6 = "First") // in fact not alerts here, but it makes config easier
+    public void javaScriptAnchorClick() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function delegateClick() {\n"
+            + "  try {"
+            + "    document.getElementById(\"link1\").click();\n"
+            + "  } catch(e) {}\n"
+            + "}"
+            + "</script></head><body>\n"
+            + "<a id='link1' href='#' onclick='document.form1.submit()'>link 1</a>\n"
+            + "<form name='form1' action='" + URL_SECOND + "' method='post'>\n"
+            + "<input type=button id='button1' value='Test' onclick='delegateClick()'>\n"
+            + "<input name='testText'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final String secondHtml
+            = "<html>\n"
+            + "<head><title>Second</title></head>\n"
+            + "</html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondHtml);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("button1")).click();
+
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+    }
+
 }

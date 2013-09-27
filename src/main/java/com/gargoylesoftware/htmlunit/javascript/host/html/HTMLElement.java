@@ -2118,7 +2118,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Click this element. This simulates the action of the user clicking with the mouse.
      * @throws IOException if this click triggers a page load that encounters problems
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 10) })
     public void click() throws IOException {
         getDomNodeOrDie().click();
     }
