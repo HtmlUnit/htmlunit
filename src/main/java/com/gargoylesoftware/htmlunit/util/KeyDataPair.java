@@ -24,7 +24,10 @@ import java.io.File;
  * @author David D. Kilzer
  * @author Mike Bowler
  * @author Ahmed Ashour
+ * @deprecated as of 2.13, with no replacement
  */
+@Deprecated
+// to be package private or 'use at your own risk' (referenced by HttpWebConnection and HtmlFileInput)
 public class KeyDataPair extends NameValuePair {
 
     private final File fileObject_;
