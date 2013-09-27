@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour" issue="1511">
+                JavaScript: array.sort() to use Arrays.LegacyMergeSort with Java 7.
+            </action>
             <action type="add" dev="mguillem">
                 JavaScript: support click method on any element for FF10+ too.
             </action>

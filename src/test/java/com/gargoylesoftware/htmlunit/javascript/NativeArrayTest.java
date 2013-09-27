@@ -144,4 +144,33 @@ public class NativeArrayTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * Test for "Comparison method violates its general contract!".
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void comparisonMethodViolatesContract() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "var results = [1, 1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 1, 1, 1, 1, 1, 1, 1, 1, -1, -1, 1, -1, -1, 1,"
+            + " -1, -1, 1, -1, 1, -1, 1, 1, 1, 1, -1, -1, 1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, -1, 1, -1, 1, -1,"
+            + " 1, -1, -1, 1, 1, -1, -1, 1, 1, 1, 1, 1, 1, -1, -1, 0, -1, -1, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0,"
+            + " 1, 1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, -1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1, 1, 1, 1, 1,"
+            + " 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1, 1, 1, -1, -1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];\n"
+            + "var index = 0;"
+            + "function test() {\n"
+            + "    var arr = new Array(37);\n"
+            + "    for (var x = 0; x < arr.length; x++) {\n"
+            + "        arr[x] = new Object();\n"
+            + "    }\n"
+            + "    arr.sort(function (a, b) {\n"
+            + "        return results[index++];\n"
+            + "    });\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }
