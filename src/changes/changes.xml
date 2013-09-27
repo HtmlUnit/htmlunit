@@ -24,7 +24,7 @@
                 JavaScript: node and window.addEventListener() and .removeEventListener() are supported in Chrome.
             </action>
             <action type="fix" dev="rbri">
-                CSS: Support seclectors with more than one pseudo element (like '#list li:not(#item_1):not(#item_3)').
+                CSS: Support selectors with more than one pseudo element (like '#list li:not(#item_1):not(#item_3)').
                 This was a problem with CSSParser and is fixed in version 0.9.11.
             </action>
             <action type="fix" dev="asashour">
