@@ -38,7 +38,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            IE = "Accept: text/html, application/xhtml+xml, */*")
+            IE = "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, application/x-shockwave-flash, */*")
     @NotYetImplemented
     public void getUrlAcceptHeader() throws Exception {
         final String html = "<html><body>Response</body></html>";
