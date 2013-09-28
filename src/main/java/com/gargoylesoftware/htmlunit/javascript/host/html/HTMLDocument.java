@@ -741,6 +741,15 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             index++;
         }
         if (scriptTagCount > 0 || tagState != PARSING_STATUS.OUTSIDE) {
+            if (LOG.isDebugEnabled()) {
+                final StringBuffer message = new StringBuffer();
+                message.append("canAlreadyBeParsed() retruns false for content: '");
+                message.append(StringUtils.abbreviateMiddle(content, ".", 100));
+                message.append("' (scriptTagCount: " + scriptTagCount);
+                message.append(" tagState: " + tagState);
+                message.append(")");
+                LOG.debug(message.toString());
+            }
             return false;
         }
 
