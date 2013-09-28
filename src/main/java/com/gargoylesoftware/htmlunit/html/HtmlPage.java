@@ -1089,7 +1089,7 @@ public class HtmlPage extends SgmlPage {
         request.setAdditionalHeaders(new HashMap<String, String>(referringRequest.getAdditionalHeaders()));
         request.setAdditionalHeader("Referer", referringRequest.getUrl().toString());
 
-        final Object cachedScript = cache.getCachedObject(request);
+        final Object cachedScript = cache.getCachedObject(url);
         if (cachedScript instanceof Script) {
             return (Script) cachedScript;
         }
@@ -1142,7 +1142,7 @@ public class HtmlPage extends SgmlPage {
             final JavaScriptEngine javaScriptEngine = client.getJavaScriptEngine();
             final Script script = javaScriptEngine.compile(this, scriptCode, url.toExternalForm(), 1);
             if (script != null) {
-                cache.cacheIfPossible(request, response, script);
+                cache.cacheIfPossible(url, response, script);
             }
 
             return script;

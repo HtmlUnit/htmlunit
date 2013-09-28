@@ -1275,8 +1275,11 @@ public class WebClient implements Serializable {
         addDefaultHeaders(webRequest);
 
         // Retrieve the response, either from the cache or from the server.
-        final Object fromCache = getCache().getCachedObject(webRequest);
         final WebResponse webResponse;
+        Object fromCache = null;
+        if (HttpMethod.GET == webRequest.getHttpMethod()) {
+            fromCache = getCache().getCachedObject(url);
+        }
         if (fromCache != null && fromCache instanceof WebResponse) {
             webResponse = new WebResponseFromCache((WebResponse) fromCache, webRequest);
         }
@@ -1287,7 +1290,7 @@ public class WebClient implements Serializable {
             catch (final NoHttpResponseException e) {
                 return new WebResponse(responseDataNoHttpResponse_, webRequest, 0);
             }
-            getCache().cacheIfPossible(webRequest, webResponse, webResponse);
+            getCache().cacheIfPossible(url, webResponse, webResponse);
         }
 
         // Continue according to the HTTP status code.

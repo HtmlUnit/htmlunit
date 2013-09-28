@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
+import java.net.URL;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -89,15 +90,14 @@ public class Cache implements Serializable {
      * Caches the specified object, if the corresponding request and response objects indicate
      * that it is cacheable.
      *
-     * @param request the request corresponding to the specified compiled script
+     * @param url the cache key
      * @param response the response corresponding to the specified compiled script
      * @param toCache the object that is to be cached, if possible (may be for instance a compiled script or
      * simply a WebResponse)
      */
-    public void cacheIfPossible(final WebRequest request, final WebResponse response, final Object toCache) {
-        if (isCacheable(request, response)) {
-            final String url = response.getWebRequest().getUrl().toString();
-            final Entry entry = new Entry(url, toCache);
+    public void cacheIfPossible(final URL url, final WebResponse response, final Object toCache) {
+        if (isCacheable(response)) {
+            final Entry entry = new Entry(url.toString(), toCache);
             entries_.put(entry.key_, entry);
             deleteOverflow();
         }
@@ -135,11 +135,10 @@ public class Cache implements Serializable {
     /**
      * Determines if the specified response can be cached.
      *
-     * @param request the performed request
      * @param response the received response
      * @return <code>true</code> if the response can be cached
      */
-    protected boolean isCacheable(final WebRequest request, final WebResponse response) {
+    protected boolean isCacheable(final WebResponse response) {
         return HttpMethod.GET == response.getWebRequest().getHttpMethod()
             && !isDynamicContent(response);
     }
@@ -205,14 +204,11 @@ public class Cache implements Serializable {
      * Returns the cached object corresponding to the specified request. If there is
      * no corresponding cached object, this method returns <tt>null</tt>.
      *
-     * @param request the request whose corresponding cached compiled script is sought
+     * @param url the cache key
      * @return the cached object corresponding to the specified request if any
      */
-    public Object getCachedObject(final WebRequest request) {
-        if (HttpMethod.GET != request.getHttpMethod()) {
-            return null;
-        }
-        final Entry cachedEntry = entries_.get(request.getUrl().toString());
+    public Object getCachedObject(final URL url) {
+        final Entry cachedEntry = entries_.get(url.toString());
         if (cachedEntry == null) {
             return null;
         }

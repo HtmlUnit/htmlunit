@@ -72,6 +72,7 @@ import org.w3c.dom.css.CSSRuleList;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -301,11 +302,14 @@ public class CSSStyleSheet extends SimpleScriptable {
                 request.setAdditionalHeader("Referer", referer);
             }
 
-            uri = request.getUrl().toExternalForm();
+            final URL reqUrl = request.getUrl();
+            Object fromCache = null;
             final Cache cache = client.getCache();
-            final Object fromCache = cache.getCachedObject(request);
+            if (HttpMethod.GET == request.getHttpMethod()) {
+                fromCache = cache.getCachedObject(reqUrl);
+            }
             if (fromCache != null && fromCache instanceof org.w3c.dom.css.CSSStyleSheet) {
-                sheet = new CSSStyleSheet(element, (org.w3c.dom.css.CSSStyleSheet) fromCache, uri);
+                sheet = new CSSStyleSheet(element, (org.w3c.dom.css.CSSStyleSheet) fromCache, reqUrl.toExternalForm());
             }
             else {
                 final WebResponse response = client.loadWebResponse(request);
@@ -317,7 +321,7 @@ public class CSSStyleSheet extends SimpleScriptable {
                 source.setByteStream(response.getContentAsStream());
                 source.setEncoding(response.getContentCharset());
                 sheet = new CSSStyleSheet(element, source, uri);
-                cache.cacheIfPossible(request, response, sheet.getWrappedSheet());
+                cache.cacheIfPossible(reqUrl, response, sheet.getWrappedSheet());
             }
         }
         catch (final FailingHttpStatusCodeException e) {

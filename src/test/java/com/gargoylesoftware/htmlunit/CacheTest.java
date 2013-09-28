@@ -138,6 +138,63 @@ public class CacheTest extends SimpleWebTestCase {
      *@throws Exception if the test fails
      */
     @Test
+    public void usageUrlEncoded() throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "  <title>page 1</title>\n"
+            + "  <script src='foo1.js'></script>\n"
+            + "  <script src='foo2.js?foo[1]=bar/baz'></script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <a href='page2.html'>to page 2</a>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final String content2 = "<html>\n2"
+            + "<head>\n"
+            + "  <title>page 2</title>\n"
+            + "  <script src='foo2.js?foo[1]=bar/baz'></script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <a href='page1.html'>to page 1</a>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final String script1 = "alert('in foo1');";
+        final String script2 = "alert('in foo2');";
+
+        final URL urlPage1 = new URL(URL_FIRST, "page1.html");
+        getMockWebConnection().setResponse(urlPage1, content);
+        final URL urlPage2 = new URL(URL_FIRST, "page2.html");
+        getMockWebConnection().setResponse(urlPage2, content2);
+
+        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        headers.add(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "foo1.js"), script1,
+                200, "ok", JAVASCRIPT_MIME_TYPE, headers);
+        getMockWebConnection().setDefaultResponse(script2, 200, "ok", JAVASCRIPT_MIME_TYPE, headers);
+
+        final WebClient webClient = getWebClientWithMockWebConnection();
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final HtmlPage page1 = webClient.getPage(urlPage1);
+        final String[] expectedAlerts = {"in foo1", "in foo2"};
+        assertEquals(expectedAlerts, collectedAlerts);
+
+        collectedAlerts.clear();
+        page1.getAnchors().get(0).click();
+
+        assertEquals(new String[] {"in foo2"}, collectedAlerts);
+        assertEquals("no request for scripts should have been performed",
+                urlPage2, getMockWebConnection().getLastWebRequest().getUrl());
+    }
+
+    /**
+     *@throws Exception if the test fails
+     */
+    @Test
     public void maxSizeMaintained() throws Exception {
         final String html = "<html><head><title>page 1</title>\n"
             + "<script src='foo1.js' type='text/javascript'/>\n"
