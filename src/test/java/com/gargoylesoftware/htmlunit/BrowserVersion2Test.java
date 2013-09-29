@@ -40,10 +40,95 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
             IE = "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, application/x-shockwave-flash, */*")
     @NotYetImplemented
-    public void getUrlAcceptHeader() throws Exception {
+    public void acceptHeaderGetUrl() throws Exception {
         final String html = "<html><body>Response</body></html>";
         loadPage2(html, getDefaultUrl());
 
+        assertEquals(getExpectedAlerts()[0], acceptHeaderString());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "Accept: image/png,image/*;q=0.8,*/*;q=0.5",
+            IE = "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, application/x-shockwave-flash, */*",
+            CHROME = "Accept: image/webp,*/*;q=0.8")
+    @NotYetImplemented
+    public void acceptHeaderImage() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function doTest(){\n"
+            + "    alert(document.getElementById('anImage').height);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<img src='foo.gif' id='anImage'/>\n"
+            + "</body></html>";
+        loadPage2(html, getDefaultUrl());
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+        assertEquals(getExpectedAlerts()[0], acceptHeaderString());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "Accept: text/css,*/*;q=0.1",
+            IE = "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, application/x-shockwave-flash, */*")
+    @NotYetImplemented
+    public void acceptHeaderCss() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "  <link href='test.css' rel='stylesheet' type='text/css'>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+        loadPage2(html, getDefaultUrl());
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+        assertEquals(getExpectedAlerts()[0], acceptHeaderString());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "Accept: text/css,*/*;q=0.1",
+            IE = "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, application/x-shockwave-flash, */*")
+    @NotYetImplemented
+    public void acceptHeaderCssWithoutType() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "  <link href='test.css' rel='stylesheet'>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+        loadPage2(html, getDefaultUrl());
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+        assertEquals(getExpectedAlerts()[0], acceptHeaderString());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "Accept: text/css,*/*;q=0.1",
+            IE = "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, application/x-shockwave-flash, */*")
+    @NotYetImplemented
+    public void acceptHeaderCssDifferentType() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "  <link href='test.css' rel='stylesheet' type='text/html'>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+        loadPage2(html, getDefaultUrl());
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
         assertEquals(getExpectedAlerts()[0], acceptHeaderString());
     }
 
