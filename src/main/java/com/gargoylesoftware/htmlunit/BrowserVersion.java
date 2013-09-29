@@ -84,6 +84,9 @@ public class BrowserVersion implements Serializable, Cloneable {
     private final Set<PluginConfiguration> plugins_ = new HashSet<PluginConfiguration>();
     private final Set<BrowserVersionFeatures> features_ = EnumSet.noneOf(BrowserVersionFeatures.class);
     private final String nickname_;
+    private String htmlAcceptHeader_;
+    private String imgAcceptHeader_;
+    private String cssAcceptHeader_;
 
     /**
      * Application name for the Internet Explorer series of browsers.
@@ -201,6 +204,18 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_10.initDefaultFeatures();
         FIREFOX_17.initDefaultFeatures();
 
+        FIREFOX_3_6.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+        FIREFOX_3_6.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
+        FIREFOX_3_6.setCssAcceptHeader("text/css,*/*;q=0.1");
+        FIREFOX_10.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+        FIREFOX_10.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
+        FIREFOX_10.setCssAcceptHeader("text/css,*/*;q=0.1");
+        FIREFOX_17.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+        FIREFOX_17.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
+        FIREFOX_17.setCssAcceptHeader("text/css,*/*;q=0.1");
+
+        INTERNET_EXPLORER_8.setHtmlAcceptHeader("image/gif, image/jpeg, image/pjpeg, image/pjpeg, application/x-shockwave-flash, */*");
+
         final PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
             "Shockwave Flash 9.0 r31", "libflashplayer.so");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
@@ -274,6 +289,10 @@ public class BrowserVersion implements Serializable, Cloneable {
         userAgent_ = userAgent;
         browserVersionNumeric_ = browserVersionNumeric;
         nickname_ = nickname;
+        htmlAcceptHeader_ = "*/*";
+        imgAcceptHeader_ = "*/*";
+        cssAcceptHeader_ = "*/*";
+
         if (features != null) {
             features_.addAll(Arrays.asList(features));
         }
@@ -465,6 +484,33 @@ public class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
+     * Returns the value used by the browser for the accept header
+     * if requesting a page.
+     * @return the accept header string
+     */
+    public String getHtmlAcceptHeader() {
+        return htmlAcceptHeader_;
+    }
+
+    /**
+     * Returns the value used by the browser for the accept header
+     * if requesting an image.
+     * @return the accept header string
+     */
+    public String getImgAcceptHeader() {
+        return imgAcceptHeader_;
+    }
+
+    /**
+     * Returns the value used by the browser for the accept header
+     * if requesting a css declaration.
+     * @return the accept header string
+     */
+    public String getCssAcceptHeader() {
+        return cssAcceptHeader_;
+    }
+
+    /**
      * @param applicationCodeName the applicationCodeName to set
      */
     public void setApplicationCodeName(final String applicationCodeName) {
@@ -546,6 +592,27 @@ public class BrowserVersion implements Serializable, Cloneable {
      */
     public void setBrowserVersion(final float browserVersion) {
         browserVersionNumeric_ = browserVersion;
+    }
+
+    /**
+     * @param htmlAcceptHeader the accept header to be used when retrieving pages
+     */
+    public void setHtmlAcceptHeader(final String htmlAcceptHeader) {
+        htmlAcceptHeader_ = htmlAcceptHeader;
+    }
+
+    /**
+     * @param imgAcceptHeader the accept header to be used when retrieving images
+     */
+    public void setImgAcceptHeader(final String imgAcceptHeader) {
+        imgAcceptHeader_ = imgAcceptHeader;
+    }
+
+    /**
+     * @param cssAcceptHeader the accept header to be used when retrieving pages
+     */
+    public void setCssAcceptHeader(final String cssAcceptHeader) {
+        cssAcceptHeader_ = cssAcceptHeader;
     }
 
     /**

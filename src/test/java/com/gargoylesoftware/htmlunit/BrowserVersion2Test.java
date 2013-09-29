@@ -20,10 +20,10 @@ import java.util.Map.Entry;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Unit tests for {@link BrowserVersion}.
@@ -42,7 +42,6 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
             IE = "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, application/x-shockwave-flash, */*")
-    @NotYetImplemented
     public void acceptHeaderGetUrl() throws Exception {
         final String html = "<html><body>Response</body></html>";
         loadPage2(html, getDefaultUrl());
@@ -54,10 +53,30 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            IE = "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, application/x-shockwave-flash, */*")
+    public void acceptHeaderWindowOpen() throws Exception {
+        String html = "<html><body>Response</body></html>";
+        getMockWebConnection().setDefaultResponse(html);
+
+        html = "<html><head><title>First</title></head>\n"
+                + "<body>\n"
+                + "  <a id='clickme' href='javascript: window.open(\"" + URL_SECOND + "\")'>Click me</a>\n"
+                + "</body></html>";
+        final WebDriver driver = loadPage2(html, getDefaultUrl());
+        driver.findElement(By.id("clickme")).click();
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+        assertEquals(getExpectedAlerts()[0], acceptHeaderString());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = "Accept: image/png,image/*;q=0.8,*/*;q=0.5",
             IE = "Accept: */*",
             CHROME = "Accept: image/webp,*/*;q=0.8")
-    @NotYetImplemented(Browser.FF)
     public void acceptHeaderImage() throws Exception {
         final String html
             = "<html><head>\n"
@@ -82,7 +101,6 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Accept: text/css,*/*;q=0.1",
             IE = "Accept: */*")
-    @NotYetImplemented(Browser.FF)
     public void acceptHeaderCss() throws Exception {
         final String html
             = "<html><head>\n"
@@ -108,7 +126,6 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Accept: text/css,*/*;q=0.1",
             IE = "Accept: */*")
-    @NotYetImplemented(Browser.FF)
     public void acceptHeaderCssWithoutType() throws Exception {
         final String html
             = "<html><head>\n"
@@ -134,7 +151,6 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Accept: text/css,*/*;q=0.1",
             IE = "Accept: */*")
-    @NotYetImplemented(Browser.FF)
     public void acceptHeaderCssDifferentType() throws Exception {
         final String html
             = "<html><head>\n"

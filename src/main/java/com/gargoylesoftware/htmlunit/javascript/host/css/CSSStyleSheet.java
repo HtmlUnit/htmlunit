@@ -290,14 +290,16 @@ public class CSSStyleSheet extends SimpleScriptable {
         try {
             // Retrieve the associated content and respect client settings regarding failing HTTP status codes.
             final WebRequest request;
+            final String accept = page.getWebClient().getBrowserVersion().getCssAcceptHeader();
             final WebClient client = page.getWebClient();
             if (link != null) {
                 // Use link.
                 request = link.getWebRequest();
+                request.setAdditionalHeader("Accept", accept);
             }
             else {
                 // Use href.
-                request = new WebRequest(new URL(url));
+                request = new WebRequest(new URL(url), accept);
                 final String referer = page.getUrl().toExternalForm();
                 request.setAdditionalHeader("Referer", referer);
             }

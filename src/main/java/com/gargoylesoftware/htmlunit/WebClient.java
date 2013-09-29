@@ -373,7 +373,8 @@ public class WebClient implements Serializable {
      */
     @SuppressWarnings("unchecked")
     public <P extends Page> P getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
-        return (P) getPage(getCurrentWindow().getTopWindow(), new WebRequest(url));
+        return (P) getPage(getCurrentWindow().getTopWindow(),
+                new WebRequest(url, getBrowserVersion().getHtmlAcceptHeader()));
     }
 
     /**
@@ -781,7 +782,7 @@ public class WebClient implements Serializable {
         final HtmlPage openerPage = (HtmlPage) opener.getEnclosedPage();
         if (url != null) {
             try {
-                final WebRequest request = new WebRequest(url);
+                final WebRequest request = new WebRequest(url, getBrowserVersion().getHtmlAcceptHeader());
                 if (getBrowserVersion().hasFeature(DIALOGWINDOW_REFERER)
                         && openerPage != null) {
                     final String referer = openerPage.getUrl().toExternalForm();
@@ -910,7 +911,7 @@ public class WebClient implements Serializable {
         fireWindowOpened(new WebWindowEvent(window, WebWindowEvent.OPEN, null, null));
 
         final HtmlPage openerPage = (HtmlPage) opener.getEnclosedPage();
-        final WebRequest request = new WebRequest(url);
+        final WebRequest request = new WebRequest(url, getBrowserVersion().getHtmlAcceptHeader());
         if (getBrowserVersion().hasFeature(DIALOGWINDOW_REFERER) && openerPage != null) {
             final String referer = openerPage.getUrl().toExternalForm();
             request.setAdditionalHeader("Referer", referer);

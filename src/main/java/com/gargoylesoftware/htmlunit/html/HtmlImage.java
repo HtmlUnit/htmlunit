@@ -391,7 +391,8 @@ public class HtmlImage extends HtmlElement {
             final WebClient webclient = page.getWebClient();
 
             final URL url = page.getFullyQualifiedUrl(getSrcAttribute());
-            final WebRequest request = new WebRequest(url);
+            final String accept = getPage().getWebClient().getBrowserVersion().getImgAcceptHeader();
+            final WebRequest request = new WebRequest(url, accept);
             request.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
             imageWebResponse_ = webclient.loadWebResponse(request);
             imageReader_ = null;

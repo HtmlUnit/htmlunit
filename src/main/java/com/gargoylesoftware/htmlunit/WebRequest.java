@@ -66,11 +66,20 @@ public class WebRequest implements Serializable {
     /**
      * Instantiates a {@link WebRequest} for the specified URL.
      * @param url the target URL
+     * @param acceptHeader the accept header to use
+     */
+    public WebRequest(final URL url, final String acceptHeader) {
+        setUrl(url);
+        setAdditionalHeader("Accept", acceptHeader);
+        setAdditionalHeader("Accept-Encoding", "gzip, deflate");
+    }
+
+    /**
+     * Instantiates a {@link WebRequest} for the specified URL.
+     * @param url the target URL
      */
     public WebRequest(final URL url) {
-        setUrl(url);
-        setAdditionalHeader("Accept", "*/*");
-        setAdditionalHeader("Accept-Encoding", "gzip, deflate");
+        this(url, "*/*");
     }
 
     /**
