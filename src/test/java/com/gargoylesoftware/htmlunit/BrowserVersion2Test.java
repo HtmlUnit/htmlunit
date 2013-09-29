@@ -22,10 +22,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Unit tests for {@link BrowserVersion}.
+ * For some details on IE view you can have a look at
+ * http://blogs.msdn.com/b/ieinternals/archive/2009/07/01/ie-and-the-accept-header.aspx
  *
  * @version $Revision$
  * @author Ronald Brill
@@ -52,19 +55,20 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Accept: image/png,image/*;q=0.8,*/*;q=0.5",
-            IE = "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, application/x-shockwave-flash, */*",
+            IE = "Accept: */*",
             CHROME = "Accept: image/webp,*/*;q=0.8")
-    @NotYetImplemented
+    @NotYetImplemented(Browser.FF)
     public void acceptHeaderImage() throws Exception {
         final String html
             = "<html><head>\n"
             + "<script>\n"
-            + "  function doTest(){\n"
-            + "    alert(document.getElementById('anImage').height);\n"
+            + "  function doTest() {\n"
+            // force access
+            + "    document.getElementById('anImage').height;\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
-            + "<img src='foo.gif' id='anImage'/>\n"
+            + "  <img src='foo.gif' id='anImage'/>\n"
             + "</body></html>";
         loadPage2(html, getDefaultUrl());
 
@@ -77,14 +81,20 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Accept: text/css,*/*;q=0.1",
-            IE = "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, application/x-shockwave-flash, */*")
-    @NotYetImplemented
+            IE = "Accept: */*")
+    @NotYetImplemented(Browser.FF)
     public void acceptHeaderCss() throws Exception {
         final String html
             = "<html><head>\n"
             + "  <link href='test.css' rel='stylesheet' type='text/css'>\n"
-            + "</head>\n"
-            + "<body>\n"
+            + "<script>\n"
+            + "  function doTest() {\n"
+            // force access
+            + "    var b = document.body;\n"
+            + "    window.getComputedStyle ? window.getComputedStyle(b,null) : b.currentStyle;\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
             + "</body></html>";
         loadPage2(html, getDefaultUrl());
 
@@ -97,14 +107,20 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Accept: text/css,*/*;q=0.1",
-            IE = "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, application/x-shockwave-flash, */*")
-    @NotYetImplemented
+            IE = "Accept: */*")
+    @NotYetImplemented(Browser.FF)
     public void acceptHeaderCssWithoutType() throws Exception {
         final String html
             = "<html><head>\n"
             + "  <link href='test.css' rel='stylesheet'>\n"
-            + "</head>\n"
-            + "<body>\n"
+            + "<script>\n"
+            + "  function doTest() {\n"
+            // force access
+            + "    var b = document.body;\n"
+            + "    window.getComputedStyle ? window.getComputedStyle(b,null) : b.currentStyle;\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
             + "</body></html>";
         loadPage2(html, getDefaultUrl());
 
@@ -117,14 +133,20 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Accept: text/css,*/*;q=0.1",
-            IE = "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, application/x-shockwave-flash, */*")
-    @NotYetImplemented
+            IE = "Accept: */*")
+    @NotYetImplemented(Browser.FF)
     public void acceptHeaderCssDifferentType() throws Exception {
         final String html
             = "<html><head>\n"
             + "  <link href='test.css' rel='stylesheet' type='text/html'>\n"
-            + "</head>\n"
-            + "<body>\n"
+            + "<script>\n"
+            + "  function doTest() {\n"
+            // force access
+            + "    var b = document.body;\n"
+            + "    window.getComputedStyle ? window.getComputedStyle(b,null) : b.currentStyle;\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
             + "</body></html>";
         loadPage2(html, getDefaultUrl());
 
