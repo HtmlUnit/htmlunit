@@ -35,7 +35,9 @@ public class SvgAngleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object SVGAngle]", "0", "1", "2", "3", "4" }, IE = "undefined")
+    @Alerts(DEFAULT = { "[object SVGAngle]", "0", "1", "2", "3", "4" },
+            IE6 = "undefined",
+            IE8 = "undefined")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
