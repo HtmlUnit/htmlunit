@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Marc Guillemot
  * @author Ronald Brill
  * @author Guy Burton
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class CSSImportRuleTest extends WebDriverTestCase {
@@ -161,7 +162,8 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "true", "true", "true" })
+    @Alerts(DEFAULT = { "true", "true", "true" })
+    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void circularImportedStylesheetsComplexCase() throws Exception {
         final String html = "<html><head>\n"
             + "<link rel='stylesheet' type='text/css' href='dir1/dir2/file1.css'></link>\n"
@@ -211,7 +213,8 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("42px")
+    @Alerts(DEFAULT = "42px")
+    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void importedStylesheetsLoadedAccordingToMediaType() throws Exception {
         final String html
             = "<html><head>\n"
