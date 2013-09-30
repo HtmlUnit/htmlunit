@@ -39,7 +39,9 @@ public class SvgMpathTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object SVGMpathElement]", IE = "[object HTMLGenericElement]")
+    @Alerts(FF = "[object SVGMpathElement]",
+            IE = "[object HTMLGenericElement]",
+            IE10 = "[object SVGElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

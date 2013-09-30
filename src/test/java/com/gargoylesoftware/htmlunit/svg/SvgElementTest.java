@@ -39,7 +39,9 @@ public class SvgElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object SVGElement]", IE = "[object HTMLGenericElement]")
+    @Alerts(FF = "[object SVGElement]",
+            IE = "[object HTMLGenericElement]",
+            IE10 = "[object Element]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

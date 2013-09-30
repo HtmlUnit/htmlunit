@@ -39,7 +39,9 @@ public class SvgFeTileTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object SVGFETileElement]", IE = "[object HTMLGenericElement]")
+    @Alerts(DEFAULT = "[object SVGFETileElement]",
+            IE6 = "[object HTMLGenericElement]",
+            IE8 = "[object HTMLGenericElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

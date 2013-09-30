@@ -39,7 +39,9 @@ public class SvgTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object SVGTextElement]", IE = "[object HTMLGenericElement]")
+    @Alerts(DEFAULT = "[object SVGTextElement]",
+            IE6 = "[object HTMLGenericElement]",
+            IE8 = "[object HTMLGenericElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -70,7 +72,9 @@ public class SvgTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "16px", IE = "exception")
+    @Alerts(DEFAULT = "16px",
+            IE6 = "exception",
+            IE8 = "exception")
     public void getFontSize() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body>\n"

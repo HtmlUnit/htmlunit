@@ -39,7 +39,9 @@ public class SvgSvgTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object SVGSVGElement]", IE = "[object HTMLGenericElement]")
+    @Alerts(DEFAULT = "[object SVGSVGElement]",
+            IE6 = "[object HTMLGenericElement]",
+            IE8 = "[object HTMLGenericElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -87,7 +89,9 @@ public class SvgSvgTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "function", "function" }, IE = { "undefined", "undefined" })
+    @Alerts(DEFAULT = { "function", "function" },
+            IE6 = { "undefined", "undefined" },
+            IE8 = { "undefined", "undefined" })
     public void functions() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body>\n"
@@ -107,7 +111,9 @@ public class SvgSvgTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGMatrix]", IE = "exception")
+    @Alerts(DEFAULT = "[object SVGMatrix]",
+            IE6 = "exception",
+            IE8 = "exception")
     public void getScreenCTM() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body>\n"
