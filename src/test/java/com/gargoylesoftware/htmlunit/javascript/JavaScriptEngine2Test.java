@@ -117,8 +117,8 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"in goo", "in hoo", "in foo" },
-            FF = {"in goo", "in hoo", "foo error" })
+    @Alerts(FF = {"in goo", "in hoo", "foo error" },
+            IE = {"in goo", "in hoo", "in foo" })
     public void functionDeclaredForwardInBlock() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
@@ -145,7 +145,8 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "undefined", "foo error" },
-            IE = {"function foo() {\n}", "function foo() {\n}" })
+            IE = { "function foo() {\n}", "function foo() {\n}" },
+            IE10 = { "function foo() {}", "function foo() {}" })
     // Real IE doesn't have the extra 'new line'
     public void variableNotDefined() throws Exception {
         final String html = "<html><head></head><body>\n"
@@ -171,7 +172,9 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "[object Window]", "[object Window]", "true",
                 "[object HTMLDocument]", "[object HTMLDocument]", "true", "function" },
-            IE = { "undefined", "exception", "undefined", "exception", "function" })
+            IE = { "undefined", "exception", "undefined", "exception", "function" },
+            IE10 = { "[object Window]", "[object Window]", "true",
+                "[object Document]", "exception", "function" })
     public void constructor() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
@@ -241,7 +244,9 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "undefined", "undefined" }, DEFAULT = { "function", "function" })
+    @Alerts(DEFAULT = { "function", "function" },
+            IE6 = { "undefined", "undefined" },
+            IE8 = { "undefined", "undefined" })
     public void inline() throws Exception {
         final String html = "<html><head><script>\n"
                 + "alert(typeof Array.prototype.filter);\n"

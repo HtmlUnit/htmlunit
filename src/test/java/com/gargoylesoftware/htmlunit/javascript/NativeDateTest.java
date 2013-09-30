@@ -38,7 +38,9 @@ public class NativeDateTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "-13", "84", "109" }, IE = { "1887", "84", "2009" })
+    @Alerts(DEFAULT = { "-13", "84", "109" },
+            IE6 = { "1887", "84", "2009" },
+            IE8 = { "1887", "84", "2009" })
     public void getYear() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -89,7 +91,8 @@ public class NativeDateTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "toSource: function", DEFAULT = "toSource: undefined")
+    @Alerts(DEFAULT = "toSource: undefined",
+            FF = "toSource: function")
     public void methods_toSource() throws Exception {
         final String[] methods = {"toSource"};
         final String html = createHTMLTestMethods("new Date()", methods);
@@ -102,7 +105,8 @@ public class NativeDateTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"toISOString: function", "toJSON: function" },
-            IE = {"toISOString: undefined", "toJSON: undefined" })
+            IE6 = {"toISOString: undefined", "toJSON: undefined" },
+            IE8 = {"toISOString: undefined", "toJSON: undefined" })
     public void methods_differences() throws Exception {
         final String[] methods = {"toISOString", "toJSON"};
         final String html = createHTMLTestMethods("new Date()", methods);
@@ -170,7 +174,10 @@ public class NativeDateTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "12:00:00 AM", FF17 = "00:00:00", CHROME = "00:00:00")
+    @Alerts(DEFAULT = "12:00:00 AM",
+            CHROME = "00:00:00",
+            FF17 = "00:00:00",
+            IE10 = "00:00:00")
     public void toLocaleTimeString() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

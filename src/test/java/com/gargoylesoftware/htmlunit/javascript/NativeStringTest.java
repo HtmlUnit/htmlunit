@@ -79,9 +79,10 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "contains: undefined", "toSource: function", "trim: function" },
-            IE = { "contains: undefined", "toSource: undefined", "trim: undefined" },
-            CHROME = { "contains: undefined", "toSource: undefined", "trim: function" })
+    @Alerts(DEFAULT = { "contains: undefined", "toSource: undefined", "trim: function" },
+            FF = { "contains: undefined", "toSource: function", "trim: function" },
+            IE6 = { "contains: undefined", "toSource: undefined", "trim: undefined" },
+            IE8 = { "contains: undefined", "toSource: undefined", "trim: undefined" })
     public void methods_differences() throws Exception {
         final String[] methods = {"contains", "toSource", "trim" };
         final String html = NativeDateTest.createHTMLTestMethods("'hello'", methods);
@@ -92,7 +93,8 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE8 = "", DEFAULT = "2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "")
     public void trim() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -113,7 +115,8 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "", DEFAULT = "3")
+    @Alerts(DEFAULT = "3",
+            IE = "")
     public void trimRight() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -134,7 +137,8 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "", DEFAULT = "4")
+    @Alerts(DEFAULT = "4",
+            IE = "")
     public void trimLeft() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"

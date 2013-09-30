@@ -14,11 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -28,6 +32,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Adam Doupe
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class IEConditionalCompilationTest extends WebDriverTestCase {
@@ -72,7 +77,8 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "1", "testing @cc_on" })
-    //TODO: fails with IE8 with WebDriver, but succeeds manually
+    //TODO: fails with IE8 and IE10 with WebDriver, but succeeds manually
+    @BuggyWebDriver({ IE8, IE10 })
     public void simple4() throws Exception {
         final String script = "/*@cc_on alert(1) @*/\n"
             + "/*@if (@_win32)\n"
@@ -85,7 +91,10 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE6 = "5.6", IE7 = "5.7", IE8 = "5.8")
+    @Alerts(IE6 = "5.6",
+            IE7 = "5.7",
+            IE8 = "5.8",
+            IE10 = "10")
     public void ifTest() throws Exception {
         final String script = "/*@cc_on@if(@_jscript_version>=5){alert(@_jscript_version)}@end@*/";
         testScript(script);
@@ -95,7 +104,10 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE6 = "5.6", IE7 = "5.7", IE8 = "5.8")
+    @Alerts(IE6 = "5.6",
+            IE7 = "5.7",
+            IE8 = "5.8",
+            IE10 = "10")
     public void variables_jscript_version() throws Exception {
         final String script = "/*@cc_on alert(@_jscript_version) @*/";
         testScript(script);
@@ -105,7 +117,10 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE6 = "6626", IE7 = "5730", IE8 = "18702")
+    @Alerts(IE6 = "6626",
+            IE7 = "5730",
+            IE8 = "18702",
+            IE10 = "16660")
     public void variables_jscript_build() throws Exception {
         final String script = "/*@cc_on alert(@_jscript_build) @*/";
         testScript(script);
@@ -197,7 +212,8 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "true", FF = "false")
+    @Alerts(FF = "false",
+            IE = "true")
     public void escaping() throws Exception {
         final String script = "var isMSIE=eval('false;/*@cc_on@if(@\\x5fwin32)isMSIE=true@end@*/');\n"
             + "alert(isMSIE);";
@@ -208,7 +224,8 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "true", FF = "false")
+    @Alerts(FF = "false",
+            IE = "true")
     public void eval() throws Exception {
         final String script =
             "var isMSIE;\n"
