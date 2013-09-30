@@ -34,7 +34,10 @@ public class Int16ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "exception", FF3_6 = "exception", DEFAULT = { "[object ArrayBuffer]", "10", "0" })
+    @Alerts(DEFAULT = { "[object ArrayBuffer]", "10", "0" },
+            FF3_6 = "exception",
+            IE6 = "exception",
+            IE8 = "exception")
     public void buffer() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -58,7 +61,10 @@ public class Int16ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "exception", FF3_6 = "exception", DEFAULT = { "17", "-45", "2" })
+    @Alerts(DEFAULT = { "17", "-45", "2" },
+            FF3_6 = "exception",
+            IE6 = "exception",
+            IE8 = "exception")
     public void arrayConstructor() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -82,7 +88,10 @@ public class Int16ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "exception", FF3_6 = "exception", DEFAULT = "2")
+    @Alerts(DEFAULT = "2",
+            FF3_6 = "exception",
+            IE6 = "exception",
+            IE8 = "exception")
     public void constant() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -103,7 +112,10 @@ public class Int16ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "exception", FF3_6 = "exception", DEFAULT = { "17", "0", "-45", "-1" })
+    @Alerts(DEFAULT = { "17", "0", "-45", "-1" },
+            FF3_6 = "exception",
+            IE6 = "exception",
+            IE8 = "exception")
     public void bufferConstructor() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

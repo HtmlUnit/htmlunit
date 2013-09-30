@@ -34,7 +34,10 @@ public class Float32ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "exception", FF3_6 = "exception", DEFAULT = { "63", "-76", "-106", "73" , "79", "97", "60", "-53" })
+    @Alerts(DEFAULT = { "63", "-76", "-106", "73" , "79", "97", "60", "-53" },
+            FF3_6 = "exception",
+            IE6 = "exception",
+            IE8 = "exception")
     public void bufferConstructor() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

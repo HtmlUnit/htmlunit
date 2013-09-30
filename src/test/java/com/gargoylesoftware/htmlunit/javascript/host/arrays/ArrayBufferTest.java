@@ -34,7 +34,10 @@ public class ArrayBufferTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "exception", FF3_6 = "exception", DEFAULT = "5")
+    @Alerts(DEFAULT = "5",
+            FF3_6 = "exception",
+            IE6 = "exception",
+            IE8 = "exception")
     public void byteLength() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -56,7 +59,9 @@ public class ArrayBufferTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "exception", FF3_6 = "exception", DEFAULT = { "1234", "1234", "6789", "1234" })
+    @Alerts(DEFAULT = { "1234", "1234", "6789", "1234" },
+            FF3_6 = "exception",
+            IE = "exception")
     public void slice() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
