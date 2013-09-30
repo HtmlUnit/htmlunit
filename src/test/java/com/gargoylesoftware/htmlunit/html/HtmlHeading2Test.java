@@ -38,7 +38,9 @@ public class HtmlHeading2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLHeadingElement]", IE = "[object]")
+    @Alerts(DEFAULT = "[object HTMLHeadingElement]",
+            IE6 = "[object]",
+            IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

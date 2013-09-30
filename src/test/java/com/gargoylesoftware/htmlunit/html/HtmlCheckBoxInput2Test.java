@@ -27,6 +27,7 @@ import org.openqa.selenium.WebElement;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -36,6 +37,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Marc Guillemot
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
@@ -461,7 +463,9 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "foo,change,", IE = { })
+    @Alerts(DEFAULT = "foo,change,",
+            IE6 = { },
+            IE8 = { })
     public void onchangeFires() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -487,7 +491,8 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "foo,change,", DEFAULT = "foo,change,boo,blur,")
+    @Alerts(DEFAULT = "foo,change,boo,blur,",
+            CHROME = "foo,change,")
     @NotYetImplemented(CHROME)
     public void onchangeFires2() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
@@ -519,7 +524,9 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "First", DEFAULT = "Second")
+    @Alerts(DEFAULT = "Second",
+            IE6 = "First",
+            IE8 = "First")
     public void setChecked() throws Exception {
         final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
@@ -541,7 +548,9 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "First", "Second" }, DEFAULT = "Second")
+    @Alerts(DEFAULT = "Second",
+            IE6 = { "First", "Second" },
+            IE8 = { "First", "Second" })
     public void setChecked2() throws Exception {
         final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
@@ -559,7 +568,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
         driver.findElement(By.id("myCheckbox")).click();
         assertEquals(getExpectedAlerts()[0], driver.getTitle());
 
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER_10 != getBrowserVersion()) {
             driver.findElement(By.id("myInput")).click();
             assertEquals(getExpectedAlerts()[1], driver.getTitle());
         }
@@ -649,7 +658,8 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "on-", "on-", "on-", "on-" },
-            IE = { "on-on", "on-on", "on-on", "on-on" })
+            IE = { "on-on", "on-on", "on-on", "on-on" },
+            IE10 = { "-", "-", "-", "-" })
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -797,7 +807,9 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "changed", IE = { })
+    @Alerts(DEFAULT = "changed",
+            IE6 = { },
+            IE8 = { })
     public void clickShouldTriggerOnchange() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
                 + "<script>\n"

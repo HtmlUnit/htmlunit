@@ -189,6 +189,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "done",
+            IE10 = "done\nfocus")
     public void focusOnNonFocusableElementShouldNotTriggerDocumentFocus() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -216,8 +218,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
                 + "</script>\n"
                 + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
-        assertEquals("done", driver.findElement(By.id("log")).getAttribute("value").trim());
+        final WebDriver driver = loadPage2(html);
+        assertEquals(getExpectedAlerts()[0], driver.findElement(By.id("log")).getAttribute("value").trim());
     }
 
     /**

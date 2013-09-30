@@ -15,7 +15,8 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -87,8 +88,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1", IE = "0")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "1",
+            IE6 = "0",
+            IE8 = "0")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_applet() throws Exception {
         loadPageWithAlerts2(elementClosesItself("applet"));
     }
@@ -106,8 +109,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1", IE = "0")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "1",
+            IE6 = "0",
+            IE8 = "0")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_audio() throws Exception {
         loadPageWithAlerts2(elementClosesItself("audio"));
     }
@@ -180,7 +185,9 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1", IE = "0")
+    @Alerts(DEFAULT = "1",
+            IE6 = "0",
+            IE8 = "0")
     public void elementClosesItself_body() throws Exception {
         loadPageWithAlerts2(elementClosesItself("body"));
     }
@@ -217,8 +224,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1", IE = "0")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "1",
+            IE6 = "0",
+            IE8 = "0")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_canvas() throws Exception {
         loadPageWithAlerts2(elementClosesItself("canvas"));
     }
@@ -227,8 +236,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null", IE = "0")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "null",
+            IE6 = "0",
+            IE8 = "0")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_caption() throws Exception {
         loadPageWithAlerts2(elementClosesItself("caption"));
     }
@@ -365,7 +376,7 @@ public class HTMLElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented(IE)
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_form() throws Exception {
         loadPageWithAlerts2(elementClosesItself("form"));
     }
@@ -374,7 +385,9 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null", IE = "0")
+    @Alerts(DEFAULT = "null",
+            IE6 = "0",
+            IE8 = "0")
     @NotYetImplemented(FF)
     public void elementClosesItself_frame() throws Exception {
         loadPageWithAlerts2(elementClosesItself("frame"));
@@ -384,7 +397,9 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null", IE = "0")
+    @Alerts(DEFAULT = "null",
+            IE6 = "0",
+            IE8 = "0")
     @NotYetImplemented
     public void elementClosesItself_frameset() throws Exception {
         loadPageWithAlerts2(elementClosesItself("frameset"));
@@ -394,8 +409,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0", IE = "1")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "0",
+            IE6 = "1",
+            IE8 = "1")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_h1() throws Exception {
         loadPageWithAlerts2(elementClosesItself("h1"));
     }
@@ -404,8 +421,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0", IE = "1")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "0",
+            IE6 = "1",
+            IE8 = "1")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_h2() throws Exception {
         loadPageWithAlerts2(elementClosesItself("h2"));
     }
@@ -414,8 +433,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0", IE = "1")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "0",
+            IE6 = "1",
+            IE8 = "1")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_h3() throws Exception {
         loadPageWithAlerts2(elementClosesItself("h3"));
     }
@@ -424,8 +445,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0", IE = "1")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "0",
+            IE6 = "1",
+            IE8 = "1")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_h4() throws Exception {
         loadPageWithAlerts2(elementClosesItself("h4"));
     }
@@ -434,8 +457,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0", IE = "1")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "0",
+            IE6 = "1",
+            IE8 = "1")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_h5() throws Exception {
         loadPageWithAlerts2(elementClosesItself("h5"));
     }
@@ -444,8 +469,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0", IE = "1")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "0",
+            IE6 = "1",
+            IE8 = "1")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_h6() throws Exception {
         loadPageWithAlerts2(elementClosesItself("h6"));
     }
@@ -472,7 +499,9 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2", IE = "null")
+    @Alerts(DEFAULT = "2",
+            IE6 = "null",
+            IE8 = "null")
     @NotYetImplemented(FF)
     public void elementClosesItself_html() throws Exception {
         loadPageWithAlerts2(elementClosesItself("html"));
@@ -482,8 +511,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1", IE = "0")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "1",
+            IE6 = "0",
+            IE8 = "0")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_iframe() throws Exception {
         loadPageWithAlerts2(elementClosesItself("iframe"));
     }
@@ -556,8 +587,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1", IE = "0")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "1",
+            IE6 = "0",
+            IE8 = "0")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_legend() throws Exception {
         loadPageWithAlerts2(elementClosesItself("legend"));
     }
@@ -638,8 +671,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1", IE = "0")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "1",
+            IE6 = "0",
+            IE8 = "0")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_multicol() throws Exception {
         loadPageWithAlerts2(elementClosesItself("multicol"));
     }
@@ -658,8 +693,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1", IE = "0")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "1",
+            IE6 = "0",
+            IE8 = "0")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_noembed() throws Exception {
         loadPageWithAlerts2(elementClosesItself("noembed"));
     }
@@ -668,8 +705,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1", IE = "0")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "1",
+            IE6 = "0",
+            IE8 = "0")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_noframes() throws Exception {
         loadPageWithAlerts2(elementClosesItself("noframes"));
     }
@@ -678,7 +717,9 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1", IE = "0")
+    @Alerts(DEFAULT = "1",
+            IE6 = "0",
+            IE8 = "0")
     public void elementClosesItself_noscript() throws Exception {
         loadPageWithAlerts2(elementClosesItself("noscript"));
     }
@@ -687,8 +728,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1", IE = "null")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "1",
+            IE6 = "0",
+            IE8 = "0")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_object() throws Exception {
         loadPageWithAlerts2(elementClosesItself("object"));
     }
@@ -706,7 +749,9 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1", IE = "0")
+    @Alerts(DEFAULT = "1",
+            IE6 = "0",
+            IE8 = "0")
     @NotYetImplemented
     public void elementClosesItself_optgroup() throws Exception {
         loadPageWithAlerts2(elementClosesItself("optgroup"));
@@ -762,8 +807,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1", IE = "0")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "1",
+            IE6 = "0",
+            IE8 = "0")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_progress() throws Exception {
         loadPageWithAlerts2(elementClosesItself("progress"));
     }
@@ -790,7 +837,9 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1", IE = "0")
+    @Alerts(DEFAULT = "1",
+            IE6 = "0",
+            IE8 = "0")
     @NotYetImplemented
     public void elementClosesItself_script() throws Exception {
         loadPageWithAlerts2(elementClosesItself("script"));
@@ -828,7 +877,9 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1", IE = "0")
+    @Alerts(DEFAULT = "1",
+            IE6 = "0",
+            IE8 = "0")
     @NotYetImplemented(FF)
     public void elementClosesItself_spacer() throws Exception {
         loadPageWithAlerts2(elementClosesItself("spacer"));
@@ -865,8 +916,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1", IE = "0")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "1",
+            IE6 = "0",
+            IE8 = "0")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_style() throws Exception {
         loadPageWithAlerts2(elementClosesItself("style"));
     }
@@ -893,7 +946,9 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0", IE = "1")
+    @Alerts(DEFAULT = "0",
+            IE6 = "1",
+            IE8 = "1")
     @NotYetImplemented(FF)
     public void elementClosesItself_table() throws Exception {
         loadPageWithAlerts2(elementClosesItself("table"));
@@ -903,8 +958,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null", IE = "0")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "null",
+            IE6 = "0",
+            IE8 = "0")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_col() throws Exception {
         loadPageWithAlerts2(elementClosesItself("col"));
     }
@@ -913,8 +970,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null", IE = "0")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "null",
+            IE6 = "0",
+            IE8 = "0")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_colgroup() throws Exception {
         loadPageWithAlerts2(elementClosesItself("colgroup"));
     }
@@ -923,8 +982,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null", IE = "0")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "null",
+            IE6 = "0",
+            IE8 = "0")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_tbody() throws Exception {
         loadPageWithAlerts2(elementClosesItself("tbody"));
     }
@@ -933,8 +994,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null", IE = "0")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "null",
+            IE6 = "0",
+            IE8 = "0")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_td() throws Exception {
         loadPageWithAlerts2(elementClosesItself("td"));
     }
@@ -943,8 +1006,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null", IE = "0")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "null",
+            IE6 = "0",
+            IE8 = "0")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_th() throws Exception {
         loadPageWithAlerts2(elementClosesItself("th"));
     }
@@ -953,8 +1018,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null", IE = "0")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "null",
+            IE6 = "0",
+            IE8 = "0")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_tr() throws Exception {
         loadPageWithAlerts2(elementClosesItself("tr"));
     }
@@ -972,8 +1039,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null", IE = "0")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "null",
+            IE6 = "0",
+            IE8 = "0")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_tfoot() throws Exception {
         loadPageWithAlerts2(elementClosesItself("tfoot"));
     }
@@ -982,8 +1051,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null", IE = "0")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "null",
+            IE6 = "0",
+            IE8 = "0")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_thead() throws Exception {
         loadPageWithAlerts2(elementClosesItself("thead"));
     }
@@ -1001,7 +1072,9 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1", IE = "0")
+    @Alerts(DEFAULT = "1",
+            IE6 = "0",
+            IE8 = "0")
     @NotYetImplemented(FF)
     public void elementClosesItself_title() throws Exception {
         loadPageWithAlerts2(elementClosesItself("title"));
@@ -1038,8 +1111,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1", IE = "0")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "1",
+            IE6 = "0",
+            IE8 = "0")
+    @NotYetImplemented({ IE6, IE8 })
     public void elementClosesItself_video() throws Exception {
         loadPageWithAlerts2(elementClosesItself("video"));
     }

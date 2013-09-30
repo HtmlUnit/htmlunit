@@ -41,9 +41,9 @@ public class HtmlOption2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "oDown,sDown,dDown,oUp,sUp,dUp,",
+            CHROME = "sUp,dUp,",
             FF3_6 = "sUp,dUp,oUp,sUp,dUp,",
-            IE = "sDown,dDown,sUp,dUp,",
-            CHROME = "sUp,dUp,")
+            IE = "sDown,dDown,sUp,dUp,")
     // there seems to be a bug in selenium; for FF >= 10 this triggers
     // "sDown,dDown,sUp,dUp,oDown,sDown,dDown,oUp,sUp,dUp," but a
     // manual test shows, that this is wrong.

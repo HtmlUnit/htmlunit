@@ -40,6 +40,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -232,7 +233,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
         driver.findElement(By.name("myInput")).sendKeys(path);
         driver.findElement(By.id("mySubmit")).click();
 
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER_10 != getBrowserVersion()) {
             final Pattern pattern = Pattern
                 .compile("Content-Disposition: form-data; name=\"myInput\";"
                         + " filename=\".*test-classes[\\\\/]realm\\.properties\"");
@@ -350,7 +351,8 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "initial-initial", "initial-initial", "newDefault-newDefault", "newDefault-newDefault" },
-            IE = { "initial-initial", "initial-initial", "initial-newDefault", "initial-newDefault" })
+            IE6 = { "initial-initial", "initial-initial", "initial-newDefault", "initial-newDefault" },
+            IE8 = { "initial-initial", "initial-initial", "initial-newDefault", "initial-newDefault" })
     public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -383,7 +385,8 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "initial-initial", "initial-initial", "newDefault-newDefault", "newDefault-newDefault" },
-            IE = { "initial-initial", "initial-initial", "initial-newDefault", "initial-newDefault" })
+            IE6 = { "initial-initial", "initial-initial", "initial-newDefault", "initial-newDefault" },
+            IE8 = { "initial-initial", "initial-initial", "initial-newDefault", "initial-newDefault" })
     public void resetByJS() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

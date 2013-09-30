@@ -36,7 +36,9 @@ public class HtmlMenuTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLMenuElement]", IE = "[object]")
+    @Alerts(DEFAULT = "[object HTMLMenuElement]",
+            IE6 = "[object]",
+            IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

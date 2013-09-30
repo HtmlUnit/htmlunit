@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -23,8 +27,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 /**
  * Set of tests for ill formed HTML code.
@@ -32,6 +34,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
  * @author Marc Guillemot
  * @author Sudhan Moghe
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class MalformedHtmlTest extends WebDriverTestCase {
@@ -183,8 +186,10 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     * @throws Exception if an error occurs
     */
     @Test
-    @NotYetImplemented({ IE, FF3_6 })
-    @Alerts(FF3_6 = "1", IE = "0")
+    @Alerts(FF3_6 = "1",
+            IE6 = "0",
+            IE8 = "0")
+    @NotYetImplemented({ IE6, IE8, FF3_6 })
     public void missingSingleQuote() throws Exception {
         final String html = "<html><body>"
             + "Go to <a href='http://blah.com>blah</a> now."
@@ -198,8 +203,10 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     * @throws Exception if an error occurs
     */
     @Test
-    @NotYetImplemented({ IE, FF3_6 })
-    @Alerts(FF3_6 = "1", IE = "0")
+    @Alerts(FF3_6 = "1",
+            IE6 = "0",
+            IE8 = "0")
+    @NotYetImplemented({ IE6, IE8, FF3_6 })
     public void missingDoubleQuote() throws Exception {
         final String html = "<html><body>"
             + "Go to <a href=\"http://blah.com>blah</a> now."

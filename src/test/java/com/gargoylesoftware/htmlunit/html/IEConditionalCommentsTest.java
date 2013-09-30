@@ -36,7 +36,9 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "hello", "IE" }, DEFAULT = "hello")
+    @Alerts(DEFAULT = "hello",
+            IE = { "hello", "IE" },
+            IE10 = "hello")
     public void ifIE() throws Exception {
         final String html = "<html><head>"
             + "<script>alert('hello')</script>\n"
@@ -49,8 +51,10 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "hello", IE6 = { "hello", "IE6" }, DEFAULT = "hello")
-    public void if_lte_IE6() throws Exception {
+    @Alerts(DEFAULT = "hello",
+            IE = "hello",
+            IE6 = { "hello", "IE6" })
+    public void if_lte_IE_6() throws Exception {
         final String html = "<html><head>"
             + "<script>alert('hello')</script>\n"
             + "<!--[if lte IE 6]><script>alert('IE6')</script><![endif]-->\n"
@@ -62,7 +66,10 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "hello", "IE up to 7" }, IE8 = "hello", DEFAULT = "hello")
+    @Alerts(DEFAULT = "hello",
+            IE = "hello",
+            IE6 = { "hello", "IE up to 7" },
+            IE7 = { "hello", "IE up to 7" })
     public void if_lte_IE_7() throws Exception {
         final String html = "<html><head>"
             + "<script>alert('hello')</script>\n"
@@ -75,7 +82,55 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "hello", "lt mso 9" }, DEFAULT = "hello")
+    @Alerts(DEFAULT = "hello",
+            IE = { "hello", "IE up to 8" },
+            IE9 = "hello",
+            IE10 = "hello")
+    public void if_lte_IE_8() throws Exception {
+        final String html = "<html><head>"
+            + "<script>alert('hello')</script>\n"
+            + "<!--[if lte IE 8]><script>alert('IE up to 8')</script><![endif]-->\n"
+            + "</head><body></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "hello",
+            IE = { "hello", "IE up to 9" },
+            IE10 = "hello")
+    public void if_lte_IE_9() throws Exception {
+        final String html = "<html><head>"
+            + "<script>alert('hello')</script>\n"
+            + "<!--[if lte IE 9]><script>alert('IE up to 9')</script><![endif]-->\n"
+            + "</head><body></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "hello",
+            IE = { "hello", "IE up to 10" },
+            IE10 = "hello")
+    public void if_lte_IE_10() throws Exception {
+        final String html = "<html><head>"
+            + "<script>alert('hello')</script>\n"
+            + "<!--[if lte IE 10]><script>alert('IE up to 10')</script><![endif]-->\n"
+            + "</head><body></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "hello",
+            IE = { "hello", "lt mso 9" },
+            IE10 = "hello")
     public void if_lte_mso_9() throws Exception {
         final String html = "<html><head>"
             + "<script>alert('hello')</script>\n"
@@ -89,9 +144,10 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "<!--[if gte IE]>hello<![endif]-->", "world" },
+    @Alerts(CHROME = { "", "" },
             FF = { "undefined", "undefined" },
-            CHROME = { "", "" })
+            IE = { "<!--[if gte IE]>hello<![endif]-->", "world" },
+            IE10 = { "", "" })
     public void incorrectExpression() throws Exception {
         final String html = "<html><head></head><body>"
             + "<div id='div1'><!--[if gte IE]>hello<![endif]--></div>\n"
@@ -135,7 +191,10 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE6 = { }, IE7 = { }, IE8 = "8+", DEFAULT = "8+")
+    @Alerts(DEFAULT = "8+",
+            IE6 = { },
+            IE7 = { },
+            IE8 = "8+")
     public void downlevelRevealed1() throws Exception {
         final String html = "<html><head>"
             + "<![if gte IE 8]>\n"
@@ -149,7 +208,10 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE6 = { }, IE7 = { }, IE8 = "8+", DEFAULT = "8+")
+    @Alerts(DEFAULT = "8+",
+            IE6 = { },
+            IE7 = { },
+            IE8 = "8+")
     public void downlevelRevealed2() throws Exception {
         final String html = "<html><head>"
             + "<!--[if gte IE 8]>-->\n"
@@ -163,7 +225,10 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE6 = { }, IE7 = { }, IE8 = "8+", DEFAULT = "8+")
+    @Alerts(DEFAULT = "8+",
+            IE6 = { },
+            IE7 = { },
+            IE8 = "8+")
     public void downlevelRevealed3() throws Exception {
         final String html = "<html><head>"
             + "<!--[if gte IE 8]><!-->\n"

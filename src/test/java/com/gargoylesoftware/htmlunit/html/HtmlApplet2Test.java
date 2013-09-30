@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HtmlApplet2Test extends WebDriverTestCase {
@@ -39,7 +40,8 @@ public class HtmlApplet2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object HTMLAppletElement]", "[object HTMLAppletElement]" },
-            IE = { "[object]", "[object]" })
+            IE6 = { "[object]", "[object]" },
+            IE8 = { "[object]", "[object]" })
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

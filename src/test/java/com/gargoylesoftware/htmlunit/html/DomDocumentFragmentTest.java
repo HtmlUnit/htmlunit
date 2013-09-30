@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest;
 
 /**
  * Tests for {@link DomDocumentFragment}.
@@ -34,11 +35,13 @@ public class DomDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "<div/>", "undefined" }, DEFAULT = { "undefined", "undefined" })
+    @Alerts(DEFAULT = { "undefined", "undefined" },
+            IE6 = { "<div/>", "undefined" },
+            IE8 = { "<div/>", "undefined" })
     public void xml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
+            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
             + "    testFragment(doc);\n"
             + "    testFragment(document);\n"
             + "  }\n"
@@ -48,12 +51,7 @@ public class DomDocumentFragmentTest extends WebDriverTestCase {
             + "    fragment.appendChild(div);\n"
             + "    alert(fragment.xml);\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);

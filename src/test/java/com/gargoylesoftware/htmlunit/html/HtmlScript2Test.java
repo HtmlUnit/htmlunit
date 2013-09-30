@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,6 +37,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Daniel Wagner-Hall
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HtmlScript2Test extends WebDriverTestCase {
@@ -67,7 +69,9 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "created", "hello", "replaced" }, IE = "exception")
+    @Alerts(DEFAULT = { "created", "hello", "replaced" },
+            IE6 = "exception",
+            IE8 = "exception")
     public void addedFromDocumentFragment() throws Exception {
         final String html = "<html><body>\n"
             + "<span id='A'></span>\n"
@@ -91,7 +95,9 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLScriptElement]", IE = "[object]")
+    @Alerts(DEFAULT = "[object HTMLScriptElement]",
+            IE6 = "[object]",
+            IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -175,7 +181,9 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "deferred", "normal", "onload" }, IE = { "normal", "deferred", "onload" })
+    @Alerts(DEFAULT = { "deferred", "normal", "onload" },
+            IE6 = { "normal", "deferred", "onload" },
+            IE8 = { "normal", "deferred", "onload" })
     public void testDefer() throws Exception {
         final String html = "<html><head>\n"
             + "<script defer>alert('deferred')</script>\n"
@@ -261,8 +269,8 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Browsers({ CHROME, FF, IE10 })
     @Alerts("3")
-    @Browsers({ FF, CHROME })
     public void setTextMultipleTextNodes() throws Exception {
         final String html
             = "<html><body>\n"

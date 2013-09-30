@@ -126,6 +126,8 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = "page2.html",
+            IE10 = "")
     public void clickNestedCheckboxElement() throws Exception {
         final String html =
               "<html>\n"
@@ -139,7 +141,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
         final WebElement checkbox = driver.findElement(By.id("theCheckbox"));
         assertEquals("input", checkbox.getTagName());
         checkbox.click();
-        assertEquals(new URL(getDefaultUrl(), "page2.html").toString(), driver.getCurrentUrl());
+        assertEquals(new URL(getDefaultUrl(), getExpectedAlerts()[0]).toString(), driver.getCurrentUrl());
     }
 
     /**
@@ -166,6 +168,8 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = "page2.html",
+            IE10 = "")
     public void clickNestedInputElement() throws Exception {
         final String html =
               "<html>\n"
@@ -179,7 +183,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
         final WebElement input = driver.findElement(By.id("theInput"));
         assertEquals("input", input.getTagName());
         input.click();
-        assertEquals(new URL(getDefaultUrl(), "page2.html").toString(), driver.getCurrentUrl());
+        assertEquals(new URL(getDefaultUrl(), getExpectedAlerts()[0]).toString(), driver.getCurrentUrl());
     }
 
     /**
@@ -206,6 +210,8 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = "page2.html",
+            IE10 = "")
     public void clickNestedRadioElement() throws Exception {
         final String html =
               "<html>\n"
@@ -219,7 +225,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
         final WebElement radio = driver.findElement(By.id("theRadio"));
         assertEquals("input", radio.getTagName());
         radio.click();
-        assertEquals(new URL(getDefaultUrl(), "page2.html").toString(), driver.getCurrentUrl());
+        assertEquals(new URL(getDefaultUrl(), getExpectedAlerts()[0]).toString(), driver.getCurrentUrl());
     }
 
     /**

@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -21,7 +23,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -35,6 +36,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HtmlButton2Test extends WebDriverTestCase {
@@ -43,7 +45,9 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLButtonElement]", IE = "[object]")
+    @Alerts(DEFAULT = "[object HTMLButtonElement]",
+            IE6 = "[object]",
+            IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -66,7 +70,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "-undefined", "-undefined", "-" })
+    @Alerts({ "-undefined", "-undefined", "-" })
     public void defaultValues() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -130,7 +134,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "initial-undefined", "initial-undefined", "newValue-undefined", "newValue-undefined",
+    @Alerts({ "initial-undefined", "initial-undefined", "newValue-undefined", "newValue-undefined",
                 "newValue-newDefault", "newValue-newDefault" })
     public void resetByClick() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
@@ -169,7 +173,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "initial-undefined", "initial-undefined", "newValue-undefined", "newValue-undefined",
+    @Alerts({ "initial-undefined", "initial-undefined", "newValue-undefined", "newValue-undefined",
                 "newValue-newDefault", "newValue-newDefault" })
     public void resetByJS() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
@@ -207,7 +211,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "initial-undefined", "initial-default", "newValue-default", "newValue-newDefault" })
+    @Alerts({ "initial-undefined", "initial-default", "newValue-default", "newValue-newDefault" })
     public void defaultValue() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -237,7 +241,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "initial-OK", "newValue-OK", "newValue-OK" })
+    @Alerts({ "initial-OK", "newValue-OK", "newValue-OK" })
     public void innerHtml() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -266,7 +270,8 @@ public class HtmlButton2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "initial-undefined", "newValue-undefined", "newValue-Cancel" },
-            IE8 = { "initial-OK", "newValue-OK", "newValue-Cancel" })
+            IE8 = { "initial-OK", "newValue-OK", "newValue-Cancel" },
+            IE10 = { "initial-OK", "newValue-OK", "newValue-Cancel" })
     public void innerText() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -294,9 +299,9 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.IE8)
     @Alerts(DEFAULT = { "initial-initial-OK", "newValue-newValue-OK", "newValue-newValue-OK" },
             IE8 = { "initial-initial-OK", "newValue--OK", "newValue--OK" })
+    @NotYetImplemented(IE8)
     public void valueAttributeNode() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"

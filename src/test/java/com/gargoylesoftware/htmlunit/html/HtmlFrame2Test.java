@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.net.URL;
 import java.util.List;
@@ -28,6 +29,7 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -98,10 +100,12 @@ public class HtmlFrame2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = { "parent [object]", "second [object]", "third [object]" },
-            FF = { "second [object HTMLFormElement]", "third [object HTMLFormElement]",
-            "parent [object HTMLFormElement]" })
+    @Alerts(FF = { "second [object HTMLFormElement]", "third [object HTMLFormElement]",
+            "parent [object HTMLFormElement]" },
+            IE = { "parent [object]", "second [object]", "third [object]" },
+            IE10 = { })
     // real FF sometimes alerts 'third' before 'second'
+    // real IE10 does not know frames.XXX.document anymore
     public void postponeLoading() throws Exception {
         final String html = "<FRAMESET onload=\"alert('parent ' + window.parent.frames.third.document.frm)\">\n"
             + "  <FRAME name=second frameborder=0 src='second.html'>\n"
@@ -155,12 +159,13 @@ public class HtmlFrame2Test extends WebDriverTestCase {
         Assert.assertEquals(3, actualAlerts.size());
 
         // ignore order of frame windows
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER_10 != getBrowserVersion()) {
             // returns 'first' 'third' 'second'
             Assert.assertEquals("first", actualAlerts.get(0));
         }
         else {
-            // returns 'third' 'second' 'first'
+            // IE10 returns 'second' 'third' 'first'
+            // DEFAULT returns 'third' 'second' 'first'
             Assert.assertEquals("first", actualAlerts.get(2));
         }
     }
@@ -169,7 +174,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(IE)
+    @NotYetImplemented({ IE6, IE8 })
     public void frameOnloadFrameInFrame() throws Exception {
         final String html = "<FRAMESET rows='50%,50%' onload=\"alert('first')\">\n"
             + "  <FRAME name='second' src='second.html'>\n"
@@ -201,7 +206,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
         Assert.assertEquals(4, actualAlerts.size());
 
         // ignore order of frame windows
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER_10 != getBrowserVersion()) {
             // returns 'first' 'third' 'fourth' 'second'
             Assert.assertEquals("first", actualAlerts.get(0));
         }

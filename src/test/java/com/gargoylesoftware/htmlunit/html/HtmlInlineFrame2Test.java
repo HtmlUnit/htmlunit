@@ -22,6 +22,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -37,6 +38,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HtmlInlineFrame2Test extends WebDriverTestCase {
@@ -45,7 +47,9 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLIFrameElement]", IE = "[object]")
+    @Alerts(DEFAULT = "[object HTMLIFrameElement]",
+            IE6 = "[object]",
+            IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -71,7 +75,8 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "[object HTMLIFrameElement]", "null" },
-            IE = { "2", "[object]", "[object]" })
+            IE6 = { "2", "[object]", "[object]" },
+            IE8 = { "2", "[object]", "[object]" })
     public void selfClosingIFrame() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -149,13 +154,15 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
         // this test does not work with the current selenium driver
         // this hack is only to inform us, if selenium uses the latest htmlunit
         // then we can remove this
-        try {
-            driver.switchTo().frame("id-left");
-            Assert.fail("Switching the frame seems to work now in selenium. Please remove this code.");
-        }
-        catch (final NoSuchMethodError e) {
-            // expected, no chance to implement the test without this
-            return;
+        if (!(driver instanceof InternetExplorerDriver)) {
+            try {
+                driver.switchTo().frame("id-left");
+                Assert.fail("Switching the frame seems to work now in selenium. Please remove this code.");
+            }
+            catch (final NoSuchMethodError e) {
+                // expected, no chance to implement the test without this
+                return;
+            }
         }
         // end REMOVE ME
 

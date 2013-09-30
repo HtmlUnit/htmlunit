@@ -36,7 +36,9 @@ public class HtmlBaseTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLBaseElement]", IE = "[object]")
+    @Alerts(DEFAULT = "[object HTMLBaseElement]",
+            IE6 = "[object]",
+            IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<base id='myId' target='MyNewWindow'>\n"

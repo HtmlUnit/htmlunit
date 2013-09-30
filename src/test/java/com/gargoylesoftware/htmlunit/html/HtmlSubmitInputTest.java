@@ -39,6 +39,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HtmlSubmitInputTest extends WebDriverTestCase {
@@ -197,7 +198,8 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "-", "-", "-" },
-            IE = { "Submit Query-", "Submit Query-", "Submit Query-" })
+            IE = { "Submit Query-", "Submit Query-", "Submit Query-" },
+            IE10 = { "Submit Query-Submit Query", "Submit Query-Submit Query", "Submit Query-Submit Query" })
     public void defaultValues() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -229,7 +231,8 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "-", "-", "-" },
-            IE = { "Submit Query-", "Submit Query-", "Submit Query-" })
+            IE = { "Submit Query-", "Submit Query-", "Submit Query-" },
+            IE10 = { "Submit Query-Submit Query", "Submit Query-Submit Query", "Submit Query-Submit Query" })
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -265,7 +268,9 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
                 "newDefault-newDefault", "newDefault-newDefault" },
-            IE = { "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
+            IE6 = { "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
+                "newValue-newDefault", "newValue-newDefault" },
+            IE8 = { "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
                 "newValue-newDefault", "newValue-newDefault" })
     public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
@@ -306,7 +311,9 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
                 "newDefault-newDefault", "newDefault-newDefault" },
-            IE = { "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
+            IE6 = { "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
+                "newValue-newDefault", "newValue-newDefault" },
+            IE8 = { "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
                 "newValue-newDefault", "newValue-newDefault" })
     public void resetByJS() throws Exception {
         final String html = "<html><head><title>foo</title>\n"

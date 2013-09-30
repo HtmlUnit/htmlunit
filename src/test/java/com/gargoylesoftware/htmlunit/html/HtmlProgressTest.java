@@ -36,8 +36,10 @@ public class HtmlProgressTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLProgressElement]", FF3_6 = "[object HTMLUnknownElement]",
-            IE = "[object HTMLGenericElement]")
+    @Alerts(DEFAULT = "[object HTMLProgressElement]",
+            FF3_6 = "[object HTMLUnknownElement]",
+            IE6 = "[object HTMLGenericElement]",
+            IE8 = "[object HTMLGenericElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
             + "<script>\n"
@@ -66,7 +68,9 @@ public class HtmlProgressTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "number70", "number100" },
-            FF3_6 = { }, IE = { })
+            FF3_6 = { },
+            IE6 = { },
+            IE8 = { })
     public void properties() throws Exception {
         final String html = "<html><body>\n"
             + "<progress id='it' value='70' max='100'>70%</progress>\n"

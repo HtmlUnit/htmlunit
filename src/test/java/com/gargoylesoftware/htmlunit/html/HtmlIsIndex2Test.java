@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HtmlIsIndex2Test extends WebDriverTestCase {
@@ -40,8 +41,11 @@ public class HtmlIsIndex2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "null",
+            FF = "[object HTMLIsIndexElement]",
+            IE6 = "[object]",
+            IE8 = "[object]")
     @NotYetImplemented(Browser.FF17)
-    @Alerts(FF = "[object HTMLIsIndexElement]", FF17 = "null", IE = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

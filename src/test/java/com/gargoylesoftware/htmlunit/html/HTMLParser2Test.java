@@ -15,15 +15,16 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -34,6 +35,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Marc Guillemot
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLParser2Test extends WebDriverTestCase {
@@ -58,7 +60,8 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "beforeafter", "undefined" },
             FF3_6 = { "before", "after", "TABLE" },
-            IE = { "before", "after", "TABLE" })
+            IE6 = { "before", "after", "TABLE" },
+            IE8 = { "before", "after", "TABLE" })
     @NotYetImplemented(FF17)
     public void testHtmlTableTextAroundTD() throws Exception {
         final String html = "<html><head><title>test_Table</title>\n"
@@ -107,7 +110,8 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = "Hi!")
+    @Alerts(FF = "Hi!",
+            IE10 = "Hi!")
     @NotYetImplemented
     public void unclosedCommentsInScript() throws Exception {
         final String html = "<html><body>\n"
@@ -159,11 +163,10 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF3_6 = { "<ABBR>", "<ACRONYM>", "<CITE>", "<CODE>",
-                    "<DFN>", "<KBD>", "<LABEL>", "<SAMP>", "<VAR>" },
-            DEFAULT = { }
-    )
-    @NotYetImplemented(Browser.FF3_6)
+    @Alerts(DEFAULT = { },
+            FF3_6 = { "<ABBR>", "<ACRONYM>", "<CITE>", "<CODE>",
+                    "<DFN>", "<KBD>", "<LABEL>", "<SAMP>", "<VAR>" })
+    @NotYetImplemented(FF3_6)
     public void tableClosesInlineTags() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -229,8 +232,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(IE = { "2", "1", "2", "1", "1", "1", "2", "2", "1", "1", "1", "1" },
-            FF = { "2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2" },
+            IE6 = { "2", "1", "2", "1", "1", "1", "2", "2", "1", "1", "1", "1" },
+            IE8 = { "2", "1", "2", "1", "1", "1", "2", "2", "1", "1", "1", "1" })
     public void childNodes_p_parent() throws Exception {
         final String html = "<html><head><title>test_getChildNodes</title>\n"
             + "<script>\n"
@@ -262,8 +266,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(IE = { "2", "1", "2", "1", "1", "1", "2", "2", "1", "1", "1", "1", "1" },
-            FF = { "2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2", "3" })
+    @Alerts(DEFAULT = { "2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2", "3" },
+            IE6 = { "2", "1", "2", "1", "1", "1", "2", "2", "1", "1", "1", "1", "1" },
+            IE8 = { "2", "1", "2", "1", "1", "1", "2", "2", "1", "1", "1", "1", "1" })
     public void childNodes_f() throws Exception {
         final String html = "<html><head><title>test_getChildNodes</title>\n"
             + "<script>\n"
@@ -314,7 +319,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_abbr() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("abbr"));
     }
@@ -323,7 +330,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_acronym() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("acronym"));
     }
@@ -332,7 +341,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_a() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("a"));
     }
@@ -341,7 +352,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE6 = { "0", "0", "0", "0", "0", "0" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
     public void childNodes_address() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("address"));
     }
@@ -350,8 +363,10 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "2", "2", "1", "2", "2", "1" },
+            IE8 = { "2", "2", "1", "2", "2", "1" })
+    @NotYetImplemented({ IE6, IE8 })
     public void childNodes_applet() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("applet"));
     }
@@ -360,7 +375,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "3" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
     @NotYetImplemented
     public void childNodes_area() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("area"));
@@ -370,8 +387,10 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "2" })
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
+    @NotYetImplemented({ IE6, IE8 })
     public void childNodes_audio() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("audio"));
     }
@@ -380,8 +399,10 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "3" })
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
+    @NotYetImplemented({ IE6, IE8 })
     public void childNodes_bgsound() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("bgsound"));
     }
@@ -390,7 +411,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "2" }, FF = { "3", "2", "2", "3", "2", "3" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
+            IE6 = { "1", "1", "1", "2", "2", "2" },
+            IE8 = { "1", "1", "1", "2", "2", "2" })
     public void childNodes_base() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("base"));
     }
@@ -399,7 +422,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "3" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     @NotYetImplemented(FF)
     public void childNodes_basefont() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("basefont"));
@@ -409,7 +434,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_bdo() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("bdo"));
     }
@@ -418,7 +445,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_big() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("big"));
     }
@@ -427,7 +456,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_blink() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("blink"));
     }
@@ -436,7 +467,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE6 = { "0", "0", "0", "0", "0", "0" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
     public void childNodes_blockquote() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("blockquote"));
     }
@@ -445,7 +478,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "1", "1", "1" }, FF = { "1", "1", "1", "1", "1", "1" })
+    @Alerts(DEFAULT = { "1", "1", "1", "1", "1", "1" },
+            IE6 = { "0", "0", "0", "1", "1", "1" },
+            IE8 = { "0", "0", "0", "1", "1", "1" })
     @NotYetImplemented(FF)
     public void childNodes_body() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("body"));
@@ -455,7 +490,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_b() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("b"));
     }
@@ -464,7 +501,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "3", "3", "3" }, FF = { "4", "3", "3", "5", "4", "4" })
+    @Alerts(DEFAULT = { "4", "3", "3", "5", "4", "4" },
+            IE6 = { "2", "2", "2", "3", "3", "3" },
+            IE8 = { "2", "2", "2", "3", "3", "3" })
     @NotYetImplemented
     public void childNodes_br() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("br"));
@@ -474,8 +513,10 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "2", "2", "1", "2", "2", "1" },
+            IE8 = { "2", "2", "1", "2", "2", "1" })
+    @NotYetImplemented({ IE6, IE8 })
     public void childNodes_button() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("button"));
     }
@@ -484,8 +525,10 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "2" })
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
+    @NotYetImplemented({ IE6, IE8 })
     public void childNodes_canvas() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("canvas"));
     }
@@ -494,8 +537,10 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "1", "1", "1", "1", "1", "1" })
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = { "1", "1", "1", "1", "1", "1" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
+    @NotYetImplemented({ IE6, IE8 })
     public void childNodes_caption() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("caption"));
     }
@@ -504,7 +549,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE6 = { "0", "0", "0", "0", "0", "0" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
     public void childNodes_center() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("center"));
     }
@@ -513,7 +560,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_cite() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("cite"));
     }
@@ -522,7 +571,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_code() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("code"));
     }
@@ -531,7 +582,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_dfn() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("dfn"));
     }
@@ -540,7 +593,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE6 = { "0", "0", "0", "0", "0", "0" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
     public void childNodes_dd() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("dd"));
     }
@@ -549,7 +604,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_del() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("del"));
     }
@@ -558,7 +615,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE6 = { "0", "0", "0", "0", "0", "0" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
     public void childNodes_dir() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("dir"));
     }
@@ -567,7 +626,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE6 = { "0", "0", "0", "0", "0", "0" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
     public void childNodes_div() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("div"));
     }
@@ -576,7 +637,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE6 = { "0", "0", "0", "0", "0", "0" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
     public void childNodes_dl() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("dl"));
     }
@@ -585,7 +648,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE6 = { "0", "0", "0", "0", "0", "0" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
     public void childNodes_dt() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("dt"));
     }
@@ -594,7 +659,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "3", "3", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "3" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
+            IE6 = { "3", "3", "2", "4", "4", "3" },
+            IE8 = { "3", "3", "2", "4", "4", "3" })
     @NotYetImplemented
     public void childNodes_embed() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("embed"));
@@ -604,7 +671,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_em() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("em"));
     }
@@ -613,7 +682,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE6 = { "0", "0", "0", "0", "0", "0" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
     public void childNodes_fieldset() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("fieldset"));
     }
@@ -622,7 +693,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_font() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("font"));
     }
@@ -631,8 +704,10 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "1", "1", "1" }, FF = { "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE6 = { "1", "1", "1", "1", "1", "1" },
+            IE8 = { "1", "1", "1", "1", "1", "1" })
+    @NotYetImplemented({ IE6, IE8 })
     public void childNodes_form() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("form"));
     }
@@ -641,7 +716,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "1", "1", "1", "1", "1", "1" })
+    @Alerts(DEFAULT = { "1", "1", "1", "1", "1", "1" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
     @NotYetImplemented
     public void childNodes_frame() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("frame"));
@@ -651,7 +728,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "1", "1", "3", "3", "2" }, FF = { "1", "1", "1", "1", "1", "1" })
+    @Alerts(DEFAULT = { "1", "1", "1", "1", "1", "1" },
+            IE6 = { "2", "1", "1", "3", "3", "2" },
+            IE8 = { "2", "1", "1", "3", "3", "2" })
     @NotYetImplemented
     public void childNodes_frameset() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("frameset"));
@@ -661,7 +740,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE6 = { "0", "0", "0", "0", "0", "0" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
     public void childNodes_h1() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("h1"));
     }
@@ -670,7 +751,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE6 = { "0", "0", "0", "0", "0", "0" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
     public void childNodes_h2() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("h2"));
     }
@@ -679,7 +762,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE6 = { "0", "0", "0", "0", "0", "0" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
     public void childNodes_h3() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("h3"));
     }
@@ -688,7 +773,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE6 = { "0", "0", "0", "0", "0", "0" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
     public void childNodes_h4() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("h4"));
     }
@@ -697,7 +784,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE6 = { "0", "0", "0", "0", "0", "0" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
     public void childNodes_h5() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("h5"));
     }
@@ -706,7 +795,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE6 = { "0", "0", "0", "0", "0", "0" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
     public void childNodes_h6() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("h6"));
     }
@@ -715,7 +806,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "1", "1", "1" }, FF = { "1", "1", "1", "1", "1", "1" })
+    @Alerts(DEFAULT = { "1", "1", "1", "1", "1", "1" },
+            IE6 = { "0", "0", "0", "1", "1", "1" },
+            IE8 = { "0", "0", "0", "1", "1", "1" })
     public void childNodes_head() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("head"));
     }
@@ -724,7 +817,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE6 = { "0", "0", "0", "0", "0", "0" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
     public void childNodes_hr() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("hr"));
     }
@@ -733,7 +828,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "1", "1", "1" }, FF = { "1", "1", "1", "1", "1", "1" })
+    @Alerts(DEFAULT = { "1", "1", "1", "1", "1", "1" },
+            IE6 = { "0", "0", "0", "1", "1", "1" },
+            IE8 = { "0", "0", "0", "1", "1", "1" })
     public void childNodes_html() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("html"));
     }
@@ -742,7 +839,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "1", "1", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "1", "1", "1" },
+            IE8 = { "1", "1", "1", "1", "1", "1" })
     public void childNodes_iframe() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("iframe"));
     }
@@ -751,7 +850,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_q() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("q"));
     }
@@ -760,8 +861,10 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "3", "3", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "3" })
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
+            IE6 = { "3", "3", "2", "4", "4", "3" },
+            IE8 = { "3", "3", "2", "4", "4", "3" })
+    @NotYetImplemented({ IE6, IE8 })
     public void childNodes_img() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("img"));
     }
@@ -770,7 +873,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_ins() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("ins"));
     }
@@ -779,7 +884,8 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "1", "1", "1" }, FF = { "1", "1", "1", "1", "1", "1" })
+    @Alerts(DEFAULT = { "1", "1", "1", "1", "1", "1" },
+            IE10 = { "1", "0", "1", "1", "0", "1" })
     @NotYetImplemented(FF)
     public void childNodes_isindex() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("isindex"));
@@ -789,7 +895,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_i() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("i"));
     }
@@ -798,7 +906,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_kbd() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("kbd"));
     }
@@ -807,7 +917,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_label() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("label"));
     }
@@ -816,7 +928,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
     @NotYetImplemented
     public void childNodes_legend() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("legend"));
@@ -826,7 +940,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE6 = { "0", "0", "0", "0", "0", "0" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
     public void childNodes_listing() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("listing"));
     }
@@ -835,7 +951,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE6 = { "0", "0", "0", "0", "0", "0" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
     public void childNodes_li() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("li"));
     }
@@ -844,8 +962,10 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "3" })
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
+    @NotYetImplemented({ IE6, IE8 })
     public void childNodes_link() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("link"));
     }
@@ -854,7 +974,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_map() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("map"));
     }
@@ -863,7 +985,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "1", "1", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "1", "1", "1" },
+            IE8 = { "1", "1", "1", "1", "1", "1" })
     public void childNodes_marquee() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("marquee"));
     }
@@ -872,7 +996,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE6 = { "0", "0", "0", "0", "0", "0" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
     public void childNodes_menu() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("menu"));
     }
@@ -881,8 +1007,10 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "3" })
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
+    @NotYetImplemented({ IE6, IE8 })
     public void childNodes_meta() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("meta"));
     }
@@ -891,8 +1019,10 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "2" })
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
+    @NotYetImplemented({ IE6, IE8 })
     public void childNodes_meter() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("meter"));
     }
@@ -901,8 +1031,10 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "2" })
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
+    @NotYetImplemented({ IE6, IE8 })
     public void childNodes_multicol() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("multicol"));
     }
@@ -911,7 +1043,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_nobr() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("nobr"));
     }
@@ -920,7 +1054,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "1", "1", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "1", "1", "1" },
+            IE8 = { "1", "1", "1", "1", "1", "1" })
     public void childNodes_noembed() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("noembed"));
     }
@@ -929,7 +1065,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "1", "1", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "1", "1", "1" },
+            IE8 = { "1", "1", "1", "1", "1", "1" })
     public void childNodes_noframes() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("noframes"));
     }
@@ -938,7 +1076,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "1", "1", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "1", "1", "1" },
+            IE8 = { "1", "1", "1", "1", "1", "1" })
     public void childNodes_noscript() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("noscript"));
     }
@@ -947,7 +1087,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "1", "1", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "1", "1", "1" },
+            IE8 = { "1", "1", "1", "1", "1", "1" })
     public void childNodes_object() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("object"));
     }
@@ -956,7 +1098,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE6 = { "0", "0", "0", "0", "0", "0" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
     public void childNodes_ol() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("ol"));
     }
@@ -965,7 +1109,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
     @NotYetImplemented
     public void childNodes_optgroup() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("optgroup"));
@@ -975,7 +1121,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
     @NotYetImplemented
     public void childNodes_option() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("option"));
@@ -985,7 +1133,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE6 = { "0", "0", "0", "0", "0", "0" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
     public void childNodes_p() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("p"));
     }
@@ -994,7 +1144,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "3" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
     @NotYetImplemented
     public void childNodes_param() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("param"));
@@ -1004,7 +1156,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0" }, FF = { "1" })
+    @Alerts(DEFAULT = { "1" },
+            IE6 = { "0" },
+            IE8 = { "0" })
     @NotYetImplemented
     public void childNodes_plaintext() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("plaintext"));
@@ -1014,7 +1168,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE6 = { "0", "0", "0", "0", "0", "0" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
     public void childNodes_pre() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("pre"));
     }
@@ -1023,8 +1179,10 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "2" })
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
+    @NotYetImplemented({ IE6, IE8 })
     public void childNodes_progress() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("progress"));
     }
@@ -1033,7 +1191,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_s() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("s"));
     }
@@ -1042,7 +1202,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_samp() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("samp"));
     }
@@ -1051,7 +1213,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "1", "1", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "1", "1", "1" },
+            IE8 = { "1", "1", "1", "1", "1", "1" })
     @NotYetImplemented
     public void childNodes_script() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("script"));
@@ -1061,8 +1225,10 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "2", "2", "1", "2", "2", "1" },
+            IE8 = { "2", "2", "1", "2", "2", "1" })
+    @NotYetImplemented({ IE6, IE8 })
     public void childNodes_select() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("select"));
     }
@@ -1071,7 +1237,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_small() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("small"));
     }
@@ -1080,7 +1248,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "3" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
     @NotYetImplemented
     public void childNodes_source() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("source"));
@@ -1090,7 +1260,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
     @NotYetImplemented
     public void childNodes_spacer() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("spacer"));
@@ -1100,7 +1272,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_span() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("span"));
     }
@@ -1109,7 +1283,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_strike() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("strike"));
     }
@@ -1118,7 +1294,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_strong() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("strong"));
     }
@@ -1127,7 +1305,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "1", "1", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "1", "1", "1" },
+            IE8 = { "1", "1", "1", "1", "1", "1" })
     public void childNodes_style() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("style"));
     }
@@ -1136,7 +1316,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_sub() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("sub"));
     }
@@ -1145,7 +1327,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_sup() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("sup"));
     }
@@ -1154,7 +1338,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "1", "1", "1" }, FF = { "3", "2", "2", "3", "3", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "3", "2" },
+            IE6 = { "1", "1", "1", "1", "1", "1" },
+            IE8 = { "1", "1", "1", "1", "1", "1" })
     @NotYetImplemented(FF)
     public void childNodes_table() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("table"));
@@ -1164,8 +1350,10 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "1", "1", "1", "1", "1", "1" })
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = { "1", "1", "1", "1", "1", "1" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
+    @NotYetImplemented({ IE6, IE8 })
     public void childNodes_col() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("col"));
     }
@@ -1174,8 +1362,10 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "1", "1", "1", "1", "1", "1" })
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = { "1", "1", "1", "1", "1", "1" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
+    @NotYetImplemented({ IE6, IE8 })
     public void childNodes_colgroup() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("colgroup"));
     }
@@ -1184,8 +1374,10 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "1", "1", "1", "1", "1", "1" })
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = { "1", "1", "1", "1", "1", "1" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
+    @NotYetImplemented({ IE6, IE8 })
     public void childNodes_tbody() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("tbody"));
     }
@@ -1194,8 +1386,10 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "1", "1", "1", "1", "1", "1" })
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = { "1", "1", "1", "1", "1", "1" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
+    @NotYetImplemented({ IE6, IE8 })
     public void childNodes_td() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("td"));
     }
@@ -1204,8 +1398,10 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "1", "1", "1", "1", "1", "1" })
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = { "1", "1", "1", "1", "1", "1" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
+    @NotYetImplemented({ IE6, IE8 })
     public void childNodes_th() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("th"));
     }
@@ -1214,8 +1410,10 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "1", "1", "1", "1", "1", "1" })
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = { "1", "1", "1", "1", "1", "1" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
+    @NotYetImplemented({ IE6, IE8 })
     public void childNodes_tr() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("tr"));
     }
@@ -1224,8 +1422,10 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "2", "2", "1", "2", "2", "1" },
+            IE8 = { "2", "2", "1", "2", "2", "1" })
+    @NotYetImplemented({ IE6, IE8 })
     public void childNodes_textarea() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("textarea"));
     }
@@ -1234,8 +1434,10 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "1", "1", "1", "1", "1", "1" })
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = { "1", "1", "1", "1", "1", "1" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
+    @NotYetImplemented({ IE6, IE8 })
     public void childNodes_tfoot() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("tfoot"));
     }
@@ -1244,8 +1446,10 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "1", "1", "1", "1", "1", "1" })
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = { "1", "1", "1", "1", "1", "1" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
+    @NotYetImplemented({ IE6, IE8 })
     public void childNodes_thead() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("thead"));
     }
@@ -1254,7 +1458,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_tt() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("tt"));
     }
@@ -1263,7 +1469,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "0", "0", "0", "0", "0", "0" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
     @NotYetImplemented(FF)
     public void childNodes_title() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("title"));
@@ -1273,7 +1481,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_u() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("u"));
     }
@@ -1282,7 +1492,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE6 = { "0", "0", "0", "0", "0", "0" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
     public void childNodes_ul() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("ul"));
     }
@@ -1291,7 +1503,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "1", "1", "1", "2", "2", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_var() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("var"));
     }
@@ -1300,8 +1514,10 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "2" })
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
+    @NotYetImplemented({ IE6, IE8 })
     public void childNodes_video() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("video"));
     }
@@ -1310,8 +1526,10 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "3" })
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
+            IE6 = { "2", "2", "2", "4", "4", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
+    @NotYetImplemented({ IE6, IE8 })
     public void childNodes_wbr() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("wbr"));
     }
@@ -1320,7 +1538,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE6 = { "0", "0", "0", "0", "0", "0" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
     public void childNodes_xmp() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("xmp"));
     }
@@ -1331,8 +1551,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "<!--[if gt IE 11]><br><![endif]-->", "<!--[if lt IE 11]><br><![endif]-->" },
-            IE = { "", "<BR>" })
-    @NotYetImplemented(IE)
+            IE6 = { "", "<BR>" },
+            IE8 = { "", "<BR>" })
+    @NotYetImplemented({ IE6, IE8 })
     public void ieConditionalCommentsNotInDom() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

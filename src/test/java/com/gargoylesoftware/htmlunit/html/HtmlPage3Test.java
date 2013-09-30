@@ -99,9 +99,10 @@ public class HtmlPage3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "undefined", "undefined", "iso-8859-1", "windows-1252" },
+    @Alerts(CHROME = { "ISO-8859-1", "ISO-8859-1", "ISO-8859-1", "ISO-8859-1" },
             FF = { "ISO-8859-1", "ISO-8859-1", "undefined", "undefined" },
-            CHROME = { "ISO-8859-1", "ISO-8859-1", "ISO-8859-1", "ISO-8859-1" })
+            IE = { "undefined", "undefined", "iso-8859-1", "windows-1252" },
+            IE10 = { "ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252" })
     public void getPageEncoding() throws Exception {
         final String htmlContent = "<html><head>\n"
             + "  <title>foo</title>\n"
