@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,7 +39,8 @@ public class DOMParserTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "4", FF = "9")
+    @Alerts(FF = "9",
+            IE = "4")
     public void parseFromString() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -117,7 +119,7 @@ public class DOMParserTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(FF)
+    @Browsers({ FF, IE10 })
     @Alerts({ "5", "[object CDATASection]", "[object Comment]", "[object Element]", "[object ProcessingInstruction]",
         "[object Text]" })
     public void parseFromString_processingInstructionKept() throws Exception {

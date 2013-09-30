@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,7 +42,8 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "HTML 1.0: true", "HTML 2.0: true", "HTML 3.0: false" },
-            IE = { "HTML 1.0: true", "HTML 2.0: false", "HTML 3.0: false" })
+            IE6 = { "HTML 1.0: true", "HTML 2.0: false", "HTML 3.0: false" },
+            IE8 = { "HTML 1.0: true", "HTML 2.0: false", "HTML 3.0: false" })
     public void hasFeature_HTML() throws Exception {
         hasFeature("HTML", "['1.0', '2.0', '3.0']");
     }
@@ -51,7 +53,8 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "XML 1.0: true", "XML 2.0: true", "XML 3.0: false" },
-            IE = { "XML 1.0: false", "XML 2.0: false", "XML 3.0: false" })
+            IE6 = { "XML 1.0: false", "XML 2.0: false", "XML 3.0: false" },
+            IE8 = { "XML 1.0: false", "XML 2.0: false", "XML 3.0: false" })
     public void hasFeature_XML() throws Exception {
         hasFeature("XML", "['1.0', '2.0', '3.0']");
     }
@@ -93,7 +96,10 @@ public class DOMImplementationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0: true",
                 "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.1: true",
                 "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: false" },
-            IE = { "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0: false",
+            IE6 = { "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0: false",
+                "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.1: false",
+                "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: false" },
+            IE8 = { "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0: false",
                 "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.1: false",
                 "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: false" })
     public void hasFeature_SVG_BasicStructure() throws Exception {
@@ -107,7 +113,10 @@ public class DOMImplementationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "http://www.w3.org/TR/SVG11/feature#Shape 1.0: true",
                 "http://www.w3.org/TR/SVG11/feature#Shape 1.1: true",
                 "http://www.w3.org/TR/SVG11/feature#Shape 1.2: false" },
-            IE = { "http://www.w3.org/TR/SVG11/feature#Shape 1.0: false",
+            IE6 = { "http://www.w3.org/TR/SVG11/feature#Shape 1.0: false",
+                "http://www.w3.org/TR/SVG11/feature#Shape 1.1: false",
+                "http://www.w3.org/TR/SVG11/feature#Shape 1.2: false" },
+            IE8 = { "http://www.w3.org/TR/SVG11/feature#Shape 1.0: false",
                 "http://www.w3.org/TR/SVG11/feature#Shape 1.1: false",
                 "http://www.w3.org/TR/SVG11/feature#Shape 1.2: false" })
     public void hasFeature_SVG_Shape() throws Exception {
@@ -136,8 +145,9 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, CHROME })
-    @Alerts(FF = "[object XMLDocument]", CHROME = "[object Document]")
+    @Browsers({ CHROME, FF, IE10 })
+    @Alerts(DEFAULT = "[object Document]",
+            FF = "[object XMLDocument]")
     @NotYetImplemented(CHROME)
     public void createDocument() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -154,7 +164,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, CHROME })
+    @Browsers({ FF, CHROME, IE10 })
     @Alerts("mydoc")
     public void createDocument_qualifiedName() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
