@@ -62,10 +62,17 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         assertEquals(null, lastRequest.getProxyHost());
         assertEquals(null, lastRequest.getRequestBody());
         assertEquals(getDefaultUrl() + "foo", lastRequest.getUrl());
-        final String expectedHeaders = "Connection: keep-alive\n"
+        String expectedHeaders = "";
+        if (getBrowserVersion() == BrowserVersion.INTERNET_EXPLORER_10) {
+            expectedHeaders += "Cache-Control: no-cache\n";
+        }
+        expectedHeaders += "Connection: keep-alive\n"
             + "Content-Length: 48\n"
-            + "Content-Type: application/x-www-form-urlencoded\n"
-            + "Host: localhost:" + PORT + "\n"
+            + "Content-Type: application/x-www-form-urlencoded\n";
+        if (getBrowserVersion() == BrowserVersion.INTERNET_EXPLORER_10) {
+            expectedHeaders += "DNT: 1\n";
+        }
+        expectedHeaders += "Host: localhost:" + PORT + "\n"
             + "Referer: http://localhost:" + PORT + "/\n"
             + "User-Agent: " + getBrowserVersion().getUserAgent() + "\n";
         assertEquals(expectedHeaders, headersToString(lastRequest));

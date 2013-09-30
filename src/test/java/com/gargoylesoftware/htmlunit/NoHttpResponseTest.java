@@ -70,11 +70,12 @@ public class NoHttpResponseTest {
          * @throws Exception if the test fails
          */
         @Test
+        // TODO [IE10] does not run in real IE10 (browser waits for a looooooong time)
         public void callSubmitInButtonAndReturnTrue() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(getDefaultUrl(), html);
             MiniServer.configureDropConnection(mockWebConnection, new URL(getDefaultUrl() + "page2?textfield="));
-            final URL urlRightSubmit =  new URL(getDefaultUrl() + "page2?textfield=new+value");
+            final URL urlRightSubmit = new URL(getDefaultUrl() + "page2?textfield=new+value");
             mockWebConnection.setResponse(urlRightSubmit, "<html><head><title>right submit</title></head></html>");
 
             final WebDriver driver = getWebDriver();

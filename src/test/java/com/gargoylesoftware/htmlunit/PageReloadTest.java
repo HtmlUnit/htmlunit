@@ -33,6 +33,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 
 /**
@@ -73,8 +74,10 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
+    @Alerts(DEFAULT = "",
+            IE10 = "#")
     public void link_url_emptyHash() throws Exception {
-        openUrlAndClickById(RELOAD_URL, "linkEmptyHash", 0, PATHNAME, "");
+        openUrlAndClickById(RELOAD_URL, "linkEmptyHash", 0, PATHNAME, getExpectedAlerts()[0]);
     }
 
     /**
@@ -229,8 +232,10 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
+    @Alerts(DEFAULT = "",
+            IE10 = "#")
     public void javascript_url_emptyHash() throws Exception {
-        openUrlAndClickById(RELOAD_URL, "javascriptEmptyHash", 0, PATHNAME, "");
+        openUrlAndClickById(RELOAD_URL, "javascriptEmptyHash", 0, PATHNAME, getExpectedAlerts()[0]);
     }
 
     /**
@@ -367,8 +372,10 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
+    @Alerts(DEFAULT = "0",
+            IE10 = "1")
     public void submitGet_url_emptyHash() throws Exception {
-        openUrlAndClickById(RELOAD_URL, "submitGetEmptyHash", 0, PATHNAME, "");
+        openUrlAndClickById(RELOAD_URL, "submitGetEmptyHash", Integer.parseInt(getExpectedAlerts()[0]), PATHNAME, "");
     }
 
     /**
@@ -613,8 +620,10 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
+    @Alerts(DEFAULT = "",
+            IE10 = "#")
     public void submitPost_url_emptyHash() throws Exception {
-        openUrlAndClickById(RELOAD_URL, "submitPostEmptyHash", 1, PATHNAME, "");
+        openUrlAndClickById(RELOAD_URL, "submitPostEmptyHash", 1, PATHNAME, getExpectedAlerts()[0]);
     }
 
     /**
@@ -759,8 +768,10 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
+    @Alerts(DEFAULT = "0",
+            IE10 = "1")
     public void jsSubmitGet_url_emptyHash() throws Exception {
-        openUrlAndClickById(RELOAD_URL, "jsSubmitGetEmptyHash", 0, PATHNAME, "");
+        openUrlAndClickById(RELOAD_URL, "jsSubmitGetEmptyHash", Integer.parseInt(getExpectedAlerts()[0]), PATHNAME, "");
     }
 
     /**
@@ -1006,8 +1017,10 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
+    @Alerts(DEFAULT = "",
+            IE10 = "#")
     public void jsSubmitPost_url_EmptyHash() throws Exception {
-        openUrlAndClickById(RELOAD_URL, "jsSubmitPostEmptyHash", 1, PATHNAME, "");
+        openUrlAndClickById(RELOAD_URL, "jsSubmitPostEmptyHash", 1, PATHNAME, getExpectedAlerts()[0]);
     }
 
     /**

@@ -49,6 +49,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * Regression test for bug 2822048: a 302 redirect without Location header.
      * @throws Exception if an error occurs
      */
+    // TODO [IE10]ERRORPAGE real IE10 displays his own error page (res://ieframe.dll/dnserror.htm#<url>)
     @Test
     public void redirect302WithoutLocation() throws Exception {
         final String html = "<html><body><a href='page2'>to redirect</a></body></html>";
@@ -233,7 +234,8 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts ({ "open", "first", "second" })
-    public void windowOpendByAnchorTargetIsAttachedToJavascriptEventLoop() throws Exception {
+    // TODO [IE10]MODALPANEL real IE10 opens a modal panel 'really close window?' which webdriver cannot handle
+    public void windowOpenedByAnchorTargetIsAttachedToJavascriptEventLoop() throws Exception {
         final String firstContent = "<html>"
             + "<head>"
             + "<script type='text/javascript'>"
@@ -277,7 +279,8 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts ({ "open", "first", "second" })
-    public void windowOpendByFormTargetIsAttachedToJavascriptEventLoop() throws Exception {
+    // TODO [IE10]MODALPANEL real IE10 opens a modal panel 'really close window?' which webdriver cannot handle
+    public void windowOpenedByFormTargetIsAttachedToJavascriptEventLoop() throws Exception {
         final String firstContent = "<html>"
             + "<head>"
             + "<script type='text/javascript'>"
@@ -323,7 +326,7 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts ({ "open", "first", "second" })
-    public void windowOpendByJavascriptIsAttachedToJavascriptEventLoop() throws Exception {
+    public void windowOpenedByJavascriptIsAttachedToJavascriptEventLoop() throws Exception {
         final String firstContent = "<html>"
             + "<head>"
             + "<script type='text/javascript'>"
@@ -368,7 +371,7 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts ({ "open", "first", "second" })
-    public void windowOpendByJavascriptFilledByFormTargetIsAttachedToJavascriptEventLoop() throws Exception {
+    public void windowOpenedByJavascriptFilledByFormTargetIsAttachedToJavascriptEventLoop() throws Exception {
         final String firstContent = "<html>"
             + "<head>"
             + "<script type='text/javascript'>"
@@ -415,16 +418,17 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts ({ "Executed", "later" })
+    // TODO [IE10]ERRORPAGE real IE10 displays own error page if response is to small
     public void execJavascriptOnErrorPages() throws Exception {
-        final String errorHtml = "<html>"
-                + "<head>"
-                + "</head>"
-                + "<body>"
-                + "<script type='text/javascript'>"
-                + "  alert('Executed');"
-                + "  setTimeout(\"alert('later')\", 10);"
-                + "</script>"
-                + "</body></html>";
+        final String errorHtml = "<html>\n"
+                + "<head>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "<script type='text/javascript'>\n"
+                + "  alert('Executed');\n"
+                + "  setTimeout(\"alert('later')\", 10);\n"
+                + "</script>\n"
+                + "</body></html>\n";
 
         final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(URL_FIRST, errorHtml, 404, "Not Found", "text/html", new ArrayList<NameValuePair>());
@@ -457,6 +461,7 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("modified")
+    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void deflateCompressionGZipCompatible() throws Exception {
         doTestDeflateCompression(true);
     }
@@ -466,7 +471,8 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("modified")
+    @Alerts(DEFAULT = "modified",
+            IE10 = "Hello world")
     public void deflateCompressionNonGZipCompatible() throws Exception {
         doTestDeflateCompression(false);
     }
