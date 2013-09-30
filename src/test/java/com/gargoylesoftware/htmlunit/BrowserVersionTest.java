@@ -47,7 +47,7 @@ public class BrowserVersionTest extends SimpleWebTestCase {
      */
     @Test
     public void testClone() {
-        final BrowserVersion ff = BrowserVersion.FIREFOX_3_6;
+        final BrowserVersion ff = BrowserVersion.FIREFOX_17;
         final BrowserVersion clone = ff.clone();
 
         assertFalse(ff == clone);

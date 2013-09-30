@@ -696,6 +696,10 @@ public class BrowserVersion implements Serializable, Cloneable {
         clone.setSystemLanguage(getSystemLanguage());
         clone.setUserLanguage(getUserLanguage());
 
+        clone.htmlAcceptHeader_ = getHtmlAcceptHeader();
+        clone.imgAcceptHeader_ = getImgAcceptHeader();
+        clone.cssAcceptHeader_ = getCssAcceptHeader();
+
         for (final PluginConfiguration pluginConf : getPlugins()) {
             clone.getPlugins().add(pluginConf.clone());
         }
