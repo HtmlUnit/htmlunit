@@ -76,40 +76,42 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * Sample:
  * <pre>
    browsers=hu,ff17,ie9
+   ie.bin=C:\\path\\to\\32bit\\IEDriverServer.exe       [Windows]
    ff3.6.bin=c:\\location_to_firefox.exe                [Windows]
    ff17.bin=/usr/bin/firefox                            [Unix-like]
    chrome.bin=/path/to/chromedriver                     [Unix-like]
  * </pre>
- * The file should contain four properties: "browsers", "ff3.6.bin", "ff17.bin", and "chrome.bin".
+ * The file should contain four properties: "browsers", "ie.bin", "ff3.6.bin", "ff17.bin", and "chrome.bin".
  * <ul>
  *   <li>browsers: is a comma separated list contains any combination of "hu" (for HtmlUnit with all browser versions),
  *   "hu-ie6", "hu-ie7", "hu-ie8", "hu-ie9", "hu-ff3.6", "hu-ff17",
  *   "ff3.6", "ff17", "ie6", "ie7", "ie8", "ie9", "chrome", which will be used to driver real browsers,
  *   note that you can't define more than one IE as there is no standard way
  *   to have multiple IEs on the same machine</li>
+ *   <li>ie.bin: is the location of the IEDriverServer binary (see
+ *   <a href="http://code.google.com/p/selenium/downloads/list">IEDriverServer downloads</a></li>
  *   <li>ff3.6.bin: is the location of the FF3.6 binary, in Windows use double back-slashes</li>
  *   <li>ff17.bin: is the location of the FF17 binary, in Windows use double back-slashes</li>
  *   <li>chrome.bin: is the location of the ChromeDriver binary (see
  *   <a href="http://code.google.com/p/chromedriver/downloads/list">Chrome Driver downloads</a></li>
  * </ul>
  * </p>
- * <p>For IE, please download <a href="http://code.google.com/p/selenium/downloads/list">IEDriverServer.exe</a>
- * and add it to the path.</p>
  *
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 public abstract class WebDriverTestCase extends WebTestCase {
 
     private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
 
     private static List<String> BROWSERS_PROPERTIES_;
+    private static String IE_BIN_;
     private static String FF3_6_BIN_;
     private static String FF10_BIN_;
     private static String FF17_BIN_;
-    private static String IE_BIN_;
     private static String CHROME_BIN_;
 
     /** The driver cache. */
