@@ -42,7 +42,8 @@ public class HtmlIsIndex2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            FF = "[object HTMLIsIndexElement]",
+            FF3_6 = "[object HTMLIsIndexElement]",
+            FF10 = "[object HTMLIsIndexElement]",
             IE6 = "[object]",
             IE8 = "[object]")
     @NotYetImplemented(Browser.FF17)
