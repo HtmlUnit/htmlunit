@@ -35,9 +35,163 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Chuck Dumont
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class XMLDocumentTest extends WebDriverTestCase {
+
+    private static final String CREATE_XML_DOCUMENT_FUNCTION_NAME = "createXMLDocument";
+
+    /** Helper. **/
+    public static final String CREATE_XML_DOCUMENT_FUNCTION = ""
+            + "  function " + CREATE_XML_DOCUMENT_FUNCTION_NAME + "() {\n"
+            + "    if (document.implementation && document.implementation.createDocument) {\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    } else if (window.ActiveXObject) {\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "    }\n"
+            + "  }\n";
+
+    /** Helper. **/
+    public static final String CREATE_NATIVE_XML_DOCUMENT_FUNCTION = ""
+            + "  function " + CREATE_XML_DOCUMENT_FUNCTION_NAME + "() {\n"
+            + "    return document.implementation.createDocument('', '', null);\n"
+            + "  }\n";
+
+    /** Helper. **/
+    public static final String CREATE_ACTIVEX_XML_DOCUMENT_FUNCTION = ""
+            + "  function " + CREATE_XML_DOCUMENT_FUNCTION_NAME + "() {\n"
+            + "    return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n";
+
+    /**
+     * Helper.
+     * @return xml helper
+     **/
+    public static String callCreateXMLDocument() {
+        return CREATE_XML_DOCUMENT_FUNCTION_NAME + "()";
+    }
+
+    private static final String LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION_NAME = "loadXMLDocumentFromFile";
+
+    /** Helper. **/
+    public static final String LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION = ""
+            + "  function " + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION_NAME + "(file) {\n"
+            + "    if (window.XMLHttpRequest) {\n"
+            + "      xhttp = new XMLHttpRequest();\n"
+            + "    } else {\n"
+            + "      xhttp = new ActiveXObject(\"Microsoft.XMLHTTP\");\n"
+            + "    }\n"
+            + "    xhttp.open(\"GET\", file, false);\n"
+            + "    xhttp.send();\n"
+            + "    return xhttp.responseXML;\n"
+            + "  }\n";
+
+    /** Helper. **/
+    public static final String LOAD_NATIVE_XML_DOCUMENT_FROM_FILE_FUNCTION = ""
+            + "  function " + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION_NAME + "(file) {\n"
+            + "    xhttp = new XMLHttpRequest();\n"
+            + "    xhttp.open(\"GET\", file, false);\n"
+            + "    xhttp.send();\n"
+            + "    return xhttp.responseXML;\n"
+            + "  }\n";
+
+    /** Helper. **/
+    public static final String LOAD_ACTIVEX_XML_DOCUMENT_FROM_FILE_FUNCTION = ""
+            + "  function " + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION_NAME + "(file) {\n"
+            + "    xhttp = new ActiveXObject(\"Microsoft.XMLHTTP\");\n"
+            + "    xhttp.open(\"GET\", file, false);\n"
+            + "    xhttp.send();\n"
+            + "    return xhttp.responseXML;\n"
+            + "  }\n";
+
+    /**
+     * Helper.
+     * @param file the file parameter
+     * @return xml helper
+     **/
+    public static String callLoadXMLDocumentFromFile(final String file) {
+        return LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION_NAME + "(" + file + ")";
+    }
+
+    private static final String LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION_NAME = "loadXMLDocumentFromString";
+
+    /**
+     * Helper.
+     * @return xml helper
+     **/
+    public static final String LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION = ""
+            + "  function " + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION_NAME + "(xml) {\n"
+            + "    if (window.DOMParser) {\n"
+            + "      parser = new DOMParser();\n"
+            + "      return parser.parseFromString(xml,\"text/xml\");\n"
+            + "    } else {\n"
+            + "      xmlDoc = new ActiveXObject(\"Microsoft.XMLDOM\");\n"
+            + "      xmlDoc.async = false;\n"
+            + "      xmlDoc.loadXML(xml);\n"
+            + "      return xmlDoc;"
+            + "    }\n"
+            + "  }\n";
+
+    /** Helper. **/
+    public static final String LOAD_NATIVE_XML_DOCUMENT_FROM_STRING_FUNCTION = ""
+            + "  function " + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION_NAME + "(xml) {\n"
+            + "    parser = new DOMParser();\n"
+            + "    return parser.parseFromString(xml,\"text/xml\");\n"
+            + "  }\n";
+
+    /** Helper. **/
+    public static final String LOAD_ACTIVEX_XML_DOCUMENT_FROM_STRING_FUNCTION = ""
+            + "  function " + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION_NAME + "(xml) {\n"
+            + "    xmlDoc = new ActiveXObject(\"Microsoft.XMLDOM\");\n"
+            + "    xmlDoc.async = false;\n"
+            + "    xmlDoc.loadXML(xml);\n"
+            + "    return xmlDoc;"
+            + "  }\n";
+
+    /**
+     * Helper.
+     * @param string the parameter
+     * @return xml helper
+     **/
+    public static String callLoadXMLDocumentFromString(final String string) {
+        return LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION_NAME + "(" + string + ")";
+    }
+
+    private static final String SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION_NAME = "serializeXMLDocumentToString";
+
+    /** Helper. **/
+    public static final String SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION = ""
+            + "  function " + SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION_NAME + "(doc) {\n"
+            + "    if (window.XMLSerializer) {\n"
+            + "      serializer = new XMLSerializer();\n"
+            + "      return serializer.serializeToString(doc);\n"
+            + "    } else {\n"
+            + "      return doc.xml;"
+            + "    }\n"
+            + "  }\n";
+
+    /** Helper. **/
+    public static final String SERIALIZE_NATIVE_XML_DOCUMENT_TO_STRING_FUNCTION = ""
+            + "  function " + SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION_NAME + "(doc) {\n"
+            + "    serializer = new XMLSerializer();\n"
+            + "    return serializer.serializeToString(doc);\n"
+            + "  }\n";
+
+    /** Helper. **/
+    public static final String SERIALIZE_ACTIVEX_XML_DOCUMENT_TO_STRING_FUNCTION = ""
+            + "  function " + SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION_NAME + "(doc) {\n"
+            + "    return doc.xml;"
+            + "  }\n";
+
+    /**
+     * Helper.
+     * @param doc the doc parameter
+     * @return xml helper
+     **/
+    public static String callSerializeXMLDocumentToString(final String doc) {
+        return SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION_NAME + "(" + doc + ")";
+    }
 
     /**
      * @throws Exception if the test fails
