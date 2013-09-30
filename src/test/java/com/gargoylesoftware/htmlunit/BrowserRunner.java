@@ -45,7 +45,7 @@ import org.junit.runners.model.Statement;
  * public class SomeTest extends WebTestCase {
  *
  *    &#064;Test
- *    &#064;Browsers({Browser.FF17})
+ *    &#064;Browsers({ Browser.FF17 })
  *    public void test() {
  *       //your test case that succeeds with only Firefox 17
  *    }
@@ -90,6 +90,9 @@ public class BrowserRunner extends Suite {
             if (/*browsers.contains("hu") ||*/ browsers.contains("hu-ie9")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_9, false));
             }
+            if (/*browsers.contains("hu") ||*/ browsers.contains("hu-ie10")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_10, false));
+            }
             if (/*browsers.contains("hu") || */browsers.contains("hu-chrome")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.CHROME, false));
             }
@@ -115,6 +118,9 @@ public class BrowserRunner extends Suite {
                 }
                 if (browsers.contains("ie9")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_9, true));
+                }
+                if (browsers.contains("ie10")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_10, true));
                 }
                 if (browsers.contains("chrome")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.CHROME, true));
@@ -186,6 +192,9 @@ public class BrowserRunner extends Suite {
         /** Internet Explorer 9. */
         IE9,
 
+        /** Internet Explorer 10. */
+        IE10,
+
         /** All versions of Firefox. */
         FF,
 
@@ -236,40 +245,43 @@ public class BrowserRunner extends Suite {
     public static @interface Alerts {
 
         /** Alerts that is used for all browsers (if defined, the other values are ignored). */
-        String[] value() default {EMPTY_DEFAULT };
+        String[] value() default { EMPTY_DEFAULT };
 
         /** Alerts for any Internet Explorer, it can be overridden by specific IE version. */
-        String[] IE() default {EMPTY_DEFAULT };
+        String[] IE() default { EMPTY_DEFAULT };
 
         /** Alerts for Internet Explorer 6. If not defined, {@link #IE()} is used. */
-        String[] IE6() default {EMPTY_DEFAULT };
+        String[] IE6() default { EMPTY_DEFAULT };
 
         /** Alerts for Internet Explorer 7. If not defined, {@link #IE()} is used. */
-        String[] IE7() default {EMPTY_DEFAULT };
+        String[] IE7() default { EMPTY_DEFAULT };
 
         /** Alerts for Internet Explorer 8. If not defined, {@link #IE()} is used. */
-        String[] IE8() default {EMPTY_DEFAULT };
+        String[] IE8() default { EMPTY_DEFAULT };
 
         /** Alerts for Internet Explorer 9. If not defined, {@link #IE()} is used. */
-        String[] IE9() default {EMPTY_DEFAULT };
+        String[] IE9() default { EMPTY_DEFAULT };
+
+        /** Alerts for Internet Explorer 10. If not defined, {@link #IE()} is used. */
+        String[] IE10() default { EMPTY_DEFAULT };
 
         /** Alerts for any Firefox, it can be overridden by specific FF version. */
-        String[] FF() default {EMPTY_DEFAULT };
+        String[] FF() default { EMPTY_DEFAULT };
 
         /** Alerts for Firefox 3.6. If not defined, {@link #FF()} is used. */
-        String[] FF3_6() default {EMPTY_DEFAULT };
+        String[] FF3_6() default { EMPTY_DEFAULT };
 
         /** Alerts for Firefox 10. If not defined, {@link #FF()} is used. */
-        String[] FF10() default {EMPTY_DEFAULT };
+        String[] FF10() default { EMPTY_DEFAULT };
 
         /** Alerts for Firefox 17. If not defined, {@link #FF()} is used. */
-        String[] FF17() default {EMPTY_DEFAULT };
+        String[] FF17() default { EMPTY_DEFAULT };
 
         /** Alerts for latest Chrome. */
-        String[] CHROME() default{EMPTY_DEFAULT };
+        String[] CHROME() default { EMPTY_DEFAULT };
 
         /** The default alerts, if nothing more specific is defined. */
-        String[] DEFAULT() default{EMPTY_DEFAULT };
+        String[] DEFAULT() default { EMPTY_DEFAULT };
     }
 
     /**
@@ -291,7 +303,7 @@ public class BrowserRunner extends Suite {
     }
 
     /**
-     * Indicates that the test runs manually in a real browser but not when using WebDriver to driver the browser.
+     * Indicates that the test runs manually in a real browser but not when using WebDriver to drive the browser.
      * @see Browser
      */
     @Retention(RetentionPolicy.RUNTIME)

@@ -66,6 +66,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 public class BrowserVersion implements Serializable, Cloneable {
 
@@ -170,6 +171,11 @@ public class BrowserVersion implements Serializable, Cloneable {
         INTERNET_EXPLORER, "5.0 (compatible; MSIE 9.0; Windows NT 6.1)",
         "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1)", 9, "IE9", null);
 
+    /** Internet Explorer 10. Work In Progress!!! */
+    public static final BrowserVersion INTERNET_EXPLORER_10 = new BrowserVersion(
+        INTERNET_EXPLORER, "5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)",
+        "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)", 10, "IE10", null);
+
     /**
      * Chrome 16.
      * @deprecated as of 2.12
@@ -199,6 +205,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         INTERNET_EXPLORER_7.initDefaultFeatures();
         INTERNET_EXPLORER_8.initDefaultFeatures();
         INTERNET_EXPLORER_9.initDefaultFeatures();
+        INTERNET_EXPLORER_10.initDefaultFeatures();
 
         FIREFOX_3_6.initDefaultFeatures();
         FIREFOX_10.initDefaultFeatures();
@@ -662,6 +669,11 @@ public class BrowserVersion implements Serializable, Cloneable {
      * @return the short name (if any)
      */
     public String getNickname() {
+        return nickname_;
+    }
+
+    @Override
+    public String toString() {
         return nickname_;
     }
 

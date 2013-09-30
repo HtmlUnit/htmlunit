@@ -109,6 +109,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static String FF3_6_BIN_;
     private static String FF10_BIN_;
     private static String FF17_BIN_;
+    private static String IE_BIN_;
     private static String CHROME_BIN_;
 
     /** The driver cache. */
@@ -144,6 +145,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     BROWSERS_PROPERTIES_
                         = Arrays.asList(properties.getProperty("browsers", "hu")
                             .replaceAll(" ", "").toLowerCase().split(","));
+                    IE_BIN_ = properties.getProperty("ie.bin");
                     FF3_6_BIN_ = properties.getProperty("ff3.6.bin");
                     FF10_BIN_ = properties.getProperty("ff10.bin");
                     FF17_BIN_ = properties.getProperty("ff17.bin");
@@ -227,9 +229,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
     protected WebDriver buildWebDriver() throws IOException {
         if (useRealBrowser_) {
             if (getBrowserVersion().isIE()) {
+                System.setProperty("webdriver.ie.driver", IE_BIN_);
                 return new InternetExplorerDriver();
             }
-            if (BrowserVersion.CHROME.equals(getBrowserVersion())) {
+            if (BrowserVersion.CHROME == getBrowserVersion()) {
                 if (CHROME_SERVICE_ == null) {
                     CHROME_SERVICE_ = new ChromeDriverService.Builder()
                         .usingDriverExecutable(new File(CHROME_BIN_))
@@ -244,13 +247,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
 
             String ffBinary = null;
-            if (getBrowserVersion() == BrowserVersion.FIREFOX_3_6) {
+            if (BrowserVersion.FIREFOX_3_6 == getBrowserVersion()) {
                 ffBinary = FF3_6_BIN_;
             }
-            else if (getBrowserVersion() == BrowserVersion.FIREFOX_10) {
+            else if (BrowserVersion.FIREFOX_10 == getBrowserVersion()) {
                 ffBinary = FF10_BIN_;
             }
-            else if (getBrowserVersion() == BrowserVersion.FIREFOX_17) {
+            else if (BrowserVersion.FIREFOX_17 == getBrowserVersion()) {
                 ffBinary = FF17_BIN_;
             }
             if (ffBinary != null) {
