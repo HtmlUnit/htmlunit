@@ -41,21 +41,24 @@ public class DocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "null",
-            IE9 = { "[object DocumentType]", "true", "html,10,null,null,null,null",
+    @Alerts(CHROME = { "[object DocumentType]", "true", "html,10,null,null,null,null",
             "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
             + "null,null,null" },
             FF = { "[object DocumentType]", "true", "html,10,null,null,null,null",
             "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
             + "null,undefined,undefined" },
-            CHROME = { "[object DocumentType]", "true", "html,10,null,null,null,null",
-            "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
-            + "null,null,null" },
             FF3_6 = { "[object DocumentType]", "true", "HTML,10,null,null,null,null",
             "HTML,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,null,null,null" },
             FF10 = { "[object DocumentType]", "true", "html,10,null,null,null,null",
             "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
-            + "null,undefined,undefined" })
+            + "null,undefined,undefined" },
+            IE = "null",
+            IE9 = { "[object DocumentType]", "true", "html,10,null,null,null,null",
+            "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
+            + "null,null,null" },
+            IE10 = { "[object DocumentType]", "true", "html,10,null,null,null,null",
+            "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
+            + "null,null,null" })
     @NotYetImplemented({ FF3_6, IE9, CHROME })
     public void doctype() throws Exception {
         final String html = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n"
@@ -88,14 +91,20 @@ public class DocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "[object]", "greeting,10,null,,undefined,", "greeting,undefined,undefined,undefined,," },
-        FF3_6 = {
+    @Alerts(
+        CHROME = {
             "[object DocumentType]", "greeting,10,null,null,null,null",
             "greeting,MyIdentifier,hello.dtd,null,null,null" },
         FF = {
             "[object DocumentType]", "greeting,10,null,null,null,null",
             "greeting,MyIdentifier,hello.dtd,null,undefined,undefined" },
-        CHROME = {
+        FF3_6 = {
+            "[object DocumentType]", "greeting,10,null,null,null,null",
+            "greeting,MyIdentifier,hello.dtd,null,null,null" },
+        IE = {
+            "[object]", "greeting,10,null,,undefined,",
+            "greeting,undefined,undefined,undefined,," },
+        IE10 = {
             "[object DocumentType]", "greeting,10,null,null,null,null",
             "greeting,MyIdentifier,hello.dtd,null,null,null" })
     @NotYetImplemented(CHROME)
@@ -139,8 +148,11 @@ public class DocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE6 = "string", IE7 = "string", IE8 = "string", FF3_6 = { },
-        DEFAULT = "undefined")
+    @Alerts(DEFAULT = "undefined",
+            FF3_6 = { },
+            IE6 = "string",
+            IE7 = "string",
+            IE8 = "string")
     @NotYetImplemented(IE9)
     public void html_previousSibling() throws Exception {
         final String html = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n"
@@ -167,10 +179,10 @@ public class DocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE6 = { "[object HTMLCommentElement]", "[object HTMLHtmlElement]" },
+    @Alerts(DEFAULT = { "[object DocumentType]",  "[object HTMLHtmlElement]" },
+            IE6 = { "[object HTMLCommentElement]", "[object HTMLHtmlElement]" },
             IE7 = { "[object HTMLCommentElement]", "[object HTMLHtmlElement]" },
-            IE8 = { "[object HTMLCommentElement]", "[object HTMLHtmlElement]" },
-            DEFAULT = { "[object DocumentType]",  "[object HTMLHtmlElement]" })
+            IE8 = { "[object HTMLCommentElement]", "[object HTMLHtmlElement]" })
     @NotYetImplemented(IE9)
     public void document_children() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html>\n"

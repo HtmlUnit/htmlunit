@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class DocumentFragmentTest extends WebDriverTestCase {
@@ -40,12 +41,13 @@ public class DocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ Browser.FF10, Browser.FF17 })
-    @Alerts(FF3_6 = "[object ComputedCSSStyleDeclaration]",
+    @Alerts(CHROME = "[object CSSStyleDeclaration]",
+            FF3_6 = "[object ComputedCSSStyleDeclaration]",
             FF10 = "[object CSSStyleDeclaration]",
             FF17 = "[object CSS2Properties]",
-            CHROME = "[object CSSStyleDeclaration]",
-            IE = "exception")
+            IE = "exception",
+            IE10 = "[object CSSStyleDeclaration]")
+    @NotYetImplemented({ Browser.FF10, Browser.FF17 })
     public void getComputedStyleOnChild() throws Exception {
         final String html = "<html><head><style>\n"
             + "  body > div { background-color: green#FF0000; }\n"
@@ -69,7 +71,9 @@ public class DocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "", IE = "DIV")
+    @Alerts(FF = "",
+            IE = "DIV",
+            IE10 = "")
     public void createElement() throws Exception {
         final String html
             = "<html>\n"
@@ -98,7 +102,7 @@ public class DocumentFragmentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "1", "DIV", "DIV" })
     public void querySelector() throws Exception {
         final String html = "<html><head><title>First</title>\n"
-            + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  var frag = document.createDocumentFragment();\n"

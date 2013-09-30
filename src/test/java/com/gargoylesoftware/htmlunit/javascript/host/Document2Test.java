@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,7 +44,10 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception", FF3_6 = "false", IE = "false")
+    @Alerts(DEFAULT = "exception",
+            FF3_6 = "false",
+            IE6 = "false",
+            IE8 = "false")
     public void createElementWithAngleBrackets() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -62,9 +66,10 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3_6 = { "DIV", "exception" },
-            DEFAULT = "exception",
-            IE = { "DIV", "false", "mySelect", "0", "OPTION", "myOption", "0" })
+    @Alerts(DEFAULT = "exception",
+            FF3_6 = { "DIV", "exception" },
+            IE6 = { "DIV", "false", "mySelect", "0", "OPTION", "myOption", "0" },
+            IE8 = { "DIV", "false", "mySelect", "0", "OPTION", "myOption", "0" })
     public void createElementWithHtml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -93,7 +98,9 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "false", IE = "true")
+    @Alerts(DEFAULT = "false",
+            IE6 = "true",
+            IE8 = "true")
     public void createElementPrototype() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  var HAS_EXTENDED_CREATE_ELEMENT_SYNTAX = (function() {\n"
@@ -115,8 +122,8 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ FF, IE10 })
     @Alerts("1")
-    @Browsers(FF)
     public void getElementByTagNameNS_includesHtml() throws Exception {
         final String html
             = "<html><head><title>foo</title>"
@@ -137,8 +144,8 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ FF, IE10 })
     @Alerts({ "div1", "null", "2", "1" })
-    @Browsers(FF)
     public void importNode_deep() throws Exception {
         importNode(true);
     }
@@ -147,8 +154,8 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ FF, IE10 })
     @Alerts({ "div1", "null", "0" })
-    @Browsers(FF)
     public void importNode_notDeep() throws Exception {
         importNode(false);
     }
@@ -296,6 +303,11 @@ public class Document2Test extends WebDriverTestCase {
             IE = { "<p>a & b</p> &amp; \u0162 \" '",
                 "<p>a & b</p> &amp; \u0162 \" '",
                 "<DIV id=div>&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</DIV>",
+                "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
+                "<p>a & b</p> &amp; \u0162 \" '" },
+            IE10 = { "<p>a & b</p> &amp; \u0162 \" '",
+                "<p>a & b</p> &amp; \u0162 \" '",
+                "<div id=\"div\">&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</div>",
                 "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
                 "<p>a & b</p> &amp; \u0162 \" '" })
     public void createTextNodeWithHtml_FF() throws Exception {
@@ -469,8 +481,9 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "style.css", "LINK" },
-            DEFAULT = { })
+    @Alerts(DEFAULT = { },
+            IE = { "style.css", "LINK" },
+            IE10 = { "Ã‚Â§Ã‚Â§URLÃ‚Â§Ã‚Â§style.css", "LINK" })
     public void createStyleSheet() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
@@ -497,8 +510,9 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "null", "" },
-            DEFAULT = { })
+    @Alerts(DEFAULT = { },
+            IE = { "null", "" },
+            IE10 = { "Ã‚Â§Ã‚Â§URLÃ‚Â§Ã‚Â§null", "null" })
     public void createStyleSheet_emptyUrl() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
@@ -525,8 +539,10 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "dotseven.css", "zero.css", "minus1.css", "seven.css", "none.css" },
-            DEFAULT = { })
+    @Alerts(DEFAULT = { },
+            IE = { "dotseven.css", "zero.css", "minus1.css", "seven.css", "none.css" },
+            IE10 = { "Ã‚Â§Ã‚Â§URLÃ‚Â§Ã‚Â§dotseven.css", "Ã‚Â§Ã‚Â§URLÃ‚Â§Ã‚Â§zero.css", "Ã‚Â§Ã‚Â§URLÃ‚Â§Ã‚Â§minus1.css",
+                        "Ã‚Â§Ã‚Â§URLÃ‚Â§Ã‚Â§seven.css", "Ã‚Â§Ã‚Â§URLÃ‚Â§Ã‚Â§none.css" })
     public void createStyleSheet_insertAt() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"

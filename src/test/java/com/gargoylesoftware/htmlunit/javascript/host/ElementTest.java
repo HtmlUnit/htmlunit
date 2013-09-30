@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,6 +27,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest;
 
 /**
  * Tests for {@link Element}.
@@ -34,6 +36,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class ElementTest extends WebDriverTestCase {
@@ -42,14 +45,12 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "1", "attrName attrValue", "attrValue", "null", "anotherValue",
-            "1", "4", "<span id='label'>changed</span>" })
+    @Alerts(DEFAULT = { "1", "attrName attrValue", "attrValue", "null", "anotherValue",
+                    "1", "4", "<span id='label'>changed</span>" })
     public void attributes() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
-            + "    doc.async = false;\n"
-            + "    alert(doc.load('foo.xml'));\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'foo.xml'") + ";\n"
             + "    var attributes = doc.documentElement.attributes;\n"
             + "    alert(attributes.length);\n"
             + "    alert(attributes[0].name + ' ' + attributes[0].value);\n"
@@ -63,12 +64,7 @@ public class ElementTest extends WebDriverTestCase {
             + "    alert(description.firstChild.nodeType);\n"
             + "    alert(description.firstChild.nodeValue);\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -90,23 +86,17 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Browsers(IE)
-    @Alerts({ "true", "1", "title" })
+    @Alerts(DEFAULT = { "1", "title" },
+            IE10 = "")
     public void selectNodes() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
-            + "    doc.async = false;\n"
-            + "    alert(doc.load('" + URL_SECOND + "'));\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "    var nodes = doc.documentElement.selectNodes('//title');\n"
             + "    alert(nodes.length);\n"
             + "    alert(nodes[0].tagName);\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -126,24 +116,18 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "2", "1" })
+    @Alerts({ "2", "1" })
+    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void removeChild() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
-            + "    doc.async = false;\n"
-            + "    alert(doc.load('" + URL_SECOND + "'));\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "    var parent = doc.documentElement.firstChild;\n"
             + "    alert(parent.childNodes.length);\n"
             + "    parent.removeChild(parent.firstChild);\n"
             + "    alert(parent.childNodes.length);\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -157,21 +141,14 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "lbl_SettingName", "outerHTML", "Item" },
-            FF = { "lbl_SettingName", "outerHTML", "undefined" })
+    @Alerts(DEFAULT = { "lbl_SettingName", "outerHTML", "undefined" },
+            IE6 = { "lbl_SettingName", "outerHTML", "Item" },
+            IE8 = { "lbl_SettingName", "outerHTML", "Item" })
     public void getAttributeNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
-            + "    doc.async = false;\n"
-            + "    doc.load('" + URL_SECOND + "');\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "    parseXML(doc);\n"
-            + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
             + "  }\n"
             + "  function parseXML(xml) {\n"
             + "    if (xml.documentElement.hasChildNodes()) {\n"
@@ -195,6 +172,7 @@ public class ElementTest extends WebDriverTestCase {
             + "      }\n"
             + "    }\n"
             + "  }\n"
+            + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "  <div id='lbl_SettingName'/>\n"
             + "</body></html>";
@@ -215,24 +193,18 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Browsers(IE)
-    @Alerts({ "book", "0", "1" })
+    @Alerts(DEFAULT = { "book", "0", "1" },
+            IE10 = "book")
     public void selectNode_root() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
-            + "    doc.async = false;\n"
-            + "    doc.load('" + URL_SECOND + "');\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "    var child = doc.documentElement.firstChild;\n"
             + "    alert(child.tagName);\n"
             + "    alert(child.selectNodes('/title').length);\n"
             + "    alert(child.selectNodes('title').length);\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -246,7 +218,9 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "1" }, IE = "exception")
+    @Alerts(DEFAULT = { "1", "1" },
+            IE6 = "exception",
+            IE8 = "exception")
     public void getElementsByTagNameNS() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -259,19 +233,13 @@ public class ElementTest extends WebDriverTestCase {
             + "    text += '  </html>\\n';\n"
             + "    text += '  </xsl:template>\\n';\n"
             + "    text += '</xsl:stylesheet>';\n"
-            + "    if (window.ActiveXObject) {\n"
-            + "      var doc=new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "      doc.async=false;\n"
-            + "      doc.loadXML(text);\n"
-            + "    } else {\n"
-            + "      var parser=new DOMParser();\n"
-            + "      var doc=parser.parseFromString(text,'text/xml');\n"
-            + "    }\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromString("text") + ";\n"
             + "    try {\n"
-            + "    alert(doc.documentElement.getElementsByTagNameNS('http://myNS', 'template').length);\n"
-            + "    alert(doc.documentElement.getElementsByTagNameNS(null, 'html').length);\n"
+            + "      alert(doc.documentElement.getElementsByTagNameNS('http://myNS', 'template').length);\n"
+            + "      alert(doc.documentElement.getElementsByTagNameNS(null, 'html').length);\n"
             + "    } catch (e) { alert('exception'); }\n"
             + "  }\n"
+            + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -282,22 +250,15 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(FF)
+    @Browsers({ FF, IE10 })
     @Alerts("false")
     public void hasAttribute() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
-            + "    doc.async = false;\n"
-            + "    doc.load('foo.xml');\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'foo.xml'") + ";\n"
             + "    alert(doc.documentElement.hasAttribute('something'));\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -318,20 +279,14 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
+    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void attributes2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
-            + "    doc.async = false;\n"
-            + "    doc.load('foo.xml');\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'foo.xml'") + ";\n"
             + "    alert(doc.documentElement.attributes.getNamedItem('library') != undefined);\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -351,23 +306,18 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "<a><b c=\"d\">e</b></a>\r\n", "<a><b c=\"d\">e</b></a>" },
-            DEFAULT = { "undefined", "undefined" })
+    @Alerts(DEFAULT = { "undefined", "undefined" },
+            IE6 = { "<a><b c=\"d\">e</b></a>\r\n", "<a><b c=\"d\">e</b></a>" },
+            IE8 = { "<a><b c=\"d\">e</b></a>\r\n", "<a><b c=\"d\">e</b></a>" })
     public void xml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  var text = '<a><b c=\"d\">e</b></a>';\n"
-            + "  if (window.ActiveXObject) {\n"
-            + "    var doc = new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "    doc.async = false;\n"
-            + "    doc.loadXML(text);\n"
-            + "  } else {\n"
-            + "    var parser = new DOMParser();\n"
-            + "    var doc = parser.parseFromString(text, 'text/xml');\n"
-            + "  }\n"
+            + "  var doc = " + XMLDocumentTest.callLoadXMLDocumentFromString("text") + ";\n"
             + "  alert(doc.xml);\n"
             + "  alert(doc.documentElement.xml);\n"
             + "}\n"
+            + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -378,18 +328,21 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"[object],DIV",
-                "[object],APP:DIV",
-                "createElementNS() is not defined",
-                "[object],DIV",
-                "[object],APP:DIV"
-                },
-            DEFAULT = {"[object HTMLDivElement],DIV",
+    @Alerts(DEFAULT = { "[object HTMLDivElement],DIV",
                 "[object HTMLUnknownElement],APP:DIV",
                 "[object Element],app:dIv",
                 "[object HTMLDivElement],DIV",
-                "[object HTMLUnknownElement],APP:DIV"
-                })
+                "[object HTMLUnknownElement],APP:DIV" },
+            IE6 = { "[object],DIV",
+                "[object],APP:DIV",
+                "createElementNS() is not defined",
+                "[object],DIV",
+                "[object],APP:DIV" },
+            IE8 = { "[object],DIV",
+                "[object],APP:DIV",
+                "createElementNS() is not defined",
+                "[object],DIV",
+                "[object],APP:DIV" })
     public void html_nodeName() throws Exception {
         html("nodeName");
     }
@@ -398,18 +351,21 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"[object],DIV",
-                "[object],APP:DIV",
-                "createElementNS() is not defined",
-                "[object],DIV",
-                "[object],APP:DIV"
-                },
-            DEFAULT = {"[object HTMLDivElement],DIV",
+    @Alerts(DEFAULT = { "[object HTMLDivElement],DIV",
                 "[object HTMLUnknownElement],APP:DIV",
                 "[object Element],app:dIv",
                 "[object HTMLDivElement],DIV",
-                "[object HTMLUnknownElement],APP:DIV"
-                })
+                "[object HTMLUnknownElement],APP:DIV" },
+            IE6 = { "[object],DIV",
+                "[object],APP:DIV",
+                "createElementNS() is not defined",
+                "[object],DIV",
+                "[object],APP:DIV" },
+            IE8 = { "[object],DIV",
+                "[object],APP:DIV",
+                "createElementNS() is not defined",
+                "[object],DIV",
+                "[object],APP:DIV" })
     public void html_tagName() throws Exception {
         html("tagName");
     }
@@ -418,18 +374,21 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"[object],undefined",
-                "[object],undefined",
-                "createElementNS() is not defined",
-                "[object],undefined",
-                "[object],undefined"
-                },
-            DEFAULT = {"[object HTMLDivElement],null",
+    @Alerts(DEFAULT = { "[object HTMLDivElement],null",
                 "[object HTMLUnknownElement],null",
                 "[object Element],app",
                 "[object HTMLDivElement],null",
-                "[object HTMLUnknownElement],null"
-                })
+                "[object HTMLUnknownElement],null" },
+            IE6 = { "[object],undefined",
+                "[object],undefined",
+                "createElementNS() is not defined",
+                "[object],undefined",
+                "[object],undefined" },
+            IE8 = { "[object],undefined",
+                "[object],undefined",
+                "createElementNS() is not defined",
+                "[object],undefined",
+                "[object],undefined" })
     public void html_prefix() throws Exception {
         html("prefix");
     }
@@ -438,18 +397,21 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"[object],undefined",
-                "[object],undefined",
-                "createElementNS() is not defined",
-                "[object],undefined",
-                "[object],undefined"
-                },
-            DEFAULT = {"[object HTMLDivElement],div",
+    @Alerts(DEFAULT = { "[object HTMLDivElement],div",
                 "[object HTMLUnknownElement],app:div",
                 "[object Element],dIv",
                 "[object HTMLDivElement],div",
-                "[object HTMLUnknownElement],app:div"
-                })
+                "[object HTMLUnknownElement],app:div" },
+            IE6 = { "[object],undefined",
+                "[object],undefined",
+                "createElementNS() is not defined",
+                "[object],undefined",
+                "[object],undefined" },
+            IE8 = { "[object],undefined",
+                "[object],undefined",
+                "createElementNS() is not defined",
+                "[object],undefined",
+                "[object],undefined" })
     @NotYetImplemented(FF)
     public void html_localName() throws Exception {
         html("localName");
@@ -459,18 +421,21 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"[object],undefined",
-                "[object],undefined",
-                "createElementNS() is not defined",
-                "[object],undefined",
-                "[object],undefined"
-                },
-            DEFAULT = {"[object HTMLDivElement],undefined",
+    @Alerts(DEFAULT = { "[object HTMLDivElement],undefined",
                 "[object HTMLUnknownElement],undefined",
                 "[object Element],undefined",
                 "[object HTMLDivElement],undefined",
-                "[object HTMLUnknownElement],undefined"
-                })
+                "[object HTMLUnknownElement],undefined" },
+            IE6 = { "[object],undefined",
+                "[object],undefined",
+                "createElementNS() is not defined",
+                "[object],undefined",
+                "[object],undefined" },
+            IE8 = { "[object],undefined",
+                "[object],undefined",
+                "createElementNS() is not defined",
+                "[object],undefined",
+                "[object],undefined" })
     public void html_baseName() throws Exception {
         html("baseName");
     }
@@ -479,18 +444,21 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"[object],undefined",
-                "[object],undefined",
-                "createElementNS() is not defined",
-                "[object],undefined",
-                "[object],undefined"
-                },
-            DEFAULT = {"[object HTMLDivElement],http://www.w3.org/1999/xhtml",
+    @Alerts(DEFAULT = { "[object HTMLDivElement],http://www.w3.org/1999/xhtml",
                 "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml",
                 "[object Element],http://www.appcelerator.org",
                 "[object HTMLDivElement],http://www.w3.org/1999/xhtml",
-                "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml"
-                })
+                "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml" },
+            IE6 = { "[object],undefined",
+                "[object],undefined",
+                "createElementNS() is not defined",
+                "[object],undefined",
+                "[object],undefined" },
+            IE8 = { "[object],undefined",
+                "[object],undefined",
+                "createElementNS() is not defined",
+                "[object],undefined",
+                "[object],undefined" })
     @NotYetImplemented(FF)
     public void html_namespaceURI() throws Exception {
         html("namespaceURI");
@@ -526,7 +494,15 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"[object],DIV",
+    @Alerts(DEFAULT = {"[object HTMLDivElement],DIV",
+                "[object HTMLUnknownElement],APP:DIV",
+                "[object HTMLUnknownElement],ANOTHER:DIV",
+                "[object Element],app:dIv",
+                "[object HTMLDivElement],DIV",
+                "[object HTMLUnknownElement],APP:DIV",
+                "[object HTMLUnknownElement],ANOTHER:DIV"
+                },
+            IE6 = {"[object],DIV",
                 "[object],dIv",
                 "[object],ANOTHER:DIV",
                 "createElementNS() is not defined",
@@ -534,13 +510,13 @@ public class ElementTest extends WebDriverTestCase {
                 "[object],dIv",
                 "[object],ANOTHER:DIV"
                 },
-            DEFAULT = {"[object HTMLDivElement],DIV",
-                "[object HTMLUnknownElement],APP:DIV",
-                "[object HTMLUnknownElement],ANOTHER:DIV",
-                "[object Element],app:dIv",
-                "[object HTMLDivElement],DIV",
-                "[object HTMLUnknownElement],APP:DIV",
-                "[object HTMLUnknownElement],ANOTHER:DIV"
+            IE8 = {"[object],DIV",
+                "[object],dIv",
+                "[object],ANOTHER:DIV",
+                "createElementNS() is not defined",
+                "[object],DIV",
+                "[object],dIv",
+                "[object],ANOTHER:DIV"
                 })
     public void namespace_nodeName() throws Exception {
         namespace("nodeName");
@@ -550,7 +526,15 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"[object],DIV",
+    @Alerts(DEFAULT = {"[object HTMLDivElement],DIV",
+                "[object HTMLUnknownElement],APP:DIV",
+                "[object HTMLUnknownElement],ANOTHER:DIV",
+                "[object Element],app:dIv",
+                "[object HTMLDivElement],DIV",
+                "[object HTMLUnknownElement],APP:DIV",
+                "[object HTMLUnknownElement],ANOTHER:DIV"
+                },
+            IE6 = {"[object],DIV",
                 "[object],dIv",
                 "[object],ANOTHER:DIV",
                 "createElementNS() is not defined",
@@ -558,13 +542,13 @@ public class ElementTest extends WebDriverTestCase {
                 "[object],dIv",
                 "[object],ANOTHER:DIV"
                 },
-            DEFAULT = {"[object HTMLDivElement],DIV",
-                "[object HTMLUnknownElement],APP:DIV",
-                "[object HTMLUnknownElement],ANOTHER:DIV",
-                "[object Element],app:dIv",
-                "[object HTMLDivElement],DIV",
-                "[object HTMLUnknownElement],APP:DIV",
-                "[object HTMLUnknownElement],ANOTHER:DIV"
+            IE8 = {"[object],DIV",
+                "[object],dIv",
+                "[object],ANOTHER:DIV",
+                "createElementNS() is not defined",
+                "[object],DIV",
+                "[object],dIv",
+                "[object],ANOTHER:DIV"
                 })
     public void namespace_tagName() throws Exception {
         namespace("tagName");
@@ -574,7 +558,15 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"[object],undefined",
+    @Alerts(DEFAULT = {"[object HTMLDivElement],null",
+                "[object HTMLUnknownElement],null",
+                "[object HTMLUnknownElement],null",
+                "[object Element],app",
+                "[object HTMLDivElement],null",
+                "[object HTMLUnknownElement],null",
+                "[object HTMLUnknownElement],null"
+                },
+            IE6 = {"[object],undefined",
                 "[object],undefined",
                 "[object],undefined",
                 "createElementNS() is not defined",
@@ -582,13 +574,13 @@ public class ElementTest extends WebDriverTestCase {
                 "[object],undefined",
                 "[object],undefined"
                 },
-            DEFAULT = {"[object HTMLDivElement],null",
-                "[object HTMLUnknownElement],null",
-                "[object HTMLUnknownElement],null",
-                "[object Element],app",
-                "[object HTMLDivElement],null",
-                "[object HTMLUnknownElement],null",
-                "[object HTMLUnknownElement],null"
+            IE8 = {"[object],undefined",
+                "[object],undefined",
+                "[object],undefined",
+                "createElementNS() is not defined",
+                "[object],undefined",
+                "[object],undefined",
+                "[object],undefined"
                 })
     public void namespace_prefix() throws Exception {
         namespace("prefix");
@@ -598,7 +590,15 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"[object],undefined",
+    @Alerts(DEFAULT = {"[object HTMLDivElement],div",
+                "[object HTMLUnknownElement],app:div",
+                "[object HTMLUnknownElement],another:div",
+                "[object Element],dIv",
+                "[object HTMLDivElement],div",
+                "[object HTMLUnknownElement],app:div",
+                "[object HTMLUnknownElement],another:div"
+                },
+            IE6 = {"[object],undefined",
                 "[object],undefined",
                 "[object],undefined",
                 "createElementNS() is not defined",
@@ -606,13 +606,13 @@ public class ElementTest extends WebDriverTestCase {
                 "[object],undefined",
                 "[object],undefined"
                 },
-            DEFAULT = {"[object HTMLDivElement],div",
-                "[object HTMLUnknownElement],app:div",
-                "[object HTMLUnknownElement],another:div",
-                "[object Element],dIv",
-                "[object HTMLDivElement],div",
-                "[object HTMLUnknownElement],app:div",
-                "[object HTMLUnknownElement],another:div"
+            IE8 = {"[object],undefined",
+                "[object],undefined",
+                "[object],undefined",
+                "createElementNS() is not defined",
+                "[object],undefined",
+                "[object],undefined",
+                "[object],undefined"
                 })
     @NotYetImplemented(FF)
     public void namespace_localName() throws Exception {
@@ -623,7 +623,15 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"[object],undefined",
+    @Alerts(DEFAULT = {"[object HTMLDivElement],http://www.w3.org/1999/xhtml",
+                "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml",
+                "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml",
+                "[object Element],http://www.appcelerator.org",
+                "[object HTMLDivElement],http://www.w3.org/1999/xhtml",
+                "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml",
+                "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml"
+                },
+            IE6 = {"[object],undefined",
                 "[object],undefined",
                 "[object],undefined",
                 "createElementNS() is not defined",
@@ -631,13 +639,13 @@ public class ElementTest extends WebDriverTestCase {
                 "[object],undefined",
                 "[object],undefined"
                 },
-            DEFAULT = {"[object HTMLDivElement],http://www.w3.org/1999/xhtml",
-                "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml",
-                "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml",
-                "[object Element],http://www.appcelerator.org",
-                "[object HTMLDivElement],http://www.w3.org/1999/xhtml",
-                "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml",
-                "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml"
+            IE8 = {"[object],undefined",
+                "[object],undefined",
+                "[object],undefined",
+                "createElementNS() is not defined",
+                "[object],undefined",
+                "[object],undefined",
+                "[object],undefined"
                 })
     @NotYetImplemented(FF)
     public void namespace_namespaceURI() throws Exception {
@@ -677,16 +685,22 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"[object]", "dIv",
-            "[object]", "html",
-            "[object]", "div",
-            "[object]", "dIv"
-            },
-        DEFAULT = {"[object Element]", "dIv",
-            "[object HTMLHtmlElement]", "html",
-            "[object HTMLDivElement]", "div",
-            "[object HTMLUnknownElement]", "dIv"
-            })
+    @Alerts(DEFAULT = {"[object Element]", "dIv",
+                "[object HTMLHtmlElement]", "html",
+                "[object HTMLDivElement]", "div",
+                "[object HTMLUnknownElement]", "dIv"
+                },
+            IE6 = {"[object]", "dIv",
+                "[object]", "html",
+                "[object]", "div",
+                "[object]", "dIv"
+                },
+            IE8 = {"[object]", "dIv",
+                "[object]", "html",
+                "[object]", "div",
+                "[object]", "dIv"
+                })
+    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void xml_nodeName() throws Exception {
         xml("nodeName");
     }
@@ -695,16 +709,22 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"[object]", "dIv",
-            "[object]", "html",
-            "[object]", "div",
-            "[object]", "dIv"
-            },
-        DEFAULT = {"[object Element]", "dIv",
-            "[object HTMLHtmlElement]", "html",
-            "[object HTMLDivElement]", "div",
-            "[object HTMLUnknownElement]", "dIv"
-            })
+    @Alerts(DEFAULT = {"[object Element]", "dIv",
+                "[object HTMLHtmlElement]", "html",
+                "[object HTMLDivElement]", "div",
+                "[object HTMLUnknownElement]", "dIv"
+                },
+            IE6 = {"[object]", "dIv",
+                "[object]", "html",
+                "[object]", "div",
+                "[object]", "dIv"
+                },
+            IE8 = {"[object]", "dIv",
+                "[object]", "html",
+                "[object]", "div",
+                "[object]", "dIv"
+                })
+    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void xml_tagName() throws Exception {
         xml("tagName");
     }
@@ -713,16 +733,22 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"[object]", "",
-            "[object]", "",
-            "[object]", "",
-            "[object]", ""
-            },
-        DEFAULT = {"[object Element]", "null",
-            "[object HTMLHtmlElement]", "null",
-            "[object HTMLDivElement]", "null",
-            "[object HTMLUnknownElement]", "null"
-            })
+    @Alerts(DEFAULT = {"[object Element]", "null",
+                "[object HTMLHtmlElement]", "null",
+                "[object HTMLDivElement]", "null",
+                "[object HTMLUnknownElement]", "null"
+                },
+            IE6 = {"[object]", "",
+                "[object]", "",
+                "[object]", "",
+                "[object]", ""
+                },
+            IE8 = {"[object]", "",
+                "[object]", "",
+                "[object]", "",
+                "[object]", ""
+                })
+    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void xml_prefix() throws Exception {
         xml("prefix");
     }
@@ -731,16 +757,22 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"[object]", "undefined",
-            "[object]", "undefined",
-            "[object]", "undefined",
-            "[object]", "undefined"
-            },
-        DEFAULT = {"[object Element]", "dIv",
-            "[object HTMLHtmlElement]", "html",
-            "[object HTMLDivElement]", "div",
-            "[object HTMLUnknownElement]", "dIv"
-            })
+    @Alerts(DEFAULT = {"[object Element]", "dIv",
+                "[object HTMLHtmlElement]", "html",
+                "[object HTMLDivElement]", "div",
+                "[object HTMLUnknownElement]", "dIv"
+                },
+            IE6 = {"[object]", "undefined",
+                "[object]", "undefined",
+                "[object]", "undefined",
+                "[object]", "undefined"
+                },
+            IE8 = {"[object]", "undefined",
+                "[object]", "undefined",
+                "[object]", "undefined",
+                "[object]", "undefined"
+                })
+    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void xml_localName() throws Exception {
         xml("localName");
     }
@@ -749,16 +781,22 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"[object]", "dIv",
-            "[object]", "html",
-            "[object]", "div",
-            "[object]", "dIv"
-            },
-        DEFAULT = {"[object Element]", "undefined",
-            "[object HTMLHtmlElement]", "undefined",
-            "[object HTMLDivElement]", "undefined",
-            "[object HTMLUnknownElement]", "undefined"
-            })
+    @Alerts(DEFAULT = {"[object Element]", "undefined",
+                "[object HTMLHtmlElement]", "undefined",
+                "[object HTMLDivElement]", "undefined",
+                "[object HTMLUnknownElement]", "undefined"
+                },
+            IE6 = {"[object]", "dIv",
+                "[object]", "html",
+                "[object]", "div",
+                "[object]", "dIv"
+                },
+            IE8 = {"[object]", "dIv",
+                "[object]", "html",
+                "[object]", "div",
+                "[object]", "dIv"
+                })
+    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void xml_baseName() throws Exception {
         xml("baseName");
     }
@@ -767,16 +805,22 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"[object]", "",
-            "[object]", "http://www.w3.org/1999/xhtml",
-            "[object]", "http://www.w3.org/1999/xhtml",
-            "[object]", "http://www.w3.org/1999/xhtml"
-            },
-        DEFAULT = {"[object Element]", "null",
-            "[object HTMLHtmlElement]", "http://www.w3.org/1999/xhtml",
-            "[object HTMLDivElement]", "http://www.w3.org/1999/xhtml",
-            "[object HTMLUnknownElement]", "http://www.w3.org/1999/xhtml"
-            })
+    @Alerts(DEFAULT = {"[object Element]", "null",
+                "[object HTMLHtmlElement]", "http://www.w3.org/1999/xhtml",
+                "[object HTMLDivElement]", "http://www.w3.org/1999/xhtml",
+                "[object HTMLUnknownElement]", "http://www.w3.org/1999/xhtml"
+                },
+            IE6 = {"[object]", "",
+                "[object]", "http://www.w3.org/1999/xhtml",
+                "[object]", "http://www.w3.org/1999/xhtml",
+                "[object]", "http://www.w3.org/1999/xhtml"
+                },
+            IE8 = {"[object]", "",
+                "[object]", "http://www.w3.org/1999/xhtml",
+                "[object]", "http://www.w3.org/1999/xhtml",
+                "[object]", "http://www.w3.org/1999/xhtml"
+                })
+    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void xml_namespaceURI() throws Exception {
         xml("namespaceURI");
     }
@@ -787,14 +831,7 @@ public class ElementTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <script>\n"
             + "      function test() {\n"
-            + "        var request;\n"
-            + "        if (window.XMLHttpRequest)\n"
-            + "          request = new XMLHttpRequest();\n"
-            + "        else if (window.ActiveXObject)\n"
-            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
-            + "        request.open('GET', 'foo.xml', false);\n"
-            + "        request.send('');\n"
-            + "        var doc = request.responseXML;\n"
+            + "        var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'foo.xml'") + ";\n"
             + "        debug(doc.documentElement.childNodes[0]);\n"
             + "        debug(doc.documentElement.childNodes[1]);\n"
             + "        debug(doc.documentElement.childNodes[1].childNodes[0]);\n"
@@ -806,6 +843,7 @@ public class ElementTest extends WebDriverTestCase {
             + "        } catch(ex) {alert(ex)};\n"
             + "        alert(e." + methodName + ");\n"
             + "      }\n"
+            + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "    </script>\n"
             + "  </head>\n"
             + "  <body onload='test()'>\n"
@@ -829,8 +867,9 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "exception occured",
-            FF = { "prototype found", "" })
+    @Alerts(DEFAULT = { "prototype found", "" },
+            IE6 = "exception occured",
+            IE8 = "exception occured")
     public void enumeratedProperties() throws Exception {
         final String html
             = "<html><head>\n"
@@ -864,18 +903,12 @@ public class ElementTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <script>\n"
             + "      function test() {\n"
-            + "        var request;\n"
-            + "        if (window.XMLHttpRequest)\n"
-            + "          request = new XMLHttpRequest();\n"
-            + "        else if (window.ActiveXObject)\n"
-            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
-            + "        request.open('GET', 'foo.xml', false);\n"
-            + "        request.send('');\n"
-            + "        var doc = request.responseXML;\n"
+            + "        var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'foo.xml'") + ";\n"
             + "        var e = doc.getElementsByTagName('title');\n"
             + "        e[0].removeAttribute('hello');\n"
             + "        alert('finished');\n"
             + "      }\n"
+            + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "    </script>\n"
             + "  </head>\n"
             + "  <body onload='test()'>\n"
@@ -898,7 +931,9 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function", IE = "exception")
+    @Alerts(DEFAULT = "function",
+            IE6 = "exception",
+            IE8 = "exception")
     public void getBoundingClientRect() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -912,7 +947,9 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0", IE = "1")
+    @Alerts(DEFAULT = "0",
+            IE6 = "1",
+            IE8 = "1")
     public void commentIsElement() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='myId'><!-- --></div>\n"
@@ -970,7 +1007,9 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "", FF = { "first", "third", "3", "second", "second" })
+    @Alerts(DEFAULT = { "first", "third", "3", "second", "second" },
+            IE6 = "",
+            IE8 = "")
     public void firstElementChild() throws Exception {
         final String html
             = "<html><head>\n"
@@ -1032,23 +1071,17 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "undefined", "[object HTMLCollection]" },
-            FF = { "[object HTMLCollection]", "[object HTMLCollection]" })
+    @Alerts(FF = { "[object HTMLCollection]", "[object HTMLCollection]" },
+            IE = { "undefined", "[object HTMLCollection]" })
     public void children() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  var text = '<hello><child></child></hello>';\n"
-            + "  if (window.ActiveXObject) {\n"
-            + "    var doc = new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "    doc.async = false;\n"
-            + "    doc.loadXML(text);\n"
-            + "  } else {\n"
-            + "    var parser = new DOMParser();\n"
-            + "    var doc = parser.parseFromString(text, 'text/xml');\n"
-            + "  }\n"
+            + "  var doc = " + XMLDocumentTest.callLoadXMLDocumentFromString("text") + ";\n"
             + "  alert(doc.documentElement.children);\n"
             + "  alert(document.documentElement.children);\n"
             + "}\n"
+            + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myId'>abcd</div>\n"
             + "</body></html>";
@@ -1060,23 +1093,18 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "undefined", "undefined" },
-            FF = { "null", "a b c" })
+    @Alerts(FF = { "null", "a b c" },
+            IE = { "undefined", "undefined" },
+            IE10 = { "undefined", "a b c" })
     public void classList() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  var text = '<hello><child></child></hello>';\n"
-            + "  if (window.ActiveXObject) {\n"
-            + "    var doc = new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "    doc.async = false;\n"
-            + "    doc.loadXML(text);\n"
-            + "  } else {\n"
-            + "    var parser = new DOMParser();\n"
-            + "    var doc = parser.parseFromString(text, 'text/xml');\n"
-            + "  }\n"
+            + "  var doc = " + XMLDocumentTest.callLoadXMLDocumentFromString("text") + ";\n"
             + "  alert(doc.documentElement.classList);\n"
             + "  alert(document.body.classList);\n"
             + "}\n"
+            + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
             + "</script></head><body onload='test()' class='a b c'>\n"
             + "  <div id='myId'>abcd</div>\n"
             + "</body></html>";
@@ -1090,7 +1118,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(FF)
+    @Browsers({ FF, IE10 })
     @Alerts({ "test value", "true", "false", "finished" })
     public void attributeNS() throws Exception {
         final String html = "<html>\n"
@@ -1120,24 +1148,19 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "ab", "ab" })
+    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void removeAttribute_case_sensitive() throws Exception {
         final String html = "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + "      function test() {\n"
-            + "        var request;\n"
-            + "        if (window.XMLHttpRequest)\n"
-            + "          request = new XMLHttpRequest();\n"
-            + "        else if (window.ActiveXObject)\n"
-            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
-            + "        request.open('GET', 'foo.xml', false);\n"
-            + "        request.send('');\n"
-            + "        var doc = request.responseXML;\n"
+            + "        var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'foo.xml'") + ";\n"
             + "        var e = doc.getElementsByTagName('title')[0];\n"
             + "        alert(e.getAttribute('normal'));\n"
             + "        e.removeAttribute('Normal');\n"
             + "        alert(e.getAttribute('normal'));\n"
             + "      }\n"
+            + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "    </script>\n"
             + "  </head>\n"
             + "  <body onload='test()'>\n"
