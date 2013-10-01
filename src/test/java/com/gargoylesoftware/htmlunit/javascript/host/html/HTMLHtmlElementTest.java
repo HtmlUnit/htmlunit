@@ -40,7 +40,9 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object HTMLHtmlElement]", IE = "[object]")
+    @Alerts(DEFAULT = "[object HTMLHtmlElement]",
+            IE6 = "[object]",
+            IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html id='myId'><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -60,8 +62,9 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "[object]", "exception" },
-            FF = { "[object HTMLHtmlElement]", "[object HTMLHtmlElement]" })
+    @Alerts(DEFAULT = { "[object HTMLHtmlElement]", "[object HTMLHtmlElement]" },
+            IE6 = { "[object]", "exception" },
+            IE8 = { "[object]", "exception" })
     public void HTMLHtmlElement_toString() throws Exception {
         final String html = "<html id='myId'><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -116,8 +119,9 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "true", "true", "true", "true" },
-            IE = { "true", "false", "true", "false" })
+    @Alerts(DEFAULT = { "true", "true", "true", "true" },
+            IE6 = { "true", "false", "true", "false" },
+            IE8 = { "true", "false", "true", "false" })
     public void clientWidth() throws Exception {
         final String html = "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN'"
             + " 'http://www.w3.org/TR/html4/loose.dtd'>" // important for IE6!!!

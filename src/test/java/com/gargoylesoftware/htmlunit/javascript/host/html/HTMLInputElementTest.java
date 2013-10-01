@@ -16,7 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,6 +41,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlImageInput;
  * @author Chris Erskine
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLInputElementTest extends WebDriverTestCase {
@@ -582,6 +584,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "<body>\n"
             + "<form name='test' action='foo'>\n"
             + "<input name='field1' onchange='submit()'>\n"
+            + "<img>\n"
             + "</form>\n"
             + "</body></html>";
 
@@ -589,7 +592,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.name("field1")).sendKeys("bla");
-        driver.findElement(By.tagName("body")).click();
+        driver.findElement(By.tagName("img")).click();
         assertEquals("page 2", driver.getTitle());
     }
 
@@ -711,7 +714,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             FF10 = {"text TeXt", "password PassWord", "hidden Hidden",
             "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox CHECKBOX" },
             FF17 = {"text TeXt", "password PassWord", "hidden Hidden",
-            "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox CHECKBOX" })
+            "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox CHECKBOX" },
+            IE10 = {"text TeXt", "password PassWord", "hidden Hidden",
+            "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox checkbox" })
     @NotYetImplemented(FF17)
     public void typeCase() throws Exception {
         final String html
@@ -770,8 +775,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "left", "right", "bottom", "middle", "top", "wrong", "" },
-            IE = { "left", "right", "bottom", "middle", "top", "", "" })
-    @NotYetImplemented(IE)
+            IE = { "left", "right", "bottom", "middle", "top", "", "" },
+            IE10 = { "", "", "", "", "", "", "" })
+    @NotYetImplemented({ IE6, IE8 })
     public void getAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -799,8 +805,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "bottom", "middle", "top" },
-            IE = { "center", "error", "center", "error", "center", "left", "right", "bottom", "middle", "top" })
-    @NotYetImplemented(IE)
+            IE = { "center", "error", "center", "error", "center", "left", "right", "bottom", "middle", "top" },
+            IE10 = { "", "error", "", "error", "", "", "", "", "", "" })
+    @NotYetImplemented({ IE6, IE8 })
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -874,7 +881,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "test", "4", "42", "2", "[object HTMLInputElement]", "25" },
-            IE = { "test", "4", "42", "2", "[object]", "8" })
+            IE6 = { "test", "4", "42", "2", "[object]", "8" },
+            IE8 = { "test", "4", "42", "2", "[object]", "8" })
     public void getAttributeAndSetValue() throws Exception {
         final String html =
             "<html>\n"
@@ -912,7 +920,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "4", "", "0" },
-            IE = { "null", "4", "null", "4" })
+            IE6 = { "null", "4", "null", "4" },
+            IE8 = { "null", "4", "null", "4" })
     @NotYetImplemented(FF)
     public void getAttributeAndSetValueNull() throws Exception {
         final String html =

@@ -43,6 +43,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
  * @author Marc Guillemot
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLImageElementTest extends WebDriverTestCase {
@@ -51,7 +52,9 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLImageElement]", IE = "[object]")
+    @Alerts(DEFAULT = "[object HTMLImageElement]",
+            IE6 = "[object]",
+            IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -300,8 +303,8 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "number: 300", "number: 200", "number: 24", "number: 24", "number: 24", "number: 24" },
-            IE = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 1", "number: 1" },
-            CHROME = { "number: 300", "number: 200", "number: 0", "number: 0", "number: 0", "number: 0" })
+            CHROME = { "number: 300", "number: 200", "number: 0", "number: 0", "number: 0", "number: 0" },
+            IE = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 1", "number: 1" })
     public void testWidthHeightWithoutSource() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -330,7 +333,8 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "number: 300", "number: 200", "number: 1", "number: 1", "number: 1", "number: 1" })
+    @Alerts(DEFAULT = { "number: 300", "number: 200", "number: 1", "number: 1", "number: 1", "number: 1" },
+            IE10 = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 1", "number: 1" })
     public void testWidthHeightWithSource() throws Exception {
         getMockWebConnection().setDefaultResponse("");
 
@@ -371,8 +375,9 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "number: 300", "number: 200", "number: 24", "number: 24", "number: 24", "number: 24" },
+            CHROME = { "number: 300", "number: 200", "number: 18", "number: 20", "number: 18", "number: 20" },
             IE = { "number: 300", "number: 200", "number: 1", "number: 1", "number: 1", "number: 1" },
-            CHROME = { "number: 300", "number: 200", "number: 18", "number: 20", "number: 18", "number: 20" })
+            IE10 = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 1", "number: 1" })
     public void testWidthHeightInvalidSource() throws Exception {
         getMockWebConnection().setDefaultResponse("");
 
