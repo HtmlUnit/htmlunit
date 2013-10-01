@@ -43,8 +43,8 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "change [select] [-]", "click [clickMe] [1]" },
-            IE8 = { "click [select] [1]", "click [clickMe] [1]", "change [select] [-]" },
-            IE = { "change [select] [-]", "click [select] [-]" })
+            IE = { "change [select] [-]", "click [select] [-]" },
+            IE8 = { "click [select] [1]", "click [clickMe] [1]", "change [select] [-]" })
     @NotYetImplemented({ FF, IE8 })
     @BuggyWebDriver // FFDriver wrongly generates a "click [select] [1]" first that doesn't occur manually
     public void optionClick() throws Exception {
@@ -64,7 +64,8 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "click [radio] [1]", "change [radio] [-]" },
-            IE = { "click [radio] [-]" })
+            IE = { "click [radio] [-]" },
+            IE10 = { "change [radio] [-]", "click [radio] [1]" })
     public void radioClick() throws Exception {
         final String firstSnippet = "       <input type='radio' name='radio' id='clickMe' value='2'\n";
         final String secondSnippet = ">Radio\n";
@@ -78,7 +79,8 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "click [checkbox] [1]", "change [checkbox] [-]" },
-            IE = { "click [checkbox] [-]" })
+            IE = { "click [checkbox] [-]" },
+            IE10 = { "change [checkbox] [-]", "click [checkbox] [1]" })
     public void checkboxClick() throws Exception {
         final String firstSnippet = "       <input type='checkbox' name='checkbox' id='clickMe' value='2'\n";
         final String secondSnippet = ">Checkbox\n";
@@ -91,7 +93,9 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "click [clickMe] [1]", IE = "click [clickMe] [-]")
+    @Alerts(DEFAULT = "click [clickMe] [1]",
+            IE6 = "click [clickMe] [-]",
+            IE8 = "click [clickMe] [-]")
     public void inputTextClick() throws Exception {
         final String firstSnippet = "       <input type='text' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
@@ -104,7 +108,9 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "click [clickMe] [1]", IE = "click [clickMe] [-]")
+    @Alerts(DEFAULT = "click [clickMe] [1]",
+            IE6 = "click [clickMe] [-]",
+            IE8 = "click [clickMe] [-]")
     public void inputPasswordClick() throws Exception {
         final String firstSnippet = "       <input type='password' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
@@ -117,7 +123,9 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "click [clickMe] [1]", IE = "click [clickMe] [-]")
+    @Alerts(DEFAULT = "click [clickMe] [1]",
+            IE6 = "click [clickMe] [-]",
+            IE8 = "click [clickMe] [-]")
     public void textareaClick() throws Exception {
         final String firstSnippet = "       <textarea name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = "></textarea>\n";
@@ -144,7 +152,9 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "click [clickMe] [1]", IE = "click [clickMe] [-]")
+    @Alerts(DEFAULT = "click [clickMe] [1]",
+            IE6 = "click [clickMe] [-]",
+            IE8 = "click [clickMe] [-]")
     public void resetClick() throws Exception {
         final String firstSnippet = "       <input type='reset' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
@@ -157,7 +167,9 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "click [clickMe] [1]", IE = "click [clickMe] [-]")
+    @Alerts(DEFAULT = "click [clickMe] [1]",
+            IE6 = "click [clickMe] [-]",
+            IE8 = "click [clickMe] [-]")
     public void buttonClick() throws Exception {
         final String firstSnippet = "       <input type='button' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
@@ -170,7 +182,9 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "click [clickMe] [1]", IE = "click [clickMe] [-]")
+    @Alerts(DEFAULT = "click [clickMe] [1]",
+            IE6 = "click [clickMe] [-]",
+            IE8 = "click [clickMe] [-]")
     public void anchorClick() throws Exception {
         final String firstSnippet = "       <a href='#' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">anchor</a>\n";
