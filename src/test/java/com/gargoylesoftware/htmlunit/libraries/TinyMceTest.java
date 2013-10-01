@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static org.junit.Assert.assertNotNull;
 
 import java.net.URL;
@@ -29,6 +30,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -50,18 +52,24 @@ public class TinyMceTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = { "348", "0" },
+            IE10 = { "347", "84" })
+    @NotYetImplemented({ IE6, IE8 })
+    // TODO [IE10]XML tinymce 3.2.7 is not compatible with IE10
     public void api() throws Exception {
-        test("api", 348, 0);
+        test("api", Integer.parseInt(getExpectedAlerts()[0]), Integer.parseInt(getExpectedAlerts()[1]));
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = { "89", "0" },
+            IE10 = { "37", "32" })
     @NotYetImplemented
+    // TODO [IE10]XML tinymce 3.2.7 is not compatible with IE10
     public void basic() throws Exception {
-        test("basic", 89, 0);
+        test("basic", Integer.parseInt(getExpectedAlerts()[0]), Integer.parseInt(getExpectedAlerts()[1]));
     }
 
     private void test(final String fileName, final int expectedTotal, final int expectedFailed) throws Exception {
