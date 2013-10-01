@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
 
 import java.net.URL;
 
@@ -41,8 +42,10 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(IE = {"[object]", "undefined", "false", "[object]", "true" },
-            FF = {"[object CSSStyleSheet]", "[object HTMLStyleElement]", "true", "undefined", "false" })
+    @Alerts(FF = {"[object CSSStyleSheet]", "[object HTMLStyleElement]", "true", "undefined", "false" },
+            IE = {"[object]", "undefined", "false", "[object]", "true" },
+            IE10 = {"[object CSSStyleSheet]", "[object HTMLStyleElement]",
+                    "true", "[object HTMLStyleElement]", "true" })
     public void owningNodeOwningElement() throws Exception {
         final String html = "<html><head><title>test_hasChildNodes</title>\n"
                 + "<script>\n"
@@ -66,8 +69,9 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = { "4", "0", "1", "2", "3", "length", "item" },
-            IE = { "4", "length", "0", "1", "2", "3" })
+    @Alerts(DEFAULT = { "4", "0", "1", "2", "3", "length", "item" },
+            IE6 = { "4", "length", "0", "1", "2", "3" },
+            IE8 = { "4", "length", "0", "1", "2", "3" })
     public void rules() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
@@ -135,7 +139,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "1", "false", "true", "0", "2", "p" },
-            IE = { "1", "true", "false", "-1", "2", "DIV" })
+            IE = { "1", "true", "false", "-1", "2", "DIV" },
+            IE10 = { "1", "false", "false", "0", "2", "p" })
     public void addRule_insertRule() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -165,7 +170,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "2", "false", "true", "undefined", "1", "div" },
-            IE = { "2", "true", "false", "undefined", "1", "DIV" })
+            IE = { "2", "true", "false", "undefined", "1", "DIV" },
+            IE10 = { "2", "false", "false", "undefined", "1", "div" })
     public void removeRule_deleteRule() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -221,8 +227,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Browsers({ FF, IE10 })
     @Alerts({ "2", ".testStyleDef", ".testStyle" })
-    @Browsers(FF)
     public void insertRuleLeadingWhitespace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -273,8 +279,9 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = { "false", "false", "true", "true", "false" },
-            IE = { "false", "false", "false", "false", "false" })
+    @Alerts(DEFAULT = { "false", "false", "true", "true", "false" },
+            IE6 = { "false", "false", "false", "false", "false" },
+            IE8 = { "false", "false", "false", "false", "false" })
     public void langCondition() throws Exception {
         final String htmlSnippet = "<div id='elt2' lang='en'></div>\n"
                 + "  <div id='elt3' lang='en-GB'></div>\n"
@@ -286,7 +293,9 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = { "true", "false" }, IE = { "false", "false" })
+    @Alerts(DEFAULT = { "true", "false" },
+            IE6 = { "false", "false" },
+            IE8 = { "false", "false" })
     public void css2_root() throws Exception {
         doTest(":root", "");
     }
@@ -296,7 +305,9 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = { "true", "true", "false" }, IE = { "false", "false", "false" })
+    @Alerts(DEFAULT = { "true", "true", "false" },
+            IE6 = { "false", "false", "false" },
+            IE8 = { "false", "false", "false" })
     public void css3_not() throws Exception {
         doTest(":not(span)", "<span id='elt2'></span>");
     }
@@ -305,8 +316,9 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = { "false", "false", "true", "false", "true", "true", "true", "true" },
-            IE = { "false", "false", "false", "false", "false", "false", "false", "false" })
+    @Alerts(DEFAULT = { "false", "false", "true", "false", "true", "true", "true", "true" },
+            IE6 = { "false", "false", "false", "false", "false", "false", "false", "false" },
+            IE8 = { "false", "false", "false", "false", "false", "false", "false", "false" })
     public void css3_enabled() throws Exception {
         final String htmlSnippet = "<input id='elt2'>\n"
             + "<input id='elt3' disabled>\n"
@@ -321,8 +333,9 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = { "false", "false", "true", "false", "true", "true", "true", "true" },
-            IE = { "false", "false", "false", "false", "false", "false", "false", "false" })
+    @Alerts(DEFAULT = { "false", "false", "true", "false", "true", "true", "true", "true" },
+            IE6 = { "false", "false", "false", "false", "false", "false", "false", "false" },
+            IE8 = { "false", "false", "false", "false", "false", "false", "false", "false" })
     public void css3_disabled() throws Exception {
         final String htmlSnippet = "<input id='elt2' disabled>\n"
             + "<input id='elt3'>\n"
@@ -337,8 +350,9 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = { "false", "false", "false", "false", "true", "false", "true", "false" },
-            IE = { "false", "false", "false", "false", "false", "false", "false", "false" })
+    @Alerts(DEFAULT = { "false", "false", "false", "false", "true", "false", "true", "false" },
+            IE6 = { "false", "false", "false", "false", "false", "false", "false", "false" },
+            IE8 = { "false", "false", "false", "false", "false", "false", "false", "false" })
     public void css3_checked() throws Exception {
         final String htmlSnippet = "<input id='elt2'>\n"
             + "<input id='elt3' checked>\n"

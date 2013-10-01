@@ -15,7 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,9 +40,10 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF3_6 = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1", "", "10px, ", "red" },
-            FF = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "H1", "", "10px, ", "red" },
-            IE = { "[object]", "H1", "", "10px, ", "red" })
+    @Alerts(FF = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "H1", "", "10px, ", "red" },
+            FF3_6 = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1", "", "10px, ", "red" },
+            IE = { "[object]", "H1", "", "10px, ", "red" },
+            IE10 = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1", "", "10px, ", "red" })
     @NotYetImplemented(FF17)
     public void test() throws Exception {
         final String html = "<html><head><title>First</title>\n"
@@ -115,8 +117,9 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(IE = "false")
-    @NotYetImplemented(IE)
+    @Alerts(IE = "false",
+            IE10 = "")
+    @NotYetImplemented({ IE6, IE8 })
     public void testReadOnly() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
@@ -147,9 +150,10 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF3_6 = { "body", "h1", "a.foo", ".foo", ".foo .foo2", "#byId" },
-            FF = { "BoDY", "H1", "A.foo", ".foo", ".foo .foo2", "#byId" },
-            IE = { "BODY", "H1", "A.foo", ".foo", ".foo .foo2", "#byId" })
+    @Alerts(FF = { "BoDY", "H1", "A.foo", ".foo", ".foo .foo2", "#byId" },
+            FF3_6 = { "body", "h1", "a.foo", ".foo", ".foo .foo2", "#byId" },
+            IE = { "BODY", "H1", "A.foo", ".foo", ".foo .foo2", "#byId" },
+            IE10 = { "body", "h1", "a.foo", ".foo", ".foo .foo2", "#byId" })
     @NotYetImplemented(FF17)
     public void selectorText() throws Exception {
         final String html = "<html><head><title>First</title>\n"
@@ -178,10 +182,11 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(IE = { "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='rightCorner.gif',sizingMethod='crop')" },
+    @Alerts(DEFAULT = { "" },
             FF3_6 = { "undefined" },
-            DEFAULT = { "" })
-    @NotYetImplemented({ IE, FF17 })
+            IE6 = { "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='rightCorner.gif',sizingMethod='crop')" },
+            IE8 = { "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='rightCorner.gif',sizingMethod='crop')" })
+    @NotYetImplemented({ FF17, IE6, IE8 })
     public void colon() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"

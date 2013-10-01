@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class StyleSheetListTest extends WebDriverTestCase {
@@ -64,7 +65,9 @@ public class StyleSheetListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "rgb(255, 0, 0)", "rgb(255, 0, 0)" }, IE = "exception")
+    @Alerts(DEFAULT = { "rgb(255, 0, 0)", "rgb(255, 0, 0)" },
+            IE6 = "exception",
+            IE8 = "exception")
     public void getComputedStyle_Link() throws Exception {
         final String html =
               "<html>\n"
@@ -98,7 +101,8 @@ public class StyleSheetListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0", "undefined", "undefined", "exception for -2" },
-            IE = { "0", "exception for 0", "exception for 46", "exception for -2" })
+            IE = { "0", "exception for 0", "exception for 46", "exception for -2" },
+            IE10 = { "0", "undefined", "undefined", "undefined" })
     public void arrayIndexOutOfBoundAccess() throws Exception {
         final String html =
               "<html>\n"
@@ -142,7 +146,9 @@ public class StyleSheetListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"1", "[object CSSStyleSheet]", "[object CSSStyleSheet]" }, IE = { "1", "[object]", "[object]" })
+    @Alerts(DEFAULT = {"1", "[object CSSStyleSheet]", "[object CSSStyleSheet]" },
+            IE6 = { "1", "[object]", "[object]" },
+            IE8 = { "1", "[object]", "[object]" })
     public void nonExistentStylesheet() throws Exception {
         final String html =
               "<html>\n"
@@ -168,7 +174,9 @@ public class StyleSheetListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"1", "[object CSSStyleSheet]", "[object CSSStyleSheet]" }, IE = { "1", "[object]", "[object]" })
+    @Alerts(DEFAULT = {"1", "[object CSSStyleSheet]", "[object CSSStyleSheet]" },
+            IE6 = { "1", "[object]", "[object]" },
+            IE8 = { "1", "[object]", "[object]" })
     public void emptyGZipEncodedStylesheet() throws Exception {
         final String html =
               "<html>\n"
@@ -201,7 +209,9 @@ public class StyleSheetListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"1", "[object CSSStyleSheet]", "[object CSSStyleSheet]" }, IE = { "1", "[object]", "[object]" })
+    @Alerts(DEFAULT = { "1", "[object CSSStyleSheet]", "[object CSSStyleSheet]" },
+            IE6 = { "1", "[object]", "[object]" },
+            IE8 = { "1", "[object]", "[object]" })
     public void brokenGZipEncodedStylesheet() throws Exception {
         final String html =
               "<html>\n"
