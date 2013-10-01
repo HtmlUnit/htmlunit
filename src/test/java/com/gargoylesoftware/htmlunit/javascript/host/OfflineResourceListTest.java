@@ -34,7 +34,9 @@ public class OfflineResourceListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = "undefined", FF = "[object OfflineResourceList]")
+    @Alerts(FF = "[object OfflineResourceList]",
+            IE = "undefined",
+            IE10 = "[object ApplicationCache]")
     public void existence() throws Exception {
         final String html
             = "<html><body><script>\n"

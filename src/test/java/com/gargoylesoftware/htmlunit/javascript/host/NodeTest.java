@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +29,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest;
 
 /**
  * Tests for {@link Node}.
@@ -38,6 +40,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * @author Bruce Faulkner
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class NodeTest extends WebDriverTestCase {
@@ -243,7 +246,8 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "exception", IE = { "3", "H2" })
+    @Alerts(FF = "exception",
+            IE = { "3", "H2" })
     public void test_insertBefore_noSecondArg() throws Exception {
         test_insertBefore("aNode.insertBefore(nodeToInsert);");
     }
@@ -302,7 +306,8 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = "exception", IE = { "in foo1", "in foo2" })
+    @Alerts(FF = "exception",
+            IE = { "in foo1", "in foo2" })
     public void testAttachEvent() throws Exception {
         final String html = "<html><head>\n"
             + "<title>First</title>\n"
@@ -330,9 +335,10 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3_6 = { "true", "false" },
-            FF = { "isSameNode not supported" },
-            IE = { "isSameNode not supported" })
+    @Alerts(FF = { "isSameNode not supported" },
+            FF3_6 = { "true", "false" },
+            IE = { "isSameNode not supported" },
+            IE10 = { "true", "false" })
     public void testIsSameNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -359,7 +365,9 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "null", "null" }, IE = { "null", "#document-fragment" })
+    @Alerts(DEFAULT = { "null", "null" },
+            IE6 = { "null", "#document-fragment" },
+            IE8 = { "null", "#document-fragment" })
     public void testAppendChild_parentNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -383,8 +391,9 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "1", "exception", "1", "exception", "1", "exception", "1" },
-            IE = { "1", "1", "1", "exception", "1" })
+    @Alerts(DEFAULT = { "1", "exception", "1", "exception", "1", "exception", "1" },
+            IE6 = { "1", "1", "1", "exception", "1" },
+            IE8 = { "1", "1", "1", "exception", "1" })
     public void append_insert_html_node() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -410,7 +419,9 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "null", "null" }, IE = { "null", "#document-fragment" })
+    @Alerts(DEFAULT = { "null", "null" },
+            IE6 = { "null", "#document-fragment" },
+            IE8 = { "null", "#document-fragment" })
     public void testInsertBefore_parentNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -461,7 +472,8 @@ public class NodeTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "3", "3", "123", "3", "123", "456", "3", "undefined" },
             FF17 = { "3", "3", "123", "3", "123", "3", "3", "3" },
-            IE = { "undefined", "not supported" })
+            IE = { "undefined", "not supported" },
+            IE10 = { "3", "3", "3", "3", "3", "3", "3", "3" })
     @NotYetImplemented(FF17)
     public void testNodePrototype() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -493,8 +505,10 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
-            "<div>one</div><div>two</div><div id=\"myDiv3\"></div>" }, IE = { "exception thrown" })
+    @Alerts(DEFAULT = { "<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
+            "<div>one</div><div>two</div><div id=\"myDiv3\"></div>" },
+            IE6 = { "exception thrown" },
+            IE8 = { "exception thrown" })
     public void testReplaceChild() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -522,8 +536,10 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
-            "<div id=\"myDiv3\"></div>" }, IE = { "exception thrown" })
+    @Alerts(DEFAULT = { "<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
+            "<div id=\"myDiv3\"></div>" },
+            IE6 = { "exception thrown" },
+            IE8 = { "exception thrown" })
     public void testReplaceChild_EmptyDocumentFragment() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -553,7 +569,8 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "in click",
-            IE = { "in click", "in click", "in click" })
+            IE6 = { "in click", "in click", "in click" },
+            IE8 = { "in click", "in click", "in click" })
     public void testCloneNode_copiesListenerOnlyForIE() throws Exception {
         final String html =
               "<html>\n"
@@ -591,7 +608,9 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "1", "1", "2", "4", "8", "16", "32" }, IE = { "undefined", "not supported" })
+    @Alerts(DEFAULT = { "1", "1", "2", "4", "8", "16", "32" },
+            IE6 = { "undefined", "not supported" },
+            IE8 = { "undefined", "not supported" })
     public void testDocumentPositionConstants() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -617,7 +636,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(FF)
+    @Browsers({ FF, IE10 })
     @Alerts({ "0", "20", "20", "4", "10", "10", "2", "20", "exception" })
     public void compareDocumentPosition() throws Exception {
         final String html
@@ -657,7 +676,9 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "0", "16" }, IE = "exception")
+    @Alerts(DEFAULT = { "0", "16" },
+            IE6 = "exception",
+            IE8 = "exception")
     public void compareDocumentPosition2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -678,7 +699,9 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "[object]", FF = "[object HTMLTableColElement]")
+    @Alerts(DEFAULT = "[object HTMLTableColElement]",
+            IE6 = "[object]",
+            IE8 = "[object]")
     public void insertBefore() throws Exception {
         final String html
             = "<html><head>\n"
@@ -728,21 +751,16 @@ public class NodeTest extends WebDriverTestCase {
     public void xml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
+            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
             + "    var root = doc.appendChild(doc.createElement('root'));\n"
             + "    var cdata = root.appendChild(doc.createCDATASection('abcdef'));\n"
             + "    cdata.splitText(3);\n"
-            + "    if (document.all)"
+            + "    if (root.xml)"
             + "      alert(root.xml);\n"
             + "    else\n"
             + "      alert(new XMLSerializer().serializeToString(root));\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -796,8 +814,9 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "4", "3", "abc", "def", "123456", "false", "0", "2", "123", "456", "1", "false" },
-            FF = { "4", "3", "abc", "def", "123456", "true", "0", "2", "123", "456", "1", "true" })
+    @Alerts(FF = { "4", "3", "abc", "def", "123456", "true", "0", "2", "123", "456", "1", "true" },
+            IE = { "4", "3", "abc", "def", "123456", "false", "0", "2", "123", "456", "1", "false" },
+            IE10 = { "4", "4", "abc", "def", "123", "false", "0", "2", "123", "456", "2", "false" })
     public void normalize() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -840,8 +859,8 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"undefined", "[object HTMLHtmlElement]" }, FF = {"[object Element]", "[object HTMLHtmlElement]" },
-            FF3_6 = {"undefined", "undefined" })
+    @Alerts(FF3_6 = {"undefined", "undefined" },
+            IE = {"undefined", "[object HTMLHtmlElement]" }, FF = {"[object Element]", "[object HTMLHtmlElement]" })
     public void parentElement() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -899,7 +918,9 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true" }, IE = { "false", "false" })
+    @Alerts(DEFAULT = { "true", "true" },
+            IE6 = { "false", "false" },
+            IE8 = { "false", "false" })
     public void addEventListener() throws Exception {
         final String html =
               "<html>\n"
