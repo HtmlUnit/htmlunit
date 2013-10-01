@@ -572,17 +572,23 @@ public final class HTMLParser {
                     if ("X-UA-Compatible".equals(meta.getHttpEquivAttribute())) {
                         final String content = meta.getContentAttribute();
                         if (content.startsWith("IE=")) {
-                            try {
-                                int value = Integer.parseInt(content.substring(3).trim());
-                                final int version = (int) page_.getWebClient().getBrowserVersion().
-                                        getBrowserVersionNumeric();
-                                if (value > version) {
-                                    value = version;
-                                }
-                                ((HTMLDocument) page_.getScriptObject()).forceDocumentMode(value);
+                            final String mode = content.substring(3).trim();
+                            final int version = (int) page_.getWebClient().getBrowserVersion().
+                                                                getBrowserVersionNumeric();
+                            if ("edge".equals(mode)) {
+                                ((HTMLDocument) page_.getScriptObject()).forceDocumentMode(version);
                             }
-                            catch (final Exception e) {
-                                // ignore
+                            else {
+                                try {
+                                    int value = Integer.parseInt(mode);
+                                    if (value > version) {
+                                        value = version;
+                                    }
+                                    ((HTMLDocument) page_.getScriptObject()).forceDocumentMode(value);
+                                }
+                                catch (final Exception e) {
+                                    // ignore
+                                }
                             }
                         }
                     }
