@@ -1,11 +1,13 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0016)http://localhost -->
 <html>
 <head>
     <script type="text/javascript" src="../lib/MochiKit/MockDOM.js"></script>
     <script type="text/javascript" src="../lib/MochiKit/Base.js"></script>
     <script type="text/javascript" src="../lib/MochiKit/Iter.js"></script>
     <script type="text/javascript" src="../lib/MochiKit/DOM.js"></script>
-    <script type="text/javascript" src="../lib/MochiKit/Style.js"></script>    
-    <script type="text/javascript" src="SimpleTest/SimpleTest.js"></script>        
+    <script type="text/javascript" src="../lib/MochiKit/Style.js"></script>
+    <script type="text/javascript" src="SimpleTest/SimpleTest.js"></script>
     <link rel="stylesheet" type="text/css" href="SimpleTest/test.css">
 </head>
 <body>
@@ -69,8 +71,8 @@ try {
     is( lst.join(" "), "original new", "callStack in correct order (abort)" );
     o.blah();
     is( lst.join(" "), "original new original new", "callStack in correct order (again)" );
-    
-    
+
+
     is( escapeHTML("<>\"&bar"), "&lt;&gt;&quot;&amp;bar", "escapeHTML" ); // for emacs highlighting: "
 
     var isDOM = function (value, expected, message) {
@@ -101,7 +103,7 @@ try {
     isDOM( d, '<span>word up<span/>Think Different</span>', 'insertSiblingNodesBefore' );
 
     insertSiblingNodesAfter(d.childNodes[0], 'purple monkey', document.createElement('span'));
-    isDOM( d, '<span>word uppurple monkey<span/><span/>Think Different</span>', 'insertSiblingNodesAfter' ); 
+    isDOM( d, '<span>word uppurple monkey<span/><span/>Think Different</span>', 'insertSiblingNodesAfter' );
 
     d = createDOM("span");
     isDOM( d, "<span/>", "createDOM empty" );
@@ -117,7 +119,7 @@ try {
     is( getNodeAttribute("donotexist", 'foo'), null, "getNodeAttribute invalid node id" );
     removeNodeAttribute(d, "spam");
     is( scrapeText(d), "onetwothree", "createDOM contents" );
-    
+
     isDOM( d, '<span baz="wibble" foo="bar">onetwothree</span>', "createDOM contents" );
 
     d = createDOM("span", null, function (f) {
@@ -146,7 +148,7 @@ try {
     domConverters.unregister("taco");
 
     isDOM( d, "<span>Goddamn, I like pork tacos</span>", "createDOM with custom converter" );
-    
+
     is(
         escapeHTML(toHTML(SPAN(null))),
         escapeHTML(toHTML(createDOM("span", null))),
@@ -158,8 +160,8 @@ try {
 
     var st = DIV(null, STRONG(null, "d"), "oor ", STRONG(null, "f", SPAN(null, "r"), "a"), "me");
     is( scrapeText(st), "door frame", "scrape in-order" );
-    
-    
+
+
     ok( !isUndefinedOrNull(getElement("test")), "getElement might work" );
     ok( !isUndefinedOrNull($("test")), "$ alias might work" );
     ok( getElement("donotexist") === null, "getElement invalid id" );
@@ -185,10 +187,10 @@ try {
     toggleElementClass("bar", d);
     ok( d.className == "baz", "toggleElementClass: " + d.className);
     toggleElementClass("bar", d);
-    ok( hasElementClass(d, "baz", "bar"), 
+    ok( hasElementClass(d, "baz", "bar"),
         "toggleElementClass 2: " + d.className);
     addElementClass(d, "bar");
-    ok( hasElementClass(d, "baz", "bar"), 
+    ok( hasElementClass(d, "baz", "bar"),
         "toggleElementClass 3: " + d.className);
     ok( addElementClass(d, "blah"), "addElementClass return");
     ok( hasElementClass(d, "baz", "bar", "blah"), "addElementClass action");
@@ -306,7 +308,7 @@ try {
     is( kv[0].join(","), "selempty,selempty2", "formContents names empty option values" );
     is( kv[1].join(","), ",foo", "formContents empty option values" );
     is( queryString("form_test2"), "selempty=&selempty2=foo", "queryString empty option values" );
-    
+
     var d = DIV(null, SPAN(), " \n\t", SPAN(), "foo", SPAN(), " ");
     is( d.childNodes.length, 6, "removeEmptyNodes test conditions correct" );
     removeEmptyTextNodes(d);
@@ -332,10 +334,10 @@ try {
     ok( !isChildNode( 'child', SPAN()), "isChildNode parent not in DOM");
 
     ok( true, "test suite finished!");
-    
-    
+
+
 } catch (err) {
-    
+
     var s = "test suite failure!\n";
     var o = {};
     var k = null;

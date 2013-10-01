@@ -1,17 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0016)http://localhost -->
 <html>
 <head>
     <script type="text/javascript" src="../lib/MochiKit/MockDOM.js"></script>
     <script type="text/javascript" src="../lib/MochiKit/Base.js"></script>
     <script type="text/javascript" src="../lib/MochiKit/Iter.js"></script>
     <script type="text/javascript" src="../lib/MochiKit/DOM.js"></script>
-    <script type="text/javascript" src="../lib/MochiKit/Style.js"></script>    
-    <script type="text/javascript" src="../lib/MochiKit/Selector.js"></script>    
-    <script type="text/javascript" src="SimpleTest/SimpleTest.js"></script>        
+    <script type="text/javascript" src="../lib/MochiKit/Style.js"></script>
+    <script type="text/javascript" src="../lib/MochiKit/Selector.js"></script>
+    <script type="text/javascript" src="SimpleTest/SimpleTest.js"></script>
     <link rel="stylesheet" type="text/css" href="SimpleTest/test.css">
     <style type="text/css">
         p, #sequence {
             display: none;
-        } 
+        }
     </style>
 </head>
 <body>
@@ -21,7 +23,7 @@
     <div id="foo">
     <p>Everything inside the red border is inside a div with <code>id="foo"</code>.</p>
     <p>This is a normal link: <a href="http://www.yahoo.com/">Yahoo</a></p>
-    
+
     <a style="display: none" href="http://www.example.com/outsidep">This a is not inside a p</a>
 
     <p>This link has <code>class="blog"</code>: <a href="http://simon.incutio.com/" class="blog">Simon Willison's Weblog</a></p>
@@ -46,7 +48,7 @@
         <a href="http://www.example.com/link7">Link 7</a>
         <a href="http://www.example.com/link8">Link 8</a>
     </div>
-    
+
     <div id="multiclass" class="multiple classnames here"></div>
 <pre id="test">
 <script type="text/javascript">
@@ -78,7 +80,7 @@ try {
     testExpected(results, expected, "'a' selector");
 
     expected = ['http://diveintomark.org/', 'http://simon.incutio.com/'];
-    results = $$('p a.blog');    
+    results = $$('p a.blog');
     testExpected(results, expected, "'p a.blog' selector");
 
     expected = ['http://www.yahoo.com/',
@@ -213,7 +215,7 @@ try {
                 'http://www.example.com/link7'];
     results = $$('#sequence a:nth-of-type(odd)');
     testExpected(results, expected, "'#sequence a:nth-of-type(odd)' selector");
-    
+
     expected = ['http://www.example.com/link1',
                 'http://www.example.com/link4',
                 'http://www.example.com/link7'];
@@ -223,17 +225,17 @@ try {
     expected = ['http://www.example.com/link5'];
     results = $$('#sequence a:nth-child(6)');
     testExpected(results, expected, "'#sequence a:nth-child(6)' selector");
-    
+
     expected = ['http://www.example.com/link5'];
     results = $$('#sequence a:nth-of-type(5)');
     testExpected(results, expected, "'#sequence a:nth-of-type(5)' selector");
-    
+
     expected =  [$('enabled'), $('checked')];
     results = $$('body :enabled');
     for (var i=0; i < results.length; i ++) {
         is( results[i], expected[i], "'body :enabled" + ' (' + i + ')');
     }
-    
+
     expected =  [$('disabled')];
     results = $$('body :disabled');
     for (var i=0; i < results.length; i ++) {
@@ -245,25 +247,25 @@ try {
     for (var i=0; i < results.length; i ++) {
         is( results[i], expected[i], "'body :checked" + ' (' + i + ')');
     }
-    
+
     expected = document.getElementsByTagName('p');
     results = $$('a[href$=outsidep] ~ *');
     for (var i=0; i < results.length; i ++) {
         is( results[i], expected[i+4], "'a[href$=outsidep] ~ *' selector" + ' (' + i + ')');
     }
-    
+
     expected = [document.documentElement];
     results = $$(':root');
     for (var i=0; i < results.length; i ++) {
         is( results[i], expected[i], "':root' selector" + ' (' + i + ')');
     }
-    
+
     expected = [$('multiclass')];
     results = $$('[class~=classnames]');
     for (var i=0; i < results.length; i ++) {
         is( results[i], expected[i], "'~=' attribute test" + ' (' + i + ')');
     }
-    
+
     var doc = MochiKit.MockDOM.createDocument();
     appendChildNodes(doc.body, A({"href": "http://www.example.com/insideAnotherDocument"}, "Inside a document"));
     withDocument(doc, function(){
@@ -272,10 +274,10 @@ try {
     });
 
     ok( true, "test suite finished!");
-    
-    
+
+
 } catch (err) {
-    
+
     var s = "test suite failure!\n";
     var o = {};
     var k = null;

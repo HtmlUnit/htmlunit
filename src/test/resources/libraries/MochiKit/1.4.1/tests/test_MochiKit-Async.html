@@ -1,11 +1,13 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0016)http://localhost -->
 <html>
 <head>
     <script type="text/javascript" src="../lib/MochiKit/Base.js"></script>
     <script type="text/javascript" src="../lib/MochiKit/Async.js"></script>
     <script type="text/javascript" src="../lib/MochiKit/Iter.js"></script>
-    <script type="text/javascript" src="../lib/MochiKit/DOM.js"></script>    
-    <script type="text/javascript" src="../lib/MochiKit/Style.js"></script>    
-    <script type="text/javascript" src="SimpleTest/SimpleTest.js"></script>        
+    <script type="text/javascript" src="../lib/MochiKit/DOM.js"></script>
+    <script type="text/javascript" src="../lib/MochiKit/Style.js"></script>
+    <script type="text/javascript" src="SimpleTest/SimpleTest.js"></script>
     <link rel="stylesheet" type="text/css" href="SimpleTest/test.css">
 </head>
 <body>
@@ -13,7 +15,7 @@
 <pre id="test">
 <script type="text/javascript">
 try {
-        
+
     var increment = function (res) {
         return res + 1;
     }
@@ -36,10 +38,10 @@ try {
             return res;
         }
     }
-    
+
     var testEqCallback = function () {
-        /* 
-            sort of emulate how deferreds work in Twisted 
+        /*
+            sort of emulate how deferreds work in Twisted
             for "convenient" testing
         */
         var args = [];
@@ -57,7 +59,7 @@ try {
     var neverHappen = function (d) {
         ok(false, "this should never happen");
     }
-    
+
     /*
         Test normal Deferred operation
     */
@@ -162,7 +164,7 @@ try {
     } catch (e) {
         ok(e instanceof AlreadyCalledError, "non-swallowed cancel");
     }
-    
+
     /* Test incorrect Deferred usage */
 
     d = new Deferred();
@@ -188,7 +190,7 @@ try {
     } catch (e) {
         ok (e instanceof Error, "chained deferred not allowed to be re-used");
     }
- 
+
     /*
         evalJSONRequest test
     */
@@ -202,7 +204,7 @@ try {
     } catch (e) {
         ok(false, "no love from getXMLHttpRequest");
     }
-    
+
     var lock = new DeferredLock();
     var lst = [];
     var pushNumber = function (x) {
@@ -244,77 +246,77 @@ try {
     d.addErrback(ebTest, "foo");
     is( lst[1], "foo", "auto-partial errback" );
     is( lst.length, 3, "auto-partial errback" );
-    
-    /* 
-        Test DeferredList 
-    */ 
-     
+
+    /*
+        Test DeferredList
+    */
+
     var callList = [new Deferred(), new Deferred(), new Deferred()];
-    callList[0].addCallback(increment); 
-    callList[1].addCallback(increment); 
-    callList[2].addCallback(increment); 
-    var defList = new DeferredList(callList); 
+    callList[0].addCallback(increment);
+    callList[1].addCallback(increment);
+    callList[2].addCallback(increment);
+    var defList = new DeferredList(callList);
     ok(defList instanceof Deferred, "DeferredList looks like a Deferred");
-    
-    callList[0].callback(3); 
-    callList[1].callback(5); 
-    callList[2].callback(4); 
-     
-    defList.addCallback(function (lst) { 
-        is( arrayEqual(lst, [[true, 4], [true, 6], [true, 5]]), 1, 
-           "deferredlist result ok" ); 
-    }); 
-    
-    /* 
-        Test fireOnOneCallback 
-    */ 
-    
+
+    callList[0].callback(3);
+    callList[1].callback(5);
+    callList[2].callback(4);
+
+    defList.addCallback(function (lst) {
+        is( arrayEqual(lst, [[true, 4], [true, 6], [true, 5]]), 1,
+           "deferredlist result ok" );
+    });
+
+    /*
+        Test fireOnOneCallback
+    */
+
     var callList2 = [new Deferred(), new Deferred(), new Deferred()];
-    callList2[0].addCallback(increment); 
-    callList2[1].addCallback(increment); 
-    callList2[2].addCallback(increment); 
-    var defList2 = new DeferredList(callList2, true); 
-    callList2[1].callback(5); 
-    callList2[0].callback(3); 
-    callList2[2].callback(4); 
-     
-    defList2.addCallback(function (lst) { 
-        is( arrayEqual(lst, [1, 6]), 1, "deferredlist fireOnOneCallback ok" ); 
-    }); 
-   
-    /* 
-        Test fireOnOneErrback 
-    */ 
-  
+    callList2[0].addCallback(increment);
+    callList2[1].addCallback(increment);
+    callList2[2].addCallback(increment);
+    var defList2 = new DeferredList(callList2, true);
+    callList2[1].callback(5);
+    callList2[0].callback(3);
+    callList2[2].callback(4);
+
+    defList2.addCallback(function (lst) {
+        is( arrayEqual(lst, [1, 6]), 1, "deferredlist fireOnOneCallback ok" );
+    });
+
+    /*
+        Test fireOnOneErrback
+    */
+
     var callList3 = [new Deferred(), new Deferred(), new Deferred()];
-    callList3[0].addCallback(increment); 
-    callList3[1].addCallback(throwStuff); 
-    callList3[2].addCallback(increment); 
-    var defList3 = new DeferredList(callList3, false, true); 
+    callList3[0].addCallback(increment);
+    callList3[1].addCallback(throwStuff);
+    callList3[2].addCallback(increment);
+    var defList3 = new DeferredList(callList3, false, true);
     defList3.callback = neverHappen;
-    callList3[0].callback(3); 
-    callList3[1].callback("foo"); 
-    callList3[2].callback(4); 
-     
-    defList3.addErrback(function (err) { 
-        is( err.message, "foo", "deferredlist fireOnOneErrback ok" ); 
-    }); 
- 
-    /* 
-        Test consumeErrors 
-    */ 
- 
+    callList3[0].callback(3);
+    callList3[1].callback("foo");
+    callList3[2].callback(4);
+
+    defList3.addErrback(function (err) {
+        is( err.message, "foo", "deferredlist fireOnOneErrback ok" );
+    });
+
+    /*
+        Test consumeErrors
+    */
+
     var callList4 = [new Deferred(), new Deferred(), new Deferred()];
-    callList4[0].addCallback(increment); 
-    callList4[1].addCallback(throwStuff); 
-    callList4[2].addCallback(increment); 
-    var defList4 = new DeferredList(callList4, false, false, true); 
-    defList4.addErrback(neverHappen); 
-    callList4[1].addCallback(function (arg) { 
-        is(arg, null, "deferredlist consumeErrors ok" ); 
-    }); 
-    callList4[0].callback(3); 
-    callList4[1].callback("foo"); 
+    callList4[0].addCallback(increment);
+    callList4[1].addCallback(throwStuff);
+    callList4[2].addCallback(increment);
+    var defList4 = new DeferredList(callList4, false, false, true);
+    defList4.addErrback(neverHappen);
+    callList4[1].addCallback(function (arg) {
+        is(arg, null, "deferredlist consumeErrors ok" );
+    });
+    callList4[0].callback(3);
+    callList4[1].callback("foo");
     callList4[2].callback(4);
 
     /*
@@ -322,19 +324,19 @@ try {
     */
 
     var callList5 = [new Deferred(), new Deferred(), new Deferred()];
-    callList5[0].addCallback(increment); 
-    callList5[1].addCallback(increment); 
-    callList5[2].addCallback(increment); 
-    var gatherRet = gatherResults(callList5); 
-    callList5[0].callback(3); 
-    callList5[1].callback(5); 
-    callList5[2].callback(4); 
-     
-    gatherRet.addCallback(function (lst) { 
-        is( arrayEqual(lst, [4, 6, 5]), 1, 
-           "gatherResults result ok" ); 
-    }); 
-    
+    callList5[0].addCallback(increment);
+    callList5[1].addCallback(increment);
+    callList5[2].addCallback(increment);
+    var gatherRet = gatherResults(callList5);
+    callList5[0].callback(3);
+    callList5[1].callback(5);
+    callList5[2].callback(4);
+
+    gatherRet.addCallback(function (lst) {
+        is( arrayEqual(lst, [4, 6, 5]), 1,
+           "gatherResults result ok" );
+    });
+
     /*
         Test maybeDeferred
     */
@@ -384,10 +386,10 @@ try {
         ok(true, "async suite finished");
         SimpleTest.finish();
     });
-            
-    
+
+
 } catch (err) {
-    
+
     var s = "test suite failure!\n";
     var o = {};
     var k = null;
