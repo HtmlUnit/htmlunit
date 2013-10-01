@@ -25,7 +25,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -220,11 +219,13 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "true", "books", "books", "1", "book", "0" }, FF = { "true", "books", "books", "3", "#text", "0" })
+    @Alerts(FF = { "true", "books", "books", "3", "#text", "0" },
+            IE = { "true", "books", "books", "1", "book", "0" },
+            IE10 = { })
     public void load() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
+            + "    var doc = " + callCreateXMLDocument() + ";\n"
             + "    doc.async = false;\n"
             + "    alert(doc.load('" + URL_SECOND + "'));\n"
             + "    alert(doc.documentElement.nodeName);\n"
@@ -233,12 +234,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "    alert(doc.childNodes[0].childNodes[0].nodeName);\n"
             + "    alert(doc.getElementsByTagName('books').item(0).attributes.length);\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -258,24 +254,23 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "true", "books", "books", "1", "book" }, FF = { "true", "books", "books", "3", "#text" })
+    @Alerts(FF = { "true", "books", "books", "3", "#text", "0" },
+            IE = { "true", "books", "books", "1", "book", "0" },
+            IE10 = { })
+    // TODO what is the difference to load()?
     public void load_relativeURL() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
+            + "    var doc = " + callCreateXMLDocument() + ";\n"
             + "    doc.async = false;\n"
             + "    alert(doc.load('" + URL_SECOND + "'));\n"
             + "    alert(doc.documentElement.nodeName);\n"
             + "    alert(doc.childNodes[0].nodeName);\n"
             + "    alert(doc.childNodes[0].childNodes.length);\n"
             + "    alert(doc.childNodes[0].childNodes[0].nodeName);\n"
+            + "    alert(doc.getElementsByTagName('books').item(0).attributes.length);\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -295,15 +290,18 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "exception", IE = "false")
+    @Alerts(FF = "undefined",
+            IE = "false",
+            IE10 = "undefined")
     public void preserveWhiteSpace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "    var doc = new ActiveXObject('MSXML2.DOMDocument');\n"
-            + "    alert(doc.preserveWhiteSpace);\n"
+            + "      var doc = " + callCreateXMLDocument() + ";\n"
+            + "      alert(doc.preserveWhiteSpace);\n"
             + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
+            + CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -313,14 +311,19 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(FF)
+    @Alerts(FF = "exception",
+            IE = "",
+            IE10 = "exception")
     public void setProperty() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = new ActiveXObject('MSXML2.DOMDocument');\n"
-            + "    doc.setProperty('SelectionNamespaces', \"xmlns:xsl='http://www.w3.org/1999/XSL/Transform'\");\n"
-            + "    doc.setProperty('SelectionLanguage', 'XPath');\n"
+            + "    var doc = " + callCreateXMLDocument() + ";\n"
+            + "    try {\n"
+            + "      doc.setProperty('SelectionNamespaces', \"xmlns:xsl='http://www.w3.org/1999/XSL/Transform'\");\n"
+            + "      doc.setProperty('SelectionLanguage', 'XPath');\n"
+            + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
+            + CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -330,25 +333,20 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "true", "exception" }, IE = { "true", "1", "books" })
+    @Alerts(FF = { "exception" },
+            IE = { "1", "books" },
+            IE10 = { "exception" })
     public void selectNodes() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
-            + "    doc.async = false;\n"
-            + "    alert(doc.load('" + URL_SECOND + "'));\n"
+            + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "    try {\n"
             + "      var nodes = doc.selectNodes('/books');\n"
             + "      alert(nodes.length);\n"
             + "      alert(nodes[0].tagName);\n"
             + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -368,24 +366,19 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "exception", IE = { "0", "1" })
+    @Alerts(FF = "exception",
+            IE = { "0", "1" },
+            IE10 = { "exception" })
     public void selectNodes_caseSensitive() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
-            + "    doc.async = false;\n"
-            + "    doc.load('" + URL_SECOND + "');\n"
+            + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "    try {\n"
             + "      alert(doc.selectNodes('/bOoKs').length);\n"
             + "      alert(doc.selectNodes('/books').length);\n"
             + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -405,24 +398,19 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "true", "exception" }, IE = { "true", "2", "1" })
-    public void selectNodes_Namespace() throws Exception {
+    @Alerts(FF = { "exception" },
+            IE = { "2", "1" },
+            IE10 = { "exception" })
+    public void selectNodes_namespace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
-            + "    doc.async = false;\n"
-            + "    alert(doc.load('" + URL_SECOND + "'));\n"
+            + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "    try {\n"
             + "      alert(doc.selectNodes('//ns1:title').length);\n"
             + "      alert(doc.selectNodes('//ns2:title').length);\n"
             + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         final String xml
@@ -449,14 +437,14 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "exception", IE = { "book", "null", "book", "null" })
+    @Alerts(FF = "exception",
+            IE = { "book", "null", "book", "null" },
+            IE10 = "exception")
     public void selectNodes_nextNodeAndReset() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      var doc = new ActiveXObject('Microsoft.XMLDOM');;\n"
-            + "      doc.async = false;\n"
-            + "      doc.load('" + URL_SECOND + "');\n"
+            + "      var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "      var nodes = doc.selectNodes('//book');\n"
             + "      alert(nodes.nextNode().nodeName);\n"
             + "      alert(nodes.nextNode());\n"
@@ -465,6 +453,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "      alert(nodes.nextNode());\n"
             + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
+            + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>foo</body></html>";
 
         final String xml
@@ -483,21 +472,22 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "exception", IE = { "book", "#document", "book", "#document" })
+    @Alerts(FF = "exception",
+            IE = { "book", "#document", "book", "#document" },
+            IE10 = "exception")
     public void selectSingleNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var text='<book/>';\n"
             + "    try {\n"
-            + "      var doc = new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "      doc.async = false;\n"
-            + "      doc.loadXML(text);\n"
+            + "      var doc = " + callLoadXMLDocumentFromString("text") + ";\n"
             + "      alert(doc.selectNodes('*')[0].nodeName);\n"
             + "      alert(doc.selectNodes('/')[0].nodeName);\n"
             + "      alert(doc.selectSingleNode('*').nodeName);\n"
             + "      alert(doc.selectNodes('*')[0].selectSingleNode('/').nodeName);\n"
             + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
+            + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -512,16 +502,10 @@ public class XMLDocumentTest extends WebDriverTestCase {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var text='<someprefix:test xmlns:someprefix=\"http://myNS\"/>';\n"
-            + "    if (window.ActiveXObject) {\n"
-            + "      var doc=new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "      doc.async=false;\n"
-            + "      doc.loadXML(text);\n"
-            + "    } else {\n"
-            + "      var parser=new DOMParser();\n"
-            + "      var doc=parser.parseFromString(text,'text/xml');\n"
-            + "    }\n"
+            + "    var doc = " + callLoadXMLDocumentFromString("text") + ";\n"
             + "    alert(doc.documentElement.tagName);\n"
             + "  }\n"
+            + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -545,16 +529,10 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    var text='<root xml:space=\\'preserve\\'>This t"
             + "<elem>ext has</elem> <![CDATA[ CDATA ]]>in<elem /> it</root>';\n"
-            + "    if (window.ActiveXObject) {\n"
-            + "      var doc=new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "      doc.async=false;\n"
-            + "      doc.loadXML(text);\n"
-            + "    } else {\n"
-            + "      var parser=new DOMParser();\n"
-            + "      var doc=parser.parseFromString(text,'text/xml');\n"
-            + "    }\n"
+            + "    var doc = " + callLoadXMLDocumentFromString("text") + ";\n"
             + "    alert(doc.documentElement.childNodes.length);\n"
             + "  }\n"
+            + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -570,26 +548,26 @@ public class XMLDocumentTest extends WebDriverTestCase {
     public void testParseError() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "  try {\n"
-            + "    var doc = new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "    alert(doc.documentElement == null);\n"
-            + "    alert(doc.parseError.errorCode === 0);\n"
-            + "    alert(doc.parseError.filepos === 0);\n"
-            + "    alert(doc.parseError.line === 0);\n"
-            + "    alert(doc.parseError.linepos === 0);\n"
-            + "    alert(doc.parseError.reason === '');\n"
-            + "    alert(doc.parseError.srcText === '');\n"
-            + "    alert(doc.parseError.url === '');\n"
-            + "    doc.async = false;\n"
-            + "    alert(doc.load('" + URL_SECOND + "'));\n"
-            + "    alert(doc.documentElement == null);\n"
-            + "    alert(doc.parseError.errorCode !== 0);\n"
-            + "    alert(doc.parseError.filepos !== 0);\n"
-            + "    alert(doc.parseError.line !== 0);\n"
-            + "    alert(doc.parseError.linepos !== 0);\n"
-            + "    alert(doc.parseError.reason !== '');\n"
-            + "    alert(doc.parseError.srcText !== '');\n"
-            + "    alert(doc.parseError.url !== '');\n"
+            + "    try {\n"
+            + "      var doc = new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "      alert(doc.documentElement == null);\n"
+            + "      alert(doc.parseError.errorCode === 0);\n"
+            + "      alert(doc.parseError.filepos === 0);\n"
+            + "      alert(doc.parseError.line === 0);\n"
+            + "      alert(doc.parseError.linepos === 0);\n"
+            + "      alert(doc.parseError.reason === '');\n"
+            + "      alert(doc.parseError.srcText === '');\n"
+            + "      alert(doc.parseError.url === '');\n"
+            + "      doc.async = false;\n"
+            + "      alert(doc.load('" + URL_SECOND + "'));\n"
+            + "      alert(doc.documentElement == null);\n"
+            + "      alert(doc.parseError.errorCode !== 0);\n"
+            + "      alert(doc.parseError.filepos !== 0);\n"
+            + "      alert(doc.parseError.line !== 0);\n"
+            + "      alert(doc.parseError.linepos !== 0);\n"
+            + "      alert(doc.parseError.reason !== '');\n"
+            + "      alert(doc.parseError.srcText !== '');\n"
+            + "      alert(doc.parseError.url !== '');\n"
             + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
@@ -622,16 +600,10 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "    text += '  </html>\\n';\n"
             + "    text += '  </xsl:template>\\n';\n"
             + "    text += '</xsl:stylesheet>';\n"
-            + "    if (window.ActiveXObject) {\n"
-            + "      var doc=new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "      doc.async=false;\n"
-            + "      doc.loadXML(text);\n"
-            + "    } else {\n"
-            + "      var parser=new DOMParser();\n"
-            + "      var doc=parser.parseFromString(text,'text/xml');\n"
-            + "    }\n"
+            + "    var doc = " + callLoadXMLDocumentFromString("text") + ";\n"
             + "    alert(doc.createNSResolver(doc.documentElement).lookupNamespaceURI('xsl'));\n"
             + "  }\n"
+            + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -641,7 +613,9 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "exception", IE = "columns")
+    @Alerts(DEFAULT = "exception",
+            IE6 = "columns",
+            IE8 = "columns")
     public void xmlInsideHtml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -671,9 +645,10 @@ public class XMLDocumentTest extends WebDriverTestCase {
     public void instanceOf() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var x = (new DOMParser()).parseFromString('<x/>','text/xml');\n"
+            + "    var x = " + callLoadXMLDocumentFromString("'<x/>'") + ";\n"
             + "    alert(x instanceof XMLDocument);;\n"
             + "  }\n"
+            + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
@@ -697,10 +672,11 @@ public class XMLDocumentTest extends WebDriverTestCase {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var s = '<toolbar><button id=\"compose_button\"/></toolbar>';\n"
-            + "    var xDoc = (new DOMParser()).parseFromString(s,'text/xml');\n"
+            + "    var xDoc = " + callLoadXMLDocumentFromString("s") + ";\n"
             + "    var r = xDoc.evaluate(\"button[@id='compose_button']\", xDoc.firstChild, null, 9, null);\n"
             + "    alert(r.singleNodeValue.tagName);\n"
             + "  }\n"
+            + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -717,8 +693,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     public void moveChildBetweenDocuments() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "  var doc1 = loadXmlDocument();\n"
-            + "  var doc2 = loadXmlDocument();\n"
+            + "  var doc1 = " + callLoadXMLDocumentFromFile("'foo.xml'") + ";\n"
+            + "  var doc2 = " + callLoadXMLDocumentFromFile("'foo.xml'") + ";\n"
             + "  alert('same doc: ' + (doc1 == doc2));\n"
             + "  var doc1Root = doc1.firstChild;\n"
             + "  alert('in first: ' + doc1Root.childNodes.length);\n"
@@ -746,16 +722,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "  alert('in 2nd: ' + doc2Root.childNodes.length);\n"
             + "\n"
             + "}\n"
-            + "function loadXmlDocument() {\n"
-            + " var doc;\n"
-            + " if (document.implementation && document.implementation.createDocument)\n"
-            + "   doc = document.implementation.createDocument('', '', null);\n"
-            + " else if (window.ActiveXObject)\n"
-            + "   doc = new ActiveXObject('Microsoft.XMLDOM');\n"
-            + " doc.async = false;\n"
-            + " doc.load('foo.xml');\n"
-            + " return doc;\n"
-            + "}\n"
+            + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -773,21 +740,14 @@ public class XMLDocumentTest extends WebDriverTestCase {
     public void getElementsByTagName() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
-            + "    doc.async = false;\n"
-            + "    doc.load('" + URL_SECOND + "');\n"
+            + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "    alert(doc.getElementsByTagName('book').length);\n"
             + "    alert(doc.getElementsByTagName('soap:book').length);\n"
             + "    var elem = doc.getElementsByTagName('book')[0];\n"
             + "    alert(elem.getElementsByTagName('title').length);\n"
             + "    alert(elem.getElementsByTagName('soap:title').length);\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -809,25 +769,19 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1", "0", "1" })
+    @Alerts(DEFAULT = { "0", "1", "0", "1" },
+            IE10 = { "1", "0" })
     public void getElementsByTagNameWithNamespace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
-            + "    doc.async = false;\n"
-            + "    doc.load('" + URL_SECOND + "');\n"
+            + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "    alert(doc.getElementsByTagName('book').length);\n"
             + "    alert(doc.getElementsByTagName('soap:book').length);\n"
             + "    var elem = doc.getElementsByTagName('soap:book')[0];\n"
             + "    alert(elem.getElementsByTagName('title').length);\n"
             + "    alert(elem.getElementsByTagName('soap:title').length);\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -849,13 +803,13 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "1", FF = "0")
+    @Alerts(FF = "0",
+            IE = "1",
+            IE10 = "")
     public void xpathWithNamespaces() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
-            + "    doc.async = false;\n"
-            + "    doc.load('" + URL_SECOND + "');\n"
+            + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "    try {\n"
             + "      alert(doc.selectNodes('//soap:book').length);\n"
             + "    } catch (e) {\n"
@@ -863,12 +817,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "null, XPathResult.NUMBER_TYPE, null).numberValue);\n"
             + "    }\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -930,24 +879,19 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "null", FF = "[object HTMLDivElement]")
+    @Alerts(FF = "[object HTMLDivElement]",
+            IE = "null",
+            IE10 = "")
     public void nodeFromID() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
-            + "    doc.async = false;\n"
-            + "    doc.load('" + URL_SECOND + "');\n"
+            + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "    if (document.all)\n"
             + "      alert(doc.nodeFromID('target'));\n"
             + "    else\n"
             + "      alert(doc.getElementById('target'));\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -967,7 +911,9 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "[object XMLDocument]", "OK" } , IE = "[object XMLDocument]")
+    @Alerts(FF = { "[object XMLDocument]", "OK" } ,
+            IE = "[object XMLDocument]",
+            IE10 = { "[object Document]", "OK" })
     //TODO: in my real IE8 (without WebDriver), I got [object HTMLDocument]
     //so it should be HTMLDocument not XMLDocument for IE
     //Also, IE8 with WebDriver gives "" (empty Alert)
