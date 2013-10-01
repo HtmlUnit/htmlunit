@@ -42,10 +42,12 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "undefined", "undefined", "undefined" }, IE8 = { "undefined", "[object]", "[object]" },
-            FF = { "[object StorageList]", "[object Storage]", "[object Storage]" },
-            FF17 = { "undefined", "[object Storage]", "[object Storage]" },
-            CHROME = { "undefined", "[object Storage]", "[object Storage]" })
+    @Alerts(DEFAULT = { "undefined", "[object Storage]", "[object Storage]" },
+            FF3_6 = { "[object StorageList]", "[object Storage]", "[object Storage]" },
+            FF10 = { "[object StorageList]", "[object Storage]", "[object Storage]" },
+            IE6 = { "undefined", "undefined", "undefined" },
+            IE7 = { "undefined", "undefined", "undefined" },
+            IE8 = { "undefined", "[object]", "[object]" })
     @NotYetImplemented(FF3_6)
     public void storage() throws Exception {
         final String html
@@ -78,7 +80,9 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "string", "1" })
+    @Alerts(DEFAULT = { "string", "1" },
+            IE6 = { },
+            IE7 = { })
     public void localStorage() throws Exception {
         final String firstHtml
             = "<html><head></head><body>\n"
@@ -111,7 +115,9 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "2", "there", "world", "1", "0" })
+    @Alerts(DEFAULT = { "0", "2", "there", "world", "1", "0" },
+            IE6 = { },
+            IE7 = { })
     public void sessionStorage() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -162,7 +168,10 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null", IE6 = { "exception", "exception" }, IE7 = { "exception", "exception" })
+    @Alerts(DEFAULT = "null",
+            IE6 = { "exception", "exception" },
+            IE7 = { "exception", "exception" },
+            IE10 = "I was here")
     public void localStorageShouldNotBeShared() throws Exception {
         final String html1 = "<html><body><script>\n"
             + "try {\n"
