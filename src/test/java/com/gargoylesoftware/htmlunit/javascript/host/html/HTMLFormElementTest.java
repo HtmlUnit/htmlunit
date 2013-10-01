@@ -31,6 +31,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -44,6 +45,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Chris Erskine
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLFormElementTest extends WebDriverTestCase {
@@ -204,7 +206,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "myEncoding", "newEncoding", "newEncoding" },
-            FF17 = { "application/x-www-form-urlencoded", "application/x-www-form-urlencoded", "newEncoding" })
+            FF17 = { "application/x-www-form-urlencoded", "application/x-www-form-urlencoded", "newEncoding" },
+            IE10 = { "application/x-www-form-urlencoded" })
     public void encodingProperty_dummyValues() throws Exception {
         doTestProperty("encoding", "enctype", "myEncoding", "newEncoding");
     }
@@ -427,7 +430,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        if (getBrowserVersion().isFirefox()) {
+        if (getBrowserVersion().isFirefox() || BrowserVersion.INTERNET_EXPLORER_10 == getBrowserVersion()) {
             setExpectedAlerts(URL_FIRST + "foo.html");
         }
         else {
@@ -653,11 +656,16 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "page1.html", "page2.html", "page1.html", "page1.html" },
+            IE10 = { "page1.html", "page1.html", "page1.html", "page1.html" })
     public void changeFormActionAfterSubmit() throws Exception {
-        changeFormActionAfterSubmit("input type='button' value='Test'", "page1.html");
-        changeFormActionAfterSubmit("input type='submit' value='Test'", "page2.html");
-        changeFormActionAfterSubmit("input type='text' value='Test'", "page1.html");
-        changeFormActionAfterSubmit("div", "page1.html");
+        final String[] expectedFiles = getExpectedAlerts();
+        setExpectedAlerts();
+
+        changeFormActionAfterSubmit("input type='button' value='Test'", expectedFiles[0]);
+        changeFormActionAfterSubmit("input type='submit' value='Test'", expectedFiles[1]);
+        changeFormActionAfterSubmit("input type='text' value='Test'", expectedFiles[2]);
+        changeFormActionAfterSubmit("div", expectedFiles[3]);
     }
 
     private void changeFormActionAfterSubmit(final String clickable, final String expectedFile) throws Exception {
@@ -688,7 +696,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = "radio")
+    @Alerts(DEFAULT = "exception",
+            IE = "radio")
     public void item() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -714,7 +723,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = "2")
+    @Alerts(DEFAULT = "exception",
+            IE = "2")
     public void item_many() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -741,7 +751,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = "radio2")
+    @Alerts(DEFAULT = "exception",
+            IE = "radio2")
     public void item_many_subindex() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -768,7 +779,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = "radio2")
+    @Alerts(DEFAULT = "exception",
+            IE = "radio2")
     public void item_integer() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -797,15 +809,20 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void changes_after_call_to_submit() throws Exception {
-        changes_after_call_to_submit("inputSubmitReturnTrue", "page4.html?f1=v1&f2=v2");
-        changes_after_call_to_submit("inputSubmitVoid", "page4.html?f1=v1&f2=v2");
+    @Alerts(DEFAULT = { "page4.html?f1=v1&f2=v2", "page4.html?f1=v1&f2=v2", "page3.html?f1=v1", "page3.html?f1=v1" },
+            IE10 = { "page3.html?f1=v1", "page3.html?f1=v1", "page3.html?f1=v1", "page3.html?f1=v1" })
+    public void changesAfterCallToSubmit() throws Exception {
+        final String[] expectedUrlSuffixes = getExpectedAlerts();
+        setExpectedAlerts();
 
-        changes_after_call_to_submit("inputSubmitReturnFalse", "page3.html?f1=v1");
-        changes_after_call_to_submit("link", "page3.html?f1=v1");
+        changesAfterCallToSubmit("inputSubmitReturnTrue", expectedUrlSuffixes[0]);
+        changesAfterCallToSubmit("inputSubmitVoid", expectedUrlSuffixes[1]);
+
+        changesAfterCallToSubmit("inputSubmitReturnFalse", expectedUrlSuffixes[2]);
+        changesAfterCallToSubmit("link", expectedUrlSuffixes[3]);
     }
 
-    private void changes_after_call_to_submit(final String id, final String expectedUrlSuffix) throws Exception {
+    private void changesAfterCallToSubmit(final String id, final String expectedUrlSuffix) throws Exception {
         final String html = "<html><head><script>\n"
             + "function submitForm() {\n"
             + "  var f = document.forms[0];\n"
@@ -847,7 +864,12 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "2",
+            IE10 = "3")
     public void submit_twice() throws Exception {
+        final String count = getExpectedAlerts()[0];
+        setExpectedAlerts();
+
         final String html = "<html><head><script>\n"
             + "function test() {\n"
             + "  var f = document.forms[0];\n"
@@ -861,7 +883,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         loadPageWithAlerts2(html);
-        assertEquals(2, getMockWebConnection().getRequestCount());
+        assertEquals(Integer.parseInt(count), getMockWebConnection().getRequestCount());
     }
 
     /**
@@ -869,7 +891,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("foo1")
-    public void target_changed_after_submit_call() throws Exception {
+    public void targetChangedAfterSubmitCall() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
             + "  var f = document.forms[0];\n"
@@ -1049,7 +1071,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object HTMLInputElement]", "undefined",
                         "[object HTMLInputElement]", "[object HTMLInputElement]" },
-            IE = { "[object]", "undefined", "[object]", "undefined" })
+            IE = { "[object]", "undefined", "[object]", "undefined" },
+            IE10 = { "[object HTMLInputElement]", "undefined", "undefined", "[object HTMLInputElement]" })
     public void accessByNameAfterNameChange() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -1075,7 +1098,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object HTMLInputElement]", "[object HTMLInputElement]" },
-        IE = { "[object]", "[object]" })
+            IE6 = { "[object]", "[object]" },
+            IE8 = { "[object]", "[object]" })
     public void lostChildrenFromElements() throws Exception {
         final String html
             = "<html><body>\n"
@@ -1095,7 +1119,9 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "function", IE = "string")
+    @Alerts(DEFAULT = "function",
+            IE6 = "string",
+            IE8 = "string")
     public void onchangeHandler() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -1114,7 +1140,9 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "in listener", "page2 loaded" }, IE = "exception")
+    @Alerts(DEFAULT = { "in listener", "page2 loaded" },
+            IE = "exception",
+            IE10 = "in listener")
     public void dispatchEventSubmitTriggersHandlers() throws Exception {
         // use an iframe to capture alerts among 2 pages
         final String container = "<html><body><iframe src='page1'></iframe></body></html>\n";

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,6 +39,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLTextAreaElementTest extends WebDriverTestCase {
@@ -125,8 +127,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(IE = {"undefined", "undefined" },
-            FF = {"11", "0" })
+    @Alerts(FF = {"11", "0" },
+            IE = {"undefined", "undefined" })
     public void textLength() throws Exception {
         final String html
             = "<html>\n"
@@ -150,10 +152,10 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(IE = {"undefined,undefined", "3,undefined", "3,10" },
+    @Alerts(DEFAULT = {"0,0", "3,3", "3,10" },
             FF3_6 = {"11,11", "3,11", "3,10" },
-            FF = {"0,0", "3,3", "3,10" }
-            )
+            IE6 = {"undefined,undefined", "3,undefined", "3,10" },
+            IE8 = {"undefined,undefined", "3,undefined", "3,10" })
     @NotYetImplemented(Browser.FF17)
     public void selection() throws Exception {
         selection(3, 10);
@@ -163,9 +165,10 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(IE = {"undefined,undefined", "-3,undefined", "-3,15" },
+    @Alerts(DEFAULT = {"0,0", "0,0", "0,11" },
             FF3_6 = {"11,11", "0,11", "0,11" },
-            FF = {"0,0", "0,0", "0,11" })
+            IE6 = {"undefined,undefined", "-3,undefined", "-3,15" },
+            IE8 = {"undefined,undefined", "-3,undefined", "-3,15" })
     @NotYetImplemented(Browser.FF17)
     public void selection_outOfBounds() throws Exception {
         selection(-3, 15);
@@ -175,9 +178,10 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(IE = {"undefined,undefined", "10,undefined", "10,5" },
+    @Alerts(DEFAULT = {"0,0", "10,10", "5,5" },
             FF3_6 = {"11,11", "10,11", "5,5" },
-            FF = {"0,0", "10,10", "5,5" })
+            IE6 = {"undefined,undefined", "10,undefined", "10,5" },
+            IE8 = {"undefined,undefined", "10,undefined", "10,5" })
     @NotYetImplemented(Browser.FF17)
     public void selection_reverseOrder() throws Exception {
         selection(10, 5);
@@ -208,7 +212,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = "yes", FF = "no")
+    @Alerts(FF = "no",
+            IE = "yes")
     public void doScroll() throws Exception {
         final String html =
             "<html>\n"
@@ -237,7 +242,9 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "Hello\r\nworld\r\n", FF = "Hello\nworld\n")
+    @Alerts(DEFAULT = "Hello\nworld\n",
+            IE6 = "Hello\r\nworld\r\n",
+            IE8 = "Hello\r\nworld\r\n")
     public void value_ignoreFirstNewLine() throws Exception {
         value("\nHello\nworld\n");
     }
@@ -246,7 +253,9 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = " \r\nHello\r\nworld\r\n", FF = " \nHello\nworld\n")
+    @Alerts(DEFAULT = " \nHello\nworld\n",
+            IE6 = " \r\nHello\r\nworld\r\n",
+            IE8 = " \r\nHello\r\nworld\r\n")
     public void value_spaceBeforeFirstNewLine() throws Exception {
         value(" \nHello\nworld\n");
     }
@@ -275,8 +284,9 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = { " foo \r\n bar ", " foo \r\n bar " },
-            FF = { " foo \n bar ", " foo \n bar " })
+    @Alerts(DEFAULT = { " foo \n bar ", " foo \n bar " },
+            IE6 = { " foo \r\n bar ", " foo \r\n bar " },
+            IE8 = { " foo \r\n bar ", " foo \r\n bar " })
     public void defaultValue() throws Exception {
         final String html
             = "<html>\n"
@@ -369,8 +379,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3_6 = { "-1", "5", "8", "4", "0", "0", "0", "3" },
-            FF = { "20", "5", "8", "4", "error", "4", "error", "4", "20", "3" },
+    @Alerts(FF = { "20", "5", "8", "4", "error", "4", "error", "4", "20", "3" },
+            FF3_6 = { "-1", "5", "8", "4", "0", "0", "0", "3" },
             IE = { "20", "5", "8", "4", "error", "4", "error", "4", "error", "4", "3" })
     public void cols() throws Exception {
         final String html
@@ -420,8 +430,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3_6 = { "-1", "5", "8", "4", "0", "0", "0", "3" },
-            FF = { "2", "5", "8", "4", "error", "4", "error", "4", "2", "3" },
+    @Alerts(FF = { "2", "5", "8", "4", "error", "4", "error", "4", "2", "3" },
+            FF3_6 = { "-1", "5", "8", "4", "0", "0", "0", "3" },
             IE = { "2", "5", "8", "4", "error", "4", "error", "4", "error", "4", "3" })
     public void rows() throws Exception {
         final String html
@@ -472,7 +482,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(FF)
+    @Browsers({ FF, IE10 })
     @Alerts({ "9", "9", "2", "7" })
     public void selectionRange() throws Exception {
         final String html
@@ -502,7 +512,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "test", "4", "42", "2", "[object HTMLTextAreaElement]", "28" },
-            IE = { "test", "4", "42", "2", "[object]", "8" })
+            IE6 = { "test", "4", "42", "2", "[object]", "8" },
+            IE8 = { "test", "4", "42", "2", "[object]", "8" })
     public void getAttributeAndSetValue() throws Exception {
         final String html =
             "<html>\n"

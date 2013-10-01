@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLTableElementTest extends WebDriverTestCase {
@@ -39,8 +40,9 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "caption1", "caption2", "null", "caption3", "exception", "caption3", "caption4" },
-            IE = { "caption1", "caption2", "null", "caption3", "exception", "caption3", "exception", "caption3" })
+    @Alerts(DEFAULT = { "caption1", "caption2", "null", "caption3", "exception", "caption3", "caption4" },
+            IE6 = { "caption1", "caption2", "null", "caption3", "exception", "caption3", "exception", "caption3" },
+            IE8 = { "caption1", "caption2", "null", "caption3", "exception", "caption3", "exception", "caption3" })
     public void tableCaptions() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -74,8 +76,9 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "thead1", "thead2", "null", "thead3", "exception", "thead3", "thead4" },
-            IE = { "thead1", "thead2", "null", "thead3", "exception", "thead3", "exception", "thead3" })
+    @Alerts(DEFAULT = { "thead1", "thead2", "null", "thead3", "exception", "thead3", "thead4" },
+            IE6 = { "thead1", "thead2", "null", "thead3", "exception", "thead3", "exception", "thead3" },
+            IE8 = { "thead1", "thead2", "null", "thead3", "exception", "thead3", "exception", "thead3" })
     public void tableHeaders() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -262,8 +265,9 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "tfoot1", "tfoot2", "null", "tfoot3", "exception", "tfoot3", "tfoot4" },
-            IE = { "tfoot1", "tfoot2", "null", "tfoot3", "exception", "tfoot3", "exception", "tfoot3" })
+    @Alerts(DEFAULT = { "tfoot1", "tfoot2", "null", "tfoot3", "exception", "tfoot3", "tfoot4" },
+            IE6 = { "tfoot1", "tfoot2", "null", "tfoot3", "exception", "tfoot3", "exception", "tfoot3" },
+            IE8 = { "tfoot1", "tfoot2", "null", "tfoot3", "exception", "tfoot3", "exception", "tfoot3" })
     public void tableFooters() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -471,9 +475,11 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "table: [object]", "row: [object]", "cell: [object]" },
-            DEFAULT = { "table: [object HTMLTableElement]",
-                    "row: [object HTMLTableRowElement]", "cell: [object HTMLTableCellElement]" })
+    @Alerts(DEFAULT = { "table: [object HTMLTableElement]",
+                "row: [object HTMLTableRowElement]", "cell: [object HTMLTableCellElement]" },
+            IE = { "table: [object]", "row: [object]", "cell: [object]" },
+            IE10 = { "table: [object HTMLTableElement]",
+                "row: [object HTMLTableRowElement]", "cell: [object HTMLTableHeaderCellElement]" })
     public void stringValues() throws Exception {
         final String html =
             "<html><head>\n"
@@ -538,7 +544,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no refresh function", IE = "refreshed")
+    @Alerts(DEFAULT = "no refresh function",
+            IE = "refreshed")
     public void refresh() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -607,9 +614,10 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = {"", "#0000aa", "#000000" },
-            DEFAULT = {"", "#0000aa", "x" },
-            FF3_6 = { "", "#0000aa", "#000000" })
+    @Alerts(DEFAULT = {"", "#0000aa", "x" },
+            FF3_6 = { "", "#0000aa", "#000000" },
+            IE = {"", "#0000aa", "#000000" },
+            IE10 = {"", "#0000aa", "#0" })
     public void bgColor() throws Exception {
         final String html =
             "<html>\n"

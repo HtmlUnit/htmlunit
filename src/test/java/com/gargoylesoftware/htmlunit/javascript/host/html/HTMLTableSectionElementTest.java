@@ -37,8 +37,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3_6 = {"left", "hello", "left", "hi", "right" },
-            FF = {"", "hello", "left", "hi", "right" },
+    @Alerts(FF = {"", "hello", "left", "hi", "right" },
+            FF3_6 = {"left", "hello", "left", "hi", "right" },
             IE = {"", "error", "", "left", "error", "left", "right" })
     @NotYetImplemented(FF17)
     public void align_thead() throws Exception {
@@ -49,8 +49,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3_6 = {"left", "hello", "left", "hi", "right" },
-            FF = {"", "hello", "left", "hi", "right" },
+    @Alerts(FF = {"", "hello", "left", "hi", "right" },
+            FF3_6 = {"left", "hello", "left", "hi", "right" },
             IE = {"", "error", "", "left", "error", "left", "right" })
     @NotYetImplemented(FF17)
     public void align_tbody() throws Exception {
@@ -61,8 +61,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3_6 = {"left", "hello", "left", "hi", "right" },
-            FF = {"", "hello", "left", "hi", "right" },
+    @Alerts(FF = {"", "hello", "left", "hi", "right" },
+            FF3_6 = {"left", "hello", "left", "hi", "right" },
             IE = {"", "error", "", "left", "error", "left", "right" })
     @NotYetImplemented(FF17)
     public void align_tfoot() throws Exception {
@@ -110,8 +110,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3_6 = { "top", "baseline", "3", "middle", "8", "bottom" },
-            FF = { "top", "baseline", "3", "middle", "8", "BOTtom" },
+    @Alerts(FF = { "top", "baseline", "3", "middle", "8", "BOTtom" },
+            FF3_6 = { "top", "baseline", "3", "middle", "8", "bottom" },
             IE = { "top", "baseline", "top", "error", "middle", "baseline", "bottom" })
     @NotYetImplemented(FF17)
     public void vAlign_thead() throws Exception {
@@ -122,8 +122,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3_6 = { "top", "baseline", "3", "middle", "8", "bottom" },
-            FF = { "top", "baseline", "3", "middle", "8", "BOTtom" },
+    @Alerts(FF = { "top", "baseline", "3", "middle", "8", "BOTtom" },
+            FF3_6 = { "top", "baseline", "3", "middle", "8", "bottom" },
             IE = { "top", "baseline", "top", "error", "middle", "baseline", "bottom" })
     @NotYetImplemented(FF17)
     public void vAlign_tbody() throws Exception {
@@ -134,8 +134,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3_6 = { "top", "baseline", "3", "middle", "8", "bottom" },
-            FF = { "top", "baseline", "3", "middle", "8", "BOTtom" },
+    @Alerts(FF = { "top", "baseline", "3", "middle", "8", "BOTtom" },
+            FF3_6 = { "top", "baseline", "3", "middle", "8", "bottom" },
             IE = { "top", "baseline", "top", "error", "middle", "baseline", "bottom" })
     @NotYetImplemented(FF17)
     public void vAlign_tfoot() throws Exception {
@@ -195,9 +195,10 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3_6 = { "p", "po", ".", "u", "8", "U8" },
-            FF = { "p", "po", "", "u", "8", "U8" },
-            IE = { "", "", "", "u", "8", "U8" })
+    @Alerts(DEFAULT = { "p", "po", "", "u", "8", "U8" },
+            FF3_6 = { "p", "po", ".", "u", "8", "U8" },
+            IE6 = { "", "", "", "u", "8", "U8" },
+            IE8 = { "", "", "", "u", "8", "U8" })
     public void ch_thead() throws Exception {
         ch("th");
     }
@@ -206,9 +207,10 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3_6 = { "p", "po", ".", "u", "8", "U8" },
-            FF = { "p", "po", "", "u", "8", "U8" },
-            IE = { "", "", "", "u", "8", "U8" })
+    @Alerts(DEFAULT = { "p", "po", "", "u", "8", "U8" },
+            FF3_6 = { "p", "po", ".", "u", "8", "U8" },
+            IE6 = { "", "", "", "u", "8", "U8" },
+            IE8 = { "", "", "", "u", "8", "U8" })
     public void ch_tbody() throws Exception {
         ch("tb");
     }
@@ -217,9 +219,10 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3_6 = { "p", "po", ".", "u", "8", "U8" },
-            FF = { "p", "po", "", "u", "8", "U8" },
-            IE = { "", "", "", "u", "8", "U8" })
+    @Alerts(DEFAULT = { "p", "po", "", "u", "8", "U8" },
+            FF3_6 = { "p", "po", ".", "u", "8", "U8" },
+            IE6 = { "", "", "", "u", "8", "U8" },
+            IE8 = { "", "", "", "u", "8", "U8" })
     public void ch_tfoot() throws Exception {
         ch("tf");
     }
@@ -277,9 +280,10 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3_6 = { "0", "4", "", "5", "0", "abc" },
-            FF = { "0", "4", "", "5.2", "-3", "abc" },
-            IE = { "", "", "", "5.2", "-3", "abc" })
+    @Alerts(DEFAULT = { "0", "4", "", "5.2", "-3", "abc" },
+            FF3_6 = { "0", "4", "", "5", "0", "abc" },
+            IE6 = { "", "", "", "5.2", "-3", "abc" },
+            IE8 = { "", "", "", "5.2", "-3", "abc" })
     public void chOff_thead() throws Exception {
         chOff("th");
     }
@@ -288,9 +292,10 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3_6 = { "0", "4", "", "5", "0", "abc" },
-            FF = { "0", "4", "", "5.2", "-3", "abc" },
-            IE = { "", "", "", "5.2", "-3", "abc" })
+    @Alerts(DEFAULT = { "0", "4", "", "5.2", "-3", "abc" },
+            FF3_6 = { "0", "4", "", "5", "0", "abc" },
+            IE6 = { "", "", "", "5.2", "-3", "abc" },
+            IE8 = { "", "", "", "5.2", "-3", "abc" })
     public void chOff_tbody() throws Exception {
         chOff("tb");
     }
@@ -299,9 +304,10 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3_6 = { "0", "4", "", "5", "0", "abc" },
-            FF = { "0", "4", "", "5.2", "-3", "abc" },
-            IE = { "", "", "", "5.2", "-3", "abc" })
+    @Alerts(DEFAULT = { "0", "4", "", "5.2", "-3", "abc" },
+            FF3_6 = { "0", "4", "", "5", "0", "abc" },
+            IE6 = { "", "", "", "5.2", "-3", "abc" },
+            IE8 = { "", "", "", "5.2", "-3", "abc" })
     public void chOff_tfoot() throws Exception {
         chOff("tf");
     }
@@ -359,7 +365,9 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "<tr><td>world</td></tr>", IE = { "exception", "<tr><td>hello</td></tr>" })
+    @Alerts(DEFAULT = "<tr><td>world</td></tr>",
+            IE6 = { "exception", "<tr><td>hello</td></tr>" },
+            IE8 = { "exception", "<tr><td>hello</td></tr>" })
     public void TBODY_innerHTML() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

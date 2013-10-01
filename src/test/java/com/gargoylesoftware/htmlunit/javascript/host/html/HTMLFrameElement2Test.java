@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author David K. Taylor
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLFrameElement2Test extends WebDriverTestCase {
@@ -55,7 +56,9 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true", IE = "false")
+    @Alerts(DEFAULT = "true",
+            IE6 = "false",
+            IE8 = "false")
     public void testContentDocument() throws Exception {
         final String html
             = "<html><head><title>first</title>\n"
@@ -97,8 +100,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * Regression test for bug 1192854.
      * @throws Exception if the test fails
      */
-    @Alerts({ "frame=OK", "frames.length=2", "frame=OK", "frames.length=0", "frame=OK", "frames.length=0" })
     @Test
+    @Alerts({ "frame=OK", "frames.length=2", "frame=OK", "frames.length=0", "frame=OK", "frames.length=0" })
     public void testFrameTag1192854() throws Exception {
         final String html
             = "<html>\n"
@@ -131,7 +134,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "function handler() {\n}", "null" })
+    @Alerts(DEFAULT = { "function handler() {\n}", "null" },
+            IE10 = { "function handler() {}", "null" })
     public void testOnloadNull() throws Exception {
         final String html =
             "<html><head>\n"

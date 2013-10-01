@@ -37,7 +37,9 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object HTMLTableRowElement]", IE = "[object]")
+    @Alerts(DEFAULT = "[object HTMLTableRowElement]",
+            IE6 = "[object]",
+            IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -93,7 +95,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "4", "exception", "4" }, IE = { "4", "3" })
+    @Alerts(FF = { "4", "exception", "4" },
+            IE = { "4", "3" })
     public void deleteCell_noArg() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -159,9 +162,10 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3_6 = { "p", "po", ".", "u", "8", "U8" },
-            FF = { "p", "po", "", "u", "8", "U8" },
-            IE = { "", "", "", "u", "8", "U8" })
+    @Alerts(DEFAULT = { "p", "po", "", "u", "8", "U8" },
+            FF3_6 = { "p", "po", ".", "u", "8", "U8" },
+            IE6 = { "", "", "", "u", "8", "U8" },
+            IE8 = { "", "", "", "u", "8", "U8" })
     public void ch() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -191,9 +195,10 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3_6 = { "0", "4", "", "5", "0", "abc" },
-            FF = { "0", "4", "", "5.2", "-3", "abc" },
-            IE = { "", "", "", "5.2", "-3", "abc" })
+    @Alerts(DEFAULT = { "0", "4", "", "5.2", "-3", "abc" },
+            FF3_6 = { "0", "4", "", "5", "0", "abc" },
+            IE6 = { "", "", "", "5.2", "-3", "abc" },
+            IE8 = { "", "", "", "5.2", "-3", "abc" })
     public void chOff() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -223,8 +228,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3_6 = { "top", "baseline", "3", "middle", "8", "bottom" },
-            FF = { "top", "baseline", "3", "middle", "8", "BOTtom" },
+    @Alerts(FF = { "top", "baseline", "3", "middle", "8", "BOTtom" },
+            FF3_6 = { "top", "baseline", "3", "middle", "8", "bottom" },
             IE = { "top", "baseline", "top", "error", "middle", "baseline", "bottom" })
     @NotYetImplemented(FF17)
     public void vAlign() throws Exception {
@@ -263,9 +268,10 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = { "", "#0000aa", "#000000" },
-            FF = { "", "#0000aa", "x" },
-            FF3_6 = { "", "#0000aa", "#000000" })
+    @Alerts(FF = { "", "#0000aa", "x" },
+            FF3_6 = { "", "#0000aa", "#000000" },
+            IE = { "", "#0000aa", "#000000" },
+            IE10 = { "", "#0000aa", "#0" })
     public void bgColor() throws Exception {
         final String html =
             "<html>\n"
@@ -292,8 +298,9 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "0", "0", "3", "1", "-1", "true", "false" },
-            IE = { "0", "0", "3", "1", "-1", "false", "true" })
+    @Alerts(DEFAULT = { "0", "0", "3", "1", "-1", "true", "false" },
+            IE6 = { "0", "0", "3", "1", "-1", "false", "true" },
+            IE8 = { "0", "0", "3", "1", "-1", "false", "true" })
     public void rowIndex_sectionRowIndex() throws Exception {
         final String html
             = "<html><body><table>\n"

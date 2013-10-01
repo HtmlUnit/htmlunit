@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -45,7 +47,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("SELECT;")
-    @BuggyWebDriver(Browser.IE)
+    @BuggyWebDriver(IE)
     //TODO: WebDriver tests passes even with HtmlUnit direct usage fails!
     public void clickSelect() throws Exception {
         final String html
@@ -98,8 +100,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "opt-a; opt-b",
             CHROME = "opt-b")
-    @NotYetImplemented
     @BuggyWebDriver
+    @NotYetImplemented
     //TODO: Needs further investigation of clicking an option without clicking the select
     //See the first comment in http://code.google.com/p/selenium/issues/detail?id=2131#c1
     // Additionally, FF and Chrome drivers look buggy as they don't allow to capture
@@ -152,10 +154,10 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
-    @BuggyWebDriver(Browser.FF)
     @Alerts(DEFAULT = "onchange-select; onclick-option; onclick-select;",
             IE = "onchange-select; onclick-select;")
+    @BuggyWebDriver(Browser.FF)
+    @NotYetImplemented
     public void clickOptionEventSequence1() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -192,10 +194,10 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
-    @BuggyWebDriver(Browser.FF)
     @Alerts(DEFAULT = "change-SELECT; click-OPTION; click-OPTION;",
             IE = "change-SELECT; click-SELECT;")
+    @BuggyWebDriver(Browser.FF)
+    @NotYetImplemented
     public void clickOptionEventSequence2() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -254,10 +256,10 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
-    @BuggyWebDriver(Browser.FF)
     @Alerts(DEFAULT = "onchange-select; change-SELECT; onclick-option; click-OPTION; onclick-select; click-OPTION;",
             IE = "onchange-select; change-SELECT; onclick-select; click-SELECT;")
+    @BuggyWebDriver(Browser.FF)
+    @NotYetImplemented
     public void clickOptionEventSequence3() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -318,7 +320,9 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "option1", "0" }, IE = { "1", "option2", "1" })
+    @Alerts(DEFAULT = { "1", "option1", "0" },
+            IE6 = { "1", "option2", "1" },
+            IE8 = { "1", "option2", "1" })
     public void unselectResetToFirstOption() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

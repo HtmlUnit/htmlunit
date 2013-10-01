@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnorderedList;
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLUListElementTest extends WebDriverTestCase {
@@ -41,7 +42,9 @@ public class HTMLUListElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUListElement]", IE = "[object]")
+    @Alerts(DEFAULT = "[object HTMLUListElement]",
+            IE6 = "[object]",
+            IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -66,7 +69,9 @@ public class HTMLUListElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "false", "true", "true", "true", "null", "", "blah", "2",
                    "true", "false", "true", "false", "", "null", "", "null" },
-            IE = { "false", "true", "true", "true", "false", "true", "true", "true",
+            IE6 = { "false", "true", "true", "true", "false", "true", "true", "true",
+                   "true", "false", "true", "false", "true", "false", "true", "false" },
+            IE8 = { "false", "true", "true", "true", "false", "true", "true", "true",
                    "true", "false", "true", "false", "true", "false", "true", "false" })
     public void compact() throws Exception {
         final String html = "<html><body>\n"

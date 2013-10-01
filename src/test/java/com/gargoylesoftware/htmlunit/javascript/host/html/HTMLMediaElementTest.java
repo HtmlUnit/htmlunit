@@ -34,7 +34,9 @@ public class HTMLMediaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "", IE = "exception")
+    @Alerts(DEFAULT = "",
+            IE6 = "exception",
+            IE8 = "exception")
     public void canPlayType() throws Exception {
         final String html
             = "<html><body>\n"

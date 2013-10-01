@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLSpanElementTest extends WebDriverTestCase {
@@ -39,7 +40,8 @@ public class HTMLSpanElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = "yes", FF = "no")
+    @Alerts(FF = "no",
+            IE = "yes")
     public void doScroll() throws Exception {
         final String html =
             "<html>\n"
@@ -67,10 +69,11 @@ public class HTMLSpanElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE6 = {"[object] undefined", "[object] undefined" },
-            IE = {"[object] ", "[object] undefined" },
+    @Alerts(FF = {"[object HTMLElement] undefined", "[object HTMLSpanElement] undefined" },
             FF3_6 = {"[object HTMLSpanElement] undefined", "[object HTMLSpanElement] undefined" },
-            FF = {"[object HTMLElement] undefined", "[object HTMLSpanElement] undefined" })
+            IE = {"[object] ", "[object] undefined" },
+            IE6 = {"[object] undefined", "[object] undefined" },
+            IE10 = {"[object HTMLPhraseElement] ", "[object HTMLSpanElement] undefined" })
     @NotYetImplemented(FF17)
     public void cite() throws Exception {
         final String html =
