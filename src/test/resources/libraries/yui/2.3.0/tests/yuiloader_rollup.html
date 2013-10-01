@@ -1,4 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0016)http://localhost -->
 <html>
 <head>
 <title>yuiloader test</title>
@@ -7,7 +8,7 @@
 
 (function() {
 
-    var logger, suite, page_modules=[]; 
+    var logger, suite, page_modules=[];
 
     function log(msg) {
 
@@ -29,7 +30,7 @@
             var n = minfo.name;
             page_modules.push(n);
             log("page load listener: " + n);
-        }, 
+        },
         load: {
             require: ['yuitest', 'editor'],
             //filter: 'DEBUG',
@@ -49,8 +50,8 @@
                         YAHOO.util.ArrayAssert.itemsAreEqual(
                             // the page-level listener fires after the onLoadComplete
                             // fires, so editor will not be in the list yet
-                            ["yahoo", "dom", "event", "yahoo-dom-event", "logger", 
-                             "yuitest", "container", "menu", "element", "button"], 
+                            ["yahoo", "dom", "event", "yahoo-dom-event", "logger",
+                             "yuitest", "container", "menu", "element", "button"],
                             page_modules);
                     },
 
@@ -58,12 +59,12 @@
                     // it ususally means the rollup skin.css was not found)
                     test_logger_css: function() {
                         var el = YAHOO.util.Dom.getElementsByClassName("error")[0];
-                        YAHOO.util.Assert.areEqual("rgb(227, 47, 11)", 
+                        YAHOO.util.Assert.areEqual("rgb(227, 47, 11)",
                             YAHOO.util.Dom.getStyle(el, "background-color"),
                                 "An element with the error class is not red");
                     }
                 }));
-                 
+
                 YAHOO.tool.TestRunner.add(suite);
                 if (parent && parent != window) {
                     YAHOO.tool.TestManager.load();

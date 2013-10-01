@@ -1,15 +1,16 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0016)http://localhost -->
 <html>
 <head>
 <title>Element Test Suite</title>
 
 <link type="text/css" rel="stylesheet" href="../build/logger/assets/logger.css">
-<link type="text/css" rel="stylesheet" href="../build/yuitest/assets/testlogger.css">     
+<link type="text/css" rel="stylesheet" href="../build/yuitest/assets/testlogger.css">
 
 <script type="text/javascript" src="../build/yahoo/yahoo.js"></script>
 <script type="text/javascript" src="../build/event/event.js"></script>
-<script type="text/javascript" src="../build/dom/dom.js"></script> 
-<script type="text/javascript" src="../build/element/element-beta-min.js"></script> 
+<script type="text/javascript" src="../build/dom/dom.js"></script>
+<script type="text/javascript" src="../build/element/element-beta-min.js"></script>
 <script type="text/javascript" src="../build/logger/logger-min.js"></script>
 <script type="text/javascript" src="../build/yuitest/yuitest-beta.js"></script>
 
@@ -38,19 +39,19 @@
 
             test_getElement: function() {
                 YAHOO.util.Assert.areEqual(elFoo, foo.get('element'), 'incorrect element');
-            },            
+            },
 
             test_setHTMLAttr: function() {
                 var innerHTML = 'updated';
                 foo.set('innerHTML', innerHTML);
                 YAHOO.util.Assert.areEqual(innerHTML, foo.get('innerHTML'), 'incorrect innerHTML');
-            },            
+            },
 
             test_setHTMLAttr: function() {
                 var innerHTML = 'updated';
                 foo.set('innerHTML', innerHTML);
                 YAHOO.util.Assert.areEqual(innerHTML, foo.get('innerHTML'), 'incorrect innerHTML');
-            },            
+            },
 
             test_onChange: function() {
                 var pass = false;
@@ -60,7 +61,7 @@
                 foo.on('titleChange', handler);
                 foo.set('title', 'foo title');
                 YAHOO.util.Assert.isTrue(pass, 'titleChange event failed to fire');
-            },            
+            },
 
             test_DomEvent: function() {
                 var pass = false;
@@ -70,7 +71,7 @@
                 foo.on('click', handler);
                 YAHOO.util.UserAction.click('foo');
                 YAHOO.util.Assert.isTrue(pass, 'click handler failed to be called');
-            },            
+            },
 
             test_customEvent: function() {
                 var pass = false;
@@ -81,7 +82,7 @@
                 foo.fireEvent('foo');
                 YAHOO.util.Assert.isTrue(pass, 'foo handler failed to be called');
             }
-        })); 
+        }));
         tool.TestRunner.add(suite);
 
         if (parent && parent != window) {
@@ -89,7 +90,7 @@
         } else {
             tool.TestRunner.run();
         }
-    }); 
+    });
 })();
 </script>
 <style type="text/css">

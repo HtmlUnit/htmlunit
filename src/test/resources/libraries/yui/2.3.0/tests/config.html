@@ -1,4 +1,5 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0016)http://localhost -->
 <html>
 <head>
 	<link type="text/css" rel="stylesheet" href="../build/logger/assets/logger.css" />
@@ -12,7 +13,7 @@
 </head>
 <body>
     <script type="text/javascript">
-	(function() { 
+	(function() {
 
 		YAHOO.namespace("tests");
 
@@ -26,13 +27,13 @@
 		YAHOO.tests.ConfigOwner = function(test) {
 			this.id = "ConfigOwner";
 	   		this.cfg = new YAHOO.util.Config(this);
-			
+
 			this.events = [];
-			
+
 			this.clearEventLog = function() {
 				this.events = [];
 			};
-			
+
 			this.getFiredEvents = function() {
 				var handlers = [];
 				for (var i = 0; i < this.events.length; i++) {
@@ -152,9 +153,9 @@
 					sTwo: "str2222",
 					Sthree: "str3333",
 					nONE:1111,
-					nTWo:2222, 
-					bONE:true, 
-					btwo:true, 
+					nTWo:2222,
+					bONE:true,
+					btwo:true,
 					bTHREE:true
 				}, true);
 
@@ -166,7 +167,7 @@
 				o.cfg.setProperty("nTWO", 22);
 				o.cfg.setProperty("BOnE", false);
 				o.cfg.setProperty("BTwO", false);
-				o.cfg.setProperty("BthreE", false);																												
+				o.cfg.setProperty("BthreE", false);
 
 
                 o.cfg.resetProperty("soNe");
@@ -178,7 +179,7 @@
 				o.cfg.resetProperty("bTWO");
 				o.cfg.resetProperty("BTHREE");
 
-		
+
 				// Should values be reset to defaults and not applyConfig values
 				Assert.areEqual("str1111", o.cfg.getProperty("sONE"));
 				Assert.areEqual("str2222", o.cfg.getProperty("stWo"));
@@ -186,8 +187,8 @@
 				Assert.areEqual(1111, o.cfg.getProperty("NONE"));
 				Assert.areEqual(2222, o.cfg.getProperty("NtWO"));
 				Assert.areEqual(true, o.cfg.getProperty("bONE"));
-				Assert.areEqual(true, o.cfg.getProperty("BtWO"));																								
-				Assert.areEqual(true, o.cfg.getProperty("BThREE"));				
+				Assert.areEqual(true, o.cfg.getProperty("BtWO"));
+				Assert.areEqual(true, o.cfg.getProperty("BThREE"));
 			},
 
 			testSubscribeToConfigEvent : function() {
@@ -206,7 +207,7 @@
 
 				o.cfg.unsubscribeFromConfigEvent("sone", this.customCfgHandler);
 				o.cfg.setProperty("sONe", "str11111");
-				
+
 				expected = ["sone"];
 				actual = o.getFiredEvents();
 

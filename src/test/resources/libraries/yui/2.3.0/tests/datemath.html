@@ -1,3 +1,5 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0016)http://localhost -->
 <html>
 <head>
 	<title>YUI DateMath Tests</title>
@@ -17,14 +19,14 @@
 			Assert=YAHOO.util.Assert,
 			ObjectAssert=YAHOO.util.ObjectAssert,
 			ArrayAssert=YAHOO.util.ArrayAssert,
-			UserAction=YAHOO.util.UserAction, 
+			UserAction=YAHOO.util.UserAction,
 			DateAssert=YAHOO.util.DateAssert,
 			DateMath=YAHOO.widget.DateMath;
-			
+
 		var logger;
 
 		var dmTemplate = {
-			
+
 			name: "datemathtestcase",
 
 			testAdd : function() {
@@ -62,7 +64,7 @@
 				resDt = DateMath.add(dt, DateMath.MONTH, 2);
 				DateAssert.datesAreEqual(new Date(2007, 2, 3), resDt, "Incorrect results adding rollover to MONTHS field with rollover year boundary to invalid date");
 			},
-			
+
 			testSubtract : function() {
 				var dt = new Date(2007, 3, 12);
 				var resDt = DateMath.subtract(dt, DateMath.DAY, 4);
@@ -138,9 +140,9 @@
 
 			testClearTime : function() {
 				var dt = new Date(2007, 3, 12, 3, 45, 29, 300);
-				
+
 				var clearedDt = DateMath.clearTime(dt);
-				
+
 				DateAssert.datesAreEqual(new Date(2007, 3, 12), clearedDt);
 				DateAssert.timesAreEqual(new Date(2007, 3, 12, 12, 0, 0, 0), clearedDt);
 			},
@@ -153,11 +155,11 @@
 				dt = new Date(2007, 11, 15);
 				rstDt = DateMath.findMonthEnd(dt);
 				DateAssert.datesAreEqual(new Date(2007, 11, 31), rstDt);
-				
+
 				dt = new Date(2007, 1, 14);
 				rstDt = DateMath.findMonthEnd(dt);
 				DateAssert.datesAreEqual(new Date(2007, 1, 28), rstDt);
-				
+
 				// Leap
 				dt = new Date(2008, 1, 14);
 				rstDt = DateMath.findMonthEnd(dt);
@@ -172,11 +174,11 @@
 				dt = new Date(2007, 0, 15);
 				rstDt = DateMath.findMonthStart(dt);
 				DateAssert.datesAreEqual(new Date(2007, 0, 1), rstDt);
-				
+
 				dt = new Date(2007, 1, 14);
 				rstDt = DateMath.findMonthStart(dt);
 				DateAssert.datesAreEqual(new Date(2007, 1, 1), rstDt);
-				
+
 				// Leap
 				dt = new Date(2008, 2, 3);
 				rstDt = DateMath.findMonthStart(dt);
@@ -200,7 +202,7 @@
 				// TODO - Need to understand week number algorithm to test properly. For now just boundary tests
 				var dt = new Date(2007, 0, 1);
 				Assert.areEqual(1, DateMath.getWeekNumber(dt, 2007));
-				
+
 				var dt = new Date(2007, 11, 29);
 				Assert.areEqual(52, DateMath.getWeekNumber(dt, 2007));
 			},
@@ -215,7 +217,7 @@
 				Assert.isFalse(DateMath.isMonthOverlapWeek(new Date(2007, 11, 23)));
 			}
 		};
-		
+
 		var dmTestCase = new TestCase(dmTemplate);
 
 		function runTests(){

@@ -1,17 +1,18 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0016)http://localhost -->
 <html>
 <head>
 <title>Slider/ColorPicker Test Suite</title>
 
 <link type="text/css" rel="stylesheet" href="../build/logger/assets/logger.css">
 <link type="text/css" rel="stylesheet" href="../build/colorpicker/assets/skins/sam/colorpicker.css">
-<link type="text/css" rel="stylesheet" href="../build/yuitest/assets/testlogger.css">     
+<link type="text/css" rel="stylesheet" href="../build/yuitest/assets/testlogger.css">
 
 <script type="text/javascript" src="../build/yahoo-dom-event/yahoo-dom-event.js"></script>
-<script type="text/javascript" src="../build/element/element-beta-min.js"></script> 
-<script type="text/javascript" src="../build/dragdrop/dragdrop-min.js"></script> 
-<script type="text/javascript" src="../build/slider/slider.js"></script> 
-<script type="text/javascript" src="../build/colorpicker/colorpicker-beta.js"></script> 
+<script type="text/javascript" src="../build/element/element-beta-min.js"></script>
+<script type="text/javascript" src="../build/dragdrop/dragdrop-min.js"></script>
+<script type="text/javascript" src="../build/slider/slider.js"></script>
+<script type="text/javascript" src="../build/colorpicker/colorpicker-beta.js"></script>
 <script type="text/javascript" src="../build/logger/logger-min.js"></script>
 <script type="text/javascript" src="../build/yuitest/yuitest-beta.js"></script>
 
@@ -38,7 +39,7 @@
             picker = new YAHOO.widget.ColorPicker('picker-container', {
                     "showhsvcontrols": true,
                     "showhexcontrols": true
-                }), 
+                }),
             elPicker = document.getElementById('picker-container');
 
         var _verifyState = function(o) {
@@ -63,38 +64,38 @@
 
             test_setAttribute: function() {
                 picker.set("red", 10);
-                
+
                 _verifyState({
                         r: 10, g: 255, b: 255, h: 180, s: 96, v: 100,
                         hex: "0AFFFF", rgb: [10, 255, 255], websafe: [0, 255, 255]
                     });
-            },            
+            },
 
             test_updateField: function() {
                 var el = Dom.get("yui-picker-g");
                 el.value = 10;
-                UserAction.keydown(el, { 
+                UserAction.keydown(el, {
                         keyCode: 13
                     });
-                
+
                 _verifyState({
                         r: 10, g: 10, b: 255, h: 240, s: 96, v: 100,
                         hex: "0A0AFF", rgb: [10, 10, 255], websafe: [0, 0, 255]
                     });
-            },            
+            },
 
             test_setValue: function() {
                 picker.setValue([45, 58, 42]);
-                
+
                 _verifyState({
                         r: 45, g: 58, b: 42, h: 109, s: 28, v: 23,
                         hex: "2D3A2A", rgb: [45, 58, 42], websafe: [51, 51, 51]
                     });
-            },            
+            },
 
             test_websafeClick: function() {
                 UserAction.click("yui-picker-websafe-swatch");
-                
+
                 _verifyState({
                         r: 51, g: 51, b: 51, h: 0, s: 0, v: 20,
                         hex: "333333", rgb: [51, 51, 51], websafe: [51, 51, 51]
@@ -113,7 +114,7 @@
                         clientX: 55,
                         clientY: 55
                     });
-                
+
                 UserAction.mouseup("yui-picker-bg", {
                         clientX: 60,
                         clientY: 60
@@ -125,7 +126,7 @@
                     });
             }
 
-        })); 
+        }));
 
         tool.TestRunner.add(suite);
 
@@ -134,7 +135,7 @@
         } else {
             tool.TestRunner.run();
         }
-    }); 
+    });
 })();
 </script>
 <style type="text/css">

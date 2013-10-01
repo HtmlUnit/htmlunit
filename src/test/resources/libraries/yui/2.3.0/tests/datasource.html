@@ -1,3 +1,5 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0016)http://localhost -->
 <html>
 <head>
 <title>YUI DataSource Tests</title>
@@ -50,7 +52,7 @@
 
     var datasourceTemplate = {
         name: "DataSource Test",
-        
+
         testConstruction: function() {
             var ds = this.createInstance();
             Assert.isObject(ds, "Failed to create instance");
@@ -69,7 +71,7 @@
     var dsStaticMethodsTemplate = {
         name:"Static Methods Test",
         data:["a","b","c"],
-        
+
         testParseNumbers: function() {
             var number;
             var ds = this.createInstance();
@@ -83,7 +85,7 @@
 
             ds = null;
         },
-        
+
         testParseDates: function() {
             var date;
             var ds = this.createInstance();
@@ -94,10 +96,10 @@
 
             date = YAHOO.util.DataSource.parseDate(myDate);
             DateAssert.datesAreEqual(date, myDate, "Incorrect date from Date");
-            
+
             date = YAHOO.util.DataSource.parseDate(979459200000);
             DateAssert.datesAreEqual(date, myDate, "Incorrect date from Number.");
-            
+
             ds = null;
         }
     };

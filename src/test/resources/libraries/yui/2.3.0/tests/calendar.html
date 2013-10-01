@@ -1,4 +1,5 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0016)http://localhost -->
 <html>
 <head>
 	<title>YUI Calendar Tests</title>
@@ -10,7 +11,7 @@
 	<script type="text/javascript" src="../build/yahoo-dom-event/yahoo-dom-event.js"></script>
 	<script type="text/javascript" src="../build/logger/logger-min.js"></script>
 	<script type="text/javascript" src="../build/yuitest/yuitest-beta-min.js"></script>
-	<script type="text/javascript" src="../build/calendar/calendar-min.js"></script>	
+	<script type="text/javascript" src="../build/calendar/calendar-min.js"></script>
 
 	<style type="text/css">
 		ol.testlist li {
@@ -43,7 +44,7 @@
 		 */
 		YAHOO.tests.CalendarTestCase = function(template) {
 			YAHOO.tests.CalendarTestCase.superclass.constructor.call(this, template);
-			
+
 			this.container = null;
 			this.isGroupCalTest = (this.widgetclass === YAHOO.widget.CalendarGroup);
 		};
@@ -76,7 +77,7 @@
 				}
 
 				if (this.needsUI) {
-					cal.render();	
+					cal.render();
 				}
 
 				return cal;
@@ -87,9 +88,9 @@
 			},
 
 			dateComparator : function(d1, d2) {
-				return ( d1 && d2 
-						   	&& d1.getFullYear() === d2.getFullYear() 
-							&& d1.getMonth() === d2.getMonth() 
+				return ( d1 && d2
+						   	&& d1.getFullYear() === d2.getFullYear()
+							&& d1.getMonth() === d2.getMonth()
 							&& d1.getDate() === d2.getDate() );
 			},
 
@@ -98,13 +99,13 @@
 
 				Assert.isArray(dates, "getSelectedDates() should always return an array");
 				if (expected.length > 0) {
-					ArrayAssert.isNotEmpty(dates, "getSelectedDates() shoud not be empty");	
+					ArrayAssert.isNotEmpty(dates, "getSelectedDates() shoud not be empty");
 				}
 				ArrayAssert.itemsAreEquivalent(expected, dates, this.dateComparator, "getSelectedDates() does not contain the correct dates");
 			},
 
 			_testConstruction : function() {
-				// Calling this method "testConstruction" and using it directly causes it to be 
+				// Calling this method "testConstruction" and using it directly causes it to be
 				// executed last. Hence providing the impl and wrapping it in the actual templates
 				var cal = this.createInstance();
 
@@ -143,7 +144,7 @@
 				var cal = this.createInstance({multi_select:true});
 
 				var testDtStr = "04/12/2007, 05/02/2008, 02/16/2006-02/18/2006";
-				var testDt = [new Date(2006, 1, 16), new Date(2006, 1, 17), 
+				var testDt = [new Date(2006, 1, 16), new Date(2006, 1, 17),
 									new Date(2006, 1, 18), new Date(2007, 3, 12),new Date(2008, 4, 2)];
 
 				cal.select(testDtStr);
@@ -161,16 +162,16 @@
 				this.assertSelectedDates(cal, [testDt]);
 
 				cal = null;
-			}, 
+			},
 
 			testSelectDateArray: function() {
 				var cal = this.createInstance({multi_select:true});
-	
+
 				var testDt = [new Date(2007, 3, 12), new Date(2007, 3, 13), new Date(2007, 3, 14)];
-	
+
 				cal.select(testDt);
 				this.assertSelectedDates(cal, testDt);
-				
+
 				cal = null;
 			},
 
@@ -279,7 +280,7 @@
 
 				Assert.isInstanceOf(Date, pgDate, "Page date should be instanceof Date");
 				DateAssert.datesAreEqual(new Date(2020, 10, 1), pgDate, "setYear to 2020 failed");
-				
+
 				cal.subtractYears(5);
 
 				pgDate = this.getCfgProperty(cal, "pagedate");
@@ -533,7 +534,7 @@
 
 				// Assert State
 				this.assertSelectedDates(cal, expectedDt);
-				
+
 				// Assert Rendering
 				if (this.isGroupCalTest) {
 					for (var i = 0; i < 2; i++) {
@@ -543,16 +544,16 @@
 
 						Assert.isFalse(Dom.hasClass(cal.pages[i].cells[1], cal.Style.CSS_CELL_SELECTED), "Cells[1] should not have selected style");
 						Assert.isFalse(Dom.hasClass(cal.pages[i].cells[30], cal.Style.CSS_CELL_SELECTED), "Cells[30] should not have selected style");
-						Assert.isFalse(Dom.hasClass(cal.pages[i].cells[38], cal.Style.CSS_CELL_SELECTED), "Cells[38] should not have selected style");					
+						Assert.isFalse(Dom.hasClass(cal.pages[i].cells[38], cal.Style.CSS_CELL_SELECTED), "Cells[38] should not have selected style");
 					}
 				} else {
 					Assert.isTrue(Dom.hasClass(cal.cells[11], cal.Style.CSS_CELL_SELECTED), "Cells[11] should have selected style");
 					Assert.isTrue(Dom.hasClass(cal.cells[12], cal.Style.CSS_CELL_SELECTED), "Cells[12] should have selected style");
 					Assert.isTrue(Dom.hasClass(cal.cells[13], cal.Style.CSS_CELL_SELECTED), "Cells[13] should have selected style");
-					
+
 					Assert.isFalse(Dom.hasClass(cal.cells[1], cal.Style.CSS_CELL_SELECTED), "Cells[1] should not have selected style");
 					Assert.isFalse(Dom.hasClass(cal.cells[30], cal.Style.CSS_CELL_SELECTED), "Cells[30] should not have selected style");
-					Assert.isFalse(Dom.hasClass(cal.cells[38], cal.Style.CSS_CELL_SELECTED), "Cells[38] should not have selected style");					
+					Assert.isFalse(Dom.hasClass(cal.cells[38], cal.Style.CSS_CELL_SELECTED), "Cells[38] should not have selected style");
 				}
 
 				cal = null;
@@ -577,7 +578,7 @@
 
 				// Assert State
 				this.assertSelectedDates(cal, expectedDt);
-				
+
 				// Assert Rendering
 				if (this.isGroupCalTest) {
 					for (var i = 0; i < 2; i++) {
@@ -654,7 +655,7 @@
 
 				var testStr = "TestGeneratedContent";
 				var testClass = "TestGeneratedClass";
-				
+
 				var customRenderer = function(workingDate, cell) {
 					cell.innerHTML = testStr;
 					Dom.addClass(cell, testClass);
@@ -672,7 +673,7 @@
 				var sundays = Dom.getElementsByClassName("wd0", "td", this.container);
 				var wednesdays = Dom.getElementsByClassName("wd3", "td", this.container);
 				var saturdays = Dom.getElementsByClassName("wd6", "td", this.container);
-				
+
 				// Expect different lengths, based on OOM days
 				for (var i = 0; i < sundays.length; i++) {
 					Assert.areEqual(testStr, sundays[i].innerHTML, "Sunday cell content not set correctly");
@@ -730,8 +731,8 @@
 							break;
 					}
 				}
-				
-				cal = null;				
+
+				cal = null;
 			},
 
 			testBasicEvents : function() {
@@ -741,17 +742,17 @@
 				var expectedEvts;
 
 				if (this.isGroupCalTest) {
-					expectedEvts = [ e.BEFORE_SELECT, e.SELECT, 
-									 e.BEFORE_SELECT, e.SELECT, 
-									 e.BEFORE_DESELECT, e.DESELECT, 
+					expectedEvts = [ e.BEFORE_SELECT, e.SELECT,
+									 e.BEFORE_SELECT, e.SELECT,
 									 e.BEFORE_DESELECT, e.DESELECT,
-									 e.BEFORE_RENDER, e.RENDER, e.CHANGE_PAGE, 
-									 e.BEFORE_RENDER, e.RENDER, e.CHANGE_PAGE, 
-									 e.BEFORE_RENDER, e.RENDER, e.CLEAR, 
-									 e.BEFORE_RENDER, e.RENDER, e.CLEAR, 
-									 e.BEFORE_RENDER, e.RENDER, e.RESET, 
+									 e.BEFORE_DESELECT, e.DESELECT,
+									 e.BEFORE_RENDER, e.RENDER, e.CHANGE_PAGE,
+									 e.BEFORE_RENDER, e.RENDER, e.CHANGE_PAGE,
+									 e.BEFORE_RENDER, e.RENDER, e.CLEAR,
+									 e.BEFORE_RENDER, e.RENDER, e.CLEAR,
 									 e.BEFORE_RENDER, e.RENDER, e.RESET,
-									 e.BEFORE_RENDER, e.RENDER, 
+									 e.BEFORE_RENDER, e.RENDER, e.RESET,
+									 e.BEFORE_RENDER, e.RENDER,
 									 e.BEFORE_RENDER, e.RENDER ];
 				} else {
 					expectedEvts = [ e.BEFORE_SELECT, e.SELECT,
@@ -786,8 +787,8 @@
 				cal.render();				// beforeRender, render
 
 				ArrayAssert.itemsAreEqual(expectedEvts, actualEvts, "Unexpected event order");
-				
-				cal = null;				
+
+				cal = null;
 			}
 		};
 
@@ -826,7 +827,7 @@
 
 				DateAssert.datesAreEqual(testPgDt, this.getCfgProperty(cal, "pagedate"), "Page date not parsed/set correctly");
 				ArrayAssert.itemsAreEquivalent(testDt, cal.getSelectedDates(), this.dateComparator, "Page date not parsed/set correctly");
-				
+
 				cal = null;
 			},
 
@@ -858,7 +859,7 @@
 				Assert.areEqual(0, (Dom.getElementsByClassName(cal.Style.CSS_CLOSE, "span", root)).length, "Close SPAN should not be rendered");
 				Assert.areEqual(0, (Dom.getElementsByClassName("title", "div", root)).length, "Title DIV should not be rendered");
 				Assert.areEqual(0, (root.getElementsByTagName("iframe")).length, "Iframe should not be rendered");
-				
+
 				cal = null;
 			},
 
@@ -893,7 +894,7 @@
 				cal.cfg.setProperty("show_Week_footer", false);
 				cal.cfg.setProperty("show_Week_HEADER", false);
 				cal.render();
-				
+
 				Assert.areEqual(baseCount, (Dom.getElementsByClassName(cal.Style.CSS_WEEKDAY_ROW, "tr", root)).length, "Weekday rows should be rendered");
 				Assert.areEqual(0, (Dom.getElementsByClassName(cal.Style.CSS_ROW_HEADER, "th", root)).length, "Week headers should not be rendered");
 				Assert.areEqual(0, (Dom.getElementsByClassName(cal.Style.CSS_ROW_FOOTER, "th", root)).length, "Week footers should not be rendered");
@@ -935,11 +936,11 @@
 				this.assertSelectedDates(cal, [new Date(2007, 3, 9), new Date(2007, 3, 14), new Date(2007, 3, 15), new Date(2007, 3, 21)]);
 
 				cal = null;
-			}, 
-			
+			},
+
 			testMultiSelectProp : function() {
 
-				// NOTE: As currently designed/implemented, MULTI_SELECT is a UI specific switch. 
+				// NOTE: As currently designed/implemented, MULTI_SELECT is a UI specific switch.
 				// It is not used to constrain selection via any API state change methods.
 
 				var testDt = [new Date(2007, 4, 13), new Date(2007, 4, 15), new Date(2007, 4, 22)];
@@ -950,7 +951,7 @@
 					var cellOne = Dom.getElementsByClassName("d13", "td", page[0]);
 					var cellTwo = Dom.getElementsByClassName("d15", "td", page[0]);
 					var cellThree = Dom.getElementsByClassName("d22", "td", page[0]);
-	
+
 					UserAction.click(cellOne[0]);
 					UserAction.click(cellTwo[0]);
 					UserAction.click(cellThree[0]);
@@ -971,7 +972,7 @@
 				cal.cfg.setProperty("pagedate", "5/2007");
 				cal.cfg.setProperty("multi_selecT", false);
 				cal.render();
-				
+
 				clickOnCells(cal);
 				this.assertSelectedDates(cal, [new Date(2007, 4, 22)]);
 
@@ -995,7 +996,7 @@
 			"CALENDARGROUP_DOM"	: new YAHOO.tests.CalendarTestCase(calGrpDomTemplate),
 			"CALENDARGROUP_CFG"	: new YAHOO.tests.CalendarTestCase(calGrpCfgTemplate)
 		}
-		
+
 		var suites = [
 			["CALENDAR_API", "CALENDARGROUP_API", "CALENDAR_DOM", "CALENDARGROUP_DOM", "CALENDAR_CFG", "CALENDARGROUP_CFG"],
 			["CALENDARGROUP_API", "CALENDARGROUP_DOM", "CALENDARGROUP_CFG"],

@@ -1,3 +1,5 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0016)http://localhost -->
 <html>
 <head>
 <title>YUI AutoComplete Tests</title>
@@ -36,7 +38,7 @@
         DS_JSFunction = YAHOO.widget.DS_JSFunction,
         DS_XHR = YAHOO.widget.DS_XHR,
         AutoComplete = YAHOO.widget.AutoComplete;
-        
+
     function AutoCompleteTestCase(template) {
         AutoCompleteTestCase.superclass.constructor.call(this, template);
         this.input = null;
@@ -49,7 +51,7 @@
         this.wrapper = document.createElement("div");
         this.wrapper.id = "testACWrapper";
         document.body.appendChild(this.wrapper);
-        
+
         this.input = document.createElement("input");
         this.input.id = "testACInput";
         this.wrapper.appendChild(this.input);
@@ -57,7 +59,7 @@
         this.container = document.createElement("div");
         this.container.id = "testACContainer";
         this.wrapper.appendChild(this.container);
-        
+
         this.datasource = new DS_JSArray(["aaa","abc","axyz"]);
     };
 
@@ -69,12 +71,12 @@
 
         this.datasource = null;
     };
-        
+
     AutoCompleteTestCase.prototype.createInstance = function(oConfig) {
         var ac = new AutoComplete(this.input, this.container, this.datasource, oConfig);
         return ac;
     };
-    
+
     var acTemplate = {
         testConstruction: function() {
             var ac = this.createInstance();
@@ -124,7 +126,7 @@
             for(var i=0; i<els.length; i++) {
                 Assert.areSame("li", els[i].tagName.toLowerCase(), "Expected an LI element");
             }
-            
+
             ac.maxResultsDisplayed = 5;
             ac.sendQuery("a");
             var els = ac.getListItems();
@@ -147,7 +149,7 @@
         acsuite.add(acTest);
         TestRunner.add(acsuite);
 
-        YAHOO.util.Event.addListener("btnRun", "click", runTests);    
+        YAHOO.util.Event.addListener("btnRun", "click", runTests);
         YAHOO.util.Dom.get("btnRun").disabled = false;
 
         if (parent && parent != window) {

@@ -1,15 +1,16 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0016)http://localhost -->
 <html>
 <head>
 <title>Animation Test Suite</title>
 
 <link type="text/css" rel="stylesheet" href="../build/logger/assets/logger.css">
-<link type="text/css" rel="stylesheet" href="../build/yuitest/assets/testlogger.css">     
+<link type="text/css" rel="stylesheet" href="../build/yuitest/assets/testlogger.css">
 
 <script type="text/javascript" src="../build/yahoo/yahoo.js"></script>
 <script type="text/javascript" src="../build/event/event.js"></script>
-<script type="text/javascript" src="../build/dom/dom.js"></script> 
-<script type="text/javascript" src="../build/animation/animation.js"></script> 
+<script type="text/javascript" src="../build/dom/dom.js"></script>
+<script type="text/javascript" src="../build/animation/animation.js"></script>
 <script type="text/javascript" src="../build/logger/logger-min.js"></script>
 <script type="text/javascript" src="../build/yuitest/yuitest-beta.js"></script>
 
@@ -44,7 +45,7 @@
 
             test_getEl: function() {
                 YAHOO.util.Assert.areEqual(elFoo, animFoo.getEl(), 'incorrect element');
-            },            
+            },
 
             test_isAnimated: function() {
                 YAHOO.util.Assert.isFalse(animFoo.isAnimated(), 'isAnimated() should be false');
@@ -52,7 +53,7 @@
 
                 YAHOO.util.Assert.isTrue(animFoo.isAnimated(), 'isAnimated() should be true');
                 animFoo.stop();
-            },            
+            },
 
             test_stop: function() {
                 animFoo.animate();
@@ -61,32 +62,32 @@
                 YAHOO.util.Assert.isFalse(animFoo.isAnimated(), 'isAnimated() should be false');
                 YAHOO.util.Assert.isTrue(animBar.isAnimated(), 'isAnimated() should be false');
                 animBar.stop();
-            },            
+            },
 
             test_onStart: function() {
                 var pass = false;
                 var handler = function() {
                     pass = true;
                     this.onStart.unsubscribe(handler);
-                };      
+                };
                 animFoo.onStart.subscribe(handler);
                 animFoo.animate();
                 animFoo.stop();
                 YAHOO.util.Assert.isTrue(pass, 'onStart failed to fire');
-            },            
+            },
 
             test_endValue: function() {
                 var handler = function() {
                     YAHOO.util.Assert.areEqual(10, elFoo.offsetWidth, 'incorrect "to" end value set');
                     YAHOO.util.Assert.areEqual(150, elBar.offsetWidth, 'incorrect "by" end value set');
                     this.onComplete.unsubscribe(handler);
-                };      
+                };
 
                 animBar.onComplete.subscribe(handler);
                 animFoo.animate();
                 animBar.animate();
-            }            
-        })); 
+            }
+        }));
         tool.TestRunner.add(suite);
 
         if (parent && parent != window) {
@@ -95,7 +96,7 @@
             tool.TestRunner.run();
         }
 
-    }); 
+    });
 })();
 </script>
 <style type="text/css">
