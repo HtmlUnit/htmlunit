@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 
 import java.io.IOException;
@@ -50,6 +52,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Sudhan Moghe
  * @author Sebastian Cato
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class XMLHttpRequestTest extends WebDriverTestCase {
@@ -64,6 +67,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Tries(3)
+    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void syncUse() throws Exception {
         final String html =
               "<html>\n"
@@ -106,7 +110,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "[object]", IE6 = "activeX created", DEFAULT = "[object XMLHttpRequest]")
+    @Alerts(DEFAULT = "[object XMLHttpRequest]",
+            IE6 = "activeX created",
+            IE8 = "[object]")
     public void creation() throws Exception {
         final String html =
             "<html>\n"
@@ -225,6 +231,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("bla bla")
+    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseText_NotXml() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -251,8 +258,10 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "someAttr", "someValue", "someAttr=\"someValue\"" })
+    @Alerts(DEFAULT = { "1", "someAttr", "someValue", "someAttr=\"someValue\"" },
+            IE10 = { "1", "someAttr", "undefined", "undefined" })
     @Browsers(IE)
+    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML2() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -408,7 +417,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "false" }, IE = { "true", "exception" }, IE6 = "exception")
+    @Alerts(DEFAULT = { "true", "false" },
+            IE = { "true", "exception" },
+            IE6 = "exception")
     public void overrideMimeType() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -443,7 +454,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "ibcdefg", "xxxxxfg" }, FF3_6 = { })
+    @Alerts(DEFAULT = { "ibcdefg", "xxxxxfg" },
+            FF3_6 = { })
+    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void replaceOnTextData() throws Exception {
         final String html =
               "<html>\n"
@@ -543,7 +556,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
+    @Browsers({ IE6, IE8 })
     @Alerts("2")
     public void responseXML_selectNodesIE() throws Exception {
         final String html =
@@ -627,12 +640,15 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "[object Element]", "[object Element]", "[object HTMLBodyElement]",
-            "[object HTMLSpanElement]", "[object XMLDocument]", "undefined" },
-            CHROME = { "[object Element]", "[object Element]", "[object HTMLBodyElement]",
-                    "[object HTMLSpanElement]", "[object Document]", "undefined" },
-            IE = { "[object]", "[object]", "[object]",
-            "<body xmlns=\"http://www.w3.org/1999/xhtml\"><span id=\"out\">Hello Bob Dole!</span></body>" })
+    @Alerts(DEFAULT = { "[object Element]", "[object Element]", "[object HTMLBodyElement]",
+                "[object HTMLSpanElement]", "[object Document]", "undefined" },
+            FF = { "[object Element]", "[object Element]", "[object HTMLBodyElement]",
+                "[object HTMLSpanElement]", "[object XMLDocument]", "undefined" },
+            IE6 = { "[object]", "[object]", "[object]",
+                "<body xmlns=\"http://www.w3.org/1999/xhtml\"><span id=\"out\">Hello Bob Dole!</span></body>" },
+            IE8 = { "[object]", "[object]", "[object]",
+                "<body xmlns=\"http://www.w3.org/1999/xhtml\"><span id=\"out\">Hello Bob Dole!</span></body>" })
+    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML_getElementById() throws Exception {
         final String html =
               "<html>\n"
@@ -779,7 +795,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "myID", IE = "exception")
+    @Alerts(DEFAULT = "myID",
+            IE = "exception")
     public void responseXML_html_select() throws Exception {
         final String html =
               "<html>\n"
@@ -821,7 +838,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "myInput", IE = "exception")
+    @Alerts(DEFAULT = "myInput",
+            IE = "exception")
     public void responseXML_html_form() throws Exception {
         final String html =
               "<html>\n"
@@ -880,7 +898,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE6 = "exception", DEFAULT = "undefined")
+    @Alerts(DEFAULT = "undefined",
+            IE6 = "exception")
     public void caseSensitivity_XMLHttpRequest() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
