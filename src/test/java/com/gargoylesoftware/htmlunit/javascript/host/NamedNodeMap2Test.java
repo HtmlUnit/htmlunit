@@ -23,6 +23,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest;
 
 /**
  * Tests for {@link com.gargoylesoftware.htmlunit.javascript.NamedNodeMap}.
@@ -37,15 +38,13 @@ public class NamedNodeMap2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(FF3_6)
     @Alerts(DEFAULT = { "myAttr", "myAttr" },
             FF3_6 = { "myAttr", "myattr" })
+    @NotYetImplemented(FF3_6)
     public void setNamedItem() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
-            + "    doc.async = false;\n"
-            + "    doc.load('" + URL_SECOND + "');\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "    var node = doc.createAttribute('myAttr');\n"
             + "    doc.documentElement.attributes.setNamedItem(node);\n"
             + "    alert(doc.documentElement.attributes.getNamedItem('myAttr').nodeName);\n"
@@ -54,12 +53,7 @@ public class NamedNodeMap2Test extends WebDriverTestCase {
             + "    document.body.attributes.setNamedItem(node);\n"
             + "    alert(document.body.attributes.getNamedItem('myAttr').nodeName);\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
