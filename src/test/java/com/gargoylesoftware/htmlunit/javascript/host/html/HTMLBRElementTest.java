@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLBRElementTest extends WebDriverTestCase {
@@ -36,10 +37,10 @@ public class HTMLBRElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(
-        IE = { "", "left", "all", "right", "none", "", "", "!", "!", "!", "left", "none", "right", "all", "none",
-               "", "" },
-        DEFAULT = { "", "left", "all", "right", "none", "2", "foo", "left", "none", "right", "all", "2", "abc", "8" })
+    @Alerts(DEFAULT = { "", "left", "all", "right", "none", "2", "foo", "left",
+                        "none", "right", "all", "2", "abc", "8" },
+            IE = { "", "left", "all", "right", "none", "", "", "!", "!", "!", "left", "none", "right", "all", "none",
+                   "", "" })
     public void clear() throws Exception {
         final String html
             = "<html><body>\n"
@@ -94,7 +95,11 @@ public class HTMLBRElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<br id=\"myId\">", FF3_6 = "undefined", FF10 = "undefined", IE = "<BR id=myId>")
+    @Alerts(DEFAULT = "<br id=\"myId\">",
+            FF3_6 = "undefined",
+            FF10 = "undefined",
+            IE6 = "<BR id=myId>",
+            IE8 = "<BR id=myId>")
     public void outerHTML() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLBodyElementTest extends WebDriverTestCase {
@@ -44,7 +45,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = {",0px,0px,0px,0px", ",,,,", ",8px,8px,8px,8px", ",,,," },
-            IE = {"0px,0px,0px,0px,0px", ",,,,", "15px 10px,10px,10px,15px,15px", ",,,," })
+            IE = {"0px,0px,0px,0px,0px", ",,,,", "15px 10px,10px,10px,15px,15px", ",,,," },
+            IE10 = {"0px,0px,0px,0px,0px", ",,,,", "8px,8px,8px,8px,8px", ",,,," })
     public void testDefaultPaddingAndMargins() throws Exception {
         final String html =
             "<html>\n"
@@ -69,7 +71,9 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = "[object]")
+    @Alerts(DEFAULT = "exception",
+            IE = "[object]",
+            IE10 = "[object MSEventObj]")
     public void attachEvent() throws Exception {
         final String html =
             "<html>\n"
@@ -129,7 +133,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "#0000aa", "x" },
             FF3_6 = {"", "#0000aa", "#000000" },
-            IE = {"", "#0000aa", "#000000" })
+            IE = {"", "#0000aa", "#000000" },
+            IE10 = {"", "#0000aa", "#0" })
     public void aLink() throws Exception {
         final String html =
             "<html>\n"
@@ -183,7 +188,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "#0000aa", "x" },
             FF3_6 = {"", "#0000aa", "#000000" },
-            IE = {"", "#0000aa", "#000000" })
+            IE = {"", "#0000aa", "#000000" },
+            IE10 = {"", "#0000aa", "#0" })
     public void bgColor() throws Exception {
         final String html =
             "<html>\n"
@@ -210,7 +216,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "#0000aa", "x" },
             FF3_6 = {"", "#0000aa", "#000000" },
-            IE = {"", "#0000aa", "#000000" })
+            IE = {"", "#0000aa", "#000000" },
+            IE10 = {"", "#0000aa", "#0" })
     public void link() throws Exception {
         final String html =
             "<html>\n"
@@ -237,7 +244,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "#0000aa", "x" },
             FF3_6 = {"", "#0000aa", "#000000" },
-            IE = {"", "#0000aa", "#000000" })
+            IE = {"", "#0000aa", "#000000" },
+            IE10 = {"", "#0000aa", "#0" })
     public void text() throws Exception {
         final String html =
             "<html>\n"
@@ -264,7 +272,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "#0000aa", "x" },
             FF3_6 = {"", "#0000aa", "#000000" },
-            IE = {"", "#0000aa", "#000000" })
+            IE = {"", "#0000aa", "#000000" },
+            IE10 = {"", "#0000aa", "#0" })
     public void vLink() throws Exception {
         final String html =
             "<html>\n"

@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,6 +36,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Marc Guillemot
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLAnchorElement2Test extends WebDriverTestCase {
@@ -100,7 +102,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, CHROME })
+    @Browsers({ FF, CHROME, IE10 })
     @Alerts("onclick")
     public void javaScriptPreventDefault() throws Exception {
         final String html
@@ -153,7 +155,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Second", FF3_6 = "First") // in fact not alerts here, but it makes config easier
+    @Alerts(DEFAULT = "Second",
+            FF3_6 = "First") // in fact not alerts here, but it makes config easier
     public void javaScriptAnchorClick() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"

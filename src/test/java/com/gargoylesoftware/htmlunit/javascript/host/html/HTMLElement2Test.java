@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLElement2Test extends WebDriverTestCase {
@@ -44,7 +45,9 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "HTML", "" }, DEFAULT = { "undefined", "undefined" })
+    @Alerts(DEFAULT = { "undefined", "undefined" },
+            IE6 = { "HTML", "" },
+            IE8 = { "HTML", "" })
     public void scopeName() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -63,8 +66,9 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "blah", "http://www.blah.com/blah", "error" },
-            DEFAULT = { "undefined", "undefined", "undefined", "http://www.meh.com/meh" })
+    @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "http://www.meh.com/meh" },
+            IE6 = { "blah", "http://www.blah.com/blah", "error" },
+            IE8 = { "blah", "http://www.blah.com/blah", "error" })
     public void scopeName2() throws Exception {
         final String html = "<html xmlns:blah='http://www.blah.com/blah'><head>\n"
             + "<script>\n"
@@ -208,7 +212,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "12", "12" })
+    @Alerts(DEFAULT = { "12", "12" },
+            IE10 = { "15", "15" })
     public void offsetTopAndLeft_Borders() throws Exception {
         final String html =
               "<html>\n"
@@ -292,15 +297,18 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(
-        FF = { "1 absolute_auto 0", "2 absolute_length 50", "3 absolute_inherit 10", "4 fixed_auto 10",
-            "5 fixed_length 50", "6 fixed_inherit 10", "7 relative_auto 0", "8 relative_length 50",
-            "9 relative_inherit 10", "10 static_auto 0", "11 static_length 0", "12 static_inherit 0",
-            "13 inherit_auto 0", "14 inherit_length 50", "15 inherit_inherit 10" },
-        IE = { "1 absolute_auto 0", "2 absolute_length 50", "3 absolute_inherit 0", "4 fixed_auto 0",
-            "5 fixed_length 0", "6 fixed_inherit 0", "7 relative_auto 0", "8 relative_length 50",
-            "9 relative_inherit 0", "10 static_auto 0", "11 static_length 0", "12 static_inherit 0",
-            "13 inherit_auto 0", "14 inherit_length 0", "15 inherit_inherit 0" })
+    @Alerts(DEFAULT = { "1 absolute_auto 0", "2 absolute_length 50", "3 absolute_inherit 10", "4 fixed_auto 10",
+                "5 fixed_length 50", "6 fixed_inherit 10", "7 relative_auto 0", "8 relative_length 50",
+                "9 relative_inherit 10", "10 static_auto 0", "11 static_length 0", "12 static_inherit 0",
+                "13 inherit_auto 0", "14 inherit_length 50", "15 inherit_inherit 10" },
+            IE6 = { "1 absolute_auto 0", "2 absolute_length 50", "3 absolute_inherit 0", "4 fixed_auto 0",
+                "5 fixed_length 0", "6 fixed_inherit 0", "7 relative_auto 0", "8 relative_length 50",
+                "9 relative_inherit 0", "10 static_auto 0", "11 static_length 0", "12 static_inherit 0",
+                "13 inherit_auto 0", "14 inherit_length 0", "15 inherit_inherit 0" },
+            IE8 = { "1 absolute_auto 0", "2 absolute_length 50", "3 absolute_inherit 0", "4 fixed_auto 0",
+                "5 fixed_length 0", "6 fixed_inherit 0", "7 relative_auto 0", "8 relative_length 50",
+                "9 relative_inherit 0", "10 static_auto 0", "11 static_length 0", "12 static_inherit 0",
+                "13 inherit_auto 0", "14 inherit_length 0", "15 inherit_inherit 0" })
     public void offsetLeft_PositionLeft_DifferentCombinations() throws Exception {
         final String html = "<html><body onload='test()'><script language='javascript'>\n"
             + "String.prototype.trim = function() {\n"
@@ -400,7 +408,9 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "8", "8" }, IE = { "10", "15" })
+    @Alerts(DEFAULT = { "8", "8" },
+            IE6 = { "10", "15" },
+            IE8 = { "10", "15" })
     public void offsetTopAndLeftWhenParentIsBody() throws Exception {
         final String html
             = "<html>\n"
@@ -499,7 +509,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0", "20" },
-            IE = { "15", "15" })
+            IE = { "15", "15" },
+            IE10 = { "0", "18" })
     public void offsetHeight_explicitHeightZero() throws Exception {
         final String html
             = "<html><body>\n"
@@ -516,7 +527,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "77", "2", "5", "20", "50", "50", "20" },
-            IE = { "100", "15", "20", "20", "50", "50", "15" })
+            IE = { "100", "15", "20", "20", "50", "50", "15" },
+            IE10 = { "75", "2", "5", "20", "50", "50", "18" })
     public void offsetHeight_calculatedBasedOnChildren() throws Exception {
         final String html
             = "<html>\n"
@@ -607,7 +619,9 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "something", "something" }, DEFAULT = { "something", "0" })
+    @Alerts(DEFAULT = { "something", "0" },
+            IE6 = { "something", "something" },
+            IE8 = { "something", "something" })
     public void textContent_null() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -635,7 +649,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "something", "null" }, DEFAULT = { "something", "0" })
+    @Alerts(DEFAULT = { "something", "0" },
+            IE = { "something", "null" })
     public void innerText_null() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -845,7 +860,9 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = { "true", "button", "error" }, DEFAULT = { "true", "button", "true", "button", "false" })
+    @Alerts(DEFAULT = { "true", "button", "true", "button", "false" },
+            IE6 = { "true", "button", "error" },
+            IE8 = { "true", "button", "error" })
     public void removeAttributeNode() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -872,7 +889,9 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "div1" }, IE = "undefined")
+    @Alerts(DEFAULT = { "3", "div1" },
+            IE6 = "undefined",
+            IE8 = "undefined")
     public void querySelectorAll() throws Exception {
         final String html = "<html><head><title>Test</title>\n"
             + "<style>\n"
@@ -904,7 +923,9 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "p1" }, IE = "undefined")
+    @Alerts(DEFAULT = { "1", "p1" },
+            IE6 = "undefined",
+            IE8 = "undefined")
     public void querySelectorAllOnDisconnectedElement() throws Exception {
         final String html = "<html><head><title>Test</title>\n"
             + "<script>\n"
@@ -982,7 +1003,9 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1", IE = "undefined")
+    @Alerts(DEFAULT = "1",
+            IE6 = "undefined",
+            IE8 = "undefined")
     public void querySelectorAll_noDuplication() throws Exception {
         final String html = "<html><body>\n"
             + "<div><span>First</span></div>\n"

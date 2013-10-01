@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,6 +33,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLDivElementTest extends WebDriverTestCase {
@@ -40,7 +42,8 @@ public class HTMLDivElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "no", IE = "yes")
+    @Alerts(DEFAULT = "no",
+            IE = "yes")
     public void doScroll() throws Exception {
         final String html =
             "<html>\n"
@@ -69,7 +72,7 @@ public class HTMLDivElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "left", "right", "justify", "center", "wrong", "" },
             IE = { "left", "right", "justify", "center", "", "" })
-    @NotYetImplemented(IE)
+    @NotYetImplemented({ IE6, IE8 })
     public void getAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -133,7 +136,8 @@ public class HTMLDivElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "true", "null", "true" },
-            IE = { "undefined", "false", "undefined", "false" })
+            IE6 = { "undefined", "false", "undefined", "false" },
+            IE8 = { "undefined", "false", "undefined", "false" })
     public void handlers() throws Exception {
         final String html
             = "<html><body>\n"

@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -60,8 +62,10 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(IE)
-    @Alerts(IE = "object", FF = "function")
+    @Alerts(DEFAULT = "function",
+            IE6 = "object",
+            IE8 = "object")
+    @NotYetImplemented({ IE6, IE8 })
     public void testToStringFunction() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -78,8 +82,9 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "5", "6" })
     @Browsers(IE)
+    @Alerts(DEFAULT = { "5", "6" },
+            IE10 = "5")
     public void getElements() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -98,9 +103,10 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = {"string 0", "string item", "string length", "string namedItem" },
-            FF17 = {"string 0", "string item", "string iterator", "string length", "string namedItem" },
-            IE = {"string length", "string myForm" })
+    @Alerts(FF = { "string 0", "string item", "string length", "string namedItem" },
+            FF17 = { "string 0", "string item", "string iterator", "string length", "string namedItem" },
+            IE = { "string length", "string myForm" },
+            IE10 = { "string item", "string length", "string myForm", "string namedItem" })
     @NotYetImplemented(FF17)
     public void testFor_in() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -126,12 +132,15 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = {"string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
-            "string item", "string length", "string namedItem" },
-            FF17 = {"string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
-                    "string item", "string iterator", "string length", "string namedItem" },
-            IE = {"string 1", "string action", "string first_submit", "string length",
-            "string second_submit", "string val1", "string val2" })
+    @Alerts(FF = { "string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
+                "string item", "string length", "string namedItem" },
+            FF17 = { "string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
+                "string item", "string iterator", "string length", "string namedItem" },
+            IE = { "string 1", "string action", "string first_submit", "string length",
+                "string second_submit", "string val1", "string val2" },
+            IE10 = { "string 1", "string action", "string first_submit", "string item",
+                "string length", "string namedItem", "string second_submit", "string val1",
+                "string val2" })
     @NotYetImplemented(FF17)
     public void testFor_in2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -187,8 +196,9 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @NotYetImplemented(FF)
-    @Alerts(IE = { "null", "null", "undefined", "null" },
-            FF = { "null", "null", "undefined", "exception" })
+    @Alerts(FF = { "null", "null", "undefined", "exception" },
+            IE = { "null", "null", "undefined", "null" },
+            IE10 = { "null", "null", "undefined", "undefined" })
     public void testOutOfBoundAccess() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -228,7 +238,9 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "DIV", "2" }, FF = { "3", "#text", "5" })
+    @Alerts(DEFAULT = { "3", "#text", "5" },
+            IE6 = { "1", "DIV", "2" },
+            IE8 = { "1", "DIV", "2" })
     public void childNodes() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -269,7 +281,9 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "[object]", "undefined" }, FF = { "[object HTMLHeadingElement]", "undefined" })
+    @Alerts(DEFAULT = { "[object HTMLHeadingElement]", "undefined" },
+            IE6 = { "[object]", "undefined" },
+            IE8 = { "[object]", "undefined" })
     public void getElementWithDollarSign() throws Exception {
         final String html
             = "<h3 id='$h'>h</h3><script>\n"
@@ -284,8 +298,9 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "undefined", "undefined", "undefined", "undefined" },
-        DEFAULT =  { "function", "function", "function", "function" })
+    @Alerts(DEFAULT =  { "function", "function", "function", "function" },
+            IE = { "undefined", "undefined", "undefined", "undefined" },
+            IE10 =  { "undefined", "undefined", "function", "function" })
     public void array_prototype() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -306,8 +321,8 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "undefined", "undefined", "function", "function" },
-        DEFAULT =  { "function", "function", "function", "function" })
+    @Alerts(DEFAULT =  { "function", "function", "function", "function" },
+            IE = { "undefined", "undefined", "function", "function" })
     public void array_prototype_standards() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
             + "<script>\n"
