@@ -1,0 +1,52 @@
+Passed: 50
+Failed: 1
+ok - pre-deferred callback
+ok - post-deferred callback
+ok - throw -> err, catch -> success
+ok - return -> err, catch -> succcess
+ok - canceller called!
+ok - CancelledError here
+ok - succeed
+ok - default fail
+ok - wrapped fail
+ok - unwrapped fail
+ok - dependent deferred succeed
+ok - dependent deferred fail
+ok - double-call
+ok - double-fail
+ok - swallow cancel
+ok - canceller called!
+ok - non-swallowed cancel
+ok - deferred not allowed for callback
+ok - deferred not allowed for errback
+ok - chained deferred not allowed to be re-used
+ok - evalJSONRequest
+ok - getXMLHttpRequest
+ok - lock acquired
+ok - lock waiting for release
+ok - lock waiting for release
+ok - lock passed on
+ok - lock passed on
+ok - over-release raised
+ok - lock acquired
+ok - lock released
+ok - auto-partial addCallback addBoth
+ok - auto-partial errback
+ok - auto-partial errback
+ok - DeferredList looks like a Deferred
+ok - deferredlist result ok
+ok - deferredlist fireOnOneCallback ok
+ok - deferredlist fireOnOneErrback ok
+ok - deferredlist consumeErrors ok
+ok - gatherResults result ok
+ok - maybeDeferred sync ok
+ok - maybeDeferred async ok
+ok - synchronous test suite finished!
+ok - argument passed in OK
+ok - argument count right
+ok - callLater
+ok - argument passed in OK
+ok - argument count right
+ok - wait
+ok - loadJSONDoc
+ok - async suite finished
