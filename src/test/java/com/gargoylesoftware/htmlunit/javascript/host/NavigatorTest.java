@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class NavigatorTest extends WebDriverTestCase {
@@ -51,7 +52,8 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(IE = "0", DEFAULT = "undefined")
+    @Alerts(DEFAULT = "undefined",
+            IE = "0")
     public void appMinorVersion() throws Exception {
         attribute("appMinorVersion", getExpectedAlerts()[0]);
     }
@@ -99,7 +101,8 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "string", "true" }, IE = { "undefined", "false" })
+    @Alerts(DEFAULT = { "string", "true" },
+            IE = { "undefined", "false" })
     public void productSub() throws Exception {
         final String html = "<html><head><script>\n"
             + "alert(typeof(navigator.productSub));\n"
@@ -116,7 +119,8 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(IE = "x86", DEFAULT = "undefined")
+    @Alerts(DEFAULT = "undefined",
+            IE = "x86")
     public void cpuClass() throws Exception {
         attribute("cpuClass", getExpectedAlerts()[0]);
     }
@@ -144,7 +148,8 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(IE = "en-us", DEFAULT = "undefined")
+    @Alerts(DEFAULT = "undefined",
+            IE = "en-us")
     public void systemLanguage() throws Exception {
         attribute("systemLanguage", getExpectedAlerts()[0]);
     }
@@ -163,7 +168,8 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(IE = "en-us", DEFAULT = "undefined")
+    @Alerts(DEFAULT = "undefined",
+            IE = "en-us")
     public void userLanguage() throws Exception {
         attribute("userLanguage", getExpectedAlerts()[0]);
     }
@@ -215,7 +221,9 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "en-us", IE = "undefined", CHROME = "undefined")
+    @Alerts(CHROME = "undefined",
+            FF = "en-us",
+            IE = "undefined")
     public void language() throws Exception {
         final String html
             = "<html><head><title>First</title></head>\n"
@@ -251,7 +259,9 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "Gecko", IE = "undefined", CHROME = "Gecko")
+    @Alerts(CHROME = "Gecko",
+            FF = "Gecko",
+            IE = "undefined")
     public void product() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
@@ -270,7 +280,10 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object GeoGeolocation]", IE = "undefined", CHROME = "[object Geolocation]")
+    @Alerts(DEFAULT = "[object Geolocation]",
+            FF = "[object GeoGeolocation]",
+            IE6 = "undefined",
+            IE8 = "undefined")
     //IE9 = "[object Geolocation]"
     public void geolocation() throws Exception {
         final String html
@@ -290,7 +303,10 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF10 = "20120713134347", FF3_6 = "20120306064154", FF17 = "20121129151842", DEFAULT = "undefined")
+    @Alerts(DEFAULT = "undefined",
+            FF3_6 = "20120306064154",
+            FF10 = "20120713134347",
+            FF17 = "20121129151842")
     public void buildID() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
@@ -309,7 +325,9 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "", "" }, IE = { "undefined", "undefined" }, CHROME = { "Google Inc.", "" })
+    @Alerts(CHROME = { "Google Inc.", "" },
+            FF = { "", "" },
+            IE = { "undefined", "undefined" })
     public void vendor() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
@@ -329,7 +347,8 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "false", FF = "true")
+    @Alerts(FF = "true",
+            IE = "false")
     public void oscpu() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"

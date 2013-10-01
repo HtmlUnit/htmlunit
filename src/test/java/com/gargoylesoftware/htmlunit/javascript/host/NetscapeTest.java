@@ -37,8 +37,8 @@ public class NetscapeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined", "exception" },
-        FF3_6 = { "[object Object]", "undefined", "[object Object]", "[object Object]" },
-        FF = { "[object Object]", "undefined", "[object Object]", "undefined" })
+            FF = { "[object Object]", "undefined", "[object Object]", "undefined" },
+            FF3_6 = { "[object Object]", "undefined", "[object Object]", "[object Object]" })
     @NotYetImplemented(Browser.FF3_6)
     public void netscape() throws Exception {
         final String html = "<html><body><script>\n"

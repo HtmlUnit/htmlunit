@@ -34,7 +34,9 @@ public class MutationEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "exception", FF = { "[object MutationEvent]", "[object MutationEvent]" })
+    @Alerts(DEFAULT = { "[object MutationEvent]", "[object MutationEvent]" },
+            IE6 = "exception",
+            IE8 = "exception")
     public void createEvent() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

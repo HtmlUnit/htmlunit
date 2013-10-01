@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -29,6 +30,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class NamedNodeMapTest extends WebDriverTestCase {
@@ -38,7 +40,9 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      */
     @Test
     @NotYetImplemented()
-    @Alerts(FF = { "baz=blah", "foo=bar", "id=f", "name=f" }, IE = { "CORRECT THE EXPECTATION PLEASE!!!!" })
+    @Alerts(FF = { "baz=blah", "foo=bar", "id=f", "name=f" },
+            IE = { "CORRECT THE EXPECTATION PLEASE!!!!" },
+            IE10 = { "name=f", "id=f", "baz=blah", "foo=bar" })
     public void testAttributes() throws Exception {
         final String html =
               "<html>\n"
@@ -100,9 +104,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
     public void testGetNamedItem_XML() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
-            + "    doc.async = false;\n"
-            + "    doc.load('second.xml');\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'second.xml'") + ";\n"
             + "    alert(doc.documentElement.attributes.getNamedItem('name').nodeName);\n"
             + "    alert(doc.documentElement.attributes.getNamedItem('name').nodeValue);\n"
             + "    alert(doc.documentElement.attributes.name.nodeName);\n"
@@ -111,12 +113,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
             + "    alert(doc.documentElement.attributes.NaMe);\n"
             + "    alert(doc.documentElement.attributes.getNamedItem('nonExistent'));\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -130,7 +127,9 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = { "[object]", "[object]", "[object]" }, FF = { "undefined", "undefined", "undefined" })
+    @Alerts(DEFAULT = { "undefined", "undefined", "undefined" },
+            IE6 = { "[object]", "[object]", "[object]" },
+            IE8 = { "[object]", "[object]", "[object]" })
     public void unspecifiedAttributes() throws Exception {
         final String html =
               "<html>\n"
