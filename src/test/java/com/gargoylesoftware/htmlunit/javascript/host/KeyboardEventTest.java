@@ -40,7 +40,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "exception", FF = { "[object KeyboardEvent]", "[object KeyboardEvent]" })
+    @Alerts(FF = { "[object KeyboardEvent]", "[object KeyboardEvent]" },
+            IE = "exception")
     public void createEvent() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -58,7 +59,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "exception", FF = { "0-0", "undefined-undefined" })
+    @Alerts(FF = { "0-0", "undefined-undefined" },
+            IE = "exception")
     public void keyCode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -78,9 +80,9 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "exception",
-            FF = { "keydown, true, true, true, true, true, true, 65, 0",
-                "keyup, false, false, false, false, false, false, 32, 0" })
+    @Alerts(FF = { "keydown, true, true, true, true, true, true, 65, 0",
+                "keyup, false, false, false, false, false, false, 32, 0" },
+            IE = "exception")
     public void initKeyEvent() throws Exception {
         final String html = "<html><head><script>\n"
             + "  var properties = ['type', 'bubbles', 'cancelable', /*'view',*/ 'ctrlKey', 'altKey',\n"
@@ -134,31 +136,40 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "keydown:65,0,65",
-                   "keypress:0,65,65",
-                   "keyup:65,0,65",
-                   "keydown:65,0,65",
-                   "keypress:0,97,97",
-                   "keyup:65,0,65",
-                   "keydown:190,0,190",
-                   "keypress:0,46,46",
-                   "keyup:190,0,190",
-                   "keydown:13,0,13",
-                   "keypress:13,0,13",
-                   "keyup:13,0,13"
-                   },
+                    "keypress:0,65,65",
+                    "keyup:65,0,65",
+                    "keydown:65,0,65",
+                    "keypress:0,97,97",
+                    "keyup:65,0,65",
+                    "keydown:190,0,190",
+                    "keypress:0,46,46",
+                    "keyup:190,0,190",
+                    "keydown:13,0,13",
+                    "keypress:13,0,13",
+                    "keyup:13,0,13" },
             IE = { "keydown:65,undefined,undefined",
-                   "keypress:65,undefined,undefined",
-                   "keyup:65,undefined,undefined",
-                   "keydown:65,undefined,undefined",
-                   "keypress:97,undefined,undefined",
-                   "keyup:65,undefined,undefined",
-                   "keydown:190,undefined,undefined",
-                   "keypress:46,undefined,undefined",
-                   "keyup:190,undefined,undefined",
-                   "keydown:13,undefined,undefined",
-                   "keypress:13,undefined,undefined",
-                   "keyup:13,undefined,undefined"
-                   })
+                    "keypress:65,undefined,undefined",
+                    "keyup:65,undefined,undefined",
+                    "keydown:65,undefined,undefined",
+                    "keypress:97,undefined,undefined",
+                    "keyup:65,undefined,undefined",
+                    "keydown:190,undefined,undefined",
+                    "keypress:46,undefined,undefined",
+                    "keyup:190,undefined,undefined",
+                    "keydown:13,undefined,undefined",
+                    "keypress:13,undefined,undefined",
+                    "keyup:13,undefined,undefined" },
+           IE10 = { "keydown:16,0,16",
+                    "keydown:65,0,65",
+                    "keypress:65,65,65",
+                    "keyup:65,0,65",
+                    "keyup:16,0,16",
+                    "keydown:65,0,65",
+                    "keypress:97,97,97",
+                    "keyup:65,0,65",
+                    "keydown:190,0,190",
+                    "keypress:46,46,46",
+                    "keyup:190,0,190" })
     public void which() throws Exception {
         final String html
             = "<html><head></head><body>\n"

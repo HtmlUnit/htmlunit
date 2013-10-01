@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
+
 import java.net.URL;
 
 import org.junit.Test;
@@ -24,6 +26,7 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -37,6 +40,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class Location2Test extends WebDriverTestCase {
@@ -203,9 +207,8 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = "#<a>foobar</a>",
-            IE8 = "#<a>foobar</a>",
-            IE = "#%3Ca%3Efoobar%3C/a%3E")
+    @Alerts(DEFAULT = "#<a>foobar</a>",
+            IE6 = "#%3Ca%3Efoobar%3C/a%3E")
     public void hash() throws Exception {
         final String html = "<html><body onload='test()'>\n"
             + "<script>\n"
@@ -531,6 +534,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @BuggyWebDriver(IE10)
     public void testLocationAfterOpenClosePopup() throws Exception {
         final String html =
               "<html>\n"
@@ -571,6 +575,12 @@ public class Location2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("click")).click();
-        assertEquals(new URL(URL_FIRST, "test.html").toExternalForm(), driver.getCurrentUrl());
+        try {
+            assertEquals(new URL(URL_FIRST, "test.html").toExternalForm(), driver.getCurrentUrl());
+        }
+        finally {
+            // TODO [IE10] when run with real IE10 the window is closed and all following tests are broken
+            shutDownAll();
+        }
     }
 }
