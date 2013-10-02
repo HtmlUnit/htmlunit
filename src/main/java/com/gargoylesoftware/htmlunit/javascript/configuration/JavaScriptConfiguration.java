@@ -130,6 +130,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBGSoundElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBRElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseFontElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBlockQuoteElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLButtonElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
@@ -175,7 +176,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLParagraphElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLParamElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLPreElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLProgressElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLQuoteElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInlineQuotationElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSelectElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSourceElement;
@@ -294,18 +295,19 @@ public final class JavaScriptConfiguration {
         FormChild.class, FormField.class, Geolocation.class, History.class,
         HTMLAnchorElement.class, HTMLAppletElement.class, HTMLAreaElement.class, HTMLAudioElement.class,
         HTMLBRElement.class, HTMLBaseElement.class, HTMLBaseFontElement.class, HTMLBGSoundElement.class,
-        HTMLBodyElement.class, HTMLButtonElement.class, HTMLCanvasElement.class, HTMLCollection.class,
-        HTMLCollectionTags.class, HTMLDListElement.class, HTMLDelElement.class, HTMLDirectoryElement.class,
+        HTMLBlockQuoteElement.class, HTMLBodyElement.class, HTMLButtonElement.class, HTMLCanvasElement.class,
+        HTMLCollection.class, HTMLCollectionTags.class, HTMLDListElement.class,
+        HTMLDelElement.class, HTMLDirectoryElement.class,
         HTMLDivElement.class, HTMLDocument.class, HTMLElement.class, HTMLEmbedElement.class, HTMLFieldSetElement.class,
         HTMLFontElement.class, HTMLFormElement.class, HTMLFrameElement.class, HTMLFrameSetElement.class,
         HTMLHRElement.class, HTMLHeadElement.class, HTMLHeadingElement.class, HTMLHtmlElement.class,
-        HTMLIFrameElement.class, HTMLImageElement.class, HTMLInputElement.class, HTMLInsElement.class,
-        HTMLIsIndexElement.class, HTMLLIElement.class, HTMLLabelElement.class, HTMLLegendElement.class,
-        HTMLLinkElement.class, HTMLListElement.class, HTMLMapElement.class,
+        HTMLIFrameElement.class, HTMLImageElement.class, HTMLInlineQuotationElement.class, HTMLInputElement.class,
+        HTMLInsElement.class, HTMLIsIndexElement.class, HTMLLIElement.class, HTMLLabelElement.class,
+        HTMLLegendElement.class, HTMLLinkElement.class, HTMLListElement.class, HTMLMapElement.class,
         HTMLMediaElement.class, HTMLMenuElement.class, HTMLMetaElement.class, HTMLMeterElement.class,
         HTMLOListElement.class, HTMLObjectElement.class, HTMLOptGroupElement.class,
         HTMLOptionElement.class, HTMLOptionsCollection.class, HTMLParagraphElement.class, HTMLParamElement.class,
-        HTMLPreElement.class, HTMLProgressElement.class, HTMLQuoteElement.class, HTMLScriptElement.class,
+        HTMLPreElement.class, HTMLProgressElement.class, HTMLScriptElement.class,
         HTMLSelectElement.class, HTMLSourceElement.class, HTMLSpacerElement.class, HTMLSpanElement.class,
         HTMLStyleElement.class, HTMLTableCaptionElement.class, HTMLTableCellElement.class, HTMLTableColElement.class,
         HTMLTableComponent.class, HTMLTableElement.class, HTMLTableRowElement.class, HTMLTableSectionElement.class,

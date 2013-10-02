@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
-import com.gargoylesoftware.htmlunit.html.HtmlBlockQuote;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineQuotation;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -24,14 +23,22 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLQuoteElement".
+ * The JavaScript object "HtmlInlineQuotation".
  *
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(domClasses = { HtmlInlineQuotation.class, HtmlBlockQuote.class })
-public class HTMLQuoteElement extends HTMLElement {
+@JsxClass(domClasses = HtmlInlineQuotation.class)
+public class HTMLInlineQuotationElement extends HTMLElement {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getClassName() {
+        return "HTMLQuoteElement";
+    }
 
     /**
      * Returns the value of the "cite" property.
@@ -77,10 +84,6 @@ public class HTMLQuoteElement extends HTMLElement {
     */
     @Override
     public String getDefaultStyleDisplay() {
-        final String tagName = getTagName();
-        if ("BLOCKQUOTE".equals(tagName)) {
-            return super.getDefaultStyleDisplay();
-        }
         return "inline";
     }
 }
