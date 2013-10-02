@@ -231,7 +231,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
     protected WebDriver buildWebDriver() throws IOException {
         if (useRealBrowser_) {
             if (getBrowserVersion().isIE()) {
-                System.setProperty("webdriver.ie.driver", IE_BIN_);
+                if (null != IE_BIN_) {
+                    System.setProperty("webdriver.ie.driver", IE_BIN_);
+                }
                 return new InternetExplorerDriver();
             }
             if (BrowserVersion.CHROME == getBrowserVersion()) {
