@@ -1,10 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<!-- saved from url=(0016)http://localhost -->
+<!doctype html public "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
 <title>YUI Tests</title>
-<link type="text/css" rel="stylesheet" href="../build/logger/assets/logger.css" />
-<link type="text/css" rel="stylesheet" href="../build/yuitest/assets/testlogger.css" />
+<link type="text/css" rel="stylesheet" href="../build/logger/assets/logger.css" />     
+<link type="text/css" rel="stylesheet" href="../build/yuitest/assets/testlogger.css" />     
 
 <style type="text/css">
 
@@ -42,32 +41,32 @@
         Event=YAHOO.util.Event,
         Assert=YAHOO.util.Assert,
         ObjectAssert=YAHOO.util.ObjectAssert,
-        ArrayAssert=YAHOO.util.ArrayAssert,
+        ArrayAssert=YAHOO.util.ArrayAssert, 
         suite=new YAHOO.tool.TestSuite("yuisuite");
 
-
+    
     suite.add(new YAHOO.tool.TestCase({
-
+        
         //name of the test case
         name : "dragdrop",
-
+    
         //extra information about tests
         _should : {
-
+        
             //tests with these names should fail
             fail : { test_to_fail: true },
-
+            
             //tests with these names should throw an error
             error : { },
-
+            
             //ignore these tests
             ignore : { }
         },
 
         test_mouseDown: function() {
             reset();
-            dd1.handleMouseDown({
-                pageX: 110,
+            dd1.handleMouseDown({ 
+                pageX: 110, 
                 pageY: 230,
                 target: dd1.getEl()
                 });
@@ -80,7 +79,7 @@
         test_mouseMiss: function() {
             reset();
             dd1.handleMouseDown({  // miss
-                pageX: 90,
+                pageX: 90, 
                 pageY: 90,
                 target: dd1.getEl()
                 });
@@ -96,8 +95,8 @@
 
         test_startDrag: function() {
             reset();
-            dd1.handleMouseDown({
-                pageX: 120,
+            dd1.handleMouseDown({ 
+                pageX: 120, 
                 pageY: 230,
                 target: dd1.getEl()
                 });
@@ -112,8 +111,8 @@
 
         test_dragOver: function() {
             reset();
-            dd1.handleMouseDown({
-                pageX: 120,
+            dd1.handleMouseDown({ 
+                pageX: 120, 
                 pageY: 230,
                 target: dd1.getEl()
                 });
@@ -137,8 +136,8 @@
          test_bodyScroll: function() {
             window.scrollTo(0,150);
             reset();
-            dd1.handleMouseDown({
-                pageX: 140,
+            dd1.handleMouseDown({ 
+                pageX: 140, 
                 pageY: 220,
                 target: dd1.getEl()
                 });
@@ -162,8 +161,8 @@
         test_containerScroll: function() {
             reset();
             Dom.get("ddcontainer").scrollTop=150;
-            dd1.handleMouseDown({
-                pageX: 140,
+            dd1.handleMouseDown({ 
+                pageX: 140, 
                 pageY: 100,
                 target: dd1.getEl()
                 });
@@ -187,9 +186,9 @@
         test_to_fail: function (){
             Assert.isNull("not null");;
         }
-
+        
     }));
-
+     
     function runTests(){
         YAHOO.tool.TestRunner.run();
     }
@@ -219,10 +218,10 @@
     YAHOO.util.Event.on(window, "load", function (){
         //create the logger
         var logger = new YAHOO.tool.TestLogger();
-
+        
         //add the tests
         YAHOO.tool.TestRunner.add(suite);
-
+        
         //add event handler
         YAHOO.util.Event.addListener("btnRun", "click", runTests);
 
@@ -246,7 +245,7 @@
             YAHOO.tool.TestRunner.run();
         }
     });
-
+    
 })();
 
 </script>

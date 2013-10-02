@@ -1,5 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<!-- saved from url=(0016)http://localhost -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
 <title>yuiloader test</title>
@@ -8,7 +7,7 @@
 
 (function() {
 
-    var logger, suite, page_modules=[];
+    var logger, suite, page_modules=[]; 
 
     function log(msg) {
 
@@ -32,7 +31,7 @@
             var n = minfo.name;
             page_modules.push(n);
             log("page load listener: " + n);
-        },
+        }, 
         load: {
             require: ['yuitest'],
             //filter: 'DEBUG',
@@ -51,18 +50,18 @@
                         YAHOO.util.ArrayAssert.itemsAreEqual(
                             // the page-level listener fires after the onLoadComplete
                             // fires, so yuitest will not be in the list yet
-                            ["yahoo", "event", "dom", "logger"],
+                            ["yahoo", "event", "dom", "logger"], 
                             page_modules);
                     },
 
                     test_logger_css: function() {
                         var el = YAHOO.util.Dom.getElementsByClassName("error")[0];
-                        YAHOO.util.Assert.areEqual("rgb(227, 47, 11)",
+                        YAHOO.util.Assert.areEqual("rgb(227, 47, 11)", 
                             YAHOO.util.Dom.getStyle(el, "background-color"),
                                 "An element with the error class is not red");
                     }
                 }));
-
+                 
                 YAHOO.tool.TestRunner.add(suite);
 
                 YAHOO.util.Event.onAvailable("yahoo-com", function() {

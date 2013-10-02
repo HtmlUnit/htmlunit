@@ -1,10 +1,8 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<!-- saved from url=(0016)http://localhost -->
 <html>
 <head>
 
-<link type="text/css" rel="stylesheet" href="../build/logger/assets/logger.css" />
-<link type="text/css" rel="stylesheet" href="../build/yuitest/assets/testlogger.css" />
+<link type="text/css" rel="stylesheet" href="../build/logger/assets/logger.css" />     
+<link type="text/css" rel="stylesheet" href="../build/yuitest/assets/testlogger.css" />     
 
 <style>
 .everything { position:relative; height:420px; }
@@ -59,10 +57,10 @@
 <script>
 
 var imgUrlsTestCase = new YAHOO.tool.TestCase({
-	/*
+	/* 
 	 * Test case to check the URL setting in the different types of image objects
 	 */
-
+	
 	name: 'Setting Urls',
 
 	setUp: function() {
@@ -86,7 +84,7 @@ var imgUrlsTestCase = new YAHOO.tool.TestCase({
 		// style.bgImg is "url('...')", but we can't rely on those quotes across browsers. indexOf is sufficient
 		YAHOO.util.Assert.areNotEqual(this.mainGroupImage.style.backgroundImage.indexOf(this.bgImgUrl), -1);
 	},
-
+	
 	testSrcImg: function() {
 		YAHOO.util.UserAction.click('srcImgCont');
 		YAHOO.util.Assert.areEqual(this.srcGroupImage.src, this.srcImgUrl);
@@ -249,7 +247,7 @@ var foldCheckTestCase = new YAHOO.tool.TestCase({
 		}
 		YAHOO.util.Assert.areEqual(this.botRightImage.style.backgroundImage, '');
 	}
-
+	
 });
 
 

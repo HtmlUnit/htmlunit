@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
-import java.net.URL;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -27,6 +26,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,12 +48,11 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class YuiTest extends WebDriverTestCase {
     private static final Log LOG = LogFactory.getLog(YuiTest.class);
-
-    private static final String BASE_FILE_PATH = "libraries/yui/2.3.0/tests/";
 
     /**
      * @throws Exception if an error occurs
@@ -244,11 +243,12 @@ public class YuiTest extends WebDriverTestCase {
     private void doTest(final String fileName, final List<String> knownFailingTests,
             final String buttonToPush, final long timeToWait) throws Exception {
 
-        final URL url = getClass().getClassLoader().getResource(BASE_FILE_PATH + fileName);
+        // final URL url = getClass().getClassLoader().getResource("tests/" + fileName);
+        final String url = "http://localhost:" + PORT + "/tests/" + fileName;
         assertNotNull(url);
 
         final WebDriver driver = getWebDriver();
-        driver.get(url.toString());
+        driver.get(url);
 
         if (buttonToPush != null) {
             driver.findElement(By.id(buttonToPush)).click();
@@ -286,5 +286,14 @@ public class YuiTest extends WebDriverTestCase {
                                 knownFailingTests.contains(testName));
             }
         }
+    }
+
+    /**
+     * Performs pre-test initialization.
+     * @throws Exception if an error occurs
+     */
+    @Before
+    public void setUp() throws Exception {
+        startWebServer("src/test/resources/libraries/yui/2.3.0", null, null);
     }
 }

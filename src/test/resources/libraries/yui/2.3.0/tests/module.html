@@ -1,5 +1,5 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<!-- saved from url=(0016)http://localhost -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -8,7 +8,7 @@
         <link type="text/css" rel="stylesheet" href="../build/logger/assets/logger.css" />
         <link type="text/css" rel="stylesheet" href="../build/yuitest/assets/testlogger.css" />
         <link type="text/css" rel="stylesheet" href="../build/calendar/assets/skins/sam/calendar.css" />
-
+    
         <script type="text/javascript" src="../build/yahoo/yahoo-min.js"></script>
         <script type="text/javascript" src="../build/dom/dom-min.js"></script>
         <script type="text/javascript" src="../build/event/event-min.js"></script>
@@ -16,11 +16,11 @@
         <script type="text/javascript" src="../build/yuitest/yuitest-beta-min.js"></script>
 
         <script type="text/javascript" src="../build/container/container-min.js"></script>
-
+        
         <style type="text/css">
-
+    
         </style>
-
+    
         <script type="text/javascript">
 
 
@@ -41,17 +41,17 @@
                 var oLogger = new YAHOO.tool.TestLogger();
 
                 var oModule;
-
+                
                 var Assert = YAHOO.util.Assert,
                     Module = YAHOO.widget.Module;
 
                 var oTestCase = new YAHOO.tool.TestCase({
-
+                
                     name: "Sample Test Case",
-
+                    
                     testConstructor: function () {
-
-                        // Create a Module from existing markup
+    
+                        // Create a Module from existing markup 
 
                         oModule = new Module("module1");
 
@@ -112,7 +112,7 @@
                         Assert.isInstanceOf(Module, oModule, "Failed to create basic instance");
 
                     },
-
+                    
                     testProperties: function () {
 
                         oModule = new Module("module2");
@@ -132,12 +132,12 @@
                         oModule = null;
 
                     },
-
+                    
                     testConfigurationProperties: function () {
 
                         // Visible
 
-                        oModule = new Module("module2", { visible: true });
+                        oModule = new Module("module2", { visible: true });                        
 
                         oModule.setBody("This is the body");
                         oModule.render(document.body);
@@ -178,7 +178,7 @@
 
 
                     },
-
+                    
                     testMethods: function () {
 
                         // Header methods
@@ -189,7 +189,7 @@
                         oModule.render(document.body);
 
                         Assert.isDOMElement(oModule.element, "The Module's root element not created.");
-                        Assert.isDOMElement(oModule.header, "The Module's header element not created.");
+                        Assert.isDOMElement(oModule.header, "The Module's header element not created.");                        
 
                         oModule.destroy();
 
@@ -232,7 +232,7 @@
                         oModule.render(document.body);
 
                         Assert.isDOMElement(oModule.element, "The Module's root element not created.");
-                        Assert.isDOMElement(oModule.body, "The Module's body element not created.");
+                        Assert.isDOMElement(oModule.body, "The Module's body element not created.");                        
 
                         oModule.destroy();
 
@@ -275,7 +275,7 @@
                         oModule.render(document.body);
 
                         Assert.isDOMElement(oModule.element, "The Module's root element not created.");
-                        Assert.isDOMElement(oModule.footer, "The Module's footer element not created.");
+                        Assert.isDOMElement(oModule.footer, "The Module's footer element not created.");                        
 
                         oModule.destroy();
 
@@ -371,29 +371,29 @@
                         oModule.render(document.body);
 
                         oModule.show();
-
+                        
                         Assert.areEqual("block", oModule.element.style.display, "The Module is not visible after calling the \"show\" method.");
-
+                        
 
                         // Hide
 
                         oModule.hide();
 
                         Assert.areEqual("none", oModule.element.style.display, "The Module is not hidden after calling the \"hide\" method.");
-
+                        
 
                         // toString
 
                         Assert.areEqual(("Module " + oModule.id), oModule.toString(), "The Module \"toString\" method is not returning the correct value.");
 
-
+                        
                         // destroy
 
                         oModule.destroy();
 
                         Assert.areEqual(null, document.getElementById("module2"), "The Module was not successfully destroyed.");
 
-
+                    
                     },
 
                     testEvents: function () {
@@ -429,17 +429,17 @@
                 } else {
                     YAHOO.tool.TestRunner.run();
                 }
-
+            
             });
 
-        </script>
-
+        </script>	
+	
     </head>
     <body>
-
+    
         <div id="module1">
             <div class="bd">The body of the module1</div>
         </div>
-
+    
     </body>
 </html>

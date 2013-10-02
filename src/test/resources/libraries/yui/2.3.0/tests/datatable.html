@@ -1,5 +1,3 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<!-- saved from url=(0016)http://localhost -->
 <html>
 <head>
 <title>YUI DataTable Tests</title>
@@ -50,7 +48,7 @@
             Assert.areSame(exp.sectionRowIndex, act.sectionRowIndex, "Unexpected sectionRowIndex: " + msg);
             Assert.areSame(exp.yuiRecordId, act.yuiRecordId, "Unexpected Record ID: " + msg);
         },
-
+        
         areSameCell: function(exp, act, msg) {
             Assert.areSame("td", act.tagName.toLowerCase(), "Expected a TD element: " + msg);
             Assert.areSame(exp.id, act.id, "Unexpected DOM ID: " + msg);
@@ -68,21 +66,21 @@
         this.container = document.createElement("div");
         this.container.id = "testDTContainer";
         document.body.appendChild(this.container);
-
+        
         this.datasource = new YAHOO.util.DataSource(this.data, this.dsConfig);
     };
 
     DataTableTestCase.prototype.tearDown = function() {
         this.datatable.destroy();
         this.datatable = null;
-
+        
         if (this.container != null) {
             YAHOO.util.Event.purgeElement(this.container, true);
             document.body.removeChild(this.container);
         }
-
+        
         this.datasource = null;
-
+        
     };
 
     DataTableTestCase.prototype.createInstance = function(oConfig) {
@@ -93,14 +91,14 @@
 
     var dtBaseTemplate = {
         name: "DataTable Base Test Case",
-
+        
         data: [
             {a:"0a",b:"0b",c:"0c"},
             {a:"1a",b:"1b",c:"1c"},
             {a:"2a",b:"2b",c:"2c"},
             {a:"3a",b:"3b",c:"3c"}
         ],
-
+            
         dsConfig: {
             responseType:YAHOO.util.DataSource.TYPE_JSARRAY,
             responseSchema:{fields:["a","b","c"]}
@@ -110,24 +108,24 @@
 
         testConstruction: function() {
             var dt = this.createInstance();
-
+            
             Assert.isObject(dt, "Failed to create DataTable instance");
             Assert.isInstanceOf(DataTable, dt, "Failed to create DataTable instance");
             Assert.isInstanceOf(ColumnSet, dt.getColumnSet(), "Failed to create ColumnSet instance");
             Assert.isInstanceOf(RecordSet, dt.getRecordSet(), "Failed to create RecordSet instance");
             Assert.areSame(this.data.length, dt.getRecordSet().getLength(), "Unexpected RecordSet length");
-
+            
             dt = null;
         }
     };
-
+    
     var dtDomAccessorsTemplate = YAHOO.lang.merge(dtBaseTemplate, {
         name: "DataTable DOM Accessors Test Case",
 
         testGetTableEl: function() {
             var dt = this.createInstance();
             var elTable = dt.getTableEl();
-
+            
             Assert.areSame("table", elTable.tagName.toLowerCase(), "Expected a TABLE element");
             Assert.areSame("yui-dt"+gCount+"-table", elTable.id, "Failed to generate correct TABLE DOM ID");
             dt = null;
@@ -137,7 +135,7 @@
             var dt = this.createInstance();
             var elTable = dt.getTableEl();
             var elTbody = dt.getMsgTbodyEl();
-
+            
             Assert.areSame("tbody", elTbody.tagName.toLowerCase(), "Expected a TBODY element");
             //TODO: generate ID for tbody?
             //Assert.areSame("yui-dt"+gCount+"-tbody", elTbody.id, "Failed to generate correct TBODY DOM ID");
@@ -149,7 +147,7 @@
             var dt = this.createInstance();
             var elTable = dt.getTableEl();
             var elTbody = dt.getTbodyEl();
-
+            
             Assert.areSame("tbody", elTbody.tagName.toLowerCase(), "Expected a TBODY element");
             //TODO: generate ID for tbody?
             //Assert.areSame("yui-dt"+gCount+"-tbody", elTbody.id, "Failed to generate correct TBODY DOM ID");
@@ -160,7 +158,7 @@
         testGetFirstTrEl: function() {
             var dt = this.createInstance();
             var elRow = dt.getFirstTrEl();
-
+            
             TableAssert.areSameRow(
                 {id:"yui-dt"+gCount+"-bdrow0",
                 sectionRowIndex:0,
@@ -172,7 +170,7 @@
         testGetLastTrEl: function() {
             var dt = this.createInstance();
             var elRow = dt.getLastTrEl();
-
+            
             TableAssert.areSameRow(
                 {id:"yui-dt"+gCount+"-bdrow"+3,
                 sectionRowIndex:3,
@@ -189,7 +187,7 @@
         testInsertRow: function() {
             var dt = this.createInstance();
             dt.addRow({a:"4a",b:"4b",c:"4c"}, 0);
-
+            
             var elRow = dt.getFirstTrEl();
             TableAssert.areSameRow(
                 {id:"yui-dt"+gCount+"-bdrow"+4,
@@ -197,11 +195,11 @@
                 yuiRecordId:4},
                 elRow, "Failed to get inserted row");
         },
-
+        
         testAppendRow: function() {
             var dt = this.createInstance();
             dt.addRow({a:"4a",b:"4b",c:"4c"});
-
+            
             var elRow = dt.getLastTrEl();
             TableAssert.areSameRow(
                 {id:"yui-dt"+gCount+"-bdrow"+4,
@@ -213,7 +211,7 @@
         testDeleteFirstRow: function() {
             var dt = this.createInstance();
             dt.deleteRow(dt.getFirstTrEl());
-
+            
             var elRow = dt.getFirstTrEl();
             TableAssert.areSameRow(
                 {id:"yui-dt"+gCount+"-bdrow"+1,
@@ -247,14 +245,14 @@
 
     var dtSortingTemplate = YAHOO.lang.merge(dtBaseTemplate, {
         name: "DataTable Sorting Test Case",
-
+        
         data: [
             {a:0,b:"zero"},
             {a:1,b:"one"},
             {a:2,b:"two"},
             {a:3,b:"three"}
         ],
-
+            
         dsConfig: {
             responseType:YAHOO.util.DataSource.TYPE_JSARRAY,
             responseSchema:{fields:["a","b"]}
@@ -271,7 +269,7 @@
             // var oColumn = dt.getColumn(0);
             var oColumn = dt.getColumn(dt.getFirstTrEl().cells[0].yuiColumnId);
             dt.sortColumn(oColumn);
-
+            
             var elRow = dt.getFirstTrEl();
             TableAssert.areSameRow(
                 {id:"yui-dt"+gCount+"-bdrow"+0,
@@ -324,7 +322,7 @@
                 elRow, "Failed to get last row ascending strings");
 
             dt.sortColumn(oColumn);
-
+            
             elRow = dt.getFirstTrEl();
             TableAssert.areSameRow(
                 {id:"yui-dt"+gCount+"-bdrow"+0,
@@ -348,7 +346,7 @@
 
             dt.addRow({a:4,b:"four"}, 0)
             dt.sortColumn(oColumn);
-
+            
             var elRow = dt.getFirstTrEl();
             TableAssert.areSameRow(
                 {id:"yui-dt"+gCount+"-bdrow"+4,
@@ -362,10 +360,10 @@
                 sectionRowIndex:4,
                 yuiRecordId:0},
                 elRow, "Failed to get last row ascending strings");
-
+                
             //TODO: test descending
         },
-
+        
         testSortThenAppend: function() {
             var dt = this.createInstance();
             // Workaround for bug 1389418
@@ -388,7 +386,7 @@
                 yuiRecordId:4},
                 elRow, "Failed to get last row ascending strings");
         },
-
+        
         testDeleteAppendInsertThenSort: function() {
             var dt = this.createInstance();
 
@@ -415,7 +413,7 @@
         }
     });
     var dtSortingTest = new DataTableTestCase(dtSortingTemplate);
-
+    
     var dtRowSelectionTemplate = YAHOO.lang.merge(dtBaseTemplate, {
         name: "DataTable Row Selection Test Case",
 
@@ -426,20 +424,20 @@
 
             Assert.areSame(true, YAHOO.util.Dom.hasClass(elRow, "yui-dt-selected"), "Failed to apply CSS");
             ArrayAssert.contains(elRow.yuiRecordId, dt.getSelectedRows(), "Failed to select first row");
-
+            
             dt.unselectRow(elRow);
 
             Assert.areSame(false, YAHOO.util.Dom.hasClass(elRow, "yui-dt-selected"), "Failed to remove CSS");
             ArrayAssert.doesNotContain(elRow, dt.getSelectedRows(), "Failed to unselect first row");
 
         },
-
+        
         testSelectThenInsert: function() {
             var dt = this.createInstance();
             var elRow = dt.getFirstTrEl();
             dt.selectRow(elRow);
             dt.addRow({a:"4a",b:"4b",c:"4c"}, 0);
-
+            
             elRow = dt.getTbodyEl().rows[1];
 
             Assert.areSame(true, YAHOO.util.Dom.hasClass(elRow, "yui-dt-selected"), "Failed to apply CSS");
@@ -456,7 +454,7 @@
 
     var dtPaginationTemplate = YAHOO.lang.merge(dtBaseTemplate, {
         name: "DataTable Pagination Test Case",
-
+        
         data: [
             {a:0},{a:1},{a:2},{a:3},{a:4},
             {a:5},{a:6},{a:7},{a:8},{a:9},
@@ -492,7 +490,7 @@
             dt.refreshView();
             Assert.areSame(4, dt.get("paginator").totalPages, "Expected 4 pages");
         },
-
+        
          testDeleteRowsDifferentPage: function() {
             var oConfig = {
                 paginated:true,
@@ -520,7 +518,7 @@
         datatablesuite.add(dtSortingTest);
         datatablesuite.add(dtRowSelectionTest);
         datatablesuite.add(dtPaginationTest);
-
+        
         TestRunner.add(datatablesuite);
 
         YAHOO.util.Event.addListener("btnRun", "click", runTests);
