@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HtmlAnchor2Test extends WebDriverTestCase {
@@ -253,6 +254,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("page2.html")
     public void clickNestedSubmitElement() throws Exception {
         final String html =
               "<html>\n"
@@ -266,7 +268,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
         final WebElement input = driver.findElement(By.id("theInput"));
         assertEquals("input", input.getTagName());
         input.click();
-        assertEquals(new URL(getDefaultUrl(), "page2.html").toString(), driver.getCurrentUrl());
+        assertEquals(new URL(getDefaultUrl(), getExpectedAlerts()[0]).toString(), driver.getCurrentUrl());
     }
 
     /**
