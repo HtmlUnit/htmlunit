@@ -54,7 +54,7 @@ public class TinyMceTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "348", "0" },
-            IE10 = { "347", "84" })
+            IE10 = { "348", "82" })
     @NotYetImplemented({ IE6, IE8 })
     // TODO [IE10]XML tinymce 3.2.7 is not compatible with IE10
     public void api() throws Exception {
