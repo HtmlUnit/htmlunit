@@ -41,7 +41,8 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            IE = "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, application/x-shockwave-flash, */*")
+            IE = "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, application/x-shockwave-flash, */*",
+            IE10 = "Accept: text/html, application/xhtml+xml, */*")
     public void acceptHeaderGetUrl() throws Exception {
         final String html = "<html><body>Response</body></html>";
         loadPage2(html, getDefaultUrl());
@@ -75,8 +76,9 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Accept: image/png,image/*;q=0.8,*/*;q=0.5",
+            CHROME = "Accept: image/webp,*/*;q=0.8",
             IE = "Accept: */*",
-            CHROME = "Accept: image/webp,*/*;q=0.8")
+            IE10 = "Accept: image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5")
     public void acceptHeaderImage() throws Exception {
         final String html
             = "<html><head>\n"
@@ -100,7 +102,8 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Accept: text/css,*/*;q=0.1",
-            IE = "Accept: */*")
+            IE = "Accept: */*",
+            IE10 = "Accept: text/css")
     public void acceptHeaderCss() throws Exception {
         final String html
             = "<html><head>\n"
@@ -125,7 +128,8 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Accept: text/css,*/*;q=0.1",
-            IE = "Accept: */*")
+            IE = "Accept: */*",
+            IE10 = "Accept: text/css")
     public void acceptHeaderCssWithoutType() throws Exception {
         final String html
             = "<html><head>\n"
@@ -150,7 +154,8 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Accept: text/css,*/*;q=0.1",
-            IE = "Accept: */*")
+            IE = "Accept: */*",
+            IE10 = "Accept: text/css")
     public void acceptHeaderCssDifferentType() throws Exception {
         final String html
             = "<html><head>\n"

@@ -126,6 +126,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
                     + "borderTopWidth-error: bottom-error: fontSize-error: height-error: left-error: "
                     + "letterSpacing-error: marginBottom-error: marginLeft-error: marginRight-error: "
                     + "marginTop-error: maxHeight-error: maxWidth-error: minHeight-error: minWidth-error: "
+                    + "outlineWidth-error: paddingBottom-error: paddingLeft-error: "
                     + "paddingRight-error: paddingTop-error: right-error: textIndent-error: top-error: "
                     + "verticalAlign-error: width-error: wordSpacing-")
     @NotYetImplemented({ IE6, FF17 })
