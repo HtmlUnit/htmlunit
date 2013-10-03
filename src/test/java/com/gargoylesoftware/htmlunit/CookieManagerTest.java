@@ -45,11 +45,12 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class CookieManagerTest extends WebDriverTestCase {
     /** HTML code with JS code <code>alert(document.cookie)</code>. */
-    public static final String HTML_ALERT_COOKIE = "<html><head><script>alert(document.cookie)</script>"
+    public static final String HTML_ALERT_COOKIE = "<html><head><script>\nalert(document.cookie);\n</script>"
         + "<body></body></html>";
 
     /**
@@ -134,6 +135,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void orderCookiesByPath_fromJs() throws Exception {
         final String html = "<html><body><script>\n"
             + "document.cookie = 'exampleCookie=rootPath;path=/';\n"
@@ -143,7 +145,11 @@ public class CookieManagerTest extends WebDriverTestCase {
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("");
-        final WebDriver webDriver = loadPage2(html);
+
+        final WebDriver webDriver = getWebDriver();
+        webDriver.manage().deleteAllCookies();
+
+        loadPage2(html);
         webDriver.findElement(By.linkText("next page")).click();
 
         final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
@@ -155,7 +161,8 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("key1=; key2=")
+    @Alerts(DEFAULT = "key1=; key2=",
+            IE10 = "key1; key2")
     public void emptyCookie() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<NameValuePair>();
         responseHeader.add(new NameValuePair("Set-Cookie", "key1="));
@@ -274,7 +281,9 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "first=1; second=2; third=3", CHROME = "third=3")
+    @Alerts(DEFAULT = "first=1; second=2; third=3",
+            CHROME = "third=3",
+            IE10 = "first=1; second=2; third=3; fourth=4")
     public void setCookieExpired_badDateFormat() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1;expires=Dec-1-94 16:00:00"));
@@ -291,7 +300,8 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("cookie1=1; cookie2=2; cookie3=3")
+    @Alerts(DEFAULT = "cookie1=1; cookie2=2; cookie3=3",
+            IE10 = "cookie1=1; cookie2=2; cookie3=3; cookie4=4; cookie5=5; cookie6=6")
     public void setCookieExpires_twoDigits() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "cookie1=1;expires=Sun 01-Dec-68 16:00:00 GMT"));
@@ -310,7 +320,8 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("cookie1=1; cookie2=2; cookie3=3")
+    @Alerts(DEFAULT = "cookie1=1; cookie2=2; cookie3=3",
+            IE10 = "cookie1=1; cookie2=2; cookie3=3; cookie4=4; cookie5=5; cookie6=6")
     public void setCookieExpires_twoDigits2() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "cookie1=1;expires=Sun,01 Dec 68 16:00:00 GMT"));
@@ -330,7 +341,8 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("cookie1=1")
+    @Alerts(DEFAULT = "cookie1=1",
+            IE10 = "cookie1=1; cookie6=6")
     public void setCookieExpires_badDateFormat() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "cookie1=1;expires=Sun-01 Dec 68 16:00:00 GMT"));
@@ -424,7 +436,8 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("first=1")
+    @Alerts(DEFAULT = "first=1",
+            IE10 = "")
     public void setCookieSubPath() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; path=/foo/blah"));
@@ -441,7 +454,8 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("first=1")
+    @Alerts(DEFAULT = "first=1",
+            IE10 = "")
     public void setCookieDifferentPath() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; path=/foo/blah"));
@@ -517,7 +531,8 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("first=1")
+    @Alerts(DEFAULT = "first=1",
+            IE10 = "")
     public void cookieSetFromJSWithoutPathUsesCurrentLocation2() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; path=/c"));
