@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,9 +46,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0", "0" },
-            FF3_6 = "exception",
-            IE8 = "exception")
-    @NotYetImplemented({ FF3_6, IE6, IE8 })
+            FF3_6 = "exception")
+    @NotYetImplemented({ FF3_6, IE6 })
     public void querySelectorAll_nullUndefined() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -238,16 +236,18 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "li1", "li4", "li7", "li10" },
-            IE8 = { })
+            IE8 = { "exception" })
     public void nth_child_equation() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
             + "function test() {\n"
             + "  if (document.querySelectorAll) {\n"
-            + "    var list = document.querySelectorAll('li:nth-child(3n+1)');\n"
-            + "    for (var i = 0 ; i < list.length; i++) {\n"
-            + "      alert(list[i].id);\n"
-            + "    }\n"
+            + "    try {\n"
+            + "      var list = document.querySelectorAll('li:nth-child(3n+1)');\n"
+            + "      for (var i = 0 ; i < list.length; i++) {\n"
+            + "        alert(list[i].id);\n"
+            + "      }\n"
+            + "    } catch (e) {alert('exception')}\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
