@@ -155,6 +155,74 @@ public class NativeDateTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "2005-12-03T07:14:15.000Z", "2005-07-12T11:04:15.000Z",
+                        "2005-07-03T15:14:05.000Z" },
+            IE6 = "",
+            IE8 = "")
+    public void toISOString() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  if (new Date().toISOString) {\n"
+            + "    alert(new Date(2005, 11, 3, 8, 14, 15).toISOString());\n"
+            + "    alert(new Date(2005, 6, 12, 13, 4, 15).toISOString());\n"
+            + "    alert(new Date(2005, 6, 3, 17, 14, 5).toISOString());\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "Sat, 03 Dec 2005 07:14:15 GMT", "Tue, 12 Jul 2005 11:04:15 GMT",
+                        "Sun, 03 Jul 2005 15:14:05 GMT" },
+            IE = { "Sat, 3 Dec 2005 07:14:15 UTC", "Tue, 12 Jul 2005 11:04:15 UTC",
+                    "Sun, 3 Jul 2005 15:14:05 UTC" })
+    public void toUTCString() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "    alert(new Date(2005, 11, 3, 8, 14, 15).toUTCString());\n"
+            + "    alert(new Date(2005, 6, 12, 13, 4, 15).toUTCString());\n"
+            + "    alert(new Date(2005, 6, 3, 17, 14, 5).toUTCString());\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "Sat, 03 Dec 2005 07:14:15 GMT", "Tue, 12 Jul 2005 11:04:15 GMT",
+                        "Sun, 03 Jul 2005 15:14:05 GMT" },
+            IE = { "Sat, 3 Dec 2005 07:14:15 UTC", "Tue, 12 Jul 2005 11:04:15 UTC",
+                    "Sun, 3 Jul 2005 15:14:05 UTC" })
+    public void toGMTString() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "    alert(new Date(2005, 11, 3, 8, 14, 15).toGMTString());\n"
+            + "    alert(new Date(2005, 6, 12, 13, 4, 15).toGMTString());\n"
+            + "    alert(new Date(2005, 6, 3, 17, 14, 5).toGMTString());\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void enumerable() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -174,15 +242,20 @@ public class NativeDateTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "12:00:00 AM",
-            CHROME = "00:00:00",
-            FF17 = "00:00:00",
-            IE10 = "00:00:00")
+    @Alerts(DEFAULT = { "00:00:00", "07:08:09" },
+            FF3_6 = { "12:00:00 AM", "07:08:09 AM" },
+            FF10 = { "12:00:00 AM", "07:08:09 AM" },
+            IE6 = { "12:00:00 AM", "07:08:09 AM" })
     public void toLocaleTimeString() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "    alert(new Date(2000, 0, 1).toLocaleTimeString());\n"
+            + "    var date = new Date(2013, 0, 1);\n"
+            + "    date.setHours(7);\n"
+            + "    date.setMinutes(8);\n"
+            + "    date.setSeconds(9);\n"
+            + "    alert(date.toLocaleTimeString());\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

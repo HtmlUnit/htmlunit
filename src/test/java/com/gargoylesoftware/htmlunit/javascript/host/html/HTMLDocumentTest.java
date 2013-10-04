@@ -597,7 +597,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "string", "Fri, 16 Oct 2009 13:59:47 GMT" })
+    @Alerts(DEFAULT = { "string", "Fri, 16 Oct 2009 13:59:47 GMT" },
+            IE = { "string", "Fri, 16 Oct 2009 13:59:47 UTC" })
     public void lastModified() throws Exception {
         final List<NameValuePair> responseHeaders = new ArrayList<NameValuePair>();
         responseHeaders.add(new NameValuePair("Last-Modified", "Fri, 16 Oct 2009 13:59:47 GMT"));

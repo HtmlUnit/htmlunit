@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Date.toUTCString and Date.toGMTString now returns the correct format in IE mode.
+            </action>
+            <action type="fix" dev="rbri">
+                Date.toLocaleTimeString fixed in IE8 mode.
+            </action>
             <action type="fix" dev="rbri" issue="1524">
                 Some debug log output added if HTMLDocument.canAlreadyBeParsed(String) returns false.
             </action>

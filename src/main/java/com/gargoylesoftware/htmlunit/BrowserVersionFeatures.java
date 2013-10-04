@@ -769,8 +769,13 @@ public enum BrowserVersionFeatures {
     JS_CONSTRUCTOR,
 
     /** Is Date.toLocaleTimeString() in 24-hour format. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 17) })
+    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(value = FF, minVersion = 17),
+        @WebBrowser(CHROME) })
     JS_DATE_LOCATE_TIME_24,
+
+    /** Is Date.toUTCString() and Date.toGMTString are returning UTC instead of GMT. */
+    @BrowserFeature({ @WebBrowser(IE) })
+    JS_DATE_USE_UTC,
 
     /** */
     @BrowserFeature(@WebBrowser(IE))
