@@ -833,7 +833,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
         final float version = browserVersion.getBrowserVersionNumeric();
         if (version == 8) {
-            documentMode_ = 7;
+            documentMode_ = 8;
             return documentMode_;
         }
         documentMode_ = 9;
