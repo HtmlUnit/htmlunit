@@ -287,9 +287,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("unchecked")
-    public DomNode getDomNodeOrNull() {
-        DomNode node = super.getDomNodeOrNull();
+    public <N extends DomNode> N getDomNodeOrNull() {
+        N node = super.getDomNodeOrNull();
         if (node == null) {
             node = getDomNodeOrNullFromRealDocument();
         }
@@ -306,8 +305,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      *
      * @return the real document's DOM node, or <tt>null</tt> if we're not emulating IE
      */
-    private DomNode getDomNodeOrNullFromRealDocument() {
-        DomNode node = null;
+    private <N extends DomNode> N getDomNodeOrNullFromRealDocument() {
+        N node = null;
         // don't use getBrowserVersion() here because this is called
         // from getBrowserVersion() and will endless loop
         final boolean ie = getWindow().getWebWindow().getWebClient().getBrowserVersion().hasFeature(GENERATED_51);

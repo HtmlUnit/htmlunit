@@ -4652,4 +4652,32 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<svg id=\"svgElem2\"></svg>", IE = "undefined")
+    public void innerHTML_svg() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      var div = document.createElement('div');\n"
+                + "      document.body.appendChild(div);\n"
+                + "      if (document.createElementNS) {\n"
+                + "        var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');\n"
+                + "        svg.setAttribute('id', 'svgElem2');\n"
+                + "        div.appendChild(svg);\n"
+                + "        alert(div.innerHTML);\n"
+                + "      } else {\n"
+                + "        alert('undefined');\n"
+                + "      }\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head><body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

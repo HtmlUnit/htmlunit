@@ -929,11 +929,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             buffer.append(s);
         }
         else if (html) {
-            final HtmlElement element = (HtmlElement) node;
-            final HTMLElement scriptObject = (HTMLElement) node.getScriptObject();
+            final DomElement element = (DomElement) node;
+            final Element scriptObject = (Element) node.getScriptObject();
             final boolean isUpperCase = getBrowserVersion().hasFeature(HTMLELEMENT_OUTER_HTML_UPPER_CASE);
             String tag = element.getTagName();
-            if (isUpperCase && !scriptObject.isLowerCaseInOuterHtml()) {
+            if (isUpperCase && scriptObject instanceof HTMLElement
+            		&& !((HTMLElement) scriptObject).isLowerCaseInOuterHtml()) {
                 tag = tag.toUpperCase(Locale.ENGLISH);
             }
             buffer.append("<").append(tag);
@@ -958,7 +959,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             buffer.append(">");
             // Add the children.
             printChildren(buffer, node, html);
-            if (!scriptObject.isEndTagForbidden()) {
+            if (!(scriptObject instanceof HTMLElement) || !((HTMLElement) scriptObject).isEndTagForbidden()) {
                 buffer.append("</").append(tag).append(">");
             }
         }
