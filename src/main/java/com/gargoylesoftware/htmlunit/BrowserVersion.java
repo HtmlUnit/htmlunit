@@ -221,7 +221,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_17.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
         FIREFOX_17.setCssAcceptHeader("text/css,*/*;q=0.1");
 
-        INTERNET_EXPLORER_8.setHtmlAcceptHeader("image/gif, image/jpeg, image/pjpeg, image/pjpeg, application/x-shockwave-flash, */*");
+        INTERNET_EXPLORER_8.setHtmlAcceptHeader("image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*");
 
         final PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
             "Shockwave Flash 9.0 r31", "libflashplayer.so");
@@ -497,6 +497,15 @@ public class BrowserVersion implements Serializable, Cloneable {
      */
     public String getHtmlAcceptHeader() {
         return htmlAcceptHeader_;
+    }
+
+    /**
+     * Returns the value used by the browser for the accept header
+     * if requesting an script.
+     * @return the accept header string
+     */
+    public String getScriptAcceptHeader() {
+        return "*/*";
     }
 
     /**
