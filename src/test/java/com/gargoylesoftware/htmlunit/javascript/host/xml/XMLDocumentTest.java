@@ -115,10 +115,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
 
     private static final String LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION_NAME = "loadXMLDocumentFromString";
 
-    /**
-     * Helper.
-     * @return xml helper
-     **/
+    /** Helper. **/
     public static final String LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION = ""
             + "  function " + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION_NAME + "(xml) {\n"
             + "    if (window.DOMParser) {\n"
@@ -196,20 +193,16 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "undefined", "true" })
+    @Alerts(DEFAULT = { "undefined", "true" },
+            IE10 = { "undefined", "undefined" })
     public void async() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
+            + "    var doc = " + callCreateXMLDocument() + ";\n"
             + "    alert(document.async);\n"
             + "    alert(doc.async);\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
