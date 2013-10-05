@@ -25,6 +25,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -115,7 +116,8 @@ public class HtmlAnchor extends HtmlElement {
             }
         }
 
-        final WebRequest webRequest = new WebRequest(url);
+        final BrowserVersion browser = getPage().getWebClient().getBrowserVersion();
+        final WebRequest webRequest = new WebRequest(url, browser.getHtmlAcceptHeader());
         webRequest.setCharset(page.getPageEncoding());
         webRequest.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
         if (LOG.isDebugEnabled()) {
