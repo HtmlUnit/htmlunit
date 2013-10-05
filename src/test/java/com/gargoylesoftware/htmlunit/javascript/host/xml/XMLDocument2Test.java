@@ -14,12 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -29,6 +30,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class XMLDocument2Test extends WebDriverTestCase {
@@ -37,14 +39,14 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "myTarget,myData,7", "myTarget,myData", "abcdefghij",
+    @Alerts(DEFAULT = { "myTarget,myData,7", "myTarget,myData", "abcdefghij",
             "<?myTarget myData?>", "<![CDATA[abcdefghij]]>" },
-            FF = { "myTarget,myData,7", "myTarget,myData", "abcdefghij",
-            "undefined", "undefined" })
+            IE10 = { "myTarget,myData,7", "myTarget,myData", "abcdefghij",
+            "<?myTarget myData?>", "abcdefghij" })
     public void createProcessingInstruction() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
+            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
             + "    var d = doc.createElement('doc');\n"
             + "    d.setAttribute('fluffy', 'true');\n"
             + "    d.setAttribute('numAttributes', '2');\n"
@@ -56,15 +58,11 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "    var cdata = doc.createCDATASection('abcdefghij');\n"
             + "    d.appendChild(cdata);\n"
             + "    alert(cdata.data);\n"
-            + "    alert(pi.xml);\n"
-            + "    alert(cdata.xml);\n"
+            + "    alert(" + XMLDocumentTest.callSerializeXMLDocumentToString("pi") + ");\n"
+            + "    alert(" + XMLDocumentTest.callSerializeXMLDocumentToString("cdata") + ");\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
+            + XMLDocumentTest.SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -74,25 +72,20 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "<root><child Sci-Fi=\"\"/></root>")
+    @Alerts(DEFAULT = "createNode not available",
+            IE6 = "<root><child Sci-Fi=\"\"/></root>")
     public void createNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
-            + "    if (document.all) {\n"
-            + "      doc.async = false;\n"
-            + "      doc.loadXML('<root><child/></root>');\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromString("'<root><child/></root>'") + ";\n"
+            + "    if (document.createNode) {\n"
             + "      var node = doc.createNode(2, 'Sci-Fi', '');\n"
             + "      doc.documentElement.childNodes.item(0).attributes.setNamedItem(node);\n"
-            + "      alert(doc.documentElement.xml);\n"
-            + "    }\n"
+            + "      alert(" + XMLDocumentTest.callSerializeXMLDocumentToString("doc.documentElement") + ");\n"
+            + "    } else { alert('createNode not available'); }\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
+            + XMLDocumentTest.SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -102,25 +95,21 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "undefined", "test", "uri:test", "test:element" })
+    @Alerts(DEFAULT = "createNode not available",
+            IE6 = { "undefined", "test", "uri:test", "test:element" })
     public void createNode_element() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
-            + "    if (document.all) {\n"
+            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
+            + "    if (document.createNode) {\n"
             + "      var node = doc.createNode(1, 'test:element', 'uri:test');\n"
             + "      alert(node.localName);\n"
             + "      alert(node.prefix);\n"
             + "      alert(node.namespaceURI);\n"
             + "      alert(node.nodeName);\n"
-            + "    }\n"
+            + "    } else { alert('createNode not available'); }\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -134,7 +123,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
     public void documentElementCaching() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
+            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
             + "    var a = doc.createElement('a');\n"
             + "    var b = doc.createElement('b');\n"
             + "    doc.appendChild(a);\n"
@@ -144,12 +133,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "    doc.appendChild(b);\n"
             + "    alert(doc.documentElement.tagName);\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -163,16 +147,11 @@ public class XMLDocument2Test extends WebDriverTestCase {
     public void createElement_namespace() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
+            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
             + "    var a = doc.createElement('a:b');\n"
             + "    alert(a.tagName);\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -184,8 +163,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ IE })
     @Alerts({ "content", "content" })
-    @Browsers(Browser.IE)
     public void text() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
