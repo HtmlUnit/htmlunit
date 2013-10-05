@@ -6787,7 +6787,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 42, 42")
-    @NotYetImplemented
     public void Sizzle__selector__child_and_adjacent() throws Exception {
         runTest("Sizzle: selector: child and adjacent");
     }

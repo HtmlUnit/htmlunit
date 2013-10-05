@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
 
 import org.junit.Test;
@@ -536,7 +537,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "ul2" })
+    @Alerts({ "2", "ul2", "ul3" })
     public void generalAdjacentSelector() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -545,7 +546,9 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  if (document.querySelectorAll) {\n"
             + "    var list = document.querySelectorAll('div~ul');\n"
             + "    alert(list.length);\n"
-            + "    alert(list[0].id);\n"
+            + "    for (var i = 0 ; i < list.length; i++) {\n"
+            + "      alert(list[i].id);\n"
+            + "    }\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
@@ -553,6 +556,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <div></div>\n"
             + "  <p></p>\n"
             + "  <ul id='ul2'></ul>\n"
+            + "  <ul id='ul3'></ul>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
@@ -690,6 +694,37 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <p  id='id2'></p>\n"
             + "  <p  id='id3'></p>\n"
             + "</section>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { },
+            IE = { "li1" })
+    @NotYetImplemented(IE)
+    public void pseudoAfter() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>Pseudo-After</title><script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    try {\n"
+            + "      var list = document.querySelectorAll('#li1:after');\n"
+            + "      for (var i = 0 ; i < list.length; i++) {\n"
+            + "        alert(list[i].id);\n"
+            + "      }\n"
+            + "    } catch (e) {alert('exception')}\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<ul>\n"
+            + "  <li id='li1'></li>\n"
+            + "  <li id='li2'></li>\n"
+            + "</ul>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
@@ -1222,6 +1257,33 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  alert(document.querySelectorAll('.foo\\\\:bar')[0].id);\n"
             + "} catch(e) {alert('exception')}\n"
             + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "exception" })
+    public void invalidSelectors() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>Invalid Selectors</title><script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    try {\n"
+            + "      var list = document.querySelectorAll('li:foo() ~ li');\n"
+            + "      alert(list.length);\n"
+            + "    } catch (e) {alert('exception')}\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<ul id='ul'>\n"
+            + "  <li id='li1'></li>\n"
+            + "  <li id='li2'></li>\n"
+            + "</ul>\n"
+            + "</body></html>";
 
         loadPageWithAlerts2(html);
     }

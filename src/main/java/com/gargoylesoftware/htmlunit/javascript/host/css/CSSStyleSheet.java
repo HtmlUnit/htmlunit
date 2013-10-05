@@ -1124,6 +1124,12 @@ public class CSSStyleSheet extends SimpleScriptable {
                 final SiblingSelector ss = (SiblingSelector) selector;
                 return isValidSelector(ss.getSelector(), documentMode)
                         && isValidSelector(ss.getSiblingSelector(), documentMode);
+            case Selector.SAC_ANY_NODE_SELECTOR:
+                if (selector instanceof SiblingSelector) {
+                    final SiblingSelector sibling = (SiblingSelector) selector;
+                    return isValidSelector(sibling.getSelector(), documentMode)
+                            && isValidSelector(sibling.getSiblingSelector(), documentMode);
+                }
             default:
                 LOG.warn("Unhandled CSS selector type '" + selector.getSelectorType() + "'. Accepting it silently.");
                 return true; // at least in a first time to break less stuff
