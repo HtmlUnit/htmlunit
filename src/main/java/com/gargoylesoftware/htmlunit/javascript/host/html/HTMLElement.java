@@ -933,9 +933,13 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             final Element scriptObject = (Element) node.getScriptObject();
             final boolean isUpperCase = getBrowserVersion().hasFeature(HTMLELEMENT_OUTER_HTML_UPPER_CASE);
             String tag = element.getTagName();
-            if (isUpperCase && scriptObject instanceof HTMLElement
-                    && !((HTMLElement) scriptObject).isLowerCaseInOuterHtml()) {
-                tag = tag.toUpperCase(Locale.ENGLISH);
+
+            HTMLElement htmlElement = null;
+            if (scriptObject instanceof HTMLElement) {
+                htmlElement = (HTMLElement) scriptObject;
+                if (isUpperCase && !htmlElement.isLowerCaseInOuterHtml()) {
+                    tag = tag.toUpperCase(Locale.ENGLISH);
+                }
             }
             buffer.append("<").append(tag);
             // Add the attributes. IE does not use quotes, FF does.
@@ -959,7 +963,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             buffer.append(">");
             // Add the children.
             printChildren(buffer, node, html);
-            if (!(scriptObject instanceof HTMLElement) || !((HTMLElement) scriptObject).isEndTagForbidden()) {
+            if (null == htmlElement || !htmlElement.isEndTagForbidden()) {
                 buffer.append("</").append(tag).append(">");
             }
         }
