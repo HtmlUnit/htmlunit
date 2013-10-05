@@ -934,7 +934,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             final boolean isUpperCase = getBrowserVersion().hasFeature(HTMLELEMENT_OUTER_HTML_UPPER_CASE);
             String tag = element.getTagName();
             if (isUpperCase && scriptObject instanceof HTMLElement
-            		&& !((HTMLElement) scriptObject).isLowerCaseInOuterHtml()) {
+                    && !((HTMLElement) scriptObject).isLowerCaseInOuterHtml()) {
                 tag = tag.toUpperCase(Locale.ENGLISH);
             }
             buffer.append("<").append(tag);
