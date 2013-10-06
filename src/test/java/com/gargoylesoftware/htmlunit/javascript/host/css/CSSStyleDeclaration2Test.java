@@ -207,7 +207,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
     @Test
     @NotYetImplemented({ IE7 })
     public void properties2() throws Exception {
-        String expected = loadExpectation("CSSStyleDeclaration2Test.properties2", ".txt");
+        final String expected = loadExpectation("CSSStyleDeclaration2Test.properties2", ".txt");
 
         final String html
             = "<html><head><title>First</title><script>\n"
