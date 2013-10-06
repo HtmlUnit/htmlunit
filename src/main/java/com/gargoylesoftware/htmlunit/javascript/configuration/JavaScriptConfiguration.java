@@ -154,6 +154,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHeadingElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInlineQuotationElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInsElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIsIndexElement;
@@ -176,7 +177,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLParagraphElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLParamElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLPreElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLProgressElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInlineQuotationElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSelectElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSourceElement;
@@ -248,6 +248,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPatternElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPolygonElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPolylineElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGRadialGradientElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGRect;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGRectElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSVGElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGScriptElement;
@@ -334,7 +335,9 @@ public final class JavaScriptConfiguration {
         SVGGElement.class, SVGImageElement.class, SVGLineElement.class, SVGLinearGradientElement.class,
         SVGMarkerElement.class, SVGMaskElement.class, SVGMatrix.class, SVGMetadataElement.class, SVGMpathElement.class,
         SVGPathElement.class, SVGPatternElement.class, SVGPolygonElement.class, SVGPolylineElement.class,
-        SVGRadialGradientElement.class, SVGRectElement.class, SVGSVGElement.class, SVGScriptElement.class,
+        SVGRadialGradientElement.class,
+        SVGRect.class, SVGRectElement.class,
+        SVGSVGElement.class, SVGScriptElement.class,
         SVGSetElement.class, SVGStopElement.class, SVGStyleElement.class, SVGSwitchElement.class,
         SVGSymbolElement.class, SVGTSpanElement.class, SVGTextElement.class, SVGTextPathElement.class,
         SVGTitleElement.class, SVGUseElement.class, Screen.class, Selection.class, SimpleArray.class,
