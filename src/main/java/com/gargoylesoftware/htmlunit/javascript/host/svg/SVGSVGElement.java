@@ -57,4 +57,16 @@ public class SVGSVGElement extends SVGElement {
     public SVGMatrix getScreenCTM() {
         return new SVGMatrix(getWindow());
     }
+
+    /**
+     * Creates a new {@link SVGRect}.
+     * @return the new rect
+     */
+    @JsxFunction
+    public SVGRect createSVGRect() {
+        final SVGRect rect = new SVGRect();
+        rect.setPrototype(getPrototype(rect.getClass()));
+        rect.setParentScope(getParentScope());
+        return rect;
+    }
 }
