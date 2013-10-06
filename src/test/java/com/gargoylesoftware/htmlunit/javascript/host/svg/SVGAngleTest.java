@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class SvgAngleTest extends WebDriverTestCase {
+public class SVGAngleTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
