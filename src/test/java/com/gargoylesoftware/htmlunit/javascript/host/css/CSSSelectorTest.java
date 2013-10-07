@@ -704,7 +704,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { },
-            IE = { "li1" })
+            IE6 = { "li1" },
+            IE8 = { "li1" })
     @NotYetImplemented(IE)
     public void pseudoAfter() throws Exception {
         final String html
