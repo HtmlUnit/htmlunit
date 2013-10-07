@@ -1222,7 +1222,9 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <div>test</div>" },
             CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
-            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+            FF3_6 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" },
+            FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             IE6 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "exception" },
             IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "exception" })
@@ -1242,7 +1244,9 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <p>test</p>" },
             CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
-            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+            FF3_6 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" },
+            FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             IE6 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "exception" },
             IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "exception" })
@@ -1280,7 +1284,9 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <a>test</a>" },
             CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
-            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+            FF3_6 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" },
+            FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             IE6 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "exception" },
             IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "exception" })
@@ -1977,7 +1983,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Browsers(IE)
-    @Alerts(IE = "rgb(0, 0, 0)",
+    @Alerts(DEFAULT = "rgb(0, 0, 0)",
             IE10 = "#000000")
     public void currentStyle() throws Exception {
         style("currentStyle");
@@ -4657,7 +4663,9 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<svg id=\"svgElem2\"></svg>", IE = "undefined")
+    @Alerts(DEFAULT = "<svg id=\"svgElem2\"></svg>",
+            IE = "undefined",
+            IE10 = "<svg xmlns=\"http://www.w3.org/2000/svg\" id=\"svgElem2\" />")
     public void innerHTML_svg() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

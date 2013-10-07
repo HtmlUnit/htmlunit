@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
@@ -38,6 +39,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -628,18 +630,26 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ CHROME, FF, IE6, IE8 })
     @Alerts(DEFAULT = { "string", "Fri, 16 Oct 2009 13:59:47 GMT" },
             IE = { "string", "Fri, 16 Oct 2009 13:59:47 UTC" })
+    // TODO IE10 = { "string", "current date/time" } as it ignores the Date header -> how to assert?
     public void lastModified() throws Exception {
         final List<NameValuePair> responseHeaders = new ArrayList<NameValuePair>();
-        responseHeaders.add(new NameValuePair("Last-Modified", "Fri, 16 Oct 2009 13:59:47 GMT"));
-        testLastModified(responseHeaders);
+        // TODO When ran with the IEDriver the IE10 is in quirks mode after this test and cannot be restored
+        // to normal in an automatic way.
+        // All following tests will break until you reset the browser into standard mode, e.g. by setting a
+        // break point to keep the browser open and using the developer tools (F12).
+        if (!(getWebDriver() instanceof InternetExplorerDriver && "IE10".equals(getBrowserVersion().getNickname()))) {
+            responseHeaders.add(new NameValuePair("Last-Modified", "Fri, 16 Oct 2009 13:59:47 GMT"));
+            testLastModified(responseHeaders);
 
-        // Last-Modified header has priority compared to Date header
-        responseHeaders.add(new NameValuePair("Date", "Fri, 17 Oct 2009 13:59:47 GMT"));
-        testLastModified(responseHeaders);
+            // Last-Modified header has priority compared to Date header
+            responseHeaders.add(new NameValuePair("Date", "Fri, 17 Oct 2009 13:59:47 GMT"));
+            testLastModified(responseHeaders);
+        }
 
-        // but Date is taken, if no Last-Modified header is present
+        // but Date is taken, if no Last-Modified header is present (if not IE10)
         responseHeaders.clear();
         responseHeaders.add(new NameValuePair("Date", "Fri, 16 Oct 2009 13:59:47 GMT"));
         testLastModified(responseHeaders);
