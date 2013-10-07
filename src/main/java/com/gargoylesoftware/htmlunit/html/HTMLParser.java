@@ -962,13 +962,6 @@ class HTMLScannerForIE extends org.cyberneko.html.HTMLScanner {
         protected void scanComment() throws IOException {
             final String s = nextContent(30); // [if ...
             if (s.startsWith("[if ") && s.contains("]>")) {
-                String commentTill = null;
-                if (s.contains("]><!-->")) {
-                    commentTill = "<![endif]-->";
-                }
-                else if (s.contains("]>-->")) {
-                    commentTill = "<!--<![endif]-->";
-                }
                 final String condition = StringUtils.substringBefore(s.substring(4), "]>");
                 try {
                     if (IEConditionalCommentExpressionEvaluator.evaluate(condition, browserVersion_)) {
@@ -982,21 +975,14 @@ class HTMLScannerForIE extends org.cyberneko.html.HTMLScanner {
                         else if (s.contains("]>-->")) {
                             skip("-->", false);
                         }
-                        return;
                     }
-                    if (commentTill != null) {
-                        final XMLStringBuffer buffer = new XMLStringBuffer();
-                        int ch;
-                        while ((ch = read()) != -1) {
-                            buffer.append((char) ch);
-                            if (buffer.toString().endsWith(commentTill)) {
-                                final XMLStringBuffer trimmedBuffer
-                                    = new XMLStringBuffer(buffer.ch, 0, buffer.length - 3);
-                                fDocumentHandler.comment(trimmedBuffer, locationAugs());
-                                return;
-                            }
+                    else {
+                        final StringBuilder builder = new StringBuilder();
+                        while (!builder.toString().endsWith("-->")) {
+                            builder.append((char) read());
                         }
                     }
+                    return;
                 }
                 catch (final Exception e) { // incorrect expression => handle it as plain text
                     // TODO: report it!

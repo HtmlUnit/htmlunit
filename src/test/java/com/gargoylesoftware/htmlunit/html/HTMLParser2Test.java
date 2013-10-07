@@ -1553,7 +1553,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "<!--[if gt IE 11]><br><![endif]-->", "<!--[if lt IE 11]><br><![endif]-->" },
             IE6 = { "", "<BR>" },
             IE8 = { "", "<BR>" })
-    @NotYetImplemented({ IE6, IE8 })
+    @NotYetImplemented(IE6)
     public void ieConditionalCommentsNotInDom() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
