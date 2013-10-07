@@ -35,6 +35,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_THROWS_NOT_ATTACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_BODY_HEAD_READONLY;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_THROW_EXCEPTION_WHEN_CLOSES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PREFIX_RETURNS_EMPTY_WHEN_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SET_ATTRIBUTE_CONSIDERS_ATTR_FOR_CLASS_AS_REAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SET_ATTRIBUTE_SUPPORTS_EVENT_HANDLERS;
@@ -1072,7 +1073,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final DomDocumentFragment fragment = (DomDocumentFragment) domNode.getPage().createDocumentFragment();
         parseHtmlSnippet(fragment, false, value);
         DomNode child = fragment.getFirstChild();
-        if (child instanceof DomElement) {
+        if (getBrowserVersion().hasFeature(JS_OUTER_THROW_EXCEPTION_WHEN_CLOSES) && child instanceof DomElement) {
             final String parentName = domNode.getParentNode().getNodeName().toUpperCase(Locale.ENGLISH);
             final short[] closes = HTMLElements.getElement(child.getNodeName()).closes;
             if (closes != null) {

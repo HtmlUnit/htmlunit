@@ -1228,7 +1228,6 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             IE6 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "exception" },
             IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "exception" })
-    @NotYetImplemented(FF17)
     public void setOuterHTMLAddBlockToParagraph() throws Exception {
         final String html = createPageForSetOuterHTML("p", "<div>test</div>");
         loadPageWithAlerts2(html);
@@ -1250,7 +1249,6 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             IE6 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "exception" },
             IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "exception" })
-    @NotYetImplemented(FF17)
     public void setOuterHTMLAddParagraphToParagraph() throws Exception {
         final String html = createPageForSetOuterHTML("p", "<p>test</p>");
         loadPageWithAlerts2(html);
@@ -1290,7 +1288,6 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             IE6 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "exception" },
             IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "exception" })
-    @NotYetImplemented(FF17)
     public void setOuterHTMLAddAnchorToAnchor() throws Exception {
         final String html = createPageForSetOuterHTML("a", "<a>test</a>");
         loadPageWithAlerts2(html);
