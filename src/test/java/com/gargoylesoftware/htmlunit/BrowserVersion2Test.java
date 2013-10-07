@@ -54,8 +54,9 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            IE = "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*")
+    @Alerts(DEFAULT = { "2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" },
+            IE = { "2", "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*" },
+            IE10 = { "1", "Accept: text/html, application/xhtml+xml, */*" })
     public void acceptHeaderWindowOpen() throws Exception {
         String html = "<html><body>Response</body></html>";
         getMockWebConnection().setDefaultResponse(html);
@@ -67,8 +68,8 @@ public class BrowserVersion2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html, getDefaultUrl());
         driver.findElement(By.id("clickme")).click();
 
-        assertEquals(2, getMockWebConnection().getRequestCount());
-        assertEquals(getExpectedAlerts()[0], acceptHeaderString());
+        assertEquals(getExpectedAlerts()[0], Integer.toString(getMockWebConnection().getRequestCount()));
+        assertEquals(getExpectedAlerts()[1], acceptHeaderString());
     }
 
     /**
@@ -76,7 +77,8 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            IE = "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*")
+            IE = "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*",
+            IE10 = "Accept: text/html, application/xhtml+xml, */*")
     public void acceptHeaderAnchorClick() throws Exception {
         String html = "<html><body>Response</body></html>";
         getMockWebConnection().setDefaultResponse(html);
@@ -97,7 +99,8 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            IE = "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*")
+            IE = "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*",
+            IE10 = "Accept: text/html, application/xhtml+xml, */*")
     public void acceptHeaderAnchorClickWithType() throws Exception {
         String html = "<html><body>Response</body></html>";
         getMockWebConnection().setDefaultResponse(html);
@@ -169,7 +172,8 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "Accept: */*")
+    @Alerts(DEFAULT = "Accept: */*",
+            IE10 = "Accept: application/javascript, */*;q=0.8")
     public void acceptHeaderJavascript() throws Exception {
         final String html
             = "<html><head>\n"
@@ -187,7 +191,8 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "Accept: */*")
+    @Alerts(DEFAULT = "Accept: */*",
+            IE10 = "Accept: application/javascript, */*;q=0.8")
     public void acceptHeaderJavascriptWithoutType() throws Exception {
         final String html
             = "<html><head>\n"
