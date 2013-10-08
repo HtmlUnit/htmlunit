@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlHtml;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLHtmlElementTest extends WebDriverTestCase {
