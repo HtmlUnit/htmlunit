@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.TextPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -133,4 +134,37 @@ public class AttachmentTest extends SimpleWebTestCase {
         attachments.clear();
     }
 
+    /**
+     * This was causing a ClassCastException in Location.setHref as of 2013-10-08 because the TextPage
+     * used for the attachment was wrongly associated to the HTMLDocument of the first page.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void jsChangeLocationAfterReceptionOfAttachment() throws Exception {
+        final String html = "<html><body>\n"
+            + "<form action='action'>\n"
+            + "<input type='submit' onclick='window.location=\"foo\"; return false'>\n"
+            + "</form>\n"
+            + "<a href='" + URL_SECOND + "'>download</a>\n"
+            + "</body></html>";
+
+        final WebClient client = getWebClient();
+        final List<Attachment> attachments = new ArrayList<Attachment>();
+        client.setAttachmentHandler(new CollectingAttachmentHandler(attachments));
+
+        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        headers.add(new NameValuePair("Content-Disposition", "attachment"));
+
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setDefaultResponse("");
+        conn.setResponse(URL_SECOND, "some text", 200, "OK", "text/plain", headers);
+
+        final HtmlPage page = loadPage(html);
+        // download text attachment
+        page.getAnchors().get(0).click();
+        assertEquals(1, attachments.size());
+
+        final HtmlElement htmlElement = (HtmlElement) page.getFirstByXPath("//input");
+        htmlElement.click(); // exception was occurring here
+    }
 }
