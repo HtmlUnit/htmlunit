@@ -332,6 +332,7 @@ public class TextRange extends SimpleScriptable {
      * Moves to a bookmark.
      * The current implementation does nothing
      * @param bookmark the bookmark
+     * @return <code>false</code>
      */
     @JsxFunction
     public boolean moveToBookmark(final String bookmark) {
