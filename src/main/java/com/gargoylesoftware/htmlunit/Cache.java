@@ -34,6 +34,7 @@ import org.w3c.dom.css.CSSStyleSheet;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public class Cache implements Serializable {
 
@@ -90,6 +91,21 @@ public class Cache implements Serializable {
      * Caches the specified object, if the corresponding request and response objects indicate
      * that it is cacheable.
      *
+     * @param request the request corresponding to the specified compiled script
+     * @param response the response corresponding to the specified compiled script
+     * @param toCache the object that is to be cached, if possible (may be for instance a compiled script or
+     * simply a WebResponse)
+     * @deprecated as of 2.13, please use {@link Cache#cacheIfPossible(URL, WebResponse, Object)}
+     */
+    @Deprecated
+    public void cacheIfPossible(final WebRequest request, final WebResponse response, final Object toCache) {
+        cacheIfPossible(request.getUrl(), response, toCache);
+    }
+
+    /**
+     * Caches the specified object, if the corresponding request and response objects indicate
+     * that it is cacheable.
+     *
      * @param url the cache key
      * @param response the response corresponding to the specified compiled script
      * @param toCache the object that is to be cached, if possible (may be for instance a compiled script or
@@ -130,6 +146,19 @@ public class Cache implements Serializable {
                 entries_.remove(oldestEntry.key_);
             }
         }
+    }
+
+    /**
+     * Determines if the specified response can be cached.
+     *
+     * @param request the performed request
+     * @param response the received response
+     * @return <code>true</code> if the response can be cached
+     * @deprecated as of 2.13, please use {@link Cache#isCacheable(WebResponse)}
+     */
+    @Deprecated
+    protected boolean isCacheable(final WebRequest request, final WebResponse response) {
+        return isCacheable(response);
     }
 
     /**
@@ -198,6 +227,19 @@ public class Cache implements Serializable {
             return new Date();
         }
         return DateUtils.parseDate(value);
+    }
+
+    /**
+     * Returns the cached object corresponding to the specified request. If there is
+     * no corresponding cached object, this method returns <tt>null</tt>.
+     *
+     * @param request the request whose corresponding cached compiled script is sought
+     * @return the cached object corresponding to the specified request if any
+     * @deprecated as of 2.13, please use {@link Cache#getCachedObject(URL)}
+     */
+    @Deprecated
+    public Object getCachedObject(final WebRequest request) {
+        return getCachedObject(request.getUrl());
     }
 
     /**
