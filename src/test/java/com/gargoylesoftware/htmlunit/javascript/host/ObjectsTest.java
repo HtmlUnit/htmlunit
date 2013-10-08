@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(Parameterized.class)
 public class ObjectsTest extends SimpleWebTestCase {

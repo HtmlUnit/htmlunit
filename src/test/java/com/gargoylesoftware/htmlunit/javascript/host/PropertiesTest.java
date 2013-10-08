@@ -58,6 +58,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Sudhan Moghe
+ * @author Frank Danek
  */
 @RunWith(Parameterized.class)
 public class PropertiesTest extends SimpleWebTestCase {

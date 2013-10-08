@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
  * @author Marc Guillemot
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class TreeWalkerTest extends WebDriverTestCase {
