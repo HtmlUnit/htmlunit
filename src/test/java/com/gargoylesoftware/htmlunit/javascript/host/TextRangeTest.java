@@ -37,8 +37,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = { "", "bla bla", "bla blabli bli" })
+    @Alerts(DEFAULT = "exception", IE = { "", "bla bla", "bla blabli bli" })
     public void text() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -70,8 +69,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "BODY")
+    @Alerts(DEFAULT = "exception", IE = "BODY")
     public void parentElement() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -95,8 +93,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = { "hello", "" })
+    @Alerts(DEFAULT = "exception", IE = { "hello", "" })
     public void collapse() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -128,8 +125,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "")
+    @Alerts(DEFAULT = "exception", IE = "")
     public void select() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -155,8 +151,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = { "hello", "hell", "ell" })
+    @Alerts(DEFAULT = "exception", IE = { "hello", "hell", "ell" })
     public void moveEnd() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -189,8 +184,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = { "hello", "hell", "ell", "1", "-1", "hello" })
+    @Alerts(DEFAULT = "exception", IE = { "hello", "hell", "ell", "1", "-1", "hello" })
     public void moveOutOfBounds_input() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -226,8 +220,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = { "true", "true", "false", "true" })
+    @Alerts(DEFAULT = "exception", IE = { "true", "true", "false", "true" })
     public void inRange() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -260,8 +253,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "false")
+    @Alerts(DEFAULT = "exception", IE = "false")
     public void inRange2() throws Exception {
         final String html = "<html><body>"
             + "<form name='f'><input name='q' value=''></form>"
@@ -330,8 +322,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "BODY")
+    @Alerts(DEFAULT = "exception", IE = "BODY")
     public void createRangeParentElement() throws Exception {
         final String html =
             "<html><body>\n"
@@ -350,8 +341,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "")
+    @Alerts(DEFAULT = "exception", IE = "")
     public void createRangeHtmlText() throws Exception {
         final String html =
             "<html><body>\n"
@@ -360,6 +350,25 @@ public class TextRangeTest extends WebDriverTestCase {
             + "  s = document.selection.createRange();\n"
             + "  t = s.htmlText;\n"
             + "  alert(t);\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "exception", IE = "ok")
+    public void moveToBookmark() throws Exception {
+        final String html =
+            "<html><body>\n"
+            + "<script>\n"
+            + "try {\n"
+            + "  var rng = document.body.createTextRange();\n"
+            + "  rng.moveToBookmark(rng.getBookmark());\n"
+            + "  alert('ok');\n"
             + "} catch(e) { alert('exception'); }\n"
             + "</script>\n"
             + "</body></html>";

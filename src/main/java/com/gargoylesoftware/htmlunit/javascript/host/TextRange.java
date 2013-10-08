@@ -316,4 +316,26 @@ public class TextRange extends SimpleScriptable {
         }
         return moveBy;
     }
+
+    /**
+     * Retrieves a bookmark (opaque string) that can be used with {@link #moveToBookmark}
+     * to return to the same range.
+     * The current implementation return empty string
+     * @return the bookmark
+     */
+    @JsxFunction
+    public String getBookmark() {
+        return "";
+    }
+
+    /**
+     * Moves to a bookmark.
+     * The current implementation does nothing
+     * @param bookmark the bookmark
+     */
+    @JsxFunction
+    public boolean moveToBookmark(final String bookmark) {
+        return false;
+    }
+
 }
