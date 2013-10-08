@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  *
  * @version $Revision$
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class BrowserVersion2Test extends WebDriverTestCase {
@@ -76,9 +77,9 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            IE = "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*",
-            IE10 = "Accept: text/html, application/xhtml+xml, */*")
+    @Alerts(DEFAULT = {"2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" },
+            IE = {"2", "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*" },
+            IE10 = {"1", "Accept: text/html, application/xhtml+xml, */*" })
     public void acceptHeaderAnchorClick() throws Exception {
         String html = "<html><body>Response</body></html>";
         getMockWebConnection().setDefaultResponse(html);
@@ -90,8 +91,8 @@ public class BrowserVersion2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html, getDefaultUrl());
         driver.findElement(By.id("clickme")).click();
 
-        assertEquals(2, getMockWebConnection().getRequestCount());
-        assertEquals(getExpectedAlerts()[0], acceptHeaderString());
+        assertEquals(getExpectedAlerts()[0], Integer.toString(getMockWebConnection().getRequestCount()));
+        assertEquals(getExpectedAlerts()[1], acceptHeaderString());
     }
 
     /**
