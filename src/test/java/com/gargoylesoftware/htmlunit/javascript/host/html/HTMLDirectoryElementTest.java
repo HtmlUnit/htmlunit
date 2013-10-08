@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLDirectoryElementTest extends WebDriverTestCase {

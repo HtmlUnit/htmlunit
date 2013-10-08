@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Tests for {@link HTMLBaseFontElement}.
  * @version $Revision$
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLBaseFontElementTest extends WebDriverTestCase {
