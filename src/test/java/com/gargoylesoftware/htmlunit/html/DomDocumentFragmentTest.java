@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class DomDocumentFragmentTest extends WebDriverTestCase {

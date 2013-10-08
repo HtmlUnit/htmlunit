@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Daniel Gredler
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HtmlFieldSetTest extends WebDriverTestCase {
