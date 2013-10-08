@@ -53,6 +53,7 @@ import org.junit.runners.model.Statement;
  * </pre>
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 public class BrowserRunner extends Suite {
 

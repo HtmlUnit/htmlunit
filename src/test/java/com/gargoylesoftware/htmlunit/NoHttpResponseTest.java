@@ -44,6 +44,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Frank Danek
  */
 @RunWith(Enclosed.class)
 public class NoHttpResponseTest {

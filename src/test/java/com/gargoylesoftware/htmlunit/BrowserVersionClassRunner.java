@@ -48,6 +48,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 

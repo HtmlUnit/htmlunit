@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
  *
  * @version $Revision$
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class PageReloadTest extends WebDriverTestCase {

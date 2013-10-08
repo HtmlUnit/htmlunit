@@ -22,6 +22,7 @@ import org.junit.Test;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Frank Danek
  */
 public class BrowserVersionTest extends SimpleWebTestCase {
 

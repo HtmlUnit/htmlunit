@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class WebClient3Test extends WebDriverTestCase {
