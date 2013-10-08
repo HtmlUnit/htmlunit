@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTitle;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class SvgTitleTest extends WebDriverTestCase {

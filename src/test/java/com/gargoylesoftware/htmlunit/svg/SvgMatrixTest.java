@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class SvgMatrixTest extends WebDriverTestCase {

@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class SvgAnchorTest extends WebDriverTestCase {
