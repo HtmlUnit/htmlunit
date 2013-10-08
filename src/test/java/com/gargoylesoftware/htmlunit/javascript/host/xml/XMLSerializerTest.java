@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Darrell DeBoer
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class XMLSerializerTest extends WebDriverTestCase {

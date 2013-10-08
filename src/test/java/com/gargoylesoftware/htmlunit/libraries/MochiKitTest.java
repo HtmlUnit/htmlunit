@@ -39,6 +39,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * </p>
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class MochiKitTest extends WebDriverTestCase {

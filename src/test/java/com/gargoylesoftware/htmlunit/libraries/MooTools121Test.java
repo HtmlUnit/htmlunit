@@ -40,6 +40,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class MooTools121Test extends WebDriverTestCase {

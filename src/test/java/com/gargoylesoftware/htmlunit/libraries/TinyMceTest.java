@@ -44,6 +44,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
+ * @author Frank Danek
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
