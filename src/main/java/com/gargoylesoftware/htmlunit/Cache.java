@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
-import java.net.URL;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -34,7 +33,6 @@ import org.w3c.dom.css.CSSStyleSheet;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Daniel Gredler
- * @author Ronald Brill
  */
 public class Cache implements Serializable {
 
@@ -95,25 +93,11 @@ public class Cache implements Serializable {
      * @param response the response corresponding to the specified compiled script
      * @param toCache the object that is to be cached, if possible (may be for instance a compiled script or
      * simply a WebResponse)
-     * @deprecated as of 2.13, please use {@link Cache#cacheIfPossible(URL, WebResponse, Object)}
      */
-    @Deprecated
     public void cacheIfPossible(final WebRequest request, final WebResponse response, final Object toCache) {
-        cacheIfPossible(request.getUrl(), response, toCache);
-    }
-
-    /**
-     * Caches the specified object, if the corresponding request and response objects indicate
-     * that it is cacheable.
-     *
-     * @param url the cache key
-     * @param response the response corresponding to the specified compiled script
-     * @param toCache the object that is to be cached, if possible (may be for instance a compiled script or
-     * simply a WebResponse)
-     */
-    public void cacheIfPossible(final URL url, final WebResponse response, final Object toCache) {
-        if (isCacheable(response)) {
-            final Entry entry = new Entry(url.toString(), toCache);
+        if (isCacheable(request, response)) {
+            final String url = response.getWebRequest().getUrl().toString();
+            final Entry entry = new Entry(url, toCache);
             entries_.put(entry.key_, entry);
             deleteOverflow();
         }
@@ -154,20 +138,8 @@ public class Cache implements Serializable {
      * @param request the performed request
      * @param response the received response
      * @return <code>true</code> if the response can be cached
-     * @deprecated as of 2.13, please use {@link Cache#isCacheable(WebResponse)}
      */
-    @Deprecated
     protected boolean isCacheable(final WebRequest request, final WebResponse response) {
-        return isCacheable(response);
-    }
-
-    /**
-     * Determines if the specified response can be cached.
-     *
-     * @param response the received response
-     * @return <code>true</code> if the response can be cached
-     */
-    protected boolean isCacheable(final WebResponse response) {
         return HttpMethod.GET == response.getWebRequest().getHttpMethod()
             && !isDynamicContent(response);
     }
@@ -235,22 +207,12 @@ public class Cache implements Serializable {
      *
      * @param request the request whose corresponding cached compiled script is sought
      * @return the cached object corresponding to the specified request if any
-     * @deprecated as of 2.13, please use {@link Cache#getCachedObject(URL)}
      */
-    @Deprecated
     public Object getCachedObject(final WebRequest request) {
-        return getCachedObject(request.getUrl());
-    }
-
-    /**
-     * Returns the cached object corresponding to the specified request. If there is
-     * no corresponding cached object, this method returns <tt>null</tt>.
-     *
-     * @param url the cache key
-     * @return the cached object corresponding to the specified request if any
-     */
-    public Object getCachedObject(final URL url) {
-        final Entry cachedEntry = entries_.get(url.toString());
+        if (HttpMethod.GET != request.getHttpMethod()) {
+            return null;
+        }
+        final Entry cachedEntry = entries_.get(request.getUrl().toString());
         if (cachedEntry == null) {
             return null;
         }

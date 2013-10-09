@@ -1090,7 +1090,7 @@ public class HtmlPage extends SgmlPage {
         request.setAdditionalHeader("Referer", referringRequest.getUrl().toString());
         request.setAdditionalHeader("Accept", client.getBrowserVersion().getScriptAcceptHeader());
 
-        final Object cachedScript = cache.getCachedObject(url);
+        final Object cachedScript = cache.getCachedObject(request);
         if (cachedScript instanceof Script) {
             return (Script) cachedScript;
         }
@@ -1143,7 +1143,7 @@ public class HtmlPage extends SgmlPage {
             final JavaScriptEngine javaScriptEngine = client.getJavaScriptEngine();
             final Script script = javaScriptEngine.compile(this, scriptCode, url.toExternalForm(), 1);
             if (script != null) {
-                cache.cacheIfPossible(url, response, script);
+                cache.cacheIfPossible(request, response, script);
             }
 
             return script;

@@ -41,9 +41,6 @@
             <action type="fix" dev="rbri" issue="1524">
                 Some debug log output added if HTMLDocument.canAlreadyBeParsed(String) returns false.
             </action>
-            <action type="fix" dev="rbri" issue="1352">
-                Caching now works for encoded URLs also.
-            </action>
             <action type="update" dev="asashour">
                 Deprecate KeyDataPair.
             </action>
