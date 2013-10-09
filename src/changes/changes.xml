@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="update" dev="mguillem">
+                Upgrade NekoHtml to 1.9.19.
+            </action>
             <action type="update" dev="rbri">
                 CSS: cssparser updated to 0.9.11.
             </action>
