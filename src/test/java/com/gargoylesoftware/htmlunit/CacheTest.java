@@ -31,7 +31,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -138,6 +140,7 @@ public class CacheTest extends SimpleWebTestCase {
      *@throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented(Browser.FF)
     public void usageUrlEncoded() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
