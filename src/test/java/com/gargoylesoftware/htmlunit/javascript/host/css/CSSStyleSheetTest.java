@@ -103,8 +103,9 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "4", "§§URL§§style2.css", "§§URL§§style4.css", "null", "null" },
-            IE = { "4", "§§URL§§style2.css", "style4.css", "", "" })
+    @Alerts(DEFAULT = { "4", "§§URL§§style2.css", "§§URL§§style4.css", "null", "null" },
+            IE6 = { "4", "§§URL§§style2.css", "style4.css", "", "" },
+            IE8 = { "4", "§§URL§§style2.css", "style4.css", "", "" })
     public void href() throws Exception {
         final String baseUrl = getDefaultUrl().toExternalForm();
         final String html = "<html>\n"

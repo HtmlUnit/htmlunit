@@ -143,11 +143,11 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "#a b", "§§URL§§#a%20b", "#a b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
-            "#% ^[]|\"<>{}\\" },
-            IE8 = { "#a b", "§§URL§§#a%20b", "#a b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
-            "#% ^[]|\"<>{}\\" },
+                    "#% ^[]|\"<>{}\\" },
             IE = { "#a b", "§§URL§§#a b", "#a%20b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
-            "#%25%20%5E%5B%5D%7C%22%3C%3E%7B%7D%5C" })
+                    "#%25%20%5E%5B%5D%7C%22%3C%3E%7B%7D%5C" },
+            IE8 = { "#a b", "§§URL§§#a%20b", "#a b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
+                    "#% ^[]|\"<>{}\\" })
     public void hashEncoding() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "  function test() {\n"
@@ -189,8 +189,8 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "#üöä", "§§URL§§#%C3%BC%C3%B6%C3%A4" },
-            CHROME = { "#üöä", "§§URL§§#üöä" },
+    @Alerts(CHROME = { "#üöä", "§§URL§§#üöä" },
+            FF = { "#üöä", "§§URL§§#%C3%BC%C3%B6%C3%A4" },
             IE = { "#üöä", "§§URL§§#üöä" },
             IE8 = { "#üöä", "§§URL§§#%C3%BC%C3%B6%C3%A4" })
     public void hashEncoding3() throws Exception {

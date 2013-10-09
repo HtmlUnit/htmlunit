@@ -484,7 +484,7 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { },
             IE = { "style.css", "LINK" },
-            IE10 = { "Ã‚Â§Ã‚Â§URLÃ‚Â§Ã‚Â§style.css", "LINK" })
+            IE10 = { "§§URL§§style.css", "LINK" })
     public void createStyleSheet() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
@@ -513,7 +513,7 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { },
             IE = { "null", "" },
-            IE10 = { "Ã‚Â§Ã‚Â§URLÃ‚Â§Ã‚Â§null", "null" })
+            IE10 = { "§§URL§§null", "null" })
     public void createStyleSheet_emptyUrl() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
@@ -542,8 +542,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { },
             IE = { "dotseven.css", "zero.css", "minus1.css", "seven.css", "none.css" },
-            IE10 = { "Ã‚Â§Ã‚Â§URLÃ‚Â§Ã‚Â§dotseven.css", "Ã‚Â§Ã‚Â§URLÃ‚Â§Ã‚Â§zero.css", "Ã‚Â§Ã‚Â§URLÃ‚Â§Ã‚Â§minus1.css",
-                        "Ã‚Â§Ã‚Â§URLÃ‚Â§Ã‚Â§seven.css", "Ã‚Â§Ã‚Â§URLÃ‚Â§Ã‚Â§none.css" })
+            IE10 = { "§§URL§§dotseven.css", "§§URL§§zero.css", "§§URL§§minus1.css", "§§URL§§seven.css",
+                        "§§URL§§none.css" })
     public void createStyleSheet_insertAt() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"

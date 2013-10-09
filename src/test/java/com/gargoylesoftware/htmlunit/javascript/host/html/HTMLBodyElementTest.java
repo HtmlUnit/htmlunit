@@ -159,8 +159,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3_6 = {"", "http://www.foo.com/blah.gif", "§§URL§§blah.gif" },
-            DEFAULT = {"", "http://www.foo.com/blah.gif", "blah.gif" })
+    @Alerts(DEFAULT = {"", "http://www.foo.com/blah.gif", "blah.gif" },
+            FF3_6 = {"", "http://www.foo.com/blah.gif", "§§URL§§blah.gif" })
     @NotYetImplemented(FF17)
     public void background() throws Exception {
         final String html =

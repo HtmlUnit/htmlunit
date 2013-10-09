@@ -1041,25 +1041,20 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "§§URL§§", "§§URL§§" })
+    @Alerts(DEFAULT = { "§§URL§§", "§§URL§§" },
+            IE10 = { "undefined", "undefined" })
     public void baseURI() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  var text = '<hello><child></child></hello>';\n"
-            + "  if (window.ActiveXObject) {\n"
-            + "    var doc = new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "    doc.async = false;\n"
-            + "    doc.loadXML(text);\n"
-            + "  } else {\n"
-            + "    var parser = new DOMParser();\n"
-            + "    var doc = parser.parseFromString(text, 'text/xml');\n"
-            + "  }\n"
+            + "  var doc = " + XMLDocumentTest.callLoadXMLDocumentFromString("text") + ";\n"
             + "  var e = doc.documentElement.firstChild;\n"
             + "  alert(e.baseURI);\n"
             + "\n"
             + "  e = document.getElementById('myId');\n"
             + "  alert(e.baseURI);\n"
             + "}\n"
+            + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myId'>abcd</div>\n"
             + "</body></html>";
