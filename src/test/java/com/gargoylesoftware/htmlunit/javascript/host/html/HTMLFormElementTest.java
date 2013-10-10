@@ -985,6 +985,28 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     }
 
     /**
+     * Ensure that Multipart form text fields are correctly encoded.
+     * This was a regression introduced in 2.12-SNAPSHOT after upgrading to HttpClient to 4.3.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void submitMultipartTextFieldWithRightEncoding() throws Exception {
+        final String html = "<html><body onload='document.forms[0].submit()'>\n"
+            + "<form action='foo.html' enctype='multipart/form-data' method='post'>\n"
+            + "  <input name='myField' value='éèêäöü'>\n"
+            + "</form></body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        loadPage2(html);
+        final String body = getMockWebConnection().getLastWebRequest().getRequestBody();
+        final String expected = "Content-Disposition: form-data; name=\"myField\"\r\n"
+            + "\r\n"
+            + "éèêäöü";
+
+        assertTrue("Body: " + body, body.contains(expected));
+    }
+
+    /**
      * Failed as of HtmlUnit-2.7-SNAPSHOT 01.12.2009 as the '#' from the
      * link together with the fact that submission occurs to the same url
      * let HtmlUnit think that it as just navigation to an anchor.

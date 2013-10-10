@@ -294,8 +294,7 @@ public class HttpWebConnection implements WebConnection {
                         buildFilePart((KeyDataPair) pair, builder);
                     }
                     else {
-                        builder.addTextBody(pair.getName(), pair.getValue(),
-                                ContentType.create(webRequest.getCharset()));
+                        builder.addTextBody(pair.getName(), pair.getValue());
                     }
                 }
                 method.setEntity(builder.build());

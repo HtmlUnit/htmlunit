@@ -489,10 +489,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 webRequest.setAdditionalHeader(headerName, headerValue);
             }
 
-            if ("PUT".equals(request.getMethod()) && request.getContentLength() > 0) {
+            if (requestParameters.isEmpty() && request.getContentLength() > 0) {
                 final byte[] buffer = new byte[request.getContentLength()];
-                request.getInputStream().readLine(buffer, 0, buffer.length);
-                webRequest.setRequestBody(new String(buffer));
+                request.getInputStream().read(buffer, 0, buffer.length);
+                webRequest.setRequestBody(new String(buffer, webRequest.getCharset()));
             }
             else {
                 webRequest.setRequestParameters(requestParameters);
