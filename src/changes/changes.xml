@@ -70,7 +70,7 @@
                 JavaScript: Missing setter for element.outerHTML in FF17 fixed.
             </action>
             <action type="update" dev="asashour">
-                Upgrade Apache HttpClient to 4.3.
+                Upgrade Apache HttpClient to 4.3.1.
             </action>
             <action type="update" dev="asashour">
                 KeyDataPair: deprecate getContentType().
