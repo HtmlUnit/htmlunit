@@ -18,11 +18,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
-import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -43,26 +40,8 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
+
 public class JavascriptErrorListenerTest extends WebServerTestCase {
-    private static final Locale locale = Locale.getDefault();
-
-    /**
-     * Sets the locale to US to allow tests to express expectations concerning error messages.
-     */
-    @BeforeClass
-    public static void setupLocale() {
-        // Set the default locale to US because Rhino messages are localized
-        Locale.setDefault(Locale.US);
-    }
-
-    /**
-     * Restore the locale to the original value.
-     */
-    @AfterClass
-    public static void restoreLocale() {
-        Locale.setDefault(locale);
-    }
-
     /**
      * Test for running without a JavaScript error listener.
      *

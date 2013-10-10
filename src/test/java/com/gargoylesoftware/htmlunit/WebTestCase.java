@@ -32,6 +32,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Locale;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -40,7 +41,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -54,11 +57,15 @@ import org.junit.Test;
  * @author Michael Ottati
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public abstract class WebTestCase {
 
     /** Logging support. */
     private static final Log LOG = LogFactory.getLog(WebTestCase.class);
+
+    /** save the environment */
+    private static final Locale SAVE_LOCALE = Locale.getDefault();
 
     /** The listener port for the web server. */
     public static final int PORT = Integer.parseInt(System.getProperty("htmlunit.test.port", "12345"));
@@ -529,6 +536,23 @@ public abstract class WebTestCase {
      */
     protected static URL getDefaultUrl() {
         return URL_FIRST;
+    }
+
+    /**
+     * Prepare the environment.
+     * Rhino has localized error message... for instance for French
+     */
+    @BeforeClass
+    public static void beforeClass() {
+        Locale.setDefault(Locale.US);
+    }
+
+    /**
+     * Restore the environment.
+     */
+    @AfterClass
+    public static void afterClass() {
+        Locale.setDefault(SAVE_LOCALE);
     }
 
     /**

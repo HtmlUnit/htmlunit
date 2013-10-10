@@ -21,7 +21,6 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
-import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
@@ -84,14 +83,8 @@ public final class ScriptExceptionTest extends SimpleWebTestCase {
 
     private void testScriptStackTrace(final String baseFileName) throws Exception {
         try {
-            final Locale locale = Locale.getDefault();
-            // Set the default locale to US because Rhino messages are localized
-            Locale.setDefault(Locale.US);
-
             loadPage(getBrowserVersion(), getFileContent(baseFileName + ".html"), null,
                 new URL("http://www.gargoylesoftware.com/"));
-
-            Locale.setDefault(locale);
         }
         catch (final ScriptException e) {
             final StringWriter stringWriter = new StringWriter();
