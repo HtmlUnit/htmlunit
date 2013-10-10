@@ -1574,4 +1574,22 @@ public class HTMLParser2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Test incorrect parsing of LABEL within A tag. Fixed in NekoHTML 1.9.19.
+     * @see <a href="http://sf.net/p/htmlunit/bugs/1547/">Bug 1547</a>
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("1")
+    public void acceptLabelWithinAnchor() throws Exception {
+        final String html = "<html><body>\n"
+            + "<a href='foo'>\n"
+            + "<label>XL</label>\n"
+            + "</a>\n"
+            + "<script>alert(document.links.length)</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
