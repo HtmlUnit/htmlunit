@@ -489,4 +489,24 @@ public class HtmlImage extends HtmlElement {
         final ImageReader reader = getImageReader();
         ImageIO.write(reader.read(0), reader.getFormatName(), file);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void finalize() {
+        if (imageReader_ != null) {
+            try {
+                final ImageInputStream stream = (ImageInputStream) imageReader_.getInput();
+                if (stream != null) {
+                    stream.close();
+                }
+                imageReader_.setInput(null);
+                imageReader_.dispose();
+            }
+            catch (final IOException e) {
+                LOG.error(e.getMessage() , e);
+            }
+        }
+    }
 }
