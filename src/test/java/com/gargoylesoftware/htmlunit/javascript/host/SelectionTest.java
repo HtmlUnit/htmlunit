@@ -22,9 +22,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -142,15 +140,10 @@ public class SelectionTest extends WebDriverTestCase {
      */
     @Test
     @Browsers(FF)
-    @Alerts(FF3_6 = {
-            "1:[object Text]/1/[object Text]/2/false/undefined/1/yzfo/yzfo",
-            "2:[object Text]/1/[object Text]/2/true/undefined/0/",
-            "false", "true" },
-            FF = {
+    @Alerts(FF = {
             "1:[object Text]/1/[object Text]/2/false/undefined/1/yzfo/yzfo",
             "2:null/0/null/0/true/undefined/0/",
             "false", "true" })
-    @NotYetImplemented(Browser.FF3_6)
     public void aLittleBitOfEverything_removeRange() throws Exception {
         final String jsSnippet = ""
             + "    var range = document.createRange();\n"

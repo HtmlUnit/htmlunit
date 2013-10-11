@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -186,10 +184,8 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     * @throws Exception if an error occurs
     */
     @Test
-    @Alerts(FF3_6 = "1",
-            IE6 = "0",
-            IE8 = "0")
-    @NotYetImplemented({ IE6, IE8, FF3_6 })
+    @Alerts(IE8 = "0")
+    @NotYetImplemented(IE8)
     public void missingSingleQuote() throws Exception {
         final String html = "<html><body>"
             + "Go to <a href='http://blah.com>blah</a> now."
@@ -203,10 +199,8 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     * @throws Exception if an error occurs
     */
     @Test
-    @Alerts(FF3_6 = "1",
-            IE6 = "0",
-            IE8 = "0")
-    @NotYetImplemented({ IE6, IE8, FF3_6 })
+    @Alerts(IE8 = "0")
+    @NotYetImplemented(IE8)
     public void missingDoubleQuote() throws Exception {
         final String html = "<html><body>"
             + "Go to <a href=\"http://blah.com>blah</a> now."

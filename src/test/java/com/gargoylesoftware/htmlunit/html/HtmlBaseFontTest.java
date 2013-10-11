@@ -35,7 +35,6 @@ public class HtmlBaseFontTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLSpanElement]",
-            FF3_6 = "[object HTMLBaseFontElement]",
             IE = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"

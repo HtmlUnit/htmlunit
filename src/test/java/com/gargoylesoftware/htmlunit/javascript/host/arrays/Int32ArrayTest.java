@@ -36,8 +36,6 @@ public class Int32ArrayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "-121", "-42", "18", "0" , "-78", "-98", "67", "-1" },
-            FF3_6 = "exception",
-            IE6 = "exception",
             IE8 = "exception")
     public void bufferConstructor() throws Exception {
         final String html

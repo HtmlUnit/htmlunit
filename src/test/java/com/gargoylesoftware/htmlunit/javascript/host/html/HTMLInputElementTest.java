@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -711,8 +710,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"text text", "password password", "hidden hidden",
             "checkbox checkbox", "radio radio", "file file", "checkbox checkbox" },
-            FF10 = {"text TeXt", "password PassWord", "hidden Hidden",
-            "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox CHECKBOX" },
             FF17 = {"text TeXt", "password PassWord", "hidden Hidden",
             "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox CHECKBOX" },
             IE10 = {"text TeXt", "password PassWord", "hidden Hidden",
@@ -777,7 +774,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "left", "right", "bottom", "middle", "top", "wrong", "" },
             IE = { "left", "right", "bottom", "middle", "top", "", "" },
             IE10 = { "", "", "", "", "", "", "" })
-    @NotYetImplemented({ IE6, IE8 })
+    @NotYetImplemented(IE8)
     public void getAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -807,7 +804,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "bottom", "middle", "top" },
             IE = { "center", "error", "center", "error", "center", "left", "right", "bottom", "middle", "top" },
             IE10 = { "", "error", "", "error", "", "", "", "", "", "" })
-    @NotYetImplemented({ IE6, IE8 })
+    @NotYetImplemented(IE8)
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -881,7 +878,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "test", "4", "42", "2", "[object HTMLInputElement]", "25" },
-            IE6 = { "test", "4", "42", "2", "[object]", "8" },
             IE8 = { "test", "4", "42", "2", "[object]", "8" })
     public void getAttributeAndSetValue() throws Exception {
         final String html =
@@ -920,7 +916,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "4", "", "0" },
-            IE6 = { "null", "4", "null", "4" },
             IE8 = { "null", "4", "null", "4" })
     @NotYetImplemented(FF)
     public void getAttributeAndSetValueNull() throws Exception {

@@ -132,7 +132,6 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "#0000aa", "x" },
-            FF3_6 = {"", "#0000aa", "#000000" },
             IE = {"", "#0000aa", "#000000" },
             IE10 = {"", "#0000aa", "#0" })
     public void aLink() throws Exception {
@@ -159,8 +158,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "http://www.foo.com/blah.gif", "blah.gif" },
-            FF3_6 = {"", "http://www.foo.com/blah.gif", "§§URL§§blah.gif" })
+    @Alerts({"", "http://www.foo.com/blah.gif", "blah.gif" })
     @NotYetImplemented(FF17)
     public void background() throws Exception {
         final String html =
@@ -187,7 +185,6 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "#0000aa", "x" },
-            FF3_6 = {"", "#0000aa", "#000000" },
             IE = {"", "#0000aa", "#000000" },
             IE10 = {"", "#0000aa", "#0" })
     public void bgColor() throws Exception {
@@ -215,7 +212,6 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "#0000aa", "x" },
-            FF3_6 = {"", "#0000aa", "#000000" },
             IE = {"", "#0000aa", "#000000" },
             IE10 = {"", "#0000aa", "#0" })
     public void link() throws Exception {
@@ -243,7 +239,6 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "#0000aa", "x" },
-            FF3_6 = {"", "#0000aa", "#000000" },
             IE = {"", "#0000aa", "#000000" },
             IE10 = {"", "#0000aa", "#0" })
     public void text() throws Exception {
@@ -271,7 +266,6 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "#0000aa", "x" },
-            FF3_6 = {"", "#0000aa", "#000000" },
             IE = {"", "#0000aa", "#000000" },
             IE10 = {"", "#0000aa", "#0" })
     public void vLink() throws Exception {

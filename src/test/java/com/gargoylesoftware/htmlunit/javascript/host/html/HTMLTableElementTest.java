@@ -41,7 +41,6 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "caption1", "caption2", "null", "caption3", "exception", "caption3", "caption4" },
-            IE6 = { "caption1", "caption2", "null", "caption3", "exception", "caption3", "exception", "caption3" },
             IE8 = { "caption1", "caption2", "null", "caption3", "exception", "caption3", "exception", "caption3" })
     public void tableCaptions() throws Exception {
         final String html
@@ -77,7 +76,6 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "thead1", "thead2", "null", "thead3", "exception", "thead3", "thead4" },
-            IE6 = { "thead1", "thead2", "null", "thead3", "exception", "thead3", "exception", "thead3" },
             IE8 = { "thead1", "thead2", "null", "thead3", "exception", "thead3", "exception", "thead3" })
     public void tableHeaders() throws Exception {
         final String html
@@ -266,7 +264,6 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "tfoot1", "tfoot2", "null", "tfoot3", "exception", "tfoot3", "tfoot4" },
-            IE6 = { "tfoot1", "tfoot2", "null", "tfoot3", "exception", "tfoot3", "exception", "tfoot3" },
             IE8 = { "tfoot1", "tfoot2", "null", "tfoot3", "exception", "tfoot3", "exception", "tfoot3" })
     public void tableFooters() throws Exception {
         final String html
@@ -615,7 +612,6 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "#0000aa", "x" },
-            FF3_6 = { "", "#0000aa", "#000000" },
             IE = {"", "#0000aa", "#000000" },
             IE10 = {"", "#0000aa", "#0" })
     public void bgColor() throws Exception {

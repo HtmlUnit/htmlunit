@@ -38,7 +38,6 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "done",
-            IE6 = "exception",
             IE8 = "exception")
     public void test() throws Exception {
         final String html =
@@ -79,7 +78,6 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "drawCustomFocusRing", "drawSystemFocusRing", "getLineDash",
                         "scrollPathIntoView", "setLineDash", "33 methods" },
-            IE6 = "exception",
             IE8 = "exception")
     public void methods() throws Exception {
         final String[] methods = {"arc", "arcTo", "beginPath", "bezierCurveTo", "clearRect", "clip", "closePath",

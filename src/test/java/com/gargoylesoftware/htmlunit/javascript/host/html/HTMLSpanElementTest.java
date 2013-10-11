@@ -70,9 +70,7 @@ public class HTMLSpanElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = {"[object HTMLElement] undefined", "[object HTMLSpanElement] undefined" },
-            FF3_6 = {"[object HTMLSpanElement] undefined", "[object HTMLSpanElement] undefined" },
             IE = {"[object] ", "[object] undefined" },
-            IE6 = {"[object] undefined", "[object] undefined" },
             IE10 = {"[object HTMLPhraseElement] ", "[object HTMLSpanElement] undefined" })
     @NotYetImplemented(FF17)
     public void cite() throws Exception {

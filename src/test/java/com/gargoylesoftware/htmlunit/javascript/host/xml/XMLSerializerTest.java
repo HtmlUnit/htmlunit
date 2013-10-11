@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -46,8 +45,6 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<note>32<to>Tove</to>3210<from>Jani</from>321032<body>Do32not32forget32me32this32weekend!</body>"
                     + "32<outer>10323232<inner>Some32Value</inner></outer>32</note>",
-            IE6 = "<note>13109<to>Tove</to>13109<from>Jani</from>13109<body>Do32not32forget32me32this32weekend!</body>"
-                    + "13109<outer>131099<inner>Some32Value</inner></outer>1310</note>1310",
             IE8 = "<note>13109<to>Tove</to>13109<from>Jani</from>13109<body>Do32not32forget32me32this32weekend!</body>"
                     + "13109<outer>131099<inner>Some32Value</inner></outer>1310</note>1310")
     public void test() throws Exception {
@@ -73,7 +70,6 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<a><!--32abc32--></a>",
-            IE6 = "<a><!--32abc32--></a>1310",
             IE8 = "<a><!--32abc32--></a>1310")
     public void comment() throws Exception {
         final String expectedString = getExpectedAlerts()[0];
@@ -89,7 +85,6 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<a>&lt;&gt;&amp;</a>",
-            IE6 = "<a>&lt;&gt;&amp;</a>1310",
             IE8 = "<a>&lt;&gt;&amp;</a>1310")
     public void xmlEntities() throws Exception {
         final String expectedString = getExpectedAlerts()[0];
@@ -107,9 +102,6 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "<?xml32version=\"1.0\"32encoding=\"UTF-8\"?>1310<xsl:stylesheet32version=\"1.0\"32"
                     + "xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">103232<xsl:template32match=\"/\">103232<html>"
                     + "1032323232<body>1032323232</body>103232</html>103232</xsl:template>10</xsl:stylesheet>",
-            IE6 = "<?xml32version=\"1.0\"?>1310<xsl:stylesheet32version=\"1.0\"32"
-                    + "xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">13109<xsl:template32match=\"/\">131099<html>"
-                    + "1310999<body>1310999</body>131099</html>13109</xsl:template>1310</xsl:stylesheet>1310",
             IE8 = "<?xml32version=\"1.0\"?>1310<xsl:stylesheet32version=\"1.0\"32"
                     + "xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">13109<xsl:template32match=\"/\">131099<html>"
                     + "1310999<body>1310999</body>131099</html>13109</xsl:template>1310</xsl:stylesheet>1310",
@@ -142,8 +134,6 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<document32attrib=\"attribValue\"><outer32attrib=\"attribValue\">"
                     + "<inner32attrib=\"attribValue\"/><meta32attrib=\"attribValue\"/></outer></document>",
-            IE6 = "<document32attrib=\"attribValue\"><outer32attrib=\"attribValue\">"
-                    + "<inner32attrib=\"attribValue\"/><meta32attrib=\"attribValue\"/></outer></document>1310",
             IE8 = "<document32attrib=\"attribValue\"><outer32attrib=\"attribValue\">"
                     + "<inner32attrib=\"attribValue\"/><meta32attrib=\"attribValue\"/></outer></document>1310",
             IE10 = "<document32attrib=\"attribValue\"><outer32attrib=\"attribValue\">"
@@ -172,12 +162,6 @@ public class XMLSerializerTest extends WebDriverTestCase {
                     + "<span32class=\"spanClass\">foo</span>"
                     + "</body>"
                     + "</html>",
-            IE6 = "<?xml32version=\"1.0\"?>1310<html32xmlns=\"http://www.w3.org/1999/xhtml\">"
-                    + "<head><title>html</title></head>"
-                    + "<body32id=\"bodyId\">"
-                    + "<span32class=\"spanClass\">foo</span>"
-                    + "</body>"
-                    + "</html>1310",
             IE8 = "<?xml32version=\"1.0\"?>1310<html32xmlns=\"http://www.w3.org/1999/xhtml\">"
                     + "<head><title>html</title></head>"
                     + "<body32id=\"bodyId\">"
@@ -190,7 +174,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
                     + "<span32class=\"spanClass\">foo</span>"
                     + "</body>"
                     + "</html>")
-    @NotYetImplemented({ FF, IE6, IE8 })
+    @NotYetImplemented({ FF, IE8 })
     public void htmlAttributes() throws Exception {
         final String expectedString = getExpectedAlerts()[0];
         setExpectedAlerts();
@@ -244,7 +228,6 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "<foo/>", "<foo/>" },
-            IE6 = "createDocument not available",
             IE8 = "createDocument not available",
             IE10 = { "<foo />", "<foo />" })
     public void document() throws Exception {
@@ -266,7 +249,6 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "<img/>", "<img xmlns=\"http://www.w3.org/1999/xhtml\" />", "<?myTarget myData?>" },
-            IE6 = "XMLSerializer not defined",
             IE8 = "XMLSerializer not defined",
             IE10 = { "<img />", "", "<?myTarget myData?>" })
     public void xml() throws Exception {
@@ -327,7 +309,6 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>",
-            IE6 = "XMLSerializer not defined",
             IE8 = "XMLSerializer not defined",
             IE10 = "<textarea xmlns=\"http://www.w3.org/1999/xhtml\" />")
     public void mixedCase() throws Exception {
@@ -355,7 +336,6 @@ public class XMLSerializerTest extends WebDriverTestCase {
                     "<input xmlns=\"http://www.w3.org/1999/xhtml\" type=\"text\" />",
                     "<link xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<meta xmlns=\"http://www.w3.org/1999/xhtml\" />" },
-            IE6 = "XMLSerializer not defined",
             IE8 = "XMLSerializer not defined")
     public void noClosingTag() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -403,7 +383,6 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<input xmlns=\"http://www.w3.org/1999/xhtml\" />",
-            IE6 = "XMLSerializer not defined",
             IE8 = "XMLSerializer not defined")
     @NotYetImplemented(FF)
     public void inputTagWithoutType() throws Exception {
@@ -430,7 +409,6 @@ public class XMLSerializerTest extends WebDriverTestCase {
                     "<p xmlns=\"http://www.w3.org/1999/xhtml\"></p>",
                     "<li xmlns=\"http://www.w3.org/1999/xhtml\"></li>",
                     "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>" },
-            IE6 = "XMLSerializer not defined",
             IE8 = "XMLSerializer not defined",
             IE10 = { "<div xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<h1 xmlns=\"http://www.w3.org/1999/xhtml\" />",
@@ -463,7 +441,6 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<img xmlns=\"http://www.w3.org/1999/xhtml\" href=\"mypage.htm\" />",
-            IE6 = "XMLSerializer not defined",
             IE8 = "XMLSerializer not defined")
     public void noClosingTagWithAttribute() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

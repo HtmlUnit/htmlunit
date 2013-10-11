@@ -14,12 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -42,12 +43,10 @@ public class DocumentFragmentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "[object CSSStyleDeclaration]",
-            FF3_6 = "[object ComputedCSSStyleDeclaration]",
-            FF10 = "[object CSSStyleDeclaration]",
             FF17 = "[object CSS2Properties]",
             IE = "exception",
             IE10 = "[object CSSStyleDeclaration]")
-    @NotYetImplemented({ Browser.FF10, Browser.FF17 })
+    @NotYetImplemented(FF17)
     public void getComputedStyleOnChild() throws Exception {
         final String html = "<html><head><style>\n"
             + "  body > div { background-color: green#FF0000; }\n"

@@ -41,7 +41,6 @@ public class SvgClipPathTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object SVGClipPathElement]",
-            IE6 = "[object HTMLGenericElement]",
             IE8 = "[object HTMLGenericElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

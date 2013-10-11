@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -72,7 +71,7 @@ public class HTMLDivElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "left", "right", "justify", "center", "wrong", "" },
             IE = { "left", "right", "justify", "center", "", "" })
-    @NotYetImplemented({ IE6, IE8 })
+    @NotYetImplemented(IE8)
     public void getAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -136,7 +135,6 @@ public class HTMLDivElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "true", "null", "true" },
-            IE6 = { "undefined", "false", "undefined", "false" },
             IE8 = { "undefined", "false", "undefined", "false" })
     public void handlers() throws Exception {
         final String html

@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 
@@ -111,7 +110,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object XMLHttpRequest]",
-            IE6 = "activeX created",
             IE8 = "[object]")
     public void creation() throws Exception {
         final String html =
@@ -418,8 +416,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "false" },
-            IE = { "true", "exception" },
-            IE6 = "exception")
+            IE = { "true", "exception" })
     public void overrideMimeType() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -454,8 +451,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "ibcdefg", "xxxxxfg" },
-            FF3_6 = { })
+    @Alerts({ "ibcdefg", "xxxxxfg" })
     // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void replaceOnTextData() throws Exception {
         final String html =
@@ -556,7 +552,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ IE6, IE8 })
+    @Browsers(IE8)
     @Alerts("2")
     public void responseXML_selectNodesIE() throws Exception {
         final String html =
@@ -644,8 +640,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                 "[object HTMLSpanElement]", "[object Document]", "undefined" },
             FF = { "[object Element]", "[object Element]", "[object HTMLBodyElement]",
                 "[object HTMLSpanElement]", "[object XMLDocument]", "undefined" },
-            IE6 = { "[object]", "[object]", "[object]",
-                "<body xmlns=\"http://www.w3.org/1999/xhtml\"><span id=\"out\">Hello Bob Dole!</span></body>" },
             IE8 = { "[object]", "[object]", "[object]",
                 "<body xmlns=\"http://www.w3.org/1999/xhtml\"><span id=\"out\">Hello Bob Dole!</span></body>" })
     // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
@@ -898,8 +892,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE6 = "exception")
+    @Alerts("undefined")
     public void caseSensitivity_XMLHttpRequest() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"

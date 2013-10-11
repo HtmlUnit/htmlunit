@@ -64,8 +64,7 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF3_6 = "false") // in fact not used as JS alerts...
+    @Alerts("true") // in fact not used as JS alerts...
     public void htmlFor_click() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -123,7 +122,6 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLFormElement]",
-            IE6 = "[object]",
             IE8 = "[object]")
     public void form() throws Exception {
         final String html

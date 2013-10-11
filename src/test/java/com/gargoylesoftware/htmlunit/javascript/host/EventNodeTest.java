@@ -93,10 +93,7 @@ public class EventNodeTest extends WebDriverTestCase {
             + "mouseup textarea,click textarea,",
             CHROME = "mousedown span,mouseup span,click span,mousedown text,focus text,mouseup text,"
                 + "click text,mousedown image,mouseup image,click image,mousedown textarea,focus textarea,"
-                + "mouseup textarea,click textarea,focus textarea,",
-            FF10 = "mousedown span,mouseup span,click span,mousedown text,focus text,mouseup text,"
-                    + "click text,mousedown image,focus image,mouseup image,click image,mousedown textarea,"
-                    + "focus textarea,mouseup textarea,click textarea,")
+                + "mouseup textarea,click textarea,focus textarea,")
     public void clickEvents() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

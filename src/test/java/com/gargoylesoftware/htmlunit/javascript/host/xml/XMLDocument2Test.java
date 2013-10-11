@@ -72,8 +72,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "createNode not available",
-            IE6 = "<root><child Sci-Fi=\"\"/></root>")
+    @Alerts("createNode not available")
     public void createNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -95,8 +94,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "createNode not available",
-            IE6 = { "undefined", "test", "uri:test", "test:element" })
+    @Alerts("createNode not available")
     public void createNode_element() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

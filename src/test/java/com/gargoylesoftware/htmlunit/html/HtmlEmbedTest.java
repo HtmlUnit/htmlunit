@@ -41,7 +41,6 @@ public class HtmlEmbedTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLEmbedElement]",
-            IE6 = "[object]",
             IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
@@ -66,7 +65,6 @@ public class HtmlEmbedTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLEmbedElement]",
-            IE6 = "[object]",
             IE8 = "[object]")
     public void saveAs() throws Exception {
         final String html = "<html><head>\n"

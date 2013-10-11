@@ -82,7 +82,6 @@ public class NativeStringTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "contains: undefined", "toSource: undefined", "trim: function" },
             FF = { "contains: undefined", "toSource: function", "trim: function" },
-            IE6 = { "contains: undefined", "toSource: undefined", "trim: undefined" },
             IE8 = { "contains: undefined", "toSource: undefined", "trim: undefined" })
     public void methods_differences() throws Exception {
         final String[] methods = {"contains", "toSource", "trim" };

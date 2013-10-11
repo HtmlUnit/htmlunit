@@ -57,7 +57,6 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE6 = "false",
             IE8 = "false")
     public void testContentDocument() throws Exception {
         final String html

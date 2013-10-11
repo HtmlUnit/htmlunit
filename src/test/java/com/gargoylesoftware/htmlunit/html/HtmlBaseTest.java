@@ -38,7 +38,6 @@ public class HtmlBaseTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLBaseElement]",
-            IE6 = "[object]",
             IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"

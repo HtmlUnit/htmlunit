@@ -38,7 +38,6 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE6 = "[object]",
             IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
@@ -63,8 +62,7 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE6 = "[object HTMLGenericElement]",
-            IE8 = "[object HTMLGenericElement]")
+           IE8 = "[object HTMLGenericElement]")
     public void simpleScriptable_strict() throws Exception {
         final String header = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" "
                 + "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n";

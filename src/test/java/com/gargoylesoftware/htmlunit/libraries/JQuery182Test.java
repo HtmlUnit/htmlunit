@@ -16,9 +16,6 @@ package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE7;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE9;
 import static org.junit.Assert.fail;
@@ -1198,15 +1195,11 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF10 = "0, 2, 2",
-        FF17 = "0, 2, 2",
-        FF3_6 = "0, 2, 2",
-        IE6 = "9, 1, 10",
-        IE7 = "9, 1, 10",
+    @Alerts(FF17 = "0, 2, 2",
         IE8 = "9, 1, 10",
         IE9 = "0, 2, 2",
         IE10 = "0, 2, 2")
-    @NotYetImplemented({ IE6, IE7, IE8 })
+    @NotYetImplemented(IE8)
     public void support__body_background_is_not_lost_if_set_prior_to_loading_jQuery___9238_() throws Exception {
         runTest("support: body background is not lost if set prior to loading jQuery (#9238)");
     }
@@ -1226,11 +1219,8 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3_6 = "0, 30, 30",
-        IE6 = "6, 24, 30",
-        IE7 = "6, 24, 30",
-        IE8 = "6, 24, 30")
-    @NotYetImplemented({ IE6, IE7, IE8 })
+    @Alerts(IE8 = "6, 24, 30")
+    @NotYetImplemented(IE8)
     public void support__Verify_that_the_support_tests_resolve_as_expected_per_browser() throws Exception {
         runTest("support: Verify that the support tests resolve as expected per browser");
     }
@@ -1520,15 +1510,10 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF10 = "2, 3, 5",
-        FF17 = "0, 3, 3",
-        FF3_6 = "2, 3, 5",
-        IE6 = "0, 3, 3",
-        IE7 = "0, 3, 3",
+    @Alerts(FF17 = "0, 3, 3",
         IE8 = "0, 3, 3",
         IE9 = "0, 3, 3",
         IE10 = "0, 3, 3")
-    @NotYetImplemented(FF3_6)
     public void queue__delay___can_be_stopped() throws Exception {
         runTest("queue: delay() can be stopped");
     }
@@ -2269,7 +2254,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented({ IE6, IE8 })
+    @NotYetImplemented(IE8)
     public void event__submit_event_bubbles_on_copied_forms___11649_() throws Exception {
         runTest("event: submit event bubbles on copied forms (#11649)");
     }
@@ -3342,11 +3327,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF10 = "0, 2, 2",
-        FF17 = "0, 2, 2",
-        FF3_6 = "0, 2, 2",
-        IE6 = "0, 3, 3",
-        IE7 = "0, 3, 3",
+    @Alerts(FF17 = "0, 2, 2",
         IE8 = "0, 3, 3",
         IE9 = "0, 2, 2",
         IE10 = "0, 2, 2")
@@ -3940,9 +3921,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE6 = "0, 5, 5",
-        IE7 = "0, 5, 5",
-        IE8 = "0, 5, 5")
+    @Alerts(IE8 = "0, 5, 5")
     public void css__css_String__Object__for_MSIE() throws Exception {
         runTest("css: css(String, Object) for MSIE");
     }
@@ -3962,9 +3941,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE6 = "0, 2, 2",
-        IE7 = "0, 2, 2",
-        IE8 = "0, 2, 2")
+    @Alerts(IE8 = "0, 2, 2")
     public void css__Setting_opacity_to_1_properly_removes_filter__style___6652_() throws Exception {
         runTest("css: Setting opacity to 1 properly removes filter: style (#6652)");
     }
@@ -4004,15 +3981,11 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF10 = "0, 7, 7",
-        FF17 = "0, 7, 7",
-        FF3_6 = "3, 4, 7",
-        IE6 = "2, 1, 3",
-        IE7 = "2, 1, 3",
+    @Alerts(FF17 = "0, 7, 7",
         IE8 = "2, 1, 3",
         IE9 = "0, 7, 7",
         IE10 = "0, 7, 7")
-    @NotYetImplemented({ IE6, IE8, FF17 })
+    @NotYetImplemented({ IE8, FF17 })
     public void css__show___resolves_correct_default_display__8099() throws Exception {
         runTest("css: show() resolves correct default display #8099");
     }
@@ -4176,11 +4149,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF10 = "0, 1, 1",
-        FF17 = "0, 1, 1",
-        FF3_6 = "1, 0, 1",
-        IE6 = "0, 1, 1",
-        IE7 = "0, 1, 1",
+    @Alerts(FF17 = "0, 1, 1",
         IE8 = "0, 1, 1",
         IE9 = "0, 1, 1",
         IE10 = "0, 1, 1")
@@ -5036,7 +5005,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented({ IE6, IE8 })
+    @NotYetImplemented(IE8)
     public void ajax__jQuery_ajax___failing_cross_domain() throws Exception {
         runTest("ajax: jQuery ajax - failing cross-domain");
     }
@@ -5217,7 +5186,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented({ IE6, IE8 })
+    @NotYetImplemented(IE8)
     public void effects__animate_negative_height() throws Exception {
         runTest("effects: animate negative height");
     }
@@ -5259,7 +5228,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented({ IE6, IE8 })
+    @NotYetImplemented(IE8)
     public void effects__animate_block_as_inline_width_height() throws Exception {
         runTest("effects: animate block as inline width/height");
     }
@@ -5270,7 +5239,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented({ IE6, IE8 })
+    @NotYetImplemented(IE8)
     public void effects__animate_native_inline_width_height() throws Exception {
         runTest("effects: animate native inline width/height");
     }
@@ -5281,7 +5250,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented({ IE6, IE8 })
+    @NotYetImplemented(IE8)
     public void effects__animate_block_width_height() throws Exception {
         runTest("effects: animate block width/height");
     }
@@ -6076,7 +6045,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented({ IE6, IE8 })
+    @NotYetImplemented(IE8)
     public void effects__slideToggle___stop___slideToggle__() throws Exception {
         runTest("effects: slideToggle().stop().slideToggle()");
     }
@@ -6186,11 +6155,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF10 = "0, 1, 1",
-        FF17 = "0, 1, 1",
-        FF3_6 = "1, 0, 1",
-        IE6 = "0, 1, 1",
-        IE7 = "0, 1, 1",
+    @Alerts(FF17 = "0, 1, 1",
         IE8 = "0, 1, 1",
         IE9 = "0, 1, 1",
         IE10 = "0, 1, 1")
@@ -6314,11 +6279,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF10 = "0, 1, 1",
-        FF17 = "0, 1, 1",
-        FF3_6 = "0, 1, 1",
-        IE6 = "0, 2, 2",
-        IE7 = "0, 2, 2",
+    @Alerts(FF17 = "0, 1, 1",
         IE8 = "0, 2, 2",
         IE9 = "0, 1, 1",
         IE10 = "0, 1, 1")
@@ -6371,11 +6332,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF10 = "0, 2, 2",
-        FF17 = "0, 2, 2",
-        FF3_6 = "2, 0, 2",
-        IE6 = "0, 2, 2",
-        IE7 = "0, 2, 2",
+    @Alerts(FF17 = "0, 2, 2",
         IE8 = "0, 2, 2",
         IE9 = "0, 2, 2",
         IE10 = "0, 2, 2")
@@ -6537,7 +6494,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 9, 9")
-    @NotYetImplemented({ IE6, IE8 })
+    @NotYetImplemented(IE8)
     public void dimensions__height__() throws Exception {
         runTest("dimensions: height()");
     }
@@ -6548,7 +6505,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 9, 9")
-    @NotYetImplemented({ IE6, IE8 })
+    @NotYetImplemented(IE8)
     public void dimensions__height_Function_() throws Exception {
         runTest("dimensions: height(Function)");
     }

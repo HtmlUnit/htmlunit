@@ -37,7 +37,6 @@ public class SVGSVGElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object SVGRect]",
-            IE6 = "undefined",
             IE8 = "undefined")
     public void createSVGRect() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -64,9 +63,8 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            IE6 = "object",
             IE8 = "object")
-    @NotYetImplemented({ IE6, IE8 })
+    @NotYetImplemented(IE8)
     public void testToStringFunction() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -240,7 +238,6 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "3", "#text", "5" },
-            IE6 = { "1", "DIV", "2" },
             IE8 = { "1", "DIV", "2" })
     public void childNodes() throws Exception {
         final String html = "<html><head>\n"
@@ -283,7 +280,6 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object HTMLHeadingElement]", "undefined" },
-            IE6 = { "[object]", "undefined" },
             IE8 = { "[object]", "undefined" })
     public void getElementWithDollarSign() throws Exception {
         final String html

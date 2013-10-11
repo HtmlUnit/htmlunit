@@ -37,7 +37,6 @@ public class CommentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Comment]",
-            IE6 = "[object]",
             IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html
@@ -54,7 +53,6 @@ public class CommentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "after", "comment" },
-            IE6 = { "undefined", "undefined" },
             IE8 = { "undefined", "undefined" })
     public void textContent() throws Exception {
         final String html
@@ -104,7 +102,6 @@ public class CommentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            IE6 = "",
             IE8 = "")
     public void id() throws Exception {
         property("id");
@@ -115,7 +112,6 @@ public class CommentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            IE6 = "",
             IE8 = "")
     public void className() throws Exception {
         property("className");
@@ -126,7 +122,6 @@ public class CommentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            IE6 = "!",
             IE8 = "!")
     public void tagName() throws Exception {
         property("tagName");
@@ -147,7 +142,6 @@ public class CommentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            IE6 = "[object]",
             IE8 = "[object]")
     public void document() throws Exception {
         property("document");

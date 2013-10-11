@@ -36,8 +36,6 @@ public class Float64ArrayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "117", "107", "126", "84" , "52", "111", "-99", "65" },
-            FF3_6 = "exception",
-            IE6 = "exception",
             IE8 = "exception")
     public void bufferConstructor() throws Exception {
         final String html

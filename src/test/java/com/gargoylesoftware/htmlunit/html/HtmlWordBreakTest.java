@@ -42,8 +42,6 @@ public class HtmlWordBreakTest extends WebDriverTestCase {
     @Test
     @NotYetImplemented(FF17)
     @Alerts(DEFAULT = "[object HTMLElement]",
-            FF3_6 = "[object HTMLWBRElement]",
-            IE6 = "[object]",
             IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
