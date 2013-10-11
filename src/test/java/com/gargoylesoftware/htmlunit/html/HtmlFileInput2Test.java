@@ -352,6 +352,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "initial-initial", "initial-initial", "newDefault-newDefault", "newDefault-newDefault" },
+            IE6 = { "initial-initial", "initial-initial", "initial-newDefault", "initial-newDefault" },
             IE8 = { "initial-initial", "initial-initial", "initial-newDefault", "initial-newDefault" })
     public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
@@ -385,6 +386,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "initial-initial", "initial-initial", "newDefault-newDefault", "newDefault-newDefault" },
+            IE6 = { "initial-initial", "initial-initial", "initial-newDefault", "initial-newDefault" },
             IE8 = { "initial-initial", "initial-initial", "initial-newDefault", "initial-newDefault" })
     public void resetByJS() throws Exception {
         final String html = "<html><head><title>foo</title>\n"

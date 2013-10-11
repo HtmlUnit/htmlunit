@@ -46,6 +46,8 @@ public class Document2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            FF3_6 = "false",
+            IE6 = "false",
             IE8 = "false")
     public void createElementWithAngleBrackets() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -66,6 +68,8 @@ public class Document2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            FF3_6 = { "DIV", "exception" },
+            IE6 = { "DIV", "false", "mySelect", "0", "OPTION", "myOption", "0" },
             IE8 = { "DIV", "false", "mySelect", "0", "OPTION", "myOption", "0" })
     public void createElementWithHtml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -96,6 +100,7 @@ public class Document2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            IE6 = "true",
             IE8 = "true")
     public void createElementPrototype() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

@@ -38,6 +38,7 @@ public class HtmlCanvasTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLCanvasElement]",
+            IE6 = "[object]",
             IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"

@@ -39,6 +39,7 @@ public class HtmlDivision2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLDivElement]",
+            IE6 = "[object]",
             IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"

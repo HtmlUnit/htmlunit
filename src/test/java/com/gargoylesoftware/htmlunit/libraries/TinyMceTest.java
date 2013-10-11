@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static org.junit.Assert.assertNotNull;
 
@@ -55,7 +56,7 @@ public class TinyMceTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "348", "0" },
             IE10 = { "348", "82" })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE6, IE8 })
     // TODO [IE10]XML tinymce 3.2.7 is not compatible with IE10
     public void api() throws Exception {
         test("api", Integer.parseInt(getExpectedAlerts()[0]), Integer.parseInt(getExpectedAlerts()[1]));

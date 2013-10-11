@@ -34,7 +34,7 @@ public class DOMStringMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "undefined", "there" })
+    @Alerts(FF = { "undefined", "there" }, FF3_6 = { })
     public void get() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -54,7 +54,7 @@ public class DOMStringMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "old", "old", "null", "null" })
+    @Alerts(FF = { "old", "old", "null", "null" }, FF3_6 = { })
     public void put() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"

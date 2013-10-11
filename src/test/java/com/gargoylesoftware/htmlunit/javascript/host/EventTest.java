@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 
@@ -203,6 +204,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = "",
+            FF3_6 = "error",
             IE = "true")
     public void testAddEventListener_HandlerNull() throws Exception {
         final String content
@@ -228,6 +230,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "123a4a", "1a2a3ab4ab1ab2ab3abc4abc" },
+            IE6 = { "124a", "1a2a4ab1ab2ab4abc" },
             IE8 = { "124a", "1a2a4ab1ab2ab4abc" })
     public void testTyping_input() throws Exception {
         testTyping("<input type='text'", "");
@@ -240,6 +243,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "123a4a", "1a2a3ab4ab1ab2ab3abc4abc" },
+            IE6 = { "124a", "1a2a4ab1ab2ab4abc" },
             IE8 = { "124a", "1a2a4ab1ab2ab4abc" })
     public void testTyping_textara() throws Exception {
         testTyping("<textarea", "</textarea>");
@@ -345,7 +349,9 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @NotYetImplemented(FF3_6)
+    @Alerts(DEFAULT = "null",
+            FF3_6 = "undefined")
     public void testNullEventHandler() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -365,6 +371,7 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @NotYetImplemented(FF)
     @Alerts(DEFAULT = { "object", "false" },
+            IE6 = { "object", "undefined" },
             IE8 = { "object", "undefined" })
     public void testBubbles() throws Exception {
         final String html =
@@ -402,6 +409,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "object", "number" },
+            IE6 = { "object", "undefined" },
             IE8 = { "object", "undefined" })
     public void testTimeStamp() throws Exception {
         final String html =
@@ -553,6 +561,9 @@ public class EventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "form1 -> custom", "form2 -> [object HTMLFormElement]",
             "form1: [object HTMLFormElement]", "form2: [object HTMLFormElement]",
             "form1 -> custom", "form2 -> [object HTMLFormElement]" },
+            IE6 = { "form1 -> custom", "form2 -> [object]",
+            "form1: [object]", "form2: [object]",
+            "form1 -> custom", "form2 -> [object]" },
             IE8 = { "form1 -> custom", "form2 -> [object]",
             "form1: [object]", "form2: [object]",
             "form1 -> custom", "form2 -> [object]" })
@@ -626,6 +637,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "focus INPUT", "focus INPUT" },
+            IE6 = { },
             IE8 = { })
     @BuggyWebDriver(FF) // FirefoxDriver wrongly triggers "focus #document" when clicking the first element rather than
     // when loading the page
@@ -692,6 +704,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "2from window", "1from document" },
+            IE6 = { "1from document", "3from window" },
             IE8 = { "1from document", "3from window" })
     public void eventHandlersParentScope() throws Exception {
         final String html = "<html><body>\n"

@@ -336,6 +336,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "isSameNode not supported" },
+            FF3_6 = { "true", "false" },
             IE = { "isSameNode not supported" },
             IE10 = { "true", "false" })
     public void testIsSameNode() throws Exception {
@@ -365,6 +366,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
+            IE6 = { "null", "#document-fragment" },
             IE8 = { "null", "#document-fragment" })
     public void testAppendChild_parentNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -390,6 +392,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "exception", "1", "exception", "1", "exception", "1" },
+            IE6 = { "1", "1", "1", "exception", "1" },
             IE8 = { "1", "1", "1", "exception", "1" })
     public void append_insert_html_node() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -417,6 +420,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "null" },
+            IE6 = { "null", "#document-fragment" },
             IE8 = { "null", "#document-fragment" })
     public void testInsertBefore_parentNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -503,6 +507,7 @@ public class NodeTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
             "<div>one</div><div>two</div><div id=\"myDiv3\"></div>" },
+            IE6 = { "exception thrown" },
             IE8 = { "exception thrown" })
     public void testReplaceChild() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -533,6 +538,7 @@ public class NodeTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "<div id=\"myDiv2\"></div><div id=\"myDiv3\"></div>", "myDiv2",
             "<div id=\"myDiv3\"></div>" },
+            IE6 = { "exception thrown" },
             IE8 = { "exception thrown" })
     public void testReplaceChild_EmptyDocumentFragment() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -563,6 +569,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "in click",
+            IE6 = { "in click", "in click", "in click" },
             IE8 = { "in click", "in click", "in click" })
     public void testCloneNode_copiesListenerOnlyForIE() throws Exception {
         final String html =
@@ -602,6 +609,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "1", "2", "4", "8", "16", "32" },
+            IE6 = { "undefined", "not supported" },
             IE8 = { "undefined", "not supported" })
     public void testDocumentPositionConstants() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -669,6 +677,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0", "16" },
+            IE6 = "exception",
             IE8 = "exception")
     public void compareDocumentPosition2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -691,6 +700,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLTableColElement]",
+            IE6 = "[object]",
             IE8 = "[object]")
     public void insertBefore() throws Exception {
         final String html
@@ -849,7 +859,8 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"undefined", "[object HTMLHtmlElement]" }, FF = {"[object Element]", "[object HTMLHtmlElement]" })
+    @Alerts(FF3_6 = {"undefined", "undefined" },
+            IE = {"undefined", "[object HTMLHtmlElement]" }, FF = {"[object Element]", "[object HTMLHtmlElement]" })
     public void parentElement() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -908,6 +919,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "true" },
+            IE6 = { "false", "false" },
             IE8 = { "false", "false" })
     public void addEventListener() throws Exception {
         final String html =

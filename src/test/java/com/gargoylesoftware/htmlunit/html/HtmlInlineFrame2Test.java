@@ -48,6 +48,7 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLIFrameElement]",
+            IE6 = "[object]",
             IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
@@ -74,6 +75,7 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "[object HTMLIFrameElement]", "null" },
+            IE6 = { "2", "[object]", "[object]" },
             IE8 = { "2", "[object]", "[object]" })
     public void selfClosingIFrame() throws Exception {
         final String html = "<html><head>\n"

@@ -36,6 +36,8 @@ public class ArrayBufferTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "5",
+            FF3_6 = "exception",
+            IE6 = "exception",
             IE8 = "exception")
     public void byteLength() throws Exception {
         final String html
@@ -59,6 +61,7 @@ public class ArrayBufferTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1234", "1234", "6789", "1234" },
+            FF3_6 = "exception",
             IE = "exception")
     public void slice() throws Exception {
         final String html

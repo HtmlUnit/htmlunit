@@ -464,6 +464,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "foo,change,",
+            IE6 = { },
             IE8 = { })
     public void onchangeFires() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
@@ -524,6 +525,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Second",
+            IE6 = "First",
             IE8 = "First")
     public void setChecked() throws Exception {
         final String firstHtml
@@ -547,6 +549,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Second",
+            IE6 = { "First", "Second" },
             IE8 = { "First", "Second" })
     public void setChecked2() throws Exception {
         final String firstHtml
@@ -805,6 +808,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "changed",
+            IE6 = { },
             IE8 = { })
     public void clickShouldTriggerOnchange() throws Exception {
         final String html = "<html><head><title>foo</title>\n"

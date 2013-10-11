@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE7;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
@@ -117,6 +119,10 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
                     + "textIndent-error: textIndent-error: textIndent-error: verticalAlign-error: verticalAlign-error: "
                     + "verticalAlign-",
             IE = "success",
+            IE6 = "error: maxHeight-error: maxHeight-error: maxHeight-error: maxHeight-error: maxWidth-error: "
+                    + "maxWidth-error: maxWidth-error: maxWidth-error: minWidth-error: minWidth-error: minWidth-error: "
+                    + "minWidth-error: outlineWidth-error: outlineWidth-error: outlineWidth-error: outlineWidth-",
+            IE7 = "error: outlineWidth-error: outlineWidth-error: outlineWidth-error: outlineWidth-",
             IE10 = "error: borderBottomWidth-error: borderLeftWidth-error: borderRightWidth-error: "
                     + "borderTopWidth-error: bottom-error: fontSize-error: height-error: left-error: "
                     + "letterSpacing-error: marginBottom-error: marginLeft-error: marginRight-error: "
@@ -124,7 +130,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
                     + "outlineWidth-error: paddingBottom-error: paddingLeft-error: "
                     + "paddingRight-error: paddingTop-error: right-error: textIndent-error: top-error: "
                     + "verticalAlign-error: width-error: wordSpacing-")
-    @NotYetImplemented(FF17)
+    @NotYetImplemented({ IE6, FF17 })
     public void width_like_properties() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -161,9 +167,11 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
     }
 
     /**
+     * Expected values are missing for IE7.
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented({ IE7 })
     public void properties() throws Exception {
         final String expected = loadExpectation("CSSStyleDeclaration2Test.properties", ".txt");
 
@@ -194,9 +202,11 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
 
     /**
      * Test types of properties.
+     * Expected values are missing for IE7.
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented({ IE7 })
     public void properties2() throws Exception {
         final String expected = loadExpectation("CSSStyleDeclaration2Test.properties2", ".txt");
 

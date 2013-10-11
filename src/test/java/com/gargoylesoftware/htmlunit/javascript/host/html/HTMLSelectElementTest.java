@@ -403,7 +403,8 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "4", "Four", "value4", "Three b", "value3b" })
+    @Alerts(DEFAULT = { "4", "Four", "value4", "Three b", "value3b" },
+            FF3_6 = "exception")
     public void addOptionWithAddMethod_IE() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -438,6 +439,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0", "test", "testValue" },
+            IE6 = { "0", "exception" },
             IE8 = { "0", "exception" })
     public void addOptionTooEmptySelectWithAddMethod_IE() throws Exception {
         final String html
@@ -467,7 +469,8 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "0", "1" })
+    @Alerts(DEFAULT = { "0", "1" },
+            FF3_6 = { "0", "exception" })
     public void addWith1Arg() throws Exception {
         final String html
             = "<html><head>\n"
@@ -553,7 +556,8 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2", "Three", "value3" })
+    @Alerts(DEFAULT = { "2", "Three", "value3" },
+            FF3_6 = "exception")
     public void optionsRemoveMethod() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -670,6 +674,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "Two", "", "Two", "", "" },
+            IE6 = { "", "", "", "", "" },
             IE8 = { "", "", "", "", "" })
     public void getValue() throws Exception {
         final String html
@@ -1092,6 +1097,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "first", "null", "null" },
+            IE6 = { "first", "null", "exception" },
             IE8 = { "first", "null", "exception" })
     public void item() throws Exception {
         final String html =

@@ -70,8 +70,20 @@ public class BrowserRunner extends Suite {
 
         if (BrowserVersionClassRunner.containsTestMethods(klass)) {
             final List<String> browsers = WebDriverTestCase.getBrowsersProperties();
+            if (browsers.contains("hu") || browsers.contains("hu-ff3.6")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3_6, false));
+            }
+            if (/* browsers.contains("hu") ||*/ browsers.contains("hu-ff10")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_10, false));
+            }
             if (browsers.contains("hu") || browsers.contains("hu-ff17")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_17, false));
+            }
+            if (/*browsers.contains("hu") ||*/ browsers.contains("hu-ie6")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_6, false));
+            }
+            if (/*browsers.contains("hu") ||*/ browsers.contains("hu-ie7")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_7, false));
             }
             if (browsers.contains("hu") || browsers.contains("hu-ie8")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, false));
@@ -87,8 +99,20 @@ public class BrowserRunner extends Suite {
             }
 
             if (WebDriverTestCase.class.isAssignableFrom(klass)) {
+                if (browsers.contains("ff3.6")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3_6, true));
+                }
+                if (browsers.contains("ff10")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_10, true));
+                }
                 if (browsers.contains("ff17")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_17, true));
+                }
+                if (browsers.contains("ie6")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_6, true));
+                }
+                if (browsers.contains("ie7")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_7, true));
                 }
                 if (browsers.contains("ie8")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, true));
@@ -157,6 +181,12 @@ public class BrowserRunner extends Suite {
         /** All versions of Internet Explorer. */
         IE,
 
+        /** Internet Explorer 6. */
+        IE6,
+
+        /** Internet Explorer 7. */
+        IE7,
+
         /** Internet Explorer 8. */
         IE8,
 
@@ -168,6 +198,12 @@ public class BrowserRunner extends Suite {
 
         /** All versions of Firefox. */
         FF,
+
+        /** Firefox 3.6. */
+        FF3_6,
+
+        /** Firefox 10. */
+        FF10,
 
         /** Firefox 17. */
         FF17,
@@ -215,6 +251,12 @@ public class BrowserRunner extends Suite {
         /** Alerts for any Internet Explorer, it can be overridden by specific IE version. */
         String[] IE() default { EMPTY_DEFAULT };
 
+        /** Alerts for Internet Explorer 6. If not defined, {@link #IE()} is used. */
+        String[] IE6() default { EMPTY_DEFAULT };
+
+        /** Alerts for Internet Explorer 7. If not defined, {@link #IE()} is used. */
+        String[] IE7() default { EMPTY_DEFAULT };
+
         /** Alerts for Internet Explorer 8. If not defined, {@link #IE()} is used. */
         String[] IE8() default { EMPTY_DEFAULT };
 
@@ -226,6 +268,12 @@ public class BrowserRunner extends Suite {
 
         /** Alerts for any Firefox, it can be overridden by specific FF version. */
         String[] FF() default { EMPTY_DEFAULT };
+
+        /** Alerts for Firefox 3.6. If not defined, {@link #FF()} is used. */
+        String[] FF3_6() default { EMPTY_DEFAULT };
+
+        /** Alerts for Firefox 10. If not defined, {@link #FF()} is used. */
+        String[] FF10() default { EMPTY_DEFAULT };
 
         /** Alerts for Firefox 17. If not defined, {@link #FF()} is used. */
         String[] FF17() default { EMPTY_DEFAULT };

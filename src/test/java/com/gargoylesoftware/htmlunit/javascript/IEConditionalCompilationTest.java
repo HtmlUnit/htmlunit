@@ -91,7 +91,9 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE8 = "5.8",
+    @Alerts(IE6 = "5.6",
+            IE7 = "5.7",
+            IE8 = "5.8",
             IE10 = "10")
     public void ifTest() throws Exception {
         final String script = "/*@cc_on@if(@_jscript_version>=5){alert(@_jscript_version)}@end@*/";
@@ -102,7 +104,9 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE8 = "5.8",
+    @Alerts(IE6 = "5.6",
+            IE7 = "5.7",
+            IE8 = "5.8",
             IE10 = "10")
     public void variables_jscript_version() throws Exception {
         final String script = "/*@cc_on alert(@_jscript_version) @*/";
@@ -113,7 +117,9 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE8 = "18702",
+    @Alerts(IE6 = "6626",
+            IE7 = "5730",
+            IE8 = "18702",
             IE10 = "16660")
     public void variables_jscript_build() throws Exception {
         final String script = "/*@cc_on alert(@_jscript_build) @*/";

@@ -52,6 +52,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "error",
+            IE6 = { },
             IE8 = { })
     public void noCorsHeaderCallsErrorHandler() throws Exception {
         final String html = "<html><head>\n"

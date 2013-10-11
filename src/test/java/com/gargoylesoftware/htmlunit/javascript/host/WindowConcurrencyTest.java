@@ -187,7 +187,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
             + "<script>var id = setInterval('document.getElementById(\"d\").innerHTML += \"x\"', 0);</script>\n"
             + "</body></html>";
 
-        WebClient client = new WebClient(BrowserVersion.FIREFOX_17);
+        WebClient client = new WebClient(BrowserVersion.FIREFOX_3_6);
         try {
             final HtmlPage page1 = loadPage(client, html, new ArrayList<String>());
             Thread.sleep(1000);
@@ -199,7 +199,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
             client.closeAllWindows();
         }
 
-        client = new WebClient(BrowserVersion.INTERNET_EXPLORER_8);
+        client = new WebClient(BrowserVersion.INTERNET_EXPLORER_7);
         try {
             final HtmlPage page2 = loadPage(client, html, new ArrayList<String>());
             client.waitForBackgroundJavaScript(1000);
@@ -524,7 +524,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
             + "setInterval(forceStyleComputationInParent, 10);\n"
             + "</script></head></body></html>";
 
-        client_ = new WebClient(BrowserVersion.FIREFOX_17);
+        client_ = new WebClient(BrowserVersion.FIREFOX_3_6);
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, html);
         webConnection.setDefaultResponse(html2);

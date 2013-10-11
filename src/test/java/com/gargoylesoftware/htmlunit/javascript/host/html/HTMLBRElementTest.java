@@ -96,6 +96,9 @@ public class HTMLBRElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<br id=\"myId\">",
+            FF3_6 = "undefined",
+            FF10 = "undefined",
+            IE6 = "<BR id=myId>",
             IE8 = "<BR id=myId>")
     public void outerHTML() throws Exception {
         final String html

@@ -37,7 +37,8 @@ public class SvgMatrixTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object SVGMatrix]",
-            IE = "undefined")
+            IE6 = "undefined",
+            IE8 = "undefined")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body>\n"
@@ -54,7 +55,8 @@ public class SvgMatrixTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1, 0, 0, 1, 0, 0", "2, 3, 4, 5, 6, 7" },
-            IE = "exception")
+            IE6 = "exception",
+            IE8 = "exception")
     public void fields() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body>\n"
@@ -92,7 +94,8 @@ public class SvgMatrixTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "function", "function", "function", "function", "function", "function", "function", "function",
             "function", "function", "function" },
-            IE = "exception")
+            IE6 = "exception",
+            IE8 = "exception")
     public void methods() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body>\n"

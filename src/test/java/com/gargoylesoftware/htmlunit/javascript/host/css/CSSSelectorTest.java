@@ -14,7 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,7 +46,9 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "0", "0" })
+    @Alerts(DEFAULT = { "0", "0" },
+            FF3_6 = "exception")
+    @NotYetImplemented({ FF3_6, IE6 })
     public void querySelectorAll_nullUndefined() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -700,6 +704,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { },
+            IE6 = { "li1" },
             IE8 = { "li1" })
     @NotYetImplemented(IE)
     public void pseudoAfter() throws Exception {
@@ -1030,7 +1035,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "1", "[object HTMLHtmlElement]", "1", "[object HTMLInputElement]", "id2" },
             FF = { "0", "undefined", "1", "[object HTMLInputElement]", "id2" },
             IE10 = { "1", "[object HTMLBodyElement]", "1", "[object HTMLInputElement]", "id2" })
-    @BuggyWebDriver(Browser.FF17)
+    @BuggyWebDriver({ Browser.FF10, Browser.FF17 })
     public void focus() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -1069,6 +1074,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "id1", },
+            IE6 = "exception",
             IE8 = "exception")
     public void enabled() throws Exception {
         final String html = "<html><head><title>First</title>\n"
@@ -1097,6 +1103,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "id2" },
+            IE6 = "exception",
             IE8 = "exception")
     public void disabled() throws Exception {
         final String html = "<html><head><title>First</title>\n"
@@ -1125,6 +1132,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "id2" },
+            IE6 = "exception",
             IE8 = "exception")
     public void target() throws Exception {
         final String html = "<html><head><title>First</title>\n"
@@ -1154,6 +1162,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0" },
+            IE6 = "exception",
             IE8 = "exception")
     public void targetNoHash() throws Exception {
         final String html = "<html><head><title>First</title>\n"
@@ -1182,6 +1191,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0" },
+            IE6 = "exception",
             IE8 = "exception")
     public void targetUnknown() throws Exception {
         final String html = "<html><head><title>First</title>\n"

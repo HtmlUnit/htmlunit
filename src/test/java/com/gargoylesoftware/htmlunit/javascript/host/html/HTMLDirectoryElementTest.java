@@ -37,6 +37,8 @@ public class HTMLDirectoryElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "false", "true", "true", "true", "null", "", "blah", "2",
                 "true", "false", "true", "false", "", "null", "", "null" },
+            IE6 = { "false", "true", "true", "true", "false", "true", "true", "true",
+                "true", "false", "true", "false", "true", "false", "true", "false" },
             IE8 = { "false", "true", "true", "true", "false", "true", "true", "true",
                 "true", "false", "true", "false", "true", "false", "true", "false" })
     public void compact() throws Exception {

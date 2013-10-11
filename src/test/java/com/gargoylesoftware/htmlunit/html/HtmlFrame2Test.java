@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.net.URL;
@@ -174,7 +175,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE6, IE8 })
     public void frameOnloadFrameInFrame() throws Exception {
         final String html = "<FRAMESET rows='50%,50%' onload=\"alert('first')\">\n"
             + "  <FRAME name='second' src='second.html'>\n"

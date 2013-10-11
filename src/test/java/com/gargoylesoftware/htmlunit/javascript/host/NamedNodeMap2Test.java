@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest;
 
@@ -36,7 +39,9 @@ public class NamedNodeMap2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "myAttr", "myAttr" })
+    @Alerts(DEFAULT = { "myAttr", "myAttr" },
+            FF3_6 = { "myAttr", "myattr" })
+    @NotYetImplemented(FF3_6)
     public void setNamedItem() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

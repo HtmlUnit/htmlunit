@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE9;
 
 import org.junit.Test;
@@ -47,6 +48,11 @@ public class DocumentTypeTest extends WebDriverTestCase {
             FF = { "[object DocumentType]", "true", "html,10,null,null,null,null",
             "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
             + "null,undefined,undefined" },
+            FF3_6 = { "[object DocumentType]", "true", "HTML,10,null,null,null,null",
+            "HTML,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,null,null,null" },
+            FF10 = { "[object DocumentType]", "true", "html,10,null,null,null,null",
+            "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
+            + "null,undefined,undefined" },
             IE = "null",
             IE9 = { "[object DocumentType]", "true", "html,10,null,null,null,null",
             "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
@@ -54,7 +60,7 @@ public class DocumentTypeTest extends WebDriverTestCase {
             IE10 = { "[object DocumentType]", "true", "html,10,null,null,null,null",
             "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
             + "null,null,null" })
-    @NotYetImplemented({ IE9, CHROME })
+    @NotYetImplemented({ FF3_6, IE9, CHROME })
     public void doctype() throws Exception {
         final String html = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n"
             + "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
@@ -93,6 +99,9 @@ public class DocumentTypeTest extends WebDriverTestCase {
         FF = {
             "[object DocumentType]", "greeting,10,null,null,null,null",
             "greeting,MyIdentifier,hello.dtd,null,undefined,undefined" },
+        FF3_6 = {
+            "[object DocumentType]", "greeting,10,null,null,null,null",
+            "greeting,MyIdentifier,hello.dtd,null,null,null" },
         IE = {
             "[object]", "greeting,10,null,,undefined,",
             "greeting,undefined,undefined,undefined,," },
@@ -141,6 +150,9 @@ public class DocumentTypeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF3_6 = { },
+            IE6 = "string",
+            IE7 = "string",
             IE8 = "string")
     @NotYetImplemented(IE9)
     public void html_previousSibling() throws Exception {
@@ -169,6 +181,8 @@ public class DocumentTypeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object DocumentType]",  "[object HTMLHtmlElement]" },
+            IE6 = { "[object HTMLCommentElement]", "[object HTMLHtmlElement]" },
+            IE7 = { "[object HTMLCommentElement]", "[object HTMLHtmlElement]" },
             IE8 = { "[object HTMLCommentElement]", "[object HTMLHtmlElement]" })
     @NotYetImplemented(IE9)
     public void document_children() throws Exception {

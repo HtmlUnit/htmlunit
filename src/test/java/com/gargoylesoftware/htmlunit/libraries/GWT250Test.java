@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE7;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
@@ -26,6 +28,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
@@ -55,6 +58,7 @@ public class GWT250Test extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @NotYetImplemented({ IE6, IE7 })
     public void hello() throws Exception {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadGWTPage("Hello", collectedAlerts, "//button");

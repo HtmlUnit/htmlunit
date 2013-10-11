@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -91,7 +92,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("")
+    @Alerts(DEFAULT = "",
+            IE6 = "1")
     public void srcWithJavaScriptProtocol_Static() throws Exception {
         final String html = "<html><head><script src='javascript:\"alert(1)\"'></script></head><body></body></html>";
         loadPageWithAlerts2(html);
@@ -102,7 +104,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("")
+    @Alerts(DEFAULT = "",
+            IE6 = "1")
     public void srcWithJavaScriptProtocol_Dynamic() throws Exception {
         final String html =
               "<html><head><title>foo</title><script>\n"
@@ -123,6 +126,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "start", "end" },
+            IE6 = { "start", "executed", "end" },
             IE8 = { "start", "executed", "end" })
     public void reexecuteModifiedScript() throws Exception {
         final String html =
@@ -144,6 +148,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "start", "end" },
+            IE6 = { "start", "exception", "end" },
             IE8 = { "start", "exception", "end" })
     public void createElementWithCreateTextNode() throws Exception {
         // IE (at least IE6 and IE8) does not support script.appendChild(source)
@@ -170,6 +175,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "start", "middle", "executed", "end" },
+            IE6 = { "start", "exception", "middle", "end" },
             IE8 = { "start", "exception", "middle", "end" })
     public void createElementWithCreateTextNodeAndAppend() throws Exception {
         // IE (at least IE6 and IE8) does not support script.appendChild(source)
@@ -289,6 +295,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "start", "end" },
+            IE6 = { "start", "exception", "end" },
             IE8 = { "start", "exception", "end" })
     public void replaceSelfWithCreateTextNode() throws Exception {
         // IE (at least IE6 and IE8) does not support script.appendChild(source)
@@ -314,6 +321,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "start", "end" },
+            IE6 = { "start", "executed", "end" },
             IE8 = { "start", "executed", "end" })
     public void replaceSelfWithSetText() throws Exception {
         // TODO this test is the same as #reexecuteModifiedScriptWhenReappending()
@@ -337,6 +345,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "start", "end" },
+            IE6 = { "start", "end", "executed" },
             IE8 = { "start", "end", "executed" })
     public void replaceSelfWithSetSrc() throws Exception {
         final String html =
@@ -362,6 +371,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "start", "executed", "end" },
+            IE6 = { "start", "exception", "end" },
             IE8 = { "start", "exception", "end" })
     public void replaceWithCreateTextNodeEmpty() throws Exception {
         // IE (at least IE6 and IE8) does not support script.appendChild(source)
@@ -388,6 +398,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "start", "end" },
+            IE6 = { "start", "exception", "end" },
             IE8 = { "start", "exception", "end" })
     public void replaceWithCreateTextNodeBlank() throws Exception {
         // IE (at least IE6 and IE8) does not support script.appendChild(source)
@@ -414,6 +425,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "script", "start", "end" },
+            IE6 = { "script", "start", "exception", "end" },
             IE8 = { "script", "start", "exception", "end" })
     public void replaceWithCreateTextNodeScript() throws Exception {
         // IE (at least IE6 and IE8) does not support script.appendChild(source)
@@ -463,6 +475,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "start", "end" },
+            IE6 = { "start", "executed", "end" },
             IE8 = { "start", "executed", "end" })
     public void replaceWithSetTextBlank() throws Exception {
         final String html =
@@ -485,6 +498,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "script", "start", "end" },
+            IE6 = { "script", "start", "executed", "end" },
             IE8 = { "script", "start", "executed", "end" })
     public void replaceWithSetTextScript() throws Exception {
         final String html =
@@ -533,6 +547,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "start", "end" },
+            IE6 = { "start", "end", "executed" },
             IE8 = { "start", "end", "executed" })
     public void replaceWithSetSrcBlank() throws Exception {
         final String html =
@@ -558,6 +573,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "script", "start", "end" },
+            IE6 = { "script", "start", "end", "executed" },
             IE8 = { "script", "start", "end", "executed" })
     public void replaceWithSetSrcScript() throws Exception {
         final String html =
@@ -663,7 +679,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Alerts(FF = { "3", "4", "2", "5" },
             IE = { "1", "2", "3", "4", "5", "6", "7" },
             IE10 = { "3", "4", "6", "2", "1", "5", "7" })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE6, IE8 })
     public void onReadyStateChange_Order() throws Exception {
         final String html =
               "<html>\n"
@@ -756,6 +772,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "onload",
+            IE6 = { "defer", "onload" },
             IE8 = { "defer", "onload" })
     public void onload_after_deferReadStateComplete() throws Exception {
         final String html =
@@ -852,6 +869,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "onload for window,",
+            IE6 = "onload for window,onclick for div1,",
             IE8 = "onload for window,onclick for div1,")
     public void scriptEventFor() throws Exception {
         final String html = "<html>\n"
@@ -888,6 +906,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "function foo() { return a > b}", "function mce() { return a &gt; b}" },
+            IE6 = { "\r\nfunction foo() { return a > b}", "function mce() { return a &gt; b}" },
             IE8 = { "\r\nfunction foo() { return a > b}", "function mce() { return a &gt; b}" })
     public void innerHtml() throws Exception {
         final String html

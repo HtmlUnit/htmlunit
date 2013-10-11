@@ -647,6 +647,52 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
+     * Returns the element in this element's page with the specified ID. If more than one element
+     * has the specified ID (not allowed by the HTML spec), this method returns the first one.
+     *
+     * @param id the ID value to search for
+     * @param <E> the sub-element type
+     * @return the element in this element's page with the specified ID
+     * @exception ElementNotFoundException if no element has the specified ID
+     * @deprecated as of 2.12, please use {@link HtmlPage#getHtmlElementById(String)}
+     */
+    @Deprecated
+    @SuppressWarnings("unchecked")
+    public <E extends HtmlElement> E getElementById(final String id) throws ElementNotFoundException {
+        return (E) ((HtmlPage) getPage()).getHtmlElementById(id);
+    }
+
+    /**
+     * <p>Returns <tt>true</tt> if there is an element in this element's page with the specified ID.
+     * This method is intended for situations where it is enough to know whether a specific
+     * element is present in the document.</p>
+     *
+     * <p>Implementation Note: This method calls {@link #getElementById(String)} internally,
+     * so writing code such as the following would be extremely inefficient:</p>
+     *
+     * <pre>
+     * if (hasHtmlElementWithId(id)) {
+     *     HtmlElement element = getHtmlElementWithId(id)
+     *     ...
+     * }
+     * </pre>
+     *
+     * @param id the id to search for
+     * @return <tt>true</tt> if there is an element in this element's page with the specified ID
+     * @deprecated as of 2.12, please use {@link HtmlPage#getElementById(String)}
+     */
+    @Deprecated
+    public boolean hasHtmlElementWithId(final String id) {
+        try {
+            getElementById(id);
+            return true;
+        }
+        catch (final ElementNotFoundException e) {
+            return false;
+        }
+    }
+
+    /**
      * Returns all elements which are descendants of this element and match the specified search criteria.
      *
      * @param elementName the name of the element to search for

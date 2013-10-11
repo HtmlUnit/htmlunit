@@ -63,6 +63,8 @@ public class NativeFunctionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "bind: function",
+            FF3_6 = "bind: undefined",
+            IE6 = "bind: undefined",
             IE8 = "bind: undefined")
     public void methods_bind() throws Exception {
         final String html = NativeDateTest.createHTMLTestMethods("function() {}", "bind");

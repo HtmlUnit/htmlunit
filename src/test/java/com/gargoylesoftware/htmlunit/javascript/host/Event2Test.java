@@ -95,6 +95,7 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "click [clickMe] [1]",
+            IE6 = "click [clickMe] [-]",
             IE8 = "click [clickMe] [-]")
     public void inputTextClick() throws Exception {
         final String firstSnippet = "       <input type='text' name='clickMe' id='clickMe' size='2'\n";
@@ -109,6 +110,7 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "click [clickMe] [1]",
+            IE6 = "click [clickMe] [-]",
             IE8 = "click [clickMe] [-]")
     public void inputPasswordClick() throws Exception {
         final String firstSnippet = "       <input type='password' name='clickMe' id='clickMe' size='2'\n";
@@ -123,6 +125,7 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "click [clickMe] [1]",
+            IE6 = "click [clickMe] [-]",
             IE8 = "click [clickMe] [-]")
     public void textareaClick() throws Exception {
         final String firstSnippet = "       <textarea name='clickMe' id='clickMe' size='2'\n";
@@ -151,6 +154,7 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "click [clickMe] [1]",
+            IE6 = "click [clickMe] [-]",
             IE8 = "click [clickMe] [-]")
     public void resetClick() throws Exception {
         final String firstSnippet = "       <input type='reset' name='clickMe' id='clickMe' size='2'\n";
@@ -165,6 +169,7 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "click [clickMe] [1]",
+            IE6 = "click [clickMe] [-]",
             IE8 = "click [clickMe] [-]")
     public void buttonClick() throws Exception {
         final String firstSnippet = "       <input type='button' name='clickMe' id='clickMe' size='2'\n";
@@ -179,6 +184,7 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "click [clickMe] [1]",
+            IE6 = "click [clickMe] [-]",
             IE8 = "click [clickMe] [-]")
     public void anchorClick() throws Exception {
         final String firstSnippet = "       <a href='#' name='clickMe' id='clickMe' size='2'\n";

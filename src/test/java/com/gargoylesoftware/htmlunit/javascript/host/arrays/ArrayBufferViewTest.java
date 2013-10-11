@@ -36,6 +36,8 @@ public class ArrayBufferViewTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "18", "93", "42" },
+            FF3_6 = "exception",
+            IE6 = "exception",
             IE8 = "exception")
     public void set_int8() throws Exception {
         final String html
@@ -62,6 +64,8 @@ public class ArrayBufferViewTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "3", "2", "3", "-1" },
+            FF3_6 = "exception",
+            IE6 = "exception",
             IE8 = "exception")
     public void subarray_int8() throws Exception {
         final String html

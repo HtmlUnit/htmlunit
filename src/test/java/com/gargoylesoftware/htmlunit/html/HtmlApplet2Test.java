@@ -40,6 +40,7 @@ public class HtmlApplet2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object HTMLAppletElement]", "[object HTMLAppletElement]" },
+            IE6 = { "[object]", "[object]" },
             IE8 = { "[object]", "[object]" })
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"

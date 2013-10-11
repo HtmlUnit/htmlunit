@@ -39,6 +39,7 @@ public class MouseEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "click", "true", "true", "true", "1", "2", "3", "4", "true", "true", "true", "true" },
+            IE6 = "exception",
             IE8 = "exception")
     public void initMouseEvent() throws Exception {
         final String html = "<html><body><script>\n"
@@ -143,6 +144,7 @@ public class MouseEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
+            IE6 = "1",
             IE8 = "1")
     public void button_onmousedown() throws Exception {
         final String html = "<html><body>\n"

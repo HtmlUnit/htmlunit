@@ -70,6 +70,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "created", "hello", "replaced" },
+            IE6 = "exception",
             IE8 = "exception")
     public void addedFromDocumentFragment() throws Exception {
         final String html = "<html><body>\n"
@@ -95,6 +96,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLScriptElement]",
+            IE6 = "[object]",
             IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
@@ -180,6 +182,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "deferred", "normal", "onload" },
+            IE6 = { "normal", "deferred", "onload" },
             IE8 = { "normal", "deferred", "onload" })
     public void testDefer() throws Exception {
         final String html = "<html><head>\n"

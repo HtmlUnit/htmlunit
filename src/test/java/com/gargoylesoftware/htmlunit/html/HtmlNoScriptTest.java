@@ -62,6 +62,7 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "[object Text]" },
+            IE6 = { "0", "null" },
             IE8 = { "0", "null" })
     public void testChildNodes() throws Exception {
         final String html

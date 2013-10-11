@@ -188,6 +188,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "5", "pass", "pass", "pass", "pass" },
+            FF3_6 = { "3", "exception", "exception", "pass", "pass" },
             IE = { "3", "exception", "exception", "pass", "pass" },
             IE10 = { "1", "exception", "exception", "pass", "pass" })
     public void openThrowOnEmptyUrl() throws Exception {
@@ -310,7 +311,9 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("ok")
+    @Alerts(DEFAULT = "ok",
+            IE6 = "exception",
+            IE7 = "exception")
     public void sameOriginPolicy() throws Exception {
         sameOriginPolicy(URL_THIRD.toString());
     }
@@ -372,6 +375,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object Document]",
             FF = "[object XMLDocument]",
+            IE6 = "[object]",
             IE8 = "[object]")
     public void iframeInResponse() throws Exception {
         final String html = "<html><head><script>\n"
@@ -490,6 +494,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "4",
+            FF3_6 = { },
+            IE6 = { "1", "2", "3", "4" },
             IE8 = { "1", "2", "3", "4" })
     public void testOnreadystatechange_sync() throws Exception {
         final String html =
@@ -530,6 +536,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Event]#[object XMLHttpRequest]",
+            FF3_6 = { },
+            IE6 = "no param",
             IE8 = "no param")
     public void testOnreadystatechangeSyncWithParam() throws Exception {
         final String html =
@@ -572,6 +580,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Event]#[object XMLHttpRequest]",
+            IE6 = "no param",
             IE8 = "no param")
     public void testOnreadystatechangeAsyncWithParam() throws Exception {
         final String html =
@@ -613,7 +622,9 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts({ "ok", "4" })
+    @Alerts(DEFAULT = { "ok", "4" },
+            IE6 = "exception",
+            IE7 = "exception")
     public void sameOriginCorsSimple() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

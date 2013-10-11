@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.util.Arrays;
@@ -25,9 +26,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -48,6 +49,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "true-true", "true-false", "true-false", "true-false", "true-false", "true-false" },
+            IE6 = { "true", "true-true", "true-true", "true-true", "true-true", "true-true", "true-true" },
             IE8 = { "true", "true-true", "true-true", "true-true", "true-true", "true-true", "true-true" })
     public void checked_appendChild_docFragment() throws Exception {
         performTest(true, true, false, true, false);
@@ -58,6 +60,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "false-true", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE6 = { "false", "false-true", "false-true", "false-true", "true-true", "true-true", "true-true" },
             IE8 = { "false", "false-true", "false-true", "false-true", "true-true", "true-true", "true-true" })
     public void notchecked_appendChild_docFragment() throws Exception {
         performTest(false, true, false, true, false);
@@ -68,6 +71,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "true-true", "true-false", "true-false", "true-false", "true-false", "true-false" },
+            IE6 = { "true", "true-true", "true-true", "true-true", "true-true", "true-true", "true-true" },
             IE8 = { "true", "true-true", "true-true", "true-true", "true-true", "true-true", "true-true" })
     public void checked_insertBefore_docFragment() throws Exception {
         performTest(true, false, false, true, false);
@@ -78,6 +82,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "false-true", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE6 = { "false", "false-true", "false-true", "false-true", "true-true", "true-true", "true-true" },
             IE8 = { "false", "false-true", "false-true", "false-true", "true-true", "true-true", "true-true" })
     public void notchecked_insertBefore_docFragment() throws Exception {
         performTest(false, false, false, true, false);
@@ -89,6 +94,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "true-true", "true-false", "true-false", "true-false", "true-false", "true-false" },
+            IE6 = { "true", "true-true", "true-true", "true-true", "true-true", "true-true", "true-true" },
             IE8 = { "true", "true-true", "true-true", "true-true", "true-true", "true-true", "true-true" })
     public void checked_appendChild_fromHtml_docFragment() throws Exception {
         performTest(true, true, true, true, false);
@@ -99,6 +105,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "false-true", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE6 = { "false", "false-true", "false-true", "false-true", "true-true", "true-true", "true-true" },
             IE8 = { "false", "false-true", "false-true", "false-true", "true-true", "true-true", "true-true" })
     public void notchecked_appendChild_fromHtml_docFragment() throws Exception {
         performTest(false, true, true, true, false);
@@ -109,6 +116,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "true-true", "true-false", "true-false", "true-false", "true-false", "true-false" },
+            IE6 = { "true", "true-true", "true-true", "true-true", "true-true", "true-true", "true-true" },
             IE8 = { "true", "true-true", "true-true", "true-true", "true-true", "true-true", "true-true" })
     public void checked_insertBefore_fromHtml_docFragment() throws Exception {
         performTest(true, false, true, true, false);
@@ -119,6 +127,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "false-true", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE6 = { "false", "false-true", "false-true", "false-true", "true-true", "true-true", "true-true" },
             IE8 = { "false", "false-true", "false-true", "false-true", "true-true", "true-true", "true-true" })
     public void notchecked_insertBefore_fromHtml_docFragment() throws Exception {
         performTest(false, false, true, true, false);
@@ -141,6 +150,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "false-true", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE6 = { "false", "false-true", "false-true", "false-true", "true-true", "true-true", "true-true" },
             IE8 = { "false", "false-true", "false-true", "false-true", "true-true", "true-true", "true-true" })
     public void notchecked_appendChild_docFragment_cloneNode() throws Exception {
         performTest(false, true, false, true, true);
@@ -162,6 +172,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "false-true", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE6 = { "false", "false-true", "false-true", "false-true", "true-true", "true-true", "true-true" },
             IE8 = { "false", "false-true", "false-true", "false-true", "true-true", "true-true", "true-true" })
     public void notchecked_insertBefore_docFragment_cloneNode() throws Exception {
         performTest(false, false, false, true, true);
@@ -173,6 +184,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "true-true", "true-false", "true-false", "true-false", "true-false", "true-false" },
+            IE6 = { "true", "true-true", "true-true", "true-true", "true-true", "true-true", "true-true" },
             IE8 = { "true", "true-true", "true-true", "true-true", "true-true", "true-true", "true-true" })
     public void checked_appendChild_fromHtml_docFragment_cloneNode() throws Exception {
         performTest(true, true, true, true, true);
@@ -183,6 +195,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "false-true", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE6 = { "false", "false-true", "false-true", "false-true", "true-true", "true-true", "true-true" },
             IE8 = { "false", "false-true", "false-true", "false-true", "true-true", "true-true", "true-true" })
     public void notchecked_appendChild_fromHtml_docFragment_cloneNode() throws Exception {
         performTest(false, true, true, true, true);
@@ -193,6 +206,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "true-true", "true-false", "true-false", "true-false", "true-false", "true-false" },
+            IE6 = { "true", "true-true", "true-true", "true-true", "true-true", "true-true", "true-true" },
             IE8 = { "true", "true-true", "true-true", "true-true", "true-true", "true-true", "true-true" })
     public void checked_insertBefore_fromHtml_docFragment_cloneNode() throws Exception {
         performTest(true, false, true, true, true);
@@ -203,6 +217,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "false-true", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE6 = { "false", "false-true", "false-true", "false-true", "true-true", "true-true", "true-true" },
             IE8 = { "false", "false-true", "false-true", "false-true", "true-true", "true-true", "true-true" })
     public void notchecked_insertBefore_fromHtml_docFragment_cloneNode() throws Exception {
         performTest(false, false, true, true, true);
@@ -222,6 +237,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE6 = { "false", "false-true", "false-true", "true-true", "true-true", "true-true" },
             IE8 = { "false", "false-true", "false-true", "true-true", "true-true", "true-true" })
     public void notchecked_appendChild() throws Exception {
         performTest(false, true, false, false, false);
@@ -241,6 +257,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE6 = { "false", "false-true", "false-true", "true-true", "true-true", "true-true" },
             IE8 = { "false", "false-true", "false-true", "true-true", "true-true", "true-true" })
     public void notchecked_insertBefore() throws Exception {
         performTest(false, false, false, false, false);
@@ -252,6 +269,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "true-false", "true-false", "true-false", "true-false", "true-false" },
+            IE6 = { "true", "true-true", "true-true", "true-true", "true-true", "true-true" },
             IE8 = { "true", "true-true", "true-true", "true-true", "true-true", "true-true" })
     public void checked_appendChild_fromHtml() throws Exception {
         performTest(true, true, true, false, false);
@@ -262,6 +280,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE6 = { "false", "false-true", "false-true", "true-true", "true-true", "true-true" },
             IE8 = { "false", "false-true", "false-true", "true-true", "true-true", "true-true" })
     public void notchecked_appendChild_fromHtml() throws Exception {
         performTest(false, true, true, false, false);
@@ -272,6 +291,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "true-false", "true-false", "true-false", "true-false", "true-false" },
+            IE6 = { "true", "true-true", "true-true", "true-true", "true-true", "true-true" },
             IE8 = { "true", "true-true", "true-true", "true-true", "true-true", "true-true" })
     public void checked_insertBefore_fromHtml() throws Exception {
         performTest(true, false, true, false, false);
@@ -282,6 +302,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE6 = { "false", "false-true", "false-true", "true-true", "true-true", "true-true" },
             IE8 = { "false", "false-true", "false-true", "true-true", "true-true", "true-true" })
     public void notchecked_insertBefore_fromHtml() throws Exception {
         performTest(false, false, true, false, false);
@@ -304,6 +325,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE6 = { "false", "false-true", "false-true", "true-true", "true-true", "true-true" },
             IE8 = { "false", "false-true", "false-true", "true-true", "true-true", "true-true" })
     public void notchecked_appendChild_cloneNode() throws Exception {
         performTest(false, true, false, false, true);
@@ -325,6 +347,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE6 = { "false", "false-true", "false-true", "true-true", "true-true", "true-true" },
             IE8 = { "false", "false-true", "false-true", "true-true", "true-true", "true-true" })
     public void notchecked_insertBefore_cloneNode() throws Exception {
         performTest(false, false, false, false, true);
@@ -345,6 +368,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE6 = { "false", "false-true", "false-true", "true-true", "true-true", "true-true" },
             IE8 = { "false", "false-true", "false-true", "true-true", "true-true", "true-true" })
     public void notchecked_appendChild_fromHtml_cloneNode() throws Exception {
         performTest(false, true, true, false, true);
@@ -365,6 +389,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE6 = { "false", "false-true", "false-true", "true-true", "true-true", "true-true" },
             IE8 = { "false", "false-true", "false-true", "true-true", "true-true", "true-true" })
     public void notchecked_insertBefore_fromHtml_cloneNode() throws Exception {
         performTest(false, false, true, false, true);
@@ -567,6 +592,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "foo,change,",
+            IE6 = "",
             IE8 = "")
     public void onchangeFires() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
@@ -627,6 +653,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Second",
+            IE6 = "First",
             IE8 = "First")
     public void setChecked() throws Exception {
         final String firstHtml
@@ -651,6 +678,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Second",
+            IE6 = { "First", "Second" },
             IE8 = { "First", "Second" })
     public void setChecked2() throws Exception {
         final String firstHtml
@@ -910,8 +938,9 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "changed",
+            IE6 = { },
             IE8 = { })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE6, IE8 })
     public void clickShouldTriggerOnchange() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
                 + "<script>\n"

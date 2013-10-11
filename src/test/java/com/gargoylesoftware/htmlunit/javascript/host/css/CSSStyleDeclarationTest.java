@@ -335,6 +335,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "", "" },
+            FF3_6 = { "undefined", "undefined" },
+            IE6 = { "", "alpha(opacity=50)" },
             IE8 = { "", "alpha(opacity=50)" })
     @NotYetImplemented(FF17)
     public void styleFilter() throws Exception {
@@ -359,6 +361,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "", "0.5", "0.4", "0.33333", "-3", "3", "", "", "" },
+            IE6 = { "", "0.5", ".4", "0.33333", "-3", "3", "10px", "foo", "auto" },
             IE8 = { "", "0.5", ".4", "0.33333", "-3", "3", "10px", "foo", "auto" })
     public void initOpacity() throws Exception {
         final String html = "<html><body>\n"
@@ -389,6 +392,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = " 0.5 0.4 0.33333 -3 3 8 7 7 7 7 ",
+            IE6 = "undefined 0.5 0.4 0.33333 -3 3 8  7  10px foo auto ",
             IE8 = "undefined 0.5 0.4 0.33333 -3 3 8  7  10px foo auto ")
     public void setOpacity() throws Exception {
         final String html = "<html><body>\n"
@@ -430,6 +434,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "exception" },
+            IE6 = "function",
             IE8 = "function")
     public void setExpression() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -451,6 +456,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "exception" },
+            IE6 = "function",
             IE8 = "function")
     public void removeExpression() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -590,6 +596,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "string", "", "1", "2", "2", "2", "2", "5", "5", "5", "5" },
+            IE6 = { "number", "0", "1", "2", "3", "4", "5", "5", "6", "7", "9" },
+            IE7 = { "number", "0", "1", "2", "3", "4", "5", "5", "6", "7", "9" },
             IE8 = { "number", "0", "1", "2", "3", "4", "4", "5", "6", "7", "8" })
     public void zIndex() throws Exception {
         final String html
@@ -679,6 +687,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "", "", "1", "1" },
+            IE6 = { "0", "0", "1", "0" },
+            IE7 = { "0", "0", "1", "0" },
             IE8 = { "0", "error", "0", "1", "error", "1" })
     public void zIndexSetUndefined() throws Exception {
         final String html
@@ -715,6 +725,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "", "", "1", "" },
+            IE6 = { "0", "0", "1", "0" },
+            IE7 = { "0", "0", "1", "0" },
             IE8 = { "0", "error", "0", "1", "error", "1" })
     public void zIndexSetNull() throws Exception {
         final String html
@@ -750,6 +762,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "7", "7", "", "4", "1" },
+            IE6 = {"0", "7", "8", "0", "error", "4", "error", "1" },
+            IE7 = {"0", "7", "8", "0", "error", "4", "error", "1" },
             IE8 = {"0", "7", "7", "0", "error", "4", "error", "1" })
     public void zIndexSetString() throws Exception {
         final String html
@@ -794,6 +808,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "", "1", "1" },
+            IE6 = {"0", "error", "0", "1", "error", "1" },
             IE8 = {"0", "error", "0", "1", "error", "1" })
     public void zIndexSetInvalid() throws Exception {
         final String html

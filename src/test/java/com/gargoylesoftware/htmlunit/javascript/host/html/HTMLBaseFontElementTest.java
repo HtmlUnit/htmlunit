@@ -14,7 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF10;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -39,8 +42,10 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object HTMLSpanElement]", "undefined", "undefined", "undefined" },
+            FF3_6 = { "[object HTMLBaseFontElement]", "", "-1", "" },
             IE = { "[object]", "", "3", "" },
             IE10 = { "[object HTMLBaseFontElement]", "", "3", "" })
+    @NotYetImplemented(FF3_6)
     public void defaults() throws Exception {
         final String html =
             "<html>\n"
@@ -66,8 +71,9 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "42" },
+            FF3_6 = { "4", "42" },
             IE = { "4", "42" })
-    @NotYetImplemented(FF17)
+    @NotYetImplemented({ FF10, FF17 })
     public void size() throws Exception {
         final String html =
             "<html>\n"
@@ -96,8 +102,9 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "helvetica" },
+            FF3_6 = { "swiss", "helvetica" },
             IE = { "swiss", "helvetica" })
-    @NotYetImplemented(FF17)
+    @NotYetImplemented({ FF10, FF17 })
     public void face() throws Exception {
         final String html =
             "<html>\n"
@@ -126,9 +133,10 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "blue" },
+            FF3_6 = { "red", "blue" },
             IE = { "#ff0000", "#0000ff" },
             IE10 = { "red", "blue" })
-    @NotYetImplemented({ FF17, IE8 })
+    @NotYetImplemented({ FF10, FF17, IE6, IE8 })
     public void color() throws Exception {
         final String html =
             "<html>\n"

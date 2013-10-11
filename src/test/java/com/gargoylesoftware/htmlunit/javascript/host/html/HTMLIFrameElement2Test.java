@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -115,6 +116,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "loaded", "foo" },
+            IE6 = { },
             IE8 = { })
     public void documentCreateElement_onLoad() throws Exception {
         final String html =
@@ -149,6 +151,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "loaded", "" },
+            IE6 = { },
             IE8 = { })
     public void documentCreateElement_onLoad_noSrc() throws Exception {
         final String html =
@@ -180,6 +183,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "createIFrame", "loaded", "foo" },
+            IE6 = { "createIFrame" },
             IE8 = { "createIFrame" })
     public void documentCreateElement_onLoad2() throws Exception {
         final String html =
@@ -215,6 +219,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "createIFrame", "loaded", "" },
+            IE6 = { "createIFrame" },
             IE8 = { "createIFrame" })
     public void documentCreateElement_onLoad2_noSrc() throws Exception {
         final String html =
@@ -300,6 +305,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "createIFrame", "loaded", "foo" },
+            IE6 = { "createIFrame" },
             IE8 = { "createIFrame" })
     public void documentCreateElement_onLoad3() throws Exception {
         final String html =
@@ -335,6 +341,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "createIFrame", "loaded", "" },
+            IE6 = { "createIFrame" },
             IE8 = { "createIFrame" })
     public void documentCreateElement_onLoad3_noSrc() throws Exception {
         final String html =
@@ -546,6 +553,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "fragment append done", "loaded" },
+            IE6 = "fragment append done",
             IE8 = "fragment append done")
     public void documentDocumentFragmentCreateElement_onLoad() throws Exception {
         final String html =
@@ -612,6 +620,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "createIFrame", "fragment append done", "loaded" },
+            IE6 = { "createIFrame", "fragment append done" },
             IE8 = { "createIFrame", "fragment append done" })
     public void documentDocumentFragmentCreateElement_onLoad2() throws Exception {
         final String html =
@@ -680,6 +689,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "createIFrame", "fragment append done", "loaded" },
+            IE6 = { "createIFrame", "fragment append done" },
             IE8 = { "createIFrame", "fragment append done" })
     public void documentDocumentFragmentCreateElement_onLoad3() throws Exception {
         final String html =
@@ -749,7 +759,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "left", "right", "bottom", "middle", "top", "wrong", "" },
             IE = { "left", "right", "bottom", "middle", "top", "", "" })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE6, IE8 })
     public void getAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -776,7 +786,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "bottom", "middle", "top" },
             IE = { "center", "error", "center", "error", "center", "left", "right", "bottom", "middle", "top" })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE6, IE8 })
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"

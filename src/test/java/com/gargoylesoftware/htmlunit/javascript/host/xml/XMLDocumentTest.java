@@ -607,6 +607,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            IE6 = "columns",
             IE8 = "columns")
     public void xmlInsideHtml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

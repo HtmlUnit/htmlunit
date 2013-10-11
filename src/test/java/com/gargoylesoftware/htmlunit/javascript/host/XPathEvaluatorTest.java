@@ -37,7 +37,7 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "function", "[object XPathEvaluator]", "[object XPathNSResolver]", "first", "second" },
-            IE = { "undefined", "exception" })
+            IE = { "undefined", "exception" }, FF3_6 = { "undefined", "exception" })
     public void simple() throws Exception {
         final String html = "<html><body>\n"
             + "<span id='first'>hello</span>\n"
@@ -65,7 +65,7 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Immortality", IE = { })
+    @Alerts(DEFAULT = { "Immortality" }, IE = { }, FF3_6 = { })
     public void namespacesWithNodeInArray() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  var xml = "
@@ -96,7 +96,7 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Immortality", IE = { })
+    @Alerts(DEFAULT = { "Immortality" }, IE = { }, FF3_6 = { })
     public void namespacesWithCustomNSResolver() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "     function nsResolver(prefix) {"

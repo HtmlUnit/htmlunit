@@ -47,7 +47,7 @@ public class ConsoleTest {
          */
         @Test
         @Alerts(DEFAULT = "false",
-            IE8 = "true")
+            FF3_6 = "true", IE6 = "true", IE7 = "true", IE8 = "true")
         public void undefined() throws Exception {
             final String html
                 = "<html><body><script>\n"
@@ -68,7 +68,7 @@ public class ConsoleTest {
          */
         @Test
         @Alerts(DEFAULT = { "info: [\"one\", \"two\", \"three\", ({})]", "info: hello" },
-            IE8 = "")
+            FF3_6 = "", IE6 = "", IE7 = "", IE8 = "")
         public void log() throws Exception {
             final WebConsole console = getWebClient().getWebConsole();
             final List<String> messages = new ArrayList<String>();

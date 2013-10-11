@@ -22,6 +22,7 @@ import java.util.BitSet;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.net.URLCodec;
 
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebAssert;
 
 /**
@@ -192,6 +193,22 @@ public final class UrlUtils {
     public static URL toUrlUnsafe(final String url) throws MalformedURLException {
         WebAssert.notNull("url", url);
         return URL_CREATOR.toUrlUnsafeClassic(url);
+    }
+
+    /**
+     * <p>Encodes illegal characters in the specified URL's path, query string and anchor according to the URL
+     * encoding rules observed in real browsers.</p>
+     *
+     * <p>For example, this method changes <tt>"http://first/?a=b c"</tt> to <tt>"http://first/?a=b%20c"</tt>.</p>
+     *
+     * @param url the URL to encode
+     * @param minimalQueryEncoding whether or not to perform minimal query encoding, like IE does
+     * @return the encoded URL
+     * @deprecated as of 2.12, please use {@link #encodeUrl(URL, boolean, String)} instead
+     */
+    @Deprecated
+    public static URL encodeUrl(final URL url, final boolean minimalQueryEncoding) {
+        return encodeUrl(url, minimalQueryEncoding, TextUtil.DEFAULT_CHARSET);
     }
 
     /**

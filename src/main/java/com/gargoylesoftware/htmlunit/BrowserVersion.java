@@ -115,6 +115,26 @@ public class BrowserVersion implements Serializable, Cloneable {
     private static final String PLATFORM_WIN32 = "Win32";
 
     /**
+     * Firefox 3.6.
+     * @deprecated as of 2.12. Use FF17 instead.
+     **/
+    @Deprecated
+    public static final BrowserVersion FIREFOX_3_6 = new BrowserVersion(
+        NETSCAPE, "5.0 (Windows; en-US)",
+        "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2.28) Gecko/20120306 Firefox/3.6.28",
+        (float) 3.6, "FF3.6", null);
+
+    /**
+     * Firefox 10. Warning: experimental!!!.
+     * @deprecated as of 2.12. Use FF17 instead.
+     */
+    @Deprecated
+    public static final BrowserVersion FIREFOX_10 = new BrowserVersion(
+        NETSCAPE, "5.0 (Windows)",
+        "Mozilla/5.0 (Windows NT 6.1; rv:10.0.11) Gecko/20100101 Firefox/10.0.11",
+        (float) 10.0, "FF10", null);
+
+    /**
      * Firefox 17 ESR.
      * @since 2.12
      **/
@@ -122,6 +142,24 @@ public class BrowserVersion implements Serializable, Cloneable {
         NETSCAPE, "5.0 (Windows)",
         "Mozilla/5.0 (Windows NT 6.1; rv:17.0) Gecko/20100101 Firefox/17.0",
         (float) 17.0, "FF17", null);
+
+    /**
+     * Internet Explorer 6.
+     * @deprecated as of 2.12
+     */
+    @Deprecated
+    public static final BrowserVersion INTERNET_EXPLORER_6 = new BrowserVersion(
+        INTERNET_EXPLORER, "4.0 (compatible; MSIE 6.0b; Windows 98)",
+        "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98)", 6, "IE6", null);
+
+    /**
+     * Internet Explorer 7.
+     * @deprecated as of 2.12
+     */
+    @Deprecated
+    public static final BrowserVersion INTERNET_EXPLORER_7 = new BrowserVersion(
+        INTERNET_EXPLORER, "4.0 (compatible; MSIE 7.0; Windows NT 5.1)",
+        "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)", 7, "IE7", null);
 
     /** Internet Explorer 8. */
     public static final BrowserVersion INTERNET_EXPLORER_8 = new BrowserVersion(
@@ -138,6 +176,18 @@ public class BrowserVersion implements Serializable, Cloneable {
         INTERNET_EXPLORER, "5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)",
         "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)", 10, "IE10", null);
 
+    /**
+     * Chrome 16.
+     * @deprecated as of 2.12
+     */
+    @Deprecated
+    public static final BrowserVersion CHROME_16 = new BrowserVersion(
+        "Netscape", "5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/535.7"
+        + " (KHTML, like Gecko) Chrome/16.0.912.63 Safari/535.7",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/535.7"
+        + " (KHTML, like Gecko) Chrome/16.0.912.63 Safari/535.7",
+        16, "Chrome16", null);
+
     /** Latest Chrome. Work In Progress!!! */
     public static final BrowserVersion CHROME = new BrowserVersion(
         "Netscape", "5.0 (Windows NT 6.1) AppleWebKit/537.36"
@@ -151,12 +201,22 @@ public class BrowserVersion implements Serializable, Cloneable {
 
     /** Register plugins for the browser versions. */
     static {
+        INTERNET_EXPLORER_6.initDefaultFeatures();
+        INTERNET_EXPLORER_7.initDefaultFeatures();
         INTERNET_EXPLORER_8.initDefaultFeatures();
         INTERNET_EXPLORER_9.initDefaultFeatures();
         INTERNET_EXPLORER_10.initDefaultFeatures();
 
+        FIREFOX_3_6.initDefaultFeatures();
+        FIREFOX_10.initDefaultFeatures();
         FIREFOX_17.initDefaultFeatures();
 
+        FIREFOX_3_6.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+        FIREFOX_3_6.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
+        FIREFOX_3_6.setCssAcceptHeader("text/css,*/*;q=0.1");
+        FIREFOX_10.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+        FIREFOX_10.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
+        FIREFOX_10.setCssAcceptHeader("text/css,*/*;q=0.1");
         FIREFOX_17.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_17.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
         FIREFOX_17.setCssAcceptHeader("text/css,*/*;q=0.1");
@@ -167,8 +227,15 @@ public class BrowserVersion implements Serializable, Cloneable {
             "Shockwave Flash 9.0 r31", "libflashplayer.so");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
             "Shockwave Flash", "swf"));
+        FIREFOX_3_6.getPlugins().add(flash);
+        FIREFOX_10.getPlugins().add(flash);
         FIREFOX_17.getPlugins().add(flash);
 
+        CHROME_16.initDefaultFeatures();
+        CHROME_16.setApplicationCodeName("Mozilla");
+        CHROME_16.setPlatform("MacIntel");
+        CHROME_16.setCpuClass(null);
+        CHROME_16.setBrowserLanguage("undefined");
         CHROME.initDefaultFeatures();
         CHROME.setApplicationCodeName("Mozilla");
         CHROME.setPlatform("MacIntel");

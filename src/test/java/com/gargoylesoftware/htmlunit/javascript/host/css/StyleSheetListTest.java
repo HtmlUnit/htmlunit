@@ -66,6 +66,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "rgb(255, 0, 0)", "rgb(255, 0, 0)" },
+            IE6 = "exception",
             IE8 = "exception")
     public void getComputedStyle_Link() throws Exception {
         final String html =
@@ -146,6 +147,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", "[object CSSStyleSheet]", "[object CSSStyleSheet]" },
+            IE6 = { "1", "[object]", "[object]" },
             IE8 = { "1", "[object]", "[object]" })
     public void nonExistentStylesheet() throws Exception {
         final String html =
@@ -173,6 +175,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", "[object CSSStyleSheet]", "[object CSSStyleSheet]" },
+            IE6 = { "1", "[object]", "[object]" },
             IE8 = { "1", "[object]", "[object]" })
     public void emptyGZipEncodedStylesheet() throws Exception {
         final String html =
@@ -207,6 +210,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "[object CSSStyleSheet]", "[object CSSStyleSheet]" },
+            IE6 = { "1", "[object]", "[object]" },
             IE8 = { "1", "[object]", "[object]" })
     public void brokenGZipEncodedStylesheet() throws Exception {
         final String html =

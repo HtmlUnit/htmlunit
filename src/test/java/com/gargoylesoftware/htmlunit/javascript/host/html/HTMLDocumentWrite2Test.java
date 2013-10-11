@@ -255,6 +255,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "<form></form>", "[object HTMLFormElement]" },
+            IE6 = { "<FORM></FORM>", "[object]" },
             IE8 = { "<FORM></FORM>", "[object]" })
     // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void writeOnOpenedWindow_WindowIsProxied() throws Exception {
@@ -281,6 +282,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "<form></form>", "[object HTMLFormElement]" },
+            IE6 = { "<FORM></FORM>", "[object]" },
             IE8 = { "<FORM></FORM>", "[object]" })
     public void writeOnOpenedWindow_DocumentIsProxied() throws Exception {
         final String html
@@ -347,7 +349,8 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE8 = "exception")
+    @Alerts(IE6 = "exception",
+            IE8 = "exception")
     public void write_fromScriptAddedWithAppendChild_inline() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<div id='it'><script>\n"

@@ -40,6 +40,7 @@ public class NativeDateTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "-13", "84", "109" },
+            IE6 = { "1887", "84", "2009" },
             IE8 = { "1887", "84", "2009" })
     public void getYear() throws Exception {
         final String html
@@ -105,6 +106,7 @@ public class NativeDateTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"toISOString: function", "toJSON: function" },
+            IE6 = {"toISOString: undefined", "toJSON: undefined" },
             IE8 = {"toISOString: undefined", "toJSON: undefined" })
     public void methods_differences() throws Exception {
         final String[] methods = {"toISOString", "toJSON"};
@@ -156,6 +158,7 @@ public class NativeDateTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "2005-12-03T07:14:15.000Z", "2005-07-12T11:04:15.000Z",
                         "2005-07-03T15:14:05.000Z" },
+            IE6 = "",
             IE8 = "")
     public void toISOString() throws Exception {
         final String html
@@ -240,7 +243,10 @@ public class NativeDateTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "00:00:00", "07:08:09" })
+    @Alerts(DEFAULT = { "00:00:00", "07:08:09" },
+            FF3_6 = { "12:00:00 AM", "07:08:09 AM" },
+            FF10 = { "12:00:00 AM", "07:08:09 AM" },
+            IE6 = { "12:00:00 AM", "07:08:09 AM" })
     public void toLocaleTimeString() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

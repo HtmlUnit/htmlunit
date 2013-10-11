@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.HttpMethod;
@@ -1299,7 +1300,10 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final HtmlSubmitInput submit = form.getInputByName("mySubmit");
         final HtmlPage secondPage = submit.click();
 
-        final String expectedURL = URL_SECOND.toString();
+        String expectedURL = URL_SECOND.toString();
+        if (getBrowserVersion() == BrowserVersion.INTERNET_EXPLORER_6) {
+            expectedURL += "?";
+        }
         assertEquals(expectedURL, secondPage.getUrl());
     }
 
@@ -1439,7 +1443,10 @@ public class HtmlFormTest extends SimpleWebTestCase {
         HtmlPage page = loadPage(html);
         page = page.<HtmlSubmitInput>getFirstByXPath("//input").click();
 
-        final String expectedUrl = URL_SECOND.toExternalForm() + "two.html";
+        String expectedUrl = URL_SECOND.toExternalForm() + "two.html";
+        if (BrowserVersion.INTERNET_EXPLORER_6.equals(getBrowserVersion())) {
+            expectedUrl += "?";
+        }
         assertEquals(expectedUrl, page.getUrl());
     }
 
@@ -1458,7 +1465,10 @@ public class HtmlFormTest extends SimpleWebTestCase {
         HtmlPage page = loadPage(html);
         page = page.<HtmlSubmitInput>getFirstByXPath("//input").click();
 
-        final String expectedUrl = getDefaultUrl().toExternalForm();
+        String expectedUrl = getDefaultUrl().toExternalForm();
+        if (BrowserVersion.INTERNET_EXPLORER_6.equals(getBrowserVersion())) {
+            expectedUrl += "?";
+        }
         assertEquals(expectedUrl, page.getUrl());
     }
 

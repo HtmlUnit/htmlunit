@@ -36,8 +36,10 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "2", "screen", "print", "screen, print" },
+            IE6 = { "Your browser does not support this example!" },
             IE8 = { "Your browser does not support this example!" })
     // TODO: check which IE versions support what
+    // For IE 6 this is correct (rbri)
     public void simple() throws Exception {
         final String html
             = "<html><body>\n"

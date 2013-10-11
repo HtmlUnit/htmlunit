@@ -1496,7 +1496,8 @@ public class DocumentTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "[object HTMLCollection]", "2" },
+    @Alerts(FF3_6 = { "undefined", "exception occured" },
+            FF = { "[object HTMLCollection]", "2" },
             IE = { "[object HTMLCollection]", "2" })
     public void scriptsArray() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><script lang='JavaScript'>\n"

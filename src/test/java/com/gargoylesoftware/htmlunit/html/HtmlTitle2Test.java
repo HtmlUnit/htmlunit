@@ -38,6 +38,7 @@ public class HtmlTitle2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLTitleElement]",
+            IE6 = "[object]",
             IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head><title id='myId'>foo</title>\n"

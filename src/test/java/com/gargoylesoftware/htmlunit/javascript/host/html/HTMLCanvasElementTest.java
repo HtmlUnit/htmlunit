@@ -36,6 +36,7 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "300", "number", "150", "number", "[object CanvasRenderingContext2D]" },
+            IE6 = { "undefined", "undefined", "undefined", "undefined" },
             IE8 = { "undefined", "undefined", "undefined", "undefined" })
     public void test() throws Exception {
         final String html =

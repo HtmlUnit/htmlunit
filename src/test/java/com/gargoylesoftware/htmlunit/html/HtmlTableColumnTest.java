@@ -38,6 +38,7 @@ public class HtmlTableColumnTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLTableColElement]",
+            IE6 = "[object]",
             IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"

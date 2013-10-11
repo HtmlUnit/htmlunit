@@ -43,6 +43,7 @@ public class HTMLUListElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUListElement]",
+            IE6 = "[object]",
             IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
@@ -68,6 +69,8 @@ public class HTMLUListElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "false", "true", "true", "true", "null", "", "blah", "2",
                    "true", "false", "true", "false", "", "null", "", "null" },
+            IE6 = { "false", "true", "true", "true", "false", "true", "true", "true",
+                   "true", "false", "true", "false", "true", "false", "true", "false" },
             IE8 = { "false", "true", "true", "true", "false", "true", "true", "true",
                    "true", "false", "true", "false", "true", "false", "true", "false" })
     public void compact() throws Exception {

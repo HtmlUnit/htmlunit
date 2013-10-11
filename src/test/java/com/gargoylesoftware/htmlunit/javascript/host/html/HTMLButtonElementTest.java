@@ -70,6 +70,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "submit", "button", "submit" },
             CHROME = { "submit", "submit", "submit" },
+            IE6 = { "button", "exception", "button", "button" },
             IE8 = { "button", "exception", "button", "button" })
     public void type() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -93,6 +94,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "test", "4", "42", "2", "[object HTMLButtonElement]", "26" },
+            IE6 = { "test", "4", "42", "2", "[object]", "8" },
             IE8 = { "test", "4", "42", "2", "[object]", "8" })
     public void getAttributeAndSetValue() throws Exception {
         final String html =

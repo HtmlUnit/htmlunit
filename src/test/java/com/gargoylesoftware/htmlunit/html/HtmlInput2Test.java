@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.util.LinkedList;
@@ -47,7 +49,9 @@ public final class HtmlInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "null", "error", "handler", "null", "error" })
+    @Alerts(DEFAULT = { "null", "error", "handler", "null", "error" },
+            FF3_6 = { "undefined", "error", "handler", "null", "error" })
+    @NotYetImplemented(FF3_6)
     public void onchangeDirectCall() throws Exception {
         final String html =
             "<html><head>\n"
@@ -110,7 +114,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "mousedown; onfocus; mouseup; onclick; onchange;", "" },
             IE = { "mousedown; onfocus; mouseup; onclick;", "onchange;" },
             IE10 = { "mousedown; onfocus; mouseup; onchange; onclick;", "" })
-    @BuggyWebDriver(IE8)
+    @BuggyWebDriver({ IE6, IE8 })
     public void clickCheckboxEventSequence() throws Exception {
         testClickEventSequence("<input type='checkbox' id='" + TEST_ID + "'>Check", false);
     }
@@ -135,7 +139,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "mousedown; onfocus; mouseup; onclick; onchange;", "" },
             IE = { "mousedown; onfocus; mouseup; onclick;", "onchange;" },
             IE10 = { "mousedown; onfocus; mouseup; onchange; onclick;", "" })
-    @BuggyWebDriver(IE8)
+    @BuggyWebDriver({ IE6, IE8 })
     public void clickRadioEventSequence() throws Exception {
         testClickEventSequence("<input type='radio' name='test' id='" + TEST_ID + "'>Check", false);
     }

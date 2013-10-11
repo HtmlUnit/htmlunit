@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -84,6 +85,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "p", "po", "", "u", "8", "U8" },
+            FF3_6 = { "p", "po", ".", "u", "8", "U8" },
+            IE6 = { "", "", "", "u", "8", "U8" },
             IE8 = { "", "", "", "u", "8", "U8" })
     public void ch() throws Exception {
         final String html
@@ -117,6 +120,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0", "4", "", "5.2", "-3", "abc" },
+            FF3_6 = { "0", "4", "", "5", "0", "abc" },
+            IE6 = { "", "", "", "5.2", "-3", "abc" },
             IE8 = { "", "", "", "5.2", "-3", "abc" })
     public void chOff() throws Exception {
         final String html
@@ -150,6 +155,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "top", "baseline", "3", "middle", "8", "BOTtom" },
+            FF3_6 = { "top", "baseline", "3", "middle", "8", "bottom" },
             IE = { "top", "baseline", "top", "error", "middle", "baseline", "bottom" })
     @NotYetImplemented(FF17)
     public void vAlign() throws Exception {
@@ -191,6 +197,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "#0000aa", "x" },
+            FF3_6 = { "", "#0000aa", "#000000" },
             IE = {"", "#0000aa", "#000000" },
             IE10 = {"", "#0000aa", "#0" })
     public void bgColor() throws Exception {
@@ -220,6 +227,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"false", "null", "true", "", "true", "", "true", "blah", "false", "null" },
+            IE6 = {"false", "false", "true", "true", "true", "true", "true", "true", "false", "false" },
             IE8 = {"false", "false", "true", "true", "true", "true", "true", "true", "false", "false" })
     public void noWrap() throws Exception {
         final String html =
@@ -443,6 +451,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "100px", "200px", "400", "abc", "-5", "100.2", "10%" },
+            FF3_6 = { "100", "200", "400", "abc", "0", "100", "10%" },
             IE = { "100", "200", "400", "error", "400", "error", "400", "100", "10%" })
     @NotYetImplemented(FF17)
     public void width() throws Exception {
@@ -488,8 +497,9 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
+            IE6 = { "1" },
             IE8 = { "1" })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE6, IE8 })
     public void offsetHeight() throws Exception {
         final String html =
             "<html><body>\n"
