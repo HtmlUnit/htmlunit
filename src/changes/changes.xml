@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.13" date="???" description="Bugfixes">
+        <release version="2.13" date="Oct 11, 2013" description="Bugfixes">
             <action type="update" dev="asashour" issue="1541">
                 HtmlImage: close imageReader in finalize().
             </action>
