@@ -14,7 +14,7 @@
             </action>
             <action type="remove" dev="asashour">
                 HtmlElement: remove deprecated getElementById() and .hasHtmlElementWithId(),
-                	and remove UrlUtils.encodeUrl().
+                and remove UrlUtils.encodeUrl().
             </action>
         </release>
         <release version="2.13" date="Oct 11, 2013" description="Bugfixes">
