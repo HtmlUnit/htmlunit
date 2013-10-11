@@ -37,7 +37,6 @@ public class TextTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Text]",
-            IE6 = "null",
             IE8 = "null")
     public void simpleScriptable() throws Exception {
         final String html
@@ -55,7 +54,6 @@ public class TextTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "abcd",
-            IE6 = "undefined",
             IE8 = "undefined")
     public void wholeText() throws Exception {
         final String html

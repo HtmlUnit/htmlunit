@@ -43,7 +43,6 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "HTML 1.0: true", "HTML 2.0: true", "HTML 3.0: false" },
-            IE6 = { "HTML 1.0: true", "HTML 2.0: false", "HTML 3.0: false" },
             IE8 = { "HTML 1.0: true", "HTML 2.0: false", "HTML 3.0: false" })
     public void hasFeature_HTML() throws Exception {
         hasFeature("HTML", "['1.0', '2.0', '3.0']");
@@ -54,7 +53,6 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "XML 1.0: true", "XML 2.0: true", "XML 3.0: false" },
-            IE6 = { "XML 1.0: false", "XML 2.0: false", "XML 3.0: false" },
             IE8 = { "XML 1.0: false", "XML 2.0: false", "XML 3.0: false" })
     public void hasFeature_XML() throws Exception {
         hasFeature("XML", "['1.0', '2.0', '3.0']");
@@ -97,9 +95,6 @@ public class DOMImplementationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0: true",
                 "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.1: true",
                 "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: false" },
-            IE6 = { "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0: false",
-                "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.1: false",
-                "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: false" },
             IE8 = { "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0: false",
                 "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.1: false",
                 "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: false" })
@@ -113,9 +108,6 @@ public class DOMImplementationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "http://www.w3.org/TR/SVG11/feature#Shape 1.0: true",
                 "http://www.w3.org/TR/SVG11/feature#Shape 1.1: true",
-                "http://www.w3.org/TR/SVG11/feature#Shape 1.2: false" },
-            IE6 = { "http://www.w3.org/TR/SVG11/feature#Shape 1.0: false",
-                "http://www.w3.org/TR/SVG11/feature#Shape 1.1: false",
                 "http://www.w3.org/TR/SVG11/feature#Shape 1.2: false" },
             IE8 = { "http://www.w3.org/TR/SVG11/feature#Shape 1.0: false",
                 "http://www.w3.org/TR/SVG11/feature#Shape 1.1: false",

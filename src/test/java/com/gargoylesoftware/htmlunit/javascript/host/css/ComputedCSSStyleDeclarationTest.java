@@ -46,7 +46,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "none",
-            IE6 = "undefined",
             IE8 = "undefined")
     public void cssFloat() throws Exception {
         final String html = "<html>\n"
@@ -462,7 +461,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "block", "block", "block", "inline", "block", "block" },
-            IE6 = { "block", "inline", "inline", "inline", "inline", "block" },
             IE8 = { "block", "inline", "inline", "inline", "inline", "block" })
     public void defaultDisplayValues_F() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
@@ -505,7 +503,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "block", "block", "block", "block", "block", "block", "block", "block" },
-            IE6 = { "block", "block", "block", "block", "block", "block", "inline", "block" },
             IE8 = { "block", "block", "block", "block", "block", "block", "inline", "block" })
     public void defaultDisplayValues_H() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
@@ -1061,7 +1058,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "underline", "none", "underline" },
-            IE6 = { "underline", "underline", "underline" },
             IE8 = { "underline", "underline", "underline" })
     public void changeInParentClassNodeReferencedByRule() throws Exception {
         final String html = "<html><head>\n"
@@ -1095,7 +1091,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "200px,400px", "200,400", "200px,400px", "50%,25%", "100,100", "100px,100px" },
-            IE6 = { "200px,400px", "200,400", "200px,400px", "50%,25%", "100,100", "50%,25%" },
             IE8 = { "200px,400px", "200,400", "200px,400px", "50%,25%", "100,100", "50%,25%" })
     public void widthAndHeightPercentagesAndPx() throws Exception {
         final String html = "<html><body onload='test()'>\n"
@@ -1123,7 +1118,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "10em,20em", "160,320", "160px,320px", "50%,25%", "80,80", "80px,80px" },
-            IE6 = { "10em,20em", "160,320", "10em,20em", "50%,25%", "80,80", "50%,25%" },
             IE8 = { "10em,20em", "160,320", "10em,20em", "50%,25%", "80,80", "50%,25%" })
     public void widthAndHeightPercentagesAndEm() throws Exception {
         final String html = "<html><body onload='test()'>\n"
@@ -1214,7 +1208,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "", "rgb(0, 0, 255)" },
-            IE6 = "exception",
             IE8 = "exception")
     @NotYetImplemented(FF)
     public void getPropertyValue() throws Exception {

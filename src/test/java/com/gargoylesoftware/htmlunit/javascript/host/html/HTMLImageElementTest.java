@@ -53,7 +53,6 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLImageElement]",
-            IE6 = "[object]",
             IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
@@ -213,8 +212,6 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "left", "right", "center", "justify", "bottom", "middle",
                 "top", "absbottom", "absmiddle", "baseline", "texttop", "wrong", "" },
-            FF10 = { "left", "right", "middle", "justify", "bottom", "middle",
-                "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", "" },
             FF17 = { "left", "right", "middle", "justify", "bottom", "middle",
                     "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", "" },
             IE = { "left", "right", "center", "", "bottom", "middle",
@@ -252,8 +249,6 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "center", "justify",
                 "bottom", "middle", "top", "absbottom", "absmiddle", "baseline", "texttop" },
-            FF10 = { "CenTer", "8", "foo", "left", "right", "middle", "justify",
-                "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop" },
             FF17 = { "CenTer", "8", "foo", "left", "right", "middle", "justify",
                 "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop" },
             IE = { "center", "error", "center", "error", "center", "left", "right",

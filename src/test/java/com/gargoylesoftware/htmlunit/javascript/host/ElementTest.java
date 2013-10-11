@@ -142,7 +142,6 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "lbl_SettingName", "outerHTML", "undefined" },
-            IE6 = { "lbl_SettingName", "outerHTML", "Item" },
             IE8 = { "lbl_SettingName", "outerHTML", "Item" })
     public void getAttributeNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -219,7 +218,6 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "1" },
-            IE6 = "exception",
             IE8 = "exception")
     public void getElementsByTagNameNS() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -307,7 +305,6 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined" },
-            IE6 = { "<a><b c=\"d\">e</b></a>\r\n", "<a><b c=\"d\">e</b></a>" },
             IE8 = { "<a><b c=\"d\">e</b></a>\r\n", "<a><b c=\"d\">e</b></a>" })
     public void xml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -333,11 +330,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object Element],app:dIv",
                 "[object HTMLDivElement],DIV",
                 "[object HTMLUnknownElement],APP:DIV" },
-            IE6 = { "[object],DIV",
-                "[object],APP:DIV",
-                "createElementNS() is not defined",
-                "[object],DIV",
-                "[object],APP:DIV" },
             IE8 = { "[object],DIV",
                 "[object],APP:DIV",
                 "createElementNS() is not defined",
@@ -356,11 +348,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object Element],app:dIv",
                 "[object HTMLDivElement],DIV",
                 "[object HTMLUnknownElement],APP:DIV" },
-            IE6 = { "[object],DIV",
-                "[object],APP:DIV",
-                "createElementNS() is not defined",
-                "[object],DIV",
-                "[object],APP:DIV" },
             IE8 = { "[object],DIV",
                 "[object],APP:DIV",
                 "createElementNS() is not defined",
@@ -379,11 +366,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object Element],app",
                 "[object HTMLDivElement],null",
                 "[object HTMLUnknownElement],null" },
-            IE6 = { "[object],undefined",
-                "[object],undefined",
-                "createElementNS() is not defined",
-                "[object],undefined",
-                "[object],undefined" },
             IE8 = { "[object],undefined",
                 "[object],undefined",
                 "createElementNS() is not defined",
@@ -402,11 +384,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object Element],dIv",
                 "[object HTMLDivElement],div",
                 "[object HTMLUnknownElement],app:div" },
-            IE6 = { "[object],undefined",
-                "[object],undefined",
-                "createElementNS() is not defined",
-                "[object],undefined",
-                "[object],undefined" },
             IE8 = { "[object],undefined",
                 "[object],undefined",
                 "createElementNS() is not defined",
@@ -426,11 +403,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object Element],undefined",
                 "[object HTMLDivElement],undefined",
                 "[object HTMLUnknownElement],undefined" },
-            IE6 = { "[object],undefined",
-                "[object],undefined",
-                "createElementNS() is not defined",
-                "[object],undefined",
-                "[object],undefined" },
             IE8 = { "[object],undefined",
                 "[object],undefined",
                 "createElementNS() is not defined",
@@ -449,11 +421,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object Element],http://www.appcelerator.org",
                 "[object HTMLDivElement],http://www.w3.org/1999/xhtml",
                 "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml" },
-            IE6 = { "[object],undefined",
-                "[object],undefined",
-                "createElementNS() is not defined",
-                "[object],undefined",
-                "[object],undefined" },
             IE8 = { "[object],undefined",
                 "[object],undefined",
                 "createElementNS() is not defined",
@@ -502,14 +469,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLUnknownElement],APP:DIV",
                 "[object HTMLUnknownElement],ANOTHER:DIV"
                 },
-            IE6 = {"[object],DIV",
-                "[object],dIv",
-                "[object],ANOTHER:DIV",
-                "createElementNS() is not defined",
-                "[object],DIV",
-                "[object],dIv",
-                "[object],ANOTHER:DIV"
-                },
             IE8 = {"[object],DIV",
                 "[object],dIv",
                 "[object],ANOTHER:DIV",
@@ -533,14 +492,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLDivElement],DIV",
                 "[object HTMLUnknownElement],APP:DIV",
                 "[object HTMLUnknownElement],ANOTHER:DIV"
-                },
-            IE6 = {"[object],DIV",
-                "[object],dIv",
-                "[object],ANOTHER:DIV",
-                "createElementNS() is not defined",
-                "[object],DIV",
-                "[object],dIv",
-                "[object],ANOTHER:DIV"
                 },
             IE8 = {"[object],DIV",
                 "[object],dIv",
@@ -566,14 +517,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLUnknownElement],null",
                 "[object HTMLUnknownElement],null"
                 },
-            IE6 = {"[object],undefined",
-                "[object],undefined",
-                "[object],undefined",
-                "createElementNS() is not defined",
-                "[object],undefined",
-                "[object],undefined",
-                "[object],undefined"
-                },
             IE8 = {"[object],undefined",
                 "[object],undefined",
                 "[object],undefined",
@@ -597,14 +540,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLDivElement],div",
                 "[object HTMLUnknownElement],app:div",
                 "[object HTMLUnknownElement],another:div"
-                },
-            IE6 = {"[object],undefined",
-                "[object],undefined",
-                "[object],undefined",
-                "createElementNS() is not defined",
-                "[object],undefined",
-                "[object],undefined",
-                "[object],undefined"
                 },
             IE8 = {"[object],undefined",
                 "[object],undefined",
@@ -630,14 +565,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLDivElement],http://www.w3.org/1999/xhtml",
                 "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml",
                 "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml"
-                },
-            IE6 = {"[object],undefined",
-                "[object],undefined",
-                "[object],undefined",
-                "createElementNS() is not defined",
-                "[object],undefined",
-                "[object],undefined",
-                "[object],undefined"
                 },
             IE8 = {"[object],undefined",
                 "[object],undefined",
@@ -690,11 +617,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLDivElement]", "div",
                 "[object HTMLUnknownElement]", "dIv"
                 },
-            IE6 = {"[object]", "dIv",
-                "[object]", "html",
-                "[object]", "div",
-                "[object]", "dIv"
-                },
             IE8 = {"[object]", "dIv",
                 "[object]", "html",
                 "[object]", "div",
@@ -713,11 +635,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLHtmlElement]", "html",
                 "[object HTMLDivElement]", "div",
                 "[object HTMLUnknownElement]", "dIv"
-                },
-            IE6 = {"[object]", "dIv",
-                "[object]", "html",
-                "[object]", "div",
-                "[object]", "dIv"
                 },
             IE8 = {"[object]", "dIv",
                 "[object]", "html",
@@ -738,11 +655,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLDivElement]", "null",
                 "[object HTMLUnknownElement]", "null"
                 },
-            IE6 = {"[object]", "",
-                "[object]", "",
-                "[object]", "",
-                "[object]", ""
-                },
             IE8 = {"[object]", "",
                 "[object]", "",
                 "[object]", "",
@@ -761,11 +673,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLHtmlElement]", "html",
                 "[object HTMLDivElement]", "div",
                 "[object HTMLUnknownElement]", "dIv"
-                },
-            IE6 = {"[object]", "undefined",
-                "[object]", "undefined",
-                "[object]", "undefined",
-                "[object]", "undefined"
                 },
             IE8 = {"[object]", "undefined",
                 "[object]", "undefined",
@@ -786,11 +693,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLDivElement]", "undefined",
                 "[object HTMLUnknownElement]", "undefined"
                 },
-            IE6 = {"[object]", "dIv",
-                "[object]", "html",
-                "[object]", "div",
-                "[object]", "dIv"
-                },
             IE8 = {"[object]", "dIv",
                 "[object]", "html",
                 "[object]", "div",
@@ -809,11 +711,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLHtmlElement]", "http://www.w3.org/1999/xhtml",
                 "[object HTMLDivElement]", "http://www.w3.org/1999/xhtml",
                 "[object HTMLUnknownElement]", "http://www.w3.org/1999/xhtml"
-                },
-            IE6 = {"[object]", "",
-                "[object]", "http://www.w3.org/1999/xhtml",
-                "[object]", "http://www.w3.org/1999/xhtml",
-                "[object]", "http://www.w3.org/1999/xhtml"
                 },
             IE8 = {"[object]", "",
                 "[object]", "http://www.w3.org/1999/xhtml",
@@ -868,7 +765,6 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "prototype found", "" },
-            IE6 = "exception occured",
             IE8 = "exception occured")
     public void enumeratedProperties() throws Exception {
         final String html
@@ -932,7 +828,6 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            IE6 = "exception",
             IE8 = "exception")
     public void getBoundingClientRect() throws Exception {
         final String html = "<html><body><script>\n"
@@ -948,7 +843,6 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            IE6 = "1",
             IE8 = "1")
     public void commentIsElement() throws Exception {
         final String html = "<html><body>\n"
@@ -1008,7 +902,6 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "first", "third", "3", "second", "second" },
-            IE6 = "",
             IE8 = "")
     public void firstElementChild() throws Exception {
         final String html

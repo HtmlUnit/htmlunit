@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
-
 import java.util.List;
 
 import org.junit.Test;
@@ -25,7 +23,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -44,12 +41,7 @@ public class StorageTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "[object Storage]", "[object Storage]" },
-            FF3_6 = { "[object StorageList]", "[object Storage]", "[object Storage]" },
-            FF10 = { "[object StorageList]", "[object Storage]", "[object Storage]" },
-            IE6 = { "undefined", "undefined", "undefined" },
-            IE7 = { "undefined", "undefined", "undefined" },
             IE8 = { "undefined", "[object]", "[object]" })
-    @NotYetImplemented(FF3_6)
     public void storage() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -81,9 +73,7 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "string", "1" },
-            IE6 = { },
-            IE7 = { })
+    @Alerts({ "string", "1" })
     public void localStorage() throws Exception {
         final String firstHtml
             = "<html><head></head><body>\n"
@@ -116,9 +106,7 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "2", "there", "world", "1", "0" },
-            IE6 = { },
-            IE7 = { })
+    @Alerts({ "0", "2", "there", "world", "1", "0" })
     public void sessionStorage() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -146,8 +134,6 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3_6 = { "[object StorageObsolete]", "error" },
-            FF10 = { "[object StorageObsolete]", "error" })
     public void globalStorage() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -170,8 +156,6 @@ public class StorageTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            IE6 = { "exception", "exception" },
-            IE7 = { "exception", "exception" },
             IE10 = "I was here")
     public void localStorageShouldNotBeShared() throws Exception {
         final String html1 = "<html><body><script>\n"

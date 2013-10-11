@@ -53,8 +53,7 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "hello",
-            IE = "hello",
-            IE6 = { "hello", "IE6" })
+            IE = "hello")
     public void if_lte_IE_6() throws Exception {
         final String html = "<html><head>"
             + "<script>alert('hello')</script>\n"
@@ -68,9 +67,7 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "hello",
-            IE = "hello",
-            IE6 = { "hello", "IE up to 7" },
-            IE7 = { "hello", "IE up to 7" })
+            IE = "hello")
     public void if_lte_IE_7() throws Exception {
         final String html = "<html><head>"
             + "<script>alert('hello')</script>\n"
@@ -166,8 +163,6 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "hello", "><" },
-            IE6 = { "hello", ">ltIE8ltIE7<" },
-            IE7 = { "hello", ">ltIE8<" },
             IE8 = { "hello", "><" })//IE9 = { "hello", ">endif<" }
     public void nested() throws Exception {
         final String html = "<html><body>\n"
@@ -193,8 +188,6 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "8+",
-            IE6 = { },
-            IE7 = { },
             IE8 = "8+")
     public void downlevelRevealed1() throws Exception {
         final String html = "<html><head>"
@@ -210,8 +203,6 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "8+",
-            IE6 = { },
-            IE7 = { },
             IE8 = "8+")
     public void downlevelRevealed2() throws Exception {
         final String html = "<html><head>"
@@ -227,8 +218,6 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "8+",
-            IE6 = { },
-            IE7 = { },
             IE8 = "8+")
     public void downlevelRevealed3() throws Exception {
         final String html = "<html><head>"

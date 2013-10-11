@@ -155,8 +155,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Second",
-            FF3_6 = "First") // in fact not alerts here, but it makes config easier
+    @Alerts("Second") // in fact not alerts here, but it makes config easier
     public void javaScriptAnchorClick() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"

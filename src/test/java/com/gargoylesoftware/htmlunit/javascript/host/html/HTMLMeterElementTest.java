@@ -36,7 +36,6 @@ public class HTMLMeterElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             FF17 = "[object HTMLMeterElement]",
-            IE6 = "[object]",
             IE8 = "[object]")
     public void tag() throws Exception {
         final String html = "<html><body>\n"

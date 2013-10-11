@@ -36,9 +36,6 @@ public class DataViewTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "22", "3.1415927410125732" },
-            FF3_6 = "exception",
-            FF10 = "exception",
-            IE6 = "exception",
             IE8 = "exception")
     public void arrayConstruction() throws Exception {
         final String html
@@ -67,9 +64,6 @@ public class DataViewTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "570119236", "2.1426990032196045", "0", "0", "0", "0", "64", "9",
                             "33", "-5", "84", "68", "45", "24" },
-            FF3_6 = "exception",
-            FF10 = "exception",
-            IE6 = "exception",
             IE8 = "exception")
     public void endian() throws Exception {
         final String html
@@ -98,9 +92,6 @@ public class DataViewTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1234", "0", "4", "-46", "0", "0", "0" },
-            FF3_6 = "exception",
-            FF10 = "exception",
-            IE6 = "exception",
             IE8 = "exception")
     public void uint16() throws Exception {
         final String html

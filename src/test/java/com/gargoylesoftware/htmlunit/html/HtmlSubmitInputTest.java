@@ -268,8 +268,6 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
                 "newDefault-newDefault", "newDefault-newDefault" },
-            IE6 = { "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
-                "newValue-newDefault", "newValue-newDefault" },
             IE8 = { "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
                 "newValue-newDefault", "newValue-newDefault" })
     public void resetByClick() throws Exception {
@@ -311,8 +309,6 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
                 "newDefault-newDefault", "newDefault-newDefault" },
-            IE6 = { "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
-                "newValue-newDefault", "newValue-newDefault" },
             IE8 = { "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
                 "newValue-newDefault", "newValue-newDefault" })
     public void resetByJS() throws Exception {

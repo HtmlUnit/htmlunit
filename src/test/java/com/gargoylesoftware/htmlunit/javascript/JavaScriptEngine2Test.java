@@ -246,7 +246,6 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "function", "function" },
-            IE6 = { "undefined", "undefined" },
             IE8 = { "undefined", "undefined" })
     public void inline() throws Exception {
         final String html = "<html><head><script>\n"

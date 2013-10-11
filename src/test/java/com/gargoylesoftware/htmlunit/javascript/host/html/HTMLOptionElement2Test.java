@@ -322,7 +322,6 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "option1", "0" },
-            IE6 = { "1", "option2", "1" },
             IE8 = { "1", "option2", "1" })
     public void unselectResetToFirstOption() throws Exception {
         final String html

@@ -8,6 +8,14 @@
 
     <body>
         <release version="2.14" date="???" description="Bugfixes">
+            <action type="remove" dev="asashour">
+                BrowserVersion: remove deprecated FIREFOX_3_6, FIREFOX_10, CHROME_16, INTERNET_EXPLORER_6
+                and INTERNET_EXPLORER_7.
+            </action>
+            <action type="remove" dev="asashour">
+                HtmlElement: remove deprecated getElementById() and .hasHtmlElementWithId(),
+                and remove UrlUtils.encodeUrl().
+            </action>
         </release>
         <release version="2.13" date="Oct 11, 2013" description="Bugfixes">
             <action type="update" dev="asashour" issue="1541">

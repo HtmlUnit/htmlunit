@@ -40,7 +40,6 @@ public class HtmlFieldSetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object HTMLFieldSetElement]", "[object HTMLFormElement]" },
-            IE6 = { "[object]", "[object]" },
             IE8 = { "[object]", "[object]" })
     public void simpleScriptable() throws Exception {
         final String html

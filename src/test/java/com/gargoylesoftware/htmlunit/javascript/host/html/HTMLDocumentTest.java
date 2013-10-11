@@ -16,10 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 import static com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument.EMPTY_COOKIE_NAME;
@@ -104,7 +102,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "function", "div1", "span2", "span3", "2", "1", "1", "0", "0", "0" },
-            IE6 = { "undefined", "exception" },
             IE8 = { "undefined", "exception" })
     public void getElementsByClassName() throws Exception {
         final String html
@@ -177,7 +174,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "BackCompat",
-            IE6 = "CSS1Compat",
             IE8 = "CSS1Compat")
     public void compatMode_html_transitional_40() throws Exception {
         compatMode("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" "
@@ -313,7 +309,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object SVGSVGElement]",
-            IE6 = "exception",
             IE8 = "exception")
     public void createDocumentNS_svg() throws Exception {
         final String html = "<html><body>\n"
@@ -331,8 +326,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF3_6 = "Hello")
+    @Alerts("exception")
     public void createDocumentNS_xul() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
@@ -357,7 +351,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object HTMLCollection]", "0" },
-            IE6 = { "[object]", "0" },
             IE8 = { "[object]", "0" })
     public void applets() throws Exception {
         final String html = "<html>\n"
@@ -382,7 +375,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "imported: [object HTMLScriptElement]", "replaced" },
-            IE6 = "exception",
             IE8 = "exception")
     public void importNode_script() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -414,7 +406,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "imported: [object HTMLDivElement]", "replaced" },
-            IE6 = "exception",
             IE8 = "exception")
     public void importNode_scriptChild() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -469,7 +460,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "exception" },
-            IE6 = { "[object]", "0", "1", "f", "f", "f", "f", "urn:f", "urn:f", "true" },
             IE8 = { "[object]", "0", "1", "f", "f", "f", "f", "urn:f", "urn:f", "true" })
     public void namespaces() throws Exception {
         final String html =
@@ -499,7 +489,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE6 = { "d", "1" },
             IE8 = { "d", "1" })
     public void documentMethodsWithoutDocument() throws Exception {
         final String html
@@ -518,7 +507,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            IE6 = "[object]",
             IE8 = "[object]")
     public void getElementById_caseSensitivity() throws Exception {
         final String html = "<html>\n"
@@ -544,7 +532,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" },
-            FF3_6 = {"", "", "#0000aa", "#0000aa", "#000000", "#000000" },
             IE = {"#ffffff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
 //            IE9 = {"#ffffff", "", "#0000aa", "#0000aa", "#000000", "#0" },
             IE10 = {"#ffffff", "", "#0000aa", "#0000aa", "#000000", "#0" })
@@ -576,7 +563,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object HTMLCollection]", "4", "red" },
-            IE6 = { "[object]", "4", "red" },
             IE8 = { "[object]", "4", "red" })
     public void identicalIDs() throws Exception {
         final String html =
@@ -630,7 +616,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ CHROME, FF, IE6, IE8 })
+    @Browsers({ CHROME, FF, IE8 })
     @Alerts(DEFAULT = { "string", "Fri, 16 Oct 2009 13:59:47 GMT" },
             IE = { "string", "Fri, 16 Oct 2009 13:59:47 UTC" })
     // TODO IE10 = { "string", "current date/time" } as it ignores the Date header -> how to assert?
@@ -904,8 +890,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "32 commands supported", "not supported: foo, 123" },
-            FF3_6 = { "exception", "0 commands supported" })
+    @Alerts({ "32 commands supported", "not supported: foo, 123" })
     public void queryCommandSupported_common() throws Exception {
         final String[] commands = {"BackColor", "Bold",
             "Copy", "CreateLink", "Cut", "Delete",
@@ -925,7 +910,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0 commands supported" },
-            FF3_6 = { "exception", "0 commands supported" },
             IE = { "46 commands supported" })
     public void queryCommandSupported_disctinct() throws Exception {
         final String[] commands = {"2D-Position", "AbsolutePosition",
@@ -978,8 +962,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "div1" },
-            IE6 = "undefined")
+    @Alerts({ "3", "div1" })
     public void querySelectorAll() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>Test</title>\n"
             + "<style>\n"
@@ -1056,7 +1039,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "3", "div1" },
-            IE6 = "undefined",
             IE8 = "undefined")
     public void querySelectorAll_quirks() throws Exception {
         final String html = "<html><head><title>Test</title>\n"
@@ -1090,7 +1072,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "3",
-            IE6 = "undefined",
             IE8 = "undefined")
     public void querySelectorAll_implicitAttribute() throws Exception {
         final String html = "<html><head><title>Test</title>\n"
@@ -1122,9 +1103,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "div1", "null" },
-            IE6 = "undefined",
-            IE7 = "undefined")
+    @Alerts({ "div1", "null" })
     public void querySelector() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>Test</title>\n"
             + "<style>\n"
@@ -1156,7 +1135,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "0" },
-            IE6 = { "0", "1" },
             IE8 = { "0", "1" })
     public void getElementsByTagName2() throws Exception {
         final String html = "<html xmlns:ns1='http://example.com'>\n"
@@ -1181,7 +1159,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "0" })
-    @NotYetImplemented({ IE6, IE8 })
+    @NotYetImplemented(IE8)
     public void getElementsByTagName3() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1335,7 +1313,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE6 = "INPUT",
             IE8 = "INPUT")
     public void createElement_notOnlyTagName() throws Exception {
         final String html = "<html><body>\n"
@@ -1356,8 +1333,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE6 = "")
+    @Alerts("null")
     public void getElementById_strict() throws Exception {
         getElementById_strict(true);
     }
@@ -1367,7 +1343,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            IE6 = "",
             IE8 = "")
     public void getElementById_quirks() throws Exception {
         getElementById_strict(false);
@@ -1393,8 +1368,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLHeadElement]",
-            FF3_6 = "undefined",
-            IE6 = "undefined",
             IE8 = "undefined")
     public void head() throws Exception {
         final String html = "<html><body>\n"
@@ -1410,7 +1383,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = {"", "", "#0000aa", "#0000aa", "x", "x" },
-            FF3_6 = {"", "", "#0000aa", "#0000aa", "#000000", "#000000" },
             IE = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
 //            IE9 = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" },
             IE10 = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" })
@@ -1442,7 +1414,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = {"", "", "#0000aa", "#0000aa", "x", "x" },
-            FF3_6 = {"", "", "#0000aa", "#0000aa", "#000000", "#000000" },
             IE = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
 //            IE9 = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" },
             IE10 = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" })
@@ -1473,9 +1444,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3_6 = {"", "", "#0000aa", "#0000aa", "#000000", "#000000" },
-            FF10 = {"#800080", "", "#0000aa", "#0000aa", "x", "x" },
-            FF17 = {"", "", "#0000aa", "#0000aa", "x", "x" },
+    @Alerts(FF17 = {"", "", "#0000aa", "#0000aa", "x", "x" },
             IE = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#000000" },
 //            IE9 = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#0" },
             IE10 = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#0" })
@@ -1507,7 +1476,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = {"", "", "#0000aa", "#0000aa", "x", "x" },
-            FF3_6 = {"", "", "#0000aa", "#0000aa", "#000000", "#000000" },
             IE = {"#000000", "", "#0000aa", "#0000aa", "#000000", "#000000" },
 //            IE9 = {"#000000", "", "#0000aa", "#0000aa", "#000000", "#0" },
             IE10 = {"#000000", "", "#0000aa", "#0000aa", "#000000", "#0" })
@@ -1539,11 +1507,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "", "true" },
-            FF3_6 = { "", "false" },
-            IE6 = { },
             IE8 = { })
 //            IE9 = {"", "true" }
-    @NotYetImplemented(FF3_6)
     public void getSelection() throws Exception {
         final String html =
             "<html>\n"
@@ -1779,7 +1744,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "BackCompat", "function", "function" },
-            IE6 = { "undefined", "BackCompat", "undefined", "undefined" },
             IE8 = { "5", "BackCompat", "undefined", "undefined" },
             IE10 = { "10", "BackCompat", "function", "function" })
     public void documentMode() throws Exception {
@@ -1791,7 +1755,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "CSS1Compat", "function", "function" },
-            IE6 = { "undefined", "CSS1Compat", "undefined", "undefined" },
             IE8 = { "8", "CSS1Compat", "object", "object" },
             IE9 = { "9", "CSS1Compat", "function", "function" },
             IE10 = { "10", "CSS1Compat", "function", "function" })
@@ -1805,7 +1768,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "BackCompat", "function", "function" },
-            IE6 = { "undefined", "CSS1Compat", "undefined", "undefined" },
             IE8 = { "8", "CSS1Compat", "object", "object" },
             IE9 = { "9", "BackCompat", "function", "function" },
             IE10 = { "10", "BackCompat", "function", "function" })
@@ -1820,7 +1782,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "CSS1Compat", "function", "function" },
-            IE6 = { "undefined", "CSS1Compat", "undefined", "undefined" },
             IE8 = { "8", "CSS1Compat", "object", "object" },
             IE9 = { "9", "CSS1Compat", "function", "function" },
             IE10 = { "10", "CSS1Compat", "function", "function" })
@@ -1834,8 +1795,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "BackCompat", "function", "function" },
-            IE = { "5", "BackCompat", "undefined", "undefined" },
-            IE6 = { "undefined", "BackCompat", "undefined", "undefined" })
+            IE = { "5", "BackCompat", "undefined", "undefined" })
     public void documentMode_metaIE5() throws Exception {
         documentMode("", "  <meta http-equiv='X-UA-Compatible' content='IE=5'>\n");
     }
@@ -1845,8 +1805,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "BackCompat", "function", "function" },
-            IE = { "8", "CSS1Compat", "object", "object" },
-            IE6 = { "undefined", "BackCompat", "undefined", "undefined" })
+            IE = { "8", "CSS1Compat", "object", "object" })
     @NotYetImplemented(IE8)
     public void documentMode_metaIE8() throws Exception {
         documentMode("", "  <meta http-equiv='X-UA-Compatible' content='IE=8'>\n");
@@ -1857,8 +1816,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "CSS1Compat", "function", "function" },
-            IE = { "8", "CSS1Compat", "object", "object" },
-            IE6 = { "undefined", "CSS1Compat", "undefined", "undefined" })
+            IE = { "8", "CSS1Compat", "object", "object" })
     @NotYetImplemented(IE8)
     public void documentMode_metaIE8_doctypeStrict() throws Exception {
         documentMode(HtmlPageTest.STANDARDS_MODE_PREFIX_, "  <meta http-equiv='X-UA-Compatible' content='IE=8'>\n");
@@ -1869,7 +1827,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "BackCompat", "function", "function" },
-            IE6 = { "undefined", "BackCompat", "undefined", "undefined" },
             IE8 = { "5", "BackCompat", "undefined", "undefined" },
             IE9 = { "9", "BackCompat", "function", "function" },
             IE10 = { "10", "BackCompat", "function", "function" })
@@ -1882,7 +1839,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "CSS1Compat", "function", "function" },
-            IE6 = { "undefined", "CSS1Compat", "undefined", "undefined" },
             IE8 = { "8", "CSS1Compat", "object", "object" },
             IE9 = { "9", "CSS1Compat", "function", "function" },
             IE10 = { "10", "CSS1Compat", "function", "function" })
@@ -1898,7 +1854,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "BackCompat", "function", "function" },
             IE = { "9", "CSS1Compat", "function", "function" },
-            IE6 = { "undefined", "BackCompat", "undefined", "undefined" },
             IE8 = { "8", "CSS1Compat", "object", "object" })
     @NotYetImplemented(IE8)
     public void documentMode_metaIE9() throws Exception {
@@ -1910,7 +1865,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "BackCompat", "function", "function" },
-            IE6 = { "undefined", "BackCompat", "undefined", "undefined" },
             IE8 = { "8", "CSS1Compat", "object", "object" },
             IE9 = { "9", "CSS1Compat", "function", "function" },
             IE10 = { "10", "CSS1Compat", "function", "function" })

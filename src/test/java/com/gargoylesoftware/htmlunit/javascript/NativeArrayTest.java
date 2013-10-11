@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -46,7 +45,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             FF17 = { "1<>5", "5<>2", "1<>2", "1<>9", "5<>1", "1<>1", "2<>1", "2<>9", "5<>9" },
             IE = { "1<>9", "9<>5", "9<>2", "9<>1", "1<>5", "5<>1", "5<>2", "5<>1", "1<>1", "1<>2", "2<>1", "1<>1" },
             IE10 = { "5<>1", "2<>5", "2<>1", "2<>5", "1<>5", "1<>2", "1<>1", "9<>5" })
-    @NotYetImplemented({ IE6, IE8, FF17 })
+    @NotYetImplemented({ IE8, FF17 })
     public void sort() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -86,9 +85,6 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "every: function", "filter: function", "forEach: function", "indexOf: function",
             "lastIndexOf: function", "map: function", "reduce: function", "reduceRight: function", "some: function" },
-            IE6 = { "every: undefined", "filter: undefined", "forEach: undefined", "indexOf: undefined",
-            "lastIndexOf: undefined", "map: undefined", "reduce: undefined", "reduceRight: undefined",
-            "some: undefined" },
             IE8 = { "every: undefined", "filter: undefined", "forEach: undefined", "indexOf: undefined",
             "lastIndexOf: undefined", "map: undefined", "reduce: undefined", "reduceRight: undefined",
             "some: undefined" })

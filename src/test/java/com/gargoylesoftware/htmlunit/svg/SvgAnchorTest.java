@@ -41,7 +41,6 @@ public class SvgAnchorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object SVGAElement]",
-            IE6 = "",
             IE8 = "")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

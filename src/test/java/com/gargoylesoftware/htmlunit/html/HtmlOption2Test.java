@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
+
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -23,7 +25,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -43,12 +44,11 @@ public class HtmlOption2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "oDown,sDown,dDown,oUp,sUp,dUp,",
             CHROME = "sUp,dUp,",
-            FF3_6 = "sUp,dUp,oUp,sUp,dUp,",
             IE = "sDown,dDown,sUp,dUp,")
     // there seems to be a bug in selenium; for FF >= 10 this triggers
     // "sDown,dDown,sUp,dUp,oDown,sDown,dDown,oUp,sUp,dUp," but a
     // manual test shows, that this is wrong.
-    @BuggyWebDriver({ Browser.FF10, Browser.FF17 })
+    @BuggyWebDriver(FF17)
     public void onMouse() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

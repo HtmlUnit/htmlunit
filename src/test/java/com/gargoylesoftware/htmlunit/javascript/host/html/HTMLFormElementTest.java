@@ -1048,7 +1048,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "", "foo4", "script4.js" },
-            FF3_6 = { "", "foo0", "foo1", "foo2", "foo3", "foo4", "script4.js" },
             IE = { "", "foo0", "foo1", "foo2", "foo3", "foo4", "script4.js" })
     @NotYetImplemented(FF17)
     public void submitTriggersRequestNotParsed() throws Exception {
@@ -1120,7 +1119,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object HTMLInputElement]", "[object HTMLInputElement]" },
-            IE6 = { "[object]", "[object]" },
             IE8 = { "[object]", "[object]" })
     public void lostChildrenFromElements() throws Exception {
         final String html
@@ -1142,7 +1140,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            IE6 = "string",
             IE8 = "string")
     public void onchangeHandler() throws Exception {
         final String html

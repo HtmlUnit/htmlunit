@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -39,9 +36,7 @@ public class HtmlTable2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "TBODY->TR->TD->Two", "THEAD->TR->TD->One", "THEAD->TR->TD->Three" },
-            FF3_6 = { "TBODY->TR->TD->Two", "THEAD->TD->One", "THEAD->TR->TD->Three" })
-    @NotYetImplemented(FF3_6)
+    @Alerts(DEFAULT = { "TBODY->TR->TD->Two", "THEAD->TR->TD->One", "THEAD->TR->TD->Three" })
     public void two_theads() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"

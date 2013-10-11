@@ -37,7 +37,6 @@ public class CDATASectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Comment]",
-            IE6 = "null",
             IE8 = "null")
     public void simpleScriptable() throws Exception {
         final String html

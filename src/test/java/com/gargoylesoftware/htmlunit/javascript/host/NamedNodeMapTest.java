@@ -128,7 +128,6 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined", "undefined" },
-            IE6 = { "[object]", "[object]", "[object]" },
             IE8 = { "[object]", "[object]", "[object]" })
     public void unspecifiedAttributes() throws Exception {
         final String html =

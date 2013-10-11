@@ -37,8 +37,6 @@ public class Int8ArrayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object ArrayBuffer]", "5", "0" },
-            FF3_6 = "exception",
-            IE6 = "exception",
             IE8 = "exception")
     public void buffer() throws Exception {
         final String html
@@ -64,8 +62,6 @@ public class Int8ArrayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "17", "-45", "2" },
-            FF3_6 = "exception",
-            IE6 = "exception",
             IE8 = "exception")
     public void arrayConstructor() throws Exception {
         final String html
@@ -91,8 +87,6 @@ public class Int8ArrayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "2", "-45", "52" },
-            FF3_6 = "exception",
-            IE6 = "exception",
             IE8 = "exception")
     public void bufferConstructor() throws Exception {
         final String html
@@ -119,8 +113,6 @@ public class Int8ArrayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            FF3_6 = "exception",
-            IE6 = "exception",
             IE8 = "exception")
     public void constant() throws Exception {
         final String html
