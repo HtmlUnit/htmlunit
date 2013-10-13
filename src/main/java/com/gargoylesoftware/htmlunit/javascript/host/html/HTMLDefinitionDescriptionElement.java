@@ -14,28 +14,24 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MOD_PHRASE_CLASS_NAME;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFINITION_COMMON_CLASS_NAME;
 
-import com.gargoylesoftware.htmlunit.html.HtmlInsertedText;
+import com.gargoylesoftware.htmlunit.html.HtmlDefinitionDescription;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
 /**
- * The JavaScript object "HTMLInsElement".
+ * The JavaScript object "HTMLDefinitionDescriptionElement".
  *
  * @version $Revision$
- * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(domClasses = HtmlInsertedText.class)
-public class HTMLInsElement extends HTMLElement {
+@JsxClass(domClasses = { HtmlDefinitionDescription.class })
+public class HTMLDefinitionDescriptionElement extends HTMLElement {
 
     /**
      * Returns the value of the "cite" property.
      * @return the value of the "cite" property
      */
-    @JsxGetter
     public String getCite() {
         final String cite = getDomNodeOrDie().getAttribute("cite");
         return cite;
@@ -45,7 +41,6 @@ public class HTMLInsElement extends HTMLElement {
      * Returns the value of the "cite" property.
      * @param cite the value
      */
-    @JsxSetter
     public void setCite(final String cite) {
         getDomNodeOrDie().setAttribute("cite", cite);
     }
@@ -54,28 +49,26 @@ public class HTMLInsElement extends HTMLElement {
      * Returns the value of the "dateTime" property.
      * @return the value of the "dateTime" property
      */
-    @JsxGetter
     public String getDateTime() {
-        final String cite = getDomNodeOrDie().getAttribute("datetime");
-        return cite;
+        final String dateTime = getDomNodeOrDie().getAttribute("datetime");
+        return dateTime;
     }
 
     /**
      * Returns the value of the "dateTime" property.
      * @param dateTime the value
      */
-    @JsxSetter
     public void setDateTime(final String dateTime) {
         getDomNodeOrDie().setAttribute("datetime", dateTime);
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * {@inheritDoc}
-    */
-    @Override
-    public String getDefaultStyleDisplay() {
-        return "inline";
+     * Returns whether the end tag is forbidden or not.
+     * @see <a href="http://www.w3.org/TR/html4/index/elements.html">HTML 4 specs</a>
+     * @return whether the end tag is forbidden or not
+     */
+    protected boolean isEndTagForbidden() {
+        return false;
     }
 
     /**
@@ -83,9 +76,9 @@ public class HTMLInsElement extends HTMLElement {
      */
     @Override
     public String getClassName() {
-        if (getWindow().getWebWindow() != null && getBrowserVersion().hasFeature(JS_MOD_PHRASE_CLASS_NAME)) {
-            return "HTMLPhraseElement";
+        if (getWindow().getWebWindow() != null && getBrowserVersion().hasFeature(JS_DEFINITION_COMMON_CLASS_NAME)) {
+            return "HTMLElement";
         }
-        return "HTMLModElement";
+        return "HTMLDDElement";
     }
 }

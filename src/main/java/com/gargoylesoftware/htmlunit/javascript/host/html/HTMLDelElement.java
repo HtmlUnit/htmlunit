@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MOD_PHRASE_CLASS_NAME;
+
 import com.gargoylesoftware.htmlunit.html.HtmlDeletedText;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -74,5 +76,16 @@ public class HTMLDelElement extends HTMLElement {
     @Override
     public String getDefaultStyleDisplay() {
         return "inline";
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getClassName() {
+        if (getWindow().getWebWindow() != null && getBrowserVersion().hasFeature(JS_MOD_PHRASE_CLASS_NAME)) {
+            return "HTMLPhraseElement";
+        }
+        return "HTMLModElement";
     }
 }

@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_QUOTE_CLASS_NAMEBLOCK;
+
 import com.gargoylesoftware.htmlunit.html.HtmlBlockQuote;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -34,6 +36,9 @@ public class HTMLBlockQuoteElement extends HTMLElement {
      */
     @Override
     public String getClassName() {
+        if (getWindow().getWebWindow() != null && getBrowserVersion().hasFeature(JS_QUOTE_CLASS_NAMEBLOCK)) {
+            return "HTMLBlockElement";
+        }
         return "HTMLQuoteElement";
     }
 

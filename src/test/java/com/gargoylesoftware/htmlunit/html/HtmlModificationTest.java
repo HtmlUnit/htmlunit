@@ -34,7 +34,7 @@ public class HtmlModificationTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "[object HTMLInsElement]", "[object HTMLDelElement]" }, IE = { "[object]", "[object]" })
+    @Alerts(FF = { "[object HTMLModElement]", "[object HTMLModElement]" }, IE = { "[object]", "[object]" })
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

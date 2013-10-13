@@ -15,42 +15,15 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_90;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLABBREVIATED;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlAbbreviated;
-import com.gargoylesoftware.htmlunit.html.HtmlAcronym;
 import com.gargoylesoftware.htmlunit.html.HtmlAddress;
-import com.gargoylesoftware.htmlunit.html.HtmlBidirectionalOverride;
-import com.gargoylesoftware.htmlunit.html.HtmlBig;
-import com.gargoylesoftware.htmlunit.html.HtmlBlink;
-import com.gargoylesoftware.htmlunit.html.HtmlBold;
-import com.gargoylesoftware.htmlunit.html.HtmlCenter;
-import com.gargoylesoftware.htmlunit.html.HtmlCitation;
-import com.gargoylesoftware.htmlunit.html.HtmlCode;
-import com.gargoylesoftware.htmlunit.html.HtmlDefinition;
-import com.gargoylesoftware.htmlunit.html.HtmlDefinitionDescription;
-import com.gargoylesoftware.htmlunit.html.HtmlDefinitionTerm;
-import com.gargoylesoftware.htmlunit.html.HtmlEmphasis;
 import com.gargoylesoftware.htmlunit.html.HtmlExample;
-import com.gargoylesoftware.htmlunit.html.HtmlItalic;
-import com.gargoylesoftware.htmlunit.html.HtmlKeyboard;
 import com.gargoylesoftware.htmlunit.html.HtmlListing;
 import com.gargoylesoftware.htmlunit.html.HtmlMultiColumn;
-import com.gargoylesoftware.htmlunit.html.HtmlNoBreak;
 import com.gargoylesoftware.htmlunit.html.HtmlPlainText;
-import com.gargoylesoftware.htmlunit.html.HtmlS;
-import com.gargoylesoftware.htmlunit.html.HtmlSample;
-import com.gargoylesoftware.htmlunit.html.HtmlSmall;
 import com.gargoylesoftware.htmlunit.html.HtmlSpan;
-import com.gargoylesoftware.htmlunit.html.HtmlStrike;
-import com.gargoylesoftware.htmlunit.html.HtmlStrong;
-import com.gargoylesoftware.htmlunit.html.HtmlSubscript;
-import com.gargoylesoftware.htmlunit.html.HtmlSuperscript;
-import com.gargoylesoftware.htmlunit.html.HtmlTeletype;
-import com.gargoylesoftware.htmlunit.html.HtmlUnderlined;
-import com.gargoylesoftware.htmlunit.html.HtmlVariable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 
@@ -62,13 +35,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
  * @author Daniel Gredler
  * @author Ronald Brill
  */
-@JsxClass(domClasses = { HtmlAbbreviated.class, HtmlAcronym.class, HtmlAddress.class,
-        HtmlBidirectionalOverride.class, HtmlBig.class, HtmlBold.class, HtmlBlink.class, HtmlCenter.class,
-        HtmlCitation.class, HtmlCode.class, HtmlDefinition.class, HtmlDefinitionDescription.class,
-        HtmlDefinitionTerm.class, HtmlEmphasis.class, HtmlItalic.class, HtmlKeyboard.class, HtmlListing.class,
-        HtmlMultiColumn.class, HtmlNoBreak.class, HtmlPlainText.class, HtmlS.class, HtmlSample.class,
-        HtmlSmall.class, HtmlSpan.class, HtmlStrike.class, HtmlStrong.class, HtmlSubscript.class,
-        HtmlSuperscript.class, HtmlTeletype.class, HtmlUnderlined.class, HtmlVariable.class, HtmlExample.class })
+@JsxClass(domClasses = {
+        HtmlAddress.class,
+        HtmlListing.class,
+        HtmlMultiColumn.class, HtmlPlainText.class,
+        HtmlSpan.class,
+        HtmlExample.class })
 public class HTMLSpanElement extends HTMLElement {
     private boolean endTagForbidden_;
 
@@ -88,36 +60,7 @@ public class HTMLSpanElement extends HTMLElement {
             return;
         }
 
-        if ((domNode instanceof HtmlAbbreviated && browser.hasFeature(HTMLABBREVIATED))
-            || domNode instanceof HtmlAcronym
-            || domNode instanceof HtmlBidirectionalOverride
-            || domNode instanceof HtmlBig
-            || domNode instanceof HtmlBold
-            || domNode instanceof HtmlBlink
-            || domNode instanceof HtmlCitation
-            || domNode instanceof HtmlCode
-            || domNode instanceof HtmlDefinition
-            || domNode instanceof HtmlEmphasis
-            || domNode instanceof HtmlItalic
-            || domNode instanceof HtmlKeyboard
-            || domNode instanceof HtmlNoBreak
-            || domNode instanceof HtmlS
-            || domNode instanceof HtmlSample
-            || domNode instanceof HtmlSmall
-            || domNode instanceof HtmlStrike
-            || domNode instanceof HtmlStrong
-            || domNode instanceof HtmlSubscript
-            || domNode instanceof HtmlSuperscript
-            || domNode instanceof HtmlTeletype
-            || domNode instanceof HtmlUnderlined
-            || domNode instanceof HtmlVariable) {
-            ActiveXObject.addProperty(this, "cite", true, true);
-            ActiveXObject.addProperty(this, "dateTime", true, true);
-            return;
-        }
-
         if (domNode instanceof HtmlAddress
-            || domNode instanceof HtmlCenter
             || domNode instanceof HtmlExample
             || domNode instanceof HtmlListing
             || domNode instanceof HtmlPlainText) {
@@ -186,9 +129,7 @@ public class HTMLSpanElement extends HTMLElement {
     public String getDefaultStyleDisplay() {
         final String tagName = getTagName();
         if ("ADDRESS".equals(tagName)
-                || "CENTER".equals(tagName)
-                || "DD".equals(tagName)
-                || "DT".equals(tagName)) {
+                || "CENTER".equals(tagName)) {
             return super.getDefaultStyleDisplay();
         }
         return "inline";

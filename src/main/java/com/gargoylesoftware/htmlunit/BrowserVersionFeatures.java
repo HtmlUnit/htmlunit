@@ -722,6 +722,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_ATTR_FIRST_LAST_CHILD_RETURNS_NULL,
 
+    /** Indicates that HTMLBlockElements returning 'HTMLElement'
+     * as class name. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_BLOCK_COMMON_CLASS_NAME,
+
     /** Indicates that the getBoundingClientRect adds an offset of 2. */
     @BrowserFeature(@WebBrowser(IE))
     JS_BOUNDING_CLIENT_RECT_OFFSET_TWO,
@@ -784,6 +789,11 @@ public enum BrowserVersionFeatures {
     /** Object prototype supports <tt>__defineGetter__</tt> and similar properties. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_DEFINE_GETTER,
+
+    /** Indicates that HTMLDefinition...Elements returning 'HTMLElement'
+     * as class name. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_DEFINITION_COMMON_CLASS_NAME,
 
     /** Javascript doctyp.entities returns an empty string (IE). */
     @BrowserFeature(@WebBrowser(IE))
@@ -993,6 +1003,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_LOCATION_HASH_IS_DECODED,
 
+    /** Indicates that HTMLModElements returning 'HTMLPhraseElement'
+     * as class name. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    JS_MOD_PHRASE_CLASS_NAME,
+
     /**
      * Indicates if the String representation of a native function begins and ends with a \n.
      */
@@ -1033,6 +1048,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_PARENT_PROTO_PROPERTIES,
 
+    /** Indicates that HTMLPhraseElements returning 'HTMLElement'
+     * as class name. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_PHRASE_COMMON_CLASS_NAME,
+
     /** Indicates that the prefix property returns an empty string if no prefix defined. */
     @BrowserFeature(@WebBrowser(IE))
     JS_PREFIX_RETURNS_EMPTY_WHEN_UNDEFINED,
@@ -1040,6 +1060,11 @@ public enum BrowserVersionFeatures {
     /** Indicates that document.queryCommandSupported(..) is only available in design mode. */
     @BrowserFeature(@WebBrowser(value = FF, maxVersion = 3.6f))
     JS_QUERYCOMMAND_SUPPORTED_ONLY_DESIGNMODE,
+
+    /** Indicates that HTMLBlockQuoteElement returning 'HTMLBlockElement'
+     * as class name. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_QUOTE_CLASS_NAMEBLOCK,
 
     /** Javascript script.text(...) reexecutes the script (IE). */
     @BrowserFeature(@WebBrowser(IE))

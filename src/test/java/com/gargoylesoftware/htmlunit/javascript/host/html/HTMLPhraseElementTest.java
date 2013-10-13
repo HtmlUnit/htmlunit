@@ -19,63 +19,35 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Unit tests for {@link HTMLSpanElement}.
+ * Unit tests for {@link HTMLPhraseElement}.
  *
  * @version $Revision$
- * @author Daniel Gredler
- * @author Marc Guillemot
- * @author Ahmed Ashour
- * @author Frank Danek
+ * @author ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HTMLSpanElementTest extends WebDriverTestCase {
+public class HTMLPhraseElementTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = "no",
-            IE = "yes")
-    public void doScroll() throws Exception {
-        final String html =
-            "<html>\n"
-            + "  <head>\n"
-            + "    <script>\n"
-            + "      function test() {\n"
-            + "        var span = document.getElementById('s');\n"
-            + "        if(span.doScroll) {\n"
-            + "          alert('yes');\n"
-            + "          span.doScroll();\n"
-            + "          span.doScroll('down');\n"
-            + "        } else {\n"
-            + "          alert('no');\n"
-            + "        }\n"
-            + "      }\n"
-            + "    </script>\n"
-            + "  </head>\n"
-            + "  <body onload='test()'><span id='s'>abc</span></body>\n"
-            + "</html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(FF = "[object HTMLSpanElement] undefined" ,
-            IE = "[object] undefined",
-            IE10 = "[object HTMLSpanElement] undefined")
+    @Alerts(FF = {"[object HTMLElement] undefined", "[object HTMLElement] undefined" },
+            IE = {"[object] ", "[object] " },
+            IE10 = {"[object HTMLPhraseElement] ", "[object HTMLPhraseElement] undefined" })
+    @NotYetImplemented(Browser.FF)
     public void cite() throws Exception {
         final String html =
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + "      function test() {\n"
-            + "        debug(document.createElement('span'));\n"
+            + "        debug(document.createElement('abbr'));\n"
+            + "        debug(document.createElement('big'));\n"
             + "      }\n"
             + "      function debug(e) {\n"
             + "        alert(e + ' ' + e.cite);\n"
