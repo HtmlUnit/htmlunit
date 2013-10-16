@@ -625,7 +625,7 @@ public class HttpWebConnection implements WebConnection {
      * Converts an HttpMethod into a WebResponse.
      */
     private WebResponse makeWebResponse(final HttpResponse httpResponse,
-            final WebRequest request, final DownloadedContent responseBody, final long loadTime) {
+            final WebRequest request, final DownloadedContent downloadedContent, final long loadTime) {
 
         String statusMessage = httpResponse.getStatusLine().getReasonPhrase();
         if (statusMessage == null) {
@@ -636,7 +636,7 @@ public class HttpWebConnection implements WebConnection {
         for (final Header header : httpResponse.getAllHeaders()) {
             headers.add(new NameValuePair(header.getName(), header.getValue()));
         }
-        final WebResponseData responseData = new WebResponseData(responseBody, statusCode, statusMessage, headers);
+        final WebResponseData responseData = new WebResponseData(downloadedContent, statusCode, statusMessage, headers);
         return newWebResponseInstance(responseData, loadTime, request);
     }
 

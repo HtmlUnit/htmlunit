@@ -72,17 +72,17 @@ public class WebResponseData implements Serializable {
 
     /**
      * Constructor.
-     * @param responseBody the downloaded response body
+     * @param downloadedContent the downloaded content
      * @param statusCode        Status code from the server
      * @param statusMessage     Status message from the server
      * @param responseHeaders   Headers in this response
      */
-    public WebResponseData(final DownloadedContent responseBody, final int statusCode, final String statusMessage,
+    public WebResponseData(final DownloadedContent downloadedContent, final int statusCode, final String statusMessage,
             final List<NameValuePair> responseHeaders) {
         statusCode_ = statusCode;
         statusMessage_ = statusMessage;
         responseHeaders_ = Collections.unmodifiableList(responseHeaders);
-        downloadedContent_ = responseBody;
+        downloadedContent_ = downloadedContent;
     }
 
     private InputStream getStream(final DownloadedContent downloadedContent,
