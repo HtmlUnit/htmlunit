@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_112
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_HTML_GENERIC_ELEMENT_CLASS_NAME;
 
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -40,10 +41,11 @@ public class HTMLUnknownElement extends HTMLElement {
      */
     @Override
     public String getNodeName() {
-        final Page page = getDomNodeOrDie().getPage();
+        final HtmlElement elem = getDomNodeOrDie();
+        final Page page = elem.getPage();
         if (page instanceof XmlPage || (getBrowserVersion().hasFeature(GENERATED_112)
-            && ((HtmlPage) page).getNamespaces().containsKey(getDomNodeOrDie().getPrefix()))) {
-            return getDomNodeOrDie().getLocalName();
+            && ((HtmlPage) page).getNamespaces().containsKey(elem.getPrefix()))) {
+            return elem.getLocalName();
         }
         return super.getNodeName();
     }
