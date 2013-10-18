@@ -653,10 +653,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTML_COMMENT_ELEMENT,
 
-    /** HTMLGenericElement instead of HTMLUnknownElement. */
-    @BrowserFeature(@WebBrowser(IE))
-    HTML_GENERIC_ELEMENT,
-
     /** Indicates that "host" HTTP header should be the first. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTTP_HEADER_HOST_FIRST,
@@ -948,6 +944,10 @@ public enum BrowserVersionFeatures {
     /** Indicates that objects with prototype property available in window scope; Firefox does this. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_HAS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE,
+
+    /** HTMLGenericElement instead of HTMLUnknownElement. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_HTML_GENERIC_ELEMENT_CLASS_NAME,
 
     /** Javascript method getHeight of IFrames may return negative values. */
     @BrowserFeature(@WebBrowser(IE))
