@@ -18,7 +18,7 @@
             <p>
                 When a WebClient is first instantiated, a TopLevelWindow is automatically created.
                 You could think of this as being the first window displayed by a web browser.  Calling
-                WebClient.getPage(WebWindow, URL, SubmitMethod, List, boolean)
+                WebClient.getPage(WebWindow, WebRequest)
                 will load the new page into this window.
             </p>
             <p>

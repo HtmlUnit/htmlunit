@@ -96,7 +96,7 @@ final HtmlTableFooter footer = table.getFooter();
 final List<HtmlTableRow> footerRows = footer.getRows();
 
 for (final HtmlTableBody body : table.getBodies()) {
-    final List rows = body.getRows();
+    final List<HtmlTableRow> rows = body.getRows();
     ...
 }]]></source>
             </p>
