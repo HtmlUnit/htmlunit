@@ -503,7 +503,7 @@ public enum BrowserVersionFeatures {
     HTML5_RUBY_TAGS,
 
     /** Indicates if HTML5 tags source, video and audio are recognized. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10), @WebBrowser(CHROME) })
     HTML5_TAGS,
 
     /** */
