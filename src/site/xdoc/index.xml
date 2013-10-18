@@ -141,7 +141,7 @@
                         </ul>
                     </li>
                     <li>Proxy server support</li>
-                    <li>Support for basic and <a href="ntlm.html">NTLM</a> authentication</li>
+                    <li>Support for basic and NTLM authentication</li>
                     <li>Excellent JavaScript support (see <a href="#JavaScript_Support">the JavaScript section</a> below)</li>
                 </ul>
             </p>

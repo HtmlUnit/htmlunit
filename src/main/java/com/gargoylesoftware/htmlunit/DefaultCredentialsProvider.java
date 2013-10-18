@@ -31,7 +31,6 @@ import org.apache.http.client.CredentialsProvider;
  * credentials for both web servers and proxies. Supports Digest
  * authentication, and Basic HTTP authentication.
  *
- * See <a href="http://htmlunit.sourceforge.net/ntlm.html">NTLM authentication</a> to use NTLM from HtlmUnit.
  * @version $Revision$
  * @author Daniel Gredler
  * @author Vikram Shitole
@@ -84,7 +83,6 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * @param workstation The workstation the authentication request is originating from.
      *        Essentially, the computer name for this machine.
      * @param domain the domain to authenticate within
-     * @see <a href="http://htmlunit.sourceforge.net/ntlm.html">How to use NTML authenticaion</a>
      */
     public void addNTLMCredentials(final String username, final String password, final String host,
             final int port, final String workstation, final String domain) {
