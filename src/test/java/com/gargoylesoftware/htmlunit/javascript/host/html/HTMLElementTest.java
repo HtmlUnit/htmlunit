@@ -3507,6 +3507,36 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "<ruby></ruby>",
+            IE8 = "<RUBY></RUBY>")
+    public void outerHTML_ruby() throws Exception {
+        loadPageWithAlerts2(outerHTML("ruby"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<rt></rt>",
+            IE8 = "<RT></RT>")
+    public void outerHTML_rt() throws Exception {
+        loadPageWithAlerts2(outerHTML("rt"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<rp></rp>",
+            IE8 = "<RP></RP>")
+    public void outerHTML_rp() throws Exception {
+        loadPageWithAlerts2(outerHTML("rp"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "<img>",
             IE8 = "<IMG>")
     public void outerHTML_img() throws Exception {

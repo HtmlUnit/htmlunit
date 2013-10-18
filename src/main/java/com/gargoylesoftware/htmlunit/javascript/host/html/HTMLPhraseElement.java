@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLABBREVIATED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PHRASE_COMMON_CLASS_NAME;
 
@@ -31,6 +32,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlEmphasis;
 import com.gargoylesoftware.htmlunit.html.HtmlItalic;
 import com.gargoylesoftware.htmlunit.html.HtmlKeyboard;
 import com.gargoylesoftware.htmlunit.html.HtmlNoBreak;
+import com.gargoylesoftware.htmlunit.html.HtmlRp;
+import com.gargoylesoftware.htmlunit.html.HtmlRt;
+import com.gargoylesoftware.htmlunit.html.HtmlRuby;
 import com.gargoylesoftware.htmlunit.html.HtmlS;
 import com.gargoylesoftware.htmlunit.html.HtmlSample;
 import com.gargoylesoftware.htmlunit.html.HtmlSmall;
@@ -62,6 +66,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
         HtmlItalic.class,
         HtmlKeyboard.class,
         HtmlNoBreak.class,
+        HtmlRt.class, HtmlRp.class, HtmlRuby.class,
         HtmlS.class, HtmlSample.class, HtmlSmall.class, HtmlStrike.class,
         HtmlSubscript.class, HtmlSuperscript.class, HtmlStrong.class,
         HtmlTeletype.class,
@@ -158,6 +163,20 @@ public class HTMLPhraseElement extends HTMLElement {
     */
     @Override
     public String getDefaultStyleDisplay() {
+        final String tagName = getTagName();
+        if ("RUBY".equals(tagName)) {
+            if (getBrowserVersion().hasFeature(CSS_DISPLAY_DEFAULT)) {
+                return "inline";
+            }
+            return "ruby";
+        }
+        if ("RT".equals(tagName)) {
+            if (getBrowserVersion().hasFeature(CSS_DISPLAY_DEFAULT)) {
+                return "inline";
+            }
+            return "ruby-text";
+        }
+
         return "inline";
     }
 

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -31,6 +32,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLElementsTest extends WebDriverTestCase {
@@ -790,6 +792,39 @@ public class HTMLElementsTest extends WebDriverTestCase {
     @NotYetImplemented(IE8)
     public void elementClosesItself_progress() throws Exception {
         loadPageWithAlerts2(elementClosesItself("progress"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    @NotYetImplemented({ FF, IE10 })
+    public void elementClosesItself_ruby() throws Exception {
+        loadPageWithAlerts2(elementClosesItself("ruby"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void elementClosesItself_rp() throws Exception {
+        loadPageWithAlerts2(elementClosesItself("rp"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void elementClosesItself_rt() throws Exception {
+        loadPageWithAlerts2(elementClosesItself("rt"));
     }
 
     /**

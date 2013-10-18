@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CANVAS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML5_TAGS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML5_RUBY_TAGS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLBASEFONT_SUPPORTED;
 
 import java.util.Arrays;
@@ -79,7 +80,9 @@ class DefaultElementFactory implements ElementFactory {
             HtmlNoScript.TAG_NAME, HtmlObject.TAG_NAME, HtmlOrderedList.TAG_NAME,
             HtmlOptionGroup.TAG_NAME, HtmlOption.TAG_NAME, HtmlParagraph.TAG_NAME,
             HtmlParameter.TAG_NAME, HtmlPlainText.TAG_NAME, HtmlPreformattedText.TAG_NAME,
-            HtmlProgress.TAG_NAME, HtmlS.TAG_NAME, HtmlSample.TAG_NAME,
+            HtmlProgress.TAG_NAME,
+            HtmlRp.TAG_NAME, HtmlRt.TAG_NAME, HtmlRuby.TAG_NAME,
+            HtmlS.TAG_NAME, HtmlSample.TAG_NAME,
             HtmlScript.TAG_NAME, HtmlSelect.TAG_NAME, HtmlSmall.TAG_NAME,
             HtmlSource.TAG_NAME, HtmlSpacer.TAG_NAME, HtmlSpan.TAG_NAME,
             HtmlStrike.TAG_NAME, HtmlStrong.TAG_NAME, HtmlStyle.TAG_NAME,
@@ -408,6 +411,30 @@ class DefaultElementFactory implements ElementFactory {
         }
         else if (tagName.equals(HtmlProgress.TAG_NAME)) {
             element = new HtmlProgress(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equals(HtmlRp.TAG_NAME)) {
+            if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_RUBY_TAGS)) {
+                element = new HtmlRp(namespaceURI, qualifiedName, page, attributeMap);
+            }
+            else {
+                return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
+            }
+        }
+        else if (tagName.equals(HtmlRt.TAG_NAME)) {
+            if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_RUBY_TAGS)) {
+                element = new HtmlRt(namespaceURI, qualifiedName, page, attributeMap);
+            }
+            else {
+                return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
+            }
+        }
+        else if (tagName.equals(HtmlRuby.TAG_NAME)) {
+            if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_RUBY_TAGS)) {
+                element = new HtmlRuby(namespaceURI, qualifiedName, page, attributeMap);
+            }
+            else {
+                return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
+            }
         }
         else if (tagName.equals(HtmlS.TAG_NAME)) {
             element = new HtmlS(namespaceURI, qualifiedName, page, attributeMap);

@@ -804,6 +804,39 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
+    @NotYetImplemented(IE8)
+    public void childNodes_ruby() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("ruby"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
+    @NotYetImplemented()
+    public void childNodes_rt() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("rt"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
+    @NotYetImplemented()
+    public void childNodes_rp() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("rp"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
             IE8 = { "3", "3", "2", "4", "4", "3" })
     @NotYetImplemented(IE8)

@@ -498,6 +498,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH,
 
+    /** Indicates if HTML5 ruby tags ruby, tp and rt are recognized. */
+    @BrowserFeature({ @WebBrowser(IE) })
+    HTML5_RUBY_TAGS,
+
     /** Indicates if HTML5 tags source, video and audio are recognized. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTML5_TAGS,
