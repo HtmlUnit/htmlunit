@@ -177,7 +177,7 @@
             </p>
             <note title="Disabling JavaScript support">
                 <p>
-                    To disable JavaScript processing for one WebClient, call WebClient.setJavaScriptEnabled(false).
+                    To disable JavaScript processing for one WebClient, call webClient.getOptions().setJavaScriptEnabled(false).
                 </p>
             </note>
             <p>
