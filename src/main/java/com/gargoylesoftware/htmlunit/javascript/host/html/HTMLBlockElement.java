@@ -17,7 +17,10 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BLOCK_COMMON_CLASS_NAME;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlAddress;
 import com.gargoylesoftware.htmlunit.html.HtmlCenter;
+import com.gargoylesoftware.htmlunit.html.HtmlExample;
+import com.gargoylesoftware.htmlunit.html.HtmlListing;
 import com.gargoylesoftware.htmlunit.html.HtmlPlainText;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
@@ -28,7 +31,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
  * @version $Revision$
  * @author Ronald Brill
  */
-@JsxClass(domClasses = { HtmlCenter.class, HtmlPlainText.class })
+@JsxClass(domClasses = {
+        HtmlAddress.class,
+        HtmlCenter.class,
+        HtmlExample.class,
+        HtmlListing.class,
+        HtmlPlainText.class })
 public class HTMLBlockElement extends HTMLElement {
 
     /**
@@ -94,5 +102,19 @@ public class HTMLBlockElement extends HTMLElement {
             return "HTMLElement";
         }
         return super.getClassName();
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * {@inheritDoc}
+    */
+    @Override
+    public String getDefaultStyleDisplay() {
+        final String tagName = getTagName();
+        if ("ADDRESS".equals(tagName)
+                || "CENTER".equals(tagName)) {
+            return super.getDefaultStyleDisplay();
+        }
+        return "inline";
     }
 }

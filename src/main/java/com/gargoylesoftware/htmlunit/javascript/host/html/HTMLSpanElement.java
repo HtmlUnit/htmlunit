@@ -18,13 +18,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_90;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlAddress;
-import com.gargoylesoftware.htmlunit.html.HtmlExample;
-import com.gargoylesoftware.htmlunit.html.HtmlListing;
 import com.gargoylesoftware.htmlunit.html.HtmlMultiColumn;
 import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 
 /**
  * The JavaScript object "HTMLSpanElement".
@@ -35,11 +31,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
  * @author Ronald Brill
  */
 @JsxClass(domClasses = {
-        HtmlAddress.class,
-        HtmlListing.class,
         HtmlMultiColumn.class,
-        HtmlSpan.class,
-        HtmlExample.class })
+        HtmlSpan.class })
 public class HTMLSpanElement extends HTMLElement {
     private boolean endTagForbidden_;
 
@@ -57,12 +50,6 @@ public class HTMLSpanElement extends HTMLElement {
             }
 
             return;
-        }
-
-        if (domNode instanceof HtmlAddress
-            || domNode instanceof HtmlExample
-            || domNode instanceof HtmlListing) {
-            ActiveXObject.addProperty(this, "cite", true, true);
         }
     }
 
@@ -125,11 +112,6 @@ public class HTMLSpanElement extends HTMLElement {
     */
     @Override
     public String getDefaultStyleDisplay() {
-        final String tagName = getTagName();
-        if ("ADDRESS".equals(tagName)
-                || "CENTER".equals(tagName)) {
-            return super.getDefaultStyleDisplay();
-        }
         return "inline";
     }
 }

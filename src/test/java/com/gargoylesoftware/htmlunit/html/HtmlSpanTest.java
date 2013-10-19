@@ -56,7 +56,7 @@ public class HtmlSpanTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object HTMLSpanElement]", IE = "[object]")
+    @Alerts(FF = "[object HTMLElement]", IE = "[object]")
     public void simpleScriptable_others() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
