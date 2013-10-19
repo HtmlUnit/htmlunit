@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BLOCK_COMM
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlCenter;
+import com.gargoylesoftware.htmlunit.html.HtmlPlainText;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 
@@ -27,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
  * @version $Revision$
  * @author Ronald Brill
  */
-@JsxClass(domClasses = { HtmlCenter.class })
+@JsxClass(domClasses = { HtmlCenter.class, HtmlPlainText.class })
 public class HTMLBlockElement extends HTMLElement {
 
     /**
@@ -38,9 +39,7 @@ public class HTMLBlockElement extends HTMLElement {
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
 
-        if (domNode instanceof HtmlCenter) {
-            ActiveXObject.addProperty(this, "cite", true, true);
-        }
+        ActiveXObject.addProperty(this, "cite", true, true);
     }
 
     /**

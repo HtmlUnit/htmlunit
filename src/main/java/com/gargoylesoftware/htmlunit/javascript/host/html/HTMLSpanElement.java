@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlAddress;
 import com.gargoylesoftware.htmlunit.html.HtmlExample;
 import com.gargoylesoftware.htmlunit.html.HtmlListing;
 import com.gargoylesoftware.htmlunit.html.HtmlMultiColumn;
-import com.gargoylesoftware.htmlunit.html.HtmlPlainText;
 import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
@@ -38,7 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 @JsxClass(domClasses = {
         HtmlAddress.class,
         HtmlListing.class,
-        HtmlMultiColumn.class, HtmlPlainText.class,
+        HtmlMultiColumn.class,
         HtmlSpan.class,
         HtmlExample.class })
 public class HTMLSpanElement extends HTMLElement {
@@ -62,8 +61,7 @@ public class HTMLSpanElement extends HTMLElement {
 
         if (domNode instanceof HtmlAddress
             || domNode instanceof HtmlExample
-            || domNode instanceof HtmlListing
-            || domNode instanceof HtmlPlainText) {
+            || domNode instanceof HtmlListing) {
             ActiveXObject.addProperty(this, "cite", true, true);
         }
     }
