@@ -950,7 +950,7 @@ public enum BrowserVersionFeatures {
     JS_HAS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE,
 
     /** HTMLGenericElement instead of HTMLUnknownElement. */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_HTML_GENERIC_ELEMENT_CLASS_NAME,
 
     /** Javascript method getHeight of IFrames may return negative values. */
