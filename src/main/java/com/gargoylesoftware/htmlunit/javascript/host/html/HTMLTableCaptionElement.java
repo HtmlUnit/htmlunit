@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(domClasses = HtmlCaption.class)
+@JsxClass(domClass = HtmlCaption.class)
 public class HTMLTableCaptionElement extends HTMLElement {
 
     /** The valid <tt>vAlign</tt> values for this element, when emulating IE. */

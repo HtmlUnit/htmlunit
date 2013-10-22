@@ -18,7 +18,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -28,7 +28,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(isJSObject = false, browsers = { @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
+@JsxClasses(
+        isJSObject = false,
+        browsers = { @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) }
+)
 public class ArrayBufferView extends SimpleScriptable {
 
     private ArrayBuffer buffer_;

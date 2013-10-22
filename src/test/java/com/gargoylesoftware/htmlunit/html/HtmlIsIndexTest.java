@@ -24,6 +24,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
@@ -45,6 +47,7 @@ public class HtmlIsIndexTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.IE)
     public void testFormSubmission() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"

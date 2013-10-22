@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgMarker;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClasses = SvgMarker.class,
+@JsxClass(domClass = SvgMarker.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGMarkerElement extends SVGElement {
 

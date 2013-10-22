@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClasses = HtmlDefinitionList.class)
+@JsxClass(domClass = HtmlDefinitionList.class)
 public class HTMLDListElement extends HTMLListElement {
 
 }

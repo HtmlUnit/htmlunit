@@ -40,7 +40,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Marc Guillemot
  * @author Daniel Gredler
  */
-@JsxClass(domClasses = HtmlApplet.class)
+@JsxClass(domClass = HtmlApplet.class)
 public class HTMLAppletElement extends HTMLElement {
 
     /**

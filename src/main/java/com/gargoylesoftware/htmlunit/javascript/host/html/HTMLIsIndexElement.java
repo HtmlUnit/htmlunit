@@ -14,8 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+
 import com.gargoylesoftware.htmlunit.html.HtmlIsIndex;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * The JavaScript object "HTMLIsIndexElement".
@@ -23,7 +27,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClasses = HtmlIsIndex.class)
+@JsxClass(domClass = HtmlIsIndex.class,
+    browsers = { @WebBrowser(value = FF, maxVersion = 16), @WebBrowser(IE) })
 public class HTMLIsIndexElement extends HTMLElement {
 
     /**

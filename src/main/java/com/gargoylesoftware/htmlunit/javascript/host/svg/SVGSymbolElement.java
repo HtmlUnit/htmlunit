@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgSymbol;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClasses = SvgSymbol.class,
+@JsxClass(domClass = SvgSymbol.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGSymbolElement extends SVGElement {
 

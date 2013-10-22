@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeTurbulence;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClasses = SvgFeTurbulence.class,
+@JsxClass(domClass = SvgFeTurbulence.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFETurbulenceElement extends SVGElement {
 

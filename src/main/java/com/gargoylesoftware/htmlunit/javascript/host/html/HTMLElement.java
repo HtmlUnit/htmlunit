@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_65;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_72;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ATTRIBUTE_FIX_IN_QUIRKS_MODE;
@@ -93,15 +94,21 @@ import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlFrameSet;
+import com.gargoylesoftware.htmlunit.html.HtmlNoBreak;
+import com.gargoylesoftware.htmlunit.html.HtmlNoEmbed;
+import com.gargoylesoftware.htmlunit.html.HtmlNoFrames;
+import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
+import com.gargoylesoftware.htmlunit.html.HtmlWordBreak;
 import com.gargoylesoftware.htmlunit.html.SubmittableElement;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -143,7 +150,14 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
  * @author Sudhan Moghe
  * @author Ronald Brill
  */
-@JsxClass(domClasses = HtmlElement.class)
+@JsxClasses({
+    @JsxClass(domClass = HtmlElement.class),
+    @JsxClass(domClass = HtmlNoBreak.class, browsers = { @WebBrowser(FF) }),
+    @JsxClass(domClass = HtmlNoEmbed.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) }),
+    @JsxClass(domClass = HtmlNoFrames.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) }),
+    @JsxClass(domClass = HtmlNoScript.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) }),
+    @JsxClass(domClass = HtmlWordBreak.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) })
+})
 public class HTMLElement extends Element implements ScriptableWithFallbackGetter {
 
     private static final Class<?>[] METHOD_PARAMS_OBJECT = new Class[] {Object.class};
@@ -2896,5 +2910,29 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     @JsxSetter({ @WebBrowser(value = FF), @WebBrowser(CHROME) })
     public void setOnsubmit(final Object onsubmit) {
         setEventHandlerProp("onsubmit", onsubmit);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * {@inheritDoc}
+    */
+    @Override
+    public String getDefaultStyleDisplay() {
+        final String tagName = getTagName();
+        if ("NOSCRIPT".equals(tagName)) {
+            final DomNode node = getDomNodeOrNull();
+            if (node != null && !node.getPage().getWebClient().getOptions().isJavaScriptEnabled()) {
+                return "block";
+            }
+
+            if (getBrowserVersion().hasFeature(CSS_DISPLAY_DEFAULT)) {
+                return "none";
+            }
+            return "inline";
+        }
+        if ("WBR".equals(tagName)) {
+            return "inline";
+        }
+        return super.getDefaultStyleDisplay();
     }
 }

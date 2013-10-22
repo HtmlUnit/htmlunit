@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(domClasses = HtmlLabel.class)
+@JsxClass(domClass = HtmlLabel.class)
 public class HTMLLabelElement extends FormChild {
 
     /**

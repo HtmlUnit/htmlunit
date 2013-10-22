@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeMorphology;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClasses = SvgFeMorphology.class,
+@JsxClass(domClass = SvgFeMorphology.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFEMorphologyElement extends SVGElement {
 

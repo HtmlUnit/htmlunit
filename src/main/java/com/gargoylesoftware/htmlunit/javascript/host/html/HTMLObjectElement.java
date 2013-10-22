@@ -35,7 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(domClasses = HtmlObject.class)
+@JsxClass(domClass = HtmlObject.class)
 public class HTMLObjectElement extends FormChild {
 
     private SimpleScriptable wrappedActiveX_;

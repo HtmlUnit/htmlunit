@@ -19,8 +19,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -39,7 +37,6 @@ public class HTMLPhraseElementTest extends WebDriverTestCase {
     @Alerts(FF = {"[object HTMLElement] undefined", "[object HTMLElement] undefined" },
             IE = {"[object] ", "[object] " },
             IE10 = {"[object HTMLPhraseElement] ", "[object HTMLPhraseElement] undefined" })
-    @NotYetImplemented(Browser.FF)
     public void cite() throws Exception {
         final String html =
             "<html>\n"

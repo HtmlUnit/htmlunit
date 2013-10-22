@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgPolygon;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClasses = SvgPolygon.class,
+@JsxClass(domClass = SvgPolygon.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGPolygonElement extends SVGElement {
 

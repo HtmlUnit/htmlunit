@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BLOCK_COMMON_CLASS_NAME;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAddress;
@@ -22,7 +24,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlCenter;
 import com.gargoylesoftware.htmlunit.html.HtmlExample;
 import com.gargoylesoftware.htmlunit.html.HtmlListing;
 import com.gargoylesoftware.htmlunit.html.HtmlPlainText;
+import com.gargoylesoftware.htmlunit.html.HtmlPreformattedText;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 
 /**
@@ -31,12 +36,14 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
  * @version $Revision$
  * @author Ronald Brill
  */
-@JsxClass(domClasses = {
-        HtmlAddress.class,
-        HtmlCenter.class,
-        HtmlExample.class,
-        HtmlListing.class,
-        HtmlPlainText.class })
+@JsxClasses({
+    @JsxClass(domClass = HtmlAddress.class),
+    @JsxClass(domClass = HtmlCenter.class),
+    @JsxClass(domClass = HtmlExample.class),
+    @JsxClass(domClass = HtmlListing.class),
+    @JsxClass(domClass = HtmlPlainText.class),
+    @JsxClass(domClass = HtmlPreformattedText.class, browsers = @WebBrowser(value = IE, maxVersion = 8))
+})
 public class HTMLBlockElement extends HTMLElement {
 
     /**
@@ -47,7 +54,9 @@ public class HTMLBlockElement extends HTMLElement {
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
 
-        ActiveXObject.addProperty(this, "cite", true, true);
+        if (getBrowserVersion().hasFeature(JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
+            ActiveXObject.addProperty(this, "cite", true, true);
+        }
     }
 
     /**
@@ -112,7 +121,8 @@ public class HTMLBlockElement extends HTMLElement {
     public String getDefaultStyleDisplay() {
         final String tagName = getTagName();
         if ("ADDRESS".equals(tagName)
-                || "CENTER".equals(tagName)) {
+                || "CENTER".equals(tagName)
+                || "PRE".equals(tagName)) {
             return super.getDefaultStyleDisplay();
         }
         return "inline";

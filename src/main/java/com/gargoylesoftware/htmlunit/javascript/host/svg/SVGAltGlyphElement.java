@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgAltGlyph;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClasses = SvgAltGlyph.class,
+@JsxClass(domClass = SvgAltGlyph.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGAltGlyphElement extends SVGElement {
 

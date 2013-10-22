@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClasses = HtmlBackgroundSound.class)
+@JsxClass(domClass = HtmlBackgroundSound.class)
 public class HTMLBGSoundElement extends HTMLElement {
 
     /**

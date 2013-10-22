@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgLinearGradient;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClasses = SvgLinearGradient.class,
+@JsxClass(domClass = SvgLinearGradient.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGLinearGradientElement extends SVGElement {
 

@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import com.gargoylesoftware.htmlunit.html.HtmlMedia;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 
 /**
@@ -24,7 +24,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(isJSObject = false)
+@JsxClasses(
+        isJSObject = false
+)
 public class HTMLMediaElement extends HTMLElement {
 
     /**

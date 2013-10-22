@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclara
  * @author Marc Guillemot
  * @author Daniel Gredler
  */
-@JsxClass(domClasses = HtmlBody.class)
+@JsxClass(domClass = HtmlBody.class)
 public class HTMLBodyElement extends HTMLElement {
 
     /**

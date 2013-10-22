@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_85;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
@@ -27,7 +27,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @version $Revision$
  * @author Daniel Gredler
  */
-@JsxClass(isJSObject = false)
+@JsxClasses(
+        isJSObject = false
+)
 public class HTMLListElement extends HTMLElement {
 
     /**

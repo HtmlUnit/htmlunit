@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  * @version $Revision$
  * @author Ronald Brill
  */
-@JsxClass(domClasses = { HtmlDefinitionTerm.class })
+@JsxClass(domClass = HtmlDefinitionTerm.class)
 public class HTMLDefinitionTermElement extends HTMLElement {
 
     /**

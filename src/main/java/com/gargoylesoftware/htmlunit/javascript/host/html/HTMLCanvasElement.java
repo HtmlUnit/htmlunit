@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingConte
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(domClasses = HtmlCanvas.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
+@JsxClass(domClass = HtmlCanvas.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
 public class HTMLCanvasElement extends HTMLElement {
 
     /**

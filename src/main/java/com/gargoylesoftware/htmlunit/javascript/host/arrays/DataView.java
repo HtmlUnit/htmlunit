@@ -22,7 +22,7 @@ import java.nio.ByteOrder;
 
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
@@ -33,7 +33,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(isJSObject = false, browsers = { @WebBrowser(value = FF, minVersion = 15), @WebBrowser(CHROME) })
+@JsxClasses(
+        isJSObject = false,
+        browsers = { @WebBrowser(value = FF, minVersion = 15), @WebBrowser(CHROME) })
 public class DataView extends ArrayBufferView {
 
     /**

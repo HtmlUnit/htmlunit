@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLABBREVIATED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PHRASE_COMMON_CLASS_NAME;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAbbreviated;
@@ -46,6 +48,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlTeletype;
 import com.gargoylesoftware.htmlunit.html.HtmlUnderlined;
 import com.gargoylesoftware.htmlunit.html.HtmlVariable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 
 /**
@@ -56,25 +60,35 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
  * @author Daniel Gredler
  * @author Ronald Brill
  */
-@JsxClass(domClasses = {
-        HtmlAbbreviated.class,
-        HtmlAcronym.class,
-        HtmlBidirectionalOverride.class, HtmlBig.class, HtmlBlink.class, HtmlBold.class,
-        HtmlCitation.class, HtmlCode.class,
-        HtmlDefinition.class,
-        HtmlEmphasis.class,
-        HtmlItalic.class,
-        HtmlKeyboard.class,
-        HtmlNoBreak.class,
-        HtmlRt.class, HtmlRp.class, HtmlRuby.class,
-        HtmlS.class, HtmlSample.class, HtmlSmall.class, HtmlStrike.class,
-        HtmlSubscript.class, HtmlSuperscript.class, HtmlStrong.class,
-        HtmlTeletype.class,
-        HtmlUnderlined.class,
-        HtmlVariable.class,
-        })
+@JsxClasses({
+    @JsxClass(domClass = HtmlAbbreviated.class),
+    @JsxClass(domClass = HtmlAcronym.class),
+    @JsxClass(domClass = HtmlBidirectionalOverride.class),
+    @JsxClass(domClass = HtmlBig.class),
+    @JsxClass(domClass = HtmlBlink.class),
+    @JsxClass(domClass = HtmlBold.class),
+    @JsxClass(domClass = HtmlCitation.class),
+    @JsxClass(domClass = HtmlCode.class),
+    @JsxClass(domClass = HtmlDefinition.class),
+    @JsxClass(domClass = HtmlEmphasis.class),
+    @JsxClass(domClass = HtmlItalic.class),
+    @JsxClass(domClass = HtmlKeyboard.class),
+    @JsxClass(domClass = HtmlNoBreak.class, browsers = @WebBrowser(IE)),
+    @JsxClass(domClass = HtmlRt.class),
+    @JsxClass(domClass = HtmlRp.class),
+    @JsxClass(domClass = HtmlRuby.class),
+    @JsxClass(domClass = HtmlS.class),
+    @JsxClass(domClass = HtmlSample.class),
+    @JsxClass(domClass = HtmlSmall.class),
+    @JsxClass(domClass = HtmlStrike.class),
+    @JsxClass(domClass = HtmlSubscript.class),
+    @JsxClass(domClass = HtmlSuperscript.class),
+    @JsxClass(domClass = HtmlStrong.class),
+    @JsxClass(domClass = HtmlTeletype.class),
+    @JsxClass(domClass = HtmlUnderlined.class),
+    @JsxClass(domClass = HtmlVariable.class)
+})
 public class HTMLPhraseElement extends HTMLElement {
-    private boolean endTagForbidden_;
 
     /**
      * Sets the DOM node that corresponds to this JavaScript object.
@@ -84,33 +98,34 @@ public class HTMLPhraseElement extends HTMLElement {
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
 
-        if ((domNode instanceof HtmlAbbreviated && getBrowserVersion().hasFeature(HTMLABBREVIATED))
-            || domNode instanceof HtmlAcronym
-            || domNode instanceof HtmlBidirectionalOverride
-            || domNode instanceof HtmlBig
-            || domNode instanceof HtmlBlink
-            || domNode instanceof HtmlBold
-            || domNode instanceof HtmlCitation
-            || domNode instanceof HtmlCode
-            || domNode instanceof HtmlDefinition
-            || domNode instanceof HtmlEmphasis
-            || domNode instanceof HtmlItalic
-            || domNode instanceof HtmlKeyboard
-            || domNode instanceof HtmlNoBreak
-            || domNode instanceof HtmlS
-            || domNode instanceof HtmlSample
-            || domNode instanceof HtmlSmall
-            || domNode instanceof HtmlStrong
-            || domNode instanceof HtmlStrike
-            || domNode instanceof HtmlSubscript
-            || domNode instanceof HtmlSuperscript
-            || domNode instanceof HtmlTeletype
-            || domNode instanceof HtmlUnderlined
-            || domNode instanceof HtmlVariable
-            ) {
-            ActiveXObject.addProperty(this, "cite", true, true);
-            ActiveXObject.addProperty(this, "dateTime", true, true);
-            return;
+        if (getBrowserVersion().hasFeature(JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
+            if ((domNode instanceof HtmlAbbreviated && getBrowserVersion().hasFeature(HTMLABBREVIATED))
+                || domNode instanceof HtmlAcronym
+                || domNode instanceof HtmlBidirectionalOverride
+                || domNode instanceof HtmlBig
+                || domNode instanceof HtmlBlink
+                || domNode instanceof HtmlBold
+                || domNode instanceof HtmlCitation
+                || domNode instanceof HtmlCode
+                || domNode instanceof HtmlDefinition
+                || domNode instanceof HtmlEmphasis
+                || domNode instanceof HtmlItalic
+                || domNode instanceof HtmlKeyboard
+                || domNode instanceof HtmlNoBreak
+                || domNode instanceof HtmlS
+                || domNode instanceof HtmlSample
+                || domNode instanceof HtmlSmall
+                || domNode instanceof HtmlStrong
+                || domNode instanceof HtmlStrike
+                || domNode instanceof HtmlSubscript
+                || domNode instanceof HtmlSuperscript
+                || domNode instanceof HtmlTeletype
+                || domNode instanceof HtmlUnderlined
+                || domNode instanceof HtmlVariable
+                ) {
+                ActiveXObject.addProperty(this, "cite", true, true);
+                ActiveXObject.addProperty(this, "dateTime", true, true);
+            }
         }
     }
 
@@ -154,7 +169,7 @@ public class HTMLPhraseElement extends HTMLElement {
      * @return whether the end tag is forbidden or not
      */
     protected boolean isEndTagForbidden() {
-        return endTagForbidden_;
+        return false;
     }
 
     /**

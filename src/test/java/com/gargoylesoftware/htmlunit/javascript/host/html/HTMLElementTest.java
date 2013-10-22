@@ -3560,7 +3560,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "<isindex></isindex>",
             IE = "<ISINDEX>",
             IE10 = "<isindex>")
-    @NotYetImplemented(FF17)
     public void outerHTML_isindex() throws Exception {
         loadPageWithAlerts2(outerHTML("isindex"));
     }

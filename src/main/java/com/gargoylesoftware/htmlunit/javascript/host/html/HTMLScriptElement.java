@@ -40,7 +40,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(domClasses = HtmlScript.class)
+@JsxClass(domClass = HtmlScript.class)
 public class HTMLScriptElement extends HTMLElement {
 
     /**

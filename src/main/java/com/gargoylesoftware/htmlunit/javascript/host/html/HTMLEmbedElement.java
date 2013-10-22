@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(domClasses = HtmlEmbed.class)
+@JsxClass(domClass = HtmlEmbed.class)
 public class HTMLEmbedElement extends HTMLElement {
 
     /**

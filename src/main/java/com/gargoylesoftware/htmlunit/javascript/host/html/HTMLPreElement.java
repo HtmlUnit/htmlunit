@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPreformattedText;
@@ -28,7 +29,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClasses = HtmlPreformattedText.class)
+@JsxClass(domClass = HtmlPreformattedText.class,
+    browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) })
 public class HTMLPreElement extends HTMLElement {
 
     /**

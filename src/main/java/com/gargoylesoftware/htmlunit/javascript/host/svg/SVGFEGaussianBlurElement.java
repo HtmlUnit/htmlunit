@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeGaussianBlur;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClasses = SvgFeGaussianBlur.class,
+@JsxClass(domClass = SvgFeGaussianBlur.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFEGaussianBlurElement extends SVGElement {
 

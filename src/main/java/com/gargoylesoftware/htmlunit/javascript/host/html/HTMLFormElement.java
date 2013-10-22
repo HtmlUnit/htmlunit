@@ -72,7 +72,7 @@ import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection
  *
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535249.aspx">MSDN documentation</a>
  */
-@JsxClass(domClasses = HtmlForm.class)
+@JsxClass(domClass = HtmlForm.class)
 public class HTMLFormElement extends HTMLElement implements Function {
 
     private HTMLCollection elements_; // has to be a member to have equality (==) working

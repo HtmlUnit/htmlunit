@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClasses = HtmlBaseFont.class, browsers = { @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 3.6f) })
+@JsxClass(domClass = HtmlBaseFont.class, browsers = { @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 3.6f) })
 public class HTMLBaseFontElement extends HTMLElement {
 
     /**

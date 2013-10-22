@@ -53,7 +53,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
  * @author Daniel Gredler
  * @author Ronald Brill
  */
-@JsxClass(domClasses = HtmlInput.class)
+@JsxClass(domClass = HtmlInput.class)
 public class HTMLInputElement extends FormField {
 
     /**

@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormField;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(domClasses = HtmlButton.class)
+@JsxClass(domClass = HtmlButton.class)
 public class HTMLButtonElement extends FormField {
 
     /**

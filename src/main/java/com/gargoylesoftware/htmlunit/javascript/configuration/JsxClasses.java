@@ -12,29 +12,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.svg;
+package com.gargoylesoftware.htmlunit.javascript.configuration;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.svg.SvgFePointLight;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * A JavaScript object for SVGFEPointLightElement.
+ * An annotation to mark a Java class as JavaScript class.
  *
  * @version $Revision$
- * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@JsxClass(domClass = SvgFePointLight.class,
-    browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
-public class SVGFEPointLightElement extends SVGElement {
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+public @interface JsxClasses {
 
-    /**
-     * Creates an instance. JavaScript objects must have a default constructor.
-     */
-    public SVGFEPointLightElement() {
-    }
+    /** The different classes. */
+    JsxClass[] value() default { };
+
+    /** Is JavaScript Object. */
+    boolean isJSObject() default true;
+
+    /** The {@link WebBrowser}s supported by this constant. */
+    WebBrowser[] browsers() default {
+        @WebBrowser(IE),
+        @WebBrowser(FF),
+        @WebBrowser(CHROME)
+    };
 }

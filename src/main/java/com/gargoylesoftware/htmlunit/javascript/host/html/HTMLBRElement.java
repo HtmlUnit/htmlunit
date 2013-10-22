@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(domClasses = HtmlBreak.class)
+@JsxClass(domClass = HtmlBreak.class)
 public class HTMLBRElement extends HTMLElement {
 
     /** Valid values for the {@link #getClear() clear} property. */

@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(domClasses = HtmlFont.class)
+@JsxClass(domClass = HtmlFont.class)
 public class HTMLFontElement extends HTMLElement {
 
     /**

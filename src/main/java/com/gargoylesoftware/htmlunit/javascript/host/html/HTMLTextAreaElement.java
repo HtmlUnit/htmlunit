@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormField;
  * @author Daniel Gredler
  * @author Ronald Brill
  */
-@JsxClass(domClasses = HtmlTextArea.class)
+@JsxClass(domClass = HtmlTextArea.class)
 public class HTMLTextAreaElement extends FormField {
 
     private static final Pattern NORMALIZE_VALUE_PATTERN = Pattern.compile("([^\\r])\\n");

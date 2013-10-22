@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeComponentTransfer;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClasses = SvgFeComponentTransfer.class,
+@JsxClass(domClass = SvgFeComponentTransfer.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFEComponentTransferElement extends SVGElement {
 

@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.WindowProxy;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-@JsxClass(domClasses = HtmlFrame.class)
+@JsxClass(domClass = HtmlFrame.class)
 public class HTMLFrameElement extends HTMLElement {
 
     /**

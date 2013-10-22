@@ -21,6 +21,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlMultiColumn;
 import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 
 /**
  * The JavaScript object "HTMLSpanElement".
@@ -30,9 +31,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  * @author Daniel Gredler
  * @author Ronald Brill
  */
-@JsxClass(domClasses = {
-        HtmlMultiColumn.class,
-        HtmlSpan.class })
+@JsxClasses({
+    @JsxClass(domClass = HtmlMultiColumn.class),
+    @JsxClass(domClass = HtmlSpan.class)
+})
 public class HTMLSpanElement extends HTMLElement {
     private boolean endTagForbidden_;
 
@@ -48,8 +50,6 @@ public class HTMLSpanElement extends HTMLElement {
             if ("basefont".equalsIgnoreCase(domNode.getLocalName())) {
                 endTagForbidden_ = true;
             }
-
-            return;
         }
     }
 

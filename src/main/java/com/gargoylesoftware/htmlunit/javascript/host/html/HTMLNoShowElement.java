@@ -15,46 +15,28 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlDivision;
-import com.gargoylesoftware.htmlunit.html.HtmlMarquee;
+import com.gargoylesoftware.htmlunit.html.HtmlNoEmbed;
+import com.gargoylesoftware.htmlunit.html.HtmlNoFrames;
+import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLDivElement".
+ * The JavaScript object "HTMLNoShowElement".
  *
  * @version $Revision$
- * @author Ahmed Ashour
- * @author Daniel Gredler
  * @author Ronald Brill
  */
 @JsxClasses({
-    @JsxClass(domClass = HtmlDivision.class),
-    @JsxClass(domClass = HtmlMarquee.class),
+    @JsxClass(domClass = HtmlNoEmbed.class, browsers = @WebBrowser(value = IE, maxVersion = 8)),
+    @JsxClass(domClass = HtmlNoFrames.class, browsers = @WebBrowser(value = IE, maxVersion = 8)),
+    @JsxClass(domClass = HtmlNoScript.class, browsers = @WebBrowser(value = IE, maxVersion = 8))
 })
-public class HTMLDivElement extends HTMLElement {
-
-    /**
-     * Returns the value of the "align" property.
-     * @return the value of the "align" property
-     */
-    @JsxGetter
-    public String getAlign() {
-        return getAlign(true);
-    }
-
-    /**
-     * Sets the value of the "align" property.
-     * @param align the value of the "align" property
-     */
-    @JsxSetter
-    public void setAlign(final String align) {
-        setAlign(align, false);
-    }
+public class HTMLNoShowElement extends HTMLElement {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>

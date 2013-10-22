@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(domClasses = HtmlLegend.class)
+@JsxClass(domClass = HtmlLegend.class)
 public class HTMLLegendElement extends FormChild {
 
     /**

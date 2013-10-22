@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(domClasses = HtmlSource.class, browsers = { @WebBrowser(FF),
+@JsxClass(domClass = HtmlSource.class, browsers = { @WebBrowser(FF),
         @WebBrowser(value = IE, minVersion = 10), @WebBrowser(CHROME) })
 public class HTMLSourceElement extends HTMLElement {
 

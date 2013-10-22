@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_104;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ALIGN_INVALID;
 
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
@@ -27,7 +27,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @version $Revision$
  * @author Daniel Gredler
  */
-@JsxClass(isJSObject = false)
+@JsxClasses(
+        isJSObject = false
+)
 public class HTMLTableComponent extends HTMLElement {
 
     /** The valid "vAlign" values for this element, when emulating IE. */

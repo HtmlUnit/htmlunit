@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgTSpan;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClasses = SvgTSpan.class,
+@JsxClass(domClass = SvgTSpan.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGTSpanElement extends SVGElement {
 

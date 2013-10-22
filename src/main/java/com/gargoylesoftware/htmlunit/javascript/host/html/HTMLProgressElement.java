@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlProgress;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -29,7 +30,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Marc Guillemot
  * @author Ronald Brill
  */
-@JsxClass(domClasses = HtmlProgress.class, browsers = @WebBrowser(value = FF, minVersion = 10))
+@JsxClass(domClass = HtmlProgress.class,
+    browsers = { @WebBrowser(value = FF), @WebBrowser(value = IE, minVersion = 10) })
 public class HTMLProgressElement extends HTMLElement {
 
     /**

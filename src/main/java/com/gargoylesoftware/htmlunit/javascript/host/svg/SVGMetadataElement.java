@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgMetadata;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClasses = SvgMetadata.class,
+@JsxClass(domClass = SvgMetadata.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGMetadataElement extends SVGElement {
 

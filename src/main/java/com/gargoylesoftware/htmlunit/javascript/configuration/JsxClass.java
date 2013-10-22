@@ -34,10 +34,7 @@ import java.lang.annotation.Target;
 public @interface JsxClass {
 
     /** The DOM class (if any). */
-    Class<?>[] domClasses() default { };
-
-    /** Is JavaScript Object. */
-    boolean isJSObject() default true;
+    Class<?> domClass() default Object.class;
 
     /** The {@link WebBrowser}s supported by this constant. */
     WebBrowser[] browsers() default {
@@ -45,5 +42,4 @@ public @interface JsxClass {
         @WebBrowser(FF),
         @WebBrowser(CHROME)
     };
-
 }

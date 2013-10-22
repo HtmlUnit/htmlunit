@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(domClasses = HtmlUnknownElement.class)
+@JsxClass(domClass = HtmlUnknownElement.class)
 public class HTMLUnknownElement extends HTMLElement {
 
     /**

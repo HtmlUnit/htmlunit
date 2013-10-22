@@ -20,6 +20,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableBody;
 import com.gargoylesoftware.htmlunit.html.HtmlTableFooter;
 import com.gargoylesoftware.htmlunit.html.HtmlTableHeader;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.RowContainer;
@@ -33,7 +34,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.RowContainer;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(domClasses = { HtmlTableBody.class, HtmlTableHeader.class, HtmlTableFooter.class })
+@JsxClasses({
+    @JsxClass(domClass = HtmlTableBody.class),
+    @JsxClass(domClass = HtmlTableHeader.class),
+    @JsxClass(domClass = HtmlTableFooter.class)
+})
 public class HTMLTableSectionElement extends RowContainer {
 
     /** The valid "vAlign" values for this element, when emulating IE. */
