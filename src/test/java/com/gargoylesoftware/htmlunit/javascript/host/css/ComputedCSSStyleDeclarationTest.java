@@ -300,12 +300,12 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "inline", "inline", "inline", "block", "inline", "inline-block" })
+    @Alerts({ "inline", "inline", "inline", "inline", "block", "inline", "inline-block" })
     public void defaultDisplayValues_B() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p id='p'>\n"
             + "    <b id='b'></b>\n"
-            // + "    <bdi id='bdi'></bdi>\n"
+            + "    <bdi id='bdi'></bdi>\n"
             + "    <bdo id='bdo'></bdo>\n"
             + "    <big id='big'></big>\n"
             + "    <blockquote id='blockquote'></blockquote>\n"
@@ -323,7 +323,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  </script>\n"
             + "  <script>\n"
             + "    x('b');\n"
-            // + "    x('bdi');\n"
+            + "    x('bdi');\n"
 
             + "    x('bdo');\n"
             + "    x('big');\n"
