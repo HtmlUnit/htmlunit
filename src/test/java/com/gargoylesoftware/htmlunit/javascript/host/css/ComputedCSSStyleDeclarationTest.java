@@ -339,7 +339,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "inline", "table-caption", "block", "inline", "inline", "table-column", "table-column-group" })
+    @Alerts({ "inline", "table-caption", "block", "inline", "inline", "table-column", "table-column-group", "inline" })
     public void defaultDisplayValues_C() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <canvas id='canvas'></canvas>\n"
@@ -358,7 +358,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  </p>\n"
 
             + "  <menu>\n"
-            // + "    <command id='command'></command>\n"
+            + "    <command id='command'></command>\n"
             + "  </menu>\n"
 
             + "  <script>\n"
@@ -377,7 +377,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    x('code');\n"
             + "    x('col');\n"
             + "    x('colgroup');\n"
-            // + "    x('command');\n"
+            + "    x('command');\n"
             + "  </script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -387,7 +387,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "block", "inline", "inline", "block", "block", "block", "block" })
+    @Alerts(DEFAULT = { "none", "block", "inline", "inline", "inline", "inline", "block", "block", "block", "block" },
+            IE8 = { "inline", "block", "inline", "inline", "inline", "inline", "block", "block", "block", "block" })
     public void defaultDisplayValues_D() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <datalist id='datalist'></datalist>\n"
@@ -401,9 +402,9 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    <del id='del'></del>\n"
             + "  </p>\n"
 
-            // + "  <details id='details'></details>\n"
+            + "  <details id='details'></details>\n"
             + "  <dfn id='dfn'></dfn>\n"
-            // + "  <dialog id='dialog'></dialog>\n"
+            + "  <dialog id='dialog'></dialog>\n"
             + "  <dir id='dir'></dir>\n"
             + "  <dir id='div'></div>\n"
 
@@ -416,12 +417,12 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "    }\n"
             + "  </script>\n"
             + "  <script>\n"
-            // + "    x('datalist');\n"
+            + "    x('datalist');\n"
             + "    x('dd');\n"
             + "    x('del');\n"
-            // + "    x('details');\n"
+            + "    x('details');\n"
             + "    x('dfn');\n"
-            // + "    x('dialog');\n"
+            + "    x('dialog');\n"
             + "    x('dir');\n"
             + "    x('div');\n"
             + "    x('dl');\n"

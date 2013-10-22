@@ -87,12 +87,15 @@ public class HTMLUnknownElement extends HTMLElement {
                 return "block";
             }
 
-            // FF 3.6
+            // FF < 16
             if ("METER".equals(tagName)) {
                 return "inline-block";
             }
             if ("PROGRESS".equals(tagName)) {
                 return "inline-block";
+            }
+            if ("DATALIST".equals(tagName)) {
+                return "none";
             }
         }
         if ("RUBY".equals(tagName)) {
