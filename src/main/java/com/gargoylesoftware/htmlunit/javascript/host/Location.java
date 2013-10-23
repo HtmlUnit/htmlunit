@@ -222,8 +222,11 @@ public class Location extends SimpleScriptable {
                 }
             }
 
+            final WebRequest request = new WebRequest(url);
+            request.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
+
             final WebWindow webWindow = getWindow().getWebWindow();
-            webWindow.getWebClient().download(webWindow, "", new WebRequest(url),
+            webWindow.getWebClient().download(webWindow, "", request,
                     newLocation.endsWith("#"), "JS set location");
         }
         catch (final MalformedURLException e) {

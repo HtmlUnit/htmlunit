@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.14" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1551">
+                JavaScript: send the correct Referer header when changing the location property.
+            </action>
             <action type="fix" dev="asashour">
                 SSL: use default algorithm for fetching the KeyManagerFactory.
             </action>

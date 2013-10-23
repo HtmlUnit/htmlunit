@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
 
 import java.net.URL;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +29,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -575,5 +577,49 @@ public class Location2Test extends WebDriverTestCase {
             // TODO [IE10] when run with real IE10 the window is closed and all following tests are broken
             shutDownAll();
         }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("§§URL§§menu.html")
+    public void missingRefererHeaderWhenSettingFrameLocation() throws Exception {
+        final String html = "<html><head><title>Frameset</title></head>\n"
+                + "<frameset rows='20%,80%'>\n"
+                + "  <frame src='menu.html' name='menu'>\n"
+                + "  <frame src='' name='content'>\n"
+                + "</frameset></html>";
+
+        final String menu = "<html><head><title>Menu</title></head>\n"
+                + "<body>\n"
+                + "  <a id='link' href='content.html' target='content'>Link</a>"
+                + "  <a id='jsLink' href='#' onclick=\"javascript:top.content.location='content.html';\">jsLink</a>\n"
+                + "</body></html>";
+
+        final String content = "<html><head><title>Content</title></head><body><p>content</p></body></html>";
+
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setResponse(new URL(getDefaultUrl(), "menu.html"), menu);
+        conn.setResponse(new URL(getDefaultUrl(), "content.html"), content);
+        conn.setResponse(new URL(getDefaultUrl(), "content.html"), content);
+
+        expandExpectedAlertsVariables(getDefaultUrl());
+        final WebDriver driver = loadPage2(html);
+
+        assertEquals(2, conn.getRequestCount());
+
+        // click an anchor with href and target
+        driver.switchTo().frame(0);
+        driver.findElement(By.id("link")).click();
+        assertEquals(3, conn.getRequestCount());
+        Map<String, String> lastAdditionalHeaders = conn.getLastAdditionalHeaders();
+        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get("Referer"));
+
+        // click an anchor with onclick which sets frame.location
+        driver.findElement(By.id("jsLink")).click();
+        assertEquals(4, conn.getRequestCount());
+        lastAdditionalHeaders = conn.getLastAdditionalHeaders();
+        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get("Referer"));
     }
 }
