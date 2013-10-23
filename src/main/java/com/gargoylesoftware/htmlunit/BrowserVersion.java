@@ -123,6 +123,15 @@ public class BrowserVersion implements Serializable, Cloneable {
         "Mozilla/5.0 (Windows NT 6.1; rv:17.0) Gecko/20100101 Firefox/17.0",
         (float) 17.0, "FF17", null);
 
+    /**
+     * Firefox 24 ESR.
+     * @since 2.14
+     **/
+    public static final BrowserVersion FIREFOX_24 = new BrowserVersion(
+        NETSCAPE, "5.0 (Windows)",
+        "Mozilla/5.0 (Windows NT 6.1; rv:24.0) Gecko/20100101 Firefox/24.0",
+        (float) 24.0, "FF24", null);
+
     /** Internet Explorer 8. */
     public static final BrowserVersion INTERNET_EXPLORER_8 = new BrowserVersion(
         INTERNET_EXPLORER, "4.0 (compatible; MSIE 8.0; Windows NT 6.0)",
@@ -161,6 +170,12 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_17.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
         FIREFOX_17.setCssAcceptHeader("text/css,*/*;q=0.1");
 
+        FIREFOX_24.initDefaultFeatures();
+
+        FIREFOX_24.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+        FIREFOX_24.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
+        FIREFOX_24.setCssAcceptHeader("text/css,*/*;q=0.1");
+
         INTERNET_EXPLORER_8.setHtmlAcceptHeader("image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*");
 
         final PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
@@ -168,6 +183,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
             "Shockwave Flash", "swf"));
         FIREFOX_17.getPlugins().add(flash);
+        FIREFOX_24.getPlugins().add(flash);
 
         CHROME.initDefaultFeatures();
         CHROME.setApplicationCodeName("Mozilla");
@@ -310,7 +326,7 @@ public class BrowserVersion implements Serializable, Cloneable {
 
     /**
      * Returns <tt>true</tt> if this <tt>BrowserVersion</tt> instance represents some
-     * version of Firefox like {@link #FIREFOX_3_6} or {@link #FIREFOX_17}.
+     * version of Firefox like {@link #FIREFOX_17} or {@link #FIREFOX_24}.
      * @return whether or not this version is a version of a Firefox browser
      */
     public final boolean isFirefox() {

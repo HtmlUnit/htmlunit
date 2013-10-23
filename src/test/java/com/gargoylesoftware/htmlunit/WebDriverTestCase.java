@@ -75,21 +75,23 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * "test.properties" in the HtmlUnit root directory.
  * Sample:
  * <pre>
-   browsers=hu,ff17,ie9
+   browsers=hu,ff17,ff24,ie9
    ie.bin=C:\\path\\to\\32bit\\IEDriverServer.exe       [Windows]
    ff17.bin=/usr/bin/firefox                            [Unix-like]
+   ff24.bin=/usr/bin/firefox                            [Unix-like]
    chrome.bin=/path/to/chromedriver                     [Unix-like]
  * </pre>
  * The file should contain four properties: "browsers", "ie.bin", "ff17.bin", and "chrome.bin".
  * <ul>
  *   <li>browsers: is a comma separated list contains any combination of "hu" (for HtmlUnit with all browser versions),
- *   "hu-ie8", "hu-ie9", "hu-ff17",
- *   "ff17", "ie8", "ie9", "chrome", which will be used to driver real browsers,
+ *   "hu-ie8", "hu-ie9", "hu-ff17, "hu-ff24",
+ *   "ff17", ff24", "ie8", "ie9", "chrome", which will be used to driver real browsers,
  *   note that you can't define more than one IE as there is no standard way
  *   to have multiple IEs on the same machine</li>
  *   <li>ie.bin: is the location of the IEDriverServer binary (see
  *   <a href="http://code.google.com/p/selenium/downloads/list">IEDriverServer downloads</a></li>
  *   <li>ff17.bin: is the location of the FF17 binary, in Windows use double back-slashes</li>
+ *   <li>ff24.bin: is the location of the FF24 binary, in Windows use double back-slashes</li>
  *   <li>chrome.bin: is the location of the ChromeDriver binary (see
  *   <a href="http://code.google.com/p/chromedriver/downloads/list">Chrome Driver downloads</a></li>
  * </ul>
@@ -108,6 +110,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static List<String> BROWSERS_PROPERTIES_;
     private static String IE_BIN_;
     private static String FF17_BIN_;
+    private static String FF24_BIN_;
     private static String CHROME_BIN_;
 
     /** The driver cache. */
@@ -145,6 +148,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                             .replaceAll(" ", "").toLowerCase().split(","));
                     IE_BIN_ = properties.getProperty("ie.bin");
                     FF17_BIN_ = properties.getProperty("ff17.bin");
+                    FF24_BIN_ = properties.getProperty("ff24.bin");
                     CHROME_BIN_ = properties.getProperty("chrome.bin");
                 }
             }
@@ -247,6 +251,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
             String ffBinary = null;
             if (BrowserVersion.FIREFOX_17 == getBrowserVersion()) {
                 ffBinary = FF17_BIN_;
+            }
+            if (BrowserVersion.FIREFOX_24 == getBrowserVersion()) {
+                ffBinary = FF24_BIN_;
             }
             if (ffBinary != null) {
                 return new FirefoxDriver(new FirefoxBinary(new File(ffBinary)), new FirefoxProfile());

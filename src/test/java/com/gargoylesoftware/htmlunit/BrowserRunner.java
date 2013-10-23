@@ -73,6 +73,9 @@ public class BrowserRunner extends Suite {
             if (browsers.contains("hu") || browsers.contains("hu-ff17")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_17, false));
             }
+            if (browsers.contains("hu") || browsers.contains("hu-ff24")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_24, false));
+            }
             if (browsers.contains("hu") || browsers.contains("hu-ie8")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, false));
             }
@@ -89,6 +92,9 @@ public class BrowserRunner extends Suite {
             if (WebDriverTestCase.class.isAssignableFrom(klass)) {
                 if (browsers.contains("ff17")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_17, true));
+                }
+                if (browsers.contains("ff24")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_24, true));
                 }
                 if (browsers.contains("ie8")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, true));
@@ -172,6 +178,9 @@ public class BrowserRunner extends Suite {
         /** Firefox 17. */
         FF17,
 
+        /** Firefox 24. */
+        FF24,
+
         /**
          * Not Browser-specific, it will run only once. Don't use this with other Browsers.
          * And don't call directly or indirectly {@link WebTestCase#getBrowserVersion()}
@@ -229,6 +238,9 @@ public class BrowserRunner extends Suite {
 
         /** Alerts for Firefox 17. If not defined, {@link #FF()} is used. */
         String[] FF17() default { EMPTY_DEFAULT };
+
+        /** Alerts for Firefox 24. If not defined, {@link #FF()} is used. */
+        String[] FF24() default { EMPTY_DEFAULT };
 
         /** Alerts for latest Chrome. */
         String[] CHROME() default { EMPTY_DEFAULT };
