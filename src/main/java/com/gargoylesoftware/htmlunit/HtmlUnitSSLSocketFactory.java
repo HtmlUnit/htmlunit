@@ -173,7 +173,8 @@ final class HtmlUnitSSLSocketFactory extends SSLSocketFactory {
             final char[] passwordChars = password != null ? password.toCharArray() : null;
 
             final KeyStore keyStore = getKeyStore(options);
-            final KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance("SunX509");
+            final String algorithm = KeyManagerFactory.getDefaultAlgorithm();
+            final KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(algorithm);
             keyManagerFactory.init(keyStore, passwordChars);
             return keyManagerFactory.getKeyManagers();
         }

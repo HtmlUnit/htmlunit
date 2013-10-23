@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.14" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                SSL: use default algorithm for fetching the KeyManagerFactory.
+            </action>
             <action type="remove" dev="asashour">
                 BrowserVersion: remove deprecated FIREFOX_3_6, FIREFOX_10, CHROME_16, INTERNET_EXPLORER_6
                 and INTERNET_EXPLORER_7.
