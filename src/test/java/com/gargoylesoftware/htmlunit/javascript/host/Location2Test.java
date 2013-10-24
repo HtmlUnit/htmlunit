@@ -583,8 +583,46 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("§§URL§§")
+    public void refererHeaderWhenSettingLocation() throws Exception {
+        final String html = "<html><head><title>Base</title></head>\n"
+                + "<body>\n"
+                + "  <a id='link' href='content.html' target='content'>Link</a>"
+                + "  <a id='jsLink' href='#' onclick=\"javascript:window.location='content.html';\">jsLink</a>\n"
+                + "</body></html>";
+
+        final String content = "<html><head><title>Content</title></head><body><p>content</p></body></html>";
+
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setResponse(new URL(getDefaultUrl(), "content.html"), content);
+        conn.setResponse(new URL(getDefaultUrl(), "content.html"), content);
+
+        expandExpectedAlertsVariables(getDefaultUrl());
+        final WebDriver driver = loadPage2(html);
+
+        assertEquals(1, conn.getRequestCount());
+
+        // click an anchor with href and target
+        driver.findElement(By.id("link")).click();
+        assertEquals(2, conn.getRequestCount());
+        Map<String, String> lastAdditionalHeaders = conn.getLastAdditionalHeaders();
+        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get("Referer"));
+
+        loadPage2(html);
+        assertEquals(3, conn.getRequestCount());
+        // click an anchor with onclick which sets frame.location
+        driver.findElement(By.id("jsLink")).click();
+        assertEquals(4, conn.getRequestCount());
+        lastAdditionalHeaders = conn.getLastAdditionalHeaders();
+        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get("Referer"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("§§URL§§menu.html")
-    public void missingRefererHeaderWhenSettingFrameLocation() throws Exception {
+    public void refererHeaderWhenSettingFrameLocation() throws Exception {
         final String html = "<html><head><title>Frameset</title></head>\n"
                 + "<frameset rows='20%,80%'>\n"
                 + "  <frame src='menu.html' name='menu'>\n"
