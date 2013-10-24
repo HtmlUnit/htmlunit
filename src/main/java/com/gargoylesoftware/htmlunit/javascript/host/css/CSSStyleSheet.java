@@ -119,6 +119,7 @@ import com.steadystate.css.parser.selectors.SuffixAttributeConditionImpl;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Guy Burton
+ * @author Frank Danek
  */
 @JsxClass
 public class CSSStyleSheet extends SimpleScriptable {
@@ -896,7 +897,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * For Firefox.
      * @return the owner
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public HTMLElement getOwnerNode() {
         return ownerNode_;
     }
@@ -923,7 +924,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * Returns the collection of rules defined in this style sheet.
      * @return the collection of rules defined in this style sheet
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList getCssRules() {
         if (cssRules_ == null) {
             cssRules_ = new com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList(this);
@@ -984,7 +985,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @see <a href="http://www.w3.org/TR/DOM-Level-2-Style/css.html#CSS-CSSStyleSheet">DOM level 2</a>
      * @return the position of the inserted rule
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public int insertRule(final String rule, final int position) {
         try {
             return wrapped_.insertRule(rule, position);
@@ -999,7 +1000,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @param position the position of the rule to be deleted
      * @see <a href="http://www.w3.org/TR/DOM-Level-2-Style/css.html#CSS-CSSStyleSheet">DOM level 2</a>
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public void deleteRule(final int position) {
         try {
             wrapped_.deleteRule(position);

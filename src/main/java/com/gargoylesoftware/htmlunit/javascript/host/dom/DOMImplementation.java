@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOMIMPLEMENTATION_ONLY_HTML;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -30,6 +31,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Frank Danek
  *
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-core.html#ID-102161490">
  * W3C Dom Level 1</a>
@@ -85,7 +87,7 @@ public class DOMImplementation extends SimpleScriptable {
      * @return the newly created {@link XMLDocument}
      */
     //TODO: change doctype type to "DocType"
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public XMLDocument createDocument(final String namespaceURI, final String qualifiedName,
             final Object doctype) {
         final XMLDocument document = new XMLDocument(getWindow().getWebWindow());

@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.arrays;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -32,10 +33,12 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @JsxClasses(
         isJSObject = false,
-        browsers = { @WebBrowser(value = FF, minVersion = 15), @WebBrowser(CHROME) })
+        browsers = { @WebBrowser(value = FF, minVersion = 15), @WebBrowser(CHROME),
+            @WebBrowser(value = IE, minVersion = 10) })
 public class DataView extends ArrayBufferView {
 
     /**

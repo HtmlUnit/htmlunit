@@ -14,9 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_105;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_106;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_107;
+import static
+    com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_SET_CAPTION_ALTHOUGH_ALREADY_SET_THROWS_ERROR;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_SET_TFOOT_ALTHOUGH_ALREADY_SET_THROWS_ERROR;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_SET_THEAD_ALTHOUGH_ALREADY_SET_THROWS_ERROR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.ArrayList;
@@ -46,6 +47,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.RowContainer;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @JsxClass(domClass = HtmlTable.class)
 public class HTMLTableElement extends RowContainer {
@@ -72,7 +74,7 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxSetter
     public void setCaption(final Object o) {
-        if (getBrowserVersion().hasFeature(GENERATED_105)) {
+        if (getBrowserVersion().hasFeature(JS_TABLE_SET_CAPTION_ALTHOUGH_ALREADY_SET_THROWS_ERROR)) {
             throw Context.reportRuntimeError("Can't set caption");
         }
         else if (!(o instanceof HTMLTableCaptionElement)) {
@@ -106,7 +108,7 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxSetter
     public void setTFoot(final Object o) {
-        if (getBrowserVersion().hasFeature(GENERATED_106)) {
+        if (getBrowserVersion().hasFeature(JS_TABLE_SET_TFOOT_ALTHOUGH_ALREADY_SET_THROWS_ERROR)) {
             throw Context.reportRuntimeError("Can't set tFoot");
         }
         else if (!(o instanceof HTMLTableSectionElement
@@ -141,7 +143,7 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxSetter
     public void setTHead(final Object o) {
-        if (getBrowserVersion().hasFeature(GENERATED_107)) {
+        if (getBrowserVersion().hasFeature(JS_TABLE_SET_THEAD_ALTHOUGH_ALREADY_SET_THROWS_ERROR)) {
             throw Context.reportRuntimeError("Can't set tHead");
         }
         else if (!(o instanceof HTMLTableSectionElement

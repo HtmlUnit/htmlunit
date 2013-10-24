@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -28,10 +29,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Frank Danek
  *
  * @see <a href="http://www.xulplanet.com/references/objref/DOMParser.html">XUL Planet</a>
  */
-@JsxClass(browsers = @WebBrowser(FF))
+@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
 public class DOMParser extends SimpleScriptable {
 
     /**

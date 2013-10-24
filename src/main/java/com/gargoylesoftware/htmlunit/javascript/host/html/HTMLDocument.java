@@ -22,24 +22,27 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_164
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_51;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_53;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_55;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_57;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_59;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_60;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_61;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_CHARSET_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_COLOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_APPEND_CHILD_SUPPORTED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DOCTYPE_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DOMAIN_IS_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FRAME_BODY_NULL_IF_NOT_LOADED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENTS_BY_NAME_EMPTY_RETURNS_NOTHING;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENTS_BY_NAME_NULL_RETURNS_NOTHING;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME_IN_QUICKS_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_QUERYCOMMAND_SUPPORTED_ONLY_DESIGNMODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUIRKS_MODE_ALWAYS_DOC_MODE_5;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -151,6 +154,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Sudhan Moghe
  * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
  * @author Ronald Brill
+ * @author Frank Danek
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535862.aspx">MSDN documentation</a>
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919">
  * W3C DOM Level 1</a>
@@ -206,6 +210,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     private String domain_;
     private String uniqueID_;
     private String lastModified_;
+    private String compatMode_;
     private int documentMode_ = -1;
 
     private boolean closePostponedAction_;
@@ -426,7 +431,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the value of the JavaScript attribute "namespaces".
      * @return the value of the JavaScript attribute "namespaces"
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
     public Object getNamespaces() {
         if (namespaces_ == null) {
             namespaces_ = new NamespaceCollection(this);
@@ -808,10 +813,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter
     public String getCompatMode() {
-        if (getDocumentMode() == 5) {
-            return "BackCompat";
-        }
-        return "CSS1Compat";
+        // initialize the modes
+        getDocumentMode();
+        return compatMode_;
     }
 
     /**
@@ -824,18 +828,20 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             return documentMode_;
         }
 
+        compatMode_ = "CSS1Compat";
+
         final BrowserVersion browserVersion = getBrowserVersion();
         if (isQuirksDocType(browserVersion)) {
-            documentMode_ = 5;
-            return documentMode_;
+            compatMode_ = "BackCompat";
+
+            if (browserVersion.hasFeature(QUIRKS_MODE_ALWAYS_DOC_MODE_5)) {
+                documentMode_ = 5;
+                return documentMode_;
+            }
         }
 
         final float version = browserVersion.getBrowserVersionNumeric();
-        if (version == 8) {
-            documentMode_ = 8;
-            return documentMode_;
-        }
-        documentMode_ = 9;
+        documentMode_ = (int) Math.floor(version);
         return documentMode_;
     }
 
@@ -847,6 +853,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     public void forceDocumentMode(final int documentMode) {
         documentMode_ = documentMode;
+        compatMode_ = documentMode == 5 ? "BackCompat" : "CSS1Compat";
     }
 
     private boolean isQuirksDocType(final BrowserVersion browserVersion) {
@@ -1012,7 +1019,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns a string representing the encoding under which the document was parsed.
      * @return a string representing the encoding under which the document was parsed
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public String getInputEncoding() {
         return getHtmlPage().getPageEncoding();
     }
@@ -1021,9 +1028,13 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the character encoding of the current document.
      * @return the character encoding of the current document
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public String getCharacterSet() {
-        return getHtmlPage().getPageEncoding();
+        final String charset = getHtmlPage().getPageEncoding();
+        if (charset != null && getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
+            return charset.toLowerCase(Locale.ENGLISH);
+        }
+        return charset;
     }
 
     /**
@@ -1200,7 +1211,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         Object result = NOT_FOUND;
 
         // IE can handle HTML, but it takes only the first tag found
-        if (tagName.startsWith("<") && getBrowserVersion().hasFeature(GENERATED_57)) {
+        if (tagName.startsWith("<") && getBrowserVersion().hasFeature(JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX)) {
             final Matcher m = FIRST_TAG_PATTERN.matcher(tagName);
             if (m.find()) {
                 tagName = m.group(1);
@@ -1300,7 +1311,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         catch (final ElementNotFoundException e) {
             // Just fall through - result is already set to null
             final BrowserVersion browser = getBrowserVersion();
-            if (browser.hasFeature(JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME_IN_QUICKS_MODE)
+            if (browser.hasFeature(JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME)
+                    || browser.hasFeature(JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME_IN_QUICKS_MODE)
                     && getHtmlPage().isQuirksMode()) {
                 final HTMLCollection elements = getElementsByName(id);
                 result = elements.get(0, elements);
@@ -1323,7 +1335,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return all the descendant elements with the specified class name
      * @see <a href="https://developer.mozilla.org/en/DOM/document.getElementsByClassName">Mozilla doc</a>
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public HTMLCollection getElementsByClassName(final String className) {
         return ((HTMLElement) getDocumentElement()).getElementsByClassName(className);
     }
@@ -1340,8 +1352,10 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxFunction
     public HTMLCollection getElementsByName(final String elementName) {
         implicitCloseIfNecessary();
-        if (getBrowserVersion().hasFeature(GENERATED_59)
-                && (StringUtils.isEmpty(elementName) || "null".equals(elementName))) {
+        if (getBrowserVersion().hasFeature(JS_GET_ELEMENTS_BY_NAME_EMPTY_RETURNS_NOTHING)
+                && StringUtils.isEmpty(elementName)
+                || getBrowserVersion().hasFeature(JS_GET_ELEMENTS_BY_NAME_NULL_RETURNS_NOTHING)
+                && "null".equals(elementName)) {
             return HTMLCollection.emptyCollection(getWindow());
         }
         // Null must me changed to '' for proper collection initialization.
@@ -1459,7 +1473,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public HTMLElement getBody() {
         final HtmlPage page = getHtmlPage();
         // for IE, the body of a not yet loaded page is null whereas it already exists for FF
-        if (getBrowserVersion().hasFeature(GENERATED_61) && (page.getEnclosingWindow() instanceof FrameWindow)) {
+        if (getBrowserVersion().hasFeature(JS_FRAME_BODY_NULL_IF_NOT_LOADED)
+                && (page.getEnclosingWindow() instanceof FrameWindow)) {
             final HtmlPage enclosingPage = (HtmlPage) page.getEnclosingWindow().getParentWindow().getEnclosedPage();
             if (WebClient.URL_ABOUT_BLANK.equals(page.getUrl())
                     && enclosingPage.getReadyState() != DomNode.READY_STATE_COMPLETE) {
@@ -1477,7 +1492,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns this document's <tt>head</tt> element.
      * @return this document's <tt>head</tt> element
      */
-    @JsxGetter(@WebBrowser(value = FF, minVersion = 10))
+    @JsxGetter({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(value = IE, minVersion = 10) })
     public HTMLElement getHead() {
         final HtmlElement head = getHtmlPage().getHead();
         if (head != null) {
@@ -1792,7 +1807,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @throws DOMException if the event type is not supported (will have a type of
      *         DOMException.NOT_SUPPORTED_ERR)
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public Event createEvent(final String eventType) throws DOMException {
         final Class<? extends Event> clazz = SUPPORTED_EVENT_TYPE_MAP.get(eventType);
         if (clazz == null) {
@@ -1855,7 +1870,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return a new range
      * @see <a href="http://www.xulplanet.com/references/objref/HTMLDocument.html#method_createRange">XUL Planet</a>
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public Range createRange() {
         final Range r = new Range(this);
         r.setParentScope(getWindow());
@@ -2046,7 +2061,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return <tt>false</tt> if at least one of the event handlers which handled the event
      *         called <tt>preventDefault</tt>; <tt>true</tt> otherwise
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public boolean dispatchEvent(final Event event) {
         event.setTarget(this);
         final ScriptResult result = fireEvent(event);
@@ -2137,7 +2152,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Sets the head.
      * @param head the head
      */
-    @JsxSetter(@WebBrowser(value = FF, minVersion = 10))
+    @JsxSetter({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(value = IE, minVersion = 10) })
     public void setHead(final ScriptableObject head) {
         //ignore
     }
@@ -2146,7 +2161,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the current selection.
      * @return the current selection
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public Selection getSelection() {
         return getWindow().getSelectionImpl();
     }

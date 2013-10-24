@@ -20,7 +20,11 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_72;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ATTRIBUTE_FIX_IN_QUIRKS_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_OUTER_HTML_UPPER_CASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_OUTER_INNER_HTML_QUOTE_ATTRIBUTES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_EXPAND_SHORT_HEX;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_REPLACE_NAME_BY_HEX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_RESTRICT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_RESTRICT_AND_FILL_UP;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_TO_LOWER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BOUNDING_CLIENT_RECT_OFFSET_TWO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CHAR_EMULATED;
@@ -149,6 +153,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @JsxClasses({
     @JsxClass(domClass = HtmlElement.class),
@@ -682,7 +687,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param localName the local name of the attribute to look for
      * @return the specified attribute, <code>null</code> if the attribute is not defined
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public Object getAttributeNodeNS(final String namespaceURI, final String localName) {
         return getDomNodeOrDie().getAttributeNodeNS(namespaceURI, localName).getScriptObject();
     }
@@ -801,7 +806,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param className the name to search for
      * @return all the descendant elements with the specified class name
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public HTMLCollection getElementsByClassName(final String className) {
         final HtmlElement elt = getDomNodeOrDie();
         final String description = "HTMLElement.getElementsByClassName('" + className + "')";
@@ -1846,7 +1851,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the namespace defined for the element
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534388.aspx">MSDN documentation</a>
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
     public String getScopeName() {
         final String prefix = getDomNodeOrDie().getPrefix();
         return prefix != null ? prefix : "HTML";
@@ -1857,7 +1862,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the Uniform Resource Name (URN) specified in the namespace declaration
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534658.aspx">MSDN documentation</a>
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
     public String getTagUrn() {
         final String urn = getDomNodeOrDie().getNamespaceURI();
         return urn != null ? urn : "";
@@ -1952,7 +1957,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return <tt>false</tt> if at least one of the event handlers which handled the event
      *         called <tt>preventDefault</tt>; <tt>true</tt> otherwise
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public boolean dispatchEvent(final Event event) {
         event.setTarget(this);
         final HtmlElement element = getDomNodeOrDie();
@@ -2129,7 +2134,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the filters
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms537452.aspx">MSDN doc</a>
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
     public Object getFilters() {
         return this; // return anything, what matters is that it is not null
     }
@@ -2346,36 +2351,57 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     protected void setColorAttribute(final String name, final String value) {
         String s = value;
-        if (getBrowserVersion().hasFeature(HTML_COLOR_RESTRICT) && !s.isEmpty()) {
-            //For IE9, check HTMLElementTest#setColorAttribute
+        if (!s.isEmpty()) {
+            final boolean replaceNameByHex = getBrowserVersion().hasFeature(HTML_COLOR_REPLACE_NAME_BY_HEX);
+            final boolean restrict = getBrowserVersion().hasFeature(HTML_COLOR_RESTRICT);
+            final boolean restrictAndFillUp = getBrowserVersion().hasFeature(HTML_COLOR_RESTRICT_AND_FILL_UP);
 
-            s = null;
-            for (final String key : COLORS_MAP_IE.keySet()) {
-                if (key.equalsIgnoreCase(value)) {
-                    s = COLORS_MAP_IE.get(key).toLowerCase(Locale.ENGLISH);
-                    break;
+            boolean isName = false;
+            if (replaceNameByHex || restrict || restrictAndFillUp) {
+                for (final String key : COLORS_MAP_IE.keySet()) {
+                    if (key.equalsIgnoreCase(value)) {
+                        isName = true;
+                        if (replaceNameByHex) {
+                            s = COLORS_MAP_IE.get(key).toLowerCase(Locale.ENGLISH);
+                        }
+                        break;
+                    }
                 }
             }
-            if (s == null) {
-                s = value.toLowerCase(Locale.ENGLISH);
-                if (s.charAt(0) == '#') {
-                    s = s.substring(1);
+            if (!isName) {
+                if (s.charAt(0) == '#' && s.length() == 4
+                        && getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_SHORT_HEX)) {
+                    final StringBuilder builder = new StringBuilder(7);
+                    builder.append("#0").append(s.charAt(1))
+                        .append('0').append(s.charAt(2))
+                        .append('0').append(s.charAt(3));
+                    s = builder.toString();
                 }
-                final StringBuilder builder = new StringBuilder(7);
-                for (int x = 0; x < 6 && x < s.length(); x++) {
-                    final char ch = s.charAt(x);
-                    if ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'f')) {
-                        builder.append(ch);
+                if (restrict || restrictAndFillUp) {
+                    if (s.charAt(0) == '#') {
+                        s = s.substring(1);
                     }
-                    else {
-                        builder.append('0');
+                    final StringBuilder builder = new StringBuilder(7);
+                    for (int x = 0; x < 6 && x < s.length(); x++) {
+                        final char ch = s.charAt(x);
+                        if ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'f') || (ch >= 'A' && ch <= 'F')) {
+                            builder.append(ch);
+                        }
+                        else {
+                            builder.append('0');
+                        }
                     }
+                    if (restrictAndFillUp) {
+                        while (builder.length() < 6) {
+                            builder.append('0');
+                        }
+                    }
+                    builder.insert(0, '#');
+                    s = builder.toString();
                 }
-                while (builder.length() < 6) {
-                    builder.append('0');
-                }
-                builder.insert(0, '#');
-                s = builder.toString();
+            }
+            if (getBrowserVersion().hasFeature(HTML_COLOR_TO_LOWER)) {
+                s = s.toLowerCase(Locale.ENGLISH);
             }
         }
         getDomNodeOrDie().setAttribute(name, s);
@@ -2808,7 +2834,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public boolean hasAttribute(final String name) {
         return super.hasAttribute(name);
     }
@@ -2880,7 +2906,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Sets the <tt>onchange</tt> event handler for this element.
      * @param onchange the <tt>onchange</tt> event handler for this element
      */
-    @JsxSetter({ @WebBrowser(value = FF), @WebBrowser(CHROME) })
+    @JsxSetter({ @WebBrowser(value = FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public void setOnchange(final Object onchange) {
         setEventHandlerProp("onchange", onchange);
     }
@@ -2889,7 +2915,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns the <tt>onchange</tt> event handler for this element.
      * @return the <tt>onchange</tt> event handler for this element
      */
-    @JsxGetter({ @WebBrowser(value = FF), @WebBrowser(CHROME) })
+    @JsxGetter({ @WebBrowser(value = FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public Function getOnchange() {
         return getEventHandler("onchange");
     }
@@ -2898,7 +2924,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns the <tt>onsubmit</tt> event handler for this element.
      * @return the <tt>onsubmit</tt> event handler for this element
      */
-    @JsxGetter({ @WebBrowser(value = FF), @WebBrowser(CHROME) })
+    @JsxGetter({ @WebBrowser(value = FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public Object getOnsubmit() {
         return getEventHandlerProp("onsubmit");
     }
@@ -2907,7 +2933,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Sets the <tt>onsubmit</tt> event handler for this element.
      * @param onsubmit the <tt>onsubmit</tt> event handler for this element
      */
-    @JsxSetter({ @WebBrowser(value = FF), @WebBrowser(CHROME) })
+    @JsxSetter({ @WebBrowser(value = FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public void setOnsubmit(final Object onsubmit) {
         setEventHandlerProp("onsubmit", onsubmit);
     }

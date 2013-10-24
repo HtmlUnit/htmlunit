@@ -15,10 +15,11 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORMFIELD_REACHABLE_BY_NEW_NAMES;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_169;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_80;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_81;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_ACTION_EXPANDURL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_ENCODING_NORMALIZED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_REJECT_INVALID_ENCODING;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.net.MalformedURLException;
@@ -69,6 +70,7 @@ import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  * @author Ronald Brill
+ * @author Frank Danek
  *
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535249.aspx">MSDN documentation</a>
  */
@@ -184,7 +186,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     @JsxGetter
     public String getAction() {
         String action = getHtmlForm().getActionAttribute();
-        if (getBrowserVersion().hasFeature(GENERATED_169)) {
+        if (getBrowserVersion().hasFeature(JS_FORM_ACTION_EXPANDURL)) {
             try {
                 action = ((HtmlPage) getHtmlForm().getPage()).getFullyQualifiedUrl(action).toExternalForm();
             }
@@ -283,6 +285,12 @@ public class HTMLFormElement extends HTMLElement implements Function {
     @JsxSetter
     public void setEncoding(final String encoding) {
         WebAssert.notNull("encoding", encoding);
+        if (getBrowserVersion().hasFeature(JS_FORM_REJECT_INVALID_ENCODING)) {
+            if (!"application/x-www-form-urlencoded".equals(encoding) && !"multipart/form-data".equals(encoding)) {
+                throw Context.reportRuntimeError("Cannot set the encoding property to invalid value: '"
+                        + encoding + "'");
+            }
+        }
         getHtmlForm().setEnctypeAttribute(encoding);
     }
 

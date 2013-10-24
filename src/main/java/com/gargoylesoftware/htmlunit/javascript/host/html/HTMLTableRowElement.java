@@ -14,8 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_108;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_172;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_ROW_SECTION_INDEX_BIG_INT_IF_UNATTACHED;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Chris Erskine
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @JsxClass(domClass = HtmlTableRow.class)
 public class HTMLTableRowElement extends HTMLTableComponent {
@@ -74,7 +75,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
         DomNode row = getDomNodeOrDie();
         final HtmlTable table = ((HtmlTableRow) row).getEnclosingTable();
         if (table == null) { // a not attached document.createElement('TR')
-            if (!getBrowserVersion().hasFeature(GENERATED_108)) {
+            if (!getBrowserVersion().hasFeature(JS_TABLE_ROW_SECTION_INDEX_BIG_INT_IF_UNATTACHED)) {
                 return -1;
             }
             // IE 6, 7 and 8 return really strange values: large integers that are not constants

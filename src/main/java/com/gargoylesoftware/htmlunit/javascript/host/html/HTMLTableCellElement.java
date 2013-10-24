@@ -16,14 +16,14 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_100;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_101;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_92;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_93;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_94;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_95;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_96;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_97;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_98;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_99;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_NOT_EMPTY_ALWAYS_TRUE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_NOWRAP_VALUE_TRUE_IF_SET;
 
 import java.util.List;
 
@@ -48,6 +48,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclara
  * @author Sudhan Moghe
  * @author Daniel Gredler
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @JsxClass(domClass = HtmlTableCell.class)
 public class HTMLTableCellElement extends HTMLTableComponent {
@@ -57,7 +58,8 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @Override
     public void setAttribute(final String name, String value) {
-        if ("noWrap".equals(name) && value != null && getBrowserVersion().hasFeature(GENERATED_92)) {
+        if ("noWrap".equals(name) && value != null
+                && getBrowserVersion().hasFeature(JS_TABLE_CELL_NOT_EMPTY_ALWAYS_TRUE)) {
             value = "true";
         }
         super.setAttribute(name, value);
@@ -275,7 +277,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     @JsxSetter
     public void setNoWrap(final boolean noWrap) {
         if (noWrap) {
-            final String value = (getBrowserVersion().hasFeature(GENERATED_97) ? "true" : "");
+            final String value = (getBrowserVersion().hasFeature(JS_TABLE_CELL_NOWRAP_VALUE_TRUE_IF_SET) ? "true" : "");
             getDomNodeOrDie().setAttribute("noWrap", value);
         }
         else {

@@ -39,6 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @JsxClass(domClass = HtmlScript.class)
 public class HTMLScriptElement extends HTMLElement {
@@ -136,7 +137,7 @@ public class HTMLScriptElement extends HTMLElement {
      * Returns the event handler that fires on load.
      * @return the event handler that fires on load
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public Object getOnload() {
         return getEventHandlerProp("onload");
     }
@@ -145,7 +146,7 @@ public class HTMLScriptElement extends HTMLElement {
      * Sets the event handler that fires on load.
      * @param handler the event handler that fires on load
      */
-    @JsxSetter(@WebBrowser(FF))
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public void setOnload(final Object handler) {
         setEventHandlerProp("onload", handler);
     }

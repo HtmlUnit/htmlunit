@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlCanvas;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -31,8 +32,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingConte
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
-@JsxClass(domClass = HtmlCanvas.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
+@JsxClass(domClass = HtmlCanvas.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME),
+        @WebBrowser(value = IE, minVersion = 10) })
 public class HTMLCanvasElement extends HTMLElement {
 
     /**

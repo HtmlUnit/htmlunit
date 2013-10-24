@@ -27,6 +27,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_UNSU
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static org.apache.commons.lang3.StringUtils.defaultIfEmpty;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -88,12 +89,14 @@ import com.steadystate.css.parser.SACParserCSS3;
  * @author Rodney Gitzel
  * @author Sudhan Moghe
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @JsxClass
 public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableWithFallbackGetter {
     /** Css important property constant. */
     protected static final String PRIORITY_IMPORTANT = "important";
 
+    private static final String ACCELERATOR = "accelerator";
     private static final String BACKGROUND = "background";
     private static final String BACKGROUND_ATTACHMENT = "background-attachment";
     private static final String BACKGROUND_COLOR = "background-color";
@@ -685,6 +688,24 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         CamelizeCache_.put(string, result);
 
         return result;
+    }
+
+    /**
+     * Gets the "accelerator" style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 10))
+    public String getAccelerator() {
+        return defaultIfEmpty(getStyleAttribute(ACCELERATOR), "false");
+    }
+
+    /**
+     * Sets the "accelerator" style attribute.
+     * @param accelerator the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 10))
+    public void setAccelerator(final String accelerator) {
+        setStyleAttributePixel(ACCELERATOR, accelerator);
     }
 
     /**
@@ -1615,7 +1636,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "cssFloat" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public String getCssFloat() {
         return getStyleAttribute(FLOAT);
     }
@@ -1624,7 +1645,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "cssFloat" style attribute.
      * @param value the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public void setCssFloat(final String value) {
         setStyleAttribute(FLOAT, value);
     }
@@ -1777,7 +1798,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "fontSizeAdjust" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public String getFontSizeAdjust() {
         return getStyleAttribute(FONT_SIZE_ADJUST);
     }
@@ -1786,7 +1807,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "fontSizeAdjust" style attribute.
      * @param fontSizeAdjust the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public void setFontSizeAdjust(final String fontSizeAdjust) {
         setStyleAttribute(FONT_SIZE_ADJUST, fontSizeAdjust);
     }
@@ -1795,7 +1816,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "fontStretch" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public String getFontStretch() {
         return getStyleAttribute(FONT_STRETCH);
     }
@@ -1804,7 +1825,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "fontStretch" style attribute.
      * @param fontStretch the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public void setFontStretch(final String fontStretch) {
         setStyleAttribute(FONT_STRETCH, fontStretch);
     }
@@ -2029,7 +2050,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "length", not yet implemented.
      * @return the length
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public int getLength() {
         return 0;
     }
@@ -2451,7 +2472,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "opacity" style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public String getOpacity() {
         final String opacity = getStyleAttribute(OPACITY);
         if (getBrowserVersion().hasFeature(JS_OPACITY_ACCEPTS_ARBITRARY_VALUES)) {
@@ -2480,7 +2501,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "opacity" style attribute.
      * @param opacity the new attribute
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public void setOpacity(final String opacity) {
         if (getBrowserVersion().hasFeature(JS_OPACITY_ACCEPTS_ARBITRARY_VALUES)) {
             setStyleAttribute(OPACITY, opacity);
@@ -2829,7 +2850,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "pointerEvents" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public String getPointerEvents() {
         return getStyleAttribute(POINTER_EVENTS);
     }
@@ -2838,7 +2859,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "pointerEvents" style attribute.
      * @param pointerEvents the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public void setPointerEvents(final String pointerEvents) {
         setStyleAttribute(POINTER_EVENTS, pointerEvents);
     }
@@ -3585,7 +3606,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "textShadow" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public String getTextShadow() {
         return getStyleAttribute(TEXT_SHADOW);
     }
@@ -3594,7 +3615,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "textShadow" style attribute.
      * @param textShadow the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public void setTextShadow(final String textShadow) {
         setStyleAttribute(TEXT_SHADOW, textShadow);
     }
@@ -3919,7 +3940,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param name the style property name
      * @return empty string if nothing found
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public String getPropertyValue(final String name) {
         if (name != null && name.contains("-")) {
             final Object value = getProperty(this, camelize(name));
@@ -3978,7 +3999,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param name the name of the property to remove
      * @return the value deleted
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public String removeProperty(final String name) {
         return removeStyleAttribute(name);
     }
@@ -3992,7 +4013,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      *        Array references are not allowed on object properties included in this script.
      * @param language specified the language used
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
     public void setExpression(final String propertyName, final String expression, final String language) {
         // Empty.
     }
@@ -4003,7 +4024,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param propertyName the name of the property from which to remove an expression
      * @return true if the expression was successfully removed
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
     public boolean removeExpression(final String propertyName) {
         return true;
     }

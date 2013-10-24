@@ -72,6 +72,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @JsxClass
 public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
@@ -287,6 +288,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
         }
         return existent;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getAccelerator() {
+        return defaultIfEmpty(getStyleAttribute("accelerator"), "undefined");
     }
 
     /**

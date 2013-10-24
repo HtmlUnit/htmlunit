@@ -14,11 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
@@ -29,6 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @JsxClass
 public class CSSFontFaceRule extends CSSRule {
@@ -54,13 +57,13 @@ public class CSSFontFaceRule extends CSSRule {
     }
 
     @Override
-    @JsxGetter(@WebBrowser(BrowserName.FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public short getType() {
         return FONT_FACE_RULE;
     }
 
     @Override
-    @JsxGetter(@WebBrowser(BrowserName.FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public String getCssText() {
         String cssText = super.getCssText();
         cssText = StringUtils.replace(cssText, "{", "{\n  ");

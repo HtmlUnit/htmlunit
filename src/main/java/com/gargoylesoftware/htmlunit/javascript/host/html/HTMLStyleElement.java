@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @JsxClass(domClass = HtmlStyle.class)
 public class HTMLStyleElement extends HTMLElement {
@@ -47,7 +48,7 @@ public class HTMLStyleElement extends HTMLElement {
      * @see <a href="http://www.xulplanet.com/references/objref/HTMLStyleElement.html">Mozilla doc</a>
      * @return the sheet
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public CSSStyleSheet getSheet() {
         if (sheet_ != null) {
             return sheet_;

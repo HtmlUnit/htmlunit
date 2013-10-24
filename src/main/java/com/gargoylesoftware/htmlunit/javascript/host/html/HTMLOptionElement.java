@@ -15,8 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_170;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_UNSELECT_SELECTS_FIRST;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_USE_TEXT_AS_VALUE_IF_NOT_DEFINED;
 
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @JsxClass(domClass = HtmlOption.class)
 public class HTMLOptionElement extends FormChild {
@@ -83,7 +84,8 @@ public class HTMLOptionElement extends FormChild {
     @JsxGetter
     public String getValue() {
         String value = getDomNodeOrNull().getAttribute("value");
-        if (value == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(GENERATED_170)) {
+        if (value == DomElement.ATTRIBUTE_NOT_DEFINED
+                && getBrowserVersion().hasFeature(JS_OPTION_USE_TEXT_AS_VALUE_IF_NOT_DEFINED)) {
             value = getDomNodeOrNull().getText();
         }
         return value;

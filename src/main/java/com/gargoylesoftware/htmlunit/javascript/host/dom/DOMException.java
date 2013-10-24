@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -30,8 +31,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * DOM-Level-2-Core</a>
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Frank Danek
  */
-@JsxClass(browsers = @WebBrowser(FF))
+@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
 public class DOMException extends SimpleScriptable {
     /** If the specified range of text does not fit into a DOMString. */
     @JsxConstant
