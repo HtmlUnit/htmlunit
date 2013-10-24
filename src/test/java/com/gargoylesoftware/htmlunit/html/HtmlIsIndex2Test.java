@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -21,7 +23,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -43,7 +44,7 @@ public class HtmlIsIndex2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "null",
             IE8 = "[object]")
-    @NotYetImplemented(Browser.FF17)
+    @NotYetImplemented(FF17)
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
