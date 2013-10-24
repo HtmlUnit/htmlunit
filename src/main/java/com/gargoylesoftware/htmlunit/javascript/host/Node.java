@@ -18,8 +18,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_121
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_124;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_45;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NOTE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLONE_NODE_COPIES_EVENT_LISTENERS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PREFIX_RETURNS_EMPTY_WHEN_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_APPENDS_CRLF;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
@@ -76,6 +77,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Bruce Faulkner
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @JsxClass
 public class Node extends SimpleScriptable {
@@ -215,7 +217,7 @@ public class Node extends SimpleScriptable {
             // is the node allowed here?
             if (!isNodeInsertable(childNode)) {
                 // IE silently ignores it
-                if (getBrowserVersion().hasFeature(JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NOTE)) {
+                if (getBrowserVersion().hasFeature(JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NODE)) {
                     return childObject;
                 }
 
@@ -375,7 +377,7 @@ public class Node extends SimpleScriptable {
             // is the node allowed here?
             if (!isNodeInsertable(newChild)) {
                 // IE silently ignores it
-                if (getBrowserVersion().hasFeature(JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NOTE)) {
+                if (getBrowserVersion().hasFeature(JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NODE)) {
                     return newChildNode;
                 }
                 throw Context.reportRuntimeError("Node cannot be inserted at the specified point in the hierarchy");
@@ -674,7 +676,7 @@ public class Node extends SimpleScriptable {
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener">Mozilla documentation</a>
      * @see #attachEvent(String, Function)
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public void addEventListener(final String type, final Function listener, final boolean useCapture) {
         getEventListenersContainer().addEventListener(type, listener, useCapture);
     }
@@ -787,7 +789,7 @@ public class Node extends SimpleScriptable {
 
             // handlers declared as property on a node don't receive the event as argument for IE
             final Object[] propHandlerArgs;
-            if (ie) {
+            if (scriptable.getBrowserVersion().hasFeature(JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT)) {
                 propHandlerArgs = ArrayUtils.EMPTY_OBJECT_ARRAY;
             }
             else {
@@ -895,7 +897,7 @@ public class Node extends SimpleScriptable {
      * Returns the namespace prefix.
      * @return the namespace prefix
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public String getPrefix() {
         final DomNode domNode = getDomNodeOrDie();
         final String prefix = domNode.getPrefix();
@@ -910,7 +912,7 @@ public class Node extends SimpleScriptable {
      * Returns the local name of this element.
      * @return the local name of this element
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public String getLocalName() {
         return getDomNodeOrDie().getLocalName();
     }
@@ -919,7 +921,7 @@ public class Node extends SimpleScriptable {
      * Returns The URI that identifies an XML namespace.
      * @return the URI that identifies an XML namespace
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public String getNamespaceURI() {
         final String namespaceURI = getDomNodeOrDie().getNamespaceURI();
         if (namespaceURI == null && getBrowserVersion().hasFeature(JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
@@ -1005,7 +1007,7 @@ public class Node extends SimpleScriptable {
      * Gets the textContent attribute.
      * @return the contents of this node as text
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public String getTextContent() {
         return getDomNodeOrDie().getTextContent();
     }

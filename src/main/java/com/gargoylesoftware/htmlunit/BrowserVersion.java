@@ -88,6 +88,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     private String htmlAcceptHeader_;
     private String imgAcceptHeader_;
     private String cssAcceptHeader_;
+    private String scriptAcceptHeader_;
 
     /**
      * Application name for the Internet Explorer series of browsers.
@@ -178,6 +179,11 @@ public class BrowserVersion implements Serializable, Cloneable {
 
         INTERNET_EXPLORER_8.setHtmlAcceptHeader("image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*");
 
+        INTERNET_EXPLORER_10.setHtmlAcceptHeader("text/html, application/xhtml+xml, */*");
+        INTERNET_EXPLORER_10.setImgAcceptHeader("image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5");
+        INTERNET_EXPLORER_10.setCssAcceptHeader("text/css");
+        INTERNET_EXPLORER_10.setScriptAcceptHeader("application/javascript, */*;q=0.8");
+
         final PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
             "Shockwave Flash 9.0 r31", "libflashplayer.so");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
@@ -248,6 +254,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         htmlAcceptHeader_ = "*/*";
         imgAcceptHeader_ = "*/*";
         cssAcceptHeader_ = "*/*";
+        scriptAcceptHeader_ = "*/*";
 
         if (features != null) {
             features_.addAll(Arrays.asList(features));
@@ -454,7 +461,7 @@ public class BrowserVersion implements Serializable, Cloneable {
      * @return the accept header string
      */
     public String getScriptAcceptHeader() {
-        return "*/*";
+        return scriptAcceptHeader_;
     }
 
     /**
@@ -578,6 +585,13 @@ public class BrowserVersion implements Serializable, Cloneable {
      */
     public void setCssAcceptHeader(final String cssAcceptHeader) {
         cssAcceptHeader_ = cssAcceptHeader;
+    }
+
+    /**
+     * @param scriptAcceptHeader the accept header to be used when retrieving scripts
+     */
+    public void setScriptAcceptHeader(final String scriptAcceptHeader) {
+        scriptAcceptHeader_ = scriptAcceptHeader;
     }
 
     /**

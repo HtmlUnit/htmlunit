@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Mirko Friedenhagen
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @JsxClass(domClass = DomComment.class)
 public final class Comment extends CharacterDataImpl {
@@ -48,7 +49,7 @@ public final class Comment extends CharacterDataImpl {
      * Returns the element ID.
      * @return the ID of this element
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
     public String getId() {
         return "";
     }
@@ -57,7 +58,7 @@ public final class Comment extends CharacterDataImpl {
      * Returns the class defined for this element.
      * @return the class name
      */
-    @JsxGetter(value = @WebBrowser(IE), propertyName = "className")
+    @JsxGetter(value = @WebBrowser(value = IE, maxVersion = 9), propertyName = "className")
     public Object getClassName_js() {
         return "";
     }
@@ -66,7 +67,7 @@ public final class Comment extends CharacterDataImpl {
      * Returns the tag name of this element.
      * @return the tag name
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
     public Object getTagName() {
         return "!";
     }
@@ -84,7 +85,7 @@ public final class Comment extends CharacterDataImpl {
      * Returns the document of this element.
      * @return the document
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
     public Object getDocument() {
         return getWindow().getDocument_js();
     }
@@ -116,7 +117,7 @@ public final class Comment extends CharacterDataImpl {
      * Gets the innerText attribute.
      * @return the innerText
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
     public String getInnerText() {
         return "";
     }
@@ -125,7 +126,7 @@ public final class Comment extends CharacterDataImpl {
      * Currently does nothing.
      * @param value the new value for the contents of this node
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(@WebBrowser(value = IE, maxVersion = 9))
     public void setInnerText(final String value) {
         // nothing
     }

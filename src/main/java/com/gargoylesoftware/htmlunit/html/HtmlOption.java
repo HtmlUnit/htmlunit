@@ -16,14 +16,14 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CONTROL_UPDATE_DONE_BEFORE_CLICK_EVENT_FIRED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_FOR_SELECT_OPTION_ALSO;
+import static com.gargoylesoftware.htmlunit.
+    BrowserVersionFeatures.EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT;
+import static com.gargoylesoftware.htmlunit.
+    BrowserVersionFeatures.EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEDOWN_NOT_FOR_SELECT_OPTION;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.
-                    EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.
-                    EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT;
+import static com.gargoylesoftware.htmlunit.
+    BrowserVersionFeatures.EVENT_ONMOUSEUP_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEUP_NOT_FOR_SELECT_OPTION;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.
-                    EVENT_ONMOUSEUP_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_EMPTY_TEXT_IS_NO_CHILDREN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_PREVENT_DISABLED;
 

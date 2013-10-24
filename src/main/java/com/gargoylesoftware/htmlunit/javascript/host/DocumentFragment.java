@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Frank Danek
  *
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-core.html#ID-B63ED1A3">
  * W3C Dom Level 1</a>
@@ -74,7 +75,7 @@ public class DocumentFragment extends Node {
      * @param tagName the tag name
      * @return the new HTML element, or NOT_FOUND if the tag is not supported
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
     public Object createElement(final String tagName) {
         return getDocument().createElement(tagName);
     }

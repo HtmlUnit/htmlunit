@@ -133,6 +133,7 @@ import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection
  * @author Ethan Glasser-Camp
  * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
  * @author Ronald Brill
+ * @author Frank Danek
  */
 public class HtmlPage extends SgmlPage {
 
@@ -2344,7 +2345,7 @@ public class HtmlPage extends SgmlPage {
      * @return true for quirks mode, false for standards mode
      */
     public boolean isQuirksMode() {
-        return ((HTMLDocument) getScriptObject()).getDocumentMode() == 5;
+        return "BackCompat".equals(((HTMLDocument) getScriptObject()).getCompatMode());
     }
 
     @Override

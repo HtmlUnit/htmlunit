@@ -123,6 +123,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Chris Erskine
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535873.aspx">MSDN documentation</a>
  */
 @JsxClass
@@ -1148,7 +1149,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener">Mozilla documentation</a>
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public void addEventListener(final String type, final Function listener, final boolean useCapture) {
         getEventListenersContainer().addEventListener(type, listener, useCapture);
     }
@@ -1172,7 +1173,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.removeEventListener">Mozilla
      * documentation</a>
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public void removeEventListener(final String type, final Function listener, final boolean useCapture) {
         getEventListenersContainer().removeEventListener(type, listener, useCapture);
     }
@@ -1506,7 +1507,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return a dummy value
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref28.html">Mozilla doc</a>
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public int getInnerWidth() {
         return getWebWindow().getInnerWidth();
     }
@@ -1526,7 +1527,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return a dummy value
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref27.html">Mozilla doc</a>
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public int getInnerHeight() {
         return getWebWindow().getInnerHeight();
     }
@@ -1581,7 +1582,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param pseudo a string specifying the pseudo-element to match (may be <tt>null</tt>)
      * @return the computed style
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public ComputedCSSStyleDeclaration getComputedStyle(final Element element, final String pseudo) {
         ComputedCSSStyleDeclaration style;
 
@@ -1618,7 +1619,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the current selection.
      * @return the current selection
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public Selection getSelection() {
         final WebWindow webWindow = getWebWindow();
         // return null if the window is in a frame that is not displayed

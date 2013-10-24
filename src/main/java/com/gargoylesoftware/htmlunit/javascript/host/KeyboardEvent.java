@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_113;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -32,6 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @JsxClass
 public class KeyboardEvent extends UIEvent {
@@ -628,7 +630,7 @@ public class KeyboardEvent extends UIEvent {
      * Returns the numeric keyCode of the key pressed, or the charCode for an alphanumeric key pressed.
      * @return the numeric keyCode of the key pressed, or the charCode for an alphanumeric key pressed
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public Object getWhich() {
         return which_;
     }

@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_176;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECTION_CONTENT_IS_DEFAULT_VALUE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Daniel Gredler
+ * @author Frank Danek
  */
 @JsxClass
 public class Selection extends SimpleScriptable {
@@ -52,8 +53,8 @@ public class Selection extends SimpleScriptable {
      */
     @Override
     public Object getDefaultValue(final Class<?> hint) {
-        final boolean ff = getBrowserVersion().hasFeature(GENERATED_176);
-        if (ff && (String.class.equals(hint) || hint == null)) {
+        final boolean returnSelectionContent = getBrowserVersion().hasFeature(JS_SELECTION_CONTENT_IS_DEFAULT_VALUE);
+        if (returnSelectionContent && (String.class.equals(hint) || hint == null)) {
             final StringBuilder sb = new StringBuilder();
             for (Range r : getRanges()) {
                 sb.append(r.toString());
@@ -129,7 +130,7 @@ public class Selection extends SimpleScriptable {
      * Returns the number of ranges in the selection.
      * @return the number of ranges in the selection
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public int getRangeCount() {
         return getRanges().size();
     }
@@ -194,7 +195,7 @@ public class Selection extends SimpleScriptable {
      * @param index the index of the range to return
      * @return the range at the specified index
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public com.gargoylesoftware.htmlunit.javascript.host.Range getRangeAt(final int index) {
         final List<Range> ranges = getRanges();
         if (index < 0 || index >= ranges.size()) {

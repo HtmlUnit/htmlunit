@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_116;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.LinkedList;
 
@@ -38,6 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @JsxClass
 public class MouseEvent extends UIEvent {
@@ -272,7 +274,7 @@ public class MouseEvent extends UIEvent {
      * @see <a href="http://unixpapa.com/js/mouse.html">Javascript Madness: Mouse Events</a>
      * @return the button code
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public int getWhich() {
         return button_ + 1;
     }
@@ -296,7 +298,7 @@ public class MouseEvent extends UIEvent {
      * @param button what mouse button is pressed
      * @param relatedTarget is there a related target for the event
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public void initMouseEvent(
             final String type,
             final boolean bubbles,

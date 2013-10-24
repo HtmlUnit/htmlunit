@@ -14,9 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.util.Map;
-
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_SET_DEFAULT_VALUE_UPDATES_VALUE;
+
+import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;

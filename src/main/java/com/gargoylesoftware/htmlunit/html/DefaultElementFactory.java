@@ -15,8 +15,8 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CANVAS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML5_TAGS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML5_RUBY_TAGS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML5_TAGS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLBASEFONT_SUPPORTED;
 
 import java.util.Arrays;

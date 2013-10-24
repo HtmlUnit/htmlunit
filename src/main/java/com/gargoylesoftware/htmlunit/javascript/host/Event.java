@@ -58,6 +58,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  * @author Rob Di Marco
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @JsxClass
 public class Event extends SimpleScriptable {
@@ -406,7 +407,7 @@ public class Event extends SimpleScriptable {
      * Returns the event target to which the event was originally dispatched.
      * @return the event target to which the event was originally dispatched
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public Object getTarget() {
         return target_;
     }
@@ -424,7 +425,7 @@ public class Event extends SimpleScriptable {
      * is useful during event capturing and event bubbling.
      * @return the current event target
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public Object getCurrentTarget() {
         return currentTarget_;
     }
@@ -467,7 +468,7 @@ public class Event extends SimpleScriptable {
      * Returns the time at which this event was created.
      * @return the time at which this event was created
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public long getTimeStamp() {
         return timeStamp_;
     }
@@ -564,7 +565,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return whether or not this event bubbles
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public boolean getBubbles() {
         return bubbles_;
     }
@@ -572,7 +573,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return whether or not this event can be canceled
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public boolean getCancelable() {
         return cancelable_;
     }
@@ -642,7 +643,7 @@ public class Event extends SimpleScriptable {
      * @param bubbles whether or not the event should bubble
      * @param cancelable whether or not the event the event should be cancelable
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public void initEvent(final String type, final boolean bubbles, final boolean cancelable) {
         type_ = type;
         bubbles_ = bubbles;
@@ -654,7 +655,7 @@ public class Event extends SimpleScriptable {
      * Any default action associated with the event will not occur.
      * Calling this method for a non-cancelable event has no effect.
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public void preventDefault() {
         preventDefault_ = true;
     }
