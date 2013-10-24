@@ -912,18 +912,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB,
 
-    /** Javascript function getElementById calls getElementByName if nothing found by id. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 6))
-    JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME,
-
-    /** Javascript function getElementById calls getElementByName if nothing found by id, only in quirks mode. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
-    JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME_IN_QUICKS_MODE,
-
-    /** Javascript function getElementById compares the id's case sensitive. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
-    JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE,
-
     /** Javascript function getElementsByName returns an empty collection if called with empty string. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_GET_ELEMENTS_BY_NAME_EMPTY_RETURNS_NOTHING,
@@ -935,6 +923,18 @@ public enum BrowserVersionFeatures {
     /** Javascript function getElementsByTagName does not support namespaces. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_GET_ELEMENTS_BY_TAG_NAME_NOT_SUPPORTS_NAMESPACES,
+
+    /** Javascript function getElementById calls getElementByName if nothing found by id. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 6))
+    JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME,
+
+    /** Javascript function getElementById calls getElementByName if nothing found by id, only in quirks mode. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
+    JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME_IN_QUICKS_MODE,
+
+    /** Javascript function getElementById compares the id's case sensitive. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
+    JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE,
 
     /** Indicates that not defined function handler should be 'undefined', or 'null'. */
     @BrowserFeature(@WebBrowser(value = FF, maxVersion = 3.6f))
@@ -1153,13 +1153,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_STYLE_UNSUPPORTED_PROPERTY_GETTER,
 
-    /** Attribute 'nowrap' has value true instead of empty if set. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
-    JS_TABLE_CELL_NOWRAP_VALUE_TRUE_IF_SET,
-
     /** Value of attribute 'nowrap' is always set to true if a not empty value is set. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_TABLE_CELL_NOT_EMPTY_ALWAYS_TRUE,
+
+    /** Attribute 'nowrap' has value true instead of empty if set. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
+    JS_TABLE_CELL_NOWRAP_VALUE_TRUE_IF_SET,
 
     /** Value of attribute 'sectionRowIndex' is a big int if the row is not attached to a table. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
@@ -1169,13 +1169,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_TABLE_SET_CAPTION_ALTHOUGH_ALREADY_SET_THROWS_ERROR,
 
-    /** When trying to set a table header (thead) although there is already one an error is thrown. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
-    JS_TABLE_SET_THEAD_ALTHOUGH_ALREADY_SET_THROWS_ERROR,
-
     /** When trying to set a table footer (tfoot) although there is already one an error is thrown. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_TABLE_SET_TFOOT_ALTHOUGH_ALREADY_SET_THROWS_ERROR,
+
+    /** When trying to set a table header (thead) although there is already one an error is thrown. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
+    JS_TABLE_SET_THEAD_ALTHOUGH_ALREADY_SET_THROWS_ERROR,
 
     /** Indicates that table elements supports the values "top", "bottom", "middle", "baseline" (IE). */
     @BrowserFeature(@WebBrowser(IE))
