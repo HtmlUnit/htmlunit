@@ -83,14 +83,16 @@ public class HTMLCollectionTest extends WebDriverTestCase {
     @Test
     @Browsers(IE)
     @Alerts(DEFAULT = { "5", "6" },
-            IE10 = "5")
+            IE10 = { "5", "exception" })
     public void getElements() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.all.length);\n"
-            + "    document.appendChild(document.createElement('div'));\n"
-            + "    alert(document.all.length);\n"
+            + "    try {"
+            + "      document.appendChild(document.createElement('div'));\n"
+            + "      alert(document.all.length);\n"
+            + "    } catch (e) { alert('exception') }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";

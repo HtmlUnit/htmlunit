@@ -328,8 +328,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "number: 300", "number: 200", "number: 1", "number: 1", "number: 1", "number: 1" },
-            IE10 = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 1", "number: 1" })
+    @Alerts({ "number: 300", "number: 200", "number: 1", "number: 1", "number: 1", "number: 1" })
     public void testWidthHeightWithSource() throws Exception {
         getMockWebConnection().setDefaultResponse("");
 
@@ -371,8 +370,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "number: 300", "number: 200", "number: 24", "number: 24", "number: 24", "number: 24" },
             CHROME = { "number: 300", "number: 200", "number: 18", "number: 20", "number: 18", "number: 20" },
-            IE = { "number: 300", "number: 200", "number: 1", "number: 1", "number: 1", "number: 1" },
-            IE10 = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 1", "number: 1" })
+            IE = { "number: 300", "number: 200", "number: 1", "number: 1", "number: 1", "number: 1" })
     public void testWidthHeightInvalidSource() throws Exception {
         getMockWebConnection().setDefaultResponse("");
 

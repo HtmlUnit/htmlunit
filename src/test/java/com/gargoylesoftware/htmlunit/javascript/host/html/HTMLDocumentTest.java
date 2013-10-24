@@ -533,7 +533,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" },
             IE = {"#ffffff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
-//            IE9 = {"#ffffff", "", "#0000aa", "#0000aa", "#000000", "#0" },
+            IE9 = {"#ffffff", "", "#0000aa", "#0000aa", "#000000", "#0" },
             IE10 = {"#ffffff", "", "#0000aa", "#0000aa", "#000000", "#0" })
     public void bgColor() throws Exception {
         final String html =
@@ -713,7 +713,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @BuggyWebDriver // tested with FF8, FF17, FF18
     @Alerts(CHROME = { "0", "exception" },
             FF = { "1", "[object HTMLBodyElement]" },
-            IE = "exception")
+            IE = "exception",
+            IE10 = { "0", "exception" })
     // TODO [IE10]MODALPANEL real IE10 opens a modal panel which webdriver cannot handle
     public void designMode_selectionRange_empty() throws Exception {
         designMode_selectionRange("");
@@ -728,7 +729,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @BuggyWebDriver // tested with FF8, FF17, FF18
     @Alerts(CHROME = { "0", "exception" },
             FF = { "1", "[object Text]" },
-            IE = "exception")
+            IE = "exception",
+            IE10 = { "0", "exception" })
     // TODO [IE10]MODALPANEL real IE10 opens a modal panel which webdriver cannot handle
     public void designMode_selectionRange_text() throws Exception {
         designMode_selectionRange("hello");
@@ -1384,7 +1386,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = {"", "", "#0000aa", "#0000aa", "x", "x" },
             IE = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
-//            IE9 = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" },
+            IE9 = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" },
             IE10 = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" })
     public void alinkColor() throws Exception {
         final String html =
@@ -1415,7 +1417,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = {"", "", "#0000aa", "#0000aa", "x", "x" },
             IE = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
-//            IE9 = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" },
+            IE9 = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" },
             IE10 = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" })
     public void linkColor() throws Exception {
         final String html =
@@ -1446,7 +1448,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(FF17 = {"", "", "#0000aa", "#0000aa", "x", "x" },
             IE = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#000000" },
-//            IE9 = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#0" },
+            IE9 = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#0" },
             IE10 = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#0" })
     public void vlinkColor() throws Exception {
         final String html =
@@ -1477,7 +1479,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = {"", "", "#0000aa", "#0000aa", "x", "x" },
             IE = {"#000000", "", "#0000aa", "#0000aa", "#000000", "#000000" },
-//            IE9 = {"#000000", "", "#0000aa", "#0000aa", "#000000", "#0" },
+            IE9 = {"#000000", "", "#0000aa", "#0000aa", "#000000", "#0" },
             IE10 = {"#000000", "", "#0000aa", "#0000aa", "#000000", "#0" })
     public void fgColor() throws Exception {
         final String html =

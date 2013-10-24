@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -701,7 +701,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { },
             IE8 = { "li1" })
-    @NotYetImplemented(IE)
+    @NotYetImplemented(IE8)
     public void pseudoAfter() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>Pseudo-After</title><script>\n"

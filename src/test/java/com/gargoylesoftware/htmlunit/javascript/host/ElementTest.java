@@ -87,14 +87,16 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Browsers(IE)
     @Alerts(DEFAULT = { "1", "title" },
-            IE10 = "")
+            IE10 = "exception")
     public void selectNodes() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
-            + "    var nodes = doc.documentElement.selectNodes('//title');\n"
-            + "    alert(nodes.length);\n"
-            + "    alert(nodes[0].tagName);\n"
+            + "    try {\n"
+            + "      var nodes = doc.documentElement.selectNodes('//title');\n"
+            + "      alert(nodes.length);\n"
+            + "      alert(nodes[0].tagName);\n"
+            + "    } catch (e) { alert('exception'); }\n"
             + "  }\n"
             + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -193,15 +195,17 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Browsers(IE)
     @Alerts(DEFAULT = { "book", "0", "1" },
-            IE10 = "book")
+            IE10 = { "book", "exception" })
     public void selectNode_root() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "    var child = doc.documentElement.firstChild;\n"
             + "    alert(child.tagName);\n"
-            + "    alert(child.selectNodes('/title').length);\n"
-            + "    alert(child.selectNodes('title').length);\n"
+            + "    try {\n"
+            + "      alert(child.selectNodes('/title').length);\n"
+            + "      alert(child.selectNodes('title').length);\n"
+            + "    } catch (e) { alert('exception'); }\n"
             + "  }\n"
             + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"

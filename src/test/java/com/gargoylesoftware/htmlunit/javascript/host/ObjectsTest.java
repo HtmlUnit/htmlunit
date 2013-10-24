@@ -50,11 +50,13 @@ public class ObjectsTest extends SimpleWebTestCase {
     private static List<String> IE9_;
     private static List<String> IE10_;
     private static List<String> FF17_;
+    private static List<String> FF24_;
 
     private static List<String> IE8_SIMULATED_;
     private static List<String> IE9_SIMULATED_;
     private static List<String> IE10_SIMULATED_;
     private static List<String> FF17_SIMULATED_;
+    private static List<String> FF24_SIMULATED_;
 
     private final String name_;
     private final BrowserVersion browserVersion_;
@@ -70,23 +72,28 @@ public class ObjectsTest extends SimpleWebTestCase {
         IE9_ = getObjects(BrowserVersion.INTERNET_EXPLORER_9);
         IE10_ = getObjects(BrowserVersion.INTERNET_EXPLORER_10);
         FF17_ = getObjects(BrowserVersion.FIREFOX_17);
+        FF24_ = getObjects(BrowserVersion.FIREFOX_24);
         Assert.assertEquals(IE8_.size(), IE9_.size());
         Assert.assertEquals(IE8_.size(), IE10_.size());
         Assert.assertEquals(IE8_.size(), FF17_.size());
+        Assert.assertEquals(IE8_.size(), FF24_.size());
         IE8_SIMULATED_ = getSimulatedObjects(BrowserVersion.INTERNET_EXPLORER_8);
         IE9_SIMULATED_ = getSimulatedObjects(BrowserVersion.INTERNET_EXPLORER_9);
         IE10_SIMULATED_ = getSimulatedObjects(BrowserVersion.INTERNET_EXPLORER_10);
         FF17_SIMULATED_ = getSimulatedObjects(BrowserVersion.FIREFOX_17);
+        FF24_SIMULATED_ = getSimulatedObjects(BrowserVersion.FIREFOX_24);
         Assert.assertEquals(IE8_SIMULATED_.size(), IE9_SIMULATED_.size());
         Assert.assertEquals(IE8_SIMULATED_.size(), IE10_SIMULATED_.size());
         Assert.assertEquals(IE8_SIMULATED_.size(), FF17_SIMULATED_.size());
+        Assert.assertEquals(IE8_SIMULATED_.size(), FF24_SIMULATED_.size());
         final Collection<Object[]> list = new ArrayList<Object[]>();
         for (final String line : IE8_) {
             final String name = line.substring(0, line.indexOf(':'));
-//            list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_8});
+            list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_8});
 //            list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_9});
 //            list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_10});
 //            list.add(new Object[] {name, BrowserVersion.FIREFOX_17});
+//            list.add(new Object[] {name, BrowserVersion.FIREFOX_24});
         }
         return list;
     }
@@ -137,6 +144,10 @@ public class ObjectsTest extends SimpleWebTestCase {
         else if (browserVersion_ == BrowserVersion.FIREFOX_17) {
             realList = FF17_;
             simulatedList = FF17_SIMULATED_;
+        }
+        else if (browserVersion_ == BrowserVersion.FIREFOX_24) {
+            realList = FF24_;
+            simulatedList = FF24_SIMULATED_;
         }
         else {
             fail("Unknown BrowserVersion " + browserVersion_);

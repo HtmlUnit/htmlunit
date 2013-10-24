@@ -207,7 +207,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "myEncoding", "newEncoding", "newEncoding" },
             FF17 = { "application/x-www-form-urlencoded", "application/x-www-form-urlencoded", "newEncoding" },
-            IE10 = { "application/x-www-form-urlencoded" })
+            IE10 = { "application/x-www-form-urlencoded", "exception" })
     public void encodingProperty_dummyValues() throws Exception {
         doTestProperty("encoding", "enctype", "myEncoding", "newEncoding");
     }
@@ -237,9 +237,11 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
             + "    alert(document.forms[0]." + jsProperty + ");\n"
-            + "    document.forms[0]." + jsProperty + "='" + newValue + "';\n"
-            + "    alert(document.forms[0]." + jsProperty + ");\n"
-            + "    alert(document.forms[0].getAttribute('" + htmlProperty + "'));\n"
+            + "    try {\n"
+            + "      document.forms[0]." + jsProperty + "='" + newValue + "';\n"
+            + "      alert(document.forms[0]." + jsProperty + ");\n"
+            + "      alert(document.forms[0].getAttribute('" + htmlProperty + "'));\n"
+            + "    } catch(e) { alert('exception'); }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
@@ -251,7 +253,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         final WebDriver wd = loadPageWithAlerts2(html);
 
         final WebElement form = wd.findElement(By.xpath("//form"));
-        if (wd instanceof HtmlUnitDriver) {
+        if (wd instanceof HtmlUnitDriver && getExpectedAlerts().length >= 3) {
             // form.getAttribute("enctype") returns form.getAttribute("encoding") with the FF driver. Bug or feature?
             assertEquals(getExpectedAlerts()[2], form.getAttribute(htmlProperty));
         }
