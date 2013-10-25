@@ -96,9 +96,8 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "2", "hi", "undefined", "you" }, IE = { "2", "hi", "undefined", "you" },
-            FF17  = { "2", "world", "undefined", "undefined" },
-            CHROME = { "2", "world", "undefined", "undefined" })
+    @Alerts(DEFAULT = { "2", "world", "undefined", "undefined" },
+            IE = { "2", "hi", "undefined", "you" })
     public void readOnlyWhenAccessedThroughFunction() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -144,7 +143,7 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true", FF17 = "false", CHROME = "false")
+    @Alerts(DEFAULT = "false", IE = "true")
     public void argumentsEqualsFnArguments() throws Exception {
         final String html = "<html><body><script>\n"
             + "function test1() {\n"
