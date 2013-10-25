@@ -40,7 +40,8 @@ public class SvgMpathTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object SVGMpathElement]",
+    @Alerts(DEFAULT = "[object SVGMPathElement]",
+            FF17 = "[object SVGMpathElement]",
             IE = "[object HTMLGenericElement]",
             IE10 = "[object SVGElement]")
     public void simpleScriptable() throws Exception {
