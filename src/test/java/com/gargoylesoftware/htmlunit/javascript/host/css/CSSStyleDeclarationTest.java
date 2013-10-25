@@ -1341,8 +1341,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "function", "before", "none", "after", "none" },
-            FF17 = { "undefined", "none" },
+    @Alerts(DEFAULT = { "undefined", "none" },
             IE = "exception")
     @NotYetImplemented(Browser.FF)
     public void interceptSetter() throws Exception {

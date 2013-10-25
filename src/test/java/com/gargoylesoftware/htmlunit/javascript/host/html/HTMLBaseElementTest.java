@@ -37,7 +37,7 @@ public class HTMLBaseElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "http://www.foo.com/images/", "", "", "_blank" },
-            FF17 = { "http://www.foo.com/images/", "§§URL§§", "", "_blank" })
+            FF = { "http://www.foo.com/images/", "§§URL§§", "", "_blank" })
     @NotYetImplemented(FF17)
     public void hrefAndTarget() throws Exception {
         final String html =

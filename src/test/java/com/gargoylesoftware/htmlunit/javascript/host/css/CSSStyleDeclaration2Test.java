@@ -109,9 +109,13 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    //TODO: This test fails with WebDriver with real FF3, but succeed if test is done outside WebDriver
     @Alerts(FF = "success",
             FF17 = "error: maxHeight-error: maxHeight-error: maxHeight-error: maxWidth-error: maxWidth-error: "
+                    + "maxWidth-error: minHeight-error: minHeight-error: minHeight-error: minWidth-error: "
+                    + "minWidth-error: minWidth-error: outlineWidth-error: outlineWidth-error: outlineWidth-error: "
+                    + "textIndent-error: textIndent-error: textIndent-error: verticalAlign-error: verticalAlign-error: "
+                    + "verticalAlign-",
+            FF24 = "error: maxHeight-error: maxHeight-error: maxHeight-error: maxWidth-error: maxWidth-error: "
                     + "maxWidth-error: minHeight-error: minHeight-error: minHeight-error: minWidth-error: "
                     + "minWidth-error: minWidth-error: outlineWidth-error: outlineWidth-error: outlineWidth-error: "
                     + "textIndent-error: textIndent-error: textIndent-error: verticalAlign-error: verticalAlign-error: "

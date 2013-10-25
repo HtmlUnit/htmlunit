@@ -43,6 +43,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "HTML 1.0: true", "HTML 2.0: true", "HTML 3.0: false" },
+            FF24 = { "HTML 1.0: true", "HTML 2.0: true", "HTML 3.0: true" },
             IE8 = { "HTML 1.0: true", "HTML 2.0: false", "HTML 3.0: false" })
     public void hasFeature_HTML() throws Exception {
         hasFeature("HTML", "['1.0', '2.0', '3.0']");
@@ -53,6 +54,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "XML 1.0: true", "XML 2.0: true", "XML 3.0: false" },
+            FF24 = { "XML 1.0: true", "XML 2.0: true", "XML 3.0: true" },
             IE8 = { "XML 1.0: false", "XML 2.0: false", "XML 3.0: false" })
     public void hasFeature_XML() throws Exception {
         hasFeature("XML", "['1.0', '2.0', '3.0']");
@@ -63,6 +65,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "CSS2 1.0: false", "CSS2 2.0: true", "CSS2 3.0: false" },
+            FF24 = { "CSS2 1.0: true", "CSS2 2.0: true", "CSS2 3.0: true" },
             IE = { "CSS2 1.0: false", "CSS2 2.0: false", "CSS2 3.0: false" })
     public void hasFeature_CSS2() throws Exception {
         hasFeature("CSS2", "['1.0', '2.0', '3.0']");
@@ -73,6 +76,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "CSS3 1.0: false", "CSS3 2.0: false", "CSS3 3.0: false" },
+            FF24 = { "CSS3 1.0: true", "CSS3 2.0: true", "CSS3 3.0: true" },
             IE = { "CSS3 1.0: false", "CSS3 2.0: false", "CSS3 3.0: false" })
     public void hasFeature_CSS3() throws Exception {
         hasFeature("CSS3", "['1.0', '2.0', '3.0']");

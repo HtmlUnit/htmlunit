@@ -104,8 +104,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "string 0", "string item", "string length", "string namedItem" },
-            FF17 = { "string 0", "string item", "string iterator", "string length", "string namedItem" },
+    @Alerts(FF = { "string 0", "string item", "string iterator", "string length", "string namedItem" },
             IE = { "string length", "string myForm" },
             IE10 = { "string item", "string length", "string myForm", "string namedItem" })
     @NotYetImplemented(FF17)

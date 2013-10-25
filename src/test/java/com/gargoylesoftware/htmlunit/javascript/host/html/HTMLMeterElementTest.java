@@ -35,7 +35,7 @@ public class HTMLMeterElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            FF17 = "[object HTMLMeterElement]",
+            FF = "[object HTMLMeterElement]",
             IE8 = "[object]")
     public void tag() throws Exception {
         final String html = "<html><body>\n"
@@ -51,7 +51,7 @@ public class HTMLMeterElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { },
-            FF17 = { "number200", "number500",
+            FF = { "number200", "number500",
             "number200", "number500", "number350", "number350" })
     public void properties() throws Exception {
         final String html = "<html><body>\n"
