@@ -42,10 +42,9 @@ public class DocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "[object CSSStyleDeclaration]",
-            FF17 = "[object CSS2Properties]",
-            IE = "exception",
-            IE10 = "[object CSSStyleDeclaration]")
+    @Alerts(DEFAULT = "[object CSSStyleDeclaration]",
+            FF = "[object CSS2Properties]",
+            IE8 = "exception")
     @NotYetImplemented(FF17)
     public void getComputedStyleOnChild() throws Exception {
         final String html = "<html><head><style>\n"

@@ -287,11 +287,6 @@ public class Document2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "<p>a & b</p> &amp; \u0162 \" '",
-                "<p>a & b</p> &amp; \u0162 \" '",
-                "undefined",
-                "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
-                "undefined" },
-            FF17 = { "<p>a & b</p> &amp; \u0162 \" '",
                     "<p>a & b</p> &amp; \u0162 \" '",
                     "<div id=\"div\">&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</div>",
                     "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
@@ -329,8 +324,7 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "error", "error", "true", "true", "true" },
-            FF17 = { "error", "error", "false", "false", "false" },
+    @Alerts(FF = { "error", "error", "false", "false", "false" },
             IE = { "true", "true", "true", "true", "true" })
     @NotYetImplemented(FF17)
     public void queryCommandEnabled() throws Exception {

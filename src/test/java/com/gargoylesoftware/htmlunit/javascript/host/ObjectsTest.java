@@ -89,7 +89,7 @@ public class ObjectsTest extends SimpleWebTestCase {
         final Collection<Object[]> list = new ArrayList<Object[]>();
         for (final String line : IE8_) {
             final String name = line.substring(0, line.indexOf(':'));
-            list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_8});
+//            list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_8});
 //            list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_9});
 //            list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_10});
 //            list.add(new Object[] {name, BrowserVersion.FIREFOX_17});

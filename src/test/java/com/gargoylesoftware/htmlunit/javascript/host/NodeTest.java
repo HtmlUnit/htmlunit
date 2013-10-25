@@ -466,10 +466,9 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "3", "3", "123", "3", "123", "456", "3", "undefined" },
+    @Alerts(DEFAULT = { "3", "3", "3", "3", "3", "3", "3", "3" },
             FF17 = { "3", "3", "123", "3", "123", "3", "3", "3" },
-            IE = { "undefined", "not supported" },
-            IE10 = { "3", "3", "3", "3", "3", "3", "3", "3" })
+            IE8 = { "undefined", "not supported" })
     @NotYetImplemented(FF17)
     public void testNodePrototype() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -875,7 +874,8 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"hi", "null", "abcd", "null" })
+    @Alerts(DEFAULT = {"hi", "null", "abcd", "null" },
+            FF24 = {"hi", "undefined", "abcd", "undefined" })
     public void attributes() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
