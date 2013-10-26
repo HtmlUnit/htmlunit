@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -34,8 +35,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.libraries.JQuery182Test;
 
 /**
  * Extracts the needed expectation from the real browsers output, this is done by waiting the browser to finish
@@ -69,6 +73,11 @@ public final class JQueryExtractor {
         final File expectationsDir =
                 new File("src/test/resources/libraries/jQuery/1.8.2/expectations");
         generateTestCases(expectationsDir);
+//
+//        extractExpectations(
+//                new File("src/test/resources/libraries/jQuery/1.8.2/expectations/rbri.txt"),
+//                new File("src/test/resources/libraries/jQuery/1.8.2/expectations/rbri1.txt")
+//                );
     }
 
     /**
@@ -109,9 +118,9 @@ public final class JQueryExtractor {
     /**
      * Generates the java code of the test cases.
      * @param dir the directory which holds the expectations
-     * @throws IOException if an error occurs.
+     * @throws Exception if an error occurs.
      */
-    public static void generateTestCases(final File dir) throws IOException {
+    public static void generateTestCases(final File dir) throws Exception {
         final Browser[] browsers = Browser.values();
         // main browsers regardless of version e.g. "FF"
         final List<String> mainNames = new ArrayList<String>();
@@ -200,9 +209,41 @@ public final class JQueryExtractor {
                     System.out.print(browserName + " = \"" + expectation + '"');
                     first = false;
                 }
-
             }
             System.out.println(")");
+
+            final String methodName = test.getName().replaceAll("\\W",  "_");
+            final Method method = JQuery182Test.class.getMethod(methodName);
+            final NotYetImplemented notYetImplemented = method.getAnnotation(NotYetImplemented.class);
+            if (null != notYetImplemented) {
+                final Browser[] notYetImplementedBrowsers = notYetImplemented.value();
+                if (notYetImplementedBrowsers.length > 0) {
+                    final List<String> browserNames = new ArrayList<String>(notYetImplementedBrowsers.length);
+                    for (Browser browser : notYetImplementedBrowsers) {
+                        browserNames.add(browser.name());
+                    }
+                    Collections.sort(browserNames);
+
+                    // TODO dirty hack
+                    if (browserNames.size() == 3 && browserNames.contains("CHROME")
+                            && browserNames.contains("FF")
+                            && browserNames.contains("IE")) {
+                        System.out.println("    @NotYetImplemented");
+                    }
+                    else {
+                        System.out.print("    @NotYetImplemented(");
+                        if (browserNames.size() > 1) {
+                            System.out.print("{ ");
+                        }
+                        System.out.print(StringUtils.join(browserNames, ", "));
+                        if (browserNames.size() > 1) {
+                            System.out.print(" }");
+                        }
+                        System.out.println(")");
+                    }
+                }
+            }
+
             System.out.println("    public void " + test.getName().replaceAll("\\W",  "_") + "() throws Exception {");
             System.out.println("        runTest(\"" + test.getName().replace("\"",  "\\\"") + "\");");
             System.out.println("    }");
