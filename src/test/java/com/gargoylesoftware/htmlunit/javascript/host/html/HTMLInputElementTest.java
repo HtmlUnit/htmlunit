@@ -710,7 +710,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"text text", "password password", "hidden hidden",
             "checkbox checkbox", "radio radio", "file file", "checkbox checkbox" },
-            FF17 = {"text TeXt", "password PassWord", "hidden Hidden",
+            FF = {"text TeXt", "password PassWord", "hidden Hidden",
             "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox CHECKBOX" },
             IE10 = {"text TeXt", "password PassWord", "hidden Hidden",
             "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox checkbox" })

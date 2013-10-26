@@ -206,7 +206,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "myEncoding", "newEncoding", "newEncoding" },
-            FF17 = { "application/x-www-form-urlencoded", "application/x-www-form-urlencoded", "newEncoding" },
+            FF = { "application/x-www-form-urlencoded", "application/x-www-form-urlencoded", "newEncoding" },
             IE10 = { "application/x-www-form-urlencoded", "exception" })
     public void encodingProperty_dummyValues() throws Exception {
         doTestProperty("encoding", "enctype", "myEncoding", "newEncoding");
