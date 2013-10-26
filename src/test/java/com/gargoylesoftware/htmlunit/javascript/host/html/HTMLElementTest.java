@@ -176,7 +176,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "", "bla", "true" },
-            FF17 = { "null", "bla", "true" },
+            FF = { "null", "bla", "true" },
             IE8 = "exception")
     @NotYetImplemented(FF17)
     public void getSetAttributeNS() throws Exception {
@@ -258,7 +258,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             "specified=true",
             "value=bleh"
             },
-            FF17 = {
+            FF = {
             "null",
             "expando=undefined",
             "firstChild=null",
@@ -386,6 +386,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "inform('newHandler')", "" },
+            FF24 = { "null", "inform('newHandler')", "null" },
             IE8 = { "null", "inform('newHandler')", "null" })
     @NotYetImplemented(FF)
     public void setAttribute_eventHandlerNull() throws Exception {
@@ -859,7 +860,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "<div id=\"div\"><ul></ul></div>", "<ul></ul>", "" },
-            FF17 = { "<div id=\"div\"><ul></ul></div>", "<ul></ul>", "undefined" },
+            FF = { "<div id=\"div\"><ul></ul></div>", "<ul></ul>", "undefined" },
             IE8 = { "<DIV id=div><UL></UL></DIV>", "<UL></UL>", "" })
     public void getSetInnerHtmlEmptyTag_FF() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
@@ -881,7 +882,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "<div id=\"div\"><span class=\"a b\"></span></div>", "<span class=\"a b\"></span>", "" },
-            FF17 = { "<div id=\"div\"><span class=\"a b\"></span></div>", "<span class=\"a b\"></span>", "undefined" },
+            FF = { "<div id=\"div\"><span class=\"a b\"></span></div>", "<span class=\"a b\"></span>", "undefined" },
             IE8 = { "<DIV id=div><SPAN class=\"a b\"></SPAN></DIV>", "<SPAN class=\"a b\"></SPAN>", "" })
     public void getSetInnerHtmlAttributeWithWhitespace_FF() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
@@ -975,9 +976,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "Outer = <p id=\"myNode\">New  cell value\n</p>" },
-            FF17 = { "Outer = <p id=\"myNode\">New  cell value\n\n</p>" },
-            IE = { "Outer = <P id=myNode>New cell value\n</P>" },
+    @Alerts(FF = { "Outer = <p id=\"myNode\">New  cell value\n\n</p>" },
+            IE8 = { "Outer = <P id=myNode>New cell value\n</P>" },
             IE10 = { "Outer = <p id=\"myNode\">New  cell value\n\n" })
     @NotYetImplemented(FF17)
     public void getOuterHTMLFromUnclosedParagraph() throws Exception {
@@ -2804,7 +2804,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "button", "", "false", "true" },
-            FF17 = { "button", "null", "false", "true" },
+            FF = { "button", "null", "false", "true" },
             IE8 = { "button", "getAttributeNS() not supported" })
     @NotYetImplemented(FF17)
     public void attributeNS() throws Exception {

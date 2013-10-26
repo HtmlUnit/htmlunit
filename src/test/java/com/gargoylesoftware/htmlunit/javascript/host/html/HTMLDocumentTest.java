@@ -807,9 +807,9 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "2", "2" },
-            IE = { "0", "0" },
-            IE10 = { "2", "0" })
+    @Alerts(DEFAULT = { "2", "0" },
+            FF17 = { "2", "2" },
+            IE8 = { "0", "0" })
     public void getElementsByName() throws Exception {
         final String html
             = "<html><head><title>Test</title><script>\n"
@@ -1446,7 +1446,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF17 = {"", "", "#0000aa", "#0000aa", "x", "x" },
+    @Alerts(FF = {"", "", "#0000aa", "#0000aa", "x", "x" },
             IE = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#000000" },
             IE9 = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#0" },
             IE10 = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#0" })
