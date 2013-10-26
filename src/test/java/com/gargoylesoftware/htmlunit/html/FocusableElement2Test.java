@@ -189,8 +189,9 @@ public class FocusableElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "done",
-            IE10 = "done\nfocus")
+    @Alerts(DEFAULT = "done\nfocus",
+            FF17 = "done",
+            IE8 = "done")
     public void focusOnNonFocusableElementShouldNotTriggerDocumentFocus() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
