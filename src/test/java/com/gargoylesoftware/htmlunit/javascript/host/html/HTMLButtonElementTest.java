@@ -130,9 +130,8 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "4", "", "0" },
-            FF24 = { "null", "4", "null", "0" },
-            IE = { "null", "4", "null", "4" })
+    @Alerts(DEFAULT = { "null", "4", "null", "4" },
+            FF17 = { "null", "4", "", "0" })
     @NotYetImplemented(FF)
     public void getAttributeAndSetValueNull() throws Exception {
         final String html =
