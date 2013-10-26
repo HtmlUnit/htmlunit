@@ -88,7 +88,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPageWithAlerts2(html);
         final String expected;
-        if ("FF17".equals(getBrowserVersion().getNickname())) {
+        if ("FF17".equals(getBrowserVersion().getNickname())
+                || "FF24".equals(getBrowserVersion().getNickname())) {
             expected = "color: pink; background: none repeat scroll 0% 0% blue;";
         }
         else if ("IE10".equals(getBrowserVersion().getNickname())) {
