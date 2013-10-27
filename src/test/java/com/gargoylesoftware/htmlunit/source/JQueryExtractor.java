@@ -73,10 +73,10 @@ public final class JQueryExtractor {
         final File expectationsDir =
                 new File("src/test/resources/libraries/jQuery/1.8.2/expectations");
         generateTestCases(expectationsDir);
-//
+
 //        extractExpectations(
-//                new File("src/test/resources/libraries/jQuery/1.8.2/expectations/rbri.txt"),
-//                new File("src/test/resources/libraries/jQuery/1.8.2/expectations/rbri1.txt")
+//                new File("src/test/resources/libraries/jQuery/1.8.2/expectations/browser_output.txt"),
+//                new File("src/test/resources/libraries/jQuery/1.8.2/expectations/clean.txt")
 //                );
     }
 
@@ -95,8 +95,9 @@ public final class JQueryExtractor {
         String line;
         while ((line = reader.readLine()) != null) {
             line = line.trim();
-            if (line.startsWith("" + testNumber + '.') && line.endsWith("Rerun")) {
-                line = line.substring(0, line.length() - 5);
+            final int endPos = line.indexOf("Rerun");
+            if (line.startsWith("" + testNumber + '.') && endPos > -1) {
+                line = line.substring(0, endPos);
                 writer.write(line + "\n");
                 testNumber++;
             }
@@ -213,35 +214,40 @@ public final class JQueryExtractor {
             System.out.println(")");
 
             final String methodName = test.getName().replaceAll("\\W",  "_");
-            final Method method = JQuery182Test.class.getMethod(methodName);
-            final NotYetImplemented notYetImplemented = method.getAnnotation(NotYetImplemented.class);
-            if (null != notYetImplemented) {
-                final Browser[] notYetImplementedBrowsers = notYetImplemented.value();
-                if (notYetImplementedBrowsers.length > 0) {
-                    final List<String> browserNames = new ArrayList<String>(notYetImplementedBrowsers.length);
-                    for (Browser browser : notYetImplementedBrowsers) {
-                        browserNames.add(browser.name());
-                    }
-                    Collections.sort(browserNames);
+            try {
+                final Method method = JQuery182Test.class.getMethod(methodName);
+                final NotYetImplemented notYetImplemented = method.getAnnotation(NotYetImplemented.class);
+                if (null != notYetImplemented) {
+                    final Browser[] notYetImplementedBrowsers = notYetImplemented.value();
+                    if (notYetImplementedBrowsers.length > 0) {
+                        final List<String> browserNames = new ArrayList<String>(notYetImplementedBrowsers.length);
+                        for (Browser browser : notYetImplementedBrowsers) {
+                            browserNames.add(browser.name());
+                        }
+                        Collections.sort(browserNames);
 
-                    // TODO dirty hack
-                    if (browserNames.size() == 3 && browserNames.contains("CHROME")
-                            && browserNames.contains("FF")
-                            && browserNames.contains("IE")) {
-                        System.out.println("    @NotYetImplemented");
-                    }
-                    else {
-                        System.out.print("    @NotYetImplemented(");
-                        if (browserNames.size() > 1) {
-                            System.out.print("{ ");
+                        // TODO dirty hack
+                        if (browserNames.size() == 3 && browserNames.contains("CHROME")
+                                && browserNames.contains("FF")
+                                && browserNames.contains("IE")) {
+                            System.out.println("    @NotYetImplemented");
                         }
-                        System.out.print(StringUtils.join(browserNames, ", "));
-                        if (browserNames.size() > 1) {
-                            System.out.print(" }");
+                        else {
+                            System.out.print("    @NotYetImplemented(");
+                            if (browserNames.size() > 1) {
+                                System.out.print("{ ");
+                            }
+                            System.out.print(StringUtils.join(browserNames, ", "));
+                            if (browserNames.size() > 1) {
+                                System.out.print(" }");
+                            }
+                            System.out.println(")");
                         }
-                        System.out.println(")");
                     }
                 }
+            }
+            catch (final NoSuchMethodException e) {
+                // ignore
             }
 
             System.out.println("    public void " + test.getName().replaceAll("\\W",  "_") + "() throws Exception {");
