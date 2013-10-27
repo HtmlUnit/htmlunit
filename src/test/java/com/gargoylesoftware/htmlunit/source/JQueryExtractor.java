@@ -75,8 +75,16 @@ public final class JQueryExtractor {
         generateTestCases(expectationsDir);
 
 //        extractExpectations(
-//                new File("src/test/resources/libraries/jQuery/1.8.2/expectations/browser_output.txt"),
-//                new File("src/test/resources/libraries/jQuery/1.8.2/expectations/clean.txt")
+//                new File("src/test/resources/libraries/jQuery/1.8.2/expectations/rbri_ff17.txt"),
+//                new File("src/test/resources/libraries/jQuery/1.8.2/expectations/results.FF17.txt")
+//                );
+//        extractExpectations(
+//                new File("src/test/resources/libraries/jQuery/1.8.2/expectations/rbri_ff24.txt"),
+//                new File("src/test/resources/libraries/jQuery/1.8.2/expectations/results.FF24.txt")
+//                );
+//        extractExpectations(
+//                new File("src/test/resources/libraries/jQuery/1.8.2/expectations/rbri_ie10.txt"),
+//                new File("src/test/resources/libraries/jQuery/1.8.2/expectations/results.IE10.txt")
 //                );
     }
 
