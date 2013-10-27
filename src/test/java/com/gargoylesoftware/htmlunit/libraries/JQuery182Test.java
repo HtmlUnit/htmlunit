@@ -42,6 +42,9 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
  * Tests for compatibility with web server loading of
  * version 1.8.2 of the <a href="http://jquery.com/">jQuery</a> JavaScript library.
  *
+ * All test method inside this class are generated based. Please have a look
+ * at {@link com.gargoylesoftware.htmlunit.source.JQueryExtractor}.
+ *
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
