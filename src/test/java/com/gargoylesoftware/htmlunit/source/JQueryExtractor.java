@@ -58,6 +58,7 @@ import com.gargoylesoftware.htmlunit.libraries.JQuery182Test;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public final class JQueryExtractor {
 
@@ -73,19 +74,6 @@ public final class JQueryExtractor {
         final File expectationsDir =
                 new File("src/test/resources/libraries/jQuery/1.8.2/expectations");
         generateTestCases(expectationsDir);
-
-//        extractExpectations(
-//                new File("src/test/resources/libraries/jQuery/1.8.2/expectations/rbri_ff17.txt"),
-//                new File("src/test/resources/libraries/jQuery/1.8.2/expectations/results.FF17.txt")
-//                );
-//        extractExpectations(
-//                new File("src/test/resources/libraries/jQuery/1.8.2/expectations/rbri_ff24.txt"),
-//                new File("src/test/resources/libraries/jQuery/1.8.2/expectations/results.FF24.txt")
-//                );
-//        extractExpectations(
-//                new File("src/test/resources/libraries/jQuery/1.8.2/expectations/rbri_ie10.txt"),
-//                new File("src/test/resources/libraries/jQuery/1.8.2/expectations/results.IE10.txt")
-//                );
     }
 
     /**
