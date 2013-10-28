@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.14" date="???" description="Bugfixes">
+            <action type="add" dev="rbri">
+                JavaScript: Embed now supports the width and hight property.
+            </action>
             <action type="fix" dev="rbri" issue="1551">
                 JavaScript: send the correct Referer header when changing the location property.
             </action>
