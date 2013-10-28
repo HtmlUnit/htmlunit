@@ -65,7 +65,7 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Immortality", IE = { })
+    @Alerts(DEFAULT = { }, FF17 = "Immortality")
     public void namespacesWithNodeInArray() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  var xml = "
@@ -96,7 +96,7 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Immortality", IE = { })
+    @Alerts(DEFAULT = { }, FF17 = "Immortality")
     public void namespacesWithCustomNSResolver() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "     function nsResolver(prefix) {"

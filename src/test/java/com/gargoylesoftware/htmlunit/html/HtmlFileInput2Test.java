@@ -33,6 +33,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -234,17 +235,24 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
         driver.findElement(By.name("myInput")).sendKeys(path);
         driver.findElement(By.id("mySubmit")).click();
 
+        String pageSource = driver.getPageSource();
+        // hack for selenium
+        int count = 0;
+        while (count < 100 && StringUtils.isEmpty(pageSource)) {
+            pageSource = driver.getPageSource();
+            count++;
+        }
+
         if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER_10 != getBrowserVersion()) {
             final Pattern pattern = Pattern
                 .compile("Content-Disposition: form-data; name=\"myInput\";"
                         + " filename=\".*test-classes[\\\\/]realm\\.properties\"");
-            final Matcher matcher = pattern.matcher(driver.getPageSource());
+            final Matcher matcher = pattern.matcher(pageSource);
             assertTrue(matcher.find());
             return;
         }
-
         // all other browsers
-        assertTrue(driver.getPageSource()
+        assertTrue(pageSource
                 .contains("Content-Disposition: form-data; name=\"myInput\"; filename=\"realm.properties\""));
     }
 

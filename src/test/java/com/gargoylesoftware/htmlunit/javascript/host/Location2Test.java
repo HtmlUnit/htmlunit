@@ -446,6 +446,8 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"", "foo3.html", "foo2.html" },
+            FF24 = {"", "foo2.html" })
     public void onlick_set_location() throws Exception {
         final String html =
             "<html><head></head>\n"
@@ -454,11 +456,10 @@ public class Location2Test extends WebDriverTestCase {
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("");
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
         driver.findElement(By.tagName("a")).click();
 
-        final String[] expectedRequests = {"", "foo3.html", "foo2.html"};
-        assertEquals(expectedRequests, getMockWebConnection().getRequestedUrls(getDefaultUrl()));
+        assertEquals(getExpectedAlerts(), getMockWebConnection().getRequestedUrls(getDefaultUrl()));
 
         assertEquals(new URL(getDefaultUrl(), "foo2.html").toString(), driver.getCurrentUrl());
     }

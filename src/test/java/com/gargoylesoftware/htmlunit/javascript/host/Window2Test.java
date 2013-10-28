@@ -253,6 +253,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object Node]", "[object Element]" },
+            FF24 = { "function Node() {\n    [native code]\n}", "function Element() {\n    [native code]\n}" },
             IE8 = { "undefined", "undefined" })
     public void windowProperties() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -560,6 +561,8 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "[object Window]", "[object Window] (true)", "exception", "null (true)", "null (false)",
                 "null (false)", "null (false)", "null (false)" },
+            FF24 = { "[object Window]", "[object Window] (true)", "1234 (true)", "null (true)", "undefined (true)",
+                    "[object Window] (true)", "[object Window] (true)", "[object Window] (true)" },
             IE = { "[object]", "[object] (true)", "1234 (true)", "null (true)", "undefined (true)", "[object] (true)",
                 "[object] (true)", "[object] (true)" },
             IE10 = { "[object Window]", "[object Window] (true)", "exception", "null (true)", "undefined (true)",
@@ -646,6 +649,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "605", "1256", "705", "1256" },
+            FF24 = { "657", "1264", "641", "1248" },
             IE10 = { "705", "1256", "688", "1239" })
     public void changeHeightsAndWidths() throws Exception {
         final String html
@@ -676,6 +680,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1210" },
+            FF24 = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1206" },
             IE = { "0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()" })
     public void scrolling1() throws Exception {
         scrolling(true);
@@ -781,6 +786,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "0", "82", "23" },
+            FF24 = { "8", "91", "0" },
             IE = { "undefined", "undefined", "undefined" })
     public void mozInnerScreenX() throws Exception {
         final String html

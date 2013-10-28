@@ -134,6 +134,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "function handler() {\n}", "null" },
+            FF24 = { "function handler() {}", "null" },
             IE10 = { "function handler() {}", "null" })
     public void testOnloadNull() throws Exception {
         final String html =

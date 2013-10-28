@@ -173,6 +173,9 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "[object Window]", "[object Window]", "true",
                 "[object HTMLDocument]", "[object HTMLDocument]", "true", "function" },
+            FF24 = { "[object Window]", "[object Window]", "true",
+                    "function HTMLDocument() {\n    [native code]\n}",
+                    "function HTMLDocument() {\n    [native code]\n}", "true", "function" },
             IE = { "undefined", "exception", "undefined", "exception", "function" },
             IE10 = { "[object Window]", "[object Window]", "true",
                 "[object Document]", "exception", "function" })

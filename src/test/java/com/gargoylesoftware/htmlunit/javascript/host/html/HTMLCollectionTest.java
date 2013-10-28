@@ -105,6 +105,8 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "string 0", "string item", "string iterator", "string length", "string namedItem" },
+            FF24 = { "string 0", "string item", "string iterator", "string length",
+                        "string myForm", "string namedItem" },
             IE = { "string length", "string myForm" },
             IE10 = { "string item", "string length", "string myForm", "string namedItem" })
     @NotYetImplemented(FF17)
@@ -133,9 +135,11 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
-                "string item", "string length", "string namedItem" },
-            FF17 = { "string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
                 "string item", "string iterator", "string length", "string namedItem" },
+            FF24 = { "string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
+                "string action", "string first_submit", "string id1", "string input_disabled",
+                "string item", "string iterator", "string length", "string namedItem", "string second_submit",
+                "string val1", "string val2" },
             IE = { "string 1", "string action", "string first_submit", "string length",
                 "string second_submit", "string val1", "string val2" },
             IE10 = { "string 1", "string action", "string first_submit", "string item",

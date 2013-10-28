@@ -35,6 +35,7 @@ public class CSSValueTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "[object CSSValue]", "0123" },
+            FF24 = { "function CSSValue() {\n    [native code]\n}", "0123" },
             IE = { "exception" })
     public void test() throws Exception {
         final String html = "<html><head><title>First</title>\n"

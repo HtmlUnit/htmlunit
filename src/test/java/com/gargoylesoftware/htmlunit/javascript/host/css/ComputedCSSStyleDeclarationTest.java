@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -170,7 +171,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
+    @Browsers({ IE, FF24 })
     @Alerts(IE = { "0", "number" },
             IE10 = { "auto", "string" })
     public void zIndex() throws Exception {
@@ -1027,6 +1028,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "1256px", "auto" },
+            FF24 = { "1248px", "auto" },
             IE = { "auto", "auto" },
             IE10 = { "1240px", "auto" })
     public void computedWidthOfHiddenElements() throws Exception {
