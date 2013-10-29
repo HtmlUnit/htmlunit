@@ -14,16 +14,23 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+
 import com.gargoylesoftware.htmlunit.html.HtmlDirectory;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * The JavaScript object "HTMLDirectoryElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@JsxClass(domClass = HtmlDirectory.class)
+@JsxClass(domClass = HtmlDirectory.class, browsers = { @WebBrowser(FF),
+            @WebBrowser(value = IE, minVersion = 10), @WebBrowser(CHROME) })
 public class HTMLDirectoryElement extends HTMLListElement {
 
 }

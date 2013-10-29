@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_90;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -22,6 +24,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlMultiColumn;
 import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * The JavaScript object "HTMLSpanElement".
@@ -32,7 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
  * @author Ronald Brill
  */
 @JsxClasses({
-    @JsxClass(domClass = HtmlMultiColumn.class),
+    @JsxClass(domClass = HtmlMultiColumn.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) }),
     @JsxClass(domClass = HtmlSpan.class)
 })
 public class HTMLSpanElement extends HTMLElement {

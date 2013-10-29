@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import com.gargoylesoftware.htmlunit.html.HtmlDirectory;
 import com.gargoylesoftware.htmlunit.html.HtmlMenu;
 import com.gargoylesoftware.htmlunit.html.HtmlUnorderedList;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -27,8 +28,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClasses ({
+    @JsxClass(domClass = HtmlDirectory.class, browsers = { @WebBrowser(value = IE, maxVersion = 9) }),
     @JsxClass(domClass = HtmlUnorderedList.class),
     @JsxClass(domClass = HtmlMenu.class, browsers = { @WebBrowser(value = IE, maxVersion = 9) })
 })
