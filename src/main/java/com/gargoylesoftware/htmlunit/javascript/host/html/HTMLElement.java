@@ -1209,7 +1209,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      *        beforeBegin, afterBegin, beforeEnd, afterEnd
      * @param text the HTML text to insert
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 8) })
     public void insertAdjacentHTML(final String where, final String text) {
         final Object[] values = getInsertAdjacentLocation(where);
         final DomNode node = (DomNode) values[0];

@@ -133,54 +133,6 @@ public class HTMLElement3Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "outside", "1", "middle", "2", "3", "4" })
-    public void insertAdjacentHTML() throws Exception {
-        insertAdjacentHTML("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");
-        insertAdjacentHTML("BeforeEnd", "AfterEnd", "BeFoReBeGiN", "afterbegin");
-    }
-
-    /**
-     * @param beforeEnd data to insert
-     * @param afterEnd data to insert
-     * @param beforeBegin data to insert
-     * @param afterBegin data to insert
-     * @throws Exception if the test fails
-     */
-    private void insertAdjacentHTML(final String beforeEnd,
-            final String afterEnd, final String beforeBegin, final String afterBegin) throws Exception {
-        final String html = "<html><head><title>First</title>\n"
-            + "<script>\n"
-            + "function test() {\n"
-            + "  var oNode = document.getElementById('middle');\n"
-            + "  oNode.insertAdjacentHTML('" + beforeEnd + "', ' <span id=3>before end</span> ');\n"
-            + "  oNode.insertAdjacentHTML('" + afterEnd + "', ' <span id=4>after end</span> ');\n"
-            + "  oNode.insertAdjacentHTML('" + beforeBegin + "', ' <span id=1>before begin</span> ');\n"
-            + "  oNode.insertAdjacentHTML('" + afterBegin + "', ' <span id=2>after begin</span> ');\n"
-            + "  var coll = document.getElementsByTagName('SPAN');\n"
-            + "  for (var i=0; i<coll.length; i++) {\n"
-            + "    alert(coll[i].id);\n"
-            + "  }\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "<span id='outside' style='color: #00ff00'>\n"
-            + "<span id='middle' style='color: #ff0000'>\n"
-            + "inside\n"
-            + "</span>\n"
-            + "</span>\n"
-            + "</body></html>";
-        final HtmlPage page = loadPageWithAlerts(html);
-        final HtmlElement elt = page.getHtmlElementById("outside");
-        assertEquals("before begin after begin inside before end after end", elt.asText());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Browsers(IE)
     @Alerts({ "outside", "1", "middle", "2", "3", "4" })
     public void insertAdjacentElement() throws Exception {
         insertAdjacentElement("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");

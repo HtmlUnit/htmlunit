@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +24,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -177,7 +174,6 @@ public class HTMLParserListenerTest extends SimpleWebTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Browsers(IE)
     public void parseFragment() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
                 + "<script>\n"
