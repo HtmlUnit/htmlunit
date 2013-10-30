@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAddress;
+import com.gargoylesoftware.htmlunit.html.HtmlBlockQuote;
 import com.gargoylesoftware.htmlunit.html.HtmlCenter;
 import com.gargoylesoftware.htmlunit.html.HtmlExample;
 import com.gargoylesoftware.htmlunit.html.HtmlListing;
@@ -38,6 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
  */
 @JsxClasses({
     @JsxClass(domClass = HtmlAddress.class),
+    @JsxClass(domClass = HtmlBlockQuote.class, browsers = @WebBrowser(IE)),
     @JsxClass(domClass = HtmlCenter.class),
     @JsxClass(domClass = HtmlExample.class),
     @JsxClass(domClass = HtmlListing.class),
@@ -121,6 +123,7 @@ public class HTMLBlockElement extends HTMLElement {
     public String getDefaultStyleDisplay() {
         final String tagName = getTagName();
         if ("ADDRESS".equals(tagName)
+                || "BLOCKQUOTE".equals(tagName)
                 || "CENTER".equals(tagName)
                 || "PRE".equals(tagName)) {
             return super.getDefaultStyleDisplay();

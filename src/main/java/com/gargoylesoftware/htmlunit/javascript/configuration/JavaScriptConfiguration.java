@@ -142,7 +142,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollectionTags;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDListElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDefinitionDescriptionElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDefinitionTermElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDelElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDirectoryElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDivElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
@@ -161,7 +160,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInlineQuotationElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInsElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIsIndexElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLIElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLabelElement;
@@ -173,6 +171,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMediaElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMenuElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMetaElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMeterElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLModElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLNoShowElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOListElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLObjectElement;
@@ -282,6 +281,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLSerializer;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Chris Erskine
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public final class JavaScriptConfiguration {
 
@@ -309,14 +309,15 @@ public final class JavaScriptConfiguration {
         HTMLCollection.class, HTMLCollectionTags.class,
         HTMLDefinitionDescriptionElement.class, HTMLDefinitionTermElement.class,
         HTMLDListElement.class,
-        HTMLDelElement.class, HTMLDirectoryElement.class,
+        HTMLDirectoryElement.class,
         HTMLDivElement.class, HTMLDocument.class, HTMLElement.class, HTMLEmbedElement.class, HTMLFieldSetElement.class,
         HTMLFontElement.class, HTMLFormElement.class, HTMLFrameElement.class, HTMLFrameSetElement.class,
         HTMLHRElement.class, HTMLHeadElement.class, HTMLHeadingElement.class, HTMLHtmlElement.class,
         HTMLIFrameElement.class, HTMLImageElement.class, HTMLInlineQuotationElement.class, HTMLInputElement.class,
-        HTMLInsElement.class, HTMLIsIndexElement.class, HTMLLIElement.class, HTMLLabelElement.class,
+        HTMLIsIndexElement.class, HTMLLIElement.class, HTMLLabelElement.class,
         HTMLLegendElement.class, HTMLLinkElement.class, HTMLListElement.class, HTMLMapElement.class,
         HTMLMediaElement.class, HTMLMenuElement.class, HTMLMetaElement.class, HTMLMeterElement.class,
+        HTMLModElement.class,
         HTMLNoShowElement.class,
         HTMLOListElement.class, HTMLObjectElement.class, HTMLOptGroupElement.class,
         HTMLOptionElement.class, HTMLOptionsCollection.class, HTMLParagraphElement.class, HTMLParamElement.class,

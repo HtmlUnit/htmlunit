@@ -1004,11 +1004,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_LOCATION_HASH_IS_DECODED,
 
-    /** Indicates that HTMLModElements returning 'HTMLPhraseElement'
-     * as class name. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_MOD_PHRASE_CLASS_NAME,
-
     /**
      * Indicates if the String representation of a native function begins and ends with a \n.
      */
@@ -1065,11 +1060,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that document.queryCommandSupported(..) is only available in design mode. */
     @BrowserFeature(@WebBrowser(value = FF, maxVersion = 3.6f))
     JS_QUERYCOMMAND_SUPPORTED_ONLY_DESIGNMODE,
-
-    /** Indicates that HTMLBlockQuoteElement returning 'HTMLBlockElement'
-     * as class name. */
-    @BrowserFeature(@WebBrowser(IE))
-    JS_QUOTE_CLASS_NAMEBLOCK,
 
     /** Javascript script.text(...) reexecutes the script (IE). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))

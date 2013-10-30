@@ -14,12 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_QUOTE_CLASS_NAMEBLOCK;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import com.gargoylesoftware.htmlunit.html.HtmlBlockQuote;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * The JavaScript object "HtmlBlockQuote".
@@ -28,7 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(domClass = HtmlBlockQuote.class)
+@JsxClass(domClass = HtmlBlockQuote.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
 public class HTMLBlockQuoteElement extends HTMLElement {
 
     /**
@@ -36,9 +38,6 @@ public class HTMLBlockQuoteElement extends HTMLElement {
      */
     @Override
     public String getClassName() {
-        if (getWindow().getWebWindow() != null && getBrowserVersion().hasFeature(JS_QUOTE_CLASS_NAMEBLOCK)) {
-            return "HTMLBlockElement";
-        }
         return "HTMLQuoteElement";
     }
 

@@ -14,22 +14,32 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MOD_PHRASE_CLASS_NAME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlDeletedText;
+import com.gargoylesoftware.htmlunit.html.HtmlInsertedText;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLDelElement".
+ * The JavaScript object "HTMLModElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(domClass = HtmlDeletedText.class)
-public class HTMLDelElement extends HTMLElement {
+@JsxClasses({
+    @JsxClass(domClass = HtmlDeletedText.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME),
+                @WebBrowser(value = IE, minVersion = 9) }),
+    @JsxClass(domClass = HtmlInsertedText.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME),
+                @WebBrowser(value = IE, minVersion = 9) })
+})
+public class HTMLModElement extends HTMLElement {
 
     /**
      * Returns the value of the "cite" property.
@@ -76,16 +86,5 @@ public class HTMLDelElement extends HTMLElement {
     @Override
     public String getDefaultStyleDisplay() {
         return "inline";
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getClassName() {
-        if (getWindow().getWebWindow() != null && getBrowserVersion().hasFeature(JS_MOD_PHRASE_CLASS_NAME)) {
-            return "HTMLPhraseElement";
-        }
-        return "HTMLModElement";
     }
 }

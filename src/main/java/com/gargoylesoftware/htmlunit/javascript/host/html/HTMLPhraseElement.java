@@ -30,7 +30,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlBold;
 import com.gargoylesoftware.htmlunit.html.HtmlCitation;
 import com.gargoylesoftware.htmlunit.html.HtmlCode;
 import com.gargoylesoftware.htmlunit.html.HtmlDefinition;
+import com.gargoylesoftware.htmlunit.html.HtmlDeletedText;
 import com.gargoylesoftware.htmlunit.html.HtmlEmphasis;
+import com.gargoylesoftware.htmlunit.html.HtmlInsertedText;
 import com.gargoylesoftware.htmlunit.html.HtmlItalic;
 import com.gargoylesoftware.htmlunit.html.HtmlKeyboard;
 import com.gargoylesoftware.htmlunit.html.HtmlNoBreak;
@@ -70,7 +72,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
     @JsxClass(domClass = HtmlCitation.class),
     @JsxClass(domClass = HtmlCode.class),
     @JsxClass(domClass = HtmlDefinition.class),
+    @JsxClass(domClass = HtmlDeletedText.class, browsers = @WebBrowser(value = IE, maxVersion = 8)),
     @JsxClass(domClass = HtmlEmphasis.class),
+    @JsxClass(domClass = HtmlInsertedText.class, browsers = @WebBrowser(value = IE, maxVersion = 8)),
     @JsxClass(domClass = HtmlItalic.class),
     @JsxClass(domClass = HtmlKeyboard.class),
     @JsxClass(domClass = HtmlNoBreak.class, browsers = @WebBrowser(IE)),
