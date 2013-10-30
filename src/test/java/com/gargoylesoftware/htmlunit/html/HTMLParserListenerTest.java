@@ -188,10 +188,9 @@ public class HTMLParserListenerTest extends SimpleWebTestCase {
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "<span id='middle' style='color: #ff0000'>\n"
-                + "inside\n"
-                + "</span>\n"
-                + "</span>\n"
+                + "  <span id='middle' style='color: #ff0000'>\n"
+                + "    inside\n"
+                + "  </span>\n"
                 + "</body></html>";
 
         final WebClient webClient = getWebClient();
