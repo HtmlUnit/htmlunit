@@ -500,7 +500,7 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "supported", "onhashchange undefined  undefined" },
-            FF = { "supported", "onhashchange http://localhost:12345/#1  http://localhost:12345/" },
+            FF = { "supported", "onhashchange §§URL§§#1  §§URL§§" },
             IE8 = { "supported", "onhashchange -" })
     public void onHashChangeJS() throws Exception {
         final String html =
@@ -521,6 +521,7 @@ public class Location2Test extends WebDriverTestCase {
             + " <button id='click' onclick='location.hash=1'>change hash</button>\n"
             + "</body></html>";
 
+        expandExpectedAlertsVariables(getDefaultUrl());
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("click")).click();
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));

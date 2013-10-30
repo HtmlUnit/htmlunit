@@ -298,7 +298,7 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Attr]", "http://localhost:12345/" },
+    @Alerts(DEFAULT = { "[object Attr]", "§§URL§§" },
             IE = { "[object]", "undefined" },
             IE10 = { "[object Attr]", "undefined" })
     public void html_baseURI() throws Exception {
@@ -370,7 +370,7 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Attr]", "http://localhost:12345/foo.xml" },
+    @Alerts(DEFAULT = { "[object Attr]", "§§URL§§foo.xml" },
             IE = { "[object]", "undefined" },
             IE10 = { "[object Attr]", "undefined" })
     public void xml_baseURI() throws Exception {
