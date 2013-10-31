@@ -4239,7 +4239,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "outside", "1", "middle", "2", "3", "4",
-        "before begin after begin inside before end after end" })
+        "before-begin after-begin inside before-end after-end" })
     public void insertAdjacentHTML() throws Exception {
         insertAdjacentHTML("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");
         insertAdjacentHTML("BeforeEnd", "AfterEnd", "BeFoReBeGiN", "afterbegin");
@@ -4258,10 +4258,10 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<script>\n"
             + "function test() {\n"
             + "  var oNode = document.getElementById('middle');\n"
-            + "  oNode.insertAdjacentHTML('" + beforeEnd + "', ' <span id=3>before end</span> ');\n"
-            + "  oNode.insertAdjacentHTML('" + afterEnd + "', ' <span id=4>after end</span> ');\n"
-            + "  oNode.insertAdjacentHTML('" + beforeBegin + "', ' <span id=1>before begin</span> ');\n"
-            + "  oNode.insertAdjacentHTML('" + afterBegin + "', ' <span id=2>after begin</span> ');\n"
+            + "  oNode.insertAdjacentHTML('" + beforeEnd + "', ' <span id=3>before-end</span> ');\n"
+            + "  oNode.insertAdjacentHTML('" + afterEnd + "', ' <span id=4>after-end</span> ');\n"
+            + "  oNode.insertAdjacentHTML('" + beforeBegin + "', ' <span id=1>before-begin</span> ');\n"
+            + "  oNode.insertAdjacentHTML('" + afterBegin + "', ' <span id=2>after-begin</span> ');\n"
             + "  var coll = document.getElementsByTagName('SPAN');\n"
             + "  for (var i=0; i<coll.length; i++) {\n"
             + "    alert(coll[i].id);\n"
@@ -4272,6 +4272,57 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  text = text.replace(/(\\s{2,})/g, ' ');\n"
             + "  text = text.replace(/^\\s+|\\s+$/g, '');\n"
             + "  alert(text);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <span id='outside' style='color: #00ff00'>\n"
+            + "    <span id='middle' style='color: #ff0000'>\n"
+            + "      inside\n"
+            + "    </span>\n"
+            + "  </span>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(IE)
+    @Alerts({ "outside", "1", "middle", "2", "3", "4",
+                "before-begin after-begin inside before-end after-end" })
+    public void insertAdjacentElement() throws Exception {
+        insertAdjacentElement("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");
+        insertAdjacentElement("BeforeEnd", "AfterEnd", "BeFoReBeGiN", "afterbegin");
+    }
+
+    private void insertAdjacentElement(final String beforeEnd,
+            final String afterEnd, final String beforeBegin, final String afterBegin) throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var oNode = document.getElementById('middle');\n"
+            + "  oNode.insertAdjacentElement('" + beforeEnd + "', makeElement(3, 'before-end'));\n"
+            + "  oNode.insertAdjacentElement('" + afterEnd + "', makeElement(4, ' after-end'));\n"
+            + "  oNode.insertAdjacentElement('" + beforeBegin + "', makeElement(1, 'before-begin '));\n"
+            + "  oNode.insertAdjacentElement('" + afterBegin + "', makeElement(2, ' after-begin'));\n"
+            + "  var coll = document.getElementsByTagName('SPAN');\n"
+            + "  for (var i=0; i<coll.length; i++) {\n"
+            + "    alert(coll[i].id);\n"
+            + "  }\n"
+            + "  var outside = document.getElementById('outside');\n"
+            + "  var text = outside.textContent ? outside.textContent : outside.innerText;\n"
+            + "  text = text.replace(/(\\r\\n|\\r|\\n)/gm, '');\n"
+            + "  text = text.replace(/(\\s{2,})/g, ' ');\n"
+            + "  text = text.replace(/^\\s+|\\s+$/g, '');\n"
+            + "  alert(text);\n"
+            + "}\n"
+            + "function makeElement(id, value) {\n"
+            + "  var span = document.createElement('span');\n"
+            + "  span.appendChild(document.createTextNode(value));\n"
+            + "  span.id = id;\n"
+            + "  return span;\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"

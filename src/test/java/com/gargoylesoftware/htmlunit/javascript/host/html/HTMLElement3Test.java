@@ -130,51 +130,6 @@ public class HTMLElement3Test extends SimpleWebTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({ "outside", "1", "middle", "2", "3", "4" })
-    public void insertAdjacentElement() throws Exception {
-        insertAdjacentElement("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");
-        insertAdjacentElement("BeforeEnd", "AfterEnd", "BeFoReBeGiN", "afterbegin");
-    }
-
-    private void insertAdjacentElement(final String beforeEnd,
-            final String afterEnd, final String beforeBegin, final String afterBegin) throws Exception {
-        final String html = "<html><head><title>First</title>\n"
-            + "<script>\n"
-            + "function test() {\n"
-            + "  var oNode = document.getElementById('middle');\n"
-            + "  oNode.insertAdjacentElement('" + beforeEnd + "', makeElement(3, 'before end'));\n"
-            + "  oNode.insertAdjacentElement('" + afterEnd + "', makeElement(4, ' after end'));\n"
-            + "  oNode.insertAdjacentElement('" + beforeBegin + "', makeElement(1, 'before begin '));\n"
-            + "  oNode.insertAdjacentElement('" + afterBegin + "', makeElement(2, ' after begin'));\n"
-            + "  var coll = document.getElementsByTagName('SPAN');\n"
-            + "  for (var i=0; i<coll.length; i++) {\n"
-            + "    alert(coll[i].id);\n"
-            + "  }\n"
-            + "}\n"
-            + "function makeElement(id, value) {\n"
-            + "  var span = document.createElement('span');\n"
-            + "  span.appendChild(document.createTextNode(value));\n"
-            + "  span.id = id;\n"
-            + "  return span;\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "<span id='outside' style='color: #00ff00'>\n"
-            + "<span id='middle' style='color: #ff0000'>\n"
-            + "inside\n"
-            + "</span>\n"
-            + "</span>\n"
-            + "</body></html>";
-        final HtmlPage page = loadPageWithAlerts(html);
-        final HtmlElement elt = page.getHtmlElementById("outside");
-        assertEquals("before begin after begin inside before end after end", elt.asText());
-    }
-
-    /**
      * Test the <tt>#default#homePage</tt> default IE behavior.
      * @throws Exception if the test fails
      */
