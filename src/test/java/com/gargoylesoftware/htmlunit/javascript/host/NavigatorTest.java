@@ -222,7 +222,7 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "undefined",
-            FF = "en-us",
+            FF = "en-US",
             IE = "undefined")
     public void language() throws Exception {
         final String html
@@ -303,7 +303,7 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF17 = "20121129151842",
+            FF17 = "20130805152501",
             FF24 = "20130910201120")
     public void buildID() throws Exception {
         final String html

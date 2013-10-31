@@ -74,6 +74,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     private String applicationMinorVersion_ = "0";
     private String applicationName_;
     private String applicationVersion_;
+    private String buildId_;
     private String browserLanguage_ = LANGUAGE_ENGLISH_US;
     private String cpuClass_ = CPU_CLASS_X86;
     private boolean onLine_ = true;
@@ -167,12 +168,16 @@ public class BrowserVersion implements Serializable, Cloneable {
 
         FIREFOX_17.initDefaultFeatures();
 
+        FIREFOX_17.setBrowserLanguage("en-US");
+        FIREFOX_17.buildId_ = "20130805152501";
         FIREFOX_17.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_17.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
         FIREFOX_17.setCssAcceptHeader("text/css,*/*;q=0.1");
 
         FIREFOX_24.initDefaultFeatures();
 
+        FIREFOX_24.setBrowserLanguage("en-US");
+        FIREFOX_24.buildId_ = "20130910201120";
         FIREFOX_24.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_24.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
         FIREFOX_24.setCssAcceptHeader("text/css,*/*;q=0.1");
@@ -644,6 +649,14 @@ public class BrowserVersion implements Serializable, Cloneable {
         return nickname_;
     }
 
+    /**
+     * Returns the buildId.
+     * @return the buildId
+     */
+    public String getBuildId() {
+        return buildId_;
+    }
+
     @Override
     public String toString() {
         return nickname_;
@@ -668,6 +681,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         clone.setSystemLanguage(getSystemLanguage());
         clone.setUserLanguage(getUserLanguage());
 
+        clone.buildId_ = getBuildId();
         clone.htmlAcceptHeader_ = getHtmlAcceptHeader();
         clone.imgAcceptHeader_ = getImgAcceptHeader();
         clone.cssAcceptHeader_ = getCssAcceptHeader();

@@ -272,14 +272,7 @@ public final class Navigator extends SimpleScriptable {
      */
     @JsxGetter(@WebBrowser(FF))
     public String getBuildID() {
-        final BrowserVersion browser = getBrowserVersion();
-        if ("FF17".equals(browser.getNickname())) {
-            return "20121129151842";
-        }
-        if ("FF3.6".equals(browser.getNickname())) {
-            return "20120306064154";
-        }
-        return "20120713134347";
+        return getBrowserVersion().getBuildId();
     }
 
     /**
