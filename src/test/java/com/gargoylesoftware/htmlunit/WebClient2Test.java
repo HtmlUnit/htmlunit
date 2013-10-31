@@ -246,14 +246,15 @@ public class WebClient2Test extends SimpleWebTestCase {
     public void acceptLanguage() throws Exception {
         final String html = "<html><body></body></html>";
         final HtmlPage p = loadPageWithAlerts(html);
-        assertEquals("en-us", p.getWebResponse().getWebRequest().getAdditionalHeaders().get("Accept-Language"));
+        // browsers are using different casing, but this is not relevant for this test
+        assertEquals("en-us", getMockWebConnection().getLastAdditionalHeaders().get("Accept-Language").toLowerCase());
 
         final WebClient client = p.getWebClient();
         final String lang = client.getBrowserVersion().getBrowserLanguage();
         try {
             client.getBrowserVersion().setBrowserLanguage("fr");
-            final HtmlPage p2 = client.getPage(getDefaultUrl());
-            assertEquals("fr", p2.getWebResponse().getWebRequest().getAdditionalHeaders().get("Accept-Language"));
+            client.getPage(getDefaultUrl());
+            assertEquals("fr", getMockWebConnection().getLastAdditionalHeaders().get("Accept-Language"));
         }
         finally {
             // Restore original language.
