@@ -41,7 +41,7 @@ public class SvgStyleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object SVGStyleElement]",
-            IE = "[object HTMLStyleElement]")
+            IE8 = "[object HTMLStyleElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

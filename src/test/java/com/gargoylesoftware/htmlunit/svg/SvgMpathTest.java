@@ -64,6 +64,9 @@ public class SvgMpathTest extends WebDriverTestCase {
             if ("[object SVGMpathElement]".equals(getExpectedAlerts()[0])) {
                 assertTrue(SvgMpath.class.isInstance(page.getElementById("myId")));
             }
+            else if ("[object SVGElement]".equals(getExpectedAlerts()[0])) {
+                assertTrue(SvgElement.class.isInstance(page.getElementById("myId")));
+            }
             else {
                 assertTrue(HtmlUnknownElement.class.isInstance(page.getElementById("myId")));
             }

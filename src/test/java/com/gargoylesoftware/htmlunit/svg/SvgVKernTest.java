@@ -24,24 +24,23 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
-import com.gargoylesoftware.htmlunit.html.HtmlScript;
+import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 
 /**
- * Tests for {@link SvgScript}.
+ * Tests for {@link SvgVKern}.
  *
  * @version $Revision$
- * @author Ahmed Ashour
  * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
-public class SvgScriptTest extends WebDriverTestCase {
+public class SvgVKernTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGScriptElement]",
-            IE8 = "[object HTMLScriptElement]")
+    @Alerts(DEFAULT = "[object SVGElement]",
+            IE8 = "[object HTMLGenericElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -52,18 +51,18 @@ public class SvgScriptTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "  <svg xmlns='http://www.w3.org/2000/svg' version='1.1'>\n"
-            + "    <script id='myId'></script>\n"
+            + "    <vkern id='myId'/>\n"
             + "  </svg>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            if ("[object SVGScriptElement]".equals(getExpectedAlerts()[0])) {
-                assertTrue(SvgScript.class.isInstance(page.getElementById("myId")));
+            if ("[object SVGElement]".equals(getExpectedAlerts()[0])) {
+                assertTrue(SvgElement.class.isInstance(page.getElementById("myId")));
             }
             else {
-                assertTrue(HtmlScript.class.isInstance(page.getElementById("myId")));
+                assertTrue(HtmlUnknownElement.class.isInstance(page.getElementById("myId")));
             }
         }
     }
