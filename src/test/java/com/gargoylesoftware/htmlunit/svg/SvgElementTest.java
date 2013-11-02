@@ -22,6 +22,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
@@ -62,6 +63,9 @@ public class SvgElementTest extends WebDriverTestCase {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             if ("[object SVGElement]".equals(getExpectedAlerts()[0])) {
                 assertTrue(SvgElement.class.getName().equals(page.getElementById("myId").getClass().getName()));
+            }
+            else if ("[object Element]".equals(getExpectedAlerts()[0])) {
+                assertTrue(DomElement.class.getName().equals(page.getElementById("myId").getClass().getName()));
             }
             else {
                 assertTrue(HtmlUnknownElement.class.isInstance(page.getElementById("myId")));

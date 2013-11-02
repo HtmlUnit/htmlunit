@@ -27,20 +27,19 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 
 /**
- * Tests for {@link SvgEllipse}.
+ * Tests for {@link SvgCursor}.
  *
  * @version $Revision$
- * @author Ahmed Ashour
  * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
-public class SvgEllipseTest extends WebDriverTestCase {
+public class SvgCursorTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGEllipseElement]",
+    @Alerts(DEFAULT = "[object SVGElement]",
             IE8 = "[object HTMLGenericElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -52,15 +51,15 @@ public class SvgEllipseTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "  <svg xmlns='http://www.w3.org/2000/svg' version='1.1'>\n"
-            + "    <ellipse id='myId'/>\n"
+            + "    <cursor id='myId'/>\n"
             + "  </svg>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            if ("[object SVGEllipseElement]".equals(getExpectedAlerts()[0])) {
-                assertTrue(SvgEllipse.class.isInstance(page.getElementById("myId")));
+            if ("[object SVGElement]".equals(getExpectedAlerts()[0])) {
+                assertTrue(SvgElement.class.isInstance(page.getElementById("myId")));
             }
             else {
                 assertTrue(HtmlUnknownElement.class.isInstance(page.getElementById("myId")));

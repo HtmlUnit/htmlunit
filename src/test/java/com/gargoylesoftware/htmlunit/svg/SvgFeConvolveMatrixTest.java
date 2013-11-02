@@ -41,7 +41,7 @@ public class SvgFeConvolveMatrixTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object SVGFEConvolveMatrixElement]",
-            IE = "[object HTMLGenericElement]")
+            IE8 = "[object HTMLGenericElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

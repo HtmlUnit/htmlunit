@@ -41,7 +41,7 @@ public class SvgFeFuncBTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object SVGFEFuncBElement]",
-            IE = "[object HTMLGenericElement]")
+            IE8 = "[object HTMLGenericElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
