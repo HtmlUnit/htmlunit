@@ -64,7 +64,7 @@ public class ArrayBuffer extends SimpleScriptable {
      * @param end (optional) byte index to end slicing
      * @return the newly created ArrayBuffer
      */
-    @JsxFunction
+    @JsxFunction({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
     public ArrayBuffer slice(final int begin, Object end) {
         if (end == Undefined.instance) {
             end = getByteLength();

@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.arrays;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -30,8 +31,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
-@JsxClass(browsers = { @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
+@JsxClass(browsers = { @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME),
+        @WebBrowser(value = IE, minVersion = 10) })
 public class Uint32Array extends ArrayBufferViewBase {
 
     /** The size, in bytes, of each array element. */
