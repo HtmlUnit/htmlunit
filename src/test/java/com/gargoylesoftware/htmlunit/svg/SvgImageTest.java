@@ -22,9 +22,9 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
-import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 
 /**
  * Tests for {@link SvgImage}.
@@ -41,7 +41,7 @@ public class SvgImageTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object SVGImageElement]",
-            IE = "[object HTMLGenericElement]")
+            IE8 = "[object HTMLImageElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -63,7 +63,7 @@ public class SvgImageTest extends WebDriverTestCase {
                 assertTrue(SvgImage.class.isInstance(page.getElementById("myId")));
             }
             else {
-                assertTrue(HtmlUnknownElement.class.isInstance(page.getElementById("myId")));
+                assertTrue(HtmlImage.class.isInstance(page.getElementById("myId")));
             }
         }
     }

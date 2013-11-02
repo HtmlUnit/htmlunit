@@ -27,20 +27,19 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 
 /**
- * Tests for {@link SvgGroup}.
+ * Tests for {@link SvgMissingGlyph}.
  *
  * @version $Revision$
- * @author Ahmed Ashour
  * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
-public class SvgGroupTest extends WebDriverTestCase {
+public class SvgMissingGlyphTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGGElement]",
+    @Alerts(DEFAULT = "[object SVGElement]",
             IE8 = "[object HTMLGenericElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -52,15 +51,15 @@ public class SvgGroupTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "  <svg xmlns='http://www.w3.org/2000/svg' version='1.1'>\n"
-            + "    <g id='myId'/>\n"
+            + "    <missing-glyph id='myId'/>\n"
             + "  </svg>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            if ("[object SVGGElement]".equals(getExpectedAlerts()[0])) {
-                assertTrue(SvgGroup.class.isInstance(page.getElementById("myId")));
+            if ("[object SVGElement]".equals(getExpectedAlerts()[0])) {
+                assertTrue(SvgElement.class.isInstance(page.getElementById("myId")));
             }
             else {
                 assertTrue(HtmlUnknownElement.class.isInstance(page.getElementById("myId")));
