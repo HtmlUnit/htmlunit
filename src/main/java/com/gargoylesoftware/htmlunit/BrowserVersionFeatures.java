@@ -164,14 +164,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     EVENT_DOM_LEVEL_3,
 
-    /** Supports vendor specific event type 'Events'. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
-    EVENT_TYPE_EVENTS,
-
-    /** Supports vendor specific event type 'KeyEvents'. */
-    @BrowserFeature({ @WebBrowser(FF) })
-    EVENT_TYPE_KEY_EVENTS,
-
     /** Is setting 'focus' and 'blur' events of 'document', triggers the event for the descendants elements. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     EVENT_FOCUS_DOCUMENT_DESCENDANTS,
@@ -231,6 +223,14 @@ public enum BrowserVersionFeatures {
     /** Triggers "propertychange" event. */
     @BrowserFeature(@WebBrowser(IE))
     EVENT_PROPERTY_CHANGE,
+
+    /** Supports vendor specific event type 'Events'. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    EVENT_TYPE_EVENTS,
+
+    /** Supports vendor specific event type 'KeyEvents'. */
+    @BrowserFeature({ @WebBrowser(FF) })
+    EVENT_TYPE_KEY_EVENTS,
 
     /** Indicates that document.execCommand() should throw an exception when called with an illegal command. */
     @BrowserFeature(@WebBrowser(IE))
@@ -864,6 +864,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_EVENT_ABORTED_BY_RETURN_VALUE_FALSE,
 
+    /** Javascript event.keyCode and event.charCode distinguish between printable and not printable keys. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_EVENT_DISTINGUISH_PRINTABLE_KEY,
+
     /** Javascript event handlers declared as property on a node
      * don't receive the event as argument.
      */
@@ -873,10 +877,6 @@ public enum BrowserVersionFeatures {
     /** Javascript event.keyCode returns undefined instead of zero if the keyCode is not set. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_EVENT_KEY_CODE_UNDEFINED,
-
-    /** Javascript event.keyCode and event.charCode distinguish between printable and not printable keys. */
-    @BrowserFeature(@WebBrowser(FF))
-    JS_EVENT_DISTINGUISH_PRINTABLE_KEY,
 
     /** Do not send parameter in event handlers. */
     @BrowserFeature(@WebBrowser(IE))
