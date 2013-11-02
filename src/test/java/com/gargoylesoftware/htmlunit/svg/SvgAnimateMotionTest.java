@@ -63,6 +63,9 @@ public class SvgAnimateMotionTest extends WebDriverTestCase {
             if ("[object SVGAnimateMotionElement]".equals(getExpectedAlerts()[0])) {
                 assertTrue(SvgAnimateMotion.class.isInstance(page.getElementById("myId")));
             }
+            else if ("[object SVGElement]".equals(getExpectedAlerts()[0])) {
+                assertTrue(SvgElement.class.isInstance(page.getElementById("myId")));
+            }
             else {
                 assertTrue(HtmlUnknownElement.class.isInstance(page.getElementById("myId")));
             }

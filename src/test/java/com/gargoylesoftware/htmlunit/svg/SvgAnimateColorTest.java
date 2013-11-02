@@ -27,22 +27,20 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 
 /**
- * Tests for {@link SvgAnimate}.
+ * Tests for {@link SvgAnimateColor}.
  *
  * @version $Revision$
- * @author Ahmed Ashour
  * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
-public class SvgAnimateTest extends WebDriverTestCase {
+public class SvgAnimateColorTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object SVGAnimateElement]",
-            IE = "[object HTMLGenericElement]",
-            IE10 = "[object SVGElement]")
+    @Alerts(DEFAULT = "[object SVGElement]",
+            IE8 = "[object HTMLGenericElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -53,17 +51,14 @@ public class SvgAnimateTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "  <svg xmlns='http://www.w3.org/2000/svg' version='1.1'>\n"
-            + "    <animate id='myId'/>\n"
+            + "    <animateColor id='myId'/>\n"
             + "  </svg>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            if ("[object SVGAnimateElement]".equals(getExpectedAlerts()[0])) {
-                assertTrue(SvgAnimate.class.isInstance(page.getElementById("myId")));
-            }
-            else if ("[object SVGElement]".equals(getExpectedAlerts()[0])) {
+            if ("[object SVGElement]".equals(getExpectedAlerts()[0])) {
                 assertTrue(SvgElement.class.isInstance(page.getElementById("myId")));
             }
             else {

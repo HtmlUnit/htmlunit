@@ -63,6 +63,9 @@ public class SvgAnimateTransformTest extends WebDriverTestCase {
             if ("[object SVGAnimateTransformElement]".equals(getExpectedAlerts()[0])) {
                 assertTrue(SvgAnimateTransform.class.isInstance(page.getElementById("myId")));
             }
+            else if ("[object SVGElement]".equals(getExpectedAlerts()[0])) {
+                assertTrue(SvgElement.class.isInstance(page.getElementById("myId")));
+            }
             else {
                 assertTrue(HtmlUnknownElement.class.isInstance(page.getElementById("myId")));
             }
