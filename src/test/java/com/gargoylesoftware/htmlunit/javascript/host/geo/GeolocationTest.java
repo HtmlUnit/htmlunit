@@ -46,6 +46,7 @@ import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class GeolocationTest extends WebServerTestCase {
@@ -54,7 +55,7 @@ public class GeolocationTest extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "12.34567891 98.76543211", IE = { })
+    @Alerts(DEFAULT = "12.34567891 98.76543211", IE8 = { })
     @NotYetImplemented(FF) //since it runs on Windows only (for now)
     public void getCurrentPosition_enabled() throws Exception {
         if (getBrowserVersion().isFirefox() && GEOLOCATION_IGNORE) {
