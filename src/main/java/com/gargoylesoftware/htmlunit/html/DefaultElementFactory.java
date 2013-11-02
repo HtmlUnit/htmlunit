@@ -43,6 +43,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
  * @author Ahmed Ashour
  * @author David K. Taylor
  * @author Ronald Brill
+ * @author Frank Danek
  */
 class DefaultElementFactory implements ElementFactory {
 
@@ -71,7 +72,7 @@ class DefaultElementFactory implements ElementFactory {
             HtmlHeading6.TAG_NAME, HtmlHead.TAG_NAME,
             HtmlHorizontalRule.TAG_NAME, HtmlHtml.TAG_NAME, HtmlInlineFrame.TAG_NAME,
             HtmlInlineQuotation.TAG_NAME,
-            HtmlImage.TAG_NAME, HtmlInsertedText.TAG_NAME, HtmlIsIndex.TAG_NAME,
+            HtmlImage.TAG_NAME, HtmlImage.TAG_NAME2, HtmlInsertedText.TAG_NAME, HtmlIsIndex.TAG_NAME,
             HtmlItalic.TAG_NAME, HtmlKeyboard.TAG_NAME, HtmlLabel.TAG_NAME,
             HtmlLegend.TAG_NAME, HtmlListing.TAG_NAME, HtmlListItem.TAG_NAME,
             HtmlLink.TAG_NAME, HtmlMap.TAG_NAME, HtmlMarquee.TAG_NAME,
@@ -308,7 +309,7 @@ class DefaultElementFactory implements ElementFactory {
         else if (tagName.equals(HtmlHtml.TAG_NAME)) {
             element = new HtmlHtml(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equals(HtmlImage.TAG_NAME)) {
+        else if (tagName.equals(HtmlImage.TAG_NAME) || tagName.equals(HtmlImage.TAG_NAME2)) {
             element = new HtmlImage(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlInlineFrame.TAG_NAME)) {

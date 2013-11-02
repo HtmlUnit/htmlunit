@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SELECTOR_LANG;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SELECTOR_ATTRIBUTE_ESCAPING;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EMPTY_IS_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EXPANDURL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_STYLE_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_STYLE_NULL;
@@ -947,6 +948,9 @@ public class CSSStyleSheet extends SimpleScriptable {
                 final HtmlLink link = (HtmlLink) node;
                 final HtmlPage page = (HtmlPage) link.getPage();
                 final String href = link.getHrefAttribute();
+                if ("".equals(href) && version.hasFeature(STYLESHEET_HREF_EMPTY_IS_NULL)) {
+                    return null;
+                }
                 if (!version.hasFeature(STYLESHEET_HREF_EXPANDURL)) {
                     // Don't expand relative URLs.
                     return href;

@@ -41,15 +41,18 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "[object KeyboardEvent]", "[object KeyboardEvent]" },
-            IE = "exception")
+    @Alerts(FF = { "DOM3: [object KeyboardEvent]", "vendor: [object KeyboardEvent]" },
+            IE = { "DOM3: exception", "vendor: exception" },
+            IE10 = { "DOM3: [object KeyboardEvent]", "vendor: exception" })
     public void createEvent() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert(document.createEvent('KeyEvents'));\n"
-            + "      alert(document.createEvent('KeyboardEvent'));\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "      alert('DOM3: ' + document.createEvent('KeyboardEvent'));\n"
+            + "    } catch(e) {alert('DOM3: exception')}\n"
+            + "    try {\n"
+            + "      alert('vendor: ' + document.createEvent('KeyEvents'));\n"
+            + "    } catch(e) {alert('vendor: exception')}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -60,15 +63,22 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "0-0", "undefined-undefined" },
-            IE = "exception")
+    @Alerts(FF = { "0-0", "0-0", "undefined-undefined" },
+            IE = { "exception", "exception", "exception" },
+            IE10 = { "exception", "0-0", "undefined-undefined" })
     public void keyCode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
             + "      var keyEvent = document.createEvent('KeyEvents');\n"
-            + "      var mouseEvent = document.createEvent('MouseEvents');\n"
             + "      alert(keyEvent.keyCode + '-' + keyEvent.charCode);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "    try {\n"
+            + "      var keyEvent = document.createEvent('KeyboardEvent');\n"
+            + "      alert(keyEvent.keyCode + '-' + keyEvent.charCode);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "    try {\n"
+            + "      var mouseEvent = document.createEvent('MouseEvents');\n"
             + "      alert(mouseEvent.keyCode + '-' + mouseEvent.charCode);\n"
             + "    } catch(e) {alert('exception')}\n"
             + "  }\n"
@@ -82,8 +92,10 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "keydown, true, true, true, true, true, true, 65, 0",
+                "keyup, false, false, false, false, false, false, 32, 0",
+                "keydown, true, true, true, true, true, true, 65, 0",
                 "keyup, false, false, false, false, false, false, 32, 0" },
-            IE = "exception")
+            IE = { "exception", "exception" })
     public void initKeyEvent() throws Exception {
         final String html = "<html><head><script>\n"
             + "  var properties = ['type', 'bubbles', 'cancelable', /*'view',*/ 'ctrlKey', 'altKey',\n"
@@ -99,6 +111,14 @@ public class KeyboardEventTest extends WebDriverTestCase {
             + "      keyEvent.initKeyEvent('keydown', true, true, null, true, true, true, true, 65, 65);\n"
             + "      dumpEvent(keyEvent);\n"
             + "      keyEvent = document.createEvent('KeyEvents');\n"
+            + "      keyEvent.initKeyEvent('keyup', false, false, null, false, false, false, false, 32, 32);\n"
+            + "      dumpEvent(keyEvent);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "    try {\n"
+            + "      var keyEvent = document.createEvent('KeyboardEvent');\n"
+            + "      keyEvent.initKeyEvent('keydown', true, true, null, true, true, true, true, 65, 65);\n"
+            + "      dumpEvent(keyEvent);\n"
+            + "      keyEvent = document.createEvent('KeyboardEvent');\n"
             + "      keyEvent.initKeyEvent('keyup', false, false, null, false, false, false, false, 32, 32);\n"
             + "      dumpEvent(keyEvent);\n"
             + "    } catch(e) {alert('exception')}\n"
@@ -152,9 +172,11 @@ public class KeyboardEventTest extends WebDriverTestCase {
                     "keydown:13,0,13",
                     "keypress:13,0,13",
                     "keyup:13,0,13" },
-           IE = { "keydown:65,undefined,undefined",
+            IE = { //"keydown:16,undefined,undefined",
+                    "keydown:65,undefined,undefined",
                     "keypress:65,undefined,undefined",
                     "keyup:65,undefined,undefined",
+                    //"keyup:16,undefined,undefined",
                     "keydown:65,undefined,undefined",
                     "keypress:97,undefined,undefined",
                     "keyup:65,undefined,undefined",
@@ -164,17 +186,22 @@ public class KeyboardEventTest extends WebDriverTestCase {
                     "keydown:13,undefined,undefined",
                     "keypress:13,undefined,undefined",
                     "keyup:13,undefined,undefined" },
-           IE10 = { "keydown:16,0,16",
+           IE10 = { //"keydown:16,0,16",
                     "keydown:65,0,65",
                     "keypress:65,65,65",
                     "keyup:65,0,65",
-                    "keyup:16,0,16",
+                    //"keyup:16,0,16",
                     "keydown:65,0,65",
                     "keypress:97,97,97",
                     "keyup:65,0,65",
                     "keydown:190,0,190",
                     "keypress:46,46,46",
-                    "keyup:190,0,190" })
+                    "keyup:190,0,190",
+                    "keydown:13,0,13",
+                    "keypress:13,13,13",
+                    "keyup:13,0,13" })
+    // WebDriver with real IE10 does not get the '\r' but real IE10 does
+    // TODO [IE10] HtmlUnit (or WebDriver?) does not fire an own event for the shift key (down + up)
     public void which() throws Exception {
         final String html
             = "<html><head></head><body>\n"

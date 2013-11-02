@@ -47,6 +47,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Node;
  * @author Ahmed Ashour
  * @author <a href="mailto:knut.johannes.dahle@gmail.com">Knut Johannes Dahle</a>
  * @author Ronald Brill
+ * @author Frank Danek
  */
 public class HtmlImage extends HtmlElement {
 
@@ -54,6 +55,8 @@ public class HtmlImage extends HtmlElement {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "img";
+    /** Another HTML tag represented by this element. */
+    public static final String TAG_NAME2 = "image";
 
     private int lastClickX_;
     private int lastClickY_;

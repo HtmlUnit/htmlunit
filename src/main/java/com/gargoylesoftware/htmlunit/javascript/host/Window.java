@@ -19,7 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_HAND
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_HANDLER_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_NOT_ALLOWED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_IS_NOT_A_FUNCTION;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_IS_A_FUNCTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_SYNCHRONOUSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
@@ -228,7 +228,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param stringToEncode string to encode
      * @return the encoded string
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public String btoa(final String stringToEncode) {
         return new String(Base64.encodeBase64(stringToEncode.getBytes()));
     }
@@ -238,7 +238,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param encodedData the encoded string
      * @return the decoded value
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public String atob(final String encodedData) {
         return new String(Base64.decodeBase64(encodedData.getBytes()));
     }
@@ -295,7 +295,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the application cache.
      * @return the application cache
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public OfflineResourceList getApplicationCache() {
         return applicationCache_;
     }
@@ -629,7 +629,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Prints messages to the console.
      * @param message the message to log
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public void dump(final String message) {
         if (console_ instanceof Console) {
             Console.log(null, console_, new Object[] {message}, null);
@@ -1267,7 +1267,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * {@inheritDoc}
      */
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
-        if (!getBrowserVersion().hasFeature(JS_WINDOW_IS_NOT_A_FUNCTION)) {
+        if (!getBrowserVersion().hasFeature(JS_WINDOW_IS_A_FUNCTION)) {
             throw Context.reportRuntimeError("Window is not a function.");
         }
         if (args.length > 0) {
@@ -1286,7 +1286,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * {@inheritDoc}
      */
     public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
-        if (!getBrowserVersion().hasFeature(JS_WINDOW_IS_NOT_A_FUNCTION)) {
+        if (!getBrowserVersion().hasFeature(JS_WINDOW_IS_A_FUNCTION)) {
             throw Context.reportRuntimeError("Window is not a function.");
         }
         return null;
@@ -1909,7 +1909,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the value of "pageXOffset" property.
      * @return the value of "pageXOffset" property
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public int getPageXOffset() {
         return 0;
     }
@@ -1918,7 +1918,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the value of "pageYOffset" property.
      * @return the value of "pageYOffset" property
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public int getPageYOffset() {
         return 0;
     }
@@ -2017,7 +2017,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return <tt>false</tt> if at least one of the event handlers which handled the event
      *         called <tt>preventDefault</tt>; <tt>true</tt> otherwise
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public boolean dispatchEvent(final Event event) {
         event.setTarget(this);
         final ScriptResult result = Node.fireEvent(this, event);
@@ -2028,7 +2028,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Getter for the onchange event handler.
      * @return the handler
      */
-    @JsxGetter({@WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
+    @JsxGetter({@WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME),
+        @WebBrowser(value = IE, minVersion = 10) })
     public Object getOnchange() {
         return getHandlerForJavaScript(Event.TYPE_CHANGE);
     }
@@ -2037,7 +2038,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Setter for the onchange event handler.
      * @param onchange the handler
      */
-    @JsxSetter({@WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
+    @JsxSetter({@WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME),
+        @WebBrowser(value = IE, minVersion = 10) })
     public void setOnchange(final Object onchange) {
         setHandlerForJavaScript(Event.TYPE_CHANGE, onchange);
     }

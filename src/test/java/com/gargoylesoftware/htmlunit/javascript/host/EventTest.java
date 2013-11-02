@@ -50,6 +50,30 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class EventTest extends WebDriverTestCase {
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "DOM2: [object Event]", "DOM3: [object Event]", "vendor: [object Event]" },
+            IE8 = { "DOM2: exception", "DOM3: exception", "vendor: exception" })
+    public void createEvent() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      alert('DOM2: ' + document.createEvent('HTMLEvents'));\n"
+            + "    } catch(e) {alert('DOM2: exception')}\n"
+            + "    try {\n"
+            + "      alert('DOM3: ' + document.createEvent('Event'));\n"
+            + "    } catch(e) {alert('DOM3: exception')}\n"
+            + "    try {\n"
+            + "      alert('vendor: ' + document.createEvent('Events'));\n"
+            + "    } catch(e) {alert('vendor: exception')}\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Verify the "this" object refers to the Element being clicked when an
      * event handler is invoked.
      * @throws Exception if the test fails
@@ -363,14 +387,13 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(FF)
-    @Alerts(DEFAULT = { "object", "false" },
-            IE8 = { "object", "undefined" })
+    @Alerts(DEFAULT = { "[object Event]", "false" },
+            IE8 = { "[object]", "undefined" })
     public void testBubbles() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
             + "    function test(e) {\n"
-            + "        alert(typeof e);\n"
+            + "        alert(e);\n"
             + "        alert(e.bubbles);\n"
             + "    }\n"
             + "</script></body></html>";
@@ -382,14 +405,14 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "object", "true" },
-            IE = { "object", "undefined" },
-            IE10 = { "object", "false" })
+    @Alerts(FF = { "[object Event]", "true" },
+            IE = { "[object]", "undefined" },
+            IE10 = { "[object Event]", "false" })
     public void testCancelable() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
             + "    function test(e) {\n"
-            + "        alert(typeof e);\n"
+            + "        alert(e);\n"
             + "        alert(e.cancelable);\n"
             + "    }\n"
             + "</script></body></html>";
@@ -401,13 +424,13 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "object", "number" },
-            IE8 = { "object", "undefined" })
+    @Alerts(DEFAULT = { "[object Event]", "number" },
+            IE8 = { "[object]", "undefined" })
     public void testTimeStamp() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
             + "    function test(e) {\n"
-            + "        alert(typeof e);\n"
+            + "        alert(e);\n"
             + "        alert(typeof e.timeStamp);\n"
             + "    }\n"
             + "</script></body></html>";

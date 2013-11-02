@@ -39,6 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class CSSStyleSheet2Test extends SimpleWebTestCase {
@@ -182,7 +183,8 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
      */
     @Test
     public void selects_pseudoClass_lang() throws Exception {
-        if (getBrowserVersion().isFirefox()) {
+        if (getBrowserVersion().isFirefox() || getBrowserVersion().isIE()
+                && getBrowserVersion().getBrowserVersionNumeric() >= 10) {
             testSelects(":lang(en)", false, true, true);
             testSelects(":lang(de)", false, false, false);
         }
@@ -197,7 +199,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
      */
     @Test
     public void selects_pseudoClass_negation() throws Exception {
-        final boolean css3 = !getBrowserVersion().isIE();
+        final boolean css3 = !(getBrowserVersion().isIE() && getBrowserVersion().getBrowserVersionNumeric() <= 9);
         testSelects(":not(div)", css3, false, css3);
     }
 

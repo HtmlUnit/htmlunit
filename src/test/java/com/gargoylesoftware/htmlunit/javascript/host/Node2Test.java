@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Bruce Faulkner
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class Node2Test extends SimpleWebTestCase {
@@ -67,7 +68,9 @@ public class Node2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "exception", IE = { "[object]", "[object]" })
+    @Alerts(FF = "exception",
+            IE = { "[object]", "[object]" },
+            IE10 = { "[object MouseEvent]", "[object MouseEvent]" })
     public void event() throws Exception {
         final String firstHtml = "<html>\n"
             + "<head><title>First Page</title>\n"

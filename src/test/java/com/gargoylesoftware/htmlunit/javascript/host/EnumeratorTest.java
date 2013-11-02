@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class EnumeratorTest extends SimpleWebTestCase {
@@ -38,7 +39,8 @@ public class EnumeratorTest extends SimpleWebTestCase {
      */
     @Test
     @Browsers(IE)
-    @Alerts({ "false", "[object]", "undefined", "undefined", "true" })
+    @Alerts(IE = { "false", "[object]", "undefined", "undefined", "true" },
+            IE10 = { "false", "[object HTMLFormElement]", "undefined", "undefined", "true" })
     public void basicEnumerator() throws Exception {
         final String html
             = "<html><head><script>\n"

@@ -15,6 +15,10 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOCTYPE_4_0_TRANSITIONAL_STANDARDS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_DOM_LEVEL_2;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_DOM_LEVEL_3;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_EVENTS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_KEY_EVENTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EXECCOMMAND_THROWS_ON_WRONG_COMMAND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_160;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_161;
@@ -28,6 +32,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_COLOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_APPEND_CHILD_SUPPORTED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CLASS_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DOCTYPE_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DOMAIN_IS_LOWERCASE;
@@ -180,7 +185,12 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * the static initializer. The map is unmodifiable. Any class that is a value in this map MUST
      * have a no-arg constructor.
      */
-    private static final Map<String, Class<? extends Event>> SUPPORTED_EVENT_TYPE_MAP;
+    /** Contains all supported DOM level 2 events. */
+    private static final Map<String, Class<? extends Event>> SUPPORTED_DOM2_EVENT_TYPE_MAP;
+    /** Contains all supported DOM level 3 events. DOM level 2 events are not included. */
+    private static final Map<String, Class<? extends Event>> SUPPORTED_DOM3_EVENT_TYPE_MAP;
+    /** Contains all supported vendor specific events. */
+    private static final Map<String, Class<? extends Event>> SUPPORTED_VENDOR_EVENT_TYPE_MAP;
 
     // all as lowercase for performance
     private static final Set<String> EXECUTE_CMDS_IE = new HashSet<String>();
@@ -217,19 +227,25 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
     /** Initializes the supported event type map. */
     static {
-        final Map<String, Class<? extends Event>> eventMap = new HashMap<String, Class<? extends Event>>();
-        eventMap.put("Event", Event.class);
-        eventMap.put("Events", Event.class);
-        eventMap.put("KeyboardEvent", KeyboardEvent.class);
-        eventMap.put("KeyEvents", KeyboardEvent.class);
-        eventMap.put("HTMLEvents", Event.class);
-        eventMap.put("MouseEvent", MouseEvent.class);
-        eventMap.put("MouseEvents", MouseEvent.class);
-        eventMap.put("MutationEvent", MutationEvent.class);
-        eventMap.put("MutationEvents", MutationEvent.class);
-        eventMap.put("UIEvent", UIEvent.class);
-        eventMap.put("UIEvents", UIEvent.class);
-        SUPPORTED_EVENT_TYPE_MAP = Collections.unmodifiableMap(eventMap);
+        final Map<String, Class<? extends Event>> dom2EventMap = new HashMap<String, Class<? extends Event>>();
+        dom2EventMap.put("HTMLEvents", Event.class);
+        dom2EventMap.put("MouseEvents", MouseEvent.class);
+        dom2EventMap.put("MutationEvents", MutationEvent.class);
+        dom2EventMap.put("UIEvents", UIEvent.class);
+        SUPPORTED_DOM2_EVENT_TYPE_MAP = Collections.unmodifiableMap(dom2EventMap);
+
+        final Map<String, Class<? extends Event>> dom3EventMap = new HashMap<String, Class<? extends Event>>();
+        dom3EventMap.put("Event", Event.class);
+        dom3EventMap.put("KeyboardEvent", KeyboardEvent.class);
+        dom3EventMap.put("MouseEvent", MouseEvent.class);
+        dom3EventMap.put("MutationEvent", MutationEvent.class);
+        dom3EventMap.put("UIEvent", UIEvent.class);
+        SUPPORTED_DOM3_EVENT_TYPE_MAP = Collections.unmodifiableMap(dom3EventMap);
+
+        final Map<String, Class<? extends Event>> additionalEventMap = new HashMap<String, Class<? extends Event>>();
+        additionalEventMap.put("Events", Event.class);
+        additionalEventMap.put("KeyEvents", KeyboardEvent.class);
+        SUPPORTED_VENDOR_EVENT_TYPE_MAP = Collections.unmodifiableMap(additionalEventMap);
 
         // commands
         List<String> cmds = Arrays.asList(
@@ -268,6 +284,19 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
 
         EXECUTE_CMDS_FF17.add("JustifyFull".toLowerCase(Locale.ENGLISH));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getClassName() {
+        if (getWindow().getWebWindow() != null) {
+            if (getBrowserVersion().hasFeature(JS_DOCUMENT_CLASS_NAME)) {
+                return "Document";
+            }
+        }
+        return super.getClassName();
     }
 
     /**
@@ -1809,7 +1838,19 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public Event createEvent(final String eventType) throws DOMException {
-        final Class<? extends Event> clazz = SUPPORTED_EVENT_TYPE_MAP.get(eventType);
+        Class<? extends Event> clazz = null;
+        if (getBrowserVersion().hasFeature(EVENT_DOM_LEVEL_2)) {
+            clazz = SUPPORTED_DOM2_EVENT_TYPE_MAP.get(eventType);
+        }
+        if (clazz == null && getBrowserVersion().hasFeature(EVENT_DOM_LEVEL_3)) {
+            clazz = SUPPORTED_DOM3_EVENT_TYPE_MAP.get(eventType);
+        }
+        if (clazz == null) {
+            if ("Events".equals(eventType) && getBrowserVersion().hasFeature(EVENT_TYPE_EVENTS)
+                || "KeyEvents".equals(eventType) && getBrowserVersion().hasFeature(EVENT_TYPE_KEY_EVENTS)) {
+                clazz = SUPPORTED_VENDOR_EVENT_TYPE_MAP.get(eventType);
+            }
+        }
         if (clazz == null) {
             Context.throwAsScriptRuntimeEx(new DOMException(DOMException.NOT_SUPPORTED_ERR,
                 "Event Type is not supported: " + eventType));
@@ -1899,7 +1940,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @throws DOMException on attempt to create a TreeWalker with a root that is <code>null</code>
      * @return a new TreeWalker
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public Object createTreeWalker(final Node root, final double whatToShow, final Scriptable filter,
             boolean expandEntityReferences) throws DOMException {
 

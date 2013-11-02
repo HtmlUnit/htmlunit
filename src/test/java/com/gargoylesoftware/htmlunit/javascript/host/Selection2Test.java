@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class Selection2Test extends SimpleWebTestCase {
@@ -61,7 +62,8 @@ public class Selection2Test extends SimpleWebTestCase {
      */
     @Test
     @Browsers(IE)
-    @Alerts({ "[object]", "[object]" })
+    @Alerts(DEFAULT = { "[object MSSelection]", "[object MSSelection]" },
+            IE8 = { "[object]", "[object]" })
     public void stringValue_IE() throws Exception {
         test("", "selection", "x");
     }
@@ -261,7 +263,8 @@ public class Selection2Test extends SimpleWebTestCase {
      */
     @Test
     @Browsers(IE)
-    @Alerts({ "[object]", "[object]" })
+    @Alerts(DEFAULT = { "[object TextRange]", "[object TextRange]" },
+            IE8 = { "[object]", "[object]" })
     public void createRange() throws Exception {
         test("", "selection.createRange()", "x");
     }

@@ -35,15 +35,17 @@ public class MutationEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object MutationEvent]", "[object MutationEvent]" },
-            IE8 = "exception")
+    @Alerts(DEFAULT = { "DOM2: [object MutationEvent]", "DOM3: [object MutationEvent]" },
+            IE8 = { "DOM2: exception", "DOM3: exception" })
     public void createEvent() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert(document.createEvent('MutationEvent'));\n"
-            + "      alert(document.createEvent('MutationEvents'));\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "      alert('DOM2: ' + document.createEvent('MutationEvents'));\n"
+            + "    } catch(e) {alert('DOM2: exception')}\n"
+            + "    try {\n"
+            + "      alert('DOM3: ' + document.createEvent('MutationEvent'));\n"
+            + "    } catch(e) {alert('DOM3: exception')}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

@@ -23,6 +23,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_UN
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_UNDEFINED_OR_NULL_THROWS_ERROR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPACITY_ACCEPTS_ARBITRARY_VALUES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_GET_ATTRIBUTE_SUPPORTS_FLAGS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_UNSUPPORTED_PROPERTY_GETTER;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -4040,7 +4041,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxFunction(@WebBrowser(IE))
     public Object getAttribute(final String name, final int flag) {
-        if (flag == 1) {
+        if (getBrowserVersion().hasFeature(JS_STYLE_GET_ATTRIBUTE_SUPPORTS_FLAGS) && flag == 1) {
             // Case-sensitive.
             return getStyleAttribute(name);
         }

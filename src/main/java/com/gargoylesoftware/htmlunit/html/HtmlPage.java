@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.BLUR_BEFORE_O
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_DOM_CONTENT_LOADED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_FRAMESET_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FOCUS_BODY_ELEMENT_AT_START;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FOCUS_HTML_ELEMENT_AT_START;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFERRED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW;
@@ -237,6 +238,9 @@ public class HtmlPage extends SgmlPage {
         if (!isAboutBlank) {
             if (browserVersion.hasFeature(FOCUS_HTML_ELEMENT_AT_START)) {
                 elementWithFocus_ = getDocumentElement();
+            }
+            else if (browserVersion.hasFeature(FOCUS_BODY_ELEMENT_AT_START)) {
+                elementWithFocus_ = getBody();
             }
             setReadyState(READY_STATE_COMPLETE);
             getDocumentElement().setReadyState(READY_STATE_COMPLETE);

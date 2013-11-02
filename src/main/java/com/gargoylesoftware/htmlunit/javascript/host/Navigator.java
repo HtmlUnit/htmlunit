@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation;
  * @author Chris Erskine
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Frank Danek
  *
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535867.aspx">MSDN documentation</a>
  */
@@ -258,7 +259,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns the geolocation.
      * @return the geolocation
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public Geolocation getGeolocation() {
         final Geolocation geolocation = new Geolocation();
         geolocation.setPrototype(getPrototype(geolocation.getClass()));

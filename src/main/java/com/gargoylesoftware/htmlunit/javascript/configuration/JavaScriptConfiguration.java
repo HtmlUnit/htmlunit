@@ -268,6 +268,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTextElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTextPathElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTitleElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGUseElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGViewElement;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLAttr;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDOMParseError;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
@@ -282,6 +283,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLSerializer;
  * @author Chris Erskine
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 public final class JavaScriptConfiguration {
 
@@ -356,7 +358,8 @@ public final class JavaScriptConfiguration {
         SVGSVGElement.class, SVGScriptElement.class,
         SVGSetElement.class, SVGStopElement.class, SVGStyleElement.class, SVGSwitchElement.class,
         SVGSymbolElement.class, SVGTSpanElement.class, SVGTextElement.class, SVGTextPathElement.class,
-        SVGTitleElement.class, SVGUseElement.class, Screen.class, Selection.class, SimpleArray.class,
+        SVGTitleElement.class, SVGUseElement.class, SVGViewElement.class,
+        Screen.class, Selection.class, SimpleArray.class,
         StaticNodeList.class, Storage.class, StyleSheetList.class, Text.class, TextRange.class, TreeWalker.class,
         UIEvent.class, Uint16Array.class, Uint32Array.class, Uint8Array.class, Uint8ClampedArray.class,
         WebSocket.class, Window.class, XMLAttr.class, XMLDocument.class, XMLDOMParseError.class,

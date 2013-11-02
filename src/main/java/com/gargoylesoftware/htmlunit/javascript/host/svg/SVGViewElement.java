@@ -16,25 +16,25 @@ package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.svg.SvgAltGlyph;
+import com.gargoylesoftware.htmlunit.svg.SvgView;
 
 /**
- * A JavaScript object for SVGAltGlyphElement.
+ * A JavaScript object for SVGViewElement.
  *
  * @version $Revision$
- * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClass(domClass = SvgAltGlyph.class,
-    browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
-public class SVGAltGlyphElement extends SVGElement {
+@JsxClass(domClass = SvgView.class,
+    browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
+public class SVGViewElement extends SVGElement {
 
     /**
      * Creates an instance. JavaScript objects must have a default constructor.
      */
-    public SVGAltGlyphElement() {
+    public SVGViewElement() {
     }
 }

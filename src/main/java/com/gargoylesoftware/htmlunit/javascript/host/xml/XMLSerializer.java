@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIAL
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_NODE_AS_UPPERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_NON_EMPTY_TAGS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -47,8 +48,9 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
  * @author Ahmed Ashour
  * @author Darrell DeBoer
  * @author Ronald Brill
+ * @author Frank Danek
  */
-@JsxClass(browsers = @WebBrowser(FF))
+@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
 public class XMLSerializer extends SimpleScriptable {
 
     // this is a bit strange but it is the way FF works

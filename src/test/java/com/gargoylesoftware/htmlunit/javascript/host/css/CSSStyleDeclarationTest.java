@@ -1120,7 +1120,12 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
 
     private void getAttribute(final String params, final String... expected) throws Exception {
         final String html =
-              "<html><body onload='alert(document.all[\"a\"].style.getAttribute(" + params + "))'>\n"
+              "<html><head><script>\n"
+            + "function test() {\n"
+            + "  alert(document.all[\"a\"].style.getAttribute(" + params + "));\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "<a id='a' href='#' style='color:green'>go</a></body></html>";
 
         setExpectedAlerts(expected);

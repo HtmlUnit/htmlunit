@@ -35,6 +35,27 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class MouseEventTest extends WebDriverTestCase {
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "DOM2: [object MouseEvent]", "DOM3: [object MouseEvent]" },
+            IE8 = { "DOM2: exception", "DOM3: exception" })
+    public void createEvent() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      alert('DOM2: ' + document.createEvent('MouseEvents'));\n"
+            + "    } catch(e) {alert('DOM2: exception')}\n"
+            + "    try {\n"
+            + "      alert('DOM3: ' + document.createEvent('MouseEvent'));\n"
+            + "    } catch(e) {alert('DOM3: exception')}\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test

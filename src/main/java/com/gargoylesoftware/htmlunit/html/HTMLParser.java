@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOCTYPE_IS_COMMENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_3;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_CDATA_AS_COMMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCONDITIONAL_COMMENTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIFRAME_IGNORE_SELFCLOSING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLPARSER_REMOVE_EMPTY_CONTENT;
@@ -89,6 +89,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgElementFactory;
  * @author Ethan Glasser-Camp
  * @author Sudhan Moghe
  * @author Ronald Brill
+ * @author Frank Danek
  */
 public final class HTMLParser {
 
@@ -814,7 +815,7 @@ public final class HTMLParser {
             handleCharacters();
             final String data = new String(ch, start, length);
             if (!data.startsWith("[CDATA")
-                    || !page_.hasFeature(GENERATED_3)) {
+                    || page_.hasFeature(HTML_CDATA_AS_COMMENT)) {
                 final DomComment comment = new DomComment(page_, data);
                 currentNode_.appendChild(comment);
             }

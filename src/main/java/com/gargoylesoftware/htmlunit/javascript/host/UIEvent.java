@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -30,6 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @JsxClass
 public class UIEvent extends Event {
@@ -73,7 +75,7 @@ public class UIEvent extends Event {
      *
      * @return some detail information about the event, depending on the event type
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public long getDetail() {
         return detail_;
     }
@@ -92,7 +94,7 @@ public class UIEvent extends Event {
      *
      * @return the view from which the event was generated
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public Object getView() {
         return getWindow();
     }
@@ -106,7 +108,7 @@ public class UIEvent extends Event {
      * @param view the view to use for this event
      * @param detail the detail to set for the event
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public void initUIEvent(
             final String type,
             final boolean bubbles,
@@ -122,7 +124,7 @@ public class UIEvent extends Event {
      * Returns whether or not the "meta" key was pressed during the event firing.
      * @return whether or not the "meta" key was pressed during the event firing
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public boolean getMetaKey() {
         return metaKey_;
     }

@@ -129,25 +129,25 @@ public class Event extends SimpleScriptable {
     /** The message event type, triggered by postMessage. */
     public static final String TYPE_MESSAGE = "message";
 
-    /** The first event phase: the capturing phase. */
+    /** No event phase. */
     @JsxConstant(@WebBrowser(FF))
+    public static final short NONE = 0;
+
+    /** The first event phase: the capturing phase. */
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public static final short CAPTURING_PHASE = 1;
 
     /** The second event phase: at the event target. */
-    @JsxConstant(@WebBrowser(FF))
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public static final short AT_TARGET = 2;
 
     /** The third (and final) event phase: the bubbling phase. */
-    @JsxConstant(@WebBrowser(FF))
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public static final short BUBBLING_PHASE = 3;
 
     /** Constant. */
     @JsxConstant(@WebBrowser(FF))
     public static final int ABORT = 0x400000;
-
-    /** Constant. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int ALT_MASK = 0x1;
 
     /** Constant. */
     @JsxConstant(@WebBrowser(FF))
@@ -164,10 +164,6 @@ public class Event extends SimpleScriptable {
     /** Constant. */
     @JsxConstant(@WebBrowser(FF))
     public static final int CLICK = 0x40;
-
-    /** Constant. */
-    @JsxConstant(@WebBrowser(FF))
-    public static final int CONTROL_MASK = 0x2;
 
     /** Constant. */
     @JsxConstant(@WebBrowser(FF))
@@ -215,10 +211,6 @@ public class Event extends SimpleScriptable {
 
     /** Constant. */
     @JsxConstant(@WebBrowser(FF))
-    public static final int META_MASK = 0x8;
-
-    /** Constant. */
-    @JsxConstant(@WebBrowser(FF))
     public static final int MOUSEDOWN = 0x1;
 
     /** Constant. */
@@ -263,10 +255,6 @@ public class Event extends SimpleScriptable {
 
     /** Constant. */
     @JsxConstant(@WebBrowser(FF))
-    public static final int SHIFT_MASK = 0x4;
-
-    /** Constant. */
-    @JsxConstant(@WebBrowser(FF))
     public static final int SUBMIT = 0x20000;
 
     /** Constant. */
@@ -280,6 +268,22 @@ public class Event extends SimpleScriptable {
     /** Constant. */
     @JsxConstant(@WebBrowser(FF))
     public static final int XFER_DONE = 0x200000;
+
+    /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int ALT_MASK = 0x1;
+
+    /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int CONTROL_MASK = 0x2;
+
+    /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int SHIFT_MASK = 0x4;
+
+    /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
+    public static final int META_MASK = 0x8;
 
     private Object srcElement_;        // IE-only writable equivalent of target.
     private Object target_;            // W3C standard read-only equivalent of srcElement.
@@ -295,7 +299,7 @@ public class Event extends SimpleScriptable {
     private boolean preventDefault_;
 
     /**
-     * The current event phase. This is a W3C standard attribute not implemented by IE. One of
+     * The current event phase. This is a W3C standard attribute. One of {@link #NONE},
      * {@link #CAPTURING_PHASE}, {@link #AT_TARGET} or {@link #BUBBLING_PHASE}.
      */
     private short eventPhase_;
@@ -485,7 +489,7 @@ public class Event extends SimpleScriptable {
      * Returns the key code associated with the event.
      * @return the key code associated with the event
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
     public Object getKeyCode() {
         if (keyCode_ == null) {
             if (getBrowserVersion().hasFeature(JS_EVENT_KEY_CODE_UNDEFINED)) {
@@ -499,7 +503,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return whether SHIFT has been pressed during this event or not
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
     public boolean getShiftKey() {
         return shiftKey_;
     }
@@ -514,7 +518,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return whether CTRL has been pressed during this event or not
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
     public boolean getCtrlKey() {
         return ctrlKey_;
     }
@@ -529,7 +533,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return whether ALT has been pressed during this event or not
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
     public boolean getAltKey() {
         return altKey_;
     }
@@ -544,7 +548,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return the current event phase for the event
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public int getEventPhase() {
         return eventPhase_;
     }
@@ -579,9 +583,19 @@ public class Event extends SimpleScriptable {
     }
 
     /**
+     * Returns <tt>true</tt> if both <tt>cancelable</tt> is <tt>true</tt> and <tt>preventDefault()</tt> has been
+     * called for this event. Otherwise this attribute must return <tt>false</tt>.
+     * @return <tt>true</tt> if this event has been cancelled or not
+     */
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    public boolean isDefaultPrevented() {
+        return cancelable_ && preventDefault_;
+    }
+
+    /**
      * @return indicates if event propagation is stopped
      */
-    @JsxGetter
+    @JsxGetter(@WebBrowser(IE))
     public boolean getCancelBubble() {
         return stopPropagation_;
     }
@@ -589,7 +603,7 @@ public class Event extends SimpleScriptable {
     /**
      * @param newValue indicates if event propagation is stopped
      */
-    @JsxSetter
+    @JsxSetter(@WebBrowser(IE))
     public void setCancelBubble(final boolean newValue) {
         stopPropagation_ = newValue;
     }
@@ -597,7 +611,7 @@ public class Event extends SimpleScriptable {
     /**
      * Stops the event from propagating.
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     public void stopPropagation() {
         stopPropagation_ = true;
     }
@@ -614,27 +628,27 @@ public class Event extends SimpleScriptable {
      * Returns the return value associated with the event.
      * @return the return value associated with the event
      */
-    @JsxGetter
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
     public Object getReturnValue() {
         return returnValue_;
-    }
-
-    /**
-     * Returns the property name associated with the event.
-     * @return the property name associated with the event
-     */
-    @JsxGetter(@WebBrowser(IE))
-    public String getPropertyName() {
-        return propertyName_;
     }
 
     /**
      * Sets the return value associated with the event.
      * @param returnValue the return value associated with the event
      */
-    @JsxSetter
+    @JsxSetter(@WebBrowser(value = IE, maxVersion = 9))
     public void setReturnValue(final Object returnValue) {
         returnValue_ = returnValue;
+    }
+
+    /**
+     * Returns the property name associated with the event.
+     * @return the property name associated with the event
+     */
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
+    public String getPropertyName() {
+        return propertyName_;
     }
 
     /**
