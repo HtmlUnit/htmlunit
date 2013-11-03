@@ -44,7 +44,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
         + "}\n"
         + "function test() {\n"
         + "  try {\n";
-    private static final String contentEnd = "\n  } catch(e) { alert('exception' + e.message) };\n"
+    private static final String contentEnd = "\n  } catch(e) { alert('exception') };\n"
         + "\n}\n</script></head>\n"
         + "<body onload='test()'>\n"
         + "<div id='theDiv'>Hello, <span id='theSpan'>this is a test for"
@@ -66,7 +66,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
         + "}\n"
         + "function test() {\n"
         + "  try {\n";
-    private static final String contentEnd2 = "\n  } catch(e) { alert('exception' + e.message) };\n"
+    private static final String contentEnd2 = "\n  } catch(e) { alert('exception') };\n"
         + "\n}\n</script></head>\n"
         + "<body onload='test()'>\n"
         + "<div id='theDiv'>Hello, <span id='theSpan'>this is a test for"
