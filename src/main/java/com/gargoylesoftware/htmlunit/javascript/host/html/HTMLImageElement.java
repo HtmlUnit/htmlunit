@@ -31,6 +31,7 @@ import org.apache.xalan.xsltc.runtime.AttributeList;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
@@ -68,6 +69,7 @@ public class HTMLImageElement extends HTMLElement {
         NORMALIZED_ALIGN_VALUES.put("texttop", "textTop");
     }
 
+    private boolean endTagForbidden_ = true;
     private boolean instantiatedViaJavaScript_ = false;
 
     /**
@@ -80,6 +82,17 @@ public class HTMLImageElement extends HTMLElement {
         final DomElement fake =
                 HTMLParser.getFactory(HtmlImage.TAG_NAME).createElement(page, HtmlImage.TAG_NAME, new AttributeList());
         setDomNode(fake);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setDomNode(final DomNode domNode) {
+        super.setDomNode(domNode);
+        if ("image".equalsIgnoreCase(domNode.getLocalName())) {
+            endTagForbidden_ = false;
+        }
     }
 
     /**
@@ -331,7 +344,7 @@ public class HTMLImageElement extends HTMLElement {
      */
     @Override
     protected boolean isEndTagForbidden() {
-        return true;
+        return endTagForbidden_;
     }
 
     /**

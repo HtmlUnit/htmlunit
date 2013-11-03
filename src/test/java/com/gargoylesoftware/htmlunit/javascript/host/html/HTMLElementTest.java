@@ -3537,6 +3537,18 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "<image></image>",
+            IE10 = "<img>",
+            IE8 = "<IMG>")
+    @NotYetImplemented(IE8)
+    public void outerHTML_image() throws Exception {
+        loadPageWithAlerts2(outerHTML("image"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "<img>",
             IE8 = "<IMG>")
     public void outerHTML_img() throws Exception {
