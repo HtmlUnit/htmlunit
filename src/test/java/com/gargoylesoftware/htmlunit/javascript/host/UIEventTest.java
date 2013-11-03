@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class UIEventTest extends WebDriverTestCase {
@@ -112,7 +113,8 @@ public class UIEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object Event]", "undefined", "[object MouseEvent]", "[object Window]" },
-            IE8 = { "[object]", "undefined", "[object]", "undefined" })    public void view() throws Exception {
+            IE8 = { "[object]", "undefined", "[object]", "undefined" })
+    public void view() throws Exception {
         final String html =
               "<html><body onload='alertView(event)'><script>\n"
             + "  function alertView(e) {\n"
