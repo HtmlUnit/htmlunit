@@ -533,6 +533,7 @@ public class HTMLElementsTest extends WebDriverTestCase {
     public void elementClosesItself_img() throws Exception {
         loadPageWithAlerts2(elementClosesItself("img"));
     }
+
     /**
      * @throws Exception if the test fails
      */
