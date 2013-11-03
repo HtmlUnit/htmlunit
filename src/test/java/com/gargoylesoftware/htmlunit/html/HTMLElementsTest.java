@@ -520,10 +520,18 @@ public class HTMLElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
+    public void elementClosesItself_image() throws Exception {
+        loadPageWithAlerts2(elementClosesItself("image"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
     public void elementClosesItself_img() throws Exception {
         loadPageWithAlerts2(elementClosesItself("img"));
     }
-
     /**
      * @throws Exception if the test fails
      */
