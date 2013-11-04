@@ -628,7 +628,8 @@ public class Event extends SimpleScriptable {
      * Returns the return value associated with the event.
      * @return the return value associated with the event
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
+    //TODO [IE10] returnValue exists only on BeforeUnloadEvent for IE10 and FF17
+    @JsxGetter
     public Object getReturnValue() {
         return returnValue_;
     }
@@ -637,7 +638,8 @@ public class Event extends SimpleScriptable {
      * Sets the return value associated with the event.
      * @param returnValue the return value associated with the event
      */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxSetter
+    //TODO [IE10] returnValue exists only on BeforeUnloadEvent for IE10 and FF17
     public void setReturnValue(final Object returnValue) {
         returnValue_ = returnValue;
     }

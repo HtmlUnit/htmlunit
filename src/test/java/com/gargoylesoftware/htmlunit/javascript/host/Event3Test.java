@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 
@@ -282,7 +283,7 @@ public class Event3Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(FF)
+    @Browsers({ FF, IE10 })
     public void testFF_StopPropagation() throws Exception {
         testFF_StopPropagation("stopPropagation()");
         testFF_StopPropagation("cancelBubble=true");

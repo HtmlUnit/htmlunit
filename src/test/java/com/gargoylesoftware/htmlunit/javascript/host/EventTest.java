@@ -387,8 +387,9 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "[object Event]", "false" },
+    @Alerts(DEFAULT = { "[object Event]", "true" },
             IE8 = { "[object]", "undefined" })
+    // TODO [IE10] must be true for IE10 (and FF17)
     public void testBubbles() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
