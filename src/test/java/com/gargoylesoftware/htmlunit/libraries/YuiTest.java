@@ -159,6 +159,7 @@ public class YuiTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "test_createlink",
+            FF17 = { "test_createlink", "test_regex" },
             IE10 = { "test_content", "test_regex", "test_blank_image", "test_insertimage",
                 "test_image_props", "test_close_window", "test_bold", "test_selected_element",
                 "test_dom_path", "test_hidden_elements", "test_event_mouseup", "test_event_mousedown",
