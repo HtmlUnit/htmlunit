@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
@@ -202,10 +201,8 @@ public class YuiTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "testConstructor", "testProperties" },
-            IE8 = "testConstructor",
-            IE10 = "testConstructor")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "testConstructor",
+            FF24 = { "testConstructor", "test_regex" })
     public void module() throws Exception {
         doTest("module.html", Arrays.asList(getExpectedAlerts()));
     }
