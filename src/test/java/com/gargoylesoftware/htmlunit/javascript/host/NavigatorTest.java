@@ -281,7 +281,7 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Geolocation]",
-            FF = "[object GeoGeolocation]",
+            FF17 = "[object GeoGeolocation]",
             IE8 = "undefined")
     //IE9 = "[object Geolocation]"
     public void geolocation() throws Exception {
