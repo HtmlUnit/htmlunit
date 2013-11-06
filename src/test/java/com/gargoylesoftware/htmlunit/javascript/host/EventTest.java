@@ -651,8 +651,6 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "focus INPUT", "focus INPUT" },
             IE8 = { })
-    @BuggyWebDriver(FF) // FirefoxDriver wrongly triggers "focus #document" when clicking the first element rather than
-    // when loading the page
     public void document_input_focus() throws Exception {
         document_input("focus");
     }
