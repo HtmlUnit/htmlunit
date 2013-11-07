@@ -177,7 +177,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_24.initDefaultFeatures();
 
         FIREFOX_24.setBrowserLanguage("en-US");
-        FIREFOX_24.buildId_ = "20130910201120";
+        FIREFOX_24.buildId_ = "20131021230807";
         FIREFOX_24.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_24.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
         FIREFOX_24.setCssAcceptHeader("text/css,*/*;q=0.1");
