@@ -14,7 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOMIMPLEMENTATION_CSS_3;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOMIMPLEMENTATION_HTML_3;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOMIMPLEMENTATION_ONLY_HTML;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOMIMPLEMENTATION_XML_3;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -56,11 +59,24 @@ public class DOMImplementation extends SimpleScriptable {
             if ("HTML".equals(feature) && ("1.0".equals(version) || "2.0".equals(version))) {
                 return true;
             }
+            else if ("HTML".equals(feature) && "3.0".equals(version)) {
+                return getBrowserVersion().hasFeature(DOMIMPLEMENTATION_HTML_3);
+            }
             else if ("XML".equals(feature) && ("1.0".equals(version) || "2.0".equals(version))) {
                 return true;
             }
+            else if ("XML".equals(feature) && "3.0".equals(version)) {
+                return getBrowserVersion().hasFeature(DOMIMPLEMENTATION_XML_3);
+            }
             else if ("CSS2".equals(feature) && "2.0".equals(version)) {
                 return true;
+            }
+            else if ("CSS2".equals(feature) && ("1.0".equals(version) || "3.0".equals(version))) {
+                return getBrowserVersion().hasFeature(DOMIMPLEMENTATION_CSS_3);
+            }
+            else if ("CSS3".equals(feature)
+                    && ("1.0".equals(version) || "2.0".equals(version) || "3.0".equals(version))) {
+                return getBrowserVersion().hasFeature(DOMIMPLEMENTATION_CSS_3);
             }
             else if ("XPath".equals(feature) && "3.0".equals(version)) {
                 return true;

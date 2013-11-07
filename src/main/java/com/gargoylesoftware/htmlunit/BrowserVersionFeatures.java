@@ -144,9 +144,21 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     DOCTYPE_IS_COMMENT,
 
+    /** If document.implementation.hasFeature() supports "CSS 3.0". */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 24))
+    DOMIMPLEMENTATION_CSS_3,
+
+    /** If document.implementation.hasFeature() supports "HTML 3.0". */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 24))
+    DOMIMPLEMENTATION_HTML_3,
+
     /** If document.implementation.hasFeature() supports only "HTML". */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     DOMIMPLEMENTATION_ONLY_HTML,
+
+    /** If document.implementation.hasFeature() supports "XML 3.0". */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 24))
+    DOMIMPLEMENTATION_XML_3,
 
     /** IE removes all child text nodes, but FF preserves the first. */
     @BrowserFeature(@WebBrowser(IE))
