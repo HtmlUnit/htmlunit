@@ -65,9 +65,10 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { }, FF17 = "Immortality")
+    @Alerts(DEFAULT = "window.XPathEvaluator undefined", FF17 = "Immortality")
     public void namespacesWithNodeInArray() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
             + "  var xml = "
             + "  '<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">"
             + "    <soap:books>"
@@ -77,15 +78,19 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
             + "      </soap:book>"
             + "    </soap:books>"
             + "  </soap:Envelope>';\n"
+
             + "  function test() {\n"
             + "    if (window.XPathEvaluator) {"
-            + "    var doc = (new DOMParser).parseFromString(xml);"
-            + "    var xpe = new XPathEvaluator();\n"
-            + "    var nsResolver = xpe.createNSResolver(doc.documentElement);\n"
-            + "    var result = xpe.evaluate('/soap:Envelope/soap:books/soap:book/title/text()', "
-                            + "[doc.documentElement], nsResolver, XPathResult.STRING_TYPE, null);\n"
-            + "    alert(result.stringValue);\n"
-            + "  }}\n"
+            + "      var doc = (new DOMParser).parseFromString(xml, 'text/xml');"
+            + "      var xpe = new XPathEvaluator();\n"
+            + "      var nsResolver = xpe.createNSResolver(doc.documentElement);\n"
+            + "      var result = xpe.evaluate('/soap:Envelope/soap:books/soap:book/title/text()', "
+                                   + "[doc.documentElement], nsResolver, XPathResult.STRING_TYPE, null);\n"
+            + "      alert(result.stringValue);\n"
+            + "    } else {\n"
+            + "      alert('window.XPathEvaluator undefined');\n"
+            + "    }\n"
+            + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -96,12 +101,14 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { }, FF17 = "Immortality")
+    @Alerts(DEFAULT = "window.XPathEvaluator undefined", FF = "Immortality")
     public void namespacesWithCustomNSResolver() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "     function nsResolver(prefix) {"
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function nsResolver(prefix) {"
             + "    return {s : 'http://schemas.xmlsoap.org/soap/envelope/'}[prefix] || null;"
             + "  }"
+
             + "  var xml = "
             + "  '<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">"
             + "    <soap:books>"
@@ -111,14 +118,18 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
             + "      </soap:book>"
             + "    </soap:books>"
             + "  </soap:Envelope>';\n"
+
             + "  function test() {\n"
             + "    if (window.XPathEvaluator) {"
-            + "    var doc = (new DOMParser).parseFromString(xml);"
-            + "    var xpe = new XPathEvaluator();\n"
-            + "    var result = xpe.evaluate('/s:Envelope/s:books/s:book/title/text()', "
-                            + "doc.documentElement, nsResolver, XPathResult.STRING_TYPE, null);\n"
-            + "    alert(result.stringValue);\n"
-            + "  }}\n"
+            + "      var doc = (new DOMParser).parseFromString(xml, 'text/xml');"
+            + "      var xpe = new XPathEvaluator();\n"
+            + "      var result = xpe.evaluate('/s:Envelope/s:books/s:book/title/text()', "
+                                   + "doc.documentElement, nsResolver, XPathResult.STRING_TYPE, null);\n"
+            + "      alert(result.stringValue);\n"
+            + "    } else {\n"
+            + "      alert('window.XPathEvaluator undefined');\n"
+            + "    }\n"
+            + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
