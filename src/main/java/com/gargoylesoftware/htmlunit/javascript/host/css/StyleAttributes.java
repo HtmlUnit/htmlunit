@@ -355,7 +355,7 @@ final class StyleAttributes {
 
         /** The style property -moz-perspective-origin. */
         MOZ_PERSPECTIVE_ORIGIN("MozPerspectiveOrigin",
-                "-moz-perspective-origin", ff17up("628px 170px")),
+                "-moz-perspective-origin", ff17up("624px 171px")),
 
         /** The style property -moz-stack-sizing. */
         MOZ_STACK_SIZING("MozStackSizing", "-moz-stack-sizing",
@@ -392,7 +392,7 @@ final class StyleAttributes {
 
         /** The style property -moz-transform-origin. */
         MOZ_TRANSFORM_ORIGIN("MozTransformOrigin", "-moz-transform-origin",
-                ffBelow17("50% 50%"), ff("628px 170px")),
+                ffBelow17("50% 50%"), ff("624px 171px")),
 
         /** The style property -moz-transform-style. */
         MOZ_TRANSFORM_STYLE("MozTransformStyle", "-moz-transform-style",
@@ -958,8 +958,8 @@ final class StyleAttributes {
         LINE_BREAK("lineBreak", "line-break", ie10up("undefined")),
 
         /** The style property line-height. */
-        LINE_HEIGHT("lineHeight", "line-height", ff17up("19px"),
-                ffBelow17("20px"), ieBelow10("20px"), ie10up("normal")),
+        LINE_HEIGHT("lineHeight", "line-height",
+                ff("20px"), ieBelow10("20px"), ie10up("normal")),
 
         /** The style property marker. */
         MARKER("marker", "marker", ff17up(""), ie10up("none")),
@@ -1005,7 +1005,7 @@ final class StyleAttributes {
 
         /** The style property perspective-origin. */
         PERSPECTIVE_ORIGIN("perspectiveOrigin", "perspective-origin",
-                ff17up("628px 170px"), ie10up("620px 163.2px")),
+                ff17up("624px 171px"), ie10up("620px 163.2px")),
 
         /** The style property pointer-events. */
         POINTER_EVENTS("pointerEvents", "pointer-events", ie10up("visiblePainted")),
@@ -1147,7 +1147,7 @@ final class StyleAttributes {
 
         /** The style property transform-origin. */
         TRANSFORM_ORIGIN("transformOrigin", "transform-origin",
-                ff17up("628px 170px"), ie10up("620px 163.2px")),
+                ff17up("624px 171px"), ie10up("620px 163.2px")),
 
         /** The style property transform-style. */
         TRANSFORM_STYLE("transformStyle", "transform-style", ff17up("flat"), ie10up("flat")),

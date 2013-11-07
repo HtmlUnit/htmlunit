@@ -785,8 +785,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "0", "82", "23" },
-            FF24 = { "8", "91", "0" },
+    @Alerts(FF = { "8", "91", "0" },
             IE = { "undefined", "undefined", "undefined" })
     public void mozInnerScreenX() throws Exception {
         final String html

@@ -1722,7 +1722,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxGetter(@WebBrowser(FF))
     public int getMozInnerScreenX() {
-        return 0;
+        return 8;
     }
 
     /**
@@ -1731,7 +1731,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxGetter(@WebBrowser(FF))
     public int getMozInnerScreenY() {
-        return 82;
+        return 91;
     }
 
     /**
@@ -1740,7 +1740,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxGetter(@WebBrowser(FF))
     public int getMozPaintCount() {
-        return 23;
+        return 0;
     }
 
     /** Definition of special cases for the smart DomHtmlAttributeChangeListenerImpl **/
