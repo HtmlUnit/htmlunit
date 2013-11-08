@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
 
 import org.apache.xml.utils.PrefixResolver;
@@ -82,12 +82,10 @@ public class XPathEvaluator extends SimpleScriptable {
         }
         // contextNodeObj can be either a node or an array with the node as the first element.
         Node contextNode = null;
-        if (contextNodeObj instanceof NativeArray) {
-            contextNode = (Node) ((NativeArray) contextNodeObj).get(0);
+        if (!(contextNodeObj instanceof Node)) {
+            throw Context.reportRuntimeError("Illegal value for parameter 'context'");
         }
-        else {
-            contextNode = (Node) contextNodeObj;
-        }
+        contextNode = (Node) contextNodeObj;
         PrefixResolver prefixResolver = null;
         if (resolver instanceof PrefixResolver) {
             prefixResolver = (PrefixResolver) resolver;

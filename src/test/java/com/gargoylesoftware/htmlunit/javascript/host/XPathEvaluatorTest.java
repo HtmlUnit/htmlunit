@@ -65,7 +65,7 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "window.XPathEvaluator undefined", FF17 = "Immortality")
+    @Alerts(DEFAULT = "window.XPathEvaluator undefined", FF17 = "exception")
     public void namespacesWithNodeInArray() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -84,9 +84,11 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
             + "      var doc = (new DOMParser).parseFromString(xml, 'text/xml');"
             + "      var xpe = new XPathEvaluator();\n"
             + "      var nsResolver = xpe.createNSResolver(doc.documentElement);\n"
-            + "      var result = xpe.evaluate('/soap:Envelope/soap:books/soap:book/title/text()', "
-                                   + "[doc.documentElement], nsResolver, XPathResult.STRING_TYPE, null);\n"
-            + "      alert(result.stringValue);\n"
+            + "      try {\n"
+            + "        var result = xpe.evaluate('/soap:Envelope/soap:books/soap:book/title/text()', "
+                                     + "[doc.documentElement], nsResolver, XPathResult.STRING_TYPE, null);\n"
+            + "        alert(result.stringValue);\n"
+            + "      } catch(e) { alert('exception'); }\n"
             + "    } else {\n"
             + "      alert('window.XPathEvaluator undefined');\n"
             + "    }\n"
