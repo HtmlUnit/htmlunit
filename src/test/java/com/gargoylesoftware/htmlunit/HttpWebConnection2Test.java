@@ -112,6 +112,10 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
             if (caseInsensitiveHeaders.contains(headerNameLower)) {
                 sb.append(headerEntry.getValue().toLowerCase(Locale.ENGLISH));
             }
+            else if ("user-agent".equals(headerNameLower)) {
+                // ignore the 64bit difference
+                sb.append(headerEntry.getValue().replace("WOW64; ", ""));
+            }
             else {
                 sb.append(headerEntry.getValue());
             }
