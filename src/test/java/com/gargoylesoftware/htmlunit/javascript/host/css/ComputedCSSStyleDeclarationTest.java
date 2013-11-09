@@ -612,7 +612,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p id='p'>\n"
             + "    <kbd id='kbd'></kbd>\n"
-            + "    <ins id='ins'></ins>\n"
             + "  </p>\n"
 
             + "  <ol>\n"
