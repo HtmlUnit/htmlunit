@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -170,17 +169,18 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "number" },
-            IE10 = { "auto", "string" })
-    @NotYetImplemented(FF17)
+    @Alerts(DEFAULT = { "auto", "string" },
+            IE8 = { "0", "number" })
     public void zIndex() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    var e = document.getElementById('myDiv');\n"
-            + "    alert(e.currentStyle['zIndex']);\n"
-            + "    alert(typeof e.currentStyle['zIndex']);\n"
+            + "    var d = document.getElementById('myDiv');\n"
+            + "    var style = d.currentStyle;\n"
+            + "    style = style ? style : window.getComputedStyle(d,'');\n"
+            + "    alert(style.zIndex);\n"
+            + "    alert(typeof style.zIndex);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
