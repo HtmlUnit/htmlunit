@@ -91,6 +91,7 @@ public class DOMParserTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(content);
     }
+
     /**
      * @throws Exception if the test fails
      */
