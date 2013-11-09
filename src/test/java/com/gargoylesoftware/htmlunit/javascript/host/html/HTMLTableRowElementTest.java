@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -226,7 +227,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "top", "baseline", "3", "middle", "8", "BOTtom" },
             IE = { "top", "baseline", "top", "error", "middle", "baseline", "bottom" })
-    @NotYetImplemented(FF17)
+    @NotYetImplemented({ FF17, FF24 })
     public void vAlign() throws Exception {
         final String html
             = "<html><body><table>\n"

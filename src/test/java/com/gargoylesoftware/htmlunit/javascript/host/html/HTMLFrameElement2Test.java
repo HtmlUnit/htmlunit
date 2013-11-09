@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -139,7 +140,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "function handler() {\n}", "null" },
             FF = { "function handler() {}", "null" },
             IE10 = { "function handler() {}", "null" })
-    @NotYetImplemented(FF17)
+    @NotYetImplemented({ FF17, FF24 })
     public void testOnloadNull() throws Exception {
         final String html =
             "<html><head>\n"

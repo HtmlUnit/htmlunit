@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -178,7 +179,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "", "bla", "true" },
             FF = { "null", "bla", "true" },
             IE8 = "exception")
-    @NotYetImplemented(FF17)
+    @NotYetImplemented({ FF17, FF24 })
     public void getSetAttributeNS() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -305,7 +306,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             "specified=true",
             "value=bleh"
             })
-    @NotYetImplemented(FF17)
+    @NotYetImplemented({ FF17, FF24 })
     public void getAttributeNode() throws Exception {
         final String html =
               "<html>\n"
@@ -388,7 +389,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "null", "inform('newHandler')", "" },
             FF24 = { "null", "inform('newHandler')", "null" },
             IE8 = { "null", "inform('newHandler')", "null" })
-    @NotYetImplemented(FF)
+    @NotYetImplemented(FF17)
     public void setAttribute_eventHandlerNull() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -979,7 +980,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(FF = { "Outer = <p id=\"myNode\">New  cell value\n\n</p>" },
             IE8 = { "Outer = <P id=myNode>New cell value\n</P>" },
             IE10 = { "Outer = <p id=\"myNode\">New  cell value\n\n" })
-    @NotYetImplemented(FF17)
+    @NotYetImplemented({ FF17, FF24 })
     public void getOuterHTMLFromUnclosedParagraph() throws Exception {
         final String html = createPageForGetOuterHTML("p", "New  cell value", true);
         loadPageWithAlerts2(html);
@@ -1210,7 +1211,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <div><div></div></div>" },
             CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div></div><div></div>" },
             IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <DIV></DIV><DIV></DIV>" })
-    @NotYetImplemented(FF17)
+    @NotYetImplemented({ FF17, FF24 })
     public void setOuterHTMLAddMultipleSelfClosingBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div/><div>");
         loadPageWithAlerts2(html);
@@ -2806,7 +2807,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "button", "", "false", "true" },
             FF = { "button", "null", "false", "true" },
             IE8 = { "button", "getAttributeNS() not supported" })
-    @NotYetImplemented(FF17)
+    @NotYetImplemented({ FF17, FF24 })
     public void attributeNS() throws Exception {
         final String html
             = "<html><head>\n"
@@ -3889,7 +3890,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<source>",
             IE8 = "<source></source>")
-    @NotYetImplemented(FF17)
+    @NotYetImplemented({ FF17, FF24 })
     public void outerHTML_source() throws Exception {
         loadPageWithAlerts2(outerHTML("source"));
     }
@@ -3979,7 +3980,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<tbody></tbody>",
             IE8 = "<TBODY></TBODY>")
-    @NotYetImplemented(FF17)
+    @NotYetImplemented({ FF17, FF24 })
     public void outerHTML_tbody() throws Exception {
         loadPageWithAlerts2(outerHTML("tbody"));
     }
@@ -4030,7 +4031,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<tfoot></tfoot>",
             IE8 = "<TFOOT></TFOOT>")
-    @NotYetImplemented(FF17)
+    @NotYetImplemented({ FF17, FF24 })
     public void outerHTML_tfoot() throws Exception {
         loadPageWithAlerts2(outerHTML("tfoot"));
     }
@@ -4041,7 +4042,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<thead></thead>",
             IE8 = "<THEAD></THEAD>")
-    @NotYetImplemented(FF17)
+    @NotYetImplemented({ FF17, FF24 })
     public void outerHTML_thead() throws Exception {
         loadPageWithAlerts2(outerHTML("thead"));
     }
@@ -4111,7 +4112,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<wbr>",
             IE8 = "<WBR>")
-    @NotYetImplemented(FF17)
+    @NotYetImplemented({ FF17, FF24 })
     public void outerHTML_wbr() throws Exception {
         loadPageWithAlerts2(outerHTML("wbr"));
     }

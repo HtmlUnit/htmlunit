@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -132,7 +132,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "null", "4", "null", "4" },
             FF17 = { "null", "4", "", "0" })
-    @NotYetImplemented(FF)
+    @NotYetImplemented(FF17)
     public void getAttributeAndSetValueNull() throws Exception {
         final String html =
             "<html>\n"

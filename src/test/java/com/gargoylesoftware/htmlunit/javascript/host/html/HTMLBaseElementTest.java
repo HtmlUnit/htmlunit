@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,7 +39,7 @@ public class HTMLBaseElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "http://www.foo.com/images/", "", "", "_blank" },
             FF = { "http://www.foo.com/images/", "§§URL§§", "", "_blank" })
-    @NotYetImplemented(FF17)
+    @NotYetImplemented({ FF17, FF24 })
     public void hrefAndTarget() throws Exception {
         final String html =
             "<html>\n"

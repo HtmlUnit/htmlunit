@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
 
 import org.junit.Test;
@@ -25,7 +27,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -154,7 +155,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0,0", "3,3", "3,10" },
             IE8 = {"undefined,undefined", "3,undefined", "3,10" })
-    @NotYetImplemented(Browser.FF17)
+    @NotYetImplemented({ FF17, FF24 })
     public void selection() throws Exception {
         selection(3, 10);
     }
@@ -165,7 +166,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0,0", "0,0", "0,11" },
             IE8 = {"undefined,undefined", "-3,undefined", "-3,15" })
-    @NotYetImplemented(Browser.FF17)
+    @NotYetImplemented({ FF17, FF24 })
     public void selection_outOfBounds() throws Exception {
         selection(-3, 15);
     }
@@ -176,7 +177,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0,0", "10,10", "5,5" },
             IE8 = {"undefined,undefined", "10,undefined", "10,5" })
-    @NotYetImplemented(Browser.FF17)
+    @NotYetImplemented({ FF17, FF24 })
     public void selection_reverseOrder() throws Exception {
         selection(10, 5);
     }

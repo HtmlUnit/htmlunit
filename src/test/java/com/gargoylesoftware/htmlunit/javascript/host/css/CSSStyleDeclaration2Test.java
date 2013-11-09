@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
@@ -128,7 +129,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
                     + "outlineWidth-error: paddingBottom-error: paddingLeft-error: "
                     + "paddingRight-error: paddingTop-error: right-error: textIndent-error: top-error: "
                     + "verticalAlign-error: width-error: wordSpacing-")
-    @NotYetImplemented(FF17)
+    @NotYetImplemented({ FF17, FF24 })
     public void width_like_properties() throws Exception {
         final String html
             = "<html><head><script>\n"

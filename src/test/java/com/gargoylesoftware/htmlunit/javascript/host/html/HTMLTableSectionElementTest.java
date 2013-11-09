@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,7 +41,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = {"", "hello", "left", "hi", "right" },
             IE = {"", "error", "", "left", "error", "left", "right" })
-    @NotYetImplemented(FF17)
+    @NotYetImplemented({ FF17, FF24 })
     public void align_thead() throws Exception {
         align("th");
     }
@@ -51,7 +52,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = {"", "hello", "left", "hi", "right" },
             IE = {"", "error", "", "left", "error", "left", "right" })
-    @NotYetImplemented(FF17)
+    @NotYetImplemented({ FF17, FF24 })
     public void align_tbody() throws Exception {
         align("tb");
     }
@@ -62,7 +63,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = {"", "hello", "left", "hi", "right" },
             IE = {"", "error", "", "left", "error", "left", "right" })
-    @NotYetImplemented(FF17)
+    @NotYetImplemented({ FF17, FF24 })
     public void align_tfoot() throws Exception {
         align("tf");
     }
@@ -110,7 +111,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "top", "baseline", "3", "middle", "8", "BOTtom" },
             IE = { "top", "baseline", "top", "error", "middle", "baseline", "bottom" })
-    @NotYetImplemented(FF17)
+    @NotYetImplemented({ FF17, FF24 })
     public void vAlign_thead() throws Exception {
         vAlign("th");
     }
@@ -121,7 +122,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "top", "baseline", "3", "middle", "8", "BOTtom" },
             IE = { "top", "baseline", "top", "error", "middle", "baseline", "bottom" })
-    @NotYetImplemented(FF17)
+    @NotYetImplemented({ FF17, FF24 })
     public void vAlign_tbody() throws Exception {
         vAlign("tb");
     }
@@ -132,7 +133,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "top", "baseline", "3", "middle", "8", "BOTtom" },
             IE = { "top", "baseline", "top", "error", "middle", "baseline", "bottom" })
-    @NotYetImplemented(FF17)
+    @NotYetImplemented({ FF17, FF24 })
     public void vAlign_tfoot() throws Exception {
         vAlign("tf");
     }

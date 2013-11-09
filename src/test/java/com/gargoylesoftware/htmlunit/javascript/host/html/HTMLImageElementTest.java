@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -234,7 +235,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
                     "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", "" },
             IE = { "left", "right", "center", "", "bottom", "middle",
                 "top", "absBottom", "absMiddle", "baseline", "textTop", "", "" })
-    @NotYetImplemented(FF17)
+    @NotYetImplemented({ FF17, FF24 })
     public void getAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -270,7 +271,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             IE = { "center", "error", "center", "error", "center", "left", "right",
                 "center", "error", "center", "bottom", "middle", "top", "absBottom",
                 "absMiddle", "baseline", "textTop" })
-    @NotYetImplemented(FF17)
+    @NotYetImplemented({ FF17, FF24 })
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"
