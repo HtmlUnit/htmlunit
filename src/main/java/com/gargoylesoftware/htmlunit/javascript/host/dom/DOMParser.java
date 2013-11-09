@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -52,7 +54,10 @@ public class DOMParser extends SimpleScriptable {
      * @return the generated document
      */
     @JsxFunction
-    public XMLDocument parseFromString(final String str, final String contentType) {
+    public XMLDocument parseFromString(final String str, final Object contentType) {
+        if (Undefined.instance == contentType) {
+            throw Context.reportRuntimeError("Missing 'contentType' parameter");
+        }
         final XMLDocument document = new XMLDocument();
         document.setParentScope(getParentScope());
         document.setPrototype(getPrototype(XMLDocument.class));

@@ -91,7 +91,6 @@ public class DOMParserTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(content);
     }
-
     /**
      * @throws Exception if the test fails
      */
@@ -111,6 +110,28 @@ public class DOMParserTest extends WebDriverTestCase {
             + "    var x = doc.getElementsByTagName('test').length;\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(content);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "ex: parseFromString",
+            IE8 = "ex: new DOMParser")
+    public void parseFromString_missingMimeType() throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var parser=new DOMParser();\n"
+            + "      try {\n"
+            + "        parser.parseFromString('');\n"
+            + "      } catch(e) { alert('ex: parseFromString'); }\n"
+            + "    } catch(e) { alert('ex: new DOMParser'); }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(content);
     }
