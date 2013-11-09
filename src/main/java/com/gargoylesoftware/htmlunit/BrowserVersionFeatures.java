@@ -954,7 +954,7 @@ public enum BrowserVersionFeatures {
     JS_GET_ELEMENTS_BY_NAME_EMPTY_RETURNS_NOTHING,
 
     /** Javascript function getElementsByName returns an empty collection if called with null. */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 24) })
     JS_GET_ELEMENTS_BY_NAME_NULL_RETURNS_NOTHING,
 
     /** Javascript function getElementsByTagName does not support namespaces. */
