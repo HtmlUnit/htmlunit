@@ -15,9 +15,11 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_KEYGEN_INLINE_BLOCK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_112;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_HTML_GENERIC_ELEMENT_CLASS_NAME;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -75,7 +77,8 @@ public class HTMLUnknownElement extends HTMLElement {
     @Override
     public String getDefaultStyleDisplay() {
         final String tagName = getTagName();
-        if (getBrowserVersion().hasFeature(CSS_DISPLAY_DEFAULT)) {
+        final BrowserVersion browser = getBrowserVersion();
+        if (browser.hasFeature(CSS_DISPLAY_DEFAULT)) {
             if ("ARTICLE".equals(tagName)
                     || "ASIDE".equals(tagName)
                     || "FIGCAPTION".equals(tagName)
@@ -98,14 +101,17 @@ public class HTMLUnknownElement extends HTMLElement {
                 return "none";
             }
         }
+        if ("KEYGEN".equals(tagName) && browser.hasFeature(CSS_KEYGEN_INLINE_BLOCK)) {
+            return "inline-block";
+        }
         if ("RUBY".equals(tagName)) {
-            if (getBrowserVersion().hasFeature(CSS_DISPLAY_DEFAULT)) {
+            if (browser.hasFeature(CSS_DISPLAY_DEFAULT)) {
                 return "inline";
             }
             return "ruby";
         }
         if ("RT".equals(tagName)) {
-            if (getBrowserVersion().hasFeature(CSS_DISPLAY_DEFAULT)) {
+            if (browser.hasFeature(CSS_DISPLAY_DEFAULT)) {
                 return "inline";
             }
             return "ruby-text";

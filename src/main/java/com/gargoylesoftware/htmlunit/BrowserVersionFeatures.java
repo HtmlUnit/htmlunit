@@ -86,6 +86,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     CSS_IMAGE_URL_QUOTED,
 
+    /** The default value of the display property for the 'keygen' tag is 'inline-block'
+     * instead of 'inline'. */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 24))
+    CSS_KEYGEN_INLINE_BLOCK,
+
     /** Indicates that only integers are allowed for pixel value. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     CSS_PIXEL_VALUES_INT_ONLY,
@@ -93,6 +98,11 @@ public enum BrowserVersionFeatures {
     /** Indicates that the :lang(..) selector is supported. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     CSS_SELECTOR_LANG,
+
+    /** The default value of the display property for the 'select' tag is 'inline'
+     * instead of 'inline-block'. */
+    @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 17), @WebBrowser(CHROME) })
+    CSS_SELECT_INLINE,
 
     /** Internet Explorer versions 5 and later support the behavior property. The behavior property lets
      * you use CSS to attach a script to a specific element in order to implement
