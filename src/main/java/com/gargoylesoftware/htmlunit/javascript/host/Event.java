@@ -588,7 +588,7 @@ public class Event extends SimpleScriptable {
      * @return <tt>true</tt> if this event has been cancelled or not
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
-    public boolean isDefaultPrevented() {
+    public boolean getDefaultPrevented() {
         return cancelable_ && preventDefault_;
     }
 
