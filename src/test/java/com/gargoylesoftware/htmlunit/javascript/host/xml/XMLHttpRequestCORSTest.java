@@ -375,7 +375,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "false", IE8 = "undefined")
-    @NotYetImplemented(IE8)
     public void withCredentials_defaultValue() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
@@ -404,7 +403,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
             FF17 = { "false", "false", "false" },
             IE8 = { "undefined", "false", "true" },
             IE10 = { "false", "false", "true" })
-    @NotYetImplemented({ FF17, IE8 })
+    @NotYetImplemented(FF17)
     public void withCredentials_notSetableInSyncMode() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 

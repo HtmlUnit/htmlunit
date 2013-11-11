@@ -5007,7 +5007,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(IE8)
     public void ajax__jQuery_ajax___failing_cross_domain() throws Exception {
         runTest("ajax: jQuery ajax - failing cross-domain");
     }

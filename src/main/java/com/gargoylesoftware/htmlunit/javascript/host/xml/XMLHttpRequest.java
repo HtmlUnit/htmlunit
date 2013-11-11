@@ -844,7 +844,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Returns the "withCredentials" property.
      * @return the "withCredentials" property
      */
-    @JsxGetter
+    @JsxGetter({ @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF) })
     public boolean getWithCredentials() {
         return withCredentials_;
     }
