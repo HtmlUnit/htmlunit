@@ -42,7 +42,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PAR
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_BODY_HEAD_READONLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_THROW_EXCEPTION_WHEN_CLOSES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PREFIX_RETURNS_EMPTY_WHEN_UNDEFINED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SET_ATTRIBUTE_CONSIDERS_ATTR_FOR_CLASS_AS_REAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SET_ATTRIBUTE_SUPPORTS_EVENT_HANDLERS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
@@ -771,34 +770,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     @JsxFunction
     public Object getAttributeNode(final String attributeName) {
         return ((NamedNodeMap) getAttributes()).getNamedItem(attributeName);
-    }
-
-    /**
-     * Sets the attribute node for the specified attribute.
-     * @param newAtt the attribute to set
-     * @return the replaced attribute node, if any
-     */
-    @JsxFunction
-    public Attr setAttributeNode(final Attr newAtt) {
-        final String name = newAtt.getName();
-
-        final Attr replacedAtt;
-        final boolean undefForClass = getBrowserVersion().
-                hasFeature(JS_SET_ATTRIBUTE_CONSIDERS_ATTR_FOR_CLASS_AS_REAL);
-        if (undefForClass) {
-            replacedAtt = (Attr) getAttributeNode(name);
-        }
-        else {
-            final NamedNodeMap nodes = (NamedNodeMap) getAttributes();
-            replacedAtt = (Attr) nodes.getNamedItemWithoutSytheticClassAttr(name);
-        }
-        if (replacedAtt != null) {
-            replacedAtt.detachFromParent();
-        }
-
-        final DomAttr newDomAttr = newAtt.getDomNodeOrDie();
-        getDomNodeOrDie().setAttributeNode(newDomAttr);
-        return replacedAtt;
     }
 
     /**

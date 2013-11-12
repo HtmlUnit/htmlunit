@@ -1076,4 +1076,32 @@ public class ElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse(xml, "text/xml");
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("test")
+    public void setAttributeNode() throws Exception {
+        final String html = "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
+            + "        var element = doc.createElement('something');\n"
+            + "        var attr = doc.createAttribute('name');\n"
+            + "        attr.value = 'test';\n"
+            + "        element.setAttributeNode(attr);\n"
+            + "        alert(element.getAttributeNode('name').value)\n"
+            + "      }\n"
+            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }
