@@ -115,6 +115,8 @@ public class XMLHttpRequest extends SimpleScriptable {
     private static final String HEADER_ACCESS_CONTROL_ALLOW_ORIGIN = "Access-Control-Allow-Origin";
     private static final String HEADER_ACCESS_CONTROL_ALLOW_HEADERS = "Access-Control-Allow-Headers";
 
+    private static final String ALLOW_ORIGIN_ALL = "*";
+
     private static final String[] ALL_PROPERTIES_ = {"onreadystatechange", "readyState", "responseText", "responseXML",
         "status", "statusText", "abort", "getAllResponseHeaders", "getResponseHeader", "open", "send",
         "setRequestHeader"};
@@ -689,7 +691,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             boolean allowOriginResponse = true;
             if (crossOriginResourceSharing) {
                 final String value = webResponse.getResponseHeaderValue(HEADER_ACCESS_CONTROL_ALLOW_ORIGIN);
-                allowOriginResponse = "*".equals(value) || originHeaderValue.equals(value);
+                allowOriginResponse = ALLOW_ORIGIN_ALL.equals(value) || originHeaderValue.equals(value);
             }
             if (allowOriginResponse) {
                 if (overriddenMimeType_ == null) {
@@ -746,7 +748,8 @@ public class XMLHttpRequest extends SimpleScriptable {
 
     private boolean isPreflightAuthorized(final WebResponse preflightResponse) {
         final String originHeader = preflightResponse.getResponseHeaderValue(HEADER_ACCESS_CONTROL_ALLOW_ORIGIN);
-        if (!"*".equals(originHeader) && !webRequest_.getAdditionalHeaders().get(HEADER_ORIGIN).equals(originHeader)) {
+        if (!ALLOW_ORIGIN_ALL.equals(originHeader)
+                && !webRequest_.getAdditionalHeaders().get(HEADER_ORIGIN).equals(originHeader)) {
             return false;
         }
         String headersHeader = preflightResponse.getResponseHeaderValue(HEADER_ACCESS_CONTROL_ALLOW_HEADERS);
