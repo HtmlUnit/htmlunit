@@ -1514,6 +1514,19 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     XHR_TRIGGER_ONLOAD_ON_COMPLETED,
 
+    /** Indicates that the "*" pattern is allowed when withCredential is enabled. */
+    @BrowserFeature(@WebBrowser(IE))
+    XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL,
+
+    /** Indicates that the propery 'withCredentials is not writable for sync requests. */
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 23))
+    XHR_WITHCREDENTIALS_SYNC_NOT_WRITEABLE,
+
+    /** Indicates that the propery 'withCredentials is not writable for sync requests.
+     * Setting the property throws an exception. */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 24))
+    XHR_WITHCREDENTIALS_SYNC_NOT_WRITEABLE_EXCEPTION,
+
     /** Indicates that the 'SelectionNamespaces' property is supported by XPath expressions. */
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(CHROME) })
     XPATH_SELECTION_NAMESPACES,

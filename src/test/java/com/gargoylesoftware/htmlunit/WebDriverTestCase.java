@@ -605,7 +605,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception if something goes wrong
      */
     protected final WebDriver loadPageWithAlerts2(final String html, final URL url) throws Exception {
-        return loadPageWithAlerts2(html, url, DEFAULT_WAIT_TIME);
+        return loadPageWithAlerts2(html, url, DEFAULT_WAIT_TIME * 1000);
     }
 
     /**

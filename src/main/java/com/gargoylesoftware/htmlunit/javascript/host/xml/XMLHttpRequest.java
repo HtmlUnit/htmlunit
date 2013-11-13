@@ -26,6 +26,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLO
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ORIGIN_HEADER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_STATUS_THROWS_EXCEPTION_WHEN_UNSET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_TRIGGER_ONLOAD_ON_COMPLETED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_SYNC_NOT_WRITEABLE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_SYNC_NOT_WRITEABLE_EXCEPTION;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -113,6 +116,7 @@ public class XMLHttpRequest extends SimpleScriptable {
     private static final String HEADER_ACCESS_CONTROL_REQUEST_METHOD = "Access-Control-Request-Method";
     private static final String HEADER_ACCESS_CONTROL_REQUEST_HEADERS = "Access-Control-Request-Headers";
     private static final String HEADER_ACCESS_CONTROL_ALLOW_ORIGIN = "Access-Control-Allow-Origin";
+    private static final String HEADER_ACCESS_CONTROL_ALLOW_CREDENTIALS = "Access-Control-Allow-Credentials";
     private static final String HEADER_ACCESS_CONTROL_ALLOW_HEADERS = "Access-Control-Allow-Headers";
 
     private static final String ALLOW_ORIGIN_ALL = "*";
@@ -480,6 +484,11 @@ public class XMLHttpRequest extends SimpleScriptable {
             throw Context.reportRuntimeError("URL for XHR.open can't be empty!");
         }
 
+        if (!async && getWithCredentials()) {
+            throw Context.reportRuntimeError(
+                    "open() in sync mode is not possible because 'withCredentials' is set to true");
+        }
+
         final String url = Context.toString(urlParam);
 
         // (URL + Method + User + Password) become a WebRequest instance.
@@ -690,8 +699,20 @@ public class XMLHttpRequest extends SimpleScriptable {
             }
             boolean allowOriginResponse = true;
             if (crossOriginResourceSharing) {
-                final String value = webResponse.getResponseHeaderValue(HEADER_ACCESS_CONTROL_ALLOW_ORIGIN);
-                allowOriginResponse = ALLOW_ORIGIN_ALL.equals(value) || originHeaderValue.equals(value);
+                String value = webResponse.getResponseHeaderValue(HEADER_ACCESS_CONTROL_ALLOW_ORIGIN);
+                allowOriginResponse = originHeaderValue.equals(value);
+                if (getWithCredentials()) {
+                    allowOriginResponse = allowOriginResponse
+                            || (getBrowserVersion().hasFeature(XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL)
+                            && ALLOW_ORIGIN_ALL.equals(value));
+
+                    // second step: check the allow-credentials header for true
+                    value = webResponse.getResponseHeaderValue(HEADER_ACCESS_CONTROL_ALLOW_CREDENTIALS);
+                    allowOriginResponse = allowOriginResponse && Boolean.parseBoolean(value);
+                }
+                else {
+                    allowOriginResponse = allowOriginResponse || ALLOW_ORIGIN_ALL.equals(value);
+                }
             }
             if (allowOriginResponse) {
                 if (overriddenMimeType_ == null) {
@@ -706,10 +727,12 @@ public class XMLHttpRequest extends SimpleScriptable {
                     };
                 }
             }
-            setState(STATE_HEADERS_RECEIVED, context);
-            setState(STATE_LOADING, context);
-            setState(STATE_DONE, context);
-            if (!allowOriginResponse) {
+            if (allowOriginResponse) {
+                setState(STATE_HEADERS_RECEIVED, context);
+                setState(STATE_LOADING, context);
+                setState(STATE_DONE, context);
+            }
+            else {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("No permitted \"Access-Control-Allow-Origin\" header for URL " + webRequest_.getUrl());
                 }
@@ -857,6 +880,14 @@ public class XMLHttpRequest extends SimpleScriptable {
      */
     @JsxSetter
     public void setWithCredentials(final boolean withCredentials) {
+        if (!async_ && state_ != STATE_UNSENT) {
+            if (getBrowserVersion().hasFeature(XHR_WITHCREDENTIALS_SYNC_NOT_WRITEABLE_EXCEPTION)) {
+                throw Context.reportRuntimeError("Property 'withCredentials' not writable in sync mode.");
+            }
+            if (getBrowserVersion().hasFeature(XHR_WITHCREDENTIALS_SYNC_NOT_WRITEABLE)) {
+                return;
+            }
+        }
         withCredentials_ = withCredentials;
     }
 

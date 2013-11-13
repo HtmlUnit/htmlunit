@@ -8,6 +8,22 @@
 
     <body>
         <release version="2.14" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: XMLHttpRequest CORS handling fixed, some new tests added and implementation fixed.
+            </action>
+            <action type="fix" dev="rbri">
+                JavaScript: Siplified/fixed implementation of the onReadyStateChange handler call.
+            </action>
+            <action type="fix" dev="rbri">
+                JavaScript: XMLHttpRequest status and statusText throws an exception in IE8 depending
+                on the state of the request.
+            </action>
+            <action type="fix" dev="rbri">
+                JavaScript: XMLHttpRequest property 'withCredentials' is not setable in sync mode (browsers specific).
+            </action>
+            <action type="fix" dev="rbri">
+                JavaScript: XMLHttpRequest property 'withCredentials' is not available in IE8.
+            </action>
             <action type="fix" dev="asashour" issue="1553">
                 JavaScript: element.setAttributeNode() applies to XML as well.
             </action>

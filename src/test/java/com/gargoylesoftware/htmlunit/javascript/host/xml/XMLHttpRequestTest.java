@@ -257,7 +257,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "        xhr.onreadystatechange = function() { alert('orsc' + xhr.readyState); };\n"
             + "        xhr.onload = function() { alert(xhr.readyState); alert(xhr.responseText); alert(this); }\n"
 
-            + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+            + "        xhr.open('GET', '/foo.xml', true);\n"
             + "        alert('open-done');\n"
 
             + "        xhr.send('');\n"

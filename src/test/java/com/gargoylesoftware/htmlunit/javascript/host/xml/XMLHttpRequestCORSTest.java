@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URL;
@@ -33,7 +30,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -399,22 +395,53 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = { "false", "ex: withCredentials=false", "ex: withCredentials=true" },
-            FF17 = { "false", "false", "false" },
-            IE8 = { "undefined", "false", "true" },
-            IE10 = { "false", "false", "true" })
-    @NotYetImplemented(FF17)
+    @Alerts(DEFAULT = { "false", "false", "ex: withCredentials=true", "ex: withCredentials=false" },
+            FF17 = { "false", "false", "false", "false" },
+            IE8 = { "undefined", "undefined", "true", "false" },
+            IE10 = { "false", "false", "true", "false" })
     public void withCredentials_notSetableInSyncMode() throws Exception {
-        expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
-
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "var xhr = " + XHRInstantiation_ + ";\n"
                 + "function test() {\n"
                 + "  try {\n"
-                + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/withCredentials2';\n"
-                + "    xhr.open('GET',  url, false);\n"
                 + "    alert(xhr.withCredentials);\n"
+                + "    xhr.open('GET',  '/foo.xml', false);\n"
+                + "    alert(xhr.withCredentials);\n"
+
+                + "    try {\n"
+                + "      xhr.withCredentials = true;\n"
+                + "      alert(xhr.withCredentials);\n"
+                + "    } catch(e) { alert('ex: withCredentials=true') }\n"
+
+                + "    try {\n"
+                + "      xhr.withCredentials = false;\n"
+                + "      alert(xhr.withCredentials);\n"
+                + "    } catch(e) { alert('ex: withCredentials=false') }\n"
+                + "  } catch(ex) { alert(ex) }\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "false", "true", "ex: open" },
+            IE8 = { "undefined", "false", "true", "open true" },
+            IE10 = { "false", "ex: withCredentials=false", "ex: withCredentials=true", "open false" })
+    public void withCredentials_openFailesInSyncMode() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "var xhr = " + XHRInstantiation_ + ";\n"
+                + "function test() {\n"
+                + "  try {\n"
+                + "    alert(xhr.withCredentials);\n"
+
                 + "    try {\n"
                 + "      xhr.withCredentials = false;\n"
                 + "      alert(xhr.withCredentials);\n"
@@ -424,13 +451,18 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "      xhr.withCredentials = true;\n"
                 + "      alert(xhr.withCredentials);\n"
                 + "    } catch(e) { alert('ex: withCredentials=true') }\n"
+
+                + "    try {\n"
+                + "      xhr.open('GET',  '/foo.xml', false);\n"
+                + "      alert('open ' + xhr.withCredentials);\n"
+                + "    } catch(e) { alert('ex: open') }\n"
                 + "  } catch(ex) { alert(ex) }\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'></body></html>";
 
-        loadPageWithAlerts2(html, new URL(getDefaultUrl(), "/withCredentials1"));
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -440,7 +472,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "1", "0", "4", "0" },
             IE8 = { "1", "ex: status not available", "4", "200" },
             IE10 = { "1", "0", "4", "200" })
-    @NotYetImplemented(FF17)
     public void withCredentials() throws Exception {
         testWithCredentials("*", "true");
     }
@@ -462,7 +493,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "1", "0", "4", "0" },
             IE8 = { "1", "ex: status not available", "4", "200" },
             IE10 = { "1", "0", "4", "200" })
-    @NotYetImplemented(FF17)
     public void withCredentialsServerSlashAtEnd() throws Exception {
         testWithCredentials("http://localhost:" + PORT + "/", "true");
     }
@@ -474,7 +504,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "1", "0", "4", "0" },
             IE8 = { "1", "ex: status not available", "4", "200" },
             IE10 = { "1", "0", "4", "200" })
-    @NotYetImplemented(FF17)
     public void withCredentials_no_header() throws Exception {
         testWithCredentials("*", null);
     }
@@ -486,7 +515,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "1", "0", "4", "0" },
             IE8 = { "1", "ex: status not available", "4", "200" },
             IE10 = { "1", "0", "4", "200" })
-    @NotYetImplemented(FF17)
     public void withCredentials_no_header_Server() throws Exception {
         testWithCredentials("http://localhost:" + PORT, null);
     }
@@ -498,7 +526,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "1", "0", "4", "0" },
             IE8 = { "1", "ex: status not available", "4", "200" },
             IE10 = { "1", "0", "4", "200" })
-    @NotYetImplemented(FF17)
     public void withCredentials_no_header_ServerSlashAtEnd() throws Exception {
         testWithCredentials("http://localhost:" + PORT + "/", null);
     }
