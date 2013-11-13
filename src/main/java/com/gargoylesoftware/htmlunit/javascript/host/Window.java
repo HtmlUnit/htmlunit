@@ -540,7 +540,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the localStorage property.
      * @return the localStorage property
      */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxGetter
     public Storage getLocalStorage() {
         return getStorage(Type.LOCAL_STORAGE);
     }
@@ -549,7 +549,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the sessionStorage property.
      * @return the sessionStorage property
      */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxGetter
     public Storage getSessionStorage() {
         return getStorage(Type.SESSION_STORAGE);
     }
@@ -1105,7 +1105,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * been set).
      * @return the onhashchange property
      */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public Object getOnhashchange() {
         return getEventListenersContainer().getEventHandlerProp(Event.TYPE_HASH_CHANGE);
     }
@@ -1114,7 +1114,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Sets the value of the onhashchange event handler.
      * @param newHandler the new handler
      */
-    @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxSetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public void setOnhashchange(final Object newHandler) {
         getEventListenersContainer().setEventHandlerProp(Event.TYPE_HASH_CHANGE, newHandler);
     }
@@ -2050,7 +2050,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param targetOrigin the origin this window must be for the event to be dispatched
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.postMessage">MDN documentation</a>
      */
-    @JsxFunction({@WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 8) })
+    @JsxFunction
     public void postMessage(final String message, final String targetOrigin) {
         final MessageEvent event = new MessageEvent(message);
         event.setParentScope(this);

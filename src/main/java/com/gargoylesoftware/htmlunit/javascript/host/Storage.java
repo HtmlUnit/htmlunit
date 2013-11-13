@@ -150,7 +150,7 @@ public class Storage extends SimpleScriptable {
     /**
      * Clears all items.
      */
-    @JsxFunction({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction
     public void clear() {
         getMap().clear();
     }

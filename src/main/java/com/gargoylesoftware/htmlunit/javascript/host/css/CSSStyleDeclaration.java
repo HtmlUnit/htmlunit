@@ -1329,7 +1329,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "borderSpacing" style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public String getBorderSpacing() {
         return getStyleAttribute(BORDER_SPACING);
     }
@@ -1338,7 +1338,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "borderSpacing" style attribute.
      * @param borderSpacing the new attribute
      */
-    @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxSetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public void setBorderSpacing(final String borderSpacing) {
         setStyleAttribute(BORDER_SPACING, borderSpacing);
     }
@@ -1493,7 +1493,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "boxSizing" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 8))
+    @JsxGetter(@WebBrowser(IE))
     public String getBoxSizing() {
         return getStyleAttribute(BOX_SIZING);
     }
@@ -1502,7 +1502,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "boxSizing" style attribute.
      * @param boxSizing the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 8))
+    @JsxSetter(@WebBrowser(IE))
     public void setBoxSizing(final String boxSizing) {
         setStyleAttribute(BOX_SIZING, boxSizing);
     }
@@ -1511,7 +1511,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "captionSide" style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public String getCaptionSide() {
         return getStyleAttribute(CAPTION_SIDE);
     }
@@ -1520,7 +1520,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "captionSide" style attribute.
      * @param captionSide the new attribute
      */
-    @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxSetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public void setCaptionSide(final String captionSide) {
         setStyleAttribute(CAPTION_SIDE, captionSide);
     }
@@ -1583,7 +1583,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "content" style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public String getContent() {
         return getStyleAttribute(CONTENT);
     }
@@ -1592,7 +1592,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "content" style attribute.
      * @param content the new attribute
      */
-    @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxSetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public void setContent(final String content) {
         setStyleAttribute(CONTENT, content);
     }
@@ -1601,7 +1601,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "counterIncrement" style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public String getCounterIncrement() {
         return getStyleAttribute(COUNTER_INCREMENT);
     }
@@ -1610,7 +1610,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "counterIncrement" style attribute.
      * @param counterIncrement the new attribute
      */
-    @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxSetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public void setCounterIncrement(final String counterIncrement) {
         setStyleAttribute(COUNTER_INCREMENT, counterIncrement);
     }
@@ -1619,7 +1619,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "counterReset" style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public String getCounterReset() {
         return getStyleAttribute(COUNTER_RESET);
     }
@@ -1628,7 +1628,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "counterReset" style attribute.
      * @param counterReset the new attribute
      */
-    @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxSetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public void setCounterReset(final String counterReset) {
         setStyleAttribute(COUNTER_RESET, counterReset);
     }
@@ -1727,7 +1727,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "emptyCells" style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public String getEmptyCells() {
         return getStyleAttribute(EMPTY_CELLS);
     }
@@ -1736,7 +1736,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "emptyCells" style attribute.
      * @param emptyCells the new attribute
      */
-    @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxSetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public void setEmptyCells(final String emptyCells) {
         setStyleAttribute(EMPTY_CELLS, emptyCells);
     }
@@ -2437,7 +2437,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "msBlockProgression" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 8))
+    @JsxGetter(@WebBrowser(IE))
     public String getMsBlockProgression() {
         return getStyleAttribute(MS_BLOCK_PROGRESSION);
     }
@@ -2446,7 +2446,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "msBlockProgression" style attribute.
      * @param msBlockProgression the new attribute
      */
-    @JsxSetter(@WebBrowser(value = IE, minVersion = 8))
+    @JsxSetter(@WebBrowser(IE))
     public void setMsBlockProgression(final String msBlockProgression) {
         setStyleAttribute(MS_BLOCK_PROGRESSION, msBlockProgression);
     }
@@ -2527,7 +2527,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "orphans" style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public String getOrphans() {
         return getStyleAttribute(ORPHANS);
     }
@@ -2536,7 +2536,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "orphans" style attribute.
      * @param orphans the new attribute
      */
-    @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxSetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public void setOrphans(final String orphans) {
         setStyleAttribute(ORPHANS, orphans);
     }
@@ -2545,7 +2545,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "outline" style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public String getOutline() {
         return getStyleAttribute(OUTLINE);
     }
@@ -2554,7 +2554,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "outline" style attribute.
      * @param outline the new attribute
      */
-    @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxSetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public void setOutline(final String outline) {
         setStyleAttribute(OUTLINE, outline);
     }
@@ -2563,7 +2563,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "outlineColor" style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public String getOutlineColor() {
         return getStyleAttribute(OUTLINE_COLOR);
     }
@@ -2572,7 +2572,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "outlineColor" style attribute.
      * @param outlineColor the new attribute
      */
-    @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxSetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public void setOutlineColor(final String outlineColor) {
         setStyleAttribute(OUTLINE_COLOR, outlineColor);
     }
@@ -2599,7 +2599,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "outlineStyle" style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public String getOutlineStyle() {
         return getStyleAttribute(OUTLINE_STYLE);
     }
@@ -2608,7 +2608,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "outlineStyle" style attribute.
      * @param outlineStyle the new attribute
      */
-    @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxSetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public void setOutlineStyle(final String outlineStyle) {
         setStyleAttribute(OUTLINE_STYLE, outlineStyle);
     }
@@ -2617,7 +2617,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "outlineWidth" style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public String getOutlineWidth() {
         return getStyleAttribute(OUTLINE_WIDTH);
     }
@@ -2626,7 +2626,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "outlineWidth" style attribute.
      * @param outlineWidth the new attribute
      */
-    @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxSetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public void setOutlineWidth(final String outlineWidth) {
         setStyleAttributePixel(OUTLINE_WIDTH, outlineWidth);
     }
@@ -2833,7 +2833,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "pageBreakInside" style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public String getPageBreakInside() {
         return getStyleAttribute(PAGE_BREAK_INSIDE);
     }
@@ -2842,7 +2842,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "pageBreakInside" style attribute.
      * @param pageBreakInside the new attribute
      */
-    @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxSetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public void setPageBreakInside(final String pageBreakInside) {
         setStyleAttribute(PAGE_BREAK_INSIDE, pageBreakInside);
     }
@@ -3733,7 +3733,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "widows" style attribute.
      * @return the style attribute
      */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public String getWidows() {
         return getStyleAttribute(WIDOWS);
     }
@@ -3742,7 +3742,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "widows" style attribute.
      * @param widows the new attribute
      */
-    @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxSetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public void setWidows(final String widows) {
         setStyleAttribute(WIDOWS, widows);
     }

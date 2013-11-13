@@ -851,7 +851,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the "documentMode" attribute.
      * @return the "documentMode" attribute
      */
-    @JsxGetter(@WebBrowser(value = IE, minVersion = 8))
+    @JsxGetter(@WebBrowser(IE))
     public int getDocumentMode() {
         if (documentMode_ != -1) {
             return documentMode_;
@@ -2116,7 +2116,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param selectors the selectors
      * @return the static node list
      */
-    @JsxFunction({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxFunction({ @WebBrowser(IE), @WebBrowser(FF) })
     public StaticNodeList querySelectorAll(final String selectors) {
         try {
             final List<Node> nodes = new ArrayList<Node>();
@@ -2136,7 +2136,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param selectors the selectors
      * @return null if no matches are found; otherwise, it returns the first matching element
      */
-    @JsxFunction({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxFunction({ @WebBrowser(IE), @WebBrowser(FF) })
     public Node querySelector(final String selectors) {
         try {
             final DomNode node = getDomNodeOrDie().querySelector(selectors);
