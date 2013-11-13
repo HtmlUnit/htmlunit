@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_E
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_WIDTH_AUTO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONT_STRECH_DEFAULT_NORMAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_TEXT_SHADOW_DEFAULT_NONE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_WORD_SPACING_DEFAULT_NORMAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LENGTH_WITHOUT_PX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.TREATS_POSITION_FIXED_LIKE_POSITION_STATIC;
@@ -1745,12 +1744,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getWordSpacing() {
-        String wordSpacing = "0px";
-        if (getBrowserVersion().hasFeature(CSS_WORD_SPACING_DEFAULT_NORMAL)) {
-            wordSpacing = "normal";
-        }
-
-        return defaultIfEmpty(super.getWordSpacing(), wordSpacing);
+        return defaultIfEmpty(super.getWordSpacing(), "0px");
     }
 
     /**

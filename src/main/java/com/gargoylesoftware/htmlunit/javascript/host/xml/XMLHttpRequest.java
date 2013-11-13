@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ERRORHANDLER_NOT_SUPPORTED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_HANDLER_THIS_IS_FUNCTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_IGNORE_SAME_ORIGIN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_IGNORE_SAME_ORIGIN_TO_ABOUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYSTATECANGE_SYNC_REQUESTS_COMPLETED;
@@ -205,13 +204,6 @@ public class XMLHttpRequest extends SimpleScriptable {
             final Scriptable scope = stateChangeHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
 
-            final Scriptable thisValue;
-            if (browser.hasFeature(XHR_HANDLER_THIS_IS_FUNCTION)) {
-                thisValue = stateChangeHandler_;
-            }
-            else {
-                thisValue = this;
-            }
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Calling onreadystatechange handler for state " + state);
             }
@@ -222,7 +214,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                 params[0] = event;
             }
 
-            jsEngine.callFunction(containingPage_, stateChangeHandler_, scope, thisValue, params);
+            jsEngine.callFunction(containingPage_, stateChangeHandler_, scope, this, params);
             if (LOG.isDebugEnabled()) {
                 if (context == null) {
                     context = Context.getCurrentContext();

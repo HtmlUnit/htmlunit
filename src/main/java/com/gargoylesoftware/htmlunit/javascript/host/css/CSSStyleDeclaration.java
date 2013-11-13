@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_IMAGE_URL_QUOTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_PIXEL_VALUES_INT_ONLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SUPPORTS_BEHAVIOR_PROPERTY;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_ROUNDED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TYPE_NUMBER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_UNDEFINED_FORCES_RESET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_UNDEFINED_OR_NULL_THROWS_ERROR;
@@ -3892,12 +3891,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
                     throw new WrappedException(e);
                 }
             }
-            if (getBrowserVersion().hasFeature(CSS_ZINDEX_ROUNDED)) {
-                setStyleAttribute(Z_INDEX, Integer.toString(Math.round(d.floatValue() - 0.00001f)));
-            }
-            else {
-                setStyleAttribute(Z_INDEX, Integer.toString(d.intValue()));
-            }
+            setStyleAttribute(Z_INDEX, Integer.toString(d.intValue()));
             return;
         }
 

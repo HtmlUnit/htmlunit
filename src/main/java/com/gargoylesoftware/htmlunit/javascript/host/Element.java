@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_37;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ATTRIBUTE_SUPPORTS_FLAGS_IN_QUIRKS_MODE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SET_ATTRIBUTE_CONSIDERS_ATTR_FOR_CLASS_AS_REAL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -567,16 +566,8 @@ public class Element extends EventNode {
     public Attr setAttributeNode(final Attr newAtt) {
         final String name = newAtt.getName();
 
-        final Attr replacedAtt;
-        final boolean undefForClass = getBrowserVersion().
-                hasFeature(JS_SET_ATTRIBUTE_CONSIDERS_ATTR_FOR_CLASS_AS_REAL);
-        if (undefForClass) {
-            replacedAtt = (Attr) getAttributeNode(name);
-        }
-        else {
-            final NamedNodeMap nodes = (NamedNodeMap) getAttributes();
-            replacedAtt = (Attr) nodes.getNamedItemWithoutSytheticClassAttr(name);
-        }
+        final NamedNodeMap nodes = (NamedNodeMap) getAttributes();
+        final Attr replacedAtt = (Attr) nodes.getNamedItemWithoutSytheticClassAttr(name);
         if (replacedAtt != null) {
             replacedAtt.detachFromParent();
         }

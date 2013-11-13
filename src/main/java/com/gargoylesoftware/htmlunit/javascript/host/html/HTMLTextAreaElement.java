@@ -15,8 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_COLS_RETURNS_MINUS1;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_ROWS_RETURNS_MINUS1;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_COLS_NEGATIVE_THROWS_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_ROWS_NEGATIVE_THROWS_EXCEPTION;
@@ -96,9 +94,6 @@ public class HTMLTextAreaElement extends FormField {
             return Integer.parseInt(s);
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().hasFeature(JS_TEXT_AREA_COLS_RETURNS_MINUS1)) {
-                return -1;
-            }
             return 20;
         }
     }
@@ -113,8 +108,7 @@ public class HTMLTextAreaElement extends FormField {
         try {
             i = Float.valueOf(cols).intValue();
             if (i < 0) {
-                if (getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_COLS_NEGATIVE_THROWS_EXCEPTION)
-                        || getBrowserVersion().hasFeature(JS_TEXT_AREA_COLS_RETURNS_MINUS1)) {
+                if (getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_COLS_NEGATIVE_THROWS_EXCEPTION)) {
                     throw new NumberFormatException("New value for cols '" + cols + "' is smaller than zero.");
                 }
                 getDomNodeOrDie().setAttribute("cols", null);
@@ -125,10 +119,7 @@ public class HTMLTextAreaElement extends FormField {
             if (getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION)) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
-            if (!getBrowserVersion().hasFeature(JS_TEXT_AREA_COLS_RETURNS_MINUS1)) {
-                return;
-            }
-            i = 0;
+            return;
         }
         getDomNodeOrDie().setAttribute("cols", Integer.toString(i));
     }
@@ -144,9 +135,6 @@ public class HTMLTextAreaElement extends FormField {
             return Integer.parseInt(s);
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().hasFeature(JS_TEXT_AREA_ROWS_RETURNS_MINUS1)) {
-                return -1;
-            }
             return 2;
         }
     }
@@ -161,8 +149,7 @@ public class HTMLTextAreaElement extends FormField {
         try {
             i = new Float(rows).intValue();
             if (i < 0) {
-                if (getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_ROWS_NEGATIVE_THROWS_EXCEPTION)
-                        || getBrowserVersion().hasFeature(JS_TEXT_AREA_COLS_RETURNS_MINUS1)) {
+                if (getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_ROWS_NEGATIVE_THROWS_EXCEPTION)) {
                     throw new NumberFormatException("New value for rows '" + rows + "' is smaller than zero.");
                 }
                 getDomNodeOrDie().setAttribute("rows", null);
@@ -173,10 +160,7 @@ public class HTMLTextAreaElement extends FormField {
             if (getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION)) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
-            if (!getBrowserVersion().hasFeature(JS_TEXT_AREA_COLS_RETURNS_MINUS1)) {
-                return;
-            }
-            i = 0;
+            return;
         }
         getDomNodeOrDie().setAttribute("rows", Integer.toString(i));
     }

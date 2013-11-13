@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_ENTITIES_EMPTY_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_ENTITIES_NULL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_INTERNALSUBSET_EMPTY_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_NOTATIONS_EMPTY_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_NOTATIONS_NULL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -89,9 +88,6 @@ public class DocumentType extends Node {
             return subset;
         }
 
-        if (getBrowserVersion().hasFeature(JS_DOCTYPE_INTERNALSUBSET_EMPTY_STRING)) {
-            return "";
-        }
         return null;
     }
 

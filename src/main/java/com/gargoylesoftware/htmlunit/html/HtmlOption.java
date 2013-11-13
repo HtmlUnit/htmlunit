@@ -18,8 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CONTROL_UPDAT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_FOR_SELECT_OPTION_ALSO;
 import static com.gargoylesoftware.htmlunit.
     BrowserVersionFeatures.EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT;
-import static com.gargoylesoftware.htmlunit.
-    BrowserVersionFeatures.EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEDOWN_NOT_FOR_SELECT_OPTION;
 import static com.gargoylesoftware.htmlunit.
     BrowserVersionFeatures.EVENT_ONMOUSEUP_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT;
@@ -253,10 +251,6 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
         if (hasFeature(EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT)) {
             page = getEnclosingSelect().mouseDown(shiftKey, ctrlKey, altKey, button);
         }
-        if (hasFeature(EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT)) {
-            page = getEnclosingSelect().mouseUp(shiftKey, ctrlKey, altKey, button);
-        }
-
         if (hasFeature(EVENT_ONMOUSEDOWN_NOT_FOR_SELECT_OPTION)) {
             return page;
         }

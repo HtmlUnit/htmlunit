@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BUTTON_SET_TYPE_THROWS_EXCEPTION;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BUTTON_USE_CONTENT_AS_VALUE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import java.io.IOException;
@@ -63,30 +62,6 @@ public class HTMLButtonElement extends FormField {
     @JsxGetter
     public String getType() {
         return ((HtmlButton) getDomNodeOrDie()).getTypeAttribute();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxGetter
-    public String getValue() {
-        if (getBrowserVersion().hasFeature(JS_BUTTON_USE_CONTENT_AS_VALUE)) {
-            return getText();
-        }
-        return super.getValue();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxSetter
-    public void setValue(final String newValue) {
-        if (getBrowserVersion().hasFeature(JS_BUTTON_USE_CONTENT_AS_VALUE)) {
-            setInnerText(newValue);
-        }
-        super.setValue(newValue);
     }
 
     /**

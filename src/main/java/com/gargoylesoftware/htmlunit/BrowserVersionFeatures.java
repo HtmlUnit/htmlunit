@@ -42,9 +42,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     ANCHOR_EMPTY_HREF_NO_FILENAME,
 
-    /** Indicates that a blur event should be triggered before an onchange event. */
-    BLUR_BEFORE_ONCHANGE,
-
     /** If the "type" attribute of HtmlButton should be evaluated to 'button' if not specified. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     BUTTON_EMPTY_TYPE_BUTTON,
@@ -115,13 +112,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
     CSS_TEXT_SHADOW_DEFAULT_NONE,
 
-    /** Default is 'normal'. */
-    CSS_WORD_SPACING_DEFAULT_NORMAL,
-
-    /** Values for the zIndex are rounded to integer. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 7))
-    CSS_ZINDEX_ROUNDED,
-
     /** IE uses the type Number for the zIndex Values (instead of String). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     CSS_ZINDEX_TYPE_NUMBER,
@@ -141,10 +131,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that "\n" are replaced by "\r\n" in textarea values. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     DISPLAYED_COLLAPSE,
-
-    /** FF 3.6 has a much lager menu bar. */
-    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 3.6f, maxVersion = 3.6f) })
-    DISPLAY_LARGE_MENU_BAR,
 
     /** */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
@@ -223,10 +209,6 @@ public enum BrowserVersionFeatures {
     EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT,
 
     /** Does not trigger "onmousedown" event handler for the select options. */
-    @BrowserFeature({ })
-    EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT,
-
-    /** Does not trigger "onmousedown" event handler for the select options. */
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 3.6f) })
     EVENT_ONMOUSEDOWN_NOT_FOR_SELECT_OPTION,
 
@@ -273,13 +255,6 @@ public enum BrowserVersionFeatures {
     /** Indicates if a form field is directly reachable by its new name once this has been changed. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     FORMFIELD_REACHABLE_BY_NEW_NAMES,
-
-    /**
-     * Special behavior of IE6; the URL submitted by a form with method type 'GET' has
-     * a question mark at the end if there are no parameters.
-     */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 6))
-    FORM_SUBMISSION_URL_END_WITH_QUESTIONMARK,
 
     /** Form submit is done without the hash part of the form action url. */
     @BrowserFeature(@WebBrowser(IE))
@@ -501,10 +476,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTMLBGSOUND,
 
-    /** Set this checked state back to default when added to page (IE6). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 7))
-    HTMLCHECKEDINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED,
-
     /** Set this checked state to false when added to page (IE). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     HTMLCHECKEDINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE,
@@ -565,9 +536,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     HTMLELEMENT_OUTER_INNER_HTML_QUOTE_ATTRIBUTES,
 
-    /** */
-    HTMLELEMENT_TRIM_CLASS_ATTRIBUTE,
-
     /**
      * Indicates if a self-closing &lt;iframe/&gt; tag should be considered as an opening tag.
      **/
@@ -619,10 +587,6 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLSCRIPT_APPLICATION_JAVASCRIPT,
-
-    /** Runs <script src="javascript:'[code]'">. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 6))
-    HTMLSCRIPT_SRC_JAVASCRIPT,
 
     /** Trims the value of the type attribute before to verify it. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
@@ -739,10 +703,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_BUTTON_SET_TYPE_THROWS_EXCEPTION,
 
-    /** IE uses the content of a button tag as value instead of the attribute. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 7))
-    JS_BUTTON_USE_CONTENT_AS_VALUE,
-
     /** Indicates that the browser emulates the char attribute. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_CHAR_EMULATED,
@@ -750,15 +710,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that the browser emulates the charOff attribute. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_CHAR_OFF_EMULATED,
-
-    /** Indicates that the browser tries to convert the char attribute values
-     * to integer. */
-    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 3.6f))
-    JS_CHAR_OFF_INTEGER,
-
-    /** Indicates that the browser returns a dot if the char attribute is not defined. */
-    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 3.6f))
-    JS_CHAR_UNDEFINED_DOT,
 
     /** Indicates that the click method call does not trigger the onchange
      * event handlers for checkboxes. */
@@ -806,9 +757,6 @@ public enum BrowserVersionFeatures {
     /** Javascript doctyp.entities returns null (FF10). */
     @BrowserFeature({@WebBrowser(value = FF, maxVersion = 3.6f), @WebBrowser(value = IE, minVersion = 10) })
     JS_DOCTYPE_ENTITIES_NULL,
-
-    /** Javascript doctyp.internalSubset returns an empty string (IE). */
-    JS_DOCTYPE_INTERNALSUBSET_EMPTY_STRING,
 
     /** Javascript doctyp.notations returns an empty string (IE). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
@@ -936,10 +884,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_FUNCTION_DECLARED_FORWARD_IN_BLOCK,
 
-    /** Indicates if the method isXmlName exists in the window scope. */
-    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 10))
-    JS_FUNCTION_ISXMLNAME,
-
     /**
      * Indicates that function can be defined as
      * <code>function object.property() {}</code> instead of <code>object.property = function() {}</code>.
@@ -971,10 +915,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_GET_ELEMENTS_BY_TAG_NAME_NOT_SUPPORTS_NAMESPACES,
 
-    /** Javascript function getElementById calls getElementByName if nothing found by id. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 6))
-    JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME,
-
     /** Javascript function getElementById calls getElementByName if nothing found by id, only in quirks mode. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME_IN_QUICKS_MODE,
@@ -982,10 +922,6 @@ public enum BrowserVersionFeatures {
     /** Javascript function getElementById compares the id's case sensitive. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE,
-
-    /** Indicates that not defined function handler should be 'undefined', or 'null'. */
-    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 3.6f))
-    JS_HANDLER_UNDEFINED,
 
     /** Indicates that objects with prototype property available in window scope; Firefox does this. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
@@ -1104,10 +1040,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_PREFIX_RETURNS_EMPTY_WHEN_UNDEFINED,
 
-    /** Indicates that document.queryCommandSupported(..) is only available in design mode. */
-    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 3.6f))
-    JS_QUERYCOMMAND_SUPPORTED_ONLY_DESIGNMODE,
-
     /** Javascript script.text(...) reexecutes the script (IE). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_SCRIPT_ALWAYS_REEXECUTE_ON_SET_TEXT,
@@ -1151,12 +1083,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_SELECT_ADD_SECOND_PARAM_IS_INDEX,
 
-    /** Indicates if calling HTMLSelectElement.add without second parameter
-     * throws an exception.
-     */
-    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 3.6f))
-    JS_SELECT_ADD_SECOND_PARAM_IS_REQUIRED,
-
     /** Indicates if calling HTMLSelectElement.item with a negative value should throw. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_SELECT_ITEM_THROWS_IF_NEGATIVE,
@@ -1164,14 +1090,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that select.options.childNodes is a valid property (IE). */
     @BrowserFeature(@WebBrowser(IE))
     JS_SELECT_OPTIONS_HAS_CHILDNODES_PROPERTY,
-
-    /** Indicates if setting an out of bound value for HTMLSelectElement.selectedIndex should throw. */
-    JS_SELECT_SELECTED_INDEX_THROWS_IF_BAD,
-
-    /** Indicates that the set attribute method treads the synthetic
-     * empty attr for 'class' (IE6/7) as a normal one. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 7))
-    JS_SET_ATTRIBUTE_CONSIDERS_ATTR_FOR_CLASS_AS_REAL,
 
     /** Indicates that the set attribute method is able to update the event handlers also.
      * e.g. element.setAttribute("onclick", "test(1);"); */
@@ -1221,18 +1139,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that table elements supports the values "top", "bottom", "middle", "baseline" (IE). */
     @BrowserFeature(@WebBrowser(IE))
     JS_TABLE_VALIGN_SUPPORTS_IE_VALUES,
-
-    /** Getting the property cols returns 20, if the defined value is not convertible into an integer (IE).
-     * FF returns -1 in this case.
-     */
-    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 3.6f))
-    JS_TEXT_AREA_COLS_RETURNS_MINUS1,
-
-    /** Getting the property rows returns 2, if the defined value is not convertible into an integer (IE).
-     * FF returns -1 in this case.
-     */
-    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 3.6f))
-    JS_TEXT_AREA_ROWS_RETURNS_MINUS1,
 
     /** Setting the property cols throws an exception, if the provided value is less
      * than 0 (IE).
@@ -1308,9 +1214,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_XML_SERIALIZER_APPENDS_CRLF,
 
-    /** Indicates that new XMLSerializer().serializeToString(..) transforms the node name to upper case. */
-    JS_XML_SERIALIZER_NODE_AS_UPPERCASE,
-
     /** Indicates that new XMLSerializer().serializeToString(..) respects the XHTML definition for non empty tags. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_XML_SERIALIZER_NON_EMPTY_TAGS,
@@ -1381,10 +1284,6 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature(@WebBrowser(FF))
     SET_READONLY_PROPERTIES,
-
-    /** Indicates [object StorageObsolete] instead of [object Storage]. */
-    @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 10) })
-    STORAGE_OBSOLETE,
 
     /** Indicates that string.trim() is supported. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
@@ -1474,9 +1373,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     XHR_ERRORHANDLER_NOT_SUPPORTED,
 
-    /** Indicates that 'this' corresponds to the handler function when a XMLHttpRequest handler is executed. */
-    XHR_HANDLER_THIS_IS_FUNCTION,
-
     /** Indicates if a same origin check should be skipped. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 8) })
     XHR_IGNORE_SAME_ORIGIN,
@@ -1530,8 +1426,4 @@ public enum BrowserVersionFeatures {
     /** Indicates that the 'SelectionNamespaces' property is supported by XPath expressions. */
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(CHROME) })
     XPATH_SELECTION_NAMESPACES,
-
-    /** Indicates if XUL is supported (FF only). */
-    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 3.6f))
-    XUL_SUPPORT;
 }

@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DISPLAY_LARGE_MENU_BAR;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -77,11 +75,6 @@ public abstract class WebWindowImpl implements WebWindow {
         WebAssert.notNull("webClient", webClient);
         webClient_ = webClient;
         jobManager_ = BackgroundJavaScriptFactory.theFactory().createJavaScriptJobManager(this);
-
-        // adjust inner height for ff 3.6
-        if (webClient.getBrowserVersion().hasFeature(DISPLAY_LARGE_MENU_BAR)) {
-            outerHeight_ = innerHeight_ + 166;
-        }
     }
 
     /**

@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.BLUR_BEFORE_ONCHANGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_DOM_CONTENT_LOADED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_FRAMESET_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT;
@@ -1947,14 +1946,8 @@ public class HtmlPage extends SgmlPage {
             }
 
             if (oldFocusedElement != null) {
-                if (hasFeature(BLUR_BEFORE_ONCHANGE)) {
-                    oldFocusedElement.fireEvent(Event.TYPE_BLUR);
-                    oldFocusedElement.removeFocus();
-                }
-                else { // IE, FF3
-                    oldFocusedElement.removeFocus();
-                    oldFocusedElement.fireEvent(Event.TYPE_BLUR);
-                }
+                oldFocusedElement.removeFocus();
+                oldFocusedElement.fireEvent(Event.TYPE_BLUR);
             }
         }
 

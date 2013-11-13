@@ -21,7 +21,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFINE_GET
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DONT_ENUM_FUNCTIONS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ECMA5_FUNCTIONS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_BIND;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_ISXMLNAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_TOSOURCE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_HAS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML;
@@ -319,9 +318,7 @@ public class JavaScriptEngine {
             removePrototypeProperties(window, "Number", "toSource");
             removePrototypeProperties(window, "String", "toSource");
         }
-        if (!browserVersion.hasFeature(JS_FUNCTION_ISXMLNAME)) {
-            deleteProperties(window, "isXMLName");
-        }
+        deleteProperties(window, "isXMLName");
 
         NativeFunctionToStringFunction.installFix(window, webClient.getBrowserVersion());
 

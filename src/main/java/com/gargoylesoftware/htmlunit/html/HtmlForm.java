@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_URL_END_WITH_QUESTIONMARK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_URL_WITHOUT_HASH;
 
 import java.net.MalformedURLException;
@@ -175,8 +174,7 @@ public class HtmlForm extends HtmlElement {
             // action may already contain some query parameters: they have to be removed
             actionUrl = StringUtils.substringBefore(actionUrl, "#");
             actionUrl = StringUtils.substringBefore(actionUrl, "?");
-            if (browser.hasFeature(FORM_SUBMISSION_URL_END_WITH_QUESTIONMARK)
-                    || queryFromFields.length() > 0) {
+            if (queryFromFields.length() > 0) {
                 actionUrl += "?" + queryFromFields;
             }
             if (anchor.length() > 0

@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.BUTTON_EMPTY_TYPE_BUTTON;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_INPUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_PROPERTY_CHANGE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_TRIM_CLASS_ATTRIBUTE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.KEYBOARD_EVENT_SPECIAL_KEYPRESS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.WINDOW_ACTIVE_ELEMENT_FOCUSED;
 
@@ -110,12 +109,6 @@ public abstract class HtmlElement extends DomElement {
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
         attributeListeners_ = new ArrayList<HtmlAttributeChangeListener>();
-        if (page != null && hasFeature(HTMLELEMENT_TRIM_CLASS_ATTRIBUTE)) {
-            final String value = getAttribute("class");
-            if (value != ATTRIBUTE_NOT_DEFINED) {
-                getAttributeNode("class").setValue(value.trim());
-            }
-        }
     }
 
     /**

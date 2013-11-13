@@ -41,10 +41,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_S
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FRAME_BODY_NULL_IF_NOT_LOADED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENTS_BY_NAME_EMPTY_RETURNS_NOTHING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENTS_BY_NAME_NULL_RETURNS_NOTHING;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME_IN_QUICKS_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_QUERYCOMMAND_SUPPORTED_ONLY_DESIGNMODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUIRKS_MODE_ALWAYS_DOC_MODE_5;
@@ -1340,8 +1338,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         catch (final ElementNotFoundException e) {
             // Just fall through - result is already set to null
             final BrowserVersion browser = getBrowserVersion();
-            if (browser.hasFeature(JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME)
-                    || browser.hasFeature(JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME_IN_QUICKS_MODE)
+            if (browser.hasFeature(JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME_IN_QUICKS_MODE)
                     && getHtmlPage().isQuirksMode()) {
                 final HTMLCollection elements = getElementsByName(id);
                 result = elements.get(0, elements);
@@ -1992,13 +1989,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxFunction
     public boolean queryCommandSupported(final String cmd) {
-        if (getBrowserVersion().hasFeature(JS_QUERYCOMMAND_SUPPORTED_ONLY_DESIGNMODE)) {
-            final String mode = getDesignMode();
-            if (!"on".equals(mode)) {
-                final String msg = "queryCommandSupported() called while document.designMode='" + mode + "'.";
-                throw Context.reportRuntimeError(msg);
-            }
-        }
         return hasCommand(cmd);
     }
 
@@ -2027,13 +2017,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxFunction
     public boolean queryCommandEnabled(final String cmd) {
-        if (getBrowserVersion().hasFeature(JS_QUERYCOMMAND_SUPPORTED_ONLY_DESIGNMODE)) {
-            final String mode = getDesignMode();
-            if (!"on".equals(mode)) {
-                final String msg = "queryCommandEnabled() called while document.designMode='" + mode + "'.";
-                throw Context.reportRuntimeError(msg);
-            }
-        }
         return hasCommand(cmd);
     }
 

@@ -29,8 +29,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCE
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BOUNDING_CLIENT_RECT_OFFSET_TWO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CHAR_EMULATED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CHAR_OFF_EMULATED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CHAR_OFF_INTEGER;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CHAR_UNDEFINED_DOT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENT_LEFT_TOP_ZERO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_EXTENT_WITHOUT_PADDING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE;
@@ -2461,11 +2459,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             return ch_;
         }
 
-        final String ch = getDomNodeOrDie().getAttribute("char");
-        if ((ch == DomElement.ATTRIBUTE_NOT_DEFINED) && (getBrowserVersion().hasFeature(JS_CHAR_UNDEFINED_DOT))) {
-            return ".";
-        }
-        return ch;
+        return getDomNodeOrDie().getAttribute("char");
     }
 
     /**
@@ -2507,22 +2501,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         try {
             final float f = Float.parseFloat(chOff);
-            if (getBrowserVersion().hasFeature(JS_CHAR_OFF_INTEGER)) {
-                if (f < 0) {
-                    chOff = "0";
-                }
-                else {
-                    chOff = Integer.toString((int) f);
-                }
+            final int i = (int) f;
+            if (i == f) {
+                chOff = Integer.toString(i);
             }
             else {
-                final int i = (int) f;
-                if (i == f) {
-                    chOff = Integer.toString(i);
-                }
-                else {
-                    chOff = Float.toString(f);
-                }
+                chOff = Float.toString(f);
             }
         }
         catch (final NumberFormatException e) {

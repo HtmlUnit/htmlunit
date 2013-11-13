@@ -17,6 +17,9 @@ package com.gargoylesoftware.htmlunit;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 import static org.junit.Assert.fail;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -41,11 +44,36 @@ public class BrowserVersionFeaturesTest extends SimpleWebTestCase {
         for (final BrowserVersionFeatures feature : BrowserVersionFeatures.values()) {
             final String featureName = feature.name();
             if (lastFeatureName != null && featureName.compareTo(lastFeatureName) < 1) {
-                fail("BrowserVersionFeatures.java: \""
-                    + featureName + "\" should be before \"" + lastFeatureName + '"');
+                fail("BrowserVersionFeatures.java: '"
+                    + featureName + "' should be before '" + lastFeatureName + "'");
             }
             lastFeatureName = featureName;
         }
     }
 
+    /**
+     * Test of alphabetical order.
+     */
+    @Test
+    @Browsers(NONE)
+    public void unusedFeatures() {
+        final List<BrowserVersion> browsers = new LinkedList<BrowserVersion>();
+        browsers.add(BrowserVersion.FIREFOX_17);
+        browsers.add(BrowserVersion.FIREFOX_24);
+        browsers.add(BrowserVersion.INTERNET_EXPLORER_8);
+        browsers.add(BrowserVersion.INTERNET_EXPLORER_9);
+        browsers.add(BrowserVersion.INTERNET_EXPLORER_10);
+        browsers.add(BrowserVersion.CHROME);
+
+        for (final BrowserVersionFeatures feature : BrowserVersionFeatures.values()) {
+            boolean inUse = false;
+            for (BrowserVersion browserVersion : browsers) {
+                if (browserVersion.hasFeature(feature)) {
+                    inUse = true;
+                    continue;
+                }
+            }
+            assertTrue("BrowserVersionFeatures.java: '" + feature.name() + "' in no longer in use.", inUse);
+        }
+    }
 }

@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_INHERIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENTS_BY_TAG_NAME_NOT_SUPPORTS_NAMESPACES;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XUL_SUPPORT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -45,7 +44,6 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
-import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
@@ -480,15 +478,11 @@ public class Document extends EventNode {
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public Object createElementNS(final String namespaceURI, final String qualifiedName) {
         final org.w3c.dom.Element element;
-        final BrowserVersion browserVersion = getBrowserVersion();
         if ("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul".equals(namespaceURI)) {
-            if (!browserVersion.hasFeature(XUL_SUPPORT)) {
-                throw Context.reportRuntimeError("XUL not available");
-            }
-            // simple hack, no need to implement the XUL objects (at least in a first time)
-            element = new HtmlDivision(namespaceURI, qualifiedName, getPage(), null);
+            throw Context.reportRuntimeError("XUL not available");
         }
-        else if (HTMLParser.XHTML_NAMESPACE.equals(namespaceURI)
+
+        if (HTMLParser.XHTML_NAMESPACE.equals(namespaceURI)
                 || HTMLParser.SVG_NAMESPACE.equals(namespaceURI)) {
             element = getPage().createElementNS(namespaceURI, qualifiedName);
         }

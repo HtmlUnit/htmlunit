@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONERROR
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_EXTERNAL_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONREADY_STATE_CHANGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_APPLICATION_JAVASCRIPT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_SRC_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_TRIM_TYPE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_ALWAYS_REEXECUTE_ON_SRC_CHANGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_FOR_AND_EVENT;
@@ -374,7 +373,6 @@ public class HtmlScript extends HtmlElement {
         }
 
         final HtmlPage page = (HtmlPage) getPage();
-        final BrowserVersion browser = page.getWebClient().getBrowserVersion();
 
         final String src = getSrcAttribute();
         if (src.equals(SLASH_SLASH_COLON)) {
@@ -382,24 +380,7 @@ public class HtmlScript extends HtmlElement {
         }
 
         if (src != ATTRIBUTE_NOT_DEFINED) {
-            if (src.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
-                // <script src="javascript:'[code]'"></script>
-                if (browser.hasFeature(HTMLSCRIPT_SRC_JAVASCRIPT)) {
-                    String code = StringUtils.removeStart(src, JavaScriptURLConnection.JAVASCRIPT_PREFIX).trim();
-                    final int len = code.length();
-                    if (len > 2) {
-                        if ((code.charAt(0) == '\'' && code.charAt(len - 1) == '\'')
-                            || (code.charAt(0) == '"' && code.charAt(len - 1) == '"')) {
-                            code = code.substring(1, len - 1);
-                            if (LOG.isDebugEnabled()) {
-                                LOG.debug("Executing JavaScript: " + code);
-                            }
-                            page.executeJavaScriptIfPossible(code, code, getStartLineNumber());
-                        }
-                    }
-                }
-            }
-            else {
+            if (!src.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 // <script src="[url]"></script>
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("Loading external JavaScript: " + src);

@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_133;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_HANDLER_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_NOT_ALLOWED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_IS_A_FUNCTION;
@@ -1249,11 +1248,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     private Object getHandlerForJavaScript(final String eventName) {
-        Object handler = getEventListenersContainer().getEventHandlerProp(eventName);
-        if (handler == null && getBrowserVersion().hasFeature(JS_HANDLER_UNDEFINED)) {
-            handler = Scriptable.NOT_FOUND;
-        }
-        return handler;
+        return getEventListenersContainer().getEventHandlerProp(eventName);
     }
 
     private void setHandlerForJavaScript(final String eventName, final Object handler) {
