@@ -24,6 +24,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYST
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYSTATECHANGE_WITH_EVENT_PARAM;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLOW_EMTPY_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ORIGIN_HEADER;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_STATUS_THROWS_EXCEPTION_WHEN_UNSET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_TRIGGER_ONLOAD_ON_COMPLETED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -199,16 +200,6 @@ public class XMLHttpRequest extends SimpleScriptable {
             final Scriptable scope = stateChangeHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
 
-            final int nbExecutions;
-            if (async_ && STATE_OPENED == state) {
-                // quite strange but IE and FF seem both to fire state loading twice
-                // in async mode (at least with HTML of the unit tests)
-                nbExecutions = 2;
-            }
-            else {
-                nbExecutions = 1;
-            }
-
             final Scriptable thisValue;
             if (browser.hasFeature(XHR_HANDLER_THIS_IS_FUNCTION)) {
                 thisValue = stateChangeHandler_;
@@ -216,25 +207,23 @@ public class XMLHttpRequest extends SimpleScriptable {
             else {
                 thisValue = this;
             }
-            for (int i = 0; i < nbExecutions; i++) {
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("Calling onreadystatechange handler for state " + state);
-                }
-                Object[] params = ArrayUtils.EMPTY_OBJECT_ARRAY;
-                if (browser.hasFeature(XHR_ONREADYSTATECHANGE_WITH_EVENT_PARAM)) {
-                    params = new Object[1];
-                    final Event event = new Event(this, Event.TYPE_READY_STATE_CHANGE);
-                    params[0] = event;
-                }
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Calling onreadystatechange handler for state " + state);
+            }
+            Object[] params = ArrayUtils.EMPTY_OBJECT_ARRAY;
+            if (browser.hasFeature(XHR_ONREADYSTATECHANGE_WITH_EVENT_PARAM)) {
+                params = new Object[1];
+                final Event event = new Event(this, Event.TYPE_READY_STATE_CHANGE);
+                params[0] = event;
+            }
 
-                jsEngine.callFunction(containingPage_, stateChangeHandler_, scope, thisValue, params);
-                if (LOG.isDebugEnabled()) {
-                    if (context == null) {
-                        context = Context.getCurrentContext();
-                    }
-                    LOG.debug("onreadystatechange handler: " + context.decompileFunction(stateChangeHandler_, 4));
-                    LOG.debug("Calling onreadystatechange handler for state " + state + ". Done.");
+            jsEngine.callFunction(containingPage_, stateChangeHandler_, scope, thisValue, params);
+            if (LOG.isDebugEnabled()) {
+                if (context == null) {
+                    context = Context.getCurrentContext();
                 }
+                LOG.debug("onreadystatechange handler: " + context.decompileFunction(stateChangeHandler_, 4));
+                LOG.debug("Calling onreadystatechange handler for state " + state + ". Done.");
             }
         }
 
@@ -390,6 +379,9 @@ public class XMLHttpRequest extends SimpleScriptable {
     @JsxGetter
     public int getStatus() {
         if (state_ == STATE_UNSENT || state_ == STATE_OPENED) {
+            if (getBrowserVersion().hasFeature(XHR_STATUS_THROWS_EXCEPTION_WHEN_UNSET)) {
+                throw Context.reportRuntimeError("status not set");
+            }
             return 0;
         }
         if (webResponse_ != null) {
@@ -408,6 +400,9 @@ public class XMLHttpRequest extends SimpleScriptable {
     @JsxGetter
     public String getStatusText() {
         if (state_ == STATE_UNSENT || state_ == STATE_OPENED) {
+            if (getBrowserVersion().hasFeature(XHR_STATUS_THROWS_EXCEPTION_WHEN_UNSET)) {
+                throw Context.reportRuntimeError("statusText not set");
+            }
             return "";
         }
         if (webResponse_ != null) {
@@ -584,6 +579,10 @@ public class XMLHttpRequest extends SimpleScriptable {
             doSend(Context.getCurrentContext());
         }
         else {
+            // quite strange but IE and FF seem both to fire state loading twice
+            // in async mode (at least with HTML of the unit tests)
+            setState(STATE_OPENED, Context.getCurrentContext());
+
             // Create and start a thread in which to execute the request.
             final Scriptable startingScope = getWindow();
             final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();

@@ -440,7 +440,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "1", "0", "4", "0" },
             IE8 = { "1", "ex: status not available", "4", "200" },
             IE10 = { "1", "0", "4", "200" })
-    @NotYetImplemented({ FF17, IE8 })
+    @NotYetImplemented(FF17)
     public void withCredentials() throws Exception {
         testWithCredentials("*", "true");
     }
@@ -451,7 +451,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "1", "0", "4", "200" },
             IE8 = { "1", "ex: status not available", "4", "200" })
-    @NotYetImplemented(IE8)
     public void withCredentialsServer() throws Exception {
         testWithCredentials("http://localhost:" + PORT, "true");
     }
@@ -463,7 +462,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "1", "0", "4", "0" },
             IE8 = { "1", "ex: status not available", "4", "200" },
             IE10 = { "1", "0", "4", "200" })
-    @NotYetImplemented({ FF17, IE8 })
+    @NotYetImplemented(FF17)
     public void withCredentialsServerSlashAtEnd() throws Exception {
         testWithCredentials("http://localhost:" + PORT + "/", "true");
     }
@@ -475,7 +474,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "1", "0", "4", "0" },
             IE8 = { "1", "ex: status not available", "4", "200" },
             IE10 = { "1", "0", "4", "200" })
-    @NotYetImplemented({ FF17, IE8 })
+    @NotYetImplemented(FF17)
     public void withCredentials_no_header() throws Exception {
         testWithCredentials("*", null);
     }
@@ -487,7 +486,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "1", "0", "4", "0" },
             IE8 = { "1", "ex: status not available", "4", "200" },
             IE10 = { "1", "0", "4", "200" })
-    @NotYetImplemented({ FF17, IE8 })
+    @NotYetImplemented(FF17)
     public void withCredentials_no_header_Server() throws Exception {
         testWithCredentials("http://localhost:" + PORT, null);
     }
@@ -499,7 +498,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "1", "0", "4", "0" },
             IE8 = { "1", "ex: status not available", "4", "200" },
             IE10 = { "1", "0", "4", "200" })
-    @NotYetImplemented({ FF17, IE8 })
+    @NotYetImplemented(FF17)
     public void withCredentials_no_header_ServerSlashAtEnd() throws Exception {
         testWithCredentials("http://localhost:" + PORT + "/", null);
     }

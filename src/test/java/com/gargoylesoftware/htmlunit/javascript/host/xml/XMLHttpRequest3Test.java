@@ -37,7 +37,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -448,46 +447,6 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         client.getPage(URL_FIRST);
 
         assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
-        assertEquals(getExpectedAlerts(), collectedAlerts);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Browsers(FF)
-    @Alerts({ "orsc1", "orsc1", "orsc2", "orsc3", "orsc4", "4", "<a>b</a>", "[object XMLHttpRequest]" })
-    public void onload() throws Exception {
-        final String html =
-              "<html>\n"
-            + "  <head>\n"
-            + "    <script>\n"
-            + "      function test() {\n"
-            + "        var xhr;\n"
-            + "        if (window.XMLHttpRequest) xhr = new XMLHttpRequest();\n"
-            + "        else xhr = new ActiveXObject('Microsoft.XMLHTTP');\n"
-            + "        xhr.onreadystatechange = function() { alert('orsc' + xhr.readyState); };\n"
-            + "        xhr.onload = function() { alert(xhr.readyState); alert(xhr.responseText); alert(this); }\n"
-            + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
-            + "        xhr.send('');\n"
-            + "      }\n"
-            + "    </script>\n"
-            + "  </head>\n"
-            + "  <body onload='test()'></body>\n"
-            + "</html>";
-
-        final String xml = "<a>b</a>";
-
-        final WebClient client = getWebClient();
-        client.setAjaxController(new NicelyResynchronizingAjaxController());
-        final List<String> collectedAlerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
-        conn.setResponse(URL_SECOND, xml, "text/xml");
-        client.setWebConnection(conn);
-        client.getPage(URL_FIRST);
-
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 }

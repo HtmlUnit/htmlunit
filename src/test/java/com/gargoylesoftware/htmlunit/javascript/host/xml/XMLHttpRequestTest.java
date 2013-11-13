@@ -135,26 +135,142 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0-", "0-" })
-    public void statusBeforeSend() throws Exception {
+    @Alerts(DEFAULT = { "1: 0-", "2: ", "3: 200-OK" },
+            IE8 = {"1: ex: status-ex: statusText, 2: , 3: 200-OK" })
+    public void statusSync() throws Exception {
         final String html =
             "<html>\n"
             + "  <head>\n"
             + "    <title>XMLHttpRequest Test</title>\n"
-            + "    <script>\n"
-            + "        var request;\n"
-            + "        if (window.XMLHttpRequest)\n"
-            + "          request = new XMLHttpRequest();\n"
-            + "        else if (window.ActiveXObject)\n"
-            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "<script>\n"
+            + "  var xhr;\n"
+            + "  if (window.XMLHttpRequest)\n"
+            + "    xhr = new XMLHttpRequest();\n"
+            + "  else if (window.ActiveXObject)\n"
+            + "    xhr = new ActiveXObject('Microsoft.XMLHTTP');\n"
 
-            + "        alert(request.status + '-' + request.statusText);\n"
-            + "        request.open('GET', '/foo.xml', false);\n"
-            + "        alert(request.status + '-' + request.statusText);\n"
-            + "    </script>\n"
+            + "  alertStatus('1: ');\n"
+            + "  xhr.open('GET', '/foo.xml', false);\n"
+            + "  alert('2: ');\n"
+
+            + "  xhr.send();\n"
+            + "  alertStatus('3: ');\n"
+
+            + "  function alertStatus(prefix) {\n"
+            + "    var msg = prefix;"
+            + "    try {\n"
+            + "      msg = msg + xhr.status + '-';\n"
+            + "    } catch(e) { msg = msg + 'ex: status' + '-' }\n"
+            + "    try {\n"
+            + "      msg = msg + xhr.statusText;;\n"
+            + "    } catch(e) { msg = msg + 'ex: statusText' }\n"
+            + "    alert(msg);\n"
+            + "  }\n"
+            + "</script>\n"
             + "  </head>\n"
             + "  <body></body>\n"
             + "</html>";
+
+        getMockWebConnection().setDefaultResponse("<res></res>", "text/xml");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "1: 0-", "2: 0-", "#1: 0-", "3: 0-", "#1: 0-", "4: 0-",
+                            "#2: 200-OK", "#3: 200-OK", "#4: 200-OK" },
+            FF24 = { "1: 0-", "2: 0-", "#1: 0-", "3: 0-", "4: 0-", "#2: 200-OK", "#3: 200-OK", "#4: 200-OK" },
+            IE8 = { "1: ex: status-ex: statusText", "2: ex: status-ex: statusText", "#1: ex: status-ex: statusText",
+                    "3: ex: status-ex: statusText", "#1: ex: status-ex: statusText", "4: ex: status-ex: statusText",
+                    "#2: 200-OK", "#3: 200-OK", "#4: 200-OK" })
+    public void statusAsync() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <title>XMLHttpRequest Test</title>\n"
+            + "<script>\n"
+            + "  var xhr;\n"
+            + "  if (window.XMLHttpRequest)\n"
+            + "    xhr = new XMLHttpRequest();\n"
+            + "  else if (window.ActiveXObject)\n"
+            + "    xhr = new ActiveXObject('Microsoft.XMLHTTP');\n"
+
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      alertStatus('1: ');\n"
+
+            + "      xhr.onreadystatechange = onReadyStateChange;\n"
+            + "      alertStatus('2: ');\n"
+
+            + "      xhr.open('GET',  '/foo.xml', true);\n"
+            + "      alertStatus('3: ');\n"
+
+            + "      xhr.send();\n"
+            + "      alertStatus('4: ');\n"
+            + "    } catch(e) { alert(e) }\n"
+            + "  }\n"
+
+            + "  function onReadyStateChange() {\n"
+            + "    alertStatus('#' + xhr.readyState + ': ');"
+            + "  }\n"
+
+            + "  function alertStatus(prefix) {\n"
+            + "    var msg = prefix;"
+            + "    try {\n"
+            + "      msg = msg + xhr.status + '-';\n"
+            + "    } catch(e) { msg = msg + 'ex: status' + '-' }\n"
+            + "    try {\n"
+            + "      msg = msg + xhr.statusText;;\n"
+            + "    } catch(e) { msg = msg + 'ex: statusText' }\n"
+            + "    alert(msg);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'></body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse("<res></res>", "text/xml");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "orsc1", "open-done", "orsc1", "send-done",
+                "orsc2", "orsc3", "orsc4", "4", "<a>b</a>", "[object XMLHttpRequest]" },
+            FF24 = { "orsc1", "open-done", "send-done",
+                "orsc2", "orsc3", "orsc4", "4", "<a>b</a>", "[object XMLHttpRequest]" },
+            IE8 = { "orsc1", "open-done", "orsc1", "send-done", "orsc2", "orsc3", "orsc4" })
+    public void onload() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var xhr;\n"
+            + "        if (window.XMLHttpRequest) xhr = new XMLHttpRequest();\n"
+            + "        else xhr = new ActiveXObject('Microsoft.XMLHTTP');\n"
+
+            + "        xhr.onreadystatechange = function() { alert('orsc' + xhr.readyState); };\n"
+            + "        xhr.onload = function() { alert(xhr.readyState); alert(xhr.responseText); alert(this); }\n"
+
+            + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+            + "        alert('open-done');\n"
+
+            + "        xhr.send('');\n"
+            + "        alert('send-done');\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'></body>\n"
+            + "</html>";
+
+        final String xml = "<a>b</a>";
+
+        getMockWebConnection().setDefaultResponse(xml, "text/xml");
         loadPageWithAlerts2(html);
     }
 

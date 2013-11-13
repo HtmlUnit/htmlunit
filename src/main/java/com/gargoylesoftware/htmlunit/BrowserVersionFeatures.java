@@ -1505,6 +1505,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     XHR_ORIGIN_HEADER,
 
+    /** Indicates that the impl throws an exception when accessing the status/statusText
+     * property in unset state. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    XHR_STATUS_THROWS_EXCEPTION_WHEN_UNSET,
+
     /** Indicates that the onload handler is not triggered if completed (FF). */
     @BrowserFeature(@WebBrowser(FF))
     XHR_TRIGGER_ONLOAD_ON_COMPLETED,
