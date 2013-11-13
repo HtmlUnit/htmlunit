@@ -26,10 +26,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLO
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ORIGIN_HEADER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_STATUS_THROWS_EXCEPTION_WHEN_UNSET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_TRIGGER_ONLOAD_ON_COMPLETED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_SYNC_NOT_WRITEABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_SYNC_NOT_WRITEABLE_EXCEPTION;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -94,7 +93,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @see <a href="http://www.w3.org/TR/XMLHttpRequest/">W3C XMLHttpRequest</a>
  * @see <a href="http://developer.apple.com/internet/webcontent/xmlhttpreq.html">Safari documentation</a>
  */
-@JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 7), @WebBrowser(FF), @WebBrowser(CHROME) })
+@JsxClass
 public class XMLHttpRequest extends SimpleScriptable {
 
     private static final Log LOG = LogFactory.getLog(XMLHttpRequest.class);

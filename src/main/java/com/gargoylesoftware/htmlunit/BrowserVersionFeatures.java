@@ -486,7 +486,7 @@ public enum BrowserVersionFeatures {
     HTML5_TAGS,
 
     /** */
-    @BrowserFeature(@WebBrowser(value = IE, minVersion = 7))
+    @BrowserFeature(@WebBrowser(IE))
     HTMLABBREVIATED,
 
     /** Should {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseFontElement#isEndTagForbidden}. */
