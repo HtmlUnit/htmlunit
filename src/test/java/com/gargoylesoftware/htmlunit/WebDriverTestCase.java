@@ -93,7 +93,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  *   <li>ff17.bin: is the location of the FF17 binary, in Windows use double back-slashes</li>
  *   <li>ff24.bin: is the location of the FF24 binary, in Windows use double back-slashes</li>
  *   <li>chrome.bin: is the location of the ChromeDriver binary (see
- *   <a href="http://code.google.com/p/chromedriver/downloads/list">Chrome Driver downloads</a></li>
+ *   <a href="http://chromedriver.storage.googleapis.com/index.html">Chrome Driver downloads</a></li>
  * </ul>
  * </p>
  *
@@ -236,6 +236,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
             if (BrowserVersion.CHROME == getBrowserVersion()) {
                 if (CHROME_SERVICE_ == null) {
+                    if (CHROME_BIN_ == null) {
+                        throw new IllegalStateException("\"chrome.bin\" property is not specified!");
+                    }
                     CHROME_SERVICE_ = new ChromeDriverService.Builder()
                         .usingDriverExecutable(new File(CHROME_BIN_))
                         .usingAnyFreePort()
