@@ -19,7 +19,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_HAND
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_NOT_ALLOWED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_IS_A_FUNCTION;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_SYNCHRONOUSE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_ALLOW_INVALID_PORT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_SYNCHRONOUS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -2047,11 +2048,33 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxFunction
     public void postMessage(final String message, final String targetOrigin) {
+        if (!"*".equals(targetOrigin)) {
+            final URL currentURL = getWebWindow().getEnclosedPage().getUrl();
+            URL targetURL = null;
+            try {
+                targetURL = new URL(targetOrigin);
+            }
+            catch (final Exception e) {
+                Context.throwAsScriptRuntimeEx(
+                        new Exception("SyntaxError: An invalid or illegal string was specified."));
+            }
+
+            if (getPort(targetURL) != getPort(currentURL)
+                    && !getBrowserVersion().hasFeature(JS_WINDOW_POST_MESSAGE_ALLOW_INVALID_PORT)) {
+                return;
+            }
+            if (!targetURL.getHost().equals(currentURL.getHost())) {
+                return;
+            }
+            if (!targetURL.getProtocol().equals(currentURL.getProtocol())) {
+                return;
+            }
+        }
         final MessageEvent event = new MessageEvent(message);
         event.setParentScope(this);
         event.setPrototype(getPrototype(event.getClass()));
 
-        if (getBrowserVersion().hasFeature(JS_WINDOW_POST_MESSAGE_SYNCHRONOUSE)) {
+        if (getBrowserVersion().hasFeature(JS_WINDOW_POST_MESSAGE_SYNCHRONOUS)) {
             dispatchEvent(event);
             return;
         }
@@ -2063,6 +2086,19 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             }
         };
         getWebWindow().getWebClient().getJavaScriptEngine().addPostponedAction(action);
+    }
+
+    private static int getPort(final URL url) {
+        int port = url.getPort();
+        if (port == -1) {
+            if ("http".equals(url.getProtocol())) {
+                port = 80;
+            }
+            else {
+                port = 443;
+            }
+        }
+        return port;
     }
 }
 

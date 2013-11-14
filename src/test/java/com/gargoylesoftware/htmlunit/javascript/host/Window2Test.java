@@ -27,6 +27,8 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -1233,6 +1235,89 @@ public class Window2Test extends WebDriverTestCase {
             + "  top.postMessage('hello', '*');\n"
             + "  top.sync = false;\n"
             + "} catch(e) { alert('exception') }\n"
+            + "</script></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, iframe);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "received", "posted" },
+            CHROME = { "posted", "received" })
+    @BuggyWebDriver(FF)
+    @NotYetImplemented(FF)
+    public void postMessage_exactURL() throws Exception {
+        // FF: strange: the result is different than postMessageSyncOrAsync()
+        // if alert() is done in URL2 just after postMessage() we will have postMessage_exactURL() expectation
+        // if alert() is removed in URL2 after postMessage(), we will have postMessageSyncOrAsync() expectation
+        postMessage(URL_FIRST.toExternalForm());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("posted")
+    public void postMessage_otherHost() throws Exception {
+        postMessage("http://127.0.0.1:" + PORT + "/");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "posted",
+            IE = { "received", "posted" })
+    public void postMessage_otherPort() throws Exception {
+        postMessage("http://localhost:" + (PORT + 1) + "/");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void postMessage_invalidTargetOrigin() throws Exception {
+        postMessage("abcdefg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("posted")
+    public void postMessage_otherProtocol() throws Exception {
+        postMessage("https://localhost:" + PORT + "/");
+    }
+
+    private void postMessage(final String url) throws Exception {
+        final String html
+            = "<html>"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  function receiveMessage(event) {\n"
+            + "    alert('received');\n"
+            + "  }\n"
+            + "  if (window.addEventListener) {\n"
+            + "    window.addEventListener('message', receiveMessage, false);\n"
+            + "  } else {\n"
+            + "    window.attachEvent('onmessage', receiveMessage);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "  <iframe src='" + URL_SECOND + "'></iframe>\n"
+            + "</body></html>";
+
+        final String iframe = "<html><body><script>\n"
+            + "  try {\n"
+            + "    top.postMessage('hello', '" + url + "');\n"
+            + "    alert('posted');\n"
+            + "  } catch (e) {\n"
+            + "    alert('exception');\n"
+            + "  }\n"
             + "</script></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, iframe);

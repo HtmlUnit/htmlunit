@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.14" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                JavaScript: fix window.postMessage() to verify protocol, port and hostname.
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: XMLHttpRequest CORS handling fixed, some new tests added and implementation fixed.
             </action>

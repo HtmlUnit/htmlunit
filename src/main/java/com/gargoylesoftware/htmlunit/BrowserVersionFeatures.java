@@ -1193,9 +1193,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_WINDOW_IS_A_FUNCTION,
 
-    /** Window.postMessage is synchronouse. */
+    /** Window.postMessage is sent when the targetOrigin port is different than the current port. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_WINDOW_POST_MESSAGE_ALLOW_INVALID_PORT,
+
+    /** Window.postMessage is synchronous. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
-    JS_WINDOW_POST_MESSAGE_SYNCHRONOUSE,
+    JS_WINDOW_POST_MESSAGE_SYNCHRONOUS,
 
     /** Supports XML. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
