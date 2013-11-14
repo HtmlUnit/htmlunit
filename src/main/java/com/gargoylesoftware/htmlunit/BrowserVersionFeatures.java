@@ -209,11 +209,11 @@ public enum BrowserVersionFeatures {
     EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT,
 
     /** Does not trigger "onmousedown" event handler for the select options. */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 3.6f) })
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(CHROME) })
     EVENT_ONMOUSEDOWN_NOT_FOR_SELECT_OPTION,
 
     /** Does not trigger "onmousedown" event handler for the select options. */
-    @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 3.6f), @WebBrowser(IE), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(CHROME) })
     EVENT_ONMOUSEUP_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT,
 
     /** Does not trigger "onmouseup" event handler for the select options. */
@@ -469,7 +469,7 @@ public enum BrowserVersionFeatures {
     HTMLBASEFONT_END_TAG_FORBIDDEN,
 
     /** Supports basefont. */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 3.6f) })
+    @BrowserFeature(@WebBrowser(IE))
     HTMLBASEFONT_SUPPORTED,
 
     /** [object HTMLBGSoundElement]. */
@@ -605,7 +605,7 @@ public enum BrowserVersionFeatures {
     HTML_COLOR_EXPAND_SHORT_HEX,
 
     /** Replace color names by their 6-digit hex color code. */
-    @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(value = FF, maxVersion = 3.6f) })
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     HTML_COLOR_REPLACE_NAME_BY_HEX,
 
     /** Do not allow anything invalid in color, but restrict to valid values (names and hex digits) only. */
@@ -614,11 +614,11 @@ public enum BrowserVersionFeatures {
 
     /** Do not allow anything invalid in color, but restrict to valid values (names and hex digits) only.
      * Fill up to 6 digits if shorter. */
-    @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(value = FF, maxVersion = 3.6f) })
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     HTML_COLOR_RESTRICT_AND_FILL_UP,
 
     /** Convert the color (name and hex code) to lower case. */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 3.6f) })
+    @BrowserFeature(@WebBrowser(IE))
     HTML_COLOR_TO_LOWER,
 
     /** HTMLCommentElement instead of Comment. */
@@ -653,7 +653,7 @@ public enum BrowserVersionFeatures {
 
     /** Top scope constants can be assign (and are not... constants).
      */
-    @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 3.6f), @WebBrowser(value = IE, maxVersion = 9) })
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_ALLOW_CONST_ASSIGNMENT,
 
     /**
@@ -755,7 +755,7 @@ public enum BrowserVersionFeatures {
     JS_DOCTYPE_ENTITIES_EMPTY_STRING,
 
     /** Javascript doctyp.entities returns null (FF10). */
-    @BrowserFeature({@WebBrowser(value = FF, maxVersion = 3.6f), @WebBrowser(value = IE, minVersion = 10) })
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 10))
     JS_DOCTYPE_ENTITIES_NULL,
 
     /** Javascript doctyp.notations returns an empty string (IE). */
@@ -763,7 +763,7 @@ public enum BrowserVersionFeatures {
     JS_DOCTYPE_NOTATIONS_EMPTY_STRING,
 
     /** Javascript doctyp.notations returns null (FF10). */
-    @BrowserFeature({@WebBrowser(value = FF, maxVersion = 3.6f), @WebBrowser(value = IE, minVersion = 10) })
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 10))
     JS_DOCTYPE_NOTATIONS_NULL,
 
     /** Javascript document.appendChild is allowed (IE). */
@@ -869,8 +869,7 @@ public enum BrowserVersionFeatures {
     JS_FRAME_BODY_NULL_IF_NOT_LOADED,
 
     /** Indicates that the URL of parent window is used to resolve URLs in frames with javascript src. */
-    @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 6),
-        @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW,
 
     /** Indicates if Function.bind is available. */

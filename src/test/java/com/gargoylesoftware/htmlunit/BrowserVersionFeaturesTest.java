@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 import static org.junit.Assert.fail;
 
+import java.lang.reflect.Field;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,12 +25,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.javascript.configuration.BrowserFeature;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * Tests for {@link BrowserVersionFeatures}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class BrowserVersionFeaturesTest extends SimpleWebTestCase {
@@ -53,10 +57,11 @@ public class BrowserVersionFeaturesTest extends SimpleWebTestCase {
 
     /**
      * Test of alphabetical order.
+     * @throws Exception in case of problems
      */
     @Test
     @Browsers(NONE)
-    public void unusedFeatures() {
+    public void unusedFeatures() throws Exception {
         final List<BrowserVersion> browsers = new LinkedList<BrowserVersion>();
         browsers.add(BrowserVersion.FIREFOX_17);
         browsers.add(BrowserVersion.FIREFOX_24);
@@ -75,5 +80,38 @@ public class BrowserVersionFeaturesTest extends SimpleWebTestCase {
             }
             assertTrue("BrowserVersionFeatures.java: '" + feature.name() + "' in no longer in use.", inUse);
         }
+
+        for (final BrowserVersionFeatures feature : BrowserVersionFeatures.values()) {
+            final Field field = BrowserVersionFeatures.class.getField(feature.name());
+            final BrowserFeature browserFeature = field.getAnnotation(BrowserFeature.class);
+
+            if (browserFeature != null) {
+                for (final WebBrowser annotatedBrowser : browserFeature.value()) {
+                    boolean inUse = false;
+                    for (BrowserVersion supportedBrowser : browsers) {
+                        if (expectedBrowserName(supportedBrowser).equals(annotatedBrowser.value().name())
+                                && annotatedBrowser.minVersion() <= supportedBrowser.getBrowserVersionNumeric()
+                                && annotatedBrowser.maxVersion() >= supportedBrowser.getBrowserVersionNumeric()) {
+                            inUse = true;
+                            continue;
+                        }
+                    }
+                    assertTrue("BrowserVersionFeatures.java: Annotation '"
+                            + annotatedBrowser.toString() + "' of feature '"
+                            + feature.name() + "' in no longer in use.", inUse);
+                }
+            }
+        }
+    }
+
+    private String expectedBrowserName(final BrowserVersion browser) {
+        if (browser.isIE()) {
+            return "IE";
+        }
+        if (browser.isFirefox()) {
+            return "FF";
+        }
+
+        return "CHROME";
     }
 }
