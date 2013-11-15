@@ -2060,8 +2060,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                         new Exception("SyntaxError: An invalid or illegal string was specified."));
             }
 
-            if (getPort(targetURL) != getPort(currentURL)
-                    && !getBrowserVersion().hasFeature(JS_WINDOW_POST_MESSAGE_ALLOW_INVALID_PORT)) {
+            if (!getBrowserVersion().hasFeature(JS_WINDOW_POST_MESSAGE_ALLOW_INVALID_PORT)
+                    && getPort(targetURL) != getPort(currentURL)) {
                 return;
             }
             if (!targetURL.getHost().equals(currentURL.getHost())) {

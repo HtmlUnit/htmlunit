@@ -18,7 +18,7 @@
                 JavaScript: XMLHttpRequest CORS handling fixed, some new tests added and implementation fixed.
             </action>
             <action type="fix" dev="rbri">
-                JavaScript: Siplified/fixed implementation of the onReadyStateChange handler call.
+                JavaScript: Simplified/fixed implementation of the onReadyStateChange handler call.
             </action>
             <action type="fix" dev="rbri">
                 JavaScript: XMLHttpRequest status and statusText throws an exception in IE8 depending
