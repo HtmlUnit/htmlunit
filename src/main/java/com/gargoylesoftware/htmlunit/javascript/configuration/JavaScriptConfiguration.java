@@ -404,16 +404,6 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Returns the configuration that has all entries. No constraints are put on the returned entries.
-     *
-     * @return the instance containing all entries from the configuration file
-     */
-    static JavaScriptConfiguration getAllEntries() {
-        final JavaScriptConfiguration configuration = new JavaScriptConfiguration(null);
-        return configuration;
-    }
-
-    /**
      * Gets all the configurations.
      * @return the class configurations
      */
