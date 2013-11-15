@@ -22,7 +22,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_IS_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_ALLOW_INVALID_PORT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_CANCELABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_SYNCHRONOUS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -104,7 +103,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -1330,20 +1328,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             if (result instanceof Window) {
                 final WebWindow webWindow = ((Window) result).getWebWindow();
                 result = getProxy(webWindow);
-            }
-            else if (result instanceof HTMLUnknownElement && getBrowserVersion()
-                    .hasFeature(JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
-                final HtmlElement unknownElement = ((HTMLUnknownElement) result).getDomNodeOrDie();
-                if ("xml".equals(unknownElement.getNodeName())) {
-                    final XMLDocument document = ActiveXObject.buildXMLDocument(getWebWindow());
-                    document.setParentScope(this);
-                    final Iterator<HtmlElement> children = unknownElement.getHtmlElementDescendants().iterator();
-                    if (children.hasNext()) {
-                        final HtmlElement root = children.next();
-                        document.loadXML(root.asXml().trim());
-                    }
-                    result = document;
-                }
             }
         }
 
