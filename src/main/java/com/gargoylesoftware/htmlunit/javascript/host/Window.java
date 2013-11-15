@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_IS_A_FUNCTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_ALLOW_INVALID_PORT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_CANCELABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_SYNCHRONOUS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
@@ -2048,8 +2049,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxFunction
     public void postMessage(final String message, final String targetOrigin) {
+        final URL currentURL = getWebWindow().getEnclosedPage().getUrl();
         if (!"*".equals(targetOrigin)) {
-            final URL currentURL = getWebWindow().getEnclosedPage().getUrl();
             URL targetURL = null;
             try {
                 targetURL = new URL(targetOrigin);
@@ -2070,7 +2071,10 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                 return;
             }
         }
-        final MessageEvent event = new MessageEvent(message);
+        final MessageEvent event = new MessageEvent();
+        final String origin = currentURL.getProtocol() + "://" + currentURL.getHost() + ':' + currentURL.getPort();
+        final boolean cancelable = getBrowserVersion().hasFeature(JS_WINDOW_POST_MESSAGE_CANCELABLE);
+        event.initMessageEvent(Event.TYPE_MESSAGE, false, cancelable, message, origin, "", this);
         event.setParentScope(this);
         event.setPrototype(getPrototype(event.getClass()));
 

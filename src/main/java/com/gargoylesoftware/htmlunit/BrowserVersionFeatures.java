@@ -1196,6 +1196,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_WINDOW_POST_MESSAGE_ALLOW_INVALID_PORT,
 
+    /** Window.postMessage created cancelable event. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_WINDOW_POST_MESSAGE_CANCELABLE,
+
     /** Window.postMessage is synchronous. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_WINDOW_POST_MESSAGE_SYNCHRONOUS,

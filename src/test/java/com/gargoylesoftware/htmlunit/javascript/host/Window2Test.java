@@ -1171,8 +1171,17 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "type: message", "data: hello" })
+    @Alerts(FF = { "type: message", "bubbles: false", "cancelable: true", "data: hello",
+            "origin: ", "source: [object Window]", "lastEventId: " },
+            CHROME = { "type: message", "bubbles: false", "cancelable: false", "data: hello",
+                    "origin: ", "source: [object Window]", "lastEventId: " },
+            IE8 = { "type: message", "bubbles: undefined", "cancelable: undefined", "data: hello",
+            "origin: ", "source: [object]", "lastEventId: undefined" })
     public void postMessage() throws Exception {
+        final String[] expectedAlerts = getExpectedAlerts();
+        expectedAlerts[4] += "http://localhost:" + PORT;
+        setExpectedAlerts(expectedAlerts);
+
         final String html
             = "<html>"
             + "<head><title>foo</title></head>\n"
@@ -1180,10 +1189,12 @@ public class Window2Test extends WebDriverTestCase {
             + "<script>\n"
             + "  function receiveMessage(event) {\n"
             + "    alert('type: ' + event.type);\n"
+            + "    alert('bubbles: ' + event.bubbles);\n"
+            + "    alert('cancelable: ' + event.cancelable);\n"
             + "    alert('data: ' + event.data);\n"
-            // + "    alert('origin: ' + event.origin);\n"
-            // + "    alert('source: ' + event.source);\n"
-            // + "    alert('lastEventId: ' + event.lastEventId);\n"
+            + "    alert('origin: ' + event.origin);\n"
+            + "    alert('source: ' + event.source);\n"
+            + "    alert('lastEventId: ' + event.lastEventId);\n"
             + "  }\n"
 
             + "  if (window.addEventListener) {\n"

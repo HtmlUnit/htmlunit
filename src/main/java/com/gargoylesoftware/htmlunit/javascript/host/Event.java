@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_DOCUMENT_DESCENDANTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_ABORTED_BY_RETURN_VALUE_FALSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_KEY_CODE_UNDEFINED;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -569,7 +570,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return whether or not this event bubbles
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public boolean getBubbles() {
         return bubbles_;
     }
@@ -577,7 +578,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return whether or not this event can be canceled
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     public boolean getCancelable() {
         return cancelable_;
     }

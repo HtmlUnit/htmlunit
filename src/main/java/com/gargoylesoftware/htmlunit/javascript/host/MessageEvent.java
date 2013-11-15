@@ -14,8 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for MessageEvent.
@@ -33,6 +39,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 public class MessageEvent extends Event {
 
     private Object data_;
+    private String origin_;
+    private String lastEventId_;
+    private Window source_;
 
     /**
      * Default constructor used to build the prototype.
@@ -51,11 +60,64 @@ public class MessageEvent extends Event {
     }
 
     /**
+     * Initializes an event object.
+     * @param type the event type
+     * @param canBubble can the event bubble
+     * @param cancelable can the event be canceled
+     * @param data the message
+     * @param origin the scheme, hostname and port of the document that caused the event
+     * @param lastEventId the identifier of the last event
+     * @param source the window object that contains the document that caused the event
+     */
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
+    public void initMessageEvent(
+            final String type,
+            final boolean canBubble,
+            final boolean cancelable,
+            final String data,
+            final String origin,
+            final String lastEventId,
+            final Window source) {
+        initEvent(type, canBubble, cancelable);
+        data_ = data;
+        origin_ = origin;
+        lastEventId_ = lastEventId;
+        source_ = source;
+    }
+
+    /**
      * Retrieves the data contained.
      * @return the data contained
      */
     @JsxGetter
     public Object getData() {
         return data_;
+    }
+
+    /**
+     * Gets the URI of the document of origin.
+     * @return the origin
+     */
+    @JsxGetter
+    public String getOrigin() {
+        return origin_;
+    }
+
+    /**
+     * Retrieves the identifier of the last event.
+     * @return the identified of the last event
+     */
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    public String getLastEventId() {
+        return lastEventId_;
+    }
+
+    /**
+     * Retrieves the data contained.
+     * @return the data contained
+     */
+    @JsxGetter
+    public Window getSource() {
+        return source_;
     }
 }

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.14" date="???" description="Bugfixes">
+            <action type="add" dev="asashour">
+                JavaScript: add missing MessageEvent properties.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: fix window.postMessage() to verify protocol, port and hostname.
             </action>

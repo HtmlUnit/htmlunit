@@ -123,6 +123,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.KeyboardEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.MessageEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.MutationEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.NamespaceCollection;
@@ -236,6 +237,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         dom3EventMap.put("Event", Event.class);
         dom3EventMap.put("KeyboardEvent", KeyboardEvent.class);
         dom3EventMap.put("MouseEvent", MouseEvent.class);
+        dom3EventMap.put("MessageEvent", MessageEvent.class);
         dom3EventMap.put("MutationEvent", MutationEvent.class);
         dom3EventMap.put("UIEvent", UIEvent.class);
         SUPPORTED_DOM3_EVENT_TYPE_MAP = Collections.unmodifiableMap(dom3EventMap);
