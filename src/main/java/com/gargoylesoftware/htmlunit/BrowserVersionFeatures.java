@@ -140,22 +140,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     DOCTYPE_IS_COMMENT,
 
-    /** If document.implementation.hasFeature() supports "CSS 3.0". */
-    @BrowserFeature(@WebBrowser(value = FF, minVersion = 24))
-    DOMIMPLEMENTATION_CSS_3,
-
-    /** If document.implementation.hasFeature() supports "HTML 3.0". */
-    @BrowserFeature(@WebBrowser(value = FF, minVersion = 24))
-    DOMIMPLEMENTATION_HTML_3,
-
-    /** If document.implementation.hasFeature() supports only "HTML". */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
-    DOMIMPLEMENTATION_ONLY_HTML,
-
-    /** If document.implementation.hasFeature() supports "XML 3.0". */
-    @BrowserFeature(@WebBrowser(value = FF, minVersion = 24))
-    DOMIMPLEMENTATION_XML_3,
-
     /** IE removes all child text nodes, but FF preserves the first. */
     @BrowserFeature(@WebBrowser(IE))
     DOM_NORMALIZE_REMOVE_CHILDREN,
@@ -770,7 +754,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_DOCUMENT_APPEND_CHILD_SUPPORTED,
 
-    /** Document instead of HTMLDocument. */
+    /** Document instead of HTMLDocument or XMLDocument. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 10))
     JS_DOCUMENT_CLASS_NAME,
 
@@ -805,6 +789,62 @@ public enum BrowserVersionFeatures {
     /** Javascript property document.domain doesn't allow to set domain of about:blank. */
     @BrowserFeature(@WebBrowser(IE))
     JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK,
+
+    /** If document.implementation.hasFeature() supports 'Core 1.0'. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 10))
+    JS_DOMIMPLEMENTATION_FEATURE_CORE_1,
+
+    /** If document.implementation.hasFeature() supports 'CSS2 2.0'. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_DOMIMPLEMENTATION_FEATURE_CSS2_2,
+
+    /** If document.implementation.hasFeature() supports 'CSS 2.0'. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_DOMIMPLEMENTATION_FEATURE_CSS_2,
+
+    /** If document.implementation.hasFeature() supports 'CSS 3.0'. */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 24))
+    JS_DOMIMPLEMENTATION_FEATURE_CSS_3,
+
+    /** If document.implementation.hasFeature() supports 'Events 3.0'. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 10))
+    JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3,
+
+    /** If document.implementation.hasFeature() supports 'HTML 3.0'. */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 24))
+    JS_DOMIMPLEMENTATION_FEATURE_HTML_3,
+
+    /** If document.implementation.hasFeature() supports 'MutationEvents 2.0'. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 10))
+    JS_DOMIMPLEMENTATION_FEATURE_MUTATIONEVENTS_2,
+
+    /** If document.implementation.hasFeature() supports only 'HTML'. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
+    JS_DOMIMPLEMENTATION_FEATURE_ONLY_HTML,
+
+    /** If document.implementation.hasFeature() supports 'StyleSheets 2.0'. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_DOMIMPLEMENTATION_FEATURE_STYLESHEETS_2,
+
+    /** If document.implementation.hasFeature() supports 'Traversal 2.0'. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 10))
+    JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_2,
+
+    /** If document.implementation.hasFeature() supports 'UIEvents 2.0'. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_DOMIMPLEMENTATION_FEATURE_UIEVENTS_2,
+
+    /** If document.implementation.hasFeature() supports 'XHTML 1.0'. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 10))
+    JS_DOMIMPLEMENTATION_FEATURE_XHTML_1,
+
+    /** If document.implementation.hasFeature() supports 'XML 3.0'. */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 24))
+    JS_DOMIMPLEMENTATION_FEATURE_XML_3,
+
+    /** If document.implementation.hasFeature() supports 'XPath 3.0'. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_DOMIMPLEMENTATION_FEATURE_XPATH_3,
 
     /** Don't enumerate functions, see {@link net.sourceforge.htmlunit.corejs.javascript.ScriptableObject#DONTENUM}. */
     @BrowserFeature(@WebBrowser(IE))

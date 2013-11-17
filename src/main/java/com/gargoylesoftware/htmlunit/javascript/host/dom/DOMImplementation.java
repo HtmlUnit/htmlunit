@@ -14,10 +14,19 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOMIMPLEMENTATION_CSS_3;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOMIMPLEMENTATION_HTML_3;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOMIMPLEMENTATION_ONLY_HTML;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOMIMPLEMENTATION_XML_3;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CORE_1;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CSS2_2;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CSS_2;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_HTML_3;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_MUTATIONEVENTS_2;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_ONLY_HTML;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_STYLESHEETS_2;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_2;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_UIEVENTS_2;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_XHTML_1;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_XML_3;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_XPATH_3;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -50,36 +59,104 @@ public class DOMImplementation extends SimpleScriptable {
      */
     @JsxFunction
     public boolean hasFeature(final String feature, final String version) {
-        if (getBrowserVersion().hasFeature(DOMIMPLEMENTATION_ONLY_HTML)) {
+        if (getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_ONLY_HTML)) {
             if ("HTML".equals(feature) && "1.0".equals(version)) {
                 return true;
             }
         }
         else {
-            if ("HTML".equals(feature) && ("1.0".equals(version) || "2.0".equals(version))) {
+            if ("Core".equals(feature)) {
+                if ("1.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CORE_1);
+                }
+                else if ("2.0".equals(version)) {
+                    return true;
+                }
+            }
+            else if ("HTML".equals(feature)) {
+                if ("1.0".equals(version) || "2.0".equals(version)) {
+                    return true;
+                }
+                else if ("3.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_HTML_3);
+                }
+            }
+            else if ("XHTML".equals(feature)) {
+                if ("1.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_XHTML_1);
+                }
+                else if ("2.0".equals(version)) {
+                    return true;
+                }
+            }
+            else if ("XML".equals(feature)) {
+                if ("1.0".equals(version) || "2.0".equals(version)) {
+                    return true;
+                }
+                else if ("3.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_XML_3);
+                }
+            }
+            else if ("Views".equals(feature) && "2.0".equals(version)) {
                 return true;
             }
-            else if ("HTML".equals(feature) && "3.0".equals(version)) {
-                return getBrowserVersion().hasFeature(DOMIMPLEMENTATION_HTML_3);
+            else if ("StyleSheets".equals(feature) && "2.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_STYLESHEETS_2);
             }
-            else if ("XML".equals(feature) && ("1.0".equals(version) || "2.0".equals(version))) {
-                return true;
-            }
-            else if ("XML".equals(feature) && "3.0".equals(version)) {
-                return getBrowserVersion().hasFeature(DOMIMPLEMENTATION_XML_3);
+            else if ("CSS".equals(feature) && "2.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS_2);
             }
             else if ("CSS2".equals(feature) && "2.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS2_2);
+            }
+            else if ("Events".equals(feature)) {
+                if ("2.0".equals(version)) {
+                    return true;
+                }
+                else if ("3.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3);
+                }
+            }
+            else if ("UIEvents".equals(feature)) {
+                if ("2.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_UIEVENTS_2);
+                }
+                else if ("3.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3);
+                }
+            }
+            else if ("MouseEvents".equals(feature)) {
+                if ("2.0".equals(version)) {
+                    return true;
+                }
+                else if ("3.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3);
+                }
+            }
+            else if ("MutationEvents".equals(feature)) {
+                if ("2.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_MUTATIONEVENTS_2);
+                }
+                else if ("3.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3);
+                }
+            }
+            else if ("HTMLEvents".equals(feature)) {
+                if ("2.0".equals(version)) {
+                    return true;
+                }
+                else if ("3.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3);
+                }
+            }
+            else if ("Range".equals(feature) && "2.0".equals(version)) {
                 return true;
             }
-            else if ("CSS2".equals(feature) && ("1.0".equals(version) || "3.0".equals(version))) {
-                return getBrowserVersion().hasFeature(DOMIMPLEMENTATION_CSS_3);
-            }
-            else if ("CSS3".equals(feature)
-                    && ("1.0".equals(version) || "2.0".equals(version) || "3.0".equals(version))) {
-                return getBrowserVersion().hasFeature(DOMIMPLEMENTATION_CSS_3);
+            else if ("Traversal".equals(feature) && "2.0".equals(version)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_2);
             }
             else if ("XPath".equals(feature) && "3.0".equals(version)) {
-                return true;
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_XPATH_3);
             }
             else if ("http://www.w3.org/TR/SVG11/feature#BasicStructure".equals(feature)
                     && ("1.0".equals(version) || "1.1".equals(version))) {
@@ -111,7 +188,7 @@ public class DOMImplementation extends SimpleScriptable {
         document.setPrototype(getPrototype(document.getClass()));
         if (qualifiedName != null && !qualifiedName.isEmpty()) {
             final XmlPage page = document.getDomNodeOrDie();
-            page.appendChild(page.createXmlElementNS(namespaceURI, qualifiedName));
+            page.appendChild(page.createXmlElementNS("".equals(namespaceURI) ? null : namespaceURI, qualifiedName));
         }
         return document;
     }
