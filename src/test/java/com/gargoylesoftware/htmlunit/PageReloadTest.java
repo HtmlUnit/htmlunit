@@ -17,15 +17,7 @@ package com.gargoylesoftware.htmlunit;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
-import java.io.IOException;
-import java.io.Writer;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.Servlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.net.URL;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -51,6 +43,7 @@ public class PageReloadTest extends WebDriverTestCase {
     private static final String PATHNAME = "/reload.html";
     private static final String PATHNAME2 = "/reload2.html";
     private static final String RELOAD_URL = "http://localhost:" + PORT + PATHNAME;
+    private static final String RELOAD2_URL = "http://localhost:" + PORT + PATHNAME2;
     private static final String RELOAD_URL_ANCHOR = RELOAD_URL + ANCHOR;
 
     /**
@@ -373,8 +366,7 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            IE10 = "1")
+    @Alerts(DEFAULT = "0", IE10 = "1")
     public void submitGet_url_emptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "submitGetEmptyHash", Integer.parseInt(getExpectedAlerts()[0]), PATHNAME, "");
     }
@@ -383,36 +375,20 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Browsers(FF)
-    public void submitGet_url_hash_ff() throws Exception {
-        openUrlAndClickById(RELOAD_URL, "submitGetHash", 0, PATHNAME, ANCHOR);
+    @Alerts(DEFAULT = { "0", ANCHOR }, IE = {"1", "" })
+    public void submitGet_url_hash() throws Exception {
+        openUrlAndClickById(RELOAD_URL, "submitGetHash", Integer.parseInt(getExpectedAlerts()[0]),
+                PATHNAME, getExpectedAlerts()[1]);
     }
 
     /**
      * @exception Exception If the test fails
      */
     @Test
-    @Browsers(IE)
-    public void submitGet_url_hash_ie() throws Exception {
-        openUrlAndClickById(RELOAD_URL, "submitGetHash", 1, PATHNAME, "");
-    }
-
-    /**
-     * @exception Exception If the test fails
-     */
-    @Test
-    @Browsers(FF)
-    public void submitGet_url_differentHash_ff() throws Exception {
-        openUrlAndClickById(RELOAD_URL, "submitGetDifferentHash", 0, PATHNAME, ANCHOR2);
-    }
-
-    /**
-     * @exception Exception If the test fails
-     */
-    @Test
-    @Browsers(IE)
-    public void submitGet_url_differentHash_ie() throws Exception {
-        openUrlAndClickById(RELOAD_URL, "submitGetDifferentHash", 1, PATHNAME, "");
+    @Alerts(DEFAULT = { "0", ANCHOR2 }, IE = {"1", "" })
+    public void submitGet_url_differentHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL, "submitGetDifferentHash", Integer.parseInt(getExpectedAlerts()[0]),
+                PATHNAME, getExpectedAlerts()[1]);
     }
 
     /**
@@ -427,18 +403,10 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Browsers(FF)
-    public void submitGet_url_urlHash_ff() throws Exception {
-        openUrlAndClickById(RELOAD_URL, "submitGetUrlHash", 0, PATHNAME, ANCHOR);
-    }
-
-    /**
-     * @exception Exception If the test fails
-     */
-    @Test
-    @Browsers(IE)
-    public void submitGet_url_urlHash_ie() throws Exception {
-        openUrlAndClickById(RELOAD_URL, "submitGetUrlHash", 1, PATHNAME, "");
+    @Alerts(DEFAULT = { "0", ANCHOR }, IE = {"1", "" })
+    public void submitGet_url_urlHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL, "submitGetUrlHash", Integer.parseInt(getExpectedAlerts()[0]),
+                PATHNAME, getExpectedAlerts()[1]);
     }
 
     /**
@@ -453,90 +421,50 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Browsers(FF)
-    public void submitGet_url_differentUrlHash_ff() throws Exception {
-        openUrlAndClickById(RELOAD_URL, "submitGetDifferentUrlHash", 1, PATHNAME2, ANCHOR);
+    @Alerts(DEFAULT = ANCHOR, IE = "")
+    public void submitGet_url_differentUrlHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL, "submitGetDifferentUrlHash", 1,
+                PATHNAME2, getExpectedAlerts()[0]);
     }
 
     /**
      * @exception Exception If the test fails
      */
     @Test
-    @Browsers(IE)
-    public void submitGet_url_differentUrlHash_ie() throws Exception {
-        openUrlAndClickById(RELOAD_URL, "submitGetDifferentUrlHash", 1, PATHNAME2, "");
+    @Alerts(DEFAULT = ANCHOR2, IE = "")
+    public void submitGet_url_differentUrlDifferentHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL, "submitGetDifferentUrlDifferentHash", 1, PATHNAME2, getExpectedAlerts()[0]);
     }
 
     /**
      * @exception Exception If the test fails
      */
     @Test
-    @Browsers(FF)
-    public void submitGet_url_differentUrlDifferentHash_ff() throws Exception {
-        openUrlAndClickById(RELOAD_URL, "submitGetDifferentUrlDifferentHash", 1, PATHNAME2, ANCHOR2);
+    @Alerts(DEFAULT = { "0", ANCHOR }, IE = {"1", "" })
+    public void submitGet_urlHash_emptyUrl() throws Exception {
+        openUrlAndClickById("http://localhost:" + PORT + "/reload.html#anchor", "submitGetEmpty",
+                Integer.parseInt(getExpectedAlerts()[0]),
+                PATHNAME, getExpectedAlerts()[1]);
     }
 
     /**
      * @exception Exception If the test fails
      */
     @Test
-    @Browsers(IE)
-    public void submitGet_url_differentUrlDifferentHash_ie() throws Exception {
-        openUrlAndClickById(RELOAD_URL, "submitGetDifferentUrlDifferentHash", 1, PATHNAME2, "");
+    @Alerts(DEFAULT = { "0", ANCHOR }, IE = {"1", "" })
+    public void submitGet_urlHash_hash() throws Exception {
+        openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetHash", Integer.parseInt(getExpectedAlerts()[0]),
+                PATHNAME, getExpectedAlerts()[1]);
     }
 
     /**
      * @exception Exception If the test fails
      */
     @Test
-    @Browsers(FF)
-    public void submitGet_urlHash_emptyUrl_ff() throws Exception {
-        openUrlAndClickById("http://localhost:" + PORT + "/reload.html#anchor", "submitGetEmpty", 0, PATHNAME, ANCHOR);
-    }
-
-    /**
-     * @exception Exception If the test fails
-     */
-    @Test
-    @Browsers(IE)
-    public void submitGet_urlHash_emptyUrl_ie() throws Exception {
-        openUrlAndClickById("http://localhost:" + PORT + "/reload.html#anchor", "submitGetEmpty", 1, PATHNAME, "");
-    }
-
-    /**
-     * @exception Exception If the test fails
-     */
-    @Test
-    @Browsers(FF)
-    public void submitGet_urlHash_hash_ff() throws Exception {
-        openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetHash", 0, PATHNAME, ANCHOR);
-    }
-
-    /**
-     * @exception Exception If the test fails
-     */
-    @Test
-    @Browsers(IE)
-    public void submitGet_urlHash_hash_ie() throws Exception {
-        openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetHash", 1, PATHNAME, "");
-    }
-
-    /**
-     * @exception Exception If the test fails
-     */
-    @Test
-    @Browsers(FF)
-    public void submitGet_urlHash_differentHash_ff() throws Exception {
-        openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetDifferentHash", 0, PATHNAME, ANCHOR2);
-    }
-
-    /**
-     * @exception Exception If the test fails
-     */
-    @Test
-    @Browsers(IE)
-    public void submitGet_urlHash_differentHash_ie() throws Exception {
-        openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetDifferentHash", 1, PATHNAME, "");
+    @Alerts(DEFAULT = { "0", ANCHOR2 }, IE = {"1", "" })
+    public void submitGet_urlHash_differentHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetDifferentHash", Integer.parseInt(getExpectedAlerts()[0]),
+                PATHNAME, getExpectedAlerts()[1]);
     }
 
     /**
@@ -551,18 +479,10 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Browsers(FF)
-    public void submitGet_urlHash_urlHash_ff() throws Exception {
-        openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetUrlHash", 0, PATHNAME, ANCHOR);
-    }
-
-    /**
-     * @exception Exception If the test fails
-     */
-    @Test
-    @Browsers(IE)
-    public void submitGet_urlHash_urlHash_ie() throws Exception {
-        openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetUrlHash", 1, PATHNAME, "");
+    @Alerts(DEFAULT = { "0", ANCHOR }, IE = {"1", "" })
+    public void submitGet_urlHash_urlHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetUrlHash", Integer.parseInt(getExpectedAlerts()[0]),
+                PATHNAME, getExpectedAlerts()[1]);
     }
 
     /**
@@ -577,36 +497,19 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Browsers(FF)
-    public void submitGet_urlHash_differentUrlHash_ff() throws Exception {
-        openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetDifferentUrlHash", 1, PATHNAME2, ANCHOR);
+    @Alerts(DEFAULT = ANCHOR, IE = "")
+    public void submitGet_urlHash_differentUrlHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetDifferentUrlHash", 1, PATHNAME2, getExpectedAlerts()[0]);
     }
 
     /**
      * @exception Exception If the test fails
      */
     @Test
-    @Browsers(IE)
-    public void submitGet_urlHash_differentUrlHash_ie() throws Exception {
-        openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetDifferentUrlHash", 1, PATHNAME2, "");
-    }
-
-    /**
-     * @exception Exception If the test fails
-     */
-    @Test
-    @Browsers(FF)
-    public void submitGet_urlHash_differentUrlDifferentHash_ff() throws Exception {
-        openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetDifferentUrlDifferentHash", 1, PATHNAME2, ANCHOR2);
-    }
-
-    /**
-     * @exception Exception If the test fails
-     */
-    @Test
-    @Browsers(IE)
-    public void submitGet_urlHash_differentUrlDifferentHash_ie() throws Exception {
-        openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetDifferentUrlDifferentHash", 1, PATHNAME2, "");
+    @Alerts(DEFAULT = ANCHOR2, IE = "")
+    public void submitGet_urlHash_differentUrlDifferentHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetDifferentUrlDifferentHash", 1,
+                PATHNAME2, getExpectedAlerts()[0]);
     }
 
     /**
@@ -779,18 +682,10 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Browsers(FF)
-    public void jsSubmitGet_url_hash_ff() throws Exception {
-        openUrlAndClickById(RELOAD_URL, "jsSubmitGetHash", 0, PATHNAME, ANCHOR);
-    }
-
-    /**
-     * @exception Exception If the test fails
-     */
-    @Test
-    @Browsers(IE)
-    public void jsSubmitGet_url_hash_ie() throws Exception {
-        openUrlAndClickById(RELOAD_URL, "jsSubmitGetHash", 1, PATHNAME, "");
+    @Alerts(DEFAULT = { "0", ANCHOR }, IE = { "1", "" })
+    public void jsSubmitGet_url_hash() throws Exception {
+        openUrlAndClickById(RELOAD_URL, "jsSubmitGetHash", Integer.parseInt(getExpectedAlerts()[0]),
+                    PATHNAME, getExpectedAlerts()[1]);
     }
 
     /**
@@ -1162,53 +1057,39 @@ public class PageReloadTest extends WebDriverTestCase {
             final String expectedPathname,
             final String expectedHash) throws Exception {
 
-        final Map<String, Class<? extends Servlet>> map = new HashMap<String, Class<? extends Servlet>>();
-        map.put("/", ReloadServlet.class);
-        map.put("/reload.html", ReloadServlet.class);
-        map.put("/reload2.html", ReloadServlet.class);
-        startWebServer(".", null, map);
+        final String html = testPage();
 
-        final WebDriver driver = getWebDriver();
-        driver.get(url);
-        final int startCounter = Integer.parseInt(driver.findElement(By.id("counter")).getText());
+        getMockWebConnection().setDefaultResponse(testResponse());
+        getMockWebConnection().setResponse(new URL(RELOAD_URL), html);
+        getMockWebConnection().setResponse(new URL(RELOAD2_URL), html);
+
+        final WebDriver driver = loadPage2(html, new URL(url));
+        Assert.assertEquals(getMockWebConnection().getRequestCount(), 1);
+
         // click
         driver.findElement(By.id(id)).click();
+        Assert.assertEquals(getMockWebConnection().getRequestCount(), counterChange + 1);
 
-        final int reloadCounter = Integer.parseInt(driver.findElement(By.id("counter")).getText());
         // check location visible to javascript
         driver.findElement(By.id("updateLocationInfo")).click();
         final String hash = driver.findElement(By.id("locationHash")).getText();
         final String pathname = driver.findElement(By.id("locationPathname")).getText();
 
-        Assert.assertEquals(startCounter + counterChange, reloadCounter);
         Assert.assertEquals(expectedPathname, pathname);
         Assert.assertEquals(expectedHash, hash);
     }
 
-    /**
-     * Refresh servlet.
-     */
-    public static class ReloadServlet extends HttpServlet {
-
-        private static int COUNTER_;
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
-            final Writer writer = resp.getWriter();
-            resp.setContentType("text/html");
-            final String response = "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n"
+    private String testPage() {
+        return "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n"
                 + "<html>\n"
                 + "  <head>\n"
+                + "    <META HTTP-EQUIV='Pragma' CONTENT='text/html;charset=UTF-8'>\n"
                 + "    <META HTTP-EQUIV='Pragma' CONTENT='no-cache'>\n"
                 + "    <META HTTP-EQUIV='CACHE-CONTROL' CONTENT='NO-CACHE'>\n"
                 + "  </head>\n"
 
                 + "<body>\n"
 
-                + "  <div id='counter'>" + COUNTER_++ + "</div>\n"
                 + "  <div id='locationPathname'></div>\n"
                 + "  <div id='locationHash'></div>\n"
                 + "  <input type='button' id='updateLocationInfo' value='updateLocationInfo' "
@@ -1336,20 +1217,27 @@ public class PageReloadTest extends WebDriverTestCase {
                 + " value='jsSubmitPostDifferentUrlDifferentHash' onclick='submit();'>\n"
                 + "  </form>\n"
 
-                + "  <a href='" + ANCHOR + "'></a>\n"
+                + "</body>\n"
+                + "</html>";
+    }
+
+    private String testResponse() {
+        return "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n"
+                + "<html>\n"
+                + "  <head>\n"
+                + "    <META HTTP-EQUIV='Pragma' CONTENT='no-cache'>\n"
+                + "    <META HTTP-EQUIV='CACHE-CONTROL' CONTENT='NO-CACHE'>\n"
+                + "  </head>\n"
+
+                + "<body>\n"
+
+                + "  <div id='locationPathname'></div>\n"
+                + "  <div id='locationHash'></div>\n"
+                + "  <input type='button' id='updateLocationInfo' value='updateLocationInfo' "
+                + "onclick='document.getElementById(\"locationHash\").innerHTML=location.hash;"
+                + "document.getElementById(\"locationPathname\").innerHTML=location.pathname;'>\n"
 
                 + "</body>\n"
                 + "</html>";
-            writer.write(response);
-            writer.close();
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
-            doGet(req, resp);
-        }
     }
 }
