@@ -304,9 +304,16 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @Alerts(DEFAULT = "", IE = ANCHOR)
     public void javascript_urlHash_differentUrl() throws Exception {
-        openUrlAndClickById(RELOAD_URL_ANCHOR, "javascriptDifferentUrl", 1, PATHNAME2, getExpectedAlerts()[0]);
+        openUrlAndClickById(RELOAD_URL_ANCHOR, "javascriptDifferentUrl", 1, PATHNAME2, "");
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    public void javascript_urlHash_differentUrlHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL_ANCHOR, "javascriptDifferentUrlHash", 1, PATHNAME2, ANCHOR);
     }
 
     /**
