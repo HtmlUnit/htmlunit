@@ -106,7 +106,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
     }
 
     /**
-     * Tests that all classes in *.javascript.* which have {@link JsxClass} annotation,
+     * Tests that all classes in *.javascript.* which have {@link JsxClasses}/{@link JsxClass} annotation,
      * are included in {@link JavaScriptConfiguration#CLASSES_}.
      */
     @Test
@@ -123,7 +123,10 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
                 catch (final Throwable t) {
                     continue;
                 }
-                if (klass.getAnnotation(JsxClass.class) != null) {
+                if (klass.getAnnotation(JsxClasses.class) != null) {
+                    foundJsxClasses.add(className);
+                }
+                else if (klass.getAnnotation(JsxClass.class) != null) {
                     foundJsxClasses.add(className);
                 }
             }
