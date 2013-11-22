@@ -191,15 +191,10 @@ public class HtmlForm extends HtmlElement {
                     url = UrlUtils.getUrlWithNewRef(url, null);
                 }
             }
-            else if (actionUrl.startsWith("?")) {
+            else if (actionUrl.startsWith("?") || actionUrl.startsWith("#")) {
                 String urlString = htmlPage.getUrl().toExternalForm();
-                if (urlString.indexOf('?') != -1) {
-                    urlString = urlString.substring(0, urlString.indexOf('?'));
-                }
-                else if (urlString.indexOf('#') != -1
-                        && browser.hasFeature(FORM_SUBMISSION_URL_WITHOUT_HASH)) {
-                    urlString = urlString.substring(0, urlString.indexOf('#'));
-                }
+                urlString = StringUtils.substringBefore(urlString, "#");
+                urlString = StringUtils.substringBefore(urlString, "?");
                 url = new URL(urlString + actionUrl);
             }
             else {

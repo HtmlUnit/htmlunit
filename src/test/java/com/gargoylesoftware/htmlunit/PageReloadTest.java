@@ -518,7 +518,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = ANCHOR, IE = "")
-    @NotYetImplemented(Browser.FF)
     public void submitGetV_urlHash_hash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetHashV", 1, PATHNAME, getExpectedAlerts()[0]);
     }
@@ -538,7 +537,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = ANCHOR2, IE = "")
-    @NotYetImplemented(Browser.FF)
     public void submitGetV_urlHash_differentHash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetDifferentHashV", 1,
                 PATHNAME, getExpectedAlerts()[0]);
@@ -1110,7 +1108,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = ANCHOR, IE = "")
-    @NotYetImplemented(Browser.FF)
     public void jsSubmitGetV_urlHash_hash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "jsSubmitGetHashV", 1, PATHNAME, getExpectedAlerts()[0]);
     }
@@ -1130,7 +1127,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = ANCHOR2, IE = "")
-    @NotYetImplemented(Browser.FF)
     public void jsSubmitGetV_urlHash_differentHash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "jsSubmitGetDifferentHashV",
                 1, PATHNAME, getExpectedAlerts()[0]);
