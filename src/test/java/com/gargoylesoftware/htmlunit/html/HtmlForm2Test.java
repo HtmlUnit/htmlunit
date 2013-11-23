@@ -19,6 +19,7 @@ import java.net.URL;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.By.ByTagName;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
@@ -172,4 +173,73 @@ public class HtmlForm2Test extends WebDriverTestCase {
         assertEquals(url.toExternalForm() + linkSuffix, driver.getCurrentUrl());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void base() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "  <base href='" + URL_SECOND + "'>\n"
+            + "</head><body>\n"
+            + "<form action='two.html'>\n"
+            + "  <input type='submit'>\n"
+            + "</form></body></html>";
+
+        getMockWebConnection().setDefaultResponse("<html><head></head><body>foo</body></html>");
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(new ByTagName("input")).click();
+
+        final URL requestedUrl = getMockWebConnection().getLastWebRequest().getUrl();
+        final String expectedUrl = URL_SECOND.toExternalForm() + "two.html";
+        assertEquals(expectedUrl, requestedUrl);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void emptyActionWithBase() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "  <base href='" + URL_SECOND + "'>\n"
+            + "</head><body>\n"
+            + "<form>\n"
+            + "  <input type='submit'>\n"
+            + "</form></body></html>";
+
+        getMockWebConnection().setDefaultResponse("<html><head></head><body>foo</body></html>");
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(new ByTagName("input")).click();
+
+        final URL requestedUrl = getMockWebConnection().getLastWebRequest().getUrl();
+        final String expectedUrl = getDefaultUrl().toExternalForm();
+        assertEquals(expectedUrl, requestedUrl);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void emptyActionWithBase2() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "  <base href='" + URL_SECOND + "'>\n"
+            + "</head><body>\n"
+            + "<form>\n"
+            + "  <input name='myName' value='myValue'>\n"
+            + "  <input type='submit'>\n"
+            + "</form></body></html>";
+
+        getMockWebConnection().setDefaultResponse("<html><head></head><body>foo</body></html>");
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(new ByTagName("input")).click();
+
+        final URL requestedUrl = getMockWebConnection().getLastWebRequest().getUrl();
+        final String expectedUrl = getDefaultUrl().toExternalForm();
+        assertEquals(expectedUrl, requestedUrl);
+    }
 }

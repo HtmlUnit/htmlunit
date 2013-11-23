@@ -1428,62 +1428,6 @@ public class HtmlFormTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void base() throws Exception {
-        final String html
-            = "<html><head>\n"
-            + "  <base href='" + URL_SECOND + "'>\n"
-            + "</head><body>\n"
-            + "<form action='two.html'>\n"
-            + "  <input type='submit'>\n"
-            + "</form></body></html>";
-        HtmlPage page = loadPage(html);
-        page = page.<HtmlSubmitInput>getFirstByXPath("//input").click();
-
-        final String expectedUrl = URL_SECOND.toExternalForm() + "two.html";
-        assertEquals(expectedUrl, page.getUrl());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void emptyActionWithBase() throws Exception {
-        final String html
-            = "<html><head>\n"
-            + "  <base href='" + URL_SECOND + "'>\n"
-            + "</head><body>\n"
-            + "<form>\n"
-            + "  <input type='submit'>\n"
-            + "</form></body></html>";
-        HtmlPage page = loadPage(html);
-        page = page.<HtmlSubmitInput>getFirstByXPath("//input").click();
-
-        final String expectedUrl = getDefaultUrl().toExternalForm();
-        assertEquals(expectedUrl, page.getUrl());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void emptyActionWithBase2() throws Exception {
-        final String html
-            = "<html><head>\n"
-            + "  <base href='" + URL_SECOND + "'>\n"
-            + "</head><body>\n"
-            + "<form>\n"
-            + "  <input name='myName' value='myValue'>\n"
-            + "  <input type='submit'>\n"
-            + "</form></body></html>";
-        HtmlPage page = loadPage(html);
-        page = page.<HtmlSubmitInput>getFirstByXPath("//input[2]").click();
-        assertEquals(getDefaultUrl() + "?myName=myValue", page.getUrl());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     public void urlAfterSubmit2() throws Exception {
         final URL url = new URL(getDefaultUrl(), "test.html");
         urlAfterSubmit(url, "post", "?hi", url + "?hi");
