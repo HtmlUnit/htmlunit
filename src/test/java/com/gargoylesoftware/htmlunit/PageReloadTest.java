@@ -497,7 +497,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = ANCHOR, IE = "")
-    @NotYetImplemented(Browser.FF)
     public void submitGetV_urlHash_emptyUrl() throws Exception {
         openUrlAndClickById("http://localhost:" + PORT + "/reload.html#anchor", "submitGetEmptyV",
                 1, PATHNAME, getExpectedAlerts()[0]);
@@ -1087,7 +1086,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = ANCHOR, IE = "")
-    @NotYetImplemented(Browser.FF)
     public void jsSubmitGetV_urlHash_emptyUrl() throws Exception {
         openUrlAndClickById("http://localhost:" + PORT + "/reload.html#anchor",
                "jsSubmitGetEmptyV", 1, PATHNAME, getExpectedAlerts()[0]);

@@ -165,40 +165,45 @@ public class HtmlForm extends HtmlElement {
 
         final BrowserVersion browser = getPage().getWebClient().getBrowserVersion();
         String actionUrl = getActionAttribute();
+        String anchor = "";
+        String queryFromFields = "";
         if (HttpMethod.GET == method) {
-            final String anchor = StringUtils.substringAfter(actionUrl, "#");
+            anchor = StringUtils.substringAfter(actionUrl, "#");
             final String enc = getPage().getPageEncoding();
-            final String queryFromFields =
+            queryFromFields =
                 URLEncodedUtils.format(Arrays.asList(NameValuePair.toHttpClient(parameters)), enc);
 
             // action may already contain some query parameters: they have to be removed
             actionUrl = StringUtils.substringBefore(actionUrl, "#");
             actionUrl = StringUtils.substringBefore(actionUrl, "?");
-            if (queryFromFields.length() > 0) {
-                actionUrl += "?" + queryFromFields;
-            }
-            if (anchor.length() > 0
-                    && !browser.hasFeature(FORM_SUBMISSION_URL_WITHOUT_HASH)) {
-                actionUrl += "#" + anchor;
-            }
             parameters.clear(); // parameters have been added to query
         }
         URL url;
         try {
             if (actionUrl.isEmpty()) {
-                url = htmlPage.getUrl();
-                if (browser.hasFeature(FORM_SUBMISSION_URL_WITHOUT_HASH)) {
-                    url = UrlUtils.getUrlWithNewRef(url, null);
-                }
-            }
-            else if (actionUrl.startsWith("?") || actionUrl.startsWith("#")) {
-                String urlString = htmlPage.getUrl().toExternalForm();
-                urlString = StringUtils.substringBefore(urlString, "#");
-                urlString = StringUtils.substringBefore(urlString, "?");
-                url = new URL(urlString + actionUrl);
+                url = WebClient.expandUrl(htmlPage.getUrl(), actionUrl);
             }
             else {
                 url = htmlPage.getFullyQualifiedUrl(actionUrl);
+            }
+
+            if (queryFromFields.length() > 0) {
+                url = UrlUtils.getUrlWithNewQuery(url, queryFromFields);
+            }
+
+            if (HttpMethod.GET == method && browser.hasFeature(FORM_SUBMISSION_URL_WITHOUT_HASH)
+                    && WebClient.URL_ABOUT_BLANK != url) {
+                url = UrlUtils.getUrlWithNewRef(url, null);
+            }
+            else if (HttpMethod.POST == method
+                    && browser.hasFeature(FORM_SUBMISSION_URL_WITHOUT_HASH)
+                    && WebClient.URL_ABOUT_BLANK != url
+                    && StringUtils.isEmpty(actionUrl)) {
+                url = UrlUtils.getUrlWithNewRef(url, null);
+            }
+            else if (anchor.length() > 0
+                    && WebClient.URL_ABOUT_BLANK != url) {
+                url = UrlUtils.getUrlWithNewRef(url, anchor);
             }
         }
         catch (final MalformedURLException e) {
