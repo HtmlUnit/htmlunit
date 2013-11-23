@@ -225,7 +225,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         assertEquals(selectSpanS, sheet.selects(selector, page.getHtmlElementById("s")));
     }
 
-/**
+    /**
      * Test for 3325124.
      * @throws Exception if the test fails
      */

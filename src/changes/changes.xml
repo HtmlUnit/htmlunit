@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.14" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                WebClient: .closeAllWindows() to delete all temporary files.
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: add missing MessageEvent properties.
             </action>

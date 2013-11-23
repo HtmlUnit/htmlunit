@@ -40,6 +40,7 @@ import java.util.Stack;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.xerces.parsers.AbstractSAXParser;
 import org.apache.xerces.util.DefaultErrorHandler;
@@ -248,6 +249,7 @@ public final class HTMLParser {
             throw new RuntimeException("Failed parsing content from " + url, origin);
         }
         finally {
+            IOUtils.closeQuietly(content);
             page.registerParsingEnd();
         }
 

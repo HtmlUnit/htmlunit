@@ -322,6 +322,7 @@ public class CSSStyleSheet extends SimpleScriptable {
                 source.setEncoding(response.getContentCharset());
                 sheet = new CSSStyleSheet(element, source, uri);
                 cache.cacheIfPossible(request, response, sheet.getWrappedSheet());
+                response.cleanUp();
             }
         }
         catch (final FailingHttpStatusCodeException e) {

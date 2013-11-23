@@ -1143,6 +1143,7 @@ public class HtmlPage extends SgmlPage {
         }
 
         final String scriptCode = response.getContentAsString(scriptEncoding);
+        response.cleanUp();
         if (null != scriptCode) {
             final JavaScriptEngine javaScriptEngine = client.getJavaScriptEngine();
             final Script script = javaScriptEngine.compile(this, scriptCode, url.toExternalForm(), 1);

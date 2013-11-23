@@ -14,8 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.Writer;
+import java.lang.reflect.Field;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,8 +32,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.HttpWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
+import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
 
 /**
  * Tests for {@link HtmlPage}.
@@ -107,5 +115,100 @@ public class HtmlPage4Test extends WebServerTestCase {
             }
             resp.getWriter().write(builder.toString());
         }
+    }
+
+    /**
+     * @exception Exception if an error occurs
+     */
+    @Test
+    @Alerts("hello")
+    public void bigJavaScript() throws Exception {
+        final StringBuilder html
+            = new StringBuilder("<html><head>\n"
+                    + "<script src='two.js'></script>\n"
+                    + "<link rel='stylesheet' type='text/css' href='three.css'/>\n"
+                    + "</head>\n"
+                    + "<body onload='test()'></body></html>");
+
+        final StringBuilder javaScript = new StringBuilder("function test() {\n"
+                + "alert('hello');\n"
+                + "}");
+
+        final StringBuilder css = new StringBuilder("body {color: blue}");
+
+        final Field field = HttpWebConnection.class.getDeclaredField("MAX_IN_MEMORY");
+        field.setAccessible(true);
+        final long maxInMemory = (Long) field.get(null);
+
+        for (int i = 0; i < maxInMemory; i++) {
+            html.append(' ');
+            javaScript.append(' ');
+            css.append(' ');
+        }
+
+        BigJavaScriptServlet1.CONTENT_ = html.toString();
+        BigJavaScriptServlet2.CONTENT_ = javaScript.toString();
+        BigJavaScriptServlet3.CONTENT_ = css.toString();
+
+        final int initialTempFiles = getTempFiles();
+        final Map<String, Class<? extends Servlet>> map = new HashMap<String, Class<? extends Servlet>>();
+        map.put("/one.html", BigJavaScriptServlet1.class);
+        map.put("/two.js", BigJavaScriptServlet2.class);
+        map.put("/three.css", BigJavaScriptServlet3.class);
+        startWebServer(".", null, map);
+        final WebClient client = getWebClient();
+        final CollectingAlertHandler alertHandler = new CollectingAlertHandler();
+        client.setAlertHandler(alertHandler);
+        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/one.html");
+        ((HTMLBodyElement) page.getBody().getScriptObject()).getCurrentStyle();
+
+        assertEquals(getExpectedAlerts(), alertHandler.getCollectedAlerts());
+        assertEquals(initialTempFiles + 1, getTempFiles());
+        client.closeAllWindows();
+        assertEquals(initialTempFiles, getTempFiles());
+    }
+
+    /**
+     *  The HTML servlet for {@link #bigJavaScript()}.
+     */
+    public static class BigJavaScriptServlet1 extends ServletContentWrapper {
+        private static String CONTENT_;
+        /** The constructor. */
+        public BigJavaScriptServlet1() {
+            super(CONTENT_);
+        }
+    }
+
+    /**
+     *  The JavaScript servlet for {@link #bigJavaScript()}.
+     */
+    public static class BigJavaScriptServlet2 extends ServletContentWrapper {
+        private static String CONTENT_;
+        /** The constructor. */
+        public BigJavaScriptServlet2() {
+            super(CONTENT_);
+        }
+    }
+
+    /**
+     *  The CSS servlet for {@link #bigJavaScript()}.
+     */
+    public static class BigJavaScriptServlet3 extends ServletContentWrapper {
+        private static String CONTENT_;
+        /** The constructor. */
+        public BigJavaScriptServlet3() {
+            super(CONTENT_);
+        }
+    }
+
+    private int getTempFiles() {
+        final File file = new File(System.getProperty("java.io.tmpdir"));
+        final String[] list = file.list(new FilenameFilter() {
+            @Override
+            public boolean accept(final File dir, final String name) {
+                return name.startsWith("htmlunit");
+            }
+        });
+        return list.length;
     }
 }
