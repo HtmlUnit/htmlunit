@@ -240,7 +240,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     FORMFIELD_REACHABLE_BY_NEW_NAMES,
 
-    /** Form submit is done without the hash part of the form action url. */
+    /** Form submit is done without the hash part of the action url. */
     @BrowserFeature(@WebBrowser(IE))
     FORM_SUBMISSION_URL_WITHOUT_HASH,
 
