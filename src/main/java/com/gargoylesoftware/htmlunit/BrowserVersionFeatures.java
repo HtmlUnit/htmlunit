@@ -1031,6 +1031,13 @@ public enum BrowserVersionFeatures {
     JS_LOCATION_HASH_IS_DECODED,
 
     /**
+     * Property location.hash returns '#' for urls ending with a hash
+     * sign (e.g. http://localhost/something/#).
+     */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_LOCATION_HASH_RETURNS_HASH_FOR_EMPTY_DEFINED,
+
+    /**
      * Indicates if the String representation of a native function begins and ends with a \n.
      */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))

@@ -211,6 +211,28 @@ public class Location2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "#<a>foobar</a>")
     public void hash() throws Exception {
+        checkHash(getDefaultUrl().toExternalForm() + "?#<a>foobar</a>");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "", IE = "#")
+    public void emptyHash() throws Exception {
+        checkHash(getDefaultUrl().toExternalForm() + "#");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "")
+    public void noHash() throws Exception {
+        checkHash(getDefaultUrl().toExternalForm());
+    }
+
+    private void checkHash(final String url) throws Exception {
         final String html = "<html><body onload='test()'>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -220,7 +242,7 @@ public class Location2Test extends WebDriverTestCase {
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse(html);
-        loadPageWithAlerts2(html, new URL(getDefaultUrl().toExternalForm() + "?#<a>foobar</a>"));
+        loadPageWithAlerts2(html, new URL(url));
     }
 
     /**

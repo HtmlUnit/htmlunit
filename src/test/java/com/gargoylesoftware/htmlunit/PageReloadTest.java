@@ -58,7 +58,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "", IE = "#")
-    @NotYetImplemented(Browser.IE)
     public void link_url_emptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "linkEmptyHash", 0, PATHNAME, getExpectedAlerts()[0]);
     }
@@ -199,7 +198,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "", IE = "#")
-    @NotYetImplemented(Browser.IE)
     public void javascript_url_emptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "javascriptEmptyHash", 0, PATHNAME, getExpectedAlerts()[0]);
     }
@@ -651,7 +649,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "", IE = "#")
-    @NotYetImplemented(Browser.IE)
     public void submitPost_url_emptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "submitPostEmptyHash", 1, PATHNAME, getExpectedAlerts()[0]);
     }
@@ -661,7 +658,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "", IE = "#")
-    @NotYetImplemented(Browser.IE)
     public void submitPostV_url_emptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "submitPostEmptyHashV", 1, PATHNAME, getExpectedAlerts()[0]);
     }
@@ -1238,7 +1234,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "", IE = "#")
-    @NotYetImplemented(Browser.IE)
     public void jsSubmitPost_url_EmptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "jsSubmitPostEmptyHash", 1, PATHNAME, getExpectedAlerts()[0]);
     }
@@ -1248,7 +1243,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "", IE = "#")
-    @NotYetImplemented(Browser.IE)
     public void jsSubmitPostV_url_EmptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "jsSubmitPostEmptyHashV", 1, PATHNAME, getExpectedAlerts()[0]);
     }
@@ -1528,6 +1522,7 @@ public class PageReloadTest extends WebDriverTestCase {
 
     private String testPage() {
         return testPageHeader()
+                + testPageBody()
                 + testPageAnchorPart()
                 + testPageFormGetPart()
                 + testPageFormPostPart();
@@ -1543,16 +1538,18 @@ public class PageReloadTest extends WebDriverTestCase {
                 + "  </head>\n";
     }
 
-    private String testPageAnchorPart() {
+    private String testPageBody() {
         return "<body>\n"
 
                 + "  <div id='locationPathname'></div>\n"
                 + "  <div id='locationHash'></div>\n"
                 + "  <input type='button' id='updateLocationInfo' value='updateLocationInfo' "
                 + "onclick='document.getElementById(\"locationHash\").innerHTML=location.hash;"
-                + "document.getElementById(\"locationPathname\").innerHTML=location.pathname;'>\n"
+                + "document.getElementById(\"locationPathname\").innerHTML=location.pathname;'>\n";
+    }
 
-                + "  <a id='linkEmpty' href=''>linkEmpty</a>\n"
+    private String testPageAnchorPart() {
+        return "  <a id='linkEmpty' href=''>linkEmpty</a>\n"
                 + "  <a id='linkEmptyHash' href='#'>linkEmptyHash</a>\n"
                 + "  <a id='linkHash' href='#anchor'>linkHash</a>\n"
                 + "  <a id='linkDifferentHash' href='#anchor2'>linkDifferentHash</a>\n"

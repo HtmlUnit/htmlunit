@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.14" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: location.hash returns '#' in ie mode if the location url ends with '#'
+                (e.g. http://localhost/something/#).
+            </action>
             <action type="fix" dev="asashour">
                 CSS: correct behavior of setting a style value to null.
             </action>

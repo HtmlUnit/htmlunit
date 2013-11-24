@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.ANCHOR_EMPTY_HREF_NO_FILENAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_IS_DECODED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_RETURNS_HASH_FOR_EMPTY_DEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_ABOUT_BLANK_HAS_EMPTY_PATH;
 
 import java.io.IOException;
@@ -273,7 +274,13 @@ public class Location extends SimpleScriptable {
             hash = decodeHash(hash);
         }
 
-        if (!StringUtils.isEmpty(hash)) {
+        if (StringUtils.isEmpty(hash)) {
+            if (getBrowserVersion().hasFeature(JS_LOCATION_HASH_RETURNS_HASH_FOR_EMPTY_DEFINED)
+                    && getHref().endsWith("#")) {
+                return "#";
+            }
+        }
+        else {
             return "#" + hash;
         }
 
