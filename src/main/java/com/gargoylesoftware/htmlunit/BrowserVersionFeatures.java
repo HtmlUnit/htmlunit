@@ -101,6 +101,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 17), @WebBrowser(CHROME) })
     CSS_SELECT_INLINE,
 
+    /** Throws exception on setting a CSS style value to null. */
+    @BrowserFeature(@WebBrowser(IE))
+    CSS_SET_NULL_THROWS,
+
     /** Internet Explorer versions 5 and later support the behavior property. The behavior property lets
      * you use CSS to attach a script to a specific element in order to implement
      * DHTML (Dynamic HTML) components.

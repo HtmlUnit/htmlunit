@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_IMAGE_URL_QUOTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_PIXEL_VALUES_INT_ONLY;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SET_NULL_THROWS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SUPPORTS_BEHAVIOR_PROPERTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TYPE_NUMBER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_UNDEFINED_FORCES_RESET;
@@ -526,7 +527,13 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param name the attribute name (camel-cased)
      * @param newValue the attribute value
      */
-    protected void setStyleAttribute(final String name, final String newValue) {
+    protected void setStyleAttribute(final String name, String newValue) {
+        if ("null".equals(newValue)) {
+            if (getBrowserVersion().hasFeature(CSS_SET_NULL_THROWS)) {
+                Context.throwAsScriptRuntimeEx(new Exception("Invalid argument."));
+            }
+            newValue = "";
+        }
         if (styleDeclaration_ != null) {
             styleDeclaration_.setProperty(name, newValue, null);
             return;

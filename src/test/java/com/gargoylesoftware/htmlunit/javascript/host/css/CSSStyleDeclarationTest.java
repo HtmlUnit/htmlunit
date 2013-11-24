@@ -1369,4 +1369,37 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "", "", "", "" },
+            IE = {"", "error", "", "", "error", "" })
+    public void setToNull() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "    var div1 = document.getElementById('div1');\n"
+            + "    alert(div1.style.border);\n"
+            + "    try {\n"
+            + "      div1.style.border = null;\n"
+            + "    } catch (e) {\n"
+            + "      alert('error');\n"
+            + "    }\n"
+            + "    alert(div1.style.border);\n"
+            + "    alert(div1.style.display);\n"
+            + "    try {\n"
+            + "      div1.style.display = null;\n"
+            + "    } catch (e) {\n"
+            + "      alert('error');\n"
+            + "    }\n"
+            + "    alert(div1.style.display);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<div id='div1'>foo</div></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
