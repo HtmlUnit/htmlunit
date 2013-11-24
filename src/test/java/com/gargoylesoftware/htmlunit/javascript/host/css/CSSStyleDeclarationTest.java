@@ -1376,6 +1376,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "", "", "", "" },
             IE = {"", "error", "", "", "error", "" })
+    @NotYetImplemented(IE)
     public void setToNull() throws Exception {
         final String html
             = "<html><head><script>\n"

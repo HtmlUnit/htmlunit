@@ -530,7 +530,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     protected void setStyleAttribute(final String name, String newValue) {
         if ("null".equals(newValue)) {
             if (getBrowserVersion().hasFeature(CSS_SET_NULL_THROWS)) {
-                Context.throwAsScriptRuntimeEx(new Exception("Invalid argument."));
+                //Context.throwAsScriptRuntimeEx(new Exception("Invalid argument."));
             }
             newValue = "";
         }
