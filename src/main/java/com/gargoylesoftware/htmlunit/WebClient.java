@@ -1933,6 +1933,7 @@ public class WebClient implements Serializable {
                 return;
             }
             final URL current = page.getUrl();
+            justHashJump = isHashJump && (url.getQuery() == null || url.getQuery().equals(current.getQuery()));
             if (!justHashJump && url.sameFile(current) && StringUtils.isNotEmpty(url.getRef())) {
                 justHashJump = true;
             }

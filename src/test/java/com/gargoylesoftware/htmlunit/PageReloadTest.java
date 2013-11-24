@@ -348,7 +348,6 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @NotYetImplemented
     public void submitGetV_url_emptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "submitGetEmptyHashV", 1, PATHNAME, "");
     }
@@ -941,7 +940,6 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @NotYetImplemented
     public void jsSubmitGetV_url_emptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "jsSubmitGetEmptyHashV", 1, PATHNAME, "");
     }
