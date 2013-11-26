@@ -900,12 +900,8 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
     JS_FORM_ACTION_EXPANDURL,
 
-    /** Indicates if form.encoding returns a recognized value when attribute is incorrect. */
-    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 17), @WebBrowser(value = IE, minVersion = 10) })
-    JS_FORM_ENCODING_NORMALIZED,
-
     /** Setting form.encoding only allowed for valid encodings. */
-    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 10) })
+    @BrowserFeature(@WebBrowser(IE))
     JS_FORM_REJECT_INVALID_ENCODING,
 
     /** Indicated that the body of a not yet loaded frame/iframe is null. */

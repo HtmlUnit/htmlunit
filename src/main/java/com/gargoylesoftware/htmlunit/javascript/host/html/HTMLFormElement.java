@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORMFIELD_REA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_80;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_81;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_ACTION_EXPANDURL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_ENCODING_NORMALIZED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_REJECT_INVALID_ENCODING;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -270,10 +269,10 @@ public class HTMLFormElement extends HTMLElement implements Function {
     @JsxGetter
     public String getEncoding() {
         final String encoding = getHtmlForm().getEnctypeAttribute();
-        if (getBrowserVersion().hasFeature(JS_FORM_ENCODING_NORMALIZED)) {
-            if (!"application/x-www-form-urlencoded".equals(encoding) && !"multipart/form-data".equals(encoding)) {
-                return "application/x-www-form-urlencoded";
-            }
+        if (!"application/x-www-form-urlencoded".equals(encoding)
+                && !"multipart/form-data".equals(encoding)
+                && !"text/plain".equals(encoding)) {
+            return "application/x-www-form-urlencoded";
         }
         return encoding;
     }
@@ -316,8 +315,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
             final WebRequest request = getHtmlForm().getWebRequest(null);
             final String target = page.getResolvedTarget(getTarget());
             final boolean isHashJump = HttpMethod.GET == request.getHttpMethod() && action.endsWith("#");
-            webClient.download(page.getEnclosingWindow(), target, request,
-                    isHashJump, "JS form.submit()");
+            webClient.download(page.getEnclosingWindow(), target, request, isHashJump, "JS form.submit()");
         }
     }
 

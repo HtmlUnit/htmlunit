@@ -197,6 +197,88 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("application/x-www-form-urlencoded")
+    public void defaultEnctype() throws Exception {
+        enctype(null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("application/x-www-form-urlencoded")
+    public void emptyEnctype() throws Exception {
+        enctype("");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("application/x-www-form-urlencoded")
+    public void blankEnctype() throws Exception {
+        enctype(" ");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("application/x-www-form-urlencoded")
+    public void unknownEnctype() throws Exception {
+        enctype("unknown");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("application/x-www-form-urlencoded")
+    public void urlencodedEnctype() throws Exception {
+        enctype("application/x-www-form-urlencoded");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("multipart/form-data")
+    public void multipartEnctype() throws Exception {
+        enctype("multipart/form-data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("text/plain")
+    public void plainEnctype() throws Exception {
+        enctype("text/plain");
+    }
+
+    private void enctype(final String encoding) throws Exception {
+        String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    alert(document.forms[0].encoding);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<form name='testForm'";
+        if (null != encoding) {
+            html = html + " enctype='" + encoding + "'";
+        }
+        html = html + ">\n"
+            + "    <input type='submit' name='submit1'/>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({ "multipart/form-data", "application/x-www-form-urlencoded", "application/x-www-form-urlencoded" })
     public void encodingProperty() throws Exception {
         doTestProperty("encoding", "enctype", "multipart/form-data", "application/x-www-form-urlencoded");
@@ -206,9 +288,18 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "myEncoding", "newEncoding", "newEncoding" },
-            FF = { "application/x-www-form-urlencoded", "application/x-www-form-urlencoded", "newEncoding" },
-            IE10 = { "application/x-www-form-urlencoded", "exception" })
+    @Alerts(DEFAULT = { "text/plain", "application/x-www-form-urlencoded", "newEncoding" },
+            IE = { "text/plain", "exception" })
+    public void encodingProperty_textPlain() throws Exception {
+        doTestProperty("encoding", "enctype", "text/plain", "newEncoding");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "application/x-www-form-urlencoded", "application/x-www-form-urlencoded", "newEncoding" },
+            IE = { "application/x-www-form-urlencoded", "exception" })
     public void encodingProperty_dummyValues() throws Exception {
         doTestProperty("encoding", "enctype", "myEncoding", "newEncoding");
     }
@@ -870,9 +961,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "2",
             IE10 = "3")
     public void submit_twice() throws Exception {
-        final String count = getExpectedAlerts()[0];
-        setExpectedAlerts();
-
         final String html = "<html><head><script>\n"
             + "function test() {\n"
             + "  var f = document.forms[0];\n"
@@ -885,8 +973,9 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "</form></body></html>";
 
         getMockWebConnection().setDefaultResponse("");
-        loadPageWithAlerts2(html);
-        assertEquals(Integer.parseInt(count), getMockWebConnection().getRequestCount());
+        loadPage2(html);
+
+        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
     }
 
     /**
