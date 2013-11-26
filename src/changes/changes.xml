@@ -8,6 +8,11 @@
 
     <body>
         <release version="2.14" date="???" description="Bugfixes">
+        Enctype form attribute returns wrong default value
+        
+            <action type="fix" dev="rbri" issue="1560">
+                JavaScript: Fixed enctype form property default value.
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: location.hash returns '#' in ie mode if the location url ends with '#'
                 (e.g. http://localhost/something/#).
