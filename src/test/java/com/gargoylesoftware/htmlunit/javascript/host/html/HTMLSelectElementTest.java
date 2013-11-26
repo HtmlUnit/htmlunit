@@ -989,18 +989,50 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts()
+    @Alerts({ "0", "1" })
     public void selectedIndex_onfocus() throws Exception {
         final String html =
             "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var s = document.getElementById('mySelect');\n"
+            + "    alert(s.selectedIndex);\n"
             + "    s.selectedIndex = 1;\n"
+            + "    alert(s.selectedIndex);\n"
             + "  }\n"
             + "</script>\n"
             + "<body onload='test()'>\n"
-            + "<select id='mySelect' onfocus='alert(1)'><option>hello</option><option>there</option></select>\n"
+            + "<body onload='test()'>\n"
+            + "  <select id='mySelect' onfocus='alert(\"select-focus\")'>\n"
+            + "    <option value='o1'>hello</option>\n"
+            + "    <option value='o2'>there</option>\n"
+            + "  </select>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "o1", "o2" })
+    public void value_onfocus() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var s = document.getElementById('mySelect');\n"
+            + "    alert(s.value);\n"
+            + "    s.value = 'o2';\n"
+            + "    alert(s.value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<body onload='test()'>\n"
+            + "  <select id='mySelect' onfocus='alert(\"select-focus\")'>\n"
+            + "    <option value='o1'>hello</option>\n"
+            + "    <option value='o2'>there</option>\n"
+            + "  </select>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
