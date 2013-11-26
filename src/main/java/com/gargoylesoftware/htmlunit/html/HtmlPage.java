@@ -1926,11 +1926,11 @@ public class HtmlPage extends SgmlPage {
      * @see WebAssert#assertAllTabIndexAttributesSet(HtmlPage)
      */
     public boolean setFocusedElement(final HtmlElement newElement, final boolean windowActivated) {
-        if (elementWithFocus_ == newElement && (!windowActivated)) {
+        if (elementWithFocus_ == newElement && !windowActivated) {
             // nothing to do
             return true;
         }
-        else if (newElement != null && newElement.getPage() != this) {
+        if (newElement != null && newElement.getPage() != this) {
             throw new IllegalArgumentException("Can't move focus to an element from a different page.");
         }
 

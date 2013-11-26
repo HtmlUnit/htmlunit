@@ -357,7 +357,7 @@ public class HTMLSelectElement extends FormField {
      */
     @Override
     public void setValue(final String newValue) {
-        getHtmlSelect().setSelectedAttribute(newValue, true);
+        getHtmlSelect().setSelectedAttribute(newValue, true, false);
     }
 
     /**

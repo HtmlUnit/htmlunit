@@ -255,10 +255,30 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @return the page contained in the current window as returned
      * by {@link com.gargoylesoftware.htmlunit.WebClient#getCurrentWindow()}
      */
-    @SuppressWarnings("unchecked")
     public <P extends Page> P setSelectedAttribute(final String optionValue, final boolean isSelected) {
+        return setSelectedAttribute(optionValue, isSelected, true);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Sets the "selected" state of the specified option. If this "select" element
+     * is single-select, then calling this method will deselect all other options.
+     *
+     * Only options that are actually in the document may be selected.
+     *
+     * @param isSelected true if the option is to become selected
+     * @param optionValue the value of the option that is to change
+     * @param invokeOnFocus whether to set focus or not.
+     * @param <P> the page type
+     * @return the page contained in the current window as returned
+     * by {@link com.gargoylesoftware.htmlunit.WebClient#getCurrentWindow()}
+     */
+    @SuppressWarnings("unchecked")
+    public <P extends Page> P setSelectedAttribute(final String optionValue,
+            final boolean isSelected, final boolean invokeOnFocus) {
         try {
-            return (P) setSelectedAttribute(getOptionByValue(optionValue), isSelected);
+            return (P) setSelectedAttribute(getOptionByValue(optionValue), isSelected, invokeOnFocus);
         }
         catch (final ElementNotFoundException e) {
             if (hasFeature(SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN)) {

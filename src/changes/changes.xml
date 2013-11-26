@@ -8,8 +8,10 @@
 
     <body>
         <release version="2.14" date="???" description="Bugfixes">
-        Enctype form attribute returns wrong default value
-        
+            <action type="fix" dev="rbri" issue="1558">
+                JavaScript: Setting the value property of a select element does not trigger
+                the onfocus event handler.
+            </action>
             <action type="fix" dev="rbri" issue="1560">
                 JavaScript: Fixed enctype form property default value.
             </action>
