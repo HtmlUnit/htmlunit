@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.14" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1530">
+                Possible dead lock in CSSStyleDeclaration fixed.
+            </action>
             <action type="fix" dev="rbri" issue="1558">
                 JavaScript: Setting the value property of a select element does not trigger
                 the onfocus event handler.
