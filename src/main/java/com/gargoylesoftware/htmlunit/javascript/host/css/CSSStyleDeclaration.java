@@ -37,13 +37,13 @@ import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -254,7 +254,11 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
 
     private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
     private static final Map<String, String> CSSColors_ = new HashMap<String, String>();
-    private static final Map<String, String> CamelizeCache_ = new ConcurrentHashMap<String, String>(400, 0.75f, 2);
+
+    // use plain old hashtable because this is synchronized and does not introduce one more
+    // indirection layer (hope this is a bit faster)
+    // we only need the get/set api so there is no difference at all
+    private static final Hashtable<String, String> CamelizeCache_ = new Hashtable<String, String>();
 
     /** The different types of shorthand values. */
     private enum Shorthand {
@@ -685,11 +689,13 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         buffer.deleteCharAt(pos);
         buffer.setCharAt(pos, Character.toUpperCase(buffer.charAt(pos)));
 
-        for (int i = pos + 1; i < buffer.length() - 1; i++) {
+        int i = pos + 1;
+        while (i < buffer.length() - 1) {
             if (buffer.charAt(i) == '-') {
                 buffer.deleteCharAt(i);
                 buffer.setCharAt(i, Character.toUpperCase(buffer.charAt(i)));
             }
+            i++;
         }
         result = buffer.toString();
         CamelizeCache_.put(string, result);
