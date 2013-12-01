@@ -90,6 +90,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     private String imgAcceptHeader_;
     private String cssAcceptHeader_;
     private String scriptAcceptHeader_;
+    private String xmlHttpRequestAcceptHeader_;
 
     /**
      * Application name for the Internet Explorer series of browsers.
@@ -171,6 +172,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_17.setBrowserLanguage("en-US");
         FIREFOX_17.buildId_ = "20130805152501";
         FIREFOX_17.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+        FIREFOX_17.setXmlHttpRequestAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_17.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
         FIREFOX_17.setCssAcceptHeader("text/css,*/*;q=0.1");
 
@@ -179,6 +181,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_24.setBrowserLanguage("en-US");
         FIREFOX_24.buildId_ = "20131112155850";
         FIREFOX_24.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+        FIREFOX_24.setXmlHttpRequestAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_24.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
         FIREFOX_24.setCssAcceptHeader("text/css,*/*;q=0.1");
 
@@ -260,6 +263,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         imgAcceptHeader_ = "*/*";
         cssAcceptHeader_ = "*/*";
         scriptAcceptHeader_ = "*/*";
+        xmlHttpRequestAcceptHeader_ = "*/*";
 
         if (features != null) {
             features_.addAll(Arrays.asList(features));
@@ -471,6 +475,15 @@ public class BrowserVersion implements Serializable, Cloneable {
 
     /**
      * Returns the value used by the browser for the accept header
+     * if performing an XMLHttpRequest.
+     * @return the accept header string
+     */
+    public String getXmlHttpRequestAcceptHeader() {
+        return xmlHttpRequestAcceptHeader_;
+    }
+
+    /**
+     * Returns the value used by the browser for the accept header
      * if requesting an image.
      * @return the accept header string
      */
@@ -600,6 +613,14 @@ public class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
+     * @param xmlHttpRequestAcceptHeader the accept header to be used when
+     * performing XMLHttpRequests
+     */
+    public void setXmlHttpRequestAcceptHeader(final String xmlHttpRequestAcceptHeader) {
+        xmlHttpRequestAcceptHeader_ = xmlHttpRequestAcceptHeader;
+    }
+
+    /**
      * @return the browserVersionNumeric
      */
     public float getBrowserVersionNumeric() {
@@ -685,6 +706,8 @@ public class BrowserVersion implements Serializable, Cloneable {
         clone.htmlAcceptHeader_ = getHtmlAcceptHeader();
         clone.imgAcceptHeader_ = getImgAcceptHeader();
         clone.cssAcceptHeader_ = getCssAcceptHeader();
+        clone.scriptAcceptHeader_ = getScriptAcceptHeader();
+        clone.xmlHttpRequestAcceptHeader_ = getXmlHttpRequestAcceptHeader();
 
         for (final PluginConfiguration pluginConf : getPlugins()) {
             clone.getPlugins().add(pluginConf.clone());

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.14" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1245">
+                Use the same accept headers as browsers do.
+            </action>
             <action type="fix" dev="rbri" issue="1530">
                 Possible dead lock in CSSStyleDeclaration fixed.
             </action>

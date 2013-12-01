@@ -259,6 +259,46 @@ public class BrowserVersion2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], acceptHeaderString());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            IE = "Accept: */*")
+    public void acceptHeaderXMLHttpRequest() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>XMLHttpRequest Test</title>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var request;\n"
+            + "        if (window.XMLHttpRequest)\n"
+            + "          request = new XMLHttpRequest();\n"
+            + "        else if (window.ActiveXObject)\n"
+            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        request.open('GET', '" + URL_SECOND + "', false);\n"
+            + "        request.send('');\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+              "<xml>\n"
+            + "<content>blah</content>\n"
+            + "<content>blah2</content>\n"
+            + "</xml>";
+
+        getMockWebConnection().setDefaultResponse(xml);
+        loadPage2(html);
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+        assertEquals(getExpectedAlerts()[0], acceptHeaderString());
+    }
+
     private String acceptHeaderString() {
         final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
         final Map<String, String> headers = lastRequest.getAdditionalHeaders();

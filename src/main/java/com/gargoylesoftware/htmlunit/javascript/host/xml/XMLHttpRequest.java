@@ -492,7 +492,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                 throw Context.reportRuntimeError("Access to restricted URI denied");
             }
 
-            final WebRequest request = new WebRequest(fullUrl);
+            final WebRequest request = new WebRequest(fullUrl, getBrowserVersion().getXmlHttpRequestAcceptHeader());
             request.setCharset("UTF-8");
             request.setAdditionalHeader("Referer", containingPage_.getUrl().toExternalForm());
 
