@@ -1089,7 +1089,7 @@ public class HtmlPage extends SgmlPage {
         final WebClient client = getWebClient();
         final Cache cache = client.getCache();
 
-        final WebRequest request = new WebRequest(url);
+        final WebRequest request = new WebRequest(url, getWebClient().getBrowserVersion().getScriptAcceptHeader());
         request.setAdditionalHeaders(new HashMap<String, String>(referringRequest.getAdditionalHeaders()));
         request.setAdditionalHeader("Referer", referringRequest.getUrl().toString());
         request.setAdditionalHeader("Accept", client.getBrowserVersion().getScriptAcceptHeader());
