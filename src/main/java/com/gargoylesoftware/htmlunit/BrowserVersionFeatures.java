@@ -850,6 +850,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     JS_DOMIMPLEMENTATION_FEATURE_XPATH_3,
 
+    /** Javascript property function delete thows an exception if the
+     * given count is negative. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_DOM_CDATA_DELETE_THROWS_NEGATIVE_COUNT,
+
     /** Don't enumerate functions, see {@link net.sourceforge.htmlunit.corejs.javascript.ScriptableObject#DONTENUM}. */
     @BrowserFeature(@WebBrowser(IE))
     JS_DONT_ENUM_FUNCTIONS,

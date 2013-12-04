@@ -8,6 +8,11 @@
 
     <body>
         <release version="2.14" date="???" description="Bugfixes">
+        DomCharacterData-deleteData
+            <action type="fix" dev="rbri" due-to="Frank Danek">
+                JavaScript: DomCharacterData.deleteData no longer wipes the string when called with an invalid
+                offset. Also the error handling is fixed.
+            </action>
             <action type="fix" dev="rbri" issue="1245">
                 Use the same accept headers as browsers do.
             </action>

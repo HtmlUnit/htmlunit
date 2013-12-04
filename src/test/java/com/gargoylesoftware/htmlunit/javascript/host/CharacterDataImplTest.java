@@ -129,15 +129,152 @@ public class CharacterDataImplTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("Some Text")
+    @Alerts({ "Some Text", "Some", "Some", "me", "" })
     public void characterDataImpl_deleteData() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var div1=document.getElementById('div1');\n"
             + "    var text1=div1.firstChild;\n"
-            + "    text1.deleteData(5, 11);\n"
-            + "    alert(text1.data);\n"
+
+            + "    try {\n"
+            + "        text1.deleteData(5, 11);\n"
+            + "        alert(text1.data);\n"
+            + "    } catch (e) { alert('exception') }\n"
+
+            + "    try {\n"
+            + "        text1.deleteData(4, 5);\n"
+            + "        alert(text1.data);\n"
+            + "    } catch (e) { alert('exception') }\n"
+
+            + "    try {\n"
+            + "        text1.deleteData(1, 0);\n"
+            + "        alert(text1.data);\n"
+            + "    } catch (e) { alert('exception') }\n"
+
+            + "    try {\n"
+            + "        text1.deleteData(0, 2);\n"
+            + "        alert(text1.data);\n"
+            + "    } catch (e) { alert('exception') }\n"
+
+            + "    try {\n"
+            + "        text1.deleteData(0, 2);\n"
+            + "        alert(text1.data);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<div id='div1'>Some Not So New Text</div></body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertEquals("First", driver.getTitle());
+    }
+
+    /**
+     * Regression test for deleteData of a text node.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "", "", "", "" },
+            IE = { "", "", "", "exception" })
+    public void characterDataImpl_deleteDataEmptyImput() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    var div1=document.getElementById('div1');\n"
+            + "    var text1=div1.firstChild;\n"
+
+            + "    try {\n"
+            + "        text1.deleteData(0, 1);\n"
+            + "        alert(text1.data);\n"
+            + "    } catch (e) { alert('exception') }\n"
+
+            + "    try {\n"
+            + "        text1.deleteData(0, 0);\n"
+            + "        alert(text1.data);\n"
+            + "    } catch (e) { alert('exception') }\n"
+
+            + "    try {\n"
+            + "        text1.deleteData(0, 1);\n"
+            + "        alert(text1.data);\n"
+            + "    } catch (e) { alert('exception') }\n"
+
+            + "    try {\n"
+            + "        text1.deleteData(0, -1);\n"
+            + "        alert(text1.data);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<div id='div1'>-</div></body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertEquals("First", driver.getTitle());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "exception", "exception", "exception", "exception" },
+            IE = { "exception", "exception", "abcde", "exception" })
+    public void characterDataImpl_deleteDataInvalidStart() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    var div1=document.getElementById('div1');\n"
+            + "    var text1=div1.firstChild;\n"
+            + "    try {\n"
+            + "        text1.deleteData(-1, 4);\n"
+            + "        alert(text1.data);\n"
+            + "    } catch (e) { alert('exception') }\n"
+
+            + "    try {\n"
+            + "        text1.deleteData(20, 4);\n"
+            + "        alert(text1.data);\n"
+            + "    } catch (e) { alert('exception') }\n"
+
+            + "    try {\n"
+            + "        text1.deleteData(20, 0);\n"
+            + "        alert(text1.data);\n"
+            + "    } catch (e) { alert('exception') }\n"
+
+            + "    try {\n"
+            + "        text1.deleteData(20, -18);\n"
+            + "        alert(text1.data);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<div id='div1'>abcde</div></body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertEquals("First", driver.getTitle());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "Some Not So New Te", "Some ", "So" },
+            IE = { "exception", "exception", "exception" })
+    public void characterDataImpl_deleteDataNegativeCount() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    var div1=document.getElementById('div1');\n"
+            + "    var text1=div1.firstChild;\n"
+            + "    try {\n"
+            + "        text1.deleteData(18, -15);\n"
+            + "        alert(text1.data);\n"
+            + "    } catch (e) { alert('exception') }\n"
+
+            + "    try {\n"
+            + "        text1.deleteData(5, -4);\n"
+            + "        alert(text1.data);\n"
+            + "    } catch (e) { alert('exception') }\n"
+
+            + "    try {\n"
+            + "        text1.deleteData(2, -4);\n"
+            + "        alert(text1.data);\n"
+            + "    } catch (e) { alert('exception') }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Not So New Text</div></body></html>";

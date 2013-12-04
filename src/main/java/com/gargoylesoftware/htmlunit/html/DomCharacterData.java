@@ -26,6 +26,8 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  * @author Philip Graf
+ * @author Ronald Brill
+ * @author Frank Danek
  */
 public abstract class DomCharacterData extends DomNode implements CharacterData {
 
@@ -94,21 +96,25 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
 
     /**
      * Deletes characters from character data.
-     * @param offset the position of the first character to be deleted
-     * @param count the number of characters to be deleted
+     * @param offset the position of the first character to be deleted (can't be
+     * less than zero)
+     * @param count the number of characters to be deleted, if less than zero
+     * leaves the first offset chars
      */
     public void deleteData(final int offset, final int count) {
-        if (offset < 0 || count < 0) {
-            throw new IllegalArgumentException("offset: " + offset + " count: " + count);
+        if (offset < 0) {
+            throw new IllegalArgumentException("Provided offset: " + offset + "is less than zero.");
         }
 
-        final int tailLength = Math.max(data_.length() - count - offset, 0);
-        if (tailLength > 0) {
-            data_ = data_.substring(0, offset) + data_.substring(offset + count, offset + count + tailLength);
+        final String data = data_.substring(0, offset);
+        if (count >= 0) {
+            final int fromLeft = offset + count;
+            if (fromLeft < data_.length()) {
+                data_ = data + data_.substring(fromLeft, data_.length());
+                return;
+            }
         }
-        else {
-            data_ = "";
-        }
+        data_ = data;
     }
 
     /**
