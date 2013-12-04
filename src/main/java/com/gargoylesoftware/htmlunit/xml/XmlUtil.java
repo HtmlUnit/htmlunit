@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -195,30 +195,44 @@ public final class XmlUtil {
      * @param page the owner page of {@link DomElement}s to be created
      * @param parent the parent DomNode
      * @param child the child Node
+     * @param handleXHTMLAsHTML if true elements from the XHTML namespace are handled as HTML elements instead of
+     *     DOM elements
      */
-    public static void appendChild(final SgmlPage page, final DomNode parent, final Node child) {
+    public static void appendChild(final SgmlPage page, final DomNode parent, final Node child,
+        final boolean handleXHTMLAsHTML) {
         final DocumentType documentType = child.getOwnerDocument().getDoctype();
         if (documentType != null && page instanceof XmlPage) {
             final DomDocumentType domDoctype = new DomDocumentType(
                     page, documentType.getName(), documentType.getPublicId(), documentType.getSystemId());
             ((XmlPage) page).setDocumentType(domDoctype);
         }
-        final DomNode childXml = createFrom(page, child);
+        final DomNode childXml = createFrom(page, child, handleXHTMLAsHTML);
         parent.appendChild(childXml);
-        copy(page, child, childXml);
+        copy(page, child, childXml, handleXHTMLAsHTML);
     }
 
-    private static DomNode createFrom(final SgmlPage page, final Node source) {
+    private static DomNode createFrom(final SgmlPage page, final Node source, final boolean handleXHTMLAsHTML) {
         if (source.getNodeType() == Node.TEXT_NODE) {
             return new DomText(page, source.getNodeValue());
         }
+        if (source.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE) {
+            return new DomProcessingInstruction(page, source.getNodeName(), source.getNodeValue());
+        }
+        if (source.getNodeType() == Node.COMMENT_NODE) {
+            return new DomComment(page, source.getNodeValue());
+        }
+        if (source.getNodeType() == Node.DOCUMENT_TYPE_NODE) {
+            final DocumentType documentType = (DocumentType) source;
+            return new DomDocumentType(page, documentType.getName(), documentType.getPublicId(),
+                    documentType.getSystemId());
+        }
         final String ns = source.getNamespaceURI();
         String localName = source.getLocalName();
-        if (HTMLParser.XHTML_NAMESPACE.equals(ns)) {
+        if (handleXHTMLAsHTML && HTMLParser.XHTML_NAMESPACE.equals(ns)) {
             final ElementFactory factory = HTMLParser.getFactory(localName);
             return factory.createElementNS(page, ns, localName, namedNodeMapToSaxAttributes(source.getAttributes()));
         }
-        final Map<String, DomAttr> attributes = new HashMap<String, DomAttr>();
+        final Map<String, DomAttr> attributes = new LinkedHashMap<String, DomAttr>();
         final NamedNodeMap nodeAttributes = source.getAttributes();
         for (int i = 0; i < nodeAttributes.getLength(); i++) {
             final Attr attribute = (Attr) nodeAttributes.item(i);
@@ -265,16 +279,19 @@ public final class XmlUtil {
      * @param page the page which the nodes belong to
      * @param source the node to copy from
      * @param dest the node to copy to
+     * @param handleXHTMLAsHTML if true elements from the XHTML namespace are handled as HTML elements instead of
+     *     DOM elements
      */
-    private static void copy(final SgmlPage page, final Node source, final DomNode dest) {
+    private static void copy(final SgmlPage page, final Node source, final DomNode dest,
+        final boolean handleXHTMLAsHTML) {
         final NodeList nodeChildren = source.getChildNodes();
         for (int i = 0; i < nodeChildren.getLength(); i++) {
             final Node child = nodeChildren.item(i);
             switch (child.getNodeType()) {
                 case Node.ELEMENT_NODE:
-                    final DomNode childXml = createFrom(page, child);
+                    final DomNode childXml = createFrom(page, child, handleXHTMLAsHTML);
                     dest.appendChild(childXml);
-                    copy(page, child, childXml);
+                    copy(page, child, childXml, handleXHTMLAsHTML);
                     break;
 
                 case Node.TEXT_NODE:

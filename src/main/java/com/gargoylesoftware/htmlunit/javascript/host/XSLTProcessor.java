@@ -177,7 +177,7 @@ public class XSLTProcessor extends SimpleScriptable {
             final SgmlPage parentPage = parent.getPage();
             final NodeList children = ((org.w3c.dom.Node) result).getChildNodes();
             for (int i = 0; i < children.getLength(); i++) {
-                XmlUtil.appendChild(parentPage, parent, children.item(i));
+                XmlUtil.appendChild(parentPage, parent, children.item(i), true);
             }
         }
         else {

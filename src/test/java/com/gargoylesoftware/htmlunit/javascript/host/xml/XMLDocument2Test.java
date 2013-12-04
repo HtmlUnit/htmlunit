@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +23,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -177,6 +179,278 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "foo", "foo" })
+    public void firstChild_element() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+            + "    alert(doc.firstChild.nodeName);\n"
+            + "    alert(doc.documentElement.nodeName);\n"
+            + "  }\n"
+            + XMLDocumentTest.LOAD_NATIVE_XML_DOCUMENT_FROM_FILE_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String xml =
+               "<foo>\n"
+             + "    <foofoo name='first'>something</foofoo>\n"
+             + "    <foofoo name='second'>something else</foofoo>\n"
+             + "</foo>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(IE)
+    @Alerts({ "foo", "foo" })
+    public void firstChild_element_activeX() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+            + "    alert(doc.firstChild.nodeName);\n"
+            + "    alert(doc.documentElement.nodeName);\n"
+            + "  }\n"
+            + XMLDocumentTest.LOAD_ACTIVEX_XML_DOCUMENT_FROM_FILE_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String xml =
+               "<foo>\n"
+             + "    <foofoo name='first'>something</foofoo>\n"
+             + "    <foofoo name='second'>something else</foofoo>\n"
+             + "</foo>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "foo", "foo" },
+            IE8 = { "xml", "foo" })
+    @NotYetImplemented(IE8)
+    // Xerces does not offer any way to access the XML declaration
+    public void firstChild_xmlDeclaration() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+            + "    alert(doc.firstChild.nodeName);\n"
+            + "    alert(doc.documentElement.nodeName);\n"
+            + "  }\n"
+            + XMLDocumentTest.LOAD_NATIVE_XML_DOCUMENT_FROM_FILE_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String xml =
+               "<?xml version=\"1.0\"?>\n"
+             + "<foo>\n"
+             + "    <foofoo name='first'>something</foofoo>\n"
+             + "    <foofoo name='second'>something else</foofoo>\n"
+             + "</foo>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(IE)
+    @Alerts({ "xml", "foo" })
+    @NotYetImplemented(IE)
+    // Xerces does not offer any way to access the XML declaration
+    public void firstChild_xmlDeclaration_activeX() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+            + "    alert(doc.firstChild.nodeName);\n"
+            + "    alert(doc.documentElement.nodeName);\n"
+            + "  }\n"
+            + XMLDocumentTest.LOAD_ACTIVEX_XML_DOCUMENT_FROM_FILE_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String xml =
+               "<?xml version=\"1.0\"?>\n"
+             + "<foo>\n"
+             + "    <foofoo name='first'>something</foofoo>\n"
+             + "    <foofoo name='second'>something else</foofoo>\n"
+             + "</foo>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "apache", "foo" })
+    public void firstChild_processingInstruction() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+            + "    alert(doc.firstChild.nodeName);\n"
+            + "    alert(doc.documentElement.nodeName);\n"
+            + "  }\n"
+            + XMLDocumentTest.LOAD_NATIVE_XML_DOCUMENT_FROM_FILE_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String xml =
+               "<?apache include file=\"header.html\" ?>\n"
+             + "<foo>\n"
+             + "    <foofoo name='first'>something</foofoo>\n"
+             + "    <foofoo name='second'>something else</foofoo>\n"
+             + "</foo>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(IE)
+    @Alerts({ "apache", "foo" })
+    public void firstChild_processingInstruction_activeX() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+            + "    alert(doc.firstChild.nodeName);\n"
+            + "    alert(doc.documentElement.nodeName);\n"
+            + "  }\n"
+            + XMLDocumentTest.LOAD_ACTIVEX_XML_DOCUMENT_FROM_FILE_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String xml =
+               "<?apache include file=\"header.html\" ?>\n"
+             + "<foo>\n"
+             + "    <foofoo name='first'>something</foofoo>\n"
+             + "    <foofoo name='second'>something else</foofoo>\n"
+             + "</foo>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "dtd", "a" })
+    public void firstChild_documentType() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+            + "    alert(doc.firstChild.nodeName);\n"
+            + "    alert(doc.documentElement.nodeName);\n"
+            + "  }\n"
+            + XMLDocumentTest.LOAD_NATIVE_XML_DOCUMENT_FROM_FILE_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String xml =
+              "<!DOCTYPE dtd [ <!ELEMENT a (b+)> <!ELEMENT b (#PCDATA)> ]>\n"
+            + "<a><b>1</b><b>2</b></a>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(IE)
+    @Alerts({ "dtd", "a" })
+    public void firstChild_documentType_activeX() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+            + "    alert(doc.firstChild.nodeName);\n"
+            + "    alert(doc.documentElement.nodeName);\n"
+            + "  }\n"
+            + XMLDocumentTest.LOAD_ACTIVEX_XML_DOCUMENT_FROM_FILE_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String xml =
+              "<!DOCTYPE dtd [ <!ELEMENT a (b+)> <!ELEMENT b (#PCDATA)> ]>\n"
+            + "<a><b>1</b><b>2</b></a>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "#comment", "foo" })
+    public void firstChild_comment() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+            + "    alert(doc.firstChild.nodeName);\n"
+            + "    alert(doc.documentElement.nodeName);\n"
+            + "  }\n"
+            + XMLDocumentTest.LOAD_NATIVE_XML_DOCUMENT_FROM_FILE_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String xml =
+              "<!--comment-->\n"
+            + "<foo>\n"
+            + "    <foofoo name='first'>something</foofoo>\n"
+            + "    <foofoo name='second'>something else</foofoo>\n"
+            + "</foo>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(IE)
+    @Alerts({ "#comment", "foo" })
+    public void firstChild_comment_activeX() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
+            + "    alert(doc.firstChild.nodeName);\n"
+            + "    alert(doc.documentElement.nodeName);\n"
+            + "  }\n"
+            + XMLDocumentTest.LOAD_ACTIVEX_XML_DOCUMENT_FROM_FILE_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String xml =
+              "<!--comment-->\n"
+            + "<foo>\n"
+            + "    <foofoo name='first'>something</foofoo>\n"
+            + "    <foofoo name='second'>something else</foofoo>\n"
+            + "</foo>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
         loadPageWithAlerts2(html);
     }
 }

@@ -82,7 +82,7 @@ public class XmlPage extends SgmlPage {
         super(null, enclosingWindow);
         node_ = node;
         if (node_ != null) {
-            XmlUtil.appendChild(this, this, node_);
+            XmlUtil.appendChild(this, this, node_, true);
         }
     }
 
@@ -98,11 +98,29 @@ public class XmlPage extends SgmlPage {
      */
     public XmlPage(final WebResponse webResponse, final WebWindow enclosingWindow, final boolean ignoreSAXException)
         throws IOException {
+        this(webResponse, enclosingWindow, ignoreSAXException, true);
+    }
+
+    /**
+     * Creates an instance.
+     * A warning is logged if an exception is thrown while parsing the XML content
+     * (for instance when the content is not a valid XML and can't be parsed).
+     *
+     * @param webResponse the response from the server
+     * @param enclosingWindow the window that holds the page
+     * @param ignoreSAXException Whether to ignore {@link SAXException} or throw it as {@link IOException}
+     * @param handleXHTMLAsHTML if true elements from the XHTML namespace are handled as HTML elements instead of
+     *     DOM elements
+     * @throws IOException if the page could not be created
+     */
+    public XmlPage(final WebResponse webResponse, final WebWindow enclosingWindow, final boolean ignoreSAXException,
+        final boolean handleXHTMLAsHTML) throws IOException {
         super(webResponse, enclosingWindow);
 
         try {
             try {
-                node_ = XmlUtil.buildDocument(webResponse).getDocumentElement();
+                final Document document = XmlUtil.buildDocument(webResponse);
+                node_ = document.getFirstChild();
             }
             catch (final SAXException e) {
                 LOG.warn("Failed parsing XML document " + webResponse.getWebRequest().getUrl()
@@ -122,8 +140,10 @@ public class XmlPage extends SgmlPage {
             }
         }
 
-        if (node_ != null) {
-            XmlUtil.appendChild(this, this, node_);
+        Node node = node_;
+        while (node != null) {
+            XmlUtil.appendChild(this, this, node, handleXHTMLAsHTML);
+            node = node.getNextSibling();
         }
     }
 

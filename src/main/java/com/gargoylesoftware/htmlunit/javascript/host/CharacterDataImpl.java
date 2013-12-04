@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOM_CDATA_DELETE_THROWS_NEGATIVE_COUNT;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -83,7 +86,24 @@ public class CharacterDataImpl extends Node {
      */
     @JsxFunction
     public void deleteData(final int offset, final int count) {
+        if (offset < 0) {
+            throw Context.reportRuntimeError("Provided offset: " + offset + " is less than zero.");
+        }
+
+        if (getBrowserVersion().hasFeature(JS_DOM_CDATA_DELETE_THROWS_NEGATIVE_COUNT)) {
+            if (count < 0) {
+                throw Context.reportRuntimeError("Provided count: " + count + " is less than zero.");
+            }
+            if (count == 0) {
+                return;
+            }
+        }
+
         final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
+        if (offset > domCharacterData.getLength()) {
+            throw Context.reportRuntimeError("Provided offset: " + offset + " is greater than length.");
+        }
+
         domCharacterData.deleteData(offset, count);
     }
 

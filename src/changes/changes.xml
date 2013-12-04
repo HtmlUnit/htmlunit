@@ -8,7 +8,10 @@
 
     <body>
         <release version="2.14" date="???" description="Bugfixes">
-        DomCharacterData-deleteData
+            <action type="fix" dev="rbri" due-to="Frank Danek">
+                JavaScript: XMLDocument.firstChild() is now enabled to support more nodes at the 
+                root level like ProcessingInstruction, Comment.
+            </action>
             <action type="fix" dev="rbri" due-to="Frank Danek">
                 JavaScript: DomCharacterData.deleteData no longer wipes the string when called with an invalid
                 offset. Also the error handling is fixed.
