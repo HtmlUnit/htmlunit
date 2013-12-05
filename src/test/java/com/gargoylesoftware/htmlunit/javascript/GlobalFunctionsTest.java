@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -46,6 +47,45 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
             + "function doTest() {\n"
             + "    alert(parseFloat('\\n 7.89 '));\n"
             + "    alert(parseFloat('7.89em'));\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test for bug <a href="http://sourceforge.net/p/htmlunit/bugs/1563/">1563</a>.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "0", "1", "-2345", "1", "12", "NaN", "0", "1", "0", "0", "64", "0", "1", "8", "9", "100" },
+            FF24 = { "0", "1", "-2345", "1", "12", "NaN", "0", "1", "8", "9", "100", "0", "1", "8", "9", "100" },
+            IE10 = { "0", "1", "-2345", "1", "12", "NaN", "0", "1", "8", "9", "100", "0", "1", "8", "9", "100" })
+    @NotYetImplemented
+    public void parseInt() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "    alert(parseInt('0'));\n"
+            + "    alert(parseInt(' 1 '));\n"
+            + "    alert(parseInt('-2345'));\n"
+            + "    alert(parseInt('1.23'));\n"
+            + "    alert(parseInt('12,3'));\n"
+            + "    alert(parseInt('abc'));\n"
+
+            + "    alert(parseInt('0'));\n"
+            + "    alert(parseInt(' 01 '));\n"
+            + "    alert(parseInt('08'));\n"
+            + "    alert(parseInt('09'));\n"
+            + "    alert(parseInt('0100'));\n"
+
+            + "    alert(parseInt('0', 10));\n"
+            + "    alert(parseInt(' 01 ', 10));\n"
+            + "    alert(parseInt('08', 10));\n"
+            + "    alert(parseInt('09', 10));\n"
+            + "    alert(parseInt('0100', 10));\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
