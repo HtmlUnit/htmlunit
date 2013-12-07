@@ -305,14 +305,20 @@ public class CSSStyleSheet extends SimpleScriptable {
                 request.setAdditionalHeader("Referer", referer);
             }
 
-            uri = request.getUrl().toExternalForm();
+            // our cache is a bit strange;
+            // loadWebResponse check the cache for the web response
+            // AND also fixes the request url for the following cache lookups
+            final WebResponse response = client.loadWebResponse(request);
+
+            // now we can look into the cache with the fixed request for
+            // a cached script
             final Cache cache = client.getCache();
             final Object fromCache = cache.getCachedObject(request);
             if (fromCache != null && fromCache instanceof org.w3c.dom.css.CSSStyleSheet) {
+                uri = request.getUrl().toExternalForm();
                 sheet = new CSSStyleSheet(element, (org.w3c.dom.css.CSSStyleSheet) fromCache, uri);
             }
             else {
-                final WebResponse response = client.loadWebResponse(request);
                 uri = response.getWebRequest().getUrl().toExternalForm();
                 client.printContentIfNecessary(response);
                 client.throwFailingHttpStatusCodeExceptionIfNecessary(response);
@@ -321,6 +327,7 @@ public class CSSStyleSheet extends SimpleScriptable {
                 source.setByteStream(response.getContentAsStream());
                 source.setEncoding(response.getContentCharset());
                 sheet = new CSSStyleSheet(element, source, uri);
+                // cache the style sheet
                 cache.cacheIfPossible(request, response, sheet.getWrappedSheet());
                 response.cleanUp();
             }

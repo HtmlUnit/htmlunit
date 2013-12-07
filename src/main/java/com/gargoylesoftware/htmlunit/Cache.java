@@ -55,11 +55,13 @@ public class Cache implements Serializable {
      */
     private static class Entry implements Comparable<Entry>, Serializable {
         private final String key_;
-        private final Object value_;
+        private WebResponse response_;
+        private Object value_;
         private long lastAccess_;
 
-        Entry(final String key, final Object value) {
+        Entry(final String key, final WebResponse response, final Object value) {
             key_ = key;
+            response_ = response;
             value_ = value;
             lastAccess_ = System.currentTimeMillis();
         }
@@ -97,7 +99,7 @@ public class Cache implements Serializable {
     public void cacheIfPossible(final WebRequest request, final WebResponse response, final Object toCache) {
         if (isCacheable(request, response)) {
             final String url = response.getWebRequest().getUrl().toString();
-            final Entry entry = new Entry(url, toCache);
+            final Entry entry = new Entry(url, response, toCache);
             entries_.put(entry.key_, entry);
             deleteOverflow();
         }
@@ -115,7 +117,7 @@ public class Cache implements Serializable {
      * @param styleSheet the parsed version of <tt>css</tt>
      */
     public void cache(final String css, final CSSStyleSheet styleSheet) {
-        final Entry entry = new Entry(css, styleSheet);
+        final Entry entry = new Entry(css, null, styleSheet);
         entries_.put(entry.key_, entry);
         deleteOverflow();
     }
@@ -199,6 +201,27 @@ public class Cache implements Serializable {
             return new Date();
         }
         return DateUtils.parseDate(value);
+    }
+
+    /**
+     * Returns the cached resonse corresponding to the specified request. If there is
+     * no corresponding cached object, this method returns <tt>null</tt>.
+     *
+     * @param request the request whose corresponding response is sought
+     * @return the cached response corresponding to the specified request if any
+     */
+    public WebResponse getCachedResponse(final WebRequest request) {
+        if (HttpMethod.GET != request.getHttpMethod()) {
+            return null;
+        }
+        final Entry cachedEntry = entries_.get(request.getUrl().toString());
+        if (cachedEntry == null) {
+            return null;
+        }
+        synchronized (entries_) {
+            cachedEntry.touch();
+        }
+        return cachedEntry.response_;
     }
 
     /**

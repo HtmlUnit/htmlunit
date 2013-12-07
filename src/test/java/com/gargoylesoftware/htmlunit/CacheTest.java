@@ -31,9 +31,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -140,8 +138,7 @@ public class CacheTest extends SimpleWebTestCase {
      *@throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.FF)
-    public void usageUrlEncoded() throws Exception {
+    public void jsUrlEncoded() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
             + "  <title>page 1</title>\n"
@@ -190,6 +187,76 @@ public class CacheTest extends SimpleWebTestCase {
         page1.getAnchors().get(0).click();
 
         assertEquals(new String[] {"in foo2"}, collectedAlerts);
+        assertEquals("no request for scripts should have been performed",
+                urlPage2, getMockWebConnection().getLastWebRequest().getUrl());
+    }
+
+    /**
+     *@throws Exception if the test fails
+     */
+    @Test
+    public void cssUrlEncoded() throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "  <title>page 1</title>\n"
+            + "  <link href='foo1.css' type='text/css' rel='stylesheet'>\n"
+            + "  <link href='foo2.js?foo[1]=bar/baz' type='text/css' rel='stylesheet'>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <a href='page2.html'>to page 2</a>\n"
+            + "  <script>\n"
+            + "    var sheets = document.styleSheets;\n"
+            + "    alert(sheets.length);\n"
+            + "    var rules = sheets[0].cssRules || sheets[0].rules;\n"
+            + "    alert(rules.length);\n"
+            + "    rules = sheets[1].cssRules || sheets[1].rules;\n"
+            + "    alert(rules.length);\n"
+            + "  </script>\n" + "  </body>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final String content2 = "<html>\n2"
+            + "<head>\n"
+            + "  <title>page 2</title>\n"
+            + "  <link href='foo2.js?foo[1]=bar/baz' type='text/css' rel='stylesheet'>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <a href='page1.html'>to page 1</a>\n"
+            + "  <script>\n"
+            + "    var sheets = document.styleSheets;\n"
+            + "    alert(sheets.length);\n"
+            + "    var rules = sheets[0].cssRules || sheets[0].rules;\n"
+            + "    alert(rules.length);\n"
+            + "  </script>\n" + "  </body>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final URL urlPage1 = new URL(URL_FIRST, "page1.html");
+        getMockWebConnection().setResponse(urlPage1, content);
+        final URL urlPage2 = new URL(URL_FIRST, "page2.html");
+        getMockWebConnection().setResponse(urlPage2, content2);
+
+        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        headers.add(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "foo1.js"), "",
+                200, "ok", "text/css", headers);
+        getMockWebConnection().setDefaultResponse("", 200, "ok", "text/css", headers);
+
+        final WebClient webClient = getWebClientWithMockWebConnection();
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final HtmlPage page1 = webClient.getPage(urlPage1);
+        final String[] expectedAlerts = {"2", "0", "0"};
+        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(3, getMockWebConnection().getRequestCount());
+
+        collectedAlerts.clear();
+        page1.getAnchors().get(0).click();
+
+        assertEquals(new String[] {"1", "0"}, collectedAlerts);
+        assertEquals(4, getMockWebConnection().getRequestCount());
         assertEquals("no request for scripts should have been performed",
                 urlPage2, getMockWebConnection().getLastWebRequest().getUrl());
     }

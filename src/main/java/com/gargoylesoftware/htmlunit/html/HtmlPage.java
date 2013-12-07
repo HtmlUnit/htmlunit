@@ -1094,12 +1094,18 @@ public class HtmlPage extends SgmlPage {
         request.setAdditionalHeader("Referer", referringRequest.getUrl().toString());
         request.setAdditionalHeader("Accept", client.getBrowserVersion().getScriptAcceptHeader());
 
+        // our cache is a bit strange;
+        // loadWebResponse check the cache for the web response
+        // AND also fixes the request url for the following cache lookups
+        final WebResponse response = client.loadWebResponse(request);
+
+        // now we can look into the cache with the fixed request for
+        // a cached script
         final Object cachedScript = cache.getCachedObject(request);
         if (cachedScript instanceof Script) {
             return (Script) cachedScript;
         }
 
-        final WebResponse response = client.loadWebResponse(request);
         client.printContentIfNecessary(response);
         client.throwFailingHttpStatusCodeExceptionIfNecessary(response);
 
@@ -1148,6 +1154,7 @@ public class HtmlPage extends SgmlPage {
             final JavaScriptEngine javaScriptEngine = client.getJavaScriptEngine();
             final Script script = javaScriptEngine.compile(this, scriptCode, url.toExternalForm(), 1);
             if (script != null) {
+                // cache the script
                 cache.cacheIfPossible(request, response, script);
             }
 
