@@ -124,7 +124,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     private int readTestNumber(final String testName) throws Exception {
-        final String testResults = loadExpectation("/libraries/jQuery/1.8.2/expectations/results", ".txt");
+        final String testResults = loadExpectation("/libraries/jQuery/" + getVersion() + "/expectations/results", ".txt");
         final String[] lines = testResults.split("\n");
         for (int i = 0; i < lines.length; ++i) {
             final String line = lines[i];

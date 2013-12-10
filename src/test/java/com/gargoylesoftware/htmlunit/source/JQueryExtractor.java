@@ -71,8 +71,9 @@ public final class JQueryExtractor {
      * @throws Exception s
      */
     public static void main(final String[] args) throws Exception {
+        final String version = "1.8.2";
         final File expectationsDir =
-                new File("src/test/resources/libraries/jQuery/1.8.2/expectations");
+                new File("src/test/resources/libraries/jQuery/" + version + "/expectations");
         generateTestCases(expectationsDir);
     }
 
@@ -272,108 +273,108 @@ public final class JQueryExtractor {
 
         return tests;
     }
-}
 
-class Expectations implements Iterable<Expectation> {
-    static Expectations readExpectations(final File file) throws IOException {
-        final Expectations expectations = new Expectations();
-        final List<String> lines = FileUtils.readLines(file);
-        for (int i = 0; i < lines.size(); ++i) {
-            expectations.add(new Expectation(i + 1, lines.get(i)));
+    static class Expectations implements Iterable<Expectation> {
+        static Expectations readExpectations(final File file) throws IOException {
+            final Expectations expectations = new Expectations();
+            final List<String> lines = FileUtils.readLines(file);
+            for (int i = 0; i < lines.size(); ++i) {
+                expectations.add(new Expectation(i + 1, lines.get(i)));
+            }
+
+            return expectations;
         }
 
-        return expectations;
-    }
+        private final Map<String, Expectation> expectations_ = new HashMap<String, Expectation>();
 
-    private final Map<String, Expectation> expectations_ = new HashMap<String, Expectation>();
-
-    public Expectation getExpectation(final Test test) {
-        return expectations_.get(test.getName());
-    }
-
-    private void add(final Expectation expectation) {
-        expectations_.put(expectation.getTestName(), expectation);
-    }
-
-    @Override
-    public Iterator<Expectation> iterator() {
-        return expectations_.values().iterator();
-    }
-}
-
-class Expectation {
-
-    private static final Pattern pattern_ = Pattern.compile("(\\d+\\. ?)?(.+)\\((\\d+, \\d+, \\d+)\\)");
-    private final int line_;
-    private final String testName_;
-    private final String testResult_;
-
-    public Expectation(final int line, final String string) {
-        line_ = line;
-        final Matcher matcher = pattern_.matcher(string);
-        if (!matcher.matches()) {
-            throw new RuntimeException("Invalid line " + line + ": " + string);
-        }
-        final String testNumber = matcher.group(1);
-        if (testNumber != null && !testNumber.trim().equals(line + ".")) {
-            throw new RuntimeException("Invalid test number for line " + line + ": " + string);
+        public Expectation getExpectation(final Test test) {
+            return expectations_.get(test.getName());
         }
 
-        testName_ = matcher.group(2).trim();
-        testResult_ = matcher.group(3);
-    }
+        private void add(final Expectation expectation) {
+            expectations_.put(expectation.getTestName(), expectation);
+        }
 
-    public int getLine() {
-        return line_;
-    }
-
-    public String getTestName() {
-        return testName_;
-    }
-
-    public String getTestResult() {
-        return testResult_;
-    }
-}
-
-class Test implements Comparable<Test> {
-    private final List<Integer> lines_ = new ArrayList<Integer>();
-    private final String name_;
-
-    public Test(final String name) {
-        name_ = name;
-    }
-
-    public String getName() {
-        return name_;
-    }
-
-    void addLine(final int line) {
-        if (!lines_.contains(line)) {
-            lines_.add(line);
-            Collections.sort(lines_);
+        @Override
+        public Iterator<Expectation> iterator() {
+            return expectations_.values().iterator();
         }
     }
 
-    @Override
-    public int compareTo(final Test o) {
-        int diff = lines_.get(0) - o.lines_.get(0);
-        if (diff == 0) {
-            diff = lines_.size() - o.lines_.size();
-            if (diff == 0) {
-                diff = name_.compareTo(o.name_);
+    static class Expectation {
+
+        private static final Pattern pattern_ = Pattern.compile("(\\d+\\. ?)?(.+)\\((\\d+, \\d+, \\d+)\\)");
+        private final int line_;
+        private final String testName_;
+        private final String testResult_;
+
+        public Expectation(final int line, final String string) {
+            line_ = line;
+            final Matcher matcher = pattern_.matcher(string);
+            if (!matcher.matches()) {
+                throw new RuntimeException("Invalid line " + line + ": " + string);
+            }
+            final String testNumber = matcher.group(1);
+            if (testNumber != null && !testNumber.trim().equals(line + ".")) {
+                throw new RuntimeException("Invalid test number for line " + line + ": " + string);
+            }
+
+            testName_ = matcher.group(2).trim();
+            testResult_ = matcher.group(3);
+        }
+
+        public int getLine() {
+            return line_;
+        }
+
+        public String getTestName() {
+            return testName_;
+        }
+
+        public String getTestResult() {
+            return testResult_;
+        }
+    }
+
+    static class Test implements Comparable<Test> {
+        private final List<Integer> lines_ = new ArrayList<Integer>();
+        private final String name_;
+
+        public Test(final String name) {
+            name_ = name;
+        }
+
+        public String getName() {
+            return name_;
+        }
+
+        void addLine(final int line) {
+            if (!lines_.contains(line)) {
+                lines_.add(line);
+                Collections.sort(lines_);
             }
         }
-        return diff;
-    }
 
-    @Override
-    public int hashCode() {
-        return name_.hashCode();
-    }
+        @Override
+        public int compareTo(final Test o) {
+            int diff = lines_.get(0) - o.lines_.get(0);
+            if (diff == 0) {
+                diff = lines_.size() - o.lines_.size();
+                if (diff == 0) {
+                    diff = name_.compareTo(o.name_);
+                }
+            }
+            return diff;
+        }
 
-    @Override
-    public boolean equals(final Object obj) {
-        return (obj instanceof Test) && name_.equals(((Test) obj).name_);
+        @Override
+        public int hashCode() {
+            return name_.hashCode();
+        }
+
+        @Override
+        public boolean equals(final Object obj) {
+            return (obj instanceof Test) && name_.equals(((Test) obj).name_);
+        }
     }
 }
