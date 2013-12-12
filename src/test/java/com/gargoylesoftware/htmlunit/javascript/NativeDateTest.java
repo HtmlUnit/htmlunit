@@ -138,7 +138,7 @@ public class NativeDateTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Saturday, January 01, 2000",
-            IE11 = "â€Ž01â€Ž.â€Ž01â€Ž.â€Ž2000")
+            IE11 = "‎01‎.‎01‎.‎2000")
     public void toLocaleDateString() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -242,7 +242,7 @@ public class NativeDateTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "00:00:00", "07:08:09" },
-            IE11 = { "â€Ž00â€Ž:â€Ž00â€Ž:â€Ž00", "â€Ž07â€Ž:â€Ž08â€Ž:â€Ž09" })
+            IE11 = { "‎00‎:‎00‎:‎00", "‎07‎:‎08‎:‎09" })
     // ATTENTION! the IE11 expectation only looks identical to the default one but there are invisible control
     // characters (char code 14 - shift out) surrounding the digit pairs...
     public void toLocaleTimeString() throws Exception {
