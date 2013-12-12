@@ -38,7 +38,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClasses(
         isJSObject = false,
         browsers = { @WebBrowser(value = FF, minVersion = 15), @WebBrowser(CHROME),
-            @WebBrowser(value = IE, minVersion = 10) })
+            @WebBrowser(value = IE, minVersion = 11) })
 public class DataView extends ArrayBufferView {
 
     /**
