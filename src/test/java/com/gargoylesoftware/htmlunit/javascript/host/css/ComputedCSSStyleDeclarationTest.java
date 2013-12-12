@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -104,7 +104,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts({"", "", "auto", "pointer" })
     public void styleElement() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
@@ -139,7 +139,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts({"", "", "pointer", "pointer" })
     public void styleElement2() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
@@ -252,7 +252,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "inline", "inline", "inline", "block", /* "inline-block", */ "none", "block", "block", "none" },
             IE = { "inline", "inline", "inline", "block", /* "none", */ "inline", "inline", "inline", "inline" },
-            IE10 = { "inline", "inline", "inline", "block", /* "inline-block", */ "inline", "block", "block", "none" })
+            IE11 = { "inline", "inline", "inline", "block", /* "inline-block", */ "inline", "block", "block", "none" })
     public void defaultDisplayValues_A() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p id='p'>\n"
@@ -696,7 +696,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "block", "none", "inline", "block", "block", "block", "inline" },
             IE = { "inline", "inline", "inline", "block", "inline", "inline", "inline" },
-            IE10 = { "block", "none", "inline", "block", "inline", "inline", "inline" })
+            IE11 = { "block", "none", "inline", "block", "inline", "inline", "inline" })
     public void defaultDisplayValues_NO() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <nav id='nav'>\n"
@@ -748,7 +748,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "block", "none", "block", "inline-block", "inline" },
             IE8 = { "block", "null", "block", "inline", "inline" },
-            IE10 = { "block", "inline", "block", "inline", "inline" })
+            IE11 = { "block", "inline", "block", "inline", "inline" })
     @NotYetImplemented(IE8)
     public void defaultDisplayValues_PQ() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
@@ -1028,7 +1028,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(FF = { "1256px", "auto" },
             FF24 = { "1248px", "auto" },
             IE = { "auto", "auto" },
-            IE10 = { "1240px", "auto" })
+            IE11 = { "1240px", "auto" })
     public void computedWidthOfHiddenElements() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

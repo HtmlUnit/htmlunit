@@ -43,7 +43,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "H1", "", "10px, ", "red" },
             IE = { "[object]", "H1", "", "10px, ", "red" },
-            IE10 = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1", "", "10px, ", "red" })
+            IE11 = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1", "", "10px, ", "red" })
     @NotYetImplemented({ FF17, FF24 })
     public void test() throws Exception {
         final String html = "<html><head><title>First</title>\n"
@@ -118,7 +118,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = "false",
-            IE10 = "")
+            IE11 = "")
     @NotYetImplemented(IE8)
     public void testReadOnly() throws Exception {
         final String html = "<html><head><title>First</title>\n"
@@ -152,7 +152,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "BoDY", "H1", "A.foo", ".foo", ".foo .foo2", "#byId" },
             IE = { "BODY", "H1", "A.foo", ".foo", ".foo .foo2", "#byId" },
-            IE10 = { "body", "h1", "a.foo", ".foo", ".foo .foo2", "#byId" })
+            IE11 = { "body", "h1", "a.foo", ".foo", ".foo .foo2", "#byId" })
     @NotYetImplemented({ FF17, FF24 })
     public void selectorText() throws Exception {
         final String html = "<html><head><title>First</title>\n"

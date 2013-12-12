@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import java.net.URL;
 
@@ -45,7 +45,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = {"[object CSSStyleSheet]", "[object HTMLStyleElement]", "true", "undefined", "false" },
             IE = {"[object]", "undefined", "false", "[object]", "true" },
-            IE10 = {"[object CSSStyleSheet]", "[object HTMLStyleElement]",
+            IE11 = {"[object CSSStyleSheet]", "[object HTMLStyleElement]",
                     "true", "[object HTMLStyleElement]", "true" })
     public void owningNodeOwningElement() throws Exception {
         final String html = "<html><head><title>test_hasChildNodes</title>\n"
@@ -140,7 +140,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "1", "false", "true", "0", "2", "p" },
             IE = { "1", "true", "false", "-1", "2", "DIV" },
-            IE10 = { "1", "false", "false", "0", "2", "p" })
+            IE11 = { "1", "false", "false", "0", "2", "p" })
     public void addRule_insertRule() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -171,7 +171,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "2", "false", "true", "undefined", "1", "div" },
             IE = { "2", "true", "false", "undefined", "1", "DIV" },
-            IE10 = { "2", "false", "false", "undefined", "1", "div" })
+            IE11 = { "2", "false", "false", "undefined", "1", "div" })
     public void removeRule_deleteRule() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -227,7 +227,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts({ "2", ".testStyleDef", ".testStyle" })
     public void insertRuleLeadingWhitespace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

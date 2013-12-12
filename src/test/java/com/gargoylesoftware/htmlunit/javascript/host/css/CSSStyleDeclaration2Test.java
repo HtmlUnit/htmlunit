@@ -121,14 +121,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
                     + "minWidth-error: minWidth-error: outlineWidth-error: outlineWidth-error: outlineWidth-error: "
                     + "textIndent-error: textIndent-error: textIndent-error: verticalAlign-error: verticalAlign-error: "
                     + "verticalAlign-",
-            IE = "success",
-            IE10 = "error: borderBottomWidth-error: borderLeftWidth-error: borderRightWidth-error: "
-                    + "borderTopWidth-error: bottom-error: fontSize-error: height-error: left-error: "
-                    + "letterSpacing-error: marginBottom-error: marginLeft-error: marginRight-error: "
-                    + "marginTop-error: maxHeight-error: maxWidth-error: minHeight-error: minWidth-error: "
-                    + "outlineWidth-error: paddingBottom-error: paddingLeft-error: "
-                    + "paddingRight-error: paddingTop-error: right-error: textIndent-error: top-error: "
-                    + "verticalAlign-error: width-error: wordSpacing-")
+            IE = "success")
     @NotYetImplemented({ FF17, FF24 })
     public void width_like_properties() throws Exception {
         final String html

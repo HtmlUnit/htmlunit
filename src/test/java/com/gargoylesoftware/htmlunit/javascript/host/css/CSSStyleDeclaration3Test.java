@@ -114,7 +114,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "transparent", "none", "repeat", "10em center", "scroll" },
-            IE10 = { "transparent", "none", "repeat", "10em", "scroll" })
+            IE11 = { "transparent", "none", "repeat", "10em", "scroll" })
     public void backgroundPosition4() throws Exception {
         background("10em center");
     }
@@ -193,7 +193,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "rgb(255, 0, 0)", "none", "repeat", "0% 0%", "scroll" },
             IE = { "red", "none", "repeat", "undefined", "scroll" },
-            IE10 = { "red", "none", "repeat", "0% 0%", "scroll" })
+            IE11 = { "red", "none", "repeat", "0% 0%", "scroll" })
     @NotYetImplemented(IE8)
     public void backgroundCssColorRed() throws Exception {
         backgroundCss("red");
@@ -249,7 +249,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "transparent", "none", "repeat", "100% 100%", "scroll" },
             IE = { "transparent", "none", "repeat", "undefined", "scroll" },
-            IE10 = { "transparent", "none", "repeat", "right bottom", "scroll" })
+            IE11 = { "transparent", "none", "repeat", "right bottom", "scroll" })
     @NotYetImplemented(IE8)
     public void backgroundCssPosition2() throws Exception {
         backgroundCss("bottom right");
@@ -261,7 +261,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "transparent", "none", "repeat", "0% 100%", "scroll" },
             IE = { "transparent", "none", "repeat", "undefined", "scroll" },
-            IE10 = { "transparent", "none", "repeat", "", "scroll" })
+            IE11 = { "transparent", "none", "repeat", "left bottom", "scroll" })
     @NotYetImplemented(IE8)
     public void backgroundCssPosition3() throws Exception {
         backgroundCss("left bottom");
@@ -273,7 +273,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "transparent", "none", "repeat", "50% 0%", "scroll" },
             IE = { "transparent", "none", "repeat", "undefined", "scroll" },
-            IE10 = { "transparent", "none", "repeat", "", "scroll" })
+            IE11 = { "transparent", "none", "repeat", "top", "scroll" })
     @NotYetImplemented(IE8)
     public void backgroundCssPosition4() throws Exception {
         backgroundCss("top center");
@@ -296,7 +296,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "rgb(255, 204, 221)", "none", "repeat", "0% 0%", "scroll" },
             IE = { "#ffccdd", "none", "repeat", "undefined", "scroll" },
-            IE10 = { "#ffccdd", "none", "repeat", "0% 0%", "scroll" })
+            IE11 = { "#ffccdd", "none", "repeat", "0% 0%", "scroll" })
     @NotYetImplemented(IE8)
     public void backgroundCssColorHex() throws Exception {
         backgroundCss("#ffccdd");
@@ -308,7 +308,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "rgb(255, 0, 0)", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll" },
             IE = { "red", "url(\"http://localhost:12346/myImage.png\")", "repeat", "undefined", "scroll" },
-            IE10 = { "red", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll" })
+            IE11 = { "red", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll" })
     @NotYetImplemented
     public void backgroundCssMixed() throws Exception {
         backgroundCss("red url(\"myImage.png\")");
@@ -320,7 +320,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "rgb(255, 255, 255)", "none", "no-repeat", "20px 100px", "scroll" },
             IE = { "#fff", "none", "no-repeat", "undefined", "scroll" },
-            IE10 = { "#fff", "none", "no-repeat", "20px 100px", "scroll" })
+            IE11 = { "#fff", "none", "no-repeat", "20px 100px", "scroll" })
     @NotYetImplemented(IE8)
     public void backgroundCssMixed2() throws Exception {
         backgroundCss("#fff no-repeat 20px 100px");

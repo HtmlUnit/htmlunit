@@ -1030,7 +1030,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "1", "[object HTMLHtmlElement]", "1", "[object HTMLInputElement]", "id2" },
             FF = { "0", "undefined", "1", "[object HTMLInputElement]", "id2" },
-            IE10 = { "1", "[object HTMLBodyElement]", "1", "[object HTMLInputElement]", "id2" })
+            IE11 = { "1", "[object HTMLBodyElement]", "1", "[object HTMLInputElement]", "id2" })
     @BuggyWebDriver({ FF17,  FF24 })
     public void focus() throws Exception {
         final String html = "<html><head><title>First</title>\n"

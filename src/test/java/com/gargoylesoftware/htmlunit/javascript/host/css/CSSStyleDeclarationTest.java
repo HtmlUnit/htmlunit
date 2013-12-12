@@ -18,7 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +27,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -93,7 +92,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
                 || "FF24".equals(getBrowserVersion().getNickname())) {
             expected = "color: pink; background: none repeat scroll 0% 0% blue;";
         }
-        else if ("IE10".equals(getBrowserVersion().getNickname())) {
+        else if ("IE11".equals(getBrowserVersion().getNickname())) {
             expected = "background: blue; color: pink; foo: bar;";
         }
         else {
@@ -130,7 +129,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "hidden", "undefined" },
-            IE = {"", "hidden", "" })
+            IE8 = {"", "hidden", "" })
     public void mozillaStyle() throws Exception {
         final String content
             = "<html><head><title>First</title><script>\n"
@@ -150,8 +149,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "undefined",
-            IE = "")
+    @Alerts(DEFAULT = "undefined",
+            IE8 = "")
     public void behavior() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -230,7 +229,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = "none repeat scroll 0% 0% blue",
             IE = "exception",
-            IE10 = "blue")
+            IE11 = "blue")
     @NotYetImplemented(FF)
     public void getPropertyValue() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
@@ -250,7 +249,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts({ "*blue* string", "" })
     public void removeProperty() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
@@ -270,7 +269,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts({ "** string", "blue" })
     public void removePropertyUnknown() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
@@ -290,7 +289,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts({ "** string", "blue" })
     public void removePropertyUndefined() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
@@ -310,7 +309,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts({ "30px", "", "30px", "arial", "", "arial" })
     public void getPropertyValue_WithDash() throws Exception {
         final String html =
@@ -633,7 +632,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "string", "", "string", "", "string", "4", "string", "", "string", "" , "string", "" },
             IE = { "number", "0", "number", "0", "number", "4", "number", "4", "number", "4", "number", "0" },
-            IE10 = { "string", "", "string", "", "number", "4", "string", "", "string", "" , "string", "" })
+            IE11 = { "string", "", "string", "", "number", "4", "string", "", "string", "" , "string", "" })
     public void zIndexDefault() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -852,7 +851,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts({ "1px", "solid", "red" })
     public void border() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -1105,7 +1104,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Browsers(IE)
     @Alerts(IE = { "", "green", "green", "", "green", "green", "", "green", "" },
-            IE10 = { "", "green", "green", "", "green", "green", "", "green", "green" })
+            IE11 = { "", "green", "green", "", "green", "green", "", "green", "green" })
     public void getAttribute() throws Exception {
         final String[] expected = getExpectedAlerts();
         getAttribute("\"font\"", expected[0]);
@@ -1140,7 +1139,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Browsers(IE)
     @Alerts(IE = { "green, green", "green, red", "green, green", "green, green",
                 "green, red", "green, red", "green, green", "green, red", "green, green" },
-            IE10 = { "green, green", "green, red", "green, red", "green, green",
+            IE11 = { "green, green", "green, red", "green, red", "green, green",
                 "green, red", "green, red", "green, green", "green, red", "green, red" })
     public void setAttribute() throws Exception {
         final String[] expected = getExpectedAlerts();
@@ -1179,7 +1178,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Browsers(IE)
     @Alerts(IE = { "green, false, green", "green, true, ", "green, false, green", "green, false, green",
             "green, true, ", "green, true, ", "green, false, green", "green, true, ", "green, false, green" },
-            IE10 = { "green, false, green", "green, true, ", "green, true, ", "green, false, green",
+            IE11 = { "green, false, green", "green, true, ", "green, true, ", "green, false, green",
                 "green, true, ", "green, true, ", "green, false, green", "green, true, ", "green, true, " })
     public void removeAttribute() throws Exception {
         final String[] expected = getExpectedAlerts();
@@ -1216,7 +1215,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BLACK", "pink", "color: pink;" },
-            IE10 = { "black", "pink", "color: pink;" })
+            IE11 = { "black", "pink", "color: pink;" })
     public void caseInsensitive() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -1349,8 +1348,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "none" },
-            IE = "exception")
-    @NotYetImplemented(Browser.FF)
+            IE = "exception",
+            IE11 = { "function", "before", "none", "after", "none" })
+    @NotYetImplemented(FF)
     public void interceptSetter() throws Exception {
         final String html = "<html><body><div id='d'>foo</div><script>\n"
             + "try {\n"
@@ -1375,7 +1375,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "", "", "", "" },
-            IE = {"", "error", "", "", "error", "" })
+            IE8 = {"", "error", "", "", "error", "" })
     @NotYetImplemented(IE)
     public void setToNull() throws Exception {
         final String html
