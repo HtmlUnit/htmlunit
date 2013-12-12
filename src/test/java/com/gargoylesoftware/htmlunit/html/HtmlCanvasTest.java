@@ -53,7 +53,7 @@ public class HtmlCanvasTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            if (getBrowserVersion().isFirefox() || "IE10".equals(getBrowserVersion().getNickname())) {
+            if (getBrowserVersion().isFirefox() || "IE11".equals(getBrowserVersion().getNickname())) {
                 assertTrue(HtmlCanvas.class.isInstance(page.getHtmlElementById("myId")));
             }
             else {

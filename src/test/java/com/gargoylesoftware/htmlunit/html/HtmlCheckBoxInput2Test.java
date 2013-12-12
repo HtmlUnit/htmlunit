@@ -119,7 +119,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "true", "true" },
-            IE = { "true", "true", "false" })
+            IE8 = { "true", "true", "false" })
     public void checked_appendChild_docFragment_cloneNode() throws Exception {
         performTest(true, true, false, true, true);
     }
@@ -138,7 +138,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "true", "true" },
-            IE = { "true", "true", "false" })
+            IE8 = { "true", "true", "false" })
     public void checked_insertBefore_docFragment_cloneNode() throws Exception {
         performTest(true, false, false, true, true);
     }
@@ -265,7 +265,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" },
-            IE = { "false", "false", "false", "true", "true", "true" })
+            IE8 = { "false", "false", "false", "true", "true", "true" })
     public void checked_appendChild_cloneNode() throws Exception {
         performTest(true, true, false, false, true);
     }
@@ -284,7 +284,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" },
-            IE = { "false", "false", "false", "true", "true", "true" })
+            IE8 = { "false", "false", "false", "true", "true", "true" })
     public void checked_insertBefore_cloneNode() throws Exception {
         performTest(true, false, false, false, true);
     }
@@ -565,7 +565,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
         driver.findElement(By.id("myCheckbox")).click();
         assertEquals(getExpectedAlerts()[0], driver.getTitle());
 
-        if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER_10 != getBrowserVersion()) {
+        if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER_11 != getBrowserVersion()) {
             driver.findElement(By.id("myInput")).click();
             assertEquals(getExpectedAlerts()[1], driver.getTitle());
         }
@@ -655,8 +655,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "on-", "on-", "on-", "on-" },
-            IE = { "on-on", "on-on", "on-on", "on-on" },
-            IE10 = { "-", "-", "-", "-" })
+            IE8 = { "on-on", "on-on", "on-on", "on-on" })
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

@@ -108,7 +108,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = "Hi!",
-            IE10 = "Hi!")
+            IE11 = "Hi!")
     @NotYetImplemented
     public void unclosedCommentsInScript() throws Exception {
         final String html = "<html><body>\n"
@@ -828,7 +828,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "1", "1", "1", "1", "1" },
-            IE10 = { "1", "0", "1", "1", "0", "1" })
+            IE11 = { "1", "0", "1", "1", "0", "1" })
     @NotYetImplemented(FF)
     public void childNodes_isindex() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("isindex"));

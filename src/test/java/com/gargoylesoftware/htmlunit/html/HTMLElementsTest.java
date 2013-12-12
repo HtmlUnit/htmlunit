@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -810,7 +810,7 @@ public class HTMLElementsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE8 = "0")
-    @NotYetImplemented({ FF, IE10 })
+    @NotYetImplemented({ FF, IE11 })
     public void elementClosesItself_ruby() throws Exception {
         loadPageWithAlerts2(elementClosesItself("ruby"));
     }

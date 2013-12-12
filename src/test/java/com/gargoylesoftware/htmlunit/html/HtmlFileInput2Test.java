@@ -243,7 +243,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
             count++;
         }
 
-        if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER_10 != getBrowserVersion()) {
+        if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER_11 != getBrowserVersion()) {
             final Pattern pattern = Pattern
                 .compile("Content-Disposition: form-data; name=\"myInput\";"
                         + " filename=\".*test-classes[\\\\/]realm\\.properties\"");

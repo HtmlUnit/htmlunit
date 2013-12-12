@@ -128,7 +128,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "page2.html",
-            IE10 = "")
+            IE11 = "")
     public void clickNestedCheckboxElement() throws Exception {
         final String html =
               "<html>\n"
@@ -170,7 +170,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "page2.html",
-            IE10 = "")
+            IE11 = "")
     public void clickNestedInputElement() throws Exception {
         final String html =
               "<html>\n"
@@ -212,7 +212,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "page2.html",
-            IE10 = "")
+            IE11 = "")
     public void clickNestedRadioElement() throws Exception {
         final String html =
               "<html>\n"

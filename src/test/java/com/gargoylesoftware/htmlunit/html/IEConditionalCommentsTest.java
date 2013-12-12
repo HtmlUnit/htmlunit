@@ -39,7 +39,7 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "hello",
             IE = { "hello", "IE" },
-            IE10 = "hello")
+            IE11 = "hello")
     public void ifIE() throws Exception {
         final String html = "<html><head>"
             + "<script>alert('hello')</script>\n"
@@ -83,7 +83,7 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "hello",
             IE = { "hello", "IE up to 8" },
             IE9 = "hello",
-            IE10 = "hello")
+            IE11 = "hello")
     public void if_lte_IE_8() throws Exception {
         final String html = "<html><head>"
             + "<script>alert('hello')</script>\n"
@@ -98,7 +98,7 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "hello",
             IE = { "hello", "IE up to 9" },
-            IE10 = "hello")
+            IE11 = "hello")
     public void if_lte_IE_9() throws Exception {
         final String html = "<html><head>"
             + "<script>alert('hello')</script>\n"
@@ -113,7 +113,7 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "hello",
             IE = { "hello", "IE up to 10" },
-            IE10 = "hello")
+            IE11 = "hello")
     public void if_lte_IE_10() throws Exception {
         final String html = "<html><head>"
             + "<script>alert('hello')</script>\n"
@@ -128,7 +128,7 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "hello",
             IE = { "hello", "lt mso 9" },
-            IE10 = "hello")
+            IE11 = "hello")
     public void if_lte_mso_9() throws Exception {
         final String html = "<html><head>"
             + "<script>alert('hello')</script>\n"
@@ -145,7 +145,7 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
     @Alerts(CHROME = { "", "" },
             FF = { "undefined", "undefined" },
             IE = { "<!--[if gte IE]>hello<![endif]-->", "world" },
-            IE10 = { "", "" })
+            IE11 = { "", "" })
     public void incorrectExpression() throws Exception {
         final String html = "<html><head></head><body>"
             + "<div id='div1'><!--[if gte IE]>hello<![endif]--></div>\n"

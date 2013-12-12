@@ -37,7 +37,7 @@ public class HtmlResetInput2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "-", "-", "-" },
             IE = { "Reset-", "Reset-", "Reset-" },
-            IE10 = { "Reset-Reset", "Reset-Reset", "Reset-Reset" })
+            IE11 = { "Reset-Reset", "Reset-Reset", "Reset-Reset" })
     public void defaultValues() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -70,7 +70,7 @@ public class HtmlResetInput2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "-", "-", "-" },
             IE = { "Reset-", "Reset-", "Reset-" },
-            IE10 = { "Reset-Reset", "Reset-Reset", "Reset-Reset" })
+            IE11 = { "Reset-Reset", "Reset-Reset", "Reset-Reset" })
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

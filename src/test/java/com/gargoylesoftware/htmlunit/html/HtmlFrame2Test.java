@@ -103,9 +103,9 @@ public class HtmlFrame2Test extends WebDriverTestCase {
     @Alerts(FF = { "second [object HTMLFormElement]", "third [object HTMLFormElement]",
             "parent [object HTMLFormElement]" },
             IE = { "parent [object]", "second [object]", "third [object]" },
-            IE10 = { })
+            IE11 = { })
     // real FF sometimes alerts 'third' before 'second'
-    // real IE10 does not know frames.XXX.document anymore
+    // real IE11 does not know frames.XXX.document anymore
     public void postponeLoading() throws Exception {
         final String html = "<FRAMESET onload=\"alert('parent ' + window.parent.frames.third.document.frm)\">\n"
             + "  <FRAME name=second frameborder=0 src='second.html'>\n"
@@ -159,12 +159,12 @@ public class HtmlFrame2Test extends WebDriverTestCase {
         Assert.assertEquals(3, actualAlerts.size());
 
         // ignore order of frame windows
-        if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER_10 != getBrowserVersion()) {
+        if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER_11 != getBrowserVersion()) {
             // returns 'first' 'third' 'second'
             Assert.assertEquals("first", actualAlerts.get(0));
         }
         else {
-            // IE10 returns 'second' 'third' 'first'
+            // IE11 returns 'second' 'third' 'first'
             // DEFAULT returns 'third' 'second' 'first'
             Assert.assertEquals("first", actualAlerts.get(2));
         }
@@ -206,7 +206,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
         Assert.assertEquals(4, actualAlerts.size());
 
         // ignore order of frame windows
-        if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER_10 != getBrowserVersion()) {
+        if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER_11 != getBrowserVersion()) {
             // returns 'first' 'third' 'fourth' 'second'
             Assert.assertEquals("first", actualAlerts.get(0));
         }

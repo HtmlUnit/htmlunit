@@ -104,7 +104,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
             FF17 = { "ISO-8859-1", "ISO-8859-1", "undefined", "undefined" },
             FF24 = { "windows-1252", "windows-1252", "undefined", "undefined" },
             IE = { "undefined", "undefined", "iso-8859-1", "windows-1252" },
-            IE10 = { "ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252" })
+            IE11 = { "ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252" })
     public void getPageEncoding() throws Exception {
         final String htmlContent = "<html><head>\n"
             + "  <title>foo</title>\n"
