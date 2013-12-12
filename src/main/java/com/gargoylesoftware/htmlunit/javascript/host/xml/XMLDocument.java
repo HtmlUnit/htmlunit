@@ -14,24 +14,18 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_ATTRIBUTE_HAS_TEXT_PROPERTY;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CLASS_NAME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.w3c.dom.Node;
 
-import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -65,15 +59,12 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Chuck Dumont
  * @author Frank Danek
  */
-@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class XMLDocument extends Document {
 
     private static final Log LOG = LogFactory.getLog(XMLDocument.class);
 
     private boolean async_ = true;
-    private boolean preserveWhiteSpace_;
-    private XMLDOMParseError parseError_;
-    private Map<String, String> properties_ = new HashMap<String, String>();
 
     /**
      * Creates a new instance. JavaScript objects must have a default constructor.
@@ -99,10 +90,23 @@ public class XMLDocument extends Document {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getClassName() {
+        if (getWindow().getWebWindow() != null) {
+            if (getBrowserVersion().hasFeature(JS_DOCUMENT_CLASS_NAME)) {
+                return "Document";
+            }
+        }
+        return super.getClassName();
+    }
+
+    /**
      * Sets the <tt>async</tt> attribute.
      * @param async Whether or not to send the request to the server asynchronously
      */
-    @JsxSetter
+    @JsxSetter(@WebBrowser(FF))
     public void setAsync(final boolean async) {
         async_ = async;
     }
@@ -111,7 +115,7 @@ public class XMLDocument extends Document {
      * Returns Whether or not to send the request to the server asynchronously.
      * @return the <tt>async</tt> attribute
      */
-    @JsxGetter
+    @JsxGetter(@WebBrowser(FF))
     public boolean getAsync() {
         return async_;
     }
@@ -122,7 +126,7 @@ public class XMLDocument extends Document {
      * @param xmlSource a string containing a URL that specifies the location of the XML file
      * @return true if the load succeeded; false if the load failed
      */
-    @JsxFunction
+    @JsxFunction(@WebBrowser(FF))
     public boolean load(final String xmlSource) {
         if (async_) {
             if (LOG.isDebugEnabled()) {
@@ -138,14 +142,6 @@ public class XMLDocument extends Document {
             return true;
         }
         catch (final IOException e) {
-            final XMLDOMParseError parseError = getParseError();
-            parseError.setErrorCode(-1);
-            parseError.setFilepos(1);
-            parseError.setLine(1);
-            parseError.setLinepos(1);
-            parseError.setReason(e.getMessage());
-            parseError.setSrcText("xml");
-            parseError.setUrl(xmlSource);
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Error parsing XML from '" + xmlSource + "'", e);
             }
@@ -160,7 +156,6 @@ public class XMLDocument extends Document {
      *        This string can contain an entire XML document or a well-formed fragment.
      * @return true if the load succeeded; false if the load failed
      */
-    @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public boolean loadXML(final String strXML) {
         try {
             final WebWindow webWindow = getWindow().getWebWindow();
@@ -191,12 +186,7 @@ public class XMLDocument extends Document {
             scriptable = new Element();
         }
         else if (domNode instanceof DomAttr) {
-            if (getPage().getWebClient().getBrowserVersion().hasFeature(JS_XML_ATTRIBUTE_HAS_TEXT_PROPERTY)) {
-                scriptable = new XMLAttr();
-            }
-            else {
-                scriptable = new Attr();
-            }
+            scriptable = new Attr();
         }
         else {
             return super.makeScriptableFor(domNode);
@@ -217,115 +207,10 @@ public class XMLDocument extends Document {
     }
 
     /**
-     * Gets the JavaScript property "parseError" for the document.
-     * @return the ParserError object for the document
-     */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
-    public XMLDOMParseError getParseError() {
-        if (parseError_ == null) {
-            parseError_ = new XMLDOMParseError();
-            parseError_.setPrototype(getPrototype(parseError_.getClass()));
-            parseError_.setParentScope(getParentScope());
-        }
-        return parseError_;
-    }
-
-    /**
-     * Contains the XML representation of the node and all its descendants.
-     * @return an XML representation of this node and all its descendants
-     */
-    @Override
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
-    public String getXml() {
-        final XMLSerializer seralizer = new XMLSerializer();
-        seralizer.setParentScope(getWindow());
-        seralizer.setPrototype(getPrototype(seralizer.getClass()));
-        return seralizer.serializeToString(getDocumentElement());
-    }
-
-    /**
-     * Gets the current white space handling.
-     * @return the current white space handling
-     */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
-    public boolean getPreserveWhiteSpace() {
-        return preserveWhiteSpace_;
-    }
-
-    /**
-     * Specifies the white space handling.
-     * @param preserveWhiteSpace white space handling
-     */
-    @JsxSetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
-    public void setPreserveWhiteSpace(final boolean preserveWhiteSpace) {
-        preserveWhiteSpace_ = preserveWhiteSpace;
-    }
-
-    /**
-     * This method is used to set
-     * <a href="http://msdn2.microsoft.com/en-us/library/ms766391.aspx">second-level properties</a>
-     * on the DOM object.
-     *
-     * @param name the name of the property to be set
-     * @param value the value of the specified property
-     */
-    @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
-    public void setProperty(final String name, final String value) {
-        properties_.put(name, value);
-    }
-
-    /**
-     * Returns the value of the property set by {@link #setProperty(String, String)}.
-     *
-     * @param name the name of the property to get
-     * @return the property value
-     */
-    @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
-    public String getProperty(final String name) {
-        return properties_.get(name);
-    }
-
-    /**
-     * Applies the specified XPath expression to this node's context and returns the generated list of matching nodes.
-     * @param expression a string specifying an XPath expression
-     * @return list of the found elements
-     */
-    @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
-    public HTMLCollection selectNodes(final String expression) {
-        final boolean attributeChangeSensitive = expression.contains("@");
-        final String description = "XMLDocument.selectNodes('" + expression + "')";
-        final SgmlPage page = getPage();
-        final HTMLCollection collection = new HTMLCollection(page.getDocumentElement(),
-                attributeChangeSensitive, description) {
-            @Override
-            protected List<Object> computeElements() {
-                final List<Object> list = new ArrayList<Object>(page.getByXPath(expression));
-                return list;
-            }
-        };
-        return collection;
-    }
-
-    /**
-     * Applies the specified pattern-matching operation to this node's context and returns the first matching node.
-     * @param expression a string specifying an XPath expression
-     * @return the first node that matches the given pattern-matching operation
-     *         If no nodes match the expression, returns a null value.
-     */
-    @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
-    public Object selectSingleNode(final String expression) {
-        final HTMLCollection collection = selectNodes(expression);
-        if (collection.getLength() > 0) {
-            return collection.get(0, collection);
-        }
-        return null;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxFunction
     public HTMLCollection getElementsByTagName(final String tagName) {
         final DomNode firstChild = getDomNodeOrDie().getFirstChild();
         if (firstChild == null) {
@@ -366,16 +251,6 @@ public class XMLDocument extends Document {
     }
 
     /**
-     * Since we are not processing DTD, this method always returns null.
-     * @param id the ID to search for
-     * @return null
-     */
-    @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
-    public Object nodeFromID(final String id) {
-        return null;
-    }
-
-    /**
      * Creates a new ProcessingInstruction.
      * @param target the target
      * @param data the data
@@ -396,29 +271,5 @@ public class XMLDocument extends Document {
     public Object createCDATASection(final String data) {
         final DomCDataSection node = ((XmlPage) getPage()).createCDATASection(data);
         return getScriptableFor(node);
-    }
-
-    /**
-     * Creates a node using the supplied type, name, and namespace.
-     * @param type a value that uniquely identifies the node type
-     * @param name the value for the new node's nodeName property
-     * @param namespaceURI A string defining the namespace URI.
-     *        If specified, the node is created in the context of the namespaceURI parameter
-     *        with the prefix specified on the node name.
-     *        If the name parameter does not have a prefix, this is treated as the default namespace.
-     * @return the newly created node
-     */
-    @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
-    public Object createNode(final Object type, final String name, final Object namespaceURI) {
-        switch((short) Context.toNumber(type)) {
-            case Node.ELEMENT_NODE:
-                return createElementNS((String) namespaceURI, name);
-            case Node.ATTRIBUTE_NODE:
-                return createAttribute(name);
-
-            default:
-                throw Context.reportRuntimeError("xmlDoc.createNode(): Unsupported type "
-                        + (short) Context.toNumber(type));
-        }
     }
 }

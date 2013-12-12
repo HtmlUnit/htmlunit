@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import java.net.URL;
 
@@ -194,7 +195,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "true" },
-            IE10 = { "undefined", "undefined" })
+            IE11 = { "undefined", "undefined" })
     public void async() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -214,7 +215,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "true", "books", "books", "3", "#text", "0" },
             IE = { "true", "books", "books", "1", "book", "0" },
-            IE10 = { })
+            IE11 = { })
     public void load() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -249,7 +250,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "true", "books", "books", "3", "#text", "0" },
             IE = { "true", "books", "books", "1", "book", "0" },
-            IE10 = { })
+            IE11 = { })
     // TODO what is the difference to load()?
     public void load_relativeURL() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -285,7 +286,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = "undefined",
             IE = "false",
-            IE10 = "undefined")
+            IE11 = "undefined")
     public void preserveWhiteSpace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -306,7 +307,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = "exception",
             IE = "",
-            IE10 = "exception")
+            IE11 = "exception")
     public void setProperty() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -328,7 +329,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "exception" },
             IE = { "1", "books" },
-            IE10 = { "exception" })
+            IE11 = { "exception" })
     public void selectNodes() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -361,7 +362,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = "exception",
             IE = { "0", "1" },
-            IE10 = { "exception" })
+            IE11 = { "exception" })
     public void selectNodes_caseSensitive() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -393,7 +394,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "exception" },
             IE = { "2", "1" },
-            IE10 = { "exception" })
+            IE11 = { "exception" })
     public void selectNodes_namespace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -432,7 +433,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = "exception",
             IE = { "book", "null", "book", "null" },
-            IE10 = "exception")
+            IE11 = "exception")
     public void selectNodes_nextNodeAndReset() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
@@ -467,7 +468,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = "exception",
             IE = { "book", "#document", "book", "#document" },
-            IE10 = "exception")
+            IE11 = "exception")
     public void selectSingleNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -632,7 +633,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(FF)
+    @Browsers({ FF, IE11 })
     @Alerts("true")
     public void instanceOf() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -762,7 +763,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0", "1", "0", "1" },
-            IE10 = { "1", "0" })
+            IE11 = { "1", "0" })
     public void getElementsByTagNameWithNamespace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -797,7 +798,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = "0",
             IE = "1",
-            IE10 = "")
+            IE11 = "")
     public void xpathWithNamespaces() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -838,7 +839,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "  var selectionNamespaces = 'xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" "
                             + "xmlns:ns1=\"http://www.example.com/ns1\"';\n"
             + "  function test() {\n"
-            + "  if (window.ActiveXObject) {"
+            + "  if ('ActiveXObject' in window) {\n"
             + "    var doc = new ActiveXObject('Microsoft.XMLDOM');\n"
             + "    doc.setProperty('SelectionNamespaces', selectionNamespaces);"
             + "    doc.async = false;\n"
@@ -872,8 +873,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = "[object HTMLDivElement]",
-            IE = "null",
-            IE10 = "")
+            IE = "null")
     public void nodeFromID() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -905,7 +905,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "[object XMLDocument]", "OK" } ,
             IE = "[object XMLDocument]",
-            IE10 = { "[object Document]", "OK" })
+            IE11 = { "[object Document]", "OK" })
     //TODO: in my real IE8 (without WebDriver), I got [object HTMLDocument]
     //so it should be HTMLDocument not XMLDocument for IE
     //Also, IE8 with WebDriver gives "" (empty Alert)

@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 
@@ -66,7 +67,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Tries(3)
-    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void syncUse() throws Exception {
         final String html =
               "<html>\n"
@@ -345,7 +346,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("bla bla")
-    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseText_NotXml() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -373,9 +374,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "someAttr", "someValue", "someAttr=\"someValue\"" },
-            IE10 = { "1", "someAttr", "undefined", "undefined" })
+            IE11 = { "1", "someAttr", "undefined", "undefined" })
     @Browsers(IE)
-    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML2() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -568,7 +569,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "ibcdefg", "xxxxxfg" })
-    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void replaceOnTextData() throws Exception {
         final String html =
               "<html>\n"
@@ -706,7 +707,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(FF)
+    @Browsers({ FF, IE11 })
     @Alerts({ "null", "myID", "blah", "span", "[object XMLDocument]" })
     public void responseXML_getElementById_FF() throws Exception {
         final String html =
@@ -753,12 +754,10 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object Element]", "[object Element]", "[object HTMLBodyElement]",
-                "[object HTMLSpanElement]", "[object Document]", "undefined" },
-            FF = { "[object Element]", "[object Element]", "[object HTMLBodyElement]",
                 "[object HTMLSpanElement]", "[object XMLDocument]", "undefined" },
             IE8 = { "[object]", "[object]", "[object]",
                 "<body xmlns=\"http://www.w3.org/1999/xhtml\"><span id=\"out\">Hello Bob Dole!</span></body>" })
-    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML_getElementById() throws Exception {
         final String html =
               "<html>\n"
@@ -906,7 +905,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "myID",
-            IE = "exception")
+            IE8 = "exception")
     public void responseXML_html_select() throws Exception {
         final String html =
               "<html>\n"
@@ -949,7 +948,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "myInput",
-            IE = "exception")
+            IE8 = "exception")
     public void responseXML_html_form() throws Exception {
         final String html =
               "<html>\n"

@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ERRORHANDLER_NOT_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_IGNORE_SAME_ORIGIN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_IGNORE_SAME_ORIGIN_TO_ABOUT;
@@ -23,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYST
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYSTATECHANGE_WITH_EVENT_PARAM;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLOW_EMTPY_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ORIGIN_HEADER;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_RESPONSE_XML_IS_ACTIVEXOBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_STATUS_THROWS_EXCEPTION_WHEN_UNSET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_TRIGGER_ONLOAD_ON_COMPLETED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL;
@@ -61,6 +61,9 @@ import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLActiveXObjectFactory;
+import com.gargoylesoftware.htmlunit.activex.javascript.msxml.XMLDOMDocument;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -72,7 +75,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
@@ -88,6 +90,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Stuart Begg
  * @author Ronald Brill
  * @author Sebastian Cato
+ * @author Frank Danek
  *
  * @see <a href="http://www.w3.org/TR/XMLHttpRequest/">W3C XMLHttpRequest</a>
  * @see <a href="http://developer.apple.com/internet/webcontent/xmlhttpreq.html">Safari documentation</a>
@@ -237,7 +240,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Returns the event handler that fires on load.
      * @return the event handler that fires on load
      */
-    @JsxGetter({ @WebBrowser(value = IE, maxVersion = 6), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF) })
     public Function getOnload() {
         return loadHandler_;
     }
@@ -246,7 +249,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Sets the event handler that fires on load.
      * @param loadHandler the event handler that fires on load
      */
-    @JsxSetter({ @WebBrowser(value = IE, maxVersion = 6), @WebBrowser(FF) })
+    @JsxSetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF) })
     public void setOnload(final Function loadHandler) {
         loadHandler_ = loadHandler;
     }
@@ -255,7 +258,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Returns the event handler that fires on error.
      * @return the event handler that fires on error
      */
-    @JsxGetter
+    @JsxGetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF) })
     public Function getOnerror() {
         return errorHandler_;
     }
@@ -264,7 +267,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Sets the event handler that fires on error.
      * @param errorHandler the event handler that fires on error
      */
-    @JsxSetter
+    @JsxSetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF) })
     public void setOnerror(final Function errorHandler) {
         errorHandler_ = errorHandler;
     }
@@ -341,19 +344,21 @@ public class XMLHttpRequest extends SimpleScriptable {
         }
         final String contentType = webResponse_.getContentType();
         if (contentType.isEmpty() || contentType.contains("xml")) {
+            final WebWindow webWindow = getWindow().getWebWindow();
             try {
-                final XmlPage page = new XmlPage(webResponse_, getWindow().getWebWindow());
-                final XMLDocument doc;
-                if (getBrowserVersion().hasFeature(JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
-                    doc = ActiveXObject.buildXMLDocument(getWindow().getWebWindow());
+                if (getBrowserVersion().hasFeature(XHR_RESPONSE_XML_IS_ACTIVEXOBJECT)) {
+                    final XmlPage page = new XmlPage(webResponse_, webWindow, true, false);
+                    final MSXMLActiveXObjectFactory factory = webWindow.getWebClient().getMSXMLActiveXObjectFactory();
+                    final XMLDOMDocument document = (XMLDOMDocument) factory.create("Microsoft.XMLDOM", webWindow);
+                    document.setDomNode(page);
+                    return document;
                 }
-                else {
-                    doc = new XMLDocument();
-                    doc.setPrototype(getPrototype(doc.getClass()));
-                }
-                doc.setParentScope(getWindow());
-                doc.setDomNode(page);
-                return doc;
+                final XmlPage page = new XmlPage(webResponse_, webWindow);
+                final XMLDocument document = new XMLDocument();
+                document.setPrototype(getPrototype(document.getClass()));
+                document.setParentScope(getWindow());
+                document.setDomNode(page);
+                return document;
             }
             catch (final IOException e) {
                 LOG.warn("Failed parsing XML document " + webResponse_.getWebRequest().getUrl() + ": "
@@ -851,7 +856,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @param mimeType the type used to override that returned by the server (if any)
      * @see <a href="http://xulplanet.com/references/objref/XMLHttpRequest.html#method_overrideMimeType">XUL Planet</a>
      */
-    @JsxFunction({ @WebBrowser(value = IE, maxVersion = 6), @WebBrowser(FF) })
+    @JsxFunction(@WebBrowser(FF))
     public void overrideMimeType(final String mimeType) {
         overriddenMimeType_ = mimeType;
     }
@@ -869,7 +874,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Sets the "withCredentials" property.
      * @param withCredentials the "withCredentials" property.
      */
-    @JsxSetter
+    @JsxSetter({ @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF) })
     public void setWithCredentials(final boolean withCredentials) {
         if (!async_ && state_ != STATE_UNSENT) {
             if (getBrowserVersion().hasFeature(XHR_WITHCREDENTIALS_SYNC_NOT_WRITEABLE_EXCEPTION)) {

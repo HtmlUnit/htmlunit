@@ -189,7 +189,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "5", "pass", "pass", "pass", "pass" },
             IE = { "3", "exception", "exception", "pass", "pass" },
-            IE10 = { "1", "exception", "exception", "pass", "pass" })
+            IE11 = { "1", "exception", "exception", "pass", "pass" })
     public void openThrowOnEmptyUrl() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -219,8 +219,9 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "bla", "someAttr", "someValue", "true", "foo", "2", "fi1" })
-    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    @Alerts(DEFAULT = { "1", "bla", "someAttr", "someValue", "true", "foo", "2", "fi1" },
+            IE8 = { "1", "bla", "someAttr", "someValue", "false", "foo", "2", "fi1" })
+    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML() throws Exception {
         testResponseXML("text/xml");
         testResponseXML(null);
@@ -232,7 +233,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
-    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML_badContentType() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -320,7 +321,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ok",
-            IE10 = "exception")
+            IE11 = "exception")
     public void sameOriginPolicy_aboutBlank() throws Exception {
         sameOriginPolicy("about:blank");
     }
@@ -370,8 +371,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Document]",
-            FF = "[object XMLDocument]",
+    @Alerts(DEFAULT = "[object XMLDocument]",
             IE8 = "[object]")
     public void iframeInResponse() throws Exception {
         final String html = "<html><head><script>\n"
@@ -396,7 +396,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts({ "in timeout", "hello" })
     @NotYetImplemented
-    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void xhrDownloadInBackground() throws Exception {
         final String html = "<html><head><script>\n"
             + "var xhr = " + XHRInstantiation_ + ";\n"
@@ -421,7 +421,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "hello", "in timeout" },
-            IE10 = { "in timeout", "hello" })
+            IE11 = { "in timeout", "hello" })
     public void xhrCallbackBeforeTimeout() throws Exception {
         final String html = "<html><head><script>\n"
             + "function wait() {\n"

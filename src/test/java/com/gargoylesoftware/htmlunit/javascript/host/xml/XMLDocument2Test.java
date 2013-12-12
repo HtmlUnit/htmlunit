@@ -43,7 +43,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "myTarget,myData,7", "myTarget,myData", "abcdefghij",
             "<?myTarget myData?>", "<![CDATA[abcdefghij]]>" },
-            IE10 = { "myTarget,myData,7", "myTarget,myData", "abcdefghij",
+            IE11 = { "myTarget,myData,7", "myTarget,myData", "abcdefghij",
             "<?myTarget myData?>", "abcdefghij" })
     public void createProcessingInstruction() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

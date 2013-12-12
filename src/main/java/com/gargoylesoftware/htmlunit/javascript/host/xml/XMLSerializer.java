@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class XMLSerializer extends SimpleScriptable {
 
     // this is a bit strange but it is the way FF works

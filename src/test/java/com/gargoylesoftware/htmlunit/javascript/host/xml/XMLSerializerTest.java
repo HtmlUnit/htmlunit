@@ -105,7 +105,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
             IE8 = "<?xml32version=\"1.0\"?>1310<xsl:stylesheet32version=\"1.0\"32"
                     + "xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">13109<xsl:template32match=\"/\">131099<html>"
                     + "1310999<body>1310999</body>131099</html>13109</xsl:template>1310</xsl:stylesheet>1310",
-            IE10 = "<xsl:stylesheet32xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"32version=\"1.0\">103232"
+            IE11 = "<xsl:stylesheet32xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"32version=\"1.0\">103232"
                     + "<xsl:template32match=\"/\">103232<html>1032323232<body>1032323232</body>103232</html>103232"
                     + "</xsl:template>10</xsl:stylesheet>")
     @NotYetImplemented
@@ -136,7 +136,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
                     + "<inner32attrib=\"attribValue\"/><meta32attrib=\"attribValue\"/></outer></document>",
             IE8 = "<document32attrib=\"attribValue\"><outer32attrib=\"attribValue\">"
                     + "<inner32attrib=\"attribValue\"/><meta32attrib=\"attribValue\"/></outer></document>1310",
-            IE10 = "<document32attrib=\"attribValue\"><outer32attrib=\"attribValue\">"
+            IE11 = "<document32attrib=\"attribValue\"><outer32attrib=\"attribValue\">"
                     + "<inner32attrib=\"attribValue\"32/><meta32attrib=\"attribValue\"32/></outer></document>")
     public void attributes() throws Exception {
         final String expectedString = getExpectedAlerts()[0];
@@ -168,7 +168,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
                     + "<span32class=\"spanClass\">foo</span>"
                     + "</body>"
                     + "</html>1310",
-            IE10 = "<html32xmlns=\"http://www.w3.org/1999/xhtml\">"
+            IE11 = "<html32xmlns=\"http://www.w3.org/1999/xhtml\">"
                     + "<head><title>html</title></head>"
                     + "<body>"
                     + "<span32class=\"spanClass\">foo</span>"
@@ -229,7 +229,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "<foo/>", "<foo/>" },
             IE8 = "createDocument not available",
-            IE10 = { "<foo />", "<foo />" })
+            IE11 = { "<foo />", "<foo />" })
     public void document() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -250,7 +250,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "<img/>", "<img xmlns=\"http://www.w3.org/1999/xhtml\" />", "<?myTarget myData?>" },
             IE8 = "XMLSerializer not defined",
-            IE10 = { "<img />", "", "<?myTarget myData?>" })
+            IE11 = { "<img />", "", "<?myTarget myData?>" })
     public void xml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -280,7 +280,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = "<root><my:parent xmlns:my=\"myUri\"><my:child/><another_child/></my:parent></root>",
             IE = "<root><my:parent xmlns:my=\"myUri\"><my:child/><another_child/></my:parent></root>\r\n",
-            IE10 = "<root><my:parent xmlns:my=\"myUri\"><my:child /><another_child /></my:parent></root>")
+            IE11 = "<root><my:parent xmlns:my=\"myUri\"><my:child /><another_child /></my:parent></root>")
     public void namespace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -310,7 +310,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>",
             IE8 = "XMLSerializer not defined",
-            IE10 = "<textarea xmlns=\"http://www.w3.org/1999/xhtml\" />")
+            IE11 = "<textarea xmlns=\"http://www.w3.org/1999/xhtml\" />")
     public void mixedCase() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -410,7 +410,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
                     "<li xmlns=\"http://www.w3.org/1999/xhtml\"></li>",
                     "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>" },
             IE8 = "XMLSerializer not defined",
-            IE10 = { "<div xmlns=\"http://www.w3.org/1999/xhtml\" />",
+            IE11 = { "<div xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<h1 xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<p xmlns=\"http://www.w3.org/1999/xhtml\" />",
                     "<li xmlns=\"http://www.w3.org/1999/xhtml\" />",

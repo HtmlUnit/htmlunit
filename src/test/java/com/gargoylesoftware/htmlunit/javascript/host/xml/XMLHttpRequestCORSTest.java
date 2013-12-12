@@ -398,7 +398,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "false", "false", "ex: withCredentials=true", "ex: withCredentials=false" },
             FF17 = { "false", "false", "false", "false" },
             IE8 = { "undefined", "undefined", "true", "false" },
-            IE10 = { "false", "false", "true", "false" })
+            IE11 = { "false", "false", "true", "false" })
     public void withCredentials_notSetableInSyncMode() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -433,7 +433,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "false", "false", "true", "ex: open" },
             IE8 = { "undefined", "false", "true", "open true" },
-            IE10 = { "false", "ex: withCredentials=false", "ex: withCredentials=true", "open false" })
+            IE11 = { "false", "ex: withCredentials=false", "ex: withCredentials=true", "open false" })
     public void withCredentials_openFailesInSyncMode() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -471,7 +471,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "1", "0", "4", "0" },
             IE8 = { "1", "ex: status not available", "4", "200" },
-            IE10 = { "1", "0", "4", "200" })
+            IE11 = { "1", "0", "4", "200" })
     public void withCredentials() throws Exception {
         testWithCredentials("*", "true");
     }
@@ -492,7 +492,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "1", "0", "4", "0" },
             IE8 = { "1", "ex: status not available", "4", "200" },
-            IE10 = { "1", "0", "4", "200" })
+            IE11 = { "1", "0", "4", "200" })
     public void withCredentialsServerSlashAtEnd() throws Exception {
         testWithCredentials("http://localhost:" + PORT + "/", "true");
     }
@@ -503,7 +503,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "1", "0", "4", "0" },
             IE8 = { "1", "ex: status not available", "4", "200" },
-            IE10 = { "1", "0", "4", "200" })
+            IE11 = { "1", "0", "4", "200" })
     public void withCredentials_no_header() throws Exception {
         testWithCredentials("*", null);
     }
@@ -514,7 +514,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "1", "0", "4", "0" },
             IE8 = { "1", "ex: status not available", "4", "200" },
-            IE10 = { "1", "0", "4", "200" })
+            IE11 = { "1", "0", "4", "200" })
     public void withCredentials_no_header_Server() throws Exception {
         testWithCredentials("http://localhost:" + PORT, null);
     }
@@ -525,7 +525,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "1", "0", "4", "0" },
             IE8 = { "1", "ex: status not available", "4", "200" },
-            IE10 = { "1", "0", "4", "200" })
+            IE11 = { "1", "0", "4", "200" })
     public void withCredentials_no_header_ServerSlashAtEnd() throws Exception {
         testWithCredentials("http://localhost:" + PORT + "/", null);
     }
