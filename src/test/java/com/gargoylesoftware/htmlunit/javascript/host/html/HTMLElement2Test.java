@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
@@ -120,7 +120,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
+    @Browsers(IE8)
     @Alerts({ "30", "30", "30" })
     public void offsetWidth_withEvent() throws Exception {
         final String html =
@@ -211,7 +211,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "12", "12" },
-            IE10 = { "15", "15" })
+            IE11 = { "15", "15" })
     public void offsetTopAndLeft_Borders() throws Exception {
         final String html =
               "<html>\n"
@@ -503,7 +503,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "0", "20" },
             IE = { "15", "15" },
-            IE10 = { "0", "18" })
+            IE11 = { "0", "18" })
     public void offsetHeight_explicitHeightZero() throws Exception {
         final String html
             = "<html><body>\n"
@@ -521,7 +521,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "77", "2", "5", "20", "50", "50", "20" },
             IE = { "100", "15", "20", "20", "50", "50", "15" },
-            IE10 = { "75", "2", "5", "20", "50", "50", "18" })
+            IE11 = { "75", "2", "5", "20", "50", "50", "18" })
     public void offsetHeight_calculatedBasedOnChildren() throws Exception {
         final String html
             = "<html>\n"

@@ -42,7 +42,7 @@ public class HTMLDivElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no",
-            IE = "yes")
+            IE8 = "yes")
     public void doScroll() throws Exception {
         final String html =
             "<html>\n"

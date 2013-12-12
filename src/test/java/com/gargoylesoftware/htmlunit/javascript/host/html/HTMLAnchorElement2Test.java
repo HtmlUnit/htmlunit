@@ -16,8 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -74,7 +74,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
+    @Browsers(IE8)
     @Alerts("onclick")
     public void javaScriptPreventDefaultIE() throws Exception {
         final String html
@@ -102,7 +102,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, CHROME, IE10 })
+    @Browsers({ FF, CHROME, IE11 })
     @Alerts("onclick")
     public void javaScriptPreventDefault() throws Exception {
         final String html

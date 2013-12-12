@@ -45,9 +45,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = "1 2 3 4 onload ",
-            IE = "1 2 3 b=loading 4 b=loaded ",
-            IE10 = { "1 2 3 b=loading 4 onload ", "1 2 3 b=loading 4 onload b=loaded " })
+    @Alerts(DEFAULT = "1 2 3 4 onload ",
+            IE8 = "1 2 3 b=loading 4 b=loaded ")
     public void onReadyStateChangeHandler() throws Exception {
         final String html = "<html>\n"
             + "  <head>\n"
@@ -660,9 +659,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "3", "4", "2", "5" },
-            IE = { "1", "2", "3", "4", "5", "6", "7" },
-            IE10 = { "3", "4", "6", "2", "1", "5", "7" })
+    @Alerts(DEFAULT = { "3", "4", "2", "5" },
+            IE8 = { "1", "2", "3", "4", "5", "6", "7" })
     @NotYetImplemented(IE8)
     public void onReadyStateChange_Order() throws Exception {
         final String html =
@@ -684,8 +682,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = "[object]",
-            IE10 = "[object MSEventObj]")
+    @Alerts(IE8 = "[object]")
     public void onReadyStateChange_EventAvailable() throws Exception {
         final String html =
               "<html><body><script>\n"
@@ -705,9 +702,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "3", "4", "2" },
-            IE = { "1", "2", "3", "4", "5", "6" },
-            IE10 = { "3", "4", "5", "2", "1", "6" })
+    @Alerts(DEFAULT = { "3", "4", "2" },
+            IE8 = { "1", "2", "3", "4", "5", "6" })
     public void onReadyStateChange_Order_NoBody() throws Exception {
         final String html =
               "<html>\n"
@@ -801,7 +797,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = "Unexpected call to method or property access",
-            IE10 = "")
+            IE11 = "")
     public void appendChild_UnexpectedCall() throws Exception {
         // IE (at least IE6 and IE8) does not support script.appendChild(source)
         final String html =
@@ -826,7 +822,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = "Unexpected call to method or property access",
-            IE10 = "")
+            IE11 = "")
     public void insertBeforeUnexpectedCall() throws Exception {
         // IE (at least IE6 and IE8) does not support script.insertBefore(source, null)
         final String html =

@@ -524,7 +524,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        if (getBrowserVersion().isFirefox() || BrowserVersion.INTERNET_EXPLORER_10 == getBrowserVersion()) {
+        if (getBrowserVersion().isFirefox() || BrowserVersion.INTERNET_EXPLORER_11 == getBrowserVersion()) {
             setExpectedAlerts(URL_FIRST + "foo.html");
         }
         else {
@@ -751,7 +751,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "page1.html", "page2.html", "page1.html", "page1.html" },
-            IE10 = { "page1.html", "page1.html", "page1.html", "page1.html" })
+            IE11 = { "page1.html", "page1.html", "page1.html", "page1.html" })
     public void changeFormActionAfterSubmit() throws Exception {
         final String[] expectedFiles = getExpectedAlerts();
         setExpectedAlerts();
@@ -904,7 +904,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "page4.html?f1=v1&f2=v2", "page4.html?f1=v1&f2=v2", "page3.html?f1=v1", "page3.html?f1=v1" },
-            IE10 = { "page3.html?f1=v1", "page3.html?f1=v1", "page3.html?f1=v1", "page3.html?f1=v1" })
+            IE11 = { "page3.html?f1=v1", "page3.html?f1=v1", "page3.html?f1=v1", "page3.html?f1=v1" })
     public void changesAfterCallToSubmit() throws Exception {
         final String[] expectedUrlSuffixes = getExpectedAlerts();
         setExpectedAlerts();
@@ -959,7 +959,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            IE10 = "3")
+            IE11 = "3")
     public void submit_twice() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
@@ -1185,7 +1185,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "[object HTMLInputElement]", "undefined",
                         "[object HTMLInputElement]", "[object HTMLInputElement]" },
             IE = { "[object]", "undefined", "[object]", "undefined" },
-            IE10 = { "[object HTMLInputElement]", "undefined", "undefined", "[object HTMLInputElement]" })
+            IE11 = { "[object HTMLInputElement]", "undefined", "undefined", "[object HTMLInputElement]" })
     public void accessByNameAfterNameChange() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -1253,7 +1253,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "in listener", "page2 loaded" },
             IE = "exception",
-            IE10 = "in listener")
+            IE11 = "in listener")
     public void dispatchEventSubmitTriggersHandlers() throws Exception {
         // use an iframe to capture alerts among 2 pages
         final String container = "<html><body><iframe src='page1'></iframe></body></html>\n";

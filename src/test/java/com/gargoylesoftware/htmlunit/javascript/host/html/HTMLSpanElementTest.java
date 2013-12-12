@@ -37,8 +37,8 @@ public class HTMLSpanElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = "no",
-            IE = "yes")
+    @Alerts(DEFAULT = "no",
+            IE8 = "yes")
     public void doScroll() throws Exception {
         final String html =
             "<html>\n"
@@ -66,9 +66,8 @@ public class HTMLSpanElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = "[object HTMLSpanElement] undefined" ,
-            IE = "[object] undefined",
-            IE10 = "[object HTMLSpanElement] undefined")
+    @Alerts(DEFAULT = "[object HTMLSpanElement] undefined" ,
+            IE8 = "[object] undefined")
     public void cite() throws Exception {
         final String html =
             "<html>\n"

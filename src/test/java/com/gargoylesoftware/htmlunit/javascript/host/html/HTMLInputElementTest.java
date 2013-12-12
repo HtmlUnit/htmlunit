@@ -713,7 +713,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             "checkbox checkbox", "radio radio", "file file", "checkbox checkbox" },
             FF = {"text TeXt", "password PassWord", "hidden Hidden",
             "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox CHECKBOX" },
-            IE10 = {"text TeXt", "password PassWord", "hidden Hidden",
+            IE11 = {"text TeXt", "password PassWord", "hidden Hidden",
             "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox checkbox" })
     @NotYetImplemented({ FF17, FF24 })
     public void typeCase() throws Exception {
@@ -774,7 +774,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "left", "right", "bottom", "middle", "top", "wrong", "" },
             IE = { "left", "right", "bottom", "middle", "top", "", "" },
-            IE10 = { "", "", "", "", "", "", "" })
+            IE11 = { "", "", "", "", "", "", "" })
     @NotYetImplemented(IE8)
     public void getAlign() throws Exception {
         final String html
@@ -804,7 +804,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "bottom", "middle", "top" },
             IE = { "center", "error", "center", "error", "center", "left", "right", "bottom", "middle", "top" },
-            IE10 = { "", "error", "", "error", "", "", "", "", "", "" })
+            IE11 = { "", "error", "", "error", "", "", "", "", "", "" })
     @NotYetImplemented(IE8)
     public void setAlign() throws Exception {
         final String html

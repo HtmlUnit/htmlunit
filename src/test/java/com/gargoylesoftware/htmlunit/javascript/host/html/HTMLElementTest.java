@@ -18,7 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.net.URL;
@@ -60,7 +60,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "all node for body: DIV A IMG DIV ", "all node for testDiv: A IMG ",
+    @Alerts(IE8 = { "all node for body: DIV A IMG DIV ", "all node for testDiv: A IMG ",
             "all node for testA: IMG ", "all node for testImg: ", "all node for testDiv2: " })
     @NotYetImplemented(FF)
     public void all_IndexByInt() throws Exception {
@@ -290,7 +290,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             "previousSibling=null",
             "specified=true",
             "value=bleh" },
-            IE10 = {
+            IE11 = {
             "null",
             "expando=true",
             "firstChild=[object Text]",
@@ -979,7 +979,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "Outer = <p id=\"myNode\">New  cell value\n\n</p>" },
             IE8 = { "Outer = <P id=myNode>New cell value\n</P>" },
-            IE10 = { "Outer = <p id=\"myNode\">New  cell value\n\n" })
+            IE11 = { "Outer = <p id=\"myNode\">New  cell value\n\n" })
     @NotYetImplemented({ FF17, FF24 })
     public void getOuterHTMLFromUnclosedParagraph() throws Exception {
         final String html = createPageForGetOuterHTML("p", "New  cell value", true);
@@ -1270,7 +1270,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "body.cpuClass = undefined", "exception" },
-            IE = { "body.cpuClass = undefined", "body.cpuClass = x86", "body.cpuClass = undefined" })
+            IE8 = { "body.cpuClass = undefined", "body.cpuClass = x86", "body.cpuClass = undefined" })
     public void addBehaviorDefaultClientCaps() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -1293,7 +1293,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "body.isHomePage = undefined", "exception" },
-            IE = { "body.isHomePage = undefined", "body.isHomePage = false", "body.isHomePage = undefined" })
+            IE8 = { "body.isHomePage = undefined", "body.isHomePage = false", "body.isHomePage = undefined" })
     public void removeBehavior() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -1849,7 +1849,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Browsers(IE)
     @Alerts(DEFAULT = "rgb(0, 0, 0)",
-            IE10 = "#000000")
+            IE11 = "#000000")
     public void currentStyle() throws Exception {
         style("currentStyle");
     }
@@ -2185,7 +2185,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "page2 loaded",
             IE = "exception",
-            IE10 = "")
+            IE11 = "")
     public void dispatchEvent_submitOnForm() throws Exception {
         final String html = "<html><head><title>page 1</title></head><body>\n"
             + "<form action='page2' id='theForm'><span id='foo'/></form>\n"
@@ -2208,7 +2208,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = "exception",
-            IE10 = "")
+            IE11 = "")
     public void dispatchEvent_submitOnFormChild() throws Exception {
         final String html = "<html><head><title>page 1</title></head><body>\n"
             + "<form action='page2'><span id='foo'/></form>\n"
@@ -2254,7 +2254,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
+    @Browsers(IE8)
     @Alerts({ "undefined", "x86", "0", "undefined" })
     public void getComponentVersion() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -2377,7 +2377,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "true", "true", "false", "false", "false", "false", "true", "true", "false", "false" },
-            IE10 = { "true", "true", "true", "false", "false", "false", "false", "true", "false", "false",
+            IE11 = { "true", "true", "true", "false", "false", "false", "false", "true", "false", "false",
                         "exception" })
     public void contains() throws Exception {
         final String html
@@ -2421,7 +2421,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE10 = "false")
+            IE11 = "false")
     public void contains_invalid_argument() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -2553,7 +2553,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "exception", "exception" },
-            IE = { "exception", "success" })
+            IE8 = { "exception", "success" })
     public void doScroll() throws Exception {
         final String html
             = "<html><head>\n"
@@ -2610,7 +2610,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "false", "hello", "true" },
-            IE = { "undefined", "true", "undefined", "false" })
+            IE8 = { "undefined", "true", "undefined", "false" })
     public void firefox__proto__() throws Exception {
         final String html
             = "<html><head>\n"
@@ -2637,7 +2637,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Browsers(IE)
     @Alerts(IE = { "false,false,false,false,false,false,false", "false,false,false,false,false,true,true" },
-            IE10 = { "false,false,false,false,false,true,false", "false,false,false,false,false,true,false" })
+            IE11 = { "false,false,false,false,false,true,false", "false,false,false,false,false,true,false" })
     public void clearAttributes() throws Exception {
         final String html
             = "<input type='text' id='i' name='i' style='color:red' onclick='alert(1)' custom1='a' /><script>\n"
@@ -2671,8 +2671,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE10)
-    public void mergeAttributesIE10() throws Exception {
+    @Browsers(IE11)
+    public void mergeAttributesIE11() throws Exception {
         mergeAttributes("i2", "false,false,false,false,false,true,true", "i", "",
                 "false,false,false,false,false,true,true", "i", "");
         mergeAttributes("i2, true", "false,false,false,false,false,true,true", "i", "",
@@ -2752,7 +2752,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"", "#0000aa", "x", "BlanchedAlmond", "aBlue", "bluex" },
             IE = {"", "#0000aa", "#000000", "#ffebcd", "#ab00e0", "#b00e00" },
             IE9 = {"", "#0000aa", "#0", "blanchedalmond", "#ab00e", "#b00e0" },
-            IE10 = {"", "#0000aa", "#0", "blanchedalmond", "#ab00e", "#b00e0" })
+            IE11 = {"", "#0000aa", "#0", "blanchedalmond", "#ab00e", "#b00e0" })
     public void setColorAttribute() throws Exception {
         final String html =
             "<html>\n"
@@ -2836,7 +2836,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object DOMStringMap]",
-            IE = "undefined")
+            IE8 = "undefined")
     public void dataset() throws Exception {
         final String html
             = "<html><head>\n"
@@ -3100,7 +3100,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<basefont>",
             IE = "<BASEFONT></BASEFONT>",
-            IE10 = "<basefont></basefont>")
+            IE11 = "<basefont></basefont>")
     public void outerHTML_basefont() throws Exception {
         loadPageWithAlerts2(outerHTML("basefont"));
     }
@@ -3539,7 +3539,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<image></image>",
-            IE10 = "<img>",
+            IE11 = "<img>",
             IE8 = "<IMG>")
     @NotYetImplemented(IE8)
     public void outerHTML_image() throws Exception {
@@ -3572,7 +3572,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<isindex></isindex>",
             IE = "<ISINDEX>",
-            IE10 = "<isindex>")
+            IE11 = "<isindex>")
     public void outerHTML_isindex() throws Exception {
         loadPageWithAlerts2(outerHTML("isindex"));
     }
@@ -4223,7 +4223,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<svg id=\"svgElem2\"></svg>",
             IE = "undefined",
-            IE10 = "<svg xmlns=\"http://www.w3.org/2000/svg\" id=\"svgElem2\" />")
+            IE11 = "<svg xmlns=\"http://www.w3.org/2000/svg\" id=\"svgElem2\" />")
     public void innerHTML_svg() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

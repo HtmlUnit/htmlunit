@@ -139,7 +139,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "function handler() {\n}", "null" },
             FF = { "function handler() {}", "null" },
-            IE10 = { "function handler() {}", "null" })
+            IE11 = { "function handler() {}", "null" })
     @NotYetImplemented({ FF17, FF24 })
     public void testOnloadNull() throws Exception {
         final String html =

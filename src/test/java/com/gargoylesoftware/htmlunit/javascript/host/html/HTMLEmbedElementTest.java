@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -77,7 +76,7 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
                     "absbottom", "absmiddle", "bottom", "texttop" },
             IE8 = { "center", "error", "center", "error", "center", "left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "baseline", "texttop" },
-            IE10 = { "CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
+            IE11 = { "CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "baseline", "texttop" })
     @NotYetImplemented({ IE8, FF17, FF24 })
     public void setAlign() throws Exception {
@@ -118,8 +117,9 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "10px", "20em", "80%", "40", "wrong", "" },
-            IE = { "10", "20", "80%", "40", "1", "" })
-    @NotYetImplemented(IE)
+            IE = { "10", "20", "80%", "40", "1", "" },
+            IE11 = { "10", "20", "80%", "40", "0", "" })
+    @NotYetImplemented(IE8)
     public void getHeight() throws Exception {
         final String html
             = "<html><body>\n"
@@ -145,7 +145,7 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "20px", "8", "foo" },
             IE = { "20", "8", "error", "8" })
-    @NotYetImplemented(IE)
+    @NotYetImplemented(IE8)
     public void setHeight() throws Exception {
         final String html
             = "<html><body>\n"
@@ -175,8 +175,9 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "10px", "20em", "80%", "40", "wrong", "" },
-            IE = { "10", "20", "80%", "40", "1", "" })
-    @NotYetImplemented(IE)
+            IE = { "10", "20", "80%", "40", "1", "" },
+            IE11 = { "10", "20", "80%", "40", "", "" })
+    @NotYetImplemented(IE8)
     public void getWidth() throws Exception {
         final String html
             = "<html><body>\n"
@@ -202,7 +203,7 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "20px", "8", "foo" },
             IE = { "20", "8", "error", "8" })
-    @NotYetImplemented(IE)
+    @NotYetImplemented(IE8)
     public void setWidth() throws Exception {
         final String html
             = "<html><body>\n"

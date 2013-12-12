@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -207,8 +207,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = "no",
-            IE = "yes")
+    @Alerts(DEFAULT = "no",
+            IE8 = "yes")
     public void doScroll() throws Exception {
         final String html =
             "<html>\n"
@@ -472,7 +472,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts({ "9", "9", "2", "7" })
     public void selectionRange() throws Exception {
         final String html

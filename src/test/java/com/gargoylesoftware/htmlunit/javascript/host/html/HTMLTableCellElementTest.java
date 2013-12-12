@@ -193,7 +193,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "#0000aa", "x" },
             IE = {"", "#0000aa", "#000000" },
-            IE10 = {"", "#0000aa", "#0" })
+            IE11 = {"", "#0000aa", "#0" })
     public void bgColor() throws Exception {
         final String html =
             "<html>\n"

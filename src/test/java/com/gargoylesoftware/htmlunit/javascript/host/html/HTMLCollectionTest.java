@@ -84,7 +84,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
     @Test
     @Browsers(IE)
     @Alerts(DEFAULT = { "5", "6" },
-            IE10 = { "5", "exception" })
+            IE11 = { "5", "exception" })
     public void getElements() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -109,7 +109,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             FF24 = { "string 0", "string item", "string iterator", "string length",
                         "string myForm", "string namedItem" },
             IE = { "string length", "string myForm" },
-            IE10 = { "string item", "string length", "string myForm", "string namedItem" })
+            IE11 = { "string item", "string length", "string myForm", "string namedItem" })
     @NotYetImplemented({ FF17, FF24 })
     public void testFor_in() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -143,7 +143,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
                 "string val1", "string val2" },
             IE = { "string 1", "string action", "string first_submit", "string length",
                 "string second_submit", "string val1", "string val2" },
-            IE10 = { "string 1", "string action", "string first_submit", "string item",
+            IE11 = { "string 1", "string action", "string first_submit", "string item",
                 "string length", "string namedItem", "string second_submit", "string val1",
                 "string val2" })
     @NotYetImplemented({ FF17, FF24 })
@@ -203,7 +203,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
     @NotYetImplemented(FF)
     @Alerts(FF = { "null", "null", "undefined", "exception" },
             IE = { "null", "null", "undefined", "null" },
-            IE10 = { "null", "null", "undefined", "undefined" })
+            IE11 = { "null", "null", "undefined", "undefined" })
     public void testOutOfBoundAccess() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -302,8 +302,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT =  { "function", "function", "function", "function" },
-            IE = { "undefined", "undefined", "undefined", "undefined" },
-            IE10 =  { "undefined", "undefined", "function", "function" })
+            IE8 = { "undefined", "undefined", "undefined", "undefined" })
     public void array_prototype() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -325,7 +324,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT =  { "function", "function", "function", "function" },
-            IE = { "undefined", "undefined", "function", "function" })
+            IE8 = { "undefined", "undefined", "function", "function" })
     public void array_prototype_standards() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
             + "<script>\n"

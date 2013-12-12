@@ -475,7 +475,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "table: [object HTMLTableElement]",
                 "row: [object HTMLTableRowElement]", "cell: [object HTMLTableCellElement]" },
             IE = { "table: [object]", "row: [object]", "cell: [object]" },
-            IE10 = { "table: [object HTMLTableElement]",
+            IE11 = { "table: [object HTMLTableElement]",
                 "row: [object HTMLTableRowElement]", "cell: [object HTMLTableHeaderCellElement]" })
     public void stringValues() throws Exception {
         final String html =
@@ -542,7 +542,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no refresh function",
-            IE = "refreshed")
+            IE8 = "refreshed")
     public void refresh() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -613,7 +613,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "#0000aa", "x" },
             IE = {"", "#0000aa", "#000000" },
-            IE10 = {"", "#0000aa", "#0" })
+            IE11 = {"", "#0000aa", "#0" })
     public void bgColor() throws Exception {
         final String html =
             "<html>\n"

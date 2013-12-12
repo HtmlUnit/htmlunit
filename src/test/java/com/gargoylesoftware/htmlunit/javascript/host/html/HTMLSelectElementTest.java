@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import static org.junit.Assert.assertSame;
 
@@ -372,7 +372,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts({ "4", "Four", "value4" })
     public void addOptionWithAddMethod_FF() throws Exception {
         final String html
