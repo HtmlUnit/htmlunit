@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Frank Danek
  */
 @JsxClass(domClass = HtmlProgress.class, browsers = { @WebBrowser(value = FF, minVersion = 10),
-        @WebBrowser(value = IE, minVersion = 10) })
+        @WebBrowser(value = IE, minVersion = 11) })
 public class HTMLProgressElement extends HTMLElement {
 
     /**

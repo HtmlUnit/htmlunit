@@ -57,13 +57,13 @@ public class CSSFontFaceRule extends CSSRule {
     }
 
     @Override
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public short getType() {
         return FONT_FACE_RULE;
     }
 
     @Override
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public String getCssText() {
         String cssText = super.getCssText();
         cssText = StringUtils.replace(cssText, "{", "{\n  ");

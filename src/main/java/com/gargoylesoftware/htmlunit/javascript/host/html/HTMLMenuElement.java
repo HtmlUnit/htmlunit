@@ -26,8 +26,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @JsxClass(domClass = HtmlMenu.class,
-    browsers = { @WebBrowser(value = FF), @WebBrowser(value = IE, minVersion = 10) })
+    browsers = { @WebBrowser(value = FF), @WebBrowser(value = IE, minVersion = 11) })
 public class HTMLMenuElement extends HTMLListElement {
 }

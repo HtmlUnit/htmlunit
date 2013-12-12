@@ -180,7 +180,7 @@ public class DOMImplementation extends SimpleScriptable {
      * @return the newly created {@link XMLDocument}
      */
     //TODO: change doctype type to "DocType"
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public XMLDocument createDocument(final String namespaceURI, final String qualifiedName,
             final Object doctype) {
         final XMLDocument document = new XMLDocument(getWindow().getWebWindow());

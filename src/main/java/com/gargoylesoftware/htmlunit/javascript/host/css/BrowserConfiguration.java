@@ -66,12 +66,12 @@ class BrowserConfiguration {
         return ie(defaultValue).startingWith(8);
     }
 
-    public static BrowserConfiguration ieBelow10(final String defaultValue) {
-        return ie(defaultValue).upTo(9);
+    public static BrowserConfiguration ieBelow11(final String defaultValue) {
+        return ie(defaultValue).upTo(10);
     }
 
-    public static BrowserConfiguration ie10up(final String defaultValue) {
-        return ie(defaultValue).startingWith(10);
+    public static BrowserConfiguration ie11up(final String defaultValue) {
+        return ie(defaultValue).startingWith(11);
     }
 
     public static boolean isDefined(final BrowserVersion browserVersion,

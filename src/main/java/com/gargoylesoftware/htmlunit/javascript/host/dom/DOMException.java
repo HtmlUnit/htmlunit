@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Marc Guillemot
  * @author Frank Danek
  */
-@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class DOMException extends SimpleScriptable {
     /** If the specified range of text does not fit into a DOMString. */
     @JsxConstant
