@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class DOMStringMapTest extends WebDriverTestCase {
@@ -34,7 +35,8 @@ public class DOMStringMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "undefined", "there" })
+    @Alerts(DEFAULT = { "undefined", "there" },
+            IE8 = { })
     public void get() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -54,7 +56,8 @@ public class DOMStringMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "old", "old", "null", "null" })
+    @Alerts(DEFAULT = { "old", "old", "null", "null" },
+            IE8 = { })
     public void put() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"

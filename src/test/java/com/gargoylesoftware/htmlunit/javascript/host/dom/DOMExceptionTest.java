@@ -84,7 +84,7 @@ public class DOMExceptionTest extends WebDriverTestCase {
     @Alerts(FF = { "3", "Node cannot be inserted at the specified point in the hierarchy",
             "6", "§§URL§§", "HIERARCHY_REQUEST_ERR: 3", "1" },
             IE = { "1" },
-            IE10 = { "3", "HierarchyRequestError", "undefined", "undefined", "HIERARCHY_REQUEST_ERR: 3", "1" })
+            IE11 = { "3", "HierarchyRequestError", "undefined", "undefined", "HIERARCHY_REQUEST_ERR: 3", "1" })
     public void appendChild_illegal_node() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"

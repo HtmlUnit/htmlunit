@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,7 +45,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "Core 1.0: false", "Core 2.0: true", "Core 3.0: false" },
             IE8 = { "Core 1.0: false", "Core 2.0: false", "Core 3.0: false" },
-            IE10 = { "Core 1.0: true", "Core 2.0: true", "Core 3.0: false" })
+            IE11 = { "Core 1.0: true", "Core 2.0: true", "Core 3.0: false" })
     public void hasFeature_Core() throws Exception {
         hasFeature("Core", "['1.0', '2.0', '3.0']");
     }
@@ -78,7 +78,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "XHTML 1.0: false", "XHTML 2.0: true", "XHTML 3.0: false" },
             IE8 = { "XHTML 1.0: false", "XHTML 2.0: false", "XHTML 3.0: false" },
-            IE10 = { "XHTML 1.0: true", "XHTML 2.0: true", "XHTML 3.0: false" })
+            IE11 = { "XHTML 1.0: true", "XHTML 2.0: true", "XHTML 3.0: false" })
     public void hasFeature_XHTML() throws Exception {
         hasFeature("XHTML", "['1.0', '2.0', '3.0']");
     }
@@ -120,7 +120,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "CSS2 1.0: false", "CSS2 2.0: true", "CSS2 3.0: false" },
             FF24 = { "CSS2 1.0: true", "CSS2 2.0: true", "CSS2 3.0: true" },
-            IE = { "CSS2 1.0: false", "CSS2 2.0: false", "CSS2 3.0: false" })
+            IE8 = { "CSS2 1.0: false", "CSS2 2.0: false", "CSS2 3.0: false" })
     public void hasFeature_CSS2() throws Exception {
         hasFeature("CSS2", "['1.0', '2.0', '3.0']");
     }
@@ -142,7 +142,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "Events 1.0: false", "Events 2.0: true", "Events 3.0: false" },
             IE8 = { "Events 1.0: false", "Events 2.0: false", "Events 3.0: false" },
-            IE10 = { "Events 1.0: false", "Events 2.0: true", "Events 3.0: true" })
+            IE11 = { "Events 1.0: false", "Events 2.0: true", "Events 3.0: true" })
     public void hasFeature_Events() throws Exception {
         hasFeature("Events", "['1.0', '2.0', '3.0']");
     }
@@ -153,7 +153,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "UIEvents 1.0: false", "UIEvents 2.0: true", "UIEvents 3.0: false" },
             IE8 = { "UIEvents 1.0: false", "UIEvents 2.0: false", "UIEvents 3.0: false" },
-            IE10 = { "UIEvents 1.0: false", "UIEvents 2.0: false", "UIEvents 3.0: true" })
+            IE11 = { "UIEvents 1.0: false", "UIEvents 2.0: false", "UIEvents 3.0: true" })
     public void hasFeature_UIEvents() throws Exception {
         hasFeature("UIEvents", "['1.0', '2.0', '3.0']");
     }
@@ -164,7 +164,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "MouseEvents 1.0: false", "MouseEvents 2.0: true", "MouseEvents 3.0: false" },
             IE8 = { "MouseEvents 1.0: false", "MouseEvents 2.0: false", "MouseEvents 3.0: false" },
-            IE10 = { "MouseEvents 1.0: false", "MouseEvents 2.0: true", "MouseEvents 3.0: true" })
+            IE11 = { "MouseEvents 1.0: false", "MouseEvents 2.0: true", "MouseEvents 3.0: true" })
     public void hasFeature_MouseEvents() throws Exception {
         hasFeature("MouseEvents", "['1.0', '2.0', '3.0']");
     }
@@ -192,7 +192,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "MutationEvents 1.0: false", "MutationEvents 2.0: false", "MutationEvents 3.0: false" },
-            IE10 = { "MutationEvents 1.0: false", "MutationEvents 2.0: true", "MutationEvents 3.0: true" })
+            IE11 = { "MutationEvents 1.0: false", "MutationEvents 2.0: true", "MutationEvents 3.0: true" })
     public void hasFeature_MutationEvents() throws Exception {
         hasFeature("MutationEvents", "['1.0', '2.0', '3.0']");
     }
@@ -212,7 +212,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "HTMLEvents 1.0: false", "HTMLEvents 2.0: true", "HTMLEvents 3.0: false" },
             IE8 = { "HTMLEvents 1.0: false", "HTMLEvents 2.0: false", "HTMLEvents 3.0: false" },
-            IE10 = { "HTMLEvents 1.0: false", "HTMLEvents 2.0: true", "HTMLEvents 3.0: true" })
+            IE11 = { "HTMLEvents 1.0: false", "HTMLEvents 2.0: true", "HTMLEvents 3.0: true" })
     public void hasFeature_HTMLEvents() throws Exception {
         hasFeature("HTMLEvents", "['1.0', '2.0', '3.0']");
     }
@@ -232,7 +232,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "Traversal 1.0: false", "Traversal 2.0: false", "Traversal 3.0: false" },
-            IE10 = { "Traversal 1.0: false", "Traversal 2.0: true", "Traversal 3.0: false" })
+            IE11 = { "Traversal 1.0: false", "Traversal 2.0: true", "Traversal 3.0: false" })
     public void hasFeature_Traversal() throws Exception {
         hasFeature("Traversal", "['1.0', '2.0', '3.0']");
     }
@@ -325,9 +325,9 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ CHROME, FF, IE10 })
-    @Alerts(DEFAULT = "[object Document]",
-            FF = "[object XMLDocument]")
+    @Browsers({ CHROME, FF, IE11 })
+    @Alerts(DEFAULT = "[object XMLDocument]",
+            CHROME = "[object Document]")
     @NotYetImplemented(CHROME)
     public void createDocument() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -345,7 +345,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, CHROME, IE10 })
+    @Browsers({ FF, CHROME, IE11 })
     @Alerts({ "mydoc", "null", "mydoc", "null" })
     public void createDocument_qualifiedName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -367,7 +367,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, CHROME, IE10 })
+    @Browsers({ FF, CHROME, IE11 })
     @Alerts({ "mydoc", "null", "mydoc", "http://mynamespace" })
     public void createDocument_namespaceAndQualifiedName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -389,7 +389,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, CHROME, IE10 })
+    @Browsers({ FF, CHROME, IE11 })
     @Alerts({ "m:mydoc", "m", "mydoc", "http://mynamespace" })
     public void createDocument_namespaceAndQualifiedNameWithPrefix() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
