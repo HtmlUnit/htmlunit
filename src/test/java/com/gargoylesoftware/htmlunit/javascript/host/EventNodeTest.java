@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class EventNodeTest extends WebDriverTestCase {
@@ -40,7 +41,7 @@ public class EventNodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
+    @Browsers(IE8)
     @Alerts("true")
     public void fireEvent() throws Exception {
         final String html
@@ -62,7 +63,7 @@ public class EventNodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
+    @Browsers(IE8)
     @Alerts("hello")
     public void fireEvent_initFromTemplate() throws Exception {
         final String html = "<html>\n"

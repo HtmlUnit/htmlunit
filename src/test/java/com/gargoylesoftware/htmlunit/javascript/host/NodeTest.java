@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -307,8 +307,8 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = "exception",
-            IE = { "in foo1", "in foo2" })
+    @Alerts(DEFAULT = "exception",
+            IE8 = { "in foo1", "in foo2" })
     public void testAttachEvent() throws Exception {
         final String html = "<html><head>\n"
             + "<title>First</title>\n"
@@ -338,7 +338,7 @@ public class NodeTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "isSameNode not supported" },
             IE = { "isSameNode not supported" },
-            IE10 = { "true", "false" })
+            IE11 = { "true", "false" })
     public void testIsSameNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -628,7 +628,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts({ "0", "20", "20", "4", "10", "10", "2", "20", "exception" })
     public void compareDocumentPosition() throws Exception {
         final String html
@@ -760,7 +760,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(IE = "exception")
+    @Alerts(IE8 = "exception")
     public void insertBefore2() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
                 + "<script>\n"
@@ -805,8 +805,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "4", "3", "abc", "def", "123456", "true", "0", "2", "123", "456", "1", "true" },
-            IE = { "4", "3", "abc", "def", "123456", "false", "0", "2", "123", "456", "1", "false" },
-            IE10 = { "4", "4", "abc", "def", "123", "false", "0", "2", "123", "456", "2", "false" })
+            IE = { "4", "3", "abc", "def", "123456", "false", "0", "2", "123", "456", "1", "false" })
     public void normalize() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

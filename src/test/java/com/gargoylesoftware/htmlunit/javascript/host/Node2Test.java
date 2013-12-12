@@ -70,7 +70,7 @@ public class Node2Test extends SimpleWebTestCase {
     @Test
     @Alerts(FF = "exception",
             IE = { "[object]", "[object]" },
-            IE10 = { "[object MouseEvent]", "[object MouseEvent]" })
+            IE11 = { "[object MouseEvent]", "[object MouseEvent]" })
     public void event() throws Exception {
         final String firstHtml = "<html>\n"
             + "<head><title>First Page</title>\n"

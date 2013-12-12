@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class MessageEventTest extends WebDriverTestCase {
@@ -56,7 +57,8 @@ public class MessageEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "message", "true", "true", "hello", "http://localhost:", "2", "[object Window]" },
-            IE8 = "exception")
+            IE8 = "exception",
+            IE11 = { "message", "true", "true", "hello", "http://localhost:", "undefined", "[object Window]" })
     public void initMessageEvent() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
         if (expectedAlerts.length > 4) {

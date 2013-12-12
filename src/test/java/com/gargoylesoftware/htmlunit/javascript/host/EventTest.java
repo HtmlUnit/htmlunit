@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 
 import org.apache.commons.lang3.StringUtils;
@@ -130,7 +130,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts("defined")
     public void testEventArgDefined() throws Exception {
         final String content
@@ -147,7 +147,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts("pass")
     public void testEventTargetSameAsThis() throws Exception {
         final String content
@@ -167,7 +167,7 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "undefined", "false" },
             IE = { "[object]", "true" },
-            IE10 = { "[object HTMLInputElement]", "true" })
+            IE11 = { "[object HTMLInputElement]", "true" })
     public void testEventSrcElementSameAsThis() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -188,7 +188,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("pass")
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     public void testEventCurrentTargetSameAsThis() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -207,7 +207,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "[object Window]", "[object HTMLDivElement]" })
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     public void testCurrentTarget_sameListenerForEltAndWindow() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -226,8 +226,8 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "",
-            IE = "true")
+    @Alerts(DEFAULT = "",
+            IE8 = "true")
     public void testAddEventListener_HandlerNull() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -389,7 +389,7 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object Event]", "true" },
             IE8 = { "[object]", "undefined" })
-    // TODO [IE10] must be true for IE10 (and FF17)
+    // TODO [IE11] must be false for IE11 (and FF17)
     public void testBubbles() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
@@ -408,7 +408,7 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "[object Event]", "true" },
             IE = { "[object]", "undefined" },
-            IE10 = { "[object Event]", "false" })
+            IE11 = { "[object Event]", "false" })
     public void testCancelable() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
@@ -459,7 +459,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts({ "click", "true", "true", "dblclick", "false", "false" })
     public void testInitEvent() throws Exception {
         final String html =
@@ -606,7 +606,7 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "activeElement BODY", "focus #document", "handler: activeElement BODY" },
             IE = { "activeElement BODY" },
-            IE10 = { "activeElement BODY", "focus BODY", "handler: activeElement BODY" })
+            IE11 = { "activeElement BODY", "focus BODY", "handler: activeElement BODY" })
     @BuggyWebDriver(FF) // FFDriver doesn't behave like "manually driven" FF
     // http://code.google.com/p/selenium/issues/detail?id=4665
     @NotYetImplemented(FF)
@@ -661,7 +661,7 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "blur INPUT",
             FF = "blur INPUT",
-            IE10 = { "blur BODY", "blur INPUT" })
+            IE11 = { "blur BODY", "blur INPUT" })
     public void document_input_blur() throws Exception {
         document_input("blur");
     }
@@ -748,8 +748,8 @@ public class EventTest extends WebDriverTestCase {
 
         eventHandlersParentScopeChain("<input type='text'", "");
         eventHandlersParentScopeChain("<input type='password'", "");
-        // IE10 cannot click on hidden fields
-        if (getBrowserVersion() != BrowserVersion.INTERNET_EXPLORER_10) {
+        // IE11 cannot click on hidden fields
+        if (getBrowserVersion() != BrowserVersion.INTERNET_EXPLORER_11) {
             eventHandlersParentScopeChain("<input type='hidden'", "");
         }
 

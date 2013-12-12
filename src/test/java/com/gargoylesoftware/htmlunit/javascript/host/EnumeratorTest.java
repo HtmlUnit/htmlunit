@@ -40,7 +40,7 @@ public class EnumeratorTest extends SimpleWebTestCase {
     @Test
     @Browsers(IE)
     @Alerts(IE = { "false", "[object]", "undefined", "undefined", "true" },
-            IE10 = { "false", "[object HTMLFormElement]", "undefined", "undefined", "true" })
+            IE11 = { "false", "[object HTMLFormElement]", "undefined", "undefined", "true" })
     public void basicEnumerator() throws Exception {
         final String html
             = "<html><head><script>\n"

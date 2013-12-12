@@ -37,7 +37,8 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = { "", "bla bla", "bla blabli bli" })
+    @Alerts(DEFAULT = "exception",
+            IE8 = { "", "bla bla", "bla blabli bli" })
     public void text() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -69,7 +70,8 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = "BODY")
+    @Alerts(DEFAULT = "exception",
+            IE = "BODY")
     public void parentElement() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -93,7 +95,8 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = { "hello", "" })
+    @Alerts(DEFAULT = "exception",
+            IE8 = { "hello", "" })
     public void collapse() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -125,7 +128,8 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = "")
+    @Alerts(DEFAULT = "exception",
+            IE8 = "")
     public void select() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -151,7 +155,8 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = { "hello", "hell", "ell" })
+    @Alerts(DEFAULT = "exception",
+            IE8 = { "hello", "hell", "ell" })
     public void moveEnd() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -184,7 +189,8 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = { "hello", "hell", "ell", "1", "-1", "hello" })
+    @Alerts(DEFAULT = "exception",
+            IE8 = { "hello", "hell", "ell", "1", "-1", "hello" })
     public void moveOutOfBounds_input() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -220,7 +226,8 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = { "true", "true", "false", "true" })
+    @Alerts(DEFAULT = "exception",
+            IE = { "true", "true", "false", "true" })
     public void inRange() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -253,7 +260,8 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = "false")
+    @Alerts(DEFAULT = "exception",
+            IE8 = "false")
     public void inRange2() throws Exception {
         final String html = "<html><body>"
             + "<form name='f'><input name='q' value=''></form>"
@@ -273,8 +281,7 @@ public class TextRangeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = "s3 foo <SPAN id=s3>foo</SPAN>",
-            IE10 = "s3 foo <SPAN id=\"s3\">foo</SPAN>")
+            IE8 = "s3 foo <SPAN id=s3>foo</SPAN>")
     public void moveToElementText() throws Exception {
         final String html = "<html><body onload='test()'>\n"
             + "<span id='s1'>abc</span><span id='s2'>xyz</span><span id='s3'>foo</span>\n"
@@ -296,8 +303,7 @@ public class TextRangeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = { "hello", "world", "hello world" },
-            IE10 = { "hello", "world", "helloworld" })
+            IE = { "hello", "world", "hello world" })
     public void setEndRange() throws Exception {
         final String html = "<html><body>\n"
             + "<form name='f'><input name='q' value='hello world'></form>\n"
@@ -322,7 +328,8 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = "BODY")
+    @Alerts(DEFAULT = "exception",
+            IE8 = "BODY")
     public void createRangeParentElement() throws Exception {
         final String html =
             "<html><body>\n"
@@ -341,7 +348,8 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = "")
+    @Alerts(DEFAULT = "exception",
+            IE8 = "")
     public void createRangeHtmlText() throws Exception {
         final String html =
             "<html><body>\n"
@@ -360,7 +368,8 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = "ok")
+    @Alerts(DEFAULT = "exception",
+            IE = "ok")
     public void moveToBookmark() throws Exception {
         final String html =
             "<html><body>\n"

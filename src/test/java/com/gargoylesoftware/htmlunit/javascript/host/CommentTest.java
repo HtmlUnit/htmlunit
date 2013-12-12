@@ -73,7 +73,7 @@ public class CommentTest extends WebDriverTestCase {
     @Alerts(CHROME = { "after", "undefined" },
             FF = { "undefined", "undefined" },
             IE = { "after", "" },
-            IE10 = { "after", "undefined" })
+            IE11 = { "after", "undefined" })
     public void innerText() throws Exception {
         final String html
             = "<html><body>\n"

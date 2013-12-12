@@ -156,7 +156,7 @@ public class StorageTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            IE10 = "I was here")
+            IE11 = "I was here")
     public void localStorageShouldNotBeShared() throws Exception {
         final String html1 = "<html><body><script>\n"
             + "try {\n"

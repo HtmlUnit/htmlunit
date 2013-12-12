@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -119,7 +119,28 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Alerts("true")
+    public void appendChild() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test(){\n"
+            + "    var span = document.createElement('SPAN');\n"
+            + "    var div = document.getElementById('d');\n"
+            + "    div.appendChild(span);\n"
+            + "    alert(span === div.childNodes[0])\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<div id='d'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({ FF, IE11 })
     @Alerts("1")
     public void getElementByTagNameNS_includesHtml() throws Exception {
         final String html
@@ -141,7 +162,7 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts({ "div1", "null", "2", "1" })
     public void importNode_deep() throws Exception {
         importNode(true);
@@ -151,7 +172,7 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts({ "div1", "null", "0" })
     public void importNode_notDeep() throws Exception {
         importNode(false);
@@ -297,7 +318,7 @@ public class Document2Test extends WebDriverTestCase {
                 "<DIV id=div>&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</DIV>",
                 "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
                 "<p>a & b</p> &amp; \u0162 \" '" },
-            IE10 = { "<p>a & b</p> &amp; \u0162 \" '",
+            IE11 = { "<p>a & b</p> &amp; \u0162 \" '",
                 "<p>a & b</p> &amp; \u0162 \" '",
                 "<div id=\"div\">&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</div>",
                 "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
@@ -473,8 +494,7 @@ public class Document2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { },
-            IE = { "style.css", "LINK" },
-            IE10 = { "§§URL§§style.css", "LINK" })
+            IE8 = { "style.css", "LINK" })
     public void createStyleSheet() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
@@ -502,8 +522,7 @@ public class Document2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { },
-            IE = { "null", "" },
-            IE10 = { "§§URL§§null", "null" })
+            IE8 = { "null", "" })
     public void createStyleSheet_emptyUrl() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
@@ -531,9 +550,7 @@ public class Document2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { },
-            IE = { "dotseven.css", "zero.css", "minus1.css", "seven.css", "none.css" },
-            IE10 = { "§§URL§§dotseven.css", "§§URL§§zero.css", "§§URL§§minus1.css", "§§URL§§seven.css",
-                        "§§URL§§none.css" })
+            IE8 = { "dotseven.css", "zero.css", "minus1.css", "seven.css", "none.css" })
     public void createStyleSheet_insertAt() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"

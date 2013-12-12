@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
@@ -110,7 +110,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts({ "SGVsbG8gV29ybGQh", "Hello World!" })
     public void atob() throws Exception {
         final String html
@@ -175,8 +175,8 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "exception",
-            IE = "1")
+    @Alerts(DEFAULT = "exception",
+            IE8 = "1")
     public void execScript2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -195,8 +195,8 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "exception",
-            IE = "true")
+    @Alerts(DEFAULT = "exception",
+            IE8 = "true")
     public void execScript_returnValue() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "try {\n"
@@ -567,7 +567,7 @@ public class Window2Test extends WebDriverTestCase {
                     "[object Window] (true)", "[object Window] (true)", "[object Window] (true)" },
             IE = { "[object]", "[object] (true)", "1234 (true)", "null (true)", "undefined (true)", "[object] (true)",
                 "[object] (true)", "[object] (true)" },
-            IE10 = { "[object Window]", "[object Window] (true)", "exception", "null (true)", "undefined (true)",
+            IE11 = { "[object Window]", "[object Window] (true)", "exception", "null (true)", "undefined (true)",
                 "[object Window] (true)", "[object Window] (true)", "[object Window] (true)" })
     public void set_opener() throws Exception {
         final String html = "<html><head><script>\n"
@@ -608,7 +608,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "exception", "exception", "exception", "exception" },
             IE8 = { "JScript", "5", "8", "number" },
-            IE10 = { "JScript", "10", "0", "number" })
+            IE11 = { "JScript", "11", "0", "number" })
     public void IEScriptEngineXxx() throws Exception {
         final String html = "<html><head><script>\n"
             + "try { alert(ScriptEngine()); } catch(e) { alert('exception') }\n"
@@ -652,7 +652,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "605", "1256", "705", "1256" },
             FF24 = { "657", "1264", "641", "1248" },
-            IE10 = { "705", "1256", "688", "1239" })
+            IE11 = { "705", "1256", "688", "1239" })
     public void changeHeightsAndWidths() throws Exception {
         final String html
             = "<html><head>\n"
@@ -754,7 +754,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "0", "0", "0", "0" },
             IE = { "undefined", "undefined", "undefined", "undefined" },
-            IE10 = { "0", "0", "undefined", "undefined" })
+            IE11 = { "0", "0", "undefined", "undefined" })
     public void pageXOffset() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -951,7 +951,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "function", "3" },
-            IE10 = { "null", "function", "4" })
+            IE11 = { "null", "function", "4" })
     public void onError() throws Exception {
         final String html
             = "<script>\n"
@@ -1172,11 +1172,13 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "type: message", "bubbles: false", "cancelable: true", "data: hello",
-            "origin: ", "source: [object Window]", "lastEventId: " },
+                "origin: ", "source: [object Window]", "lastEventId: " },
             CHROME = { "type: message", "bubbles: false", "cancelable: false", "data: hello",
-                    "origin: ", "source: [object Window]", "lastEventId: " },
-            IE8 = { "type: message", "bubbles: undefined", "cancelable: undefined", "data: hello",
-            "origin: ", "source: [object]", "lastEventId: undefined" })
+                "origin: ", "source: [object Window]", "lastEventId: " },
+            IE = { "type: message", "bubbles: undefined", "cancelable: undefined", "data: hello",
+                "origin: ", "source: [object]", "lastEventId: undefined" },
+            IE11 = { "type: message", "bubbles: false", "cancelable: false", "data: hello",
+                "origin: ", "source: [object Window]", "lastEventId: undefined" })
     public void postMessage() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
         expectedAlerts[4] += "http://localhost:" + PORT;
@@ -1257,7 +1259,8 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "received", "posted" },
-            CHROME = { "posted", "received" })
+            CHROME = { "posted", "received" },
+            IE11 = { "posted", "received" })
     @BuggyWebDriver(FF)
     @NotYetImplemented(FF)
     public void postMessage_exactURL() throws Exception {
@@ -1281,7 +1284,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "posted",
-            IE = { "received", "posted" })
+            IE8 = { "received", "posted" })
     public void postMessage_otherPort() throws Exception {
         postMessage("http://localhost:" + (PORT + 1) + "/");
     }

@@ -51,7 +51,7 @@ public class DocumentTypeTest extends WebDriverTestCase {
             IE9 = { "[object DocumentType]", "true", "html,10,null,null,null,null",
             "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
             + "null,null,null" },
-            IE10 = { "[object DocumentType]", "true", "html,10,null,null,null,null",
+            IE11 = { "[object DocumentType]", "true", "html,10,null,null,null,null",
             "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
             + "null,null,null" })
     @NotYetImplemented({ IE9, CHROME })
@@ -96,7 +96,7 @@ public class DocumentTypeTest extends WebDriverTestCase {
         IE = {
             "[object]", "greeting,10,null,,undefined,",
             "greeting,undefined,undefined,undefined,," },
-        IE10 = {
+        IE11 = {
             "[object DocumentType]", "greeting,10,null,null,null,null",
             "greeting,MyIdentifier,hello.dtd,null,null,null" })
     @NotYetImplemented(CHROME)

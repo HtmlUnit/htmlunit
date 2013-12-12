@@ -66,7 +66,7 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "click [radio] [1]", "change [radio] [-]" },
             IE = { "click [radio] [-]" },
-            IE10 = { "change [radio] [-]", "click [radio] [1]" })
+            IE11 = { "change [radio] [-]", "click [radio] [1]" })
     public void radioClick() throws Exception {
         final String firstSnippet = "       <input type='radio' name='radio' id='clickMe' value='2'\n";
         final String secondSnippet = ">Radio\n";
@@ -81,7 +81,7 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "click [checkbox] [1]", "change [checkbox] [-]" },
             IE = { "click [checkbox] [-]" },
-            IE10 = { "change [checkbox] [-]", "click [checkbox] [1]" })
+            IE11 = { "change [checkbox] [-]", "click [checkbox] [1]" })
     public void checkboxClick() throws Exception {
         final String firstSnippet = "       <input type='checkbox' name='checkbox' id='clickMe' value='2'\n";
         final String secondSnippet = ">Checkbox\n";

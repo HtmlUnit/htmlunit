@@ -43,7 +43,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "DOM3: [object KeyboardEvent]", "vendor: [object KeyboardEvent]" },
             IE = { "DOM3: exception", "vendor: exception" },
-            IE10 = { "DOM3: [object KeyboardEvent]", "vendor: exception" })
+            IE11 = { "DOM3: [object KeyboardEvent]", "vendor: exception" })
     public void createEvent() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -65,7 +65,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "0-0", "0-0", "undefined-undefined" },
             IE = { "exception", "exception", "exception" },
-            IE10 = { "exception", "0-0", "undefined-undefined" })
+            IE11 = { "exception", "0-0", "undefined-undefined" })
     public void keyCode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -186,7 +186,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
                     "keydown:13,undefined,undefined",
                     "keypress:13,undefined,undefined",
                     "keyup:13,undefined,undefined" },
-           IE10 = { //"keydown:16,0,16",
+           IE11 = { //"keydown:16,0,16",
                     "keydown:65,0,65",
                     "keypress:65,65,65",
                     "keyup:65,0,65",
@@ -200,8 +200,8 @@ public class KeyboardEventTest extends WebDriverTestCase {
                     "keydown:13,0,13",
                     "keypress:13,13,13",
                     "keyup:13,0,13" })
-    // WebDriver with real IE10 does not get the '\r' but real IE10 does
-    // TODO [IE10] HtmlUnit (or WebDriver?) does not fire an own event for the shift key (down + up)
+    // WebDriver with real IE11 does not get the '\r' but real IE11 does
+    // TODO [IE11] HtmlUnit (or WebDriver?) does not fire an own event for the shift key (down + up)
     public void which() throws Exception {
         final String html
             = "<html><head></head><body>\n"

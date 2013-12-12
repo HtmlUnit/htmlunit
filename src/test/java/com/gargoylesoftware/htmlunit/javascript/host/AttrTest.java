@@ -300,7 +300,7 @@ public class AttrTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object Attr]", "§§URL§§" },
             IE = { "[object]", "undefined" },
-            IE10 = { "[object Attr]", "undefined" })
+            IE11 = { "[object Attr]", "undefined" })
     public void html_baseURI() throws Exception {
         html("baseURI");
     }
@@ -321,7 +321,7 @@ public class AttrTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object Attr]", "testattr" },
             IE = { "[object]", "undefined" },
-            IE10 = { "[object Attr]", "testAttr" })
+            IE11 = { "[object Attr]", "testAttr" })
     public void html_localName() throws Exception {
         html("localName");
     }
@@ -372,7 +372,7 @@ public class AttrTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object Attr]", "§§URL§§foo.xml" },
             IE = { "[object]", "undefined" },
-            IE10 = { "[object Attr]", "undefined" })
+            IE11 = { "[object Attr]", "undefined" })
     public void xml_baseURI() throws Exception {
         xml("baseURI");
     }

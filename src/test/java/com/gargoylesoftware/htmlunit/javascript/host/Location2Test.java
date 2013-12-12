@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import java.net.URL;
 import java.util.Map;
@@ -553,7 +553,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @BuggyWebDriver(IE10)
+    @BuggyWebDriver(IE11)
     public void testLocationAfterOpenClosePopup() throws Exception {
         final String html =
               "<html>\n"
@@ -598,7 +598,7 @@ public class Location2Test extends WebDriverTestCase {
             assertEquals(new URL(URL_FIRST, "test.html").toExternalForm(), driver.getCurrentUrl());
         }
         finally {
-            // TODO [IE10] when run with real IE10 the window is closed and all following tests are broken
+            // TODO [IE11] when run with real IE11 the window is closed and all following tests are broken
             shutDownAll();
         }
     }

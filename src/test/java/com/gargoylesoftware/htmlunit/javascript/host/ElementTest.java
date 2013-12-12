@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -87,7 +87,7 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Browsers(IE)
     @Alerts(DEFAULT = { "1", "title" },
-            IE10 = "exception")
+            IE11 = "exception")
     public void selectNodes() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -119,7 +119,7 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "2", "1" })
-    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void removeChild() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -195,7 +195,8 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Browsers(IE)
     @Alerts(DEFAULT = { "book", "0", "1" },
-            IE10 = { "book", "exception" })
+            IE11 = { "book", "exception" })
+    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void selectNode_root() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -252,7 +253,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts("false")
     public void hasAttribute() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -281,7 +282,7 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void attributes2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -626,7 +627,7 @@ public class ElementTest extends WebDriverTestCase {
                 "[object]", "div",
                 "[object]", "dIv"
                 })
-    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void xml_nodeName() throws Exception {
         xml("nodeName");
     }
@@ -645,7 +646,7 @@ public class ElementTest extends WebDriverTestCase {
                 "[object]", "div",
                 "[object]", "dIv"
                 })
-    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void xml_tagName() throws Exception {
         xml("tagName");
     }
@@ -664,7 +665,7 @@ public class ElementTest extends WebDriverTestCase {
                 "[object]", "",
                 "[object]", ""
                 })
-    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void xml_prefix() throws Exception {
         xml("prefix");
     }
@@ -683,7 +684,7 @@ public class ElementTest extends WebDriverTestCase {
                 "[object]", "undefined",
                 "[object]", "undefined"
                 })
-    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void xml_localName() throws Exception {
         xml("localName");
     }
@@ -702,7 +703,7 @@ public class ElementTest extends WebDriverTestCase {
                 "[object]", "div",
                 "[object]", "dIv"
                 })
-    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void xml_baseName() throws Exception {
         xml("baseName");
     }
@@ -721,7 +722,7 @@ public class ElementTest extends WebDriverTestCase {
                 "[object]", "http://www.w3.org/1999/xhtml",
                 "[object]", "http://www.w3.org/1999/xhtml"
                 })
-    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void xml_namespaceURI() throws Exception {
         xml("namespaceURI");
     }
@@ -945,7 +946,7 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "§§URL§§", "§§URL§§" },
-            IE10 = { "undefined", "undefined" })
+            IE = { "undefined", "undefined" })
     public void baseURI() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -993,7 +994,7 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "null", "a b c" },
             IE = { "undefined", "undefined" },
-            IE10 = { "undefined", "a b c" })
+            IE11 = { "undefined", "a b c" })
     public void classList() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -1016,7 +1017,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts({ "test value", "true", "false", "finished" })
     public void attributeNS() throws Exception {
         final String html = "<html>\n"
@@ -1046,7 +1047,7 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "ab", "ab" })
-    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void removeAttribute_case_sensitive() throws Exception {
         final String html = "<html>\n"
             + "  <head>\n"

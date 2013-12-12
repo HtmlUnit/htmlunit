@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -86,7 +86,7 @@ public class UIEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object Event]", "undefined", "[object MouseEvent]", "1", "[object MouseEvent]", "2" },
             IE8 = { "[object]", "undefined", "[object]", "undefined", "[object]", "undefined" })
-    @BuggyWebDriver(IE10)
+    @BuggyWebDriver(IE11)
     // IEDriver has a detail of '3' for the double click but it is '2' when executed manually
     public void detail() throws Exception {
         final String html =
@@ -113,7 +113,8 @@ public class UIEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object Event]", "undefined", "[object MouseEvent]", "[object Window]" },
-            IE8 = { "[object]", "undefined", "[object]", "undefined" })
+            IE8 = { "[object]", "undefined", "[object]", "undefined" },
+            IE11 = { "[object Event]", "undefined", "[object PointerEvent]", "[object Window]" })
     public void view() throws Exception {
         final String html =
               "<html><body onload='alertView(event)'><script>\n"

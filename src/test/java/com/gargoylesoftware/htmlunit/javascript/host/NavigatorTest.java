@@ -217,13 +217,13 @@ public class NavigatorTest extends WebDriverTestCase {
     }
 
     /**
-     * Test language property (only for Mozilla).
+     * Test language property.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "undefined",
-            FF = "en-US",
-            IE = "undefined")
+    @Alerts(DEFAULT = "en-US",
+            CHROME = "undefined",
+            IE8 = "undefined")
     public void language() throws Exception {
         final String html
             = "<html><head><title>First</title></head>\n"
@@ -255,13 +255,11 @@ public class NavigatorTest extends WebDriverTestCase {
     }
 
     /**
-     * Test some Mozilla properties (minimal tests are support is not completed).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "Gecko",
-            FF = "Gecko",
-            IE = "undefined")
+    @Alerts(DEFAULT = "Gecko",
+            IE8 = "undefined")
     public void product() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
@@ -325,7 +323,8 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = { "Google Inc.", "" },
             FF = { "", "" },
-            IE = { "undefined", "undefined" })
+            IE = { "undefined", "undefined" },
+            IE11 = { "", "undefined" })
     public void vendor() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"

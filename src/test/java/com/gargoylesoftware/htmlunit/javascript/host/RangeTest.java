@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE10;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -65,9 +65,8 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE10 })
-    @Alerts(FF = { "true", "[object HTMLDocument]", "[object HTMLDocument]", "0", "[object HTMLDocument]", "0" },
-            IE10 = { "true", "[object Document]", "[object Document]", "0", "[object Document]", "0" })
+    @Browsers({ FF, IE11 })
+    @Alerts({ "true", "[object HTMLDocument]", "[object HTMLDocument]", "0", "[object HTMLDocument]", "0" })
     public void emptyRange() throws Exception {
         loadPageWithAlerts2(contentStart + "alertRange(r);" + contentEnd);
     }
@@ -76,7 +75,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts({ "false", "BODY", "BODY", "1", "BODY", "2" })
     public void selectNode() throws Exception {
         final String script = "r.selectNode(document.getElementById('theDiv'));"
@@ -89,7 +88,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts({ "false", "DIV", "DIV", "0", "DIV", "2" })
     public void selectNodeContents() throws Exception {
         final String script = "r.selectNodeContents(document.getElementById('theDiv'));"
@@ -102,7 +101,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts("<div id=\"myDiv2\"></div><div>harhar</div><div id=\"myDiv3\"></div>")
     public void createContextualFragment() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -155,7 +154,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts({ "qwerty", "tyxy", "[object DocumentFragment]", "[object HTMLSpanElement] [object Text]", "qwer",
         "[object HTMLSpanElement]" })
     public void extractContents() throws Exception {
@@ -181,7 +180,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts({
         "1 <p><b id=\"b\">text1<span id=\"s\">inner</span>text2</b></p>",
         "2 text1",
@@ -219,7 +218,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts({ "0", "1", "2", "3" })
     public void constants() throws Exception {
         final String html =
@@ -236,7 +235,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts({ "-1", "1", "1", "-1", "0" })
     public void compareBoundaryPoints() throws Exception {
         final String html = "<html><body>\n"
@@ -259,7 +258,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts({ "abcd", "bc", "null", "null", "ad", "bc" })
     public void extractContents3() throws Exception {
         final String html =
@@ -285,7 +284,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts({ "qwerty", "tyxy", "[object DocumentFragment]", "[object HTMLSpanElement] [object Text]", "qwerty",
         "[object HTMLSpanElement]" })
     public void cloneContents() throws Exception {
@@ -311,7 +310,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts({ "qwerty", "bcqwertyxy", "null", "az" })
     public void deleteContents() throws Exception {
         final String html =
@@ -334,7 +333,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ FF, IE10 })
+    @Browsers({ FF, IE11 })
     @Alerts({ "abcd", "bc", "null", "null", "ad" })
     public void deleteContents2() throws Exception {
         final String html =

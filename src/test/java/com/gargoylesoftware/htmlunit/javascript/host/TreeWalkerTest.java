@@ -104,7 +104,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
             FF17 = { "A", "A", "4294967295", "false" },
             FF24 = { "A", "A", "4294967295", "undefined" },
             IE = "exception",
-            IE10 = { "A", "A", "-1", "true" })
+            IE11 = { "A", "A", "-1", "true" })
     public void getters2() throws Exception {
         final String script = "var theA = document.getElementById('theA');\n"
             + "var tw = document.createTreeWalker(theA, NodeFilter.SHOW_ALL, null, true);\n"
