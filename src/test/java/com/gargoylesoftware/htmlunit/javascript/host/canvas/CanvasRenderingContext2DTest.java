@@ -78,7 +78,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "drawCustomFocusRing", "drawSystemFocusRing", "getLineDash",
                         "scrollPathIntoView", "setLineDash", "33 methods" },
-            IE8 = "exception")
+            IE8 = "exception",
+            IE11 = { "drawCustomFocusRing", "drawSystemFocusRing", "scrollPathIntoView", "35 methods" })
     public void methods() throws Exception {
         final String[] methods = {"arc", "arcTo", "beginPath", "bezierCurveTo", "clearRect", "clip", "closePath",
             "createImageData", "createLinearGradient", "createPattern", "createRadialGradient", "drawImage",

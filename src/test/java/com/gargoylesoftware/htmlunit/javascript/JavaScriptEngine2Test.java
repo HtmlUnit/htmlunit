@@ -147,7 +147,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "undefined", "foo error" },
             IE = { "function foo() {\n}", "function foo() {\n}" },
-            IE10 = { "function foo() {}", "function foo() {}" })
+            IE11 = { "function foo() {}", "function foo() {}" })
     // Real IE doesn't have the extra 'new line'
     public void variableNotDefined() throws Exception {
         final String html = "<html><head></head><body>\n"
@@ -171,14 +171,12 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "[object Window]", "[object Window]", "true",
+    @Alerts(DEFAULT = { "[object Window]", "[object Window]", "true",
                 "[object HTMLDocument]", "[object HTMLDocument]", "true", "function" },
             FF24 = { "[object Window]", "[object Window]", "true",
-                    "function HTMLDocument() {\n    [native code]\n}",
-                    "function HTMLDocument() {\n    [native code]\n}", "true", "function" },
-            IE = { "undefined", "exception", "undefined", "exception", "function" },
-            IE10 = { "[object Window]", "[object Window]", "true",
-                "[object Document]", "exception", "function" })
+                "function HTMLDocument() {\n    [native code]\n}",
+                "function HTMLDocument() {\n    [native code]\n}", "true", "function" },
+            IE8 = { "undefined", "exception", "undefined", "exception", "function" })
     public void constructor() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"

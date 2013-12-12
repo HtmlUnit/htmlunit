@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class NativeObjectTest extends WebDriverTestCase {
@@ -59,7 +60,7 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "__defineGetter__: function", "__defineSetter__: function", "__lookupGetter__: function",
             "__lookupSetter__: function" },
-            IE = { "__defineGetter__: undefined", "__defineSetter__: undefined", "__lookupGetter__: undefined",
+            IE8 = { "__defineGetter__: undefined", "__defineSetter__: undefined", "__lookupGetter__: undefined",
             "__lookupSetter__: undefined" })
     public void methods_different() throws Exception {
         final String[] methods = {"__defineGetter__", "__defineSetter__", "__lookupGetter__", "__lookupSetter__"};

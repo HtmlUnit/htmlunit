@@ -137,7 +137,8 @@ public class NativeDateTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("Saturday, January 01, 2000")
+    @Alerts(DEFAULT = "Saturday, January 01, 2000",
+            IE11 = "â€Ž01â€Ž.â€Ž01â€Ž.â€Ž2000")
     public void toLocaleDateString() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -179,7 +180,7 @@ public class NativeDateTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "Sat, 03 Dec 2005 07:14:15 GMT", "Tue, 12 Jul 2005 11:04:15 GMT",
                         "Sun, 03 Jul 2005 15:14:05 GMT" },
-            IE = { "Sat, 3 Dec 2005 07:14:15 UTC", "Tue, 12 Jul 2005 11:04:15 UTC",
+            IE8 = { "Sat, 3 Dec 2005 07:14:15 UTC", "Tue, 12 Jul 2005 11:04:15 UTC",
                     "Sun, 3 Jul 2005 15:14:05 UTC" })
     public void toUTCString() throws Exception {
         final String html
@@ -200,8 +201,8 @@ public class NativeDateTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "Sat, 03 Dec 2005 07:14:15 GMT", "Tue, 12 Jul 2005 11:04:15 GMT",
-                        "Sun, 03 Jul 2005 15:14:05 GMT" },
-            IE = { "Sat, 3 Dec 2005 07:14:15 UTC", "Tue, 12 Jul 2005 11:04:15 UTC",
+                    "Sun, 03 Jul 2005 15:14:05 GMT" },
+            IE8 = { "Sat, 3 Dec 2005 07:14:15 UTC", "Tue, 12 Jul 2005 11:04:15 UTC",
                     "Sun, 3 Jul 2005 15:14:05 UTC" })
     public void toGMTString() throws Exception {
         final String html
@@ -240,7 +241,10 @@ public class NativeDateTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "00:00:00", "07:08:09" })
+    @Alerts(DEFAULT = { "00:00:00", "07:08:09" },
+            IE11 = { "â€Ž00â€Ž:â€Ž00â€Ž:â€Ž00", "â€Ž07â€Ž:â€Ž08â€Ž:â€Ž09" })
+    // ATTENTION! the IE11 expectation only looks identical to the default one but there are invisible control
+    // characters (char code 14 - shift out) surrounding the digit pairs...
     public void toLocaleTimeString() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

@@ -40,7 +40,7 @@ public class NativeErrorTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = "true",
             IE = "undefined",
-            IE10 = "false")
+            IE11 = "false")
     public void stack() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -68,7 +68,7 @@ public class NativeErrorTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = "true",
             IE = "undefined",
-            IE10 = "false")
+            IE11 = "false")
     @NotYetImplemented(FF)
     public void stackNewError() throws Exception {
         final String html
