@@ -71,6 +71,8 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
+import com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLActiveXObjectFactory;
+import com.gargoylesoftware.htmlunit.activex.javascript.msxml.XMLDOMDocument;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
@@ -229,7 +231,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param stringToEncode string to encode
      * @return the encoded string
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public String btoa(final String stringToEncode) {
         return new String(Base64.encodeBase64(stringToEncode.getBytes()));
     }
@@ -239,7 +241,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param encodedData the encoded string
      * @return the decoded value
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public String atob(final String encodedData) {
         return new String(Base64.decodeBase64(encodedData.getBytes()));
     }
@@ -296,7 +298,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the application cache.
      * @return the application cache
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public OfflineResourceList getApplicationCache() {
         return applicationCache_;
     }
@@ -630,7 +632,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Prints messages to the console.
      * @param message the message to log
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public void dump(final String message) {
         if (console_ instanceof Console) {
             Console.log(null, console_, new Object[] {message}, null);
@@ -1150,7 +1152,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener">Mozilla documentation</a>
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public void addEventListener(final String type, final Function listener, final boolean useCapture) {
         getEventListenersContainer().addEventListener(type, listener, useCapture);
     }
@@ -1174,7 +1176,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.removeEventListener">Mozilla
      * documentation</a>
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public void removeEventListener(final String type, final Function listener, final boolean useCapture) {
         getEventListenersContainer().removeEventListener(type, listener, useCapture);
     }
@@ -1335,8 +1337,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                     .hasFeature(JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
                 final HtmlElement unknownElement = ((HTMLUnknownElement) result).getDomNodeOrDie();
                 if ("xml".equals(unknownElement.getNodeName())) {
-                    final XMLDocument document = ActiveXObject.buildXMLDocument(getWebWindow());
-                    document.setParentScope(this);
+                    final MSXMLActiveXObjectFactory factory =
+                            getWebWindow().getWebClient().getMSXMLActiveXObjectFactory();
+                    final XMLDOMDocument document = (XMLDOMDocument) factory.create("Microsoft.XMLDOM", getWebWindow());
                     final Iterator<HtmlElement> children = unknownElement.getHtmlElementDescendants().iterator();
                     if (children.hasNext()) {
                         final HtmlElement root = children.next();
@@ -1504,7 +1507,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return a dummy value
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref28.html">Mozilla doc</a>
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public int getInnerWidth() {
         return getWebWindow().getInnerWidth();
     }
@@ -1524,7 +1527,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return a dummy value
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref27.html">Mozilla doc</a>
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public int getInnerHeight() {
         return getWebWindow().getInnerHeight();
     }
@@ -1579,7 +1582,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param pseudo a string specifying the pseudo-element to match (may be <tt>null</tt>)
      * @return the computed style
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public ComputedCSSStyleDeclaration getComputedStyle(final Element element, final String pseudo) {
         ComputedCSSStyleDeclaration style;
 
@@ -1616,7 +1619,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the current selection.
      * @return the current selection
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public Selection getSelection() {
         final WebWindow webWindow = getWebWindow();
         // return null if the window is in a frame that is not displayed
@@ -1906,7 +1909,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the value of "pageXOffset" property.
      * @return the value of "pageXOffset" property
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public int getPageXOffset() {
         return 0;
     }
@@ -1915,7 +1918,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the value of "pageYOffset" property.
      * @return the value of "pageYOffset" property
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public int getPageYOffset() {
         return 0;
     }
@@ -2014,7 +2017,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return <tt>false</tt> if at least one of the event handlers which handled the event
      *         called <tt>preventDefault</tt>; <tt>true</tt> otherwise
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public boolean dispatchEvent(final Event event) {
         event.setTarget(this);
         final ScriptResult result = Node.fireEvent(this, event);
@@ -2026,7 +2029,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the handler
      */
     @JsxGetter({@WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME),
-        @WebBrowser(value = IE, minVersion = 10) })
+        @WebBrowser(value = IE, minVersion = 11) })
     public Object getOnchange() {
         return getHandlerForJavaScript(Event.TYPE_CHANGE);
     }
@@ -2036,7 +2039,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param onchange the handler
      */
     @JsxSetter({@WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME),
-        @WebBrowser(value = IE, minVersion = 10) })
+        @WebBrowser(value = IE, minVersion = 11) })
     public void setOnchange(final Object onchange) {
         setHandlerForJavaScript(Event.TYPE_CHANGE, onchange);
     }

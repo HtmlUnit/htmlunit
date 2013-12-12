@@ -130,7 +130,7 @@ public class Selection extends SimpleScriptable {
      * Returns the number of ranges in the selection.
      * @return the number of ranges in the selection
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public int getRangeCount() {
         return getRanges().size();
     }
@@ -195,7 +195,7 @@ public class Selection extends SimpleScriptable {
      * @param index the index of the range to return
      * @return the range at the specified index
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public com.gargoylesoftware.htmlunit.javascript.host.Range getRangeAt(final int index) {
         final List<Range> ranges = getRanges();
         if (index < 0 || index >= ranges.size()) {

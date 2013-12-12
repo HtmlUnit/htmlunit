@@ -259,7 +259,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns the geolocation.
      * @return the geolocation
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public Geolocation getGeolocation() {
         final Geolocation geolocation = new Geolocation();
         geolocation.setPrototype(getPrototype(geolocation.getClass()));

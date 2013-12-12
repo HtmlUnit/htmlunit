@@ -63,7 +63,7 @@ public class DocumentType extends Node {
      * Returns the publicId.
      * @return the publicId
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public String getPublicId() {
         return ((DomDocumentType) getDomNodeOrDie()).getPublicId();
     }
@@ -72,7 +72,7 @@ public class DocumentType extends Node {
      * Returns the systemId.
      * @return the systemId
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public String getSystemId() {
         return ((DomDocumentType) getDomNodeOrDie()).getSystemId();
     }
@@ -81,7 +81,7 @@ public class DocumentType extends Node {
      * Returns the internal subset.
      * @return the internal subset
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public String getInternalSubset() {
         final String subset = ((DomDocumentType) getDomNodeOrDie()).getInternalSubset();
         if (StringUtils.isNotEmpty(subset)) {

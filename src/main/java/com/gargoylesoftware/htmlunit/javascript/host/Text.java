@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Ahmed Ashour
  * @author Chuck Dumont
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @JsxClass(domClass = DomText.class)
 public class Text extends CharacterDataImpl {
@@ -61,7 +62,7 @@ public class Text extends CharacterDataImpl {
      * Returns wholeText value.
      * @return wholeText value
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10), @WebBrowser(CHROME) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
     public String getWholeText() {
         return ((DomText) getDomNodeOrDie()).getWholeText();
     }

@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * Event definitions</a>.
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @JsxClass
 public class MessageEvent extends Event {
@@ -69,7 +70,7 @@ public class MessageEvent extends Event {
      * @param lastEventId the identifier of the last event
      * @param source the window object that contains the document that caused the event
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public void initMessageEvent(
             final String type,
             final boolean canBubble,

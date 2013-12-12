@@ -285,7 +285,7 @@ public class Document extends EventNode {
      * @param deep Whether to recursively import the subtree under the specified node; or not
      * @return the imported node that belongs to this Document
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public Object importNode(final Node importedNode, final boolean deep) {
         DomNode domNode = importedNode.getDomNodeOrDie();
         domNode = domNode.cloneNode(deep);
@@ -423,7 +423,7 @@ public class Document extends EventNode {
             // FF3.6 supports document.createElement('div') or supports document.createElement('<div>')
             // but not document.createElement('<div name="test">')
             // IE9- supports also document.createElement('<div name="test">')
-            // FF4+ and IE10 don't support document.createElement('<div>')
+            // FF4+ and IE11 don't support document.createElement('<div>')
             if (browserVersion.hasFeature(BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_STRICT)
                   && (tagName.contains("<") || tagName.contains(">"))) {
                 LOG.info("createElement: Provided string '"
@@ -475,7 +475,7 @@ public class Document extends EventNode {
      * @param qualifiedName the qualified name of the element type to instantiate
      * @return the new HTML element, or NOT_FOUND if the tag is not supported
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public Object createElementNS(final String namespaceURI, final String qualifiedName) {
         final org.w3c.dom.Element element;
         if ("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul".equals(namespaceURI)) {
@@ -535,7 +535,7 @@ public class Document extends EventNode {
      *                  which matches all elements.
      * @return a live NodeList of found elements in the order they appear in the tree
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public Object getElementsByTagNameNS(final Object namespaceURI, final String localName) {
         final String description = "Document.getElementsByTagNameNS('" + namespaceURI + "', '" + localName + "')";
 

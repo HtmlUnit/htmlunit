@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -39,28 +38,10 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class ActiveXObjectTest extends SimpleWebTestCase {
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Browsers(NONE)
-    public void xmlHttpRequestFlavours() throws Exception {
-        assertFalse(ActiveXObject.isXMLHttpRequest(null));
-        assertFalse(ActiveXObject.isXMLHttpRequest("foo"));
-        assertTrue(ActiveXObject.isXMLHttpRequest("Microsoft.XMLHTTP"));
-        assertTrue(ActiveXObject.isXMLHttpRequest("Msxml2.XMLHTTP"));
-        assertTrue(ActiveXObject.isXMLHttpRequest("Msxml2.XMLHTTP.3.0"));
-        assertTrue(ActiveXObject.isXMLHttpRequest("Msxml2.XMLHTTP.4.0"));
-        assertTrue(ActiveXObject.isXMLHttpRequest("Msxml2.XMLHTTP.5.0"));
-        assertTrue(ActiveXObject.isXMLHttpRequest("Msxml2.XMLHTTP.6.0"));
-        assertTrue(ActiveXObject.isXMLDocument("Microsoft.XmlDom"));
-        assertTrue(ActiveXObject.isXMLDocument("MSXML4.DOMDocument"));
-        assertTrue(ActiveXObject.isXMLDocument("Msxml2.DOMDocument.6.0"));
-    }
 
     /**
      * @throws Exception if the test fails

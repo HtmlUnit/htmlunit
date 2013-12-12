@@ -46,6 +46,7 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
  * @author Chris Erskine
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 public class JavaScriptConfigurationTest extends SimpleWebTestCase {
 
@@ -59,7 +60,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
     @Test
     public void configurationMapExpands() throws Exception {
         // get a reference to the leaky map
-        final Field field = JavaScriptConfiguration.class.getDeclaredField("ConfigurationMap_");
+        final Field field = JavaScriptConfiguration.class.getDeclaredField("CONFIGURATION_MAP_");
         field.setAccessible(true);
         final Map<?, ?> leakyMap = (Map<? , ?>) field.get(null);
 

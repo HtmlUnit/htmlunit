@@ -275,7 +275,7 @@ public class MouseEvent extends UIEvent {
      * @see <a href="http://unixpapa.com/js/mouse.html">Javascript Madness: Mouse Events</a>
      * @return the button code
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public int getWhich() {
         return button_ + 1;
     }
@@ -299,7 +299,7 @@ public class MouseEvent extends UIEvent {
      * @param button what mouse button is pressed
      * @param relatedTarget is there a related target for the event
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public void initMouseEvent(
             final String type,
             final boolean bubbles,
@@ -362,7 +362,7 @@ public class MouseEvent extends UIEvent {
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public boolean getAltKey() {
         return super.getAltKey();
     }
@@ -371,7 +371,7 @@ public class MouseEvent extends UIEvent {
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public boolean getCtrlKey() {
         return super.getCtrlKey();
     }
@@ -380,7 +380,7 @@ public class MouseEvent extends UIEvent {
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public boolean getShiftKey() {
         return super.getShiftKey();
     }

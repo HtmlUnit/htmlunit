@@ -135,15 +135,15 @@ public class Event extends SimpleScriptable {
     public static final short NONE = 0;
 
     /** The first event phase: the capturing phase. */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public static final short CAPTURING_PHASE = 1;
 
     /** The second event phase: at the event target. */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public static final short AT_TARGET = 2;
 
     /** The third (and final) event phase: the bubbling phase. */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public static final short BUBBLING_PHASE = 3;
 
     /** Constant. */
@@ -412,7 +412,7 @@ public class Event extends SimpleScriptable {
      * Returns the event target to which the event was originally dispatched.
      * @return the event target to which the event was originally dispatched
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public Object getTarget() {
         return target_;
     }
@@ -430,7 +430,7 @@ public class Event extends SimpleScriptable {
      * is useful during event capturing and event bubbling.
      * @return the current event target
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public Object getCurrentTarget() {
         return currentTarget_;
     }
@@ -473,7 +473,7 @@ public class Event extends SimpleScriptable {
      * Returns the time at which this event was created.
      * @return the time at which this event was created
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public long getTimeStamp() {
         return timeStamp_;
     }
@@ -549,7 +549,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return the current event phase for the event
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public int getEventPhase() {
         return eventPhase_;
     }
@@ -570,7 +570,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return whether or not this event bubbles
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public boolean getBubbles() {
         return bubbles_;
     }
@@ -578,7 +578,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return whether or not this event can be canceled
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public boolean getCancelable() {
         return cancelable_;
     }
@@ -588,7 +588,7 @@ public class Event extends SimpleScriptable {
      * called for this event. Otherwise this attribute must return <tt>false</tt>.
      * @return <tt>true</tt> if this event has been cancelled or not
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public boolean getDefaultPrevented() {
         return cancelable_ && preventDefault_;
     }
@@ -612,7 +612,7 @@ public class Event extends SimpleScriptable {
     /**
      * Stops the event from propagating.
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public void stopPropagation() {
         stopPropagation_ = true;
     }
@@ -629,7 +629,7 @@ public class Event extends SimpleScriptable {
      * Returns the return value associated with the event.
      * @return the return value associated with the event
      */
-    //TODO [IE10] returnValue exists only on BeforeUnloadEvent for IE10 and FF17
+    //TODO [IE11] returnValue exists only on BeforeUnloadEvent for IE11 and FF17
     @JsxGetter
     public Object getReturnValue() {
         return returnValue_;
@@ -640,7 +640,7 @@ public class Event extends SimpleScriptable {
      * @param returnValue the return value associated with the event
      */
     @JsxSetter
-    //TODO [IE10] returnValue exists only on BeforeUnloadEvent for IE10 and FF17
+    //TODO [IE11] returnValue exists only on BeforeUnloadEvent for IE11 and FF17
     public void setReturnValue(final Object returnValue) {
         returnValue_ = returnValue;
     }
@@ -660,7 +660,7 @@ public class Event extends SimpleScriptable {
      * @param bubbles whether or not the event should bubble
      * @param cancelable whether or not the event the event should be cancelable
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public void initEvent(final String type, final boolean bubbles, final boolean cancelable) {
         type_ = type;
         bubbles_ = bubbles;
@@ -672,7 +672,7 @@ public class Event extends SimpleScriptable {
      * Any default action associated with the event will not occur.
      * Calling this method for a non-cancelable event has no effect.
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public void preventDefault() {
         preventDefault_ = true;
     }

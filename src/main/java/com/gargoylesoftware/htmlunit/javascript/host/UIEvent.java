@@ -76,7 +76,7 @@ public class UIEvent extends Event {
      *
      * @return some detail information about the event, depending on the event type
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public long getDetail() {
         return detail_;
     }
@@ -111,7 +111,7 @@ public class UIEvent extends Event {
      *
      * @return the view from which the event was generated
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public Object getView() {
         return getWindow();
     }
@@ -125,7 +125,7 @@ public class UIEvent extends Event {
      * @param view the view to use for this event
      * @param detail the detail to set for the event
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public void initUIEvent(
             final String type,
             final boolean bubbles,
@@ -141,7 +141,7 @@ public class UIEvent extends Event {
      * Returns whether or not the "meta" key was pressed during the event firing.
      * @return whether or not the "meta" key was pressed during the event firing
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public boolean getMetaKey() {
         return metaKey_;
     }
