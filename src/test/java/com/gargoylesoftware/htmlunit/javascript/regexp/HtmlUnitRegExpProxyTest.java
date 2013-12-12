@@ -450,7 +450,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "afood$0$7b",
-            IE10 = "afoodfoo$7b")
+            IE11 = "afoodfoo$7b")
     public void replace_backReferences() throws Exception {
         testEvaluate("'afoob'.replace(/(foo)/g, '$1d$0$7')");
     }

@@ -37,8 +37,8 @@ public class XmlPage2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "8",
-            IE10 = "")
-    // TODO [IE10]XML real IE10 does not support document.load
+            IE11 = "")
+    // TODO [IE11]XML real IE11 does not support document.load
     public void load_XMLComment() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -63,7 +63,7 @@ public class XmlPage2Test extends WebDriverTestCase {
     @Test
     @Alerts(FF =  { "true", "14" },
             IE = { "true", "16" },
-            IE10 = { "true", "15" })
+            IE11 = { "true", "15" })
     public void createElement() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
