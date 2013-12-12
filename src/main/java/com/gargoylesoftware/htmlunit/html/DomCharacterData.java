@@ -103,7 +103,7 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
      */
     public void deleteData(final int offset, final int count) {
         if (offset < 0) {
-            throw new IllegalArgumentException("Provided offset: " + offset + "is less than zero.");
+            throw new IllegalArgumentException("Provided offset: " + offset + " is less than zero.");
         }
 
         final String data = data_.substring(0, offset);

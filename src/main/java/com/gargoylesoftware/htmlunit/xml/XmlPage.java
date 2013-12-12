@@ -50,6 +50,7 @@ import com.gargoylesoftware.htmlunit.html.DomProcessingInstruction;
  * @author Marc Guillemot
  * @author David K. Taylor
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 public class XmlPage extends SgmlPage {
 

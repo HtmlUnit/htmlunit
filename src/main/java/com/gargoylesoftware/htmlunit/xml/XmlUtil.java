@@ -66,6 +66,7 @@ import com.gargoylesoftware.htmlunit.html.HTMLParser;
  * @author Sudhan Moghe
  * @author Ronald Brill
  * @author Chuck Dumont
+ * @author Frank Danek
  */
 public final class XmlUtil {
 

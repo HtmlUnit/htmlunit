@@ -50,7 +50,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * Regression test for bug 2822048: a 302 redirect without Location header.
      * @throws Exception if an error occurs
      */
-    // TODO [IE10]ERRORPAGE real IE10 displays his own error page (res://ieframe.dll/dnserror.htm#<url>)
+    // TODO [IE11]ERRORPAGE real IE11 displays his own error page (res://ieframe.dll/dnserror.htm#<url>)
     @Test
     public void redirect302WithoutLocation() throws Exception {
         final String html = "<html><body><a href='page2'>to redirect</a></body></html>";
@@ -235,7 +235,7 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts ({ "open", "first", "second" })
-    // TODO [IE10]MODALPANEL real IE10 opens a modal panel 'really close window?' which webdriver cannot handle
+    // TODO [IE11]MODALPANEL real IE11 opens a modal panel 'really close window?' which webdriver cannot handle
     public void windowOpenedByAnchorTargetIsAttachedToJavascriptEventLoop() throws Exception {
         final String firstContent = "<html>"
             + "<head>"
@@ -280,7 +280,7 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts ({ "open", "first", "second" })
-    // TODO [IE10]MODALPANEL real IE10 opens a modal panel 'really close window?' which webdriver cannot handle
+    // TODO [IE11]MODALPANEL real IE11 opens a modal panel 'really close window?' which webdriver cannot handle
     public void windowOpenedByFormTargetIsAttachedToJavascriptEventLoop() throws Exception {
         final String firstContent = "<html>"
             + "<head>"
@@ -419,7 +419,7 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts ({ "Executed", "later" })
-    // TODO [IE10]ERRORPAGE real IE10 displays own error page if response is to small
+    // TODO [IE11]ERRORPAGE real IE11 displays own error page if response is to small
     public void execJavascriptOnErrorPages() throws Exception {
         final String errorHtml = "<html>\n"
                 + "<head>\n"
@@ -462,7 +462,7 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("modified")
-    // TODO [IE10]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void deflateCompressionGZipCompatible() throws Exception {
         doTestDeflateCompression(true);
     }
@@ -473,7 +473,7 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "modified",
-            IE10 = "Hello world")
+            IE11 = "Hello world")
     public void deflateCompressionNonGZipCompatible() throws Exception {
         doTestDeflateCompression(false);
     }

@@ -71,7 +71,7 @@ public class NoHttpResponseTest {
          * @throws Exception if the test fails
          */
         @Test
-        // TODO [IE10] does not run in real IE10 (browser waits for a looooooong time)
+        // TODO [IE11] does not run in real IE11 (browser waits for a looooooong time)
         public void callSubmitInButtonAndReturnTrue() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
             mockWebConnection.setResponse(getDefaultUrl(), html);

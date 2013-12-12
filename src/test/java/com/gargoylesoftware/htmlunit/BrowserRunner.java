@@ -82,8 +82,8 @@ public class BrowserRunner extends Suite {
             if (/*browsers.contains("hu") ||*/ browsers.contains("hu-ie9")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_9, false));
             }
-            if (/*browsers.contains("hu") ||*/ browsers.contains("hu-ie10")) {
-                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_10, false));
+            if (/*browsers.contains("hu") ||*/ browsers.contains("hu-ie11")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_11, false));
             }
             if (/*browsers.contains("hu") || */browsers.contains("hu-chrome")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.CHROME, false));
@@ -102,8 +102,8 @@ public class BrowserRunner extends Suite {
                 if (browsers.contains("ie9")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_9, true));
                 }
-                if (browsers.contains("ie10")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_10, true));
+                if (browsers.contains("ie11")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_11, true));
                 }
                 if (browsers.contains("chrome")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.CHROME, true));
@@ -169,8 +169,8 @@ public class BrowserRunner extends Suite {
         /** Internet Explorer 9. */
         IE9,
 
-        /** Internet Explorer 10. */
-        IE10,
+        /** Internet Explorer 11. */
+        IE11,
 
         /** All versions of Firefox. */
         FF,
@@ -230,8 +230,8 @@ public class BrowserRunner extends Suite {
         /** Alerts for Internet Explorer 9. If not defined, {@link #IE()} is used. */
         String[] IE9() default { EMPTY_DEFAULT };
 
-        /** Alerts for Internet Explorer 10. If not defined, {@link #IE()} is used. */
-        String[] IE10() default { EMPTY_DEFAULT };
+        /** Alerts for Internet Explorer 11. If not defined, {@link #IE()} is used. */
+        String[] IE11() default { EMPTY_DEFAULT };
 
         /** Alerts for any Firefox, it can be overridden by specific FF version. */
         String[] FF() default { EMPTY_DEFAULT };

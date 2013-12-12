@@ -43,7 +43,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
             IE = "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*",
-            IE10 = "Accept: text/html, application/xhtml+xml, */*")
+            IE11 = "Accept: text/html, application/xhtml+xml, */*")
     public void acceptHeaderGetUrl() throws Exception {
         final String html = "<html><body>Response</body></html>";
         loadPage2(html, getDefaultUrl());
@@ -57,7 +57,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" },
             IE = { "2", "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*" },
-            IE10 = { "2", "Accept: text/html, application/xhtml+xml, */*" })
+            IE11 = { "2", "Accept: text/html, application/xhtml+xml, */*" })
     public void acceptHeaderWindowOpen() throws Exception {
         String html = "<html><body>Response</body></html>";
         getMockWebConnection().setDefaultResponse(html);
@@ -79,7 +79,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" },
             IE = {"2", "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*" },
-            IE10 = {"2", "Accept: text/html, application/xhtml+xml, */*" })
+            IE11 = {"2", "Accept: text/html, application/xhtml+xml, */*" })
     public void acceptHeaderAnchorClick() throws Exception {
         String html = "<html><body>Response</body></html>";
         getMockWebConnection().setDefaultResponse(html);
@@ -101,7 +101,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
             IE = "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*",
-            IE10 = "Accept: text/html, application/xhtml+xml, */*")
+            IE11 = "Accept: text/html, application/xhtml+xml, */*")
     public void acceptHeaderAnchorClickWithType() throws Exception {
         String html = "<html><body>Response</body></html>";
         getMockWebConnection().setDefaultResponse(html);
@@ -124,7 +124,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "Accept: image/png,image/*;q=0.8,*/*;q=0.5",
             CHROME = "Accept: image/webp,*/*;q=0.8",
             IE = "Accept: */*",
-            IE10 = "Accept: image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5")
+            IE11 = "Accept: image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5")
     public void acceptHeaderImage() throws Exception {
         final String html
             = "<html><head>\n"
@@ -149,7 +149,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Accept: text/css,*/*;q=0.1",
             IE = "Accept: */*",
-            IE10 = "Accept: text/css")
+            IE11 = "Accept: text/css, */*")
     public void acceptHeaderCss() throws Exception {
         final String html
             = "<html><head>\n"
@@ -174,7 +174,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Accept: */*",
-            IE10 = "Accept: application/javascript, */*;q=0.8")
+            IE11 = "Accept: application/javascript, */*;q=0.8")
     public void acceptHeaderJavascript() throws Exception {
         final String html
             = "<html><head>\n"
@@ -193,7 +193,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Accept: */*",
-            IE10 = "Accept: application/javascript, */*;q=0.8")
+            IE11 = "Accept: application/javascript, */*;q=0.8")
     public void acceptHeaderJavascriptWithoutType() throws Exception {
         final String html
             = "<html><head>\n"
@@ -213,7 +213,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Accept: text/css,*/*;q=0.1",
             IE = "Accept: */*",
-            IE10 = "Accept: text/css")
+            IE11 = "Accept: text/css, */*")
     public void acceptHeaderCssWithoutType() throws Exception {
         final String html
             = "<html><head>\n"
@@ -239,7 +239,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Accept: text/css,*/*;q=0.1",
             IE = "Accept: */*",
-            IE10 = "Accept: text/css")
+            IE11 = "Accept: text/css, */*")
     public void acceptHeaderCssDifferentType() throws Exception {
         final String html
             = "<html><head>\n"

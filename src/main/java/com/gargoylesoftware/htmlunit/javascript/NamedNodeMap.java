@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ATTRIBUTES_BY_NAME_CASE_SENSITIVE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ATTRIBUTES_CONTAINS_EMPTY_ATTR_FOR_PROPERTIES;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -38,6 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Node;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill
+ * @author Frank Danek
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core.html#ID-1780488922">DOM Level 2 Core Spec</a>
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms763824.aspx">IXMLDOMNamedNodeMap</a>
  */
@@ -89,7 +91,15 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     public Object getWithFallback(final String name) {
         final Object response = getNamedItem(name);
         if (response != null) {
-            return response;
+            if (response instanceof Attr && getBrowserVersion().hasFeature(JS_ATTRIBUTES_BY_NAME_CASE_SENSITIVE)) {
+                final Attr attr = (Attr) response;
+                if (attr.getName().equals(name)) {
+                    return response;
+                }
+            }
+            else {
+                return response;
+            }
         }
         if (useRecursiveAttributeForIE() && isRecursiveAttribute(name)) {
             return getUnspecifiedAttributeNode(name);

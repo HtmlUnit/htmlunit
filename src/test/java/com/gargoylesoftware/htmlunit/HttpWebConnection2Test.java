@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HttpWebConnection2Test extends WebDriverTestCase {
@@ -63,13 +64,13 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         assertEquals(null, lastRequest.getRequestBody());
         assertEquals(getDefaultUrl() + "foo", lastRequest.getUrl());
         String expectedHeaders = "";
-        if (getBrowserVersion() == BrowserVersion.INTERNET_EXPLORER_10) {
+        if (getBrowserVersion() == BrowserVersion.INTERNET_EXPLORER_11) {
             expectedHeaders += "Cache-Control: no-cache\n";
         }
         expectedHeaders += "Connection: keep-alive\n"
             + "Content-Length: 48\n"
             + "Content-Type: application/x-www-form-urlencoded\n";
-        if (getBrowserVersion() == BrowserVersion.INTERNET_EXPLORER_10) {
+        if (getBrowserVersion() == BrowserVersion.INTERNET_EXPLORER_11) {
             expectedHeaders += "DNT: 1\n";
         }
         expectedHeaders += "Host: localhost:" + PORT + "\n"

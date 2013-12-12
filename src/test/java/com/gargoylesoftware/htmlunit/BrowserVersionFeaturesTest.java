@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class BrowserVersionFeaturesTest extends SimpleWebTestCase {
@@ -67,7 +68,7 @@ public class BrowserVersionFeaturesTest extends SimpleWebTestCase {
         browsers.add(BrowserVersion.FIREFOX_24);
         browsers.add(BrowserVersion.INTERNET_EXPLORER_8);
         browsers.add(BrowserVersion.INTERNET_EXPLORER_9);
-        browsers.add(BrowserVersion.INTERNET_EXPLORER_10);
+        browsers.add(BrowserVersion.INTERNET_EXPLORER_11);
         browsers.add(BrowserVersion.CHROME);
 
         for (final BrowserVersionFeatures feature : BrowserVersionFeatures.values()) {
