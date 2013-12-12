@@ -129,7 +129,6 @@ public class YuiTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE10 = "test_setStyle")
     @NotYetImplemented(IE8)
     public void dom() throws Exception {
         doTest("dom.html", Arrays.asList(getExpectedAlerts()));
@@ -139,8 +138,7 @@ public class YuiTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE8 = { "test_startDrag", "test_dragOver", "test_containerScroll" },
-            IE10 = { "test_startDrag", "test_dragOver", "test_bodyScroll", "test_containerScroll" })
+    @Alerts(IE8 = { "test_startDrag", "test_dragOver", "test_containerScroll" })
     @NotYetImplemented(IE8)
     public void dragDrop() throws Exception {
         doTest("dragdrop.html", Arrays.asList(getExpectedAlerts()));
@@ -160,11 +158,7 @@ public class YuiTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "test_createlink",
             FF17 = { "test_createlink", "test_regex" },
-            IE10 = { "test_content", "test_regex", "test_blank_image", "test_insertimage",
-                "test_image_props", "test_close_window", "test_bold", "test_selected_element",
-                "test_dom_path", "test_hidden_elements", "test_event_mouseup", "test_event_mousedown",
-                "test_event_double_click", "test_event_keyup", "test_event_keydown", "test_event_keypress",
-                "test_createlink", "test_content_after" })
+            IE11 = { "test_bold", "test_createlink" })
     @NotYetImplemented
     public void editor() throws Exception {
         doTest("editor.html", Arrays.asList(getExpectedAlerts()));
@@ -175,7 +169,6 @@ public class YuiTest extends WebDriverTestCase {
      */
     @Test
     @NotYetImplemented
-    // TODO [IE10]XML fails completely in real IE10
     public void yuiLoaderRollup() throws Exception {
         doTest("yuiloader_rollup.html");
     }

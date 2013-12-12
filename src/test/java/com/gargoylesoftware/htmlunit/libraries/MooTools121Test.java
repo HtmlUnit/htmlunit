@@ -56,18 +56,9 @@ public class MooTools121Test extends WebDriverTestCase {
             FF24 = { "364", "2", "0",
                     "should return true if the string constains the string and separator otherwise false",
                     "should return the function bound to an object with multiple arguments" },
-            IE10 = { "239", "0", "11",
+            IE11 = { "364", "2", "0",
                     "should return the function bound to an object with multiple arguments",
-                    "should return an Element with various attributes",
-                    "should return an Element with for attribute",
-                    "should return an Element with class attribute",
-                    "should return input Elements with name and type attributes",
-                    "should return input Elements that are checked",
-                    "should return a select Element that retains it's selected options",
-                    "should set the checked attribute of an Element",
-                    "should set the for attribute of an element",
-                    "should set the opacity of an Element",
-                    "should set the `styles` property on an Element using the Element constructor" })
+                    "should return a CSS string representing the Element's styles" })
     @Test
     public void mooTools() throws Exception {
         final String resource = "libraries/mootools/1.2.1/Specs/index.html";
