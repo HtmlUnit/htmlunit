@@ -145,10 +145,10 @@ public class BrowserVersion implements Serializable, Cloneable {
         INTERNET_EXPLORER, "5.0 (compatible; MSIE 9.0; Windows NT 6.1)",
         "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1)", 9, "IE9", null);
 
-    /** Internet Explorer 10. Work In Progress!!! */
-    public static final BrowserVersion INTERNET_EXPLORER_10 = new BrowserVersion(
-        INTERNET_EXPLORER, "5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)",
-        "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)", 10, "IE10", null);
+    /** Internet Explorer 11. Work In Progress!!! */
+    public static final BrowserVersion INTERNET_EXPLORER_11 = new BrowserVersion(
+        NETSCAPE, "5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko",
+        "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko", 11, "IE11", null);
 
     /** Latest Chrome. Work In Progress!!! */
     public static final BrowserVersion CHROME = new BrowserVersion(
@@ -165,7 +165,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     static {
         INTERNET_EXPLORER_8.initDefaultFeatures();
         INTERNET_EXPLORER_9.initDefaultFeatures();
-        INTERNET_EXPLORER_10.initDefaultFeatures();
+        INTERNET_EXPLORER_11.initDefaultFeatures();
 
         FIREFOX_17.initDefaultFeatures();
 
@@ -187,10 +187,10 @@ public class BrowserVersion implements Serializable, Cloneable {
 
         INTERNET_EXPLORER_8.setHtmlAcceptHeader("image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*");
 
-        INTERNET_EXPLORER_10.setHtmlAcceptHeader("text/html, application/xhtml+xml, */*");
-        INTERNET_EXPLORER_10.setImgAcceptHeader("image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5");
-        INTERNET_EXPLORER_10.setCssAcceptHeader("text/css");
-        INTERNET_EXPLORER_10.setScriptAcceptHeader("application/javascript, */*;q=0.8");
+        INTERNET_EXPLORER_11.setHtmlAcceptHeader("text/html, application/xhtml+xml, */*");
+        INTERNET_EXPLORER_11.setImgAcceptHeader("image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5");
+        INTERNET_EXPLORER_11.setCssAcceptHeader("text/css, */*");
+        INTERNET_EXPLORER_11.setScriptAcceptHeader("application/javascript, */*;q=0.8");
 
         final PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
             "Shockwave Flash 9.0 r31", "libflashplayer.so");
@@ -327,7 +327,7 @@ public class BrowserVersion implements Serializable, Cloneable {
      * @return whether or not this version is a version of IE
      */
     public final boolean isIE() {
-        return INTERNET_EXPLORER.equals(getApplicationName());
+        return getNickname().startsWith("IE");
     }
 
     /**
@@ -346,7 +346,7 @@ public class BrowserVersion implements Serializable, Cloneable {
      * @return whether or not this version is a version of a Firefox browser
      */
     public final boolean isFirefox() {
-        return !isChrome() && NETSCAPE.equals(getApplicationName());
+        return getNickname().startsWith("FF");
     }
 
     /**
