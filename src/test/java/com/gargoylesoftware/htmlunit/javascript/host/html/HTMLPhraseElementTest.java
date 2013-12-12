@@ -25,7 +25,8 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Unit tests for {@link HTMLPhraseElement}.
  *
  * @version $Revision$
- * @author ronald Brill
+ * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLPhraseElementTest extends WebDriverTestCase {
