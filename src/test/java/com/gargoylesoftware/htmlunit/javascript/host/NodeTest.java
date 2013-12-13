@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE9;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -338,8 +339,9 @@ public class NodeTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "isSameNode not supported" },
             IE = { "isSameNode not supported" },
+            IE9 = { "true", "false" },
             IE11 = { "true", "false" })
-    public void testIsSameNode() throws Exception {
+    public void isSameNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var d1 = document.getElementById('div1');\n"
@@ -628,7 +630,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE11 })
+    @Browsers({ FF, IE9, IE11 })
     @Alerts({ "0", "20", "20", "4", "10", "10", "2", "20", "exception" })
     public void compareDocumentPosition() throws Exception {
         final String html

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.14" date="???" description="Bugfixes">
+            <action type="add" dev="asashour">
+                JavaScript: node and window.addEventListener() and .removeEventListener() are supported starting IE 9.
+            </action>
             <action type="fix" dev="rbri" due-to="Frank Danek">
                 JavaScript: XMLDocument.firstChild() is now enabled to support more nodes at the
                 root level like ProcessingInstruction, Comment.

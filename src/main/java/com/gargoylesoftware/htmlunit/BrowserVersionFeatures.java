@@ -270,10 +270,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
-    GENERATED_121,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
     GENERATED_124,
 
     /** Was originally .isIE(). */
@@ -658,7 +654,7 @@ public enum BrowserVersionFeatures {
 
     /** Indicates that the appendChild call throws no exception
      * if the provided node cannot be inserted. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NODE,
 
     /** Indicates that the class name of "arguments" object is "Object". */
@@ -972,7 +968,7 @@ public enum BrowserVersionFeatures {
     JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE,
 
     /** Indicates that objects with prototype property available in window scope; Firefox does this. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 9) })
     JS_HAS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE,
 
     /** HTMLGenericElement instead of HTMLUnknownElement. */
@@ -1048,12 +1044,16 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE,
 
+    /** Should throw exception if extra argument is passed to node.insertBefore(). */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    JS_NODE_INSERT_BEFORE_THROW_EXCEPTION_FOR_EXTRA_ARGUMENT,
+
     /** If <tt>true</tt>, Date.prototype.getYear subtracts 1900 only if 1900 <= date < 2000. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_NON_ECMA_GET_YEAR,
 
     /** "[object]" in quirks mode. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_OBJECT_IN_QUIRKS_MODE,
 
     /** Indicates that someObj.offsetParent throws an exception when called on an object that is not yet attached

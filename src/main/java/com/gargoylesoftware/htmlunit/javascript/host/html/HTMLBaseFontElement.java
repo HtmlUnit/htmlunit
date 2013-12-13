@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLBASEFONT_END_TAG_FORBIDDEN;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -31,7 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlBaseFont.class, browsers = { @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 3.6f) })
+@JsxClass(domClass = HtmlBaseFont.class, browsers = @WebBrowser(IE))
 public class HTMLBaseFontElement extends HTMLElement {
 
     /**

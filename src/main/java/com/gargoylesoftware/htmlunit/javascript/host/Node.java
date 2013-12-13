@@ -14,13 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_121;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_124;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_45;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLONE_NODE_COPIES_EVENT_LISTENERS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_INSERT_BEFORE_THROW_EXCEPTION_FOR_EXTRA_ARGUMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PREFIX_RETURNS_EMPTY_WHEN_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_APPENDS_CRLF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
@@ -87,75 +87,75 @@ public class Node extends SimpleScriptable {
     private EventListenersContainer eventListenersContainer_;
 
     /** @see org.w3c.dom.Node#ELEMENT_NODE */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) })
     public static final short ELEMENT_NODE = org.w3c.dom.Node.ELEMENT_NODE;
 
     /** @see org.w3c.dom.Node#ATTRIBUTE_NODE */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) })
     public static final short ATTRIBUTE_NODE = org.w3c.dom.Node.ATTRIBUTE_NODE;
 
     /** @see org.w3c.dom.Node#TEXT_NODE */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) })
     public static final short TEXT_NODE = org.w3c.dom.Node.TEXT_NODE;
 
     /** @see org.w3c.dom.Node#CDATA_SECTION_NODE */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) })
     public static final short CDATA_SECTION_NODE = org.w3c.dom.Node.CDATA_SECTION_NODE;
 
     /** @see org.w3c.dom.Node#ENTITY_REFERENCE_NODE */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) })
     public static final short ENTITY_REFERENCE_NODE = org.w3c.dom.Node.ENTITY_REFERENCE_NODE;
 
     /** @see org.w3c.dom.Node#ENTITY_NODE */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) })
     public static final short ENTITY_NODE = org.w3c.dom.Node.ENTITY_NODE;
 
     /** @see org.w3c.dom.Node#PROCESSING_INSTRUCTION_NODE */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) })
     public static final short PROCESSING_INSTRUCTION_NODE = org.w3c.dom.Node.PROCESSING_INSTRUCTION_NODE;
 
     /** @see org.w3c.dom.Node#COMMENT_NODE */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) })
     public static final short COMMENT_NODE = org.w3c.dom.Node.COMMENT_NODE;
 
     /** @see org.w3c.dom.Node#DOCUMENT_NODE */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) })
     public static final short DOCUMENT_NODE = org.w3c.dom.Node.DOCUMENT_NODE;
 
     /** @see org.w3c.dom.Node#DOCUMENT_TYPE_NODE */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) })
     public static final short DOCUMENT_TYPE_NODE = org.w3c.dom.Node.DOCUMENT_TYPE_NODE;
 
     /** @see org.w3c.dom.Node#DOCUMENT_FRAGMENT_NODE */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) })
     public static final short DOCUMENT_FRAGMENT_NODE = org.w3c.dom.Node.DOCUMENT_FRAGMENT_NODE;
 
     /** @see org.w3c.dom.Node#NOTATION_NODE */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) })
     public static final short NOTATION_NODE = org.w3c.dom.Node.NOTATION_NODE;
 
     /** @see org.w3c.dom.Node#DOCUMENT_POSITION_DISCONNECTED */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) })
     public static final short DOCUMENT_POSITION_DISCONNECTED = org.w3c.dom.Node.DOCUMENT_POSITION_DISCONNECTED;
 
     /** @see org.w3c.dom.Node#DOCUMENT_POSITION_PRECEDING */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) })
     public static final short DOCUMENT_POSITION_PRECEDING = org.w3c.dom.Node.DOCUMENT_POSITION_PRECEDING;
 
     /** @see org.w3c.dom.Node#DOCUMENT_POSITION_FOLLOWING */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) })
     public static final short DOCUMENT_POSITION_FOLLOWING = org.w3c.dom.Node.DOCUMENT_POSITION_FOLLOWING;
 
     /** @see org.w3c.dom.Node#DOCUMENT_POSITION_CONTAINS */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) })
     public static final short DOCUMENT_POSITION_CONTAINS = org.w3c.dom.Node.DOCUMENT_POSITION_CONTAINS;
 
     /** @see org.w3c.dom.Node#DOCUMENT_POSITION_CONTAINED_BY */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) })
     public static final short DOCUMENT_POSITION_CONTAINED_BY = org.w3c.dom.Node.DOCUMENT_POSITION_CONTAINED_BY;
 
     /** @see org.w3c.dom.Node#DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) })
     public static final short DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC
         = org.w3c.dom.Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC;
 
@@ -390,9 +390,9 @@ public class Node extends SimpleScriptable {
                 return newChildObject;
             }
             final DomNode refChildNode;
-            // IE accepts non standard calls with only one arg
+            // IE accepts non standard calls with only one argument
             if (refChildObject == Undefined.instance) {
-                if (getBrowserVersion().hasFeature(GENERATED_121)) {
+                if (getBrowserVersion().hasFeature(JS_NODE_INSERT_BEFORE_THROW_EXCEPTION_FOR_EXTRA_ARGUMENT)) {
                     if (args.length > 1) {
                         throw Context.reportRuntimeError("Invalid argument.");
                     }
@@ -446,7 +446,7 @@ public class Node extends SimpleScriptable {
      *
      * @return whether this node is the same node as the given one
      */
-    @JsxFunction({ @WebBrowser(value = FF, maxVersion = 3.6f), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction(@WebBrowser(value = IE, minVersion = 9))
     public boolean isSameNode(final Object other) {
         return other == this;
     }
@@ -675,7 +675,7 @@ public class Node extends SimpleScriptable {
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener">Mozilla documentation</a>
      * @see #attachEvent(String, Function)
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 9) })
     public void addEventListener(final String type, final Function listener, final boolean useCapture) {
         getEventListenersContainer().addEventListener(type, listener, useCapture);
     }
@@ -710,7 +710,7 @@ public class Node extends SimpleScriptable {
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.removeEventListener">Mozilla
      * documentation</a>
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 9) })
     public void removeEventListener(final String type, final Function listener, final boolean useCapture) {
         getEventListenersContainer().removeEventListener(type, listener, useCapture);
     }
@@ -947,7 +947,7 @@ public class Node extends SimpleScriptable {
      * @see <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#Node3-compareDocumentPosition">DOM level 3</a>
      * @see org.w3c.dom.Node#compareDocumentPosition(org.w3c.dom.Node)
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) })
     public short compareDocumentPosition(final Object node) {
         if (!(node instanceof Node)) {
             throw Context.reportRuntimeError("Could not convert JavaScript argument arg 0");
