@@ -59,7 +59,7 @@ public class SVGMatrix extends SimpleScriptable {
     /**
      * Gets the <code>a</code> entry of the matrix.
      * @return the field
-     **/
+     */
     @JsxGetter
     public double getA() {
         return fieldA_;
@@ -68,7 +68,7 @@ public class SVGMatrix extends SimpleScriptable {
     /**
      * Gets the <code>b</code> entry of the matrix.
      * @return the field
-     **/
+     */
     @JsxGetter
     public double getB() {
         return fieldB_;
@@ -77,7 +77,7 @@ public class SVGMatrix extends SimpleScriptable {
     /**
      * Gets the <code>c</code> entry of the matrix.
      * @return the field
-     **/
+     */
     @JsxGetter
     public double getC() {
         return fieldC_;
@@ -86,7 +86,7 @@ public class SVGMatrix extends SimpleScriptable {
     /**
      * Gets the <code>d</code> entry of the matrix.
      * @return the field
-     **/
+     */
     @JsxGetter
     public double getD() {
         return fieldD_;
@@ -95,7 +95,7 @@ public class SVGMatrix extends SimpleScriptable {
     /**
      * Gets the <code>e</code> entry of the matrix.
      * @return the field
-     **/
+     */
     @JsxGetter
     public double getE() {
         return fieldE_;
@@ -104,7 +104,7 @@ public class SVGMatrix extends SimpleScriptable {
     /**
      * Gets the <code>f</code> entry of the matrix.
      * @return the field
-     **/
+     */
     @JsxGetter
     public double getF() {
         return fieldF_;
@@ -113,7 +113,7 @@ public class SVGMatrix extends SimpleScriptable {
     /**
      * Sets the <code>a</code> entry of the matrix.
      * @param newValue the new value for the field
-     **/
+     */
     @JsxSetter
     public void setA(final double newValue) {
         fieldA_ = newValue;
@@ -122,7 +122,7 @@ public class SVGMatrix extends SimpleScriptable {
     /**
      * Sets the <code>b</code> entry of the matrix.
      * @param newValue the new value for the field
-     **/
+     */
     @JsxSetter
     public void setB(final double newValue) {
         fieldB_ = newValue;
@@ -131,7 +131,7 @@ public class SVGMatrix extends SimpleScriptable {
     /**
      * Sets the <code>c</code> entry of the matrix.
      * @param newValue the new value for the field
-     **/
+     */
     @JsxSetter
     public void setC(final double newValue) {
         fieldC_ = newValue;
@@ -140,7 +140,7 @@ public class SVGMatrix extends SimpleScriptable {
     /**
      * Sets the <code>d</code> entry of the matrix.
      * @param newValue the new value for the field
-     **/
+     */
     @JsxSetter
     public void setD(final double newValue) {
         fieldD_ = newValue;
@@ -149,7 +149,7 @@ public class SVGMatrix extends SimpleScriptable {
     /**
      * Sets the <code>e</code> entry of the matrix.
      * @param newValue the new value for the field
-     **/
+     */
     @JsxSetter
     public void setE(final double newValue) {
         fieldE_ = newValue;
@@ -158,7 +158,7 @@ public class SVGMatrix extends SimpleScriptable {
     /**
      * Sets the <code>f</code> entry of the matrix.
      * @param newValue the new value for the field
-     **/
+     */
     @JsxSetter
     public void setF(final double newValue) {
         fieldF_ = newValue;

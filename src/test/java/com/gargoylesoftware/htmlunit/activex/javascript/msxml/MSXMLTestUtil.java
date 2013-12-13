@@ -27,7 +27,7 @@ public final class MSXMLTestUtil {
     /** Helper. */
     public static final String CREATE_XMLDOMDOCUMENT_FUNCTION_NAME = "createXMLDOMDocument";
 
-    /** Helper. **/
+    /** Helper. */
     public static final String CREATE_XMLDOMDOCUMENT_FUNCTION = ""
             + "  function " + CREATE_XMLDOMDOCUMENT_FUNCTION_NAME + "() {\n"
             + "    return new ActiveXObject('Microsoft.XMLDOM');\n"
@@ -36,7 +36,7 @@ public final class MSXMLTestUtil {
     /**
      * Helper.
      * @return xml helper
-     **/
+     */
     public static String callCreateXMLDOMDocument() {
         return CREATE_XMLDOMDOCUMENT_FUNCTION_NAME + "()";
     }
@@ -44,7 +44,7 @@ public final class MSXMLTestUtil {
     /** Helper. */
     public static final String LOAD_XMLDOMDOCUMENT_FROM_STRING_FUNCTION_NAME = "loadXMLDOMDocumentFromString";
 
-    /** Helper. **/
+    /** Helper. */
     public static final String LOAD_XMLDOMDOCUMENT_FROM_STRING_FUNCTION = ""
             + "  function " + LOAD_XMLDOMDOCUMENT_FROM_STRING_FUNCTION_NAME + "(xml) {\n"
             + "    xmlDoc = new ActiveXObject(\"Microsoft.XMLDOM\");\n"
@@ -57,7 +57,7 @@ public final class MSXMLTestUtil {
      * Helper.
      * @param string the parameter
      * @return xml helper
-     **/
+     */
     public static String callLoadXMLDOMDocumentFromString(final String string) {
         return LOAD_XMLDOMDOCUMENT_FROM_STRING_FUNCTION_NAME + "(" + string + ")";
     }
@@ -65,7 +65,7 @@ public final class MSXMLTestUtil {
     /** Helper. */
     public static final String LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION_NAME = "loadXMLDOMDocumentFromURL";
 
-    /** Helper. **/
+    /** Helper. */
     public static final String LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION = ""
             + "  function " + LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION_NAME + "(url) {\n"
             + "    xmlDoc = new ActiveXObject(\"Microsoft.XMLDOM\");\n"
@@ -78,7 +78,7 @@ public final class MSXMLTestUtil {
      * Helper.
      * @param url the parameter
      * @return xml helper
-     **/
+     */
     public static String callLoadXMLDOMDocumentFromURL(final String url) {
         return LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION_NAME + "(" + url + ")";
     }
@@ -95,7 +95,7 @@ public final class MSXMLTestUtil {
     /**
      * Helper.
      * @return xml helper
-     **/
+     */
     public static String callCreateXMLHTTPRequest() {
         return CREATE_XMLHTTPREQUEST_FUNCTION_NAME + "()";
     }
@@ -103,7 +103,7 @@ public final class MSXMLTestUtil {
     /** Helper. */
     public static final String LOAD_XMLHTTPREQUEST_FROM_URL_FUNCTION_NAME = "loadXMLHTTPRequestFromURL";
 
-    /** Helper. **/
+    /** Helper. */
     public static final String LOAD_XMLHTTPREQUEST_FROM_URL_FUNCTION = ""
             + "  function " + LOAD_XMLHTTPREQUEST_FROM_URL_FUNCTION_NAME + "(url) {\n"
             + "    xhr = new ActiveXObject(\"Microsoft.XMLHTTP\");\n"
@@ -116,7 +116,7 @@ public final class MSXMLTestUtil {
      * Helper.
      * @param url the parameter
      * @return xml helper
-     **/
+     */
     public static String callLoadXMLHTTPRequestFromURL(final String url) {
         return LOAD_XMLHTTPREQUEST_FROM_URL_FUNCTION_NAME + "(" + url + ")";
     }
@@ -124,7 +124,7 @@ public final class MSXMLTestUtil {
     /** Helper. */
     public static final String SERIALIZE_XMLDOMDOCUMENT_TO_STRING_FUNCTION_NAME = "serializeXMLDOMDocumentToString";
 
-    /** Helper. **/
+    /** Helper. */
     public static final String SERIALIZE_XMLDOMDOCUMENT_TO_STRING_FUNCTION = ""
             + "  function " + SERIALIZE_XMLDOMDOCUMENT_TO_STRING_FUNCTION_NAME + "(doc) {\n"
             + "    return doc.xml;\n"
@@ -134,7 +134,7 @@ public final class MSXMLTestUtil {
      * Helper.
      * @param doc the doc parameter
      * @return xml helper
-     **/
+     */
     public static String callSerializeXMLDOMDocumentToString(final String doc) {
         return SERIALIZE_XMLDOMDOCUMENT_TO_STRING_FUNCTION_NAME + "(" + doc + ")";
     }

@@ -120,7 +120,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     /**
      * Firefox 17 ESR.
      * @since 2.12
-     **/
+     */
     public static final BrowserVersion FIREFOX_17 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows)",
         "Mozilla/5.0 (Windows NT 6.1; rv:17.0) Gecko/20100101 Firefox/17.0",
@@ -129,7 +129,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     /**
      * Firefox 24 ESR.
      * @since 2.14
-     **/
+     */
     public static final BrowserVersion FIREFOX_24 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows)",
         "Mozilla/5.0 (Windows NT 6.1; rv:24.0) Gecko/20100101 Firefox/24.0",

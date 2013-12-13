@@ -520,13 +520,13 @@ public enum BrowserVersionFeatures {
 
     /**
      * Indicates outer/innerHtml quotes attributes.
-     **/
+     */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     HTMLELEMENT_OUTER_INNER_HTML_QUOTE_ATTRIBUTES,
 
     /**
      * Indicates if a self-closing &lt;iframe/&gt; tag should be considered as an opening tag.
-     **/
+     */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     HTMLIFRAME_IGNORE_SELFCLOSING,
 

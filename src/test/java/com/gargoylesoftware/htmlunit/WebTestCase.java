@@ -107,7 +107,7 @@ public abstract class WebTestCase {
     /**
      * Constant for the URL which is used in the tests.
      * This URL doesn't use the same host name as {@link #URL_FIRST} and {@link #URL_SECOND}.
-     **/
+     */
     public static final URL URL_THIRD;
 
     /**

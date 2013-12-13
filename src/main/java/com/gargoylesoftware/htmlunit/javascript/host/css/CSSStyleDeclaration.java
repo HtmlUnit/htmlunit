@@ -238,7 +238,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     private static final String Z_INDEX = "z-index";
     private static final String ZOOM = "zoom";
 
-    /** The width style attribute. **/
+    /** The width style attribute. */
     protected static final String WIDTH = "width";
 
     private static final Pattern TO_INT_PATTERN = Pattern.compile("(\\d+).*");

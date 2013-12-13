@@ -1743,7 +1743,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         return 0;
     }
 
-    /** Definition of special cases for the smart DomHtmlAttributeChangeListenerImpl **/
+    /** Definition of special cases for the smart DomHtmlAttributeChangeListenerImpl */
     private static final Set<String> ATTRIBUTES_AFFECTING_PARENT = new HashSet<String>(Arrays.asList(
             "style",
             "class",
