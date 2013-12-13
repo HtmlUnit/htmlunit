@@ -8,7 +8,7 @@
 
     <body>
         <release version="2.14" date="???" description="Bugfixes">
-            <action type="add" dev="asashour">
+            <action type="add" dev="asashour" issue="1536">
                 JavaScript: node and window.addEventListener() and .removeEventListener() are supported starting IE 9.
             </action>
             <action type="fix" dev="rbri" due-to="Frank Danek">
