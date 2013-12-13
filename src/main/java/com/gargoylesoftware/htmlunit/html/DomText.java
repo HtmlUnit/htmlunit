@@ -133,8 +133,7 @@ public class DomText extends DomCharacterData implements Text {
             if (!(getParentNode() instanceof HtmlStyle) || !data.startsWith("<!--") || !data.endsWith("-->")) {
                 data = StringUtils.escapeXmlChars(data);
             }
-            printWriter.print(data);
-            printWriter.print("\r\n");
+            printWriter.println(data);
         }
         printChildrenAsXml(indent, printWriter);
     }
