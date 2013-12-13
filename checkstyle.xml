@@ -40,6 +40,11 @@
     </module>
 
     <module name="RegexpSingleline">
+        <property name="format" value="\*\*/"/>
+        <property name="message" value="Trailing two asterisks."/>
+    </module>
+
+    <module name="RegexpSingleline">
         <property name="format" value="\s$"/>
         <property name="message" value="Trailing whitespace found."/>
     </module>
