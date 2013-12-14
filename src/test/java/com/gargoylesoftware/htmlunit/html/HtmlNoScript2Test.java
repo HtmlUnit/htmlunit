@@ -42,18 +42,18 @@ public class HtmlNoScript2Test extends SimpleWebTestCase {
             + "<noscript><div>hello</noscript>"
             + "</body></html>";
 
-        final String expectedFF = "<body>\n"
-            + "  <noscript>\n"
-            + "    &lt;div&gt;hello\n"
-            + "  </noscript>\n"
-            + "</body>\n";
-        final String expectedIE = "<body>\n"
-            + "  <noscript/>\n"
-            + "</body>\n";
+        final String expectedFF = "<body>" + LINE_SEPARATOR
+            + "  <noscript>" + LINE_SEPARATOR
+            + "    &lt;div&gt;hello" + LINE_SEPARATOR
+            + "  </noscript>" + LINE_SEPARATOR
+            + "</body>" + LINE_SEPARATOR;
+        final String expectedIE = "<body> + LINE_SEPARATOR"
+            + "  <noscript/> + LINE_SEPARATOR"
+            + "</body> + LINE_SEPARATOR";
 
         final String expected = getBrowserVersion().isFirefox() ? expectedFF : expectedIE;
         final HtmlPage page = loadPage(html);
-        assertEquals(expected, page.getBody().asXml().replaceAll("\\r", ""));
+        assertEquals(expected, page.getBody().asXml());
     }
 
     /**
@@ -65,13 +65,13 @@ public class HtmlNoScript2Test extends SimpleWebTestCase {
             + "<noscript><div>hello</noscript>"
             + "</body></html>";
 
-        final String expected = "<body>\n"
-            + "  <noscript>\n"
-            + "    <div>\n"
-            + "      hello\n"
-            + "    </div>\n"
-            + "  </noscript>\n"
-            + "</body>\n";
+        final String expected = "<body>" + LINE_SEPARATOR
+            + "  <noscript>" + LINE_SEPARATOR
+            + "    <div>" + LINE_SEPARATOR
+            + "      hello" + LINE_SEPARATOR
+            + "    </div>" + LINE_SEPARATOR
+            + "  </noscript>" + LINE_SEPARATOR
+            + "</body>" + LINE_SEPARATOR;
 
         final WebClient client = getWebClient();
         client.getOptions().setJavaScriptEnabled(false);
@@ -81,7 +81,7 @@ public class HtmlNoScript2Test extends SimpleWebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_FIRST);
-        assertEquals(expected, page.getBody().asXml().replaceAll("\\r", ""));
+        assertEquals(expected, page.getBody().asXml());
     }
 
     /**
@@ -118,6 +118,6 @@ public class HtmlNoScript2Test extends SimpleWebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_FIRST);
-        assertEquals(expected, page.getBody().asText().replaceAll("\\r", ""));
+        assertEquals(expected, page.getBody().asText());
     }
 }
