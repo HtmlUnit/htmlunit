@@ -47,9 +47,9 @@ public class HtmlNoScript2Test extends SimpleWebTestCase {
             + "    &lt;div&gt;hello" + LINE_SEPARATOR
             + "  </noscript>" + LINE_SEPARATOR
             + "</body>" + LINE_SEPARATOR;
-        final String expectedIE = "<body> + LINE_SEPARATOR"
-            + "  <noscript/> + LINE_SEPARATOR"
-            + "</body> + LINE_SEPARATOR";
+        final String expectedIE = "<body>" + LINE_SEPARATOR
+            + "  <noscript/>" + LINE_SEPARATOR
+            + "</body>" + LINE_SEPARATOR;
 
         final String expected = getBrowserVersion().isFirefox() ? expectedFF : expectedIE;
         final HtmlPage page = loadPage(html);
