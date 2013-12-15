@@ -560,12 +560,16 @@ public class HtmlScript extends HtmlElement {
 
         final String data = textNode.getData();
         if (data.contains("//<![CDATA[")) {
-            printWriter.println(data);
+            printWriter.print(data);
+            printWriter.print("\r\n");
         }
         else {
-            printWriter.println("//<![CDATA[");
-            printWriter.println(data);
-            printWriter.println("//]]>");
+            printWriter.print("//<![CDATA[");
+            printWriter.print("\r\n");
+            printWriter.print(data);
+            printWriter.print("\r\n");
+            printWriter.print("//]]>");
+            printWriter.print("\r\n");
         }
     }
 

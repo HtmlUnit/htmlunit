@@ -141,7 +141,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
         final String html = "<html><body><script id='s'>" + script + "</script></body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlScript scriptElement = page.getHtmlElementById("s");
-        assertEquals("<script id=\"s\">" + LINE_SEPARATOR + script + LINE_SEPARATOR + "</script>" + LINE_SEPARATOR,
+        assertEquals("<script id=\"s\">\r\n" + script + "\r\n</script>\r\n",
                 scriptElement.asXml());
     }
 

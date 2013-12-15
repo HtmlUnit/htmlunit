@@ -784,7 +784,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         final StringWriter stringWriter = new StringWriter();
         final PrintWriter printWriter = new PrintWriter(stringWriter);
         if (charsetName != null && this instanceof HtmlHtml) {
-            printWriter.println("<?xml version=\"1.0\" encoding=\"" + charsetName + "\"?>");
+            printWriter.print("<?xml version=\"1.0\" encoding=\"" + charsetName + "\"?>");
+            printWriter.print("\r\n");
         }
         printXml("", printWriter);
         printWriter.close();
@@ -798,7 +799,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param printWriter writer where child nodes are written
      */
     protected void printXml(final String indent, final PrintWriter printWriter) {
-        printWriter.println(indent + this);
+        printWriter.print(indent);
+        printWriter.print(this);
+        printWriter.print("\r\n");
         printChildrenAsXml(indent, printWriter);
     }
 
