@@ -42,14 +42,14 @@ public class HtmlNoScript2Test extends SimpleWebTestCase {
             + "<noscript><div>hello</noscript>"
             + "</body></html>";
 
-        final String expectedFF = "<body>" + LINE_SEPARATOR
-            + "  <noscript>" + LINE_SEPARATOR
-            + "    &lt;div&gt;hello" + LINE_SEPARATOR
-            + "  </noscript>" + LINE_SEPARATOR
-            + "</body>" + LINE_SEPARATOR;
-        final String expectedIE = "<body>" + LINE_SEPARATOR
-            + "  <noscript/>" + LINE_SEPARATOR
-            + "</body>" + LINE_SEPARATOR;
+        final String expectedFF = "<body>\r\n"
+            + "  <noscript>\r\n"
+            + "    &lt;div&gt;hello\r\n"
+            + "  </noscript>\r\n"
+            + "</body>\r\n";
+        final String expectedIE = "<body>\r\n"
+            + "  <noscript/>\r\n"
+            + "</body>\r\n";
 
         final String expected = getBrowserVersion().isFirefox() ? expectedFF : expectedIE;
         final HtmlPage page = loadPage(html);
@@ -65,13 +65,13 @@ public class HtmlNoScript2Test extends SimpleWebTestCase {
             + "<noscript><div>hello</noscript>"
             + "</body></html>";
 
-        final String expected = "<body>" + LINE_SEPARATOR
-            + "  <noscript>" + LINE_SEPARATOR
-            + "    <div>" + LINE_SEPARATOR
-            + "      hello" + LINE_SEPARATOR
-            + "    </div>" + LINE_SEPARATOR
-            + "  </noscript>" + LINE_SEPARATOR
-            + "</body>" + LINE_SEPARATOR;
+        final String expected = "<body>\r\n"
+            + "  <noscript>\r\n"
+            + "    <div>\r\n"
+            + "      hello\r\n"
+            + "    </div>\r\n"
+            + "  </noscript>\r\n"
+            + "</body>\r\n";
 
         final WebClient client = getWebClient();
         client.getOptions().setJavaScriptEnabled(false);
