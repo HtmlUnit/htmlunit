@@ -16,32 +16,31 @@ package com.gargoylesoftware.htmlunit.libraries;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests that depend on one of JavaScript libraries.
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class LibraryDependencyTest extends SimpleWebTestCase {
+public class LibraryDependencyTest extends WebDriverTestCase {
 
     /**
      * Test for http://sourceforge.net/tracker/index.php?func=detail&aid=1997280&group_id=47038&atid=448266.
      * @throws Exception if the test fails
      */
+    @Alerts("2")
     @Test
     public void contextFactory_Browser() throws Exception {
         final String firstHtml =
@@ -72,21 +71,12 @@ public class LibraryDependencyTest extends SimpleWebTestCase {
             + "</html>";
         final String prototype = getContent("libraries/prototype/1.6.0/dist/prototype.js");
 
-        final String[] expectedAlerts = {"2"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient webClient = getWebClientWithMockWebConnection();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
         final MockWebConnection webConnection = getMockWebConnection();
-        webClient.setWebConnection(webConnection);
-
         webConnection.setResponse(URL_FIRST, firstHtml);
         webConnection.setResponse(URL_SECOND, secondHtml);
         webConnection.setResponse(URL_THIRD, prototype, "application/javascript");
 
-        webClient.getPage(URL_FIRST);
-        webClient.waitForBackgroundJavaScript(10000);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts2(URL_FIRST, 10000);
     }
 
     private String getContent(final String resourceName) throws IOException {
