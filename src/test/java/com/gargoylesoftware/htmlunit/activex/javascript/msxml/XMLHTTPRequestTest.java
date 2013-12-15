@@ -818,7 +818,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "debugRequest(xhr);\n"
             // not found
             + "try {\n"
-            + "  xhr.open('GET', 'http://localhost/doesntexist', false);\n"
+            + "  xhr.open('GET', 'http://localhost:9876/doesntexist', false);\n"
             + "  xhr.send();\n"
             + "} catch(e) { alert('exception-urlNotFound'); }\n"
             // debug without status
