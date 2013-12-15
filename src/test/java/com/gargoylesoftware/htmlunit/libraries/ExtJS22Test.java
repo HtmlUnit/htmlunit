@@ -14,83 +14,110 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import static org.junit.Assert.assertNotNull;
-
-import java.net.URL;
 import java.util.List;
 
-import org.junit.After;
+import org.eclipse.jetty.server.Server;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlButton;
-import com.gargoylesoftware.htmlunit.html.HtmlDivision;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlTable;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.WebServerTestCase;
 
 /**
  * Tests for 2.2 version of <a href="http://www.extjs.com/">Ext JS</a>.
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class ExtJS22Test extends SimpleWebTestCase {
+public class ExtJS22Test extends WebDriverTestCase {
 
-    private WebClient webClient_;
+    private static Server SERVER_;
 
     /**
-     * After.
+     * @throws Exception if an error occurs
      */
-    @After
-    public void after() {
-        webClient_.closeAllWindows();
+    @BeforeClass
+    public static void aaa_startSesrver() throws Exception {
+        SERVER_ = WebServerTestCase.createWebServer("src/test/resources/libraries/ExtJS/" + getVersion(), null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @AfterClass
+    public static void zzz_stopServer() throws Exception {
+        SERVER_.stop();
+    }
+
+    /**
+     * Returns the Ext JS version being tested.
+     * @return the Ext JS version being tested
+     */
+    protected static String getVersion() {
+        return "2.2";
+    }
+
+    /**
+     * Loads the Ext JS test page using the specified example.
+     *
+     * @param example the example name
+     * @param htmlName the page name
+     * @return the loaded page
+     * @throws Exception if an error occurs
+     */
+    protected WebDriver getPage(final String example, final String htmlName) throws Exception {
+        final WebDriver driver = getWebDriver();
+        driver.get("http://localhost:" + PORT + "/examples/" + example + "/" + htmlName + ".html");
+        return driver;
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @SuppressWarnings("unchecked")
     public void core_templates() throws Exception {
-        final HtmlPage page = getPage("core", "templates");
-        final List<HtmlButton> buttons = (List<HtmlButton>) page.getByXPath("//button");
-        final List<HtmlDivision> divs = (List<HtmlDivision>) page.getByXPath("//div[@class='x-panel-body']");
+        final WebDriver driver = getPage("core", "templates");
+        final List<WebElement> buttons = driver.findElements(By.xpath("//button"));
+        final List<WebElement> divs = driver.findElements(By.xpath("//div[@class='x-panel-body']"));
         assertEquals(2, buttons.size());
         assertEquals(2, divs.size());
-        assertEquals("Apply the template to see results here", divs.get(0).asText());
-        assertEquals("Apply the template to see results here", divs.get(1).asText());
+        assertEquals("Apply the template to see results here", divs.get(0).getText());
+        assertEquals("Apply the template to see results here", divs.get(1).getText());
+
         buttons.get(0).click();
-        assertEquals("Name: Jack Slocum" + LINE_SEPARATOR + "Company: Ext JS, LLC" + LINE_SEPARATOR
-            + "Location: Cleveland, Ohio", divs.get(0).asText());
-        assertEquals("Apply the template to see results here", divs.get(1).asText());
+        assertEquals("Name: Jack Slocum\n" + "Company: Ext JS, LLC\n"
+            + "Location: Cleveland, Ohio", divs.get(0).getText());
+        assertEquals("Apply the template to see results here", divs.get(1).getText());
+
         buttons.get(1).click();
-        assertEquals("Name: Jack Slocum" + LINE_SEPARATOR + "Company: Ext JS, LLC" + LINE_SEPARATOR
-            + "Location: Cleveland, Ohio", divs.get(0).asText());
-        assertEquals("Name: Jack Slocum" + LINE_SEPARATOR + "Company: Ext JS, LLC" + LINE_SEPARATOR
-            + "Location: Cleveland, Ohio" + LINE_SEPARATOR
-            + "Kids:" + LINE_SEPARATOR + "1. Jack Slocum's kid - Sara Grace" + LINE_SEPARATOR
-            + "2. Jack Slocum's kid - Zachary", divs.get(1).asText());
+        assertEquals("Name: Jack Slocum\n" + "Company: Ext JS, LLC\n"
+            + "Location: Cleveland, Ohio", divs.get(0).getText());
+        assertEquals("Name: Jack Slocum\n" + "Company: Ext JS, LLC\n"
+            + "Location: Cleveland, Ohio\n"
+            + "Kids:\n" + "1. Jack Slocum's kid - Sara Grace\n"
+            + "2. Jack Slocum's kid - Zachary", divs.get(1).getText());
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @SuppressWarnings("unchecked")
     public void core_spotlight() throws Exception {
-        final HtmlPage page = getPage("core", "spotlight");
-        final List<HtmlButton> buttons = (List<HtmlButton>) page.getByXPath("//button");
+        final WebDriver driver = getPage("core", "spotlight");
+        final List<WebElement> buttons = driver.findElements(By.xpath("//button"));
         assertEquals(4, buttons.size());
-        assertEquals("Start", buttons.get(0).asText());
-        assertEquals("Next Panel", buttons.get(1).asText());
-        assertEquals("Next Panel", buttons.get(2).asText());
-        assertEquals("Done", buttons.get(3).asText());
+        assertEquals("Start", buttons.get(0).getText());
+        assertEquals("Next Panel", buttons.get(1).getText());
+        assertEquals("Next Panel", buttons.get(2).getText());
+        assertEquals("Done", buttons.get(3).getText());
 
         assertTrue(core_spotlight_isDisabled(buttons.get(1)));
         assertTrue(core_spotlight_isDisabled(buttons.get(2)));
@@ -117,10 +144,10 @@ public class ExtJS22Test extends SimpleWebTestCase {
         assertTrue(core_spotlight_isDisabled(buttons.get(3)));
     }
 
-    private boolean core_spotlight_isDisabled(final HtmlButton button) {
-        final HtmlTable table = (HtmlTable) button.getEnclosingElement("table");
+    private boolean core_spotlight_isDisabled(final WebElement button) {
+        final WebElement table = button.findElement(By.xpath("ancestor::table[1]"));
         if (getBrowserVersion().isIE()) {
-            return table.hasAttribute("disabled");
+            return !table.isEnabled();
         }
         return table.getAttribute("class").contains("disabled");
     }
@@ -130,35 +157,14 @@ public class ExtJS22Test extends SimpleWebTestCase {
      */
     @Test
     public void debug_console() throws Exception {
-        final HtmlPage page = getPage("debug", "debug-console");
-        assertEquals(2, page.getAnchors().size());
-        page.getAnchors().get(1).click();
+        final WebDriver driver = getPage("debug", "debug-console");
+
+        final List<WebElement> anchors = driver.findElements(By.xpath("//a"));
+        assertEquals(2, anchors.size());
+
+        anchors.get(1).click();
         assertEquals("Hello from the Ext console.",
-            page.<DomNode>getFirstByXPath("//div[starts-with(text(), 'Hello')]").asText());
-    }
-
-    /**
-     * Returns the Ext JS version being tested.
-     * @return the Ext JS version being tested
-     */
-    protected String getVersion() {
-        return "2.2";
-    }
-
-    /**
-     * Loads the Ext JS test page using the specified example.
-     *
-     * @param example the example name
-     * @param htmlName the page name
-     * @return the loaded page
-     * @throws Exception if an error occurs
-     */
-    protected HtmlPage getPage(final String example, final String htmlName) throws Exception {
-        final String resource = "libraries/ExtJS/" + getVersion() + "/examples/" + example + "/" + htmlName + ".html";
-        final URL url = getClass().getClassLoader().getResource(resource);
-        assertNotNull(url);
-        webClient_ = getWebClient();
-        return webClient_.getPage(url);
+                driver.findElement(By.xpath("//div[starts-with(text(), 'Hello')][1]")).getText());
     }
 
     /**
@@ -166,8 +172,8 @@ public class ExtJS22Test extends SimpleWebTestCase {
      */
     @Test
     public void desktop_desktop() throws Exception {
-        final HtmlPage page = getPage("desktop", "desktop");
-        page.<HtmlButton>getFirstByXPath("//button").click();
+        final WebDriver driver = getPage("desktop", "desktop");
+        driver.findElement(By.xpath("//button[1]")).click();
     }
 
     /**
@@ -175,12 +181,12 @@ public class ExtJS22Test extends SimpleWebTestCase {
      */
     @Test
     public void form_absform() throws Exception {
-        final HtmlPage page = getPage("form", "absform");
-        final String xml = page.asXml();
-        assertTrue(xml.contains("Resize Me"));
-        assertTrue(xml.contains("Send To:"));
-        assertTrue(xml.contains("Subject:"));
-        assertTrue(xml.contains("Cancel"));
+        final WebDriver driver = getPage("form", "absform");
+        final String content = driver.findElement(By.xpath("//html/body")).getText();
+        assertTrue(content.contains("Resize Me"));
+        assertTrue(content.contains("Send To:"));
+        assertTrue(content.contains("Subject:"));
+        assertTrue(content.contains("Cancel"));
     }
 
     /**
@@ -188,12 +194,12 @@ public class ExtJS22Test extends SimpleWebTestCase {
      */
     @Test
     public void form_anchoring() throws Exception {
-        final HtmlPage page = getPage("form", "anchoring");
-        final String xml = page.asXml();
-        assertTrue(xml.contains("Send To:"));
-        assertTrue(xml.contains("Subject:"));
-        assertTrue(xml.contains("Send"));
-        assertTrue(xml.contains("Cancel"));
+        final WebDriver driver = getPage("form", "anchoring");
+        final String content = driver.findElement(By.xpath("//html/body")).getText();
+        assertTrue(content.contains("Send To:"));
+        assertTrue(content.contains("Subject:"));
+        assertTrue(content.contains("Send"));
+        assertTrue(content.contains("Cancel"));
     }
 
     /**
@@ -201,24 +207,24 @@ public class ExtJS22Test extends SimpleWebTestCase {
      */
     @Test
     public void grid_binding() throws Exception {
-        final HtmlPage page = getPage("grid", "binding");
+        final WebDriver driver = getPage("grid", "binding");
 
         // usually this need 1s but sometimes our build machine is slower
         // this is not an performance test, we only like to ensure that all
         // functionality is running
-        page.getWebClient().waitForBackgroundJavaScriptStartingBefore(2 * DEFAULT_WAIT_TIME);
+        Thread.sleep(2 * DEFAULT_WAIT_TIME);
 
-        final HtmlElement detailPanel = page.getHtmlElementById("detailPanel");
-        final HtmlDivision resultsDiv = detailPanel.getFirstByXPath("div/div");
-        assertEquals("Please select a book to see additional details.", resultsDiv.asText());
+        final WebElement detailPanel = driver.findElement(By.id("detailPanel"));
+        final WebElement resultsDiv = detailPanel.findElement(By.xpath("div/div[1]"));
+        assertEquals("Please select a book to see additional details.", resultsDiv.getText());
 
-        final HtmlDivision firstRowDiv = page.getFirstByXPath("//div[@class='x-grid3-body']/div");
+        final WebElement firstRowDiv = driver.findElement(By.xpath("//div[@class='x-grid3-body']/div[1]"));
 
         firstRowDiv.click();
-        assertEquals("Title: Master of the Game" + LINE_SEPARATOR
-                + "Author: Sidney Sheldon" + LINE_SEPARATOR
-                + "Manufacturer: Warner Books" + LINE_SEPARATOR
-                + "Product Group: Book", resultsDiv.asText());
+        assertEquals("Title: Master of the Game\n"
+                + "Author: Sidney Sheldon\n"
+                + "Manufacturer: Warner Books\n"
+                + "Product Group: Book", resultsDiv.getText());
     }
 
 }
