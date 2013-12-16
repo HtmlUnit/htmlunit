@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link Screen}.
@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref.html">Mozilla documentation</a>
  */
 @RunWith(BrowserRunner.class)
-public class ScreenTest extends SimpleWebTestCase {
+public class ScreenTest extends WebDriverTestCase {
 
     /**
      * Test all desired properties on screen (easy to copy and test in a real browser).
@@ -77,6 +77,6 @@ public class ScreenTest extends SimpleWebTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }
