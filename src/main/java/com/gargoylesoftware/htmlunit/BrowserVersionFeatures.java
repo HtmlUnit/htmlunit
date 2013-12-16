@@ -250,14 +250,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
-    GENERATED_100,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_101,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
     GENERATED_104,
 
     /** Was originally .isIE(). */
@@ -419,14 +411,6 @@ public enum BrowserVersionFeatures {
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
     GENERATED_96,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_98,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_99,
 
     /** If the class name is [object GeoGeolocation]. */
     @BrowserFeature(@WebBrowser(FF))
@@ -1167,6 +1151,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_STYLE_UNSUPPORTED_PROPERTY_GETTER,
 
+    /** The width cell height does not return negative values. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_TABLE_CELL_HEIGHT_DOES_NOT_RETURN_NEGATIVE_VALUES,
+
     /** Value of attribute 'nowrap' is always set to true if a not empty value is set. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_TABLE_CELL_NOT_EMPTY_ALWAYS_TRUE,
@@ -1174,6 +1162,18 @@ public enum BrowserVersionFeatures {
     /** Attribute 'nowrap' has value true instead of empty if set. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_TABLE_CELL_NOWRAP_VALUE_TRUE_IF_SET,
+
+    /** The width cell property does not return negative values. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_TABLE_CELL_WIDTH_DOES_NOT_RETURN_NEGATIVE_VALUES,
+
+    /** Throws an exception if the value for column span is less than one. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_TABLE_COLUMN_SPAN_THROWS_EXCEPTION_IF_LESS_THAN_ONE,
+
+    /** The width column property does not return negative values. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_TABLE_COLUMN_WIDTH_DOES_NOT_RETURN_NEGATIVE_VALUES,
 
     /** Value of attribute 'sectionRowIndex' is a big int if the row is not attached to a table. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
@@ -1385,14 +1385,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that unknown tags inside an SVG element are handled as DOM elements, not SVG elements. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     SVG_UNKNOWN_ARE_DOM,
-
-    /** Throws an exception if the value for column span is less than one. */
-    @BrowserFeature(@WebBrowser(IE))
-    TABLE_COLUMN_SPAN_THROWS_EXCEPTION_IF_LESS_THAN_ONE,
-
-    /** The width column property does not return negative values. */
-    @BrowserFeature(@WebBrowser(IE))
-    TABLE_COLUMN_WIDTH_DOES_NOT_RETURN_NEGATIVE_VALUES,
 
     /** Indicates that "\n" are replaced by "\r\n" in textarea values. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))

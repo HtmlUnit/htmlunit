@@ -14,8 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.TABLE_COLUMN_SPAN_THROWS_EXCEPTION_IF_LESS_THAN_ONE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.TABLE_COLUMN_WIDTH_DOES_NOT_RETURN_NEGATIVE_VALUES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.
+                                                JS_TABLE_COLUMN_SPAN_THROWS_EXCEPTION_IF_LESS_THAN_ONE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.
+                                                JS_TABLE_COLUMN_WIDTH_DOES_NOT_RETURN_NEGATIVE_VALUES;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.HtmlTableColumn;
@@ -67,7 +69,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
         final double d = Context.toNumber(span);
         int i = (int) d;
         if (i < 1) {
-            if (getBrowserVersion().hasFeature(TABLE_COLUMN_SPAN_THROWS_EXCEPTION_IF_LESS_THAN_ONE)) {
+            if (getBrowserVersion().hasFeature(JS_TABLE_COLUMN_SPAN_THROWS_EXCEPTION_IF_LESS_THAN_ONE)) {
                 final Exception e = new Exception("Cannot set the span property to invalid value: " + span);
                 Context.throwAsScriptRuntimeEx(e);
             }
@@ -84,7 +86,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
      */
     @JsxGetter(propertyName = "width")
     public String getWidth_js() {
-        final boolean ie = getBrowserVersion().hasFeature(TABLE_COLUMN_WIDTH_DOES_NOT_RETURN_NEGATIVE_VALUES);
+        final boolean ie = getBrowserVersion().hasFeature(JS_TABLE_COLUMN_WIDTH_DOES_NOT_RETURN_NEGATIVE_VALUES);
         final Boolean returnNegativeValues = ie ? Boolean.FALSE : null;
         return getWidthOrHeight("width", returnNegativeValues);
     }

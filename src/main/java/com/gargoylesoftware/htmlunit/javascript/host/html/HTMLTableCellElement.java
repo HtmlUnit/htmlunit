@@ -14,16 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_100;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_101;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_93;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_94;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_95;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_96;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_98;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_99;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_NOT_EMPTY_ALWAYS_TRUE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_NOWRAP_VALUE_TRUE_IF_SET;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_WIDTH_DOES_NOT_RETURN_NEGATIVE_VALUES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_HEIGHT_DOES_NOT_RETURN_NEGATIVE_VALUES;
 
 import java.util.List;
 
@@ -303,7 +301,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxGetter(propertyName = "width")
     public String getWidth_js() {
-        final boolean ie = getBrowserVersion().hasFeature(GENERATED_98);
+        final boolean ie = getBrowserVersion().hasFeature(JS_TABLE_CELL_WIDTH_DOES_NOT_RETURN_NEGATIVE_VALUES);
         final Boolean returnNegativeValues = ie ? Boolean.TRUE : null;
         return getWidthOrHeight("width", returnNegativeValues);
     }
@@ -314,7 +312,8 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxSetter
     public void setWidth(final String width) {
-        setWidthOrHeight("width", width, !getBrowserVersion().hasFeature(GENERATED_99));
+        setWidthOrHeight("width", width,
+                !getBrowserVersion().hasFeature(JS_TABLE_CELL_WIDTH_DOES_NOT_RETURN_NEGATIVE_VALUES));
     }
 
     /**
@@ -323,7 +322,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxGetter(propertyName = "height")
     public String getHeight_js() {
-        final boolean ie = getBrowserVersion().hasFeature(GENERATED_100);
+        final boolean ie = getBrowserVersion().hasFeature(JS_TABLE_CELL_HEIGHT_DOES_NOT_RETURN_NEGATIVE_VALUES);
         final Boolean returnNegativeValues = ie ? Boolean.TRUE : null;
         return getWidthOrHeight("height", returnNegativeValues);
     }
@@ -334,7 +333,8 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxSetter
     public void setHeight(final String height) {
-        setWidthOrHeight("height", height, !getBrowserVersion().hasFeature(GENERATED_101));
+        setWidthOrHeight("height", height,
+                !getBrowserVersion().hasFeature(JS_TABLE_CELL_HEIGHT_DOES_NOT_RETURN_NEGATIVE_VALUES));
     }
 
     /**
