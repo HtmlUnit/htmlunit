@@ -273,6 +273,15 @@ public class HTMLElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
+    public void elementClosesItself_datalist() throws Exception {
+        loadPageWithAlerts2(elementClosesItself("datalist"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
     public void elementClosesItself_dfn() throws Exception {
         loadPageWithAlerts2(elementClosesItself("dfn"));
     }
