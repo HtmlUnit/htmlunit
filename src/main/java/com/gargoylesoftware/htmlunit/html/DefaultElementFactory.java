@@ -60,6 +60,7 @@ class DefaultElementFactory implements ElementFactory {
             HtmlBlockQuote.TAG_NAME, HtmlBody.TAG_NAME, HtmlBold.TAG_NAME,
             HtmlBreak.TAG_NAME, HtmlButton.TAG_NAME, HtmlCanvas.TAG_NAME, HtmlCaption.TAG_NAME,
             HtmlCenter.TAG_NAME, HtmlCitation.TAG_NAME, HtmlCode.TAG_NAME,
+            HtmlDataList.TAG_NAME,
             HtmlDefinition.TAG_NAME, HtmlDefinitionDescription.TAG_NAME,
             HtmlDeletedText.TAG_NAME, HtmlDirectory.TAG_NAME,
             HtmlDivision.TAG_NAME, HtmlDefinitionList.TAG_NAME,
@@ -236,6 +237,14 @@ class DefaultElementFactory implements ElementFactory {
         }
         else if (tagName.equals(HtmlCode.TAG_NAME)) {
             element = new HtmlCode(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equals(HtmlDataList.TAG_NAME)) {
+            if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
+                element = new HtmlDataList(namespaceURI, qualifiedName, page, attributeMap);
+            }
+            else {
+                return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
+            }
         }
         else if (tagName.equals(HtmlDefinition.TAG_NAME)) {
             element = new HtmlDefinition(namespaceURI, qualifiedName, page, attributeMap);
