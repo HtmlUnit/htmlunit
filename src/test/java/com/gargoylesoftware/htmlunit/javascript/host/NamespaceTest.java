@@ -19,30 +19,36 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link com.gargoylesoftware.htmlunit.javascript.host.Namespace}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class NamespaceTest extends SimpleWebTestCase {
+public class NamespaceTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "me,http://mysite" })
+    @Alerts(DEFAULT = "no namespaces",
+            IE = "me, http://mysite")
     public void test() throws Exception {
         final String html
             = "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:me='http://mysite'>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    if (document.namespaces)\n"
-            + "      for (var i=0; i < document.namespaces.length; i++)\n"
-            + "        alert(document.namespaces[i].name + ',' + document.namespaces[i].urn);\n"
+            + "    if (document.namespaces) {\n"
+            + "      for (var i=0; i < document.namespaces.length; i++) {\n"
+            + "        alert(document.namespaces[i].name + ', ' + document.namespaces[i].urn);\n"
+            + "      }\n"
+            + "    } else {\n"
+            + "      alert('no namespaces');\n"
+            + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -50,6 +56,6 @@ public class NamespaceTest extends SimpleWebTestCase {
             + "<app:dIv xmlns='http://anotherURL'></app:dIv>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }
