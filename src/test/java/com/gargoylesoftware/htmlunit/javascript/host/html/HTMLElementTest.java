@@ -3258,6 +3258,17 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "<datalist></datalist>",
+            IE8 = "<:datalist></:datalist>")
+    @NotYetImplemented(IE8)
+    public void outerHTML_datalist() throws Exception {
+        loadPageWithAlerts2(outerHTML("datalist"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "<dfn></dfn>",
             IE8 = "<DFN></DFN>")
     public void outerHTML_dfn() throws Exception {
