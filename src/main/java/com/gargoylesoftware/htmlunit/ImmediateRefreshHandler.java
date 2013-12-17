@@ -19,9 +19,8 @@ import java.io.Serializable;
 import java.net.URL;
 
 /**
- * The default handler for page refreshes. This refresh handler immediately
- * refreshes the specified page, using the specified URL and ignoring the
- * wait time.
+ * This refresh handler immediately refreshes the specified page,
+ * using the specified URL and ignoring the wait time.
  *
  * If you want a refresh handler that does not ignore the wait time,
  * see {@link ThreadedRefreshHandler}.
