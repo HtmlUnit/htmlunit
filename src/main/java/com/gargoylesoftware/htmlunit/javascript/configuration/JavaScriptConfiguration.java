@@ -157,6 +157,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLegendElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLListElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMapElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMarqueeElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMediaElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMenuElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMetaElement;
@@ -187,6 +188,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableRowElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableSectionElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTitleElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUListElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
@@ -305,6 +307,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLIFrameElement.class, HTMLImageElement.class, HTMLInlineQuotationElement.class, HTMLInputElement.class,
         HTMLIsIndexElement.class, HTMLLIElement.class, HTMLLabelElement.class,
         HTMLLegendElement.class, HTMLLinkElement.class, HTMLListElement.class, HTMLMapElement.class,
+        HTMLMarqueeElement.class,
         HTMLMediaElement.class, HTMLMenuElement.class, HTMLMetaElement.class, HTMLMeterElement.class,
         HTMLModElement.class,
         HTMLNoShowElement.class,
@@ -315,7 +318,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLSelectElement.class, HTMLSourceElement.class, HTMLSpacerElement.class, HTMLSpanElement.class,
         HTMLStyleElement.class, HTMLTableCaptionElement.class, HTMLTableCellElement.class, HTMLTableColElement.class,
         HTMLTableComponent.class, HTMLTableElement.class, HTMLTableRowElement.class, HTMLTableSectionElement.class,
-        HTMLTextAreaElement.class, HTMLTitleElement.class,
+        HTMLTextElement.class, HTMLTextAreaElement.class, HTMLTitleElement.class,
         HTMLUListElement.class, HTMLUnknownElement.class,
         HTMLWBRElement.class,
         HTMLVideoElement.class,

@@ -14,39 +14,18 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
-import com.gargoylesoftware.htmlunit.html.HtmlWordBreak;
+import com.gargoylesoftware.htmlunit.html.HtmlMarquee;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for {@link HtmlWordBreak}.
+ * The JavaScript object "HTMLTextElement".
  *
  * @version $Revision$
- * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(domClass = HtmlWordBreak.class,
-    browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
-public class HTMLWBRElement extends HTMLElement {
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean isEndTagForbidden() {
-        return true;
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * {@inheritDoc}
-    */
-    @Override
-    public String getDefaultStyleDisplay() {
-        return "inline";
-    }
+@JsxClass(domClass = HtmlMarquee.class, browsers = @WebBrowser(IE))
+public class HTMLMarqueeElement extends HTMLElement {
 }
