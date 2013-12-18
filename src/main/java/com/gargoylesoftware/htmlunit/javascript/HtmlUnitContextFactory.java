@@ -341,6 +341,8 @@ public class HtmlUnitContextFactory extends ContextFactory {
                 return browserVersion_.hasFeature(BrowserVersionFeatures.JS_FUNCTION_OBJECT_METHOD);
             case Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK:
                 return browserVersion_.hasFeature(BrowserVersionFeatures.JS_FUNCTION_DECLARED_FORWARD_IN_BLOCK);
+            case Context.FEATURE_HTMLUNIT_PARSE_INT_RADIX_10:
+                return browserVersion_.hasFeature(BrowserVersionFeatures.JS_PARSE_INT_RADIX_10);
             default:
                 return super.hasFeature(cx, featureIndex);
         }

@@ -1070,6 +1070,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_PARENT_PROTO_PROPERTIES,
 
+    /** Indicates that parseInt() should have radix 10 by default. */
+    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(value = FF, minVersion = 24),
+        @WebBrowser(CHROME)})
+    JS_PARSE_INT_RADIX_10,
+
     /** Indicates that HTMLPhraseElements returning 'HTMLElement'
      * as class name. */
     @BrowserFeature(@WebBrowser(FF))
