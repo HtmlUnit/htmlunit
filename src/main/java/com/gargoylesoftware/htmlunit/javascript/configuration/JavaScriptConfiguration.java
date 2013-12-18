@@ -177,7 +177,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLProgressElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSelectElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSourceElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSpacerElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSpanElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableCaptionElement;
@@ -315,7 +314,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLOptionElement.class, HTMLOptionsCollection.class, HTMLParagraphElement.class, HTMLParamElement.class,
         HTMLPhraseElement.class,
         HTMLPreElement.class, HTMLProgressElement.class, HTMLScriptElement.class,
-        HTMLSelectElement.class, HTMLSourceElement.class, HTMLSpacerElement.class, HTMLSpanElement.class,
+        HTMLSelectElement.class, HTMLSourceElement.class, HTMLSpanElement.class,
         HTMLStyleElement.class, HTMLTableCaptionElement.class, HTMLTableCellElement.class, HTMLTableColElement.class,
         HTMLTableComponent.class, HTMLTableElement.class, HTMLTableRowElement.class, HTMLTableSectionElement.class,
         HTMLTextElement.class, HTMLTextAreaElement.class, HTMLTitleElement.class,

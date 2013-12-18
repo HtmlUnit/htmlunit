@@ -101,7 +101,7 @@ public class AttributesTest extends TestCase {
             "HtmlPlainText",
             "HtmlPreformattedText", "HtmlRadioButtonInput", "HtmlResetInput",
             "HtmlS", "HtmlSample", "HtmlScript", "HtmlSelect", "HtmlSmall",
-            "HtmlSpacer", "HtmlSpan", "HtmlSource", "HtmlStrike",
+            "HtmlSpan", "HtmlSource", "HtmlStrike",
             "HtmlStrong", "HtmlStyle", "HtmlSubmitInput",
             "HtmlSubscript", "HtmlSuperscript",
             "HtmlTable", "HtmlTableBody", /*"HtmlTableCell",*/ "HtmlTableColumn",

@@ -89,7 +89,7 @@ class DefaultElementFactory implements ElementFactory {
             HtmlRp.TAG_NAME, HtmlRt.TAG_NAME, HtmlRuby.TAG_NAME,
             HtmlS.TAG_NAME, HtmlSample.TAG_NAME,
             HtmlScript.TAG_NAME, HtmlSection.TAG_NAME, HtmlSelect.TAG_NAME, HtmlSmall.TAG_NAME,
-            HtmlSource.TAG_NAME, HtmlSpacer.TAG_NAME, HtmlSpan.TAG_NAME,
+            HtmlSource.TAG_NAME, HtmlSpan.TAG_NAME,
             HtmlStrike.TAG_NAME, HtmlStrong.TAG_NAME, HtmlStyle.TAG_NAME,
             HtmlSubscript.TAG_NAME, HtmlSuperscript.TAG_NAME,
             HtmlTable.TAG_NAME, HtmlTableColumn.TAG_NAME, HtmlTableColumnGroup.TAG_NAME,
@@ -535,9 +535,6 @@ class DefaultElementFactory implements ElementFactory {
             else {
                 return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
             }
-        }
-        else if (tagName.equals(HtmlSpacer.TAG_NAME)) {
-            element = new HtmlSpacer(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlSpan.TAG_NAME)) {
             element = new HtmlSpan(namespaceURI, qualifiedName, page, attributeMap);

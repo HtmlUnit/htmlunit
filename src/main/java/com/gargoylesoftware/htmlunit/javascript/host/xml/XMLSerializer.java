@@ -85,7 +85,7 @@ public class XMLSerializer extends SimpleScriptable {
             HtmlPlainText.TAG_NAME, HtmlPreformattedText.TAG_NAME,
             HtmlInlineQuotation.TAG_NAME, HtmlS.TAG_NAME, HtmlSample.TAG_NAME,
             HtmlScript.TAG_NAME, HtmlSelect.TAG_NAME, HtmlSmall.TAG_NAME,
-            HtmlSource.TAG_NAME, HtmlSpacer.TAG_NAME, HtmlSpan.TAG_NAME,
+            HtmlSource.TAG_NAME, HtmlSpan.TAG_NAME,
             HtmlStrike.TAG_NAME, HtmlStrong.TAG_NAME, HtmlStyle.TAG_NAME,
             HtmlSubscript.TAG_NAME, HtmlSuperscript.TAG_NAME, HtmlTitle.TAG_NAME,
             HtmlTable.TAG_NAME, HtmlTableColumn.TAG_NAME, HtmlTableColumnGroup.TAG_NAME,
