@@ -91,15 +91,23 @@ import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlArea;
+import com.gargoylesoftware.htmlunit.html.HtmlArticle;
+import com.gargoylesoftware.htmlunit.html.HtmlAside;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlFigure;
+import com.gargoylesoftware.htmlunit.html.HtmlFooter;
 import com.gargoylesoftware.htmlunit.html.HtmlFrameSet;
+import com.gargoylesoftware.htmlunit.html.HtmlHeader;
+import com.gargoylesoftware.htmlunit.html.HtmlMark;
+import com.gargoylesoftware.htmlunit.html.HtmlNav;
 import com.gargoylesoftware.htmlunit.html.HtmlNoBreak;
 import com.gargoylesoftware.htmlunit.html.HtmlNoEmbed;
 import com.gargoylesoftware.htmlunit.html.HtmlNoFrames;
 import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlSection;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 import com.gargoylesoftware.htmlunit.html.HtmlWordBreak;
@@ -153,11 +161,19 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
  * @author Frank Danek
  */
 @JsxClasses({
+    @JsxClass(domClass = HtmlArticle.class),
+    @JsxClass(domClass = HtmlAside.class),
     @JsxClass(domClass = HtmlElement.class),
+    @JsxClass(domClass = HtmlFigure.class),
+    @JsxClass(domClass = HtmlFooter.class),
+    @JsxClass(domClass = HtmlHeader.class),
+    @JsxClass(domClass = HtmlMark.class),
+    @JsxClass(domClass = HtmlNav.class),
     @JsxClass(domClass = HtmlNoBreak.class, browsers = { @WebBrowser(FF) }),
     @JsxClass(domClass = HtmlNoEmbed.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) }),
     @JsxClass(domClass = HtmlNoFrames.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) }),
     @JsxClass(domClass = HtmlNoScript.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) }),
+    @JsxClass(domClass = HtmlSection.class),
     @JsxClass(domClass = HtmlWordBreak.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) })
 })
 public class HTMLElement extends Element implements ScriptableWithFallbackGetter {
@@ -2911,7 +2927,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             }
             return "inline";
         }
-        if ("WBR".equals(tagName)) {
+        if ("WBR".equals(tagName) || "MARK".equals(tagName)) {
             return "inline";
         }
         return super.getDefaultStyleDisplay();

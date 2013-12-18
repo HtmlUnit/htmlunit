@@ -2992,12 +2992,15 @@ public class HTMLElementTest extends WebDriverTestCase {
     }
 
     private String outerHTML(final String elementName) {
-        return "<html><head>\n"
+        return "<!DOCTYPE html><html><head>\n"
                 + "  <script>\n"
                 + "    function test(){\n"
-                + "      var value = document.createElement('" + elementName + "').cloneNode(true).outerHTML;\n"
-                + "      while (value && (value.charAt(0) == '\\r' || value.charAt(0) == '\\n'))\n"
+                + "      var value = document.createElement('" + elementName + "').outerHTML;\n"
+                + "      while (value && (value.charAt(0) == '\\r' || value.charAt(0) == '\\n')) {\n"
                 + "        value = value.substring(1);\n"
+                + "      }\n"
+                // IE8 inserts a fancy namespace declaration if the tag is unknown
+                + "      value = value.replace('<?XML:NAMESPACE PREFIX = PUBLIC NS = \"URN:COMPONENT\" />', '');\n"
                 + "      alert(value);\n"
                 + "    }\n"
                 + "  </script>\n"
@@ -3063,6 +3066,24 @@ public class HTMLElementTest extends WebDriverTestCase {
             IE8 = "<AREA>")
     public void outerHTML_area() throws Exception {
         loadPageWithAlerts2(outerHTML("area"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<article></article>")
+    public void outerHTML_article() throws Exception {
+        loadPageWithAlerts2(outerHTML("article"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<aside></aside>")
+    public void outerHTML_aside() throws Exception {
+        loadPageWithAlerts2(outerHTML("aside"));
     }
 
     /**
@@ -3258,9 +3279,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<datalist></datalist>",
-            IE8 = "<:datalist></:datalist>")
-    @NotYetImplemented(IE8)
+    @Alerts("<datalist></datalist>")
     public void outerHTML_datalist() throws Exception {
         loadPageWithAlerts2(outerHTML("datalist"));
     }
@@ -3369,6 +3388,15 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("<figure></figure>")
+    public void outerHTML_figure() throws Exception {
+        loadPageWithAlerts2(outerHTML("figure"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "<font></font>",
             IE8 = "<FONT></FONT>")
     public void outerHTML_font() throws Exception {
@@ -3383,6 +3411,15 @@ public class HTMLElementTest extends WebDriverTestCase {
             IE8 = "<FORM></FORM>")
     public void outerHTML_form() throws Exception {
         loadPageWithAlerts2(outerHTML("form"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<footer></footer>")
+    public void outerHTML_footer() throws Exception {
+        loadPageWithAlerts2(outerHTML("footer"));
     }
 
     /**
@@ -3473,6 +3510,15 @@ public class HTMLElementTest extends WebDriverTestCase {
             IE8 = "<HEAD></HEAD>")
     public void outerHTML_head() throws Exception {
         loadPageWithAlerts2(outerHTML("head"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<header></header>")
+    public void outerHTML_header() throws Exception {
+        loadPageWithAlerts2(outerHTML("header"));
     }
 
     /**
@@ -3682,6 +3728,15 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("<mark></mark>")
+    public void outerHTML_mark() throws Exception {
+        loadPageWithAlerts2(outerHTML("mark"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "<menu></menu>",
             IE8 = "<MENU></MENU>")
     public void outerHTML_menu() throws Exception {
@@ -3714,6 +3769,15 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts("<multicol></multicol>")
     public void outerHTML_multicol() throws Exception {
         loadPageWithAlerts2(outerHTML("multicol"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<nav></nav>")
+    public void outerHTML_nav() throws Exception {
+        loadPageWithAlerts2(outerHTML("nav"));
     }
 
     /**
@@ -3873,6 +3937,15 @@ public class HTMLElementTest extends WebDriverTestCase {
             IE8 = "<SCRIPT></SCRIPT>")
     public void outerHTML_script() throws Exception {
         loadPageWithAlerts2(outerHTML("script"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<section></section>")
+    public void outerHTML_section() throws Exception {
+        loadPageWithAlerts2(outerHTML("section"));
     }
 
     /**
