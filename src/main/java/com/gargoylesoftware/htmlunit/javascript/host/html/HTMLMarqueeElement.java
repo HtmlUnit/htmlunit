@@ -21,7 +21,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLTextElement".
+ * The JavaScript object "HTMLMarqueeElement".
  *
  * @version $Revision$
  * @author Ronald Brill
