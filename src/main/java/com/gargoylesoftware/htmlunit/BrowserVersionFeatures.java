@@ -1072,7 +1072,7 @@ public enum BrowserVersionFeatures {
 
     /** Indicates that parseInt() should have radix 10 by default. */
     @BrowserFeature({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(value = FF, minVersion = 24),
-        @WebBrowser(CHROME)})
+        @WebBrowser(CHROME) })
     JS_PARSE_INT_RADIX_10,
 
     /** Indicates that HTMLPhraseElements returning 'HTMLElement'
