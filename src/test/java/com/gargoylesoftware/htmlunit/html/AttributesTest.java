@@ -71,49 +71,8 @@ public class AttributesTest extends TestCase {
         final HtmlPage page = webClient.getPage(SimpleWebTestCase.URL_FIRST);
 
         final TestSuite suite = new TestSuite();
-        final String[] classesToTest = {
-            "HtmlAbbreviated", "HtmlAcronym",
-            "HtmlAddress", "HtmlAnchor", "HtmlApplet", "HtmlArea",
-            "HtmlAudio", "HtmlBackgroundSound",
-            "HtmlBase", "HtmlBaseFont", "HtmlBidirectionalOverride",
-            "HtmlBig", "HtmlBlink",
-            "HtmlBlockQuote", "HtmlBody", "HtmlBold", "HtmlBreak", "HtmlButton",
-            "HtmlButtonInput", "HtmlCanvas", "HtmlCaption", "HtmlCenter",
-            "HtmlCheckBoxInput", "HtmlCitation", "HtmlCode",
-            "HtmlDefinition", "HtmlDefinitionDescription",
-            "HtmlDefinitionList", "HtmlDefinitionTerm",
-            "HtmlDeletedText", "HtmlDirectory", "HtmlDivision", /*"HtmlElement", */
-            "HtmlEmbed", "HtmlEmphasis", "HtmlExample",
-            "HtmlFieldSet", "HtmlFileInput", "HtmlFont", "HtmlForm",
-            "HtmlFrame", "HtmlFrameSet", "HtmlHead", "HtmlHeading1",
-            "HtmlHeading2", "HtmlHeading3", "HtmlHeading4", "HtmlHeading5",
-            "HtmlHeading6", "HtmlHiddenInput", "HtmlHorizontalRule",
-            "HtmlHtml", "HtmlImage", "HtmlImageInput", "HtmlInlineFrame",
-            "HtmlInlineQuotation",
-            "HtmlInsertedText", "HtmlIsIndex", "HtmlItalic",
-            "HtmlKeyboard", "HtmlLabel",
-            "HtmlLegend", "HtmlLink", "HtmlListing", "HtmlListItem", "HtmlMap",
-            "HtmlMarquee",
-            "HtmlMenu", "HtmlMeta", "HtmlMultiColumn",
-            "HtmlNoBreak", "HtmlNoEmbed", "HtmlNoFrames", "HtmlNoScript",
-            "HtmlObject", "HtmlOption", "HtmlOptionGroup", "HtmlOrderedList",
-            /*"HtmlPage",*/ "HtmlParagraph", "HtmlParameter", "HtmlPasswordInput",
-            "HtmlPlainText",
-            "HtmlPreformattedText", "HtmlRadioButtonInput", "HtmlResetInput",
-            "HtmlS", "HtmlSample", "HtmlScript", "HtmlSelect", "HtmlSmall",
-            "HtmlSpan", "HtmlSource", "HtmlStrike",
-            "HtmlStrong", "HtmlStyle", "HtmlSubmitInput",
-            "HtmlSubscript", "HtmlSuperscript",
-            "HtmlTable", "HtmlTableBody", /*"HtmlTableCell",*/ "HtmlTableColumn",
-            "HtmlTableColumnGroup", "HtmlTableDataCell",
-            "HtmlTableFooter", "HtmlTableHeader", "HtmlTableHeaderCell",
-            "HtmlTableRow", "HtmlTeletype", "HtmlTextArea", "HtmlTextInput",
-            "HtmlTitle", "HtmlUnderlined", "HtmlUnorderedList",
-            "HtmlVariable", "HtmlVideo", "HtmlWordBreak"
-        };
 
-        for (final String testClass : classesToTest) {
-            final Class<?> clazz = Class.forName("com.gargoylesoftware.htmlunit.html." + testClass);
+        for (final Class<? extends HtmlElement> clazz : DefaultElementFactory.SUPPORTED_ELEMNTS_) {
             addTestsForClass(clazz, page, suite);
         }
         return suite;

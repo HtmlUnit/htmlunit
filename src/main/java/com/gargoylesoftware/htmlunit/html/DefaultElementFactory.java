@@ -19,6 +19,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML5_RUBY_TA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML5_TAGS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLBASEFONT_SUPPORTED;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -53,53 +55,74 @@ class DefaultElementFactory implements ElementFactory {
      * For example HTMLParser2Test.childNodes_xmp
      * You can generate your own test cases by looking into TestSource.generateTestForHtmlElements
      */
-    static final List<String> SUPPORTED_TAGS_ = Arrays.asList(HtmlAbbreviated.TAG_NAME, HtmlAcronym.TAG_NAME,
-            HtmlAnchor.TAG_NAME, HtmlAddress.TAG_NAME, HtmlApplet.TAG_NAME, HtmlArea.TAG_NAME,
-            HtmlArticle.TAG_NAME, HtmlAside.TAG_NAME, HtmlAudio.TAG_NAME,
-            HtmlBackgroundSound.TAG_NAME, HtmlBase.TAG_NAME, HtmlBaseFont.TAG_NAME,
-            HtmlBidirectionalOverride.TAG_NAME, HtmlBig.TAG_NAME, HtmlBlink.TAG_NAME,
-            HtmlBlockQuote.TAG_NAME, HtmlBody.TAG_NAME, HtmlBold.TAG_NAME,
-            HtmlBreak.TAG_NAME, HtmlButton.TAG_NAME, HtmlCanvas.TAG_NAME, HtmlCaption.TAG_NAME,
-            HtmlCenter.TAG_NAME, HtmlCitation.TAG_NAME, HtmlCode.TAG_NAME,
-            HtmlDataList.TAG_NAME,
-            HtmlDefinition.TAG_NAME, HtmlDefinitionDescription.TAG_NAME,
-            HtmlDeletedText.TAG_NAME, HtmlDirectory.TAG_NAME,
-            HtmlDivision.TAG_NAME, HtmlDefinitionList.TAG_NAME,
-            HtmlDefinitionTerm.TAG_NAME, HtmlEmbed.TAG_NAME,
-            HtmlEmphasis.TAG_NAME,
-            HtmlFieldSet.TAG_NAME, HtmlFigure.TAG_NAME,
-            HtmlFont.TAG_NAME, HtmlForm.TAG_NAME, HtmlFooter.TAG_NAME,
-            HtmlFrame.TAG_NAME, HtmlFrameSet.TAG_NAME,
-            HtmlHead.TAG_NAME, HtmlHeader.TAG_NAME,
-            HtmlHeading1.TAG_NAME, HtmlHeading2.TAG_NAME, HtmlHeading3.TAG_NAME,
-            HtmlHeading4.TAG_NAME, HtmlHeading5.TAG_NAME, HtmlHeading6.TAG_NAME,
-            HtmlHorizontalRule.TAG_NAME, HtmlHtml.TAG_NAME, HtmlInlineFrame.TAG_NAME,
-            HtmlInlineQuotation.TAG_NAME,
-            HtmlImage.TAG_NAME, HtmlImage.TAG_NAME2, HtmlInsertedText.TAG_NAME, HtmlIsIndex.TAG_NAME,
-            HtmlItalic.TAG_NAME, HtmlKeyboard.TAG_NAME, HtmlLabel.TAG_NAME,
-            HtmlLegend.TAG_NAME, HtmlListing.TAG_NAME, HtmlListItem.TAG_NAME,
-            HtmlLink.TAG_NAME, HtmlMap.TAG_NAME, HtmlMark.TAG_NAME, HtmlMarquee.TAG_NAME,
-            HtmlMenu.TAG_NAME, HtmlMeta.TAG_NAME, HtmlMeter.TAG_NAME, HtmlMultiColumn.TAG_NAME,
-            HtmlNav.TAG_NAME,
-            HtmlNoBreak.TAG_NAME, HtmlNoEmbed.TAG_NAME, HtmlNoFrames.TAG_NAME,
-            HtmlNoScript.TAG_NAME, HtmlObject.TAG_NAME, HtmlOrderedList.TAG_NAME,
-            HtmlOptionGroup.TAG_NAME, HtmlOption.TAG_NAME, HtmlParagraph.TAG_NAME,
-            HtmlParameter.TAG_NAME, HtmlPlainText.TAG_NAME, HtmlPreformattedText.TAG_NAME,
-            HtmlProgress.TAG_NAME,
-            HtmlRp.TAG_NAME, HtmlRt.TAG_NAME, HtmlRuby.TAG_NAME,
-            HtmlS.TAG_NAME, HtmlSample.TAG_NAME,
-            HtmlScript.TAG_NAME, HtmlSection.TAG_NAME, HtmlSelect.TAG_NAME, HtmlSmall.TAG_NAME,
-            HtmlSource.TAG_NAME, HtmlSpan.TAG_NAME,
-            HtmlStrike.TAG_NAME, HtmlStrong.TAG_NAME, HtmlStyle.TAG_NAME,
-            HtmlSubscript.TAG_NAME, HtmlSuperscript.TAG_NAME,
-            HtmlTable.TAG_NAME, HtmlTableColumn.TAG_NAME, HtmlTableColumnGroup.TAG_NAME,
-            HtmlTableBody.TAG_NAME, HtmlTableDataCell.TAG_NAME, HtmlTableHeaderCell.TAG_NAME,
-            HtmlTableRow.TAG_NAME, HtmlTextArea.TAG_NAME, HtmlTableFooter.TAG_NAME,
-            HtmlTableHeader.TAG_NAME, HtmlTeletype.TAG_NAME, HtmlTitle.TAG_NAME,
-            HtmlUnderlined.TAG_NAME, HtmlUnorderedList.TAG_NAME,
-            HtmlVariable.TAG_NAME, HtmlVideo.TAG_NAME,
-            HtmlWordBreak.TAG_NAME, HtmlExample.TAG_NAME
-    );
+    @SuppressWarnings("unchecked")
+    static final List<Class<? extends HtmlElement>> SUPPORTED_ELEMNTS_
+        = Arrays.asList(HtmlAbbreviated.class, HtmlAcronym.class,
+            HtmlAnchor.class, HtmlAddress.class, HtmlApplet.class, HtmlArea.class,
+            HtmlArticle.class, HtmlAside.class, HtmlAudio.class,
+            HtmlBackgroundSound.class, HtmlBase.class, HtmlBaseFont.class,
+            HtmlBidirectionalOverride.class, HtmlBig.class, HtmlBlink.class,
+            HtmlBlockQuote.class, HtmlBody.class, HtmlBold.class,
+            HtmlBreak.class, HtmlButton.class, HtmlCanvas.class, HtmlCaption.class,
+            HtmlCenter.class, HtmlCitation.class, HtmlCode.class,
+            HtmlDataList.class,
+            HtmlDefinition.class, HtmlDefinitionDescription.class,
+            HtmlDeletedText.class, HtmlDirectory.class,
+            HtmlDivision.class, HtmlDefinitionList.class,
+            HtmlDefinitionTerm.class, HtmlEmbed.class,
+            HtmlEmphasis.class,
+            HtmlFieldSet.class, HtmlFigure.class,
+            HtmlFont.class, HtmlForm.class, HtmlFooter.class,
+            HtmlFrame.class, HtmlFrameSet.class,
+            HtmlHead.class, HtmlHeader.class,
+            HtmlHeading1.class, HtmlHeading2.class, HtmlHeading3.class,
+            HtmlHeading4.class, HtmlHeading5.class, HtmlHeading6.class,
+            HtmlHorizontalRule.class, HtmlHtml.class, HtmlInlineFrame.class,
+            HtmlInlineQuotation.class,
+            HtmlImage.class, HtmlInsertedText.class, HtmlIsIndex.class,
+            HtmlItalic.class, HtmlKeyboard.class, HtmlLabel.class,
+            HtmlLegend.class, HtmlListing.class, HtmlListItem.class,
+            HtmlLink.class, HtmlMap.class, HtmlMark.class, HtmlMarquee.class,
+            HtmlMenu.class, HtmlMeta.class, HtmlMeter.class, HtmlMultiColumn.class,
+            HtmlNav.class,
+            HtmlNoBreak.class, HtmlNoEmbed.class, HtmlNoFrames.class,
+            HtmlNoScript.class, HtmlObject.class, HtmlOrderedList.class,
+            HtmlOptionGroup.class, HtmlOption.class, HtmlParagraph.class,
+            HtmlParameter.class, HtmlPlainText.class, HtmlPreformattedText.class,
+            HtmlProgress.class,
+            HtmlRp.class, HtmlRt.class, HtmlRuby.class,
+            HtmlS.class, HtmlSample.class,
+            HtmlScript.class, HtmlSection.class, HtmlSelect.class, HtmlSmall.class,
+            HtmlSource.class, HtmlSpan.class,
+            HtmlStrike.class, HtmlStrong.class, HtmlStyle.class,
+            HtmlSubscript.class, HtmlSuperscript.class,
+            HtmlTable.class, HtmlTableColumn.class, HtmlTableColumnGroup.class,
+            HtmlTableBody.class, HtmlTableDataCell.class, HtmlTableHeaderCell.class,
+            HtmlTableRow.class, HtmlTextArea.class, HtmlTableFooter.class,
+            HtmlTableHeader.class, HtmlTeletype.class, HtmlTitle.class,
+            HtmlUnderlined.class, HtmlUnorderedList.class,
+            HtmlVariable.class, HtmlVideo.class,
+            HtmlWordBreak.class, HtmlExample.class
+        );
+
+    static final List<String> SUPPORTED_TAGS_;
+    static {
+        SUPPORTED_TAGS_ = new ArrayList<String>(SUPPORTED_ELEMNTS_.size());
+        for (Class<? extends HtmlElement> clazz : SUPPORTED_ELEMNTS_) {
+            try {
+                final Field field = clazz.getDeclaredField("TAG_NAME");
+                field.setAccessible(true); // performance
+                final Object tagName = field.get(null);
+                SUPPORTED_TAGS_.add((String) tagName);
+            }
+            catch (final Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        // HtmlImage supports two tags
+        SUPPORTED_TAGS_.add(HtmlImage.TAG_NAME2);
+    }
 
     /**
      * @param page the owning page
