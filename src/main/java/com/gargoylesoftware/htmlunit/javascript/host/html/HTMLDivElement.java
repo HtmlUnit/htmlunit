@@ -14,11 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
-import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlMarquee;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -57,26 +55,5 @@ public class HTMLDivElement extends HTMLElement {
     @JsxSetter
     public void setAlign(final String align) {
         setAlign(align, false);
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * {@inheritDoc}
-    */
-    @Override
-    public String getDefaultStyleDisplay() {
-        final String tagName = getTagName();
-        if ("NOSCRIPT".equals(tagName)) {
-            final DomNode node = getDomNodeOrNull();
-            if (node != null && !node.getPage().getWebClient().getOptions().isJavaScriptEnabled()) {
-                return "block";
-            }
-
-            if (getBrowserVersion().hasFeature(CSS_DISPLAY_DEFAULT)) {
-                return "none";
-            }
-            return "inline";
-        }
-        return "block";
     }
 }
