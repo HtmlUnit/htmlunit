@@ -115,7 +115,7 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for http://sourceforge.net/tracker/index.php?func=detail&aid=1101525&group_id=47038&atid=448266.
+     * Regression test for http://sourceforge.net/p/htmlunit/bugs/203/.
      * @throws Exception if the test fails
      */
     @Test
@@ -181,8 +181,8 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
 
     /**
      * Forward referencing issue in FrameSet.
-     * Test for bug 1239285
-     * https://sourceforge.net/tracker/index.php?func=detail&aid=1239285&group_id=47038&atid=448266
+     * Test for bug 291
+     * http://sourceforge.net/p/htmlunit/bugs/291/
      * @throws Exception if the test fails
      */
     @Test
@@ -293,7 +293,7 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for https://sf.net/tracker/index.php?func=detail&aid=1794764&group_id=47038&atid=448266.
+     * Regression test for http://sourceforge.net/p/htmlunit/bugs/521/.
      * @throws Exception if the test fails
      */
     @Test

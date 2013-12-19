@@ -303,7 +303,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     }
 
     /**
-     * Regression test for http://sourceforge.net/tracker/index.php?func=detail&aid=1209692&group_id=47038&atid=448266.
+     * Regression test for http://sourceforge.net/p/htmlunit/bugs/269/.
      * @throws Exception if the test fails
      */
     @Test
@@ -561,9 +561,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     }
 
     /**
-     * Regression test for bug 1611097.
-     * https://sourceforge.net/tracker/index.php?func=detail&aid=1611097&group_id=47038&atid=448266
-     * Caution: the problem appeared with jdk 1.4 but not with jdk 1.5 as String contains a
+     * Regression test for bug 410.
+     * http://sourceforge.net/p/htmlunit/bugs/410/
+     * Caution: the problem appeared with JDK 1.4 but not with JDK 1.5 as String contains a
      * replace(CharSequence, CharSequence) method in this version
      * @throws Exception if the test fails
      */

@@ -184,8 +184,8 @@ public class HtmlFrameTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug 1518195.
-     * See http://sourceforge.net/tracker/index.php?func=detail&aid=1518195&group_id=47038&atid=448266.
+     * Regression test for bug 363.
+     * See http://sourceforge.net/p/htmlunit/bugs/363/.
      * @throws Exception if the test fails
      */
     @Test

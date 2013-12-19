@@ -56,8 +56,8 @@ public class MemoryLeakTest extends SimpleWebTestCase {
     /**
      * Verifies that windows don't get leaked, especially when there are long-running background JS tasks
      * scheduled via <tt>setTimeout</tt> or <tt>setInterval</tt>. See the following bugs:
-     *    https://sourceforge.net/tracker/index.php?func=detail&aid=2003396&group_id=47038&atid=448266
-     *    https://sourceforge.net/tracker/index.php?func=detail&aid=2014629&group_id=47038&atid=448266
+     *    http://sourceforge.net/p/htmlunit/bugs/639/
+     *    http://sourceforge.net/p/htmlunit/bugs/648/
      *
      * @throws Exception if an error occurs
      */

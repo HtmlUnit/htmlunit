@@ -1788,7 +1788,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
 
     /**
      * HtmlPage.getReadyState() should give the same information than the document element.
-     * @see <a href="http://sf.net/tracker/index.php?func=detail&aid=1592733&group_id=47038&atid=448266">1592733</a>
+     * @see <a href="http://sourceforge.net/p/htmlunit/bugs/402/">402</a>
      * @exception Exception If the test fails
      */
     @Test

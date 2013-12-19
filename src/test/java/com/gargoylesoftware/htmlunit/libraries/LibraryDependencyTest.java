@@ -37,7 +37,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class LibraryDependencyTest extends WebDriverTestCase {
 
     /**
-     * Test for http://sourceforge.net/tracker/index.php?func=detail&aid=1997280&group_id=47038&atid=448266.
+     * Test for http://sourceforge.net/p/htmlunit/bugs/637/.
      * @throws Exception if the test fails
      */
     @Alerts("2")

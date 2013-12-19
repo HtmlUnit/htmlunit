@@ -304,7 +304,7 @@ public class LocationTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for http://sourceforge.net/tracker/index.php?func=detail&aid=1289060&group_id=47038&atid=448266.
+     * Regression test for http://sourceforge.net/p/htmlunit/bugs/307/.
      * @throws Exception if the test fails
      */
     @Test

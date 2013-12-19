@@ -462,8 +462,8 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
     }
 
     /**
-     * Regression test for bug 1304741.
-     * See https://sourceforge.net/tracker/index.php?func=detail&aid=1304741&group_id=47038&atid=448266.
+     * Regression test for bug 308.
+     * See http://sourceforge.net/p/htmlunit/bugs/308/.
      * @throws Exception if the test fails
      */
     @Test

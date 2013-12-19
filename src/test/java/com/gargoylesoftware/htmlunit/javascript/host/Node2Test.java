@@ -122,7 +122,7 @@ public class Node2Test extends SimpleWebTestCase {
 
     /**
      * Verifies that attributes belonging to cloned nodes are available via JavaScript.
-     * http://sourceforge.net/tracker/index.php?func=detail&aid=2024741&group_id=47038&atid=448266
+     * http://sourceforge.net/p/htmlunit/bugs/659/
      * @throws Exception if an error occurs
      */
     @Test

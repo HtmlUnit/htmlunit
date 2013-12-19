@@ -243,7 +243,7 @@ public class SimpleScriptableTest extends SimpleWebTestCase {
     }
 
     /**
-     * Test for https://sourceforge.net/tracker/index.php?func=detail&aid=1933943&group_id=47038&atid=448266.
+     * Test for http://sourceforge.net/p/htmlunit/bugs/587/.
      * See also http://groups.google.com/group/mozilla.dev.tech.js-engine.rhino/browse_thread/thread/1f1c24f58f662c58.
      * @throws Exception if the test fails
      */

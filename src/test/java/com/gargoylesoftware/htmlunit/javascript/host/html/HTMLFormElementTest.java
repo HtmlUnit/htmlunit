@@ -688,7 +688,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     /**
      * Test that the form from the right page is returned after browsing.
      * Regression test for
-     * http://sourceforge.net/tracker/index.php?func=detail&aid=1627983&group_id=47038&atid=448266
+     * http://sourceforge.net/p/htmlunit/bugs/417/
      * @throws Exception if the test fails
      */
     @Test

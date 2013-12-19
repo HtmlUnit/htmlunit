@@ -297,7 +297,7 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
 
     /**
      * Verifies that the event object is correctly made available.
-     * Regression test for https://sf.net/tracker/index.php?func=detail&aid=1648014&group_id=47038&atid=448266.
+     * Regression test for http://sourceforge.net/p/htmlunit/bugs/425/
      * @throws Exception if the test fails
      */
     @Test

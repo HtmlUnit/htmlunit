@@ -349,7 +349,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
      * Test HttpClient for uploading a file with non-ASCII name, if it works it means HttpClient has fixed its bug.
      *
      * Test for http://issues.apache.org/jira/browse/HTTPCLIENT-293,
-     * which is related to http://sourceforge.net/tracker/index.php?func=detail&aid=1818569&group_id=47038&atid=448266
+     * which is related to http://sourceforge.net/p/htmlunit/bugs/535/
      *
      * @throws Exception if the test fails
      */
@@ -391,7 +391,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
     /**
      * Test uploading a file with non-ASCII name.
      *
-     * Test for http://sourceforge.net/tracker/index.php?func=detail&aid=1818569&group_id=47038&atid=448266
+     * Test for http://sourceforge.net/p/htmlunit/bugs/535/
      *
      * @throws Exception if the test fails
      */

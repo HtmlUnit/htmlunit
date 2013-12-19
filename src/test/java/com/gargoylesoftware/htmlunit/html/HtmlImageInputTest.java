@@ -177,7 +177,7 @@ public class HtmlImageInputTest extends SimpleWebTestCase {
     }
 
     /**
-     * Test for bug: http://sourceforge.net/tracker/index.php?func=detail&aid=2013891&group_id=47038&atid=448266.
+     * Test for bug: http://sourceforge.net/p/htmlunit/bugs/646/.
      * @throws Exception if an error occurs
      */
     @Test
@@ -191,7 +191,7 @@ public class HtmlImageInputTest extends SimpleWebTestCase {
     }
 
     /**
-     * Test for bug: http://sourceforge.net/tracker/index.php?func=detail&aid=2013891&group_id=47038&atid=448266.
+     * Test for bug: http://sourceforge.net/p/htmlunit/bugs/646/.
      * @throws Exception if an error occurs
      */
     @Test

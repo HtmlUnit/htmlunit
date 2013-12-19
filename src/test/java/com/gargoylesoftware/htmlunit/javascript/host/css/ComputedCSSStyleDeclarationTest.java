@@ -133,7 +133,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     /**
      * Some style tests. There are two points in this case:
      * <ol>
-     *  <li>https://sourceforge.net/tracker/index.php?func=detail&aid=1566274&group_id=82996&atid=567969</li>
+     *  <li>http://sourceforge.net/p/cssparser/bugs/17/</li>
      *  <li>the "pointer" value gets inherited by "myDiv2", which is parsed as a child of "style_test_1"</li>
      * </ol>
      * @throws Exception if the test fails

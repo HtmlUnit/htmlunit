@@ -111,8 +111,6 @@ public class YuiTest extends WebDriverTestCase {
     public void config() throws Exception {
         // Test currently commented out as there are problems with the YUI test.
         // A bug has been filed against YUI regarding the problems with the test.
-        // See http://sourceforge.net/tracker/index.php?func=detail&aid=1788014&group_id=165715&atid=836476
-        // for more details.
         fail("YUI test has a bug that causes this to fail.");
         //doTest("config.html");
     }

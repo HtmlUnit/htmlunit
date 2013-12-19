@@ -55,8 +55,8 @@ public class DomTextTest extends SimpleWebTestCase {
     }
 
     /**
-     * Test font formats, as per bug #1731042.
-     * See http://sourceforge.net/tracker/index.php?func=detail&aid=1731042&group_id=47038&atid=448266.
+     * Test font formats, as per bug #490.
+     * See http://sourceforge.net/p/htmlunit/bugs/490/.
      *
      * @throws Exception if the test fails
      */

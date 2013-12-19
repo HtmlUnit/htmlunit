@@ -261,7 +261,7 @@ public final class HTMLParser {
      * probably be done by NekoHTML. See the bug linked below. If and when that bug is fixed,
      * we may be able to get rid of this code.
      *
-     * http://sourceforge.net/tracker/index.php?func=detail&aid=1898038&group_id=195122&atid=952178
+     * http://sourceforge.net/p/nekohtml/bugs/15/
      * @param page
      * @param originalCall
      * @param checkInsideFrameOnly true if the original page had body that was removed by JavaScript

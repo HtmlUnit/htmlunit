@@ -561,8 +561,8 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
     }
 
    /**
-    * Test for bug 1678826.
-    * https://sourceforge.net/tracker/index.php?func=detail&aid=1678826&group_id=47038&atid=448266
+    * Test for bug 436.
+    * http://sourceforge.net/p/htmlunit/bugs/436/
     * @throws Exception if the test fails
     */
     @Test

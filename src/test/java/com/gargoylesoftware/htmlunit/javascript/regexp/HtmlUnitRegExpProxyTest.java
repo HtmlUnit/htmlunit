@@ -74,7 +74,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
         + "assertArrEquals(s.match(re), [s, 'var a = 1;', ';']);\n";
 
     /**
-     * Test for bug http://sf.net/tracker/index.php?func=detail&aid=1780089&group_id=47038&atid=448266.
+     * Test for bug http://sourceforge.net/p/htmlunit/bugs/513/.
      * @throws Exception if the test fails
      */
     @Test

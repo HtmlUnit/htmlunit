@@ -64,8 +64,8 @@ public class HTMLOptionElementTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug 1323425.
-     * See http://sourceforge.net/tracker/index.php?func=detail&aid=1323425&group_id=47038&atid=448266.
+     * Regression test for bug 313.
+     * See http://sourceforge.net/p/htmlunit/bugs/313/.
      * @throws Exception if the test fails
      */
     @Test

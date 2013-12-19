@@ -48,7 +48,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public class HTMLFrameElementTest extends SimpleWebTestCase {
 
     /**
-     * Regression test for http://sourceforge.net/tracker/index.php?func=detail&aid=1101525&group_id=47038&atid=448266.
+     * Regression test for http://sourceforge.net/p/htmlunit/bugs/203/.
      * @throws Exception if the test fails
      */
     @Test
@@ -87,7 +87,7 @@ public class HTMLFrameElementTest extends SimpleWebTestCase {
 
     /**
      * Regression test for bug 1236048.
-     * See http://sourceforge.net/tracker/index.php?func=detail&aid=1236048&group_id=47038&atid=448266.
+     * See http://sourceforge.net/p/htmlunit/bugs/288/.
      * @throws Exception if the test fails
      */
     @Alerts("2")
@@ -118,8 +118,8 @@ public class HTMLFrameElementTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug 1289060.
-     * See http://sourceforge.net/tracker/index.php?func=detail&aid=1289060&group_id=47038&atid=448266.
+     * Regression test for bug 307.
+     * See http://sourceforge.net/p/htmlunit/bugs/307/.
      * @throws Exception if the test fails
      */
     @Alerts("DIV")
