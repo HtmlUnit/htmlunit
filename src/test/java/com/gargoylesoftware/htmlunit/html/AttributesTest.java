@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @author Christian Sell
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class AttributesTest extends TestCase {
 
@@ -71,8 +72,57 @@ public class AttributesTest extends TestCase {
         final HtmlPage page = webClient.getPage(SimpleWebTestCase.URL_FIRST);
 
         final TestSuite suite = new TestSuite();
+        final String[] classesToTest = {
+            "HtmlAbbreviated", "HtmlAcronym",
+            "HtmlAnchor", "HtmlAddress", "HtmlApplet", "HtmlArea",
+            "HtmlArticle", "HtmlAside", "HtmlAudio",
+            "HtmlBackgroundSound", "HtmlBase", "HtmlBaseFont",
+            "HtmlBidirectionalOverride", "HtmlBig", "HtmlBlink",
+            "HtmlBlockQuote", "HtmlBody", "HtmlBold",
+            "HtmlBreak", "HtmlButton", "HtmlCanvas", "HtmlCaption",
+            "HtmlCenter", "HtmlCitation", "HtmlCode",
+            "HtmlDataList",
+            "HtmlDefinition", "HtmlDefinitionDescription",
+            "HtmlDeletedText", "HtmlDirectory",
+            "HtmlDivision", "HtmlDefinitionList",
+            "HtmlDefinitionTerm", "HtmlEmbed",
+            "HtmlEmphasis",
+            "HtmlFieldSet", "HtmlFigure",
+            "HtmlFont", "HtmlForm", "HtmlFooter",
+            "HtmlFrame", "HtmlFrameSet",
+            "HtmlHead", "HtmlHeader",
+            "HtmlHeading1", "HtmlHeading2", "HtmlHeading3",
+            "HtmlHeading4", "HtmlHeading5", "HtmlHeading6",
+            "HtmlHorizontalRule", "HtmlHtml", "HtmlInlineFrame",
+            "HtmlInlineQuotation",
+            "HtmlImage", "HtmlImage", "HtmlInsertedText", "HtmlIsIndex",
+            "HtmlItalic", "HtmlKeyboard", "HtmlLabel",
+            "HtmlLegend", "HtmlListing", "HtmlListItem",
+            "HtmlLink", "HtmlMap", "HtmlMark", "HtmlMarquee",
+            "HtmlMenu", "HtmlMeta", "HtmlMeter", "HtmlMultiColumn",
+            "HtmlNav",
+            "HtmlNoBreak", "HtmlNoEmbed", "HtmlNoFrames",
+            "HtmlNoScript", "HtmlObject", "HtmlOrderedList",
+            "HtmlOptionGroup", "HtmlOption", "HtmlParagraph",
+            "HtmlParameter", "HtmlPlainText", "HtmlPreformattedText",
+            "HtmlProgress",
+            "HtmlRp", "HtmlRt", "HtmlRuby",
+            "HtmlS", "HtmlSample",
+            "HtmlScript", "HtmlSection", "HtmlSelect", "HtmlSmall",
+            "HtmlSource", "HtmlSpan",
+            "HtmlStrike", "HtmlStrong", "HtmlStyle",
+            "HtmlSubscript", "HtmlSuperscript",
+            "HtmlTable", "HtmlTableColumn", "HtmlTableColumnGroup",
+            "HtmlTableBody", "HtmlTableDataCell", "HtmlTableHeaderCell",
+            "HtmlTableRow", "HtmlTextArea", "HtmlTableFooter",
+            "HtmlTableHeader", "HtmlTeletype", "HtmlTitle",
+            "HtmlUnderlined", "HtmlUnorderedList",
+            "HtmlVariable", "HtmlVideo",
+            "HtmlWordBreak", "HtmlExample"
+        };
 
-        for (final Class<? extends HtmlElement> clazz : DefaultElementFactory.SUPPORTED_ELEMNTS_) {
+        for (final String testClass : classesToTest) {
+            final Class<?> clazz = Class.forName("com.gargoylesoftware.htmlunit.html." + testClass);
             addTestsForClass(clazz, page, suite);
         }
         return suite;
