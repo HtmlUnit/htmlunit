@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -106,8 +107,11 @@ public class ObjectsTest extends SimpleWebTestCase {
     }
 
     private static List<String> getObjects(final BrowserVersion browserVersion) throws Exception {
-        final URL url = ObjectsTest.class.getClassLoader().getResource(
-                "objects/objects." + browserVersion.getNickname() + ".txt");
+        final String fileName = "objects/objects." + browserVersion.getNickname() + ".txt";
+        final URL url = ObjectsTest.class.getClassLoader().getResource(fileName);
+        if (null == url) {
+            throw new FileNotFoundException(fileName);
+        }
         return FileUtils.readLines(new File(url.toURI()));
     }
 
