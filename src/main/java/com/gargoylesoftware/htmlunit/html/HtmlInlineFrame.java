@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlInlineFrame extends BaseFrameElement {
 
@@ -54,5 +55,17 @@ public class HtmlInlineFrame extends BaseFrameElement {
     @Override
     protected boolean isEmptyXmlTagExpanded() {
         return true;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Returns the default display style.
+     *
+     * @return the default display style.
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        return DisplayStyle.INLINE;
     }
 }

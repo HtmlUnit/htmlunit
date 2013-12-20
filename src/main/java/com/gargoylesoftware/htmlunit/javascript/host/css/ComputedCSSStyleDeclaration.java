@@ -564,7 +564,17 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getDisplay() {
-        return defaultIfEmpty(super.getDisplay(), getElement().getDefaultStyleDisplay());
+        // don't use defaultIfEmpty for performance
+        // (no need to calculate the default if not empty)
+        final String value = super.getDisplay();
+        if (StringUtils.isEmpty(value)) {
+            final Element elem = getElement();
+            if (elem instanceof HTMLElement) {
+                return ((HTMLElement) elem).getDefaultStyleDisplay();
+            }
+            return "";
+        }
+        return value;
     }
 
     /**
@@ -779,7 +789,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     @Override
     protected String getStyleAttributeValue(final Definition style) {
-        return defaultIfEmpty(super.getStyleAttributeValue(style), style.getDefaultComputedValue(getBrowserVersion()));
+        // don't use defaultIfEmpty for performance
+        // (no need to calculate the default if not empty)
+        final String value = super.getStyleAttributeValue(style);
+        if (StringUtils.isEmpty(value)) {
+            return style.getDefaultComputedValue(getBrowserVersion());
+        }
+        return value;
     }
 
     /**

@@ -47,17 +47,4 @@ public class HTMLParagraphElement extends HTMLElement {
     public void setAlign(final String align) {
         setAlign(align, false);
     }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * {@inheritDoc}
-    */
-    @Override
-    public String getDefaultStyleDisplay() {
-        final String tagName = getTagName();
-        if ("PROGRESS".equals(tagName)) {
-            return "inline";
-        }
-        return super.getDefaultStyleDisplay();
-    }
 }

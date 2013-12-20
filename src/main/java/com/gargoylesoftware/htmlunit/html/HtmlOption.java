@@ -15,12 +15,13 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CONTROL_UPDATE_DONE_BEFORE_CLICK_EVENT_FIRED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_FOR_SELECT_OPTION_ALSO;
-import static com.gargoylesoftware.htmlunit.
-    BrowserVersionFeatures.EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.
+                            EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEDOWN_NOT_FOR_SELECT_OPTION;
-import static com.gargoylesoftware.htmlunit.
-    BrowserVersionFeatures.EVENT_ONMOUSEUP_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.
+                            EVENT_ONMOUSEUP_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEUP_NOT_FOR_SELECT_OPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_EMPTY_TEXT_IS_NO_CHILDREN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_PREVENT_DISABLED;
@@ -395,5 +396,20 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
     @Override
     protected boolean isStateUpdateFirst() {
         return hasFeature(CONTROL_UPDATE_DONE_BEFORE_CLICK_EVENT_FIRED);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Returns the default display style.
+     *
+     * @return the default display style.
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        if (hasFeature(CSS_DISPLAY_DEFAULT)) {
+            return DisplayStyle.BLOCK;
+        }
+        return DisplayStyle.INLINE;
     }
 }

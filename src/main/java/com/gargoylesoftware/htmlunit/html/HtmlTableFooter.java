@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlTableFooter extends TableRowGroup {
 
@@ -42,5 +43,17 @@ public class HtmlTableFooter extends TableRowGroup {
     HtmlTableFooter(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Returns the default display style.
+     *
+     * @return the default display style.
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        return DisplayStyle.TABLE_FOOTER_GROUP;
     }
 }

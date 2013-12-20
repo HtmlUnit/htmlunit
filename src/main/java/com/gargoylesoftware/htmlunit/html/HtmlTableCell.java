@@ -76,4 +76,15 @@ public abstract class HtmlTableCell extends HtmlElement {
         return (HtmlTableRow) getEnclosingElement("tr");
     }
 
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Returns the default display style.
+     *
+     * @return the default display style.
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        return DisplayStyle.TABLE_CELL;
+    }
 }

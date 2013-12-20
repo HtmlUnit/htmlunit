@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_FOR_INPUT_IGNORES_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLICK_CHECKBOX_TRIGGERS_NO_CHANGE_EVENT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -414,17 +413,5 @@ public class HTMLInputElement extends FormField {
     @Override
     protected boolean isEndTagForbidden() {
         return true;
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * {@inheritDoc}
-    */
-    @Override
-    public String getDefaultStyleDisplay() {
-        if (getBrowserVersion().hasFeature(CSS_DISPLAY_DEFAULT)) {
-            return "inline";
-        }
-        return "inline-block";
     }
 }

@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
+
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -40,5 +42,20 @@ public class HtmlRuby extends HtmlElement {
     HtmlRuby(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Returns the default display style.
+     *
+     * @return the default display style.
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        if (hasFeature(CSS_DISPLAY_DEFAULT)) {
+            return DisplayStyle.INLINE;
+        }
+        return DisplayStyle.RUBY;
     }
 }

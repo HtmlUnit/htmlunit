@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.NOSCRIPT_BODY_AS_TEXT;
 
 import java.util.Map;
@@ -31,6 +32,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlNoScript extends HtmlElement {
 
@@ -58,5 +60,23 @@ public class HtmlNoScript extends HtmlElement {
             return super.appendChild(node);
         }
         return null;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Returns the default display style.
+     *
+     * @return the default display style.
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        if (!getPage().getWebClient().getOptions().isJavaScriptEnabled()) {
+            return DisplayStyle.BLOCK;
+        }
+        if (hasFeature(CSS_DISPLAY_DEFAULT)) {
+            return DisplayStyle.NONE;
+        }
+        return DisplayStyle.INLINE;
     }
 }

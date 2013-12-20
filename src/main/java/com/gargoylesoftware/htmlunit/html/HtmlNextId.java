@@ -19,16 +19,15 @@ import java.util.Map;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
- * Wrapper for the HTML element "sub".
+ * Wrapper for the HTML element "nextId".
  *
  * @version $Revision$
- * @author Ahmed Ashour
  * @author Ronald Brill
  */
-public class HtmlSubscript extends HtmlElement {
+public class HtmlNextId extends HtmlElement {
 
     /** The HTML tag represented by this element. */
-    public static final String TAG_NAME = "sub";
+    public static final String TAG_NAME = "nextid";
 
     /**
      * Creates a new instance.
@@ -38,20 +37,8 @@ public class HtmlSubscript extends HtmlElement {
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlSubscript(final String namespaceURI, final String qualifiedName, final SgmlPage page,
+    HtmlNextId(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     *
-     * Returns the default display style.
-     *
-     * @return the default display style.
-     */
-    @Override
-    public DisplayStyle getDefaultStyleDisplay() {
-        return DisplayStyle.INLINE;
     }
 }

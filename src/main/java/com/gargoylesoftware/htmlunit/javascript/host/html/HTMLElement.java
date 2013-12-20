@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_65;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_72;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ATTRIBUTE_FIX_IN_QUIRKS_MODE;
@@ -2913,23 +2912,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      * {@inheritDoc}
     */
-    @Override
     public String getDefaultStyleDisplay() {
-        final String tagName = getTagName();
-        if ("NOSCRIPT".equals(tagName)) {
-            final DomNode node = getDomNodeOrNull();
-            if (node != null && !node.getPage().getWebClient().getOptions().isJavaScriptEnabled()) {
-                return "block";
-            }
-
-            if (getBrowserVersion().hasFeature(CSS_DISPLAY_DEFAULT)) {
-                return "none";
-            }
-            return "inline";
-        }
-        if ("WBR".equals(tagName) || "MARK".equals(tagName)) {
-            return "inline";
-        }
-        return super.getDefaultStyleDisplay();
+        final HtmlElement htmlElt = getDomNodeOrDie();
+        return htmlElt.getDefaultStyleDisplay().value();
     }
 }

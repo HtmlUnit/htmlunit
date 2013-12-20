@@ -3000,7 +3000,9 @@ public class HTMLElementTest extends WebDriverTestCase {
                 + "        value = value.substring(1);\n"
                 + "      }\n"
                 // IE8 inserts a fancy namespace declaration if the tag is unknown
+                // and of course IE10 is different
                 + "      value = value.replace('<?XML:NAMESPACE PREFIX = PUBLIC NS = \"URN:COMPONENT\" />', '');\n"
+                + "      value = value.replace('<?XML:NAMESPACE PREFIX = \"PUBLIC\" NS = \"URN:COMPONENT\" />', '');\n"
                 + "      alert(value);\n"
                 + "    }\n"
                 + "  </script>\n"
@@ -3778,6 +3780,17 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts("<nav></nav>")
     public void outerHTML_nav() throws Exception {
         loadPageWithAlerts2(outerHTML("nav"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<nextid></nextid>",
+            IE8 = "<NEXTID>",
+            IE11 = "<nextid>")
+    public void outerHTML_nextid() throws Exception {
+        loadPageWithAlerts2(outerHTML("nextid"));
     }
 
     /**

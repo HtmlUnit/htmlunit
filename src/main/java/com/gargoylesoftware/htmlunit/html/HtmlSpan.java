@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Ahmed Ashour
  * @author Rodney Gitzel
  * @author Sudhan Moghe
+ * @author Ronald Brill
  */
 public class HtmlSpan extends HtmlElement {
 
@@ -61,5 +62,17 @@ public class HtmlSpan extends HtmlElement {
     @Override
     protected boolean isEmptyXmlTagExpanded() {
         return true;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Returns the default display style.
+     *
+     * @return the default display style.
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        return DisplayStyle.INLINE;
     }
 }

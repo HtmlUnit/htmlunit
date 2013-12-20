@@ -547,17 +547,6 @@ public class Element extends EventNode {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     *
-     * Returns the default display style.
-     *
-     * @return the default display style.
-     */
-    public String getDefaultStyleDisplay() {
-        return "block";
-    }
-
-    /**
      * Sets the attribute node for the specified attribute.
      * @param newAtt the attribute to set
      * @return the replaced attribute node, if any

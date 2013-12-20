@@ -14,10 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
-import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlNoEmbed;
 import com.gargoylesoftware.htmlunit.html.HtmlNoFrames;
 import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
@@ -37,25 +35,5 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
     @JsxClass(domClass = HtmlNoScript.class, browsers = @WebBrowser(value = IE, maxVersion = 8))
 })
 public class HTMLNoShowElement extends HTMLElement {
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * {@inheritDoc}
-    */
-    @Override
-    public String getDefaultStyleDisplay() {
-        final String tagName = getTagName();
-        if ("NOSCRIPT".equals(tagName)) {
-            final DomNode node = getDomNodeOrNull();
-            if (node != null && !node.getPage().getWebClient().getOptions().isJavaScriptEnabled()) {
-                return "block";
-            }
-
-            if (getBrowserVersion().hasFeature(CSS_DISPLAY_DEFAULT)) {
-                return "none";
-            }
-            return "inline";
-        }
-        return "block";
-    }
+    // nothing so far
 }

@@ -190,13 +190,4 @@ public class HTMLTableRowElement extends HTMLTableComponent {
 
         htmlRow.getCell(position).remove();
     }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * {@inheritDoc}
-    */
-    @Override
-    public String getDefaultStyleDisplay() {
-        return "table-row";
-    }
 }

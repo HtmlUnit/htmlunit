@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  * @author Rodney Gitzel
+ * @author Ronald Brill
  */
 public class HtmlUnknownElement extends HtmlElement {
 
@@ -60,5 +61,17 @@ public class HtmlUnknownElement extends HtmlElement {
     @Override
     protected boolean isTrimmedText() {
         return false;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Returns the default display style.
+     *
+     * @return the default display style.
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        return DisplayStyle.INLINE;
     }
 }

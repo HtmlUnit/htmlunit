@@ -14,8 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static
-    com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_SET_CAPTION_ALTHOUGH_ALREADY_SET_THROWS_ERROR;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.
+                            JS_TABLE_SET_CAPTION_ALTHOUGH_ALREADY_SET_THROWS_ERROR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_SET_TFOOT_ALTHOUGH_ALREADY_SET_THROWS_ERROR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_SET_THEAD_ALTHOUGH_ALREADY_SET_THROWS_ERROR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -373,14 +373,5 @@ public class HTMLTableElement extends RowContainer {
     @JsxSetter
     public void setBgColor(final String bgColor) {
         setColorAttribute("bgColor", bgColor);
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * {@inheritDoc}
-    */
-    @Override
-    public String getDefaultStyleDisplay() {
-        return "table";
     }
 }

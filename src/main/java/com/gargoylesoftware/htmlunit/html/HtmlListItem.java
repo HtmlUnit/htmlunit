@@ -68,4 +68,16 @@ public class HtmlListItem extends HtmlElement {
     public final String getValueAttribute() {
         return getAttribute("value");
     }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Returns the default display style.
+     *
+     * @return the default display style.
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        return DisplayStyle.LIST_ITEM;
+    }
 }

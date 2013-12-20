@@ -163,6 +163,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMenuElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMetaElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMeterElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLModElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLNextIdElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLNoShowElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOListElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLObjectElement;
@@ -310,6 +311,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLMediaElement.class, HTMLMenuElement.class, HTMLMetaElement.class, HTMLMeterElement.class,
         HTMLModElement.class,
         HTMLNoShowElement.class,
+        HTMLNextIdElement.class,
         HTMLOListElement.class, HTMLObjectElement.class, HTMLOptGroupElement.class,
         HTMLOptionElement.class, HTMLOptionsCollection.class, HTMLParagraphElement.class, HTMLParamElement.class,
         HTMLPhraseElement.class,

@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 
@@ -100,7 +101,7 @@ public class AttributesTest extends TestCase {
             "HtmlLegend", "HtmlListing", "HtmlListItem",
             "HtmlLink", "HtmlMap", "HtmlMark", "HtmlMarquee",
             "HtmlMenu", "HtmlMeta", "HtmlMeter", "HtmlMultiColumn",
-            "HtmlNav",
+            "HtmlNav", "HtmlNextId",
             "HtmlNoBreak", "HtmlNoEmbed", "HtmlNoFrames",
             "HtmlNoScript", "HtmlObject", "HtmlOrderedList",
             "HtmlOptionGroup", "HtmlOption", "HtmlParagraph",
@@ -121,9 +122,25 @@ public class AttributesTest extends TestCase {
             "HtmlWordBreak", "HtmlExample"
         };
 
+        final HashSet<String> supportedTags = new HashSet<String>(DefaultElementFactory.SUPPORTED_TAGS_);
+
         for (final String testClass : classesToTest) {
             final Class<?> clazz = Class.forName("com.gargoylesoftware.htmlunit.html." + testClass);
             addTestsForClass(clazz, page, suite);
+
+            String tag = (String) clazz.getField("TAG_NAME").get(null);
+            supportedTags.remove(tag);
+            try {
+                tag = (String) clazz.getField("TAG_NAME2").get(null);
+                supportedTags.remove(tag);
+            }
+            catch (final NoSuchFieldException e) {
+                // ignore
+            }
+        }
+
+        if (!supportedTags.isEmpty()) {
+            throw new RuntimeException("Missing tag class(es) " + supportedTags.toString());
         }
         return suite;
     }

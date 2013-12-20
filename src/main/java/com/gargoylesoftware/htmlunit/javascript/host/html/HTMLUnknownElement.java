@@ -14,12 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_KEYGEN_INLINE_BLOCK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_112;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_HTML_GENERIC_ELEMENT_CLASS_NAME;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -68,54 +65,5 @@ public class HTMLUnknownElement extends HTMLElement {
      */
     protected boolean isLowerCaseInOuterHtml() {
         return true;
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * {@inheritDoc}
-    */
-    @Override
-    public String getDefaultStyleDisplay() {
-        final String tagName = getTagName();
-        final BrowserVersion browser = getBrowserVersion();
-        if (browser.hasFeature(CSS_DISPLAY_DEFAULT)) {
-            if ("ARTICLE".equals(tagName)
-                    || "ASIDE".equals(tagName)
-                    || "FIGCAPTION".equals(tagName)
-                    || "FIGURE".equals(tagName)
-                    || "FOOTER".equals(tagName)
-                    || "HEADER".equals(tagName)
-                    || "NAV".equals(tagName)
-                    || "SECTION".equals(tagName)) {
-                return "block";
-            }
-
-            // FF < 16
-            if ("METER".equals(tagName)) {
-                return "inline-block";
-            }
-            if ("PROGRESS".equals(tagName)) {
-                return "inline-block";
-            }
-            if ("DATALIST".equals(tagName)) {
-                return "none";
-            }
-        }
-        if ("KEYGEN".equals(tagName) && browser.hasFeature(CSS_KEYGEN_INLINE_BLOCK)) {
-            return "inline-block";
-        }
-        if ("RUBY".equals(tagName)) {
-            if (browser.hasFeature(CSS_DISPLAY_DEFAULT)) {
-                return "inline";
-            }
-            return "ruby";
-        }
-        if ("RT".equals(tagName)) {
-            if (browser.hasFeature(CSS_DISPLAY_DEFAULT)) {
-                return "inline";
-            }
-            return "ruby-text";
-        }
-        return "inline";
     }
 }

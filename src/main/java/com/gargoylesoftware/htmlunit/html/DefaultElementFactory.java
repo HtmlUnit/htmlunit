@@ -80,7 +80,7 @@ class DefaultElementFactory implements ElementFactory {
             HtmlLegend.TAG_NAME, HtmlListing.TAG_NAME, HtmlListItem.TAG_NAME,
             HtmlLink.TAG_NAME, HtmlMap.TAG_NAME, HtmlMark.TAG_NAME, HtmlMarquee.TAG_NAME,
             HtmlMenu.TAG_NAME, HtmlMeta.TAG_NAME, HtmlMeter.TAG_NAME, HtmlMultiColumn.TAG_NAME,
-            HtmlNav.TAG_NAME,
+            HtmlNav.TAG_NAME, HtmlNextId.TAG_NAME,
             HtmlNoBreak.TAG_NAME, HtmlNoEmbed.TAG_NAME, HtmlNoFrames.TAG_NAME,
             HtmlNoScript.TAG_NAME, HtmlObject.TAG_NAME, HtmlOrderedList.TAG_NAME,
             HtmlOptionGroup.TAG_NAME, HtmlOption.TAG_NAME, HtmlParagraph.TAG_NAME,
@@ -441,6 +441,9 @@ class DefaultElementFactory implements ElementFactory {
             else {
                 return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
             }
+        }
+        else if (tagName.equals(HtmlNextId.TAG_NAME)) {
+            element = new HtmlNextId(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlNoBreak.TAG_NAME)) {
             element = new HtmlNoBreak(namespaceURI, qualifiedName, page, attributeMap);

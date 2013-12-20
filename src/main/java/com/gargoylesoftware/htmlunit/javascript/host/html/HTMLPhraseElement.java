@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLABBREVIATED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PHRASE_COMMON_CLASS_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
@@ -176,29 +175,6 @@ public class HTMLPhraseElement extends HTMLElement {
      */
     protected boolean isEndTagForbidden() {
         return false;
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * {@inheritDoc}
-    */
-    @Override
-    public String getDefaultStyleDisplay() {
-        final String tagName = getTagName();
-        if ("RUBY".equals(tagName)) {
-            if (getBrowserVersion().hasFeature(CSS_DISPLAY_DEFAULT)) {
-                return "inline";
-            }
-            return "ruby";
-        }
-        if ("RT".equals(tagName)) {
-            if (getBrowserVersion().hasFeature(CSS_DISPLAY_DEFAULT)) {
-                return "inline";
-            }
-            return "ruby-text";
-        }
-
-        return "inline";
     }
 
     /**

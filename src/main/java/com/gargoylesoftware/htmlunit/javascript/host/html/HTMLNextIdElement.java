@@ -14,24 +14,26 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
-import com.gargoylesoftware.htmlunit.html.HtmlSource;
+import com.gargoylesoftware.htmlunit.html.HtmlNextId;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLSourceElement".
+ * The JavaScript object "HTMLNextIdElement".
  *
  * @version $Revision$
- * @author Ahmed Ashour
  * @author Ronald Brill
- * @author Frank Danek
  */
-@JsxClass(domClass = HtmlSource.class, browsers = { @WebBrowser(FF),
-        @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
-public class HTMLSourceElement extends HTMLElement {
-    // nothing so far
+@JsxClass(domClass = HtmlNextId.class, browsers = @WebBrowser(IE))
+public class HTMLNextIdElement extends HTMLElement {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isEndTagForbidden() {
+        return true;
+    }
 }

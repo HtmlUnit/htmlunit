@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlInsertedText extends HtmlElement {
 
@@ -67,5 +68,17 @@ public class HtmlInsertedText extends HtmlElement {
      */
     public final String getDateTimeAttribute() {
         return getAttribute("datetime");
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Returns the default display style.
+     *
+     * @return the default display style.
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        return DisplayStyle.INLINE;
     }
 }

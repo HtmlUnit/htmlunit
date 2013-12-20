@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
+
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -26,6 +28,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlLegend extends HtmlElement {
 
@@ -67,5 +70,20 @@ public class HtmlLegend extends HtmlElement {
      */
     public final String getAlignAttribute() {
         return getAttribute("align");
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Returns the default display style.
+     *
+     * @return the default display style.
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        if (hasFeature(CSS_DISPLAY_DEFAULT)) {
+            return DisplayStyle.BLOCK;
+        }
+        return DisplayStyle.INLINE;
     }
 }

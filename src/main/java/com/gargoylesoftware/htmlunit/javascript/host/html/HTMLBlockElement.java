@@ -114,20 +114,4 @@ public class HTMLBlockElement extends HTMLElement {
         }
         return super.getClassName();
     }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * {@inheritDoc}
-    */
-    @Override
-    public String getDefaultStyleDisplay() {
-        final String tagName = getTagName();
-        if ("ADDRESS".equals(tagName)
-                || "BLOCKQUOTE".equals(tagName)
-                || "CENTER".equals(tagName)
-                || "PRE".equals(tagName)) {
-            return super.getDefaultStyleDisplay();
-        }
-        return "inline";
-    }
 }

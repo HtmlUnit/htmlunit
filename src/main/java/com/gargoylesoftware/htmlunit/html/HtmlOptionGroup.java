@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTIONGROUP_NO_DISABLED;
 
 import java.util.Map;
@@ -91,4 +92,18 @@ public class HtmlOptionGroup extends HtmlElement implements DisabledElement {
         return (HtmlSelect) getEnclosingElement("select");
     }
 
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Returns the default display style.
+     *
+     * @return the default display style.
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        if (hasFeature(CSS_DISPLAY_DEFAULT)) {
+            return DisplayStyle.BLOCK;
+        }
+        return DisplayStyle.INLINE;
+    }
 }

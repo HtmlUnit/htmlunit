@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlEmbed extends HtmlElement {
 
@@ -67,5 +68,17 @@ public class HtmlEmbed extends HtmlElement {
         final FileOutputStream fos = new FileOutputStream(file);
         IOUtils.copy(webResponse.getContentAsStream(), fos);
         fos.close();
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Returns the default display style.
+     *
+     * @return the default display style.
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        return DisplayStyle.INLINE;
     }
 }

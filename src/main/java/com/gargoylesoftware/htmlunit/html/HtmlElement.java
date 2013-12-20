@@ -80,6 +80,57 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  */
 public abstract class HtmlElement extends DomElement {
 
+    /**
+     * Enum for the different display styles.
+     */
+    public enum DisplayStyle {
+        /** none. */
+        NONE("none"),
+        /** block. */
+        BLOCK("block"),
+        /** inline. */
+        INLINE("inline"),
+        /** inline-block. */
+        INLINE_BLOCK("inline-block"),
+        /** list-item. */
+        LIST_ITEM("list-item"),
+        /** table. */
+        TABLE("table"),
+        /** table-cell. */
+        TABLE_CELL("table-cell"),
+        /** table-column. */
+        TABLE_COLUMN("table-column"),
+        /** table-column-group. */
+        TABLE_COLUMN_GROUP("table-column-group"),
+        /** table-row. */
+        TABLE_ROW("table-row"),
+        /** table-row-group. */
+        TABLE_ROW_GROUP("table-row-group"),
+        /** table-header-group. */
+        TABLE_HEADER_GROUP("table-header-group"),
+        /** table-footer-group. */
+        TABLE_FOOTER_GROUP("table-footer-group"),
+        /** table-caption. */
+        TABLE_CAPTION("table-caption"),
+        /** ruby. */
+        RUBY("ruby"),
+        /** ruby-text. */
+        RUBY_TEXT("ruby-text");
+
+        private final String value_;
+        DisplayStyle(final String value) {
+            value_ = value;
+        }
+
+        /**
+         * The string used from js.
+         * @return the value as string
+         */
+        public String value() {
+            return value_;
+        }
+    }
+
     private static final Log LOG = LogFactory.getLog(HtmlElement.class);
 
     /**
@@ -1518,5 +1569,16 @@ public abstract class HtmlElement extends DomElement {
     @Override
     public DomNode querySelector(final String selectors) {
         return super.querySelector(selectors);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Returns the default display style.
+     *
+     * @return the default display style.
+     */
+    public DisplayStyle getDefaultStyleDisplay() {
+        return DisplayStyle.BLOCK;
     }
 }

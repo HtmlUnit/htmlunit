@@ -15,9 +15,9 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.
-                                                JS_TABLE_COLUMN_SPAN_THROWS_EXCEPTION_IF_LESS_THAN_ONE;
+                    JS_TABLE_COLUMN_SPAN_THROWS_EXCEPTION_IF_LESS_THAN_ONE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.
-                                                JS_TABLE_COLUMN_WIDTH_DOES_NOT_RETURN_NEGATIVE_VALUES;
+                    JS_TABLE_COLUMN_WIDTH_DOES_NOT_RETURN_NEGATIVE_VALUES;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.HtmlTableColumn;
@@ -106,18 +106,5 @@ public class HTMLTableColElement extends HTMLTableComponent {
     @Override
     protected boolean isEndTagForbidden() {
         return getDomNodeOrDie() instanceof HtmlTableColumn;
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * {@inheritDoc}
-    */
-    @Override
-    public String getDefaultStyleDisplay() {
-        final String tagName = getTagName();
-        if ("COLGROUP".equals(tagName)) {
-            return "table-column-group";
-        }
-        return "table-column";
     }
 }

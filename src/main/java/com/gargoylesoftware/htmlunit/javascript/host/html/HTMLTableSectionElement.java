@@ -119,20 +119,4 @@ public class HTMLTableSectionElement extends RowContainer {
     public void setChOff(final String chOff) {
         super.setChOff(chOff);
     }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * {@inheritDoc}
-    */
-    @Override
-    public String getDefaultStyleDisplay() {
-        final String tagName = getTagName();
-        if ("TFOOT".equals(tagName)) {
-            return "table-footer-group";
-        }
-        if ("THEAD".equals(tagName)) {
-            return "table-header-group";
-        }
-        return "table-row-group";
-    }
 }

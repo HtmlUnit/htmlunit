@@ -18,10 +18,10 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_93;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_94;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_95;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_96;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_HEIGHT_DOES_NOT_RETURN_NEGATIVE_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_NOT_EMPTY_ALWAYS_TRUE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_NOWRAP_VALUE_TRUE_IF_SET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_WIDTH_DOES_NOT_RETURN_NEGATIVE_VALUES;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_HEIGHT_DOES_NOT_RETURN_NEGATIVE_VALUES;
 
 import java.util.List;
 
@@ -335,14 +335,5 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     public void setHeight(final String height) {
         setWidthOrHeight("height", height,
                 !getBrowserVersion().hasFeature(JS_TABLE_CELL_HEIGHT_DOES_NOT_RETURN_NEGATIVE_VALUES));
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * {@inheritDoc}
-    */
-    @Override
-    public String getDefaultStyleDisplay() {
-        return "table-cell";
     }
 }

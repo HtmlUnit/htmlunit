@@ -33,13 +33,5 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(domClass = HtmlAudio.class, browsers = { @WebBrowser(FF),
         @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
 public class HTMLAudioElement extends HTMLMediaElement {
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * {@inheritDoc}
-    */
-    @Override
-    public String getDefaultStyleDisplay() {
-        return "none";
-    }
+    // empty at the moment
 }

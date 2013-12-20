@@ -25,13 +25,5 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  */
 @JsxClass(domClass = HtmlDataList.class)
 public class HTMLDataListElement extends HTMLElement {
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * {@inheritDoc}
-    */
-    @Override
-    public String getDefaultStyleDisplay() {
-        return "none";
-    }
+    // nothing so far
 }

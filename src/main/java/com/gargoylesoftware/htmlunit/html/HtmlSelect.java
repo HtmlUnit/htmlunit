@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN;
 
 import java.util.ArrayList;
@@ -618,5 +619,20 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      */
     public Collection<String> getPreviousNames() {
         return previousNames_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Returns the default display style.
+     *
+     * @return the default display style.
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        if (hasFeature(CSS_DISPLAY_DEFAULT)) {
+            return DisplayStyle.INLINE;
+        }
+        return DisplayStyle.INLINE_BLOCK;
     }
 }
