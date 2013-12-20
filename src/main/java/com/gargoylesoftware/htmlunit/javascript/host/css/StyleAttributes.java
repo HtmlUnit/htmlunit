@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff17up;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff24up;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffBelow17;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ie11up;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ie8up;
@@ -249,6 +250,9 @@ final class StyleAttributes {
         /** The style property -moz-column-count. */
         MOZ_COLUMN_COUNT("MozColumnCount", "-moz-column-count", ff("auto")),
 
+        /** The style property -moz-column-fill. */
+        MOZ_COLUMN_FILL("MozColumnFill", "-moz-column-fill", ff24up("balance")),
+
         /** The style property -moz-column-gap. */
         MOZ_COLUMN_GAP("MozColumnGap", "-moz-column-gap", ff("16px")),
 
@@ -304,7 +308,7 @@ final class StyleAttributes {
         MOZ_OPACITY("MozOpacity", "-moz-opacity", ffBelow17("1")),
 
         /** The style property -moz-orient. */
-        MOZ_ORIENT("MozOrient", "-moz-orient", ff17up("horizontal")),
+        MOZ_ORIENT("MozOrient", "-moz-orient", ff24up("auto"), ff17up("horizontal")),
 
         /** The style property -moz-outline. */
         MOZ_OUTLINE("MozOutline", "-moz-outline", ffBelow17("")),
@@ -511,7 +515,7 @@ final class StyleAttributes {
                 "-ms-content-zooming", ie11up("none")),
 
         /** The style property -ms-flex. */
-        MS_FLEX("msFlex", "-ms-flex", ie11up("0 0 auto")),
+        MS_FLEX("msFlex", "-ms-flex", ie11up("0 1 auto")),
 
         /** The style property -ms-flex-align. */
         MS_FLEX_ALIGN("msFlexAlign", "-ms-flex-align", ie11up("stretch")),
@@ -529,7 +533,7 @@ final class StyleAttributes {
         MS_FLEX_LINE_PACK("msFlexLinePack", "-ms-flex-line-pack", ie11up("stretch")),
 
         /** The style property -ms-flex-negative. */
-        MS_FLEX_NEGATIVE("msFlexNegative", "-ms-flex-negative", ie11up("0")),
+        MS_FLEX_NEGATIVE("msFlexNegative", "-ms-flex-negative", ie11up("1")),
 
         /** The style property -ms-flex-order. */
         MS_FLEX_ORDER("msFlexOrder", "-ms-flex-order", ie11up("0")),
@@ -595,6 +599,9 @@ final class StyleAttributes {
         /** The style property -ms-hyphens. */
         MS_HYPHENS("msHyphens", "-ms-hyphens", ie11up("manual")),
 
+        /** The style property -ms-ime-align. */
+        MS_IME_ALIGN("msImeAlign", "-ms-ime-align", ie11up("")),
+
         /** The style property -ms-interpolation-mode. */
         MS_INTERPOLATION_MODE("msInterpolationMode", "-ms-interpolation-mode", ie11up("undefined")),
 
@@ -647,6 +654,9 @@ final class StyleAttributes {
         /** The style property -ms-scroll-translation. */
         MS_SCROLL_TRANSLATION("msScrollTranslation", "-ms-scroll-translation", ie11up("none")),
 
+        /** The style property -ms-text-combine-horizontal. */
+        MS_TEXT_COMBINE_HORIZONTAL("msTextCombineHorizontal", "-ms-text-combine-horizontal", ie11up("none")),
+
         /** The style property -ms-touch-action. */
         MS_TOUCH_ACTION("msTouchAction", "-ms-touch-action", ie11up("auto")),
 
@@ -695,6 +705,15 @@ final class StyleAttributes {
 
         /** The style property -ms-wrap-through. */
         MS_WRAP_THROUGH("msWrapThrough", "-ms-wrap-through", ie11up("wrap")),
+
+        /** The style property alignment-content. */
+        ALIGN_CONTENT("alignContent", "align-content", ie11up("stretch")),
+
+        /** The style property alignment-items. */
+        ALIGN_ITEMS("alignItems", "align-items", ff24up("stretch"), ie11up("stretch")),
+
+        /** The style property alignment-self. */
+        ALIGN_SELF("alignSelf", "align-self", ff24up("stretch"), ie11up("auto")),
 
         /** The style property alignment-baseline. */
         ALIGNMENT_BASELINE("alignmentBaseline", "alignment-baseline", ie11up("auto")),
@@ -765,7 +784,7 @@ final class StyleAttributes {
         BASELINE_SHIFT("baselineShift", "baseline-shift", ie11up("baseline")),
 
         /** The style property behavior. */
-        BEHAVIOR("behavior", "behavior", ie11up("undefined")),
+        BEHAVIOR("behavior", "behavior"),
 
         /** The style property border-bottom-left-radius. */
         BORDER_BOTTOM_LEFT_RADIUS("borderBottomLeftRadius",
@@ -776,27 +795,27 @@ final class StyleAttributes {
                 "border-bottom-right-radius", ff17up("0px"), ie11up("0px")),
 
         /** The style property border-image. */
-        BORDER_IMAGE("borderImage", "border-image", ff17up("")),
+        BORDER_IMAGE("borderImage", "border-image", ff17up(""), ie11up("")),
 
         /** The style property border-image-outset. */
         BORDER_IMAGE_OUTSET("borderImageOutset", "border-image-outset",
-                ff17up("0 0 0 0")),
+                ff17up("0 0 0 0"), ie11up("0")),
 
         /** The style property border-image-repeat. */
         BORDER_IMAGE_REPEAT("borderImageRepeat", "border-image-repeat",
-                ff17up("stretch stretch")),
+                ff17up("stretch stretch"), ie11up("stretch")),
 
         /** The style property border-image-slice. */
         BORDER_IMAGE_SLICE("borderImageSlice", "border-image-slice",
-                ff17up("100% 100% 100% 100%")),
+                ff17up("100% 100% 100% 100%"), ie11up("100%")),
 
         /** The style property border-image-source. */
         BORDER_IMAGE_SOURCE("borderImageSource", "border-image-source",
-                ff17up("none")),
+                ff17up("none"), ie11up("none")),
 
         /** The style property border-image-width. */
         BORDER_IMAGE_WIDTH("borderImageWidth", "border-image-width",
-                ff17up("1 1 1 1")),
+                ff17up("1 1 1 1"), ie11up("1")),
 
         /** The style property border-radius. */
         BORDER_RADIUS("borderRadius", "border-radius", ff17up(""), ie11up("")),
@@ -905,6 +924,27 @@ final class StyleAttributes {
         /** The style property filter. */
         FILTER("filter", "filter", ff17up("none"), ieBelow11(""), ie11up("none")),
 
+        /** The style property flex. */
+        FLEX("flex", "flex", ff24up(""), ie11up("0 1 auto")),
+
+        /** The style property flex-basis. */
+        FLEX_BASIS("flexBasis", "flex-basis", ff24up("auto"), ie11up("auto")),
+
+        /** The style property flex-direction. */
+        FLEX_DIRECTION("flexDirection", "flex-direction", ff24up("row"), ie11up("row")),
+
+        /** The style property flex-flow. */
+        FLEX_FLOW("flexFlow", "flex-flow", ie11up("row nowrap")),
+
+        /** The style property flex-grow. */
+        FLEX_GROW("flexGrow", "flex-grow", ff24up("0"), ie11up("0")),
+
+        /** The style property flex-shrink. */
+        FLEX_SHRINK("flexShrink", "flex-shrink", ff24up("1"), ie11up("1")),
+
+        /** The style property flex-wrap. */
+        FLEX_WRAP("flexWrap", "flex-wrap", ie11up("nowrap")),
+
         /** The style property flood-color. */
         FLOOD_COLOR("floodColor", "flood-color", ff17up("rgb(0, 0, 0)"), ie11up("")),
 
@@ -928,6 +968,9 @@ final class StyleAttributes {
 
         /** The style property ime-mode. */
         IME_MODE("imeMode", "ime-mode", ie11up("undefined")),
+
+        /** The style property ime-mode. */
+        JUSTIFY_CONTENT("justifyContent", "justify-content", ff24up("flex-start"), ie11up("flex-start")),
 
         /** The style property kerning. */
         KERNING("kerning", "kerning", ie11up("auto")),
@@ -976,6 +1019,9 @@ final class StyleAttributes {
         /** The style property mask. */
         MASK("mask", "mask", ff17up("none"), ie11up("none")),
 
+        /** The style property order. */
+        ORDER("order", "order", ff24up("0"), ie11up("0")),
+
         /** The style property page-break-inside. */
         ORPHANS("orphans", "orphans", ie11up("2")),
 
@@ -983,7 +1029,7 @@ final class StyleAttributes {
         OUTLINE_COLOR("outlineColor", "outline-color", ie11up("transparent")),
 
         /** The style property page-break-inside. */
-        PAGE_BREAK_INSIDE("pageBreakInside", "page-break-inside", ie11up("auto")),
+        PAGE_BREAK_INSIDE("pageBreakInside", "page-break-inside", ff24up("auto"), ie11up("auto")),
 
         /** The style property pause. */
         PAUSE("pause", "pause", ffBelow17("")),
@@ -1021,7 +1067,7 @@ final class StyleAttributes {
         RICHNESS("richness", "richness", ffBelow17("")),
 
         /** The style property ruby-align. */
-        RUBY_ALIGN("rubyAlign", "ruby-align", ie11up("auto")),
+        RUBY_ALIGN("rubyAlign", "ruby-align"),
 
         /** The style property ruby-overhang. */
         RUBY_OVERHANG("rubyOverhang", "ruby-overhang", ie11up("auto")),
@@ -1141,6 +1187,9 @@ final class StyleAttributes {
 
         /** The style property text-underline-position. */
         TEXT_UNDERLINE_POSITION("textUnderlinePosition", "text-underline-position", ie11up("auto")),
+
+        /** The style property touch-action. */
+        TOUCH_ACTION("touchAction", "touch-action", ie11up("auto")),
 
         /** The style property transform. */
         TRANSFORM("transform", "transform", ff17up("none"), ie11up("none")),

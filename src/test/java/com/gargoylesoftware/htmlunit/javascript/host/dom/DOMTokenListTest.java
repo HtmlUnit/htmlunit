@@ -36,8 +36,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "3", "b", "true", "false", "c d" },
-            IE11 = { "3", "b", "true", "false", "c d" })
+    @Alerts(DEFAULT = { "3", "b", "true", "false", "c d" },
+            IE8 = "")
     public void various() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -63,8 +63,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "0", "null", "false", "# removed", "" },
-            IE11 = { "0", "null", "false", "# removed", "" })
+    @Alerts(DEFAULT = { "0", "null", "false", "# removed", "" },
+            IE8 = "")
     public void noAttribute() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -88,8 +88,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "0", "undefined", "1", "#" },
-            IE11 = { "0", "undefined", "1", "#" })
+    @Alerts(DEFAULT = { "0", "undefined", "1", "#" },
+            IE8 = "")
     public void noAttributeAdd() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -112,8 +112,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "0", "true", "1", "#" },
-            IE11 = { "0", "true", "1", "#" })
+    @Alerts(DEFAULT = { "0", "true", "1", "#" },
+            IE8 = "")
     public void noAttributeToggle() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -194,8 +194,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "exception", "exception", "true", "false" },
-            IE11 = { "exception", "exception", "true", "false" })
+    @Alerts(DEFAULT = { "exception", "exception", "true", "false" },
+            IE8 = "")
     public void contains() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -223,8 +223,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "false", "false", "false" },
-            IE11 = { "false", "false", "false" })
+    @Alerts(DEFAULT = { "false", "false", "false" },
+            IE8 = "")
     public void containsSubstring() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -247,8 +247,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "true", "true", "true", "true" },
-            IE11 = { "true", "true", "true", "true" })
+    @Alerts(DEFAULT = { "true", "true", "true", "true" },
+            IE8 = "")
     public void containsBorderCheck() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -275,8 +275,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "exception", "exception", "3", "4", "true" },
-            IE11 = { "exception", "exception", "3", "4", "true" })
+    @Alerts(DEFAULT = { "exception", "exception", "3", "4", "true" },
+            IE8 = "")
     public void add() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -331,8 +331,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "3", "3", "true" },
-            IE11 = { "3", "3", "true" })
+    @Alerts(DEFAULT = { "3", "3", "true" },
+            IE8 = "")
     public void addDuplicated() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -356,8 +356,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "exception", "exception", "3", "3", "2", "false" },
-            IE11 = { "exception", "exception", "3", "3", "2", "false" })
+    @Alerts(DEFAULT = { "exception", "exception", "3", "3", "2", "false" },
+            IE8 = "")
     public void remove() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -389,8 +389,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "3", "1", "false" },
-            IE11 = { "3", "1", "false" })
+    @Alerts(DEFAULT = { "3", "1", "false" },
+            IE8 = "")
     public void removeDuplicated() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -441,8 +441,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "exception", "exception", "2", "true", "false", "1", "false", "true", "2", "true" },
-            IE11 = { "exception", "exception", "2", "true", "false", "1", "false", "true", "2", "true" })
+    @Alerts(DEFAULT = { "exception", "exception", "2", "true", "false", "1", "false", "true", "2", "true" },
+            IE8 = "")
     public void toggle() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"

@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
@@ -1137,10 +1138,24 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Browsers(IE)
-    @Alerts(IE = { "green, green", "green, red", "green, green", "green, green",
-                "green, red", "green, red", "green, green", "green, red", "green, green" },
-            IE11 = { "green, green", "green, red", "green, red", "green, green",
-                "green, red", "green, red", "green, green", "green, red", "green, red" })
+    @Alerts(IE = { "'font', 'blah', green, green",
+                "'color', 'red', green, red",
+                "'ColoR', 'red', green, red",
+                "'font', 'blah', 0, green, green",
+                "'color', 'red', 0, green, red",
+                "'ColoR', 'red', 0, green, red",
+                "'font', 'blah', 1, green, green",
+                "'color', 'red', 1, green, red",
+                "'ColoR', 'red', 1, green, red" },
+            IE8 = { "'font', 'blah', green, green",
+                "'color', 'red', green, red",
+                "'ColoR', 'red', green, green",
+                "'font', 'blah', 0, green, green",
+                "'color', 'red', 0, green, red",
+                "'ColoR', 'red', 0, green, red",
+                "'font', 'blah', 1, green, green",
+                "'color', 'red', 1, green, red",
+                "'ColoR', 'red', 1, green, green" })
     public void setAttribute() throws Exception {
         final String[] expected = getExpectedAlerts();
         setAttribute("'font', 'blah'", expected[0]);
@@ -1160,6 +1175,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "<a id='a' href='#' style='color:green'>go</a>\n"
             + "<script>\n"
             + "  function test() {\n"
+            + "    alert(\"" + params + "\");\n"
             + "    alert(document.all['a'].style.getAttribute('color'));\n"
             + "    document.all['a'].style.setAttribute(" + params + ");\n"
             + "    alert(document.all['a'].style.getAttribute('color'));\n"
@@ -1176,10 +1192,24 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Browsers(IE)
-    @Alerts(IE = { "green, false, green", "green, true, ", "green, false, green", "green, false, green",
-            "green, true, ", "green, true, ", "green, false, green", "green, true, ", "green, false, green" },
-            IE11 = { "green, false, green", "green, true, ", "green, true, ", "green, false, green",
-                "green, true, ", "green, true, ", "green, false, green", "green, true, ", "green, true, " })
+    @Alerts(IE = { "'font', green, false, green",
+                "'color', green, true, ",
+                "'ColoR', green, true, ",
+                "'font', 0, green, false, green",
+                "'color', 0, green, true, ",
+                "'ColoR', 0, green, true, ",
+                "'font', 1, green, false, green",
+                "'color', 1, green, true, ",
+                "'ColoR', 1, green, true, " },
+            IE8 = { "'font', green, false, green",
+                "'color', green, true, ",
+                "'ColoR', green, false, green",
+                "'font', 0, green, false, green",
+                "'color', 0, green, true, ",
+                "'ColoR', 0, green, true, ",
+                "'font', 1, green, false, green",
+                "'color', 1, green, true, ",
+                "'ColoR', 1, green, false, green" })
     public void removeAttribute() throws Exception {
         final String[] expected = getExpectedAlerts();
         removeAttribute("'font'", expected[0]);
@@ -1199,6 +1229,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "<a id='a' href='#' style='color:green'>go</a>\n"
             + "<script>\n"
             + "  function test() {\n"
+            + "    alert(\"" + params + "\");\n"
             + "    alert(document.all['a'].style.getAttribute('color'));\n"
             + "    alert(document.all['a'].style.removeAttribute(" + params + "));\n"
             + "    alert(document.all['a'].style.getAttribute('color'));\n"
@@ -1376,7 +1407,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "", "", "", "" },
             IE8 = {"", "error", "", "", "error", "" })
-    @NotYetImplemented(IE)
+    @NotYetImplemented(IE8)
     public void setToNull() throws Exception {
         final String html
             = "<html><head><script>\n"

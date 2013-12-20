@@ -80,26 +80,32 @@ public enum BrowserVersionFeatures {
     CSS_FONT_STRECH_DEFAULT_NORMAL,
 
     /** Indicates that the browser can surrounds image url's with quotes. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     CSS_IMAGE_URL_QUOTED,
 
-    /** The default value of the display property for the 'keygen' tag is 'inline-block'
-     * instead of 'inline'. */
+    /** The default value of the display property for the 'keygen' tag is 'inline-block' instead of the default one. */
     @BrowserFeature(@WebBrowser(value = FF, minVersion = 24))
-    CSS_KEYGEN_INLINE_BLOCK,
+    CSS_KEYGEN_DISPLAY_INLINE_BLOCK,
+
+    /** The default value of the display property for the 'noscript' tag is 'inline' instead of the default one. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    CSS_NOSCRIPT_DISPLAY_INLINE,
 
     /** Indicates that only integers are allowed for pixel value. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     CSS_PIXEL_VALUES_INT_ONLY,
 
+    /** The default value of the display property for the 'script' tag is 'inline' instead of the default one. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    CSS_SCRIPT_DISPLAY_INLINE,
+
     /** Indicates that the :lang(..) selector is supported. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     CSS_SELECTOR_LANG,
 
-    /** The default value of the display property for the 'select' tag is 'inline'
-     * instead of 'inline-block'. */
+    /** The default value of the display property for the 'select' tag is 'inline' instead of the default one. */
     @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 17), @WebBrowser(CHROME) })
-    CSS_SELECT_INLINE,
+    CSS_SELECT_DISPLAY_INLINE,
 
     /** Throws exception on setting a CSS style value to null. */
     @BrowserFeature(@WebBrowser(IE))
@@ -181,7 +187,7 @@ public enum BrowserVersionFeatures {
     EVENT_ONERROR_EXTERNAL_JAVASCRIPT,
 
     /** Triggers "onload" event if external javascript successfully loaded. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     EVENT_ONLOAD_EXTERNAL_JAVASCRIPT,
 
     /** Triggers "onload" event of the frameset before the one from the frames. */
@@ -209,7 +215,7 @@ public enum BrowserVersionFeatures {
     EVENT_ONMOUSEUP_NOT_FOR_SELECT_OPTION,
 
     /** Triggers "onreadystatechange" event. */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     EVENT_ONREADY_STATE_CHANGE,
 
     /** Triggers "propertychange" event. */
@@ -331,10 +337,6 @@ public enum BrowserVersionFeatures {
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
     GENERATED_45,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_48,
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
@@ -464,8 +466,12 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLCOLLECTION_IDENTICAL_IDS,
 
-    /** Allow detection of object type for collection elements. */
+    /** HtmlCollection returns null instead of undefined if an element was not found. */
     @BrowserFeature(@WebBrowser(IE))
+    HTMLCOLLECTION_NULL_IF_NOT_FOUND,
+
+    /** Allow detection of object type for collection elements. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     HTMLCOLLECTION_OBJECT_DETECTION,
 
     /**
@@ -563,6 +569,10 @@ public enum BrowserVersionFeatures {
     /** Setting defaultValue updates the value also. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLTEXTAREA_SET_DEFAULT_VALUE_UPDATES_VALUE,
+
+    /** HTML attributes are always lower case. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 10) })
+    HTML_ATTRIBUTE_LOWER_CASE,
 
     /** Adds CData nodes as Comment elements to the DOM. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
@@ -714,7 +724,7 @@ public enum BrowserVersionFeatures {
     JS_DEFERRED,
 
     /** Object prototype supports <tt>__defineGetter__</tt> and similar properties. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_DEFINE_GETTER,
 
     /** Indicates that HTMLDefinition...Elements returning 'HTMLElement'
@@ -742,7 +752,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_DOCUMENT_APPEND_CHILD_SUPPORTED,
 
-    /** Document instead of HTMLDocument or XMLDocument. */
+    /** Document instead of HTMLDocument. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_DOCUMENT_CLASS_NAME,
 
@@ -783,7 +793,7 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_CORE_1,
 
     /** If document.implementation.hasFeature() supports 'CSS2 2.0'. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     JS_DOMIMPLEMENTATION_FEATURE_CSS2_2,
 
     /** If document.implementation.hasFeature() supports 'CSS 2.0'. */
@@ -928,7 +938,7 @@ public enum BrowserVersionFeatures {
     JS_GET_ATTRIBUTE_SUPPORTS_FLAGS_IN_QUIRKS_MODE,
 
     /** Javascript function getBackgroundColor of computed styles returns the color as rgb. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB,
 
     /** Javascript function getElementsByName returns an empty collection if called with empty string. */
@@ -1003,7 +1013,7 @@ public enum BrowserVersionFeatures {
     JS_INNER_HTML_REDUCE_WHITESPACES,
 
     /** Javascript function returning a length (e.g. getWidth) without 'px' at the end. */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 10))
     JS_LENGTH_WITHOUT_PX,
 
     /**
@@ -1110,7 +1120,7 @@ public enum BrowserVersionFeatures {
     JS_SCRIPT_SUPPORTS_FOR_AND_EVENT,
 
     /** Javascript script object supports the onreadystatechange event (IE). */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_SCRIPT_SUPPORTS_ONREADYSTATECHANGE,
 
     /** If true the content of a selection is it's default value instead of toString. */
@@ -1149,6 +1159,14 @@ public enum BrowserVersionFeatures {
     /** Indicates if style.getAttribute supports a (second) flags argument. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_STYLE_GET_ATTRIBUTE_SUPPORTS_FLAGS,
+
+    /** Indicates if style.removeAttribute supports a (second) flags argument. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
+    JS_STYLE_REMOVE_ATTRIBUTE_SUPPORTS_FLAGS,
+
+    /** Indicates if style.setAttribute supports a (second) flags argument. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
+    JS_STYLE_SET_ATTRIBUTE_SUPPORTS_FLAGS,
 
     /** IE supports accessing unsupported style elements via getter
      * like val = elem.style.htmlunit;.
@@ -1270,13 +1288,17 @@ public enum BrowserVersionFeatures {
     JS_XML,
 
     /** Indicates that new XMLSerializer().serializeToString(..) adds the xhtml namespace to the root element. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_XML_SERIALIZER_ADD_XHTML_NAMESPACE,
 
     /** Indicates that new XMLSerializer().serializeToString(..) always appends a CRLF at the end
      * of the produced string. */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_XML_SERIALIZER_APPENDS_CRLF,
+
+    /** Indicates that new XMLSerializer().serializeToString(..) inserts a blank before self-closing a tag. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_XML_SERIALIZER_BLANK_BEFORE_SELF_CLOSING,
 
     /** Indicates that new XMLSerializer().serializeToString(..) respects the XHTML definition for non empty tags. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
@@ -1438,15 +1460,16 @@ public enum BrowserVersionFeatures {
     XHR_IGNORE_SAME_ORIGIN_TO_ABOUT,
 
     /** Indicates that the onreadystatechange handler is triggered for sync requests for COMPLETED (4). */
-    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME),
+        @WebBrowser(value = IE, minVersion = 11) })
     XHR_ONREADYSTATECANGE_SYNC_REQUESTS_COMPLETED,
 
     /** Indicates that the onreadystatechange handler is not triggered for sync requests. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     XHR_ONREADYSTATECANGE_SYNC_REQUESTS_NOT_TRIGGERED,
 
     /** Indicates that the onreadystatechange handler is triggered with an event parameter (FF). */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     XHR_ONREADYSTATECHANGE_WITH_EVENT_PARAM,
 
     /** Indicates if an empty url is allowed as url param for the open method. */

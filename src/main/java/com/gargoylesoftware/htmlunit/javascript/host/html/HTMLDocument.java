@@ -1274,7 +1274,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param index where to insert the sheet in the collection
      * @return the newly created stylesheet
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
     public CSSStyleSheet createStyleSheet(final String url, final Object index) {
         final HTMLLinkElement link = (HTMLLinkElement) createElement("link");
         link.setHref(url);

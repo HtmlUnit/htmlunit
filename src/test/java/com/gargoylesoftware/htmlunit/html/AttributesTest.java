@@ -43,6 +43,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 public class AttributesTest extends TestCase {
 
@@ -88,7 +89,7 @@ public class AttributesTest extends TestCase {
             "HtmlDivision", "HtmlDefinitionList",
             "HtmlDefinitionTerm", "HtmlEmbed",
             "HtmlEmphasis",
-            "HtmlFieldSet", "HtmlFigure",
+            "HtmlFieldSet", "HtmlFigureCaption", "HtmlFigure",
             "HtmlFont", "HtmlForm", "HtmlFooter",
             "HtmlFrame", "HtmlFrameSet",
             "HtmlHead", "HtmlHeader",

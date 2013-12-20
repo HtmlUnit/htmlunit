@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_NOSCRIPT_DISPLAY_INLINE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.NOSCRIPT_BODY_AS_TEXT;
 
 import java.util.Map;
@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 public class HtmlNoScript extends HtmlElement {
 
@@ -74,9 +75,9 @@ public class HtmlNoScript extends HtmlElement {
         if (!getPage().getWebClient().getOptions().isJavaScriptEnabled()) {
             return DisplayStyle.BLOCK;
         }
-        if (hasFeature(CSS_DISPLAY_DEFAULT)) {
-            return DisplayStyle.NONE;
+        if (hasFeature(CSS_NOSCRIPT_DISPLAY_INLINE)) {
+            return DisplayStyle.INLINE;
         }
-        return DisplayStyle.INLINE;
+        return DisplayStyle.NONE;
     }
 }

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -23,6 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for a CanvasRenderingContext2D.
@@ -30,6 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Frank Danek
  */
 @JsxClass
 public class CanvasRenderingContext2D extends SimpleScriptable {
@@ -41,26 +44,6 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     @JsxGetter
     public Object getFillStyle() {
         return null;
-    }
-
-    /**
-     * Changes the transformation matrix to apply a translation transformation with the given characteristics.
-     * @param x the translation distance in the horizontal direction
-     * @param y the translation distance in the vertical direction
-     */
-    @JsxFunction
-    public void translate(final Object x, final Object y) {
-      // empty
-    }
-
-    /**
-     * Changes the transformation matrix to apply a scaling transformation with the given characteristics.
-     * @param x the scale factor in the horizontal direction
-     * @param y the scale factor in the vertical direction
-     */
-    @JsxFunction
-    public void scale(final Object x, final Object y) {
-      //empty
     }
 
     /**
@@ -127,109 +110,6 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     }
 
     /**
-     * Clears the specified rectangular area.
-     * @param x the x
-     * @param y the y
-     * @param w the width
-     * @param h the height
-     */
-    @JsxFunction
-    public void clearRect(final double x, final double y, final double w, final double h) {
-        //empty
-    }
-
-    /**
-     * Paints the specified rectangular area.
-     * @param x the x
-     * @param y the y
-     * @param w the width
-     * @param h the height
-     */
-    @JsxFunction
-    public void fillRect(final double x, final double y, final double w, final double h) {
-        //empty
-    }
-
-    /**
-     * Strokes the specified rectangular area.
-     * @param x the x
-     * @param y the y
-     * @param w the width
-     * @param h the height
-     */
-    @JsxFunction
-    public void strokeRect(final double x, final double y, final double w, final double h) {
-        //empty
-    }
-
-    /**
-     * Begins the subpaths.
-     */
-    @JsxFunction
-    public void beginPath() {
-        //empty
-    }
-
-    /**
-     * Closes the subpaths.
-     */
-    @JsxFunction
-    public void closePath() {
-        //empty
-    }
-
-    /**
-     * Creates a new subpath.
-     * @param x the x
-     * @param y the y
-     */
-    @JsxFunction
-    public void moveTo(final double x, final double y) {
-        //empty
-    }
-
-    /**
-     * Connect the last point to the given point.
-     * @param x the x
-     * @param y the y
-     */
-    @JsxFunction
-    public void lineTo(final double x, final double y) {
-        //empty
-    }
-
-    /**
-     * Pushes state on state stack.
-     */
-    @JsxFunction
-    public void save() {
-        //empty
-    }
-
-    /**
-     * Pops state stack and restore state.
-     */
-    @JsxFunction
-    public void restore() {
-        //empty
-    }
-
-    /**
-     * Creates linear gradient.
-     * @param x0 the x0
-     * @param y0 the y0
-     * @param r0 the r0
-     * @param x1 the x1
-     * @param y1 the y1
-     * @param r1 the r1
-     */
-    @JsxFunction
-    public void createLinearGradient(final double x0, final double y0, final double r0, final double x1,
-            final Object y1, final Object r1) {
-        //empty
-    }
-
-    /**
      * Draws an arc.
      * @param x the x
      * @param y the y
@@ -259,6 +139,14 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     }
 
     /**
+     * Begins the subpaths.
+     */
+    @JsxFunction
+    public void beginPath() {
+        //empty
+    }
+
+    /**
      * Draws a cubic Bézier curve.
      * @param cp1x the cp1x
      * @param cp1y the cp1y
@@ -274,31 +162,14 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     }
 
     /**
-     * Draws a quadratic Bézier curve.
-     * @param controlPointX the x-coordinate of the control point
-     * @param controlPointY the y-coordinate of the control point
-     * @param endPointX the x-coordinate of the end point
-     * @param endPointY the y-coordinate of the end point
+     * Clears the specified rectangular area.
+     * @param x the x
+     * @param y the y
+     * @param w the width
+     * @param h the height
      */
     @JsxFunction
-    public void quadraticCurveTo(final double controlPointX, final double controlPointY,
-            final double endPointX, final double endPointY) {
-        //empty
-    }
-
-    /**
-     * Fills the shape.
-     */
-    @JsxFunction
-    public void fill() {
-        //empty
-    }
-
-    /**
-     * Calculates the strokes of all the subpaths of the current path.
-     */
-    @JsxFunction
-    public void stroke() {
+    public void clearRect(final double x, final double y, final double w, final double h) {
         //empty
     }
 
@@ -307,6 +178,53 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public void clip() {
+        //empty
+    }
+
+    /**
+     * Closes the subpaths.
+     */
+    @JsxFunction
+    public void closePath() {
+        //empty
+    }
+
+    /**
+     * Creates a new, blank ImageData object with the specified dimensions.
+     */
+    @JsxFunction
+    public void createImageData() {
+        //empty
+    }
+
+    /**
+     * Creates linear gradient.
+     * @param x0 the x0
+     * @param y0 the y0
+     * @param r0 the r0
+     * @param x1 the x1
+     * @param y1 the y1
+     * @param r1 the r1
+     */
+    @JsxFunction
+    public void createLinearGradient(final double x0, final double y0, final double r0, final double x1,
+            final Object y1, final Object r1) {
+        //empty
+    }
+
+    /**
+     * Creates a pattern.
+     */
+    @JsxFunction
+    public void createPattern() {
+        //empty
+    }
+
+    /**
+     * Creates a gradient.
+     */
+    @JsxFunction
+    public void createRadialGradient() {
         //empty
     }
 
@@ -324,26 +242,22 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     }
 
     /**
-     * Creates a new, blank ImageData object with the specified dimensions.
+     * Fills the shape.
      */
     @JsxFunction
-    public void createImageData() {
+    public void fill() {
         //empty
     }
 
     /**
-     * Creates a pattern.
+     * Paints the specified rectangular area.
+     * @param x the x
+     * @param y the y
+     * @param w the width
+     * @param h the height
      */
     @JsxFunction
-    public void createPattern() {
-        //empty
-    }
-
-    /**
-     * Creates a gradient.
-     */
-    @JsxFunction
-    public void createRadialGradient() {
+    public void fillRect(final double x, final double y, final double w, final double h) {
         //empty
     }
 
@@ -366,6 +280,14 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     /**
      * Dummy placeholder.
      */
+    @JsxFunction(@WebBrowser(IE))
+    public void getLineDash() {
+        //empty
+    }
+
+    /**
+     * Dummy placeholder.
+     */
     @JsxFunction
     public void getLineData() {
         //empty
@@ -380,10 +302,30 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     }
 
     /**
+     * Connect the last point to the given point.
+     * @param x the x
+     * @param y the y
+     */
+    @JsxFunction
+    public void lineTo(final double x, final double y) {
+        //empty
+    }
+
+    /**
      * Dummy placeholder.
      */
     @JsxFunction
     public void measureText() {
+        //empty
+    }
+
+    /**
+     * Creates a new subpath.
+     * @param x the x
+     * @param y the y
+     */
+    @JsxFunction
+    public void moveTo(final double x, final double y) {
         //empty
     }
 
@@ -396,10 +338,31 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     }
 
     /**
+     * Draws a quadratic Bézier curve.
+     * @param controlPointX the x-coordinate of the control point
+     * @param controlPointY the y-coordinate of the control point
+     * @param endPointX the x-coordinate of the end point
+     * @param endPointY the y-coordinate of the end point
+     */
+    @JsxFunction
+    public void quadraticCurveTo(final double controlPointX, final double controlPointY,
+            final double endPointX, final double endPointY) {
+        //empty
+    }
+
+    /**
      * Dummy placeholder.
      */
     @JsxFunction
     public void rect() {
+        //empty
+    }
+
+    /**
+     * Pops state stack and restore state.
+     */
+    @JsxFunction
+    public void restore() {
         //empty
     }
 
@@ -412,10 +375,56 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     }
 
     /**
+     * Pushes state on state stack.
+     */
+    @JsxFunction
+    public void save() {
+        //empty
+    }
+
+    /**
+     * Changes the transformation matrix to apply a scaling transformation with the given characteristics.
+     * @param x the scale factor in the horizontal direction
+     * @param y the scale factor in the vertical direction
+     */
+    @JsxFunction
+    public void scale(final Object x, final Object y) {
+      //empty
+    }
+
+    /**
+     * Dummy placeholder.
+     */
+    @JsxFunction(@WebBrowser(IE))
+    public void setLineDash() {
+        //empty
+    }
+
+    /**
      * Dummy placeholder.
      */
     @JsxFunction
     public void setTransform() {
+        //empty
+    }
+
+    /**
+     * Calculates the strokes of all the subpaths of the current path.
+     */
+    @JsxFunction
+    public void stroke() {
+        //empty
+    }
+
+    /**
+     * Strokes the specified rectangular area.
+     * @param x the x
+     * @param y the y
+     * @param w the width
+     * @param h the height
+     */
+    @JsxFunction
+    public void strokeRect(final double x, final double y, final double w, final double h) {
         //empty
     }
 
@@ -433,5 +442,15 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     @JsxFunction
     public void transform() {
         //empty
+    }
+
+    /**
+     * Changes the transformation matrix to apply a translation transformation with the given characteristics.
+     * @param x the translation distance in the horizontal direction
+     * @param y the translation distance in the vertical direction
+     */
+    @JsxFunction
+    public void translate(final Object x, final Object y) {
+      // empty
     }
 }

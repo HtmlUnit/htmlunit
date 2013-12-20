@@ -45,6 +45,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLIFrameElementTest extends SimpleWebTestCase {
@@ -431,8 +432,7 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "loading", "complete" },
-            IE = { "loading", "complete" })
+    @Alerts({ "loading", "complete" })
     public void readyState_IFrame() throws Exception {
         final String html = "<html><head></head>\n"
             + "  <body>\n"

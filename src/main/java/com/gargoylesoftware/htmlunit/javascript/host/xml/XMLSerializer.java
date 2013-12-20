@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_ADD_XHTML_NAMESPACE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_APPENDS_CRLF;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_BLANK_BEFORE_SELF_CLOSING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_NON_EMPTY_TAGS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -221,7 +222,12 @@ public class XMLSerializer extends SimpleScriptable {
                 buffer.append("</").append(nodeName).append('>');
             }
             else {
-                buffer.append(optionalPrefix).append("/>");
+                buffer.append(optionalPrefix);
+                if (buffer.charAt(buffer.length() - 1) != ' '
+                    && getBrowserVersion().hasFeature(JS_XML_SERIALIZER_BLANK_BEFORE_SELF_CLOSING)) {
+                    buffer.append(" ");
+                }
+                buffer.append("/>");
             }
         }
         else {

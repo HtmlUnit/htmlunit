@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CLASS_NAME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -87,19 +86,6 @@ public class XMLDocument extends Document {
                 throw Context.reportRuntimeError("IOException: " + e);
             }
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getClassName() {
-        if (getWindow().getWebWindow() != null) {
-            if (getBrowserVersion().hasFeature(JS_DOCUMENT_CLASS_NAME)) {
-                return "Document";
-            }
-        }
-        return super.getClassName();
     }
 
     /**

@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSelect;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLOptionElementTest extends SimpleWebTestCase {
@@ -233,10 +234,10 @@ public class HTMLOptionElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "[object]", "[object]", "[object]", "[object]", "null",
-            "[object]", "null", "[object]", "[object]", "null" },
-            FF = { "null", "[object Attr]", "null", "null", "null",
-            "null", "null", "null", "null", "null" })
+    @Alerts(DEFAULT = { "null", "[object Attr]", "null", "null", "null",
+                "null", "null", "null", "null", "null" },
+            IE8 = { "[object]", "[object]", "[object]", "[object]", "null",
+                "[object]", "null", "[object]", "[object]", "null" })
     public void getAttributeNode() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -272,8 +273,8 @@ public class HTMLOptionElementTest extends SimpleWebTestCase {
      */
     @Test
     @Browsers(IE)
-    @NotYetImplemented
     @Alerts("1")
+    @NotYetImplemented
     public void without_new() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -333,7 +334,9 @@ public class HTMLOptionElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "null", "[object]", "null" }, FF = { "[object Text]", "[object Text]", "[object Text]" })
+    @Alerts(FF = { "[object Text]", "[object Text]", "[object Text]" },
+            IE = { "null", "[object]", "null" },
+            IE11 = { "null", "[object Text]", "null" })
     public void text() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -398,8 +401,8 @@ public class HTMLOptionElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "text0", "text1", "text1b", "text2" },
-            IE = { "", "", "", "" })
+    @Alerts(DEFAULT = { "text0", "text1", "text1b", "text2" },
+            IE8 = { "", "", "", "" })
     public void defaultValueFromNestedNodes() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -436,7 +439,8 @@ public class HTMLOptionElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "[object]", FF = "[object HTMLFormElement]")
+    @Alerts(DEFAULT = "[object HTMLFormElement]",
+            IE8 = "[object]")
     public void form() throws Exception {
         final String html
             = "<html><body><form><select id='s'><option>a</option></select></form><script>\n"

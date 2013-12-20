@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
@@ -51,6 +52,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  * @author Ethan Glasser-Camp
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLElement3Test extends SimpleWebTestCase {
@@ -60,14 +62,14 @@ public class HTMLElement3Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {
-            "Old = <B>Old innerHTML</B><!-- old comment -->",
-            "New = <B><I id=newElt>New cell value</I></B>",
-            "I" },
-    DEFAULT = {
-            "Old = <b>Old innerHTML</b><!-- old comment -->",
-            "New =  <b><i id=\"newElt\">New cell value</i></b>",
-            "I" })
+    @Alerts(DEFAULT = {
+                "Old = <b>Old innerHTML</b><!-- old comment -->",
+                "New =  <b><i id=\"newElt\">New cell value</i></b>",
+                "I" },
+            IE8 = {
+                "Old = <B>Old innerHTML</B><!-- old comment -->",
+                "New = <B><I id=newElt>New cell value</I></B>",
+                "I" })
     public void getSetInnerHTMLComplex_FF() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -102,7 +104,12 @@ public class HTMLElement3Test extends SimpleWebTestCase {
      */
     @Test
     @Browsers(IE)
-    @Alerts(IE = { "Old = <B id=innerNode>Old outerHTML</B>", "New = <B><I id=newElt>New cell value</I></B>", "I" })
+    @Alerts(IE = { "Old = <B id=innerNode>Old outerHTML</B>",
+                "New = <B><I id=newElt>New cell value</I></B>",
+                "I" },
+            IE11 = { "Old = <b id=\"innerNode\">Old outerHTML</b>",
+                "New = <b><i id=\"newElt\">New cell value</i></b>",
+                "I" })
     public void getSetOuterHTMLComplex() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -134,8 +141,8 @@ public class HTMLElement3Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts(IE = { "isHomePage = false", "isHomePage = true", "isHomePage = true", "isHomePage = false" })
+    @Browsers(IE8)
+    @Alerts(IE8 = { "isHomePage = false", "isHomePage = true", "isHomePage = true", "isHomePage = false" })
     public void addBehaviorDefaultHomePage() throws Exception {
         final URL url1 = URL_FIRST;
         final URL url2 = URL_SECOND;

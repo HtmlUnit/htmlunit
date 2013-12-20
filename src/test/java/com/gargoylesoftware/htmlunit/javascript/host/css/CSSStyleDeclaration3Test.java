@@ -191,9 +191,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "rgb(255, 0, 0)", "none", "repeat", "0% 0%", "scroll" },
-            IE = { "red", "none", "repeat", "undefined", "scroll" },
-            IE11 = { "red", "none", "repeat", "0% 0%", "scroll" })
+    @Alerts(DEFAULT = { "rgb(255, 0, 0)", "none", "repeat", "0% 0%", "scroll" },
+            IE8 = { "red", "none", "repeat", "undefined", "scroll" })
     @NotYetImplemented(IE8)
     public void backgroundCssColorRed() throws Exception {
         backgroundCss("red");
@@ -247,9 +246,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "transparent", "none", "repeat", "100% 100%", "scroll" },
-            IE = { "transparent", "none", "repeat", "undefined", "scroll" },
-            IE11 = { "transparent", "none", "repeat", "right bottom", "scroll" })
+    @Alerts(DEFAULT = { "transparent", "none", "repeat", "100% 100%", "scroll" },
+            IE8 = { "transparent", "none", "repeat", "undefined", "scroll" })
     @NotYetImplemented(IE8)
     public void backgroundCssPosition2() throws Exception {
         backgroundCss("bottom right");
@@ -259,9 +257,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "transparent", "none", "repeat", "0% 100%", "scroll" },
-            IE = { "transparent", "none", "repeat", "undefined", "scroll" },
-            IE11 = { "transparent", "none", "repeat", "left bottom", "scroll" })
+    @Alerts(DEFAULT = { "transparent", "none", "repeat", "0% 100%", "scroll" },
+            IE8 = { "transparent", "none", "repeat", "undefined", "scroll" })
     @NotYetImplemented(IE8)
     public void backgroundCssPosition3() throws Exception {
         backgroundCss("left bottom");
@@ -294,9 +291,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "rgb(255, 204, 221)", "none", "repeat", "0% 0%", "scroll" },
-            IE = { "#ffccdd", "none", "repeat", "undefined", "scroll" },
-            IE11 = { "#ffccdd", "none", "repeat", "0% 0%", "scroll" })
+    @Alerts(DEFAULT = { "rgb(255, 204, 221)", "none", "repeat", "0% 0%", "scroll" },
+            IE8 = { "#ffccdd", "none", "repeat", "undefined", "scroll" })
     @NotYetImplemented(IE8)
     public void backgroundCssColorHex() throws Exception {
         backgroundCss("#ffccdd");
@@ -306,9 +302,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "rgb(255, 0, 0)", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll" },
-            IE = { "red", "url(\"http://localhost:12346/myImage.png\")", "repeat", "undefined", "scroll" },
-            IE11 = { "red", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll" })
+    @Alerts(DEFAULT = { "rgb(255, 0, 0)", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll" },
+            IE8 = { "red", "url(\"http://localhost:12346/myImage.png\")", "repeat", "undefined", "scroll" })
     @NotYetImplemented
     public void backgroundCssMixed() throws Exception {
         backgroundCss("red url(\"myImage.png\")");
@@ -318,9 +313,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "rgb(255, 255, 255)", "none", "no-repeat", "20px 100px", "scroll" },
-            IE = { "#fff", "none", "no-repeat", "undefined", "scroll" },
-            IE11 = { "#fff", "none", "no-repeat", "20px 100px", "scroll" })
+    @Alerts(DEFAULT = { "rgb(255, 255, 255)", "none", "no-repeat", "20px 100px", "scroll" },
+            IE8 = { "#fff", "none", "no-repeat", "undefined", "scroll" })
     @NotYetImplemented(IE8)
     public void backgroundCssMixed2() throws Exception {
         backgroundCss("#fff no-repeat 20px 100px");
@@ -336,8 +330,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
             + "  <div id='tester'>hello</div>\n"
             + "  <script>\n"
             + "    var myDiv = document.getElementById('tester');\n"
-            + "    var myDivStyle = myDiv.currentStyle;\n"
-            + "    if(!myDivStyle) myDivStyle = window.getComputedStyle(myDiv, null);\n"
+            + "    var myDivStyle = "
+            + "window.getComputedStyle ? window.getComputedStyle(myDiv,null) : myDiv.currentStyle;\n"
             + "    alert(myDivStyle.backgroundColor);\n"
             + "    alert(myDivStyle.backgroundImage);\n"
             + "    alert(myDivStyle.backgroundRepeat);\n"
@@ -354,7 +348,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0px",
-            IE = "auto")
+            IE8 = "auto")
     public void widthAbsolute() throws Exception {
         final String html =
             "<html>\n"
@@ -365,8 +359,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
             + "  <div id='tester'></div>\n"
             + "  <script>\n"
             + "    var myDiv = document.getElementById('tester');\n"
-            + "    var myDivStyle = myDiv.currentStyle;\n"
-            + "    if(!myDivStyle) myDivStyle = window.getComputedStyle(myDiv, null);\n"
+            + "    var myDivStyle = "
+            + "window.getComputedStyle ? window.getComputedStyle(myDiv,null) : myDiv.currentStyle;\n"
             + "    alert(myDivStyle.width);\n"
             + "  </script>\n"
             + "</body></html>";

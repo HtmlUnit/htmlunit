@@ -663,7 +663,7 @@ public class Node extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536343.aspx">MSDN documentation</a>
      * @see #addEventListener(String, Function, boolean)
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
     public boolean attachEvent(final String type, final Function listener) {
         return getEventListenersContainer().addEventListener(StringUtils.substring(type, 2), listener, false);
     }
@@ -968,7 +968,7 @@ public class Node extends SimpleScriptable {
      * Represents the xml content of the node and its descendants.
      * @return the xml content of the node and its descendants
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
     public Object getXml() {
         final DomNode node = getDomNodeOrDie();
         if (node.getPage() instanceof XmlPage) {

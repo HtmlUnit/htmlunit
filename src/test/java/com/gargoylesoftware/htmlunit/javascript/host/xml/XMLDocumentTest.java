@@ -215,18 +215,20 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "true", "books", "books", "3", "#text", "0" },
             IE = { "true", "books", "books", "1", "book", "0" },
-            IE11 = { })
+            IE11 = "exception")
     public void load() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = " + callCreateXMLDocument() + ";\n"
             + "    doc.async = false;\n"
-            + "    alert(doc.load('" + URL_SECOND + "'));\n"
-            + "    alert(doc.documentElement.nodeName);\n"
-            + "    alert(doc.childNodes[0].nodeName);\n"
-            + "    alert(doc.childNodes[0].childNodes.length);\n"
-            + "    alert(doc.childNodes[0].childNodes[0].nodeName);\n"
-            + "    alert(doc.getElementsByTagName('books').item(0).attributes.length);\n"
+            + "    try {\n"
+            + "      alert(doc.load('" + URL_SECOND + "'));\n"
+            + "      alert(doc.documentElement.nodeName);\n"
+            + "      alert(doc.childNodes[0].nodeName);\n"
+            + "      alert(doc.childNodes[0].childNodes.length);\n"
+            + "      alert(doc.childNodes[0].childNodes[0].nodeName);\n"
+            + "      alert(doc.getElementsByTagName('books').item(0).attributes.length);\n"
+            + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
             + CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -250,19 +252,21 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "true", "books", "books", "3", "#text", "0" },
             IE = { "true", "books", "books", "1", "book", "0" },
-            IE11 = { })
+            IE11 = "exception")
     // TODO what is the difference to load()?
     public void load_relativeURL() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = " + callCreateXMLDocument() + ";\n"
             + "    doc.async = false;\n"
-            + "    alert(doc.load('" + URL_SECOND + "'));\n"
-            + "    alert(doc.documentElement.nodeName);\n"
-            + "    alert(doc.childNodes[0].nodeName);\n"
-            + "    alert(doc.childNodes[0].childNodes.length);\n"
-            + "    alert(doc.childNodes[0].childNodes[0].nodeName);\n"
-            + "    alert(doc.getElementsByTagName('books').item(0).attributes.length);\n"
+            + "    try {\n"
+            + "      alert(doc.load('" + URL_SECOND + "'));\n"
+            + "      alert(doc.documentElement.nodeName);\n"
+            + "      alert(doc.childNodes[0].nodeName);\n"
+            + "      alert(doc.childNodes[0].childNodes.length);\n"
+            + "      alert(doc.childNodes[0].childNodes[0].nodeName);\n"
+            + "      alert(doc.getElementsByTagName('books').item(0).attributes.length);\n"
+            + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
             + CREATE_XML_DOCUMENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -762,8 +766,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "1", "0", "1" },
-            IE11 = { "1", "0" })
+    @Alerts({ "0", "1", "0", "1" })
     public void getElementsByTagNameWithNamespace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -872,8 +875,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object HTMLDivElement]",
-            IE = "null")
+    @Alerts(DEFAULT = "[object HTMLDivElement]",
+            IE8 = "null")
     public void nodeFromID() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

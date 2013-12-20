@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SELECT_DISPLAY_INLINE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN;
 
 import java.util.ArrayList;
@@ -46,6 +46,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 public class HtmlSelect extends HtmlElement implements DisabledElement, SubmittableElement, FormFieldWithNameHistory {
 
@@ -630,7 +631,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        if (hasFeature(CSS_DISPLAY_DEFAULT)) {
+        if (hasFeature(CSS_SELECT_DISPLAY_INLINE)) {
             return DisplayStyle.INLINE;
         }
         return DisplayStyle.INLINE_BLOCK;

@@ -250,7 +250,7 @@ public class HTMLTableElement extends RowContainer {
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536687.aspx">
      * MSDN Documentation</a>
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
     public void refresh() {
         // Empty: this method only affects rendering, which we don't care about.
     }

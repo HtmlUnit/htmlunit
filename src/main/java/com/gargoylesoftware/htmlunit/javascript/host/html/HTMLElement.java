@@ -96,6 +96,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlFigure;
+import com.gargoylesoftware.htmlunit.html.HtmlFigureCaption;
 import com.gargoylesoftware.htmlunit.html.HtmlFooter;
 import com.gargoylesoftware.htmlunit.html.HtmlFrameSet;
 import com.gargoylesoftware.htmlunit.html.HtmlHeader;
@@ -164,6 +165,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
     @JsxClass(domClass = HtmlAside.class),
     @JsxClass(domClass = HtmlElement.class),
     @JsxClass(domClass = HtmlFigure.class),
+    @JsxClass(domClass = HtmlFigureCaption.class),
     @JsxClass(domClass = HtmlFooter.class),
     @JsxClass(domClass = HtmlHeader.class),
     @JsxClass(domClass = HtmlMark.class),
@@ -407,7 +409,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns the value of the "all" property.
      * @return the value of the "all" property
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
     public HTMLCollection getAll() {
         if (all_ == null) {
             all_ = new HTMLCollection(getDomNodeOrDie(), false, "HTMLElement.all") {
@@ -508,7 +510,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns the document.
      * @return the document
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
     public DocumentProxy getDocument() {
         return getWindow().getDocument_js();
     }
@@ -1303,7 +1305,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param behavior the URL of the behavior to add, or a default behavior name
      * @return an identifier that can be user later to detach the behavior from the element
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
     public int addBehavior(final String behavior) {
         // if behavior already defined, then nothing to do
         if (behaviors_.contains(behavior)) {
@@ -2226,7 +2228,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Simulates a click on a scrollbar component (IE only).
      * @param scrollAction the type of scroll action to simulate
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
     public void doScroll(final String scrollAction) {
         if (((HtmlPage) getDomNodeOrDie().getPage()).isBeingParsed()) {
             throw Context.reportRuntimeError("The data necessary to complete this operation is not yet available.");
@@ -2849,7 +2851,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns the "dataset" attribute.
      * @return the "dataset" attribute
      */
-    @JsxGetter({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
+    @JsxGetter({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME),
+        @WebBrowser(value = IE, minVersion = 11) })
     public DOMStringMap getDataset() {
         return new DOMStringMap(this);
     }

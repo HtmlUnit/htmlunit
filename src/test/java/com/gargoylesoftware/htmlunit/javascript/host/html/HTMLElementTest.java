@@ -3390,6 +3390,15 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("<figcaption></figcaption>")
+    public void outerHTML_figcaption() throws Exception {
+        loadPageWithAlerts2(outerHTML("figcaption"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("<figure></figure>")
     public void outerHTML_figure() throws Exception {
         loadPageWithAlerts2(outerHTML("figure"));
@@ -3598,8 +3607,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<image></image>",
-            IE11 = "<img>",
-            IE8 = "<IMG>")
+            IE8 = "<IMG>",
+            IE11 = "<img>")
     @NotYetImplemented(IE8)
     public void outerHTML_image() throws Exception {
         loadPageWithAlerts2(outerHTML("image"));

@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_48;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_50;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_COMMENT_IS_ELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_IDENTICAL_IDS;
@@ -54,6 +54,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @JsxClass
 public class HTMLCollection extends NodeList {
@@ -254,7 +255,7 @@ public class HTMLCollection extends NodeList {
      */
     private Object nullIfNotFound(final Object object) {
         if (object == NOT_FOUND) {
-            if (getBrowserVersion().hasFeature(GENERATED_48)) {
+            if (getBrowserVersion().hasFeature(HTMLCOLLECTION_NULL_IF_NOT_FOUND)) {
                 return null;
             }
             return Context.getUndefinedValue();

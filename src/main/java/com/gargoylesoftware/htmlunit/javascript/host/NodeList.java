@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_48;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_49;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_50;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_COMMENT_IS_ELEMENT;
@@ -60,6 +60,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @JsxClass
 public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.NodeList {
@@ -372,7 +373,7 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
      */
     private Object nullIfNotFound(final Object object) {
         if (object == NOT_FOUND) {
-            if (getBrowserVersion().hasFeature(GENERATED_48)) {
+            if (getBrowserVersion().hasFeature(HTMLCOLLECTION_NULL_IF_NOT_FOUND)) {
                 return null;
             }
             return Context.getUndefinedValue();

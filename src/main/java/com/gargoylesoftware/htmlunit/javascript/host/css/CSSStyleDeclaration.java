@@ -24,6 +24,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_UN
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPACITY_ACCEPTS_ARBITRARY_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_GET_ATTRIBUTE_SUPPORTS_FLAGS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_REMOVE_ATTRIBUTE_SUPPORTS_FLAGS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_SET_ATTRIBUTE_SUPPORTS_FLAGS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_UNSUPPORTED_PROPERTY_GETTER;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -942,7 +944,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the object's behavior (IE only).
      * @return the object's behavior
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 10))
     public String getBehavior() {
         return getStyleAttribute(BEHAVIOR);
     }
@@ -951,7 +953,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the object's behavior (IE only).
      * @param behavior the new behavior
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(@WebBrowser(value = IE, maxVersion = 10))
     public void setBehavior(final String behavior) {
         setStyleAttribute(BEHAVIOR, behavior);
 
@@ -2896,6 +2898,24 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     }
 
     /**
+     * Gets the "pixelHeight" style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public int getPixelHeight() {
+        return pixelValue(getHeight());
+    }
+
+    /**
+     * Sets the "pixelHeight" style attribute.
+     * @param pixelHeight the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setPixelHeight(final int pixelHeight) {
+        setHeight(pixelHeight + "px");
+    }
+
+    /**
      * Gets the "pixelLeft" style attribute.
      * @return the style attribute
      */
@@ -2947,6 +2967,24 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     @JsxSetter(@WebBrowser(IE))
     public void setPixelTop(final int pixelTop) {
         setTop(pixelTop + "px");
+    }
+
+    /**
+     * Gets the "pixelWidth" style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public int getPixelWidth() {
+        return pixelValue(getWidth());
+    }
+
+    /**
+     * Sets the "pixelWidth" style attribute.
+     * @param pixelWidth the new attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setPixelWidth(final int pixelWidth) {
+        setWidth(pixelWidth + "px");
     }
 
     /**
@@ -4071,12 +4109,14 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxFunction(@WebBrowser(IE))
     public void setAttribute(final String name, final String value, final Object flag) {
-        int flagInt;
-        if (flag == Undefined.instance) {
-            flagInt = 1;
-        }
-        else {
-            flagInt = (int) Context.toNumber(flag);
+        int flagInt = 0;
+        if (getBrowserVersion().hasFeature(JS_STYLE_SET_ATTRIBUTE_SUPPORTS_FLAGS)) {
+            if (flag == Undefined.instance) {
+                flagInt = 1;
+            }
+            else {
+                flagInt = (int) Context.toNumber(flag);
+            }
         }
         if (flagInt == 0) {
             // Case-insensitive.
@@ -4103,12 +4143,14 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxFunction(@WebBrowser(IE))
     public boolean removeAttribute(final String name, final Object flag) {
-        int flagInt;
-        if (flag == Undefined.instance) {
-            flagInt = 1;
-        }
-        else {
-            flagInt = (int) Context.toNumber(flag);
+        int flagInt = 0;
+        if (getBrowserVersion().hasFeature(JS_STYLE_REMOVE_ATTRIBUTE_SUPPORTS_FLAGS)) {
+            if (flag == Undefined.instance) {
+                flagInt = 1;
+            }
+            else {
+                flagInt = (int) Context.toNumber(flag);
+            }
         }
         if (flagInt == 0) {
             // Case-insensitive.

@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION;
+import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.callLoadXMLDocumentFromFile;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +36,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLCollection2Test extends SimpleWebTestCase {
@@ -41,21 +45,14 @@ public class HTMLCollection2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "1" })
+    @Alerts("1")
     public void testChildNodes() throws Exception {
         final String firstContent = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
-            + "    doc.async = false;\n"
-            + "    alert(doc.load('" + URL_SECOND + "'));\n"
+            + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "    alert(doc.documentElement.childNodes.length);\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 

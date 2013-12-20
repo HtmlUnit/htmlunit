@@ -43,6 +43,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Thomas Robbs
  * @author David K. Taylor
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLFrameElementTest extends SimpleWebTestCase {
@@ -220,7 +221,9 @@ public class HTMLFrameElementTest extends SimpleWebTestCase {
      */
     @Test
     @NotYetImplemented(FF)
-    @Alerts(IE = "[object]", FF = "undefined")
+    @Alerts(FF = "undefined",
+            IE = "[object]",
+            IE11 = "[object Window]")
     public void frames() throws Exception {
         final String mainHtml =
             "<html><head><title>frames</title></head>\n"

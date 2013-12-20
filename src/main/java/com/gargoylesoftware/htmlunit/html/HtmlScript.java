@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SCRIPT_DISPLAY_INLINE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONERROR_EXTERNAL_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_EXTERNAL_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONREADY_STATE_CHANGE;
@@ -72,6 +72,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Sudhan Moghe
  * @author Ronald Brill
  * @author Daniel Wagner-Hall
+ * @author Frank Danek
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-81598695">DOM Level 1</a>
  * @see <a href="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-81598695">DOM Level 2</a>
  */
@@ -619,9 +620,9 @@ public class HtmlScript extends HtmlElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        if (hasFeature(CSS_DISPLAY_DEFAULT)) {
-            return DisplayStyle.NONE;
+        if (hasFeature(CSS_SCRIPT_DISPLAY_INLINE)) {
+            return DisplayStyle.INLINE;
         }
-        return DisplayStyle.INLINE;
+        return DisplayStyle.NONE;
     }
 }

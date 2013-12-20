@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOCTYPE_IS_COMMENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_ATTRIBUTE_LOWER_CASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_CDATA_AS_COMMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCONDITIONAL_COMMENTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIFRAME_IGNORE_SELFCLOSING;
@@ -446,6 +447,9 @@ public final class HTMLParser {
             try {
                 setFeature(FEATURE_AUGMENTATIONS, true);
                 setProperty("http://cyberneko.org/html/properties/names/elems", "default");
+                if (!webClient.getBrowserVersion().hasFeature(HTML_ATTRIBUTE_LOWER_CASE)) {
+                    setProperty("http://cyberneko.org/html/properties/names/attrs", "no-change");
+                }
                 setFeature("http://cyberneko.org/html/features/report-errors", reportErrors);
                 setFeature(FEATURE_PARSE_NOSCRIPT, !webClient.getOptions().isJavaScriptEnabled());
                 setFeature(HTMLScanner.ALLOW_SELFCLOSING_IFRAME,
