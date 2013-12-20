@@ -170,6 +170,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLObjectElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptGroupElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionsCollection;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOutputElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLParagraphElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLParamElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLPhraseElement;
@@ -313,7 +314,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLNoShowElement.class,
         HTMLNextIdElement.class,
         HTMLOListElement.class, HTMLObjectElement.class, HTMLOptGroupElement.class,
-        HTMLOptionElement.class, HTMLOptionsCollection.class, HTMLParagraphElement.class, HTMLParamElement.class,
+        HTMLOptionElement.class, HTMLOptionsCollection.class, HTMLOutputElement.class,
+        HTMLParagraphElement.class, HTMLParamElement.class,
         HTMLPhraseElement.class,
         HTMLPreElement.class, HTMLProgressElement.class, HTMLScriptElement.class,
         HTMLSelectElement.class, HTMLSourceElement.class, HTMLSpanElement.class,

@@ -1154,6 +1154,17 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
+    @NotYetImplemented(IE8)
+    public void childNodes_output() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("output"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
             IE8 = { "0", "0", "0", "0", "0", "0" })
     public void childNodes_p() throws Exception {

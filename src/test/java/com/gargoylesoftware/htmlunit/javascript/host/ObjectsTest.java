@@ -99,8 +99,8 @@ public class ObjectsTest extends SimpleWebTestCase {
 //            list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_8});
 //            list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_9});
 //            list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_11});
-//            list.add(new Object[] {name, BrowserVersion.FIREFOX_17});
-//            list.add(new Object[] {name, BrowserVersion.FIREFOX_24});
+            list.add(new Object[] {name, BrowserVersion.FIREFOX_17});
+            list.add(new Object[] {name, BrowserVersion.FIREFOX_24});
 //            list.add(new Object[] {name, BrowserVersion.CHROME});
         }
         return list;

@@ -83,7 +83,8 @@ class DefaultElementFactory implements ElementFactory {
             HtmlNav.TAG_NAME, HtmlNextId.TAG_NAME,
             HtmlNoBreak.TAG_NAME, HtmlNoEmbed.TAG_NAME, HtmlNoFrames.TAG_NAME,
             HtmlNoScript.TAG_NAME, HtmlObject.TAG_NAME, HtmlOrderedList.TAG_NAME,
-            HtmlOptionGroup.TAG_NAME, HtmlOption.TAG_NAME, HtmlParagraph.TAG_NAME,
+            HtmlOptionGroup.TAG_NAME, HtmlOption.TAG_NAME, HtmlOutput.TAG_NAME,
+            HtmlParagraph.TAG_NAME,
             HtmlParameter.TAG_NAME, HtmlPlainText.TAG_NAME, HtmlPreformattedText.TAG_NAME,
             HtmlProgress.TAG_NAME,
             HtmlRp.TAG_NAME, HtmlRt.TAG_NAME, HtmlRuby.TAG_NAME,
@@ -468,6 +469,14 @@ class DefaultElementFactory implements ElementFactory {
         }
         else if (tagName.equals(HtmlOrderedList.TAG_NAME)) {
             element = new HtmlOrderedList(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equals(HtmlOutput.TAG_NAME)) {
+            if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
+                element = new HtmlOutput(namespaceURI, qualifiedName, page, attributeMap);
+            }
+            else {
+                return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
+            }
         }
         else if (tagName.equals(HtmlParagraph.TAG_NAME)) {
             element = new HtmlParagraph(namespaceURI, qualifiedName, page, attributeMap);

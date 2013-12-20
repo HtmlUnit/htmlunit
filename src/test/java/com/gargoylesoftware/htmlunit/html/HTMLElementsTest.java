@@ -862,6 +862,17 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void elementClosesItself_output() throws Exception {
+        loadPageWithAlerts2(elementClosesItself("output"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("0")
     public void elementClosesItself_p() throws Exception {
         loadPageWithAlerts2(elementClosesItself("p"));

@@ -3877,6 +3877,15 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("<output></output>")
+    public void outerHTML_output() throws Exception {
+        loadPageWithAlerts2(outerHTML("output"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "<p></p>",
             IE8 = "<P></P>")
     public void outerHTML_p() throws Exception {
