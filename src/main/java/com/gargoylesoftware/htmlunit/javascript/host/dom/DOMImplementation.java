@@ -15,8 +15,15 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CORE_1;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CSS2_1;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CSS2_2;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CSS2_3;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CSS3_1;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CSS3_2;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CSS3_3;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CSS_1;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CSS_2;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CSS_3;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_HTML_3;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_MUTATIONEVENTS_2;
@@ -69,7 +76,7 @@ public class DOMImplementation extends SimpleScriptable {
                 if ("1.0".equals(version)) {
                     return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CORE_1);
                 }
-                else if ("2.0".equals(version)) {
+                if ("2.0".equals(version)) {
                     return true;
                 }
             }
@@ -77,7 +84,7 @@ public class DOMImplementation extends SimpleScriptable {
                 if ("1.0".equals(version) || "2.0".equals(version)) {
                     return true;
                 }
-                else if ("3.0".equals(version)) {
+                if ("3.0".equals(version)) {
                     return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_HTML_3);
                 }
             }
@@ -85,7 +92,7 @@ public class DOMImplementation extends SimpleScriptable {
                 if ("1.0".equals(version)) {
                     return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_XHTML_1);
                 }
-                else if ("2.0".equals(version)) {
+                if ("2.0".equals(version)) {
                     return true;
                 }
             }
@@ -93,7 +100,7 @@ public class DOMImplementation extends SimpleScriptable {
                 if ("1.0".equals(version) || "2.0".equals(version)) {
                     return true;
                 }
-                else if ("3.0".equals(version)) {
+                if ("3.0".equals(version)) {
                     return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_XML_3);
                 }
             }
@@ -103,17 +110,44 @@ public class DOMImplementation extends SimpleScriptable {
             else if ("StyleSheets".equals(feature) && "2.0".equals(version)) {
                 return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_STYLESHEETS_2);
             }
-            else if ("CSS".equals(feature) && "2.0".equals(version)) {
-                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS_2);
+            else if ("CSS".equals(feature)) {
+                if ("1.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS_1);
+                }
+                if ("2.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS_2);
+                }
+                if ("3.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS_3);
+                }
             }
-            else if ("CSS2".equals(feature) && "2.0".equals(version)) {
-                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS2_2);
+            else if ("CSS2".equals(feature)) {
+                if ("1.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS2_1);
+                }
+                if ("2.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS2_2);
+                }
+                if ("3.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS2_3);
+                }
+            }
+            else if ("CSS3".equals(feature)) {
+                if ("1.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS3_1);
+                }
+                if ("2.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS3_2);
+                }
+                if ("3.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CSS3_3);
+                }
             }
             else if ("Events".equals(feature)) {
                 if ("2.0".equals(version)) {
                     return true;
                 }
-                else if ("3.0".equals(version)) {
+                if ("3.0".equals(version)) {
                     return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3);
                 }
             }
@@ -121,7 +155,7 @@ public class DOMImplementation extends SimpleScriptable {
                 if ("2.0".equals(version)) {
                     return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_UIEVENTS_2);
                 }
-                else if ("3.0".equals(version)) {
+                if ("3.0".equals(version)) {
                     return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3);
                 }
             }
@@ -129,7 +163,7 @@ public class DOMImplementation extends SimpleScriptable {
                 if ("2.0".equals(version)) {
                     return true;
                 }
-                else if ("3.0".equals(version)) {
+                if ("3.0".equals(version)) {
                     return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3);
                 }
             }
@@ -137,7 +171,7 @@ public class DOMImplementation extends SimpleScriptable {
                 if ("2.0".equals(version)) {
                     return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_MUTATIONEVENTS_2);
                 }
-                else if ("3.0".equals(version)) {
+                if ("3.0".equals(version)) {
                     return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3);
                 }
             }
@@ -145,7 +179,7 @@ public class DOMImplementation extends SimpleScriptable {
                 if ("2.0".equals(version)) {
                     return true;
                 }
-                else if ("3.0".equals(version)) {
+                if ("3.0".equals(version)) {
                     return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3);
                 }
             }

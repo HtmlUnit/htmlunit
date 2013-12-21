@@ -792,9 +792,33 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_DOMIMPLEMENTATION_FEATURE_CORE_1,
 
+    /** If document.implementation.hasFeature() supports 'CSS2 1.0'. */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 24))
+    JS_DOMIMPLEMENTATION_FEATURE_CSS2_1,
+
     /** If document.implementation.hasFeature() supports 'CSS2 2.0'. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     JS_DOMIMPLEMENTATION_FEATURE_CSS2_2,
+
+    /** If document.implementation.hasFeature() supports 'CSS2 3.0'. */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 24))
+    JS_DOMIMPLEMENTATION_FEATURE_CSS2_3,
+
+    /** If document.implementation.hasFeature() supports 'CSS3 1.0'. */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 24))
+    JS_DOMIMPLEMENTATION_FEATURE_CSS3_1,
+
+    /** If document.implementation.hasFeature() supports 'CSS3 2.0'. */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 24))
+    JS_DOMIMPLEMENTATION_FEATURE_CSS3_2,
+
+    /** If document.implementation.hasFeature() supports 'CSS3 3.0'. */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 24))
+    JS_DOMIMPLEMENTATION_FEATURE_CSS3_3,
+
+    /** If document.implementation.hasFeature() supports 'CSS 1.0'. */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 24))
+    JS_DOMIMPLEMENTATION_FEATURE_CSS_1,
 
     /** If document.implementation.hasFeature() supports 'CSS 2.0'. */
     @BrowserFeature(@WebBrowser(FF))
