@@ -3,16 +3,38 @@
   function init() {
     //http://msdn.microsoft.com/en-us/library/ms533054.aspx
     //http://www.w3schools.com/tags/html5.asp
-    var names = ["a", "abbr", "acronym", "address", "applet", "area", "article", "aside", "attribute", "audio", "b", "base", "baseFont", "bdo", "bgSound", "big", "blink", "blockQuote", "body", "br", "button", "canvas", "caption", "center", "cite", "clientInformation", "clipboardData", "code", "col", "colGroup", "command", "comment", "currentStyle", "custom", "datagrid", "datalist", "datatemplate", "dataTransfer", "dd", "defaults", "del", "details", "dfn", "dialog", "dir", "div", "dl", "document", "DocumentCompatibleInfo", "dt", "em", "embed", "event", "event-source", "external", "fieldSet", "figure", "font", "footer", "form", "frame", "frameSet", "h1", "head", "header", "history", "hn", "hr", "html", "i", "iframe", "ilayer", "img", "implementation", "IMPORT", "input", "ins", "isIndex", "kbd", "label", "layer", "legend", "li", "link", "listing", "location", "map", "mark", "marquee", "menu", "meta", "meter", "multicol", "namespace", "nav", "navigator", "nest", "nextID", "noBR", "noEmbed", "noFrames", "noLayer", "noScript", "object", "ol", "optGroup", "option", "output", "p", "page", "param", "plainText", "popup", "pre", "progress", "q", "rb", "rbc", "rp", "rt", "rtc", "ruby", "rule", "runtimeStyle", "s", "samp", "screen", "script", "section", "select", "selection", "small", "source", "spacer", "span", "Storage", "strike", "strong", "style", "styleSheet", "sub", "sup", "table", "tBody", "td", "textArea", "TextNode", "TextRange", "TextRectangle", "tFoot", "th", "tHead", "time", "title", "tr", "tt", "u", "ul", "userProfile", "var", "video", "wbr", "window", "XDomainRequest", "xml", "XMLHttpRequest", "xmp"];
-	             
-	for (var n in names) {
-	  try {
+    var names = [
+        "a", "abbr", "acronym", "address", "applet", "area", "article", "aside", "attribute", "audio",
+        "b", "base", "baseFont", "bdo", "bgSound", "big", "blink", "blockQuote", "body", "br", "button",
+        "canvas", "caption", "center", "cite", "clientInformation", "clipboardData", "code", "col", "colGroup", "command", "comment", "currentStyle", "custom",
+        "datagrid", "datalist", "datatemplate", "dataTransfer", "dd", "defaults", "del", "details", "dfn", "dialog", "dir", "div", "dl", "document", "DocumentCompatibleInfo", "dt",
+        "em", "embed", "event", "event-source", "external",
+        "fieldSet", "figure", "font", "footer", "form", "frame", "frameSet",
+        "h1", "h2", "h3", "h4", "h5", "h6", "head", "header", "history", "hn", "hr", "html",
+        "i", "iframe", "ilayer", "img", "implementation", "IMPORT", "input", "ins", "isIndex",
+        "kbd", "keygen",
+        "label", "layer", "legend", "li", "link", "listing", "location",
+        "map", "mark", "marquee", "menu", "meta", "meter", "multicol", 
+        "namespace", "nav", "navigator", "nest", "nextID", "noBR", "noEmbed", "noFrames", "noLayer", "noScript",
+        "object", "ol", "optGroup", "option", "output",
+        "p", "page", "param", "plainText", "popup", "pre", "progress",
+        "q",
+        "rb", "rbc", "rp", "rt", "rtc", "ruby", "rule", "runtimeStyle",
+        "s", "samp", "screen", "script", "section", "select", "selection", "small", "source", "spacer", "span", "Storage", "strike", "strong", "style", "styleSheet", "sub", "sup",
+        "table", "tBody", "td", "textArea", "TextNode", "TextRange", "TextRectangle", "tFoot", "th", "tHead", "time", "title", "tr", "tt",
+        "u", "ul", "userProfile",
+        "var", "video",
+        "wbr", "window",
+        "XDomainRequest", "xml", "XMLHttpRequest", "xmp"
+        ];
+
+    for (var n in names) {
+      try {
         document.getElementById('myTextarea').value += names[n] + ':' + document.createElement(names[n]) + '\n';
-	  }
-	  catch(e) {
+      } catch(e) {
         document.getElementById('myTextarea').value += names[n] + ':' + "ERROR" + '\n';
-	  }
-	}
+      }
+    }
   }
 </script></head><body onload='init()'>
 <textarea id='myTextarea' rows='35' cols='150'></textarea>
