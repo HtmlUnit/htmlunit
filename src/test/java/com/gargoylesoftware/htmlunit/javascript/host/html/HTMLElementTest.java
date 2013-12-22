@@ -3669,6 +3669,16 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "<keygen>",
+            IE8 = "<keygen></keygen>")
+    public void outerHTML_keygen() throws Exception {
+        loadPageWithAlerts2(outerHTML("keygen"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "<label></label>",
             IE8 = "<LABEL></LABEL>")
     public void outerHTML_label() throws Exception {
@@ -4170,6 +4180,15 @@ public class HTMLElementTest extends WebDriverTestCase {
             IE8 = "<TT></TT>")
     public void outerHTML_tt() throws Exception {
         loadPageWithAlerts2(outerHTML("tt"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<time></time>")
+    public void outerHTML_time() throws Exception {
+        loadPageWithAlerts2(outerHTML("time"));
     }
 
     /**

@@ -151,6 +151,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInlineQuotationElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIsIndexElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLKeygenElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLIElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLabelElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLegendElement;
@@ -190,6 +191,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableRowElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableSectionElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTimeElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTitleElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUListElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
@@ -294,7 +296,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         FormChild.class, FormField.class, Geolocation.class,
         HashChangeEvent.class, History.class,
         HTMLAnchorElement.class, HTMLAppletElement.class, HTMLAreaElement.class, HTMLAudioElement.class,
-        HTMLBRElement.class, HTMLBaseElement.class, HTMLBaseFontElement.class, HTMLBGSoundElement.class,
+        HTMLBGSoundElement.class,
+        HTMLBRElement.class, HTMLBaseElement.class, HTMLBaseFontElement.class,
         HTMLBlockElement.class,
         HTMLBlockQuoteElement.class, HTMLBodyElement.class, HTMLButtonElement.class, HTMLCanvasElement.class,
         HTMLCollection.class, HTMLCollectionTags.class,
@@ -306,7 +309,9 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLFontElement.class, HTMLFormElement.class, HTMLFrameElement.class, HTMLFrameSetElement.class,
         HTMLHRElement.class, HTMLHeadElement.class, HTMLHeadingElement.class, HTMLHtmlElement.class,
         HTMLIFrameElement.class, HTMLImageElement.class, HTMLInlineQuotationElement.class, HTMLInputElement.class,
-        HTMLIsIndexElement.class, HTMLLIElement.class, HTMLLabelElement.class,
+        HTMLIsIndexElement.class,
+        HTMLKeygenElement.class,
+        HTMLLIElement.class, HTMLLabelElement.class,
         HTMLLegendElement.class, HTMLLinkElement.class, HTMLListElement.class, HTMLMapElement.class,
         HTMLMarqueeElement.class,
         HTMLMediaElement.class, HTMLMenuElement.class, HTMLMetaElement.class, HTMLMeterElement.class,
@@ -321,7 +326,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLSelectElement.class, HTMLSourceElement.class, HTMLSpanElement.class,
         HTMLStyleElement.class, HTMLTableCaptionElement.class, HTMLTableCellElement.class, HTMLTableColElement.class,
         HTMLTableComponent.class, HTMLTableElement.class, HTMLTableRowElement.class, HTMLTableSectionElement.class,
-        HTMLTextElement.class, HTMLTextAreaElement.class, HTMLTitleElement.class,
+        HTMLTextElement.class, HTMLTextAreaElement.class, HTMLTimeElement.class, HTMLTitleElement.class,
         HTMLUListElement.class, HTMLUnknownElement.class,
         HTMLWBRElement.class,
         HTMLVideoElement.class,

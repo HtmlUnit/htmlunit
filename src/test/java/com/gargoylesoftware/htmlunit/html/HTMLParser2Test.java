@@ -935,6 +935,17 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
+    @NotYetImplemented
+    public void childNodes_keygen() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("keygen"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
             IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_label() throws Exception {
@@ -1531,6 +1542,17 @@ public class HTMLParser2Test extends WebDriverTestCase {
             IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_tt() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("tt"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE8 = { "2", "2", "2", "4", "4", "3" })
+    @NotYetImplemented(IE8)
+    public void childNodes_time() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("time"));
     }
 
     /**

@@ -76,7 +76,9 @@ class DefaultElementFactory implements ElementFactory {
             HtmlHorizontalRule.TAG_NAME, HtmlHtml.TAG_NAME, HtmlInlineFrame.TAG_NAME,
             HtmlInlineQuotation.TAG_NAME,
             HtmlImage.TAG_NAME, HtmlImage.TAG_NAME2, HtmlInsertedText.TAG_NAME, HtmlIsIndex.TAG_NAME,
-            HtmlItalic.TAG_NAME, HtmlKeyboard.TAG_NAME, HtmlLabel.TAG_NAME,
+            HtmlItalic.TAG_NAME,
+            HtmlKeyboard.TAG_NAME, HtmlKeygen.TAG_NAME,
+            HtmlLabel.TAG_NAME,
             HtmlLegend.TAG_NAME, HtmlListing.TAG_NAME, HtmlListItem.TAG_NAME,
             HtmlLink.TAG_NAME, HtmlMap.TAG_NAME, HtmlMark.TAG_NAME, HtmlMarquee.TAG_NAME,
             HtmlMenu.TAG_NAME, HtmlMeta.TAG_NAME, HtmlMeter.TAG_NAME, HtmlMultiColumn.TAG_NAME,
@@ -96,7 +98,7 @@ class DefaultElementFactory implements ElementFactory {
             HtmlTable.TAG_NAME, HtmlTableColumn.TAG_NAME, HtmlTableColumnGroup.TAG_NAME,
             HtmlTableBody.TAG_NAME, HtmlTableDataCell.TAG_NAME, HtmlTableHeaderCell.TAG_NAME,
             HtmlTableRow.TAG_NAME, HtmlTextArea.TAG_NAME, HtmlTableFooter.TAG_NAME,
-            HtmlTableHeader.TAG_NAME, HtmlTeletype.TAG_NAME, HtmlTitle.TAG_NAME,
+            HtmlTableHeader.TAG_NAME, HtmlTeletype.TAG_NAME, HtmlTime.TAG_NAME, HtmlTitle.TAG_NAME,
             HtmlUnderlined.TAG_NAME, HtmlUnorderedList.TAG_NAME,
             HtmlVariable.TAG_NAME, HtmlVideo.TAG_NAME,
             HtmlWordBreak.TAG_NAME, HtmlExample.TAG_NAME
@@ -281,6 +283,9 @@ class DefaultElementFactory implements ElementFactory {
         else if (tagName.equals(HtmlDeletedText.TAG_NAME)) {
             element = new HtmlDeletedText(namespaceURI, qualifiedName, page, attributeMap);
         }
+        else if (tagName.equals(HtmlDirectory.TAG_NAME)) {
+            element = new HtmlDirectory(namespaceURI, qualifiedName, page, attributeMap);
+        }
         else if (tagName.equals(HtmlDivision.TAG_NAME)) {
             element = new HtmlDivision(namespaceURI, qualifiedName, page, attributeMap);
         }
@@ -396,6 +401,14 @@ class DefaultElementFactory implements ElementFactory {
         }
         else if (tagName.equals(HtmlKeyboard.TAG_NAME)) {
             element = new HtmlKeyboard(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equals(HtmlKeygen.TAG_NAME)) {
+            if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
+                element = new HtmlKeygen(namespaceURI, qualifiedName, page, attributeMap);
+            }
+            else {
+                return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
+            }
         }
         else if (tagName.equals(HtmlLabel.TAG_NAME)) {
             element = new HtmlLabel(namespaceURI, qualifiedName, page, attributeMap);
@@ -607,11 +620,16 @@ class DefaultElementFactory implements ElementFactory {
         else if (tagName.equals(HtmlTextArea.TAG_NAME)) {
             element = new HtmlTextArea(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equals(HtmlDirectory.TAG_NAME)) {
-            element = new HtmlDirectory(namespaceURI, qualifiedName, page, attributeMap);
-        }
         else if (tagName.equals(HtmlTitle.TAG_NAME)) {
             element = new HtmlTitle(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equals(HtmlTime.TAG_NAME)) {
+            if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
+                element = new HtmlTime(namespaceURI, qualifiedName, page, attributeMap);
+            }
+            else {
+                return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
+            }
         }
         else if (tagName.equals(HtmlUnderlined.TAG_NAME)) {
             element = new HtmlUnderlined(namespaceURI, qualifiedName, page, attributeMap);

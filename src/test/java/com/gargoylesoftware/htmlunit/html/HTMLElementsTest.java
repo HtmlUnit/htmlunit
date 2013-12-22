@@ -652,6 +652,17 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void elementClosesItself_keygen() throws Exception {
+        loadPageWithAlerts2(elementClosesItself("keygen"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("1")
     public void elementClosesItself_label() throws Exception {
         loadPageWithAlerts2(elementClosesItself("label"));
@@ -1210,6 +1221,17 @@ public class HTMLElementsTest extends WebDriverTestCase {
     @Alerts("1")
     public void elementClosesItself_tt() throws Exception {
         loadPageWithAlerts2(elementClosesItself("tt"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void elementClosesItself_time() throws Exception {
+        loadPageWithAlerts2(elementClosesItself("time"));
     }
 
     /**

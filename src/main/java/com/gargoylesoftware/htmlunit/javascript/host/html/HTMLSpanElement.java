@@ -35,7 +35,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  */
 @JsxClasses({
-    @JsxClass(domClass = HtmlMultiColumn.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) }),
+    @JsxClass(domClass = HtmlMultiColumn.class,
+            browsers = { @WebBrowser(value = FF, maxVersion = 17), @WebBrowser(CHROME) }),
     @JsxClass(domClass = HtmlSpan.class)
 })
 public class HTMLSpanElement extends HTMLElement {
