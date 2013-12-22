@@ -3,53 +3,60 @@
   function init(event) {
     var xmlDocument = createXmlDocument();
     var element = xmlDocument.createElement('wakwak');
-	var unknown = document.createElement('harhar');
+    var unknown = document.createElement('harhar');
     var div = document.createElement('div');
-	writeAll('Dom.text', document.createTextNode('some text'), unknown);
-	writeAll('Dom.attr', document.createAttribute('some_attrib'), unknown);
-	writeAll('Dom.comment', document.createComment('come_comment'), unknown);
-	writeAll('HTMLUnknownElement', unknown, div);
-	writeAll('HTMLElement', unknown, element);
-	writeAll('HTMLAnchorElement', document.createElement('a'), unknown);
-	writeAll('ABBR', document.createElement('abbr'), unknown);//has properties in IE, FF evaluates it to HTMLSpanElement, no 'abbr' object
-	writeAll('ACRONYM', document.createElement('acronym'), unknown);//same as 'abbr'
-	writeAll('ADDRESS', document.createElement('address'), unknown);//same as 'abbr'
-	writeAll('HTMLAppletElement', document.createElement('applet'), unknown);
-	writeAll('HTMLAreaElement', document.createElement('area'), unknown);
-	writeAll('B', document.createElement('b'), unknown);//same as 'abbr'
-	writeAll('HTMLBaseElement', document.createElement('base'), unknown);
-	writeAll('HTMLBaseFontElement', document.createElement('basefont'), unknown);
-	writeAll('BDO', document.createElement('bdo'), unknown);//same as 'abbr'
-	writeAll('BGSOUND', document.createElement('bgsound'), unknown);//same as 'abbr'
-	writeAll('BIG', document.createElement('big'), unknown);//same as 'abbr'
-	writeAll('BLINK', document.createElement('blink'), unknown);//same as 'abbr'
+    writeAll('Dom.text', document.createTextNode('some text'), unknown);
+    writeAll('Dom.attr', document.createAttribute('some_attrib'), unknown);
+    writeAll('Dom.comment', document.createComment('come_comment'), unknown);
+    writeAll('HTMLUnknownElement', unknown, div);
+    writeAll('HTMLElement', unknown, element);
+
+    writeAll('HTMLAnchorElement', document.createElement('a'), unknown);
+    writeAll('ABBR', document.createElement('abbr'), unknown);//has properties in IE, FF evaluates it to HTMLSpanElement, no 'abbr' object
+    writeAll('ACRONYM', document.createElement('acronym'), unknown);//same as 'abbr'
+    writeAll('ADDRESS', document.createElement('address'), unknown);//same as 'abbr'
+    writeAll('HTMLAppletElement', document.createElement('applet'), unknown);
+    writeAll('HTMLAreaElement', document.createElement('area'), unknown);
+    writeAll('HTMLArticleElement', document.createElement('article'), unknown);
+    writeAll('HTMLAsideElement', document.createElement('aside'), unknown);
+    writeAll('HTMLAttributeElement', document.createElement('attribute'), unknown);
+    writeAll('HTMLAudioElement', document.createElement('audio'), unknown);
+
+    writeAll('B', document.createElement('b'), unknown);//same as 'abbr'
+    writeAll('HTMLBaseElement', document.createElement('base'), unknown);
+    writeAll('HTMLBaseFontElement', document.createElement('basefont'), unknown);
+    writeAll('BDO', document.createElement('bdo'), unknown);//same as 'abbr'
+    writeAll('BGSOUND', document.createElement('bgsound'), unknown);//same as 'abbr'
+    writeAll('BIG', document.createElement('big'), unknown);//same as 'abbr'
+    writeAll('BLINK', document.createElement('blink'), unknown);//same as 'abbr'
     writeAll('BlockQuote', document.createElement('blockquote'), unknown);
     writeAll('HTMLBodyElement', document.body, unknown);
     writeAll('HTMLBRElement', document.createElement('br'), unknown);
     writeAll('HTMLButtonElement', document.createElement('button'), unknown);
+
     writeAll('HTMLCanvasElement', document.createElement('canvas'), unknown);
     writeAll('HTMLTableCaptionElement', document.createElement('caption'), unknown);
-	writeAll('CENTER', document.createElement('center'), unknown);//same as 'abbr'
-	writeAll('CITE', document.createElement('cite'), unknown);//same as 'abbr'
-	writeAll('ClientInformation', window.clientInformation, null);
-	writeAll('ClipboardData', window.clipboardData, null);
-	writeAll('CODE', document.createElement('code'), unknown);//same as 'abbr'
+    writeAll('CENTER', document.createElement('center'), unknown);//same as 'abbr'
+    writeAll('CITE', document.createElement('cite'), unknown);//same as 'abbr'
+    writeAll('ClientInformation', window.clientInformation, null);
+    writeAll('ClipboardData', window.clipboardData, null);
+    writeAll('CODE', document.createElement('code'), unknown);//same as 'abbr'
     writeAll('HTMLTableColElement', document.createElement('col'), unknown);
     writeAll('ColGroup', document.createElement('colgroup'), unknown);
     writeAll('CurrentStyle', document.getElementById('myTextarea').currentStyle, document.getElementById('myTextarea').style);
 //custom tag: http://msdn.microsoft.com/en-us/library/ms535233.aspx
 //event.dataTransfer
 //defaults
-	writeAll('DD', document.createElement('dd'), unknown);//same as 'abbr'
+    writeAll('DD', document.createElement('dd'), unknown);//same as 'abbr'
     writeAll('HTMLDelElement', document.createElement('del'), unknown);
-	writeAll('DFN', document.createElement('dfn'), unknown);//same as 'abbr'
+    writeAll('DFN', document.createElement('dfn'), unknown);//same as 'abbr'
 //Dialog Helper
     writeAll('HTMLDirectoryElement', document.createElement('dir'), unknown);
     writeAll('HTMLDListElement', document.createElement('dl'), unknown);
-	writeAll('HTMLDivElement', div, unknown);
+    writeAll('HTMLDivElement', div, unknown);
     writeAll('HTMLDocument', document, xmlDocument);
-	writeAll('DT', document.createElement('dt'), unknown);//same as 'abbr'
-	writeAll('EM', document.createElement('em'), unknown);//same as 'abbr'
+    writeAll('DT', document.createElement('dt'), unknown);//same as 'abbr'
+    writeAll('EM', document.createElement('em'), unknown);//same as 'abbr'
     writeAll('HTMLEmbedElement', document.createElement('embed'), unknown);
     writeAll('Event', event ? event : window.event, null);
 //external
@@ -66,7 +73,7 @@
 //HTML Comment
 //DocumentCompatibleInfo
 //Storage
-	writeAll('I', document.createElement('i'), unknown);//same as 'abbr'
+    writeAll('I', document.createElement('i'), unknown);//same as 'abbr'
     writeAll('HTMLIFrameElement', document.createElement('iframe'), unknown);
     writeAll('HTMLImageElement', document.createElement('img'), unknown);
 //    writeAll('Implementation', document.implementation, unknown);
@@ -74,25 +81,28 @@
     writeAll('HTMLInputElement', document.createElement('input'), unknown);
     writeAll('HTMLInsElement', document.createElement('ins'), unknown);
     writeAll('HTMLIsIndexElement', document.createElement('insindex'), unknown);
-	writeAll('KBD', document.createElement('kbd'), unknown);//same as 'abbr'
+
+    writeAll('HTMLKbdElement', document.createElement('kbd'), unknown);//same as 'abbr'
+    writeAll('HtmlKeygenElement', document.createElement('keygen'), unknown);//same as 'abbr'
+
     writeAll('HTMLLabelElement', document.createElement('label'), unknown);
     writeAll('HTMLLIElement', document.createElement('li'), unknown);
     writeAll('HTMLLinkElement', document.createElement('link'), unknown);
     writeAll('HTMLLegendElement', document.createElement('legend'), unknown);
-	writeAll('LISTING', document.createElement('listing'), unknown);//same as 'abbr'
-	writeAll('Location', window.location, null);
+    writeAll('LISTING', document.createElement('listing'), unknown);//same as 'abbr'
+    writeAll('Location', window.location, null);
     writeAll('HTMLMapElement', document.createElement('map'), unknown);
-	writeAll('MARQUEE', document.createElement('marquee'), unknown);//has properties in IE, FF evaluates it to HTMLDivElement, no 'marquee' object
+    writeAll('MARQUEE', document.createElement('marquee'), unknown);//has properties in IE, FF evaluates it to HTMLDivElement, no 'marquee' object
     writeAll('HTMLMenuElement', document.createElement('menu'), unknown);
     writeAll('HTMLMetaElement', document.createElement('meta'), unknown);
-	writeAll('MULTICOL', document.createElement('multiCol'), unknown);//same as 'abbr'
+    writeAll('MULTICOL', document.createElement('multiCol'), unknown);//same as 'abbr'
 //namespace
     writeAll('Navigator', window.navigator, unknown);
 //nextID
-	writeAll('NOBR', document.createElement('noBR'), unknown);//same as 'abbr'
-	writeAll('NOEMBED', document.createElement('noEmbed'), unknown);//same as 'marquee'
-	writeAll('NOFRAMES', document.createElement('noFrames'), unknown);//same as 'marquee'
-	writeAll('NOSCRIPT', document.createElement('noScript'), unknown);//same as 'marquee'
+    writeAll('NOBR', document.createElement('noBR'), unknown);//same as 'abbr'
+    writeAll('NOEMBED', document.createElement('noEmbed'), unknown);//same as 'marquee'
+    writeAll('NOFRAMES', document.createElement('noFrames'), unknown);//same as 'marquee'
+    writeAll('NOSCRIPT', document.createElement('noScript'), unknown);//same as 'marquee'
     writeAll('HTMLObjectElement', document.createElement('object'), unknown);
     writeAll('HTMLOListElement', document.createElement('ol'), unknown);
     writeAll('HTMLOptGroupElement', document.createElement('optGroup'), unknown);
@@ -100,7 +110,7 @@
     writeAll('HTMLParagraphElement', document.createElement('p'), unknown);
     writeAll('HTMLParamElement', document.createElement('param'), unknown);
 //stylesheet.page
-	writeAll('PLAINTEXT', document.createElement('plainText'), unknown);//same as 'abbr'
+    writeAll('PLAINTEXT', document.createElement('plainText'), unknown);//same as 'abbr'
 //popup
     writeAll('HTMLPreElement', document.createElement('pre'), unknown);
     writeAll('HTMLQuoteElement', document.createElement('q'), unknown);
@@ -108,22 +118,22 @@
 //ruby
 //rule (CSS)
 //runtimeStyle
-	writeAll('S', document.createElement('s'), unknown);//same as 'abbr'
-	writeAll('SAMP', document.createElement('samp'), unknown);//same as 'abbr'
+    writeAll('S', document.createElement('s'), unknown);//same as 'abbr'
+    writeAll('SAMP', document.createElement('samp'), unknown);//same as 'abbr'
 //screen
     writeAll('HTMLScriptElement', document.createElement('script'), unknown);
     writeAll('HTMLSelectElement', document.createElement('select'), unknown);
 //    writeAll('xxx', document.selection, unknown);
-	writeAll('SMALL', document.createElement('small'), unknown);//same as 'abbr'
+    writeAll('SMALL', document.createElement('small'), unknown);//same as 'abbr'
     writeAll('HTMLSpacerElement', document.createElement('spacer'), unknown);
     writeAll('HTMLSpanElement', document.createElement('span'), unknown);
-	writeAll('STRIKE', document.createElement('strike'), unknown);//same as 'abbr'
-	writeAll('STRONG', document.createElement('strong'), unknown);//same as 'abbr'
+    writeAll('STRIKE', document.createElement('strike'), unknown);//same as 'abbr'
+    writeAll('STRONG', document.createElement('strong'), unknown);//same as 'abbr'
     writeAll('HTMLStyleElement', document.createElement('style'), unknown);
 //page.style (different than element.style)
 //styleSheet
-	writeAll('SUB', document.createElement('sub'), unknown);//same as 'abbr'
-	writeAll('SUP', document.createElement('sup'), unknown);//same as 'abbr'
+    writeAll('SUB', document.createElement('sub'), unknown);//same as 'abbr'
+    writeAll('SUP', document.createElement('sup'), unknown);//same as 'abbr'
     writeAll('HTMLTableElement', document.createElement('table'), unknown);
     writeAll('HTMLTableSectionElement', document.createElement('tbody'), unknown);
     writeAll('HTMLTableCellElement', document.createElement('td'), unknown);
@@ -134,18 +144,20 @@
     writeAll('TH', document.createElement('th'), unknown);
     writeAll('THead', document.createElement('thead'), unknown);
     writeAll('HTMLTitleElement', document.createElement('title'), unknown);
+    writeAll('HTMLTimeElement', document.createElement('time'), unknown);
     writeAll('HTMLTableRowElement', document.createElement('tr'), unknown);
-	writeAll('TT', document.createElement('tt'), unknown);//same as 'abbr'
-	writeAll('U', document.createElement('u'), unknown);//same as 'abbr'
+    writeAll('TT', document.createElement('tt'), unknown);//same as 'abbr'
+
+    writeAll('U', document.createElement('u'), unknown);//same as 'abbr'
     writeAll('HTMLUListElement', document.createElement('ul'), unknown);
 //userProfile
-	writeAll('VAR', document.createElement('var'), unknown);//same as 'abbr'
+    writeAll('VAR', document.createElement('var'), unknown);//same as 'abbr'
     writeAll('HTMLWBRElement', document.createElement('wbr'), unknown);
     writeAll('Window', window, null);
 //XDomainRequest
 //xml
 //XMLHttpRequest
-	writeAll('XMP', document.createElement('xmp'), unknown);//same as 'abbr'
+    writeAll('XMP', document.createElement('xmp'), unknown);//same as 'abbr'
   }
 
   /**
@@ -160,8 +172,8 @@
     var all = [];
     for (var property in object) {
       try {
-	    if (parent == null || !(property in parent)) {
-	      if (typeof object[property] == 'function')
+        if (parent == null || !(property in parent)) {
+          if (typeof object[property] == 'function')
             all.push(property + '()');
           else
             all.push(property);
@@ -178,19 +190,19 @@
       }
     }
     if (document.all) {
-	  for (var index in ieMethods) {
+      for (var index in ieMethods) {
         var method = ieMethods[index];
         try {
-	      if (object[method] !== undefined && (parent == null || parent[method] === undefined)) {
-	        all.push(method + '()');
+          if (object[method] !== undefined && (parent == null || parent[method] === undefined)) {
+            all.push(method + '()');
           }
         } catch(e) {
-	       all.push(method + '()');
-	    }
-	  }
+           all.push(method + '()');
+        }
+      }
     }
-	all.sort(sortFunction);
-	document.getElementById('myTextarea').value += name + ':' + all + '\n';
+    all.sort(sortFunction);
+    document.getElementById('myTextarea').value += name + ':' + all + '\n';
   }
   function sortFunction(s1, s2) {
     return s1.toLowerCase() > s2.toLowerCase() ? 1 : -1;

@@ -9,6 +9,10 @@ ACRONYM:cite,dateTime
 ADDRESS:cite,clear,clear(),width
 HTMLAppletElement:align,alt,altHtml,archive,BaseHref,border,code,codeBase,codeType,contentDocument,dataFld,dataFormatAs,dataSrc,declare,form,height,hspace,name,onerror,standby,type,useMap,vspace,width
 HTMLAreaElement:alt,coords,hash,host,hostname,href,noHref,pathname,port,protocol,search,shape,target
+HTMLArticleElement:
+HTMLAsideElement:
+HTMLAttributeElement:
+HTMLAudioElement:
 B:cite,dateTime
 HTMLBaseElement:href,target
 HTMLBaseFontElement:color,face,size
@@ -57,7 +61,8 @@ HTMLImageElement:align,alt,border,complete,dataFld,dataFormatAs,dataSrc,dynsrc,f
 HTMLInputElement:accept,align,alt,border,checked,complete,createTextRange(),dataFld,dataFormatAs,dataSrc,defaultChecked,dynsrc,form,height,hspace,indeterminate,loop,lowsrc,maxLength,name,onabort,onchange,onerror,onload,onselect,readOnly,select(),size,src,start,start(),status,type,useMap,value,vrml,vspace,width
 HTMLInsElement:cite,dateTime
 HTMLIsIndexElement:
-KBD:cite,dateTime
+HTMLKbdElement:cite,dateTime
+HtmlKeygenElement:
 HTMLLabelElement:dataFld,dataFormatAs,dataSrc,form,htmlFor
 HTMLLIElement:type,value
 HTMLLinkElement:charset,href,hreflang,media,onerror,onload,rel,rev,styleSheet,target,type
@@ -103,6 +108,7 @@ TFoot:align,bgColor,ch,chOff,deleteRow(),insertRow(),moveRow(),rows,vAlign
 TH:abbr,align,axis,background,bgColor,borderColor,borderColorDark,borderColorLight,cellIndex,ch,chOff,colSpan,headers,height,noWrap,rowSpan,scope,vAlign,width
 THead:align,bgColor,ch,chOff,deleteRow(),insertRow(),moveRow(),rows,vAlign
 HTMLTitleElement:
+HTMLTimeElement:
 HTMLTableRowElement:align,bgColor,borderColor,borderColorDark,borderColorLight,cells,ch,chOff,deleteCell(),height,insertCell(),rowIndex,sectionRowIndex,vAlign
 TT:cite,dateTime
 U:cite,dateTime

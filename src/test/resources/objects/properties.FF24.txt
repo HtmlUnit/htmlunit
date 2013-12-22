@@ -9,6 +9,10 @@ ACRONYM:
 ADDRESS:
 HTMLAppletElement:align,alt,archive,code,codeBase,height,hspace,name,object,vspace,width
 HTMLAreaElement:alt,coords,download,hash,host,hostname,href,noHref,pathname,ping,port,protocol,search,shape,target
+HTMLArticleElement:
+HTMLAsideElement:
+HTMLAttributeElement:
+HTMLAudioElement:autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,defaultMuted,defaultPlaybackRate,duration,ended,error,HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,load(),loop,mozAudioCaptured,mozAudioChannelType,mozAutoplayEnabled,mozCaptureStream(),mozCaptureStreamUntilEnded(),mozChannels,mozCurrentSampleOffset(),mozFragmentEnd,mozFrameBufferLength,mozGetMetadata(),mozPreservesPitch,mozSampleRate,mozSetup(),mozSrcObject,mozWriteAudio(),muted,NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,pause(),paused,play(),playbackRate,played,preload,readyState,seekable,seeking,src,volume
 B:
 HTMLBaseElement:href,target
 HTMLBaseFontElement:
@@ -57,7 +61,8 @@ HTMLImageElement:align,alt,border,complete,crossOrigin,height,hspace,isMap,longD
 HTMLInputElement:accept,align,alt,autocomplete,autofocus,checked,checkValidity(),controllers,defaultChecked,defaultValue,disabled,files,form,formAction,formEnctype,formMethod,formNoValidate,formTarget,height,indeterminate,list,max,maxLength,min,mozIsTextField(),multiple,name,pattern,placeholder,readOnly,required,select(),selectionDirection,selectionEnd,selectionStart,setCustomValidity(),setSelectionRange(),size,src,step,stepDown(),stepUp(),textLength,type,useMap,validationMessage,validity,value,valueAsNumber,width,willValidate
 HTMLInsElement:cite,dateTime
 HTMLIsIndexElement:
-KBD:
+HTMLKbdElement:
+HtmlKeygenElement:
 HTMLLabelElement:control,form,htmlFor
 HTMLLIElement:type,value
 HTMLLinkElement:charset,crossOrigin,disabled,href,hreflang,media,rel,rev,sheet,target,type
@@ -103,6 +108,7 @@ TFoot:align,ch,chOff,deleteRow(),insertRow(),rows,vAlign
 TH:abbr,align,axis,bgColor,cellIndex,ch,chOff,colSpan,headers,height,noWrap,rowSpan,scope,vAlign,width
 THead:align,ch,chOff,deleteRow(),insertRow(),rows,vAlign
 HTMLTitleElement:text
+HTMLTimeElement:dateTime
 HTMLTableRowElement:align,bgColor,cells,ch,chOff,deleteCell(),insertCell(),rowIndex,sectionRowIndex,vAlign
 TT:
 U:
