@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * The JavaScript object "HTMLTimeElement".
  *
- * @version $Revision: 8672 $
+ * @version $Revision$
  * @author Ronald Brill
  */
 @JsxClass(domClass = HtmlTime.class, browsers = @WebBrowser(value = FF, minVersion = 24))

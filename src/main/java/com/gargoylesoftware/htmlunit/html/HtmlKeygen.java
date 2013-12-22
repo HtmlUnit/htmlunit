@@ -21,7 +21,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 /**
  * Wrapper for the HTML element "keygen".
  *
- * @version $Revision: 8882 $
+ * @version $Revision$
  * @author Ronald Brill
  */
 public class HtmlKeygen extends HtmlElement {

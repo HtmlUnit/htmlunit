@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * The JavaScript object "HTMLSpanElement".
  *
- * @version $Revision: 8882 $
+ * @version $Revision$
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Ronald Brill
