@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLBGSOUND;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BGSOUND_AS_SPAN;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BGSOUND_AS_UNKNOWN;
 
 import com.gargoylesoftware.htmlunit.html.HtmlBackgroundSound;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -33,8 +34,13 @@ public class HTMLBGSoundElement extends HTMLElement {
      */
     @Override
     public String getClassName() {
-        if (getWindow().getWebWindow() != null && !getBrowserVersion().hasFeature(HTMLBGSOUND)) {
-            return "HTMLSpanElement";
+        if (getWindow().getWebWindow() != null) {
+            if (getBrowserVersion().hasFeature(JS_BGSOUND_AS_SPAN)) {
+                return "HTMLSpanElement";
+            }
+            if (getBrowserVersion().hasFeature(JS_BGSOUND_AS_UNKNOWN)) {
+                return "HTMLUnknownElement";
+            }
         }
         return super.getClassName();
     }

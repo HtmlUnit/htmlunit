@@ -442,10 +442,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTMLBASEFONT_SUPPORTED,
 
-    /** [object HTMLBGSoundElement]. */
-    @BrowserFeature(@WebBrowser(IE))
-    HTMLBGSOUND,
-
     /** Set this checked state to false when added to page (IE). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     HTMLCHECKEDINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE,
@@ -671,6 +667,14 @@ public enum BrowserVersionFeatures {
     /** firstChild and lastChild returns null for Attr (like IE does). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_ATTR_FIRST_LAST_CHILD_RETURNS_NULL,
+
+    /** HTMLBGSoundElement reported as HTMLSpanElement. */
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 17))
+    JS_BGSOUND_AS_SPAN,
+
+    /** HTMLBGSoundElement reported as HTMLUnknownElement. */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 24))
+    JS_BGSOUND_AS_UNKNOWN,
 
     /** Indicates that HTMLBlockElements returning 'HTMLElement'
      * as class name. */
