@@ -128,7 +128,7 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "", "second" },
-            CHROME = { "Â§Â§URLÂ§Â§", "second" })
+            CHROME = { "§§URL§§", "second" })
     public void formArray() throws Exception {
         final String firstHtml
             = "<html><head><SCRIPT lang='JavaScript'>\n"
@@ -541,7 +541,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("Â§Â§URLÂ§Â§script/")
+    @Alerts("§§URL§§script/")
     public void getElementById_scriptSrc() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
@@ -876,7 +876,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("Â§Â§URLÂ§Â§")
+    @Alerts("§§URL§§")
     public void referrer() throws Exception {
         final String firstHtml = "<html><head><title>First</title></head><body>\n"
             + "<a href='" + URL_SECOND + "'>click me</a></body></html>";
