@@ -85,6 +85,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Ahmed Ashour
  * @author Amit Manjhi
  * @author Ronald Brill
+ * @author Frank Danek
  * @see <a href="http://groups-beta.google.com/group/netscape.public.mozilla.jseng/browse_thread/thread/b4edac57329cf49f/069e9307ec89111f">
  * Rhino and Java Browser</a>
  */
@@ -231,7 +232,7 @@ public class JavaScriptEngine {
                         if (obj.getClass() == Element.class) {
                             final Page page = webWindow.getEnclosedPage();
                             if (page != null && page.isHtmlPage()) {
-                                final DomNode domNode = new HtmlDivision(null, "", (HtmlPage) page, null);
+                                final DomNode domNode = new HtmlDivision("", (HtmlPage) page, null);
                                 obj.setDomNode(domNode);
                             }
                         }

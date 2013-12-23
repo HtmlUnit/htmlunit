@@ -54,10 +54,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     CAN_INHERIT_CSS_PROPERTY_VALUES,
 
-    /** The status/value update of a control is processed before the click event. */
-    @BrowserFeature(@WebBrowser(IE))
-    CONTROL_UPDATE_DONE_BEFORE_CLICK_EVENT_FIRED,
-
     /** Indicates that the default value for height of elements is 15 instead of 20. */
     @BrowserFeature(@WebBrowser(IE))
     CSS_DEFAULT_ELEMENT_HEIGHT_15,
@@ -174,13 +170,17 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     EVENT_INPUT,
 
+    /** Triggers "onchange" event handler after "onclick" event handler. */
+    @BrowserFeature(@WebBrowser(FF))
+    EVENT_ONCHANGE_AFTER_ONCLICK,
+
     /** Triggers "onchange" event handler on losing focus. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     EVENT_ONCHANGE_LOSING_FOCUS,
 
-    /** Triggers "onclick" event handler also for the select option. */
-    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF), @WebBrowser(CHROME) })
-    EVENT_ONCLICK_FOR_SELECT_OPTION_ALSO,
+    /** Triggers "onclick" event handler for the select only, not for the clicked option. */
+    @BrowserFeature(@WebBrowser(IE))
+    EVENT_ONCLICK_FOR_SELECT_ONLY,
 
     /** Triggers "onerror" if external loading of an external javascript failed. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
@@ -223,7 +223,7 @@ public enum BrowserVersionFeatures {
     EVENT_PROPERTY_CHANGE,
 
     /** Supports vendor specific event type 'Events'. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
     EVENT_TYPE_EVENTS,
 
     /** Supports vendor specific event type 'KeyEvents'. */
@@ -231,7 +231,7 @@ public enum BrowserVersionFeatures {
     EVENT_TYPE_KEY_EVENTS,
 
     /** Indicates that document.execCommand() should throw an exception when called with an illegal command. */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     EXECCOMMAND_THROWS_ON_WRONG_COMMAND,
 
     /** */
@@ -259,7 +259,7 @@ public enum BrowserVersionFeatures {
     GENERATED_104,
 
     /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     GENERATED_112,
 
     /** Was originally .isIE(). */
@@ -295,15 +295,7 @@ public enum BrowserVersionFeatures {
     GENERATED_158,
 
     /** Was originally .isFirefox(). */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    GENERATED_160,
-
-    /** Was originally .isFirefox(). */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    GENERATED_161,
-
-    /** Was originally .isFirefox(). */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     GENERATED_164,
 
     /** Was originally .isFirefox(). */
@@ -360,15 +352,7 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
-    GENERATED_60,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
     GENERATED_63,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_65,
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
@@ -484,6 +468,25 @@ public enum BrowserVersionFeatures {
     /** Do document.bgColor/.alinkColor/.vlinkColor/.linkColor have value by default. */
     @BrowserFeature(@WebBrowser(IE))
     HTMLDOCUMENT_COLOR,
+
+    /** Calls to <code>document.XYZ</code> also looks at frames. */
+    @BrowserFeature(@WebBrowser(IE))
+    HTMLDOCUMENT_GET_ALSO_FRAMES,
+
+    /** Calls to <code>document.XYZ</code> looks at children with the specified ID and/or name. */
+    @BrowserFeature(@WebBrowser(IE))
+    HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME,
+
+    /** Calls to <code>document.XYZ</code> looks at children with the specified name. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    HTMLDOCUMENT_GET_FOR_NAME,
+
+    /**
+     * Calls to <code>document.XYZ</code> should first look at standard functions before looking at elements
+     * named <code>XYZ</code>.
+     */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS,
 
     /** Allows invalid 'align' values. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
@@ -604,14 +607,14 @@ public enum BrowserVersionFeatures {
     HTTP_HEADER_HOST_FIRST,
 
     /** Indicates that the browser should ignore contents of inner head elements. */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     IGNORE_CONTENTS_OF_INNER_HEAD,
 
     /**
      * The function addEventListener or attachEvent(IE) accepts null as listener
      * instead of throwing an exception.
      */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 17) })
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 17), @WebBrowser(CHROME) })
     JS_ADD_EVENT_LISTENER_ACCEPTS_NULL_LISTENER,
 
     /** Setting the property align to arbitrary values is allowed. */
@@ -772,9 +775,17 @@ public enum BrowserVersionFeatures {
         @WebBrowser(value = IE, minVersion = 11) })
     JS_DOCUMENT_CREATE_ELEMENT_STRICT,
 
+    /** Design mode constants start with a capital letter. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    JS_DOCUMENT_DESIGN_MODE_CAPITAL_FIRST,
+
     /** The browser supports the design mode 'Inherit' (IE). */
     @BrowserFeature(@WebBrowser(IE))
     JS_DOCUMENT_DESIGN_MODE_INHERIT,
+
+    /** The browser supports the design mode only for frames. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    JS_DOCUMENT_DESIGN_MODE_ONLY_FOR_FRAMES,
 
     /** Javascript document.doctype returns null (IE). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
@@ -1033,7 +1044,7 @@ public enum BrowserVersionFeatures {
     JS_INNER_HTML_CREATES_DOC_FRAGMENT_AS_PARENT,
 
     /** Indicates that innerHTML is readonly for some tags. */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_INNER_HTML_READONLY_FOR_SOME_TAGS,
 
     /** Indicates if multiple spaces are replaced by a single one when accessing innerHTML. */
