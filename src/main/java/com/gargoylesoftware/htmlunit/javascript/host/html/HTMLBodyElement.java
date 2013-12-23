@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_158;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_41;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_BODY_HEAD_READONLY;
 
 import java.net.MalformedURLException;
 import java.util.Locale;
@@ -214,4 +215,16 @@ public class HTMLBodyElement extends HTMLElement {
         setColorAttribute("vLink", vLink);
     }
 
+    /**
+     * Overwritten to throw an exception in IE8/9.
+     * @param value the new value for replacing this node
+     */
+    @JsxSetter
+    @Override
+    public void setOuterHTML(final String value) {
+        if (getBrowserVersion().hasFeature(JS_OUTER_HTML_BODY_HEAD_READONLY)) {
+            throw Context.reportRuntimeError("outerHTML is read-only for tag 'body'");
+        }
+        super.setOuterHTML(value);
+    }
 }

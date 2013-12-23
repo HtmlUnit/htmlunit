@@ -111,6 +111,17 @@ public class HTMLTableColElement extends HTMLTableComponent {
 
     /**
      * Overwritten to throw an exception in IE8/9.
+     * @param value the new value for replacing this node
+     */
+    @JsxSetter
+    @Override
+    public void setOuterHTML(final String value) {
+        throw Context.reportRuntimeError("outerHTML is read-only for tag '"
+                            + getDomNodeOrDie().getNodeName() + "'");
+    }
+
+    /**
+     * Overwritten to throw an exception in IE8/9.
      * @param value the new value for the contents of this node
      */
     @JsxSetter

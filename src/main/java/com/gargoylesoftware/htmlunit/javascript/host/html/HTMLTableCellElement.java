@@ -336,4 +336,15 @@ public class HTMLTableCellElement extends HTMLTableComponent {
         setWidthOrHeight("height", height,
                 !getBrowserVersion().hasFeature(JS_TABLE_CELL_HEIGHT_DOES_NOT_RETURN_NEGATIVE_VALUES));
     }
+
+    /**
+     * Overwritten to throw an exception in IE8/9.
+     * @param value the new value for replacing this node
+     */
+    @JsxSetter
+    @Override
+    public void setOuterHTML(final String value) {
+        throw Context.reportRuntimeError("outerHTML is read-only for tag '"
+                        + getDomNodeOrDie().getTagName() + "'");
+    }
 }

@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_91;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ALIGN_INVALID;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.HtmlCaption;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -90,5 +91,15 @@ public class HTMLTableCaptionElement extends HTMLElement {
             valid = null;
         }
         return valid;
+    }
+
+    /**
+     * Overwritten to throw an exception in IE8/9.
+     * @param value the new value for replacing this node
+     */
+    @JsxSetter
+    @Override
+    public void setOuterHTML(final String value) {
+        throw Context.reportRuntimeError("outerHTML is read-only for tag 'caption'");
     }
 }
