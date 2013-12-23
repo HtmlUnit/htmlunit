@@ -31,7 +31,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENT_LEF
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_EXTENT_WITHOUT_PADDING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_CREATES_DOC_FRAGMENT_AS_PARENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_READONLY_FOR_SOME_TAGS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_REDUCE_WHITESPACES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_THROWS_NOT_ATTACHED;
@@ -379,14 +378,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * provide access to the value of the "charOff" DOM attribute. Not applicable to all types of HTML elements.
      */
     private String chOff_ = "";
-
-    /**
-     * The tag names of the objects for which innerHTML is read only in IE
-     */
-    private static final List<String> INNER_HTML_READONLY_IN_IE =
-        Arrays.asList(new String[] {
-            "col", "colgroup", "frameset", "head", "html", "style", "table",
-            "tbody", "tfoot", "thead", "title", "tr"});
 
     /**
      * The tag names of the objects for which innerText is read only
@@ -975,11 +966,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     @JsxSetter
     public void setInnerHTML(final Object value) {
         final DomNode domNode = getDomNodeOrDie();
-        final boolean readonly = getBrowserVersion().hasFeature(JS_INNER_HTML_READONLY_FOR_SOME_TAGS);
-
-        if (readonly && INNER_HTML_READONLY_IN_IE.contains(domNode.getNodeName())) {
-            throw Context.reportRuntimeError("innerHTML is read-only for tag " + domNode.getNodeName());
-        }
 
         domNode.removeAllChildren();
 

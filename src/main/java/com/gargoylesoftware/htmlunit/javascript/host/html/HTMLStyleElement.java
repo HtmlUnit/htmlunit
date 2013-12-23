@@ -14,10 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_READONLY_FOR_SOME_TAGS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.io.StringReader;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import org.w3c.css.sac.InputSource;
 
@@ -110,5 +113,18 @@ public class HTMLStyleElement extends HTMLElement {
     public String getMedia() {
         final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
         return style.getAttribute("media");
+    }
+
+    /**
+     * Overwritten to throw an exception in IE8/9.
+     * @param value the new value for the contents of this node
+     */
+    @JsxSetter
+    @Override
+    public void setInnerHTML(final Object value) {
+        if (getBrowserVersion().hasFeature(JS_INNER_HTML_READONLY_FOR_SOME_TAGS)) {
+            throw Context.reportRuntimeError("innerHTML is read-only for tag 'style'");
+        }
+        super.setInnerHTML(value);
     }
 }
