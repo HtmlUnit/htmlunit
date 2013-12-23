@@ -189,7 +189,7 @@ public class NodeTest extends WebDriverTestCase {
     @Alerts({ "nb nodes: 2", "8", "1" })
     public void testChildNodes_Comments() throws Exception {
         final String html = "<html><head><title>test</title>\n"
-            + "<html><head></head>\n"
+            + "</head>\n"
             + "<body><!-- comment --><script>\n"
             + "var nodes = document.body.childNodes;\n"
             + "alert('nb nodes: ' + nodes.length);\n"
