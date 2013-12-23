@@ -23,6 +23,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  *
  * @version $Revision$
  * @author Ronald Brill
+ * @author Frank Danek
  */
 public class HtmlDataList extends HtmlElement {
 
@@ -32,14 +33,13 @@ public class HtmlDataList extends HtmlElement {
     /**
      * Creates a new instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlDataList(final String namespaceURI, final String qualifiedName, final SgmlPage page,
+    HtmlDataList(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, page, attributes);
+        super(qualifiedName, page, attributes);
     }
 
     /**

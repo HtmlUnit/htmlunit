@@ -14,14 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CONTROL_UPDATE_DONE_BEFORE_CLICK_EVENT_FIRED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_FOR_SELECT_OPTION_ALSO;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_FOR_SELECT_ONLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.
-                            EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT;
+    EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEDOWN_NOT_FOR_SELECT_OPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.
-                            EVENT_ONMOUSEUP_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT;
+    EVENT_ONMOUSEUP_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEUP_NOT_FOR_SELECT_OPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_EMPTY_TEXT_IS_NO_CHILDREN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_PREVENT_DISABLED;
@@ -31,10 +30,8 @@ import java.io.PrintWriter;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
-import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
 
 /**
  * Wrapper for the HTML element "option".
@@ -48,6 +45,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Ronald Brill
+ * @author Frank Danek
  */
 public class HtmlOption extends HtmlElement implements DisabledElement {
 
@@ -61,14 +59,13 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
     /**
      * Creates an instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlOption(final String namespaceURI, final String qualifiedName, final SgmlPage page,
+    HtmlOption(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, page, attributes);
+        super(qualifiedName, page, attributes);
         initialSelectedState_ = hasAttribute("selected");
     }
 
@@ -275,6 +272,30 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public <P extends Page> P click(final Event event) throws IOException {
+        if (hasFeature(EVENT_ONCLICK_FOR_SELECT_ONLY)) {
+            final SgmlPage page = getPage();
+
+            if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
+                return (P) page;
+            }
+
+            if (isStateUpdateFirst()) {
+                doClickStateUpdate();
+            }
+
+            return getEnclosingSelect().click(event);
+        }
+        else {
+            return super.click(event);
+        }
+    }
+
+    /**
      * Selects the option if it's not already selected.
      * {@inheritDoc}
      */
@@ -297,21 +318,22 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * {@inheritDoc}
      */
     @Override
-    protected ScriptResult doClickFireClickEvent(final Event event) throws IOException {
-        final ScriptResult scriptResult = super.doClickFireClickEvent(event);
-        final boolean triggerClickOption = hasFeature(EVENT_ONCLICK_FOR_SELECT_OPTION_ALSO);
-        if (!triggerClickOption) {
-            return scriptResult;
+    protected DomNode getEventTargetElement() {
+        if (hasFeature(EVENT_ONCLICK_FOR_SELECT_ONLY)) {
+            final HtmlSelect select = getEnclosingSelect();
+            if (select != null) {
+                return select;
+            }
         }
+        return super.getEventTargetElement();
+    }
 
-        if (event.isAborted(scriptResult)) {
-            return scriptResult;
-        }
-
-        final Event optionClickEvent = new MouseEvent(this, MouseEvent.TYPE_CLICK,
-                event.getShiftKey(), event.getCtrlKey(), event.getAltKey(),
-            MouseEvent.BUTTON_LEFT);
-        return super.doClickFireClickEvent(optionClickEvent);
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isStateUpdateFirst() {
+        return true;
     }
 
     /**
@@ -376,26 +398,6 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
         final HtmlSerializer ser = new HtmlSerializer();
         ser.setIgnoreMaskedElements(false);
         return ser.asText(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected DomNode getEventTargetElement() {
-        final HtmlSelect select = getEnclosingSelect();
-        if (select != null) {
-            return select;
-        }
-        return super.getEventTargetElement();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean isStateUpdateFirst() {
-        return hasFeature(CONTROL_UPDATE_DONE_BEFORE_CLICK_EVENT_FIRED);
     }
 
     /**

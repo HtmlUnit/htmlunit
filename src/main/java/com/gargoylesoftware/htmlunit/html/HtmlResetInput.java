@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 public class HtmlResetInput extends HtmlInput {
 
@@ -44,14 +45,13 @@ public class HtmlResetInput extends HtmlInput {
     /**
      * Creates an instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlResetInput(final String namespaceURI, final String qualifiedName, final SgmlPage page,
+    HtmlResetInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, page, addValueIfNeeded(page, attributes));
+        super(qualifiedName, page, addValueIfNeeded(page, attributes));
 
         // fix the default value in case we have set it
         if (hasFeature(RESETINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED)

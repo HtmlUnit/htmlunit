@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ahmed Ashour
  * @author Dmitri Zoubkov
  * @author Ronald Brill
+ * @author Frank Danek
  */
 public class HtmlButton extends HtmlElement implements DisabledElement, SubmittableElement, FormFieldWithNameHistory {
 
@@ -54,14 +55,13 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     /**
      * Creates a new instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlButton(final String namespaceURI, final String qualifiedName, final SgmlPage page,
+    HtmlButton(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, page, attributes);
+        super(qualifiedName, page, attributes);
         originalName_ = getNameAttribute();
     }
 

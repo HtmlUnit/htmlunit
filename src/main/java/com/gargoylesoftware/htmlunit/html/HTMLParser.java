@@ -287,7 +287,7 @@ public final class HTMLParser {
 
         // If the document does not have a body, add it.
         if (!hasBody && !checkInsideFrameOnly) {
-            final HtmlBody body = new HtmlBody(null, "body", page, null, false);
+            final HtmlBody body = new HtmlBody("body", page, null, false);
             doc.appendChild(body);
         }
 
@@ -632,7 +632,7 @@ public final class HTMLParser {
             if ("table".equals(currentNodeName) && "div".equals(newNodeName)) {
                 currentNode.insertBefore(newElement);
             }
-            else if (head_ != null && "title".equals(newNodeName)) {
+            else if (head_ != null && "title".equals(newNodeName) && !parsingInnerHead_) {
                 head_.appendChild(newElement);
             }
             else {
@@ -871,6 +871,10 @@ public final class HTMLParser {
             if (formWaitingForLostChildren_ != null && "form".equals(element.localpart)) {
                 formWaitingForLostChildren_ = null;
             }
+
+            if (parsingInnerHead_ && "head".equalsIgnoreCase(element.localpart)) {
+                parsingInnerHead_ = false;
+            }
         }
 
         /**
@@ -892,6 +896,10 @@ public final class HTMLParser {
                         }
                     }
                 }
+            }
+
+            if (headParsed_ && "head".equalsIgnoreCase(elem.localpart)) {
+                parsingInnerHead_ = true;
             }
         }
 

@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 public class HtmlCenter extends HtmlElement {
 
@@ -35,13 +36,12 @@ public class HtmlCenter extends HtmlElement {
     /**
      * Creates an instance of HtmlCenter
      *
-     * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
-    HtmlCenter(final String namespaceURI, final String qualifiedName, final SgmlPage page,
+    HtmlCenter(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, page, attributes);
+        super(qualifiedName, page, attributes);
     }
 }

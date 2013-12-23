@@ -37,6 +37,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Frank Danek
  */
 public class HtmlFileInput extends HtmlInput {
 
@@ -46,14 +47,13 @@ public class HtmlFileInput extends HtmlInput {
     /**
      * Creates an instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlFileInput(final String namespaceURI, final String qualifiedName, final SgmlPage page,
+    HtmlFileInput(final String qualifiedName, final SgmlPage page,
         final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, page, addValueIfNeeded(page, attributes));
+        super(qualifiedName, page, addValueIfNeeded(page, attributes));
 
         if (hasFeature(FILEINPUT_EMPTY_DEFAULT_VALUE)) {
             setDefaultValue("", false);

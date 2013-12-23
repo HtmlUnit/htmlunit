@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 public class HtmlTableColumn extends HtmlElement {
 
@@ -36,14 +37,13 @@ public class HtmlTableColumn extends HtmlElement {
     /**
      * Creates an instance of HtmlTableColumn
      *
-     * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
-    HtmlTableColumn(final String namespaceURI, final String qualifiedName, final SgmlPage page,
+    HtmlTableColumn(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, page, attributes);
+        super(qualifiedName, page, attributes);
     }
 
     /**

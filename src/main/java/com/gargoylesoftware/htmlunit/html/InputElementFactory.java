@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Ahmed Ashour
  * @author David K. Taylor
  * @author Dmitri Zoubkov
+ * @author Frank Danek
  */
 public final class InputElementFactory implements ElementFactory {
 
@@ -100,41 +101,41 @@ public final class InputElementFactory implements ElementFactory {
             // and the common browsers seem to treat it as a "text" input so we will as well.
             final DomAttr newAttr = new DomAttr(page, null, "type", "text", true);
             attributeMap.put("type", newAttr);
-            result = new HtmlTextInput(namespaceURI, qualifiedName, page, attributeMap);
+            result = new HtmlTextInput(qualifiedName, page, attributeMap);
         }
         else if ("submit".equals(type)) {
-            result = new HtmlSubmitInput(namespaceURI, qualifiedName, page, attributeMap);
+            result = new HtmlSubmitInput(qualifiedName, page, attributeMap);
         }
         else if ("checkbox".equals(type)) {
-            result = new HtmlCheckBoxInput(namespaceURI, qualifiedName, page, attributeMap);
+            result = new HtmlCheckBoxInput(qualifiedName, page, attributeMap);
         }
         else if ("radio".equals(type)) {
-            result = new HtmlRadioButtonInput(namespaceURI, qualifiedName, page, attributeMap);
+            result = new HtmlRadioButtonInput(qualifiedName, page, attributeMap);
         }
         else if ("text".equals(type)) {
-            result = new HtmlTextInput(namespaceURI, qualifiedName, page, attributeMap);
+            result = new HtmlTextInput(qualifiedName, page, attributeMap);
         }
         else if ("hidden".equals(type)) {
-            result = new HtmlHiddenInput(namespaceURI, qualifiedName, page, attributeMap);
+            result = new HtmlHiddenInput(qualifiedName, page, attributeMap);
         }
         else if ("password".equals(type)) {
-            result = new HtmlPasswordInput(namespaceURI, qualifiedName, page, attributeMap);
+            result = new HtmlPasswordInput(qualifiedName, page, attributeMap);
         }
         else if ("image".equals(type)) {
-            result = new HtmlImageInput(namespaceURI, qualifiedName, page, attributeMap);
+            result = new HtmlImageInput(qualifiedName, page, attributeMap);
         }
         else if ("reset".equals(type)) {
-            result = new HtmlResetInput(namespaceURI, qualifiedName, page, attributeMap);
+            result = new HtmlResetInput(qualifiedName, page, attributeMap);
         }
         else if ("button".equals(type)) {
-            result = new HtmlButtonInput(namespaceURI, qualifiedName, page, attributeMap);
+            result = new HtmlButtonInput(qualifiedName, page, attributeMap);
         }
         else if ("file".equals(type)) {
-            result = new HtmlFileInput(namespaceURI, qualifiedName, page, attributeMap);
+            result = new HtmlFileInput(qualifiedName, page, attributeMap);
         }
         else {
             LOG.info("Bad input type: \"" + type + "\", creating a text input");
-            result = new HtmlTextInput(namespaceURI, qualifiedName, page, attributeMap);
+            result = new HtmlTextInput(qualifiedName, page, attributeMap);
         }
         return result;
     }

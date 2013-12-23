@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 public class HtmlBase extends HtmlElement {
 
@@ -34,14 +35,13 @@ public class HtmlBase extends HtmlElement {
     /**
      * Creates a new instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlBase(final String namespaceURI, final String qualifiedName, final SgmlPage page,
+    HtmlBase(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, page, attributes);
+        super(qualifiedName, page, attributes);
     }
 
     /**

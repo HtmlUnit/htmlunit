@@ -150,15 +150,14 @@ public abstract class HtmlElement extends DomElement {
     /**
      * Creates an instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the page that contains this element
      * @param attributes a map ready initialized with the attributes for this element, or
      * <code>null</code>. The map will be stored as is, not copied.
      */
-    protected HtmlElement(final String namespaceURI, final String qualifiedName, final SgmlPage page,
+    protected HtmlElement(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, page, attributes);
+        super(HTMLParser.XHTML_NAMESPACE, qualifiedName, page, attributes);
         attributeListeners_ = new ArrayList<HtmlAttributeChangeListener>();
     }
 

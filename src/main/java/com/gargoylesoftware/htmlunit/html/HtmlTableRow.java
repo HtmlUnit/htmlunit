@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 public class HtmlTableRow extends HtmlElement {
 
@@ -41,14 +42,13 @@ public class HtmlTableRow extends HtmlElement {
     /**
      * Creates an instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the page that this element is contained within
      * @param attributes the initial attributes
      */
-    HtmlTableRow(final String namespaceURI, final String qualifiedName, final SgmlPage page,
+    HtmlTableRow(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, page, attributes);
+        super(qualifiedName, page, attributes);
     }
 
     /**

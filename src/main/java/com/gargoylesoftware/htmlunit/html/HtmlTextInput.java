@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Ronald Brill
+ * @author Frank Danek
  */
 public class HtmlTextInput extends HtmlInput implements SelectableTextInput {
 
@@ -53,14 +54,13 @@ public class HtmlTextInput extends HtmlInput implements SelectableTextInput {
     /**
      * Creates an instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlTextInput(final String namespaceURI, final String qualifiedName, final SgmlPage page,
+    HtmlTextInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, page, attributes);
+        super(qualifiedName, page, attributes);
     }
 
     /**
@@ -156,7 +156,7 @@ public class HtmlTextInput extends HtmlInput implements SelectableTextInput {
      */
     @Override
     protected Object clone() throws CloneNotSupportedException {
-        return new HtmlTextInput(getNamespaceURI(), getQualifiedName(), getPage(), getAttributesMap());
+        return new HtmlTextInput(getQualifiedName(), getPage(), getAttributesMap());
     }
 
     /**

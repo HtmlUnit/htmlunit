@@ -44,6 +44,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 public abstract class HtmlInput extends HtmlElement implements DisabledElement, SubmittableElement,
     FormFieldWithNameHistory {
@@ -63,20 +64,19 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @param attributes the initial attributes
      */
     public HtmlInput(final SgmlPage page, final Map<String, DomAttr> attributes) {
-        this(null, TAG_NAME, page, attributes);
+        this(TAG_NAME, page, attributes);
     }
 
     /**
      * Creates an instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    public HtmlInput(final String namespaceURI, final String qualifiedName, final SgmlPage page,
+    public HtmlInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, page, attributes);
+        super(qualifiedName, page, attributes);
         defaultValue_ = getValueAttribute();
         originalName_ = getNameAttribute();
     }

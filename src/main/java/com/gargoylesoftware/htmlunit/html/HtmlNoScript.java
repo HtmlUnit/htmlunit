@@ -43,14 +43,13 @@ public class HtmlNoScript extends HtmlElement {
     /**
      * Creates an instance of HtmlNoScript
      *
-     * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
-    HtmlNoScript(final String namespaceURI, final String qualifiedName, final SgmlPage page,
+    HtmlNoScript(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, page, attributes);
+        super(qualifiedName, page, attributes);
     }
 
     @Override

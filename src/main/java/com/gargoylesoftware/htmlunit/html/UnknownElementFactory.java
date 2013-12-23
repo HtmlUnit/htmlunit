@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Ahmed Ashour
  * @author David K. Taylor
  * @author Ronald Brill
+ * @author Frank Danek
  */
 public final class UnknownElementFactory implements ElementFactory {
 
@@ -69,6 +70,6 @@ public final class UnknownElementFactory implements ElementFactory {
     public HtmlElement createElementNS(final SgmlPage page, final String namespaceURI,
             final String qualifiedName, final Attributes attributes, final boolean checkBrowserCompatibility) {
         final Map<String, DomAttr> attributeMap = DefaultElementFactory.setAttributes(page, attributes);
-        return new HtmlUnknownElement(page, namespaceURI, qualifiedName, attributeMap);
+        return new HtmlUnknownElement(page, qualifiedName, attributeMap);
     }
 }

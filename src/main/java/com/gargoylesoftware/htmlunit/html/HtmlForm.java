@@ -60,6 +60,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Ahmed Ashour
  * @author Philip Graf
  * @author Ronald Brill
+ * @author Frank Danek
  */
 public class HtmlForm extends HtmlElement {
 
@@ -78,14 +79,13 @@ public class HtmlForm extends HtmlElement {
     /**
      * Creates an instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param htmlPage the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlForm(final String namespaceURI, final String qualifiedName, final SgmlPage htmlPage,
+    HtmlForm(final String qualifiedName, final SgmlPage htmlPage,
             final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, htmlPage, attributes);
+        super(qualifiedName, htmlPage, attributes);
     }
 
     /**

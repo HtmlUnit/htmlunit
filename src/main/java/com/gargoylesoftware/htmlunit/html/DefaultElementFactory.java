@@ -161,26 +161,26 @@ class DefaultElementFactory implements ElementFactory {
 //            }
 //        }
         if (tagName.equals(HtmlAbbreviated.TAG_NAME)) {
-            element = new HtmlAbbreviated(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlAbbreviated(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlAcronym.TAG_NAME)) {
-            element = new HtmlAcronym(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlAcronym(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlAddress.TAG_NAME)) {
-            element = new HtmlAddress(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlAddress(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlAnchor.TAG_NAME)) {
-            element = new HtmlAnchor(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlAnchor(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlApplet.TAG_NAME)) {
-            element = new HtmlApplet(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlApplet(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlArea.TAG_NAME)) {
-            element = new HtmlArea(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlArea(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlArticle.TAG_NAME)) {
             if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                element = new HtmlArticle(namespaceURI, qualifiedName, page, attributeMap);
+                element = new HtmlArticle(qualifiedName, page, attributeMap);
             }
             else {
                 return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
@@ -188,7 +188,7 @@ class DefaultElementFactory implements ElementFactory {
         }
         else if (tagName.equals(HtmlAside.TAG_NAME)) {
             if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                element = new HtmlAside(namespaceURI, qualifiedName, page, attributeMap);
+                element = new HtmlAside(qualifiedName, page, attributeMap);
             }
             else {
                 return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
@@ -196,111 +196,111 @@ class DefaultElementFactory implements ElementFactory {
         }
         else if (tagName.equals(HtmlAudio.TAG_NAME)) {
             if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                element = new HtmlAudio(namespaceURI, qualifiedName, page, attributeMap);
+                element = new HtmlAudio(qualifiedName, page, attributeMap);
             }
             else {
                 return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
             }
         }
         else if (tagName.equals(HtmlBackgroundSound.TAG_NAME)) {
-            element = new HtmlBackgroundSound(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlBackgroundSound(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlBase.TAG_NAME)) {
-            element = new HtmlBase(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlBase(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlBaseFont.TAG_NAME)) {
             if (page.getWebClient().getBrowserVersion().hasFeature(HTMLBASEFONT_SUPPORTED)) {
-                element = new HtmlBaseFont(namespaceURI, qualifiedName, page, attributeMap);
+                element = new HtmlBaseFont(qualifiedName, page, attributeMap);
             }
             else {
-                element = new HtmlSpan(namespaceURI, qualifiedName, page, attributeMap);
+                element = new HtmlSpan(qualifiedName, page, attributeMap);
             }
         }
         else if (tagName.equals(HtmlBidirectionalOverride.TAG_NAME)) {
-            element = new HtmlBidirectionalOverride(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlBidirectionalOverride(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlBig.TAG_NAME)) {
-            element = new HtmlBig(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlBig(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlBlink.TAG_NAME)) {
-            element = new HtmlBlink(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlBlink(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlBlockQuote.TAG_NAME)) {
-            element = new HtmlBlockQuote(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlBlockQuote(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlBody.TAG_NAME)) {
-            element = new HtmlBody(namespaceURI, qualifiedName, page, attributeMap, false);
+            element = new HtmlBody(qualifiedName, page, attributeMap, false);
         }
         else if (tagName.equals(HtmlBold.TAG_NAME)) {
-            element = new HtmlBold(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlBold(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlBreak.TAG_NAME)) {
-            element = new HtmlBreak(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlBreak(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlButton.TAG_NAME)) {
-            element = new HtmlButton(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlButton(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlCanvas.TAG_NAME)) {
             if (page.getWebClient().getBrowserVersion().hasFeature(CANVAS)) {
-                element = new HtmlCanvas(namespaceURI, qualifiedName, page, attributeMap);
+                element = new HtmlCanvas(qualifiedName, page, attributeMap);
             }
             else {
                 return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
             }
         }
         else if (tagName.equals(HtmlCaption.TAG_NAME)) {
-            element = new HtmlCaption(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlCaption(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlCenter.TAG_NAME)) {
-            element = new HtmlCenter(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlCenter(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlCitation.TAG_NAME)) {
-            element = new HtmlCitation(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlCitation(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlCode.TAG_NAME)) {
-            element = new HtmlCode(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlCode(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlDataList.TAG_NAME)) {
             if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                element = new HtmlDataList(namespaceURI, qualifiedName, page, attributeMap);
+                element = new HtmlDataList(qualifiedName, page, attributeMap);
             }
             else {
                 return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
             }
         }
         else if (tagName.equals(HtmlDefinition.TAG_NAME)) {
-            element = new HtmlDefinition(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlDefinition(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlDefinitionDescription.TAG_NAME)) {
-            element = new HtmlDefinitionDescription(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlDefinitionDescription(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlDefinitionList.TAG_NAME)) {
-            element = new HtmlDefinitionList(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlDefinitionList(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlDefinitionTerm.TAG_NAME)) {
-            element = new HtmlDefinitionTerm(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlDefinitionTerm(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlDeletedText.TAG_NAME)) {
-            element = new HtmlDeletedText(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlDeletedText(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlDirectory.TAG_NAME)) {
-            element = new HtmlDirectory(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlDirectory(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlDivision.TAG_NAME)) {
-            element = new HtmlDivision(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlDivision(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlEmbed.TAG_NAME)) {
-            element = new HtmlEmbed(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlEmbed(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlEmphasis.TAG_NAME)) {
-            element = new HtmlEmphasis(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlEmphasis(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlFieldSet.TAG_NAME)) {
-            element = new HtmlFieldSet(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlFieldSet(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlFigure.TAG_NAME)) {
             if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                element = new HtmlFigure(namespaceURI, qualifiedName, page, attributeMap);
+                element = new HtmlFigure(qualifiedName, page, attributeMap);
             }
             else {
                 return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
@@ -308,21 +308,21 @@ class DefaultElementFactory implements ElementFactory {
         }
         else if (tagName.equals(HtmlFigureCaption.TAG_NAME)) {
             if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                element = new HtmlFigureCaption(namespaceURI, qualifiedName, page, attributeMap);
+                element = new HtmlFigureCaption(qualifiedName, page, attributeMap);
             }
             else {
                 return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
             }
         }
         else if (tagName.equals(HtmlFont.TAG_NAME)) {
-            element = new HtmlFont(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlFont(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlForm.TAG_NAME)) {
-            element = new HtmlForm(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlForm(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlFooter.TAG_NAME)) {
             if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                element = new HtmlFooter(namespaceURI, qualifiedName, page, attributeMap);
+                element = new HtmlFooter(qualifiedName, page, attributeMap);
             }
             else {
                 return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
@@ -335,48 +335,48 @@ class DefaultElementFactory implements ElementFactory {
                     srcAttribute.setValue(srcAttribute.getValue().trim());
                 }
             }
-            element = new HtmlFrame(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlFrame(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlFrameSet.TAG_NAME)) {
-            element = new HtmlFrameSet(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlFrameSet(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlHead.TAG_NAME)) {
-            element = new HtmlHead(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlHead(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlHeader.TAG_NAME)) {
             if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                element = new HtmlHeader(namespaceURI, qualifiedName, page, attributeMap);
+                element = new HtmlHeader(qualifiedName, page, attributeMap);
             }
             else {
                 return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
             }
         }
         else if (tagName.equals(HtmlHeading1.TAG_NAME)) {
-            element = new HtmlHeading1(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlHeading1(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlHeading2.TAG_NAME)) {
-            element = new HtmlHeading2(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlHeading2(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlHeading3.TAG_NAME)) {
-            element = new HtmlHeading3(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlHeading3(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlHeading4.TAG_NAME)) {
-            element = new HtmlHeading4(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlHeading4(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlHeading5.TAG_NAME)) {
-            element = new HtmlHeading5(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlHeading5(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlHeading6.TAG_NAME)) {
-            element = new HtmlHeading6(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlHeading6(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlHorizontalRule.TAG_NAME)) {
-            element = new HtmlHorizontalRule(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlHorizontalRule(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlHtml.TAG_NAME)) {
-            element = new HtmlHtml(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlHtml(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlImage.TAG_NAME) || tagName.equals(HtmlImage.TAG_NAME2)) {
-            element = new HtmlImage(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlImage(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlInlineFrame.TAG_NAME)) {
             if (attributeMap != null) {
@@ -385,138 +385,138 @@ class DefaultElementFactory implements ElementFactory {
                     srcAttribute.setValue(srcAttribute.getValue().trim());
                 }
             }
-            element = new HtmlInlineFrame(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlInlineFrame(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlInlineQuotation.TAG_NAME)) {
-            element = new HtmlInlineQuotation(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlInlineQuotation(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlInsertedText.TAG_NAME)) {
-            element = new HtmlInsertedText(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlInsertedText(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlIsIndex.TAG_NAME)) {
-            element = new HtmlIsIndex(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlIsIndex(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlItalic.TAG_NAME)) {
-            element = new HtmlItalic(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlItalic(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlKeyboard.TAG_NAME)) {
-            element = new HtmlKeyboard(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlKeyboard(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlKeygen.TAG_NAME)) {
             if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                element = new HtmlKeygen(namespaceURI, qualifiedName, page, attributeMap);
+                element = new HtmlKeygen(qualifiedName, page, attributeMap);
             }
             else {
                 return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
             }
         }
         else if (tagName.equals(HtmlLabel.TAG_NAME)) {
-            element = new HtmlLabel(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlLabel(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlLegend.TAG_NAME)) {
-            element = new HtmlLegend(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlLegend(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlLink.TAG_NAME)) {
-            element = new HtmlLink(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlLink(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlListing.TAG_NAME)) {
-            element = new HtmlListing(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlListing(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlListItem.TAG_NAME)) {
-            element = new HtmlListItem(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlListItem(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlMap.TAG_NAME)) {
-            element = new HtmlMap(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlMap(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlMark.TAG_NAME)) {
             if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                element = new HtmlMark(namespaceURI, qualifiedName, page, attributeMap);
+                element = new HtmlMark(qualifiedName, page, attributeMap);
             }
             else {
                 return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
             }
         }
         else if (tagName.equals(HtmlMarquee.TAG_NAME)) {
-            element = new HtmlMarquee(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlMarquee(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlMenu.TAG_NAME)) {
-            element = new HtmlMenu(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlMenu(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlMeta.TAG_NAME)) {
-            element = new HtmlMeta(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlMeta(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlMeter.TAG_NAME)) {
             if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                element = new HtmlMeter(namespaceURI, qualifiedName, page, attributeMap);
+                element = new HtmlMeter(qualifiedName, page, attributeMap);
             }
             else {
                 return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
             }
         }
         else if (tagName.equals(HtmlMultiColumn.TAG_NAME)) {
-            element = new HtmlMultiColumn(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlMultiColumn(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlNav.TAG_NAME)) {
             if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                element = new HtmlNav(namespaceURI, qualifiedName, page, attributeMap);
+                element = new HtmlNav(qualifiedName, page, attributeMap);
             }
             else {
                 return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
             }
         }
         else if (tagName.equals(HtmlNextId.TAG_NAME)) {
-            element = new HtmlNextId(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlNextId(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlNoBreak.TAG_NAME)) {
-            element = new HtmlNoBreak(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlNoBreak(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlNoEmbed.TAG_NAME)) {
-            element = new HtmlNoEmbed(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlNoEmbed(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlNoFrames.TAG_NAME)) {
-            element = new HtmlNoFrames(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlNoFrames(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlNoScript.TAG_NAME)) {
-            element = new HtmlNoScript(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlNoScript(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlObject.TAG_NAME)) {
-            element = new HtmlObject(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlObject(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlOption.TAG_NAME)) {
-            element = new HtmlOption(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlOption(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlOptionGroup.TAG_NAME)) {
-            element = new HtmlOptionGroup(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlOptionGroup(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlOrderedList.TAG_NAME)) {
-            element = new HtmlOrderedList(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlOrderedList(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlOutput.TAG_NAME)) {
             if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                element = new HtmlOutput(namespaceURI, qualifiedName, page, attributeMap);
+                element = new HtmlOutput(qualifiedName, page, attributeMap);
             }
             else {
                 return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
             }
         }
         else if (tagName.equals(HtmlParagraph.TAG_NAME)) {
-            element = new HtmlParagraph(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlParagraph(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlParameter.TAG_NAME)) {
-            element = new HtmlParameter(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlParameter(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlPlainText.TAG_NAME)) {
-            element = new HtmlPlainText(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlPlainText(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlPreformattedText.TAG_NAME)) {
-            element = new HtmlPreformattedText(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlPreformattedText(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlProgress.TAG_NAME)) {
-            element = new HtmlProgress(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlProgress(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlRp.TAG_NAME)) {
             if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_RUBY_TAGS)) {
-                element = new HtmlRp(namespaceURI, qualifiedName, page, attributeMap);
+                element = new HtmlRp(qualifiedName, page, attributeMap);
             }
             else {
                 return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
@@ -524,7 +524,7 @@ class DefaultElementFactory implements ElementFactory {
         }
         else if (tagName.equals(HtmlRt.TAG_NAME)) {
             if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_RUBY_TAGS)) {
-                element = new HtmlRt(namespaceURI, qualifiedName, page, attributeMap);
+                element = new HtmlRt(qualifiedName, page, attributeMap);
             }
             else {
                 return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
@@ -532,127 +532,127 @@ class DefaultElementFactory implements ElementFactory {
         }
         else if (tagName.equals(HtmlRuby.TAG_NAME)) {
             if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_RUBY_TAGS)) {
-                element = new HtmlRuby(namespaceURI, qualifiedName, page, attributeMap);
+                element = new HtmlRuby(qualifiedName, page, attributeMap);
             }
             else {
                 return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
             }
         }
         else if (tagName.equals(HtmlS.TAG_NAME)) {
-            element = new HtmlS(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlS(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlSample.TAG_NAME)) {
-            element = new HtmlSample(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlSample(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlScript.TAG_NAME)) {
-            element = new HtmlScript(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlScript(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlSection.TAG_NAME)) {
             if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                element = new HtmlSection(namespaceURI, qualifiedName, page, attributeMap);
+                element = new HtmlSection(qualifiedName, page, attributeMap);
             }
             else {
                 return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
             }
         }
         else if (tagName.equals(HtmlSelect.TAG_NAME)) {
-            element = new HtmlSelect(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlSelect(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlSmall.TAG_NAME)) {
-            element = new HtmlSmall(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlSmall(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlSource.TAG_NAME)) {
             if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                element = new HtmlSource(namespaceURI, qualifiedName, page, attributeMap);
+                element = new HtmlSource(qualifiedName, page, attributeMap);
             }
             else {
                 return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
             }
         }
         else if (tagName.equals(HtmlSpan.TAG_NAME)) {
-            element = new HtmlSpan(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlSpan(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlStrike.TAG_NAME)) {
-            element = new HtmlStrike(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlStrike(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlStrong.TAG_NAME)) {
-            element = new HtmlStrong(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlStrong(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlStyle.TAG_NAME)) {
-            element = new HtmlStyle(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlStyle(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlSubscript.TAG_NAME)) {
-            element = new HtmlSubscript(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlSubscript(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlSuperscript.TAG_NAME)) {
-            element = new HtmlSuperscript(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlSuperscript(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlTable.TAG_NAME)) {
-            element = new HtmlTable(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlTable(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlTableBody.TAG_NAME)) {
-            element = new HtmlTableBody(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlTableBody(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlTableColumn.TAG_NAME)) {
-            element = new HtmlTableColumn(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlTableColumn(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlTableColumnGroup.TAG_NAME)) {
-            element = new HtmlTableColumnGroup(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlTableColumnGroup(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlTableDataCell.TAG_NAME)) {
-            element = new HtmlTableDataCell(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlTableDataCell(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlTableFooter.TAG_NAME)) {
-            element = new HtmlTableFooter(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlTableFooter(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlTableHeader.TAG_NAME)) {
-            element = new HtmlTableHeader(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlTableHeader(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlTableHeaderCell.TAG_NAME)) {
-            element = new HtmlTableHeaderCell(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlTableHeaderCell(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlTableRow.TAG_NAME)) {
-            element = new HtmlTableRow(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlTableRow(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlTeletype.TAG_NAME)) {
-            element = new HtmlTeletype(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlTeletype(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlTextArea.TAG_NAME)) {
-            element = new HtmlTextArea(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlTextArea(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlTitle.TAG_NAME)) {
-            element = new HtmlTitle(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlTitle(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlTime.TAG_NAME)) {
             if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                element = new HtmlTime(namespaceURI, qualifiedName, page, attributeMap);
+                element = new HtmlTime(qualifiedName, page, attributeMap);
             }
             else {
                 return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
             }
         }
         else if (tagName.equals(HtmlUnderlined.TAG_NAME)) {
-            element = new HtmlUnderlined(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlUnderlined(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlUnorderedList.TAG_NAME)) {
-            element = new HtmlUnorderedList(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlUnorderedList(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlVariable.TAG_NAME)) {
-            element = new HtmlVariable(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlVariable(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlVideo.TAG_NAME)) {
             if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
-                element = new HtmlVideo(namespaceURI, qualifiedName, page, attributeMap);
+                element = new HtmlVideo(qualifiedName, page, attributeMap);
             }
             else {
                 return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
             }
         }
         else if (tagName.equals(HtmlWordBreak.TAG_NAME)) {
-            element = new HtmlWordBreak(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlWordBreak(qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlExample.TAG_NAME)) {
-            element = new HtmlExample(namespaceURI, qualifiedName, page, attributeMap);
+            element = new HtmlExample(qualifiedName, page, attributeMap);
         }
         else {
             throw new IllegalStateException("Cannot find HtmlElement for " + qualifiedName);

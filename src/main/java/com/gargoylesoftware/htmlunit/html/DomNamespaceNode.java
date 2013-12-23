@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Document;
  * @author David K. Taylor
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 public abstract class DomNamespaceNode extends DomNode {
 
@@ -66,6 +67,13 @@ public abstract class DomNamespaceNode extends DomNode {
      */
     @Override
     public String getNamespaceURI() {
+        if (getPage().isHtmlPage() && !(getPage() instanceof XHtmlPage)
+            && HTMLParser.XHTML_NAMESPACE.equals(namespaceURI_)
+            && XPathUtils.isProcessingXPath()) {
+            // for Xalan processing we have to strip the 'default' XHTML namespace for HTML pages to be able to find
+            // the elements by XPath without needing to add the namespace to it
+            return null;
+        }
         return namespaceURI_;
     }
 

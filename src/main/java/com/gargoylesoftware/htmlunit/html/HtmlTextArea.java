@@ -45,6 +45,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Sudhan Moghe
  * @author Amit Khanna
  * @author Ronald Brill
+ * @author Frank Danek
  */
 public class HtmlTextArea extends HtmlElement implements DisabledElement, SubmittableElement, SelectableTextInput,
     FormFieldWithNameHistory {
@@ -74,14 +75,13 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     /**
      * Creates an instance.
      *
-     * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlTextArea(final String namespaceURI, final String qualifiedName, final SgmlPage page,
+    HtmlTextArea(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, page, attributes);
+        super(qualifiedName, page, attributes);
         originalName_ = getNameAttribute();
     }
 
@@ -455,7 +455,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      */
     @Override
     protected Object clone() throws CloneNotSupportedException {
-        return new HtmlTextArea(getNamespaceURI(), getQualifiedName(), getPage(), getAttributesMap());
+        return new HtmlTextArea(getQualifiedName(), getPage(), getAttributesMap());
     }
 
     /**

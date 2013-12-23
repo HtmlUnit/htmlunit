@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Frank Danek
  */
 public class HtmlNoFrames extends HtmlElement {
 
@@ -36,13 +37,12 @@ public class HtmlNoFrames extends HtmlElement {
     /**
      * Creates an instance of HtmlNoFrames
      *
-     * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
-    HtmlNoFrames(final String namespaceURI, final String qualifiedName, final SgmlPage page,
+    HtmlNoFrames(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, page, attributes);
+        super(qualifiedName, page, attributes);
     }
 }

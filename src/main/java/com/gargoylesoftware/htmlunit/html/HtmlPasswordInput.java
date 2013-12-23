@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput {
 
@@ -51,14 +52,14 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
 
     /**
      * Creates an instance.
-     * @param namespaceURI the URI that identifies an XML namespace
+     *
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    HtmlPasswordInput(final String namespaceURI, final String qualifiedName, final SgmlPage page,
+    HtmlPasswordInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, page, attributes);
+        super(qualifiedName, page, attributes);
     }
 
     /**
@@ -139,7 +140,7 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
      */
     @Override
     protected Object clone() throws CloneNotSupportedException {
-        return new HtmlPasswordInput(getNamespaceURI(), getQualifiedName(), getPage(), getAttributesMap());
+        return new HtmlPasswordInput(getQualifiedName(), getPage(), getAttributesMap());
     }
 
     /**

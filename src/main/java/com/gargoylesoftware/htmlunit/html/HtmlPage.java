@@ -1193,7 +1193,7 @@ public class HtmlPage extends SgmlPage {
                 throw new IllegalStateException("Headelement was not defined for this page");
             }
             final Map<String, DomAttr> emptyMap = Collections.emptyMap();
-            titleElement = new HtmlTitle(null, HtmlTitle.TAG_NAME, this, emptyMap);
+            titleElement = new HtmlTitle(HtmlTitle.TAG_NAME, this, emptyMap);
             if (head.getFirstChild() != null) {
                 head.getFirstChild().insertBefore(titleElement);
             }
@@ -1225,17 +1225,35 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
+     * Gets the first child of startElement or it's children that is an instance of the given class.
+     * @param startElement the parent element
+     * @param clazz the class to search for
+     * @return <code>null</code> if no child found
+     */
+    private DomElement getFirstChildElementRecursive(final DomElement startElement, final Class<?> clazz) {
+        if (startElement == null) {
+            return null;
+        }
+        for (final DomElement element : startElement.getChildElements()) {
+            if (clazz.isInstance(element)) {
+                return element;
+            }
+            final DomElement childFound = getFirstChildElementRecursive(element, clazz);
+            if (childFound != null) {
+                return childFound;
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Gets the title element for this page. Returns null if one is not found.
      *
      * @return the title element for this page or null if this is not one
      */
     private HtmlTitle getTitleElement() {
-        final HtmlHead head = (HtmlHead) getFirstChildElement(getDocumentElement(), HtmlHead.class);
-        if (head != null) {
-            return (HtmlTitle) getFirstChildElement(head, HtmlTitle.class);
-        }
-
-        return null;
+        return (HtmlTitle) getFirstChildElementRecursive(getDocumentElement(), HtmlTitle.class);
     }
 
     /**

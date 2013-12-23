@@ -23,6 +23,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 public class HtmlAudio extends HtmlMedia {
 
@@ -32,14 +33,13 @@ public class HtmlAudio extends HtmlMedia {
     /**
      * Creates an instance of HtmlAudio
      *
-     * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
-    HtmlAudio(final String namespaceURI, final String qualifiedName, final SgmlPage page,
+    HtmlAudio(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, page, attributes);
+        super(qualifiedName, page, attributes);
     }
 
     /**

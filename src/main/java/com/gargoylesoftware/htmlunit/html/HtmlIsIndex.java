@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 public class HtmlIsIndex extends HtmlElement implements SubmittableElement {
 
@@ -41,14 +42,13 @@ public class HtmlIsIndex extends HtmlElement implements SubmittableElement {
     /**
      * Creates an instance of HtmlIsIndex
      *
-     * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
-    HtmlIsIndex(final String namespaceURI, final String qualifiedName, final SgmlPage page,
+    HtmlIsIndex(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, page, attributes);
+        super(qualifiedName, page, attributes);
     }
 
     /**
