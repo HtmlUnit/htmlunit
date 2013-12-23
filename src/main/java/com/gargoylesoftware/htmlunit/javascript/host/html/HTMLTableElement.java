@@ -388,4 +388,13 @@ public class HTMLTableElement extends RowContainer {
         }
         super.setInnerHTML(value);
     }
+
+    /**
+     * Overwritten to throw an exception because this is readonly.
+     * @param value the new value for the contents of this node
+     */
+    @Override
+    protected void setInnerTextImpl(final String value) {
+        throw Context.reportRuntimeError("innerText is read-only for tag 'table'");
+    }
 }

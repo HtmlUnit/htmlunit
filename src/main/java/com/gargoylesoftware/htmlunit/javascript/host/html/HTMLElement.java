@@ -380,12 +380,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     private String chOff_ = "";
 
     /**
-     * The tag names of the objects for which innerText is read only
-     */
-    private static final List<String> INNER_TEXT_READONLY =
-        Arrays.asList(new String[] {"html", "table", "tbody", "tfoot", "thead", "tr"});
-
-    /**
      * The tag names of the objects for which outerHTML is read only.
      * Note: IE additionally handles the body and head tag as read only.
      *       see feature JS_OUTER_HTML_BODY_READONLY
@@ -876,7 +870,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534310.aspx">MSDN documentation</a>
      * @return the contents of this node as HTML
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 11) })
+    @JsxGetter
     public String getOuterHTML() {
         final StringBuilder buf = new StringBuilder();
         // we can't rely on DomNode.asXml because it adds indentation and new lines
@@ -997,12 +991,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         setInnerTextImpl(Context.toString(value));
     }
 
-    private void setInnerTextImpl(final String value) {
+    /**
+     * The worker for setInnerText.
+     * @param value the new value for the contents of this node
+     */
+    protected void setInnerTextImpl(final String value) {
         final DomNode domNode = getDomNodeOrDie();
-
-        if (INNER_TEXT_READONLY.contains(domNode.getNodeName())) {
-            throw Context.reportRuntimeError("innerText is read-only for tag " + domNode.getNodeName());
-        }
 
         domNode.removeAllChildren();
 
@@ -1034,7 +1028,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param value the new value for replacing this node
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534310.aspx">MSDN documentation</a>
      */
-    @JsxSetter({ @WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 11) })
+    @JsxSetter
     public void setOuterHTML(final String value) {
         final DomNode domNode = getDomNodeOrDie();
         final String nodeName = domNode.getNodeName();
