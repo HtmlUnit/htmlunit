@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
  * @version $Revision$
  * @author Brad Clarke
  * @author Daniel Gredler
+ * @author Frank Danek
  */
 public class WindowConcurrencyTest extends SimpleWebTestCase {
 
@@ -534,7 +535,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
 
         // Recreating what can occur with two threads requires
         // to know a bit about the style invalidation used in Window.DomHtmlAttributeChangeListenerImpl
-        final HtmlElement elt = new HtmlDivision("", "div", page1, new HashMap<String, DomAttr>()) {
+        final HtmlElement elt = new HtmlDivision("div", page1, new HashMap<String, DomAttr>()) {
             @Override
             public DomNode getParentNode() {
                 // this gets called by CSS invalidation logic

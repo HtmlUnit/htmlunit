@@ -162,6 +162,8 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("12345")
+    @NotYetImplemented(IE8)
+    // Our HTML fixed done during parsing create an HTML different from the IE8 one
     public void testWrongHtml_TagBeforeHtml() throws Exception {
         final String html = "<div>\n"
             + "<html>\n"

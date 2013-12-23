@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
@@ -24,7 +25,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest;
@@ -253,7 +253,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE11 })
+    @Browsers({ CHROME, FF, IE11 })
     @Alerts("false")
     public void hasAttribute() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -394,7 +394,6 @@ public class ElementTest extends WebDriverTestCase {
                 "createElementNS() is not defined",
                 "[object],undefined",
                 "[object],undefined" })
-    @NotYetImplemented(FF)
     public void html_localName() throws Exception {
         html("localName");
     }
@@ -431,7 +430,6 @@ public class ElementTest extends WebDriverTestCase {
                 "createElementNS() is not defined",
                 "[object],undefined",
                 "[object],undefined" })
-    @NotYetImplemented(FF)
     public void html_namespaceURI() throws Exception {
         html("namespaceURI");
     }
@@ -554,7 +552,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object],undefined",
                 "[object],undefined"
                 })
-    @NotYetImplemented(FF)
     public void namespace_localName() throws Exception {
         namespace("localName");
     }
@@ -579,7 +576,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object],undefined",
                 "[object],undefined"
                 })
-    @NotYetImplemented(FF)
     public void namespace_namespaceURI() throws Exception {
         namespace("namespaceURI");
     }
@@ -770,12 +766,18 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "prototype found", "" },
-            FF24 = {    "prototype found",
-                    "ELEMENT_NODEATTRIBUTE_NODETEXT_NODECDATA_SECTION_NODEENTITY_REFERENCE_"
-                    + "NODEENTITY_NODEPROCESSING_INSTRUCTION_NODECOMMENT_NODEDOCUMENT_NODEDOCUMENT_"
-                    + "TYPE_NODEDOCUMENT_FRAGMENT_NODENOTATION_NODEDOCUMENT_POSITION_DISCONNECTEDDOCUMENT_"
-                    + "POSITION_PRECEDINGDOCUMENT_POSITION_FOLLOWINGDOCUMENT_POSITION_"
-                    + "CONTAINSDOCUMENT_POSITION_CONTAINED_BYDOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC" },
+            CHROME = { "prototype found", "ALLOW_KEYBOARD_INPUTtoString"
+                    + "ELEMENT_NODEATTRIBUTE_NODETEXT_NODECDATA_SECTION_NODEENTITY_REFERENCE_NODE"
+                    + "ENTITY_NODEPROCESSING_INSTRUCTION_NODECOMMENT_NODEDOCUMENT_NODEDOCUMENT_TYPE_NODE"
+                    + "DOCUMENT_FRAGMENT_NODENOTATION_NODEDOCUMENT_POSITION_DISCONNECTEDDOCUMENT_POSITION_PRECEDING"
+                    + "DOCUMENT_POSITION_FOLLOWINGDOCUMENT_POSITION_CONTAINSDOCUMENT_POSITION_CONTAINED_BY"
+                    + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC" },
+            FF24 = { "prototype found", ""
+                    + "ELEMENT_NODEATTRIBUTE_NODETEXT_NODECDATA_SECTION_NODEENTITY_REFERENCE_NODE"
+                    + "ENTITY_NODEPROCESSING_INSTRUCTION_NODECOMMENT_NODEDOCUMENT_NODEDOCUMENT_TYPE_NODE"
+                    + "DOCUMENT_FRAGMENT_NODENOTATION_NODEDOCUMENT_POSITION_DISCONNECTEDDOCUMENT_POSITION_PRECEDING"
+                    + "DOCUMENT_POSITION_FOLLOWINGDOCUMENT_POSITION_CONTAINSDOCUMENT_POSITION_CONTAINED_BY"
+                    + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC" },
             IE8 = "exception occured")
     public void enumeratedProperties() throws Exception {
         final String html
@@ -946,6 +948,7 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "§§URL§§", "§§URL§§" },
+            CHROME = { "", "§§URL§§" },
             IE = { "undefined", "undefined" })
     public void baseURI() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"
@@ -970,7 +973,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "[object HTMLCollection]", "[object HTMLCollection]" },
+    @Alerts(DEFAULT = { "[object HTMLCollection]", "[object HTMLCollection]" },
             IE = { "undefined", "[object HTMLCollection]" })
     public void children() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"
@@ -992,7 +995,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "null", "a b c" },
+    @Alerts(CHROME = { "", "a b c" },
+            FF = { "null", "a b c" },
             IE = { "undefined", "undefined" },
             IE11 = { "undefined", "a b c" })
     public void classList() throws Exception {
@@ -1017,7 +1021,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE11 })
+    @Browsers({ CHROME, FF, IE11 })
     @Alerts({ "test value", "true", "false", "finished" })
     public void attributeNS() throws Exception {
         final String html = "<html>\n"

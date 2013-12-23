@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @JsxClass
 public class EventNode extends Node {
@@ -370,7 +371,7 @@ public class EventNode extends Node {
      * @param event specifies the event object from which to obtain event object properties.
      * @return <tt>true</tt> if the event fired successfully, <tt>false</tt> if it was canceled
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
     public boolean fireEvent(final String type, Event event) {
         if (event == null) {
             event = new MouseEvent();

@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_65;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_72;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ATTRIBUTE_FIX_IN_QUIRKS_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_OUTER_HTML_UPPER_CASE;
@@ -534,33 +533,18 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * {@inheritDoc}
      */
     @Override
-    public String getNamespaceURI() {
-        final HtmlElement domNode = getDomNodeOrDie();
-        if (getBrowserVersion().hasFeature(GENERATED_65)) {
-            return domNode.getNamespaceURI();
-        }
-        if (domNode.getHtmlPageOrNull() != null) {
-            return null;
-        }
-        return domNode.getNamespaceURI();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public String getLocalName() {
         final DomNode domNode = getDomNodeOrDie();
         if (domNode.getHtmlPageOrNull() != null) {
             final String prefix = domNode.getPrefix();
             if (prefix != null) {
                 // create string builder only if needed (performance)
-                final StringBuilder localName = new StringBuilder(prefix.toUpperCase(Locale.ENGLISH));
+                final StringBuilder localName = new StringBuilder(prefix.toLowerCase(Locale.ENGLISH));
                 localName.append(':');
-                localName.append(domNode.getLocalName().toUpperCase(Locale.ENGLISH));
+                localName.append(domNode.getLocalName().toLowerCase(Locale.ENGLISH));
                 return localName.toString();
             }
-            return domNode.getLocalName().toUpperCase(Locale.ENGLISH);
+            return domNode.getLocalName().toLowerCase(Locale.ENGLISH);
         }
         return domNode.getLocalName();
     }
@@ -1136,7 +1120,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
          * @param append append or no
          */
         public ProxyDomNode(final SgmlPage page, final DomNode target, final boolean append) {
-            super(null, HtmlDivision.TAG_NAME, page, null);
+            super(HtmlDivision.TAG_NAME, page, null);
             target_ = target;
             append_ = append;
         }
@@ -1851,6 +1835,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
     public String getTagUrn() {
         final String urn = getDomNodeOrDie().getNamespaceURI();
+        if (HTMLParser.XHTML_NAMESPACE.equals(urn)) {
+            return "";
+        }
         return urn != null ? urn : "";
     }
 
@@ -2797,7 +2784,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Gets the token list of class attribute.
      * @return the token list of class attribute
      */
-    @Override
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public DOMTokenList getClassList() {
         return new DOMTokenList(this, "class");
     }
@@ -2833,7 +2820,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
     public HTMLCollection getChildren() {
         return super.getChildren();
     }

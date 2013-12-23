@@ -127,7 +127,7 @@ public class Element extends EventNode {
      * Returns the Base URI as a string.
      * @return the Base URI as a string
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public String getBaseURI() {
         return getDomNodeOrDie().getPage().getUrl().toExternalForm();
     }
@@ -303,7 +303,7 @@ public class Element extends EventNode {
      *                  which matches all elements.
      * @return a live NodeList of found elements in the order they appear in the tree
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public Object getElementsByTagNameNS(final Object namespaceURI, final String localName) {
         final String description = "Element.getElementsByTagNameNS('" + namespaceURI + "', '" + localName + "')";
 
@@ -324,7 +324,7 @@ public class Element extends EventNode {
      * @param name the name of the attribute to look for
      * @return true if an attribute with the given name is specified on this element or has a default value
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public boolean hasAttribute(final String name) {
         return getDomNodeOrDie().hasAttribute(name);
     }
@@ -364,7 +364,7 @@ public class Element extends EventNode {
      * Returns the current number of child elements.
      * @return the child element count
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public int getChildElementCount() {
         return getDomNodeOrDie().getChildElementCount();
     }
@@ -373,7 +373,7 @@ public class Element extends EventNode {
      * Returns the first element child.
      * @return the first element child
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public Element getFirstElementChild() {
         final DomElement child = getDomNodeOrDie().getFirstElementChild();
         if (child != null) {
@@ -386,7 +386,7 @@ public class Element extends EventNode {
      * Returns the last element child.
      * @return the last element child
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public Element getLastElementChild() {
         final DomElement child = getDomNodeOrDie().getLastElementChild();
         if (child != null) {
@@ -399,7 +399,7 @@ public class Element extends EventNode {
      * Returns the next element sibling.
      * @return the next element sibling
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public Element getNextElementSibling() {
         final DomElement child = getDomNodeOrDie().getNextElementSibling();
         if (child != null) {
@@ -412,7 +412,7 @@ public class Element extends EventNode {
      * Returns the previous element sibling.
      * @return the previous element sibling
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public Element getPreviousElementSibling() {
         final DomElement child = getDomNodeOrDie().getPreviousElementSibling();
         if (child != null) {
@@ -452,7 +452,7 @@ public class Element extends EventNode {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms537446.aspx">MSDN documentation</a>
      * @return the child at the given position
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public HTMLCollection getChildren() {
         final DomElement node = getDomNodeOrDie();
         final HTMLCollection collection = new HTMLCollection(node, false, "Element.children") {
@@ -468,7 +468,7 @@ public class Element extends EventNode {
      * Gets the token list of class attribute.
      * @return the token list of class attribute
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public DOMTokenList getClassList() {
         return null;
     }

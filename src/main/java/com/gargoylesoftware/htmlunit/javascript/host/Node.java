@@ -897,7 +897,7 @@ public class Node extends SimpleScriptable {
      * Returns the namespace prefix.
      * @return the namespace prefix
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public String getPrefix() {
         final DomNode domNode = getDomNodeOrDie();
         final String prefix = domNode.getPrefix();
@@ -912,7 +912,7 @@ public class Node extends SimpleScriptable {
      * Returns the local name of this element.
      * @return the local name of this element
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public String getLocalName() {
         return getDomNodeOrDie().getLocalName();
     }
@@ -921,7 +921,7 @@ public class Node extends SimpleScriptable {
      * Returns The URI that identifies an XML namespace.
      * @return the URI that identifies an XML namespace
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public String getNamespaceURI() {
         final String namespaceURI = getDomNodeOrDie().getNamespaceURI();
         return namespaceURI;
@@ -931,7 +931,7 @@ public class Node extends SimpleScriptable {
      * Returns the base name of this element.
      * @return the base name of this element
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
     public Object getBaseName() {
         final DomElement domElem = getDomNodeOrDie();
         final boolean isXmlPage = domElem.getOwnerDocument() instanceof XmlPage;

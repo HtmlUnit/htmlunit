@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
@@ -130,7 +131,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE11 })
+    @Browsers({ CHROME, FF, IE11 })
     @Alerts("defined")
     public void testEventArgDefined() throws Exception {
         final String content
@@ -147,7 +148,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE11 })
+    @Browsers({ CHROME, FF, IE11 })
     @Alerts("pass")
     public void testEventTargetSameAsThis() throws Exception {
         final String content
@@ -165,9 +166,9 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "undefined", "false" },
-            IE = { "[object]", "true" },
-            IE11 = { "[object HTMLInputElement]", "true" })
+    @Alerts(DEFAULT = { "[object HTMLInputElement]", "true" },
+            FF = { "undefined", "false" },
+            IE8 = { "[object]", "true" })
     public void testEventSrcElementSameAsThis() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -188,7 +189,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("pass")
-    @Browsers({ FF, IE11 })
+    @Browsers({ CHROME, FF, IE11 })
     public void testEventCurrentTargetSameAsThis() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -207,7 +208,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "[object Window]", "[object HTMLDivElement]" })
-    @Browsers({ FF, IE11 })
+    @Browsers({ CHROME, FF, IE11 })
     public void testCurrentTarget_sameListenerForEltAndWindow() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -305,7 +306,8 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("frame1")
+    @Alerts(DEFAULT = "frame1",
+            CHROME = "")
     public void thisInEventHandler() throws Exception {
         final String html
             = "<html><head></head>\n"
@@ -325,8 +327,8 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "true", "exception" },
-            IE = { "false", "false" })
+    @Alerts(DEFAULT = { "false", "false" },
+            FF = { "true", "exception" })
     public void testIEWindowEvent() throws Exception {
         final String html =
             "<html><head>\n"
@@ -389,7 +391,7 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object Event]", "true" },
             IE8 = { "[object]", "undefined" })
-    // TODO [IE11] must be false for IE11 (and FF17)
+    // TODO [IE11] must be false for Chrome, FF and IE11
     public void testBubbles() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
@@ -406,9 +408,9 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "[object Event]", "true" },
-            IE = { "[object]", "undefined" },
-            IE11 = { "[object Event]", "false" })
+    @Alerts(DEFAULT = { "[object Event]", "false" },
+            FF = { "[object Event]", "true" },
+            IE8 = { "[object]", "undefined" })
     public void testCancelable() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
@@ -459,7 +461,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ FF, IE11 })
+    @Browsers({ CHROME, FF, IE11 })
     @Alerts({ "click", "true", "true", "dblclick", "false", "false" })
     public void testInitEvent() throws Exception {
         final String html =
@@ -604,8 +606,8 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "activeElement BODY", "focus #document", "handler: activeElement BODY" },
-            IE = { "activeElement BODY" },
+    @Alerts(DEFAULT = { "activeElement BODY" },
+            FF = { "activeElement BODY", "focus #document", "handler: activeElement BODY" },
             IE11 = { "activeElement BODY", "focus BODY", "handler: activeElement BODY" })
     @BuggyWebDriver(FF) // FFDriver doesn't behave like "manually driven" FF
     // http://code.google.com/p/selenium/issues/detail?id=4665
@@ -659,8 +661,8 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "blur INPUT",
-            FF = "blur INPUT",
+    @Alerts(DEFAULT = "blur INPUT",
+            IE8 = "",
             IE11 = { "blur BODY", "blur INPUT" })
     public void document_input_blur() throws Exception {
         document_input("blur");
@@ -749,7 +751,8 @@ public class EventTest extends WebDriverTestCase {
         eventHandlersParentScopeChain("<input type='text'", "");
         eventHandlersParentScopeChain("<input type='password'", "");
         // IE11 cannot click on hidden fields
-        if (getBrowserVersion() != BrowserVersion.INTERNET_EXPLORER_11) {
+        if (getBrowserVersion() != BrowserVersion.INTERNET_EXPLORER_11
+                && getBrowserVersion() != BrowserVersion.CHROME) {
             eventHandlersParentScopeChain("<input type='hidden'", "");
         }
 
@@ -775,7 +778,8 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "from theField", "from document", "from document", "from window" })
+    @Alerts(DEFAULT = { "from theField", "from document", "from document", "from window" },
+            CHROME = { "from theField", "from theForm", "from document", "from window" })
     public void eventHandlersParentScopeChain_span() throws Exception {
         eventHandlersParentScopeChain("<span", "</span>");
     }

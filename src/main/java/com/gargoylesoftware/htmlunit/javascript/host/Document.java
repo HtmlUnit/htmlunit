@@ -15,7 +15,9 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_CAPITAL_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_INHERIT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_ONLY_FOR_FRAMES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENTS_BY_TAG_NAME_NOT_SUPPORTS_NAMESPACES;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -28,6 +30,7 @@ import java.util.regex.Pattern;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.xml.utils.PrefixResolver;
@@ -167,15 +170,13 @@ public class Document extends EventNode {
     public String getDesignMode() {
         if (designMode_ == null) {
             if (getBrowserVersion().hasFeature(JS_DOCUMENT_DESIGN_MODE_INHERIT)) {
-                if (getWindow().getWebWindow() instanceof FrameWindow) {
-                    designMode_ = "Inherit";
-                }
-                else {
-                    designMode_ = "Off";
-                }
+                designMode_ = "inherit";
             }
             else {
                 designMode_ = "off";
+            }
+            if (getBrowserVersion().hasFeature(JS_DOCUMENT_DESIGN_MODE_CAPITAL_FIRST)) {
+                designMode_ = StringUtils.capitalize(designMode_);
             }
         }
         return designMode_;
@@ -192,19 +193,23 @@ public class Document extends EventNode {
             if (!"on".equalsIgnoreCase(mode) && !"off".equalsIgnoreCase(mode) && !"inherit".equalsIgnoreCase(mode)) {
                 throw Context.reportRuntimeError("Invalid document.designMode value '" + mode + "'.");
             }
-            if (!(getWindow().getWebWindow() instanceof FrameWindow)) {
-                // IE ignores designMode changes for documents that aren't in frames.
-                return;
+            if (!(getWindow().getWebWindow() instanceof FrameWindow)
+                && getBrowserVersion().hasFeature(JS_DOCUMENT_DESIGN_MODE_ONLY_FOR_FRAMES)) {
+                // IE evaluates all designMode changes for documents that aren't in frames as Off
+                designMode_ = "off";
             }
-
-            if ("on".equalsIgnoreCase(mode)) {
-                designMode_ = "On";
+            else if ("on".equalsIgnoreCase(mode)) {
+                designMode_ = "on";
             }
             else if ("off".equalsIgnoreCase(mode)) {
-                designMode_ = "Off";
+                designMode_ = "off";
             }
             else if ("inherit".equalsIgnoreCase(mode)) {
-                designMode_ = "Inherit";
+                designMode_ = "inherit";
+            }
+
+            if (getBrowserVersion().hasFeature(JS_DOCUMENT_DESIGN_MODE_CAPITAL_FIRST)) {
+                designMode_ = StringUtils.capitalize(designMode_);
             }
         }
         else {
@@ -236,7 +241,7 @@ public class Document extends EventNode {
      * Gets the window in which this document is contained.
      * @return the window
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public Object getDefaultView() {
         return getWindow();
     }
@@ -315,7 +320,7 @@ public class Document extends EventNode {
      * @param type the type of events to capture
      * @see Window#captureEvents(String)
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public void captureEvents(final String type) {
         // Empty.
     }

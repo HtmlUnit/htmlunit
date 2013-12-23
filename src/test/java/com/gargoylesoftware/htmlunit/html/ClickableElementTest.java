@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
@@ -35,6 +38,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @author Chris Erskine
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class ClickableElementTest extends SimpleWebTestCase {
@@ -636,10 +640,13 @@ public class ClickableElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "foo", "foo" }, IE8 = { "foo", "foo" }, IE = "foo")
+    @Alerts(DEFAULT = "foo",
+            IE = "")
+    @BuggyWebDriver(CHROME)
+    // ChromeDriver does not generate a "foo" but it occurs manually
     public void option_onClick() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head>\n"
-                + "<body><form><select><option id='clickId' onClick='alert(\"foo\")'>\n"
+                + "<body><form><select size='2'><option id='clickId' onClick='alert(\"foo\")'>\n"
                 + "Option</option></select></form></body>\n"
                 + "</html>";
 

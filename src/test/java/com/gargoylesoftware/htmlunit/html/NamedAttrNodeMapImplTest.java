@@ -26,6 +26,7 @@ import org.junit.Test;
  *
  * @version $Revision$
  * @author Ronald Brill
+ * @author Frank Danek
  */
 public class NamedAttrNodeMapImplTest {
 
@@ -51,7 +52,7 @@ public class NamedAttrNodeMapImplTest {
             // expected
         }
 
-        final DomElement dom = new HtmlBreak("", "", null, null);
+        final DomElement dom = new HtmlBreak("", null, null);
 
         NamedAttrNodeMapImpl map = new NamedAttrNodeMapImpl(dom, true);
         Assert.assertTrue(map.isEmpty());
@@ -67,7 +68,7 @@ public class NamedAttrNodeMapImplTest {
      */
     @Test
     public void caseSensitive() throws Exception {
-        final DomElement dom = new HtmlBreak("", "", null, null);
+        final DomElement dom = new HtmlBreak("", null, null);
 
         NamedAttrNodeMapImpl map = new NamedAttrNodeMapImpl(dom, true);
         Assert.assertTrue(map.isEmpty());
@@ -93,7 +94,7 @@ public class NamedAttrNodeMapImplTest {
      */
     @Test
     public void caseInSensitive() throws Exception {
-        final DomElement dom = new HtmlBreak("", "", null, null);
+        final DomElement dom = new HtmlBreak("", null, null);
 
         NamedAttrNodeMapImpl map = new NamedAttrNodeMapImpl(dom, false);
         Assert.assertTrue(map.isEmpty());
@@ -119,7 +120,7 @@ public class NamedAttrNodeMapImplTest {
      */
     @Test
     public void preseveOrderCaseInsensitive() throws Exception {
-        final DomElement dom = new HtmlBreak("", "", null, null);
+        final DomElement dom = new HtmlBreak("", null, null);
 
         final NamedAttrNodeMapImpl map = new NamedAttrNodeMapImpl(dom, false);
         Assert.assertTrue(map.isEmpty());
@@ -153,7 +154,7 @@ public class NamedAttrNodeMapImplTest {
      */
     @Test
     public void preseveOrderCaseSensitive() throws Exception {
-        final DomElement dom = new HtmlBreak("", "", null, null);
+        final DomElement dom = new HtmlBreak("", null, null);
 
         final NamedAttrNodeMapImpl map = new NamedAttrNodeMapImpl(dom, true);
         Assert.assertTrue(map.isEmpty());

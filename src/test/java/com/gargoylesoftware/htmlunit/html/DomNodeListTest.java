@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  *
  * @version $Revision$
  * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class DomNodeListTest extends SimpleWebTestCase {
@@ -51,7 +52,7 @@ public class DomNodeListTest extends SimpleWebTestCase {
         assertEquals(3, divs.getLength());
         validateDomNodeList(divs);
 
-        final HtmlDivision newDiv = new HtmlDivision(null, HtmlDivision.TAG_NAME, page, null);
+        final HtmlDivision newDiv = new HtmlDivision(HtmlDivision.TAG_NAME, page, null);
         page.getBody().appendChild(newDiv);
         assertEquals(4, divs.getLength());
         validateDomNodeList(divs);

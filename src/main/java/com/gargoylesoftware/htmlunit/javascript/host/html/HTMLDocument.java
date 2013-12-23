@@ -20,16 +20,17 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_DOM_LEV
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_EVENTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_KEY_EVENTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EXECCOMMAND_THROWS_ON_WRONG_COMMAND;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_160;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_161;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_164;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_51;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_53;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_55;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_60;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_CHARSET_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_COLOR;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_ALSO_FRAMES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_FOR_NAME;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_APPEND_CHILD_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CLASS_NAME;
@@ -1418,7 +1419,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @Override
     protected Object getWithPreemption(final String name) {
         final HtmlPage page = (HtmlPage) getDomNodeOrNull();
-        if (page == null || getBrowserVersion().hasFeature(GENERATED_160)) {
+        if (page == null || getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS)) {
             return NOT_FOUND;
         }
         return getIt(name);
@@ -1427,12 +1428,13 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     private Object getIt(final String name) {
         final HtmlPage page = (HtmlPage) getDomNodeOrNull();
 
-        final boolean isIE = getBrowserVersion().hasFeature(GENERATED_60);
+        final boolean forIDAndOrName = getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME);
+        final boolean alsoFrames = getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_ALSO_FRAMES);
         final HTMLCollection collection = new HTMLCollection(page, true, "HTMLDocument." + name) {
             @Override
             protected List<Object> computeElements() {
                 final List<DomElement> elements;
-                if (isIE) {
+                if (forIDAndOrName) {
                     elements = page.getElementsByIdAndOrName(name);
                 }
                 else {
@@ -1441,7 +1443,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                 final List<Object> matchingElements = new ArrayList<Object>();
                 for (final DomElement elt : elements) {
                     if (elt instanceof HtmlForm || elt instanceof HtmlImage || elt instanceof HtmlApplet
-                            || (isIE && elt instanceof BaseFrameElement)) {
+                            || (alsoFrames && elt instanceof BaseFrameElement)) {
                         matchingElements.add(elt);
                     }
                 }
@@ -1454,7 +1456,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                 if ("name".equals(attributeName)) {
                     return EffectOnCache.RESET;
                 }
-                else if (isIE && "id".equals(attributeName)) {
+                else if (forIDAndOrName && "id".equals(attributeName)) {
                     return EffectOnCache.RESET;
                 }
 
@@ -1463,7 +1465,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
             @Override
             protected SimpleScriptable getScriptableFor(final Object object) {
-                if (isIE && object instanceof BaseFrameElement) {
+                if (alsoFrames && object instanceof BaseFrameElement) {
                     return (SimpleScriptable) ((BaseFrameElement) object).getEnclosedWindow().getScriptObject();
                 }
                 return super.getScriptableFor(object);
@@ -1486,7 +1488,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * {@inheritDoc}
      */
     public Object getWithFallback(final String name) {
-        if (getBrowserVersion().hasFeature(GENERATED_161)) {
+        if (getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_FOR_NAME)
+            || getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME)) {
             return getIt(name);
         }
         return NOT_FOUND;
@@ -1673,7 +1676,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @see DomNode#READY_STATE_INTERACTIVE
      * @see DomNode#READY_STATE_COMPLETE
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(FF) })
     public String getReadyState() {
         final DomNode node = getDomNodeOrDie();
         return node.getReadyState();
@@ -1777,7 +1780,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the value of the JavaScript attribute <tt>scripts</tt>.
      * @return the value of the JavaScript attribute <tt>scripts</tt>
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 10) })
     public Object getScripts() {
         if (scripts_ == null) {
             scripts_ = new HTMLCollection(getDomNodeOrDie(), false, "HTMLDocument.scripts") {
@@ -1880,7 +1883,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536390.aspx">MSDN Documentation</a>
      * @return an uninitialized event object
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
     public Event createEventObject() {
         final Event event = new MouseEvent();
         event.setParentScope(getWindow());
@@ -2047,7 +2050,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533065.aspx">MSDN documentation</a>
      * @return the value of the "activeElement" property
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
+    @JsxGetter
     public Object getActiveElement() {
         if (activeElement_ == null) {
             final HtmlElement body = getHtmlPage().getBody();

@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 public class EventListenersContainer implements Serializable {
 
@@ -88,7 +89,7 @@ public class EventListenersContainer implements Serializable {
             if (accept) {
                 return true;
             }
-            throw new EvaluatorException("Could not convert JavaScript argument (Listner was null).");
+            throw new EvaluatorException("Could not convert JavaScript argument (Listener was null).");
         }
 
         final List<Function> listeners = getHandlersOrCreateIt(type).getHandlers(useCapture);

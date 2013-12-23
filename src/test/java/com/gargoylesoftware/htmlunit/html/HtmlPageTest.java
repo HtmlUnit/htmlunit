@@ -72,6 +72,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HtmlPageTest extends SimpleWebTestCase {
@@ -1781,7 +1782,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final NodeList divs = page.getElementsByTagName("div");
         assertEquals(3, divs.getLength());
 
-        final HtmlDivision newDiv = new HtmlDivision(null, HtmlDivision.TAG_NAME, page, null);
+        final HtmlDivision newDiv = new HtmlDivision(HtmlDivision.TAG_NAME, page, null);
         page.getBody().appendChild(newDiv);
         assertEquals(4, divs.getLength());
     }

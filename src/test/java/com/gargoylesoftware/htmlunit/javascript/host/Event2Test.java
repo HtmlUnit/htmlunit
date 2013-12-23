@@ -14,8 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +25,6 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -44,10 +43,11 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "change [select] [-]", "click [clickMe] [1]" },
-            IE = { "change [select] [-]", "click [select] [-]" },
-            IE8 = { "click [select] [1]", "click [clickMe] [1]", "change [select] [-]" })
-    @NotYetImplemented({ FF, IE8 })
-    @BuggyWebDriver // FFDriver wrongly generates a "click [select] [1]" first that doesn't occur manually
+            IE = { "change [select] [-]", "click [select] [1]" },
+            IE8 = { "change [select] [-]", "click [select] [-]" })
+    @BuggyWebDriver({ CHROME, FF })
+    // FFDriver wrongly generates a "click [select] [1]" first that doesn't occur manually
+    // ChromeDriver wrongly generates a "click [select] [1]" instead of "clickMe"
     public void optionClick() throws Exception {
         final String firstSnippet = "       <select name='select' id='select' size='2'\n";
         final String secondSnippet = ">\n"
@@ -60,13 +60,33 @@ public class Event2Test extends WebDriverTestCase {
     }
 
     /**
+     * Test event order for clicking on a select option.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "click [clickMe] [1]",
+            IE = "")
+    @BuggyWebDriver(CHROME)
+    // ChromeDriver does not generate a "click [clickMe] [1]" but it occurs manually
+    public void optionClick2() throws Exception {
+        final String firstSnippet = "       <select name='select' id='select' size='2'>\n"
+                + "               <option id='o_id1' value='o_value1'>option1</option>\n"
+                + "               <option id='clickMe' value='o_value2'\n";
+        final String secondSnippet = ">option2</option>\n"
+                + "               <option id='o_id3' value='o_value3'>option3</option>\n"
+                + "       </select>\n";
+
+        testEvents(firstSnippet, secondSnippet);
+    }
+
+    /**
      * Test event order for clicking on a radio button.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "click [radio] [1]", "change [radio] [-]" },
-            IE = { "click [radio] [-]" },
-            IE11 = { "change [radio] [-]", "click [radio] [1]" })
+    @Alerts(DEFAULT = { "change [radio] [-]", "click [radio] [1]" },
+            FF = { "click [radio] [1]", "change [radio] [-]" },
+            IE8 = { "click [radio] [-]" })
     public void radioClick() throws Exception {
         final String firstSnippet = "       <input type='radio' name='radio' id='clickMe' value='2'\n";
         final String secondSnippet = ">Radio\n";
@@ -79,9 +99,9 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "click [checkbox] [1]", "change [checkbox] [-]" },
-            IE = { "click [checkbox] [-]" },
-            IE11 = { "change [checkbox] [-]", "click [checkbox] [1]" })
+    @Alerts(DEFAULT = { "change [checkbox] [-]", "click [checkbox] [1]" },
+            FF = { "click [checkbox] [1]", "change [checkbox] [-]" },
+            IE8 = { "click [checkbox] [-]" })
     public void checkboxClick() throws Exception {
         final String firstSnippet = "       <input type='checkbox' name='checkbox' id='clickMe' value='2'\n";
         final String secondSnippet = ">Checkbox\n";

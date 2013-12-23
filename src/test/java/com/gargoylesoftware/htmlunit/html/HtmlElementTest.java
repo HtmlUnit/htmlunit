@@ -39,6 +39,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Sudhan Moghe
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HtmlElementTest extends SimpleWebTestCase {
@@ -902,7 +903,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final NodeList divs = body.getElementsByTagName("div");
         assertEquals(3, divs.getLength());
 
-        final HtmlDivision newDiv = new HtmlDivision(null, HtmlDivision.TAG_NAME, page, null);
+        final HtmlDivision newDiv = new HtmlDivision(HtmlDivision.TAG_NAME, page, null);
         body.appendChild(newDiv);
         assertEquals(4, divs.getLength());
     }

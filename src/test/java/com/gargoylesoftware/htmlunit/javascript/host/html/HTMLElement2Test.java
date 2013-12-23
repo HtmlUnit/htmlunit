@@ -67,6 +67,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "http://www.meh.com/meh" },
             IE8 = { "blah", "http://www.blah.com/blah", "error" })
+    @NotYetImplemented(IE8)
     public void scopeName2() throws Exception {
         final String html = "<html xmlns:blah='http://www.blah.com/blah'><head>\n"
             + "<script>\n"

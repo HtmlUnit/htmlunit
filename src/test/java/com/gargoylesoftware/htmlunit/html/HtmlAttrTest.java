@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * @author Denis N. Antonioli
  * @author Ahmed Ashour
  * @author David K. Taylor
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HtmlAttrTest extends SimpleWebTestCase {
@@ -52,7 +53,7 @@ public class HtmlAttrTest extends SimpleWebTestCase {
 
     static {
         final Map<String, DomAttr> emptyMap = Collections.emptyMap();
-        HTML_ELEMENT = new HtmlElement(null, "dummy", null, emptyMap) {
+        HTML_ELEMENT = new HtmlElement("dummy", null, emptyMap) {
             @Override
             public HtmlPage getPage() {
                 return null;

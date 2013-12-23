@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.util.LinkedList;
@@ -27,7 +28,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -157,7 +157,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "onchange-select; onclick-option; onclick-select;",
             IE = "onchange-select; onclick-select;")
-    @BuggyWebDriver(Browser.FF)
+    @BuggyWebDriver(FF)
     @NotYetImplemented
     public void clickOptionEventSequence1() throws Exception {
         final String html = "<html><head>\n"
@@ -197,8 +197,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "change-SELECT; click-OPTION; click-OPTION;",
             IE = "change-SELECT; click-SELECT;")
-    @BuggyWebDriver(Browser.FF)
-    @NotYetImplemented
+    @BuggyWebDriver(FF)
     public void clickOptionEventSequence2() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -259,8 +258,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "onchange-select; change-SELECT; onclick-option; click-OPTION; onclick-select; click-OPTION;",
             IE = "onchange-select; change-SELECT; onclick-select; click-SELECT;")
-    @BuggyWebDriver(Browser.FF)
-    @NotYetImplemented
+    @BuggyWebDriver(FF)
     public void clickOptionEventSequence3() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -356,7 +354,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             + "  var sel = document.form1.select1;\n"
             + "  sel.options[1].selected = true;\n"
             + "  alert(sel.selectedIndex);\n"
-            + "}</script></head><body onload='doTest()'>\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
             + "<form name='form1'>\n"
             + "    <select name='select1' onfocus='alert(\"focus\")'>\n"
             + "        <option value='option1' name='option1'>One</option>\n"

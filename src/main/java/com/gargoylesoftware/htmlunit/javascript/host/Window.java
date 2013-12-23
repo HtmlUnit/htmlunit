@@ -307,7 +307,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the current event (used by JavaScript only when emulating IE).
      * @return the current event, or <tt>null</tt> if no event is currently available
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public Object getEvent() {
         return currentEvent_;
     }
@@ -1140,7 +1140,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536343.aspx">MSDN documentation</a>
      * @return <code>true</code> if the listener has been added
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
     public boolean attachEvent(final String type, final Function listener) {
         return getEventListenersContainer().addEventListener(StringUtils.substring(type, 2), listener, false);
     }
