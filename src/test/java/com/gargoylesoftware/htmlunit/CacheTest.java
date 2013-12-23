@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class CacheTest extends SimpleWebTestCase {
@@ -150,7 +151,7 @@ public class CacheTest extends SimpleWebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final String content2 = "<html>\n2"
+        final String content2 = "<html>\n"
             + "<head>\n"
             + "  <title>page 2</title>\n"
             + "  <script src='foo2.js?foo[1]=bar/baz'></script>\n"
@@ -211,11 +212,11 @@ public class CacheTest extends SimpleWebTestCase {
             + "    alert(rules.length);\n"
             + "    rules = sheets[1].cssRules || sheets[1].rules;\n"
             + "    alert(rules.length);\n"
-            + "  </script>\n" + "  </body>\n"
+            + "  </script>\n"
             + "</body>\n"
             + "</html>";
 
-        final String content2 = "<html>\n2"
+        final String content2 = "<html>\n"
             + "<head>\n"
             + "  <title>page 2</title>\n"
             + "  <link href='foo2.js?foo[1]=bar/baz' type='text/css' rel='stylesheet'>\n"
@@ -227,7 +228,7 @@ public class CacheTest extends SimpleWebTestCase {
             + "    alert(sheets.length);\n"
             + "    var rules = sheets[0].cssRules || sheets[0].rules;\n"
             + "    alert(rules.length);\n"
-            + "  </script>\n" + "  </body>\n"
+            + "  </script>\n"
             + "</body>\n"
             + "</html>";
 
