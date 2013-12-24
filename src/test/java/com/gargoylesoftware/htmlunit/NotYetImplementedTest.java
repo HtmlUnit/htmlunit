@@ -66,7 +66,7 @@ public class NotYetImplementedTest {
         int index = 1;
         String revision = "-1";
         for (final String line : lines) {
-            if (line.contains("notYetImplemented()")) {
+            if (line.contains("@NotYetImplemented()")) {
                 String methodName = null;
                 for (int i = index; i >= 0; i--) {
                     final String l = lines.get(i);
@@ -80,10 +80,12 @@ public class NotYetImplementedTest {
                 entries_.add(path + ';' + revision + ';' + methodName + ';' + lineNumber + ';' + description);
             }
             else if (line.startsWith("    @NotYetImplemented")) {
-                final String browser;
+                String browser;
                 if (line.contains("(")) {
-                    browser = line.replaceAll(".*\\((.*)\\).*", "$1").replaceAll("Browser\\.", "")
-                        .replaceAll("[{}]", "").trim();
+                    browser = line.replaceAll(".*\\((.*)\\).*", "$1");
+                    browser = browser.replaceAll("Browser\\.", "");
+                    browser = browser.replaceAll("[{}]", "");
+                    browser = browser.trim();
                 }
                 else {
                     browser = "";
@@ -142,12 +144,32 @@ public class NotYetImplementedTest {
 
     private void save() throws Exception {
         final StringBuilder builder = new StringBuilder();
-        builder.append("<html><head></head><body>\n");
-        builder.append("NotYetImplemented is a condition in which a test is known to fail with HtmlUnit.");
-        builder.append("<table border='1'>\n");
+        builder.append("<html><head>\n");
+        builder.append("<style type=\"text/css\">\n");
+        builder.append("table.bottomBorder { border-collapse:collapse; }\n");
+        builder.append("table.bottomBorder td, table.bottomBorder th { "
+                            + "border-bottom:1px dotted black;padding:5px; }\n");
+        builder.append("table.bottomBorder td.numeric { text-align:right; }\n");
+        builder.append("</style>\n");
+        builder.append("</head><body>\n");
+        builder.append("<p>NotYetImplemented is a condition in which a test is known to fail with HtmlUnit.</p>");
+        // statistics
+        builder.append("<h3>Overview</h3>");
+        final int overviewPos = builder.length();
+        // per browser
+
+        // details
+        builder.append("<h3>Details</h3>");
+        builder.append("<table class='bottomBorder'>\n");
         builder.append("  <tr><th>File</th><th>#</th><th>Method</th><th>Line</th><th>Description</th></tr>\n");
         String lastFile = null;
+
         int count = 0;
+        int countIE8 = 0;
+        int countIE9 = 0;
+        int countIE11 = 0;
+        int countFF17 = 0;
+        int countFF24 = 0;
         for (final String entry : entries_) {
             final String[] values = entry.split(";");
             final String file = values[0];
@@ -155,7 +177,7 @@ public class NotYetImplementedTest {
             final String revision = values[1];
             final String method = values[2];
             final String line = values[3];
-            final String browser = values.length > 5 ? values[4] : "";
+            final String browser = values.length >= 5 ? values[4] : "All";
             final String description = entry.endsWith(";") ? "&nbsp;"
                     : values[values.length - 1].replace("__semicolon__", ";");
             builder.append("  <tr>\n");
@@ -180,11 +202,86 @@ public class NotYetImplementedTest {
             builder.append("    <td><a href='https://sourceforge.net/p/htmlunit/code/" + revision
                     + "/tree/trunk/htmlunit/" + file + "#l" + line + "'>").append(method).append("</a> ")
                     .append(browser).append("</td>\n");
-            builder.append("    <td>").append(line).append("</td>\n");
+            builder.append("    <td class='numeric'>").append(line).append("</td>\n");
             builder.append("    <td>").append(description).append("</td>\n");
             builder.append("  </tr>\n");
+
+            if (browser.contains("IE8")) {
+                countIE8++;
+            }
+            if (browser.contains("IE11")) {
+                countIE11++;
+            }
+            if (browser.contains("IE9")) {
+                countIE9++;
+            }
+            if (!browser.contains("IE8")
+                    && !browser.contains("IE8")
+                    && !browser.contains("IE9")
+                    && browser.contains("IE11")) {
+                countIE8++;
+                countIE9++;
+                countIE11++;
+            }
+
+            if (browser.contains("FF17")) {
+                countFF17++;
+            }
+            if (browser.contains("FF24")) {
+                countFF24++;
+            }
+            if (!browser.contains("FF17")
+                    && !browser.contains("FF24")
+                    && browser.contains("FF")) {
+                countFF17++;
+                countFF24++;
+            }
+            if (browser.contains("All")) {
+                countIE8++;
+                countIE9++;
+                countIE11++;
+                countFF17++;
+                countFF24++;
+            }
+
         }
         builder.append("</table>\n").append("</body></html>");
+
+        final StringBuilder overview = new StringBuilder();
+        overview.append("<table class='bottomBorder'>\n");
+        overview.append("  <tr>\n");
+        overview.append("    <td class='numeric'>").append(Integer.toString(count)).append("</td>\n");
+        overview.append("    <td>methods marked as NotYetImplemented</td>\n");
+        overview.append("  </tr>\n");
+
+        overview.append("  <tr>\n");
+        overview.append("    <td class='numeric'>").append(Integer.toString(countIE8)).append("</td>\n");
+        overview.append("    <td>for IE8</td>\n");
+        overview.append("  </tr>\n");
+
+        overview.append("  <tr>\n");
+        overview.append("    <td class='numeric'>").append(Integer.toString(countIE9)).append("</td>\n");
+        overview.append("    <td>for IE9</td>\n");
+        overview.append("  </tr>\n");
+
+        overview.append("  <tr>\n");
+        overview.append("    <td class='numeric'>").append(Integer.toString(countIE11)).append("</td>\n");
+        overview.append("    <td>for IE11</td>\n");
+        overview.append("  </tr>\n");
+
+        overview.append("  <tr>\n");
+        overview.append("    <td class='numeric'>").append(Integer.toString(countFF17)).append("</td>\n");
+        overview.append("    <td>for FF17</td>\n");
+        overview.append("  </tr>\n");
+
+        overview.append("  <tr>\n");
+        overview.append("    <td class='numeric'>").append(Integer.toString(countFF24)).append("</td>\n");
+        overview.append("    <td>for FF24</td>\n");
+        overview.append("  </tr>\n");
+        overview.append("</table>\n");
+
+        builder.insert(overviewPos, overview);
+
         FileUtils.writeStringToFile(new File(PropertiesTest.getArtifactsDirectory(), "notYetImplemented.html"),
                 builder.toString());
     }
