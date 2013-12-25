@@ -77,18 +77,15 @@ public class NotYetImplementedTest {
                 }
                 final int lineNumber = getLineNumber(lines, index);
                 final String description = getDescription(lines, index);
-                entries_.add(path + ';' + revision + ';' + methodName + ';' + lineNumber + ';' + description);
+                entries_.add(path + ';' + revision + ';' + methodName + ';' + lineNumber + ";All;" + description);
             }
             else if (line.startsWith("    @NotYetImplemented")) {
-                String browser;
+                String browser = "All";
                 if (line.contains("(")) {
                     browser = line.replaceAll(".*\\((.*)\\).*", "$1");
                     browser = browser.replaceAll("Browser\\.", "");
                     browser = browser.replaceAll("[{}]", "");
                     browser = browser.trim();
-                }
-                else {
-                    browser = "";
                 }
                 String methodName = null;
                 for (int i = index; i < lines.size(); i++) {
@@ -177,7 +174,7 @@ public class NotYetImplementedTest {
             final String revision = values[1];
             final String method = values[2];
             final String line = values[3];
-            final String browser = values.length >= 5 ? values[4] : "All";
+            final String browser = values[4];
             final String description = entry.endsWith(";") ? "&nbsp;"
                     : values[values.length - 1].replace("__semicolon__", ";");
             builder.append("  <tr>\n");
