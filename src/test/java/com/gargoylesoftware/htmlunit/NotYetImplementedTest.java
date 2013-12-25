@@ -68,7 +68,7 @@ public class NotYetImplementedTest {
         for (final String line : lines) {
             if (line.contains("@NotYetImplemented()")) {
                 String methodName = null;
-                for (int i = index; i >= 0; i--) {
+                for (int i = index; i < lines.size(); i++) {
                     final String l = lines.get(i);
                     if (l.startsWith("    public ")) {
                         methodName = l.split(" ")[6];
