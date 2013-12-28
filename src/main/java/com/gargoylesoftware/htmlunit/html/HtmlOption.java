@@ -280,7 +280,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
         if (hasFeature(EVENT_ONCLICK_FOR_SELECT_ONLY)) {
             final SgmlPage page = getPage();
 
-            if (this.isDisabled()) {
+            if (isDisabled()) {
                 return (P) page;
             }
 
