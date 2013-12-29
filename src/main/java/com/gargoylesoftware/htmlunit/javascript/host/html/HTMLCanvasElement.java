@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D;
+import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 
 /**
  * A JavaScript object for {@link HtmlCanvas}.
@@ -45,7 +46,8 @@ public class HTMLCanvasElement extends HTMLElement {
     @Override
     @JsxGetter
     public int getWidth() {
-        return getCurrentStyle().getCalculatedWidth(false, false);
+        final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
+        return style.getCalculatedWidth(false, false);
     }
 
     /**
@@ -64,7 +66,8 @@ public class HTMLCanvasElement extends HTMLElement {
     @Override
     @JsxGetter
     public int getHeight() {
-        return getCurrentStyle().getCalculatedHeight(false, false);
+        final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
+        return style.getCalculatedHeight(false, false);
     }
 
     /**

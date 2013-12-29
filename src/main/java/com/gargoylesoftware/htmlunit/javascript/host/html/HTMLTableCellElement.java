@@ -73,7 +73,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
             return super.getOffsetHeight();
         }
 
-        final ComputedCSSStyleDeclaration style = getCurrentStyle();
+        final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
         final boolean includeBorder = getBrowserVersion().hasFeature(GENERATED_93);
         return style.getCalculatedHeight(includeBorder, true);
     }
@@ -89,7 +89,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
             return (int) w;
         }
 
-        final ComputedCSSStyleDeclaration style = getCurrentStyle();
+        final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
         if ("collapse".equals(style.getBorderCollapse())) {
             final HtmlTableRow row = getRow();
             if (row != null) {

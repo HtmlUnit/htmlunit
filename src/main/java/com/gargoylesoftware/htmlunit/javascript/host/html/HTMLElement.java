@@ -1636,14 +1636,15 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             // compute appropriate offset height to pretend mouse event was produced within this element
             return event.getClientY() - getPosY() + 50;
         }
-        return getCurrentStyle().getCalculatedHeight(true, true);
+        final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
+        return style.getCalculatedHeight(true, true);
     }
 
     private boolean isDislayNone() {
         // if a parent is display:none there's nothing that a child can do to override it
         HTMLElement element = this;
         while (element != null) {
-            final CSSStyleDeclaration style = element.getCurrentStyle();
+            final CSSStyleDeclaration style = element.getWindow().getComputedStyle(element, null);
             final String display = style.getDisplay();
             if ("none".equals(display)) {
                 return true;
@@ -1672,7 +1673,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             // compute appropriate offset width to pretend mouse event was produced within this element
             return event.getClientX() - getPosX() + 50;
         }
-        return getCurrentStyle().getCalculatedWidth(true, true);
+        final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
+        return style.getCalculatedWidth(true, true);
     }
 
     /**
@@ -1712,7 +1714,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             scrollTop_ = 0;
         }
         else if (scrollTop_ > 0) {
-            if (!getCurrentStyle().isScrollable(false)) {
+            final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
+            if (!style.isScrollable(false)) {
                 scrollTop_ = 0;
             }
         }
@@ -1741,7 +1744,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             scrollLeft_ = 0;
         }
         else if (scrollLeft_ > 0) {
-            if (!getCurrentStyle().isScrollable(true)) {
+            final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
+            if (!style.isScrollable(true)) {
                 scrollLeft_ = 0;
             }
         }
@@ -2501,10 +2505,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         // Add the offset for this node.
         DomNode node = getDomNodeOrDie();
         HTMLElement element = (HTMLElement) node.getScriptObject();
-        left += element.getCurrentStyle().getLeft(true, false, false);
+        ComputedCSSStyleDeclaration style = element.getWindow().getComputedStyle(element, null);
+        left += style.getLeft(true, false, false);
 
         // If this node is absolutely positioned, we're done.
-        final String position = element.getCurrentStyle().getPositionWithInheritance();
+        final String position = style.getPositionWithInheritance();
         if ("absolute".equals(position)) {
             return left;
         }
@@ -2514,14 +2519,16 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         while (node != null && node.getScriptObject() != offsetParent) {
             if (node.getScriptObject() instanceof HTMLElement) {
                 element = (HTMLElement) node.getScriptObject();
-                left += element.getCurrentStyle().getLeft(true, true, true);
+                style = element.getWindow().getComputedStyle(element, null);
+                left += style.getLeft(true, true, true);
             }
             node = node.getParentNode();
         }
 
         if (offsetParent != null) {
-            left += offsetParent.getCurrentStyle().getMarginLeftValue();
-            left += offsetParent.getCurrentStyle().getPaddingLeftValue();
+            style = offsetParent.getWindow().getComputedStyle(offsetParent, null);
+            left += style.getMarginLeftValue();
+            left += style.getPaddingLeftValue();
         }
 
         return left;
@@ -2537,7 +2544,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         while (element != null) {
             cumulativeOffset += element.getOffsetLeft();
             if (element != this) {
-                cumulativeOffset += element.getCurrentStyle().getBorderLeftValue();
+                final ComputedCSSStyleDeclaration style = element.getWindow().getComputedStyle(element, null);
+                cumulativeOffset += style.getBorderLeftValue();
             }
             element = element.getOffsetParent();
         }
@@ -2554,7 +2562,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         while (element != null) {
             cumulativeOffset += element.getOffsetTop();
             if (element != this) {
-                cumulativeOffset += element.getCurrentStyle().getBorderTopValue();
+                final ComputedCSSStyleDeclaration style = element.getWindow().getComputedStyle(element, null);
+                cumulativeOffset += style.getBorderTopValue();
             }
             element = element.getOffsetParent();
         }
@@ -2582,7 +2591,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         if (getBrowserVersion().hasFeature(JS_CLIENT_LEFT_TOP_ZERO)) {
             return 0;
         }
-        return getCurrentStyle().getBorderLeftValue();
+        final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
+        return style.getBorderLeftValue();
     }
 
     /**
@@ -2594,7 +2604,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         if (getBrowserVersion().hasFeature(JS_CLIENT_LEFT_TOP_ZERO)) {
             return 0;
         }
-        return getCurrentStyle().getBorderTopValue();
+        final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
+        return style.getBorderTopValue();
     }
 
     /**
@@ -2618,10 +2629,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         // Add the offset for this node.
         DomNode node = getDomNodeOrDie();
         HTMLElement element = (HTMLElement) node.getScriptObject();
-        top += element.getCurrentStyle().getTop(true, false, false);
+        ComputedCSSStyleDeclaration style = element.getWindow().getComputedStyle(element, null);
+        top += style.getTop(true, false, false);
 
         // If this node is absolutely positioned, we're done.
-        final String position = element.getCurrentStyle().getPositionWithInheritance();
+        final String position = style.getPositionWithInheritance();
         if ("absolute".equals(position)) {
             return top;
         }
@@ -2631,18 +2643,22 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         while (node != null && node.getScriptObject() != offsetParent) {
             if (node.getScriptObject() instanceof HTMLElement) {
                 element = (HTMLElement) node.getScriptObject();
-                top += element.getCurrentStyle().getTop(false, true, true);
+                style = element.getWindow().getComputedStyle(element, null);
+                top += style.getTop(false, true, true);
             }
             node = node.getParentNode();
         }
 
         if (offsetParent != null) {
             final HTMLElement thiz = (HTMLElement) getDomNodeOrDie().getScriptObject();
-            final boolean thisElementHasTopMargin = (thiz.getCurrentStyle().getMarginTopValue() != 0);
+            style = thiz.getWindow().getComputedStyle(thiz, null);
+            final boolean thisElementHasTopMargin = style.getMarginTopValue() != 0;
+
+            style = offsetParent.getWindow().getComputedStyle(offsetParent, null);
             if (!thisElementHasTopMargin) {
-                top += offsetParent.getCurrentStyle().getMarginTopValue();
+                top += style.getMarginTopValue();
             }
-            top += offsetParent.getCurrentStyle().getPaddingTopValue();
+            top += style.getPaddingTopValue();
         }
 
         return top;
@@ -2673,7 +2689,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         Object offsetParent = null;
         final HTMLElement htmlElement = (HTMLElement) currentElement.getScriptObject();
-        final ComputedCSSStyleDeclaration style = htmlElement.getCurrentStyle();
+        final ComputedCSSStyleDeclaration style = htmlElement.getWindow().getComputedStyle(htmlElement, null);
         final String position = style.getPositionWithInheritance();
         final boolean ie = getBrowserVersion().hasFeature(GENERATED_72);
         final boolean staticPos = "static".equals(position);
@@ -2692,7 +2708,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
             if (parentNode != null && parentNode.getScriptObject() instanceof HTMLElement) {
                 final HTMLElement parentElement = (HTMLElement) parentNode.getScriptObject();
-                final ComputedCSSStyleDeclaration parentStyle = parentElement.getCurrentStyle();
+                final ComputedCSSStyleDeclaration parentStyle =
+                            parentElement.getWindow().getComputedStyle(parentElement, null);
                 final String parentPosition = parentStyle.getPositionWithInheritance();
                 final boolean parentIsStatic = "static".equals(parentPosition);
                 final boolean parentIsFixed = "fixed".equals(parentPosition);
