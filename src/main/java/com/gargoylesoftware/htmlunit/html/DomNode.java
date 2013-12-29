@@ -709,7 +709,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             for (final Node node : getAncestors(true)) {
                 final ScriptableObject scriptableObject = ((DomNode) node).getScriptObject();
                 if (scriptableObject instanceof HTMLElement) {
-                    final CSSStyleDeclaration style = ((HTMLElement) scriptableObject).getCurrentStyle();
+                    final HTMLElement elem = (HTMLElement) scriptableObject;
+                    final CSSStyleDeclaration style = elem.getWindow().getComputedStyle(elem, null);
                     final String display = style.getDisplay();
                     if ("none".equals(display)) {
                         return false;
@@ -1749,10 +1750,12 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
      * Indicates if this node is currently directly attached to the page.
      * @return <code>true</code> if the page is one ancestor of the node.
      */
-    protected boolean isDirectlyAttachedToPage() {
+    public boolean isDirectlyAttachedToPage() {
         return directlyAttachedToPage_;
     }
 

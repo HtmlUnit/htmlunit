@@ -2371,8 +2371,12 @@ public class HtmlPage extends SgmlPage {
         return "BackCompat".equals(((HTMLDocument) getScriptObject()).getCompatMode());
     }
 
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * {@inheritDoc}
+     */
     @Override
-    protected boolean isDirectlyAttachedToPage() {
+    public boolean isDirectlyAttachedToPage() {
         return true;
     }
 
