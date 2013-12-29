@@ -16,10 +16,10 @@ package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DIALOGWINDOW_REFERER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_150;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PROTOCOL_DATA;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MINIMAL_QUERY_ENCODING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.WINDOW_ACTIVE_ELEMENT_FOCUSED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -42,8 +42,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
-
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.io.IOUtils;
@@ -1697,8 +1695,9 @@ public class WebClient implements Serializable {
                 // now looks at the visibility of the frame window
                 final BaseFrameElement frameElement = fw.getFrameElement();
                 if (frameElement.isDisplayed()) {
-                    final ScriptableObject scriptableObject = frameElement.getScriptObject();
-                    final ComputedCSSStyleDeclaration style = ((HTMLElement) scriptableObject).getCurrentStyle();
+                    final HTMLElement htmlElement = (HTMLElement) frameElement.getScriptObject();
+                    final ComputedCSSStyleDeclaration style =
+                            htmlElement.getWindow().getComputedStyle(htmlElement, null);
                     use = (style.getCalculatedWidth(false, false) != 0)
                         && (style.getCalculatedHeight(false, false) != 0);
                 }
