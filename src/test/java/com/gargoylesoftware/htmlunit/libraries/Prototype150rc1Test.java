@@ -30,9 +30,24 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class Prototype150rc1Test extends PrototypeTestBase {
+
+    /**
+     * @return the resource base url
+     */
+    protected String getBaseUrl() {
+        return "http://localhost:" + PORT + "/test/unit/";
+    }
+
+    /**
+     * @return the resource base directory
+     */
+    protected String getResourceBase() {
+        return "src/test/resources/libraries/prototype/" + getVersion();
+    }
 
     /**
      * @throws Exception if test fails

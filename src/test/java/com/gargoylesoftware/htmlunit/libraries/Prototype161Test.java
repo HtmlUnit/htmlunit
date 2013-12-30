@@ -195,7 +195,7 @@ public class Prototype161Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented
+    @NotYetImplemented(IE)
     public void selector() throws Exception {
         test("selector.html");
     }

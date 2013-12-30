@@ -38,6 +38,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public abstract class PrototypeTestBase extends WebServerTestCase {
 
@@ -58,8 +59,9 @@ public abstract class PrototypeTestBase extends WebServerTestCase {
      */
     protected void test(final String filename) throws Exception {
         webClient_ = getWebClient();
+
         final HtmlPage page =
-            webClient_.getPage("http://localhost:" + PORT + "/test/unit/" + filename);
+            webClient_.getPage(getBaseUrl() + filename);
 
         webClient_.waitForBackgroundJavaScript(25000);
 
@@ -122,7 +124,7 @@ public abstract class PrototypeTestBase extends WebServerTestCase {
      */
     @Before
     public void setUp() throws Exception {
-        startWebServer("src/test/resources/libraries/prototype/" + getVersion());
+        startWebServer(getResourceBase());
     }
 
     /**
@@ -135,5 +137,19 @@ public abstract class PrototypeTestBase extends WebServerTestCase {
     public void tearDown() throws Exception {
         super.tearDown();
         webClient_.closeAllWindows();
+    }
+
+    /**
+     * @return the resource base url
+     */
+    protected String getBaseUrl() {
+        return "http://localhost:" + PORT + "/";
+    }
+
+    /**
+     * @return the resource base directory
+     */
+    protected String getResourceBase() {
+        return "src/test/resources/libraries/prototype/" + getVersion() + "/test/unit/";
     }
 }
