@@ -37,7 +37,7 @@ public class Prototype171Test extends PrototypeTestBase {
      * For IE: 2 assertions pass whereas they shouldn't in testResponders
      */
     @Test
-    @NotYetImplemented
+    @NotYetImplemented(IE)
     public void ajax() throws Exception {
         test("ajax_test.html");
     }
