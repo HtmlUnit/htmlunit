@@ -4466,7 +4466,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
          * @return the CSS attribute value for the specified element
          */
         public final String get(final Element element) {
-            final ComputedCSSStyleDeclaration style = element.getCurrentStyle();
+            final ComputedCSSStyleDeclaration style = element.getWindow().getComputedStyle(element, null);
             final String value = get(style);
             return value;
         }

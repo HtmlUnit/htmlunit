@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.14" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Return value fixed for element.height and element.width when element is not attached to the page.
+            </action>
+            <action type="fix" dev="rbri">
+                Element.currentStyle returns null for elements not attached to the page.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade commons-codec to 1.9.
             </action>

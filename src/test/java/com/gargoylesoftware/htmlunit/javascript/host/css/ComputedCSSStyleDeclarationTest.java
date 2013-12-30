@@ -1219,6 +1219,28 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "auto", "auto" }, IE8 = { "-", "-" })
+    public void widthAndHeightDisconnected() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var e = document.createElement('div');\n"
+            + "      var style = window.getComputedStyle ? window.getComputedStyle(e, null) : e.currentStyle;\n"
+            + "      alert(style ? style.width : '-');\n"
+            + "      alert(style ? style.height : '-');\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

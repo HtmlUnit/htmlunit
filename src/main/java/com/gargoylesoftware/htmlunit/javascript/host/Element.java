@@ -543,6 +543,9 @@ public class Element extends EventNode {
      */
     @JsxGetter(@WebBrowser(IE))
     public ComputedCSSStyleDeclaration getCurrentStyle() {
+        if (!getDomNodeOrDie().isDirectlyAttachedToPage()) {
+            return null;
+        }
         return getWindow().getComputedStyle(this, null);
     }
 

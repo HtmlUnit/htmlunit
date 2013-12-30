@@ -6523,7 +6523,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented(FF)
     public void dimensions__innerWidth__() throws Exception {
         runTest("dimensions: innerWidth()");
     }
@@ -6534,7 +6533,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
-    @NotYetImplemented
     public void dimensions__innerHeight__() throws Exception {
         runTest("dimensions: innerHeight()");
     }
@@ -6545,7 +6543,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 11, 11")
-    @NotYetImplemented(FF)
     public void dimensions__outerWidth__() throws Exception {
         runTest("dimensions: outerWidth()");
     }
@@ -6596,7 +6593,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 11, 11")
-    @NotYetImplemented
     public void dimensions__outerHeight__() throws Exception {
         runTest("dimensions: outerHeight()");
     }

@@ -1109,4 +1109,26 @@ public class ElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "undefined", "undefined" }, IE = { "available", "null" })
+    public void currentStyle() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var e = document.getElementById('tester');\n"
+            + "      alert(e.currentStyle ? 'available' : e.currentStyle);\n"
+            + "      e = document.createElement('div');\n"
+            + "      alert(e.currentStyle ? 'available' : e.currentStyle);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='tester'></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }
