@@ -1297,7 +1297,7 @@ public enum BrowserVersionFeatures {
     /** Changing the opener of an window to something not null
      * is not valid (in FF).
      */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 17), @WebBrowser(CHROME) })
     JS_WINDOW_CHANGE_OPENER_NOT_ALLOWED,
 
     /** Support for accessing the frame of a window by id additionally
