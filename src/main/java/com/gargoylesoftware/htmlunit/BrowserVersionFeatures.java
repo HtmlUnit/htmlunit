@@ -399,7 +399,7 @@ public enum BrowserVersionFeatures {
     GENERATED_96,
 
     /** If the class name is [object GeoGeolocation]. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 17))
     GEO_GEOLOCATION,
 
     /** */
