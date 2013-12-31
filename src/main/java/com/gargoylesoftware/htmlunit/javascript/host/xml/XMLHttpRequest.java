@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ERRORHANDLER_NOT_SUPPORTED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_IGNORE_SAME_ORIGIN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_IGNORE_SAME_ORIGIN_TO_ABOUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYSTATECANGE_SYNC_REQUESTS_COMPLETED;
@@ -586,9 +587,11 @@ public class XMLHttpRequest extends SimpleScriptable {
             doSend(Context.getCurrentContext());
         }
         else {
-            // quite strange but IE and FF seem both to fire state loading twice
-            // in async mode (at least with HTML of the unit tests)
-            setState(STATE_OPENED, Context.getCurrentContext());
+            if (getBrowserVersion().hasFeature(XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE)) {
+                // quite strange but IE and FF seem both to fire state loading twice
+                // in async mode (at least with HTML of the unit tests)
+                setState(STATE_OPENED, Context.getCurrentContext());
+            }
 
             // Create and start a thread in which to execute the request.
             final Scriptable startingScope = getWindow();

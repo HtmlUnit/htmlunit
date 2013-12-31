@@ -1494,6 +1494,12 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     XHR_ERRORHANDLER_NOT_SUPPORTED,
 
+    /** XMLHttpRequest triggers the opened event at the beginning of the send
+     * method again.
+     */
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 17) })
+    XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE,
+
     /** Indicates if a same origin check should be skipped. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 8) })
     XHR_IGNORE_SAME_ORIGIN,

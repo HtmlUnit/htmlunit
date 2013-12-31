@@ -7,7 +7,13 @@
     </properties>
 
     <body>
-        <release version="2.14" date="???" description="Bugfixes">
+        <release version="2.14" date="???" description="Bugfixes, initial work on FF24 and IE11">
+            <action type="fix" dev="rbri">
+                JavaScript: XMLHttpRequest event processing fixed for FF24.
+            </action>
+            <action type="fix" dev="rbri">
+                Return value fixed for element.height and element.width when element is not attached to the page.
+            </action>
             <action type="add" dev="rbri">
                 JavaScript: String.contains() added for FF18 and later.
             </action>
