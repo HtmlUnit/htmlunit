@@ -9,6 +9,9 @@
     <body>
         <release version="2.14" date="???" description="Bugfixes, initial work on FF24 and IE11">
             <action type="fix" dev="rbri">
+                JavaScript: Node.attributes is no longer supported (since FF22).
+            </action>
+            <action type="fix" dev="rbri">
                 JavaScript: XMLHttpRequest event processing fixed for FF24.
             </action>
             <action type="fix" dev="rbri">

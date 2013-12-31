@@ -1024,7 +1024,7 @@ public class Node extends SimpleScriptable {
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/Node.attributes">Gecko DOM Reference</a>
      * @return the attributes of this XML element
      */
-    @JsxGetter
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 21) })
     public Object getAttributes() {
         return null;
     }
