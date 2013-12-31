@@ -27,6 +27,7 @@ import java.util.Map;
 
 import javax.servlet.Servlet;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -63,17 +64,13 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
     private static final String MSG_NO_CONTENT = "no Content";
     private static final String MSG_PROCESSING_ERROR = "error processing";
 
-    private static final String UNSENT = String.valueOf(XMLHttpRequest.STATE_UNSENT);
-    private static final String OPENED = String.valueOf(XMLHttpRequest.STATE_OPENED);
-    private static final String HEADERS_RECEIVED = String.valueOf(XMLHttpRequest.STATE_HEADERS_RECEIVED);
-    private static final String LOADING = String.valueOf(XMLHttpRequest.STATE_LOADING);
-    private static final String DONE = String.valueOf(XMLHttpRequest.STATE_DONE);
-
     /**
      * Tests asynchronous use of XMLHttpRequest, using Mozilla style object creation.
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "0", "1", "1", "2", "3", "4" },
+                FF24 = { "0", "1", "2", "3", "4" })
     public void asyncUse() throws Exception {
         final String html =
               "<html>\n"
@@ -118,8 +115,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         client.getPage(URL_FIRST);
 
         assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
-        final String[] alerts = {UNSENT, OPENED, OPENED, HEADERS_RECEIVED, LOADING, DONE, xml};
-        assertEquals(alerts, collectedAlerts);
+        assertEquals(ArrayUtils.add(getExpectedAlerts(), xml), collectedAlerts);
     }
 
     /**
@@ -128,7 +124,8 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
      */
     @Test
     @Alerts(IE = { "0", "1", "1", "2", "4", MSG_NO_CONTENT },
-            FF = { "0", "1", "1", "2", "4", MSG_NO_CONTENT, MSG_PROCESSING_ERROR })
+            FF = { "0", "1", "2", "4", MSG_NO_CONTENT, MSG_PROCESSING_ERROR },
+            FF17 = { "0", "1", "1", "2", "4", MSG_NO_CONTENT, MSG_PROCESSING_ERROR })
     public void testAsyncUseWithNetworkConnectionFailure() throws Exception {
         final String html =
               "<html>\n"
