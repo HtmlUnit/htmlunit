@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_KEYGEN_DISPLAY_INLINE_BLOCK;
+
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -50,6 +52,9 @@ public class HtmlKeygen extends HtmlElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
+        if (hasFeature(CSS_KEYGEN_DISPLAY_INLINE_BLOCK)) {
+            return DisplayStyle.INLINE_BLOCK;
+        }
         return DisplayStyle.INLINE;
     }
 }
