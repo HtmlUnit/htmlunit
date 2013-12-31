@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlBackgroundSoundTest extends SimpleWebTestCase {
@@ -34,7 +35,10 @@ public class HtmlBackgroundSoundTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "[object HTMLBGSoundElement]", FF = "[object HTMLSpanElement]", CHROME = "[object HTMLElement]")
+    @Alerts(IE = "[object HTMLBGSoundElement]",
+            FF = "[object HTMLUnknownElement]",
+            FF17 = "[object HTMLSpanElement]",
+            CHROME = "[object HTMLElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ +  "<html><head>\n"
             + "<script>\n"
