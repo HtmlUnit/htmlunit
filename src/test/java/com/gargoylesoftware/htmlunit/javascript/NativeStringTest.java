@@ -155,4 +155,43 @@ public class NativeStringTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "contains not supported",
+            FF24 = { "true", "false", "true", "true", "true", "false", "true", "true", "true", "false",
+                        "true", "true", "false", "false" })
+    public void contains() throws Exception {
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "  if ('contains' in String.prototype) {"
+            + "    var str = 'To be, or not to be, that is the question.';\n"
+            + "    alert(str.contains('To be'));\n"
+            + "    alert(str.contains('TO'));\n"
+            + "    alert(str.contains(''));\n"
+            + "    alert(str.contains(' '));\n"
+            + "    alert(str.contains('To be', 0));\n"
+            + "    alert(str.contains('TO', 0));\n"
+            + "    alert(str.contains(' ', 0));\n"
+            + "    alert(str.contains('', 0));\n"
+            + "    alert(str.contains('or', 7));\n"
+            + "    alert(str.contains('or', 8));\n"
+
+            + "    alert(str.contains('or', -3));\n"
+            + "    alert(str.contains('or', 7.9));\n"
+            + "    alert(str.contains('or', 8.1));\n"
+            + "    alert(str.contains());\n"
+            + "  } else {\n"
+            + "    alert('contains not supported');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

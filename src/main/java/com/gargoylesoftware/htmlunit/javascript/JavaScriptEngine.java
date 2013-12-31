@@ -24,6 +24,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_B
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_TOSOURCE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_HAS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_CONTAINS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_TRIM;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_TRIM_LEFT_RIGHT;
 
@@ -294,6 +295,12 @@ public class JavaScriptEngine {
             final ScriptableObject stringPrototype =
                 (ScriptableObject) ScriptableObject.getClassPrototype(window, "String");
             stringPrototype.defineFunctionProperties(new String[] {"trimLeft", "trimRight"},
+                StringCustom.class, ScriptableObject.EMPTY);
+        }
+        if (browserVersion.hasFeature(STRING_CONTAINS)) {
+            final ScriptableObject stringPrototype =
+                (ScriptableObject) ScriptableObject.getClassPrototype(window, "String");
+            stringPrototype.defineFunctionProperties(new String[] {"contains"},
                 StringCustom.class, ScriptableObject.EMPTY);
         }
 

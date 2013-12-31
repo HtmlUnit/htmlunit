@@ -24,6 +24,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public final class StringCustom {
 
@@ -71,5 +72,30 @@ public final class StringCustom {
             return string;
         }
         return string.substring(0, end);
+    }
+
+    /**
+     * Determines whether one string may be found within another string,
+     * returning true or false as appropriate.
+     * @param context the JavaScript context
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method
+     * @param function the function
+     * @return true or false
+     */
+    public static boolean contains(
+            final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
+        if (args.length < 1) {
+            return false;
+        }
+        final String string = Context.toString(thisObj);
+        final String search = Context.toString(args[0]);
+
+        if (args.length < 2) {
+            return string.contains(search);
+        }
+
+        final int start = (int) Math.max(0, Context.toNumber(args[1]));
+        return string.indexOf(search, start) > -1;
     }
 }

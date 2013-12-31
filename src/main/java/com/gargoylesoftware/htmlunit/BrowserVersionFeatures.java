@@ -1410,6 +1410,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     SET_READONLY_PROPERTIES,
 
+    /** Indicates that string.contains() is supported. */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 18))
+    STRING_CONTAINS,
+
     /** Indicates that string.trim() is supported. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     STRING_TRIM,

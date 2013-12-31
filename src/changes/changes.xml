@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.14" date="???" description="Bugfixes">
+            <action type="add" dev="rbri">
+                JavaScript: String.contains() added for FF18 and later.
+            </action>
             <action type="fix" dev="rbri">
                 Return value fixed for element.height and element.width when element is not attached to the page.
             </action>
