@@ -123,6 +123,25 @@ public class HTMLElementTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "null", IE8 = "[object]")
+    public void getAttribute_styleAttribute() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var elem = document.getElementById('tester');\n"
+            + "    alert(elem.getAttribute('style'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='tester'>tester</div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception on test failure
      */
     @Test
