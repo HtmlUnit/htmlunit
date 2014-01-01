@@ -137,6 +137,7 @@ public class JQuery182Test extends WebDriverTestCase {
 
         return -1;
     }
+
     /**
      * @throws Exception if an error occurs
      */
