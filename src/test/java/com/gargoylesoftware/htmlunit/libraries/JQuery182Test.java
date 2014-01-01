@@ -137,7 +137,6 @@ public class JQuery182Test extends WebDriverTestCase {
 
         return -1;
     }
-
     /**
      * @throws Exception if an error occurs
      */
@@ -5470,7 +5469,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {525=[IE11, IE9], 526=[FF24], 530=[FF17], 532=[IE8]}.
+     * Test {525=[IE11, IE9], 530=[FF17, FF24], 532=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5480,7 +5479,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {526=[FF17], 528=[IE11, IE8, IE9], 529=[FF24]}.
+     * Test {526=[FF17, FF24], 528=[IE11, IE8, IE9]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5491,13 +5490,23 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {526=[IE11, IE9], 527=[FF24], 529=[FF17], 531=[IE8]}.
+     * Test {526=[IE11, IE9], 529=[FF17, FF24], 531=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("0, 6, 6")
     public void effects__CSS_Auto_to_50() throws Exception {
         runTest("effects: CSS Auto to 50");
+    }
+
+    /**
+     * Test {527=[FF17, FF24], 529=[IE11, IE8, IE9]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("0, 4, 4")
+    public void effects__CSS_Auto_to_hide() throws Exception {
+        runTest("effects: CSS Auto to hide");
     }
 
     /**
@@ -5511,17 +5520,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {527=[FF17], 529=[IE11, IE8, IE9], 530=[FF24]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("0, 4, 4")
-    public void effects__CSS_Auto_to_hide() throws Exception {
-        runTest("effects: CSS Auto to hide");
-    }
-
-    /**
-     * Test {530=[IE11, IE9], 531=[FF24], 535=[FF17], 537=[IE8]}.
+     * Test {530=[IE11, IE9], 535=[FF17, FF24], 537=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5531,7 +5530,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {531=[FF17], 533=[IE11, IE8, IE9], 534=[FF24]}.
+     * Test {531=[FF17, FF24], 533=[IE11, IE8, IE9]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5542,13 +5541,23 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {531=[IE11, IE9], 532=[FF24], 534=[FF17], 536=[IE8]}.
+     * Test {531=[IE11, IE9], 534=[FF17, FF24], 536=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("0, 6, 6")
     public void effects__JS_Auto_to_50() throws Exception {
         runTest("effects: JS Auto to 50");
+    }
+
+    /**
+     * Test {532=[FF17, FF24], 534=[IE11, IE8, IE9]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("0, 4, 4")
+    public void effects__JS_Auto_to_hide() throws Exception {
+        runTest("effects: JS Auto to hide");
     }
 
     /**
@@ -5562,17 +5571,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {532=[FF17], 534=[IE11, IE8, IE9], 535=[FF24]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("0, 4, 4")
-    public void effects__JS_Auto_to_hide() throws Exception {
-        runTest("effects: JS Auto to hide");
-    }
-
-    /**
-     * Test {535=[IE11, IE9], 536=[FF24], 540=[FF17], 542=[IE8]}.
+     * Test {535=[IE11, IE9], 540=[FF17, FF24], 542=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5582,7 +5581,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {536=[FF17], 538=[IE11, IE8, IE9], 539=[FF24]}.
+     * Test {536=[FF17, FF24], 538=[IE11, IE8, IE9]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5592,13 +5591,23 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {536=[IE11, IE9], 537=[FF24], 539=[FF17], 541=[IE8]}.
+     * Test {536=[IE11, IE9], 539=[FF17, FF24], 541=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("0, 6, 6")
     public void effects__CSS_100_to_50() throws Exception {
         runTest("effects: CSS 100 to 50");
+    }
+
+    /**
+     * Test {537=[FF17, FF24], 539=[IE11, IE8, IE9]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("0, 4, 4")
+    public void effects__CSS_100_to_hide() throws Exception {
+        runTest("effects: CSS 100 to hide");
     }
 
     /**
@@ -5612,17 +5621,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {537=[FF17], 539=[IE11, IE8, IE9], 540=[FF24]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("0, 4, 4")
-    public void effects__CSS_100_to_hide() throws Exception {
-        runTest("effects: CSS 100 to hide");
-    }
-
-    /**
-     * Test {540=[IE11, IE9], 541=[FF24], 545=[FF17], 547=[IE8]}.
+     * Test {540=[IE11, IE9], 545=[FF17, FF24], 547=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5632,7 +5631,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {541=[FF17], 543=[IE11, IE8, IE9], 544=[FF24]}.
+     * Test {541=[FF17, FF24], 543=[IE11, IE8, IE9]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5642,13 +5641,23 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {541=[IE11, IE9], 542=[FF24], 544=[FF17], 546=[IE8]}.
+     * Test {541=[IE11, IE9], 544=[FF17, FF24], 546=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("0, 6, 6")
     public void effects__JS_100_to_50() throws Exception {
         runTest("effects: JS 100 to 50");
+    }
+
+    /**
+     * Test {542=[FF17, FF24], 544=[IE11, IE8, IE9]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("0, 4, 4")
+    public void effects__JS_100_to_hide() throws Exception {
+        runTest("effects: JS 100 to hide");
     }
 
     /**
@@ -5662,17 +5671,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {542=[FF17], 544=[IE11, IE8, IE9], 545=[FF24]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("0, 4, 4")
-    public void effects__JS_100_to_hide() throws Exception {
-        runTest("effects: JS 100 to hide");
-    }
-
-    /**
-     * Test {545=[IE11, IE9], 546=[FF24], 550=[FF17], 552=[IE8]}.
+     * Test {545=[IE11, IE9], 550=[FF17, FF24], 552=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5682,7 +5681,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {546=[FF17], 548=[IE11, IE8, IE9], 549=[FF24]}.
+     * Test {546=[FF17, FF24], 548=[IE11, IE8, IE9]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5692,13 +5691,23 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {546=[IE11, IE9], 547=[FF24], 549=[FF17], 551=[IE8]}.
+     * Test {546=[IE11, IE9], 549=[FF17, FF24], 551=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("0, 6, 6")
     public void effects__CSS_50_to_50() throws Exception {
         runTest("effects: CSS 50 to 50");
+    }
+
+    /**
+     * Test {547=[FF17, FF24], 549=[IE11, IE8, IE9]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("0, 4, 4")
+    public void effects__CSS_50_to_hide() throws Exception {
+        runTest("effects: CSS 50 to hide");
     }
 
     /**
@@ -5712,17 +5721,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {547=[FF17], 549=[IE11, IE8, IE9], 550=[FF24]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("0, 4, 4")
-    public void effects__CSS_50_to_hide() throws Exception {
-        runTest("effects: CSS 50 to hide");
-    }
-
-    /**
-     * Test {550=[IE11, IE9], 551=[FF24], 555=[FF17], 557=[IE8]}.
+     * Test {550=[IE11, IE9], 555=[FF17, FF24], 557=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5732,7 +5731,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {551=[FF17], 553=[IE11, IE8, IE9], 554=[FF24]}.
+     * Test {551=[FF17, FF24], 553=[IE11, IE8, IE9]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5742,13 +5741,23 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {551=[IE11, IE9], 552=[FF24], 554=[FF17], 556=[IE8]}.
+     * Test {551=[IE11, IE9], 554=[FF17, FF24], 556=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("0, 6, 6")
     public void effects__JS_50_to_50() throws Exception {
         runTest("effects: JS 50 to 50");
+    }
+
+    /**
+     * Test {552=[FF17, FF24], 554=[IE11, IE8, IE9]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("0, 4, 4")
+    public void effects__JS_50_to_hide() throws Exception {
+        runTest("effects: JS 50 to hide");
     }
 
     /**
@@ -5762,17 +5771,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {552=[FF17], 554=[IE11, IE8, IE9], 555=[FF24]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("0, 4, 4")
-    public void effects__JS_50_to_hide() throws Exception {
-        runTest("effects: JS 50 to hide");
-    }
-
-    /**
-     * Test {555=[IE11, IE9], 556=[FF24], 560=[FF17], 562=[IE8]}.
+     * Test {555=[IE11, IE9], 560=[FF17, FF24], 562=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5782,7 +5781,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {556=[FF17], 558=[IE11, IE8, IE9], 559=[FF24]}.
+     * Test {556=[FF17, FF24], 558=[IE11, IE8, IE9]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5792,13 +5791,23 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {556=[IE11, IE9], 557=[FF24], 559=[FF17], 561=[IE8]}.
+     * Test {556=[IE11, IE9], 559=[FF17, FF24], 561=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("0, 6, 6")
     public void effects__CSS_0_to_50() throws Exception {
         runTest("effects: CSS 0 to 50");
+    }
+
+    /**
+     * Test {557=[FF17, FF24], 559=[IE11, IE8, IE9]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("0, 4, 4")
+    public void effects__CSS_0_to_hide() throws Exception {
+        runTest("effects: CSS 0 to hide");
     }
 
     /**
@@ -5812,17 +5821,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {557=[FF17], 559=[IE11, IE8, IE9], 560=[FF24]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("0, 4, 4")
-    public void effects__CSS_0_to_hide() throws Exception {
-        runTest("effects: CSS 0 to hide");
-    }
-
-    /**
-     * Test {560=[IE11, IE9], 561=[FF24], 565=[FF17], 567=[IE8]}.
+     * Test {560=[IE11, IE9], 565=[FF17, FF24], 567=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5832,7 +5831,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {561=[FF17], 563=[IE11, IE8, IE9], 564=[FF24]}.
+     * Test {561=[FF17, FF24], 563=[IE11, IE8, IE9]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5842,13 +5841,23 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {561=[IE11, IE9], 562=[FF24], 564=[FF17], 566=[IE8]}.
+     * Test {561=[IE11, IE9], 564=[FF17, FF24], 566=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("0, 6, 6")
     public void effects__JS_0_to_50() throws Exception {
         runTest("effects: JS 0 to 50");
+    }
+
+    /**
+     * Test {562=[FF17, FF24], 564=[IE11, IE8, IE9]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("0, 4, 4")
+    public void effects__JS_0_to_hide() throws Exception {
+        runTest("effects: JS 0 to hide");
     }
 
     /**
@@ -5859,16 +5868,6 @@ public class JQuery182Test extends WebDriverTestCase {
     @Alerts("0, 6, 6")
     public void effects__JS_0_to_100() throws Exception {
         runTest("effects: JS 0 to 100");
-    }
-
-    /**
-     * Test {562=[FF17], 564=[IE11, IE8, IE9], 565=[FF24]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("0, 4, 4")
-    public void effects__JS_0_to_hide() throws Exception {
-        runTest("effects: JS 0 to hide");
     }
 
     /**
