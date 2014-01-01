@@ -399,7 +399,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
             FF17 = { "false", "false", "false", "false" },
             IE8 = { "undefined", "undefined", "true", "false" },
             IE11 = { "false", "false", "true", "false" })
-    public void withCredentials_notSetableInSyncMode() throws Exception {
+    public void withCredentials_notSettableInSyncMode() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "var xhr = " + XHRInstantiation_ + ";\n"

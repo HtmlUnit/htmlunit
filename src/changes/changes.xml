@@ -9,7 +9,7 @@
     <body>
         <release version="2.14" date="???" description="Bugfixes, initial work on FF24 and IE11">
             <action type="fix" dev="rbri">
-                JavaScript: Window.opener is setable from javascript (FF24).
+                JavaScript: Window.opener is settable from javascript (FF24).
             </action>
             <action type="fix" dev="rbri">
                 JavaScript: Node.attributes is no longer supported (since FF22).
