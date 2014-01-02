@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +23,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -41,6 +43,7 @@ public class CSSPrimitiveValueTest extends WebDriverTestCase {
             FF24 = { "function CSSPrimitiveValue() {\n    [native code]\n}",
                     "012345678910111213141516171819202122232425" },
             IE = { "exception" })
+    @NotYetImplemented(FF24)
     public void test() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<script>\n"

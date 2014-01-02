@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.apache.commons.lang3.StringUtils;
@@ -257,6 +258,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "[object Node]", "[object Element]" },
             FF24 = { "function Node() {\n    [native code]\n}", "function Element() {\n    [native code]\n}" },
             IE8 = { "undefined", "undefined" })
+    @NotYetImplemented(FF24)
     public void windowProperties() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -653,6 +655,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "605", "1256", "705", "1256" },
             FF24 = { "657", "1264", "641", "1248" },
             IE11 = { "705", "1256", "688", "1239" })
+    @NotYetImplemented(FF24)
     public void changeHeightsAndWidths() throws Exception {
         final String html
             = "<html><head>\n"
@@ -684,6 +687,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(FF = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1210" },
             FF24 = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1206" },
             IE = { "0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()" })
+    @NotYetImplemented(FF24)
     public void scrolling1() throws Exception {
         scrolling(true);
     }

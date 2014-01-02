@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import java.net.URL;
@@ -470,6 +471,7 @@ public class Location2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "foo3.html", "foo2.html" },
             FF24 = {"", "foo2.html" })
+    @NotYetImplemented(FF24)
     public void onlick_set_location() throws Exception {
         final String html =
             "<html><head></head>\n"
@@ -493,7 +495,7 @@ public class Location2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "supported", "onhashchange undefined  undefined" },
             FF = { "supported", "onhashchange http://localhost:12345/#1  http://localhost:12345/" },
             IE8 = { "supported", "onhashchange -" })
-    @NotYetImplemented(Browser.FF17)
+    @NotYetImplemented(Browser.FF)
     public void onHashChange() throws Exception {
         final String html =
             "<html><head>\n"

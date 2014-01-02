@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -23,6 +25,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlHtml;
 
@@ -65,6 +68,7 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "[object HTMLHtmlElement]", "[object HTMLHtmlElement]" },
             FF24 = { "[object HTMLHtmlElement]", "function HTMLHtmlElement() {\n    [native code]\n}" },
             IE8 = { "[object]", "exception" })
+    @NotYetImplemented(FF24)
     public void HTMLHtmlElement_toString() throws Exception {
         final String html = "<html id='myId'><head><title>foo</title><script>\n"
             + "  function test() {\n"

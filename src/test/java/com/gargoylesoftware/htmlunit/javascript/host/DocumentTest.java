@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
@@ -1114,6 +1115,7 @@ public class DocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT =  { "false", "false" },
             FF17 = { "false", "true" },
             IE8 = { "true", "true" })
+    @NotYetImplemented(FF24)
     public void all_AsBoolean() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
