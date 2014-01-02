@@ -134,7 +134,7 @@ public class XMLDOMCharacterData extends XMLDOMNode {
             return;
         }
 
-        final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
+        final DomCharacterData domCharacterData = getDomNodeOrDie();
         if (offset > domCharacterData.getLength()) {
             throw Context.reportRuntimeError("The offset must be 0 or a positive number that is not greater than the "
                     + "number of characters in the data.");
@@ -150,6 +150,9 @@ public class XMLDOMCharacterData extends XMLDOMNode {
      */
     @JsxFunction
     public void insertData(final int offset, final String data) {
+        if (data == null || "null".equals(data)) {
+            throw Context.reportRuntimeError("Type mismatch.");
+        }
         if (data.isEmpty()) {
             return;
         }
@@ -157,10 +160,6 @@ public class XMLDOMCharacterData extends XMLDOMNode {
             throw Context.reportRuntimeError("The offset must be 0 or a positive number that is not greater than the "
                     + "number of characters in the data.");
         }
-        if (data == null || "null".equals(data)) {
-            throw Context.reportRuntimeError("Type mismatch.");
-        }
-
         final DomCharacterData domCharacterData = getDomNodeOrDie();
         if (offset > domCharacterData.getLength()) {
             throw Context.reportRuntimeError("The offset must be 0 or a positive number that is not greater than the "
