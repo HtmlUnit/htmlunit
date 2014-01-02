@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.14" date="???" description="Bugfixes, initial work on FF24 and IE11">
+            <action type="update" dev="rbri">
+                Upgrade Apache commons-lang to 3.2.
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: Window.opener is settable from javascript (FF24).
             </action>
