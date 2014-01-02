@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.14" date="???" description="Bugfixes, initial work on FF24 and IE11">
+            <action type="fix" dev="rbri">
+                JavaScript: Document.inputEncoding and Document.characterSet are doing some kind of
+                normalization on the encoding string starting with FF24.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-lang to 3.2.
             </action>

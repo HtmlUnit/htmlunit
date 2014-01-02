@@ -465,6 +465,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTMLDOCUMENT_CHARSET_LOWERCASE,
 
+    /** Do a normalization of the charset names. */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 24))
+    HTMLDOCUMENT_CHARSET_NORMALIZED,
+
     /** Do document.bgColor/.alinkColor/.vlinkColor/.linkColor have value by default. */
     @BrowserFeature(@WebBrowser(IE))
     HTMLDOCUMENT_COLOR,
