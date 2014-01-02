@@ -50,6 +50,19 @@ public class HTMLElementsTest extends WebDriverTestCase {
                 + "</body></html>";
     }
 
+    private String headElementClosesItself(final String tagName) {
+        return "<html><head>\n"
+                + "<" + tagName + " id='outer'><" + tagName + ">\n"
+                + "<script>\n"
+                + "function test() {\n"
+                + "  var e = document.getElementById('outer');\n"
+                + "  alert(e == null ? e : e.childNodes.length);\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "</body></html>";
+    }
+
     /**
      * @throws Exception if the test fails
      */
@@ -162,9 +175,8 @@ public class HTMLElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void elementClosesItself_basefont() throws Exception {
-        loadPageWithAlerts2(elementClosesItself("basefont"));
+        loadPageWithAlerts2(headElementClosesItself("basefont"));
     }
 
     /**
