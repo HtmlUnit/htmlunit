@@ -67,6 +67,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Chris Erskine
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class BrowserVersion implements Serializable, Cloneable {
 
@@ -120,7 +121,9 @@ public class BrowserVersion implements Serializable, Cloneable {
     /**
      * Firefox 17 ESR.
      * @since 2.12
+     * @deprecated as of 2.14
      */
+    @Deprecated
     public static final BrowserVersion FIREFOX_17 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows)",
         "Mozilla/5.0 (Windows NT 6.1; rv:17.0) Gecko/20100101 Firefox/17.0",

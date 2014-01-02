@@ -70,10 +70,10 @@ public class BrowserRunner extends Suite {
 
         if (BrowserVersionClassRunner.containsTestMethods(klass)) {
             final List<String> browsers = WebDriverTestCase.getBrowsersProperties();
-            if (browsers.contains("hu") || browsers.contains("hu-ff17")) {
+            if (/*browsers.contains("hu") ||*/ browsers.contains("hu-ff17")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_17, false));
             }
-            if (/*browsers.contains("hu") ||*/ browsers.contains("hu-ff24")) {
+            if (browsers.contains("hu") || browsers.contains("hu-ff24")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_24, false));
             }
             if (browsers.contains("hu") || browsers.contains("hu-ie8")) {
