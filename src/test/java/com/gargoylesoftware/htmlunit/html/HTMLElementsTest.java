@@ -175,8 +175,18 @@ public class HTMLElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    public void elementClosesItself_basefont() throws Exception {
+    public void headElementClosesItself_basefont() throws Exception {
         loadPageWithAlerts2(headElementClosesItself("basefont"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented
+    public void elementClosesItself_basefont() throws Exception {
+        loadPageWithAlerts2(elementClosesItself("basefont"));
     }
 
     /**
