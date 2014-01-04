@@ -63,7 +63,8 @@ public final class DateCustom {
                 ((Window) thisObj.getParentScope()).getWebWindow().getWebClient().getBrowserVersion();
 
         if (browserVersion.hasFeature(JS_DATE_LOCALE_DATE_SHORT_WITH_SPECIAL_CHARS)) {
-            formatString = "‎dd‎.‎MM‎.‎yyyy";
+            // [U+200E] -> Unicode Character 'LEFT-TO-RIGHT MARK'
+            formatString = "\u200Edd‎.‎MM‎.‎yyyy";
         }
         else if (browserVersion.hasFeature(JS_DATE_LOCALE_DATE_SHORT)) {
             formatString = "d.M.yyyy";
