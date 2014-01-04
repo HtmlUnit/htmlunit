@@ -19,8 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_LOCAL
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_LOCALE_TIME_WITH_SPECIAL_CHARS;
 
 import java.lang.reflect.Field;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -30,6 +28,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.commons.lang3.time.FastDateFormat;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 
@@ -72,8 +71,8 @@ public final class DateCustom {
         else {
             formatString = "EEEE, MMMM dd, yyyy";
         }
-        final DateFormat format =  new SimpleDateFormat(formatString, getLocale(thisObj));
-        return format.format(new Date(getDateValue(thisObj)));
+        final FastDateFormat format =  FastDateFormat.getInstance(formatString, getLocale(thisObj));
+        return format.format(getDateValue(thisObj));
     }
 
     /**
@@ -96,8 +95,8 @@ public final class DateCustom {
         else {
             formatString = "HH:mm:ss";
         }
-        final DateFormat format =  new SimpleDateFormat(formatString, getLocale(thisObj));
-        return format.format(new Date(getDateValue(thisObj)));
+        final FastDateFormat format =  FastDateFormat.getInstance(formatString, getLocale(thisObj));
+        return format.format(getDateValue(thisObj));
     }
 
     /**
