@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_PROGRESS_DISPLAY_INLINE;
+
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -52,6 +54,9 @@ public class HtmlProgress extends HtmlElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
+        if (hasFeature(CSS_PROGRESS_DISPLAY_INLINE)) {
+            return DisplayStyle.INLINE;
+        }
         return DisplayStyle.INLINE_BLOCK;
     }
 }

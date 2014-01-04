@@ -1025,7 +1025,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             FF24 = { "1248px", "auto" },
             IE = { "auto", "auto" },
             IE11 = { "1240px", "auto" })
-    @NotYetImplemented(FF24)
+    @NotYetImplemented({ FF24, IE11 })
     public void computedWidthOfHiddenElements() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1248,7 +1248,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "", "rgb(0, 0, 255)" },
             IE8 = "exception")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, IE11 })
     public void getPropertyValue() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"

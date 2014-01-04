@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BUTTON_SET_TYPE_THROWS_EXCEPTION;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import java.io.IOException;
@@ -37,6 +38,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormField;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @JsxClass(domClass = HtmlButton.class)
 public class HTMLButtonElement extends FormField {
@@ -86,7 +88,7 @@ public class HTMLButtonElement extends FormField {
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public void click() throws IOException {
         super.click();
     }

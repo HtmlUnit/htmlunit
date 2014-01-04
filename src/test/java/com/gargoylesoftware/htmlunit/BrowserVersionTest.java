@@ -31,7 +31,7 @@ public class BrowserVersionTest extends SimpleWebTestCase {
      */
     @Test
     public void getBrowserVersionNumeric() {
-        assertEquals(17.0f, BrowserVersion.FIREFOX_17.getBrowserVersionNumeric());
+        assertEquals(24.0f, BrowserVersion.FIREFOX_24.getBrowserVersionNumeric());
         assertEquals(8.0f, BrowserVersion.INTERNET_EXPLORER_8.getBrowserVersionNumeric());
         assertEquals(9.0f, BrowserVersion.INTERNET_EXPLORER_9.getBrowserVersionNumeric());
         assertEquals(11.0f, BrowserVersion.INTERNET_EXPLORER_11.getBrowserVersionNumeric());
@@ -43,7 +43,7 @@ public class BrowserVersionTest extends SimpleWebTestCase {
      */
     @Test
     public void testClone() {
-        final BrowserVersion ff = BrowserVersion.FIREFOX_17;
+        final BrowserVersion ff = BrowserVersion.FIREFOX_24;
         final BrowserVersion clone = ff.clone();
 
         assertFalse(ff == clone);

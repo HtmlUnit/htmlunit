@@ -57,7 +57,7 @@ public class BrowserVersionFeaturesTest extends SimpleWebTestCase {
     }
 
     /**
-     * Test of alphabetical order.
+     * Test of usage.
      * @throws Exception in case of problems
      */
     @Test

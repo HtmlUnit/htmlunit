@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import java.util.List;
 
 import org.junit.Test;
@@ -23,6 +26,8 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -155,9 +160,14 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE11 = "I was here")
-    public void localStorageShouldNotBeShared() throws Exception {
+    @Alerts(DEFAULT = "I was here",
+            IE8 = "")
+    @BuggyWebDriver({ CHROME, FF })
+    // The way ChromeDriver and FFDriver start the real browsers clears the LocalStorage somehow.
+    // But when executed manually the LocalStorage is shared.
+    @NotYetImplemented
+    // TODO somehow persist the LocalStorage
+    public void localStorageShouldBeShared() throws Exception {
         final String html1 = "<html><body><script>\n"
             + "try {\n"
             + "  localStorage.clear();\n"
@@ -186,7 +196,7 @@ public class StorageTest extends WebDriverTestCase {
         }
         finally {
             if (!(driver2 instanceof HtmlUnitDriver)) {
-                driver2.quit();
+                shutDownAll();
             }
         }
     }

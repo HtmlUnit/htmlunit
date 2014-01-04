@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static org.junit.Assert.assertArrayEquals;
 
 import java.net.URL;
@@ -474,6 +475,8 @@ public class WebClient3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "modified",
             IE11 = "Hello world")
+    @NotYetImplemented(IE11)
+    // IE11 does not support deflate compression anymore but I couldn't find a way to disable it in HttpClient
     public void deflateCompressionNonGZipCompatible() throws Exception {
         doTestDeflateCompression(false);
     }

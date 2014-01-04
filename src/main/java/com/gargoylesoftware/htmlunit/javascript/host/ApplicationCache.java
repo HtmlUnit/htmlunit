@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @see <a href="https://developer.mozilla.org/en/nsIDOMOfflineResourceList">Mozilla Documentation</a>
  */
 @JsxClass(browsers = @WebBrowser(FF))
-public class OfflineResourceList extends SimpleScriptable {
+public class ApplicationCache extends SimpleScriptable {
 
     /** The object isn't associated with an application cache. */
     public static final short STATUS_UNCACHED = 0;

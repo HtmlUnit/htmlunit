@@ -14,11 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION;
+import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.callLoadXMLDocumentFromFile;
+
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.net.URL;
 
@@ -1497,11 +1501,11 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "null",
-            DEFAULT = { "[object HTMLDocument]", "[object HTMLBodyElement]",
+    @Alerts(DEFAULT = { "[object HTMLDocument]", "[object HTMLBodyElement]",
                 "true", "true", "true", "false", "true", "false" },
+            CHROME = "null",
             IE8 = { "[object]", "[object]", "true", "true", "true", "true", "true", "true" })
-    @NotYetImplemented(IE)
+    @NotYetImplemented(IE8)
     public void documentCloneNode() throws Exception {
         final String html = "<html><body id='hello' onload='doTest()'>\n"
                 + "  <script id='jscript'>\n"
@@ -2039,30 +2043,21 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "true", "books", "books", "3", "#text", "0" },
-            IE = { "true", "books", "books", "1", "book", "0" },
-            IE11 = "")
-    // TODO [IE11] IE11 does not support Document.load()
+    @Alerts(DEFAULT = { "books", "books", "3", "#text", "0" },
+            IE8 = { "books", "books", "1", "book", "0" })
     public void createAttribute() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
+            + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "    var cid = document.createAttribute('id');\n"
             + "    cid.nodeValue = 'a1';\n"
-            + "    doc.async = false;\n"
-            + "    alert(doc.load('" + URL_SECOND + "'));\n"
             + "    alert(doc.documentElement.nodeName);\n"
             + "    alert(doc.childNodes[0].nodeName);\n"
             + "    alert(doc.childNodes[0].childNodes.length);\n"
             + "    alert(doc.childNodes[0].childNodes[0].nodeName);\n"
             + "    alert(doc.getElementsByTagName('books').item(0).attributes.length);\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -2083,25 +2078,18 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "0", "1" })
-    // TODO [IE11] IE11 does not support Document.load()
+    @Alerts(DEFAULT = { "0", "1" },
+            IE8 = "")
     public void getElementsByTagNameNS() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
-            + "    doc.async = false;\n"
-            + "    doc.load('" + URL_SECOND + "');\n"
+            + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "    if (!document.all) {\n"
             + "      alert(document.getElementsByTagNameNS('*', 'books').length);\n"
             + "      alert(doc.getElementsByTagNameNS('*', 'books').length);\n"
             + "    }\n"
             + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
+            + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 

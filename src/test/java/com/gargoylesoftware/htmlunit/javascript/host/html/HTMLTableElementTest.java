@@ -473,10 +473,14 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "table: [object HTMLTableElement]",
-                "row: [object HTMLTableRowElement]", "cell: [object HTMLTableCellElement]" },
-            IE = { "table: [object]", "row: [object]", "cell: [object]" },
-            IE11 = { "table: [object HTMLTableElement]",
-                "row: [object HTMLTableRowElement]", "cell: [object HTMLTableHeaderCellElement]" })
+                "row: [object HTMLTableRowElement]",
+                "headcell: [object HTMLTableCellElement]",
+                "datacell: [object HTMLTableCellElement]" },
+            IE = { "table: [object HTMLTableElement]",
+                "row: [object HTMLTableRowElement]",
+                "headcell: [object HTMLTableHeaderCellElement]",
+                "datacell: [object HTMLTableDataCellElement]" },
+            IE8 = { "table: [object]", "row: [object]", "headcell: [object]", "datacell: [object]" })
     public void stringValues() throws Exception {
         final String html =
             "<html><head>\n"
@@ -485,14 +489,18 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "    {\n"
             + "      alert('table: ' + document.getElementById('myTable'));\n"
             + "      alert('row: ' + document.getElementById('myRow'));\n"
-            + "      alert('cell: ' + document.getElementById('myCell'));\n"
+            + "      alert('headcell: ' + document.getElementById('myHeadCell'));\n"
+            + "      alert('datacell: ' + document.getElementById('myDataCell'));\n"
             + "    }\n"
             + "  </script>\n"
             + "  </head>\n"
             + "  <body onload='test()'>\n"
             + "    <table id='myTable'>\n"
             + "      <tr id='myRow'>\n"
-            + "        <th id='myCell'>Foo</th>\n"
+            + "        <th id='myHeadCell'>Foo</th>\n"
+            + "      </tr>\n"
+            + "      <tr>\n"
+            + "        <td id='myDataCell'>Foo</th>\n"
             + "      </tr>\n"
             + "    </table>\n"
             + "  </body>\n"

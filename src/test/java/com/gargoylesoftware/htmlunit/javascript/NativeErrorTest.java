@@ -14,12 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -38,9 +41,10 @@ public class NativeErrorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "true",
-            IE = "undefined",
-            IE11 = "false")
+    @Alerts(DEFAULT = "method (url)",
+            FF = "method@url",
+            IE8 = "undefined")
+    @NotYetImplemented({ CHROME, FF, IE11 })
     public void stack() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -50,7 +54,15 @@ public class NativeErrorTest extends WebDriverTestCase {
             + "  } catch (e) {\n"
             + "    if (e.stack) {\n"
             + "      var s = e.stack;\n"
-            + "      alert(s.indexOf('test()@') != -1 || s.indexOf('test@') != -1);\n"
+            + "      if (s.indexOf('test()@') != -1) {\n"
+            + "        alert('method()@url');\n"
+            + "      } else if (s.indexOf('test@') != -1) {\n"
+            + "        alert('method@url');\n"
+            + "      } else if (s.indexOf('test (') != -1) {\n"
+            + "        alert('method (url)');\n"
+            + "      } else if (s.indexOf('test() (') != -1) {\n"
+            + "        alert('method() (url)');\n"
+            + "      }\n"
             + "    }\n"
             + "    else\n"
             + "      alert('undefined');\n"
@@ -66,10 +78,10 @@ public class NativeErrorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "true",
-            IE = "undefined",
-            IE11 = "false")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "method (url)",
+            FF = "method@url",
+            IE8 = "undefined")
+    @NotYetImplemented({ CHROME, FF, IE11 })
     public void stackNewError() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -79,7 +91,15 @@ public class NativeErrorTest extends WebDriverTestCase {
             + "  } catch (e) {\n"
             + "    if (e.stack) {\n"
             + "      var s = e.stack;\n"
-            + "      alert(s.indexOf('test()@') != -1 || s.indexOf('test@') != -1);\n"
+            + "      if (s.indexOf('test()@') != -1) {\n"
+            + "        alert('method()@url');\n"
+            + "      } else if (s.indexOf('test@') != -1) {\n"
+            + "        alert('method@url');\n"
+            + "      } else if (s.indexOf('test (') != -1) {\n"
+            + "        alert('method (url)');\n"
+            + "      } else if (s.indexOf('test() (') != -1) {\n"
+            + "        alert('method() (url)');\n"
+            + "      }\n"
             + "    }\n"
             + "    else\n"
             + "      alert('undefined');\n"

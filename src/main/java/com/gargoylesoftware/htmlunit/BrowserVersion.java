@@ -76,6 +76,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     private String applicationName_;
     private String applicationVersion_;
     private String buildId_;
+    private String vendor_;
     private String browserLanguage_ = LANGUAGE_ENGLISH_US;
     private String cpuClass_ = CPU_CLASS_X86;
     private boolean onLine_ = true;
@@ -173,6 +174,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_17.initDefaultFeatures();
 
         FIREFOX_17.setBrowserLanguage("en-US");
+        FIREFOX_17.setVendor("");
         FIREFOX_17.buildId_ = "20130805152501";
         FIREFOX_17.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_17.setXmlHttpRequestAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
@@ -182,6 +184,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_24.initDefaultFeatures();
 
         FIREFOX_24.setBrowserLanguage("en-US");
+        FIREFOX_24.setVendor("");
         FIREFOX_24.buildId_ = "20131112155850";
         FIREFOX_24.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_24.setXmlHttpRequestAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
@@ -190,6 +193,8 @@ public class BrowserVersion implements Serializable, Cloneable {
 
         INTERNET_EXPLORER_8.setHtmlAcceptHeader("image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*");
 
+        INTERNET_EXPLORER_11.setBrowserLanguage("en-US");
+        INTERNET_EXPLORER_11.setVendor("");
         INTERNET_EXPLORER_11.setHtmlAcceptHeader("text/html, application/xhtml+xml, */*");
         INTERNET_EXPLORER_11.setImgAcceptHeader("image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5");
         INTERNET_EXPLORER_11.setCssAcceptHeader("text/css, */*");
@@ -204,9 +209,10 @@ public class BrowserVersion implements Serializable, Cloneable {
 
         CHROME.initDefaultFeatures();
         CHROME.setApplicationCodeName("Mozilla");
+        CHROME.setVendor("Google Inc.");
         CHROME.setPlatform("MacIntel");
         CHROME.setCpuClass(null);
-        CHROME.setBrowserLanguage("undefined");
+        CHROME.setBrowserLanguage("en-US");
         // there are other issues with Chrome; a different productSub, etc.
     }
 
@@ -391,6 +397,13 @@ public class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
+     * @return the vendor
+     */
+    public String getVendor() {
+        return vendor_;
+    }
+
+    /**
      * Returns the browser application language, for example "en-us".
      * Default value is {@link #LANGUAGE_ENGLISH_US} if not explicitly configured.
      * @return the browser application language
@@ -529,6 +542,13 @@ public class BrowserVersion implements Serializable, Cloneable {
      */
     public void setApplicationVersion(final String applicationVersion) {
         applicationVersion_ = applicationVersion;
+    }
+
+    /**
+     * @param vendor the vendor to set
+     */
+    public void setVendor(final String vendor) {
+        this.vendor_ = vendor;
     }
 
     /**
@@ -698,6 +718,7 @@ public class BrowserVersion implements Serializable, Cloneable {
 
         clone.setApplicationCodeName(getApplicationCodeName());
         clone.setApplicationMinorVersion(getApplicationMinorVersion());
+        clone.setVendor(getVendor());
         clone.setBrowserLanguage(getBrowserLanguage());
         clone.setCpuClass(getCpuClass());
         clone.setOnLine(isOnLine());

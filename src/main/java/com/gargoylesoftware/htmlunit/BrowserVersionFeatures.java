@@ -91,6 +91,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     CSS_PIXEL_VALUES_INT_ONLY,
 
+    /** The default value of the display property for the 'progress' tag is 'inline' instead of the default one. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    CSS_PROGRESS_DISPLAY_INLINE,
+
     /** The default value of the display property for the 'script' tag is 'inline' instead of the default one. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     CSS_SCRIPT_DISPLAY_INLINE,
@@ -325,10 +329,6 @@ public enum BrowserVersionFeatures {
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
     GENERATED_43,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_45,
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
@@ -632,8 +632,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_ALIGN_FOR_INPUT_IGNORES_VALUES,
 
-    /** Top scope constants can be assign (and are not... constants).
-     */
+    /** Top scope constants can be assign (and are not... constants). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_ALLOW_CONST_ASSIGNMENT,
 
@@ -643,6 +642,10 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature(@WebBrowser(IE))
     JS_ANCHORS_REQUIRES_NAME_OR_ID,
+
+    /** Indicates that the <code>ApplicationCache</code> is named <code>OfflineResourceList</code> instead. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_APPCACHE_NAME_OFFLINERESOURCELIST,
 
     /** Indicates that the appendChild call create a DocumentFragment to be
      * the parentNode's parentNode if this was null. */
@@ -721,13 +724,20 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     JS_CONSTRUCTOR,
 
-    /** Is Date.toLocaleTimeString() in 24-hour format. */
-    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(value = FF, minVersion = 17),
-        @WebBrowser(CHROME) })
-    JS_DATE_LOCATE_TIME_24,
+    /** <code>Date.toLocaleDateString()</code> returns a short form (d.M.yyyy). */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_DATE_LOCALE_DATE_SHORT,
+
+    /** <code>Date.toLocaleDateString()</code> returns a short form (dd.MM.yyyy) with some weird special chars. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_DATE_LOCALE_DATE_SHORT_WITH_SPECIAL_CHARS,
+
+    /** <code>Date.toLocaleTimeString()</code> returns a form with some weird special chars. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_DATE_LOCALE_TIME_WITH_SPECIAL_CHARS,
 
     /** Is Date.toUTCString() and Date.toGMTString are returning UTC instead of GMT. */
-    @BrowserFeature({ @WebBrowser(IE) })
+    @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 9) })
     JS_DATE_USE_UTC,
 
     /** */
@@ -762,10 +772,6 @@ public enum BrowserVersionFeatures {
     /** Javascript document.appendChild is allowed (IE). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_DOCUMENT_APPEND_CHILD_SUPPORTED,
-
-    /** Document instead of HTMLDocument. */
-    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
-    JS_DOCUMENT_CLASS_NAME,
 
     /** Javascript function document.createElement can process html code.
      * e.g. document.createElement("<INPUT TYPE='RADIO' NAME='RADIOTEST' VALUE='First Choice'>")
@@ -887,6 +893,18 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     JS_DOMIMPLEMENTATION_FEATURE_XPATH_3,
 
+    /** <code>DOMParser.parseFromString(..)</code> handles an empty String as error. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    JS_DOMPARSER_EMPTY_STRING_IS_ERROR,
+
+    /** <code>DOMParser.parseFromString(..)</code> throws an exception if an error occurs. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_DOMPARSER_EXCEPTION_ON_ERROR,
+
+    /** <code>DOMParser.parseFromString(..)</code> creates a document containing a <code>parsererror</code> element. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_DOMPARSER_PARSERERROR_ON_ERROR,
+
     /** Javascript property function delete thows an exception if the
      * given count is negative. */
     @BrowserFeature(@WebBrowser(IE))
@@ -911,7 +929,7 @@ public enum BrowserVersionFeatures {
     JS_ERROR_STACK,
 
     /** Indicates that "eval" function should have access to the local function scope. */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_EVAL_LOCAL_SCOPE,
 
     /** Javascript event aborted check is based on the event handler return value (IE);
@@ -1065,8 +1083,17 @@ public enum BrowserVersionFeatures {
      * for url 'http://localhost/something/#%C3%BC'.<br>
      * IE evaluates to #%C3%BC.
      */
-    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 8, maxVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 8, maxVersion = 9), @WebBrowser(FF) })
     JS_LOCATION_HASH_IS_DECODED,
+
+    /**
+     * Set this property if the browser evaluates<br>
+     * window.location.hash to #%C3%BC; (like Firefox)<br>
+     * for url 'http://localhost/something/#&uuml;'.<br>
+     * IE evaluates to #&uuml;.
+     */
+    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 8, maxVersion = 9), @WebBrowser(FF) })
+    JS_LOCATION_HASH_IS_ENCODED,
 
     /**
      * Property location.hash returns '#' for urls ending with a hash
@@ -1078,8 +1105,16 @@ public enum BrowserVersionFeatures {
     /**
      * Indicates if the String representation of a native function begins and ends with a \n.
      */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
+    @BrowserFeature(@WebBrowser(IE))
     JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE,
+
+    /** <code>Node.childNodes</code> ignores empty text nodes for XML pages. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
+    JS_NODE_CHILDNODES_IGNORE_EMPTY_TEXT_NODES,
+
+    /** The reference argument of <code>Node.insertBefore(..)</code> is optional. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    JS_NODE_INSERT_BEFORE_REF_OPTIONAL,
 
     /** Should throw exception if extra argument is passed to node.insertBefore(). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
@@ -1193,11 +1228,16 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_SET_ATTRIBUTE_SUPPORTS_EVENT_HANDLERS,
 
-    /** When addressing an item in a stylesheet list, IE throws an exception for all
-     * invalid indexes not only for negative ones like FF does.
+    /** When addressing an item in a stylesheet list using a negative index an exception is thrown. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, maxVersion = 9) })
+    JS_STYLESHEETLIST_EXCEPTION_FOR_NEGATIVE_INDEX,
+
+    /**
+     * When addressing an item in a stylesheet list using an index higher than the count of contained items an
+     * exception is thrown.
      */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
-    JS_STYLESHEET_LIST_EXEPTION_FOR_ALL_INVALID_INDEXES,
+    JS_STYLESHEETLIST_EXCEPTION_FOR_TOO_HIGH_INDEX,
 
     /** Indicates if style.getAttribute supports a (second) flags argument. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
@@ -1289,20 +1329,28 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 10) })
     JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION,
 
-    /** It looks likes TreeWalker.expandEntityReferences is always <code>false</code> for FF17.
-     */
+    /** Indicates that <code>TreeWalker.expandEntityReferences</code> is always <code>false</code>. */
     @BrowserFeature(@WebBrowser(value = FF, minVersion = 17))
     JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE,
+
+    /**
+     * Indicates that the filter to be used by the TreeWalker has to be a function (so no object with a method
+     * <code>acceptNode(..)</code> is supported).
+     */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_TREEWALKER_FILTER_FUNCTION_ONLY,
 
     /** Setting the property width/heigth to arbitrary values is allowed. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES,
 
-    /** Changing the opener of an window to something not null
-     * is not valid (in FF).
-     */
+    /** Changing the opener of a window to something not null is not valid. */
     @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 17), @WebBrowser(CHROME) })
     JS_WINDOW_CHANGE_OPENER_NOT_ALLOWED,
+
+    /** Changing the opener of a window to something not null and not a window is not valid. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT,
 
     /** Support for accessing the frame of a window by id additionally
      * to using the name (FF).
@@ -1314,8 +1362,12 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_WINDOW_IS_A_FUNCTION,
 
+    /** <code>Window.onerror</code> gets the column number as 4th argument. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_WINDOW_ONERROR_COLUMN_ARGUMENT,
+
     /** Window.postMessage is sent when the targetOrigin port is different than the current port. */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_WINDOW_POST_MESSAGE_ALLOW_INVALID_PORT,
 
     /** Window.postMessage created cancelable event. */
@@ -1330,6 +1382,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_XML,
 
+    /** Indicates that XML code embedded in an HTML page is handled by MSXML ActiveX. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
+    JS_XML_IN_HTML_VIA_ACTIVEXOBJECT,
+
     /** Indicates that new XMLSerializer().serializeToString(..) adds the xhtml namespace to the root element. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_XML_SERIALIZER_ADD_XHTML_NAMESPACE,
@@ -1343,9 +1399,21 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_XML_SERIALIZER_BLANK_BEFORE_SELF_CLOSING,
 
+    /**
+     * Indicates that new XMLSerializer().serializeToString(..) called with a document fragment created by an
+     * HTMLPage always returns ''.
+     */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_XML_SERIALIZER_HTML_DOCUMENT_FRAGMENT_ALWAYS_EMPTY,
+
     /** Indicates that new XMLSerializer().serializeToString(..) respects the XHTML definition for non empty tags. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_XML_SERIALIZER_NON_EMPTY_TAGS,
+
+    /** Indicates that <code>XMLSerializer.serializeToString(..)</code> serializes a single CDataSection as escaped
+     * text instead of <code>&lt;![CDATA[xxx]]&gt;</code>. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_XML_SERIALIZER_ROOT_CDATA_AS_ESCAPED_TEXT,
 
     /** Indicates that the browser uses the ActiveXObject for implementing XML support (IE). */
     @BrowserFeature(@WebBrowser(IE))
@@ -1494,8 +1562,8 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME) })
     WINDOW_ACTIVE_ELEMENT_FOCUSED,
 
-    /** XMLHttpRequest does not trigger the error handler (IE). */
-    @BrowserFeature(@WebBrowser(IE))
+    /** XMLHttpRequest does not trigger the error handler. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     XHR_ERRORHANDLER_NOT_SUPPORTED,
 
     /** XMLHttpRequest triggers the opened event at the beginning of the send
@@ -1504,12 +1572,21 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 17) })
     XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE,
 
+    /**
+     * Indicates if the port should be ignored during origin check.
+     * For IE11: this is currently a bug, see
+     * http://connect.microsoft.com/IE/feedback/details/781303/
+     * origin-header-is-not-added-to-cors-requests-to-same-domain-but-different-port
+     */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    XHR_IGNORE_PORT_FOR_SAME_ORIGIN,
+
     /** Indicates if a same origin check should be skipped. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 8) })
     XHR_IGNORE_SAME_ORIGIN,
 
     /** Indicates if a request to a about URL is allowed. */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     XHR_IGNORE_SAME_ORIGIN_TO_ABOUT,
 
     /** Indicates that the onreadystatechange handler is triggered for sync requests for COMPLETED (4). */
@@ -1530,10 +1607,10 @@ public enum BrowserVersionFeatures {
     XHR_OPEN_ALLOW_EMTPY_URL,
 
     /** Indicates if a "Origin" header should be sent. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     XHR_ORIGIN_HEADER,
 
-    /** Indicates that responseXML returns the ActiveXObject. */
+    /** Indicates that <code>responseXML</code> returns an MXSML ActiveX object. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     XHR_RESPONSE_XML_IS_ACTIVEXOBJECT,
 
@@ -1550,14 +1627,25 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL,
 
-    /** Indicates that the propery 'withCredentials is not writable for sync requests. */
-    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 23))
-    XHR_WITHCREDENTIALS_SYNC_NOT_WRITEABLE,
+    /**
+     * Indicates that the property <code>withCredentials</code> is not writable before calling <code>open()</code>.
+     * Setting the property throws an exception.
+     */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 10))
+    XHR_WITHCREDENTIALS_NOT_WRITEABLE_BEFORE_OPEN_EXCEPTION,
 
-    /** Indicates that the propery 'withCredentials is not writable for sync requests.
-     * Setting the property throws an exception. */
+    /**
+     * Indicates that the property <code>withCredentials</code> is not writable for sync requests.
+     */
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 23))
+    XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC,
+
+    /**
+     * Indicates that the property <code>withCredentials</code> is not writable for sync requests.
+     * Setting the property throws an exception.
+     */
     @BrowserFeature(@WebBrowser(value = FF, minVersion = 24))
-    XHR_WITHCREDENTIALS_SYNC_NOT_WRITEABLE_EXCEPTION,
+    XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION,
 
     /** Indicates that the 'SelectionNamespaces' property is supported by XPath expressions. */
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(CHROME) })

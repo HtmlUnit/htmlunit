@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
@@ -91,7 +92,7 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Browsers(FF)
+    @Browsers({ CHROME, FF })
     public void browserLanguage_FF() throws Exception {
         attribute("browserLanguage", "undefined");
     }
@@ -222,7 +223,6 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "en-US",
-            CHROME = "undefined",
             IE8 = "undefined")
     public void language() throws Exception {
         final String html
@@ -344,8 +344,8 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "true",
-            IE = "false")
+    @Alerts(DEFAULT = "false",
+            FF = "true")
     public void oscpu() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"

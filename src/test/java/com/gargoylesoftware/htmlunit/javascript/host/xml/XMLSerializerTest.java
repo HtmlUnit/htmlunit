@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -174,7 +175,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
                     + "<span32class=\"spanClass\">foo</span>"
                     + "</body>"
                     + "</html>")
-    @NotYetImplemented({ FF, IE8 })
+    @NotYetImplemented({ FF, IE8, IE11 })
+    // IE11 omits the body's ID attribute
     public void htmlAttributes() throws Exception {
         final String expectedString = getExpectedAlerts()[0];
         setExpectedAlerts();
@@ -384,7 +386,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<input xmlns=\"http://www.w3.org/1999/xhtml\" />",
             IE8 = "XMLSerializer not defined")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, IE11 })
     public void inputTagWithoutType() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

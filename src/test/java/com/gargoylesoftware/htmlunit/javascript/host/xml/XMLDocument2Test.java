@@ -41,10 +41,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "myTarget,myData,7", "myTarget,myData", "abcdefghij",
-            "<?myTarget myData?>", "<![CDATA[abcdefghij]]>" },
-            IE11 = { "myTarget,myData,7", "myTarget,myData", "abcdefghij",
-            "<?myTarget myData?>", "abcdefghij" })
+    @Alerts({ "myTarget,myData,7", "myTarget,myData", "<?myTarget myData?>" })
     public void createProcessingInstruction() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -57,10 +54,56 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "    doc.insertBefore(pi, d);\n"
             + "    alert(pi.nodeName + ',' + pi.nodeValue + ',' + pi.nodeType);\n"
             + "    alert(pi.target + ',' + pi.data);\n"
+            + "    alert(" + XMLDocumentTest.callSerializeXMLDocumentToString("pi") + ");\n"
+            + "  }\n"
+            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
+            + XMLDocumentTest.SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "#cdata-section,abcdefghij,4", "abcdefghij", "<![CDATA[abcdefghij]]>" },
+            IE11 = { "#cdata-section,abcdefghij,4", "abcdefghij", "abcdefghij" })
+    public void createCDATASection() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
+            + "    var d = doc.createElement('doc');\n"
+            + "    doc.appendChild(d);\n"
             + "    var cdata = doc.createCDATASection('abcdefghij');\n"
             + "    d.appendChild(cdata);\n"
+            + "    alert(cdata.nodeName + ',' + cdata.nodeValue + ',' + cdata.nodeType);\n"
             + "    alert(cdata.data);\n"
-            + "    alert(" + XMLDocumentTest.callSerializeXMLDocumentToString("pi") + ");\n"
+            + "    alert(" + XMLDocumentTest.callSerializeXMLDocumentToString("cdata") + ");\n"
+            + "  }\n"
+            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
+            + XMLDocumentTest.SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "#cdata-section,<>&?,4", "<>&?", "<![CDATA[<>&?]]>" },
+            IE11 = { "#cdata-section,<>&?,4", "<>&?", "&lt;&gt;&amp;?" })
+    public void createCDATASection_specialChars() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
+            + "    var d = doc.createElement('doc');\n"
+            + "    doc.appendChild(d);\n"
+            + "    var cdata = doc.createCDATASection('<>&?');\n"
+            + "    d.appendChild(cdata);\n"
+            + "    alert(cdata.nodeName + ',' + cdata.nodeValue + ',' + cdata.nodeType);\n"
+            + "    alert(cdata.data);\n"
             + "    alert(" + XMLDocumentTest.callSerializeXMLDocumentToString("cdata") + ");\n"
             + "  }\n"
             + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
@@ -163,7 +206,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ IE })
+    @Browsers(IE)
     @Alerts({ "content", "content" })
     public void text() throws Exception {
         final String html = "<html><head><script>\n"

@@ -35,11 +35,13 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * DOM-Level-2-Traversal-Range</a>
  * @version $Revision$
  * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
+ * @author Frank Danek
  */
 @JsxClass
 public class TreeWalker extends SimpleScriptable {
 
-    private Node root_, currentNode_;
+    private Node root_;
+    private Node currentNode_;
     private long whatToShow_;
     private NodeFilter filter_;
     private boolean expandEntityReferences_;

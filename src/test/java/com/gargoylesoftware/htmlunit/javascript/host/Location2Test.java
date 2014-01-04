@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
@@ -27,7 +29,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -122,7 +123,8 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "", "about:blank", "", "", "about:", "" },
+    @Alerts(CHROME = { "", "about:blank", "blank", "", "about:", "" },
+            FF = { "", "about:blank", "", "", "about:", "" },
             IE = { "", "about:blank", "/blank", "", "about:", "" })
     public void about_blank_attributes() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
@@ -145,10 +147,10 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "#a b", "§§URL§§#a%20b", "#a b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
-                    "#% ^[]|\"<>{}\\" },
-            IE = { "#a b", "§§URL§§#a b", "#a%20b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
+    @Alerts(DEFAULT = { "#a b", "§§URL§§#a b", "#a%20b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
                     "#%25%20%5E%5B%5D%7C%22%3C%3E%7B%7D%5C" },
+            FF = { "#a b", "§§URL§§#a%20b", "#a b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
+                    "#% ^[]|\"<>{}\\" },
             IE8 = { "#a b", "§§URL§§#a%20b", "#a b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
                     "#% ^[]|\"<>{}\\" })
     public void hashEncoding() throws Exception {
@@ -175,8 +177,8 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "#myDataTable=foo=ojkoj", "§§URL§§#myDataTable=foo%3Dojkoj" },
-            IE = { "#myDataTable=foo%3Dojkoj", "§§URL§§#myDataTable=foo%3Dojkoj" },
+    @Alerts(DEFAULT = { "#myDataTable=foo%3Dojkoj", "§§URL§§#myDataTable=foo%3Dojkoj" },
+            FF = { "#myDataTable=foo=ojkoj", "§§URL§§#myDataTable=foo%3Dojkoj" },
             IE8 = { "#myDataTable=foo=ojkoj", "§§URL§§#myDataTable=foo%3Dojkoj" })
     public void hashEncoding2() throws Exception {
         final String html = "<html><body><script>\n"
@@ -192,9 +194,8 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = { "#üöä", "§§URL§§#üöä" },
+    @Alerts(DEFAULT = { "#üöä", "§§URL§§#üöä" },
             FF = { "#üöä", "§§URL§§#%C3%BC%C3%B6%C3%A4" },
-            IE = { "#üöä", "§§URL§§#üöä" },
             IE8 = { "#üöä", "§§URL§§#%C3%BC%C3%B6%C3%A4" })
     public void hashEncoding3() throws Exception {
         final String html = "<html><body><script>\n"
@@ -210,7 +211,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "#<a>foobar</a>")
+    @Alerts("#<a>foobar</a>")
     public void hash() throws Exception {
         checkHash(getDefaultUrl().toExternalForm() + "?#<a>foobar</a>");
     }
@@ -219,7 +220,8 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "", IE = "#")
+    @Alerts(DEFAULT = "",
+            IE = "#")
     public void emptyHash() throws Exception {
         checkHash(getDefaultUrl().toExternalForm() + "#");
     }
@@ -228,7 +230,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "")
+    @Alerts("")
     public void noHash() throws Exception {
         checkHash(getDefaultUrl().toExternalForm());
     }
@@ -470,8 +472,9 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "foo3.html", "foo2.html" },
+            CHROME = {"", "foo2.html" },
             FF24 = {"", "foo2.html" })
-    @NotYetImplemented(FF24)
+    @NotYetImplemented({ CHROME, FF24 })
     public void onlick_set_location() throws Exception {
         final String html =
             "<html><head></head>\n"
@@ -492,10 +495,10 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "supported", "onhashchange undefined  undefined" },
-            FF = { "supported", "onhashchange http://localhost:12345/#1  http://localhost:12345/" },
+    @Alerts(DEFAULT = { "supported", "onhashchange http://localhost:12345/#1  http://localhost:12345/" },
+            IE = { "supported", "onhashchange undefined  undefined" },
             IE8 = { "supported", "onhashchange -" })
-    @NotYetImplemented(Browser.FF)
+    @NotYetImplemented({ CHROME, FF })
     public void onHashChange() throws Exception {
         final String html =
             "<html><head>\n"
@@ -523,8 +526,8 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "supported", "onhashchange undefined  undefined" },
-            FF = { "supported", "onhashchange §§URL§§#1  §§URL§§" },
+    @Alerts(DEFAULT = { "supported", "onhashchange §§URL§§#1  §§URL§§" },
+            IE = { "supported", "onhashchange undefined  undefined" },
             IE8 = { "supported", "onhashchange -" })
     public void onHashChangeJS() throws Exception {
         final String html =

@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class NamespaceTest extends WebDriverTestCase {
@@ -36,7 +37,7 @@ public class NamespaceTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no namespaces",
-            IE = "me, http://mysite")
+            IE8 = "me, http://mysite")
     public void test() throws Exception {
         final String html
             = "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:me='http://mysite'>\n"

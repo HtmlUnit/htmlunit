@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMPARSER_EMPTY_STRING_IS_ERROR;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMPARSER_EXCEPTION_ON_ERROR;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMPARSER_PARSERERROR_ON_ERROR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -22,6 +25,7 @@ import java.io.IOException;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -44,6 +48,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Attr;
 import com.gargoylesoftware.htmlunit.javascript.host.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMException;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -143,12 +148,15 @@ public class XMLDocument extends Document {
      * @return true if the load succeeded; false if the load failed
      */
     public boolean loadXML(final String strXML) {
+        final WebWindow webWindow = getWindow().getWebWindow();
         try {
-            final WebWindow webWindow = getWindow().getWebWindow();
+            if (StringUtils.isEmpty(strXML) && getBrowserVersion().hasFeature(JS_DOMPARSER_EMPTY_STRING_IS_ERROR)) {
+                throw new IOException("Error parsing XML '" + strXML + "'");
+            }
 
             final WebResponse webResponse = new StringWebResponse(strXML, webWindow.getEnclosedPage().getUrl());
 
-            final XmlPage page = new XmlPage(webResponse, webWindow);
+            final XmlPage page = new XmlPage(webResponse, webWindow, false);
             setDomNode(page);
             return true;
         }
@@ -156,8 +164,35 @@ public class XMLDocument extends Document {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Error parsing XML\n" + strXML, e);
             }
+
+            if (getBrowserVersion().hasFeature(JS_DOMPARSER_EXCEPTION_ON_ERROR)) {
+                throw asJavaScriptException(
+                        new DOMException("Syntax Error",
+                            DOMException.SYNTAX_ERR));
+            }
+            if (getBrowserVersion().hasFeature(JS_DOMPARSER_PARSERERROR_ON_ERROR)) {
+                try {
+                    final XmlPage page = createParserErrorXmlPage("Syntax Error", webWindow);
+                    setDomNode(page);
+                }
+                catch (final IOException eI) {
+                    LOG.error("Could not handle ParserError", e);
+                }
+            }
+
             return false;
         }
+    }
+
+    private XmlPage createParserErrorXmlPage(final String message, final WebWindow webWindow) throws IOException {
+        final String xml = "<parsererror xmlns=\"http://www.mozilla.org/newlayout/xml/parsererror.xml\">\n"
+            + message + "\n"
+            + "<sourcetext></sourcetext>\n"
+            + "</parsererror>";
+
+        final WebResponse webResponse = new StringWebResponse(xml, webWindow.getEnclosedPage().getUrl());
+
+        return new XmlPage(webResponse, webWindow, false);
     }
 
     /**

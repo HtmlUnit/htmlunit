@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
+ * @author Frank Danek
  */
 public class ScriptException extends RuntimeException {
 
@@ -221,6 +222,21 @@ public class ScriptException extends RuntimeException {
         if (getCause() instanceof RhinoException) {
             final RhinoException cause = (RhinoException) getCause();
             return cause.lineNumber();
+        }
+
+        return -1;
+    }
+
+    /**
+     * Returns the column number of the source that was executing at the time of the exception.
+     *
+     * @return the column number or -1 if the exception was not thrown due to the
+     * execution of a script.
+     */
+    public int getFailingColumnNumber() {
+        if (getCause() instanceof RhinoException) {
+            final RhinoException cause = (RhinoException) getCause();
+            return cause.columnNumber();
         }
 
         return -1;

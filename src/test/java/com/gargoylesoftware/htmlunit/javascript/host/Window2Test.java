@@ -155,8 +155,8 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "Packages: undefined", "XML: undefined", "XMLList: undefined",
-                    "Namespace: undefined", "QName: undefined" })
+    @Alerts({ "Packages: undefined", "XML: undefined", "XMLList: undefined",
+        "Namespace: undefined", "QName: undefined" })
     public void rhino_lazilyNames3() throws Exception {
         doTestRhinoLazilyNames("Packages", "XML", "XMLList", "Namespace", "QName");
     }
@@ -655,7 +655,9 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "605", "1256", "705", "1256" },
             FF24 = { "657", "1264", "641", "1248" },
             IE11 = { "705", "1256", "688", "1239" })
-    @NotYetImplemented(FF24)
+    @NotYetImplemented({ FF24, IE11 })
+    // TODO width and height calculation needs to be reworked in HtmlUnit
+    // but as the calculation might be effected by e.g. current windows style it is not that simple
     public void changeHeightsAndWidths() throws Exception {
         final String html
             = "<html><head>\n"

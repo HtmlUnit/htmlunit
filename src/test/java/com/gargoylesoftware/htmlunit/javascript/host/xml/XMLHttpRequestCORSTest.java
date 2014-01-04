@@ -75,7 +75,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(IE = { "4", "200", "No Origin!" }, DEFAULT = { "4", "200", "§§URL§§" })
+    @Alerts(DEFAULT = { "4", "200", "§§URL§§" },
+            IE = { "4", "200", "No Origin!" })
     public void simple() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
@@ -131,7 +132,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(IE = { "4", "200" }, DEFAULT = { "exception", "4", "0" })
+    @Alerts(DEFAULT = { "exception", "4", "0" },
+            IE = { "4", "200" })
     public void noAccessControlAllowOrigin() throws Exception {
         incorrectAccessControlAllowOrigin(null);
     }
@@ -167,7 +169,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(IE = { "4", "200" }, DEFAULT = { "exception", "4", "0" })
+    @Alerts(DEFAULT = { "exception", "4", "0" },
+            IE = { "4", "200" })
     public void nonMatchingAccessControlAllowOrigin() throws Exception {
         incorrectAccessControlAllowOrigin("http://www.sourceforge.net");
     }
@@ -176,8 +179,9 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(IE = { "4", "200", "null", "null", "null", "null" },
-            DEFAULT = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother" })
+    @Alerts(DEFAULT = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother" },
+            CHROME = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother, content-type" },
+            IE = { "4", "200", "null", "null", "null", "null" })
     public void preflight() throws Exception {
         doPreflightTestAllowedMethods("POST, GET, OPTIONS", "text/plain");
     }
@@ -186,8 +190,9 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(IE = { "4", "200", "null", "null", "null", "null" },
-            DEFAULT = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother" })
+    @Alerts(DEFAULT = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother" },
+            CHROME = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother, content-type" },
+            IE = { "4", "200", "null", "null", "null", "null" })
     public void preflight_contentTypeWithCharset() throws Exception {
         doPreflightTestAllowedMethods("POST, GET, OPTIONS", "text/plain;charset=utf-8");
     }
@@ -198,8 +203,9 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(IE = { "4", "200", "null", "null", "null", "null" },
-            DEFAULT = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother" })
+    @Alerts(DEFAULT = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother" },
+            CHROME = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother, content-type" },
+            IE = { "4", "200", "null", "null", "null", "null" })
     public void preflight_incorrect_methods() throws Exception {
         doPreflightTestAllowedMethods(null, "text/plain");
     }
@@ -296,7 +302,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(IE = { "4", "200" }, DEFAULT = { "exception", "4", "0" })
+    @Alerts(DEFAULT = { "exception", "4", "0" },
+            IE = { "4", "200" })
     public void preflight_incorrect_headers() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
@@ -332,6 +339,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "4", "200", "options_headers", "x-ping,x-pong" },
+            CHROME = { "4", "200", "options_headers", "x-ping, x-pong" },
             IE = { "4", "200", "options_headers", "null" })
     public void preflight_many_header_values() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
@@ -370,7 +378,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = "false", IE8 = "undefined")
+    @Alerts(DEFAULT = "false",
+            IE8 = "undefined")
     public void withCredentials_defaultValue() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
@@ -395,11 +404,100 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
+    @Alerts(DEFAULT = { "false", "true", "false", "ex: open", "true" },
+            CHROME = { "false", "true", "false", "true" },
+            IE8 = { "undefined", "true", "false", "true" },
+            IE11 = { "false", "ex: withCredentials=true", "ex: withCredentials=false",
+                "ex: withCredentials=true", "false" })
+    public void withCredentials_setBeforeOpenSync() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "var xhr = " + XHRInstantiation_ + ";\n"
+                + "function test() {\n"
+                + "  try {\n"
+                + "    alert(xhr.withCredentials);\n"
+
+                + "    try {\n"
+                + "      xhr.withCredentials = true;\n"
+                + "      alert(xhr.withCredentials);\n"
+                + "    } catch(e) { alert('ex: withCredentials=true') }\n"
+
+                + "    try {\n"
+                + "      xhr.withCredentials = false;\n"
+                + "      alert(xhr.withCredentials);\n"
+                + "    } catch(e) { alert('ex: withCredentials=false') }\n"
+
+                + "    try {\n"
+                + "      xhr.withCredentials = true;\n"
+                + "    } catch(e) { alert('ex: withCredentials=true') }\n"
+
+                + "    try {\n"
+                + "      xhr.open('GET',  '/foo.xml', false);\n"
+                + "    } catch(e) { alert('ex: open') }\n"
+                + "    alert(xhr.withCredentials);\n"
+                + "  } catch(ex) { alert(ex) }\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "true", "false", "true" },
+            CHROME = { "false", "true", "false", "true" },
+            IE8 = { "undefined", "true", "false", "true" },
+            IE11 = { "false", "ex: withCredentials=true", "ex: withCredentials=false",
+                "ex: withCredentials=true", "false" })
+    public void withCredentials_setBeforeOpenAsync() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "var xhr = " + XHRInstantiation_ + ";\n"
+                + "function test() {\n"
+                + "  try {\n"
+                + "    alert(xhr.withCredentials);\n"
+
+                + "    try {\n"
+                + "      xhr.withCredentials = true;\n"
+                + "      alert(xhr.withCredentials);\n"
+                + "    } catch(e) { alert('ex: withCredentials=true') }\n"
+
+                + "    try {\n"
+                + "      xhr.withCredentials = false;\n"
+                + "      alert(xhr.withCredentials);\n"
+                + "    } catch(e) { alert('ex: withCredentials=false') }\n"
+
+                + "    try {\n"
+                + "      xhr.withCredentials = true;\n"
+                + "    } catch(e) { alert('ex: withCredentials=true') }\n"
+
+                + "    try {\n"
+                + "      xhr.open('GET',  '/foo.xml', true);\n"
+                + "    } catch(e) { alert('ex: open') }\n"
+                + "    alert(xhr.withCredentials);\n"
+                + "  } catch(ex) { alert(ex) }\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
     @Alerts(DEFAULT = { "false", "false", "ex: withCredentials=true", "ex: withCredentials=false" },
+            CHROME = { "false", "false", "true", "false" },
             FF17 = { "false", "false", "false", "false" },
             IE8 = { "undefined", "undefined", "true", "false" },
             IE11 = { "false", "false", "true", "false" })
-    public void withCredentials_notSettableInSyncMode() throws Exception {
+    public void withCredentials_setAfterOpenSync() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "var xhr = " + XHRInstantiation_ + ";\n"
@@ -431,21 +529,20 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "true", "ex: open" },
-            IE8 = { "undefined", "false", "true", "open true" },
-            IE11 = { "false", "ex: withCredentials=false", "ex: withCredentials=true", "open false" })
-    public void withCredentials_openFailesInSyncMode() throws Exception {
+    @Alerts(DEFAULT = { "false", "false", "ex: withCredentials=true", "ex: withCredentials=false" },
+            CHROME = { "false", "false", "true", "false" },
+            FF17 = { "false", "false", "false", "false" },
+            IE8 = { "undefined", "undefined", "true", "false" },
+            IE11 = { "false", "false", "true", "false" })
+    public void withCredentials_setAfterOpenAsync() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "var xhr = " + XHRInstantiation_ + ";\n"
                 + "function test() {\n"
                 + "  try {\n"
                 + "    alert(xhr.withCredentials);\n"
-
-                + "    try {\n"
-                + "      xhr.withCredentials = false;\n"
-                + "      alert(xhr.withCredentials);\n"
-                + "    } catch(e) { alert('ex: withCredentials=false') }\n"
+                + "    xhr.open('GET',  '/foo.xml', false);\n"
+                + "    alert(xhr.withCredentials);\n"
 
                 + "    try {\n"
                 + "      xhr.withCredentials = true;\n"
@@ -453,9 +550,9 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "    } catch(e) { alert('ex: withCredentials=true') }\n"
 
                 + "    try {\n"
-                + "      xhr.open('GET',  '/foo.xml', false);\n"
-                + "      alert('open ' + xhr.withCredentials);\n"
-                + "    } catch(e) { alert('ex: open') }\n"
+                + "      xhr.withCredentials = false;\n"
+                + "      alert(xhr.withCredentials);\n"
+                + "    } catch(e) { alert('ex: withCredentials=false') }\n"
                 + "  } catch(ex) { alert(ex) }\n"
                 + "}\n"
                 + "</script>\n"
@@ -470,6 +567,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "0", "4", "0" },
+            CHROME = { "1", "ex: status not available", "4", "0" },
             IE8 = { "1", "ex: status not available", "4", "200" },
             IE11 = { "1", "0", "4", "200" })
     public void withCredentials() throws Exception {
@@ -481,6 +579,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "0", "4", "200" },
+            CHROME = { "1", "ex: status not available", "4", "200" },
             IE8 = { "1", "ex: status not available", "4", "200" })
     public void withCredentialsServer() throws Exception {
         testWithCredentials("http://localhost:" + PORT, "true");
@@ -491,6 +590,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "0", "4", "0" },
+            CHROME = { "1", "ex: status not available", "4", "0" },
             IE8 = { "1", "ex: status not available", "4", "200" },
             IE11 = { "1", "0", "4", "200" })
     public void withCredentialsServerSlashAtEnd() throws Exception {
@@ -502,6 +602,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "0", "4", "0" },
+            CHROME = { "1", "ex: status not available", "4", "0" },
             IE8 = { "1", "ex: status not available", "4", "200" },
             IE11 = { "1", "0", "4", "200" })
     public void withCredentials_no_header() throws Exception {
@@ -513,6 +614,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "0", "4", "0" },
+            CHROME = { "1", "ex: status not available", "4", "0" },
             IE8 = { "1", "ex: status not available", "4", "200" },
             IE11 = { "1", "0", "4", "200" })
     public void withCredentials_no_header_Server() throws Exception {
@@ -524,6 +626,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "0", "4", "0" },
+            CHROME = { "1", "ex: status not available", "4", "0" },
             IE8 = { "1", "ex: status not available", "4", "200" },
             IE11 = { "1", "0", "4", "200" })
     public void withCredentials_no_header_ServerSlashAtEnd() throws Exception {

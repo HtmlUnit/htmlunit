@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -105,6 +108,8 @@ public class TreeWalkerTest extends WebDriverTestCase {
             FF24 = { "A", "A", "4294967295", "undefined" },
             IE = "exception",
             IE11 = { "A", "A", "-1", "true" })
+    @NotYetImplemented(IE11)
+    // The spec states it is an unsigned long.
     public void getters2() throws Exception {
         final String script = "var theA = document.getElementById('theA');\n"
             + "var tw = document.createTreeWalker(theA, NodeFilter.SHOW_ALL, null, true);\n"
@@ -427,9 +432,14 @@ public class TreeWalkerTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "P", "undefined" },
             IE = "exception")
     public void secondFilterReject() throws Exception {
-        final String script = "var noScripts = {acceptNode: function(node) {if (node.tagName == 'SPAN' ||"
-            + "node.tagName == 'DIV') return NodeFilter.FILTER_REJECT;"
-            + "return NodeFilter.FILTER_ACCEPT}};\n"
+        final String script = ""
+            + "var noScripts = {\n"
+            + "  acceptNode: function(node) {\n"
+            + "    if (node.tagName == 'SPAN' || node.tagName == 'DIV')\n"
+            + "      return NodeFilter.FILTER_REJECT;\n"
+            + "    return NodeFilter.FILTER_ACCEPT;\n"
+            + "  }\n"
+            + "};\n"
             + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts, true);\n"
             + "alert(safeTagName(tw.firstChild()));\n"
             + "alert(safeTagName(tw.nextSibling()));\n";

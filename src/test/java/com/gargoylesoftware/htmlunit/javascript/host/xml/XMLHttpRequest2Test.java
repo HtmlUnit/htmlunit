@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URL;
@@ -190,6 +192,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "5", "pass", "pass", "pass", "pass" },
             IE = { "3", "exception", "exception", "pass", "pass" },
             IE11 = { "1", "exception", "exception", "pass", "pass" })
+    @NotYetImplemented(IE11)
+    // real IE11 invokes just one request and returns the other two responses from it's cache
     public void openThrowOnEmptyUrl() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

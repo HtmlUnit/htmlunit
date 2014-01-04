@@ -17,7 +17,11 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_ADD_XHTML_NAMESPACE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_APPENDS_CRLF;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_BLANK_BEFORE_SELF_CLOSING;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.
+    JS_XML_SERIALIZER_HTML_DOCUMENT_FRAGMENT_ALWAYS_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_NON_EMPTY_TAGS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_ROOT_CDATA_AS_ESCAPED_TEXT;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -35,10 +39,12 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.CDATASection;
 import com.gargoylesoftware.htmlunit.javascript.host.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.DocumentFragment;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
@@ -50,7 +56,7 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class XMLSerializer extends SimpleScriptable {
 
     // this is a bit strange but it is the way FF works
@@ -119,6 +125,10 @@ public class XMLSerializer extends SimpleScriptable {
             root = ((Document) root).getDocumentElement();
         }
         else if (root instanceof DocumentFragment) {
+            if (root.getOwnerDocument() instanceof HTMLDocument
+                && getBrowserVersion().hasFeature(JS_XML_SERIALIZER_HTML_DOCUMENT_FRAGMENT_ALWAYS_EMPTY)) {
+                return "";
+            }
             root = root.getFirstChild();
         }
         if (root instanceof Element) {
@@ -141,6 +151,14 @@ public class XMLSerializer extends SimpleScriptable {
                 buffer.append("\r\n");
             }
             return buffer.toString();
+        }
+        if (root instanceof CDATASection
+            && getBrowserVersion().hasFeature(JS_XML_SERIALIZER_ROOT_CDATA_AS_ESCAPED_TEXT)) {
+            final DomCDataSection domCData = root.getDomNodeOrDie();
+            final String data = domCData.getData();
+            if (org.apache.commons.lang3.StringUtils.isNotBlank(data)) {
+                return StringUtils.escapeXmlChars(data);
+            }
         }
         return root.getDomNodeOrDie().asXml();
     }

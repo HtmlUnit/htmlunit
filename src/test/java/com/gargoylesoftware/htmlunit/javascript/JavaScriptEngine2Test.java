@@ -149,9 +149,8 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "undefined", "foo error" },
-            IE = { "function foo() {\n}", "function foo() {\n}" },
-            IE11 = { "function foo() {}", "function foo() {}" })
-    // Real IE doesn't have the extra 'new line'
+            IE = { "function foo() {\n}", "function foo() {\n}" })
+    // TODO Real IE doesn't have the extra 'new line'
     public void variableNotDefined() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"

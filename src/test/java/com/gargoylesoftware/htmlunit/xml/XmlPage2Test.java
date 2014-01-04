@@ -36,18 +36,14 @@ public class XmlPage2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "8",
-            IE11 = "")
-    // TODO [IE11]XML real IE11 does not support document.load
+    @Alerts("8")
     public void load_XMLComment() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
-            + "    doc.async = false;\n"
-            + "    doc.load('" + URL_SECOND + "');\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "    alert(doc.documentElement.childNodes[0].nodeType);\n"
             + "  }\n"
-            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
+            + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -61,7 +57,7 @@ public class XmlPage2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF =  { "true", "14" },
+    @Alerts(DEFAULT =  { "true", "14" },
             IE = { "true", "16" },
             IE11 = { "true", "15" })
     public void createElement() throws Exception {

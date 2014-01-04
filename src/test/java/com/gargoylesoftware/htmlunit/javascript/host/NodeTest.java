@@ -14,11 +14,19 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE9;
+import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION;
+import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION;
+import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.
+    SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION;
+import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.callCreateXMLDocument;
+import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.callLoadXMLDocumentFromString;
+import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.callSerializeXMLDocumentToString;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,7 +39,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
-import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest;
 
 /**
  * Tests for {@link Node}.
@@ -232,55 +239,6 @@ public class NodeTest extends WebDriverTestCase {
     }
 
     /**
-     * Regression test to verify that insertBefore correctly appends
-     * the new child object when the reference child object is null.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({ "3", "H2" })
-    public void test_insertBefore_nullRef() throws Exception {
-        test_insertBefore("aNode.insertBefore(nodeToInsert, null);");
-    }
-
-    /**
-     * Regression test to verify that insertBefore correctly appends
-     * the new child object when the reference child object is null.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(FF = "exception",
-            IE = { "3", "H2" })
-    public void test_insertBefore_noSecondArg() throws Exception {
-        test_insertBefore("aNode.insertBefore(nodeToInsert);");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    void test_insertBefore(final String insertJSLine) throws Exception {
-        final String html = "<html><head><title>test_insertBefore</title>\n"
-            + "<script>\n"
-            + "function doTest() {\n"
-            + "  var nodeToInsert = document.getElementById('nodeToInsert');\n"
-            + "  var aNode = document.getElementById('myNode');\n"
-            + "  try {\n"
-            + insertJSLine
-            + "    alert(aNode.childNodes.length);\n"
-            + "    alert(aNode.childNodes[2].nodeName);\n"
-            + "  }\n"
-            + "  catch (e) { alert('exception'); }\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head><body onload='doTest()'>\n"
-            + "<h2 id='nodeToInsert'>Bottom</h2>\n"
-            + "<div id='myNode'><span>Child Node 1-A</span>"
-            + "<h1>Child Node 2-A</h1></div>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
      * The common browsers always return node names in uppercase. Test this.
      * @throws Exception on test failure
      */
@@ -337,10 +295,9 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "isSameNode not supported" },
-            IE = { "isSameNode not supported" },
-            IE9 = { "true", "false" },
-            IE11 = { "true", "false" })
+    @Alerts(DEFAULT = { "true", "false" },
+            FF = { "isSameNode not supported" },
+            IE8 = { "isSameNode not supported" })
     public void isSameNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -413,33 +370,6 @@ public class NodeTest extends WebDriverTestCase {
     }
 
     /**
-     * Test element.appendChild: If the parent has a null parentNode,
-     * IE creates a DocumentFragment be the parent's parentNode.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = { "null", "null" },
-            IE8 = { "null", "#document-fragment" })
-    public void testInsertBefore_parentNode() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var div1 = document.createElement('div');\n"
-            + "    var div2 = document.createElement('div');\n"
-            + "    alert(div1.parentNode);\n"
-            + "    div1.insertBefore(div2,null);\n"
-            + "    if(div1.parentNode)\n"
-            + "      alert(div1.parentNode.nodeName);\n"
-            + "    else\n"
-            + "      alert(div1.parentNode);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -470,9 +400,10 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "3", "3", "3", "3", "3", "3", "3", "3" },
+            CHROME = { "3", "3", "3", "3", "3", "3", "3", "undefined" },
             FF17 = { "3", "3", "123", "3", "123", "3", "3", "3" },
             IE8 = { "undefined", "not supported" })
-    @NotYetImplemented({ FF17, FF24 })
+    @NotYetImplemented({ CHROME, FF17, FF24, IE11 })
     public void testNodePrototype() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -630,8 +561,10 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE9, IE11 })
-    @Alerts({ "0", "20", "20", "4", "10", "10", "2", "20", "exception" })
+    @Browsers({ CHROME, FF, IE9, IE11 })
+    @Alerts(DEFAULT = { "0", "20", "20", "4", "10", "10", "2", "20", "exception" },
+            CHROME = { "0", "20", "20", "4", "10", "10", "2", "20", "1" })
+    @NotYetImplemented(CHROME)
     public void compareDocumentPosition() throws Exception {
         final String html
             = "<html><head>\n"
@@ -692,43 +625,15 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLTableColElement]",
-            IE8 = "[object]")
-    public void insertBefore() throws Exception {
-        final String html
-            = "<html><head>\n"
-            + "<script>\n"
-            + "function test() {\n"
-            + "  var table = document.getElementById('myTable');\n"
-            + "  var colGroup = table.insertBefore(document.createElement('colgroup'), null);\n"
-            + "  alert(colGroup);\n"
-            + "}\n"
-            + "</script></head><body onload='test()'>\n"
-            + "  <table id='myTable'></table>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("bk")
     public void prefix() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  var text = \"<bk:book xmlns:bk='urn:loc.gov:books'></bk:book>\";\n"
-            + "  if (window.ActiveXObject) {\n"
-            + "    var doc = new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "    doc.async = false;\n"
-            + "    doc.loadXML(text);\n"
-            + "  } else {\n"
-            + "    var parser = new DOMParser();\n"
-            + "    var doc = parser.parseFromString(text, 'text/xml');\n"
-            + "  }\n"
+            + "  var doc = " + callLoadXMLDocumentFromString("text") + ";\n"
             + "  alert(doc.documentElement.prefix);\n"
             + "}\n"
+            + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -739,23 +644,33 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("<root><![CDATA[abc]]><![CDATA[def]]></root>")
+    @Alerts(DEFAULT = "<root><![CDATA[abc]]><![CDATA[def]]></root>",
+            IE8 = "<root><![CDATA[abc]]><![CDATA[def]]></root>\r\n")
     public void xml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = " + XMLDocumentTest.callCreateXMLDocument() + ";\n"
+            + "    var doc = " + callCreateXMLDocument() + ";\n"
             + "    var root = doc.appendChild(doc.createElement('root'));\n"
             + "    var cdata = root.appendChild(doc.createCDATASection('abcdef'));\n"
             + "    cdata.splitText(3);\n"
-            + "    if (root.xml)"
-            + "      alert(root.xml);\n"
-            + "    else\n"
-            + "      alert(new XMLSerializer().serializeToString(root));\n"
+            + "    alert(" + callSerializeXMLDocumentToString("doc") + ");\n"
             + "  }\n"
-            + XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION
+            + CREATE_XML_DOCUMENT_FUNCTION
+            + SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Regression test to verify that insertBefore correctly appends
+     * the new child object when the reference child object is null.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "3", "H2" })
+    public void insertBefore_nullRef() throws Exception {
+        test_insertBefore("aNode.insertBefore(nodeToInsert, null);");
     }
 
     /**
@@ -763,7 +678,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE8 = "exception")
-    public void insertBefore2() throws Exception {
+    public void insertBefore_undefinedRef() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
                 + "<script>\n"
                 + "function doTest(){\n"
@@ -781,11 +696,98 @@ public class NodeTest extends WebDriverTestCase {
     }
 
     /**
+     * Regression test to verify that insertBefore correctly appends
+     * the new child object when the reference child object is null.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "3", "H2" },
+            FF = "exception")
+    public void insertBefore_noSecondArg() throws Exception {
+        test_insertBefore("aNode.insertBefore(nodeToInsert);");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    void test_insertBefore(final String insertJSLine) throws Exception {
+        final String html = "<html><head><title>test_insertBefore</title>\n"
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  var nodeToInsert = document.getElementById('nodeToInsert');\n"
+            + "  var aNode = document.getElementById('myNode');\n"
+            + "  try {\n"
+            + insertJSLine
+            + "    alert(aNode.childNodes.length);\n"
+            + "    alert(aNode.childNodes[2].nodeName);\n"
+            + "  }\n"
+            + "  catch (e) { alert('exception'); }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='doTest()'>\n"
+            + "<h2 id='nodeToInsert'>Bottom</h2>\n"
+            + "<div id='myNode'><span>Child Node 1-A</span>"
+            + "<h1>Child Node 2-A</h1></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test element.appendChild: If the parent has a null parentNode,
+     * IE creates a DocumentFragment be the parent's parentNode.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "null" },
+            IE8 = { "null", "#document-fragment" })
+    public void insertBefore_parentNode() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var div1 = document.createElement('div');\n"
+            + "    var div2 = document.createElement('div');\n"
+            + "    alert(div1.parentNode);\n"
+            + "    div1.insertBefore(div2,null);\n"
+            + "    if(div1.parentNode)\n"
+            + "      alert(div1.parentNode.nodeName);\n"
+            + "    else\n"
+            + "      alert(div1.parentNode);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "[object HTMLTableColElement]",
+            IE8 = "[object]")
+    public void insertBefore_inTable() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var table = document.getElementById('myTable');\n"
+            + "  var colGroup = table.insertBefore(document.createElement('colgroup'), null);\n"
+            + "  alert(colGroup);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <table id='myTable'></table>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception on test failure
      */
     @Test
     @Alerts(FF = "exception")
-    public void insertBefore3() throws Exception {
+    public void insertBefore_newElement() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
                 + "<script>\n"
                 + "function doTest(){\n"
@@ -806,7 +808,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "4", "3", "abc", "def", "123456", "true", "0", "2", "123", "456", "1", "true" },
+    @Alerts(DEFAULT = { "4", "3", "abc", "def", "123456", "true", "0", "2", "123", "456", "1", "true" },
             IE = { "4", "3", "abc", "def", "123456", "false", "0", "2", "123", "456", "1", "false" })
     public void normalize() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -850,22 +852,18 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"undefined", "[object HTMLHtmlElement]" }, FF = {"[object Element]", "[object HTMLHtmlElement]" })
+    @Alerts(DEFAULT = { "[object Element]", "[object HTMLHtmlElement]" },
+            IE = { "undefined", "[object HTMLHtmlElement]" })
     public void parentElement() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  var text = '<hello>hi</hello>';\n"
-            + "  if (window.ActiveXObject) {\n"
-            + "    var doc = new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "    doc.async = false;\n"
-            + "    doc.loadXML(text);\n"
-            + "  } else {\n"
-            + "    var parser = new DOMParser();\n"
-            + "    var doc = parser.parseFromString(text, 'text/xml');\n"
-            + "  }\n"
+            + "  var doc = " + callLoadXMLDocumentFromString("text") + ";\n"
             + "  alert(doc.documentElement.firstChild.parentElement);\n"
             + "  alert(document.body.parentElement);\n"
             + "}\n"
+            + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -876,20 +874,15 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"hi", "null", "abcd", "null" },
-            FF24 = {"hi", "undefined", "abcd", "undefined" })
+    @Alerts(DEFAULT = { "hi", "null", "abcd", "null" },
+            CHROME = { "hi", "undefined", "abcd", "undefined" },
+            FF24 = { "hi", "undefined", "abcd", "undefined" })
     public void attributes() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  var text = '<hello>hi</hello>';\n"
-            + "  if (window.ActiveXObject) {\n"
-            + "    var doc = new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "    doc.async = false;\n"
-            + "    doc.loadXML(text);\n"
-            + "  } else {\n"
-            + "    var parser = new DOMParser();\n"
-            + "    var doc = parser.parseFromString(text, 'text/xml');\n"
-            + "  }\n"
+            + "  var doc = " + callLoadXMLDocumentFromString("text") + ";\n"
             + "  var node = doc.documentElement.firstChild;\n"
             + "  alert(node.nodeValue);\n"
             + "  alert(node.attributes);\n"
@@ -898,6 +891,7 @@ public class NodeTest extends WebDriverTestCase {
             + "  alert(node.nodeValue);\n"
             + "  alert(node.attributes);\n"
             + "}\n"
+            + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myId'>abcd</div>\n"
             + "</body></html>";

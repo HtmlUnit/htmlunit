@@ -17,12 +17,14 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_133;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_NOT_ALLOWED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_IS_A_FUNCTION;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ONERROR_COLUMN_ARGUMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_ALLOW_INVALID_PORT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_CANCELABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_SYNCHRONOUS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_IN_HTML_VIA_ACTIVEXOBJECT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -150,7 +152,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     private History history_;
     private Location location_;
     private ScriptableObject console_;
-    private OfflineResourceList applicationCache_;
+    private ApplicationCache applicationCache_;
     private Selection selection_;
     private Event currentEvent_;
     private String status_ = "";
@@ -298,8 +300,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the application cache.
      * @return the application cache
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
-    public OfflineResourceList getApplicationCache() {
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public ApplicationCache getApplicationCache() {
         return applicationCache_;
     }
 
@@ -726,7 +728,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         console_.setParentScope(this);
         ((Console) console_).setPrototype(getPrototype(((SimpleScriptable) console_).getClass()));
 
-        applicationCache_ = new OfflineResourceList();
+        applicationCache_ = new ApplicationCache();
         applicationCache_.setParentScope(this);
         applicationCache_.setPrototype(getPrototype(applicationCache_.getClass()));
 
@@ -827,6 +829,10 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             else {
                 throw Context.reportRuntimeError("Can't set opener!");
             }
+        }
+        if (getBrowserVersion().hasFeature(JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT)
+            && newValue != null && newValue != Context.getUndefinedValue() && !(newValue instanceof Window)) {
+            throw Context.reportRuntimeError("Can't set opener to something other than a window!");
         }
         opener_ = newValue;
     }
@@ -1108,7 +1114,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * been set).
      * @return the onhashchange property
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME) })
     public Object getOnhashchange() {
         return getEventListenersContainer().getEventHandlerProp(Event.TYPE_HASH_CHANGE);
     }
@@ -1117,7 +1123,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Sets the value of the onhashchange event handler.
      * @param newHandler the new handler
      */
-    @JsxSetter({ @WebBrowser(IE), @WebBrowser(FF) })
+    @JsxSetter({ @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME) })
     public void setOnhashchange(final Object newHandler) {
         getEventListenersContainer().setEventHandlerProp(Event.TYPE_HASH_CHANGE, newHandler);
     }
@@ -1246,7 +1252,15 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             final String msg = e.getMessage();
             final String url = e.getPage().getUrl().toExternalForm();
             final int line = e.getFailingLineNumber();
-            final Object[] args = new Object[] {msg, url, Integer.valueOf(line)};
+
+            Object[] args;
+            if (getBrowserVersion().hasFeature(JS_WINDOW_ONERROR_COLUMN_ARGUMENT)) {
+                final int column = e.getFailingColumnNumber();
+                args = new Object[] {msg, url, Integer.valueOf(line), Integer.valueOf(column)};
+            }
+            else {
+                args = new Object[] {msg, url, Integer.valueOf(line)};
+            }
             f.call(Context.getCurrentContext(), this, this, args);
         }
     }
@@ -1334,7 +1348,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                 result = getProxy(webWindow);
             }
             else if (result instanceof HTMLUnknownElement && getBrowserVersion()
-                    .hasFeature(JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
+                    .hasFeature(JS_XML_IN_HTML_VIA_ACTIVEXOBJECT)) {
                 final HtmlElement unknownElement = ((HTMLUnknownElement) result).getDomNodeOrDie();
                 if ("xml".equals(unknownElement.getNodeName())) {
                     final MSXMLActiveXObjectFactory factory =
@@ -1405,7 +1419,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param language the language of the specified code ("JavaScript", "JScript" or "VBScript")
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536420.aspx">MSDN documentation</a>
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
     public void execScript(final String script, final Object language) {
         final String languageStr = Context.toString(language);
         if (language == Undefined.instance
@@ -1882,7 +1896,10 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxFunction(@WebBrowser(IE))
     public int ScriptEngineMajorVersion() {
-        return 5;
+        if (getBrowserVersion().getBrowserVersionNumeric() < 10) {
+            return 5;
+        }
+        return (int) getBrowserVersion().getBrowserVersionNumeric();
     }
 
     /**
@@ -1892,7 +1909,10 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxFunction(@WebBrowser(IE))
     public int ScriptEngineMinorVersion() {
-        return (int) getBrowserVersion().getBrowserVersionNumeric();
+        if (getBrowserVersion().getBrowserVersionNumeric() < 10) {
+            return (int) getBrowserVersion().getBrowserVersionNumeric();
+        }
+        return 0;
     }
 
     /**

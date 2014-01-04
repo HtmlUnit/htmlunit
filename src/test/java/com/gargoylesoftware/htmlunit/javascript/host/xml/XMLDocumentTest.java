@@ -26,6 +26,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -617,7 +618,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "    alert(messageTableHeaders.documentElement.nodeName);\n"
+            + "      alert(messageTableHeaders.documentElement.nodeName);\n"
             + "    } catch(e) {alert('exception'); }\n"
             + "  }\n"
             + "</script>\n"
@@ -801,7 +802,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = "0",
             IE = "1",
-            IE11 = "")
+            IE11 = "exception")
     public void xpathWithNamespaces() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -809,8 +810,12 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "    try {\n"
             + "      alert(doc.selectNodes('//soap:book').length);\n"
             + "    } catch (e) {\n"
+            + "      try {\n"
             + "      alert(doc.evaluate('count(//book)', doc.documentElement, "
             + "null, XPathResult.NUMBER_TYPE, null).numberValue);\n"
+            + "      } catch (e) {\n"
+            + "        alert('exception');\n"
+            + "      }\n"
             + "    }\n"
             + "  }\n"
             + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
@@ -912,6 +917,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
     //TODO: in my real IE8 (without WebDriver), I got [object HTMLDocument]
     //so it should be HTMLDocument not XMLDocument for IE
     //Also, IE8 with WebDriver gives "" (empty Alert)
+    @NotYetImplemented(IE11)
+    // Real IE11 seems to generate always an (HTML)Document within an iframe.
     public void test() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

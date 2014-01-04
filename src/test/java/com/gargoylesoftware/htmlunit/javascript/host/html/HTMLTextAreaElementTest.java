@@ -14,9 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
@@ -128,8 +127,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(FF = {"11", "0" },
-            IE = {"undefined", "undefined" })
+    @Alerts(DEFAULT = { "11", "0" },
+            IE = { "undefined", "undefined" })
     public void textLength() throws Exception {
         final String html
             = "<html>\n"
@@ -153,9 +152,10 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0,0", "3,3", "3,10" },
-            IE8 = {"undefined,undefined", "3,undefined", "3,10" })
-    @NotYetImplemented({ FF17, FF24 })
+    @Alerts(DEFAULT = { "0,0", "0,0", "3,3", "3,10", "0,0" },
+            FF = { "0,0", "11,11", "3,11", "3,10", "7,7" },
+            IE8 = { "undefined,undefined", "undefined,undefined", "3,undefined", "3,10", "3,10" })
+    @NotYetImplemented({ CHROME, IE11 })
     public void selection() throws Exception {
         selection(3, 10);
     }
@@ -164,9 +164,10 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0,0", "0,0", "0,11" },
-            IE8 = {"undefined,undefined", "-3,undefined", "-3,15" })
-    @NotYetImplemented({ FF17, FF24 })
+    @Alerts(DEFAULT = { "0,0", "0,0", "0,0", "0,11", "0,0" },
+            FF = { "0,0", "11,11", "0,11", "0,11", "7,7" },
+            IE8 = { "undefined,undefined", "undefined,undefined", "-3,undefined", "-3,15", "-3,15" })
+    @NotYetImplemented({ CHROME, IE11 })
     public void selection_outOfBounds() throws Exception {
         selection(-3, 15);
     }
@@ -175,9 +176,11 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0,0", "10,10", "5,5" },
-            IE8 = {"undefined,undefined", "10,undefined", "10,5" })
-    @NotYetImplemented({ FF17, FF24 })
+    @Alerts(DEFAULT = { "0,0", "0,0", "10,10", "5,5", "0,0" },
+            FF = { "0,0", "11,11", "10,11", "5,5", "7,7" },
+            IE8 = { "undefined,undefined", "undefined,undefined", "10,undefined", "10,5", "10,5" },
+            IE11 = { "0,0", "0,0", "10,10", "5,5", "7,7" })
+    @NotYetImplemented({ CHROME, IE11 })
     public void selection_reverseOrder() throws Exception {
         selection(10, 5);
     }
@@ -190,11 +193,14 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
             + "  <textarea id='myTextArea'></textarea>\n"
             + "  <script>\n"
             + "    var textarea = document.getElementById('myTextArea');\n"
+            + "    alert(textarea.selectionStart + ',' + textarea.selectionEnd);\n"
             + "    textarea.value = 'Hello there';\n"
             + "    alert(textarea.selectionStart + ',' + textarea.selectionEnd);\n"
             + "    textarea.selectionStart = " + selectionStart + ";\n"
             + "    alert(textarea.selectionStart + ',' + textarea.selectionEnd);\n"
             + "    textarea.selectionEnd = " + selectionEnd + ";\n"
+            + "    alert(textarea.selectionStart + ',' + textarea.selectionEnd);\n"
+            + "    textarea.value = 'nothing';\n"
             + "    alert(textarea.selectionStart + ',' + textarea.selectionEnd);\n"
             + "  </script>\n"
             + "</body>\n"
@@ -371,7 +377,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "20", "5", "8", "4", "error", "4", "error", "4", "20", "3" },
+    @Alerts(CHROME = { "20", "5", "8", "4", "20", "20", "20", "3" },
+            FF = { "20", "5", "8", "4", "error", "4", "error", "4", "20", "3" },
             IE = { "20", "5", "8", "4", "error", "4", "error", "4", "error", "4", "3" })
     public void cols() throws Exception {
         final String html
@@ -421,7 +428,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "2", "5", "8", "4", "error", "4", "error", "4", "2", "3" },
+    @Alerts(CHROME = { "2", "5", "8", "4", "2", "2", "2", "3" },
+            FF = { "2", "5", "8", "4", "error", "4", "error", "4", "2", "3" },
             IE = { "2", "5", "8", "4", "error", "4", "error", "4", "error", "4", "3" })
     public void rows() throws Exception {
         final String html
@@ -472,7 +480,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE11 })
+    @Browsers({ CHROME, FF, IE11 })
     @Alerts({ "9", "9", "2", "7" })
     public void selectionRange() throws Exception {
         final String html
@@ -541,7 +549,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "null", "4", "", "0" },
             IE = { "null", "4", "null", "4" })
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ CHROME, FF })
     public void getAttributeAndSetValueNull() throws Exception {
         final String html =
             "<html>\n"

@@ -34,7 +34,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_APPEND_CHILD_SUPPORTED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CLASS_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DOCTYPE_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DOMAIN_IS_LOWERCASE;
@@ -46,6 +45,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMEN
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME_IN_QUICKS_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_FILTER_FUNCTION_ONLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUIRKS_MODE_ALWAYS_DOC_MODE_5;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
@@ -287,19 +287,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
 
         EXECUTE_CMDS_FF17.add("JustifyFull".toLowerCase(Locale.ENGLISH));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getClassName() {
-        if (getWindow().getWebWindow() != null) {
-            if (getBrowserVersion().hasFeature(JS_DOCUMENT_CLASS_NAME)) {
-                return "Document";
-            }
-        }
-        return super.getClassName();
     }
 
     /**
@@ -1806,7 +1793,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the value of the JavaScript attribute <tt>selection</tt>.
      * @return the value of the JavaScript attribute <tt>selection</tt>
      */
-    @JsxGetter(value = @WebBrowser(IE), propertyName = "selection")
+    @JsxGetter(value = @WebBrowser(value = IE, maxVersion = 9), propertyName = "selection")
     public Selection getSelection_js() {
         return getWindow().getSelectionImpl();
     }
@@ -1922,7 +1909,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return a new range
      * @see <a href="http://www.xulplanet.com/references/objref/HTMLDocument.html#method_createRange">XUL Planet</a>
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public Range createRange() {
         final Range r = new Range(this);
         r.setParentScope(getWindow());
@@ -1955,6 +1942,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public Object createTreeWalker(final Node root, final double whatToShow, final Scriptable filter,
             boolean expandEntityReferences) throws DOMException {
 
+        final boolean filterFunctionOnly = getBrowserVersion().hasFeature(JS_TREEWALKER_FILTER_FUNCTION_ONLY);
+
         // seems that Rhino doesn't like long as parameter type
         final long whatToShowL = Double.valueOf(whatToShow).longValue();
         NodeFilter filterWrapper = null;
@@ -1968,6 +1957,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                         response = ((Callable) filter).call(Context.getCurrentContext(), filter, filter, args);
                     }
                     else {
+                        if (filterFunctionOnly) {
+                            throw Context.reportRuntimeError("only a function is allowed as filter");
+                        }
                         response = ScriptableObject.callMethod(filter, "acceptNode", args);
                     }
                     return (short) Context.toNumber(response);

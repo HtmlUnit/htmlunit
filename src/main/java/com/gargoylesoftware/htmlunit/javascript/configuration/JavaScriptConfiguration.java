@@ -55,7 +55,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Navigator;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.NodeFilter;
 import com.gargoylesoftware.htmlunit.javascript.host.NodeList;
-import com.gargoylesoftware.htmlunit.javascript.host.OfflineResourceList;
+import com.gargoylesoftware.htmlunit.javascript.host.ApplicationCache;
 import com.gargoylesoftware.htmlunit.javascript.host.Plugin;
 import com.gargoylesoftware.htmlunit.javascript.host.PluginArray;
 import com.gargoylesoftware.htmlunit.javascript.host.Popup;
@@ -283,7 +283,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
     @SuppressWarnings("unchecked")
     static final Class<? extends SimpleScriptable>[] CLASSES_ = new Class[] {
         ArrayBuffer.class, ArrayBufferView.class, ArrayBufferViewBase.class,
-        Attr.class, ActiveXObject.class, BoxObject.class, CDATASection.class, ClipboardData.class,
+        Attr.class, ActiveXObject.class, ApplicationCache.class,
+        BoxObject.class, CDATASection.class, ClipboardData.class,
         CSSCharsetRule.class, CSSFontFaceRule.class, CSSImportRule.class, CSSMediaRule.class, CSSPrimitiveValue.class,
         CSSRule.class,
         CSSRuleList.class, CSSStyleDeclaration.class, CSSStyleRule.class, CSSStyleSheet.class, CSSValue.class,
@@ -334,7 +335,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         KeyboardEvent.class,
         Location.class, MediaList.class, MessageEvent.class, MimeType.class, MimeTypeArray.class, MouseEvent.class,
         MutationEvent.class, NamedNodeMap.class, Namespace.class, NamespaceCollection.class, Navigator.class,
-        Node.class, NodeFilter.class, NodeList.class, OfflineResourceList.class,
+        Node.class, NodeFilter.class, NodeList.class,
         Plugin.class, PluginArray.class, Popup.class, Position.class, ProcessingInstruction.class,
         Range.class, RowContainer.class,
         SVGAElement.class, SVGAltGlyphElement.class, SVGAngle.class, SVGAnimateElement.class,

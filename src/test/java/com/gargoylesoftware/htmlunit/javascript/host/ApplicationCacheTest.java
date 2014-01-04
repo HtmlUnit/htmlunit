@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
-public class OfflineResourceListTest extends WebDriverTestCase {
+public class ApplicationCacheTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if an error occurs
@@ -40,9 +40,11 @@ public class OfflineResourceListTest extends WebDriverTestCase {
             IE11 = "[object ApplicationCache]")
     public void existence() throws Exception {
         final String html
-            = "<html><body><script>\n"
-            + "alert(window.applicationCache);\n"
-            + "</script></body></html>";
+            = "<html><body>\n"
+            + "<script>\n"
+            + "  alert(window.applicationCache);\n"
+            + "</script>\n"
+            + "</body></html>";
         loadPageWithAlerts2(html);
     }
 

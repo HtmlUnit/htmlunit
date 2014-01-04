@@ -14,10 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLESHEETLIST_EXCEPTION_FOR_NEGATIVE_INDEX;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLESHEETLIST_EXCEPTION_FOR_TOO_HIGH_INDEX;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -47,6 +48,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @JsxClass
 public class StyleSheetList extends SimpleScriptable {
@@ -129,11 +131,15 @@ public class StyleSheetList extends SimpleScriptable {
     @JsxFunction
     public Object item(final int index) {
         if (index < 0) {
-            throw Context.reportRuntimeError("Invalid negative index: " + index);
+            if (getWindow().getWebWindow().getWebClient().getBrowserVersion().hasFeature(
+                    JS_STYLESHEETLIST_EXCEPTION_FOR_NEGATIVE_INDEX)) {
+                throw Context.reportRuntimeError("Invalid negative index: " + index);
+            }
+            return Context.getUndefinedValue();
         }
         else if (index >= nodes_.getLength()) {
             if (getWindow().getWebWindow().getWebClient().getBrowserVersion().hasFeature(
-                    BrowserVersionFeatures.JS_STYLESHEET_LIST_EXEPTION_FOR_ALL_INVALID_INDEXES)) {
+                    JS_STYLESHEETLIST_EXCEPTION_FOR_TOO_HIGH_INDEX)) {
                 throw Context.reportRuntimeError("Invalid index: " + index);
             }
             return Context.getUndefinedValue();
