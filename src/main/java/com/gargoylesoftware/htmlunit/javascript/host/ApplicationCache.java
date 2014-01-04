@@ -14,7 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_APPCACHE_NAME_OFFLINERESOURCELIST;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -24,8 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * <p>A collection of offline resources as defined in the
- * <a href="http://www.w3.org/TR/2008/WD-html5-20080122/#appcache">HTML5 spec</a>.
+ * <p>A collection of offline resources as defined in the HTML5 spec.
  * Intended to support offline web applications.</p>
  *
  * <p><b>NOTE:</b> This class is essentially a skeleton implementation providing minimal
@@ -35,10 +37,13 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Frank Danek
+ * @see <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/offline.html#application-cache-api">
+ * HTML5 spec</a>
  * @see <a href="https://developer.mozilla.org/en/offline_resources_in_firefox">Offline Resources in Firefox</a>
  * @see <a href="https://developer.mozilla.org/en/nsIDOMOfflineResourceList">Mozilla Documentation</a>
  */
-@JsxClass(browsers = @WebBrowser(FF))
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class ApplicationCache extends SimpleScriptable {
 
     /** The object isn't associated with an application cache. */
@@ -62,6 +67,19 @@ public class ApplicationCache extends SimpleScriptable {
     private Object onprogress_;
     private Object onupdateready_;
     private Object oncached_;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getClassName() {
+        if (getWindow().getWebWindow() != null) {
+            if (getBrowserVersion().hasFeature(JS_APPCACHE_NAME_OFFLINERESOURCELIST)) {
+                return "OfflineResourceList";
+            }
+        }
+        return super.getClassName();
+    }
 
     /**
      * Returns the event listener to be called when fetching the application cache manifest and checking for updates.
