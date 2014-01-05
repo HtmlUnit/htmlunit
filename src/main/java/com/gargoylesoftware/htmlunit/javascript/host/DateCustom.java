@@ -64,7 +64,7 @@ public final class DateCustom {
 
         if (browserVersion.hasFeature(JS_DATE_LOCALE_DATE_SHORT_WITH_SPECIAL_CHARS)) {
             // [U+200E] -> Unicode Character 'LEFT-TO-RIGHT MARK'
-            formatString = "\u200Edd‎.‎MM‎.‎yyyy";
+            formatString = "\u200Edd\u200E.\u200EMM\u200E.\u200Eyyyy";
         }
         else if (browserVersion.hasFeature(JS_DATE_LOCALE_DATE_SHORT)) {
             formatString = "d.M.yyyy";
@@ -91,7 +91,8 @@ public final class DateCustom {
                 ((Window) thisObj.getParentScope()).getWebWindow().getWebClient().getBrowserVersion();
 
         if (browserVersion.hasFeature(JS_DATE_LOCALE_TIME_WITH_SPECIAL_CHARS)) {
-            formatString = "‎HH‎:‎mm‎:‎ss";
+            // [U+200E] -> Unicode Character 'LEFT-TO-RIGHT MARK'
+            formatString = "\u200EHH\u200E:\u200Emm\u200E:\u200Ess";
         }
         else {
             formatString = "HH:mm:ss";

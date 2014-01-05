@@ -139,7 +139,7 @@ public class NativeDateTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Saturday, January 01, 2000",
             CHROME = "1.1.2000",
-            IE11 = "\u200E01‎.‎01‎.‎2000")
+            IE11 = "\u200E01\u200E.\u200E01\u200E.\u200E2000")
     public void toLocaleDateString() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -149,7 +149,6 @@ public class NativeDateTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        System.out.println((int) getExpectedAlerts()[0].charAt(0));
         loadPageWithAlerts2(html);
     }
 
@@ -244,9 +243,7 @@ public class NativeDateTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "00:00:00", "07:08:09" },
-            IE11 = { "‎00‎:‎00‎:‎00", "‎07‎:‎08‎:‎09" })
-    // ATTENTION! the IE11 expectation only looks identical to the default one but there are invisible control
-    // characters (char code 14 - shift out) surrounding the digit pairs...
+            IE11 = { "\u200E00\u200E:\u200E00\u200E:\u200E00", "\u200E07\u200E:\u200E08\u200E:\u200E09" })
     public void toLocaleTimeString() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
