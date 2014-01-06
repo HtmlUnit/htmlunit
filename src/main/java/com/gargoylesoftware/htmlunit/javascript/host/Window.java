@@ -1596,7 +1596,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param pseudo a string specifying the pseudo-element to match (may be <tt>null</tt>)
      * @return the computed style
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) })
     public ComputedCSSStyleDeclaration getComputedStyle(final Element element, final String pseudo) {
         ComputedCSSStyleDeclaration style;
 
