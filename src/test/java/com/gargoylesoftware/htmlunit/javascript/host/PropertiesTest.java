@@ -170,14 +170,14 @@ public class PropertiesTest extends SimpleWebTestCase {
         final List<String> realList;
         final List<String> simulatedList;
         final DefaultCategoryDataset dataset;
-        final StringBuilder html;
+        final StringBuilder detailsHtml;
         final MutableInt actualPropertyCount;
         final MutableInt remainingPropertyCount;
         if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_8) {
             realList = IE8_;
             simulatedList = IE8_SIMULATED_;
             dataset = CATEGORY_DATASET_IE8_;
-            html = IE8_HTML_;
+            detailsHtml = IE8_HTML_;
             actualPropertyCount = IE8_ACTUAL_PROPERTY_COUNT_;
             remainingPropertyCount = IE8_REMAINING_PROPERTY_COUNT_;
         }
@@ -185,7 +185,7 @@ public class PropertiesTest extends SimpleWebTestCase {
             realList = IE11_;
             simulatedList = IE11_SIMULATED_;
             dataset = CATEGORY_DATASET_IE11_;
-            html = IE11_HTML_;
+            detailsHtml = IE11_HTML_;
             actualPropertyCount = IE11_ACTUAL_PROPERTY_COUNT_;
             remainingPropertyCount = IE11_REMAINING_PROPERTY_COUNT_;
         }
@@ -193,7 +193,7 @@ public class PropertiesTest extends SimpleWebTestCase {
             realList = FF17_;
             simulatedList = FF17_SIMULATED_;
             dataset = CATEGORY_DATASET_FF17_;
-            html = FF17_HTML_;
+            detailsHtml = FF17_HTML_;
             actualPropertyCount = FF17_ACTUAL_PROPERTY_COUNT_;
             remainingPropertyCount = FF17_REMAINING_PROPERTY_COUNT_;
         }
@@ -201,7 +201,7 @@ public class PropertiesTest extends SimpleWebTestCase {
             realList = FF24_;
             simulatedList = FF24_SIMULATED_;
             dataset = CATEGORY_DATASET_FF24_;
-            html = FF24_HTML_;
+            detailsHtml = FF24_HTML_;
             actualPropertyCount = FF24_ACTUAL_PROPERTY_COUNT_;
             remainingPropertyCount = FF24_REMAINING_PROPERTY_COUNT_;
         }
@@ -245,32 +245,81 @@ public class PropertiesTest extends SimpleWebTestCase {
             LOG.debug("Error" + ':' + erroredProperties);
         }
 
-        appendHtml(html, originalRealProperties, simulatedProperties, erroredProperties);
+        htmlDetails(detailsHtml, originalRealProperties, simulatedProperties, erroredProperties);
         if (dataset.getColumnCount() == IE8_.size()) {
             saveChart(dataset);
-            html.append("<tr><td colspan='3' align='right'><b>Total Implemented: ")
-                .append(actualPropertyCount.intValue() - remainingPropertyCount.intValue()).append(" / ")
-                .append(actualPropertyCount.intValue()).append("</b></td></tr>");
-            html.append("</table>").append('\n').append("<br>").append("Legend:").append("<br>")
-                .append("<span style='color: blue'>").append("To be implemented").append("</span>").append("<br>")
-                .append("<span style='color: green'>").append("Implemented").append("</span>").append("<br>")
-                .append("<span style='color: red'>").append("Should not be implemented").append("</span>")
-                .append("</html>");
 
             FileUtils.writeStringToFile(new File(getArtifactsDirectory()
-                + "/properties-"
-                + browserVersion_.getNickname()
-                + ".html"), html.toString());
+                    + "/properties-" + browserVersion_.getNickname() + ".html"),
+                    htmlHeader()
+                        .append(overview(actualPropertyCount.intValue(), remainingPropertyCount.intValue()))
+                        .append(htmlDetailsHeader())
+                        .append(detailsHtml)
+                        .append(htmlDetailsFooter())
+                        .append(htmlFooter()).toString());
         }
     }
 
-    private void appendHtml(final StringBuilder html, final List<String> originalRealProperties,
+    private StringBuilder htmlHeader() {
+        final StringBuilder html = new StringBuilder();
+        html.append("<html><head>\n");
+        html.append("<style type=\"text/css\">\n");
+        html.append("table.bottomBorder { border-collapse:collapse; }\n");
+        html.append("table.bottomBorder td, table.bottomBorder th { "
+                            + "border-bottom:1px dotted black;padding:5px; }\n");
+        html.append("table.bottomBorder td.numeric { text-align:right; }\n");
+        html.append("</style>\n");
+        html.append("</head><body>\n");
+
+        html.append("<div align='center'>").append("<h2>")
+        .append("HtmlUnit implemented properties and methods for " + browserVersion_.getNickname())
+        .append("</h2>").append("</div>\n");
+        return html;
+    }
+
+    private StringBuilder overview(final int actualPropertyCount, final int remainingPropertyCount) {
+        final StringBuilder html = new StringBuilder();
+        html.append("<table class='bottomBorder'>");
+        html.append("<tr>\n");
+
+        html.append("<th>Total Implemented:</th>\n");
+        html.append("<td>" + (actualPropertyCount - remainingPropertyCount))
+            .append(" / " + actualPropertyCount).append("</td>\n");
+
+        html.append("</tr>\n");
+        html.append("</table>\n");
+
+        html.append("<p><br></p>\n");
+
+        return html;
+    }
+
+    private StringBuilder htmlFooter() {
+        final StringBuilder html = new StringBuilder();
+
+        html.append("<br>").append("Legend:").append("<br>")
+        .append("<span style='color: blue'>").append("To be implemented").append("</span>").append("<br>")
+        .append("<span style='color: green'>").append("Implemented").append("</span>").append("<br>")
+        .append("<span style='color: red'>").append("Should not be implemented").append("</span>");
+        html.append("\n");
+
+        html.append("</body>\n");
+        html.append("</html>\n");
+        return html;
+    }
+
+    private StringBuilder htmlDetailsHeader() {
+        final StringBuilder html = new StringBuilder();
+
+        html.append("<table class='bottomBorder' width='100%'>");
+        html.append("<tr>\n");
+        html.append("<th>Class</th><th>Methods/Properties</th><th>Counts</th>\n");
+        html.append("</tr>");
+        return html;
+    }
+
+    private StringBuilder htmlDetails(final StringBuilder html, final List<String> originalRealProperties,
             final List<String> simulatedProperties, final List<String> erroredProperties) {
-        if (html.length() == 0) {
-            html.append("<html>").append('\n').append("<div align='center'>").append("<h2>")
-            .append("HtmlUnit implemented properties and methods for " + browserVersion_.getNickname())
-            .append("</h2>").append("</div>").append("<table width='100%' border='1'>");
-        }
         html.append("<tr>").append('\n').append("<td rowspan='2'>").append("<a name='" + name_ + "'>").append(name_)
             .append("</a>").append("</td>").append('\n').append("<td>");
         int implementedCount = 0;
@@ -308,7 +357,16 @@ public class PropertiesTest extends SimpleWebTestCase {
             html.append("&nbsp;");
         }
         html.append("</td>")
-            .append("<td>").append(erroredProperties.size()).append("</td>").append("</tr>").append('\n');
+            .append("<td>").append(erroredProperties.size()).append("</td>").append("</tr>\n");
+
+        return html;
+    }
+
+    private StringBuilder htmlDetailsFooter() {
+        final StringBuilder html = new StringBuilder();
+
+        html.append("</table>");
+        return html;
     }
 
     private String getValueOf(final List<String> list, final String name) {
