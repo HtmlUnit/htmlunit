@@ -23,7 +23,7 @@
                 normalization on the encoding string starting with FF24.
             </action>
             <action type="update" dev="rbri">
-                Upgrade Apache commons-lang to 3.2.
+                Upgrade Apache commons-lang to 3.2.1.
             </action>
             <action type="fix" dev="rbri">
                 JavaScript: Window.opener is settable from javascript (FF24).
