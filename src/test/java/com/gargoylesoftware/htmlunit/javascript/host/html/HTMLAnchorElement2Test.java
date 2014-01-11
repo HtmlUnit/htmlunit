@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * Unit tests for {@link HTMLLinkElement}.
@@ -214,6 +215,71 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.name("testanchor")).click();
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "http://htmlunit.sourceforge.net/", "§§URL§§test", "§§URL§§#test",
+        "§§URL§§#", "§§URL§§" })
+    public void getDefaultValue() throws Exception {
+        final String html
+            = "<html><head><title>AnchorTest</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('absolute'));\n"
+            + "    alert(document.getElementById('relative'));\n"
+            + "    alert(document.getElementById('hash'));\n"
+            + "    alert(document.getElementById('hashOnly'));\n"
+            + "    alert(document.getElementById('empty'));\n"
+            + "  }\n</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <a href='http://htmlunit.sourceforge.net/' id='absolute'>bla</a>\n"
+            + "  <a href='test' id='relative'>bla</a>\n"
+            + "  <a href='#test' id='hash'>bla</a>\n"
+            + "  <a href='#' id='hashOnly'>bla</a>\n"
+            + "  <a href='' id='empty'>bla</a>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "http://htmlunit.sourceforge.net/", "§§URL§§test", "§§URL§§#ref#test",
+        "§§URL§§#ref#", "§§URL§§#ref" })
+    public void getDefaultValueWithHash() throws Exception {
+        final String html
+            = "<html><head><title>AnchorTest</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('absolute'));\n"
+            + "    alert(document.getElementById('relative'));\n"
+            + "    alert(document.getElementById('hash'));\n"
+            + "    alert(document.getElementById('hashOnly'));\n"
+            + "    alert(document.getElementById('empty'));\n"
+            + "  }\n</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <a href='http://htmlunit.sourceforge.net/' id='absolute'>bla</a>\n"
+            + "  <a href='test' id='relative'>bla</a>\n"
+            + "  <a href='#test' id='hash'>bla</a>\n"
+            + "  <a href='#' id='hashOnly'>bla</a>\n"
+            + "  <a href='' id='empty'>bla</a>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse(html);
+        final WebDriver driver = loadPage2(html, UrlUtils.getUrlWithNewRef(URL_FIRST, "ref"));
 
         expandExpectedAlertsVariables(URL_FIRST);
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
