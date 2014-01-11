@@ -226,10 +226,12 @@ public class CodeStyleTest {
 
                     @Override
                     public void handleProperty(final long revision, final SVNPropertyData property) {
+                        // nothing to do
                     }
 
                     @Override
                     public void handleProperty(final SVNURL url, final SVNPropertyData property) {
+                        // nothing to do
                     }
 
                     @Override
