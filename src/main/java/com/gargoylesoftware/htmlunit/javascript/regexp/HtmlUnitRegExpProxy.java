@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.regexp;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_REGEXP_EMPTY_LASTPAREN_IF_TOO_MANY_GROUPS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_REGEXP_GROUP0_RETURNS_WHOLE_MATCH;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -32,6 +35,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+
 /**
  * Begins customization of JavaScript RegExp base on JDK regular expression support.
  *
@@ -46,13 +51,16 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
 
     private static final Pattern REPLACE_PATTERN = Pattern.compile("\\$\\$");
     private final RegExpProxy wrapped_;
+    private final BrowserVersion browserVersion_;
 
     /**
      * Wraps a proxy to enhance it.
      * @param wrapped the original proxy
+     * @param browserVersion the current browser version
      */
-    public HtmlUnitRegExpProxy(final RegExpProxy wrapped) {
+    public HtmlUnitRegExpProxy(final RegExpProxy wrapped, final BrowserVersion browserVersion) {
         wrapped_ = wrapped;
+        browserVersion_ = browserVersion;
     }
 
     /**
@@ -184,7 +192,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         return sb.toString();
     }
 
-    static String computeReplacementValue(final String replacement,
+    String computeReplacementValue(final String replacement,
             final String originalString, final Matcher matcher) {
 
         int lastIndex = 0;
@@ -222,6 +230,11 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
                     switch (next) {
                         case '&':
                             ss = matcher.group();
+                            break;
+                        case '0':
+                            if (browserVersion_.hasFeature(JS_REGEXP_GROUP0_RETURNS_WHOLE_MATCH)) {
+                                ss = matcher.group();
+                            }
                             break;
                         case '`':
                             ss = originalString.substring(0, matcher.start());
@@ -298,12 +311,17 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
 
         // lastParen
         if (matcher.groupCount() > 0) {
-            final String last = matcher.group(matcher.groupCount());
-            if (last == null) {
+            if (matcher.groupCount() > 9 && browserVersion_.hasFeature(JS_REGEXP_EMPTY_LASTPAREN_IF_TOO_MANY_GROUPS)) {
                 lastParen = new SubString();
             }
             else {
-                lastParen = new FixedSubString(last);
+                final String last = matcher.group(matcher.groupCount());
+                if (last == null) {
+                    lastParen = new SubString();
+                }
+                else {
+                    lastParen = new FixedSubString(last);
+                }
             }
         }
 

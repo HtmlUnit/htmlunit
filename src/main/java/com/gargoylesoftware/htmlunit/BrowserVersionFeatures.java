@@ -1208,6 +1208,14 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_PREFIX_RETURNS_EMPTY_WHEN_UNDEFINED,
 
+    /** <code>RegExp.lastParen</code> returns an empty string if the RegExp has too many groups. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_REGEXP_EMPTY_LASTPAREN_IF_TOO_MANY_GROUPS,
+
+    /** RegExp group <code>$0</code> returns the whole previous match (see {@link java.util.regex.Matcher#group()}. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_REGEXP_GROUP0_RETURNS_WHOLE_MATCH,
+
     /** Javascript script.text(...) reexecutes the script (IE). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_SCRIPT_ALWAYS_REEXECUTE_ON_SET_TEXT,
