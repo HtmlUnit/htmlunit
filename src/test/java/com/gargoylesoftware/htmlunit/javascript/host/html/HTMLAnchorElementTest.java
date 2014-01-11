@@ -25,12 +25,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -54,70 +50,6 @@ public class HTMLAnchorElementTest extends SimpleWebTestCase {
         catch (final MalformedURLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({ "http://x/testsite1.html", "testsite1.html", "http://x/testsite2.html", "testsite2.html",
-        "13", "testanchor", "mailto:" })
-    public void getAttribute_and_href() throws Exception {
-        final WebClient client = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
-
-        final String html
-            = "<html><head><title>AnchorTest</title><script>\n"
-            + "function doTest(anchorElement) {\n"
-            + "    alert(anchorElement.href);\n"
-            + "    alert(anchorElement.getAttribute('href'));\n"
-            + "    anchorElement.href='testsite2.html';\n"
-            + "    alert(anchorElement.href);\n"
-            + "    alert(anchorElement.getAttribute('href'));\n"
-            + "    alert(anchorElement.getAttribute('id'));\n"
-            + "    alert(anchorElement.getAttribute('name'));\n"
-            + "    var link2 = document.getElementById('link2');\n"
-            + "    alert(link2.href);\n"
-            + "}\n</script></head>\n"
-            + "<body>\n"
-            + "<a href='testsite1.html' id='13' name='testanchor' onClick='doTest(this);return false'>bla</a>\n"
-            + "<a href='mailto:' id='link2'>mail</a>\n"
-            + "</body></html>";
-
-        webConnection.setDefaultResponse(html);
-        client.setWebConnection(webConnection);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final HtmlPage page = client.getPage("http://x");
-        final HtmlAnchor anchor = page.getAnchorByName("testanchor");
-        anchor.click();
-
-        assertEquals(getExpectedAlerts(), collectedAlerts);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({ "true", "not defined" })
-    public void onclickToString() throws Exception {
-        final String html
-            = "<html><head><title>AnchorTest</title><script>\n"
-            + "function test() {\n"
-            + "    for (var i=0; i<document.links.length; ++i)\n"
-            + "    {\n"
-            + "        var onclick = document.links[i].onclick;\n"
-            + "        alert(onclick ? (onclick.toString().indexOf('alert(') != -1) : 'not defined');\n"
-            + "    }\n"
-            + "}\n</script></head>\n"
-            + "<body onload='test()'>\n"
-            + "<a href='foo.html' onClick='alert(\"on click\")'>\n"
-            + "<a href='foo2.html'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
     }
 
     /**
@@ -309,58 +241,5 @@ public class HTMLAnchorElementTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(getBrowserVersion(), html, null, URL_GARGOYLE);
         final HtmlAnchor link = page.getAnchors().get(0);
         assertEquals("http://www.gargoylesoftware.commotion/foo.html#O", link.getHrefAttribute());
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts({ "", "A", "a", "A", "a8", "8Afoo", "8", "@" })
-    public void readWriteAccessKey() throws Exception {
-        final String html
-            = "<html><body><a id='a1' href='#'></a><a id='a2' href='#' accesskey='A'></a><script>\n"
-            + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
-            + "alert(a1.accessKey);\n"
-            + "alert(a2.accessKey);\n"
-            + "a1.accessKey = 'a';\n"
-            + "a2.accessKey = 'A';\n"
-            + "alert(a1.accessKey);\n"
-            + "alert(a2.accessKey);\n"
-            + "a1.accessKey = 'a8';\n"
-            + "a2.accessKey = '8Afoo';\n"
-            + "alert(a1.accessKey);\n"
-            + "alert(a2.accessKey);\n"
-            + "a1.accessKey = '8';\n"
-            + "a2.accessKey = '@';\n"
-            + "alert(a1.accessKey);\n"
-            + "alert(a2.accessKey);\n"
-            + "</script></body></html>";
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * Verifies that anchor href attributes are trimmed of whitespace (bug 1658064),
-     * just like they are in IE and Firefox.
-     * Verifies that href of anchor without href is empty string.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts({ "9", "9", "true", "false" })
-    public void testHrefTrimmed() throws Exception {
-        final String html = "<html><head><title>AnchorTest</title><script>\n"
-            + "function test() {\n"
-            + "  alert(document.getElementById('a').href.length);\n"
-            + "  alert(document.getElementById('b').href.length);\n"
-            + "  alert(document.getElementById('c').href === '');\n"
-            + "  alert(document.getElementById('d').href === '');\n"
-            + "}\n</script></head>\n"
-            + "<body onload='test()'>\n"
-            + "<a href=' http://a/ ' id='a'>a</a> "
-            + "<a href='  http://b/    ' id='b'>b</a>\n"
-            + "<a name='myAnchor' id='c'>c</a>\n"
-            + "<a href='' id='d'>d</a>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
     }
 }
