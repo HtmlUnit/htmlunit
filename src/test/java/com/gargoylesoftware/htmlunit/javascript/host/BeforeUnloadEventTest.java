@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 /**
  * Tests for {@link BeforeUnloadEvent}.
  *
- * @version $Revision: 8941 $
+ * @version $Revision$
  * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
