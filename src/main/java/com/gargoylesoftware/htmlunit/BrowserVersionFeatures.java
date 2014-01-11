@@ -466,10 +466,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     HTMLCHECKEDINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE,
 
-    /** Setting defaultChecked updates checked also. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 8), @WebBrowser(CHROME) })
-    HTMLCHECKEDINPUT_SET_DEFAULT_CHECKED_UPDATES_CHECKED,
-
     /** Set the default value based on the current value when clone (IE). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     HTMLCHECKEDINPUT_SET_DEFAULT_VALUE_WHEN_CLONE,
@@ -477,10 +473,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that comment nodes should be treated similar to elements, e.g. getElementsByTagName(). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     HTMLCOLLECTION_COMMENT_IS_ELEMENT,
-
-    /** Allows multiple elements with the same 'id'. */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME) })
-    HTMLCOLLECTION_IDENTICAL_IDS,
 
     /** HtmlCollection returns null instead of undefined if an element was not found. */
     @BrowserFeature(@WebBrowser(IE))
@@ -649,13 +641,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that the browser should ignore contents of inner head elements. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     IGNORE_CONTENTS_OF_INNER_HEAD,
-
-    /**
-     * The function addEventListener or attachEvent(IE) accepts null as listener
-     * instead of throwing an exception.
-     */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 17), @WebBrowser(CHROME) })
-    JS_ADD_EVENT_LISTENER_ACCEPTS_NULL_LISTENER,
 
     /** Setting the property align to arbitrary values is allowed. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
@@ -1003,10 +988,6 @@ public enum BrowserVersionFeatures {
     /** Indicated that the body of a not yet loaded frame/iframe is null. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_FRAME_BODY_NULL_IF_NOT_LOADED,
-
-    /** Indicates that the URL of parent window is used to resolve URLs in frames with javascript src. */
-    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF), @WebBrowser(CHROME) })
-    JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW,
 
     /** Indicates if Function.bind is available. */
     @BrowserFeature({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME),
@@ -1602,10 +1583,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     URL_MISSING_SLASHES,
 
-    /** */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME) })
-    WINDOW_ACTIVE_ELEMENT_FOCUSED,
-
     /** XMLHttpRequest does not trigger the error handler. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     XHR_ERRORHANDLER_NOT_SUPPORTED,
@@ -1624,10 +1601,6 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     XHR_IGNORE_PORT_FOR_SAME_ORIGIN,
-
-    /** Indicates if a same origin check should be skipped. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 8) })
-    XHR_IGNORE_SAME_ORIGIN,
 
     /** Indicates if a request to a about URL is allowed. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))

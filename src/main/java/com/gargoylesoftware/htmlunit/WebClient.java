@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_150
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PROTOCOL_DATA;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MINIMAL_QUERY_ENCODING;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.WINDOW_ACTIVE_ELEMENT_FOCUSED;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -719,18 +718,10 @@ public class WebClient implements Serializable {
         if (enclosedPage != null && enclosedPage.isHtmlPage()) {
             final Window jsWindow = (Window) currentWindow_.getScriptObject();
             if (jsWindow != null) {
-                if (getBrowserVersion().hasFeature(WINDOW_ACTIVE_ELEMENT_FOCUSED)) {
-                    final HTMLElement activeElement =
-                            (HTMLElement) ((HTMLDocument) jsWindow.getDocument()).getActiveElement();
-                    if (activeElement != null) {
-                        ((HtmlPage) enclosedPage).setFocusedElement(activeElement.getDomNodeOrDie(), true);
-                    }
-                }
-                else {
-                    final HtmlElement focusedElement = ((HtmlPage) enclosedPage).getFocusedElement();
-                    if (focusedElement != null) {
-                        ((HtmlPage) enclosedPage).setFocusedElement(focusedElement, true);
-                    }
+                final HTMLElement activeElement =
+                        (HTMLElement) ((HTMLDocument) jsWindow.getDocument()).getActiveElement();
+                if (activeElement != null) {
+                    ((HtmlPage) enclosedPage).setFocusedElement(activeElement.getDomNodeOrDie(), true);
                 }
             }
         }

@@ -72,14 +72,15 @@ public class BrowserVersionFeaturesTest extends SimpleWebTestCase {
         browsers.add(BrowserVersion.CHROME);
 
         for (final BrowserVersionFeatures feature : BrowserVersionFeatures.values()) {
-            boolean inUse = false;
+            int useCount = 0;
             for (BrowserVersion browserVersion : browsers) {
                 if (browserVersion.hasFeature(feature)) {
-                    inUse = true;
-                    continue;
+                    useCount++;
                 }
             }
-            assertTrue("BrowserVersionFeatures.java: '" + feature.name() + "' in no longer in use.", inUse);
+            assertTrue("BrowserVersionFeatures.java: '" + feature.name() + "' in no longer in use.", useCount > 0);
+            assertTrue("BrowserVersionFeatures.java: '" + feature.name() + "' is enabled for all supported browsers.",
+                    useCount < browsers.size());
         }
 
         for (final BrowserVersionFeatures feature : BrowserVersionFeatures.values()) {

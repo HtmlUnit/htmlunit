@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_40;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ADD_EVENT_LISTENER_ACCEPTS_NULL_LISTENER;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,7 +23,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 
 import org.apache.commons.logging.Log;
@@ -84,12 +82,7 @@ public class EventListenersContainer implements Serializable {
      */
     public boolean addEventListener(final String type, final Function listener, final boolean useCapture) {
         if (null == listener) {
-            final boolean accept = jsNode_.getWindow().getWebWindow().getWebClient()
-                    .getBrowserVersion().hasFeature(JS_ADD_EVENT_LISTENER_ACCEPTS_NULL_LISTENER);
-            if (accept) {
-                return true;
-            }
-            throw new EvaluatorException("Could not convert JavaScript argument (Listener was null).");
+            return true;
         }
 
         final List<Function> listeners = getHandlersOrCreateIt(type).getHandlers(useCapture);

@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_INPUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_USES_POINTEREVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_PROPERTY_CHANGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.KEYBOARD_EVENT_SPECIAL_KEYPRESS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.WINDOW_ACTIVE_ELEMENT_FOCUSED;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -1112,10 +1111,8 @@ public abstract class HtmlElement extends DomElement {
     public void focus() {
         final HtmlPage page = (HtmlPage) getPage();
         page.setFocusedElement(this);
-        if (hasFeature(WINDOW_ACTIVE_ELEMENT_FOCUSED)) {
-            final HTMLElement jsElt = (HTMLElement) getScriptObject();
-            jsElt.setActive();
-        }
+        final HTMLElement jsElt = (HTMLElement) getScriptObject();
+        jsElt.setActive();
     }
 
     /**

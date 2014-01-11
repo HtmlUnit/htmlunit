@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_50;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_COMMENT_IS_ELEMENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_IDENTICAL_IDS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -202,9 +201,6 @@ public class HTMLCollection extends NodeList {
             if (next instanceof DomElement) {
                 final String id = ((DomElement) next).getAttribute("id");
                 if (name.equals(id)) {
-                    if (!getBrowserVersion().hasFeature(HTMLCOLLECTION_IDENTICAL_IDS)) {
-                        return getScriptableForElement(next);
-                    }
                     matchingElements.add(next);
                 }
             }
@@ -225,9 +221,6 @@ public class HTMLCollection extends NodeList {
             if (next instanceof DomElement) {
                 final String nodeName = ((DomElement) next).getAttribute("name");
                 if (name.equals(nodeName)) {
-                    if (!getBrowserVersion().hasFeature(HTMLCOLLECTION_IDENTICAL_IDS)) {
-                        return getScriptableForElement(next);
-                    }
                     matchingElements.add(next);
                 }
             }

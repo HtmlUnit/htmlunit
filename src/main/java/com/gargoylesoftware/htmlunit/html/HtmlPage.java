@@ -21,7 +21,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FOCUS_BODY_ELEMENT_AT_START;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FOCUS_HTML_ELEMENT_AT_START;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFERRED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MISSING_SLASHES;
 
@@ -685,8 +684,7 @@ public class HtmlPage extends SgmlPage {
             if (frame) {
                 final boolean frameSrcIsNotSet = (baseUrl == WebClient.URL_ABOUT_BLANK);
                 final boolean frameSrcIsJs = "javascript".equals(baseUrl.getProtocol());
-                final boolean jsFrameUseParentUrl = hasFeature(JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW);
-                if (frameSrcIsNotSet || (frameSrcIsJs && jsFrameUseParentUrl)) {
+                if (frameSrcIsNotSet || frameSrcIsJs) {
                     baseUrl = ((HtmlPage) window.getTopWindow().getEnclosedPage()).getWebResponse()
                         .getWebRequest().getUrl();
                 }
