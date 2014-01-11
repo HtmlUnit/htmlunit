@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -24,9 +28,17 @@ import java.lang.annotation.Target;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Frank Danek
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface JsxConstructor {
+
+    /** The {@link WebBrowser}s supported by this constructor. */
+    WebBrowser[] value() default {
+        @WebBrowser(IE),
+        @WebBrowser(FF),
+        @WebBrowser(CHROME)
+    };
 }
 

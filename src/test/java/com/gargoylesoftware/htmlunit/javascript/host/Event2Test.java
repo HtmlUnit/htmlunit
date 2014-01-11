@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,6 +26,7 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -42,12 +44,18 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "change [select] [-]", "click [clickMe] [1]" },
-            IE = { "change [select] [-]", "click [select] [1]" },
-            IE8 = { "change [select] [-]", "click [select] [-]" })
+    @Alerts(DEFAULT = { "[object Event] change b:true c:false [select] [-]",
+                "[object MouseEvent] click b:true c:true [clickMe] [1]" },
+            IE = { "[object Event] change b:true c:false [select] [-]",
+                "[object MouseEvent] click b:true c:true [select] [1]" },
+            IE8 = { "[object] change b:undefined c:undefined [select] [-]",
+                "[object] click b:undefined c:undefined [select] [-]" })
     @BuggyWebDriver({ CHROME, FF })
-    // FFDriver wrongly generates a "click [select] [1]" first that doesn't occur manually
-    // ChromeDriver wrongly generates a "click [select] [1]" instead of "clickMe"
+    // FFDriver wrongly generates a "[object MouseEvent] click b:true c:true [select] [1]" first that doesn't occur
+    // manually
+    // ChromeDriver wrongly generates a "[object MouseEvent] click b:true c:true [select] [1]" instead of "clickMe"
+    @NotYetImplemented(IE11)
+    // No idea why the IE11 fires a MouseEvent here instead of a PointerEvent
     public void optionClick() throws Exception {
         final String firstSnippet = "       <select name='select' id='select' size='2'\n";
         final String secondSnippet = ">\n"
@@ -64,10 +72,10 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "click [clickMe] [1]",
+    @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
             IE = "")
     @BuggyWebDriver(CHROME)
-    // ChromeDriver does not generate a "click [clickMe] [1]" but it occurs manually
+    // ChromeDriver does not generate a "[object MouseEvent] click b:true c:true [clickMe] [1]" but it occurs manually
     public void optionClick2() throws Exception {
         final String firstSnippet = "       <select name='select' id='select' size='2'>\n"
                 + "               <option id='o_id1' value='o_value1'>option1</option>\n"
@@ -84,9 +92,13 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "change [radio] [-]", "click [radio] [1]" },
-            FF = { "click [radio] [1]", "change [radio] [-]" },
-            IE8 = { "click [radio] [-]" })
+    @Alerts(CHROME = { "[object Event] change b:true c:false [radio] [-]",
+                "[object MouseEvent] click b:true c:true [radio] [1]" },
+            FF = { "[object MouseEvent] click b:true c:true [radio] [1]",
+                "[object Event] change b:true c:false [radio] [-]" },
+            IE = { "[object Event] change b:true c:false [radio] [-]",
+                "[object PointerEvent] click b:true c:true [radio] [1]" },
+            IE8 = { "[object] click b:undefined c:undefined [radio] [-]" })
     public void radioClick() throws Exception {
         final String firstSnippet = "       <input type='radio' name='radio' id='clickMe' value='2'\n";
         final String secondSnippet = ">Radio\n";
@@ -99,9 +111,13 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "change [checkbox] [-]", "click [checkbox] [1]" },
-            FF = { "click [checkbox] [1]", "change [checkbox] [-]" },
-            IE8 = { "click [checkbox] [-]" })
+    @Alerts(CHROME = { "[object Event] change b:true c:false [checkbox] [-]",
+                "[object MouseEvent] click b:true c:true [checkbox] [1]" },
+            FF = { "[object MouseEvent] click b:true c:true [checkbox] [1]",
+                "[object Event] change b:true c:false [checkbox] [-]" },
+            IE = { "[object Event] change b:true c:false [checkbox] [-]",
+                "[object PointerEvent] click b:true c:true [checkbox] [1]" },
+            IE8 = { "[object] click b:undefined c:undefined [checkbox] [-]" })
     public void checkboxClick() throws Exception {
         final String firstSnippet = "       <input type='checkbox' name='checkbox' id='clickMe' value='2'\n";
         final String secondSnippet = ">Checkbox\n";
@@ -114,8 +130,9 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "click [clickMe] [1]",
-            IE8 = "click [clickMe] [-]")
+    @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
+            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
+            IE8 = "[object] click b:undefined c:undefined [clickMe] [-]")
     public void inputTextClick() throws Exception {
         final String firstSnippet = "       <input type='text' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
@@ -128,8 +145,9 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "click [clickMe] [1]",
-            IE8 = "click [clickMe] [-]")
+    @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
+            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
+            IE8 = "[object] click b:undefined c:undefined [clickMe] [-]")
     public void inputPasswordClick() throws Exception {
         final String firstSnippet = "       <input type='password' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
@@ -142,8 +160,9 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "click [clickMe] [1]",
-            IE8 = "click [clickMe] [-]")
+    @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
+            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
+            IE8 = "[object] click b:undefined c:undefined [clickMe] [-]")
     public void textareaClick() throws Exception {
         final String firstSnippet = "       <textarea name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = "></textarea>\n";
@@ -169,8 +188,9 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "click [clickMe] [1]",
-            IE8 = "click [clickMe] [-]")
+    @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
+            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
+            IE8 = "[object] click b:undefined c:undefined [clickMe] [-]")
     public void resetClick() throws Exception {
         final String firstSnippet = "       <input type='reset' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
@@ -183,8 +203,9 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "click [clickMe] [1]",
-            IE8 = "click [clickMe] [-]")
+    @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
+            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
+            IE8 = "[object] click b:undefined c:undefined [clickMe] [-]")
     public void buttonClick() throws Exception {
         final String firstSnippet = "       <input type='button' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";
@@ -197,8 +218,9 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "click [clickMe] [1]",
-            IE8 = "click [clickMe] [-]")
+    @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
+            IE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
+            IE8 = "[object] click b:undefined c:undefined [clickMe] [-]")
     public void anchorClick() throws Exception {
         final String firstSnippet = "       <a href='#' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">anchor</a>\n";
@@ -213,8 +235,10 @@ public class Event2Test extends WebDriverTestCase {
                 + "  <script type='text/javascript'>\n"
                 + "  <!--\n"
                 + "    function dumpEvent(event) {\n"
-                + "      var msg = '';\n"
-                + "      msg = msg + event.type;\n"
+                + "      var msg = event;\n"
+                + "      msg = msg + ' ' + event.type;\n"
+                + "      msg = msg + ' b:' + event.bubbles;\n"
+                + "      msg = msg + ' c:' + event.cancelable;\n"
                 + "\n"
                 + "      // target\n"
                 + "      var eTarget;\n"

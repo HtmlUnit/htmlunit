@@ -198,7 +198,10 @@ public abstract class AbstractJavaScriptConfiguration {
                     }
                 }
                 else if (annotation instanceof JsxConstructor) {
-                    classConfiguration.setJSConstructor(method);
+                    if (isSupported(((JsxConstructor) annotation).value(),
+                            expectedBrowserName, browserVersionNumeric)) {
+                        classConfiguration.setJSConstructor(method);
+                    }
                 }
             }
         }

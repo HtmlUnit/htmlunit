@@ -17,8 +17,11 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOCTYPE_4_0_TRANSITIONAL_STANDARDS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_DOM_LEVEL_2;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_DOM_LEVEL_3;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_BEFOREUNLOADEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_EVENTS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_HASHCHANGEEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_KEY_EVENTS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_POINTEREVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EXECCOMMAND_THROWS_ON_WRONG_COMMAND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_164;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_51;
@@ -122,8 +125,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.BeforeUnloadEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.HashChangeEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.KeyboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.MessageEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
@@ -131,6 +136,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.MutationEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.NamespaceCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.NodeFilter;
+import com.gargoylesoftware.htmlunit.javascript.host.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.Range;
 import com.gargoylesoftware.htmlunit.javascript.host.Selection;
 import com.gargoylesoftware.htmlunit.javascript.host.StaticNodeList;
@@ -246,8 +252,11 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         SUPPORTED_DOM3_EVENT_TYPE_MAP = Collections.unmodifiableMap(dom3EventMap);
 
         final Map<String, Class<? extends Event>> additionalEventMap = new HashMap<String, Class<? extends Event>>();
+        additionalEventMap.put("BeforeUnloadEvent", BeforeUnloadEvent.class);
         additionalEventMap.put("Events", Event.class);
+        additionalEventMap.put("HashChangeEvent", HashChangeEvent.class);
         additionalEventMap.put("KeyEvents", KeyboardEvent.class);
+        additionalEventMap.put("PointerEvent", PointerEvent.class);
         SUPPORTED_VENDOR_EVENT_TYPE_MAP = Collections.unmodifiableMap(additionalEventMap);
 
         // commands
@@ -1845,7 +1854,13 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
         if (clazz == null) {
             if ("Events".equals(eventType) && getBrowserVersion().hasFeature(EVENT_TYPE_EVENTS)
-                || "KeyEvents".equals(eventType) && getBrowserVersion().hasFeature(EVENT_TYPE_KEY_EVENTS)) {
+                || "KeyEvents".equals(eventType) && getBrowserVersion().hasFeature(EVENT_TYPE_KEY_EVENTS)
+                || "HashChangeEvent".equals(eventType)
+                    && getBrowserVersion().hasFeature(EVENT_TYPE_HASHCHANGEEVENT)
+                || "BeforeUnloadEvent".equals(eventType)
+                    && getBrowserVersion().hasFeature(EVENT_TYPE_BEFOREUNLOADEVENT)
+                || "PointerEvent".equals(eventType)
+                    && getBrowserVersion().hasFeature(EVENT_TYPE_POINTEREVENT)) {
                 clazz = SUPPORTED_VENDOR_EVENT_TYPE_MAP.get(eventType);
             }
         }
@@ -1856,9 +1871,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
         try {
             final Event event = clazz.newInstance();
-            event.setEventType(eventType);
             event.setParentScope(getWindow());
             event.setPrototype(getPrototype(clazz));
+            event.eventCreated();
             return event;
         }
         catch (final InstantiationException e) {

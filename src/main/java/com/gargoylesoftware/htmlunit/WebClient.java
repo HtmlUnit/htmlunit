@@ -2041,6 +2041,7 @@ public class WebClient implements Serializable {
                         downloadedResponse.target_, "_self");
                 if (downloadedResponse.urlWithOnlyHashChange_ != null) {
                     final HtmlPage page = (HtmlPage) downloadedResponse.requestingWindow_.getEnclosedPage();
+                    final String oldURL = page.getUrl().toExternalForm();
                     page.getWebResponse().getWebRequest().setUrl(downloadedResponse.urlWithOnlyHashChange_);
                     win.getHistory().addPage(page);
 
@@ -2048,7 +2049,7 @@ public class WebClient implements Serializable {
                     final Window jsWindow = (Window) win.getScriptObject();
                     if (null != jsWindow) {
                         final Location location = jsWindow.getLocation();
-                        location.setHash(downloadedResponse.urlWithOnlyHashChange_.getRef());
+                        location.setHash(oldURL, downloadedResponse.urlWithOnlyHashChange_.getRef());
                     }
                 }
                 else {

@@ -154,6 +154,14 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     DOM_NORMALIZE_REMOVE_CHILDREN,
 
+    /** <code>BeforeUnloadEvent</code> automatically gets the <code>type</code> 'beforeunload'. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    EVENT_BEFOREUNLOAD_AUTO_TYPE,
+
+    /** <code>Event.bubbles</code> and <code>Event.cancelable</code> are false as default. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    EVENT_BUBBLES_AND_CANCELABLE_DEFAULT_FALSE,
+
     /** Triggers "DOMContentLoaded" event. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     EVENT_DOM_CONTENT_LOADED,
@@ -174,6 +182,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     EVENT_INPUT,
 
+    /** Triggers 'onbeforeunload' event handler using <code>Event</code>. */
+    @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 9) })
+    EVENT_ONBEFOREUNLOAD_USES_EVENT,
+
     /** Triggers "onchange" event handler after "onclick" event handler. */
     @BrowserFeature(@WebBrowser(FF))
     EVENT_ONCHANGE_AFTER_ONCLICK,
@@ -186,9 +198,21 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     EVENT_ONCLICK_FOR_SELECT_ONLY,
 
+    /** Triggers 'onclick' and 'ondblclick' event handler using <code>PointerEvent</code>. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    EVENT_ONCLICK_USES_POINTEREVENT,
+
     /** Triggers "onerror" if external loading of an external javascript failed. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     EVENT_ONERROR_EXTERNAL_JAVASCRIPT,
+
+    /** <code>Event.bubbles</code> and <code>Event.cancelable</code> are false in 'onhashchange' event handler. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    EVENT_ONHASHCHANGE_BUBBLES_AND_CANCELABLE_FALSE,
+
+    /** <code>Event.cancelable</code> is false in 'onload' event handler. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    EVENT_ONLOAD_CANCELABLE_FALSE,
 
     /** Triggers "onload" event if external javascript successfully loaded. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
@@ -226,13 +250,25 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     EVENT_PROPERTY_CHANGE,
 
+    /** Supports event type 'BeforeUnloadEvent'. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    EVENT_TYPE_BEFOREUNLOADEVENT,
+
     /** Supports vendor specific event type 'Events'. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
     EVENT_TYPE_EVENTS,
 
+    /** Supports event type 'HashChangeEvent'. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    EVENT_TYPE_HASHCHANGEEVENT,
+
     /** Supports vendor specific event type 'KeyEvents'. */
-    @BrowserFeature({ @WebBrowser(FF) })
+    @BrowserFeature(@WebBrowser(FF))
     EVENT_TYPE_KEY_EVENTS,
+
+    /** Supports event type 'PointerEvent'. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    EVENT_TYPE_POINTEREVENT,
 
     /** Indicates that document.execCommand() should throw an exception when called with an illegal command. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))

@@ -22,6 +22,7 @@ import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 import com.gargoylesoftware.htmlunit.javascript.host.Attr;
+import com.gargoylesoftware.htmlunit.javascript.host.BeforeUnloadEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.BoxObject;
 import com.gargoylesoftware.htmlunit.javascript.host.CDATASection;
 import com.gargoylesoftware.htmlunit.javascript.host.CharacterDataImpl;
@@ -58,6 +59,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.NodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.ApplicationCache;
 import com.gargoylesoftware.htmlunit.javascript.host.Plugin;
 import com.gargoylesoftware.htmlunit.javascript.host.PluginArray;
+import com.gargoylesoftware.htmlunit.javascript.host.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.Popup;
 import com.gargoylesoftware.htmlunit.javascript.host.ProcessingInstruction;
 import com.gargoylesoftware.htmlunit.javascript.host.Range;
@@ -186,7 +188,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableCaptionElemen
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableCellElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableColElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableComponent;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableDataCellElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableHeaderCellElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableRowElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableSectionElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement;
@@ -284,7 +288,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
     static final Class<? extends SimpleScriptable>[] CLASSES_ = new Class[] {
         ArrayBuffer.class, ArrayBufferView.class, ArrayBufferViewBase.class,
         Attr.class, ActiveXObject.class, ApplicationCache.class,
-        BoxObject.class, CDATASection.class, ClipboardData.class,
+        BeforeUnloadEvent.class, BoxObject.class, CDATASection.class, ClipboardData.class,
         CSSCharsetRule.class, CSSFontFaceRule.class, CSSImportRule.class, CSSMediaRule.class, CSSPrimitiveValue.class,
         CSSRule.class,
         CSSRuleList.class, CSSStyleDeclaration.class, CSSStyleRule.class, CSSStyleSheet.class, CSSValue.class,
@@ -326,7 +330,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLPreElement.class, HTMLProgressElement.class, HTMLScriptElement.class,
         HTMLSelectElement.class, HTMLSourceElement.class, HTMLSpanElement.class,
         HTMLStyleElement.class, HTMLTableCaptionElement.class, HTMLTableCellElement.class, HTMLTableColElement.class,
-        HTMLTableComponent.class, HTMLTableElement.class, HTMLTableRowElement.class, HTMLTableSectionElement.class,
+        HTMLTableComponent.class, HTMLTableDataCellElement.class, HTMLTableElement.class,
+        HTMLTableHeaderCellElement.class, HTMLTableRowElement.class, HTMLTableSectionElement.class,
         HTMLTextElement.class, HTMLTextAreaElement.class, HTMLTimeElement.class, HTMLTitleElement.class,
         HTMLUListElement.class, HTMLUnknownElement.class,
         HTMLWBRElement.class,
@@ -336,7 +341,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         Location.class, MediaList.class, MessageEvent.class, MimeType.class, MimeTypeArray.class, MouseEvent.class,
         MutationEvent.class, NamedNodeMap.class, Namespace.class, NamespaceCollection.class, Navigator.class,
         Node.class, NodeFilter.class, NodeList.class,
-        Plugin.class, PluginArray.class, Popup.class, Position.class, ProcessingInstruction.class,
+        Plugin.class, PluginArray.class, PointerEvent.class, Popup.class, Position.class, ProcessingInstruction.class,
         Range.class, RowContainer.class,
         SVGAElement.class, SVGAltGlyphElement.class, SVGAngle.class, SVGAnimateElement.class,
         SVGAnimateMotionElement.class, SVGAnimateTransformElement.class, SVGCircleElement.class,

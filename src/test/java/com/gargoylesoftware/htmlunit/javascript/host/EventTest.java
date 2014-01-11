@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -50,14 +51,95 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 @RunWith(BrowserRunner.class)
 public class EventTest extends WebDriverTestCase {
 
+    private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
+        + "    if (event) {\n"
+        + "      alert(event);\n"
+        + "      alert(event.type);\n"
+        + "      alert(event.bubbles);\n"
+        + "      alert(event.cancelable);\n"
+        + "    } else {\n"
+        + "      alert('no event');\n"
+        + "    }\n"
+        + "  }\n";
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "[object Event]", "event", "false", "false" },
+            IE = "exception")
+    public void create_ctor() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new Event('event');\n"
+            + "      dump(event);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "[object Event]", "event", "true", "false" },
+            IE = "exception")
+    public void create_ctorWithDetails() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = new Event('event', {\n"
+            + "        'bubbles': true\n"
+            + "      });\n"
+            + "      dump(event);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "[object Event]", "", "false", "false" },
+            FF = { "[object Event]", "", "true", "true" },
+            IE8 = "exception")
+    public void create_createEvent() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = document.createEvent('Event');\n"
+            + "      dump(event);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
     /**
      * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = { "DOM2: [object Event]", "DOM3: [object Event]", "vendor: [object Event]" },
             IE8 = { "DOM2: exception", "DOM3: exception", "vendor: exception" })
-    public void createEvent() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+    public void create_createEventForDifferentTypes() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
             + "      alert('DOM2: ' + document.createEvent('HTMLEvents'));\n"
@@ -71,6 +153,29 @@ public class EventTest extends WebDriverTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "[object Event]", "event", "true", "false" },
+            IE8 = "exception")
+    public void initEvent() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = document.createEvent('Event');\n"
+            + "      event.initEvent('event', true, false);\n"
+            + "      dump(event);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
         loadPageWithAlerts2(html);
     }
 
@@ -389,35 +494,16 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "[object Event]", "true" },
-            IE8 = { "[object]", "undefined" })
-    // TODO [IE11] must be false for Chrome, FF and IE11
-    public void testBubbles() throws Exception {
+    @Alerts(DEFAULT = { "[object Event]", "load", "false", "false" },
+            FF = { "[object Event]", "load", "false", "true" },
+            IE8 = { "[object]", "load", "undefined", "undefined" })
+    public void onload() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
             + "    function test(e) {\n"
-            + "        alert(e);\n"
-            + "        alert(e.bubbles);\n"
+            + "        dump(e);\n"
             + "    }\n"
-            + "</script></body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = { "[object Event]", "false" },
-            FF = { "[object Event]", "true" },
-            IE8 = { "[object]", "undefined" })
-    public void testCancelable() throws Exception {
-        final String html =
-              "<html><body onload='test(event)'><script>\n"
-            + "    function test(e) {\n"
-            + "        alert(e);\n"
-            + "        alert(e.cancelable);\n"
-            + "    }\n"
+            + DUMP_EVENT_FUNCTION
             + "</script></body></html>";
 
         loadPageWithAlerts2(html);
@@ -487,7 +573,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "true", "I was here" })
+    @Alerts({ "true", "I was here" })
     public void firedEvent_equals_original_event() throws Exception {
         final String html =
             "<html><head><title>First</title>\n"
@@ -529,7 +615,7 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Browsers(FF)
     @Alerts("400000,1,20000000,2000,8000,40,2,80,800,800000,1000,8000000,10000000,100,400,200,80000,1000000,"
-            + "8,1,20,10,8,4,2,2000000,10000,4000000,40000,4000,4,20000,100000,200000,")
+                + "8,1,20,10,8,4,2,2000000,10000,4000000,40000,4000,4,20000,100000,200000,")
     public void constants() throws Exception {
         final String html =
               "<html><body>\n"

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_DOM_CONTENT_LOADED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONBEFOREUNLOAD_USES_EVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_FRAMESET_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FOCUS_BODY_ELEMENT_AT_START;
@@ -88,6 +89,7 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.host.BeforeUnloadEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -1275,7 +1277,14 @@ public class HtmlPage extends SgmlPage {
             if (element == null) { // happens for instance if document.documentElement has been removed from parent
                 return true;
             }
-            final Event event = new Event(element, eventType);
+            final Event event;
+            if (eventType.equals(Event.TYPE_BEFORE_UNLOAD)
+                && !getWebClient().getBrowserVersion().hasFeature(EVENT_ONBEFOREUNLOAD_USES_EVENT)) {
+                event = new BeforeUnloadEvent(element, eventType);
+            }
+            else {
+                event = new Event(element, eventType);
+            }
             element.fireEvent(event);
             if (!isOnbeforeunloadAccepted(this, event)) {
                 return false;
@@ -1308,7 +1317,14 @@ public class HtmlPage extends SgmlPage {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("Executing on" + eventType + " handler for " + frame);
                 }
-                final Event event = new Event(frame, eventType);
+                final Event event;
+                if (eventType.equals(Event.TYPE_BEFORE_UNLOAD)
+                    && !getWebClient().getBrowserVersion().hasFeature(EVENT_ONBEFOREUNLOAD_USES_EVENT)) {
+                    event = new BeforeUnloadEvent(frame, eventType);
+                }
+                else {
+                    event = new Event(frame, eventType);
+                }
                 ((Node) frame.getScriptObject()).executeEvent(event);
                 if (!isOnbeforeunloadAccepted((HtmlPage) frame.getPage(), event)) {
                     return false;

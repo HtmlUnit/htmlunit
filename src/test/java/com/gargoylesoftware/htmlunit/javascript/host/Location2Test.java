@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
@@ -498,7 +497,6 @@ public class Location2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "supported", "onhashchange http://localhost:12345/#1  http://localhost:12345/" },
             IE = { "supported", "onhashchange undefined  undefined" },
             IE8 = { "supported", "onhashchange -" })
-    @NotYetImplemented({ CHROME, FF })
     public void onHashChange() throws Exception {
         final String html =
             "<html><head>\n"

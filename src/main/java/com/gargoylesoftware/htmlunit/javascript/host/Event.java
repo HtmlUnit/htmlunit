@@ -14,7 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_BUBBLES_AND_CANCELABLE_DEFAULT_FALSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_DOCUMENT_DESCENDANTS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_CANCELABLE_FALSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_ABORTED_BY_RETURN_VALUE_FALSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_KEY_CODE_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
@@ -25,6 +27,7 @@ import java.util.LinkedList;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.ScriptResult;
@@ -36,6 +39,7 @@ import com.gargoylesoftware.htmlunit.html.SubmittableElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -289,7 +293,7 @@ public class Event extends SimpleScriptable {
     private Object srcElement_;        // IE-only writable equivalent of target.
     private Object target_;            // W3C standard read-only equivalent of srcElement.
     private Object currentTarget_;     // Changes during event capturing and bubbling.
-    private String type_;              // The event type.
+    private String type_ = "";         // The event type.
     private Object keyCode_;           // Key code for a keypress
     private boolean shiftKey_;         // Exposed here in IE, only in mouse events in FF.
     private boolean ctrlKey_;          // Exposed here in IE, only in mouse events in FF.
@@ -348,6 +352,16 @@ public class Event extends SimpleScriptable {
         type_ = type;
         setParentScope(scriptable);
         setPrototype(getPrototype(getClass()));
+
+        if (TYPE_CHANGE.equals(type)) {
+            cancelable_ = false;
+        }
+        else if (TYPE_LOAD.equals(type)) {
+            bubbles_ = false;
+            if (getBrowserVersion().hasFeature(EVENT_ONLOAD_CANCELABLE_FALSE)) {
+                cancelable_ = false;
+            }
+        }
     }
 
     /**
@@ -367,6 +381,42 @@ public class Event extends SimpleScriptable {
      */
     public Event() {
         // Empty.
+    }
+
+    /**
+     * Called whenever an event is created using <code>Document.createEvent(..)</code>.
+     * This method is called after the parent scope was set so you are able to access the browser version.
+     */
+    public void eventCreated() {
+        if (getBrowserVersion().hasFeature(EVENT_BUBBLES_AND_CANCELABLE_DEFAULT_FALSE)) {
+            setBubbles(false);
+            setCancelable(false);
+        }
+    }
+
+    /**
+     * JavaScript constructor.
+     *
+     * @param type the event type
+     * @param details the event details (optional)
+     */
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public void jsConstructor(final String type, final ScriptableObject details) {
+        boolean bubbles = false;
+        boolean cancelable = false;
+
+        if (details != null && !Context.getUndefinedValue().equals(details)) {
+            final Boolean detailBubbles = (Boolean) details.get("bubbles");
+            if (detailBubbles != null) {
+                bubbles = detailBubbles.booleanValue();
+            }
+
+            final Boolean detailCancelable = (Boolean) details.get("cancelable");
+            if (detailCancelable != null) {
+                cancelable = detailCancelable.booleanValue();
+            }
+        }
+        initEvent(type, bubbles, cancelable);
     }
 
     /**
@@ -576,11 +626,25 @@ public class Event extends SimpleScriptable {
     }
 
     /**
+     * @param bubbles the bubbles to set
+     */
+    protected void setBubbles(final boolean bubbles) {
+        bubbles_ = bubbles;
+    }
+
+    /**
      * @return whether or not this event can be canceled
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public boolean getCancelable() {
         return cancelable_;
+    }
+
+    /**
+     * @param cancelable the cancelable to set
+     */
+    protected void setCancelable(final boolean cancelable) {
+        cancelable_ = cancelable;
     }
 
     /**
@@ -629,8 +693,7 @@ public class Event extends SimpleScriptable {
      * Returns the return value associated with the event.
      * @return the return value associated with the event
      */
-    //TODO [IE11] returnValue exists only on BeforeUnloadEvent for IE11 and FF17
-    @JsxGetter
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 9) })
     public Object getReturnValue() {
         return returnValue_;
     }
@@ -639,8 +702,7 @@ public class Event extends SimpleScriptable {
      * Sets the return value associated with the event.
      * @param returnValue the return value associated with the event
      */
-    @JsxSetter
-    //TODO [IE11] returnValue exists only on BeforeUnloadEvent for IE11 and FF17
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 9) })
     public void setReturnValue(final Object returnValue) {
         returnValue_ = returnValue;
     }

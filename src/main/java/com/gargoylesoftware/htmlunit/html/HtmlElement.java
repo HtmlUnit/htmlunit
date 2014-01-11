@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.BUTTON_EMPTY_TYPE_BUTTON;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_INPUT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_USES_POINTEREVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_PROPERTY_CHANGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.KEYBOARD_EVENT_SPECIAL_KEYPRESS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.WINDOW_ACTIVE_ELEMENT_FOCUSED;
@@ -58,6 +59,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.KeyboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 /**
@@ -77,6 +79,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  * @author Dmitri Zoubkov
  * @author Sudhan Moghe
  * @author Ronald Brill
+ * @author Frank Danek
  */
 public abstract class HtmlElement extends DomElement {
 
@@ -1077,7 +1080,14 @@ public abstract class HtmlElement extends DomElement {
             return getPage();
         }
         final HtmlPage page = (HtmlPage) getPage();
-        final Event event = new MouseEvent(this, eventType, shiftKey, ctrlKey, altKey, button);
+        final Event event;
+        if (MouseEvent.TYPE_CONTEXT_MENU.equals(eventType)
+            && getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
+            event = new PointerEvent(this, eventType, shiftKey, ctrlKey, altKey, button);
+        }
+        else {
+            event = new MouseEvent(this, eventType, shiftKey, ctrlKey, altKey, button);
+        }
         final ScriptResult scriptResult = fireEvent(event);
         final Page currentPage;
         if (scriptResult == null) {
@@ -1197,8 +1207,15 @@ public abstract class HtmlElement extends DomElement {
 
             mouseUp(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
 
-            final Event event = new MouseEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
-                    ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
+            final Event event;
+            if (getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
+                event = new PointerEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
+                        ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
+            }
+            else {
+                event = new MouseEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
+                        ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
+            }
             return (P) click(event);
         }
     }
@@ -1353,8 +1370,15 @@ public abstract class HtmlElement extends DomElement {
             return (P) clickPage;
         }
 
-        final Event event = new MouseEvent(this, MouseEvent.TYPE_DBL_CLICK, shiftKey, ctrlKey, altKey,
-                MouseEvent.BUTTON_LEFT);
+        final Event event;
+        if (getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
+            event = new PointerEvent(this, MouseEvent.TYPE_DBL_CLICK, shiftKey, ctrlKey, altKey,
+                    MouseEvent.BUTTON_LEFT);
+        }
+        else {
+            event = new MouseEvent(this, MouseEvent.TYPE_DBL_CLICK, shiftKey, ctrlKey, altKey,
+                    MouseEvent.BUTTON_LEFT);
+        }
         final ScriptResult scriptResult = fireEvent(event);
         if (scriptResult == null) {
             return (P) clickPage;
