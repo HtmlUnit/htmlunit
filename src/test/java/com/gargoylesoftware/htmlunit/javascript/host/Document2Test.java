@@ -19,6 +19,8 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
+import java.net.URL;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -297,6 +299,61 @@ public class Document2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("text1")).click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * Regression test for issue 1568.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "[object HTMLBodyElement]", "http://localhost:12345/#", "http://localhost:12345/#" },
+            IE11 = { "null", "http://localhost:12345/#", "http://localhost:12345/#" })
+    @NotYetImplemented
+    public void activeElement_iframe() throws Exception {
+        final String html =
+                "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+
+                + "  <a id='insert' "
+                        + "onclick=\"insertText("
+                        + "'<html><head></head><body>first frame text</body></html>');\" href=\"#\">"
+                        + "insert text to frame</a>\n"
+                + "  <a id= 'update' "
+                        + "onclick=\"insertText("
+                        + "'<html><head></head><body>another frame text</body></html>');\" href=\"#\">"
+                        + "change frame text again</a><br>\n"
+                + "  <iframe id='innerFrame' name='innerFrame' src='frame1.html'></iframe>\n"
+
+                + "  <script>\n"
+                + "    alert(document.activeElement);\n"
+
+                + "    function insertText(text) {\n"
+                + "      with (innerFrame.document) {\n"
+                + "        open();\n"
+                + "        writeln(text);\n"
+                + "        close();\n"
+                + "      }\n"
+                + "      alert(document.activeElement);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</body>\n"
+                + "</html>";
+
+        getMockWebConnection().setResponse(new URL("http://example.com/frame1.html"), "");
+
+        final WebDriver driver = loadPage2(html);
+
+        driver.findElement(By.id("insert")).click();
+        driver.switchTo().frame(driver.findElement(By.id("innerFrame")));
+        assertEquals("first frame text", driver.findElement(By.tagName("body")).getText());
+
+        driver.switchTo().defaultContent();
+        driver.findElement(By.id("update")).click();
+        driver.switchTo().frame(driver.findElement(By.id("innerFrame")));
+        assertEquals("another frame text", driver.findElement(By.tagName("body")).getText());
 
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
