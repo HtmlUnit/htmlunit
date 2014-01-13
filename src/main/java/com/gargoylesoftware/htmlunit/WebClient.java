@@ -61,6 +61,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
@@ -701,7 +702,7 @@ public class WebClient implements Serializable {
         if (currentWindow_ == window) {
             return;
         }
-        //onBlur event is triggered for focused element of old current window
+        // onBlur event is triggered for focused element of old current window
         if (currentWindow_ != null && !currentWindow_.isClosed()) {
             final Page enclosedPage = currentWindow_.getEnclosedPage();
             if (enclosedPage != null && enclosedPage.isHtmlPage()) {
@@ -712,16 +713,22 @@ public class WebClient implements Serializable {
             }
         }
         currentWindow_ = window;
-        //1. In IE activeElement becomes focused element for new current window
-        //2. onFocus event is triggered for focusedElement of new current window
-        final Page enclosedPage = currentWindow_.getEnclosedPage();
-        if (enclosedPage != null && enclosedPage.isHtmlPage()) {
-            final Window jsWindow = (Window) currentWindow_.getScriptObject();
-            if (jsWindow != null) {
-                final HTMLElement activeElement =
-                        (HTMLElement) ((HTMLDocument) jsWindow.getDocument()).getActiveElement();
-                if (activeElement != null) {
-                    ((HtmlPage) enclosedPage).setFocusedElement(activeElement.getDomNodeOrDie(), true);
+
+        // when marking an iframe window as current we have no need to move the focus
+        final boolean isIFrame = currentWindow_ instanceof FrameWindow
+                && ((FrameWindow) currentWindow_).getFrameElement() instanceof HtmlInlineFrame;
+        if (!isIFrame) {
+            //1. activeElement becomes focused element for new current window
+            //2. onFocus event is triggered for focusedElement of new current window
+            final Page enclosedPage = currentWindow_.getEnclosedPage();
+            if (enclosedPage != null && enclosedPage.isHtmlPage()) {
+                final Window jsWindow = (Window) currentWindow_.getScriptObject();
+                if (jsWindow != null) {
+                    final HTMLElement activeElement =
+                            (HTMLElement) ((HTMLDocument) jsWindow.getDocument()).getActiveElement();
+                    if (activeElement != null) {
+                        ((HtmlPage) enclosedPage).setFocusedElement(activeElement.getDomNodeOrDie(), true);
+                    }
                 }
             }
         }

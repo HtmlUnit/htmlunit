@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.14" date="???" description="FF24, Bugfixes, initial work on IE11">
+            <action type="fix" dev="rbri" issue="1568">
+                Do not change the active element when the content of an iframe was changed.
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: conversion of anchor element into strings fixed.
             </action>
