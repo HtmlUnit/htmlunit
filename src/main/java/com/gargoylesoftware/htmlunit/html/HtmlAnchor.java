@@ -101,22 +101,10 @@ public class HtmlAnchor extends HtmlElement {
             page.executeJavaScriptIfPossible(builder.toString(), "javascript url", getStartLineNumber());
             return;
         }
-        URL url = page.getFullyQualifiedUrl(href);
-        // fix for empty url
-        if (StringUtils.isEmpty(href)) {
-            final boolean dropFilename = hasFeature(ANCHOR_EMPTY_HREF_NO_FILENAME);
-            if (dropFilename) {
-                String path = url.getPath();
-                path = path.substring(0, path.lastIndexOf('/') + 1);
-                url = UrlUtils.getUrlWithNewPath(url, path);
-                url = UrlUtils.getUrlWithNewRef(url, null);
-            }
-            else {
-                url = UrlUtils.getUrlWithNewRef(url, null);
-            }
-        }
 
-        final BrowserVersion browser = getPage().getWebClient().getBrowserVersion();
+        final URL url = getTargetUrl(href, page);
+
+        final BrowserVersion browser = page.getWebClient().getBrowserVersion();
         final WebRequest webRequest = new WebRequest(url, browser.getHtmlAcceptHeader());
         webRequest.setCharset(page.getPageEncoding());
         webRequest.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
@@ -132,6 +120,32 @@ public class HtmlAnchor extends HtmlElement {
                 webRequest, href.endsWith("#"), "Link click");
     }
 
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * @param href the href
+     * @param page the HtmlPage
+     * @return the calculated target url.
+     * @throws MalformedURLException if an IO error occurs
+     */
+    public static URL getTargetUrl(final String href, final HtmlPage page) throws MalformedURLException {
+        URL url = page.getFullyQualifiedUrl(href);
+        // fix for empty url
+        if (StringUtils.isEmpty(href)) {
+            final boolean dropFilename = page.getWebClient().getBrowserVersion()
+                    .hasFeature(ANCHOR_EMPTY_HREF_NO_FILENAME);
+            if (dropFilename) {
+                String path = url.getPath();
+                path = path.substring(0, path.lastIndexOf('/') + 1);
+                url = UrlUtils.getUrlWithNewPath(url, path);
+                url = UrlUtils.getUrlWithNewRef(url, null);
+            }
+            else {
+                url = UrlUtils.getUrlWithNewRef(url, null);
+            }
+        }
+        return url;
+    }
     /**
      * {@inheritDoc}
      */

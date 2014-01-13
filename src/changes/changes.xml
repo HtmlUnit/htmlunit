@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.14" date="???" description="FF24, Bugfixes, initial work on IE11">
+            <action type="fix" dev="rbri">
+                JavaScript: conversion of anchor element into strings fixed.
+            </action>
             <action type="fix" dev="rbri" due-to="Frank Danek">
                 JavaScript: hashChangeEvent processing fixed.
             </action>

@@ -256,8 +256,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "http://htmlunit.sourceforge.net/", "§§URL§§test", "§§URL§§#ref#test",
-        "§§URL§§#ref#", "§§URL§§#ref" })
+    @Alerts({ "http://htmlunit.sourceforge.net/", "§§URL§§test", "§§URL§§#test",
+        "§§URL§§#", "§§URL§§" })
     public void getDefaultValueWithHash() throws Exception {
         final String html
             = "<html><head><title>AnchorTest</title>\n"
@@ -289,6 +289,41 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "http://htmlunit.sourceforge.net/", "§§URL§§test", "§§URL§§index.html#test",
+                        "§§URL§§index.html#", "§§URL§§index.html" },
+            IE = { "http://htmlunit.sourceforge.net/", "§§URL§§test", "§§URL§§index.html#test",
+                        "§§URL§§index.html#", "§§URL§§" })
+    public void getDefaultValueWithHashAndFileName() throws Exception {
+        final String html
+            = "<html><head><title>AnchorTest</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('absolute'));\n"
+            + "    alert(document.getElementById('relative'));\n"
+            + "    alert(document.getElementById('hash'));\n"
+            + "    alert(document.getElementById('hashOnly'));\n"
+            + "    alert(document.getElementById('empty'));\n"
+            + "  }\n</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <a href='http://htmlunit.sourceforge.net/' id='absolute'>bla</a>\n"
+            + "  <a href='test' id='relative'>bla</a>\n"
+            + "  <a href='#test' id='hash'>bla</a>\n"
+            + "  <a href='#' id='hashOnly'>bla</a>\n"
+            + "  <a href='' id='empty'>bla</a>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse(html);
+        final WebDriver driver = loadPage2(html, UrlUtils.getUrlWithNewPath(URL_FIRST, "/index.html"));
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({ "true", "not defined" })
     public void onclickToString() throws Exception {
         final String html
@@ -303,8 +338,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <a href='foo.html' onClick='alert(\"on click\")'>\n"
-            + "  <a href='foo2.html'>\n"
+            + "  <a href='foo.html' onClick='alert(\"on click\")'>a1</a>\n"
+            + "  <a href='foo2.html'>a2</a>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
