@@ -35,6 +35,7 @@ public class ScriptRuntimeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0", "50", "100", "xxx", "zzz", "yyy" },
+            FF17 = {"xxx", "50", "zzz", "100", "0", "yyy" },
             IE8 = {"xxx", "50", "zzz", "100", "0", "yyy" })
     public void enumChangeObject() throws Exception {
         final String html

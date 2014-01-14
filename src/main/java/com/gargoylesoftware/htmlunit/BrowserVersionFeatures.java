@@ -946,7 +946,8 @@ public enum BrowserVersionFeatures {
     JS_ELEMENT_EXTENT_WITHOUT_PADDING,
 
     /** Indicates that for(x in y) should enumerate the numbers first. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 9) })
+    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 24), @WebBrowser(CHROME),
+        @WebBrowser(value = IE, minVersion = 9) })
     JS_ENUM_NUMBERS_FIRST,
 
     /** Indicates that 'exception' (technically NativeError) exposes "stack" property. */
