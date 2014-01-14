@@ -146,6 +146,7 @@ public class HtmlAnchor extends HtmlElement {
         }
         return url;
     }
+
     /**
      * {@inheritDoc}
      */
