@@ -34,6 +34,7 @@ import static org.apache.commons.lang3.StringUtils.defaultIfEmpty;
 
 import java.awt.Color;
 import java.io.IOException;
+import java.io.Serializable;
 import java.io.StringReader;
 import java.text.MessageFormat;
 import java.text.ParseException;
@@ -4494,7 +4495,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Contains information about a single style element, including its name, its value, and an index which
      * can be compared against other indices in order to determine precedence.
      */
-    public static class StyleElement implements Comparable<StyleElement> {
+    public static class StyleElement implements Comparable<StyleElement>, Serializable {
         private final String name_;
         private final String value_;
         private final String priority_;

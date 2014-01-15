@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import java.io.Serializable;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.css.sac.AttributeCondition;
@@ -31,7 +33,7 @@ import org.w3c.css.sac.SiblingSelector;
  * @version $Revision$
  * @author Marc Guillemot
  */
-class SelectorSpecificity implements Comparable<SelectorSpecificity> {
+class SelectorSpecificity implements Comparable<SelectorSpecificity>, Serializable {
     private static final Log LOG = LogFactory.getLog(SelectorSpecificity.class);
     /**
      * The specificity for declarations made in the style attributes of an element.
