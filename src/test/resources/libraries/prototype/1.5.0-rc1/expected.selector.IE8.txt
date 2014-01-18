@@ -1,0 +1,20 @@
+18 tests, 46 assertions, 0 failures, 0 errors
+Status Test Message
+passed testSelectorWithTagName 4 assertions, 0 failures, 0 errors
+passed testSelectorWithId 2 assertions, 0 failures, 0 errors
+passed testSelectorWithClassName 2 assertions, 0 failures, 0 errors
+passed testSelectorWithTagNameAndId 2 assertions, 0 failures, 0 errors
+passed testSelectorWithTagNameAndClassName 4 assertions, 0 failures, 0 errors
+passed testSelectorWithIdAndClassName 4 assertions, 0 failures, 0 errors
+passed testSelectorWithTagNameAndIdAndClassName 5 assertions, 0 failures, 0 errors
+passed test$$MatchesAncestryWithTokensSeparatedByWhitespace 2 assertions, 0 failures, 0 errors
+passed test$$CombinesResultsWhenMultipleExpressionsArePassed 1 assertions, 0 failures, 0 errors
+passed testSelectorWithTagNameAndAttributeExistence 3 assertions, 0 failures, 0 errors
+passed testSelectorWithTagNameAndSpecificAttributeValue 2 assertions, 0 failures, 0 errors
+passed testSelectorWithTagNameAndWhitespaceTokenizedAttributeValue 2 assertions, 0 failures, 0 errors
+passed testSelectorWithUniversalAndHyphenTokenizedAttributeValue 2 assertions, 0 failures, 0 errors
+passed testSelectorWithTagNameAndNegatedAttributeValue 1 assertions, 0 failures, 0 errors
+passed test$$WithNestedAttributeSelectors 1 assertions, 0 failures, 0 errors
+passed testSelectorWithMultipleConditions 2 assertions, 0 failures, 0 errors
+passed testSelectorMatchElements 3 assertions, 0 failures, 0 errors
+passed testSelectorFindElement 4 assertions, 0 failures, 0 errors
