@@ -1,0 +1,49 @@
+37 tests, 160 assertions, 9 failures, 0 errors
+Status Test Message
+passed testSelectorWithTagName 4 assertions, 0 failures, 0 errors
+passed testSelectorWithId 3 assertions, 0 failures, 0 errors
+passed testSelectorWithClassName 2 assertions, 0 failures, 0 errors
+passed testSelectorWithTagNameAndId 2 assertions, 0 failures, 0 errors
+passed testSelectorWithTagNameAndClassName 4 assertions, 0 failures, 0 errors
+passed testSelectorWithIdAndClassName 4 assertions, 0 failures, 0 errors
+passed testSelectorWithTagNameAndIdAndClassName 5 assertions, 0 failures, 0 errors
+passed test$$MatchesAncestryWithTokensSeparatedByWhitespace 2 assertions, 0 failures, 0 errors
+passed test$$CombinesResultsWhenMultipleExpressionsArePassed 1 assertions, 0 failures, 0 errors
+passed testSelectorWithTagNameAndAttributeExistence 3 assertions, 0 failures, 0 errors
+passed testSelectorWithTagNameAndSpecificAttributeValue 2 assertions, 0 failures, 0 errors
+failed testSelectorWithTagNameAndWhitespaceTokenizedAttributeValue 0 assertions, 2 failures, 0 errors
+Failure: assertEnumEqual: expected [<a id="link_1" class="first internal">, <a id="link_2" class="internal highlight">], actual []
+Failure: assertEnumEqual: expected [<a id="link_1" class="first internal">, <a id="link_2" class="internal highlight">], actual []
+passed testSelectorWithAttributeAndNoTagName 6 assertions, 0 failures, 0 errors
+passed testSelectorWithUniversalAndHyphenTokenizedAttributeValue 2 assertions, 0 failures, 0 errors
+passed testSelectorWithTagNameAndNegatedAttributeValue 1 assertions, 0 failures, 0 errors
+passed testSelectorWithBracketAttributeValue 4 assertions, 0 failures, 0 errors
+passed test$$WithNestedAttributeSelectors 1 assertions, 0 failures, 0 errors
+failed testSelectorWithMultipleConditions 1 assertions, 1 failures, 0 errors
+Failure: assertEnumEqual: expected [<a id="link_3" class="external">], actual []
+passed testSelectorMatchElements 3 assertions, 0 failures, 0 errors
+passed testSelectorFindElement 4 assertions, 0 failures, 0 errors
+passed testElementMatch 14 assertions, 0 failures, 0 errors
+passed testSelectorWithSpaceInAttributeValue 1 assertions, 0 failures, 0 errors
+passed testSelectorWithNamespacedAttributes 0 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+passed testSelectorWithChild 6 assertions, 0 failures, 0 errors
+passed testSelectorWithAdjacence 10 assertions, 0 failures, 0 errors
+passed testSelectorWithLaterSibling 10 assertions, 0 failures, 0 errors
+failed testSelectorWithNewAttributeOperators 6 assertions, 3 failures, 0 errors
+Failure: matching beginning of string: expected [<div id="father" class="brothers men">, <div id="uncle" class="brothers men">], actual []
+Failure: matching end of string: expected [<div id="father" class="brothers men">, <div id="uncle" class="brothers men">], actual []
+Failure: matching substring: expected [<div id="father" class="brothers men">, <div id="uncle" class="brothers men">], actual []
+passed testSelectorWithDuplicates 2 assertions, 0 failures, 0 errors
+passed testSelectorWithFirstLastOnlyNthNthLastChild 18 assertions, 0 failures, 0 errors
+passed testSelectorWithFirstLastNthNthLastOfType 5 assertions, 0 failures, 0 errors
+passed testSelectorWithNot 10 assertions, 0 failures, 0 errors
+passed testSelectorWithEnabledDisabledChecked 3 assertions, 0 failures, 0 errors
+passed testSelectorWithEmpty 2 assertions, 0 failures, 0 errors
+failed testIdenticalResultsFromEquivalentSelectors 8 assertions, 3 failures, 0 errors
+Failure: assertEnumEqual: expected [<div id="father" class="brothers men">, <div id="uncle" class="brothers men">], actual []
+Failure: assertEnumEqual: expected [<div id="father" class="brothers men">, <div id="uncle" class="brothers men">], actual []
+Failure: assertEnumEqual: expected [<div id="fixtures">, <div id="level1">, <div id="level2_3">, <div id="dupContainer">, <div id="grandfather">, <div id="son">, <div id="testlog">, <div id="logsummary">], actual [<div id="fixtures">, <div id="level1">, <div id="level2_3">, <div id="dupContainer">, <div id="grandfather">, <div id="father" class="brothers men">, <div id="son">, <div id="uncle" class="brothers men">, <div id="testlog">, <div id="logsummary">]
+passed testSelectorsThatShouldReturnNothing 4 assertions, 0 failures, 0 errors
+passed testCommasFor$$ 4 assertions, 0 failures, 0 errors
+passed testSelectorExtendsAllNodes 3 assertions, 0 failures, 0 errors
