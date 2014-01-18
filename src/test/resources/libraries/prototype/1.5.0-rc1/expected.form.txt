@@ -1,6 +1,6 @@
 4 tests, 21 assertions, 0 failures, 0 errors
-Status	Test	Message
-passed	testFormElementEventObserver	2 assertions, 0 failures, 0 errors
-passed	testFormElementEnabling	6 assertions, 0 failures, 0 errors
-passed	testFormGetElements	9 assertions, 0 failures, 0 errors
-passed	testFormSerialize	4 assertions, 0 failures, 0 errors
+Status Test Message
+passed testFormElementEventObserver 2 assertions, 0 failures, 0 errors
+passed testFormElementEnabling 6 assertions, 0 failures, 0 errors
+passed testFormGetElements 9 assertions, 0 failures, 0 errors
+passed testFormSerialize 4 assertions, 0 failures, 0 errors

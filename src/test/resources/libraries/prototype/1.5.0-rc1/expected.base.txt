@@ -1,6 +1,6 @@
 4 tests, 48 assertions, 0 failures, 0 errors
-Status	Test	Message
-passed	testObjectInspect	5 assertions, 0 failures, 0 errors
-passed	testDoesntExtendObjectPrototype	2 assertions, 0 failures, 0 errors
-passed	testPeriodicalExecuterStop	1 assertions, 0 failures, 0 errors
-passed	testBindAsEventListener	40 assertions, 0 failures, 0 errors
+Status Test Message
+passed testObjectInspect 5 assertions, 0 failures, 0 errors
+passed testDoesntExtendObjectPrototype 2 assertions, 0 failures, 0 errors
+passed testPeriodicalExecuterStop 1 assertions, 0 failures, 0 errors
+passed testBindAsEventListener 40 assertions, 0 failures, 0 errors

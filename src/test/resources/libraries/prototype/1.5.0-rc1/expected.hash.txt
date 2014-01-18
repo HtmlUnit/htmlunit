@@ -1,7 +1,7 @@
 5 tests, 19 assertions, 0 failures, 0 errors
-Status	Test	Message
-passed	testKeys	3 assertions, 0 failures, 0 errors
-passed	testValues	3 assertions, 0 failures, 0 errors
-passed	testMerge	4 assertions, 0 failures, 0 errors
-passed	testToQueryString	6 assertions, 0 failures, 0 errors
-passed	testInspect	3 assertions, 0 failures, 0 errors
+Status Test Message
+passed testKeys 3 assertions, 0 failures, 0 errors
+passed testValues 3 assertions, 0 failures, 0 errors
+passed testMerge 4 assertions, 0 failures, 0 errors
+passed testToQueryString 6 assertions, 0 failures, 0 errors
+passed testInspect 3 assertions, 0 failures, 0 errors

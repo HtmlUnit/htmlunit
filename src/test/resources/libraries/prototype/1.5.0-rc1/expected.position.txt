@@ -1,8 +1,7 @@
-Test of functions in position.js
 5 tests, 28 assertions, 0 failures, 0 errors
-Status	Test	Message
-passed	testPrepare	4 assertions, 0 failures, 0 errors
-passed	testPositionedOffset	4 assertions, 0 failures, 0 errors
-passed	testPage	4 assertions, 0 failures, 0 errors
-passed	testOffsetParent	4 assertions, 0 failures, 0 errors
-passed	testWithin	12 assertions, 0 failures, 0 errors
+Status Test Message
+passed testPrepare 4 assertions, 0 failures, 0 errors
+passed testPositionedOffset 4 assertions, 0 failures, 0 errors
+passed testPage 4 assertions, 0 failures, 0 errors
+passed testOffsetParent 4 assertions, 0 failures, 0 errors
+passed testWithin 12 assertions, 0 failures, 0 errors

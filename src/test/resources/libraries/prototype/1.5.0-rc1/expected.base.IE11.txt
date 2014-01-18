@@ -1,0 +1,39 @@
+35 tests, 225 assertions, 0 failures, 0 errors
+Status Test Message
+passed testFunctionArgumentNames 7 assertions, 0 failures, 0 errors
+passed testFunctionBind 7 assertions, 0 failures, 0 errors
+passed testFunctionCurry 3 assertions, 0 failures, 0 errors
+passed testFunctionDelay 3 assertions, 0 failures, 0 errors
+passed testFunctionWrap 4 assertions, 0 failures, 0 errors
+passed testFunctionDefer 2 assertions, 0 failures, 0 errors
+passed testFunctionMethodize 3 assertions, 0 failures, 0 errors
+passed testObjectExtend 5 assertions, 0 failures, 0 errors
+passed testObjectToQueryString 1 assertions, 0 failures, 0 errors
+passed testObjectClone 4 assertions, 0 failures, 0 errors
+passed testObjectInspect 5 assertions, 0 failures, 0 errors
+passed testObjectToJSON 19 assertions, 0 failures, 0 errors
+passed testObjectToHTML 7 assertions, 0 failures, 0 errors
+passed testObjectIsArray 4 assertions, 0 failures, 0 errors
+passed testObjectIsHash 3 assertions, 0 failures, 0 errors
+passed testObjectIsElement 4 assertions, 0 failures, 0 errors
+passed testObjectIsFunction 9 assertions, 0 failures, 0 errors
+passed testObjectIsString 7 assertions, 0 failures, 0 errors
+passed testObjectIsNumber 8 assertions, 0 failures, 0 errors
+passed testObjectIsUndefined 8 assertions, 0 failures, 0 errors
+passed testDoesntExtendObjectPrototype 2 assertions, 0 failures, 0 errors
+passed testPeriodicalExecuterStop 1 assertions, 0 failures, 0 errors
+passed testBindAsEventListener 40 assertions, 0 failures, 0 errors
+passed testDateToJSON 1 assertions, 0 failures, 0 errors
+passed testRegExpEscape 25 assertions, 0 failures, 0 errors
+passed testBrowserDetection 7 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+Info: -- skipped for comparison --
+passed testClassCreate 8 assertions, 0 failures, 0 errors
+passed testClassInstantiation 5 assertions, 0 failures, 0 errors
+passed testInheritance 5 assertions, 0 failures, 0 errors
+passed testSuperclassMethodCall 4 assertions, 0 failures, 0 errors
+passed testClassAddMethods 6 assertions, 0 failures, 0 errors
+passed testBaseClassWithMixin 2 assertions, 0 failures, 0 errors
+passed testSubclassWithMixin 1 assertions, 0 failures, 0 errors
+passed testSubclassWithMixins 3 assertions, 0 failures, 0 errors
+passed testClassWithToStringAndValueOfMethods 2 assertions, 0 failures, 0 errors

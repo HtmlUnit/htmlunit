@@ -1,14 +1,14 @@
 12 tests, 49 assertions, 0 failures, 0 errors
-Status	Test	Message
-passed	testClear	3 assertions, 0 failures, 0 errors
-passed	testClone	6 assertions, 0 failures, 0 errors
-passed	testFirst	3 assertions, 0 failures, 0 errors
-passed	testLast	3 assertions, 0 failures, 0 errors
-passed	testCompact	4 assertions, 0 failures, 0 errors
-passed	testFlatten	5 assertions, 0 failures, 0 errors
-passed	testIndexOf	4 assertions, 0 failures, 0 errors
-passed	testInspect	4 assertions, 0 failures, 0 errors
-passed	testReduce	5 assertions, 0 failures, 0 errors
-passed	testReverse	4 assertions, 0 failures, 0 errors
-passed	testUniq	4 assertions, 0 failures, 0 errors
-passed	testWithout	4 assertions, 0 failures, 0 errors
+Status Test Message
+passed testClear 3 assertions, 0 failures, 0 errors
+passed testClone 6 assertions, 0 failures, 0 errors
+passed testFirst 3 assertions, 0 failures, 0 errors
+passed testLast 3 assertions, 0 failures, 0 errors
+passed testCompact 4 assertions, 0 failures, 0 errors
+passed testFlatten 5 assertions, 0 failures, 0 errors
+passed testIndexOf 4 assertions, 0 failures, 0 errors
+passed testInspect 4 assertions, 0 failures, 0 errors
+passed testReduce 5 assertions, 0 failures, 0 errors
+passed testReverse 4 assertions, 0 failures, 0 errors
+passed testUniq 4 assertions, 0 failures, 0 errors
+passed testWithout 4 assertions, 0 failures, 0 errors

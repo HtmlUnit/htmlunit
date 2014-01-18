@@ -1,5 +1,5 @@
 3 tests, 11 assertions, 0 failures, 0 errors
-Status	Test	Message
-passed	testSynchronousRequest	2 assertions, 0 failures, 0 errors
-passed	testAsynchronousRequest	2 assertions, 0 failures, 0 errors
-passed	testUpdater	7 assertions, 0 failures, 0 errors
+Status Test Message
+passed testSynchronousRequest 2 assertions, 0 failures, 0 errors
+passed testAsynchronousRequest 2 assertions, 0 failures, 0 errors
+passed testUpdater 7 assertions, 0 failures, 0 errors
