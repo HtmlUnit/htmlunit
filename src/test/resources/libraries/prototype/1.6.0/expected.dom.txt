@@ -1,4 +1,4 @@
-87 tests, 811 assertions, 0 failures, 0 errors
+87 tests, 808 assertions, 3 failures, 0 errors
 Status Test Message
 passed testDollarFunction 9 assertions, 0 failures, 0 errors
 passed testGetElementsByClassName 18 assertions, 0 failures, 0 errors
@@ -84,6 +84,9 @@ passed testPositionedOffset 4 assertions, 0 failures, 0 errors
 passed testViewportOffset 4 assertions, 0 failures, 0 errors
 passed testOffsetParent 4 assertions, 0 failures, 0 errors
 passed testAbsolutize 2 assertions, 0 failures, 0 errors
-passed testViewportDimensions 2 assertions, 0 failures, 0 errors
-passed testViewportScrollOffsets 3 assertions, 0 failures, 0 errors
+failed testViewportDimensions 0 assertions, 2 failures, 0 errors
+Failure: NOTE: YOU MUST ALLOW JAVASCRIPT TO RESIZE YOUR WINDOW FOR THESE TESTS TO PASS: expected "1482", actual "1432" Line #1552
+Failure: NOTE: YOU MUST ALLOW JAVASCRIPT TO RESIZE YOUR WINDOW FOR THESE TESTS TO PASS: expected "724", actual "674" Line #1553
+failed testViewportScrollOffsets 2 assertions, 1 failures, 0 errors
+Failure: assertEqual: expected "25", actual "0" Line #1567
 passed testNodeConstants 13 assertions, 0 failures, 0 errors

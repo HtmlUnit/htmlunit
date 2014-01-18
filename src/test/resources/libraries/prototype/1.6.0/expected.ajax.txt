@@ -1,24 +1,24 @@
 15 tests, 32 assertions, 0 failures, 0 errors
-Status	Test	Message
-passed	testSynchronousRequest	4 assertions, 0 failures, 0 errors
-passed	testAsynchronousRequest	2 assertions, 0 failures, 0 errors
-passed	testUpdater	5 assertions, 0 failures, 0 errors
-passed	testUpdaterWithInsertion	3 assertions, 0 failures, 0 errors
-passed	testResponders	10 assertions, 0 failures, 0 errors
-passed	testEvalResponseShouldBeCalledBeforeOnComplete	0 assertions, 0 failures, 0 errors
-Info: You must be running your tests from rake to test this feature.
-passed	testContentTypeSetForSimulatedVerbs	0 assertions, 0 failures, 0 errors
-Info: You must be running your tests from rake to test this feature.
-passed	testOnCreateCallback	2 assertions, 0 failures, 0 errors
-passed	testEvalJS	1 assertions, 0 failures, 0 errors
-Info: You must be running your tests from rake to test this feature.
-passed	testCallbacks	2 assertions, 0 failures, 0 errors
-passed	testResponseText	2 assertions, 0 failures, 0 errors
-passed	testResponseXML	0 assertions, 0 failures, 0 errors
-Info: You must be running your tests from rake to test this feature.
-passed	testResponseJSON	1 assertions, 0 failures, 0 errors
-Info: You must be running your tests from rake to test this feature.
-passed	testHeaderJSON	0 assertions, 0 failures, 0 errors
-Info: You must be running your tests from rake to test this feature.
-passed	testGetHeader	0 assertions, 0 failures, 0 errors
-Info: You must be running your tests from rake to test this feature.
+Status Test Message
+passed testSynchronousRequest 4 assertions, 0 failures, 0 errors
+passed testAsynchronousRequest 2 assertions, 0 failures, 0 errors
+passed testUpdater 5 assertions, 0 failures, 0 errors
+passed testUpdaterWithInsertion 3 assertions, 0 failures, 0 errors
+passed testResponders 10 assertions, 0 failures, 0 errors
+passed testEvalResponseShouldBeCalledBeforeOnComplete 0 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+passed testContentTypeSetForSimulatedVerbs 0 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+passed testOnCreateCallback 2 assertions, 0 failures, 0 errors
+passed testEvalJS 1 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+passed testCallbacks 2 assertions, 0 failures, 0 errors
+passed testResponseText 2 assertions, 0 failures, 0 errors
+passed testResponseXML 0 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+passed testResponseJSON 1 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+passed testHeaderJSON 0 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+passed testGetHeader 0 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --

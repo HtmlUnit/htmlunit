@@ -1,4 +1,4 @@
-37 tests, 169 assertions, 0 failures, 0 errors
+37 tests, 171 assertions, 0 failures, 0 errors
 Status Test Message
 passed testSelectorWithTagName 4 assertions, 0 failures, 0 errors
 passed testSelectorWithId 3 assertions, 0 failures, 0 errors
@@ -22,8 +22,7 @@ passed testSelectorMatchElements 3 assertions, 0 failures, 0 errors
 passed testSelectorFindElement 4 assertions, 0 failures, 0 errors
 passed testElementMatch 14 assertions, 0 failures, 0 errors
 passed testSelectorWithSpaceInAttributeValue 1 assertions, 0 failures, 0 errors
-passed testSelectorWithNamespacedAttributes 0 assertions, 0 failures, 0 errors
-Info: -- skipped for comparison --
+passed testSelectorWithNamespacedAttributes 2 assertions, 0 failures, 0 errors
 passed testSelectorWithChild 6 assertions, 0 failures, 0 errors
 passed testSelectorWithAdjacence 10 assertions, 0 failures, 0 errors
 passed testSelectorWithLaterSibling 10 assertions, 0 failures, 0 errors

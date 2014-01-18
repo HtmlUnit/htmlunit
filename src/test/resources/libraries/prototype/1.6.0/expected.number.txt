@@ -1,6 +1,6 @@
 4 tests, 20 assertions, 0 failures, 0 errors
-Status	Test	Message
-passed	testNumberMathMethods	7 assertions, 0 failures, 0 errors
-passed	testNumberToColorPart	3 assertions, 0 failures, 0 errors
-passed	testNumberToPaddedString	7 assertions, 0 failures, 0 errors
-passed	testNumberToJSON	3 assertions, 0 failures, 0 errors
+Status Test Message
+passed testNumberMathMethods 7 assertions, 0 failures, 0 errors
+passed testNumberToColorPart 3 assertions, 0 failures, 0 errors
+passed testNumberToPaddedString 7 assertions, 0 failures, 0 errors
+passed testNumberToJSON 3 assertions, 0 failures, 0 errors
