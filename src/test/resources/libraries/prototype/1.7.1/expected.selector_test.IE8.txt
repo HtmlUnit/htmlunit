@@ -1,0 +1,52 @@
+42 tests, 164 assertions, 2 failures, 4 errors
+Status Test Message
+testSelectorWithTagName passed 4 assertions, 0 failures, 0 errors
+testSelectorWithId passed 3 assertions, 0 failures, 0 errors
+testSelectorWithClassName passed 2 assertions, 0 failures, 0 errors
+testSelectorWithTagNameAndId passed 2 assertions, 0 failures, 0 errors
+testSelectorWithTagNameAndClassName passed 4 assertions, 0 failures, 0 errors
+testSelectorWithIdAndClassName passed 4 assertions, 0 failures, 0 errors
+testSelectorWithTagNameAndIdAndClassName passed 5 assertions, 0 failures, 0 errors
+test$$MatchesAncestryWithTokensSeparatedByWhitespace passed 2 assertions, 0 failures, 0 errors
+test$$CombinesResultsWhenMultipleExpressionsArePassed passed 1 assertions, 0 failures, 0 errors
+testSelectorWithTagNameAndAttributeExistence passed 3 assertions, 0 failures, 0 errors
+testSelectorWithTagNameAndSpecificAttributeValue passed 2 assertions, 0 failures, 0 errors
+testSelectorWithTagNameAndWhitespaceTokenizedAttributeValue passed 2 assertions, 0 failures, 0 errors
+testSelectorWithAttributeAndNoTagName passed 8 assertions, 0 failures, 0 errors
+testSelectorWithAttributeContainingDash passed 1 assertions, 0 failures, 0 errors
+testSelectorWithTagNameAndNegatedAttributeValue passed 1 assertions, 0 failures, 0 errors
+testSelectorWithBracketAttributeValue passed 4 assertions, 0 failures, 0 errors
+test$$WithNestedAttributeSelectors passed 1 assertions, 0 failures, 0 errors
+testSelectorWithMultipleConditions passed 2 assertions, 0 failures, 0 errors
+testSelectorMatchElements passed 4 assertions, 0 failures, 0 errors
+testSelectorFindElement passed 4 assertions, 0 failures, 0 errors
+testElementMatch passed 20 assertions, 0 failures, 0 errors
+testSelectorWithSpaceInAttributeValue passed 1 assertions, 0 failures, 0 errors
+testSelectorWithChild passed 6 assertions, 0 failures, 0 errors
+testSelectorWithAdjacence passed 10 assertions, 0 failures, 0 errors
+testSelectorWithLaterSibling passed 10 assertions, 0 failures, 0 errors
+testSelectorWithNewAttributeOperators passed 9 assertions, 0 failures, 0 errors
+testSelectorWithDuplicates passed 2 assertions, 0 failures, 0 errors
+testSelectorWithFirstLastOnlyNthNthLastChild error 13 assertions, 0 failures, 1 errors
+TypeError: Object doesn't support this property or method, error=(TypeError: Object doesn't support this property or method)
+testSelectorWithFirstLastNthNthLastOfType error 0 assertions, 0 failures, 1 errors
+TypeError: Object doesn't support this property or method, error=(TypeError: Object doesn't support this property or method)
+testSelectorWithNot error 0 assertions, 0 failures, 1 errors
+TypeError: Object doesn't support this property or method, error=(TypeError: Object doesn't support this property or method)
+testSelectorWithEnabledDisabledChecked passed 3 assertions, 0 failures, 0 errors
+testSelectorWithEmpty failed 0 assertions, 2 failures, 0 errors
+Failure: #level1 *:empty
+expected: <[<span id="level3_1">, <span id="level3_2">, <div id="level2_3">]>, actual: <[<span id="level3_1">, <span id="level3_2">, <em id="level_only_child">, <div id="level2_3">]>
+Failure: newlines count as content!
+expected: <[]>, actual: <[<em id="level_only_child">]>
+testIdenticalResultsFromEquivalentSelectors error 8 assertions, 0 failures, 1 errors
+TypeError: Object doesn't support this property or method, error=(TypeError: Object doesn't support this property or method)
+testSelectorsThatShouldReturnNothing passed 4 assertions, 0 failures, 0 errors
+testCommasFor$$ passed 4 assertions, 0 failures, 0 errors
+testSelectorExtendsAllNodes passed 3 assertions, 0 failures, 0 errors
+testCopiedNodesGetIncluded passed 2 assertions, 0 failures, 0 errors
+testSelectorNotInsertedNodes passed 4 assertions, 0 failures, 0 errors
+testElementDown passed 1 assertions, 0 failures, 0 errors
+testElementDownWithDotAndColon passed 2 assertions, 0 failures, 0 errors
+testDescendantSelectorBuggy passed 1 assertions, 0 failures, 0 errors
+testFindElementWithIndexWhenElementsAreNotInDocumentOrder passed 2 assertions, 0 failures, 0 errors
