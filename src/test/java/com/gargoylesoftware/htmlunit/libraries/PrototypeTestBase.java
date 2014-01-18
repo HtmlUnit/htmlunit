@@ -20,7 +20,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.net.URL;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -29,9 +28,12 @@ import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.server.Server;
 import org.junit.AfterClass;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -76,7 +78,17 @@ public abstract class PrototypeTestBase extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     protected void test(final String filename) throws Exception {
-        final WebDriver driver = loadPageWithAlerts2(new URL(getBaseUrl() + filename));
+        final WebDriver driver = getWebDriver();
+        if (!(driver instanceof HtmlUnitDriver)) {
+            try {
+                driver.manage().window().setSize(new Dimension(1272, 768));
+            }
+            catch (final WebDriverException e) {
+                // ChromeDriver version 0.5 (Mar 26, 2013) does not support the setSize command
+                LOG.warn(e.getMessage(), e);
+            }
+        }
+        driver.get(getBaseUrl() + filename);
 
         // wait
         final long runTime = 60 * DEFAULT_WAIT_TIME;
