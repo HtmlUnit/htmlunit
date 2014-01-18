@@ -15,12 +15,18 @@
 package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.WebServerTestCase;
 
 /**
  * Tests for compatibility with version 1.5.0-rc1 of
@@ -36,17 +42,32 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 public class Prototype150rc1Test extends PrototypeTestBase {
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @BeforeClass
+    public static void aaa_startSesrver() throws Exception {
+        SERVER_ = WebServerTestCase.createWebServer("src/test/resources/libraries/prototype/1.5.0-rc1/", null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected String getVersion() {
+        return "1.5.0-rc1";
+    }
+
+    /**
      * @return the resource base url
      */
     protected String getBaseUrl() {
         return "http://localhost:" + PORT + "/test/unit/";
     }
 
-    /**
-     * @return the resource base directory
-     */
-    protected String getResourceBase() {
-        return "src/test/resources/libraries/prototype/" + getVersion();
+    @Override
+    protected WebElement getSummaryElement(final WebDriver driver) {
+        final WebElement status = driver.findElement(By.cssSelector("div#logsummary"));
+        return status;
     }
 
     /**
@@ -77,6 +98,7 @@ public class Prototype150rc1Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
+    @NotYetImplemented(IE8)
     public void dom() throws Exception {
         test("dom.html");
     }
@@ -140,19 +162,10 @@ public class Prototype150rc1Test extends PrototypeTestBase {
     }
 
     /**
-     * Blocked by Rhino bug 369860 (https://bugzilla.mozilla.org/show_bug.cgi?id=369860).
      * @throws Exception if test fails
      */
     @Test
     public void string() throws Exception {
         test("string.html");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected String getVersion() {
-        return "1.5.0-rc1";
     }
 }
