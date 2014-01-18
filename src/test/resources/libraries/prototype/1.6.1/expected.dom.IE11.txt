@@ -1,4 +1,4 @@
-95 tests, 902 assertions, 3 failures, 0 errors
+95 tests, 905 assertions, 0 failures, 0 errors
 Status Test Message
 testDollarFunction passed 9 assertions, 0 failures, 0 errors
 testGetElementsByClassName passed 0 assertions, 0 failures, 0 errors
@@ -90,15 +90,9 @@ testViewportOffset passed 7 assertions, 0 failures, 0 errors
 testOffsetParent passed 5 assertions, 0 failures, 0 errors
 testAbsolutize passed 3 assertions, 0 failures, 0 errors
 testRelativize passed 1 assertions, 0 failures, 0 errors
-testViewportDimensions failed 0 assertions, 2 failures, 0 errors
-Failure: NOTE: YOU MUST ALLOW JAVASCRIPT TO RESIZE YOUR WINDOW FOR THIS TEST TO PASS
-expected: <1466>, actual: <1416>
-Failure: NOTE: YOU MUST ALLOW JAVASCRIPT TO RESIZE YOUR WINDOW FOR THIS TEST TO PASS
-expected: <724>, actual: <674>
+testViewportDimensions passed 2 assertions, 0 failures, 0 errors
 testElementToViewportDimensionsDoesNotAffectDocumentProperties passed 38 assertions, 0 failures, 0 errors
-testViewportScrollOffsets failed 2 assertions, 1 failures, 0 errors
-Failure: NOTE: YOU MUST ALLOW JAVASCRIPT TO RESIZE YOUR WINDOW FOR THESE TESTS TO PASS
-expected: <25>, actual: <0>
+testViewportScrollOffsets passed 3 assertions, 0 failures, 0 errors
 testNodeConstants passed 13 assertions, 0 failures, 0 errors
 testElementStorage passed 11 assertions, 0 failures, 0 errors
 testElementClone passed 15 assertions, 0 failures, 0 errors

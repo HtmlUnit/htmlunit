@@ -1,8 +1,8 @@
 6 tests, 21 assertions, 0 failures, 0 errors
-Status	Test	Message
-testInclude	passed	8 assertions, 0 failures, 0 errors
-testEach	passed	2 assertions, 0 failures, 0 errors
-testAny	passed	2 assertions, 0 failures, 0 errors
-testAll	passed	2 assertions, 0 failures, 0 errors
-testToArray	passed	6 assertions, 0 failures, 0 errors
-testDefaultsToNotExclusive	passed	1 assertions, 0 failures, 0 errors
+Status Test Message
+testInclude passed 8 assertions, 0 failures, 0 errors
+testEach passed 2 assertions, 0 failures, 0 errors
+testAny passed 2 assertions, 0 failures, 0 errors
+testAll passed 2 assertions, 0 failures, 0 errors
+testToArray passed 6 assertions, 0 failures, 0 errors
+testDefaultsToNotExclusive passed 1 assertions, 0 failures, 0 errors

@@ -92,9 +92,9 @@ testAbsolutize passed 3 assertions, 0 failures, 0 errors
 testRelativize passed 1 assertions, 0 failures, 0 errors
 testViewportDimensions failed 0 assertions, 2 failures, 0 errors
 Failure: NOTE: YOU MUST ALLOW JAVASCRIPT TO RESIZE YOUR WINDOW FOR THIS TEST TO PASS
-expected: <1466>, actual: <1416>
+expected: <966>, actual: <916>
 Failure: NOTE: YOU MUST ALLOW JAVASCRIPT TO RESIZE YOUR WINDOW FOR THIS TEST TO PASS
-expected: <724>, actual: <674>
+expected: <975>, actual: <925>
 testElementToViewportDimensionsDoesNotAffectDocumentProperties passed 38 assertions, 0 failures, 0 errors
 testViewportScrollOffsets failed 2 assertions, 1 failures, 0 errors
 Failure: NOTE: YOU MUST ALLOW JAVASCRIPT TO RESIZE YOUR WINDOW FOR THESE TESTS TO PASS

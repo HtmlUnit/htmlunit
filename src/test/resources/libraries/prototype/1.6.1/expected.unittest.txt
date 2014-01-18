@@ -1,19 +1,21 @@
-12 tests, 86 assertions, 0 failures, 0 errors
-Status	Test	Message
-testIsRunningFromRake	passed	1 assertions, 0 failures, 0 errors
-Info: These tests are *not* running from rake.
-testBuildMessage	passed	1 assertions, 0 failures, 0 errors
-testAssertEqual	passed	11 assertions, 0 failures, 0 errors
-testAssertEnumEqual	passed	4 assertions, 0 failures, 0 errors
-testAssertHashEqual	passed	4 assertions, 0 failures, 0 errors
-testAssertRespondsTo	passed	2 assertions, 0 failures, 0 errors
-testAssertIdentical	passed	15 assertions, 0 failures, 0 errors
-testAssertNullAndAssertUndefined	passed	12 assertions, 0 failures, 0 errors
-testAssertMatch	passed	7 assertions, 0 failures, 0 errors
-testAssertInstanceOf	passed	3 assertions, 0 failures, 0 errors
-testAssertVisible	passed	24 assertions, 0 failures, 0 errors
-testAssertElementsMatch	passed	2 assertions, 0 failures, 0 errors
+12 tests, 85 assertions, 1 failures, 0 errors
+Status Test Message
+testIsRunningFromRake failed 0 assertions, 1 failures, 0 errors
+Failure: assert
+got <false>
+Info: -- skipped for comparison --
+testBuildMessage passed 1 assertions, 0 failures, 0 errors
+testAssertEqual passed 11 assertions, 0 failures, 0 errors
+testAssertEnumEqual passed 4 assertions, 0 failures, 0 errors
+testAssertHashEqual passed 4 assertions, 0 failures, 0 errors
+testAssertRespondsTo passed 2 assertions, 0 failures, 0 errors
+testAssertIdentical passed 15 assertions, 0 failures, 0 errors
+testAssertNullAndAssertUndefined passed 12 assertions, 0 failures, 0 errors
+testAssertMatch passed 7 assertions, 0 failures, 0 errors
+testAssertInstanceOf passed 3 assertions, 0 failures, 0 errors
+testAssertVisible passed 24 assertions, 0 failures, 0 errors
+testAssertElementsMatch passed 2 assertions, 0 failures, 0 errors
 2 tests, 2 assertions, 0 failures, 0 errors
-Status	Test	Message
-testDummy	passed	1 assertions, 0 failures, 0 errors
-testMultipleTestRunner	passed	1 assertions, 0 failures, 0 errors
+Status Test Message
+testDummy passed 1 assertions, 0 failures, 0 errors
+testMultipleTestRunner passed 1 assertions, 0 failures, 0 errors

@@ -1,4 +1,4 @@
 2 tests, 6 assertions, 0 failures, 0 errors
-Status	Test	Message
-testPeriodicalExecuterStop	passed	1 assertions, 0 failures, 0 errors
-testOnTimerEventMethod	passed	5 assertions, 0 failures, 0 errors
+Status Test Message
+testPeriodicalExecuterStop passed 1 assertions, 0 failures, 0 errors
+testOnTimerEventMethod passed 5 assertions, 0 failures, 0 errors

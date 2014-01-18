@@ -1,29 +1,29 @@
 18 tests, 36 assertions, 0 failures, 0 errors
-Status	Test	Message
-testSynchronousRequest	passed	4 assertions, 0 failures, 0 errors
-testAsynchronousRequest	passed	2 assertions, 0 failures, 0 errors
-testUpdater	passed	5 assertions, 0 failures, 0 errors
-testUpdaterWithInsertion	passed	3 assertions, 0 failures, 0 errors
-testUpdaterOptions	passed	1 assertions, 0 failures, 0 errors
-testResponders	passed	10 assertions, 0 failures, 0 errors
-testEvalResponseShouldBeCalledBeforeOnComplete	passed	0 assertions, 0 failures, 0 errors
-Info: You must be running your tests from rake to test this feature.
-testContentTypeSetForSimulatedVerbs	passed	0 assertions, 0 failures, 0 errors
-Info: You must be running your tests from rake to test this feature.
-testOnCreateCallback	passed	2 assertions, 0 failures, 0 errors
-testEvalJS	passed	1 assertions, 0 failures, 0 errors
-Info: You must be running your tests from rake to test this feature.
-testCallbacks	passed	2 assertions, 0 failures, 0 errors
-testResponseText	passed	2 assertions, 0 failures, 0 errors
-testResponseXML	passed	0 assertions, 0 failures, 0 errors
-Info: You must be running your tests from rake to test this feature.
-testResponseJSON	passed	1 assertions, 0 failures, 0 errors
-Info: You must be running your tests from rake to test this feature.
-testHeaderJSON	passed	0 assertions, 0 failures, 0 errors
-Info: You must be running your tests from rake to test this feature.
-testGetHeader	passed	0 assertions, 0 failures, 0 errors
-Info: You must be running your tests from rake to test this feature.
-testParametersCanBeHash	passed	0 assertions, 0 failures, 0 errors
-Info: You must be running your tests from rake to test this feature.
-testIsSameOriginMethod	passed	3 assertions, 0 failures, 0 errors
-Info: You must be running your tests from rake to test this feature.
+Status Test Message
+testSynchronousRequest passed 4 assertions, 0 failures, 0 errors
+testAsynchronousRequest passed 2 assertions, 0 failures, 0 errors
+testUpdater passed 5 assertions, 0 failures, 0 errors
+testUpdaterWithInsertion passed 3 assertions, 0 failures, 0 errors
+testUpdaterOptions passed 1 assertions, 0 failures, 0 errors
+testResponders passed 10 assertions, 0 failures, 0 errors
+testEvalResponseShouldBeCalledBeforeOnComplete passed 0 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+testContentTypeSetForSimulatedVerbs passed 0 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+testOnCreateCallback passed 2 assertions, 0 failures, 0 errors
+testEvalJS passed 1 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+testCallbacks passed 2 assertions, 0 failures, 0 errors
+testResponseText passed 2 assertions, 0 failures, 0 errors
+testResponseXML passed 0 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+testResponseJSON passed 1 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+testHeaderJSON passed 0 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+testGetHeader passed 0 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+testParametersCanBeHash passed 0 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+testIsSameOriginMethod passed 3 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --

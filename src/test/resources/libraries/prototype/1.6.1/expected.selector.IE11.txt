@@ -1,4 +1,4 @@
-44 tests, 197 assertions, 1 failures, 0 errors
+44 tests, 196 assertions, 0 failures, 0 errors
 Status Test Message
 testSelectorWithTagName passed 4 assertions, 0 failures, 0 errors
 testSelectorWithId passed 3 assertions, 0 failures, 0 errors
@@ -23,7 +23,8 @@ testSelectorMatchElements passed 4 assertions, 0 failures, 0 errors
 testSelectorFindElement passed 4 assertions, 0 failures, 0 errors
 testElementMatch passed 20 assertions, 0 failures, 0 errors
 testSelectorWithSpaceInAttributeValue passed 1 assertions, 0 failures, 0 errors
-testSelectorWithNamespacedAttributes passed 4 assertions, 0 failures, 0 errors
+testSelectorWithNamespacedAttributes passed 2 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
 testSelectorWithChild passed 6 assertions, 0 failures, 0 errors
 testSelectorWithAdjacence passed 10 assertions, 0 failures, 0 errors
 testSelectorWithLaterSibling passed 10 assertions, 0 failures, 0 errors
@@ -32,9 +33,7 @@ testSelectorWithDuplicates passed 2 assertions, 0 failures, 0 errors
 testSelectorWithFirstLastOnlyNthNthLastChild passed 18 assertions, 0 failures, 0 errors
 testSelectorWithFirstLastNthNthLastOfType passed 5 assertions, 0 failures, 0 errors
 testSelectorWithNot passed 12 assertions, 0 failures, 0 errors
-testSelectorWithEnabledDisabledChecked failed 2 assertions, 1 failures, 0 errors
-Failure: assertEnumEqual
-expected: <[<input id="enabled_text_field">, <input id="checked_box">, <input id="unchecked_box">, <input id="checked_radio">, <input id="unchecked_radio">]>, actual: <[<input id="hidden">, <input id="enabled_text_field">, <input id="checked_box">, <input id="unchecked_box">, <input id="checked_radio">, <input id="unchecked_radio">]>
+testSelectorWithEnabledDisabledChecked passed 3 assertions, 0 failures, 0 errors
 testSelectorWithEmpty passed 2 assertions, 0 failures, 0 errors
 testIdenticalResultsFromEquivalentSelectors passed 12 assertions, 0 failures, 0 errors
 testSelectorsThatShouldReturnNothing passed 4 assertions, 0 failures, 0 errors
