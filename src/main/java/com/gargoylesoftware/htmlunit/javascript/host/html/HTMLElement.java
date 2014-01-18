@@ -2752,7 +2752,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             top += 2;
         }
 
-        final ClientRect textRectangle = new ClientRect(0, left, 0, top);
+        final ClientRect textRectangle = new ClientRect(top + getOffsetHeight(), left, left + getOffsetWidth(), top);
         textRectangle.setParentScope(getWindow());
         textRectangle.setPrototype(getPrototype(textRectangle.getClass()));
         return textRectangle;
