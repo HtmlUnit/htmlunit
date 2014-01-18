@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -24,8 +25,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.WebServerTestCase;
 
 /**
  * Tests for compatibility with version 1.6.0 of
@@ -72,7 +73,6 @@ public class Prototype160Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented(IE8)
     public void ajax() throws Exception {
         test("ajax.html");
     }
@@ -132,6 +132,7 @@ public class Prototype160Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
+    @NotYetImplemented(IE11)
     public void event() throws Exception {
         test("event.html");
     }
@@ -140,7 +141,7 @@ public class Prototype160Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented
+    @NotYetImplemented({ FF, IE11 })
     public void form() throws Exception {
         test("form.html");
     }
@@ -182,7 +183,6 @@ public class Prototype160Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented(IE8)
     public void selector() throws Exception {
         test("selector.html");
     }
@@ -200,7 +200,7 @@ public class Prototype160Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented
+    @NotYetImplemented({ FF, IE11 })
     public void unitTests() throws Exception {
         test("unit_tests.html");
     }
