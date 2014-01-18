@@ -1,6 +1,6 @@
 4 tests, 12 assertions, 0 failures, 0 errors
-Status	Test	Message
-testInput	passed	8 assertions, 0 failures, 0 errors
-testForm	passed	2 assertions, 0 failures, 0 errors
-testEvent	passed	1 assertions, 0 failures, 0 errors
-testCollections	passed	1 assertions, 0 failures, 0 errors
+Status Test Message
+testInput passed 8 assertions, 0 failures, 0 errors
+testForm passed 2 assertions, 0 failures, 0 errors
+testEvent passed 1 assertions, 0 failures, 0 errors
+testCollections passed 1 assertions, 0 failures, 0 errors

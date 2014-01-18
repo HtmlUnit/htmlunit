@@ -1,10 +1,10 @@
 8 tests, 11 assertions, 0 failures, 0 errors
-Status	Test	Message
-testHandlersDoNothingIfStartHasNotBeenCalled	passed	1 assertions, 0 failures, 0 errors
-testHandlersAreFiredWhenStartIsCalled	passed	2 assertions, 0 failures, 0 errors
-testHandlersDoNotFireAfterStartingAndThenStopping	passed	3 assertions, 0 failures, 0 errors
-testHandlersWithoutSelectorsPassTheTargetElementToCallbacks	passed	1 assertions, 0 failures, 0 errors
-testHandlersWithSelectorsPassTheMatchedElementToCallbacks	passed	1 assertions, 0 failures, 0 errors
-testHandlersWithSelectorsDoNotCallTheCallbackIfNoMatchingElementIsFound	passed	1 assertions, 0 failures, 0 errors
-testHandlerCallbacksAreBoundToTheOriginalElement	passed	1 assertions, 0 failures, 0 errors
-testCallingStartMultipleTimesDoesNotInstallMultipleObservers	passed	1 assertions, 0 failures, 0 errors
+Status Test Message
+testHandlersDoNothingIfStartHasNotBeenCalled passed 1 assertions, 0 failures, 0 errors
+testHandlersAreFiredWhenStartIsCalled passed 2 assertions, 0 failures, 0 errors
+testHandlersDoNotFireAfterStartingAndThenStopping passed 3 assertions, 0 failures, 0 errors
+testHandlersWithoutSelectorsPassTheTargetElementToCallbacks passed 1 assertions, 0 failures, 0 errors
+testHandlersWithSelectorsPassTheMatchedElementToCallbacks passed 1 assertions, 0 failures, 0 errors
+testHandlersWithSelectorsDoNotCallTheCallbackIfNoMatchingElementIsFound passed 1 assertions, 0 failures, 0 errors
+testHandlerCallbacksAreBoundToTheOriginalElement passed 1 assertions, 0 failures, 0 errors
+testCallingStartMultipleTimesDoesNotInstallMultipleObservers passed 1 assertions, 0 failures, 0 errors

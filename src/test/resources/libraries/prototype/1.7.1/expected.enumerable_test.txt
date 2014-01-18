@@ -1,40 +1,40 @@
 38 tests, 208 assertions, 0 failures, 0 errors
-Status	Test	Message
-testEachBreak	passed	1 assertions, 0 failures, 0 errors
-testEachReturnActsAsContinue	passed	1 assertions, 0 failures, 0 errors
-test #each passes value, index and collection to the iterator	passed	9 assertions, 0 failures, 0 errors
-testEachChaining	passed	2 assertions, 0 failures, 0 errors
-testEnumContext	passed	4 assertions, 0 failures, 0 errors
-testAny	passed	6 assertions, 0 failures, 0 errors
-test #any passes value, index and collection to the iterator	passed	9 assertions, 0 failures, 0 errors
-testAll	passed	6 assertions, 0 failures, 0 errors
-test #all passes value, index and collection to the iterator	passed	9 assertions, 0 failures, 0 errors
-testCollect	passed	2 assertions, 0 failures, 0 errors
-test #collect passes value, index and collection to the iterator	passed	9 assertions, 0 failures, 0 errors
-testDetect	passed	1 assertions, 0 failures, 0 errors
-test #detect passes value, index and collection to the iterator	passed	9 assertions, 0 failures, 0 errors
-testEachSlice	passed	8 assertions, 0 failures, 0 errors
-testEachWithIndex	passed	2 assertions, 0 failures, 0 errors
-testFindAll	passed	1 assertions, 0 failures, 0 errors
-test #findAll passes value, index and collection to the iterator	passed	9 assertions, 0 failures, 0 errors
-testGrep	passed	9 assertions, 0 failures, 0 errors
-test #grep passes value, index and collection to the iterator	passed	9 assertions, 0 failures, 0 errors
-testInclude	passed	6 assertions, 0 failures, 0 errors
-testInGroupsOf	passed	14 assertions, 0 failures, 0 errors
-testInject	passed	1 assertions, 0 failures, 0 errors
-test #inject passes memo, value, index and collection to the iterator	passed	9 assertions, 0 failures, 0 errors
-testInvoke	passed	5 assertions, 0 failures, 0 errors
-testMax	passed	4 assertions, 0 failures, 0 errors
-test #max passes value, index and collection to the iterator	passed	9 assertions, 0 failures, 0 errors
-testMin	passed	3 assertions, 0 failures, 0 errors
-test #min passes value, index and collection to the iterator	passed	9 assertions, 0 failures, 0 errors
-testPartition	passed	3 assertions, 0 failures, 0 errors
-test #partition passes value, index and collection to the iterator	passed	9 assertions, 0 failures, 0 errors
-testPluck	passed	1 assertions, 0 failures, 0 errors
-testReject	passed	2 assertions, 0 failures, 0 errors
-test #reject passes value, index and collection to the iterator	passed	9 assertions, 0 failures, 0 errors
-testSortBy	passed	1 assertions, 0 failures, 0 errors
-test #sortBy passes value, index and collection to the iterator	passed	9 assertions, 0 failures, 0 errors
-testToArray	passed	2 assertions, 0 failures, 0 errors
-testZip	passed	2 assertions, 0 failures, 0 errors
-testSize	passed	4 assertions, 0 failures, 0 errors
+Status Test Message
+testEachBreak passed 1 assertions, 0 failures, 0 errors
+testEachReturnActsAsContinue passed 1 assertions, 0 failures, 0 errors
+test #each passes value, index and collection to the iterator passed 9 assertions, 0 failures, 0 errors
+testEachChaining passed 2 assertions, 0 failures, 0 errors
+testEnumContext passed 4 assertions, 0 failures, 0 errors
+testAny passed 6 assertions, 0 failures, 0 errors
+test #any passes value, index and collection to the iterator passed 9 assertions, 0 failures, 0 errors
+testAll passed 6 assertions, 0 failures, 0 errors
+test #all passes value, index and collection to the iterator passed 9 assertions, 0 failures, 0 errors
+testCollect passed 2 assertions, 0 failures, 0 errors
+test #collect passes value, index and collection to the iterator passed 9 assertions, 0 failures, 0 errors
+testDetect passed 1 assertions, 0 failures, 0 errors
+test #detect passes value, index and collection to the iterator passed 9 assertions, 0 failures, 0 errors
+testEachSlice passed 8 assertions, 0 failures, 0 errors
+testEachWithIndex passed 2 assertions, 0 failures, 0 errors
+testFindAll passed 1 assertions, 0 failures, 0 errors
+test #findAll passes value, index and collection to the iterator passed 9 assertions, 0 failures, 0 errors
+testGrep passed 9 assertions, 0 failures, 0 errors
+test #grep passes value, index and collection to the iterator passed 9 assertions, 0 failures, 0 errors
+testInclude passed 6 assertions, 0 failures, 0 errors
+testInGroupsOf passed 14 assertions, 0 failures, 0 errors
+testInject passed 1 assertions, 0 failures, 0 errors
+test #inject passes memo, value, index and collection to the iterator passed 9 assertions, 0 failures, 0 errors
+testInvoke passed 5 assertions, 0 failures, 0 errors
+testMax passed 4 assertions, 0 failures, 0 errors
+test #max passes value, index and collection to the iterator passed 9 assertions, 0 failures, 0 errors
+testMin passed 3 assertions, 0 failures, 0 errors
+test #min passes value, index and collection to the iterator passed 9 assertions, 0 failures, 0 errors
+testPartition passed 3 assertions, 0 failures, 0 errors
+test #partition passes value, index and collection to the iterator passed 9 assertions, 0 failures, 0 errors
+testPluck passed 1 assertions, 0 failures, 0 errors
+testReject passed 2 assertions, 0 failures, 0 errors
+test #reject passes value, index and collection to the iterator passed 9 assertions, 0 failures, 0 errors
+testSortBy passed 1 assertions, 0 failures, 0 errors
+test #sortBy passes value, index and collection to the iterator passed 9 assertions, 0 failures, 0 errors
+testToArray passed 2 assertions, 0 failures, 0 errors
+testZip passed 2 assertions, 0 failures, 0 errors
+testSize passed 4 assertions, 0 failures, 0 errors

@@ -1,19 +1,19 @@
 17 tests, 59 assertions, 0 failures, 0 errors
-Status	Test	Message
-testCustomEventFiring	passed	5 assertions, 0 failures, 0 errors
-testCustomEventBubbling	passed	4 assertions, 0 failures, 0 errors
-testCustomEventCanceling	passed	4 assertions, 0 failures, 0 errors
-testEventObjectIsExtended	passed	3 assertions, 0 failures, 0 errors
-testEventObserversAreBoundToTheObservedElement	passed	2 assertions, 0 failures, 0 errors
-testMultipleCustomEventObserversWithTheSameHandler	passed	2 assertions, 0 failures, 0 errors
-testMultipleEventHandlersCanBeAddedAndRemovedFromAnElement	passed	4 assertions, 0 failures, 0 errors
-testStopObservingWithoutArguments	passed	2 assertions, 0 failures, 0 errors
-testStopObservingWithoutHandlerArgument	passed	3 assertions, 0 failures, 0 errors
-testStopObservingRemovesHandlerFromCache	passed	6 assertions, 0 failures, 0 errors
-testObserveAndStopObservingAreChainable	passed	7 assertions, 0 failures, 0 errors
-testDocumentLoaded	passed	2 assertions, 0 failures, 0 errors
-testDocumentContentLoadedEventFiresBeforeWindowLoad	passed	6 assertions, 0 failures, 0 errors
-testEventStopped	passed	2 assertions, 0 failures, 0 errors
-testNonBubblingCustomEvent	passed	1 assertions, 0 failures, 0 errors
-testEventFindElement	passed	5 assertions, 0 failures, 0 errors
-testEventIDDuplication	passed	1 assertions, 0 failures, 0 errors
+Status Test Message
+testCustomEventFiring passed 5 assertions, 0 failures, 0 errors
+testCustomEventBubbling passed 4 assertions, 0 failures, 0 errors
+testCustomEventCanceling passed 4 assertions, 0 failures, 0 errors
+testEventObjectIsExtended passed 3 assertions, 0 failures, 0 errors
+testEventObserversAreBoundToTheObservedElement passed 2 assertions, 0 failures, 0 errors
+testMultipleCustomEventObserversWithTheSameHandler passed 2 assertions, 0 failures, 0 errors
+testMultipleEventHandlersCanBeAddedAndRemovedFromAnElement passed 4 assertions, 0 failures, 0 errors
+testStopObservingWithoutArguments passed 2 assertions, 0 failures, 0 errors
+testStopObservingWithoutHandlerArgument passed 3 assertions, 0 failures, 0 errors
+testStopObservingRemovesHandlerFromCache passed 6 assertions, 0 failures, 0 errors
+testObserveAndStopObservingAreChainable passed 7 assertions, 0 failures, 0 errors
+testDocumentLoaded passed 2 assertions, 0 failures, 0 errors
+testDocumentContentLoadedEventFiresBeforeWindowLoad passed 6 assertions, 0 failures, 0 errors
+testEventStopped passed 2 assertions, 0 failures, 0 errors
+testNonBubblingCustomEvent passed 1 assertions, 0 failures, 0 errors
+testEventFindElement passed 5 assertions, 0 failures, 0 errors
+testEventIDDuplication passed 1 assertions, 0 failures, 0 errors

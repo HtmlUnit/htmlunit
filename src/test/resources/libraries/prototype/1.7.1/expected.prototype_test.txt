@@ -1,5 +1,5 @@
 1 tests, 7 assertions, 0 failures, 0 errors
-Status	Test	Message
-testBrowserDetection	passed	7 assertions, 0 failures, 0 errors
-Info: User agent string is: Mozilla/5.0 (Windows; U; Windows NT 5.0; de; rv:1.9.2.12) Gecko/20101026 Firefox/3.6.12
-Info: Running on Gecko
+Status Test Message
+testBrowserDetection passed 7 assertions, 0 failures, 0 errors
+Info: -- skipped for comparison --
+Info: -- skipped for comparison --
