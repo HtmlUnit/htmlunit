@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -67,9 +68,14 @@ public abstract class PrototypeTestBase extends WebDriverTestCase {
      * @param driver the WebDriver
      * @return the WebElement
      */
-    protected WebElement getSummaryElement(final WebDriver driver) {
-        final WebElement status = driver.findElement(By.cssSelector("div.logsummary"));
-        return status;
+    protected boolean testFinished(final WebDriver driver) {
+        final List<WebElement> status = driver.findElements(By.cssSelector("div.logsummary"));
+        for (WebElement webElement : status) {
+            if (webElement.getText().contains("errors")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -93,8 +99,8 @@ public abstract class PrototypeTestBase extends WebDriverTestCase {
         // wait
         final long runTime = 60 * DEFAULT_WAIT_TIME;
         final long endTime = System.currentTimeMillis() + runTime;
-        final WebElement status = getSummaryElement(driver);
-        while (!status.getText().contains("errors")) {
+
+        while (!testFinished(driver)) {
             Thread.sleep(100);
 
             if (System.currentTimeMillis() > endTime) {

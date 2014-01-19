@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.libraries;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
+import java.util.List;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -64,9 +66,14 @@ public class Prototype160Test extends PrototypeTestBase {
     }
 
     @Override
-    protected WebElement getSummaryElement(final WebDriver driver) {
-        final WebElement status = driver.findElement(By.cssSelector("div#logsummary"));
-        return status;
+    protected boolean testFinished(final WebDriver driver) {
+        final List<WebElement> status = driver.findElements(By.cssSelector("div#logsummary"));
+        for (WebElement webElement : status) {
+            if (webElement.getText().contains("errors")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
