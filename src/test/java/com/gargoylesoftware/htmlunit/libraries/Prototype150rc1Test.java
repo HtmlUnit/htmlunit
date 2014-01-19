@@ -70,11 +70,11 @@ public class Prototype150rc1Test extends PrototypeTestBase {
     protected boolean testFinished(final WebDriver driver) {
         final List<WebElement> status = driver.findElements(By.cssSelector("div#logsummary"));
         for (WebElement webElement : status) {
-            if (webElement.getText().contains("errors")) {
-                return true;
+            if (!webElement.getText().contains("errors")) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     /**
