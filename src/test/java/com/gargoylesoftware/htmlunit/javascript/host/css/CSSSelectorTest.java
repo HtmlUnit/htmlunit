@@ -814,7 +814,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     }
 
     /**
-     * see http://dev.w3.org/csswg/selectors3/#negation and
+     * See http://dev.w3.org/csswg/selectors3/#negation and
      * http://dev.w3.org/csswg/selectors3/#simple-selectors-dfn.
      *
      * @throws Exception if an error occurs
