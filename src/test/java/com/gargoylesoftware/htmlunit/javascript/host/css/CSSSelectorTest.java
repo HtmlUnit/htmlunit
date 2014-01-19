@@ -814,6 +814,38 @@ public class CSSSelectorTest extends WebDriverTestCase {
     }
 
     /**
+     * see http://dev.w3.org/csswg/selectors3/#negation and
+     * http://dev.w3.org/csswg/selectors3/#simple-selectors-dfn.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("exception")
+    public void invalid_not() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    try {\n"
+            + "      alert(document.querySelectorAll('p a:not(a:first-of-type)')[0].id);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<p>\n"
+            + "  <strong id='strong'>This</strong> is a short blurb\n"
+            + "  <a id='link_1' href='#'>with a link</a> or\n"
+            + "  <a id='link_2' href='#'>two</a>.\n"
+            + "  Or <cite id='with_title' title='hello world!'>a citation</cite>.\n"
+            + "</p>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
