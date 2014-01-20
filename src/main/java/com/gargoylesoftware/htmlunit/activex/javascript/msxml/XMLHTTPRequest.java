@@ -12,25 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.xml;
+package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ERRORHANDLER_NOT_SUPPORTED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_IGNORE_PORT_FOR_SAME_ORIGIN;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYSTATECANGE_SYNC_REQUESTS_COMPLETED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYSTATECANGE_SYNC_REQUESTS_NOT_TRIGGERED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYSTATECHANGE_WITH_EVENT_PARAM;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLOW_EMTPY_URL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ORIGIN_HEADER;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_RESPONSE_XML_IS_ACTIVEXOBJECT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_STATUS_THROWS_EXCEPTION_WHEN_UNSET;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_TRIGGER_ONLOAD_ON_COMPLETED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.
-    XHR_WITHCREDENTIALS_NOT_WRITEABLE_BEFORE_OPEN_EXCEPTION;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.io.IOException;
@@ -53,22 +36,18 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.auth.UsernamePasswordCredentials;
 
 import com.gargoylesoftware.htmlunit.AjaxController;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLActiveXObjectFactory;
-import com.gargoylesoftware.htmlunit.activex.javascript.msxml.XMLDOMDocument;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -77,13 +56,13 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
-import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
- * A JavaScript object for a XMLHttpRequest.
+ * A JavaScript object for MSXML's (ActiveX) XMLHTTPRequest.<br>
+ * Provides client-side protocol support for communication with HTTP servers.
+ * @see <a href="http://msdn.microsoft.com/en-us/library/ms759148.aspx">MSDN documentation</a>
  *
  * @version $Revision$
  * @author Daniel Gredler
@@ -93,14 +72,11 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Ronald Brill
  * @author Sebastian Cato
  * @author Frank Danek
- *
- * @see <a href="http://www.w3.org/TR/XMLHttpRequest/">W3C XMLHttpRequest</a>
- * @see <a href="http://developer.apple.com/internet/webcontent/xmlhttpreq.html">Safari documentation</a>
  */
-@JsxClass
-public class XMLHttpRequest extends SimpleScriptable {
+@JsxClass(browsers = @WebBrowser(IE))
+public class XMLHTTPRequest extends MSXMLScriptable {
 
-    private static final Log LOG = LogFactory.getLog(XMLHttpRequest.class);
+    private static final Log LOG = LogFactory.getLog(XMLHTTPRequest.class);
 
     /** The object has been created, but not initialized (the open() method has not been called). */
     public static final int STATE_UNSENT = 0;
@@ -119,7 +95,6 @@ public class XMLHttpRequest extends SimpleScriptable {
     private static final String HEADER_ACCESS_CONTROL_REQUEST_METHOD = "Access-Control-Request-Method";
     private static final String HEADER_ACCESS_CONTROL_REQUEST_HEADERS = "Access-Control-Request-Headers";
     private static final String HEADER_ACCESS_CONTROL_ALLOW_ORIGIN = "Access-Control-Allow-Origin";
-    private static final String HEADER_ACCESS_CONTROL_ALLOW_CREDENTIALS = "Access-Control-Allow-Credentials";
     private static final String HEADER_ACCESS_CONTROL_ALLOW_HEADERS = "Access-Control-Allow-Headers";
 
     private static final String ALLOW_ORIGIN_ALL = "*";
@@ -134,30 +109,18 @@ public class XMLHttpRequest extends SimpleScriptable {
 
     private int state_;
     private Function stateChangeHandler_;
-    private Function loadHandler_;
-    private Function errorHandler_;
     private WebRequest webRequest_;
     private boolean async_;
     private int threadID_;
     private WebResponse webResponse_;
-    private String overriddenMimeType_;
     private HtmlPage containingPage_;
-    private final boolean caseSensitiveProperties_;
-    private boolean withCredentials_;
+    private boolean openedMultipleTimes_;
+    private boolean sent_;
 
     /**
-     * Creates a new instance. JavaScript objects must have a default constructor.
+     * Creates an instance. JavaScript objects must have a default constructor.
      */
-    public XMLHttpRequest() {
-        this(true);
-    }
-
-    /**
-     * Creates a new instance.
-     * @param caseSensitiveProperties if properties and methods are case sensitive
-     */
-    public XMLHttpRequest(final boolean caseSensitiveProperties) {
-        caseSensitiveProperties_ = caseSensitiveProperties;
+    public XMLHTTPRequest() {
         state_ = STATE_UNSENT;
     }
 
@@ -170,17 +133,20 @@ public class XMLHttpRequest extends SimpleScriptable {
     }
 
     /**
-     * Returns the event handler that fires on every state change.
-     * @return the event handler that fires on every state change
+     * Returns the event handler to be called when the <code>readyState</code> property changes.
+     * @return the event handler to be called when the readyState property changes
      */
     @JsxGetter
-    public Function getOnreadystatechange() {
+    public Object getOnreadystatechange() {
+        if (stateChangeHandler_ == null) {
+            return Undefined.instance;
+        }
         return stateChangeHandler_;
     }
 
     /**
-     * Sets the event handler that fires on every state change.
-     * @param stateChangeHandler the event handler that fires on every state change
+     * Sets the event handler to be called when the <code>readyState</code> property changes.
+     * @param stateChangeHandler the event handler to be called when the readyState property changes
      */
     @JsxSetter
     public void setOnreadystatechange(final Function stateChangeHandler) {
@@ -194,30 +160,19 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Sets the state as specified and invokes the state change handler if one has been set.
      * @param state the new state
      * @param context the context within which the state change handler is to be invoked;
-     *                if <tt>null</tt>, the current thread's context is used.
+     *     if <code>null</code>, the current thread's context is used
      */
     private void setState(final int state, Context context) {
         state_ = state;
 
-        final BrowserVersion browser = getBrowserVersion();
-        // Firefox doesn't trigger onreadystatechange handler for sync requests except for completed for FF10
-        final boolean noTriggerForSync = browser.hasFeature(
-                XHR_ONREADYSTATECANGE_SYNC_REQUESTS_NOT_TRIGGERED);
-        final boolean triggerForSyncCompleted = (state == STATE_DONE)
-            && browser.hasFeature(XHR_ONREADYSTATECANGE_SYNC_REQUESTS_COMPLETED);
-        if (stateChangeHandler_ != null && (async_ || !noTriggerForSync || triggerForSyncCompleted)) {
+        if (stateChangeHandler_ != null && !openedMultipleTimes_) {
             final Scriptable scope = stateChangeHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
 
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Calling onreadystatechange handler for state " + state);
             }
-            Object[] params = ArrayUtils.EMPTY_OBJECT_ARRAY;
-            if (browser.hasFeature(XHR_ONREADYSTATECHANGE_WITH_EVENT_PARAM)) {
-                params = new Object[1];
-                final Event event = new Event(this, Event.TYPE_READY_STATE_CHANGE);
-                params[0] = event;
-            }
+            final Object[] params = ArrayUtils.EMPTY_OBJECT_ARRAY;
 
             jsEngine.callFunction(containingPage_, stateChangeHandler_, scope, this, params);
             if (LOG.isDebugEnabled()) {
@@ -228,78 +183,10 @@ public class XMLHttpRequest extends SimpleScriptable {
                 LOG.debug("Calling onreadystatechange handler for state " + state + ". Done.");
             }
         }
-
-        // Firefox has a separate onload handler, too.
-        final boolean triggerOnload = browser.hasFeature(XHR_TRIGGER_ONLOAD_ON_COMPLETED);
-        if (triggerOnload && loadHandler_ != null && state == STATE_DONE) {
-            final Scriptable scope = loadHandler_.getParentScope();
-            final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
-            jsEngine.callFunction(containingPage_, loadHandler_, scope, this, ArrayUtils.EMPTY_OBJECT_ARRAY);
-        }
     }
 
     /**
-     * Returns the event handler that fires on load.
-     * @return the event handler that fires on load
-     */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF) })
-    public Function getOnload() {
-        return loadHandler_;
-    }
-
-    /**
-     * Sets the event handler that fires on load.
-     * @param loadHandler the event handler that fires on load
-     */
-    @JsxSetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF) })
-    public void setOnload(final Function loadHandler) {
-        loadHandler_ = loadHandler;
-    }
-
-    /**
-     * Returns the event handler that fires on error.
-     * @return the event handler that fires on error
-     */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF) })
-    public Function getOnerror() {
-        return errorHandler_;
-    }
-
-    /**
-     * Sets the event handler that fires on error.
-     * @param errorHandler the event handler that fires on error
-     */
-    @JsxSetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF) })
-    public void setOnerror(final Function errorHandler) {
-        errorHandler_ = errorHandler;
-    }
-
-    /**
-     * Invokes the onerror handler if one has been set.
-     * @param context the context within which the onerror handler is to be invoked;
-     *                if <tt>null</tt>, the current thread's context is used.
-     */
-    private void processError(Context context) {
-        if (errorHandler_ != null && !getBrowserVersion().hasFeature(XHR_ERRORHANDLER_NOT_SUPPORTED)) {
-            final Scriptable scope = errorHandler_.getParentScope();
-            final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
-
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Calling onerror handler");
-            }
-            jsEngine.callFunction(containingPage_, errorHandler_, this, scope, ArrayUtils.EMPTY_OBJECT_ARRAY);
-            if (LOG.isDebugEnabled()) {
-                if (context == null) {
-                    context = Context.getCurrentContext();
-                }
-                LOG.debug("onerror handler: " + context.decompileFunction(errorHandler_, 4));
-                LOG.debug("Calling onerror handler done.");
-            }
-        }
-    }
-
-    /**
-     * Returns the current state of the HTTP request. The possible values are:
+     * Returns the state of the request. The possible values are:
      * <ul>
      *   <li>0 = unsent</li>
      *   <li>1 = opened</li>
@@ -307,7 +194,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      *   <li>3 = loading</li>
      *   <li>4 = done</li>
      * </ul>
-     * @return the current state of the HTTP request
+     * @return the state of the request
      */
     @JsxGetter
     public int getReadyState() {
@@ -315,105 +202,93 @@ public class XMLHttpRequest extends SimpleScriptable {
     }
 
     /**
-     * Returns a string version of the data retrieved from the server.
-     * @return a string version of the data retrieved from the server
+     * Returns the response entity body as a string.
+     * @return the response entity body as a string
      */
     @JsxGetter
     public String getResponseText() {
-        if (state_ == STATE_UNSENT || state_ == STATE_OPENED) {
-            return "";
+        if (state_ == STATE_UNSENT) {
+            throw Context.reportRuntimeError(
+                    "The data necessary to complete this operation is not yet available (request not opened).");
+        }
+        if (state_ != STATE_DONE) {
+            throw Context.reportRuntimeError("Unspecified error (request not sent).");
         }
         if (webResponse_ != null) {
             return webResponse_.getContentAsString();
         }
         if (LOG.isDebugEnabled()) {
-            LOG.debug("XMLHttpRequest.responseText was retrieved before the response was available.");
+            LOG.debug("XMLHTTPRequest.responseText was retrieved before the response was available.");
         }
         return "";
     }
 
     /**
-     * Returns a DOM-compatible document object version of the data retrieved from the server.
-     * @return a DOM-compatible document object version of the data retrieved from the server
+     * Returns the parsed response entity body.
+     * @return the parsed response entity body
      */
     @JsxGetter
     public Object getResponseXML() {
-        if (webResponse_ == null) {
-            return null; // send() has not been called
+        if (state_ == STATE_UNSENT) {
+            throw Context.reportRuntimeError("Unspecified error (request not opened).");
         }
-        if (webResponse_ instanceof NetworkErrorWebResponse) {
-            return null;
-        }
-        final String contentType = webResponse_.getContentType();
-        if (contentType.isEmpty() || contentType.contains("xml")) {
-            final WebWindow webWindow = getWindow().getWebWindow();
-            try {
-                if (getBrowserVersion().hasFeature(XHR_RESPONSE_XML_IS_ACTIVEXOBJECT)) {
-                    final XmlPage page = new XmlPage(webResponse_, webWindow, true, false);
-                    final MSXMLActiveXObjectFactory factory = webWindow.getWebClient().getMSXMLActiveXObjectFactory();
-                    final XMLDOMDocument document = (XMLDOMDocument) factory.create("Microsoft.XMLDOM", webWindow);
-                    document.setDomNode(page);
-                    return document;
+        if (state_ == STATE_DONE && webResponse_ != null && !(webResponse_ instanceof NetworkErrorWebResponse)) {
+            final String contentType = webResponse_.getContentType();
+            if (contentType.contains("xml")) {
+                try {
+                    final XmlPage page = new XmlPage(webResponse_, getWindow().getWebWindow(), true, false);
+                    final XMLDOMDocument doc = new XMLDOMDocument();
+                    doc.setDomNode(page);
+                    doc.setPrototype(getPrototype(doc.getClass()));
+                    doc.setEnvironment(getEnvironment());
+                    doc.setParentScope(getWindow());
+                    return doc;
                 }
-                final XmlPage page = new XmlPage(webResponse_, webWindow);
-                final XMLDocument document = new XMLDocument();
-                document.setPrototype(getPrototype(document.getClass()));
-                document.setParentScope(getWindow());
-                document.setDomNode(page);
-                return document;
-            }
-            catch (final IOException e) {
-                LOG.warn("Failed parsing XML document " + webResponse_.getWebRequest().getUrl() + ": "
-                        + e.getMessage());
-                return null;
+                catch (final IOException e) {
+                    LOG.warn("Failed parsing XML document " + webResponse_.getWebRequest().getUrl() + ": "
+                            + e.getMessage());
+                    return null;
+                }
             }
         }
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("XMLHttpRequest.responseXML was called but the response is "
-                + webResponse_.getContentType());
-        }
-        return null;
+        final XMLDOMDocument doc = new XMLDOMDocument(getWindow().getWebWindow());
+        doc.setPrototype(getPrototype(doc.getClass()));
+        doc.setEnvironment(getEnvironment());
+        return doc;
     }
 
     /**
-     * Returns the numeric status returned by the server, such as 404 for "Not Found"
-     * or 200 for "OK".
-     * @return the numeric status returned by the server
+     * Returns the HTTP status code returned by a request.
+     * @return the HTTP status code returned by a request
      */
     @JsxGetter
     public int getStatus() {
-        if (state_ == STATE_UNSENT || state_ == STATE_OPENED) {
-            if (getBrowserVersion().hasFeature(XHR_STATUS_THROWS_EXCEPTION_WHEN_UNSET)) {
-                throw Context.reportRuntimeError("status not set");
-            }
-            return 0;
+        if (state_ != STATE_DONE) {
+            throw Context.reportRuntimeError("Unspecified error (request not sent).");
         }
         if (webResponse_ != null) {
             return webResponse_.getStatusCode();
         }
 
-        LOG.error("XMLHttpRequest.status was retrieved without a response available (readyState: "
+        LOG.error("XMLHTTPRequest.status was retrieved without a response available (readyState: "
             + state_ + ").");
         return 0;
     }
 
     /**
-     * Returns the string message accompanying the status code, such as "Not Found" or "OK".
-     * @return the string message accompanying the status code
+     * Returns the HTTP response line status.
+     * @return the HTTP response line status
      */
     @JsxGetter
     public String getStatusText() {
-        if (state_ == STATE_UNSENT || state_ == STATE_OPENED) {
-            if (getBrowserVersion().hasFeature(XHR_STATUS_THROWS_EXCEPTION_WHEN_UNSET)) {
-                throw Context.reportRuntimeError("statusText not set");
-            }
-            return "";
+        if (state_ != STATE_DONE) {
+            throw Context.reportRuntimeError("Unspecified error (request not sent).");
         }
         if (webResponse_ != null) {
             return webResponse_.getStatusMessage();
         }
 
-        LOG.error("XMLHttpRequest.statusText was retrieved without a response available (readyState: "
+        LOG.error("XMLHTTPRequest.statusText was retrieved without a response available (readyState: "
             + state_ + ").");
         return null;
     }
@@ -424,90 +299,103 @@ public class XMLHttpRequest extends SimpleScriptable {
     @JsxFunction
     public void abort() {
         getWindow().getWebWindow().getJobManager().stopJob(threadID_);
+        setState(STATE_UNSENT, Context.getCurrentContext());
     }
 
     /**
-     * Returns the labels and values of all the HTTP headers.
-     * @return the labels and values of all the HTTP headers
+     * Returns the values of all the HTTP headers.
+     * @return the resulting header information
      */
     @JsxFunction
     public String getAllResponseHeaders() {
         if (state_ == STATE_UNSENT || state_ == STATE_OPENED) {
-            return null;
+            throw Context.reportRuntimeError("Unspecified error (request not sent).");
         }
         if (webResponse_ != null) {
             final StringBuilder buffer = new StringBuilder();
             for (final NameValuePair header : webResponse_.getResponseHeaders()) {
-                buffer.append(header.getName()).append(": ").append(header.getValue()).append("\n");
+                buffer.append(header.getName()).append(": ").append(header.getValue()).append("\r\n");
             }
-            return buffer.toString();
+            return buffer.append("\r\n").toString();
         }
 
-        LOG.error("XMLHttpRequest.getAllResponseHeaders() was called without a response available (readyState: "
+        LOG.error("XMLHTTPRequest.getAllResponseHeaders() was called without a response available (readyState: "
             + state_ + ").");
         return null;
     }
 
     /**
      * Retrieves the value of an HTTP header from the response body.
-     * @param headerName the (case-insensitive) name of the header to retrieve
-     * @return the value of the specified HTTP header
+     * @param header the case-insensitive header name
+     * @return the resulting header information
      */
     @JsxFunction
-    public String getResponseHeader(final String headerName) {
+    public String getResponseHeader(final String header) {
         if (state_ == STATE_UNSENT || state_ == STATE_OPENED) {
-            return null;
+            throw Context.reportRuntimeError("Unspecified error (request not sent).");
+        }
+        if (header == null || "null".equals(header)) {
+            throw Context.reportRuntimeError("Type mismatch (header is null).");
+        }
+        if ("".equals(header)) {
+            throw Context.reportRuntimeError("Invalid argument (header is empty).");
         }
         if (webResponse_ != null) {
-            return webResponse_.getResponseHeaderValue(headerName);
+            final String value = webResponse_.getResponseHeaderValue(header);
+            if (value == null) {
+                return "";
+            }
+            return value;
         }
 
-        LOG.error("XMLHttpRequest.getAllResponseHeaders(..) was called without a response available (readyState: "
+        LOG.error("XMLHTTPRequest.getResponseHeader(..) was called without a response available (readyState: "
             + state_ + ").");
         return null;
     }
 
     /**
-     * Assigns the destination URL, method and other optional attributes of a pending request.
-     * @param method the method to use to send the request to the server (GET, POST, etc)
-     * @param urlParam the URL to send the request to
-     * @param async Whether or not to send the request to the server asynchronously
-     * @param user If authentication is needed for the specified URL, the username to use to authenticate
-     * @param password If authentication is needed for the specified URL, the password to use to authenticate
+     * Initializes the request and specifies the method, URL, and authentication information for the request.
+     * @param method the HTTP method used to open the connection, such as GET, POST, PUT, or PROPFIND;
+     *      for XMLHTTP, this parameter is not case-sensitive; the verbs TRACE and TRACK are not allowed.
+     * @param url the requested URL; this can be either an absolute URL or a relative URL
+     * @param async indicator of whether the call is asynchronous; the default is <code>true</code> (the call returns
+     *     immediately); if set to <code>true</code>, attach an <code>onreadystatechange</code> property callback so
+     *     that you can tell when the <code>send</code> call has completed
+     * @param user the name of the user for authentication
+     * @param password the password for authentication
      */
     @JsxFunction
-    public void open(final String method, final Object urlParam, final boolean async,
+    public void open(final String method, final Object url, final boolean async,
         final Object user, final Object password) {
-        if ((urlParam == null || "".equals(urlParam)) && !getBrowserVersion().hasFeature(XHR_OPEN_ALLOW_EMTPY_URL)) {
-            throw Context.reportRuntimeError("URL for XHR.open can't be empty!");
+        if (method == null || "null".equals(method)) {
+            throw Context.reportRuntimeError("Type mismatch (method is null).");
+        }
+        if (url == null || "null".equals(url)) {
+            throw Context.reportRuntimeError("Type mismatch (url is null).");
+        }
+        state_ = STATE_UNSENT;
+        openedMultipleTimes_ = webRequest_ != null;
+        sent_ = false;
+        webRequest_ = null;
+        webResponse_ = null;
+        if ("".equals(method) || "TRACE".equalsIgnoreCase(method)) {
+            throw Context.reportRuntimeError("Invalid procedure call or argument (method is invalid).");
+        }
+        if ("".equals(url)) {
+            throw Context.reportRuntimeError("Invalid procedure call or argument (url is empty).");
         }
 
-        if (!async && getWithCredentials()) {
-            throw Context.reportRuntimeError(
-                    "open() in sync mode is not possible because 'withCredentials' is set to true");
-        }
-
-        final String url = Context.toString(urlParam);
+        final String urlAsString = Context.toString(url);
 
         // (URL + Method + User + Password) become a WebRequest instance.
         containingPage_ = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
 
         try {
-            final URL fullUrl = containingPage_.getFullyQualifiedUrl(url);
-            final URL originUrl = containingPage_.getUrl();
+            final URL fullUrl = containingPage_.getFullyQualifiedUrl(urlAsString);
 
-            final WebRequest request = new WebRequest(fullUrl, getBrowserVersion().getXmlHttpRequestAcceptHeader());
+            final WebRequest request = new WebRequest(fullUrl);
             request.setCharset("UTF-8");
             request.setAdditionalHeader("Referer", containingPage_.getUrl().toExternalForm());
-
-            if (!isSameOrigin(originUrl, fullUrl) && getBrowserVersion().hasFeature(XHR_ORIGIN_HEADER)) {
-                final StringBuilder origin = new StringBuilder().append(originUrl.getProtocol()).append("://")
-                        .append(originUrl.getHost());
-                if (originUrl.getPort() != -1) {
-                    origin.append(':').append(originUrl.getPort());
-                }
-                request.setAdditionalHeader(HEADER_ORIGIN, origin.toString());
-            }
 
             request.setHttpMethod(HttpMethod.valueOf(method.toUpperCase(Locale.ENGLISH)));
 
@@ -527,8 +415,12 @@ public class XMLHttpRequest extends SimpleScriptable {
             webRequest_ = request;
         }
         catch (final MalformedURLException e) {
-            LOG.error("Unable to initialize XMLHttpRequest using malformed URL '" + url + "'.");
+            LOG.error("Unable to initialize XMLHTTPRequest using malformed URL '" + urlAsString + "'.");
             return;
+        }
+        catch (final IllegalArgumentException e) {
+            LOG.error("Unable to initialize XMLHTTPRequest using illegal argument '" + e.getMessage() + "'.");
+            webRequest_ = null;
         }
         // Async stays a boolean.
         async_ = async;
@@ -536,33 +428,25 @@ public class XMLHttpRequest extends SimpleScriptable {
         setState(STATE_OPENED, null);
     }
 
-    private boolean isSameOrigin(final URL originUrl, final URL newUrl) {
-        if (!originUrl.getHost().equals(newUrl.getHost())) {
-            return false;
-        }
-
-        if (getBrowserVersion().hasFeature(XHR_IGNORE_PORT_FOR_SAME_ORIGIN)) {
-            return true;
-        }
-
-        int originPort = originUrl.getPort();
-        if (originPort == -1) {
-            originPort = originUrl.getDefaultPort();
-        }
-        int newPort = newUrl.getPort();
-        if (newPort == -1) {
-            newPort = newUrl.getDefaultPort();
-        }
-        return originPort == newPort;
-    }
-
     /**
-     * Sends the specified content to the server in an HTTP request and receives the response.
-     * @param content the body of the message being sent with the request
+     * Sends an HTTP request to the server and receives a response.
+     * @param body the body of the message being sent with the request.
      */
     @JsxFunction
-    public void send(final Object content) {
-        prepareRequest(content);
+    public void send(final Object body) {
+        if (webRequest_ == null) {
+            setState(STATE_DONE, Context.getCurrentContext());
+            return;
+        }
+        if (sent_) {
+            throw Context.reportRuntimeError("Unspecified error (request already sent).");
+        }
+        sent_ = true;
+
+        prepareRequest(body);
+
+        // quite strange but IE seems to fire state loading twice
+        setState(STATE_OPENED, Context.getCurrentContext());
 
         final WebClient client = getWindow().getWebWindow().getWebClient();
         final AjaxController ajaxController = client.getAjaxController();
@@ -572,12 +456,6 @@ public class XMLHttpRequest extends SimpleScriptable {
             doSend(Context.getCurrentContext());
         }
         else {
-            if (getBrowserVersion().hasFeature(XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE)) {
-                // quite strange but IE and FF seem both to fire state loading twice
-                // in async mode (at least with HTML of the unit tests)
-                setState(STATE_OPENED, Context.getCurrentContext());
-            }
-
             // Create and start a thread in which to execute the request.
             final Scriptable startingScope = getWindow();
             final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
@@ -605,7 +483,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
                     createJavascriptXMLHttpRequestJob(cf, action);
             if (LOG.isDebugEnabled()) {
-                LOG.debug("Starting XMLHttpRequest thread for asynchronous request");
+                LOG.debug("Starting XMLHTTPRequest thread for asynchronous request");
             }
             threadID_ = getWindow().getWebWindow().getJobManager().addJob(job, page);
         }
@@ -616,16 +494,19 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @param content the content to send
      */
     private void prepareRequest(final Object content) {
-        if (content != null
-            && (HttpMethod.POST == webRequest_.getHttpMethod()
-                    || HttpMethod.PUT == webRequest_.getHttpMethod())
-            && !Context.getUndefinedValue().equals(content)) {
-            final String body = Context.toString(content);
-            if (body.length() > 0) {
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("Setting request body to: " + body);
+        if (content != null && !Context.getUndefinedValue().equals(content)) {
+            if (!"".equals(content) && HttpMethod.GET == webRequest_.getHttpMethod()) {
+                webRequest_.setHttpMethod(HttpMethod.POST);
+            }
+            if (HttpMethod.POST == webRequest_.getHttpMethod()
+                    || HttpMethod.PUT == webRequest_.getHttpMethod()) {
+                final String body = Context.toString(content);
+                if (body.length() > 0) {
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("Setting request body to: " + body);
+                    }
+                    webRequest_.setRequestBody(body);
                 }
-                webRequest_.setRequestBody(body);
             }
         }
     }
@@ -683,33 +564,12 @@ public class XMLHttpRequest extends SimpleScriptable {
             }
             boolean allowOriginResponse = true;
             if (crossOriginResourceSharing) {
-                String value = webResponse.getResponseHeaderValue(HEADER_ACCESS_CONTROL_ALLOW_ORIGIN);
+                final String value = webResponse.getResponseHeaderValue(HEADER_ACCESS_CONTROL_ALLOW_ORIGIN);
                 allowOriginResponse = originHeaderValue.equals(value);
-                if (getWithCredentials()) {
-                    allowOriginResponse = allowOriginResponse
-                            || (getBrowserVersion().hasFeature(XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL)
-                            && ALLOW_ORIGIN_ALL.equals(value));
-
-                    // second step: check the allow-credentials header for true
-                    value = webResponse.getResponseHeaderValue(HEADER_ACCESS_CONTROL_ALLOW_CREDENTIALS);
-                    allowOriginResponse = allowOriginResponse && Boolean.parseBoolean(value);
-                }
-                else {
-                    allowOriginResponse = allowOriginResponse || ALLOW_ORIGIN_ALL.equals(value);
-                }
+                allowOriginResponse = allowOriginResponse || ALLOW_ORIGIN_ALL.equals(value);
             }
             if (allowOriginResponse) {
-                if (overriddenMimeType_ == null) {
-                    webResponse_ = webResponse;
-                }
-                else {
-                    webResponse_ = new WebResponseWrapper(webResponse) {
-                        @Override
-                        public String getContentType() {
-                            return overriddenMimeType_;
-                        }
-                    };
-                }
+                webResponse_ = webResponse;
             }
             if (allowOriginResponse) {
                 setState(STATE_HEADERS_RECEIVED, context);
@@ -730,11 +590,8 @@ public class XMLHttpRequest extends SimpleScriptable {
             webResponse_ = new NetworkErrorWebResponse(webRequest_);
             setState(STATE_HEADERS_RECEIVED, context);
             setState(STATE_DONE, context);
-            if (async_) {
-                processError(context);
-            }
-            else {
-                Context.throwAsScriptRuntimeEx(e);
+            if (!async_) {
+                throw Context.reportRuntimeError("Object not found.");
             }
         }
     }
@@ -799,15 +656,27 @@ public class XMLHttpRequest extends SimpleScriptable {
     }
 
     /**
-     * Sets the specified header to the specified value. The <tt>open</tt> method must be
-     * called before this method, or an error will occur.
-     * @param name the name of the header being set
-     * @param value the value of the header being set
+     * Sets the specified header to the specified value.<br>
+     * The <code>open</code> method must be called before this method, or an error will occur.
+     * @param name the header name to set
+     * @param value the value of the header
      */
     @JsxFunction
     public void setRequestHeader(final String name, final String value) {
+        if (name == null || "null".equals(name)) {
+            throw Context.reportRuntimeError("Type mismatch (name is null).");
+        }
+        if ("".equals(name)) {
+            throw Context.reportRuntimeError("Invalid argument (name is empty).");
+        }
+        if (value == null || "null".equals(value)) {
+            throw Context.reportRuntimeError("Type mismatch (value is null).");
+        }
+        if (StringUtils.isBlank(value)) {
+            return;
+        }
         if (!isAuthorizedHeader(name)) {
-            LOG.warn("Ignoring XMLHttpRequest.setRequestHeader for " + name
+            LOG.warn("Ignoring XMLHTTPRequest.setRequestHeader for " + name
                 + ": it is a restricted header");
             return;
         }
@@ -816,7 +685,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             webRequest_.setAdditionalHeader(name, value);
         }
         else {
-            throw Context.reportRuntimeError("The open() method must be called before setRequestHeader().");
+            throw Context.reportRuntimeError("Unspecified error (request not opened).");
         }
     }
 
@@ -838,58 +707,14 @@ public class XMLHttpRequest extends SimpleScriptable {
     }
 
     /**
-     * Override the mime type returned by the server (if any). This may be used, for example, to force a stream
-     * to be treated and parsed as text/xml, even if the server does not report it as such.
-     * This must be done before the send method is invoked.
-     * @param mimeType the type used to override that returned by the server (if any)
-     * @see <a href="http://xulplanet.com/references/objref/XMLHttpRequest.html#method_overrideMimeType">XUL Planet</a>
-     */
-    @JsxFunction(@WebBrowser(FF))
-    public void overrideMimeType(final String mimeType) {
-        overriddenMimeType_ = mimeType;
-    }
-
-    /**
-     * Returns the "withCredentials" property.
-     * @return the "withCredentials" property
-     */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF) })
-    public boolean getWithCredentials() {
-        return withCredentials_;
-    }
-
-    /**
-     * Sets the "withCredentials" property.
-     * @param withCredentials the "withCredentials" property.
-     */
-    @JsxSetter({ @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF) })
-    public void setWithCredentials(final boolean withCredentials) {
-        if (!async_ && state_ != STATE_UNSENT) {
-            if (getBrowserVersion().hasFeature(XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION)) {
-                throw Context.reportRuntimeError("Property 'withCredentials' not writable in sync mode.");
-            }
-            if (getBrowserVersion().hasFeature(XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC)) {
-                return;
-            }
-        }
-        if (state_ == STATE_UNSENT
-            && getBrowserVersion().hasFeature(XHR_WITHCREDENTIALS_NOT_WRITEABLE_BEFORE_OPEN_EXCEPTION)) {
-            throw Context.reportRuntimeError("Property 'withCredentials' not writable before calling open().");
-        }
-        withCredentials_ = withCredentials;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
     public Object get(String name, final Scriptable start) {
-        if (!caseSensitiveProperties_) {
-            for (final String property : ALL_PROPERTIES_) {
-                if (property.equalsIgnoreCase(name)) {
-                    name = property;
-                    break;
-                }
+        for (final String property : ALL_PROPERTIES_) {
+            if (property.equalsIgnoreCase(name)) {
+                name = property;
+                break;
             }
         }
         return super.get(name, start);
@@ -900,12 +725,10 @@ public class XMLHttpRequest extends SimpleScriptable {
      */
     @Override
     public void put(String name, final Scriptable start, final Object value) {
-        if (!caseSensitiveProperties_) {
-            for (final String property : ALL_PROPERTIES_) {
-                if (property.equalsIgnoreCase(name)) {
-                    name = property;
-                    break;
-                }
+        for (final String property : ALL_PROPERTIES_) {
+            if (property.equalsIgnoreCase(name)) {
+                name = property;
+                break;
             }
         }
         super.put(name, start, value);

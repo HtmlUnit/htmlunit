@@ -52,6 +52,7 @@ import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.CredentialsProvider;
 import org.w3c.css.sac.ErrorHandler;
 
+import com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLActiveXObjectFactory;
 import com.gargoylesoftware.htmlunit.attachment.Attachment;
 import com.gargoylesoftware.htmlunit.attachment.AttachmentHandler;
 import com.gargoylesoftware.htmlunit.gae.GAEUtils;
@@ -70,7 +71,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import com.gargoylesoftware.htmlunit.javascript.host.activex.MSXMLActiveXObjectFactory;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
