@@ -21,6 +21,7 @@ import java.net.Socket;
 import org.apache.http.HttpHost;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.params.HttpParams;
+import org.apache.http.protocol.HttpContext;
 
 /**
  * SOCKS aware {@link org.apache.http.conn.scheme.SchemeSocketFactory}.
@@ -39,6 +40,10 @@ class SocksSocketFactory extends PlainSocketFactory {
 
     static HttpHost getSocksProxy(final HttpParams parameters) {
         return (HttpHost) parameters.getParameter(SOCKS_PROXY);
+    }
+
+    static HttpHost getSocksProxy(final HttpContext context) {
+        return (HttpHost) context.getAttribute(SOCKS_PROXY);
     }
 
     static Socket createSocketWithSocksProxy(final HttpHost socksProxy) {

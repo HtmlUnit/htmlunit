@@ -42,8 +42,7 @@ import org.apache.http.ProtocolVersion;
 import org.apache.http.StatusLine;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.impl.client.AbstractHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHttpResponse;
 import org.apache.http.message.BasicStatusLine;
 import org.apache.log4j.Level;
@@ -244,9 +243,9 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         final boolean[] tabCalled = {false};
         final WebConnection myWebConnection = new HttpWebConnection(webClient) {
             @Override
-            protected AbstractHttpClient createHttpClient() {
+            protected HttpClientBuilder createHttpClient() {
                 tabCalled[0] = true;
-                return new DefaultHttpClient();
+                return HttpClientBuilder.create();
             }
         };
 
