@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
 
 /**
  * Tests for compatibility with version 1.6.1 of
- * <a href="http://http://www.prototypejs.org/">Prototype JavaScript library</a>.
+ * <a href="http://www.prototypejs.org/">Prototype JavaScript library</a>.
  *
  * @version $Revision$
  * @author Ronald Brill

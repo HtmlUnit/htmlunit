@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
 
 /**
  * Tests for compatibility with version 1.6.0 of
- * <a href="http://prototype.conio.net/">Prototype JavaScript library</a>.
+ * <a href="http://www.prototypejs.org/">Prototype JavaScript library</a>.
  *
  * @version $Revision$
  * @author Ahmed Ashour
