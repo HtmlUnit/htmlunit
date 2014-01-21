@@ -1,4 +1,4 @@
-17 tests, 110 assertions, 2 failures, 0 errors
+17 tests, 111 assertions, 1 failures, 0 errors
 Status Test Message
 testDollarF passed 1 assertions, 0 failures, 0 errors
 testFormReset passed 1 assertions, 0 failures, 0 errors
@@ -7,9 +7,7 @@ testFormElementObserver passed 6 assertions, 0 failures, 0 errors
 testFormObserver passed 5 assertions, 0 failures, 0 errors
 testFormEnabling passed 16 assertions, 0 failures, 0 errors
 testFormElementEnabling passed 5 assertions, 0 failures, 0 errors
-testFormActivating failed 3 assertions, 1 failures, 0 errors
-Failure: assertEqual
-expected: <'Hello'>, actual: <''>
+testFormActivating passed 4 assertions, 0 failures, 0 errors
 testFormGetElements passed 1 assertions, 0 failures, 0 errors
 testFormGetInputs passed 6 assertions, 0 failures, 0 errors
 testFormFindFirstElement passed 3 assertions, 0 failures, 0 errors
