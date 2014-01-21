@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.util.List;
@@ -81,7 +80,6 @@ public class Prototype150rc1Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented(IE11)
     public void ajax() throws Exception {
         test("ajax.html");
     }
@@ -90,7 +88,6 @@ public class Prototype150rc1Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented(IE11)
     public void array() throws Exception {
         test("array.html");
     }
@@ -99,7 +96,6 @@ public class Prototype150rc1Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented(IE11)
     public void base() throws Exception {
         test("base.html");
     }
@@ -108,7 +104,7 @@ public class Prototype150rc1Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented({ IE8, IE11 })
+    @NotYetImplemented(IE8)
     public void dom() throws Exception {
         test("dom.html");
     }
@@ -117,7 +113,6 @@ public class Prototype150rc1Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented(IE11)
     public void elementMixins() throws Exception {
         test("element_mixins.html");
     }
@@ -126,7 +121,6 @@ public class Prototype150rc1Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented(IE11)
     public void enumerable() throws Exception {
         test("enumerable.html");
     }
@@ -135,7 +129,6 @@ public class Prototype150rc1Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented(IE11)
     public void form() throws Exception {
         test("form.html");
     }
@@ -144,7 +137,6 @@ public class Prototype150rc1Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented(IE11)
     public void hash() throws Exception {
         test("hash.html");
     }
@@ -170,7 +162,6 @@ public class Prototype150rc1Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented(IE11)
     public void selector() throws Exception {
         test("selector.html");
     }
@@ -179,7 +170,6 @@ public class Prototype150rc1Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented(IE11)
     public void string() throws Exception {
         test("string.html");
     }
