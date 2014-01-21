@@ -1,0 +1,8 @@
+2 tests, 14 assertions, 2 failures, 0 errors
+Status Test Message
+testPrepare passed 4 assertions, 0 failures, 0 errors
+testWithin failed 10 assertions, 2 failures, 0 errors
+Failure: left/top corner
+got <false>
+Failure: left/bottom corner
+got <false>

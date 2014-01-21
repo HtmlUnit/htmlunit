@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.util.List;
@@ -104,7 +105,7 @@ public class Prototype150rc1Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, CHROME })
     public void dom() throws Exception {
         test("dom.html");
     }

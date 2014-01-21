@@ -1,0 +1,6 @@
+2 tests, 14 assertions, 2 failures, 0 errors
+Status Test Message
+passed testPrepare 4 assertions, 0 failures, 0 errors
+failed testWithin 10 assertions, 2 failures, 0 errors
+Failure: left/top corner Line #79
+Failure: left/bottom corner Line #80

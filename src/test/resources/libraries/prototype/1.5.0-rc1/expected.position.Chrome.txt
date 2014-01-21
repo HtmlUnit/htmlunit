@@ -1,0 +1,9 @@
+5 tests, 26 assertions, 2 failures, 0 errors
+Status Test Message
+passed testPrepare 4 assertions, 0 failures, 0 errors
+passed testPositionedOffset 4 assertions, 0 failures, 0 errors
+passed testPage 4 assertions, 0 failures, 0 errors
+passed testOffsetParent 4 assertions, 0 failures, 0 errors
+failed testWithin 10 assertions, 2 failures, 0 errors
+Failure: left/top corner
+Failure: left/bottom corner
