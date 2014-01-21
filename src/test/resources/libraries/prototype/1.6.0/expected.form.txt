@@ -1,4 +1,4 @@
-15 tests, 108 assertions, 1 failures, 0 errors
+15 tests, 109 assertions, 0 failures, 0 errors
 Status Test Message
 passed testDollarF 1 assertions, 0 failures, 0 errors
 passed testFormElementEventObserver 2 assertions, 0 failures, 0 errors
@@ -6,8 +6,7 @@ passed testFormElementObserver 6 assertions, 0 failures, 0 errors
 passed testFormObserver 5 assertions, 0 failures, 0 errors
 passed testFormEnabling 16 assertions, 0 failures, 0 errors
 passed testFormElementEnabling 5 assertions, 0 failures, 0 errors
-failed testFormActivating 3 assertions, 1 failures, 0 errors
-Failure: assertEqual: expected "'Hello'", actual "''" Line #322
+passed testFormActivating 4 assertions, 0 failures, 0 errors
 passed testFormGetElements 1 assertions, 0 failures, 0 errors
 passed testFormGetInputs 6 assertions, 0 failures, 0 errors
 passed testFormFindFirstElement 3 assertions, 0 failures, 0 errors

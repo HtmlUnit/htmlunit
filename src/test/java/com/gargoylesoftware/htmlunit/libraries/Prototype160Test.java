@@ -28,6 +28,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 
@@ -149,7 +150,7 @@ public class Prototype160Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented({ FF, IE11, CHROME })
+    @BuggyWebDriver(FF)
     public void form() throws Exception {
         test("form.html");
     }
