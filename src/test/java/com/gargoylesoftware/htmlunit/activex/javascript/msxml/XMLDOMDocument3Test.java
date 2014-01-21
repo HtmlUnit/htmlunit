@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link XMLDocument}.
+ * Tests for {@link com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument}.
  * @see com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument2Test
  *
  * @version $Revision$

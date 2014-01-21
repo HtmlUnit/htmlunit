@@ -30,6 +30,23 @@
     <suppress checks="LineLength" files="HTMLBodyElementTest.java"/>
     <suppress checks="LineLength" files="HtmlUnitRegExpProxyTest.java"/>
     <suppress checks="LineLength" files="JQuery182Test.java"/>
+    <suppress checks="LineLength" files="XMLDOMNamedNodeMap.java"/>
+    <suppress checks="LineLength" files="XMLDOMAttributeTest.java"/>
+    <suppress checks="LineLength" files="XMLDOMCDATASectionTest.java"/>
+    <suppress checks="LineLength" files="XMLDOMCommentTest.java"/>
+    <suppress checks="LineLength" files="XMLDOMDocument2Test.java"/>
+    <suppress checks="LineLength" files="XMLDOMDocument3Test.java"/>
+    <suppress checks="LineLength" files="XMLDOMDocumentFragmentTest.java"/>
+    <suppress checks="LineLength" files="XMLDOMDocumentTest.java"/>
+    <suppress checks="LineLength" files="XMLDOMDocumentTypeTest.java"/>
+    <suppress checks="LineLength" files="XMLDOMElementTest.java"/>
+    <suppress checks="LineLength" files="XMLDOMNamedNodeMapTest.java"/>
+    <suppress checks="LineLength" files="XMLDOMNodeListTest.java"/>
+    <suppress checks="LineLength" files="XMLDOMParseErrorTest.java"/>
+    <suppress checks="LineLength" files="XMLDOMProcessingInstructionTest.java"/>
+    <suppress checks="LineLength" files="XMLDOMTextTest.java"/>
+    <suppress checks="LineLength" files="XMLSerializerTest.java"/>
+    <suppress checks="LineLength" files="XSLProcessorTest.java"/>
     <suppress checks="MethodLength" files="DefaultElementFactory.java"/>
     <suppress checks="MethodLength" files="Dojo102Test.java"/>
     <suppress checks="MethodLength" files="CSSStyleDeclaration2Test.java"/>

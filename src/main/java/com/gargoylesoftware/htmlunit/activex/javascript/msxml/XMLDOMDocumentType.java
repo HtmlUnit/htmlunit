@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
-
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import org.w3c.dom.NamedNodeMap;

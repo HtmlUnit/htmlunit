@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
-
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
@@ -29,8 +28,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * A JavaScript object for MSXML's (ActiveX) XMLDOMNamedNodeMap.<br>
  * Adds support for namespaces and iteration through the collection of attribute nodes.<br>
- * String comparisons in this class are case-insensitive when used with an {@link HtmlElement},
- * but case-sensitive when used with a {@link DomElement}.
+ * String comparisons in this class are case-insensitive when used with an
+ * {@link com.gargoylesoftware.htmlunit.html.HtmlElement},
+ * but case-sensitive when used with a {@link com.gargoylesoftware.htmlunit.html.DomElement}.
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms763824.aspx">MSDN documentation</a>
  *
  * @version $Revision$
