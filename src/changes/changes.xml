@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.14" date="???" description="FF24, Bugfixes, initial work on IE11">
+            <action type="update" dev="asashour">
+                Upgrade Apache HttpClient to 4.3.2.
+            </action>
             <action type="fix" dev="rbri">
                 CSS: Parsing of the :not pseudo class fixed, only simple selectors are allowed.
                 This was a problem with CSSParser and is fixed in version 0.9.13.
