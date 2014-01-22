@@ -265,7 +265,6 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "createIFrame", "loaded" })
-    @NotYetImplemented
     public void documentCreateElement_iFrameInsideDiv() throws Exception {
         final String html =
                 "<html>\n"

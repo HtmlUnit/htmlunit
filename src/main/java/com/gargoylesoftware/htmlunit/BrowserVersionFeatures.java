@@ -1052,14 +1052,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_HTML_GENERIC_ELEMENT_CLASS_NAME,
 
-    /** Javascript method getHeight of IFrames may return negative values. */
-    @BrowserFeature(@WebBrowser(IE))
-    JS_IFRAME_GET_HEIGHT_NEGATIVE_VALUES,
-
-    /** Javascript method getWidth of IFrames may return negative values. */
-    @BrowserFeature(@WebBrowser(IE))
-    JS_IFRAME_GET_WIDTH_NEGATIVE_VALUES,
-
     /** IE ignores the last line containing uncommented. */
     @BrowserFeature(@WebBrowser(IE))
     JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED,
