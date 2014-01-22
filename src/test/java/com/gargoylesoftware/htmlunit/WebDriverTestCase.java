@@ -883,6 +883,7 @@ class FixedWebDriverHtmlUnitWebElement extends HtmlUnitWebElement {
     @Override
     public String getText() {
         String text = getElement().asText();
+        text = text.trim();
         text = text.replace('\t', ' ');
         return text;
     }
