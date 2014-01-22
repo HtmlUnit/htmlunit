@@ -885,6 +885,5 @@ class FixedWebDriverHtmlUnitWebElement extends HtmlUnitWebElement {
         String text = getElement().asText();
         text = text.replace('\t', ' ');
         return text;
-
     }
 }
