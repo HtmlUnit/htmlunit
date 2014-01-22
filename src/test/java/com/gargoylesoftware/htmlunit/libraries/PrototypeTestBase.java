@@ -19,7 +19,6 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -35,11 +34,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 
 /**
  * Base class for tests for compatibility with <a href="http://prototype.conio.net/">Prototype</a>.
@@ -110,11 +107,11 @@ public abstract class PrototypeTestBase extends WebDriverTestCase {
 
         String expected = getExpectations(getBrowserVersion(), filename);
         WebElement testlog = driver.findElement(By.id("testlog"));
-        String actual = getText(testlog);
+        String actual = testlog.getText();
 
         try {
             testlog = driver.findElement(By.id("testlog_2"));
-            actual = actual + "\n" + getText(testlog);
+            actual = actual + "\n" + testlog.getText();
         }
         catch (final NoSuchElementException e) {
             // ignore
@@ -167,19 +164,6 @@ public abstract class PrototypeTestBase extends WebDriverTestCase {
         }
 
         return FileUtils.readFileToString(expectationsFile, "UTF-8");
-    }
-
-    private String getText(final WebElement webElement) throws Exception {
-        // Hack for the buggy asText method in seleniums htmlunit code
-        if (webElement instanceof HtmlUnitWebElement) {
-            final Method method = HtmlUnitWebElement.class.getDeclaredMethod("getElement", (Class<?>[]) null);
-            method.setAccessible(true);
-            final HtmlElement htmlElement = (HtmlElement) method.invoke(webElement);
-            String text = htmlElement.asText();
-            text = text.replace('\t', ' ');
-            return text;
-        }
-        return webElement.getText();
     }
 
     /**

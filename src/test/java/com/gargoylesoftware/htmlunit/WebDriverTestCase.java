@@ -879,4 +879,12 @@ class FixedWebDriverHtmlUnitWebElement extends HtmlUnitWebElement {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public String getText() {
+        String text = getElement().asText();
+        text = text.replace('\t', ' ');
+        return text;
+
+    }
 }
