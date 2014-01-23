@@ -257,9 +257,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"", "100", "foo", "20%", "-5", "30.2", "400", "abc", "-5", "100.2", "10%", "300" },
-            IE = {"", "100", "", "20%", "-5", "30", "error", "400", "100", "-5", "100", "10%", "300" })
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = {"", "100", "foo", "20%", "-5", "30.2", "400", "abc", "-5", "100.2", "10%", "-12.56" },
+            IE = {"", "100", "", "20%", "-5", "30", "error", "400", "100", "-5", "100", "10%", "-12" })
     public void width() throws Exception {
         final String html
             = "<html><body>\n"
@@ -294,7 +293,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "set(i3, -5);\n"
             + "set(i4, 100.2);\n"
             + "set(i5, '10%');\n"
-            + "set(i6, 300);\n"
+            + "set(i6, -12.56);\n"
             + "alert(i1.width);\n"
             + "alert(i2.width);\n"
             + "alert(i3.width);\n"
@@ -310,9 +309,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"", "100", "foo", "20%", "-5", "30.2", "400", "abc", "-5", "100.2", "10%", "300" },
-            IE = {"", "100", "", "20%", "-5", "30", "error", "400", "100", "-5", "100", "10%", "300" })
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = {"", "100", "foo", "20%", "-5", "30.2", "400", "abc", "-5", "100.2", "10%", "-12.56" },
+            IE = {"", "100", "", "20%", "-5", "30", "error", "400", "100", "-5", "100", "10%", "-12" })
     public void height() throws Exception {
         final String html
             = "<html><body>\n"
@@ -347,7 +345,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "set(i3, -5);\n"
             + "set(i4, 100.2);\n"
             + "set(i5, '10%');\n"
-            + "set(i6, 300);\n"
+            + "set(i6, -12.56);\n"
             + "alert(i1.height);\n"
             + "alert(i2.height);\n"
             + "alert(i3.height);\n"
@@ -365,6 +363,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "uninitialized", "complete" },
+            CHROME = { "complete", "complete" },
             IE = { "loading", "complete" })
     @NotYetImplemented(FF)
     public void readyState_IFrame() throws Exception {
@@ -433,9 +432,9 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = { "[object]", "[object]", "undefined", "" },
+    @Alerts(DEFAULT = { "[object Window]", "[object HTMLIFrameElement]", "undefined", "" },
             FF = { "[object HTMLIFrameElement]", "[object HTMLIFrameElement]", "", "" },
-            IE11 = { "[object Window]", "[object HTMLIFrameElement]", "undefined", "" })
+            IE8 = { "[object]", "[object]", "undefined", "" })
     @NotYetImplemented(IE)
     public void idByName() throws Exception {
         final String html

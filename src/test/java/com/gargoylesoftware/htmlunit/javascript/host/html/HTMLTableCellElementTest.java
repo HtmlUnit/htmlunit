@@ -445,7 +445,6 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "100px", "200px", "400", "abc", "-5", "100.2", "10%" },
             IE = { "100", "200", "400", "error", "400", "error", "400", "100", "10%" })
-    @NotYetImplemented({ FF17, FF24 })
     public void width() throws Exception {
         final String html =
             "<html>\n"

@@ -2216,6 +2216,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     protected String getWidthOrHeight(final String attributeName, final Boolean returnNegativeValues) {
         String value = getDomNodeOrDie().getAttribute(attributeName);
+        if (getBrowserVersion().hasFeature(JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES)) {
+            return value;
+        }
         if (!PERCENT_VALUE.matcher(value).matches()) {
             try {
                 final Float f = Float.valueOf(value);
