@@ -412,7 +412,6 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "128px",
             IE = "128")
-    @NotYetImplemented(FF)
     public void width_px() throws Exception {
         final String html
             = "<html><head>"

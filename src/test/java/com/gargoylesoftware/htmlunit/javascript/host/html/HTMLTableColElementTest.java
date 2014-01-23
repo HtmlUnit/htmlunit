@@ -332,7 +332,6 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "128",
             FF = "128px")
-    @NotYetImplemented({ FF17, FF24 })
     public void width_px() throws Exception {
         final String html
             = "<html><head>"
