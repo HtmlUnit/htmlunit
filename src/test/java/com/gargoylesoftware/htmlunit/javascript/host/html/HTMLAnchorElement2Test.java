@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
- * Unit tests for {@link HTMLLinkElement}.
+ * Unit tests for {@link HTMLAnchorElement}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
