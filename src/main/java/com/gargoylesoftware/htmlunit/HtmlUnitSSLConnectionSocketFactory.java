@@ -72,7 +72,8 @@ final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocketFactor
                     return new HtmlUnitSSLConnectionSocketFactory((KeyStore) null, null); // only SOCKS awareness
                 }
                 // SOCKS + keystore
-                return new HtmlUnitSSLConnectionSocketFactory(getKeyStore(options), options.getSSLClientCertificatePassword());
+                return new HtmlUnitSSLConnectionSocketFactory(getKeyStore(options),
+                        options.getSSLClientCertificatePassword());
             }
 
             // we need insecure SSL + SOCKS awareness
@@ -88,7 +89,8 @@ final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocketFactor
         }
     }
 
-    private HtmlUnitSSLConnectionSocketFactory(final SSLContext sslContext, final X509HostnameVerifier hostnameVerifier) {
+    private HtmlUnitSSLConnectionSocketFactory(final SSLContext sslContext,
+            final X509HostnameVerifier hostnameVerifier) {
         super(sslContext, hostnameVerifier);
     }
 
