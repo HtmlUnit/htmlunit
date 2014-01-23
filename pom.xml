@@ -787,7 +787,7 @@
         <dependency>
             <groupId>net.sourceforge.nekohtml</groupId>
             <artifactId>nekohtml</artifactId>
-            <version>1.9.19</version>
+            <version>1.9.20-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <groupId>xerces</groupId>

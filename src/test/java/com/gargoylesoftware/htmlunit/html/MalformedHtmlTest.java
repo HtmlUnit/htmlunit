@@ -252,4 +252,19 @@ public class MalformedHtmlTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+    * Regression test for bug 1564.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "1", "�", "65533" })
+    public void entityWithInvalidUTF16Code() throws Exception {
+        final String html = "<html><head><title>&#x1b3d6e;</title></head><body><script>"
+            + "alert(document.title.length);\n"
+            + "alert(document.title);\n"
+            + "alert(document.title.charCodeAt(0));\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
 }
