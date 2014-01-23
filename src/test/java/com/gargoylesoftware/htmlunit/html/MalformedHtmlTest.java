@@ -258,7 +258,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "�", "65533" })
+    @Alerts({ "1", "\uFFFD", "65533" })
     public void entityWithInvalidUTF16Code() throws Exception {
         final String html = "<html><head><title>&#x1b3d6e;</title></head><body><script>"
             + "alert(document.title.length);\n"
