@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.14" date="???" description="FF24, Bugfixes, initial work on IE11">
+            <action type="update" dev="asashour">
+                BrowserVersion: deprecate INTERNET_EXPLORER_8 and INTERNET_EXPLORER_9.
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: improved width and height processing for html elements when simulating FF.
             </action>
