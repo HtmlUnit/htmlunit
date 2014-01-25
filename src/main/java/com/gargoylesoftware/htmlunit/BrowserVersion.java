@@ -144,6 +144,7 @@ public class BrowserVersion implements Serializable, Cloneable {
      * @deprecated as of 2.14
      */
     // to be removed in 2.16 if IE11 is complete
+    @Deprecated
     public static final BrowserVersion INTERNET_EXPLORER_8 = new BrowserVersion(
         INTERNET_EXPLORER, "4.0 (compatible; MSIE 8.0; Windows NT 6.0)",
         "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0)", 8, "IE8", null);
@@ -152,6 +153,7 @@ public class BrowserVersion implements Serializable, Cloneable {
      * Internet Explorer 9. Work In Progress!!!
      * @deprecated as of 2.14
      */
+    @Deprecated
     public static final BrowserVersion INTERNET_EXPLORER_9 = new BrowserVersion(
         INTERNET_EXPLORER, "5.0 (compatible; MSIE 9.0; Windows NT 6.1)",
         "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1)", 9, "IE9", null);
