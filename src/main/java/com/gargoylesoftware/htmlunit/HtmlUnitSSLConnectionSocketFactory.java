@@ -106,16 +106,6 @@ final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocketFactor
                 BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Socket createSocket(final HttpContext context) throws IOException {
-        final Socket socket = super.createSocket(context);
-        configureSocket((SSLSocket) socket, context);
-        return socket;
-    }
-
     private void configureSocket(final SSLSocket sslSocket, final HttpContext context) {
         if (isUseSSL3Only(context)) {
             sslSocket.setEnabledProtocols(new String[]{"SSLv3"});
