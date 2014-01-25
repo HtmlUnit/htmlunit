@@ -61,6 +61,10 @@ import org.apache.http.protocol.HttpContext;
 final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocketFactory {
     private static final String SSL3ONLY = "htmlunit.SSL3Only";
 
+    static void setUseSSL3Only(final HttpContext parameters, final boolean ssl3Only) {
+        parameters.setAttribute(SSL3ONLY, ssl3Only);
+    }
+
     static boolean isUseSSL3Only(final HttpContext context) {
         return "TRUE".equalsIgnoreCase((String) context.getAttribute(SSL3ONLY));
     }
@@ -107,10 +111,6 @@ final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocketFactor
      */
     @Override
     public Socket createSocket(final HttpContext context) throws IOException {
-        if (SocksSocketFactory.getSocksProxy(context) != null) {
-            // we create the socket in connectSocket has we need to know the destination to open the underlying request
-            return null;
-        }
         final Socket socket = super.createSocket(context);
         configureSocket((SSLSocket) socket, context);
         return socket;
@@ -129,7 +129,7 @@ final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocketFactor
             final InetSocketAddress remoteAddress,
             final InetSocketAddress localAddress,
             final HttpContext context) throws IOException {
-        final HttpHost socksProxy = SocksSocketFactory.getSocksProxy(context);
+        final HttpHost socksProxy = SocksConnectionSocketFactory.getSocksProxy(context);
         if (socksProxy != null) {
             final Socket underlying = SocksSocketFactory.createSocketWithSocksProxy(socksProxy);
             underlying.setReuseAddress(true);

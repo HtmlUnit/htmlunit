@@ -14,13 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.Socket;
 
 import org.apache.http.HttpHost;
-import org.apache.http.conn.scheme.PlainSocketFactory;
-import org.apache.http.params.HttpParams;
+import org.apache.http.conn.socket.PlainConnectionSocketFactory;
+import org.apache.http.protocol.HttpContext;
 
 /**
  * SOCKS aware {@link org.apache.http.conn.scheme.SchemeSocketFactory}.
@@ -30,15 +31,15 @@ import org.apache.http.params.HttpParams;
  * @author Ronald Brill
  * @author Marc Guillemot
  */
-class SocksSocketFactory extends PlainSocketFactory {
+class SocksConnectionSocketFactory extends PlainConnectionSocketFactory {
     private static final String SOCKS_PROXY = "htmlunit.socksproxy";
 
-    static void setSocksProxy(final HttpParams parameters, final HttpHost socksProxy) {
-        parameters.setParameter(SOCKS_PROXY, socksProxy);
+    static void setSocksProxy(final HttpContext context, final HttpHost socksProxy) {
+        context.setAttribute(SOCKS_PROXY, socksProxy);
     }
 
-    static HttpHost getSocksProxy(final HttpParams parameters) {
-        return (HttpHost) parameters.getParameter(SOCKS_PROXY);
+    static HttpHost getSocksProxy(final HttpContext context) {
+        return (HttpHost) context.getAttribute(SOCKS_PROXY);
     }
 
     static Socket createSocketWithSocksProxy(final HttpHost socksProxy) {
@@ -51,11 +52,11 @@ class SocksSocketFactory extends PlainSocketFactory {
      * {@inheritDoc}
      */
     @Override
-    public Socket createSocket(final HttpParams params) {
-        final HttpHost socksProxy = getSocksProxy(params);
+    public Socket createSocket(final HttpContext context) throws IOException {
+        final HttpHost socksProxy = getSocksProxy(context);
         if (socksProxy != null) {
             return createSocketWithSocksProxy(socksProxy);
         }
-        return super.createSocket(params);
+        return super.createSocket(context);
     }
 }
