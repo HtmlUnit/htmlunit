@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
@@ -854,6 +855,52 @@ public class HTMLElementTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setInnerHTMLExecuteJavaScript() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var newnode = '<scr'+'ipt>alerter();</scr'+'ipt>';\n"
+            + "    var outernode = document.getElementById('myNode');\n"
+            + "    outernode.innerHTML = newnode;\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    alert('executed');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void setInnerHTMLDeclareJavaScript() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var newnode = '<scr'+'ipt>function tester() { alerter(); }</scr'+'ipt>';\n"
+            + "    var outernode = document.getElementById('myNode');\n"
+            + "    outernode.innerHTML = newnode;\n"
+            + "    try {\n"
+            + "      tester();\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    alert('declared');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Verifies outerHTML, innerHTML and innerText for newly created div.
      * @throws Exception if the test fails
      */
@@ -1280,6 +1327,54 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    <" + nodeTag + " id='myNode'><span id='innerNode'>Old outerHTML</span></" + nodeTag + ">\n"
             + "</body>\n"
             + "</html>";
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    public void setOuterHTMLExecuteJavaScript() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var newnode = '<scr'+'ipt>alerter();</scr'+'ipt>';\n"
+            + "    var oldnode = document.getElementById('myNode');\n"
+            + "    oldnode.outerHTML = newnode;\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    alert('executed');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    @NotYetImplemented
+    public void setOuterHTMLDeclareJavaScript() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var newnode = '<scr'+'ipt>function tester() { alerter(); }</scr'+'ipt>';\n"
+            + "    var oldnode = document.getElementById('myNode');\n"
+            + "    oldnode.outerHTML = newnode;\n"
+            + "    try {\n"
+            + "      tester();\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    alert('declared');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -4407,6 +4502,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts({ "outside", "1", "middle", "2", "3", "4",
         "before-begin after-begin inside before-end after-end" })
     public void insertAdjacentHTML() throws Exception {
+        insertAdjacentHTML("beforeend", "afterend", "beforebegin", "afterbegin");
         insertAdjacentHTML("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");
         insertAdjacentHTML("BeforeEnd", "AfterEnd", "BeFoReBeGiN", "afterbegin");
     }
@@ -4455,10 +4551,11 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
+    @Browsers({ CHROME, IE })
     @Alerts({ "outside", "1", "middle", "2", "3", "4",
                 "before-begin after-begin inside before-end after-end" })
     public void insertAdjacentElement() throws Exception {
+        insertAdjacentElement("beforeend", "afterend", "beforebegin", "afterbegin");
         insertAdjacentElement("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");
         insertAdjacentElement("BeforeEnd", "AfterEnd", "BeFoReBeGiN", "afterbegin");
     }
@@ -4493,6 +4590,53 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
+            + "  <span id='outside' style='color: #00ff00'>\n"
+            + "    <span id='middle' style='color: #ff0000'>\n"
+            + "      inside\n"
+            + "    </span>\n"
+            + "  </span>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({ CHROME, IE })
+    @Alerts(DEFAULT = { "outside", "middle",
+                "before-begin after-begin inside before-end after-end" },
+            IE8 = { "outside", "middle",
+                "before-begin after-begininside before-end after-end" })
+    @NotYetImplemented(IE8)
+    public void insertAdjacentText() throws Exception {
+        insertAdjacentText("beforeend", "afterend", "beforebegin", "afterbegin");
+        insertAdjacentText("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");
+        insertAdjacentText("BeforeEnd", "AfterEnd", "BeFoReBeGiN", "afterbegin");
+    }
+
+    private void insertAdjacentText(final String beforeEnd,
+            final String afterEnd, final String beforeBegin, final String afterBegin) throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var oNode = document.getElementById('middle');\n"
+            + "  oNode.insertAdjacentText('" + beforeEnd + "', 'before-end');\n"
+            + "  oNode.insertAdjacentText('" + afterEnd + "', ' after-end');\n"
+            + "  oNode.insertAdjacentText('" + beforeBegin + "', 'before-begin ');\n"
+            + "  oNode.insertAdjacentText('" + afterBegin + "', ' after-begin');\n"
+            + "  var coll = document.getElementsByTagName('SPAN');\n"
+            + "  for (var i=0; i<coll.length; i++) {\n"
+            + "    alert(coll[i].id);\n"
+            + "  }\n"
+            + "  var outside = document.getElementById('outside');\n"
+            + "  var text = outside.textContent ? outside.textContent : outside.innerText;\n"
+            + "  text = text.replace(/(\\r\\n|\\r|\\n)/gm, '');\n"
+            + "  text = text.replace(/(\\s{2,})/g, ' ');\n"
+            + "  text = text.replace(/^\\s+|\\s+$/g, '');\n"
+            + "  alert(text);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
             + "  <span id='outside' style='color: #00ff00'>\n"
             + "    <span id='middle' style='color: #ff0000'>\n"
             + "      inside\n"

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.14" date="???" description="FF24, Bugfixes, initial work on IE11">
+            <action type="fix" dev="rbri" due-to="Frank Danek">
+                JavaScript: Function HTMLelement.insertAdjacentText added (IE, Chrome).
+            </action>
             <action type="update" dev="asashour">
                 BrowserVersion: deprecate INTERNET_EXPLORER_8 and INTERNET_EXPLORER_9.
             </action>

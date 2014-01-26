@@ -198,10 +198,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     private static final Pattern PRINT_NODE_PATTERN = Pattern.compile("  ");
     private static final Pattern PRINT_NODE_QUOTE_PATTERN = Pattern.compile("\"");
 
-    static final String POSITION_BEFORE_BEGIN = "beforeBegin";
-    static final String POSITION_AFTER_BEGIN = "afterBegin";
-    static final String POSITION_BEFORE_END = "beforeEnd";
-    static final String POSITION_AFTER_END = "afterEnd";
+    static final String POSITION_BEFORE_BEGIN = "beforebegin";
+    static final String POSITION_AFTER_BEGIN = "afterbegin";
+    static final String POSITION_BEFORE_END = "beforeend";
+    static final String POSITION_AFTER_END = "afterend";
 
     /**
      * Static counter for {@link #uniqueID_}.
@@ -1133,16 +1133,21 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Inserts the given HTML text into the element at the location.
-     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536452.aspx">
-     * MSDN documentation</a>
-     * @param where specifies where to insert the HTML text, using one of the following value:
-     *        beforeBegin, afterBegin, beforeEnd, afterEnd
-     * @param text the HTML text to insert
+     * Parses the given text as HTML or XML and inserts the resulting nodes into the tree in the position given by the
+     * position argument.
+     * @param position specifies where to insert the nodes, using one of the following values (case-insensitive):
+     *        beforebegin, afterbegin, beforeend, afterend
+     * @param text the text to parse
+     *
+     * @see <a href="http://www.w3.org/TR/DOM-Parsing/#methods-2">W3C Spec</a>
+     * @see <a href="http://domparsing.spec.whatwg.org/#dom-element-insertadjacenthtml">WhatWG Spec</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element.insertAdjacentHTML"
+     *      >Mozilla Developer Network</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ie/ms536452.aspx">MSDN</a>
      */
-    @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 8) })
-    public void insertAdjacentHTML(final String where, final String text) {
-        final Object[] values = getInsertAdjacentLocation(where);
+    @JsxFunction
+    public void insertAdjacentHTML(final String position, final String text) {
+        final Object[] values = getInsertAdjacentLocation(position);
         final DomNode node = (DomNode) values[0];
         final boolean append = ((Boolean) values[1]).booleanValue();
 
@@ -1153,17 +1158,17 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Inserts the given element into the element at the location.
-     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536451.aspx">
-     * MSDN documentation</a>
-     * @param where specifies where to insert the element, using one of the following value:
-     *        beforeBegin, afterBegin, beforeEnd, afterEnd
-     * @param object the element to insert
+     * @param where specifies where to insert the element, using one of the following values (case-insensitive):
+     *        beforebegin, afterbegin, beforeend, afterend
+     * @param insertedElement the element to be inserted
      * @return an element object
+     *
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ie/ms536451.aspx">MSDN</a>
      */
-    @JsxFunction(@WebBrowser(IE))
-    public Object insertAdjacentElement(final String where, final Object object) {
-        if (object instanceof Node) {
-            final DomNode childNode = ((Node) object).getDomNodeOrDie();
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    public Object insertAdjacentElement(final String where, final Object insertedElement) {
+        if (insertedElement instanceof Node) {
+            final DomNode childNode = ((Node) insertedElement).getDomNodeOrDie();
             final Object[] values = getInsertAdjacentLocation(where);
             final DomNode node = (DomNode) values[0];
             final boolean append = ((Boolean) values[1]).booleanValue();
@@ -1174,19 +1179,42 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             else {
                 node.insertBefore(childNode);
             }
-            return object;
+            return insertedElement;
         }
-        throw Context.reportRuntimeError("Passed object is not an element: " + object);
+        throw Context.reportRuntimeError("Passed object is not an element: " + insertedElement);
+    }
+
+    /**
+     * Inserts the given text into the element at the specified location.
+     * @param where specifies where to insert the text, using one of the following values (case-insensitive):
+     *      beforebegin, afterbegin, beforeend, afterend
+     * @param text the text to insert
+     *
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ie/ms536453.aspx">MSDN</a>
+     */
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    public void insertAdjacentText(final String where, final String text) {
+        final Object[] values = getInsertAdjacentLocation(where);
+        final DomNode node = (DomNode) values[0];
+        final boolean append = ((Boolean) values[1]).booleanValue();
+
+        final DomText domText = new DomText(node.getPage(), text);
+        // add the new nodes
+        if (append) {
+            node.appendChild(domText);
+        }
+        else {
+            node.insertBefore(domText);
+        }
     }
 
     /**
      * Returns where and how to add the new node.
-     * Used by {@link #insertAdjacentHTML(String, String)} and
-     * {@link #insertAdjacentElement(String, Object)}.
-     *
-     * @param where specifies where to insert the element, using one of the following value:
-     *        beforeBegin, afterBegin, beforeEnd, afterEnd
-     *
+     * Used by {@link #insertAdjacentHTML(String, String)},
+     * {@link #insertAdjacentElement(String, Object)} and
+     * {@link #insertAdjacentText(String, String)}.
+     * @param where specifies where to insert the element, using one of the following values (case-insensitive):
+     *        beforebegin, afterbegin, beforeend, afterend
      * @return an array of 1-DomNode:parentNode and 2-Boolean:append
      */
     private Object[] getInsertAdjacentLocation(final String where) {
