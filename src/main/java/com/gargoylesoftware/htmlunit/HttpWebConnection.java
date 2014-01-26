@@ -759,12 +759,10 @@ public class HttpWebConnection implements WebConnection {
     }
 
     /**
-     * Shutdown the connection manager.
+     * Shutdown the connection.
      */
     public synchronized void shutdown() {
         if (httpClientBuilder_ != null) {
-            // TODO: asashour
-            //httpClientBuilder_.getConnectionManager().shutdown();
             httpClientBuilder_ = null;
         }
     }

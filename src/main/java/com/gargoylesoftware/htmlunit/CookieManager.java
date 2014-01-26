@@ -30,8 +30,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.cookie.CookieSpec;
-import org.apache.http.cookie.CookieSpecRegistry;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.cookie.BrowserCompatSpecFactory;
 
 import com.gargoylesoftware.htmlunit.util.Cookie;
 
@@ -59,8 +58,7 @@ public class CookieManager implements Serializable {
     @SuppressWarnings("unchecked")
     private final Set<Cookie> cookies_ = new ListOrderedSet();
 
-    /** The cookies spec registry */
-    private final transient CookieSpecRegistry registry_ = new DefaultHttpClient().getCookieSpecs();
+    private final transient CookieSpec cookieSpec_ = new BrowserCompatSpecFactory().create(null);
 
     /**
      * Creates a new instance.
@@ -116,12 +114,11 @@ public class CookieManager implements Serializable {
         // discard expired cookies
         clearExpired(new Date());
 
-        final CookieSpec spec = registry_.getCookieSpec(HTMLUNIT_COOKIE_POLICY);
         final org.apache.http.cookie.Cookie[] all = Cookie.toHttpClient(cookies_);
         final CookieOrigin cookieOrigin = new CookieOrigin(host, port, path, secure);
         final List<org.apache.http.cookie.Cookie> matches = new ArrayList<org.apache.http.cookie.Cookie>();
         for (final org.apache.http.cookie.Cookie cookie : all) {
-            if (spec.match(cookie, cookieOrigin)) {
+            if (cookieSpec_.match(cookie, cookieOrigin)) {
                 matches.add(cookie);
             }
         }
