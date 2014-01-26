@@ -225,9 +225,7 @@ public class HttpWebConnection implements WebConnection {
      */
     private static HttpHost getHostConfiguration(final WebRequest webRequest) {
         final URL url = webRequest.getUrl();
-        final HttpHost hostConfiguration = new HttpHost(url.getHost(), url.getPort(), url.getProtocol());
-
-        return hostConfiguration;
+        return new HttpHost(url.getHost(), url.getPort(), url.getProtocol());
     }
 
 //    private static void setProxy(final HttpUriRequest httpUriRequest, final WebRequest webRequest) {
@@ -285,6 +283,9 @@ public class HttpWebConnection implements WebConnection {
         // what shouldn't happen here
         URI uri = URIUtils.createURI(url.getProtocol(), url.getHost(), url.getPort(), url.getPath(),
                 escapeQuery(url.getQuery()), null);
+        if (getVirtualHost() != null) {
+            uri = URI.create(getVirtualHost());
+        }
         final HttpRequestBase httpMethod = buildHttpMethod(webRequest.getHttpMethod(), uri);
         setProxy(httpMethod, webRequest);
         if (!(httpMethod instanceof HttpEntityEnclosingRequest)) {
@@ -392,8 +393,6 @@ public class HttpWebConnection implements WebConnection {
         if (webClient_.getCookieManager().isCookiesEnabled()) {
             // Cookies are enabled. Note that it's important that we enable single cookie headers,
             // for compatibility purposes.
-            // TODO: asashour
-//            httpClient.getParams().setParameter(CookieSpecPNames.SINGLE_COOKIE_HEADER, Boolean.TRUE);
             httpClient.setDefaultCookieStore(new HtmlUnitCookieStore(webClient_.getCookieManager()));
         }
         else {
@@ -579,37 +578,6 @@ public class HttpWebConnection implements WebConnection {
      * @return the <tt>HttpClient</tt> that will be used by this WebConnection
      */
     protected HttpClientBuilder createHttpClient() {
-        // TODO: asashour
-//        final HttpParams httpParams = new BasicHttpParams();
-//
-//        HttpClientParams.setRedirecting(httpParams, false);
-//        // Set timeouts
-//        configureTimeout(httpParams, webClient_.getOptions().getTimeout());
-//
-//        final SchemeRegistry schemeRegistry = new SchemeRegistry();
-//        schemeRegistry.register(new Scheme("http", 80, new SocksSocketFactory()));
-//        configureHttpsScheme(schemeRegistry);
-//
-//        final PoolingClientConnectionManager connectionManager =
-//            new PoolingClientConnectionManager(schemeRegistry);
-//        connectionManager.setDefaultMaxPerRoute(6);
-//
-//        final DefaultHttpClient httpClient = new DefaultHttpClient(connectionManager, httpParams);
-//        httpClient.setCookieStore(new HtmlUnitCookieStore2(webClient_.getCookieManager()));
-//
-//        httpClient.setRedirectStrategy(new DefaultRedirectStrategy() {
-//            @Override
-//            public boolean isRedirected(final HttpRequest request, final HttpResponse response,
-//                    final HttpContext context) throws ProtocolException {
-//                return super.isRedirected(request, response, context)
-//                        && response.getFirstHeader("location") != null;
-//            }
-//        });
-//
-//        if (getVirtualHost() != null) {
-//            httpClient.getParams().setParameter(ClientPNames.VIRTUAL_HOST, virtualHost_);
-//        }
-
         final HttpClientBuilder builder = HttpClientBuilder.create();
         builder.setRedirectStrategy(new DefaultRedirectStrategy() {
             @Override
@@ -684,10 +652,6 @@ public class HttpWebConnection implements WebConnection {
      */
     public void setVirtualHost(final String virtualHost) {
         virtualHost_ = virtualHost;
-        if (virtualHost_ != null) {
-            // TODO: asashour
-            //getHttpClient().getParams().setParameter(ClientPNames.VIRTUAL_HOST, virtualHost_);
-        }
     }
 
     /**
