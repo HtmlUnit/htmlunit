@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
-import static com.gargoylesoftware.htmlunit.BrowserVersion.INTERNET_EXPLORER_8;
+import static com.gargoylesoftware.htmlunit.BrowserVersion.INTERNET_EXPLORER_11;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
@@ -1628,7 +1628,7 @@ public class WebClientTest extends SimpleWebTestCase {
     @Test
     public void testUrlEncoding() throws Exception {
         final URL url = new URL("http://host/x+y\u00E9/a\u00E9 b?c \u00E9 d");
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_17, "<html></html>", new ArrayList<String>(), url);
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_24, "<html></html>", new ArrayList<String>(), url);
         final WebRequest wrs = page.getWebResponse().getWebRequest();
         assertEquals("http://host/x+y%C3%A9/a%C3%A9%20b?c%20%E9%20d", wrs.getUrl());
     }
@@ -1641,7 +1641,7 @@ public class WebClientTest extends SimpleWebTestCase {
     @Test
     public void testUrlEncoding2() throws Exception {
         final URL url = new URL("http://host/x+y\u00E9/a\u00E9 b?c \u00E9 d");
-        final HtmlPage page = loadPage(INTERNET_EXPLORER_8, "<html></html>", new ArrayList<String>(), url);
+        final HtmlPage page = loadPage(INTERNET_EXPLORER_11, "<html></html>", new ArrayList<String>(), url);
         final WebRequest wrs = page.getWebResponse().getWebRequest();
         assertEquals("http://host/x+y%C3%A9/a%C3%A9%20b?c%20\u00E9%20d", wrs.getUrl());
     }
