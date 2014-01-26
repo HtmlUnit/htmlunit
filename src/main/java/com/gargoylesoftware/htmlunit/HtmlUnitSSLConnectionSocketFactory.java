@@ -121,7 +121,7 @@ final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocketFactor
             final HttpContext context) throws IOException {
         final HttpHost socksProxy = SocksConnectionSocketFactory.getSocksProxy(context);
         if (socksProxy != null) {
-            final Socket underlying = SocksSocketFactory.createSocketWithSocksProxy(socksProxy);
+            final Socket underlying = SocksConnectionSocketFactory.createSocketWithSocksProxy(socksProxy);
             underlying.setReuseAddress(true);
 
             // TODO: commented out for HttpClient 4.3

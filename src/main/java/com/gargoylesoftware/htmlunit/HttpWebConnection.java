@@ -804,11 +804,6 @@ public class HttpWebConnection implements WebConnection {
             httpClientBuilder_ = null;
         }
     }
-
-    //TODO: should we really do this?
-//    public void clearCredentials() {
-//        httpContext_.removeAttribute(HttpClientContext.TARGET_AUTH_STATE);
-//    }
 }
 
 /**
@@ -971,6 +966,10 @@ final class HtmlUnitHttpClientBuilder {
     private HtmlUnitHttpClientBuilder() {
     }
 
+    /**
+     * Has the exact logic in HttpClientBuilder, but with the ability to configure
+     * <code>socketFactory</code>.
+     */
     public static void configureConnectionManager(final HttpClientBuilder builder) {
         final ConnectionSocketFactory socketFactory = new SocksConnectionSocketFactory();
 
