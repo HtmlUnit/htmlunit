@@ -78,6 +78,10 @@ svn co http://svn.code.sf.net/p/htmlunit/code/trunk/htmlunit/ .]]></source>
             <p>
                 Usually, you need to get the JARs for your IDE. You can do that by something like:
             </p>
+            <source>Eclipse: right click on the project -> Configure -> Convert to Maven Project</source>
+            <p>
+                , alternatively:
+            </p>
             <source>mvn eclipse:eclipse</source>
             <p>
                 or
