@@ -214,7 +214,7 @@ public class CodeStyleTest {
      */
     private void svnProperties(final File file, final String relativePath) {
         if (!isSvnPropertiesDefined(file)) {
-            //addFailure("'svn:eol-style' and 'svn:keywords' properties are not defined for " + relativePath);
+            addFailure("'svn:eol-style' and 'svn:keywords' properties are not defined for " + relativePath);
         }
     }
 
