@@ -24,6 +24,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 
+import org.apache.http.localserver.LocalTestServer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,7 +40,7 @@ import org.junit.runner.RunWith;
 @RunWith(BrowserRunner.class)
 public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends SimpleWebTestCase {
 
-    private LocalTestServerWithClientCerts localServer_;
+    private LocalTestServer localServer_;
 
     /**
      * @throws Exception if an error occurs
@@ -62,7 +63,7 @@ public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends Simpl
         final SSLContext serverSSLContext = SSLContext.getInstance("TLS");
         serverSSLContext.init(keyManagers, trustManagers, null);
 
-        localServer_ = new LocalTestServerWithClientCerts(serverSSLContext);
+        localServer_ = new LocalTestServer(serverSSLContext);
         localServer_.registerDefaultHandlers();
 
         localServer_.start();
