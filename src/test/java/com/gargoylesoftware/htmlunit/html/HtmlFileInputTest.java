@@ -45,12 +45,12 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -355,7 +355,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
      */
     @Test
     @Browsers(NONE)
-    public void testUploadFileWithNonASCIIName_HttpClient() throws Exception {
+    public void uploadFileWithNonASCIIName_HttpClient() throws Exception {
         final String filename = "\u6A94\u6848\uD30C\uC77C\u30D5\u30A1\u30A4\u30EB\u0645\u0644\u0641.txt";
         final String path = getClass().getClassLoader().getResource(filename).toExternalForm();
         final File file = new File(new URI(path));
@@ -367,14 +367,15 @@ public class HtmlFileInputTest extends WebServerTestCase {
         startWebServer("./", null, servlets);
         final HttpPost filePost = new HttpPost("http://localhost:" + PORT + "/upload2");
 
-        final MultipartEntity reqEntity =
-            new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE, null, Charset.forName("UTF-8"));
-        reqEntity.addPart("myInput", new FileBody(file, "application/octet-stream"));
+        final MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+        builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE)
+            .setCharset(Charset.forName("UTF-8"));
+        builder.addPart("myInput", new FileBody(file, ContentType.APPLICATION_OCTET_STREAM));
 
-        filePost.setEntity(reqEntity);
+        filePost.setEntity(builder.build());
 
-        final HttpClient client = new DefaultHttpClient();
-        final HttpResponse httpResponse = client.execute(filePost);
+        final HttpClientBuilder clientBuilder = HttpClientBuilder.create();
+        final HttpResponse httpResponse = clientBuilder.build().execute(filePost);
 
         InputStream content = null;
         try {
