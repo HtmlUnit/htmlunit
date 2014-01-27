@@ -49,7 +49,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
     @Browsers({ CHROME, FF, IE11 })
     @Alerts(DEFAULT = { "[object CSSImportRule]", "§§URL§§second/",
                 "[object MediaList]", "0", "[object CSSStyleSheet]" },
-            IE11 = { "[object CSSImportRule]", "$$URL§§second/",
+            IE11 = { "[object CSSImportRule]", "§§URL§§second/",
                 "all", "0", "[object CSSStyleSheet]" })
     // IE8 does not support CSSStyleSheet.cssRules
     public void getImportFromCssRulesCollection_absolute() throws Exception {
