@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ERRORHANDLER_NOT_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_IGNORE_PORT_FOR_SAME_ORIGIN;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_NO_CROSS_ORIGIN_TO_ABOUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYSTATECANGE_SYNC_REQUESTS_COMPLETED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYSTATECANGE_SYNC_REQUESTS_NOT_TRIGGERED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYSTATECHANGE_WITH_EVENT_PARAM;
@@ -495,6 +496,9 @@ public class XMLHttpRequest extends SimpleScriptable {
         try {
             final URL fullUrl = containingPage_.getFullyQualifiedUrl(url);
             final URL originUrl = containingPage_.getUrl();
+            if (!isAllowCrossDomainsFor(originUrl, fullUrl)) {
+                throw Context.reportRuntimeError("Access to restricted URI denied");
+            }
 
             final WebRequest request = new WebRequest(fullUrl, getBrowserVersion().getXmlHttpRequestAcceptHeader());
             request.setCharset("UTF-8");
@@ -534,6 +538,16 @@ public class XMLHttpRequest extends SimpleScriptable {
         async_ = async;
         // Change the state!
         setState(STATE_OPENED, null);
+    }
+
+    private boolean isAllowCrossDomainsFor(final URL originUrl, final URL newUrl) {
+        final BrowserVersion browser = getBrowserVersion();
+        if (browser.hasFeature(XHR_NO_CROSS_ORIGIN_TO_ABOUT)
+                && "about".equals(newUrl.getProtocol())) {
+            return false;
+        }
+
+        return true;
     }
 
     private boolean isSameOrigin(final URL originUrl, final URL newUrl) {

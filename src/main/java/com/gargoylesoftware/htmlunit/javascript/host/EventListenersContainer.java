@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_40;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_HANDLER_UNDEFINED_AS_NULL;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -133,8 +135,15 @@ public class EventListenersContainer implements Serializable {
      * @param value the new property
      */
     public void setEventHandlerProp(final String eventName, final Object value) {
+        Object handler = value;
+        if (jsNode_.getWindow().getWebWindow().getWebClient().getBrowserVersion()
+            .hasFeature(JS_EVENT_HANDLER_UNDEFINED_AS_NULL)
+            && Undefined.instance == value) {
+            handler = null;
+        }
+
         final Handlers handlers = getHandlersOrCreateIt(eventName);
-        handlers.handler_ = value;
+        handlers.handler_ = handler;
     }
 
     /**
@@ -147,7 +156,6 @@ public class EventListenersContainer implements Serializable {
         if (handlers == null) {
             return null;
         }
-        // TODO: handle differences between IE and FF: null vs undefined
         return handlers.handler_;
     }
 

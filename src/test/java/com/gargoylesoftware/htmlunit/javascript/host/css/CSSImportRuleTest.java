@@ -14,7 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import java.net.URL;
 
@@ -44,12 +46,26 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(FF)
-    public void getImportFromCssRulesCollection() throws Exception {
-        // with absolute URL
+    @Browsers({ CHROME, FF, IE11 })
+    @Alerts(DEFAULT = { "[object CSSImportRule]", "§§URL§§second/",
+                "[object MediaList]", "0", "[object CSSStyleSheet]" },
+            IE11 = { "[object CSSImportRule]", "$$URL§§second/",
+                "all", "0", "[object CSSStyleSheet]" })
+    // IE8 does not support CSSStyleSheet.cssRules
+    public void getImportFromCssRulesCollection_absolute() throws Exception {
         getImportFromCssRulesCollection(getDefaultUrl(), URL_SECOND.toExternalForm(), URL_SECOND);
+    }
 
-        // with relative URL
+    /**
+     * Regression test for bug 2658249.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers({ CHROME, FF, IE11 })
+    @Alerts({ "[object CSSImportRule]", "foo.css",
+        "all", "0", "[object CSSStyleSheet]" })
+    // IE8 does not support CSSStyleSheet.cssRules
+    public void getImportFromCssRulesCollection_relative() throws Exception {
         final URL urlPage = new URL(URL_FIRST, "/dir1/dir2/foo.html");
         final URL urlCss = new URL(URL_FIRST, "/dir1/dir2/foo.css");
         getImportFromCssRulesCollection(urlPage, "foo.css", urlCss);

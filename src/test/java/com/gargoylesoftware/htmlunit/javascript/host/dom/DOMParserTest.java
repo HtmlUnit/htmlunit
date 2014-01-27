@@ -24,6 +24,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -54,6 +55,150 @@ public class DOMParserTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({ CHROME, FF, IE11 })
+    @Alerts("[object HTMLDocument]")
+    @NotYetImplemented({ CHROME, FF, IE11 })
+    public void parseFromString_text_html() throws Exception {
+        final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text='<html></html>';\n"
+            + "    var parser = new DOMParser();\n"
+            + "    try {\n"
+            + "      var doc = parser.parseFromString(text, 'text/html');\n"
+            + "      alert(doc);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(content);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({ CHROME, FF, IE11 })
+    @Alerts(DEFAULT = "[object XMLDocument]",
+            CHROME = "[object Document]")
+    public void parseFromString_text_xml() throws Exception {
+        final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text='<note/>';\n"
+            + "    var parser = new DOMParser();\n"
+            + "    try {\n"
+            + "      var doc = parser.parseFromString(text, 'text/xml');\n"
+            + "      alert(doc);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(content);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({ CHROME, FF, IE11 })
+    @Alerts(DEFAULT = "[object XMLDocument]",
+            CHROME = "[object Document]")
+    public void parseFromString_application_xml() throws Exception {
+        final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text='<note/>';\n"
+            + "    var parser = new DOMParser();\n"
+            + "    try {\n"
+            + "      var doc = parser.parseFromString(text, 'application/xml');\n"
+            + "      alert(doc);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(content);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({ CHROME, FF, IE11 })
+    @Alerts(DEFAULT = "[object XMLDocument]",
+            CHROME = "[object Document]")
+    public void parseFromString_application_xhtmlXml() throws Exception {
+        final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text='<html/>';\n"
+            + "    var parser = new DOMParser();\n"
+            + "    try {\n"
+            + "      var doc = parser.parseFromString(text, 'application/xhtml+xml');\n"
+            + "      alert(doc);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(content);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({ CHROME, FF, IE11 })
+    @Alerts(DEFAULT = "[object SVGDocument]",
+            IE11 = "[object XMLDocument]")
+    @NotYetImplemented({ CHROME, FF })
+    public void parseFromString_application_svgXml() throws Exception {
+        final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text='<svg  xmlns=\"http://www.w3.org/2000/svg\"/>';\n"
+            + "    var parser = new DOMParser();\n"
+            + "    try {\n"
+            + "      var doc = parser.parseFromString(text, 'image/svg+xml');\n"
+            + "      alert(doc);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(content);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({ CHROME, FF, IE11 })
+    @Alerts("exception")
+    public void parseFromString_unknownType() throws Exception {
+        final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text='<test/>';\n"
+            + "    var parser = new DOMParser();\n"
+            + "    try {\n"
+            + "      var doc = parser.parseFromString(text, 'unknown/type');\n"
+            + "      alert(doc);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(content);
     }
 
     /**
@@ -142,8 +287,7 @@ public class DOMParserTest extends WebDriverTestCase {
      */
     @Test
     @Browsers({ CHROME, FF, IE11 })
-    @Alerts(DEFAULT = "exception",
-            CHROME = "")
+    @Alerts("exception")
     public void parseFromString_missingMimeType() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

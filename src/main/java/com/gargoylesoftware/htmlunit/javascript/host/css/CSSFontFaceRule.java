@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONTFACERULE_CSSTEXT_CRLF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -66,11 +67,18 @@ public class CSSFontFaceRule extends CSSRule {
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public String getCssText() {
         String cssText = super.getCssText();
-        cssText = StringUtils.replace(cssText, "{", "{\n  ");
-        cssText = StringUtils.replace(cssText, "}", ";\n}");
-        cssText = StringUtils.replace(cssText, "; ", ";\n  ");
-        cssText = REPLACEMENT_1.matcher(cssText).replaceFirst("font-family: \"$1\";");
-        cssText = REPLACEMENT_2.matcher(cssText).replaceFirst("src: url(\"$1\");");
+        if (getBrowserVersion().hasFeature(CSS_FONTFACERULE_CSSTEXT_CRLF)) {
+            cssText = StringUtils.replace(cssText, "{", "{\r\n\t");
+            cssText = StringUtils.replace(cssText, "}", ";\r\n}\r\n");
+            cssText = StringUtils.replace(cssText, "; ", ";\r\n\t");
+        }
+        else {
+            cssText = StringUtils.replace(cssText, "{", "{\n  ");
+            cssText = StringUtils.replace(cssText, "}", ";\n}");
+            cssText = StringUtils.replace(cssText, "; ", ";\n  ");
+            cssText = REPLACEMENT_1.matcher(cssText).replaceFirst("font-family: \"$1\";");
+            cssText = REPLACEMENT_2.matcher(cssText).replaceFirst("src: url(\"$1\");");
+        }
         return cssText;
     }
 }

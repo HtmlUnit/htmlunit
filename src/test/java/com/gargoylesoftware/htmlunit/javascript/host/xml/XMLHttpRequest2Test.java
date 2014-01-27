@@ -37,6 +37,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -424,8 +425,9 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "hello", "in timeout" },
-            IE11 = { "in timeout", "hello" })
+    @Alerts({ "hello", "in timeout" })
+    @BuggyWebDriver(IE11)
+    // IEDriver catches "in timeout", "hello" but real IE11 gets the correct order
     public void xhrCallbackBeforeTimeout() throws Exception {
         final String html = "<html><head><script>\n"
             + "function wait() {\n"

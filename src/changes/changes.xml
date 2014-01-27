@@ -9,6 +9,21 @@
     <body>
         <release version="2.14" date="???" description="FF24, Bugfixes, initial work on IE11">
             <action type="fix" dev="rbri" due-to="Frank Danek">
+                JavaScript: CORS handling is different in IE11 for the 'about:' protocol.
+            </action>
+            <action type="fix" dev="rbri" due-to="Frank Danek">
+                JavaScript: Window many property fixes for IE11 and Chrome.
+            </action>
+            <action type="fix" dev="rbri" due-to="Frank Danek">
+                JavaScript: CSSFontFace rule cssText property fixed for IE11.
+            </action>
+            <action type="fix" dev="rbri" due-to="Frank Danek">
+                JavaScript: style zIndex is of type integer in IE11.
+            </action>
+            <action type="fix" dev="rbri" due-to="Frank Danek">
+                JavaScript: DOMParser.parseFromString() type checking fixed.
+            </action>
+            <action type="fix" dev="rbri" due-to="Frank Danek">
                 JavaScript: Function HTMLelement.insertAdjacentText added (IE, Chrome).
             </action>
             <action type="update" dev="asashour">

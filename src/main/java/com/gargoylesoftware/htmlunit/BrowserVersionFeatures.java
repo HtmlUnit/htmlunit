@@ -71,6 +71,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     CSS_DISPLAY_DEFAULT,
 
+    /** <code>CSSFontFaceRule.cssText</code> uses \r\n to break lines. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    CSS_FONTFACERULE_CSSTEXT_CRLF,
+
     /** Default is 'normal'. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     CSS_FONT_STRECH_DEFAULT_NORMAL,
@@ -121,6 +125,10 @@ public enum BrowserVersionFeatures {
     /** Default is 'none'. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     CSS_TEXT_SHADOW_DEFAULT_NONE,
+
+    /** zIndex is of type Integer. Other values are ignored (''). */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    CSS_ZINDEX_TYPE_INTEGER,
 
     /** IE uses the type Number for the zIndex Values (instead of String). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
@@ -225,6 +233,10 @@ public enum BrowserVersionFeatures {
     /** Triggers "onload" event if an iframe was created by javascript and added to the page. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT,
+
+    /** Setting the 'onload' event handler to <code>undefined</code> throws an error. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    EVENT_ONLOAD_UNDEFINED_THROWS_ERROR,
 
     /** Does not trigger "onmousedown" event handler for the select options. */
     @BrowserFeature({ @WebBrowser(IE) })
@@ -679,7 +691,7 @@ public enum BrowserVersionFeatures {
     JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NODE,
 
     /** Indicates that the class name of "arguments" object is "Object". */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_ARGUMENTS_IS_OBJECT,
 
     /** Indicates that "someFunction.arguments" is a read-only view of the function's argument. */
@@ -968,11 +980,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     JS_EVENT_DISTINGUISH_PRINTABLE_KEY,
 
-    /** Javascript event handlers declared as property on a node
-     * don't receive the event as argument.
-     */
+    /** Javascript event handlers declared as property on a node don't receive the event as argument. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT,
+
+    /** If an event handler has the value <code>undefined</code> <code>null</code> is returned instead. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    JS_EVENT_HANDLER_UNDEFINED_AS_NULL,
 
     /** Javascript event.keyCode returns undefined instead of zero if the keyCode is not set. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
@@ -1198,9 +1212,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_SCRIPT_ALWAYS_REEXECUTE_ON_SET_TEXT,
 
-    /** Always execute the script if IE;
-     *  in FF, only execute if the old "src" attribute was undefined
-     *  and there was no inline code.
+    /**
+     * Always execute the script if IE;
+     * in FF, only execute if the old "src" attribute was undefined
+     * and there was no inline code.
      */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_SCRIPT_ALWAYS_REEXECUTE_ON_SRC_CHANGE,
@@ -1472,8 +1487,8 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     PROTOCOL_DATA,
 
-    /** Indicates .querySelectorAll() is not supported in quirks mode. */
-    @BrowserFeature(@WebBrowser(value = IE, minVersion = 8, maxVersion = 9))
+    /** Indicates <code>.querySelectorAll()</code> and <code>.querySelector()</code> is not supported in quirks mode. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 8))
     QUERYSELECTORALL_NOT_IN_QUIRKS,
 
     /** Document mode is always 5 in quirks mode ignoring the browser version. */
@@ -1498,10 +1513,9 @@ public enum BrowserVersionFeatures {
     /**
      * Indicates that a read only JS property can potentially be set.
      * If supported, {@link net.sourceforge.htmlunit.corejs.javascript.ScriptableObject}.isReadOnlySettable()
-     * will be checked,
-     * if not supported, an exception will be thrown.
+     * will be checked, if not supported, an exception will be thrown.
      */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     SET_READONLY_PROPERTIES,
 
     /** Indicates that string.contains() is supported. */
@@ -1599,9 +1613,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     XHR_IGNORE_PORT_FOR_SAME_ORIGIN,
 
-    /** Indicates if a request to a about URL is allowed. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
-    XHR_IGNORE_SAME_ORIGIN_TO_ABOUT,
+    /** A cross origin request to about:blank is not allowed. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    XHR_NO_CROSS_ORIGIN_TO_ABOUT,
 
     /** Indicates that the onreadystatechange handler is triggered for sync requests for COMPLETED (4). */
     @BrowserFeature({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME),

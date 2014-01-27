@@ -34,6 +34,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
  * @author Ahmed Ashour
  * @author Frank Danek
  *
+ * @see <a href="http://www.w3.org/TR/DOM-Parsing/">W3C Spec</a>
+ * @see <a href="http://domparsing.spec.whatwg.org/">WhatWG Spec</a>
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMParser">Mozilla Developer Network</a>
+ * @see <a href="http://msdn.microsoft.com/en-us/library/ff975060.aspx">MSDN</a>
  * @see <a href="http://www.xulplanet.com/references/objref/DOMParser.html">XUL Planet</a>
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
@@ -48,17 +52,23 @@ public class DOMParser extends SimpleScriptable {
     }
 
     /**
-     * The string passed in is parsed into a DOM document.
-     * @param str the UTF16 string to be parsed
-     * @param contentType the content type of the string -
-     *        either <tt>text/xml</tt>, <tt>application/xml</tt>, or <tt>application/xhtml+xml</tt>. Must not be NULL.
+     * Parses the given Unicode string into a DOM document.
+     * @param str the Unicode string to be parsed
+     * @param type the MIME type of the string -
+     *        <code>text/html</code>, <code>text/xml</code>, <code>application/xml</code>,
+     *        <code>application/xhtml+xml</code>, <code>image/svg+xml</code>. Must not be <code>null</code>.
      * @return the generated document
      */
     @JsxFunction
-    public XMLDocument parseFromString(final String str, final Object contentType) {
-        if (Undefined.instance == contentType) {
-            throw Context.reportRuntimeError("Missing 'contentType' parameter");
+    public XMLDocument parseFromString(final String str, final Object type) {
+        if (type == null || Undefined.instance == type) {
+            throw Context.reportRuntimeError("Missing 'type' parameter");
         }
+        if (!"text/html".equals(type) && !"text/xml".equals(type) && !"application/xml".equals(type)
+            && !"application/xhtml+xml".equals(type) && !"image/svg+xml".equals(type)) {
+            throw Context.reportRuntimeError("Invalid 'type' parameter: " + type);
+        }
+
         final XMLDocument document = new XMLDocument();
         document.setParentScope(getParentScope());
         document.setPrototype(getPrototype(XMLDocument.class));

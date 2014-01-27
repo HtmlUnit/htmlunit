@@ -57,6 +57,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequestTest.Stre
  * @author Ahmed Ashour
  * @author Stuart Begg
  * @author Sudhan Moghe
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class XMLHttpRequest3Test extends WebServerTestCase {
@@ -123,9 +124,9 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "0", "1", "1", "2", "4", MSG_NO_CONTENT },
-            FF = { "0", "1", "2", "4", MSG_NO_CONTENT, MSG_PROCESSING_ERROR },
-            FF17 = { "0", "1", "1", "2", "4", MSG_NO_CONTENT, MSG_PROCESSING_ERROR })
+    @Alerts(DEFAULT = { "0", "1", "1", "2", "4", MSG_NO_CONTENT, MSG_PROCESSING_ERROR },
+            IE8 = { "0", "1", "1", "2", "4", MSG_NO_CONTENT },
+            FF24 = { "0", "1", "2", "4", MSG_NO_CONTENT, MSG_PROCESSING_ERROR })
     public void testAsyncUseWithNetworkConnectionFailure() throws Exception {
         final String html =
               "<html>\n"

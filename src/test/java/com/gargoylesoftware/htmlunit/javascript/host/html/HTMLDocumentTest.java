@@ -521,31 +521,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "null",
-            IE8 = "[object]")
-    public void getElementById_caseSensitivity() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "    <script>\n"
-            + "    function test() {\n"
-            + "      alert(document.getElementById('MYDIV'));\n"
-            + "    }\n"
-            + "    </script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "<div id='myDiv'>\n"
-            + "  <div></div>\n"
-            + "</div>\n"
-            + "</body>\n"
-            + "</html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
      * @throws Exception if an error occurs
      */
     @Test
@@ -823,21 +798,219 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "2", "0" },
-            FF17 = { "2", "2" },
-            IE8 = { "0", "0" })
-    public void getElementsByName() throws Exception {
+    @Alerts({ "0", "0" })
+    public void getElementsByName_notFound() throws Exception {
         final String html
             = "<html><head><title>Test</title><script>\n"
             + "function doTest() {\n"
-            + "    alert(document.getElementsByName('').length);\n"
             + "    alert(document.getElementsByName(null).length);\n"
+            + "    alert(document.getElementsByName('foo').length);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
-            + "<div name=''></div>\n"
-            + "<div name=''></div>\n"
-            + "<div></div>\n"
-            + "<div></div>\n"
+            + "  <div name='test'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "2", "0" },
+            FF17 = { "2", "2" },
+            IE8 = { "0", "0" })
+    public void getElementsByName_emptyName() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementsByName('').length);\n"
+            + "    alert(document.getElementsByName(null).length);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div name=''></div>\n"
+            + "  <div name=''></div>\n"
+            + "  <div></div>\n"
+            + "  <div></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "1", "2", "1", "2", "1", "2", "1", "2", "1", "2", "1", "2" },
+            IE8 = { "1", "2", "1", "2", "1", "2", "1", "2", "1", "2", "0", "0" })
+    @NotYetImplemented(IE8)
+    public void getElementsByName_elements() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      alert(document.getElementsByName('form1').length);\n"
+            + "    } catch (e) { alert('exception:f1') }\n"
+            + "    try {\n"
+            + "      alert(document.getElementsByName('form2').length);\n"
+            + "    } catch (e) { alert('exception:f2') }\n"
+            + "    try {\n"
+            + "      alert(document.getElementsByName('frame1').length);\n"
+            + "    } catch (e) { alert('exception:f1') }\n"
+            + "    try {\n"
+            + "      alert(document.getElementsByName('frame2').length);\n"
+            + "    } catch (e) { alert('exception:f2') }\n"
+            + "    try {\n"
+            + "      alert(document.getElementsByName('input1').length);\n"
+            + "    } catch (e) { alert('exception:i1') }\n"
+            + "    try {\n"
+            + "      alert(document.getElementsByName('input2').length);\n"
+            + "    } catch (e) { alert('exception:i2') }\n"
+            + "    try {\n"
+            + "      alert(document.getElementsByName('anchor1').length);\n"
+            + "    } catch (e) { alert('exception:a1') }\n"
+            + "    try {\n"
+            + "      alert(document.getElementsByName('anchor2').length);\n"
+            + "    } catch (e) { alert('exception:a2') }\n"
+            + "    try {\n"
+            + "      alert(document.getElementsByName('image1').length);\n"
+            + "    } catch (e) { alert('exception:i1') }\n"
+            + "    try {\n"
+            + "      alert(document.getElementsByName('image2').length);\n"
+            + "    } catch (e) { alert('exception:i2') }\n"
+            + "    try {\n"
+            + "      alert(document.getElementsByName('element1').length);\n"
+            + "    } catch (e) { alert('exception:e1') }\n"
+            + "    try {\n"
+            + "      alert(document.getElementsByName('element2').length);\n"
+            + "    } catch (e) { alert('exception:e2') }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <form name='form1'></form>\n"
+            + "  <form name='form2'></form>\n"
+            + "  <form name='form2'></form>\n"
+            + "  <iframe name='frame1'></iframe>\n"
+            + "  <iframe name='frame2'></iframe>\n"
+            + "  <iframe name='frame2'></iframe>\n"
+            + "  <input type='text' name='input1' value='1'/>\n"
+            + "  <input type='text' name='input2' value='2'/>\n"
+            + "  <input type='text' name='input2' value='3'/>\n"
+            + "  <a name='anchor1'></a>\n"
+            + "  <a name='anchor2'></a>\n"
+            + "  <a name='anchor2'></a>\n"
+            + "  <img name='image1'>\n"
+            + "  <img name='image2'>\n"
+            + "  <img name='image2'>\n"
+            + "  <div name='element1'></table>\n"
+            + "  <div name='element2'></div>\n"
+            + "  <div name='element2'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "1", "2" })
+    public void getElementsByName_frame() throws Exception {
+        final String html = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\""
+            + "\"http://www.w3.org/TR/html4/frameset.dtd\">\n"
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      alert(document.getElementsByName('frame1').length);\n"
+            + "    } catch (e) { alert('exception:f1') }\n"
+            + "    try {\n"
+            + "      alert(document.getElementsByName('frame2').length);\n"
+            + "    } catch (e) { alert('exception:f2') }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<frameset onload='test()'>\n"
+            + "  <frame src='" + URL_SECOND + "' name='frame1'>\n"
+            + "  <frame src='" + URL_SECOND + "' name='frame2'>\n"
+            + "  <frame src='" + URL_SECOND + "' name='frame2'>\n"
+            + "</frameset>"
+            + "</html>";
+
+        final String frame = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><head><title>frame</title></head><body></body></html>";
+        getMockWebConnection().setDefaultResponse(frame);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "10" },
+            IE8 = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "exception:setAttributeNS", "9" })
+    @NotYetImplemented
+    // TODO [IE11] HTMLCollection problem
+    public void getElementsByName_changedAfterGet() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var collection = document.getElementsByName('image1');\n"
+            + "    alert(collection.length);\n"
+
+            + "    var newImage1 = document.createElement('img');\n"
+            + "    newImage1.name = 'image1';\n"
+            + "    document.getElementById('outer1').appendChild(newImage1);\n"
+            + "    alert(collection.length);\n"
+
+            + "    var newImage2 = document.createElement('img');\n"
+            + "    newImage2.name = 'image1';\n"
+            + "    document.getElementById('outer2').insertBefore(newImage2, null);\n"
+            + "    alert(collection.length);\n"
+
+            + "    var newImage3 = document.createElement('img');\n"
+            + "    newImage3.name = 'image1';\n"
+            + "    document.getElementById('outer3').replaceChild(newImage3, document.getElementById('inner3'));\n"
+            + "    alert(collection.length);\n"
+
+            + "    document.getElementById('outer4').outerHTML = '<img name=\"image1\">';\n"
+            + "    alert(collection.length);\n"
+
+            + "    document.getElementById('outer5').innerHTML = '<img name=\"image1\">';\n"
+            + "    alert(collection.length);\n"
+
+            + "    document.getElementById('outer6').insertAdjacentHTML('beforeend', '<img name=\"image1\">');\n"
+            + "    alert(collection.length);\n"
+
+            + "    document.getElementById('image2').name = 'image1';\n"
+            + "    alert(collection.length);\n"
+
+            + "    document.getElementById('image3').setAttribute('name', 'image1');\n"
+            + "    alert(collection.length);\n"
+
+            + "    var newAttr = document.createAttribute('name');\n"
+            + "    newAttr.nodeValue = 'image1';\n"
+            + "    document.getElementById('image4').setAttributeNode(newAttr);\n"
+            + "    alert(collection.length);\n"
+
+            + "    try {\n"
+            + "      document.getElementById('image5').setAttributeNS(null, 'name', 'image1');\n"
+            + "      alert(collection.length);\n"
+            + "    } catch (e) { alert('exception:setAttributeNS') }\n"
+
+            + "    document.getElementById('outer1').removeChild(newImage1);\n"
+            + "    alert(collection.length);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <img name='image1'>\n"
+            + "  <div id='outer1'></div>\n"
+            + "  <div id='outer2'></div>\n"
+            + "  <div id='outer3'><div id='inner3'></div></div>\n"
+            + "  <div id='outer4'></div>\n"
+            + "  <div id='outer5'></div>\n"
+            + "  <div id='outer6'></div>\n"
+            + "  <img id='image2'>\n"
+            + "  <img id='image3'>\n"
+            + "  <img id='image4'>\n"
+            + "  <img id='image5'>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
@@ -1385,6 +1558,31 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "null",
+            IE8 = "[object]")
+    public void getElementById_caseSensitivity() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "    <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.getElementById('MYDIV'));\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<div id='myDiv'>\n"
+            + "  <div></div>\n"
+            + "</div>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "[object HTMLHeadElement]",
             IE8 = "undefined")
     public void head() throws Exception {
@@ -1827,7 +2025,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "BackCompat", "function", "function" },
             IE = { "8", "CSS1Compat", "object", "object" })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void documentMode_metaIE8() throws Exception {
         documentMode("", "  <meta http-equiv='X-UA-Compatible' content='IE=8'>\n");
     }
@@ -1838,7 +2036,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "CSS1Compat", "function", "function" },
             IE = { "8", "CSS1Compat", "object", "object" })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void documentMode_metaIE8_doctypeStrict() throws Exception {
         documentMode(HtmlPageTest.STANDARDS_MODE_PREFIX_, "  <meta http-equiv='X-UA-Compatible' content='IE=8'>\n");
     }

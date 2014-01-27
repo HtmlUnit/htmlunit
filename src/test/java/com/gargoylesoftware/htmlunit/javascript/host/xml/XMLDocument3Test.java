@@ -14,7 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import java.util.ArrayList;
+import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION;
+import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION;
+import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.callLoadXMLDocumentFromFile;
+import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.callLoadXMLDocumentFromString;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -23,10 +27,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -35,9 +36,10 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
-public class XMLDocument3Test extends SimpleWebTestCase {
+public class XMLDocument3Test extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -47,9 +49,7 @@ public class XMLDocument3Test extends SimpleWebTestCase {
     public void load_Encoding() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
-            + "    doc.async = false;\n"
-            + "    doc.load('" + URL_SECOND + "');\n"
+            + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "    var value = doc.documentElement.firstChild.nodeValue;\n"
             + "    for (var i=0; i < value.length; i++ ) {\n"
             + "      alert(value.charCodeAt(i));\n"
@@ -61,23 +61,18 @@ public class XMLDocument3Test extends SimpleWebTestCase {
             + "    else if (window.ActiveXObject)\n"
             + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
             + "  }\n"
+            + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         final String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
             + "<something>\u064A\u0627 \u0644\u064A\u064A\u064A\u064A\u064A\u064A\u0644</something>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = getWebClient();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
+        getMockWebConnection().setResponse(URL_FIRST, html);
         final List<NameValuePair> emptyList = Collections.emptyList();
-        conn.setResponse(URL_SECOND, xml.getBytes("UTF-8"), 200, "OK", "text/xml", emptyList);
-        client.setWebConnection(conn);
+        getMockWebConnection().setResponse(URL_SECOND, xml.getBytes("UTF-8"), 200, "OK", "text/xml", emptyList);
 
-        client.getPage(URL_FIRST);
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        loadPageWithAlerts2(URL_FIRST);
     }
 
     /**
@@ -91,33 +86,20 @@ public class XMLDocument3Test extends SimpleWebTestCase {
             + "<script>\n"
             + "  function test(encoding) {\n"
             + "    var text=\"<?xml version='1.0' encoding='\" + encoding + \"'?><body>\u00e6</body>\";\n"
-            + "    if (window.ActiveXObject) {\n"
-            + "      var doc=new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "      doc.async=false;\n"
-            + "      doc.loadXML(text);\n"
-            + "    } else {\n"
-            + "      var parser=new DOMParser();\n"
-            + "      var doc=parser.parseFromString(text,'text/xml');\n"
-            + "    }\n"
+            + "    var doc=" + callLoadXMLDocumentFromString("text") + ";\n"
             + "    var value = doc.documentElement.firstChild.nodeValue;\n"
             + "    for (var i=0; i < value.length; i++ ) {\n"
             + "      alert(value.charCodeAt(i));\n"
             + "    }\n"
             + "  }\n"
+            + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
             + "</script></head><body onload='test(\"ISO-8859-1\");test(\"UTF8\");'>\n"
             + "</body></html>";
 
-        final WebClient client = getWebClientWithMockWebConnection();
-        final List<String> collectedAlerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final MockWebConnection webConnection = getMockWebConnection();
-        webConnection.setResponse(URL_FIRST, html, "text/html; charset=ISO-8859-1", "ISO-8859-1");
-
-        client.getPage(URL_FIRST);
+        getMockWebConnection().setResponse(URL_FIRST, html, "text/html; charset=ISO-8859-1", "ISO-8859-1");
 
         // javascript ignores the encoding defined in the xml, the xml is parsed as string
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        loadPageWithAlerts2(URL_FIRST);
     }
 
     /**
@@ -131,33 +113,20 @@ public class XMLDocument3Test extends SimpleWebTestCase {
             + "<script>\n"
             + "  function test(encoding) {\n"
             + "    var text=\"<?xml version='1.0' encoding='\" + encoding + \"'?><body>\u0414</body>\";\n"
-            + "    if (window.ActiveXObject) {\n"
-            + "      var doc=new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "      doc.async=false;\n"
-            + "      doc.loadXML(text);\n"
-            + "    } else {\n"
-            + "      var parser=new DOMParser();\n"
-            + "      var doc=parser.parseFromString(text,'text/xml');\n"
-            + "    }\n"
+            + "    var doc=" + callLoadXMLDocumentFromString("text") + ";\n"
             + "    var value = doc.documentElement.firstChild.nodeValue;\n"
             + "    for (var i=0; i < value.length; i++ ) {\n"
             + "      alert(value.charCodeAt(i));\n"
             + "    }\n"
             + "  }\n"
+            + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
             + "</script></head><body onload='test(\"UTF-8\");test(\"ISO-8859-1\");'>\n"
             + "</body></html>";
 
-        final WebClient client = getWebClientWithMockWebConnection();
-        final List<String> collectedAlerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final MockWebConnection webConnection = getMockWebConnection();
-        webConnection.setResponse(URL_FIRST, html, "text/html; charset=UTF-8", "UTF-8");
-
-        client.getPage(URL_FIRST);
+        getMockWebConnection().setResponse(URL_FIRST, html, "text/html; charset=UTF-8", "UTF-8");
 
         // javascript ignores the encoding defined in the xml, the xml is parsed as string
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        loadPageWithAlerts2(URL_FIRST);
     }
 
 }

@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
@@ -899,7 +900,9 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "null", "function", "null" })
+    @Alerts(DEFAULT = { "null", "function", "null", "null" },
+            IE8 = { "null", "function", "null", "exception" })
+    @NotYetImplemented(IE8)
     public void onbeforeunload() throws Exception {
         final String html =
             "<html><head><title>First</title>\n"
@@ -911,6 +914,10 @@ public class Window2Test extends WebDriverTestCase {
             + "  alert(typeof window.onbeforeunload);\n"
             + "  window.onbeforeunload = null;\n"
             + "  alert(window.onbeforeunload);\n"
+            + "  try {\n"
+            + "    window.onbeforeunload = undefined;\n"
+            + "    alert(window.onbeforeunload);\n"
+            + "  } catch(e) { alert('exception'); }\n"
             + "  \n"
             + "}\n"
             + "</script>\n"

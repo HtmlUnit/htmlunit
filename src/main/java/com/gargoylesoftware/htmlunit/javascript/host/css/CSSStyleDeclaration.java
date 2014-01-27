@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_IMAGE_URL
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_PIXEL_VALUES_INT_ONLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SET_NULL_THROWS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SUPPORTS_BEHAVIOR_PROPERTY;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TYPE_INTEGER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TYPE_NUMBER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_UNDEFINED_FORCES_RESET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_UNDEFINED_OR_NULL_THROWS_ERROR;
@@ -3877,6 +3878,15 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     @JsxGetter
     public Object getZIndex() {
         final String value = getStyleAttribute(Z_INDEX);
+        if (getBrowserVersion().hasFeature(CSS_ZINDEX_TYPE_INTEGER)) {
+            try {
+                return Integer.valueOf(value);
+            }
+            catch (final NumberFormatException e) {
+                return "";
+            }
+        }
+
         if (getBrowserVersion().hasFeature(CSS_ZINDEX_TYPE_NUMBER)) {
             if (value == null
                     || Context.getUndefinedValue().equals(value)
@@ -3929,7 +3939,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             return;
         }
 
-        // numeric (IE)
+        // number
         if (getBrowserVersion().hasFeature(CSS_ZINDEX_TYPE_NUMBER)) {
             final Double d;
             if (zIndex instanceof Double) {
@@ -3947,7 +3957,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             return;
         }
 
-        // string (FF)
+        // string
         if (zIndex instanceof Number) {
             final Number number = (Number) zIndex;
             if (number.doubleValue() % 1 == 0) {

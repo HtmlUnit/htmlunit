@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
@@ -39,6 +40,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebRequest;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -56,6 +58,9 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 @RunWith(BrowserRunner.class)
 public class XMLHttpRequestTest extends WebDriverTestCase {
+
+    private static final String XHR_INSTANTIATION = "(window.XMLHttpRequest ? "
+        + "new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP'))";
 
     private static final String UNINITIALIZED = String.valueOf(XMLHttpRequest.STATE_UNSENT);
     private static final String LOADING = String.valueOf(XMLHttpRequest.STATE_OPENED);
@@ -75,11 +80,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    <title>XMLHttpRequest Test</title>\n"
             + "    <script>\n"
             + "      function testSync() {\n"
-            + "        var request;\n"
-            + "        if (window.XMLHttpRequest)\n"
-            + "          request = new XMLHttpRequest();\n"
-            + "        else if (window.ActiveXObject)\n"
-            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        var request = " + XHR_INSTANTIATION + ";\n"
             + "        alert(request.readyState);\n"
             + "        request.open('GET', '" + URL_SECOND + "', false);\n"
             + "        alert(request.readyState);\n"
@@ -144,11 +145,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <title>XMLHttpRequest Test</title>\n"
             + "<script>\n"
-            + "  var xhr;\n"
-            + "  if (window.XMLHttpRequest)\n"
-            + "    xhr = new XMLHttpRequest();\n"
-            + "  else if (window.ActiveXObject)\n"
-            + "    xhr = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "  var xhr = " + XHR_INSTANTIATION + ";\n"
 
             + "  alertStatus('1: ');\n"
             + "  xhr.open('GET', '/foo.xml', false);\n"
@@ -192,11 +189,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <title>XMLHttpRequest Test</title>\n"
             + "<script>\n"
-            + "  var xhr;\n"
-            + "  if (window.XMLHttpRequest)\n"
-            + "    xhr = new XMLHttpRequest();\n"
-            + "  else if (window.ActiveXObject)\n"
-            + "    xhr = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "  var xhr = " + XHR_INSTANTIATION + ";\n"
 
             + "  function test() {\n"
             + "    try {\n"
@@ -251,9 +244,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <script>\n"
             + "      function test() {\n"
-            + "        var xhr;\n"
-            + "        if (window.XMLHttpRequest) xhr = new XMLHttpRequest();\n"
-            + "        else xhr = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        var xhr = " + XHR_INSTANTIATION + ";\n"
 
             + "        xhr.onreadystatechange = function() { alert('orsc' + xhr.readyState); };\n"
             + "        xhr.onload = function() { alert(xhr.readyState); alert(xhr.responseText); alert(this); }\n"
@@ -286,11 +277,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <title>XMLHttpRequest Test</title>\n"
             + "    <script>\n"
-            + "        var request;\n"
-            + "        if (window.XMLHttpRequest)\n"
-            + "          request = new XMLHttpRequest();\n"
-            + "        else if (window.ActiveXObject)\n"
-            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        var request = " + XHR_INSTANTIATION + ";\n"
 
             + "        alert(request.getResponseHeader('content-length'));\n"
             + "        request.open('GET', '/foo.xml', false);\n"
@@ -314,11 +301,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    <title>XMLHttpRequest Test</title>\n"
             + "    <script>\n"
             + "      function testSync() {\n"
-            + "        var request;\n"
-            + "        if (window.XMLHttpRequest)\n"
-            + "          request = new XMLHttpRequest();\n"
-            + "        else if (window.ActiveXObject)\n"
-            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        var request = " + XHR_INSTANTIATION + ";\n"
             + "        request.open('GET', '/foo.xml', false);\n"
             + "        request.send('');\n"
             + "        alert(request.readyState);\n"
@@ -351,11 +334,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  var request;\n"
-            + "  if (window.XMLHttpRequest)\n"
-            + "    request = new XMLHttpRequest();\n"
-            + "  else if (window.ActiveXObject)\n"
-            + "    request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "  var request = " + XHR_INSTANTIATION + ";\n"
             + "  request.open('GET', 'foo.txt', false);\n"
             + "  request.send('');\n"
             + "  alert(request.responseText);\n"
@@ -365,6 +344,134 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "<body onload='test()'></body></html>";
 
         getMockWebConnection().setDefaultResponse("bla bla", "text/plain");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    public void responseXML_text_html() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var xhr = new XMLHttpRequest();\n"
+            + "    xhr.open('GET', 'foo.xml', false);\n"
+            + "    xhr.send('');\n"
+            + "    try {\n"
+            + "      alert(xhr.responseXML);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("<html></html>", "text/html");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({ CHROME, FF, IE11 })
+    @Alerts(DEFAULT = "[object XMLDocument]",
+            CHROME = "[object Document]")
+    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    public void responseXML_text_xml() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var xhr = new XMLHttpRequest();\n"
+            + "    xhr.open('GET', 'foo.xml', false);\n"
+            + "    xhr.send('');\n"
+            + "    try {\n"
+            + "      alert(xhr.responseXML);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("<note/>", "text/xml");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({ CHROME, FF, IE11 })
+    @Alerts(DEFAULT = "[object XMLDocument]",
+            CHROME = "[object Document]")
+    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    public void responseXML_application_xml() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var xhr = new XMLHttpRequest();\n"
+            + "    xhr.open('GET', 'foo.xml', false);\n"
+            + "    xhr.send('');\n"
+            + "    try {\n"
+            + "      alert(xhr.responseXML);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("<note/>", "application/xml");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({ CHROME, FF, IE11 })
+    @Alerts(DEFAULT = "[object XMLDocument]",
+            CHROME = "[object Document]")
+    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    public void responseXML_application_xhtmlXml() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var xhr = new XMLHttpRequest();\n"
+            + "    xhr.open('GET', 'foo.xml', false);\n"
+            + "    xhr.send('');\n"
+            + "    try {\n"
+            + "      alert(xhr.responseXML);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("<html/>", "application/xhtml+xml");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({ CHROME, FF, IE11 })
+    @Alerts(DEFAULT = "[object XMLDocument]",
+            CHROME = "[object Document]")
+    // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    public void responseXML_application_svgXml() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var xhr = new XMLHttpRequest();\n"
+            + "    xhr.open('GET', 'foo.xml', false);\n"
+            + "    xhr.send('');\n"
+            + "    try {\n"
+            + "      alert(xhr.responseXML);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("<svg  xmlns=\"http://www.w3.org/2000/svg\"/>", "image/svg+xml");
         loadPageWithAlerts2(html);
     }
 
@@ -381,11 +488,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  var request;\n"
-            + "  if (window.XMLHttpRequest)\n"
-            + "    request = new XMLHttpRequest();\n"
-            + "  else if (window.ActiveXObject)\n"
-            + "    request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "  var request = " + XHR_INSTANTIATION + ";\n"
             + "  request.open('GET', 'foo.xml', false);\n"
             + "  request.send('');\n"
             + "  var childNodes = request.responseXML.childNodes;\n"
@@ -415,11 +518,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  var request;\n"
-            + "  if (window.XMLHttpRequest)\n"
-            + "    request = new XMLHttpRequest();\n"
-            + "  else if (window.ActiveXObject)\n"
-            + "    request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "  var request = " + XHR_INSTANTIATION + ";\n"
             + "try {\n"
             + "  request.open('GET', 'http://this.doesnt.exist/foo.xml', false);\n"
             + "  request.send('');\n"
@@ -442,11 +541,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  var request;\n"
-            + "  if (window.XMLHttpRequest)\n"
-            + "    request = new XMLHttpRequest();\n"
-            + "  else if (window.ActiveXObject)\n"
-            + "    request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "  var request = " + XHR_INSTANTIATION + ";\n"
             + "  request.open('GET', 'foo.txt', false);\n"
             + "  request.send(null);\n"
             + "}\n"
@@ -483,11 +578,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  var request;\n"
-            + "  if (window.XMLHttpRequest)\n"
-            + "    request = new XMLHttpRequest();\n"
-            + "  else if (window.ActiveXObject)\n"
-            + "    request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "  var request = " + XHR_INSTANTIATION + ";\n"
             + "  request.open('GET', 'foo.txt', false);\n"
             + "  request.send(" + sendArg + ");\n"
             + "}\n"
@@ -509,11 +600,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  var request;\n"
-            + "  if (window.XMLHttpRequest)\n"
-            + "    request = new XMLHttpRequest();\n"
-            + "  else if (window.ActiveXObject)\n"
-            + "    request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "  var request = " + XHR_INSTANTIATION + ";\n"
             + "  request.open('GET', 'foo.txt', false);\n"
             + "  request.send();\n"
             + "}\n"
@@ -578,11 +665,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    <script>\n"
             + "      var request;\n"
             + "      function testReplace() {\n"
-            + "        if (window.XMLHttpRequest) {\n"
-            + "          request = new XMLHttpRequest();\n"
-            + "        } else if (window.ActiveXObject) {\n"
-            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
-            + "        }\n"
+            + "        request = " + XHR_INSTANTIATION + ";\n"
             + "        request.onreadystatechange = onReadyStateChange;\n"
             + "        request.open('GET', '" + URL_SECOND + "', false);\n"
             + "        request.send('');\n"
@@ -623,14 +706,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     public void refererHeader() throws Exception {
         final String html = "<html><head><script>\n"
-            + "function getXMLHttpRequest() {\n"
-            + " if (window.XMLHttpRequest)\n"
-            + "        return new XMLHttpRequest();\n"
-            + " else if (window.ActiveXObject)\n"
-            + "        return new ActiveXObject('Microsoft.XMLHTTP');\n"
-            + "}\n"
             + "function test() {\n"
-            + " req = getXMLHttpRequest();\n"
+            + " req = " + XHR_INSTANTIATION + ";\n"
             + " req.open('post', 'foo.xml', false);\n"
             + " req.send('');\n"
             + "}\n"
@@ -678,11 +755,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    <title>XMLHttpRequest Test</title>\n"
             + "    <script>\n"
             + "      function test() {\n"
-            + "        var request;\n"
-            + "        if (window.XMLHttpRequest)\n"
-            + "          request = new XMLHttpRequest();\n"
-            + "        else if (window.ActiveXObject)\n"
-            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        var request = " + XHR_INSTANTIATION + ";\n"
             + "        request.open('GET', '" + URL_SECOND + "', false);\n"
             + "        request.send('');\n"
             + "        alert(request.responseXML.selectNodes('//content').length);\n"
@@ -716,11 +789,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    <title>XMLHttpRequest Test</title>\n"
             + "    <script>\n"
             + "      function test() {\n"
-            + "        var request;\n"
-            + "        if (window.XMLHttpRequest)\n"
-            + "          request = new XMLHttpRequest();\n"
-            + "        else if (window.ActiveXObject)\n"
-            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        var request = " + XHR_INSTANTIATION + ";\n"
             + "        request.open('GET', '" + URL_SECOND + "', false);\n"
             + "        request.send('');\n"
             + "        alert(request.responseXML.getElementById('id1'));\n"
@@ -765,11 +834,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    <title>XMLHttpRequest Test</title>\n"
             + "    <script>\n"
             + "      function test() {\n"
-            + "        var request;\n"
-            + "        if (window.XMLHttpRequest)\n"
-            + "          request = new XMLHttpRequest();\n"
-            + "        else if (window.ActiveXObject)\n"
-            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        var request = " + XHR_INSTANTIATION + ";\n"
             + "        request.open('GET', '" + URL_SECOND + "', false);\n"
             + "        request.send('');\n"
             + "        var doc = request.responseXML;\n"
@@ -813,11 +878,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <script>\n"
             + "      function test() {\n"
-            + "        var request;\n"
-            + "        if (window.XMLHttpRequest)\n"
-            + "          request = new XMLHttpRequest();\n"
-            + "        else if (window.ActiveXObject)\n"
-            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        var request = " + XHR_INSTANTIATION + ";\n"
             + "        request.open('GET', '" + URL_SECOND + "', false);\n"
             + "        request.send('');\n"
             + "        alert(request.responseText);\n"
@@ -914,11 +975,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    <script>\n"
             + "      function test() {\n"
             + "        try {\n"
-            + "        var request;\n"
-            + "        if (window.XMLHttpRequest)\n"
-            + "          request = new XMLHttpRequest();\n"
-            + "        else if (window.ActiveXObject)\n"
-            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        var request = " + XHR_INSTANTIATION + ";\n"
             + "        request.open('GET', '" + URL_SECOND + "', false);\n"
             + "        request.send('');\n"
             + "        alert(request.responseXML.getElementById('myID').id);\n"
@@ -957,11 +1014,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    <script>\n"
             + "      function test() {\n"
             + "        try {\n"
-            + "        var request;\n"
-            + "        if (window.XMLHttpRequest)\n"
-            + "          request = new XMLHttpRequest();\n"
-            + "        else if (window.ActiveXObject)\n"
-            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        var request = " + XHR_INSTANTIATION + ";\n"
             + "        request.open('GET', '" + URL_SECOND + "', false);\n"
             + "        request.send('');\n"
             + "        alert(request.responseXML.getElementById('myID').myInput.name);\n"

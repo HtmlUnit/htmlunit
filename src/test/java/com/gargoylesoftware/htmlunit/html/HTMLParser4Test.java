@@ -47,7 +47,8 @@ public class HTMLParser4Test extends WebDriverTestCase {
     @Test
     @Alerts("TABLE")
     public void table_tfoot() throws Exception {
-        final String html = "<html><body>"
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><body>"
             + "<table><tr><td>hello</td></tr>\n"
             + "<tfoot id='tf'><tr><td>foot</td></tr></tfoot>"
             + "</table>\n"
@@ -67,8 +68,8 @@ public class HTMLParser4Test extends WebDriverTestCase {
     @Test
     @Alerts("myForm")
     public void badlyFormedHTML() throws Exception {
-        final String html
-            = "<html><head><title>first</title>\n"
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>first</title>\n"
             + "     <script>\n"
             + "         function test(){\n"
             + "             alert(document.getElementById('myInput').form.id);\n"
@@ -98,8 +99,8 @@ public class HTMLParser4Test extends WebDriverTestCase {
         // Note: the <meta> tag in this test is quite important because
         // I could adapt the TagBalancer to make it work except with this <meta http-equiv...
         // (it worked with <meta name=...)
-        final String html
-            = "<html><head><mainA3>\n"
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><mainA3>\n"
             + "     <meta http-equiv='Content-Type' content='text/html; charset=ISO-8859-1'>\n"
             + "     <title>first</title>\n"
             + "     <script>\n"
@@ -120,8 +121,8 @@ public class HTMLParser4Test extends WebDriverTestCase {
     @Test
     @Alerts({"false", "true" })
     public void duplicatedAttribute() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
             + "</head>\n"
             + "     <script>\n"
             + "         function test() {\n"
@@ -146,8 +147,8 @@ public class HTMLParser4Test extends WebDriverTestCase {
             IE8 = { "1", "3", "[object HTMLScriptElement]",
                 "[object HTMLGenericElement]", "[object HTMLGenericElement]", "[object HTMLFormElement]" })
     public void namespace() throws Exception {
-        final String html
-            = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n"
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n"
             + "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:app='http://www.appcelerator.org'>\n"
             + "<head>\n"
             + "<script>\n"
@@ -180,11 +181,11 @@ public class HTMLParser4Test extends WebDriverTestCase {
                 "[object HTMLUnknownElement]", "APP:SCRIPT,APP:SCRIPT,http://www.w3.org/1999/xhtml,null,app:script" },
             IE8 = { "1",
                 "createElementNS() is not defined",
-                "[object]", "SCRIPT,SCRIPT,undefined,undefined,undefined",
-                "[object]", "script,script,undefined,undefined,undefined" })
+                "[object HTMLScriptElement]", "SCRIPT,SCRIPT,undefined,undefined,undefined",
+                "[object HTMLGenericElement]", "script,script,undefined,undefined,undefined" })
     public void namespace2() throws Exception {
-        final String html
-            = "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:app='http://www.appcelerator.org'>\n"
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:app='http://www.appcelerator.org'>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -232,8 +233,8 @@ public class HTMLParser4Test extends WebDriverTestCase {
     // This is pretty mysterious because the second title HAS the text 'Inner Html' inside.
     // Currently I do not know why it behaves this way so I take the default behavior.
     public void completeHtmlInsideDiv() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
             + "    <title>Outer Html</title>\n"
             + "    <script>\n"
             + "        function test() {\n"
@@ -294,8 +295,8 @@ public class HTMLParser4Test extends WebDriverTestCase {
     // This is pretty mysterious because the second title HAS the text 'Inner Html' inside.
     // Currently I do not know why it behaves this way so I take the default behavior.
     public void writeCompleteHtmlInsideDIV() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
             + "    <title>Outer Html</title>\n"
             + "    <script>\n"
             + "        function test() {\n"
@@ -348,8 +349,8 @@ public class HTMLParser4Test extends WebDriverTestCase {
                 "bodyTitles",
                 "innerDiv", "outerDiv" })
     public void setCompleteHtmlToDIV_innerHTML() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
             + "    <title>Outer Html</title>\n"
             + "    <script>\n"
             + "        function test() {\n"
@@ -402,8 +403,8 @@ public class HTMLParser4Test extends WebDriverTestCase {
     @NotYetImplemented({ CHROME, FF, IE11 })
     // currently the content of HEAD and BODY are added directly to HTML
     public void setCompleteHtmlToHTML_innerHTML() throws Exception {
-        final String html
-            = "<html><head>\n"
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
             + "    <title>Outer Html</title>\n"
             + "    <script>\n"
             + "        function test() {\n"

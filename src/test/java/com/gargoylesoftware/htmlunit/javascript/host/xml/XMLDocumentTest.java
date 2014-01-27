@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
@@ -793,6 +794,94 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "</soap:Envelope>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "true", "false", "false", "false" },
+            CHROME = { "false", "false", "true", "false" },
+            IE = { "false", "false", "false", "false" },
+            IE8 = "exception")
+    @NotYetImplemented({ CHROME, FF })
+    // XML ID handling not yet correctly implemented
+    public void getElementById_xml() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text='<?xml version=\"1.0\" encoding=\"utf-8\"?>\\n'\n"
+            + "      + '<!DOCTYPE idTest [\\n'\n"
+            + "      + '    <!ATTLIST item xId ID #IMPLIED>\\n'\n"
+            + "      + ']>\\n'\n"
+            + "      + '<idTest>\\n'\n"
+            + "      + '    <item xId=\"item1\" />\\n'\n"
+            + "      + '    <item xml:id=\"item2\" />\\n'\n"
+            + "      + '    <item id=\"item3\" />\\n'\n"
+            + "      + '    <item ID=\"item4\" />\\n'\n"
+            + "      + '</idTest>';\n"
+            + "    try {\n"
+            + "      var doc = " + callLoadXMLDocumentFromString("text") + ";\n"
+            + "      alert(doc.getElementById('item1') != null);\n"
+            + "      alert(doc.getElementById('item2') != null);\n"
+            + "      alert(doc.getElementById('item3') != null);\n"
+            + "      alert(doc.getElementById('item4') != null);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "false" },
+            CHROME = { "true", "true" },
+            IE8 = "exception")
+    @NotYetImplemented(CHROME)
+    // XML ID handling not yet correctly implemented
+    public void getElementById_html() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text='<form id=\"form1\">\\n'\n"
+            + "      + '    <div id=\"div1\"></div>\\n'\n"
+            + "      + '</form>';\n"
+            + "    try {\n"
+            + "      var doc = " + callLoadXMLDocumentFromString("text") + ";\n"
+            + "      alert(doc.getElementById('form1') != null);\n"
+            + "      alert(doc.getElementById('div1') != null);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "true", "true" },
+            IE8 = "exception")
+    public void getElementById_xhtml() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text='<form xmlns=\"http://www.w3.org/1999/xhtml\" id=\"form1\">\\n'\n"
+            + "      + '    <div id=\"div1\"></div>\\n'\n"
+            + "      + '</form>';\n"
+            + "    try {\n"
+            + "      var doc = " + callLoadXMLDocumentFromString("text") + ";\n"
+            + "      alert(doc.getElementById('form1') != null);\n"
+            + "      alert(doc.getElementById('div1') != null);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
         loadPageWithAlerts2(html);
     }
 

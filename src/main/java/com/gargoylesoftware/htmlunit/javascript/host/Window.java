@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_UNDEFINED_THROWS_ERROR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_133;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_NOT_ALLOWED;
@@ -1048,6 +1049,10 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxSetter
     public void setOnload(final Object newOnload) {
+        if (getBrowserVersion().hasFeature(EVENT_ONLOAD_UNDEFINED_THROWS_ERROR)
+            && Context.getUndefinedValue().equals(newOnload)) {
+            throw Context.reportRuntimeError("Invalid onload value: undefined.");
+        }
         getEventListenersContainer().setEventHandlerProp("load", newOnload);
     }
 
@@ -1169,7 +1174,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param listener the event listener
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536411.aspx">MSDN documentation</a>
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
     public void detachEvent(final String type, final Function listener) {
         getEventListenersContainer().removeEventListener(StringUtils.substring(type, 2), listener, false);
     }
@@ -1412,11 +1417,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Executes the specified script code as long as the language is JavaScript or JScript. Does
-     * nothing if the language specified is VBScript.
-     * Note: MSDN doc says that the function returns null but in fact this is undefined.
+     * Executes the specified script code as long as the language is JavaScript or JScript.
      * @param script the script code to execute
-     * @param language the language of the specified code ("JavaScript", "JScript" or "VBScript")
+     * @param language the language of the specified code ("JavaScript" or "JScript")
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536420.aspx">MSDN documentation</a>
      */
     @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
@@ -1427,7 +1430,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             ScriptRuntime.evalSpecial(Context.getCurrentContext(), this, this, new Object[] {script}, null, 0);
         }
         else if ("vbscript".equalsIgnoreCase(languageStr)) {
-            LOG.warn("VBScript not supported in Window.execScript().");
+            throw Context.reportRuntimeError("VBScript not supported in Window.execScript().");
         }
         else {
             // Unrecognized language: use the IE error message ("Invalid class string").
@@ -1521,7 +1524,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return a dummy value
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref28.html">Mozilla doc</a>
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public int getInnerWidth() {
         return getWebWindow().getInnerWidth();
     }
@@ -1531,7 +1534,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return a dummy value
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref79.html">Mozilla doc</a>
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public int getOuterWidth() {
         return getWebWindow().getOuterWidth();
     }
@@ -1541,7 +1544,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return a dummy value
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref27.html">Mozilla doc</a>
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public int getInnerHeight() {
         return getWebWindow().getInnerHeight();
     }
@@ -1551,7 +1554,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return a dummy value
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref78.html">Mozilla doc</a>
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public int getOuterHeight() {
         return getWebWindow().getOuterHeight();
     }
@@ -1574,7 +1577,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param type the type of events to capture
      * @see Document#captureEvents(String)
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public void captureEvents(final String type) {
         // Empty.
     }
@@ -1920,7 +1923,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * (currently empty implementation)
      * @see <a href="https://developer.mozilla.org/en/DOM/window.stop">window.stop</a>
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public void stop() {
         //empty
     }

@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.net.URL;
 
@@ -49,7 +50,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("Frame2")
-    public void testFrameName() throws Exception {
+    public void frameName() throws Exception {
         final String html
             = "<html><head><title>first</title></head>\n"
             + "<frameset cols='20%,80%'>\n"
@@ -66,7 +67,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE8 = "false")
-    public void testContentDocument() throws Exception {
+    public void contentDocument() throws Exception {
         final String html
             = "<html><head><title>first</title>\n"
                 + "<script>\n"
@@ -87,7 +88,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    public void testContentWindow() throws Exception {
+    public void contentWindow() throws Exception {
         final String html
             = "<html><head><title>first</title>\n"
                 + "<script>\n"
@@ -141,11 +142,11 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "function handler() {\n}", "null" },
-            FF = { "function handler() {}", "null" },
-            IE11 = { "function handler() {}", "null" })
-    @NotYetImplemented({ FF17, FF24 })
-    public void testOnloadNull() throws Exception {
+    @Alerts(DEFAULT = { "function handler() {}", "null", "null" },
+            IE8 = { "function handler() {}", "null", "exception" })
+    @NotYetImplemented({ FF17, FF24, IE8 })
+    // Currently a \n is put between the {}
+    public void onloadNull() throws Exception {
         final String html =
             "<html><head>\n"
             + "<script>\n"
@@ -156,6 +157,10 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
             + "    alert(iframe.onload);\n"
             + "    iframe.onload = null;\n"
             + "    alert(iframe.onload);\n"
+            + "    try {\n"
+            + "      iframe.onload = undefined;\n"
+            + "      alert(iframe.onload);\n"
+            + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
             + "</script>\n"
             + "<body onload=test()>\n"
@@ -172,12 +177,12 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "§§URL§§subdir/frame.html", "§§URL§§frame.html" },
             IE11 = { "§§URL§§subdir/frame.html" })
-    public void testLocation() throws Exception {
-        testLocation("Frame1.location = \"frame.html\"");
-        testLocation("Frame1.location.replace(\"frame.html\")");
+    public void location() throws Exception {
+        location("Frame1.location = \"frame.html\"");
+        location("Frame1.location.replace(\"frame.html\")");
     }
 
-    private void testLocation(final String jsExpr) throws Exception {
+    private void location(final String jsExpr) throws Exception {
         final String firstContent
             = "<html><head><title>first</title></head>\n"
             + "<frameset cols='*' onload='" + jsExpr + "'>\n"
@@ -201,9 +206,9 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * See http://sourceforge.net/p/htmlunit/bugs/288/.
      * @throws Exception if the test fails
      */
-    @Alerts("2")
     @Test
-    public void testWriteFrameset() throws Exception {
+    @Alerts("2")
+    public void writeFrameset() throws Exception {
         final String content1 = "<html><head>\n"
             + "<script>\n"
             + "    document.write('<frameset>');\n"
@@ -223,9 +228,9 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * See http://sourceforge.net/p/htmlunit/bugs/307/.
      * @throws Exception if the test fails
      */
-    @Alerts("DIV")
     @Test
-    public void testFrameLoadedAfterParent() throws Exception {
+    @Alerts("DIV")
+    public void frameLoadedAfterParent() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
             + "<iframe name='testFrame' src='testFrame.html'></iframe>\n"
@@ -247,9 +252,9 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * See https://sourceforge.net/tracker/?func=detail&atid=448266&aid=2314485&group_id=47038
      * @throws Exception if the test fails
      */
+    @Test
     @Alerts({ "about:blank", "oFrame.foo: undefined", "/frame1.html", "oFrame.foo: foo of frame 1",
         "/frame2.html", "oFrame.foo: foo of frame 2" })
-    @Test
     public void changingFrameDocumentLocation() throws Exception {
         final String firstHtml = "<html><head><script>\n"
             + "var oFrame;\n"
@@ -288,5 +293,60 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         driver.findElement(By.id("btn3")).click();
 
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "[object Window]",
+            FF = "[object HTMLFrameElement]",
+            FF17 = "undefined",
+            IE8 = "[object]")
+    @NotYetImplemented(FF17)
+    public void frames() throws Exception {
+        final String mainHtml =
+            "<html><head><title>frames</title></head>\n"
+            + "<frameset onload=\"alert(window.frames['f1'])\">\n"
+            + "<frame id='f1' src='1.html'/>\n"
+            + "<frame id='f2' src='1.html'/>\n"
+            + "</frameset>\n"
+            + "</html>";
+
+        final String frame1 = "<html><head><title>1</title></head>\n"
+            + "<body></body>\n"
+            + "</html>";
+
+        getMockWebConnection().setResponse(URL_FIRST, mainHtml);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "1.html"), frame1);
+
+        loadPageWithAlerts2(URL_FIRST);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "[object Window]",
+            FF = "[object HTMLFrameElement]",
+            FF17 = "undefined",
+            IE8 = "[object]")
+    @NotYetImplemented(FF17)
+    public void parent_frames() throws Exception {
+        final String mainHtml =
+            "<html><head><title>frames</title></head>\n"
+            + "<frameset>\n"
+            + "<frame id='f1' src='1.html'/>\n"
+            + "</frameset>\n"
+            + "</html>";
+
+        final String frame1 = "<html><head><title>1</title></head>\n"
+            + "<body onload=\"alert(parent.frames['f1'])\"></body>\n"
+            + "</html>";
+
+        getMockWebConnection().setResponse(URL_FIRST, mainHtml);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "1.html"), frame1);
+
+        loadPageWithAlerts2(URL_FIRST);
     }
 }

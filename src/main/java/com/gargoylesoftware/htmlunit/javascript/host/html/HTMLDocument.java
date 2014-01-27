@@ -2167,8 +2167,17 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         if (response instanceof FunctionObject
             && ("querySelectorAll".equals(name) || "querySelector".equals(name))
             && getBrowserVersion().hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
-            final ScriptableObject sobj = getPage().getScriptObject();
-            if ((sobj instanceof HTMLDocument) && ((HTMLDocument) sobj).getDocumentMode() < 8) {
+            Document document = null;
+            final HtmlPage page = getHtmlPageOrNull();
+            if (page != null) {
+                document = (Document) page.getScriptObject();
+            }
+            else if (start instanceof DocumentProxy) {
+                // if in prototype no domNode is set -> use start
+                document = ((DocumentProxy) start).getDelegee();
+            }
+            if (document != null && document instanceof HTMLDocument
+                && ((HTMLDocument) document).getDocumentMode() < 8) {
                 return NOT_FOUND;
             }
         }
