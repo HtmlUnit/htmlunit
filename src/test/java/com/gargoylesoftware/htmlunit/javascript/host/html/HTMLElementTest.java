@@ -1423,21 +1423,40 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = { "BR", "DIV", "2", "3" })
-    @NotYetImplemented(FF)
+    @Alerts({ "BR", "DIV", "2", "3" })
     public void children() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='myDiv'><br/><div><span>test</span></div></div>\n"
             + "<script>\n"
             + "try {\n"
             + "  var oDiv = document.getElementById('myDiv');\n"
-            + "  for (var i=0; i<oDiv.children.length; i++)\n"
-            + "    alert(oDiv.children(i).tagName);\n"
+            + "  for (var i=0; i<oDiv.children.length; i++) {\n"
+            + "    alert(oDiv.children[i].tagName);\n"
+            + "  }\n"
             + "  var oCol = oDiv.children;\n"
             + "  alert(oCol.length);\n"
             + "  oDiv.insertAdjacentHTML('beforeEnd', '<br>');\n"
             + "  alert(oCol.length);\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "2", "exception" },
+            IE = { "2", "BR" })
+    @NotYetImplemented(FF)
+    public void childrenFunctionAccess() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='myDiv'><br/><div>\n"
+            + "<script>\n"
+            + "try {\n"
+            + "  var oDiv = document.getElementById('myDiv');\n"
+            + "  alert(oDiv.children.length);\n"
+            + "  alert(oDiv.children(0).tagName);\n"
             + "} catch(e) { alert('exception'); }\n"
             + "</script></body></html>";
         loadPageWithAlerts2(html);
