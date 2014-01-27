@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
@@ -467,6 +468,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "form1", "form1", "2", "2" },
             FF17 = { "exception:w.f1", "form1", "exception:w.f2", "2" })
+    @NotYetImplemented(FF17)
     public void formByName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -640,6 +642,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "image1", "image1", "2", "2" },
             FF17 = { "exception:w.i1", "image1", "exception:w.i2", "2" })
+    @NotYetImplemented(FF17)
     public void imageByName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -792,6 +795,7 @@ public class Window3Test extends WebDriverTestCase {
                 "image1", "element1", "element1" },
             FF17 = { "exception:w.f1", "form1", "exception:w.f1", "f1", "exception:w.i1", "input1",
                 "exception:w.a1", "anchor1", "exception:w.i1", "image1", "exception:w.e1", "element1" })
+    @NotYetImplemented(FF17)
     public void elementsById() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -851,6 +855,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "f1", "f1" },
             FF17 = { "exception:w.f1", "f1" })
+    @NotYetImplemented(FF17)
     public void frameById() throws Exception {
         final String html = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\""
             + "\"http://www.w3.org/TR/html4/frameset.dtd\">\n"
