@@ -708,7 +708,7 @@ public enum BrowserVersionFeatures {
     JS_ATTRIBUTES_CONTAINS_EMPTY_ATTR_FOR_PROPERTIES,
 
     /** firstChild and lastChild returns null for Attr (like IE does). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
+    @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 9), @WebBrowser(FF) })
     JS_ATTR_FIRST_LAST_CHILD_RETURNS_NULL,
 
     /** HTMLBGSoundElement reported as HTMLSpanElement. */

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.14" date="???" description="FF24, Bugfixes, initial work on IE11">
+            <action type="fix" dev="rbri">
+                JavaScript: Attr firstChild/lastChild fixed when no child at all (FF).
+            </action>
             <action type="fix" dev="rbri" due-to="Frank Danek">
                 JavaScript: CORS handling is different in IE11 for the 'about:' protocol.
             </action>

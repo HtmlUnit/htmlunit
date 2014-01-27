@@ -326,7 +326,6 @@ public class HTMLElementTest extends WebDriverTestCase {
             "specified=true",
             "value=bleh"
             })
-    @NotYetImplemented({ FF17, FF24 })
     public void getAttributeNode() throws Exception {
         final String html =
               "<html>\n"
