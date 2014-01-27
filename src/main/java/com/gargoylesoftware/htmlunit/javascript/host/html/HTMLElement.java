@@ -1038,7 +1038,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         // this disables execution of script tags
         final Document doc = getWindow().getDocument();
-        for (final DomNode node : fragment.getChildren()) {
+        for (final DomNode node : fragment.getDescendants()) {
             node.processImportNode(doc);
         }
 

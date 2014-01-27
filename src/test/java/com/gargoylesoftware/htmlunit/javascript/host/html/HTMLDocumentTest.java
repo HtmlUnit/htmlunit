@@ -749,6 +749,44 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            IE8 = "true")
+    public void all_detection() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    alert(!(!document.all));\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "undefined",
+            FF = "[object HTML document.all class]",
+            FF17 = "undefined",
+            IE = "[object HTMLAllCollection]",
+            IE8 = "[object HTMLCollection]")
+    @NotYetImplemented({ CHROME, FF, IE11 })
+    public void all_scriptableToString() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    alert(document.all);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(FF = "not defined",
             IE = { "false", "1", "about:blank", "about:blank" },
             IE11 = { "true", "1" })

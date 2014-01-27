@@ -1353,6 +1353,27 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void setOuterHTMLExecuteNestedJavaScript() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var newnode = '<div><scr'+'ipt>alerter();</scr'+'ipt></div>';\n"
+            + "    var oldnode = document.getElementById('myNode');\n"
+            + "    oldnode.outerHTML = newnode;\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    alert('executed');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("exception")
     public void setOuterHTMLDeclareJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -4515,6 +4536,177 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "executed",
+            IE8 = "exception-append")
+    // IE8 does not support appendChild for script elements
+    public void appendChildExecuteJavaScript() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var newnode = document.createElement('script');\n"
+            + "    try {\n"
+            + "      newnode.appendChild(document.createTextNode('alerter();'));\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      outernode.appendChild(newnode);\n"
+            + "    } catch(e) { alert('exception-append'); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    alert('executed');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "declared",
+            IE8 = "exception-append")
+    // IE8 does not support appendChild for script elements
+    public void appendChildDeclareJavaScript() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var newnode = document.createElement('script');\n"
+            + "    try {\n"
+            + "      newnode.appendChild(document.createTextNode('function tester() { alerter(); }'));\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      outernode.appendChild(newnode);\n"
+            + "      try {\n"
+            + "        tester();\n"
+            + "      } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { alert('exception-append'); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    alert('declared');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "executed",
+            IE8 = "exception-append")
+    // IE8 does not support appendChild for script elements
+    public void insertBeforeExecuteJavaScript() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var newnode = document.createElement('script');\n"
+            + "    try {\n"
+            + "      newnode.appendChild(document.createTextNode('alerter();'));\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      outernode.insertBefore(newnode, null);\n"
+            + "    } catch(e) { alert('exception-append'); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    alert('executed');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "declared",
+            IE8 = "exception-append")
+    // IE8 does not support appendChild for script elements
+    public void insertBeforeDeclareJavaScript() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var newnode = document.createElement('script');\n"
+            + "    try {\n"
+            + "      newnode.appendChild(document.createTextNode('function tester() { alerter(); }'));\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      outernode.insertBefore(newnode, null);\n"
+            + "      try {\n"
+            + "        tester();\n"
+            + "      } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { alert('exception-append'); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    alert('declared');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "executed",
+            IE8 = "exception-append")
+    // IE8 does not support appendChild for script elements
+    public void replaceChildExecuteJavaScript() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var newnode = document.createElement('script');\n"
+            + "    try {\n"
+            + "      newnode.appendChild(document.createTextNode('alerter();'));\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      outernode.replaceChild(newnode, document.getElementById('inner'));\n"
+            + "    } catch(e) { alert('exception-append'); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    alert('executed');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myNode'><div id='inner'></div></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "declared",
+            IE8 = "exception-append")
+    // IE8 does not support appendChild for script elements
+    public void replaceChildDeclareJavaScript() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var newnode = document.createElement('script');\n"
+            + "    try {\n"
+            + "      newnode.appendChild(document.createTextNode('function tester() { alerter(); }'));\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      outernode.replaceChild(newnode, document.getElementById('inner'));\n"
+            + "      try {\n"
+            + "        tester();\n"
+            + "      } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { alert('exception-append'); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    alert('declared');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myNode'><div id='inner'></div></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({ "outside", "1", "middle", "2", "3", "4",
         "before-begin after-begin inside before-end after-end" })
     public void insertAdjacentHTML() throws Exception {
@@ -4567,6 +4759,51 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void insertAdjacentHTMLExecuteJavaScript() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var outernode = document.getElementById('myNode');\n"
+            + "    outernode.insertAdjacentHTML('afterend', '<scr'+'ipt>alerter();</scr'+'ipt>');\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    alert('executed');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void insertAdjacentHTMLDeclareJavaScript() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var outernode = document.getElementById('myNode');\n"
+            + "    outernode.insertAdjacentHTML('afterend', "
+            + "'<scr'+'ipt>function tester() { alerter(); }</scr'+'ipt>');\n"
+            + "    try {\n"
+            + "      tester();\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    alert('declared');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Browsers({ CHROME, IE })
     @Alerts({ "outside", "1", "middle", "2", "3", "4",
                 "before-begin after-begin inside before-end after-end" })
@@ -4611,6 +4848,65 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "      inside\n"
             + "    </span>\n"
             + "  </span>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({ CHROME, IE })
+    @Alerts(DEFAULT = "executed",
+            IE8 = "exception-append")
+    // IE8 does not support appendChild for script elements
+    public void insertAdjacentElementExecuteJavaScript() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var newnode = document.createElement('script');\n"
+            + "    try {\n"
+            + "      newnode.appendChild(document.createTextNode('alerter();'));\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      outernode.insertAdjacentElement('afterend', newnode);\n"
+            + "    } catch(e) { alert('exception-append'); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    alert('executed');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({ CHROME, IE })
+    @Alerts(DEFAULT = "declared",
+            IE8 = "exception-append")
+    // IE8 does not support appendChild for script elements
+    public void insertAdjacentElementDeclareJavaScript() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var newnode = document.createElement('script');\n"
+            + "    try {\n"
+            + "      newnode.appendChild(document.createTextNode('function tester() { alerter(); }'));\n"
+            + "      var outernode = document.getElementById('myNode');\n"
+            + "      outernode.insertAdjacentElement('afterend', newnode);\n"
+            + "      try {\n"
+            + "        tester();\n"
+            + "      } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { alert('exception-append'); }\n"
+            + "  }\n"
+            + "  function alerter() {\n"
+            + "    alert('declared');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myNode'></div>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
