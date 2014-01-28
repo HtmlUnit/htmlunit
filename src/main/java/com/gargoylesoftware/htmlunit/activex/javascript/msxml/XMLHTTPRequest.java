@@ -42,6 +42,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.http.auth.UsernamePasswordCredentials;
 
 import com.gargoylesoftware.htmlunit.AjaxController;
+import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -640,8 +641,8 @@ public class XMLHTTPRequest extends MSXMLScriptable {
     private boolean isPreflightHeader(final String name, final String value) {
         if ("content-type".equals(name)) {
             final String lcValue = value.toLowerCase(Locale.ENGLISH);
-            if ("application/x-www-form-urlencoded".equals(lcValue)
-                || "multipart/form-data".equals(lcValue)
+            if (FormEncodingType.URL_ENCODED.getName().equals(lcValue)
+                || FormEncodingType.MULTIPART.getName().equals(lcValue)
                 || "text/plain".equals(lcValue)
                 || lcValue.startsWith("text/plain;charset=")) {
                 return false;

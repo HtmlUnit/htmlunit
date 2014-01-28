@@ -451,7 +451,7 @@ public class Document extends EventNode {
             if (element instanceof BaseFrameElement) {
                 ((BaseFrameElement) element).markAsCreatedByJavascript();
             }
-            if (element instanceof HtmlInput) {
+            else if (element instanceof HtmlInput) {
                 ((HtmlInput) element).markAsCreatedByJavascript();
             }
             final Object jsElement = getScriptableFor(element);
