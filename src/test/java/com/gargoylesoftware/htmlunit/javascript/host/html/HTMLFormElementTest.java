@@ -1053,7 +1053,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("application/x-www-form-urlencoded")
-    @NotYetImplemented
     public void enctype_defaultValue() throws Exception {
         final String html = "<html><body><script>\n"
             + "alert(document.createElement('form').enctype)\n"

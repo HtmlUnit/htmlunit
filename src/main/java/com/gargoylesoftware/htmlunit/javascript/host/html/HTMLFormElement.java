@@ -33,6 +33,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -263,18 +264,44 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
+     * Returns the value of the JavaScript attribute "enctype".
+     * @return the value of this attribute
+     */
+    @JsxGetter
+    public String getEnctype() {
+        final String encoding = getHtmlForm().getEnctypeAttribute();
+        if (!FormEncodingType.URL_ENCODED.getName().equals(encoding)
+                && !FormEncodingType.MULTIPART.getName().equals(encoding)
+                && !"text/plain".equals(encoding)) {
+            return FormEncodingType.URL_ENCODED.getName();
+        }
+        return encoding;
+    }
+
+    /**
+     * Sets the value of the JavaScript attribute "enctype".
+     * @param enctype the new value
+     */
+    @JsxSetter
+    public void setEnctype(final String enctype) {
+        WebAssert.notNull("encoding", enctype);
+        if (getBrowserVersion().hasFeature(JS_FORM_REJECT_INVALID_ENCODING)) {
+            if (!FormEncodingType.URL_ENCODED.getName().equals(enctype)
+                    && !FormEncodingType.MULTIPART.getName().equals(enctype)) {
+                throw Context.reportRuntimeError("Cannot set the encoding property to invalid value: '"
+                        + enctype + "'");
+            }
+        }
+        getHtmlForm().setEnctypeAttribute(enctype);
+    }
+
+    /**
      * Returns the value of the JavaScript attribute "encoding".
      * @return the value of this attribute
      */
     @JsxGetter
     public String getEncoding() {
-        final String encoding = getHtmlForm().getEnctypeAttribute();
-        if (!"application/x-www-form-urlencoded".equals(encoding)
-                && !"multipart/form-data".equals(encoding)
-                && !"text/plain".equals(encoding)) {
-            return "application/x-www-form-urlencoded";
-        }
-        return encoding;
+        return getEnctype();
     }
 
     /**
@@ -283,14 +310,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      */
     @JsxSetter
     public void setEncoding(final String encoding) {
-        WebAssert.notNull("encoding", encoding);
-        if (getBrowserVersion().hasFeature(JS_FORM_REJECT_INVALID_ENCODING)) {
-            if (!"application/x-www-form-urlencoded".equals(encoding) && !"multipart/form-data".equals(encoding)) {
-                throw Context.reportRuntimeError("Cannot set the encoding property to invalid value: '"
-                        + encoding + "'");
-            }
-        }
-        getHtmlForm().setEnctypeAttribute(encoding);
+        setEnctype(encoding);
     }
 
     private HtmlForm getHtmlForm() {
