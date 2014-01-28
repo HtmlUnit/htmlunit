@@ -9,6 +9,9 @@
     <body>
         <release version="2.14" date="???" description="FF24, Bugfixes, initial work on IE11">
             <action type="fix" dev="rbri">
+                JavaScript: body.background property handling fixed for FF.
+            </action>
+            <action type="fix" dev="rbri">
                 JavaScript: Missing enctype property support added to forms.
             </action>
             <action type="fix" dev="rbri">
