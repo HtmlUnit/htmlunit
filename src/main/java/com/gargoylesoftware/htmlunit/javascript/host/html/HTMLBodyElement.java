@@ -14,19 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_158;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_41;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_BODY_HEAD_READONLY;
 
-import java.net.MalformedURLException;
 import java.util.Locale;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
-import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -110,18 +106,7 @@ public class HTMLBodyElement extends HTMLElement {
     @JsxGetter
     public String getBackground() {
         final HtmlElement node = getDomNodeOrDie();
-        String background = node.getAttribute("background");
-        if (background != DomElement.ATTRIBUTE_NOT_DEFINED
-                && getBrowserVersion().hasFeature(GENERATED_158)) {
-            try {
-                final HtmlPage page = (HtmlPage) node.getPage();
-                background = page.getFullyQualifiedUrl(background).toExternalForm();
-            }
-            catch (final MalformedURLException e) {
-                Context.throwAsScriptRuntimeEx(e);
-            }
-        }
-        return background;
+        return node.getAttribute("background");
     }
 
     /**

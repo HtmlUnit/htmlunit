@@ -343,10 +343,6 @@ public enum BrowserVersionFeatures {
     GENERATED_157,
 
     /** Was originally .isFirefox(). */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    GENERATED_158,
-
-    /** Was originally .isFirefox(). */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     GENERATED_164,
 
