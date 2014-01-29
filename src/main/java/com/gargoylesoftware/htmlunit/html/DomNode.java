@@ -875,7 +875,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     public ScriptableObject getScriptObject() {
         if (scriptObject_ == null) {
             final SgmlPage page = getPage();
-            if (this == getPage()) {
+            if (this == page) {
                 final StringBuilder msg = new StringBuilder("No script object associated with the Page.");
                 // because this is a strange case we like to provide as many info as possible
                 msg.append(" class: '");
@@ -892,7 +892,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 }
                 throw new IllegalStateException(msg.toString());
             }
-            scriptObject_ = ((SimpleScriptable) ((DomNode) page_).getScriptObject()).makeScriptableFor(this);
+            scriptObject_ = ((SimpleScriptable) page.getScriptObject()).makeScriptableFor(this);
         }
         return scriptObject_;
     }
