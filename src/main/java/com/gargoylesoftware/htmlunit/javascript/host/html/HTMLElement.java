@@ -76,6 +76,7 @@ import org.xml.sax.helpers.AttributesImpl;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
@@ -959,6 +960,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
             final String valueAsString = Context.toString(value);
             parseHtmlSnippet(domNode, true, valueAsString);
+
+            for (final DomNode node : domNode.getDescendants()) {
+                if (node instanceof BaseFrameElement) {
+                    ((BaseFrameElement) node).markLoadSrcWhenAddedToPage();
+                }
+            }
 
             final boolean createFragment = getBrowserVersion().hasFeature(JS_INNER_HTML_CREATES_DOC_FRAGMENT_AS_PARENT);
             // if the parentNode has null parentNode in IE,

@@ -19,6 +19,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -386,6 +387,18 @@ public abstract class BaseFrameElement extends HtmlElement {
 
         if (loadSrcWhenAddedToPage_) {
             loadSrc();
+        }
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Marks this frame to load the source when added to page.
+     */
+    public void markLoadSrcWhenAddedToPage() {
+        final String src = getSrcAttribute();
+        if (StringUtils.isNoneEmpty(src) && !WebClient.ABOUT_BLANK.equals(src)) {
+            loadSrcWhenAddedToPage_ = true;
         }
     }
 
