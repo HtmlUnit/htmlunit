@@ -14,27 +14,52 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import static org.junit.Assert.assertNotNull;
-
-import java.net.URL;
-
+import org.eclipse.jetty.server.Server;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.WebServerTestCase;
 
 /**
  * Tests for compatibility with <a href="http://www.curvycorners.net">curvyCorners</a>.
  *
  * @version $Revision$
  * @author Gareth Davis
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class CurvyCornersTest extends SimpleWebTestCase {
+public class CurvyCornersTest extends WebDriverTestCase {
 
-    private static final String BASE_FILE_PATH = "libraries/curvyCorners/1.2.9-beta/";
+    /** The server. */
+    protected static Server SERVER_;
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @BeforeClass
+    public static void aaa_startSesrver() throws Exception {
+        SERVER_ = WebServerTestCase.createWebServer("src/test/resources/libraries/curvyCorners/1.2.9-beta/", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @AfterClass
+    public static void zzz_stopServer() throws Exception {
+        SERVER_.stop();
+    }
+
+    /**
+     * @return the resource base url
+     */
+    protected String getBaseUrl() {
+        return "http://localhost:" + PORT + "/";
+    }
 
     /**
      * @throws Exception if the test fails
@@ -52,12 +77,8 @@ public class CurvyCornersTest extends SimpleWebTestCase {
         doTest("demo2.html");
     }
 
-    private void doTest(final String fileName) throws Exception {
-        final URL url = getClass().getClassLoader().getResource(BASE_FILE_PATH + fileName);
-        assertNotNull(url);
-
-        final WebClient client = getWebClient();
-        client.getPage(url);
+    private void doTest(final String filename) throws Exception {
+        final WebDriver driver = getWebDriver();
+        driver.get(getBaseUrl() + filename);
     }
-
 }
