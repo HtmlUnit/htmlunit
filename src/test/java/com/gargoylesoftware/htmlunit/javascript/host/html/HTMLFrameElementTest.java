@@ -14,24 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -66,38 +57,4 @@ public class HTMLFrameElementTest extends SimpleWebTestCase {
         final ObjectOutputStream objectOS = new ObjectOutputStream(new ByteArrayOutputStream());
         objectOS.writeObject(page);
     }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @NotYetImplemented(FF)
-    @Alerts(FF = "undefined",
-            IE = "[object]",
-            IE11 = "[object Window]")
-    public void frames() throws Exception {
-        final String mainHtml =
-            "<html><head><title>frames</title></head>\n"
-            + "<frameset>\n"
-            + "<frame id='f1' src='1.html'/>\n"
-            + "</frameset>\n"
-            + "</html>";
-
-        final String frame1 = "<html><head><title>1</title></head>\n"
-            + "<body onload=\"alert(parent.frames['f1'])\"></body>\n"
-            + "</html>";
-
-        final WebClient webClient = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
-        webClient.setWebConnection(conn);
-
-        conn.setResponse(URL_FIRST, mainHtml);
-        conn.setResponse(new URL(URL_FIRST, "1.html"), frame1);
-
-        webClient.getPage(URL_FIRST);
-        assertEquals(getExpectedAlerts(), collectedAlerts);
-    }
-
 }

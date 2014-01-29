@@ -304,7 +304,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
             FF17 = "undefined",
             IE8 = "[object]")
     @NotYetImplemented(FF17)
-    public void frames() throws Exception {
+    public void frames_framesetOnLoad() throws Exception {
         final String mainHtml =
             "<html><head><title>frames</title></head>\n"
             + "<frameset onload=\"alert(window.frames['f1'])\">\n"
@@ -315,6 +315,33 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
 
         final String frame1 = "<html><head><title>1</title></head>\n"
             + "<body></body>\n"
+            + "</html>";
+
+        getMockWebConnection().setResponse(URL_FIRST, mainHtml);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "1.html"), frame1);
+
+        loadPageWithAlerts2(URL_FIRST);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "[object HTMLFrameElement]",
+            FF17 = "undefined",
+            IE8 = "[object]",
+            IE11 = "[object Window]")
+    @NotYetImplemented(FF17)
+    public void frames_bodyOnLoad() throws Exception {
+        final String mainHtml =
+            "<html><head><title>frames</title></head>\n"
+            + "<frameset>\n"
+            + "<frame id='f1' src='1.html'/>\n"
+            + "</frameset>\n"
+            + "</html>";
+
+        final String frame1 = "<html><head><title>1</title></head>\n"
+            + "<body onload=\"alert(parent.frames['f1'])\"></body>\n"
             + "</html>";
 
         getMockWebConnection().setResponse(URL_FIRST, mainHtml);
