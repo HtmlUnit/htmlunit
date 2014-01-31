@@ -382,6 +382,9 @@ public final class HTMLParser {
      */
     static final class HtmlUnitDOMBuilder extends AbstractSAXParser
             implements ContentHandler, LexicalHandler, HTMLTagBalancingListener {
+
+        private enum HeadParsed { YES, SYNTESIZED, NO };
+
         private final HtmlPage page_;
 
         private Locator locator_;
@@ -389,7 +392,7 @@ public final class HTMLParser {
 
         private DomNode currentNode_;
         private StringBuilder characters_;
-        private boolean headParsed_ = false;
+        private HeadParsed headParsed_ = HeadParsed.NO;
         private boolean parsingInnerHead_ = false;
         private HtmlElement head_;
         private HtmlElement body_;
@@ -498,6 +501,15 @@ public final class HTMLParser {
         public void startDocument() throws SAXException {
         }
 
+        /** {@inheritDoc} */
+        @Override
+        public void startElement(final QName element, final XMLAttributes attributes, final Augmentations augs)
+            throws XNIException {
+            // just to have local access to the augmentations. A better way?
+            augmentations_ = augs;
+            super.startElement(element, attributes, augs);
+        }
+
         /** {@inheritDoc ContentHandler#startElement(String,String,String,Attributes)} */
         public void startElement(
                 String namespaceURI, final String localName,
@@ -519,18 +531,19 @@ public final class HTMLParser {
                 namespaceURI = namespaceURI.trim();
             }
             if ("head".equals(tagLower)) {
-                if (headParsed_ || page_.isParsingHtmlSnippet()) {
+                if (headParsed_ == HeadParsed.YES || page_.isParsingHtmlSnippet()) {
                     parsingInnerHead_ = true;
                     return;
                 }
-                headParsed_ = true;
+
+                headParsed_ = isSynthesized(augmentations_) ? HeadParsed.SYNTESIZED : HeadParsed.YES;
             }
             // add a head if none was there
-            else if (!headParsed_ && ("body".equals(tagLower) || "frameset".equals(tagLower))) {
+            else if (headParsed_ == HeadParsed.NO && ("body".equals(tagLower) || "frameset".equals(tagLower))) {
                 final ElementFactory factory = getElementFactory(page_, namespaceURI, "head");
                 final DomElement newElement = factory.createElement(page_, "head", null);
                 currentNode_.appendChild(newElement);
-                headParsed_ = true;
+                headParsed_ = HeadParsed.SYNTESIZED;
             }
 
             // If we're adding a body element, keep track of any temporary synthetic ones
@@ -898,7 +911,7 @@ public final class HTMLParser {
                 }
             }
 
-            if (headParsed_ && "head".equalsIgnoreCase(elem.localpart)) {
+            if (headParsed_ == HeadParsed.YES && "head".equalsIgnoreCase(elem.localpart)) {
                 parsingInnerHead_ = true;
             }
         }
@@ -916,6 +929,12 @@ public final class HTMLParser {
             finally {
                 page_.setBuilder(oldBuilder);
             }
+        }
+
+        private boolean isSynthesized(final Augmentations augs) {
+            final HTMLEventInfo info = (augs == null) ? null
+                    : (HTMLEventInfo) augs.getItem(FEATURE_AUGMENTATIONS);
+            return info != null ? info.isSynthesized() : false;
         }
     }
 }

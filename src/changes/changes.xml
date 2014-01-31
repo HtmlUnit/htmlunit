@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.14" date="???" description="FF24, Bugfixes, initial work on IE11">
+            <action type="fix" dev="rbri">
+                HtmlParser fixed for pages with scripts outside the html tag.
+            </action>
             <action type="add" dev="asashour" issue="215" system="features">
                 HtmlFileInput: ability to upload multiple files using setValueAttribute(String []).
             </action>

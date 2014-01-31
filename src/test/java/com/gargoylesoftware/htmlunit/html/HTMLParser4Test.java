@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -85,6 +86,97 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "         </form>\n"
             + "     </table>\n"
             + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception failure
+     */
+    @Test
+    @Alerts(DEFAULT = { "4", "[object HTMLScriptElement]", "[object Text]",
+                "[object HTMLTitleElement]", "[object Text]" },
+            IE8 = { "2", "[object HTMLTitleElement]", "[object HTMLScriptElement]", "undefined", "undefined" })
+    @NotYetImplemented(IE8)
+    public void badlyFormedHTML_scriptBeforeHead() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<script>var i=7;</script>\n"
+            + "<html>\n"
+            + "  <head>\n"
+            + "     <title>first</title>\n"
+            + "  </head>\n"
+            + "  <body>\n"
+            + "    <script>\n"
+            + "      var headchilds = document.getElementsByTagName('head')[0].childNodes;\n"
+            + "      alert(headchilds.length);\n"
+            + "      alert(headchilds[0]);\n"
+            + "      alert(headchilds[1]);\n"
+            + "      alert(headchilds[2]);\n"
+            + "      alert(headchilds[3]);\n"
+            + "    </script>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception failure
+     */
+    @Test
+    @Alerts(DEFAULT = { "4", "[object HTMLScriptElement]", "[object Text]",
+                "[object HTMLTitleElement]", "[object Text]" },
+            IE8 = { "3", "[object]", "[object]", "[object]", "undefined" })
+    @NotYetImplemented(IE8)
+    public void badlyFormedHTML_scriptBeforeDoctype() throws Exception {
+        final String html = "<script>var i=7;</script>\n"
+            + HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "  <head>\n"
+            + "     <title>first</title>\n"
+            + "  </head>\n"
+            + "  <body>\n"
+            + "    <script>\n"
+            + "      var headchilds = document.getElementsByTagName('head')[0].childNodes;\n"
+            + "      alert(headchilds.length);\n"
+            + "      alert(headchilds[0]);\n"
+            + "      alert(headchilds[1]);\n"
+            + "      alert(headchilds[2]);\n"
+            + "      alert(headchilds[3]);\n"
+            + "    </script>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception failure
+     */
+    @Test
+    @Alerts(DEFAULT = { "4", "[object HTMLParagraphElement]", "[object Text]",
+                "[object HTMLScriptElement]", "[object Text]" },
+            IE8 = { "3", "[object]", "[object]", "[object]", "undefined" })
+    @NotYetImplemented
+    public void badlyFormedHTML_scriptAfterHtml() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "  <head>\n"
+            + "     <title>first</title>\n"
+            + "    <script>\n"
+            + "      function test(){\n"
+            + "        var headchilds = document.getElementsByTagName('body')[0].childNodes;\n"
+            + "        alert(headchilds.length);\n"
+            + "        alert(headchilds[0]);\n"
+            + "        alert(headchilds[1]);\n"
+            + "        alert(headchilds[2]);\n"
+            + "        alert(headchilds[3]);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'><p>HtmlUnit</p></body>\n"
+            + "</html>"
+            + "<script>var i=7;</script>\n";
 
         loadPageWithAlerts2(html);
     }
