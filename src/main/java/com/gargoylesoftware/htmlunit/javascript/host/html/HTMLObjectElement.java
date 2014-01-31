@@ -20,7 +20,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.html.HtmlObject;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -38,7 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
 @JsxClass(domClass = HtmlObject.class)
 public class HTMLObjectElement extends FormChild {
 
-    private SimpleScriptable wrappedActiveX_;
+    private Scriptable wrappedActiveX_;
 
     /**
      * Returns the value of the "alt" property.

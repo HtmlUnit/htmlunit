@@ -106,19 +106,17 @@ public class ActiveXObject extends SimpleScriptable {
         final WebClient webClient = getWindow(ctorObj).getWebWindow().getWebClient();
         final Map<String, String> map = webClient.getActiveXObjectMap();
         if (map != null) {
-            final Object mapValue = map.get(activeXName);
-            if (mapValue != null) {
-                final String xClassString = (String) mapValue;
-                Object object = null;
+            final String xClassString = map.get(activeXName);
+            if (xClassString != null) {
                 try {
                     final Class<?> xClass = Class.forName(xClassString);
-                    object = xClass.newInstance();
+                    final Object object = xClass.newInstance();
+                    return Context.toObject(object, ctorObj);
                 }
                 catch (final Exception e) {
                     throw Context.reportRuntimeError("ActiveXObject Error: failed instantiating class " + xClassString
                             + " because " + e.getMessage() + ".");
                 }
-                return Context.toObject(object, ctorObj);
             }
         }
         if (webClient.getOptions().isActiveXNative() && System.getProperty("os.name").contains("Windows")) {
