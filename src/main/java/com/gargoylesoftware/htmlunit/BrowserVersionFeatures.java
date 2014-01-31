@@ -412,10 +412,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
-    GENERATED_86,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
     GENERATED_88,
 
     /** Was originally .isIE(). */
@@ -641,6 +637,10 @@ public enum BrowserVersionFeatures {
     /** HTMLCommentElement instead of Comment. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     HTML_COMMENT_ELEMENT,
+
+    /** Supports &lt;object&gt; classid attribute. */
+    @BrowserFeature(@WebBrowser(IE))
+    HTML_OBJECT_CLASSID,
 
     /** Indicates that "host" HTTP header should be the first. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })

@@ -14,11 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_86;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_OBJECT_CLASSID;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+
+import java.util.Map;
+
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlObject;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -94,15 +98,41 @@ public class HTMLObjectElement extends FormChild {
     @JsxSetter(@WebBrowser(IE))
     public void setClassid(final String classid) {
         getDomNodeOrDie().setAttribute("classid", classid);
-        if (classid.indexOf(':') != -1 && getBrowserVersion().hasFeature(GENERATED_86)
-                && getWindow().getWebWindow().getWebClient().getOptions().isActiveXNative()
-                && System.getProperty("os.name").contains("Windows")) {
-            try {
-                wrappedActiveX_ = new ActiveXObjectImpl(classid);
-                wrappedActiveX_.setParentScope(getParentScope());
+        if (classid.indexOf(':') != -1 && getBrowserVersion().hasFeature(HTML_OBJECT_CLASSID)) {
+            final WebClient webClient = getWindow().getWebWindow().getWebClient();
+            final Map<String, String> map = webClient.getActiveXObjectMap();
+            if (map != null) {
+                final String xClassString = map.get(classid);
+                if (xClassString != null) {
+                    try {
+                        final Class<?> xClass = Class.forName(xClassString);
+                        final Object object = xClass.newInstance();
+                        boolean contextCreated = false;
+                        if (Context.getCurrentContext() == null) {
+                            Context.enter();
+                            contextCreated = true;
+                        }
+                        wrappedActiveX_ = Context.toObject(object, getParentScope());
+                        if (contextCreated) {
+                            Context.exit();
+                        }
+                    }
+                    catch (final Exception e) {
+                        throw Context.reportRuntimeError("ActiveXObject Error: failed instantiating class "
+                                + xClassString + " because " + e.getMessage() + ".");
+                    }
+                    return;
+                }
             }
-            catch (final Exception e) {
-                Context.throwAsScriptRuntimeEx(e);
+            if (webClient.getOptions().isActiveXNative()
+                    && System.getProperty("os.name").contains("Windows")) {
+                try {
+                    wrappedActiveX_ = new ActiveXObjectImpl(classid);
+                    wrappedActiveX_.setParentScope(getParentScope());
+                }
+                catch (final Exception e) {
+                    Context.throwAsScriptRuntimeEx(e);
+                }
             }
         }
     }
