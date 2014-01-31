@@ -26,8 +26,8 @@
                 i.e. Jacob jar is not needed for compiling or usual usage of HtmlUnit.
             </p>
             <p>
-                To use Jacob, add jacob.jar to the classpath and configure the .dll so that the following code
-                works for you:
+                To use Jacob, add jacob.jar to the classpath and put the .dll in the path (java.library.path)
+                so that the following code works for you:
             </p>
             <source><![CDATA[
 final ActiveXComponent activeXComponent = new ActiveXComponent("InternetExplorer.Application");
