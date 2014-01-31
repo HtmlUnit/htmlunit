@@ -19,11 +19,14 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FILEINPUT_EMP
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -52,7 +55,7 @@ public class HtmlFileInput extends HtmlInput {
      * @param attributes the initial attributes
      */
     HtmlFileInput(final String qualifiedName, final SgmlPage page,
-        final Map<String, DomAttr> attributes) {
+            final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, addValueIfNeeded(page, attributes));
 
         if (hasFeature(FILEINPUT_EMPTY_DEFAULT_VALUE)) {
@@ -110,44 +113,48 @@ public class HtmlFileInput extends HtmlInput {
      */
     @Override
     public NameValuePair[] getSubmitKeyValuePairs() {
-        String value = getValueAttribute();
+        final String valueAttribute = getValueAttribute();
 
-        if (StringUtils.isEmpty(value)) {
+        if (StringUtils.isEmpty(valueAttribute)) {
             return new NameValuePair[] {new KeyDataPair(getNameAttribute(), new File(""), null, null)};
         }
 
-        File file = null;
-        // to tolerate file://
-        if (value.startsWith("file:/")) {
-            if (value.startsWith("file://") && !value.startsWith("file:///")) {
-                value = "file:///" + value.substring(7);
+        final List<NameValuePair> list = new ArrayList<NameValuePair>();
+        for (String value : valueAttribute.split("§")) {
+            File file = null;
+            // to tolerate file://
+            if (value.startsWith("file:/")) {
+                if (value.startsWith("file://") && !value.startsWith("file:///")) {
+                    value = "file:///" + value.substring(7);
+                }
+                try {
+                    file = new File(new URI(value));
+                }
+                catch (final URISyntaxException e) {
+                    // nothing here
+                }
             }
-            try {
-                file = new File(new URI(value));
-            }
-            catch (final URISyntaxException e) {
-                // nothing here
-            }
-        }
 
-        if (file == null) {
-            file = new File(value);
-        }
+            if (file == null) {
+                file = new File(value);
+            }
 
-        // contentType and charset are determined from browser and page
-        // perhaps it could be interesting to have setters for it in this class
-        // to give finer control to user
-        final String contentType;
-        if (contentType_ == null) {
-            contentType = getPage().getWebClient().guessContentType(file);
+            // contentType and charset are determined from browser and page
+            // perhaps it could be interesting to have setters for it in this class
+            // to give finer control to user
+            final String contentType;
+            if (contentType_ == null) {
+                contentType = getPage().getWebClient().guessContentType(file);
+            }
+            else {
+                contentType = contentType_;
+            }
+            final String charset = getPage().getPageEncoding();
+            final KeyDataPair keyDataPair = new KeyDataPair(getNameAttribute(), file, contentType, charset);
+            keyDataPair.setData(data_);
+            list.add(keyDataPair);
         }
-        else {
-            contentType = contentType_;
-        }
-        final String charset = getPage().getPageEncoding();
-        final KeyDataPair keyDataPair = new KeyDataPair(getNameAttribute(), file, contentType, charset);
-        keyDataPair.setData(data_);
-        return new NameValuePair[] {keyDataPair};
+        return list.toArray(new NameValuePair[list.size()]);
     }
 
     /**
@@ -186,4 +193,28 @@ public class HtmlFileInput extends HtmlInput {
     public String getContentType() {
         return contentType_;
     }
+
+    /**
+     * Used to specify <code>multiple</code> paths to upload.
+     *
+     * The current implementation splits the value based on '§'.
+     * We may follow WebDriver solution, once made,
+     * see https://code.google.com/p/selenium/issues/detail?id=2239
+     * @param paths the list of paths of the files to upload
+     * @return the page contained by this element's window after the value is set
+     */
+    public Page setValueAttribute(final String[] paths) {
+        if (getAttribute("multiple") == ATTRIBUTE_NOT_DEFINED) {
+            throw new IllegalStateException("HtmlFileInput is not 'multiple'.");
+        }
+        final StringBuilder builder = new StringBuilder();
+        for (final String p : paths) {
+            if (builder.length() != 0) {
+                builder.append('§');
+            }
+            builder.append(p);
+        }
+        return super.setValueAttribute(builder.toString());
+    }
+
 }

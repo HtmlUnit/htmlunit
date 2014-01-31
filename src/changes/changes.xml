@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.14" date="???" description="FF24, Bugfixes, initial work on IE11">
+            <action type="add" dev="asashour" issue="215" system="features">
+                HtmlFileInput: ability to upload multiple files using setValueAttribute(String []).
+            </action>
             <action type="fix" dev="asashour">
                 HTMLObjectElement: classid could be affected by webClient.setActiveXObjectMap().
             </action>

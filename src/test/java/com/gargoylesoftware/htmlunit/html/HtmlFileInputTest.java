@@ -493,4 +493,63 @@ public class HtmlFileInputTest extends WebServerTestCase {
             writer.close();
         }
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void mutiple() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        servlets.put("/upload1", Multiple1Servlet.class);
+        servlets.put("/upload2", HtmlFileInput2Test.PrintRequestServlet.class);
+        startWebServer("./", null, servlets);
+
+        final String filename1 = "HtmlFileInputTest_one.txt";
+        final String path1 = getClass().getResource(filename1).toExternalForm();
+        final File file1 = new File(new URI(path1));
+        assertTrue(file1.exists());
+
+        final String filename2 = "HtmlFileInputTest_two.txt";
+        final String path2 = getClass().getResource(filename2).toExternalForm();
+        final File file2 = new File(new URI(path2));
+        assertTrue(file2.exists());
+
+        final WebClient client = getWebClient();
+        final HtmlPage firstPage = client.getPage("http://localhost:" + PORT + "/upload1");
+
+        final HtmlForm form = firstPage.getForms().get(0);
+        final HtmlFileInput fileInput = form.getInputByName("myInput");
+        fileInput.setValueAttribute(new String[] {path1, path2});
+
+        final HtmlSubmitInput submitInput = form.getInputByValue("Upload");
+        final HtmlPage secondPage = submitInput.click();
+
+        final String response = secondPage.getWebResponse().getContentAsString();
+
+        assertTrue(response.contains("HtmlFileInputTest_one.txt"));
+        assertTrue(response.contains("First"));
+        assertTrue(response.contains("HtmlFileInputTest_two.txt"));
+        assertTrue(response.contains("Second"));
+    }
+
+    /**
+     * Servlet for '/upload1'.
+     */
+    public static class Multiple1Servlet extends HttpServlet {
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+            throws ServletException, IOException {
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html");
+            response.getWriter().write("<html>"
+                + "<body><form action='upload2' method='post' enctype='multipart/form-data'>\n"
+                + "Name: <input name='myInput' type='file' multiple><br>\n"
+                + "<input type='submit' value='Upload' id='mySubmit'>\n"
+                + "</form></body></html>\n");
+        }
+    }
 }
