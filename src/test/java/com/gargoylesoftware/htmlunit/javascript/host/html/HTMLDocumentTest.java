@@ -983,57 +983,63 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "10" },
-            IE8 = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "exception:setAttributeNS", "9" })
-    @NotYetImplemented
-    // TODO [IE11] HTMLCollection problem
+    @Alerts(DEFAULT = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "9" },
+            IE8 = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "exception:setAttributeNS", "8" })
     public void getElementsByName_changedAfterGet() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
+            // 1
             + "    var collection = document.getElementsByName('image1');\n"
             + "    alert(collection.length);\n"
 
+            // 2
             + "    var newImage1 = document.createElement('img');\n"
             + "    newImage1.name = 'image1';\n"
             + "    document.getElementById('outer1').appendChild(newImage1);\n"
             + "    alert(collection.length);\n"
 
+            // 3
             + "    var newImage2 = document.createElement('img');\n"
             + "    newImage2.name = 'image1';\n"
             + "    document.getElementById('outer2').insertBefore(newImage2, null);\n"
             + "    alert(collection.length);\n"
 
+            // 4
             + "    var newImage3 = document.createElement('img');\n"
             + "    newImage3.name = 'image1';\n"
             + "    document.getElementById('outer3').replaceChild(newImage3, document.getElementById('inner3'));\n"
             + "    alert(collection.length);\n"
 
+            // 5
             + "    document.getElementById('outer4').outerHTML = '<img name=\"image1\">';\n"
             + "    alert(collection.length);\n"
 
+            // 6
             + "    document.getElementById('outer5').innerHTML = '<img name=\"image1\">';\n"
             + "    alert(collection.length);\n"
 
+            // 7
             + "    document.getElementById('outer6').insertAdjacentHTML('beforeend', '<img name=\"image1\">');\n"
             + "    alert(collection.length);\n"
 
-            + "    document.getElementById('image2').name = 'image1';\n"
-            + "    alert(collection.length);\n"
-
+            // 8
             + "    document.getElementById('image3').setAttribute('name', 'image1');\n"
             + "    alert(collection.length);\n"
 
+            // 9
             + "    var newAttr = document.createAttribute('name');\n"
             + "    newAttr.nodeValue = 'image1';\n"
             + "    document.getElementById('image4').setAttributeNode(newAttr);\n"
             + "    alert(collection.length);\n"
 
+            // 10
             + "    try {\n"
             + "      document.getElementById('image5').setAttributeNS(null, 'name', 'image1');\n"
             + "      alert(collection.length);\n"
             + "    } catch (e) { alert('exception:setAttributeNS') }\n"
 
+            // 9
             + "    document.getElementById('outer1').removeChild(newImage1);\n"
             + "    alert(collection.length);\n"
             + "  }\n"
@@ -1049,6 +1055,147 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  <img id='image3'>\n"
             + "  <img id='image4'>\n"
             + "  <img id='image5'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Contains the cases of test {@link #getElementsByName_changedAfterGet()} that are not yet implemented.<br>
+     * If a case gets implemented, move it to {@link #getElementsByName_changedAfterGet()}.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "1", "2" })
+    @NotYetImplemented
+    public void getElementsByName_changedAfterGet_nyi() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            // 1
+            + "    var collection = document.getElementsByName('image1');\n"
+            + "    alert(collection.length);\n"
+
+            // 2
+            + "    document.getElementById('image2').name = 'image1';\n"
+            + "    alert(collection.length);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <img name='image1'>\n"
+            + "  <img id='image2'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "9" },
+            IE8 = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "exception:setAttributeNS", "8" })
+    public void getElementsByName_changedAfterGet_nested() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            // 1
+            + "    var collection = document.getElementsByName('image1');\n"
+            + "    alert(collection.length);\n"
+
+            // 2
+            + "    var newImage1 = document.createElement('img');\n"
+            + "    newImage1.name = 'image1';\n"
+            + "    document.getElementById('outer1').appendChild(newImage1);\n"
+            + "    alert(collection.length);\n"
+
+            // 3
+            + "    var newImage2 = document.createElement('img');\n"
+            + "    newImage2.name = 'image1';\n"
+            + "    document.getElementById('outer2').insertBefore(newImage2, null);\n"
+            + "    alert(collection.length);\n"
+
+            // 4
+            + "    var newImage3 = document.createElement('img');\n"
+            + "    newImage3.name = 'image1';\n"
+            + "    document.getElementById('outer3').replaceChild(newImage3, document.getElementById('inner3'));\n"
+            + "    alert(collection.length);\n"
+
+            // 5
+            + "    document.getElementById('outer4').outerHTML = '<img name=\"image1\">';\n"
+            + "    alert(collection.length);\n"
+
+            // 6
+            + "    document.getElementById('outer5').innerHTML = '<img name=\"image1\">';\n"
+            + "    alert(collection.length);\n"
+
+            // 7
+            + "    document.getElementById('outer6').insertAdjacentHTML('beforeend', '<img name=\"image1\">');\n"
+            + "    alert(collection.length);\n"
+
+            // 8
+            + "    document.getElementById('image3').setAttribute('name', 'image1');\n"
+            + "    alert(collection.length);\n"
+
+            // 9
+            + "    var newAttr = document.createAttribute('name');\n"
+            + "    newAttr.nodeValue = 'image1';\n"
+            + "    document.getElementById('image4').setAttributeNode(newAttr);\n"
+            + "    alert(collection.length);\n"
+
+            // 10
+            + "    try {\n"
+            + "      document.getElementById('image5').setAttributeNS(null, 'name', 'image1');\n"
+            + "      alert(collection.length);\n"
+            + "    } catch (e) { alert('exception:setAttributeNS') }\n"
+
+            // 9
+            + "    document.getElementById('outer1').removeChild(newImage1);\n"
+            + "    alert(collection.length);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div>\n"
+            + "    <img name='image1'>\n"
+            + "    <div id='outer1'></div>\n"
+            + "    <div id='outer2'></div>\n"
+            + "    <div id='outer3'><div id='inner3'></div></div>\n"
+            + "    <div id='outer4'></div>\n"
+            + "    <div id='outer5'></div>\n"
+            + "    <div id='outer6'></div>\n"
+            + "    <img id='image2'>\n"
+            + "    <img id='image3'>\n"
+            + "    <img id='image4'>\n"
+            + "    <img id='image5'>\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Contains the cases of test {@link #getElementsByName_changedAfterGet_nested()} that are not yet implemented.<br>
+     * If a case gets implemented, move it to {@link #getElementsByName_changedAfterGet_nested()}.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "1", "2" })
+    @NotYetImplemented
+    public void getElementsByName_changedAfterGet_nested_nyi() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            // 1
+            + "    var collection = document.getElementsByName('image1');\n"
+            + "    alert(collection.length);\n"
+
+            // 2
+            + "    document.getElementById('image2').name = 'image1';\n"
+            + "    alert(collection.length);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div>\n"
+            + "    <img name='image1'>\n"
+            + "    <img id='image2'>\n"
+            + "  </div>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

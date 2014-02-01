@@ -217,14 +217,25 @@ public class Node extends SimpleScriptable {
 
             // is the node allowed here?
             if (!isNodeInsertable(childNode)) {
-                // IE silently ignores it
                 if (getBrowserVersion().hasFeature(JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NODE)) {
-                    return childObject;
+                    return childNode;
                 }
-
                 throw asJavaScriptException(
                     new DOMException("Node cannot be inserted at the specified point in the hierarchy",
                         DOMException.HIERARCHY_REQUEST_ERR));
+            }
+            if (childObject instanceof DomDocumentFragment) {
+                final DomDocumentFragment fragment = (DomDocumentFragment) childObject;
+                for (final DomNode child : fragment.getChildren()) {
+                    if (!isNodeInsertable((Node) child.getScriptObject())) {
+                        if (getBrowserVersion().hasFeature(JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NODE)) {
+                            return childNode;
+                        }
+                        throw asJavaScriptException(
+                            new DOMException("Node cannot be inserted at the specified point in the hierarchy",
+                                DOMException.HIERARCHY_REQUEST_ERR));
+                    }
+                }
             }
 
             // Get XML node for the DOM node passed in
@@ -248,7 +259,7 @@ public class Node extends SimpleScriptable {
             }
 
             initInlineFrameIfNeeded(childDomNode);
-            for (final DomNode domNode : childDomNode.getChildren()) {
+            for (final DomNode domNode : childDomNode.getDescendants()) {
                 initInlineFrameIfNeeded(domNode);
             }
         }
@@ -302,12 +313,179 @@ public class Node extends SimpleScriptable {
     }
 
     /**
+     * Add a DOM node as a child to this node before the referenced node.
+     * If the referenced node is null, append to the end.
+     * @param context the JavaScript context
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method
+     * @param function the function
+     * @return the newly added child node
+     */
+    @JsxFunction
+    public static Object insertBefore(
+            final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
+        return ((Node) thisObj).insertBeforeImpl(args);
+    }
+
+    /**
+     * Add a DOM node as a child to this node before the referenced node.
+     * If the referenced node is null, append to the end.
+     * @param args the arguments
+     * @return the newly added child node
+     */
+    protected Object insertBeforeImpl(final Object[] args) {
+        final Object newChildObject = args[0];
+        final Object refChildObject;
+        if (args.length > 1) {
+            refChildObject = args[1];
+        }
+        else {
+            refChildObject = Undefined.instance;
+        }
+        Object insertedChild = null;
+
+        if (newChildObject instanceof Node) {
+            final Node newChild = (Node) newChildObject;
+            final DomNode newChildNode = newChild.getDomNodeOrDie();
+
+            // is the node allowed here?
+            if (!isNodeInsertable(newChild)) {
+                if (getBrowserVersion().hasFeature(JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NODE)) {
+                    return newChild;
+                }
+                throw asJavaScriptException(
+                    new DOMException("Node cannot be inserted at the specified point in the hierarchy",
+                        DOMException.HIERARCHY_REQUEST_ERR));
+            }
+            if (newChildNode instanceof DomDocumentFragment) {
+                final DomDocumentFragment fragment = (DomDocumentFragment) newChildNode;
+                for (final DomNode child : fragment.getChildren()) {
+                    if (!isNodeInsertable((Node) child.getScriptObject())) {
+                        if (getBrowserVersion().hasFeature(JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NODE)) {
+                            return newChild;
+                        }
+                        throw asJavaScriptException(
+                            new DOMException("Node cannot be inserted at the specified point in the hierarchy",
+                                DOMException.HIERARCHY_REQUEST_ERR));
+                    }
+                }
+            }
+
+            // extract refChild
+            final DomNode refChildNode;
+            if (refChildObject == Undefined.instance) {
+                if (getBrowserVersion().hasFeature(JS_NODE_INSERT_BEFORE_THROW_EXCEPTION_FOR_EXTRA_ARGUMENT)) {
+                    if (args.length > 1) {
+                        throw Context.reportRuntimeError("Invalid argument.");
+                    }
+                    refChildNode = null;
+                }
+                else {
+                    if (args.length == 2 || getBrowserVersion().hasFeature(JS_NODE_INSERT_BEFORE_REF_OPTIONAL)) {
+                        refChildNode = null;
+                    }
+                    else {
+                        throw Context.reportRuntimeError("insertBefore: not enough arguments");
+                    }
+                }
+            }
+            else if (refChildObject != null) {
+                refChildNode = ((Node) refChildObject).getDomNodeOrDie();
+            }
+            else {
+                refChildNode = null;
+            }
+
+            final DomNode domNode = getDomNodeOrDie();
+
+            domNode.insertBefore(newChildNode, refChildNode);
+            insertedChild = newChild;
+
+            // if parentNode is null, create a DocumentFragment to be the parentNode
+            if (domNode.getParentNode() == null && getBrowserVersion()
+                    .hasFeature(JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT)) {
+                final DomDocumentFragment fragment = domNode.getPage().createDomDocumentFragment();
+                fragment.appendChild(domNode);
+            }
+        }
+        return insertedChild;
+    }
+
+    /**
      * Indicates if the node can be inserted.
      * @param childObject the node
      * @return <code>false</code> if it is not allowed here
      */
     private boolean isNodeInsertable(final Node childObject) {
         return !(childObject instanceof HTMLHtmlElement);
+    }
+
+    /**
+     * Removes a DOM node from this node.
+     * @param childObject the node to remove from this node
+     * @return the removed child node
+     */
+    @JsxFunction
+    public Object removeChild(final Object childObject) {
+        Object removedChild = null;
+
+        if (childObject instanceof Node) {
+            // Get XML node for the DOM node passed in
+            final DomNode childNode = ((Node) childObject).getDomNodeOrDie();
+
+            // Remove the child from the parent node
+            childNode.remove();
+            removedChild = childObject;
+        }
+        return removedChild;
+    }
+
+    /**
+     * Replaces a child DOM node with another DOM node.
+     * @param newChildObject the node to add as a child of this node
+     * @param oldChildObject the node to remove as a child of this node
+     * @return the removed child node
+     */
+    @JsxFunction
+    public Object replaceChild(final Object newChildObject, final Object oldChildObject) {
+        Object removedChild = null;
+
+        if (newChildObject instanceof DocumentFragment) {
+            final DocumentFragment fragment = (DocumentFragment) newChildObject;
+            Node firstNode = null;
+            final Node refChildObject = ((Node) oldChildObject).getNextSibling();
+            for (final DomNode node : fragment.getDomNodeOrDie().getChildren()) {
+                if (firstNode == null) {
+                    replaceChild(node.getScriptObject(), oldChildObject);
+                    firstNode = (Node) node.getScriptObject();
+                }
+                else {
+                    insertBeforeImpl(new Object[] {node.getScriptObject(), refChildObject});
+                }
+            }
+            if (firstNode == null) {
+                removeChild(oldChildObject);
+            }
+            removedChild = oldChildObject;
+        }
+        else if (newChildObject instanceof Node && oldChildObject instanceof Node) {
+            final Node newChild = (Node) newChildObject;
+
+            // is the node allowed here?
+            if (!isNodeInsertable(newChild)) {
+                throw Context.reportRuntimeError("Node cannot be inserted at the specified point in the hierarchy");
+            }
+
+            // Get XML nodes for the DOM nodes passed in
+            final DomNode newChildNode = newChild.getDomNodeOrDie();
+            final DomNode oldChildNode = ((Node) oldChildObject).getDomNodeOrDie();
+
+            // Replace the old child with the new child.
+            oldChildNode.replace(newChildNode);
+            removedChild = oldChildObject;
+        }
+
+        return removedChild;
     }
 
     /**
@@ -346,104 +524,6 @@ public class Node extends SimpleScriptable {
     }
 
     /**
-     * Add a DOM node as a child to this node before the referenced node.
-     * If the referenced node is null, append to the end.
-     * @param context the JavaScript context
-     * @param thisObj the scriptable
-     * @param args the arguments passed into the method
-     * @param function the function
-     * @return the newly added child node
-     */
-    @JsxFunction
-    public static Object insertBefore(
-            final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
-        return ((Node) thisObj).insertBeforeImpl(args);
-    }
-
-    /**
-     * Add a DOM node as a child to this node before the referenced node.
-     * If the referenced node is null, append to the end.
-     * @param args the arguments
-     * @return the newly added child node
-     */
-    protected Object insertBeforeImpl(final Object[] args) {
-        final Object newChildObject = args[0];
-        final Object refChildObject;
-        if (args.length > 1) {
-            refChildObject = args[1];
-        }
-        else {
-            refChildObject = Undefined.instance;
-        }
-        Object appendedChild = null;
-
-        if (newChildObject instanceof Node) {
-            final Node newChild = (Node) newChildObject;
-            final DomNode newChildNode = newChild.getDomNodeOrDie();
-
-            // is the node allowed here?
-            if (!isNodeInsertable(newChild)) {
-                // IE silently ignores it
-                if (getBrowserVersion().hasFeature(JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NODE)) {
-                    return newChildNode;
-                }
-                throw Context.reportRuntimeError("Node cannot be inserted at the specified point in the hierarchy");
-            }
-
-            if (newChildNode instanceof DomDocumentFragment) {
-                final DomDocumentFragment fragment = (DomDocumentFragment) newChildNode;
-                for (final DomNode child : fragment.getChildren()) {
-                    insertBeforeImpl(new Object[] {child.getScriptObject(), refChildObject});
-                }
-                return newChildObject;
-            }
-            final DomNode refChildNode;
-            // IE accepts non standard calls with only one argument
-            if (refChildObject == Undefined.instance) {
-                if (getBrowserVersion().hasFeature(JS_NODE_INSERT_BEFORE_THROW_EXCEPTION_FOR_EXTRA_ARGUMENT)) {
-                    if (args.length > 1) {
-                        throw Context.reportRuntimeError("Invalid argument.");
-                    }
-                    refChildNode = null;
-                }
-                else {
-                    if (args.length == 2 || getBrowserVersion().hasFeature(JS_NODE_INSERT_BEFORE_REF_OPTIONAL)) {
-                        refChildNode = null;
-                    }
-                    else {
-                        throw Context.reportRuntimeError("insertBefore: not enough arguments");
-                    }
-                }
-            }
-            else if (refChildObject != null) {
-                refChildNode = ((Node) refChildObject).getDomNodeOrDie();
-            }
-            else {
-                refChildNode = null;
-            }
-
-            final DomNode domNode = getDomNodeOrDie();
-            // Append the child to the parent node
-            if (refChildNode != null) {
-                refChildNode.insertBefore(newChildNode);
-                appendedChild = newChildObject;
-            }
-            else {
-                domNode.appendChild(newChildNode);
-                appendedChild = newChildObject;
-            }
-
-            // if parentNode is null in IE, create a DocumentFragment to be the parentNode
-            if (domNode.getParentNode() == null && getBrowserVersion()
-                    .hasFeature(JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT)) {
-                final DomDocumentFragment fragment = domNode.getPage().createDomDocumentFragment();
-                fragment.appendChild(domNode);
-            }
-        }
-        return appendedChild;
-    }
-
-    /**
      * This method provides a way to determine whether two Node references returned by
      * the implementation reference the same object.
      * When two Node references are references to the same object, even if through a proxy,
@@ -457,26 +537,6 @@ public class Node extends SimpleScriptable {
     @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 9) })
     public boolean isSameNode(final Object other) {
         return other == this;
-    }
-
-    /**
-     * Removes a DOM node from this node.
-     * @param childObject the node to remove from this node
-     * @return the removed child node
-     */
-    @JsxFunction
-    public Object removeChild(final Object childObject) {
-        Object removedChild = null;
-
-        if (childObject instanceof Node) {
-            // Get XML node for the DOM node passed in
-            final DomNode childNode = ((Node) childObject).getDomNodeOrDie();
-
-            // Remove the child from the parent node
-            childNode.remove();
-            removedChild = childObject;
-        }
-        return removedChild;
     }
 
     /**
@@ -540,54 +600,6 @@ public class Node extends SimpleScriptable {
             }
         }
         return null;
-    }
-
-    /**
-     * Replaces a child DOM node with another DOM node.
-     * @param newChildObject the node to add as a child of this node
-     * @param oldChildObject the node to remove as a child of this node
-     * @return the removed child node
-     */
-    @JsxFunction
-    public Object replaceChild(final Object newChildObject, final Object oldChildObject) {
-        Object removedChild = null;
-
-        if (newChildObject instanceof DocumentFragment) {
-            final DocumentFragment fragment = (DocumentFragment) newChildObject;
-            Node firstNode = null;
-            final Node refChildObject = ((Node) oldChildObject).getNextSibling();
-            for (final DomNode node : fragment.getDomNodeOrDie().getChildren()) {
-                if (firstNode == null) {
-                    replaceChild(node.getScriptObject(), oldChildObject);
-                    firstNode = (Node) node.getScriptObject();
-                }
-                else {
-                    insertBeforeImpl(new Object[] {node.getScriptObject(), refChildObject});
-                }
-            }
-            if (firstNode == null) {
-                removeChild(oldChildObject);
-            }
-            removedChild = oldChildObject;
-        }
-        else if (newChildObject instanceof Node && oldChildObject instanceof Node) {
-            final Node newChild = (Node) newChildObject;
-
-            // is the node allowed here?
-            if (!isNodeInsertable(newChild)) {
-                throw Context.reportRuntimeError("Node cannot be inserted at the specified point in the hierarchy");
-            }
-
-            // Get XML nodes for the DOM nodes passed in
-            final DomNode newChildNode = newChild.getDomNodeOrDie();
-            final DomNode oldChildNode = ((Node) oldChildObject).getDomNodeOrDie();
-
-            // Replace the old child with the new child.
-            oldChildNode.replace(newChildNode);
-            removedChild = oldChildObject;
-        }
-
-        return removedChild;
     }
 
     /**

@@ -39,6 +39,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -220,8 +221,13 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
                 final DomNode domNode = getDomNodeOrNull();
                 if (domNode != null) {
                     domNode.addDomChangeListener(listener);
-                    if (attributeChangeSensitive_ && domNode instanceof HtmlElement) {
-                        ((HtmlElement) domNode).addHtmlAttributeChangeListener(listener);
+                    if (attributeChangeSensitive_) {
+                        if (domNode instanceof HtmlElement) {
+                            ((HtmlElement) domNode).addHtmlAttributeChangeListener(listener);
+                        }
+                        else if (domNode instanceof HtmlPage) {
+                            ((HtmlPage) domNode).addHtmlAttributeChangeListener(listener);
+                        }
                     }
                 }
                 listenerRegistered_ = true;

@@ -706,16 +706,16 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "2-2", "3-3", "4-4", "5-5", "6-6", "7-7", "8-8", "9-9", "10-10", "11-11", "12-12", "11-11" },
-            FF17 = { "0-2", "0-3", "0-4", "0-5", "0-6", "0-7", "0-8", "0-9", "0-10", "0-11", "0-12", "0-11" },
-            IE8 = { "2-2", "3-3", "4-4", "5-5", "6-6", "7-7", "8-8", "9-9", "10-10", "11-11",
-                "exception:setAttributeNS", "10-10" })
-    @NotYetImplemented
-    // TODO [IE11] HTMLCollection problem
+    @Alerts(DEFAULT = { "2-2", "3-3", "4-4", "5-5", "6-6", "7-7", "8-8", "9-9", "10-10", "11-11", "10-10" },
+            FF17 = { "0-2", "0-3", "0-4", "0-5", "0-6", "0-7", "0-8", "0-9", "0-10", "0-11", "0-10" },
+            IE8 = { "2-2", "3-3", "4-4", "5-5", "6-6", "7-7", "8-8", "9-9", "10-10",
+                "exception:setAttributeNS", "9-9" })
+    @NotYetImplemented(FF17)
     public void elementsByName_changedAfterGet() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
+            // 2
             + "    var collection1 = window.image1;\n"
             + "    var collection2 = image1;\n"
             + "    if (!collection1) {\n"
@@ -726,46 +726,53 @@ public class Window3Test extends WebDriverTestCase {
             + "    }\n"
             + "    alert(collection1.length + '-' + collection2.length);\n"
 
+            // 3
             + "    var newImage1 = document.createElement('img');\n"
             + "    newImage1.name = 'image1';\n"
             + "    document.getElementById('outer1').appendChild(newImage1);\n"
             + "    alert(collection1.length + '-' + collection2.length);\n"
 
+            // 4
             + "    var newImage2 = document.createElement('img');\n"
             + "    newImage2.name = 'image1';\n"
             + "    document.getElementById('outer2').insertBefore(newImage2, null);\n"
             + "    alert(collection1.length + '-' + collection2.length);\n"
 
+            // 5
             + "    var newImage3 = document.createElement('img');\n"
             + "    newImage3.name = 'image1';\n"
             + "    document.getElementById('outer3').replaceChild(newImage3, document.getElementById('inner3'));\n"
             + "    alert(collection1.length + '-' + collection2.length);\n"
 
+            // 6
             + "    document.getElementById('outer4').outerHTML = '<img name=\"image1\">';\n"
             + "    alert(collection1.length + '-' + collection2.length);\n"
 
+            // 7
             + "    document.getElementById('outer5').innerHTML = '<img name=\"image1\">';\n"
             + "    alert(collection1.length + '-' + collection2.length);\n"
 
+            // 8
             + "    document.getElementById('outer6').insertAdjacentHTML('beforeend', '<img name=\"image1\">');\n"
             + "    alert(collection1.length + '-' + collection2.length);\n"
 
-            + "    document.getElementById('image2').name = 'image1';\n"
-            + "    alert(collection1.length + '-' + collection2.length);\n"
-
+            // 9
             + "    document.getElementById('image3').setAttribute('name', 'image1');\n"
             + "    alert(collection1.length + '-' + collection2.length);\n"
 
+            // 10
             + "    var newAttr = document.createAttribute('name');\n"
             + "    newAttr.nodeValue = 'image1';\n"
             + "    document.getElementById('image4').setAttributeNode(newAttr);\n"
             + "    alert(collection1.length + '-' + collection2.length);\n"
 
+            // 11
             + "    try {\n"
             + "      document.getElementById('image5').setAttributeNS(null, 'name', 'image1');\n"
             + "      alert(collection1.length + '-' + collection2.length);\n"
             + "    } catch (e) { alert('exception:setAttributeNS') }\n"
 
+            // 10
             + "    document.getElementById('outer1').removeChild(newImage1);\n"
             + "    alert(collection1.length + '-' + collection2.length);\n"
             + "  }\n"
@@ -782,6 +789,41 @@ public class Window3Test extends WebDriverTestCase {
             + "  <img id='image3'>\n"
             + "  <img id='image4'>\n"
             + "  <img id='image5'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "2-2", "3-3" },
+            FF17 = { "0-2", "0-3" })
+    @NotYetImplemented
+    public void elementsByName_changedAfterGet_nyi() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            // 2
+            + "    var collection1 = window.image1;\n"
+            + "    var collection2 = image1;\n"
+            + "    if (!collection1) {\n"
+            + "      collection1 = [];\n"
+            + "    }\n"
+            + "    if (!collection2) {\n"
+            + "      collection2 = [];\n"
+            + "    }\n"
+            + "    alert(collection1.length + '-' + collection2.length);\n"
+
+            // 3
+            + "    document.getElementById('image2').name = 'image1';\n"
+            + "    alert(collection1.length + '-' + collection2.length);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <img name='image1'>\n"
+            + "  <img name='image1'>\n"
+            + "  <img id='image2'>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

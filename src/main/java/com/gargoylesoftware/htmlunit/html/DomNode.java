@@ -89,6 +89,7 @@ import com.steadystate.css.parser.SACParserCSS3;
  * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
  * @author Ronald Brill
  * @author Chuck Dumont
+ * @author Frank Danek
  */
 public abstract class DomNode implements Cloneable, Serializable, Node {
 
@@ -671,6 +672,13 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public NamedNodeMap getAttributes() {
+        return NamedAttrNodeMapImpl.EMPTY_MAP;
+    }
+
+    /**
      * Returns a flag indicating whether or not this node should have any leading and trailing
      * whitespace removed when {@link #asText()} is called. This method should usually return
      * <tt>true</tt>, but must return <tt>false</tt> for such things as text formatting tags.
@@ -923,13 +931,105 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             if (domNode != this && domNode.getParentNode() != null) {
                 domNode.detach();
             }
-            // move the node
+
             basicAppend(domNode);
 
             fireAddition(domNode);
         }
 
         return domNode;
+    }
+
+    /**
+     * Appends the specified node to the end of this node's children, assuming the specified
+     * node is clean (doesn't have preexisting relationships to other nodes).
+     *
+     * @param node the node to append to this node's children
+     */
+    private void basicAppend(final DomNode node) {
+        node.setPage(getPage());
+        if (firstChild_ == null) {
+            firstChild_ = node;
+            firstChild_.previousSibling_ = node;
+        }
+        else {
+            final DomNode last = getLastChild();
+            last.nextSibling_ = node;
+            node.previousSibling_ = last;
+            node.nextSibling_ = null; // safety first
+            firstChild_.previousSibling_ = node; // new last node
+        }
+        node.parent_ = this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Node insertBefore(final Node newChild, final Node refChild) {
+        if (newChild instanceof DomDocumentFragment) {
+            final DomDocumentFragment fragment = (DomDocumentFragment) newChild;
+            for (final DomNode child : fragment.getChildren()) {
+                insertBefore(child, refChild);
+            }
+        }
+        else {
+            if (refChild == null) {
+                appendChild(newChild);
+            }
+            else {
+                if (refChild.getParentNode() != this) {
+                    throw new DOMException(DOMException.NOT_FOUND_ERR, "Reference node is not a child of this node.");
+                }
+                ((DomNode) refChild).insertBefore((DomNode) newChild);
+            }
+        }
+        return newChild;
+    }
+
+    /**
+     * Inserts the specified node as a new child node before this node into the child relationship this node is a
+     * part of. If the specified node is this node, this method is a no-op.
+     *
+     * @param newNode the new node to insert
+     * @throws IllegalStateException if this node is not a child of any other node
+     */
+    public void insertBefore(final DomNode newNode) throws IllegalStateException {
+        if (previousSibling_ == null) {
+            throw new IllegalStateException("Previous sibling for " + this + " is null.");
+        }
+
+        if (newNode == this) {
+            return;
+        }
+
+        // clean up the new node, in case it is being moved
+        if (newNode.getParentNode() != null) {
+            newNode.detach();
+        }
+
+        basicInsertBefore(newNode);
+
+        fireAddition(newNode);
+    }
+
+    /**
+     * Inserts the specified node into this node's parent's children right before this node, assuming the specified
+     * node is clean (doesn't have preexisting relationships to other nodes).
+     *
+     * @param node the node to insert before this node
+     */
+    private void basicInsertBefore(final DomNode node) {
+        node.setPage(page_);
+        if (parent_.firstChild_ == this) {
+            parent_.firstChild_ = node;
+        }
+        else {
+            previousSibling_.nextSibling_ = node;
+        }
+        node.previousSibling_ = previousSibling_;
+        node.nextSibling_ = this;
+        previousSibling_ = node;
+        node.parent_ = parent_;
     }
 
     private void fireAddition(final DomNode domNode) {
@@ -969,6 +1069,130 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
+     * Recursively sets the new page on the node and its children
+     * @param newPage the new owning page
+     */
+    private void setPage(final SgmlPage newPage) {
+        if (page_ == newPage) {
+            return; // nothing to do
+        }
+
+        page_ = newPage;
+        for (final DomNode node : getChildren()) {
+            node.setPage(newPage);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Node removeChild(final Node child) {
+        if (child.getParentNode() != this) {
+            throw new DOMException(DOMException.NOT_FOUND_ERR, "Node is not a child of this node.");
+        }
+        ((DomNode) child).remove();
+        return child;
+    }
+
+    /**
+     * Removes all of this node's children.
+     */
+    public void removeAllChildren() {
+        while (getFirstChild() != null) {
+            getFirstChild().remove();
+        }
+    }
+
+    /**
+     * Removes this node from all relationships with other nodes.
+     */
+    public void remove() {
+        // same as detach for the moment
+        detach();
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Detach this node from all relationships with other nodes.
+     * This is the first step of an move.
+     */
+    protected void detach() {
+        final DomNode exParent = parent_;
+
+        basicRemove();
+
+        fireRemoval(exParent);
+    }
+
+    /**
+     * Cuts off all relationships this node has with siblings and parents.
+     */
+    private void basicRemove() {
+        if (parent_ != null && parent_.firstChild_ == this) {
+            parent_.firstChild_ = nextSibling_;
+        }
+        else if (previousSibling_ != null && previousSibling_.nextSibling_ == this) {
+            previousSibling_.nextSibling_ = nextSibling_;
+        }
+        if (nextSibling_ != null && nextSibling_.previousSibling_ == this) {
+            nextSibling_.previousSibling_ = previousSibling_;
+        }
+        if (parent_ != null && this == parent_.getLastChild()) {
+            parent_.firstChild_.previousSibling_ = previousSibling_;
+        }
+
+        nextSibling_ = null;
+        previousSibling_ = null;
+        parent_ = null;
+    }
+
+    private void fireRemoval(final DomNode exParent) {
+        final HtmlPage htmlPage = getHtmlPageOrNull();
+        if (htmlPage != null) {
+            // some of the actions executed on removal need an intact parent relationship (e.g. for the
+            // DocumentPositionComparator) so we have to restore it temporarily
+            parent_ = exParent;
+            htmlPage.notifyNodeRemoved(this);
+            parent_ = null;
+        }
+
+        if (exParent != null) {
+            fireNodeDeleted(exParent, this);
+            // ask ex-parent to fire event (because we don't have parent now)
+            exParent.fireNodeDeleted(exParent, this);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Node replaceChild(final Node newChild, final Node oldChild) {
+        if (oldChild.getParentNode() != this) {
+            throw new DOMException(DOMException.NOT_FOUND_ERR, "Node is not a child of this node.");
+        }
+        ((DomNode) oldChild).replace((DomNode) newChild);
+        return oldChild;
+    }
+
+    /**
+     * Replaces this node with another node. If the specified node is this node, this
+     * method is a no-op.
+     * @param newNode the node to replace this one
+     * @throws IllegalStateException if this node is not a child of any other node
+     */
+    public void replace(final DomNode newNode) throws IllegalStateException {
+        if (newNode != this) {
+            final DomNode exParent = parent_;
+            final DomNode exNextSibling = nextSibling_;
+
+            remove();
+
+            exParent.insertBefore(newNode, exNextSibling);
+        }
+    }
+
+    /**
      * Quietly removes this node and moves its children to the specified destination. "Quietly" means
      * that no node events are fired. This method is not appropriate for most use cases. It should
      * only be used in specific cases for HTML parsing hackery.
@@ -984,28 +1208,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             destination.basicAppend(child);
         }
         basicRemove();
-    }
-
-    /**
-     * Appends the specified node to the end of this node's children, assuming the specified
-     * node is clean (doesn't have preexisting relationships to other nodes.
-     *
-     * @param node the node to append to this node's children
-     */
-    private void basicAppend(final DomNode node) {
-        node.setPage(getPage());
-        if (firstChild_ == null) {
-            firstChild_ = node;
-            firstChild_.previousSibling_ = node;
-        }
-        else {
-            final DomNode last = getLastChild();
-            last.nextSibling_ = node;
-            node.previousSibling_ = last;
-            node.nextSibling_ = null; // safety first
-            firstChild_.previousSibling_ = node; // new last node
-        }
-        node.parent_ = this;
     }
 
     /**
@@ -1033,172 +1235,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         if (childDocument != thisDocument && childDocument != null) {
             throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Child node " + newChild.getNodeName()
                 + " is not in the same Document as this " + getNodeName() + ".");
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public Node insertBefore(final Node newChild, final Node refChild) {
-        if (refChild == null) {
-            appendChild(newChild);
-        }
-        else {
-            if (refChild.getParentNode() != this) {
-                throw new DOMException(DOMException.NOT_FOUND_ERR, "Reference node is not a child of this node.");
-            }
-            ((DomNode) refChild).insertBefore((DomNode) newChild);
-        }
-        return null;
-    }
-
-    /**
-     * Inserts a new child node before this node into the child relationship this node is a
-     * part of. If the specified node is this node, this method is a no-op.
-     *
-     * @param newNode the new node to insert
-     * @throws IllegalStateException if this node is not a child of any other node
-     */
-    public void insertBefore(final DomNode newNode) throws IllegalStateException {
-        if (previousSibling_ == null) {
-            throw new IllegalStateException("Previous sibling for " + this + " is null.");
-        }
-
-        if (newNode == this) {
-            return;
-        }
-
-        //clean up the new node, in case it is being moved
-        final DomNode exParent = newNode.getParentNode();
-        newNode.basicRemove();
-
-        if (parent_.firstChild_ == this) {
-            parent_.firstChild_ = newNode;
-        }
-        else {
-            previousSibling_.nextSibling_ = newNode;
-        }
-        newNode.previousSibling_ = previousSibling_;
-        newNode.nextSibling_ = this;
-        previousSibling_ = newNode;
-        newNode.parent_ = parent_;
-        newNode.setPage(page_);
-
-        fireAddition(newNode);
-
-        if (exParent != null) {
-            fireNodeDeleted(exParent, newNode);
-            exParent.fireNodeDeleted(exParent, this);
-        }
-    }
-
-    /**
-     * Recursively sets the new page on the node and its children
-     * @param newPage the new owning page
-     */
-    private void setPage(final SgmlPage newPage) {
-        if (page_ == newPage) {
-            return; // nothing to do
-        }
-
-        page_ = newPage;
-        for (final DomNode node : getChildren()) {
-            node.setPage(newPage);
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public NamedNodeMap getAttributes() {
-        return NamedAttrNodeMapImpl.EMPTY_MAP;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public Node removeChild(final Node child) {
-        if (child.getParentNode() != this) {
-            throw new DOMException(DOMException.NOT_FOUND_ERR, "Node is not a child of this node.");
-        }
-        ((DomNode) child).remove();
-        return child;
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     *
-     * Detach this node from all relationships with other nodes.
-     * This is the first step of an move.
-     */
-    protected void detach() {
-        final DomNode exParent = parent_;
-        basicRemove();
-
-        final HtmlPage htmlPage = getHtmlPageOrNull();
-        if (htmlPage != null) {
-            htmlPage.notifyNodeRemoved(this);
-        }
-
-        if (exParent != null) {
-            fireNodeDeleted(exParent, this);
-            //ask ex-parent to fire event (because we don't have parent now)
-            exParent.fireNodeDeleted(exParent, this);
-        }
-    }
-
-    /**
-     * Removes this node from all relationships with other nodes.
-     */
-    public void remove() {
-        // same as detach for the moment
-        detach();
-    }
-
-    /**
-     * Cuts off all relationships this node has with siblings and parents.
-     */
-    private void basicRemove() {
-        if (parent_ != null && parent_.firstChild_ == this) {
-            parent_.firstChild_ = nextSibling_;
-        }
-        else if (previousSibling_ != null && previousSibling_.nextSibling_ == this) {
-            previousSibling_.nextSibling_ = nextSibling_;
-        }
-        if (nextSibling_ != null && nextSibling_.previousSibling_ == this) {
-            nextSibling_.previousSibling_ = previousSibling_;
-        }
-        if (parent_ != null && this == parent_.getLastChild()) {
-            parent_.firstChild_.previousSibling_ = previousSibling_;
-        }
-
-        nextSibling_ = null;
-        previousSibling_ = null;
-        parent_ = null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public Node replaceChild(final Node newChild, final Node oldChild) {
-        if (oldChild.getParentNode() != this) {
-            throw new DOMException(DOMException.NOT_FOUND_ERR, "Node is not a child of this node.");
-        }
-        ((DomNode) oldChild).replace((DomNode) newChild);
-        return oldChild;
-    }
-
-    /**
-     * Replaces this node with another node. If the specified node is this node, this
-     * method is a no-op.
-     * @param newNode the node to replace this one
-     * @throws IllegalStateException if this node is not a child of any other node
-     */
-    public void replace(final DomNode newNode) throws IllegalStateException {
-        if (newNode != this) {
-            newNode.remove();
-            insertBefore(newNode);
-            remove();
         }
     }
 
@@ -1432,15 +1468,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public void setReadyState(final String state) {
         readyState_ = state;
-    }
-
-    /**
-     * Removes all of this node's children.
-     */
-    public void removeAllChildren() {
-        while (getFirstChild() != null) {
-            getFirstChild().remove();
-        }
     }
 
     /**

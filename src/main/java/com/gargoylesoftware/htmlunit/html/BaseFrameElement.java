@@ -19,9 +19,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.w3c.dom.Attr;
 
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.Page;
@@ -69,6 +69,15 @@ public abstract class BaseFrameElement extends HtmlElement {
         super(qualifiedName, page, attributes);
 
         init();
+
+        if (page instanceof HtmlPage && ((HtmlPage) page).isParsingHtmlSnippet()) {
+            // if created by the HTMLParser the src attribute is not set via setAttribute() or some other method but is
+            // part of the given attributes already.
+            final String src = getAttribute("src");
+            if (src != ATTRIBUTE_NOT_DEFINED && !WebClient.ABOUT_BLANK.equals(src)) {
+                loadSrcWhenAddedToPage_ = true;
+            }
+        }
     }
 
     private void init() {
@@ -357,6 +366,31 @@ public abstract class BaseFrameElement extends HtmlElement {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Attr setAttributeNode(final Attr attribute) {
+        final String qualifiedName = attribute.getName();
+        String attributeValue = null;
+        if ("src".equals(qualifiedName)) {
+            attributeValue = attribute.getValue().trim();
+        }
+
+        final Attr result = super.setAttributeNode(attribute);
+
+        if ("src".equals(qualifiedName) && !WebClient.ABOUT_BLANK.equals(attributeValue)) {
+            if (isDirectlyAttachedToPage()) {
+                loadSrc();
+            }
+            else {
+                loadSrcWhenAddedToPage_ = true;
+            }
+        }
+
+        return result;
+    }
+
     private void loadSrc() {
         loadSrcWhenAddedToPage_ = false;
         final String src = getSrcAttribute();
@@ -387,18 +421,6 @@ public abstract class BaseFrameElement extends HtmlElement {
 
         if (loadSrcWhenAddedToPage_) {
             loadSrc();
-        }
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     *
-     * Marks this frame to load the source when added to page.
-     */
-    public void markLoadSrcWhenAddedToPage() {
-        final String src = getSrcAttribute();
-        if (StringUtils.isNoneEmpty(src) && !WebClient.ABOUT_BLANK.equals(src)) {
-            loadSrcWhenAddedToPage_ = true;
         }
     }
 

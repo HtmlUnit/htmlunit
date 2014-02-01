@@ -37,6 +37,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;
 import org.w3c.dom.DOMException;
@@ -213,6 +214,52 @@ public abstract class HtmlElement extends DomElement {
         if (hasFeature(EVENT_PROPERTY_CHANGE)) {
             fireEvent(Event.createPropertyChangeEvent(this, qualifiedName));
         }
+    }
+
+    /**
+     * Sets the specified attribute. This method may be overridden by subclasses
+     * which are interested in specific attribute value changes, but such methods <b>must</b>
+     * invoke <tt>super.setAttributeNode()</tt>, and <b>should</b> consider the value of the
+     * <tt>cloning</tt> parameter when deciding whether or not to execute custom logic.
+     *
+     * @param attribute the attribute to set
+     * @return {@inheritDoc}
+     */
+    @Override
+    public Attr setAttributeNode(final Attr attribute) {
+        final String qualifiedName = attribute.getName();
+        final String oldAttributeValue = getAttribute(qualifiedName);
+        final HtmlPage htmlPage = (HtmlPage) getPage();
+        final boolean mappedElement = isDirectlyAttachedToPage()
+                    && HtmlPage.isMappedElement(htmlPage, qualifiedName);
+        if (mappedElement) {
+            // cast is save here because isMappedElement checks for HtmlPage
+            htmlPage.removeMappedElement(this);
+        }
+
+        final Attr result = super.setAttributeNode(attribute);
+
+        if (mappedElement) {
+            htmlPage.addMappedElement(this);
+        }
+
+        final HtmlAttributeChangeEvent htmlEvent;
+        if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
+            htmlEvent = new HtmlAttributeChangeEvent(this, qualifiedName, attribute.getValue());
+            fireHtmlAttributeAdded(htmlEvent);
+            htmlPage.fireHtmlAttributeAdded(htmlEvent);
+        }
+        else {
+            htmlEvent = new HtmlAttributeChangeEvent(this, qualifiedName, oldAttributeValue);
+            fireHtmlAttributeReplaced(htmlEvent);
+            htmlPage.fireHtmlAttributeReplaced(htmlEvent);
+        }
+
+        if (hasFeature(EVENT_PROPERTY_CHANGE)) {
+            fireEvent(Event.createPropertyChangeEvent(this, qualifiedName));
+        }
+
+        return result;
     }
 
     /**

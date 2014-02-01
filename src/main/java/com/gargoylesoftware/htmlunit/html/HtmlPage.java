@@ -46,6 +46,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -376,33 +377,6 @@ public class HtmlPage extends SgmlPage {
 
     /**
      * {@inheritDoc}
-     */
-    public DomNodeList<DomElement> getElementsByTagName(final String tagName) {
-        return new XPathDomNodeList<DomElement>(this, "//*[local-name()='" + tagName + "']");
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
-    public DomNodeList<DomElement> getElementsByTagNameNS(final String namespaceURI, final String localName) {
-        throw new UnsupportedOperationException("HtmlPage.getElementsByTagNameNS is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public DomElement getElementById(final String elementId) {
-        try {
-            return getElementById(elementId, true);
-        }
-        catch (final ElementNotFoundException e) {
-            return null;
-        }
-    }
-
-    /**
-     * {@inheritDoc}
      * Not yet implemented.
      */
     public String getInputEncoding() {
@@ -519,6 +493,14 @@ public class HtmlPage extends SgmlPage {
 
     /**
      * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public DOMImplementation getImplementation() {
+        throw new UnsupportedOperationException("HtmlPage.getImplementation is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
      * @param tagName the tag name, preferably in lowercase
      */
     @Override
@@ -578,14 +560,6 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public DOMImplementation getImplementation() {
-        throw new UnsupportedOperationException("HtmlPage.getImplementation is not yet implemented.");
-    }
-
-    /**
-     * {@inheritDoc}
-     * Not yet implemented.
-     */
     public EntityReference createEntityReference(final String id) {
         throw new UnsupportedOperationException("HtmlPage.createEntityReference is not yet implemented.");
     }
@@ -596,6 +570,33 @@ public class HtmlPage extends SgmlPage {
      */
     public ProcessingInstruction createProcessingInstruction(final String namespaceURI, final String qualifiedName) {
         throw new UnsupportedOperationException("HtmlPage.createProcessingInstruction is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public DomNodeList<DomElement> getElementsByTagName(final String tagName) {
+        return new XPathDomNodeList<DomElement>(this, "//*[local-name()='" + tagName + "']");
+    }
+
+    /**
+     * {@inheritDoc}
+     * Not yet implemented.
+     */
+    public DomNodeList<DomElement> getElementsByTagNameNS(final String namespaceURI, final String localName) {
+        throw new UnsupportedOperationException("HtmlPage.getElementsByTagNameNS is not yet implemented.");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public DomElement getElementById(final String elementId) {
+        try {
+            return getElementById(elementId, true);
+        }
+        catch (final ElementNotFoundException e) {
+            return null;
+        }
     }
 
     /**
@@ -1333,6 +1334,15 @@ public class HtmlPage extends SgmlPage {
         return true;
     }
 
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * @return true if the OnbeforeunloadHandler has accepted to change the page
+     */
+    public boolean isOnbeforeunloadAccepted() {
+        return executeEventHandlersIfNeeded(Event.TYPE_BEFORE_UNLOAD);
+    }
+
     private boolean isOnbeforeunloadAccepted(final HtmlPage page, final Event event) {
         if (event.getType().equals(Event.TYPE_BEFORE_UNLOAD) && event.getReturnValue() != null) {
             final OnbeforeunloadHandler handler = getWebClient().getOnbeforeunloadHandler();
@@ -1767,6 +1777,55 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * @param node the node that has just been added to the document
+     */
+    void notifyNodeAdded(final DomNode node) {
+        if (node instanceof DomElement) {
+            addMappedElement((DomElement) node, true);
+
+            if (node instanceof BaseFrameElement) {
+                frameElements_.add((BaseFrameElement) node);
+            }
+            for (final HtmlElement child : node.getHtmlElementDescendants()) {
+                if (child instanceof BaseFrameElement) {
+                    frameElements_.add((BaseFrameElement) child);
+                }
+            }
+
+            if ("base".equals(node.getNodeName())) {
+                calculateBase();
+            }
+        }
+        node.onAddedToPage();
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * @param node the node that has just been removed from the tree
+     */
+    void notifyNodeRemoved(final DomNode node) {
+        if (node instanceof HtmlElement) {
+            removeMappedElement((HtmlElement) node, true, true);
+
+            if (node instanceof BaseFrameElement) {
+                frameElements_.remove(node);
+            }
+            for (final HtmlElement child : node.getHtmlElementDescendants()) {
+                if (child instanceof BaseFrameElement) {
+                    frameElements_.remove(child);
+                }
+            }
+
+            if ("base".equals(node.getNodeName())) {
+                calculateBase();
+            }
+        }
+    }
+
+    /**
      * Adds an element to the ID and name maps, if necessary.
      * @param element the element to be added to the ID and name maps
      */
@@ -1788,7 +1847,23 @@ public class HtmlPage extends SgmlPage {
 
     private void addElement(final Map<String, SortedSet<DomElement>> map, final DomElement element,
             final String attribute, final boolean recurse) {
-        final String value = element.getAttribute(attribute);
+        // first try real attributes
+        String value = element.getAttribute(attribute);
+
+        if (DomElement.ATTRIBUTE_NOT_DEFINED == value && !(element instanceof HtmlApplet)) {
+            // second try are JavaScript attributes
+            // ...but applets are a bit special so ignore them
+            final ScriptableObject scriptObject = element.getScriptObject();
+            // we have to make sure the scriptObject has a slot for the given attribute.
+            // just using get() may use e.g. getWithPreemption().
+            if (scriptObject.has(attribute, scriptObject)) {
+                final Object jsValue = scriptObject.get(attribute, scriptObject);
+                if (jsValue != null && jsValue != Scriptable.NOT_FOUND && jsValue instanceof String) {
+                    value = (String) jsValue;
+                }
+            }
+        }
+
         if (DomElement.ATTRIBUTE_NOT_DEFINED != value) {
             SortedSet<DomElement> elements = map.get(value);
             if (elements == null) {
@@ -1829,8 +1904,24 @@ public class HtmlPage extends SgmlPage {
     }
 
     private void removeElement(final Map<String, SortedSet<DomElement>> map, final DomElement element,
-            final String att, final boolean recurse) {
-        final String value = element.getAttribute(att);
+            final String attribute, final boolean recurse) {
+        // first try real attributes
+        String value = element.getAttribute(attribute);
+
+        if (DomElement.ATTRIBUTE_NOT_DEFINED == value && !(element instanceof HtmlApplet)) {
+            // second try are JavaScript attributes
+            // ...but applets are a bit special so ignore them
+            final ScriptableObject scriptObject = element.getScriptObject();
+            // we have to make sure the scriptObject has a slot for the given attribute.
+            // just using get() may use e.g. getWithPreemption().
+            if (scriptObject.has(attribute, scriptObject)) {
+                final Object jsValue = scriptObject.get(attribute, scriptObject);
+                if (jsValue != null && jsValue != Scriptable.NOT_FOUND && jsValue instanceof String) {
+                    value = (String) jsValue;
+                }
+            }
+        }
+
         if (!StringUtils.isEmpty(value)) {
             final SortedSet<DomElement> elements = map.remove(value);
             if (elements != null && (elements.size() != 1 || !elements.contains(element))) {
@@ -1840,29 +1931,20 @@ public class HtmlPage extends SgmlPage {
         }
         if (recurse) {
             for (final DomElement child : element.getChildElements()) {
-                removeElement(map, child, att, true);
+                removeElement(map, child, attribute, true);
             }
         }
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     *
-     * @param node the node that has just been added to the document
+     * Indicates if the attribute name indicates that the owning element is mapped.
+     * @param document the owning document
+     * @param attributeName the name of the attribute to consider
+     * @return <code>true</code> if the owning element should be mapped in its owning page
      */
-    void notifyNodeAdded(final DomNode node) {
-        if (node instanceof DomElement) {
-            addMappedElement((DomElement) node, true);
-
-            if (node instanceof BaseFrameElement) {
-                frameElements_.add((BaseFrameElement) node);
-            }
-
-            if ("base".equals(node.getNodeName())) {
-                calculateBase();
-            }
-        }
-        node.onAddedToPage();
+    static boolean isMappedElement(final Document document, final String attributeName) {
+        return (document instanceof HtmlPage)
+            && ("name".equals(attributeName) || "id".equals(attributeName));
     }
 
     private void calculateBase() {
@@ -1879,25 +1961,6 @@ public class HtmlPage extends SgmlPage {
             default:
                 base_ = baseElements.get(0);
                 notifyIncorrectness("Multiple 'base' detected, only the first is used.");
-        }
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     *
-     * @param node the node that has just been removed from the tree
-     */
-    void notifyNodeRemoved(final DomNode node) {
-        if (node instanceof HtmlElement) {
-            removeMappedElement((HtmlElement) node, true, true);
-
-            if (node instanceof BaseFrameElement) {
-                frameElements_.remove(node);
-            }
-
-            if ("base".equals(node.getNodeName())) {
-                calculateBase();
-            }
         }
     }
 
@@ -2059,9 +2122,17 @@ public class HtmlPage extends SgmlPage {
      */
     @Override
     public HtmlPage cloneNode(final boolean deep) {
-        final HtmlPage result = (HtmlPage) super.cloneNode(deep);
+        // we need the ScriptObject clone before cloning the kids.
+        final HtmlPage result = (HtmlPage) super.cloneNode(false);
         final SimpleScriptable jsObjClone = ((SimpleScriptable) getScriptObject()).clone();
         jsObjClone.setDomNode(result);
+
+        // if deep, clone the kids too.
+        if (deep) {
+            for (DomNode child = getFirstChild(); child != null; child = child.getNextSibling()) {
+                result.appendChild(child.cloneNode(true));
+            }
+        }
         return result;
     }
 
@@ -2174,15 +2245,6 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     *
-     * @return true if the OnbeforeunloadHandler has accepted to change the page
-     */
-    public boolean isOnbeforeunloadAccepted() {
-        return executeEventHandlersIfNeeded(Event.TYPE_BEFORE_UNLOAD);
-    }
-
-    /**
      * Returns <tt>true</tt> if an HTML parser is operating on this page, adding content to it.
      * @return <tt>true</tt> if an HTML parser is operating on this page, adding content to it
      */
@@ -2208,7 +2270,7 @@ public class HtmlPage extends SgmlPage {
      * Returns <tt>true</tt> if an HTML parser is parsing a non-inline HTML snippet to add content
      * to this page. Non-inline content is content that is parsed for the page, but not in the
      * same stream as the page itself -- basically anything other than <tt>document.write()</tt>
-     * or <tt>document.writeln()</tt>: <tt>innerHTML</tt>, <tt>otherHTML</tt>,
+     * or <tt>document.writeln()</tt>: <tt>innerHTML</tt>, <tt>outerHTML</tt>,
      * <tt>document.createElement()</tt>, etc.
      *
      * @return <tt>true</tt> if an HTML parser is parsing a non-inline HTML snippet to add content
@@ -2230,11 +2292,6 @@ public class HtmlPage extends SgmlPage {
      */
     void registerSnippetParsingEnd() {
         snippetParserCount_--;
-
-        // maybe the stream has added a iframe tag
-        if (0 == snippetParserCount_) {
-            loadFrames();
-        }
     }
 
     /**
@@ -2364,17 +2421,6 @@ public class HtmlPage extends SgmlPage {
      */
     public void save(final File file) throws IOException {
         new XmlSerializer().save(this, file);
-    }
-
-    /**
-     * Indicates if the attribute name indicates that the owning element is mapped.
-     * @param document the owning document
-     * @param attributeName the name of the attribute to consider
-     * @return <code>true</code> if the owning element should be mapped in its owning page
-     */
-    static boolean isMappedElement(final Document document, final String attributeName) {
-        return (document instanceof HtmlPage)
-            && ("name".equals(attributeName) || "id".equals(attributeName));
     }
 
     /**

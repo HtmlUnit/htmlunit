@@ -76,7 +76,6 @@ import org.xml.sax.helpers.AttributesImpl;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
@@ -713,6 +712,22 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
+     * Gets the attributes of the element in the form of a {@link org.xml.sax.Attributes}.
+     * @param element the element to read the attributes from
+     * @return the attributes
+     */
+    protected AttributesImpl readAttributes(final HtmlElement element) {
+        final AttributesImpl attributes = new AttributesImpl();
+        for (final DomAttr entry : element.getAttributesMap().values()) {
+            final String name = entry.getName();
+            final String value = entry.getValue();
+            attributes.addAttribute(null, name, name, null, value);
+        }
+
+        return attributes;
+    }
+
+    /**
      * Removes this object from the document hierarchy.
      * @param removeChildren whether to remove children or no
      * @return a reference to the object that is removed
@@ -943,8 +958,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Replace all children elements of this element with the supplied value.
-     * @param value the new value for the contents of this node
+     * Replaces all child elements of this element with the supplied value.
+     * @param value the new value for the contents of this element
      */
     @JsxSetter
     public void setInnerHTML(final Object value) {
@@ -952,20 +967,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         domNode.removeAllChildren();
 
-        // null && IE     -> add child
-        // null && non-IE -> Don't add
-        // ''             -> Don't add
         final boolean addChildForNull = getBrowserVersion().hasFeature(JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE);
         if ((value == null && addChildForNull) || (value != null && !"".equals(value))) {
 
             final String valueAsString = Context.toString(value);
-            parseHtmlSnippet(domNode, true, valueAsString);
-
-            for (final DomNode node : domNode.getDescendants()) {
-                if (node instanceof BaseFrameElement) {
-                    ((BaseFrameElement) node).markLoadSrcWhenAddedToPage();
-                }
-            }
+            parseHtmlSnippet(domNode, valueAsString);
 
             final boolean createFragment = getBrowserVersion().hasFeature(JS_INNER_HTML_CREATES_DOC_FRAGMENT_AS_PARENT);
             // if the parentNode has null parentNode in IE,
@@ -978,8 +984,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Replace all children elements of this element with the supplied value.
-     * @param value the new value for the contents of this node
+     * Replaces all child elements of this element with the supplied text value.
+     * @param value the new value for the contents of this element
      */
     @JsxSetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public void setInnerText(final String value) {
@@ -1009,8 +1015,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Replace all children elements of this element with the supplied value.
-     * @param value the new value for the contents of this node
+     * Replaces all child elements of this element with the supplied text value.
+     * @param value the new value for the contents of this element
      */
     @Override
     public void setTextContent(final Object value) {
@@ -1018,52 +1024,57 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Replace all children elements of this element with the supplied value.
-     * Sets the outerHTML of the node.
-     * @param value the new value for replacing this node
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534310.aspx">MSDN documentation</a>
+     * Replaces this element (including all child elements) with the supplied value.
+     * @param value the new value for replacing this element
      */
     @JsxSetter
     public void setOuterHTML(final String value) {
         final DomNode domNode = getDomNodeOrDie();
+        final DomNode parent = domNode.getParentNode();
+        final DomNode nextSibling = domNode.getNextSibling();
 
-        final DomDocumentFragment fragment = (DomDocumentFragment) domNode.getPage().createDocumentFragment();
-        parseHtmlSnippet(fragment, false, value);
-        DomNode child = fragment.getFirstChild();
-        if (getBrowserVersion().hasFeature(JS_OUTER_THROW_EXCEPTION_WHEN_CLOSES) && child instanceof DomElement) {
-            final String parentName = domNode.getParentNode().getNodeName().toUpperCase(Locale.ENGLISH);
-            final short[] closes = HTMLElements.getElement(child.getNodeName()).closes;
-            if (closes != null) {
-                for (final short close : closes) {
-                    if (HTMLElements.getElement(close).name.equals(parentName)) {
-                        throw Context.reportRuntimeError("outerHTML can not set '" + value
-                                + "' while its parent is " + domNode.getParentNode());
+        domNode.remove();
+
+        final DomNode target;
+        final boolean append;
+        if (nextSibling != null) {
+            target = nextSibling;
+            append = false;
+        }
+        else {
+            target = parent;
+            append = true;
+        }
+
+        final DomNode proxyDomNode = new ProxyDomNode(target.getPage(), target, append) {
+            @Override
+            public DomNode appendChild(final org.w3c.dom.Node node) {
+                if (getBrowserVersion().hasFeature(JS_OUTER_THROW_EXCEPTION_WHEN_CLOSES)
+                    && node instanceof DomElement) {
+                    final String parentName = parent.getNodeName().toUpperCase(Locale.ENGLISH);
+                    final short[] closes = HTMLElements.getElement(node.getNodeName()).closes;
+                    if (closes != null) {
+                        for (final short close : closes) {
+                            if (HTMLElements.getElement(close).name.equals(parentName)) {
+                                throw Context.reportRuntimeError("outerHTML can not set '" + value
+                                    + "' while its parent is " + domNode.getParentNode());
+                            }
+                        }
                     }
                 }
+
+                return super.appendChild(node);
             }
-        }
-
-        // this disables execution of script tags
-        final Document doc = getWindow().getDocument();
-        for (final DomNode node : fragment.getDescendants()) {
-            node.processImportNode(doc);
-        }
-
-        while (child != null) {
-            domNode.insertBefore(child);
-            child = fragment.getFirstChild();
-        }
-        domNode.remove();
+        };
+        parseHtmlSnippet(proxyDomNode, value);
     }
 
     /**
-     * Parses the specified HTML source code, appending the resultant content at the specified target location.
+     * Parses the specified HTML source code, appending the resulting content at the specified target location.
      * @param target the node indicating the position at which the parsed content should be placed
-     * @param append if <tt>true</tt>, append the parsed content as a child of the specified target;
-     *               if <tt>false</tt>, append the parsed content as the previous sibling of the specified target
      * @param source the HTML code extract to parse
      */
-    public static void parseHtmlSnippet(final DomNode target, final boolean append, final String source) {
+    public static void parseHtmlSnippet(final DomNode target, final String source) {
         try {
             HTMLParser.parseFragment(target, source);
         }
@@ -1130,26 +1141,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Gets the attributes of the element in the form of a {@link org.xml.sax.Attributes}.
-     * @param element the element to read the attributes from
-     * @return the attributes
-     */
-    protected AttributesImpl readAttributes(final HtmlElement element) {
-        final AttributesImpl attributes = new AttributesImpl();
-        for (final DomAttr entry : element.getAttributesMap().values()) {
-            final String name = entry.getName();
-            final String value = entry.getValue();
-            attributes.addAttribute(null, name, name, null, value);
-        }
-
-        return attributes;
-    }
-
-    /**
      * Parses the given text as HTML or XML and inserts the resulting nodes into the tree in the position given by the
      * position argument.
      * @param position specifies where to insert the nodes, using one of the following values (case-insensitive):
-     *        beforebegin, afterbegin, beforeend, afterend
+     *        <code>beforebegin</code>, <code>afterbegin</code>, <code>beforeend</code>, <code>afterend</code>
      * @param text the text to parse
      *
      * @see <a href="http://www.w3.org/TR/DOM-Parsing/#methods-2">W3C Spec</a>
@@ -1161,12 +1156,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     @JsxFunction
     public void insertAdjacentHTML(final String position, final String text) {
         final Object[] values = getInsertAdjacentLocation(position);
-        final DomNode node = (DomNode) values[0];
+        final DomNode domNode = (DomNode) values[0];
         final boolean append = ((Boolean) values[1]).booleanValue();
 
         // add the new nodes
-        final DomNode proxyNode = new ProxyDomNode(node.getPage(), node, append);
-        parseHtmlSnippet(proxyNode, append, text);
+        final DomNode proxyDomNode = new ProxyDomNode(domNode.getPage(), domNode, append);
+        parseHtmlSnippet(proxyDomNode, text);
     }
 
     /**

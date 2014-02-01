@@ -8,6 +8,11 @@
 
     <body>
         <release version="2.14" date="???" description="FF24, Bugfixes, initial work on IE11">
+            <action type="fix" dev="rbri" due-to="Frank Danek">
+                JavaScript: Internal cleanup and some fixes for the innerHTML/outerHTML/insertAdjacentHTML.
+                Fix appendChild/insertBefore/replaceChild also.
+                Additionally trigger the correct notifications to inform about dom changes.
+            </action>
             <action type="fix" dev="rbri">
                 HtmlParser fixed for pages with scripts outside the html tag.
             </action>
