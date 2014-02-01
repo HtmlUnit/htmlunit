@@ -383,7 +383,7 @@ public final class HTMLParser {
     static final class HtmlUnitDOMBuilder extends AbstractSAXParser
             implements ContentHandler, LexicalHandler, HTMLTagBalancingListener {
 
-        private enum HeadParsed { YES, SYNTESIZED, NO };
+        private enum HeadParsed { YES, SYNTHESIZED, NO };
 
         private final HtmlPage page_;
 
@@ -396,7 +396,7 @@ public final class HTMLParser {
         private boolean parsingInnerHead_ = false;
         private HtmlElement head_;
         private HtmlElement body_;
-        private Augmentations augmentations_;
+        private boolean lastTagWasSynthesized_;
         private HtmlForm formWaitingForLostChildren_;
         private static final String FEATURE_AUGMENTATIONS = "http://cyberneko.org/html/features/augmentations";
         private static final String FEATURE_PARSE_NOSCRIPT
@@ -505,8 +505,8 @@ public final class HTMLParser {
         @Override
         public void startElement(final QName element, final XMLAttributes attributes, final Augmentations augs)
             throws XNIException {
-            // just to have local access to the augmentations. A better way?
-            augmentations_ = augs;
+            // augs might change so we store only the interesting part
+            lastTagWasSynthesized_ = isSynthesized(augs);
             super.startElement(element, attributes, augs);
         }
 
@@ -536,14 +536,14 @@ public final class HTMLParser {
                     return;
                 }
 
-                headParsed_ = isSynthesized(augmentations_) ? HeadParsed.SYNTESIZED : HeadParsed.YES;
+                headParsed_ = lastTagWasSynthesized_ ? HeadParsed.SYNTHESIZED : HeadParsed.YES;
             }
             // add a head if none was there
             else if (headParsed_ == HeadParsed.NO && ("body".equals(tagLower) || "frameset".equals(tagLower))) {
                 final ElementFactory factory = getElementFactory(page_, namespaceURI, "head");
                 final DomElement newElement = factory.createElement(page_, "head", null);
                 currentNode_.appendChild(newElement);
-                headParsed_ = HeadParsed.SYNTESIZED;
+                headParsed_ = HeadParsed.SYNTHESIZED;
             }
 
             // If we're adding a body element, keep track of any temporary synthetic ones
@@ -657,8 +657,8 @@ public final class HTMLParser {
         @Override
         public void endElement(final QName element, final Augmentations augs)
             throws XNIException {
-            // just to have local access to the augmentations. A better way?
-            augmentations_ = augs;
+            // augs might change so we store only the interesting part
+            lastTagWasSynthesized_ = isSynthesized(augs);
             super.endElement(element, augs);
         }
 
@@ -687,8 +687,7 @@ public final class HTMLParser {
             previousNode.setEndLocation(locator_.getLineNumber(), locator_.getColumnNumber());
 
             // special handling for form lost children (malformed HTML code where </form> is synthesized)
-            if (previousNode instanceof HtmlForm
-                && ((HTMLEventInfo) augmentations_.getItem(FEATURE_AUGMENTATIONS)).isSynthesized()) {
+            if (previousNode instanceof HtmlForm && lastTagWasSynthesized_) {
                 formWaitingForLostChildren_ = (HtmlForm) previousNode;
             }
             else if (formWaitingForLostChildren_ != null && previousNode instanceof SubmittableElement) {
