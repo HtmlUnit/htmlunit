@@ -1039,7 +1039,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         if (isDirectlyAttachedToPage()) {
             // trigger events
             final Page page = getPage();
-            if (page instanceof HtmlPage) {
+            if (null != page && page.isHtmlPage()) {
                 ((HtmlPage) page).notifyNodeAdded(domNode);
             }
 

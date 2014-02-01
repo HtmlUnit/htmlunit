@@ -70,7 +70,7 @@ public abstract class BaseFrameElement extends HtmlElement {
 
         init();
 
-        if (page instanceof HtmlPage && ((HtmlPage) page).isParsingHtmlSnippet()) {
+        if (null != page && page.isHtmlPage() && ((HtmlPage) page).isParsingHtmlSnippet()) {
             // if created by the HTMLParser the src attribute is not set via setAttribute() or some other method but is
             // part of the given attributes already.
             final String src = getAttribute("src");

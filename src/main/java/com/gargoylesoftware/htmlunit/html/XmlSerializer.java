@@ -28,6 +28,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 
@@ -70,12 +71,12 @@ class XmlSerializer {
     public String asXml(final HtmlElement node) throws IOException {
         buffer_.setLength(0);
         indent_.setLength(0);
-        String charsetName = null;
-        if (node.getPage() instanceof HtmlPage) {
-            charsetName = node.getPage().getPageEncoding();
-        }
-        if (charsetName != null && node instanceof HtmlHtml) {
-            buffer_.append("<?xml version=\"1.0\" encoding=\"").append(charsetName).append("\"?>").append('\n');
+        final SgmlPage page = node.getPage();
+        if (null != page && page.isHtmlPage()) {
+            final String charsetName = page.getPageEncoding();
+            if (charsetName != null && node instanceof HtmlHtml) {
+                buffer_.append("<?xml version=\"1.0\" encoding=\"").append(charsetName).append("\"?>").append('\n');
+            }
         }
         printXml(node);
         final String response = buffer_.toString();
