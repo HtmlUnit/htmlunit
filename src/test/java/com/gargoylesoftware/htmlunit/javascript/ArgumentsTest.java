@@ -154,4 +154,20 @@ public class ArgumentsTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("hi")
+    public void argumentsAsParameter() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "function test1(arguments) {\n"
+            + "  alert(arguments);\n"
+            + "}\n"
+            + "test1('hi');\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
