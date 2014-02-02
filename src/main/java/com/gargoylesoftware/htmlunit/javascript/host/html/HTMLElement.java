@@ -941,7 +941,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             }
             buffer.append(">");
             // Add the children.
-            printChildren(buffer, node, html);
+            final boolean isHtml = html
+                    && !(scriptObject instanceof HTMLScriptElement)
+                    && !(scriptObject instanceof HTMLStyleElement);
+            printChildren(buffer, node, isHtml);
             if (null == htmlElement || !htmlElement.isEndTagForbidden()) {
                 buffer.append("</").append(tag).append(">");
             }

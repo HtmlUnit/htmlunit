@@ -909,4 +909,35 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "\n    <script id=\"testScript\">function foo() { return a > b}</script>\n  " },
+            IE8 = { "" })
+    @NotYetImplemented(IE8)
+    public void innerHTMLGetSet() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+
+            + "  <div id='tester'>\n"
+            + "    <script id='testScript'>function foo() { return a > b}</script>\n"
+            + "  </div>\n"
+
+            + "  <script type='text/javascript'>\n"
+            + "    var div = document.getElementById('tester');\n"
+            + "    try {\n"
+            + "      div.innerHTML = div.innerHTML;\n"
+            + "    } catch (e) { alert('exception'); }\n"
+            + "    alert(div.innerHTML);\n"
+            + "  </script>\n"
+
+            + "</body>\n"
+            + "</html>\n";
+
+        loadPageWithAlerts2(html);
+    }
 }
