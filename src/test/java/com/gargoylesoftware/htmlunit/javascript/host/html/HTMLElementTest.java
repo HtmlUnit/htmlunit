@@ -1674,6 +1674,38 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({ "0", "10", "0" })
+    public void scrollLeft() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "    <title>Test</title>\n"
+            + "    <script>\n"
+            + "    function doTest() {\n"
+            + "      var outer = document.getElementById('outer');\n"
+            + "      var inner = document.getElementById('inner');\n"
+            + "      alert(outer.scrollLeft);\n"
+
+            + "      outer.scrollLeft = 10;\n"
+            + "      alert(outer.scrollLeft);\n"
+
+            + "      outer.scrollLeft = -4;\n"
+            + "      alert(outer.scrollLeft);\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <div id='outer' style='overflow: scroll; width: 100px'>\n"
+            + "    <div id='inner' style='width: 250px'>abcdefg hijklmnop qrstuvw xyz</div>\n"
+            + "  </div>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts({ "0", "0", "0", "0", "0", "17", "0", "0" })
     public void scrollTop_overflowScroll() throws Exception {
         scrollTop("scroll");
