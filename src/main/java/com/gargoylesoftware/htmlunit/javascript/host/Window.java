@@ -403,7 +403,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536392.aspx">MSDN documentation</a>
      * @return the created popup
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 10))
     public Popup createPopup() {
         final Popup popup = new Popup();
         popup.setParentScope(this);

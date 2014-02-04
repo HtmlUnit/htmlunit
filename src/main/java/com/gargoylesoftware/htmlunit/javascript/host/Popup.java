@@ -40,9 +40,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
  * @author Marc Guillemot
  * @author David K. Taylor
  * @author Ahmed Ashour
+ * @author Ronald Brill
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535882.aspx">MSDN documentation</a>
  */
-@JsxClass(browsers = @WebBrowser(IE))
+@JsxClass(browsers = @WebBrowser(value = IE, maxVersion = 10))
 public class Popup extends SimpleScriptable {
 
     private boolean opened_;
