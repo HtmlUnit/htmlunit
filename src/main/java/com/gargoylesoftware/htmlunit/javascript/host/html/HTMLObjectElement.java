@@ -21,9 +21,11 @@ import java.util.Map;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Wrapper;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlObject;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -39,7 +41,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
  * @author Ronald Brill
  */
 @JsxClass(domClass = HtmlObject.class)
-public class HTMLObjectElement extends FormChild {
+public class HTMLObjectElement extends FormChild implements Wrapper {
 
     private Scriptable wrappedActiveX_;
 
@@ -109,7 +111,7 @@ public class HTMLObjectElement extends FormChild {
                         final Object object = xClass.newInstance();
                         boolean contextCreated = false;
                         if (Context.getCurrentContext() == null) {
-                            Context.enter();
+                            new HtmlUnitContextFactory(webClient).enterContext();
                             contextCreated = true;
                         }
                         wrappedActiveX_ = Context.toObject(object, getParentScope());
@@ -159,5 +161,16 @@ public class HTMLObjectElement extends FormChild {
         else {
             super.put(name, start, value);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object unwrap() {
+        if (wrappedActiveX_ instanceof Wrapper) {
+            return ((Wrapper) wrappedActiveX_).unwrap();
+        }
+        return wrappedActiveX_;
     }
 }
