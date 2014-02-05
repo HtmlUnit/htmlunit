@@ -33,6 +33,7 @@ import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ConfirmHandler;
 import com.gargoylesoftware.htmlunit.DialogWindow;
@@ -1090,24 +1091,21 @@ public class WindowTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({ "undefined", "Jane", "Smith", "sdg", "finished" })
     public void showModalDialog() throws Exception {
         final String html1
             = "<html><head><script>\n"
             + "  function test() {\n"
             + "    alert(window.returnValue);\n"
             + "    var o = new Object();\n"
-            + "    o.firstName = f.elements.firstName.value;\n"
-            + "    o.lastName = f.elements.lastName.value;\n"
+            + "    o.firstName = 'Jane';\n"
+            + "    o.lastName = 'Smith';\n"
             + "    var ret = showModalDialog('myDialog.html', o, 'dialogHeight:300px; dialogLeft:200px;');\n"
             + "    alert(ret);\n"
             + "    alert('finished');\n"
             + "  }\n"
             + "</script></head><body>\n"
             + "  <button onclick='test()' id='b'>Test</button>\n"
-            + "  <form id='f'>\n"
-            + "    First Name: <input type='text' name='firstName' value='Jane'><br>\n"
-            + "    Last Name: <input type='text' name='lastName' value='Smith'>\n"
-            + "  </form>\n"
             + "</body></html>";
 
         final String html2
@@ -1118,8 +1116,6 @@ public class WindowTest extends SimpleWebTestCase {
             + "  window.returnValue = 'sdg';\n"
             + "</script></head>\n"
             + "<body>foo</body></html>";
-
-        final String[] expected = {"undefined", "Jane", "Smith", "sdg", "finished"};
 
         final WebClient client = getWebClient();
         final List<String> actual = new ArrayList<String>();
@@ -1133,10 +1129,60 @@ public class WindowTest extends SimpleWebTestCase {
         final HtmlPage page = client.getPage(URL_FIRST);
         final HtmlElement button = page.getHtmlElementById("b");
         final HtmlPage dialogPage = button.click();
-        final DialogWindow dialog = (DialogWindow) dialogPage.getEnclosingWindow();
 
+        final DialogWindow dialog = (DialogWindow) dialogPage.getEnclosingWindow();
         dialog.close();
-        assertEquals(expected, actual);
+
+        assertEquals(getExpectedAlerts(), actual);
+    }
+
+    /**
+     * Test for the <tt>showModalDialog</tt> method. This tests blocking
+     * until the window gets closed.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "undefined", "sdg", "finished" })
+    @NotYetImplemented
+    public void showModalDialogWithButton() throws Exception {
+        final String html1
+            = "<html><head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(window.returnValue);\n"
+            + "      var res = showModalDialog('myDialog.html', null, 'dialogHeight:300px; dialogLeft:200px;');\n"
+            + "      alert(res);\n"
+            + "      alert('finished');\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <button onclick='test()' id='openDlg'>Test</button>\n"
+            + "</body></html>";
+
+        final String html2
+            = "<html><head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <button id='closeDlg' onclick='window.returnValue = \"result\"; window.close();'></button>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebClient client = getWebClient();
+        final List<String> actual = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(actual));
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html1);
+        conn.setResponse(new URL(URL_FIRST.toExternalForm() + "myDialog.html"), html2);
+        client.setWebConnection(conn);
+
+        final HtmlPage page = getWebClient().getPage(URL_FIRST);
+        HtmlElement button = page.getHtmlElementById("openDlg");
+        final HtmlPage dialogPage = button.click();
+        button = dialogPage.getHtmlElementById("closeDlg");
+
+        assertEquals(getExpectedAlerts(), actual);
     }
 
     /**
