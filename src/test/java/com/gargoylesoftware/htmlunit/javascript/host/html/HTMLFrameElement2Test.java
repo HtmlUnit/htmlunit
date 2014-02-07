@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.net.URL;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -375,5 +376,238 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "1.html"), frame1);
 
         loadPageWithAlerts2(URL_FIRST);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "OnloadTest", "header -> content -> frameSet",
+                "content\nClick for new frame content with onload",
+                "header -> content -> frameSet -> onloadFrame",
+                "onloadFrame\nNew content loaded..." })
+    @NotYetImplemented
+    public void windowLocationReplaceOnload() throws Exception {
+        final String html = "<html><head><title>OnloadTest</title></head>\n"
+                + "<frameset rows=\"50,*\" onLoad=\"top.header.addToFrameOrder('frameSet');\">\n"
+                + "  <frame name=\"header\" src=\"header.html\"></frame>\n"
+                + "  <frame name=\"content\" id=\"content\" "
+                        + "src=\"javascript:window.location.replace('content.html')\"></frame>\n"
+                + "</frameset>\n"
+                + "</html>";
+
+        final String headerFrame = "<html><head><title>headerFrame</title></head>\n"
+                + "<script type=\"text/javascript\">\n"
+                + "  function addToFrameOrder(frame) {\n"
+                + "    var spacer = ' -> ';\n"
+                + "    var frameOrder = document.getElementById('frameOrder').innerHTML;\n"
+                + "    if (frameOrder == '') {spacer = '';}\n"
+                + "    document.getElementById('frameOrder').innerHTML = frameOrder + spacer + frame;\n"
+                + "  }\n"
+                + "</script>\n"
+                + "<body onload=\"addToFrameOrder('header');\">\n"
+                + "<div id=\"frameOrder\"></div>\n"
+                + "</body></html>";
+
+        final String contentFrame = "<html><head><title>contentFrame</title></head>\n"
+                + "<body onload=\"top.header.addToFrameOrder('content');\">\n"
+                + "<h3>content</h3>\n"
+                + "<a name=\"onloadFrameAnchor\" href=\"onload.html\" "
+                        + "target=\"content\">Click for new frame content with onload</a>\n"
+                + "</body></html>";
+
+        final String onloadFrame = "<html><head><title>onloadFrame</title></head>\n"
+                + "<body onload=\"alert('Onload alert.');top.header.addToFrameOrder('onloadFrame');\">\n"
+                + "<script type=\"text/javascript\">\n"
+                + "  alert('Body alert.');\n"
+                + "</script>\n"
+                + "<h3>onloadFrame</h3>\n"
+                + "<p id=\"newContent\">New content loaded...</p>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_FIRST, html);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "header.html"), headerFrame);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "content.html"), contentFrame);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "onload.html"), onloadFrame);
+
+        final WebDriver driver = loadPage2(html, URL_FIRST);
+        // top frame
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+
+        // header frame
+        driver.switchTo().frame("header");
+        assertEquals(getExpectedAlerts()[1], driver.findElement(By.id("frameOrder")).getText());
+
+        // content frame
+        driver.switchTo().defaultContent();
+        driver.switchTo().frame("content");
+        assertEquals(getExpectedAlerts()[2],
+                driver.findElement(By.tagName("body")).getText());
+
+        driver.findElement(By.name("onloadFrameAnchor")).click();
+        driver.switchTo().defaultContent();
+        driver.switchTo().frame("header");
+        assertEquals(getExpectedAlerts()[3], driver.findElement(By.id("frameOrder")).getText());
+
+        driver.switchTo().defaultContent();
+        driver.switchTo().frame("content");
+        assertEquals(getExpectedAlerts()[4], driver.findElement(By.tagName("body")).getText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "OnloadTest", "header -> content -> frameSet",
+                        "content\nClick for new frame content with onload",
+                        "header -> content -> frameSet -> onloadFrame",
+                        "onloadFrame\nNew content loaded..." },
+            FF = { "OnloadTest", "header -> frameSet", "" })
+    @NotYetImplemented
+    public void windowLocationAssignOnload() throws Exception {
+        final String html = "<html><head><title>OnloadTest</title></head>\n"
+                + "<frameset rows=\"50,*\" onLoad=\"top.header.addToFrameOrder('frameSet');\">\n"
+                + "  <frame name=\"header\" src=\"header.html\"></frame>\n"
+                + "  <frame name=\"content\" id=\"content\" "
+                        + "src=\"javascript:window.location.assign('content.html')\"></frame>\n"
+                + "</frameset>\n"
+                + "</html>";
+
+        final String headerFrame = "<html><head><title>headerFrame</title></head>\n"
+                + "<script type=\"text/javascript\">\n"
+                + "  function addToFrameOrder(frame) {\n"
+                + "    var spacer = ' -> ';\n"
+                + "    var frameOrder = document.getElementById('frameOrder').innerHTML;\n"
+                + "    if (frameOrder == '') {spacer = '';}\n"
+                + "    document.getElementById('frameOrder').innerHTML = frameOrder + spacer + frame;\n"
+                + "  }\n"
+                + "</script>\n"
+                + "<body onload=\"addToFrameOrder('header');\">\n"
+                + "<div id=\"frameOrder\"></div>\n"
+                + "</body></html>";
+
+        final String contentFrame = "<html><head><title>contentFrame</title></head>\n"
+                + "<body onload=\"top.header.addToFrameOrder('content');\">\n"
+                + "<h3>content</h3>\n"
+                + "<a name=\"onloadFrameAnchor\" href=\"onload.html\" "
+                        + "target=\"content\">Click for new frame content with onload</a>\n"
+                + "</body></html>";
+
+        final String onloadFrame = "<html><head><title>onloadFrame</title></head>\n"
+                + "<body onload=\"alert('Onload alert.');top.header.addToFrameOrder('onloadFrame');\">\n"
+                + "<script type=\"text/javascript\">\n"
+                + "  alert('Body alert.');\n"
+                + "</script>\n"
+                + "<h3>onloadFrame</h3>\n"
+                + "<p id=\"newContent\">New content loaded...</p>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_FIRST, html);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "header.html"), headerFrame);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "content.html"), contentFrame);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "onload.html"), onloadFrame);
+
+        final WebDriver driver = loadPage2(html, URL_FIRST);
+        // top frame
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+
+        // header frame
+        driver.switchTo().frame("header");
+        assertEquals(getExpectedAlerts()[1], driver.findElement(By.id("frameOrder")).getText());
+
+        // content frame
+        driver.switchTo().defaultContent();
+        driver.switchTo().frame("content");
+        assertEquals(getExpectedAlerts()[2],
+                driver.findElement(By.tagName("body")).getText());
+
+        if (StringUtils.isNotEmpty(getExpectedAlerts()[2])) {
+            driver.findElement(By.name("onloadFrameAnchor")).click();
+            driver.switchTo().defaultContent();
+            driver.switchTo().frame("header");
+            assertEquals(getExpectedAlerts()[3], driver.findElement(By.id("frameOrder")).getText());
+
+            driver.switchTo().defaultContent();
+            driver.switchTo().frame("content");
+            assertEquals(getExpectedAlerts()[4], driver.findElement(By.tagName("body")).getText());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "OnloadTest", "header -> content -> frameSet",
+                        "content\nClick for new frame content with onload",
+                        "header -> content -> frameSet -> onloadFrame",
+                        "onloadFrame\nNew content loaded..." })
+    @NotYetImplemented
+    public void windowLocationSetOnload() throws Exception {
+        final String html = "<html><head><title>OnloadTest</title></head>\n"
+                + "<frameset rows=\"50,*\" onLoad=\"top.header.addToFrameOrder('frameSet');\">\n"
+                + "  <frame name=\"header\" src=\"header.html\"></frame>\n"
+                + "  <frame name=\"content\" id=\"content\" "
+                        + "src=\"javascript:window.location='content.html'\"></frame>\n"
+                + "</frameset>\n"
+                + "</html>";
+
+        final String headerFrame = "<html><head><title>headerFrame</title></head>\n"
+                + "<script type=\"text/javascript\">\n"
+                + "  function addToFrameOrder(frame) {\n"
+                + "    var spacer = ' -> ';\n"
+                + "    var frameOrder = document.getElementById('frameOrder').innerHTML;\n"
+                + "    if (frameOrder == '') {spacer = '';}\n"
+                + "    document.getElementById('frameOrder').innerHTML = frameOrder + spacer + frame;\n"
+                + "  }\n"
+                + "</script>\n"
+                + "<body onload=\"addToFrameOrder('header');\">\n"
+                + "<div id=\"frameOrder\"></div>\n"
+                + "</body></html>";
+
+        final String contentFrame = "<html><head><title>contentFrame</title></head>\n"
+                + "<body onload=\"top.header.addToFrameOrder('content');\">\n"
+                + "<h3>content</h3>\n"
+                + "<a name=\"onloadFrameAnchor\" href=\"onload.html\" "
+                        + "target=\"content\">Click for new frame content with onload</a>\n"
+                + "</body></html>";
+
+        final String onloadFrame = "<html><head><title>onloadFrame</title></head>\n"
+                + "<body onload=\"alert('Onload alert.');top.header.addToFrameOrder('onloadFrame');\">\n"
+                + "<script type=\"text/javascript\">\n"
+                + "  alert('Body alert.');\n"
+                + "</script>\n"
+                + "<h3>onloadFrame</h3>\n"
+                + "<p id=\"newContent\">New content loaded...</p>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_FIRST, html);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "header.html"), headerFrame);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "content.html"), contentFrame);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "onload.html"), onloadFrame);
+
+        final WebDriver driver = loadPage2(html, URL_FIRST);
+        // top frame
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+
+        // header frame
+        driver.switchTo().frame("header");
+        assertEquals(getExpectedAlerts()[1], driver.findElement(By.id("frameOrder")).getText());
+
+        // content frame
+        driver.switchTo().defaultContent();
+        driver.switchTo().frame("content");
+        assertEquals(getExpectedAlerts()[2],
+                driver.findElement(By.tagName("body")).getText());
+
+        if (StringUtils.isNotEmpty(getExpectedAlerts()[2])) {
+            driver.findElement(By.name("onloadFrameAnchor")).click();
+            driver.switchTo().defaultContent();
+            driver.switchTo().frame("header");
+            assertEquals(getExpectedAlerts()[3], driver.findElement(By.id("frameOrder")).getText());
+
+            driver.switchTo().defaultContent();
+            driver.switchTo().frame("content");
+            assertEquals(getExpectedAlerts()[4], driver.findElement(By.tagName("body")).getText());
+        }
     }
 }
