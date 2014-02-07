@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript.background;
 import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
+ * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+ *
  * Google App Engine specific subclass to facilitate execution of JS jobs.
  *
  * @version $Revision$
@@ -24,7 +26,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @author Kostadin Chikov
  * @author Ronald Brill
  */
-class GAEJavaScriptExecutor extends DefaultJavaScriptExecutor {
+public class GAEJavaScriptExecutor extends DefaultJavaScriptExecutor {
     private static final long serialVersionUID = 6730370472962866668L;
 
     /** Creates an EventLoop for the webClient.

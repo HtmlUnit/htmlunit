@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.14" date="???" description="FF24, Bugfixes, initial work on IE11">
+            <action type="fix" dev="rbri" issue="1503">
+                GAEJavaScriptExecutor is public again but marked as part of the internal api.
+            </action>
             <action type="fix" dev="rbri" issue="1509">
                 JavaScript: Fix encoding of innerHTML result for script content.
             </action>
