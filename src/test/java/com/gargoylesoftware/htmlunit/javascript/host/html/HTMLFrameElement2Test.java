@@ -444,15 +444,15 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @NotYetImplemented
     public void windowLocationReplaceOnload() throws Exception {
         final String html = "<html><head><title>OnloadTest</title></head>\n"
-                + "<frameset rows=\"50,*\" onLoad=\"top.header.addToFrameOrder('frameSet');\">\n"
-                + "  <frame name=\"header\" src=\"header.html\">\n"
-                + "  <frame name=\"content\" id=\"content\" "
+                + "<frameset rows='50,*' onLoad=\"top.header.addToFrameOrder('frameSet');\">\n"
+                + "  <frame name='header' src='header.html'>\n"
+                + "  <frame name='content' id='content' "
                         + "src=\"javascript:window.location.replace('content.html')\">\n"
                 + "</frameset>\n"
                 + "</html>";
 
         final String headerFrame = "<html><head><title>headerFrame</title></head>\n"
-                + "<script type=\"text/javascript\">\n"
+                + "<script type='text/javascript'>\n"
                 + "  function addToFrameOrder(frame) {\n"
                 + "    var spacer = ' -> ';\n"
                 + "    var frameOrder = document.getElementById('frameOrder').innerHTML;\n"
@@ -467,17 +467,17 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         final String contentFrame = "<html><head><title>contentFrame</title></head>\n"
                 + "<body onload=\"top.header.addToFrameOrder('content');\">\n"
                 + "  <h3>content</h3>\n"
-                + "  <a name=\"onloadFrameAnchor\" href=\"onload.html\" "
-                        + "target=\"content\">Click for new frame content with onload</a>\n"
+                + "  <a name='onloadFrameAnchor' href='onload.html' "
+                        + "target='content'>Click for new frame content with onload</a>\n"
                 + "</body></html>";
 
         final String onloadFrame = "<html><head><title>onloadFrame</title></head>\n"
                 + "<body onload=\"alert('Onload alert.');top.header.addToFrameOrder('onloadFrame');\">\n"
-                + "  <script type=\"text/javascript\">\n"
+                + "  <script type='text/javascript'>\n"
                 + "    alert('Body alert.');\n"
                 + "  </script>\n"
                 + "  <h3>onloadFrame</h3>\n"
-                + "  <p id=\"newContent\">New content loaded...</p>\n"
+                + "  <p id='newContent'>New content loaded...</p>\n"
                 + "</body></html>";
 
         getMockWebConnection().setResponse(URL_FIRST, html);
@@ -521,15 +521,15 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @NotYetImplemented(FF)
     public void windowLocationAssignOnload() throws Exception {
         final String html = "<html><head><title>OnloadTest</title></head>\n"
-                + "<frameset rows=\"50,*\" onLoad=\"top.header.addToFrameOrder('frameSet');\">\n"
-                + "  <frame name=\"header\" src=\"header.html\">\n"
-                + "  <frame name=\"content\" id=\"content\" "
+                + "<frameset rows='50,*' onLoad=\"top.header.addToFrameOrder('frameSet');\">\n"
+                + "  <frame name='header' src='header.html'>\n"
+                + "  <frame name='content' id='content' "
                         + "src=\"javascript:window.location.assign('content.html')\">\n"
                 + "</frameset>\n"
                 + "</html>";
 
         final String headerFrame = "<html><head><title>headerFrame</title></head>\n"
-                + "<script type=\"text/javascript\">\n"
+                + "<script type='text/javascript'>\n"
                 + "  function addToFrameOrder(frame) {\n"
                 + "    var spacer = ' -> ';\n"
                 + "    var frameOrder = document.getElementById('frameOrder').innerHTML;\n"
@@ -538,23 +538,23 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
                 + "  }\n"
                 + "</script>\n"
                 + "<body onload=\"addToFrameOrder('header');\">\n"
-                + "  <div id=\"frameOrder\"></div>\n"
+                + "  <div id='frameOrder'></div>\n"
                 + "</body></html>";
 
         final String contentFrame = "<html><head><title>contentFrame</title></head>\n"
                 + "<body onload=\"top.header.addToFrameOrder('content');\">\n"
                 + "  <h3>content</h3>\n"
-                + "  <a name=\"onloadFrameAnchor\" href=\"onload.html\" "
-                        + "target=\"content\">Click for new frame content with onload</a>\n"
+                + "  <a name='onloadFrameAnchor' href='onload.html' "
+                        + "target='content'>Click for new frame content with onload</a>\n"
                 + "</body></html>";
 
         final String onloadFrame = "<html><head><title>onloadFrame</title></head>\n"
                 + "<body onload=\"alert('Onload alert.');top.header.addToFrameOrder('onloadFrame');\">\n"
-                + "  <script type=\"text/javascript\">\n"
+                + "  <script type='text/javascript'>\n"
                 + "    alert('Body alert.');\n"
                 + "  </script>\n"
                 + "  <h3>onloadFrame</h3>\n"
-                + "  <p id=\"newContent\">New content loaded...</p>\n"
+                + "  <p id='newContent'>New content loaded...</p>\n"
                 + "</body></html>";
 
         getMockWebConnection().setResponse(URL_FIRST, html);
@@ -599,15 +599,15 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @NotYetImplemented
     public void windowLocationSetOnload() throws Exception {
         final String html = "<html><head><title>OnloadTest</title></head>\n"
-                + "<frameset rows=\"50,*\" onLoad=\"top.header.addToFrameOrder('frameSet');\">\n"
-                + "  <frame name=\"header\" src=\"header.html\">\n"
-                + "  <frame name=\"content\" id=\"content\" "
+                + "<frameset rows='50,*' onLoad=\"top.header.addToFrameOrder('frameSet');\">\n"
+                + "  <frame name='header' src='header.html'>\n"
+                + "  <frame name='content' id='content' "
                         + "src=\"javascript:window.location='content.html'\">\n"
                 + "</frameset>\n"
                 + "</html>";
 
         final String headerFrame = "<html><head><title>headerFrame</title></head>\n"
-                + "<script type=\"text/javascript\">\n"
+                + "<script type='text/javascript'>\n"
                 + "  function addToFrameOrder(frame) {\n"
                 + "    var spacer = ' -> ';\n"
                 + "    var frameOrder = document.getElementById('frameOrder').innerHTML;\n"
@@ -616,23 +616,23 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
                 + "  }\n"
                 + "</script>\n"
                 + "<body onload=\"addToFrameOrder('header');\">\n"
-                + "  <div id=\"frameOrder\"></div>\n"
+                + "  <div id='frameOrder'></div>\n"
                 + "</body></html>";
 
         final String contentFrame = "<html><head><title>contentFrame</title></head>\n"
                 + "<body onload=\"top.header.addToFrameOrder('content');\">\n"
                 + "  <h3>content</h3>\n"
-                + "  <a name=\"onloadFrameAnchor\" href=\"onload.html\" "
-                        + "target=\"content\">Click for new frame content with onload</a>\n"
+                + "  <a name='onloadFrameAnchor' href='onload.html' "
+                        + "target='content'>Click for new frame content with onload</a>\n"
                 + "</body></html>";
 
         final String onloadFrame = "<html><head><title>onloadFrame</title></head>\n"
                 + "<body onload=\"alert('Onload alert.');top.header.addToFrameOrder('onloadFrame');\">\n"
-                + "  <script type=\"text/javascript\">\n"
+                + "  <script type='text/javascript'>\n"
                 + "    alert('Body alert.');\n"
                 + "  </script>\n"
                 + "  <h3>onloadFrame</h3>\n"
-                + "  <p id=\"newContent\">New content loaded...</p>\n"
+                + "  <p id='newContent'>New content loaded...</p>\n"
                 + "</body></html>";
 
         getMockWebConnection().setResponse(URL_FIRST, html);
