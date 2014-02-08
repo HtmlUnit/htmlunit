@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_DOM_CONTENT_LOADED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONBEFOREUNLOAD_USES_EVENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_FRAMESET_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FOCUS_BODY_ELEMENT_AT_START;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FOCUS_HTML_ELEMENT_AT_START;
@@ -254,7 +253,6 @@ public class HtmlPage extends SgmlPage {
         setReadyStateOnDeferredScriptsIfNeeded();
 
         // frame initialization has a different order
-        final boolean framesetFirst = browserVersion.hasFeature(EVENT_ONLOAD_FRAMESET_FIRST);
         boolean isFrameWindow = enclosingWindow instanceof FrameWindow;
         boolean isFirstPageInFrameWindow = false;
         if (isFrameWindow) {
@@ -262,7 +260,7 @@ public class HtmlPage extends SgmlPage {
             isFirstPageInFrameWindow = enclosingWindow.getHistory().getLength() <= 2; // first is always about:blank
         }
 
-        if ((framesetFirst && !isFrameWindow) || (isFrameWindow && !isFirstPageInFrameWindow)) {
+        if (isFrameWindow && !isFirstPageInFrameWindow) {
             executeEventHandlersIfNeeded(Event.TYPE_LOAD);
         }
 
@@ -275,7 +273,7 @@ public class HtmlPage extends SgmlPage {
             }
         }
 
-        if (!framesetFirst && !isFrameWindow) {
+        if (!isFrameWindow) {
             executeEventHandlersIfNeeded(Event.TYPE_LOAD);
         }
 

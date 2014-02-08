@@ -96,29 +96,28 @@ public class HtmlFrame2Test extends WebDriverTestCase {
 
     /**
      * Regression test for for bug
-     * <a href="http://sf.net/support/tracker.php?aid=2873802">2873802</a>.
+     * <a href="http://sourceforge.net/p/htmlunit/bugs/925/">925</a>.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "second [object HTMLFormElement]", "third [object HTMLFormElement]",
+    @Alerts(DEFAULT = { "second [object HTMLFormElement]", "third [object HTMLFormElement]",
             "parent [object HTMLFormElement]" },
-            IE = { "parent [object]", "second [object]", "third [object]" },
-            IE11 = { })
+            IE8 = { "second [object]", "third [object]", "parent [object]" })
     // real FF sometimes alerts 'third' before 'second'
-    // real IE11 does not know frames.XXX.document anymore
     public void postponeLoading() throws Exception {
-        final String html = "<FRAMESET onload=\"alert('parent ' + window.parent.frames.third.document.frm)\">\n"
-            + "  <FRAME name=second frameborder=0 src='second.html'>\n"
-            + "  <FRAME name=third frameborder=0 src='third.html'>\n"
+        final String html = "<FRAMESET rows='50%,*' "
+                + "onload=\"alert('parent ' + window.parent.frames['third'].document.frm)\">\n"
+            + "  <FRAME name='second' frameborder='0' src='second.html'>\n"
+            + "  <FRAME name='third' frameborder='0' src='third.html'>\n"
             + "</FRAMESET>";
 
         final String secondHtml = "<html>\n"
-            + "<body onload=\"alert('second ' + window.parent.frames.third.document.frm)\">\n"
+            + "<body onload=\"alert('second ' + window.parent.frames['third'].document.frm)\">\n"
             + "  <h1>second</h1>\n"
             + "</body></html>";
 
         final String thirdHtml = "<html>\n"
-            + "<body onload=\"alert('third ' + window.parent.frames.third.document.frm)\">\n"
+            + "<body onload=\"alert('third ' + window.parent.frames['third'].document.frm)\">\n"
             + "  <form name='frm' id='frm'>\n"
             + "      <input type='text' id='one' name='one' value='something'>\n"
             + "  </form>\n"
@@ -133,6 +132,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({ "second", "third", "first" })
     public void frameOnload() throws Exception {
         final String html = "<FRAMESET rows='50%,50%' onload=\"alert('first')\">\n"
             + "  <FRAME name='second' src='second.html'>\n"
@@ -152,22 +152,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(getDefaultUrl(), "second.html"), secondHtml);
         getMockWebConnection().setResponse(new URL(getDefaultUrl(), "third.html"), thirdHtml);
 
-        final WebDriver driver = loadPage2(html);
-        final List<String> actualAlerts = getCollectedAlerts(driver);
-
-        // tested with real ff17 and ie6; running in selenium returns different results
-        Assert.assertEquals(3, actualAlerts.size());
-
-        // ignore order of frame windows
-        if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER_11 != getBrowserVersion()) {
-            // returns 'first' 'third' 'second'
-            Assert.assertEquals("first", actualAlerts.get(0));
-        }
-        else {
-            // IE11 returns 'second' 'third' 'first'
-            // DEFAULT returns 'third' 'second' 'first'
-            Assert.assertEquals("first", actualAlerts.get(2));
-        }
+        loadPageWithAlerts2(html);
     }
 
     /**

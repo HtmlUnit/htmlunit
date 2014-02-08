@@ -226,10 +226,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     EVENT_ONLOAD_EXTERNAL_JAVASCRIPT,
 
-    /** Triggers "onload" event of the frameset before the one from the frames. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
-    EVENT_ONLOAD_FRAMESET_FIRST,
-
     /** Triggers "onload" event if an iframe was created by javascript and added to the page. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT,
