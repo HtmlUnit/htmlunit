@@ -54,7 +54,7 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("§§URL§§")
-    public void testDocumentLocationGet() throws Exception {
+    public void documentLocationGet() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -71,7 +71,7 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("ok")
-    public void testDocumentLocationSet() throws Exception {
+    public void documentLocationSet() throws Exception {
         final String html1 =
               "<html>\n"
             + "<head>\n"
@@ -106,7 +106,7 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("§§URL§§")
-    public void testDocumentLocationHref() throws Exception {
+    public void documentLocationHref() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -252,7 +252,7 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "#hello", "#hi" })
-    public void testSetHash2() throws Exception {
+    public void setHash2() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "  function test() {\n"
@@ -273,7 +273,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testSetHrefWithOnlyHash() throws Exception {
+    public void setHrefWithOnlyHash() throws Exception {
         final String html = "<html><body><script>document.location.href = '#x';</script></body></html>";
         loadPageWithAlerts2(html);
     }
@@ -285,7 +285,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testSetHrefWithOnlyHash2() throws Exception {
+    public void setHrefWithOnlyHash2() throws Exception {
         final String html = "<script>document.location.href = '" + getDefaultUrl() + "#x';</script>";
         loadPageWithAlerts2(html);
     }
@@ -295,7 +295,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testReplace() throws Exception {
+    public void replace() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -317,7 +317,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testReplaceLastInHistory() throws Exception {
+    public void replaceLastInHistory() throws Exception {
         final String startContent = "<html><head><title>First Page</title></head><body></body></html>";
         getMockWebConnection().setResponse(URL_FIRST, startContent);
 
@@ -349,7 +349,33 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testReplaceFirstInHistory() throws Exception {
+    @Alerts("on-load")
+    public void replaceOnload() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    location.replace('" + URL_SECOND + "');\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+        final String secondContent = "<html><head><title>Second</title></head>\n"
+                + "<body onload='alert(\"on-load\")'></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+        final WebDriver webdriver = loadPageWithAlerts2(html);
+
+        assertEquals("Second", webdriver.getTitle());
+        assertEquals(2, getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * Test for <tt>replace</tt>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void replaceFirstInHistory() throws Exception {
         final String firstContent
             = "<html><head><title>First Page</title><script>\n"
             + "function doTest() {\n"
@@ -372,7 +398,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAssign() throws Exception {
+    public void assign() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"
             + "  function test() {\n"
@@ -393,7 +419,78 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testChangeLocationToNonHtml() throws Exception {
+    @Alerts("on-load")
+    public void assignOnload() throws Exception {
+        final String firstContent
+            = "<html><head><title>First</title><script>\n"
+            + "  function test() {\n"
+            + "    location.assign('" + URL_SECOND + "');\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        final String secondContent = "<html><head><title>Second</title></head>\n"
+                + "<body onload='alert(\"on-load\");'></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+        final WebDriver driver = loadPageWithAlerts2(firstContent);
+
+        assertEquals("Second", driver.getTitle());
+        assertEquals(2, getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void assingByEquals() throws Exception {
+        final String firstContent
+            = "<html><head><title>First</title><script>\n"
+            + "  function test() {\n"
+            + "    location = '" + URL_SECOND + "';\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(firstContent, URL_FIRST);
+        assertEquals("Second", driver.getTitle());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("on-load")
+    public void assingByEqualsOnload() throws Exception {
+        final String firstContent
+            = "<html><head><title>First</title><script>\n"
+            + "  function test() {\n"
+            + "    location  = '" + URL_SECOND + "';\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        final String secondContent = "<html><head><title>Second</title></head>\n"
+                + "<body onload='alert(\"on-load\");'></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+        final WebDriver driver = loadPageWithAlerts2(firstContent);
+
+        assertEquals("Second", driver.getTitle());
+        assertEquals(2, getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void changeLocationToNonHtml() throws Exception {
         final String html =
               "<html><head>\n"
             + "  <script>\n"
@@ -557,7 +654,7 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @BuggyWebDriver(IE11)
-    public void testLocationAfterOpenClosePopup() throws Exception {
+    public void locationAfterOpenClosePopup() throws Exception {
         final String html =
               "<html>\n"
             + "<head>\n"
