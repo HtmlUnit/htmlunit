@@ -441,7 +441,6 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
                 "content\nClick for new frame content with onload",
                 "header -> content -> frameSet -> onloadFrame",
                 "onloadFrame\nNew content loaded..." })
-    @NotYetImplemented
     public void windowLocationReplaceOnload() throws Exception {
         final String html = "<html><head><title>OnloadTest</title></head>\n"
                 + "<frameset rows='50,*' onLoad=\"top.header.addToFrameOrder('frameSet');\">\n"

@@ -70,6 +70,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.History;
 import com.gargoylesoftware.htmlunit.OnbeforeunloadHandler;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
@@ -257,7 +258,14 @@ public class HtmlPage extends SgmlPage {
         boolean isFirstPageInFrameWindow = false;
         if (isFrameWindow) {
             isFrameWindow = ((FrameWindow) enclosingWindow).getFrameElement() instanceof HtmlFrame;
-            isFirstPageInFrameWindow = enclosingWindow.getHistory().getLength() <= 2; // first is always about:blank
+
+            final History hist = enclosingWindow.getHistory();
+            if (hist.getLength() > 0 && WebClient.URL_ABOUT_BLANK == hist.getUrl(0)) {
+                isFirstPageInFrameWindow = hist.getLength() <= 2;
+            }
+            else {
+                isFirstPageInFrameWindow = enclosingWindow.getHistory().getLength() < 2;
+            }
         }
 
         if (isFrameWindow && !isFirstPageInFrameWindow) {
