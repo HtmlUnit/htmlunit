@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
@@ -52,7 +51,7 @@ public class HTMLFrameElement extends HTMLElement {
      * @return <code>null</code> if no document is contained
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_frame_ref4.html">Gecko DOM Reference</a>
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public DocumentProxy getContentDocument() {
         return ((Window) getFrame().getEnclosedWindow().getScriptObject()).getDocument_js();
     }

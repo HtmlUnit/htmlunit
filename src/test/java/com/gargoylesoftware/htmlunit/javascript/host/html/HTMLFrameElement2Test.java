@@ -67,20 +67,25 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts(DEFAULT = { "[object HTMLDocument]", "true" },
+            IE8 = { "[object]", "true" })
     public void contentDocument() throws Exception {
         final String html
-            = "<html><head><title>first</title>\n"
-                + "<script>\n"
-                + "function test() {\n"
-                + "  alert(document.getElementById('myFrame').contentDocument == frames.foo.document);\n"
-                + "}\n"
-                + "</script></head>\n"
-                + "<frameset rows='*' onload='test()'>\n"
-                + "<frame name='foo' id='myFrame' src='about:blank'/>\n"
-                + "</frameset>\n"
-                + "</html>";
+            = "<!DOCTYPE html>\n"
+            + "<html>\n"
+            + "<head>\n"
+            + "  <title>first</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.getElementById('myFrame').contentDocument);\n"
+            + "      alert(document.getElementById('myFrame').contentDocument == frames.foo.document);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<frameset rows='*' onload='test()'>\n"
+            + "  <frame name='foo' id='myFrame' src='about:blank'/>\n"
+            + "</frameset>\n"
+            + "</html>";
 
         loadPageWithAlerts2(html);
     }
@@ -663,5 +668,40 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
             driver.switchTo().frame("content");
             assertEquals(getExpectedAlerts()[4], driver.findElement(By.tagName("body")).getText());
         }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "localhost", "localhost", "localhost", "localhost" })
+    public void domain() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <title>OnloadTest</title>\n"
+                + "  <script>\n"
+                + "    function doTest() {\n"
+                + "      alert(document.domain);\n"
+                + "      alert(document.getElementById('left').contentWindow.document.domain);\n"
+                + "      alert(document.getElementById('center').contentWindow.document.domain);\n"
+                + "      alert(document.getElementById('right').contentWindow.document.domain);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<frameset cols='33%,33%,*' onLoad='doTest()'>\n"
+                + "  <frame name='left' id='left' >\n"
+                + "  <frame name='center' id='center' src='about:blank'>\n"
+                + "  <frame name='right' id='right' src='left.html'>\n"
+                + "</frameset>\n"
+                + "</html>";
+
+        final String left = "<html><head><title>Left</title></head>\n"
+                + "<body>left</body>\n"
+                + "</html>";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "left.html"), left);
+
+        loadPageWithAlerts2(html);
+        assertEquals(2, getMockWebConnection().getRequestCount());
     }
 }

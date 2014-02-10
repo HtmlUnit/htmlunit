@@ -26,7 +26,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -51,7 +50,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Alerts("false")
     public void style() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<!DOCTYPE html>\n"
+            + "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.getElementById('myIFrame').style == undefined);\n"
             + "}\n</script></head>\n"
@@ -67,7 +67,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Alerts({ "1", "myIFrame" })
     public void referenceFromJavaScript() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<!DOCTYPE html>\n"
+            + "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    alert(window.frames.length);\n"
             + "    alert(window.frames['myIFrame'].name);\n"
@@ -85,7 +86,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Alerts({ "about:blank", "about:blank" })
     public void directAccessPerName() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<!DOCTYPE html>\n"
+            + "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    alert(myIFrame.location);\n"
             + "    alert(Frame.location);\n"
@@ -105,12 +107,14 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Alerts("IFRAME")
     public void onLoadGetsIFrameElementByIdInParent() throws Exception {
         final String firstContent
-            = "<html><head><title>First</title></head>\n"
+            = "<!DOCTYPE html>\n"
+            + "<html><head><title>First</title></head>\n"
             + "<body>\n"
             + "<iframe id='myIFrame' src='frame.html'></iframe></body></html>";
 
         final String frameContent
-            = "<html><head><title>Frame</title><script>\n"
+            = "<!DOCTYPE html>\n"
+            + "<html><head><title>Frame</title><script>\n"
             + "function doTest() {\n"
             + "    alert(parent.document.getElementById('myIFrame').tagName);\n"
             + "}\n</script></head>\n"
@@ -129,19 +133,24 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(FF)
-    @Alerts(FF = "true")
+    @Alerts(DEFAULT = { "[object HTMLDocument]", "true" },
+            IE8 = { "[object]", "true" })
     public void contentDocument() throws Exception {
         final String html
-            = "<html><head><title>first</title>\n"
-                + "<script>\n"
-                + "function test() {\n"
-                + "  alert(document.getElementById('myFrame').contentDocument == frames.foo.document);\n"
-                + "}\n"
-                + "</script></head>\n"
-                + "<body onload='test()'>\n"
-                + "<iframe name='foo' id='myFrame' src='about:blank'></iframe>\n"
-                + "</body></html>";
+            = "<!DOCTYPE html>\n"
+            + "<html>\n"
+            + "<head>\n"
+            + "  <title>first</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.getElementById('myFrame').contentDocument);\n"
+            + "      alert(document.getElementById('myFrame').contentDocument == frames.foo.document);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <iframe name='foo' id='myFrame' src='about:blank'></iframe>\n"
+            + "</body></html>";
         loadPageWithAlerts2(html);
     }
 
@@ -152,15 +161,16 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Alerts("true")
     public void frameElement() throws Exception {
         final String html
-            = "<html><head><title>first</title>\n"
-                + "<script>\n"
-                + "function test() {\n"
-                + "  alert(document.getElementById('myFrame') == frames.foo.frameElement);\n"
-                + "}\n"
-                + "</script></head>\n"
-                + "<body onload='test()'>\n"
-                + "<iframe name='foo' id='myFrame' src='about:blank'></iframe>\n"
-                + "</body></html>";
+            = "<!DOCTYPE html>\n"
+            + "<html><head><title>first</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  alert(document.getElementById('myFrame') == frames.foo.frameElement);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<iframe name='foo' id='myFrame' src='about:blank'></iframe>\n"
+            + "</body></html>";
         loadPageWithAlerts2(html);
     }
 
@@ -173,8 +183,9 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts({ "false", "false", "true", "true", "true", "object", "object" })
     public void writeToIFrame() throws Exception {
-        final String html =
-              "<html><body onload='test()'><script>\n"
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html><body onload='test()'><script>\n"
             + "    function test() {\n"
             + "        \n"
             + "        var frame = document.createElement('iframe');\n"
@@ -212,8 +223,9 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "123", "undefined" },
             IE11 = { "123" })
     public void iFrameReinitialized() throws Exception {
-        final String html =
-              "<html><body><a id='test' href='2.html' target='theFrame'>page 2 in frame</a>\n"
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html><body><a id='test' href='2.html' target='theFrame'>page 2 in frame</a>\n"
             + "<iframe name='theFrame' src='1.html'></iframe>\n"
             + "</body></html>";
 
@@ -241,7 +253,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Alerts("about:blank")
     public void setSrc_JavascriptUrl() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<!DOCTYPE html>\n"
+            + "<html><head><title>First</title><script>\n"
             + "  function test() {\n"
             + "   document.getElementById('iframe1').src = 'javascript:void(0)';\n"
             + "   alert(window.frames[0].location);\n"
@@ -261,7 +274,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             IE = {"", "100", "", "20%", "-5", "30", "error", "400", "100", "-5", "100", "10%", "-12" })
     public void width() throws Exception {
         final String html
-            = "<html><body>\n"
+            = "<!DOCTYPE html>\n"
+            + "<html><body>\n"
             + "<iframe id='i1'></iframe>\n"
             + "<iframe id='i2' width='100'></iframe>\n"
             + "<iframe id='i3' width='foo'></iframe>\n"
@@ -313,7 +327,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             IE = {"", "100", "", "20%", "-5", "30", "error", "400", "100", "-5", "100", "10%", "-12" })
     public void height() throws Exception {
         final String html
-            = "<html><body>\n"
+            = "<!DOCTYPE html>\n"
+            + "<html><body>\n"
             + "<iframe id='i1'></iframe>\n"
             + "<iframe id='i2' height='100'></iframe>\n"
             + "<iframe id='i3' height='foo'></iframe>\n"
@@ -367,7 +382,9 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             IE = { "loading", "complete" })
     @NotYetImplemented(FF)
     public void readyState_IFrame() throws Exception {
-        final String html = "<html><head></head>\n"
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html><head></head>\n"
             + "  <body>\n"
             + "    <iframe id='i'></iframe>\n"
             + "    <script>\n"
@@ -389,9 +406,10 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "null", "[object HTMLBodyElement]" },
             IE8 = { "null", "[object]" })
     public void body() throws Exception {
-        final String html =
-              "<html><body>\n"
-            + "<iframe name='theFrame' src='1.html'></iframe>\n"
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html><body>\n"
+            + "  <iframe name='theFrame' src='1.html'></iframe>\n"
             + "</body></html>";
 
         final String frame = "<html><head><script>alert(document.body);</script></head>\n"
@@ -413,7 +431,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             IE = "128")
     public void width_px() throws Exception {
         final String html
-            = "<html><head>"
+            = "<!DOCTYPE html>\n"
+            + "<html><head>"
             + "<script>\n"
             + "  function test() {\n"
             + "    var iframe = document.getElementById('myFrame');\n"
@@ -438,7 +457,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void idByName() throws Exception {
         final String html
-            = "<html><head>"
+            = "<!DOCTYPE html>\n"
+            + "<html><head>"
             + "<script>\n"
             + "  function test() {\n"
             + "    alert(myFrame);\n"
@@ -461,7 +481,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Alerts("foo")
     public void settingInnerHtmlTriggersFrameLoad() throws Exception {
         final String html
-            = "<html><body><div id='d' onclick='loadFrame()'>Click me to show frame</div><script>\n"
+            = "<!DOCTYPE html>\n"
+            + "<html><body><div id='d' onclick='loadFrame()'>Click me to show frame</div><script>\n"
             + "function loadFrame() {\n"
             + "  var s = '<iframe id=\"i\" src=\"frame.html\">';\n"
             + "  s += '<p>Your browser does not support frames</p>';\n"
@@ -492,7 +513,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Alerts("something")
     public void window() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<!DOCTYPE html>\n"
+            + "<html><head><title>First</title><script>\n"
             + "function test() {\n"
             + "    var iframe = document.getElementById('myIFrame');\n"
             + "    iframe.contentWindow.contents = 'something';\n"
@@ -515,7 +537,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Alerts("something")
     public void settingSrc() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<!DOCTYPE html>\n"
+            + "<html><head><title>First</title><script>\n"
             + "function test() {\n"
             + "    var iframe = document.createElement('iframe');\n"
             + "    var content = 'something';\n"
@@ -532,5 +555,85 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
         driver.switchTo().frame(0);
         final String content = driver.findElement(By.xpath("//html/body")).getText();
         assertEquals(getExpectedAlerts()[0], content);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "localhost", "localhost", "localhost", "localhost",
+                "true", "true", "true" })
+    public void domain() throws Exception {
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html>\n"
+            + "<head>\n"
+            + "  <title>OnloadTest</title>\n"
+            + "  <script>\n"
+            + "    function doTest() {\n"
+            + "      var docDomain = document.domain;\n"
+            + "      var frame1Domain = document.getElementById('frame1').contentWindow.document.domain;\n"
+            + "      var frame2Domain = document.getElementById('frame2').contentWindow.document.domain;\n"
+            + "      var frame3Domain = document.getElementById('frame3').contentWindow.document.domain;\n"
+            + "      alert(docDomain);\n"
+            + "      alert(frame1Domain);\n"
+            + "      alert(frame2Domain);\n"
+            + "      alert(frame3Domain);\n"
+            + "      alert(docDomain === frame1Domain);\n"
+            + "      alert(docDomain === frame2Domain);\n"
+            + "      alert(docDomain === frame3Domain);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <iframe id='frame1' ></iframe>\n"
+            + "  <iframe id='frame2' src='about:blank'></iframe>\n"
+            + "  <iframe id='frame3' src='content.html'></iframe>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final String left = "<html><head><title>Left</title></head>\n"
+                + "<body>left</body>\n"
+                + "</html>";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "content.html"), left);
+
+        loadPageWithAlerts2(html);
+        assertEquals(2, getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "localhost", "localhost", "true" })
+    public void domainDynamic() throws Exception {
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html>\n"
+            + "<head>\n"
+            + "  <title>OnloadTest</title>\n"
+            + "  <script>\n"
+            + "    function doTest() {\n"
+            + "      var myFrame = document.createElement('iframe');\n"
+            + "      myFrame.id = 'idMyFrame'\n"
+            + "      myFrame.src = 'about:blank'\n"
+            + "      document.body.appendChild(myFrame)\n"
+
+            + "      var docDomain = document.domain;\n"
+            + "      var myFrameDomain = myFrame.contentDocument.domain;\n"
+
+            + "      alert(docDomain);\n"
+            + "      alert(myFrameDomain);\n"
+            + "      alert(docDomain === myFrameDomain);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+        assertEquals(1, getMockWebConnection().getRequestCount());
     }
 }
