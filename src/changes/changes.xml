@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.14" date="???" description="FF24, Bugfixes, initial work on IE11">
+            <action type="fix" dev="rbri" issue="1575">
+                JavaScript: Use the correct url for checking if the origin header has to be added
+                to a XMLHttpRequest.
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: Property contentDocument (Frame/iFrame) is available in IE8 also.
             </action>

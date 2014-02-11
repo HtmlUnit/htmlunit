@@ -496,7 +496,7 @@ public class XMLHttpRequest extends SimpleScriptable {
 
         try {
             final URL fullUrl = containingPage_.getFullyQualifiedUrl(url);
-            final URL originUrl = containingPage_.getUrl();
+            final URL originUrl = containingPage_.getFullyQualifiedUrl("");
             if (!isAllowCrossDomainsFor(originUrl, fullUrl)) {
                 throw Context.reportRuntimeError("Access to restricted URI denied");
             }

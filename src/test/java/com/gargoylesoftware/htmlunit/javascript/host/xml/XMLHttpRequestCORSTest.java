@@ -662,7 +662,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"
-                + "<body onload='test()'></body></html>";
+                + "<body onload='test()'>\n"
+                + "</body></html>";
 
         WithCredentialsServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = accessControlAllowOrigin;
         WithCredentialsServerServlet.ACCESS_CONTROL_ALLOW_CREDENTIALS_ = accessControlAllowCredentials;
@@ -671,6 +672,58 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         startWebServer2(".", null, servlets2);
 
         loadPageWithAlerts2(html, new URL(getDefaultUrl(), "/withCredentials1"));
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts("done 200")
+    public void testWithCredentialsIFrame() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+
+                + "function load() {\n"
+                + "  try {\n"
+                + "    var myContent = '<!DOCTYPE html><html><head></head><body>"
+                            + "<script src=\"get.js\"><\\/script><p>tttttt</p></body></html>';\n"
+                + "    window.asyncLoadIFrame = document.createElement('iframe');\n"
+                + "    asyncLoadIFrame.id = 'asyncLoadIFrame';\n"
+                + "    asyncLoadIFrame.src = 'about:blank';\n"
+                + "    document.body.appendChild(asyncLoadIFrame);\n"
+
+                + "    asyncLoadIFrame.contentWindow.document.open('text/html', 'replace');\n"
+                + "    asyncLoadIFrame.contentWindow.document.write(myContent);\n"
+                + "    asyncLoadIFrame.contentWindow.document.close();\n"
+                + "  } catch(e) { alert(e) }\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='load()'>\n"
+                + "</body></html>";
+
+        final String js = ""
+                + "var xhr = " + XHRInstantiation_ + ";\n"
+                + "  try {\n"
+                + "    var url = '/data';\n"
+                + "    xhr.open('GET',  url, true);\n"
+                + "    xhr.withCredentials = true;\n"
+                + "    xhr.onreadystatechange = onReadyStateChange;\n"
+                + "    xhr.send();\n"
+                + "  } catch(e) { alert(e) }\n"
+
+                + "  function onReadyStateChange() {\n"
+                + "    if (xhr.readyState == 4) {\n"
+                + "      alert('done ' + xhr.status);\n"
+                + "    }\n"
+                + "  }\n";
+
+        getMockWebConnection().setDefaultResponse(js, JAVASCRIPT_MIME_TYPE);
+        final String xml = "<xml><content>blah</content></xml>";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "/data"), xml, "text/xml");
+
+        loadPageWithAlerts2(html);
     }
 
     /**
