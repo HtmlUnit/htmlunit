@@ -115,5 +115,6 @@ public class StringUtilsTest extends SimpleWebTestCase {
     public void sanitizeForFileName() {
         assertEquals("HtmlUnit", StringUtils.sanitizeForFileName("HtmlUnit"));
         assertEquals("Html_Uni_", StringUtils.sanitizeForFileName("Html:Uni\t"));
+        assertEquals("Html_Unit", StringUtils.sanitizeForFileName("Html\\Unit"));
     }
 }
