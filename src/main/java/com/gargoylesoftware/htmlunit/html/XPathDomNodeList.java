@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.Serializable;
+import java.lang.ref.WeakReference;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +69,7 @@ class XPathDomNodeList<E extends DomNode> extends AbstractList<E> implements Dom
             node_ = node;
             xpath_ = xpath;
             transformer_ = transformer;
-            final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
+            final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl(this);
             node_.addDomChangeListener(listener);
             if (node_ instanceof HtmlElement) {
                 ((HtmlElement) node_).addHtmlAttributeChangeListener(listener);
@@ -135,41 +136,64 @@ class XPathDomNodeList<E extends DomNode> extends AbstractList<E> implements Dom
     /**
      * DOM change listener which clears the node cache when necessary.
      */
-    private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener {
+    private static final class DomHtmlAttributeChangeListenerImpl
+                                    implements DomChangeListener, HtmlAttributeChangeListener {
+
+        private transient WeakReference<XPathDomNodeList<?>> nodeList_;
+
+        private DomHtmlAttributeChangeListenerImpl(final XPathDomNodeList<?> nodeList) {
+            super();
+
+            nodeList_ = new WeakReference<XPathDomNodeList<?>>(nodeList);
+        }
 
         /**
          * {@inheritDoc}
          */
         public void nodeAdded(final DomChangeEvent event) {
-            cachedElements_ = null;
+            clearCache();
         }
 
         /**
          * {@inheritDoc}
          */
         public void nodeDeleted(final DomChangeEvent event) {
-            cachedElements_ = null;
+            clearCache();
         }
 
         /**
          * {@inheritDoc}
          */
         public void attributeAdded(final HtmlAttributeChangeEvent event) {
-            cachedElements_ = null;
+            clearCache();
         }
 
         /**
          * {@inheritDoc}
          */
         public void attributeRemoved(final HtmlAttributeChangeEvent event) {
-            cachedElements_ = null;
+            clearCache();
         }
 
         /**
          * {@inheritDoc}
          */
         public void attributeReplaced(final HtmlAttributeChangeEvent event) {
-            cachedElements_ = null;
+            clearCache();
+        }
+
+        private void clearCache() {
+            final XPathDomNodeList<?> nodes = getNodeListOrNull();
+            if (null != nodes) {
+                nodes.cachedElements_ = null;
+            }
+        }
+
+        private XPathDomNodeList<?> getNodeListOrNull() {
+            if (null == nodeList_) {
+                return null;
+            }
+            return nodeList_.get();
         }
     }
 

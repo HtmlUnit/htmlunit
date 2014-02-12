@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -236,7 +237,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
             cachedElements = computeElements();
             cachedElements_ = cachedElements;
             if (!listenerRegistered_) {
-                final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
+                final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl(this);
                 final DomNode domNode = getDomNodeOrNull();
                 if (domNode != null) {
                     domNode.addDomChangeListener(listener);
@@ -479,52 +480,85 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
         }
     }
 
-    private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener {
+    private static final class DomHtmlAttributeChangeListenerImpl
+                                    implements DomChangeListener, HtmlAttributeChangeListener {
+
+        private transient WeakReference<XMLDOMNodeList> nodeList_;
+
+        private DomHtmlAttributeChangeListenerImpl(final XMLDOMNodeList nodeList) {
+            super();
+
+            nodeList_ = new WeakReference<XMLDOMNodeList>(nodeList);
+        }
 
         /**
          * {@inheritDoc}
          */
         public void nodeAdded(final DomChangeEvent event) {
-            cachedElements_ = null;
+            clearCache();
         }
 
         /**
          * {@inheritDoc}
          */
         public void nodeDeleted(final DomChangeEvent event) {
-            cachedElements_ = null;
+            clearCache();
         }
 
         /**
          * {@inheritDoc}
          */
         public void attributeAdded(final HtmlAttributeChangeEvent event) {
-            handleChangeOnCache(getEffectOnCache(event));
+            handleChangeOnCache(event);
         }
 
         /**
          * {@inheritDoc}
          */
         public void attributeRemoved(final HtmlAttributeChangeEvent event) {
-            handleChangeOnCache(getEffectOnCache(event));
+            handleChangeOnCache(event);
         }
 
         /**
          * {@inheritDoc}
          */
         public void attributeReplaced(final HtmlAttributeChangeEvent event) {
-            if (attributeChangeSensitive_) {
-                handleChangeOnCache(getEffectOnCache(event));
+            final XMLDOMNodeList nodes = nodeList_.get();
+            if (null == nodes) {
+                return;
+            }
+            if (nodes.attributeChangeSensitive_) {
+                handleChangeOnCache(event);
             }
         }
 
-        private void handleChangeOnCache(final EffectOnCache effectOnCache) {
+        private void handleChangeOnCache(final HtmlAttributeChangeEvent event) {
+            final XMLDOMNodeList nodes = getNodeListOrNull();
+            if (null == nodes) {
+                return;
+            }
+
+            final EffectOnCache effectOnCache = nodes.getEffectOnCache(event);
             if (EffectOnCache.NONE == effectOnCache) {
                 return;
             }
-            else if (EffectOnCache.RESET == effectOnCache) {
-                cachedElements_ = null;
+            if (EffectOnCache.RESET == effectOnCache) {
+                clearCache();
             }
+        }
+
+        private void clearCache() {
+            final XMLDOMNodeList nodes = getNodeListOrNull();
+            if (null != nodes) {
+                nodes.cachedElements_ = null;
+            }
+        }
+
+        private XMLDOMNodeList getNodeListOrNull() {
+            if (null == nodeList_) {
+                return null;
+            }
+            return nodeList_.get();
         }
     }
 
