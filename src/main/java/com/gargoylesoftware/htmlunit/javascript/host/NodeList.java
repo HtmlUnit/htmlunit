@@ -582,7 +582,7 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
         }
 
         private void handleChangeOnCache(final HtmlAttributeChangeEvent event) {
-            final NodeList nodes = getNodeListOrNull();
+            final NodeList nodes = nodeList_.get();
             if (null == nodes) {
                 return;
             }
@@ -597,17 +597,10 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
         }
 
         private void clearCache() {
-            final NodeList nodes = getNodeListOrNull();
+            final NodeList nodes = nodeList_.get();
             if (null != nodes) {
                 nodes.cachedElements_ = null;
             }
-        }
-
-        private NodeList getNodeListOrNull() {
-            if (null == nodeList_) {
-                return null;
-            }
-            return nodeList_.get();
         }
     }
 

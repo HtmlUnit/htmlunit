@@ -24,6 +24,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -145,7 +147,7 @@ public abstract class HtmlElement extends DomElement {
     public static final Short TAB_INDEX_OUT_OF_BOUNDS = new Short(Short.MIN_VALUE);
 
     /** The listeners which are to be notified of attribute changes. */
-    private final List<HtmlAttributeChangeListener> attributeListeners_;
+    private final Collection<HtmlAttributeChangeListener> attributeListeners_;
 
     /** The owning form for lost form children. */
     private HtmlForm owningForm_;
@@ -161,7 +163,7 @@ public abstract class HtmlElement extends DomElement {
     protected HtmlElement(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(HTMLParser.XHTML_NAMESPACE, qualifiedName, page, attributes);
-        attributeListeners_ = new ArrayList<HtmlAttributeChangeListener>();
+        attributeListeners_ = new LinkedHashSet<HtmlAttributeChangeListener>();
     }
 
     /**

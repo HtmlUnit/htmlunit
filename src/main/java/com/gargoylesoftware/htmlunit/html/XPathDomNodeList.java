@@ -183,17 +183,10 @@ class XPathDomNodeList<E extends DomNode> extends AbstractList<E> implements Dom
         }
 
         private void clearCache() {
-            final XPathDomNodeList<?> nodes = getNodeListOrNull();
+            final XPathDomNodeList<?> nodes = nodeList_.get();
             if (null != nodes) {
                 nodes.cachedElements_ = null;
             }
-        }
-
-        private XPathDomNodeList<?> getNodeListOrNull() {
-            if (null == nodeList_) {
-                return null;
-            }
-            return nodeList_.get();
         }
     }
 

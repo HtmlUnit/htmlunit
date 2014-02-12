@@ -533,7 +533,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
         }
 
         private void handleChangeOnCache(final HtmlAttributeChangeEvent event) {
-            final XMLDOMNodeList nodes = getNodeListOrNull();
+            final XMLDOMNodeList nodes = nodeList_.get();
             if (null == nodes) {
                 return;
             }
@@ -548,17 +548,10 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
         }
 
         private void clearCache() {
-            final XMLDOMNodeList nodes = getNodeListOrNull();
+            final XMLDOMNodeList nodes = nodeList_.get();
             if (null != nodes) {
                 nodes.cachedElements_ = null;
             }
-        }
-
-        private XMLDOMNodeList getNodeListOrNull() {
-            if (null == nodeList_) {
-                return null;
-            }
-            return nodeList_.get();
         }
     }
 

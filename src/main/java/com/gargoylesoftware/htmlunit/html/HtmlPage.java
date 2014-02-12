@@ -35,6 +35,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -150,7 +151,7 @@ public class HtmlPage extends SgmlPage {
     private int parserCount_;
     private int snippetParserCount_;
     private int inlineSnippetParserCount_;
-    private List<HtmlAttributeChangeListener> attributeListeners_;
+    private Collection<HtmlAttributeChangeListener> attributeListeners_;
     private final Object lock_ = new String(); // used for synchronization
     private final List<Range> selectionRanges_ = new ArrayList<Range>(3);
     private final List<PostponedAction> afterLoadActions_ = new ArrayList<PostponedAction>();
@@ -2153,11 +2154,9 @@ public class HtmlPage extends SgmlPage {
         WebAssert.notNull("listener", listener);
         synchronized (lock_) {
             if (attributeListeners_ == null) {
-                attributeListeners_ = new ArrayList<HtmlAttributeChangeListener>();
+                attributeListeners_ = new LinkedHashSet<HtmlAttributeChangeListener>();
             }
-            if (!attributeListeners_.contains(listener)) {
-                attributeListeners_.add(listener);
-            }
+            attributeListeners_.add(listener);
         }
     }
 
