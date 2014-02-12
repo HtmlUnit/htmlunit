@@ -107,4 +107,13 @@ public class StringUtilsTest extends SimpleWebTestCase {
         assertEquals("\\\\1", StringUtils.sanitizeForAppendReplacement("\\1"));
         assertEquals("\\\\1\\$2 \\\\3", StringUtils.sanitizeForAppendReplacement("\\1$2 \\3"));
     }
+
+    /**
+     * Test for method {@link StringUtils#sanitizeForFileName(String)}.
+     */
+    @Test
+    public void sanitizeForFileName() {
+        assertEquals("HtmlUnit", StringUtils.sanitizeForFileName("HtmlUnit"));
+        assertEquals("Html_Uni_", StringUtils.sanitizeForFileName("Html:Uni\t"));
+    }
 }

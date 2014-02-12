@@ -37,6 +37,7 @@ public final class StringUtils {
     private static final Pattern HEX_COLOR = Pattern.compile("#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})");
     private static final Pattern RGB_COLOR =
         Pattern.compile("rgb\\s*?\\(\\s*?(\\d{1,3})\\s*?,\\s*?(\\d{1,3})\\s*?,\\s*?(\\d{1,3})\\s*?\\)");
+    private static final Pattern ILLEGAL_FILE_NAME_CHARS = Pattern.compile("\\\\|/|\\||:|\\?|\\*|\"|<|>|\\p{Cntrl}");
 
     /**
      * Disallow instantiation of this class.
@@ -264,5 +265,16 @@ public final class StringUtils {
         final String toReplace = org.apache.commons.lang3.StringUtils.replaceEach(toSanitize,
                 new String[] {"\\", "$"}, new String[]{"\\\\", "\\$"});
         return toReplace;
+    }
+
+    /**
+     * Sanitizes a string for use as filename.
+     * Replaces \, /, |, :, ?, *, &quot;, &lt;, &gt;, control chars by _ (underscore).
+     *
+     * @param toSanitize the string to sanitize
+     * @return sanitized version of the given string
+     */
+    public static String sanitizeForFileName(final String toSanitize) {
+        return ILLEGAL_FILE_NAME_CHARS.matcher(toSanitize).replaceAll("_");
     }
 }

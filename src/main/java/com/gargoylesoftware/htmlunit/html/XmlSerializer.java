@@ -273,6 +273,7 @@ class XmlSerializer {
         name = StringUtils.substringBefore(name, "?"); // remove query
         name = StringUtils.substringBefore(name, ";"); // remove additional info
         name = StringUtils.substring(name, 0, 30); // many file systems have a limit at 255, let's limit it
+        name = com.gargoylesoftware.htmlunit.util.StringUtils.sanitizeForFileName(name);
         if (!name.endsWith(extension)) {
             name += extension;
         }
