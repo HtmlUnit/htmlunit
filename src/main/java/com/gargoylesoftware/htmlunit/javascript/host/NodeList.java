@@ -14,12 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_49;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_50;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_COMMENT_IS_ELEMENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -205,6 +206,17 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
         return NOT_FOUND;
     }
 
+    @Override
+    protected void setDomNode(final DomNode domNode, final boolean assignScriptObject) {
+        final DomNode oldDomNode = getDomNodeOrNull();
+
+        super.setDomNode(domNode, assignScriptObject);
+
+        if (oldDomNode != domNode) {
+            listenerRegistered_ = false;
+        }
+    }
+
     /**
      * Gets the HTML elements from cache or retrieve them at first call.
      * @return the list of {@link HtmlElement} contained in this collection
@@ -217,7 +229,7 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
             cachedElements = computeElements();
             cachedElements_ = cachedElements;
             if (!listenerRegistered_) {
-                final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
+                final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl(this);
                 final DomNode domNode = getDomNodeOrNull();
                 if (domNode != null) {
                     domNode.addDomChangeListener(listener);
@@ -229,8 +241,8 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
                             ((HtmlPage) domNode).addHtmlAttributeChangeListener(listener);
                         }
                     }
+                    listenerRegistered_ = true;
                 }
-                listenerRegistered_ = true;
             }
         }
 
@@ -464,10 +476,14 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
         }
 
         final List<String> idList = new ArrayList<String>();
-
         final List<Object> elements = getElements();
 
-        if (!getBrowserVersion().hasFeature(GENERATED_50)) {
+        if (getBrowserVersion().hasFeature(GENERATED_50)) {
+            idList.add("length");
+
+            addElementIds(idList, elements);
+        }
+        else {
             final int length = elements.size();
             for (int i = 0; i < length; i++) {
                 idList.add(Integer.toString(i));
@@ -479,11 +495,6 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
             for (final String name : jsConfig.getClassConfiguration(getClassName()).functionKeys()) {
                 idList.add(name);
             }
-        }
-        else {
-            idList.add("length");
-
-            addElementIds(idList, elements);
         }
         return idList.toArray();
     }
@@ -518,52 +529,85 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
         }
     }
 
-    private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener {
+    private static final class DomHtmlAttributeChangeListenerImpl
+                                    implements DomChangeListener, HtmlAttributeChangeListener {
+
+        private transient WeakReference<NodeList> nodeList_;
+
+        private DomHtmlAttributeChangeListenerImpl(final NodeList nodeList) {
+            super();
+
+            nodeList_ = new WeakReference<NodeList>(nodeList);
+        }
 
         /**
          * {@inheritDoc}
          */
         public void nodeAdded(final DomChangeEvent event) {
-            cachedElements_ = null;
+            clearCache();
         }
 
         /**
          * {@inheritDoc}
          */
         public void nodeDeleted(final DomChangeEvent event) {
-            cachedElements_ = null;
+            clearCache();
         }
 
         /**
          * {@inheritDoc}
          */
         public void attributeAdded(final HtmlAttributeChangeEvent event) {
-            handleChangeOnCache(getEffectOnCache(event));
+            handleChangeOnCache(event);
         }
 
         /**
          * {@inheritDoc}
          */
         public void attributeRemoved(final HtmlAttributeChangeEvent event) {
-            handleChangeOnCache(getEffectOnCache(event));
+            handleChangeOnCache(event);
         }
 
         /**
          * {@inheritDoc}
          */
         public void attributeReplaced(final HtmlAttributeChangeEvent event) {
-            if (attributeChangeSensitive_) {
-                handleChangeOnCache(getEffectOnCache(event));
+            final NodeList nodes = nodeList_.get();
+            if (null == nodes) {
+                return;
+            }
+            if (nodes.attributeChangeSensitive_) {
+                handleChangeOnCache(event);
             }
         }
 
-        private void handleChangeOnCache(final EffectOnCache effectOnCache) {
+        private void handleChangeOnCache(final HtmlAttributeChangeEvent event) {
+            final NodeList nodes = getNodeListOrNull();
+            if (null == nodes) {
+                return;
+            }
+
+            final EffectOnCache effectOnCache = nodes.getEffectOnCache(event);
             if (EffectOnCache.NONE == effectOnCache) {
                 return;
             }
-            else if (EffectOnCache.RESET == effectOnCache) {
-                cachedElements_ = null;
+            if (EffectOnCache.RESET == effectOnCache) {
+                clearCache();
             }
+        }
+
+        private void clearCache() {
+            final NodeList nodes = getNodeListOrNull();
+            if (null != nodes) {
+                nodes.cachedElements_ = null;
+            }
+        }
+
+        private NodeList getNodeListOrNull() {
+            if (null == nodeList_) {
+                return null;
+            }
+            return nodeList_.get();
         }
     }
 
