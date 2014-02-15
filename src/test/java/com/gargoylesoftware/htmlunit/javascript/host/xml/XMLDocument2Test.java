@@ -506,7 +506,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "name: item1", "id: 1", "id: 2", "name: item2", "name: item3", "id: 3" },
             IE11 = { "id: 1", "name: item1", "id: 2", "name: item2", "id: 3", "name: item3" })
-    @NotYetImplemented({ FF, CHROME })
+    @NotYetImplemented({ FF, CHROME, IE8 })
     public void attributeOrder() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
