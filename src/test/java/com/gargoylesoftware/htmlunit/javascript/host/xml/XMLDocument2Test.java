@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -494,6 +496,37 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "</foo>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test case for issue #1576.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "name: item1", "id: 1", "id: 2", "name: item2", "name: item3", "id: 3" },
+            IE11 = { "id: 1", "name: item1", "id: 2", "name: item2", "id: 3", "name: item3" })
+    @NotYetImplemented({ FF, CHROME })
+    public void attributeOrder() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromString(
+                    "'<items>"
+                        + "<item name=\"item1\" id=\"1\">value1</item>"
+                        + "<item id=\"2\" name=\"item2\">value2</item>"
+                        + "<item name=\"item3\" id=\"3\">value3</item>"
+                    + "</items>'") + ";\n"
+            + "    var items = doc.getElementsByTagName('item');\n"
+            + "    for(i=0; i<items.length; i++) {\n"
+            + "      var attribs = items[i].attributes;\n"
+            + "      for(j=0; j<attribs.length; j++) {\n"
+            + "        alert(attribs[j].name + ': ' + attribs[j].value);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  }\n"
+            + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
         loadPageWithAlerts2(html);
     }
 }
