@@ -817,6 +817,8 @@ public class WebClient implements Serializable {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
      * Open the window with the specified name. The name may be a special
      * target name of _self, _parent, _top, or _blank. An empty or null
      * name is set to the default. The special target names are relative to
@@ -827,7 +829,7 @@ public class WebClient implements Serializable {
      * @param defaultName the default target if no name is given
      * @return the new window
      */
-    private WebWindow openTargetWindow(
+    public WebWindow openTargetWindow(
             final WebWindow opener, final String windowName, final String defaultName) {
 
         WebAssert.notNull("opener", opener);

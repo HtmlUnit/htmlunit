@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.15" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: The javascript inside the href attrib of an anchor executes in the context
+                of the anchors target.
+            </action>
         </release>
         <release version="2.14" date="Feb 17, 2014" description="FF24, Bugfixes, initial work on IE11">
             <action type="update" dev="mguillem">

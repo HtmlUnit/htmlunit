@@ -406,4 +406,53 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "inner", "self", "main", "top", "main", "parent" },
+            IE11 = { "inner", "self", "main", "parent" })
+    public void javaScriptTarget() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head><title>main</title></head>\n"
+            + "<body>\n"
+            + "  <iframe id='testFrame' src='" + URL_SECOND + "'></iframe>\n"
+            + "</body></html>";
+
+        final String script = "javascript: try { alert(document.title); } catch(e) { alert(e); }";
+        final String secondHtml
+            = "<html>\n"
+            + "<head><title>inner</title></head>\n"
+            + "<body>\n"
+            + "  <a id='tester' href='javascript:'>no href</a>\n"
+            + "  <a id='selfTester' target='_self' href='" + script + "alert(\"self\")'>self</a>\n"
+            + "  <a id='blankTester' target='_blank' href='" + script + "alert(\"blank\")'>blank</a>\n"
+            + "  <a id='topTester' target='_top' href='" + script + "alert(\"top\")'>top</a>\n"
+            + "  <a id='parentTester' target='_parent' href='" + script + "alert(\"parent\")'>parent</a>\n"
+            + "  <a id='unknownTester' target='unknown' href='" + script + "alert(\"unknown\")'>unknown</a>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondHtml);
+
+        final WebDriver driver = loadPage2(html);
+
+        driver.switchTo().frame("testFrame");
+        assertEquals(1, driver.getWindowHandles().size());
+        driver.findElement(By.id("tester")).click();
+        assertEquals(1, driver.getWindowHandles().size());
+        driver.findElement(By.id("selfTester")).click();
+        assertEquals(1, driver.getWindowHandles().size());
+        driver.findElement(By.id("blankTester")).click();
+        assertEquals(2, driver.getWindowHandles().size());
+        driver.findElement(By.id("topTester")).click();
+        assertEquals(2, driver.getWindowHandles().size());
+        driver.findElement(By.id("parentTester")).click();
+        assertEquals(2, driver.getWindowHandles().size());
+        driver.findElement(By.id("unknownTester")).click();
+        assertEquals(3, driver.getWindowHandles().size());
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
 }

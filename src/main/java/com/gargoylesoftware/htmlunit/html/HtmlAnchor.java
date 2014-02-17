@@ -80,7 +80,7 @@ public class HtmlAnchor extends HtmlElement {
         if (ATTRIBUTE_NOT_DEFINED == getHrefAttribute()) {
             return;
         }
-        final HtmlPage page = (HtmlPage) getPage();
+        HtmlPage htmlPage = (HtmlPage) getPage();
         if (StringUtils.startsWithIgnoreCase(href, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
             final StringBuilder builder = new StringBuilder(href.length());
             builder.append(JavaScriptURLConnection.JAVASCRIPT_PREFIX);
@@ -98,25 +98,32 @@ public class HtmlAnchor extends HtmlElement {
                 }
                 builder.append(ch);
             }
-            page.executeJavaScriptIfPossible(builder.toString(), "javascript url", getStartLineNumber());
+
+            final WebWindow win = htmlPage.getWebClient().openTargetWindow(htmlPage.getEnclosingWindow(),
+                    htmlPage.getResolvedTarget(getTargetAttribute()), "_self");
+            final Page page = win.getEnclosedPage();
+            if (page != null && page.isHtmlPage()) {
+                htmlPage = (HtmlPage) page;
+                htmlPage.executeJavaScriptIfPossible(builder.toString(), "javascript url", getStartLineNumber());
+            }
             return;
         }
 
-        final URL url = getTargetUrl(href, page);
+        final URL url = getTargetUrl(href, htmlPage);
 
-        final BrowserVersion browser = page.getWebClient().getBrowserVersion();
+        final BrowserVersion browser = htmlPage.getWebClient().getBrowserVersion();
         final WebRequest webRequest = new WebRequest(url, browser.getHtmlAcceptHeader());
-        webRequest.setCharset(page.getPageEncoding());
-        webRequest.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
+        webRequest.setCharset(htmlPage.getPageEncoding());
+        webRequest.setAdditionalHeader("Referer", htmlPage.getUrl().toExternalForm());
         if (LOG.isDebugEnabled()) {
             LOG.debug(
                     "Getting page for " + url.toExternalForm()
                     + ", derived from href '" + href
                     + "', using the originating URL "
-                    + page.getUrl());
+                    + htmlPage.getUrl());
         }
-        page.getWebClient().download(page.getEnclosingWindow(),
-                page.getResolvedTarget(getTargetAttribute()),
+        htmlPage.getWebClient().download(htmlPage.getEnclosingWindow(),
+                htmlPage.getResolvedTarget(getTargetAttribute()),
                 webRequest, href.endsWith("#"), "Link click");
     }
 
