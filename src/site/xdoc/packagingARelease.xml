@@ -150,7 +150,6 @@ mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/stagin
                     </li>
                 </ol>
             </p>
-            
         </section>
     </body>
 </document>

@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.sourceforge.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>2.14-SNAPSHOT</version>
+    <version>2.14</version>
     <name>HtmlUnit</name>
     <organization>
         <name>Gargoyle Software Inc.</name>
@@ -776,7 +776,7 @@
         <dependency>
             <groupId>net.sourceforge.htmlunit</groupId>
             <artifactId>htmlunit-core-js</artifactId>
-            <version>2.14-SNAPSHOT</version>
+            <version>2.14</version>
         </dependency>
         <!-- This is an indirect dependency, used by Xalan and NekoHtml -->
         <dependency>
@@ -916,19 +916,4 @@
             <url>scp://shell.sourceforge.net/home/project-web/htmlunit/htdocs/</url>
         </site>
     </distributionManagement>
-    <repositories>
-        <repository>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <id>OSS Sonatype snapshots</id>
-            <name>OSS Sonatype snapshots</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-            <layout>default</layout>
-        </repository>
-    </repositories>
 </project>
