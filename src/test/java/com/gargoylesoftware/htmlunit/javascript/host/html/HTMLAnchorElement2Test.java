@@ -411,9 +411,9 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "inner", "self", "main", "top", "main", "parent" },
-            IE11 = { "inner", "self", "main", "parent" })
-    public void javaScriptTarget() throws Exception {
+    @Alerts(DEFAULT = { "inner", "none", "inner", "self", "main", "top", "main", "parent" },
+            IE11 = { "inner", "none", "inner", "self", "main", "parent" })
+    public void javascriptTarget() throws Exception {
         final String html
             = "<html>\n"
             + "<head><title>main</title></head>\n"
@@ -426,7 +426,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             = "<html>\n"
             + "<head><title>inner</title></head>\n"
             + "<body>\n"
-            + "  <a id='tester' href='javascript:'>no href</a>\n"
+            + "  <a id='tester' href='" + script + "alert(\"none\")'>no href</a>\n"
             + "  <a id='selfTester' target='_self' href='" + script + "alert(\"self\")'>self</a>\n"
             + "  <a id='blankTester' target='_blank' href='" + script + "alert(\"blank\")'>blank</a>\n"
             + "  <a id='topTester' target='_top' href='" + script + "alert(\"top\")'>top</a>\n"
