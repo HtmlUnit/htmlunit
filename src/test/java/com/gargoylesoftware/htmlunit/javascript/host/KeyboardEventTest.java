@@ -132,9 +132,32 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81",
-        "82", "83", "84", "85", "86", "87", "88", "89", "90" })
+    @Alerts({ "32", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57" })
     public void keyCodes() throws Exception {
+        final String html = "<html><head>"
+            + "<script>"
+            + "function handleKey(e) {\n"
+            + "  alert(e.keyCode);"
+            + "}"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "<input id='t' onkeyup='handleKey(event)'/>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement field = driver.findElement(By.id("t"));
+
+        field.sendKeys(" 0123456789");
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "65", "6667", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81",
+        "82", "83", "84", "85", "86", "87", "88", "89", "90" })
+    public void keyCodes2() throws Exception {
         final String html = "<html><head>"
             + "<script>"
             + "function handleKey(e) {\n"
