@@ -672,4 +672,31 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "\n    cell1\n  ", "[object Text]", "abc", "[object Text]", "" },
+            IE8 = { "undefined", "[object]", "abc", "[object]", "" })
+    public void textContent() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "  <table id='tab'>\n"
+            + "    <tr><td>cell1</td></tr>\n"
+            + "  </table>\n"
+            + "<script>\n"
+            + "  var node = document.getElementById('tab');\n"
+            + "  alert(node.textContent);\n"
+            + "  alert(node.firstChild);\n"
+
+            + "  try { node.textContent = 'abc'; } catch(e) {alert('ex');}\n"
+            + "  alert(node.textContent);\n"
+            + "  alert(node.firstChild);\n"
+
+            + "  try { node.textContent = ''; } catch(e) {alert('ex');}\n"
+            + "  alert(node.textContent);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
 }
