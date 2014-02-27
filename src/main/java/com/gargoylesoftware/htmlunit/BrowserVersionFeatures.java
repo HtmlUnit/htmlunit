@@ -1093,6 +1093,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_INNER_HTML_REDUCE_WHITESPACES,
 
+    /** Indicates that innerText is readonly for tables. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_INNER_TEXT_READONLY_FOR_TABLE,
+
     /** Javascript function returning a length (e.g. getWidth) without 'px' at the end. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 10))
     JS_LENGTH_WITHOUT_PX,

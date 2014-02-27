@@ -39,7 +39,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"", "hello", "left", "hi", "right" },
+    @Alerts(DEFAULT = {"", "hello", "left", "hi", "right" },
             IE = {"", "error", "", "left", "error", "left", "right" })
     @NotYetImplemented({ FF17, FF24 })
     public void align_thead() throws Exception {
@@ -50,7 +50,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"", "hello", "left", "hi", "right" },
+    @Alerts(DEFAULT = {"", "hello", "left", "hi", "right" },
             IE = {"", "error", "", "left", "error", "left", "right" })
     @NotYetImplemented({ FF17, FF24 })
     public void align_tbody() throws Exception {
@@ -61,7 +61,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"", "hello", "left", "hi", "right" },
+    @Alerts(DEFAULT = {"", "hello", "left", "hi", "right" },
             IE = {"", "error", "", "left", "error", "left", "right" })
     @NotYetImplemented({ FF17, FF24 })
     public void align_tfoot() throws Exception {
@@ -109,7 +109,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "top", "baseline", "3", "middle", "8", "BOTtom" },
+    @Alerts(DEFAULT = { "top", "baseline", "3", "middle", "8", "BOTtom" },
             IE = { "top", "baseline", "top", "error", "middle", "baseline", "bottom" })
     @NotYetImplemented({ FF17, FF24 })
     public void vAlign_thead() throws Exception {
@@ -120,7 +120,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "top", "baseline", "3", "middle", "8", "BOTtom" },
+    @Alerts(DEFAULT = { "top", "baseline", "3", "middle", "8", "BOTtom" },
             IE = { "top", "baseline", "top", "error", "middle", "baseline", "bottom" })
     @NotYetImplemented({ FF17, FF24 })
     public void vAlign_tbody() throws Exception {
@@ -131,7 +131,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "top", "baseline", "3", "middle", "8", "BOTtom" },
+    @Alerts(DEFAULT = { "top", "baseline", "3", "middle", "8", "BOTtom" },
             IE = { "top", "baseline", "top", "error", "middle", "baseline", "bottom" })
     @NotYetImplemented({ FF17, FF24 })
     public void vAlign_tfoot() throws Exception {
@@ -367,6 +367,96 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             + "    <tbody id='myId'><tr><td>hello</td></tr></tbody>\n"
             + "  </table>\n"
             + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "undefined", "[object HTMLTableRowElement]", "abc", "[object HTMLTableRowElement]", "" },
+            CHROME = {"cell1", "[object HTMLTableRowElement]",
+                        "ex", "cell1", "[object HTMLTableRowElement]", "ex", "cell1" },
+            IE8 = { "cell1", "[object]", "abc", "[object]", "" },
+            IE11 = { "cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", "" })
+    public void innerText_body() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "  <table>\n"
+            + "    <tbody id='tab_row'><tr><td>cell1</td></tr></tbody>\n"
+            + "  </table>\n"
+            + "<script>\n"
+            + "  var node = document.getElementById('tab_row');\n"
+            + "  alert(node.innerText);\n"
+            + "  alert(node.firstChild);\n"
+
+            + "  try { node.innerText = 'abc'; } catch(e) {alert('ex');}\n"
+            + "  alert(node.innerText);\n"
+            + "  alert(node.firstChild);\n"
+
+            + "  try { node.innerText = ''; } catch(e) {alert('ex');}\n"
+            + "  alert(node.innerText);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "undefined", "[object HTMLTableRowElement]", "abc", "[object HTMLTableRowElement]", "" },
+            CHROME = {"cell1", "[object HTMLTableRowElement]",
+                        "ex", "cell1", "[object HTMLTableRowElement]", "ex", "cell1" },
+            IE8 = { "cell1", "[object]", "abc", "[object]", "" },
+            IE11 = { "cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", "" })
+    public void innerText_header() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "  <table>\n"
+            + "    <thead id='tab_row'><tr><td>cell1</td></tr></thead>\n"
+            + "  </table>\n"
+            + "<script>\n"
+            + "  var node = document.getElementById('tab_row');\n"
+            + "  alert(node.innerText);\n"
+            + "  alert(node.firstChild);\n"
+
+            + "  try { node.innerText = 'abc'; } catch(e) {alert('ex');}\n"
+            + "  alert(node.innerText);\n"
+            + "  alert(node.firstChild);\n"
+
+            + "  try { node.innerText = ''; } catch(e) {alert('ex');}\n"
+            + "  alert(node.innerText);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "undefined", "[object HTMLTableRowElement]", "abc", "[object HTMLTableRowElement]", "" },
+            CHROME = {"cell1", "[object HTMLTableRowElement]",
+                        "ex", "cell1", "[object HTMLTableRowElement]", "ex", "cell1" },
+            IE8 = { "cell1", "[object]", "abc", "[object]", "" },
+            IE11 = { "cell1", "[object HTMLTableRowElement]", "abc", "[object Text]", "" })
+    public void innerText_footer() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "  <table>\n"
+            + "    <tfoot id='tab_row'><tr><td>cell1</td></tr></tfoot>\n"
+            + "  </table>\n"
+            + "<script>\n"
+            + "  var node = document.getElementById('tab_row');\n"
+            + "  alert(node.innerText);\n"
+            + "  alert(node.firstChild);\n"
+
+            + "  try { node.innerText = 'abc'; } catch(e) {alert('ex');}\n"
+            + "  alert(node.innerText);\n"
+            + "  alert(node.firstChild);\n"
+
+            + "  try { node.innerText = ''; } catch(e) {alert('ex');}\n"
+            + "  alert(node.innerText);\n"
+            + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
 }

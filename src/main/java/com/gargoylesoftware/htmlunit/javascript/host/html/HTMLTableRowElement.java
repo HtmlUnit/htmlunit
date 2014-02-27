@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_172;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_READONLY_FOR_SOME_TAGS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_READONLY_FOR_TABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_ROW_SECTION_INDEX_BIG_INT_IF_UNATTACHED;
 
 import java.util.ArrayList;
@@ -221,6 +222,9 @@ public class HTMLTableRowElement extends HTMLTableComponent {
      */
     @Override
     protected void setInnerTextImpl(final String value) {
-        throw Context.reportRuntimeError("innerText is read-only for tag 'tr'");
+        if (getBrowserVersion().hasFeature(JS_INNER_TEXT_READONLY_FOR_TABLE)) {
+            throw Context.reportRuntimeError("innerText is read-only for tag 'tr'");
+        }
+        super.setInnerTextImpl(value);
     }
 }
