@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.15" date="???" description="Bugfixes">
+            <action type="update" dev="asashour">
+                Upgrade Apache HttpComponents to 4.3.3.
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: The javascript inside the href attrib of an anchor executes in the context
                 of the anchors target.
