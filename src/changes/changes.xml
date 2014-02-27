@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.15" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1578">
+                JavaScript: Wrong charCode reported by the onKeyPress keyboard event for the space key.
+            </action>
             <action type="fix" dev="rbri" issue="1580">
                 JavaScript: Fix our implementation of innerText for table elements.
             </action>

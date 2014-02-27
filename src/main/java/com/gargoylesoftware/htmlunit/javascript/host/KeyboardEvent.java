@@ -538,7 +538,7 @@ public class KeyboardEvent extends UIEvent {
         }
         setKeyCode(keyCode);
         if (getType().equals(Event.TYPE_KEY_PRESS)) {
-            if ((character >= 33 && character <= 126)
+            if ((character >= 32 && character <= 126)
                     || !getBrowserVersion().hasFeature(JS_EVENT_DISTINGUISH_PRINTABLE_KEY)) {
                 charCode_ = character;
             }
