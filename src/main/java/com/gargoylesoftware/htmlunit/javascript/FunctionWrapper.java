@@ -65,7 +65,7 @@ class FunctionWrapper implements Function {
     }
 
     public void put(final int index, final Scriptable start, final Object value) {
-        wrapped_.put(index, start, value);
+        wrapped_.put(index, wrapped_, value);
     }
 
     public void delete(final String name) {
