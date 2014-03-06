@@ -20,8 +20,10 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * Wrapper for a {@link Function} delegating all calls to the wrapped instance.
+ *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 class FunctionWrapper implements Function {
     private final Function wrapped_;
@@ -59,7 +61,7 @@ class FunctionWrapper implements Function {
     }
 
     public void put(final String name, final Scriptable start, final Object value) {
-        wrapped_.put(name, start, value);
+        wrapped_.put(name, wrapped_, value);
     }
 
     public void put(final int index, final Scriptable start, final Object value) {
