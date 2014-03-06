@@ -43,59 +43,6 @@ public class HtmlImageInputTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClick_NoPosition() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
-            + "<form id='form1' method='post'>\n"
-            + "<input type='image' name='aButton' value='foo'/>\n"
-            + "<input type='image' name='button' value='foo'/>\n"
-            + "<input type='image' name='anotherButton' value='foo'/>\n"
-            + "</form></body></html>";
-        final HtmlPage page = loadPageWithAlerts(htmlContent);
-        final MockWebConnection webConnection = getMockConnection(page);
-
-        final HtmlForm form = page.getHtmlElementById("form1");
-
-        final HtmlImageInput imageInput = form.getInputByName("button");
-        final HtmlPage secondPage = (HtmlPage) imageInput.click();
-        assertNotNull(secondPage);
-
-        final List<NameValuePair> expectedPairs = new ArrayList<NameValuePair>();
-        expectedPairs.add(new NameValuePair("button.x", "0"));
-        expectedPairs.add(new NameValuePair("button.y", "0"));
-        if (getBrowserVersion().isFirefox()) {
-            expectedPairs.add(new NameValuePair("button", "foo"));
-        }
-
-        assertEquals(
-            expectedPairs,
-            webConnection.getLastParameters());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testClick_NoPosition_NoValue() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
-            + "<form id='form1'>\n"
-            + "<input type='image' name='button'>\n"
-            + "</form></body></html>";
-        final HtmlPage page = loadPageWithAlerts(htmlContent);
-        getMockConnection(page).setDefaultResponse(htmlContent);
-        final HtmlForm form = page.getHtmlElementById("form1");
-
-        final HtmlImageInput imageInput = form.getInputByName("button");
-        final HtmlPage secondPage = (HtmlPage) imageInput.click();
-        final String url = secondPage.getUrl().toExternalForm();
-        assertTrue(url.endsWith("?button.x=0&button.y=0"));
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     public void testClick_WithPosition() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -116,9 +63,6 @@ public class HtmlImageInputTest extends SimpleWebTestCase {
         final List<NameValuePair> expectedPairs = new ArrayList<NameValuePair>();
         expectedPairs.add(new NameValuePair("button.x", "100"));
         expectedPairs.add(new NameValuePair("button.y", "200"));
-        if (getBrowserVersion().isFirefox()) {
-            expectedPairs.add(new NameValuePair("button", "foo"));
-        }
 
         assertEquals(
             expectedPairs,
@@ -154,53 +98,5 @@ public class HtmlImageInputTest extends SimpleWebTestCase {
         assertEquals(
             expectedPairs,
             webConnection.getLastParameters());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testOutsideForm() throws Exception {
-        final String html =
-            "<html><head></head>\n"
-            + "<body>\n"
-            + "<input id='myInput' type='image' src='test.png' onclick='alert(1)'>\n"
-            + "</body></html>";
-
-        final String[] expectedAlerts = {"1"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
-        final HtmlImageInput input = page.getHtmlElementById("myInput");
-        input.click();
-
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * Test for bug: http://sourceforge.net/p/htmlunit/bugs/646/.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void testClickFiresOnMouseDown() throws Exception {
-        final String s = "<html><body><input type='image' src='x.png' id='i' onmousedown='alert(1)'></body></html>";
-        final String[] expectedAlerts = {"1"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), s, collectedAlerts);
-        page.getHtmlElementById("i").click();
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * Test for bug: http://sourceforge.net/p/htmlunit/bugs/646/.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void testClickFiresOnMouseUp() throws Exception {
-        final String s = "<html><body><input type='image' src='x.png' id='i' onmouseup='alert(1)'></body></html>";
-        final String[] expectedAlerts = {"1"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), s, collectedAlerts);
-        page.getHtmlElementById("i").click();
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

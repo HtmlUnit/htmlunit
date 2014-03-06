@@ -547,8 +547,8 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     HTMLIFRAME_IGNORE_SELFCLOSING,
 
-    /** */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    /** Clicking an image input submits the value as param if defined. */
+    @BrowserFeature(@WebBrowser(CHROME))
     HTMLIMAGE_NAME_VALUE_PARAMS,
 
     /** Setting defaultValue updates the value also. */

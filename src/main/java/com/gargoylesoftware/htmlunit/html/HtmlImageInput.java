@@ -24,6 +24,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -127,12 +128,30 @@ public class HtmlImageInput extends HtmlInput {
      * @exception ElementNotFoundException If a particular XML element could not be found in the DOM model
      */
     @Override
-    @SuppressWarnings("unchecked")
     public <P extends Page> P click(final int x, final int y) throws IOException, ElementNotFoundException {
         wasPositionSpecified_ = true;
         xPosition_ = x;
         yPosition_ = y;
-        return (P) super.click();
+        return super.click();
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Simulates clicking on this element, returning the page in the window that has the focus
+     * after the element has been clicked. Note that the returned page may or may not be the same
+     * as the original page, depending on the type of element being clicked, the presence of JavaScript
+     * action listeners, etc.
+     *
+     * @param event the click event used
+     * @param <P> the page type
+     * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
+     * @exception IOException if an IO error occurs
+     */
+    @Override
+    public <P extends Page> P click(final Event event) throws IOException {
+        wasPositionSpecified_ = true;
+        return super.click(event);
     }
 
     /**

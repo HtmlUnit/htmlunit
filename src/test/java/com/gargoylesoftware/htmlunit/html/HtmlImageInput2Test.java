@@ -14,21 +14,76 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link HtmlImageInput}.
  *
  * @version $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Marc Guillemot
+ * @author Ahmed Ashour
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlImageInput2Test extends WebDriverTestCase {
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "§§URL§§?button.x=0&button.y=0",
+            CHROME = "§§URL§§?button.x=10&button.y=10&button=foo",
+            IE8 = "§§URL§§?button.x=15&button.y=16",
+            IE11 = "§§URL§§?button.x=14&button.y=15")
+    @NotYetImplemented({ CHROME, IE })
+    public void testClick_NoPosition() throws Exception {
+        final String html
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "<input type='image' name='aButton' value='foo'/>\n"
+            + "<input type='image' name='button' value='foo'/>\n"
+            + "<input type='image' name='anotherButton' value='foo'/>\n"
+            + "</form></body></html>";
+        final WebDriver webDriver = loadPage2(html);
+        webDriver.findElement(By.name("button")).click();
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        assertEquals(getExpectedAlerts()[0], webDriver.getCurrentUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "§§URL§§?button.x=0&button.y=0",
+            CHROME = "§§URL§§?button.x=24&button.y=10",
+            IE8 = "§§URL§§?button.x=15&button.y=16",
+            IE11 = "§§URL§§?button.x=14&button.y=15")
+    @NotYetImplemented({ CHROME, IE })
+    public void testClick_NoPosition_NoValue() throws Exception {
+        final String html
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "<input type='image' name='button'>\n"
+            + "</form></body></html>";
+        final WebDriver webDriver = loadPage2(html);
+        webDriver.findElement(By.name("button")).click();
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        assertEquals(getExpectedAlerts()[0], webDriver.getCurrentUrl());
+    }
 
     /**
      * @throws Exception if the test fails
@@ -200,5 +255,73 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("§§URL§§?imageInput.x=0&imageInput.y=0")
+    public void javascriptClick() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+                + "</head><body>\n"
+                + "<form>\n"
+                + "  <input type='image' name='imageInput'>\n"
+                + "  <input type='button' id='submit' value='submit' "
+                        + "onclick='document.getElementsByName(\"imageInput\")[0].click()'>\n"
+                + "</form>\n"
+                + "</body></html>";
+
+        final WebDriver webDriver = loadPage2(html);
+        webDriver.findElement(By.id("submit")).click();
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        assertEquals(getExpectedAlerts()[0], webDriver.getCurrentUrl());
+    }
+
+    /**
+     * Test for bug: http://sourceforge.net/p/htmlunit/bugs/646/.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("1")
+    public void testClickFiresOnMouseDown() throws Exception {
+        final String html = "<html><body><input type='image' src='x.png' id='i' onmousedown='alert(1)'></body></html>";
+
+        final WebDriver webDriver = loadPage2(html);
+        webDriver.findElement(By.id("i")).click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(webDriver));
+    }
+
+    /**
+     * Test for bug: http://sourceforge.net/p/htmlunit/bugs/646/.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("1")
+    public void testClickFiresOnMouseUp() throws Exception {
+        final String html = "<html><body><input type='image' src='x.png' id='i' onmouseup='alert(1)'></body></html>";
+        final WebDriver webDriver = loadPage2(html);
+        webDriver.findElement(By.id("i")).click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(webDriver));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    public void testOutsideForm() throws Exception {
+        final String html =
+            "<html><head></head>\n"
+            + "<body>\n"
+            + "<input id='myInput' type='image' src='test.png' onclick='alert(1)'>\n"
+            + "</body></html>";
+        final WebDriver webDriver = loadPage2(html);
+        webDriver.findElement(By.id("myInput")).click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(webDriver));
     }
 }
