@@ -9,7 +9,7 @@
     <body>
         <release version="2.15" date="???" description="Bugfixes">
             <action type="fix" dev="asashour">
-                JavaScript: fix setting value to toString() function. 
+                JavaScript: fix setting value to toString() function.
             </action>
             <action type="update" dev="asashour">
                 Upgrade Apache commons-lang to 3.3.
