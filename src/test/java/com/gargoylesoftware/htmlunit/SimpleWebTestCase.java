@@ -90,9 +90,7 @@ public abstract class SimpleWebTestCase extends WebTestCase {
      */
     public final HtmlPage loadPage(final String html, final List<String> collectedAlerts) throws Exception {
         generateTest_browserVersion_.set(FLAG_ALL_BROWSERS);
-        final BrowserVersion version =
-                (getBrowserVersion() != null) ? getBrowserVersion() : BrowserVersion.getDefault();
-        return loadPage(version, html, collectedAlerts, getDefaultUrl());
+        return loadPage(getBrowserVersion(), html, collectedAlerts, getDefaultUrl());
     }
 
     /**

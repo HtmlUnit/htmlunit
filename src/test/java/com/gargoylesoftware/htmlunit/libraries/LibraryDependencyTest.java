@@ -80,9 +80,8 @@ public class LibraryDependencyTest extends WebDriverTestCase {
     }
 
     private String getContent(final String resourceName) throws IOException {
-        InputStream in = null;
+        final InputStream in = getClass().getClassLoader().getResourceAsStream(resourceName);
         try {
-            in = getClass().getClassLoader().getResourceAsStream(resourceName);
             return IOUtils.toString(in);
         }
         finally {
