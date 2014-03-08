@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-
 import com.gargoylesoftware.htmlunit.html.HtmlArea;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * The JavaScript object "HTMLAreaElement".
@@ -65,24 +62,6 @@ public class HTMLAreaElement extends HTMLElement {
     @JsxSetter
     public void setAlt(final String alt) {
         getDomNodeOrDie().setAttribute("alt", alt);
-    }
-
-    /**
-     * {@inheritDoc} Overridden to modify browser configurations.
-     */
-    @Override
-    @JsxGetter(@WebBrowser(FF))
-    public String getAccessKey() {
-        return super.getAccessKey();
-    }
-
-    /**
-     * {@inheritDoc} Overridden to modify browser configurations.
-     */
-    @Override
-    @JsxSetter(@WebBrowser(FF))
-    public void setAccessKey(final String accessKey) {
-        super.setAccessKey(accessKey);
     }
 
     /**

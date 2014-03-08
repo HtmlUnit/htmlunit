@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -29,7 +27,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
@@ -403,23 +400,5 @@ public class HTMLAnchorElement extends HTMLElement {
         catch (final MalformedURLException e) {
             return href;
         }
-    }
-
-    /**
-     * {@inheritDoc} Overridden to modify browser configurations.
-     */
-    @Override
-    @JsxGetter(@WebBrowser(FF))
-    public String getAccessKey() {
-        return super.getAccessKey();
-    }
-
-    /**
-     * {@inheritDoc} Overridden to modify browser configurations.
-     */
-    @Override
-    @JsxSetter(@WebBrowser(FF))
-    public void setAccessKey(final String accessKey) {
-        super.setAccessKey(accessKey);
     }
 }

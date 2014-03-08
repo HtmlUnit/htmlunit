@@ -2231,7 +2231,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns the "accessKey" property.
      * @return the "accessKey" property
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter
     public String getAccessKey() {
         return getDomNodeOrDie().getAttribute("accesskey");
     }
@@ -2240,7 +2240,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Sets the "accessKey" property.
      * @param accessKey the "accessKey" property
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter
     public void setAccessKey(final String accessKey) {
         getDomNodeOrDie().setAttribute("accesskey", accessKey);
     }

@@ -70,24 +70,6 @@ public class HTMLButtonElement extends FormField {
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxGetter
-    public String getAccessKey() {
-        return super.getAccessKey();
-    }
-
-    /**
-     * {@inheritDoc} Overridden to modify browser configurations.
-     */
-    @Override
-    @JsxSetter
-    public void setAccessKey(final String accessKey) {
-        super.setAccessKey(accessKey);
-    }
-
-    /**
-     * {@inheritDoc} Overridden to modify browser configurations.
-     */
-    @Override
     @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public void click() throws IOException {
         super.click();

@@ -270,22 +270,4 @@ public class HTMLTextAreaElement extends FormField {
     public void setReadOnly(final boolean readOnly) {
         ((HtmlTextArea) getDomNodeOrDie()).setReadOnly(readOnly);
     }
-
-    /**
-     * {@inheritDoc} Overridden to modify browser configurations.
-     */
-    @Override
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
-    public String getAccessKey() {
-        return super.getAccessKey();
-    }
-
-    /**
-     * {@inheritDoc} Overridden to modify browser configurations.
-     */
-    @Override
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
-    public void setAccessKey(final String accessKey) {
-        super.setAccessKey(accessKey);
-    }
 }

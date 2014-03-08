@@ -365,24 +365,6 @@ public class HTMLInputElement extends FormField {
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxGetter(@WebBrowser(FF))
-    public String getAccessKey() {
-        return super.getAccessKey();
-    }
-
-    /**
-     * {@inheritDoc} Overridden to modify browser configurations.
-     */
-    @Override
-    @JsxSetter(@WebBrowser(FF))
-    public void setAccessKey(final String accessKey) {
-        super.setAccessKey(accessKey);
-    }
-
-    /**
-     * {@inheritDoc} Overridden to modify browser configurations.
-     */
-    @Override
     @JsxFunction(@WebBrowser(FF))
     public void click() throws IOException {
         final HtmlInput domNode = (HtmlInput) getDomNodeOrDie();
