@@ -23,7 +23,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlOrderedList;
 
@@ -117,7 +116,6 @@ public class HTMLOListElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "", "", "blah", "A", "null", "", "blah", "A", "1", "a", "A", "i", "I", "u" },
             IE8 = { "", "", "", "A", "", "", "blah", "A", "1", "a", "A", "i", "I", "exception", "I" },
             IE11 = { "", "", "", "A", "null", "", "blah", "A", "1", "a", "A", "i", "I", "exception", "I" })
-    @NotYetImplemented
     public void type() throws Exception {
         final String html =
                 "<html>\n"

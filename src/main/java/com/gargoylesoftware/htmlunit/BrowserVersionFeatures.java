@@ -1373,6 +1373,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_TREEWALKER_FILTER_FUNCTION_ONLY,
 
+    /** Setting the property align to arbitrary values is allowed. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    JS_TYPE_ACCEPTS_ARBITRARY_VALUES,
+
     /** Setting the property width/heigth to arbitrary values is allowed. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES,

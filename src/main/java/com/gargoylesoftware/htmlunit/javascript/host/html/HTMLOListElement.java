@@ -16,14 +16,36 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import com.gargoylesoftware.htmlunit.html.HtmlOrderedList;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
 /**
  * The JavaScript object "HTMLOListElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(domClass = HtmlOrderedList.class)
 public class HTMLOListElement extends HTMLListElement {
 
+    /**
+     * Returns the value of the <tt>type</tt> attribute.
+     *
+     * @return the value of the <tt>type</tt> attribute
+     */
+    @JsxGetter
+    public String getType() {
+        return super.getType();
+    }
+
+    /**
+     * Sets the value of the <tt>type</tt> attribute.
+     *
+     * @param type the value of the <tt>type</tt> attribute
+     */
+    @JsxSetter
+    public void setType(final String type) {
+        super.setType(type);
+    }
 }

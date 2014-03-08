@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLLIST_LIMIT_COMPACT_TO_BOOLEAN;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TYPE_ACCEPTS_ARBITRARY_VALUES;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
@@ -27,6 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @JsxClasses(
         isJSObject = false
@@ -67,4 +69,41 @@ public class HTMLListElement extends HTMLElement {
         return super.getAttribute(attributeName, flags);
     }
 
+    /**
+     * Returns the value of the "type" property.
+     * @return the value of the "type" property
+     */
+    protected String getType() {
+        final boolean acceptArbitraryValues = getBrowserVersion().hasFeature(JS_TYPE_ACCEPTS_ARBITRARY_VALUES);
+
+        final String type = getDomNodeOrDie().getAttribute("type");
+        if (acceptArbitraryValues
+            || "1".equals(type)
+            || "a".equals(type)
+            || "A".equals(type)
+            || "i".equals(type)
+            || "I".equals(type)) {
+            return type;
+        }
+        return "";
+    }
+
+    /**
+     * Sets the value of the "type" property.
+     * @param type the value of the "type" property
+     */
+    protected void setType(final String type) {
+        final boolean acceptArbitraryValues = getBrowserVersion().hasFeature(JS_TYPE_ACCEPTS_ARBITRARY_VALUES);
+        if (acceptArbitraryValues
+                || "1".equals(type)
+                || "a".equals(type)
+                || "A".equals(type)
+                || "i".equals(type)
+                || "I".equals(type)) {
+            getDomNodeOrDie().setAttribute("type", type);
+            return;
+        }
+
+        throw Context.reportRuntimeError("Cannot set the type property to invalid value: '" + type + "'");
+    }
 }
