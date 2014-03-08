@@ -168,17 +168,19 @@ class XmlSerializer {
         final String suffix = getFileExtension(enclosedPage);
         final File file = createFile(srcAttr.getValue(), "." + suffix);
 
-        if (enclosedPage != null && enclosedPage.isHtmlPage()) {
-            file.delete(); // TODO: refactor as it is stupid to create empty file at one place
-            // and then to complain that it already exists
-            ((HtmlPage) enclosedPage).save(file);
-        }
-        else {
-            final InputStream is = enclosedPage.getWebResponse().getContentAsStream();
-            final FileOutputStream fos = new FileOutputStream(file);
-            IOUtils.copyLarge(is, fos);
-            IOUtils.closeQuietly(is);
-            IOUtils.closeQuietly(fos);
+        if (enclosedPage != null) {
+            if (enclosedPage.isHtmlPage()) {
+                file.delete(); // TODO: refactor as it is stupid to create empty file at one place
+                // and then to complain that it already exists
+                ((HtmlPage) enclosedPage).save(file);
+            }
+            else {
+                final InputStream is = enclosedPage.getWebResponse().getContentAsStream();
+                final FileOutputStream fos = new FileOutputStream(file);
+                IOUtils.copyLarge(is, fos);
+                IOUtils.closeQuietly(is);
+                IOUtils.closeQuietly(fos);
+            }
         }
 
         srcAttr.setValue(file.getParentFile().getName() + FILE_SEPARATOR + file.getName());
@@ -186,13 +188,15 @@ class XmlSerializer {
     }
 
     private String getFileExtension(final Page enclosedPage) {
-        if (enclosedPage != null && enclosedPage.isHtmlPage()) {
-            return "html";
-        }
+        if (enclosedPage != null) {
+            if (enclosedPage.isHtmlPage()) {
+                return "html";
+            }
 
-        final URL url = enclosedPage.getUrl();
-        if (url.getPath().contains(".")) {
-            return StringUtils.substringAfterLast(url.getPath(), ".");
+            final URL url = enclosedPage.getUrl();
+            if (url.getPath().contains(".")) {
+                return StringUtils.substringAfterLast(url.getPath(), ".");
+            }
         }
 
         return ".unknown";

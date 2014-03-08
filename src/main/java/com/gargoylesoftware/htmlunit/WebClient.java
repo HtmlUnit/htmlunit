@@ -1960,13 +1960,16 @@ public class WebClient implements Serializable {
 
         if (win != null && HttpMethod.POST != request.getHttpMethod()) {
             final Page page = win.getEnclosedPage();
-            if (page != null && page.isHtmlPage() && !((HtmlPage) page).isOnbeforeunloadAccepted()) {
-                return;
-            }
-            final URL current = page.getUrl();
-            justHashJump = isHashJump && (url.getQuery() == null || url.getQuery().equals(current.getQuery()));
-            if (!justHashJump && url.sameFile(current) && StringUtils.isNotEmpty(url.getRef())) {
-                justHashJump = true;
+            if (page != null) {
+                if (page.isHtmlPage() && !((HtmlPage) page).isOnbeforeunloadAccepted()) {
+                    return;
+                }
+
+                final URL current = page.getUrl();
+                justHashJump = isHashJump && (url.getQuery() == null || url.getQuery().equals(current.getQuery()));
+                if (!justHashJump && url.sameFile(current) && StringUtils.isNotEmpty(url.getRef())) {
+                    justHashJump = true;
+                }
             }
         }
 

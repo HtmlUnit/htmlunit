@@ -237,7 +237,7 @@ public class XMLDOMElement extends XMLDOMNode {
      */
     @JsxFunction
     public XMLDOMAttribute removeAttributeNode(final XMLDOMAttribute att) {
-        if (att == null || "null".equals(att)) {
+        if (att == null) {
             throw Context.reportRuntimeError("Type mismatch.");
         }
 

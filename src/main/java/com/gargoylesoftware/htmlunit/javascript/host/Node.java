@@ -224,19 +224,6 @@ public class Node extends SimpleScriptable {
                     new DOMException("Node cannot be inserted at the specified point in the hierarchy",
                         DOMException.HIERARCHY_REQUEST_ERR));
             }
-            if (childObject instanceof DomDocumentFragment) {
-                final DomDocumentFragment fragment = (DomDocumentFragment) childObject;
-                for (final DomNode child : fragment.getChildren()) {
-                    if (!isNodeInsertable((Node) child.getScriptObject())) {
-                        if (getBrowserVersion().hasFeature(JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NODE)) {
-                            return childNode;
-                        }
-                        throw asJavaScriptException(
-                            new DOMException("Node cannot be inserted at the specified point in the hierarchy",
-                                DOMException.HIERARCHY_REQUEST_ERR));
-                    }
-                }
-            }
 
             // Get XML node for the DOM node passed in
             final DomNode childDomNode = childNode.getDomNodeOrDie();
