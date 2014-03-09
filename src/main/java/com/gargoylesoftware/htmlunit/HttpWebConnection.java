@@ -133,10 +133,10 @@ public class HttpWebConnection implements WebConnection {
     private final WebClient webClient_;
 
     /** Use single HttpContext, so there is no need to re-send authentication for each and every request. */
-    private HttpContext httpContext_ = new HttpClientContext();
+    private final HttpContext httpContext_;
     private String virtualHost_;
     private final CookieSpecProvider htmlUnitCookieSpecProvider_;
-    private final WebClientOptions usedOptions_ = new WebClientOptions();
+    private final WebClientOptions usedOptions_;
 
     /**
      * Creates a new HTTP web connection instance.
@@ -150,6 +150,8 @@ public class HttpWebConnection implements WebConnection {
                 return new HtmlUnitBrowserCompatCookieSpec(webClient_.getIncorrectnessListener());
             }
         };
+        httpContext_ = new HttpClientContext();
+        usedOptions_ = new WebClientOptions();
     }
 
     /**
@@ -386,10 +388,9 @@ public class HttpWebConnection implements WebConnection {
             credentialsProvider.setCredentials(authScope, requestCredentials);
             httpContext_.removeAttribute(HttpClientContext.TARGET_AUTH_STATE);
         }
-        httpContext_.removeAttribute(HttpClientContext.CREDS_PROVIDER);
         httpClient.setDefaultCredentialsProvider(credentialsProvider);
+        httpContext_.removeAttribute(HttpClientContext.CREDS_PROVIDER);
 
-        httpContext_.removeAttribute(HttpClientContext.COOKIE_STORE);
         if (webClient_.getCookieManager().isCookiesEnabled()) {
             // Cookies are enabled. Note that it's important that we enable single cookie headers,
             // for compatibility purposes.
@@ -408,6 +409,8 @@ public class HttpWebConnection implements WebConnection {
                 }
             });
         }
+        httpContext_.removeAttribute(HttpClientContext.COOKIE_STORE);
+
         return httpMethod;
     }
 
