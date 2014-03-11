@@ -184,7 +184,7 @@ public class HttpWebConnection implements WebConnection {
                 // Try to use only SSLv3 instead
                 if (webClient_.getOptions().isUseInsecureSSL()) {
                     HtmlUnitSSLConnectionSocketFactory.setUseSSL3Only(httpContext_, true);
-                    httpResponse = builder.build().execute(hostConfiguration, httpMethod);
+                    httpResponse = builder.build().execute(hostConfiguration, httpMethod, httpContext_);
                 }
                 else {
                     throw s;
