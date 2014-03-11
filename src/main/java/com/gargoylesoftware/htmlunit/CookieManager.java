@@ -36,11 +36,15 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
 
 /**
  * Manages cookies for a {@link WebClient}. This class is thread-safe.
+ * You can disable Cookies by calling setCookiesEnabled(false). The
+ * CookieManager itself takes care of this and ignores all cookie request if
+ * disabled. If you override this your methods have to do the same.
  *
  * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Nicolas Belisle
+ * @author Ronald Brill
  */
 public class CookieManager implements Serializable {
 
@@ -85,19 +89,29 @@ public class CookieManager implements Serializable {
 
     /**
      * Returns the currently configured cookies, in an unmodifiable set.
+     * If disabled, this returns an empty set.
      * @return the currently configured cookies, in an unmodifiable set
      */
     public synchronized Set<Cookie> getCookies() {
+        if (!isCookiesEnabled()) {
+            return Collections.<Cookie>emptySet();
+        }
+
         final Set<Cookie> copy = new HashSet<Cookie>(cookies_);
         return Collections.unmodifiableSet(copy);
     }
 
     /**
      * Returns the currently configured cookies applicable to the specified URL, in an unmodifiable set.
+     * If disabled, this returns an empty set.
      * @param url the URL on which to filter the returned cookies
      * @return the currently configured cookies applicable to the specified URL, in an unmodifiable set
      */
     public synchronized Set<Cookie> getCookies(final URL url) {
+        if (!isCookiesEnabled()) {
+            return Collections.<Cookie>emptySet();
+        }
+
         final String host = url.getHost();
         final String path = url.getPath();
         final String protocol = url.getProtocol();
@@ -130,10 +144,15 @@ public class CookieManager implements Serializable {
 
     /**
      * Clears all cookies that have expired before supplied date.
+     * If disabled, this returns false.
      * @param date the date to use for comparison when clearing expired cookies
      * @return whether any cookies were found expired, and were cleared
      */
     public synchronized boolean clearExpired(final Date date) {
+        if (!isCookiesEnabled()) {
+            return false;
+        }
+
         if (date == null) {
             return false;
         }
@@ -166,10 +185,15 @@ public class CookieManager implements Serializable {
 
     /**
      * Returns the currently configured cookie with the specified name, or <tt>null</tt> if one does not exist.
+     * If disabled, this returns null.
      * @param name the name of the cookie to return
      * @return the currently configured cookie with the specified name, or <tt>null</tt> if one does not exist
      */
     public synchronized Cookie getCookie(final String name) {
+        if (!isCookiesEnabled()) {
+            return null;
+        }
+
         for (Cookie cookie : cookies_) {
             if (StringUtils.equals(cookie.getName(), name)) {
                 return cookie;
@@ -180,9 +204,14 @@ public class CookieManager implements Serializable {
 
     /**
      * Adds the specified cookie.
+     * If disabled, this does nothing.
      * @param cookie the cookie to add
      */
     public synchronized void addCookie(final Cookie cookie) {
+        if (!isCookiesEnabled()) {
+            return;
+        }
+
         cookies_.remove(cookie);
 
         // don't add expired cookie
@@ -193,16 +222,26 @@ public class CookieManager implements Serializable {
 
     /**
      * Removes the specified cookie.
+     * If disabled, this does nothing.
      * @param cookie the cookie to remove
      */
     public synchronized void removeCookie(final Cookie cookie) {
+        if (!isCookiesEnabled()) {
+            return;
+        }
+
         cookies_.remove(cookie);
     }
 
     /**
      * Removes all cookies.
+     * If disabled, this does nothing.
      */
     public synchronized void clearCookies() {
+        if (!isCookiesEnabled()) {
+            return;
+        }
+
         cookies_.clear();
     }
 

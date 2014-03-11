@@ -82,22 +82,32 @@ public class CookieManagerTest extends WebDriverTestCase {
         mgr.clearCookies();
         assertTrue(mgr.getCookies().isEmpty());
 
+        // Add a cookie before disabling cookies.
+        mgr.addCookie(cookie);
+        assertEquals(1, mgr.getCookies().size());
+
         // Disable cookies.
         mgr.setCookiesEnabled(false);
         assertFalse(mgr.isCookiesEnabled());
-
-        final Cookie cookie2 = new Cookie("a", "b", "c", "d", new Date(System.currentTimeMillis() + 5000), false);
+        assertEquals(0, mgr.getCookies().size());
 
         // Add a cookie after disabling cookies.
-        mgr.addCookie(cookie);
+        final Cookie cookie2 = new Cookie("a", "b", "c", "d", new Date(System.currentTimeMillis() + 5000), false);
         mgr.addCookie(cookie2);
-        assertEquals(2, mgr.getCookies().size());
+        assertEquals(0, mgr.getCookies().size());
+        assertFalse(mgr.clearExpired(new Date(System.currentTimeMillis() + 10000)));
 
         // Enable cookies again.
         mgr.setCookiesEnabled(true);
         assertTrue(mgr.isCookiesEnabled());
+        assertEquals(1, mgr.getCookies().size());
 
         // Clear expired cookies
+        assertFalse(mgr.clearExpired(new Date(System.currentTimeMillis() + 10000)));
+        assertEquals(1, mgr.getCookies().size());
+
+        mgr.addCookie(cookie2);
+        assertEquals(2, mgr.getCookies().size());
         assertTrue(mgr.clearExpired(new Date(System.currentTimeMillis() + 10000)));
         assertEquals(1, mgr.getCookies().size());
     }

@@ -8,6 +8,11 @@
 
     <body>
         <release version="2.15" date="???" description="Bugfixes">
+            <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGE: All public methods of CookieManager are taking care of the isCookiesEnabled()
+                state. Subclasses have to do the same. This was done as part of the migration to the new HttpClient
+                api.
+            </action>
             <action type="fix" dev="mguillem" issue="1562">
                 HTML parsing: unknown closing tags can't close any other unknown tags.
             </action>

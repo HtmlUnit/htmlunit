@@ -391,26 +391,6 @@ public class HttpWebConnection implements WebConnection {
         httpClient.setDefaultCredentialsProvider(credentialsProvider);
         httpContext_.removeAttribute(HttpClientContext.CREDS_PROVIDER);
 
-        if (webClient_.getCookieManager().isCookiesEnabled()) {
-            // Cookies are enabled. Note that it's important that we enable single cookie headers,
-            // for compatibility purposes.
-            httpClient.setDefaultCookieStore(new HtmlUnitCookieStore(webClient_.getCookieManager()));
-        }
-        else {
-            // Cookies are disabled.
-            httpClient.setDefaultCookieStore(new CookieStore() {
-                public void addCookie(final Cookie cookie) { /* empty */ }
-                public void clear() { /* empty */ }
-                public boolean clearExpired(final Date date) {
-                    return false;
-                }
-                public List<Cookie> getCookies() {
-                    return Collections.<Cookie>emptyList();
-                }
-            });
-        }
-        httpContext_.removeAttribute(HttpClientContext.COOKIE_STORE);
-
         return httpMethod;
     }
 
@@ -557,6 +537,8 @@ public class HttpWebConnection implements WebConnection {
 
             registeryBuilder.register(HACKED_COOKIE_POLICY, htmlUnitCookieSpecProvider_);
             httpClientBuilder_.setDefaultCookieSpecRegistry(registeryBuilder.build());
+
+            httpClientBuilder_.setDefaultCookieStore(new HtmlUnitCookieStore(webClient_.getCookieManager()));
         }
 
         return httpClientBuilder_;
