@@ -265,4 +265,21 @@ public class MalformedHtmlTest extends WebDriverTestCase {
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+    * Regression test for bug 1562.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("hello world")
+    public void sectionWithUnknownClosingTag() throws Exception {
+        final String html = "<html><body><section id='it'>"
+            + "hello</isslot> world"
+            + "</section>\n"
+            + "<script>\n"
+            + "var elt = document.getElementById('it');\n"
+            + "alert(elt.textContent || elt.innerText);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
 }
