@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.15" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1583" due-to="Carsten">
+                Optimized image data handling; the finalizer needed for the ImageInputStream
+                no longer stops the image node itself from being gc'ed.
+            </action>
             <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: All public methods of CookieManager are taking care of the isCookiesEnabled()
                 state. Subclasses have to do the same. This was done as part of the migration to the new HttpClient

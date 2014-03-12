@@ -61,7 +61,7 @@ public class HtmlImage extends HtmlElement {
     private int lastClickX_;
     private int lastClickY_;
     private WebResponse imageWebResponse_;
-    private ImageReader imageReader_;
+    private ImageData imageData_;
     private boolean downloaded_;
     private boolean onloadInvoked_;
 
@@ -332,8 +332,7 @@ public class HtmlImage extends HtmlElement {
      * @throws IOException if an error occurs while downloading or reading the image
      */
     public int getHeight() throws IOException {
-        readImageIfNeeded();
-        return imageReader_.getHeight(0);
+        return getImageReader().getHeight(0);
     }
 
     /**
@@ -345,8 +344,7 @@ public class HtmlImage extends HtmlElement {
      * @throws IOException if an error occurs while downloading or reading the image
      */
     public int getWidth() throws IOException {
-        readImageIfNeeded();
-        return imageReader_.getWidth(0);
+        return getImageReader().getWidth(0);
     }
 
     /**
@@ -359,7 +357,7 @@ public class HtmlImage extends HtmlElement {
      */
     public ImageReader getImageReader() throws IOException {
         readImageIfNeeded();
-        return imageReader_;
+        return imageData_.getImageReader();
     }
 
     /**
@@ -397,22 +395,23 @@ public class HtmlImage extends HtmlElement {
             final WebRequest request = new WebRequest(url, accept);
             request.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
             imageWebResponse_ = webclient.loadWebResponse(request);
-            imageReader_ = null;
+            imageData_ = null;
             downloaded_ = true;
         }
     }
 
     private void readImageIfNeeded() throws IOException {
         downloadImageIfNeeded();
-        if (imageReader_ == null) {
+        if (imageData_ == null) {
             final ImageInputStream iis = ImageIO.createImageInputStream(imageWebResponse_.getContentAsStream());
             final Iterator<ImageReader> iter = ImageIO.getImageReaders(iis);
             if (!iter.hasNext()) {
                 iis.close();
                 throw new IOException("No image detected in response");
             }
-            imageReader_ = iter.next();
-            imageReader_.setInput(iis);
+            final ImageReader imageReader = iter.next();
+            imageReader.setInput(iis);
+            imageData_ = new ImageData(imageReader);
         }
     }
 
@@ -493,26 +492,6 @@ public class HtmlImage extends HtmlElement {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void finalize() {
-        if (imageReader_ != null) {
-            try {
-                final ImageInputStream stream = (ImageInputStream) imageReader_.getInput();
-                if (stream != null) {
-                    stream.close();
-                }
-                imageReader_.setInput(null);
-                imageReader_.dispose();
-            }
-            catch (final IOException e) {
-                LOG.error(e.getMessage() , e);
-            }
-        }
-    }
-
-    /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * Returns the default display style.
@@ -522,5 +501,47 @@ public class HtmlImage extends HtmlElement {
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
         return DisplayStyle.INLINE;
+    }
+
+    /**
+     * Wraps the ImageReader for an HtmlImage. This is necessary because an object with a finalize()
+     * method is only garbage collected after the method has been run. Which causes all referenced
+     * objects to also not be garbage collected until this happens. Because a HtmlImage references a lot
+     * of objects which could all be garbage collected without impacting the ImageReader it is better to
+     * wrap it in another class.
+     */
+    private static final class ImageData {
+
+        private final ImageReader imageReader_;
+
+        public ImageData(final ImageReader imageReader) {
+            imageReader_ = imageReader;
+        }
+
+        public ImageReader getImageReader() {
+            return imageReader_;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void finalize() {
+            if (imageReader_ != null) {
+                try {
+                    final ImageInputStream stream = (ImageInputStream) imageReader_.getInput();
+                    if (stream != null) {
+                        stream.close();
+                    }
+                }
+                catch (final IOException e) {
+                    LOG.error(e.getMessage(), e);
+                }
+                finally {
+                    imageReader_.setInput(null);
+                    imageReader_.dispose();
+                }
+            }
+        }
     }
 }
