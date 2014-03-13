@@ -53,6 +53,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.DefaultCredentialsProvider2Test.InMemoryAppender;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
@@ -438,4 +439,44 @@ public class HttpWebConnectionTest extends WebServerTestCase {
             writer.close();
         }
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    public void remotePort() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        servlets.put("/test", RemotePortServlet.class);
+        startWebServer("./", null, servlets);
+
+        final WebClient client = getWebClient();
+
+        String firstPort = null;
+
+        for (int i = 0; i < 5; i++) {
+            final HtmlPage page = client.getPage("http://localhost:" + PORT + "/test");
+            final String port = page.asText();
+            if (firstPort == null) {
+                firstPort = port;
+            }
+            assertEquals(firstPort, port);
+        }
+    }
+
+    /**
+     * Servlet for {@link #remotePort()}.
+     */
+    public static class RemotePortServlet extends HttpServlet {
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            response.setContentType("text/html");
+            response.getWriter().write("" + request.getRemotePort());
+        }
+    }
+
 }
