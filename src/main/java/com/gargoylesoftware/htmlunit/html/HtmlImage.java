@@ -48,6 +48,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Node;
  * @author <a href="mailto:knut.johannes.dahle@gmail.com">Knut Johannes Dahle</a>
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Carsten Steul
  */
 public class HtmlImage extends HtmlElement {
 

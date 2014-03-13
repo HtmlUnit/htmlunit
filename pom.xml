@@ -727,6 +727,9 @@
         <contributor>
             <name>Sebastian Cato</name>
         </contributor>
+        <contributor>
+            <name>Carsten Steul</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
