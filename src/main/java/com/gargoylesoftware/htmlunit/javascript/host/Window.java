@@ -958,6 +958,17 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
+     * Loads the new HTML document corresponding to the specified URL.
+     * @param url the location of the new HTML document to load
+     * @throws IOException if loading the specified location fails
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536638%28VS.85%29.aspx">MSDN Documentation</a>
+     */
+    @JsxFunction(@WebBrowser(IE))
+    public void navigate(final String url) throws IOException {
+        getLocation().assign(url);
+    }
+
+    /**
      * Does nothing.
      * @param width the width offset
      * @param height the height offset

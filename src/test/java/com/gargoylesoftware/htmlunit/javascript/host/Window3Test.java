@@ -52,6 +52,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class Window3Test extends WebDriverTestCase {
@@ -1449,5 +1450,29 @@ public class Window3Test extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(URL_FIRST);
 
         driver.findElement(By.id("clickme")).click();
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "First", IE = "Second")
+    public void navigate() throws Exception {
+        final String firstContent
+            = "<html><head><title>First</title><script>\n"
+            + "  function test() {\n"
+            + "    if (window.navigate) {\n"
+            + "      window.navigate('" + URL_SECOND + "');\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(firstContent, URL_FIRST);
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }
 }

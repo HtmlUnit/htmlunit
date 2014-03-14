@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.15" date="???" description="Bugfixes">
+            <action type="add" dev="rbri">
+                JavaScript: window.navigate(url) for IE browsers added.
+            </action>
             <action type="fix" dev="rbri" issue="1583" due-to="Carsten Steul">
                 Optimized image data handling; the finalizer needed for the ImageInputStream
                 no longer stops the image node itself from being gc'ed.
