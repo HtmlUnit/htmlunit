@@ -342,10 +342,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     GENERATED_164,
 
-    /** Was originally .isFirefox(). */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    GENERATED_172,
-
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     GENERATED_21,
@@ -1313,6 +1309,10 @@ public enum BrowserVersionFeatures {
     /** The width column property does not return negative values. */
     @BrowserFeature(@WebBrowser(IE))
     JS_TABLE_COLUMN_WIDTH_DOES_NOT_RETURN_NEGATIVE_VALUES,
+
+    /** Calling deleteCell without an index throws an exeption. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    JS_TABLE_ROW_DELETE_CELL_REQUIRES_INDEX,
 
     /** Value of attribute 'sectionRowIndex' is a big int if the row is not attached to a table. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
