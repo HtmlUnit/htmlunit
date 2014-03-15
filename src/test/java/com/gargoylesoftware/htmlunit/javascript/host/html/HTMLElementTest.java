@@ -4219,7 +4219,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<source>",
             IE8 = "<source></source>")
-    @NotYetImplemented({ FF17, FF24 })
     public void outerHTML_source() throws Exception {
         loadPageWithAlerts2(outerHTML("source"));
     }
@@ -4309,7 +4308,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<tbody></tbody>",
             IE8 = "<TBODY></TBODY>")
-    @NotYetImplemented({ FF17, FF24 })
     public void outerHTML_tbody() throws Exception {
         loadPageWithAlerts2(outerHTML("tbody"));
     }
@@ -4360,7 +4358,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<tfoot></tfoot>",
             IE8 = "<TFOOT></TFOOT>")
-    @NotYetImplemented({ FF17, FF24 })
     public void outerHTML_tfoot() throws Exception {
         loadPageWithAlerts2(outerHTML("tfoot"));
     }
@@ -4371,7 +4368,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<thead></thead>",
             IE8 = "<THEAD></THEAD>")
-    @NotYetImplemented({ FF17, FF24 })
     public void outerHTML_thead() throws Exception {
         loadPageWithAlerts2(outerHTML("thead"));
     }

@@ -33,5 +33,13 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(domClass = HtmlSource.class, browsers = { @WebBrowser(FF),
         @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
 public class HTMLSourceElement extends HTMLElement {
-    // nothing so far
+
+    /**
+     * Returns whether the end tag is forbidden or not.
+     * @see <a href="http://www.w3.org/TR/html4/index/elements.html">HTML 4 specs</a>
+     * @return whether the end tag is forbidden or not
+     */
+    protected boolean isEndTagForbidden() {
+        return true;
+    }
 }

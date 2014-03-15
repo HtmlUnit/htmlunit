@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ALIGN_INVALID;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -46,10 +44,6 @@ public abstract class TableRowGroup extends HtmlElement {
     protected TableRowGroup(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
-        final boolean invalidAlign = hasFeature(HTMLELEMENT_ALIGN_INVALID);
-        if (invalidAlign && !hasAttribute("align")) {
-            setAttribute("align", "left");
-        }
     }
 
     /**

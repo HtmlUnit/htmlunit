@@ -41,7 +41,6 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "hello", "left", "hi", "right" },
             IE = {"", "error", "", "left", "error", "left", "right" })
-    @NotYetImplemented({ FF17, FF24 })
     public void align_thead() throws Exception {
         align("th");
     }
@@ -52,7 +51,6 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "hello", "left", "hi", "right" },
             IE = {"", "error", "", "left", "error", "left", "right" })
-    @NotYetImplemented({ FF17, FF24 })
     public void align_tbody() throws Exception {
         align("tb");
     }
@@ -63,7 +61,6 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "hello", "left", "hi", "right" },
             IE = {"", "error", "", "left", "error", "left", "right" })
-    @NotYetImplemented({ FF17, FF24 })
     public void align_tfoot() throws Exception {
         align("tf");
     }
