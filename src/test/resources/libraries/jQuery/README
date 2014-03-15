@@ -2,11 +2,18 @@ This directory contains the resources necessary to run the jQuery JavaScript lib
 Each subdirectory corresponds to a specific version of the jQuery library.
 
 -------------------------
+For 2.1.0
+
+Get jQuery sources from https://github.com/jquery/jquery
+
+-------------------------
 For 1.8.2
 
 Get jQuery sources from https://github.com/jquery/jquery,
 test/qunit from https://github.com/jquery/qunit
 src/sizzle from https://github.com/jquery/sizzle
+
+-------------------------
 
     - Get JavaBridgeTemplate621.war from php-java-bridge.sourceforge.net
     - Deploy to a web server
