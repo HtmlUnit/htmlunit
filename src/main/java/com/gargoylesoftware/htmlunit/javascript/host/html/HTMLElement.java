@@ -377,6 +377,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     private String chOff_ = "";
 
+    private boolean endTagForbidden_ = false;
+
     /**
      * Returns the value of the "all" property.
      * @return the value of the "all" property
@@ -413,6 +415,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             if (eventName.startsWith("on")) {
                 createEventHandler(eventName, attr.getValue());
             }
+        }
+        if ("wbr".equalsIgnoreCase(domNode.getLocalName())) {
+            endTagForbidden_ = true;
         }
     }
 
@@ -2870,7 +2875,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return whether the end tag is forbidden or not
      */
     protected boolean isEndTagForbidden() {
-        return false;
+        return endTagForbidden_;
     }
 
     /**

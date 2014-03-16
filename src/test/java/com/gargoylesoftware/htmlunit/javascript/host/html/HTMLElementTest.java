@@ -4446,7 +4446,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<wbr>",
             IE8 = "<WBR>")
-    @NotYetImplemented({ FF17, FF24 })
     public void outerHTML_wbr() throws Exception {
         loadPageWithAlerts2(outerHTML("wbr"));
     }
