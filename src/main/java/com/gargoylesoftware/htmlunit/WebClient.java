@@ -157,6 +157,15 @@ public class WebClient implements Serializable {
     private OnbeforeunloadHandler onbeforeunloadHandler_;
     private Cache cache_ = new Cache();
 
+    /** target "_blank". */
+    private static final String TARGET_BLANK = "_blank";
+    /** target "_parent". */
+    private static final String TARGET_SELF = "_self";
+    /** target "_parent". */
+    private static final String TARGET_PARENT = "_parent";
+    /** target "_top". */
+    private static final String TARGET_TOP = "_top";
+
     /** "about:blank". */
     public static final String ABOUT_BLANK = "about:blank";
     /** URL for "about:blank". */
@@ -359,7 +368,7 @@ public class WebClient implements Serializable {
     @SuppressWarnings("unchecked")
     public <P extends Page> P getPage(final WebWindow opener, final String target, final WebRequest params)
         throws FailingHttpStatusCodeException, IOException {
-        return (P) getPage(openTargetWindow(opener, target, "_self"), params);
+        return (P) getPage(openTargetWindow(opener, target, TARGET_SELF), params);
     }
 
     /**
@@ -794,7 +803,7 @@ public class WebClient implements Serializable {
      * @return the new window
      */
     public WebWindow openWindow(final URL url, final String windowName, final WebWindow opener) {
-        final WebWindow window = openTargetWindow(opener, windowName, "_blank");
+        final WebWindow window = openTargetWindow(opener, windowName, TARGET_BLANK);
         final HtmlPage openerPage = (HtmlPage) opener.getEnclosedPage();
         if (url != null) {
             try {
@@ -843,7 +852,7 @@ public class WebClient implements Serializable {
         WebWindow webWindow = resolveWindow(opener, windowToOpen);
 
         if (webWindow == null) {
-            if ("_blank".equals(windowToOpen)) {
+            if (TARGET_BLANK.equals(windowToOpen)) {
                 windowToOpen = "";
             }
             webWindow = new TopLevelWindow(windowToOpen, this);
@@ -858,19 +867,19 @@ public class WebClient implements Serializable {
     }
 
     private WebWindow resolveWindow(final WebWindow opener, final String name) {
-        if (name == null || name.isEmpty() || "_self".equals(name)) {
+        if (name == null || name.isEmpty() || TARGET_SELF.equals(name)) {
             return opener;
         }
 
-        if ("_parent".equals(name)) {
+        if (TARGET_PARENT.equals(name)) {
             return opener.getParentWindow();
         }
 
-        if ("_top".equals(name)) {
+        if (TARGET_TOP.equals(name)) {
             return opener.getTopWindow();
         }
 
-        if ("_blank".equals(name)) {
+        if (TARGET_BLANK.equals(name)) {
             return null;
         }
 
