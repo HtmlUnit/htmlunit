@@ -33,7 +33,7 @@
                 JavaScript: fix setting value to toString() function.
             </action>
             <action type="update" dev="asashour">
-                Upgrade Apache commons-lang to 3.3.
+                Upgrade Apache commons-lang to 3.3.1.
             </action>
             <action type="fix" dev="rbri" issue="1578">
                 JavaScript: Wrong charCode reported by the onKeyPress keyboard event for the space key.
