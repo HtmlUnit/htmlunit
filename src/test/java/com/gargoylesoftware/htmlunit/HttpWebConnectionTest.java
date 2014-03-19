@@ -475,7 +475,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
             response.setContentType("text/html");
-            response.getWriter().write("" + request.getRemotePort());
+            response.getWriter().write(String.valueOf(request.getRemotePort()));
         }
     }
 
