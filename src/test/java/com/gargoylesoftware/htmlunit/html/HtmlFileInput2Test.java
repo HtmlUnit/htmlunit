@@ -74,7 +74,10 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
         }
         driver.findElement(By.name("myInput")).sendKeys(path);
         driver.findElement(By.id("mySubmit")).click();
-        assertTrue(driver.getPageSource().contains("CONTENT_TYPE:application/octet-stream"));
+
+        final String pageSource = driver.getPageSource();
+        assertTrue(pageSource.contains("CONTENT_TYPE:application/octet-stream"));
+        assertFalse(pageSource.contains("charset"));
     }
 
     /**

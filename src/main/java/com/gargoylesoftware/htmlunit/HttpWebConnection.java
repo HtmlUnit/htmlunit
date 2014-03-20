@@ -425,7 +425,7 @@ public class HttpWebConnection implements WebConnection {
             mimeType = "application/octet-stream";
         }
 
-        final ContentType contentType = ContentType.create(mimeType, pairWithFile.getCharset());
+        final ContentType contentType = ContentType.create(mimeType);
         final File file = pairWithFile.getFile();
 
         if (pairWithFile.getData() != null) {

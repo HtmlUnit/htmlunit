@@ -8,7 +8,10 @@
 
     <body>
         <release version="2.15" date="???" description="Bugfixes">
-            <action type="add" dev="rbri" issue="1584" >
+            <action type="fix" dev="rbri" issue="1585" due-to="Jakub Kotasek">
+                File upload content type shouldn't contain charset.
+            </action>
+            <action type="fix" dev="rbri" issue="1584" >
                 JavaScript: setting outerHTML now works also for detached elements.
             </action>
             <action type="add" dev="rbri">
