@@ -1168,11 +1168,15 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_OUTER_HTML_BODY_HEAD_READONLY,
 
+    /** element.outerHTML handles null value as string "null" (IE). */
+    @BrowserFeature(@WebBrowser(value = IE))
+    JS_OUTER_HTML_NULL_AS_STRING,
+
     /** element.outerHTML throws an exception, if the new tag will close
      * the outer one when parsing the html source (IE).
      */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
-    JS_OUTER_THROW_EXCEPTION_WHEN_CLOSES,
+    JS_OUTER_HTML_THROW_EXCEPTION_WHEN_CLOSES,
 
     /** If <tt>true</tt>, then treat <tt>__parent__</tt> and <tt>__proto__</tt> as special properties. */
     @BrowserFeature(@WebBrowser(IE))

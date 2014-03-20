@@ -206,7 +206,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     @Override
-    public void setOuterHTML(final String value) {
+    public void setOuterHTML(final Object value) {
         if (getBrowserVersion().hasFeature(JS_OUTER_HTML_BODY_HEAD_READONLY)) {
             throw Context.reportRuntimeError("outerHTML is read-only for tag 'body'");
         }

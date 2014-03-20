@@ -34,7 +34,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_REDUCE_WHITESPACES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_THROWS_NOT_ATTACHED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_THROW_EXCEPTION_WHEN_CLOSES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_THROW_EXCEPTION_WHEN_CLOSES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_NULL_AS_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PREFIX_RETURNS_EMPTY_WHEN_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SET_ATTRIBUTE_SUPPORTS_EVENT_HANDLERS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES;
@@ -1036,11 +1037,22 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param value the new value for replacing this element
      */
     @JsxSetter
-    public void setOuterHTML(final String value) {
+    public void setOuterHTML(final Object value) {
         final DomNode domNode = getDomNodeOrDie();
-        final DomNode parent = domNode.getParentNode();
-        final DomNode nextSibling = domNode.getNextSibling();
 
+        if (value == null && !getBrowserVersion().hasFeature(JS_OUTER_HTML_NULL_AS_STRING)) {
+            domNode.remove();
+            return;
+        }
+        final String valueStr = Context.toString(value);
+        if (valueStr.isEmpty()) {
+            domNode.remove();
+            return;
+        }
+
+        final DomNode parent = domNode.getParentNode();
+
+        final DomNode nextSibling = domNode.getNextSibling();
         domNode.remove();
 
         final DomNode target;
@@ -1057,14 +1069,14 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final DomNode proxyDomNode = new ProxyDomNode(target.getPage(), target, append) {
             @Override
             public DomNode appendChild(final org.w3c.dom.Node node) {
-                if (getBrowserVersion().hasFeature(JS_OUTER_THROW_EXCEPTION_WHEN_CLOSES)
+                if (getBrowserVersion().hasFeature(JS_OUTER_HTML_THROW_EXCEPTION_WHEN_CLOSES)
                     && node instanceof DomElement) {
                     final String parentName = parent.getNodeName().toUpperCase(Locale.ENGLISH);
                     final short[] closes = HTMLElements.getElement(node.getNodeName()).closes;
                     if (closes != null) {
                         for (final short close : closes) {
                             if (HTMLElements.getElement(close).name.equals(parentName)) {
-                                throw Context.reportRuntimeError("outerHTML can not set '" + value
+                                throw Context.reportRuntimeError("outerHTML can not set '" + valueStr
                                     + "' while its parent is " + domNode.getParentNode());
                             }
                         }
@@ -1074,7 +1086,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 return super.appendChild(node);
             }
         };
-        parseHtmlSnippet(proxyDomNode, value);
+        parseHtmlSnippet(proxyDomNode, valueStr);
     }
 
     /**

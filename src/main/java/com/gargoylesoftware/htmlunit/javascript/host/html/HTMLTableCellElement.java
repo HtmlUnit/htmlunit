@@ -343,7 +343,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxSetter
     @Override
-    public void setOuterHTML(final String value) {
+    public void setOuterHTML(final Object value) {
         throw Context.reportRuntimeError("outerHTML is read-only for tag '"
                         + getDomNodeOrDie().getTagName() + "'");
     }
