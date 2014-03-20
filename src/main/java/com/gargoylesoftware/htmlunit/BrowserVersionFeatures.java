@@ -1172,6 +1172,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE))
     JS_OUTER_HTML_NULL_AS_STRING,
 
+    /** element.outerHTML removes all children from detached node (IE). */
+    @BrowserFeature(@WebBrowser(value = IE))
+    JS_OUTER_HTML_REMOVES_CHILDS_FOR_DETACHED,
+
     /** element.outerHTML throws an exception, if the new tag will close
      * the outer one when parsing the html source (IE).
      */

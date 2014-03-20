@@ -1408,6 +1408,176 @@ public class HTMLElementTest extends WebDriverTestCase {
     }
 
     /**
+     * Test setting <code>outerHTML</code> to two XHTML self-closing <code>div</code> (block).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>", "Childs: 1" },
+            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "exception" },
+            IE11 = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0" },
+            IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = ", "Childs: 0" })
+    public void setOuterHTMLDetachedElementNull() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "    <title>test</title>\n"
+                + "    <script>\n"
+                + "    function doTest(){\n"
+                + "       var myNode = document.getElementById('myNode');\n"
+                + "       document.body.removeChild(myNode);\n"
+                + "       alert('Old = ' + myNode.innerHTML);\n"
+                + "       try {\n"
+                + "           myNode.outerHTML = null;\n"
+                + "           alert('New = ' + myNode.innerHTML);\n"
+                + "           alert('Childs: ' + myNode.childNodes.length);\n"
+                + "       } catch(e) {alert('exception'); }\n"
+                + "    }\n"
+                + "    </script>\n"
+                + "</head>\n"
+                + "<body onload='doTest()'>\n"
+                + "    <div id='myNode'><span id='innerNode'>Old outerHTML</span></div>\n"
+                + "</body>\n"
+                + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test setting <code>outerHTML</code> to two XHTML self-closing <code>div</code> (block).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>", "Childs: 1" },
+            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "exception" },
+            IE11 = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0" },
+            IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = ", "Childs: 0" })
+    public void setOuterHTMLDetachedElementUndefined() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "    <title>test</title>\n"
+                + "    <script>\n"
+                + "    function doTest(){\n"
+                + "       var myNode = document.getElementById('myNode');\n"
+                + "       document.body.removeChild(myNode);\n"
+                + "       alert('Old = ' + myNode.innerHTML);\n"
+                + "       try {\n"
+                + "           myNode.outerHTML = undefined;\n"
+                + "           alert('New = ' + myNode.innerHTML);\n"
+                + "           alert('Childs: ' + myNode.childNodes.length);\n"
+                + "       } catch(e) {alert('exception'); }\n"
+                + "    }\n"
+                + "    </script>\n"
+                + "</head>\n"
+                + "<body onload='doTest()'>\n"
+                + "    <div id='myNode'><span id='innerNode'>Old outerHTML</span></div>\n"
+                + "</body>\n"
+                + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test setting <code>outerHTML</code> to two XHTML self-closing <code>div</code> (block).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>", "Childs: 1" },
+            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "exception" },
+            IE11 = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0" },
+            IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = ", "Childs: 0" })
+    public void setOuterHTMLDetachedElementEmpty() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "    <title>test</title>\n"
+                + "    <script>\n"
+                + "    function doTest(){\n"
+                + "       var myNode = document.getElementById('myNode');\n"
+                + "       document.body.removeChild(myNode);\n"
+                + "       alert('Old = ' + myNode.innerHTML);\n"
+                + "       try {\n"
+                + "           myNode.outerHTML = '';\n"
+                + "           alert('New = ' + myNode.innerHTML);\n"
+                + "           alert('Childs: ' + myNode.childNodes.length);\n"
+                + "       } catch(e) {alert('exception'); }\n"
+                + "    }\n"
+                + "    </script>\n"
+                + "</head>\n"
+                + "<body onload='doTest()'>\n"
+                + "    <div id='myNode'><span id='innerNode'>Old outerHTML</span></div>\n"
+                + "</body>\n"
+                + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test setting <code>outerHTML</code> to two XHTML self-closing <code>div</code> (block).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>", "Childs: 1" },
+            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "exception" },
+            IE11 = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0" },
+            IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = ", "Childs: 0" })
+    public void setOuterHTMLDetachedElementBlank() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "    <title>test</title>\n"
+                + "    <script>\n"
+                + "    function doTest(){\n"
+                + "       var myNode = document.getElementById('myNode');\n"
+                + "       document.body.removeChild(myNode);\n"
+                + "       alert('Old = ' + myNode.innerHTML);\n"
+                + "       try {\n"
+                + "           myNode.outerHTML = '';\n"
+                + "           alert('New = ' + myNode.innerHTML);\n"
+                + "           alert('Childs: ' + myNode.childNodes.length);\n"
+                + "       } catch(e) {alert('exception'); }\n"
+                + "    }\n"
+                + "    </script>\n"
+                + "</head>\n"
+                + "<body onload='doTest()'>\n"
+                + "    <div id='myNode'><span id='innerNode'>Old outerHTML</span></div>\n"
+                + "</body>\n"
+                + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test setting <code>outerHTML</code> to two XHTML self-closing <code>div</code> (block).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>", "Childs: 1" },
+            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "exception" },
+            IE = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = ", "Childs: 0" },
+            IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = ", "Childs: 0" })
+    public void setOuterHTMLDetachedElement() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "    <title>test</title>\n"
+                + "    <script>\n"
+                + "    function doTest(){\n"
+                + "       var myNode = document.getElementById('myNode');\n"
+                + "       document.body.removeChild(myNode);\n"
+                + "       alert('Old = ' + myNode.innerHTML);\n"
+                + "       try {\n"
+                + "           myNode.outerHTML = '<p>test</p>';\n"
+                + "           alert('New = ' + myNode.innerHTML);\n"
+                + "           alert('Childs: ' + myNode.childNodes.length);\n"
+                + "       } catch(e) {alert('exception'); }\n"
+                + "    }\n"
+                + "    </script>\n"
+                + "</head>\n"
+                + "<body onload='doTest()'>\n"
+                + "    <div id='myNode'><span id='innerNode'>Old outerHTML</span></div>\n"
+                + "</body>\n"
+                + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
