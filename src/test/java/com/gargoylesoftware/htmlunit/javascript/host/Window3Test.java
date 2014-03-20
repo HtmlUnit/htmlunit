@@ -1411,6 +1411,111 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("about:blank")
+    public void openWindow_aboutblank_location() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var win = window.open('about:blank', 'test');\n"
+            + "  alert(win.location);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("about:blank")
+    public void openWindow_empty_location() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var win = window.open('', 'test');\n"
+            + "  alert(win.location);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("§§URL§§img.gif")
+    public void openWindow_aboutblank_img() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var win = window.open('about:blank', 'test', '');\n"
+            + "  win.document.open();\n"
+            + "  win.document.writeln('<img id=\"myImg\" src=\"img.gif\" />');\n"
+            + "  win.document.close();\n"
+            + "  alert(win.document.getElementById('myImg').src );\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("§§URL§§img.gif")
+    public void openWindow_aboutblank_document_img() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var win = window.open('about:blank', 'test');\n"
+            + "  win.document.open();\n"
+            + "  win.document.writeln('<html><head></head><body><img id=\"myImg\" src=\"img.gif\" /></body></html>');\n"
+            + "  win.document.close();\n"
+            + "  win.focus();\n"
+            + "  alert(win.document.getElementById('myImg').src );\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("§§URL§§img.gif")
+    public void openWindow_empty_img() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var win = window.open('', 'test');\n"
+            + "  win.document.open();\n"
+            + "  win.document.writeln('<img id=\"myImg\" src=\"img.gif\" />');\n"
+            + "  win.document.close();\n"
+            + "  alert(win.document.getElementById('myImg').src );\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "true",
             IE = "error")
     public void stop() throws Exception {
