@@ -86,4 +86,11 @@ public class StaticNodeList extends SimpleScriptable {
         return elements_.size();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean has(final int index, final Scriptable start) {
+        return index >= 0 && index < getLength();
+    }
 }

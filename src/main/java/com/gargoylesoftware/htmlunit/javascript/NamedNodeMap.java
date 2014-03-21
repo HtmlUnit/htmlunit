@@ -252,4 +252,12 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
         }
         return null;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean has(final int index, final Scriptable start) {
+        return index >= 0 && index < getLength();
+    }
 }

@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest;
 
 /**
@@ -28,6 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
 public class NamedNodeMap2Test extends WebDriverTestCase {
@@ -56,6 +58,25 @@ public class NamedNodeMap2Test extends WebDriverTestCase {
         final String xml = "<test></test>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({ "true", "[object Attr]", "true", "[object Attr]" })
+    public void has() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html ng-app><body>\n"
+            + "<script>\n"
+            + "var attributes = document.documentElement.attributes;\n"
+            + "alert(0 in attributes);\n"
+            + "alert(attributes[0]);\n"
+            + "alert('0' in attributes);\n"
+            + "alert(attributes['0']);\n"
+            + "</script>\n"
+            + "</body></html>";
+
         loadPageWithAlerts2(html);
     }
 }
