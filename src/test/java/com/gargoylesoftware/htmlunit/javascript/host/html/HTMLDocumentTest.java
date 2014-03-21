@@ -298,7 +298,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE11 })
+    @Browsers({ FF, IE11, CHROME })
     @Alerts({ "[object HTMLDivElement]", "[object HTMLUnknownElement]", "[object Element]" })
     public void createDocumentNS() throws Exception {
         final String html = "<html>\n"
@@ -452,7 +452,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ FF, IE11 })
+    @Browsers({ FF, IE11, CHROME })
     @Alerts("clicked")
     public void dispatchEvent() throws Exception {
         final String html =
@@ -556,7 +556,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object HTMLCollection]", "4", "red" },
-            IE8 = { "[object]", "4", "red" })
+            IE8 = { "[object]", "4", "red" },
+            CHROME = { "[object NodeList]", "4", "red" })
     public void identicalIDs() throws Exception {
         final String html =
             "<html>\n"
@@ -787,7 +788,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "not defined",
+    @Alerts(DEFAULT = "not defined",
             IE = { "false", "1", "about:blank", "about:blank" },
             IE11 = { "true", "1" })
     @NotYetImplemented(IE)
@@ -816,9 +817,9 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "undefined", "false" },
-            IE = { "[object]", "true" },
-            IE11 = { "[object Window]", "true" })
+    @Alerts(DEFAULT = { "[object Window]", "true" },
+            FF = { "undefined", "false" },
+            IE8 = { "[object]", "true" })
     public void frameAccessByName() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test(){\n"
@@ -1600,7 +1601,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "", "a", "", "b", "" })
+    @Alerts(DEFAULT = { "", "a", "", "b", "" },
+            CHROME = { "", "a", "a", "b", "b" })
     public void cookie_write2() throws Exception {
         final String html =
               "<html>\n"
@@ -1783,7 +1785,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"", "", "#0000aa", "#0000aa", "x", "x" },
+    @Alerts(DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" },
             IE = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
             IE9 = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" },
             IE11 = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" })
@@ -1814,7 +1816,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"", "", "#0000aa", "#0000aa", "x", "x" },
+    @Alerts(DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" },
             IE = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
             IE9 = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" },
             IE11 = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" })
@@ -1845,7 +1847,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"", "", "#0000aa", "#0000aa", "x", "x" },
+    @Alerts(DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" },
             IE = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#000000" },
             IE9 = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#0" },
             IE11 = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#0" })
@@ -1876,7 +1878,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"", "", "#0000aa", "#0000aa", "x", "x" },
+    @Alerts(DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" },
             IE = {"#000000", "", "#0000aa", "#0000aa", "#000000", "#000000" },
             IE9 = {"#000000", "", "#0000aa", "#0000aa", "#000000", "#0" },
             IE11 = {"#000000", "", "#0000aa", "#0000aa", "#000000", "#0" })
@@ -1909,7 +1911,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "", "true" },
             IE8 = { })
-//            IE9 = {"", "true" }
     public void getSelection() throws Exception {
         final String html =
             "<html>\n"
