@@ -36,6 +36,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NATIVE_FUN
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_THROWS_NOT_ATTACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_NULL_AS_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_REMOVES_CHILDS_FOR_DETACHED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_THROWS_FOR_DETACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_THROW_EXCEPTION_WHEN_CLOSES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PREFIX_RETURNS_EMPTY_WHEN_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SET_ATTRIBUTE_SUPPORTS_EVENT_HANDLERS;
@@ -1044,6 +1045,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         if (null == parent) {
             if (getBrowserVersion().hasFeature(JS_OUTER_HTML_REMOVES_CHILDS_FOR_DETACHED)) {
                 domNode.removeAllChildren();
+            }
+            if (getBrowserVersion().hasFeature(JS_OUTER_HTML_THROWS_FOR_DETACHED)) {
+                throw Context.reportRuntimeError("outerHTML is readonly for detached nodes");
             }
             return;
         }

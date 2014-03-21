@@ -1169,12 +1169,16 @@ public enum BrowserVersionFeatures {
     JS_OUTER_HTML_BODY_HEAD_READONLY,
 
     /** element.outerHTML handles null value as string "null" (IE). */
-    @BrowserFeature(@WebBrowser(value = IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_OUTER_HTML_NULL_AS_STRING,
 
     /** element.outerHTML removes all children from detached node (IE). */
-    @BrowserFeature(@WebBrowser(value = IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_OUTER_HTML_REMOVES_CHILDS_FOR_DETACHED,
+
+    /** element.outerHTML removes all children from detached node (IE). */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_OUTER_HTML_THROWS_FOR_DETACHED,
 
     /** element.outerHTML throws an exception, if the new tag will close
      * the outer one when parsing the html source (IE).
