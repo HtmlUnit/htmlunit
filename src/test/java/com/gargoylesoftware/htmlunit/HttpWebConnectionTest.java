@@ -53,7 +53,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.DefaultCredentialsProvider2Test.InMemoryAppender;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
@@ -444,7 +443,6 @@ public class HttpWebConnectionTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void remotePort() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
         servlets.put("/test", RemotePortServlet.class);

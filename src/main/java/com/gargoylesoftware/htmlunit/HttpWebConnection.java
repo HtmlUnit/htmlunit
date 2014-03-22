@@ -910,6 +910,7 @@ class HtmlUnitCookieStore implements CookieStore, Serializable {
  */
 final class HtmlUnitHttpClientBuilder {
 
+    private static PoolingHttpClientConnectionManager poolingmgr;
     private HtmlUnitHttpClientBuilder() {
     }
 
@@ -918,6 +919,10 @@ final class HtmlUnitHttpClientBuilder {
      * <code>socketFactory</code>.
      */
     public static void configureConnectionManager(final HttpClientBuilder builder) {
+        if (poolingmgr != null) {
+            builder.setConnectionManager(poolingmgr);
+            return;
+        }
         final ConnectionSocketFactory socketFactory = new SocksConnectionSocketFactory();
 
         LayeredConnectionSocketFactory sslSocketFactory =
@@ -957,7 +962,7 @@ final class HtmlUnitHttpClientBuilder {
             }
         }
 
-        final PoolingHttpClientConnectionManager poolingmgr = new PoolingHttpClientConnectionManager(
+        poolingmgr = new PoolingHttpClientConnectionManager(
                 RegistryBuilder.<ConnectionSocketFactory>create()
                     .register("http", socketFactory)
                     .register("https", sslSocketFactory)
