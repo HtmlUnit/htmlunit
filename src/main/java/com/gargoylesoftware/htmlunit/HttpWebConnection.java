@@ -910,7 +910,8 @@ class HtmlUnitCookieStore implements CookieStore, Serializable {
  */
 final class HtmlUnitHttpClientBuilder {
 
-    private static PoolingHttpClientConnectionManager poolingmgr;
+    private static PoolingHttpClientConnectionManager POOLING_CONNECTION_MANAGER_;
+
     private HtmlUnitHttpClientBuilder() {
     }
 
@@ -919,8 +920,8 @@ final class HtmlUnitHttpClientBuilder {
      * <code>socketFactory</code>.
      */
     public static void configureConnectionManager(final HttpClientBuilder builder) {
-        if (poolingmgr != null) {
-            builder.setConnectionManager(poolingmgr);
+        if (POOLING_CONNECTION_MANAGER_ != null) {
+            builder.setConnectionManager(POOLING_CONNECTION_MANAGER_);
             return;
         }
         final ConnectionSocketFactory socketFactory = new SocksConnectionSocketFactory();
@@ -962,33 +963,33 @@ final class HtmlUnitHttpClientBuilder {
             }
         }
 
-        poolingmgr = new PoolingHttpClientConnectionManager(
+        POOLING_CONNECTION_MANAGER_ = new PoolingHttpClientConnectionManager(
                 RegistryBuilder.<ConnectionSocketFactory>create()
                     .register("http", socketFactory)
                     .register("https", sslSocketFactory)
                     .build());
         if (defaultSocketConfig != null) {
-            poolingmgr.setDefaultSocketConfig(defaultSocketConfig);
+            POOLING_CONNECTION_MANAGER_.setDefaultSocketConfig(defaultSocketConfig);
         }
         if (defaultConnectionConfig != null) {
-            poolingmgr.setDefaultConnectionConfig(defaultConnectionConfig);
+            POOLING_CONNECTION_MANAGER_.setDefaultConnectionConfig(defaultConnectionConfig);
         }
         if (systemProperties) {
             String s = System.getProperty("http.keepAlive", "true");
             if ("true".equalsIgnoreCase(s)) {
                 s = System.getProperty("http.maxConnections", "5");
                 final int max = Integer.parseInt(s);
-                poolingmgr.setDefaultMaxPerRoute(max);
-                poolingmgr.setMaxTotal(2 * max);
+                POOLING_CONNECTION_MANAGER_.setDefaultMaxPerRoute(max);
+                POOLING_CONNECTION_MANAGER_.setMaxTotal(2 * max);
             }
         }
         if (maxConnTotal > 0) {
-            poolingmgr.setMaxTotal(maxConnTotal);
+            POOLING_CONNECTION_MANAGER_.setMaxTotal(maxConnTotal);
         }
         if (maxConnPerRoute > 0) {
-            poolingmgr.setDefaultMaxPerRoute(maxConnPerRoute);
+            POOLING_CONNECTION_MANAGER_.setDefaultMaxPerRoute(maxConnPerRoute);
         }
-        builder.setConnectionManager(poolingmgr);
+        builder.setConnectionManager(POOLING_CONNECTION_MANAGER_);
     }
 
     private static String[] split(final String s) {
