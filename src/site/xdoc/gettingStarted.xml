@@ -113,7 +113,7 @@ public void xpath() throws Exception {
             <source><![CDATA[
 @Test
 public void homePage_proxy() throws Exception {
-    final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_10, "http://myproxyserver", myProxyPort);
+    final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_10, "myproxyserver", myProxyPort);
 
     //set proxy username and password 
     final DefaultCredentialsProvider credentialsProvider = (DefaultCredentialsProvider) webClient.getCredentialsProvider();
