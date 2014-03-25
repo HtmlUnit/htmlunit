@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_START_DATE_1970;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_HEADER_HOST_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_AUTH_CREDENTIALS;
 
@@ -148,7 +149,8 @@ public class HttpWebConnection implements WebConnection {
         htmlUnitCookieSpecProvider_ = new CookieSpecProvider() {
             @Override
             public CookieSpec create(final HttpContext context) {
-                return new HtmlUnitBrowserCompatCookieSpec(webClient_.getIncorrectnessListener());
+                return new HtmlUnitBrowserCompatCookieSpec(webClient.getBrowserVersion(),
+                        webClient_.getIncorrectnessListener());
             }
         };
         httpContext_ = new HttpClientContext();
@@ -792,7 +794,8 @@ class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
         "d/M/yyyy",
     };
 
-    HtmlUnitBrowserCompatCookieSpec(final IncorrectnessListener incorrectnessListener) {
+    HtmlUnitBrowserCompatCookieSpec(final BrowserVersion browserVersion,
+            final IncorrectnessListener incorrectnessListener) {
         super();
         final BasicPathHandler pathHandler = new BasicPathHandler() {
             @Override
@@ -814,7 +817,12 @@ class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
                     value = value.substring(1, value.length() - 1);
                 }
                 value = value.replaceAll("[ ,:-]+", " ");
-                cookie.setExpiryDate(DateUtils.parseDate(value, DEFAULT_DATE_PATTERNS, DATE_1_1_1970));
+
+                Date startDate = null;
+                if (browserVersion.hasFeature(HTTP_COOKIE_START_DATE_1970)) {
+                    startDate = DATE_1_1_1970;
+                }
+                cookie.setExpiryDate(DateUtils.parseDate(value, DEFAULT_DATE_PATTERNS, startDate));
             }
 
             public boolean match(final Cookie cookie, final CookieOrigin origin) {

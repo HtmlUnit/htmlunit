@@ -634,6 +634,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTML_OBJECT_CLASSID,
 
+    /** Indicates that the start date for two digits cookies is 1970
+     * instead of 2000 (Two digits years are interpreted as 20xx
+     * if before 1970 and as 19xx otherwise).
+     */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, maxVersion = 10) })
+    HTTP_COOKIE_START_DATE_1970,
+
     /** Indicates that "host" HTTP header should be the first. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTTP_HEADER_HOST_FIRST,
