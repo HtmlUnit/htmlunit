@@ -326,6 +326,7 @@ public class CookieManagerTest extends WebDriverTestCase {
 
     /**
      * Two digits years should be interpreted as 20xx if before 1970 and as 19xx otherwise.
+     * Same as the test before, only different formating was used.
      * @throws Exception if the test fails
      */
     @Test
@@ -352,7 +353,7 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "cookie1=1",
             IE11 = "cookie1=1; cookie6=6")
-    public void setCookieExpires_badDateFormat() throws Exception {
+    public void cookieExpires_TwoDigits3() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "cookie1=1;expires=Sun-01 Dec 68 16:00:00 GMT"));
         responseHeader1.add(new NameValuePair("Set-Cookie", "cookie6=6;expires=Wed-01 Dec 71 16:00:00 GMT"));
@@ -362,18 +363,19 @@ public class CookieManagerTest extends WebDriverTestCase {
     }
 
     /**
+     * Test some formating errors.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts
-    public void setCookieExpired_badDateFormat2() throws Exception {
+    @Alerts("first=1; second=2; third=3; fourth=4; fifth=5; sixth=6")
+    public void cookieExpires_badDateFormat() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
-        responseHeader1.add(new NameValuePair("Set-Cookie", "first=1;expires=Thu 01-Dec-94 16:00:00 GMT"));
-        responseHeader1.add(new NameValuePair("Set-Cookie", "second=2;expires=Thu 01 Dec 94 16:00:00 GMT"));
-        responseHeader1.add(new NameValuePair("Set-Cookie", "third=3;expires=Thu, 01-Dec-94 16:00:00 GMT"));
-        responseHeader1.add(new NameValuePair("Set-Cookie", "fourth=4;expires=Thu, 01 Dec 94 16:00:00 GMT"));
-        responseHeader1.add(new NameValuePair("Set-Cookie", "fifth=5;expires=Thu,01-Dec-94 16:00:00 GMT"));
-        responseHeader1.add(new NameValuePair("Set-Cookie", "sixth=6;expires=Thu,01 Dec 94 16:00:00 GMT"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "first=1;expires=Thu 01-Dec-42 16:00:00 GMT"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "second=2;expires=Thu 01 Dec 42 16:00:00 GMT"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "third=3;expires=Thu, 01-Dec-42 16:00:00 GMT"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "fourth=4;expires=Thu, 01 Dec 42 16:00:00 GMT"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "fifth=5;expires=Thu,01-Dec-42 16:00:00 GMT"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "sixth=6;expires=Thu,01 Dec 42 16:00:00 GMT"));
         getMockWebConnection().setResponse(getDefaultUrl(), HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader1);
 
         loadPageWithAlerts2(getDefaultUrl());
