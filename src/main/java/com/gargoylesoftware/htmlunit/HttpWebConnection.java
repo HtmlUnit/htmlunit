@@ -137,6 +137,7 @@ public class HttpWebConnection implements WebConnection {
     private String virtualHost_;
     private final CookieSpecProvider htmlUnitCookieSpecProvider_;
     private final WebClientOptions usedOptions_;
+    private PoolingHttpClientConnectionManager connectionManager_;
 
     /**
      * Creates a new HTTP web connection instance.
@@ -161,7 +162,10 @@ public class HttpWebConnection implements WebConnection {
         final URL url = request.getUrl();
         final HttpClientBuilder builder = reconfigureHttpClientIfNeeded(getHttpClientBuilder());
 
-        HtmlUnitHttpClientBuilder.configureConnectionManager(builder);
+        if (connectionManager_ == null) {
+            connectionManager_ = HtmlUnitHttpClientBuilder.createConnectionManager(builder);
+        }
+        builder.setConnectionManager(connectionManager_);
 
         HttpUriRequest httpMethod = null;
         try {
@@ -910,8 +914,6 @@ class HtmlUnitCookieStore implements CookieStore, Serializable {
  */
 final class HtmlUnitHttpClientBuilder {
 
-    private static PoolingHttpClientConnectionManager POOLING_CONNECTION_MANAGER_;
-
     private HtmlUnitHttpClientBuilder() {
     }
 
@@ -919,11 +921,7 @@ final class HtmlUnitHttpClientBuilder {
      * Has the exact logic in HttpClientBuilder, but with the ability to configure
      * <code>socketFactory</code>.
      */
-    public static void configureConnectionManager(final HttpClientBuilder builder) {
-        if (POOLING_CONNECTION_MANAGER_ != null) {
-            builder.setConnectionManager(POOLING_CONNECTION_MANAGER_);
-            return;
-        }
+    public static PoolingHttpClientConnectionManager createConnectionManager(final HttpClientBuilder builder) {
         final ConnectionSocketFactory socketFactory = new SocksConnectionSocketFactory();
 
         LayeredConnectionSocketFactory sslSocketFactory =
@@ -963,33 +961,33 @@ final class HtmlUnitHttpClientBuilder {
             }
         }
 
-        POOLING_CONNECTION_MANAGER_ = new PoolingHttpClientConnectionManager(
+        final PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager(
                 RegistryBuilder.<ConnectionSocketFactory>create()
                     .register("http", socketFactory)
                     .register("https", sslSocketFactory)
                     .build());
         if (defaultSocketConfig != null) {
-            POOLING_CONNECTION_MANAGER_.setDefaultSocketConfig(defaultSocketConfig);
+            connectionManager.setDefaultSocketConfig(defaultSocketConfig);
         }
         if (defaultConnectionConfig != null) {
-            POOLING_CONNECTION_MANAGER_.setDefaultConnectionConfig(defaultConnectionConfig);
+            connectionManager.setDefaultConnectionConfig(defaultConnectionConfig);
         }
         if (systemProperties) {
             String s = System.getProperty("http.keepAlive", "true");
             if ("true".equalsIgnoreCase(s)) {
                 s = System.getProperty("http.maxConnections", "5");
                 final int max = Integer.parseInt(s);
-                POOLING_CONNECTION_MANAGER_.setDefaultMaxPerRoute(max);
-                POOLING_CONNECTION_MANAGER_.setMaxTotal(2 * max);
+                connectionManager.setDefaultMaxPerRoute(max);
+                connectionManager.setMaxTotal(2 * max);
             }
         }
         if (maxConnTotal > 0) {
-            POOLING_CONNECTION_MANAGER_.setMaxTotal(maxConnTotal);
+            connectionManager.setMaxTotal(maxConnTotal);
         }
         if (maxConnPerRoute > 0) {
-            POOLING_CONNECTION_MANAGER_.setDefaultMaxPerRoute(maxConnPerRoute);
+            connectionManager.setDefaultMaxPerRoute(maxConnPerRoute);
         }
-        builder.setConnectionManager(POOLING_CONNECTION_MANAGER_);
+        return connectionManager;
     }
 
     private static String[] split(final String s) {
