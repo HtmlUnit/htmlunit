@@ -415,10 +415,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final HtmlElement htmlElt = (HtmlElement) domNode;
         for (final DomAttr attr : htmlElt.getAttributesMap().values()) {
             final String eventName = attr.getName();
-            if (eventName.startsWith("on")) {
+            if (eventName.toLowerCase(Locale.ENGLISH).startsWith("on")) {
                 createEventHandler(eventName, attr.getValue());
             }
         }
+
         if ("wbr".equalsIgnoreCase(domNode.getLocalName())) {
             endTagForbidden_ = true;
         }

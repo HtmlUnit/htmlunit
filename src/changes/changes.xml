@@ -9,6 +9,9 @@
     <body>
         <release version="2.15" date="???" description="Bugfixes">
             <action type="fix" dev="rbri">
+                JavaScript: Some event definitions ignored when simulating IE11.
+            </action>
+            <action type="fix" dev="rbri">
                 HashMap corruption (leads to an endless loop) because of concurrent access.
             </action>
             <action type="fix" dev="rbri">

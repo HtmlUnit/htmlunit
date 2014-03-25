@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -207,5 +209,40 @@ public class HtmlButtonInput2Test extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("foo")
+    public void click_onClick() throws Exception {
+        final String html
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1' onSubmit='alert(\"bar\")'>\n"
+            + "    <input type='button' name='button' id='button' "
+            + "onClick='alert(\"foo\")'>Push me</button>\n"
+            + "</form></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("button")).click();
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("foo")
+    public void click_onClickIgnoreCase() throws Exception {
+        final String html
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "    <input type='button' name='button' id='button' "
+            + "oNclICK='alert(\"foo\")'>Push me</button>\n"
+            + "</form></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("button")).click();
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 }

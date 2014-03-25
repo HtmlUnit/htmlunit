@@ -54,8 +54,7 @@ public class HtmlButtonInputTest extends SimpleWebTestCase {
 
         final HtmlPage secondPage = button.click();
 
-        final String[] expectedAlerts = {"foo"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
 
         assertSame(page, secondPage);
     }
