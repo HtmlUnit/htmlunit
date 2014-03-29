@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.http.Header;
+import org.apache.http.client.utils.DateUtils;
 import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.impl.cookie.BrowserCompatSpec;
 import org.apache.http.message.BasicHeader;
@@ -51,7 +52,7 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
 @RunWith(BrowserRunner.class)
 public class CookieManagerTest extends WebDriverTestCase {
     /** HTML code with JS code <code>alert(document.cookie)</code>. */
-    public static final String HTML_ALERT_COOKIE = "<html><head><script>\nalert(document.cookie);\n</script>"
+    public static final String HTML_ALERT_COOKIE = "<html><head><script>\nalert(document.cookie);\n</script></head>"
         + "<body></body></html>";
 
     /**
@@ -482,6 +483,40 @@ public class CookieManagerTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(firstUrl, "", 302, "Moved", "text/html", responseHeader1);
 
         loadPageWithAlerts2(firstUrl);
+    }
+    /**
+     * Test for document.cookie for cookies expiered after the page was loaded.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"cookies: first=1", "cookies: " })
+    public void setCookieTimeout() throws Exception {
+        final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
+        final String expires = DateUtils.formatDate(new Date(System.currentTimeMillis() + 10000));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; expires=" + expires + "; path=/foo"));
+        responseHeader1.add(new NameValuePair("Location", "/foo/content.html"));
+
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "  function alertCookies() {\n"
+                + "    alert('cookies: ' + document.cookie);\n"
+                + "  }\n"
+                + "</script>"
+                + "</head>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + "  alertCookies();\n"
+                + "  window.setTimeout(alertCookies, 11000);\n"
+                + "</script>"
+                + "</body>\n"
+                + "</html>";
+
+        getMockWebConnection().setDefaultResponse(html);
+        final URL firstUrl = new URL(getDefaultUrl(), "/foo/test.html");
+        getMockWebConnection().setResponse(firstUrl, "", 302, "Moved", "text/html", responseHeader1);
+
+        loadPageWithAlerts2(firstUrl, 25000);
     }
 
     /**

@@ -27,7 +27,6 @@ import java.util.Set;
 
 import org.apache.commons.collections.set.ListOrderedSet;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.cookie.CookieSpec;
 import org.apache.http.impl.cookie.BrowserCompatSpecFactory;
@@ -47,13 +46,6 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
  * @author Ronald Brill
  */
 public class CookieManager implements Serializable {
-
-    /**
-     * HtmlUnit's cookie policy is to be browser-compatible. Code which requires access to
-     * HtmlUnit's cookie policy should use this constant, rather than making assumptions and using
-     * one of the HttpClient {@link CookieSpecs} constants directly.
-     */
-    public static final String HTMLUNIT_COOKIE_POLICY = CookieSpecs.BROWSER_COMPATIBILITY;
 
     /** Whether or not cookies are enabled. */
     private boolean cookiesEnabled_;
@@ -113,15 +105,15 @@ public class CookieManager implements Serializable {
         }
 
         final String host = url.getHost();
-        final String path = url.getPath();
-        final String protocol = url.getProtocol();
-        final boolean secure = "https".equals(protocol);
-
         // URLs like "about:blank" don't have cookies and we need to catch these
         // cases here before HttpClient complains
         if (host.isEmpty()) {
             return Collections.emptySet();
         }
+
+        final String path = url.getPath();
+        final String protocol = url.getProtocol();
+        final boolean secure = "https".equals(protocol);
 
         final int port = getPort(url);
 
