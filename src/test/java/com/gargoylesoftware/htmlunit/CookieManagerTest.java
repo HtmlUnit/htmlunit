@@ -484,6 +484,7 @@ public class CookieManagerTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(firstUrl);
     }
+
     /**
      * Test for document.cookie for cookies expiered after the page was loaded.
      * @throws Exception if the test fails
