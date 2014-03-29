@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_EXTENDED_DATE_PATTERNS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_START_DATE_1970;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_HEADER_HOST_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_AUTH_CREDENTIALS;
@@ -791,6 +792,15 @@ class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
         "EEE dd MMM yyyy HH mm ss z ",
         "EEE dd MM yy HH mm ss z ",
         "EEE dd MM yyyy HH mm ss z ",
+    };
+    private static final String[] EXTENDED_DATE_PATTERNS = new String[] {
+        "EEE dd MMM yy HH mm ss zzz",
+        "EEE dd MMM yyyy HH mm ss zzz",
+        "EEE MMM d HH mm ss yyyy",
+        "EEE dd MMM yy HH mm ss z ",
+        "EEE dd MMM yyyy HH mm ss z ",
+        "EEE dd MM yy HH mm ss z ",
+        "EEE dd MM yyyy HH mm ss z ",
         "d/M/yyyy",
     };
 
@@ -822,7 +832,13 @@ class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
                 if (browserVersion.hasFeature(HTTP_COOKIE_START_DATE_1970)) {
                     startDate = DATE_1_1_1970;
                 }
-                cookie.setExpiryDate(DateUtils.parseDate(value, DEFAULT_DATE_PATTERNS, startDate));
+
+                String[] datePatterns = DEFAULT_DATE_PATTERNS;
+                if (browserVersion.hasFeature(HTTP_COOKIE_EXTENDED_DATE_PATTERNS)) {
+                    datePatterns = EXTENDED_DATE_PATTERNS;
+                }
+
+                cookie.setExpiryDate(DateUtils.parseDate(value, datePatterns, startDate));
             }
 
             public boolean match(final Cookie cookie, final CookieOrigin origin) {

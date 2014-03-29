@@ -46,6 +46,7 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class CookieManagerTest extends WebDriverTestCase {
@@ -447,12 +448,13 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "first=1",
-            IE11 = "")
+    @Alerts(DEFAULT = "first=1; second=2",
+            IE11 = "first=1")
     public void setCookieSubPath() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
-        responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; path=/foo/blah"));
-        responseHeader1.add(new NameValuePair("Location", "/foo/blah"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "first=1;path=/foo/blah"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "second=2;path=/foo/blah/test"));
+        responseHeader1.add(new NameValuePair("Location", "/foo/blah/test"));
 
         getMockWebConnection().setDefaultResponse(HTML_ALERT_COOKIE);
         getMockWebConnection().setResponse(getDefaultUrl(), "", 302, "Moved", "text/html", responseHeader1);
@@ -465,13 +467,15 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "first=1",
-            IE11 = "")
+    @Alerts(DEFAULT = "first=1; second=2",
+            IE11 = "first=1")
     public void setCookieDifferentPath() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; path=/foo/blah"));
-        responseHeader1.add(new NameValuePair("Set-Cookie", "second=2; path=/other/path"));
-        responseHeader1.add(new NameValuePair("Location", "/foo/blah"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "second=2; path=/foo/blah/test"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "third=3; path=/foo/other"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "fourth=4; path=/other/path"));
+        responseHeader1.add(new NameValuePair("Location", "/foo/blah/test"));
 
         getMockWebConnection().setDefaultResponse(HTML_ALERT_COOKIE);
         final URL firstUrl = new URL(getDefaultUrl(), "/a/b");
