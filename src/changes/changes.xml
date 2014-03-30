@@ -9,6 +9,9 @@
     <body>
         <release version="2.15" date="???" description="Bugfixes">
             <action type="fix" dev="rbri">
+                Cookies: Different path interpretation done by IE11 fixed.
+            </action>
+            <action type="fix" dev="rbri">
                 JavaScript: Some event definitions ignored when simulating IE11.
             </action>
             <action type="fix" dev="rbri">
