@@ -649,6 +649,12 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTTP_HEADER_HOST_FIRST,
 
+    /** Indicates that the pas is extracted from the location (IE11).
+     * Sample: from the location /foo/boo only /foo is used.
+     */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    HTTP_COOKIE_EXTRACT_PATH_FROM_LOCATION,
+
     /** Indicates that the browser should ignore contents of inner head elements. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     IGNORE_CONTENTS_OF_INNER_HEAD,

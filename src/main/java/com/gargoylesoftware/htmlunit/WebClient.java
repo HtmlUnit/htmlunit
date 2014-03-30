@@ -34,9 +34,11 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ConcurrentModificationException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -50,6 +52,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpStatus;
 import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.CredentialsProvider;
+import org.apache.http.cookie.CookieOrigin;
 import org.w3c.css.sac.ErrorHandler;
 
 import com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLActiveXObjectFactory;
@@ -75,6 +78,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclara
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.protocol.data.DataUrlDecoder;
+import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
@@ -2102,5 +2106,48 @@ public class WebClient implements Serializable {
      */
     public StorageHolder getStorageHolder() {
         return storageHolder_;
+    }
+
+    /**
+     * Returns the currently configured cookies applicable to the specified URL, in an unmodifiable set.
+     * If disabled, this returns an empty set.
+     * @param url the URL on which to filter the returned cookies
+     * @return the currently configured cookies applicable to the specified URL, in an unmodifiable set
+     */
+    public synchronized Set<Cookie> getCookies(final URL url) {
+        final CookieManager cookieManager = getCookieManager();
+
+        if (!cookieManager.isCookiesEnabled()) {
+            return Collections.<Cookie>emptySet();
+        }
+
+        final String host = url.getHost();
+        // URLs like "about:blank" don't have cookies and we need to catch these
+        // cases here before HttpClient complains
+        if (host.isEmpty()) {
+            return Collections.emptySet();
+        }
+
+        final String path = url.getPath();
+        final String protocol = url.getProtocol();
+        final boolean secure = "https".equals(protocol);
+
+        final int port = cookieManager.getPort(url);
+
+        // discard expired cookies
+        cookieManager.clearExpired(new Date());
+
+        final org.apache.http.cookie.Cookie[] all = Cookie.toHttpClient(cookieManager.getCookies());
+        final CookieOrigin cookieOrigin = new CookieOrigin(host, port, path, secure);
+        final List<org.apache.http.cookie.Cookie> matches = new ArrayList<org.apache.http.cookie.Cookie>();
+        for (final org.apache.http.cookie.Cookie cookie : all) {
+            if (new HtmlUnitBrowserCompatCookieSpec(getBrowserVersion()).match(cookie, cookieOrigin)) {
+                matches.add(cookie);
+            }
+        }
+
+        final Set<Cookie> cookies = new LinkedHashSet<Cookie>();
+        cookies.addAll(Cookie.fromHttpClient(matches));
+        return Collections.unmodifiableSet(cookies);
     }
 }

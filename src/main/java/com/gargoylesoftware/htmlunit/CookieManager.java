@@ -19,13 +19,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.collections.set.ListOrderedSet;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.cookie.CookieSpec;
@@ -51,8 +49,7 @@ public class CookieManager implements Serializable {
     private boolean cookiesEnabled_;
 
     /** The cookies added to this cookie manager. */
-    @SuppressWarnings("unchecked")
-    private final Set<Cookie> cookies_ = new ListOrderedSet();
+    private final Set<Cookie> cookies_ = new LinkedHashSet<Cookie>();
 
     private final transient CookieSpec cookieSpec_ = new BrowserCompatSpecFactory().create(null);
 
@@ -89,7 +86,8 @@ public class CookieManager implements Serializable {
             return Collections.<Cookie>emptySet();
         }
 
-        final Set<Cookie> copy = new HashSet<Cookie>(cookies_);
+        final Set<Cookie> copy = new LinkedHashSet<Cookie>();
+        copy.addAll(cookies_);
         return Collections.unmodifiableSet(copy);
     }
 
@@ -98,7 +96,10 @@ public class CookieManager implements Serializable {
      * If disabled, this returns an empty set.
      * @param url the URL on which to filter the returned cookies
      * @return the currently configured cookies applicable to the specified URL, in an unmodifiable set
+     *
+     * @deprecated as of 2.13 use {@link WebClient#getCookies(URL)}
      */
+    @Deprecated
     public synchronized Set<Cookie> getCookies(final URL url) {
         if (!isCookiesEnabled()) {
             return Collections.<Cookie>emptySet();
@@ -236,5 +237,4 @@ public class CookieManager implements Serializable {
 
         cookies_.clear();
     }
-
 }

@@ -501,6 +501,27 @@ public class CookieManagerTest extends WebDriverTestCase {
     }
 
     /**
+     * Response to /a/b sets cookie to /foo/blah.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "first=1; second=2")
+    public void setCookieDifferentPathSlashAtEnd() throws Exception {
+        final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
+        responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; path=/foo"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "second=2; path=/foo/"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "third=3; path=/foo/other"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "fourth=4; path=/other/path"));
+        responseHeader1.add(new NameValuePair("Location", "/foo/"));
+
+        getMockWebConnection().setDefaultResponse(HTML_ALERT_COOKIE);
+        final URL firstUrl = new URL(getDefaultUrl(), "/a/b");
+        getMockWebConnection().setResponse(firstUrl, "", 302, "Moved", "text/html", responseHeader1);
+
+        loadPageWithAlerts2(firstUrl);
+    }
+
+    /**
      * Test for document.cookie for cookies expiered after the page was loaded.
      * @throws Exception if the test fails
      */
@@ -508,7 +529,7 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"cookies: first=1", "cookies: " })
     public void setCookieTimeout() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
-        final String expires = DateUtils.formatDate(new Date(System.currentTimeMillis() + 10000));
+        final String expires = DateUtils.formatDate(new Date(System.currentTimeMillis() + 1000));
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; expires=" + expires + "; path=/foo"));
         responseHeader1.add(new NameValuePair("Location", "/foo/content.html"));
 
@@ -523,7 +544,7 @@ public class CookieManagerTest extends WebDriverTestCase {
                 + "<body>\n"
                 + "<script>\n"
                 + "  alertCookies();\n"
-                + "  window.setTimeout(alertCookies, 11000);\n"
+                + "  window.setTimeout(alertCookies, 1100);\n"
                 + "</script>"
                 + "</body>\n"
                 + "</html>";

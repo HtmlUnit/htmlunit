@@ -119,7 +119,7 @@ public class CookieManager2Test extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final HtmlPage htmlPage = webClient.getPage("about:blank");
 
-        final Set<Cookie> cookies = webClient.getCookieManager().getCookies(htmlPage.getUrl());
+        final Set<Cookie> cookies = webClient.getCookies(htmlPage.getUrl());
         assertTrue(cookies.toString(), cookies.isEmpty());
     }
 

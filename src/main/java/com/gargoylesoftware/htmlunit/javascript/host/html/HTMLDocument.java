@@ -816,7 +816,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         url = replaceForCookieIfNecessary(url);
 
         final StringBuilder buffer = new StringBuilder();
-        final Set<Cookie> cookies = page.getWebClient().getCookieManager().getCookies(url);
+        final Set<Cookie> cookies = page.getWebClient().getCookies(url);
         for (final Cookie cookie : cookies) {
             if (cookie.isHttpOnly()) {
                 continue;
