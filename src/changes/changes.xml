@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.15" date="???" description="Bugfixes">
+            <action type="update" dev="rbri">
+                CookieManager: deprecate getCookies(URL).
+            </action>
             <action type="fix" dev="rbri">
                 Cookies: Different path interpretation done by IE11 fixed.
             </action>
