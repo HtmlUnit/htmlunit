@@ -638,6 +638,12 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, maxVersion = 10) })
     HTTP_COOKIE_EXTENDED_DATE_PATTERNS,
 
+    /** Indicates that the pas is extracted from the location (IE11).
+     * Sample: from the location /foo/boo only /foo is used.
+     */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    HTTP_COOKIE_EXTRACT_PATH_FROM_LOCATION,
+
     /** Indicates that the start date for two digits cookies is 1970
      * instead of 2000 (Two digits years are interpreted as 20xx
      * if before 1970 and as 19xx otherwise).
@@ -648,12 +654,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that "host" HTTP header should be the first. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTTP_HEADER_HOST_FIRST,
-
-    /** Indicates that the pas is extracted from the location (IE11).
-     * Sample: from the location /foo/boo only /foo is used.
-     */
-    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
-    HTTP_COOKIE_EXTRACT_PATH_FROM_LOCATION,
 
     /** Indicates that the browser should ignore contents of inner head elements. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
