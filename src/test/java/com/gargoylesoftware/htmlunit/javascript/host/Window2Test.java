@@ -629,16 +629,17 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(FF)
-    @Alerts({ "true", "true", "false", "true", "true", "true", "true" })
+    @Browsers({ FF, IE11 })
+    @Alerts(FF = { "true", "true", "true", "false", "true", "true", "true" },
+            IE11 = { "true", "true", "false", "true", "true", "true", "true" })
     public void heightsAndWidths() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
             + "function test() {\n"
             + "  alert(window.innerHeight > 0);\n"
             + "  alert(window.innerHeight == document.body.clientHeight);\n"
-            + "  alert(window.outerHeight == window.innerHeight + 166);\n" // FF 3.6
-            + "  alert(window.outerHeight == window.innerHeight + 111);\n"
+            + "  alert(window.outerHeight == window.innerHeight + 111);\n" // FF
+            + "  alert(window.outerHeight == window.innerHeight + 57);\n" // IE11
             + "  alert(window.innerWidth > 0);\n"
             + "  alert(window.innerWidth == document.body.clientWidth);\n"
             + "  alert(window.outerWidth == window.innerWidth + 8);\n"
