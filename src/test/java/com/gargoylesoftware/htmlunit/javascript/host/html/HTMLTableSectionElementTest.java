@@ -456,4 +456,62 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "undefined", "#0000aa", "x" },
+            IE = { "", "#0000aa", "#000000" },
+            IE11 = { "", "#0000aa", "#0" })
+    public void bgColorFooter() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var tfoot = document.getElementById('tfoot');\n"
+            + "        alert(tfoot.bgColor);\n"
+            + "        tfoot.bgColor = '#0000aa';\n"
+            + "        alert(tfoot.bgColor);\n"
+            + "        tfoot.bgColor = 'x';\n"
+            + "        alert(tfoot.bgColor);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  <table><tfoot id='tfoot'><tr><td>cell1</td></tr></tfoot></table>\n"
+            + "  </body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "undefined", "#0000aa", "x" },
+            IE = { "", "#0000aa", "#000000" },
+            IE11 = { "", "#0000aa", "#0" })
+    public void bgColorHeader() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var thead = document.getElementById('thead');\n"
+            + "        alert(thead.bgColor);\n"
+            + "        thead.bgColor = '#0000aa';\n"
+            + "        alert(thead.bgColor);\n"
+            + "        thead.bgColor = 'x';\n"
+            + "        alert(thead.bgColor);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  <table><thead id='thead'><tr><td>cell1</td></tr></thead></table>\n"
+            + "  </body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
 }

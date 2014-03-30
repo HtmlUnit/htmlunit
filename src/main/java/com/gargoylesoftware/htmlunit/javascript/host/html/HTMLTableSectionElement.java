@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_READONLY_FOR_SOME_TAGS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_READONLY_FOR_TABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_VALIGN_SUPPORTS_IE_VALUES;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.HtmlTableBody;
@@ -26,6 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.RowContainer;
 
 /**
@@ -121,6 +123,26 @@ public class HTMLTableSectionElement extends RowContainer {
     @JsxSetter
     public void setChOff(final String chOff) {
         super.setChOff(chOff);
+    }
+
+    /**
+     * Returns the value of the <tt>bgColor</tt> attribute.
+     * @return the value of the <tt>bgColor</tt> attribute
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
+     */
+    @JsxGetter(@WebBrowser(value = IE))
+    public String getBgColor() {
+        return getDomNodeOrDie().getAttribute("bgColor");
+    }
+
+    /**
+     * Sets the value of the <tt>bgColor</tt> attribute.
+     * @param bgColor the value of the <tt>bgColor</tt> attribute
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
+     */
+    @JsxSetter(@WebBrowser(value = IE))
+    public void setBgColor(final String bgColor) {
+        setColorAttribute("bgColor", bgColor);
     }
 
     /**
