@@ -1432,6 +1432,12 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_WINDOW_ONERROR_COLUMN_ARGUMENT,
 
+    /**
+     * Difference of window.outer/inner height is 57.
+     */
+    @BrowserFeature(@WebBrowser(value = IE))
+    JS_WINDOW_OUTER_INNER_HEIGTH_DIFF_57,
+
     /** Window.postMessage is sent when the targetOrigin port is different than the current port. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_WINDOW_POST_MESSAGE_ALLOW_INVALID_PORT,

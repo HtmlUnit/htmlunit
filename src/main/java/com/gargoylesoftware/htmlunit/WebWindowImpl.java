@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGTH_DIFF_57;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -53,10 +55,10 @@ public abstract class WebWindowImpl implements WebWindow {
     private final History history_ = new History(this);
     private boolean closed_;
 
-    private int innerHeight_ = 605;
-    private int outerHeight_ = innerHeight_ + 111;
-    private int innerWidth_ = 1256;
-    private int outerWidth_ = innerWidth_ + 8;
+    private int innerHeight_;
+    private int outerHeight_;
+    private int innerWidth_;
+    private int outerWidth_;
 
     /**
      * Never call this, used for Serialization.
@@ -75,6 +77,16 @@ public abstract class WebWindowImpl implements WebWindow {
         WebAssert.notNull("webClient", webClient);
         webClient_ = webClient;
         jobManager_ = BackgroundJavaScriptFactory.theFactory().createJavaScriptJobManager(this);
+
+        innerHeight_ = 605;
+        if (webClient.getBrowserVersion().hasFeature(JS_WINDOW_OUTER_INNER_HEIGTH_DIFF_57)) {
+            outerHeight_ = innerHeight_ + 57;
+        }
+        else {
+            outerHeight_ = innerHeight_ + 111;
+        }
+        innerWidth_ = 1256;
+        outerWidth_ = innerWidth_ + 8;
     }
 
     /**
