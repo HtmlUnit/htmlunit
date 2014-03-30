@@ -597,15 +597,14 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "first=1",
-            IE11 = "")
+    @Alerts(DEFAULT = "first=1")
     public void cookieSetFromJSWithoutPathUsesCurrentLocation2() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; path=/c"));
 
         final String html = "<head><body><script>\n"
             + "document.cookie = 'first=new';\n"
-            + "location.replace('/c');\n"
+            + "location.replace('/c/test.html');\n"
             + "</script></body></html>";
 
         getMockWebConnection().setDefaultResponse(HTML_ALERT_COOKIE);
