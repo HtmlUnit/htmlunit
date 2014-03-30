@@ -35,6 +35,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
@@ -178,6 +179,20 @@ public class CookieManagerTest extends WebDriverTestCase {
         final List<NameValuePair> responseHeader = new ArrayList<NameValuePair>();
         responseHeader.add(new NameValuePair("Set-Cookie", "key1="));
         responseHeader.add(new NameValuePair("Set-Cookie", "key2="));
+        getMockWebConnection().setDefaultResponse(HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader);
+
+        loadPageWithAlerts2(getDefaultUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("value1")
+    @NotYetImplemented
+    public void emptyCookieName() throws Exception {
+        final List<NameValuePair> responseHeader = new ArrayList<NameValuePair>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "=value1"));
         getMockWebConnection().setDefaultResponse(HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader);
 
         loadPageWithAlerts2(getDefaultUrl());
