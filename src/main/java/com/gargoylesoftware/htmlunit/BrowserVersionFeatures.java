@@ -949,7 +949,7 @@ public enum BrowserVersionFeatures {
     JS_DOM_CDATA_DELETE_THROWS_NEGATIVE_COUNT,
 
     /** Don't enumerate functions, see {@link net.sourceforge.htmlunit.corejs.javascript.ScriptableObject#DONTENUM}. */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 10))
     JS_DONT_ENUM_FUNCTIONS,
 
     /** Enables Javascript ECMA5 functions (like Date.toISOString or Date.toJSON). */
