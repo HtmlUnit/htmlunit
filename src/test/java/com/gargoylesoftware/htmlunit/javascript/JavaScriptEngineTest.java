@@ -39,7 +39,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -101,22 +100,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug https://sf.net/tracker/?func=detail&atid=448266&aid=1609944&group_id=47038.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("foo")
-    public void onloadJavascriptFunction() throws Exception {
-        final String html
-            = "<html><head><title>foo</title><script>\n"
-            + "function onload() {alert('foo');}"
-            + "</script></head><body>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
      * Tries to set the value of a text input field.
      * @throws Exception if the test fails
      */
@@ -139,59 +122,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         final HtmlTextInput textInput = page.getHtmlElementById("textfield1");
         assertEquals("blue", textInput.getValueAttribute());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("foo")
-    public void alert() throws Exception {
-        final String html
-            = "<html><head><title>foo</title><script>\n"
-            + "alert('foo')\n"
-            + "</script></head><body>\n"
-            + "<p>hello world</p>\n"
-            + "<form name='form1'>\n"
-            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
-            + "    <input type='text' name='textfield2' id='textfield2'/>\n"
-            + "</form>\n"
-            + "</body></html>";
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * Checks that a dynamically compiled function works in the scope of its birth.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("foo")
-    public void scopeOfNewFunction() throws Exception {
-        final String html
-            = "<html><head><script>\n"
-            + "var f = new Function('alert(\"foo\")');\n"
-            + "f();\n"
-            + "</script></head><body>\n"
-            + "</body></html>";
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("foo")
-    public void scopeOfNestedNewFunction() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "var foo = 'foo';\n"
-            + "var f1 = new Function('f = new Function(\"alert(foo)\"); f()');\n"
-            + "f1();\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body>\n"
-            + "</body></html>";
-        loadPageWithAlerts(html);
     }
 
     /**
@@ -572,31 +502,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     }
 
     /**
-     * Sets value on input expects a string. If you pass in a value that isn't a string
-     * this used to blow up.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    public void setValuesThatAreNotStrings() throws Exception {
-        final String html
-            = "<html><head><title>foo</title><script>\n"
-            + "function doTest() {\n"
-            + "    document.form1.textfield1.value = 1;\n"
-            + "    alert(document.form1.textfield1.value)\n"
-            + "}\n"
-            + "</script></head><body onload='doTest()'>\n"
-            + "<p>hello world</p>\n"
-            + "<form name='form1'>\n"
-            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
-            + "    <input type='text' name='textfield2' id='textfield2'/>\n"
-            + "</form>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -653,106 +558,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         assertEquals("frame1", page1.getTitleText());
         assertEquals("frame2", page2.getTitleText());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("foo")
-    public void javaScriptWrappedInHtmlComments() throws Exception {
-        final String html
-            = "<html><head><title>foo</title><script language='javascript'><!--\n"
-            + "function doTest() {\n"
-            + "  alert('foo');\n"
-            + "}\n"
-            + "-->\n</script></head>\n"
-            + "<body onload='doTest()'></body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    public void javaScriptWrappedInHtmlComments2() throws Exception {
-        final String html =
-            "<html><head>\n"
-            + "<script><!--\n"
-            + " alert('1')\n"
-            + "--></script>\n"
-            + "</head>\n"
-            + "<body>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    public void javaScriptWrappedInHtmlComments_commentOnOpeningLine() throws Exception {
-        final String html
-            = "<html><head><title>foo</title><script language='javascript'><!-- Some comment here\n"
-            + "function doTest() {\n"
-            + " alert('1')\n"
-            + "}\n"
-            + "-->\n</script></head>\n"
-            + "<body onload='doTest()'></body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * Regression test for bug 1714762.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void javaScriptWrappedInHtmlComments_commentNotClosed() throws Exception {
-        final String html
-            = "<html><head><title>foo</title>\n"
-            + "<script language='javascript'><!-- alert(1);</script>\n"
-            + "<script language='javascript'><!-- </script>\n"
-            + "</head>\n"
-            + "<body></body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void javaScriptWrappedInHtmlComments_allOnOneLine() throws Exception {
-        final String html
-            = "<html>\n"
-            + "  <head>\n"
-            + "    <title>test</title>\n"
-            + "    <script>var test;</script>\n"
-            + "    <!-- var test should be undefined since it's on first line -->\n"
-            + "    <!-- but there should be no index out of bounds exception  -->\n"
-            + "    <script> <!-- test = 'abc'; // --> </script>\n"
-            + "  </head>\n"
-            + "  <body onload='alert(test)'>\n"
-            + "  </body>\n"
-            + "</html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("test")
-    public void eventHandlerWithComment() throws Exception {
-        final String html = "<html><body onLoad='alert(\"test\"); // xxx'></body></html>";
-        loadPageWithAlerts(html);
     }
 
     /**
@@ -1294,73 +1099,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({ "2", "3" })
-    public void comment() throws Exception {
-        final String html =
-            "<html><head>\n"
-            + "<script><!-- alert(1);\n"
-            + " alert(2);\n"
-            + "alert(3)//--></script>\n"
-            + "</head>\n"
-            + "<body>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({ "rstlne-rstlne-rstlne", "rstlno-rstlne-rstlne",
-            "rstlna-rstlne-rstlne", "rstlne-rstlne-rstlne",
-            "rstlni-rstlni-rstlni", "rstlna-rstlna-rstlna" })
-    public void regExpSupport() throws Exception {
-        final String html = "<html>\n"
-            + "  <head>\n"
-            + "    <title>test</title>\n"
-            + "    <script id='a'>\n"
-            + "       var s = new String('rstlne-rstlne-rstlne');\n"
-            + "       alert(s);\n"
-            + "       s = s.replace('e', 'o');\n"
-            + "       alert(s);\n"
-            + "       s = s.replace(/o/, 'a');\n"
-            + "       alert(s);\n"
-            + "       s = s.replace(new RegExp('a'), 'e');\n"
-            + "       alert(s);\n"
-            + "       s = s.replace(new RegExp('e', 'g'), 'i');\n"
-            + "       alert(s);\n"
-            + "       s = s.replace(/i/g, 'a');\n"
-            + "       alert(s);\n"
-            + "    </script>\n"
-            + "  </head>\n"
-            + "  <body>abc</body>\n"
-            + "</html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * Test ECMA reserved keywords... that are accepted by "normal" browsers
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("123")
-    public void ecmaReservedKeywords() throws Exception {
-        final String html
-            = "<html><head><title>foo</title><script>\n"
-            + "var o = {float: 123};"
-            + "alert(o.float);"
-            + "</script></head><body>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
      * Test that compiled script are cached.
      * @throws Exception if the test fails
      */
@@ -1528,144 +1266,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final ScriptException exception = jsExceptions.get(0);
         assertTrue("Message: " + exception.getMessage(),
             exception.getMessage().contains("\"notExisting\" is not defined"));
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(FF = "found")
-    public void enumerateMethods() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    for (var x in document) {\n"
-            + "      if (x == 'getElementById')\n"
-            + "        alert('found');"
-            + "    }\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * Unit tests for bug 2531218 reported by Rhino as
-     * <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=477604">Bug 477604 -
-     * Array.concat causes ArrayIndexOutOfBoundException with non dense array</a>.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("3")
-    public void array_concat() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var a = [1, 2, 3];\n"
-            + "    for (var i=10; i<20; ++i)\n"
-            + "      a[i] = 't' + i;\n"
-            + "    var b = [1, 2, 3];\n"
-            + "    b.concat(a);\n"
-            + "    alert(b.length);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * String value of native functions starts with \n on IE.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @NotYetImplemented(IE)
-    @Alerts(FF = { "0", "false", "0" },
-            IE = { "1", "true", "1" })
-    public void nativeFunction_toStringValue() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    alert(String(window.alert).indexOf('function'));\n"
-            + "    alert(String(window.alert).charAt(0) == '\\n');\n"
-            + "    alert(String(document.getElementById).indexOf('function'));\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void function_toStringValue() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function f() {}\n"
-            + "  function test() {\n"
-            + "    alert(String(f).indexOf('function'));\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(IE = { "1", "2" })
-    public void function_object_method() throws Exception {
-        if (getBrowserVersion().isIE()) {
-            final String html = "<html><head><title>foo</title><script>\n"
-                    + "  try {\n"
-                    + "    alert('1');\n"
-                    + "    function document.onclick() {\n"
-                    + "      alert('hi');\n"
-                    + "    }\n"
-                    + "    alert('2');\n"
-                    + "  } catch(e) {alert(e)}\n"
-                    + "</script></head><body>\n"
-                    + "  <div id='myDiv'>Hello there</div>\n"
-                    + "</body></html>";
-
-            loadPageWithAlerts(html);
-        }
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("that's it")
-    public void quoteAsUnicodeInString() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "alert('that\\x27s it');\n"
-            + "</script></head><body>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("error")
-    public void recursion() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function recurse(c) {\n"
-            + "    try {\n"
-            + "      recurse(c++);\n"
-            + "    } catch (e) {\n"
-            + "      alert('error');\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script></head><body onload='recurse(1)'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
     }
 
     /**
