@@ -75,7 +75,15 @@ public class HtmlImage extends HtmlElement {
      */
     HtmlImage(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(qualifiedName, page, attributes);
+        super(unifyLocalName(qualifiedName), page, attributes);
+    }
+
+    private static String unifyLocalName(final String qualifiedName) {
+        if (qualifiedName != null && qualifiedName.endsWith(TAG_NAME2)) {
+            final int pos = qualifiedName.lastIndexOf(TAG_NAME2);
+            return qualifiedName.substring(0, pos) + TAG_NAME;
+        }
+        return qualifiedName;
     }
 
     /**

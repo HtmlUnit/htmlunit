@@ -2850,24 +2850,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxFunction
-    public Object getAttribute(final String attributeName, final Integer flags) {
-        return super.getAttribute(attributeName, flags);
-    }
-
-    /**
-     * {@inheritDoc} Overridden to modify browser configurations.
-     */
-    @Override
-    @JsxGetter
-    public final String getTagName() {
-        return super.getTagName();
-    }
-
-    /**
-     * {@inheritDoc} Overridden to modify browser configurations.
-     */
-    @Override
     @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE) })
     public HTMLCollection getChildren() {
         return super.getChildren();

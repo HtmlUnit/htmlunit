@@ -4039,9 +4039,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<image></image>",
+            CHROME = "<image>",
             IE8 = "<IMG>",
             IE11 = "<img>")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ CHROME, FF })
     public void outerHTML_image() throws Exception {
         loadPageWithAlerts2(outerHTML("image"));
     }

@@ -53,17 +53,19 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLImageElement]",
-            IE8 = "[object]")
+    @Alerts(DEFAULT = { "[object HTMLImageElement]", "[object HTMLImageElement]" },
+            IE8 = { "[object]", "[object]" })
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
+            + "    alert(document.getElementById('myId1'));\n"
+            + "    alert(document.getElementById('myId2'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
-            + "  <img id='myId'>\n"
+            + "  <img id='myId1'>\n"
+            + "  <image id='myId2'>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
@@ -73,17 +75,39 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLImageElement]",
-            IE8 = "[object]")
-    public void simpleScriptable2() throws Exception {
+    @Alerts({ "IMG", "IMG" })
+    public void nodeName() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
+            + "    alert(document.getElementById('myId1').nodeName);\n"
+            + "    alert(document.getElementById('myId2').nodeName);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
-            + "  <image id='myId'>\n"
+            + "  <img id='myId1'>\n"
+            + "  <image id='myId2'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "IMG", "IMG" })
+    public void tagName() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myId1').tagName);\n"
+            + "    alert(document.getElementById('myId2').tagName);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <img id='myId1'>\n"
+            + "  <image id='myId2'>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
@@ -232,7 +256,9 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "left", "right", "middle", "justify", "bottom", "middle",
-                    "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", "" },
+                "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", "" },
+            CHROME = { "left", "right", "center", "justify", "bottom", "middle",
+                "top", "absbottom", "absmiddle", "baseline", "texttop", "wrong", "" },
             IE = { "left", "right", "center", "", "bottom", "middle",
                 "top", "absBottom", "absMiddle", "baseline", "textTop", "", "" })
     @NotYetImplemented({ FF17, FF24 })
@@ -268,6 +294,8 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "middle", "justify",
                 "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop" },
+            CHROME = { "CenTer", "8", "foo", "left", "right", "center", "justify",
+                "bottom", "middle", "top", "absbottom", "absmiddle", "baseline", "texttop" },
             IE = { "center", "error", "center", "error", "center", "left", "right",
                 "center", "error", "center", "bottom", "middle", "top", "absBottom",
                 "absMiddle", "baseline", "textTop" })

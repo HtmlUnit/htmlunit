@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
@@ -504,7 +503,6 @@ public class Window3Test extends WebDriverTestCase {
             IE = { "frame1", "frame1", "2", "2" },
             IE8 = { "frame1", "frame1", "exception:w.f2", "exception:f2" })
     @NotYetImplemented(IE)
-    // TODO [IE11] HTMLCollection problem
     public void frameByName() throws Exception {
         final String html = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\""
             + "\"http://www.w3.org/TR/html4/frameset.dtd\">\n"
@@ -564,40 +562,8 @@ public class Window3Test extends WebDriverTestCase {
             + "  <iframe name='frame1'></iframe>\n"
             + "  <iframe name='frame2'></iframe>\n"
             + "  <iframe name='frame2'></iframe>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-     /**
-      * @throws Exception if the test fails
-      */
-    @Test
-    @Alerts(DEFAULT = { "exception:w.i1", "exception:i1", "exception:w.i2", "exception:i2" },
-            IE = { "input1", "input1", "2", "2" })
-    @NotYetImplemented(FF)
-    // TODO [IE11] HTMLCollection problem
-    public void inputByName() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    try {\n"
-            + "      alert(window.input1.name);\n"
-            + "    } catch (e) { alert('exception:w.i1') }\n"
-            + "    try {\n"
-            + "      alert(input1.name);\n"
-            + "    } catch (e) { alert('exception:i1') }\n"
-            + "    try {\n"
-            + "      alert(window.input2.length);\n"
-            + "    } catch (e) { alert('exception:w.i2') }\n"
-            + "    try {\n"
-            + "      alert(input2.length);\n"
-            + "    } catch (e) { alert('exception:i2') }\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "  <input type='text' name='input1' value='1'/>\n"
-            + "  <input type='text' name='input2' value='2'/>\n"
-            + "  <input type='text' name='input2' value='3'/>\n"
+            // iframes are treated as frames and as such have priority over other elements
+            + "  <form name='frame2'></form>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
@@ -607,97 +573,173 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "exception:w.a1", "exception:a1", "exception:w.a2", "exception:a2" },
-            IE = { "anchor1", "anchor1", "2", "2" })
-    @NotYetImplemented(FF)
-    // TODO [IE11] HTMLCollection problem
-    public void anchorByName() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    try {\n"
-            + "      alert(window.anchor1.name);\n"
-            + "    } catch (e) { alert('exception:w.a1') }\n"
-            + "    try {\n"
-            + "      alert(anchor1.name);\n"
-            + "    } catch (e) { alert('exception:a1') }\n"
-            + "    try {\n"
-            + "      alert(window.anchor2.length);\n"
-            + "    } catch (e) { alert('exception:w.a2') }\n"
-            + "    try {\n"
-            + "      alert(anchor2.length);\n"
-            + "    } catch (e) { alert('exception:a2') }\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "  <a name='anchor1'></a>\n"
-            + "  <a name='anchor2'></a>\n"
-            + "  <a name='anchor2'></a>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = { "image1", "image1", "2", "2" },
-            FF17 = { "exception:w.i1", "image1", "exception:w.i2", "2" })
-    @NotYetImplemented(FF17)
-    public void imageByName() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    try {\n"
-            + "      alert(window.image1.name);\n"
-            + "    } catch (e) { alert('exception:w.i1') }\n"
-            + "    try {\n"
-            + "      alert(image1.name);\n"
-            + "    } catch (e) { alert('exception:i1') }\n"
-            + "    try {\n"
-            + "      alert(window.image2.length);\n"
-            + "    } catch (e) { alert('exception:w.i2') }\n"
-            + "    try {\n"
-            + "      alert(image2.length);\n"
-            + "    } catch (e) { alert('exception:i2') }\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "  <img name='image1'>\n"
-            + "  <img name='image2'>\n"
-            + "  <img name='image2'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({ "exception:w.e1", "exception:e1", "exception:w.e2", "exception:e2" })
+    @Alerts(DEFAULT = { "5", "EMBED", "FORM", "IMG", "IMG", "OBJECT", "5", "EMBED", "FORM", "IMG", "IMG", "OBJECT" },
+            FF17 = { "exception:w.e1", "5", "EMBED", "FORM", "IMG", "IMG", "OBJECT" },
+            IE = { "11", "A", "BUTTON", "EMBED", "FORM", "IMG", "IMG", "INPUT", "MAP", "OBJECT", "SELECT", "TEXTAREA",
+                "11", "A", "BUTTON", "EMBED", "FORM", "IMG", "IMG", "INPUT", "MAP", "OBJECT", "SELECT", "TEXTAREA" })
     @NotYetImplemented
-    // TODO [IE11] HTMLCollection problem
-    public void elementByName() throws Exception {
+    // The following tags cause problems with WebDriver:
+    // applet, body, frame, frameset, head, html, isindex, meta, plaintext, title
+    // The iframe tag is treated as frame and as such has priority over the other tags, which would make the test
+    // useless.
+    public void elementsByName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert(window.element1.name);\n"
+            + "      dump(window.element1);\n"
             + "    } catch (e) { alert('exception:w.e1') }\n"
             + "    try {\n"
-            + "      alert(element1.name);\n"
+            + "      dump(element1);\n"
             + "    } catch (e) { alert('exception:e1') }\n"
-            + "    try {\n"
-            + "      alert(window.element2.length);\n"
-            + "    } catch (e) { alert('exception:w.e2') }\n"
-            + "    try {\n"
-            + "      alert(element2.length);\n"
-            + "    } catch (e) { alert('exception:e2') }\n"
+            + "  }\n"
+            + "  function dump(c) {\n"
+            + "    alert(c.length);\n"
+            + "    for (i = 0; i < c.length; i++) {\n"
+            + "      alert(c.item(i).nodeName);\n"
+            + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
-            + "  <div name='element1'></table>\n"
-            + "  <div name='element2'></div>\n"
-            + "  <div name='element2'></div>\n"
+            + "  <abbr name='element1'></abbr>\n"
+            + "  <acronym name='element1'></acronym>\n"
+            + "  <a name='element1'></a>\n"
+            + "  <address name='element1'></address>\n"
+            // + "  <applet name='element1'></applet>\n"
+            + "  <article name='element1'></article>\n"
+            + "  <audio name='element1'></audio>\n"
+            + "  <bgsound name='element1'>\n"
+            + "  <base name='element1'>\n"
+            + "  <basefont name='element1'>\n"
+            + "  <bdo name='element1'></bdo>\n"
+            + "  <big name='element1'></big>\n"
+            + "  <blink name='element1'></blink>\n"
+            + "  <blockquote name='element1'></blockquote>\n"
+            // + "  <body name='element1'></body>\n"
+            + "  <b name='element1'></b>\n"
+            + "  <br name='element1'>\n"
+            + "  <button name='element1'></button>\n"
+            + "  <canvas name='element1'></canvas>\n"
+            + "  <caption name='element1'></caption>\n"
+            + "  <center name='element1'></center>\n"
+            + "  <cite name='element1'></cite>\n"
+            + "  <code name='element1'></code>\n"
+            + "  <datalist name='element1'></datalist>\n"
+            + "  <dfn name='element1'></dfn>\n"
+            + "  <del name='element1'></del>\n"
+            + "  <dir name='element1'></dir>\n"
+            + "  <div name='element1'></div>\n"
+            + "  <dl name='element1'>\n"
+            + "    <dt name='element1'></dt>\n"
+            + "    <dd name='element1'></dd>\n"
+            + "  </dl>\n"
+            + "  <embed name='element1'>\n"
+            + "  <em name='element1'></em>\n"
+            + "  <fieldset name='element1'></fieldset>\n"
+            + "  <figcaption name='element1'></figcaption>\n"
+            + "  <figure name='element1'></figure>\n"
+            + "  <font name='element1'></font>\n"
+            + "  <form name='element1'></form>\n"
+            + "  <footer name='element1'></footer>\n"
+            // + "  <frame name='element1'>\n"
+            // + "  <frameset name='element1'></frameset>\n"
+            + "  <h1 name='element1'></h1>\n"
+            + "  <h2 name='element1'></h2>\n"
+            + "  <h3 name='element1'></h3>\n"
+            + "  <h4 name='element1'></h4>\n"
+            + "  <h5 name='element1'></h5>\n"
+            + "  <h6 name='element1'></h6>\n"
+            // + "  <head name='element1'></head>\n"
+            + "  <header name='element1'></header>\n"
+            + "  <hr name='element1'>\n"
+            // + "  <html name='element1'></html>\n"
+            // + "  <iframe name='element1'></iframe>\n"
+            + "  <q name='element1'></q>\n"
+            + "  <ruby name='element1'>\n"
+            + "    <rt name='element1'></rt>\n"
+            + "    <rp name='element1'></rp>\n"
+            + "  </ruby>\n"
+            + "  <image name='element1'></image>\n"
+            + "  <img name='element1'>\n"
+            + "  <input name='element1'>\n"
+            + "  <ins name='element1'></ins>\n"
+            // + "  <isindex name='element1'></isindex>\n"
+            + "  <i name='element1'></i>\n"
+            + "  <kbd name='element1'></kbd>\n"
+            + "  <keygen name='element1'>\n"
+            + "  <label name='element1'></label>\n"
+            + "  <legend name='element1'></legend>\n"
+            + "  <listing name='element1'></listing>\n"
+            + "  <link name='element1'>\n"
+            + "  <map name='element1'>\n"
+            + "    <area name='element1'>\n"
+            + "  </map>\n"
+            + "  <marquee name='element1'></marquee>\n"
+            + "  <mark name='element1'></mark>\n"
+            + "  <menu name='element1'></menu>\n"
+            // + "  <meta name='element1'>\n"
+            + "  <meter name='element1'></meter>\n"
+            + "  <multicol name='element1'></multicol>\n"
+            + "  <nav name='element1'></nav>\n"
+            + "  <nextid name='element1'></nextid>\n"
+            + "  <nobr name='element1'></nobr>\n"
+            + "  <noembed name='element1'></noembed>\n"
+            + "  <noframes name='element1'></noframes>\n"
+            + "  <noscript name='element1'></noscript>\n"
+            + "  <object name='element1'>\n"
+            + "    <param name='element1'>\n"
+            + "  </object>\n"
+            + "  <ol name='element1'>\n"
+            + "    <li name='element1'></li>\n"
+            + "  </ol>\n"
+            + "  <output name='element1'></output>\n"
+            + "  <p name='element1'></p>\n"
+            // + "  <plaintext name='element1'></plaintext>\n"
+            + "  <pre name='element1'></pre>\n"
+            + "  <progress name='element1'></progress>\n"
+            + "  <s name='element1'></s>\n"
+            + "  <samp name='element1'></samp>\n"
+            + "  <script name='element1'></script>\n"
+            + "  <section name='element1'></section>\n"
+            + "  <select name='element1'>\n"
+            + "    <optgroup name='element1'>\n"
+            + "      <option name='element1'></option>\n"
+            + "    </optgroup>\n"
+            + "  </select>\n"
+            + "  <small name='element1'></small>\n"
+            + "  <source name='element1'>\n"
+            + "  <spacer name='element1'></spacer>\n"
+            + "  <span name='element1'></span>\n"
+            + "  <strike name='element1'></strike>\n"
+            + "  <strong name='element1'></strong>\n"
+            + "  <style name='element1'></style>\n"
+            + "  <sub name='element1'></sub>\n"
+            + "  <sup name='element1'></sup>\n"
+            + "  <table name='element1'>\n"
+            + "    <colgroup name='element1'>\n"
+            + "      <col name='element1'></col>\n"
+            + "    </colgroup>\n"
+            + "    <thead name='element1'>\n"
+            + "      <tr name='element1'>\n"
+            + "        <th name='element1'></th>\n"
+            + "      </tr>\n"
+            + "    </thead>\n"
+            + "    <tbody name='element1'>\n"
+            + "      <tr name='element1'>\n"
+            + "        <td name='element1'></td>\n"
+            + "      </tr>\n"
+            + "    </tbody>\n"
+            + "    <tfoot name='element1'></tfoot>\n"
+            + "  </table>\n"
+            + "  <textarea name='element1'></textarea>\n"
+            + "  <tt name='element1'></tt>\n"
+            + "  <time name='element1'></time>\n"
+            // + "  <title name='element1'></title>\n"
+            + "  <u name='element1'></u>\n"
+            + "  <ul name='element1'></ul>\n"
+            + "  <var name='element1'></var>\n"
+            + "  <video name='element1'></video>\n"
+            + "  <wbr name='element1'>\n"
+            + "  <xmp name='element1'></xmp>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
