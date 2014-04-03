@@ -21,6 +21,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -400,5 +401,26 @@ public class HTMLAnchorElement extends HTMLElement {
         catch (final MalformedURLException e) {
             return href;
         }
+    }
+
+    /**
+     * Returns the <tt>text</tt> attribute.
+     * @return the <tt>text</tt> attribute
+     */
+    @Override
+    @JsxGetter
+    public String getText() {
+        final DomNode htmlElement = getDomNodeOrDie();
+        return htmlElement.asText();
+    }
+
+    /**
+     * Sets the <tt>text</tt> attribute.
+     * @param text the <tt>text</tt> attribute
+     */
+    @JsxSetter
+    public void setText(final String text) {
+        final DomNode htmlElement = getDomNodeOrDie();
+        htmlElement.setTextContent(text);
     }
 }

@@ -1716,6 +1716,29 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "1", "0" })
+    @NotYetImplemented
+    public void childrenDoesNotCountTextNodes() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  children = document.getElementById('myBody').children;\n"
+            + "  alert(children.length);\n"
+
+            + "  children = document.getElementById('myId').children;\n"
+            + "  alert(children.length);\n"
+            + "}\n"
+            + "</script></head><body id='myBody' onload='test()'>\n"
+            + "  <div id='myId'>abcd</div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = { "2", "exception" },
             IE = { "2", "BR" })
     @NotYetImplemented(FF)

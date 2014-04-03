@@ -24,6 +24,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -289,5 +290,65 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
         final WebElement tester = driver.findElement(By.id("a"));
         tester.click();
         assertEquals(2, driver.getWindowHandles().size());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "My Link", "", "abcd" })
+    public void getText() throws Exception {
+        final String html =
+              "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myAnchor').text);\n"
+            + "    alert(document.getElementById('myImgAnchor').text);\n"
+            + "    alert(document.getElementById('myImgTxtAnchor').text);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload=test()>\n"
+            + "  <a id='myAnchor'>My Link</a>\n"
+            + "  <a id='myImgAnchor'><img src='test.png' /></a>\n"
+            + "  <a id='myImgTxtAnchor'>ab<img src='test.png' />cd</a>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "My Link 0", "Hello 0", " 1", "Hello 0", "a 2", "Hello 0" })
+    @NotYetImplemented
+    public void setText() throws Exception {
+        final String html =
+              "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var anchor = document.getElementById('myAnchor');\n"
+            + "      alert(anchor.text + ' ' + anchor.children.length);\n"
+            + "      anchor.text = 'Hello';\n"
+            + "      alert(anchor.text + ' ' + anchor.children.length);\n"
+
+            + "      anchor = document.getElementById('myImgAnchor');\n"
+            + "      alert(anchor.text + ' ' + anchor.children.length);\n"
+            + "      anchor.text = 'Hello';\n"
+            + "      alert(anchor.text + ' ' + anchor.children.length);\n"
+
+            + "      anchor = document.getElementById('myImgTxtAnchor');\n"
+            + "      alert(anchor.text + ' ' + anchor.children.length);\n"
+            + "      anchor.text = 'Hello';\n"
+            + "      alert(anchor.text + ' ' + anchor.children.length);\n"
+            + "    } catch (e) { alert('exception' + e) }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload=test()>\n"
+            + "  <a id='myAnchor'>My Link</a>\n"
+            + "  <a id='myImgAnchor'><img src='test.png' /></a>\n"
+            + "  <a id='myImgTxtAnchor'><img src='test.png' />a<img src='test.png' /></a>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
     }
 }
