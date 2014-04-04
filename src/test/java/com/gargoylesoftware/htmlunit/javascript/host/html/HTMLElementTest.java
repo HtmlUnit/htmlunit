@@ -2467,15 +2467,20 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = { "[object ClientRectList]", "1" },
+            IE8 = { "[object]", "1" })
+    @NotYetImplemented
     public void getClientRects() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var d1 = document.getElementById('div1');\n"
-            + "    d1.getClientRects();\n"
+            + "    var rects = d1.getClientRects();\n"
+            + "    alert(rects);\n"
+            + "    alert(rects.length);\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "<div id='div1'/>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='div1'/>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
