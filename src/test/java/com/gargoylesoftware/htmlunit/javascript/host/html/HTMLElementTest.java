@@ -1717,7 +1717,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "0" })
-    @NotYetImplemented
     public void childrenDoesNotCountTextNodes() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

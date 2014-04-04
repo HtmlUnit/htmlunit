@@ -976,15 +976,28 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLCollection]", "[object HTMLCollection]" },
-            IE = { "undefined", "[object HTMLCollection]" })
+    @Alerts(DEFAULT = { "[object HTMLCollection] 1", "[object HTMLCollection] 2", "[object HTMLCollection] 0" },
+            IE = { "exception", "[object HTMLCollection] 2", "[object HTMLCollection] 0" })
     public void children() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  var text = '<hello><child></child></hello>';\n"
             + "  var doc = " + XMLDocumentTest.callLoadXMLDocumentFromString("text") + ";\n"
-            + "  alert(doc.documentElement.children);\n"
-            + "  alert(document.documentElement.children);\n"
+
+            + "  try {\n"
+            + "    var children = doc.documentElement.children;\n"
+            + "    alert(children + ' ' + children.length);\n"
+            + "  } catch (e) { alert('exception'); }\n"
+
+            + "  try {\n"
+            + "    children = document.documentElement.children;\n"
+            + "    alert(children + ' ' + children.length);\n"
+            + "  } catch (e) { alert('exception'); }\n"
+
+            + "  try {\n"
+            + "    children = document.getElementById('myId').children;\n"
+            + "    alert(children + ' ' + children.length);\n"
+            + "  } catch (e) { alert('exception'); }\n"
             + "}\n"
             + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"

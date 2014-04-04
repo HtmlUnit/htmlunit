@@ -24,7 +24,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -320,7 +319,6 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "My Link 0", "Hello 0", " 1", "Hello 0", "a 2", "Hello 0" })
-    @NotYetImplemented
     public void setText() throws Exception {
         final String html =
               "<html><head><script>\n"
