@@ -118,7 +118,7 @@ public class RowContainer extends HTMLElement {
         final int rowCount = rows.getLength();
         final int r;
         if (rowIndex == -1 || rowIndex == rowCount) {
-            r = Math.max(0, rowCount - 1);
+            r = Math.max(0, rowCount);
         }
         else {
             r = rowIndex;
@@ -134,7 +134,7 @@ public class RowContainer extends HTMLElement {
 
     /**
      * Inserts a new row at the given position.
-     * @param index the index where the row should be inserted (0 <= index < nbRows)
+     * @param index the index where the row should be inserted (0 <= index <= nbRows)
      * @return the inserted row
      */
     public Object insertRow(final int index) {
@@ -144,10 +144,14 @@ public class RowContainer extends HTMLElement {
         if (rowCount == 0) {
             getDomNodeOrDie().appendChild(newRow);
         }
+        else if (index == rowCount) {
+            final SimpleScriptable row = (SimpleScriptable) rows.item(Integer.valueOf(index - 1));
+            row.getDomNodeOrDie().getParentNode().appendChild(newRow);
+        }
         else {
             final SimpleScriptable row = (SimpleScriptable) rows.item(Integer.valueOf(index));
             // if at the end, then in the same "sub-container" as the last existing row
-            if (index >= rowCount - 1) {
+            if (index > rowCount - 1) {
                 row.getDomNodeOrDie().getParentNode().appendChild(newRow);
             }
             else {

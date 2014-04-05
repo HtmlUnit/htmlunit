@@ -321,33 +321,88 @@ public class HTMLTableElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({ "1", "2", "1", "0", "TD", "1", "2" })
-    public void insertRow() throws Exception {
+    private void insertRow(final String rowIndex) throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "  <table id='table_1'>\n"
-            + "  <tr><td>foo</td></tr>\n"
+            + "    <tr><td>first</td></tr>\n"
+            + "    <tr><td>second</td></tr>\n"
             + "  </table>\n"
-            + "  <script type='text/javascript' language='JavaScript'>\n"
+            + "  <script>\n"
             + "    var table = document.getElementById('table_1');\n"
             + "    alert(table.rows.length);\n"
-            + "    var newRow = table.insertRow(-1);\n"
-            + "    alert(table.rows.length);\n"
-            + "    alert(newRow.rowIndex);\n"
-            + "    alert(newRow.cells.length);\n"
-            + "    var newCell = newRow.insertCell(-1);\n"
-            + "    alert(newCell.tagName);\n"
-            + "    alert(newRow.cells.length);\n"
-            + "    newRow.insertCell(newRow.cells.length);\n"
-            + "    alert(newRow.cells.length);\n"
+            + "    try {\n"
+            + "      var newRow = table.insertRow(" + rowIndex + ");\n"
+            + "      alert(table.rows.length);\n"
+            + "      alert(newRow.rowIndex);\n"
+            + "    } catch (e) { alert('exception'); }\n"
             + "  </script>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "2", "3", "2" })
+    public void insertRowEmpty() throws Exception {
+        insertRow("");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "2", "exception" })
+    public void insertRow_MinusTen() throws Exception {
+        insertRow("-2");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "2", "3", "2" })
+    public void insertRow_MinusOne() throws Exception {
+        insertRow("-1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "2", "3", "0" })
+    public void insertRow_Zero() throws Exception {
+        insertRow("0");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "2", "3", "1" })
+    public void insertRow_One() throws Exception {
+        insertRow("1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "2", "3", "2" })
+    public void insertRow_Two() throws Exception {
+        insertRow("2");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "2", "exception" })
+    public void insertRow_Three() throws Exception {
+        insertRow("3");
     }
 
     /**

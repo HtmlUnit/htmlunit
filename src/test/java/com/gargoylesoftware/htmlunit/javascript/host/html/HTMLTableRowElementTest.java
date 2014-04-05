@@ -378,4 +378,91 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
+
+    private void insertCell(final String cellIndex) throws Exception {
+        final String html
+            = "<html><head><title>foo</title></head><body>\n"
+            + "  <table>\n"
+            + "    <tr id='myRow'>\n"
+            + "      <td>first</td>\n"
+            + "      <td>second</td>\n"
+            + "    </tr>\n"
+            + "  </table>\n"
+            + "  <script>\n"
+            + "    var row = document.getElementById('myRow');\n"
+            + "    alert(row.cells.length);\n"
+            + "    try {\n"
+            + "      var newCell = row.insertCell(" + cellIndex + ");\n"
+            + "      alert(row.cells.length);\n"
+            + "      alert(newCell.cellIndex);\n"
+            + "    } catch (e) { alert('exception'); }\n"
+            + "  </script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "2", "3", "2" },
+            FF17 = { "2", "exception" })
+    public void insertCellEmpty() throws Exception {
+        insertCell("");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "2", "exception" })
+    public void insertCell_MinusTen() throws Exception {
+        insertCell("-2");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "2", "3", "2" })
+    public void insertCell_MinusOne() throws Exception {
+        insertCell("-1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "2", "3", "0" })
+    public void insertCell_Zero() throws Exception {
+        insertCell("0");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "2", "3", "1" })
+    public void insertCell_One() throws Exception {
+        insertCell("1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "2", "3", "2" })
+    public void insertCell_Two() throws Exception {
+        insertCell("2");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "2", "exception" })
+    public void insertCell_Three() throws Exception {
+        insertCell("3");
+    }
 }
