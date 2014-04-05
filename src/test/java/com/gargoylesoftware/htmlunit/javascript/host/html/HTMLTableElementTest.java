@@ -356,7 +356,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "2", "exception" })
-    public void insertRow_MinusTen() throws Exception {
+    public void insertRow_MinusTwo() throws Exception {
         insertRow("-2");
     }
 

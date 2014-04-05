@@ -408,6 +408,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "2", "3", "2" },
             FF17 = { "2", "exception" })
+    @NotYetImplemented(FF17)
     public void insertCellEmpty() throws Exception {
         insertCell("");
     }
@@ -417,7 +418,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "2", "exception" })
-    public void insertCell_MinusTen() throws Exception {
+    public void insertCell_MinusTwo() throws Exception {
         insertCell("-2");
     }
 
