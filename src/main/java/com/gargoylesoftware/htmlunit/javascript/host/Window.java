@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_133
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_NOT_ALLOWED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_IS_A_FUNCTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ONERROR_COLUMN_ARGUMENT;
@@ -34,6 +35,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -53,6 +55,8 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Predicate;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -82,12 +86,22 @@ import com.gargoylesoftware.htmlunit.html.DomChangeListener;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
+import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlEmbed;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlImage;
+import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
+import com.gargoylesoftware.htmlunit.html.HtmlMap;
+import com.gargoylesoftware.htmlunit.html.HtmlObject;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
+import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -1335,19 +1349,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             result = getFrameWindowByName(page, name);
 
             if (result == NOT_FOUND) {
-                // May be attempting to retrieve element(s) by name. IMPORTANT: We're using map-backed operations
-                // like getHtmlElementsByName() and getHtmlElementById() as much as possible, so as to avoid XPath
-                // overhead. We only use an XPath-based operation when we have to (where there is more than one
-                // matching element). This optimization appears to improve performance in certain situations by ~15%
-                // vs using XPath-based operations throughout.
-                final List<DomElement> elements = page.getElementsByName(name);
-                if (elements.size() == 1) {
-                    result = getScriptableFor(elements.get(0));
-                }
-                else if (elements.size() > 1) {
-                    result = ((HTMLDocument) document_).getElementsByName(name);
-                }
-                else {
+                result = getElementsByName(page, name);
+
+                if (result == NOT_FOUND) {
                     // May be attempting to retrieve element by ID (try map-backed operation again instead of XPath).
                     try {
                         final HtmlElement htmlElement = page.getHtmlElementById(name);
@@ -1416,6 +1420,69 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         catch (final ElementNotFoundException e) {
             return NOT_FOUND;
         }
+    }
+
+    private Object getElementsByName(final HtmlPage page, final String name) {
+        Object result = NOT_FOUND;
+
+        // May be attempting to retrieve element(s) by name. IMPORTANT: We're using map-backed operations
+        // like getHtmlElementsByName() and getHtmlElementById() as much as possible, so as to avoid XPath
+        // overhead. We only use an XPath-based operation when we have to (where there is more than one
+        // matching element). This optimization appears to improve performance in certain situations by ~15%
+        // vs using XPath-based operations throughout.
+        final List<DomElement> elements = page.getElementsByName(name);
+
+        final boolean includeFormFields = getBrowserVersion().hasFeature(JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME);
+        final Predicate filter = new Predicate() {
+            @Override
+            public boolean evaluate(final Object object) {
+                if (object instanceof HtmlEmbed
+                    || object instanceof HtmlForm
+                    || object instanceof HtmlImage
+                    || object instanceof HtmlObject) {
+                    return true;
+                }
+                if (includeFormFields && (
+                        object instanceof HtmlAnchor
+                        || object instanceof HtmlButton
+                        || object instanceof HtmlInput
+                        || object instanceof HtmlMap
+                        || object instanceof HtmlSelect
+                        || object instanceof HtmlTextArea)) {
+                    return true;
+                }
+                return false;
+            }
+        };
+        CollectionUtils.filter(elements, filter);
+
+        if (elements.size() == 1) {
+            result = getScriptableFor(elements.get(0));
+        }
+        else if (elements.size() > 1) {
+            // Null must be changed to '' for proper collection initialization.
+            final String expElementName = "null".equals(name) ? "" : name;
+
+            result = new HTMLCollection(page, true, "Window.getElementsByName('" + name + "')") {
+                @Override
+                protected List<Object> computeElements() {
+                    final List<DomElement> elements = page.getElementsByName(expElementName);
+                    CollectionUtils.filter(elements, filter);
+
+                    return new ArrayList<Object>(elements);
+                }
+
+                @Override
+                protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
+                    if ("name".equals(event.getName())) {
+                        return EffectOnCache.RESET;
+                    }
+                    return EffectOnCache.NONE;
+                }
+            };
+        }
+
+        return result;
     }
 
     /**

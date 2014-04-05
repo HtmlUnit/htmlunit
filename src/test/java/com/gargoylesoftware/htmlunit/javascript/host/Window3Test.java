@@ -577,7 +577,6 @@ public class Window3Test extends WebDriverTestCase {
             FF17 = { "exception:w.e1", "5", "EMBED", "FORM", "IMG", "IMG", "OBJECT" },
             IE = { "11", "A", "BUTTON", "EMBED", "FORM", "IMG", "IMG", "INPUT", "MAP", "OBJECT", "SELECT", "TEXTAREA",
                 "11", "A", "BUTTON", "EMBED", "FORM", "IMG", "IMG", "INPUT", "MAP", "OBJECT", "SELECT", "TEXTAREA" })
-    @NotYetImplemented
     // The following tags cause problems with WebDriver:
     // applet, body, frame, frameset, head, html, isindex, meta, plaintext, title
     // The iframe tag is treated as frame and as such has priority over the other tags, which would make the test

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.15" date="???" description="Bugfixes">
+            <action type="add" dev="rbri" due-to="Frank Danek">
+                JavaScript: Window.name implementation fixed for IE11.
+            </action>
             <action type="add" dev="rbri">
                 JavaScript: add support for the bgColor attribute on thead and tfoot element.
             </action>

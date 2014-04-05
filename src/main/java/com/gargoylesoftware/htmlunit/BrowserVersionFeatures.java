@@ -1418,6 +1418,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT,
 
+    /** <code>window.name</code> returns also form fields (e.g. input, textarea). */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME,
+
     /** Support for accessing the frame of a window by id additionally
      * to using the name (FF).
      */
