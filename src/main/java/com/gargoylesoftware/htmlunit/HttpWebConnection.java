@@ -224,7 +224,7 @@ public class HttpWebConnection implements WebConnection {
 
     private void setProxy(final HttpRequestBase httpRequest, final WebRequest webRequest) {
         final RequestConfig.Builder requestBuilder = createRequestConfig();
-        configureTimeout(requestBuilder, webClient_.getOptions().getTimeout());
+        configureTimeout(requestBuilder, getTimeout());
 
         if (webRequest.getProxyHost() != null) {
             final HttpHost proxy = new HttpHost(webRequest.getProxyHost(), webRequest.getProxyPort());
@@ -550,7 +550,7 @@ public class HttpWebConnection implements WebConnection {
                         && response.getFirstHeader("location") != null;
             }
         });
-        configureTimeout(builder, webClient_.getOptions().getTimeout());
+        configureTimeout(builder, getTimeout());
         builder.setMaxConnPerRoute(6);
         return builder;
     }
@@ -590,8 +590,9 @@ public class HttpWebConnection implements WebConnection {
             configureHttpsScheme(httpClientBuilder);
         }
 
-        if (options.getTimeout() != usedOptions_.getTimeout()) {
-            configureTimeout(httpClientBuilder, options.getTimeout());
+        final int timeout = getTimeout();
+        if (timeout != usedOptions_.getTimeout()) {
+            configureTimeout(httpClientBuilder, timeout);
         }
         return httpClientBuilder;
     }
