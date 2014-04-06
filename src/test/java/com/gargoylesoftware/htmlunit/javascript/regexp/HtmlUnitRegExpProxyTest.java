@@ -26,6 +26,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -849,5 +850,45 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Alerts("><")
     public void replace_T() throws Exception {
         testEvaluate("'>' + 'a\\\\.b'.replace(/([\\u00C0-\\uFFFF]|[\\w]|\\\\.)+/, '') + '<'");
+    }
+
+    /**
+     * Test for bug 1455.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "html,body,div,div,div", "undefined", "undefined", "undefined",
+                "html", "1", "undefined", "/html/body/div[5]/div[1]/div[1]" },
+            IE8 = { "html,body,div,div,div", "25", "28", "/html/body/div[5]/div[1]/div[1]",
+                    "null" })
+    @NotYetImplemented
+    public void regExResultProperties() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var source = '/html/body/div[5]/div[1]/div[1]';\n"
+            + "    var myRegexp = new RegExp(\n"
+            + "          '\\\\$?(?:(?![0-9-])[\\\\w-]+:)?(?![0-9-])[\\\\w-]+' ,'g');\n"
+          
+            + "     var result = source.match(myRegexp);\n"
+            + "     alert(result);\n"
+            + "     if (result) {\n"
+            + "       alert(result.index);\n"
+            + "       alert(result.lastIndex);\n"
+            + "       alert(result.input);\n"
+            + "     }\n"
+
+            + "     result = myRegexp.exec(source);\n"
+            + "     alert(result);\n"
+            + "     if (result) {\n"
+            + "       alert(result.index);\n"
+            + "       alert(result.lastIndex);\n"
+            + "       alert(result.input);\n"
+            + "     }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
     }
 }
