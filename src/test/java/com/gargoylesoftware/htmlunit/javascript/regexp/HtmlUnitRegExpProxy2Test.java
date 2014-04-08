@@ -148,5 +148,4 @@ public class HtmlUnitRegExpProxy2Test extends SimpleWebTestCase {
             Context.exit();
         }
     }
-
 }

@@ -156,7 +156,7 @@ public class HtmlUnitRegExpProxyInstancePropertiesTest extends WebDriverTestCase
             + "    var source = '/html/body/div[5]/div[1]/div[1]';\n"
             + "    var myRegexp = new RegExp(\n"
             + "          '\\\\$?(?:(?![0-9-])[\\\\w-]+:)?(?![0-9-])[\\\\w-]+' ,'g');\n"
-          
+
             + "     var result = source.match(myRegexp);\n"
             + "     alert(result);\n"
             + "     if (result) {\n"
