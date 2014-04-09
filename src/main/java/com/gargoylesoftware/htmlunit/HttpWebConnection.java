@@ -223,8 +223,7 @@ public class HttpWebConnection implements WebConnection {
     }
 
     private void setProxy(final HttpRequestBase httpRequest, final WebRequest webRequest) {
-        final RequestConfig.Builder requestBuilder = createRequestConfig();
-        configureTimeout(requestBuilder, getTimeout());
+        final RequestConfig.Builder requestBuilder = createRequestConfigBuilder(getTimeout());
 
         if (webRequest.getProxyHost() != null) {
             final HttpHost proxy = new HttpHost(webRequest.getProxyHost(), webRequest.getProxyPort());
@@ -556,25 +555,23 @@ public class HttpWebConnection implements WebConnection {
     }
 
     private void configureTimeout(final HttpClientBuilder builder, final int timeout) {
-        final RequestConfig.Builder requestBuilder = createRequestConfig();
-        configureTimeout(requestBuilder, timeout);
+        final RequestConfig.Builder requestBuilder = createRequestConfigBuilder(timeout);
 
         builder.setDefaultRequestConfig(requestBuilder.build());
         httpContext_.removeAttribute(HttpClientContext.REQUEST_CONFIG);
         usedOptions_.setTimeout(timeout);
     }
 
-    private RequestConfig.Builder createRequestConfig() {
+    private RequestConfig.Builder createRequestConfigBuilder(final int timeout) {
         final RequestConfig.Builder requestBuilder = RequestConfig.custom()
                 .setCookieSpec(HACKED_COOKIE_POLICY)
-                .setRedirectsEnabled(false);
-        return requestBuilder;
-    }
+                .setRedirectsEnabled(false)
 
-    private void configureTimeout(final RequestConfig.Builder builder, final int timeout) {
-        builder.setConnectTimeout(timeout)
-            .setConnectionRequestTimeout(timeout)
-            .setSocketTimeout(timeout);
+                // timeout
+                .setConnectTimeout(timeout)
+                .setConnectionRequestTimeout(timeout)
+                .setSocketTimeout(timeout);
+        return requestBuilder;
     }
 
     /**
