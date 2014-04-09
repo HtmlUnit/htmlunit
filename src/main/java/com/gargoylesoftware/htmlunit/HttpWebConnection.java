@@ -25,7 +25,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.lang.reflect.Field;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -43,6 +42,7 @@ import javax.net.ssl.SSLSocketFactory;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpEntityEnclosingRequest;
@@ -94,7 +94,6 @@ import org.apache.http.impl.cookie.RFC2109SpecFactory;
 import org.apache.http.impl.cookie.RFC2965SpecFactory;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HttpContext;
-import org.apache.http.util.TextUtils;
 
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -151,7 +150,7 @@ public class HttpWebConnection implements WebConnection {
         final HttpClientBuilder builder = reconfigureHttpClientIfNeeded(getHttpClientBuilder());
 
         if (connectionManager_ == null) {
-            connectionManager_ = HtmlUnitHttpClientBuilder.createConnectionManager(builder);
+            connectionManager_ = createConnectionManager(builder);
         }
         builder.setConnectionManager(connectionManager_);
 
@@ -727,6 +726,87 @@ public class HttpWebConnection implements WebConnection {
             httpClientBuilder_ = null;
         }
     }
+
+    /**
+     * Has the exact logic in HttpClientBuilder, but with the ability to configure
+     * <code>socketFactory</code>.
+     */
+    private PoolingHttpClientConnectionManager createConnectionManager(final HttpClientBuilder builder) {
+        final ConnectionSocketFactory socketFactory = new SocksConnectionSocketFactory();
+
+        LayeredConnectionSocketFactory sslSocketFactory;
+        try {
+            sslSocketFactory = (LayeredConnectionSocketFactory)
+                        FieldUtils.readDeclaredField(builder, "sslSocketFactory", true);
+            final SocketConfig defaultSocketConfig = (SocketConfig)
+                        FieldUtils.readDeclaredField(builder, "defaultSocketConfig", true);
+            final ConnectionConfig defaultConnectionConfig = (ConnectionConfig)
+                        FieldUtils.readDeclaredField(builder, "defaultConnectionConfig", true);
+            final boolean systemProperties = (Boolean) FieldUtils.readDeclaredField(builder, "systemProperties", true);
+            final int maxConnTotal = (Integer) FieldUtils.readDeclaredField(builder, "maxConnTotal", true);
+            final int maxConnPerRoute = (Integer) FieldUtils.readDeclaredField(builder, "maxConnPerRoute", true);
+            X509HostnameVerifier hostnameVerifier = (X509HostnameVerifier)
+                        FieldUtils.readDeclaredField(builder, "hostnameVerifier", true);
+            final SSLContext sslcontext = (SSLContext) FieldUtils.readDeclaredField(builder, "sslcontext", true);
+
+            if (sslSocketFactory == null) {
+                final String[] supportedProtocols = systemProperties
+                        ? StringUtils.split(System.getProperty("https.protocols"), ',') : null;
+                final String[] supportedCipherSuites = systemProperties
+                        ? StringUtils.split(System.getProperty("https.cipherSuites"), ',') : null;
+                if (hostnameVerifier == null) {
+                    hostnameVerifier = SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER;
+                }
+                if (sslcontext != null) {
+                    sslSocketFactory = new SSLConnectionSocketFactory(
+                            sslcontext, supportedProtocols, supportedCipherSuites, hostnameVerifier);
+                }
+                else {
+                    if (systemProperties) {
+                        sslSocketFactory = new SSLConnectionSocketFactory(
+                                (SSLSocketFactory) SSLSocketFactory.getDefault(),
+                                supportedProtocols, supportedCipherSuites, hostnameVerifier);
+                    }
+                    else {
+                        sslSocketFactory = new SSLConnectionSocketFactory(
+                                SSLContexts.createDefault(),
+                                hostnameVerifier);
+                    }
+                }
+            }
+
+            final PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager(
+                    RegistryBuilder.<ConnectionSocketFactory>create()
+                        .register("http", socketFactory)
+                        .register("https", sslSocketFactory)
+                        .build());
+            if (defaultSocketConfig != null) {
+                connectionManager.setDefaultSocketConfig(defaultSocketConfig);
+            }
+            if (defaultConnectionConfig != null) {
+                connectionManager.setDefaultConnectionConfig(defaultConnectionConfig);
+            }
+            if (systemProperties) {
+                String s = System.getProperty("http.keepAlive", "true");
+                if ("true".equalsIgnoreCase(s)) {
+                    s = System.getProperty("http.maxConnections", "5");
+                    final int max = Integer.parseInt(s);
+                    connectionManager.setDefaultMaxPerRoute(max);
+                    connectionManager.setMaxTotal(2 * max);
+                }
+            }
+            if (maxConnTotal > 0) {
+                connectionManager.setMaxTotal(maxConnTotal);
+            }
+            if (maxConnPerRoute > 0) {
+                connectionManager.setDefaultMaxPerRoute(maxConnPerRoute);
+            }
+            return connectionManager;
+        }
+        catch (final IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
 
 /**
@@ -770,108 +850,5 @@ class HtmlUnitCookieStore implements CookieStore, Serializable {
      */
     public synchronized void clear() {
         manager_.clearCookies();
-    }
-
-}
-
-/**
- * A helper class for configuring {@link HttpClientBuilder}.
- *
- * @author Ahmed Ashour
- */
-final class HtmlUnitHttpClientBuilder {
-
-    private HtmlUnitHttpClientBuilder() {
-    }
-
-    /**
-     * Has the exact logic in HttpClientBuilder, but with the ability to configure
-     * <code>socketFactory</code>.
-     */
-    public static PoolingHttpClientConnectionManager createConnectionManager(final HttpClientBuilder builder) {
-        final ConnectionSocketFactory socketFactory = new SocksConnectionSocketFactory();
-
-        LayeredConnectionSocketFactory sslSocketFactory =
-                (LayeredConnectionSocketFactory) getField(builder, "sslSocketFactory");
-        final SocketConfig defaultSocketConfig = (SocketConfig) getField(builder, "defaultSocketConfig");
-        final ConnectionConfig defaultConnectionConfig =
-                (ConnectionConfig) getField(builder, "defaultConnectionConfig");
-        final boolean systemProperties = (Boolean) getField(builder, "systemProperties");
-        final int maxConnTotal = (Integer) getField(builder, "maxConnTotal");
-        final int maxConnPerRoute = (Integer) getField(builder, "maxConnPerRoute");
-        X509HostnameVerifier hostnameVerifier = (X509HostnameVerifier) getField(builder, "hostnameVerifier");
-        final SSLContext sslcontext = (SSLContext) getField(builder, "sslcontext");
-
-        if (sslSocketFactory == null) {
-            final String[] supportedProtocols = systemProperties ? split(
-                    System.getProperty("https.protocols")) : null;
-            final String[] supportedCipherSuites = systemProperties ? split(
-                    System.getProperty("https.cipherSuites")) : null;
-            if (hostnameVerifier == null) {
-                hostnameVerifier = SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER;
-            }
-            if (sslcontext != null) {
-                sslSocketFactory = new SSLConnectionSocketFactory(
-                        sslcontext, supportedProtocols, supportedCipherSuites, hostnameVerifier);
-            }
-            else {
-                if (systemProperties) {
-                    sslSocketFactory = new SSLConnectionSocketFactory(
-                            (SSLSocketFactory) SSLSocketFactory.getDefault(),
-                            supportedProtocols, supportedCipherSuites, hostnameVerifier);
-                }
-                else {
-                    sslSocketFactory = new SSLConnectionSocketFactory(
-                            SSLContexts.createDefault(),
-                            hostnameVerifier);
-                }
-            }
-        }
-
-        final PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager(
-                RegistryBuilder.<ConnectionSocketFactory>create()
-                    .register("http", socketFactory)
-                    .register("https", sslSocketFactory)
-                    .build());
-        if (defaultSocketConfig != null) {
-            connectionManager.setDefaultSocketConfig(defaultSocketConfig);
-        }
-        if (defaultConnectionConfig != null) {
-            connectionManager.setDefaultConnectionConfig(defaultConnectionConfig);
-        }
-        if (systemProperties) {
-            String s = System.getProperty("http.keepAlive", "true");
-            if ("true".equalsIgnoreCase(s)) {
-                s = System.getProperty("http.maxConnections", "5");
-                final int max = Integer.parseInt(s);
-                connectionManager.setDefaultMaxPerRoute(max);
-                connectionManager.setMaxTotal(2 * max);
-            }
-        }
-        if (maxConnTotal > 0) {
-            connectionManager.setMaxTotal(maxConnTotal);
-        }
-        if (maxConnPerRoute > 0) {
-            connectionManager.setDefaultMaxPerRoute(maxConnPerRoute);
-        }
-        return connectionManager;
-    }
-
-    private static String[] split(final String s) {
-        if (TextUtils.isBlank(s)) {
-            return null;
-        }
-        return s.split(" *, *");
-    }
-
-    private static Object getField(final HttpClientBuilder builder, final String fieldName) {
-        try {
-            final Field field = HttpClientBuilder.class.getDeclaredField(fieldName);
-            field.setAccessible(true);
-            return field.get(builder);
-        }
-        catch (final Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 }
