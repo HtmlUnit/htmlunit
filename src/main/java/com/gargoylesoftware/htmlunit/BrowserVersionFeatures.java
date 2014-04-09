@@ -360,14 +360,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
-    GENERATED_42,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_43,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
     GENERATED_49,
 
     /** Was originally .isIE(). */
@@ -744,6 +736,10 @@ public enum BrowserVersionFeatures {
     /** Indicates that the browser emulates the charOff attribute. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_CHAR_OFF_EMULATED,
+
+    /** Do not allow invalid clear values. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_CLEAR_RESTRICT,
 
     /** Indicates that the click method call does not trigger the onchange
      * event handlers for checkboxes. */
