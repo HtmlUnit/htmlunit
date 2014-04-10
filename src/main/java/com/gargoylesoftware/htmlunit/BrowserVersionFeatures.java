@@ -190,6 +190,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     EVENT_INPUT,
 
+    /** MouseEvent.button uses IE numbering scheme. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
+    EVENT_MOUSERVENT_BUTTON_CODE_IE,
+
     /** Triggers 'onbeforeunload' event handler using <code>Event</code>. */
     @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 9) })
     EVENT_ONBEFOREUNLOAD_USES_EVENT,
@@ -311,10 +315,6 @@ public enum BrowserVersionFeatures {
     GENERATED_112,
 
     /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
-    GENERATED_116,
-
-    /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
     GENERATED_124,
 
@@ -405,22 +405,6 @@ public enum BrowserVersionFeatures {
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
     GENERATED_91,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_93,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_94,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_95,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_96,
 
     /** If the class name is [object GeoGeolocation]. */
     @BrowserFeature(@WebBrowser(value = FF, maxVersion = 17))
@@ -1323,13 +1307,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_TABLE_CELL_NOWRAP_VALUE_TRUE_IF_SET,
 
+    /** The width cell offset calculation takes border into account. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_TABLE_CELL_OFFSET_INCLUDES_BORDER,
+
     /** The width cell property does not return negative values. */
     @BrowserFeature(@WebBrowser(IE))
     JS_TABLE_CELL_WIDTH_DOES_NOT_RETURN_NEGATIVE_VALUES,
-
-    /** Throws an exception if the value for column span is less than one. */
-    @BrowserFeature(@WebBrowser(IE))
-    JS_TABLE_COLUMN_SPAN_THROWS_EXCEPTION_IF_LESS_THAN_ONE,
 
     /** The width column property does not return negative values. */
     @BrowserFeature(@WebBrowser(IE))
@@ -1354,6 +1338,10 @@ public enum BrowserVersionFeatures {
     /** When trying to set a table header (thead) although there is already one an error is thrown. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_TABLE_SET_THEAD_ALTHOUGH_ALREADY_SET_THROWS_ERROR,
+
+    /** Throws an exception if the value for column span is less than one. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID,
 
     /** Indicates that table elements supports the values "top", "bottom", "middle", "baseline" (IE). */
     @BrowserFeature(@WebBrowser(IE))

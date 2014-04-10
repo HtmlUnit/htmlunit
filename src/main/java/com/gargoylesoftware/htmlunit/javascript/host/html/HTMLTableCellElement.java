@@ -14,14 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_93;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_94;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_95;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_96;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_HEIGHT_DOES_NOT_RETURN_NEGATIVE_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_NOT_EMPTY_ALWAYS_TRUE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_NOWRAP_VALUE_TRUE_IF_SET;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_OFFSET_INCLUDES_BORDER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_WIDTH_DOES_NOT_RETURN_NEGATIVE_VALUES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID;
 
 import java.util.List;
 
@@ -74,7 +72,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
         }
 
         final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
-        final boolean includeBorder = getBrowserVersion().hasFeature(GENERATED_93);
+        final boolean includeBorder = getBrowserVersion().hasFeature(JS_TABLE_CELL_OFFSET_INCLUDES_BORDER);
         return style.getCalculatedHeight(includeBorder, true);
     }
 
@@ -95,7 +93,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
             if (row != null) {
                 final HtmlElement thiz = getDomNodeOrDie();
                 final List<HtmlTableCell> cells = row.getCells();
-                final boolean ie = getBrowserVersion().hasFeature(GENERATED_94);
+                final boolean ie = getBrowserVersion().hasFeature(JS_TABLE_CELL_OFFSET_INCLUDES_BORDER);
                 final boolean leftmost = (cells.indexOf(thiz) == 0);
                 final boolean rightmost = (cells.indexOf(thiz) == cells.size() - 1);
                 w -= ((ie && leftmost ? 0 : 0.5) * style.getBorderLeftValue());
@@ -209,7 +207,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
             }
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().hasFeature(GENERATED_95)) {
+            if (getBrowserVersion().hasFeature(JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID)) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
             s = "1";
@@ -249,7 +247,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
             }
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().hasFeature(GENERATED_96)) {
+            if (getBrowserVersion().hasFeature(JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID)) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
             s = "1";

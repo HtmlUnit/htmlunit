@@ -16,9 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_READONLY_FOR_SOME_TAGS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.
-                    JS_TABLE_COLUMN_SPAN_THROWS_EXCEPTION_IF_LESS_THAN_ONE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.
                     JS_TABLE_COLUMN_WIDTH_DOES_NOT_RETURN_NEGATIVE_VALUES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.HtmlTableColumn;
@@ -70,7 +69,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
         final double d = Context.toNumber(span);
         int i = (int) d;
         if (i < 1) {
-            if (getBrowserVersion().hasFeature(JS_TABLE_COLUMN_SPAN_THROWS_EXCEPTION_IF_LESS_THAN_ONE)) {
+            if (getBrowserVersion().hasFeature(JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID)) {
                 final Exception e = new Exception("Cannot set the span property to invalid value: " + span);
                 Context.throwAsScriptRuntimeEx(e);
             }
