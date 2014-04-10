@@ -347,10 +347,6 @@ public enum BrowserVersionFeatures {
     GENERATED_21,
 
     /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
-    GENERATED_37,
-
-    /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
     GENERATED_40,
 
@@ -401,10 +397,6 @@ public enum BrowserVersionFeatures {
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
     GENERATED_90,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_91,
 
     /** If the class name is [object GeoGeolocation]. */
     @BrowserFeature(@WebBrowser(value = FF, maxVersion = 17))
@@ -941,6 +933,10 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_ELEMENT_EXTENT_WITHOUT_PADDING,
+
+    /** Element.removeAttirbute emoves the named property also. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
+    JS_ELEMENT_REMOVE_ATTRIBUTE_REMOVES_PROPERTY,
 
     /** Indicates that for(x in y) should enumerate the numbers first. */
     @BrowserFeature({ @WebBrowser(value = FF, minVersion = 24), @WebBrowser(CHROME),

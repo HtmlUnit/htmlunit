@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_37;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_REMOVE_ATTRIBUTE_REMOVES_PROPERTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ATTRIBUTE_SUPPORTS_FLAGS_IN_QUIRKS_MODE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -346,7 +346,7 @@ public class Element extends EventNode {
     @JsxFunction
     public void removeAttribute(final String name) {
         getDomNodeOrDie().removeAttribute(name);
-        if (getBrowserVersion().hasFeature(GENERATED_37)) {
+        if (getBrowserVersion().hasFeature(JS_ELEMENT_REMOVE_ATTRIBUTE_REMOVES_PROPERTY)) {
             delete(name);
         }
     }

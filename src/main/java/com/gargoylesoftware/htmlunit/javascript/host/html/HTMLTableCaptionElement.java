@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_91;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ALIGN_INVALID;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -66,7 +65,7 @@ public class HTMLTableCaptionElement extends HTMLElement {
      */
     @JsxGetter(@WebBrowser(IE))
     public String getVAlign() {
-        return getVAlign(getValidVAlignValues(), VALIGN_DEFAULT_VALUE);
+        return getVAlign(VALIGN_VALID_VALUES_IE, VALIGN_DEFAULT_VALUE);
     }
 
     /**
@@ -75,22 +74,7 @@ public class HTMLTableCaptionElement extends HTMLElement {
      */
     @JsxSetter(@WebBrowser(IE))
     public void setVAlign(final Object vAlign) {
-        setVAlign(vAlign, getValidVAlignValues());
-    }
-
-    /**
-     * Returns the valid "vAlign" values for this element, depending on the browser being emulated.
-     * @return the valid "vAlign" values for this element, depending on the browser being emulated
-     */
-    private String[] getValidVAlignValues() {
-        String[] valid;
-        if (getBrowserVersion().hasFeature(GENERATED_91)) {
-            valid = VALIGN_VALID_VALUES_IE;
-        }
-        else {
-            valid = null;
-        }
-        return valid;
+        setVAlign(vAlign, VALIGN_VALID_VALUES_IE);
     }
 
     /**
