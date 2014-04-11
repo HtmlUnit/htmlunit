@@ -535,7 +535,7 @@ public enum BrowserVersionFeatures {
     HTMLOPTIONGROUP_NO_DISABLED,
 
     /** */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
     HTMLOPTION_EMPTY_TEXT_IS_NO_CHILDREN,
 
     /** */
@@ -1153,6 +1153,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_OPACITY_ACCEPTS_ARBITRARY_VALUES,
 
+    /** Indicates that new option(..) does not update the label property (IE8). */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 10))
+    JS_OPTION_CONSTRUCTOR_IGNORES_LABEL,
+
     /** Was originally .isFirefox(). */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_OPTION_USE_TEXT_AS_VALUE_IF_NOT_DEFINED,
@@ -1253,9 +1257,21 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_SELECT_ITEM_THROWS_IF_NEGATIVE,
 
+    /** Indicates that select.options throws an exception if the requested index is neagtive (IE8). */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 10))
+    JS_SELECT_OPTIONS_EXCEPTION_FOR_NEGATIVE,
+
     /** Indicates that select.options.childNodes is a valid property (IE). */
     @BrowserFeature(@WebBrowser(IE))
     JS_SELECT_OPTIONS_HAS_CHILDNODES_PROPERTY,
+
+    /** Indicates that select.options has a wong class name (IE11). */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_SELECT_OPTIONS_HAS_SELECT_CLASS_NAME,
+
+    /** Indicates that select.options returns null if requested index is outside (IE). */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_SELECT_OPTIONS_NULL_FOR_OUTSIDE,
 
     /** Indicates that the set attribute method is able to update the event handlers also.
      * e.g. element.setAttribute("onclick", "test(1);"); */

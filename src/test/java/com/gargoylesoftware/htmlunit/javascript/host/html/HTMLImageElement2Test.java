@@ -49,11 +49,11 @@ public class HTMLImageElement2Test extends SimpleWebTestCase {
     public void onLoad_calledWhenImageDownloaded_static() throws Exception {
         final String html = "<html><body><img src='foo.png' onload='test()'>\n"
             + "<script>\n"
-            + "  alert(0)\n" // first script to be sure that img onload doesn't get executed after first JS execution
+            + "  alert(0);\n" // first script to be sure that img onload doesn't get executed after first JS execution
             + "</script>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  alert(1)\n"
+            + "  alert(1);\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>";
@@ -74,11 +74,12 @@ public class HTMLImageElement2Test extends SimpleWebTestCase {
     @Test
     @Alerts("1")
     public void onLoad_calledWhenImageDownloaded_dynamic() throws Exception {
-        final String html = "<html><body><script>\n"
-            + "var i = document.createElement('img');\n"
-            + "i.src = '" + URL_SECOND + "';\n"
-            + "i.src = '" + URL_THIRD + "';\n"
-            + "i.onload = function(){alert(1);};\n"
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + "  var i = document.createElement('img');\n"
+            + "  i.src = '" + URL_SECOND + "';\n"
+            + "  i.src = '" + URL_THIRD + "';\n"
+            + "  i.onload = function(){ alert(1); };\n"
             + "</script></body></html>";
 
         final MockWebConnection conn = getMockWebConnection();

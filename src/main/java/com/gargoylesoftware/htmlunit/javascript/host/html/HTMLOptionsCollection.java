@@ -15,7 +15,10 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_88;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_EXCEPTION_FOR_NEGATIVE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_HAS_CHILDNODES_PROPERTY;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_HAS_SELECT_CLASS_NAME;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_NULL_FOR_OUTSIDE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -68,6 +71,18 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getClassName() {
+        if (getWindow().getWebWindow() != null
+                && getBrowserVersion().hasFeature(JS_SELECT_OPTIONS_HAS_SELECT_CLASS_NAME)) {
+            return "HTMLSelectElement";
+        }
+        return super.getClassName();
+    }
+
+    /**
      * Initializes this object.
      * @param select the HtmlSelect that this object will retrieve elements from
      */
@@ -85,18 +100,21 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      */
     @Override
     public Object get(final int index, final Scriptable start) {
-        final Object response;
         if (index < 0) {
-            throw Context.reportRuntimeError("Index or size is negative");
-        }
-        else if (index >= htmlSelect_.getOptionSize()) {
-            response = Context.getUndefinedValue();
-        }
-        else {
-            response = getScriptableFor(htmlSelect_.getOption(index));
+            if (getBrowserVersion().hasFeature(JS_SELECT_OPTIONS_EXCEPTION_FOR_NEGATIVE)) {
+                throw Context.reportRuntimeError("Index is negative");
+            }
+            return Context.getUndefinedValue();
         }
 
-        return response;
+        if (index >= htmlSelect_.getOptionSize()) {
+            if (getBrowserVersion().hasFeature(JS_SELECT_OPTIONS_NULL_FOR_OUTSIDE)) {
+                return null;
+            }
+            return Context.getUndefinedValue();
+        }
+
+        return getScriptableFor(htmlSelect_.getOption(index));
     }
 
     /**

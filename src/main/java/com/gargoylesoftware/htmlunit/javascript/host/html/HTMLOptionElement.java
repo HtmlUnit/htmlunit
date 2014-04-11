@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_UNSELECT_SELECTS_FIRST;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_CONSTRUCTOR_IGNORES_LABEL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_USE_TEXT_AS_VALUE_IF_NOT_DEFINED;
 
 import org.xml.sax.helpers.AttributesImpl;
@@ -70,6 +71,9 @@ public class HTMLOptionElement extends FormChild {
 
         if (!"undefined".equals(newText)) {
             htmlOption.appendChild(new DomText(page, newText));
+            if (!getBrowserVersion().hasFeature(JS_OPTION_CONSTRUCTOR_IGNORES_LABEL)) {
+                htmlOption.setLabelAttribute(newText);
+            }
         }
         if (!"undefined".equals(newValue)) {
             htmlOption.setValueAttribute(newValue);
