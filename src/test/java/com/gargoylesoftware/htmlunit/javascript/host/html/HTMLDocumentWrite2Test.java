@@ -388,4 +388,183 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
         assertEquals("here", driver.findElement(By.id("it")).getText());
         assertEquals("here", driver.findElement(By.tagName("body")).getText());
     }
+
+    /**
+     * Verifies that document.write() sends content to the correct destination (always somewhere in the body).
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "[object HTMLBodyElement]", "s1 s2 s3 s4 s5" },
+            IE8 = { "null", "[object]", "s1 s2 s3 s4 s5" })
+    public void write_Destination() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>alert(document.body);</script>\n"
+            + "    <script>document.write('<span id=\"s1\">1</span>');</script>\n"
+            + "    <script>alert(document.body);</script>\n"
+            + "    <title>test</title>\n"
+            + "    <script>document.write('<span id=\"s2\">2</span>');</script>\n"
+            + "  </head>\n"
+            + "  <body id='foo'>\n"
+            + "    <script>document.write('<span id=\"s3\">3</span>');</script>\n"
+            + "    <span id='s4'>4</span>\n"
+            + "    <script>document.write('<span id=\"s5\">5</span>');</script>\n"
+            + "    <script>\n"
+            + "      var s = '';\n"
+            + "      for(var n = document.body.firstChild; n; n = n.nextSibling) {\n"
+            + "        if(n.id) {\n"
+            + "          if(s.length > 0) s+= ' ';\n"
+            + "            s += n.id;\n"
+            + "        }\n"
+            + "      }\n"
+            + "      alert(s);\n"
+            + "    </script>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Verifies that document.write() sends content to the correct destination (always somewhere in the body),
+     * and that if a synthetic temporary body needs to be created, the attributes of the real body are eventually
+     * used once the body is parsed.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "[object HTMLBodyElement]", "", "foo" },
+            IE8 = { "null", "[object]", "", "foo" })
+    public void write_BodyAttributesKept() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>alert(document.body);</script>\n"
+            + "    <script>document.write('<span id=\"s1\">1</span>');</script>\n"
+            + "    <script>alert(document.body);</script>\n"
+            + "    <script>alert(document.body.id);</script>\n"
+            + "    <title>test</title>\n"
+            + "  </head>\n"
+            + "  <body id='foo'>\n"
+            + "    <script>alert(document.body.id);</script>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Verifies that document.write() sends content to the correct destination (always somewhere in the body),
+     * and that script elements written to the document are executed in the correct order.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "1", "2", "3" })
+    public void write_ScriptExecutionOrder() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>test</title>\n"
+            + "    <script>alert('1');</script>\n"
+            + "    <script>document.write('<scrip'+'t>alert(\"2\")</s'+'cript>');</script>\n"
+            + "  </head>\n"
+            + "  <body>\n"
+            + "    <script>document.write('<scrip'+'t>alert(\"3\")</s'+'cript>');</script>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("outer")
+    public void writeInManyTimes() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    alert(document.getElementById('inner').parentNode.id);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<script>\n"
+            + "document.write('<div id=\"outer\">');\n"
+            + "document.write('<div id=\"inner\"/>');\n"
+            + "document.write('</div>');\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test for bug 1185389.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "theBody", "theBody", "theBody" })
+    public void writeAddNodesToCorrectParent() throws Exception {
+        final String html = "<html><head><title>foo</title></head>\n"
+             + "<body id=\"theBody\">\n"
+             + "<script>\n"
+             + "document.write('<p id=\"para1\">Paragraph #1</p>');\n"
+             + "document.write('<p id=\"para2\">Paragraph #2</p>');\n"
+             + "document.write('<p id=\"para3\">Paragraph #3</p>');\n"
+             + "alert(document.getElementById('para1').parentNode.id);\n"
+             + "alert(document.getElementById('para2').parentNode.id);\n"
+             + "alert(document.getElementById('para3').parentNode.id);\n"
+             + "</script>\n"
+             + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test for bug 436.
+     * http://sourceforge.net/p/htmlunit/bugs/436/
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "outer", "inner1" })
+    public void writeAddNodesToCorrectParent_Bug1678826() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+             + "function doTest(){\n"
+             + "    alert(document.getElementById('inner1').parentNode.id);\n"
+             + "    alert(document.getElementById('inner2').parentNode.id);\n"
+             + "}\n"
+             + "</script></head>\n"
+             + "<body onload='doTest()'>\n"
+             + "<script>\n"
+             + "document.write('<div id=\"outer\">');"
+             + "document.write('<br id=\"br1\">');"
+             + "document.write('<div id=\"inner1\"/>');"
+             + "document.write('<hr id=\"hr1\"/>');"
+             + "document.write('<div id=\"inner2\"/>');"
+             + "document.write('</div>');"
+             + "</script>\n"
+             + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+     /**
+      * @throws Exception if the test fails
+      */
+    @Test
+    @Alerts({ "STYLE", "SCRIPT" })
+    public void writeStyle() throws Exception {
+        final String html = "<html><head><title>foo</title></head><body>\n"
+             + "<script>\n"
+             + "  document.write('<style type=\"text/css\" id=\"myStyle\">');\n"
+             + "  document.write('  .nwr {white-space: nowrap;}');\n"
+             + "  document.write('</style>');\n"
+             + "  document.write('<div id=\"myDiv\">');\n"
+             + "  document.write('</div>');\n"
+             + "  alert(document.getElementById('myDiv').previousSibling.nodeName);\n"
+             + "  alert(document.getElementById('myStyle').previousSibling.nodeName);\n"
+             + "</script>\n"
+             + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
