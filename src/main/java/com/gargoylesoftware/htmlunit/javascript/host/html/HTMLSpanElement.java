@@ -14,9 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLBASEFONT_END_TAG_FORBIDDEN;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlMultiColumn;
 import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -37,6 +40,22 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
     @JsxClass(domClass = HtmlSpan.class)
 })
 public class HTMLSpanElement extends HTMLElement {
+    private boolean endTagForbidden_;
+
+    /**
+     * Sets the DOM node that corresponds to this JavaScript object.
+     * @param domNode the DOM node
+     */
+    @Override
+    public void setDomNode(final DomNode domNode) {
+        super.setDomNode(domNode);
+        final BrowserVersion browser = getBrowserVersion();
+        if (browser.hasFeature(HTMLBASEFONT_END_TAG_FORBIDDEN)) {
+            if ("basefont".equalsIgnoreCase(domNode.getLocalName())) {
+                endTagForbidden_ = true;
+            }
+        }
+    }
 
     /**
      * Returns the value of the "cite" property.
@@ -88,6 +107,6 @@ public class HTMLSpanElement extends HTMLElement {
      * @return whether the end tag is forbidden or not
      */
     protected boolean isEndTagForbidden() {
-        return false;
+        return endTagForbidden_;
     }
 }
