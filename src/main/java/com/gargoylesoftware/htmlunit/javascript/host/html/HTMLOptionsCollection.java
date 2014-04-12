@@ -14,10 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_88;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.
+                    JS_SELECT_OPTIONS_DONT_ADD_EMPTY_TEXT_CHILD_WHEN_EXPANDING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_EXCEPTION_FOR_NEGATIVE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_HAS_CHILDNODES_PROPERTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_HAS_SELECT_CLASS_NAME;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_IGNORE_NEGATIVE_LENGTH;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_NULL_FOR_OUTSIDE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -224,6 +226,13 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      */
     @JsxSetter
     public void setLength(final int newLength) {
+        if (newLength < 0) {
+            if (getBrowserVersion().hasFeature(JS_SELECT_OPTIONS_IGNORE_NEGATIVE_LENGTH)) {
+                return;
+            }
+            throw Context.reportRuntimeError("Length is negative");
+        }
+
         final int currentLength = htmlSelect_.getOptionSize();
         if (currentLength > newLength) {
             htmlSelect_.setOptionSize(newLength);
@@ -233,7 +242,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
                 final HtmlOption option = (HtmlOption) HTMLParser.getFactory(HtmlOption.TAG_NAME).createElement(
                         htmlSelect_.getPage(), HtmlOption.TAG_NAME, null);
                 htmlSelect_.appendOption(option);
-                if (!getBrowserVersion().hasFeature(GENERATED_88)) {
+                if (!getBrowserVersion().hasFeature(JS_SELECT_OPTIONS_DONT_ADD_EMPTY_TEXT_CHILD_WHEN_EXPANDING)) {
                     option.appendChild(new DomText(option.getPage(), ""));
                 }
             }

@@ -392,10 +392,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
-    GENERATED_88,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
     GENERATED_90,
 
     /** If the class name is [object GeoGeolocation]. */
@@ -1268,6 +1264,15 @@ public enum BrowserVersionFeatures {
     /** Indicates that select.options has a wong class name (IE11). */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_SELECT_OPTIONS_HAS_SELECT_CLASS_NAME,
+
+    /** Ignore negative value when setting the length (FF24). */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 24))
+    JS_SELECT_OPTIONS_IGNORE_NEGATIVE_LENGTH,
+
+    /** When expanding the collection by setting the length don't add
+     * a empty text node. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_SELECT_OPTIONS_DONT_ADD_EMPTY_TEXT_CHILD_WHEN_EXPANDING,
 
     /** Indicates that select.options returns null if requested index is outside (IE). */
     @BrowserFeature(@WebBrowser(IE))
