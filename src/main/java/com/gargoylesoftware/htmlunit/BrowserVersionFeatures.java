@@ -334,10 +334,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     GENERATED_157,
 
-    /** Was originally .isFirefox(). */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
-    GENERATED_164,
-
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     GENERATED_21,
@@ -361,10 +357,6 @@ public enum BrowserVersionFeatures {
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
     GENERATED_53,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_55,
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
@@ -771,6 +763,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_DOCUMENT_APPEND_CHILD_SUPPORTED,
 
+    /** Closes the document implicitly, i.e. flushes the <tt>document.write</tt> buffer (IE only). */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_DOCUMENT_CLOSE_IMPLICITLY,
+
     /** Javascript function document.createElement can process html code.
      * e.g. document.createElement("<INPUT TYPE='RADIO' NAME='RADIOTEST' VALUE='First Choice'>")
      * @see "http://msdn.microsoft.com/en-us/library/ms536389%28v=VS.85%29.aspx"
@@ -802,6 +798,10 @@ public enum BrowserVersionFeatures {
     /** Javascript property document.domain is lowercase. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_DOCUMENT_DOMAIN_IS_LOWERCASE,
+
+    /** dicument.elementFromPoint returns null if at least one point coordinat is zero or smaller. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    JS_DOCUMENT_ELEMENT_FROM_POINT_NULL_WHEN_OUTSIDE,
 
     /** Javascript document.forms(...) supported (IE). */
     @BrowserFeature(@WebBrowser(IE))

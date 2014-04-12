@@ -23,10 +23,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_HA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_KEY_EVENTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_POINTEREVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EXECCOMMAND_THROWS_ON_WRONG_COMMAND;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_164;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_51;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_53;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_55;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_CHARSET_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_CHARSET_NORMALIZED;
@@ -37,9 +35,11 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_APPEND_CHILD_SUPPORTED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CLOSE_IMPLICITLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DOCTYPE_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DOMAIN_IS_LOWERCASE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_ELEMENT_FROM_POINT_NULL_WHEN_OUTSIDE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FRAME_BODY_NULL_IF_NOT_LOADED;
@@ -1201,7 +1201,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Closes the document implicitly, i.e. flushes the <tt>document.write</tt> buffer (IE only).
      */
     private void implicitCloseIfNecessary() {
-        final boolean ie = getBrowserVersion().hasFeature(GENERATED_55);
+        final boolean ie = getBrowserVersion().hasFeature(JS_DOCUMENT_CLOSE_IMPLICITLY);
         if (!writeInCurrentDocument_ && ie) {
             try {
                 close();
@@ -1913,7 +1913,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxFunction
     public Object elementFromPoint(final int x, final int y) {
         // minimal implementation to make simple unit test happy for FF and IE
-        if (getBrowserVersion().hasFeature(GENERATED_164) && (x <= 0 || y <= 0)) {
+        if (getBrowserVersion().hasFeature(JS_DOCUMENT_ELEMENT_FROM_POINT_NULL_WHEN_OUTSIDE)
+                && (x <= 0 || y <= 0)) {
             return null;
         }
         return getBody();
