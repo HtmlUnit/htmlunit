@@ -324,10 +324,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
-    GENERATED_133,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
     GENERATED_150,
 
     /** Was originally .isFirefox(). */
@@ -1278,6 +1274,13 @@ public enum BrowserVersionFeatures {
      * e.g. element.setAttribute("onclick", "test(1);"); */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_SET_ATTRIBUTE_SUPPORTS_EVENT_HANDLERS,
+
+    /**
+     * When <tt>setInterval()</tt> is called with a 0 millisecond delay, Internet Explorer turns it
+     * into a <tt>setTimeout()</tt> call.
+     */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    JS_SET_INTERVAL_ZERO_TIMEOUT_FORCES_SET_TIMEOUT,
 
     /** When addressing an item in a stylesheet list using a negative index an exception is thrown. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, maxVersion = 9) })

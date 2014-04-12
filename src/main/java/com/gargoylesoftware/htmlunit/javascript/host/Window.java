@@ -15,8 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_UNDEFINED_THROWS_ERROR;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_133;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SET_INTERVAL_ZERO_TIMEOUT_FORCES_SET_TIMEOUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_NOT_ALLOWED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME;
@@ -1551,7 +1551,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxFunction
     public int setInterval(final Object code, int timeout, final Object language) {
-        if (timeout == 0 && getBrowserVersion().hasFeature(GENERATED_133)) {
+        if (timeout == 0 && getBrowserVersion().hasFeature(JS_SET_INTERVAL_ZERO_TIMEOUT_FORCES_SET_TIMEOUT)) {
             return setTimeout(code, timeout, language);
         }
 

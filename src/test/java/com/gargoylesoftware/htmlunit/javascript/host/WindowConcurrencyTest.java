@@ -176,42 +176,6 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
     }
 
     /**
-     * When <tt>setInterval()</tt> is called with a 0 millisecond delay, Internet Explorer turns it
-     * into a <tt>setTimeout()</tt> call, and Firefox imposes a minimum timer restriction.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void setIntervalZeroDelay() throws Exception {
-        final String html
-            = "<html><body><div id='d'></div>\n"
-            + "<script>var id = setInterval('document.getElementById(\"d\").innerHTML += \"x\"', 0);</script>\n"
-            + "</body></html>";
-
-        WebClient client = new WebClient(BrowserVersion.FIREFOX_24);
-        try {
-            final HtmlPage page1 = loadPage(client, html, new ArrayList<String>());
-            Thread.sleep(1000);
-            page1.executeJavaScript("clearInterval(id)");
-            client.waitForBackgroundJavaScript(1000);
-            assertTrue(page1.getElementById("d").asText().length() > 1);
-        }
-        finally {
-            client.closeAllWindows();
-        }
-
-        client = new WebClient(BrowserVersion.INTERNET_EXPLORER_11);
-        try {
-            final HtmlPage page2 = loadPage(client, html, new ArrayList<String>());
-            client.waitForBackgroundJavaScript(1000);
-            assertEquals(1, page2.getElementById("d").asText().length());
-        }
-        finally {
-            client.closeAllWindows();
-        }
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test
