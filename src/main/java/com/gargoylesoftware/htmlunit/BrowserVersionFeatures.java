@@ -351,10 +351,6 @@ public enum BrowserVersionFeatures {
     GENERATED_40,
 
     /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
-    GENERATED_41,
-
-    /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
     GENERATED_49,
 
@@ -389,10 +385,6 @@ public enum BrowserVersionFeatures {
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
     GENERATED_81,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_90,
 
     /** If the class name is [object GeoGeolocation]. */
     @BrowserFeature(@WebBrowser(value = FF, maxVersion = 17))
@@ -692,6 +684,10 @@ public enum BrowserVersionFeatures {
      * as class name. */
     @BrowserFeature(@WebBrowser(FF))
     JS_BLOCK_COMMON_CLASS_NAME,
+
+    /** Was originally .isIE(). */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
+    JS_BODY_MARGINS_IE8,
 
     /** Indicates that the getBoundingClientRect adds an offset of 2. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
@@ -1253,6 +1249,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_SELECT_ITEM_THROWS_IF_NEGATIVE,
 
+    /** When expanding the collection by setting the length don't add
+     * a empty text node. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_SELECT_OPTIONS_DONT_ADD_EMPTY_TEXT_CHILD_WHEN_EXPANDING,
+
     /** Indicates that select.options throws an exception if the requested index is neagtive (IE8). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 10))
     JS_SELECT_OPTIONS_EXCEPTION_FOR_NEGATIVE,
@@ -1268,11 +1269,6 @@ public enum BrowserVersionFeatures {
     /** Ignore negative value when setting the length (FF24). */
     @BrowserFeature(@WebBrowser(value = FF, minVersion = 24))
     JS_SELECT_OPTIONS_IGNORE_NEGATIVE_LENGTH,
-
-    /** When expanding the collection by setting the length don't add
-     * a empty text node. */
-    @BrowserFeature(@WebBrowser(IE))
-    JS_SELECT_OPTIONS_DONT_ADD_EMPTY_TEXT_CHILD_WHEN_EXPANDING,
 
     /** Indicates that select.options returns null if requested index is outside (IE). */
     @BrowserFeature(@WebBrowser(IE))
