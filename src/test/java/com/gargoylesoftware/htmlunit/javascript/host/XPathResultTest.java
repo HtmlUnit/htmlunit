@@ -22,7 +22,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link XPathResult}.
@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class XPathResultTest extends SimpleWebTestCase {
+public class XPathResultTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -68,7 +68,7 @@ public class XPathResultTest extends SimpleWebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -103,7 +103,7 @@ public class XPathResultTest extends SimpleWebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -136,7 +136,7 @@ public class XPathResultTest extends SimpleWebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -173,7 +173,7 @@ public class XPathResultTest extends SimpleWebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -193,7 +193,7 @@ public class XPathResultTest extends SimpleWebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -218,7 +218,7 @@ public class XPathResultTest extends SimpleWebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -246,7 +246,7 @@ public class XPathResultTest extends SimpleWebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -271,6 +271,6 @@ public class XPathResultTest extends SimpleWebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }
