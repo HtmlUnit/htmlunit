@@ -1046,26 +1046,6 @@ public class HtmlFormTest extends SimpleWebTestCase {
     }
 
     /**
-      * Simulates a bug report where using JavaScript to submit a form that contains a
-      * JavaScript action causes a an "IllegalArgumentException: JavaScript URLs can only
-      * be used to load content into frames and iframes".
-      *
-      * @throws Exception if the test fails
-      */
-    @Test
-    @Alerts("clicked")
-    public void jSSubmit_JavaScriptAction() throws Exception {
-        final String html
-            = "<html><head><title>First</title></head>\n"
-            + "<body onload='document.getElementById(\"aForm\").submit()'>\n"
-            + "<form id='aForm' action='javascript:alert(\"clicked\")'"
-            + "</form>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -1301,30 +1281,6 @@ public class HtmlFormTest extends SimpleWebTestCase {
 
         final String expectedURL = URL_SECOND.toString();
         assertEquals(expectedURL, secondPage.getUrl());
-    }
-
-    /**
-     * @throws Exception if the test page can't be loaded
-     */
-    @Test
-    @Alerts({ "1", "val2" })
-    public void malformedHtml_nestedForms() throws Exception {
-        final String html
-            = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    alert(document.forms.length);\n"
-            + "    alert(document.forms[0].field2.value);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "<form id='form1' method='get' action='foo'>\n"
-            + "    <input name='field1' value='val1'/>\n"
-            + "    <form>\n"
-            + "    <input name='field2' value='val2'/>\n"
-            + "    <input type='submit' id='submitButton'/>\n"
-            + "    </form>\n"
-            + "</form></body></html>";
-
-        loadPageWithAlerts(html);
     }
 
     /**
