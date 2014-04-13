@@ -40,7 +40,7 @@ public class HtmlHiddenInput2Test extends SimpleWebTestCase {
                 + "  <input type='hidden' id='myHiddenInput' value='HiddenValue'/>"
                 + "</form>"
                 + "</body></html>";
-        final HtmlPage page = loadPageWithAlerts(html);
+        final HtmlPage page = loadPage(html);
         final HtmlElement hidden = page.getHtmlElementById("myHiddenInput");
         assertFalse(hidden.isDisplayed());
     }

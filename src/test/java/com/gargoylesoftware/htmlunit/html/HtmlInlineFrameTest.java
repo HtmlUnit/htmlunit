@@ -20,7 +20,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -192,29 +191,6 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
         final HtmlInlineFrame iframe = page.getHtmlElementById("iframe1");
         assertEquals(URL_THIRD.toExternalForm(), iframe.getSrcAttribute());
         assertEquals("Third", ((HtmlPage) iframe.getEnclosedPage()).getTitleText());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("2")
-    public void testScriptUnderIFrame() throws Exception {
-        final String firstContent
-            = "<html><body>\n"
-            + "<iframe src='" + URL_SECOND + "'>\n"
-            + "  <div><script>alert(1);</script></div>\n"
-            + "  <script src='" + URL_THIRD + "'></script>\n"
-            + "</iframe>\n"
-            + "</body></html>";
-        final String secondContent
-            = "<html><body><script>alert(2);</script></body></html>";
-        final String thirdContent = "alert('3');";
-
-        getMockWebConnection().setResponse(URL_SECOND, secondContent);
-        getMockWebConnection().setResponse(URL_THIRD, thirdContent, "text/javascript");
-
-        loadPageWithAlerts(firstContent);
     }
 
     /**

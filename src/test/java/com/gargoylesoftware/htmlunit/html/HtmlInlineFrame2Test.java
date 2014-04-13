@@ -172,4 +172,27 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
         driver.switchTo().frame("id-right");
         assertEquals("Body of right frame", driver.findElement(By.id("content")).getText());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void testScriptUnderIFrame() throws Exception {
+        final String firstContent
+            = "<html><body>\n"
+            + "<iframe src='" + URL_SECOND + "'>\n"
+            + "  <div><script>alert(1);</script></div>\n"
+            + "  <script src='" + URL_THIRD + "'></script>\n"
+            + "</iframe>\n"
+            + "</body></html>";
+        final String secondContent
+            = "<html><body><script>alert(2);</script></body></html>";
+        final String thirdContent = "alert('3');";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+        getMockWebConnection().setResponse(URL_THIRD, thirdContent, "text/javascript");
+
+        loadPageWithAlerts2(firstContent);
+    }
 }
