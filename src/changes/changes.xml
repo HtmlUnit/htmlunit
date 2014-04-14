@@ -9,6 +9,10 @@
     <body>
         <release version="2.15" date="???" description="Bugfixes">
             <action type="fix" dev="rbri">
+                JavaScript: Function evaluate now returns the correct result when
+                called with XPathResult.BOOLEAN_TYPE as result type.
+            </action>
+            <action type="fix" dev="rbri">
                 JavaScript: table.insertRow was broken when trying to insert a row
                 directly before the last one.
             </action>

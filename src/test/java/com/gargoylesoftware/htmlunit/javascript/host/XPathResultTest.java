@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -296,17 +293,31 @@ public class XPathResultTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "true", "true" },
+    @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" },
             IE = "evaluate not supported")
-    @NotYetImplemented(FF)
     public void booleanType() throws Exception {
-        final String html = "<html><head><title>foo</title><span attr=\"true\">true</span><script>\n"
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<title>foo</title>\n"
+            + "<script>\n"
             + "  function test() {\n"
             + "    if (document.evaluate && XPathResult) {\n"
             + "      try {\n"
-            + "        var result = document.evaluate('//title', document, null, "
+            + "        var result = document.evaluate('//unknown', document, null, "
                             + "XPathResult.BOOLEAN_TYPE, null);\n"
             + "        alert(result.booleanValue === false);\n"
+
+            + "        var result = document.evaluate('//title', document, null, "
+                            + "XPathResult.BOOLEAN_TYPE, null);\n"
+            + "        alert(result.booleanValue === true);\n"
+
+            + "        result = document.evaluate('//div', document, null, "
+                            + "XPathResult.BOOLEAN_TYPE, null);\n"
+            + "        alert(result.booleanValue === true);\n"
+            + "        result = document.evaluate('//div/@attr', document, null, "
+                        + "XPathResult.BOOLEAN_TYPE, null);\n"
+            + "        alert(result.booleanValue === true);\n"
+
             + "        result = document.evaluate('//span', document, null, "
                             + "XPathResult.BOOLEAN_TYPE, null);\n"
             + "        alert(result.booleanValue === true);\n"
@@ -318,7 +329,11 @@ public class XPathResultTest extends WebDriverTestCase {
             + "      alert('evaluate not supported');\n"
             + "    }\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div attr=\"false\">false</span>"
+            + "  <span attr=\"true\">true</span>"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

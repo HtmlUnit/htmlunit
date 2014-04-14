@@ -245,7 +245,7 @@ public class XPathResult extends SimpleScriptable {
         if (resultType_ != BOOLEAN_TYPE) {
             throw Context.reportRuntimeError("Cannot get booleanValue for type: " + resultType_);
         }
-        return Boolean.parseBoolean(asString());
+        return result_.size() > 0;
     }
 
     /**
