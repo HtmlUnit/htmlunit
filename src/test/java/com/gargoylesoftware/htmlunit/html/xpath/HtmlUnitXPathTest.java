@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -40,6 +41,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlUnitXPathTest extends SimpleWebTestCase {
@@ -260,13 +262,18 @@ public class HtmlUnitXPathTest extends SimpleWebTestCase {
     public void id() throws Exception {
         final String content = "<html><head><title>foo</title></head>\n"
             + "<body>\n"
-            + "<div><a href='link.html' id='test'></div>\n"
+            + "<div>\n"
+            + "  <a href='link.html' id='test'>\n"
+            + "</div>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(content);
 
-        assertNull(page.getFirstByXPath("//div[@id='doesNotExist']"));
+        final HtmlAnchor anchor = page.getHtmlElementById("test");
+        Assert.assertSame(anchor, page.getFirstByXPath("//a[@id='test']"));
+        Assert.assertSame(anchor, page.getFirstByXPath("//*[@id='test']"));
 
+        assertNull(page.getFirstByXPath("//div[@id='doesNotExist']"));
         assertNull(page.getFirstByXPath("id('doesNotExist')"));
     }
 
