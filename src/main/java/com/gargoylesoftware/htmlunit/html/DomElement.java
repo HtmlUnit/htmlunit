@@ -507,23 +507,40 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * @return an Iterable over the DomElement children of this object, i.e. excluding the non-element nodes
      */
     public final Iterable<DomElement> getChildElements() {
-        return new Iterable<DomElement>() {
-            public Iterator<DomElement> iterator() {
-                return new ChildElementsIterator();
-            }
-        };
+        return new ChildElementsIterable(this);
+    }
+
+    /**
+     * An Iterable over the DomElement children.
+     */
+    private static class ChildElementsIterable implements Iterable<DomElement> {
+        private final Iterator<DomElement> iterator_;
+
+        /** Constructor.
+         * @param domNode the parent
+         */
+        protected ChildElementsIterable(final DomNode domNode) {
+            iterator_ = new ChildElementsIterator(domNode);
+        }
+
+        @Override
+        public Iterator<DomElement> iterator() {
+            return iterator_;
+        }
     }
 
     /**
      * An iterator over the DomElement children.
      */
-    protected class ChildElementsIterator implements Iterator<DomElement> {
+    protected static class ChildElementsIterator implements Iterator<DomElement> {
 
         private DomElement nextElement_;
 
-        /** Constructor. */
-        protected ChildElementsIterator() {
-            final DomNode child = getFirstChild();
+        /** Constructor.
+         * @param domNode the parent
+         */
+        protected ChildElementsIterator(final DomNode domNode) {
+            final DomNode child = domNode.getFirstChild();
             if (child != null) {
                 if (child instanceof DomElement) {
                     nextElement_ = (DomElement) child;
