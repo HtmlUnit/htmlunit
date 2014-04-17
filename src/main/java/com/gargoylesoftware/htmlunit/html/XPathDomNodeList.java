@@ -84,11 +84,11 @@ class XPathDomNodeList<E extends DomNode> extends AbstractList<E> implements Dom
      */
     private List<Object> getNodes() {
         if (cachedElements_ == null) {
-            if (node_ != null) {
-                cachedElements_ = XPathUtils.getByXPath(node_, xpath_, null);
+            if (node_ == null) {
+                cachedElements_ = new ArrayList<Object>();
             }
             else {
-                cachedElements_ = new ArrayList<Object>();
+                cachedElements_ = XPathUtils.getByXPath(node_, xpath_, null);
             }
         }
         return cachedElements_;
