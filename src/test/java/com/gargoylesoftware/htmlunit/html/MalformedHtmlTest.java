@@ -282,4 +282,92 @@ public class MalformedHtmlTest extends WebDriverTestCase {
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "4", "#text:\n    ", "A:null", "DIV:null", "#text:Z\n\n\n", "3",
+                "innerDiv", "BODY:null", "3", "A:null", "A:null", "#text:Y",
+                "outerA", "BODY:null", "1", "#text:V", "true", "false",
+                "outerA", "DIV:null", "1", "#text:W", "false", "false",
+                "innerA", "DIV:null", "1", "#text:X", "false", "true" },
+            IE8 = { "6", "A:null", "A:null", "#text:Y", "#text:Z", "2",
+                "innerDiv", "A:null", "3", "#text:W", "A:null", "#text:Y",
+                "outerA", "BODY:null", "2", "#text:V", "true", "false",
+                "innerA", "DIV:null", "1", "#text:X", "false", "true",
+                "exception" })
+    @NotYetImplemented
+    // Input:
+    // <a id="outerA">V<div id="innerDiv">W<a id="innerA">X</a>Y</div>Z</a>
+    // CHROME, FF17, FF24 and IE11 generate:
+    // <a id="outerA">V</a><div id="innerDiv"><a id="outerA">W</a><a id="innerA">X</a>Y</div>Z
+    // IE8 generates (total mess):
+    // <a id="outerA">V<div id="innerDiv">W<a id="innerA">X</a>Y</div></a><a id="innerA">X</a>YZ</a/>
+    // HtmlUnit generates:
+    // <a id="outerA">V<div id="innerDiv">W</div></a><a id="innerA">X</a>YZ
+    public void nestedAnchorInDivision() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "    function test() {\n"
+            + "        var outerA = document.getElementById('outerA');\n"
+            + "        var innerDiv = document.getElementById('innerDiv');\n"
+            + "        var innerA = document.getElementById('innerA');\n"
+            + "        var anchors = document.getElementsByTagName('a');\n"
+
+            + "        try {\n"
+            + "            alert(document.body.childNodes.length);\n"
+            + "            dump(document.body.childNodes[0]);\n"
+            + "            dump(document.body.childNodes[1]);\n"
+            + "            dump(document.body.childNodes[2]);\n"
+            + "            dump(document.body.childNodes[3]);\n"
+            + "            alert(document.getElementsByTagName('a').length);\n"
+            + "        } catch (e) { alert('exception') }\n"
+
+            + "        try {\n"
+            + "            alert(innerDiv.id);\n"
+            + "            dump(innerDiv.parentNode);\n"
+            + "            alert(innerDiv.childNodes.length);\n"
+            + "            dump(innerDiv.childNodes[0]);\n"
+            + "            dump(innerDiv.childNodes[1]);\n"
+            + "            dump(innerDiv.childNodes[2]);\n"
+            + "        } catch (e) { alert('exception') }\n"
+
+            + "        try {\n"
+            + "            alert(anchors[0].id);\n"
+            + "            dump(anchors[0].parentNode);\n"
+            + "            alert(anchors[0].childNodes.length);\n"
+            + "            dump(anchors[0].childNodes[0]);\n"
+            + "            alert(anchors[0] == outerA);\n"
+            + "            alert(anchors[0] == innerA);\n"
+            + "        } catch (e) { alert('exception') }\n"
+
+            + "        try {\n"
+            + "            alert(anchors[1].id);\n"
+            + "            dump(anchors[1].parentNode);\n"
+            + "            alert(anchors[1].childNodes.length);\n"
+            + "            dump(anchors[1].childNodes[0]);\n"
+            + "            alert(anchors[1] == outerA);\n"
+            + "            alert(anchors[1] == innerA);\n"
+            + "        } catch (e) { alert('exception') }\n"
+
+            + "        try {\n"
+            + "            alert(anchors[2].id);\n"
+            + "            dump(anchors[2].parentNode);\n"
+            + "            alert(anchors[2].childNodes.length);\n"
+            + "            dump(anchors[2].childNodes[0]);\n"
+            + "            alert(anchors[2] == outerA);\n"
+            + "            alert(anchors[2] == innerA);\n"
+            + "        } catch (e) { alert('exception') }\n"
+            + "    }\n"
+            + "    function dump(e) {\n"
+            + "        alert(e.nodeName + ':' + e.nodeValue);\n"
+            + "    }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "    <a id='outerA'>V<div id='innerDiv'>W<a id='innerA'>X</a>Y</div>Z</a>\n"
+            + "</body>\n"
+            + "</html>\n";
+
+        loadPageWithAlerts2(html);
+    }
 }
