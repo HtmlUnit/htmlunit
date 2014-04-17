@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Unit tests for {@link HtmlElement}.
  *
- * @version $Revision: 8931 $
+ * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Denis N. Antonioli
  * @author Daniel Gredler
