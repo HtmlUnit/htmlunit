@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLTEXTAREA_SET_DEFAULT_VALUE_UPDATES_VALUE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_DOES_NOT_CHANGE_SELECTION;
 
 import java.io.PrintWriter;
 import java.util.Collection;
@@ -144,8 +145,10 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
             child.setData(newValue);
         }
 
-        setSelectionStart(newValue.length());
-        setSelectionEnd(newValue.length());
+        if (!hasFeature(JS_INPUT_SET_VALUE_DOES_NOT_CHANGE_SELECTION)) {
+            setSelectionStart(newValue.length());
+            setSelectionEnd(newValue.length());
+        }
     }
 
     /**
@@ -394,7 +397,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
         printOpeningTagContentAsXml(printWriter);
 
         printWriter.print(">");
-        printWriter.print(StringEscapeUtils.escapeXml(getText()));
+        printWriter.print(StringEscapeUtils.escapeXml10(getText()));
         printWriter.print("</textarea>");
     }
 

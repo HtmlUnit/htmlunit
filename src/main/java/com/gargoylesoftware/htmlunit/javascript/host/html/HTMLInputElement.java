@@ -208,7 +208,7 @@ public class HTMLInputElement extends FormField {
      * Gets the value of "selectionStart" attribute.
      * @return the selection start
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public int getSelectionStart() {
         return ((SelectableTextInput) getDomNodeOrDie()).getSelectionStart();
     }
@@ -217,7 +217,7 @@ public class HTMLInputElement extends FormField {
      * Sets the value of "selectionStart" attribute.
      * @param start selection start
      */
-    @JsxSetter(@WebBrowser(FF))
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public void setSelectionStart(final int start) {
         ((SelectableTextInput) getDomNodeOrDie()).setSelectionStart(start);
     }
@@ -226,7 +226,7 @@ public class HTMLInputElement extends FormField {
      * Gets the value of "selectionEnd" attribute.
      * @return the selection end
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public int getSelectionEnd() {
         return ((SelectableTextInput) getDomNodeOrDie()).getSelectionEnd();
     }
@@ -235,7 +235,7 @@ public class HTMLInputElement extends FormField {
      * Sets the value of "selectionEnd" attribute.
      * @param end selection end
      */
-    @JsxSetter(@WebBrowser(FF))
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public void setSelectionEnd(final int end) {
         ((SelectableTextInput) getDomNodeOrDie()).setSelectionEnd(end);
     }

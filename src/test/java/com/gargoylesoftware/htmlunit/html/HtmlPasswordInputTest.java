@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlPasswordInputTest extends WebDriverTestCase {
@@ -334,6 +335,110 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "7" },
+            IE = { "textLength not available" })
+    public void textLength() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var text = document.getElementById('testId');\n"
+            + "    if(text.textLength) {\n"
+            + "      alert(text.textLength);\n"
+            + "    } else {\n"
+            + "      alert('textLength not available');\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='password' id='testId' value='initial'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("0")
+    public void selection() throws Exception {
+        final String html =
+              "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    alert(getSelection(document.getElementById('text1')).length);\n"
+            + "  }\n"
+            + "  function getSelection(element) {\n"
+            + "    if (typeof element.selectionStart == 'number') {\n"
+            + "      return element.value.substring(element.selectionStart, element.selectionEnd);\n"
+            + "    } else if (document.selection && document.selection.createRange) {\n"
+            + "      return document.selection.createRange().text;\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input type='password' id='text1'/>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "0,0", "11,11", "3,11", "3,10" },
+            IE11 = { "0,0", "0,0", "3,3", "3,10" },
+            IE8 = { "undefined,undefined", "undefined,undefined", "3,undefined", "3,10" })
+    public void selection2_1() throws Exception {
+        selection2(3, 10);
+    }
+
+    /**
+     * @throws Exception if test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "0,0", "11,11", "0,11", "0,11" },
+            IE11 = { "0,0", "0,0", "0,0", "0,11" },
+            IE8 = { "undefined,undefined", "undefined,undefined", "-3,undefined", "-3,15" })
+    public void selection2_2() throws Exception {
+        selection2(-3, 15);
+    }
+
+    /**
+     * @throws Exception if test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "0,0", "11,11", "10,11", "5,5" },
+            IE11 = { "0,0", "0,0", "10,10", "5,5" },
+            IE = { "undefined,undefined", "undefined,undefined", "10,undefined", "10,5" })
+    public void selection2_3() throws Exception {
+        selection2(10, 5);
+    }
+
+    private void selection2(final int selectionStart, final int selectionEnd) throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "<input id='myTextInput' value='Bonjour' type='password'>\n"
+            + "<script>\n"
+            + "    var input = document.getElementById('myTextInput');\n"
+            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "    input.value = 'Hello there';\n"
+            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "    input.selectionStart = " + selectionStart + ";\n"
+            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "    input.selectionEnd = " + selectionEnd + ";\n"
+            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
         loadPageWithAlerts2(html);
     }
 }

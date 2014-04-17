@@ -49,7 +49,7 @@ public class SelectionDelegate implements Serializable {
      */
     public SelectionDelegate(final SelectableTextInput element) {
         element_ = element;
-        selection_ = new SimpleRange(element, element.getText().length());
+        selection_ = new SimpleRange(element, 0);
     }
 
     /**

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_SET_DEFAULT_VALUE_UPDATES_VALUE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_DOES_NOT_CHANGE_SELECTION;
 
 import java.util.Map;
 
@@ -144,7 +145,7 @@ public class HtmlTextInput extends HtmlInput implements SelectableTextInput {
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
         if ("value".equals(qualifiedName)) {
             final SgmlPage page = getPage();
-            if (page != null && page.isHtmlPage()) {
+            if (page != null && page.isHtmlPage() && !hasFeature(JS_INPUT_SET_VALUE_DOES_NOT_CHANGE_SELECTION)) {
                 setSelectionStart(attributeValue.length());
                 setSelectionEnd(attributeValue.length());
             }

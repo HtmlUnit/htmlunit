@@ -21,7 +21,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
@@ -34,7 +33,8 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Sudhan Moghe
- */
+ * @author Ronald Brill
+*/
 @RunWith(BrowserRunner.class)
 public class HtmlTextInputTest extends SimpleWebTestCase {
 
@@ -157,83 +157,6 @@ public class HtmlTextInputTest extends SimpleWebTestCase {
 
         final HtmlPage secondPage = (HtmlPage) textInput.type('\n');
         assertEquals("Second", secondPage.getTitleText());
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("0")
-    public void selection() throws Exception {
-        final String html =
-              "<html><head><script>\n"
-            + "  function test() {\n"
-            + "    alert(getSelection(document.getElementById('text1')).length);\n"
-            + "  }\n"
-            + "  function getSelection(element) {\n"
-            + "    if (typeof element.selectionStart == 'number') {\n"
-            + "      return element.value.substring(element.selectionStart, element.selectionEnd);\n"
-            + "    } else if (document.selection && document.selection.createRange) {\n"
-            + "      return document.selection.createRange().text;\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script></head>\n"
-            + "<body onload='test()'>\n"
-            + "<input id='text1'/>\n"
-            + "</body></html>";
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if test fails
-     */
-    @Test
-    @Alerts(IE = { "undefined,undefined", "undefined,undefined", "3,undefined", "3,10" },
-            FF = { "7,7", "11,11", "3,11", "3,10" })
-    public void selection2_1() throws Exception {
-        selection2("text", 3, 10);
-        selection2("password", 3, 10);
-    }
-
-    /**
-     * @throws Exception if test fails
-     */
-    @Test
-    @Alerts(IE = { "undefined,undefined", "undefined,undefined", "-3,undefined", "-3,15" },
-            FF = { "7,7", "11,11", "0,11", "0,11" })
-    public void selection2_2() throws Exception {
-        selection2("text", -3, 15);
-        selection2("password", -3, 15);
-    }
-
-    /**
-     * @throws Exception if test fails
-     */
-    @Test
-    @Alerts(IE = { "undefined,undefined", "undefined,undefined", "10,undefined", "10,5" },
-            FF = { "7,7", "11,11", "10,11", "5,5" })
-    public void selection2_3() throws Exception {
-        selection2("text", 10, 5);
-        selection2("password", 10, 5);
-    }
-
-    private void selection2(final String type, final int selectionStart, final int selectionEnd) throws Exception {
-        final String html = "<html>\n"
-            + "<body>\n"
-            + "<input id='myTextInput' value='Bonjour' type='" + type + "'>\n"
-            + "<script>\n"
-            + "    var input = document.getElementById('myTextInput');\n"
-            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "    input.value = 'Hello there';\n"
-            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "    input.selectionStart = " + selectionStart + ";\n"
-            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "    input.selectionEnd = " + selectionEnd + ";\n"
-            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "</script>\n"
-            + "</body>\n"
-            + "</html>";
-        loadPageWithAlerts(html);
     }
 
     /**

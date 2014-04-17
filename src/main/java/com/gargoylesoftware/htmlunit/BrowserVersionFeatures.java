@@ -1074,6 +1074,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(CHROME))
     JS_INNER_TEXT_READONLY_FOR_TABLE,
 
+    /** Setting the value of an Input Text/Password/TextArea does not change the
+     * selection. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_INPUT_SET_VALUE_DOES_NOT_CHANGE_SELECTION,
+
     /** Javascript function returning a length (e.g. getWidth) without 'px' at the end. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 10))
     JS_LENGTH_WITHOUT_PX,
