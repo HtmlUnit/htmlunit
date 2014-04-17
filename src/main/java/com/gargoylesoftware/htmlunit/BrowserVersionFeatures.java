@@ -259,7 +259,7 @@ public enum BrowserVersionFeatures {
     EVENT_ONREADY_STATE_CHANGE,
 
     /** Triggers "propertychange" event. */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     EVENT_PROPERTY_CHANGE,
 
     /** Supports event type 'BeforeUnloadEvent'. */

@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.assertSame;
 
 import java.util.ArrayList;
@@ -27,7 +26,6 @@ import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
@@ -934,27 +932,6 @@ public class HtmlElementTest extends SimpleWebTestCase {
     }
 
     /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(IE = "value")
-    public void onpropertychange() throws Exception {
-        final String html = "<html><head><script>\n"
-            + "  function test() {\n"
-            + "    document.getElementById('input1').value = 'New Value';\n"
-            + "  }\n"
-            + "  function handler() {\n"
-            + "    alert(event.propertyName);\n"
-            + "  }\n"
-            + "</script></head>\n"
-            + "<body onload='test()'>\n"
-            + "  <input id='input1' onpropertychange='handler()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -1164,30 +1141,6 @@ public class HtmlElementTest extends SimpleWebTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({ "true", "true" })
-    public void duplicateId() throws Exception {
-        final String html
-            = "<html>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var value = document.getElementById('duplicateID').innerHTML;\n"
-            + "    alert(value.length > 10);\n"
-            + "    document.getElementById('duplicateID').style.display = 'block';\n"
-            + "    alert(value === document.getElementById('duplicateID').innerHTML);\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <fieldset id='duplicateID'><span id='duplicateID'></span></fieldset>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
      * @throws Exception if an error occurs
      */
     @Test
@@ -1197,29 +1150,6 @@ public class HtmlElementTest extends SimpleWebTestCase {
         assertEquals("b", page.getElementById("d").getAttribute("a"));
         page = clone(page);
         assertEquals("b", page.getElementById("d").getAttribute("a"));
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @NotYetImplemented(IE)
-    @Alerts(IE = { "1", "1" })
-    public void onpropertychange2() throws Exception {
-        final String html = "<html><head><script>\n"
-            + "  function test() {\n"
-            + "    document.getElementById('input1').value = 'New Value';\n"
-            + "  }\n"
-            + "  function handler() {\n"
-            + "    alert(1);\n"
-            + "    document.getElementById('input1').dir='rtl';"
-            + "  }\n"
-            + "</script></head>\n"
-            + "<body onload='test()'>\n"
-            + "  <input id='input1' onpropertychange='handler()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
     }
 
     /**
