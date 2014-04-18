@@ -1351,4 +1351,21 @@ public class Window2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, iframe);
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Regression test to reproduce a known bug.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("about:blank")
+    public void openWindow_emptyUrl() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "var w = window.open('');\n"
+            + "alert(w ? w.document.location : w);\n"
+            + "</script></head>\n"
+            + "<body></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

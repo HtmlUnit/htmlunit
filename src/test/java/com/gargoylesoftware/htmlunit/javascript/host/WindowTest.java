@@ -478,23 +478,6 @@ public class WindowTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test to reproduce a known bug.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("about:blank")
-    public void openWindow_emptyUrl() throws Exception {
-        final String html
-            = "<html><head><script>\n"
-            + "var w = window.open('');\n"
-            + "alert(w ? w.document.location : w);\n"
-            + "</script></head>\n"
-            + "<body></body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
      * Verifies that <tt>window.open</tt> behaves correctly when popups are blocked.
      * @throws Exception if an error occurs
      */
