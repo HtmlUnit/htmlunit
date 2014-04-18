@@ -18,7 +18,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
@@ -30,36 +29,6 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  */
 @RunWith(BrowserRunner.class)
 public class HtmlTableSectionTest extends SimpleWebTestCase {
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(IE = { "[object]", "[object]", "[object]" },
-            FF = { "[object HTMLTableSectionElement]",
-            "[object HTMLTableSectionElement]", "[object HTMLTableSectionElement]" })
-    public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('myId1'));\n"
-            + "    alert(document.getElementById('myId2'));\n"
-            + "    alert(document.getElementById('myId3'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <table>\n"
-            + "    <thead id='myId1'/>\n"
-            + "    <tbody id='myId2'/>\n"
-            + "    <tfoot id='myId3'/>\n"
-            + "  </table>\n"
-            + "</body></html>";
-
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertTrue(HtmlTableHeader.class.isInstance(page.getHtmlElementById("myId1")));
-        assertTrue(HtmlTableBody.class.isInstance(page.getHtmlElementById("myId2")));
-        assertTrue(HtmlTableFooter.class.isInstance(page.getHtmlElementById("myId3")));
-    }
 
     /**
      * @throws Exception if the test fails

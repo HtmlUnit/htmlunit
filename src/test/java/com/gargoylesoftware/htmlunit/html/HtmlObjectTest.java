@@ -41,26 +41,6 @@ public class HtmlObjectTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "[object]", FF = "[object HTMLObjectElement]")
-    public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <object id='myId'>\n"
-            + "</body></html>";
-
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertTrue(HtmlObject.class.isInstance(page.getHtmlElementById("myId")));
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(IE = "false", FF = "undefined")
     public void classid() throws Exception {
         if (getBrowserVersion().isIE() && !ActiveXObjectTest.isJacobInstalled()) {

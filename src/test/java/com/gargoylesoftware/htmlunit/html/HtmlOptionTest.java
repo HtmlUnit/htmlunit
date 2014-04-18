@@ -173,29 +173,6 @@ public class HtmlOptionTest extends SimpleWebTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(FF = "[object HTMLOptionElement]", IE = "[object]")
-    public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<select>\n"
-            + "  <option id='myId'>test1</option>\n"
-            + "  <option id='myId2'>test2</option>\n"
-            + "</select>\n"
-            + "</body></html>";
-
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertTrue(HtmlOption.class.isInstance(page.getHtmlElementById("myId")));
-    }
-
-    /**
      * @throws Exception if an error occurs
      */
     @Test
