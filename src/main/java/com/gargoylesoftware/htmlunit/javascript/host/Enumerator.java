@@ -14,7 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ENUMERATOR_CONSTRUCTOR_THROWS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -52,14 +54,20 @@ public class Enumerator extends SimpleScriptable {
      */
     @JsxConstructor
     public void jsConstructor(final Object o) {
-        if (o instanceof HTMLCollection) {
+        if (Undefined.instance == o) {
+            collection_ = HTMLCollection.emptyCollection(getWindow());
+        }
+        else if (getBrowserVersion().hasFeature(JS_ENUMERATOR_CONSTRUCTOR_THROWS)) {
+            throw Context.reportRuntimeError("TypeError: object is not enumerable");
+        }
+        else if (o instanceof HTMLCollection) {
             collection_ = (HTMLCollection) o;
         }
         else if (o instanceof HTMLFormElement) {
             collection_ = ((HTMLFormElement) o).getElements();
         }
         else {
-            throw new IllegalArgumentException(String.valueOf(o));
+            throw Context.reportRuntimeError("TypeError: object is not enumerable (" + String.valueOf(o) + ")");
         }
     }
 

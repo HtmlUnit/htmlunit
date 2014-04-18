@@ -926,6 +926,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_ELEMENT_REMOVE_ATTRIBUTE_REMOVES_PROPERTY,
 
+    /** The Enumerator constructor throws an exception if called with HtmlCollections
+     * as parameter. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_ENUMERATOR_CONSTRUCTOR_THROWS,
+
     /** Indicates that for(x in y) should enumerate the numbers first. */
     @BrowserFeature({ @WebBrowser(value = FF, minVersion = 24), @WebBrowser(CHROME),
         @WebBrowser(value = IE, minVersion = 9) })
