@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLTEXTAREA_SET_DEFAULT_VALUE_UPDATES_VALUE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_DOES_NOT_CHANGE_SELECTION;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START;
 
 import java.io.PrintWriter;
 import java.util.Collection;
@@ -145,10 +145,12 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
             child.setData(newValue);
         }
 
-        if (!hasFeature(JS_INPUT_SET_VALUE_DOES_NOT_CHANGE_SELECTION)) {
-            setSelectionStart(newValue.length());
-            setSelectionEnd(newValue.length());
+        int pos = 0;
+        if (!hasFeature(JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START)) {
+            pos = newValue.length();
         }
+        setSelectionStart(pos);
+        setSelectionEnd(pos);
     }
 
     /**

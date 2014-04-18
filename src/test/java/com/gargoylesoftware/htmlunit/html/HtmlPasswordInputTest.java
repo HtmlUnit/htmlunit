@@ -441,4 +441,39 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
             + "</html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "0,0", "4,5", "10,10", "4,4", "1,1" },
+            IE11 = { "0,0", "4,5", "0,0", "0,0", "0,0" },
+            IE8 = { "undefined,undefined", "4,5", "4,5", "4,5", "0,4" })
+    public void selectionOnUpdate() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "<input id='myTextInput' value='Hello' type='password'>\n"
+            + "<script>\n"
+            + "    var input = document.getElementById('myTextInput');\n"
+            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
+
+            + "    input.selectionStart = 4;\n"
+            + "    input.selectionEnd = 5;\n"
+            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "    input.value = 'abcdefghif';\n"
+            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
+
+            + "    input.value = 'abcd';\n"
+            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
+
+            + "    input.selectionStart = 0;\n"
+            + "    input.selectionEnd = 4;\n"
+
+            + "    input.value = 'a';\n"
+            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
 }

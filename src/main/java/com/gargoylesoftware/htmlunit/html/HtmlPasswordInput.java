@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_SET_DEFAULT_VALUE_UPDATES_VALUE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_DOES_NOT_CHANGE_SELECTION;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START;
 
 import java.util.Map;
 
@@ -152,9 +152,13 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
         if ("value".equals(qualifiedName)) {
             final SgmlPage page = getPage();
-            if (page != null && page.isHtmlPage() && !hasFeature(JS_INPUT_SET_VALUE_DOES_NOT_CHANGE_SELECTION)) {
-                setSelectionStart(attributeValue.length());
-                setSelectionEnd(attributeValue.length());
+            if (page != null && page.isHtmlPage()) {
+                int pos = 0;
+                if (!hasFeature(JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START)) {
+                    pos = attributeValue.length();
+                }
+                setSelectionStart(pos);
+                setSelectionEnd(pos);
             }
         }
     }
