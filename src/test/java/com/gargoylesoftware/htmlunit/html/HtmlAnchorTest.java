@@ -574,19 +574,6 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
     }
 
     /**
-     * Attributes aren't usually quoted in IE, but <tt>href</tt> attributes of anchor elements are.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(FF = "<a id=\"a\" href=\"#x\">foo</a>", IE = "<A id=a href=\"#x\">foo</A>")
-    public void testInnerHtmlHrefQuotedEvenInIE() throws Exception {
-        final String html = "<html><body onload='alert(document.getElementById(\"d\").innerHTML)'>"
-            + "<div id='d'><a id='a' href='#x'>foo</a></div></body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
      * Test for bug 2794667.
      * @throws Exception if an error occurs
      */

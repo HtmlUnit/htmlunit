@@ -18,6 +18,8 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
+import java.net.URL;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -281,5 +283,42 @@ public class HtmlScript2Test extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Verifies that setting a script's <tt>src</tt> attribute behaves correctly.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "1", "2", "3" },
+            IE8 = { "1", "2", "3", "4", "5" })
+    public void settingSrcAttribute() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <title>Test</title>\n"
+            + "    <script id='a'></script>\n"
+            + "    <script id='b'>alert('1');</script>\n"
+            + "    <script id='c' src='script2.js'></script>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        document.getElementById('a').src = 'script3.js';\n"
+            + "        document.getElementById('b').src = 'script4.js';\n"
+            + "        document.getElementById('c').src = 'script5.js';\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "      test\n"
+            + "  </body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse(html);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script2.js"), "alert(2);");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script3.js"), "alert(3);");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script4.js"), "alert(4);");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "script5.js"), "alert(5);");
+
+        loadPageWithAlerts2(URL_FIRST);
     }
 }

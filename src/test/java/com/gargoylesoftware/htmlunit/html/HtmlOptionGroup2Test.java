@@ -24,21 +24,21 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link HtmlTable}.
+ * Tests for {@link HtmlOptionGroup}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Daniel Gredler
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HtmlTable2Test extends WebDriverTestCase {
+public class HtmlOptionGroup2Test extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLTableElement]",
-            IE8 = "[object]")
+    @Alerts(DEFAULT = "[object HTMLOptGroupElement]", IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -47,42 +47,18 @@ public class HtmlTable2Test extends WebDriverTestCase {
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
-            + "  <table id='myId'/>\n"
+            + "  <select>\n"
+            + "    <optgroup id='myId' label='my label'>\n"
+            + "      <option>My Option</option>\n"
+            + "    </optgroup>\n"
+            + "  </select>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            assertTrue(HtmlTable.class.isInstance(page.getHtmlElementById("myId")));
+            assertTrue(HtmlOptionGroup.class.isInstance(page.getHtmlElementById("myId")));
         }
     }
 
-    /**
-     * Table can have multiple children of &lt;thead&gt;, &lt;tbody&gt; and &lt;tfoot&gt;.
-     * Also, IE adds TR between THEAD and TD if missing.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = { "TBODY->TR->TD->Two", "THEAD->TR->TD->One", "THEAD->TR->TD->Three" })
-    public void two_theads() throws Exception {
-        final String html = "<html><head><script>\n"
-            + "  function test() {\n"
-            + "    for (var child = myTable1.firstChild; child != null; child = child.nextSibling) {\n"
-            + "      alert(debug(child));\n"
-            + "    }\n"
-            + "  }\n"
-            + "  function debug(node) {\n"
-            + "    return node.nodeValue != null ? node.nodeValue : (node.nodeName + '->' + debug(node.firstChild));\n"
-            + "  }\n"
-            + "</script></head>\n"
-            + "<body onload='test()'>\n"
-            + "<table id='myTable1'>"
-            + "<td>Two</td>"
-            + "<thead><td>One</td></thead>"
-            + "<thead><tr><td>Three</td></tr></thead>"
-            + "</table>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
 }

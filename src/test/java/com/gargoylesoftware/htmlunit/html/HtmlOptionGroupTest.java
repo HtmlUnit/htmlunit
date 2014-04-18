@@ -36,15 +36,9 @@ public class HtmlOptionGroupTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object HTMLOptGroupElement]", IE = "[object]")
-    public void simpleScriptable() throws Exception {
+    public void enclosingSelect() throws Exception {
         final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
+            + "</head><body>\n"
             + "  <select>\n"
             + "    <optgroup id='myId' label='my label'>\n"
             + "      <option>My Option</option>\n"
@@ -52,7 +46,7 @@ public class HtmlOptionGroupTest extends SimpleWebTestCase {
             + "  </select>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPageWithAlerts(html);
+        final HtmlPage page = loadPage(html);
         final HtmlOptionGroup optionGroup = page.getHtmlElementById("myId");
         Assert.assertNotNull(optionGroup.getEnclosingSelect());
     }

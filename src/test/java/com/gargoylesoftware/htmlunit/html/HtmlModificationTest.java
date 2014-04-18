@@ -16,25 +16,29 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link HtmlInsertedText}, and {@link HtmlDeletedText}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HtmlModificationTest extends SimpleWebTestCase {
+public class HtmlModificationTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "[object HTMLModElement]", "[object HTMLModElement]" }, IE = { "[object]", "[object]" })
+    @Alerts(DEFAULT = { "[object HTMLModElement]", "[object HTMLModElement]" },
+            IE8 = { "[object]", "[object]" })
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -49,8 +53,12 @@ public class HtmlModificationTest extends SimpleWebTestCase {
 
         //both values should be HTMLModElement
         //see http://forums.mozillazine.org/viewtopic.php?t=623715
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertTrue(HtmlInsertedText.class.isInstance(page.getHtmlElementById("myId1")));
-        assertTrue(HtmlDeletedText.class.isInstance(page.getHtmlElementById("myId2")));
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertTrue(HtmlInsertedText.class.isInstance(page.getHtmlElementById("myId1")));
+            assertTrue(HtmlDeletedText.class.isInstance(page.getHtmlElementById("myId2")));
+        }
     }
 }

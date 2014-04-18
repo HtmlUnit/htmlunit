@@ -349,4 +349,18 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Attributes aren't usually quoted in IE, but <tt>href</tt> attributes of anchor elements are.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<a id=\"a\" href=\"#x\">foo</a>",
+            IE8 = "<A id=a href=\"#x\">foo</A>")
+    public void innerHtmlHrefQuotedEvenInIE() throws Exception {
+        final String html = "<html><body onload='alert(document.getElementById(\"d\").innerHTML)'>"
+            + "<div id='d'><a id='a' href='#x'>foo</a></div></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

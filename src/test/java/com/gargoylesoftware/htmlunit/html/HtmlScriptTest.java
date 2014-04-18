@@ -280,50 +280,6 @@ public class HtmlScriptTest extends SimpleWebTestCase {
     }
 
     /**
-     * Verifies that setting a script's <tt>src</tt> attribute behaves correctly.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(FF = { "1", "2", "3" }, IE = { "1", "2", "3", "4", "5" })
-    public void testSettingSrcAttribute() throws Exception {
-        final String html =
-            "<html>\n"
-            + "  <head>\n"
-            + "    <title>Test</title>\n"
-            + "    <script id='a'></script>\n"
-            + "    <script id='b'>alert('1');</script>\n"
-            + "    <script id='c' src='script2.js'></script>\n"
-            + "    <script>\n"
-            + "      function test() {\n"
-            + "        document.getElementById('a').src = 'script3.js';\n"
-            + "        document.getElementById('b').src = 'script4.js';\n"
-            + "        document.getElementById('c').src = 'script5.js';\n"
-            + "      }\n"
-            + "    </script>\n"
-            + "  </head>\n"
-            + "  <body onload='test()'>\n"
-            + "      test\n"
-            + "  </body>\n"
-            + "</html>";
-
-        final List<String> actual = new ArrayList<String>();
-
-        final WebClient client = getWebClient();
-        client.setAlertHandler(new CollectingAlertHandler(actual));
-
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setDefaultResponse(html);
-        webConnection.setResponse(new URL("http://abc/script2.js"), "alert(2);");
-        webConnection.setResponse(new URL("http://abc/script3.js"), "alert(3);");
-        webConnection.setResponse(new URL("http://abc/script4.js"), "alert(4);");
-        webConnection.setResponse(new URL("http://abc/script5.js"), "alert(5);");
-        client.setWebConnection(webConnection);
-
-        client.getPage("http://abc/");
-        assertEquals(getExpectedAlerts(), actual);
-    }
-
-    /**
      * Verifies that 204 (No Content) responses for script resources are handled gracefully.
      * @throws Exception on test failure
      * @see <a href="https://sourceforge.net/tracker/?func=detail&atid=448266&aid=2815903&group_id=47038">2815903</a>
