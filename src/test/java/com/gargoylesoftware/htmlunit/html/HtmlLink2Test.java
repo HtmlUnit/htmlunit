@@ -16,10 +16,12 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link HtmlLink}.
@@ -27,24 +29,31 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HtmlLinkTest extends SimpleWebTestCase {
+public class HtmlLink2Test extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void getResponse_referer() throws Exception {
+    @Alerts(DEFAULT = "[object HTMLLinkElement]", IE8 = "[object]")
+    public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<link id='myId' href='file1.css'></link>\n"
-            + "</head><body>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myId'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(html);
-
-        final HtmlLink link = page.getFirstByXPath("//link");
-        final WebResponse respCss = link.getWebResponse(true);
-        assertEquals(page.getUrl().toExternalForm(), respCss.getWebRequest().getAdditionalHeaders().get("Referer"));
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertTrue(HtmlLink.class.isInstance(page.getHtmlElementById("myId")));
+        }
     }
 }
