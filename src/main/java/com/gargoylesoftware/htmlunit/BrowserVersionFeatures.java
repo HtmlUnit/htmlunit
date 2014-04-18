@@ -1122,6 +1122,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_NODE_CHILDNODES_IGNORE_EMPTY_TEXT_NODES,
 
+    /** <code>Node.contains</code> returns false instead of throwing an exception. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG,
+
     /** The reference argument of <code>Node.insertBefore(..)</code> is optional. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_NODE_INSERT_BEFORE_REF_OPTIONAL,
