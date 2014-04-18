@@ -41,7 +41,6 @@ import org.junit.runner.RunWith;
 import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -563,23 +562,6 @@ public class HtmlPageTest extends SimpleWebTestCase {
 
         final String[] expectedAlerts = {"foo"};
         assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * Regression test for window.onload property.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("function () {\n}")
-    public void testOnLoadHandler_ScriptNameRead() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
-            + "<script type='text/javascript'>\n"
-            + "load=function(){};\n"
-            + "onload=load;\n"
-            + "alert(onload);\n"
-            + "</script></head><body></body></html>";
-
-        loadPageWithAlerts(html);
     }
 
     /**

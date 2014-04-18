@@ -129,4 +129,21 @@ public class HtmlPage3Test extends WebDriverTestCase {
         loadPageWithAlerts2(htmlContent);
     }
 
+    /**
+     * Regression test for window.onload property.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testOnLoadHandler_ScriptNameRead() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script type='text/javascript'>\n"
+            + "load=function (){};\n"
+            + "onload=load;\n"
+            + "alert(onload);\n"
+            + "</script></head><body></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        assertEquals(1, getCollectedAlerts(driver).size());
+        assertTrue(getCollectedAlerts(driver).get(0).startsWith("function"));
+    }
 }
