@@ -413,31 +413,6 @@ public class HtmlElementTest extends SimpleWebTestCase {
     }
 
     /**
-     * Verifies that cloned node attributes have the same initial values, but changes can be made
-     * to the clone without affecting the original node, and that the id attribute is treated the
-     * same as all the other attributes. See bug 1707726.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts({ "false", "true", "a", "a", "b", "b", "b", "c" })
-    public void testClonedNodeAttributes() throws Exception {
-        final String html = "<html><body id='a' title='b'><script>\n"
-            + "var x = document.body.cloneNode(true);\n"
-            + "alert(document.body==x);\n"
-            + "alert(document.getElementById('a')==document.body);\n"
-            + "alert(document.body.id);\n"
-            + "alert(x.id);\n"
-            + "alert(document.body.title);\n"
-            + "alert(x.title);\n"
-            + "x.title='c';\n"
-            + "alert(document.body.title);\n"
-            + "alert(x.title);\n"
-            + "</script></body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -948,28 +923,6 @@ public class HtmlElementTest extends SimpleWebTestCase {
 
         page.getHtmlElementById("textfield1").type('a');
         assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * Test attribute.text and attribute.xml added for XmlElement attributes
-     * are undefined for HtmlElement.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({ "type", "undefined", "undefined" })
-    public void testTextAndXmlUndefined() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
-            + "    <input type='text' id='textfield1' onfocus='alert(1)'>\n"
-            + "    <script>\n"
-            + "         var node = document.getElementById('textfield1');\n"
-            + "         alert(node.attributes[0].nodeName);\n"
-            + "         alert(node.attributes[0].text);\n"
-            + "         alert(node.attributes[0].xml);\n"
-            + "    </script>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
     }
 
     /**
