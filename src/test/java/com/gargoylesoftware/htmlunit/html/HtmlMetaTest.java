@@ -16,10 +16,13 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link HtmlMeta}.
@@ -27,15 +30,16 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HtmlMetaTest extends SimpleWebTestCase {
+public class HtmlMetaTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object HTMLMetaElement]", IE = "[object]")
+    @Alerts(DEFAULT = "[object HTMLMetaElement]", IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<meta id='m' http-equiv='content-type' content='text/html'>\n"
@@ -46,8 +50,12 @@ public class HtmlMetaTest extends SimpleWebTestCase {
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertTrue(HtmlMeta.class.isInstance(page.getHtmlElementById("m")));
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertTrue(HtmlMeta.class.isInstance(page.getHtmlElementById("m")));
+        }
     }
 
     /**
@@ -56,8 +64,10 @@ public class HtmlMetaTest extends SimpleWebTestCase {
     @Test
     public void asText() throws Exception {
         final String html = "<html><head><meta id='m' http-equiv='a' content='b'></head><body></body></html>";
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertEquals("", page.getElementById("m").asText());
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        final String text = driver.findElement(By.id("m")).getText();
+        assertEquals("", text);
     }
 
     /**
@@ -66,8 +76,10 @@ public class HtmlMetaTest extends SimpleWebTestCase {
     @Test
     public void isDisplayed() throws Exception {
         final String html = "<html><head><meta id='m' http-equiv='a' content='b'></head><body></body></html>";
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertFalse(page.getElementById("m").isDisplayed());
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        final boolean displayed = driver.findElement(By.id("m")).isDisplayed();
+        assertFalse(displayed);
     }
 
 }

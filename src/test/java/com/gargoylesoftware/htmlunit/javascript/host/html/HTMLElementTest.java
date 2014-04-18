@@ -61,9 +61,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE8 = { "all node for body: DIV A IMG DIV ", "all node for testDiv: A IMG ",
+    @Alerts(DEFAULT = { "all is not supported", "all is not supported",
+            "all is not supported", "all is not supported", "all is not supported" },
+            IE8 = { "all node for body: DIV A IMG DIV ", "all node for testDiv: A IMG ",
             "all node for testA: IMG ", "all node for testImg: ", "all node for testDiv2: " })
-    @NotYetImplemented(FF)
     public void all_IndexByInt() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -77,18 +78,21 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "function dumpAll(_id) {\n"
             + "  var oNode = document.getElementById(_id);\n"
             + "  var col = oNode.all;\n"
-            + "  var str = 'all node for ' + _id + ': ';\n"
-            + "  for (var i=0; i<col.length; i++)\n"
-            + "  {\n"
-            + "    str += col[i].tagName + ' ';\n"
+            + "  if (col) {\n"
+            + "    var str = 'all node for ' + _id + ': ';\n"
+            + "    for (var i=0; i<col.length; i++) {\n"
+            + "      str += col[i].tagName + ' ';\n"
+            + "    }\n"
+            + "    alert(str);\n"
+            + "  } else {\n"
+            + "    alert('all is not supported');\n"
             + "  }\n"
-            + "  alert(str);\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()' id='body'>\n"
-            + "<div id='testDiv'>foo<a href='foo.html' id='testA'><img src='foo.png' id='testImg'></a></div>\n"
-            + "<div id='testDiv2'>foo</div>\n"
+            + "  <div id='testDiv'>foo<a href='foo.html' id='testA'><img src='foo.png' id='testImg'></a></div>\n"
+            + "  <div id='testDiv2'>foo</div>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
