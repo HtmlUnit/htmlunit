@@ -24,22 +24,21 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link HtmlBaseFont}.
+ * Tests for {@link HtmlSpan}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Sudhan Moghe
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HtmlBaseFontTest extends WebDriverTestCase {
+public class HtmlSpan2Test extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLSpanElement]",
-            IE11 = "[object HTMLBaseFontElement]",
-            IE8 = "[object]")
+    @Alerts(DEFAULT = "[object HTMLSpanElement]", IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -48,18 +47,39 @@ public class HtmlBaseFontTest extends WebDriverTestCase {
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
-            + "  <basefont id='myId'/>\n"
+            + "  <span id='myId'>My Span</span>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            if (getBrowserVersion().isIE()) {
-                assertTrue(HtmlBaseFont.class.isInstance(page.getHtmlElementById("myId")));
-            }
-            if (getBrowserVersion().isFirefox()) {
-                assertTrue(HtmlSpan.class.isInstance(page.getHtmlElementById("myId")));
-            }
+            assertTrue(HtmlSpan.class.isInstance(page.getHtmlElementById("myId")));
+        }
+    }
+
+    /**
+     * Test that HTMLSpanElement is the default for other elements like 'address', 'code', 'strike', etc.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "[object HTMLElement]",
+            IE11 = "[object HTMLBlockElement]",
+            IE8 = "[object]")
+    public void simpleScriptable_others() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myId'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <address id='myId'>My Address</address>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertTrue(HtmlAddress.class.isInstance(page.getHtmlElementById("myId")));
         }
     }
 }

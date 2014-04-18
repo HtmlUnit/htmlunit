@@ -24,42 +24,39 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link HtmlBaseFont}.
+ * Tests for {@link HtmlStyle}.
  *
  * @version $Revision$
+ * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HtmlBaseFontTest extends WebDriverTestCase {
+public class HtmlStyle2Test extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLSpanElement]",
-            IE11 = "[object HTMLBaseFontElement]",
+    @Alerts(DEFAULT = "[object HTMLStyleElement]",
             IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
+            + "<style type='text/css' id='myId'>\n"
+            + "img { border: 0px }\n"
+            + "</style>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('myId'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
-            + "  <basefont id='myId'/>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            if (getBrowserVersion().isIE()) {
-                assertTrue(HtmlBaseFont.class.isInstance(page.getHtmlElementById("myId")));
-            }
-            if (getBrowserVersion().isFirefox()) {
-                assertTrue(HtmlSpan.class.isInstance(page.getHtmlElementById("myId")));
-            }
+            assertTrue(HtmlStyle.class.isInstance(page.getHtmlElementById("myId")));
         }
     }
 }

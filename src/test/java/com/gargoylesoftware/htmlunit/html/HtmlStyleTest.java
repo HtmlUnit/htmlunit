@@ -18,7 +18,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
@@ -50,28 +49,6 @@ public class HtmlStyleTest extends SimpleWebTestCase {
         final DomNode node = page.getHtmlElementById("testStyle");
         assertEquals("style", node.getNodeName());
         assertEquals("", node.asText());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(FF = "[object HTMLStyleElement]", IE = "[object]")
-    public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
-            + "<style type='text/css' id='myId'>\n"
-            + "img { border: 0px }\n"
-            + "</style>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "</body></html>";
-
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertTrue(HtmlStyle.class.isInstance(page.getHtmlElementById("myId")));
     }
 
     /**
