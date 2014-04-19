@@ -1520,7 +1520,7 @@ public enum BrowserVersionFeatures {
     META_X_UA_COMPATIBLE,
 
     /** If true, then silently ignore element.appendChild(element). */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     NODE_APPEND_CHILD_SELF_IGNORE,
 
     /** Body of a &lt;noscript&gt; tag is not totally ignored but considered as a (not displayed) text node. */
