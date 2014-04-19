@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -59,7 +60,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "beforeafter", "undefined" },
             IE8 = { "before", "after", "TABLE" })
-    @NotYetImplemented({ FF17, FF24 })
+    @NotYetImplemented({ FF17, FF24, IE11 })
     public void testHtmlTableTextAroundTD() throws Exception {
         final String html = "<html><head><title>test_Table</title>\n"
             + "<script>\n"
@@ -429,7 +430,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
             IE8 = { "1", "1", "1", "2", "2", "1" })
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, IE11 })
     public void childNodes_basefont() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("basefont"));
     }
@@ -480,7 +481,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "1", "1", "1", "1", "1", "1" },
             IE8 = { "0", "0", "0", "1", "1", "1" })
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, IE11 })
     public void childNodes_body() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("body"));
     }
@@ -874,7 +875,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
             IE8 = { "3", "3", "2", "4", "4", "3" })
-    @NotYetImplemented({ IE8, FF17, FF24 })
+    @NotYetImplemented({ IE8, IE11, FF17, FF24 })
     public void childNodes_image() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("image"));
     }
@@ -906,7 +907,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "1", "1", "1", "1", "1", "1" },
             IE11 = { "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, IE11 })
     public void childNodes_isindex() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("isindex"));
     }
@@ -1430,7 +1431,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "3", "2" },
             IE8 = { "1", "1", "1", "1", "1", "1" })
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, IE11 })
     public void childNodes_table() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("table"));
     }
@@ -1561,7 +1562,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
             IE8 = { "0", "0", "0", "0", "0", "0" })
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, IE11 })
     public void childNodes_title() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("title"));
     }
