@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+
 import java.net.URL;
 
 import org.junit.Test;
@@ -24,6 +26,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -129,12 +132,14 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "page2.html",
             IE11 = "")
+    @NotYetImplemented(IE11)
     public void clickNestedCheckboxElement() throws Exception {
         final String html =
               "<html>\n"
             + "<body>\n"
-            + "<a href='page2.html'>"
-            + "<input type='checkbox' id='theCheckbox' name='myCheckbox' value='Milk'></a>\n"
+            + "  <a href='page2.html'>"
+            + "    <input type='checkbox' id='theCheckbox' name='myCheckbox' value='Milk'>\n"
+            + "  </a>\n"
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("");
@@ -171,12 +176,14 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "page2.html",
             IE11 = "")
+    @NotYetImplemented(IE11)
     public void clickNestedInputElement() throws Exception {
         final String html =
               "<html>\n"
             + "<body>\n"
-            + "<a href='page2.html'>"
-            + "<input type='image' id='theInput' /></a>\n"
+            + "  <a href='page2.html'>"
+            + "    <input type='image' id='theInput' />\n"
+            + "  </a>\n"
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("");
@@ -213,12 +220,14 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "page2.html",
             IE11 = "")
+    @NotYetImplemented(IE11)
     public void clickNestedRadioElement() throws Exception {
         final String html =
               "<html>\n"
             + "<body>\n"
-            + "<a href='page2.html'>"
-            + "<input type='radio' id='theRadio' name='myRadio' value='Milk'></a>\n"
+            + "  <a href='page2.html'>"
+            + "    <input type='radio' id='theRadio' name='myRadio' value='Milk'>\n"
+            + "  </a>\n"
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("");
