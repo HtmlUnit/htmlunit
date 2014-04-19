@@ -925,4 +925,33 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
                 + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Test <code>input.checked</code> if the radio <code>&lt;input&gt;</code> do not have distinct 'value'.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "false,false", "true,false", "false,true" })
+    public void radioInputChecked() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<form name='myForm'>\n"
+            + "  <input type='radio' name='myRadio'>\n"
+            + "  <input type='radio' name='myRadio'>\n"
+            + "</form>\n"
+            + "<script>\n"
+            + "  var r1 = document.forms.myForm.myRadio[0];\n"
+            + "  var r2 = document.forms.myForm.myRadio[1];\n"
+            + "  alert(r1.checked + ',' + r2.checked);\n"
+            + "  r1.checked = true;\n"
+            + "  alert(r1.checked + ',' + r2.checked);\n"
+            + "  r2.checked = true;\n"
+            + "  alert(r1.checked + ',' + r2.checked);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

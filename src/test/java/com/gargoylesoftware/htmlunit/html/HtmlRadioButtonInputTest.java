@@ -64,6 +64,8 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "newtrue",
+            IE8 = "on")
     public void onchangeHandlerInvoked() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -73,7 +75,6 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(html);
-
         final HtmlRadioButtonInput radio = page.getHtmlElementById("radio");
 
         assertFalse(radio.isChecked());
@@ -81,15 +82,7 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
         radio.setChecked(true);
 
         assertTrue(radio.isChecked());
-
-        final String expectedValue;
-        if (getBrowserVersion().isIE()) {
-            expectedValue = "on";
-        }
-        else {
-            expectedValue = "newtrue";
-        }
-        assertEquals(expectedValue, radio.getValueAttribute());
+        assertEquals(getExpectedAlerts()[0], radio.getValueAttribute());
     }
 
     /**
@@ -105,7 +98,6 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(html);
-
         final HtmlRadioButtonInput radio = page.getHtmlElementById("radio");
 
         assertFalse(radio.isChecked());
@@ -167,6 +159,8 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "Second",
+            IE8 = "First")
     public void setChecked() throws Exception {
         final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
@@ -188,44 +182,7 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
         final HtmlRadioButtonInput radio = page.getHtmlElementById("myRadio");
 
         final HtmlPage secondPage = (HtmlPage) radio.setChecked(true);
-
-        final String expectedValue;
-        if (getBrowserVersion().isIE()) {
-            expectedValue = "First";
-        }
-        else {
-            expectedValue = "Second";
-        }
-        assertEquals(expectedValue, secondPage.getTitleText());
-    }
-
-    /**
-     * Test <code>input.checked</code> if the radio <code>&lt;input&gt;</code> do not have distinct 'value'.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({ "false,false", "true,false", "false,true" })
-    public void radioInputChecked() throws Exception {
-        final String html
-            = "<html><head>\n"
-            + "</head>\n"
-            + "<body>\n"
-            + "<form name='myForm'>\n"
-            + "  <input type='radio' name='myRadio'>\n"
-            + "  <input type='radio' name='myRadio'>\n"
-            + "</form>\n"
-            + "<script>\n"
-            + "  var r1 = document.forms.myForm.myRadio[0];\n"
-            + "  var r2 = document.forms.myForm.myRadio[1];\n"
-            + "  alert(r1.checked + ',' + r2.checked);\n"
-            + "  r1.checked = true;\n"
-            + "  alert(r1.checked + ',' + r2.checked);\n"
-            + "  r2.checked = true;\n"
-            + "  alert(r1.checked + ',' + r2.checked);\n"
-            + "</script>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
+        assertEquals(getExpectedAlerts()[0], secondPage.getTitleText());
     }
 
     /**
