@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -44,7 +45,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "left", "right", "justify", "char", "center", "wrong", "" },
             IE = { "left", "right", "", "", "center", "", "" })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void getAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -74,7 +75,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "justify", "char", "center" },
             IE = { "center", "error", "center", "error", "center", "left", "right",
                     "error", "right", "error", "right", "center" })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"

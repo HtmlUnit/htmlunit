@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -775,7 +776,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "left", "right", "bottom", "middle", "top", "wrong", "" },
             IE = { "left", "right", "bottom", "middle", "top", "", "" },
             IE11 = { "", "", "", "", "", "", "" })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void getAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -805,7 +806,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "bottom", "middle", "top" },
             IE = { "center", "error", "center", "error", "center", "left", "right", "bottom", "middle", "top" },
             IE11 = { "", "error", "", "error", "", "", "", "", "", "" })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -918,7 +919,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "null", "4", "", "0" },
             IE8 = { "null", "4", "null", "4" })
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, IE11 })
     public void getAttributeAndSetValueNull() throws Exception {
         final String html =
             "<html>\n"
