@@ -699,7 +699,7 @@ public enum BrowserVersionFeatures {
 
     /** Indicates that the click method call does not trigger the onchange
      * event handlers for checkboxes. */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_CLICK_CHECKBOX_TRIGGERS_NO_CHANGE_EVENT,
 
     /** Indicates that the clientLeft and clientTop returning zero in all cases. */
