@@ -716,7 +716,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox CHECKBOX" },
             IE11 = {"text TeXt", "password PassWord", "hidden Hidden",
             "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox checkbox" })
-    @NotYetImplemented({ FF17, FF24 })
+    @NotYetImplemented({ FF17, FF24, IE11 })
     public void typeCase() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
