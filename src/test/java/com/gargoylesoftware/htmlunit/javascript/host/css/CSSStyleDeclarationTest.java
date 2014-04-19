@@ -338,7 +338,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "", "" },
             IE8 = { "", "alpha(opacity=50)" })
-    @NotYetImplemented({ FF17, FF24 })
+    @NotYetImplemented({ FF17, FF24, IE11 })
     public void styleFilter() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test(){\n"

@@ -1119,7 +1119,7 @@ public class DocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT =  { "false", "false" },
             FF17 = { "false", "true" },
             IE8 = { "true", "true" })
-    @NotYetImplemented(FF24)
+    @NotYetImplemented({ FF24, IE11 })
     public void all_AsBoolean() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"

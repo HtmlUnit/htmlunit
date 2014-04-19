@@ -1174,6 +1174,8 @@ public class WindowTest extends SimpleWebTestCase {
      */
     @Test
     @Browsers(IE)
+    @Alerts(IE8 = { "[object]", "a" },
+            IE11 = { "[object Window]", "a" })
     public void showModelessDialog() throws Exception {
         final String html1
             = "<html><head><script>\n"
@@ -1198,8 +1200,6 @@ public class WindowTest extends SimpleWebTestCase {
             + "  Name: <input id='name'><input value='OK' id='b' type='button' onclick='update()'>\n"
             + "</body></html>";
 
-        final String[] expected = {"[object]", "a"};
-
         final WebClient client = getWebClient();
         final List<String> actual = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(actual));
@@ -1219,7 +1219,7 @@ public class WindowTest extends SimpleWebTestCase {
         final HtmlButtonInput button2 = (HtmlButtonInput) dialogPage.getHtmlElementById("b");
         button2.click();
 
-        assertEquals(expected, actual);
+        assertEquals(getExpectedAlerts(), actual);
     }
 
     /**
@@ -1317,8 +1317,8 @@ public class WindowTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "10", "20", "30", "40" },
-        IE = { "undefined", "undefined", "undefined", "undefined" })
+    @Alerts(DEFAULT = { "10", "20", "30", "40" },
+            IE8 = { "undefined", "undefined", "undefined", "undefined" })
     public void mozillaViewportSetters() throws Exception {
         final String html = "<html>\n"
                 + "<head></head>\n"
