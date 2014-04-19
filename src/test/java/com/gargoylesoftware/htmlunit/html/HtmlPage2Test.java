@@ -109,7 +109,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "25", IE8 = "25")
+    @Alerts("25")
     public void loadExternalJavaScript() throws Exception {
         final String html =
             "<html><head>\n"
