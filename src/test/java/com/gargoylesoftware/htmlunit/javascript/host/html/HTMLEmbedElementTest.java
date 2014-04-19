@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -119,7 +120,7 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "10px", "20em", "80%", "40", "wrong", "" },
             IE = { "10", "20", "80%", "40", "1", "" },
             IE11 = { "10", "20", "80%", "40", "0", "" })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void getHeight() throws Exception {
         final String html
             = "<html><body>\n"
@@ -145,7 +146,7 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "20px", "8", "foo" },
             IE = { "20", "8", "error", "8" })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void setHeight() throws Exception {
         final String html
             = "<html><body>\n"
@@ -177,7 +178,7 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "10px", "20em", "80%", "40", "wrong", "" },
             IE = { "10", "20", "80%", "40", "1", "" },
             IE11 = { "10", "20", "80%", "40", "", "" })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void getWidth() throws Exception {
         final String html
             = "<html><body>\n"
@@ -203,7 +204,7 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "20px", "8", "foo" },
             IE = { "20", "8", "error", "8" })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void setWidth() throws Exception {
         final String html
             = "<html><body>\n"
