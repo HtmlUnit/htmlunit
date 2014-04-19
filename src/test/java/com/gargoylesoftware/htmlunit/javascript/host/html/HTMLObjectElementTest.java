@@ -43,20 +43,6 @@ public class HTMLObjectElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "[object]", "null" }, FF = { "[object HTMLFormElement]", "null" })
-    public void form() throws Exception {
-        final String html
-            = "<html><body><form><object id='o1'></object></form><object id='o2'></object><script>\n"
-            + "alert(document.getElementById('o1').form);\n"
-            + "alert(document.getElementById('o2').form);\n"
-            + "</script></body></html>";
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "undefined", IE = { "ActiveX is working!", "Javascript called this method!" })
     public void classid() throws Exception {
         final String clsid = "clsid:TESTING-CLASS-ID";
