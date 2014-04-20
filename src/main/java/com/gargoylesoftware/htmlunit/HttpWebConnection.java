@@ -555,8 +555,10 @@ public class HttpWebConnection implements WebConnection {
 
     private void configureTimeout(final HttpClientBuilder builder, final int timeout) {
         final RequestConfig.Builder requestBuilder = createRequestConfigBuilder(timeout);
-
         builder.setDefaultRequestConfig(requestBuilder.build());
+
+        builder.setDefaultSocketConfig(createSocketConfigBuilder(timeout).build());
+
         httpContext_.removeAttribute(HttpClientContext.REQUEST_CONFIG);
         usedOptions_.setTimeout(timeout);
     }
@@ -571,6 +573,13 @@ public class HttpWebConnection implements WebConnection {
                 .setConnectionRequestTimeout(timeout)
                 .setSocketTimeout(timeout);
         return requestBuilder;
+    }
+
+    private SocketConfig.Builder createSocketConfigBuilder(final int timeout) {
+        final SocketConfig.Builder socketBuilder = SocketConfig.custom()
+                // timeout
+                .setSoTimeout(timeout);
+        return socketBuilder;
     }
 
     /**

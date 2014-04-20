@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.15" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1593">
+                HttpWebConnection: set socket timeout also (regression in 2.14).
+            </action>
             <action type="fix" dev="rbri">
                 HtmlButton.getAttribute("type") now returns the correct value if no type was specified.
             </action>
