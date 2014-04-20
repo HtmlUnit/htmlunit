@@ -19,16 +19,14 @@ import static org.junit.Assert.assertSame;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -126,39 +124,17 @@ public class HtmlButtonTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "submit", IE8 = "button")
     public void defaultButtonType_StandardsCompliantBrowser() throws Exception {
-        final String expectedType = getBrowserVersion().isFirefox() ? "submit" : "button";
-        final String firstContent
+        final String html
             = "<html><head><title>First</title></head><body>\n"
             + "<form id='form1' action='" + URL_SECOND + "' method='post'>\n"
             + "    <button name='button' id='button' value='pushme'>PushMe</button>\n"
             + "</form></body></html>";
-        final String secondContent
-            = "<html><head><title>Second</title></head><body'></body></html>";
-        final WebClient client = getWebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
-        client.setWebConnection(webConnection);
-
-        final HtmlPage page = client.getPage(URL_FIRST);
+        final HtmlPage page = loadPage(html);
         final HtmlButton button = page.getHtmlElementById("button");
-        assertEquals(expectedType, button.getTypeAttribute());
-
-        final HtmlPage page2 = button.click();
-        final List<NameValuePair> expectedParameters;
-        final String expectedSecondPageTitle;
-        if ("submit".equals(expectedType)) {
-            expectedParameters = Collections.singletonList(new NameValuePair("button", "pushme"));
-            expectedSecondPageTitle = "Second";
-        }
-        else {
-            expectedParameters = Collections.emptyList();
-            expectedSecondPageTitle = "First";
-        }
-        assertEquals(expectedParameters, webConnection.getLastParameters());
-        assertEquals(expectedSecondPageTitle, page2.getTitleText());
+        assertEquals(getExpectedAlerts()[0], button.getTypeAttribute());
+        assertEquals(getExpectedAlerts()[0], button.getAttribute("type"));
     }
-
 }

@@ -9,6 +9,9 @@
     <body>
         <release version="2.15" date="???" description="Bugfixes">
             <action type="fix" dev="rbri">
+                HtmlButton.getAttribute("type") now returns the correct value if no type was specified.
+            </action>
+            <action type="fix" dev="rbri">
                 JavaScript: Function evaluate now returns the correct result when
                 called with XPathResult.BOOLEAN_TYPE as result type.
             </action>

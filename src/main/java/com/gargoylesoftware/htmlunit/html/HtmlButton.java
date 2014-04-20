@@ -201,17 +201,18 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
-     * Returns the value of the attribute "type". Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
-     * documentation for details on the use of this attribute. Note that Internet
-     * Explorer doesn't follow the spec when the type isn't specified. It will return
-     * "button" rather than the "submit" specified in the spec.
+     * Overwritten, because Internet Explorer doesn't follow the spec
+     * when the type isn't specified. It will return
+     * button" rather than the "submit" specified in the spec.
      *
-     * @return the value of the attribute "type" or the default value if that attribute isn't defined
+     * @param attributeName the name of the attribute
+     * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED} or {@link #ATTRIBUTE_VALUE_EMPTY}
      */
-    public final String getTypeAttribute() {
-        String type = getAttribute("type");
-        if (type == DomElement.ATTRIBUTE_NOT_DEFINED) {
+    @Override
+    public String getAttribute(final String attributeName) {
+        String type = super.getAttribute(attributeName);
+
+        if (type == DomElement.ATTRIBUTE_NOT_DEFINED && "type".equalsIgnoreCase(attributeName)) {
             if (hasFeature(BUTTON_EMPTY_TYPE_BUTTON)) {
                 type = "button";
             }
@@ -220,6 +221,17 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
             }
         }
         return type;
+    }
+
+    /**
+     * Returns the value of the attribute "type". Refer to the
+     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * documentation for details on the use of this attribute.
+     *
+     * @return the value of the attribute "type" or the default value if that attribute isn't defined
+     */
+    public final String getTypeAttribute() {
+        return getAttribute("type");
     }
 
     /**

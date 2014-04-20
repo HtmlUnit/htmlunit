@@ -16,15 +16,20 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Tests for {@link HtmlButton}.
@@ -323,5 +328,41 @@ public class HtmlButton2Test extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * According to the HTML spec, the default type for a button is "submit".
+     * IE is different than the HTML spec and has a default type of "button".
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "submit", "1", "button-pushme", "Second" },
+            IE8 = { "button", "0", "", "First" })
+    public void defaultButtonType_StandardsCompliantBrowser() throws Exception {
+        final String firstContent
+            = "<html><head><title>First</title></head><body>\n"
+            + "<form id='form1' action='" + URL_SECOND + "' method='post'>\n"
+            + "    <button name='button' id='button' value='pushme'>PushMe</button>\n"
+            + "</form></body></html>";
+        final String secondContent
+            = "<html><head><title>Second</title></head><body'></body></html>";
+
+        getMockWebConnection().setResponse(URL_FIRST, firstContent);
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(firstContent);
+        final WebElement button = driver.findElement(By.id("button"));
+
+        assertEquals(getExpectedAlerts()[0], button.getAttribute("type"));
+
+        button.click();
+
+        final List<NameValuePair> params = getMockWebConnection().getLastParameters();
+        assertEquals(getExpectedAlerts()[1], "" + params.size());
+
+        if (params.size() > 0) {
+            assertEquals(getExpectedAlerts()[2], params.get(0).getName() + "-" + params.get(0).getValue());
+        }
+        assertEquals(getExpectedAlerts()[3], driver.getTitle());
     }
 }
