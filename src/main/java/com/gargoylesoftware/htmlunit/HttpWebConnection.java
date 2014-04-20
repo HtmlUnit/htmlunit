@@ -251,13 +251,14 @@ public class HttpWebConnection implements WebConnection {
     private HttpUriRequest makeHttpMethod(final WebRequest webRequest)
         throws IOException, URISyntaxException {
 
+        final String charset = webRequest.getCharset();
+
         // Make sure that the URL is fully encoded. IE actually sends some Unicode chars in request
         // URLs; because of this we allow some Unicode chars in URLs. However, at this point we're
         // handing things over the HttpClient, and HttpClient will blow up if we leave these Unicode
         // chars in the URL.
-        final URL url = UrlUtils.encodeUrl(webRequest.getUrl(), false, webRequest.getCharset());
+        final URL url = UrlUtils.encodeUrl(webRequest.getUrl(), false, charset);
 
-        final String charset = webRequest.getCharset();
         // URIUtils.createURI is deprecated but as of httpclient-4.2.1, URIBuilder doesn't work here as it encodes path
         // what shouldn't happen here
         URI uri = URIUtils.createURI(url.getProtocol(), url.getHost(), url.getPort(), url.getPath(),
@@ -308,7 +309,7 @@ public class HttpWebConnection implements WebConnection {
                     }
                     else {
                         builder.addTextBody(pair.getName(), pair.getValue(),
-                                ContentType.create("text/plain", webRequest.getCharset()));
+                                ContentType.create("text/plain", charset));
                     }
                 }
                 method.setEntity(builder.build());
