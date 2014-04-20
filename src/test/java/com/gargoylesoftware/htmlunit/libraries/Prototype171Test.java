@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.BeforeClass;
@@ -151,7 +150,7 @@ public class Prototype171Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented({ IE11, CHROME })
+    @NotYetImplemented(CHROME)
     @BuggyWebDriver(FF)
     public void form() throws Exception {
         test("form_test.html");

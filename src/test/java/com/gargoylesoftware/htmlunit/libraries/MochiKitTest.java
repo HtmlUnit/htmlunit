@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.concurrent.TimeUnit;
@@ -143,7 +144,7 @@ public class MochiKitTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ FF17, FF24 })
+    @NotYetImplemented({ FF17, FF24, IE11 })
     public void style() throws Exception {
         doTest("Style");
     }

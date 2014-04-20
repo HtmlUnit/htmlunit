@@ -14,14 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.assertNotNull;
+
+import java.util.LinkedList;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -163,12 +165,15 @@ public class HtmlTextInputTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
+    @Alerts(DEFAULT = { "exception", "My old value" },
+            IE8 = "My new value")
     public void setSelectionText() throws Exception {
         final String html =
               "<html><head><script>\n"
             + "  function test() {\n"
-            + "    document.selection.createRange().text = 'new';\n"
+            + "    try {\n"
+            + "      document.selection.createRange().text = 'new';\n"
+            + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body>\n"
@@ -176,14 +181,18 @@ public class HtmlTextInputTest extends SimpleWebTestCase {
             + "<input id='myButton' type='button' value='Test' onclick='test()'>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final List<String> alerts = new LinkedList<String>();
+
+        final HtmlPage page = loadPage(getBrowserVersion(), html, alerts);
         final HtmlTextInput input = page.getHtmlElementById("myInput");
         final HtmlButtonInput button = page.getHtmlElementById("myButton");
         page.setFocusedElement(input);
         input.setSelectionStart(3);
         input.setSelectionEnd(6);
         button.click();
-        assertEquals("My new value", input.getValueAttribute());
+
+        alerts.add(input.getValueAttribute());
+        assertEquals(getExpectedAlerts(), alerts);
     }
 
     /**
