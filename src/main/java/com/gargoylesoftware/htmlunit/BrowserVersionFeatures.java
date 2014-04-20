@@ -1551,6 +1551,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     RESETINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED,
 
+    /** Set the default value attribute of a reset input to 'undefined' if declared as 'Reset'. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
+    RESETINPUT_DEFAULT_VALUE_UNDEFINED,
+
     /** Indicates that escaping in attribute selectors is supported. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     SELECTOR_ATTRIBUTE_ESCAPING,
@@ -1607,6 +1611,10 @@ public enum BrowserVersionFeatures {
     /** Set the value attribute of a submit input to 'Submit Query' if no value attribute specified. */
     @BrowserFeature(@WebBrowser(IE))
     SUBMITINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED,
+
+    /** Set the default value attribute of a submit input to 'undefined' if declared as 'Reset'. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
+    SUBMITINPUT_DEFAULT_VALUE_UNDEFINED,
 
     /** Indicates if SVG is supported. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })

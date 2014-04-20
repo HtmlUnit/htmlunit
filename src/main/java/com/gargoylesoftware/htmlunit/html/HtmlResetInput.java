@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_SET_VALUE_UPDATES_DEFAULT_VALUE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.RESETINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.RESETINPUT_DEFAULT_VALUE_UNDEFINED;
 
 import java.io.IOException;
 import java.util.Map;
@@ -54,7 +55,7 @@ public class HtmlResetInput extends HtmlInput {
         super(qualifiedName, page, addValueIfNeeded(page, attributes));
 
         // fix the default value in case we have set it
-        if (hasFeature(RESETINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED)
+        if (hasFeature(RESETINPUT_DEFAULT_VALUE_UNDEFINED)
                 && getAttribute("value") == DEFAULT_VALUE) {
             setDefaultValue(ATTRIBUTE_NOT_DEFINED, false);
         }
