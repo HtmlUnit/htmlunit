@@ -316,10 +316,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
-    GENERATED_124,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
     GENERATED_13,
 
     /** Was originally .isIE(). */
@@ -684,6 +680,10 @@ public enum BrowserVersionFeatures {
     /** Trying to change the type of a button element throws an exception (IE). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_BUTTON_SET_TYPE_THROWS_EXCEPTION,
+
+    /** If we're emulating IE, the overall JavaScript return value is the last return value. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_CALL_RESULT_IS_LAST_RETURN_VALUE,
 
     /** Indicates that the browser emulates the char attribute. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))

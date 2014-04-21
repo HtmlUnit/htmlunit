@@ -90,20 +90,20 @@ public class CSSRuleList extends SimpleScriptable {
         final List<String> idList = new ArrayList<String>();
 
         final int length = getLength();
-        if (!getBrowserVersion().hasFeature(GENERATED_21)) {
+        if (getBrowserVersion().hasFeature(GENERATED_21)) {
+            idList.add("length");
+
+            for (int i = 0; i < length; i++) {
+                idList.add(Integer.toString(i));
+            }
+        }
+        else {
             for (int i = 0; i < length; i++) {
                 idList.add(Integer.toString(i));
             }
 
             idList.add("length");
             idList.add("item");
-        }
-        else {
-            idList.add("length");
-
-            for (int i = 0; i < length; i++) {
-                idList.add(Integer.toString(i));
-            }
         }
         return idList.toArray();
     }

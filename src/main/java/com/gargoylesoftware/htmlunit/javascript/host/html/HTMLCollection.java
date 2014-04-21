@@ -349,10 +349,14 @@ public class HTMLCollection extends NodeList {
         }
 
         final List<String> idList = new ArrayList<String>();
-
         final List<Object> elements = getElements();
 
-        if (!getBrowserVersion().hasFeature(GENERATED_50)) {
+        if (getBrowserVersion().hasFeature(GENERATED_50)) {
+            idList.add("length");
+
+            addElementIds(idList, elements);
+        }
+        else {
             final int length = elements.size();
             for (int i = 0; i < length; i++) {
                 idList.add(Integer.toString(i));
@@ -364,11 +368,6 @@ public class HTMLCollection extends NodeList {
             for (final String name : jsConfig.getClassConfiguration(getClassName()).functionKeys()) {
                 idList.add(name);
             }
-        }
-        else {
-            idList.add("length");
-
-            addElementIds(idList, elements);
         }
         return idList.toArray();
     }
