@@ -903,6 +903,14 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     JS_DOMPARSER_PARSERERROR_ON_ERROR,
 
+    /** DOMTokenList uses a enhanced set of whitespace chars. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_DOMTOKENLIST_ENHANCED_WHITESPACE_CHARS,
+
+    /** DOMTokenList removed all whitespace chars during edit. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_EDIT,
+
     /** Javascript property function delete thows an exception if the
      * given count is negative. */
     @BrowserFeature(@WebBrowser(IE))

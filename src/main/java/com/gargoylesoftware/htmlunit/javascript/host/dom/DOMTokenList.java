@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_ENHANCED_WHITESPACE_CHARS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_EDIT;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,6 +43,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.Node;
 public final class DOMTokenList extends SimpleScriptable {
 
     private static final String WHITESPACE_CHARS = " \t\r\n\u000C";
+    private static final String WHITESPACE_CHARS_IE_11 = WHITESPACE_CHARS + "\u000B";
+
     private String attributeName_;
 
     /**
@@ -67,7 +72,7 @@ public final class DOMTokenList extends SimpleScriptable {
     @JsxGetter
     public int getLength() {
         final String value = getDefaultValue(null);
-        return StringUtils.split(value, WHITESPACE_CHARS).length;
+        return StringUtils.split(value, whitespaceChars()).length;
     }
 
     /**
@@ -77,7 +82,10 @@ public final class DOMTokenList extends SimpleScriptable {
     public String getDefaultValue(final Class<?> hint) {
         final DomAttr attr = (DomAttr) getDomNodeOrDie().getAttributes().getNamedItem(attributeName_);
         if (attr != null) {
-            final String value = attr.getValue();
+            String value = attr.getValue();
+            if (getBrowserVersion().hasFeature(JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_EDIT)) {
+                value = StringUtils.join(StringUtils.split(value, whitespaceChars()), ' ');
+            }
             return value;
         }
         return "";
@@ -108,7 +116,7 @@ public final class DOMTokenList extends SimpleScriptable {
         if (StringUtils.isEmpty(token)) {
             throw Context.reportRuntimeError("Empty imput not allowed");
         }
-        if (StringUtils.containsAny(token, WHITESPACE_CHARS)) {
+        if (StringUtils.containsAny(token, whitespaceChars())) {
             throw Context.reportRuntimeError("Empty imput not allowed");
         }
         String value = getDefaultValue(null);
@@ -163,7 +171,7 @@ public final class DOMTokenList extends SimpleScriptable {
         if (StringUtils.isEmpty(token)) {
             throw Context.reportRuntimeError("Empty imput not allowed");
         }
-        if (StringUtils.containsAny(token, WHITESPACE_CHARS)) {
+        if (StringUtils.containsAny(token, whitespaceChars())) {
             throw Context.reportRuntimeError("Empty imput not allowed");
         }
         return position(getDefaultValue(null), token) > -1;
@@ -180,7 +188,7 @@ public final class DOMTokenList extends SimpleScriptable {
             return null;
         }
         final String value = getDefaultValue(null);
-        final List<String> values = Arrays.asList(StringUtils.split(value, WHITESPACE_CHARS));
+        final List<String> values = Arrays.asList(StringUtils.split(value, whitespaceChars()));
         if (index < values.size()) {
             return values.get(index);
         }
@@ -216,7 +224,14 @@ public final class DOMTokenList extends SimpleScriptable {
         return pos;
     }
 
+    private String whitespaceChars() {
+        if (getBrowserVersion().hasFeature(JS_DOMTOKENLIST_ENHANCED_WHITESPACE_CHARS)) {
+            return WHITESPACE_CHARS_IE_11;
+        }
+        return WHITESPACE_CHARS;
+    }
+
     private boolean isWhitespache(final int ch) {
-        return WHITESPACE_CHARS.indexOf(ch) > -1;
+        return whitespaceChars().indexOf(ch) > -1;
     }
 }
