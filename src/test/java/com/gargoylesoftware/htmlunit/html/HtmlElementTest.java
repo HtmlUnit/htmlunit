@@ -38,6 +38,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlElementTest extends SimpleWebTestCase {
@@ -722,6 +723,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "mousedown-0", IE8 = "mousedown-1")
     public void testMouseDown() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -735,13 +737,11 @@ public class HtmlElementTest extends SimpleWebTestCase {
             + "<textarea id='myTextarea'></textarea>\n"
             + "</body></html>";
 
-        final String expected = getBrowserVersion().isFirefox() ? "mousedown-0" : "mousedown-1";
-
         final HtmlPage page = loadPage(html);
         final HtmlBody body = page.getHtmlElementById("myBody");
         body.mouseDown();
         final HtmlTextArea textArea = page.getHtmlElementById("myTextarea");
-        assertEquals(expected, textArea.getText());
+        assertEquals(getExpectedAlerts()[0], textArea.getText());
     }
 
     /**
@@ -771,6 +771,9 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "mousedown-3-mouseup-3-contextmenu-3-",
+            IE11 = "mousedown-2-mouseup-2-contextmenu-2-",
+            IE8 = "mousedown-2-mouseup-2-contextmenu-0-")
     public void testRightClick() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -794,14 +797,11 @@ public class HtmlElementTest extends SimpleWebTestCase {
             + "  <textarea id='myTextarea'></textarea>\n"
             + "</body></html>";
 
-        final String expected = getBrowserVersion().isFirefox() ? "mousedown-3-mouseup-3-contextmenu-3-"
-            : "mousedown-2-mouseup-2-contextmenu-0-";
-
         final HtmlPage page = loadPage(html);
         final HtmlDivision div = page.getHtmlElementById("myDiv");
         div.rightClick();
         final HtmlTextArea textArea = page.getHtmlElementById("myTextarea");
-        assertEquals(expected, textArea.getText());
+        assertEquals(getExpectedAlerts()[0], textArea.getText());
     }
 
     /**
@@ -810,6 +810,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "mousedown-1-mouseup-1-", IE11 = "mousedown-0-mouseup-0-")
     public void testMouse_Down_Up() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -832,14 +833,12 @@ public class HtmlElementTest extends SimpleWebTestCase {
             + "  <textarea id='myTextarea'></textarea>\n"
             + "</body></html>";
 
-        final String expected = "mousedown-1-mouseup-1-";
-
         final HtmlPage page = loadPage(html);
         final HtmlDivision div = page.getHtmlElementById("myDiv");
         div.mouseDown();
         div.mouseUp();
         final HtmlTextArea textArea = page.getHtmlElementById("myTextarea");
-        assertEquals(expected, textArea.getText());
+        assertEquals(getExpectedAlerts()[0], textArea.getText());
     }
 
     /**
