@@ -851,6 +851,15 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @JsxGetter
     public String getInnerHTML() {
+        final DomNode domNode;
+        try {
+            domNode = getDomNodeOrDie();
+        }
+        catch (final IllegalStateException e) {
+            Context.throwAsScriptRuntimeEx(e);
+            return "";
+        }
+
         final StringBuilder buf = new StringBuilder();
 
         final String tagName = getTagName();
@@ -862,7 +871,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         isPlain = isPlain || "STYLE".equals(tagName);
 
         // we can't rely on DomNode.asXml because it adds indentation and new lines
-        printChildren(buf, getDomNodeOrDie(), !isPlain);
+        printChildren(buf, domNode, !isPlain);
         return buf.toString();
     }
 
@@ -975,7 +984,14 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @JsxSetter
     public void setInnerHTML(final Object value) {
-        final DomNode domNode = getDomNodeOrDie();
+        final DomNode domNode;
+        try {
+            domNode = getDomNodeOrDie();
+        }
+        catch (final IllegalStateException e) {
+            Context.throwAsScriptRuntimeEx(e);
+            return;
+        }
 
         domNode.removeAllChildren();
 

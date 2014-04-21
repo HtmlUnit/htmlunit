@@ -3191,18 +3191,19 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = { "exception call", "exception set" },
             CHROME = { "undefined", "true" })
-    @NotYetImplemented(FF)
     public void prototype_innerHTML() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
             + "try {\n"
             + "  alert(HTMLElement.prototype.innerHTML);\n"
+            + "} catch (e) { alert('exception call') }\n"
+            + "try {\n"
             + "  var myFunc = function() {};\n"
             + "  HTMLElement.prototype.innerHTML = myFunc;\n"
             + "  alert(HTMLElement.prototype.innerHTML == myFunc);\n"
-            + "} catch (e) { alert('exception') }\n"
+            + "} catch (e) { alert('exception set') }\n"
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
