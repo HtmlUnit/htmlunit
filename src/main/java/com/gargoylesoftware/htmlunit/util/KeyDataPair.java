@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.util;
 import java.io.File;
 
 /**
+ * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+ *
  * A holder for a key/value pair that represents a file to upload.
  *
  * @version $Revision$
@@ -24,10 +26,7 @@ import java.io.File;
  * @author David D. Kilzer
  * @author Mike Bowler
  * @author Ahmed Ashour
- * @deprecated as of 2.13, with no replacement
  */
-@Deprecated
-// to be package private or 'use at your own risk' (referenced by HttpWebConnection and HtmlFileInput)
 public class KeyDataPair extends NameValuePair {
 
     private final File fileObject_;
