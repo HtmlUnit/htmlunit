@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import org.apache.commons.logging.Log;
@@ -98,6 +99,12 @@ public class MSXMLScriptable extends SimpleScriptable {
             return getPrototype((Class<? extends SimpleScriptable>) javaScriptClass.getSuperclass());
         }
         return prototype;
+    }
+
+    @Override
+    protected boolean isReadOnlySettable(final String name, final Object value) {
+        throw ScriptRuntime.typeError3("msg.set.prop.no.setter",
+                name, getClassName(), Context.toString(value));
     }
 
     /**
