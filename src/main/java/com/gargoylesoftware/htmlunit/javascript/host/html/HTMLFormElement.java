@@ -444,12 +444,11 @@ public class HTMLFormElement extends HTMLElement implements Function {
                 return true;
             }
 
-            if (!getBrowserVersion().hasFeature(FORMFIELD_REACHABLE_BY_NEW_NAMES)) {
-                return false;
-            }
-            else if (name.equals(element.getAttribute("name"))
-                || elementWithNames.getPreviousNames().contains(name)) {
-                return true;
+            if (getBrowserVersion().hasFeature(FORMFIELD_REACHABLE_BY_NEW_NAMES)) {
+                if (name.equals(element.getAttribute("name"))
+                        || elementWithNames.getPreviousNames().contains(name)) {
+                    return true;
+                }
             }
         }
         return false;

@@ -1189,19 +1189,32 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object HTMLInputElement]", "undefined",
-                        "[object HTMLInputElement]", "[object HTMLInputElement]" },
-            IE = { "[object]", "undefined", "[object]", "undefined" },
-            IE11 = { "[object HTMLInputElement]", "undefined", "undefined", "[object HTMLInputElement]" })
+                        "[object HTMLInputElement]", "[object HTMLInputElement]",
+                        "[object HTMLInputElement]", "[object HTMLInputElement]", "[object HTMLInputElement]" },
+            IE = { "[object]", "undefined",
+                    "[object]", "undefined",
+                    "[object]", "undefined", "undefined" },
+            IE11 = { "[object HTMLInputElement]", "undefined",
+                        "undefined", "[object HTMLInputElement]",
+                        "undefined", "undefined", "[object HTMLInputElement]" })
     public void accessByNameAfterNameChange() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function go() {\n"
+            + "   var field = document.simple_form.originalName;\n"
             + "   alert(document.simple_form.originalName);\n"
             + "   alert(document.simple_form.newName);\n"
-            + "   document.simple_form.originalName.name = 'newName';\n"
+
+            + "   field.name = 'newName';\n"
             + "   alert(document.simple_form.originalName);\n"
             + "   alert(document.simple_form.newName);\n"
-            + "}</script></head>\n"
+
+            + "   field.name = 'brandNewName';\n"
+            + "   alert(document.simple_form.originalName);\n"
+            + "   alert(document.simple_form.newName);\n"
+            + "   alert(document.simple_form.brandNewName);\n"
+            + "}\n"
+            + "</script></head>\n"
             + "<body onload='go()'>\n"
             + "<form name='simple_form'>\n"
             + "   <input name='originalName'>\n"
