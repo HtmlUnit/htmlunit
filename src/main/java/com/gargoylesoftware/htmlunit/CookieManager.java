@@ -97,7 +97,7 @@ public class CookieManager implements Serializable {
      * @param url the URL on which to filter the returned cookies
      * @return the currently configured cookies applicable to the specified URL, in an unmodifiable set
      *
-     * @deprecated as of 2.13 use {@link WebClient#getCookies(URL)}
+     * @deprecated as of 2.15 use {@link WebClient#getCookies(URL)}
      */
     @Deprecated
     public synchronized Set<Cookie> getCookies(final URL url) {
