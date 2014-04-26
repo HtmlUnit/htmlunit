@@ -32,6 +32,7 @@ import java.util.Collection;
  * or through all the names it has had.
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public interface FormFieldWithNameHistory {
     /**
@@ -41,8 +42,8 @@ public interface FormFieldWithNameHistory {
     String getOriginalName();
 
     /**
-     * Get all the names this field had before the current one.
+     * Get all the names this field got after the original one.
      * @return an empty collection if the name attribute has never been changed.
      */
-    Collection<String> getPreviousNames();
+    Collection<String> getNewNames();
 }

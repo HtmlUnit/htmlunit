@@ -302,6 +302,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     FORMFIELD_REACHABLE_BY_NEW_NAMES,
 
+    /** Indicates if a form field is directly reachable by its original name once this has been changed. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 10) })
+    FORMFIELD_REACHABLE_BY_ORIGINAL_NAME,
+
     /** Form submit is done without the hash part of the action url. */
     @BrowserFeature(@WebBrowser(IE))
     FORM_SUBMISSION_URL_WITHOUT_HASH,

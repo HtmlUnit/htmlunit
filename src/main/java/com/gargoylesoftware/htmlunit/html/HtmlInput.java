@@ -53,7 +53,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     private String defaultValue_;
     private String originalName_;
-    private Collection<String> previousNames_ = Collections.emptySet();
+    private Collection<String> newNames_ = Collections.emptySet();
     private boolean createdByJavascript_ = false;
     private Object valueAtFocus_;
 
@@ -510,10 +510,10 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     @Override
     public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
         if ("name".equals(qualifiedName)) {
-            if (previousNames_.isEmpty()) {
-                previousNames_ = new HashSet<String>();
+            if (newNames_.isEmpty()) {
+                newNames_ = new HashSet<String>();
             }
-            previousNames_.add(attributeValue);
+            newNames_.add(attributeValue);
         }
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
     }
@@ -528,8 +528,8 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     /**
      * {@inheritDoc}
      */
-    public Collection<String> getPreviousNames() {
-        return previousNames_;
+    public Collection<String> getNewNames() {
+        return newNames_;
     }
 
     /**

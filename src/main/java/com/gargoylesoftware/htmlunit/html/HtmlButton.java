@@ -50,7 +50,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "button";
     private String originalName_;
-    private Collection<String> previousNames_ = Collections.emptySet();
+    private Collection<String> newNames_ = Collections.emptySet();
 
     /**
      * Creates a new instance.
@@ -295,10 +295,10 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     @Override
     public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
         if ("name".equals(qualifiedName)) {
-            if (previousNames_.isEmpty()) {
-                previousNames_ = new HashSet<String>();
+            if (newNames_.isEmpty()) {
+                newNames_ = new HashSet<String>();
             }
-            previousNames_.add(attributeValue);
+            newNames_.add(attributeValue);
         }
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
     }
@@ -313,8 +313,8 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     /**
      * {@inheritDoc}
      */
-    public Collection<String> getPreviousNames() {
-        return previousNames_;
+    public Collection<String> getNewNames() {
+        return newNames_;
     }
 
     /**

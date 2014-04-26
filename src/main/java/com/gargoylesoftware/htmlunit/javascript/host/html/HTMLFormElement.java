@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORMFIELD_REACHABLE_BY_NEW_NAMES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORMFIELD_REACHABLE_BY_ORIGINAL_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_80;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_81;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_ACTION_EXPANDURL;
@@ -438,15 +439,21 @@ public class HTMLFormElement extends HTMLElement implements Function {
             if (element.getEnclosingForm() != getHtmlForm()) {
                 return false; // nested forms
             }
+            if (name.equals(element.getId())) {
+                return true;
+            }
             final FormFieldWithNameHistory elementWithNames = (FormFieldWithNameHistory) element;
-            if (name.equals(elementWithNames.getOriginalName())
-                    || name.equals(element.getId())) {
+            if (getBrowserVersion().hasFeature(FORMFIELD_REACHABLE_BY_ORIGINAL_NAME)) {
+                if (name.equals(elementWithNames.getOriginalName())) {
+                    return true;
+                }
+            }
+            else if (name.equals(element.getAttribute("name"))) {
                 return true;
             }
 
             if (getBrowserVersion().hasFeature(FORMFIELD_REACHABLE_BY_NEW_NAMES)) {
-                if (name.equals(element.getAttribute("name"))
-                        || elementWithNames.getPreviousNames().contains(name)) {
+                if (elementWithNames.getNewNames().contains(name)) {
                     return true;
                 }
             }
