@@ -26,11 +26,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -62,94 +58,6 @@ public class Node2Test extends SimpleWebTestCase {
             + "</script></head><body onload='doTest()'><div id='a'><div id='b'/></div></html>";
         final HtmlPage page = loadPageWithAlerts(html);
         assertNotNull(page.getHtmlElementById("b").getParentNode());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(FF = "exception",
-            IE = { "[object]", "[object]" },
-            IE11 = { "[object MouseEvent]", "[object MouseEvent]" })
-    public void event() throws Exception {
-        final String firstHtml = "<html>\n"
-            + "<head><title>First Page</title>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var iframe = document.createElement('iframe');\n"
-            + "    document.body.appendChild(iframe);\n"
-            + "    iframe.contentWindow.location.replace('" + URL_SECOND + "');\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "    <input type='button' id='myInput' value='Test me'>\n"
-            + "    <div id='myDiv'></div>\n"
-            + "</body>\n"
-            + "</html>";
-        final String secondHtml =
-            "<html>\n"
-            + "  <head>\n"
-            + "    <script>\n"
-            + "      var handler = function() {\n"
-            + "        alert(parent.event);\n"
-            + "        parent.document.getElementById('myDiv').style.display = 'none';\n"
-            + "        alert(parent.event);\n"
-            + "      }\n"
-            + "      function test() {\n"
-            + "        try {\n"
-            + "          parent.document.body.attachEvent('onclick', handler);\n"
-            + "        } catch(e) { alert('exception') };\n"
-            + "      }\n"
-            + "    </script>\n"
-            + "  </head>\n"
-            + "  <body onload='test()'>\n"
-            + "  </body>\n"
-            + "</html>";
-
-        final WebClient client = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, firstHtml);
-        conn.setResponse(URL_SECOND, secondHtml);
-        client.setWebConnection(conn);
-
-        final HtmlPage page = client.getPage(URL_FIRST);
-        page.getHtmlElementById("myInput").click();
-        assertEquals(getExpectedAlerts(), collectedAlerts);
-    }
-
-    /**
-     * Verifies that attributes belonging to cloned nodes are available via JavaScript.
-     * http://sourceforge.net/p/htmlunit/bugs/659/
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("id=bar")
-    public void testCloneAttributesAvailable() throws Exception {
-        final String html =
-              "<html>\n"
-            + "  <head>\n"
-            + "  <script type='text/javascript'>\n"
-            + "    function go() {\n"
-            + "        var node = document.getElementById('foo');\n"
-            + "        var clone = node.cloneNode(true);\n"
-            + "        clone.id = 'bar';\n"
-            + "        node.appendChild(clone);\n"
-            + "        alert(clone.attributes[0].nodeName + '=' + clone.attributes[0].nodeValue);\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "  </head>\n"
-            + "  <body onload='go()'>\n"
-            + "    <div id='foo'></div>\n"
-            + "  </body>\n"
-            + "</html>";
-
-        final HtmlPage page = loadPageWithAlerts(html);
-        final HtmlElement element = page.getHtmlElementById("bar");
-        final String value = element.getAttribute("id");
-        assertEquals("bar", value);
     }
 
     /**

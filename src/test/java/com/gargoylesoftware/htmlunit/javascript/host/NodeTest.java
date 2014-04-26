@@ -23,7 +23,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE9;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.
-    SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION;
+                                                                    SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.callCreateXMLDocument;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.callLoadXMLDocumentFromString;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.callSerializeXMLDocumentToString;
@@ -32,6 +32,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -922,5 +923,87 @@ public class NodeTest extends WebDriverTestCase {
             + "</html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE8 = { "[object]", "[object]" })
+    public void event() throws Exception {
+        final String firstHtml = "<html>\n"
+            + "<head><title>First Page</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var iframe = document.createElement('iframe');\n"
+            + "    document.body.appendChild(iframe);\n"
+            + "    iframe.contentWindow.location.replace('" + URL_SECOND + "');\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "    <input type='button' id='myInput' value='Test me'>\n"
+            + "    <div id='myDiv'></div>\n"
+            + "</body>\n"
+            + "</html>";
+        final String secondHtml =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      var handler = function() {\n"
+            + "        alert(parent.event);\n"
+            + "        parent.document.getElementById('myDiv').style.display = 'none';\n"
+            + "        alert(parent.event);\n"
+            + "      }\n"
+            + "      function test() {\n"
+            + "        try {\n"
+            + "          parent.document.body.attachEvent('onclick', handler);\n"
+            + "        } catch(e) { alert('exception') };\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        getMockWebConnection().setResponse(URL_FIRST, firstHtml);
+        getMockWebConnection().setResponse(URL_SECOND, secondHtml);
+
+        final WebDriver driver = loadPage2(firstHtml, URL_FIRST);
+        driver.findElement(By.id("myInput")).click();
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * Verifies that attributes belonging to cloned nodes are available via JavaScript.
+     * http://sourceforge.net/p/htmlunit/bugs/659/
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("id=bar")
+    public void testCloneAttributesAvailable() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "  <script type='text/javascript'>\n"
+            + "    function go() {\n"
+            + "        var node = document.getElementById('foo');\n"
+            + "        var clone = node.cloneNode(true);\n"
+            + "        clone.id = 'bar';\n"
+            + "        node.appendChild(clone);\n"
+            + "        alert(clone.attributes[0].nodeName + '=' + clone.attributes[0].nodeValue);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "  </head>\n"
+            + "  <body onload='go()'>\n"
+            + "    <div id='foo'></div>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebElement element = driver.findElement(By.id("bar"));
+        final String value = element.getAttribute("id");
+        assertEquals("bar", value);
     }
 }
