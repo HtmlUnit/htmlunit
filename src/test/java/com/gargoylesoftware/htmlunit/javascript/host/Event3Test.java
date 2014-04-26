@@ -21,7 +21,6 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
@@ -38,8 +37,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
-import com.gargoylesoftware.htmlunit.html.HtmlDivision;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -57,37 +54,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public class Event3Test extends SimpleWebTestCase {
 
     /**
-     * Tests that event fires on key press.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testEventOnKeyDown() throws Exception {
-        final String html
-            = "<html><head></head><body>\n"
-            + "<button type='button' id='clickId'>Click Me</button>\n"
-            + "<script>\n"
-            + "function handler(_e) {\n"
-            + "  var e = _e ? _e : window.event;\n"
-            + "  if (e.keyCode == 65)\n"
-            + "    alert('pass');\n"
-            + "  else\n"
-            + "    alert('fail:' + e.keyCode);\n"
-            + "}\n"
-            + "document.getElementById('clickId').onkeydown = handler;\n"
-            + "document.getElementById('clickId').onclick = handler;</script>\n"
-            + "</body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
-        final HtmlElement element = page.getHtmlElementById("clickId");
-        element.type('A');
-        element.type('B');
-        element.click();
-        final String[] expectedAlerts = {"pass", "fail:66", "fail:undefined"};
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -102,15 +68,17 @@ public class Event3Test extends SimpleWebTestCase {
     private void testEventOnKeyDown_Shift_Ctrl_Alt(final boolean shiftKey,
             final boolean ctrlKey, final boolean altKey, final String[] expectedAlerts) throws Exception {
         final String content
-            = "<html><head></head><body>\n"
-            + "<button type='button' id='clickId'/>\n"
-            + "<script>\n"
-            + "function handler(_e) {\n"
-            + "  var e = _e ? _e : window.event;\n"
-            + "  alert(e.shiftKey + ',' + e.ctrlKey + ',' + e.altKey);\n"
-            + "}\n"
-            + "document.getElementById('clickId').onkeydown = handler;\n"
-            + "</script>\n"
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <button type='button' id='clickId'/>\n"
+            + "  <script>\n"
+            + "    function handler(_e) {\n"
+            + "      var e = _e ? _e : window.event;\n"
+            + "      alert(e.shiftKey + ',' + e.ctrlKey + ',' + e.altKey);\n"
+            + "    }\n"
+            + "    document.getElementById('clickId').onkeydown = handler;\n"
+            + "  </script>\n"
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<String>();
@@ -365,39 +333,6 @@ public class Event3Test extends SimpleWebTestCase {
     }
 
     /**
-     * Verifies that in IE, the <tt>shiftKey</tt>, <tt>ctrlKey</tt> and <tt>altKey</tt>
-     * event attributes are defined for all events, but <tt>metaKey</tt> is not defined
-     * for any events.<br/>
-     * Verifies that in FF, the <tt>shiftKey</tt>, <tt>ctrlKey</tt>, <tt>altKey</tt> and
-     * <tt>metaKey</tt> attributes are defined for mouse events only.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(FF = {"object", "undefined", "undefined", "undefined", "undefined",
-            "object", "false", "false", "false", "false" },
-            IE = {"object", "false", "false", "false", "undefined",
-            "object", "false", "false", "false", "undefined" })
-    public void testKeys() throws Exception {
-        final String html =
-              "<html><body onload='test(event)'><script>\n"
-            + "    function test(e) {\n"
-            + "        alert(typeof e);\n"
-            + "        alert(e.shiftKey);\n"
-            + "        alert(e.ctrlKey);\n"
-            + "        alert(e.altKey);\n"
-            + "        alert(e.metaKey);\n"
-            + "    }\n"
-            + "</script>\n"
-            + "<div id='div' onclick='test(event)'>abc</div>\n"
-            + "</body></html>";
-        final List<String> actual = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), html, actual);
-        final HtmlDivision div = page.getHtmlElementById("div");
-        div.click();
-        assertEquals(Arrays.toString(getExpectedAlerts()), actual.toString());
-    }
-
-    /**
      * @throws Exception if an error occurs
      */
     @Test
@@ -518,36 +453,6 @@ public class Event3Test extends SimpleWebTestCase {
         else {
             assertSame(page, secondPage);
         }
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void preventDefault() throws Exception {
-        final String html =
-            "<html><head><title>First</title>\n"
-            + "<script>\n"
-            + "function block(e) {\n"
-            + "  if (e && e.preventDefault)\n"
-            + "    e.preventDefault();\n"
-            + "  else\n"
-            + "    return false;\n"
-            + "}\n"
-            + "\n"
-            + "function test() {\n"
-            + "  document.getElementById('myForm').onsubmit = block;\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<form id='myForm' action='doesnt_exist.html'>\n"
-            + "  <input type='submit' id='mySubmit' value='Continue'></p>\n"
-            + "</form>"
-            + "</body></html>";
-
-        final HtmlPage page = loadPageWithAlerts(html);
-        final HtmlPage page2 = page.getHtmlElementById("mySubmit").click();
-        assertEquals(getDefaultUrl(), page2.getUrl());
     }
 
 }

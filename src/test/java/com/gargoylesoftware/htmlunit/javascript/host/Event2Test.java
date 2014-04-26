@@ -22,6 +22,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -303,5 +304,102 @@ public class Event2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickMe")).click();
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * Tests that event fires on key press.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "pass", "fail:66", "fail:undefined" })
+    public void testEventOnKeyDown() throws Exception {
+        final String html
+            = "<html><head></head>\n"
+            + "<body>\n"
+            + "  <button type='button' id='clickId'>Click Me</button>\n"
+            + "  <script>\n"
+            + "    function handler(_e) {\n"
+            + "      var e = _e ? _e : window.event;\n"
+            + "      if (e.keyCode == 65)\n"
+            + "        alert('pass');\n"
+            + "      else\n"
+            + "        alert('fail:' + e.keyCode);\n"
+            + "    }\n"
+            + "    document.getElementById('clickId').onkeydown = handler;\n"
+            + "    document.getElementById('clickId').onclick = handler;\n"
+            + "  </script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement element = driver.findElement(By.id("clickId"));
+        element.sendKeys("a");
+        element.sendKeys("b");
+        element.click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * Verifies that in IE, the <tt>shiftKey</tt>, <tt>ctrlKey</tt> and <tt>altKey</tt>
+     * event attributes are defined for all events, but <tt>metaKey</tt> is not defined
+     * for any events.<br/>
+     * Verifies that in FF, the <tt>shiftKey</tt>, <tt>ctrlKey</tt>, <tt>altKey</tt> and
+     * <tt>metaKey</tt> attributes are defined for mouse events only.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"object", "undefined", "undefined", "undefined", "undefined",
+            "object", "false", "false", "false", "false" },
+            IE8 = {"object", "false", "false", "false", "undefined",
+            "object", "false", "false", "false", "undefined" })
+    public void testKeys() throws Exception {
+        final String html =
+              "<html><body onload='test(event)'><script>\n"
+            + "    function test(e) {\n"
+            + "        alert(typeof e);\n"
+            + "        alert(e.shiftKey);\n"
+            + "        alert(e.ctrlKey);\n"
+            + "        alert(e.altKey);\n"
+            + "        alert(e.metaKey);\n"
+            + "    }\n"
+            + "</script>\n"
+            + "<div id='div' onclick='test(event)'>abc</div>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement element = driver.findElement(By.id("div"));
+        element.click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void preventDefault() throws Exception {
+        final String html =
+            "<html><head><title>First</title>\n"
+            + "<script>\n"
+            + "function block(e) {\n"
+            + "  if (e && e.preventDefault)\n"
+            + "    e.preventDefault();\n"
+            + "  else\n"
+            + "    return false;\n"
+            + "}\n"
+            + "\n"
+            + "function test() {\n"
+            + "  document.getElementById('myForm').onsubmit = block;\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form id='myForm' action='doesnt_exist.html'>\n"
+            + "  <input type='submit' id='mySubmit' value='Continue'></p>\n"
+            + "</form>"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        driver.findElement(By.id("mySubmit"));
+        assertEquals(getDefaultUrl().toExternalForm(), driver.getCurrentUrl());
     }
 }
