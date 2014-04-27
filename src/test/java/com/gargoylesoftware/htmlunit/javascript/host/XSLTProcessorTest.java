@@ -14,42 +14,49 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.net.URL;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link XSLTProcessor}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class XSLTProcessorTest extends SimpleWebTestCase {
+public class XSLTProcessorTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "97", "null" }, IE = "97")
+    @Alerts(FF = { "97", "[object Element]" },
+            IE = { "<html><body><h2>My CD Collection</h2><ul></ul></body></html>",
+                    "<?xml version=\"1.0\" encoding=\"UTF-16\"?>My CD Collection ()" })
+    @NotYetImplemented
     public void test() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var xmlDoc = createXmlDocument();\n"
             + "    xmlDoc.async = false;\n"
-            + "    xmlDoc.load('" + URL_SECOND + "');\n"
-            + "    \n"
+            + "    xmlDoc.load('" + URL_SECOND + "2');\n"
+
             + "    var xslDoc;\n"
             + "    if (window.ActiveXObject)\n"
             + "      xslDoc = new ActiveXObject('Msxml2.FreeThreadedDOMDocument.3.0');\n"
             + "    else\n"
             + "      xslDoc = createXmlDocument();\n"
             + "    xslDoc.async = false;\n"
-            + "    xslDoc.load('" + URL_THIRD + "');\n"
+            + "    xslDoc.load('" + URL_SECOND + "2');\n"
             + "    \n"
             + "    if (window.ActiveXObject) {\n"
             + "      var xslt = new ActiveXObject('Msxml2.XSLTemplate.3.0');\n"
@@ -58,9 +65,12 @@ public class XSLTProcessorTest extends SimpleWebTestCase {
             + "      xslProc.input = xmlDoc;\n"
             + "      xslProc.transform();\n"
             + "      var s = xslProc.output.replace(/\\r?\\n/g, '');\n"
-            + "      alert(s.length);\n"
+            + "      alert(s);\n"
             + "      xslProc.input = xmlDoc.documentElement;\n"
             + "      xslProc.transform();\n"
+            + "      var s = xslProc.output.replace(/\\r?\\n/g, '');\n"
+            + "      s = s.replace(/\\s+/g, ' ');\n"
+            + "      alert(s);\n"
             + "    } else {\n"
             + "      var processor = new XSLTProcessor();\n"
             + "      processor.importStylesheet(xslDoc);\n"
@@ -110,9 +120,9 @@ public class XSLTProcessorTest extends SimpleWebTestCase {
             + "</xsl:stylesheet>";
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(URL_SECOND, xml, "text/xml");
-        conn.setResponse(URL_THIRD, xsl, "text/xml");
+        conn.setResponse(new URL(URL_SECOND, "1"), xml, "text/xml");
+        conn.setResponse(new URL(URL_SECOND, "2"), xsl, "text/xml");
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }
