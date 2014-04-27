@@ -671,6 +671,7 @@ public class KeyboardEvent extends UIEvent {
     public Object getKeyCode() {
         return super.getKeyCode();
     }
+
     /**
      * @return whether SHIFT has been pressed during this event or not
      */
