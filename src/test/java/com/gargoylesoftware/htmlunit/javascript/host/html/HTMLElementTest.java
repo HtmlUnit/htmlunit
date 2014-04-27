@@ -230,6 +230,33 @@ public class HTMLElementTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "text", "i", "i", "[object CSS2Properties]", "function", "undefined", "undefined" },
+            IE11 = { "text", "i", "i", "[object MSStyleCSSProperties]", "function", "undefined", "undefined" })
+    @NotYetImplemented
+    public void attributesAccess() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <input type='text' id='i' name='i' style='color:red' onclick='alert(1)' custom1='a' />\n"
+            + "  <script>\n"
+            + "    var i = document.getElementById('i');\n"
+            + "    alert(i.type);\n"
+            + "    alert(i.id);\n"
+            + "    alert(i.name);\n"
+            + "    alert(i.style);\n"
+            + "    alert(typeof i.onclick);\n"
+            + "    alert(i.custom1);\n"
+            + "    alert(i.custom2);\n"
+            + "  </script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception on test failure
      */
     @Test
@@ -3098,21 +3125,31 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts(IE = { "false,false,false,false,false,false,false", "false,false,false,false,false,true,true" },
+    @Alerts(DEFAULT = { "false,false,false,false,false,true,false", "clearAttributes not available" },
+            IE = { "false,false,false,false,false,false,false", "false,false,false,false,false,true,true" },
             IE11 = { "false,false,false,false,false,true,false", "false,false,false,false,false,true,false" })
+    @NotYetImplemented
     public void clearAttributes() throws Exception {
         final String html
-            = "<input type='text' id='i' name='i' style='color:red' onclick='alert(1)' custom1='a' /><script>\n"
-            + "function u(o) { return typeof o == 'undefined'; }\n"
-            + "var i = document.getElementById('i');\n"
-            + "i.custom2 = 'b';\n"
-            + "alert([u(i.type), u(i.id), u(i.name), u(i.style), u(i.onclick),"
-            + "       u(i.custom1), u(i.custom2)].join(','));\n"
-            + "i.clearAttributes();\n"
-            + "alert([u(i.type), u(i.id), u(i.name), u(i.style), u(i.onclick),"
-            + "       u(i.custom1), u(i.custom2)].join(','));\n"
-            + "</script>";
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function u(o) { return typeof o == 'undefined'; }\n"
+            + "</script></head>\n"
+            + "<body>\n"
+            + "  <input type='text' id='i' name='i' style='color:red' onclick='alert(1)' custom1='a' />\n"
+            + "  <script>\n"
+            + "    var i = document.getElementById('i');\n"
+            + "    i.custom2 = 'b';\n"
+            + "    alert([u(i.type), u(i.id), u(i.name), u(i.style), u(i.onclick),"
+            + "           u(i.custom1), u(i.custom2)].join(','));\n"
+            + "    if(i.clearAttributes) {\n"
+            + "      alert([u(i.type), u(i.id), u(i.name), u(i.style), u(i.onclick),"
+            + "             u(i.custom1), u(i.custom2)].join(','));\n"
+            + "    } else {\n"
+            + "      alert('clearAttributes not available');\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</body></html>";
         loadPageWithAlerts2(html);
     }
 
