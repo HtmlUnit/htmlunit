@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_49;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_50;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_COMMENT_IS_ELEMENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_ITEM_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION;
 
@@ -166,7 +167,14 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
         if (args.length == 0) {
             throw Context.reportRuntimeError("Zero arguments; need an index or a key.");
         }
-        return nullIfNotFound(getIt(args[0]));
+        final Object object = getIt(args[0]);
+        if (object == NOT_FOUND) {
+            if (getBrowserVersion().hasFeature(HTMLCOLLECTION_NULL_IF_NOT_FOUND)) {
+                return null;
+            }
+            return Context.getUndefinedValue();
+        }
+        return object;
     }
 
     /**
@@ -372,19 +380,9 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
      */
     @JsxFunction
     public final Object item(final Object index) {
-        return nullIfNotFound(getIt(index));
-    }
-
-    /**
-     * Returns the specified object, unless it is the <tt>NOT_FOUND</tt> constant, in which case <tt>null</tt>
-     * is returned for IE.
-     * @param object the object to return
-     * @return the specified object, unless it is the <tt>NOT_FOUND</tt> constant, in which case <tt>null</tt>
-     *         is returned for IE.
-     */
-    private Object nullIfNotFound(final Object object) {
+        final Object object = getIt(index);
         if (object == NOT_FOUND) {
-            if (getBrowserVersion().hasFeature(HTMLCOLLECTION_NULL_IF_NOT_FOUND)) {
+            if (getBrowserVersion().hasFeature(HTMLCOLLECTION_NULL_IF_ITEM_NOT_FOUND)) {
                 return null;
             }
             return Context.getUndefinedValue();

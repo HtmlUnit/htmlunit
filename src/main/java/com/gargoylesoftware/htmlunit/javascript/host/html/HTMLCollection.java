@@ -14,9 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_50;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_COMMENT_IS_ELEMENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_ITEM_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -249,7 +249,7 @@ public class HTMLCollection extends NodeList {
      */
     private Object nullIfNotFound(final Object object) {
         if (object == NOT_FOUND) {
-            if (getBrowserVersion().hasFeature(HTMLCOLLECTION_NULL_IF_NOT_FOUND)) {
+            if (getBrowserVersion().hasFeature(HTMLCOLLECTION_NULL_IF_ITEM_NOT_FOUND)) {
                 return null;
             }
             return Context.getUndefinedValue();
