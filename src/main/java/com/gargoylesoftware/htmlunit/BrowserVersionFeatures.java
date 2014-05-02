@@ -1009,7 +1009,7 @@ public enum BrowserVersionFeatures {
      * Indicates that function can be defined as
      * <code>function object.property() {}</code> instead of <code>object.property = function() {}</code>.
      */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 10))
     JS_FUNCTION_OBJECT_METHOD,
 
     /** Indicates if the method toSource exists on the native objects. */

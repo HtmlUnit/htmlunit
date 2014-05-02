@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
@@ -25,7 +26,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -331,8 +332,8 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
     @Alerts(IE8 = { "1", "2" })
+    @NotYetImplemented({ FF17, FF24, Browser.IE11 })
     public void function_object_method() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
                 + "  try {\n"
@@ -342,7 +343,8 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
                 + "    }\n"
                 + "    alert('2');\n"
                 + "  } catch(e) {alert(e)}\n"
-                + "</script></head><body>\n"
+                + "</script></head>\n"
+                + "<body>\n"
                 + "  <div id='myDiv'>Hello there</div>\n"
                 + "</body></html>";
 
