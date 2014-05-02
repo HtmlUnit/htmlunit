@@ -2019,7 +2019,7 @@ public class WebClientTest extends SimpleWebTestCase {
 
         final HtmlPage page3 = client.getPage(URL_THIRD);
         ((HTMLStyleElement) page3.getBody().getFirstChild().getScriptObject()).getSheet();
-        assertEquals(3, errors.intValue());
+        assertEquals(2, errors.intValue());
         assertEquals("http://127.0.0.1:" + PORT + "/third/http://127.0.0.1:" + PORT + "/third/", errorUri.toString());
     }
 
