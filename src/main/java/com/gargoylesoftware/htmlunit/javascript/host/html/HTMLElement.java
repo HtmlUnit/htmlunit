@@ -32,7 +32,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_EX
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_CREATES_DOC_FRAGMENT_AS_PARENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_REDUCE_WHITESPACES;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_SCRIPT_STARTSWITH_NEW_LINE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_THROWS_NOT_ATTACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_NULL_AS_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_REMOVES_CHILDS_FOR_DETACHED;
@@ -864,7 +864,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         final String tagName = getTagName();
         boolean isPlain = "SCRIPT".equals(tagName);
-        if (isPlain && getBrowserVersion().hasFeature(JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE)) {
+        if (isPlain && getBrowserVersion().hasFeature(JS_INNER_HTML_SCRIPT_STARTSWITH_NEW_LINE)) {
             buf.append("\r\n");
         }
 

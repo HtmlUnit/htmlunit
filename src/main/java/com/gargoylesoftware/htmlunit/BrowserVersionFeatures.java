@@ -1091,6 +1091,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_INNER_HTML_REDUCE_WHITESPACES,
 
+    /** the inner html of a script tag start always with a \r\n. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 10))
+    JS_INNER_HTML_SCRIPT_STARTSWITH_NEW_LINE,
+
     /** Indicates that innerText is readonly for tables. */
     @BrowserFeature(@WebBrowser(CHROME))
     JS_INNER_TEXT_READONLY_FOR_TABLE,
