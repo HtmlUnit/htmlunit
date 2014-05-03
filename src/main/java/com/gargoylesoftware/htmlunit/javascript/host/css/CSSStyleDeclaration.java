@@ -3997,7 +3997,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param name the style property name
      * @return empty string if nothing found
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 9) })
     public String getPropertyValue(final String name) {
         if (name != null && name.contains("-")) {
             final Object value = getProperty(this, camelize(name));

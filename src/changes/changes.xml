@@ -9,6 +9,9 @@
     <body>
         <release version="2.15" date="???" description="Bugfixes, IE11 progress">
             <action type="update" dev="asashour">
+                JavaScript: ComputedCSSStyleDeclaration.getPropertyValue is supported in Chrome.
+            </action>
+            <action type="update" dev="asashour">
                 KeyDataPair: marked as internal API.
             </action>
             <action type="fix" dev="rbri" issue="1593">
