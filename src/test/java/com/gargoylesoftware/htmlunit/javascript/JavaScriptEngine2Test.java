@@ -17,16 +17,19 @@ package com.gargoylesoftware.htmlunit.javascript;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -333,7 +336,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE8 = { "1", "2" })
-    @NotYetImplemented({ FF17, FF24, Browser.IE11 })
+    @BuggyWebDriver({ IE11, FF17, FF24 })
     public void function_object_method() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
                 + "  try {\n"
@@ -348,7 +351,15 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
                 + "  <div id='myDiv'>Hello there</div>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        try {
+            loadPageWithAlerts2(html);
+            if (getExpectedAlerts().length == 0) {
+                Assert.fail("WebDriverException expected");
+            }
+        }
+        catch (final WebDriverException e) {
+            // at the moment we do not get the syntax exception when running in selenium
+        }
     }
 
     /**
