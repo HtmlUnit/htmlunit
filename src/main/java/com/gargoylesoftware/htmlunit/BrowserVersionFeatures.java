@@ -364,10 +364,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
-    GENERATED_72,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
     GENERATED_80,
 
     /** Was originally .isIE(). */
@@ -1162,11 +1158,20 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_OBJECT_IN_QUIRKS_MODE,
 
+    /** Indicates that someObj.offsetParent returns null, it someObj has fixed style.
+     */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_OFFSET_PARENT_NULL_IF_FIXED,
+
     /** Indicates that someObj.offsetParent throws an exception when called on an object that is not yet attached
      *  to the page's DOM.
      */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_OFFSET_PARENT_THROWS_NOT_ATTACHED,
+
+    /** Was originally .isIE(). */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 10))
+    JS_OFFSET_PARENT_USE_TABLES_IF_FIXED,
 
     /** Setting the property opacity of an css style declaration to arbitrary values is allowed.
      * FF accepts only valid floats.

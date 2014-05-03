@@ -1378,7 +1378,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div></div><div></div>",
                     "Childs: 1" },
             IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <DIV></DIV><DIV></DIV>", "Childs: 1" })
-    @NotYetImplemented({ FF17, FF24, IE8 })
+    @NotYetImplemented({ FF17, FF24, IE8, IE11 })
     public void setOuterHTMLAddMultipleSelfClosingBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div/><div>");
         loadPageWithAlerts2(html);
@@ -2144,7 +2144,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "body", "exception" },
+    @Alerts(DEFAULT = { "null", "body", "exception", "body", "body", "body",
+            "f1", "body", "h1", "i1", "td", "exception", "td", "body", "body" },
             FF = { "null", "body", "body", "body", "body", "body",
             "f1", "body", "h1", "i1", "td", "body", "td", "body", "body" },
             IE8 = { "null", "body", "body", "body", "body", "body",
@@ -2173,25 +2174,28 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "      </tr>\n"
             + "    </table>\n"
             + "    <script>\n"
+            + "      function alertOffsetParentId(id) {\n"
+            + "        try {\n"
+            + "          alert(document.getElementById(id).offsetParent.id);\n"
+            + "        } catch (e) { alert('exception'); }\n"
+            + "      }\n"
             + "      function test() {\n"
-            + "      try {\n"
-            + "                                                              // FF   IE   \n"
+            + "                                   // FF   IE   \n"
             + "        alert(document.getElementById('body').offsetParent);  // null null \n"
-            + "        alert(document.getElementById('a2').offsetParent.id); // body body \n"
-            + "        alert(document.getElementById('b2').offsetParent.id); // body body \n"
-            + "        alert(document.getElementById('c2').offsetParent.id); // body body \n"
-            + "        alert(document.getElementById('d2').offsetParent.id); // body body \n"
-            + "        alert(document.getElementById('e2').offsetParent.id); // body body \n"
-            + "        alert(document.getElementById('f2').offsetParent.id); // f1   body \n"
-            + "        alert(document.getElementById('g2').offsetParent.id); // body body \n"
-            + "        alert(document.getElementById('h2').offsetParent.id); // h1   h1   \n"
-            + "        alert(document.getElementById('i2').offsetParent.id); // i1   i1   \n"
-            + "        alert(document.getElementById('j2').offsetParent.id); // td   td   \n"
-            + "        alert(document.getElementById('k2').offsetParent.id); // body td   \n"
-            + "        alert(document.getElementById('l2').offsetParent.id); // td   td   \n"
-            + "        alert(document.getElementById('m2').offsetParent.id); // body body \n"
-            + "        alert(document.getElementById('n2').offsetParent.id); // body body \n"
-            + "      } catch (e) { alert('exception'); }\n"
+            + "        alertOffsetParentId('a2'); // body body \n"
+            + "        alertOffsetParentId('b2'); // body body \n"
+            + "        alertOffsetParentId('c2'); // body body \n"
+            + "        alertOffsetParentId('d2'); // body body \n"
+            + "        alertOffsetParentId('e2'); // body body \n"
+            + "        alertOffsetParentId('f2'); // f1   body \n"
+            + "        alertOffsetParentId('g2'); // body body \n"
+            + "        alertOffsetParentId('h2'); // h1   h1   \n"
+            + "        alertOffsetParentId('i2'); // i1   i1   \n"
+            + "        alertOffsetParentId('j2'); // td   td   \n"
+            + "        alertOffsetParentId('k2'); // body td   \n"
+            + "        alertOffsetParentId('l2'); // td   td   \n"
+            + "        alertOffsetParentId('m2'); // body body \n"
+            + "        alertOffsetParentId('n2'); // body body \n"
             + "      }\n"
             + "    </script>\n"
             + "  </body>\n"
@@ -3187,18 +3191,18 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<input type='text' id='i2' name='i2' style='color:red' onclick='alert(1)' custom1='a' />\n"
             + "<script>\n"
             + "function u(o) { return typeof o == 'undefined'; }\n"
-            + "var i = document.getElementById('i');\n"
-            + "var i2 = document.getElementById('i2');\n"
-            + "i2.custom2 = 'b';\n"
-            + "alert([u(i.type), u(i.id), u(i.name), u(i.style), u(i.onclick),"
-            + "       u(i.custom1), u(i.custom2)].join(','));\n"
-            + "alert(i.id);\n"
-            + "alert(i.name);\n"
-            + "i.mergeAttributes(" + params + ");\n"
-            + "alert([u(i.type), u(i.id), u(i.name), u(i.style), u(i.onclick),"
-            + "       u(i.custom1), u(i.custom2)].join(','));\n"
-            + "alert(i.id);\n"
-            + "alert(i.name);\n"
+            + "  var i = document.getElementById('i');\n"
+            + "  var i2 = document.getElementById('i2');\n"
+            + "  i2.custom2 = 'b';\n"
+            + "  alert([u(i.type), u(i.id), u(i.name), u(i.style), u(i.onclick),"
+            + "         u(i.custom1), u(i.custom2)].join(','));\n"
+            + "  alert(i.id);\n"
+            + "  alert(i.name);\n"
+            + "  i.mergeAttributes(" + params + ");\n"
+            + "  alert([u(i.type), u(i.id), u(i.name), u(i.style), u(i.onclick),"
+            + "         u(i.custom1), u(i.custom2)].join(','));\n"
+            + "  alert(i.id);\n"
+            + "  alert(i.name);\n"
             + "</script>";
 
         setExpectedAlerts(expectedAlerts);

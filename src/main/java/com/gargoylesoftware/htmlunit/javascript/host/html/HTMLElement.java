@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_72;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ATTRIBUTE_FIX_IN_QUIRKS_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_OUTER_HTML_UPPER_CASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_OUTER_INNER_HTML_QUOTE_ATTRIBUTES;
@@ -33,7 +32,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_CREATES_DOC_FRAGMENT_AS_PARENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_REDUCE_WHITESPACES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_SCRIPT_STARTSWITH_NEW_LINE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_NULL_IF_FIXED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_THROWS_NOT_ATTACHED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_USE_TABLES_IF_FIXED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_NULL_AS_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_REMOVES_CHILDS_FOR_DETACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_THROWS_FOR_DETACHED;
@@ -2775,12 +2776,18 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         Object offsetParent = null;
         final HTMLElement htmlElement = (HTMLElement) currentElement.getScriptObject();
+        if (getBrowserVersion().hasFeature(JS_OFFSET_PARENT_NULL_IF_FIXED)
+                && "fixed".equals(htmlElement.getStyle().getPosition())) {
+            return null;
+        }
+
         final ComputedCSSStyleDeclaration style = htmlElement.getWindow().getComputedStyle(htmlElement, null);
         final String position = style.getPositionWithInheritance();
-        final boolean ie = getBrowserVersion().hasFeature(GENERATED_72);
+        final boolean useTablesIfFixed = getBrowserVersion().hasFeature(JS_OFFSET_PARENT_USE_TABLES_IF_FIXED);
         final boolean staticPos = "static".equals(position);
+
         final boolean fixedPos = "fixed".equals(position);
-        final boolean useTables = ((ie && (staticPos || fixedPos)) || (!ie && staticPos));
+        final boolean useTables = ((useTablesIfFixed && (staticPos || fixedPos)) || (!useTablesIfFixed && staticPos));
 
         while (currentElement != null) {
 
@@ -2799,7 +2806,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 final String parentPosition = parentStyle.getPositionWithInheritance();
                 final boolean parentIsStatic = "static".equals(parentPosition);
                 final boolean parentIsFixed = "fixed".equals(parentPosition);
-                if ((ie && !parentIsStatic && !parentIsFixed) || (!ie && !parentIsStatic)) {
+                if ((useTablesIfFixed && !parentIsStatic && !parentIsFixed) || (!useTablesIfFixed && !parentIsStatic)) {
                     offsetParent = parentNode.getScriptObject();
                     break;
                 }
