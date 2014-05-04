@@ -959,7 +959,7 @@ public enum BrowserVersionFeatures {
     JS_FORM_REJECT_INVALID_ENCODING,
 
     /** Support for document.formName('inputName'). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 10))
+    @BrowserFeature(@WebBrowser(IE))
     JS_FORM_USABLE_AS_FUNCTIOM,
 
     /** Indicated that the body of a not yet loaded frame/iframe is null. */
