@@ -326,14 +326,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     GENERATED_150,
 
-    /** Was originally .isFirefox(). */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    GENERATED_156,
-
-    /** Was originally .isFirefox(). */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    GENERATED_157,
-
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     GENERATED_21,
@@ -1047,6 +1039,10 @@ public enum BrowserVersionFeatures {
     /** Indicates that objects with prototype property available in window scope; Firefox does this. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 9) })
     JS_HAS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE,
+
+    /** History entries are enumerated as properties. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    JS_HISTORY_ENUMS_ENTRIES,
 
     /** HTMLGenericElement instead of HTMLUnknownElement. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
