@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html.impl;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_13;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECTION_ONLY_ONE_PER_PAGE;
 
 import java.io.Serializable;
 
@@ -117,7 +117,7 @@ public class SelectionDelegate implements Serializable {
         final Page page = element_.getPage();
         if (page != null && page.isHtmlPage()) {
             final HtmlPage htmlPage = (HtmlPage) page;
-            if (htmlPage.getWebClient().getBrowserVersion().hasFeature(GENERATED_13)) {
+            if (htmlPage.getWebClient().getBrowserVersion().hasFeature(JS_SELECTION_ONLY_ONE_PER_PAGE)) {
                 htmlPage.setSelectionRange(selection_);
             }
         }

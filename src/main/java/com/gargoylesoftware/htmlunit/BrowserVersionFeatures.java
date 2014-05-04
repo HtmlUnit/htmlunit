@@ -311,16 +311,8 @@ public enum BrowserVersionFeatures {
     FORM_SUBMISSION_URL_WITHOUT_HASH,
 
     /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_104,
-
-    /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     GENERATED_112,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_13,
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
@@ -1256,6 +1248,10 @@ public enum BrowserVersionFeatures {
     /** If true the content of a selection is it's default value instead of toString. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_SELECTION_CONTENT_IS_DEFAULT_VALUE,
+
+    /** Only one selection per page. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_SELECTION_ONLY_ONE_PER_PAGE,
 
     /** Javascript selectorText property returns selectors in uppercase. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
