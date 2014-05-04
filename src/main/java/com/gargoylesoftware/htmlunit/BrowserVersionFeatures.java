@@ -342,10 +342,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     GENERATED_63,
 
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_80,
-
     /** If the class name is [object GeoGeolocation]. */
     @BrowserFeature(@WebBrowser(value = FF, maxVersion = 17))
     GEO_GEOLOCATION,
@@ -969,6 +965,10 @@ public enum BrowserVersionFeatures {
     /** Setting form.encoding only allowed for valid encodings. */
     @BrowserFeature(@WebBrowser(IE))
     JS_FORM_REJECT_INVALID_ENCODING,
+
+    /** Support for document.formName('inputName'). */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 10))
+    JS_FORM_USABLE_AS_FUNCTIOM,
 
     /** Indicated that the body of a not yet loaded frame/iframe is null. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))

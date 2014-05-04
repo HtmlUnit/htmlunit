@@ -1296,4 +1296,28 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(getDefaultUrl() + "page2"), page2);
         loadPageWithAlerts2(container);
     }
+
+    /**
+     * Another strange IE feature.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception", IE8 = "[object]")
+    public void asFunction() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function go() {\n"
+            + "   try {\n"
+            + "     alert(document.simple_form('inp1'));\n"
+            + "   } catch(e) { alert('exception'); }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='go()'>\n"
+            + "<form name='simple_form'>\n"
+            + "   <input name='inp1'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
