@@ -14,12 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_49;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_50;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_COMMENT_IS_ELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_ITEM_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_LIST_ENUMERATE_FUNCTIONS;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -450,15 +449,10 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
         if ("length".equals(name)) {
             return true;
         }
-        if (!getBrowserVersion().hasFeature(GENERATED_49)) {
+        if (getBrowserVersion().hasFeature(JS_NODE_LIST_ENUMERATE_FUNCTIONS)) {
             final JavaScriptConfiguration jsConfig = getWindow().getWebWindow().getWebClient()
                     .getJavaScriptEngine().getJavaScriptConfiguration();
-            for (final String functionName : jsConfig.getClassConfiguration(getClassName()).functionKeys()) {
-                if (name.equals(functionName)) {
-                    return true;
-                }
-            }
-            return false;
+            return jsConfig.getClassConfiguration(getClassName()).functionKeys().contains(name);
         }
         return getWithPreemption(name) != NOT_FOUND;
     }
@@ -476,12 +470,7 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
         final List<String> idList = new ArrayList<String>();
         final List<Object> elements = getElements();
 
-        if (getBrowserVersion().hasFeature(GENERATED_50)) {
-            idList.add("length");
-
-            addElementIds(idList, elements);
-        }
-        else {
+        if (getBrowserVersion().hasFeature(JS_NODE_LIST_ENUMERATE_FUNCTIONS)) {
             final int length = elements.size();
             for (int i = 0; i < length; i++) {
                 idList.add(Integer.toString(i));
@@ -493,6 +482,10 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
             for (final String name : jsConfig.getClassConfiguration(getClassName()).functionKeys()) {
                 idList.add(name);
             }
+        }
+        else {
+            idList.add("length");
+            addElementIds(idList, elements);
         }
         return idList.toArray();
     }

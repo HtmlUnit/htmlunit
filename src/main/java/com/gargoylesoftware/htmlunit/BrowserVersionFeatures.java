@@ -335,14 +335,6 @@ public enum BrowserVersionFeatures {
     GENERATED_40,
 
     /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_49,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_50,
-
-    /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     GENERATED_51,
 
@@ -357,10 +349,6 @@ public enum BrowserVersionFeatures {
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
     GENERATED_80,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_81,
 
     /** If the class name is [object GeoGeolocation]. */
     @BrowserFeature(@WebBrowser(value = FF, maxVersion = 17))
@@ -1145,6 +1133,10 @@ public enum BrowserVersionFeatures {
     /** Should throw exception if extra argument is passed to node.insertBefore(). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_NODE_INSERT_BEFORE_THROW_EXCEPTION_FOR_EXTRA_ARGUMENT,
+
+    /** Functions are enumerated. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    JS_NODE_LIST_ENUMERATE_FUNCTIONS,
 
     /** If <tt>true</tt>, Date.prototype.getYear subtracts 1900 only if 1900 <= date < 2000. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
