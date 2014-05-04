@@ -327,10 +327,6 @@ public enum BrowserVersionFeatures {
     GENERATED_150,
 
     /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
-    GENERATED_21,
-
-    /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
     GENERATED_40,
 
@@ -697,6 +693,10 @@ public enum BrowserVersionFeatures {
     /** Indicates that "constructor" property is defined, e.g. <tt>document.constructor</tt>. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     JS_CONSTRUCTOR,
+
+    /** item is not a enumerable property of CSSRuleList. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
+    JS_CSSRULELIST_DONT_ENUM_ITEM,
 
     /** <code>Date.toLocaleDateString()</code> returns a short form (d.M.yyyy). */
     @BrowserFeature(@WebBrowser(CHROME))
