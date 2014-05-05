@@ -1018,7 +1018,7 @@ public class NodeTest extends WebDriverTestCase {
             + "  <head>\n"
             + "  <script>\n"
             + "    function test() {\n"
-            + "      var node = document.getElementById('foo');\n"
+            + "      var foo = document.getElementById('foo');\n"
             + "      foo.textContent = 'Hello';\n"
             + "      if (foo.firstChild) {\n"
             + "        alert(foo.firstChild.wholeText);\n"
