@@ -58,85 +58,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public class HTMLElement3Test extends SimpleWebTestCase {
 
     /**
-     * Test the use of innerHTML to set new HTML code.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = {
-                "Old = <b>Old innerHTML</b><!-- old comment -->",
-                "New =  <b><i id=\"newElt\">New cell value</i></b>",
-                "I" },
-            IE8 = {
-                "Old = <B>Old innerHTML</B><!-- old comment -->",
-                "New = <B><I id=newElt>New cell value</I></B>",
-                "I" })
-    public void getSetInnerHTMLComplex_FF() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "    <title>test</title>\n"
-            + "    <script>\n"
-            + "    function doTest(){\n"
-            + "       var myNode = document.getElementById('myNode');\n"
-            + "       alert('Old = ' + myNode.innerHTML);\n"
-            + "       myNode.innerHTML = ' <b><i id=\"newElt\">New cell value</i></b>';\n"
-            + "       alert('New = ' + myNode.innerHTML);\n"
-            + "       alert(document.getElementById('newElt').tagName);\n"
-            + "   }\n"
-            + "    </script>\n"
-            + "</head>\n"
-            + "<body onload='doTest()'>\n"
-            + "<p id='myNode'><b>Old innerHTML</b><!-- old comment --></p>\n"
-            + "</body>\n"
-            + "</html>";
-
-        final HtmlPage page = loadPageWithAlerts(html);
-
-        final HtmlElement pElt = page.getHtmlElementById("myNode");
-        assertEquals("p", pElt.getNodeName());
-        final HtmlElement elt = page.getHtmlElementById("newElt");
-        assertEquals("New cell value", elt.asText());
-        assertEquals(1, page.getWebClient().getWebWindows().size());
-    }
-
-    /**
-     * Test the use of outerHTML to set new HTML code.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Browsers(IE)
-    @Alerts(IE = { "Old = <B id=innerNode>Old outerHTML</B>",
-                "New = <B><I id=newElt>New cell value</I></B>",
-                "I" },
-            IE11 = { "Old = <b id=\"innerNode\">Old outerHTML</b>",
-                "New = <b><i id=\"newElt\">New cell value</i></b>",
-                "I" })
-    public void getSetOuterHTMLComplex() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "    <title>test</title>\n"
-            + "    <script>\n"
-            + "    function doTest(){\n"
-            + "       var myNode = document.getElementById('myNode');\n"
-            + "       var innerNode = document.getElementById('innerNode');\n"
-            + "       alert('Old = ' + innerNode.outerHTML);\n"
-            + "       innerNode.outerHTML = ' <b><i id=\"newElt\">New cell value</i></b>';\n"
-            + "       alert('New = ' + myNode.innerHTML);\n"
-            + "       alert(document.getElementById('newElt').tagName);\n"
-            + "   }\n"
-            + "    </script>\n"
-            + "</head>\n"
-            + "<body onload='doTest()'>\n"
-            + "<p id='myNode'><b id='innerNode'>Old outerHTML</b></p>\n"
-            + "</body>\n"
-            + "</html>";
-        final HtmlPage page = loadPageWithAlerts(html);
-        final HtmlElement pElt = page.getHtmlElementById("myNode");
-        assertEquals("p", pElt.getNodeName());
-        final HtmlElement elt = page.getHtmlElementById("newElt");
-        assertEquals("New cell value", elt.asText());
-    }
-
-    /**
      * Test the <tt>#default#homePage</tt> default IE behavior.
      * @throws Exception if the test fails
      */
@@ -638,5 +559,4 @@ public class HTMLElement3Test extends SimpleWebTestCase {
         final HtmlPage page = loadPageWithAlerts(html);
         assertEquals("test" + LINE_SEPARATOR + "hello", page.asText());
     }
-
 }

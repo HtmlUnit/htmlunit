@@ -1005,4 +1005,87 @@ public class HTMLElement2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Test the use of innerHTML to set new HTML code.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {
+                "Old = <b>Old innerHTML</b><!-- old comment -->",
+                "New =  <b><i id=\"newElt\">New cell value</i></b>",
+                "I" },
+            IE8 = {
+                "Old = <B>Old innerHTML</B><!-- old comment -->",
+                "New = <B><I id=newElt>New cell value</I></B>",
+                "I" })
+    public void getSetInnerHTMLComplex() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "    <title>test</title>\n"
+            + "    <script>\n"
+            + "    function doTest(){\n"
+            + "       var myNode = document.getElementById('myNode');\n"
+            + "       alert('Old = ' + myNode.innerHTML);\n"
+            + "       myNode.innerHTML = ' <b><i id=\"newElt\">New cell value</i></b>';\n"
+            + "       alert('New = ' + myNode.innerHTML);\n"
+            + "       alert(document.getElementById('newElt').tagName);\n"
+            + "   }\n"
+            + "    </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<p id='myNode'><b>Old innerHTML</b><!-- old comment --></p>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+
+        final WebElement pElt = driver.findElement(By.id("myNode"));
+        assertEquals("p", pElt.getTagName());
+
+        final WebElement elt = driver.findElement(By.id("newElt"));
+        assertEquals("New cell value", elt.getText());
+        assertEquals(1, driver.getWindowHandles().size());
+    }
+
+    /**
+     * Test the use of outerHTML to set new HTML code.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "Old = <b id=\"innerNode\">Old outerHTML</b>",
+                "New =  <b><i id=\"newElt\">New cell value</i></b>",
+                "I" },
+            IE8 = { "Old = <B id=innerNode>Old outerHTML</B>",
+                "New = <B><I id=newElt>New cell value</I></B>",
+                "I" })
+    public void getSetOuterHTMLComplex() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "    <title>test</title>\n"
+            + "    <script>\n"
+            + "    function doTest(){\n"
+            + "       var myNode = document.getElementById('myNode');\n"
+            + "       var innerNode = document.getElementById('innerNode');\n"
+            + "       alert('Old = ' + innerNode.outerHTML);\n"
+            + "       innerNode.outerHTML = ' <b><i id=\"newElt\">New cell value</i></b>';\n"
+            + "       alert('New = ' + myNode.innerHTML);\n"
+            + "       alert(document.getElementById('newElt').tagName);\n"
+            + "   }\n"
+            + "    </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<p id='myNode'><b id='innerNode'>Old outerHTML</b></p>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+
+        final WebElement pElt = driver.findElement(By.id("myNode"));
+        assertEquals("p", pElt.getTagName());
+
+        final WebElement elt = driver.findElement(By.id("newElt"));
+        assertEquals("New cell value", elt.getText());
+        assertEquals(1, driver.getWindowHandles().size());
+    }
 }
