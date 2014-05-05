@@ -1009,7 +1009,7 @@ public class Node extends SimpleScriptable {
      * Replace all children elements of this element with the supplied value.
      * @param value - the new value for the contents of this node
      */
-    @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public void setTextContent(final Object value) {
         getDomNodeOrDie().setTextContent(value == null ? null : Context.toString(value));
     }

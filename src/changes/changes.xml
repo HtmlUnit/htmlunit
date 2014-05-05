@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.15" date="???" description="Bugfixes, IE11 progress">
+            <action type="add" dev="asashour">
+                JavaScript: Node.textContent can be set in Chrome.
+            </action>
             <action type="update" dev="asashour">
                 JavaScript: ComputedCSSStyleDeclaration.getPropertyValue is supported in Chrome.
             </action>

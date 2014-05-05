@@ -502,7 +502,7 @@ public class NodeTest extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "  <script type='text/javascript'>\n"
+            + "  <script>\n"
             + "    function go() {\n"
             + "        var node = document.createElement('button');\n"
             + "        var f = function() { alert('in click') };\n"
@@ -910,7 +910,7 @@ public class NodeTest extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "  <script type='text/javascript'>\n"
+            + "  <script>\n"
             + "    function test() {\n"
             + "        var node = document.createElement('button');\n"
             + "        alert(node.addEventListener !== undefined);\n"
@@ -986,7 +986,7 @@ public class NodeTest extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "  <script type='text/javascript'>\n"
+            + "  <script>\n"
             + "    function go() {\n"
             + "        var node = document.getElementById('foo');\n"
             + "        var clone = node.cloneNode(true);\n"
@@ -1005,5 +1005,32 @@ public class NodeTest extends WebDriverTestCase {
         final WebElement element = driver.findElement(By.id("bar"));
         final String value = element.getAttribute("id");
         assertEquals("bar", value);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "Hello", IE8 = "")
+    public void setTextContent() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var node = document.getElementById('foo');\n"
+            + "      foo.textContent = 'Hello';\n"
+            + "      if (foo.firstChild) {\n"
+            + "        alert(foo.firstChild.wholeText);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <span id='foo'></span>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
     }
 }
