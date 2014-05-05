@@ -815,7 +815,7 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-websocket</artifactId>
-            <version>8.1.14.v20131031</version>
+            <version>8.1.15.v20140411</version>
         </dependency>
         <!-- Test dependencies. -->
         <dependency>
@@ -851,7 +851,7 @@
         <dependency>
             <groupId>org.mortbay.jetty</groupId>
             <artifactId>jetty-maven-plugin</artifactId>
-            <version>8.1.14.v20131031</version>
+            <version>8.1.15.v20140411</version>
             <scope>test</scope>
         </dependency>
         <!-- The presence of slf4j on the classpath during the unit tests triggers correct logging in Jetty. -->
