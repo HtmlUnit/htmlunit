@@ -960,7 +960,7 @@ public enum BrowserVersionFeatures {
 
     /** Support for document.formName('inputName'). */
     @BrowserFeature(@WebBrowser(IE))
-    JS_FORM_USABLE_AS_FUNCTIOM,
+    JS_FORM_USABLE_AS_FUNCTION,
 
     /** Indicated that the body of a not yet loaded frame/iframe is null. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))

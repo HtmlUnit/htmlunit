@@ -18,7 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORMFIELD_REA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORMFIELD_REACHABLE_BY_ORIGINAL_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_ACTION_EXPANDURL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_REJECT_INVALID_ENCODING;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_USABLE_AS_FUNCTIOM;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_USABLE_AS_FUNCTION;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.net.MalformedURLException;
@@ -478,7 +478,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * {@inheritDoc}
      */
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
-        if (!getBrowserVersion().hasFeature(JS_FORM_USABLE_AS_FUNCTIOM)) {
+        if (!getBrowserVersion().hasFeature(JS_FORM_USABLE_AS_FUNCTION)) {
             throw Context.reportRuntimeError("Not a function.");
         }
         if (args.length > 0) {
@@ -497,7 +497,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * {@inheritDoc}
      */
     public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
-        if (!getBrowserVersion().hasFeature(JS_FORM_USABLE_AS_FUNCTIOM)) {
+        if (!getBrowserVersion().hasFeature(JS_FORM_USABLE_AS_FUNCTION)) {
             throw Context.reportRuntimeError("Not a function.");
         }
         return null;
