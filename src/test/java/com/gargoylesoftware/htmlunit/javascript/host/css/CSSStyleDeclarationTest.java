@@ -74,7 +74,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "black", "pink" })
-    @NotYetImplemented({ FF17, FF24 })
+    @NotYetImplemented({ FF17, FF24, IE11 })
     public void style_MultipleCssAttributes() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -310,21 +310,28 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE11 })
-    @Alerts({ "30px", "", "30px", "arial", "", "arial" })
+    @Alerts(DEFAULT = { "30px", "", "30px", "arial", "", "arial" },
+            IE8 = { "30px", "exception", "exception", "arial", "exception", "exception" })
     public void getPropertyValue_WithDash() throws Exception {
         final String html =
-              "<html><body onload='test()'><script>\n"
+            "<html><body onload='test()'><script>\n"
+            + "    function prop(elem, prop) {\n"
+            + "      try{\n"
+            + "        var p = span.style.getPropertyValue(prop);\n"
+            + "        alert(p);\n"
+            + "      } catch (e) { alert('exception'); }\n"
+            + "    }\n"
+
             + "    function test() {\n"
             + "        var span = document.getElementById('span');\n"
             + "        span.style['fontSize'] = '30px';\n"
             + "        alert(span.style.fontSize);\n"
-            + "        alert(span.style.getPropertyValue('fontSize'));\n"
-            + "        alert(span.style.getPropertyValue('font-size'));\n"
+            + "        prop(span, 'fontSize');\n"
+            + "        prop(span, 'font-size');\n"
             + "        span.style['fontFamily'] = 'arial';\n"
             + "        alert(span.style.fontFamily);\n"
-            + "        alert(span.style.getPropertyValue('fontFamily'));\n"
-            + "        alert(span.style.getPropertyValue('font-family'));\n"
+            + "        prop(span, 'fontFamily');\n"
+            + "        prop(span, 'font-family');\n"
             + "    }\n"
             + "</script>\n"
             + "<span id='span'>x</span>\n"
