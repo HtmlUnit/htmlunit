@@ -653,6 +653,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_CALL_RESULT_IS_LAST_RETURN_VALUE,
 
+    /** toDataURL for canvas returns the IE11 version of the png. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_CANVAS_DATA_URL_IE_PNG,
+
     /** Indicates that the browser emulates the char attribute. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_CHAR_EMULATED,
