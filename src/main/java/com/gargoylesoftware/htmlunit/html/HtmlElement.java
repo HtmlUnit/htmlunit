@@ -303,6 +303,9 @@ public abstract class HtmlElement extends DomElement {
     @Override
     public final void removeAttribute(final String attributeName) {
         final String value = getAttribute(attributeName);
+        if (value == ATTRIBUTE_NOT_DEFINED) {
+            return;
+        }
 
         final HtmlPage htmlPage = getHtmlPageOrNull();
         if (htmlPage != null) {
