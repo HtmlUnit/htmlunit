@@ -974,13 +974,16 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "  f.submit();\n"
             + "  f.submit();\n"
             + "}\n"
-            + "</script></head><body onload='test()'>\n"
-            + "<form action='page1.html' name='myForm'>\n"
-            + "  <input name='myField' value='some value'>\n"
-            + "</form></body></html>";
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form action='page1.html' name='myForm'>\n"
+            + "    <input name='myField' value='some value'>\n"
+            + "  </form>\n"
+            + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("");
         loadPage2(html);
+        Thread.sleep(100);
 
         assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
     }
