@@ -1296,6 +1296,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_SELECT_OPTIONS_NULL_FOR_OUTSIDE,
 
+    /** Indicates that select.value = 'val' only checks the value attribute and
+     * not the option text. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_SELECT_SET_VALUES_CHECKS_ONLY_VALUE_ATTRIBUTE,
+
     /** Indicates that the set attribute method is able to update the event handlers also.
      * e.g. element.setAttribute("onclick", "test(1);"); */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })

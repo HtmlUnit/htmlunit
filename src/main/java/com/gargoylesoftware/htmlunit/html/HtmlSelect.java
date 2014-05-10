@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SELECT_DISPLAY_INLINE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_SET_VALUES_CHECKS_ONLY_VALUE_ATTRIBUTE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN;
 
 import java.util.ArrayList;
@@ -279,7 +280,15 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     public <P extends Page> P setSelectedAttribute(final String optionValue,
             final boolean isSelected, final boolean invokeOnFocus) {
         try {
-            return (P) setSelectedAttribute(getOptionByValue(optionValue), isSelected, invokeOnFocus);
+            final boolean attributeOnly = hasFeature(JS_SELECT_SET_VALUES_CHECKS_ONLY_VALUE_ATTRIBUTE);
+            final HtmlOption selected;
+            if (attributeOnly) {
+                selected = getOptionByValueStrict(optionValue);
+            }
+            else {
+                selected = getOptionByValue(optionValue);
+            }
+            return setSelectedAttribute(selected, isSelected, invokeOnFocus);
         }
         catch (final ElementNotFoundException e) {
             if (hasFeature(SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN)) {
@@ -452,6 +461,16 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
         WebAssert.notNull("value", value);
         for (final HtmlOption option : getOptions()) {
             if (option.getValueAttribute().equals(value)) {
+                return option;
+            }
+        }
+        throw new ElementNotFoundException("option", "value", value);
+    }
+
+    private HtmlOption getOptionByValueStrict(final String value) throws ElementNotFoundException {
+        WebAssert.notNull("value", value);
+        for (final HtmlOption option : getOptions()) {
+            if (option.getAttribute("value").equals(value)) {
                 return option;
             }
         }
