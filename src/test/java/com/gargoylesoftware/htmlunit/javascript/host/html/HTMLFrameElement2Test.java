@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.net.URL;
@@ -151,7 +152,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "function handler() {}", "null", "null" },
             IE8 = { "function handler() {}", "null", "exception" })
-    @NotYetImplemented({ FF17, FF24, IE8 })
+    @NotYetImplemented({ FF17, FF24, IE8, IE11 })
     // Currently a \n is put between the {}
     public void onloadNull() throws Exception {
         final String html =
@@ -374,8 +375,14 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
             + "</frameset>\n"
             + "</html>";
 
-        final String frame1 = "<html><head><title>1</title></head>\n"
-            + "<body onload=\"alert(parent.frames['f1'])\"></body>\n"
+        final String frame1 = "<html><head><title>f1</title>\n"
+            + "<script type='text/javascript'>\n"
+            + "  function test() {\n"
+            + "    alert(parent.frames['f1']);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test();'></body>\n"
             + "</html>";
 
         getMockWebConnection().setResponse(URL_FIRST, mainHtml);

@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_IS_A_FUNCTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ONERROR_COLUMN_ARGUMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_ALLOW_INVALID_PORT;
@@ -93,6 +94,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlEmbed;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
@@ -1355,7 +1357,14 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                     // May be attempting to retrieve element by ID (try map-backed operation again instead of XPath).
                     try {
                         final HtmlElement htmlElement = page.getHtmlElementById(name);
-                        result = getScriptableFor(htmlElement);
+                        if (getBrowserVersion().hasFeature(JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW)
+                                && htmlElement instanceof HtmlFrame) {
+                            final HtmlFrame frame = (HtmlFrame) htmlElement;
+                            result = getScriptableFor(frame.getEnclosedWindow());
+                        }
+                        else {
+                            result = getScriptableFor(htmlElement);
+                        }
                     }
                     catch (final ElementNotFoundException e) {
                         result = NOT_FOUND;

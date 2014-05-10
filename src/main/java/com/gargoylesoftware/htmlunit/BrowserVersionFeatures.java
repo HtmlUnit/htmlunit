@@ -1448,11 +1448,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME,
 
-    /** Support for accessing the frame of a window by id additionally
-     * to using the name (FF).
-     */
+    /** Support for accessing the frame of a window by id additionally to using the name (FF). */
     @BrowserFeature({ @WebBrowser(IE) })
     JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID,
+
+    /** <code>window..frames['id']</code> returns the frame window instead of the frame element. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW,
 
     /** Window property usable as function. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
