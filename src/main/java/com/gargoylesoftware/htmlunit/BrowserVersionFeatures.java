@@ -1041,14 +1041,21 @@ public enum BrowserVersionFeatures {
      * for invalid values returns 1.
      */
     @BrowserFeature(@WebBrowser(CHROME))
-    JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20x0,
+    JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20_0x0,
 
     /**
      * Getting the width and height of an image tag without a source returns 28x30;
      * for invalid values returns 1.
      */
-    @BrowserFeature(@WebBrowser(IE))
-    JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30x1,
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 10))
+    JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_1x1,
+
+    /**
+     * Getting the width and height of an image tag without a source returns 28x30;
+     * for invalid values returns same.
+     */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30,
 
     /** Indicates that innerHTML adds the child also for null values. */
     @BrowserFeature(@WebBrowser(IE))

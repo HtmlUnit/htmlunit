@@ -15,8 +15,9 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20x0;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30x1;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20_0x0;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_1x1;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -242,7 +243,7 @@ public class HTMLImageElement extends HTMLElement {
                 return Integer.parseInt(widthAttrib);
             }
             catch (final NumberFormatException e) {
-                if (getBrowserVersion().hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30x1)) {
+                if (getBrowserVersion().hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_1x1)) {
                     return 1;
                 }
             }
@@ -254,10 +255,11 @@ public class HTMLImageElement extends HTMLElement {
             }
             catch (final IOException e) {
                 final BrowserVersion browserVersion = getBrowserVersion();
-                if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30x1)) {
+                if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_1x1)
+                        || browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
                     return 1;
                 }
-                if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20x0)) {
+                if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20_0x0)) {
                     return 18;
                 }
                 return 24;
@@ -265,10 +267,11 @@ public class HTMLImageElement extends HTMLElement {
         }
 
         final BrowserVersion browserVersion = getBrowserVersion();
-        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30x1)) {
+        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_1x1)
+                || browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
             return 28;
         }
-        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20x0)) {
+        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20_0x0)) {
             return 0;
         }
         return 24;
@@ -298,7 +301,7 @@ public class HTMLImageElement extends HTMLElement {
                 return Integer.parseInt(height);
             }
             catch (final NumberFormatException e) {
-                if (getBrowserVersion().hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30x1)) {
+                if (getBrowserVersion().hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_1x1)) {
                     return 1;
                 }
             }
@@ -310,10 +313,11 @@ public class HTMLImageElement extends HTMLElement {
             }
             catch (final IOException e) {
                 final BrowserVersion browserVersion = getBrowserVersion();
-                if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30x1)) {
+                if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_1x1)
+                        || browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
                     return 1;
                 }
-                if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20x0)) {
+                if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20_0x0)) {
                     return 20;
                 }
                 return 24;
@@ -321,10 +325,11 @@ public class HTMLImageElement extends HTMLElement {
         }
 
         final BrowserVersion browserVersion = getBrowserVersion();
-        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30x1)) {
+        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_1x1)
+                || browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
             return 30;
         }
-        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20x0)) {
+        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20_0x0)) {
             return 0;
         }
         return 24;
