@@ -850,4 +850,31 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     public void replace_T() throws Exception {
         testEvaluate("'>' + 'a\\\\.b'.replace(/([\\u00C0-\\uFFFF]|[\\w]|\\\\.)+/, '') + '<'");
     }
+    
+    /**
+     * Test from Prototype suite running very fast with Java 6 but taking ages with Java 7 & 8.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "2200915", "2000915" })
+    public void replace_huge() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "String.prototype.times = function(n) {\n"
+            + "    var s = '';\n"
+            + "    for (var i =0; i< n; ++i) {\n"
+            + "        s += this;\n"
+            + "    }\n"
+            + "    return s;\n"
+            + "}\n"
+            + "var size = 100;\n"
+            + "var longString = '\"' + '123456789\\\\\"'.times(size * 10) + '\"';\n"
+            + "var object = '{' + longString + ': ' + longString + '},';\n"
+            + "var huge = '[' + object.times(size) + '{\"test\": 123}]';\n"
+            + "alert(huge.length);\n"
+            + "alert(huge.replace(/\\\\./g, '@').length);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
