@@ -373,4 +373,22 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "<table><colgroup><col></colgroup></table>",
+    		IE8 = "<TABLE><COLGROUP><COL></COLGROUP></TABLE>")
+    public void parsing() throws Exception {
+        final String html
+            = "<html><body><div>"
+            + "<table><colgroup><col></colgroup></table>"
+            + "</div>\n"
+            + "<script>\n"
+            + "alert(document.body.firstChild.innerHTML);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

@@ -118,7 +118,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     }
 
     /**
-     * Test for <a href="http://sourceforge.net/support/tracker.php?aid=2767865">Bug 2767865</a>.
+     * Test for <a href="https://sourceforge.net/p/nekohtml/bugs/68/">Bug 68</a>.
      * In fact this is not fully correct because IE (6 at least) does something very strange
      * and keeps the DIV in TABLE but wraps it in a node without name.
      * @throws Exception if the test fails
@@ -368,6 +368,37 @@ public class MalformedHtmlTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>\n";
 
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+    * Regression test for bug 1598.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "DOC", "1" })
+    public void unknownTagInTable() throws Exception {
+        final String html = "<html><body>"
+            + "<table id='it'><doc><tr><td>hello</td></tr></doc></table>"
+            + "<script>\n"
+            + "alert(document.body.firstChild.tagName);\n"
+            + "alert(document.getElementById('it').rows.length);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "DOC", "1" })
+    public void unknownTagInTbody() throws Exception {
+        final String html = "<html><body>"
+            + "<table id='it'><tbody><doc><tr><td>hello</td></tr></doc></tbody></table>"
+            + "<script>\n"
+            + "alert(document.body.firstChild.tagName);\n"
+            + "alert(document.getElementById('it').rows.length);\n"
+            + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
 }

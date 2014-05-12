@@ -15,11 +15,11 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOCTYPE_IS_COMMENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_ATTRIBUTE_LOWER_CASE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_CDATA_AS_COMMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCONDITIONAL_COMMENTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIFRAME_IGNORE_SELFCLOSING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLPARSER_REMOVE_EMPTY_CONTENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_ATTRIBUTE_LOWER_CASE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_CDATA_AS_COMMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.IGNORE_CONTENTS_OF_INNER_HEAD;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFINE_GETTER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.META_X_UA_COMPATIBLE;
@@ -31,17 +31,19 @@ import java.io.InputStream;
 import java.io.StringReader;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Stack;
 
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.xerces.parsers.AbstractSAXParser;
 import org.apache.xerces.util.DefaultErrorHandler;
@@ -388,7 +390,7 @@ public final class HTMLParser {
         private final HtmlPage page_;
 
         private Locator locator_;
-        private final Stack<DomNode> stack_ = new Stack<DomNode>();
+        private final Deque<DomNode> stack_ = new ArrayDeque<DomNode>();
 
         private DomNode currentNode_;
         private StringBuilder characters_;
@@ -639,18 +641,60 @@ public final class HTMLParser {
         private void addNodeToRightParent(final DomNode currentNode, final DomElement newElement) {
             final String currentNodeName = currentNode.getNodeName();
             final String newNodeName = newElement.getNodeName();
+            
+            DomNode parent = currentNode;
 
-            // this only fixes bug http://sourceforge.net/support/tracker.php?aid=2767865
-            // TODO: understand in which cases it should be done to generalize it!!!
-            if ("table".equals(currentNodeName) && "div".equals(newNodeName)) {
-                currentNode.insertBefore(newElement);
+            if ("tr".equals(newNodeName) && !isTableChild(currentNodeName)) {
+            	parent = dequeueMalformedElementsUntil("tbody", "thead", "tfoot");
+            }
+            else if (isTableChild(newNodeName) && !"table".equals(currentNodeName)) {
+            	parent = dequeueMalformedElementsUntil("table");
+            }
+
+            if ("table".equals(currentNodeName) && !isTableChild(newNodeName)) {
+            	parent.insertBefore(newElement);
+            	if ("form".equals(newNodeName)) {
+            		newElement.appendChild(parent);
+            	}
+            }
+            else if (isTableChild(currentNodeName) && !"tr".equals(newNodeName)
+            		&& !("col".equals(newNodeName) && "colgroup".equals(currentNodeName))) {
+            	final DomNode table = currentNode.getParentNode();
+            	table.insertBefore(newElement);
             }
             else if (head_ != null && "title".equals(newNodeName) && !parsingInnerHead_) {
                 head_.appendChild(newElement);
             }
             else {
-                currentNode.appendChild(newElement);
+            	parent.appendChild(newElement);
             }
+        }
+        
+        private DomNode dequeueMalformedElementsUntil(final String... searchedElementNames) {
+        	DomNode searchedNode = null;
+        	for (final DomNode node : stack_) {
+    			if (ArrayUtils.contains(searchedElementNames, node.getNodeName())) {
+    				searchedNode = node;
+    				break;
+    			}
+        	}
+
+        	if (searchedNode == null) {
+        		searchedNode = stack_.peek(); // this is surely wrong but at least it won't throw a NPE
+        	}
+        	else {
+            	// remove all elements from the stack until the found node
+        		while (stack_.peek() != searchedNode) {
+        			stack_.pop();
+        		}
+        	}
+        	return searchedNode;
+		}
+
+		private boolean isTableChild(final String nodeName) {
+        	return "thead".equals(nodeName) || "tbody".equals(nodeName)
+        			|| "tfoot".equals(nodeName) || "caption".equals(nodeName)
+        			|| "colgroup".equals(nodeName);
         }
 
         /** {@inheritDoc} */

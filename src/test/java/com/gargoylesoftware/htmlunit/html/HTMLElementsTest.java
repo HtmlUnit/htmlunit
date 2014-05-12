@@ -1134,7 +1134,7 @@ public class HTMLElementsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             IE8 = "1")
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented(IE8)
     public void elementClosesItself_table() throws Exception {
         loadPageWithAlerts2(elementClosesItself("table"));
     }
