@@ -907,7 +907,7 @@
         <dependency>
             <groupId>org.tmatesoft.svnkit</groupId>
             <artifactId>svnkit</artifactId>
-            <version>1.7.8</version>
+            <version>1.8.3-1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
