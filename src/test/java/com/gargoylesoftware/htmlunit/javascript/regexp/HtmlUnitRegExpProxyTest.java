@@ -850,7 +850,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     public void replace_T() throws Exception {
         testEvaluate("'>' + 'a\\\\.b'.replace(/([\\u00C0-\\uFFFF]|[\\w]|\\\\.)+/, '') + '<'");
     }
-    
+
     /**
      * Test from Prototype suite running very fast with Java 6 but taking ages with Java 7 & 8.
      * @throws Exception if an error occurs
