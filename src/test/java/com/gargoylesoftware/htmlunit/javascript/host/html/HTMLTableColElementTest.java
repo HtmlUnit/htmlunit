@@ -379,7 +379,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<table><colgroup><col></colgroup></table>",
-    		IE8 = "<TABLE><COLGROUP><COL></COLGROUP></TABLE>")
+             IE8 = "<TABLE><COLGROUP><COL></COLGROUP></TABLE>")
     public void parsing() throws Exception {
         final String html
             = "<html><body><div>"
