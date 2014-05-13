@@ -1249,8 +1249,14 @@ public enum BrowserVersionFeatures {
     /** Javascript script tags supports the 'for' and the 'event'
      * attribute (IE).
      */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 10))
+    JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_ELEMENT_BY_ID,
+
+    /** Javascript script tags supports the 'for' and the 'event'
+     * attribute (IE).
+     */
     @BrowserFeature(@WebBrowser(IE))
-    JS_SCRIPT_SUPPORTS_FOR_AND_EVENT,
+    JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW,
 
     /** Javascript script object supports the onreadystatechange event (IE). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))

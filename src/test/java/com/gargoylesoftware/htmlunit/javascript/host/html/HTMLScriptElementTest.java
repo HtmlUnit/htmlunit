@@ -630,8 +630,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "exception",
-            IE = "hello")
+    @Alerts(DEFAULT = { "script-for", "exception", "script-body" },
+            IE = { "script-body", "script-for", "hello" })
     public void scriptForEvent() throws Exception {
         // IE accepts it with () or without
         scriptForEvent("onload");
@@ -641,13 +641,17 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     private void scriptForEvent(final String eventName) throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script FOR='window' EVENT='" + eventName + "' LANGUAGE='javascript'>\n"
-            + "try {\n"
-            + " document.form1.txt.value='hello';\n"
-            + " alert(document.form1.txt.value);\n"
-            + "} catch(e) {alert('exception'); }\n"
+            + "  alert('script-for');\n"
+            + "  try {\n"
+            + "    document.form1.txt.value='hello';\n"
+            + "    alert(document.form1.txt.value);\n"
+            + "  } catch(e) {alert('exception'); }\n"
             + "</script></head>\n"
             + "<body>\n"
-            + "  <form name='form1'><input type=text name='txt'></form>\n"
+            + "  <form name='form1'><input type='text' name='txt'></form>\n"
+            + "  <script>\n"
+            + "    alert('script-body');\n"
+            + "  </script>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

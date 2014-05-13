@@ -21,7 +21,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONREADY
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_APPLICATION_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_TRIM_TYPE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_ALWAYS_REEXECUTE_ON_SRC_CHANGE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_FOR_AND_EVENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_ELEMENT_BY_ID;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_ONREADYSTATECHANGE;
 
 import java.io.PrintWriter;
@@ -314,16 +315,15 @@ public class HtmlScript extends HtmlElement {
             event = event.substring(0, event.length() - 2);
         }
 
-        final boolean supportsEventFor = hasFeature(JS_SCRIPT_SUPPORTS_FOR_AND_EVENT);
         final String scriptCode = getScriptCode();
-        if (supportsEventFor
-                && event != ATTRIBUTE_NOT_DEFINED && forr != ATTRIBUTE_NOT_DEFINED) {
-            if ("window".equals(forr)) {
+        if (event != ATTRIBUTE_NOT_DEFINED && forr != ATTRIBUTE_NOT_DEFINED) {
+            if (hasFeature(JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW) && "window".equals(forr)) {
                 final Window window = (Window) getPage().getEnclosingWindow().getScriptObject();
                 final BaseFunction function = new EventHandler(this, event, scriptCode);
                 window.attachEvent(event, function);
+                return;
             }
-            else {
+            if (hasFeature(JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_ELEMENT_BY_ID)) {
                 try {
                     final HtmlElement elt = ((HtmlPage) getPage()).getHtmlElementById(forr);
                     elt.setEventHandler(event, scriptCode);
@@ -332,9 +332,10 @@ public class HtmlScript extends HtmlElement {
                     LOG.warn("<script for='" + forr + "' ...>: no element found with id \""
                         + forr + "\". Ignoring.");
                 }
+                return;
             }
         }
-        else if (forr == ATTRIBUTE_NOT_DEFINED || "onload".equals(event)) {
+        if (forr == ATTRIBUTE_NOT_DEFINED || "onload".equals(event)) {
             final String url = getPage().getUrl().toExternalForm();
             final int line1 = getStartLineNumber();
             final int line2 = getEndLineNumber();
