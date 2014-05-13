@@ -641,60 +641,60 @@ public final class HTMLParser {
         private void addNodeToRightParent(final DomNode currentNode, final DomElement newElement) {
             final String currentNodeName = currentNode.getNodeName();
             final String newNodeName = newElement.getNodeName();
-            
+
             DomNode parent = currentNode;
 
             if ("tr".equals(newNodeName) && !isTableChild(currentNodeName)) {
-            	parent = dequeueMalformedElementsUntil("tbody", "thead", "tfoot");
+                parent = dequeueMalformedElementsUntil("tbody", "thead", "tfoot");
             }
             else if (isTableChild(newNodeName) && !"table".equals(currentNodeName)) {
-            	parent = dequeueMalformedElementsUntil("table");
+                parent = dequeueMalformedElementsUntil("table");
             }
 
             if ("table".equals(currentNodeName) && !isTableChild(newNodeName)) {
-            	parent.insertBefore(newElement);
-            	if ("form".equals(newNodeName)) {
-            		newElement.appendChild(parent);
-            	}
+                parent.insertBefore(newElement);
+                if ("form".equals(newNodeName)) {
+                    newElement.appendChild(parent);
+                }
             }
             else if (isTableChild(currentNodeName) && !"tr".equals(newNodeName)
-            		&& !("col".equals(newNodeName) && "colgroup".equals(currentNodeName))) {
-            	final DomNode table = currentNode.getParentNode();
-            	table.insertBefore(newElement);
+                    && !("col".equals(newNodeName) && "colgroup".equals(currentNodeName))) {
+                final DomNode table = currentNode.getParentNode();
+                table.insertBefore(newElement);
             }
             else if (head_ != null && "title".equals(newNodeName) && !parsingInnerHead_) {
                 head_.appendChild(newElement);
             }
             else {
-            	parent.appendChild(newElement);
+                parent.appendChild(newElement);
             }
         }
-        
+
         private DomNode dequeueMalformedElementsUntil(final String... searchedElementNames) {
-        	DomNode searchedNode = null;
-        	for (final DomNode node : stack_) {
-    			if (ArrayUtils.contains(searchedElementNames, node.getNodeName())) {
-    				searchedNode = node;
-    				break;
-    			}
-        	}
+            DomNode searchedNode = null;
+            for (final DomNode node : stack_) {
+                if (ArrayUtils.contains(searchedElementNames, node.getNodeName())) {
+                    searchedNode = node;
+                    break;
+                }
+            }
 
-        	if (searchedNode == null) {
-        		searchedNode = stack_.peek(); // this is surely wrong but at least it won't throw a NPE
-        	}
-        	else {
-            	// remove all elements from the stack until the found node
-        		while (stack_.peek() != searchedNode) {
-        			stack_.pop();
-        		}
-        	}
-        	return searchedNode;
-		}
+            if (searchedNode == null) {
+                searchedNode = stack_.peek(); // this is surely wrong but at least it won't throw a NPE
+            }
+            else {
+                // remove all elements from the stack until the found node
+                while (stack_.peek() != searchedNode) {
+                    stack_.pop();
+                }
+            }
+            return searchedNode;
+        }
 
-		private boolean isTableChild(final String nodeName) {
-        	return "thead".equals(nodeName) || "tbody".equals(nodeName)
-        			|| "tfoot".equals(nodeName) || "caption".equals(nodeName)
-        			|| "colgroup".equals(nodeName);
+        private boolean isTableChild(final String nodeName) {
+            return "thead".equals(nodeName) || "tbody".equals(nodeName)
+                    || "tfoot".equals(nodeName) || "caption".equals(nodeName)
+                    || "colgroup".equals(nodeName);
         }
 
         /** {@inheritDoc} */
