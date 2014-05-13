@@ -645,8 +645,10 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + " document.form1.txt.value='hello';\n"
             + " alert(document.form1.txt.value);\n"
             + "} catch(e) {alert('exception'); }\n"
-            + "</script></head><body>\n"
-            + "<form name='form1'><input type=text name='txt'></form></body></html>";
+            + "</script></head>\n"
+            + "<body>\n"
+            + "  <form name='form1'><input type=text name='txt'></form>\n"
+            + "</body></html>";
 
         loadPageWithAlerts2(html);
     }
