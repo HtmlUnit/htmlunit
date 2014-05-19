@@ -638,6 +638,10 @@ public enum BrowserVersionFeatures {
     JS_BLOCK_COMMON_CLASS_NAME,
 
     /** Was originally .isIE(). */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_BODY_MARGINS_IE11,
+
+    /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_BODY_MARGINS_IE8,
 

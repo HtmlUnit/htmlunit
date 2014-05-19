@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BODY_MARGINS_IE11;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BODY_MARGINS_IE8;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_BODY_HEAD_READONLY;
 
@@ -60,6 +61,10 @@ public class HTMLBodyElement extends HTMLElement {
     public void setDefaults(final ComputedCSSStyleDeclaration style) {
         if (getBrowserVersion().hasFeature(JS_BODY_MARGINS_IE8)) {
             style.setDefaultLocalStyleAttribute("margin", "15px 10px");
+            style.setDefaultLocalStyleAttribute("padding", "0px");
+        }
+        else if (getBrowserVersion().hasFeature(JS_BODY_MARGINS_IE11)) {
+            style.setDefaultLocalStyleAttribute("margin", "8px");
             style.setDefaultLocalStyleAttribute("padding", "0px");
         }
         else {
