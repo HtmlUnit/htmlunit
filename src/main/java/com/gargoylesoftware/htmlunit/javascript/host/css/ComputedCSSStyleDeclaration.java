@@ -43,6 +43,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
+import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlHiddenInput;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
@@ -1279,7 +1280,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final boolean explicitHeightSpecified = super.getHeight().length() > 0;
 
         final int defaultHeight;
-        if (getElement().getFirstChild() == null) {
+        if (getElement().getFirstChild() == null
+                || (node instanceof HtmlDivision && node.getTextContent().trim().isEmpty())) {
             if (node instanceof HtmlButton
                     || (node instanceof HtmlInput && !(node instanceof HtmlHiddenInput))) {
                 defaultHeight = 20;
@@ -1308,6 +1310,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
         int height = pixelValue(getElement(), new CssValue(defaultValue) {
             @Override public String get(final ComputedCSSStyleDeclaration style) {
+                final Element element = style.getElement();
+                if (element instanceof HTMLBodyElement) {
+                    return String.valueOf(element.getWindow().getWebWindow().getInnerHeight());
+                }
                 return style.getStyleAttribute("height");
             }
         });

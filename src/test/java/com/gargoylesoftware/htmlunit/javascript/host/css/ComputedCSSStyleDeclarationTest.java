@@ -1301,4 +1301,85 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void offsetHeight_empty_tag() throws Exception {
+        final String html = "<html><head><title>First</title><script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('div1').offsetHeight);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='div1'/>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void offsetHeight_empty() throws Exception {
+        final String html = "<html><head><title>First</title><script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('div1').offsetHeight);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='div1'></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("20")
+    public void offsetHeight_with_content() throws Exception {
+        final String html = "<html><head><title>First</title><script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('div1').offsetHeight);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='div1'>foo</div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "true", "false" })
+    public void offsetHeight_setting_height() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<style>\n"
+            + "  .v-loading-indicator {\n"
+            + "    height: 100%\n"
+            + "  }\n"
+            + "</style>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var div1 = document.getElementById('div1');\n"
+            + "    alert(div1.offsetHeight == 0);\n"
+            + "    div1.className = 'v-loading-indicator';"
+            + "    alert(div1.offsetHeight == 0);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='div1'/>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }
