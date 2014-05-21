@@ -6492,7 +6492,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 9, 9")
-    @NotYetImplemented(IE8)
     public void dimensions__height__() throws Exception {
         runTest("dimensions: height()");
     }
@@ -6503,7 +6502,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 9, 9")
-    @NotYetImplemented(IE8)
     public void dimensions__height_Function_() throws Exception {
         runTest("dimensions: height(Function)");
     }
