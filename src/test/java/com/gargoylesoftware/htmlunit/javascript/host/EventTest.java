@@ -32,9 +32,9 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
  * Tests that when DOM events such as "onclick" have access
@@ -697,7 +697,7 @@ public class EventTest extends WebDriverTestCase {
             IE11 = { "activeElement BODY", "focus BODY", "handler: activeElement BODY" })
     @BuggyWebDriver(FF) // FFDriver doesn't behave like "manually driven" FF
     // http://code.google.com/p/selenium/issues/detail?id=4665
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, IE11 })
     public void document_focus() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
