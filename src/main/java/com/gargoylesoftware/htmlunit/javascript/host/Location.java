@@ -24,8 +24,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_ABOUT_BLA
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -62,8 +60,6 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  */
 @JsxClass
 public class Location extends SimpleScriptable {
-
-    private static final Pattern DECODE_HASH_PATTERN = Pattern.compile("%([\\dA-F]{2})");
 
     private static final Log LOG = LogFactory.getLog(Location.class);
     private static final String UNKNOWN = "null";
@@ -348,19 +344,7 @@ public class Location extends SimpleScriptable {
         if (hash.indexOf('%') == -1) {
             return hash;
         }
-        final StringBuffer sb = new StringBuffer();
-        final Matcher m = DECODE_HASH_PATTERN.matcher(hash);
-        while (m.find()) {
-            final String code = m.group(1);
-            final int u = (char) Character.digit(code.charAt(0), 16);
-            final int l = (char) Character.digit(code.charAt(1), 16);
-            final char replacement = (char) ((u << 4) + l);
-            m.appendReplacement(sb, "");
-            sb.append(replacement);
-        }
-        m.appendTail(sb);
-
-        return sb.toString();
+        return UrlUtils.decode(hash);
     }
 
     /**
