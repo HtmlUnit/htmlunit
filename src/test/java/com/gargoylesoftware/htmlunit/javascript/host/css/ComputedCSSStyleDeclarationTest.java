@@ -1342,7 +1342,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "20", IE8 = "15")
+    @Alerts(DEFAULT = "20", IE11 = "18", IE8 = "15")
     public void offsetHeight_with_content() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "  function test() {\n"

@@ -55,8 +55,12 @@ public enum BrowserVersionFeatures {
     CAN_INHERIT_CSS_PROPERTY_VALUES,
 
     /** Indicates that the default value for height of elements is 15 instead of 20. */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 10))
     CSS_DEFAULT_ELEMENT_HEIGHT_15,
+
+    /** Indicates that the default value for height of elements is 18 instead of 20. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    CSS_DEFAULT_ELEMENT_HEIGHT_18,
 
     /** Indicates that the default value for height of elements is used instead
      * of the calculated value, if the calculated value is smaller. */
