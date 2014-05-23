@@ -44,7 +44,7 @@ public class WebClientOptions implements Serializable {
     private ProxyConfig proxyConfig_;
     private int timeout_ = 90000; // like Firefox 16 default's value for network.http.connection-timeout
 
-    private boolean useInsecureSSL_ = false; // default is secure SSL
+    private boolean useInsecureSSL_; // default is secure SSL
 
     /**
      * If set to <code>true</code>, the client will accept connections to any host, regardless of
@@ -86,7 +86,7 @@ public class WebClientOptions implements Serializable {
      * Sets the SSL client certificate to use.
      * The needed parameters are used to construct a {@link java.security.KeyStore}.
      *
-     * If the web server requires Renegotiation, you have to set sytem property
+     * If the web server requires Renegotiation, you have to set system property
      * "sun.security.ssl.allowUnsafeRenegotiation" to true, as hinted in
      * <a href="http://www.oracle.com/technetwork/java/javase/documentation/tlsreadme2-176330.html">
      * TLS Renegotiation Issue</a>.

@@ -24,7 +24,6 @@ import org.apache.commons.lang3.StringUtils;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -146,7 +145,8 @@ public class HtmlImageInput extends HtmlInput {
      *
      * @param event the click event used
      * @param <P> the page type
-     * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
+     * @return the page contained in the current window as returned by
+     *         {@link com.gargoylesoftware.htmlunit.WebClient#getCurrentWindow()}
      * @exception IOException if an IO error occurs
      */
     @Override

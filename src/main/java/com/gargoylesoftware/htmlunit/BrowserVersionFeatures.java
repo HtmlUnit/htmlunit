@@ -1385,7 +1385,7 @@ public enum BrowserVersionFeatures {
 
     /** The width column property does not return negative values. */
     @BrowserFeature(@WebBrowser(IE))
-    JS_TABLE_COLUMN_WIDTH_DOES_NOT_RETURN_NEGATIVE_VALUES,
+    JS_TABLE_COLUMN_WIDTH_NO_NEGATIVE_VALUES,
 
     /** Calling deleteCell without an index throws an exeption. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
