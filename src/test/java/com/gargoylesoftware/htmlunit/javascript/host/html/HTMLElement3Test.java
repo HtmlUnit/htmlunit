@@ -400,14 +400,6 @@ public class HTMLElement3Test extends SimpleWebTestCase {
     }
 
     /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void dispatchEvent2() throws Exception {
-        testHTMLFile("HTMLElementTest_dispatchEvent2.html");
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test

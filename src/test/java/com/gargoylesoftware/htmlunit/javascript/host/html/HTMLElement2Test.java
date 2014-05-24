@@ -1088,4 +1088,37 @@ public class HTMLElement2Test extends WebDriverTestCase {
         assertEquals("New cell value", elt.getText());
         assertEquals(1, driver.getWindowHandles().size());
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "true" }, IE8 = { })
+    public void dispatchEvent2() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<title>test</title>\n"
+            + "<script>\n"
+            + "  function simulateClick() {\n"
+            + "    var evt = document.createEvent('MouseEvents');\n"
+            + "    evt.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0,"
+                        + " false, false, false, false, 0, null);\n"
+            + "    var cb = document.getElementById('checkbox');\n"
+            + "    cb.dispatchEvent(evt);\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    if (document.createEvent) {\n"
+            + "      alert(document.getElementById('checkbox').checked);\n"
+            + "      simulateClick();\n"
+            + "      alert(document.getElementById('checkbox').checked);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<body onload='test()'>\n"
+            + "  <input type='checkbox' id='checkbox'/><label for='checkbox'>Checkbox</label>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
