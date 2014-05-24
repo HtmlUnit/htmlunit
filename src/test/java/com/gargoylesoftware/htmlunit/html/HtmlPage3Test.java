@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+
 import java.util.List;
 
 import org.junit.Assert;
@@ -25,6 +27,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -145,5 +148,93 @@ public class HtmlPage3Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         assertEquals(1, getCollectedAlerts(driver).size());
         assertTrue(getCollectedAlerts(driver).get(0).startsWith("function"));
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    public void constructor() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<p>hello world</p>\n"
+            + "<form id='form1' action='/formSubmit' method='post'>\n"
+            + "  <input type='text' NAME='textInput1' value='textInput1'/>\n"
+            + "  <input type='text' name='textInput2' value='textInput2'/>\n"
+            + "  <input type='hidden' name='hidden1' value='hidden1'/>\n"
+            + "  <input type='submit' name='submitInput1' value='push me'/>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertEquals("foo", driver.getTitle());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getInputByName() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<p>hello world</p>\n"
+            + "<form id='form1' action='/formSubmit' method='post'>\n"
+            + "  <input type='text' NAME='textInput1' value='textInput1'/>\n"
+            + "  <input type='text' name='textInput2' value='textInput2'/>\n"
+            + "  <input type='hidden' name='hidden1' value='hidden1'/>\n"
+            + "  <input type='submit' name='submitInput1' value='push me'/>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+
+        final WebElement form = driver.findElement(By.id("form1"));
+        final WebElement input = form.findElement(By.name("textInput1"));
+        Assert.assertEquals("name", "textInput1", input.getAttribute("name"));
+
+        Assert.assertEquals("value", "textInput1", input.getAttribute("value"));
+        Assert.assertEquals("type", "text", input.getAttribute("type"));
+    }
+
+    /**
+     * @exception Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "[object HTMLInputElement]", "1" },
+            IE8 = { "[object]", "1" })
+    @BuggyWebDriver(IE11)
+    public void write_getElementById_afterParsing() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    document.write(\"<input id='sendemail'>\");\n"
+            + "    alert(document.getElementById('sendemail'));\n"
+            + "    document.write(\"<input name='sendemail2'>\");\n"
+            + "    alert(document.getElementsByName('sendemail2').length);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @exception Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "[object HTMLInputElement]", "1" },
+            IE8 = { "[object]", "1" })
+    public void write_getElementById_duringParsing() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body><script>\n"
+            + "    document.write(\"<input id='sendemail'>\");\n"
+            + "    alert(document.getElementById('sendemail'));\n"
+            + "    document.write(\"<input name='sendemail2'>\");\n"
+            + "    alert(document.getElementsByName('sendemail2').length);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
     }
 }

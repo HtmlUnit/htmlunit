@@ -35,7 +35,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_APPEND_CHILD_SUPPORTED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CLOSE_IMPLICITLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DOCTYPE_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DOMAIN_IS_LOWERCASE;
@@ -1201,8 +1200,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Closes the document implicitly, i.e. flushes the <tt>document.write</tt> buffer (IE only).
      */
     private void implicitCloseIfNecessary() {
-        final boolean ie = getBrowserVersion().hasFeature(JS_DOCUMENT_CLOSE_IMPLICITLY);
-        if (!writeInCurrentDocument_ && ie) {
+        if (!writeInCurrentDocument_) {
             try {
                 close();
             }

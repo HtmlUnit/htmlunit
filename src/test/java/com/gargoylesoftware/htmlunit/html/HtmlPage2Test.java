@@ -25,7 +25,6 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -54,53 +53,6 @@ public class HtmlPage2Test extends SimpleWebTestCase {
      */
     @Rule
     public final TemporaryFolder tmpFolderProvider_ = new TemporaryFolder();
-
-    /**
-     * @exception Exception If the test fails
-     */
-    @Test
-    public void constructor() throws Exception {
-        final String html = "<html>\n"
-            + "<head><title>foo</title></head>\n"
-            + "<body>\n"
-            + "<p>hello world</p>\n"
-            + "<form id='form1' action='/formSubmit' method='post'>\n"
-            + "<input type='text' NAME='textInput1' value='textInput1'/>\n"
-            + "<input type='text' name='textInput2' value='textInput2'/>\n"
-            + "<input type='hidden' name='hidden1' value='hidden1'/>\n"
-            + "<input type='submit' name='submitInput1' value='push me'/>\n"
-            + "</form>\n"
-            + "</body></html>";
-
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertEquals("foo", page.getTitleText());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void getInputByName() throws Exception {
-        final String html = "<html>\n"
-            + "<head><title>foo</title></head>\n"
-            + "<body>\n"
-            + "<p>hello world</p>\n"
-            + "<form id='form1' action='/formSubmit' method='post'>\n"
-            + "<input type='text' NAME='textInput1' value='textInput1'/>\n"
-            + "<input type='text' name='textInput2' value='textInput2'/>\n"
-            + "<input type='hidden' name='hidden1' value='hidden1'/>\n"
-            + "<input type='submit' name='submitInput1' value='push me'/>\n"
-            + "</form>\n"
-            + "</body></html>";
-        final HtmlPage page = loadPageWithAlerts(html);
-
-        final HtmlForm form = page.getHtmlElementById("form1");
-        final HtmlInput input = form.getInputByName("textInput1");
-        Assert.assertEquals("name", "textInput1", input.getNameAttribute());
-
-        Assert.assertEquals("value", "textInput1", input.getValueAttribute());
-        Assert.assertEquals("type", "text", input.getTypeAttribute());
-    }
 
     /**
      * Different versions of IE behave differently here.
@@ -603,42 +555,6 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         final HtmlPage copyPage = (HtmlPage) copy.getCurrentWindow().getTopWindow().getEnclosedPage();
         copyPage.getHtmlElementById("link").click();
         assertEquals(URL_FIRST.toExternalForm(), copyPage.getElementById("aframe").getAttribute("src"));
-    }
-
-    /**
-     * @exception Exception if the test fails
-     */
-    @Test
-    @Alerts(IE = { "[object]", "1" }, FF = { "null", "0" })
-    public void write_getElementById_afterParsing() throws Exception {
-        final String html = "<html>\n"
-            + "<head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    document.write(\"<input id='sendemail'>\");\n"
-            + "    alert(document.getElementById('sendemail'));\n"
-            + "    document.write(\"<input name='sendemail2'>\");\n"
-            + "    alert(document.getElementsByName('sendemail2').length);\n"
-            + "  }\n"
-            + "</script></head>\n"
-            + "<body onload='test()'></body></html>";
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * @exception Exception if the test fails
-     */
-    @Test
-    @Alerts(IE = { "[object]", "1" }, FF = { "[object HTMLInputElement]", "1" })
-    public void write_getElementById_duringParsing() throws Exception {
-        final String html = "<html>\n"
-            + "<head><title>foo</title></head>\n"
-            + "<body><script>\n"
-            + "    document.write(\"<input id='sendemail'>\");\n"
-            + "    alert(document.getElementById('sendemail'));\n"
-            + "    document.write(\"<input name='sendemail2'>\");\n"
-            + "    alert(document.getElementsByName('sendemail2').length);\n"
-            + "</script></body></html>";
-        loadPageWithAlerts(html);
     }
 
     /**

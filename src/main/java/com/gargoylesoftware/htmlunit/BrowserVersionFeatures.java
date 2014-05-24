@@ -751,10 +751,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_DOCUMENT_APPEND_CHILD_SUPPORTED,
 
-    /** Closes the document implicitly, i.e. flushes the <tt>document.write</tt> buffer (IE only). */
-    @BrowserFeature(@WebBrowser(IE))
-    JS_DOCUMENT_CLOSE_IMPLICITLY,
-
     /** Javascript function document.createElement can process html code.
      * e.g. document.createElement("<INPUT TYPE='RADIO' NAME='RADIOTEST' VALUE='First Choice'>")
      * @see "http://msdn.microsoft.com/en-us/library/ms536389%28v=VS.85%29.aspx"
