@@ -88,19 +88,6 @@ public class HtmlScriptTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for bug 3236689.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void badSrcUrl() throws Exception {
-        final String html = "<html><head>\n"
-                + "<script src='http://'>alert(1)</script>\n"
-                + "</head><body></body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
      * @throws Exception if an error occurs
      */
     @Test
@@ -146,41 +133,6 @@ public class HtmlScriptTest extends SimpleWebTestCase {
     }
 
     /**
-     * Verifies that the weird script src attribute used by the jQuery JavaScript library is
-     * ignored silently (bug 1695279).
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testInvalidJQuerySrcAttribute() throws Exception {
-        loadPage("<html><body><script src='//:'></script></body></html>");
-    }
-
-    /**
-     * Verifies that if a script element executes "window.location.href=someotherpage", then subsequent
-     * script tags, and any onload handler for the original page do not run.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({ "First script executes", "Second page loading" })
-    public void testChangingLocationSkipsFurtherScriptsOnPage() throws Exception {
-        final String html
-            = "<html><head></head>\n"
-            + "<body onload='alert(\"body onload executing but should be skipped\")'>\n"
-            + "<script>alert('First script executes')</script>\n"
-            + "<script>window.location.href='" + URL_SECOND + "'</script>\n"
-            + "<script>alert('Third script executing but should be skipped')</script>\n"
-            + "</body></html>";
-
-        final String secondPage
-            = "<html><head></head><body>\n"
-            + "<script>alert('Second page loading')</script>\n"
-            + "</body></html>";
-
-        getMockWebConnection().setResponse(URL_SECOND, secondPage);
-        loadPageWithAlerts(html);
-    }
-
-    /**
      * Tests the 'Referer' HTTP header.
      * @throws Exception on test failure
      */
@@ -209,6 +161,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("loaded")
     public void testScriptCloneDoesNotReloadScript() throws Exception {
         final String html = "<html><body><script src='" + URL_SECOND + "'></script></body></html>";
         final String js = "alert('loaded')";
@@ -229,8 +182,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
         page.cloneNode(true);
         assertEquals(2, conn.getRequestCount());
 
-        final String[] expected = {"loaded"};
-        assertEquals(expected, actual);
+        assertEquals(getExpectedAlerts(), actual);
     }
 
     /**
@@ -238,6 +190,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("ok")
     public void testWhitespaceInSrc() throws Exception {
         final String html = "<html><head><script src=' " + URL_SECOND + " '></script></head><body>abc</body></html>";
         final String js = "alert('ok')";
@@ -253,8 +206,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         client.getPage(URL_FIRST);
-        final String[] expectedAlerts = {"ok"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
