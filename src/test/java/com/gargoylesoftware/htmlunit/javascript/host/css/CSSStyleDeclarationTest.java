@@ -1388,7 +1388,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "undefined", "none" },
             IE = "exception",
             IE11 = { "function", "before", "none", "after", "none" })
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, IE11 })
     public void interceptSetter() throws Exception {
         final String html = "<html><body><div id='d'>foo</div><script>\n"
             + "try {\n"
