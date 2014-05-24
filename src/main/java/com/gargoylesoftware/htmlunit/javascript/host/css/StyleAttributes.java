@@ -951,9 +951,6 @@ final class StyleAttributes {
         /** The style property flood-opacity. */
         FLOOD_OPACITY("floodOpacity", "flood-opacity", ff17up("1"), ie11up("1")),
 
-        /** The style property font-family. */
-        FONT_FAMILY("fontFamily", "font-family", ie11up("Times New Roman")),
-
         /** The style property font-feature-settings. */
         FONT_FEATURE_SETTINGS("fontFeatureSettings", "font-feature-settings", ie11up("normal")),
 

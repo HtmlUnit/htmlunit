@@ -79,6 +79,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     CSS_FONTFACERULE_CSSTEXT_CRLF,
 
+    /** Default is 'Times New Roman'. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    CSS_FONT_FAMILY_DEFAULT_TIMES,
+
     /** Default is 'normal'. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     CSS_FONT_STRECH_DEFAULT_NORMAL,

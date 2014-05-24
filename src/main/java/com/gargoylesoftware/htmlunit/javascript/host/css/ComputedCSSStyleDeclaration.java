@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_E
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_18;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_MARKS_MIN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_WIDTH_AUTO;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONT_FAMILY_DEFAULT_TIMES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONT_STRECH_DEFAULT_NORMAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_TEXT_SHADOW_DEFAULT_NONE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB;
@@ -592,7 +593,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getFontFamily() {
-        return defaultIfEmpty(super.getFontFamily(), "serif");
+        String defaultFontFamily = "serif";
+        if (getBrowserVersion().hasFeature(CSS_FONT_FAMILY_DEFAULT_TIMES)) {
+            defaultFontFamily = "Times New Roman";
+        }
+        return defaultIfEmpty(super.getFontFamily(), defaultFontFamily);
     }
 
     /**
