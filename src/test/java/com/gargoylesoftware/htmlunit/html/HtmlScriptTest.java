@@ -332,4 +332,29 @@ public class HtmlScriptTest extends SimpleWebTestCase {
         final HtmlScript script = page.getFirstByXPath("//script");
         assertFalse(script.isDisplayed());
     }
+
+    /**
+     * Verifies that if a script element executes "window.location.href=someotherpage", then subsequent
+     * script tags, and any onload handler for the original page do not run.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "First script executes", "Second page loading" })
+    public void testChangingLocationSkipsFurtherScriptsOnPage() throws Exception {
+        final String html
+            = "<html><head></head>\n"
+            + "<body onload='alert(\"body onload executing but should be skipped\")'>\n"
+            + "<script>alert('First script executes')</script>\n"
+            + "<script>window.location.href='" + URL_SECOND + "'</script>\n"
+            + "<script>alert('Third script executing but should be skipped')</script>\n"
+            + "</body></html>";
+
+        final String secondPage
+            = "<html><head></head><body>\n"
+            + "<script>alert('Second page loading')</script>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondPage);
+        loadPageWithAlerts(html);
+    }
 }

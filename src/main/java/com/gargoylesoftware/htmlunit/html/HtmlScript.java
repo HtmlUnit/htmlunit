@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SCRIPT_DISPLAY_INLINE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONERROR_EXTERNAL_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_EXTERNAL_JAVASCRIPT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_INTERNAL_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONREADY_STATE_CHANGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_APPLICATION_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_TRIM_TYPE;
@@ -406,6 +407,8 @@ public class HtmlScript extends HtmlElement {
         else if (getFirstChild() != null) {
             // <script>[code]</script>
             executeInlineScriptIfNeeded();
+
+            executeEventIfBrowserHasFeature(Event.TYPE_LOAD, EVENT_ONLOAD_INTERNAL_JAVASCRIPT);
         }
     }
 

@@ -242,6 +242,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT,
 
+    /** Triggers "onload" event if internal javascript loaded. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    EVENT_ONLOAD_INTERNAL_JAVASCRIPT,
+
     /** Setting the 'onload' event handler to <code>undefined</code> throws an error. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     EVENT_ONLOAD_UNDEFINED_THROWS_ERROR,

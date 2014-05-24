@@ -28,7 +28,6 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -327,14 +326,16 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = "z", IE11 = { "x", "z" })
+    @Alerts(FF = { "s-x", "z" },
+            IE11 = { "s-x", "x", "z" },
+            IE8 = "s-x")
     public void addEventListener_load() throws Exception {
         final String html
             = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var s1 = document.createElement('script');\n"
-            + "    s1.text = 'var foo';\n"
+            + "    s1.text = 'alert(\"s-x\")';\n"
             + "    if(s1.addEventListener) s1.addEventListener('load', function(){alert('x')}, false);\n"
             + "    document.body.insertBefore(s1, document.body.firstChild);\n"
             + "    \n"
@@ -378,31 +379,5 @@ public class HtmlScript2Test extends WebDriverTestCase {
     @Test
     public void testInvalidJQuerySrcAttribute() throws Exception {
         loadPage2("<html><body><script src='//:'></script></body></html>");
-    }
-
-    /**
-     * Verifies that if a script element executes "window.location.href=someotherpage", then subsequent
-     * script tags, and any onload handler for the original page do not run.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({ "First script executes", "Second page loading" })
-    @BuggyWebDriver
-    public void testChangingLocationSkipsFurtherScriptsOnPage() throws Exception {
-        final String html
-            = "<html><head></head>\n"
-            + "<body onload='alert(\"body onload executing but should be skipped\")'>\n"
-            + "<script>alert('First script executes')</script>\n"
-            + "<script>window.location.href='" + URL_SECOND + "'</script>\n"
-            + "<script>alert('Third script executing but should be skipped')</script>\n"
-            + "</body></html>";
-
-        final String secondPage
-            = "<html><head></head><body>\n"
-            + "<script>alert('Second page loading')</script>\n"
-            + "</body></html>";
-
-        getMockWebConnection().setResponse(URL_SECOND, secondPage);
-        loadPageWithAlerts2(html);
     }
 }
