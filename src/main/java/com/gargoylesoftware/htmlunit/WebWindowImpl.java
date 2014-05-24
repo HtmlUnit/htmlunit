@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUT
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -186,8 +185,10 @@ public abstract class WebWindowImpl implements WebWindow {
             LOG.debug("destroyChildren");
         }
         getJobManager().removeAllJobs();
-        for (final ListIterator<WebWindowImpl> iter = childWindows_.listIterator(); iter.hasNext();) {
-            final WebWindowImpl window = iter.next();
+
+        // try to deal with js thread adding a new window inbetween
+        while (!childWindows_.isEmpty()) {
+            final WebWindowImpl window = childWindows_.get(0);
             if (LOG.isDebugEnabled()) {
                 LOG.debug("closing child window: " + window);
             }
@@ -198,7 +199,7 @@ public abstract class WebWindowImpl implements WebWindow {
                 ((HtmlPage) page).cleanUp();
             }
             window.destroyChildren();
-            iter.remove();
+            childWindows_.remove(window);
         }
     }
 

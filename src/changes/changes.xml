@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.15" date="???" description="Bugfixes, IE11 progress">
+            <action type="fix" dev="rbri" issue="1602">
+                ConcurrentModificationException in WebWindowImpl.destroyChildren().
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: fix .offsetHeight for empty &lt;div&gt;.
             </action>
