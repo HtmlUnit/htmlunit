@@ -402,4 +402,83 @@ public class Event2Test extends WebDriverTestCase {
         driver.findElement(By.id("mySubmit"));
         assertEquals(getDefaultUrl().toExternalForm(), driver.getCurrentUrl());
     }
+
+    /**
+     * Test Mozilla DOMContentLoaded event.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "DOMContentLoaded type=DOMContentLoaded", "onLoad" },
+            IE8 = "onLoad")
+    public void testDOMContentLoaded() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<title>DOMContentLoaded</title>\n"
+            + "<script>\n"
+            + "  if (document.addEventListener) {\n"
+            + "    document.addEventListener('DOMContentLoaded', onDCL, false);\n"
+            + "  }\n"
+            + "  function onDCL(e) {\n"
+            + "    alert('DOMContentLoaded type=' + e.type);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='alert(\"onLoad\")'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "not canceled", "true", "canceled", "true" },
+            IE8 = { })
+    public void testPreventDefault() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<title>preventDefault - copied from mozilla.org</title>\n"
+            + "<script>\n"
+            + "  function preventDef(event) {\n"
+            + "    event.preventDefault();\n"
+            + "  }\n"
+
+            + "  function addHandler() {\n"
+            + "    document.getElementById('checkbox').addEventListener('click', preventDef, false);\n"
+            + "  }\n"
+
+            + "  function simulateClick() {\n"
+            + "    var evt = document.createEvent('MouseEvents');\n"
+            + "    evt.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0,"
+                        + " false, false, false, false, 0, null);\n"
+            + "    var cb = document.getElementById('checkbox');\n"
+            + "    var canceled = !cb.dispatchEvent(evt);\n"
+            + "    if(canceled) {\n"
+            + "      // A handler called preventDefault\n"
+            + "      alert('canceled');\n"
+            + "    } else {\n"
+            + "      // None of the handlers called preventDefault\n"
+            + "      alert('not canceled');\n"
+            + "    }\n"
+            + "  }\n"
+
+            + "  function test() {\n"
+            + "    if (document.createEvent) {\n"
+            + "      alert(document.getElementById('checkbox').checked);\n"
+            + "      simulateClick();\n"
+            + "      alert(document.getElementById('checkbox').checked);\n"
+            + "      addHandler();\n"
+            + "      simulateClick();\n"
+            + "      alert(document.getElementById('checkbox').checked);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input type='checkbox' id='checkbox'/><label for='checkbox'>Checkbox</label>"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

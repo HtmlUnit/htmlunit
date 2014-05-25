@@ -24,11 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 
-import com.gargoylesoftware.htmlunit.html.DomElement;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -200,42 +197,6 @@ public abstract class SimpleWebTestCase extends WebTestCase {
      */
     protected static final MockWebConnection getMockConnection(final HtmlPage page) {
         return (MockWebConnection) page.getWebClient().getWebConnection();
-    }
-
-    /**
-     * Load the specified resource for the supported browsers and tests
-     * that the generated log corresponds to the expected one for this browser.
-     *
-     * @param fileName the resource name which resides in /resources folder and
-     *        belongs to the same package as the test class.
-     *
-     * @throws Exception if the test fails
-     */
-    protected void testHTMLFile(final String fileName) throws Exception {
-        final String resourcePath = getClass().getPackage().getName().replace('.', '/') + '/' + fileName;
-        final URL url = getClass().getClassLoader().getResource(resourcePath);
-
-        final String browserKey = getBrowserVersion().getNickname().substring(0, 2);
-
-        final WebClient client = getWebClient();
-
-        final HtmlPage page = client.getPage(url);
-        final HtmlElement want = page.getHtmlElementById(browserKey);
-
-        final HtmlElement got = page.getHtmlElementById("log");
-
-        final List<String> expected = readChildElementsText(want);
-        final List<String> actual = readChildElementsText(got);
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    private List<String> readChildElementsText(final HtmlElement elt) {
-        final List<String> list = new ArrayList<String>();
-        for (final DomElement child : elt.getChildElements()) {
-            list.add(child.asText());
-        }
-        return list;
     }
 
     /**

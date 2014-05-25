@@ -367,23 +367,6 @@ public class Event3Test extends SimpleWebTestCase {
     }
 
     /**
-     * Test Mozilla DOMContentLoaded event.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testDOMContentLoaded() throws Exception {
-        testHTMLFile("EventTest_DOMContentLoaded.html");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testPreventDefault() throws Exception {
-        testHTMLFile("EventTest_preventDefault.html");
-    }
-
-    /**
      * Test for bug 1976960: what happens with different return values at different levels?
      * @throws Exception if an error occurs
      */
