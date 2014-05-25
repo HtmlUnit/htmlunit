@@ -141,7 +141,6 @@ public class Prototype160Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented(IE11)
     public void event() throws Exception {
         test("event.html");
     }
