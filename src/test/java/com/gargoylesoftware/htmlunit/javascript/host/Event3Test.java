@@ -14,9 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 
@@ -36,7 +34,6 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
-import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -147,72 +144,6 @@ public class Event3Test extends SimpleWebTestCase {
     }
 
     /**
-     * Test event transmission to event handler.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(FF = { "false", "true", "SPAN" },
-            IE = { "true", "false", "SPAN" })
-    public void testEventTransmission() throws Exception {
-        final String content =
-            "<html><body><span id='clickMe'>foo</span>\n"
-            + "<script>\n"
-            + "function handler(e) {\n"
-            + "  alert(e == null);\n"
-            + "  alert(window.event == null);\n"
-            + "  var theEvent = (e != null) ? e : window.event;\n"
-            + "  var target = theEvent.target ? theEvent.target : theEvent.srcElement;\n"
-            + "  alert(target.tagName);\n"
-            + "}\n"
-            + "document.getElementById('clickMe').onclick = handler;\n"
-            + "</script></body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        page.getHtmlElementById("clickMe").click();
-
-        assertEquals(getExpectedAlerts(), collectedAlerts);
-    }
-
-    /**
-     * Test for event capturing and bubbling in FF.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Browsers(FF)
-    @Alerts({ "window capturing", "div capturing", "span capturing",
-        "span bubbling", "div", "div bubbling", "window bubbling" })
-    public void testFF_EventCapturingAndBubbling() throws Exception {
-        final String content = "<html><head><title>foo</title>\n"
-            + "<script>\n"
-            + "function t(_s) {\n"
-            + "     return function() { alert(_s) };\n"
-            + "}\n"
-            + "function init() {\n"
-            + "  window.addEventListener('click', t('window capturing'), true);\n"
-            + "  window.addEventListener('click', t('window bubbling'), false);\n"
-            + "  var oDiv = document.getElementById('theDiv');\n"
-            + "  oDiv.addEventListener('click', t('div capturing'), true);\n"
-            + "  oDiv.addEventListener('click', t('div bubbling'), false);\n"
-            + "  var oSpan = document.getElementById('theSpan');\n"
-            + "  oSpan.addEventListener('click', t('span capturing'), true);\n"
-            + "  oSpan.addEventListener('click', t('span bubbling'), false);\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head><body onload='init()'>\n"
-            + "<div onclick=\"alert('div')\" id='theDiv'>\n"
-            + "<span id='theSpan'>blabla</span>\n"
-            + "</div>\n"
-            + "</body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        page.getHtmlElementById("theSpan").click();
-
-        assertEquals(getExpectedAlerts(), collectedAlerts);
-    }
-
-    /**
      * Test for event bubbling in IE.
      * @throws Exception if the test fails
      */
@@ -245,125 +176,6 @@ public class Event3Test extends SimpleWebTestCase {
         page.getHtmlElementById("theSpan").click();
 
         assertEquals(getExpectedAlerts(), collectedAlerts);
-    }
-
-    /**
-     * Test for event capturing and bubbling in FF.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Browsers({ FF, IE11 })
-    public void testFF_StopPropagation() throws Exception {
-        testFF_StopPropagation("stopPropagation()");
-        testFF_StopPropagation("cancelBubble=true");
-    }
-
-    private void testFF_StopPropagation(final String cancelMethod) throws Exception {
-        final String content = "<html><head><title>foo</title>\n"
-            + "<script>\n"
-            + "var counter = 0;\n"
-            + "function t(_s) {\n"
-            + "  return function(e) { alert(_s); counter++; if (counter >= 4) e." + cancelMethod + "; };\n"
-            + "}\n"
-            + "function init() {\n"
-            + "  window.addEventListener('click', t('window capturing'), true);\n"
-            + "  var oDiv = document.getElementById('theDiv');\n"
-            + "  oDiv.addEventListener('click', t('div capturing'), true);\n"
-            + "  var oSpan = document.getElementById('theSpan');\n"
-            + "  oSpan.addEventListener('click', t('span capturing'), true);\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head><body onload='init()'>\n"
-            + "<div onclick=\"alert('div')\" id='theDiv'>\n"
-            + "<span id='theSpan'>blabla</span>\n"
-            + "</div>\n"
-            + "</body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        page.getHtmlElementById("theSpan").click();
-        final String[] expectedAlerts1 = {"window capturing", "div capturing", "span capturing", "div"};
-        assertEquals(expectedAlerts1, collectedAlerts);
-        collectedAlerts.clear();
-
-        page.getHtmlElementById("theSpan").click();
-        final String[] expectedAlerts2 = {"window capturing"};
-        assertEquals(expectedAlerts2, collectedAlerts);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Browsers(FF)
-    public void testFF_StopPropagation_WithMultipleEventHandlers() throws Exception {
-        final String content = "<html><head><title>foo</title>\n"
-            + "<script>\n"
-            + "var counter = 0;\n"
-            + "function t(_s) {\n"
-            + "  return function(e) { alert(_s); counter++; if (counter >= 5) e.stopPropagation(); };\n"
-            + "}\n"
-            + "function init() {\n"
-            + "  window.addEventListener('click', t('w'), true);\n"
-            + "  window.addEventListener('click', t('w 2'), true);\n"
-            + "  var oDiv = document.getElementById('theDiv');\n"
-            + "  oDiv.addEventListener('click', t('d'), true);\n"
-            + "  oDiv.addEventListener('click', t('d 2'), true);\n"
-            + "  var oSpan = document.getElementById('theSpan');\n"
-            + "  oSpan.addEventListener('click', t('s'), true);\n"
-            + "  oSpan.addEventListener('click', t('s 2'), true);\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head><body onload='init()'>\n"
-            + "<div id='theDiv'>\n"
-            + "<span id='theSpan'>blabla</span>\n"
-            + "</div>\n"
-            + "</body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        page.getHtmlElementById("theSpan").click();
-        final String[] expectedAlerts1 = {"w", "w 2", "d", "d 2", "s", "s 2"};
-        assertEquals(expectedAlerts1, collectedAlerts);
-        collectedAlerts.clear();
-
-        page.getHtmlElementById("theSpan").click();
-        final String[] expectedAlerts2 = {"w", "w 2"};
-        assertEquals(expectedAlerts2, collectedAlerts);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Browsers(FF)
-    @Alerts({ "capturing", "at target", "bubbling" })
-    public void testEventPhase() throws Exception {
-        final String html =
-              "<html><head><script>\n"
-            + "  function init() {\n"
-            + "    var form = document.forms[0];\n"
-            + "    form.addEventListener('click', alertPhase, true);\n"
-            + "    form.addEventListener('click', alertPhase, false);\n"
-            + "  }\n"
-            + "  function alertPhase(e) {\n"
-            + "    switch (e.eventPhase) {\n"
-            + "      case 1: alert('capturing'); break;\n"
-            + "      case 2: alert('at target'); break;\n"
-            + "      case 3: alert('bubbling'); break;\n"
-            + "      default: alert('unknown');\n"
-            + "    }\n"
-            + "  }\n"
-            + "</script></head>\n"
-            + "<body onload='init()'>\n"
-            + "<form><input type='button' onclick='alertPhase(event)' id='b'></form>\n"
-            + "</body></html>";
-
-        final List<String> actual = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), html, actual);
-        final HtmlButtonInput button = page.getHtmlElementById("b");
-        button.click();
-        assertEquals(getExpectedAlerts(), actual);
     }
 
     /**

@@ -481,4 +481,224 @@ public class Event2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Test event transmission to event handler.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "true", "SPAN" },
+            IE11 = { "false", "false", "SPAN" },
+            IE8 = { "true", "false", "SPAN" })
+    public void testEventTransmission() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<body>\n"
+            + "  <span id='clickMe'>foo</span>\n"
+            + "  <script>\n"
+            + "    function handler(e) {\n"
+            + "      alert(e == null);\n"
+            + "      alert(window.event == null);\n"
+            + "      var theEvent = (e != null) ? e : window.event;\n"
+            + "      var target = theEvent.target ? theEvent.target : theEvent.srcElement;\n"
+            + "      alert(target.tagName);\n"
+            + "    }\n"
+            + "    document.getElementById('clickMe').onclick = handler;\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("clickMe")).click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "capturing", "at target", "bubbling" },
+            IE8 = "unknown")
+    public void testEventPhase() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<head><script>\n"
+            + "  function init() {\n"
+            + "    var form = document.forms[0];\n"
+            + "    if (form.addEventListener) {\n"
+            + "      form.addEventListener('click', alertPhase, true);\n"
+            + "      form.addEventListener('click', alertPhase, false);\n"
+            + "    }\n"
+            + "  }\n"
+
+            + "  function alertPhase(e) {\n"
+            + "    switch (e.eventPhase) {\n"
+            + "      case 1: alert('capturing'); break;\n"
+            + "      case 2: alert('at target'); break;\n"
+            + "      case 3: alert('bubbling'); break;\n"
+            + "      default: alert('unknown');\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='init()'>\n"
+            + "  <form>\n"
+            + "    <input type='button' onclick='alertPhase(event)' id='b'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("b")).click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * Test for event capturing and bubbling in FF.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "window capturing", "div capturing", "span capturing",
+                "span bubbling", "div", "div bubbling", "window bubbling" },
+            IE8 = "div")
+    public void eventCapturingAndBubbling() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function t(_s) {\n"
+            + "    return function() { alert(_s) };\n"
+            + "  }\n"
+
+            + "  function init() {\n"
+            + "    if (window.addEventListener) {\n"
+            + "      window.addEventListener('click', t('window capturing'), true);\n"
+            + "      window.addEventListener('click', t('window bubbling'), false);\n"
+            + "    }\n"
+            + "    var oDiv = document.getElementById('theDiv');\n"
+            + "    if (oDiv.addEventListener) {\n"
+            + "      oDiv.addEventListener('click', t('div capturing'), true);\n"
+            + "      oDiv.addEventListener('click', t('div bubbling'), false);\n"
+            + "    }\n"
+            + "    var oSpan = document.getElementById('theSpan');\n"
+            + "    if (oSpan.addEventListener) {\n"
+            + "      oSpan.addEventListener('click', t('span capturing'), true);\n"
+            + "      oSpan.addEventListener('click', t('span bubbling'), false);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='init()'>\n"
+            + "  <div onclick=\"alert('div')\" id='theDiv'>\n"
+            + "    <span id='theSpan'>blabla</span>\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("theSpan")).click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * Test for event capturing and bubbling.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "window capturing", "div capturing", "span capturing", "div", "window capturing" },
+            IE8 = { "div", "div" })
+    public void stopPropagation() throws Exception {
+        stopPropagation("stopPropagation()");
+    }
+
+    /**
+     * Test for event capturing and bubbling in FF.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "window capturing", "div capturing", "span capturing", "div", "window capturing" },
+            IE11 = { "window capturing", "div capturing", "span capturing", "div", "window capturing",
+                "div capturing", "span capturing" },
+            IE8 = { "div", "div" })
+    public void stopPropagationCancelBubble() throws Exception {
+        stopPropagation("cancelBubble=true");
+    }
+
+    private void stopPropagation(final String cancelMethod) throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "  var counter = 0;\n"
+            + "  function t(_s) {\n"
+            + "    return function(e) { alert(_s); counter++; if (counter >= 4) e." + cancelMethod + "; };\n"
+            + "  }\n"
+            + "  function init() {\n"
+            + "    if (window.addEventListener) {\n"
+            + "      window.addEventListener('click', t('window capturing'), true);\n"
+            + "    }\n"
+            + "    var oDiv = document.getElementById('theDiv');\n"
+            + "    if (oDiv.addEventListener) {\n"
+            + "      oDiv.addEventListener('click', t('div capturing'), true);\n"
+            + "    }\n"
+            + "    var oSpan = document.getElementById('theSpan');\n"
+            + "    if (oSpan.addEventListener) {\n"
+            + "      oSpan.addEventListener('click', t('span capturing'), true);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='init()'>\n"
+            + "  <div onclick=\"alert('div')\" id='theDiv'>\n"
+            + "    <span id='theSpan'>blabla</span>\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("theSpan")).click();
+        driver.findElement(By.id("theSpan")).click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "w", "w 2", "d", "d 2", "s", "s 2", "w", "w 2" },
+            IE8 = { })
+    public void stopPropagation_WithMultipleEventHandlers() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "  var counter = 0;\n"
+            + "  function t(_s) {\n"
+            + "    return function(e) { alert(_s); counter++; if (counter >= 5) e.stopPropagation(); };\n"
+            + "  }\n"
+            + "  function init() {\n"
+            + "    if (window.addEventListener) {\n"
+            + "      window.addEventListener('click', t('w'), true);\n"
+            + "      window.addEventListener('click', t('w 2'), true);\n"
+            + "    }\n"
+            + "    var oDiv = document.getElementById('theDiv');\n"
+            + "    if (oDiv.addEventListener) {\n"
+            + "      oDiv.addEventListener('click', t('d'), true);\n"
+            + "      oDiv.addEventListener('click', t('d 2'), true);\n"
+            + "    }\n"
+            + "    var oSpan = document.getElementById('theSpan');\n"
+            + "    if (oSpan.addEventListener) {\n"
+            + "      oSpan.addEventListener('click', t('s'), true);\n"
+            + "      oSpan.addEventListener('click', t('s 2'), true);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='init()'>\n"
+            + "<div id='theDiv'>\n"
+            + "<span id='theSpan'>blabla</span>\n"
+            + "</div>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("theSpan")).click();
+        driver.findElement(By.id("theSpan")).click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
 }
