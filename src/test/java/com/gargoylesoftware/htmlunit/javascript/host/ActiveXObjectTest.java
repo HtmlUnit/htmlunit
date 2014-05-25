@@ -24,9 +24,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
@@ -42,47 +40,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
  */
 @RunWith(BrowserRunner.class)
 public class ActiveXObjectTest extends SimpleWebTestCase {
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Browsers(IE)
-    public void xmlDocument() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var doc = new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "    alert(doc);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        final String[] expectedAlerts = {"[object]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(getBrowserVersion(), content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Browsers(IE)
-    @Alerts("exception: Automation server can't create object for 'InternetExplorer.Application'.")
-    @NotYetImplemented
-    public void activex() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    try {\n"
-            + "      var ie = new ActiveXObject('InternetExplorer.Application');\n"
-            + "      alert(ie);\n"
-            + "    } catch(e) {alert('exception: ' + e.message);}\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
-    }
 
     /**
      * @throws Exception if the test fails
