@@ -61,15 +61,6 @@ public class FocusableElementTest extends SimpleWebTestCase {
     }
 
     /**
-     * Test focus on all types of elements.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testOnAllElements() throws Exception {
-        testHTMLFile("FocusableElementTest_onAllElements.html");
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test

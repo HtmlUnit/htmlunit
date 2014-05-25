@@ -293,4 +293,31 @@ public class FocusableElement2Test extends WebDriverTestCase {
         final String[] alerts = driver.findElement(By.id("log")).getAttribute("value").split("\r?\n");
         assertEquals(getExpectedAlerts(), Arrays.asList(alerts));
     }
+
+    /**
+     * Test focus on all types of elements.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "true", "true" })
+    public void testOnAllElements() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<title>focus/blur on all elements</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('foo1').focus != null);\n"
+            + "    alert(document.getElementById('foo2').focus != null);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test(); focus()'>\n"
+            + "  <span id='foo1'>X</span>\n"
+            + "  <form action=''>\n"
+            + "    <input id='foo2'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
