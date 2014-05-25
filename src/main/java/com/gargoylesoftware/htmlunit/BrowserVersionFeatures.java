@@ -179,7 +179,7 @@ public enum BrowserVersionFeatures {
     EVENT_BUBBLES_AND_CANCELABLE_DEFAULT_FALSE,
 
     /** Triggers "DOMContentLoaded" event. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     EVENT_DOM_CONTENT_LOADED,
 
     /** Supports DOM level 2 events. */
