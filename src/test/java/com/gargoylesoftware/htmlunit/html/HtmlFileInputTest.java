@@ -57,6 +57,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.HttpWebConnection;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -218,7 +219,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
         httpEntity.writeTo(out);
         out.close();
 
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER_11 != getBrowserVersion()) {
             final Pattern pattern = Pattern
                 .compile("Content-Disposition: form-data; name=\"image\";"
                         + " filename=\".*testfiles[\\\\/]tiny-png\\.img\"");
