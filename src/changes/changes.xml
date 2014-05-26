@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.15" date="???" description="Bugfixes, IE11 progress">
+            <action type="add" dev="asashour" issue="1600">
+                WebClientOptions: add .setSSLClientProtocols(), .setSSLClientCipherSuites() and .setSSLInsecureProtocol().
+            </action>
             <action type="fix" dev="rbri" issue="1602">
                 ConcurrentModificationException in WebWindowImpl.destroyChildren().
             </action>

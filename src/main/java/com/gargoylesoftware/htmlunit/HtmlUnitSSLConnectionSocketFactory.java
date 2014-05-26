@@ -71,21 +71,29 @@ final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocketFactor
 
     public static SSLConnectionSocketFactory buildSSLSocketFactory(final WebClientOptions options) {
         try {
+            final String[] sslClientProtocols = options.getSSLClientProtocols();
+            final String[] sslClientCipherSuites = options.getSSLClientCipherSuites();
+
             if (!options.isUseInsecureSSL()) {
                 if (options.getSSLClientCertificateUrl() == null) {
-                    return new HtmlUnitSSLConnectionSocketFactory((KeyStore) null, null); // only SOCKS awareness
+                    return new HtmlUnitSSLConnectionSocketFactory((KeyStore) null, null,
+                            sslClientProtocols, sslClientCipherSuites); // only SOCKS awareness
                 }
                 // SOCKS + keystore
                 return new HtmlUnitSSLConnectionSocketFactory(getKeyStore(options),
-                        options.getSSLClientCertificatePassword());
+                        options.getSSLClientCertificatePassword(), sslClientProtocols, sslClientCipherSuites);
             }
 
             // we need insecure SSL + SOCKS awareness
-            final SSLContext sslContext = SSLContext.getInstance("SSL");
+            String protocol = options.getSSLInsecureProtocol();
+            if (protocol == null) {
+                protocol = "SSL";
+            }
+            final SSLContext sslContext = SSLContext.getInstance(protocol);
             sslContext.init(getKeyManagers(options), new TrustManager[]{new InsecureTrustManager2()}, null);
 
             final SSLConnectionSocketFactory factory = new HtmlUnitSSLConnectionSocketFactory(sslContext,
-                SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+                SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER, sslClientProtocols, sslClientCipherSuites);
             return factory;
         }
         catch (final GeneralSecurityException e) {
@@ -94,15 +102,17 @@ final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocketFactor
     }
 
     private HtmlUnitSSLConnectionSocketFactory(final SSLContext sslContext,
-            final X509HostnameVerifier hostnameVerifier) {
-        super(sslContext, hostnameVerifier);
+            final X509HostnameVerifier hostnameVerifier,
+            final String[] supportedProtocols, final String[] supportedCipherSuites) {
+        super(sslContext, supportedProtocols, supportedCipherSuites, hostnameVerifier);
     }
 
-    private HtmlUnitSSLConnectionSocketFactory(final KeyStore keystore, final String keystorePassword)
+    private HtmlUnitSSLConnectionSocketFactory(final KeyStore keystore, final String keystorePassword,
+            final String[] supportedProtocols, final String[] supportedCipherSuites)
         throws NoSuchAlgorithmException, KeyManagementException, KeyStoreException, UnrecoverableKeyException {
         super(SSLContexts.custom()
                 .loadKeyMaterial(keystore, keystorePassword != null ? keystorePassword.toCharArray() : null)
-                .build(),
+                .build(), supportedProtocols, supportedCipherSuites,
                 BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
     }
 
@@ -165,7 +175,8 @@ final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocketFactor
             final char[] passwordChars = password != null ? password.toCharArray() : null;
 
             final KeyStore keyStore = getKeyStore(options);
-            final KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance("SunX509");
+            final KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(
+                    KeyManagerFactory.getDefaultAlgorithm());
             keyManagerFactory.init(keyStore, passwordChars);
             return keyManagerFactory.getKeyManagers();
         }

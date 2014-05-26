@@ -37,6 +37,8 @@ public class WebClientOptions implements Serializable {
     private URL sslClientCertificateUrl_;
     private String sslClientCertificatePassword_;
     private String sslClientCertificateType_;
+    private String[] sslClientProtocols_;
+    private String[] sslClientCipherSuites_;
     private boolean geolocationEnabled_;
     private boolean doNotTrackEnabled_;
     private boolean activeXNative_;
@@ -45,6 +47,7 @@ public class WebClientOptions implements Serializable {
     private int timeout_ = 90000; // like Firefox 16 default's value for network.http.connection-timeout
 
     private boolean useInsecureSSL_; // default is secure SSL
+    private String sslInsecureProtocol_;
 
     /**
      * If set to <code>true</code>, the client will accept connections to any host, regardless of
@@ -112,6 +115,48 @@ public class WebClientOptions implements Serializable {
 
     String getSSLClientCertificateType() {
         return sslClientCertificateType_;
+    }
+
+    /**
+     * Gets the protocol versions enabled for use on SSL connections.
+     * @return the protocol versions enabled for use on SSL connections
+     * @see #setSSLClientProtocols(String[])
+     */
+    public String[] getSSLClientProtocols() {
+        return sslClientProtocols_;
+    }
+
+    /**
+     * Sets the protocol versions enabled for use on SSL connections,
+     * <code>null</code> to use default ones.
+     *
+     * @param sslClientProtocols the protocol versions
+     * @see javax.net.ssl.SSLSocket#setEnabledProtocols(String[])
+     * @see #getSSLClientProtocols()
+     */
+    public void setSSLClientProtocols(final String[] sslClientProtocols) {
+        this.sslClientProtocols_ = sslClientProtocols;
+    }
+
+    /**
+     * Gets the cipher suites enabled for use on SSL connections.
+     * @return the cipher suites enabled for use on SSL connections
+     * @see #setSSLClientCipherSuites(String[])
+     */
+    public String[] getSSLClientCipherSuites() {
+        return sslClientCipherSuites_;
+    }
+
+    /**
+     * Sets the cipher suites enabled for use on SSL connections,
+     * <code>null</code> to use default ones.
+     *
+     * @param sslClientCipherSuites the cipher suites
+     * @see javax.net.ssl.SSLSocket#setEnabledCipherSuites(String[])
+     * @see #getSSLClientCipherSuites()
+     */
+    public void setSSLClientCipherSuites(final String[] sslClientCipherSuites) {
+        this.sslClientCipherSuites_ = sslClientCipherSuites;
     }
 
     /**
@@ -360,5 +405,22 @@ public class WebClientOptions implements Serializable {
      */
     public void setTimeout(final int timeout) {
         timeout_ = timeout;
+    }
+
+    /**
+     * Sets the SSL protocol, used only when {@link #setUseInsecureSSL(boolean)} is set to <code>true</code>.
+     * @param sslInsecureProtocol the SSL protocol for insecure SSL connections,
+     *      <code>null</code> to use for default value
+     */
+    public void setSSLInsecureProtocol(final String sslInsecureProtocol) {
+        this.sslInsecureProtocol_ = sslInsecureProtocol;
+    }
+
+    /**
+     * Gets the SSL protocol, to be used only when {@link #setUseInsecureSSL(boolean)} is set to <code>true</code>.
+     * @return the SSL protocol for insecure SSL connections
+     */
+    public String getSSLInsecureProtocol() {
+        return sslInsecureProtocol_;
     }
 }
