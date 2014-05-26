@@ -174,7 +174,9 @@ public abstract class WebWindowImpl implements WebWindow {
      * @param child the child window to associate with this window
      */
     public void addChildWindow(final FrameWindow child) {
-        childWindows_.add(child);
+        synchronized (childWindows_) {
+            childWindows_.add(child);
+        }
     }
 
     /**
@@ -199,7 +201,10 @@ public abstract class WebWindowImpl implements WebWindow {
                 ((HtmlPage) page).cleanUp();
             }
             window.destroyChildren();
-            childWindows_.remove(window);
+
+            synchronized (childWindows_) {
+                childWindows_.remove(window);
+            }
         }
     }
 
