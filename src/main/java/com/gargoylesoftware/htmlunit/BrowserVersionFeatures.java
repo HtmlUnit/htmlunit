@@ -351,7 +351,7 @@ public enum BrowserVersionFeatures {
     GEO_GEOLOCATION,
 
     /** */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 10))
     HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH,
 
     /** Indicates if HTML5 ruby tags ruby, tp and rt are recognized. */
