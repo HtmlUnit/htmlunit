@@ -1047,8 +1047,9 @@ public class WebClient implements Serializable {
      */
     public void deregisterWebWindow(final WebWindow webWindow) {
         WebAssert.notNull("webWindow", webWindow);
-        windows_.remove(webWindow);
-        fireWindowClosed(new WebWindowEvent(webWindow, WebWindowEvent.CLOSE, webWindow.getEnclosedPage(), null));
+        if (windows_.remove(webWindow)) {
+            fireWindowClosed(new WebWindowEvent(webWindow, WebWindowEvent.CLOSE, webWindow.getEnclosedPage(), null));
+        }
     }
 
     /**

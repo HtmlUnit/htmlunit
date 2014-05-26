@@ -136,13 +136,8 @@ public class FrameWindow extends WebWindowImpl {
      * Closes this frame window.
      */
     public void close() {
-        setClosed();
-        final Page page = getEnclosedPage();
-        if (page != null) {
-            page.cleanUp();
-        }
-        getJobManager().shutdown();
-        destroyChildren();
+        final WebWindowImpl parent = (WebWindowImpl) getParentWindow();
+        parent.removeChildWindow(this);
         getWebClient().deregisterWebWindow(this);
     }
 }

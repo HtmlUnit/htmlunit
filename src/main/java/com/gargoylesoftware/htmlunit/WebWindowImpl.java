@@ -23,7 +23,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 
@@ -188,23 +187,33 @@ public abstract class WebWindowImpl implements WebWindow {
         }
         getJobManager().removeAllJobs();
 
-        // try to deal with js thread adding a new window inbetween
+        // try to deal with js thread adding a new window in between
         while (!childWindows_.isEmpty()) {
             final WebWindowImpl window = childWindows_.get(0);
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("closing child window: " + window);
-            }
-            window.setClosed();
-            window.getJobManager().shutdown();
-            final Page page = window.getEnclosedPage();
-            if (page != null && page.isHtmlPage()) {
-                ((HtmlPage) page).cleanUp();
-            }
-            window.destroyChildren();
+            removeChildWindow(window);
+        }
+    }
 
-            synchronized (childWindows_) {
-                childWindows_.remove(window);
-            }
+    /**
+     * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
+     *
+     * Destroy the child window.
+     * @param window the child to destroy
+     */
+    public void removeChildWindow(final WebWindowImpl window) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("closing child window: " + window);
+        }
+        window.setClosed();
+        window.getJobManager().shutdown();
+        final Page page = window.getEnclosedPage();
+        if (page != null) {
+            page.cleanUp();
+        }
+        window.destroyChildren();
+
+        synchronized (childWindows_) {
+            childWindows_.remove(window);
         }
     }
 
