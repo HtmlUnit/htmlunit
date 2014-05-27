@@ -444,7 +444,6 @@ public class HttpWebConnection implements WebConnection {
         else {
             filename = pairWithFile.getFile().getName();
         }
-        filename = new String(filename.getBytes(pairWithFile.getCharset()));
         builder.addBinaryBody(pairWithFile.getName(), pairWithFile.getFile(), contentType, filename);
     }
 
