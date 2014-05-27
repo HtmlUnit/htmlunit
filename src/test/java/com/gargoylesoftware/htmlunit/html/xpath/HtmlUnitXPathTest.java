@@ -25,7 +25,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
@@ -170,31 +169,6 @@ public class HtmlUnitXPathTest extends SimpleWebTestCase {
             collectedValues.add(node.getNodeValue());
         }
         assertEquals(expectedValues, collectedValues);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(FF = { "102", "111", "111", "160", "97", "110", "100", "160", "102", "111", "111" },
-            IE = "error")
-    public void optionText() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
-            + "function test() {\n"
-            + "  try {\n"
-            + "    var expr = 'string(//option)';\n"
-            + "    var result = document.evaluate(expr, document.documentElement, null, XPathResult.ANY_TYPE, null);\n"
-            + "    var value = result.stringValue;\n"
-            + "    for (i=0; i < value.length; i++) {\n"
-            + "      alert(value.charCodeAt(i));\n"
-            + "    }\n"
-            + "  } catch (e) {alert('error')}\n"
-            + "}\n"
-            + "</script></head><body onload='test()'>\n"
-            + "  <select name='test'><option value='1'>foo&nbsp;and&nbsp;foo</option></select>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(content);
     }
 
     /**
