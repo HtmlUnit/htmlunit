@@ -19,6 +19,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.io.ByteArrayOutputStream;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.zip.GZIPOutputStream;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Script;
@@ -1289,5 +1291,39 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final Thread jsThread = jsThreads.get(0);
         assertEquals("JS executor for " + page.getWebClient(), jsThread.getName());
         assertTrue(jsThread.isDaemon());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void shutdown() throws Exception {
+        final String html = "<html></html>";
+        final HtmlPage page = loadPage(html);
+
+        final WebClient webClient = getWebClient();
+        final JavaScriptEngine engine = webClient.getJavaScriptEngine();
+
+        engine.addPostponedAction(new PostponedAction(page) {
+            @Override
+            public void execute() throws Exception {
+            }
+        });
+        assertEquals(1, getPostponedActions(engine).get().size());
+        webClient.closeAllWindows();
+
+        assertNull(getPostponedActions(engine).get());
+    }
+
+    @SuppressWarnings("unchecked")
+    private static ThreadLocal<List<PostponedAction>> getPostponedActions(final JavaScriptEngine engine) {
+        try {
+            final Field field = engine.getClass().getDeclaredField("postponedActions_");
+            field.setAccessible(true);
+            return (ThreadLocal<List<PostponedAction>>) field.get(engine);
+        }
+        catch (final Exception e) {
+            throw Context.throwAsScriptRuntimeEx(e);
+        }
     }
 }

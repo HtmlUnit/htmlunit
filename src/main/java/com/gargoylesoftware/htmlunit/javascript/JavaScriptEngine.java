@@ -491,6 +491,11 @@ public class JavaScriptEngine {
             javaScriptExecutor_.shutdown();
             javaScriptExecutor_ = null;
         }
+        if (postponedActions_ != null) {
+            postponedActions_.remove();
+            javaScriptRunning_.remove();
+            holdPostponedActions_ = false;
+        }
     }
 
     /**
