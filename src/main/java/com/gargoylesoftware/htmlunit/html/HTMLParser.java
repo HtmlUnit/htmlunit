@@ -645,10 +645,10 @@ public final class HTMLParser {
             DomNode parent = currentNode;
 
             if ("tr".equals(newNodeName) && !isTableChild(currentNodeName)) {
-                parent = dequeueMalformedElementsUntil("tbody", "thead", "tfoot");
+                parent = findElementOnStack("tbody", "thead", "tfoot");
             }
             else if (isTableChild(newNodeName) && !"table".equals(currentNodeName)) {
-                parent = dequeueMalformedElementsUntil("table");
+                parent = findElementOnStack("table");
             }
 
             if ("table".equals(currentNodeName) && !isTableChild(newNodeName)) {
@@ -670,7 +670,7 @@ public final class HTMLParser {
             }
         }
 
-        private DomNode dequeueMalformedElementsUntil(final String... searchedElementNames) {
+        private DomNode findElementOnStack(final String... searchedElementNames) {
             DomNode searchedNode = null;
             for (final DomNode node : stack_) {
                 if (ArrayUtils.contains(searchedElementNames, node.getNodeName())) {
@@ -682,12 +682,7 @@ public final class HTMLParser {
             if (searchedNode == null) {
                 searchedNode = stack_.peek(); // this is surely wrong but at least it won't throw a NPE
             }
-            else {
-                // remove all elements from the stack until the found node
-                while (stack_.peek() != searchedNode) {
-                    stack_.pop();
-                }
-            }
+
             return searchedNode;
         }
 

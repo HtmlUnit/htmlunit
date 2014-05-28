@@ -401,4 +401,49 @@ public class MalformedHtmlTest extends WebDriverTestCase {
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    // correct assertion is
+    // @Alerts({ "1", "TABLE", "1", "FORM" })
+    // this test is NOT marked as NYI because we like to ensure
+    // no exception is thrown
+    @Alerts({ "1", "FORM", "1", "TABLE" })
+    public void formInNestedTable() throws Exception {
+        final String html = "<html>\n"
+                + "<body>\n"
+                + "<table>\n"
+                + "  <tr>\n"
+                + "    <td>\n"
+                + "      <table>\n"
+                + "        <tr>\n"
+                + "          <td id='td0'>\n"
+                + "            <table>\n"
+                + "              <form id='xyz'>\n"
+                + "              <tr>\n"
+                + "                <td>\n"
+                + "                  <input type='hidden' name='xyz' value='123'>\n"
+                + "                  <input type='submit' value='Submit'>\n"
+                + "                </td>\n"
+                + "              </tr>\n"
+                + "              </form>\n"
+                + "            </table>"
+                + "          </td>\n"
+                + "        </tr>\n"
+                + "        <tr><td></td></tr>\n"
+                + "      </table>\n"
+                + "    </td>\n"
+                + "  </tr>\n"
+                + "</table>"
+                + "<script>\n"
+                + "  alert(document.getElementById('td0').children.length);\n"
+                + "  alert(document.getElementById('td0').children[0].tagName);\n"
+                + "  alert(document.getElementById('td0').children[0].children.length);\n"
+                + "  alert(document.getElementById('td0').children[0].children[0].tagName);\n"
+                + "</script>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }
