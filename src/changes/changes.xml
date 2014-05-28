@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.15" date="???" description="Bugfixes, IE11 progress">
+            <action type="fix" dev="rbri" issue="1605" due-to="Carsten Steul">
+                NoSuchElementException when parsing malformed HTML.
+            </action>
             <action type="update" dev="asashour">
                 JavaScriptEngine: deprecate .shutdownJavaScriptExecutor().
             </action>
