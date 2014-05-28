@@ -1738,7 +1738,7 @@ public class WebClient implements Serializable {
      */
     public void closeAllWindows() {
         if (scriptEngine_ != null) {
-            scriptEngine_.shutdownJavaScriptExecutor();
+            scriptEngine_.shutdown();
         }
         // NB: this implementation is too simple as a new TopLevelWindow may be opened by
         // some JS script while we are closing the others
