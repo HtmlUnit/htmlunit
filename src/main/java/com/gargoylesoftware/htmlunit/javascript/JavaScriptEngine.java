@@ -502,9 +502,11 @@ public class JavaScriptEngine {
         }
         if (postponedActions_ != null) {
             postponedActions_.remove();
-            javaScriptRunning_.remove();
-            holdPostponedActions_ = false;
         }
+        if (javaScriptRunning_ != null) {
+            javaScriptRunning_.remove();
+        }
+        holdPostponedActions_ = false;
     }
 
     /**
