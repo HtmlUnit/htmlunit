@@ -736,6 +736,7 @@ public class HttpWebConnection implements WebConnection {
         }
         if (connectionManager_ != null) {
             connectionManager_.shutdown();
+            connectionManager_ = null;
         }
     }
 
