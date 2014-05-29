@@ -210,5 +210,8 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
     public void shutdown() {
         shutdown_ = true;
         killThread();
+
+        webClient_.clear();
+        jobManagerList_.clear();
     }
 }
