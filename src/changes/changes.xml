@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.15" date="???" description="Bugfixes, IE11 progress">
+            <action type="fix" dev="asashour">
+                HtmlUnitRegExpProxy: better performance, as String.substring() implementation was changed in Java 7.
+            </action>
             <action type="fix" dev="rbri" issue="1605" due-to="Carsten Steul">
                 NoSuchElementException when parsing malformed HTML.
             </action>

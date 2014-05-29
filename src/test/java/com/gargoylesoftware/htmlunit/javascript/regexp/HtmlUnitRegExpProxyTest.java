@@ -855,7 +855,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * Test from Prototype suite running very fast with Java 6 but taking ages with Java 7 & 8.
      * @throws Exception if an error occurs
      */
-    @Test
+    @Test(timeout = 1000)
     @Alerts({ "2200915", "2000915" })
     public void replace_huge() throws Exception {
         final String html = "<html><body><script>\n"

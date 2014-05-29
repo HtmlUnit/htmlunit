@@ -327,15 +327,16 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
 
         // leftContext
         if (startPos > 0) {
-            leftContext = new FixedSubString(thisString.substring(0, startPos));
+            leftContext = new SubString(thisString, 0, startPos);
         }
         else {
             leftContext = new SubString();
         }
 
         // rightContext
-        if (endPos < thisString.length()) {
-            rightContext = new FixedSubString(thisString.substring(endPos));
+        int length = thisString.length();
+        if (endPos < length) {
+            rightContext = new SubString(thisString, endPos, length - endPos);
         }
         else {
             rightContext = new SubString();
