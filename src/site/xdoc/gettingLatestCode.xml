@@ -110,7 +110,7 @@ svn co http://svn.code.sf.net/p/htmlunit/code/trunk/htmlunit/ .]]></source>
                 Tests currently assume that port 12345 is free on the machine, 
                 if you have <tt>java.net.BindException: Address already in use: JVM_Bind</tt>,
                 then set the system property <code>htmlunit.test.port</code> e.g. <code>-Dhtmlunit.test.port=10101</code>.
-                <br></br>
+                <br/>
                 Additionally class SocksProxyTest requires a SOCKS Proxy running at port 55555.
             </p>
         </section>
