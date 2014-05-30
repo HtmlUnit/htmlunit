@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.15" date="???" description="Bugfixes, IE11 progress">
+            <action type="fix" dev="rbri" issue="1579">
+                Some changes of the SOCKS proxy settings are ignored for HTTPS.
+            </action>
             <action type="fix" dev="rbri" issue="1608" due-to="Carsten Steul">
                 Avoid exception if the content-length provided by the server is not correct.
             </action>

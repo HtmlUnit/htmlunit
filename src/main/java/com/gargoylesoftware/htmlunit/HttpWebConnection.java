@@ -597,7 +597,8 @@ public class HttpWebConnection implements WebConnection {
 
         // register new SSL factory only if settings have changed
         if (options.isUseInsecureSSL() != usedOptions_.isUseInsecureSSL()
-                || options.getSSLClientCertificateUrl() != usedOptions_.getSSLClientCertificateUrl()) {
+                || options.getSSLClientCertificateUrl() != usedOptions_.getSSLClientCertificateUrl()
+                || options.getProxyConfig() != usedOptions_.getProxyConfig()) {
             configureHttpsScheme(httpClientBuilder);
         }
 
@@ -619,6 +620,7 @@ public class HttpWebConnection implements WebConnection {
         usedOptions_.setUseInsecureSSL(options.isUseInsecureSSL());
         usedOptions_.setSSLClientCertificate(options.getSSLClientCertificateUrl(),
                 options.getSSLClientCertificatePassword(), options.getSSLClientCertificateType());
+        usedOptions_.setProxyConfig(options.getProxyConfig());
     }
 
     /**
