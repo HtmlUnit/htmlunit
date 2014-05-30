@@ -334,7 +334,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         }
 
         // rightContext
-        int length = thisString.length();
+        final int length = thisString.length();
         if (endPos < length) {
             rightContext = new SubString(thisString, endPos, length - endPos);
         }
