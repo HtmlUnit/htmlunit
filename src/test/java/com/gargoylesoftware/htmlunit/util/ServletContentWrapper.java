@@ -59,4 +59,19 @@ public abstract class ServletContentWrapper extends HttpServlet {
         doGet(request, response);
     }
 
+    /**
+     * Helper.
+     * @return the content
+     */
+    protected String getContent() {
+        return content_;
+    }
+
+    /**
+     * Helper.
+     * @return the length of the content
+     */
+    protected int getContentLength() {
+        return content_.length();
+    }
 }

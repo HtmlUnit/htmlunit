@@ -35,6 +35,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -65,6 +66,8 @@ import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
  * @author David D. Kilzer
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
+ * @author Carsten Steul
  */
 @RunWith(BrowserRunner.class)
 public class HttpWebConnectionTest extends WebServerTestCase {
@@ -477,4 +480,156 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         }
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void contentLengthSmallerThanContent() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        servlets.put("/contentLengthSmallerThanContent", ContentLengthSmallerThanContentServlet.class);
+        startWebServer("./", null, servlets);
+
+        final WebClient client = getWebClient();
+        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/contentLengthSmallerThanContent");
+        assertEquals("visible text", page.asText());
+    }
+
+    /**
+     * Servlet for {@link #contentLengthSmallerThanContent()}.
+     */
+    public static class ContentLengthSmallerThanContentServlet extends ServletContentWrapper {
+
+        /** Constructor. */
+        public ContentLengthSmallerThanContentServlet() {
+            super("<html>\n"
+                + "<body>\n"
+                + "  <p>visible text</p>\n"
+                + "  <p>missing text</p>\n"
+                + "</body>\n"
+                + "</html>");
+        }
+
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+            throws IOException, ServletException {
+            response.setContentLength(getContent().indexOf("<p>missing text</p>"));
+            super.doGet(request, response);
+        }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void contentLengthSmallerThanContentLargeContent() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        servlets.put("/contentLengthSmallerThanContent", ContentLengthSmallerThanContentLargeContentServlet.class);
+        startWebServer("./", null, servlets);
+
+        final WebClient client = getWebClient();
+        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/contentLengthSmallerThanContent");
+        assertTrue(page.asText(), page.asText().endsWith("visible text"));
+    }
+
+    /**
+     * Servlet for {@link #contentLengthSmallerThanContentLargeContent()}.
+     */
+    public static class ContentLengthSmallerThanContentLargeContentServlet extends ServletContentWrapper {
+
+        /** Constructor. */
+        public ContentLengthSmallerThanContentLargeContentServlet() {
+            super("<html>\n"
+                + "<body>\n"
+                + "  <p>"
+                + StringUtils.repeat("HtmlUnit  ", 1024 * 1024)
+                + "</p>\n"
+                + "  <p>visible text</p>\n"
+                + "  <p>missing text</p>\n"
+                + "</body>\n"
+                + "</html>");
+        }
+
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+            throws IOException, ServletException {
+            response.setContentLength(getContent().indexOf("<p>missing text</p>"));
+            super.doGet(request, response);
+        }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void contentLengthLargerThanContent() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        servlets.put("/contentLengthLargerThanContent", ContentLengthLargerThanContentServlet.class);
+        startWebServer("./", null, servlets);
+
+        final WebClient client = getWebClient();
+        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/contentLengthLargerThanContent");
+        assertEquals("visible text", page.asText());
+    }
+
+    /**
+     * Servlet for {@link #contentLengthLargerThanContent()}.
+     */
+    public static class ContentLengthLargerThanContentServlet extends ServletContentWrapper {
+
+        /** Constructor. */
+        public ContentLengthLargerThanContentServlet() {
+            super("<html>\n"
+                + "<body>\n"
+                + "  <p>visible text</p>\n"
+                + "</body>\n"
+                + "</html>");
+        }
+
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+            throws IOException, ServletException {
+            response.setContentLength(getContentLength() + 42);
+            super.doGet(request, response);
+        }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void contentLengthLargerThanContentLargeContent() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        servlets.put("/contentLengthLargerThanContent", ContentLengthLargerThanContentServlet.class);
+        startWebServer("./", null, servlets);
+
+        final WebClient client = getWebClient();
+        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/contentLengthLargerThanContent");
+        assertEquals("visible text", page.asText());
+    }
+
+    /**
+     * Servlet for {@link #contentLengthLargerThanContentLargeContent()}.
+     */
+    public static class ContentLengthLargerThanContentLargeContentServlet extends ServletContentWrapper {
+
+        /** Constructor. */
+        public ContentLengthLargerThanContentLargeContentServlet() {
+            super("<html>\n"
+                    + "<body>\n"
+                    + "  <p>"
+                    + StringUtils.repeat("HtmlUnit  ", 1024 * 1024)
+                    + "</p>\n"
+                    + "  <p>visible text</p>\n"
+                    + "  <p>missing text</p>\n"
+                    + "</body>\n"
+                    + "</html>");
+        }
+
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+            throws IOException, ServletException {
+            response.setContentLength(getContentLength() + 2000);
+            super.doGet(request, response);
+        }
+    }
 }

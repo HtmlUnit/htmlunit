@@ -43,6 +43,9 @@ import javax.net.ssl.SSLSocketFactory;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.http.ConnectionClosedException;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpEntityEnclosingRequest;
@@ -112,8 +115,11 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Nicolas Belisle
  * @author Ronald Brill
  * @author John J Murdoch
+ * @author Carsten Steul
  */
 public class HttpWebConnection implements WebConnection {
+
+    private static final Log LOG = LogFactory.getLog(HttpWebConnection.class);
 
     private static final String HACKED_COOKIE_POLICY = "mine";
     private HttpClientBuilder httpClientBuilder_;
@@ -695,6 +701,10 @@ public class HttpWebConnection implements WebConnection {
                     return new DownloadedContent.OnFile(file, true);
                 }
             }
+        }
+        catch (final ConnectionClosedException e) {
+            LOG.warn("Connection was closed while reading from stream.", e);
+            return new DownloadedContent.InMemory(bos.toByteArray());
         }
         finally {
             IOUtils.closeQuietly(is);
