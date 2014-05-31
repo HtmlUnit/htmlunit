@@ -40,6 +40,7 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object HTMLSpanElement]", "undefined", "undefined", "undefined" },
+            CHROME = { "[object HTMLElement]", "undefined", "undefined", "undefined" },
             IE = { "[object]", "", "3", "" },
             IE11 = { "[object HTMLBaseFontElement]", "", "3", "" })
     public void defaults() throws Exception {

@@ -308,6 +308,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Window]",
+            CHROME = "[object HTMLFrameElement]",
             FF = "[object HTMLFrameElement]",
             FF17 = "undefined",
             IE8 = "[object]")
@@ -363,6 +364,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Window]",
+            CHROME = "[object HTMLFrameElement]",
             FF = "[object HTMLFrameElement]",
             FF17 = "undefined",
             IE8 = "[object]")
