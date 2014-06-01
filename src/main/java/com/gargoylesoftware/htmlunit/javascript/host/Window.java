@@ -48,6 +48,8 @@ import java.util.Set;
 import java.util.WeakHashMap;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
+import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
@@ -104,6 +106,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -2196,13 +2199,21 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             return;
         }
 
+        final JavaScriptEngine jsEngine = getWebWindow().getWebClient().getJavaScriptEngine();
         final PostponedAction action = new PostponedAction(getDomNodeOrDie().getPage()) {
             @Override
             public void execute() throws Exception {
-                dispatchEvent(event);
+                final ContextAction action = new ContextAction() {
+                    public Object run(final Context cx) {
+                        return dispatchEvent(event);
+                    }
+                };
+
+                final ContextFactory cf = jsEngine.getContextFactory();
+                cf.call(action);
             }
         };
-        getWebWindow().getWebClient().getJavaScriptEngine().addPostponedAction(action);
+        jsEngine.addPostponedAction(action);
     }
 
     private static int getPort(final URL url) {

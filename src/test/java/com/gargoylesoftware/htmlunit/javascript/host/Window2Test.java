@@ -1233,6 +1233,44 @@ public class Window2Test extends WebDriverTestCase {
     }
 
     /**
+     * Test for #1589 NullPointerException because of missing context.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("data: hello")
+    public void postMessageFromClick() throws Exception {
+        final String html
+            = "<html>"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  function receiveMessage(event) {\n"
+            + "    alert('data: ' + event.data);\n"
+            + "  }\n"
+
+            + "  if (window.addEventListener) {\n"
+            + "    window.addEventListener('message', receiveMessage, false);\n"
+            + "  } else {\n"
+            + "    window.attachEvent('onmessage', receiveMessage);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "  <iframe id='myFrame' src='" + URL_SECOND + "'></iframe>\n"
+            + "</body></html>";
+
+        final String iframe = "<html><body>\n"
+            + "<button id='clickme' onclick='top.postMessage(\"hello\", \"*\");'>Click me</a>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, iframe);
+        final WebDriver driver = loadPage2(html);
+        driver.switchTo().frame("myFrame");
+        driver.findElement(By.id("clickme")).click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

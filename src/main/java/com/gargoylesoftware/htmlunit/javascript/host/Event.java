@@ -424,10 +424,11 @@ public class Event extends SimpleScriptable {
      */
     @SuppressWarnings("unchecked")
     void startFire() {
-        LinkedList<Event> events = (LinkedList<Event>) Context.getCurrentContext().getThreadLocal(KEY_CURRENT_EVENT);
+        final Context context = Context.getCurrentContext();
+        LinkedList<Event> events = (LinkedList<Event>) context.getThreadLocal(KEY_CURRENT_EVENT);
         if (events == null) {
             events = new LinkedList<Event>();
-            Context.getCurrentContext().putThreadLocal(KEY_CURRENT_EVENT, events);
+            context.putThreadLocal(KEY_CURRENT_EVENT, events);
         }
         events.add(this);
     }
