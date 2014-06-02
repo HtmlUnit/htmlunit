@@ -7,6 +7,8 @@
     </properties>
 
     <body>
+        <release version="2.16" date="???" description="Bugfixes">
+        </release>
         <release version="2.15" date="Jun 2, 2014" description="Bugfixes, IE11 progress">
             <action type="update" dev="asashour">
                 Upgrade NekoHtml to 1.9.21.
