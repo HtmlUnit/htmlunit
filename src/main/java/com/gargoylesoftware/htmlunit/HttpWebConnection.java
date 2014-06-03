@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_AUTH_CRED
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -706,6 +707,12 @@ public class HttpWebConnection implements WebConnection {
         }
         catch (final ConnectionClosedException e) {
             LOG.warn("Connection was closed while reading from stream.", e);
+            return new DownloadedContent.InMemory(bos.toByteArray());
+        }
+        catch (final EOFException e) {
+            // this might happen with broken gzip content
+            // see com.gargoylesoftware.htmlunit.HttpWebConnection2Test.brokenGzip()
+            LOG.warn("EndOfFile while reading from stream.", e);
             return new DownloadedContent.InMemory(bos.toByteArray());
         }
         finally {

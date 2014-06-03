@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -119,4 +120,21 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         return sb.toString();
     }
 
+    /**
+     * Test for broken gzip content.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void brokenGzip() throws Exception {
+        final byte[] content = new byte[] {-1};
+        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        headers.add(new NameValuePair("Content-Encoding", "gzip"));
+        headers.add(new NameValuePair("Content-Length", String.valueOf(content.length)));
+
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setResponse(URL_FIRST, content, 404, "OK", "text/html", headers);
+
+        // only check that no exception is thrown
+        loadPageWithAlerts2(URL_FIRST);
+    }
 }
