@@ -30,11 +30,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * <p>A collection of offline resources as defined in the HTML5 spec.
  * Intended to support offline web applications.</p>
  *
- * <p><b>NOTE:</b> This class is essentially a skeleton implementation providing minimal
- * compatibility while we wait for the HTML5 dust to settle. The first real browser we should
- * worry about supporting with this implementation will probably be either Firefox 3.5
- * or Firefox 4.</p>
- *
  * @version $Revision$
  * @author Daniel Gredler
  * @author Frank Danek
