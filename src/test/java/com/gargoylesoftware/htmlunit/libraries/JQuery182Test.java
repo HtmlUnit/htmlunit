@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static org.junit.Assert.fail;
@@ -3982,7 +3983,7 @@ public class JQuery182Test extends WebDriverTestCase {
     @Alerts(FF24 = "0, 7, 7",
         IE11 = "0, 7, 7",
         IE8 = "2, 1, 3")
-    @NotYetImplemented({ IE8, IE11 })
+    @NotYetImplemented({ IE8, FF24, IE11 })
     public void css__show___resolves_correct_default_display__8099() throws Exception {
         runTest("css: show() resolves correct default display #8099");
     }
