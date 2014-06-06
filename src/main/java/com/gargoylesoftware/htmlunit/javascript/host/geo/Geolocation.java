@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.geo;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GEO_GEOLOCATION;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -114,18 +112,6 @@ public class Geolocation extends SimpleScriptable {
      */
     @JsxFunction
     public void clearWatch(final int watchId) {
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getClassName() {
-        if (getWindow().getWebWindow() != null
-                && getBrowserVersion().hasFeature(GEO_GEOLOCATION)) {
-            return "GeoGeolocation";
-        }
-        return super.getClassName();
     }
 
     private void doGetPosition() {

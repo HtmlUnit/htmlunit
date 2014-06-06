@@ -556,6 +556,7 @@ public class HttpWebConnection implements WebConnection {
             }
         });
         configureTimeout(builder, getTimeout());
+        configureHttpsScheme(builder);
         builder.setMaxConnPerRoute(6);
         return builder;
     }
@@ -598,9 +599,16 @@ public class HttpWebConnection implements WebConnection {
 
         // register new SSL factory only if settings have changed
         if (options.isUseInsecureSSL() != usedOptions_.isUseInsecureSSL()
-                || options.getSSLClientCertificateUrl() != usedOptions_.getSSLClientCertificateUrl()
+                || options.getSSLClientCertificateStore() != usedOptions_.getSSLClientCertificateStore()
+                || options.getSSLTrustStore() != usedOptions_.getSSLTrustStore()
+                || options.getSSLClientCipherSuites() != usedOptions_.getSSLClientCipherSuites()
+                || options.getSSLClientProtocols() != usedOptions_.getSSLClientProtocols()
                 || options.getProxyConfig() != usedOptions_.getProxyConfig()) {
             configureHttpsScheme(httpClientBuilder);
+            if (connectionManager_ != null) {
+                connectionManager_.shutdown();
+                connectionManager_ = null;
+            }
         }
 
         final int timeout = getTimeout();
@@ -619,8 +627,10 @@ public class HttpWebConnection implements WebConnection {
         builder.setSSLSocketFactory(socketFactory);
 
         usedOptions_.setUseInsecureSSL(options.isUseInsecureSSL());
-        usedOptions_.setSSLClientCertificate(options.getSSLClientCertificateUrl(),
-                options.getSSLClientCertificatePassword(), options.getSSLClientCertificateType());
+        usedOptions_.setSSLClientCertificateStore(options.getSSLClientCertificateStore());
+        usedOptions_.setSSLTrustStore(options.getSSLTrustStore());
+        usedOptions_.setSSLClientCipherSuites(options.getSSLClientCipherSuites());
+        usedOptions_.setSSLClientProtocols(options.getSSLClientProtocols());
         usedOptions_.setProxyConfig(options.getProxyConfig());
     }
 

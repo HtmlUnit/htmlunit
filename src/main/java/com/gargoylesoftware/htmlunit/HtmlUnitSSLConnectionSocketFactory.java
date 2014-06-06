@@ -79,15 +79,13 @@ final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocketFactor
             final boolean useInsecureSSL = options.isUseInsecureSSL();
 
             if (!useInsecureSSL) {
-                if (options.getSSLClientCertificateUrl() == null) {
-                    return new HtmlUnitSSLConnectionSocketFactory((KeyStore) null, null,
-                            useInsecureSSL,
-                            sslClientProtocols, sslClientCipherSuites); // only SOCKS awareness
-                }
-                // SOCKS + keystore
-                return new HtmlUnitSSLConnectionSocketFactory(getKeyStore(options),
-                        options.getSSLClientCertificatePassword(),
-                        useInsecureSSL, sslClientProtocols, sslClientCipherSuites);
+                final KeyStore keyStore = options.getSSLClientCertificateStore();
+                final KeyStore trustStore = options.getSSLTrustStore();
+
+                return new HtmlUnitSSLConnectionSocketFactory(keyStore,
+                        keyStore == null ? null : options.getSSLClientCertificatePassword(),
+                        trustStore, useInsecureSSL,
+                        sslClientProtocols, sslClientCipherSuites);
             }
 
             // we need insecure SSL + SOCKS awareness
@@ -115,12 +113,13 @@ final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocketFactor
         this.useInsecureSSL_ = useInsecureSSL;
     }
 
-    private HtmlUnitSSLConnectionSocketFactory(final KeyStore keystore, final String keystorePassword,
-            final boolean useInsecureSSL,
+    private HtmlUnitSSLConnectionSocketFactory(final KeyStore keystore, final char[] keystorePassword,
+            final KeyStore truststore, final boolean useInsecureSSL,
             final String[] supportedProtocols, final String[] supportedCipherSuites)
         throws NoSuchAlgorithmException, KeyManagementException, KeyStoreException, UnrecoverableKeyException {
         super(SSLContexts.custom()
-                .loadKeyMaterial(keystore, keystorePassword != null ? keystorePassword.toCharArray() : null)
+                .loadKeyMaterial(keystore, keystorePassword)
+                .loadTrustMaterial(truststore)
                 .build(), supportedProtocols, supportedCipherSuites,
                 BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
         this.useInsecureSSL_ = useInsecureSSL;
@@ -200,31 +199,15 @@ final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocketFactor
     }
 
     private static KeyManager[] getKeyManagers(final WebClientOptions options) {
-        if (options.getSSLClientCertificateUrl() == null) {
+        if (options.getSSLClientCertificateStore() == null) {
             return null;
         }
         try {
-            final String password = options.getSSLClientCertificatePassword();
-            final char[] passwordChars = password != null ? password.toCharArray() : null;
-
-            final KeyStore keyStore = getKeyStore(options);
+            final KeyStore keyStore = options.getSSLClientCertificateStore();
             final KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(
                     KeyManagerFactory.getDefaultAlgorithm());
-            keyManagerFactory.init(keyStore, passwordChars);
+            keyManagerFactory.init(keyStore, options.getSSLClientCertificatePassword());
             return keyManagerFactory.getKeyManagers();
-        }
-        catch (final Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static KeyStore getKeyStore(final WebClientOptions options) {
-        try {
-            final KeyStore keyStore = KeyStore.getInstance(options.getSSLClientCertificateType());
-            final String password = options.getSSLClientCertificatePassword();
-            final char[] passwordChars = password != null ? password.toCharArray() : null;
-            keyStore.load(options.getSSLClientCertificateUrl().openStream(), passwordChars);
-            return keyStore;
         }
         catch (final Exception e) {
             throw new RuntimeException(e);

@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
 import java.net.URL;
+import java.security.KeyStore;
 
 /**
  * Represents options of a {@link WebClient}.
@@ -34,9 +35,9 @@ public class WebClientOptions implements Serializable {
     private boolean appletEnabled_;
     private boolean popupBlockerEnabled_;
     private boolean isRedirectEnabled_ = true;
-    private URL sslClientCertificateUrl_;
-    private String sslClientCertificatePassword_;
-    private String sslClientCertificateType_;
+    private KeyStore sslClientCertificateStore_;
+    private char[] sslClientCertificatePassword_;
+    private KeyStore sslTrustStore_;
     private String[] sslClientProtocols_;
     private String[] sslClientCipherSuites_;
     private boolean geolocationEnabled_;
@@ -100,21 +101,20 @@ public class WebClientOptions implements Serializable {
      */
     public void setSSLClientCertificate(final URL certificateUrl, final String certificatePassword,
             final String certificateType) {
-        sslClientCertificateUrl_ = certificateUrl;
-        sslClientCertificatePassword_ = certificatePassword;
-        sslClientCertificateType_ = certificateType;
+        sslClientCertificateStore_ = getKeyStore(certificateUrl, certificatePassword, certificateType);
+        sslClientCertificatePassword_ = certificatePassword == null ? null : certificatePassword.toCharArray();
     }
 
-    URL getSSLClientCertificateUrl() {
-        return sslClientCertificateUrl_;
+    void setSSLClientCertificateStore(final KeyStore keyStore) {
+        this.sslClientCertificateStore_ = keyStore;
     }
 
-    String getSSLClientCertificatePassword() {
+    KeyStore getSSLClientCertificateStore() {
+        return sslClientCertificateStore_;
+    }
+
+    char[] getSSLClientCertificatePassword() {
         return sslClientCertificatePassword_;
-    }
-
-    String getSSLClientCertificateType() {
-        return sslClientCertificateType_;
     }
 
     /**
@@ -422,5 +422,45 @@ public class WebClientOptions implements Serializable {
      */
     public String getSSLInsecureProtocol() {
         return sslInsecureProtocol_;
+    }
+
+    /**
+     * Sets the SSL server certificate trust store. All server certificates will be validated against
+     * this trust store.
+     *
+     * The needed parameters are used to construct a {@link java.security.KeyStore}.
+     *
+     * @param sslTrustStoreUrl the URL which locates the trust store
+     * @param sslTrustStorePassword the trust store password
+     * @param sslTrustStoreType the type of trust store, usually "jks" or "pkcs12".
+     */
+    public void setSSLTrustStore(final URL sslTrustStoreUrl, final String sslTrustStorePassword,
+            final String sslTrustStoreType) {
+        this.sslTrustStore_ = getKeyStore(sslTrustStoreUrl, sslTrustStorePassword, sslTrustStoreType);
+    }
+
+    void setSSLTrustStore(final KeyStore keyStore) {
+        this.sslTrustStore_ = keyStore;
+    }
+
+    KeyStore getSSLTrustStore() {
+        return sslTrustStore_;
+    }
+
+    private KeyStore getKeyStore(final URL keystoreURL, final String keystorePassword,
+            final String keystoreType) {
+        if (keystoreURL == null) {
+            return null;
+        }
+
+        try {
+            final KeyStore keyStore = KeyStore.getInstance(keystoreType);
+            final char[] passwordChars = keystorePassword != null ? keystorePassword.toCharArray() : null;
+            keyStore.load(keystoreURL.openStream(), passwordChars);
+            return keyStore;
+        }
+        catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

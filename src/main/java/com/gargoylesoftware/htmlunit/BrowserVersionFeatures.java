@@ -116,7 +116,7 @@ public enum BrowserVersionFeatures {
     CSS_SELECTOR_LANG,
 
     /** The default value of the display property for the 'select' tag is 'inline' instead of the default one. */
-    @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 17), @WebBrowser(CHROME) })
+    @BrowserFeature(@WebBrowser(CHROME))
     CSS_SELECT_DISPLAY_INLINE,
 
     /** Throws exception on setting a CSS style value to null. */
@@ -345,10 +345,6 @@ public enum BrowserVersionFeatures {
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
     GENERATED_63,
-
-    /** If the class name is [object GeoGeolocation]. */
-    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 17))
-    GEO_GEOLOCATION,
 
     /** */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 10))
@@ -635,10 +631,6 @@ public enum BrowserVersionFeatures {
     /** firstChild and lastChild returns null for Attr (like IE does). */
     @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 9), @WebBrowser(FF) })
     JS_ATTR_FIRST_LAST_CHILD_RETURNS_NULL,
-
-    /** HTMLBGSoundElement reported as HTMLSpanElement. */
-    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 17))
-    JS_BGSOUND_AS_SPAN,
 
     /** HTMLBGSoundElement reported as HTMLUnknownElement. */
     @BrowserFeature(@WebBrowser(value = FF, minVersion = 24))
@@ -1467,7 +1459,7 @@ public enum BrowserVersionFeatures {
     JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES,
 
     /** Changing the opener of a window to something not null is not valid. */
-    @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 17), @WebBrowser(CHROME) })
+    @BrowserFeature(@WebBrowser(CHROME))
     JS_WINDOW_CHANGE_OPENER_NOT_ALLOWED,
 
     /** Changing the opener of a window to something not null and not a window is not valid. */
@@ -1628,7 +1620,7 @@ public enum BrowserVersionFeatures {
     STRING_TRIM,
 
     /** Indicates that string.trimLeft() and .trimRight() are supported. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9, maxVersion = 9), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     STRING_TRIM_LEFT_RIGHT,
 
     /**
@@ -1706,7 +1698,7 @@ public enum BrowserVersionFeatures {
     /** XMLHttpRequest triggers the opened event at the beginning of the send
      * method again.
      */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 17) })
+    @BrowserFeature(@WebBrowser(IE))
     XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE,
 
     /**
@@ -1769,15 +1761,9 @@ public enum BrowserVersionFeatures {
 
     /**
      * Indicates that the property <code>withCredentials</code> is not writable for sync requests.
-     */
-    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 23))
-    XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC,
-
-    /**
-     * Indicates that the property <code>withCredentials</code> is not writable for sync requests.
      * Setting the property throws an exception.
      */
-    @BrowserFeature(@WebBrowser(value = FF, minVersion = 24))
+    @BrowserFeature(@WebBrowser(value = FF))
     XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION,
 
     /** Indicates that the 'SelectionNamespaces' property is supported by XPath expressions. */
