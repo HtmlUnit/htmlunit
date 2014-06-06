@@ -49,6 +49,7 @@ public class WebClientOptions implements Serializable {
 
     private boolean useInsecureSSL_; // default is secure SSL
     private String sslInsecureProtocol_;
+    private int maxInMemory_ = 500 * 1024;
 
     /**
      * If set to <code>true</code>, the client will accept connections to any host, regardless of
@@ -462,5 +463,21 @@ public class WebClientOptions implements Serializable {
         catch (final Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Returns the maximum bytes to have in memory, after which the content is saved to a file.
+     * @return the maximum bytes in memory
+     */
+    public int getMaxInMemory() {
+        return maxInMemory_;
+    }
+
+    /**
+     * Sets the maximum bytes to have in memory, after which the content is saved to a file.
+     * @param maxInMemory maximum bytes in memory
+     */
+    public void setMaxInMemory(final int maxInMemory) {
+        this.maxInMemory_ = maxInMemory;
     }
 }

@@ -669,8 +669,6 @@ public class HttpWebConnection implements WebConnection {
         return newWebResponseInstance(responseData, loadTime, request);
     }
 
-    private static final long MAX_IN_MEMORY = 500 * 1024;
-
     /**
      * Downloads the response body.
      * @param httpResponse the web server's response
@@ -683,7 +681,7 @@ public class HttpWebConnection implements WebConnection {
             return new DownloadedContent.InMemory(new byte[] {});
         }
 
-        return downloadContent(httpEntity.getContent());
+        return downloadContent(httpEntity.getContent(), webClient_.getOptions().getMaxInMemory());
     }
 
     /**
@@ -691,8 +689,21 @@ public class HttpWebConnection implements WebConnection {
      * @param is the stream to read
      * @return a wrapper around the downloaded content
      * @throws IOException in case of read issues
+     * @deprecated as of 2.16, use {@link #downloadContent(InputStream, int)}
      */
+    @Deprecated
     public static DownloadedContent downloadContent(final InputStream is) throws IOException {
+        return downloadContent(is, 500 * 1024);
+    }
+
+    /**
+     * Reads the content of the stream and saves it in memory or on the file system.
+     * @param is the stream to read
+     * @param maxInMemory the maximumBytes to store in memory, after which save to a local file
+     * @return a wrapper around the downloaded content
+     * @throws IOException in case of read issues
+     */
+    public static DownloadedContent downloadContent(final InputStream is, final int maxInMemory) throws IOException {
         if (is == null) {
             return new DownloadedContent.InMemory(new byte[] {});
         }
@@ -703,7 +714,7 @@ public class HttpWebConnection implements WebConnection {
         try {
             while ((nbRead = is.read(buffer)) != -1) {
                 bos.write(buffer, 0, nbRead);
-                if (bos.size() > MAX_IN_MEMORY) {
+                if (bos.size() > maxInMemory) {
                     // we have exceeded the max for memory, let's write everything to a temporary file
                     final File file = File.createTempFile("htmlunit", ".tmp");
                     file.deleteOnExit();

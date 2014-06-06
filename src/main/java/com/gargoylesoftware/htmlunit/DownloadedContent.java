@@ -90,6 +90,12 @@ public interface DownloadedContent extends Serializable {
         public boolean isEmpty() {
             return false;
         }
+
+        @Override
+        protected void finalize() throws Throwable {
+            super.finalize();
+            cleanUp();
+        }
     }
 
     /**
