@@ -8,7 +8,7 @@
 
     <body>
         <release version="2.16" date="???" description="Bugfixes">
-            <action type="fix" dev="asashour">
+            <action type="fix" dev="asashour" issue="1612">
                 HttpWebConnection: Java 7: handle "handshake alert:  unrecognized_name" with insecure SSL.
             </action>
             <action type="update" dev="asashour">
