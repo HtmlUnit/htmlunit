@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                HttpWebConnection: Java 7: handle "handshake alert:  unrecognized_name" with insecure SSL.
+            </action>
             <action type="update" dev="asashour">
                 Upgrade Apache HttpComponents to 4.3.4.
             </action>

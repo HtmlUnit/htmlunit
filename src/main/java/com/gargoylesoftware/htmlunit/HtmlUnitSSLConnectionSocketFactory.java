@@ -61,6 +61,8 @@ import org.apache.http.protocol.HttpContext;
 final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocketFactory {
     private static final String SSL3ONLY = "htmlunit.SSL3Only";
 
+    private final boolean useInsecureSSL_;
+
     static void setUseSSL3Only(final HttpContext parameters, final boolean ssl3Only) {
         parameters.setAttribute(SSL3ONLY, ssl3Only);
     }
@@ -74,14 +76,18 @@ final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocketFactor
             final String[] sslClientProtocols = options.getSSLClientProtocols();
             final String[] sslClientCipherSuites = options.getSSLClientCipherSuites();
 
-            if (!options.isUseInsecureSSL()) {
+            final boolean useInsecureSSL = options.isUseInsecureSSL();
+
+            if (!useInsecureSSL) {
                 if (options.getSSLClientCertificateUrl() == null) {
                     return new HtmlUnitSSLConnectionSocketFactory((KeyStore) null, null,
+                            useInsecureSSL,
                             sslClientProtocols, sslClientCipherSuites); // only SOCKS awareness
                 }
                 // SOCKS + keystore
                 return new HtmlUnitSSLConnectionSocketFactory(getKeyStore(options),
-                        options.getSSLClientCertificatePassword(), sslClientProtocols, sslClientCipherSuites);
+                        options.getSSLClientCertificatePassword(),
+                        useInsecureSSL, sslClientProtocols, sslClientCipherSuites);
             }
 
             // we need insecure SSL + SOCKS awareness
@@ -93,7 +99,8 @@ final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocketFactor
             sslContext.init(getKeyManagers(options), new TrustManager[]{new InsecureTrustManager2()}, null);
 
             final SSLConnectionSocketFactory factory = new HtmlUnitSSLConnectionSocketFactory(sslContext,
-                SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER, sslClientProtocols, sslClientCipherSuites);
+                SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER,
+                useInsecureSSL, sslClientProtocols, sslClientCipherSuites);
             return factory;
         }
         catch (final GeneralSecurityException e) {
@@ -102,18 +109,21 @@ final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocketFactor
     }
 
     private HtmlUnitSSLConnectionSocketFactory(final SSLContext sslContext,
-            final X509HostnameVerifier hostnameVerifier,
+            final X509HostnameVerifier hostnameVerifier, final boolean useInsecureSSL,
             final String[] supportedProtocols, final String[] supportedCipherSuites) {
         super(sslContext, supportedProtocols, supportedCipherSuites, hostnameVerifier);
+        this.useInsecureSSL_ = useInsecureSSL;
     }
 
     private HtmlUnitSSLConnectionSocketFactory(final KeyStore keystore, final String keystorePassword,
+            final boolean useInsecureSSL,
             final String[] supportedProtocols, final String[] supportedCipherSuites)
         throws NoSuchAlgorithmException, KeyManagementException, KeyStoreException, UnrecoverableKeyException {
         super(SSLContexts.custom()
                 .loadKeyMaterial(keystore, keystorePassword != null ? keystorePassword.toCharArray() : null)
                 .build(), supportedProtocols, supportedCipherSuites,
                 BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
+        this.useInsecureSSL_ = useInsecureSSL;
     }
 
     private void configureSocket(final SSLSocket sslSocket, final HttpContext context) {
@@ -152,7 +162,30 @@ final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocketFactor
             configureSocket((SSLSocket) sslSocket, context);
             return sslSocket;
         }
-        return super.connectSocket(connectTimeout, socket, host, remoteAddress, localAddress, context);
+        try {
+            return super.connectSocket(connectTimeout, socket, host, remoteAddress, localAddress, context);
+        }
+        catch (final IOException e) {
+            if (useInsecureSSL_ && "handshake alert:  unrecognized_name".equals(e.getMessage())) {
+                setEmptyHostname(host);
+
+                return super.connectSocket(connectTimeout,
+                        createSocket(context),
+                        host, remoteAddress, localAddress, context);
+            }
+            throw e;
+        }
+    }
+
+    private void setEmptyHostname(final HttpHost host) {
+        try {
+            final Field field = HttpHost.class.getDeclaredField("hostname");
+            field.setAccessible(true);
+            field.set(host, "");
+        }
+        catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private javax.net.ssl.SSLSocketFactory getSSLSocketFactory() {
