@@ -104,7 +104,6 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "A", "A", "4294967295", "true" },
-            FF17 = { "A", "A", "4294967295", "false" },
             FF24 = { "A", "A", "4294967295", "undefined" },
             IE = "exception",
             IE11 = { "A", "A", "-1", "true" })
@@ -123,7 +122,6 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "DIV", "1", "true" },
-            FF17 = { "BODY", "DIV", "1", "false" },
             FF24 = { "BODY", "DIV", "1", "undefined" },
             IE8 = "exception")
     public void firstChild() throws Exception {
@@ -140,7 +138,6 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "SPAN", "1", "true" },
-            FF17 = { "BODY", "SPAN", "1", "false" },
             FF24 = { "BODY", "SPAN", "1", "undefined" },
             IE8 = "exception")
     public void firstChild2() throws Exception {
@@ -158,7 +155,6 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "P", "1", "true" },
-            FF17 = { "BODY", "P", "1", "false" },
             FF24 = { "BODY", "P", "1", "undefined" },
             IE8 = "exception")
     public void lastChild() throws Exception {
@@ -175,7 +171,6 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "SPAN", "1", "true" },
-            FF17 = { "BODY", "SPAN", "1", "false" },
             FF24 = { "BODY", "SPAN", "1", "undefined" },
             IE8 = "exception")
     public void lastChild2() throws Exception {
@@ -193,7 +188,6 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "BODY", "1", "true", "null" },
-            FF17 = { "BODY", "BODY", "1", "false", "null" },
             FF24 = { "BODY", "BODY", "1", "undefined", "null" },
             IE8 = "exception")
     public void parentNode() throws Exception {
@@ -212,7 +206,6 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "DIV", "1", "true" },
-            FF17 = { "BODY", "DIV", "1", "false" },
             FF24 = { "BODY", "DIV", "1", "undefined" },
             IE8 = "exception")
     public void parentNode2() throws Exception {
@@ -230,7 +223,6 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "P", "1", "true", "null" },
-            FF17 = { "BODY", "P", "1", "false", "null" },
             FF24 = { "BODY", "P", "1", "undefined", "null" },
             IE8 = "exception")
     public void siblings() throws Exception {
@@ -249,7 +241,6 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "DIV", "1", "true", "null" },
-            FF17 = { "BODY", "DIV", "1", "false", "null" },
             FF24 = { "BODY", "DIV", "1", "undefined", "null" },
             IE8 = "exception")
     public void siblings2() throws Exception {

@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE9;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,13 +47,10 @@ public class DocumentTypeTest extends WebDriverTestCase {
             "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
             + "null,undefined,undefined" },
             IE = "null",
-            IE9 = { "[object DocumentType]", "true", "html,10,null,null,null,null",
-            "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
-            + "null,null,null" },
             IE11 = { "[object DocumentType]", "true", "html,10,null,null,null,null",
             "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
             + "null,null,null" })
-    @NotYetImplemented({ IE9, CHROME })
+    @NotYetImplemented(CHROME)
     public void doctype() throws Exception {
         final String html = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n"
             + "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
@@ -142,7 +138,6 @@ public class DocumentTypeTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE8 = "string")
-    @NotYetImplemented(IE9)
     public void html_previousSibling() throws Exception {
         final String html = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n"
             + "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
@@ -170,7 +165,6 @@ public class DocumentTypeTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object DocumentType]",  "[object HTMLHtmlElement]" },
             IE8 = { "[object HTMLCommentElement]", "[object HTMLHtmlElement]" })
-    @NotYetImplemented(IE9)
     public void document_children() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html>\n"
             + "<head>\n"

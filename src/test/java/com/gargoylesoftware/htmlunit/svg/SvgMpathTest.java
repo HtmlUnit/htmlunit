@@ -44,7 +44,6 @@ public class SvgMpathTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object SVGMPathElement]",
-            FF17 = "[object SVGMpathElement]",
             IE = "[object HTMLGenericElement]",
             IE11 = "[object SVGElement]")
     @NotYetImplemented(FF24)

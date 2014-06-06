@@ -120,17 +120,6 @@ public class BrowserVersion implements Serializable, Cloneable {
     private static final String PLATFORM_WIN32 = "Win32";
 
     /**
-     * Firefox 17 ESR.
-     * @since 2.12
-     * @deprecated as of 2.14
-     */
-    @Deprecated
-    public static final BrowserVersion FIREFOX_17 = new BrowserVersion(
-        NETSCAPE, "5.0 (Windows)",
-        "Mozilla/5.0 (Windows NT 6.1; rv:17.0) Gecko/20100101 Firefox/17.0",
-        (float) 17.0, "FF17", null);
-
-    /**
      * Firefox 24 ESR.
      * @since 2.14
      */
@@ -148,15 +137,6 @@ public class BrowserVersion implements Serializable, Cloneable {
     public static final BrowserVersion INTERNET_EXPLORER_8 = new BrowserVersion(
         INTERNET_EXPLORER, "4.0 (compatible; MSIE 8.0; Windows NT 6.0)",
         "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0)", 8, "IE8", null);
-
-    /**
-     * Internet Explorer 9. Work In Progress!!!
-     * @deprecated as of 2.14
-     */
-    @Deprecated
-    public static final BrowserVersion INTERNET_EXPLORER_9 = new BrowserVersion(
-        INTERNET_EXPLORER, "5.0 (compatible; MSIE 9.0; Windows NT 6.1)",
-        "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1)", 9, "IE9", null);
 
     /** Internet Explorer 11. Work In Progress!!! */
     public static final BrowserVersion INTERNET_EXPLORER_11 = new BrowserVersion(
@@ -177,18 +157,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     /** Register plugins for the browser versions. */
     static {
         INTERNET_EXPLORER_8.initDefaultFeatures();
-        INTERNET_EXPLORER_9.initDefaultFeatures();
         INTERNET_EXPLORER_11.initDefaultFeatures();
-
-        FIREFOX_17.initDefaultFeatures();
-
-        FIREFOX_17.setBrowserLanguage("en-US");
-        FIREFOX_17.setVendor("");
-        FIREFOX_17.buildId_ = "20130805152501";
-        FIREFOX_17.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-        FIREFOX_17.setXmlHttpRequestAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-        FIREFOX_17.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
-        FIREFOX_17.setCssAcceptHeader("text/css,*/*;q=0.1");
 
         FIREFOX_24.initDefaultFeatures();
 
@@ -213,7 +182,6 @@ public class BrowserVersion implements Serializable, Cloneable {
             "Shockwave Flash 9.0 r31", "libflashplayer.so");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
             "Shockwave Flash", "swf"));
-        FIREFOX_17.getPlugins().add(flash);
         FIREFOX_24.getPlugins().add(flash);
 
         CHROME.initDefaultFeatures();

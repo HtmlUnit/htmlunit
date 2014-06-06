@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -130,9 +127,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "4", "null", "4" },
-            FF17 = { "null", "4", "", "0" })
-    @NotYetImplemented(FF17)
+    @Alerts({ "null", "4", "null", "4" })
     public void getAttributeAndSetValueNull() throws Exception {
         final String html =
             "<html>\n"

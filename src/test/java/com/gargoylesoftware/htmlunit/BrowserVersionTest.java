@@ -33,7 +33,6 @@ public class BrowserVersionTest extends SimpleWebTestCase {
     public void getBrowserVersionNumeric() {
         assertEquals(24.0f, BrowserVersion.FIREFOX_24.getBrowserVersionNumeric());
         assertEquals(8.0f, BrowserVersion.INTERNET_EXPLORER_8.getBrowserVersionNumeric());
-        assertEquals(9.0f, BrowserVersion.INTERNET_EXPLORER_9.getBrowserVersionNumeric());
         assertEquals(11.0f, BrowserVersion.INTERNET_EXPLORER_11.getBrowserVersionNumeric());
         assertEquals(31.0f, BrowserVersion.CHROME.getBrowserVersionNumeric());
     }

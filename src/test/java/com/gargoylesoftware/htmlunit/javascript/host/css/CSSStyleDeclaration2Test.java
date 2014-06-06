@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 
 import org.apache.commons.lang3.StringUtils;
@@ -110,19 +109,13 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "success",
-            FF17 = "error: maxHeight-error: maxHeight-error: maxHeight-error: maxWidth-error: maxWidth-error: "
-                    + "maxWidth-error: minHeight-error: minHeight-error: minHeight-error: minWidth-error: "
-                    + "minWidth-error: minWidth-error: outlineWidth-error: outlineWidth-error: outlineWidth-error: "
-                    + "textIndent-error: textIndent-error: textIndent-error: verticalAlign-error: verticalAlign-error: "
-                    + "verticalAlign-",
-            FF24 = "error: maxHeight-error: maxHeight-error: maxHeight-error: maxWidth-error: maxWidth-error: "
+    @Alerts(FF24 = "error: maxHeight-error: maxHeight-error: maxHeight-error: maxWidth-error: maxWidth-error: "
                     + "maxWidth-error: minHeight-error: minHeight-error: minHeight-error: minWidth-error: "
                     + "minWidth-error: minWidth-error: outlineWidth-error: outlineWidth-error: outlineWidth-error: "
                     + "textIndent-error: textIndent-error: textIndent-error: verticalAlign-error: verticalAlign-error: "
                     + "verticalAlign-",
             IE = "success")
-    @NotYetImplemented({ FF17, FF24 })
+    @NotYetImplemented(FF24)
     public void width_like_properties() throws Exception {
         final String html
             = "<html><head><script>\n"

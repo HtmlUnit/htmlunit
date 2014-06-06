@@ -96,16 +96,6 @@ public class KeyDataPair extends NameValuePair {
     }
 
     /**
-     * Gets the content type for this file upload.
-     * @return the content type
-     * @deprecated as of 2.13, please use {@link #getMimeType()}
-     */
-    @Deprecated
-    public String getContentType() {
-        return getMimeType();
-    }
-
-    /**
      * Gets the MIME type for this file upload.
      * @return the MIME type
      */

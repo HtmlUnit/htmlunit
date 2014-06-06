@@ -163,9 +163,7 @@ public class NotYetImplementedTest {
 
         int count = 0;
         int countIE8 = 0;
-        int countIE9 = 0;
         int countIE11 = 0;
-        int countFF17 = 0;
         int countFF24 = 0;
         for (final String entry : entries_) {
             final String[] values = entry.split(";");
@@ -209,35 +207,25 @@ public class NotYetImplementedTest {
             if (browser.contains("IE11")) {
                 countIE11++;
             }
-            if (browser.contains("IE9")) {
-                countIE9++;
-            }
             if (!browser.contains("IE8")
                     && !browser.contains("IE8")
                     && !browser.contains("IE9")
                     && browser.contains("IE11")) {
                 countIE8++;
-                countIE9++;
                 countIE11++;
             }
 
-            if (browser.contains("FF17")) {
-                countFF17++;
-            }
             if (browser.contains("FF24")) {
                 countFF24++;
             }
             if (!browser.contains("FF17")
                     && !browser.contains("FF24")
                     && browser.contains("FF")) {
-                countFF17++;
                 countFF24++;
             }
             if (browser.contains("All")) {
                 countIE8++;
-                countIE9++;
                 countIE11++;
-                countFF17++;
                 countFF24++;
             }
 
@@ -257,18 +245,8 @@ public class NotYetImplementedTest {
         overview.append("  </tr>\n");
 
         overview.append("  <tr>\n");
-        overview.append("    <td class='numeric'>").append(Integer.toString(countIE9)).append("</td>\n");
-        overview.append("    <td>for IE9</td>\n");
-        overview.append("  </tr>\n");
-
-        overview.append("  <tr>\n");
         overview.append("    <td class='numeric'>").append(Integer.toString(countIE11)).append("</td>\n");
         overview.append("    <td>for IE11</td>\n");
-        overview.append("  </tr>\n");
-
-        overview.append("  <tr>\n");
-        overview.append("    <td class='numeric'>").append(Integer.toString(countFF17)).append("</td>\n");
-        overview.append("    <td>for FF17</td>\n");
         overview.append("  </tr>\n");
 
         overview.append("  <tr>\n");

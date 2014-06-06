@@ -37,7 +37,6 @@ public class HtmlBackgroundSoundTest extends SimpleWebTestCase {
     @Test
     @Alerts(IE = "[object HTMLBGSoundElement]",
             FF = "[object HTMLUnknownElement]",
-            FF17 = "[object HTMLSpanElement]",
             CHROME = "[object HTMLElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ +  "<html><head>\n"

@@ -45,9 +45,9 @@ import org.junit.runners.model.Statement;
  * public class SomeTest extends WebTestCase {
  *
  *    &#064;Test
- *    &#064;Browsers({ Browser.FF17 })
+ *    &#064;Browsers({ Browser.FF24 })
  *    public void test() {
- *       //your test case that succeeds with only Firefox 17
+ *       //your test case that succeeds with only Firefox 24
  *    }
  * }
  * </pre>
@@ -70,17 +70,11 @@ public class BrowserRunner extends Suite {
 
         if (BrowserVersionClassRunner.containsTestMethods(klass)) {
             final List<String> browsers = WebDriverTestCase.getBrowsersProperties();
-            if (/*browsers.contains("hu") ||*/ browsers.contains("hu-ff17")) {
-                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_17, false));
-            }
             if (browsers.contains("hu") || browsers.contains("hu-ff24")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_24, false));
             }
             if (browsers.contains("hu") || browsers.contains("hu-ie8")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, false));
-            }
-            if (/*browsers.contains("hu") ||*/ browsers.contains("hu-ie9")) {
-                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_9, false));
             }
             if (/*browsers.contains("hu") ||*/ browsers.contains("hu-ie11")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_11, false));
@@ -90,17 +84,11 @@ public class BrowserRunner extends Suite {
             }
 
             if (WebDriverTestCase.class.isAssignableFrom(klass)) {
-                if (browsers.contains("ff17")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_17, true));
-                }
                 if (browsers.contains("ff24")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_24, true));
                 }
                 if (browsers.contains("ie8")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, true));
-                }
-                if (browsers.contains("ie9")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_9, true));
                 }
                 if (browsers.contains("ie11")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_11, true));
@@ -166,17 +154,11 @@ public class BrowserRunner extends Suite {
         /** Internet Explorer 8. */
         IE8,
 
-        /** Internet Explorer 9. */
-        IE9,
-
         /** Internet Explorer 11. */
         IE11,
 
         /** All versions of Firefox. */
         FF,
-
-        /** Firefox 17. */
-        FF17,
 
         /** Firefox 24. */
         FF24,
@@ -227,17 +209,11 @@ public class BrowserRunner extends Suite {
         /** Alerts for Internet Explorer 8. If not defined, {@link #IE()} is used. */
         String[] IE8() default { EMPTY_DEFAULT };
 
-        /** Alerts for Internet Explorer 9. If not defined, {@link #IE()} is used. */
-        String[] IE9() default { EMPTY_DEFAULT };
-
         /** Alerts for Internet Explorer 11. If not defined, {@link #IE()} is used. */
         String[] IE11() default { EMPTY_DEFAULT };
 
         /** Alerts for any Firefox, it can be overridden by specific FF version. */
         String[] FF() default { EMPTY_DEFAULT };
-
-        /** Alerts for Firefox 17. If not defined, {@link #FF()} is used. */
-        String[] FF17() default { EMPTY_DEFAULT };
 
         /** Alerts for Firefox 24. If not defined, {@link #FF()} is used. */
         String[] FF24() default { EMPTY_DEFAULT };

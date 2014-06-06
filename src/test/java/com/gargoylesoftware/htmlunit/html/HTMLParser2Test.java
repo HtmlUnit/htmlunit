@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -60,7 +59,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "beforeafter", "undefined" },
             IE8 = { "before", "after", "TABLE" })
-    @NotYetImplemented({ FF17, FF24, IE11 })
+    @NotYetImplemented({ FF24, IE11 })
     public void testHtmlTableTextAroundTD() throws Exception {
         final String html = "<html><head><title>test_Table</title>\n"
             + "<script>\n"
@@ -875,7 +874,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
             IE8 = { "3", "3", "2", "4", "4", "3" })
-    @NotYetImplemented({ IE8, IE11, FF17, FF24 })
+    @NotYetImplemented({ IE8, IE11, FF24 })
     public void childNodes_image() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("image"));
     }

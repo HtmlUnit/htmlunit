@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -526,7 +525,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" },
             IE = {"#ffffff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
-            IE9 = {"#ffffff", "", "#0000aa", "#0000aa", "#000000", "#0" },
             IE11 = {"#ffffff", "", "#0000aa", "#0000aa", "#000000", "#0" })
     public void bgColor() throws Exception {
         final String html =
@@ -702,7 +700,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @BuggyWebDriver({ IE, FF17 }) // tested with FF8, FF17, FF18 works with ff24
+    @BuggyWebDriver(IE) // tested with FF8, FF18 works with ff24
     @Alerts(CHROME = { "0", "exception" },
             FF = { "1", "[object HTMLBodyElement]" },
             IE = "exception",
@@ -718,7 +716,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @BuggyWebDriver({ IE, FF17 }) // tested with FF8, FF17, FF18 works with ff24
+    @BuggyWebDriver(IE) // tested with FF8, works with ff24
     @Alerts(CHROME = { "0", "exception" },
             FF = { "1", "[object Text]" },
             IE = "exception",
@@ -769,7 +767,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "undefined",
             FF = "[object HTML document.all class]",
-            FF17 = "undefined",
             IE = "[object HTMLAllCollection]",
             IE8 = "[object HTMLCollection]")
     @NotYetImplemented({ CHROME, FF, IE11 })
@@ -857,7 +854,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "2", "0" },
-            FF17 = { "2", "2" },
             IE8 = { "0", "0" })
     public void getElementsByName_emptyName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1787,7 +1783,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" },
             IE = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
-            IE9 = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" },
             IE11 = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" })
     public void alinkColor() throws Exception {
         final String html =
@@ -1818,7 +1813,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" },
             IE = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
-            IE9 = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" },
             IE11 = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" })
     public void linkColor() throws Exception {
         final String html =
@@ -1849,7 +1843,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" },
             IE = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#000000" },
-            IE9 = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#0" },
             IE11 = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#0" })
     public void vlinkColor() throws Exception {
         final String html =
@@ -1880,7 +1873,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" },
             IE = {"#000000", "", "#0000aa", "#0000aa", "#000000", "#000000" },
-            IE9 = {"#000000", "", "#0000aa", "#0000aa", "#000000", "#0" },
             IE11 = {"#000000", "", "#0000aa", "#0000aa", "#000000", "#0" })
     public void fgColor() throws Exception {
         final String html =
@@ -1961,7 +1953,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = { "ISO-8859-1", "ISO-8859-1", "ISO-8859-1", "ISO-8859-1" },
-            FF17 = { "ISO-8859-1", "ISO-8859-1", "undefined", "undefined" },
             FF24 = { "windows-1252", "windows-1252", "undefined", "undefined" },
             IE = { "undefined", "undefined", "iso-8859-1", "windows-1252" },
             IE11 = { "ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252" })
@@ -1987,7 +1978,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = { "ISO-8859-1", "ISO-8859-1", "ISO-8859-1", "ISO-8859-1" },
-            FF17 = { "ISO-8859-1", "ISO-8859-1", "undefined", "undefined" },
             FF24 = { "windows-1252", "windows-1252", "undefined", "undefined" },
             IE = { "undefined", "undefined", "iso-8859-1", "windows-1252" },
             IE11 = { "ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252" })
@@ -2014,7 +2004,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = { "ISO-8859-1", "ISO-8859-1", "ISO-8859-1", "ISO-8859-1" },
-            FF17 = { "ISO-8859-1", "ISO-8859-1", "undefined", "undefined" },
             FF24 = { "windows-1252", "windows-1252", "undefined", "undefined" },
             IE = { "undefined", "undefined", "iso-8859-1", "windows-1252" },
             IE11 = { "ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252" })
@@ -2161,7 +2150,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "CSS1Compat", "function", "function" },
             IE8 = { "8", "CSS1Compat", "object", "object" },
-            IE9 = { "9", "CSS1Compat", "function", "function" },
             IE11 = { "11", "CSS1Compat", "function", "function" })
     @NotYetImplemented(IE8)
     public void documentMode_doctypeStrict() throws Exception {
@@ -2174,7 +2162,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "BackCompat", "function", "function" },
             IE8 = { "8", "CSS1Compat", "object", "object" },
-            IE9 = { "9", "BackCompat", "function", "function" },
             IE11 = { "11", "BackCompat", "function", "function" })
     @NotYetImplemented(IE8)
     public void documentMode_doctypeTransitional() throws Exception {
@@ -2188,7 +2175,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "CSS1Compat", "function", "function" },
             IE8 = { "8", "CSS1Compat", "object", "object" },
-            IE9 = { "9", "CSS1Compat", "function", "function" },
             IE11 = { "11", "CSS1Compat", "function", "function" })
     @NotYetImplemented(IE8)
     public void documentMode_doctypeHTML5() throws Exception {
@@ -2233,7 +2219,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "BackCompat", "function", "function" },
             IE8 = { "5", "BackCompat", "undefined", "undefined" },
-            IE9 = { "9", "BackCompat", "function", "function" },
             IE11 = { "11", "BackCompat", "function", "function" })
     public void documentMode_metaEmulateIE8() throws Exception {
         documentMode("", "  <meta http-equiv='X-UA-Compatible' content='IE=Emulate8'>\n");
@@ -2245,7 +2230,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "CSS1Compat", "function", "function" },
             IE8 = { "8", "CSS1Compat", "object", "object" },
-            IE9 = { "9", "CSS1Compat", "function", "function" },
             IE11 = { "11", "CSS1Compat", "function", "function" })
     @NotYetImplemented(IE8)
     public void documentMode_metaEmulateIE8_doctypeStrict() throws Exception {
@@ -2271,7 +2255,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "BackCompat", "function", "function" },
             IE8 = { "8", "CSS1Compat", "object", "object" },
-            IE9 = { "9", "CSS1Compat", "function", "function" },
             IE11 = { "11", "CSS1Compat", "function", "function" })
     @NotYetImplemented(IE8)
     public void documentMode_metaIEEdge() throws Exception {

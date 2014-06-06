@@ -279,9 +279,7 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Geolocation]",
-            FF17 = "[object GeoGeolocation]",
             IE8 = "undefined")
-    //IE9 = "[object Geolocation]"
     public void geolocation() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
@@ -301,7 +299,6 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF17 = "20130805152501",
             FF24 = "20131112155850")
     public void buildID() throws Exception {
         final String html

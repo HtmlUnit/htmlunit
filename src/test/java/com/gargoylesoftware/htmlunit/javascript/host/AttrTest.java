@@ -123,8 +123,7 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "undefined" },
-            FF17 = { "true", "false", "false" })
+    @Alerts({ "undefined", "undefined", "undefined" })
     public void isId() throws Exception {
         final String html
             = "<html><head><script>\n"

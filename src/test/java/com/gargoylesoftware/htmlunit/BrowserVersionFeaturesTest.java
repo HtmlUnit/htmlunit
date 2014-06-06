@@ -64,10 +64,8 @@ public class BrowserVersionFeaturesTest extends SimpleWebTestCase {
     @Browsers(NONE)
     public void unusedFeatures() throws Exception {
         final List<BrowserVersion> browsers = new LinkedList<BrowserVersion>();
-        browsers.add(BrowserVersion.FIREFOX_17);
         browsers.add(BrowserVersion.FIREFOX_24);
         browsers.add(BrowserVersion.INTERNET_EXPLORER_8);
-        browsers.add(BrowserVersion.INTERNET_EXPLORER_9);
         browsers.add(BrowserVersion.INTERNET_EXPLORER_11);
         browsers.add(BrowserVersion.CHROME);
 

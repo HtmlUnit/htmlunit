@@ -817,8 +817,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "inline", "inline", "none", "block", "inline-block", "inline",
                         "inline", "inline", "inline", "inline", "inline", "inline", "inline" },
-            FF17 = { "inline", "inline", "none", "block", "inline", "inline",
-                        "inline", "inline", "inline", "inline", "inline", "inline", "inline" },
             IE8 = { "inline", "inline", "inline", "inline", "inline-block", "inline",
                         "inline", "inline", "inline", "inline", "inline", "inline", "inline" })
     public void defaultDisplayValues_S() throws Exception {

@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -1063,7 +1062,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "1", "[object HTMLHtmlElement]", "1", "[object HTMLInputElement]", "id2" },
             FF = { "0", "undefined", "1", "[object HTMLInputElement]", "id2" },
             IE11 = { "1", "[object HTMLBodyElement]", "1", "[object HTMLInputElement]", "id2" })
-    @BuggyWebDriver({ FF17,  FF24 })
+    @BuggyWebDriver(FF24)
     public void focus() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"

@@ -15,11 +15,8 @@
 package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE9;
 import static org.junit.Assert.fail;
 
 import org.eclipse.jetty.server.Server;
@@ -1200,11 +1197,9 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF17 = "0, 2, 2",
-        FF24 = "0, 2, 2",
+    @Alerts(FF24 = "0, 2, 2",
         IE11 = "0, 2, 2",
-        IE8 = "9, 1, 10",
-        IE9 = "0, 2, 2")
+        IE8 = "9, 1, 10")
     @NotYetImplemented(IE8)
     public void support__body_background_is_not_lost_if_set_prior_to_loading_jQuery___9238_() throws Exception {
         runTest("support: body background is not lost if set prior to loading jQuery (#9238)");
@@ -1716,8 +1711,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF17 = "0, 4, 4",
-        FF24 = "0, 4, 4")
+    @Alerts(FF24 = "0, 4, 4")
     public void attributes__val___respects_numbers_without_exception__Bug__9319_() throws Exception {
         runTest("attributes: val() respects numbers without exception (Bug #9319)");
     }
@@ -3331,11 +3325,9 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF17 = "0, 2, 2",
-        FF24 = "0, 2, 2",
+    @Alerts(FF24 = "0, 2, 2",
         IE11 = "0, 2, 2",
-        IE8 = "0, 3, 3",
-        IE9 = "0, 2, 2")
+        IE8 = "0, 3, 3")
     public void manipulation__append_the_same_fragment_with_events__Bug__6997__5566_() throws Exception {
         runTest("manipulation: append the same fragment with events (Bug #6997, 5566)");
     }
@@ -3987,12 +3979,10 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF17 = "0, 7, 7",
-        FF24 = "0, 7, 7",
+    @Alerts(FF24 = "0, 7, 7",
         IE11 = "0, 7, 7",
-        IE8 = "2, 1, 3",
-        IE9 = "0, 7, 7")
-    @NotYetImplemented({ FF17, FF24, IE8, IE11 })
+        IE8 = "2, 1, 3")
+    @NotYetImplemented({ IE8, IE11 })
     public void css__show___resolves_correct_default_display__8099() throws Exception {
         runTest("css: show() resolves correct default display #8099");
     }
@@ -4013,7 +4003,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 9, 9")
-    @NotYetImplemented(IE9)
     public void css__toggle__() throws Exception {
         runTest("css: toggle()");
     }
@@ -6279,11 +6268,9 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF17 = "0, 1, 1",
-        FF24 = "0, 1, 1",
+    @Alerts(FF24 = "0, 1, 1",
         IE11 = "0, 1, 1",
-        IE8 = "0, 2, 2",
-        IE9 = "0, 1, 1")
+        IE8 = "0, 2, 2")
     public void effects__non_px_animation_handles_non_numeric_start___11971_() throws Exception {
         runTest("effects: non-px animation handles non-numeric start (#11971)");
     }

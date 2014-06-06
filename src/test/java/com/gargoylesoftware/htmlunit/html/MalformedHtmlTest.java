@@ -300,7 +300,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     @NotYetImplemented
     // Input:
     // <a id="outerA">V<div id="innerDiv">W<a id="innerA">X</a>Y</div>Z</a>
-    // CHROME, FF17, FF24 and IE11 generate:
+    // CHROME, FF24 and IE11 generate:
     // <a id="outerA">V</a><div id="innerDiv"><a id="outerA">W</a><a id="innerA">X</a>Y</div>Z
     // IE8 generates (total mess):
     // <a id="outerA">V<div id="innerDiv">W<a id="innerA">X</a>Y</div></a><a id="innerA">X</a>YZ</a/>

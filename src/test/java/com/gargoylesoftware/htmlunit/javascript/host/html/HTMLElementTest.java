@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
@@ -203,7 +202,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "", "bla", "true" },
             FF = { "null", "bla", "true" },
             IE8 = "exception")
-    @NotYetImplemented({ FF17, FF24 })
+    @NotYetImplemented(FF24)
     public void getSetAttributeNS() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -439,7 +438,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "null", "inform('newHandler')", "" },
             FF24 = { "null", "inform('newHandler')", "null" },
             IE8 = { "null", "inform('newHandler')", "null" })
-    @NotYetImplemented(FF17)
     public void setAttribute_eventHandlerNull() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1097,7 +1095,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(FF = { "Outer = <p id=\"myNode\">New  cell value\n\n</p>" },
             IE8 = { "Outer = <P id=myNode>New cell value\n</P>" },
             IE11 = { "Outer = <p id=\"myNode\">New  cell value\n\n" })
-    @NotYetImplemented({ FF17, FF24, IE11 })
+    @NotYetImplemented({ FF24, IE11 })
     public void getOuterHTMLFromUnclosedParagraph() throws Exception {
         final String html = createPageForGetOuterHTML("p", "New  cell value", true);
         loadPageWithAlerts2(html);
@@ -1378,7 +1376,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div></div><div></div>",
                     "Childs: 1" },
             IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <DIV></DIV><DIV></DIV>", "Childs: 1" })
-    @NotYetImplemented({ FF17, FF24, IE8, IE11 })
+    @NotYetImplemented({ FF24, IE8, IE11 })
     public void setOuterHTMLAddMultipleSelfClosingBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div/><div>");
         loadPageWithAlerts2(html);
@@ -3256,7 +3254,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "#0000aa", "x", "BlanchedAlmond", "aBlue", "bluex" },
             IE = {"", "#0000aa", "#000000", "#ffebcd", "#ab00e0", "#b00e00" },
-            IE9 = {"", "#0000aa", "#0", "blanchedalmond", "#ab00e", "#b00e0" },
             IE11 = {"", "#0000aa", "#0", "blanchedalmond", "#ab00e", "#b00e0" })
     public void setColorAttribute() throws Exception {
         final String html =
@@ -3312,7 +3309,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "button", "", "false", "true" },
             FF = { "button", "null", "false", "true" },
             IE8 = { "button", "getAttributeNS() not supported" })
-    @NotYetImplemented({ FF17, FF24 })
+    @NotYetImplemented(FF24)
     public void attributeNS() throws Exception {
         final String html
             = "<html><head>\n"

@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
@@ -466,9 +465,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "form1", "form1", "2", "2" },
-            FF17 = { "exception:w.f1", "form1", "exception:w.f2", "2" })
-    @NotYetImplemented(FF17)
+    @Alerts(DEFAULT = { "form1", "form1", "2", "2" })
     public void formByName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -574,7 +571,6 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "5", "EMBED", "FORM", "IMG", "IMG", "OBJECT", "5", "EMBED", "FORM", "IMG", "IMG", "OBJECT" },
-            FF17 = { "exception:w.e1", "5", "EMBED", "FORM", "IMG", "IMG", "OBJECT" },
             IE = { "11", "A", "BUTTON", "EMBED", "FORM", "IMG", "IMG", "INPUT", "MAP", "OBJECT", "SELECT", "TEXTAREA",
                 "11", "A", "BUTTON", "EMBED", "FORM", "IMG", "IMG", "INPUT", "MAP", "OBJECT", "SELECT", "TEXTAREA" })
     // The following tags cause problems with WebDriver:
@@ -749,10 +745,8 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "2-2", "3-3", "4-4", "5-5", "6-6", "7-7", "8-8", "9-9", "10-10", "11-11", "10-10" },
-            FF17 = { "0-2", "0-3", "0-4", "0-5", "0-6", "0-7", "0-8", "0-9", "0-10", "0-11", "0-10" },
             IE8 = { "2-2", "3-3", "4-4", "5-5", "6-6", "7-7", "8-8", "9-9", "10-10",
                 "exception:setAttributeNS", "9-9" })
-    @NotYetImplemented(FF17)
     public void elementsByName_changedAfterGet() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -840,8 +834,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "2-2", "3-3" },
-            FF17 = { "0-2", "0-3" })
+    @Alerts({ "2-2", "3-3" })
     @NotYetImplemented
     public void elementsByName_changedAfterGet_nyi() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -875,11 +868,8 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "form1", "form1", "f1", "f1", "input1", "input1", "anchor1", "anchor1", "image1",
-                "image1", "element1", "element1" },
-            FF17 = { "exception:w.f1", "form1", "exception:w.f1", "f1", "exception:w.i1", "input1",
-                "exception:w.a1", "anchor1", "exception:w.i1", "image1", "exception:w.e1", "element1" })
-    @NotYetImplemented(FF17)
+    @Alerts({ "form1", "form1", "f1", "f1", "input1", "input1", "anchor1", "anchor1", "image1",
+                "image1", "element1", "element1" })
     public void elementsById() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -937,9 +927,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "f1", "f1" },
-            FF17 = { "exception:w.f1", "f1" })
-    @NotYetImplemented(FF17)
+    @Alerts({ "f1", "f1" })
     public void frameById() throws Exception {
         final String html = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\""
             + "\"http://www.w3.org/TR/html4/frameset.dtd\">\n"

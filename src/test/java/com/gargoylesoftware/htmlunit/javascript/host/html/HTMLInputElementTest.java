@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -718,7 +717,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox CHECKBOX" },
             IE11 = {"text TeXt", "password PassWord", "hidden Hidden",
             "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox checkbox" })
-    @NotYetImplemented({ FF17, FF24, IE11 })
+    @NotYetImplemented({ FF24, IE11 })
     public void typeCase() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
