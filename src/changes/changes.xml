@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="Bugfixes">
+            <action type="update" dev="asashour">
+                Upgrade Apache HttpComponents to 4.3.4.
+            </action>
             <action type="fix" dev="rbri" issue="1609">
                 Fix EOFException when processing responses with broken gzip'ed content.
             </action>
