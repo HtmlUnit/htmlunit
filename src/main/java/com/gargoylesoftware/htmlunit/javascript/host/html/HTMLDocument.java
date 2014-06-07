@@ -203,7 +203,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     private static final Set<String> EXECUTE_CMDS_IE = new HashSet<String>();
     /** https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla#Executing_Commands */
     private static final Set<String> EXECUTE_CMDS_FF = new HashSet<String>();
-    private static final Set<String> EXECUTE_CMDS_FF17 = new HashSet<String>();
 
     /**
      * Static counter for {@link #uniqueID_}.
@@ -285,16 +284,14 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             "backColor", "bold", "contentReadOnly", "copy", "createLink", "cut", "decreaseFontSize", "delete",
             "fontName", "fontSize", "foreColor", "formatBlock", "heading", "hiliteColor", "increaseFontSize",
             "indent", "insertHorizontalRule", "insertHTML", "insertImage", "insertOrderedList", "insertUnorderedList",
-            "insertParagraph", "italic", "justifyCenter", "justifyLeft", "justifyRight", "outdent", "paste", "redo",
+            "insertParagraph", "italic",
+            "justifyCenter", "JustifyFull", "justifyLeft", "justifyRight", "outdent", "paste", "redo",
             "removeFormat", "selectAll", "strikeThrough", "subscript", "superscript", "underline", "undo", "unlink",
             "useCSS", "styleWithCSS"
         );
         for (String cmd : cmds) {
             EXECUTE_CMDS_FF.add(cmd.toLowerCase(Locale.ENGLISH));
-            EXECUTE_CMDS_FF17.add(cmd.toLowerCase(Locale.ENGLISH));
         }
-
-        EXECUTE_CMDS_FF17.add("JustifyFull".toLowerCase(Locale.ENGLISH));
     }
 
     /**
@@ -2021,12 +2018,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         if (getBrowserVersion().isIE()) {
             return EXECUTE_CMDS_IE.contains(cmdLC);
         }
-        else if ("FF3.6".equals(getBrowserVersion().getNickname())) {
-            return EXECUTE_CMDS_FF.contains(cmdLC);
-        }
-        else {
-            return EXECUTE_CMDS_FF17.contains(cmdLC);
-        }
+        return EXECUTE_CMDS_FF.contains(cmdLC);
     }
 
     /**
