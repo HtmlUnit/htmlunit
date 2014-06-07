@@ -1194,7 +1194,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener">Mozilla documentation</a>
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 9) })
-    public void addEventListener(final String type, final Function listener, final boolean useCapture) {
+    public void addEventListener(final String type, final Scriptable listener, final boolean useCapture) {
         getEventListenersContainer().addEventListener(type, listener, useCapture);
     }
 
@@ -1218,7 +1218,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * documentation</a>
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 9) })
-    public void removeEventListener(final String type, final Function listener, final boolean useCapture) {
+    public void removeEventListener(final String type, final Scriptable listener, final boolean useCapture) {
         getEventListenersContainer().removeEventListener(type, listener, useCapture);
     }
 

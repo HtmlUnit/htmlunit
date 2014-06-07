@@ -25,6 +25,9 @@ import java.util.Locale;
 import java.util.Map;
 
 import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import org.apache.commons.logging.Log;
@@ -49,10 +52,10 @@ public class EventListenersContainer implements Serializable {
     private static final Log LOG = LogFactory.getLog(EventListenersContainer.class);
 
     static class Handlers implements Serializable {
-        private final List<Function> capturingHandlers_ = new ArrayList<Function>();
-        private final List<Function> bubblingHandlers_ = new ArrayList<Function>();
+        private final List<Scriptable> capturingHandlers_ = new ArrayList<Scriptable>();
+        private final List<Scriptable> bubblingHandlers_ = new ArrayList<Scriptable>();
         private Object handler_;
-        List<Function> getHandlers(final boolean useCapture) {
+        List<Scriptable> getHandlers(final boolean useCapture) {
             if (useCapture) {
                 return capturingHandlers_;
             }
@@ -82,12 +85,12 @@ public class EventListenersContainer implements Serializable {
      * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
      * @return <code>true</code> if the listener has been added
      */
-    public boolean addEventListener(final String type, final Function listener, final boolean useCapture) {
+    public boolean addEventListener(final String type, final Scriptable listener, final boolean useCapture) {
         if (null == listener) {
             return true;
         }
 
-        final List<Function> listeners = getHandlersOrCreateIt(type).getHandlers(useCapture);
+        final List<Scriptable> listeners = getHandlersOrCreateIt(type).getHandlers(useCapture);
         if (listeners.contains(listener)) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug(type + " listener already registered, skipping it (" + listener + ")");
@@ -108,7 +111,7 @@ public class EventListenersContainer implements Serializable {
         return handlers;
     }
 
-    private List<Function> getHandlers(final String eventType, final boolean useCapture) {
+    private List<Scriptable> getHandlers(final String eventType, final boolean useCapture) {
         final Handlers handlers = eventHandlers_.get(eventType.toLowerCase(Locale.ENGLISH));
         if (handlers != null) {
             return handlers.getHandlers(useCapture);
@@ -122,8 +125,8 @@ public class EventListenersContainer implements Serializable {
      * @param listener the listener
      * @param useCapture to use capture or not
      */
-    public void removeEventListener(final String type, final Function listener, final boolean useCapture) {
-        final List<Function> handlers = getHandlers(type, useCapture);
+    public void removeEventListener(final String type, final Scriptable listener, final boolean useCapture) {
+        final List<Scriptable> handlers = getHandlers(type, useCapture);
         if (handlers != null) {
             handlers.remove(listener);
         }
@@ -166,7 +169,7 @@ public class EventListenersContainer implements Serializable {
             return null;
         }
         ScriptResult allResult = null;
-        final List<Function> handlers = getHandlers(event.getType(), useCapture);
+        final List<Scriptable> handlers = getHandlers(event.getType(), useCapture);
         if (handlers != null && !handlers.isEmpty()) {
             final boolean ie = jsNode_.getWindow().getWebWindow().getWebClient()
                     .getBrowserVersion().hasFeature(GENERATED_40);
@@ -174,20 +177,36 @@ public class EventListenersContainer implements Serializable {
             event.setCurrentTarget(jsNode_);
             final HtmlPage page = (HtmlPage) node.getPage();
             // make a copy of the list as execution of an handler may (de-)register handlers
-            final List<Function> handlersToExecute = new ArrayList<Function>(handlers);
-            for (final Function listener : handlersToExecute) {
-                final ScriptResult result = page.executeJavaScriptFunctionIfPossible(listener, jsNode_, args, node);
-                if (event.isPropagationStopped()) {
-                    allResult = result;
+            final List<Scriptable> handlersToExecute = new ArrayList<Scriptable>(handlers);
+            for (final Scriptable listener : handlersToExecute) {
+                Function function = null;
+                Scriptable thisObject = null;
+                if (listener instanceof Function) {
+                    function = (Function) listener;
+                    thisObject = jsNode_;
                 }
-                if (ie) {
-                    if (ScriptResult.isFalse(result)) {
+                else if (listener instanceof NativeObject) {
+                    final Object handleEvent = ScriptableObject.getProperty(listener, "handleEvent");
+                    if (handleEvent instanceof Function) {
+                        function = (Function) handleEvent;
+                        thisObject = listener;
+                    }
+                }
+                if (function != null) {
+                    final ScriptResult result =
+                            page.executeJavaScriptFunctionIfPossible(function, thisObject, args, node);
+                    if (event.isPropagationStopped()) {
                         allResult = result;
                     }
-                    else {
-                        final Object eventReturnValue = event.getReturnValue();
-                        if (eventReturnValue instanceof Boolean && !((Boolean) eventReturnValue).booleanValue()) {
-                            allResult = new ScriptResult(Boolean.FALSE, page);
+                    if (ie) {
+                        if (ScriptResult.isFalse(result)) {
+                            allResult = result;
+                        }
+                        else {
+                            final Object eventReturnValue = event.getReturnValue();
+                            if (eventReturnValue instanceof Boolean && !((Boolean) eventReturnValue).booleanValue()) {
+                                allResult = new ScriptResult(Boolean.FALSE, page);
+                            }
                         }
                     }
                 }
