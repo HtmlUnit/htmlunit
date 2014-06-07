@@ -18,7 +18,6 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.Writer;
-import java.lang.reflect.Field;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,7 +33,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.HttpWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
@@ -136,9 +134,7 @@ public class HtmlPage4Test extends WebServerTestCase {
 
         final StringBuilder css = new StringBuilder("body {color: blue}");
 
-        final Field field = HttpWebConnection.class.getDeclaredField("MAX_IN_MEMORY");
-        field.setAccessible(true);
-        final long maxInMemory = (Long) field.get(null);
+        final long maxInMemory = getWebClient().getOptions().getMaxInMemory();
 
         for (int i = 0; i < maxInMemory; i++) {
             html.append(' ');
