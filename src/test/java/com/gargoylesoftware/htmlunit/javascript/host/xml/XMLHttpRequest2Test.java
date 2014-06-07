@@ -615,7 +615,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
 
     /**
      * Test the simplest CORS case. A cross-origin simple request,
-     * server replies "allow *". FF3.6 succeeds because of its old weird cross-origin policy.
+     * server replies "allow *".
      * @throws Exception if the test fails.
      */
     @Test

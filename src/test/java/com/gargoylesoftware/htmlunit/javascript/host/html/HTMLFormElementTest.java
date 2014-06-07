@@ -1134,7 +1134,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     }
 
     /**
-     * For FF3.6 and IE8: calling form.submit() immediately triggers a request but only the
+     * For IE8: calling form.submit() immediately triggers a request but only the
      * last response for a page is parsed.
      * For FF10+ and Chrome: only one request, the last one.
      * @throws Exception if the test fails
