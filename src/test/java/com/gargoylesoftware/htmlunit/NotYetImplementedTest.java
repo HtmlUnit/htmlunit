@@ -218,8 +218,7 @@ public class NotYetImplementedTest {
             if (browser.contains("FF24")) {
                 countFF24++;
             }
-            if (!browser.contains("FF17")
-                    && !browser.contains("FF24")
+            if (!browser.contains("FF24")
                     && browser.contains("FF")) {
                 countFF24++;
             }
