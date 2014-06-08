@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-
 import java.net.URL;
 
 import org.junit.Test;
@@ -26,7 +24,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -94,8 +91,9 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "<body>\n"
-            + "<a href='page2.html'>"
-            + "<span id='theSpan'>My Link</span></a>\n"
+            + "  <a href='page2.html'>\n"
+            + "    <span id='theSpan'>My Link</span>\n"
+            + "  </a>\n"
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("");
@@ -114,8 +112,9 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "<body>\n"
-            + "<a href='page2.html'>"
-            + "<button id='theButton'></button></a>\n"
+            + "  <a href='page2.html'>\n"
+            + "    <button id='theButton'></button>\n"
+            + "  </a>\n"
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("");
@@ -132,12 +131,11 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "page2.html",
             IE11 = "")
-    @NotYetImplemented(IE11)
     public void clickNestedCheckboxElement() throws Exception {
         final String html =
               "<html>\n"
             + "<body>\n"
-            + "  <a href='page2.html'>"
+            + "  <a href='page2.html'>\n"
             + "    <input type='checkbox' id='theCheckbox' name='myCheckbox' value='Milk'>\n"
             + "  </a>\n"
             + "</body></html>";
@@ -158,8 +156,9 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "<body>\n"
-            + "<a href='page2.html'>"
-            + "<img id='theImage' src='test.png' /></a>\n"
+            + "  <a href='page2.html'>\n"
+            + "    <img id='theImage' src='test.png' />\n"
+            + "  </a>\n"
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("");
@@ -176,13 +175,58 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "page2.html",
             IE11 = "")
-    @NotYetImplemented(IE11)
-    public void clickNestedInputElement() throws Exception {
+    public void clickNestedInputImageElement() throws Exception {
         final String html =
               "<html>\n"
             + "<body>\n"
-            + "  <a href='page2.html'>"
+            + "  <a href='page2.html'>\n"
             + "    <input type='image' id='theInput' />\n"
+            + "  </a>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        final WebDriver driver = loadPage2(html);
+        final WebElement input = driver.findElement(By.id("theInput"));
+        assertEquals("input", input.getTagName());
+        input.click();
+        assertEquals(new URL(getDefaultUrl(), getExpectedAlerts()[0]).toString(), driver.getCurrentUrl());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "page2.html",
+            IE11 = "")
+    public void clickNestedInputTextElement() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<body>\n"
+            + "  <a href='page2.html'>\n"
+            + "    <input type='text' id='theInput' />\n"
+            + "  </a>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        final WebDriver driver = loadPage2(html);
+        final WebElement input = driver.findElement(By.id("theInput"));
+        assertEquals("input", input.getTagName());
+        input.click();
+        assertEquals(new URL(getDefaultUrl(), getExpectedAlerts()[0]).toString(), driver.getCurrentUrl());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "page2.html",
+            IE11 = "")
+    public void clickNestedInputPasswordElement() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<body>\n"
+            + "  <a href='page2.html'>\n"
+            + "    <input type='password' id='theInput' />\n"
             + "  </a>\n"
             + "</body></html>";
 
@@ -202,8 +246,11 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "<body>\n"
-            + "<a href='page2.html'>"
-            + "<select><option id='theOption'>test</option></select></a>\n"
+            + "  <a href='page2.html'>\n"
+            + "    <select>\n"
+            + "      <option id='theOption'>test</option>\n"
+            + "    </select>\n"
+            + "  </a>\n"
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("");
@@ -220,12 +267,11 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "page2.html",
             IE11 = "")
-    @NotYetImplemented(IE11)
     public void clickNestedRadioElement() throws Exception {
         final String html =
               "<html>\n"
             + "<body>\n"
-            + "  <a href='page2.html'>"
+            + "  <a href='page2.html'>\n"
             + "    <input type='radio' id='theRadio' name='myRadio' value='Milk'>\n"
             + "  </a>\n"
             + "</body></html>";
@@ -247,8 +293,9 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "<body>\n"
-            + "<a href='page2.html'>"
-            + "<input type='reset' id='theInput' /></a>\n"
+            + "  <a href='page2.html'>\n"
+            + "    <input type='reset' id='theInput' />\n"
+            + "  </a>\n"
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("");
@@ -268,8 +315,9 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "<body>\n"
-            + "<a href='page2.html'>"
-            + "<input type='submit' id='theInput' /></a>\n"
+            + "  <a href='page2.html'>\n"
+            + "    <input type='submit' id='theInput' />\n"
+            + "  </a>\n"
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("");

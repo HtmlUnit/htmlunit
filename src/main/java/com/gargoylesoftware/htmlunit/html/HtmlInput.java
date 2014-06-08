@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_DOES_NOT_CLICK_SURROUNDING_ANCHOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_SET_DEFAULT_VALUE_UPDATES_VALUE;
 
 import java.io.IOException;
@@ -471,6 +472,13 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
         // By default this is no different than a click without coordinates.
         return (P) click();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected boolean propagateClickStateUpdateToParent() {
+        return !hasFeature(HTMLINPUT_DOES_NOT_CLICK_SURROUNDING_ANCHOR);
     }
 
     /**

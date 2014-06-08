@@ -168,4 +168,12 @@ public class HtmlSubmitInput extends HtmlInput {
         }
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean propagateClickStateUpdateToParent() {
+        return true;
+    }
 }

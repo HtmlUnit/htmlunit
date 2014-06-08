@@ -463,6 +463,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(CHROME))
     HTMLIMAGE_NAME_VALUE_PARAMS,
 
+    /** When clicking a input the the surrounding anchor is not clicked. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    HTMLINPUT_DOES_NOT_CLICK_SURROUNDING_ANCHOR,
+
     /** Setting defaultValue updates the value also. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9), @WebBrowser(CHROME) })
     HTMLINPUT_SET_DEFAULT_VALUE_UPDATES_VALUE,

@@ -1343,16 +1343,28 @@ public abstract class HtmlElement extends DomElement {
      * @throws IOException if an IO error occurs
      */
     protected boolean doClickStateUpdate() throws IOException {
-        final DomNode parent = getParentNode();
-
-        // needed for instance to perform link doClickAction when a nested element is clicked
-        // it should probably be changed to do this at the event level but currently
-        // this wouldn't work with JS disabled as events are propagated in the host object tree.
-        if (parent instanceof HtmlElement) {
-            return ((HtmlElement) parent).doClickStateUpdate();
+        if (propagateClickStateUpdateToParent()) {
+            // needed for instance to perform link doClickAction when a nested element is clicked
+            // it should probably be changed to do this at the event level but currently
+            // this wouldn't work with JS disabled as events are propagated in the host object tree.
+            final DomNode parent = getParentNode();
+            if (parent instanceof HtmlElement) {
+                return ((HtmlElement) parent).doClickStateUpdate();
+            }
         }
 
         return false;
+    }
+
+    /**
+     * @see #doClickStateUpdate()
+     * Usually the click is propagated to the parent. Overwrite if you
+     * like to disable this.
+     *
+     * @return true or false
+     */
+    protected boolean propagateClickStateUpdateToParent() {
+        return true;
     }
 
     /**
