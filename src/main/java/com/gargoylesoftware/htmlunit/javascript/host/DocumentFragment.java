@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.ArrayList;
@@ -145,7 +144,7 @@ public class DocumentFragment extends Node {
      * @param selectors the selectors
      * @return null if no matches are found; otherwise, it returns the first matching element
      */
-    @JsxFunction({ @WebBrowser(IE), @WebBrowser(FF) })
+    @JsxFunction
     public Node querySelector(final String selectors) {
         try {
             final DomNode node = getDomNodeOrDie().querySelector(selectors);

@@ -2091,7 +2091,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param selectors the selectors
      * @return null if no matches are found; otherwise, it returns the first matching element
      */
-    @JsxFunction({ @WebBrowser(IE), @WebBrowser(FF) })
+    @JsxFunction
     public Node querySelector(final String selectors) {
         try {
             final DomNode node = getDomNodeOrDie().querySelector(selectors);
