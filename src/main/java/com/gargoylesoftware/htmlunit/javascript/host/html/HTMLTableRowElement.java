@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_READONLY_FOR_TABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_ROW_DELETE_CELL_REQUIRES_INDEX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_ROW_SECTION_INDEX_BIG_INT_IF_UNATTACHED;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object representing a TR.
@@ -226,5 +228,59 @@ public class HTMLTableRowElement extends HTMLTableComponent {
             throw Context.reportRuntimeError("innerText is read-only for tag 'tr'");
         }
         super.setInnerTextImpl(value);
+    }
+
+    /**
+     * Gets the "borderColor" attribute.
+     * @return the attribute
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public String getBorderColor() {
+        return getDomNodeOrDie().getAttribute("borderColor");
+    }
+
+    /**
+     * Sets the "borderColor" attribute.
+     * @param borderColor the new attribute
+     */
+    @JsxSetter(@WebBrowser(IE))
+    public void setBorderColor(final String borderColor) {
+        setColorAttribute("borderColor", borderColor);
+    }
+
+    /**
+     * Gets the "borderColor" attribute.
+     * @return the attribute
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public String getBorderColorDark() {
+        return getDomNodeOrDie().getAttribute("borderColorDark");
+    }
+
+    /**
+     * Sets the "borderColor" attribute.
+     * @param borderColor the new attribute
+     */
+    @JsxSetter(@WebBrowser(IE))
+    public void setBorderColorDark(final String borderColor) {
+        setColorAttribute("borderColorDark", borderColor);
+    }
+
+    /**
+     * Gets the "borderColor" attribute.
+     * @return the attribute
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public String getBorderColorLight() {
+        return getDomNodeOrDie().getAttribute("borderColorLight");
+    }
+
+    /**
+     * Sets the "borderColor" attribute.
+     * @param borderColor the new attribute
+     */
+    @JsxSetter(@WebBrowser(IE))
+    public void setBorderColorLight(final String borderColor) {
+        setColorAttribute("borderColorLight", borderColor);
     }
 }

@@ -377,6 +377,60 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
+     * Gets the "borderColor" attribute.
+     * @return the attribute
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public String getBorderColor() {
+        return getDomNodeOrDie().getAttribute("borderColor");
+    }
+
+    /**
+     * Sets the "borderColor" attribute.
+     * @param borderColor the new attribute
+     */
+    @JsxSetter(@WebBrowser(IE))
+    public void setBorderColor(final String borderColor) {
+        setColorAttribute("borderColor", borderColor);
+    }
+
+    /**
+     * Gets the "borderColor" attribute.
+     * @return the attribute
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public String getBorderColorDark() {
+        return getDomNodeOrDie().getAttribute("borderColorDark");
+    }
+
+    /**
+     * Sets the "borderColor" attribute.
+     * @param borderColor the new attribute
+     */
+    @JsxSetter(@WebBrowser(IE))
+    public void setBorderColorDark(final String borderColor) {
+        setColorAttribute("borderColorDark", borderColor);
+    }
+
+    /**
+     * Gets the "borderColor" attribute.
+     * @return the attribute
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public String getBorderColorLight() {
+        return getDomNodeOrDie().getAttribute("borderColorLight");
+    }
+
+    /**
+     * Sets the "borderColor" attribute.
+     * @param borderColor the new attribute
+     */
+    @JsxSetter(@WebBrowser(IE))
+    public void setBorderColorLight(final String borderColor) {
+        setColorAttribute("borderColorLight", borderColor);
+    }
+
+    /**
      * Overwritten to throw an exception in IE8/9.
      * @param value the new value for the contents of this node
      */

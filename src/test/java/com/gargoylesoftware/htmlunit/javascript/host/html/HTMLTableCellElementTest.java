@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -501,6 +502,109 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
             + "alert(it.offsetHeight);\n"
             + "</script>\n"
             + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "undefined", "#667788", "unknown", "undefined", "undefined", "undefined" },
+            IE = { "", "#667788", "#000000", "red", "#123456", "#000000" })
+    @NotYetImplemented(IE)
+    public void borderColor() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "  <table><tr><td id='tabd1'></td></tr></table>\n"
+            + "  <table><tr><td id='tabd2' borderColor='red'></td></tr></table>\n"
+            + "  <table><tr><td id='tabd3' borderColor='#123456'></td></tr></table>\n"
+            + "  <table><tr><td id='tabd4' borderColor='unknown'></td></tr></table>\n"
+            + "<script>\n"
+            + "  var node = document.getElementById('tabd1');\n"
+            + "  alert(node.borderColor);\n"
+
+            + "  node.borderColor='#667788';\n"
+            + "  alert(node.borderColor);\n"
+
+            + "  node.borderColor='unknown';\n"
+            + "  alert(node.borderColor);\n"
+
+            + "  var node = document.getElementById('tabd2');\n"
+            + "  alert(node.borderColor);\n"
+            + "  var node = document.getElementById('tabd3');\n"
+            + "  alert(node.borderColor);\n"
+            + "  var node = document.getElementById('tabd4');\n"
+            + "  alert(node.borderColor);\n"
+
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "undefined", "undefined", "undefined" },
+            IE = { "", "", "", "", "", "" })
+    public void borderColorDark() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "  <table><tr><td id='tabd1'></td></tr></table>\n"
+            + "  <table><tr><td id='tabd2' borderColor='red'></td></tr></table>\n"
+            + "  <table><tr><td id='tabd3' borderColor='#123456'></td></tr></table>\n"
+            + "  <table><tr><td id='tabd4' borderColor='unknown'></td></tr></table>\n"
+            + "<script>\n"
+            + "  var node = document.getElementById('tabd1');\n"
+            + "  alert(node.borderColorDark);\n"
+
+            + "  node.borderColor='#667788';\n"
+            + "  alert(node.borderColorDark);\n"
+
+            + "  node.borderColor='unknown';\n"
+            + "  alert(node.borderColorDark);\n"
+
+            + "  var node = document.getElementById('tabd2');\n"
+            + "  alert(node.borderColorDark);\n"
+            + "  var node = document.getElementById('tabd3');\n"
+            + "  alert(node.borderColorDark);\n"
+            + "  var node = document.getElementById('tabd4');\n"
+            + "  alert(node.borderColorDark);\n"
+
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "undefined", "undefined", "undefined" },
+            IE = { "", "", "", "", "", "" })
+    public void borderColorLight() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "  <table><tr><td id='tabd1'></td></tr></table>\n"
+            + "  <table><tr><td id='tabd2' borderColor='red'></td></tr></table>\n"
+            + "  <table><tr><td id='tabd3' borderColor='#123456'></td></tr></table>\n"
+            + "  <table><tr><td id='tabd4' borderColor='unknown'></td></tr></table>\n"
+            + "<script>\n"
+            + "  var node = document.getElementById('tabd1');\n"
+            + "  alert(node.borderColorLight);\n"
+
+            + "  node.borderColor='#667788';\n"
+            + "  alert(node.borderColorLight);\n"
+
+            + "  node.borderColor='unknown';\n"
+            + "  alert(node.borderColorLight);\n"
+
+            + "  var node = document.getElementById('tabd2');\n"
+            + "  alert(node.borderColorLight);\n"
+            + "  var node = document.getElementById('tabd3');\n"
+            + "  alert(node.borderColorLight);\n"
+            + "  var node = document.getElementById('tabd4');\n"
+            + "  alert(node.borderColorLight);\n"
+
+            + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
 }
