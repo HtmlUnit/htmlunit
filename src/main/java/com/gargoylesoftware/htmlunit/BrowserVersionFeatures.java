@@ -529,6 +529,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 8) })
     HTML_COLOR_EXPAND_SHORT_HEX,
 
+    /** Expand #0 to #000000. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    HTML_COLOR_EXPAND_ZERO,
+
     /** Replace color names by their 6-digit hex color code. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     HTML_COLOR_REPLACE_NAME_BY_HEX,

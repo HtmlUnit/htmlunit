@@ -33,6 +33,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_FOR_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_EXPAND_ZERO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_APPEND_CHILD_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX;
@@ -1561,6 +1562,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
             color = "#ffffff";
         }
+        if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
+            color = "#000000";
+        }
         return color;
     }
 
@@ -1585,6 +1589,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
             color = "#0000ff";
         }
+        if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
+            color = "#000000";
+        }
         return color;
     }
 
@@ -1607,6 +1614,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         String color = getHtmlPage().getBody().getAttribute("link");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
             color = "#0000ff";
+        }
+        if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
+            color = "#000000";
         }
         return color;
     }
@@ -1631,6 +1641,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
             color = "#800080";
         }
+        if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
+            color = "#000000";
+        }
         return color;
     }
 
@@ -1652,6 +1665,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public String getFgColor() {
         String color = getHtmlPage().getBody().getAttribute("text");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
+            color = "#000000";
+        }
+        if (getBrowserVersion().hasFeature(HTML_COLOR_EXPAND_ZERO) && "#0".equals(color)) {
             color = "#000000";
         }
         return color;
