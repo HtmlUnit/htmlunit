@@ -424,14 +424,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
         //this is the value with UTF-8 encoding
         final String expectedResponse = "6A94 6848 D30C C77C 30D5 30A1 30A4 30EB 645 644 641 2E 74 78 74 <br>myInput";
 
-        assertTrue("Invalid Response: " + response, response.contains(expectedResponse));
-
-        if (getBrowserVersion().isIE()) {
-            assertTrue(expectedResponse.length() < response.length());
-        }
-        else {
-            assertEquals(expectedResponse.length(), response.length());
-        }
+        assertTrue("Invalid Response: " + response, response.endsWith(expectedResponse));
     }
 
     /**
