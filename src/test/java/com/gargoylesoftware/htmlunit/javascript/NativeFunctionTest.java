@@ -19,7 +19,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -196,7 +195,6 @@ public class NativeFunctionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "2", "eat", "bananas" })
-    @NotYetImplemented
     public void apply() throws Exception {
         final String html = "<html><head><script>\n"
             + "  var myObject = {'length': 2, '0': 'eat', '1': 'bananas'};\n"
