@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -186,6 +187,31 @@ public class NativeFunctionTest extends WebDriverTestCase {
             + "foo();\n"
             + "alert(ori == $);\n"
             + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "2", "eat", "bananas" })
+    @NotYetImplemented
+    public void apply() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  var myObject = {'length': 2, '0': 'eat', '1': 'bananas'};\n"
+            + "  function test() {\n"
+            + "    test2.apply(null, myObject);\n"
+            + "  }\n"
+            + "\n"
+            + "  function test2() {\n"
+            + "    alert(arguments.length);\n"
+            + "    for (var i in arguments) {\n"
+            + "      alert(arguments[i]);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
 
         loadPageWithAlerts2(html);
     }
