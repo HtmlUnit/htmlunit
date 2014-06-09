@@ -1439,4 +1439,26 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "1", "width", "" }, IE8 = { "undefined", "width", "" })
+    public void length() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var a = document.createElement('div');\n"
+            + "    a.style.cssText='width: 100%';\n"
+            + "    alert(a.style.length);\n"
+            + "    alert(a.style[0]);\n"
+            + "    alert(a.style[1]);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }

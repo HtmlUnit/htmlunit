@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="Bugfixes">
+            <action type="add" dev="asashour" issue="1615">
+                JavaScript: implement .style.length and indexed value.
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: .querySelector() is supported in Chrome.
             </action>

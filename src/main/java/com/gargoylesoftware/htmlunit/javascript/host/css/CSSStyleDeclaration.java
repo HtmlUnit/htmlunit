@@ -2067,9 +2067,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "length", not yet implemented.
      * @return the length
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public int getLength() {
-        return 0;
+        return getStyleMap().size();
     }
 
     /**
@@ -2390,6 +2390,15 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         }
 
         return super.get(name, start);
+    }
+
+    @Override
+    public Object get(final int index, final Scriptable start) {
+        final int size = getStyleMap().size();
+        if (index >= size) {
+            return "";
+        }
+        return getStyleMap().keySet().toArray(new String[size])[index];
     }
 
     /**
