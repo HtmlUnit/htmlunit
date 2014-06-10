@@ -71,6 +71,43 @@ public class EventListenersContainerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "someName", "myevent", "[object HTMLBodyElement]" }, IE = "exception")
+    public void addEventListener_node() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function MyEventListener(name) {\n"
+            + "    this.name = name;\n"
+            + "  }\n"
+            + "\n"
+            + "  MyEventListener.prototype = {\n"
+            + "    handleEvent: function(evt) {\n"
+            + "      alert(this.name);\n"
+            + "      alert(evt.type);\n"
+            + "      alert(evt.target);\n"
+            + "    }\n"
+            + "  }\n"
+            + "\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var listener = new MyEventListener('someName');\n"
+            + "      document.body.addEventListener('myevent', listener, false);\n"
+            + "      document.body.dispatchEvent(new Event('myevent'));\n"
+            + "    } catch (e) {\n"
+            + "      alert('exception');\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "", IE = "exception")
     public void addEventListener_no_handleEvent() throws Exception {
         final String html

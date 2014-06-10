@@ -685,7 +685,7 @@ public class Node extends SimpleScriptable {
      * @see #attachEvent(String, Function)
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 9) })
-    public void addEventListener(final String type, final Function listener, final boolean useCapture) {
+    public void addEventListener(final String type, final Scriptable listener, final boolean useCapture) {
         getEventListenersContainer().addEventListener(type, listener, useCapture);
     }
 
