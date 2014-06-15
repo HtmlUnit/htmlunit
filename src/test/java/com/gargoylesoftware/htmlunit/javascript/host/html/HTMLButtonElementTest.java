@@ -14,11 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -82,6 +86,97 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "submit", "submit", "submit", "submit", "reset", "button", "submit" },
+            IE8 = { "button", "button", "submit", "button", "reset", "button", "button" })
+    public void getType() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myNone').type);\n"
+            + "    alert(document.getElementById('myEmpty').type);\n"
+            + "    alert(document.getElementById('mySubmit').type);\n"
+            + "    alert(document.getElementById('mySubmitTrim').type);\n"
+            + "    alert(document.getElementById('myReset').type);\n"
+            + "    alert(document.getElementById('myButton').type);\n"
+            + "    alert(document.getElementById('myUnknown').type);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND + "'>\n"
+            + "    <button id='myNone'></button>\n"
+            + "    <button type='' id='myEmpty'></button>\n"
+            + "    <button type='submit' id='mySubmit'></button>\n"
+            + "    <button type=' Submit\t' id='mySubmitTrim'></button>\n"
+            + "    <button type='reSet' id='myReset'></button>\n"
+            + "    <button type='button' id='myButton'></button>\n"
+            + "    <button type='unknown' id='myUnknown'></button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "myFormId", "null", "null", "null", "null", "myFormId", "null", "myForm2Id", "myForm2Id" },
+            IE11 = { "myFormId", "myFormId", "null", "myFormId", "myFormId", "null", "myFormId", "myFormId", "null" },
+            IE8 = { "myFormId", "", "", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined" })
+    @NotYetImplemented({ FF, IE8 })
+    public void getForm() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function show(id) {\n"
+            + "    elem = document.getElementById(id);\n"
+            + "    if (elem.form) {\n"
+            + "      alert(elem.form.id);\n"
+            + "    } else {\n"
+            + "      alert(elem.form);\n"
+            + "    }\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    show('myNone');\n"
+            + "    show('myEmptyInside');\n"
+            + "    show('myEmptyOutside');\n"
+            + "    show('myFormTrim');\n"
+            + "    show('myFormCase');\n"
+            + "    show('myOutside');\n"
+            + "    show('myUnknown');\n"
+            + "    show('myFormOther');\n"
+            + "    show('myFormOtherOutside');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myFormId' action='" + URL_SECOND + "'>\n"
+            + "    <button id='myNone'></button>\n"
+            + "    <button form='' id='myEmptyInside'></button>\n"
+            + "    <button form='myFormId' id='myForm'></button>\n"
+            + "    <button form=' myFormId\t' id='myFormTrim'></button>\n"
+            + "    <button form='myformid' id='myFormCase'></button>\n"
+            + "    <button form='unknown' id='myUnknown'></button>\n"
+            + "    <button form='myForm2Id' id='myFormOther'></button>\n"
+            + "  </form>\n"
+            + "  <form id='myForm2Id' action='" + URL_SECOND + "'>\n"
+            + "  </form>\n"
+            + "  <button form='myFormId' id='myOutside'></button>\n"
+            + "  <button form='' id='myEmptyOutside'></button>\n"
+            + "  <button form='myForm2Id' id='myFormOtherOutside'></button>\n"
+            + "</body></html>";
+
         loadPageWithAlerts2(html);
     }
 

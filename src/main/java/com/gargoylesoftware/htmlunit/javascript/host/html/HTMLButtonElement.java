@@ -14,11 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.BUTTON_EMPTY_TYPE_BUTTON;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BUTTON_SET_TYPE_THROWS_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -63,7 +65,23 @@ public class HTMLButtonElement extends FormField {
     @Override
     @JsxGetter
     public String getType() {
-        return ((HtmlButton) getDomNodeOrDie()).getTypeAttribute();
+        String type = ((HtmlButton) getDomNodeOrDie()).getTypeAttribute();
+        if (null != type) {
+            type = type.toLowerCase(Locale.ENGLISH);
+        }
+        if ("reset".equals(type)) {
+            return "reset";
+        }
+        if ("submit".equals(type)) {
+            return "submit";
+        }
+        if ("button".equals(type)) {
+            return "button";
+        }
+        if (getBrowserVersion().hasFeature(BUTTON_EMPTY_TYPE_BUTTON)) {
+            return "button";
+        }
+        return "submit";
     }
 
     /**

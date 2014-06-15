@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.util.List;
@@ -364,5 +366,303 @@ public class HtmlButton2Test extends WebDriverTestCase {
             assertEquals(getExpectedAlerts()[2], params.get(0).getName() + "-" + params.get(0).getValue());
         }
         assertEquals(getExpectedAlerts()[3], driver.getTitle());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2", IE8 = "1")
+    @NotYetImplemented({ IE11, FF })
+    public void typeUnknown() throws Exception {
+        final String html
+            = "<html><head><title>first</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND + "'>\n"
+            + "    <button type='unknown' id='myButton'>Explicit Submit</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final String secondContent
+            = "<html><head><title>second</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse(secondContent);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myButton")).click();
+
+        final int expectedReqCount = Integer.parseInt(getExpectedAlerts()[0]);
+        assertEquals(expectedReqCount, getMockWebConnection().getRequestCount());
+        if (expectedReqCount > 1) {
+            assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typeSubmit() throws Exception {
+        final String html
+            = "<html><head><title>first</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND + "'>\n"
+            + "    <button type='submit' id='myButton'>Explicit Submit</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final String secondContent
+            = "<html><head><title>second</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse(secondContent);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myButton")).click();
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+        assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typeReset() throws Exception {
+        final String html
+            = "<html><head><title>first</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND + "'>\n"
+            + "    <button type='reset' id='myButton'>Explicit Submit</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final String secondContent
+            = "<html><head><title>second</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse(secondContent);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myButton")).click();
+
+        assertEquals(1, getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2", IE8 = "1")
+    public void submitWithoutType() throws Exception {
+        final String html
+            = "<html><head><title>first</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND + "'>\n"
+            + "    <button id='myButton'>Implicit Submit</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final String secondContent
+            = "<html><head><title>second</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse(secondContent);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myButton")).click();
+
+        final int expectedReqCount = Integer.parseInt(getExpectedAlerts()[0]);
+        assertEquals(expectedReqCount, getMockWebConnection().getRequestCount());
+        if (expectedReqCount > 1) {
+            assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2", IE = "1")
+    @NotYetImplemented(FF)
+    public void typeUnknownExternal() throws Exception {
+        final String html
+            = "<html><head><title>first</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND + "'>\n"
+            + "  </form>\n"
+            + "  <button type='unknown' id='myButton' form='myForm'>Explicit Submit</button>\n"
+            + "</body></html>";
+        final String secondContent
+            = "<html><head><title>second</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse(secondContent);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myButton")).click();
+
+        final int expectedReqCount = Integer.parseInt(getExpectedAlerts()[0]);
+        assertEquals(expectedReqCount, getMockWebConnection().getRequestCount());
+        if (expectedReqCount > 1) {
+            assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2", IE = "1")
+    @NotYetImplemented(FF)
+    public void typeSubmitExternal() throws Exception {
+        final String html
+            = "<html><head><title>first</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND + "'>\n"
+            + "  </form>\n"
+            + "  <button type='submit' id='myButton' form='myForm'>Explicit Submit</button>\n"
+            + "</body></html>";
+        final String secondContent
+            = "<html><head><title>second</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse(secondContent);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myButton")).click();
+
+        final int expectedReqCount = Integer.parseInt(getExpectedAlerts()[0]);
+        assertEquals(expectedReqCount, getMockWebConnection().getRequestCount());
+        if (expectedReqCount > 1) {
+            assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    public void typeResetExternal() throws Exception {
+        final String html
+            = "<html><head><title>first</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND + "'>\n"
+            + "  </form>\n"
+            + "  <button type='reset' id='myButton' form='myForm'>Explicit Submit</button>\n"
+            + "</body></html>";
+        final String secondContent
+            = "<html><head><title>second</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse(secondContent);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myButton")).click();
+
+        final int expectedReqCount = Integer.parseInt(getExpectedAlerts()[0]);
+        assertEquals(expectedReqCount, getMockWebConnection().getRequestCount());
+        if (expectedReqCount > 1) {
+            assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts(DEFAULT = "2", IE = "1")
+    @Test
+    @NotYetImplemented(FF)
+    public void submitWithoutTypeExternal() throws Exception {
+        final String html
+            = "<html><head><title>first</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND + "'>\n"
+            + "  </form>\n"
+            + "  <button id='myButton' form='myForm'>Implicit Submit</button>\n"
+            + "</body></html>";
+        final String secondContent
+            = "<html><head><title>second</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse(secondContent);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myButton")).click();
+
+        final int expectedReqCount = Integer.parseInt(getExpectedAlerts()[0]);
+        assertEquals(expectedReqCount, getMockWebConnection().getRequestCount());
+        if (expectedReqCount > 1) {
+            assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    public void externalUnknownFrom() throws Exception {
+        final String html
+            = "<html><head><title>first</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND + "'>\n"
+            + "  </form>\n"
+            + "  <button type='submit' id='myButton' form='unknown'>Explicit Submit</button>\n"
+            + "</body></html>";
+        final String secondContent
+            = "<html><head><title>second</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse(secondContent);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myButton")).click();
+
+        final int expectedReqCount = Integer.parseInt(getExpectedAlerts()[0]);
+        assertEquals(expectedReqCount, getMockWebConnection().getRequestCount());
+        if (expectedReqCount > 1) {
+            assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2", IE = "1")
+    @NotYetImplemented
+    public void internalDifferentFrom() throws Exception {
+        final String html
+            = "<html><head><title>first</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND + "'>\n"
+            + "  </form>\n"
+            + "  <form id='other' action='" + URL_THIRD + "'>\n"
+            + "    <button type='submit' id='myButton' form='myForm'>Explicit Submit</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final String secondContent
+            = "<html><head><title>second</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse(secondContent);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myButton")).click();
+
+        final int expectedReqCount = Integer.parseInt(getExpectedAlerts()[0]);
+        assertEquals(expectedReqCount, getMockWebConnection().getRequestCount());
+        if (expectedReqCount > 1) {
+            assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
+        }
     }
 }
