@@ -894,6 +894,37 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     }
 
     /**
+     * Browsers are really strange.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "none", IE11 = "inline", IE8 = "ignored")
+    @NotYetImplemented(IE11)
+    public void displayDefaultOverwritesNone() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <title>foo</title>\n"
+            + "  <style>\n"
+            + "    tt { display: none; }\n"
+            + "  </style>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if(window.getComputedStyle) {\n"
+            + "        var elem = document.createElement('TT');\n"
+            + "        alert(window.getComputedStyle(elem, null)['display']);\n"
+            + "      } else {\n"
+            + "        alert('ignored');\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -1252,6 +1283,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "BLACK", "pink", "color: pink;" },
             IE11 = { "black", "pink", "color: pink;" })
+    @NotYetImplemented(IE11)
     public void caseInsensitive() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
