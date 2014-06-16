@@ -635,8 +635,8 @@ public final class HTMLParser {
         }
 
         /**
-         * Adds the new node to the right parent that is not necessary the currentNode in case
-         * of malformed HTML code.
+         * Adds the new node to the right parent that is not necessary the currentNode in case of
+         * malformed HTML code. The method tries to emulate the behaviour of Firefox.
          */
         private void addNodeToRightParent(final DomNode currentNode, final DomElement newElement) {
             final String currentNodeName = currentNode.getNodeName();
@@ -644,26 +644,65 @@ public final class HTMLParser {
 
             DomNode parent = currentNode;
 
+            // If the new node is a table element and the current node isn't one search the stack for the
+            // correct parent.
             if ("tr".equals(newNodeName) && !isTableChild(currentNodeName)) {
                 parent = findElementOnStack("tbody", "thead", "tfoot");
             }
             else if (isTableChild(newNodeName) && !"table".equals(currentNodeName)) {
                 parent = findElementOnStack("table");
             }
-
-            if ("table".equals(currentNodeName) && !isTableChild(newNodeName)) {
-                parent.insertBefore(newElement);
-                if ("form".equals(newNodeName)) {
-                    newElement.appendChild(parent);
-                }
+            else if (isTableCell(newNodeName) && !"tr".equals(currentNodeName)) {
+                parent = findElementOnStack("tr");
             }
-            else if (isTableChild(currentNodeName) && !"tr".equals(newNodeName)
-                    && !("col".equals(newNodeName) && "colgroup".equals(currentNodeName))) {
-                final DomNode table = currentNode.getParentNode();
-                table.insertBefore(newElement);
+
+            // If the parent changed and the old parent was a form it is now waiting for lost children.
+            if (parent != currentNode && "form".equals(currentNodeName)) {
+                formWaitingForLostChildren_ = (HtmlForm) currentNode;
+            }
+
+            final String parentNodeName = parent.getNodeName();
+
+            if (("table".equals(parentNodeName) && !isTableChild(newNodeName))
+                    || (isTableChild(parentNodeName) && !"caption".equals(parentNodeName)
+                            && !"colgroup".equals(parentNodeName) && !"tr".equals(newNodeName))
+                    || ("colgroup".equals(parentNodeName) && !"col".equals(newNodeName))
+                    || ("tr".equals(parentNodeName) && !isTableCell(newNodeName))) {
+                // If its a form or submittable just add it even though the resulting DOM is incorrect.
+                // Otherwise insert the element before the table.
+                if ("form".equals(newNodeName)) {
+                    formWaitingForLostChildren_ = (HtmlForm) newElement;
+                    parent.appendChild(newElement);
+                }
+                else if (newElement instanceof SubmittableElement) {
+                    if (formWaitingForLostChildren_ != null) {
+                        formWaitingForLostChildren_.addLostChild((HtmlElement) newElement);
+                    }
+                    parent.appendChild(newElement);
+                }
+                else {
+                    parent = findElementOnStack("table");
+                    parent.insertBefore(newElement);
+                }
             }
             else if (head_ != null && "title".equals(newNodeName) && !parsingInnerHead_) {
                 head_.appendChild(newElement);
+            }
+            else if (formWaitingForLostChildren_ != null && "form".equals(parentNodeName)) {
+                // Do not append any children to invalid form. Submittable are inserted after the form,
+                // everything else before the table.
+                if (newElement instanceof SubmittableElement) {
+                    formWaitingForLostChildren_.addLostChild((HtmlElement) newElement);
+                    parent.getParentNode().appendChild(newElement);
+                }
+                else {
+                    parent = findElementOnStack("table");
+                    parent.insertBefore(newElement);
+                }
+            }
+            else if (formWaitingForLostChildren_ != null && newElement instanceof SubmittableElement) {
+                formWaitingForLostChildren_.addLostChild((HtmlElement) newElement);
+                parent.appendChild(newElement);
             }
             else {
                 parent.appendChild(newElement);
@@ -690,6 +729,10 @@ public final class HTMLParser {
             return "thead".equals(nodeName) || "tbody".equals(nodeName)
                     || "tfoot".equals(nodeName) || "caption".equals(nodeName)
                     || "colgroup".equals(nodeName);
+        }
+
+        private boolean isTableCell(final String nodeName) {
+            return "td".equals(nodeName) || "th".equals(nodeName);
         }
 
         /** {@inheritDoc} */
@@ -722,15 +765,17 @@ public final class HTMLParser {
                 }
             }
 
+            // Need to reset this at each closing form tag because a valid form could start afterwards.
+            if ("form".equals(tagLower) && formWaitingForLostChildren_ != null) {
+                formWaitingForLostChildren_ = null;
+            }
+
             final DomNode previousNode = stack_.pop(); //remove currentElement from stack
             previousNode.setEndLocation(locator_.getLineNumber(), locator_.getColumnNumber());
 
             // special handling for form lost children (malformed HTML code where </form> is synthesized)
             if (previousNode instanceof HtmlForm && lastTagWasSynthesized_) {
                 formWaitingForLostChildren_ = (HtmlForm) previousNode;
-            }
-            else if (formWaitingForLostChildren_ != null && previousNode instanceof SubmittableElement) {
-                formWaitingForLostChildren_.addLostChild((HtmlElement) previousNode);
             }
 
             if (!stack_.isEmpty()) {

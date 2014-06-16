@@ -203,7 +203,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     @NotYetImplemented(IE8)
     public void missingDoubleQuote() throws Exception {
         final String html = "<html><body>"
-            + "Go to <a href=\"http://blah.com>blah</a> now."
+                + "Go to <a href='http://blah.com>blah</a> now."
             + "<script>alert(document.links.length)</script>"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -406,12 +406,8 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    // correct assertion is
-    // @Alerts({ "1", "TABLE", "1", "FORM" })
-    // this test is NOT marked as NYI because we like to ensure
-    // no exception is thrown
-    @Alerts({ "1", "FORM", "1", "TABLE" })
-    public void formInNestedTable() throws Exception {
+    @Alerts({ "1", "TABLE", "2", "FORM", "TBODY" })
+    public void formInTable1() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
                 + "<table>\n"
@@ -442,6 +438,360 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "  alert(document.getElementById('td0').children[0].tagName);\n"
                 + "  alert(document.getElementById('td0').children[0].children.length);\n"
                 + "  alert(document.getElementById('td0').children[0].children[0].tagName);\n"
+                + "  alert(document.getElementById('td0').children[0].children[1].tagName);\n"
+                + "</script>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "3", "1a", "1b", "1c", "0", "TBODY", "3", "2a", "2b", "2c", "0", "TBODY" })
+    public void formInTable2() throws Exception {
+        final String html = "<html>\n"
+                + "<body>\n"
+                + "<table>\n"
+                + "    <tr>\n"
+                + "      <td>xyz</td>\n"
+                + "    </tr>\n"
+                + "    <form name='form1' action='' method='post'>\n"
+                + "      <input type='hidden' name='1a' value='a1' />\n"
+                + "      <tr>\n"
+                + "        <td>\n"
+                + "          <table>\n"
+                + "            <tr>\n"
+                + "              <td>\n"
+                + "                <input type='text' name='1b' value='b1' />\n"
+                + "              </td>\n"
+                + "            </tr>\n"
+                + "          </table>\n"
+                + "        </td>\n"
+                + "      </tr>\n"
+                + "      <input type='hidden' name='1c' value='c1'>\n"
+                + "    </form>\n"
+                + "    <form name='form2' action='' method='post'>\n"
+                + "      <input type='hidden' name='2a' value='a2' />\n"
+                + "      <tr>\n"
+                + "        <td>\n"
+                + "          <table>\n"
+                + "            <tr>\n"
+                + "              <td>\n"
+                + "                <input type='text' name='2b' value='b2' />\n"
+                + "              </td>\n"
+                + "            </tr>\n"
+                + "          </table>\n"
+                + "        </td>\n"
+                + "      </tr>\n"
+                + "      <input type='hidden' name='2c' value='c2'>\n"
+                + "    </form>\n"
+                + "  </table>"
+                + "<script>\n"
+                + "  for(var i = 0; i < document.forms.length; ++i) {"
+                + "  alert(document.forms[i].elements.length);\n"
+                + "    for(var j = 0; j < document.forms[i].elements.length; ++j) {"
+                + "      alert(document.forms[i].elements[j].name);"
+                + "    }"
+                + "    alert(document.forms[i].children.length);"
+                + "    alert(document.forms[i].parentNode.tagName);"
+                + "  }"
+                + "</script>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "3", "1a", "1b", "", "0", "TABLE" })
+    public void formInTable3() throws Exception {
+        final String html = "<html>\n"
+                + "<body>\n"
+                + "  <table>\n"
+                + "    <form name='form1' action='' method='get'>\n"
+                + "      <input type='hidden' name='1a' value='a1'>\n"
+                + "      <tr>\n"
+                + "        <td>\n"
+                + "          <input type='hidden' name='1b' value='b1'>\n"
+                + "          <input type='submit' value='Submit'>\n"
+                + "        </td>\n"
+                + "      </tr>\n"
+                + "    </form>\n"
+                + "  </table>"
+                + "<script>\n"
+                + "  for(var i = 0; i < document.forms.length; ++i) {"
+                + "  alert(document.forms[i].elements.length);\n"
+                + "    for(var j = 0; j < document.forms[i].elements.length; ++j) {"
+                + "      alert(document.forms[i].elements[j].name);"
+                + "    }"
+                + "    alert(document.forms[i].children.length);"
+                + "    alert(document.forms[i].parentNode.tagName);"
+                + "  }"
+                + "</script>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    // correct FF assertion is
+    // @Alerts({ "3", "1a", "1b", "", "0", "DIV" })
+    @Alerts({ "3", "1a", "1b", "", "1", "DIV" })
+    public void formInTable4() throws Exception {
+        final String html = "<html>\n"
+                + "<body>\n"
+                + "  <table>\n"
+                + "    <div>\n"
+                + "      <form name='form1' action='' method='get'>\n"
+                + "        <input type='hidden' name='1a' value='a1'>\n"
+                + "        <tr>\n"
+                + "          <td>\n"
+                + "            <input type='hidden' name='1b' value='b1'>\n"
+                + "            <input type='submit' value='Submit'>\n"
+                + "          </td>\n"
+                + "        </tr>\n"
+                + "      </form>\n"
+                + "    </div>\n"
+                + "  </table>"
+                + "<script>\n"
+                + "  for(var i = 0; i < document.forms.length; ++i) {"
+                + "  alert(document.forms[i].elements.length);\n"
+                + "    for(var j = 0; j < document.forms[i].elements.length; ++j) {"
+                + "      alert(document.forms[i].elements[j].name);"
+                + "    }"
+                + "    alert(document.forms[i].children.length);"
+                + "    alert(document.forms[i].parentNode.tagName);"
+                + "  }"
+                + "</script>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "1", "1a", "0", "TR", "1", "2a", "0", "TR" })
+    public void formInTable5() throws Exception {
+        final String html = "<html>\n"
+                + "<body>\n"
+                + "  <table>\n"
+                + "    <tr>\n"
+                + "      <form name='form1'>\n"
+                + "        <input value='a1' name='1a' type='hidden'></input>\n"
+                + "      </form>\n"
+                + "      <form name='form2'>\n"
+                + "        <input value='a2' name='2a' type='hidden'></input>\n"
+                + "      </form>\n"
+                + "      <td>\n"
+                + "      </td>\n"
+                + "    </tr>\n"
+                + "  </table>"
+                + "<script>\n"
+                + "  for(var i = 0; i < document.forms.length; ++i) {"
+                + "  alert(document.forms[i].elements.length);\n"
+                + "    for(var j = 0; j < document.forms[i].elements.length; ++j) {"
+                + "      alert(document.forms[i].elements[j].name);"
+                + "    }"
+                + "    alert(document.forms[i].children.length);"
+                + "    alert(document.forms[i].parentNode.tagName);"
+                + "  }"
+                + "</script>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "2", "1a", "1b", "0", "TR" })
+    public void formInTable6() throws Exception {
+        final String html = "<html>\n"
+                + "<body>\n"
+                + "<table>\n"
+                + "  <tr>\n"
+                + "    <td></td>\n"
+                + "    <form name='form1'>\n"
+                + "      <input name='1a' value='a1' type='hidden'></input>\n"
+                + "      <td>\n"
+                + "        <div>\n"
+                + "          <table>\n"
+                + "            <tr>\n"
+                + "              <td>\n"
+                + "                <input name='1b' value='b1'></input>\n"
+                + "              </td>\n"
+                + "            </tr>\n"
+                + "          </table>\n"
+                + "        </div>\n"
+                + "      </td>\n"
+                + "    </form>\n"
+                + "  </tr>\n"
+                + "</table>"
+                + "<script>\n"
+                + "  for(var i = 0; i < document.forms.length; ++i) {"
+                + "  alert(document.forms[i].elements.length);\n"
+                + "    for(var j = 0; j < document.forms[i].elements.length; ++j) {"
+                + "      alert(document.forms[i].elements[j].name);"
+                + "    }"
+                + "    alert(document.forms[i].children.length);"
+                + "    alert(document.forms[i].parentNode.tagName);"
+                + "  }"
+                + "</script>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "3", "1a", "1b", "1c", "0", "TR", "1", "2a", "1", "DIV" })
+    public void formInTable7() throws Exception {
+        final String html = "<html>\n"
+                + "<body>\n"
+                + "  <table>\n"
+                + "    <tbody>\n"
+                + "      <tr>\n"
+                + "        <form name='form1'>\n"
+                + "          <input type='hidden' name='1a' value='a1' />\n"
+                + "          <td>\n"
+                + "            <input type='hidden' name='1b' value='b1' />\n"
+                + "            <div>\n"
+                + "              <input name='1c' value='c1'>\n"
+                + "            </div>\n"
+                + "          </td>\n"
+                + "        </form>\n"
+                + "      </tr>\n"
+                + "    </tbody>\n"
+                + "  </table>\n"
+                + "  <div>\n"
+                + "    <form name='form2'>\n"
+                + "      <input type='hidden' name='2a' value='a2' />\n"
+                + "    </form>\n"
+                + "  </div>"
+                + "<script>\n"
+                + "  for(var i = 0; i < document.forms.length; ++i) {"
+                + "  alert(document.forms[i].elements.length);\n"
+                + "    for(var j = 0; j < document.forms[i].elements.length; ++j) {"
+                + "      alert(document.forms[i].elements[j].name);"
+                + "    }"
+                + "    alert(document.forms[i].children.length);"
+                + "    alert(document.forms[i].parentNode.tagName);"
+                + "  }"
+                + "</script>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "2", "1a", "1b", "2", "BODY", "TR", "TABLE", "2" })
+    public void formInTable8() throws Exception {
+        final String html = "<html>\n"
+                + "<body>\n"
+                + "<form name='form1'>\n"
+                + "    <input type='hidden' name='1a' value='a1' />\n"
+                + "    <div>\n"
+                + "      <table>\n"
+                + "        <colgroup id='colgroup'>\n"
+                + "          <col width='50%' />\n"
+                + "          <col width='50%' />\n"
+                + "        </colgroup>\n"
+                + "        <thead>\n"
+                + "          <tr>\n"
+                + "            <th>A</th>\n"
+                + "            <th>B</th>\n"
+                + "          </tr>\n"
+                + "        </thead>\n"
+                + "        <tbody>\n"
+                + "          <tr>\n"
+                + "            <input type='hidden' name='1b' value='b1' />\n"
+                + "            <td>1</td>\n"
+                + "            <td>2</td>\n"
+                + "          </tr>\n"
+                + "        </tbody>\n"
+                + "      </table>\n"
+                + "    </div>\n"
+                + "  </form>"
+                + "<script>\n"
+                + "  alert(document.form1.elements.length);"
+                + "  for(var j = 0; j < document.form1.elements.length; ++j) {"
+                + "    alert(document.form1.elements[j].name);"
+                + "  }"
+                + "  alert(document.form1.children.length);"
+                + "  alert(document.form1.parentNode.tagName);"
+                + "  alert(document.form1['1b'].parentNode.tagName);"
+                + "  alert(document.getElementById('colgroup').parentNode.tagName);"
+                + "  alert(document.getElementById('colgroup').children.length);"
+                + "</script>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    // correct FF assertion is
+    // @Alerts({ "3", "1b", "1a", "1c", "0", "TABLE" })
+    @Alerts({ "3", "1a", "1b", "1c", "0", "TABLE" })
+    public void formInTable9() throws Exception {
+        final String html = "<html>\n"
+                + "<body>\n"
+                + "<table>\n"
+                + "    <form name='form1'>\n"
+                + "      <input type='hidden' name='1a' value='a1' />\n"
+                + "      <div>\n"
+                + "        <input type='hidden' name='1b' value='b1' />\n"
+                + "      </div>\n"
+                + "      <tbody>\n"
+                + "        <tr>\n"
+                + "          <input type='hidden' name='1c' value='c1' />\n"
+                + "          <td>1</td>\n"
+                + "          <td>2</td>\n"
+                + "        </tr>\n"
+                + "      </tbody>\n"
+                + "    </form>\n"
+                + "  </table>"
+                + "<script>\n"
+                + "  alert(document.form1.elements.length);"
+                + "  for(var j = 0; j < document.form1.elements.length; ++j) {"
+                + "    alert(document.form1.elements[j].name);"
+                + "  }"
+                + "  alert(document.form1.children.length);"
+                + "  alert(document.form1.parentNode.tagName);"
+                + "</script>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "<div>caption</div>", "TABLE" },
+            IE8 = { "<DIV>caption</DIV>", "TABLE" })
+    public void nonInlineElementInCaption() throws Exception {
+        final String html = "<html>\n"
+                + "<body>\n"
+                + "  <table>\n"
+                + "    <caption id='caption'>\n"
+                + "      <div>caption</div>\n"
+                + "    </caption>\n"
+                + "    <tr>\n"
+                + "      <td>content</td>\n"
+                + "    </tr>\n"
+                + "  </table>"
+                + "<script>\n"
+                + "  alert(document.getElementById('caption').innerHTML.replace(/\\s+/g, ''));"
+                + "  alert(document.getElementById('caption').parentNode.tagName);"
                 + "</script>\n"
                 + "</body></html>";
         loadPageWithAlerts2(html);
