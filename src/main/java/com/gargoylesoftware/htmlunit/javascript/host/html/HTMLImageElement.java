@@ -351,4 +351,13 @@ public class HTMLImageElement extends HTMLElement {
     protected boolean isEndTagForbidden() {
         return endTagForbidden_;
     }
+
+    /**
+     * Support for the image.complete property.
+     * @return the value of the "complete" property
+     */
+    @JsxGetter
+    public boolean getComplete() {
+        return ((HtmlImage) getDomNodeOrDie()).getComplete();
+    }
 }

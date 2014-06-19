@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
@@ -348,15 +349,15 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     public void testWidthHeightWithoutSource() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
-            + "  function showInfos(imageId) {\n"
+            + "  function showInfo(imageId) {\n"
             + "    var img = document.getElementById(imageId);\n"
             + "    alert(typeof(img.width) + ': ' + img.width);\n"
             + "    alert(typeof(img.height) + ': ' + img.height);\n"
             + "  }\n"
             + "  function test() {\n"
-            + "    showInfos('myImage1');\n"
-            + "    showInfos('myImage2');\n"
-            + "    showInfos('myImage3');\n"
+            + "    showInfo('myImage1');\n"
+            + "    showInfo('myImage2');\n"
+            + "    showInfo('myImage3');\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -379,15 +380,15 @@ public class HTMLImageElementTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
             + "<script>\n"
-            + "  function showInfos(imageId) {\n"
+            + "  function showInfo(imageId) {\n"
             + "    var img = document.getElementById(imageId);\n"
             + "    alert(typeof(img.width) + ': ' + img.width);\n"
             + "    alert(typeof(img.height) + ': ' + img.height);\n"
             + "  }\n"
             + "  function test() {\n"
-            + "    showInfos('myImage1');\n"
-            + "    showInfos('myImage2');\n"
-            + "    showInfos('myImage3');\n"
+            + "    showInfo('myImage1');\n"
+            + "    showInfo('myImage2');\n"
+            + "    showInfo('myImage3');\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -421,21 +422,62 @@ public class HTMLImageElementTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
             + "<script>\n"
-            + "  function showInfos(imageId) {\n"
+            + "  function showInfo(imageId) {\n"
             + "    var img = document.getElementById(imageId);\n"
             + "    alert(typeof(img.width) + ': ' + img.width);\n"
             + "    alert(typeof(img.height) + ': ' + img.height);\n"
             + "  }\n"
             + "  function test() {\n"
-            + "    showInfos('myImage1');\n"
-            + "    showInfos('myImage2');\n"
-            + "    showInfos('myImage3');\n"
+            + "    showInfo('myImage1');\n"
+            + "    showInfo('myImage2');\n"
+            + "    showInfo('myImage3');\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "  <img id='myImage1' src='" + URL_SECOND + "' width='300' height='200'>\n"
             + "  <img id='myImage2' src='" + URL_SECOND + "' >\n"
             + "  <img id='myImage3' src='" + URL_SECOND + "' width='hello' height='hello'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test that image's width and height are numbers.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "true", "true", "true", "true" },
+            IE = { "false", "false", "false", "true" })
+    public void complete() throws Exception {
+        final InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img");
+        final byte[] directBytes = IOUtils.toByteArray(is);
+        is.close();
+
+        final URL urlImage = new URL(URL_SECOND, "img.jpg");
+        final List<NameValuePair> emptyList = Collections.emptyList();
+        getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        getMockWebConnection().setDefaultResponse("Test");
+
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function showInfo(imageId) {\n"
+            + "    var img = document.getElementById(imageId);\n"
+            + "    img.width;\n" // this forces image loading in htmlunit
+            + "    alert(img.complete);\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    showInfo('myImage1');\n"
+            + "    showInfo('myImage2');\n"
+            + "    showInfo('myImage3');\n"
+            + "    showInfo('myImage4');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <img id='myImage1' >\n"
+            + "  <img id='myImage2' src=''>\n"
+            + "  <img id='myImage3' src='" + URL_SECOND + "'>\n"
+            + "  <img id='myImage4' src='" + URL_SECOND + "img.jpg'>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

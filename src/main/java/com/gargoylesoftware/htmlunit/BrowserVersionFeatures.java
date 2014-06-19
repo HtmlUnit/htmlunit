@@ -1049,6 +1049,13 @@ public enum BrowserVersionFeatures {
     JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED,
 
     /**
+     * The complete property returns also true, if the image download was failing
+     * or if there was no src at all.
+     */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST,
+
+    /**
      * Getting the width and height of an image tag without a source returns 18x20;
      * for invalid values returns 1.
      */

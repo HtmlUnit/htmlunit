@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -552,5 +554,15 @@ public class HtmlImage extends HtmlElement {
                 }
             }
         }
+    }
+
+    /**
+     * @return true if the image was successfully downloaded
+     */
+    public boolean getComplete() {
+        if (hasFeature(JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST)) {
+            return downloaded_ || getSrcAttribute() == ATTRIBUTE_NOT_DEFINED;
+        }
+        return imageData_ != null;
     }
 }
