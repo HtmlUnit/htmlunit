@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1587" due-to="Hartmut Arlt">
+                URISyntaxException thrown while trying to load valid URL (invalid percent sign escaping)
+            </action>
             <action type="fix" dev="rbri" issue="1610" due-to="Carsten Steul">
                 Improved processing of malformed html.
             </action>

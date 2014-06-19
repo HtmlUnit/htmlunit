@@ -284,12 +284,59 @@ public final class UrlUtils {
         try {
             final byte[] bytes = unescaped.getBytes(charset);
             final byte[] bytes2 = URLCodec.encodeUrl(allowed, bytes);
-            return new String(bytes2, "US-ASCII");
+            return encodePercentSign(bytes2);
         }
         catch (final UnsupportedEncodingException e) {
             // Should never happen.
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Encodes every occurrence of the escape character '%' in the given input
+     * string that is not followed by two hexadecimal characters.
+     * @param str the input string
+     * @return the given input string where every occurrence of <code>%</code> in
+     * invalid escape sequences has been replace by <code>%25</code>
+     * @throws UnsupportedEncodingException should never happen
+     */
+    private static String encodePercentSign(final byte[] input) throws UnsupportedEncodingException {
+        if (input == null) {
+            return null;
+        }
+
+        final StringBuilder result = new StringBuilder(new String(input, "US-ASCII"));
+        int state = -0;
+        int offset = 0;
+        for (int i = 0; i < input.length; i++) {
+            final byte  b = input[i];
+            if (b == '%') {
+                state = 1;
+            }
+            else if (state == 1 || state == 2) {
+                if (('0' <= b && b <= '9')
+                        || ('A' <= b && b <= 'F')
+                        || ('a' <= b && b <= 'f')) {
+                    state++;
+                    if (state == 3) {
+                        state = 0;
+                    }
+                }
+                else {
+                    final int st = i - state + offset;
+                    result .replace(st, st + 1, "%25");
+                    offset = offset + 2;
+                    state = 0;
+                }
+            }
+        }
+        if (state == 1 || state == 2) {
+            final int st = input.length - state + offset;
+            result .replace(st, st + 1, "%25");
+            offset = offset + 2;
+            state = 0;
+        }
+        return result.toString();
     }
 
     /**

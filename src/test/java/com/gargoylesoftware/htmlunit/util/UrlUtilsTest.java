@@ -230,8 +230,59 @@ public class UrlUtilsTest extends SimpleWebTestCase {
      */
     @Test
     public void percent() throws Exception {
-        final URL url = new URL("http://localhost/bug%21.html");
+        URL url = new URL("http://localhost/bug%21.html");
         assertEquals("http://localhost/bug%21.html",
+                UrlUtils.encodeUrl(url, false, TextUtil.DEFAULT_CHARSET).toExternalForm());
+
+        url = new URL("http://localhost/bug%0F.html");
+        assertEquals("http://localhost/bug%0F.html",
+                UrlUtils.encodeUrl(url, false, TextUtil.DEFAULT_CHARSET).toExternalForm());
+
+        url = new URL("http://localhost/bug%ff.html");
+        assertEquals("http://localhost/bug%ff.html",
+                UrlUtils.encodeUrl(url, false, TextUtil.DEFAULT_CHARSET).toExternalForm());
+
+        url = new URL("http://localhost/bug%AB.html");
+        assertEquals("http://localhost/bug%AB.html",
+                UrlUtils.encodeUrl(url, false, TextUtil.DEFAULT_CHARSET).toExternalForm());
+    }
+
+    /**
+     * Tests for #1587.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void percentEncoding() throws Exception {
+        URL url = new URL("http://localhost/bug%.html");
+        assertEquals("http://localhost/bug%25.html",
+                UrlUtils.encodeUrl(url, false, TextUtil.DEFAULT_CHARSET).toExternalForm());
+
+        url = new URL("http://localhost/bug%a.html");
+        assertEquals("http://localhost/bug%25a.html",
+                UrlUtils.encodeUrl(url, false, TextUtil.DEFAULT_CHARSET).toExternalForm());
+
+        url = new URL("http://localhost/bug%ak.html");
+        assertEquals("http://localhost/bug%25ak.html",
+                UrlUtils.encodeUrl(url, false, TextUtil.DEFAULT_CHARSET).toExternalForm());
+
+        url = new URL("http://localhost/bug.html?namelist=Woman%2g%20Daily");
+        assertEquals("http://localhost/bug.html?namelist=Woman%252g%20Daily",
+                UrlUtils.encodeUrl(url, false, TextUtil.DEFAULT_CHARSET).toExternalForm());
+
+        url = new URL("http://localhost/bug.html?namelist=Woman%u2122%20Daily");
+        assertEquals("http://localhost/bug.html?namelist=Woman%25u2122%20Daily",
+                UrlUtils.encodeUrl(url, false, TextUtil.DEFAULT_CHARSET).toExternalForm());
+
+        url = new URL("http://localhost/bug.html?%");
+        assertEquals("http://localhost/bug.html?%25",
+                UrlUtils.encodeUrl(url, false, TextUtil.DEFAULT_CHARSET).toExternalForm());
+
+        url = new URL("http://localhost/bug.html?%2");
+        assertEquals("http://localhost/bug.html?%252",
+                UrlUtils.encodeUrl(url, false, TextUtil.DEFAULT_CHARSET).toExternalForm());
+
+        url = new URL("http://localhost/bug.html?%2x");
+        assertEquals("http://localhost/bug.html?%252x",
                 UrlUtils.encodeUrl(url, false, TextUtil.DEFAULT_CHARSET).toExternalForm());
     }
 
