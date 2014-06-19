@@ -540,6 +540,8 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     @Test
     // correct FF assertion is
     // @Alerts({ "3", "1a", "1b", "", "0", "DIV" })
+    // this test is NOT marked as NYI because we like to ensure
+    // to get notified if something changes
     @Alerts({ "3", "1a", "1b", "", "1", "DIV" })
     public void formInTable4() throws Exception {
         final String html = "<html>\n"
@@ -741,6 +743,8 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     @Test
     // correct FF assertion is
     // @Alerts({ "3", "1b", "1a", "1c", "0", "TABLE" })
+    // this test is NOT marked as NYI because we like to ensure
+    // to get notified if something changes
     @Alerts({ "3", "1a", "1b", "1c", "0", "TABLE" })
     public void formInTable9() throws Exception {
         final String html = "<html>\n"
