@@ -19,9 +19,12 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -409,23 +412,41 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
     }
 
     /**
+     * Tests for the result of __lookupGetter__.
+     * Until 20.06.2014 the result was wrongly a MemberBox. Converting it to a boolean was producing warning messages
+     * on the error output.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            CHROME = "undefined",
+    @Alerts(FF = { "function", "true", "function length() {\n    [native code]\n}", "0", "0" },
+            CHROME = { "undefined", "false", "undefined", "exception" },
             IE8 = "exception")
     public void lookupGetter() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
             + "function test() {\n"
             + "  try {\n"
-            + "    alert(typeof window.__lookupGetter__('length'));\n"
+            + "    var lengthGetter = window.__lookupGetter__('length');\n"
+            + "    alert(typeof lengthGetter);\n"
+            + "    alert(!!lengthGetter);\n"
+            + "    alert(lengthGetter);\n"
+            + "    alert(lengthGetter.call(window));\n"
+            + "    alert(lengthGetter.call());\n"
             + "  } catch(e) {alert('exception')}\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        
+        final PrintStream originalErr = System.err;
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setErr(new PrintStream(out , true));
+        try {
+            loadPageWithAlerts2(html);
+        }
+        finally {
+        	System.setErr(originalErr);
+        }
+        
+        Assert.assertEquals("Error output is not empty", "", out.toString());
     }
 }

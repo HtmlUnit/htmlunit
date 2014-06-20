@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.16" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem">
+                JavaScript: ensure that values returned by __lookupG(S)etter__ are normal JavaScript objects.
+                Fixed related Rhino warning messages on System.err. (FF)
+            </action>
             <action type="add" dev="rbri" issue="1617">
                 JavaScript: Image.complete support added.
             </action>
