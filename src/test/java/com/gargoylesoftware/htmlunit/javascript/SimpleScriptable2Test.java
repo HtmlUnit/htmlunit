@@ -436,7 +436,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        
+
         final PrintStream originalErr = System.err;
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setErr(new PrintStream(out , true));
@@ -444,9 +444,9 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
             loadPageWithAlerts2(html);
         }
         finally {
-        	System.setErr(originalErr);
+            System.setErr(originalErr);
         }
-        
+
         Assert.assertEquals("Error output is not empty", "", out.toString());
     }
 }
