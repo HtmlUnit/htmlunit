@@ -420,7 +420,9 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "function", "true", "function length() {\n    [native code]\n}", "0", "0" },
             CHROME = { "undefined", "false", "undefined", "exception" },
+            IE11 = { "function", "true", "\nfunction length() {\n    [native code]\n}\n", "0", "0" },
             IE8 = "exception")
+    @NotYetImplemented(IE11)
     public void lookupGetter() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
