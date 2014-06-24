@@ -555,6 +555,12 @@ public final class HTMLParser {
                 oldBody = (HtmlBody) page_.getBody();
             }
 
+            // Need to reset this at each starting form tag because it could be set from a synthesized
+            // end tag.
+            if ("form".equals(tagLower)) {
+                formWaitingForLostChildren_ = null;
+            }
+
             // Add the new node.
             if (!(page_ instanceof XHtmlPage) && XHTML_NAMESPACE.equals(namespaceURI)) {
                 namespaceURI = null;
@@ -766,7 +772,7 @@ public final class HTMLParser {
             }
 
             // Need to reset this at each closing form tag because a valid form could start afterwards.
-            if ("form".equals(tagLower) && formWaitingForLostChildren_ != null) {
+            if ("form".equals(tagLower)) {
                 formWaitingForLostChildren_ = null;
             }
 
@@ -964,7 +970,7 @@ public final class HTMLParser {
          */
         public void ignoredEndElement(final QName element, final Augmentations augs) {
             // if real </form> is reached, don't accept fields anymore as lost children
-            if (formWaitingForLostChildren_ != null && "form".equals(element.localpart)) {
+            if ("form".equals(element.localpart)) {
                 formWaitingForLostChildren_ = null;
             }
 

@@ -800,4 +800,41 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "2", "input1", "submit1", "1", "LI", "2", "input2", "submit2", "2", "DIV" })
+    public void synthesizedDivInForm() throws Exception {
+        final String html = "<html>\n"
+                + "<body>\n"
+                + "  <ul>\n"
+                + "    <li>\n"
+                + "      <form name='form1' action='action1' method='POST'>\n"
+                + "        <div>\n"
+                + "          <input name='input1' value='value1'>\n"
+                + "          <input name='submit1' type='submit'>\n"
+                + "      </form>\n"
+                + "    </li>\n"
+                + "  </ul>\n"
+                + "  <div>\n"
+                + "    <form name='form2' action='action2' method='POST'>\n"
+                + "      <input name='input2' value='value2'>\n"
+                + "      <input name='submit2' type='submit'>\n"
+                + "    </form>\n"
+                + "  </div>"
+                + "<script>\n"
+                + "  for(var i = 0; i < document.forms.length; ++i) {"
+                + "  alert(document.forms[i].elements.length);\n"
+                + "    for(var j = 0; j < document.forms[i].elements.length; ++j) {"
+                + "      alert(document.forms[i].elements[j].name);"
+                + "    }"
+                + "    alert(document.forms[i].children.length);"
+                + "    alert(document.forms[i].parentNode.tagName);"
+                + "  }"
+                + "</script>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }
