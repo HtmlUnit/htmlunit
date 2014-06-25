@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -149,7 +150,8 @@ public class Node2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1", "2" })
+    @Alerts(DEFAULT = { "1", "2", "§§URL§§second/" },
+            IE8 = { "1", "2", "§§URL§§" })
     public void eventListener_returnValue_false() throws Exception {
         final String html
             = "<html><head>\n"
@@ -176,21 +178,16 @@ public class Node2Test extends SimpleWebTestCase {
             + "  <a href='" + URL_SECOND + "' id='myAnchor'>Click me</a>\n"
             + "</body></html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
+
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
         final HtmlPage page2 = page.getHtmlElementById("myAnchor").click();
         //IE doesn't have specific order
         Collections.sort(collectedAlerts);
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        assertEquals(ArrayUtils.subarray(getExpectedAlerts(), 0, 2), collectedAlerts);
 
-        final URL expectedURL;
-        if (getBrowserVersion().isIE()) {
-            expectedURL = getDefaultUrl();
-        }
-        else {
-            expectedURL = URL_SECOND;
-        }
-        assertEquals(expectedURL.toExternalForm(), page2.getUrl().toExternalForm());
+        assertEquals(getExpectedAlerts()[2], page2.getUrl().toExternalForm());
     }
 
 }
