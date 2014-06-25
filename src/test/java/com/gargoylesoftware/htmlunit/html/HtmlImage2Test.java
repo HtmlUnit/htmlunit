@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Collections;
@@ -27,7 +25,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -54,7 +51,6 @@ public class HtmlImage2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void loadImageEmptySource() throws Exception {
         loadImage("src=''");
     }
@@ -64,7 +60,6 @@ public class HtmlImage2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2", IE = "1")
-    @NotYetImplemented(IE)
     public void loadImageBlankSource() throws Exception {
         loadImage("src=' '");
     }

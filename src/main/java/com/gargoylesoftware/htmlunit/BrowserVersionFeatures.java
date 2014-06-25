@@ -459,6 +459,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     HTMLIFRAME_IGNORE_SELFCLOSING,
 
+    /** Handle blank source like empty. */
+    @BrowserFeature(@WebBrowser(IE))
+    HTMLIMAGE_BLANK_SRC_AS_EMPTY,
+
     /** Clicking an image input submits the value as param if defined. */
     @BrowserFeature(@WebBrowser(CHROME))
     HTMLIMAGE_NAME_VALUE_PARAMS,

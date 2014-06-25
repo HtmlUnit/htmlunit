@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_BLANK_SRC_AS_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST;
 
 import java.io.File;
@@ -26,6 +27,7 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpStatus;
@@ -398,14 +400,19 @@ public class HtmlImage extends HtmlElement {
      */
     private void downloadImageIfNeeded() throws IOException {
         if (!downloaded_) {
-            final HtmlPage page = (HtmlPage) getPage();
-            final WebClient webclient = page.getWebClient();
+            // HTMLIMAGE_BLANK_SRC_AS_EMPTY
+            final String src = getSrcAttribute();
+            if (!"".equals(src)
+                    && !(hasFeature(HTMLIMAGE_BLANK_SRC_AS_EMPTY) && StringUtils.isBlank(src))) {
+                final HtmlPage page = (HtmlPage) getPage();
+                final WebClient webclient = page.getWebClient();
 
-            final URL url = page.getFullyQualifiedUrl(getSrcAttribute());
-            final String accept = webclient.getBrowserVersion().getImgAcceptHeader();
-            final WebRequest request = new WebRequest(url, accept);
-            request.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
-            imageWebResponse_ = webclient.loadWebResponse(request);
+                final URL url = page.getFullyQualifiedUrl(src);
+                final String accept = webclient.getBrowserVersion().getImgAcceptHeader();
+                final WebRequest request = new WebRequest(url, accept);
+                request.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
+                imageWebResponse_ = webclient.loadWebResponse(request);
+            }
             imageData_ = null;
             downloaded_ = true;
         }
@@ -414,6 +421,9 @@ public class HtmlImage extends HtmlElement {
     private void readImageIfNeeded() throws IOException {
         downloadImageIfNeeded();
         if (imageData_ == null) {
+            if (null == imageWebResponse_) {
+                throw new IOException("No image response available");
+            }
             final ImageInputStream iis = ImageIO.createImageInputStream(imageWebResponse_.getContentAsStream());
             final Iterator<ImageReader> iter = ImageIO.getImageReaders(iis);
             if (!iter.hasNext()) {
@@ -423,6 +433,11 @@ public class HtmlImage extends HtmlElement {
             final ImageReader imageReader = iter.next();
             imageReader.setInput(iis);
             imageData_ = new ImageData(imageReader);
+
+            // dispose all others
+            while (iter.hasNext()) {
+                iter.next().dispose();
+            }
         }
     }
 
