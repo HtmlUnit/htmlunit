@@ -32,6 +32,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_CREATES_DOC_FRAGMENT_AS_PARENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_REDUCE_WHITESPACES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_SCRIPT_STARTSWITH_NEW_LINE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MERGE_ATTRIBUTES_ALL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_NULL_IF_FIXED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_THROWS_NOT_ATTACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_USE_TABLES_IF_FIXED;
@@ -632,26 +633,28 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final HtmlElement src = source.getDomNodeOrDie();
         final HtmlElement target = getDomNodeOrDie();
 
-        // Merge custom attributes defined directly in HTML.
-        for (final Map.Entry<String, DomAttr> attribute : src.getAttributesMap().entrySet()) {
-            // Quick hack to figure out what's a "custom" attribute, and what isn't.
-            // May not be 100% correct.
-            final String attributeName = attribute.getKey();
-            if (!ScriptableObject.hasProperty(getPrototype(), attributeName)) {
-                final String attributeValue = attribute.getValue().getNodeValue();
-                target.setAttribute(attributeName, attributeValue);
+        if (getBrowserVersion().hasFeature(JS_MERGE_ATTRIBUTES_ALL)) {
+            // Merge custom attributes defined directly in HTML.
+            for (final Map.Entry<String, DomAttr> attribute : src.getAttributesMap().entrySet()) {
+                // Quick hack to figure out what's a "custom" attribute, and what isn't.
+                // May not be 100% correct.
+                final String attributeName = attribute.getKey();
+                if (!ScriptableObject.hasProperty(getPrototype(), attributeName)) {
+                    final String attributeValue = attribute.getValue().getNodeValue();
+                    target.setAttribute(attributeName, attributeValue);
+                }
             }
-        }
 
-        // Merge custom attributes defined at runtime via JavaScript.
-        for (final Object id : source.getAllIds()) {
-            if (id instanceof Integer) {
-                final int i = ((Integer) id).intValue();
-                put(i, this, source.get(i, source));
-            }
-            else if (id instanceof String) {
-                final String s = (String) id;
-                put(s, this, source.get(s, source));
+            // Merge custom attributes defined at runtime via JavaScript.
+            for (final Object id : source.getAllIds()) {
+                if (id instanceof Integer) {
+                    final int i = ((Integer) id).intValue();
+                    put(i, this, source.get(i, source));
+                }
+                else if (id instanceof String) {
+                    final String s = (String) id;
+                    put(s, this, source.get(s, source));
+                }
             }
         }
 

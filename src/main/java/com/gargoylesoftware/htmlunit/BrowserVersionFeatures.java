@@ -1139,6 +1139,13 @@ public enum BrowserVersionFeatures {
     JS_LOCATION_HASH_RETURNS_HASH_FOR_EMPTY_DEFINED,
 
     /**
+     * Method mergeAttributes will merge all attribs instead only the
+     * known/supported ones.
+     */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
+    JS_MERGE_ATTRIBUTES_ALL,
+
+    /**
      * Indicates if the String representation of a native function begins and ends with a \n.
      */
     @BrowserFeature(@WebBrowser(IE))
