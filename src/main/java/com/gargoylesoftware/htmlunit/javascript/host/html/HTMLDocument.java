@@ -1524,7 +1524,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns this document's <tt>head</tt> element.
      * @return this document's <tt>head</tt> element
      */
-    @JsxGetter({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public HTMLElement getHead() {
         final HtmlElement head = getHtmlPage().getHead();
         if (head != null) {
@@ -1796,7 +1796,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the value of the JavaScript attribute <tt>scripts</tt>.
      * @return the value of the JavaScript attribute <tt>scripts</tt>
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 10) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(FF) })
     public Object getScripts() {
         if (scripts_ == null) {
             scripts_ = new HTMLCollection(getDomNodeOrDie(), false, "HTMLDocument.scripts") {
@@ -2213,7 +2213,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Sets the head.
      * @param head the head
      */
-    @JsxSetter({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public void setHead(final ScriptableObject head) {
         //ignore
     }

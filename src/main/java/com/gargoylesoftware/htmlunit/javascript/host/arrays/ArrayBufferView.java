@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClasses(
         isJSObject = false,
-        browsers = { @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME),
+        browsers = { @WebBrowser(FF), @WebBrowser(CHROME),
             @WebBrowser(value = IE, minVersion = 11) })
 public class ArrayBufferView extends SimpleScriptable {
 

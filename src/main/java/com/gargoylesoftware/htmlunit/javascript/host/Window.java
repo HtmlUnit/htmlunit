@@ -2141,7 +2141,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Getter for the onchange event handler.
      * @return the handler
      */
-    @JsxGetter({@WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME),
+    @JsxGetter({@WebBrowser(FF), @WebBrowser(CHROME),
         @WebBrowser(value = IE, minVersion = 11) })
     public Object getOnchange() {
         return getHandlerForJavaScript(Event.TYPE_CHANGE);
@@ -2151,7 +2151,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Setter for the onchange event handler.
      * @param onchange the handler
      */
-    @JsxSetter({@WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME),
+    @JsxSetter({@WebBrowser(FF), @WebBrowser(CHROME),
         @WebBrowser(value = IE, minVersion = 11) })
     public void setOnchange(final Object onchange) {
         setHandlerForJavaScript(Event.TYPE_CHANGE, onchange);

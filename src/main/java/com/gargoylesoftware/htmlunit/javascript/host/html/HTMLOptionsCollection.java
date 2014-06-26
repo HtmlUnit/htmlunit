@@ -305,7 +305,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * Removes the option at the specified index.
      * @param index the option index
      */
-    @JsxFunction({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 10) })
+    @JsxFunction({ @WebBrowser(IE), @WebBrowser(FF) })
     public void remove(final int index) {
         if (index < 0) {
             Context.reportRuntimeError("Invalid index: " + index);

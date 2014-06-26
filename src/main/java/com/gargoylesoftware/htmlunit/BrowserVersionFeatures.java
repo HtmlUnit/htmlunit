@@ -987,7 +987,7 @@ public enum BrowserVersionFeatures {
     JS_FRAME_BODY_NULL_IF_NOT_LOADED,
 
     /** Indicates if Function.bind is available. */
-    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME),
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME),
         @WebBrowser(value = IE, minVersion = 11) })
     JS_FUNCTION_BIND,
 
@@ -1448,7 +1448,7 @@ public enum BrowserVersionFeatures {
      * convertible into an integer (IE).
      * FF ignores the provided value in this case and sets cols to 0.
      */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 10) })
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF) })
     JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION,
 
     /** Setting the property rows throws an exception, if the provided value is less
@@ -1462,7 +1462,7 @@ public enum BrowserVersionFeatures {
      * convertible into an integer (IE).
      * FF ignores the provided value in this case and sets rows to 0.
      */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 10) })
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF) })
     JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION,
 
     /** Indicates that <code>TreeWalker.expandEntityReferences</code> is always <code>false</code>. */
@@ -1741,7 +1741,7 @@ public enum BrowserVersionFeatures {
     XHR_NO_CROSS_ORIGIN_TO_ABOUT,
 
     /** Indicates that the onreadystatechange handler is triggered for sync requests for COMPLETED (4). */
-    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME),
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME),
         @WebBrowser(value = IE, minVersion = 11) })
     XHR_ONREADYSTATECANGE_SYNC_REQUESTS_COMPLETED,
 
@@ -1754,7 +1754,7 @@ public enum BrowserVersionFeatures {
     XHR_ONREADYSTATECHANGE_WITH_EVENT_PARAM,
 
     /** Indicates if an empty url is allowed as url param for the open method. */
-    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     XHR_OPEN_ALLOW_EMTPY_URL,
 
     /** Indicates if a "Origin" header should be sent. */

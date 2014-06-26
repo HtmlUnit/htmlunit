@@ -297,7 +297,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns the doNotTrack.
      * @return the doNotTrack
      */
-    @JsxGetter(@WebBrowser(value = FF, minVersion = 10))
+    @JsxGetter(@WebBrowser(FF))
     public String getDoNotTrack() {
         if (getWindow().getWebWindow().getWebClient().getOptions().isDoNotTrackEnabled()) {
             return "yes";

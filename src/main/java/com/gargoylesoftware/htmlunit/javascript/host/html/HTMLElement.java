@@ -2168,7 +2168,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Click this element. This simulates the action of the user clicking with the mouse.
      * @throws IOException if this click triggers a page load that encounters problems
      */
-    @JsxFunction({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
+    @JsxFunction({ @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME) })
     public void click() throws IOException {
         getDomNodeOrDie().click();
     }
@@ -2885,7 +2885,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME) })
     public Element getParentElement() {
         return super.getParentElement();
     }
@@ -2894,7 +2894,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns the "dataset" attribute.
      * @return the "dataset" attribute
      */
-    @JsxGetter({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME),
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME),
         @WebBrowser(value = IE, minVersion = 11) })
     public DOMStringMap getDataset() {
         return new DOMStringMap(this);

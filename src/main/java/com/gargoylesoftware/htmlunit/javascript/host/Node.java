@@ -1018,7 +1018,7 @@ public class Node extends SimpleScriptable {
      * @return the parent element
      * @see #getParentNode()
      */
-    @JsxGetter({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public Element getParentElement() {
         final Node parent = getParent();
         if (!(parent instanceof Element)) {
@@ -1042,7 +1042,7 @@ public class Node extends SimpleScriptable {
      * @param element element object that specifies the element to check
      * @return true if the element is contained within this object
      */
-    @JsxFunction({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
+    @JsxFunction({ @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME) })
     public boolean contains(final Object element) {
         if (!(element instanceof Node)) {
             if (getBrowserVersion().hasFeature(JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG)) {
