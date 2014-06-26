@@ -193,7 +193,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         new WeakHashMap<Node, ComputedCSSStyleDeclaration>();
 
     private final Map<Type, Storage> storages_ = new HashMap<Type, Storage>();
-    private StorageList storageList_;
 
     /**
      * Restores the transient {@link #computedStyles_} map during deserialization.
@@ -595,20 +594,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         }
 
         return storage;
-    }
-
-    /**
-     * Returns the globalStorage property.
-     * @return the globalStorage property
-     */
-    @JsxGetter(@WebBrowser(value = FF, maxVersion = 10))
-    public StorageList getGlobalStorage() {
-        if (storageList_ == null) {
-            storageList_ = new StorageList();
-            storageList_.setParentScope(this);
-            storageList_.setPrototype(getPrototype(StorageList.class));
-        }
-        return storageList_;
     }
 
     /**
