@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLABBREVIATED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PHRASE_COMMON_CLASS_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -68,7 +67,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
     @JsxClass(domClass = HtmlAcronym.class),
     @JsxClass(domClass = HtmlBidirectionalOverride.class),
     @JsxClass(domClass = HtmlBig.class),
-    @JsxClass(domClass = HtmlBlink.class, browsers = { @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 17) }),
+    @JsxClass(domClass = HtmlBlink.class, browsers = { @WebBrowser(IE) }),
     @JsxClass(domClass = HtmlBold.class),
     @JsxClass(domClass = HtmlCitation.class),
     @JsxClass(domClass = HtmlCode.class),
