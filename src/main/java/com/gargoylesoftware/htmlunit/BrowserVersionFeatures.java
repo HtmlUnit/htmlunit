@@ -628,7 +628,7 @@ public enum BrowserVersionFeatures {
     JS_ARGUMENTS_IS_OBJECT,
 
     /** Indicates that "someFunction.arguments" is a read-only view of the function's argument. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 17) })
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_ARGUMENTS_READ_ONLY_ACCESSED_FROM_FUNCTION,
 
     /** Indicates that getting an attribute by name (attributes.name) is case-sensitive. */
@@ -1466,7 +1466,7 @@ public enum BrowserVersionFeatures {
     JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION,
 
     /** Indicates that <code>TreeWalker.expandEntityReferences</code> is always <code>false</code>. */
-    @BrowserFeature(@WebBrowser(value = FF, minVersion = 17))
+    @BrowserFeature(@WebBrowser(FF))
     JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE,
 
     /**

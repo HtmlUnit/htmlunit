@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Chuck Dumont
  * @author Ronald Brill
  */
-@JsxClass(browsers = @WebBrowser(value = FF, minVersion = 17))
+@JsxClass(browsers = @WebBrowser(FF))
 public class XPathEvaluator extends SimpleScriptable {
 
     /**
