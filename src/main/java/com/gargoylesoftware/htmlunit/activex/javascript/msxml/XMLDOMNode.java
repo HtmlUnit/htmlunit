@@ -105,8 +105,8 @@ public class XMLDOMNode extends MSXMLScriptable {
 
             childNodes_ = new XMLDOMNodeList(domNode, false, "XMLDOMNode.childNodes") {
                 @Override
-                protected List<Object> computeElements() {
-                    final List<Object> response = new ArrayList<Object>();
+                protected List<DomNode> computeElements() {
+                    final List<DomNode> response = new ArrayList<DomNode>();
                     for (final DomNode child : domNode.getChildren()) {
                         //IE: XmlPage ignores all empty text nodes
                         if (skipEmptyTextNode && child instanceof DomText && !(child instanceof DomCDataSection)
@@ -564,8 +564,10 @@ public class XMLDOMNode extends MSXMLScriptable {
         final XMLDOMSelection collection = new XMLDOMSelection(domNode, attributeChangeSensitive,
                 "XMLDOMNode.selectNodes('" + expression + "')") {
             @Override
-            protected List<Object> computeElements() {
-                return new ArrayList<Object>(domNode.getByXPath(expression));
+            protected List<DomNode> computeElements() {
+                @SuppressWarnings("unchecked")
+                final List<DomNode> nodes = (List<DomNode>) domNode.getByXPath(expression);
+                return new ArrayList<DomNode>(nodes);
             }
         };
         return collection;

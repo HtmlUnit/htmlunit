@@ -334,8 +334,8 @@ public class XMLDOMElement extends XMLDOMNode {
         else if ("".equals(tagNameTrimmed)) {
             collection = new XMLDOMNodeList(node, false, description) {
                 @Override
-                protected List<Object> computeElements() {
-                    final List<Object> response = new ArrayList<Object>();
+                protected List<DomNode> computeElements() {
+                    final List<DomNode> response = new ArrayList<DomNode>();
                     final DomNode domNode = getDomNodeOrNull();
                     if (domNode == null) {
                         return response;
