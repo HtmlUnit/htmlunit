@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Sudhan Moghe
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Carsten Steul
  */
 @RunWith(BrowserRunner.class)
 public class MalformedHtmlTest extends WebDriverTestCase {

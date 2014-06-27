@@ -94,6 +94,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgElementFactory;
  * @author Sudhan Moghe
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Carsten Steul
  */
 public final class HTMLParser {
 
