@@ -1050,6 +1050,16 @@ public class Node extends SimpleScriptable {
             }
             throw Context.reportRuntimeError("Could not convert JavaScript argument arg 0");
         }
+
+        if (getBrowserVersion().hasFeature(JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG)) {
+            if (element instanceof CharacterDataImpl) {
+                return false;
+            }
+            if (this instanceof CharacterDataImpl) {
+                throw Context.reportRuntimeError("Function 'contains' not available for text nodes.");
+            }
+        }
+
         for (Node parent = (Node) element; parent != null; parent = parent.getParentElement()) {
             if (this == parent) {
                 return true;
