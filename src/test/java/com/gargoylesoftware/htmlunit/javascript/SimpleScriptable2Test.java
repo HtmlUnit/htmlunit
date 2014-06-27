@@ -19,12 +19,9 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -439,16 +436,6 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final PrintStream originalErr = System.err;
-        final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        System.setErr(new PrintStream(out , true));
-        try {
-            loadPageWithAlerts2(html);
-        }
-        finally {
-            System.setErr(originalErr);
-        }
-
-        Assert.assertEquals("Error output is not empty", "", out.toString());
+        loadPageWithAlerts2(html);
     }
 }

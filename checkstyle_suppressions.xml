@@ -66,4 +66,5 @@
     <!-- JUnit Rules require the rules field to have public visibility. -->
     <!-- See http://checkstyle.sourceforge.net/config_design.html#VisibilityModifier -->
     <suppress files=".*(?:Test|TestBase)\.java$" checks="VisibilityModifier"/>
+    <suppress files="WebTestCase.java" checks="VisibilityModifier"/>
 </suppressions>

@@ -44,7 +44,9 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestRule;
 
 /**
  * Common superclass for HtmlUnit tests.
@@ -154,6 +156,12 @@ public abstract class WebTestCase {
     private List<String> generateTest_expectedAlerts_;
     private boolean generateTest_notYetImplemented_;
     private String generateTest_testName_;
+
+    /**
+     * JUnit 4 {@link Rule} controlling System.err.
+     */
+    @Rule
+    public final TestRule errOutputChecker_ = new ErrorOutputChecker();
 
     static {
         try {
