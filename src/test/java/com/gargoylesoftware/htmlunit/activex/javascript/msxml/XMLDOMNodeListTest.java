@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.callLoadXMLDOMDocumentFromURL;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.createTestHTML;
@@ -24,7 +23,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -41,8 +39,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("[object Object]")
+    @Alerts(DEFAULT = "exception", IE = "[object Object]")
     public void scriptableToString() throws Exception {
         tester("alert(Object.prototype.toString.call(list));\n");
     }
@@ -51,8 +48,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
-    @Alerts("2")
+    @Alerts(DEFAULT = "exception", IE = "2")
     public void length() throws Exception {
         tester("alert(list.length);\n");
     }
@@ -61,8 +57,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
-    @Alerts("0")
+    @Alerts(DEFAULT = "exception", IE = "0")
     public void length_empty() throws Exception {
         tester("alert(list.length);\n", "<root/>");
     }
@@ -71,8 +66,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "exception", IE = "undefined")
     public void byName_attribute() throws Exception {
         tester("alert(list.child1);\n");
     }
@@ -81,8 +75,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "exception", IE = "undefined")
     public void byName_map() throws Exception {
         tester("alert(list['child1']);\n");
     }
@@ -91,8 +84,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
-    @Alerts("child1=null")
+    @Alerts(DEFAULT = "exception", IE = "child1=null")
     public void byNumber() throws Exception {
         tester("debug(list[0]);\n");
     }
@@ -101,8 +93,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "exception", IE = "null")
     public void byNumber_unknown() throws Exception {
         tester("debug(list[2]);\n");
     }
@@ -111,8 +102,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
-    @Alerts("child1=null")
+    @Alerts(DEFAULT = "exception", IE = "child1=null")
     public void item() throws Exception {
         tester("debug(list.item(0));\n");
     }
@@ -121,8 +111,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "exception", IE = "null")
     public void item_unknown() throws Exception {
         tester("debug(list.item(2));\n");
     }
@@ -131,8 +120,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "2", "child1=null", "child2=null", "null" })
+    @Alerts(DEFAULT = "exception", IE = { "2", "child1=null", "child2=null", "null" })
     public void nextNode() throws Exception {
         final String test = ""
             + "alert(list.length);\n"
@@ -147,8 +135,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "2", "child1=null", "child1=null", "child2=null", "child1=null" })
+    @Alerts(DEFAULT = "exception", IE = { "2", "child1=null", "child1=null", "child2=null", "child1=null" })
     public void reset() throws Exception {
         final String test = ""
             + "alert(list.length);\n"
@@ -166,8 +153,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Browsers(IE)
-    @Alerts("true")
+    @Alerts(DEFAULT = "exception", IE = "true")
     public void in() throws Exception {
         tester("alert(0 in list);\n");
     }
@@ -176,8 +162,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Browsers(IE)
-    @Alerts("true")
+    @Alerts(DEFAULT = "exception", IE = "true")
     public void in_length() throws Exception {
         tester("alert('length' in list);\n");
     }
@@ -186,8 +171,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Browsers(IE)
-    @Alerts("false")
+    @Alerts(DEFAULT = "exception", IE = "false")
     public void in_unknownIndex() throws Exception {
         tester("alert(-1 in list);\n");
     }
@@ -196,8 +180,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Browsers(IE)
-    @Alerts("true")
+    @Alerts(DEFAULT = "exception", IE = "true")
     public void in_unknownIndex2() throws Exception {
         tester("alert(2 in list);\n");
     }
@@ -206,8 +189,7 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Browsers(IE)
-    @Alerts("false")
+    @Alerts(DEFAULT = "exception", IE = "false")
     public void in_unknown() throws Exception {
         tester("alert('child1' in list);\n");
     }
@@ -225,9 +207,9 @@ public class XMLDOMNodeListTest extends WebDriverTestCase {
     private void tester(final String test, final String xml) throws Exception {
         final String html = ""
             + "  function test() {\n"
-            + "    var doc = " + callLoadXMLDOMDocumentFromURL("'second.xml'") + ";\n"
-            + "    var root = doc.documentElement;\n"
             + "    try {\n"
+            + "      var doc = " + callLoadXMLDOMDocumentFromURL("'second.xml'") + ";\n"
+            + "      var root = doc.documentElement;\n"
             + "      var list = root.childNodes;\n"
             + test
             + "    } catch(e) { alert('exception'); }\n"
