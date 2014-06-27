@@ -26,7 +26,6 @@ import org.junit.runner.RunWith;
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -361,41 +360,6 @@ public class DomNodeTest extends SimpleWebTestCase {
 
         final List<?> results = page.getByXPath("//div");
         assertEquals(1, results.size());
-    }
-
-    /**
-     * Test that element.selectNodes("/tagName") searches from root of the tree, not from that specific element.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(FF = { "book", "exception" } , IE = { "book", "0", "1" })
-    public void selectNodes() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
-            + "    doc.async = false;\n"
-            + "    doc.load('foo.xml');\n"
-            + "    var child = doc.documentElement.firstChild;\n"
-            + "    alert(child.tagName);\n"
-            + "    try {\n"
-            + "      alert(child.selectNodes('/title').length);\n"
-            + "      alert(child.selectNodes('title').length);\n"
-            + "    } catch (e) { alert('exception') }\n"
-            + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        final String xml = "<books><book><title>Immortality</title><author>John Smith</author></book></books>";
-
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
-
-        loadPageWithAlerts(html);
     }
 
     /**

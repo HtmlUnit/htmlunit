@@ -293,6 +293,38 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
     }
 
     /**
+     * Test that element.selectNodes("/tagName") searches from root of the tree, not from that specific element.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(IE)
+    @Alerts({ "book", "0", "1" })
+    public void selectNodes_fromRoot() throws Exception {
+        final String html = ""
+                + "  function test() {\n"
+                + "    var doc = " + callLoadXMLDOMDocumentFromURL("'" + URL_SECOND + "'") + ";\n"
+                + "    try {\n"
+                + "      var child = doc.documentElement.firstChild;\n"
+                + "      alert(child.tagName);\n"
+
+                + "      try {\n"
+                + "        alert(child.selectNodes('/title').length);\n"
+                + "      } catch(e) { alert('exception /title'); }\n"
+
+                + "      try {\n"
+                + "        alert(child.selectNodes('title').length);\n"
+                + "      } catch(e) { alert('exception title'); }\n"
+                + "    } catch(e) { alert('exception'); }\n"
+                + "  }\n"
+                + LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
+
+        final String xml = "<books><book><title>Immortality</title><author>John Smith</author></book></books>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        loadPageWithAlerts2(createTestHTML(html));
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
