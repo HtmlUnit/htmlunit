@@ -35,7 +35,10 @@ import org.junit.runners.model.Statement;
 public class ErrorOutputChecker implements TestRule {
     private PrintStream originalErr_;
     private final ByteArrayOutputStream baos_ = new ByteArrayOutputStream();
-    private static final Pattern WEB_DRIVER_MSG =
+    private static final Pattern WEB_DRIVER_CHROME_MSG =
+            Pattern.compile("Starting ChromeDriver \\(v[\\.0-9]*\\) on port \\d*\r?\n"
+                    + "Only local connections are allowed\\.\r?\n");
+    private static final Pattern WEB_DRIVER_IE_MSG =
             Pattern.compile("Started InternetExplorerDriver server \\(\\d\\d\\-bit\\)\r?\n"
                     + ".*\r?\nListening on port \\d*\r?\n");
 
@@ -64,7 +67,8 @@ public class ErrorOutputChecker implements TestRule {
         if (baos_.size() != 0) {
             String output = baos_.toString();
             // remove webdriver message
-            output = WEB_DRIVER_MSG.matcher(output).replaceAll("");
+            output = WEB_DRIVER_CHROME_MSG.matcher(output).replaceAll("");
+            output = WEB_DRIVER_IE_MSG.matcher(output).replaceAll("");
             if (output.length() > 0) {
                 throw new RuntimeException("Test has produced output to System.err: " + output);
             }
