@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.regex.Pattern;
 
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
@@ -29,10 +30,14 @@ import org.junit.runners.model.Statement;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class ErrorOutputChecker implements TestRule {
     private PrintStream originalErr_;
     private final ByteArrayOutputStream baos_ = new ByteArrayOutputStream();
+    private static final Pattern WEB_DRIVER_MSG =
+            Pattern.compile("Started InternetExplorerDriver server \\(\\d\\d\\-bit\\)\r?\n"
+                    + ".*\r?\nListening on port \\d*\r?\n");
 
     /**
      * {@inheritDoc}
@@ -57,8 +62,12 @@ public class ErrorOutputChecker implements TestRule {
 
     private void verifyNoOutput() {
         if (baos_.size() != 0) {
-            throw new RuntimeException("Test has produced output to System.err: "
-                    + baos_.toString());
+            String output = baos_.toString();
+            // remove webdriver message
+            output = WEB_DRIVER_MSG.matcher(output).replaceAll("");
+            if (output.length() > 0) {
+                throw new RuntimeException("Test has produced output to System.err: " + output);
+            }
         }
     }
 
