@@ -2616,12 +2616,15 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = { "exception" },
+            IE8 = { })
     public void setExpression() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "     var div1 = document.getElementById('div1');\n"
-            + "     div1.setExpression('title','id');\n"
+            + "    try {\n"
+            + "      var div1 = document.getElementById('div1');\n"
+            + "      div1.setExpression('title','id');\n"
+            + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='div1'/>\n"
@@ -2633,13 +2636,21 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = { "ex setExpression", "ex removeExpression" },
+            IE8 = { })
     public void removeExpression() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "     var div1 = document.getElementById('div1');\n"
-            + "     div1.setExpression('title','id');\n"
-            + "     div1.removeExpression('title');"
+            + "    var div1 = document.getElementById('div1');\n"
+
+            + "    try {\n"
+            + "      div1.setExpression('title','id');\n"
+            + "    } catch(e) { alert('ex setExpression'); }\n"
+
+            + "    try {\n"
+            + "      div1.removeExpression('title');"
+            + "    } catch(e) { alert('ex removeExpression'); }\n"
+
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='div1'/>\n"

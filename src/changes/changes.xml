@@ -9,6 +9,9 @@
     <body>
         <release version="2.16" date="???" description="Bugfixes">
             <action type="fix" dev="rbri">
+                Methods setExpression and removeExpression are only available in IE8.
+            </action>
+            <action type="fix" dev="rbri">
                 Image downloading: try to download only if the src attribute is not empty.
             </action>
             <action type="fix" dev="rbri" issue="1619 " due-to="Carsten Steul">

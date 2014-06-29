@@ -1944,7 +1944,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      *        Array references are not allowed on object properties included in this script.
      * @param language specified the language used
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
     public void setExpression(final String propertyName, final String expression, final String language) {
         // Empty.
     }
@@ -1955,7 +1955,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param propertyName Specifies the name of the property from which to remove an expression
      * @return true if the expression was successfully removed
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
     public boolean removeExpression(final String propertyName) {
         return true;
     }
