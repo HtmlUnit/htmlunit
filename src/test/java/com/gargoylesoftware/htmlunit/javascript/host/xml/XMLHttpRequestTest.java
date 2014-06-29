@@ -182,6 +182,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             FF24 = { "1: 0-", "2: 0-", "#1: 0-", "3: 0-", "4: 0-", "#2: 200-OK", "#3: 200-OK", "#4: 200-OK" },
             IE8 = { "1: ex: status-ex: statusText", "2: ex: status-ex: statusText", "#1: ex: status-ex: statusText",
                     "3: ex: status-ex: statusText", "#1: ex: status-ex: statusText", "4: ex: status-ex: statusText",
+                    "#2: 200-OK", "#3: 200-OK", "#4: 200-OK" },
+            CHROME = { "1: 0-", "2: 0-", "#1: 0-", "3: 0-", "4: 0-",
                     "#2: 200-OK", "#3: 200-OK", "#4: 200-OK" })
     public void statusAsync() throws Exception {
         final String html =
@@ -237,7 +239,11 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                 "orsc2", "orsc3", "orsc4", "4", "<a>b</a>", "[object XMLHttpRequest]" },
             FF24 = { "orsc1", "open-done", "send-done",
                 "orsc2", "orsc3", "orsc4", "4", "<a>b</a>", "[object XMLHttpRequest]" },
-            IE8 = { "orsc1", "open-done", "orsc1", "send-done", "orsc2", "orsc3", "orsc4" })
+            IE8 = { "orsc1", "open-done", "orsc1", "send-done", "orsc2", "orsc3", "orsc4" },
+            IE11 = { "orsc1", "open-done",
+                "orsc2", "orsc3", "orsc4", "4", "<a>b</a>", "[object XMLHttpRequest]", "send-done" },
+            CHROME = {"orsc1", "open-done", "send-done",
+                "orsc2", "orsc3", "orsc4", "4", "<a>b</a>", "[object XMLHttpRequest]" })
     public void onload() throws Exception {
         final String html =
               "<html>\n"
@@ -376,8 +382,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Browsers({ CHROME, FF, IE11 })
-    @Alerts(DEFAULT = "[object XMLDocument]",
-            CHROME = "[object Document]")
+    @Alerts("[object XMLDocument]")
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML_text_xml() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -402,8 +407,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Browsers({ CHROME, FF, IE11 })
-    @Alerts(DEFAULT = "[object XMLDocument]",
-            CHROME = "[object Document]")
+    @Alerts("[object XMLDocument]")
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML_application_xml() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -428,8 +432,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Browsers({ CHROME, FF, IE11 })
-    @Alerts(DEFAULT = "[object XMLDocument]",
-            CHROME = "[object Document]")
+    @Alerts("[object XMLDocument]")
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML_application_xhtmlXml() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -454,8 +457,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Browsers({ CHROME, FF, IE11 })
-    @Alerts(DEFAULT = "[object XMLDocument]",
-            CHROME = "[object Document]")
+    @Alerts("[object XMLDocument]")
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML_application_svgXml() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -780,8 +782,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE11 })
-    @Alerts({ "null", "myID", "blah", "span", "[object XMLDocument]" })
+    @Browsers({ FF, IE11, CHROME })
+    @Alerts(DEFAULT = { "null", "myID", "blah", "span", "[object XMLDocument]" },
+        CHROME = { "[object Element]", "myID", "blah", "span", "[object XMLDocument]" })
     public void responseXML_getElementById_FF() throws Exception {
         final String html =
               "<html>\n"

@@ -29,6 +29,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_TRIGGER_O
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_NOT_WRITEABLE_BEFORE_OPEN_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -242,7 +243,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Returns the event handler that fires on load.
      * @return the event handler that fires on load
      */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
     public Function getOnload() {
         return loadHandler_;
     }
@@ -251,7 +252,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Sets the event handler that fires on load.
      * @param loadHandler the event handler that fires on load
      */
-    @JsxSetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF) })
+    @JsxSetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
     public void setOnload(final Function loadHandler) {
         loadHandler_ = loadHandler;
     }
@@ -857,7 +858,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @param mimeType the type used to override that returned by the server (if any)
      * @see <a href="http://xulplanet.com/references/objref/XMLHttpRequest.html#method_overrideMimeType">XUL Planet</a>
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public void overrideMimeType(final String mimeType) {
         overriddenMimeType_ = mimeType;
     }

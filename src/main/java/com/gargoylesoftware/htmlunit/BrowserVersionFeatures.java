@@ -1534,6 +1534,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_XML,
 
+    /** XMLDocument: .getElementById() to return any element, not HTML specifically. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT,
+
     /** Indicates that XML code embedded in an HTML page is handled by MSXML ActiveX. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_XML_IN_HTML_VIA_ACTIVEXOBJECT,
@@ -1771,7 +1775,7 @@ public enum BrowserVersionFeatures {
     XHR_STATUS_THROWS_EXCEPTION_WHEN_UNSET,
 
     /** Indicates that the onload handler is not triggered if completed (FF). */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     XHR_TRIGGER_ONLOAD_ON_COMPLETED,
 
     /** Indicates that the "*" pattern is allowed when withCredential is enabled. */

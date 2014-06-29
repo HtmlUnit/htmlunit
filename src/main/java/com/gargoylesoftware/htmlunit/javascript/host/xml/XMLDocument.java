@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMPARSER_EMPTY_STRING_IS_ERROR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMPARSER_EXCEPTION_ON_ERROR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMPARSER_PARSERERROR_ON_ERROR;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -262,8 +263,8 @@ public class XMLDocument extends Document {
             return null;
         }
 
-        if (domElement instanceof HtmlElement) {
-            return ((HtmlElement) domElement).getScriptObject();
+        if (domElement instanceof HtmlElement || getBrowserVersion().hasFeature(JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT)) {
+            return ((DomElement) domElement).getScriptObject();
         }
         if (LOG.isDebugEnabled()) {
             LOG.debug("getElementById(" + id + "): no HTML DOM node found with this ID");
