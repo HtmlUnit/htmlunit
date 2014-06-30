@@ -88,7 +88,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  *   note that you can't define more than one IE as there is no standard way
  *   to have multiple IEs on the same machine</li>
  *   <li>ie.bin: is the location of the IEDriverServer binary (see
- *   <a href="http://code.google.com/p/selenium/downloads/list">IEDriverServer downloads</a></li>
+ *   <a href="http://selenium-release.storage.googleapis.com/index.html">IEDriverServer downloads</a></li>
  *   <li>ff24.bin: is the location of the FF24 binary, in Windows use double back-slashes</li>
  *   <li>chrome.bin: is the location of the ChromeDriver binary (see
  *   <a href="http://chromedriver.storage.googleapis.com/index.html">Chrome Driver downloads</a></li>
