@@ -263,7 +263,8 @@ public class XMLDocument extends Document {
             return null;
         }
 
-        if (domElement instanceof HtmlElement || getBrowserVersion().hasFeature(JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT)) {
+        if (domElement instanceof HtmlElement
+                || getBrowserVersion().hasFeature(JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT)) {
             return ((DomElement) domElement).getScriptObject();
         }
         if (LOG.isDebugEnabled()) {
