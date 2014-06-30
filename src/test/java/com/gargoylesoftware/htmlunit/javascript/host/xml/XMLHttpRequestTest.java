@@ -240,8 +240,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             FF24 = { "orsc1", "open-done", "send-done",
                 "orsc2", "orsc3", "orsc4", "4", "<a>b</a>", "[object XMLHttpRequest]" },
             IE8 = { "orsc1", "open-done", "orsc1", "send-done", "orsc2", "orsc3", "orsc4" },
-            IE11 = { "orsc1", "open-done",
-                "orsc2", "orsc3", "orsc4", "4", "<a>b</a>", "[object XMLHttpRequest]", "send-done" },
             CHROME = {"orsc1", "open-done", "send-done",
                 "orsc2", "orsc3", "orsc4", "4", "<a>b</a>", "[object XMLHttpRequest]" })
     public void onload() throws Exception {
