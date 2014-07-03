@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1622 " due-to="Hartmut Arlt">
+                Width and height of file inputs should be greater than zero.
+            </action>
             <action type="fix" dev="asashour" issue="1618">
                 JavaScript: XMLDocument.getElementById(): to return XML elements (Chrome).
             </action>

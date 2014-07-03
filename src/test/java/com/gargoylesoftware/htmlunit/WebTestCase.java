@@ -311,6 +311,15 @@ public abstract class WebTestCase {
     }
 
     /**
+     * Assert the specified condition is false.
+     * @param message message to show
+     * @param condition condition to test
+     */
+    protected void assertFalse(final String message, final boolean condition) {
+        Assert.assertFalse(message, condition);
+    }
+
+    /**
      * Returns an input stream for the specified file name. Refer to {@link #getFileObject(String)}
      * for details on how the file is located.
      * @param fileName the base file name

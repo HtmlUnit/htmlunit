@@ -47,6 +47,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
 import com.gargoylesoftware.htmlunit.html.HtmlHiddenInput;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
@@ -1140,7 +1141,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 width -= (getBorderHorizontal() + getPaddingHorizontal());
             }
             else if (node instanceof HtmlSubmitInput || node instanceof HtmlResetInput
-                        || node instanceof HtmlButtonInput || node instanceof HtmlButton) {
+                        || node instanceof HtmlButtonInput || node instanceof HtmlButton
+                        || node instanceof HtmlFileInput) {
                 final String text = node.asText();
                 width = 10 + (text.length() * PIXELS_PER_CHAR);
             }

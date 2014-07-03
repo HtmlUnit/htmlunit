@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,7 +44,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -60,6 +62,9 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = { "CONTENT_TYPE:application/octet-stream", "charset" },
+            IE = { "CONTENT_TYPE:text/plain", "charset" })
+    @NotYetImplemented(IE)
     public void contentType() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
         servlets.put("/upload1", Upload1Servlet.class);
@@ -76,8 +81,8 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
         driver.findElement(By.id("mySubmit")).click();
 
         final String pageSource = driver.getPageSource();
-        assertTrue(pageSource.contains("CONTENT_TYPE:application/octet-stream"));
-        assertFalse(pageSource.contains("charset"));
+        assertTrue(pageSource, pageSource.contains(getExpectedAlerts()[0]));
+        assertFalse(pageSource, pageSource.contains(getExpectedAlerts()[1]));
     }
 
     /**
@@ -205,6 +210,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("Content-Disposition: form-data; name=\"myInput\"; filename=\"\"")
     public void empty() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
         servlets.put("/upload1", Upload1Servlet.class);
@@ -215,14 +221,25 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
         driver.get("http://localhost:" + PORT + "/upload1");
         driver.findElement(By.id("mySubmit")).click();
 
-        assertTrue(driver.getPageSource()
-                .contains("Content-Disposition: form-data; name=\"myInput\"; filename=\"\""));
+        String pageSource = driver.getPageSource();
+        // hack for selenium
+        int count = 0;
+        while (count < 100 && StringUtils.isEmpty(pageSource)) {
+            pageSource = driver.getPageSource();
+            count++;
+        }
+
+        final Matcher matcher = Pattern.compile(getExpectedAlerts()[0]).matcher(pageSource);
+        assertTrue(pageSource, matcher.find());
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = "Content-Disposition: form-data; name=\"myInput\"; filename=\"realm.properties\"",
+            IE = "Content-Disposition: form-data; name=\"myInput\";"
+                        + " filename=\".*test-classes[\\\\/]realm\\.properties\"")
     public void realFile() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
         servlets.put("/upload1", Upload1Servlet.class);
@@ -246,17 +263,8 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
             count++;
         }
 
-        if (getBrowserVersion().isIE() && BrowserVersion.INTERNET_EXPLORER_11 != getBrowserVersion()) {
-            final Pattern pattern = Pattern
-                .compile("Content-Disposition: form-data; name=\"myInput\";"
-                        + " filename=\".*test-classes[\\\\/]realm\\.properties\"");
-            final Matcher matcher = pattern.matcher(pageSource);
-            assertTrue(matcher.find());
-            return;
-        }
-        // all other browsers
-        assertTrue(pageSource
-                .contains("Content-Disposition: form-data; name=\"myInput\"; filename=\"realm.properties\""));
+        final Matcher matcher = Pattern.compile(getExpectedAlerts()[0]).matcher(pageSource);
+        assertTrue(pageSource, matcher.find());
     }
 
     /**
@@ -362,8 +370,8 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "initial-initial", "initial-initial", "newDefault-newDefault", "newDefault-newDefault" },
-            IE8 = { "initial-initial", "initial-initial", "initial-newDefault", "initial-newDefault" })
+    @Alerts(DEFAULT = { "-initial", "-initial", "-newDefault", "-newDefault" },
+            IE8 = { "-", "-", "-newDefault", "-newDefault" })
     public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -383,7 +391,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "<form>\n"
-            + "  <input type='text' id='testId' value='initial'>\n"
+            + "  <input type='file' id='testId' value='initial'>\n"
             + "  <input type='reset' id='testReset'>\n"
             + "</form>\n"
             + "</body></html>";
@@ -395,8 +403,8 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "initial-initial", "initial-initial", "newDefault-newDefault", "newDefault-newDefault" },
-            IE8 = { "initial-initial", "initial-initial", "initial-newDefault", "initial-newDefault" })
+    @Alerts(DEFAULT = { "-initial", "-initial", "-newDefault", "-newDefault" },
+            IE8 = { "-", "-", "-newDefault", "-newDefault" })
     public void resetByJS() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -416,7 +424,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "<form>\n"
-            + "  <input type='text' id='testId' value='initial'>\n"
+            + "  <input type='file' id='testId' value='initial'>\n"
             + "</form>\n"
             + "</body></html>";
 
@@ -468,5 +476,27 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
         driver.findElement(By.tagName("body")).click();
 
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "true", "true" })
+    public void testNonZeroWidthHeight() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var file = document.getElementById('testId');\n"
+                + "    alert(file.clientWidth > 2);\n"
+                + "    alert(file.clientHeight > 2);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "<form>\n"
+                + "  <input type='file' id='testId'>\n"
+                + "</form>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
     }
 }
