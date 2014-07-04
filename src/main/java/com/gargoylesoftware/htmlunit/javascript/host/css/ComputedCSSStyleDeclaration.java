@@ -1152,9 +1152,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             else if (node instanceof HtmlRadioButtonInput || node instanceof HtmlCheckBoxInput) {
                 width = 20; // wild guess
             }
-            else if (node instanceof HtmlTextInput || node instanceof HtmlPasswordInput) {
-                width = 50; // wild guess
-            }
             else if (node instanceof HtmlTextArea) {
                 width = 100; // wild guess
             }
