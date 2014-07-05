@@ -1490,7 +1490,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 result.put(prefix[0], prefix[1].substring(1, prefix[1].length() - 1));
             }
         }
-        return result.isEmpty() ? result : null;
+        return result.isEmpty() ? null : result;
     }
 
     /**
