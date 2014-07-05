@@ -48,7 +48,7 @@ public class HtmlUnitRegExpProxy2Test extends SimpleWebTestCase {
         + "if (s != expected)\n"
         + " throw 'Expected >' + expected + '< but got >' + s + '<';";
 
-    private final String scriptTestMatch_ = "function arrayToString(_arr) {\n"
+    private static final String scriptTestMatch_ = "function arrayToString(_arr) {\n"
             + "  if (_arr == null) return null;\n"
             + "  var s = '[';\n"
             + "  for (var i=0; i<_arr.length; ++i)\n"

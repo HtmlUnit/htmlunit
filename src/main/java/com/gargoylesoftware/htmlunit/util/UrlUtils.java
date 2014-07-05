@@ -333,8 +333,6 @@ public final class UrlUtils {
         if (state == 1 || state == 2) {
             final int st = input.length - state + offset;
             result .replace(st, st + 1, "%25");
-            offset = offset + 2;
-            state = 0;
         }
         return result.toString();
     }

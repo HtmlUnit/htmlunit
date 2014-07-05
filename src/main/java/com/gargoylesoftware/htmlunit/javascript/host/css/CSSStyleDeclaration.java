@@ -438,9 +438,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     private StyleElement getStyleElementCaseInSensitive(final String name) {
         final Map<String, StyleElement> map = getStyleMap();
-        for (final String key : map.keySet()) {
-            if (key.equalsIgnoreCase(name)) {
-                return map.get(key);
+        for (final Map.Entry<String, StyleElement> entry : map.entrySet()) {
+            if (entry.getKey().equalsIgnoreCase(name)) {
+                return entry.getValue();
             }
         }
         return null;

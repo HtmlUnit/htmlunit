@@ -65,10 +65,11 @@ final class HtmlUnitPrefixResolver extends PrefixResolverDefault {
         final String xmlns = "xmlns:";
         final int xmlnsLength = xmlns.length();
 
-        for (final String name : attributes.keySet()) {
+        for (final Map.Entry<String, DomAttr> entry : attributes.entrySet()) {
+            final String name = entry.getKey();
             if (name.startsWith(xmlns)) {
-                if (name.substring(xmlnsLength).equals(prefix)) {
-                    return attributes.get(name).getValue();
+                if (name.regionMatches(xmlnsLength, prefix, 0, prefix.length())) {
+                    return entry.getValue().getValue();
                 }
             }
         }

@@ -1161,9 +1161,8 @@ public class WindowTest extends SimpleWebTestCase {
         client.setWebConnection(conn);
 
         final HtmlPage page = getWebClient().getPage(URL_FIRST);
-        HtmlElement button = page.getHtmlElementById("openDlg");
-        final HtmlPage dialogPage = button.click();
-        button = dialogPage.getHtmlElementById("closeDlg");
+        final HtmlElement button = page.getHtmlElementById("openDlg");
+        button.click();
 
         assertEquals(getExpectedAlerts(), actual);
     }
