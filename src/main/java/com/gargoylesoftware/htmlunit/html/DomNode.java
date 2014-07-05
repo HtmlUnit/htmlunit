@@ -730,7 +730,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             final boolean collapseInvisible = hasFeature(DISPLAYED_COLLAPSE);
             // visibility: iterate bottom to top, because children can override
             // the visibility used by parent nodes
-            for (CSSStyleDeclaration style : styles) {
+            for (final CSSStyleDeclaration style : styles) {
                 final String visibility = style.getVisibility();
                 if (visibility.length() > 5) {
                     if ("visible".equals(visibility)) {
@@ -1481,7 +1481,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     private static Map<String, String> parseSelectionNamespaces(final String selectionNS) {
         final Map<String, String> result = new HashMap<String, String>();
         final String[] toks = selectionNS.split("\\s");
-        for (String tok : toks) {
+        for (final String tok : toks) {
             if (tok.startsWith("xmlns=")) {
                 result.put("", tok.substring(7, tok.length() - 7));
             }
@@ -1490,7 +1490,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 result.put(prefix[0], prefix[1].substring(1, prefix[1].length() - 1));
             }
         }
-        return result.size() > 0 ? result : null;
+        return result.isEmpty() ? result : null;
     }
 
     /**

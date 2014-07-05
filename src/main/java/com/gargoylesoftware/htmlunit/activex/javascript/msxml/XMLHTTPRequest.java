@@ -682,12 +682,10 @@ public class XMLHTTPRequest extends MSXMLScriptable {
             return;
         }
 
-        if (webRequest_ != null) {
-            webRequest_.setAdditionalHeader(name, value);
-        }
-        else {
+        if (webRequest_ == null) {
             throw Context.reportRuntimeError("Unspecified error (request not opened).");
         }
+        webRequest_.setAdditionalHeader(name, value);
     }
 
     /**

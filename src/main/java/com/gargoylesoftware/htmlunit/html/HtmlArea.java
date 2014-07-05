@@ -232,8 +232,6 @@ public class HtmlArea extends HtmlElement {
         }
         else if ("circle".equals(shape) && getCoordsAttribute() != null) {
             final String[] coords = StringUtils.split(getCoordsAttribute(), ',');
-            final double centerX = Double.parseDouble(coords[0].trim());
-            final double centerY = Double.parseDouble(coords[1].trim());
             final String radiusString = coords[2].trim();
 
             final int radius;
@@ -243,6 +241,9 @@ public class HtmlArea extends HtmlElement {
             catch (final NumberFormatException nfe) {
                 throw new NumberFormatException("Circle radius of " + radiusString + " is not yet implemented.");
             }
+
+            final double centerX = Double.parseDouble(coords[0].trim());
+            final double centerY = Double.parseDouble(coords[1].trim());
             final Ellipse2D ellipse = new Ellipse2D.Double(centerX - (double) radius / 2, centerY - (double) radius / 2,
                     radius, radius);
             if (ellipse.contains(x, y)) {

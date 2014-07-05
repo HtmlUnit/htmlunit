@@ -158,19 +158,19 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      */
     @Override
     protected void printXml(final String indent, final PrintWriter printWriter) {
-        final boolean hasChildren = (getFirstChild() != null);
+        final boolean hasChildren = getFirstChild() != null;
         printWriter.print(indent + "<");
         printOpeningTagContentAsXml(printWriter);
 
-        if (!hasChildren && !isEmptyXmlTagExpanded()) {
-            printWriter.print("/>");
-            printWriter.print("\r\n");
-        }
-        else {
+        if (hasChildren || isEmptyXmlTagExpanded()) {
             printWriter.print(">");
             printWriter.print("\r\n");
             printChildrenAsXml(indent, printWriter);
             printWriter.print(indent + "</" + getTagName() + ">");
+            printWriter.print("\r\n");
+        }
+        else {
+            printWriter.print("/>");
             printWriter.print("\r\n");
         }
     }
@@ -194,17 +194,17 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      */
     String getQualifiedName(final String namespaceURI, final String localName) {
         final String qualifiedName;
-        if (namespaceURI != null) {
-            final String prefix = namespaces().get(namespaceURI);
-            if (prefix != null) {
-                qualifiedName = prefix + ':' + localName;
-            }
-            else {
-                qualifiedName = null;
-            }
+        if (namespaceURI == null) {
+            qualifiedName = localName;
         }
         else {
-            qualifiedName = localName;
+            final String prefix = namespaces().get(namespaceURI);
+            if (prefix == null) {
+                qualifiedName = null;
+            }
+            else {
+                qualifiedName = prefix + ':' + localName;
+            }
         }
         return qualifiedName;
     }

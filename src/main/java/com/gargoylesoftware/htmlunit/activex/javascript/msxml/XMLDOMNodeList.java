@@ -569,7 +569,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
      * {@inheritDoc}
      */
     public Node item(final int index) {
-        return (DomNode) getElements().get(index);
+        return getElements().get(index);
     }
 
     /**

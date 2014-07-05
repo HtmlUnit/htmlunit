@@ -249,13 +249,13 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
                     }
                 }
             }
-            if (ss != null) {
-                result.append(ss);
-                lastIndex = i + 2;
-            }
-            else {
+            if (ss == null) {
                 result.append('$');
                 lastIndex = i + 1;
+            }
+            else {
+                result.append(ss);
+                lastIndex = i + 2;
             }
         }
 
@@ -427,8 +427,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
      */
     static String jsRegExpToJavaRegExp(final String re) {
         final RegExpJsToJavaConverter regExpJsToJavaFSM = new RegExpJsToJavaConverter();
-        final String tmpNew = regExpJsToJavaFSM.convert(re);
-        return tmpNew;
+        return regExpJsToJavaFSM.convert(re);
     }
 
     /**
