@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -233,6 +234,22 @@ public class ApplicationCache extends SimpleScriptable {
     @JsxFunction()
     public void removeEventListener(final String type, final Scriptable listener, final boolean useCapture) {
         getEventListenersContainer().removeEventListener(type, listener, useCapture);
+    }
+
+    /**
+     * Dispatches an event into the event system (standards-conformant browsers only). See
+     * <a href="https://developer.mozilla.org/en-US/docs/DOM/element.dispatchEvent">the Gecko
+     * DOM reference</a> for more information.
+     *
+     * @param event the event to be dispatched
+     * @return <tt>false</tt> if at least one of the event handlers which handled the event
+     *         called <tt>preventDefault</tt>; <tt>true</tt> otherwise
+     */
+    @JsxFunction()
+    public boolean dispatchEvent(final Event event) {
+        event.setTarget(this);
+        final ScriptResult result = Node.fireEvent(this, event);
+        return !event.isAborted(result);
     }
 
     private Object getHandlerForJavaScript(final String eventName) {
