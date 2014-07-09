@@ -51,4 +51,123 @@ public class ApplicationCacheTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function(e){}",
+            IE8 = "no applicationCache")
+    public void onchecking() throws Exception {
+        eventHandler("onchecking");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function(e){}",
+            IE8 = "no applicationCache")
+    public void onerror() throws Exception {
+        eventHandler("onerror");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function(e){}",
+            IE8 = "no applicationCache")
+    public void onnoupdate() throws Exception {
+        eventHandler("onnoupdate");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function(e){}",
+            IE8 = "no applicationCache")
+    public void ondownloading() throws Exception {
+        eventHandler("ondownloading");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function(e){}",
+            IE8 = "no applicationCache")
+    public void onprogress() throws Exception {
+        eventHandler("onprogress");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function(e){}",
+            IE8 = "no applicationCache")
+    public void onupdateready() throws Exception {
+        eventHandler("onupdateready");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function(e){}",
+            IE8 = "no applicationCache")
+    public void oncached() throws Exception {
+        eventHandler("oncached");
+    }
+
+    private void eventHandler(final String handler) throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    if (window.applicationCache) {;\n"
+            + "      window.applicationCache." + handler + " = function(e) {};\n"
+            + "      var handler = window.applicationCache." + handler + ".toString();\n"
+
+                     // normalize, testing function.toString() is done somewhere else
+            + "      alert(handler.replace(/(\\r|\\n|\\r\\n| )/gm, ''));\n"
+            + "    } else {\n"
+            + "      alert('no applicationCache');\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "false", "false", "true", "true" },
+            IE8 = "no applicationCache")
+    public void eventListener() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    if (window.applicationCache) {;\n"
+            + "      alert(window.applicationCache.addEventListener == null);\n"
+            + "      alert(window.applicationCache.removeEventListener == null);\n"
+            + "      alert(window.applicationCache.dispatchEvent == null);\n"
+
+            + "      alert(window.applicationCache.attachEvent == null);\n"
+            + "      alert(window.applicationCache.detachEvent == null);\n"
+            + "    } else {\n"
+            + "      alert('no applicationCache');\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

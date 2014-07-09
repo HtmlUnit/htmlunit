@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_APPCACHE_N
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -33,6 +34,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Frank Danek
+ * @author Ronald Brill
+ * @author Jake Cobb
  * @see <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/offline.html#application-cache-api">
  * HTML5 spec</a>
  * @see <a href="https://developer.mozilla.org/en/offline_resources_in_firefox">Offline Resources in Firefox</a>
@@ -55,13 +58,7 @@ public class ApplicationCache extends SimpleScriptable {
     public static final short STATUS_OBSOLETE = 5;
 
     private short status_ = STATUS_UNCACHED;
-    private Object onchecking_;
-    private Object onerror_;
-    private Object onnoupdate_;
-    private Object ondownloading_;
-    private Object onprogress_;
-    private Object onupdateready_;
-    private Object oncached_;
+    private EventListenersContainer eventListenersContainer_;
 
     /**
      * {@inheritDoc}
@@ -82,7 +79,7 @@ public class ApplicationCache extends SimpleScriptable {
      */
     @JsxGetter
     public Object getOnchecking() {
-        return onchecking_;
+        return getHandlerForJavaScript("checking");
     }
 
     /**
@@ -91,7 +88,7 @@ public class ApplicationCache extends SimpleScriptable {
      */
     @JsxSetter
     public void setOnchecking(final Object o) {
-        onchecking_ = o;
+        setHandlerForJavaScript("checking", o);
     }
 
     /**
@@ -100,7 +97,7 @@ public class ApplicationCache extends SimpleScriptable {
      */
     @JsxGetter
     public Object getOnerror() {
-        return onerror_;
+        return getHandlerForJavaScript(Event.TYPE_ERROR);
     }
 
     /**
@@ -109,7 +106,7 @@ public class ApplicationCache extends SimpleScriptable {
      */
     @JsxSetter
     public void setOnerror(final Object o) {
-        onerror_ = o;
+        setHandlerForJavaScript(Event.TYPE_ERROR, o);
     }
 
     /**
@@ -118,7 +115,7 @@ public class ApplicationCache extends SimpleScriptable {
      */
     @JsxGetter
     public Object getOnnoupdate() {
-        return onnoupdate_;
+        return getHandlerForJavaScript("update");
     }
 
     /**
@@ -127,7 +124,7 @@ public class ApplicationCache extends SimpleScriptable {
      */
     @JsxSetter
     public void setOnnoupdate(final Object o) {
-        onnoupdate_ = o;
+        setHandlerForJavaScript("update", o);
     }
 
     /**
@@ -136,7 +133,7 @@ public class ApplicationCache extends SimpleScriptable {
      */
     @JsxGetter
     public Object getOndownloading() {
-        return ondownloading_;
+        return getHandlerForJavaScript("downloading");
     }
 
     /**
@@ -145,7 +142,7 @@ public class ApplicationCache extends SimpleScriptable {
      */
     @JsxSetter
     public void setOndownloading(final Object o) {
-        ondownloading_ = o;
+        setHandlerForJavaScript("downloading", o);
     }
 
     /**
@@ -154,7 +151,7 @@ public class ApplicationCache extends SimpleScriptable {
      */
     @JsxGetter
     public Object getOnprogress() {
-        return onprogress_;
+        return getHandlerForJavaScript("progress");
     }
 
     /**
@@ -163,7 +160,7 @@ public class ApplicationCache extends SimpleScriptable {
      */
     @JsxSetter
     public void setOnprogress(final Object o) {
-        onprogress_ = o;
+        setHandlerForJavaScript("progress", o);
     }
 
     /**
@@ -172,7 +169,7 @@ public class ApplicationCache extends SimpleScriptable {
      */
     @JsxGetter
     public Object getOnupdateready() {
-        return onupdateready_;
+        return getHandlerForJavaScript("updateready");
     }
 
     /**
@@ -181,7 +178,7 @@ public class ApplicationCache extends SimpleScriptable {
      */
     @JsxSetter
     public void setOnupdateready(final Object o) {
-        onupdateready_ = o;
+        setHandlerForJavaScript("updateready", o);
     }
 
     /**
@@ -190,7 +187,7 @@ public class ApplicationCache extends SimpleScriptable {
      */
     @JsxGetter
     public Object getOncached() {
-        return oncached_;
+        return getHandlerForJavaScript("cached");
     }
 
     /**
@@ -199,7 +196,54 @@ public class ApplicationCache extends SimpleScriptable {
      */
     @JsxSetter
     public void setOncached(final Object o) {
-        oncached_ = o;
+        setHandlerForJavaScript("cached", o);
+    }
+
+    /**
+     * Gets the container for event listeners.
+     * @return the container (newly created if needed)
+     */
+    public EventListenersContainer getEventListenersContainer() {
+        if (eventListenersContainer_ == null) {
+            eventListenersContainer_ = new EventListenersContainer(this);
+        }
+        return eventListenersContainer_;
+    }
+
+    /**
+     * Allows the registration of event listeners on the event target.
+     * @param type the event type to listen for (like "onload")
+     * @param listener the event listener
+     * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
+     * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener">Mozilla documentation</a>
+     */
+    @JsxFunction()
+    public void addEventListener(final String type, final Scriptable listener, final boolean useCapture) {
+        getEventListenersContainer().addEventListener(type, listener, useCapture);
+    }
+
+    /**
+     * Allows the removal of event listeners on the event target.
+     * @param type the event type to listen for (like "load")
+     * @param listener the event listener
+     * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
+     * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.removeEventListener">Mozilla
+     * documentation</a>
+     */
+    @JsxFunction()
+    public void removeEventListener(final String type, final Scriptable listener, final boolean useCapture) {
+        getEventListenersContainer().removeEventListener(type, listener, useCapture);
+    }
+
+    private Object getHandlerForJavaScript(final String eventName) {
+        return getEventListenersContainer().getEventHandlerProp(eventName);
+    }
+
+    private void setHandlerForJavaScript(final String eventName, final Object handler) {
+        if (handler == null || handler instanceof Scriptable) {
+            getEventListenersContainer().setEventHandlerProp(eventName, handler);
+        }
+        // Otherwise, fail silently.
     }
 
     /**
