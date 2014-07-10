@@ -37,6 +37,7 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -615,7 +616,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     }
 
     /**
-     * Test Mozilla's overrideMimeType method.
      * @throws Exception if the test fails
      */
     @Test
@@ -645,6 +645,32 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
             "text/plain");
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("27035")
+    @NotYetImplemented
+    public void overrideMimeType_charset() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "try {\n"
+            + "  var request = new XMLHttpRequest();\n"
+            + "  request.open('GET', '" + URL_SECOND + "', false);\n"
+            + "  request.overrideMimeType('text/plain; charset=GBK');\n"
+            + "  request.send('');\n"
+            + "  alert(request.responseText.charCodeAt(0));\n"
+            + "} catch (e) { alert('exception'); }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "黄", "text/plain", "UTF-8");
+      	loadPageWithAlerts2(html);
     }
 
     /**
