@@ -670,7 +670,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "<body onload='test()'></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, "黄", "text/plain", "UTF-8");
-      	loadPageWithAlerts2(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
