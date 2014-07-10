@@ -668,7 +668,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the "external" property.
      * @return the "external" property
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter
     public External getExternal() {
         final External external = new External();
         external.setParentScope(this);

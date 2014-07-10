@@ -26,14 +26,33 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @version $Revision$
  * @author Peter Faller
+ * @author Ronald Brill
  */
-@JsxClass(browsers = @WebBrowser(IE))
+@JsxClass
 public class External extends SimpleScriptable {
 
     /**
      * Empty implementation.
      */
-    @JsxFunction
+    @JsxFunction(@WebBrowser(IE))
     public void AutoCompleteSaveForm() {
+        // dummy
+    }
+
+    /**
+     * Empty implementation.
+     */
+    @JsxFunction()
+    public void AddSearchProvider() {
+        // dummy
+    }
+
+    /**
+     * Empty implementation.
+     * @return 0
+     */
+    @JsxFunction
+    public int IsSearchProviderInstalled() {
+        return 0;
     }
 }

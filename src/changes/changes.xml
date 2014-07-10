@@ -8,6 +8,11 @@
 
     <body>
         <release version="2.16" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Window.external implementation fixed; the property is available in FF and
+                Chrome also. Additionally we added stubs for the functions AddSearchProvider
+                and IsSearchProviderInstalled.
+            </action>
             <action type="fix" dev="rbri" issue="1613 " due-to="Jake Cobb">
                 Missing event listener functions addEventListener, removeEventListener
                 and dispatchEvent added to applicationCache.
