@@ -672,7 +672,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "黄", "text/plain", "UTF-8");
+        getMockWebConnection().setResponse(URL_SECOND, "\u9ec4", "text/plain", "UTF-8");
         loadPageWithAlerts2(html);
     }
 
@@ -698,7 +698,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "黄", "text/plain", "UTF-8");
+        getMockWebConnection().setResponse(URL_SECOND, "\u9ec4", "text/plain", "UTF-8");
         loadPageWithAlerts2(html);
     }
 
@@ -724,7 +724,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "黄", "text/plain", "UTF-8");
+        getMockWebConnection().setResponse(URL_SECOND, "\u9ec4", "text/plain", "UTF-8");
         loadPageWithAlerts2(html);
     }
 
@@ -750,7 +750,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "黄", "text/plain", "UTF-8");
+        getMockWebConnection().setResponse(URL_SECOND, "\u9ec4", "text/plain", "UTF-8");
         loadPageWithAlerts2(html);
     }
 
@@ -1232,7 +1232,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "'黄'", "text/plain", "UTF-8");
+        getMockWebConnection().setResponse(URL_SECOND, "'\u9ec4'", "text/plain", "UTF-8");
         loadPageWithAlerts2(html);
     }
 
@@ -1245,12 +1245,11 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Browsers(NONE)
     @NotYetImplemented
     public void java_encoding() throws Exception {
-
         // Chrome and FF return the last apostrophe, see overrideMimeType_charset_all()
         // but Java and other tools (e.g. Notpad++) return only 3 characters, not 4
         // this method is not a test case, but rather to show the behavior of java
 
-        final String string = "'黄'";
+        final String string = "'\u9ec4'";
         final ByteArrayInputStream bais = new ByteArrayInputStream(string.getBytes("UTF-8"));
         final BufferedReader reader = new BufferedReader(new InputStreamReader(bais, "GBK"));
         final String output = reader.readLine();
