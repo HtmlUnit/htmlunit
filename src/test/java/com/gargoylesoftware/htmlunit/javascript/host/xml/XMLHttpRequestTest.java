@@ -1238,7 +1238,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
     /**
      * Helper method Bug #1623.
-     * @throws Exception
+     *
+     * @throws Exception if the test fails
      */
     @Test
     @Browsers(NONE)
