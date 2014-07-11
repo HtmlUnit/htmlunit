@@ -717,10 +717,29 @@ public class XMLHttpRequest extends SimpleScriptable {
                     webResponse_ = webResponse;
                 }
                 else {
+                    final int index = overriddenMimeType_.toLowerCase().indexOf("charset=");
+                    String charsetString = "";
+                    if (index != -1) {
+                        charsetString = overriddenMimeType_.substring(index + "charset=".length());
+                    }
+                    final String charset;
+                    if (!charsetString.isEmpty()) {
+                        charset = charsetString;
+                    }
+                    else {
+                        charset = null;
+                    }
                     webResponse_ = new WebResponseWrapper(webResponse) {
                         @Override
                         public String getContentType() {
                             return overriddenMimeType_;
+                        }
+                        @Override
+                        public String getContentCharset() {
+                            if (charset != null) {
+                                return charset;
+                            }
+                            return super.getContentCharset();
                         }
                     };
                 }

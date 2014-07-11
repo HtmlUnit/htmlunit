@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                JavaScript: XMLHttpRequest: overrideMimeType() to handle charset (Chrome and FF).
+            </action>
             <action type="fix" dev="rbri">
                 Window.external implementation fixed; the property is available in FF and
                 Chrome also. Additionally we added stubs for the functions AddSearchProvider

@@ -651,8 +651,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("27035")
-    @NotYetImplemented
+    @Alerts(DEFAULT = "27035", IE8 = "exception", IE11 = "111")
+    @NotYetImplemented(IE11)
     public void overrideMimeType_charset() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -661,6 +661,84 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "  var request = new XMLHttpRequest();\n"
             + "  request.open('GET', '" + URL_SECOND + "', false);\n"
             + "  request.overrideMimeType('text/plain; charset=GBK');\n"
+            + "  request.send('');\n"
+            + "  alert(request.responseText.charCodeAt(0));\n"
+            + "} catch (e) { alert('exception'); }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "黄", "text/plain", "UTF-8");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "27035", IE8 = "exception", IE11 = "111")
+    @NotYetImplemented(IE11)
+    public void overrideMimeType_charset_upper_case() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "try {\n"
+            + "  var request = new XMLHttpRequest();\n"
+            + "  request.open('GET', '" + URL_SECOND + "', false);\n"
+            + "  request.overrideMimeType('text/plain; chaRSet=GBK');\n"
+            + "  request.send('');\n"
+            + "  alert(request.responseText.charCodeAt(0));\n"
+            + "} catch (e) { alert('exception'); }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "黄", "text/plain", "UTF-8");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "40644", IE8 = "exception", IE11 = "111")
+    @NotYetImplemented(IE11)
+    public void overrideMimeType_charset_empty() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "try {\n"
+            + "  var request = new XMLHttpRequest();\n"
+            + "  request.open('GET', '" + URL_SECOND + "', false);\n"
+            + "  request.overrideMimeType('text/plain; charset=');\n"
+            + "  request.send('');\n"
+            + "  alert(request.responseText.charCodeAt(0));\n"
+            + "} catch (e) { alert('exception'); }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "黄", "text/plain", "UTF-8");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "40644", CHROME = "233", IE8 = "exception", IE11 = "NaN")
+    @NotYetImplemented({ IE11, CHROME })
+    public void overrideMimeType_charset_wrong() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "try {\n"
+            + "  var request = new XMLHttpRequest();\n"
+            + "  request.open('GET', '" + URL_SECOND + "', false);\n"
+            + "  request.overrideMimeType('text/plain; charset=abcdefg');\n"
             + "  request.send('');\n"
             + "  alert(request.responseText.charCodeAt(0));\n"
             + "} catch (e) { alert('exception'); }\n"

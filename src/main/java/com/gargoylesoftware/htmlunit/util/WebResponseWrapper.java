@@ -64,7 +64,7 @@ public class WebResponseWrapper extends WebResponse {
      */
     @Override
     public String getContentAsString() {
-        return wrappedWebResponse_.getContentAsString();
+        return wrappedWebResponse_.getContentAsString(getContentCharset());
     }
 
     /**

@@ -37,7 +37,7 @@ public class ErrorOutputChecker implements TestRule {
     private final ByteArrayOutputStream baos_ = new ByteArrayOutputStream();
     private static final Pattern WEB_DRIVER_CHROME_MSG =
             Pattern.compile("Starting ChromeDriver \\(v[\\.0-9]*\\) on port \\d*\r?\n"
-                    + "(Only local connections are allowed\\.\r?\n)?");
+                    + "Only local connections are allowed\\.\r?\n");
     private static final Pattern WEB_DRIVER_IE_MSG =
             Pattern.compile("Started InternetExplorerDriver server \\(\\d\\d\\-bit\\)\r?\n"
                     + ".*\r?\nListening on port \\d*\r?\n");
