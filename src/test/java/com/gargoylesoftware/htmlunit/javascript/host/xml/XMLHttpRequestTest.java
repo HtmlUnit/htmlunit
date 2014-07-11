@@ -21,7 +21,10 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -1201,5 +1204,57 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         assertFalse(XMLHttpRequest.isAuthorizedHeader("Proxy-Hack"));
         assertFalse(XMLHttpRequest.isAuthorizedHeader("Sec-"));
         assertFalse(XMLHttpRequest.isAuthorizedHeader("Sec-Hack"));
+    }
+
+    /**
+     * Test case for Bug #1623.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "39", "27035", "65533", "39" }, IE8 = "exception", IE11 = { "39", "27035", "63" })
+    @NotYetImplemented({ CHROME, FF, IE11 })
+    public void overrideMimeType_charset_all() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "try {\n"
+            + "  var request = new XMLHttpRequest();\n"
+            + "  request.open('GET', '" + URL_SECOND + "', false);\n"
+            + "  request.overrideMimeType('text/plain; charset=GBK');\n"
+            + "  request.send('');\n"
+            + "  for (var i = 0; i < request.responseText.length; i++) {\n"
+            + "    alert(request.responseText.charCodeAt(i));\n"
+            + "  }\n"
+            + "} catch (e) { alert('exception'); }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "'黄'", "text/plain", "UTF-8");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Helper method Bug #1623.
+     * @throws Exception
+     */
+    @Test
+    @Browsers(NONE)
+    @NotYetImplemented
+    public void java_encoding() throws Exception {
+        // Chrome and FF return the last apostrophe, see overrideMimeType_charset_all()
+        // but Java and other tools (e.g. Notpad++ return only 3 characters, not 4)
+        final String string = "'黄'";
+        final ByteArrayInputStream bais = new ByteArrayInputStream(string.getBytes("UTF-8"));
+        final BufferedReader reader = new BufferedReader(new InputStreamReader(bais, "GBK"));
+        final String output = reader.readLine();
+        reader.close();
+
+        assertEquals(39, output.codePointAt(0));
+        assertEquals(27035, output.codePointAt(1));
+        assertEquals(65533, output.codePointAt(2));
+        assertEquals(39, output.codePointAt(3));
     }
 }
