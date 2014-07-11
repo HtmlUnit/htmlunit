@@ -1245,8 +1245,11 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Browsers(NONE)
     @NotYetImplemented
     public void java_encoding() throws Exception {
+
         // Chrome and FF return the last apostrophe, see overrideMimeType_charset_all()
-        // but Java and other tools (e.g. Notpad++ return only 3 characters, not 4)
+        // but Java and other tools (e.g. Notpad++) return only 3 characters, not 4
+        // this method is not a test case, but rather to show the behavior of java
+
         final String string = "'黄'";
         final ByteArrayInputStream bais = new ByteArrayInputStream(string.getBytes("UTF-8"));
         final BufferedReader reader = new BufferedReader(new InputStreamReader(bais, "GBK"));
