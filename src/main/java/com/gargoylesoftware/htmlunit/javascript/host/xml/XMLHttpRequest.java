@@ -49,6 +49,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
@@ -94,6 +95,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Ronald Brill
  * @author Sebastian Cato
  * @author Frank Danek
+ * @author Jake Cobb
  *
  * @see <a href="http://www.w3.org/TR/XMLHttpRequest/">W3C XMLHttpRequest</a>
  * @see <a href="http://developer.apple.com/internet/webcontent/xmlhttpreq.html">Safari documentation</a>
@@ -472,15 +474,21 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Assigns the destination URL, method and other optional attributes of a pending request.
      * @param method the method to use to send the request to the server (GET, POST, etc)
      * @param urlParam the URL to send the request to
-     * @param async Whether or not to send the request to the server asynchronously
+     * @param asyncParam Whether or not to send the request to the server asynchronously, defaults to <code>true</code>
      * @param user If authentication is needed for the specified URL, the username to use to authenticate
      * @param password If authentication is needed for the specified URL, the password to use to authenticate
      */
     @JsxFunction
-    public void open(final String method, final Object urlParam, final boolean async,
+    public void open(final String method, final Object urlParam, final Object asyncParam,
         final Object user, final Object password) {
         if ((urlParam == null || "".equals(urlParam)) && !getBrowserVersion().hasFeature(XHR_OPEN_ALLOW_EMTPY_URL)) {
             throw Context.reportRuntimeError("URL for XHR.open can't be empty!");
+        }
+
+        // async defaults to true if not specified
+        boolean async = true;
+        if (asyncParam != Undefined.instance) {
+            async = ScriptRuntime.toBoolean(asyncParam);
         }
 
         if (!async && getWithCredentials()) {

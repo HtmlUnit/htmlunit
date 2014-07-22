@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="1625 " due-to="Jake Cobb">
+                JavaScript: default value for XMLHttpRequest.open's async parameter is true.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: XMLHttpRequest: overrideMimeType() to handle charset (Chrome and FF).
             </action>

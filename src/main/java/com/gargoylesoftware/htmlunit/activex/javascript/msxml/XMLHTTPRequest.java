@@ -32,6 +32,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
@@ -73,6 +74,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Ronald Brill
  * @author Sebastian Cato
  * @author Frank Danek
+ * @author Jake Cobb
  */
 @JsxClass(browsers = @WebBrowser(IE))
 public class XMLHTTPRequest extends MSXMLScriptable {
@@ -359,14 +361,14 @@ public class XMLHTTPRequest extends MSXMLScriptable {
      * @param method the HTTP method used to open the connection, such as GET, POST, PUT, or PROPFIND;
      *      for XMLHTTP, this parameter is not case-sensitive; the verbs TRACE and TRACK are not allowed.
      * @param url the requested URL; this can be either an absolute URL or a relative URL
-     * @param async indicator of whether the call is asynchronous; the default is <code>true</code> (the call returns
-     *     immediately); if set to <code>true</code>, attach an <code>onreadystatechange</code> property callback so
-     *     that you can tell when the <code>send</code> call has completed
+     * @param asyncParam indicator of whether the call is asynchronous; the default is <code>true</code> (the call
+     *     returns immediately); if set to <code>true</code>, attach an <code>onreadystatechange</code> property
+     *     callback so that you can tell when the <code>send</code> call has completed
      * @param user the name of the user for authentication
      * @param password the password for authentication
      */
     @JsxFunction
-    public void open(final String method, final Object url, final boolean async,
+    public void open(final String method, final Object url, final Object asyncParam,
         final Object user, final Object password) {
         if (method == null || "null".equals(method)) {
             throw Context.reportRuntimeError("Type mismatch (method is null).");
@@ -384,6 +386,12 @@ public class XMLHTTPRequest extends MSXMLScriptable {
         }
         if ("".equals(url)) {
             throw Context.reportRuntimeError("Invalid procedure call or argument (url is empty).");
+        }
+
+        // defaults to true if not specified
+        boolean async = true;
+        if (asyncParam != Undefined.instance) {
+            async = ScriptRuntime.toBoolean(asyncParam);
         }
 
         final String urlAsString = Context.toString(url);

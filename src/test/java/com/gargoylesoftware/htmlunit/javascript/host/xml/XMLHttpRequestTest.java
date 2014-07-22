@@ -59,6 +59,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Sebastian Cato
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Jake Cobb
  */
 @RunWith(BrowserRunner.class)
 public class XMLHttpRequestTest extends WebDriverTestCase {
@@ -230,6 +231,38 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "  </head>\n"
             + "  <body onload='test()'></body>\n"
             + "</html>";
+
+        getMockWebConnection().setDefaultResponse("<res></res>", "text/xml");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Checks that not passing the async flag to <code>open()</code>
+     * results in async execution.  If this gets interpreted as <code>false</code>
+     * then you will see the alert order 1-2-4-3 instead of 1-2-3-4.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "#1", "#2", "#3", "#4" })
+    public void asyncIsDefault() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "var xhr = " + XHR_INSTANTIATION + ";\n"
+
+            + "function onReadyStateChange() {\n"
+            + "  if( xhr.readyState == 4 ) {\n"
+            + "    alert('#4');\n"
+            + "  }\n"
+            + "}\n"
+
+            + "try {\n"
+            + "  alert('#1');\n"
+            + "  xhr.onreadystatechange = onReadyStateChange;\n"
+            + "  xhr.open('GET',  '/foo.xml');\n"
+            + "  alert('#2');\n"
+            + "  xhr.send();\n"
+            + "  alert('#3');\n"
+            + "} catch(e) { alert(e); }\n"
+            + "</script></body></html>";
 
         getMockWebConnection().setDefaultResponse("<res></res>", "text/xml");
         loadPageWithAlerts2(html);
