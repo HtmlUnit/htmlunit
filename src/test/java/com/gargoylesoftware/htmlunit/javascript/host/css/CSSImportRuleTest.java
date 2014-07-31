@@ -14,10 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-
 import java.net.URL;
 
 import org.junit.Test;
@@ -25,7 +21,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -46,11 +41,12 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ CHROME, FF, IE11 })
     @Alerts(DEFAULT = { "[object CSSImportRule]", "§§URL§§second/",
                 "[object MediaList]", "0", "[object CSSStyleSheet]" },
+            FF31 = { "[object CSSImportRule]", "§§URL§§second/", "", "0", "[object CSSStyleSheet]" },
             IE11 = { "[object CSSImportRule]", "§§URL§§second/",
-                "all", "0", "[object CSSStyleSheet]" })
+                "all", "0", "[object CSSStyleSheet]" },
+            IE8 = "cssRules undefined")
     // IE8 does not support CSSStyleSheet.cssRules
     public void getImportFromCssRulesCollection_absolute() throws Exception {
         getImportFromCssRulesCollection(getDefaultUrl(), URL_SECOND.toExternalForm(), URL_SECOND);
@@ -61,9 +57,11 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ CHROME, FF, IE11 })
-    @Alerts({ "[object CSSImportRule]", "foo.css",
-        "all", "0", "[object CSSStyleSheet]" })
+    @Alerts(DEFAULT = { "[object CSSImportRule]", "foo.css",
+                "[object MediaList]", "0", "[object CSSStyleSheet]" },
+            FF31 = { "[object CSSImportRule]", "foo.css", "", "0", "[object CSSStyleSheet]" },
+            IE11 = { "[object CSSImportRule]", "foo.css", "all", "0", "[object CSSStyleSheet]" },
+            IE8 = "cssRules undefined")
     // IE8 does not support CSSStyleSheet.cssRules
     public void getImportFromCssRulesCollection_relative() throws Exception {
         final URL urlPage = new URL(URL_FIRST, "/dir1/dir2/foo.html");
@@ -77,20 +75,22 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             = "<html><body>\n"
             + "<style>@import url('" + cssRef + "');</style><div id='d'>foo</div>\n"
             + "<script>\n"
-            + "var r = document.styleSheets.item(0).cssRules[0];\n"
-            + "alert(r);\n"
-            + "alert(r.href);\n"
-            + "alert(r.media);\n"
-            + "alert(r.media.length);\n"
-            + "alert(r.styleSheet);\n"
+            + "  var item = document.styleSheets.item(0);\n"
+            + "  if (item.cssRules) {\n"
+            + "    var r = item.cssRules[0];\n"
+            + "    alert(r);\n"
+            + "    alert(r.href);\n"
+            + "    alert(r.media);\n"
+            + "    alert(r.media.length);\n"
+            + "    alert(r.styleSheet);\n"
+            + "  } else {\n"
+            + "    alert('cssRules undefined');\n"
+            + "  }\n"
             + "</script>\n"
             + "</body></html>";
         final String css = "#d { color: green }";
 
         getMockWebConnection().setResponse(cssUrl, css, "text/css");
-
-        setExpectedAlerts("[object CSSImportRule]", cssRef,
-            "[object MediaList]", "0", "[object CSSStyleSheet]");
         loadPageWithAlerts2(html, pageUrl);
     }
 
