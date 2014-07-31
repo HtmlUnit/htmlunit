@@ -72,9 +72,11 @@ public final class JQueryExtractor {
      */
     public static void main(final String[] args) throws Exception {
         final String version = "1.8.2";
-        final File expectationsDir =
-                new File("src/test/resources/libraries/jQuery/" + version + "/expectations");
-        generateTestCases(expectationsDir);
+        final String browser = "ff31";
+        final File baseDir = new File("src/test/resources/libraries/jQuery/" + version + "/expectations");
+
+        extractExpectations(new File(baseDir, browser + ".out"), new File(baseDir, "results." + browser + ".txt"));
+        generateTestCases(baseDir);
     }
 
     /**

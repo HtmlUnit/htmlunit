@@ -90,7 +90,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "BODY", "1", "false" },
-            FF24 = { "BODY", "BODY", "1", "undefined" },
+            FF = { "BODY", "BODY", "1", "undefined" },
             IE8 = "exception")
     public void getters1() throws Exception {
         final String script = "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, false);"
@@ -103,9 +103,9 @@ public class TreeWalkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "A", "A", "4294967295", "true" },
-            FF24 = { "A", "A", "4294967295", "undefined" },
-            IE = "exception",
+    @Alerts(DEFAULT = { "A", "A", "4294967295", "undefined" },
+            CHROME = { "A", "A", "4294967295", "false" },
+            IE8 = "exception",
             IE11 = { "A", "A", "-1", "true" })
     @NotYetImplemented(IE11)
     // The spec states it is an unsigned long.
@@ -122,7 +122,8 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "DIV", "1", "true" },
-            FF24 = { "BODY", "DIV", "1", "undefined" },
+            CHROME = { "BODY", "DIV", "1", "false" },
+            FF = { "BODY", "DIV", "1", "undefined" },
             IE8 = "exception")
     public void firstChild() throws Exception {
         final String script =
@@ -138,7 +139,8 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "SPAN", "1", "true" },
-            FF24 = { "BODY", "SPAN", "1", "undefined" },
+            CHROME = { "BODY", "SPAN", "1", "false" },
+            FF = { "BODY", "SPAN", "1", "undefined" },
             IE8 = "exception")
     public void firstChild2() throws Exception {
         final String script =
@@ -155,7 +157,8 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "P", "1", "true" },
-            FF24 = { "BODY", "P", "1", "undefined" },
+            CHROME = { "BODY", "P", "1", "false" },
+            FF = { "BODY", "P", "1", "undefined" },
             IE8 = "exception")
     public void lastChild() throws Exception {
         final String script =
@@ -171,7 +174,8 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "SPAN", "1", "true" },
-            FF24 = { "BODY", "SPAN", "1", "undefined" },
+            CHROME = { "BODY", "SPAN", "1", "false" },
+            FF = { "BODY", "SPAN", "1", "undefined" },
             IE8 = "exception")
     public void lastChild2() throws Exception {
         final String script =
@@ -188,7 +192,8 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "BODY", "1", "true", "null" },
-            FF24 = { "BODY", "BODY", "1", "undefined", "null" },
+            CHROME = { "BODY", "BODY", "1", "false", "null" },
+            FF = { "BODY", "BODY", "1", "undefined", "null" },
             IE8 = "exception")
     public void parentNode() throws Exception {
         final String script =
@@ -206,7 +211,8 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "DIV", "1", "true" },
-            FF24 = { "BODY", "DIV", "1", "undefined" },
+            CHROME = { "BODY", "DIV", "1", "false" },
+            FF = { "BODY", "DIV", "1", "undefined" },
             IE8 = "exception")
     public void parentNode2() throws Exception {
         final String script =
@@ -223,7 +229,8 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "P", "1", "true", "null" },
-            FF24 = { "BODY", "P", "1", "undefined", "null" },
+            CHROME = { "BODY", "P", "1", "false", "null" },
+            FF = { "BODY", "P", "1", "undefined", "null" },
             IE8 = "exception")
     public void siblings() throws Exception {
         final String script =
@@ -241,7 +248,8 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "DIV", "1", "true", "null" },
-            FF24 = { "BODY", "DIV", "1", "undefined", "null" },
+            CHROME = { "BODY", "DIV", "1", "false", "null" },
+            FF = { "BODY", "DIV", "1", "undefined", "null" },
             IE8 = "exception")
     public void siblings2() throws Exception {
         final String script1 =

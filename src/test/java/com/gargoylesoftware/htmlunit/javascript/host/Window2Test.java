@@ -257,7 +257,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object Node]", "[object Element]" },
-            FF24 = { "function Node() {\n    [native code]\n}", "function Element() {\n    [native code]\n}" },
+            FF = { "function Node() {\n    [native code]\n}", "function Element() {\n    [native code]\n}" },
             IE8 = { "undefined", "undefined" })
     @NotYetImplemented(FF24)
     public void windowProperties() throws Exception {
@@ -564,11 +564,9 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "[object Window]", "[object Window] (true)", "exception", "null (true)", "null (false)",
-                "null (false)", "null (false)", "null (false)" },
-            FF24 = { "[object Window]", "[object Window] (true)", "1234 (true)", "null (true)", "undefined (true)",
+    @Alerts(FF = { "[object Window]", "[object Window] (true)", "1234 (true)", "null (true)", "undefined (true)",
                     "[object Window] (true)", "[object Window] (true)", "[object Window] (true)" },
-            IE = { "[object]", "[object] (true)", "1234 (true)", "null (true)", "undefined (true)", "[object] (true)",
+            IE8 = { "[object]", "[object] (true)", "1234 (true)", "null (true)", "undefined (true)", "[object] (true)",
                 "[object] (true)", "[object] (true)" },
             IE11 = { "[object Window]", "[object Window] (true)", "exception", "null (true)", "undefined (true)",
                 "[object Window] (true)", "[object Window] (true)", "[object Window] (true)" })
@@ -630,7 +628,8 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Browsers({ FF, IE11 })
-    @Alerts(FF = { "true", "true", "true", "false", "true", "true", "true" },
+    @Alerts(FF24 = { "true", "true", "true", "false", "true", "true", "true" },
+            FF31 = { "true", "true", "false", "false", "true", "true", "true" },
             IE11 = { "true", "true", "false", "true", "true", "true", "true" })
     public void heightsAndWidths() throws Exception {
         final String html
@@ -656,6 +655,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "605", "1256", "705", "1256" },
             FF24 = { "657", "1264", "641", "1248" },
+            FF31 = { "674", "1264", "658", "1248" },
             IE11 = { "705", "1256", "688", "1239" })
     @NotYetImplemented({ FF24, IE11 })
     // TODO width and height calculation needs to be reworked in HtmlUnit
@@ -688,7 +688,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1210" },
+    @Alerts(FF31 = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1240" },
             FF24 = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1206" },
             IE = { "0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()" })
     @NotYetImplemented(FF24)
@@ -795,7 +795,8 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "8", "91", "0" },
+    @Alerts(FF24 = { "8", "91", "0" },
+            FF31 = { "8", "94", "0" },
             IE = { "undefined", "undefined", "undefined" })
     public void mozInnerScreenX() throws Exception {
         final String html
@@ -965,6 +966,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "function", "3" },
+            FF31 = { "null", "function", "5" },
             IE11 = { "null", "function", "4" })
     public void onError() throws Exception {
         final String html
@@ -1185,7 +1187,9 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "type: message", "bubbles: false", "cancelable: true", "data: hello",
+    @Alerts(FF24 = { "type: message", "bubbles: false", "cancelable: true", "data: hello",
+                "origin: ", "source: [object Window]", "lastEventId: " },
+            FF31 = { "type: message", "bubbles: false", "cancelable: false", "data: hello",
                 "origin: ", "source: [object Window]", "lastEventId: " },
             CHROME = { "type: message", "bubbles: false", "cancelable: false", "data: hello",
                 "origin: ", "source: [object Window]", "lastEventId: " },

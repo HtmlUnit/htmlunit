@@ -675,7 +675,8 @@ public class HTMLElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE8 = "0")
+            IE8 = "0",
+            FF31 = "2")
     @NotYetImplemented(IE8)
     public void elementClosesItself_keygen() throws Exception {
         loadPageWithAlerts2(elementClosesItself("keygen"));
