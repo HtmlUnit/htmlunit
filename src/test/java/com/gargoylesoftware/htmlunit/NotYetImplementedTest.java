@@ -165,6 +165,7 @@ public class NotYetImplementedTest {
         int countIE8 = 0;
         int countIE11 = 0;
         int countFF24 = 0;
+        int countFF31 = 0;
         for (final String entry : entries_) {
             final String[] values = entry.split(";");
             final String file = values[0];
@@ -208,9 +209,8 @@ public class NotYetImplementedTest {
                 countIE11++;
             }
             if (!browser.contains("IE8")
-                    && !browser.contains("IE8")
-                    && !browser.contains("IE9")
-                    && browser.contains("IE11")) {
+                    && !browser.contains("IE11")
+                    && browser.contains("IE")) {
                 countIE8++;
                 countIE11++;
             }
@@ -218,14 +218,20 @@ public class NotYetImplementedTest {
             if (browser.contains("FF24")) {
                 countFF24++;
             }
+            if (browser.contains("FF31")) {
+                countFF31++;
+            }
             if (!browser.contains("FF24")
+                    && !browser.contains("FF31")
                     && browser.contains("FF")) {
                 countFF24++;
+                countFF31++;
             }
             if (browser.contains("All")) {
                 countIE8++;
                 countIE11++;
                 countFF24++;
+                countFF31++;
             }
 
         }
@@ -252,6 +258,12 @@ public class NotYetImplementedTest {
         overview.append("    <td class='numeric'>").append(Integer.toString(countFF24)).append("</td>\n");
         overview.append("    <td>for FF24</td>\n");
         overview.append("  </tr>\n");
+
+        overview.append("  <tr>\n");
+        overview.append("    <td class='numeric'>").append(Integer.toString(countFF31)).append("</td>\n");
+        overview.append("    <td>for FF31</td>\n");
+        overview.append("  </tr>\n");
+
         overview.append("</table>\n");
 
         builder.insert(overviewPos, overview);

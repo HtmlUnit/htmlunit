@@ -68,26 +68,32 @@ public class PropertiesTest extends SimpleWebTestCase {
     private static List<String> IE8_;
     private static List<String> IE11_;
     private static List<String> FF24_;
+    private static List<String> FF31_;
 
     private static List<String> IE8_SIMULATED_;
     private static List<String> IE11_SIMULATED_;
     private static List<String> FF24_SIMULATED_;
+    private static List<String> FF31_SIMULATED_;
 
     private static DefaultCategoryDataset CATEGORY_DATASET_IE8_ = new DefaultCategoryDataset();
     private static DefaultCategoryDataset CATEGORY_DATASET_IE11_ = new DefaultCategoryDataset();
     private static DefaultCategoryDataset CATEGORY_DATASET_FF24_ = new DefaultCategoryDataset();
+    private static DefaultCategoryDataset CATEGORY_DATASET_FF31_ = new DefaultCategoryDataset();
 
     private static StringBuilder IE8_HTML_ = new StringBuilder();
     private static StringBuilder IE11_HTML_ = new StringBuilder();
     private static StringBuilder FF24_HTML_ = new StringBuilder();
+    private static StringBuilder FF31_HTML_ = new StringBuilder();
 
     private static MutableInt IE8_ACTUAL_PROPERTY_COUNT_ = new MutableInt();
     private static MutableInt IE11_ACTUAL_PROPERTY_COUNT_ = new MutableInt();
     private static MutableInt FF24_ACTUAL_PROPERTY_COUNT_ = new MutableInt();
+    private static MutableInt FF31_ACTUAL_PROPERTY_COUNT_ = new MutableInt();
 
     private static MutableInt IE8_REMAINING_PROPERTY_COUNT_ = new MutableInt();
     private static MutableInt IE11_REMAINING_PROPERTY_COUNT_ = new MutableInt();
     private static MutableInt FF24_REMAINING_PROPERTY_COUNT_ = new MutableInt();
+    private static MutableInt FF31_REMAINING_PROPERTY_COUNT_ = new MutableInt();
 
     private final String name_;
     private final BrowserVersion browserVersion_;
@@ -108,20 +114,25 @@ public class PropertiesTest extends SimpleWebTestCase {
         IE8_ = getProperties(BrowserVersion.INTERNET_EXPLORER_8);
         IE11_ = getProperties(BrowserVersion.INTERNET_EXPLORER_11);
         FF24_ = getProperties(BrowserVersion.FIREFOX_24);
+        FF31_ = getProperties(BrowserVersion.FIREFOX_24);
         Assert.assertEquals(IE8_.size(), IE8_.size());
         Assert.assertEquals(IE8_.size(), IE11_.size());
+        Assert.assertEquals(IE8_.size(), FF24_.size());
         Assert.assertEquals(IE8_.size(), FF24_.size());
         IE8_SIMULATED_ = getSimulatedProperties(BrowserVersion.INTERNET_EXPLORER_8);
         IE11_SIMULATED_ = getSimulatedProperties(BrowserVersion.INTERNET_EXPLORER_11);
         FF24_SIMULATED_ = getSimulatedProperties(BrowserVersion.FIREFOX_24);
+        FF31_SIMULATED_ = getSimulatedProperties(BrowserVersion.FIREFOX_24);
         Assert.assertEquals(IE8_SIMULATED_.size(), IE11_SIMULATED_.size());
         Assert.assertEquals(IE8_SIMULATED_.size(), FF24_SIMULATED_.size());
+        Assert.assertEquals(IE8_SIMULATED_.size(), FF31_SIMULATED_.size());
         final Collection<Object[]> list = new ArrayList<Object[]>();
         for (final String line : IE8_) {
             final String name = line.substring(0, line.indexOf(':'));
             list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_8});
             list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_11});
             list.add(new Object[] {name, BrowserVersion.FIREFOX_24});
+            list.add(new Object[] {name, BrowserVersion.FIREFOX_31});
         }
         return list;
     }
@@ -185,6 +196,14 @@ public class PropertiesTest extends SimpleWebTestCase {
             detailsHtml = FF24_HTML_;
             actualPropertyCount = FF24_ACTUAL_PROPERTY_COUNT_;
             remainingPropertyCount = FF24_REMAINING_PROPERTY_COUNT_;
+        }
+        else if (browserVersion_ == BrowserVersion.FIREFOX_31) {
+            realList = FF31_;
+            simulatedList = FF31_SIMULATED_;
+            dataset = CATEGORY_DATASET_FF31_;
+            detailsHtml = FF31_HTML_;
+            actualPropertyCount = FF31_ACTUAL_PROPERTY_COUNT_;
+            remainingPropertyCount = FF31_REMAINING_PROPERTY_COUNT_;
         }
         else {
             fail("Unknown BrowserVersion " + browserVersion_);

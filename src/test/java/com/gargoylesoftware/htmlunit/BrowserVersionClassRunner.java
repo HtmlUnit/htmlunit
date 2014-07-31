@@ -80,6 +80,9 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                 else if (browserVersion_ == BrowserVersion.FIREFOX_24) {
                     expectedAlerts = firstDefined(alerts.FF24(), alerts.FF(), alerts.DEFAULT());
                 }
+                else if (browserVersion_ == BrowserVersion.FIREFOX_31) {
+                    expectedAlerts = firstDefined(alerts.FF31(), alerts.FF(), alerts.DEFAULT());
+                }
                 else if (browserVersion_ == BrowserVersion.CHROME) {
                     expectedAlerts = firstDefined(alerts.CHROME(), alerts.DEFAULT());
                 }
