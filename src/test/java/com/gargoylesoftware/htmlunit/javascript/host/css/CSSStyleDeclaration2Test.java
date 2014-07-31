@@ -114,6 +114,11 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
                     + "minWidth-error: minWidth-error: outlineWidth-error: outlineWidth-error: outlineWidth-error: "
                     + "textIndent-error: textIndent-error: textIndent-error: verticalAlign-error: verticalAlign-error: "
                     + "verticalAlign-",
+            FF31 = "error: maxHeight-error: maxHeight-error: maxHeight-error: maxWidth-error: maxWidth-error: "
+                    + "maxWidth-error: minHeight-error: minHeight-error: minHeight-error: minWidth-error: "
+                    + "minWidth-error: minWidth-error: outlineWidth-error: outlineWidth-error: outlineWidth-error: "
+                    + "textIndent-error: textIndent-error: textIndent-error: verticalAlign-error: verticalAlign-error: "
+                    + "verticalAlign-",
             IE = "success")
     @NotYetImplemented(FF24)
     public void width_like_properties() throws Exception {
@@ -159,13 +164,16 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
         final String expected = loadExpectation("CSSStyleDeclaration2Test.properties", ".txt");
 
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html>\n"
+            + "<head><title>Tester</title>\n"
+            + "<script>\n"
             + "function test() {\n"
             + "  var style = document.getElementById('myDiv').style;\n"
             + "  var array = [];\n"
             + "  for (var i in style) {\n"
-            + "    if (eval('style.' + i) == '')\n"
-            + "      array.push(i);\n"
+            + "    try {\n"
+            + "      if (eval('style.' + i) == '') { array.push(i); }\n"
+            + "    } catch(e) {}\n" // ignore strange properties like '@@iterator'
             + "  }\n"
             + "  array.sort();\n"
             + "  document.getElementById('myTextarea').value = array.join('\\n');\n"
@@ -192,13 +200,16 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
         final String expected = loadExpectation("CSSStyleDeclaration2Test.properties2", ".txt");
 
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html>\n"
+            + "<head><title>Tester</title>\n"
+            + "<script>\n"
             + "function test() {\n"
             + "  var style = document.getElementById('myDiv').style;\n"
             + "  var array = [];\n"
             + "  for (var i in style) {\n"
-            + "    if (eval('style.' + i) === '')\n"
-            + "      array.push(i);\n"
+            + "    try {\n"
+            + "      if (eval('style.' + i) === '') { array.push(i); }\n"
+            + "    } catch(e) {}\n" // ignore strange properties like '@@iterator'
             + "  }\n"
             + "  array.sort();\n"
             + "  document.getElementById('myTextarea').value = array.join('\\n');\n"
