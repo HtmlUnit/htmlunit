@@ -78,6 +78,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "ellipse", "getLineDash",
                 "removeHitRegion", "scrollPathIntoView", "setLineDash", "33 methods" },
+            FF31 = { "addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "ellipse",
+                    "removeHitRegion", "scrollPathIntoView", "35 methods" },
             IE8 = "exception",
             IE11 = { "addHitRegion", "drawCustomFocusRing", "drawSystemFocusRing", "ellipse", "removeHitRegion",
                 "scrollPathIntoView", "35 methods" })

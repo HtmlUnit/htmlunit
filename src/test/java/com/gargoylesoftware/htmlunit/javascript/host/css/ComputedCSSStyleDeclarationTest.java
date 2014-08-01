@@ -605,7 +605,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "inline", "inline", "inline", "block", "list-item" },
-            FF24 = { "inline", "inline-block", "inline", "block", "list-item" },
+            FF = { "inline", "inline-block", "inline", "block", "list-item" },
             IE = { "inline", "inline", "inline", "inline", "list-item" })
     public void defaultDisplayValues_KL() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
@@ -1020,8 +1020,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "1256px", "auto" },
-            FF24 = { "1248px", "auto" },
+    @Alerts(FF = { "1248px", "auto" },
             IE = { "auto", "auto" },
             IE11 = { "1240px", "auto" })
     @NotYetImplemented({ FF24, IE11 })

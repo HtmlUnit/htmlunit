@@ -37,8 +37,7 @@ public class CSSValueTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = { "[object CSSValue]", "0123" },
-            FF24 = { "function CSSValue() {\n    [native code]\n}", "0123" },
+    @Alerts(FF = { "function CSSValue() {\n    [native code]\n}", "0123" },
             IE = { "exception" })
     @NotYetImplemented(FF24)
     public void test() throws Exception {
