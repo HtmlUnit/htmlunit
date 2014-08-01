@@ -72,7 +72,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "black", "pink" })
+    @Alerts(DEFAULT = "color: pink; background: blue; foo: bar;",
+            FF = "color: pink; background: none repeat scroll 0% 0% blue;",
+            IE11 = "background: blue; color: pink; foo: bar;")
     @NotYetImplemented({ FF24, IE11 })
     public void style_MultipleCssAttributes() throws Exception {
         final String html
@@ -86,18 +88,11 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "<body onload='doTest()'>\n"
             + "<div id='div1' style='color: black;background:blue;foo:bar'>foo</div></body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
-        final String expected;
-        if ("FF24".equals(getBrowserVersion().getNickname())) {
-            expected = "color: pink; background: none repeat scroll 0% 0% blue;";
-        }
-        else if ("IE11".equals(getBrowserVersion().getNickname())) {
-            expected = "background: blue; color: pink; foo: bar;";
-        }
-        else {
-            expected = "color: pink; background: blue; foo: bar;";
-        }
-        assertEquals(expected, driver.findElement(By.id("div1")).getAttribute("style"));
+        // final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html, URL_FIRST);
+        verifyAlerts(DEFAULT_WAIT_TIME, new String[] {"black", "pink"}, driver);
+
+        assertEquals(getExpectedAlerts()[0], driver.findElement(By.id("div1")).getAttribute("style"));
     }
 
     /**
@@ -1476,7 +1471,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "width", "" }, IE8 = { "undefined", "width", "" })
+    @Alerts(DEFAULT = { "1", "width", "" },
+            FF31 = { "1", "width", "undefined" },
+            IE8 = { "undefined", "width", "" })
     public void length() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

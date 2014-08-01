@@ -70,6 +70,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object BeforeUnloadEvent]", "", "true", "true", "" },
+            FF31 = { "[object BeforeUnloadEvent]", "", "false", "false", "" },
             CHROME = { "[object BeforeUnloadEvent]", "beforeunload", "false", "true", "" },
             IE = "exception")
     public void create_createEvent() throws Exception {

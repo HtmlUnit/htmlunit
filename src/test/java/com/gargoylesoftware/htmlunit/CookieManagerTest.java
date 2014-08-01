@@ -53,7 +53,11 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
 @RunWith(BrowserRunner.class)
 public class CookieManagerTest extends WebDriverTestCase {
     /** HTML code with JS code <code>alert(document.cookie)</code>. */
-    public static final String HTML_ALERT_COOKIE = "<html><head><script>\nalert(document.cookie);\n</script></head>"
+    public static final String HTML_ALERT_COOKIE = "<html><head>\n"
+        + "<script>\n"
+        + "alert(document.cookie);\n"
+        + "</script>\n"
+        + "</head>"
         + "<body></body></html>";
 
     /**
@@ -465,6 +469,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "first=1; second=2",
+            FF31 = "second=2; first=1",
             IE11 = "first=1")
     public void setCookieSubPath() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
@@ -484,6 +489,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "first=1; second=2",
+            FF31 = "second=2; first=1",
             IE11 = "first=1")
     public void setCookieDifferentPath() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
@@ -505,7 +511,8 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "first=1; second=2")
+    @Alerts(DEFAULT = "first=1; second=2",
+            FF31 = "second=2; first=1")
     public void setCookieDifferentPathSlashAtEnd() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; path=/foo"));

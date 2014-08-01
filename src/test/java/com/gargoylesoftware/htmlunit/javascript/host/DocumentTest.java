@@ -1579,7 +1579,7 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "object", "[object Event]", "false" },
-            FF = { "true", "object", "[object Event]", "true" },
+            FF24 = { "true", "object", "[object Event]", "true" },
             IE8 = "exception")
     public void createEvent_FF_Event() throws Exception {
         createEvent_FF("Event");
@@ -1590,7 +1590,7 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "object", "[object Event]", "false" },
-            FF = { "true", "object", "[object Event]", "true" },
+            FF24 = { "true", "object", "[object Event]", "true" },
             IE8 = "exception")
     public void createEvent_FF_Events() throws Exception {
         createEvent_FF("Events");
@@ -1601,7 +1601,7 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "object", "[object Event]", "false" },
-            FF = { "true", "object", "[object Event]", "true" },
+            FF24 = { "true", "object", "[object Event]", "true" },
             IE8 = "exception")
     public void createEvent_FF_HTMLEvents() throws Exception {
         createEvent_FF("HTMLEvents");

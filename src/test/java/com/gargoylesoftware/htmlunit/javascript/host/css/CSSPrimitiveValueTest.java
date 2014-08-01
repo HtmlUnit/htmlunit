@@ -39,8 +39,7 @@ public class CSSPrimitiveValueTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = { "[object CSSPrimitiveValue]", "012345678910111213141516171819202122232425" },
-            FF24 = { "function CSSPrimitiveValue() {\n    [native code]\n}",
+    @Alerts(FF = { "function CSSPrimitiveValue() {\n    [native code]\n}",
                     "012345678910111213141516171819202122232425" },
             IE = { "exception" })
     @NotYetImplemented(FF24)

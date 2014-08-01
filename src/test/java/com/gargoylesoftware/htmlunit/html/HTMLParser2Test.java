@@ -905,6 +905,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "1", "1", "1", "1", "1" },
+            FF31 = { "1", "0", "1", "1", "0", "1" },
             IE11 = { "1", "0", "1", "1", "0", "1" })
     @NotYetImplemented({ FF, IE11 })
     public void childNodes_isindex() throws Exception {

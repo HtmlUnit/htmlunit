@@ -99,6 +99,7 @@ public class HashChangeEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object HashChangeEvent]", "", "true", "true", "", "" },
+            FF31 = { "[object HashChangeEvent]", "", "false", "false", "", "" },
             CHROME = { "[object HashChangeEvent]", "", "false", "false", "", "" },
             IE = "exception")
     public void create_createEvent() throws Exception {
