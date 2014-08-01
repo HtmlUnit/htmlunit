@@ -155,6 +155,7 @@ public class YuiTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "test_createlink",
+            FF = { "test_regex", "test_createlink" },
             IE11 = { "test_bold", "test_createlink" })
     @NotYetImplemented
     public void editor() throws Exception {
