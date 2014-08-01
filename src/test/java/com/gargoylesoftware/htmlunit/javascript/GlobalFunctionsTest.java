@@ -36,7 +36,7 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
      * Test for bug <a href="http://sourceforge.net/support/tracker.php?aid=2815674">2815674</a>
      * due to Rhino bug <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=501972">501972</a>
      * and for bug <a href="http://sourceforge.net/support/tracker.php?aid=2903514">2903514</a>
-     * due to Reno bug <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=531436">531436</a>.
+     * due to Rhino bug <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=531436">531436</a>.
      * @throws Exception if the test fails
      */
     @Test
