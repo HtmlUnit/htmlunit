@@ -40,7 +40,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object SVGMatrix]",
-            FF24 = "function SVGMatrix() {\n    [native code]\n}",
+            FF = "function SVGMatrix() {\n    [native code]\n}",
             IE8 = "undefined")
     @NotYetImplemented(FF24)
     public void simpleScriptable() throws Exception {
