@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Marc Guillemot
  * @author Ronald Brill
  */
-@JsxClass(domClass = HtmlMeter.class, browsers = { @WebBrowser(value = FF), @WebBrowser(CHROME) })
+@JsxClass(domClass = HtmlMeter.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
 public class HTMLMeterElement extends HTMLElement {
 
     /**

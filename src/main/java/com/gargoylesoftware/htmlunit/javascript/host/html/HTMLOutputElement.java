@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ronald Brill
  */
-@JsxClass(domClass = HtmlOutput.class, browsers = { @WebBrowser(value = FF), @WebBrowser(CHROME) })
+@JsxClass(domClass = HtmlOutput.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
 public class HTMLOutputElement extends HTMLElement {
     // nothing so far
 }

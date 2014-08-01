@@ -92,7 +92,7 @@ public enum BrowserVersionFeatures {
     CSS_IMAGE_URL_QUOTED,
 
     /** The default value of the display property for the 'keygen' tag is 'inline-block' instead of the default one. */
-    @BrowserFeature(@WebBrowser(value = FF))
+    @BrowserFeature(@WebBrowser(FF))
     CSS_KEYGEN_DISPLAY_INLINE_BLOCK,
 
     /** The default value of the display property for the 'noscript' tag is 'inline' instead of the default one. */
@@ -127,7 +127,7 @@ public enum BrowserVersionFeatures {
      * you use CSS to attach a script to a specific element in order to implement
      * DHTML (Dynamic HTML) components.
      */
-    @BrowserFeature(@WebBrowser(value = IE))
+    @BrowserFeature(@WebBrowser(IE))
     CSS_SUPPORTS_BEHAVIOR_PROPERTY,
 
     /** Default is 'none'. */
@@ -406,7 +406,7 @@ public enum BrowserVersionFeatures {
     HTMLDOCUMENT_CHARSET_LOWERCASE,
 
     /** Do a normalization of the charset names. */
-    @BrowserFeature(@WebBrowser(value = FF))
+    @BrowserFeature(@WebBrowser(FF))
     HTMLDOCUMENT_CHARSET_NORMALIZED,
 
     /** Do document.bgColor/.alinkColor/.vlinkColor/.linkColor have value by default. */
@@ -645,7 +645,7 @@ public enum BrowserVersionFeatures {
     JS_ATTR_FIRST_LAST_CHILD_RETURNS_NULL,
 
     /** HTMLBGSoundElement reported as HTMLUnknownElement. */
-    @BrowserFeature(@WebBrowser(value = FF))
+    @BrowserFeature(@WebBrowser(FF))
     JS_BGSOUND_AS_UNKNOWN,
 
     /** Indicates that HTMLBlockElements returning 'HTMLElement'
@@ -767,7 +767,7 @@ public enum BrowserVersionFeatures {
     JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX,
 
     /** Javascript function document.createElement accepts only tag names. */
-    @BrowserFeature({ @WebBrowser(value = FF), @WebBrowser(CHROME),
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME),
         @WebBrowser(value = IE, minVersion = 11) })
     JS_DOCUMENT_CREATE_ELEMENT_STRICT,
 
@@ -808,7 +808,7 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_CORE_1,
 
     /** If document.implementation.hasFeature() supports 'CSS2 1.0'. */
-    @BrowserFeature(@WebBrowser(value = FF))
+    @BrowserFeature(@WebBrowser(FF))
     JS_DOMIMPLEMENTATION_FEATURE_CSS2_1,
 
     /** If document.implementation.hasFeature() supports 'CSS2 2.0'. */
@@ -816,23 +816,23 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_CSS2_2,
 
     /** If document.implementation.hasFeature() supports 'CSS2 3.0'. */
-    @BrowserFeature(@WebBrowser(value = FF))
+    @BrowserFeature(@WebBrowser(FF))
     JS_DOMIMPLEMENTATION_FEATURE_CSS2_3,
 
     /** If document.implementation.hasFeature() supports 'CSS3 1.0'. */
-    @BrowserFeature(@WebBrowser(value = FF))
+    @BrowserFeature(@WebBrowser(FF))
     JS_DOMIMPLEMENTATION_FEATURE_CSS3_1,
 
     /** If document.implementation.hasFeature() supports 'CSS3 2.0'. */
-    @BrowserFeature(@WebBrowser(value = FF))
+    @BrowserFeature(@WebBrowser(FF))
     JS_DOMIMPLEMENTATION_FEATURE_CSS3_2,
 
     /** If document.implementation.hasFeature() supports 'CSS3 3.0'. */
-    @BrowserFeature(@WebBrowser(value = FF))
+    @BrowserFeature(@WebBrowser(FF))
     JS_DOMIMPLEMENTATION_FEATURE_CSS3_3,
 
     /** If document.implementation.hasFeature() supports 'CSS 1.0'. */
-    @BrowserFeature(@WebBrowser(value = FF))
+    @BrowserFeature(@WebBrowser(FF))
     JS_DOMIMPLEMENTATION_FEATURE_CSS_1,
 
     /** If document.implementation.hasFeature() supports 'CSS 2.0'. */
@@ -840,7 +840,7 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_CSS_2,
 
     /** If document.implementation.hasFeature() supports 'CSS 3.0'. */
-    @BrowserFeature(@WebBrowser(value = FF))
+    @BrowserFeature(@WebBrowser(FF))
     JS_DOMIMPLEMENTATION_FEATURE_CSS_3,
 
     /** If document.implementation.hasFeature() supports 'Events 3.0'. */
@@ -848,7 +848,7 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3,
 
     /** If document.implementation.hasFeature() supports 'HTML 3.0'. */
-    @BrowserFeature(@WebBrowser(value = FF))
+    @BrowserFeature(@WebBrowser(FF))
     JS_DOMIMPLEMENTATION_FEATURE_HTML_3,
 
     /** If document.implementation.hasFeature() supports 'MutationEvents 2.0'. */
@@ -876,7 +876,7 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_XHTML_1,
 
     /** If document.implementation.hasFeature() supports 'XML 3.0'. */
-    @BrowserFeature(@WebBrowser(value = FF))
+    @BrowserFeature(@WebBrowser(FF))
     JS_DOMIMPLEMENTATION_FEATURE_XML_3,
 
     /** If document.implementation.hasFeature() supports 'XPath 3.0'. */
@@ -932,7 +932,7 @@ public enum BrowserVersionFeatures {
     JS_ENUMERATOR_CONSTRUCTOR_THROWS,
 
     /** Indicates that for(x in y) should enumerate the numbers first. */
-    @BrowserFeature({ @WebBrowser(value = FF), @WebBrowser(CHROME),
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME),
         @WebBrowser(value = IE, minVersion = 11) })
     JS_ENUM_NUMBERS_FIRST,
 
@@ -1021,7 +1021,7 @@ public enum BrowserVersionFeatures {
     JS_GET_ELEMENTS_BY_NAME_EMPTY_RETURNS_NOTHING,
 
     /** Javascript function getElementsByName returns an empty collection if called with null. */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF) })
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF) })
     JS_GET_ELEMENTS_BY_NAME_NULL_RETURNS_NOTHING,
 
     /** Javascript function getElementsByTagName does not support namespaces. */
@@ -1239,7 +1239,7 @@ public enum BrowserVersionFeatures {
     JS_PARENT_PROTO_PROPERTIES,
 
     /** Indicates that parseInt() should have radix 10 by default. */
-    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(value = FF),
+    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF),
         @WebBrowser(CHROME) })
     JS_PARSE_INT_RADIX_10,
 
@@ -1336,7 +1336,7 @@ public enum BrowserVersionFeatures {
     JS_SELECT_OPTIONS_HAS_SELECT_CLASS_NAME,
 
     /** Ignore negative value when setting the length (FF24). */
-    @BrowserFeature(@WebBrowser(value = FF))
+    @BrowserFeature(@WebBrowser(FF))
     JS_SELECT_OPTIONS_IGNORE_NEGATIVE_LENGTH,
 
     /** Indicates that select.options returns null if requested index is outside (IE). */
@@ -1519,7 +1519,7 @@ public enum BrowserVersionFeatures {
     /**
      * Difference of window.outer/inner height is 57.
      */
-    @BrowserFeature(@WebBrowser(value = IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_57,
 
     /** Window.postMessage is sent when the targetOrigin port is different than the current port. */
@@ -1587,7 +1587,7 @@ public enum BrowserVersionFeatures {
      * Indicates that the browser considers the meta X-UA-Compatible when determining
      * compatibility/quirks mode.
      */
-    @BrowserFeature(@WebBrowser(value = IE))
+    @BrowserFeature(@WebBrowser(IE))
     META_X_UA_COMPATIBLE,
 
     /** If true, then silently ignore element.appendChild(element). */
@@ -1646,7 +1646,7 @@ public enum BrowserVersionFeatures {
     SET_READONLY_PROPERTIES,
 
     /** Indicates that string.contains() is supported. */
-    @BrowserFeature(@WebBrowser(value = FF))
+    @BrowserFeature(@WebBrowser(FF))
     STRING_CONTAINS,
 
     /** Indicates that string.trim() is supported. */
@@ -1797,7 +1797,7 @@ public enum BrowserVersionFeatures {
      * Indicates that the property <code>withCredentials</code> is not writable for sync requests.
      * Setting the property throws an exception.
      */
-    @BrowserFeature(@WebBrowser(value = FF))
+    @BrowserFeature(@WebBrowser(FF))
     XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION,
 
     /** Indicates that the 'SelectionNamespaces' property is supported by XPath expressions. */

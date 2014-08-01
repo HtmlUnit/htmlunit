@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ronald Brill
  */
-@JsxClass(domClass = HtmlTime.class, browsers = @WebBrowser(value = FF))
+@JsxClass(domClass = HtmlTime.class, browsers = @WebBrowser(FF))
 public class HTMLTimeElement extends HTMLElement {
 
     /**

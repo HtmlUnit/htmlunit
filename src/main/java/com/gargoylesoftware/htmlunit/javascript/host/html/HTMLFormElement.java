@@ -239,7 +239,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Returns the <tt>onsubmit</tt> event handler for this element.
      * @return the <tt>onsubmit</tt> event handler for this element
      */
-    @JsxGetter(@WebBrowser(value = IE))
+    @JsxGetter(@WebBrowser(IE))
     public Object getOnsubmit() {
         return getEventHandlerProp("onsubmit");
     }
@@ -248,7 +248,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Sets the <tt>onsubmit</tt> event handler for this element.
      * @param onsubmit the <tt>onsubmit</tt> event handler for this element
      */
-    @JsxSetter(@WebBrowser(value = IE))
+    @JsxSetter(@WebBrowser(IE))
     public void setOnsubmit(final Object onsubmit) {
         setEventHandlerProp("onsubmit", onsubmit);
     }

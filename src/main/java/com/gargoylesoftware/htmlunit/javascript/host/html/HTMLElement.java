@@ -2922,7 +2922,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Sets the <tt>onchange</tt> event handler for this element.
      * @param onchange the <tt>onchange</tt> event handler for this element
      */
-    @JsxSetter({ @WebBrowser(value = FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public void setOnchange(final Object onchange) {
         setEventHandlerProp("onchange", onchange);
     }
@@ -2931,7 +2931,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns the <tt>onchange</tt> event handler for this element.
      * @return the <tt>onchange</tt> event handler for this element
      */
-    @JsxGetter({ @WebBrowser(value = FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public Function getOnchange() {
         return getEventHandler("onchange");
     }
@@ -2940,7 +2940,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns the <tt>onsubmit</tt> event handler for this element.
      * @return the <tt>onsubmit</tt> event handler for this element
      */
-    @JsxGetter({ @WebBrowser(value = FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public Object getOnsubmit() {
         return getEventHandlerProp("onsubmit");
     }
@@ -2949,7 +2949,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Sets the <tt>onsubmit</tt> event handler for this element.
      * @param onsubmit the <tt>onsubmit</tt> event handler for this element
      */
-    @JsxSetter({ @WebBrowser(value = FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public void setOnsubmit(final Object onsubmit) {
         setEventHandlerProp("onsubmit", onsubmit);
     }

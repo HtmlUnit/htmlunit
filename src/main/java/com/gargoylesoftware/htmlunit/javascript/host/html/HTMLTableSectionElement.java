@@ -130,7 +130,7 @@ public class HTMLTableSectionElement extends RowContainer {
      * @return the value of the <tt>bgColor</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
-    @JsxGetter(@WebBrowser(value = IE))
+    @JsxGetter(@WebBrowser(IE))
     public String getBgColor() {
         return getDomNodeOrDie().getAttribute("bgColor");
     }
@@ -140,7 +140,7 @@ public class HTMLTableSectionElement extends RowContainer {
      * @param bgColor the value of the <tt>bgColor</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
-    @JsxSetter(@WebBrowser(value = IE))
+    @JsxSetter(@WebBrowser(IE))
     public void setBgColor(final String bgColor) {
         setColorAttribute("bgColor", bgColor);
     }
