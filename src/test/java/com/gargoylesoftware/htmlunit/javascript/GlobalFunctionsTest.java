@@ -36,7 +36,7 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
      * Test for bug <a href="http://sourceforge.net/support/tracker.php?aid=2815674">2815674</a>
      * due to Rhino bug <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=501972">501972</a>
      * and for bug <a href="http://sourceforge.net/support/tracker.php?aid=2903514">2903514</a>
-     * due to Rhino bug <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=531436">531436</a>.
+     * due to Reno bug <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=531436">531436</a>.
      * @throws Exception if the test fails
      */
     @Test
@@ -60,10 +60,8 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "1", "-2345", "1", "12", "NaN", "0", "1", "0", "0", "64", "0", "1", "8", "9", "100" },
-            CHROME = { "0", "1", "-2345", "1", "12", "NaN", "0", "1", "8", "9", "100", "0", "1", "8", "9", "100" },
-            FF = { "0", "1", "-2345", "1", "12", "NaN", "0", "1", "8", "9", "100", "0", "1", "8", "9", "100" },
-            IE11 = { "0", "1", "-2345", "1", "12", "NaN", "0", "1", "8", "9", "100", "0", "1", "8", "9", "100" })
+    @Alerts(DEFAULT = { "0", "1", "-2345", "1", "12", "NaN", "0", "1", "8", "9", "100", "0", "1", "8", "9", "100" },
+            IE8 = { "0", "1", "-2345", "1", "12", "NaN", "0", "1", "0", "0", "64", "0", "1", "8", "9", "100" })
     public void parseInt() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
