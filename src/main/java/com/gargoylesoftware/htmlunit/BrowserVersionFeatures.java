@@ -1048,6 +1048,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_HTML_GENERIC_ELEMENT_CLASS_NAME,
 
+    /** HTMLElement instead of HTMLUnknownElement for elements with hyphen ('-'). */
+    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 31), @WebBrowser(CHROME) })
+    JS_HTML_HYPHEN_ELEMENT_CLASS_NAME,
+
     /** IE ignores the last line containing uncommented. */
     @BrowserFeature(@WebBrowser(IE))
     JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED,

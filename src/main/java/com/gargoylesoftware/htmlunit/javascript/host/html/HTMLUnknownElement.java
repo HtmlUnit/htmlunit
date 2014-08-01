@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_112;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_HTML_GENERIC_ELEMENT_CLASS_NAME;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_HTML_HYPHEN_ELEMENT_CLASS_NAME;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -54,8 +55,14 @@ public class HTMLUnknownElement extends HTMLElement {
      */
     @Override
     public String getClassName() {
-        if (getWindow().getWebWindow() != null && getBrowserVersion().hasFeature(JS_HTML_GENERIC_ELEMENT_CLASS_NAME)) {
-            return "HTMLGenericElement";
+        if (getWindow().getWebWindow() != null) {
+            if (getBrowserVersion().hasFeature(JS_HTML_GENERIC_ELEMENT_CLASS_NAME)) {
+                return "HTMLGenericElement";
+            }
+            if (getTagName().indexOf('-') != -1
+                    && getBrowserVersion().hasFeature(JS_HTML_HYPHEN_ELEMENT_CLASS_NAME)) {
+                return "HTMLElement";
+            }
         }
         return super.getClassName();
     }

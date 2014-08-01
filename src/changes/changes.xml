@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                JavaScript: fix class name of unknown elements with hyphen in their tag name.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade commons-logging to 1.2.
             </action>

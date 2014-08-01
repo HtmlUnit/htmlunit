@@ -37,23 +37,31 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            IE8 = "[object]")
+    @Alerts(DEFAULT = { "[object HTMLUnknownElement]", "[object HTMLUnknownElement]" , "[object HTMLElement]" },
+            FF24 = { "[object HTMLUnknownElement]", "[object HTMLUnknownElement]" , "[object HTMLUnknownElement]" },
+            IE8 = { "[object]", "[object]" , "[object]" },
+            IE11 = { "[object HTMLUnknownElement]", "[object HTMLUnknownElement]" , "[object HTMLUnknownElement]" })
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
+            + "    alert(document.getElementById('myId1'));\n"
+            + "    alert(document.getElementById('myId2'));\n"
+            + "    alert(document.getElementById('myId3'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
-            + "<xml id='myId'/>\n"
+            + "<xml id='myId1'/>\n"
+            + "<doesnt_exist id='myId2'/>\n"
+            + "<doesnt-exist id='myId3'/>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId")));
+            assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId1")));
+            assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId2")));
+            assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId3")));
         }
     }
 
@@ -61,25 +69,33 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-           IE8 = "[object HTMLGenericElement]")
+    @Alerts(DEFAULT = { "[object HTMLUnknownElement]", "[object HTMLUnknownElement]" , "[object HTMLElement]" },
+        FF24 = { "[object HTMLUnknownElement]", "[object HTMLUnknownElement]" , "[object HTMLUnknownElement]" },
+        IE8 = { "[object HTMLGenericElement]", "[object HTMLGenericElement]" , "[object HTMLGenericElement]" },
+        IE11 = { "[object HTMLUnknownElement]", "[object HTMLUnknownElement]" , "[object HTMLUnknownElement]" })
     public void simpleScriptable_strict() throws Exception {
         final String header = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" "
                 + "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n";
         final String html = header + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
+            + "    alert(document.getElementById('myId1'));\n"
+            + "    alert(document.getElementById('myId2'));\n"
+            + "    alert(document.getElementById('myId3'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
-            + "<xml id='myId'/>\n"
+            + "<xml id='myId1'/>\n"
+            + "<doesnt_exist id='myId2'/>\n"
+            + "<doesnt-exist id='myId3'/>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId")));
+            assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId1")));
+            assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId2")));
+            assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId3")));
         }
     }
 }
