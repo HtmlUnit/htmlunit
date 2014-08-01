@@ -51,7 +51,7 @@ public class MooTools121Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "364", "0", "0" },
             CHROME = { "364", "1", "0",
                     "should return the function bound to an object with multiple arguments" },
-            FF24 = { "364", "2", "0",
+            FF = { "364", "2", "0",
                     "should return true if the string constains the string and separator otherwise false",
                     "should return the function bound to an object with multiple arguments" },
             IE11 = { "364", "2", "0",

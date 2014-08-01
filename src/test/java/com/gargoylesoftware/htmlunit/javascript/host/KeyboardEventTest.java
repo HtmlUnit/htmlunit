@@ -281,7 +281,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    // FF seem to generate seperate events for the shift key (tested with
+    // FF seem to generate separate events for the shift key (tested with
     // real FF24)
     @Test
     @Alerts(FF = { // "keydown:16,0,16",

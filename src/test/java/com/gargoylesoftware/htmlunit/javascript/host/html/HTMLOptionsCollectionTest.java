@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link HTMLOptionsCollection}.
  *
- * @version $Revision:$
+ * @version $Revision$
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
@@ -71,7 +71,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "exception", "exception" },
-            FF24 = { "1", "4" })
+            FF = { "1", "4" })
     public void setLength_negative() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

@@ -569,7 +569,7 @@ public class Location2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "foo3.html", "foo2.html" },
             CHROME = {"", "foo2.html" },
-            FF24 = {"", "foo2.html" })
+            FF = {"", "foo2.html" })
     @NotYetImplemented({ CHROME, FF24 })
     public void onlick_set_location() throws Exception {
         final String html =

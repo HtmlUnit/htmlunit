@@ -118,7 +118,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
     @Browsers({ CHROME, FF, IE11 })
     @Alerts(DEFAULT = "[object HTMLAnchorElement]",
             CHROME = "function HTMLAnchorElement() { [native code] }",
-            FF24 = "function HTMLAnchorElement() {\n    [native code]\n}",
+            FF = "function HTMLAnchorElement() {\n    [native code]\n}",
             IE8 = "[object]")
     @NotYetImplemented({ CHROME, FF24 })
     public void hostClassNames() throws Exception {
@@ -172,7 +172,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
                 "Element>HTMLElement: true", "HTMLElement>HTMLHtmlElement: true",
                 "CSSStyleDeclaration>ComputedCSSStyleDeclaration: exception", "Image>HTMLImageElement: false",
                 "HTMLImageElement>Image: true" },
-            FF24 = { "Node>Element: true", "Document>XMLDocument: true", "Node>XPathResult: false",
+            FF = { "Node>Element: true", "Document>XMLDocument: true", "Node>XPathResult: false",
                 "Element>HTMLElement: true", "HTMLElement>HTMLHtmlElement: true",
                 "CSSStyleDeclaration>ComputedCSSStyleDeclaration: exception", "Image>HTMLImageElement: true",
                 "HTMLImageElement>Image: true" },

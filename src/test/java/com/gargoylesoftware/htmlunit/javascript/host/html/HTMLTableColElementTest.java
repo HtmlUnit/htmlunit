@@ -354,7 +354,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "", "string" },
-            FF24 = { "null", "string" })
+            FF = { "null", "string" })
     @NotYetImplemented(FF24)
     public void width_null() throws Exception {
         final String html
