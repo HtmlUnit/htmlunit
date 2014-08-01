@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.lang.reflect.Field;
@@ -22,9 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.javascript.configuration.BrowserFeature;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -36,14 +34,12 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@RunWith(BrowserRunner.class)
-public class BrowserVersionFeaturesTest extends SimpleWebTestCase {
+public class BrowserVersionFeaturesTest  {
 
     /**
      * Test of alphabetical order.
      */
     @Test
-    @Browsers(NONE)
     public void lexicographicOrder() {
         String lastFeatureName = null;
         for (final BrowserVersionFeatures feature : BrowserVersionFeatures.values()) {
@@ -61,10 +57,10 @@ public class BrowserVersionFeaturesTest extends SimpleWebTestCase {
      * @throws Exception in case of problems
      */
     @Test
-    @Browsers(NONE)
     public void unusedFeatures() throws Exception {
         final List<BrowserVersion> browsers = new LinkedList<BrowserVersion>();
         browsers.add(BrowserVersion.FIREFOX_24);
+        browsers.add(BrowserVersion.FIREFOX_31);
         browsers.add(BrowserVersion.INTERNET_EXPLORER_8);
         browsers.add(BrowserVersion.INTERNET_EXPLORER_11);
         browsers.add(BrowserVersion.CHROME);
