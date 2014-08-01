@@ -81,8 +81,7 @@ public class NativeStringTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "contains: undefined", "toSource: undefined", "trim: function" },
-            FF = { "contains: undefined", "toSource: function", "trim: function" },
-            FF24 = { "contains: function", "toSource: function", "trim: function" },
+            FF = { "contains: function", "toSource: function", "trim: function" },
             IE8 = { "contains: undefined", "toSource: undefined", "trim: undefined" })
     public void methods_differences() throws Exception {
         final String[] methods = {"contains", "toSource", "trim" };
@@ -161,7 +160,7 @@ public class NativeStringTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "contains not supported",
-            FF24 = { "true", "false", "true", "true", "true", "false", "true", "true", "true", "false",
+            FF = { "true", "false", "true", "true", "true", "false", "true", "true", "true", "false",
                         "true", "true", "false", "false" })
     public void contains() throws Exception {
         final String html

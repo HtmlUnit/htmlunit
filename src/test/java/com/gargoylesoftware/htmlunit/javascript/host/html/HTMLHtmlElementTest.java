@@ -66,7 +66,7 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object HTMLHtmlElement]", "[object HTMLHtmlElement]" },
-            FF24 = { "[object HTMLHtmlElement]", "function HTMLHtmlElement() {\n    [native code]\n}" },
+            FF = { "[object HTMLHtmlElement]", "function HTMLHtmlElement() {\n    [native code]\n}" },
             IE8 = { "[object]", "exception" })
     @NotYetImplemented(FF24)
     public void HTMLHtmlElement_toString() throws Exception {

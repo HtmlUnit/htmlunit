@@ -105,9 +105,9 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "string 0", "string item", "string iterator", "string length", "string namedItem" },
-            FF24 = { "string 0", "string item", "string iterator", "string length",
+    @Alerts(FF24 = { "string 0", "string item", "string iterator", "string length",
                         "string myForm", "string namedItem" },
+            FF31 = { "string 0", "string @@iterator", "string item", "string length", "string namedItem" },
             IE = { "string length", "string myForm" },
             IE11 = { "string item", "string length", "string myForm", "string namedItem" })
     @NotYetImplemented({ FF24, IE11 })
@@ -135,12 +135,12 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
-                "string item", "string iterator", "string length", "string namedItem" },
-            FF24 = { "string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
+    @Alerts(FF24 = { "string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
                 "string action", "string first_submit", "string id1", "string input_disabled",
                 "string item", "string iterator", "string length", "string namedItem", "string second_submit",
                 "string val1", "string val2" },
+            FF31 = { "string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
+                    "string @@iterator", "string item", "string length", "string namedItem" },
             IE = { "string 1", "string action", "string first_submit", "string length",
                 "string second_submit", "string val1", "string val2" },
             IE11 = { "string 1", "string action", "string first_submit", "string item",

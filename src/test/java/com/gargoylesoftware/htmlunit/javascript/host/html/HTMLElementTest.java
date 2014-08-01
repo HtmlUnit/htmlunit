@@ -436,7 +436,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "inform('newHandler')", "" },
-            FF24 = { "null", "inform('newHandler')", "null" },
+            FF = { "null", "inform('newHandler')", "null" },
             IE8 = { "null", "inform('newHandler')", "null" })
     public void setAttribute_eventHandlerNull() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -2423,6 +2423,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object ClientRect]",
+            FF31 = "[object DOMRect]",
             IE8 = "[object]")
     public void getBoundingClientRect() throws Exception {
         final String html = "<html><body><div id='div1'>hello</div><script>\n"
@@ -2500,6 +2501,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object ClientRectList]", "1" },
+            FF31 = { "[object DOMRect]", "1" },
             IE8 = { "[object]", "1" })
     @NotYetImplemented
     public void getClientRects() throws Exception {

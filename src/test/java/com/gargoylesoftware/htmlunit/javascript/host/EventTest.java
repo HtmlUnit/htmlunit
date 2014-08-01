@@ -113,7 +113,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object Event]", "", "false", "false" },
-            FF = { "[object Event]", "", "true", "true" },
+            FF24 = { "[object Event]", "", "true", "true" },
             IE8 = "exception")
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -548,7 +548,8 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Browsers({ CHROME, FF, IE11 })
-    @Alerts({ "click", "true", "true", "dblclick", "false", "false" })
+    @Alerts(DEFAULT = { "click", "true", "true", "dblclick", "false", "false" },
+            FF31 = { "click", "true", "true", "click", "false", "false" })
     public void testInitEvent() throws Exception {
         final String html =
               "<html><body onload='test()'><script>\n"

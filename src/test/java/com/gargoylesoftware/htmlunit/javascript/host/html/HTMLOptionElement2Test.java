@@ -665,8 +665,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLOptionsCollection]", "0", "1" },
-            CHROME = { "[object HTMLOptionsCollection]", "0", "exception", "0" },
+    @Alerts(DEFAULT = { "[object HTMLOptionsCollection]", "0", "exception", "0" },
+            FF24 = { "[object HTMLOptionsCollection]", "0", "1" },
             IE11 = { "[object HTMLSelectElement]", "0", "1" },
             IE8 = { "[object]", "0", "exception", "0" })
     @NotYetImplemented({ FF, IE11 })
