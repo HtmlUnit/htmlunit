@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgCircle;
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgCircle.class,
-    browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
+    browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGCircleElement extends SVGElement {
 
     /**

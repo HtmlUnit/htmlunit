@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeOffset;
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgFeOffset.class,
-    browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
+    browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFEOffsetElement extends SVGElement {
 
     /**

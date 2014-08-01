@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgTitle;
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = SvgTitle.class,
-    browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
+    browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGTitleElement extends SVGElement {
 
     /**

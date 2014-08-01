@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @version $Revision$
  * @author Marc Guillemot
  */
-@JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
+@JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGMatrix extends SimpleScriptable {
     private double fieldA_ = 1;
     private double fieldB_ = 0;

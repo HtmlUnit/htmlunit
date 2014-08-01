@@ -35,9 +35,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClasses({
     @JsxClass(domClass = HtmlDeletedText.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME),
-                @WebBrowser(value = IE, minVersion = 9) }),
+                @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(domClass = HtmlInsertedText.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME),
-                @WebBrowser(value = IE, minVersion = 9) })
+                @WebBrowser(value = IE, minVersion = 11) })
 })
 public class HTMLModElement extends HTMLElement {
 

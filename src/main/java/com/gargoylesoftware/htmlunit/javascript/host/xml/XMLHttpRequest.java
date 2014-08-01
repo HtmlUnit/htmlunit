@@ -894,7 +894,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Returns the "withCredentials" property.
      * @return the "withCredentials" property
      */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF) })
     public boolean getWithCredentials() {
         return withCredentials_;
     }
@@ -903,7 +903,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Sets the "withCredentials" property.
      * @param withCredentials the "withCredentials" property.
      */
-    @JsxSetter({ @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF) })
+    @JsxSetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF) })
     public void setWithCredentials(final boolean withCredentials) {
         if (!async_ && state_ != STATE_UNSENT) {
             if (getBrowserVersion().hasFeature(XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION)) {

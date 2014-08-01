@@ -172,11 +172,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
     @JsxClass(domClass = HtmlMark.class),
     @JsxClass(domClass = HtmlNav.class),
     @JsxClass(domClass = HtmlNoBreak.class, browsers = { @WebBrowser(FF) }),
-    @JsxClass(domClass = HtmlNoEmbed.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) }),
-    @JsxClass(domClass = HtmlNoFrames.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) }),
-    @JsxClass(domClass = HtmlNoScript.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) }),
+    @JsxClass(domClass = HtmlNoEmbed.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+    @JsxClass(domClass = HtmlNoFrames.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+    @JsxClass(domClass = HtmlNoScript.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(domClass = HtmlSection.class),
-    @JsxClass(domClass = HtmlWordBreak.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) })
+    @JsxClass(domClass = HtmlWordBreak.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 })
 public class HTMLElement extends Element implements ScriptableWithFallbackGetter {
 

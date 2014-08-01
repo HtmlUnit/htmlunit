@@ -619,7 +619,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the console property.
      * @return the console property
      */
-    @JsxGetter({ @WebBrowser(value = FF, minVersion = 4), @WebBrowser(value = IE, minVersion = 9),
+    @JsxGetter({ @WebBrowser(value = FF, minVersion = 4), @WebBrowser(value = IE, minVersion = 11),
             @WebBrowser(CHROME) })
     public ScriptableObject getConsole() {
         return console_;
@@ -629,7 +629,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Sets the console.
      * @param console the console
      */
-    @JsxSetter({ @WebBrowser(value = FF, minVersion = 4), @WebBrowser(value = IE, minVersion = 9),
+    @JsxSetter({ @WebBrowser(value = FF, minVersion = 4), @WebBrowser(value = IE, minVersion = 11),
         @WebBrowser(CHROME) })
     public void setConsole(final ScriptableObject console) {
         console_ = console;
@@ -1178,7 +1178,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener">Mozilla documentation</a>
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 9) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public void addEventListener(final String type, final Scriptable listener, final boolean useCapture) {
         getEventListenersContainer().addEventListener(type, listener, useCapture);
     }
@@ -1202,7 +1202,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.removeEventListener">Mozilla
      * documentation</a>
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 9) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public void removeEventListener(final String type, final Scriptable listener, final boolean useCapture) {
         getEventListenersContainer().removeEventListener(type, listener, useCapture);
     }
@@ -1674,7 +1674,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param pseudo a string specifying the pseudo-element to match (may be <tt>null</tt>)
      * @return the computed style
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9), @WebBrowser(CHROME) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
     public ComputedCSSStyleDeclaration getComputedStyle(final Element element, final String pseudo) {
         ComputedCSSStyleDeclaration style;
 

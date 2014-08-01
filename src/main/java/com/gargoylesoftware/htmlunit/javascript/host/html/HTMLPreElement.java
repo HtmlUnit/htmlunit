@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = HtmlPreformattedText.class,
-    browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9) })
+    browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class HTMLPreElement extends HTMLElement {
 
     /**
