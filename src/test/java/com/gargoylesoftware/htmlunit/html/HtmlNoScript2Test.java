@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlNoScript2Test extends SimpleWebTestCase {
@@ -37,25 +38,22 @@ public class HtmlNoScript2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "<body>\r\n"
+                        + "  <noscript>\r\n"
+                        + "    &lt;div&gt;hello\r\n"
+                        + "  </noscript>\r\n"
+                        + "</body>\r\n",
+            IE8 = "<body>\r\n"
+                    + "  <noscript>\r\n  </noscript>\r\n"
+                    + "</body>\r\n")
     public void asXml_jsEnabled() throws Exception {
         final String html
             = "<html><body>\n"
             + "<noscript><div>hello</noscript>"
             + "</body></html>";
 
-        final String expectedDefault = "<body>\r\n"
-            + "  <noscript>\r\n"
-            + "    &lt;div&gt;hello\r\n"
-            + "  </noscript>\r\n"
-            + "</body>\r\n";
-
-        final String expectedIE8 = "<body>\r\n"
-            + "  <noscript>\r\n  </noscript>\r\n"
-            + "</body>\r\n";
-
-        final String expected = getBrowserVersion() == BrowserVersion.INTERNET_EXPLORER_8 ? expectedIE8 : expectedDefault;
         final HtmlPage page = loadPage(html);
-        assertEquals(expected, page.getBody().asXml());
+        assertEquals(getExpectedAlerts()[0], page.getBody().asXml());
     }
 
     /**
