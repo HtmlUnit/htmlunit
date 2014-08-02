@@ -106,6 +106,15 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
+    @Alerts(DEFAULT = "", IE = "#")
+    public void link_url_differentUrlEmptyHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL, "linkDifferentUrlEmptyHash", 1, PATHNAME2, getExpectedAlerts()[0]);
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
     public void link_url_differentUrlHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "linkDifferentUrlHash", 1, PATHNAME2, ANCHOR);
     }
@@ -166,6 +175,15 @@ public class PageReloadTest extends WebDriverTestCase {
     @Test
     public void link_urlHash_differentUrl() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "linkDifferentUrl", 1, PATHNAME2, "");
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "", IE = "#")
+    public void link_urlHash_differentUrlEmptyHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL_ANCHOR, "linkDifferentUrlEmptyHash", 1, PATHNAME2, getExpectedAlerts()[0]);
     }
 
     /**
@@ -246,6 +264,15 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
+    @Alerts(DEFAULT = "", IE = "#")
+    public void javascript_url_differentUrlEmptyHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL, "javascriptDifferentUrlEmptyHash", 1, PATHNAME2, getExpectedAlerts()[0]);
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
     public void javascript_url_differentUrlHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "javascriptDifferentUrlHash", 1, PATHNAME2, ANCHOR);
     }
@@ -306,6 +333,15 @@ public class PageReloadTest extends WebDriverTestCase {
     @Test
     public void javascript_urlHash_differentUrl() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "javascriptDifferentUrl", 1, PATHNAME2, "");
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "", IE = "#")
+    public void javascript_urlHash_differentUrlEmptyHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL_ANCHOR, "javascriptDifferentUrlEmptyHash", 1, PATHNAME2, getExpectedAlerts()[0]);
     }
 
     /**
@@ -444,10 +480,26 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
+    public void submitGet_url_differentUrlEmptyHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL, "submitGetDifferentUrlEmptyHash", 1, PATHNAME2, "");
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
     @Alerts(DEFAULT = ANCHOR, IE = "")
     public void submitGet_url_differentUrlHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "submitGetDifferentUrlHash", 1,
                 PATHNAME2, getExpectedAlerts()[0]);
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    public void submitGetV_url_differentUrlEmptyHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL, "submitGetDifferentUrlEmptyHashV", 1, PATHNAME2, "");
     }
 
     /**
@@ -594,9 +646,25 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
+    public void submitGet_urlHash_differentUrlEmptyHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetDifferentUrlEmptyHash", 1, PATHNAME2, "");
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
     @Alerts(DEFAULT = ANCHOR, IE = "")
     public void submitGet_urlHash_differentUrlHash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetDifferentUrlHash", 1, PATHNAME2, getExpectedAlerts()[0]);
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    public void submitGetV_urlHash_differentUrlEmptyHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL_ANCHOR, "submitGetDifferentUrlEmptyHashV", 1, PATHNAME2, "");
     }
 
     /**
@@ -746,8 +814,28 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
+    @Alerts(DEFAULT = "", IE = "#")
+    public void submitPost_url_differentUrlEmptyHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL, "submitPostDifferentUrlEmptyHash",
+                1, PATHNAME2, getExpectedAlerts()[0]);
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
     public void submitPost_url_differentUrlHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "submitPostDifferentUrlHash", 1, PATHNAME2, ANCHOR);
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "", IE = "#")
+    public void submitPostV_url_differentUrlEmptyHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL, "submitPostDifferentUrlEmptyHashV",
+                1, PATHNAME2, getExpectedAlerts()[0]);
     }
 
     /**
@@ -878,8 +966,28 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
+    @Alerts(DEFAULT = "", IE = "#")
+    public void submitPost_urlHash_differentUrlEmptyHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL_ANCHOR, "submitPostDifferentUrlEmptyHash",
+                1, PATHNAME2, getExpectedAlerts()[0]);
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
     public void submitPost_urlHash_differentUrlHash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "submitPostDifferentUrlHash", 1, PATHNAME2, ANCHOR);
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "", IE = "#")
+    public void submitPostV_urlHash_differentUrlEmptyHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL_ANCHOR, "submitPostDifferentUrlEmptyHashV",
+                1, PATHNAME2, getExpectedAlerts()[0]);
     }
 
     /**
@@ -1033,9 +1141,25 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
+    public void jsSubmitGet_url_differentUrlEmptyHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL, "jsSubmitGetDifferentUrlEmptyHash", 1, PATHNAME2, "");
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
     @Alerts(DEFAULT = ANCHOR, IE = "")
     public void jsSubmitGet_url_differentUrlHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "jsSubmitGetDifferentUrlHash", 1, PATHNAME2, getExpectedAlerts()[0]);
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    public void jsSubmitGetV_url_differentUrlEmptyHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL, "jsSubmitGetDifferentUrlEmptyHashV", 1, PATHNAME2, "");
     }
 
     /**
@@ -1179,9 +1303,26 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
+    public void jsSubmitGet_urlHash_differentUrlEmptyHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL_ANCHOR, "jsSubmitGetDifferentUrlEmptyHash", 1, PATHNAME2, "");
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
     @Alerts(DEFAULT = ANCHOR, IE = "")
     public void jsSubmitGet_urlHash_differentUrlHash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "jsSubmitGetDifferentUrlHash", 1, PATHNAME2, getExpectedAlerts()[0]);
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    public void jsSubmitGetV_urlHash_differentUrlEmptyHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL_ANCHOR, "jsSubmitGetDifferentUrlEmptyHashV",
+                1, PATHNAME2, "");
     }
 
     /**
@@ -1331,8 +1472,28 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
+    @Alerts(DEFAULT = "", IE = "#")
+    public void jsSubmitPost_url_differentUrlEmptyHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL, "jsSubmitPostDifferentUrlEmptyHash",
+                1, PATHNAME2, getExpectedAlerts()[0]);
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
     public void jsSubmitPost_url_differentUrlHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "jsSubmitPostDifferentUrlHash", 1, PATHNAME2, ANCHOR);
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "", IE = "#")
+    public void jsSubmitPostV_url_differentUrlEmptyHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL, "jsSubmitPostDifferentUrlEmptyHashV",
+                1, PATHNAME2, getExpectedAlerts()[0]);
     }
 
     /**
@@ -1463,8 +1624,28 @@ public class PageReloadTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
+    @Alerts(DEFAULT = "", IE = "#")
+    public void jsSubmitPost_urlHash_differentUrlEmptyHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL_ANCHOR, "jsSubmitPostDifferentUrlEmptyHash",
+                1, PATHNAME2, getExpectedAlerts()[0]);
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
     public void jsSubmitPost_urlHash_differentUrlHash() throws Exception {
         openUrlAndClickById(RELOAD_URL_ANCHOR, "jsSubmitPostDifferentUrlHash", 1, PATHNAME2, ANCHOR);
+    }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "", IE = "#")
+    public void jsSubmitPostV_urlHash_differentUrlEmptyHash() throws Exception {
+        openUrlAndClickById(RELOAD_URL_ANCHOR, "jsSubmitPostDifferentUrlEmptyHashV",
+                1, PATHNAME2, getExpectedAlerts()[0]);
     }
 
     /**
@@ -1557,6 +1738,8 @@ public class PageReloadTest extends WebDriverTestCase {
                 + "  <a id='linkUrlHash' href='" + RELOAD_URL_ANCHOR + "'>linkUrlHash</a>\n"
                 + "  <a id='linkDifferentUrl' href='" + "http://localhost:" + PORT + "/reload2.html"
                 + "'>linkDifferentUrl</a>\n"
+                + "  <a id='linkDifferentUrlEmptyHash' href='" + "http://localhost:" + PORT + "/reload2.html#"
+                + "'>linkDifferentUrlEmptyHash</a>\n"
                 + "  <a id='linkDifferentUrlHash' href='" + "http://localhost:" + PORT + "/reload2.html"
                 + ANCHOR + "'>linkDifferentUrlHash</a>\n"
                 + "  <a id='linkDifferentUrlDifferentHash' href='" + "http://localhost:" + PORT
@@ -1579,6 +1762,9 @@ public class PageReloadTest extends WebDriverTestCase {
                 + " onclick='location.href=\"" + RELOAD_URL_ANCHOR + "\"'>\n"
                 + "    <input type='button' id='javascriptDifferentUrl' value='javascriptDifferentUrl'"
                 + " onclick='location.href=\"" + "http://localhost:" + PORT + "/reload2.html" + "\"'>\n"
+                + "    <input type='button' id='javascriptDifferentUrlEmptyHash' "
+                                                    + "value='javascriptDifferentUrlEmptyHash'"
+                + " onclick='location.href=\"" + "http://localhost:" + PORT + "/reload2.html#\"'>\n"
                 + "    <input type='button' id='javascriptDifferentUrlHash' value='javascriptDifferentUrlHash'"
                 + " onclick='location.href=\"" + "http://localhost:" + PORT + "/reload2.html" + ANCHOR + "\"'>\n"
                 + "    <input type='button' id='javascriptDifferentUrlDifferentHash'"
@@ -1660,6 +1846,22 @@ public class PageReloadTest extends WebDriverTestCase {
                 + "    <input type='text' name='valueGetDifferentUrlV' />\n"
                 + "    <input type='submit' id='submitGetDifferentUrlV' value='submitGetDifferentUrlV'>\n"
                 + "    <input type='button' id='jsSubmitGetDifferentUrlV' value='jsSubmitGetDifferentUrlV'"
+                + " onclick='submit();'>\n"
+                + "  </form>\n"
+
+                + "  <form action='" + "http://localhost:" + PORT + "/reload2.html#' method='GET'>\n"
+                + "    <input type='submit' id='submitGetDifferentUrlEmptyHash' "
+                                                + "value='submitGetDifferentUrlEmptyHash'>\n"
+                + "    <input type='button' id='jsSubmitGetDifferentUrlEmptyHash' "
+                                                + "value='jsSubmitGetDifferentUrlEmptyHash'"
+                + " onclick='submit();'>\n"
+                + "  </form>\n"
+                + "  <form action='" + "http://localhost:" + PORT + "/reload2.html#' method='GET'>\n"
+                + "    <input type='text' name='valueGetDifferentUrlEmptyHashV' />\n"
+                + "    <input type='submit' id='submitGetDifferentUrlEmptyHashV' "
+                                                + "value='submitGetDifferentUrlEmptyHashV'>\n"
+                + "    <input type='button' id='jsSubmitGetDifferentUrlEmptyHashV' "
+                                                + "value='jsSubmitGetDifferentUrlEmptyHashV'"
                 + " onclick='submit();'>\n"
                 + "  </form>\n"
 
@@ -1766,6 +1968,20 @@ public class PageReloadTest extends WebDriverTestCase {
                 + "    <input type='submit' id='submitPostDifferentUrlV' value='submitPostDifferentUrlV'>\n"
                 + "    <input type='button' id='jsSubmitPostDifferentUrlV' value='jsSubmitPostDifferentUrlV'"
                 + " onclick='submit();'>\n"
+                + "  </form>\n"
+
+                + "  <form action='" + "http://localhost:" + PORT + "/reload2.html#' method='POST'>\n"
+                + "    <input type='submit' id='submitPostDifferentUrlEmptyHash' "
+                                                + "value='submitPostDifferentUrlEmptyHash'>\n"
+                + "    <input type='button' id='jsSubmitPostDifferentUrlEmptyHash'"
+                + " value='jsSubmitPostDifferentUrlEmptyHash' onclick='submit();'>\n"
+                + "  </form>\n"
+                + "  <form action='" + "http://localhost:" + PORT + "/reload2.html#' method='POST'>\n"
+                + "    <input type='text' name='valuePostDifferentUrlEmptyHashV' />\n"
+                + "    <input type='submit' id='submitPostDifferentUrlEmptyHashV' "
+                                                + "value='submitPostDifferentUrlEmptyHashV'>\n"
+                + "    <input type='button' id='jsSubmitPostDifferentUrlEmptyHashV'"
+                + " value='jsSubmitPostDifferentUrlEmptyHashV' onclick='submit();'>\n"
                 + "  </form>\n"
 
                 + "  <form action='" + "http://localhost:" + PORT + "/reload2.html" + ANCHOR + "' method='POST'>\n"

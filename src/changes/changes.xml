@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1628">
+                Anchor or form did not load a page if the target URL ends with "#".
+            </action>
             <action type="fix" dev="asashour" issue="1624">
                 HtmlNoScript: expand empty tag.
             </action>

@@ -1961,16 +1961,16 @@ public class WebClient implements Serializable {
      * @param requestingWindow the window from which the request comes
      * @param target the name of the target window
      * @param request the request to perform
-     * @param isHashJump in at least one case (anchor url is '#') it is not possible
-     *        to decide that this is only a hash jump; in this case you can provide
-     *        true here; otherwise use false
+     * @param urlEndsWithHash in at least one case (anchor url ends '#') it is not possible
+     *        to determine that empty ref from the URL; so the caller havs to provide that info.
+     *        use url.endsWith("#") when calling
      * @param description information about the origin of the request. Useful for debugging.
      */
     public void download(final WebWindow requestingWindow, final String target,
-        final WebRequest request, final boolean isHashJump, final String description) {
+        final WebRequest request, final boolean urlEndsWithHash, final String description) {
         final WebWindow win = resolveWindow(requestingWindow, target);
         final URL url = request.getUrl();
-        boolean justHashJump = isHashJump;
+        boolean justHashJump = false;
 
         if (win != null && HttpMethod.POST != request.getHttpMethod()) {
             final Page page = win.getEnclosedPage();
@@ -1980,10 +1980,10 @@ public class WebClient implements Serializable {
                 }
 
                 final URL current = page.getUrl();
-                justHashJump = isHashJump && (url.getQuery() == null || url.getQuery().equals(current.getQuery()));
-                if (!justHashJump && url.sameFile(current) && StringUtils.isNotEmpty(url.getRef())) {
-                    justHashJump = true;
-                }
+                justHashJump =
+                        url.sameFile(current)
+                        && (url.getQuery() == null || url.getQuery().equals(current.getQuery()))
+                        && (urlEndsWithHash || StringUtils.isNotEmpty(url.getRef()));
             }
         }
 
