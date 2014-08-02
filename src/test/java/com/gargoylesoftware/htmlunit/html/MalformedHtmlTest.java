@@ -699,7 +699,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     public void formInTable8() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
-                + "<form name='form1'>\n"
+                + "  <form name='form1'>\n"
                 + "    <input type='hidden' name='1a' value='a1' />\n"
                 + "    <div>\n"
                 + "      <table>\n"
@@ -750,7 +750,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     public void formInTable9() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
-                + "<table>\n"
+                + "  <table>\n"
                 + "    <form name='form1'>\n"
                 + "      <input type='hidden' name='1a' value='a1' />\n"
                 + "      <div>\n"
@@ -763,6 +763,38 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "          <td>2</td>\n"
                 + "        </tr>\n"
                 + "      </tbody>\n"
+                + "    </form>\n"
+                + "  </table>"
+                + "<script>\n"
+                + "  alert(document.form1.elements.length);"
+                + "  for(var j = 0; j < document.form1.elements.length; ++j) {"
+                + "    alert(document.form1.elements[j].name);"
+                + "  }"
+                + "  alert(document.form1.children.length);"
+                + "  alert(document.form1.parentNode.tagName);"
+                + "</script>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test case for issue #1621.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "1", "form1_submit", "0", "TABLE" })
+    public void formInTable10() throws Exception {
+        final String html = "<html>\n"
+                + "<body>\n"
+                + "  <table>\n"
+                + "    <form name='form1'>\n"
+                + "      <tr>\n"
+                + "        <td>\n"
+                + "          <input name='form1_submit' type='submit'/>\n"
+                + "        </td>\n"
+                + "      </tr>\n"
+                + "    </form>\n"
+                + "    <form name='form2'>\n"
                 + "    </form>\n"
                 + "  </table>"
                 + "<script>\n"
