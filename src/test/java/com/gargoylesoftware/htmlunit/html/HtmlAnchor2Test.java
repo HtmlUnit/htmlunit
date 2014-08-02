@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.assertSame;
+
 import java.net.URL;
 
 import org.junit.Test;
@@ -24,6 +26,8 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.HttpMethod;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -419,5 +423,54 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
             + "<div id='d'><a id='a' href='#x'>foo</a></div></body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testClick() throws Exception {
+        final String html
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>\n"
+            + "<a href='" + URL_SECOND + "' id='a2'>link to foo2</a>\n"
+            + "</body></html>";
+
+        final String secondContent
+            = "<html><head><title>Second</title></head><body></body></html>";
+
+        final MockWebConnection webConnection = getMockWebConnection();
+        webConnection.setDefaultResponse(secondContent);
+
+        final WebDriver driver = loadPage2(html);
+        assertEquals(1, webConnection.getRequestCount());
+
+        // Test that the correct value is being passed back up to the server
+        driver.findElement(By.id("a2")).click();
+
+        assertEquals(URL_SECOND.toExternalForm(), driver.getCurrentUrl());
+        assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
+        assertTrue(webConnection.getLastParameters().isEmpty());
+
+        assertEquals(2, webConnection.getRequestCount());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testClickAnchorName() throws Exception {
+        final String html
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<a href='#clickedAnchor' id='a1'>link to foo1</a>\n"
+            + "</body></html>";
+
+        final MockWebConnection webConnection = getMockWebConnection();
+        final WebDriver driver = loadPage2(html);
+
+        assertEquals(1, webConnection.getRequestCount());
+
+        driver.findElement(By.id("a1")).click();
+        assertEquals(1, webConnection.getRequestCount()); // no second server hit
     }
 }

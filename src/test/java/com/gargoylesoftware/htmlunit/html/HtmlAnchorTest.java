@@ -40,7 +40,6 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Tests for {@link HtmlAnchor}.
@@ -53,53 +52,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 @RunWith(BrowserRunner.class)
 public class HtmlAnchorTest extends SimpleWebTestCase {
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testClick() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
-            + "<a href='http://www.foo1.com' id='a1'>link to foo1</a>\n"
-            + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>\n"
-            + "<a href='http://www.foo3.com' id='a3'>link to foo3</a>\n"
-            + "</body></html>";
-
-        final HtmlPage page = loadPage(htmlContent);
-        final HtmlAnchor anchor = page.getHtmlElementById("a2");
-
-        // Test that the correct value is being passed back up to the server
-        final HtmlPage secondPage = (HtmlPage) anchor.click();
-
-        final List<NameValuePair> expectedParameters = Collections.emptyList();
-        final MockWebConnection webConnection = getMockConnection(secondPage);
-
-        assertEquals("url", "http://www.foo2.com/", secondPage.getUrl());
-        assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
-        Assert.assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
-        assertNotNull(secondPage);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testClickAnchorName() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
-            + "<a href='#clickedAnchor' id='a1'>link to foo1</a>\n"
-            + "</body></html>";
-
-        final HtmlPage page = loadPage(html);
-
-        final MockWebConnection conn = (MockWebConnection) page.getWebClient().getWebConnection();
-        assertEquals(1, conn.getRequestCount());
-
-        final HtmlPage secondPage = page.getHtmlElementById("a1").click();
-        assertEquals(1, conn.getRequestCount()); // no second server hit
-        assertSame(page, secondPage);
-    }
 
     /**
      * @throws Exception if the test fails
