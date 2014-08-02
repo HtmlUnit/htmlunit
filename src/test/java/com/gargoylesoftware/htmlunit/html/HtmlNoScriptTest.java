@@ -68,7 +68,7 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
             = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    var noscript = document.getElementById('myDiv' ).childNodes.item(0);\n"
+            + "    var noscript = document.getElementById('myDiv').childNodes.item(0);\n"
             + "    alert(noscript.childNodes.length);\n"
             + "    alert(noscript.firstChild);\n"
             + "  }\n"
