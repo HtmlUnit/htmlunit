@@ -38,7 +38,7 @@ public class HttpWebConnectionProxyTest extends WebServerTestCase {
     private Server proxyWebServer_;
 
     /**
-     * Performs post-test deconstruction.
+     * Performs pre-test construction.
      * @throws Exception if an error occurs
      */
     @Before
@@ -56,7 +56,7 @@ public class HttpWebConnectionProxyTest extends WebServerTestCase {
     }
 
     /**
-     * Performs pre-test construction.
+     * Performs post-test deconstruction.
      * @throws Exception if an error occurs
      */
     @After
