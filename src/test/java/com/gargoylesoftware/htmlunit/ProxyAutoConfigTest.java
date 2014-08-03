@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript;
+package com.gargoylesoftware.htmlunit;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -20,8 +20,6 @@ import java.util.Calendar;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import org.junit.Test;
-
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for the {@link ProxyAutoConfig}.

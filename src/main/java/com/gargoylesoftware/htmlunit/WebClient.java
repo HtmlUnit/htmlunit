@@ -68,7 +68,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
-import com.gargoylesoftware.htmlunit.javascript.ProxyAutoConfig;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.Location;
@@ -1081,7 +1080,8 @@ public class WebClient implements Serializable {
         }
         responseHeaders.add(new NameValuePair("content-type",
             decoder.getMediaType() + ";charset=" + decoder.getCharset()));
-        final DownloadedContent downloadedContent = HttpWebConnection.downloadContent(url.openStream());
+        final DownloadedContent downloadedContent =
+                HttpWebConnection.downloadContent(url.openStream(), getOptions().getMaxInMemory());
         final WebResponseData data = new WebResponseData(downloadedContent, 200, "OK", responseHeaders);
         return new WebResponse(data, url, webRequest.getHttpMethod(), 0);
     }
