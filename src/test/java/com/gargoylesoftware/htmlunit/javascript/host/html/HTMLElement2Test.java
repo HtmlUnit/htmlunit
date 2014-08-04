@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.apache.commons.lang3.StringUtils;
@@ -1119,6 +1121,39 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "  <input type='checkbox' id='checkbox'/><label for='checkbox'>Checkbox</label>\n"
             + "</body>\n"
             + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test case for issue #1626.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "true")
+    @NotYetImplemented({ FF, IE11 })
+    public void offsetLeft_PositionFixed() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "    <title>Box-Example</title>\n"
+                + "    <style>\n"
+                + "         body {\n"
+                + "             padding: 0; margin:0;\n"
+                + "         }\n"
+                + "         #container {\n"
+                + "             width: 200px; position: fixed; right: 0px;\n"
+                + "         }\n"
+                + "    </style>\n"
+                + "</head>\n"
+                + "<body onload=\"alert(document.getElementById('container').offsetLeft > 0)\">\n"
+                + "    <div id=\"container\">\n"
+                + "        <ul>\n"
+                + "            <li><span>1st</span> List Item.</li>\n"
+                + "            <li><span>Another</span> List Item.</li>\n"
+                + "        </ul>\n"
+                + "    </div>\n"
+                + "</body>\n"
+                + "</html>";
 
         loadPageWithAlerts2(html);
     }
