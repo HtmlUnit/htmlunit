@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.ACTIVEX_CHECK;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.CREATE_XMLDOMDOCUMENT_FUNCTION;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.callCreateXMLDOMDocument;
@@ -26,7 +27,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -45,8 +45,7 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("[object Object]")
+    @Alerts(DEFAULT = "[object Object]", FF = "no ActiveX")
     public void scriptableToString() throws Exception {
         tester("alert(Object.prototype.toString.call(text));\n");
     }
@@ -55,8 +54,7 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void attributes() throws Exception {
         property("attributes");
     }
@@ -65,8 +63,7 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("")
+    @Alerts(DEFAULT = "", FF = "no ActiveX")
     public void baseName() throws Exception {
         property("baseName");
     }
@@ -75,8 +72,7 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("0")
+    @Alerts(DEFAULT = "0", FF = "no ActiveX")
     public void childNodes() throws Exception {
         tester("alert(text.childNodes.length);\n");
     }
@@ -85,13 +81,13 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "X", "X", "X",
-        "exception-setNull",
-        "", "", "",
-        "test", "test", "test",
-        "test\ntest", "test\ntest", "test\ntest",
-        "<tag/>", "<tag/>", "<tag/>" })
+    @Alerts(DEFAULT = { "X", "X", "X",
+                "exception-setNull",
+                "", "", "",
+                "test", "test", "test",
+                "test\ntest", "test\ntest", "test\ntest",
+                "<tag/>", "<tag/>", "<tag/>" },
+        FF = "no ActiveX")
     public void data() throws Exception {
         final String test = ""
             + "alert(text.data);\n"
@@ -134,8 +130,7 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void dataType() throws Exception {
         property("dataType");
     }
@@ -144,8 +139,7 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void definition() throws Exception {
         property("definition");
     }
@@ -154,8 +148,7 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void firstChild() throws Exception {
         property("firstChild");
     }
@@ -164,8 +157,7 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void lastChild() throws Exception {
         property("lastChild");
     }
@@ -174,8 +166,8 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "1", "0", "4", "9", "6" })
+    @Alerts(DEFAULT = { "1", "0", "4", "9", "6" },
+            FF = "no ActiveX")
     public void length() throws Exception {
         final String test = ""
             + "alert(text.length);\n"
@@ -204,8 +196,7 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("")
+    @Alerts(DEFAULT = "", FF = "no ActiveX")
     public void namespaceURI() throws Exception {
         property("namespaceURI");
     }
@@ -214,8 +205,7 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("#text")
+    @Alerts(DEFAULT = "#text", FF = "no ActiveX")
     public void nodeName() throws Exception {
         property("nodeName");
     }
@@ -224,8 +214,7 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("3")
+    @Alerts(DEFAULT = "3", FF = "no ActiveX")
     public void nodeType() throws Exception {
         property("nodeType");
     }
@@ -234,13 +223,13 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "X", "X", "X",
-        "exception-setNull",
-        "", "", "",
-        "test", "test", "test",
-        "test\ntest", "test\ntest", "test\ntest",
-        "<tag/>", "<tag/>", "<tag/>" })
+    @Alerts(DEFAULT = { "X", "X", "X",
+                        "exception-setNull",
+                        "", "", "",
+                        "test", "test", "test",
+                        "test\ntest", "test\ntest", "test\ntest",
+                        "<tag/>", "<tag/>", "<tag/>" },
+        FF = "no ActiveX")
     public void nodeValue() throws Exception {
         final String test = ""
             + "alert(text.nodeValue);\n"
@@ -283,8 +272,7 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "true", "true", "true" })
+    @Alerts(DEFAULT = { "true", "true", "true" }, FF = "no ActiveX")
     @NotYetImplemented(IE)
     // Xerxes is the problem here as they do treat whitespaces as text nodes.
     public void nodeValue_empty() throws Exception {
@@ -312,8 +300,7 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("true")
+    @Alerts(DEFAULT = "true", FF = "no ActiveX")
     public void ownerDocument() throws Exception {
         tester("alert(text.ownerDocument === doc);\n");
     }
@@ -322,11 +309,11 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("true")
+    @Alerts(DEFAULT = "true", FF = "no ActiveX")
     public void ownerDocument_created() throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var text = doc.createTextNode('something');\n"
             + "    try {\n"
@@ -342,8 +329,7 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("true")
+    @Alerts(DEFAULT = "true", FF = "no ActiveX")
     public void parentNode() throws Exception {
         tester("alert(root === text.parentNode);\n");
     }
@@ -352,11 +338,11 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("true")
+    @Alerts(DEFAULT = "true", FF = "no ActiveX")
     public void parentNode_created() throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var text = doc.createTextNode('something');\n"
             + "    try {\n"
@@ -372,8 +358,7 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("")
+    @Alerts(DEFAULT = "", FF = "no ActiveX")
     public void prefix() throws Exception {
         property("prefix");
     }
@@ -382,13 +367,13 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "X", "X", "X",
-        "exception-setNull",
-        "", "", "",
-        "test", "test", "test",
-        "test\ntest", "test\ntest", "test\ntest",
-        "<tag/>", "<tag/>", "<tag/>" })
+    @Alerts(DEFAULT = { "X", "X", "X",
+                        "exception-setNull",
+                        "", "", "",
+                        "test", "test", "test",
+                        "test\ntest", "test\ntest", "test\ntest",
+                        "<tag/>", "<tag/>", "<tag/>" },
+            FF = "no ActiveX")
     public void text() throws Exception {
         final String test = ""
             + "alert(text.text);\n"
@@ -431,8 +416,7 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "text", "text\r\ntext", "  text  text  " })
+    @Alerts(DEFAULT = { "text", "text\r\ntext", "  text  text  " }, FF = "no ActiveX")
     public void xml() throws Exception {
         final String test =
             // text
@@ -458,11 +442,11 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("")
+    @Alerts(DEFAULT = "", FF = "no ActiveX")
     public void xml_created() throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var text = doc.createTextNode('');\n"
             + "    try {\n"
@@ -478,8 +462,8 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "myText", "myText-appended", "exception-appendNull", "myText-appended", "myText-appended\n" })
+    @Alerts(DEFAULT = { "myText", "myText-appended", "exception-appendNull", "myText-appended", "myText-appended\n" },
+            FF = "no ActiveX")
     public void appendData() throws Exception {
         final String test = ""
             + "alert(text.data);\n"
@@ -504,13 +488,13 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "myText", "myTex", "myx", "yx",
-        "exception-deletePosNegative", "yx",
-        "exception-deletePosTooHigh", "yx",
-        "yx",
-        "exception-deleteCntNegative", "yx",
-        "y" })
+    @Alerts(DEFAULT = { "myText", "myTex", "myx", "yx",
+                        "exception-deletePosNegative", "yx",
+                        "exception-deletePosTooHigh", "yx",
+                        "yx",
+                        "exception-deleteCntNegative", "yx",
+                        "y" },
+        FF = "no ActiveX")
     public void deleteData() throws Exception {
         final String test = ""
             + "alert(text.data);\n"
@@ -552,13 +536,13 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "myText", "myText-b", "myT-m-ext-b", "f-myT-m-ext-b",
-        "exception-insertNull", "f-myT-m-ext-b", "\nf-myT-m-ext-b",
-        "\nf-myT-m-ext-b",
-        "exception-insertPosNegative", "\nf-myT-m-ext-b",
-        "\nf-myT-m-ext-b",
-        "exception-insertPosTooHigh", "\nf-myT-m-ext-b" })
+    @Alerts(DEFAULT = { "myText", "myText-b", "myT-m-ext-b", "f-myT-m-ext-b",
+                        "exception-insertNull", "f-myT-m-ext-b", "\nf-myT-m-ext-b",
+                        "\nf-myT-m-ext-b",
+                        "exception-insertPosNegative", "\nf-myT-m-ext-b",
+                        "\nf-myT-m-ext-b",
+                        "exception-insertPosTooHigh", "\nf-myT-m-ext-b" },
+           FF = "no ActiveX")
     public void insertData() throws Exception {
         final String test = ""
             + "alert(text.data);\n"
@@ -605,14 +589,14 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "myText", "myTex-b", "my-m-x-b", "f-y-m-x-b",
-        "exception-replaceNull", "f-y--x-b", "f-y\nx-b",
-        "exception-replacePosNegative", "f-y\nx-b",
-        "exception-replacePosTooHigh", "f-y\nx-b",
-        "f-y\nx-b",
-        "exception-replaceCntNegative", "f-y\nx-b",
-        "f" })
+    @Alerts(DEFAULT = { "myText", "myTex-b", "my-m-x-b", "f-y-m-x-b",
+                        "exception-replaceNull", "f-y--x-b", "f-y\nx-b",
+                        "exception-replacePosNegative", "f-y\nx-b",
+                        "exception-replacePosTooHigh", "f-y\nx-b",
+                        "f-y\nx-b",
+                        "exception-replaceCntNegative", "f-y\nx-b",
+                        "f" },
+           FF = "no ActiveX")
     public void replaceData() throws Exception {
         final String test = ""
             + "alert(text.data);\n"
@@ -664,10 +648,10 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "1", "2", "#text", "2", "my", "#text", "4", "Text", "true",
-        "exception-splitPosNegative", "my",
-        "exception-splitPosTooHigh", "my" })
+    @Alerts(DEFAULT = { "1", "2", "#text", "2", "my", "#text", "4", "Text", "true",
+                        "exception-splitPosNegative", "my",
+                        "exception-splitPosTooHigh", "my" },
+            FF = "no ActiveX")
     public void splitText() throws Exception {
         final String test = ""
             + "alert(root.childNodes.length);\n"
@@ -697,13 +681,13 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "myText", "t", "myText", "Te", "myText", "m", "myText",
-        "exception-substringPosNegative", "myText",
-        "exception-substringPosTooHigh", "myText",
-        "", "myText",
-        "exception-substringCntNegative", "myText",
-        "yText", "myText" })
+    @Alerts(DEFAULT = { "myText", "t", "myText", "Te", "myText", "m", "myText",
+                        "exception-substringPosNegative", "myText",
+                        "exception-substringPosTooHigh", "myText",
+                        "", "myText",
+                        "exception-substringCntNegative", "myText",
+                        "yText", "myText" },
+            FF = "no ActiveX")
     public void substringData() throws Exception {
         final String test = ""
             + "alert(text.data);\n"
@@ -754,6 +738,7 @@ public class XMLDOMTextTest extends WebDriverTestCase {
     private void tester(final String test, final String xml) throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var doc = " + callLoadXMLDOMDocumentFromURL("'second.xml'") + ";\n"
             + "    var root = doc.documentElement;\n"
             + "    try {\n"
