@@ -226,8 +226,7 @@ public class Location extends SimpleScriptable {
             request.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
 
             final WebWindow webWindow = getWindow().getWebWindow();
-            webWindow.getWebClient().download(webWindow, "", request,
-                    newLocation.endsWith("#"), "JS set location");
+            webWindow.getWebClient().download(webWindow, "", request, "JS set location");
         }
         catch (final MalformedURLException e) {
             LOG.error("setLocation('" + newLocation + "') Got MalformedURLException", e);

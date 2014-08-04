@@ -23,8 +23,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for page reloading in various situations.
@@ -373,7 +371,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0", IE = "1")
-    @NotYetImplemented(Browser.IE)
     public void submitGet_url_emptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "submitGetEmptyHash", Integer.parseInt(getExpectedAlerts()[0]), PATHNAME, "");
     }
@@ -1035,7 +1032,6 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0", IE = "1")
-    @NotYetImplemented(Browser.IE)
     public void jsSubmitGet_url_emptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "jsSubmitGetEmptyHash", Integer.parseInt(getExpectedAlerts()[0]), PATHNAME, "");
     }

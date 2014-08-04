@@ -135,8 +135,7 @@ public class HtmlForm extends HtmlElement {
         final String target = htmlPage.getResolvedTarget(getTargetAttribute());
 
         final WebWindow webWindow = htmlPage.getEnclosingWindow();
-        final String action = getActionAttribute();
-        webClient.download(webWindow, target, request, action.endsWith("#"), "JS form.submit()");
+        webClient.download(webWindow, target, request, "JS form.submit()");
         return htmlPage;
     }
 
@@ -164,10 +163,12 @@ public class HtmlForm extends HtmlElement {
 
         final BrowserVersion browser = getPage().getWebClient().getBrowserVersion();
         String actionUrl = getActionAttribute();
-        String anchor = "";
+        String anchor = null;
         String queryFromFields = "";
         if (HttpMethod.GET == method) {
-            anchor = StringUtils.substringAfter(actionUrl, "#");
+            if (actionUrl.contains("#")) {
+                anchor = StringUtils.substringAfter(actionUrl, "#");
+            }
             final String enc = getPage().getPageEncoding();
             queryFromFields =
                 URLEncodedUtils.format(Arrays.asList(NameValuePair.toHttpClient(parameters)), enc);
@@ -200,7 +201,7 @@ public class HtmlForm extends HtmlElement {
                     && StringUtils.isEmpty(actionUrl)) {
                 url = UrlUtils.getUrlWithNewRef(url, null);
             }
-            else if (anchor.length() > 0
+            else if (anchor != null
                     && WebClient.URL_ABOUT_BLANK != url) {
                 url = UrlUtils.getUrlWithNewRef(url, anchor);
             }
