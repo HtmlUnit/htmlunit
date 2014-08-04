@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.ACTIVEX_CHECK;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.CREATE_XMLDOMDOCUMENT_FUNCTION;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.LOAD_XMLDOMDOCUMENT_FROM_STRING_FUNCTION;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.SERIALIZE_XMLDOMDOCUMENT_TO_STRING_FUNCTION;
@@ -31,7 +32,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Darrell DeBoer
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class XMLSerializerTest extends WebDriverTestCase {
@@ -50,12 +51,13 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("<note>13109<to>Tove</to>13109<from>Jani</from>13109<body>Do32not32forget32me32this32weekend!</body>"
-                    + "13109<outer>131099<inner>Some32Value</inner></outer>1310</note>1310")
+    @Alerts(DEFAULT = { "",
+                    "<note>13109<to>Tove</to>13109<from>Jani</from>13109<body>Do32not32forget32me32this32weekend!</body>"
+                    + "13109<outer>131099<inner>Some32Value</inner></outer>1310</note>1310" },
+            FF = { "no ActiveX", "" })
     public void test() throws Exception {
-        final String expectedString = getExpectedAlerts()[0];
-        setExpectedAlerts();
+        final String expectedString = getExpectedAlerts()[1];
+        setExpectedAlerts(getExpectedAlerts()[0]);
         final String serializationText =
                 "<note> "
                 + "<to>Tove</to> \\n"
@@ -75,11 +77,12 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("<a><!--32abc32--></a>1310")
+    @Alerts(DEFAULT = { "", "<a><!--32abc32--></a>1310" },
+            FF = { "no ActiveX", "" })
     public void comment() throws Exception {
-        final String expectedString = getExpectedAlerts()[0];
-        setExpectedAlerts();
+        final String expectedString = getExpectedAlerts()[1];
+        setExpectedAlerts(getExpectedAlerts()[0]);
+
         final String serializationText = "<a><!-- abc --></a>";
         final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
         final WebElement textArea = driver.findElement(By.id("myTextArea"));
@@ -90,11 +93,10 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("<a>&lt;&gt;&amp;</a>1310")
+    @Alerts(DEFAULT = { "", "<a>&lt;&gt;&amp;</a>1310" }, FF = { "no ActiveX", "" })
     public void xmlEntities() throws Exception {
-        final String expectedString = getExpectedAlerts()[0];
-        setExpectedAlerts();
+        final String expectedString = getExpectedAlerts()[1];
+        setExpectedAlerts(getExpectedAlerts()[0]);
         final String serializationText = "<a>&lt;&gt;&amp;</a>";
         final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
         final WebElement textArea = driver.findElement(By.id("myTextArea"));
@@ -105,15 +107,16 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("<?xml32version=\"1.0\"?>1310<xsl:stylesheet32version=\"1.0\"32"
+    @Alerts(DEFAULT = { "",
+                    "<?xml32version=\"1.0\"?>1310<xsl:stylesheet32version=\"1.0\"32"
                     + "xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">13109<xsl:template32match=\"/\">131099<html>"
-                    + "1310999<body>1310999</body>131099</html>13109</xsl:template>1310</xsl:stylesheet>1310")
+                    + "1310999<body>1310999</body>131099</html>13109</xsl:template>1310</xsl:stylesheet>1310" },
+            FF = { "no ActiveX", "" })
     @NotYetImplemented(IE)
     // so far we are not able to add the XML header
     public void nameSpaces() throws Exception {
-        final String expectedString = getExpectedAlerts()[0];
-        setExpectedAlerts();
+        final String expectedString = getExpectedAlerts()[1];
+        setExpectedAlerts(getExpectedAlerts()[0]);
         final String serializationText =
                 "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\n"
                 + "<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\\n"
@@ -134,12 +137,12 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("<document32attrib=\"attribValue\"><outer32attrib=\"attribValue\">"
-                    + "<inner32attrib=\"attribValue\"/><meta32attrib=\"attribValue\"/></outer></document>1310")
+    @Alerts(DEFAULT = { "", "<document32attrib=\"attribValue\"><outer32attrib=\"attribValue\">"
+                    + "<inner32attrib=\"attribValue\"/><meta32attrib=\"attribValue\"/></outer></document>1310" },
+            FF = { "no ActiveX", "" })
     public void attributes() throws Exception {
-        final String expectedString = getExpectedAlerts()[0];
-        setExpectedAlerts();
+        final String expectedString = getExpectedAlerts()[1];
+        setExpectedAlerts(getExpectedAlerts()[0]);
         final String serializationText = "<document attrib=\"attribValue\">"
                                             + "<outer attrib=\"attribValue\">"
                                             + "<inner attrib=\"attribValue\"/>"
@@ -155,18 +158,19 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("<?xml32version=\"1.0\"?>1310<html32xmlns=\"http://www.w3.org/1999/xhtml\">"
+    @Alerts(DEFAULT = {"",
+                    "<?xml32version=\"1.0\"?>1310<html32xmlns=\"http://www.w3.org/1999/xhtml\">"
                     + "<head><title>html</title></head>"
                     + "<body32id=\"bodyId\">"
                     + "<span32class=\"spanClass\">foo</span>"
                     + "</body>"
-                    + "</html>1310")
+                    + "</html>1310" },
+           FF = { "no ActiveX", "" })
     @NotYetImplemented(IE)
     // so far we are not able to add the XML header
     public void htmlAttributes() throws Exception {
-        final String expectedString = getExpectedAlerts()[0];
-        setExpectedAlerts();
+        final String expectedString = getExpectedAlerts()[1];
+        setExpectedAlerts(getExpectedAlerts()[0]);
         final String serializationText = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>"
                                           + "<html xmlns=\"http://www.w3.org/1999/xhtml\">"
                                           + "<head><title>html</title></head>"
@@ -191,7 +195,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
         final StringBuilder buffer = new StringBuilder();
         buffer.append(
               "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n");
+            + "  function test() {\n" + ACTIVEX_CHECK);
 
         buffer.append("    var text = '").append(escapedText).append("';\n").append(
               "    var doc = " + callLoadXMLDOMDocumentFromString("text") + ";\n"
@@ -216,10 +220,10 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "<foo/>\r\n", "<foo/>" })
+    @Alerts(DEFAULT = { "<foo/>\r\n", "<foo/>" }, FF = "no ActiveX")
     public void document() throws Exception {
         final String html = "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    try {\n"
             + "      var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "      doc.documentElement = doc.createElement('foo');\n"
@@ -236,10 +240,10 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "<img/>", "<?myTarget myData?>" })
+    @Alerts(DEFAULT = { "<img/>", "<?myTarget myData?>" }, FF = "no ActiveX")
     public void xml() throws Exception {
         final String html = "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    try {\n"
             + "      var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "      testFragment(doc);\n"
@@ -262,10 +266,11 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("<root><my:parent xmlns:my=\"myUri\"><my:child/><another_child/></my:parent></root>\r\n")
+    @Alerts(DEFAULT = "<root><my:parent xmlns:my=\"myUri\"><my:child/><another_child/></my:parent></root>\r\n",
+            FF = "no ActiveX")
     public void namespace() throws Exception {
         final String html = "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    try {\n"
             + "      var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "      var root = doc.createElement('root');\n"
@@ -290,10 +295,10 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("<teXtaREa/>")
+    @Alerts(DEFAULT = "<teXtaREa/>", FF = "no ActiveX")
     public void mixedCase() throws Exception {
         final String html = "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    try {\n"
             + "      var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "      var t = doc.createElement('teXtaREa');\n"
@@ -309,10 +314,10 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("<img href=\"mypage.htm\"/>")
+    @Alerts(DEFAULT = "<img href=\"mypage.htm\"/>", FF = "no ActiveX")
     public void noClosingTagWithAttribute() throws Exception {
         final String html = "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    try {\n"
             + "      var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "      var t = doc.createElement('img');\n"

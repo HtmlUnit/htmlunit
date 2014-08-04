@@ -21,8 +21,13 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  *
  * @version $Revision$
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public final class MSXMLTestUtil {
+
+    /** Helper. */
+    public static final String ACTIVEX_CHECK =
+            "    if (!('ActiveXObject' in window)) { alert('no ActiveX'); return; }\n";
 
     /** Helper. */
     public static final String CREATE_XMLDOMDOCUMENT_FUNCTION_NAME = "createXMLDOMDocument";
