@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.ACTIVEX_CHECK;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.CREATE_XMLDOMDOCUMENT_FUNCTION;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.callCreateXMLDOMDocument;
@@ -26,7 +27,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -37,6 +37,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Mirko Friedenhagen
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class XMLDOMCDATASectionTest extends WebDriverTestCase {
@@ -45,8 +46,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("[object Object]")
+    @Alerts(DEFAULT = "[object Object]", FF = "no ActiveX")
     public void scriptableToString() throws Exception {
         tester("alert(Object.prototype.toString.call(cdata));\n");
     }
@@ -55,8 +55,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void attributes() throws Exception {
         property("attributes");
     }
@@ -65,8 +64,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("")
+    @Alerts(DEFAULT = "", FF = "no ActiveX")
     public void baseName() throws Exception {
         property("baseName");
     }
@@ -75,8 +73,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("0")
+    @Alerts(DEFAULT = "0", FF = "no ActiveX")
     public void childNodes() throws Exception {
         tester("alert(cdata.childNodes.length);\n");
     }
@@ -85,13 +82,13 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ " ", " ", " ",
-        "exception-setNull",
-        "", "", "",
-        "test", "test", "test",
-        "test\ntest", "test\ntest", "test\ntest",
-        "<tag/>", "<tag/>", "<tag/>" })
+    @Alerts(DEFAULT = { " ", " ", " ",
+                        "exception-setNull",
+                        "", "", "",
+                        "test", "test", "test",
+                        "test\ntest", "test\ntest", "test\ntest",
+                        "<tag/>", "<tag/>", "<tag/>" },
+            FF = "no ActiveX")
     public void data() throws Exception {
         final String test = ""
             + "alert(cdata.data);\n"
@@ -134,8 +131,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void dataType() throws Exception {
         property("dataType");
     }
@@ -144,8 +140,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void definition() throws Exception {
         property("definition");
     }
@@ -154,8 +149,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void firstChild() throws Exception {
         property("firstChild");
     }
@@ -164,8 +158,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void lastChild() throws Exception {
         property("lastChild");
     }
@@ -174,8 +167,8 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "1", "0", "4", "9", "6" })
+    @Alerts(DEFAULT = { "1", "0", "4", "9", "6" },
+            FF = "no ActiveX")
     public void length() throws Exception {
         final String test = ""
             + "alert(cdata.length);\n"
@@ -204,8 +197,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("")
+    @Alerts(DEFAULT = "", FF = "no ActiveX")
     public void namespaceURI() throws Exception {
         property("namespaceURI");
     }
@@ -214,8 +206,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("#cdata-section")
+    @Alerts(DEFAULT = "#cdata-section", FF = "no ActiveX")
     public void nodeName() throws Exception {
         property("nodeName");
     }
@@ -224,8 +215,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("4")
+    @Alerts(DEFAULT = "4", FF = "no ActiveX")
     public void nodeType() throws Exception {
         property("nodeType");
     }
@@ -234,13 +224,13 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ " ", " ", " ",
-        "exception-setNull",
-        "", "", "",
-        "test", "test", "test",
-        "test\ntest", "test\ntest", "test\ntest",
-        "<tag/>", "<tag/>", "<tag/>" })
+    @Alerts(DEFAULT = { " ", " ", " ",
+                        "exception-setNull",
+                        "", "", "",
+                        "test", "test", "test",
+                        "test\ntest", "test\ntest", "test\ntest",
+                        "<tag/>", "<tag/>", "<tag/>" },
+            FF = "no ActiveX")
     public void nodeValue() throws Exception {
         final String test = ""
             + "alert(cdata.nodeValue);\n"
@@ -283,8 +273,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("")
+    @Alerts(DEFAULT = "", FF = "no ActiveX")
     @NotYetImplemented(IE)
     // Xerxes is the problem here as they drop empty CDATA sections. So <root> has no children and our test fails.
     // see: https://issues.apache.org/jira/browse/XERCESJ-1033
@@ -301,8 +290,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("true")
+    @Alerts(DEFAULT = "true", FF = "no ActiveX")
     public void ownerDocument() throws Exception {
         tester("alert(cdata.ownerDocument === doc);\n");
     }
@@ -311,11 +299,11 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("true")
+    @Alerts(DEFAULT = "true", FF = "no ActiveX")
     public void ownerDocument_created() throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var cdata = doc.createCDATASection('something');\n"
             + "    try {\n"
@@ -331,8 +319,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("true")
+    @Alerts(DEFAULT = "true", FF = "no ActiveX")
     public void parentNode() throws Exception {
         final String xml = ""
             + "<root>"
@@ -346,11 +333,11 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("true")
+    @Alerts(DEFAULT = "true", FF = "no ActiveX")
     public void parentNode_created() throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var cdata = doc.createCDATASection('something');\n"
             + "    try {\n"
@@ -366,8 +353,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("")
+    @Alerts(DEFAULT = "", FF = "no ActiveX")
     public void prefix() throws Exception {
         property("prefix");
     }
@@ -376,13 +362,13 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ " ", " ", " ",
-        "exception-setNull",
-        "", "", "",
-        "test", "test", "test",
-        "test\ntest", "test\ntest", "test\ntest",
-        "<tag/>", "<tag/>", "<tag/>" })
+    @Alerts(DEFAULT = { " ", " ", " ",
+                        "exception-setNull",
+                        "", "", "",
+                        "test", "test", "test",
+                        "test\ntest", "test\ntest", "test\ntest",
+                        "<tag/>", "<tag/>", "<tag/>" },
+            FF = "no ActiveX")
     public void text() throws Exception {
         final String test = ""
             + "alert(cdata.text);\n"
@@ -425,8 +411,8 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "<![CDATA[ ]]>", "<![CDATA[text]]>", "<![CDATA[text\r\ntext]]>", "<![CDATA[<tag/>]]>" })
+    @Alerts(DEFAULT = { "<![CDATA[ ]]>", "<![CDATA[text]]>", "<![CDATA[text\r\ntext]]>", "<![CDATA[<tag/>]]>" },
+            FF = "no ActiveX")
     public void xml() throws Exception {
         final String test = ""
             + "alert(cdata.xml);\n"
@@ -455,11 +441,11 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("<![CDATA[]]>")
+    @Alerts(DEFAULT = "<![CDATA[]]>", FF = "no ActiveX")
     public void xml_created() throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var cdata = doc.createCDATASection('');\n"
             + "    try {\n"
@@ -475,8 +461,8 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "myCDATA", "myCDATA-appended", "exception-appendNull", "myCDATA-appended", "myCDATA-appended\n" })
+    @Alerts(DEFAULT = { "myCDATA", "myCDATA-appended", "exception-appendNull", "myCDATA-appended", "myCDATA-appended\n" },
+            FF = "no ActiveX")
     public void appendData() throws Exception {
         final String test = ""
             + "alert(cdata.data);\n"
@@ -501,13 +487,13 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "myCDATA", "myCDAT", "myT", "yT",
-        "exception-deletePosNegative", "yT",
-        "exception-deletePosTooHigh", "yT",
-        "yT",
-        "exception-deleteCntNegative", "yT",
-        "y" })
+    @Alerts(DEFAULT = { "myCDATA", "myCDAT", "myT", "yT",
+                        "exception-deletePosNegative", "yT",
+                        "exception-deletePosTooHigh", "yT",
+                        "yT",
+                        "exception-deleteCntNegative", "yT",
+                        "y" },
+            FF = "no ActiveX")
     public void deleteData() throws Exception {
         final String test = ""
             + "alert(cdata.data);\n"
@@ -549,13 +535,13 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "myCDATA", "myCDATA-b", "myC-m-DATA-b", "f-myC-m-DATA-b",
-        "exception-insertNull", "f-myC-m-DATA-b", "\nf-myC-m-DATA-b",
-        "\nf-myC-m-DATA-b",
-        "exception-insertPosNegative", "\nf-myC-m-DATA-b",
-        "\nf-myC-m-DATA-b",
-        "exception-insertPosTooHigh", "\nf-myC-m-DATA-b" })
+    @Alerts(DEFAULT = { "myCDATA", "myCDATA-b", "myC-m-DATA-b", "f-myC-m-DATA-b",
+                        "exception-insertNull", "f-myC-m-DATA-b", "\nf-myC-m-DATA-b",
+                        "\nf-myC-m-DATA-b",
+                        "exception-insertPosNegative", "\nf-myC-m-DATA-b",
+                        "\nf-myC-m-DATA-b",
+                        "exception-insertPosTooHigh", "\nf-myC-m-DATA-b" },
+            FF = "no ActiveX")
     public void insertData() throws Exception {
         final String test = ""
             + "alert(cdata.data);\n"
@@ -602,14 +588,14 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "myCDATA", "myCDAT-b", "my-m-T-b", "f-y-m-T-b",
-        "exception-replaceNull", "f-y--T-b", "f-y\nT-b",
-        "exception-replacePosNegative", "f-y\nT-b",
-        "exception-replacePosTooHigh", "f-y\nT-b",
-        "f-y\nT-b",
-        "exception-replaceCntNegative", "f-y\nT-b",
-        "f" })
+    @Alerts(DEFAULT = { "myCDATA", "myCDAT-b", "my-m-T-b", "f-y-m-T-b",
+                        "exception-replaceNull", "f-y--T-b", "f-y\nT-b",
+                        "exception-replacePosNegative", "f-y\nT-b",
+                        "exception-replacePosTooHigh", "f-y\nT-b",
+                        "f-y\nT-b",
+                        "exception-replaceCntNegative", "f-y\nT-b",
+                        "f" },
+            FF = "no ActiveX")
     public void replaceData() throws Exception {
         final String test = ""
             + "alert(cdata.data);\n"
@@ -661,10 +647,10 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "1", "2", "#cdata-section", "2", "my", "#cdata-section", "5", "CDATA", "true",
-        "exception-splitPosNegative", "my",
-        "exception-splitPosTooHigh", "my" })
+    @Alerts(DEFAULT = { "1", "2", "#cdata-section", "2", "my", "#cdata-section", "5", "CDATA", "true",
+                        "exception-splitPosNegative", "my",
+                        "exception-splitPosTooHigh", "my" },
+            FF = "no ActiveX")
     public void splitText() throws Exception {
         final String test = ""
             + "alert(root.childNodes.length);\n"
@@ -694,13 +680,13 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "myCDATA", "A", "myCDATA", "CDA", "myCDATA", "m", "myCDATA",
-        "exception-substringPosNegative", "myCDATA",
-        "exception-substringPosTooHigh", "myCDATA",
-        "", "myCDATA",
-        "exception-substringCntNegative", "myCDATA",
-        "yCDATA", "myCDATA" })
+    @Alerts(DEFAULT = { "myCDATA", "A", "myCDATA", "CDA", "myCDATA", "m", "myCDATA",
+                        "exception-substringPosNegative", "myCDATA",
+                        "exception-substringPosTooHigh", "myCDATA",
+                        "", "myCDATA",
+                        "exception-substringCntNegative", "myCDATA",
+                        "yCDATA", "myCDATA" },
+            FF = "no ActiveX")
     public void substringData() throws Exception {
         final String test = ""
             + "alert(cdata.data);\n"
@@ -751,6 +737,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
     private void tester(final String test, final String xml) throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var doc = " + callLoadXMLDOMDocumentFromURL("'second.xml'") + ";\n"
             + "    var root = doc.documentElement;\n"
             + "    try {\n"
