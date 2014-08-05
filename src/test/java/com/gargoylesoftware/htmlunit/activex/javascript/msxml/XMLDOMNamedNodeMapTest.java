@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.ACTIVEX_CHECK;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.callLoadXMLDOMDocumentFromURL;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.createTestHTML;
@@ -24,7 +24,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -35,6 +34,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
@@ -43,8 +43,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("[object Object]")
+    @Alerts(DEFAULT = "[object Object]", FF = "no ActiveX")
     public void scriptableToString() throws Exception {
         tester("alert(Object.prototype.toString.call(attrs));\n");
     }
@@ -53,8 +52,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
-    @Alerts("1")
+    @Alerts(DEFAULT = "1", FF = "no ActiveX")
     public void length() throws Exception {
         tester("alert(attrs.length);\n");
     }
@@ -63,8 +61,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined", FF = "no ActiveX")
     public void byName_attribute() throws Exception {
         tester("alert(attrs.name);\n");
     }
@@ -73,8 +70,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined", FF = "no ActiveX")
     public void byName_map() throws Exception {
         tester("alert(attrs['name']);\n");
     }
@@ -83,8 +79,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
-    @Alerts("name")
+    @Alerts(DEFAULT = "name", FF = "no ActiveX")
     public void byNumber() throws Exception {
         tester("alert(attrs[0].nodeName);\n");
     }
@@ -93,8 +88,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void byNumber_unknown() throws Exception {
         tester("debug(attrs[1]);\n");
     }
@@ -103,8 +97,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
-    @Alerts("name=y")
+    @Alerts(DEFAULT = "name=y", FF = "no ActiveX")
     public void getNamedItem() throws Exception {
         tester("debug(attrs.getNamedItem('name'));\n");
     }
@@ -113,8 +106,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void getNamedItem_unknown() throws Exception {
         tester("debug(attrs.getNamedItem('unknown'));\n");
     }
@@ -123,8 +115,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void getNamedItem_caseSensitive() throws Exception {
         tester("debug(attrs.getNamedItem('NaMe'));\n");
     }
@@ -133,8 +124,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("exception-getNull")
+    @Alerts(DEFAULT = "exception-getNull", FF = "no ActiveX")
     public void getNamedItem_null() throws Exception {
         final String test = ""
             + "try {\n"
@@ -148,8 +138,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
-    @Alerts("name=y")
+    @Alerts(DEFAULT = "name=y", FF = "no ActiveX")
     public void item() throws Exception {
         tester("debug(attrs.item(0));\n");
     }
@@ -158,8 +147,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void item_unknown() throws Exception {
         tester("debug(attrs.item(1));\n");
     }
@@ -168,8 +156,8 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "2", "name1=y1", "name2=y2", "null" })
+    @Alerts(DEFAULT = { "2", "name1=y1", "name2=y2", "null" },
+            FF = "no ActiveX")
     public void nextNode() throws Exception {
         final String test = ""
             + "alert(attrs.length);\n"
@@ -184,8 +172,8 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "1", "name=y", "0", "null", "name=y" })
+    @Alerts(DEFAULT = { "1", "name=y", "0", "null", "name=y" },
+            FF = "no ActiveX")
     public void removeNamedItem() throws Exception {
         final String test = ""
             + "alert(attrs.length);\n"
@@ -202,8 +190,8 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "1", "1", "null" })
+    @Alerts(DEFAULT = { "1", "1", "null" },
+            FF = "no ActiveX")
     public void removeNamedItem_unknown() throws Exception {
         final String test = ""
             + "alert(attrs.length);\n"
@@ -218,8 +206,8 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "1", "1", "null" })
+    @Alerts(DEFAULT = { "1", "1", "null" },
+            FF = "no ActiveX")
     public void removeNamedItem_caseSensitive() throws Exception {
         final String test = ""
             + "alert(attrs.length);\n"
@@ -234,8 +222,8 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "0", "exception-removeNull" })
+    @Alerts(DEFAULT = { "0", "exception-removeNull" },
+            FF = "no ActiveX")
     public void removeNamedItem_null() throws Exception {
         final String test = ""
             + "alert(attrs.length);\n"
@@ -250,8 +238,8 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "2", "name1=y1", "name1=y1", "name2=y2", "name1=y1" })
+    @Alerts(DEFAULT = { "2", "name1=y1", "name1=y1", "name2=y2", "name1=y1" },
+            FF = "no ActiveX")
     public void reset() throws Exception {
         final String test = ""
             + "alert(attrs.length);\n"
@@ -269,8 +257,8 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "0", "1", "myAttr=", "true" })
+    @Alerts(DEFAULT = { "0", "1", "myAttr=", "true" },
+            FF = "no ActiveX")
     public void setNamedItem() throws Exception {
         final String test = ""
             + "alert(attrs.length);\n"
@@ -287,8 +275,8 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "0", "exception-setNull" })
+    @Alerts(DEFAULT = { "0", "exception-setNull" },
+            FF = "no ActiveX")
     public void setNamedItem_null() throws Exception {
         final String test = ""
             + "alert(attrs.length);\n"
@@ -308,6 +296,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
     private void tester(final String test, final String xml) throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var doc = " + callLoadXMLDOMDocumentFromURL("'second.xml'") + ";\n"
             + "    try {\n"
             + "      var attrs = doc.documentElement.attributes;\n"
