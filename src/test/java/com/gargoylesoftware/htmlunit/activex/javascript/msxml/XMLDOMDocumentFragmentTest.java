@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.ACTIVEX_CHECK;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.CREATE_XMLDOMDOCUMENT_FUNCTION;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.callCreateXMLDOMDocument;
@@ -26,7 +26,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -34,6 +33,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
@@ -42,8 +42,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("[object Object]")
+    @Alerts(DEFAULT = "[object Object]", FF = "no ActiveX")
     public void scriptableToString() throws Exception {
         tester("alert(Object.prototype.toString.call(fragment));\n");
     }
@@ -52,8 +51,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void attributes() throws Exception {
         property("attributes");
     }
@@ -62,8 +60,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("")
+    @Alerts(DEFAULT = "", FF = "no ActiveX")
     public void baseName() throws Exception {
         property("baseName");
     }
@@ -72,9 +69,9 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "4", "#cdata-section=child-cdata", "true", "#comment=child-comment", "true",
-        "child-element=null", "true", "#text=child-text", "true" })
+    @Alerts(DEFAULT = { "4", "#cdata-section=child-cdata", "true", "#comment=child-comment", "true",
+                        "child-element=null", "true", "#text=child-text", "true" },
+            FF = "no ActiveX")
     public void childNodes() throws Exception {
         final String test = ""
             + "var cdata = doc.createCDATASection('child-cdata');\n"
@@ -109,8 +106,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("0")
+    @Alerts(DEFAULT = "0", FF = "no ActiveX")
     public void childNodes_none() throws Exception {
         tester("alert(fragment.childNodes.length);\n");
     }
@@ -119,8 +115,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void dataType() throws Exception {
         property("dataType");
     }
@@ -129,8 +124,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void definition() throws Exception {
         property("definition");
     }
@@ -139,8 +133,8 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "child-element=null", "true" })
+    @Alerts(DEFAULT = { "child-element=null", "true" },
+            FF = "no ActiveX")
     public void firstChild() throws Exception {
         final String test = ""
             + "var element = doc.createElement('child-element');\n"
@@ -155,8 +149,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void firstChild_none() throws Exception {
         property("firstChild");
     }
@@ -165,8 +158,8 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "child-element=null", "true" })
+    @Alerts(DEFAULT = { "child-element=null", "true" },
+            FF = "no ActiveX")
     public void lastChild() throws Exception {
         final String test = ""
             + "var element = doc.createElement('child-element');\n"
@@ -181,8 +174,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void lastChild_none() throws Exception {
         property("lastChild");
     }
@@ -191,8 +183,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("")
+    @Alerts(DEFAULT = "", FF = "no ActiveX")
     public void namespaceURI() throws Exception {
         property("namespaceURI");
     }
@@ -201,8 +192,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("#document-fragment")
+    @Alerts(DEFAULT = "#document-fragment", FF = "no ActiveX")
     public void nodeName() throws Exception {
         property("nodeName");
     }
@@ -211,8 +201,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("11")
+    @Alerts(DEFAULT = "11", FF = "no ActiveX")
     public void nodeType() throws Exception {
         property("nodeType");
     }
@@ -221,8 +210,8 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "null", "exception-setNull", "exception-setEmpty", "exception-set" })
+    @Alerts(DEFAULT = { "null", "exception-setNull", "exception-setEmpty", "exception-set" },
+            FF = "no ActiveX")
     public void nodeValue() throws Exception {
         final String test = ""
             + "alert(fragment.nodeValue);\n"
@@ -246,8 +235,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("true")
+    @Alerts(DEFAULT = "true", FF = "no ActiveX")
     public void ownerDocument() throws Exception {
         tester("alert(fragment.ownerDocument === doc);\n");
     }
@@ -256,8 +244,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void parentNode() throws Exception {
         property("parentNode");
     }
@@ -266,8 +253,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("")
+    @Alerts(DEFAULT = "", FF = "no ActiveX")
     public void prefix() throws Exception {
         property("prefix");
     }
@@ -276,8 +262,8 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("child-cdatagrand-child-textchild-text")
+    @Alerts(DEFAULT = "child-cdatagrand-child-textchild-text",
+            FF = "no ActiveX")
     public void text() throws Exception {
         final String test = ""
             + "var cdata = doc.createCDATASection('child-cdata');\n"
@@ -303,8 +289,8 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "exception-set", "exception-setEmpty", "exception-setNull" })
+    @Alerts(DEFAULT = { "exception-set", "exception-setEmpty", "exception-setNull" },
+            FF = "no ActiveX")
     public void text_set() throws Exception {
         final String test =
             // normal
@@ -327,8 +313,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("c\nct\nt")
+    @Alerts(DEFAULT = "c\nct\nt", FF = "no ActiveX")
     public void text_lineBreak() throws Exception {
         final String test = ""
             + "var cdata = doc.createCDATASection('c\\nc');\n"
@@ -344,11 +329,11 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("")
+    @Alerts(DEFAULT = "", FF = "no ActiveX")
     public void text_created() throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var fragment = doc.createDocumentFragment();\n"
             + "    try {\n"
@@ -364,9 +349,9 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("<![CDATA[child-cdata]]><!--child-comment--><child-element/>"
-            + "<child-element2><grand-child-element/></child-element2>child-text")
+    @Alerts(DEFAULT = "<![CDATA[child-cdata]]><!--child-comment--><child-element/>"
+                    + "<child-element2><grand-child-element/></child-element2>child-text",
+            FF = "no ActiveX")
     public void xml() throws Exception {
         final String test = ""
             + "var cdata = doc.createCDATASection('child-cdata');\n"
@@ -392,8 +377,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("child-text\r\n")
+    @Alerts(DEFAULT = "child-text\r\n", FF = "no ActiveX")
     public void xml_lineBreak() throws Exception {
         final String test =
                 "var text = doc.createTextNode('child-text\\n');\n"
@@ -407,11 +391,11 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("")
+    @Alerts(DEFAULT = "", FF = "no ActiveX")
     public void xml_created() throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var fragment = doc.createDocumentFragment();\n"
             + "    try {\n"
@@ -434,6 +418,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
     private void tester(final String test, final String xml) throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var doc = " + callLoadXMLDOMDocumentFromURL("'" + URL_SECOND + "'") + ";\n"
             + "    var root = doc.documentElement;\n"
             + "    var fragment = doc.createDocumentFragment();\n"
