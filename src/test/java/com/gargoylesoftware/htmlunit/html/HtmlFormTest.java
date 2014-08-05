@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
@@ -34,7 +33,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -1066,24 +1064,19 @@ public class HtmlFormTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF })
+    @Alerts(DEFAULT = { "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo#anchor",
+                        "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo#anchor",
+                        "foo#anchor",
+                        "foo?foo=12#anchor" },
+            IE = { "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo",
+                    "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo",
+                    "foo#anchor",
+                    "foo?foo=12#anchor" })
     public void urlAfterSubmitWithAnchor() throws Exception {
-        urlAfterSubmit("get", "foo#anchor", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo#anchor");
-        urlAfterSubmit("get", "foo?foo=12#anchor", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo#anchor");
-        urlAfterSubmit("post", "foo#anchor", "foo#anchor");
-        urlAfterSubmit("post", "foo?foo=12#anchor", "foo?foo=12#anchor");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Browsers({ IE })
-    public void urlAfterSubmitWithAnchor_IE() throws Exception {
-        urlAfterSubmit("get", "foo#anchor", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo");
-        urlAfterSubmit("get", "foo?foo=12#anchor", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo");
-        urlAfterSubmit("post", "foo#anchor", "foo#anchor");
-        urlAfterSubmit("post", "foo?foo=12#anchor", "foo?foo=12#anchor");
+        urlAfterSubmit("get", "foo#anchor", getExpectedAlerts()[0]);
+        urlAfterSubmit("get", "foo?foo=12#anchor", getExpectedAlerts()[1]);
+        urlAfterSubmit("post", "foo#anchor", getExpectedAlerts()[2]);
+        urlAfterSubmit("post", "foo?foo=12#anchor", getExpectedAlerts()[3]);
     }
 
     /**

@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -24,7 +21,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -41,8 +37,7 @@ public class HtmlBodyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE11 })
-    @Alerts("[object HTMLBodyElement]")
+    @Alerts(DEFAULT = "[object HTMLBodyElement]", IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
