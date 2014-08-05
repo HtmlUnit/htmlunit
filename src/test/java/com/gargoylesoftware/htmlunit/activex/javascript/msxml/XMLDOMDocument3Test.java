@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.ACTIVEX_CHECK;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.CREATE_XMLDOMDOCUMENT_FUNCTION;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.LOAD_XMLDOMDOCUMENT_FROM_STRING_FUNCTION;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.SERIALIZE_XMLDOMDOCUMENT_TO_STRING_FUNCTION;
@@ -28,7 +28,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -47,12 +46,13 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "myTarget,myData,7", "myTarget,myData", "abcdefghij",
-            "<?myTarget myData?>", "<![CDATA[abcdefghij]]>" })
+    @Alerts(DEFAULT = { "myTarget,myData,7", "myTarget,myData", "abcdefghij",
+                        "<?myTarget myData?>", "<![CDATA[abcdefghij]]>" },
+            FF = "no ActiveX")
     public void createProcessingInstruction() throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var d = doc.createElement('doc');\n"
             + "    d.setAttribute('fluffy', 'true');\n"
@@ -77,11 +77,11 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("createNode not available")
+    @Alerts(DEFAULT = "createNode not available", FF = "no ActiveX")
     public void createNode() throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var doc = " + callLoadXMLDOMDocumentFromString("'<root><child/></root>'") + ";\n"
             + "    if (document.createNode) {\n"
             + "      var node = doc.createNode(2, 'Sci-Fi', '');\n"
@@ -98,11 +98,11 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("createNode not available")
+    @Alerts(DEFAULT = "createNode not available", FF = "no ActiveX")
     public void createNode_element() throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    if (document.createNode) {\n"
             + "      var node = doc.createNode(1, 'test:element', 'uri:test');\n"
@@ -120,11 +120,11 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "a", "null", "b" })
+    @Alerts(DEFAULT = { "a", "null", "b" }, FF = "no ActiveX")
     public void documentElementCaching() throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var a = doc.createElement('a');\n"
             + "    var b = doc.createElement('b');\n"
@@ -143,11 +143,11 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("a:b")
+    @Alerts(DEFAULT = "a:b", FF = "no ActiveX")
     public void createElement_namespace() throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var a = doc.createElement('a:b');\n"
             + "    alert(a.tagName);\n"
@@ -162,11 +162,12 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "content", "content" })
+    @Alerts(DEFAULT = { "content", "content" },
+            FF = "no ActiveX")
     public void text() throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var xml = '<Envelope><Body>content</Body></Envelope>';\n"
             + "    var xmldoc = " + callLoadXMLDOMDocumentFromString("xml") + ";\n"
 
