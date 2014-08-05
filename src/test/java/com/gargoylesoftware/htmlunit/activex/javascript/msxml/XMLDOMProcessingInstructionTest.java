@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.ACTIVEX_CHECK;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.CREATE_XMLDOMDOCUMENT_FUNCTION;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.callCreateXMLDOMDocument;
@@ -26,7 +27,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
@@ -43,8 +44,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("[object Object]")
+    @Alerts(DEFAULT = "[object Object]", FF = "no ActiveX")
     public void scriptableToString() throws Exception {
         tester("alert(Object.prototype.toString.call(instr));\n");
     }
@@ -53,8 +53,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void attributes() throws Exception {
         property("attributes");
     }
@@ -63,8 +62,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "1", "version=1.0" })
+    @Alerts(DEFAULT = { "1", "version=1.0" }, FF = "no ActiveX")
     @NotYetImplemented(IE)
     // DOM processing instructions do not support attributes
     public void attributes_xmlDecl() throws Exception {
@@ -79,13 +77,14 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "3", "version=1.0", "encoding=utf-8", "standalone=yes" })
+    @Alerts(DEFAULT = { "3", "version=1.0", "encoding=utf-8", "standalone=yes" },
+            FF = "no ActiveX")
     @NotYetImplemented(IE)
     // DOM processing instructions do not support attributes
     public void attributes_complete_xmlDecl() throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var instr = doc.createProcessingInstruction("
             + "'xml', 'version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"');\n"
@@ -109,8 +108,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("apache")
+    @Alerts(DEFAULT = "apache", FF = "no ActiveX")
     public void baseName() throws Exception {
         property("baseName");
     }
@@ -119,8 +117,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("xml")
+    @Alerts(DEFAULT = "xml", FF = "no ActiveX")
     public void baseName_xmlDecl() throws Exception {
         property_xmlDecl("baseName");
     }
@@ -129,8 +126,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("0")
+    @Alerts(DEFAULT = "0", FF = "no ActiveX")
     public void childNodes() throws Exception {
         tester("alert(instr.childNodes.length);\n");
     }
@@ -139,8 +135,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("0")
+    @Alerts(DEFAULT = "0", FF = "no ActiveX")
     public void childNodes_xmlDecl() throws Exception {
         tester_xmlDecl("alert(instr.childNodes.length);\n");
     }
@@ -149,13 +144,13 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "include file=\"header.html\" ", "include file=\"header.html\" ", "include file=\"header.html\" ",
-        "exception-setNull",
-        "", "", "",
-        "test", "test", "test",
-        "test\ntest", "test\ntest", "test\ntest",
-        "<tag/>", "<tag/>", "<tag/>" })
+    @Alerts(DEFAULT = { "include file=\"header.html\" ", "include file=\"header.html\" ", "include file=\"header.html\" ",
+                        "exception-setNull",
+                        "", "", "",
+                        "test", "test", "test",
+                        "test\ntest", "test\ntest", "test\ntest",
+                        "<tag/>", "<tag/>", "<tag/>" },
+            FF = "no ActiveX")
     public void data() throws Exception {
         final String test = ""
             + "alert(instr.data);\n"
@@ -193,11 +188,11 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "version=\"1.0\"", "version=\"1.0\"", "version=\"1.0\"",
-        "exception-setNull",
-        "exception-setEmpty",
-        "exception-set" })
+    @Alerts(DEFAULT = { "version=\"1.0\"", "version=\"1.0\"", "version=\"1.0\"",
+                        "exception-setNull",
+                        "exception-setEmpty",
+                        "exception-set" },
+        FF = "no ActiveX")
     public void data_xmlDecl() throws Exception {
         final String test = ""
             + "alert(instr.data);\n"
@@ -223,8 +218,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void dataType() throws Exception {
         property("dataType");
     }
@@ -233,8 +227,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void dataType_xmlDecl() throws Exception {
         property_xmlDecl("dataType");
     }
@@ -243,8 +236,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void definition() throws Exception {
         property("definition");
     }
@@ -253,8 +245,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void definition_xmlDecl() throws Exception {
         property_xmlDecl("definition");
     }
@@ -263,8 +254,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void firstChild() throws Exception {
         property("firstChild");
     }
@@ -273,8 +263,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void firstChild_xmlDecl() throws Exception {
         property_xmlDecl("firstChild");
     }
@@ -283,8 +272,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void lastChild() throws Exception {
         property("lastChild");
     }
@@ -293,8 +281,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("null")
+    @Alerts(DEFAULT = "null", FF = "no ActiveX")
     public void lastChild_xmlDecl() throws Exception {
         property_xmlDecl("lastChild");
     }
@@ -303,8 +290,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("")
+    @Alerts(DEFAULT = "", FF = "no ActiveX")
     public void namespaceURI() throws Exception {
         property("namespaceURI");
     }
@@ -313,8 +299,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("")
+    @Alerts(DEFAULT = "", FF = "no ActiveX")
     public void namespaceURI_xmlDecl() throws Exception {
         property_xmlDecl("namespaceURI");
     }
@@ -323,8 +308,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("apache")
+    @Alerts(DEFAULT = "apache", FF = "no ActiveX")
     public void nodeName() throws Exception {
         property("nodeName");
     }
@@ -333,8 +317,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("xml")
+    @Alerts(DEFAULT = "xml", FF = "no ActiveX")
     public void nodeName_xmlDecl() throws Exception {
         property_xmlDecl("nodeName");
     }
@@ -343,8 +326,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("7")
+    @Alerts(DEFAULT = "7", FF = "no ActiveX")
     public void nodeType() throws Exception {
         property("nodeType");
     }
@@ -353,8 +335,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("7")
+    @Alerts(DEFAULT = "7", FF = "no ActiveX")
     public void nodeType_xmlDecl() throws Exception {
         property_xmlDecl("nodeType");
     }
@@ -363,13 +344,13 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "include file=\"header.html\" ", "include file=\"header.html\" ", "include file=\"header.html\" ",
-        "exception-setNull",
-        "", "", "",
-        "test", "test", "test",
-        "test\ntest", "test\ntest", "test\ntest",
-        "<tag/>", "<tag/>", "<tag/>" })
+    @Alerts(DEFAULT = { "include file=\"header.html\" ", "include file=\"header.html\" ", "include file=\"header.html\" ",
+                        "exception-setNull",
+                        "", "", "",
+                        "test", "test", "test",
+                        "test\ntest", "test\ntest", "test\ntest",
+                        "<tag/>", "<tag/>", "<tag/>" },
+            FF = "no ActiveX")
     public void nodeValue() throws Exception {
         final String test = ""
             + "alert(instr.nodeValue);\n"
@@ -407,11 +388,11 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "version=\"1.0\"", "version=\"1.0\"", "version=\"1.0\"",
-        "exception-setNull",
-        "exception-setEmpty",
-        "exception-set" })
+    @Alerts(DEFAULT = { "version=\"1.0\"", "version=\"1.0\"", "version=\"1.0\"",
+                        "exception-setNull",
+                        "exception-setEmpty",
+                        "exception-set" },
+        FF = "no ActiveX")
     public void nodeValue_xmlDecl() throws Exception {
         final String test = ""
             + "alert(instr.nodeValue);\n"
@@ -437,8 +418,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("true")
+    @Alerts(DEFAULT = "true", FF = "no ActiveX")
     public void ownerDocument() throws Exception {
         tester("alert(instr.ownerDocument === doc);\n");
     }
@@ -447,8 +427,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("true")
+    @Alerts(DEFAULT = "true", FF = "no ActiveX")
     public void ownerDocument_xmlDecl() throws Exception {
         tester_xmlDecl("alert(instr.ownerDocument === doc);\n");
     }
@@ -457,11 +436,11 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("true")
+    @Alerts(DEFAULT = "true", FF = "no ActiveX")
     public void ownerDocument_created() throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var instr = doc.createProcessingInstruction('apache', 'file=\"header.html\"');\n"
             + "    try {\n"
@@ -477,11 +456,11 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("true")
+    @Alerts(DEFAULT = "true", FF = "no ActiveX")
     public void ownerDocument_created_xmlDecl() throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var instr = doc.createProcessingInstruction('xml', 'version=\"1.0\"');\n"
             + "    try {\n"
@@ -497,8 +476,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("true")
+    @Alerts(DEFAULT = "true", FF = "no ActiveX")
     public void parentNode() throws Exception {
         tester("alert(doc === instr.parentNode);\n");
     }
@@ -507,8 +485,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("true")
+    @Alerts(DEFAULT = "true", FF = "no ActiveX")
     public void parentNode_xmlDecl() throws Exception {
         tester_xmlDecl("alert(doc === instr.parentNode);\n");
     }
@@ -517,11 +494,11 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("true")
+    @Alerts(DEFAULT = "true", FF = "no ActiveX")
     public void parentNode_created() throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var instr = doc.createProcessingInstruction('apache', 'file=\"header.html\"');\n"
             + "    try {\n"
@@ -537,11 +514,11 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("true")
+    @Alerts(DEFAULT = "true", FF = "no ActiveX")
     public void parentNode_created_xmlDecl() throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var instr = doc.createProcessingInstruction('xml', 'version=\"1.0\"');\n"
             + "    try {\n"
@@ -557,8 +534,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("")
+    @Alerts(DEFAULT = "", FF = "no ActiveX")
     public void prefix() throws Exception {
         property("prefix");
     }
@@ -567,8 +543,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("")
+    @Alerts(DEFAULT = "", FF = "no ActiveX")
     public void prefix_xmlDecl() throws Exception {
         property_xmlDecl("prefix");
     }
@@ -577,8 +552,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("apache")
+    @Alerts(DEFAULT = "apache", FF = "no ActiveX")
     public void target() throws Exception {
         property("target");
     }
@@ -587,8 +561,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("xml")
+    @Alerts(DEFAULT = "xml", FF = "no ActiveX")
     public void target_xmlDecl() throws Exception {
         property_xmlDecl("target");
     }
@@ -597,13 +570,13 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "include file=\"header.html\" ", "include file=\"header.html\" ", "include file=\"header.html\" ",
-        "exception-setNull",
-        "", "", "",
-        "test", "test", "test",
-        "test\ntest", "test\ntest", "test\ntest",
-        "<tag/>", "<tag/>", "<tag/>" })
+    @Alerts(DEFAULT = { "include file=\"header.html\" ", "include file=\"header.html\" ", "include file=\"header.html\" ",
+                        "exception-setNull",
+                        "", "", "",
+                        "test", "test", "test",
+                        "test\ntest", "test\ntest", "test\ntest",
+                        "<tag/>", "<tag/>", "<tag/>" },
+            FF = "no ActiveX")
     public void text() throws Exception {
         final String test = ""
             + "alert(instr.text);\n"
@@ -641,11 +614,11 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "version=\"1.0\"", "version=\"1.0\"", "version=\"1.0\"",
-        "exception-setNull",
-        "exception-setEmpty",
-        "exception-set" })
+    @Alerts(DEFAULT = { "version=\"1.0\"", "version=\"1.0\"", "version=\"1.0\"",
+                        "exception-setNull",
+                        "exception-setEmpty",
+                        "exception-set" },
+        FF = "no ActiveX")
     public void text_xmlDecl() throws Exception {
         final String test = ""
             + "alert(instr.text);\n"
@@ -671,8 +644,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("<?apache include file=\"header.html\" ?>")
+    @Alerts(DEFAULT = "<?apache include file=\"header.html\" ?>", FF = "no ActiveX")
     public void xml() throws Exception {
         property("xml");
     }
@@ -681,8 +653,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("<?xml version=\"1.0\"?>")
+    @Alerts(DEFAULT = "<?xml version=\"1.0\"?>", FF = "no ActiveX")
     public void xml_xmlDecl() throws Exception {
         property_xmlDecl("xml");
     }
@@ -691,11 +662,11 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("<?x ?>")
+    @Alerts(DEFAULT = "<?x ?>", FF = "no ActiveX")
     public void xml_created() throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var instr = doc.createProcessingInstruction('x', '');\n"
             + "    try {\n"
@@ -725,6 +696,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
     private void tester_xmlDecl(final String test) throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    var instr = doc.createProcessingInstruction('xml', 'version=\"1.0\"');\n"
             + "    doc.appendChild(instr);\n"
@@ -740,6 +712,7 @@ public class XMLDOMProcessingInstructionTest extends WebDriverTestCase {
     private void tester(final String test, final String xml) throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var doc = " + callLoadXMLDOMDocumentFromURL("'second.xml'") + ";\n"
             + "    var root = doc.documentElement;\n"
             + "    try {\n"

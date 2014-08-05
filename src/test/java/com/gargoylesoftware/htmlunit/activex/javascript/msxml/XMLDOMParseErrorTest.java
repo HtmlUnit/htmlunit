@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.ACTIVEX_CHECK;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.CREATE_XMLDOMDOCUMENT_FUNCTION;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.LOAD_XMLDOMDOCUMENT_FROM_STRING_FUNCTION;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
@@ -28,7 +28,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -36,6 +35,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class XMLDOMParseErrorTest extends WebDriverTestCase {
@@ -44,11 +44,11 @@ public class XMLDOMParseErrorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts("[object Object]")
+    @Alerts(DEFAULT = "[object Object]", FF = "no ActiveX")
     public void scriptableToString() throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "    try {\n"
             + "      alert(Object.prototype.toString.call(doc.parseError));\n"
@@ -63,11 +63,12 @@ public class XMLDOMParseErrorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "false", "true", "true", "true", "true", "true", "true", "true", "exception-Other" })
+    @Alerts(DEFAULT = { "false", "true", "true", "true", "true", "true", "true", "true", "exception-Other" },
+            FF = "no ActiveX")
     public void parseError_createXMLDocument() throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    try {\n"
             + "      var doc = " + callCreateXMLDOMDocument() + ";\n"
             + "      alert(doc.parseError == null);\n"
@@ -95,11 +96,12 @@ public class XMLDOMParseErrorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "false", "false", "false", "false", "false", "false", "false", "true", "exception-Other" })
+    @Alerts(DEFAULT = { "false", "false", "false", "false", "false", "false", "false", "true", "exception-Other" },
+            FF = "no ActiveX")
     public void parseError_loadXML() throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    var text='<root><element></root>';\n"
             + "    try {\n"
             + "      var doc = " + callLoadXMLDOMDocumentFromString("text") + ";\n"
@@ -128,11 +130,12 @@ public class XMLDOMParseErrorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "false", "false", "false", "false", "false", "false", "false", "false", "exception-Other" })
+    @Alerts(DEFAULT = { "false", "false", "false", "false", "false", "false", "false", "false", "exception-Other" },
+            FF = "no ActiveX")
     public void parseError_load() throws Exception {
         final String html = ""
             + "  function test() {\n"
+            + ACTIVEX_CHECK
             + "    try {\n"
             + "      var doc = " + callLoadXMLDOMDocumentFromURL("'" + URL_SECOND + "'") + ";\n"
             + "      alert(doc.parseError == null);\n"
