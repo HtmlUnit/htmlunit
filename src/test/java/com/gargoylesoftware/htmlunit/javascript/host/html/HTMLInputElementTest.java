@@ -582,10 +582,10 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             = "<html><head>\n"
             + "</head>\n"
             + "<body>\n"
-            + "<form name='test' action='foo'>\n"
-            + "<input name='field1' onchange='submit()'>\n"
-            + "<img>\n"
-            + "</form>\n"
+            + "  <form name='test' action='foo'>\n"
+            + "    <input name='field1' onchange='submit()'>\n"
+            + "    <img src=''>\n"
+            + "  </form>\n"
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("<html><title>page 2</title><body></body></html>");

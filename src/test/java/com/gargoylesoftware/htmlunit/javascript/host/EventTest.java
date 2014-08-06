@@ -838,7 +838,9 @@ public class EventTest extends WebDriverTestCase {
         eventHandlersParentScopeChain("<input type='text'", "");
         eventHandlersParentScopeChain("<input type='password'", "");
         // IE11 cannot click on hidden fields
+        // FF31 cannot click on hidden fields
         if (getBrowserVersion() != BrowserVersion.INTERNET_EXPLORER_11
+                && getBrowserVersion() != BrowserVersion.FIREFOX_31
                 && getBrowserVersion() != BrowserVersion.CHROME) {
             eventHandlersParentScopeChain("<input type='hidden'", "");
         }
