@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
@@ -32,7 +31,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -53,6 +51,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * @author Rob Di Marco
  * @author Sudhan Moghe
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class DocumentTest extends WebDriverTestCase {
@@ -342,19 +341,29 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ CHROME, FF, IE11 })
-    @Alerts({ "Some:Div,Some:Div,myNS,Some,Div", "svg,svg,http://www.w3.org/2000/svg,null,svg" })
+    @Alerts(DEFAULT = { "Some:Div", "Some:Div", "myNS", "Some", "Div",
+                        "svg", "svg", "http://www.w3.org/2000/svg", "null", "svg" },
+            IE8 = "not available")
     public void createElementNS() throws Exception {
         final String html
-            = "<html><head><script>\n"
-            + "function doTest() {\n"
-            + "  var div = document.createElementNS('myNS', 'Some:Div');\n"
-            + "  alert(div.nodeName + ',' + div.tagName + ',' + div.namespaceURI + ',' + "
-            + "div.prefix + ',' + div.localName);\n"
-            + "  var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');\n"
-            + "  alert(svg.nodeName + ',' + svg.tagName + ',' + svg.namespaceURI + ',' + "
-            + "svg.prefix + ',' + svg.localName);\n"
-            + "}\n"
+            = "<html><head>\""
+            + "<script>\n"
+            + "  function doTest() {\n"
+            + "    if (!document.createElementNS) { alert('not available'); return }\n"
+            + "    var div = document.createElementNS('myNS', 'Some:Div');\n"
+            + "    alert(div.nodeName);\n"
+            + "    alert(div.tagName);\n"
+            + "    alert(div.namespaceURI);\n"
+            + "    alert(div.prefix);\n"
+            + "    alert(div.localName);\n"
+
+            + "    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');\n"
+            + "    alert(svg.nodeName);\n"
+            + "    alert(svg.tagName);\n"
+            + "    alert(svg.namespaceURI);\n"
+            + "    alert(svg.prefix);\n"
+            + "    alert(svg.localName);\n"
+            + "  }\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "</body></html>";
@@ -396,13 +405,13 @@ public class DocumentTest extends WebDriverTestCase {
     public void appendChild() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "  function doTest(){\n"
             + "    var form = document.forms['form1'];\n"
             + "    var div = document.createElement('DIV');\n"
             + "    form.appendChild(div);\n"
             + "    var elements = document.getElementsByTagName('DIV');\n"
             + "    alert(elements.length )\n"
-            + "}\n"
+            + "  }\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1'>\n"
@@ -456,12 +465,12 @@ public class DocumentTest extends WebDriverTestCase {
     public void appendChild_textNode() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "  function doTest(){\n"
             + "    var form = document.forms['form1'];\n"
             + "    var child = document.createTextNode('Some Text');\n"
             + "    form.appendChild(child);\n"
             + "    alert(form.lastChild.data )\n"
-            + "}\n"
+            + "  }\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1'>\n"
@@ -480,7 +489,7 @@ public class DocumentTest extends WebDriverTestCase {
     public void cloneNode() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "  function doTest(){\n"
             + "    var form = document.forms['form1'];\n"
             + "    var cloneShallow = form.cloneNode(false);\n"
             + "    alert(cloneShallow!=null);\n"
@@ -488,7 +497,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "    var cloneDeep = form.cloneNode(true);\n"
             + "    alert(cloneDeep!=null);\n"
             + "    alert(cloneDeep.firstChild!=null);\n"
-            + "}\n"
+            + "  }\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<form name='form1'>\n"
             + "<p>hello world</p>\n"
@@ -507,13 +516,13 @@ public class DocumentTest extends WebDriverTestCase {
     public void insertBefore() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "function doTest(){\n"
+            + "  function doTest(){\n"
             + "    var form = document.forms['form1'];\n"
             + "    var oldChild = document.getElementById('oldChild');\n"
             + "    var div = document.createElement('DIV');\n"
             + "    form.insertBefore(div, oldChild);\n"
             + "    alert(form.firstChild==div )\n"
-            + "}\n"
+            + "  }\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<form name='form1'><div id='oldChild'/></form>\n"
             + "</body></html>";
@@ -571,10 +580,10 @@ public class DocumentTest extends WebDriverTestCase {
     public void parentNode_Nested() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
-            + "function doTest() {\n"
+            + "  function doTest() {\n"
             + "    var div1=document.getElementById('childDiv');\n"
             + "    alert(div1.parentNode.id);\n"
-            + "}\n"
+            + "  }\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='parentDiv'><div id='childDiv'></div></div>\n"
             + "</body></html>";
@@ -591,9 +600,9 @@ public class DocumentTest extends WebDriverTestCase {
     public void parentNode_Document() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
-            + "function doTest() {\n"
+            + "  function doTest() {\n"
             + "    alert(document.parentNode==null);\n"
-            + "}\n"
+            + "  }\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
@@ -609,10 +618,10 @@ public class DocumentTest extends WebDriverTestCase {
     public void parentNode_CreateElement() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
-            + "function doTest() {\n"
+            + "  function doTest() {\n"
             + "    var div1=document.createElement('div');\n"
             + "    alert(div1.parentNode==null);\n"
-            + "}\n"
+            + "  }\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
@@ -628,12 +637,12 @@ public class DocumentTest extends WebDriverTestCase {
     public void parentNode_AppendChild() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
-            + "function doTest() {\n"
+            + "  function doTest() {\n"
             + "    var childDiv=document.getElementById('childDiv');\n"
             + "    var parentDiv=document.getElementById('parentDiv');\n"
             + "    parentDiv.appendChild(childDiv);\n"
             + "    alert(childDiv.parentNode.id);\n"
-            + "}\n"
+            + "  }\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='parentDiv'></div><div id='childDiv'></div>\n"
             + "</body></html>";
@@ -650,11 +659,11 @@ public class DocumentTest extends WebDriverTestCase {
     public void documentElement() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
-            + "function doTest() {\n"
+            + "  function doTest() {\n"
             + "    alert(document.documentElement!=null);\n"
             + "    alert(document.documentElement.tagName);\n"
             + "    alert(document.documentElement.parentNode==document);\n"
-            + "}\n"
+            + "  }\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
@@ -670,10 +679,10 @@ public class DocumentTest extends WebDriverTestCase {
     public void firstChild_Nested() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
-            + "function doTest() {\n"
+            + "  function doTest() {\n"
             + "    var div1=document.getElementById('parentDiv');\n"
             + "    alert(div1.firstChild.id);\n"
-            + "}\n"
+            + "  }\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='parentDiv'><div id='childDiv'/><div id='childDiv2'/></div>\n"
             + "</body></html>";
@@ -690,14 +699,14 @@ public class DocumentTest extends WebDriverTestCase {
     public void firstChild_AppendChild() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
-            + "function doTest() {\n"
+            + "  function doTest() {\n"
             + "    var childDiv=document.getElementById('childDiv');\n"
             + "    var parentDiv=document.getElementById('parentDiv');\n"
             + "    parentDiv.appendChild(childDiv);\n"
             + "    var childDiv2=document.getElementById('childDiv2');\n"
             + "    parentDiv.appendChild(childDiv2);\n"
             + "    alert(parentDiv.firstChild.id);\n"
-            + "}\n"
+            + "  }\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='parentDiv'/><div id='childDiv'/><div id='childDiv2'/>\n"
             + "</body></html>";
@@ -714,10 +723,10 @@ public class DocumentTest extends WebDriverTestCase {
     public void lastChild_Nested() throws Exception {
         final String html
             = "<html><head><title>Last</title><script>\n"
-            + "function doTest() {\n"
+            + "  function doTest() {\n"
             + "    var div1=document.getElementById('parentDiv');\n"
             + "    alert(div1.lastChild.id);\n"
-            + "}\n"
+            + "  }\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='parentDiv'><div id='childDiv1'></div><div id='childDiv'></div></div>\n"
             + "</body></html>";
@@ -734,14 +743,14 @@ public class DocumentTest extends WebDriverTestCase {
     public void lastChild_AppendChild() throws Exception {
         final String html
             = "<html><head><title>Last</title><script>\n"
-            + "function doTest() {\n"
+            + "  function doTest() {\n"
             + "    var childDiv1=document.getElementById('childDiv1');\n"
             + "    var parentDiv=document.getElementById('parentDiv');\n"
             + "    parentDiv.appendChild(childDiv1);\n"
             + "    var childDiv=document.getElementById('childDiv');\n"
             + "    parentDiv.appendChild(childDiv);\n"
             + "    alert(parentDiv.lastChild.id);\n"
-            + "}\n"
+            + "  }\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='parentDiv'/><div id='childDiv1'/><div id='childDiv'/>\n"
             + "</body></html>";
@@ -758,10 +767,10 @@ public class DocumentTest extends WebDriverTestCase {
     public void nextSibling_Nested() throws Exception {
         final String html
             = "<html><head><title>Last</title><script>\n"
-            + "function doTest() {\n"
+            + "  function doTest() {\n"
             + "    var div1 = document.getElementById('previousDiv');\n"
             + "    alert(div1.nextSibling.id);\n"
-            + "}\n"
+            + "  }\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='parentDiv'><div id='previousDiv'></div><div id='nextDiv'></div></div>\n"
             + "</body></html>";
@@ -778,14 +787,14 @@ public class DocumentTest extends WebDriverTestCase {
     public void nextSibling_AppendChild() throws Exception {
         final String html
             = "<html><head><title>Last</title><script>\n"
-            + "function doTest() {\n"
+            + "  function doTest() {\n"
             + "    var previousDiv=document.getElementById('previousDiv');\n"
             + "    var parentDiv=document.getElementById('parentDiv');\n"
             + "    parentDiv.appendChild(previousDiv);\n"
             + "    var nextDiv=document.getElementById('nextDiv');\n"
             + "    parentDiv.appendChild(nextDiv);\n"
             + "    alert(previousDiv.nextSibling.id);\n"
-            + "}\n"
+            + "  }\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='parentDiv'/><div id='junk1'/><div id='previousDiv'/><div id='junk2'/><div id='nextDiv'/>\n"
             + "</body></html>";
@@ -802,10 +811,10 @@ public class DocumentTest extends WebDriverTestCase {
     public void previousSibling_Nested() throws Exception {
         final String html
             = "<html><head><title>Last</title><script>\n"
-            + "function doTest() {\n"
+            + "  function doTest() {\n"
             + "    var div1 = document.getElementById('nextDiv');\n"
             + "    alert(div1.previousSibling.id);\n"
-            + "}\n"
+            + "  }\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='parentDiv'><div id='previousDiv'></div><div id='nextDiv'></div></div>\n"
             + "</body></html>";
@@ -822,14 +831,14 @@ public class DocumentTest extends WebDriverTestCase {
     public void previousSibling_AppendChild() throws Exception {
         final String html
             = "<html><head><title>Last</title><script>\n"
-            + "function doTest() {\n"
+            + "  function doTest() {\n"
             + "    var previousDiv=document.getElementById('previousDiv');\n"
             + "    var parentDiv=document.getElementById('parentDiv');\n"
             + "    parentDiv.appendChild(previousDiv);\n"
             + "    var nextDiv=document.getElementById('nextDiv');\n"
             + "    parentDiv.appendChild(nextDiv);\n"
             + "    alert(nextDiv.previousSibling.id);\n"
-            + "}\n"
+            + "  }\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='parentDiv'/><div id='junk1'/><div id='previousDiv'/><div id='junk2'/><div id='nextDiv'/>\n"
             + "</body></html>";
@@ -845,10 +854,10 @@ public class DocumentTest extends WebDriverTestCase {
     public void allProperty_KeyByName() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
-            + "function doTest() {\n"
+            + "  function doTest() {\n"
             + "    alert(document.all['input1'].value);\n"
             + "    alert(document.all['foo2'].value);\n"
-            + "}\n"
+            + "  }\n"
             + "</script></head><body onload='doTest()'><form id='form1'>\n"
             + "    <input id='input1' name='foo1' type='text' value='tangerine' />\n"
             + "    <input id='input2' name='foo2' type='text' value='ginger' />\n"
@@ -930,14 +939,14 @@ public class DocumentTest extends WebDriverTestCase {
     public void getElementsByTagName() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
-            + "function doTest() {\n"
+            + "  function doTest() {\n"
             + "    var elements = document.getElementsByTagName('input');\n"
             + "    for (var i=0; i<elements.length; i++) {\n"
             + "        alert(elements[i].type);\n"
             + "        alert(elements.item(i).type);\n"
             + "    }\n"
             + "    alert(elements == document.getElementsByTagName('input'));\n"
-            + "}\n"
+            + "  }\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<form><input type='button' name='button1' value='pushme'></form>\n"
             + "</body></html>";
@@ -954,12 +963,12 @@ public class DocumentTest extends WebDriverTestCase {
     public void getElementsByTagName_CaseInsensitive() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
-            + "function doTest() {\n"
+            + "  function doTest() {\n"
             + "    var elements = document.getElementsByTagName('InPuT');\n"
             + "    for(i=0; i<elements.length; i++ ) {\n"
             + "        alert(elements[i].type);\n"
             + "    }\n"
-            + "}\n"
+            + "  }\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<form><input type='button' name='button1' value='pushme'></form>\n"
             + "</body></html>";
@@ -1777,8 +1786,9 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(FF)
-    @Alerts({ "0", "1", "1" })
+    @Alerts(DEFAULT = { "0", "1", "1" },
+            IE11 = { "0", "0", "0" },
+            IE8 = { "undefined", "undefined", "undefined" })
     @BuggyWebDriver(FF)
     public void designMode_createsSelectionRange() throws Exception {
         final String html1 = "<html><body><iframe id='i' src='" + URL_SECOND + "'></iframe></body></html>";
@@ -1832,14 +1842,16 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[object HTMLHeadingElement]")
-    @Browsers(FF)
+    @Alerts(DEFAULT = "[object HTMLHeadingElement]", IE = "not available")
     public void evaluate_caseInsensitiveAttribute() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var expr = './/*[@CLASS]';\n"
-            + "    var result = document.evaluate(expr, document.documentElement, null, XPathResult.ANY_TYPE, null);\n"
-            + "    alert(result.iterateNext());\n"
+            + "    if(document.evaluate) {\n"
+            + "      var expr = './/*[@CLASS]';\n"
+            + "      var result = document.evaluate(expr, "
+                                + "document.documentElement, null, XPathResult.ANY_TYPE, null);\n"
+            + "      alert(result.iterateNext());\n"
+            + "    } else { alert('not available'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <h1 class='title'>Some text</h1>\n"
@@ -1852,16 +1864,20 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[object HTMLHtmlElement]")
-    @Browsers({ CHROME, FF })
+    @Alerts(DEFAULT = "[object HTMLHtmlElement]", IE = "not available")
     public void evaluate_caseInsensitiveTagName() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
             + "  function test() {\n"
-            + "    var expr = '/hTmL';\n"
-            + "    var result = document.evaluate(expr, document.documentElement, null, XPathResult.ANY_TYPE, null);\n"
-            + "    alert(result.iterateNext());\n"
+            + "    if(document.evaluate) {\n"
+            + "      var expr = '/hTmL';\n"
+            + "      var result = document.evaluate(expr, "
+                        + "document.documentElement, null, XPathResult.ANY_TYPE, null);\n"
+            + "      alert(result.iterateNext());\n"
+            + "    } else { alert('not available'); }\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "  <h1 class='title'>Some text</h1>\n"
             + "</body></html>";
 
@@ -1966,8 +1982,8 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "null", "text1", "text2", "onfocus text2" })
+    @Alerts(DEFAULT = { "null", "text1", "not available" },
+            IE = { "null", "text1", "text2", "onfocus text2" })
     @NotYetImplemented(IE)
     // the execution order is not yet correct: the onfocus is called during onload not after it
     public void setActive() throws Exception {
@@ -1975,13 +1991,16 @@ public class DocumentTest extends WebDriverTestCase {
             + "  alert(document.activeElement);"
             + "  function test() {\n"
             + "     alert(document.activeElement.id);\n"
-            + "     document.getElementById('text2').setActive();\n"
-            + "     alert(document.activeElement.id);\n"
+            + "     var inp = document.getElementById('text2');\n"
+            + "     if (inp.setActive) {\n"
+            + "       inp.setActive();\n"
+            + "       alert(document.activeElement.id);\n"
+            + "     } else { alert('not available'); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body>\n"
-            + "<input id='text1' onclick='test()'>\n"
-            + "<input id='text2' onfocus='alert(\"onfocus text2\")'>\n"
+            + "  <input id='text1' onclick='test()'>\n"
+            + "  <input id='text2' onfocus='alert(\"onfocus text2\")'>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -1995,14 +2014,17 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ CHROME, FF, IE11 })
-    @Alerts({ "123", "captured" })
+    @Alerts(DEFAULT = { "123", "captured" },
+            IE8 = { "not available", "123" })
     public void captureEvents() throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "<script>\n"
-            + "function t() { alert('captured'); }\n"
-            + "document.captureEvents(Event.CLICK);\n"
-            + "document.onclick = t;\n"
+            + "  function t() { alert('captured'); }\n"
+
+            + "  if(document.captureEvents) {\n"
+            + "    document.captureEvents(Event.CLICK);\n"
+            + "    document.onclick = t;\n"
+            + "  } else { alert('not available'); }\n"
             + "</script></head><body>\n"
             + "<div id='theDiv' onclick='alert(123)'>foo</div>\n"
             + "</body></html>";
