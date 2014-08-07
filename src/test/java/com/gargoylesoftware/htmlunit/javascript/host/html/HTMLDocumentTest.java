@@ -1953,7 +1953,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = { "ISO-8859-1", "ISO-8859-1", "ISO-8859-1", "ISO-8859-1" },
-            FF24 = { "windows-1252", "windows-1252", "undefined", "undefined" },
+            FF = { "windows-1252", "windows-1252", "undefined", "undefined" },
             IE = { "undefined", "undefined", "iso-8859-1", "windows-1252" },
             IE11 = { "ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252" })
     public void encoding() throws Exception {
@@ -1978,7 +1978,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = { "ISO-8859-1", "ISO-8859-1", "ISO-8859-1", "ISO-8859-1" },
-            FF24 = { "windows-1252", "windows-1252", "undefined", "undefined" },
+            FF = { "windows-1252", "windows-1252", "undefined", "undefined" },
             IE = { "undefined", "undefined", "iso-8859-1", "windows-1252" },
             IE11 = { "ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252" })
     public void encoding2() throws Exception {
@@ -2004,7 +2004,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = { "ISO-8859-1", "ISO-8859-1", "ISO-8859-1", "ISO-8859-1" },
-            FF24 = { "windows-1252", "windows-1252", "undefined", "undefined" },
+            FF = { "windows-1252", "windows-1252", "undefined", "undefined" },
             IE = { "undefined", "undefined", "iso-8859-1", "windows-1252" },
             IE11 = { "ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252" })
     public void encoding3() throws Exception {
