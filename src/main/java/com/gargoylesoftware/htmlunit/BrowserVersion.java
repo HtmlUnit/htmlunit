@@ -173,7 +173,7 @@ public class BrowserVersion implements Serializable, Cloneable {
 
         FIREFOX_24.setBrowserLanguage("en-US");
         FIREFOX_24.setVendor("");
-        FIREFOX_24.buildId_ = "20131112155850";
+        FIREFOX_24.buildId_ = "20140609182057";
         FIREFOX_24.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_24.setXmlHttpRequestAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_24.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
@@ -181,7 +181,7 @@ public class BrowserVersion implements Serializable, Cloneable {
 
         FIREFOX_31.setBrowserLanguage("en-US");
         FIREFOX_31.setVendor("");
-        FIREFOX_31.buildId_ = "20131112155850";
+        FIREFOX_31.buildId_ = "20140717132905";
         FIREFOX_31.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_31.setXmlHttpRequestAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_31.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
