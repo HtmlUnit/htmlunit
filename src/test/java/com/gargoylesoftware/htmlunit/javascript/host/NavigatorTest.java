@@ -14,16 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.PluginConfiguration;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -74,7 +73,9 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     public void appVersion() throws Exception {
-        attribute("appVersion", getBrowserVersion().getApplicationVersion());
+        attribute("appVersion", getBrowserVersion().getApplicationVersion(),
+                "WOW64; ", "SLCC2; ", ".NET CLR 2.0.50727; ", ".NET CLR 3.5.30729; ", ".NET CLR 3.0.30729; ",
+                "Media Center PC 6.0; ", ".NET4.0C; ", ".NET4.0E; ");
     }
 
     /**
@@ -82,19 +83,9 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Browsers(IE)
+    @Alerts(DEFAULT = "undefined", IE = "")
     public void browserLanguage_IE() throws Exception {
-        attribute("browserLanguage", getBrowserVersion().getBrowserLanguage());
-    }
-
-    /**
-     * Tests the "browserLanguage" property.
-     * @throws Exception on test failure
-     */
-    @Test
-    @Browsers({ CHROME, FF })
-    public void browserLanguage_FF() throws Exception {
-        attribute("browserLanguage", "undefined");
+        attribute("browserLanguage", getExpectedAlerts()[0]);
     }
 
     /**
@@ -161,7 +152,9 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     public void userAgent() throws Exception {
-        attribute("userAgent", getBrowserVersion().getUserAgent());
+        attribute("userAgent", getBrowserVersion().getUserAgent(),
+                "WOW64; ", "SLCC2; ", ".NET CLR 2.0.50727; ", ".NET CLR 3.5.30729; ", ".NET CLR 3.0.30729; ",
+                "Media Center PC 6.0; ", ".NET4.0C; ", ".NET4.0E; ");
     }
 
     /**
@@ -181,7 +174,27 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     public void plugins() throws Exception {
-        attribute("plugins.length", String.valueOf(getBrowserVersion().getPlugins().size()));
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "    <title>test</title>\n"
+                + "    <script>\n"
+                + "    function doTest(){\n"
+                + "       for (var i=0; i<window.navigator.plugins.length; i++) {\n"
+                + "         alert(window.navigator.plugins[i].name);\n"
+                + "      }\n"
+                + "    }\n"
+                + "    </script>\n"
+                + "</head>\n"
+                + "<body onload='doTest()'>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        final List<String> alerts = getCollectedAlerts(driver);
+
+        for (PluginConfiguration plugin : getBrowserVersion().getPlugins()) {
+            assertTrue(alerts.contains(plugin.getName()));
+        }
     }
 
     /**
@@ -199,22 +212,28 @@ public class NavigatorTest extends WebDriverTestCase {
      * @param value the expected value for the named attribute
      * @throws Exception on test failure
      */
-    void attribute(final String name, final String value) throws Exception {
+    void attribute(final String name, final String value, final String... ignore) throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "    <title>test</title>\n"
                 + "    <script>\n"
                 + "    function doTest(){\n"
-                + "       alert('" + name + " = ' + window.navigator." + name + ");\n"
+                + "       alert(window.navigator." + name + ");\n"
                 + "    }\n"
                 + "    </script>\n"
                 + "</head>\n"
-                + "<body onload=\'doTest()\'>\n"
+                + "<body onload='doTest()'>\n"
                 + "</body>\n"
                 + "</html>";
 
-        setExpectedAlerts(name + " = " + value);
-        loadPageWithAlerts2(html);
+        setExpectedAlerts(value);
+        final WebDriver driver = loadPage2(html);
+        final List<String> alerts = getCollectedAlerts(driver);
+
+        for (int i = 0; i < ignore.length; i++) {
+            alerts.set(0, alerts.get(0).replace(ignore[i], ""));
+        }
+        assertEquals(getExpectedAlerts(), alerts);
     }
 
     /**
@@ -299,7 +318,7 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF24 = "20131112155850",
+            FF24 = "20140609182057",
             FF31 = "20140717132905")
     public void buildID() throws Exception {
         final String html
