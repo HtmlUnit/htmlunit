@@ -14,10 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
@@ -29,7 +27,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -191,8 +188,8 @@ public class EventTest extends WebDriverTestCase {
             = "<html><head></head><body>\n"
             + "<input type='button' id='clickId'/>\n"
             + "<script>\n"
-            + "function handler(event) { alert(this.getAttribute('id')); }\n"
-            + "document.getElementById('clickId').onclick = handler;</script>\n"
+            + "  function handler(event) { alert(this.getAttribute('id')); }\n"
+            + "  document.getElementById('clickId').onclick = handler;</script>\n"
             + "</body></html>";
         onClickPageTest(content);
     }
@@ -209,9 +206,9 @@ public class EventTest extends WebDriverTestCase {
             = "<html><head></head><body>\n"
             + "<input type='button' id='clickId'/>\n"
             + "<script>\n"
-            + "function handler(event) { alert(this.madeUpProperty); }\n"
-            + "document.getElementById('clickId').onclick = handler;\n"
-            + "document.getElementById('clickId').madeUpProperty = 'foo';\n"
+            + "  function handler(event) { alert(this.madeUpProperty); }\n"
+            + "  document.getElementById('clickId').onclick = handler;\n"
+            + "  document.getElementById('clickId').madeUpProperty = 'foo';\n"
             + "</script>\n"
             + "</body></html>";
         onClickPageTest(content);
@@ -236,15 +233,16 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ CHROME, FF, IE11 })
-    @Alerts("defined")
+    @Alerts(DEFAULT = "defined", IE8 = "undefined")
     public void testEventArgDefined() throws Exception {
         final String content
-            = "<html><head></head><body>\n"
+            = "<html><head></head>\n"
+            + "<body>\n"
             + "<input type='button' id='clickId'/>\n"
             + "<script>\n"
-            + "function handler(event) { alert(event ? 'defined' : 'undefined'); }\n"
-            + "document.getElementById('clickId').onclick = handler;</script>\n"
+            + "  function handler(event) { alert(event ? 'defined' : 'undefined'); }\n"
+            + "  document.getElementById('clickId').onclick = handler;\n"
+            + "</script>\n"
             + "</body></html>";
         onClickPageTest(content);
     }
@@ -253,16 +251,19 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ CHROME, FF, IE11 })
-    @Alerts("pass")
+    @Alerts(DEFAULT = "pass", IE8 = "no event param")
     public void testEventTargetSameAsThis() throws Exception {
         final String content
-            = "<html><head></head><body>\n"
+            = "<html><head></head>\n"
+            + "<body>\n"
             + "<input type='button' id='clickId'/>\n"
             + "<script>\n"
-            + "function handler(event) {\n"
-            + "alert(event.target == this ? 'pass' : event.target + '!=' + this); }\n"
-            + "document.getElementById('clickId').onclick = handler;</script>\n"
+            + "  function handler(event) {\n"
+            + "    if(!event) { alert('no event param'); return; };\n"
+            + "    alert(event.target == this ? 'pass' : event.target + '!=' + this);\n"
+            + "  }\n"
+            + "  document.getElementById('clickId').onclick = handler;\n"
+            + "</script>\n"
             + "</body></html>";
         onClickPageTest(content);
     }
@@ -279,11 +280,13 @@ public class EventTest extends WebDriverTestCase {
             = "<html><head></head><body>\n"
             + "<input type='button' id='clickId'/>\n"
             + "<script>\n"
-            + "function handler(event) {\n"
-            + "event = event ? event : window.event;\n"
-            + "alert(event.srcElement);\n"
-            + "alert(event.srcElement == this); }\n"
-            + "document.getElementById('clickId').onclick = handler;</script>\n"
+            + "  function handler(event) {\n"
+            + "    event = event ? event : window.event;\n"
+            + "    alert(event.srcElement);\n"
+            + "    alert(event.srcElement == this);\n"
+            + "  }\n"
+            + "  document.getElementById('clickId').onclick = handler;\n"
+            + "</script>\n"
             + "</body></html>";
         onClickPageTest(content);
     }
@@ -293,16 +296,19 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("pass")
-    @Browsers({ CHROME, FF, IE11 })
+    @Alerts(DEFAULT = "pass", IE8 = "no event param")
     public void testEventCurrentTargetSameAsThis() throws Exception {
         final String content
-            = "<html><head></head><body>\n"
+            = "<html><head></head>\n"
+            + "<body>\n"
             + "<input type='button' id='clickId'/>\n"
             + "<script>\n"
-            + "function handler(event) {\n"
-            + "alert(event.currentTarget == this ? 'pass' : event.currentTarget + '!=' + this); }\n"
-            + "document.getElementById('clickId').onclick = handler;</script>\n"
+            + "  function handler(event) {\n"
+            + "    if(!event) { alert('no event param'); return; };\n"
+            + "    alert(event.currentTarget == this ? 'pass' : event.currentTarget + '!=' + this);\n"
+            + "  }\n"
+            + "  document.getElementById('clickId').onclick = handler;\n"
+            + "</script>\n"
             + "</body></html>";
         onClickPageTest(content);
     }
@@ -312,17 +318,24 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "[object Window]", "[object HTMLDivElement]" })
-    @Browsers({ CHROME, FF, IE11 })
+    @Alerts(DEFAULT = { "[object Window]", "[object HTMLDivElement]" },
+            IE8 = { "no addEventListener", "no event param" })
     public void testCurrentTarget_sameListenerForEltAndWindow() throws Exception {
         final String content
             = "<html><head></head><body>\n"
             + "<div id='clickId'>click me</div>\n"
             + "<script>\n"
-            + "function handler(event) {\n"
-            + "alert(event.currentTarget); }\n"
-            + "document.getElementById('clickId').onmousedown = handler;\n"
-            + "window.addEventListener('mousedown', handler, true);</script>\n"
+            + "  function handler(event) {\n"
+            + "    if(!event) { alert('no event param'); return; };\n"
+            + "    alert(event.currentTarget);\n"
+            + "  }\n"
+            + "  document.getElementById('clickId').onmousedown = handler;\n"
+            + "  if(window.addEventListener) {\n"
+            + "    window.addEventListener('mousedown', handler, true);\n"
+            + "  } else {\n"
+            + "    alert('no addEventListener');\n"
+            + "  }\n"
+            + "</script>\n"
             + "</body></html>";
         onClickPageTest(content);
     }
@@ -531,35 +544,21 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(NONE)
-    public void testSetEventPhaseToInvalidValue() throws Exception {
-        boolean thrown = false;
-        try {
-            new Event().setEventPhase((short) 777);
-        }
-        catch (final IllegalArgumentException e) {
-            thrown = true;
-        }
-        assertTrue(thrown);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Browsers({ CHROME, FF, IE11 })
     @Alerts(DEFAULT = { "click", "true", "true", "dblclick", "false", "false" },
-            FF31 = { "click", "true", "true", "click", "false", "false" })
+            FF31 = { "click", "true", "true", "click", "false", "false" },
+            IE8 = "no createEvent")
     public void testInitEvent() throws Exception {
         final String html =
               "<html><body onload='test()'><script>\n"
             + "  function test() {\n"
+            + "    if(!document.createEvent) { alert('no createEvent'); return; };\n"
             + "    var e = document.createEvent('Event');\n"
             + "    e.initEvent('click', true, true);\n"
             + "    doAlerts(e);\n"
             + "    e.initEvent('dblclick', false, false);\n"
             + "    doAlerts(e);\n"
             + "  }\n"
+
             + "  function doAlerts(e) {\n"
             + "    alert(e.type);\n"
             + "    alert(e.bubbles);\n"
@@ -614,24 +613,43 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(FF)
-    @Alerts("400000,1,20000000,2000,8000,40,2,80,800,800000,1000,8000000,10000000,100,400,200,80000,1000000,"
-                + "8,1,20,10,8,4,2,2000000,10000,4000000,40000,4000,4,20000,100000,200000,")
+    @Alerts(DEFAULT = { "e-0", "e-1", "e-2", "e-3", "e-4", "e-5",
+                        "e-6", "e-7", "e-8", "e-9", "e-10", "e-11",
+                        "e-12", "e-13", "e-14", "e-15", "e-16", "e-17", "e-18",
+                        "e-19", "e-20", "e-21", "e-22", "e-23", "e-24",
+                        "e-25", "e-26", "e-27", "e-28", "e-29", "e-30", "e-31", "e-32",
+                         "e-33" },
+            FF24 = { "400000", "1", "20000000", "2000", "8000", "40",
+                     "2", "80", "800", "800000", "1000", "8000000",
+                     "10000000", "100", "400", "200", "80000", "1000000", "8",
+                     "1", "20", "10", "8", "4", "2",
+                     "2000000", "10000", "4000000", "40000", "4000", "4", "20000", "100000",
+                     "200000" },
+            FF31 = { "e-0", "1", "e-2", "e-3", "e-4", "e-5",
+                     "2", "e-7", "e-8", "e-9", "e-10", "e-11",
+                     "e-12", "e-13", "e-14", "e-15", "e-16", "e-17", "8",
+                     "e-19", "e-20", "e-21", "e-22", "e-23", "e-24",
+                     "e-25", "e-26", "e-27", "e-28", "e-29", "4", "e-31", "e-32",
+                     "e-33" },
+            IE8 = "no Event")
     public void constants() throws Exception {
         final String html =
               "<html><body>\n"
             + "<script>\n"
-            + "    var constants = [Event.ABORT, Event.ALT_MASK, Event.BACK, Event.BLUR, Event.CHANGE, Event.CLICK, "
+            + "    if(!document.createEvent) { alert('no Event'); }\n"
+            + "    else {\n"
+            + "      var constants = [Event.ABORT, Event.ALT_MASK, Event.BACK, Event.BLUR, Event.CHANGE, Event.CLICK, "
             + "Event.CONTROL_MASK, Event.DBLCLICK, Event.DRAGDROP, Event.ERROR, Event.FOCUS, Event.FORWARD, "
             + "Event.HELP, Event.KEYDOWN, Event.KEYPRESS, Event.KEYUP, Event.LOAD, Event.LOCATE, Event.META_MASK, "
             + "Event.MOUSEDOWN, Event.MOUSEDRAG, Event.MOUSEMOVE, Event.MOUSEOUT, Event.MOUSEOVER, Event.MOUSEUP, "
             + "Event.MOVE, Event.RESET, Event.RESIZE, Event.SCROLL, Event.SELECT, Event.SHIFT_MASK, Event.SUBMIT, "
             + "Event.UNLOAD, Event.XFER_DONE];\n"
-            + "    var str = '';\n"
-            + "    for (var x in constants) {\n"
-            + "      str += constants[x].toString(16) + ',';\n"
+            + "      for (var x in constants) {\n"
+            + "        try {\n"
+            + "          alert(constants[x].toString(16));\n"
+            + "        } catch(e) { alert('e-' + x); }\n"
+            + "      }\n"
             + "    }\n"
-            + "    alert(str);\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -642,13 +660,14 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(FF)
-    @Alerts("40000000")
+    @Alerts(DEFAULT = "exception", FF24 = "40000000")
     public void text() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
             + "  function test(e) {\n"
-            + "    alert(e.TEXT.toString(16));\n"// But Event.TEXT is undefined!!!
+            + "    try {\n"
+            + "      alert(e.TEXT.toString(16));\n"// But Event.TEXT is undefined!!!
+            + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
