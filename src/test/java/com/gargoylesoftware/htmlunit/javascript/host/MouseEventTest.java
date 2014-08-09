@@ -26,6 +26,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -194,10 +195,22 @@ public class MouseEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "Click on DIV(id=div1): true, true, false, false",
+                        "Click on SPAN(id=span1): true, true, true, false",
+                        "Click on SPAN(id=span2): true, false, false, true",
+                        "Click on TEXTAREA(id=myTextarea): true, false, false, false" },
+            FF31 = { "Click on DIV(id=div1): true, true, false, false",
+                        "Click on SPAN(id=span1): true, true, true, false",
+                        "Click on SPAN(id=span2): false, false, false, true",
+                        "Click on TEXTAREA(id=myTextarea): true, false, false, false" })
+    @BuggyWebDriver
     public void eventCoordinates() throws Exception {
         final URL url = getClass().getClassLoader().getResource("event_coordinates.html");
         assertNotNull(url);
 
+        final String[] expected = getExpectedAlerts();
+
+        setExpectedAlerts();
         final WebDriver driver = loadPageWithAlerts2(url);
         assertEquals("Mouse Event coordinates", driver.getTitle());
 
@@ -205,18 +218,18 @@ public class MouseEventTest extends WebDriverTestCase {
         assertEquals("", textarea.getText());
 
         driver.findElement(By.id("div1")).click();
-        assertEquals("Click on DIV(id=div1): true, true, false, false", textarea.getText());
+        assertEquals(expected[0], textarea.getText());
         textarea.clear();
 
         driver.findElement(By.id("span1")).click();
-        assertEquals("Click on SPAN(id=span1): true, true, true, false", textarea.getText());
+        assertEquals(expected[1], textarea.getText());
         textarea.clear();
 
         driver.findElement(By.id("span2")).click();
-        assertEquals("Click on SPAN(id=span2): true, false, false, true", textarea.getText());
+        assertEquals(expected[2], textarea.getText());
         textarea.clear();
 
         textarea.click();
-        assertEquals("Click on TEXTAREA(id=myTextarea): true, false, false, false", textarea.getText());
+        assertEquals(expected[3], textarea.getText());
     }
 }

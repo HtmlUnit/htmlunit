@@ -2,39 +2,39 @@
 <head>
 <title>Mouse Event coordinates</title>
 <script type="text/javascript">
-function computePosition(element) 
-{
-    var x = y =0;
-    do {
-      x += element.offsetLeft || 0;
-      y += element.offsetTop  || 0;
-      element = element.offsetParent;
+    function computePosition(element) 
+    {
+        var x = y =0;
+        do {
+          x += element.offsetLeft || 0;
+          y += element.offsetTop  || 0;
+          element = element.offsetParent;
+        }
+        while (element);
+        return {x: x, y: y};
     }
-	while (element);
-    return {x: x, y: y};
-}
-
-function eventWithin(elementId, event)
-{
-	var element = document.getElementById(elementId);
-	var x = event.pageX || event.clientX + document.body.scrollLeft;
-	var y = event.pageY || event.clientY + document.body.scrollTop;
-	var pos = computePosition(element);
-    return (y >= pos.y && y <  pos.y + element.offsetHeight &&
-            x >= pos.x && x <  pos.x + element.offsetWidth);
-}
-
-function mouseClicked(e)
-{
-	var target = e.target || e.srcElement;
-	var str = "Click on " + target.tagName + "(id=" + target.id + "): "
-		+ eventWithin('myBody', e) + ", "
-		+ eventWithin('div1', e) + ", "
-		+ eventWithin('span1', e) + ", "
-		+ eventWithin('span2', e);
-	document.getElementById("myTextarea").value += str + "\n"
-
-}
+    
+    function eventWithin(elementId, event)
+    {
+        var element = document.getElementById(elementId);
+        var x = event.pageX || event.clientX + document.body.scrollLeft;
+        var y = event.pageY || event.clientY + document.body.scrollTop;
+        var pos = computePosition(element);
+        return (y >= pos.y && y <  pos.y + element.offsetHeight &&
+                x >= pos.x && x <  pos.x + element.offsetWidth);
+    }
+    
+    function mouseClicked(e)
+    {
+        var target = e.target || e.srcElement;
+        var str = "Click on " + target.tagName + "(id=" + target.id + "): "
+            + eventWithin('myBody', e) + ", "
+            + eventWithin('div1', e) + ", "
+            + eventWithin('span1', e) + ", "
+            + eventWithin('span2', e);
+        document.getElementById("myTextarea").value += str + "\n"
+    
+    }
 </script>
 </head>
 <body id='myBody' onclick='mouseClicked(event)'>
