@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Many minor fixes for the screen object (setters implemented, more testcases, Chrome support added).
+            </action>
             <action type="update" dev="rbri">
                 ProxyAutoConfig package fixed (moved from com.gargoylesoftware.htmlunit.javascript to
                 com.gargoylesoftware.htmlunit). There is still a deprecated class at the original

@@ -1261,6 +1261,10 @@ public enum BrowserVersionFeatures {
     JS_REGEXP_GROUP0_RETURNS_WHOLE_MATCH,
 
     /** Javascript script.text(...) reexecutes the script (IE). */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    JS_SCREEN_SETTER_THROWS_ERROR,
+
+    /** Javascript script.text(...) reexecutes the script (IE). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 9))
     JS_SCRIPT_ALWAYS_REEXECUTE_ON_SET_TEXT,
 
