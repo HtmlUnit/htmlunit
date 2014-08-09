@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class MessageEventTest extends WebDriverTestCase {
@@ -56,9 +57,10 @@ public class MessageEventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "message", "true", "true", "hello", "http://localhost:", "2", "[object Window]" },
-            IE8 = "exception",
-            IE11 = { "message", "true", "true", "hello", "http://localhost:", "undefined", "[object Window]" })
+    @Alerts(DEFAULT = "no initMessageEvent",
+            FF24 = { "message", "true", "true", "hello", "http://localhost:", "2", "[object Window]" },
+            IE11 = { "message", "true", "true", "hello", "http://localhost:", "undefined", "[object Window]" },
+            IE8 = "no createEvent")
     public void initMessageEvent() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
         if (expectedAlerts.length > 4) {
@@ -68,16 +70,24 @@ public class MessageEventTest extends WebDriverTestCase {
         final String origin = "http://localhost:" + PORT;
         final String html = "<html><body><script>\n"
             + "try {\n"
-            + "  var e = document.createEvent('MessageEvent');\n"
-            + "  e.initMessageEvent('message', true, true, 'hello', '" + origin + "', 2, window, null);\n"
-            + "  alert(e.type);\n"
-            + "  alert(e.bubbles);\n"
-            + "  alert(e.cancelable);\n"
-            + "  alert(e.data);\n"
-            + "  alert(e.origin);\n"
-            + "  alert(e.lastEventId);\n"
-            + "  alert(e.source);\n"
-            + "} catch(e) { alert('exception') }\n"
+            + "  if (document.createEvent) {\n"
+            + "    var e = document.createEvent('MessageEvent');\n"
+            + "    if (e.initMessageEvent) {\n"
+            + "      e.initMessageEvent('message', true, true, 'hello', '" + origin + "', 2, window, null);\n"
+            + "      alert(e.type);\n"
+            + "      alert(e.bubbles);\n"
+            + "      alert(e.cancelable);\n"
+            + "      alert(e.data);\n"
+            + "      alert(e.origin);\n"
+            + "      alert(e.lastEventId);\n"
+            + "      alert(e.source);\n"
+            + "    } else {\n"
+            + "      alert('no initMessageEvent');"
+            + "    }\n"
+            + "  } else {\n"
+            + "    alert('no createEvent');"
+            + "  }\n"
+            + "} catch(e) { alert(e) }\n"
             + "</script></body></html>";
 
         loadPageWithAlerts2(html);
