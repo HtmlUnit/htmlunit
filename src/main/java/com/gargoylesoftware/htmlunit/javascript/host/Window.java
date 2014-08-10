@@ -252,7 +252,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param stringToEncode string to encode
      * @return the encoded string
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public String btoa(final String stringToEncode) {
         return new String(Base64.encodeBase64(stringToEncode.getBytes()));
     }
@@ -262,7 +262,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param encodedData the encoded string
      * @return the decoded value
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public String atob(final String encodedData) {
         return new String(Base64.decodeBase64(encodedData.getBytes()));
     }

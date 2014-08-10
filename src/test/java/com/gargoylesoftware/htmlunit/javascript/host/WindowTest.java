@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
@@ -32,7 +31,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ConfirmHandler;
@@ -1172,16 +1170,17 @@ public class WindowTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
-    @Alerts(IE8 = { "[object]", "a" },
+    @Alerts(DEFAULT = "", IE8 = { "[object]", "a" },
             IE11 = { "[object Window]", "a" })
     public void showModelessDialog() throws Exception {
         final String html1
             = "<html><head><script>\n"
             + "  var userName = '';\n"
             + "  function test() {\n"
-            + "    var newWindow = showModelessDialog('myDialog.html', window, 'status:false');\n"
-            + "    alert(newWindow);\n"
+            + "    if (window.showModelessDialog) {\n"
+            + "      var newWindow = showModelessDialog('myDialog.html', window, 'status:false');\n"
+            + "      alert(newWindow);\n"
+            + "    }\n"
             + "  }\n"
             + "  function update() { alert(userName); }\n"
             + "</script></head><body>\n"

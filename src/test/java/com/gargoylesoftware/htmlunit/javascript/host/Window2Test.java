@@ -28,7 +28,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -53,7 +52,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "found", "true" },
-            IE = { "not found", "true" })
+            DEFAULT = { "not found", "true" })
     public void FF_controllers() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -112,15 +111,16 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE11 })
-    @Alerts({ "SGVsbG8gV29ybGQh", "Hello World!" })
+    @Alerts(DEFAULT = { "SGVsbG8gV29ybGQh", "Hello World!" }, IE8 = {})
     public void atob() throws Exception {
         final String html
             = "<html><head></head><body>\n"
             + "<script>\n"
-            + "  var data = window.btoa('Hello World!');\n"
-            + "  alert(data);\n"
-            + "  alert(atob(data));\n"
+            + "  if (window.btoa) {\n"
+            + "    var data = window.btoa('Hello World!');\n"
+            + "    alert(data);\n"
+            + "    alert(atob(data));\n"
+            + "  }\n"
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -145,8 +145,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "java: undefined", "getClass: undefined" },
-            IE = { "java: undefined", "getClass: undefined" })
+    @Alerts({ "java: undefined", "getClass: undefined" })
     public void rhino_lazilyNames2() throws Exception {
         doTestRhinoLazilyNames("java", "getClass");
     }
@@ -215,7 +214,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "undefined",
+    @Alerts(DEFAULT = "undefined",
             IE = "function")
     public void collectGarbage() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -256,9 +255,9 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object Node]", "[object Element]" },
-            FF = { "function Node() {\n    [native code]\n}", "function Element() {\n    [native code]\n}" },
-            IE8 = { "undefined", "undefined" })
+    @Alerts(DEFAULT = { "function Node() {\n    [native code]\n}", "function Element() {\n    [native code]\n}" },
+            IE8 = { "undefined", "undefined" },
+            IE11 = { "[object Node]", "[object Element]" })
     @NotYetImplemented(FF24)
     public void windowProperties() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -564,7 +563,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "[object Window]", "[object Window] (true)", "1234 (true)", "null (true)", "undefined (true)",
+    @Alerts(DEFAULT = { "[object Window]", "[object Window] (true)", "1234 (true)", "null (true)", "undefined (true)",
                     "[object Window] (true)", "[object Window] (true)", "[object Window] (true)" },
             IE8 = { "[object]", "[object] (true)", "1234 (true)", "null (true)", "undefined (true)", "[object] (true)",
                 "[object] (true)", "[object] (true)" },
@@ -607,7 +606,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "exception", "exception", "exception", "exception" },
+    @Alerts(DEFAULT = { "exception", "exception", "exception", "exception" },
             IE8 = { "JScript", "5", "8", "number" },
             IE11 = { "JScript", "11", "0", "number" })
     public void IEScriptEngineXxx() throws Exception {
@@ -627,9 +626,9 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE11 })
     @Alerts(FF24 = { "true", "true", "true", "false", "true", "true", "true" },
             FF31 = { "true", "true", "false", "false", "true", "true", "true" },
+            IE8 = { "false", "false", "false", "false", "false", "false", "false" },
             IE11 = { "true", "true", "false", "true", "true", "true", "true" })
     public void heightsAndWidths() throws Exception {
         final String html
@@ -690,7 +689,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(FF31 = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1240" },
             FF24 = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1206" },
-            IE = { "0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()" })
+            DEFAULT = { "0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()" })
     @NotYetImplemented(FF24)
     public void scrolling1() throws Exception {
         scrolling(true);
@@ -702,7 +701,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "0,0", "0,0", "0,0", "0,0", "0,0", "0,0", "0,0" },
-            IE = { "0,0", "0,0", "0,0", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()" })
+            DEFAULT = { "0,0", "0,0", "0,0", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()" })
     public void scrolling2() throws Exception {
         scrolling(false);
     }
@@ -760,7 +759,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "0", "0", "0", "0" },
+    @Alerts(DEFAULT = { "0", "0", "0", "0" },
             IE = { "undefined", "undefined", "undefined", "undefined" },
             IE11 = { "0", "0", "undefined", "undefined" })
     public void pageXOffset() throws Exception {
@@ -797,7 +796,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(FF24 = { "8", "91", "0" },
             FF31 = { "8", "94", "0" },
-            IE = { "undefined", "undefined", "undefined" })
+            DEFAULT = { "undefined", "undefined", "undefined" })
     public void mozInnerScreenX() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -965,8 +964,9 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "function", "3" },
-            FF31 = { "null", "function", "5" },
+    @Alerts(DEFAULT = { "null", "function", "5" },
+            FF24 = { "null", "function", "3" },
+            IE8 = { "null", "function", "3" },
             IE11 = { "null", "function", "4" })
     public void onError() throws Exception {
         final String html
