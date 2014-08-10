@@ -804,84 +804,164 @@ public enum BrowserVersionFeatures {
     JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK,
 
     /** If document.implementation.hasFeature() supports 'Core 1.0'. */
-    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_DOMIMPLEMENTATION_FEATURE_CORE_1,
 
+    /** If document.implementation.hasFeature() supports 'Core 1.0'. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    JS_DOMIMPLEMENTATION_FEATURE_CORE_3,
+
     /** If document.implementation.hasFeature() supports 'CSS2 1.0'. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_DOMIMPLEMENTATION_FEATURE_CSS2_1,
 
     /** If document.implementation.hasFeature() supports 'CSS2 2.0'. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_DOMIMPLEMENTATION_FEATURE_CSS2_2,
 
     /** If document.implementation.hasFeature() supports 'CSS2 3.0'. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_DOMIMPLEMENTATION_FEATURE_CSS2_3,
 
     /** If document.implementation.hasFeature() supports 'CSS3 1.0'. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_DOMIMPLEMENTATION_FEATURE_CSS3_1,
 
     /** If document.implementation.hasFeature() supports 'CSS3 2.0'. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_DOMIMPLEMENTATION_FEATURE_CSS3_2,
 
     /** If document.implementation.hasFeature() supports 'CSS3 3.0'. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_DOMIMPLEMENTATION_FEATURE_CSS3_3,
 
     /** If document.implementation.hasFeature() supports 'CSS 1.0'. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_DOMIMPLEMENTATION_FEATURE_CSS_1,
 
     /** If document.implementation.hasFeature() supports 'CSS 2.0'. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_DOMIMPLEMENTATION_FEATURE_CSS_2,
 
     /** If document.implementation.hasFeature() supports 'CSS 3.0'. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_DOMIMPLEMENTATION_FEATURE_CSS_3,
 
+    /** If document.implementation.hasFeature() supports 'Events 1.0'. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    JS_DOMIMPLEMENTATION_FEATURE_EVENTS_1,
+
     /** If document.implementation.hasFeature() supports 'Events 3.0'. */
-    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3,
 
     /** If document.implementation.hasFeature() supports 'HTML 3.0'. */
     @BrowserFeature(@WebBrowser(FF))
     JS_DOMIMPLEMENTATION_FEATURE_HTML_3,
 
+    /** If document.implementation.hasFeature() supports 'KeyboardEvents'. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    JS_DOMIMPLEMENTATION_FEATURE_KEYBOARDEVENTS,
+
+    /** If document.implementation.hasFeature() supports 'LS'. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    JS_DOMIMPLEMENTATION_FEATURE_LS,
+
+    /** If document.implementation.hasFeature() supports 'MouseEvents 1.0'. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    JS_DOMIMPLEMENTATION_FEATURE_MOUSEEVENTS_1,
+
+    /** If document.implementation.hasFeature() supports 'MouseEvents 2.0'. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    JS_DOMIMPLEMENTATION_FEATURE_MOUSEEVENTS_2,
+
+    /** If document.implementation.hasFeature() supports 'MutationEvents 1.0'. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    JS_DOMIMPLEMENTATION_FEATURE_MUTATIONEVENTS_1,
+
     /** If document.implementation.hasFeature() supports 'MutationEvents 2.0'. */
-    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     JS_DOMIMPLEMENTATION_FEATURE_MUTATIONEVENTS_2,
+
+    /** If document.implementation.hasFeature() supports 'MutationNameEvents'. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    JS_DOMIMPLEMENTATION_FEATURE_MUTATIONNAMEEVENTS,
 
     /** If document.implementation.hasFeature() supports only 'HTML'. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_DOMIMPLEMENTATION_FEATURE_ONLY_HTML,
 
+    /** If document.implementation.hasFeature() supports 'Range 1.0'. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    JS_DOMIMPLEMENTATION_FEATURE_RANGE_1,
+
+    /** If document.implementation.hasFeature() supports 'Range 2.0'. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    JS_DOMIMPLEMENTATION_FEATURE_RANGE_2,
+
+    /** If document.implementation.hasFeature() supports 'Range 3.0'. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    JS_DOMIMPLEMENTATION_FEATURE_RANGE_3,
+
     /** If document.implementation.hasFeature() supports 'StyleSheets 2.0'. */
-    @BrowserFeature(@WebBrowser(FF))
-    JS_DOMIMPLEMENTATION_FEATURE_STYLESHEETS_2,
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    JS_DOMIMPLEMENTATION_FEATURE_STYLESHEETS,
+
+    /** If document.implementation.hasFeature() supports 'MutationNameEvents'. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    JS_DOMIMPLEMENTATION_FEATURE_TEXTEVENTS,
+
+    /** If document.implementation.hasFeature() supports 'Traversal 1.0'. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_1,
 
     /** If document.implementation.hasFeature() supports 'Traversal 2.0'. */
-    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_2,
 
+    /** If document.implementation.hasFeature() supports 'Traversal 3.0'. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_3,
+
     /** If document.implementation.hasFeature() supports 'UIEvents 2.0'. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_DOMIMPLEMENTATION_FEATURE_UIEVENTS_2,
 
+    /** If document.implementation.hasFeature() supports 'UIEvents 3.0'. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    JS_DOMIMPLEMENTATION_FEATURE_UIEVENTS_3,
+
+    /** If document.implementation.hasFeature() supports 'Validation'. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    JS_DOMIMPLEMENTATION_FEATURE_VALIDATION,
+
+    /** If document.implementation.hasFeature() supports 'Views 1.0'. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    JS_DOMIMPLEMENTATION_FEATURE_VIEWS_1,
+
+    /** If document.implementation.hasFeature() supports 'Views 2.0'. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    JS_DOMIMPLEMENTATION_FEATURE_VIEWS_2,
+
+    /** If document.implementation.hasFeature() supports 'Views 3.0'. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    JS_DOMIMPLEMENTATION_FEATURE_VIEWS_3,
+
     /** If document.implementation.hasFeature() supports 'XHTML 1.0'. */
-    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     JS_DOMIMPLEMENTATION_FEATURE_XHTML_1,
 
+    /** If document.implementation.hasFeature() supports 'XHTML 3.0'. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    JS_DOMIMPLEMENTATION_FEATURE_XHTML_3,
+
     /** If document.implementation.hasFeature() supports 'XML 3.0'. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_DOMIMPLEMENTATION_FEATURE_XML_3,
 
     /** If document.implementation.hasFeature() supports 'XPath 3.0'. */
-    @BrowserFeature(@WebBrowser(FF))
-    JS_DOMIMPLEMENTATION_FEATURE_XPATH_3,
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    JS_DOMIMPLEMENTATION_FEATURE_XPATH,
 
     /** <code>DOMParser.parseFromString(..)</code> handles an empty String as error. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CORE_1;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CORE_3;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CSS2_1;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CSS2_2;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CSS2_3;
@@ -24,16 +25,35 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEME
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CSS_1;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CSS_2;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_CSS_3;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_EVENTS_1;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_HTML_3;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_KEYBOARDEVENTS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_LS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_MOUSEEVENTS_1;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_MOUSEEVENTS_2;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_MUTATIONEVENTS_1;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_MUTATIONEVENTS_2;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_MUTATIONNAMEEVENTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_ONLY_HTML;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_STYLESHEETS_2;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_RANGE_1;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_RANGE_2;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_RANGE_3;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_STYLESHEETS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_TEXTEVENTS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_1;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_2;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_3;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_UIEVENTS_2;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_UIEVENTS_3;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_VALIDATION;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_VIEWS_1;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_VIEWS_2;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_VIEWS_3;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_XHTML_1;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_XHTML_3;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_XML_3;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_XPATH_3;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_XPATH;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -51,6 +71,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  *
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-core.html#ID-102161490">
  * W3C Dom Level 1</a>
@@ -79,6 +100,9 @@ public class DOMImplementation extends SimpleScriptable {
                 if ("2.0".equals(version)) {
                     return true;
                 }
+                if ("3.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_CORE_3);
+                }
             }
             else if ("HTML".equals(feature)) {
                 if ("1.0".equals(version) || "2.0".equals(version)) {
@@ -89,11 +113,11 @@ public class DOMImplementation extends SimpleScriptable {
                 }
             }
             else if ("XHTML".equals(feature)) {
-                if ("1.0".equals(version)) {
+                if ("1.0".equals(version) || "2.0".equals(version)) {
                     return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_XHTML_1);
                 }
-                if ("2.0".equals(version)) {
-                    return true;
+                if ("3.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_XHTML_3);
                 }
             }
             else if ("XML".equals(feature)) {
@@ -104,11 +128,19 @@ public class DOMImplementation extends SimpleScriptable {
                     return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_XML_3);
                 }
             }
-            else if ("Views".equals(feature) && "2.0".equals(version)) {
-                return true;
+            else if ("Views".equals(feature)) {
+                if ("1.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_VIEWS_1);
+                }
+                if ("2.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_VIEWS_2);
+                }
+                if ("3.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_VIEWS_3);
+                }
             }
-            else if ("StyleSheets".equals(feature) && "2.0".equals(version)) {
-                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_STYLESHEETS_2);
+            else if ("StyleSheets".equals(feature)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_STYLESHEETS);
             }
             else if ("CSS".equals(feature)) {
                 if ("1.0".equals(version)) {
@@ -144,53 +176,84 @@ public class DOMImplementation extends SimpleScriptable {
                 }
             }
             else if ("Events".equals(feature)) {
-                if ("2.0".equals(version)) {
-                    return true;
+                if ("1.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_EVENTS_1);
                 }
-                if ("3.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3);
-                }
-            }
-            else if ("UIEvents".equals(feature)) {
-                if ("2.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_UIEVENTS_2);
-                }
-                if ("3.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3);
-                }
-            }
-            else if ("MouseEvents".equals(feature)) {
-                if ("2.0".equals(version)) {
-                    return true;
-                }
-                if ("3.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3);
-                }
-            }
-            else if ("MutationEvents".equals(feature)) {
-                if ("2.0".equals(version)) {
-                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_MUTATIONEVENTS_2);
-                }
-                if ("3.0".equals(version)) {
+                if ("2.0".equals(version) || "3.0".equals(version)) {
                     return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3);
                 }
             }
             else if ("HTMLEvents".equals(feature)) {
-                if ("2.0".equals(version)) {
-                    return true;
+                if ("1.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_EVENTS_1);
                 }
-                if ("3.0".equals(version)) {
+                if ("2.0".equals(version) || "3.0".equals(version)) {
                     return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3);
                 }
             }
-            else if ("Range".equals(feature) && "2.0".equals(version)) {
-                return true;
+            else if ("UIEvents".equals(feature)) {
+                if ("1.0".equals(version) || "2.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_UIEVENTS_2);
+                }
+                if ("3.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_UIEVENTS_3);
+                }
             }
-            else if ("Traversal".equals(feature) && "2.0".equals(version)) {
-                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_2);
+            else if ("KeyboardEvents".equals(feature)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_KEYBOARDEVENTS);
             }
-            else if ("XPath".equals(feature) && "3.0".equals(version)) {
-                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_XPATH_3);
+            else if ("MouseEvents".equals(feature)) {
+                if ("1.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_MOUSEEVENTS_1);
+                }
+                if ("2.0".equals(version) || "3.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_MOUSEEVENTS_2);
+                }
+            }
+            else if ("MutationEvents".equals(feature)) {
+                if ("1.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_MUTATIONEVENTS_1);
+                }
+                if ("2.0".equals(version) || "3.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_MUTATIONEVENTS_2);
+                }
+            }
+            else if ("MutationNameEvents".equals(feature)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_MUTATIONNAMEEVENTS);
+            }
+            else if ("TextEvents".equals(feature)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_TEXTEVENTS);
+            }
+            else if ("LS".equals(feature) || "LS-Async".equals(feature)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_LS);
+            }
+            else if ("Range".equals(feature)) {
+                if ("1.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_RANGE_1);
+                }
+                if ("2.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_RANGE_2);
+                }
+                if ("3.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_RANGE_3);
+                }
+            }
+            else if ("Traversal".equals(feature)) {
+                if ("1.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_1);
+                }
+                if ("2.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_2);
+                }
+                if ("3.0".equals(version)) {
+                    return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_3);
+                }
+            }
+            else if ("Validation".equals(feature)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_VALIDATION);
+            }
+            else if ("XPath".equals(feature)) {
+                return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_XPATH);
             }
             else if ("http://www.w3.org/TR/SVG11/feature#BasicStructure".equals(feature)
                     && ("1.0".equals(version) || "1.1".equals(version))) {

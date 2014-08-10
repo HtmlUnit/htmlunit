@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Many minor fixes for implementation.hasFeature (retested with ff24, ff31 and chrome added).
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: document.createNSResolver() and .evaluate() are supported in Chrome.
             </action>
