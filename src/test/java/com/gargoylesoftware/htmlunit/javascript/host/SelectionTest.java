@@ -14,15 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -39,9 +35,8 @@ public class SelectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
-    @Alerts(IE = "true")
-    public void equality_IE() throws Exception {
+    @Alerts("true")
+    public void equality_selection() throws Exception {
         final String html = "<html><body><script>alert(document.selection==document.selection);</script></body></html>";
         loadPageWithAlerts2(html);
     }
@@ -50,11 +45,12 @@ public class SelectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(FF)
-    @Alerts(FF = "true")
-    public void equality_FF() throws Exception {
+    @Alerts(DEFAULT = "true", IE8 = "exception")
+    public void equality_getSelection() throws Exception {
         final String html = "<html><body><script>\n"
-            + "alert(window.getSelection()==window.getSelection());\n"
+            + "try {\n"
+            + "  alert(window.getSelection()==window.getSelection());\n"
+            + "} catch (e) {alert('exception')}\n"
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
@@ -63,21 +59,22 @@ public class SelectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(FF)
-    @Alerts(FF = { "0", "0", "0", "cdefg" })
+    @Alerts(DEFAULT = { "0", "0", "0", "cdefg" }, IE8 = { }, CHROME = { "0", "1", "1", "cdefg" })
     public void inputSelectionsAreIndependent() throws Exception {
         final String html = "<html><body onload='test()'>\n"
             + "<input id='i' value='abcdefghi'/>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    var i = document.getElementById('i');\n"
-            + "    var s = window.getSelection();\n"
-            + "    alert(s.rangeCount);\n"
-            + "    i.selectionStart = 2;\n"
-            + "    alert(s.rangeCount);\n"
-            + "    i.selectionEnd = 7;\n"
-            + "    alert(s.rangeCount);\n"
-            + "    alert(i.value.substring(i.selectionStart, i.selectionEnd));\n"
+            + "    if (window.getSelection) {\n"
+            + "      var i = document.getElementById('i');\n"
+            + "      var s = window.getSelection();\n"
+            + "      alert(s.rangeCount);\n"
+            + "      i.selectionStart = 2;\n"
+            + "      alert(s.rangeCount);\n"
+            + "      i.selectionEnd = 7;\n"
+            + "      alert(s.rangeCount);\n"
+            + "      alert(i.value.substring(i.selectionStart, i.selectionEnd));\n"
+            + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
@@ -88,8 +85,7 @@ public class SelectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(FF)
-    @Alerts(FF = {
+    @Alerts(DEFAULT = {
             "1:null/0/null/0/true/undefined/0/",
             "2:s2/0/s2/1/false/undefined/1/xyz/xyz",
             "3:s2/0/s3/1/false/undefined/1/xyzfoo/xyzfoo",
@@ -101,7 +97,7 @@ public class SelectionTest extends WebDriverTestCase {
             "9:s2/1/s3/1/false/undefined/2/abcfoo/abc/foo",
             "10:s2/1/s3/3/false/undefined/2/abcfoo---foo/abc/foo---foo",
             "11:s1/0/s1/0/true/undefined/1//",
-            "12:null/0/null/0/true/undefined/0/" })
+            "12:null/0/null/0/true/undefined/0/" }, IE8 = { })
     public void aLittleBitOfEverything() throws Exception {
         final String jsSnippet = ""
             + "    alertSelection(selection);\n"
@@ -139,11 +135,10 @@ public class SelectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(FF)
-    @Alerts(FF = {
+    @Alerts(DEFAULT = {
             "1:[object Text]/1/[object Text]/2/false/undefined/1/yzfo/yzfo",
             "2:null/0/null/0/true/undefined/0/",
-            "false", "true" })
+            "false", "true" }, IE8 = { })
     public void aLittleBitOfEverything_removeRange() throws Exception {
         final String jsSnippet = ""
             + "    var range = document.createRange();\n"
@@ -166,6 +161,9 @@ public class SelectionTest extends WebDriverTestCase {
             + "<script>\n"
             + "  var x = 1;\n"
             + "  function test() {\n"
+            + "    if (!window.getSelection) {\n"
+            + "      return;\n"
+            + "    }\n"
             + "    var selection = window.getSelection();\n"
             + "    var s1 = document.getElementById('s1');\n"
             + "    var s2 = document.getElementById('s2');\n"
@@ -191,8 +189,7 @@ public class SelectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(FF)
-    @Alerts(FF = { "", "", "null", "null" })
+    @Alerts(FF = { "", "", "null", "null" }, IE8 = { }, DEFAULT = { "" , "", "", "" })
     public void getSelection_display() throws Exception {
         final String html = "<html><body onload='test()'>\n"
             + "<iframe id='frame1' src='about:blank'></iframe>\n"
@@ -200,10 +197,12 @@ public class SelectionTest extends WebDriverTestCase {
             + "<div style='display: none'><iframe id='frame3' src='about:blank'></iframe></div>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    alert(window.getSelection());\n"
-            + "    alert(document.getElementById('frame1').contentWindow.getSelection());"
-            + "    alert(document.getElementById('frame2').contentWindow.getSelection());"
-            + "    alert(document.getElementById('frame3').contentWindow.getSelection());"
+            + "    if (window.getSelection) {\n"
+            + "      alert(window.getSelection());\n"
+            + "      alert(document.getElementById('frame1').contentWindow.getSelection());\n"
+            + "      alert(document.getElementById('frame2').contentWindow.getSelection());\n"
+            + "      alert(document.getElementById('frame3').contentWindow.getSelection());\n"
+            + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
