@@ -671,7 +671,7 @@ public class Node extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536343.aspx">MSDN documentation</a>
      * @see #addEventListener(String, Function, boolean)
      */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
     public boolean attachEvent(final String type, final Function listener) {
         return getEventListenersContainer().addEventListener(StringUtils.substring(type, 2), listener, false);
     }
@@ -939,7 +939,7 @@ public class Node extends SimpleScriptable {
      * Returns the base name of this element.
      * @return the base name of this element
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public Object getBaseName() {
         final DomElement domElem = getDomNodeOrDie();
         final boolean isXmlPage = domElem.getOwnerDocument() instanceof XmlPage;
@@ -976,7 +976,7 @@ public class Node extends SimpleScriptable {
      * Represents the xml content of the node and its descendants.
      * @return the xml content of the node and its descendants
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public Object getXml() {
         final DomNode node = getDomNodeOrDie();
         if (node.getPage() instanceof XmlPage) {

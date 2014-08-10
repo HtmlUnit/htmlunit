@@ -72,7 +72,7 @@ public class Element extends EventNode {
      * @param expression a string specifying an XPath expression
      * @return list of the found elements
      */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
     public HTMLCollection selectNodes(final String expression) {
         final DomElement domNode = getDomNodeOrDie();
         final boolean attributeChangeSensitive = expression.contains("@");
@@ -92,7 +92,7 @@ public class Element extends EventNode {
      * @return the first node that matches the given pattern-matching operation
      *         If no nodes match the expression, returns a null value.
      */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
     public Object selectSingleNode(final String expression) {
         final HTMLCollection collection = selectNodes(expression);
         if (collection.getLength() > 0) {
@@ -262,7 +262,7 @@ public class Element extends EventNode {
      * Represents the text content of the node or the concatenated text representing the node and its descendants.
      * @return the text content of the node or the concatenated text representing the node and its descendants
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public String getText() {
         final StringBuilder buffer = new StringBuilder();
         toText(getDomNodeOrDie(), buffer);

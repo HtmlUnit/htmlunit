@@ -946,7 +946,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the object's behavior (IE only).
      * @return the object's behavior
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 10))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public String getBehavior() {
         return getStyleAttribute(BEHAVIOR);
     }
@@ -955,7 +955,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the object's behavior (IE only).
      * @param behavior the new behavior
      */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 10))
+    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
     public void setBehavior(final String behavior) {
         setStyleAttribute(BEHAVIOR, behavior);
 
@@ -4079,7 +4079,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      *        Array references are not allowed on object properties included in this script.
      * @param language specified the language used
      */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
     public void setExpression(final String propertyName, final String expression, final String language) {
         // Empty.
     }
@@ -4090,7 +4090,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param propertyName the name of the property from which to remove an expression
      * @return true if the expression was successfully removed
      */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
     public boolean removeExpression(final String propertyName) {
         return true;
     }

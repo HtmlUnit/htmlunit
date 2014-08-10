@@ -139,7 +139,7 @@ public class Selection extends SimpleScriptable {
      * Returns the type of selection (IE only).
      * @return the type of selection
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public String getType() {
         return type_;
     }
@@ -148,7 +148,7 @@ public class Selection extends SimpleScriptable {
      * Creates a TextRange object from the current text selection (IE only).
      * @return the created TextRange object
      */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
     public TextRange createRange() {
         final TextRange range;
         final Range first = getFirstRange();
@@ -253,7 +253,7 @@ public class Selection extends SimpleScriptable {
     /**
      * Cancels the current selection, sets the selection type to none, and sets the item property to null (IE only).
      */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
     public void empty() {
         type_ = "None";
     }

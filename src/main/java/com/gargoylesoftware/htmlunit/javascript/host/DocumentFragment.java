@@ -74,7 +74,7 @@ public class DocumentFragment extends Node {
      * @param tagName the tag name
      * @return the new HTML element, or NOT_FOUND if the tag is not supported
      */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
     public Object createElement(final String tagName) {
         return getDocument().createElement(tagName);
     }

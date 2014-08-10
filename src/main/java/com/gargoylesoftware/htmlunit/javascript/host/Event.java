@@ -541,7 +541,7 @@ public class Event extends SimpleScriptable {
      * Returns the key code associated with the event.
      * @return the key code associated with the event
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public Object getKeyCode() {
         if (keyCode_ == null) {
             if (getBrowserVersion().hasFeature(JS_EVENT_KEY_CODE_UNDEFINED)) {
@@ -555,7 +555,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return whether SHIFT has been pressed during this event or not
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public boolean getShiftKey() {
         return shiftKey_;
     }
@@ -570,7 +570,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return whether CTRL has been pressed during this event or not
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public boolean getCtrlKey() {
         return ctrlKey_;
     }
@@ -585,7 +585,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return whether ALT has been pressed during this event or not
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public boolean getAltKey() {
         return altKey_;
     }
@@ -694,7 +694,7 @@ public class Event extends SimpleScriptable {
      * Returns the return value associated with the event.
      * @return the return value associated with the event
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 9) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8) })
     public Object getReturnValue() {
         return returnValue_;
     }
@@ -703,7 +703,7 @@ public class Event extends SimpleScriptable {
      * Sets the return value associated with the event.
      * @param returnValue the return value associated with the event
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 9) })
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8) })
     public void setReturnValue(final Object returnValue) {
         returnValue_ = returnValue;
     }
@@ -712,7 +712,7 @@ public class Event extends SimpleScriptable {
      * Returns the property name associated with the event.
      * @return the property name associated with the event
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public String getPropertyName() {
         return propertyName_;
     }

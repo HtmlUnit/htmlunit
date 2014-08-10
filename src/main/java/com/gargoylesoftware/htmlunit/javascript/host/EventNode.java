@@ -371,7 +371,7 @@ public class EventNode extends Node {
      * @param event specifies the event object from which to obtain event object properties.
      * @return <tt>true</tt> if the event fired successfully, <tt>false</tt> if it was canceled
      */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
     public boolean fireEvent(final String type, Event event) {
         if (event == null) {
             event = new MouseEvent();

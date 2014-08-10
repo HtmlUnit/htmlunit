@@ -388,7 +388,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns the value of the "all" property.
      * @return the value of the "all" property
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public HTMLCollection getAll() {
         if (all_ == null) {
             all_ = new HTMLCollection(getDomNodeOrDie(), false, "HTMLElement.all") {
@@ -493,7 +493,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns the document.
      * @return the document
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public DocumentProxy getDocument() {
         return getWindow().getDocument_js();
     }
@@ -1337,7 +1337,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param behavior the URL of the behavior to add, or a default behavior name
      * @return an identifier that can be user later to detach the behavior from the element
      */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
     public int addBehavior(final String behavior) {
         // if behavior already defined, then nothing to do
         if (behaviors_.contains(behavior)) {
@@ -1873,7 +1873,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the namespace defined for the element
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534388.aspx">MSDN documentation</a>
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public String getScopeName() {
         final String prefix = getDomNodeOrDie().getPrefix();
         return prefix != null ? prefix : "HTML";
@@ -1884,7 +1884,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the Uniform Resource Name (URN) specified in the namespace declaration
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534658.aspx">MSDN documentation</a>
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public String getTagUrn() {
         final String urn = getDomNodeOrDie().getNamespaceURI();
         if (HTMLParser.XHTML_NAMESPACE.equals(urn)) {
@@ -2159,7 +2159,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the filters
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms537452.aspx">MSDN doc</a>
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public Object getFilters() {
         return this; // return anything, what matters is that it is not null
     }
@@ -2267,7 +2267,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Simulates a click on a scrollbar component (IE only).
      * @param scrollAction the type of scroll action to simulate
      */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
     public void doScroll(final String scrollAction) {
         if (((HtmlPage) getDomNodeOrDie().getPage()).isBeingParsed()) {
             throw Context.reportRuntimeError("The data necessary to complete this operation is not yet available.");

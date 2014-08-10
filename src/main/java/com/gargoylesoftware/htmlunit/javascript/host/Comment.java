@@ -49,7 +49,7 @@ public final class Comment extends CharacterDataImpl {
      * Returns the element ID.
      * @return the ID of this element
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public String getId() {
         return "";
     }
@@ -58,7 +58,7 @@ public final class Comment extends CharacterDataImpl {
      * Returns the class defined for this element.
      * @return the class name
      */
-    @JsxGetter(value = @WebBrowser(value = IE, maxVersion = 9), propertyName = "className")
+    @JsxGetter(value = @WebBrowser(value = IE, maxVersion = 8), propertyName = "className")
     public Object getClassName_js() {
         return "";
     }
@@ -67,7 +67,7 @@ public final class Comment extends CharacterDataImpl {
      * Returns the tag name of this element.
      * @return the tag name
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public Object getTagName() {
         return "!";
     }
@@ -85,7 +85,7 @@ public final class Comment extends CharacterDataImpl {
      * Returns the document of this element.
      * @return the document
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public Object getDocument() {
         return getWindow().getDocument_js();
     }
@@ -117,7 +117,7 @@ public final class Comment extends CharacterDataImpl {
      * Gets the innerText attribute.
      * @return the innerText
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public String getInnerText() {
         return "";
     }
@@ -126,7 +126,7 @@ public final class Comment extends CharacterDataImpl {
      * Currently does nothing.
      * @param value the new value for the contents of this node
      */
-    @JsxSetter(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
     public void setInnerText(final String value) {
         // nothing
     }

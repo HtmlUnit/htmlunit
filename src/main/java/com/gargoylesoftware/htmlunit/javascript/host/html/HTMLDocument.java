@@ -456,7 +456,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the value of the JavaScript attribute "namespaces".
      * @return the value of the JavaScript attribute "namespaces"
      */
-    @JsxGetter(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
     public Object getNamespaces() {
         if (namespaces_ == null) {
             namespaces_ = new NamespaceCollection(this);
@@ -1276,7 +1276,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param index where to insert the sheet in the collection
      * @return the newly created stylesheet
      */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
     public CSSStyleSheet createStyleSheet(final String url, final Object index) {
         final HTMLLinkElement link = (HTMLLinkElement) createElement("link");
         link.setHref(url);
@@ -1813,7 +1813,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the value of the JavaScript attribute <tt>selection</tt>.
      * @return the value of the JavaScript attribute <tt>selection</tt>
      */
-    @JsxGetter(value = @WebBrowser(value = IE, maxVersion = 9), propertyName = "selection")
+    @JsxGetter(value = @WebBrowser(value = IE, maxVersion = 8), propertyName = "selection")
     public Selection getSelection_js() {
         return getWindow().getSelectionImpl();
     }
@@ -1905,7 +1905,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536390.aspx">MSDN Documentation</a>
      * @return an uninitialized event object
      */
-    @JsxFunction(@WebBrowser(value = IE, maxVersion = 9))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
     public Event createEventObject() {
         final Event event = new MouseEvent();
         event.setParentScope(getWindow());

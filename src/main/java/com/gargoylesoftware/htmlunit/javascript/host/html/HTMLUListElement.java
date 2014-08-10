@@ -33,9 +33,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  */
 @JsxClasses({
-        @JsxClass(domClass = HtmlDirectory.class, browsers = { @WebBrowser(value = IE, maxVersion = 9) }),
+        @JsxClass(domClass = HtmlDirectory.class, browsers = { @WebBrowser(value = IE, maxVersion = 8) }),
         @JsxClass(domClass = HtmlUnorderedList.class),
-        @JsxClass(domClass = HtmlMenu.class, browsers = { @WebBrowser(value = IE, maxVersion = 9) }) })
+        @JsxClass(domClass = HtmlMenu.class, browsers = { @WebBrowser(value = IE, maxVersion = 8) }) })
 public class HTMLUListElement extends HTMLListElement {
 
     /**
