@@ -1711,7 +1711,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the current selection.
      * @return the current selection
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public Selection getSelection() {
         final WebWindow webWindow = getWebWindow();
         // return null if the window is in a frame that is not displayed

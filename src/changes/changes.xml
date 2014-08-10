@@ -12,7 +12,7 @@
                 JavaScript: document.createNSResolver() and .evaluate() are supported in Chrome.
             </action>
             <action type="fix" dev="asashour">
-                JavaScript: window.atob() and .btoa() are supported in Chrome.
+                JavaScript: window.atob(), .btoa() and .getSelection() are supported in Chrome.
             </action>
             <action type="fix" dev="asashour">
                 JavaScript: CSSStyleDeclaration.getPropertyCSSValue() is supported in Chrome.
