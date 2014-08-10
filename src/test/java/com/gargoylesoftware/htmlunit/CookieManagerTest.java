@@ -14,19 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.http.Header;
 import org.apache.http.client.utils.DateUtils;
-import org.apache.http.cookie.CookieOrigin;
-import org.apache.http.impl.cookie.BrowserCompatSpec;
-import org.apache.http.message.BasicHeader;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -34,9 +28,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
 
@@ -59,65 +51,6 @@ public class CookieManagerTest extends WebDriverTestCase {
         + "</script>\n"
         + "</head>"
         + "<body></body></html>";
-
-    /**
-     * Verifies the basic cookie manager behavior.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Browsers(NONE)
-    public void basicBehavior() throws Exception {
-        // Create a new cookie manager.
-        final CookieManager mgr = new CookieManager();
-        assertTrue(mgr.isCookiesEnabled());
-        assertTrue(mgr.getCookies().isEmpty());
-
-        // Add a cookie to the manager.
-        final Cookie cookie = new Cookie("localhost", "a", "b");
-        mgr.addCookie(cookie);
-        assertFalse(mgr.getCookies().isEmpty());
-
-        // Remove the cookie from the manager.
-        mgr.removeCookie(cookie);
-        assertTrue(mgr.getCookies().isEmpty());
-
-        // Add the cookie back to the manager.
-        mgr.addCookie(cookie);
-        assertFalse(mgr.getCookies().isEmpty());
-
-        // Clear all cookies from the manager.
-        mgr.clearCookies();
-        assertTrue(mgr.getCookies().isEmpty());
-
-        // Add a cookie before disabling cookies.
-        mgr.addCookie(cookie);
-        assertEquals(1, mgr.getCookies().size());
-
-        // Disable cookies.
-        mgr.setCookiesEnabled(false);
-        assertFalse(mgr.isCookiesEnabled());
-        assertEquals(0, mgr.getCookies().size());
-
-        // Add a cookie after disabling cookies.
-        final Cookie cookie2 = new Cookie("a", "b", "c", "d", new Date(System.currentTimeMillis() + 5000), false);
-        mgr.addCookie(cookie2);
-        assertEquals(0, mgr.getCookies().size());
-        assertFalse(mgr.clearExpired(new Date(System.currentTimeMillis() + 10000)));
-
-        // Enable cookies again.
-        mgr.setCookiesEnabled(true);
-        assertTrue(mgr.isCookiesEnabled());
-        assertEquals(1, mgr.getCookies().size());
-
-        // Clear expired cookies
-        assertFalse(mgr.clearExpired(new Date(System.currentTimeMillis() + 10000)));
-        assertEquals(1, mgr.getCookies().size());
-
-        mgr.addCookie(cookie2);
-        assertEquals(2, mgr.getCookies().size());
-        assertTrue(mgr.clearExpired(new Date(System.currentTimeMillis() + 10000)));
-        assertEquals(1, mgr.getCookies().size());
-    }
 
     /**
      * @throws Exception if the test fails
@@ -227,23 +160,6 @@ public class CookieManagerTest extends WebDriverTestCase {
         assertTrue("lastCookies: " + lastCookies, lastCookies.contains("key=value")
                 && lastCookies.contains("test=\"aa= xx==\"")
                 && lastCookies.contains("; "));
-    }
-
-    /**
-     * Test that " are not discarded.
-     * Once this test passes, our hack in HttpWebConnection.HtmlUnitBrowserCompatCookieSpec can safely be removed.
-     * @see <a href="https://issues.apache.org/jira/browse/HTTPCLIENT-1006">HttpClient bug 1006</a>
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Browsers(NONE)
-    public void httpClientParsesCookiesQuotedValuesCorrectly() throws Exception {
-        final Header header = new BasicHeader("Set-Cookie", "first=\"hello world\"");
-        final BrowserCompatSpec spec = new BrowserCompatSpec();
-        final CookieOrigin origin = new CookieOrigin("localhost", 80, "/", false);
-        final List<org.apache.http.cookie.Cookie> list = spec.parse(header, origin);
-        assertEquals(1, list.size());
-        assertEquals("\"hello world\"", list.get(0).getValue());
     }
 
     /**
