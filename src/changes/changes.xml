@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="Bugfixes">
+            <action type="update" dev="rbri">
+                Upgrade Apache HttpClient to 4.3.5.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: HTMLStyleElement.getSheet() is supported in Chrome.
             </action>
