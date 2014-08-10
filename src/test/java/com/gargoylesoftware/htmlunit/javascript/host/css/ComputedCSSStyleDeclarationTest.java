@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -1024,7 +1023,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(FF = { "1248px", "auto" },
             IE = { "auto", "auto" },
             IE11 = { "1240px", "auto" })
-    @NotYetImplemented({ FF24, IE11 })
+    @NotYetImplemented({ FF, IE11 })
     public void computedWidthOfHiddenElements() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

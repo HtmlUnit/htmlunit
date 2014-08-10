@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff24up;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffBelow31;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff31up;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ie11up;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ie8up;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ieBelow11;
@@ -362,7 +364,7 @@ final class StyleAttributes {
                 ff("auto")),
 
         /** The style property -moz-text-blink. */
-        MOZ_TEXT_BLINK("MozTextBlink", "-moz-text-blink", ff("none")),
+        MOZ_TEXT_BLINK("MozTextBlink", "-moz-text-blink", ffBelow31("none")),
 
         /** The style property -moz-text-decoration-color. */
         MOZ_TEXT_DECORATION_COLOR("MozTextDecorationColor",
@@ -693,9 +695,8 @@ final class StyleAttributes {
 
         /** The style property -ms-wrap-through. */
         MS_WRAP_THROUGH("msWrapThrough", "-ms-wrap-through", ie11up("wrap")),
-
         /** The style property alignment-content. */
-        ALIGN_CONTENT("alignContent", "align-content", ie11up("stretch")),
+        ALIGN_CONTENT("alignContent", "align-content", ie11up("stretch"), ff31up("stretch")),
 
         /** The style property alignment-items. */
         ALIGN_ITEMS("alignItems", "align-items", ff24up("stretch"), ie11up("stretch")),
@@ -705,6 +706,9 @@ final class StyleAttributes {
 
         /** The style property alignment-baseline. */
         ALIGNMENT_BASELINE("alignmentBaseline", "alignment-baseline", ie11up("auto")),
+
+        /** The style property all. */
+        ALL("all", "all", ff31up("")),
 
         /** The style property animation. */
         ANIMATION("animation", "animation", ff(""), ie11up("")),
@@ -747,6 +751,10 @@ final class StyleAttributes {
         /** The style property backface-visibility. */
         BACKFACE_VISIBILITY("backfaceVisibility", "backface-visibility",
                 ff("visible"), ie11up("visible")),
+
+        /** The style property background-blend-mode. */
+        BACKGROUND_BLEND_MODE("backgroundBlendMode", "background-blend-mode",
+                ff31up("normal")),
 
         /** The style property background-clip. */
         BACKGROUND_CLIP("backgroundClip", "background-clip",
@@ -820,7 +828,7 @@ final class StyleAttributes {
         BOX_SHADOW("boxShadow", "box-shadow", ff("none"), ie11up("none")),
 
         /** The style property box-sizing. */
-        BOX_SIZING("boxSizing", "box-sizing", ie11up("content-box")),
+        BOX_SIZING("boxSizing", "box-sizing", ff31up("content-box"), ie11up("content-box")),
 
         /** The style property break-after. */
         BREAK_AFTER("breakAfter", "break-after", ie11up("auto")),
@@ -922,7 +930,7 @@ final class StyleAttributes {
         FLEX_DIRECTION("flexDirection", "flex-direction", ff24up("row"), ie11up("row")),
 
         /** The style property flex-flow. */
-        FLEX_FLOW("flexFlow", "flex-flow", ie11up("row nowrap")),
+        FLEX_FLOW("flexFlow", "flex-flow", ff31up(""), ie11up("row nowrap")),
 
         /** The style property flex-grow. */
         FLEX_GROW("flexGrow", "flex-grow", ff24up("0"), ie11up("0")),
@@ -931,7 +939,7 @@ final class StyleAttributes {
         FLEX_SHRINK("flexShrink", "flex-shrink", ff24up("1"), ie11up("1")),
 
         /** The style property flex-wrap. */
-        FLEX_WRAP("flexWrap", "flex-wrap", ie11up("nowrap")),
+        FLEX_WRAP("flexWrap", "flex-wrap", ff31up("nowrap"), ie11up("nowrap")),
 
         /** The style property flood-color. */
         FLOOD_COLOR("floodColor", "flood-color", ff("rgb(0, 0, 0)"), ie11up("")),
@@ -947,6 +955,9 @@ final class StyleAttributes {
 
         /** The style property glyph-orientation-vertical. */
         GLYPH_ORIENTATION_VERTICAL("glyphOrientationVertical", "glyph-orientation-vertical", ie11up("auto")),
+
+        /** The style property image-orientation. */
+        IMAGE_ORIENTATION("imageOrientation", "image-orientation", ff31up("0deg")),
 
         /** The style property image-rendering. */
         IMAGE_RENDERING("imageRendering", "image-rendering", ff("auto")),
@@ -1030,6 +1041,9 @@ final class StyleAttributes {
 
         /** The style property pitch-range. */
         PITCH_RANGE("pitchRange", "pitch-range"),
+
+        /** The style property paint-order. */
+        PAINT_ORDER("paintOrder", "paint-order", ff31up("normal")),
 
         /** The style property perspective. */
         PERSPECTIVE("perspective", "perspective", ff("none"), ie11up("none")),
