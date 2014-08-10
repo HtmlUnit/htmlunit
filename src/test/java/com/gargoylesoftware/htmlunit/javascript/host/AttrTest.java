@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -22,7 +21,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -77,8 +75,7 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(FF)
-    @Alerts(FF = { "true", "true" })
+    @Alerts({ "true", "true" })
     public void specified2() throws Exception {
         final String html
             = "<html><body onload='test()'><div id='div' class='test'></div>\n"
@@ -298,6 +295,7 @@ public class AttrTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object Attr]", "§§URL§§" },
+            CHROME = { "[object Attr]", "null" },
             IE = { "[object]", "undefined" },
             IE11 = { "[object Attr]", "undefined" })
     public void html_baseURI() throws Exception {
@@ -370,6 +368,7 @@ public class AttrTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object Attr]", "§§URL§§foo.xml" },
+            CHROME = { "[object Attr]", "null" },
             IE = { "[object]", "undefined" },
             IE11 = { "[object Attr]", "undefined" })
     public void xml_baseURI() throws Exception {
