@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -258,7 +257,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "function Node() {\n    [native code]\n}", "function Element() {\n    [native code]\n}" },
             IE8 = { "undefined", "undefined" },
             IE11 = { "[object Node]", "[object Element]" })
-    @NotYetImplemented(FF24)
+    @NotYetImplemented(FF)
     public void windowProperties() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -656,7 +655,7 @@ public class Window2Test extends WebDriverTestCase {
             FF24 = { "657", "1264", "641", "1248" },
             FF31 = { "674", "1264", "658", "1248" },
             IE11 = { "705", "1256", "688", "1239" })
-    @NotYetImplemented({ FF24, IE11 })
+    @NotYetImplemented({ FF, IE11 })
     // TODO width and height calculation needs to be reworked in HtmlUnit
     // but as the calculation might be effected by e.g. current windows style it is not that simple
     public void changeHeightsAndWidths() throws Exception {
@@ -690,7 +689,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(FF31 = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1240" },
             FF24 = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1206" },
             DEFAULT = { "0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()" })
-    @NotYetImplemented(FF24)
+    @NotYetImplemented(FF)
     public void scrolling1() throws Exception {
         scrolling(true);
     }
