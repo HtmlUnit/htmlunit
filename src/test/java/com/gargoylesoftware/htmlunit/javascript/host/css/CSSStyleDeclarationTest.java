@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -73,7 +72,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "color: pink; background: blue; foo: bar;",
             FF = "color: pink; background: none repeat scroll 0% 0% blue;",
             IE11 = "background: blue; color: pink; foo: bar;")
-    @NotYetImplemented({ FF24, IE11 })
+    @NotYetImplemented({ FF, IE11 })
     public void style_MultipleCssAttributes() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -339,7 +338,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "", "" },
             IE8 = { "", "alpha(opacity=50)" })
-    @NotYetImplemented({ FF24, IE11 })
+    @NotYetImplemented({ FF, IE11 })
     public void styleFilter() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test(){\n"

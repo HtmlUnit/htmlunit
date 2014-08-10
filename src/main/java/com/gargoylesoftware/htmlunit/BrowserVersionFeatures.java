@@ -1453,7 +1453,7 @@ public enum BrowserVersionFeatures {
     JS_SET_INTERVAL_ZERO_TIMEOUT_FORCES_SET_TIMEOUT,
 
     /** When addressing an item in a stylesheet list using a negative index an exception is thrown. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, maxVersion = 8) })
+    @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 24), @WebBrowser(value = IE, maxVersion = 8) })
     JS_STYLESHEETLIST_EXCEPTION_FOR_NEGATIVE_INDEX,
 
     /**
