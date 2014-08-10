@@ -65,7 +65,7 @@ public class RangeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "[object HTMLDocument]", "[object HTMLDocument]", "0", "[object HTMLDocument]", "0" },
-        IE8 = {})
+        IE8 = { })
     public void emptyRange() throws Exception {
         loadPageWithAlerts2(contentStart + "alertRange(r);" + contentEnd);
     }
@@ -74,7 +74,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "BODY", "BODY", "1", "BODY", "2" }, IE8 = {})
+    @Alerts(DEFAULT = { "false", "BODY", "BODY", "1", "BODY", "2" }, IE8 = { })
     public void selectNode() throws Exception {
         final String script = "r.selectNode(document.getElementById('theDiv'));"
             + "alertRange(r);";
@@ -86,7 +86,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "DIV", "DIV", "0", "DIV", "2" }, IE8 = {})
+    @Alerts(DEFAULT = { "false", "DIV", "DIV", "0", "DIV", "2" }, IE8 = { })
     public void selectNodeContents() throws Exception {
         final String script = "r.selectNodeContents(document.getElementById('theDiv'));"
             + "alertRange(r);";
@@ -98,7 +98,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<div id=\"myDiv2\"></div><div>harhar</div><div id=\"myDiv3\"></div>", IE8 = {})
+    @Alerts(DEFAULT = "<div id=\"myDiv2\"></div><div>harhar</div><div id=\"myDiv3\"></div>", IE8 = { })
     public void createContextualFragment() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -153,7 +153,7 @@ public class RangeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "qwerty", "tyxy", "[object DocumentFragment]", "[object HTMLSpanElement] [object Text]", "qwer",
-        "[object HTMLSpanElement]" }, IE8 = {})
+            "[object HTMLSpanElement]" }, IE8 = { })
     public void extractContents() throws Exception {
         final String html =
               "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div><script>\n"
@@ -180,14 +180,14 @@ public class RangeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {
-        "1 <p><b id=\"b\">text1<span id=\"s\">inner</span>text2</b></p>",
-        "2 text1",
-        "3 [object DocumentFragment]",
-        "4 1: [object HTMLParagraphElement]: <b id=\"b\">text1</b>",
-        "5 <p><b id=\"b\"><span id=\"s\">inner</span>text2</b></p>",
-        "6 1: [object HTMLParagraphElement]: <b id=\"b\"><span id=\"s\"></span>text2</b>",
-        "7 <p><b id=\"b\"><span id=\"s\">inner</span></b></p>" },
-        IE8 = {})
+            "1 <p><b id=\"b\">text1<span id=\"s\">inner</span>text2</b></p>",
+            "2 text1",
+            "3 [object DocumentFragment]",
+            "4 1: [object HTMLParagraphElement]: <b id=\"b\">text1</b>",
+            "5 <p><b id=\"b\"><span id=\"s\">inner</span>text2</b></p>",
+            "6 1: [object HTMLParagraphElement]: <b id=\"b\"><span id=\"s\"></span>text2</b>",
+            "7 <p><b id=\"b\"><span id=\"s\">inner</span></b></p>" },
+            IE8 = { })
     public void extractContents2() throws Exception {
         final String html =
               "<html><body><div id='d'><p><b id='b'>text1<span id='s'>inner</span>text2</b></p></div><script>\n"
@@ -219,7 +219,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "1", "2", "3" }, IE8 = {})
+    @Alerts(DEFAULT = { "0", "1", "2", "3" }, IE8 = { })
     public void constants() throws Exception {
         final String html =
               "<html><body><script>\n"
@@ -237,7 +237,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "-1", "1", "1", "-1", "0" }, IE8 = {})
+    @Alerts(DEFAULT = { "-1", "1", "1", "-1", "0" }, IE8 = { })
     public void compareBoundaryPoints() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='d1'><div id='d2'></div></div>\n"
@@ -261,7 +261,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "abcd", "bc", "null", "null", "ad", "bc" }, IE8 = {})
+    @Alerts(DEFAULT = { "abcd", "bc", "null", "null", "ad", "bc" }, IE8 = { })
     public void extractContents3() throws Exception {
         final String html =
             "<html><body><div id='d'><span id='a'>a</span><span id='b'>b</span>"
@@ -288,8 +288,8 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "qwerty", "tyxy", "[object DocumentFragment]", "[object HTMLSpanElement] [object Text]", "qwerty",
-        "[object HTMLSpanElement]" }, IE8 = {})
+    @Alerts(DEFAULT = { "qwerty", "tyxy", "[object DocumentFragment]", "[object HTMLSpanElement] [object Text]",
+            "qwerty", "[object HTMLSpanElement]" }, IE8 = { })
     public void cloneContents() throws Exception {
         final String html =
             "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div><script>\n"
@@ -315,7 +315,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "qwerty", "bcqwertyxy", "null", "az" }, IE8 = {})
+    @Alerts(DEFAULT = { "qwerty", "bcqwertyxy", "null", "az" }, IE8 = { })
     public void deleteContents() throws Exception {
         final String html =
             "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div><script>\n"
@@ -339,7 +339,7 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "abcd", "bc", "null", "null", "ad" }, IE8 = {})
+    @Alerts(DEFAULT = { "abcd", "bc", "null", "null", "ad" }, IE8 = { })
     public void deleteContents2() throws Exception {
         final String html =
             "<html><body><div id='d'><span id='a'>a</span><span id='b'>b</span><span id='c'>c</span>"

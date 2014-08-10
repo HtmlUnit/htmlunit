@@ -105,7 +105,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "", "auto", "pointer" }, IE8 = {"", ""})
+    @Alerts(DEFAULT = { "", "", "auto", "pointer" }, IE8 = { "", "" })
     public void styleElement() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<style type='text/css'>\n"
@@ -141,7 +141,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "", "pointer", "pointer" }, IE8 = {"", ""})
+    @Alerts(DEFAULT = { "", "", "pointer", "pointer" }, IE8 = { "", "" })
     public void styleElement2() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<style type='text/css'>\n"

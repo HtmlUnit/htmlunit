@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -27,7 +26,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -243,14 +241,16 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "*blue* string", "" })
+    @Alerts(DEFAULT = { "*blue* string", "" }, IE8 = { })
     public void removeProperty() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
-            + "    var oDiv1 = document.getElementById('div1');\n"
+            + "  var oDiv1 = document.getElementById('div1');\n"
+            + "  if (oDiv1.style.removeProperty) {\n"
             + "    var value = oDiv1.style.removeProperty('color');\n"
             + "    alert('*' + value + '* ' + typeof(value));\n"
             + "    alert(oDiv1.style.cssText);\n"
+            + "  }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -262,14 +262,16 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "** string", "blue" })
+    @Alerts(DEFAULT = { "** string", "blue" }, IE8 = { })
     public void removePropertyUnknown() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
-            + "    var oDiv1 = document.getElementById('div1');\n"
+            + "  var oDiv1 = document.getElementById('div1');\n"
+            + "  if (oDiv1.style.removeProperty) {\n"
             + "    var value = oDiv1.style.removeProperty('font-size');\n"
             + "    alert('*' + value + '* ' + typeof(value));\n"
             + "    alert(oDiv1.style.getPropertyValue('color'));\n"
+            + "  }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -281,14 +283,16 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "** string", "blue" })
+    @Alerts(DEFAULT = { "** string", "blue" }, IE8 = { })
     public void removePropertyUndefined() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
-            + "    var oDiv1 = document.getElementById('div1');\n"
+            + "  var oDiv1 = document.getElementById('div1');\n"
+            + "  if (oDiv1.style.removeProperty) {\n"
             + "    var value = oDiv1.style.removeProperty(undefined);\n"
             + "    alert('*' + value + '* ' + typeof(value));\n"
             + "    alert(oDiv1.style.getPropertyValue('color'));\n"
+            + "  }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -849,14 +853,16 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "1px", "solid", "red" })
+    @Alerts(DEFAULT = { "1px", "solid", "red" }, IE8 = { })
     public void border() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "     var style = document.getElementById('myDiv').style;\n"
-            + "     alert(style.getPropertyValue('border-top-width'));\n"
-            + "     alert(style.getPropertyValue('border-top-style'));\n"
-            + "     alert(style.getPropertyValue('border-top-color'));\n"
+            + "    var style = document.getElementById('myDiv').style;\n"
+            + "    if (style.getPropertyValue) {\n"
+            + "      alert(style.getPropertyValue('border-top-width'));\n"
+            + "      alert(style.getPropertyValue('border-top-style'));\n"
+            + "      alert(style.getPropertyValue('border-top-color'));\n"
+            + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myDiv' style='border: red 1px solid'/>\n"
@@ -1130,26 +1136,32 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "", "green", "green", "", "green", "green", "", "green", "" },
+    @Alerts(DEFAULT = { },
+            IE8 = { "", "green", "green", "", "green", "green", "", "green", "" },
             IE11 = { "", "green", "green", "", "green", "green", "", "green", "green" })
     public void getAttribute() throws Exception {
+        getAttribute("\"font\"", new String[0]);
         final String[] expected = getExpectedAlerts();
-        getAttribute("\"font\"", expected[0]);
-        getAttribute("\"color\"", expected[1]);
-        getAttribute("\"ColoR\"", expected[2]);
-        getAttribute("\"font\", 0", expected[3]);
-        getAttribute("\"color\", 0", expected[4]);
-        getAttribute("\"coLOr\", 0", expected[5]);
-        getAttribute("\"font\", 1", expected[6]);
-        getAttribute("\"color\", 1", expected[7]);
-        getAttribute("\"ColOR\", 1", expected[8]);
+        if (expected.length != 0) {
+            getAttribute("'font'", expected[0]);
+            getAttribute("'color'", expected[1]);
+            getAttribute("'ColoR'", expected[2]);
+            getAttribute("'font', 0", expected[3]);
+            getAttribute("'color', 0", expected[4]);
+            getAttribute("'coLOr', 0", expected[5]);
+            getAttribute("'font', 1", expected[6]);
+            getAttribute("'color', 1", expected[7]);
+            getAttribute("'ColOR', 1", expected[8]);
+        }
     }
 
     private void getAttribute(final String params, final String... expected) throws Exception {
         final String html =
               "<html><head><script>\n"
             + "function test() {\n"
-            + "  alert(document.all[\"a\"].style.getAttribute(" + params + "));\n"
+            + "  if (document.all['a'].style.getAttribute) {\n"
+            + "    alert(document.all['a'].style.getAttribute(" + params + "));\n"
+            + "  }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1163,7 +1175,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = { "'font', 'blah', green, green",
+    @Alerts(DEFAULT = { "not supported", "not supported", "not supported", "not supported", "not supported",
+                "not supported", "not supported", "not supported", "not supported" },
+            IE = { "'font', 'blah', green, green",
                 "'color', 'red', green, red",
                 "'ColoR', 'red', green, red",
                 "'font', 'blah', 0, green, green",
@@ -1200,10 +1214,15 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "<a id='a' href='#' style='color:green'>go</a>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    alert(\"" + params + "\");\n"
-            + "    alert(document.all['a'].style.getAttribute('color'));\n"
-            + "    document.all['a'].style.setAttribute(" + params + ");\n"
-            + "    alert(document.all['a'].style.getAttribute('color'));\n"
+            + "    if (document.all['a'].style.getAttribute) {\n"
+            + "      alert(\"" + params + "\");\n"
+            + "      alert(document.all['a'].style.getAttribute('color'));\n"
+            + "      document.all['a'].style.setAttribute(" + params + ");\n"
+            + "      alert(document.all['a'].style.getAttribute('color'));\n"
+            + "    }\n"
+            + "    else {\n"
+            + "      alert('not supported');\n"
+            + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
@@ -1216,7 +1235,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = { "'font', green, false, green",
+    @Alerts(DEFAULT = { "not supported", "not supported", "not supported", "not supported", "not supported",
+                "not supported", "not supported", "not supported", "not supported" },
+            IE = { "'font', green, false, green",
                 "'color', green, true, ",
                 "'ColoR', green, true, ",
                 "'font', 0, green, false, green",
@@ -1253,10 +1274,15 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "<a id='a' href='#' style='color:green'>go</a>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    alert(\"" + params + "\");\n"
-            + "    alert(document.all['a'].style.getAttribute('color'));\n"
-            + "    alert(document.all['a'].style.removeAttribute(" + params + "));\n"
-            + "    alert(document.all['a'].style.getAttribute('color'));\n"
+            + "    if (document.all['a'].style.getAttribute) {\n"
+            + "      alert(\"" + params + "\");\n"
+            + "      alert(document.all['a'].style.getAttribute('color'));\n"
+            + "      alert(document.all['a'].style.removeAttribute(" + params + "));\n"
+            + "      alert(document.all['a'].style.getAttribute('color'));\n"
+            + "    }\n"
+            + "    else {\n"
+            + "      alert('not supported');\n"
+            + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";

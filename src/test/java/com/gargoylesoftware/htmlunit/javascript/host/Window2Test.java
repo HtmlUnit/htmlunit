@@ -111,7 +111,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "SGVsbG8gV29ybGQh", "Hello World!" }, IE8 = {})
+    @Alerts(DEFAULT = { "SGVsbG8gV29ybGQh", "Hello World!" }, IE8 = { })
     public void atob() throws Exception {
         final String html
             = "<html><head></head><body>\n"

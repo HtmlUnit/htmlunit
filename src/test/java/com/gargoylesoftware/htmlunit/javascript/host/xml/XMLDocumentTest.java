@@ -614,7 +614,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "http://myNS", IE = {})
+    @Alerts(DEFAULT = "http://myNS", IE = { })
     public void createNSResolver() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -695,7 +695,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "button", IE = {})
+    @Alerts(DEFAULT = "button", IE = { })
     public void evaluate() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -800,8 +800,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0", "1", "0", "1" },
-            CHROME = { "1", "0"},
-            IE11 = { "1", "0"})
+            CHROME = { "1", "0" },
+            IE11 = { "1", "0" })
     @NotYetImplemented({ CHROME, IE11 })
     public void getElementsByTagNameWithNamespace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -964,7 +964,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {}, IE = "1")
+    @Alerts(DEFAULT = { }, IE = "1")
     public void selectionNamespaces() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  var selectionNamespaces = 'xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" "
