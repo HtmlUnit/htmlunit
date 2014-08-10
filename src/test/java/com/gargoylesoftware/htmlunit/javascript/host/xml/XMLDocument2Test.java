@@ -24,7 +24,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -208,11 +207,16 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "content", "content" })
+    @Alerts(DEFAULT = "exception", IE = { "content", "content" })
     public void text() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
+            + "    try {\n"
+            + "      new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "    } catch (e) {\n"
+            + "      alert('exception');\n"
+            + "      return;"
+            + "    }\n"
             + "    var xmldoc = new ActiveXObject('Microsoft.XMLDOM');\n"
             + "    var xml = '<Envelope><Body>content</Body></Envelope>';\n"
             + "    xmldoc.loadXML(xml);\n"
@@ -257,11 +261,16 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "foo", "foo" })
+    @Alerts(DEFAULT = "exception", IE = { "foo", "foo" })
     public void firstChild_element_activeX() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
+            + "    try {\n"
+            + "      new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "    } catch (e) {\n"
+            + "      alert('exception');\n"
+            + "      return;"
+            + "    }\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "    alert(doc.firstChild.nodeName);\n"
             + "    alert(doc.documentElement.nodeName);\n"
@@ -314,13 +323,18 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "xml", "foo" })
+    @Alerts(DEFAULT = "exception", IE = { "xml", "foo" })
     @NotYetImplemented(IE)
     // Xerces does not offer any way to access the XML declaration
     public void firstChild_xmlDeclaration_activeX() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
+            + "    try {\n"
+            + "      new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "    } catch (e) {\n"
+            + "      alert('exception');\n"
+            + "      return;"
+            + "    }\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "    alert(doc.firstChild.nodeName);\n"
             + "    alert(doc.documentElement.nodeName);\n"
@@ -371,11 +385,16 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "apache", "foo" })
+    @Alerts(DEFAULT = "exception", IE = { "apache", "foo" })
     public void firstChild_processingInstruction_activeX() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
+            + "    try {\n"
+            + "      new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "    } catch (e) {\n"
+            + "      alert('exception');\n"
+            + "      return;"
+            + "    }\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "    alert(doc.firstChild.nodeName);\n"
             + "    alert(doc.documentElement.nodeName);\n"
@@ -423,11 +442,16 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "dtd", "a" })
+    @Alerts(DEFAULT = "exception", IE = { "dtd", "a" })
     public void firstChild_documentType_activeX() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
+            + "    try {\n"
+            + "      new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "    } catch (e) {\n"
+            + "      alert('exception');\n"
+            + "      return;"
+            + "    }\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "    alert(doc.firstChild.nodeName);\n"
             + "    alert(doc.documentElement.nodeName);\n"
@@ -475,11 +499,16 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "#comment", "foo" })
+    @Alerts(DEFAULT = "exception", IE = { "#comment", "foo" })
     public void firstChild_comment_activeX() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
+            + "    try {\n"
+            + "      new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "    } catch (e) {\n"
+            + "      alert('exception');\n"
+            + "      return;"
+            + "    }\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "    alert(doc.firstChild.nodeName);\n"
             + "    alert(doc.documentElement.nodeName);\n"

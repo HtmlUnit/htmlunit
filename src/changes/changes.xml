@@ -9,6 +9,9 @@
     <body>
         <release version="2.16" date="???" description="Bugfixes">
             <action type="fix" dev="asashour">
+                JavaScript: document.createNSResolver() and .evaluate() are supported in Chrome.
+            </action>
+            <action type="fix" dev="asashour">
                 JavaScript: window.atob() and .btoa() are supported in Chrome.
             </action>
             <action type="fix" dev="asashour">
