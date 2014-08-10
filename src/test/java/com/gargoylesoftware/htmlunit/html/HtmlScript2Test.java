@@ -14,10 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-
 import java.net.URL;
 
 import org.junit.Test;
@@ -27,7 +23,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -268,17 +263,18 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ CHROME, FF, IE11 })
-    @Alerts("3")
+    @Alerts(DEFAULT = "3", IE8 = "exception")
     public void setTextMultipleTextNodes() throws Exception {
         final String html
             = "<html><body>\n"
             + "<script>\n"
-            + "  var script = document.createElement('script');"
-            + "  script.appendChild(document.createTextNode('alert(\"1\");'));\n;"
-            + "  script.appendChild(document.createTextNode('alert(\"2\");'));\n;"
-            + "  script.text = 'alert(\"3\");';\n;"
-            + "  document.body.appendChild(script);\n"
+            + "  try {\n"
+            + "    var script = document.createElement('script');"
+            + "    script.appendChild(document.createTextNode('alert(\"1\");'));\n;"
+            + "    script.appendChild(document.createTextNode('alert(\"2\");'));\n;"
+            + "    script.text = 'alert(\"3\");';\n;"
+            + "    document.body.appendChild(script);\n"
+            + "  } catch (e) {alert('exception');}\n"
             + "</script>\n"
             + "</body></html>";
 

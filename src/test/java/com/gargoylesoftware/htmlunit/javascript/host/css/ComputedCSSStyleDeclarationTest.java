@@ -27,7 +27,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -106,8 +105,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE11 })
-    @Alerts({"", "", "auto", "pointer" })
+    @Alerts(DEFAULT = {"", "", "auto", "pointer" }, IE8 = {"", ""})
     public void styleElement() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<style type='text/css'>\n"
@@ -117,12 +115,14 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "</style>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "     var div1 = document.getElementById('myDiv1');\n"
-            + "     var div2 = document.getElementById('myDiv2');\n"
-            + "     alert(div1.style.cursor);\n"
-            + "     alert(div2.style.cursor);\n"
-            + "     alert(window.getComputedStyle(div1, null).cursor);\n"
-            + "     alert(window.getComputedStyle(div2, null).cursor);\n"
+            + "    var div1 = document.getElementById('myDiv1');\n"
+            + "    var div2 = document.getElementById('myDiv2');\n"
+            + "    alert(div1.style.cursor);\n"
+            + "    alert(div2.style.cursor);\n"
+            + "    if (window.getComputedStyle) {\n"
+            + "      alert(window.getComputedStyle(div1, null).cursor);\n"
+            + "      alert(window.getComputedStyle(div2, null).cursor);\n"
+            + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myDiv1'/>\n"
@@ -141,8 +141,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE11 })
-    @Alerts({"", "", "pointer", "pointer" })
+    @Alerts(DEFAULT = {"", "", "pointer", "pointer" }, IE8 = {"", ""})
     public void styleElement2() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<style type='text/css'>\n"
@@ -152,12 +151,14 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "</style>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "     var div1 = document.getElementById('style_test_1');\n"
-            + "     var div2 = document.getElementById('myDiv2');\n"
-            + "     alert(div1.style.cursor);\n"
-            + "     alert(div2.style.cursor);\n"
-            + "     alert(window.getComputedStyle(div1, null).cursor);\n"
-            + "     alert(window.getComputedStyle(div2, null).cursor);\n"
+            + "    var div1 = document.getElementById('style_test_1');\n"
+            + "    var div2 = document.getElementById('myDiv2');\n"
+            + "    alert(div1.style.cursor);\n"
+            + "    alert(div2.style.cursor);\n"
+            + "    if (window.getComputedStyle) {\n"
+            + "      alert(window.getComputedStyle(div1, null).cursor);\n"
+            + "      alert(window.getComputedStyle(div2, null).cursor);\n"
+            + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='style_test_1'/>\n"

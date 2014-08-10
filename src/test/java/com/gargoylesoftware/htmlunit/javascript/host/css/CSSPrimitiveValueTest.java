@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 
 import org.junit.Test;
@@ -22,7 +21,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -69,17 +67,18 @@ public class CSSPrimitiveValueTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(FF)
-    @Alerts({ "rgb(0, 0, 255)", "0" })
+    @Alerts(DEFAULT = { "rgb(0, 0, 255)", "0" }, IE = {} )
     public void getPropertyCSSValue() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
-            + "function doTest() {\n"
+            + "  function doTest() {\n"
             + "    var oDiv1 = document.getElementById('div1');\n"
-            + "    var style = document.defaultView.getComputedStyle(oDiv1, null);\n"
-            + "    var cssValue = style.getPropertyCSSValue('color');\n"
-            + "    alert(cssValue.cssText);\n"
-            + "    alert(style.getPropertyCSSValue('border-left-width').getFloatValue(CSSPrimitiveValue.CSS_PX));\n"
-            + "}\n"
+            + "    if (document.defaultView) {\n"
+            + "      var style = document.defaultView.getComputedStyle(oDiv1, null);\n"
+            + "      var cssValue = style.getPropertyCSSValue('color');\n"
+            + "      alert(cssValue.cssText);\n"
+            + "      alert(style.getPropertyCSSValue('border-left-width').getFloatValue(CSSPrimitiveValue.CSS_PX));\n"
+            + "    }\n"
+            + "  }\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<div id='div1' style='color: rgb(0, 0, 255)'>foo</div></body></html>";

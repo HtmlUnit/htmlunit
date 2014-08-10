@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +22,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
@@ -45,10 +42,9 @@ public class ActiveXObjectTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
     public void activex2() throws Exception {
         if (!getBrowserVersion().isIE()) {
-            throw new Exception();
+            return;
         }
         if (!isJacobInstalled()) {
             return;
@@ -108,10 +104,9 @@ public class ActiveXObjectTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
     public void method() throws Exception {
         if (!getBrowserVersion().isIE()) {
-            throw new Exception();
+            return;
         }
         if (!isJacobInstalled()) {
             return;
@@ -147,10 +142,9 @@ public class ActiveXObjectTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
     public void setProperty() throws Exception {
         if (!getBrowserVersion().isIE()) {
-            throw new Exception();
+            return;
         }
         if (!isJacobInstalled()) {
             return;

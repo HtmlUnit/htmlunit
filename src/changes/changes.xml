@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                JavaScript: CSSStyleDeclaration.getPropertyCSSValue() is supported in Chrome.
+            </action>
             <action type="fix" dev="rbri">
                 Many minor fixes for the screen object (setters implemented, more testcases, Chrome support added).
             </action>

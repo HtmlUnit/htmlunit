@@ -243,7 +243,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE11 })
     @Alerts({ "*blue* string", "" })
     public void removeProperty() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
@@ -263,7 +262,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE11 })
     @Alerts({ "** string", "blue" })
     public void removePropertyUnknown() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
@@ -283,7 +281,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE11 })
     @Alerts({ "** string", "blue" })
     public void removePropertyUndefined() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
@@ -852,7 +849,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE11 })
     @Alerts({ "1px", "solid", "red" })
     public void border() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -1134,8 +1130,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
-    @Alerts(IE = { "", "green", "green", "", "green", "green", "", "green", "" },
+    @Alerts(DEFAULT = { "", "green", "green", "", "green", "green", "", "green", "" },
             IE11 = { "", "green", "green", "", "green", "green", "", "green", "green" })
     public void getAttribute() throws Exception {
         final String[] expected = getExpectedAlerts();
@@ -1168,7 +1163,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
     @Alerts(IE = { "'font', 'blah', green, green",
                 "'color', 'red', green, red",
                 "'ColoR', 'red', green, red",
@@ -1222,7 +1216,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
     @Alerts(IE = { "'font', green, false, green",
                 "'color', green, true, ",
                 "'ColoR', green, true, ",
