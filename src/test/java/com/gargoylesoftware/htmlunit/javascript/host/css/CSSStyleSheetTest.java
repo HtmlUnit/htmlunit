@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-
 import java.net.URL;
 
 import org.junit.Test;
@@ -24,7 +21,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -43,8 +39,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = {"[object CSSStyleSheet]", "[object HTMLStyleElement]", "true", "undefined", "false" },
-            IE = {"[object]", "undefined", "false", "[object]", "true" },
+    @Alerts(DEFAULT = {"[object CSSStyleSheet]", "[object HTMLStyleElement]", "true", "undefined", "false" },
+            IE8 = {"[object]", "undefined", "false", "[object]", "true" },
             IE11 = {"[object CSSStyleSheet]", "[object HTMLStyleElement]",
                     "true", "[object HTMLStyleElement]", "true" })
     public void owningNodeOwningElement() throws Exception {
@@ -138,9 +134,9 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "1", "false", "true", "0", "2", "p" },
-            IE = { "1", "true", "false", "-1", "2", "DIV" },
-            IE11 = { "1", "false", "false", "0", "2", "p" })
+    @Alerts(DEFAULT = { "1", "false", "false", "0", "2", "p" },
+            FF = { "1", "false", "true", "0", "2", "p" },
+            IE8 = { "1", "true", "false", "-1", "2", "DIV" })
     public void addRule_insertRule() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -171,7 +167,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "2", "false", "true", "undefined", "1", "div" },
             IE = { "2", "true", "false", "undefined", "1", "DIV" },
-            IE11 = { "2", "false", "false", "undefined", "1", "div" })
+            IE11 = { "2", "false", "false", "undefined", "1", "div" },
+            CHROME = { "2", "false", "false", "undefined", "1", "div" })
     public void removeRule_deleteRule() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -223,23 +220,25 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     }
 
     /**
-     * Test that CSSParser can handle leading whitspace in insertRule.
+     * Test that CSSParser can handle leading whitespace in insertRule.
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ FF, IE11 })
-    @Alerts({ "2", ".testStyleDef", ".testStyle" })
+    @Alerts(DEFAULT = { "2", ".testStyleDef", ".testStyle" }, IE8 = { },
+            CHROME = { "2", ".teststyledef", ".teststyle" })
     public void insertRuleLeadingWhitespace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "  var f = document.getElementById('myStyle');\n"
             + "  var s = f.sheet ? f.sheet : f.styleSheet;\n"
             + "  var rules = s.cssRules || s.rules;\n"
-            + "  s.insertRule('.testStyle { width: 24px; }', 0);\n"
-            + "  s.insertRule(' .testStyleDef { height: 42px; }', 0);\n"
-            + "  alert(rules.length);\n"
-            + "  alert(rules[0].selectorText);\n"
-            + "  alert(rules[1].selectorText);\n"
+            + "  if (s.insertRule) {\n"
+            + "    s.insertRule('.testStyle { width: 24px; }', 0);\n"
+            + "    s.insertRule(' .testStyleDef { height: 42px; }', 0);\n"
+            + "    alert(rules.length);\n"
+            + "    alert(rules[0].selectorText);\n"
+            + "    alert(rules[1].selectorText);\n"
+            + "  }\n"
             + "}</script>\n"
             + "<style id='myStyle'></style>\n"
             + "</head><body onload='doTest()'>\n"
@@ -280,7 +279,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "false", "true", "true", "false" },
-            IE8 = { "false", "false", "false", "false", "false" })
+            IE8 = { "false", "false", "false", "false", "false" },
+            CHROME = { "false", "false", "false", "false", "false" })
     public void langCondition() throws Exception {
         final String htmlSnippet = "<div id='elt2' lang='en'></div>\n"
                 + "  <div id='elt3' lang='en-GB'></div>\n"
@@ -293,7 +293,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "false" },
-            IE8 = { "false", "false" })
+            IE8 = { "false", "false" },
+            CHROME = { "false", "false" })
     public void css2_root() throws Exception {
         doTest(":root", "");
     }
@@ -304,7 +305,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "true", "false" },
-            IE8 = { "false", "false", "false" })
+            IE8 = { "false", "false", "false" },
+            CHROME = { "false", "false", "false" })
     public void css3_not() throws Exception {
         doTest(":not(span)", "<span id='elt2'></span>");
     }
@@ -314,7 +316,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "false", "true", "false", "true", "true", "true", "true" },
-            IE8 = { "false", "false", "false", "false", "false", "false", "false", "false" })
+            IE8 = { "false", "false", "false", "false", "false", "false", "false", "false" },
+            CHROME = { "false", "false", "false", "false", "false", "false", "false", "false" })
     public void css3_enabled() throws Exception {
         final String htmlSnippet = "<input id='elt2'>\n"
             + "<input id='elt3' disabled>\n"
@@ -330,7 +333,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "false", "true", "false", "true", "true", "true", "true" },
-            IE8 = { "false", "false", "false", "false", "false", "false", "false", "false" })
+            IE8 = { "false", "false", "false", "false", "false", "false", "false", "false" },
+            CHROME = { "false", "false", "false", "false", "false", "false", "false", "false" })
     public void css3_disabled() throws Exception {
         final String htmlSnippet = "<input id='elt2' disabled>\n"
             + "<input id='elt3'>\n"
@@ -346,7 +350,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "false", "false", "false", "true", "false", "true", "false" },
-            IE8 = { "false", "false", "false", "false", "false", "false", "false", "false" })
+            IE8 = { "false", "false", "false", "false", "false", "false", "false", "false" },
+            CHROME = { "false", "false", "false", "false", "false", "false", "false", "false" })
     public void css3_checked() throws Exception {
         final String htmlSnippet = "<input id='elt2'>\n"
             + "<input id='elt3' checked>\n"
@@ -435,11 +440,11 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     }
 
     /**
-     * Test that the rule with higher specifity wins.
+     * Test that the rule with higher specificity wins.
      * @throws Exception on test failure
      */
     @Test
-    @Alerts("60")
+    @Alerts(DEFAULT = "60", CHROME = "auto")
     public void rulePriority_specificity() throws Exception {
         final String html = "<html><head>\n"
             + "<style>\n"
@@ -460,11 +465,11 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     }
 
     /**
-     * Test that the rule with higher specifity wins. More comple case.
+     * Test that the rule with higher specificity wins. More complete case.
      * @throws Exception on test failure
      */
     @Test
-    @Alerts("60")
+    @Alerts(DEFAULT = "60", CHROME = "auto")
     public void rulePriority_specificity2() throws Exception {
         final String html = "<html><head>\n"
             + "<style>\n"
@@ -493,7 +498,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "10", "10" })
+    @Alerts(DEFAULT = { "10", "10" }, CHROME = { "auto", "auto" })
     public void rulePriority_position() throws Exception {
         final String html = "<html><head>\n"
             + "<style>\n"
@@ -634,7 +639,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "block", "1" })
+    @Alerts(DEFAULT = { "block", "1" }, CHROME = { "block", "0" })
     public void mediaOnLinkTag_notScreen() throws Exception {
         mediaOnLinkTag("print");
     }
@@ -652,7 +657,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "block", "1" })
+    @Alerts(DEFAULT = { "block", "1" }, CHROME = { "block", "0" })
     public void mediaOnLinkTag_multipleWithoutScreen() throws Exception {
         mediaOnLinkTag("print, projection, tv");
     }

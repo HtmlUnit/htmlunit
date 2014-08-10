@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                JavaScript: HTMLStyleElement.getSheet() is supported in Chrome.
+            </action>
             <action type="fix" dev="rbri">
                 Many minor fixes for implementation.hasFeature (retested with ff24, ff31 and Chrome added).
             </action>
