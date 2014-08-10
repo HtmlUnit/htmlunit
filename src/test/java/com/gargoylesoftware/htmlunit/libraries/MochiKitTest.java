@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static org.junit.Assert.assertNotNull;
 
@@ -143,7 +143,7 @@ public class MochiKitTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ FF24, IE11 })
+    @NotYetImplemented({ FF, IE11 })
     public void style() throws Exception {
         doTest("Style");
     }

@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.svg;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,7 +46,7 @@ public class SvgMpathTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object SVGMPathElement]",
             IE = "[object HTMLGenericElement]",
             IE11 = "[object SVGElement]")
-    @NotYetImplemented(FF24)
+    @NotYetImplemented(FF)
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
