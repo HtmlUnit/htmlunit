@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -78,7 +77,7 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "null", "one", "two", "three" },
             IE8 = { "undefined", "one", "two", "three" })
-    @BuggyWebDriver({ FF24, IE8, IE11 })
+    @BuggyWebDriver
     @NotYetImplemented(IE8)
     public void opener() throws Exception {
         final URL urlThird = new URL(URL_FIRST, "third/");

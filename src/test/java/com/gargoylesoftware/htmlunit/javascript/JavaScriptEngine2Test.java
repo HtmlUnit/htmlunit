@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
@@ -335,7 +336,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE8 = { "1", "2" })
-    @BuggyWebDriver({ IE11, FF24 })
+    @BuggyWebDriver({ IE11, FF24, FF31 })
     public void function_object_method() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
                 + "  try {\n"

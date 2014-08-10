@@ -873,7 +873,7 @@ public class NodeTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "hi", "null", "abcd", "null" },
             CHROME = { "hi", "undefined", "abcd", "undefined" },
-            FF24 = { "hi", "undefined", "abcd", "undefined" })
+            FF = { "hi", "undefined", "abcd", "undefined" })
     public void attributes() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

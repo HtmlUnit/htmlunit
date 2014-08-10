@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
@@ -86,8 +87,9 @@ public class UIEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object Event]", "undefined", "[object MouseEvent]", "1", "[object MouseEvent]", "2" },
             IE8 = { "[object]", "undefined", "[object]", "undefined", "[object]", "undefined" })
-    @BuggyWebDriver(IE11)
+    @BuggyWebDriver({ IE11, FF31 })
     // IEDriver has a detail of '3' for the double click but it is '2' when executed manually
+    // FF31 has a detail of '1' for the double click but it is '2' when executed manually
     public void detail() throws Exception {
         final String html =
               "<html><head><script>\n"
