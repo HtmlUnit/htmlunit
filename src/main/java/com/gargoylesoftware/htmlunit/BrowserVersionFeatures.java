@@ -856,7 +856,7 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_EVENTS_3,
 
     /** If document.implementation.hasFeature() supports 'HTML 3.0'. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_DOMIMPLEMENTATION_FEATURE_HTML_3,
 
     /** If document.implementation.hasFeature() supports 'KeyboardEvents'. */
@@ -906,6 +906,14 @@ public enum BrowserVersionFeatures {
     /** If document.implementation.hasFeature() supports 'StyleSheets 2.0'. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
     JS_DOMIMPLEMENTATION_FEATURE_STYLESHEETS,
+
+    /** If document.implementation.hasFeature() supports 'http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0'. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    JS_DOMIMPLEMENTATION_FEATURE_SVG_BASICSTRUCTURE_1_0,
+
+    /** If document.implementation.hasFeature() supports 'http://www.w3.org/TR/SVG11/feature#Shape 1.0'. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    JS_DOMIMPLEMENTATION_FEATURE_SVG_SHAPE_1_0,
 
     /** If document.implementation.hasFeature() supports 'MutationNameEvents'. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })

@@ -14,16 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -340,13 +335,14 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ CHROME, FF, IE11 })
-    @Alerts(DEFAULT = "[object XMLDocument]")
+    @Alerts(DEFAULT = "[object XMLDocument]", IE8 = { })
     public void createDocument() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    alert(document.implementation.createDocument('', '', null));\n"
+            + "    if (document.implementation.createDocument) {\n"
+            + "      alert(document.implementation.createDocument('', '', null));\n"
+            + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -358,17 +354,18 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, CHROME, IE11 })
-    @Alerts({ "mydoc", "null", "mydoc", "null" })
+    @Alerts(DEFAULT = { "mydoc", "null", "mydoc", "null" }, IE8 = { })
     public void createDocument_qualifiedName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = document.implementation.createDocument('', 'mydoc', null);\n"
-            + "    alert(doc.documentElement.tagName);\n"
-            + "    alert(doc.documentElement.prefix);\n"
-            + "    alert(doc.documentElement.localName);\n"
-            + "    alert(doc.documentElement.namespaceURI);\n"
+            + "    if (document.implementation.createDocument) {\n"
+            + "      var doc = document.implementation.createDocument('', 'mydoc', null);\n"
+            + "      alert(doc.documentElement.tagName);\n"
+            + "      alert(doc.documentElement.prefix);\n"
+            + "      alert(doc.documentElement.localName);\n"
+            + "      alert(doc.documentElement.namespaceURI);\n"
+            + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -380,17 +377,18 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, CHROME, IE11 })
-    @Alerts({ "mydoc", "null", "mydoc", "http://mynamespace" })
+    @Alerts(DEFAULT = { "mydoc", "null", "mydoc", "http://mynamespace" }, IE8 = { })
     public void createDocument_namespaceAndQualifiedName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = document.implementation.createDocument('http://mynamespace', 'mydoc', null);\n"
-            + "    alert(doc.documentElement.tagName);\n"
-            + "    alert(doc.documentElement.prefix);\n"
-            + "    alert(doc.documentElement.localName);\n"
-            + "    alert(doc.documentElement.namespaceURI);\n"
+            + "    if (document.implementation.createDocument) {\n"
+            + "      var doc = document.implementation.createDocument('http://mynamespace', 'mydoc', null);\n"
+            + "      alert(doc.documentElement.tagName);\n"
+            + "      alert(doc.documentElement.prefix);\n"
+            + "      alert(doc.documentElement.localName);\n"
+            + "      alert(doc.documentElement.namespaceURI);\n"
+            + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -402,17 +400,18 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, CHROME, IE11 })
-    @Alerts({ "m:mydoc", "m", "mydoc", "http://mynamespace" })
+    @Alerts(DEFAULT = { "m:mydoc", "m", "mydoc", "http://mynamespace" }, IE8 = { })
     public void createDocument_namespaceAndQualifiedNameWithPrefix() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = document.implementation.createDocument('http://mynamespace', 'm:mydoc', null);\n"
-            + "    alert(doc.documentElement.tagName);\n"
-            + "    alert(doc.documentElement.prefix);\n"
-            + "    alert(doc.documentElement.localName);\n"
-            + "    alert(doc.documentElement.namespaceURI);\n"
+            + "    if (document.implementation.createDocument) {\n"
+            + "      var doc = document.implementation.createDocument('http://mynamespace', 'm:mydoc', null);\n"
+            + "      alert(doc.documentElement.tagName);\n"
+            + "      alert(doc.documentElement.prefix);\n"
+            + "      alert(doc.documentElement.localName);\n"
+            + "      alert(doc.documentElement.namespaceURI);\n"
+            + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

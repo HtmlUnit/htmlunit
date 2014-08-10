@@ -40,6 +40,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEME
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_RANGE_2;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_RANGE_3;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_STYLESHEETS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_SVG_BASICSTRUCTURE_1_0;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_SVG_SHAPE_1_0;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_TEXTEVENTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_1;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMIMPLEMENTATION_FEATURE_TRAVERSAL_2;
@@ -255,13 +257,23 @@ public class DOMImplementation extends SimpleScriptable {
             else if ("XPath".equals(feature)) {
                 return getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_XPATH);
             }
-            else if ("http://www.w3.org/TR/SVG11/feature#BasicStructure".equals(feature)
-                    && ("1.0".equals(version) || "1.1".equals(version))) {
-                return true;
+            else if ("http://www.w3.org/TR/SVG11/feature#BasicStructure".equals(feature)) {
+                if ("1.0".equals(version)
+                        && getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_SVG_BASICSTRUCTURE_1_0)) {
+                    return true;
+                }
+                if ("1.1".equals(version)) {
+                    return true;
+                }
             }
-            else if ("http://www.w3.org/TR/SVG11/feature#Shape".equals(feature)
-                    && ("1.0".equals(version) || "1.1".equals(version))) {
-                return true;
+            else if ("http://www.w3.org/TR/SVG11/feature#Shape".equals(feature)) {
+                if ("1.0".equals(version)
+                        && getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_FEATURE_SVG_SHAPE_1_0)) {
+                    return true;
+                }
+                if ("1.1".equals(version)) {
+                    return true;
+                }
             }
             //TODO: other features.
         }
