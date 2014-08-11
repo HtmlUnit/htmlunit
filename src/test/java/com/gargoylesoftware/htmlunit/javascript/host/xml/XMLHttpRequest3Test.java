@@ -71,7 +71,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0", "1", "1", "2", "3", "4" },
-                FF = { "0", "1", "2", "3", "4" })
+                FF24 = { "0", "1", "2", "3", "4" })
     public void asyncUse() throws Exception {
         final String html =
               "<html>\n"
@@ -126,7 +126,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
     @Test
     @Alerts(DEFAULT = { "0", "1", "1", "2", "4", MSG_NO_CONTENT, MSG_PROCESSING_ERROR },
             IE8 = { "0", "1", "1", "2", "4", MSG_NO_CONTENT },
-            FF = { "0", "1", "2", "4", MSG_NO_CONTENT, MSG_PROCESSING_ERROR })
+            FF24 = { "0", "1", "2", "4", MSG_NO_CONTENT, MSG_PROCESSING_ERROR })
     public void testAsyncUseWithNetworkConnectionFailure() throws Exception {
         final String html =
               "<html>\n"
