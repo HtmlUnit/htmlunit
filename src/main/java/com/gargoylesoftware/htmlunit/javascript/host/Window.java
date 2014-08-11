@@ -24,6 +24,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_IS_A_FUNCTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ONERROR_COLUMN_ARGUMENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ONERROR_ERROR_ARGUMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_ALLOW_INVALID_PORT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_CANCELABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_SYNCHRONOUS;
@@ -1276,7 +1277,12 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             Object[] args;
             if (getBrowserVersion().hasFeature(JS_WINDOW_ONERROR_COLUMN_ARGUMENT)) {
                 final int column = e.getFailingColumnNumber();
-                args = new Object[] {msg, url, Integer.valueOf(line), Integer.valueOf(column)};
+                if (getBrowserVersion().hasFeature(JS_WINDOW_ONERROR_ERROR_ARGUMENT)) {
+                    args = new Object[] {msg, url, Integer.valueOf(line), Integer.valueOf(column), e};
+                }
+                else {
+                    args = new Object[] {msg, url, Integer.valueOf(line), Integer.valueOf(column)};
+                }
             }
             else {
                 args = new Object[] {msg, url, Integer.valueOf(line)};

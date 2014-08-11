@@ -1150,6 +1150,12 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature(@WebBrowser(FF))
     JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST,
+    /**
+     * Getting the width and height of an image tag without a source returns 18x20;
+     * for invalid values returns 1.
+     */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 31))
+    JS_IMAGE_WIDTH_HEIGHT_RETURNS_0x0_0x0,
 
     /**
      * Getting the width and height of an image tag without a source returns 18x20;
@@ -1605,8 +1611,12 @@ public enum BrowserVersionFeatures {
     JS_WINDOW_IS_A_FUNCTION,
 
     /** <code>Window.onerror</code> gets the column number as 4th argument. */
-    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(value = FF, minVersion = 31) })
     JS_WINDOW_ONERROR_COLUMN_ARGUMENT,
+
+    /** <code>Window.onerror</code> gets the column number as 5th argument. */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 31))
+    JS_WINDOW_ONERROR_ERROR_ARGUMENT,
 
     /**
      * Difference of window.outer/inner height is 57.
@@ -1619,7 +1629,7 @@ public enum BrowserVersionFeatures {
     JS_WINDOW_POST_MESSAGE_ALLOW_INVALID_PORT,
 
     /** Window.postMessage created cancelable event. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 24))
     JS_WINDOW_POST_MESSAGE_CANCELABLE,
 
     /** Window.postMessage is synchronous. */
@@ -1824,7 +1834,7 @@ public enum BrowserVersionFeatures {
     /** XMLHttpRequest triggers the opened event at the beginning of the send
      * method again.
      */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 31) })
     XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE,
 
     /**
