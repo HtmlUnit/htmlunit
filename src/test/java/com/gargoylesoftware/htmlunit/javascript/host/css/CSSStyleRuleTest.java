@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -43,7 +43,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
     @Alerts(FF = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "H1", "", "10px, ", "red" },
             IE = { "[object]", "H1", "", "10px, ", "red" },
             IE11 = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1", "", "10px, ", "red" })
-    @NotYetImplemented(FF24)
+    @NotYetImplemented(FF)
     public void test() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
@@ -152,7 +152,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
     @Alerts(FF = { "BoDY", "H1", "A.foo", ".foo", ".foo .foo2", "#byId" },
             IE = { "BODY", "H1", "A.foo", ".foo", ".foo .foo2", "#byId" },
             IE11 = { "body", "h1", "a.foo", ".foo", ".foo .foo2", "#byId" })
-    @NotYetImplemented(FF24)
+    @NotYetImplemented(FF)
     public void selectorText() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"

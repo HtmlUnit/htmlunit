@@ -3989,7 +3989,7 @@ public class JQuery182Test extends WebDriverTestCase {
         FF31 = "0, 7, 7",
         IE11 = "0, 7, 7",
         IE8 = "2, 1, 3")
-    @NotYetImplemented({ FF24, IE11, IE8 })
+    @NotYetImplemented({ FF, IE11, IE8 })
     public void css__show___resolves_correct_default_display__8099() throws Exception {
         runTest("css: show() resolves correct default display #8099");
     }
