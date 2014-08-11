@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import java.text.SimpleDateFormat;
@@ -120,7 +119,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
             CHROME = "function HTMLAnchorElement() { [native code] }",
             FF = "function HTMLAnchorElement() {\n    [native code]\n}",
             IE8 = "[object]")
-    @NotYetImplemented({ CHROME, FF24 })
+    @NotYetImplemented({ CHROME, FF })
     public void hostClassNames() throws Exception {
         testHostClassNames("HTMLAnchorElement");
     }
