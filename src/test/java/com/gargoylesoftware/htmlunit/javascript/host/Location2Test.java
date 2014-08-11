@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import java.net.URL;
@@ -570,7 +570,7 @@ public class Location2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"", "foo3.html", "foo2.html" },
             CHROME = {"", "foo2.html" },
             FF = {"", "foo2.html" })
-    @NotYetImplemented({ CHROME, FF24 })
+    @NotYetImplemented({ CHROME, FF })
     public void onlick_set_location() throws Exception {
         final String html =
             "<html><head></head>\n"

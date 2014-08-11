@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION;
@@ -400,7 +399,7 @@ public class NodeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "3", "3", "3", "3", "3", "3", "3", "3" },
             CHROME = { "3", "3", "3", "3", "3", "3", "3", "undefined" },
             IE8 = { "undefined", "not supported" })
-    @NotYetImplemented({ CHROME, FF24, IE11 })
+    @NotYetImplemented({ CHROME, FF, IE11 })
     public void testNodePrototype() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

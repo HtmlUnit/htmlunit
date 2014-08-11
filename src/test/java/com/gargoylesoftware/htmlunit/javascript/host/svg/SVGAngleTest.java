@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,7 +41,7 @@ public class SVGAngleTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "[object SVGAngle]", "0", "1", "2", "3", "4" },
             FF = { "function SVGAngle() {\n    [native code]\n}", "0", "1", "2", "3", "4" },
             IE8 = "undefined")
-    @NotYetImplemented(FF24)
+    @NotYetImplemented(FF)
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

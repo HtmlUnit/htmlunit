@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -355,7 +354,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "", "string" },
             FF = { "null", "string" })
-    @NotYetImplemented(FF24)
+    @NotYetImplemented(FF)
     public void width_null() throws Exception {
         final String html
             = "<html><head>"

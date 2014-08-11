@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -68,7 +68,7 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "42" },
             IE = { "4", "42" })
-    @NotYetImplemented(FF24)
+    @NotYetImplemented(FF)
     public void size() throws Exception {
         final String html =
             "<html>\n"
@@ -98,7 +98,7 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "helvetica" },
             IE = { "swiss", "helvetica" })
-    @NotYetImplemented(FF24)
+    @NotYetImplemented(FF)
     public void face() throws Exception {
         final String html =
             "<html>\n"
@@ -129,7 +129,7 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "undefined", "blue" },
             IE = { "#ff0000", "#0000ff" },
             IE11 = { "red", "blue" })
-    @NotYetImplemented({ FF24, IE8 })
+    @NotYetImplemented({ FF, IE8 })
     public void color() throws Exception {
         final String html =
             "<html>\n"

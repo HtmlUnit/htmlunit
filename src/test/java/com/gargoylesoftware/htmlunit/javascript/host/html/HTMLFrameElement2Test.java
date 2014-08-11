@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -151,7 +150,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "function handler() {}", "null", "null" },
             IE8 = { "function handler() {}", "null", "exception" })
-    @NotYetImplemented({ FF24, IE8, IE11 })
+    @NotYetImplemented({ FF, IE8, IE11 })
     // Currently a \n is put between the {}
     public void onloadNull() throws Exception {
         final String html =
