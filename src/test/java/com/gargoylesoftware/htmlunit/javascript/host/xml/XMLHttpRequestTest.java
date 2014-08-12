@@ -184,7 +184,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "1: 0-", "2: 0-", "#1: 0-", "3: 0-", "#1: 0-", "4: 0-",
                             "#2: 200-OK", "#3: 200-OK", "#4: 200-OK" },
-            FF24 = { "1: 0-", "2: 0-", "#1: 0-", "3: 0-", "4: 0-", "#2: 200-OK", "#3: 200-OK", "#4: 200-OK" },
+            FF = { "1: 0-", "2: 0-", "#1: 0-", "3: 0-", "4: 0-", "#2: 200-OK", "#3: 200-OK", "#4: 200-OK" },
             IE8 = { "1: ex: status-ex: statusText", "2: ex: status-ex: statusText", "#1: ex: status-ex: statusText",
                     "3: ex: status-ex: statusText", "#1: ex: status-ex: statusText", "4: ex: status-ex: statusText",
                     "#2: 200-OK", "#3: 200-OK", "#4: 200-OK" },
@@ -274,7 +274,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "orsc1", "open-done", "orsc1", "send-done",
                 "orsc2", "orsc3", "orsc4", "4", "<a>b</a>", "[object XMLHttpRequest]" },
-            FF24 = { "orsc1", "open-done", "send-done",
+            FF = { "orsc1", "open-done", "send-done",
                 "orsc2", "orsc3", "orsc4", "4", "<a>b</a>", "[object XMLHttpRequest]" },
             IE8 = { "orsc1", "open-done", "orsc1", "send-done", "orsc2", "orsc3", "orsc4" },
             CHROME = {"orsc1", "open-done", "send-done",

@@ -1835,7 +1835,7 @@ public enum BrowserVersionFeatures {
     /** XMLHttpRequest triggers the opened event at the beginning of the send
      * method again.
      */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 31) })
+    @BrowserFeature(@WebBrowser(IE))
     XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE,
 
     /**
