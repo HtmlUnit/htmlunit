@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_57;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_63;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_94;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,14 +78,22 @@ public abstract class WebWindowImpl implements WebWindow {
         jobManager_ = BackgroundJavaScriptFactory.theFactory().createJavaScriptJobManager(this);
 
         innerHeight_ = 605;
-        if (webClient.getBrowserVersion().hasFeature(JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_57)) {
-            outerHeight_ = innerHeight_ + 57;
+        if (webClient.getBrowserVersion().hasFeature(JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_63)) {
+            outerHeight_ = innerHeight_ + 63;
+        }
+        else if (webClient.getBrowserVersion().hasFeature(JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_94)) {
+            outerHeight_ = innerHeight_ + 94;
         }
         else {
-            outerHeight_ = innerHeight_ + 111;
+            outerHeight_ = innerHeight_ + 115;
         }
         innerWidth_ = 1256;
-        outerWidth_ = innerWidth_ + 8;
+        if (webClient.getBrowserVersion().hasFeature(JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_63)) {
+            outerWidth_ = innerWidth_ + 16;
+        }
+        else {
+            outerWidth_ = innerWidth_ + 14;
+        }
     }
 
     /**

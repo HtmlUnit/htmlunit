@@ -1611,19 +1611,22 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_WINDOW_IS_A_FUNCTION,
 
-    /** <code>Window.onerror</code> gets the column number as 4th argument. */
+    /** <code>Window.onerror</code> gets the column number as as 4th
+     * and the error as 5th argument. */
     @BrowserFeature({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(value = FF, minVersion = 31) })
-    JS_WINDOW_ONERROR_COLUMN_ARGUMENT,
-
-    /** <code>Window.onerror</code> gets the column number as 5th argument. */
-    @BrowserFeature(@WebBrowser(value = FF, minVersion = 31))
-    JS_WINDOW_ONERROR_ERROR_ARGUMENT,
+    JS_WINDOW_ONERROR_COLUMN_ERROR_ARGUMENT,
 
     /**
-     * Difference of window.outer/inner height is 57.
+     * Difference of window.outer/inner height is 63.
      */
     @BrowserFeature(@WebBrowser(IE))
-    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_57,
+    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_63,
+
+    /**
+     * Difference of window.outer/inner height is 94.
+     */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 31))
+    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_94,
 
     /** Window.postMessage is sent when the targetOrigin port is different than the current port. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))

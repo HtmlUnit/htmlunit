@@ -625,21 +625,23 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF24 = { "true", "true", "true", "false", "true", "true", "true" },
-            FF31 = { "true", "true", "false", "false", "true", "true", "true" },
-            IE8 = { "false", "false", "false", "false", "false", "false", "false" },
-            IE11 = { "true", "true", "false", "true", "true", "true", "true" })
+    @Alerts(FF24 = { "true", "true", "true", "false", "false", "true", "true", "true", "false" },
+            FF31 = { "true", "true", "false", "true", "false", "true", "true", "true", "false" },
+            IE8 = { "false", "false", "false", "false", "false", "false", "false", "false", "false" },
+            IE11 = { "true", "true", "false", "false", "true", "true", "true", "false", "true" })
     public void heightsAndWidths() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
             + "function test() {\n"
             + "  alert(window.innerHeight > 0);\n"
             + "  alert(window.innerHeight == document.body.clientHeight);\n"
-            + "  alert(window.outerHeight == window.innerHeight + 111);\n" // FF
-            + "  alert(window.outerHeight == window.innerHeight + 57);\n" // IE11
+            + "  alert(window.outerHeight == window.innerHeight + 115);\n" // FF24
+            + "  alert(window.outerHeight == window.innerHeight + 94);\n" // FF32
+            + "  alert(window.outerHeight == window.innerHeight + 63);\n" // IE11
             + "  alert(window.innerWidth > 0);\n"
             + "  alert(window.innerWidth == document.body.clientWidth);\n"
-            + "  alert(window.outerWidth == window.innerWidth + 8);\n"
+            + "  alert(window.outerWidth == window.innerWidth + 14);\n" // FF
+            + "  alert(window.outerWidth == window.innerWidth + 16);\n" // IE11
             + "}\n"
             + "</script>\n"
             + "</body></html>";
@@ -652,8 +654,8 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "605", "1256", "705", "1256" },
-            FF24 = { "657", "1264", "641", "1248" },
-            FF31 = { "674", "1264", "658", "1248" },
+            FF24 = { "653", "1258", "636", "1241" },
+            FF31 = { "674", "1258", "657", "1241" },
             IE11 = { "705", "1256", "688", "1239" })
     @NotYetImplemented({ FF, IE11 })
     // TODO width and height calculation needs to be reworked in HtmlUnit
@@ -686,8 +688,8 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF31 = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1240" },
-            FF24 = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1206" },
+    @Alerts(FF31 = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1238" },
+            FF24 = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1196" },
             DEFAULT = { "0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()" })
     @NotYetImplemented(FF)
     public void scrolling1() throws Exception {
@@ -793,8 +795,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF24 = { "8", "91", "0" },
-            FF31 = { "8", "94", "0" },
+    @Alerts(FF = { "11", "91", "0" },
             DEFAULT = { "undefined", "undefined", "undefined" })
     public void mozInnerScreenX() throws Exception {
         final String html
@@ -965,8 +966,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "null", "function", "5" },
             FF24 = { "null", "function", "3" },
-            IE8 = { "null", "function", "3" },
-            IE11 = { "null", "function", "4" })
+            IE8 = { "null", "function", "3" })
     public void onError() throws Exception {
         final String html
             = "<script>\n"

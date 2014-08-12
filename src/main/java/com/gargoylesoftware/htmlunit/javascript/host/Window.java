@@ -23,8 +23,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FOR
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_IS_A_FUNCTION;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ONERROR_COLUMN_ARGUMENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ONERROR_ERROR_ARGUMENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ONERROR_COLUMN_ERROR_ARGUMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_ALLOW_INVALID_PORT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_CANCELABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_POST_MESSAGE_SYNCHRONOUS;
@@ -1275,14 +1274,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             final int line = e.getFailingLineNumber();
 
             Object[] args;
-            if (getBrowserVersion().hasFeature(JS_WINDOW_ONERROR_COLUMN_ARGUMENT)) {
+            if (getBrowserVersion().hasFeature(JS_WINDOW_ONERROR_COLUMN_ERROR_ARGUMENT)) {
                 final int column = e.getFailingColumnNumber();
-                if (getBrowserVersion().hasFeature(JS_WINDOW_ONERROR_ERROR_ARGUMENT)) {
-                    args = new Object[] {msg, url, Integer.valueOf(line), Integer.valueOf(column), e};
-                }
-                else {
-                    args = new Object[] {msg, url, Integer.valueOf(line), Integer.valueOf(column)};
-                }
+                args = new Object[] {msg, url, Integer.valueOf(line), Integer.valueOf(column), e};
             }
             else {
                 args = new Object[] {msg, url, Integer.valueOf(line)};
@@ -1820,7 +1814,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxGetter(@WebBrowser(FF))
     public int getMozInnerScreenX() {
-        return 8;
+        return 11;
     }
 
     /**
