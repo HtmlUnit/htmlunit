@@ -86,7 +86,7 @@ passed testOffsetParent 4 assertions, 0 failures, 0 errors
 passed testAbsolutize 2 assertions, 0 failures, 0 errors
 failed testViewportDimensions 0 assertions, 2 failures, 0 errors
 Failure: NOTE: YOU MUST ALLOW JAVASCRIPT TO RESIZE YOUR WINDOW FOR THESE TESTS TO PASS: expected "1308", actual "1258" Line #1552
-Failure: NOTE: YOU MUST ALLOW JAVASCRIPT TO RESIZE YOUR WINDOW FOR THESE TESTS TO PASS: expected "724", actual "674" Line #1553
+Failure: NOTE: YOU MUST ALLOW JAVASCRIPT TO RESIZE YOUR WINDOW FOR THESE TESTS TO PASS: expected "703", actual "653" Line #1553
 failed testViewportScrollOffsets 2 assertions, 1 failures, 0 errors
 Failure: assertEqual: expected "25", actual "0" Line #1567
 passed testNodeConstants 13 assertions, 0 failures, 0 errors
