@@ -175,7 +175,8 @@ public enum BrowserVersionFeatures {
     EVENT_BEFOREUNLOAD_AUTO_TYPE,
 
     /** <code>Event.bubbles</code> and <code>Event.cancelable</code> are false as default. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11),
+        @WebBrowser(value = FF, minVersion = 31) })
     EVENT_BUBBLES_AND_CANCELABLE_DEFAULT_FALSE,
 
     /** Triggers "DOMContentLoaded" event. */

@@ -350,7 +350,7 @@ final class StyleAttributes {
 
         /** The style property -moz-perspective-origin. */
         MOZ_PERSPECTIVE_ORIGIN("MozPerspectiveOrigin",
-                "-moz-perspective-origin", ff("624px 171px")),
+                "-moz-perspective-origin", ff("621px 172.5px")),
 
         /** The style property -moz-stack-sizing. */
         MOZ_STACK_SIZING("MozStackSizing", "-moz-stack-sizing",
@@ -386,7 +386,7 @@ final class StyleAttributes {
         MOZ_TRANSFORM("MozTransform", "-moz-transform", ff("none")),
 
         /** The style property -moz-transform-origin. */
-        MOZ_TRANSFORM_ORIGIN("MozTransformOrigin", "-moz-transform-origin", ff("624px 171px")),
+        MOZ_TRANSFORM_ORIGIN("MozTransformOrigin", "-moz-transform-origin", ff("621px 172.5px")),
 
         /** The style property -moz-transform-style. */
         MOZ_TRANSFORM_STYLE("MozTransformStyle", "-moz-transform-style",
@@ -1050,7 +1050,7 @@ final class StyleAttributes {
 
         /** The style property perspective-origin. */
         PERSPECTIVE_ORIGIN("perspectiveOrigin", "perspective-origin",
-                ff("624px 171px"), ie11up("620px 163.2px")),
+                ff("621px 172.5px"), ie11up("620px 163.2px")),
 
         /** The style property pointer-events. */
         POINTER_EVENTS("pointerEvents", "pointer-events", ie11up("visiblePainted")),
@@ -1194,7 +1194,7 @@ final class StyleAttributes {
 
         /** The style property transform-origin. */
         TRANSFORM_ORIGIN("transformOrigin", "transform-origin",
-                ff("624px 171px"), ie11up("620px 163.2px")),
+                ff("621px 172.5px"), ie11up("620px 163.2px")),
 
         /** The style property transform-style. */
         TRANSFORM_STYLE("transformStyle", "transform-style", ff("flat"), ie11up("flat")),
