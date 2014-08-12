@@ -37,7 +37,8 @@
                 <a href="http://webdriver.googlecode.com/">WebDriver</a>,
                 <a href="http://www.jboss.org/jsfunit/">JSFUnit</a>,
                 <a href="http://www.wetator.org/">WETATOR</a>,
-                <a href="http://celerity.rubyforge.org/">Celerity</a>, ...
+                <a href="http://celerity.rubyforge.org/">Celerity</a>,
+                <a href="https://github.com/spring-projects/spring-test-htmlunit">Spring MVC Test HtmlUnit</a>, ...
             </p>
             <p>
                 HtmlUnit was originally written by
