@@ -94,7 +94,7 @@ testViewportDimensions failed 0 assertions, 2 failures, 0 errors
 Failure: NOTE: YOU MUST ALLOW JAVASCRIPT TO RESIZE YOUR WINDOW FOR THIS TEST TO PASS
 expected: <1291>, actual: <1241>
 Failure: NOTE: YOU MUST ALLOW JAVASCRIPT TO RESIZE YOUR WINDOW FOR THIS TEST TO PASS
-expected: <724>, actual: <674>
+expected: <703>, actual: <653>
 testElementToViewportDimensionsDoesNotAffectDocumentProperties passed 38 assertions, 0 failures, 0 errors
 testViewportScrollOffsets failed 2 assertions, 1 failures, 0 errors
 Failure: NOTE: YOU MUST ALLOW JAVASCRIPT TO RESIZE YOUR WINDOW FOR THESE TESTS TO PASS
