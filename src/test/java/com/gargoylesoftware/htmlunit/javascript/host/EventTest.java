@@ -544,27 +544,66 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "click", "true", "true", "dblclick", "false", "false" },
-            FF31 = { "click", "true", "true", "click", "false", "false" },
+    @Alerts(DEFAULT = { "click", "true", "true", "click", "false", "false" },
             IE8 = "no createEvent")
-    public void testInitEvent() throws Exception {
+    public void testInitEventClick() throws Exception {
+        testInitEvent("click");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "dblclick", "true", "true", "dblclick", "false", "false" },
+            IE8 = "no createEvent")
+    public void testInitEventDblClick() throws Exception {
+        testInitEvent("dblclick");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "unknown", "true", "true", "unknown", "false", "false" },
+            IE8 = "no createEvent")
+    public void testInitEventUnknown() throws Exception {
+        testInitEvent("unknown");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "cASe", "true", "true", "cASe", "false", "false" },
+            IE8 = "no createEvent")
+    public void testInitEventCaseSensitive() throws Exception {
+        testInitEvent("cASe");
+    }
+
+    private void testInitEvent(final String eventType) throws Exception {
         final String html =
-              "<html><body onload='test()'><script>\n"
+              "<html><head><script>\n"
             + "  function test() {\n"
             + "    if(!document.createEvent) { alert('no createEvent'); return; };\n"
-            + "    var e = document.createEvent('Event');\n"
-            + "    e.initEvent('click', true, true);\n"
-            + "    doAlerts(e);\n"
-            + "    e.initEvent('dblclick', false, false);\n"
-            + "    doAlerts(e);\n"
-            + "  }\n"
 
-            + "  function doAlerts(e) {\n"
-            + "    alert(e.type);\n"
-            + "    alert(e.bubbles);\n"
-            + "    alert(e.cancelable);\n"
+            + "    var e = document.createEvent('Event');\n"
+            + "    try {\n"
+            + "      e.initEvent('" + eventType + "', true, true);\n"
+            + "      alert(e.type);\n"
+            + "      alert(e.bubbles);\n"
+            + "      alert(e.cancelable);\n"
+            + "    } catch(e) { alert('e-' + '" + eventType + "'); }\n"
+
+            + "    var e = document.createEvent('Event');\n"
+            + "    try {\n"
+            + "      e.initEvent('" + eventType + "', false, false);\n"
+            + "      alert(e.type);\n"
+            + "      alert(e.bubbles);\n"
+            + "      alert(e.cancelable);\n"
+            + "    } catch(e) { alert('e2-' + '" + eventType + "'); }\n"
             + "  }\n"
-            + "</script></body></html>";
+            + "</script></head>"
+            + "<body onload='test()'></body></html>";
 
         loadPageWithAlerts2(html);
     }
@@ -631,6 +670,12 @@ public class EventTest extends WebDriverTestCase {
                      "e-19", "e-20", "e-21", "e-22", "e-23", "e-24",
                      "e-25", "e-26", "e-27", "e-28", "e-29", "4", "e-31", "e-32",
                      "e-33" },
+            CHROME = { "e-0", "e-1", "e-2", "2000", "8000", "40",
+                 "e-6", "80", "800", "e-9", "1000", "e-11",
+                 "e-12", "100", "400", "200", "e-16", "e-17", "e-18",
+                 "1", "20", "10", "8", "4", "2",
+                 "e-25", "e-26", "e-27", "e-28", "4000", "e-30", "e-31", "e-32",
+                 "e-33" },
             IE8 = "no Event")
     public void constants() throws Exception {
         final String html =
