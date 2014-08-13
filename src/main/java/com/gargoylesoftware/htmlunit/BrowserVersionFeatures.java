@@ -1244,6 +1244,14 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_MERGE_ATTRIBUTES_ALL,
 
+    /** Indicates that an empty media list is represented by thse string 'all'. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_MEDIA_LIST_ALL,
+
+    /** Indicates that an empty media list is represented by thse string 'all'. */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 31))
+    JS_MEDIA_LIST_EMPTY_STRING,
+
     /**
      * Indicates if the String representation of a native function begins and ends with a \n.
      */

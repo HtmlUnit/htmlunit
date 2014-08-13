@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MEDIA_LIST_ALL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MEDIA_LIST_EMPTY_STRING;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -25,6 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 @JsxClass
 public class MediaList extends SimpleScriptable {
@@ -80,5 +84,16 @@ public class MediaList extends SimpleScriptable {
     @JsxGetter
     public String getMediaText() {
         return wrappedList_.getMediaText();
+    }
+
+    @Override
+    public Object getDefaultValue(final Class<?> hint) {
+        if (getBrowserVersion().hasFeature(JS_MEDIA_LIST_EMPTY_STRING)) {
+            return "";
+        }
+        if (getBrowserVersion().hasFeature(JS_MEDIA_LIST_ALL)) {
+            return "all";
+        }
+        return super.getDefaultValue(hint);
     }
 }
