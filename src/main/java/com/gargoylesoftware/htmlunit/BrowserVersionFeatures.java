@@ -711,10 +711,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_CSSRULELIST_DONT_ENUM_ITEM,
 
-    /** setting style length values requires the px unit. */
-    @BrowserFeature(@WebBrowser(FF))
-    JS_CSS_PX_UNIT_REQUIRED,
-
     /** <code>Date.toLocaleDateString()</code> returns a short form (d.M.yyyy). */
     @BrowserFeature(@WebBrowser(CHROME))
     JS_DATE_LOCALE_DATE_SHORT,
