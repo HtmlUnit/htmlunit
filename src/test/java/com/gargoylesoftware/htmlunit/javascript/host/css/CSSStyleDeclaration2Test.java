@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
@@ -109,46 +109,133 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF24 = "error: maxHeight-error: maxHeight-error: maxHeight-error: maxWidth-error: maxWidth-error: "
-                    + "maxWidth-error: minHeight-error: minHeight-error: minHeight-error: minWidth-error: "
-                    + "minWidth-error: minWidth-error: outlineWidth-error: outlineWidth-error: outlineWidth-error: "
-                    + "textIndent-error: textIndent-error: textIndent-error: verticalAlign-error: verticalAlign-error: "
-                    + "verticalAlign-",
-            FF31 = "error: maxHeight-error: maxHeight-error: maxHeight-error: maxWidth-error: maxWidth-error: "
-                    + "maxWidth-error: minHeight-error: minHeight-error: minHeight-error: minWidth-error: "
-                    + "minWidth-error: minWidth-error: outlineWidth-error: outlineWidth-error: outlineWidth-error: "
-                    + "textIndent-error: textIndent-error: textIndent-error: verticalAlign-error: verticalAlign-error: "
-                    + "verticalAlign-",
-            IE = "success")
-    @NotYetImplemented(FF24)
+    @Alerts({ "success", "success", "success", "success" })
     public void width_like_properties() throws Exception {
+        width_like_properties("bottom", "left", "right", "top");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "borderBottomWidth 42% - 42em", "borderLeftWidth 42% - 42em",
+                "borderRightWidth 42% - 42em", "borderTopWidth 42% - 42em" })
+    @NotYetImplemented
+    public void width_like_properties_border() throws Exception {
+        width_like_properties("borderBottomWidth", "borderLeftWidth", "borderRightWidth", "borderTopWidth");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "success", "success", "success", "success" })
+    public void width_like_properties_margin() throws Exception {
+        width_like_properties("marginBottom", "marginLeft", "marginRight", "marginTop");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "success", "success", "success", "success" })
+    public void width_like_properties_padding() throws Exception {
+        width_like_properties("paddingBottom", "paddingLeft", "paddingRight", "paddingTop");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "success", "success", "success", "success", "success", "success" },
+            FF = { "success", "success", "maxHeight 42.0 - ; 42.7 - ; 42 - ",
+                    "maxWidth 42.0 - ; 42.7 - ; 42 - ", "minHeight 42.0 - ; 42.7 - ; 42 - ",
+                    "minWidth 42.0 - ; 42.7 - ; 42 - " })
+    @NotYetImplemented(FF)
+    public void width_like_properties_heightWidth() throws Exception {
+        width_like_properties("height", "width", "maxHeight", "maxWidth", "minHeight", "minWidth");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "success", "letterSpacing 42% - 42em",
+                        "outlineWidth 42% - 42em", "success", "success",
+                        "wordSpacing 42% - 42em" },
+            FF = { "success", "letterSpacing 42% - 42em",
+                        "outlineWidth 42.0 - ; 42.7 - ; 42 - ; 42% - 42em",
+                        "textIndent 42.0 - ; 42.7 - ; 42 - ",
+                        "verticalAlign 42.0 - ; 42.7 - ; 42 - ",
+                        "wordSpacing 42% - 42em" })
+    @NotYetImplemented
+    public void width_like_properties_font() throws Exception {
+        width_like_properties("fontSize", "letterSpacing", "outlineWidth", "textIndent",
+                        "verticalAlign", "wordSpacing");
+    }
+
+    private void width_like_properties(final String... properties) throws Exception {
+        final String props = "'" + StringUtils.join(properties, "', '") + "'";
         final String html
             = "<html><head><script>\n"
             + "function test() {\n"
-            + "  var properties = ['borderBottomWidth','borderLeftWidth','borderRightWidth','borderTopWidth',\n"
-            + "      'bottom', 'fontSize','height','left','letterSpacing','marginBottom','marginLeft',\n"
-            + "      'marginRight','marginTop','maxHeight','maxWidth','minHeight','minWidth',\n"
-            + "      'outlineWidth','paddingBottom','paddingLeft','paddingRight','paddingTop','right',\n"
-            + "      'textIndent','top','verticalAlign','width','wordSpacing'];\n"
+            + "  var properties = [" + props + "];\n"
             + "\n"
-            + "  var result = '';\n"
             + "  for (var prop in properties) {\n"
             + "    prop = properties[prop];\n"
+            + "    var result = '';\n"
+
             + "    var node = document.createElement('div');\n"
-            + "    if (node.style[prop] != '')\n"
-            + "      result += 'error: ' + prop + '-';\n"
+            + "    if (node.style[prop] != '') {\n"
+            + "      if (result == '') { result += prop } else { result += '; ' }\n"
+            + "      result += ' initial ' + node.style[prop];\n"
+            + "    }\n"
+
             + "    node.style[prop] = '42.0';\n"
-            + "    if (node.style[prop] != '42px')\n"
-            + "      result += 'error: ' + prop + '-';\n"
+            + "    if (node.style[prop] != '42px') {\n"
+            + "      if (result == '') { result += prop } else { result += ';' }\n"
+            + "      result += ' 42.0 - ' + node.style[prop];\n"
+            + "    }\n"
+
             + "    node.style[prop] = '42.7';\n"
             + "    var expected = document.all ? '42px' : '42.7px';\n"
-            + "    if (node.style[prop] != expected)\n"
-            + "      result += 'error: ' + prop + '-';\n"
+            + "    if (node.style[prop] != expected) {\n"
+            + "      if (result == '') { result += prop } else { result += ';' }\n"
+            + "      result += ' 42.7 - ' + node.style[prop];\n"
+            + "    }\n"
+
             + "    node.style[prop] = '42';\n"
-            + "    if (node.style[prop] != '42px')\n"
-            + "      result += 'error: ' + prop + '-';\n"
+            + "    if (node.style[prop] != '42px') {\n"
+            + "      if (result == '') { result += prop } else { result += ';' }\n"
+            + "      result += ' 42 - ' + node.style[prop];\n"
+            + "    }\n"
+
+            + "    node.style[prop] = '42px';\n"
+            + "    if (node.style[prop] != '42px') {\n"
+            + "      if (result == '') { result += prop } else { result += ';' }\n"
+            + "      result += ' 42px - ' + node.style[prop];\n"
+            + "    }\n"
+
+            + "    node.style[prop] = '42mm';\n"
+            + "    if (node.style[prop] != '42mm') {\n"
+            + "      if (result == '') { result += prop } else { result += ';' }\n"
+            + "      result += ' 42mm - ' + node.style[prop];\n"
+            + "    }\n"
+
+            + "    node.style[prop] = '42em';\n"
+            + "    if (node.style[prop] != '42em') {\n"
+            + "      if (result == '') { result += prop } else { result += ';' }\n"
+            + "      result += ' 42em - ' + node.style[prop];\n"
+            + "    }\n"
+
+            + "    node.style[prop] = '42%';\n"
+            + "    if (node.style[prop] != '42%') {\n"
+            + "      if (result == '') { result += prop } else { result += ';' }\n"
+            + "      result += ' 42% - ' + node.style[prop];\n"
+            + "    }\n"
+
+            + "    alert(result == '' ? 'success' : result);\n"
             + "  }\n"
-            + "  alert(result == '' ? 'success' : result);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
