@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
@@ -781,7 +780,7 @@ public class ElementTest extends WebDriverTestCase {
                     + "DOCUMENT_POSITION_FOLLOWINGDOCUMENT_POSITION_CONTAINSDOCUMENT_POSITION_CONTAINED_BY"
                     + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC" },
             IE8 = "exception occured")
-    @NotYetImplemented(FF24)
+    @NotYetImplemented(FF)
     public void enumeratedProperties() throws Exception {
         final String html
             = "<html><head>\n"
