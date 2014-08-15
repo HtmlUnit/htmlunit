@@ -26,7 +26,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -195,16 +194,39 @@ public class MouseEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "Click on DIV(id=div1): true, true, false, false",
-                        "Click on SPAN(id=span1): true, true, true, false",
-                        "Click on SPAN(id=span2): true, false, false, true",
-                        "Click on TEXTAREA(id=myTextarea): true, false, false, false" },
-            FF31 = { "Click on DIV(id=div1): true, true, false, false",
-                        "Click on SPAN(id=span1): true, true, true, false",
-                        "Click on SPAN(id=span2): false, false, false, true",
-                        "Click on TEXTAREA(id=myTextarea): true, false, false, false" })
-    @BuggyWebDriver
-    public void eventCoordinates() throws Exception {
+    @Alerts("Click on DIV(id=div1): true, true, false, false")
+    public void eventCoordinates_div() throws Exception {
+        eventCoordinates("div1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Click on SPAN(id=span1): true, true, true, false")
+    public void eventCoordinates_spanInsideDiv() throws Exception {
+        eventCoordinates("span1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Click on SPAN(id=span2): true, false, false, true")
+    public void eventCoordinates_span() throws Exception {
+        eventCoordinates("span2");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Click on TEXTAREA(id=myTextarea): true, false, false, false")
+    public void eventCoordinates_textarea() throws Exception {
+        eventCoordinates("myTextarea");
+    }
+
+    private void eventCoordinates(final String id) throws Exception {
         final URL url = getClass().getClassLoader().getResource("event_coordinates.html");
         assertNotNull(url);
 
@@ -217,19 +239,7 @@ public class MouseEventTest extends WebDriverTestCase {
         final WebElement textarea = driver.findElement(By.id("myTextarea"));
         assertEquals("", textarea.getText());
 
-        driver.findElement(By.id("div1")).click();
-        assertEquals(expected[0], textarea.getText());
-        textarea.clear();
-
-        driver.findElement(By.id("span1")).click();
-        assertEquals(expected[1], textarea.getText());
-        textarea.clear();
-
-        driver.findElement(By.id("span2")).click();
-        assertEquals(expected[2], textarea.getText());
-        textarea.clear();
-
-        textarea.click();
-        assertEquals(expected[3], textarea.getText());
+        driver.findElement(By.id(id)).click();
+        assertEquals(expected[0], textarea.getAttribute("value").trim());
     }
 }
