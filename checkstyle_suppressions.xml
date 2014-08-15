@@ -62,6 +62,7 @@
     <suppress checks="MethodLength" files="DOMImplementation.java"/>
     <suppress checks="MethodLength" files="SvgElementFactory.java"/>
 
+    <suppress checks="ParameterNumber" files="CanvasRenderingContext2D.java"/>
     <suppress checks="ParameterNumber" files="HtmlUnitRegExpProxy.java"/>
     <suppress checks="ParameterNumber" files="KeyboardEvent.java"/>
     <suppress checks="ParameterNumber" files="MouseEvent.java"/>

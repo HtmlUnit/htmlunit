@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -33,6 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @JsxClass
 public class CanvasRenderingContext2D extends SimpleScriptable {
@@ -242,6 +245,25 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     }
 
     /**
+     * Paints the specified ellipse.
+     * @param x the x
+     * @param y the y
+     * @param radiusX the radiusX
+     * @param radiusY the radiusY
+     * @param rotation the rotation
+     * @param startAngle the startAngle
+     * @param endAngle the endAngle
+     * @param anticlockwise the anticlockwise
+     */
+    @JsxFunction(@WebBrowser(CHROME))
+    public void ellipse(final double x, final double y,
+                    final double radiusX, final double radiusY,
+                    final double rotation, final double startAngle, final double endAngle,
+                    final boolean anticlockwise) {
+        //empty
+    }
+
+    /**
      * Fills the shape.
      */
     @JsxFunction
@@ -280,7 +302,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     /**
      * Dummy placeholder.
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 31), @WebBrowser(CHROME) })
     public void getLineDash() {
         //empty
     }
@@ -395,7 +417,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     /**
      * Dummy placeholder.
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 31), @WebBrowser(CHROME) })
     public void setLineDash() {
         //empty
     }
