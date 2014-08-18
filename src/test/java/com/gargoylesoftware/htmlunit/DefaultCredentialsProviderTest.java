@@ -14,16 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
-import static org.junit.Assert.assertNotNull;
-
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.impl.auth.BasicScheme;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -34,35 +30,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 @RunWith(BrowserRunner.class)
 public class DefaultCredentialsProviderTest extends SimpleWebTestCase {
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Browsers(NONE)
-    public void serialization() throws Exception {
-        final String username = "foo";
-        final String password = "password";
-        final String host = "my.host";
-        final int port = 1234;
-        final String realm = "blah";
-        final String scheme = "NTLM";
-
-        DefaultCredentialsProvider provider = new DefaultCredentialsProvider();
-        provider.addCredentials(username, password, host, port, realm);
-
-        assertNotNull(provider.getCredentials(new AuthScope(host, port, realm, scheme)));
-        assertNull(provider.getCredentials(new AuthScope("invalidHost", port, realm, scheme)));
-        assertNotNull(provider.getCredentials(new AuthScope(host, port, realm, scheme)));
-        assertNull(provider.getCredentials(new AuthScope("invalidHost", port, realm, scheme)));
-
-        provider = clone(provider);
-
-        assertNotNull(provider.getCredentials(new AuthScope(host, port, realm, scheme)));
-        assertNull(provider.getCredentials(new AuthScope("invalidHost", port, realm, scheme)));
-        assertNotNull(provider.getCredentials(new AuthScope(host, port, realm, scheme)));
-        assertNull(provider.getCredentials(new AuthScope("invalidHost", port, realm, scheme)));
-    }
 
     /**
      * Test that successive calls to {@link DefaultCredentialsProvider#addCredentials(String, String)}
