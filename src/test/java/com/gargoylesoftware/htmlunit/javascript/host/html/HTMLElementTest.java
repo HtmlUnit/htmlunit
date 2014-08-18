@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -2417,6 +2418,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object ClientRect]",
             FF31 = "[object DOMRect]",
             IE8 = "[object]")
+    @NotYetImplemented(FF31)
     public void getBoundingClientRect() throws Exception {
         final String html = "<html><body><div id='div1'>hello</div><script>\n"
             + "try {\n"

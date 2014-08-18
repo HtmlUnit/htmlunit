@@ -248,6 +248,12 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                     }
                     break;
 
+                case FF31:
+                    if (browserVersion_ == BrowserVersion.FIREFOX_31) {
+                        return true;
+                    }
+                    break;
+
                 case CHROME:
                     if (browserVersion_.isChrome()) {
                         return true;
