@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="2.16" date="???" description="Bugfixes">
+        <release version="2.16" date="???" description="FF31, Bugfixes">
+            <action type="add" dev="rbri" issue="1636">
+                Firefox 31 ESR support added.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache HttpClient to 4.3.5.
             </action>
