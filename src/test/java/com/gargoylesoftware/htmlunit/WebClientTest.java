@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 import static com.gargoylesoftware.htmlunit.BrowserVersion.INTERNET_EXPLORER_11;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertNotNull;
@@ -28,9 +27,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
@@ -43,11 +39,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.apache.http.HttpStatus;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.w3c.css.sac.CSSException;
@@ -56,7 +48,6 @@ import org.w3c.css.sac.ErrorHandler;
 
 import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
@@ -86,77 +77,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  */
 @RunWith(BrowserRunner.class)
 public class WebClientTest extends SimpleWebTestCase {
-
-    /**
-     * Tests if all JUnit 4 candidate test methods declare <tt>@Test</tt> annotation.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Browsers(NONE)
-    public void testTests() throws Exception {
-        testTests(new File("src/test/java"));
-    }
-
-    private void testTests(final File dir) throws Exception {
-        for (final File file : dir.listFiles()) {
-            if (file.isDirectory()) {
-                if (!".svn".equals(file.getName())) {
-                    testTests(file);
-                }
-            }
-            else {
-                if (file.getName().endsWith(".java")) {
-                    final int index = new File("src/test/java").getAbsolutePath().length();
-                    String name = file.getAbsolutePath();
-                    name = name.substring(index + 1, name.length() - 5);
-                    name = name.replace(File.separatorChar, '.');
-                    final Class<?> clazz;
-                    try {
-                        clazz = Class.forName(name);
-                    }
-                    catch (final Exception e) {
-                        continue;
-                    }
-                    name = file.getName();
-                    if (name.endsWith("Test.java") || name.endsWith("TestCase.java")) {
-                        for (final Constructor<?> ctor : clazz.getConstructors()) {
-                            if (ctor.getParameterTypes().length == 0) {
-                                for (final Method method : clazz.getDeclaredMethods()) {
-                                    if (Modifier.isPublic(method.getModifiers())
-                                            && method.getAnnotation(Before.class) == null
-                                            && method.getAnnotation(BeforeClass.class) == null
-                                            && method.getAnnotation(After.class) == null
-                                            && method.getAnnotation(AfterClass.class) == null
-                                            && method.getAnnotation(Test.class) == null
-                                            && method.getReturnType() == Void.TYPE
-                                            && method.getParameterTypes().length == 0) {
-                                        fail("Method '" + method.getName()
-                                                + "' in " + name + " does not declare @Test annotation");
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Browsers(NONE)
-    public void addRequestHeader_Cookie() throws Exception {
-        final WebClient client = new WebClient();
-        try {
-            client.addRequestHeader("Cookie", "some_value");
-            fail("Should have thrown an exception ");
-        }
-        catch (final IllegalArgumentException e) {
-            //success
-        }
-    }
 
     /**
      * Test the situation where credentials are required but they haven't been specified.
@@ -1584,27 +1504,6 @@ public class WebClientTest extends SimpleWebTestCase {
 
         final String[] expectedAlerts = {"foo"};
         assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * Test that WebClient.getPage(String) calls WebClient.getPage(URL) with the right URL.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Browsers(NONE)
-    public void testGetPageWithStringArg() throws Exception {
-        final URL[] calledUrls = {null};
-        final WebClient wc = new WebClient() {
-            @Override
-            @SuppressWarnings("unchecked")
-            public Page getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
-                calledUrls[0] = url;
-                return null;
-            }
-        };
-
-        wc.getPage(getDefaultUrl().toExternalForm());
-        assertEquals(getDefaultUrl(), calledUrls[0]);
     }
 
     /**
