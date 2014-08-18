@@ -257,6 +257,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
     /**
      * Tests usage of regex with non escaped curly braces, such as is used by dhtmlGrid.
      * @throws Exception if the test fails
