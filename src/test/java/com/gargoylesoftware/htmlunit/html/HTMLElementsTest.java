@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -677,7 +678,7 @@ public class HTMLElementsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE8 = "0",
             FF31 = "2")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, FF31 })
     public void elementClosesItself_keygen() throws Exception {
         loadPageWithAlerts2(elementClosesItself("keygen"));
     }
