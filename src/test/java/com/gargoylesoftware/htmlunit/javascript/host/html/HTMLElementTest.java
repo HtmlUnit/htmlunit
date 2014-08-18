@@ -198,8 +198,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "", "bla", "true" },
-            FF = { "null", "bla", "true" },
+    @Alerts(DEFAULT = { "null", "bla", "true" },
+            IE11 = { "", "bla", "true" },
             IE8 = "exception")
     @NotYetImplemented(FF)
     public void getSetAttributeNS() throws Exception {
@@ -232,7 +232,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "text", "i", "i", "[object CSS2Properties]", "function", "undefined", "undefined" },
-            IE11 = { "text", "i", "i", "[object MSStyleCSSProperties]", "function", "undefined", "undefined" })
+            IE11 = { "text", "i", "i", "[object MSStyleCSSProperties]", "function", "undefined", "undefined" },
+            CHROME = { "text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined" })
     @NotYetImplemented
     public void attributesAccess() throws Exception {
         final String html
@@ -434,8 +435,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "null", "inform('newHandler')", "" },
-            FF = { "null", "inform('newHandler')", "null" },
+    @Alerts(DEFAULT = { "null", "inform('newHandler')", "null" },
+            IE11 = { "null", "inform('newHandler')", "" },
             IE8 = { "null", "inform('newHandler')", "null" })
     public void setAttribute_eventHandlerNull() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -952,8 +953,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * Verifies outerHTML, innerHTML and innerText for newly created div.
      * @throws Exception if the test fails
      */
-    @Alerts(DEFAULT = { "true", "true", "false" },
-            IE = { "true", "true", "true" })
+    @Alerts(DEFAULT = { "true", "true", "true" },
+            FF = { "true", "true", "false" })
     @Test
     public void outerHTMLinNewDiv() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
@@ -1091,7 +1092,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "Outer = <p id=\"myNode\">New  cell value\n\n</p>" },
+    @Alerts(DEFAULT = { "Outer = <p id=\"myNode\">New  cell value\n\n</p>" },
             IE8 = { "Outer = <P id=myNode>New cell value\n</P>" },
             IE11 = { "Outer = <p id=\"myNode\">New  cell value\n\n" })
     @NotYetImplemented({ FF, IE11 })
@@ -1300,8 +1301,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <div>test</div>", "Childs: 1" },
-            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
-                    "New = <span id=\"innerNode\">Old outerHTML</span>", "Childs: 1" },
             IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "exception" })
     public void setOuterHTMLAddBlockToParagraph() throws Exception {
         final String html = createPageForSetOuterHTML("p", "<div>test</div>");
@@ -1316,8 +1315,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <p>test</p>", "Childs: 1" },
-            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
-                    "New = <span id=\"innerNode\">Old outerHTML</span>", "Childs: 1" },
             IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "exception" })
     public void setOuterHTMLAddParagraphToParagraph() throws Exception {
         final String html = createPageForSetOuterHTML("p", "<p>test</p>");
@@ -1345,8 +1342,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <a>test</a>", "Childs: 1" },
-            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
-                    "New = <span id=\"innerNode\">Old outerHTML</span>", "Childs: 1" },
             IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "exception" })
     public void setOuterHTMLAddAnchorToAnchor() throws Exception {
         final String html = createPageForSetOuterHTML("a", "<a>test</a>");
@@ -1372,8 +1367,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <div><div></div></div>", "Childs: 1" },
-            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div></div><div></div>",
-                    "Childs: 1" },
             IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <DIV></DIV><DIV></DIV>", "Childs: 1" })
     @NotYetImplemented({ FF, IE8, IE11 })
     public void setOuterHTMLAddMultipleSelfClosingBlock() throws Exception {
@@ -2689,7 +2682,8 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "page2 loaded",
             IE = "exception",
-            IE11 = "")
+            IE11 = "",
+            CHROME = "")
     public void dispatchEvent_submitOnForm() throws Exception {
         final String html = "<html><head><title>page 1</title></head><body>\n"
             + "<form action='page2' id='theForm'><span id='foo'/></form>\n"
@@ -2925,7 +2919,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE11 = "false")
+            IE11 = "false",
+            CHROME = "false")
     public void contains_invalid_argument() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -3318,8 +3313,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "button", "", "false", "true" },
-            FF = { "button", "null", "false", "true" },
+    @Alerts(DEFAULT = { "button", "null", "false", "true" },
+            IE11 = { "button", "", "false", "true" },
             IE8 = { "button", "getAttributeNS() not supported" })
     @NotYetImplemented(FF)
     public void attributeNS() throws Exception {
@@ -3616,7 +3611,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<bgsound>",
-            IE8 = "<BGSOUND>")
+            IE8 = "<BGSOUND>",
+            CHROME = "<bgsound></bgsound>")
     public void outerHTML_bgsound() throws Exception {
         loadPageWithAlerts2(outerHTML("bgsound"));
     }
@@ -4185,7 +4181,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<keygen>",
-            IE8 = "<keygen></keygen>")
+            IE8 = "<keygen></keygen>",
+            CHROME = "<keygen></keygen>")
     public void outerHTML_keygen() throws Exception {
         loadPageWithAlerts2(outerHTML("keygen"));
     }
