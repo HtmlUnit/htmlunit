@@ -1489,9 +1489,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "width", "" },
-            FF31 = { "1", "width", "undefined" },
-            IE8 = { "undefined", "width", "" })
+    @Alerts(DEFAULT = { "1", "width", "", "undefined" },
+            FF = { "1", "width", "undefined", "undefined" },
+            IE8 = { "undefined", "width", "", "undefined" })
     public void length() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1501,6 +1501,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "    alert(a.style.length);\n"
             + "    alert(a.style[0]);\n"
             + "    alert(a.style[1]);\n"
+            + "    alert(a.style[-1]);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"

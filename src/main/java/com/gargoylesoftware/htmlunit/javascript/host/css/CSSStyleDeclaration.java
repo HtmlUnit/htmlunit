@@ -28,6 +28,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_GET_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_REMOVE_ATTRIBUTE_SUPPORTS_FLAGS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_SET_ATTRIBUTE_SUPPORTS_FLAGS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_UNSUPPORTED_PROPERTY_GETTER;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -2394,8 +2395,15 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
 
     @Override
     public Object get(final int index, final Scriptable start) {
+        if (index < 0) {
+            return Undefined.instance;
+        }
+
         final int size = getStyleMap().size();
         if (index >= size) {
+            if (getBrowserVersion().hasFeature(JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED)) {
+                return Undefined.instance;
+            }
             return "";
         }
         return getStyleMap().keySet().toArray(new String[size])[index];

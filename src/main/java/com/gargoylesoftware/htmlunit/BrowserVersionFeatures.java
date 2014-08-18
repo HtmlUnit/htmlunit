@@ -1496,6 +1496,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_STYLE_UNSUPPORTED_PROPERTY_GETTER,
 
+    /** Indicates that trying to access the style property with a wrong index returns undefined
+     * instead of "". */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED,
+
     /** The width cell height does not return negative values. */
     @BrowserFeature(@WebBrowser(IE))
     JS_TABLE_CELL_HEIGHT_DOES_NOT_RETURN_NEGATIVE_VALUES,
