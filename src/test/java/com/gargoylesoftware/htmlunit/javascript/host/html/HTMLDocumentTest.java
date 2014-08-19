@@ -19,16 +19,12 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
-import static com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument.EMPTY_COOKIE_NAME;
-import static com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate;
 import static org.junit.Assert.fail;
 
 import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -41,14 +37,12 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
-import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -297,14 +291,15 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE11, CHROME })
-    @Alerts({ "[object HTMLDivElement]", "[object HTMLUnknownElement]", "[object Element]" })
+    @Alerts(DEFAULT = { "[object HTMLDivElement]", "[object HTMLUnknownElement]", "[object Element]" },
+            IE8 = "document.createElementNS not available")
     public void createDocumentNS() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "<title>Test</title>\n"
             + "<script>\n"
             + "function test() {\n"
+            + "  if(!document.createElementNS) { alert('document.createElementNS not available'); return; }\n"
             + "  var elt = document.createElementNS('http://www.w3.org/1999/xhtml', 'div');\n"
             + "  alert(elt);\n"
             + "  var elt = document.createElementNS('http://www.w3.org/1999/xhtml', 'foo');\n"
@@ -451,13 +446,14 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ FF, IE11, CHROME })
-    @Alerts("clicked")
+    @Alerts(DEFAULT = "clicked",
+            IE8 = "document.addEventListener not available")
     public void dispatchEvent() throws Exception {
         final String html =
             "<html>\n"
             + "<script>\n"
             + "  function doTest() {\n"
+            + "    if (!document.createEvent) { return }\n"
             + "    var e = document.createEvent('MouseEvents');\n"
             + "    e.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);\n"
             + "    document.dispatchEvent(e);\n"
@@ -465,7 +461,12 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  function clickListener() {\n"
             + "    alert('clicked');\n"
             + "  }\n"
-            + "  document.addEventListener('click', clickListener, true);\n"
+
+            + "  if (document.addEventListener) {\n"
+            + "    document.addEventListener('click', clickListener, true);\n"
+            + "  } else {\n"
+            + "    alert('document.addEventListener not available');\n"
+            + "  }\n"
             + "</script>\n"
             + "<body onload='doTest()'>foo</body>\n"
             + "</html>";
@@ -608,7 +609,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ CHROME, FF, IE8 })
     @Alerts(DEFAULT = { "string", "Fri, 16 Oct 2009 13:59:47 GMT" },
             IE = { "string", "Fri, 16 Oct 2009 13:59:47 UTC" })
     public void lastModified() throws Exception {
@@ -1199,29 +1199,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     }
 
     /**
-     * Test having &lt; and &gt; in attribute values.
-     */
-    @Test
-    @Browsers(NONE)
-    public void canAlreadyBeParsed() {
-        assertTrue(HTMLDocument.canAlreadyBeParsed("<p>hallo</p>"));
-        assertTrue(HTMLDocument.canAlreadyBeParsed("<img src='foo' alt=\"<'>\"></img>"));
-
-        // double close is ok
-        assertTrue(HTMLDocument.canAlreadyBeParsed("<script></script></script>"));
-
-        // check for correct string quoting in script
-        assertTrue(HTMLDocument.canAlreadyBeParsed("<script>var test ='abc';</script>"));
-        assertTrue(HTMLDocument.canAlreadyBeParsed("<script>var test =\"abc\";</script>"));
-        assertFalse(HTMLDocument.canAlreadyBeParsed("<script>var test ='abc\";</script>"));
-        assertFalse(HTMLDocument.canAlreadyBeParsed("<script>var test ='abc;</script>"));
-        assertFalse(HTMLDocument.canAlreadyBeParsed("<script>var test =\"abc;</script>"));
-
-        // check quoting only inside script tags
-        assertTrue(HTMLDocument.canAlreadyBeParsed("<script>var test ='abc';</script><p>it's fun</p>"));
-    }
-
-    /**
      * Regression test for a bug introduced by the document proxy and detected by the Dojo JavaScript library tests.
      * @throws Exception if an error occurs
      */
@@ -1619,46 +1596,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</html>";
 
         loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Browsers(NONE)
-    public void buildCookie() throws Exception {
-        final String domain = URL_FIRST.getHost();
-        checkCookie(HTMLDocument.buildCookie("", URL_FIRST), EMPTY_COOKIE_NAME, "", "/", domain, false, null);
-        checkCookie(HTMLDocument.buildCookie("toto", URL_FIRST), EMPTY_COOKIE_NAME, "toto", "/", domain, false, null);
-        checkCookie(HTMLDocument.buildCookie("toto=", URL_FIRST), "toto", "", "/", domain, false, null);
-        checkCookie(HTMLDocument.buildCookie("toto=foo", URL_FIRST), "toto", "foo", "/", domain, false, null);
-        checkCookie(HTMLDocument.buildCookie("toto=foo;secure", URL_FIRST), "toto", "foo", "/", domain, true, null);
-        checkCookie(HTMLDocument.buildCookie("toto=foo;path=/myPath;secure", URL_FIRST),
-                "toto", "foo", "/myPath", domain, true, null);
-
-        // Check that leading and trailing whitespaces are ignored
-        checkCookie(HTMLDocument.buildCookie("   toto=foo;  path=/myPath  ; secure  ", URL_FIRST),
-                "toto", "foo", "/myPath", domain, true, null);
-
-        // Check that we accept reserved attribute names (e.g expires, domain) in any case
-        checkCookie(HTMLDocument.buildCookie("toto=foo; PATH=/myPath; SeCURE", URL_FIRST),
-                "toto", "foo", "/myPath", domain, true, null);
-
-        // Check that we are able to parse and set the expiration date correctly
-        final String dateString = "Fri, 21 Jul 2006 20:47:11 UTC";
-        final Date date = parseHttpDate(dateString);
-        checkCookie(HTMLDocument.buildCookie("toto=foo; expires=" + dateString, URL_FIRST),
-                "toto", "foo", "/", domain, false, date);
-    }
-
-    private void checkCookie(final Cookie cookie, final String name, final String value,
-            final String path, final String domain, final boolean secure, final Date date) {
-        assertEquals(name, cookie.getName());
-        assertEquals(value, cookie.getValue());
-        assertEquals(path, cookie.getPath());
-        assertEquals(domain, cookie.getDomain());
-        assertEquals(secure, cookie.isSecure());
-        assertEquals(date, cookie.getExpires());
     }
 
     /**

@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.fail;
 
@@ -28,7 +27,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.CookieManager;
@@ -135,8 +133,8 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
     * @throws Exception if the test fails
     */
     @Test
-    @Browsers(FF)
-    @Alerts({ "www.gargoylesoftware.com", "gargoylesoftware.com" })
+    @Alerts(DEFAULT = { "www.gargoylesoftware.com", "gargoylesoftware.com" },
+            IE8 = { "WWW.GARGOYLESOFTWARE.COM", "GaRgOyLeSoFtWaRe.CoM" })
     public void domainMixedCaseNetscape() throws Exception {
         final URL urlGargoyleUpperCase = new URL("http://WWW.GARGOYLESOFTWARE.COM/");
 
