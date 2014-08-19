@@ -23,7 +23,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -414,26 +413,29 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(FF)
-    @Alerts(FF = { "84,30", "84,30", "84,30", "82,30", "82,30", "82,30" })
+    @Alerts(DEFAULT = { "84,30", "84,30", "84,30", "82,30", "82,30", "82,30" },
+            IE8 = { "84,34", "84,34", "84,34", "83,34", "82,34", "83,34" })
     public void cellWidthHeightWithBorderCollapse() throws Exception {
         final String html
             = "<html><body><table id='t'><tr>\n"
             + "<td id='td1' style='width: 80px; height: 30px; border: 2px solid blue; padding: 0px;'>a</td>\n"
             + "<td id='td2' style='width: 80px; height: 30px; border: 2px solid blue; padding: 0px;'>a</td>\n"
             + "<td id='td3' style='width: 80px; height: 30px; border: 2px solid blue; padding: 0px;'>a</td>\n"
-            + "</tr></table><script>\n"
-            + "var t = document.getElementById('t');\n"
-            + "var td1 = document.getElementById('td1');\n"
-            + "var td2 = document.getElementById('td2');\n"
-            + "var td3 = document.getElementById('td3');\n"
-            + "alert(td1.offsetWidth + ',' + td1.offsetHeight);\n"
-            + "alert(td2.offsetWidth + ',' + td2.offsetHeight);\n"
-            + "alert(td3.offsetWidth + ',' + td3.offsetHeight);\n"
-            + "t.style.borderCollapse = 'collapse';\n"
-            + "alert(td1.offsetWidth + ',' + td1.offsetHeight);\n"
-            + "alert(td2.offsetWidth + ',' + td2.offsetHeight);\n"
-            + "alert(td3.offsetWidth + ',' + td3.offsetHeight);\n"
+            + "</tr></table>\n"
+            + "<script>\n"
+            + "  var t = document.getElementById('t');\n"
+            + "  var td1 = document.getElementById('td1');\n"
+            + "  var td2 = document.getElementById('td2');\n"
+            + "  var td3 = document.getElementById('td3');\n"
+
+            + "  alert(td1.offsetWidth + ',' + td1.offsetHeight);\n"
+            + "  alert(td2.offsetWidth + ',' + td2.offsetHeight);\n"
+            + "  alert(td3.offsetWidth + ',' + td3.offsetHeight);\n"
+
+            + "  t.style.borderCollapse = 'collapse';\n"
+            + "  alert(td1.offsetWidth + ',' + td1.offsetHeight);\n"
+            + "  alert(td2.offsetWidth + ',' + td2.offsetHeight);\n"
+            + "  alert(td3.offsetWidth + ',' + td3.offsetHeight);\n"
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
