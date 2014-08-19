@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +24,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -43,14 +41,14 @@ public class EventNodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE8)
-    @Alerts("true")
+    @Alerts(DEFAULT = "fireEvent not available", IE8 = "true")
     public void fireEvent() throws Exception {
         final String html
             = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var form = document.getElementById('myForm');\n"
+            + "    if (!form.fireEvent) { alert('fireEvent not available'); return }\n"
             + "    alert(form.fireEvent('onsubmit'));\n"
             + "  }\n"
             + "</script>\n"
@@ -65,17 +63,18 @@ public class EventNodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE8)
-    @Alerts("hello")
+    @Alerts(DEFAULT = "createEventObject not available", IE8 = "hello")
     public void fireEvent_initFromTemplate() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + "    function test() {\n"
+            + "      if (!document.createEventObject) { alert('createEventObject not available'); return }\n"
             + "      var myEvent = document.createEventObject();\n"
             + "      myEvent.eventType = 'onclick';\n"
             + "      myEvent.foo = 'hello';\n"
-            + "      document.getElementById('theButton').fireEvent('onclick', myEvent);\n"
+            + "      var butt = document.getElementById('theButton');\n"
+            + "      butt.fireEvent('onclick', myEvent);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head><body onload='test()'>\n"

@@ -32,7 +32,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -557,9 +556,9 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ CHROME, FF, IE11 })
     @Alerts(DEFAULT = { "0", "20", "20", "4", "10", "10", "2", "20", "exception" },
-            CHROME = { "0", "20", "20", "4", "10", "10", "2", "20", "1" })
+            CHROME = { "0", "20", "20", "4", "10", "10", "2", "20", "1" },
+            IE8 = "compareDocumentPosition not available")
     @NotYetImplemented(CHROME)
     public void compareDocumentPosition() throws Exception {
         final String html
@@ -569,6 +568,8 @@ public class NodeTest extends WebDriverTestCase {
             + "  var div1 = document.getElementById('div1');\n"
             + "  var div2 = document.getElementById('div2');\n"
             + "  var div3 = document.getElementById('div3');\n"
+            + "  if (!div1.compareDocumentPosition) { alert('compareDocumentPosition not available'); return }\n"
+
             + "  alert(div1.compareDocumentPosition(div1));\n"
             + "  alert(div1.compareDocumentPosition(div2));\n"
             + "  alert(div1.compareDocumentPosition(div3));\n"
