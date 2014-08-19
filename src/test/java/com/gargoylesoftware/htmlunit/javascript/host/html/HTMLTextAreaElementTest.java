@@ -26,7 +26,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -480,8 +479,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ CHROME, FF, IE11 })
-    @Alerts({ "9", "9", "2", "7" })
+    @Alerts(DEFAULT = { "9", "9", "2", "7" },
+            IE8 = "setSelectionRange not available")
     public void selectionRange() throws Exception {
         final String html
             = "<html>\n"
@@ -489,6 +488,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
             + "  <script>\n"
             + "    function test() {\n"
             + "      var ta = document.getElementById('myInput');\n"
+            + "      if (!ta.setSelectionRange) { alert('setSelectionRange not available'); return };\n"
             + "      ta.setSelectionRange(15, 15);\n"
             + "      alert(ta.selectionStart);"
             + "      alert(ta.selectionEnd);"
