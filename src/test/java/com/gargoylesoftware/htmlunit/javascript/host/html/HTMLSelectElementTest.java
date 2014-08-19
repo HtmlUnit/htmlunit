@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static org.junit.Assert.assertSame;
 
 import org.junit.Test;
@@ -26,7 +24,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -371,19 +368,23 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE11 })
-    @Alerts({ "4", "Four", "value4" })
+    @Alerts(DEFAULT = { "4", "Four", "value4" },
+            IE8 = { "exception", "3", "Three", "value3" })
     public void addOptionWithAddMethod_FF() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "function doTest() {\n"
+            + "  function doTest() {\n"
             + "    var options = document.form1.select1;\n"
-            + "    options.add(new Option('Four','value4'), null);\n"
+            + "    try {\n"
+            + "      options.add(new Option('Four','value4'), null);\n"
+            + "    } catch(e) { alert('exception'); }\n"
             + "    alert(options.length);\n"
             + "    var index = options.length - 1;\n"
             + "    alert(options[index].text);\n"
             + "    alert(options[index].value);\n"
-            + "}</script></head><body onload='doTest()'>\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1'>\n"
             + "    <select name='select1'>\n"
