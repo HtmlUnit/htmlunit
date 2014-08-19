@@ -14,17 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -86,9 +82,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts(DEFAULT = { "1", "title" },
-            IE11 = "exception")
+    @Alerts(DEFAULT = "exception",
+            IE8 = { "1", "title" })
     public void selectNodes() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -194,9 +189,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts(DEFAULT = { "book", "0", "1" },
-            IE11 = { "book", "exception" })
+    @Alerts(DEFAULT = { "book", "exception" },
+            IE8 = { "book", "0", "1" })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void selectNode_root() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -254,12 +248,12 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ CHROME, FF, IE11 })
-    @Alerts("false")
+    @Alerts(DEFAULT = "false", IE8 = "hasAttribute not available")
     public void hasAttribute() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'foo.xml'") + ";\n"
+            + "    if (!doc.documentElement.hasAttribute) { alert('hasAttribute not available'); return }\n"
             + "    alert(doc.documentElement.hasAttribute('something'));\n"
             + "  }\n"
             + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
@@ -1036,13 +1030,14 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ CHROME, FF, IE11 })
-    @Alerts({ "test value", "true", "false", "finished" })
+    @Alerts(DEFAULT = { "test value", "true", "false", "finished" },
+            IE8 = "createDocument not available")
     public void attributeNS() throws Exception {
         final String html = "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + "      function test() {\n"
+            + "        if (!document.implementation.createDocument) { alert('createDocument not available'); return }\n"
             + "        var doc = document.implementation.createDocument(\"\", \"\", null);\n"
             + "        var element = doc.createElementNS(\'uri:test\', \'test:element\');\n"
             + "        element.setAttributeNS(\'uri:test\', \'test:attribute\', 'test value');\n"
