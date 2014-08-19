@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.apache.commons.lang3.StringUtils;
@@ -27,7 +26,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -123,8 +121,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE8)
-    @Alerts({ "30", "30", "30" })
+    @Alerts(DEFAULT = "attachEvent not available", IE8 = { "30", "30", "30" })
     public void offsetWidth_withEvent() throws Exception {
         final String html =
               "<html>\n"
@@ -132,6 +129,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    var myDiv2 = document.getElementById('myDiv2');\n"
+            + "    if(!document.attachEvent) { alert('attachEvent not available'); return }\n"
+
             + "    myDiv2.attachEvent('ondataavailable', handler);\n"
             + "    document.attachEvent('ondataavailable', handler);\n"
             + "    var m = document.createEventObject();\n"
@@ -1130,8 +1129,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "true")
-    @NotYetImplemented({ FF, IE11 })
+    @Alerts("true")
+    @NotYetImplemented(FF)
     public void offsetLeft_PositionFixed() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

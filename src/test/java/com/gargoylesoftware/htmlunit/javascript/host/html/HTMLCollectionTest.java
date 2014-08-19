@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -24,7 +23,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -50,8 +48,9 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             + "function test() {\n"
             + "    alert(document.links != 'foo')\n"
             + "}\n"
-            + "</script></head><body onload='test()'>\n"
-            + "<a href='bla.html'>link</a>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <a href='bla.html'>link</a>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
@@ -81,9 +80,8 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts(DEFAULT = { "5", "6" },
-            IE11 = { "5", "exception" })
+    @Alerts(DEFAULT = { "5", "exception" },
+            IE8 = { "5", "6" })
     public void getElements() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -94,7 +92,8 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             + "      alert(document.all.length);\n"
             + "    } catch (e) { alert('exception') }\n"
             + "}\n"
-            + "</script></head><body onload='doTest()'>\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
@@ -179,7 +178,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = {"false", "false" },
+    @Alerts(DEFAULT = {"false", "false" },
             IE = {"true", "true" })
     public void testTags() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -200,7 +199,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @NotYetImplemented(FF)
-    @Alerts(FF = { "null", "null", "undefined", "exception" },
+    @Alerts(DEFAULT = { "null", "null", "undefined", "exception" },
             IE = { "null", "null", "undefined", "null" },
             IE11 = { "null", "null", "undefined", "undefined" })
     public void testOutOfBoundAccess() throws Exception {

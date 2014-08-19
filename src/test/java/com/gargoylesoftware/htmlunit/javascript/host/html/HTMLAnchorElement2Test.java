@@ -14,11 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -26,7 +21,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
@@ -75,14 +69,14 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE8)
-    @Alerts("onclick")
+    @Alerts(DEFAULT = { "attachEvent not available", "href" }, IE8 = "onclick")
     public void javaScriptPreventDefaultIE() throws Exception {
         final String html
             = "<html><head><title>Test</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var a = document.getElementById('link');\n"
+            + "    if (!a.attachEvent) { alert('attachEvent not available'); return };\n"
             + "    a.attachEvent('onclick', handler);\n"
             + "  }\n"
             + "  function handler() {\n"
@@ -91,7 +85,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "  }\n"
             + "</script>\n"
             + "<body onload='test()'>\n"
-            + "<a id='link' href='javascript: alert(\"href\");'>link</a>\n"
+            + "  <a id='link' href='javascript: alert(\"href\");'>link</a>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
@@ -103,14 +97,15 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, CHROME, IE11 })
-    @Alerts("onclick")
+    @Alerts(DEFAULT = "onclick",
+            IE8 = { "addEventListener not available", "href" })
     public void javaScriptPreventDefault() throws Exception {
         final String html
             = "<html><head><title>Test</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var a = document.getElementById('link');\n"
+            + "    if (!a.addEventListener) { alert('addEventListener not available'); return };\n"
             + "    a.addEventListener('click', handler);\n"
             + "  }\n"
             + "  function handler(event) {\n"
