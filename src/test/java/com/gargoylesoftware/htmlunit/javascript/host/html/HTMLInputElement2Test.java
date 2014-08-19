@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +22,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
@@ -45,23 +42,28 @@ public class HTMLInputElement2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(FF)
-    @Alerts("hello")
+    @Alerts(DEFAULT = { "hello", "me te" },
+            IE8 = { "input.setSelectionRange not available", "" })
     public void selectionRange() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "    var input = document.getElementById('myInput');\n"
+            + "    if (!input.setSelectionRange) { alert('input.setSelectionRange not available'); return };\n"
             + "    input.setSelectionRange(2, 7);\n"
             + "    alert('hello');"
             + "}\n"
-            + "</script></head><body onload='test()'>\n"
-            + "<input id='myInput' value='some test'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='myInput' value='some test'>\n"
             + "</body></html>";
 
+        final String[] expected = getExpectedAlerts();
+        setExpectedAlerts(new String[] {expected[0]});
         final HtmlPage page = loadPageWithAlerts(html);
         final HtmlTextInput input = page.getHtmlElementById("myInput");
-        assertEquals("me te", input.getSelectedText());
+
+        assertEquals(expected[1], input.getSelectedText());
     }
 
     /**
