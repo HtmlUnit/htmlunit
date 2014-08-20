@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="FF31, Bugfixes">
+            <action type="fix" dev="asashour" due-to="Jake Cobb" issue="1633">
+                JavaScript: fix writing to a read-only property in the prototype.
+            </action>
             <action type="add" dev="rbri" issue="1636">
                 Firefox 31 ESR support added.
             </action>

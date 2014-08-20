@@ -730,6 +730,9 @@
         <contributor>
             <name>Carsten Steul</name>
         </contributor>
+        <contributor>
+            <name>Jake Cobb</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
