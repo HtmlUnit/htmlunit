@@ -29,29 +29,35 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  */
 @RunWith(BrowserRunner.class)
 public class ScriptableObjectTest extends WebDriverTestCase {
-	
-	/**
-	 * Tests that writing a property which is a read-only in the prototype
-	 * behaves as expected.
-	 * 
-	 * @see https://sourceforge.net/p/htmlunit/bugs/1633/
-	 * @throws Exception on failure
-	 */
-	@Test
-	@Alerts({"default", "default", "default"})
-	public void testReadOnlyPrototype() throws Exception {
-		final String html = "<html><body><script>"
-			+ "var proto = Object.create(Object.prototype, {\n"
-			+ "    myProp: {\n"
-			+ "        get: function() { return 'default'; }\n"
-			+ "    }\n"
-			+ "});\n"
-			+ "var o1 = Object.create(proto), o2 = Object.create(proto);\n"
-			+ "o2.myProp = 'bar';\n"
-			+ "alert(o2.myProp);\n"
-			+ "alert(o1.myProp);\n"
-			+ "alert(proto.myProp)";
-		loadPageWithAlerts2(html);
-	}
+
+    /**
+     * Tests that writing a property which is a read-only in the prototype
+     * behaves as expected.
+     *
+     * @see https://sourceforge.net/p/htmlunit/bugs/1633/
+     * @throws Exception on failure
+     */
+    @Test
+    @Alerts({ "default", "default", "default" })
+    public void testReadOnlyPrototype() throws Exception {
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + "  var proto = Object.create(Object.prototype, {\n"
+            + "    myProp: {\n"
+            + "        get: function() { return 'default'; }\n"
+            + "    }\n"
+            + "  });\n"
+            + "  var o1 = Object.create(proto);\n"
+            + "  var o2 = Object.create(proto);\n"
+            + "  o2.myProp = 'bar';\n"
+            + "  alert(o2.myProp);\n"
+            + "  alert(o1.myProp);\n"
+            + "  alert(proto.myProp)"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>\n";
+
+        loadPageWithAlerts2(html);
+    }
 
 }
