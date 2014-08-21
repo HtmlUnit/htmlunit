@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -26,7 +27,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -114,12 +114,10 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ CHROME, FF, IE11 })
     @Alerts(DEFAULT = "[object HTMLAnchorElement]",
             CHROME = "function HTMLAnchorElement() { [native code] }",
-            FF = "function HTMLAnchorElement() {\n    [native code]\n}",
-            IE8 = "[object]")
-    @NotYetImplemented({ CHROME, FF })
+            FF = "function HTMLAnchorElement() {\n    [native code]\n}")
+    @NotYetImplemented({ CHROME, FF, IE8 })
     public void hostClassNames() throws Exception {
         testHostClassNames("HTMLAnchorElement");
     }
@@ -166,37 +164,87 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ CHROME, FF, IE11 })
-    @Alerts(CHROME = { "Node>Element: true", "Document>XMLDocument: true", "Node>XPathResult: false",
-                "Element>HTMLElement: true", "HTMLElement>HTMLHtmlElement: true",
-                "CSSStyleDeclaration>ComputedCSSStyleDeclaration: exception", "Image>HTMLImageElement: false",
-                "HTMLImageElement>Image: true" },
-            FF = { "Node>Element: true", "Document>XMLDocument: true", "Node>XPathResult: false",
-                "Element>HTMLElement: true", "HTMLElement>HTMLHtmlElement: true",
-                "CSSStyleDeclaration>ComputedCSSStyleDeclaration: exception", "Image>HTMLImageElement: true",
-                "HTMLImageElement>Image: true" },
-            IE11 = { "Node>Element: true", "Document>XMLDocument: true", "Node>XPathResult: exception",
-                "Element>HTMLElement: true", "HTMLElement>HTMLHtmlElement: true",
-                "CSSStyleDeclaration>ComputedCSSStyleDeclaration: exception", "Image>HTMLImageElement: true",
-                "HTMLImageElement>Image: true" })
-    @NotYetImplemented({ CHROME, FF, IE11 })
-    // TODO Class ComputedCSSStyleDeclaration is unknown in all real browsers
-    public void isParentOf() throws Exception {
-        final String[] expectedAlerts = getExpectedAlerts();
-
-        isParentOf("Node", "Element", expectedAlerts[0]);
-        isParentOf("Document", "XMLDocument", expectedAlerts[1]);
-        isParentOf("Node", "XPathResult", expectedAlerts[2]);
-        isParentOf("Element", "HTMLElement", expectedAlerts[3]);
-        isParentOf("HTMLElement", "HTMLHtmlElement", expectedAlerts[4]);
-        isParentOf("CSSStyleDeclaration", "ComputedCSSStyleDeclaration", expectedAlerts[5]);
-
-        //although Image != HTMLImageElement, they seem to be synonyms!!!
-        isParentOf("Image", "HTMLImageElement", expectedAlerts[6]);
-        isParentOf("HTMLImageElement", "Image", expectedAlerts[7]);
+    @Alerts(DEFAULT = "Node>Element: true",
+            IE8 = "Node>Element: exception")
+    public void isParentOf_Node_Element() throws Exception {
+        isParentOf("Node", "Element");
     }
 
-    private void isParentOf(final String object1, final String object2, final String status) throws Exception {
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Document>XMLDocument: true",
+            IE8 = "Document>XMLDocument: exception")
+    public void isParentOf_Document_XMLDocument() throws Exception {
+        isParentOf("Document", "XMLDocument");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Node>XPathResult: false",
+            IE = "Node>XPathResult: exception")
+    public void isParentOf_Node_XPathResult() throws Exception {
+        isParentOf("Node", "XPathResult");
+
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Element>HTMLElement: true",
+            IE8 = "Element>HTMLElement: exception")
+    public void isParentOf_Element_HTMLElement() throws Exception {
+        isParentOf("Element", "HTMLElement");
+
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "HTMLElement>HTMLHtmlElement: true",
+            IE8 = "HTMLElement>HTMLHtmlElement: exception")
+    public void isParentOf_HTMLElement_HTMLHtmlElement() throws Exception {
+        isParentOf("HTMLElement", "HTMLHtmlElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("CSSStyleDeclaration>ComputedCSSStyleDeclaration: exception")
+    @NotYetImplemented({ CHROME, FF, IE11 })
+    // TODO Class ComputedCSSStyleDeclaration is unknown in all real browsers
+    public void isParentOf_CSSStyleDeclaration_ComputedCSSStyleDeclaration() throws Exception {
+        isParentOf("CSSStyleDeclaration", "ComputedCSSStyleDeclaration");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Image>HTMLImageElement: true",
+            CHROME = "Image>HTMLImageElement: false")
+    public void isParentOf_Image_HTMLImageElement() throws Exception {
+        //although Image != HTMLImageElement, they seem to be synonyms!!!
+        isParentOf("Image", "HTMLImageElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("HTMLImageElement>Image: true")
+    public void isParentOf_HTMLImageElement_Image() throws Exception {
+        //although Image != HTMLImageElement, they seem to be synonyms!!!
+        isParentOf("HTMLImageElement", "Image");
+    }
+
+    private void isParentOf(final String object1, final String object2) throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -204,6 +252,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
             + "      alert('" + object1 + ">" + object2 + ": ' + isParentOf(" + object1 + ", " + object2 + "));\n"
             + "    } catch(e) { alert('" + object1 + ">" + object2 + ": exception'); }\n"
             + "  }\n"
+
             + "  /**\n"
             + "   * Returns true if o1 prototype is parent/grandparent of o2 prototype\n"
             + "   */\n"
@@ -214,7 +263,6 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        setExpectedAlerts(status);
         loadPageWithAlerts2(html);
     }
 
