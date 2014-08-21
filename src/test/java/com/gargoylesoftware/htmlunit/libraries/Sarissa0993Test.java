@@ -14,17 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
-
-import java.io.StringReader;
 import java.util.List;
-
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMResult;
-import javax.xml.transform.stream.StreamSource;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,12 +22,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -105,41 +92,5 @@ public class Sarissa0993Test extends WebDriverTestCase {
         assertEquals(1, divList.size());
         final WebElement div = divList.get(0);
         assertEquals("OK!", div.getText());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Browsers(NONE)
-    public void xslt() throws Exception {
-        final String input = "<root><element attribute=\"value\"/></root>";
-        final String style = "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"1.0\">\n"
-            + "<xsl:output method=\"xml\" omit-xml-declaration=\"yes\"/>\n"
-            + "<xsl:param select=\"'anonymous'\" name=\"user\"/>\n"
-            + "<xsl:template match=\"/\">\n"
-            + "<p id=\"user\">User: <xsl:value-of select=\"$user\"/>\n"
-            + "</p>\n"
-            + "<xsl:apply-templates/>\n"
-            + "<hr/>\n"
-            + "</xsl:template>\n"
-            + "<xsl:template match=\"greeting\">\n"
-            + "<p>\n"
-            + "<xsl:apply-templates/>\n"
-            + "</p>\n"
-            + "</xsl:template>\n"
-            + "</xsl:stylesheet>";
-
-        final Source xmlSource = new StreamSource(new StringReader(input));
-        final Source xsltSource = new StreamSource(new StringReader(style));
-
-        final Document containerDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-        final Element containerElement = containerDocument.createElement("container");
-        containerDocument.appendChild(containerElement);
-
-        final DOMResult result = new DOMResult(containerElement);
-
-        final Transformer transformer = TransformerFactory.newInstance().newTransformer(xsltSource);
-        transformer.transform(xmlSource, result);
     }
 }

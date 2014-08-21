@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 import static com.gargoylesoftware.htmlunit.util.StringUtils.formatHttpDate;
 
 import java.io.InputStream;
@@ -31,7 +30,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -50,7 +48,6 @@ public class CacheTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(NONE)
     public void isDynamicContent() throws Exception {
         final Cache cache = new Cache();
         final Map<String, String> headers = new HashMap<String, String>();

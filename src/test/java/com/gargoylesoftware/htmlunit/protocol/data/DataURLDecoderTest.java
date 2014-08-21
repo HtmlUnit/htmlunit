@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.protocol.data;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 import static com.gargoylesoftware.htmlunit.protocol.data.DataUrlDecoder.decodeDataURL;
 
 import org.junit.Test;
@@ -22,7 +21,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
@@ -38,7 +36,6 @@ public class DataURLDecoderTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(NONE)
     public void testDecodeDataURL() throws Exception {
         DataUrlDecoder decoder = decodeDataURL("data:text/javascript,d1%20%3D%20'one'%3B");
         assertEquals("d1 = 'one';", decoder.getDataAsString());
