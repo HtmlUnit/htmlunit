@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="FF31, Bugfixes">
+            <action type="add" dev="asashour">
+                BrowserVersion: introduce .setHeaderNamesOrdered() to guide the order of the request HTTP headers.
+            </action>
             <action type="fix" dev="asashour" due-to="Jake Cobb" issue="1633">
                 JavaScript: fix writing to a read-only property in the prototype.
             </action>

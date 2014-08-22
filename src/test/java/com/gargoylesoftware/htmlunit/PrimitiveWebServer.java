@@ -21,6 +21,8 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A very simple implementation of a Web Server.
@@ -34,6 +36,7 @@ public class PrimitiveWebServer {
     private final int port_;
     private final byte[] defaultResponse_;
     private ServerSocket server_;
+    private List<String> requests = new ArrayList<String>();
 
     /**
      * Constructs a new SimpleWebServer.
@@ -66,6 +69,7 @@ public class PrimitiveWebServer {
                                 break;
                             }
                         }
+                        requests.add(writer.toString());
                         final OutputStream out = socket.getOutputStream();
                         out.write(defaultResponse_);
                         out.close();
@@ -87,5 +91,20 @@ public class PrimitiveWebServer {
      */
     public void stop() throws IOException {
         server_.close();
+    }
+
+    /**
+     * Returns the saved requests.
+     * @return the requests
+     */
+    public List<String> getRequests() {
+        return requests;
+    }
+
+    /**
+     * Clears all requests.
+     */
+    public void clearRequests() {
+        requests.clear();
     }
 }

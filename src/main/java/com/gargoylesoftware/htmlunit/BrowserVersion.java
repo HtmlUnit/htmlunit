@@ -93,6 +93,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     private String cssAcceptHeader_;
     private String scriptAcceptHeader_;
     private String xmlHttpRequestAcceptHeader_;
+    private String[] headerNamesOrdered_;
 
     /**
      * Application name for the Internet Explorer series of browsers.
@@ -174,6 +175,8 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_24.setBrowserLanguage("en-US");
         FIREFOX_24.setVendor("");
         FIREFOX_24.buildId_ = "20140609182057";
+        FIREFOX_24.setHeaderNamesOrdered(new String[] {
+                "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Connection" });
         FIREFOX_24.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_24.setXmlHttpRequestAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_24.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
@@ -182,6 +185,8 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_31.setBrowserLanguage("en-US");
         FIREFOX_31.setVendor("");
         FIREFOX_31.buildId_ = "20140717132905";
+        FIREFOX_31.setHeaderNamesOrdered(new String[] {
+                "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Connection" });
         FIREFOX_31.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_31.setXmlHttpRequestAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_31.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
@@ -191,6 +196,8 @@ public class BrowserVersion implements Serializable, Cloneable {
 
         INTERNET_EXPLORER_11.setBrowserLanguage("en-US");
         INTERNET_EXPLORER_11.setVendor("");
+        INTERNET_EXPLORER_11.setHeaderNamesOrdered(new String[] {
+                "Accept", "Accept-Language", "User-Agent", "Accept-Encoding", "Host", "DNT", "Connection" });
         INTERNET_EXPLORER_11.setHtmlAcceptHeader("text/html, application/xhtml+xml, */*");
         INTERNET_EXPLORER_11.setImgAcceptHeader("image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5");
         INTERNET_EXPLORER_11.setCssAcceptHeader("text/css, */*");
@@ -209,6 +216,8 @@ public class BrowserVersion implements Serializable, Cloneable {
         CHROME.setPlatform("MacIntel");
         CHROME.setCpuClass(null);
         CHROME.setBrowserLanguage("en-US");
+        CHROME.setHeaderNamesOrdered(new String[] {
+                "Host", "Connection", "Accept", "User-Agent", "Accept-Encoding", "Accept-Language" });
         // there are other issues with Chrome; a different productSub, etc.
     }
 
@@ -697,6 +706,22 @@ public class BrowserVersion implements Serializable, Cloneable {
         return buildId_;
     }
 
+    /**
+     * Gets the headers names, so they are sent in the given order (if included in the request).
+     * @return headerNames the header names in ordered manner
+     */
+    public String[] getHeaderNamesOrdered() {
+        return headerNamesOrdered_;
+    }
+
+    /**
+     * Sets the headers names, so they are sent in the given order (if included in the request).
+     * @param headerNames the header names in ordered manner
+     */
+    public void setHeaderNamesOrdered(final String[] headerNames) {
+        this.headerNamesOrdered_ = headerNames;
+    }
+
     @Override
     public String toString() {
         return nickname_;
@@ -728,6 +753,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         clone.cssAcceptHeader_ = getCssAcceptHeader();
         clone.scriptAcceptHeader_ = getScriptAcceptHeader();
         clone.xmlHttpRequestAcceptHeader_ = getXmlHttpRequestAcceptHeader();
+        clone.headerNamesOrdered_ = getHeaderNamesOrdered();
 
         for (final PluginConfiguration pluginConf : getPlugins()) {
             clone.getPlugins().add(pluginConf.clone());

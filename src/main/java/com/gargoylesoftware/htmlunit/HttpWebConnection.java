@@ -329,22 +329,7 @@ public class HttpWebConnection implements WebConnection {
             }
         }
 
-        if (webClient_.getBrowserVersion().hasFeature(HTTP_HEADER_HOST_FIRST)) {
-            final int port = webRequest.getUrl().getPort();
-            final StringBuilder host = new StringBuilder(webRequest.getUrl().getHost());
-            if (port != 80 && port > 0) {
-                host.append(':');
-                host.append(Integer.toString(port));
-            }
-            httpMethod.setHeader(new BasicHeader("Host", host.toString()));
-        }
-        httpMethod.setHeader(new BasicHeader("User-Agent", webClient_.getBrowserVersion().getUserAgent()));
-
-        if (webClient_.getOptions().isDoNotTrackEnabled()) {
-            httpMethod.setHeader(new BasicHeader("DNT", "1"));
-        }
-
-        writeRequestHeadersToHttpMethod(httpMethod, webRequest.getAdditionalHeaders());
+        writeRequestHeadersToHttpMethod(httpMethod, webRequest);
 
         final HttpClientBuilder httpClient = getHttpClientBuilder();
 
@@ -758,8 +743,46 @@ public class HttpWebConnection implements WebConnection {
         return new WebResponse(responseData, request, loadTime);
     }
 
-    private static void writeRequestHeadersToHttpMethod(final HttpUriRequest httpMethod,
-        final Map<String, String> requestHeaders) {
+    private void writeRequestHeadersToHttpMethod(final HttpUriRequest httpMethod, final WebRequest webRequest) {
+        final Map<String, String> requestHeaders = webRequest.getAdditionalHeaders();
+        final int port = webRequest.getUrl().getPort();
+        final StringBuilder host = new StringBuilder(webRequest.getUrl().getHost());
+        if (port != 80 && port > 0) {
+            host.append(':');
+            host.append(Integer.toString(port));
+        }
+
+        final String userAgent = webClient_.getBrowserVersion().getUserAgent();
+        for (final String header : webClient_.getBrowserVersion().getHeaderNamesOrdered()) {
+            if ("Host".equals(header)) {
+                httpMethod.setHeader(new BasicHeader(header, host.toString()));
+            }
+            else if ("User-Agent".equals(header)) {
+                httpMethod.setHeader(new BasicHeader(header, userAgent));
+            }
+            else if ("Accept".equals(header) && requestHeaders.get(header) != null) {
+                httpMethod.setHeader(new BasicHeader(header, requestHeaders.get(header)));
+            }
+            else if ("Accept-Language".equals(header) && requestHeaders.get(header) != null) {
+                httpMethod.setHeader(new BasicHeader(header, requestHeaders.get(header)));
+            }
+            else if ("Accept-Encoding".equals(header) && requestHeaders.get(header) != null) {
+                httpMethod.setHeader(new BasicHeader(header, requestHeaders.get(header)));
+            }
+            else if ("Connection".equals(header) && requestHeaders.get(header) != null) {
+                httpMethod.setHeader(new BasicHeader(header, requestHeaders.get(header)));
+            }
+            else if ("DNT".equals(header) && webClient_.getOptions().isDoNotTrackEnabled()) {
+                httpMethod.setHeader(new BasicHeader(header, "1"));
+            }
+        }
+
+        // not all browser versions have DNT by default as part of getHeaderNamesOrdered()
+        // so we add it again, in case
+        if (webClient_.getOptions().isDoNotTrackEnabled()) {
+            httpMethod.setHeader(new BasicHeader("DNT", "1"));
+        }
+
         synchronized (requestHeaders) {
             for (final Map.Entry<String, String> entry : requestHeaders.entrySet()) {
                 httpMethod.setHeader(entry.getKey(), entry.getValue());
