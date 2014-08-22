@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_HEADER_HOST_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_AUTH_CREDENTIALS;
 
 import java.io.ByteArrayInputStream;

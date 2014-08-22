@@ -36,7 +36,7 @@ public class PrimitiveWebServer {
     private final int port_;
     private final byte[] defaultResponse_;
     private ServerSocket server_;
-    private List<String> requests = new ArrayList<String>();
+    private List<String> requests_ = new ArrayList<String>();
 
     /**
      * Constructs a new SimpleWebServer.
@@ -69,7 +69,7 @@ public class PrimitiveWebServer {
                                 break;
                             }
                         }
-                        requests.add(writer.toString());
+                        requests_.add(writer.toString());
                         final OutputStream out = socket.getOutputStream();
                         out.write(defaultResponse_);
                         out.close();
@@ -98,13 +98,13 @@ public class PrimitiveWebServer {
      * @return the requests
      */
     public List<String> getRequests() {
-        return requests;
+        return requests_;
     }
 
     /**
      * Clears all requests.
      */
     public void clearRequests() {
-        requests.clear();
+        requests_.clear();
     }
 }
