@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import java.net.URL;
 
@@ -26,7 +25,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -140,13 +138,14 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE11 })
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "getElementsByTagNameNS not available")
     public void getElementByTagNameNS_includesHtml() throws Exception {
         final String html
             = "<html><head><title>foo</title>"
             + "<script>\n"
             + "  function doTest(){\n"
+            + "    if (!document.getElementsByTagNameNS) { alert('getElementsByTagNameNS not available'); return; };\n"
             + "    alert(document.getElementsByTagNameNS('*', 'html').length);\n"
             + "  }\n"
             + "</script>"
@@ -162,8 +161,8 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE11 })
-    @Alerts({ "div1", "null", "2", "1" })
+    @Alerts(DEFAULT = { "div1", "null", "2", "1" },
+            IE8 = "importNode not available")
     public void importNode_deep() throws Exception {
         importNode(true);
     }
@@ -172,8 +171,8 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE11 })
-    @Alerts({ "div1", "null", "0" })
+    @Alerts(DEFAULT = { "div1", "null", "0" },
+            IE8 = "importNode not available")
     public void importNode_notDeep() throws Exception {
         importNode(false);
     }
@@ -181,6 +180,7 @@ public class Document2Test extends WebDriverTestCase {
     private void importNode(final boolean deep) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
+            + "    if (!document.importNode) { alert('importNode not available'); return; };\n"
             + "    var node = document.importNode(document.getElementById('div1'), " + deep + ");\n"
             + "    alert(node.id);\n"
             + "    alert(node.parentNode);\n"
@@ -200,8 +200,9 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(FF)
-    @Alerts({"parent", "child" })
+    @Alerts(DEFAULT = {"parent", "child" },
+            IE11 = "evaluate not available",
+            IE8 = "importNode not available")
     public void importNodeWithNamespace() throws Exception {
         final MockWebConnection conn = getMockWebConnection();
         conn.setDefaultResponse(
@@ -211,6 +212,8 @@ public class Document2Test extends WebDriverTestCase {
         final String html = "<html xmlns='http://www.w3.org/1999/xhtml'>"
             + "<head><title>foo</title><script>\n"
             + "function test() {\n"
+            + "   if (!document.importNode) { alert('importNode not available'); return; };\n"
+            + "   if (!document.evaluate) { alert('evaluate not available'); return; };\n"
             + "   var xmlhttp = new XMLHttpRequest();\n"
             + "   xmlhttp.open(\"GET\",\"content.xhtml\",true);\n"
             + "   xmlhttp.send();\n"
@@ -240,8 +243,9 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(FF)
-    @Alerts({"parent", "child", "child3" })
+    @Alerts(DEFAULT = {"parent", "child", "child3" },
+            IE11 = "evaluate not available",
+            IE8 = "importNode not available")
     public void importNodesWithNamespace() throws Exception {
         final MockWebConnection conn = getMockWebConnection();
         conn.setDefaultResponse(
@@ -252,6 +256,8 @@ public class Document2Test extends WebDriverTestCase {
         final String html = "<html xmlns='http://www.w3.org/1999/xhtml'>"
             + "<head><title>foo</title><script>\n"
             + "function test() {\n"
+            + "   if (!document.importNode) { alert('importNode not available'); return; };\n"
+            + "   if (!document.evaluate) { alert('evaluate not available'); return; };\n"
             + "   var xmlhttp = new XMLHttpRequest();\n"
             + "   xmlhttp.open(\"GET\",\"content.xhtml\",true);\n"
             + "   xmlhttp.send();\n"
