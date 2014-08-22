@@ -188,7 +188,6 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
             IE = "Node>XPathResult: exception")
     public void isParentOf_Node_XPathResult() throws Exception {
         isParentOf("Node", "XPathResult");
-
     }
 
     /**
@@ -199,7 +198,6 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
             IE8 = "Element>HTMLElement: exception")
     public void isParentOf_Element_HTMLElement() throws Exception {
         isParentOf("Element", "HTMLElement");
-
     }
 
     /**
