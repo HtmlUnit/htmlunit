@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.ByteArrayOutputStream;
@@ -56,7 +55,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.HttpWebConnection;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -355,7 +353,6 @@ public class HtmlFileInputTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(NONE)
     public void uploadFileWithNonASCIIName_HttpClient() throws Exception {
         final String filename = "\u6A94\u6848\uD30C\uC77C\u30D5\u30A1\u30A4\u30EB\u0645\u0644\u0641.txt";
         final String path = getClass().getClassLoader().getResource(filename).toExternalForm();

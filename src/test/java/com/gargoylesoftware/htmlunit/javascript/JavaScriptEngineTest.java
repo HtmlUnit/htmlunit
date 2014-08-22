@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
@@ -40,7 +40,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -787,8 +786,11 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
     public void activeXObjectWithMap() throws Exception {
+        if (!getBrowserVersion().hasFeature(JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
+            return;
+        }
+
         final Map<String, String> activexToJavaMapping = new HashMap<String, String>();
         activexToJavaMapping.put(
                 "MockActiveXObject",

@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -29,8 +28,6 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 
 /**
  * Tests for {@link WebClient}.
@@ -125,7 +122,6 @@ public class WebClient5Test extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(NONE)
     public void testGetPageWithStringArg() throws Exception {
         final URL[] calledUrls = {null};
         final WebClient wc = new WebClient() {

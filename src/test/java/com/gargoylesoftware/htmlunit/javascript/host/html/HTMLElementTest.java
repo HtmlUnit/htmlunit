@@ -2327,9 +2327,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts(DEFAULT = "rgb(0, 0, 0)",
-            IE11 = "#000000")
+    @Alerts(DEFAULT = "undefined",
+            IE11 = { "[object MSCurrentStyleCSSProperties]", "#000000" },
+            IE8 = { "[object]", "#000000" })
+    @NotYetImplemented(IE)
     public void currentStyle() throws Exception {
         style("currentStyle");
     }
@@ -2338,8 +2339,9 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "undefined",
+            IE11 = { "[object MSStyleCSSProperties]", "" },
+            IE8 = { "[object]", "" })
     public void runtimeStyle() throws Exception {
         style("runtimeStyle");
     }
@@ -2349,7 +2351,10 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    alert(document.getElementById('myDiv')." + styleProperty + ".color);\n"
+            + "    var elem = document.getElementById('myDiv');\n"
+            + "    var style = elem." + styleProperty + ";\n"
+            + "    alert(style);\n"
+            + "    if (style) { alert(style.color); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
