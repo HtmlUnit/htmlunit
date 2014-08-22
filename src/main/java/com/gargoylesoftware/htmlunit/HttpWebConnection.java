@@ -752,28 +752,34 @@ public class HttpWebConnection implements WebConnection {
         }
 
         final String userAgent = webClient_.getBrowserVersion().getUserAgent();
-        for (final String header : webClient_.getBrowserVersion().getHeaderNamesOrdered()) {
-            if ("Host".equals(header)) {
-                httpMethod.setHeader(new BasicHeader(header, host.toString()));
+        final String[] headerNames = webClient_.getBrowserVersion().getHeaderNamesOrdered();
+        if (headerNames != null) {
+            for (final String header : headerNames) {
+                if ("Host".equals(header)) {
+                    httpMethod.setHeader(new BasicHeader(header, host.toString()));
+                }
+                else if ("User-Agent".equals(header)) {
+                    httpMethod.setHeader(new BasicHeader(header, userAgent));
+                }
+                else if ("Accept".equals(header) && requestHeaders.get(header) != null) {
+                    httpMethod.setHeader(new BasicHeader(header, requestHeaders.get(header)));
+                }
+                else if ("Accept-Language".equals(header) && requestHeaders.get(header) != null) {
+                    httpMethod.setHeader(new BasicHeader(header, requestHeaders.get(header)));
+                }
+                else if ("Accept-Encoding".equals(header) && requestHeaders.get(header) != null) {
+                    httpMethod.setHeader(new BasicHeader(header, requestHeaders.get(header)));
+                }
+                else if ("Connection".equals(header) && requestHeaders.get(header) != null) {
+                    httpMethod.setHeader(new BasicHeader(header, requestHeaders.get(header)));
+                }
+                else if ("DNT".equals(header) && webClient_.getOptions().isDoNotTrackEnabled()) {
+                    httpMethod.setHeader(new BasicHeader(header, "1"));
+                }
             }
-            else if ("User-Agent".equals(header)) {
-                httpMethod.setHeader(new BasicHeader(header, userAgent));
-            }
-            else if ("Accept".equals(header) && requestHeaders.get(header) != null) {
-                httpMethod.setHeader(new BasicHeader(header, requestHeaders.get(header)));
-            }
-            else if ("Accept-Language".equals(header) && requestHeaders.get(header) != null) {
-                httpMethod.setHeader(new BasicHeader(header, requestHeaders.get(header)));
-            }
-            else if ("Accept-Encoding".equals(header) && requestHeaders.get(header) != null) {
-                httpMethod.setHeader(new BasicHeader(header, requestHeaders.get(header)));
-            }
-            else if ("Connection".equals(header) && requestHeaders.get(header) != null) {
-                httpMethod.setHeader(new BasicHeader(header, requestHeaders.get(header)));
-            }
-            else if ("DNT".equals(header) && webClient_.getOptions().isDoNotTrackEnabled()) {
-                httpMethod.setHeader(new BasicHeader(header, "1"));
-            }
+        }
+        else {
+            httpMethod.setHeader(new BasicHeader("User-Agent", userAgent));
         }
 
         // not all browser versions have DNT by default as part of getHeaderNamesOrdered()
