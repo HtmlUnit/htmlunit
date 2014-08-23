@@ -14,20 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-import static org.junit.Assert.fail;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
@@ -62,8 +58,9 @@ public class HTMLElement3Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE8)
-    @Alerts(IE8 = { "isHomePage = false", "isHomePage = true", "isHomePage = true", "isHomePage = false" })
+    @Alerts(DEFAULT = { "addBehavior not available", "http://localhost:12345/" },
+            IE8 = { "isHomePage = false", "isHomePage = true", "isHomePage = true",
+                    "isHomePage = false", "http://localhost:12345/second/" })
     public void addBehaviorDefaultHomePage() throws Exception {
         final URL url1 = URL_FIRST;
         final URL url2 = URL_SECOND;
@@ -73,10 +70,12 @@ public class HTMLElement3Test extends SimpleWebTestCase {
             + "    <title>Test</title>\n"
             + "    <script>\n"
             + "    function doTest() {\n"
+            + "       var body = document.body;\n"
+            + "       if (!body.addBehavior) { alert('addBehavior not available'); return }\n"
+
             + "       // Test adding the behavior via script. Note that the URL\n"
             + "       // used to test must be part of the SAME domain as this\n"
             + "       // document, otherwise isHomePage() always returns false.\n"
-            + "       var body = document.body;\n"
             + "       body.addBehavior('#default#homePage');\n"
             + "       var url = '" + url1 + "';\n"
             + "       alert('isHomePage = ' + body.isHomePage(url));\n"
@@ -101,16 +100,15 @@ public class HTMLElement3Test extends SimpleWebTestCase {
             + "</html>";
         final String html2 = "<html></html>";
 
-        final WebClient client = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(url1, html1);
         webConnection.setResponse(url2, html2);
-        client.setWebConnection(webConnection);
-        final HtmlPage page = client.getPage(url1);
-        assertEquals(getExpectedAlerts(), collectedAlerts);
-        assertEquals(url2.toExternalForm(), page.getUrl().toExternalForm());
+
+        final String[] alerts = getExpectedAlerts();
+        setExpectedAlerts(ArrayUtils.subarray(alerts, 0, alerts.length - 1));
+        final HtmlPage page = loadPageWithAlerts(html1, url1, 1000);
+
+        assertEquals(alerts[alerts.length - 1], page.getUrl().toExternalForm());
     }
 
     /**
@@ -119,8 +117,8 @@ public class HTMLElement3Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts(IE = { "Refused", "foo" })
+    @Alerts(DEFAULT = "startDownload not available",
+            IE = { "Refused", "foo" })
     public void addBehaviorDefaultDownload() throws Exception {
         final URL url1 = new URL("http://htmlunit.sourceforge.net/");
         final URL url2 = new URL("http://htmlunit.sourceforge.net/test.txt");
@@ -133,6 +131,8 @@ public class HTMLElement3Test extends SimpleWebTestCase {
             + "    <title>Test</title>\n"
             + "    <script>\n"
             + "    function doTest() {\n"
+            + "      if (!hp.startDownload) { alert('startDownload not available'); return }\n"
+
             + "      try {\n"
             + "        hp.startDownload('http://www.domain2.com/test.txt', callback);\n"
             + "      }\n"
@@ -152,27 +152,11 @@ public class HTMLElement3Test extends SimpleWebTestCase {
             + "  </body>\n"
             + "</html>";
 
-        final WebClient client = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(url1, html1);
         webConnection.setResponse(url2, "foo");
         webConnection.setResponse(url3, "foo2");
-        client.setWebConnection(webConnection);
-        client.getPage(url1);
-
-        final String[] expectedAlerts = getExpectedAlerts();
-        final int waitTime = 50;
-        final int maxTime = 1000;
-        for (int time = 0; time < maxTime; time += waitTime) {
-            if (expectedAlerts.length <= collectedAlerts.size()) {
-                assertEquals(expectedAlerts, collectedAlerts);
-                return;
-            }
-            Thread.sleep(waitTime);
-        }
-        fail("Unable to collect expected alerts within " + maxTime + "ms; collected alerts: " + collectedAlerts);
+        loadPageWithAlerts(html1, url1, 1000);
     }
 
     /**
@@ -361,50 +345,81 @@ public class HTMLElement3Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
+    @Alerts(DEFAULT = { "clicked", "fireEvent not available" },
+            IE8 = { "clicked", "clicked" })
     public void fireEvent_WithoutTemplate() throws Exception {
         final String html =
-            "<html><body>\n"
-            + "<div id='a' onclick='alert(\"clicked\")'>foo</div>\n"
-            + "<div id='b' onmouseover='document.getElementById(\"a\").fireEvent(\"onclick\")'>bar</div>\n"
+            "<html>\n"
+            + "  <head>\n"
+            + "    <title>Test</title>\n"
+            + "    <script>\n"
+            + "    function doTest() {\n"
+            + "      var elem = document.getElementById('a');\n"
+            + "      if (!elem.fireEvent) { alert('fireEvent not available'); return }\n"
+            + "      elem.fireEvent('onclick');\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "<body>\n"
+            + "  <div id='a' onclick='alert(\"clicked\")'>foo</div>\n"
+            + "  <div id='b' onmouseover='doTest()'>bar</div>\n"
             + "</body></html>";
+
         final List<String> actual = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), html, actual);
         page.getHtmlElementById("a").click();
         page.getHtmlElementById("b").mouseOver();
-        final String[] expected = {"clicked", "clicked"};
-        assertEquals(expected, actual);
+        assertEquals(getExpectedAlerts(), actual);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
+    @Alerts(DEFAULT = { "click", "fireEvent not available", "fireEvent not available" },
+            IE8 = { "click", "click", "click" })
     public void fireEvent_WithTemplate() throws Exception {
         final String html =
-            "<html><body>\n"
-            + "<script>var template = document.createEventObject();</script>\n"
-            + "<script>function doAlert(e) { alert(e.type); }</script>\n"
+            "<html>\n"
+            + "  <head>\n"
+            + "    <title>Test</title>\n"
+            + "    <script>\n"
+            + "    function doAlert(e) {\n"
+            + "      alert(e.type);\n"
+            + "    }\n"
+            + "    function doTest() {\n"
+            + "      var elem = document.getElementById('a');\n"
+            + "      if (!elem.fireEvent) { alert('fireEvent not available'); return }\n"
+            + "      elem.fireEvent('onclick');\n"
+            + "    }\n"
+            + "    function doTest2() {\n"
+            + "      var elem = document.getElementById('a');\n"
+            + "      if (!elem.fireEvent) { alert('fireEvent not available'); return }\n"
+            + "      var template = document.createEventObject();\n"
+            + "      elem.fireEvent('onclick', template);\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "<body>\n"
             + "<div id='a' onclick='doAlert(event)'>foo</div>\n"
-            + "<div id='b' onmouseover='document.getElementById(\"a\").fireEvent(\"onclick\")'>bar</div>\n"
-            + "<div id='c' onmouseover='document.getElementById(\"a\").fireEvent(\"onclick\", template)'>baz</div>\n"
+            + "<div id='b' onmouseover='doTest()'>bar</div>\n"
+            + "<div id='c' onmouseover='doTest2()'>baz</div>\n"
             + "</body></html>";
+
         final List<String> actual = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), html, actual);
         page.getHtmlElementById("a").click();
         page.getHtmlElementById("b").mouseOver();
         page.getHtmlElementById("c").mouseOver();
-        final String[] expected = {"click", "click", "click"};
-        assertEquals(expected, actual);
+        assertEquals(getExpectedAlerts(), actual);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({"body1", "button1", "text1", "[object]", "onfocus text2", "text2", "onfocus text1", "onfocus text2" })
+    @Alerts(DEFAULT = { "body1", "body1", "body1", "setActive not available" },
+            IE = {"body1", "button1", "text1", "[object]", "onfocus text2", "text2", "onfocus text1", "onfocus text2" })
     public void setActiveAndFocus() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
@@ -412,29 +427,38 @@ public class HTMLElement3Test extends SimpleWebTestCase {
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final String firstHtml = "<html><head><title>First</title>\n"
-            + "<script>var win2;</script></head>\n"
+        final String firstHtml = "<html>\n"
+            + "<head>\n"
+            + "  <title>First</title>\n"
+            + "  <script>var win2;</script>\n"
+            + "</head>\n"
             + "<body id='body1' onload='alert(document.activeElement.id)'><form name='form1'>\n"
-            + "<input id='text1' onfocus='alert(\"onfocus text1\");win2.focus();'>\n"
-            + "<button id='button1' onClick='win2=window.open(\"" + URL_SECOND + "\");'>Click me</a>\n"
+            + "  <input id='text1' onfocus='alert(\"onfocus text1\"); win2.focus();'>\n"
+            + "  <button id='button1' onClick='win2=window.open(\"" + URL_SECOND + "\");'>Click me</a>\n"
             + "</form></body></html>";
         webConnection.setResponse(URL_FIRST, firstHtml);
 
-        final String secondHtml = "<html><head><title>Second</title></head>\n"
+        final String secondHtml = "<html>\n"
+            + "<head>\n"
+            + "  <title>Second</title>\n"
+            + "</head>\n"
             + "<body id='body2'>\n"
-            + "<input id='text2' onfocus='alert(\"onfocus text2\")'>\n"
-            + "<button id='button2' onClick='doTest();'>Click me</a>\n"
-            + "<script>\n"
+            + "  <input id='text2' onfocus='alert(\"onfocus text2\")'>\n"
+            + "  <button id='button2' onClick='doTest();'>Click me</a>\n"
+            + "  <script>\n"
             + "     function doTest() {\n"
+            + "         var elem = opener.document.getElementById('text1');\n"
             + "         alert(opener.document.activeElement.id);\n"
-            + "         opener.document.getElementById('text1').setActive();\n"
+            + "         if (!elem.setActive) { alert('setActive not available'); return }\n"
+            + "         elem.setActive();\n"
             + "         alert(opener.document.activeElement.id);\n"
             + "         alert(document.activeElement);\n"
             + "         document.getElementById('text2').setActive();\n"
             + "         alert(document.activeElement.id);\n"
             + "         opener.focus();\n"
             + "    }\n"
-            + "</script></body></html>";
+            + "  </script>\n"
+            + "</body></html>";
         webConnection.setResponse(URL_SECOND, secondHtml);
 
         webClient.setWebConnection(webConnection);
