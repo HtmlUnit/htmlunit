@@ -363,9 +363,6 @@ public class CodeStyleTest {
                 if (line.contains("@RunWith(BrowserRunner.class)")) {
                     runWith = true;
                 }
-                if (line.contains("@Browsers(NONE)") || line.contains("@Browsers(Browser.NONE)")) {
-                    browserNone = true;
-                }
                 if (line.contains("@Test")) {
                     browserNone = false;
                 }
