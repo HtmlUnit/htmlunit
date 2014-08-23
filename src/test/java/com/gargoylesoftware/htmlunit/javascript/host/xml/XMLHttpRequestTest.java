@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -37,7 +36,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -885,8 +883,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE8)
-    @Alerts("2")
+    @Alerts(DEFAULT = "selectNodes not available",
+            IE8 = "2")
     public void responseXML_selectNodesIE() throws Exception {
         final String html =
               "<html>\n"
@@ -897,6 +895,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "        var request = " + XHR_INSTANTIATION + ";\n"
             + "        request.open('GET', '" + URL_SECOND + "', false);\n"
             + "        request.send('');\n"
+            + "        if (!request.responseXML.selectNodes) { alert('selectNodes not available'); return }\n"
             + "        alert(request.responseXML.selectNodes('//content').length);\n"
             + "      }\n"
             + "    </script>\n"
