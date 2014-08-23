@@ -104,9 +104,6 @@ public class BrowserRunner extends Suite {
                 }
             }
         }
-        if (BrowserNoneClassRunner.containsTestMethods(klass)) {
-            runners_.add(new BrowserNoneClassRunner(klass));
-        }
     }
 
     @Override
@@ -171,29 +168,6 @@ public class BrowserRunner extends Suite {
 
         /** Firefox 31. */
         FF31,
-
-        /**
-         * Not Browser-specific, it will run only once. Don't use this with other Browsers.
-         * And don't call directly or indirectly {@link WebTestCase#getBrowserVersion()}
-         */
-        NONE;
-    }
-
-    /**
-     * The only {@link Browser}s that are expected to succeed, default value is all.
-     * For example, if you use <tt>@Browsers(Browser.INTERNET_EXPLORER_6)</tt> that means only IE6 is expected
-     * to succeed, but IE7, FF2 and FF3 should fail.
-     */
-    @Retention(RetentionPolicy.RUNTIME)
-    @Target(ElementType.METHOD)
-    public static @interface Browsers {
-
-        /**
-         * The browsers which the case succeeds (but fails with remaining ones).
-         */
-        Browser[] value() default {
-            IE, FF, CHROME
-        };
     }
 
     /**

@@ -27,17 +27,15 @@ import org.junit.runners.model.Statement;
 class BrowserStatement extends Statement {
 
     private Statement next_;
-    private final boolean shouldFail_;
     private final boolean notYetImplemented_;
     private final Method method_;
     private final String browserVersionString_;
     private final int tries_;
 
-    BrowserStatement(final Statement next, final Method method, final boolean shouldFail,
+    BrowserStatement(final Statement next, final Method method,
             final boolean notYetImplemented, final int tries, final String browserVersionString) {
         next_ = next;
         method_ = method;
-        shouldFail_ = shouldFail;
         notYetImplemented_ = notYetImplemented;
         tries_ = tries;
         browserVersionString_ = browserVersionString;
@@ -51,7 +49,7 @@ class BrowserStatement extends Statement {
                 break;
             }
             catch (final Throwable t) {
-                if (shouldFail_ || notYetImplemented_) {
+                if (notYetImplemented_) {
                     throw t;
                 }
                 System.out.println("Failed test "
@@ -67,18 +65,7 @@ class BrowserStatement extends Statement {
         Exception toBeThrown = null;
         try {
             next_.evaluate();
-            if (shouldFail_) {
-                final String errorMessage;
-                if (browserVersionString_ == null) {
-                    errorMessage = method_.getName() + " is marked to fail with "
-                        + browserVersionString_ + ", but succeeds";
-                }
-                else {
-                    errorMessage = method_.getName() + " is marked to fail, but succeeds";
-                }
-                toBeThrown = new Exception(errorMessage);
-            }
-            else if (notYetImplemented_) {
+            if (notYetImplemented_) {
                 final String errorMessage;
                 if (browserVersionString_ == null) {
                     errorMessage = method_.getName() + " is marked as not implemented but already works";
@@ -91,7 +78,7 @@ class BrowserStatement extends Statement {
             }
         }
         catch (final Throwable e) {
-            if (!shouldFail_ && !notYetImplemented_) {
+            if (!notYetImplemented_) {
                 throw e;
             }
         }

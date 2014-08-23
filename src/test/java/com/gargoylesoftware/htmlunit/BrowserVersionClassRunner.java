@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 import static org.junit.Assert.assertTrue;
 
 import java.lang.reflect.Method;
@@ -38,7 +37,6 @@ import org.junit.runners.model.Statement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
@@ -154,9 +152,6 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         if (isNotYetImplemented(method) && !realBrowser_) {
             prefix = "(NYI) ";
         }
-        else if (isExpectedToFail(method)) {
-            prefix = "(failure expected) ";
-        }
         else if (realBrowser_ && isBuggyWebDriver(method)) {
             prefix = "(buggy) ";
         }
@@ -179,13 +174,6 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
             return testMethods_;
         }
         final List<FrameworkMethod> methods = super.computeTestMethods();
-        for (int i = 0; i < methods.size(); i++) {
-            final Method method = methods.get(i).getMethod();
-            final Browsers browsers = method.getAnnotation(Browsers.class);
-            if (browsers != null && browsers.value()[0] == NONE) {
-                methods.remove(i--);
-            }
-        }
         final Comparator<FrameworkMethod> comparator = new Comparator<FrameworkMethod>() {
             public int compare(final FrameworkMethod fm1, final FrameworkMethod fm2) {
                 return fm1.getName().compareTo(fm2.getName());
@@ -199,10 +187,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
     static boolean containsTestMethods(final Class<WebTestCase> klass) {
         for (final Method method : klass.getMethods()) {
             if (method.getAnnotation(Test.class) != null) {
-                final Browsers browsers = method.getAnnotation(Browsers.class);
-                if (browsers == null || browsers.value()[0] != NONE) {
-                    return true;
-                }
+                return true;
             }
         }
         return false;
@@ -293,7 +278,6 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
         //  End of copy & paste from super.methodBlock()  //
 
-        final boolean shouldFail = isExpectedToFail(method);
         final boolean notYetImplemented;
         final int tries;
 
@@ -306,7 +290,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
             tries = getTries(method);
         }
         setAlerts(testCase, method.getMethod());
-        statement = new BrowserStatement(statement, method.getMethod(), shouldFail,
+        statement = new BrowserStatement(statement, method.getMethod(),
                 notYetImplemented, tries, browserVersion_.getNickname());
         return statement;
     }
@@ -341,11 +325,6 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
     private Statement withTestRules(final FrameworkMethod method, final Object target, final Statement statement) {
         final List<TestRule> testRules = getTestRules(target);
         return testRules.isEmpty() ? statement : new RunRules(statement, testRules, describeChild(method));
-    }
-
-    private boolean isExpectedToFail(final FrameworkMethod method) {
-        final Browsers browsers = method.getAnnotation(Browsers.class);
-        return browsers != null && !isDefinedIn(browsers.value());
     }
 
     private boolean isNotYetImplemented(final FrameworkMethod method) {
