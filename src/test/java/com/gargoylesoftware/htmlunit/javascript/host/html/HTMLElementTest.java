@@ -30,7 +30,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -2591,8 +2590,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "true", "true" })
+    @Alerts(DEFAULT = { "true", "true" },
+            FF = "undefined")
     public void uniqueIDFormatIE() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -2601,6 +2600,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "     var id2 = div2.uniqueID;\n"
             + "     //as id2 is retrieved before getting id1, id2 should be < id1;\n"
             + "     var id1 = div1.uniqueID;\n"
+            + "     if (id1 === undefined) { alert('undefined'); return }\n"
             + "     alert(id1.substring(0, 6) == 'ms__id');\n"
             + "     var id1Int = parseInt(id1.substring(6, id1.length));\n"
             + "     var id2Int = parseInt(id2.substring(6, id2.length));\n"
@@ -2759,16 +2759,18 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE8)
-    @Alerts({ "undefined", "x86", "0", "undefined" })
+    @Alerts(DEFAULT = { "undefined", "undefined", "undefined" },
+            IE8 = { "undefined", "x86", "0", "undefined" })
     public void getComponentVersion() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  alert(document.body.cpuClass);\n"
             + "  document.body.style.behavior='url(#default#clientCaps)';\n"
             + "  alert(document.body.cpuClass);\n"
-            + "  var ver=document.body.getComponentVersion('{E5D12C4E-7B4F-11D3-B5C9-0050045C3C96}','ComponentID');\n"
-            + "  alert(ver.length);\n"
+            + "  if (document.body.getComponentVersion) {\n"
+            + "    var ver=document.body.getComponentVersion('{E5D12C4E-7B4F-11D3-B5C9-0050045C3C96}','ComponentID');\n"
+            + "    alert(ver.length);\n"
+            + "  }\n"
             + "  document.body.style.behavior='';\n"
             + "  alert(document.body.cpuClass);\n"
             + "}\n"
@@ -3083,8 +3085,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "div2", "null", "div3", "div4", "div6", "div7", "null" })
+    @Alerts(DEFAULT = { "div2", "null", "div3", "div4", "div6", "div7", "null" },
+            FF = "removeNode not available")
     public void removeNode() throws Exception {
         final String html
             = "<html><head>\n"
@@ -3092,6 +3094,8 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "function test() {\n"
             + "  var div1 = document.getElementById('div1');\n"
             + "  var div2 = document.getElementById('div2');\n"
+            + "  if (!div2.removeNode) { alert('removeNode not available'); return };\n"
+
             + "  alert(div1.firstChild.id);\n"
             + "  alert(div2.removeNode().firstChild);\n"
             + "  alert(div1.firstChild.id);\n"
@@ -3173,51 +3177,65 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE8)
+    @Alerts(DEFAULT = "mergeAttributes not available",
+            IE11 = { "false,false,false,false,false,true,true", "i", "",
+                        "false,false,false,false,false,true,true", "i", "" },
+            IE8 = { "false,false,false,false,false,true,true", "i", "",
+                    "false,false,false,false,false,false,false", "i", "" })
     public void mergeAttributes() throws Exception {
-        mergeAttributes("i2", "false,false,false,false,false,true,true", "i", "",
-            "false,false,false,false,false,false,false", "i", "");
-        mergeAttributes("i2, true", "false,false,false,false,false,true,true", "i", "",
-            "false,false,false,false,false,false,false", "i", "");
-        mergeAttributes("i2, false", "false,false,false,false,false,true,true", "i", "",
-            "false,false,false,false,false,false,false", "i2", "i2");
+        mergeAttributesTest("i2");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE11)
-    public void mergeAttributesIE11() throws Exception {
-        mergeAttributes("i2", "false,false,false,false,false,true,true", "i", "",
-                "false,false,false,false,false,true,true", "i", "");
-        mergeAttributes("i2, true", "false,false,false,false,false,true,true", "i", "",
-            "false,false,false,false,false,true,true", "i", "");
-        mergeAttributes("i2, false", "false,false,false,false,false,true,true", "i", "",
-            "false,false,false,false,false,true,true", "i2", "i2");
+    @Alerts(DEFAULT = "mergeAttributes not available",
+            IE11 = { "false,false,false,false,false,true,true", "i", "",
+                        "false,false,false,false,false,true,true", "i", "" },
+            IE8 = { "false,false,false,false,false,true,true", "i", "",
+                        "false,false,false,false,false,false,false", "i", "" })
+    public void mergeAttributesTrue() throws Exception {
+        mergeAttributesTest("i2, true");
     }
 
-    private void mergeAttributes(final String params, final String... expectedAlerts) throws Exception {
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "mergeAttributes not available",
+            IE11 = { "false,false,false,false,false,true,true", "i", "",
+                        "false,false,false,false,false,true,true", "i2", "i2" },
+            IE8 = { "false,false,false,false,false,true,true", "i", "",
+                        "false,false,false,false,false,false,false", "i2", "i2" })
+    public void mergeAttributesfalse() throws Exception {
+        mergeAttributesTest("i2, false");
+    }
+
+    private void mergeAttributesTest(final String params, final String... expectedAlerts) throws Exception {
         final String html
             = "<input type='text' id='i' />\n"
             + "<input type='text' id='i2' name='i2' style='color:red' onclick='alert(1)' custom1='a' />\n"
             + "<script>\n"
             + "function u(o) { return typeof o == 'undefined'; }\n"
             + "  var i = document.getElementById('i');\n"
-            + "  var i2 = document.getElementById('i2');\n"
-            + "  i2.custom2 = 'b';\n"
-            + "  alert([u(i.type), u(i.id), u(i.name), u(i.style), u(i.onclick),"
-            + "         u(i.custom1), u(i.custom2)].join(','));\n"
-            + "  alert(i.id);\n"
-            + "  alert(i.name);\n"
-            + "  i.mergeAttributes(" + params + ");\n"
-            + "  alert([u(i.type), u(i.id), u(i.name), u(i.style), u(i.onclick),"
-            + "         u(i.custom1), u(i.custom2)].join(','));\n"
-            + "  alert(i.id);\n"
-            + "  alert(i.name);\n"
+            + "  if (i.mergeAttributes) {\n"
+            + "    var i2 = document.getElementById('i2');\n"
+            + "    i2.custom2 = 'b';\n"
+            + "    alert([u(i.type), u(i.id), u(i.name), u(i.style), u(i.onclick),"
+            + "           u(i.custom1), u(i.custom2)].join(','));\n"
+            + "    alert(i.id);\n"
+            + "    alert(i.name);\n"
+            + "    i.mergeAttributes(" + params + ");\n"
+            + "    alert([u(i.type), u(i.id), u(i.name), u(i.style), u(i.onclick),"
+            + "           u(i.custom1), u(i.custom2)].join(','));\n"
+            + "    alert(i.id);\n"
+            + "    alert(i.name);\n"
+            + "  } else {\n"
+            + "    alert('mergeAttributes not available');\n"
+            + "  }\n"
             + "</script>";
 
-        setExpectedAlerts(expectedAlerts);
         loadPageWithAlerts2(html);
     }
 
@@ -5274,9 +5292,9 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ CHROME, IE })
-    @Alerts({ "outside", "1", "middle", "2", "3", "4",
-                "before-begin after-begin inside before-end after-end" })
+    @Alerts(DEFAULT = { "outside", "1", "middle", "2", "3", "4",
+                "before-begin after-begin inside before-end after-end" },
+            FF = "insertAdjacentElement not available")
     public void insertAdjacentElement() throws Exception {
         insertAdjacentElement("beforeend", "afterend", "beforebegin", "afterbegin");
         insertAdjacentElement("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");
@@ -5289,6 +5307,8 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<script>\n"
             + "function test() {\n"
             + "  var oNode = document.getElementById('middle');\n"
+            + "  if (!oNode.insertAdjacentElement) { alert('insertAdjacentElement not available'); return };\n"
+
             + "  oNode.insertAdjacentElement('" + beforeEnd + "', makeElement(3, 'before-end'));\n"
             + "  oNode.insertAdjacentElement('" + afterEnd + "', makeElement(4, ' after-end'));\n"
             + "  oNode.insertAdjacentElement('" + beforeBegin + "', makeElement(1, 'before-begin '));\n"
@@ -5326,20 +5346,22 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ CHROME, IE })
     @Alerts(DEFAULT = "executed",
+            FF = "insertAdjacentElement not available",
             IE8 = "exception-append")
-    // IE8 does not support appendChild for script elements
     public void insertAdjacentElementExecuteJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var newnode = document.createElement('script');\n"
+            // IE8 does not support appendChild for script elements
             + "    try {\n"
             + "      newnode.appendChild(document.createTextNode('alerter();'));\n"
-            + "      var outernode = document.getElementById('myNode');\n"
-            + "      outernode.insertAdjacentElement('afterend', newnode);\n"
-            + "    } catch(e) { alert('exception-append'); }\n"
+            + "    } catch(e) { alert('exception-append'); return }\n"
+
+            + "    var outernode = document.getElementById('myNode');\n"
+            + "    if (!outernode.insertAdjacentElement) { alert('insertAdjacentElement not available'); return };\n"
+            + "    outernode.insertAdjacentElement('afterend', newnode);\n"
             + "  }\n"
             + "  function alerter() {\n"
             + "    alert('executed');\n"
@@ -5354,10 +5376,9 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ CHROME, IE })
     @Alerts(DEFAULT = "executed",
+            FF = "insertAdjacentElement not available",
             IE8 = "exception-append")
-    // IE8 does not support appendChild for script elements
     public void insertAdjacentElementExecuteNestedJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -5365,11 +5386,14 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    var newnode = document.createElement('div');\n"
             + "    var newscript = document.createElement('script');\n"
             + "    newnode.appendChild(newscript);\n"
+            // IE8 does not support appendChild for script elements
             + "    try {\n"
             + "      newscript.appendChild(document.createTextNode('alerter();'));\n"
-            + "      var outernode = document.getElementById('myNode');\n"
-            + "      outernode.insertAdjacentElement('afterend', newnode);\n"
-            + "    } catch(e) { alert('exception-append'); }\n"
+            + "    } catch(e) { alert('exception-append'); return }\n"
+
+            + "    var outernode = document.getElementById('myNode');\n"
+            + "    if (!outernode.insertAdjacentElement) { alert('insertAdjacentElement not available'); return };\n"
+            + "    outernode.insertAdjacentElement('afterend', newnode);\n"
             + "  }\n"
             + "  function alerter() {\n"
             + "    alert('executed');\n"
@@ -5384,10 +5408,9 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ CHROME, IE })
     @Alerts(DEFAULT = "declared",
+            FF = "insertAdjacentElement not available",
             IE8 = "exception-append")
-    // IE8 does not support appendChild for script elements
     public void insertAdjacentElementDeclareJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -5396,6 +5419,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    try {\n"
             + "      newnode.appendChild(document.createTextNode('function tester() { alerter(); }'));\n"
             + "      var outernode = document.getElementById('myNode');\n"
+            + "      if (!outernode.insertAdjacentElement) { alert('insertAdjacentElement not available'); return };\n"
             + "      outernode.insertAdjacentElement('afterend', newnode);\n"
             + "      try {\n"
             + "        tester();\n"
@@ -5415,9 +5439,9 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ CHROME, IE })
     @Alerts(DEFAULT = { "outside", "middle",
                 "before-begin after-begin inside before-end after-end" },
+            FF = "insertAdjacentText not available",
             IE8 = { "outside", "middle",
                 "before-begin after-begininside before-end after-end" })
     @NotYetImplemented(IE8)
@@ -5433,6 +5457,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  var oNode = document.getElementById('middle');\n"
+            + "  if (!oNode.insertAdjacentText) { alert('insertAdjacentText not available'); return };\n"
             + "  oNode.insertAdjacentText('" + beforeEnd + "', 'before-end');\n"
             + "  oNode.insertAdjacentText('" + afterEnd + "', ' after-end');\n"
             + "  oNode.insertAdjacentText('" + beforeBegin + "', 'before-begin ');\n"
