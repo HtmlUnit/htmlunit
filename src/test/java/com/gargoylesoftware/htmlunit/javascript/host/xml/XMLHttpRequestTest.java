@@ -16,10 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -416,8 +414,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ CHROME, FF, IE11 })
-    @Alerts("[object XMLDocument]")
+    @Alerts(DEFAULT = "[object XMLDocument]",
+            IE8 = "[object Object]")
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML_text_xml() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -441,8 +439,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ CHROME, FF, IE11 })
-    @Alerts("[object XMLDocument]")
+    @Alerts(DEFAULT = "[object XMLDocument]",
+            IE8 = "[object Object]")
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML_application_xml() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -466,8 +464,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ CHROME, FF, IE11 })
-    @Alerts("[object XMLDocument]")
+    @Alerts(DEFAULT = "[object XMLDocument]",
+            IE8 = "[object Object]")
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML_application_xhtmlXml() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -491,8 +489,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ CHROME, FF, IE11 })
-    @Alerts("[object XMLDocument]")
+    @Alerts(DEFAULT = "[object XMLDocument]",
+            IE8 = "[object Object]")
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML_application_svgXml() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -519,8 +517,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "1", "someAttr", "someValue", "someAttr=\"someValue\"" },
             IE11 = { "1", "someAttr", "undefined", "undefined" })
-    @Browsers(IE)
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    @NotYetImplemented(FF)
     public void responseXML2() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -868,11 +866,12 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
-    @Alerts("0")
+    @Alerts(DEFAULT = "ActiveXObject not available",
+            IE = "0")
     public void caseSensitivity() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
+            + "  if (!window.ActiveXObject) { alert('ActiveXObject not available'); return }\n"
             + "  var req = new ActiveXObject('MSXML2.XmlHttp');\n"
             + "  alert(req.readyState);\n"
             + "}\n"
@@ -920,9 +919,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ FF, IE11, CHROME })
     @Alerts(DEFAULT = { "null", "myID", "blah", "span", "[object XMLDocument]" },
-        CHROME = { "[object Element]", "myID", "blah", "span", "[object XMLDocument]" })
+            CHROME = { "[object Element]", "myID", "blah", "span", "[object XMLDocument]" },
+            IE8 = "responseXML.getElementById not available")
     public void responseXML_getElementById_FF() throws Exception {
         final String html =
               "<html>\n"
@@ -933,11 +932,15 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "        var request = " + XHR_INSTANTIATION + ";\n"
             + "        request.open('GET', '" + URL_SECOND + "', false);\n"
             + "        request.send('');\n"
-            + "        alert(request.responseXML.getElementById('id1'));\n"
-            + "        alert(request.responseXML.getElementById('myID').id);\n"
-            + "        alert(request.responseXML.getElementById('myID').innerHTML);\n"
-            + "        alert(request.responseXML.getElementById('myID').tagName);\n"
-            + "        alert(request.responseXML.getElementById('myID').ownerDocument);\n"
+            + "        if (request.responseXML.getElementById) {\n"
+            + "          alert(request.responseXML.getElementById('id1'));\n"
+            + "          alert(request.responseXML.getElementById('myID').id);\n"
+            + "          alert(request.responseXML.getElementById('myID').innerHTML);\n"
+            + "          alert(request.responseXML.getElementById('myID').tagName);\n"
+            + "          alert(request.responseXML.getElementById('myID').ownerDocument);\n"
+            + "        } else  {\n"
+            + "          alert('responseXML.getElementById not available');\n"
+            + "        }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1184,11 +1187,12 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(IE)
-    @Alerts("0")
+    @Alerts(DEFAULT = "ActiveXObject not available",
+            IE = "0")
     public void caseSensitivity_activeX() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
+            + "  if (!window.ActiveXObject) { alert('ActiveXObject not available'); return }\n"
             + "  var req = new ActiveXObject('MSXML2.XmlHttp');\n"
             + "  alert(req.reAdYsTaTe);\n"
             + "}\n"
@@ -1219,7 +1223,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(NONE)
     public void isAuthorizedHeader() throws Exception {
         assertTrue(XMLHttpRequest.isAuthorizedHeader("Foo"));
         assertTrue(XMLHttpRequest.isAuthorizedHeader("Content-Type"));
@@ -1275,7 +1278,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(NONE)
     @NotYetImplemented
     public void java_encoding() throws Exception {
         // Chrome and FF return the last apostrophe, see overrideMimeType_charset_all()
