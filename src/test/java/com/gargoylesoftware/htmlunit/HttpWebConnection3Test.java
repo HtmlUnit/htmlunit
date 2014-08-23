@@ -22,7 +22,11 @@ import java.util.Arrays;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
@@ -58,8 +62,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         final WebDriver driver = getWebDriver();
 
         driver.get("http://localhost:" + PORT + "");
-        final String firstRequest = primitiveWebServer_.getRequests().get(0);
-        final String[] headers = firstRequest.split("\\r\\n");
+        final String request = primitiveWebServer_.getRequests().get(0);
+        final String[] headers = request.split("\\r\\n");
         final String[] result = new String[headers.length - 1];
         for (int i = 0; i < result.length; i++) {
             final String header = headers[i + 1];
@@ -77,4 +81,66 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             primitiveWebServer_.stop();
         }
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = { "Host", "Connection", "Accept", "User-Agent", "Referer", "Accept-Encoding", "Accept-Language",
+            "Cookie" },
+        FF = { "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie",
+            "Connection" },
+        IE = { "Accept", "Referer", "Accept-Language", "User-Agent", "Accept-Encoding", "Host", "DNT", "Connection",
+            "Cookie" })
+    @NotYetImplemented
+    public void headers_cookie_referer_cookie() throws Exception {
+        final String htmlResponse = "<a href='2.html'>Click me</a>";
+        final String response = "HTTP/1.1 200 OK\r\n"
+            + "Content-Length: " + htmlResponse.length() + "\r\n"
+            + "Content-Type: text/html\r\n"
+            + "Set-Cookie: name=value\r\n"
+            + "\r\n"
+            + htmlResponse;
+
+        primitiveWebServer_ = new PrimitiveWebServer(PORT, response.getBytes());
+        primitiveWebServer_.start();
+        final WebDriver driver = getWebDriver();
+
+        driver.get("http://localhost:" + PORT + "");
+        driver.findElement(By.linkText("Click me")).click();
+
+        final Wait<WebDriver> wait = new WebDriverWait(driver, 5);
+        wait.until(currentUrlContains("2.html"));
+
+        int index = 1;
+        String request;
+        do {
+            request = primitiveWebServer_.getRequests().get(index++);
+        }
+        while (request.contains("/favicon.ico"));
+
+        final String[] headers = request.split("\\r\\n");
+        final String[] result = new String[headers.length - 1];
+        for (int i = 0; i < result.length; i++) {
+            final String header = headers[i + 1];
+            result[i] = header.substring(0, header.indexOf(':'));
+        }
+        assertEquals(Arrays.asList(getExpectedAlerts()).toString(), Arrays.asList(result).toString());
+    }
+
+    /**
+     * An expectation for checking that the current url contains a case-sensitive substring.
+     *
+     * @param url the fragment of url expected
+     * @return true when the url matches, false otherwise
+     */
+    public static ExpectedCondition<Boolean> currentUrlContains(final String url) {
+        return new ExpectedCondition<Boolean>() {
+            public Boolean apply(final WebDriver driver) {
+                final String currentUrl = driver.getCurrentUrl();
+                return currentUrl != null && currentUrl.contains(url);
+            }
+        };
+    }
+
 }
