@@ -820,6 +820,8 @@ public class HttpWebConnection implements WebConnection {
         }
         else {
             list.add(new StaticHttpRequestInterceptor("User-Agent", userAgent) { });
+            list.add(new RequestAddCookies());
+            list.add(new RequestClientConnControl());
         }
 
         // not all browser versions have DNT by default as part of getHeaderNamesOrdered()
