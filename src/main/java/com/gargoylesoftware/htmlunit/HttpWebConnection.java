@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,8 +50,10 @@ import org.apache.http.ConnectionClosedException;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpEntityEnclosingRequest;
+import org.apache.http.HttpException;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpRequest;
+import org.apache.http.HttpRequestInterceptor;
 import org.apache.http.HttpResponse;
 import org.apache.http.ProtocolException;
 import org.apache.http.auth.AuthScope;
@@ -69,6 +72,14 @@ import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.methods.HttpTrace;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.client.protocol.RequestAcceptEncoding;
+import org.apache.http.client.protocol.RequestAddCookies;
+import org.apache.http.client.protocol.RequestAuthCache;
+import org.apache.http.client.protocol.RequestClientConnControl;
+import org.apache.http.client.protocol.RequestDefaultHeaders;
+import org.apache.http.client.protocol.RequestExpectContinue;
+import org.apache.http.client.protocol.ResponseContentEncoding;
+import org.apache.http.client.protocol.ResponseProcessCookies;
 import org.apache.http.client.utils.URIUtils;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.config.ConnectionConfig;
@@ -95,8 +106,10 @@ import org.apache.http.impl.cookie.IgnoreSpecFactory;
 import org.apache.http.impl.cookie.NetscapeDraftSpecFactory;
 import org.apache.http.impl.cookie.RFC2109SpecFactory;
 import org.apache.http.impl.cookie.RFC2965SpecFactory;
-import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HttpContext;
+import org.apache.http.protocol.HttpProcessorBuilder;
+import org.apache.http.protocol.RequestContent;
+import org.apache.http.protocol.RequestTargetHost;
 
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -328,9 +341,9 @@ public class HttpWebConnection implements WebConnection {
             }
         }
 
-        writeRequestHeadersToHttpMethod(httpMethod, webRequest);
-
         final HttpClientBuilder httpClient = getHttpClientBuilder();
+
+        configureHttpProcessor(httpClient, webRequest);
 
         // Tell the client where to get its credentials from
         // (it may have changed on the webClient since last call to getHttpClientFor(...))
@@ -618,6 +631,26 @@ public class HttpWebConnection implements WebConnection {
         usedOptions_.setProxyConfig(options.getProxyConfig());
     }
 
+    private void configureHttpProcessor(final HttpClientBuilder builder, final WebRequest webRequest)
+        throws IOException {
+        final HttpProcessorBuilder b = HttpProcessorBuilder.create();
+        for (final HttpRequestInterceptor i : getHttpRequestInterceptors(webRequest)) {
+            b.add(i);
+        }
+
+        // These are the headers used in HttpClientBuilder, excluding the already added ones
+        // (RequestClientConnControl and RequestAddCookies)
+        b.addAll(new RequestDefaultHeaders(null),
+                new RequestContent(),
+                new RequestTargetHost(),
+                new RequestExpectContinue());
+        b.add(new RequestAcceptEncoding());
+        b.add(new RequestAuthCache());
+        b.add(new ResponseProcessCookies());
+        b.add(new ResponseContentEncoding());
+        builder.setHttpProcessor(b.build());
+    }
+
     /**
      * Sets the virtual host.
      * @param virtualHost the virtualHost to set
@@ -742,7 +775,8 @@ public class HttpWebConnection implements WebConnection {
         return new WebResponse(responseData, request, loadTime);
     }
 
-    private void writeRequestHeadersToHttpMethod(final HttpUriRequest httpMethod, final WebRequest webRequest) {
+    private List<HttpRequestInterceptor> getHttpRequestInterceptors(final WebRequest webRequest) throws IOException {
+        final List<HttpRequestInterceptor> list = new ArrayList<HttpRequestInterceptor>();
         final Map<String, String> requestHeaders = webRequest.getAdditionalHeaders();
         final int port = webRequest.getUrl().getPort();
         final StringBuilder host = new StringBuilder(webRequest.getUrl().getHost());
@@ -756,41 +790,79 @@ public class HttpWebConnection implements WebConnection {
         if (headerNames != null) {
             for (final String header : headerNames) {
                 if ("Host".equals(header)) {
-                    httpMethod.setHeader(new BasicHeader(header, host.toString()));
+                    list.add(new StaticHttpRequestInterceptor(header, host.toString()) { });
                 }
                 else if ("User-Agent".equals(header)) {
-                    httpMethod.setHeader(new BasicHeader(header, userAgent));
+                    list.add(new StaticHttpRequestInterceptor(header, userAgent) { });
                 }
                 else if ("Accept".equals(header) && requestHeaders.get(header) != null) {
-                    httpMethod.setHeader(new BasicHeader(header, requestHeaders.get(header)));
+                    list.add(new StaticHttpRequestInterceptor(header, requestHeaders.get(header)) { });
                 }
                 else if ("Accept-Language".equals(header) && requestHeaders.get(header) != null) {
-                    httpMethod.setHeader(new BasicHeader(header, requestHeaders.get(header)));
+                    list.add(new StaticHttpRequestInterceptor(header, requestHeaders.get(header)) { });
                 }
                 else if ("Accept-Encoding".equals(header) && requestHeaders.get(header) != null) {
-                    httpMethod.setHeader(new BasicHeader(header, requestHeaders.get(header)));
+                    list.add(new StaticHttpRequestInterceptor(header, requestHeaders.get(header)) { });
                 }
-                else if ("Connection".equals(header) && requestHeaders.get(header) != null) {
-                    httpMethod.setHeader(new BasicHeader(header, requestHeaders.get(header)));
+                else if ("Referer".equals(header) && requestHeaders.get(header) != null) {
+                    list.add(new StaticHttpRequestInterceptor(header, requestHeaders.get(header)) { });
+                }
+                else if ("Connection".equals(header)) {
+                    list.add(new RequestClientConnControl());
+                }
+                else if ("Cookie".equals(header)) {
+                    list.add(new RequestAddCookies());
                 }
                 else if ("DNT".equals(header) && webClient_.getOptions().isDoNotTrackEnabled()) {
-                    httpMethod.setHeader(new BasicHeader(header, "1"));
+                    list.add(new StaticHttpRequestInterceptor(header, "1") { });
                 }
             }
         }
         else {
-            httpMethod.setHeader(new BasicHeader("User-Agent", userAgent));
+            list.add(new StaticHttpRequestInterceptor("User-Agent", userAgent) { });
         }
 
         // not all browser versions have DNT by default as part of getHeaderNamesOrdered()
         // so we add it again, in case
         if (webClient_.getOptions().isDoNotTrackEnabled()) {
-            httpMethod.setHeader(new BasicHeader("DNT", "1"));
+            list.add(new StaticHttpRequestInterceptor("DNT", "1") { });
         }
 
         synchronized (requestHeaders) {
-            for (final Map.Entry<String, String> entry : requestHeaders.entrySet()) {
-                httpMethod.setHeader(entry.getKey(), entry.getValue());
+            list.add(new MultiHttpRequestInterceptor(new HashMap<String, String>(requestHeaders)));
+        }
+        return list;
+    }
+
+    /** We must have a separate class per header, because of org.apache.http.protocol.ChainBuilder. */
+    private abstract static class StaticHttpRequestInterceptor implements HttpRequestInterceptor {
+        private String name_;
+        private String value_;
+
+        StaticHttpRequestInterceptor(final String name, final String value) {
+            this.name_ = name;
+            this.value_ = value;
+        }
+
+        @Override
+        public void process(final HttpRequest request, final HttpContext context)
+            throws HttpException, IOException {
+            request.setHeader(name_, value_);
+        }
+    }
+
+    private static class MultiHttpRequestInterceptor implements HttpRequestInterceptor {
+        private final Map<String, String> map_;
+
+        MultiHttpRequestInterceptor(final Map<String, String> map) {
+            this.map_ = map;
+        }
+
+        @Override
+        public void process(final HttpRequest request, final HttpContext context)
+            throws HttpException, IOException {
+            for (final String key : map_.keySet()) {
+                request.setHeader(key, map_.get(key));
             }
         }
     }

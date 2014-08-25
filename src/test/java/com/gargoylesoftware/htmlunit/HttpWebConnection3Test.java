@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.util.Arrays;
@@ -49,7 +48,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @Alerts(CHROME = { "Host", "Connection", "Accept", "User-Agent", "Accept-Encoding", "Accept-Language" },
         FF = { "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Connection" },
         IE = { "Accept", "Accept-Language", "User-Agent", "Accept-Encoding", "Host", "DNT", "Connection" })
-    @NotYetImplemented({ CHROME, IE })
+    @NotYetImplemented(IE)
     public void headers() throws Exception {
         final String response = "HTTP/1.1 200 OK\r\n"
             + "Content-Length: 2\r\n"
@@ -92,8 +91,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             "Connection" },
         IE = { "Accept", "Referer", "Accept-Language", "User-Agent", "Accept-Encoding", "Host", "DNT", "Connection",
             "Cookie" })
-    @NotYetImplemented
-    public void headers_cookie_referer_cookie() throws Exception {
+    @NotYetImplemented(IE)
+    public void headers_cookie_referer() throws Exception {
         final String htmlResponse = "<a href='2.html'>Click me</a>";
         final String response = "HTTP/1.1 200 OK\r\n"
             + "Content-Length: " + htmlResponse.length() + "\r\n"

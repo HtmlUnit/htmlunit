@@ -176,7 +176,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_24.setVendor("");
         FIREFOX_24.buildId_ = "20140609182057";
         FIREFOX_24.setHeaderNamesOrdered(new String[] {
-            "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Connection" });
+            "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection" });
         FIREFOX_24.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_24.setXmlHttpRequestAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_24.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
@@ -186,7 +186,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_31.setVendor("");
         FIREFOX_31.buildId_ = "20140717132905";
         FIREFOX_31.setHeaderNamesOrdered(new String[] {
-            "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Connection" });
+            "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection" });
         FIREFOX_31.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_31.setXmlHttpRequestAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_31.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
@@ -197,7 +197,8 @@ public class BrowserVersion implements Serializable, Cloneable {
         INTERNET_EXPLORER_11.setBrowserLanguage("en-US");
         INTERNET_EXPLORER_11.setVendor("");
         INTERNET_EXPLORER_11.setHeaderNamesOrdered(new String[] {
-            "Accept", "Accept-Language", "User-Agent", "Accept-Encoding", "Host", "DNT", "Connection" });
+            "Accept", "Referer", "Accept-Language", "User-Agent", "Accept-Encoding", "Host", "DNT", "Connection",
+            "Cookie" });
         INTERNET_EXPLORER_11.setHtmlAcceptHeader("text/html, application/xhtml+xml, */*");
         INTERNET_EXPLORER_11.setImgAcceptHeader("image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5");
         INTERNET_EXPLORER_11.setCssAcceptHeader("text/css, */*");
@@ -217,7 +218,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         CHROME.setCpuClass(null);
         CHROME.setBrowserLanguage("en-US");
         CHROME.setHeaderNamesOrdered(new String[] {
-            "Host", "Connection", "Accept", "User-Agent", "Accept-Encoding", "Accept-Language" });
+            "Host", "Connection", "Accept", "User-Agent", "Referer", "Accept-Encoding", "Accept-Language", "Cookie" });
         // there are other issues with Chrome; a different productSub, etc.
     }
 
