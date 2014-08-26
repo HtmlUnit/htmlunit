@@ -37,6 +37,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Jake Cobb
  */
 @RunWith(BrowserRunner.class)
 public class StorageTest extends WebDriverTestCase {
@@ -199,5 +200,73 @@ public class StorageTest extends WebDriverTestCase {
                 shutDownAll();
             }
         }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "undefined", "null", "extraMethod called", "null" })
+    @NotYetImplemented
+    public void prototypeIsExtensible() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "try {\n"
+            + "  localStorage.clear();\n"
+            + "  alert(localStorage.extraMethod);\n"
+            + "  alert(localStorage.getItem('extraMethod'));\n"
+            + "  Storage.prototype.extraMethod = function() {\n"
+            + "    alert('extraMethod called');\n"
+            + "  };\n"
+            + "  try {\n"
+            + "    localStorage.extraMethod();\n"
+            + "  } catch (e2) {\n"
+            + "    alert('localStorage.extraMethod not callable');\n"
+            + "  }\n"
+            + "  alert(localStorage.getItem('extraMethod'));\n"
+            + "} catch (e) { alert('exception'); }\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "function", "null", "function", "value" },
+            IE = { "function", "null", "string", "value" })
+    @NotYetImplemented
+    public void prototypePropertiesAreVisible() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "try {\n"
+            + "  localStorage.clear();\n"
+            + "  alert(typeof localStorage.hasOwnProperty);\n"
+            + "  alert(localStorage.getItem('hasOwnProperty'));\n"
+            + "  localStorage.setItem('hasOwnProperty', 'value');\n"
+            + "  alert(typeof localStorage.hasOwnProperty);\n"
+            + "  alert(localStorage.getItem('hasOwnProperty'));\n"
+            + "} catch (e) { alert('exception'); }\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "function", "null", "string", "value" },
+            CHROME = { "function", "null", "string", "null" })
+    @NotYetImplemented
+    public void writeToPrototypeProperty() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "try {\n"
+            + "  localStorage.clear();\n"
+            + "  alert(typeof localStorage.hasOwnProperty);\n"
+            + "  alert(localStorage.getItem('hasOwnProperty'));\n"
+            + "  localStorage.hasOwnProperty = 'value';\n"
+            + "  alert(typeof localStorage.hasOwnProperty);\n"
+            + "  alert(localStorage.getItem('hasOwnProperty'));\n"
+            + "} catch (e) { alert('exception'); }\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
     }
 }
