@@ -80,7 +80,11 @@ public class Storage extends SimpleScriptable {
         if (store_ == null || RESERVED_NAMES_.contains(name)) {
             return super.get(name, start);
         }
-        return getItem(name);
+        final Object value = getItem(name);
+        if (value != null) {
+            return value;
+        }
+        return super.get(name, start);
     }
 
     /**

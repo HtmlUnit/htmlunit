@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="FF31, Bugfixes">
+        	<action type="fix" dev="asashour" issue="1639">
+        		JavaScript: fix Storage prototype properties. 
+        	</action>
             <action type="add" dev="asashour">
                 BrowserVersion: introduce .setHeaderNamesOrdered() to guide the order of the request HTTP headers.
             </action>
