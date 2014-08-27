@@ -206,7 +206,8 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "undefined", "null", "extraMethod called", "null" })
+    @Alerts(DEFAULT = { "undefined", "null", "extraMethod called", "null" },
+        IE8 = { "undefined", "null", "exception" })
     public void prototypeIsExtensible() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
