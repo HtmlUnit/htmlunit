@@ -232,9 +232,8 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "function", "null", "function", "value" },
-            IE = { "function", "null", "string", "value" })
-    @NotYetImplemented({ CHROME, FF })
+    @Alerts(DEFAULT = { "function", "null", "function", "value", "1" },
+            IE = { "function", "null", "string", "value", "1" })
     public void prototypePropertiesAreVisible() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -245,6 +244,7 @@ public class StorageTest extends WebDriverTestCase {
             + "  alert(typeof localStorage.hasOwnProperty);\n"
             + "  alert(localStorage.getItem('hasOwnProperty'));\n"
             + "} catch (e) { alert('exception'); }\n"
+            + "  alert(localStorage.length);\n"
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
@@ -253,9 +253,8 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "function", "null", "string", "value" },
-            CHROME = { "function", "null", "string", "null" })
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = { "function", "null", "string", "value", "1" },
+            CHROME = { "function", "null", "string", "null", "0" })
     public void writeToPrototypeProperty() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -265,6 +264,7 @@ public class StorageTest extends WebDriverTestCase {
             + "  localStorage.hasOwnProperty = 'value';\n"
             + "  alert(typeof localStorage.hasOwnProperty);\n"
             + "  alert(localStorage.getItem('hasOwnProperty'));\n"
+            + "  alert(localStorage.length);\n"
             + "} catch (e) { alert('exception'); }\n"
             + "</script></body></html>";
         loadPageWithAlerts2(html);

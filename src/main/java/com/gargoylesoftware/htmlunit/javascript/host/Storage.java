@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STORAGE_GET_FROM_ITEMS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STORAGE_PRESERVED_INCLUDED;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +40,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 public class Storage extends SimpleScriptable {
 
     private static List<String> RESERVED_NAMES_ = Arrays.asList("clear", "key", "getItem", "length", "removeItem",
-        "setItem");
+        "setItem", "constructor", "toString", "toLocaleString", "valueOf", "hasOwnProperty", "propertyIsEnumerable",
+        "isPrototypeOf", "__defineGetter__", "__defineSetter__", "__lookupGetter__", "__lookupSetter__");
 
     private final Map<String, String> store_;
 
@@ -65,11 +69,13 @@ public class Storage extends SimpleScriptable {
      */
     @Override
     public void put(final String name, final Scriptable start, final Object value) {
-        if (store_ == null || RESERVED_NAMES_.contains(name)) {
+        final boolean isReserved = RESERVED_NAMES_.contains(name);
+        if (store_ == null || isReserved) {
             super.put(name, start, value);
-            return;
         }
-        setItem(name, Context.toString(value));
+        if (store_ != null && (!isReserved || getBrowserVersion().hasFeature(JS_STORAGE_PRESERVED_INCLUDED))) {
+            setItem(name, Context.toString(value));
+        }
     }
 
     /**
@@ -77,7 +83,8 @@ public class Storage extends SimpleScriptable {
      */
     @Override
     public Object get(final String name, final Scriptable start) {
-        if (store_ == null || RESERVED_NAMES_.contains(name)) {
+        if (store_ == null
+                || (RESERVED_NAMES_.contains(name) && !getBrowserVersion().hasFeature(JS_STORAGE_GET_FROM_ITEMS))) {
             return super.get(name, start);
         }
         final Object value = getItem(name);
