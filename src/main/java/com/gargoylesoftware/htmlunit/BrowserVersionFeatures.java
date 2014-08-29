@@ -1467,13 +1467,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_SET_INTERVAL_ZERO_TIMEOUT_FORCES_SET_TIMEOUT,
 
-    /** Whether to add to the storage even preserved words. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
-    JS_STORAGE_PRESERVED_INCLUDED,
-
     /** Whether to get any property from the items first. */
     @BrowserFeature(@WebBrowser(IE))
     JS_STORAGE_GET_FROM_ITEMS,
+
+    /** Whether to add to the storage even preserved words. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
+    JS_STORAGE_PRESERVED_INCLUDED,
 
     /** When addressing an item in a stylesheet list using a negative index an exception is thrown. */
     @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 24), @WebBrowser(value = IE, maxVersion = 8) })
