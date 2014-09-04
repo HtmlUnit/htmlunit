@@ -66,6 +66,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection.RawResponseData;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPreformattedText;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -881,7 +882,9 @@ class FixedWebDriverHtmlUnitWebElement extends HtmlUnitWebElement {
     @Override
     public String getText() {
         String text = getElement().asText();
-        text = text.trim();
+        if (!(getElement() instanceof HtmlPreformattedText)) {
+            text = text.trim();
+        }
         text = text.replace('\t', ' ');
         text = text.replace("\r", "");
         return text;

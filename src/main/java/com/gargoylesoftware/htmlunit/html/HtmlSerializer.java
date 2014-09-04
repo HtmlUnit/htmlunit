@@ -187,6 +187,9 @@ class HtmlSerializer {
         else if (node instanceof HtmlUnorderedList) {
             appendHtmlUnorderedList((HtmlUnorderedList) node);
         }
+        else if (node instanceof HtmlPreformattedText) {
+            appendHtmlPreformattedText((HtmlPreformattedText) node);
+        }
         else if (node instanceof HtmlNoScript && node.getPage().getWebClient().getOptions().isJavaScriptEnabled()) {
             return;
         }
@@ -365,6 +368,19 @@ class HtmlSerializer {
             appendChildren(item);
         }
         doAppendBlockSeparator();
+    }
+
+    private void appendHtmlPreformattedText(final HtmlPreformattedText htmlPreformattedText) {
+        if (isVisible(htmlPreformattedText)) {
+            doAppendBlockSeparator();
+            String text = htmlPreformattedText.getTextContent();
+            text = StringUtils.replace(text, "\t", AS_TEXT_TAB);
+            text = StringUtils.replace(text, " ", AS_TEXT_BLANK);
+            text = TEXT_AREA_PATTERN.matcher(text).replaceAll(AS_TEXT_NEW_LINE);
+            text = StringUtils.replace(text, "\r", AS_TEXT_NEW_LINE);
+            doAppend(text);
+            doAppendBlockSeparator();
+        }
     }
 
     private void appendText(final DomText domText) {

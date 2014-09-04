@@ -56,4 +56,12 @@ public class HtmlPreformattedText extends HtmlElement {
     public final String getWidthAttribute() {
         return getAttribute("width");
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isBlock() {
+        return true;
+    }
 }

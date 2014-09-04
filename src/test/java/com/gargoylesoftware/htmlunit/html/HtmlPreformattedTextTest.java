@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
@@ -29,6 +30,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlPreformattedTextTest extends WebDriverTestCase {
@@ -55,5 +57,31 @@ public class HtmlPreformattedTextTest extends WebDriverTestCase {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             assertTrue(HtmlPreformattedText.class.isInstance(page.getHtmlElementById("myId")));
         }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asText() throws Exception {
+        final String html = "<html><head></head><body>\n"
+            + "<pre id='foo'>  hello \t abc</pre>"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        assertEquals("  hello   abc", driver.findElement(By.id("foo")).getText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asTextInsideDiv() throws Exception {
+        final String html = "<html><head></head><body>\n"
+            + "<div id='foo'>start<pre>  hello \t abc </pre>end</div>"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        assertEquals("start\n  hello   abc \nend", driver.findElement(By.id("foo")).getText());
     }
 }
