@@ -63,25 +63,41 @@ public class HtmlPreformattedTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("  hello   abc")
     public void asText() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<pre id='foo'>  hello \t abc</pre>"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        assertEquals("  hello   abc", driver.findElement(By.id("foo")).getText());
+        assertEquals(getExpectedAlerts()[0], driver.findElement(By.id("foo")).getText());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("1\n2\n3\n4")
+    public void asTextDifferentLineBreaks() throws Exception {
+        final String html = "<html><head></head><body>\n"
+            + "<pre id='foo'>1\n2\r\n3\r4</pre>"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        assertEquals(getExpectedAlerts()[0], driver.findElement(By.id("foo")).getText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("start\n  hello   abc \nend")
     public void asTextInsideDiv() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<div id='foo'>start<pre>  hello \t abc </pre>end</div>"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        assertEquals("start\n  hello   abc \nend", driver.findElement(By.id("foo")).getText());
+        assertEquals(getExpectedAlerts()[0], driver.findElement(By.id("foo")).getText());
     }
 }
