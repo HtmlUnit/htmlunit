@@ -22,6 +22,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
@@ -36,6 +37,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  * @author Amit Khanna
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlTextAreaTest extends SimpleWebTestCase {
@@ -229,6 +231,8 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = " foo \n bar <p>html snippet</p>",
+            FF = "foo bar <p>html snippet</p>")
     public void asText() throws Exception {
         final String content
             = "<html><head><title>foo</title></head><body>\n"
@@ -241,14 +245,15 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
         final HtmlForm form = page.getHtmlElementById("form1");
         final HtmlTextArea textArea = form.getTextAreaByName("textArea1");
         assertNotNull(textArea);
-        Assert.assertEquals("White space must be preserved!",
-            " foo " + LINE_SEPARATOR + " bar <p>html snippet</p>" + LINE_SEPARATOR, textArea.asText());
+        Assert.assertEquals(getExpectedAlerts()[0].replace("\n", LINE_SEPARATOR), textArea.asText());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = " foo \n bar <p>html snippet</p>",
+    FF = "foo bar <p>html snippet</p>")
     public void testParentAsText() throws Exception {
         final String content
             = "<html><head><title>foo</title></head><body>\n"
@@ -259,7 +264,7 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(content);
         final HtmlForm form = page.getHtmlElementById("form1");
-        Assert.assertEquals(" foo " + LINE_SEPARATOR + " bar <p>html snippet</p>" + LINE_SEPARATOR, form.asText());
+        Assert.assertEquals(getExpectedAlerts()[0].replace("\n", LINE_SEPARATOR), form.asText());
     }
 
     /**

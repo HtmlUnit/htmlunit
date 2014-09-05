@@ -107,11 +107,11 @@ public class KeyboardEvent2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "keydown:39 keyup:39", FF = "keydown:39,0,39 keypress:39,0,0 keyup:39,0,39 ")
+    @Alerts(IE = "keydown:39 keyup:39", FF = "keydown:39,0,39 keypress:39,0,0 keyup:39,0,39")
     public void dom_vk_right() throws Exception {
         final HtmlPage page = getHtmlPage();
         page.getDocumentElement().type(KeyboardEvent.DOM_VK_RIGHT);
         final String log = page.getHtmlElementById("log").asText();
-        assertTrue(log.contains(getExpectedAlerts()[0]));
+        assertTrue(log, log.contains(getExpectedAlerts()[0]));
     }
 }

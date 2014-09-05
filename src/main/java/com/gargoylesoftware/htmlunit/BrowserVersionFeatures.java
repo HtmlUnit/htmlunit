@@ -518,6 +518,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLSCRIPT_TRIM_TYPE,
 
+    /** asText returns no newlines. */
+    @BrowserFeature(@WebBrowser(FF))
+    HTMLTEXTAREA_REMOVE_NEWLINE_FROM_TEXT,
+
     /** Setting defaultValue updates the value also. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLTEXTAREA_SET_DEFAULT_VALUE_UPDATES_VALUE,

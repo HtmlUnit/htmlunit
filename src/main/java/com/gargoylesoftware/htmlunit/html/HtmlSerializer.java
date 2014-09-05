@@ -14,11 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLTEXTAREA_REMOVE_NEWLINE_FROM_TEXT;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 
 /**
  * Utility to handle conversion from HTML code to string.
@@ -269,9 +273,19 @@ class HtmlSerializer {
     private void appendHtmlTextArea(final HtmlTextArea htmlTextArea) {
         if (isVisible(htmlTextArea)) {
             String text = htmlTextArea.getText();
+
+            final BrowserVersion browser = htmlTextArea.getPage().getWebClient().getBrowserVersion();
+            if (browser.hasFeature(HTMLTEXTAREA_REMOVE_NEWLINE_FROM_TEXT)) {
+                text = TEXT_AREA_PATTERN.matcher(text).replaceAll("");
+                text = StringUtils.replace(text, "\r", "");
+                text = StringUtils.normalizeSpace(text);
+            }
+            else {
+                text = StringUtils.stripEnd(text, null);
+                text = TEXT_AREA_PATTERN.matcher(text).replaceAll(AS_TEXT_NEW_LINE);
+                text = StringUtils.replace(text, "\r", AS_TEXT_NEW_LINE);
+            }
             text = StringUtils.replace(text, " ", AS_TEXT_BLANK);
-            text = TEXT_AREA_PATTERN.matcher(text).replaceAll(AS_TEXT_NEW_LINE);
-            text = StringUtils.replace(text, "\r", AS_TEXT_NEW_LINE);
             doAppend(text);
         }
     }

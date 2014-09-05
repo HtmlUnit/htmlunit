@@ -50,7 +50,7 @@ public class HTMLTextAreaElement2Test extends SimpleWebTestCase {
             + "    log('keypressed: ' + e.value)\n"
             + "  }\n"
             + "  function log(msg) {\n"
-            + "    document.getElementById('log').value += msg + '\\n';\n"
+            + "    document.getElementById('log').value += msg + '; ';\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body>\n"
@@ -65,12 +65,12 @@ public class HTMLTextAreaElement2Test extends SimpleWebTestCase {
         page.setFocusedElement(null); // remove focus on textarea to trigger onchange
 
         final HtmlTextArea log = page.getHtmlElementById("log");
-        final String expectation = "keypressed: " + LINE_SEPARATOR
-            + "keypressed: h" + LINE_SEPARATOR
-            + "keypressed: he" + LINE_SEPARATOR
-            + "keypressed: hel" + LINE_SEPARATOR
-            + "keypressed: hell" + LINE_SEPARATOR
-            + "changed: hello" + LINE_SEPARATOR;
+        final String expectation = "keypressed: ; "
+            + "keypressed: h; "
+            + "keypressed: he; "
+            + "keypressed: hel; "
+            + "keypressed: hell; "
+            + "changed: hello;";
         assertEquals(expectation, log.asText());
     }
 
