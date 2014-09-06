@@ -40,6 +40,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author Katharina Probst
  * @author Amit Manjhi
  * @author Ronald Brill
+ * @author Carsten Steul
  * @see MemoryLeakTest
  */
 class JavaScriptJobManagerImpl implements JavaScriptJobManager {
@@ -166,18 +167,18 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         if (timeoutMillis > 0) {
             long now = System.currentTimeMillis();
             final long end = now + timeoutMillis;
-            while (getJobCount() > 0 && now < end) {
-                try {
-                    synchronized (this) {
+
+            synchronized (this) {
+                while (getJobCount() > 0 && now < end) {
+                    try {
                         wait(end - now);
                     }
-
+                    catch (final InterruptedException e) {
+                        LOG.error("InterruptedException while in waitForJobs", e);
+                    }
                     // maybe a change triggers the wakup; we have to recalculate the
                     // wait time
                     now = System.currentTimeMillis();
-                }
-                catch (final InterruptedException e) {
-                    LOG.error("InterruptedException while in waitForJobs", e);
                 }
             }
         }
@@ -198,33 +199,28 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                   + delayMillis + " (" + latestExecutionTime + ") to finish");
         }
 
-        JavaScriptJob earliestJob;
-        boolean waitingJob;
-        boolean currentJob;
-        synchronized (this) {
-            earliestJob = getEarliestJob();
-            waitingJob = earliestJob != null && earliestJob.getTargetExecutionTime() < latestExecutionTime;
-            currentJob = currentlyRunningJob_ != null
-                && currentlyRunningJob_.getTargetExecutionTime() < latestExecutionTime;
-        }
-
         final long interval = Math.max(40, delayMillis);
-        while (currentJob || waitingJob) {
-            try {
-                synchronized (this) {
+        synchronized (this) {
+            JavaScriptJob earliestJob = getEarliestJob();
+            boolean waitingJob = earliestJob != null && earliestJob.getTargetExecutionTime() < latestExecutionTime;
+            boolean currentJob = currentlyRunningJob_ != null
+                    && currentlyRunningJob_.getTargetExecutionTime() < latestExecutionTime;
+
+            while (currentJob || waitingJob) {
+                try {
                     wait(interval);
                 }
-            }
-            catch (final InterruptedException e) {
-                LOG.error("InterruptedException while in waitForJobsStartingBefore", e);
-            }
-            synchronized (this) {
+                catch (final InterruptedException e) {
+                    LOG.error("InterruptedException while in waitForJobsStartingBefore", e);
+                }
+
                 earliestJob = getEarliestJob();
                 waitingJob = earliestJob != null && earliestJob.getTargetExecutionTime() < latestExecutionTime;
                 currentJob = currentlyRunningJob_ != null
-                    && currentlyRunningJob_.getTargetExecutionTime() < latestExecutionTime;
+                        && currentlyRunningJob_.getTargetExecutionTime() < latestExecutionTime;
             }
         }
+
         final int jobs = getJobCount();
         if (debug) {
             LOG.debug("Finished waiting for all jobs that have target execution time earlier than "

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="FF31, Bugfixes">
+            <action type="fix" dev="rbri" issue="1640 " due-to="Carsten Steul">
+                JavaScript: Simplified synchronization in JavaScriptJobManagerImpl.waitForJobs methods.
+            </action>
             <action type="fix" dev="rbri">
                 Fix asText() of HtmlPreformattedText.
             </action>
