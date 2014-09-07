@@ -1241,6 +1241,38 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "true", "true", "true", "true", "false", "false", "true", "true", "true", "false" },
+            IE8 = { "true", "true", "true", "false", "true", "false", "false", "true", "false", "true" })
+    @NotYetImplemented(IE8)
+    public void widthAuto() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      tester(document.body);\n"
+                + "      tester(document.getElementById('div'));\n"
+                + "    }\n"
+                + "    function tester(el) {\n"
+                + "      alert(el.style.width=='auto');\n"
+                + "      alert(el.clientWidth > 100);\n"
+                + "      alert(el.offsetWidth > 100);\n"
+
+                + "      var style = window.getComputedStyle ? window.getComputedStyle(el, null) : el.currentStyle;\n"
+                + "      alert(/\\d+px/.test(style.width));\n"
+                + "      alert(style.width=='auto');\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body style='width: auto' onload='test();'>\n"
+                + "<div id='div'></div>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

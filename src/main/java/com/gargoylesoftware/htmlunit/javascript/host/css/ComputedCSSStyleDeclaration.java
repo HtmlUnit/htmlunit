@@ -1067,6 +1067,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
                     return getWindowDefaultValue() + "px";
                 }
+                else if ("auto".equals(value)) {
+                    if (getBrowserVersion().hasFeature(CSS_DEFAULT_WIDTH_AUTO)) {
+                        return "auto";
+                    }
+
+                    return getWindowDefaultValue() + "px";
+                }
+
                 return value;
             }
         });
@@ -1159,6 +1167,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 // Inline elements take up however much space is required by their children.
                 width = getContentWidth();
             }
+        }
+        else if ("auto".equals(styleWidth)) {
+            width = windowWidth;
         }
         else {
             // Width explicitly set in the style attribute, or there was no parent to provide guidance.
