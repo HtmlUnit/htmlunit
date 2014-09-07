@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -21,6 +22,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -115,6 +117,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "transparent", "none", "repeat", "10em center", "scroll" },
             IE11 = { "transparent", "none", "repeat", "10em", "scroll" })
+    @NotYetImplemented(Browser.IE11)
     public void backgroundPosition4() throws Exception {
         background("10em center");
     }
@@ -271,7 +274,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(FF = { "transparent", "none", "repeat", "50% 0%", "scroll" },
             IE = { "transparent", "none", "repeat", "undefined", "scroll" },
             IE11 = { "transparent", "none", "repeat", "top", "scroll" })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented(IE)
     public void backgroundCssPosition4() throws Exception {
         backgroundCss("top center");
     }
