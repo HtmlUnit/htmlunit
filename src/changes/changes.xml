@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="FF31, Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: document.importNode() is supported in Chrome.
+            </action>
             <action type="fix" dev="rbri" issue="1642" due-to="Carsten Steul">
                 JavaScript: Improved width calculation if style is set to 'auto'.
             </action>
