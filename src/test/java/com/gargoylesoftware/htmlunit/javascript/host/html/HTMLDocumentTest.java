@@ -610,7 +610,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "string", "Fri, 16 Oct 2009 13:59:47 GMT" },
-            IE = { "string", "Fri, 16 Oct 2009 13:59:47 UTC" })
+            IE8 = { "string", "Fri, 16 Oct 2009 13:59:47 UTC" })
     public void lastModified() throws Exception {
         final List<NameValuePair> responseHeaders = new ArrayList<NameValuePair>();
         // TODO When ran with the IEDriver the IE11 is in a mysterious state after this test and cannot be restored
