@@ -314,7 +314,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object HTMLBodyElement]", "http://localhost:12345/#", "http://localhost:12345/#" },
             IE11 = { "null", "http://localhost:12345/#", "http://localhost:12345/#" },
-            IE8 = { "[object]", "http://localhost:12345/#", "http://localhost:12345/#" })
+            IE8 = { "[object]", "http://localhost:12345/#", "http://localhost:12345/#" },
+            CHROME = { "[object HTMLBodyElement]", "[object HTMLBodyElement]", "[object HTMLBodyElement]" })
     public void activeElement_iframe() throws Exception {
         final String html =
                 "<html>\n"
@@ -369,11 +370,11 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "<p>a & b</p> &amp; \u0162 \" '",
-                    "<p>a & b</p> &amp; \u0162 \" '",
-                    "<div id=\"div\">&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</div>",
-                    "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
-                    "undefined" },
+    @Alerts(DEFAULT = { "<p>a & b</p> &amp; \u0162 \" '",
+                        "<p>a & b</p> &amp; \u0162 \" '",
+                        "<div id=\"div\">&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</div>",
+                        "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
+                        "undefined" },
             IE = { "<p>a & b</p> &amp; \u0162 \" '",
                 "<p>a & b</p> &amp; \u0162 \" '",
                 "<DIV id=div>&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</DIV>",
@@ -407,19 +408,20 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "error", "error", "false", "false", "false" },
-            IE = { "true", "true", "true", "true", "true" })
+    @Alerts(DEFAULT = { "true", "true", "true", "true", "true" },
+            FF = { "error", "error", "false", "false", "false" })
     @NotYetImplemented(FF)
     public void queryCommandEnabled() throws Exception {
         final String html = "<html><body onload='x()'><iframe name='f' id='f'></iframe><script>\n"
             + "function x() {\n"
-            + "var d = window.frames['f'].document;\n"
-            + "try { alert(d.queryCommandEnabled('SelectAll')); } catch(e) { alert('error'); }\n"
-            + "try { alert(d.queryCommandEnabled('sElectaLL')); } catch(e) { alert('error'); }\n"
-            + "d.designMode='on';\n"
-            + "alert(d.queryCommandEnabled('SelectAll'));\n"
-            + "alert(d.queryCommandEnabled('selectall'));\n"
-            + "alert(d.queryCommandEnabled('SeLeCtALL'));}\n"
+            + "  var d = window.frames['f'].document;\n"
+            + "  try { alert(d.queryCommandEnabled('SelectAll')); } catch(e) { alert(e); }\n"
+            + "  try { alert(d.queryCommandEnabled('sElectaLL')); } catch(e) { alert(e); }\n"
+            + "  d.designMode='on';\n"
+            + "  alert(d.queryCommandEnabled('SelectAll'));\n"
+            + "  alert(d.queryCommandEnabled('selectall'));\n"
+            + "  alert(d.queryCommandEnabled('SeLeCtALL'));\n"
+            + "}\n"
             + "</script></body></html>";
 
         loadPageWithAlerts2(html);
