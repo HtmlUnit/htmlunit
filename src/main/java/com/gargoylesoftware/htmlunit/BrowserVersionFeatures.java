@@ -348,7 +348,7 @@ public enum BrowserVersionFeatures {
     GENERATED_63,
 
     /** */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    @BrowserFeature(@WebBrowser(IE))
     HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH,
 
     /** Indicates if HTML5 ruby tags ruby, tp and rt are recognized. */
