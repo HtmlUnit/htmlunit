@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,6 +33,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class UIEventTest extends WebDriverTestCase {
@@ -86,9 +86,9 @@ public class UIEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object Event]", "undefined", "[object MouseEvent]", "1", "[object MouseEvent]", "2" },
-            IE8 = { "[object]", "undefined", "[object]", "undefined", "[object]", "undefined" })
-    @BuggyWebDriver({ IE11, FF31 })
-    // IEDriver has a detail of '3' for the double click but it is '2' when executed manually
+            IE8 = { "[object]", "undefined", "[object]", "undefined", "[object]", "undefined" },
+            IE11 = { "[object Event]", "undefined", "[object PointerEvent]", "0", "[object PointerEvent]", "0" })
+    @BuggyWebDriver(FF31)
     // FF31 has a detail of '1' for the double click but it is '2' when executed manually
     public void detail() throws Exception {
         final String html =
@@ -99,8 +99,8 @@ public class UIEventTest extends WebDriverTestCase {
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='alertDetail(event)'>\n"
-            + "<div id='a' onclick='alertDetail(event)'>abc</div>\n"
-            + "<div id='b' ondblclick='alertDetail(event)'>xyz</div>\n"
+            + "  <div id='a' onclick='alertDetail(event)'>abc</div>\n"
+            + "  <div id='b' ondblclick='alertDetail(event)'>xyz</div>\n"
             + "</body></html>";
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("a")).click();
