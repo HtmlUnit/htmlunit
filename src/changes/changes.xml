@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="2.16" date="???" description="FF31, Bugfixes">
+        <release version="2.16" date="???" description="Java 7, FF31, Bugfixes">
+            <action type="update" dev="asashour">
+                Mandate Java 7 as a minimum requirement.
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: document.importNode() is supported in Chrome.
             </action>
