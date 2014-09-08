@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Marc Guillemot
  * @author Chuck Dumont
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class XMLDocumentTest extends WebDriverTestCase {
@@ -469,8 +470,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "book", "exception /title, exception title" },
-            IE8 = { "book", "0", "1" },
-            IE11 = { "undefined", "exception /title, exception title" })
+            IE8 = { "book", "0", "1" })
+    // IE11 works only if running alone
     public void selectNodes_fromRoot() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
@@ -1003,16 +1004,17 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLDivElement]",
-            IE = "null")
+    @Alerts(DEFAULT = "nodeFromID not available",
+            IE8 = "nodeFromID null")
     public void nodeFromID() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = " + callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
-            + "    if (document.all)\n"
-            + "      alert(doc.nodeFromID('target'));\n"
-            + "    else\n"
-            + "      alert(doc.getElementById('target'));\n"
+            + "    try {\n"
+            + "      alert('nodeFromID ' + doc.nodeFromID('target'));\n"
+            + "    } catch (e) {\n"
+            + "      alert('nodeFromID not available');\n"
+            + "    }"
             + "  }\n"
             + LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
