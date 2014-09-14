@@ -136,8 +136,9 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "3", "0", "3", "8" },
-            IE11 = { "3", "0", "3", "7" })
+    @Alerts(DEFAULT = { "3", "0", "3", "8" },
+            IE11 = { "3", "0", "3", "7" },
+            IE8 = "")
     public void length() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -167,8 +168,9 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "a", "b", "c", "d", "\u000B", "e", "f", "g", "null", "null", "null" },
-            IE11 = { "a", "b", "c", "d", "e", "f", "g", "null", "null", "null" })
+    @Alerts(DEFAULT = { "a", "b", "c", "d", "\u000B", "e", "f", "g", "null", "null", "null" },
+            IE11 = { "a", "b", "c", "d", "e", "f", "g", "null", "null", "null" },
+            IE8 = "")
     public void item() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -306,8 +308,9 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "1", "2", "a \t #" },
-            IE11 = { "1", "2", "a #" })
+    @Alerts(DEFAULT = { "1", "2", "a \t #" },
+            IE11 = { "1", "2", "a #" },
+            IE8 = "")
     public void addWhitespaceAtEnd() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -414,8 +417,9 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "a \t c \n d  e", "4", "3", "a d  e" },
-            IE11 = { "a \t c \n d  e", "4", "3", "a d e" })
+    @Alerts(DEFAULT = { "a \t c \n d  e", "4", "3", "a d  e" },
+            IE11 = { "a \t c \n d  e", "4", "3", "a d e" },
+            IE8 = "")
     public void removeWhitespace() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
