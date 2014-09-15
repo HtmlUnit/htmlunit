@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.ClassUtils;
 import org.apache.http.auth.Credentials;
 import org.apache.http.auth.UsernamePasswordCredentials;
 
@@ -435,7 +434,7 @@ public class WebRequest implements Serializable {
     @Override
     public String toString() {
         final StringBuilder buffer = new StringBuilder();
-        buffer.append(ClassUtils.getShortClassName(getClass()));
+        buffer.append(getClass().getSimpleName());
         buffer.append("[<");
         buffer.append("url=\"" + url_ + '"');
         buffer.append(", " + httpMethod_);

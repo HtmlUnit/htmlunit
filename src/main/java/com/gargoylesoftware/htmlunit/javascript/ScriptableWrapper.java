@@ -24,7 +24,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.ClassUtils;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 
@@ -66,7 +65,7 @@ public class ScriptableWrapper extends ScriptableObject {
         if (NodeList.class.equals(staticType)
                 || NamedNodeMap.class.equals(staticType)) {
             try {
-                jsClassName_ = ClassUtils.getShortClassName(staticType);
+                jsClassName_ = staticType.getSimpleName();
 
                 // is there a better way that would avoid to keep local
                 // information?

@@ -36,7 +36,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 
-import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Attr;
@@ -706,7 +705,7 @@ public abstract class HtmlElement extends DomElement {
         final StringWriter writer = new StringWriter();
         final PrintWriter printWriter = new PrintWriter(writer);
 
-        printWriter.print(ClassUtils.getShortClassName(getClass()));
+        printWriter.print(getClass().getSimpleName());
         printWriter.print("[<");
         printOpeningTagContentAsXml(printWriter);
         printWriter.print(">]");

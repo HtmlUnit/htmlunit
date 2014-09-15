@@ -32,7 +32,6 @@ import java.util.Map;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 
-import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -604,7 +603,7 @@ public class HtmlScript extends HtmlElement {
         final StringWriter writer = new StringWriter();
         final PrintWriter printWriter = new PrintWriter(writer);
 
-        printWriter.print(ClassUtils.getShortClassName(getClass()));
+        printWriter.print(getClass().getSimpleName());
         printWriter.print("[<");
         printOpeningTagContentAsXml(printWriter);
         printWriter.print(">");
