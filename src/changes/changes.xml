@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="Java 7, FF31, Bugfixes">
+            <action type="fix" dev="rbri" issue="1632" >
+                Ignore ConcurrentModificationException thrown while build the toString representation of an object.
+            </action>
             <action type="fix" dev="rbri" issue="1643" >
                 JavaScript: DOMTokenList#remove method remains tail-whitespace when the last token was removed.
             </action>
