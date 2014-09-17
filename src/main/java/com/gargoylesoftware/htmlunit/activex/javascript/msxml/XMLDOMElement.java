@@ -323,45 +323,48 @@ public class XMLDOMElement extends XMLDOMNode {
 
         final DomNode node = getDomNodeOrDie();
         final String description = "XMLDOMElement.getElementsByTagName('" + tagNameTrimmed + "')";
-        if ("*".equals(tagNameTrimmed)) {
-            collection = new XMLDOMNodeList(node, false, description) {
-                @Override
-                protected boolean isMatching(final DomNode node) {
-                    return true;
-                }
-            };
-        }
-        else if ("".equals(tagNameTrimmed)) {
-            collection = new XMLDOMNodeList(node, false, description) {
-                @Override
-                protected List<DomNode> computeElements() {
-                    final List<DomNode> response = new ArrayList<DomNode>();
-                    final DomNode domNode = getDomNodeOrNull();
-                    if (domNode == null) {
-                        return response;
+        switch (tagNameTrimmed) {
+            case "*":
+                collection = new XMLDOMNodeList(node, false, description) {
+                    @Override
+                    protected boolean isMatching(final DomNode node) {
+                        return true;
                     }
-                    for (final DomNode node : getCandidates()) {
-                        if (node instanceof DomText) {
-                            final DomText domText = (DomText) node;
-                            if (!StringUtils.isBlank(domText.getWholeText())) {
+                };
+                break;
+
+            case "":
+                collection = new XMLDOMNodeList(node, false, description) {
+                    @Override
+                    protected List<DomNode> computeElements() {
+                        final List<DomNode> response = new ArrayList<DomNode>();
+                        final DomNode domNode = getDomNodeOrNull();
+                        if (domNode == null) {
+                            return response;
+                        }
+                        for (final DomNode node : getCandidates()) {
+                            if (node instanceof DomText) {
+                                final DomText domText = (DomText) node;
+                                if (!StringUtils.isBlank(domText.getWholeText())) {
+                                    response.add(node);
+                                }
+                            }
+                            else {
                                 response.add(node);
                             }
                         }
-                        else {
-                            response.add(node);
-                        }
+                        return response;
                     }
-                    return response;
-                }
-            };
-        }
-        else {
-            collection = new XMLDOMNodeList(node, false, description) {
-                @Override
-                protected boolean isMatching(final DomNode node) {
-                    return tagNameTrimmed.equals(node.getNodeName());
-                }
-            };
+                };
+                break;
+
+            default:
+                collection = new XMLDOMNodeList(node, false, description) {
+                    @Override
+                    protected boolean isMatching(final DomNode node) {
+                        return tagNameTrimmed.equals(node.getNodeName());
+                    }
+                };
         }
 
         elementsByTagName_.put(tagName, collection);

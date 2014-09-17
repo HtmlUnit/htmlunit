@@ -215,55 +215,62 @@ public class HtmlArea extends HtmlElement {
     boolean containsPoint(final int x, final int y) {
         final String shape = StringUtils.defaultIfEmpty(getShapeAttribute(), "rect").toLowerCase(Locale.ENGLISH);
 
-        if ("default".equals(shape) && getCoordsAttribute() != null) {
-            return true;
-        }
-        else if ("rect".equals(shape) && getCoordsAttribute() != null) {
+        if (getCoordsAttribute() != null) {
             final String[] coords = StringUtils.split(getCoordsAttribute(), ',');
-            final double leftX = Double.parseDouble(coords[0].trim());
-            final double topY = Double.parseDouble(coords[1].trim());
-            final double rightX = Double.parseDouble(coords[2].trim());
-            final double bottomY = Double.parseDouble(coords[3].trim());
-            final Rectangle2D rectangle = new Rectangle2D.Double(leftX, topY,
-                    rightX - leftX + 1, bottomY - topY + 1);
-            if (rectangle.contains(x, y)) {
-                return true;
-            }
-        }
-        else if ("circle".equals(shape) && getCoordsAttribute() != null) {
-            final String[] coords = StringUtils.split(getCoordsAttribute(), ',');
-            final String radiusString = coords[2].trim();
+            switch (shape) {
+                case "rect":
+                    final double leftX = Double.parseDouble(coords[0].trim());
+                    final double topY = Double.parseDouble(coords[1].trim());
+                    final double rightX = Double.parseDouble(coords[2].trim());
+                    final double bottomY = Double.parseDouble(coords[3].trim());
+                    final Rectangle2D rectangle = new Rectangle2D.Double(leftX, topY,
+                            rightX - leftX + 1, bottomY - topY + 1);
+                    if (rectangle.contains(x, y)) {
+                        return true;
+                    }
+                    break;
 
-            final int radius;
-            try {
-                radius = Integer.parseInt(radiusString);
-            }
-            catch (final NumberFormatException nfe) {
-                throw new NumberFormatException("Circle radius of " + radiusString + " is not yet implemented.");
-            }
+                case "circle":
+                    final String radiusString = coords[2].trim();
 
-            final double centerX = Double.parseDouble(coords[0].trim());
-            final double centerY = Double.parseDouble(coords[1].trim());
-            final Ellipse2D ellipse = new Ellipse2D.Double(centerX - (double) radius / 2, centerY - (double) radius / 2,
-                    radius, radius);
-            if (ellipse.contains(x, y)) {
-                return true;
-            }
-        }
-        else if ("poly".equals(shape) && getCoordsAttribute() != null) {
-            final String[] coords = StringUtils.split(getCoordsAttribute(), ',');
-            final GeneralPath path = new GeneralPath();
-            for (int i = 0; i + 1 < coords.length; i += 2) {
-                if (i == 0) {
-                    path.moveTo(Float.parseFloat(coords[i]), Float.parseFloat(coords[i + 1]));
-                }
-                else {
-                    path.lineTo(Float.parseFloat(coords[i]), Float.parseFloat(coords[i + 1]));
-                }
-            }
-            path.closePath();
-            if (path.contains(x, y)) {
-                return true;
+                    final int radius;
+                    try {
+                        radius = Integer.parseInt(radiusString);
+                    }
+                    catch (final NumberFormatException nfe) {
+                        throw new NumberFormatException("Circle radius of " + radiusString
+                                + " is not yet implemented.");
+                    }
+
+                    final double centerX = Double.parseDouble(coords[0].trim());
+                    final double centerY = Double.parseDouble(coords[1].trim());
+                    final Ellipse2D ellipse = new Ellipse2D.Double(centerX - (double) radius / 2,
+                            centerY - (double) radius / 2,
+                            radius, radius);
+                    if (ellipse.contains(x, y)) {
+                        return true;
+                    }
+                    break;
+
+                case "poly":
+                    final GeneralPath path = new GeneralPath();
+                    for (int i = 0; i + 1 < coords.length; i += 2) {
+                        if (i == 0) {
+                            path.moveTo(Float.parseFloat(coords[i]), Float.parseFloat(coords[i + 1]));
+                        }
+                        else {
+                            path.lineTo(Float.parseFloat(coords[i]), Float.parseFloat(coords[i + 1]));
+                        }
+                    }
+                    path.closePath();
+                    if (path.contains(x, y)) {
+                        return true;
+                    }
+                    break;
+
+                case "default":
+                default:
+                    break;
             }
         }
 

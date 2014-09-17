@@ -133,10 +133,7 @@ public class XMLDOMNode extends MSXMLScriptable {
         for ( ; node instanceof DomElement; node = node.getParentNode()) {
             final String value = ((DomElement) node).getAttribute("xml:space");
             if (!value.isEmpty()) {
-                if ("default".equals(value)) {
-                    return Boolean.TRUE;
-                }
-                return Boolean.FALSE;
+                return "default".equals(value);
             }
         }
         return null;
