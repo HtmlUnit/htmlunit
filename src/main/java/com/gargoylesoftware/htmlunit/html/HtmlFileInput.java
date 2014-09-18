@@ -210,7 +210,7 @@ public class HtmlFileInput extends HtmlInput {
         final StringBuilder builder = new StringBuilder();
         for (final String p : paths) {
             if (builder.length() != 0) {
-                builder.append('§');
+                builder.append('\u00A7');
             }
             builder.append(p);
         }
