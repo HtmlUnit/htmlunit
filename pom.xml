@@ -24,8 +24,8 @@
                 <version>3.1</version>
                 <configuration>
                     <!-- Update the links reference in javadoc, PDM and clover plugins when this changes -->
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.6</source>
+                    <target>1.6</target>
                     <testExcludes>
                         <exclude>**/CodeChecker.java</exclude>
                     </testExcludes>
@@ -354,7 +354,7 @@
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>3.2</version>
                 <configuration>
-                    <targetJdk>1.7</targetJdk>
+                    <targetJdk>1.6</targetJdk>
                 </configuration>
             </plugin>
             <plugin>
