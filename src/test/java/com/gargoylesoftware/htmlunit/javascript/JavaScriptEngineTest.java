@@ -1328,4 +1328,58 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             throw Context.throwAsScriptRuntimeEx(e);
         }
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("starting")
+    public void shutdownShouldKill() throws Exception {
+        final String html = "<html>\n"
+                + "<head><title>Test page</title>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    alert('starting');\n"
+                + "    while(true) { Math.sin(3.14) * Math.sin(3.14);}\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='setTimeout(test, 50);'>\n"
+                + "</body></html>";
+
+        final WebClient webClient = getWebClient();
+        final List<String> collectedAlerts = new ArrayList<String>();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        loadPage(html);
+        Thread.sleep(100);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+
+        webClient.closeAllWindows();
+        Thread.sleep(100);
+        assertEquals(0, getJavaScriptThreads().size());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("unload")
+    public void shutdownOnUnload() throws Exception {
+        final String html = "<html>\n"
+                + "<head><title>Test page</title>\n"
+                + "<script>\n"
+                + "  window.onbeforeunload = function(e) {\n"
+                + "    window.open('about:blank');\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body'>\n"
+                + "</body></html>";
+
+        loadPage(html);
+
+        getWebClient().closeAllWindows();
+        assertEquals(0, getJavaScriptThreads().size());
+    }
 }

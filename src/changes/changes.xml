@@ -8,6 +8,14 @@
 
     <body>
         <release version="2.16" date="???" description="Java 7, FF31, Bugfixes">
+            <action type="fix" dev="rbri" >
+                WebClient.closeAllWindows() now kills the thread, if join does not succeed. this might happen,
+                if one of the javascript jobs runs in an endless loop.
+            </action>
+            <action type="fix" dev="rbri" issue="1638" >
+                WebClient.closeAllWindows() now stops the JS thread also of some onunload handler opens new windows or
+                refreshes iframes.
+            </action>
             <action type="fix" dev="rbri" issue="1643" >
                 JavaScript: DOMTokenList#remove method remains tail-whitespace when the last token was removed.
             </action>

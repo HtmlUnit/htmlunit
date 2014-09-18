@@ -89,10 +89,16 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
             // ignore, this doesn't matter, we want to stop it
         }
         if (eventLoopThread_.isAlive()) {
-            LOG.warn("Event loop thread "
-                + eventLoopThread_.getName()
-                + " still alive at "
-                + System.currentTimeMillis());
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("Event loop thread "
+                        + eventLoopThread_.getName()
+                        + " still alive at "
+                        + System.currentTimeMillis());
+                LOG.warn("Event loop thread will be stopped");
+            }
+
+            // Und bist du nicht willig
+            eventLoopThread_.stop();
         }
     }
 

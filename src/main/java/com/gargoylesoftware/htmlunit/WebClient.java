@@ -1737,9 +1737,6 @@ public class WebClient implements Serializable {
      * Closes all opened windows, stopping all background JavaScript processing.
      */
     public void closeAllWindows() {
-        if (scriptEngine_ != null) {
-            scriptEngine_.shutdown();
-        }
         // NB: this implementation is too simple as a new TopLevelWindow may be opened by
         // some JS script while we are closing the others
         final List<TopLevelWindow> topWindows = new ArrayList<TopLevelWindow>(topLevelWindows_);
@@ -1748,6 +1745,13 @@ public class WebClient implements Serializable {
                 topWindow.close();
             }
         }
+
+        // do this after closing the windows, otherwise some unload event might
+        // start a new window that will start the thread again
+        if (scriptEngine_ != null) {
+            scriptEngine_.shutdown();
+        }
+
         //FIXME Depends on the implementation
         if (webConnection_ instanceof HttpWebConnection) {
             ((HttpWebConnection) webConnection_).shutdown();
