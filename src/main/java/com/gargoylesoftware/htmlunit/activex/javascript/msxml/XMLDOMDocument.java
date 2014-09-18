@@ -434,17 +434,15 @@ public class XMLDOMDocument extends XMLDOMNode {
      */
     private Object createElementNS(final String namespaceURI, final String qualifiedName) {
         final org.w3c.dom.Element element;
-        switch (namespaceURI) {
-            case "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul":
-                throw Context.reportRuntimeError("XUL not available");
-
-            case HTMLParser.XHTML_NAMESPACE:
-            case HTMLParser.SVG_NAMESPACE:
-                element = getPage().createElementNS(namespaceURI, qualifiedName);
-                break;
-
-            default:
-                element = new DomElement(namespaceURI, qualifiedName, getPage(), null);
+        if ("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul".equals(namespaceURI)) {
+            throw Context.reportRuntimeError("XUL not available");
+        }
+        else if (HTMLParser.XHTML_NAMESPACE.equals(namespaceURI)
+                || HTMLParser.SVG_NAMESPACE.equals(namespaceURI)) {
+            element = getPage().createElementNS(namespaceURI, qualifiedName);
+        }
+        else {
+            element = new DomElement(namespaceURI, qualifiedName, getPage(), null);
         }
         return getScriptableFor(element);
     }
