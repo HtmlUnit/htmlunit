@@ -25,7 +25,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.ConcurrentModificationException;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
@@ -708,13 +707,7 @@ public abstract class HtmlElement extends DomElement {
 
         printWriter.print(getClass().getSimpleName());
         printWriter.print("[<");
-        try {
-            printOpeningTagContentAsXml(printWriter);
-        }
-        catch (final ConcurrentModificationException e) {
-            // ignore CMExceptions because this is usually debug code
-            printWriter.print("....");
-        }
+        printOpeningTagContentAsXml(printWriter);
         printWriter.print(">]");
         printWriter.flush();
         return writer.toString();

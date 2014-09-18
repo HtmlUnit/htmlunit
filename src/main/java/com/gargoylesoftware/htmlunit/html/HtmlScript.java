@@ -28,7 +28,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUP
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ConcurrentModificationException;
 import java.util.Map;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
@@ -606,13 +605,7 @@ public class HtmlScript extends HtmlElement {
 
         printWriter.print(getClass().getSimpleName());
         printWriter.print("[<");
-        try {
-            printOpeningTagContentAsXml(printWriter);
-        }
-        catch (final ConcurrentModificationException e) {
-            // ignore CMExceptions because this is usually debug code
-            printWriter.print("....");
-        }
+        printOpeningTagContentAsXml(printWriter);
         printWriter.print(">");
         printWriter.print(getScriptCode());
         printWriter.print("]");
