@@ -292,7 +292,7 @@ public class Event extends SimpleScriptable {
 
     private Object srcElement_;        // IE-only writable equivalent of target.
     private Object target_;            // W3C standard read-only equivalent of srcElement.
-    private Object currentTarget_;     // Changes during event capturing and bubbling.
+    private Scriptable currentTarget_; // Changes during event capturing and bubbling.
     private String type_ = "";         // The event type.
     private Object keyCode_;           // Key code for a keypress
     private boolean shiftKey_;         // Exposed here in IE, only in mouse events in FF.
@@ -482,7 +482,7 @@ public class Event extends SimpleScriptable {
      * @return the current event target
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
-    public Object getCurrentTarget() {
+    public Scriptable getCurrentTarget() {
         return currentTarget_;
     }
 
