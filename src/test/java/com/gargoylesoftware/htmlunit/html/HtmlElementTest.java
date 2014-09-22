@@ -48,7 +48,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testElementHasAttributeWith() throws Exception {
+    public void hasAttributeWith() throws Exception {
         final String html = "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -61,7 +61,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testElementHasAttributeNone() throws Exception {
+    public void hasAttributeNone() throws Exception {
         final String html = "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -74,7 +74,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testElementHasAttributeNSWith() throws Exception {
+    public void hasAttributeNSWith() throws Exception {
         final String html
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final HtmlPage page = loadPage(html);
@@ -88,7 +88,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testElementHasAttributeNSNone() throws Exception {
+    public void hasAttributeNSNone() throws Exception {
         final String html = "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -101,7 +101,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testElementGetAttributeWith() throws Exception {
+    public void getAttributeWith() throws Exception {
         final String html = "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -114,7 +114,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testElementGetAttributeNone() throws Exception {
+    public void getAttributeNone() throws Exception {
         final String html = "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -127,7 +127,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testElementGetAttributeNSWith() throws Exception {
+    public void getAttributeNSWith() throws Exception {
         final String html
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final HtmlPage page = loadPage(html);
@@ -141,7 +141,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testElementGetAttributeNSNone() throws Exception {
+    public void getAttributeNSNone() throws Exception {
         final String html = "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(html);
 
@@ -154,7 +154,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testElementGetNamespaceURIWith() throws Exception {
+    public void getNamespaceURIWith() throws Exception {
         final String html
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final HtmlPage page = loadPage(html);
@@ -174,7 +174,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testElementGetNamespaceURINone() throws Exception {
+    public void getNamespaceURINone() throws Exception {
         final String html
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final HtmlPage page = loadPage(html);
@@ -194,7 +194,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testElementGetLocalNameWith() throws Exception {
+    public void getLocalNameWith() throws Exception {
         final String html
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final HtmlPage page = loadPage(html);
@@ -214,7 +214,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testElementGetLocalNameNone() throws Exception {
+    public void getLocalNameNone() throws Exception {
         final String html
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final HtmlPage page = loadPage(html);
@@ -235,7 +235,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testElementGetPrefixWith() throws Exception {
+    public void getPrefixWith() throws Exception {
         final String html
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final HtmlPage page = loadPage(html);
@@ -255,7 +255,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testElementGetPrefixNone() throws Exception {
+    public void getPrefixNone() throws Exception {
         final String html
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final HtmlPage page = loadPage(html);
@@ -275,7 +275,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testElementSetPrefix() throws Exception {
+    public void setPrefix() throws Exception {
         final String html
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final HtmlPage page = loadPage(html);
@@ -297,7 +297,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testElementSetAttributeWith() throws Exception {
+    public void setAttributeWith() throws Exception {
         final String html
             = "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(html);
@@ -312,7 +312,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testElementSetAttributeNone() throws Exception {
+    public void setAttributeNone() throws Exception {
         final String html
             = "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(html);
@@ -327,7 +327,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testElementSetAttributeNSWith() throws Exception {
+    public void setAttributeNSWith() throws Exception {
         final String html
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final HtmlPage page = loadPage(html);
@@ -342,7 +342,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testElementSetAttributeNSNone() throws Exception {
+    public void setAttributeNSNone() throws Exception {
         final String html
             = "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(html);
@@ -357,7 +357,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testElementRemoveAttributeWith() throws Exception {
+    public void removeAttributeWith() throws Exception {
         final String html
             = "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(html);
@@ -372,7 +372,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testElementRemoveAttributeNone() throws Exception {
+    public void removeAttributeNone() throws Exception {
         final String html
             = "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(html);
@@ -387,7 +387,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testElementRemoveAttributeNSWith() throws Exception {
+    public void removeAttributeNSWith() throws Exception {
         final String html
             = "<html><head></head><body xmlns:ns='http://foobar' id='tag' ns:foo='bar'>text</body></html>";
         final HtmlPage page = loadPage(html);
@@ -403,7 +403,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testElementRemoveAttributeNSNone() throws Exception {
+    public void removeAttributeNSNone() throws Exception {
         final String html
             = "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(html);
@@ -417,7 +417,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetEnclosingForm() throws Exception {
+    public void getEnclosingForm() throws Exception {
         final String htmlContent =
             "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
@@ -434,7 +434,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetEnclosing() throws Exception {
+    public void getEnclosing() throws Exception {
         final String htmlContent =
             "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
