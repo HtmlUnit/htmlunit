@@ -115,7 +115,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "false", "true", "a", "a", "b", "b", "b", "c" })
-    public void testClonedNodeAttributes() throws Exception {
+    public void clonedNodeAttributes() throws Exception {
         final String html = "<html><body id='a' title='b'><script>\n"
             + "var x = document.body.cloneNode(true);\n"
             + "alert(document.body==x);\n"
@@ -139,7 +139,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "true", "undefined", "undefined" })
-    public void testTextAndXmlUndefined() throws Exception {
+    public void textAndXmlUndefined() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "    <input type='text' id='textfield1' onfocus='alert(1)'>\n"
