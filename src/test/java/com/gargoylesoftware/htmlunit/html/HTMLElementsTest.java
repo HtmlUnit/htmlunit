@@ -420,9 +420,7 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE8 = "0")
-    @NotYetImplemented(IE8)
+    @Alerts("1")
     public void elementClosesItself_figcaption() throws Exception {
         loadPageWithAlerts2(elementClosesItself("figcaption"));
     }
@@ -472,22 +470,45 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE8 = "0")
-    @NotYetImplemented({ FF, IE11, CHROME })
+    @Alerts("0")
     public void elementClosesItself_frame() throws Exception {
-        loadPageWithAlerts2(elementClosesItself("frame"));
+        final String html =
+                "<html><head>\n"
+                + "<script>\n"
+                + "function test() {\n"
+                + "  var e = document.getElementById('outer');\n"
+                + "  alert(e == null ? e : e.childNodes.length);\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<frameset onload='test()'>\n"
+                + "<frame id='outer'><frame>\n"
+                + "</frameset></html>";
+
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            IE8 = "0")
-    @NotYetImplemented
+    @Alerts(DEFAULT = "2", IE8 = "0")
+    @NotYetImplemented(IE8)
     public void elementClosesItself_frameset() throws Exception {
-        loadPageWithAlerts2(elementClosesItself("frameset"));
+        final String html =
+                "<html><head>\n"
+                + "<script>\n"
+                + "function test() {\n"
+                + "  var e = document.getElementById('outer');\n"
+                + "  alert(e == null ? e : e.childNodes.length);\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<frameset onload='test()' id='outer'>\n"
+                + "<frameset>\n"
+                + "</frameset></html>";
+
+        loadPageWithAlerts2(html);
     }
 
     /**
