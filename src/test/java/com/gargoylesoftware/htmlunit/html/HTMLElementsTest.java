@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
@@ -473,7 +474,7 @@ public class HTMLElementsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "null",
             IE8 = "0")
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented({ FF, IE11, CHROME })
     public void elementClosesItself_frame() throws Exception {
         loadPageWithAlerts2(elementClosesItself("frame"));
     }
@@ -590,7 +591,7 @@ public class HTMLElementsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             IE8 = "null")
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented({ FF, IE11, CHROME })
     public void elementClosesItself_html() throws Exception {
         loadPageWithAlerts2(elementClosesItself("html"));
     }
@@ -826,7 +827,7 @@ public class HTMLElementsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE8 = "0")
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented({ FF, IE11, CHROME })
     public void elementClosesItself_nextid() throws Exception {
         loadPageWithAlerts2(elementClosesItself("nextid"));
     }
@@ -968,7 +969,7 @@ public class HTMLElementsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE8 = "0")
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented({ FF, IE11, CHROME })
     public void elementClosesItself_ruby() throws Exception {
         loadPageWithAlerts2(elementClosesItself("ruby"));
     }
@@ -1069,7 +1070,7 @@ public class HTMLElementsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE8 = "0")
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented({ FF, IE11, CHROME })
     public void elementClosesItself_spacer() throws Exception {
         loadPageWithAlerts2(elementClosesItself("spacer"));
     }
