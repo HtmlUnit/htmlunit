@@ -16,7 +16,9 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
@@ -63,8 +65,17 @@ public final class TestCaseTest {
     }
 
     private void generateTestForHtmlElements(final String relativePath, final String line, final List<String> lines) {
+        final Set<String> tags = new HashSet<String>(HtmlPageTest.HTML_TAGS_);
+        // headtags
+        tags.remove("basefont");
+        tags.remove("title");
+        tags.remove("isindex");
+        // other special tags
+        tags.remove("frame");
+        tags.remove("frameset");
+
         final List<String> allExpectedLines = new ArrayList<String>();
-        for (final String tag : HtmlPageTest.HTML_TAGS_) {
+        for (final String tag : tags) {
             allExpectedLines.add(line.replace("xmp", tag));
         }
         allExpectedLines.removeAll(lines);
