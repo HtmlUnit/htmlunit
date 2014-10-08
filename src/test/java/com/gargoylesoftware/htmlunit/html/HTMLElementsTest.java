@@ -1264,9 +1264,23 @@ public class HTMLElementsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE8 = "0")
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented(IE8)
     public void elementClosesItself_title() throws Exception {
-        loadPageWithAlerts2(elementClosesItself("title"));
+        // title is a bit special, we have to provide at least
+        // one closing tab otherwise title spans to the end of the file
+        final String html =
+                "<html><head>\n"
+                + "<script>\n"
+                + "function test() {\n"
+                + "  var e = document.getElementById('outer');\n"
+                + "  alert(e == null ? e : e.childNodes.length);\n"
+                + "}\n"
+                + "</script>\n"
+                + "<title id='outer'><title></title>\n"
+                + "</head><body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
     }
 
     /**
