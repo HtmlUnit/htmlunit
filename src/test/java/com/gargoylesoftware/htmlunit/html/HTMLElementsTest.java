@@ -186,9 +186,8 @@ public class HTMLElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void elementClosesItself_basefont() throws Exception {
-        loadPageWithAlerts2(elementClosesItself("basefont"));
+        loadPageWithAlerts2(headElementClosesItself("basefont"));
     }
 
     /**
@@ -672,7 +671,7 @@ public class HTMLElementsTest extends WebDriverTestCase {
     @Alerts("0")
     @NotYetImplemented
     public void elementClosesItself_isindex() throws Exception {
-        loadPageWithAlerts2(elementClosesItself("isindex"));
+        loadPageWithAlerts2(headElementClosesItself("isindex"));
     }
 
     /**
