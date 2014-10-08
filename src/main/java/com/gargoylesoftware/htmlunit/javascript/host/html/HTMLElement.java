@@ -113,6 +113,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 import com.gargoylesoftware.htmlunit.html.HtmlWordBreak;
 import com.gargoylesoftware.htmlunit.html.SubmittableElement;
+import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
@@ -1733,7 +1734,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         while (element != null) {
             final CSSStyleDeclaration style = element.getWindow().getComputedStyle(element, null);
             final String display = style.getDisplay();
-            if ("none".equals(display)) {
+            if (DisplayStyle.NONE.value().equals(display)) {
                 return true;
             }
             element = element.getParentHTMLElement();

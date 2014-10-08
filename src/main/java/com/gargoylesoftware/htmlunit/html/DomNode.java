@@ -59,6 +59,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
@@ -720,7 +721,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                     final HTMLElement elem = (HTMLElement) scriptableObject;
                     final CSSStyleDeclaration style = elem.getWindow().getComputedStyle(elem, null);
                     final String display = style.getDisplay();
-                    if ("none".equals(display)) {
+                    if (DisplayStyle.NONE.value().equals(display)) {
                         return false;
                     }
                     styles.addFirst(style);
