@@ -284,4 +284,13 @@ public class HtmlArea extends HtmlElement {
         }
         return DisplayStyle.INLINE;
     }
+
+    @Override
+    public boolean isDisplayed() {
+        final DomNode parent = getParentNode();
+        if (null != parent && parent instanceof HtmlMap) {
+            return parent.isDisplayed();
+        }
+        return false;
+    }
 }

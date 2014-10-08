@@ -461,8 +461,12 @@ public enum BrowserVersionFeatures {
     HTMLIFRAME_IGNORE_SELFCLOSING,
 
     /** Handle blank source like empty. */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(CHROME) })
     HTMLIMAGE_BLANK_SRC_AS_EMPTY,
+
+    /** Mark the image as invisible if no src attribute defined. */
+    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 31), @WebBrowser(CHROME) })
+    HTMLIMAGE_INVISIBLE_NO_SRC,
 
     /** Clicking an image input submits the value as param if defined. */
     @BrowserFeature(@WebBrowser(CHROME))

@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
@@ -68,5 +70,29 @@ public class HtmlMap extends HtmlElement {
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
         return DisplayStyle.INLINE;
+    }
+
+    @Override
+    public boolean isDisplayed() {
+        final HtmlImage image = findReferencingImage();
+        if (null != image) {
+            return image.isDisplayed();
+        }
+        return false;
+    }
+
+    private HtmlImage findReferencingImage() {
+        final HtmlPage page = getHtmlPageOrNull();
+        String name = getNameAttribute();
+        if (null != page && StringUtils.isNotBlank(name)) {
+            name = "#" + name.trim();
+            for (HtmlElement elem : page.getDocumentElement().getHtmlElementsByTagName("img")) {
+                final HtmlImage image = (HtmlImage) elem;
+                if (name.equals(image.getUseMapAttribute())) {
+                    return image;
+                }
+            }
+        }
+        return null;
     }
 }

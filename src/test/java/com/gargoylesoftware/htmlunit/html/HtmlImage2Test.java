@@ -22,6 +22,8 @@ import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -59,7 +61,7 @@ public class HtmlImage2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2", IE = "1")
+    @Alerts(DEFAULT = "2", IE = "1", CHROME = "1")
     public void loadImageBlankSource() throws Exception {
         loadImage("src=' '");
     }
@@ -104,5 +106,70 @@ public class HtmlImage2Test extends WebDriverTestCase {
 
         loadPage2(html);
         assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void isDisplayed() throws Exception {
+        isDisplayed("src='img.jpg'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "true", FF31 = "false", CHROME = "false")
+    public void isDisplayedNoSource() throws Exception {
+        isDisplayed("");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "true", CHROME = "false")
+    public void isDisplayedEmptySource() throws Exception {
+        isDisplayed("src=''");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "true", CHROME = "false")
+    public void isDisplayedBlankSource() throws Exception {
+        isDisplayed("src=' '");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void isDisplayedInvalidSource() throws Exception {
+        isDisplayed("src='unknown.gif'");
+    }
+
+    private void isDisplayed(final String src) throws Exception {
+        final InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img");
+        final byte[] directBytes = IOUtils.toByteArray(is);
+        is.close();
+
+        final URL urlImage = new URL(URL_FIRST, "img.jpg");
+        final List<NameValuePair> emptyList = Collections.emptyList();
+        getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+
+        final String html = "<html><head><title>Page A</title></head>\n"
+                + "<body>\n"
+                + "  <img id='myImg' " + src + " >\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final boolean displayed = driver.findElement(By.id("myImg")).isDisplayed();
+        assertEquals(Boolean.parseBoolean(getExpectedAlerts()[0]), displayed);
     }
 }
