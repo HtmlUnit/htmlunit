@@ -8,6 +8,11 @@
 
     <body>
         <release version="2.16" date="???" description="Java 7, FF31, Bugfixes">
+            <action type="add" dev="rbri" issue="1637">
+                AppletConfirmHandler added. It is possible to define this handler for a web client.
+                This handler is called before an applet code download. By implementing this handler you
+                can restrict the download per applet (like the confirm dialog in the browser).
+            </action>
             <action type="fix" dev="rbri" >
                 Method isDisplayed() now works correct for HtmlImage, HtmlMap and HtmlArea.
             </action>
