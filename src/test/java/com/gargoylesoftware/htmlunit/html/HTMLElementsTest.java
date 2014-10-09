@@ -40,6 +40,52 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class HTMLElementsTest extends WebDriverTestCase {
 
     private String elementClosesItself(final String tagName) {
+        if ("basefont".equals(tagName) || "isindex".equals(tagName)) {
+            return headElementClosesItself(tagName);
+        }
+
+        if ("title".equals(tagName)) {
+            // title is a bit special, we have to provide at least
+            // one closing tab otherwise title spans to the end of the file
+            return "<html><head>\n"
+                    + "<script>\n"
+                    + "function test() {\n"
+                    + "  var e = document.getElementById('outer');\n"
+                    + "  alert(e == null ? e : e.childNodes.length);\n"
+                    + "}\n"
+                    + "</script>\n"
+                    + "<title id='outer'><title></title>\n"
+                    + "</head><body onload='test()'>\n"
+                    + "</body></html>";
+        }
+
+        if ("frame".equals(tagName)) {
+            return "<html><head>\n"
+                    + "<script>\n"
+                    + "function test() {\n"
+                    + "  var e = document.getElementById('outer');\n"
+                    + "  alert(e == null ? e : e.childNodes.length);\n"
+                    + "}\n"
+                    + "</script>\n"
+                    + "</head>\n"
+                    + "<frameset onload='test()'>\n"
+                    + "<frame id='outer'><frame>\n"
+                    + "</frameset></html>";
+        }
+        if ("frameset".equals(tagName)) {
+            return "<html><head>\n"
+                    + "<script>\n"
+                    + "function test() {\n"
+                    + "  var e = document.getElementById('outer');\n"
+                    + "  alert(e == null ? e : e.childNodes.length);\n"
+                    + "}\n"
+                    + "</script>\n"
+                    + "</head>\n"
+                    + "<frameset onload='test()' id='outer'>\n"
+                    + "<frameset>\n"
+                    + "</frameset></html>";
+        }
+
         return "<html><head>\n"
                 + "<script>\n"
                 + "function test() {\n"
@@ -177,17 +223,8 @@ public class HTMLElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    public void headElementClosesItself_basefont() throws Exception {
-        loadPageWithAlerts2(headElementClosesItself("basefont"));
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
     public void elementClosesItself_basefont() throws Exception {
-        loadPageWithAlerts2(headElementClosesItself("basefont"));
+        loadPageWithAlerts2(elementClosesItself("basefont"));
     }
 
     /**
@@ -471,20 +508,7 @@ public class HTMLElementsTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void elementClosesItself_frame() throws Exception {
-        final String html =
-                "<html><head>\n"
-                + "<script>\n"
-                + "function test() {\n"
-                + "  var e = document.getElementById('outer');\n"
-                + "  alert(e == null ? e : e.childNodes.length);\n"
-                + "}\n"
-                + "</script>\n"
-                + "</head>\n"
-                + "<frameset onload='test()'>\n"
-                + "<frame id='outer'><frame>\n"
-                + "</frameset></html>";
-
-        loadPageWithAlerts2(html);
+        loadPageWithAlerts2(elementClosesItself("frame"));
     }
 
     /**
@@ -494,20 +518,7 @@ public class HTMLElementsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "2", IE8 = "0")
     @NotYetImplemented(IE8)
     public void elementClosesItself_frameset() throws Exception {
-        final String html =
-                "<html><head>\n"
-                + "<script>\n"
-                + "function test() {\n"
-                + "  var e = document.getElementById('outer');\n"
-                + "  alert(e == null ? e : e.childNodes.length);\n"
-                + "}\n"
-                + "</script>\n"
-                + "</head>\n"
-                + "<frameset onload='test()' id='outer'>\n"
-                + "<frameset>\n"
-                + "</frameset></html>";
-
-        loadPageWithAlerts2(html);
+        loadPageWithAlerts2(elementClosesItself("frameset"));
     }
 
     /**
@@ -669,9 +680,8 @@ public class HTMLElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void elementClosesItself_isindex() throws Exception {
-        loadPageWithAlerts2(headElementClosesItself("isindex"));
+        loadPageWithAlerts2(elementClosesItself("isindex"));
     }
 
     /**
@@ -1287,21 +1297,7 @@ public class HTMLElementsTest extends WebDriverTestCase {
             IE8 = "0")
     @NotYetImplemented(IE8)
     public void elementClosesItself_title() throws Exception {
-        // title is a bit special, we have to provide at least
-        // one closing tab otherwise title spans to the end of the file
-        final String html =
-                "<html><head>\n"
-                + "<script>\n"
-                + "function test() {\n"
-                + "  var e = document.getElementById('outer');\n"
-                + "  alert(e == null ? e : e.childNodes.length);\n"
-                + "}\n"
-                + "</script>\n"
-                + "<title id='outer'><title></title>\n"
-                + "</head><body onload='test()'>\n"
-                + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        loadPageWithAlerts2(elementClosesItself("title"));
     }
 
     /**
