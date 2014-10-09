@@ -26,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.htmlunit.AppletConfirmHandler;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -196,7 +197,9 @@ public class HtmlApplet extends HtmlElement {
 
     /**
      * Gets the applet referenced by this tag. Instantiates it if necessary.
-     * @return the applet
+     *
+     * @return the applet or null, if the installed AppletConfirmHandler
+     * prohibits this applet
      * @throws IOException in case of problem
      */
     public Applet getApplet() throws IOException {
@@ -241,9 +244,15 @@ public class HtmlApplet extends HtmlElement {
             }
         }
 
+        final HtmlPage page = (HtmlPage) getPage();
+        final WebClient webclient = page.getWebClient();
+
+        final AppletConfirmHandler handler = webclient.getAppletConfirmHandler();
+        if (null != handler && !handler.confirm(this)) {
+            return;
+        }
+
         if (null == applet_) {
-            final HtmlPage page = (HtmlPage) getPage();
-            final WebClient webclient = page.getWebClient();
 
             String appletClassName = getCodeAttribute();
             if (appletClassName.endsWith(".class")) {

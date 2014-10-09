@@ -21,6 +21,7 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.AppletConfirmHandler;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
@@ -351,5 +352,71 @@ public class HtmlAppletTest extends SimpleWebTestCase {
 
         final HtmlApplet htmlApplet = (HtmlApplet) applets.get(0);
         htmlApplet.getApplet();
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void appletConfirmHandler() throws Exception {
+        final URL url = getClass().getResource("/applets/simpleAppletDoIt.html");
+
+        final WebClient webClient = getWebClient();
+        final List<String> collectedStatus = new ArrayList<String>();
+        final StatusHandler statusHandler = new StatusHandler() {
+            public void statusMessageChanged(final Page page, final String message) {
+                collectedStatus.add(message);
+            }
+        };
+        webClient.setStatusHandler(statusHandler);
+        webClient.getOptions().setAppletEnabled(true);
+
+        webClient.setAppletConfirmHandler(new AppletConfirmHandler() {
+            @Override
+            public boolean confirm(final HtmlApplet applet) {
+                assertEquals("simpleAppletDoIt.jar", applet.getArchiveAttribute());
+                return true;
+            }
+        });
+
+        final HtmlPage page = webClient.getPage(url);
+        final DomNodeList<DomElement> applets = page.getElementsByTagName("applet");
+        assertEquals(1, applets.size());
+
+        final HtmlApplet htmlApplet = (HtmlApplet) applets.get(0);
+        assertTrue(htmlApplet.getApplet() != null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void appletConfirmHandlerPermit() throws Exception {
+        final URL url = getClass().getResource("/applets/simpleAppletDoIt.html");
+
+        final WebClient webClient = getWebClient();
+        final List<String> collectedStatus = new ArrayList<String>();
+        final StatusHandler statusHandler = new StatusHandler() {
+            public void statusMessageChanged(final Page page, final String message) {
+                collectedStatus.add(message);
+            }
+        };
+        webClient.setStatusHandler(statusHandler);
+        webClient.getOptions().setAppletEnabled(true);
+
+        webClient.setAppletConfirmHandler(new AppletConfirmHandler() {
+            @Override
+            public boolean confirm(final HtmlApplet applet) {
+                assertEquals("simpleAppletDoIt.jar", applet.getArchiveAttribute());
+                return false;
+            }
+        });
+
+        final HtmlPage page = webClient.getPage(url);
+        final DomNodeList<DomElement> applets = page.getElementsByTagName("applet");
+        assertEquals(1, applets.size());
+
+        final HtmlApplet htmlApplet = (HtmlApplet) applets.get(0);
+        assertTrue(htmlApplet.getApplet() == null);
     }
 }

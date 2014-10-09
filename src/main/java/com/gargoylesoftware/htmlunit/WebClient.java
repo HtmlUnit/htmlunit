@@ -143,6 +143,7 @@ public class WebClient implements Serializable {
     private PromptHandler promptHandler_;
     private StatusHandler statusHandler_;
     private AttachmentHandler attachmentHandler_;
+    private AppletConfirmHandler appletConfirmHandler_;
     private AjaxController ajaxController_ = new AjaxController();
 
     private BrowserVersion browserVersion_;
@@ -1612,6 +1613,22 @@ public class WebClient implements Serializable {
      */
     public AttachmentHandler getAttachmentHandler() {
         return attachmentHandler_;
+    }
+
+    /**
+     * Sets the applet confirm handler.
+     * @param handler the new applet confirm handler handler
+     */
+    public void setAppletConfirmHandler(final AppletConfirmHandler handler) {
+        appletConfirmHandler_ = handler;
+    }
+
+    /**
+     * Returns the current applet confirm handler.
+     * @return the current applet confirm handler
+     */
+    public AppletConfirmHandler getAppletConfirmHandler() {
+        return appletConfirmHandler_;
     }
 
     /**
