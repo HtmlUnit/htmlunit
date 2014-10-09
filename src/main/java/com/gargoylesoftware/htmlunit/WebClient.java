@@ -1207,9 +1207,7 @@ public class WebClient implements Serializable {
      * @throws IOException if an IO problem occurs
      * @return the WebResponse
      */
-    public WebResponse loadWebResponse(final WebRequest webRequest)
-        throws IOException {
-
+    public WebResponse loadWebResponse(final WebRequest webRequest) throws IOException {
         final WebResponse response;
         final String protocol = webRequest.getUrl().getProtocol();
         if ("about".equals(protocol)) {
