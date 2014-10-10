@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="Java 7, FF31, Bugfixes">
+            <action type="fix" dev="rbri" issue="1647" due-to="Carsten Steul">
+                JavaScript: Support event parameter for event handlers created implicit by setAttribute.
+            </action>
             <action type="add" dev="rbri" issue="1637">
                 AppletConfirmHandler added. It is possible to define this handler for a web client.
                 This handler is called before an applet code download. By implementing this handler you

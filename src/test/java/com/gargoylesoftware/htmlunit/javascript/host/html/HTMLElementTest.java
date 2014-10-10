@@ -416,7 +416,8 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    password.setAttribute('onfocus', \"alert('onfocus2');\");\n"
             + "    password.setAttribute('onblur', \"alert('onblur2');\");\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "  <form>\n"
             + "    <input type='text' id='login' name='login'>\n"
             + "    <input type='password' id='password' name='password'>\n"
@@ -454,7 +455,8 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  function inform(msg) {\n"
             + "    alert(msg);\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "  <form>\n"
             + "    <input type='text' id='login' name='login'>\n"
             + "  </form>\n"
@@ -489,7 +491,8 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  function inform(msg) {\n"
             + "    alert(msg);\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "  <form>\n"
             + "    <input type='text' id='login' name='login'>\n"
             + "  </form>\n"
@@ -524,7 +527,8 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  function inform(msg) {\n"
             + "    alert(msg);\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "  <form>\n"
             + "    <input type='text' id='login' name='login'>\n"
             + "  </form>\n"
@@ -533,6 +537,38 @@ public class HTMLElementTest extends WebDriverTestCase {
         final WebDriver webDriver = loadPage2(html);
 
         webDriver.findElement(new ById("login")).click();
+
+        verifyAlerts(DEFAULT_WAIT_TIME, getExpectedAlerts(), webDriver);
+    }
+    
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "focus", "click", "blur" },
+            IE8 = { })
+    public void setAttribute_eventHandlerEventArgument() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text = document.getElementById('login');\n"
+
+            + "    text.setAttribute('onclick', 'alert(event.type);');\n"
+            + "    text.setAttribute('onFocus', 'alert(event.type);');\n"
+            + "    text.setAttribute('ONBLUR', 'alert(event.type);');\n"
+
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input type='text' id='login' name='login'>\n"
+            + "    <input type='password' id='password' name='password'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver webDriver = loadPage2(html);
+
+        webDriver.findElement(new ById("login")).click();
+        webDriver.findElement(new ById("password")).click();
 
         verifyAlerts(DEFAULT_WAIT_TIME, getExpectedAlerts(), webDriver);
     }
@@ -556,7 +592,8 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  function inform(msg) {\n"
             + "    alert(msg);\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "  <form>\n"
             + "    <input type='text' id='login' name='login' onclick='inform(\"onclick\")'>\n"
             + "  </form>\n"
@@ -2591,6 +2628,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "true" },
+            CHROME = "undefined",
             FF = "undefined")
     public void uniqueIDFormatIE() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -3086,6 +3124,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "div2", "null", "div3", "div4", "div6", "div7", "null" },
+            CHROME = "removeNode not available",
             FF = "removeNode not available")
     public void removeNode() throws Exception {
         final String html

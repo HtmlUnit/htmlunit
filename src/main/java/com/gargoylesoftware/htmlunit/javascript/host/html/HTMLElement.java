@@ -690,16 +690,15 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         name = fixAttributeName(name);
         getDomNodeOrDie().setAttribute(name, value);
 
-        // FF: call corresponding event handler setOnxxx if found
+        // call corresponding event handler setOnxxx if found
         if (getBrowserVersion().hasFeature(JS_SET_ATTRIBUTE_SUPPORTS_EVENT_HANDLERS) && !name.isEmpty()) {
             name = name.toLowerCase(Locale.ENGLISH);
             if (name.startsWith("on")) {
                 try {
                     name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
                     final Method method = getClass().getMethod("set" + name, METHOD_PARAMS_OBJECT);
-                    final String source = "function(){" + value + "}";
-                    method.invoke(this, new Object[] {
-                            Context.getCurrentContext().compileFunction(getWindow(), source, "", 0, null)});
+                    method.invoke(this, new Object[] { new EventHandler(getDomNodeOrDie(), name.substring(2),
+                            value) });
                 }
                 catch (final NoSuchMethodException e) {
                     //silently ignore
