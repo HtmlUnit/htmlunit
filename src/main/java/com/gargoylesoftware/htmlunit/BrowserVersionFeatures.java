@@ -719,6 +719,14 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_CSSRULELIST_DONT_ENUM_ITEM,
 
+    /** css style object is named CSS2Properties. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_CSSSTYLEDECLARATION_CSS2PROPERTIES,
+
+    /** css style object is named MSStyleCSSProperties. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_CSSSTYLEDECLARATION_MSSTYLECSSPROPERTIES,
+
     /** <code>Date.toLocaleDateString()</code> returns a short form (d.M.yyyy). */
     @BrowserFeature(@WebBrowser(CHROME))
     JS_DATE_LOCALE_DATE_SHORT,
