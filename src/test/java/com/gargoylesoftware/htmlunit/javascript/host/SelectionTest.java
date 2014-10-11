@@ -90,31 +90,93 @@ public class SelectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {
             "1:null/0/null/0/true/undefined/0/",
-            "2:s2/0/s2/1/false/undefined/1/xyz/xyz",
-            "3:s2/0/s3/1/false/undefined/1/xyzfoo/xyzfoo",
-            "4:s2/0/s3/2/false/undefined/1/xyzfoo---/xyzfoo---",
-            "5:s2/0/s3/3/false/undefined/1/xyzfoo---foo/xyzfoo---foo",
-            "6:s3/3/s3/3/true/undefined/1//",
-            "7:s1/0/s1/1/false/undefined/1/abc/abc",
-            "8:s1/0/s1/1/false/undefined/1/abc/abc",
-            "9:s2/1/s3/1/false/undefined/2/abcfoo/abc/foo",
-            "10:s2/1/s3/3/false/undefined/2/abcfoo---foo/abc/foo---foo",
-            "11:s1/0/s1/0/true/undefined/1//",
-            "12:null/0/null/0/true/undefined/0/" }, IE8 = { })
-    public void aLittleBitOfEverything() throws Exception {
+            "2:s2/0/s2/1/false/undefined/1/xyz/xyz" },
+            IE8 = { })
+    public void selectAllChildren() throws Exception {
         final String jsSnippet = ""
             + "    alertSelection(selection);\n"
             + "    selection.selectAllChildren(s2);\n"
+            + "    alertSelection(selection);\n";
+
+        tester(jsSnippet);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {
+            "1:s2/0/s2/1/false/undefined/1/xyz/xyz",
+            "2:s2/0/s3/1/false/undefined/1/xyzfoo/xyzfoo",
+            "3:s2/0/s3/2/false/undefined/1/xyzfoo---/xyzfoo---",
+            "4:s2/0/s3/3/false/undefined/1/xyzfoo---foo/xyzfoo---foo" },
+            IE8 = { },
+            IE11 = { "1:s2/0/s2/1/false/undefined/1/xyz/xyz",
+                        "selection.extend not available" })
+    public void extend() throws Exception {
+        final String jsSnippet = ""
+            + "    selection.selectAllChildren(s2);\n"
             + "    alertSelection(selection);\n"
-            + "    selection.extend(s3, 1);\n"
+            + "    if (selection.extend) {\n"
+            + "      selection.extend(s3, 1);\n"
+            + "      alertSelection(selection);\n"
+            + "      selection.extend(s3, 2);\n"
+            + "      alertSelection(selection);\n"
+            + "      selection.extend(s3, 3);\n"
+            + "      alertSelection(selection);\n"
+            + "    } else { alert('selection.extend not available'); }\n";
+
+        tester(jsSnippet);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {
+            "1:s2/0/s2/1/false/undefined/1/xyz/xyz",
+            "2:s2/0/s2/0/true/undefined/1//" },
+            IE8 = { })
+    public void collapseToStart() throws Exception {
+        final String jsSnippet = ""
+            + "    selection.selectAllChildren(s2);\n"
             + "    alertSelection(selection);\n"
-            + "    selection.extend(s3, 2);\n"
-            + "    alertSelection(selection);\n"
-            + "    selection.extend(s3, 3);\n"
+            + "    selection.collapseToStart();\n"
+            + "    alertSelection(selection);\n";
+
+        tester(jsSnippet);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {
+            "1:s2/0/s2/1/false/undefined/1/xyz/xyz",
+            "2:s2/1/s2/1/true/undefined/1//" },
+            IE8 = { })
+    public void collapseToEnd() throws Exception {
+        final String jsSnippet = ""
+            + "    selection.selectAllChildren(s2);\n"
             + "    alertSelection(selection);\n"
             + "    selection.collapseToEnd();\n"
-            + "    alertSelection(selection);\n"
-            + "    selection.selectAllChildren(s1);\n"
+            + "    alertSelection(selection);\n";
+
+        tester(jsSnippet);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {
+            "1:null/0/null/0/true/undefined/0/",
+            "2:null/0/null/0/true/undefined/0/",
+            "3:s2/1/s3/1/false/undefined/1/foo/foo",
+            "4:null/0/null/0/true/undefined/0/" },
+            IE8 = { })
+    public void range() throws Exception {
+        final String jsSnippet = ""
             + "    alertSelection(selection);\n"
             + "    var range = document.createRange();\n"
             + "    range.setStart(s2, 1);\n"
@@ -122,14 +184,10 @@ public class SelectionTest extends WebDriverTestCase {
             + "    alertSelection(selection);\n"
             + "    selection.addRange(range);\n"
             + "    alertSelection(selection);\n"
-            + "    selection.extend(s3, 3);\n"
-            + "    alertSelection(selection);\n"
-            + "    selection.collapseToStart();\n"
-            + "    alertSelection(selection);\n"
             + "    selection.removeAllRanges();\n"
             + "    alertSelection(selection);\n";
 
-        aLittleBitOfEverything(jsSnippet);
+        tester(jsSnippet);
     }
 
     /**
@@ -155,12 +213,16 @@ public class SelectionTest extends WebDriverTestCase {
             + "    selection.addRange(range);\n"
             + "    alert(selection.getRangeAt(0) == selection.getRangeAt(0));\n";
 
-        aLittleBitOfEverything(jsSnippet);
+        tester(jsSnippet);
     }
 
-    private void aLittleBitOfEverything(final String jsSnippet) throws Exception {
-        final String html = "<html><body onload='test()'>\n"
-            + "<span id='s1'>abc</span><span id='s2'>xyz</span><span id='s3'>foo<span>---</span>foo</span>\n"
+    private void tester(final String jsSnippet) throws Exception {
+        final String html = "<html>\n"
+            + "<body onload='test()'>\n"
+            + "  <span id='s1'>abc</span>"
+            +   "<span id='s2'>xyz</span>"
+            +   "<span id='s3'>foo<span>---</span>foo</span>\n"
+
             + "<script>\n"
             + "  var x = 1;\n"
             + "  function test() {\n"
@@ -171,8 +233,11 @@ public class SelectionTest extends WebDriverTestCase {
             + "    var s1 = document.getElementById('s1');\n"
             + "    var s2 = document.getElementById('s2');\n"
             + "    var s3 = document.getElementById('s3');\n"
-            + jsSnippet
+            + "    try {\n"
+                        + jsSnippet
+            + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
+
             + "  function alertSelection(s) {\n"
             + "    var anchorNode = (s.anchorNode && s.anchorNode.id ? s.anchorNode.id : s.anchorNode);\n"
             + "    var focusNode = (s.focusNode && s.focusNode.id ? s.focusNode.id : s.focusNode);\n"
