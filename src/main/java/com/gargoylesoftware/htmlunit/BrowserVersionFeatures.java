@@ -1428,7 +1428,7 @@ public enum BrowserVersionFeatures {
     JS_SELECTION_CONTENT_IS_DEFAULT_VALUE,
 
     /** Only one selection per page. */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_SELECTION_ONLY_ONE_PER_PAGE,
 
     /** Javascript selectorText property returns selectors in uppercase. */
