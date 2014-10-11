@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class SelectionTest extends WebDriverTestCase {
@@ -189,22 +190,38 @@ public class SelectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "", "", "null", "null" }, IE8 = { }, DEFAULT = { "" , "", "", "" })
+    @Alerts(DEFAULT = { "" , "null-0" , "", "null-0" , "", "null-0" , "", "null-0" },
+            FF = { "", "null-0" , "", "null-0" , "null", "null" },
+            IE8 = { })
     public void getSelection_display() throws Exception {
-        final String html = "<html><body onload='test()'>\n"
-            + "<iframe id='frame1' src='about:blank'></iframe>\n"
-            + "<iframe id='frame2' src='about:blank' style='display: none'></iframe>\n"
-            + "<div style='display: none'><iframe id='frame3' src='about:blank'></iframe></div>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    if (window.getSelection) {\n"
-            + "      alert(window.getSelection());\n"
-            + "      alert(document.getElementById('frame1').contentWindow.getSelection());\n"
-            + "      alert(document.getElementById('frame2').contentWindow.getSelection());\n"
-            + "      alert(document.getElementById('frame3').contentWindow.getSelection());\n"
+        final String html = "<html>\n"
+            + "<body onload='test()'>\n"
+            + "  <iframe id='frame1' src='about:blank'></iframe>\n"
+            + "  <iframe id='frame2' src='about:blank' style='display: none'></iframe>\n"
+            + "  <div style='display: none'>\n"
+            + "    <iframe id='frame3' src='about:blank'></iframe>\n"
+            + "  </div>\n"
+
+            + "  <script>\n"
+            + "    function sel(win) {\n"
+            + "      if (win.getSelection) {\n"
+            + "        var range = win.getSelection();\n"
+            + "        alert(range);\n"
+            + "        if (range) {\n"
+            + "          alert(range.anchorNode + '-' + range.rangeCount);\n"
+            + "        }\n"
+            + "      }\n"
             + "    }\n"
-            + "  }\n"
-            + "</script>\n"
+
+            + "    function test() {\n"
+            + "      if (window.getSelection) {\n"
+            + "        sel(window);\n"
+            + "        sel(document.getElementById('frame1').contentWindow);\n"
+            + "        sel(document.getElementById('frame2').contentWindow);\n"
+            + "        sel(document.getElementById('frame3').contentWindow);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }

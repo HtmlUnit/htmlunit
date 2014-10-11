@@ -1681,6 +1681,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_WINDOW_POST_MESSAGE_SYNCHRONOUS,
 
+    /** Window.getSelection returns null, if the window is not visible. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_WINDOW_SELECTION_NULL_IF_INVISIBLE,
+
     /** Supports XML. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_XML,
