@@ -540,7 +540,7 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         verifyAlerts(DEFAULT_WAIT_TIME, getExpectedAlerts(), webDriver);
     }
-    
+
     /**
      * @throws Exception if the test fails
      */

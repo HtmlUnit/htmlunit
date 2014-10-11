@@ -697,8 +697,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 try {
                     name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
                     final Method method = getClass().getMethod("set" + name, METHOD_PARAMS_OBJECT);
-                    method.invoke(this, new Object[] { new EventHandler(getDomNodeOrDie(), name.substring(2),
-                            value) });
+                    method.invoke(this, new Object[] {new EventHandler(getDomNodeOrDie(), name.substring(2), value)});
                 }
                 catch (final NoSuchMethodException e) {
                     //silently ignore
