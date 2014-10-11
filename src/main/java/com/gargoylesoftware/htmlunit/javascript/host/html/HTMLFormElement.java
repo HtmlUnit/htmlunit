@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORMFIELD_REA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_ACTION_EXPANDURL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_DISPATCHEVENT_SUBMITS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_REJECT_INVALID_ENCODING;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_SUBMIT_FORCES_DOWNLOAD;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_USABLE_AS_FUNCTION;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -334,7 +335,8 @@ public class HTMLFormElement extends HTMLElement implements Function {
             // download should be done ASAP, response will be loaded into a window later
             final WebRequest request = getHtmlForm().getWebRequest(null);
             final String target = page.getResolvedTarget(getTarget());
-            webClient.download(page.getEnclosingWindow(), target, request, "JS form.submit()");
+            final boolean forceDownload = webClient.getBrowserVersion().hasFeature(JS_FORM_SUBMIT_FORCES_DOWNLOAD);
+            webClient.download(page.getEnclosingWindow(), target, request, forceDownload, "JS form.submit()");
         }
     }
 

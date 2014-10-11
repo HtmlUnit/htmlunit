@@ -1087,6 +1087,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_FORM_REJECT_INVALID_ENCODING,
 
+    /** Calling form.submit() twice forces double download. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_FORM_SUBMIT_FORCES_DOWNLOAD,
+
     /** Support for document.formName('inputName'). */
     @BrowserFeature(@WebBrowser(IE))
     JS_FORM_USABLE_AS_FUNCTION,

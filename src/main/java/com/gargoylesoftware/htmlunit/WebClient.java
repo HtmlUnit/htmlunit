@@ -1980,10 +1980,11 @@ public class WebClient implements Serializable {
      * @param requestingWindow the window from which the request comes
      * @param target the name of the target window
      * @param request the request to perform
+     * @param forceLoad if true always load the request even if there is already the same in the queue
      * @param description information about the origin of the request. Useful for debugging.
      */
     public void download(final WebWindow requestingWindow, final String target,
-        final WebRequest request, final String description) {
+        final WebRequest request, final boolean forceLoad, final String description) {
         final WebWindow win = resolveWindow(requestingWindow, target);
         final URL url = request.getUrl();
         boolean justHashJump = false;
@@ -2011,8 +2012,10 @@ public class WebClient implements Serializable {
                 }
                 final WebRequest otherRequest = loadJob.request_;
                 final URL otherUrl = otherRequest.getUrl();
+
                 // TODO: investigate but it seems that IE considers query string too but not FF
-                if (url.getPath().equals(otherUrl.getPath()) // fail fast
+                if (!forceLoad
+                    && url.getPath().equals(otherUrl.getPath()) // fail fast
                     && url.toString().equals(otherUrl.toString())
                     && request.getRequestParameters().equals(otherRequest.getRequestParameters())
                     && StringUtils.equals(request.getRequestBody(), otherRequest.getRequestBody())) {

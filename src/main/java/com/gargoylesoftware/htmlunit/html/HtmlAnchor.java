@@ -124,7 +124,7 @@ public class HtmlAnchor extends HtmlElement {
         }
         htmlPage.getWebClient().download(htmlPage.getEnclosingWindow(),
                 htmlPage.getResolvedTarget(getTargetAttribute()),
-                webRequest, "Link click");
+                webRequest, false, "Link click");
     }
 
     /**

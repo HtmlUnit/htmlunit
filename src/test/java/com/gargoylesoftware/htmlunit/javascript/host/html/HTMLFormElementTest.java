@@ -960,12 +960,14 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "2",
             IE11 = "3")
     public void submit_twice() throws Exception {
-        final String html = "<html><head><script>\n"
-            + "function test() {\n"
-            + "  var f = document.forms[0];\n"
-            + "  f.submit();\n"
-            + "  f.submit();\n"
-            + "}\n"
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var f = document.forms[0];\n"
+            + "    f.submit();\n"
+            + "    f.submit();\n"
+            + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <form action='page1.html' name='myForm'>\n"

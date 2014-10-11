@@ -135,7 +135,7 @@ public class HtmlForm extends HtmlElement {
         final String target = htmlPage.getResolvedTarget(getTargetAttribute());
 
         final WebWindow webWindow = htmlPage.getEnclosingWindow();
-        webClient.download(webWindow, target, request, "JS form.submit()");
+        webClient.download(webWindow, target, request, false, "JS form.submit()");
         return htmlPage;
     }
 
