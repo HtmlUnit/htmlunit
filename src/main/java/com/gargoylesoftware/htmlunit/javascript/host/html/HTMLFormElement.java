@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORMFIELD_REACHABLE_BY_NEW_NAMES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORMFIELD_REACHABLE_BY_ORIGINAL_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_ACTION_EXPANDURL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_DISPATCHEVENT_SUBMITS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_REJECT_INVALID_ENCODING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_USABLE_AS_FUNCTION;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -505,7 +506,8 @@ public class HTMLFormElement extends HTMLElement implements Function {
     public boolean dispatchEvent(final Event event) {
         final boolean result = super.dispatchEvent(event);
 
-        if (event.getType().equals(Event.TYPE_SUBMIT)) {
+        if (Event.TYPE_SUBMIT.equals(event.getType())
+                && getBrowserVersion().hasFeature(JS_FORM_DISPATCHEVENT_SUBMITS)) {
             submit();
         }
         return result;

@@ -1079,6 +1079,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_FORM_ACTION_EXPANDURL,
 
+    /** form.dispatchEvent(e) submits the form if the event is of type 'submit'. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_FORM_DISPATCHEVENT_SUBMITS,
+
     /** Setting form.encoding only allowed for valid encodings. */
     @BrowserFeature(@WebBrowser(IE))
     JS_FORM_REJECT_INVALID_ENCODING,

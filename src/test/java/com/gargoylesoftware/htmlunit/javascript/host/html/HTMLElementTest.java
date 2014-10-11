@@ -2725,20 +2725,24 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "page2 loaded",
-            IE = "exception",
-            IE11 = "",
-            CHROME = "")
+    @Alerts(DEFAULT = "",
+            FF = "page2 loaded",
+            IE8 = "exception")
     public void dispatchEvent_submitOnForm() throws Exception {
-        final String html = "<html><head><title>page 1</title></head><body>\n"
-            + "<form action='page2' id='theForm'><span id='foo'/></form>\n"
+        final String html = "<html>\n"
+            + "<head><title>page 1</title></head>\n"
+            + "<body>\n"
+            + "<form action='page2' id='theForm'>\n"
+            + "  <span id='foo'/>\n"
+            + "</form>\n"
             + "<script>\n"
-            + "try {\n"
-            + "  var e = document.createEvent('HTMLEvents');\n"
-            + "  e.initEvent('submit', true, false);\n"
-            + "  document.getElementById('theForm').dispatchEvent(e);\n"
-            + "} catch(e) { alert('exception'); }\n"
-            + "</script></body></html>";
+            + "  try {\n"
+            + "    var e = document.createEvent('HTMLEvents');\n"
+            + "    e.initEvent('submit', true, false);\n"
+            + "    document.getElementById('theForm').dispatchEvent(e);\n"
+            + "  } catch(e) { alert('exception'); }\n"
+            + "</script>\n"
+            + "</body></html>";
 
         final String page2 = "<html><body><script>alert('page2 loaded');</script></body></html>";
 
