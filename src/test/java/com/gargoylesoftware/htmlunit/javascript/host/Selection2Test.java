@@ -192,7 +192,10 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "0", "1" }, CHROME = { "0", "3" }, IE = { "undefined", "exception", "undefined" })
+    @Alerts(DEFAULT = { "0", "1" },
+            CHROME = { "0", "3" },
+            IE8 = { "undefined", "exception", "undefined" },
+            IE11 = { "0", "exception", "1" })
     @NotYetImplemented(CHROME)
     public void extend() throws Exception {
         test("try{selection.extend(s2, 1)}catch(e){alert('exception')}", "selection.focusOffset", "x");
@@ -250,9 +253,10 @@ public class Selection2Test extends SimpleWebTestCase {
     private void test(final String action, final String x, final String alert)
         throws Exception {
 
-        final String html = "<html><body onload='test()'>\n"
-            + "<span id='s1'>abc</span><span id='s2'>xyz</span><span id='s3'>foo</span>\n"
-            + "<input type='button' id='b' onclick=\"" + action + ";test();\" value='click'></input>\n"
+        final String html = "<html>\n"
+            + "<body onload='test()'>\n"
+            + "  <span id='s1'>abc</span><span id='s2'>xyz</span><span id='s3'>foo</span>\n"
+            + "  <input type='button' id='b' onclick=\"" + action + ";test();\" value='click'></input>\n"
             + "<script>\n"
             + "  var selection = document.selection; // IE\n"
             + "  if(!selection) selection = window.getSelection(); // FF\n"
