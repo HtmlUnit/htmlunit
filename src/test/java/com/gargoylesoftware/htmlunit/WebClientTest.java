@@ -847,18 +847,20 @@ public class WebClientTest extends SimpleWebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         HtmlElement focus = page.getFocusedElement();
-        Assert.assertTrue("original", (focus == null) || (focus == page.getDocumentElement()));
+        Assert.assertTrue("original", (focus == null)
+                            || (focus == page.getDocumentElement())
+                            || (focus == page.getBody()));
 
         focus = page.tabToPreviousElement();
-        Assert.assertTrue("next", (focus == null) || (focus == page.getDocumentElement()));
+        Assert.assertNull("previous", focus);
 
         focus = page.tabToNextElement();
-        Assert.assertTrue("previous", (focus == null) || (focus == page.getDocumentElement()));
+        Assert.assertNull("next", focus);
 
         focus = page.pressAccessKey('a');
-        Assert.assertTrue("accesskey", (focus == null) || (focus == page.getDocumentElement()));
+        Assert.assertNull("accesskey", focus);
 
-        final List<?> expectedAlerts = Collections.EMPTY_LIST;
+        final String[] expectedAlerts = {};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -875,10 +877,13 @@ public class WebClientTest extends SimpleWebTestCase {
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{null});
         final HtmlElement element = page.getHtmlElementById("submit0");
 
-        HtmlElement focus = page.getFocusedElement();
-        Assert.assertTrue("original", (focus == null) || (focus == page.getDocumentElement()));
-        focus = page.pressAccessKey('x');
-        Assert.assertTrue("accesskey", (focus == null) || (focus == page.getDocumentElement()));
+        final HtmlElement focus = page.getFocusedElement();
+        Assert.assertTrue("original", (focus == null)
+                || (focus == page.getDocumentElement())
+                || (focus == page.getBody()));
+
+        final HtmlElement accessKey = page.pressAccessKey('x');
+        Assert.assertEquals("accesskey", focus, accessKey);
 
         Assert.assertEquals("next", element, page.tabToNextElement());
         Assert.assertEquals("nextAgain", element, page.tabToNextElement());
