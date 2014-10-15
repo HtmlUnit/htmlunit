@@ -30,7 +30,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#messageevent">
  * Event definitions</a>.
  *
- * @see <a href="https://developer.mozilla.org/en/WebSockets/WebSockets_reference/MessageEvent">Mozilla documentation</a>
+ * @see <a href="https://developer.mozilla.org/en/WebSockets/WebSockets_reference/MessageEvent">
+ *          Mozilla documentation</a>
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
