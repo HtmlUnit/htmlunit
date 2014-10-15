@@ -140,7 +140,7 @@ public class Prototype161Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented({ IE11, CHROME })
+    @NotYetImplemented(CHROME)
     @BuggyWebDriver(FF)
     public void form() throws Exception {
         test("form.html");
@@ -215,7 +215,7 @@ public class Prototype161Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented({ IE11, CHROME })
+    @NotYetImplemented(IE11)
     public void selector() throws Exception {
         test("selector.html");
     }
