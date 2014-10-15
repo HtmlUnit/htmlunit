@@ -51,10 +51,23 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *     pre.innerHTML = pre.innerHTML.replace('APPNAME', navigator.appName);
  *     pre.innerHTML = pre.innerHTML.replace('APPVERSION', navigator.appVersion);
  *     pre.innerHTML = pre.innerHTML.replace('USERAGENT', navigator.userAgent);
- *     var isMicrosoft = navigator.appName.indexOf('Microsoft') != -1;
- *     var numeric = isMicrosoft ? 9 : 17;
+ *     var isMicrosoft = navigator.appVersion.indexOf('Trident/') > 0;
+ *     var isChrome = navigator.appVersion.indexOf('Chrome') != -1;
+ *     var numeric = 31;
+ *     if (isMicrosoft) {
+ *         numeric = 11;
+ *     }
+ *     else if (isChrome) {
+ *         numeric = 38;
+ *     }
  *     pre.innerHTML = pre.innerHTML.replace('NUMERIC', numeric);
- *     var browser = isMicrosoft ? "INTERNET_EXPLORER_8" : "FIREFOX_10";
+ *     var browser = "FIREFOX_31";
+ *     if (isMicrosoft) {
+ *         browser = "INTERNET_EXPLORER_11";
+ *     }
+ *     else if (isChrome) {
+ *         browser = "CHROME";
+ *     }
  *     pre.innerHTML = pre.innerHTML.replace('BROWSER', browser);
  * </script>
  * However, note that the constants are not enough to fully customize the browser,
@@ -155,11 +168,11 @@ public class BrowserVersion implements Serializable, Cloneable {
 
     /** Latest Chrome. Work In Progress!!! */
     public static final BrowserVersion CHROME = new BrowserVersion(
-        "Netscape", "5.0 (Windows NT 6.1) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36",
+        NETSCAPE, "5.0 (Windows NT 6.1) AppleWebKit/537.36"
+        + " (KHTML, like Gecko) Chrome/38.0.2125.104 Safari/537.36",
         "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36",
-        31, "Chrome", null);
+        + " (KHTML, like Gecko) Chrome/38.0.2125.104 Safari/537.36",
+        38, "Chrome", null);
 
     /** The default browser version. */
     private static BrowserVersion DefaultBrowserVersion_ = INTERNET_EXPLORER_8;
@@ -357,7 +370,7 @@ public class BrowserVersion implements Serializable, Cloneable {
 
     /**
      * Returns <tt>true</tt> if this <tt>BrowserVersion</tt> instance represents some
-     * version of Firefox like {@link #FIREFOX_24} or {@link #FIREFOX_41}.
+     * version of Firefox like {@link #FIREFOX_24} or {@link #FIREFOX_31}.
      * @return whether or not this version is a version of a Firefox browser
      */
     public final boolean isFirefox() {
