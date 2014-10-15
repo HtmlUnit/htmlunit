@@ -23,6 +23,7 @@ import org.junit.Test;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class BrowserVersionTest extends SimpleWebTestCase {
 
@@ -32,9 +33,10 @@ public class BrowserVersionTest extends SimpleWebTestCase {
     @Test
     public void getBrowserVersionNumeric() {
         assertEquals(24.0f, BrowserVersion.FIREFOX_24.getBrowserVersionNumeric());
+        assertEquals(31.0f, BrowserVersion.FIREFOX_31.getBrowserVersionNumeric());
         assertEquals(8.0f, BrowserVersion.INTERNET_EXPLORER_8.getBrowserVersionNumeric());
         assertEquals(11.0f, BrowserVersion.INTERNET_EXPLORER_11.getBrowserVersionNumeric());
-        assertEquals(31.0f, BrowserVersion.CHROME.getBrowserVersionNumeric());
+        assertEquals(38.0f, BrowserVersion.CHROME.getBrowserVersionNumeric());
     }
 
     /**
