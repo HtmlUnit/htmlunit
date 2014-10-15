@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 
 import org.junit.Test;
@@ -29,6 +30,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class CSSPrimitiveValueTest extends WebDriverTestCase {
@@ -37,10 +39,12 @@ public class CSSPrimitiveValueTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = { "function CSSPrimitiveValue() {\n    [native code]\n}",
-                    "012345678910111213141516171819202122232425" },
+    @Alerts(DEFAULT = { "function CSSPrimitiveValue() {\n    [native code]\n}",
+                        "012345678910111213141516171819202122232425" },
+            CHROME = { "function CSSPrimitiveValue() { [native code] }",
+                        "012345678910111213141516171819202122232425" },
             IE = { "exception" })
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ CHROME, FF })
     public void test() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<script>\n"
@@ -67,16 +71,24 @@ public class CSSPrimitiveValueTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "rgb(0, 0, 255)", "0" }, IE = { })
+    @Alerts(DEFAULT = { "rgb(0, 0, 255)", "0" },
+            IE8 = "document.defaultView not available",
+            IE11 = "style.getPropertyCSSValue not available")
     public void getPropertyCSSValue() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "  function doTest() {\n"
             + "    var oDiv1 = document.getElementById('div1');\n"
             + "    if (document.defaultView) {\n"
             + "      var style = document.defaultView.getComputedStyle(oDiv1, null);\n"
-            + "      var cssValue = style.getPropertyCSSValue('color');\n"
-            + "      alert(cssValue.cssText);\n"
-            + "      alert(style.getPropertyCSSValue('border-left-width').getFloatValue(CSSPrimitiveValue.CSS_PX));\n"
+            + "      if (style.getPropertyCSSValue) {\n"
+            + "        var cssValue = style.getPropertyCSSValue('color');\n"
+            + "        alert(cssValue.cssText);\n"
+            + "        alert(style.getPropertyCSSValue('border-left-width').getFloatValue(CSSPrimitiveValue.CSS_PX));\n"
+            + "      } else {\n"
+            + "        alert('style.getPropertyCSSValue not available');\n"
+            + "      }\n"
+            + "    } else {\n"
+            + "      alert('document.defaultView not available');\n"
             + "    }\n"
             + "  }\n"
             + "</script></head>\n"
