@@ -26,12 +26,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * A JavaScript object for MessageEvent.
  *
- * @see <a href="https://developer.mozilla.org/en/WebSockets/WebSockets_reference/MessageEvent">
- * Mozilla documentation</a>
- *
  * For general information on which properties and functions should be supported, see
  * <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#messageevent">
  * Event definitions</a>.
+ *
+ * @see <a href="https://developer.mozilla.org/en/WebSockets/WebSockets_reference/MessageEvent">Mozilla documentation</a>
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek

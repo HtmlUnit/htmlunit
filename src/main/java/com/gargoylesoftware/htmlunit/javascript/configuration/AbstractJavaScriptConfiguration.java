@@ -51,7 +51,7 @@ public abstract class AbstractJavaScriptConfiguration {
     private final Map<String, ClassConfiguration> configuration_;
 
     /**
-     * Constructor is only called from {@link #getInstance(BrowserVersion)} which is synchronized.
+     * Constructor.
      * @param browser the browser version to use
      */
     protected AbstractJavaScriptConfiguration(final BrowserVersion browser) {

@@ -4428,12 +4428,12 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
 
     /**
      * Converts the specified length string value into an integer number of pixels. This method does
-     * <b>NOT</b> handle percentages correctly; use {@link #pixelValue(HTMLElement, CssValue)} if you
+     * <b>NOT</b> handle percentages correctly; use {@link #pixelValue(Element, CssValue)} if you
      * need percentage support).
      * @param value the length string value to convert to an integer number of pixels
      * @return the integer number of pixels corresponding to the specified length string value
      * @see <a href="http://htmlhelp.com/reference/css/units.html">CSS Units</a>
-     * @see #pixelValue(HTMLElement, CssValue)
+     * @see #pixelValue(Element, CssValue)
      */
     protected static int pixelValue(final String value) {
         int i = NumberUtils.toInt(TO_INT_PATTERN.matcher(value).replaceAll("$1"), 0);

@@ -1867,11 +1867,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     /**
      * Returns the specified length value as a pixel length value, as long as we're not emulating IE.
-     * This method does <b>NOT</b> handle percentages correctly; use {@link #pixelValue(HTMLElement, CssValue)}
+     * This method does <b>NOT</b> handle percentages correctly; use {@link #pixelValue(Element, CssValue)}
      * if you need percentage support).
      * @param value the length value to convert to a pixel length value
      * @return the specified length value as a pixel length value
-     * @see #pixelString(HTMLElement, CSSStyleDeclaration.CssValue)
+     * @see #pixelString(Element, CSSStyleDeclaration.CssValue)
      */
     protected String pixelString(final String value) {
         if (getBrowserVersion().hasFeature(JS_LENGTH_WITHOUT_PX)) {

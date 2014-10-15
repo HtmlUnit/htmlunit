@@ -669,7 +669,7 @@ public class Node extends SimpleScriptable {
      * @param listener the event listener
      * @return <code>true</code> if the listener has been added
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536343.aspx">MSDN documentation</a>
-     * @see #addEventListener(String, Function, boolean)
+     * @see #addEventListener(String, Scriptable, boolean)
      */
     @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
     public boolean attachEvent(final String type, final Function listener) {
