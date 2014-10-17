@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SELECTOR_LANG;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
+import static com.gargoylesoftware.htmlunit.
+                BrowserVersionFeatures.QUERYSELECTOR_CSS3_PSEUDO_SELECTORS_REQUIRE_ATTACHED_NODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SELECTOR_ATTRIBUTE_ESCAPING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EMPTY_IS_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EXPANDURL;
@@ -755,7 +757,7 @@ public class CSSStyleSheet extends SimpleScriptable {
                     throw new CSSException("Invalid selectors: " + selectors);
                 }
 
-                validateSelectors(selectorList, 9);
+                validateSelectors(selectorList, 9, element);
 
                 return !CSSStyleSheet.selects(browserVersion, selectorList.item(0), element);
             }
@@ -1103,12 +1105,14 @@ public class CSSStyleSheet extends SimpleScriptable {
      * Validates the list of selectors.
      * @param selectorList the selectors
      * @param documentMode see {@link HTMLDocument#getDocumentMode()}
+     * @param domNode the dom node the query should work on
      * @throws CSSException if a selector is invalid
      */
-    public static void validateSelectors(final SelectorList selectorList, final int documentMode) throws CSSException {
+    public static void validateSelectors(final SelectorList selectorList, final int documentMode,
+                final DomNode domNode) throws CSSException {
         for (int i = 0; i < selectorList.getLength(); ++i) {
             final Selector item = selectorList.item(i);
-            if (!isValidSelector(item, documentMode)) {
+            if (!isValidSelector(item, documentMode, domNode)) {
                 throw new CSSException("Invalid selector: " + item);
             }
         }
@@ -1117,28 +1121,28 @@ public class CSSStyleSheet extends SimpleScriptable {
     /**
      * @param documentMode see {@link HTMLDocument#getDocumentMode()}
      */
-    private static boolean isValidSelector(final Selector selector, final int documentMode) {
+    private static boolean isValidSelector(final Selector selector, final int documentMode, final DomNode domNode) {
         switch (selector.getSelectorType()) {
             case Selector.SAC_ELEMENT_NODE_SELECTOR:
                 return true;
             case Selector.SAC_CONDITIONAL_SELECTOR:
                 final ConditionalSelector conditional = (ConditionalSelector) selector;
-                return isValidSelector(conditional.getSimpleSelector(), documentMode)
-                        && isValidSelector(conditional.getCondition(), documentMode);
+                return isValidSelector(conditional.getSimpleSelector(), documentMode, domNode)
+                        && isValidSelector(conditional.getCondition(), documentMode, domNode);
             case Selector.SAC_DESCENDANT_SELECTOR:
             case Selector.SAC_CHILD_SELECTOR:
                 final DescendantSelector ds = (DescendantSelector) selector;
-                return isValidSelector(ds.getAncestorSelector(), documentMode)
-                        && isValidSelector(ds.getSimpleSelector(), documentMode);
+                return isValidSelector(ds.getAncestorSelector(), documentMode, domNode)
+                        && isValidSelector(ds.getSimpleSelector(), documentMode, domNode);
             case Selector.SAC_DIRECT_ADJACENT_SELECTOR:
                 final SiblingSelector ss = (SiblingSelector) selector;
-                return isValidSelector(ss.getSelector(), documentMode)
-                        && isValidSelector(ss.getSiblingSelector(), documentMode);
+                return isValidSelector(ss.getSelector(), documentMode, domNode)
+                        && isValidSelector(ss.getSiblingSelector(), documentMode, domNode);
             case Selector.SAC_ANY_NODE_SELECTOR:
                 if (selector instanceof SiblingSelector) {
                     final SiblingSelector sibling = (SiblingSelector) selector;
-                    return isValidSelector(sibling.getSelector(), documentMode)
-                            && isValidSelector(sibling.getSiblingSelector(), documentMode);
+                    return isValidSelector(sibling.getSelector(), documentMode, domNode)
+                            && isValidSelector(sibling.getSiblingSelector(), documentMode, domNode);
                 }
             default:
                 LOG.warn("Unhandled CSS selector type '" + selector.getSelectorType() + "'. Accepting it silently.");
@@ -1149,12 +1153,12 @@ public class CSSStyleSheet extends SimpleScriptable {
     /**
      * @param documentMode see {@link HTMLDocument#getDocumentMode()}
      */
-    private static boolean isValidSelector(final Condition condition, final int documentMode) {
+    private static boolean isValidSelector(final Condition condition, final int documentMode, final DomNode domNode) {
         switch (condition.getConditionType()) {
             case Condition.SAC_AND_CONDITION:
                 final CombinatorCondition cc1 = (CombinatorCondition) condition;
-                return isValidSelector(cc1.getFirstCondition(), documentMode)
-                        && isValidSelector(cc1.getSecondCondition(), documentMode);
+                return isValidSelector(cc1.getFirstCondition(), documentMode, domNode)
+                        && isValidSelector(cc1.getSecondCondition(), documentMode, domNode);
             case Condition.SAC_ATTRIBUTE_CONDITION:
             case Condition.SAC_ID_CONDITION:
             case Condition.SAC_CLASS_CONDITION:
@@ -1171,6 +1175,13 @@ public class CSSStyleSheet extends SimpleScriptable {
                 if (documentMode < 9) {
                     return CSS2_PSEUDO_CLASSES.contains(value);
                 }
+
+                if (!CSS2_PSEUDO_CLASSES.contains(value)
+                        && domNode.hasFeature(QUERYSELECTOR_CSS3_PSEUDO_SELECTORS_REQUIRE_ATTACHED_NODE)
+                        && !domNode.isDirectlyAttachedToPage()) {
+                    throw new CSSException("Syntax Error");
+                }
+
                 if ("nth-child()".equals(value)) {
                     final String arg = StringUtils.substringBetween(pcc.getValue(), "(", ")").trim();
                     return "even".equalsIgnoreCase(arg) || "odd".equalsIgnoreCase(arg)

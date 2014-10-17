@@ -1736,6 +1736,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             if (errorOccured.get()) {
                 throw new CSSException("Invalid selectors: " + selectors);
             }
+
             if (null != selectorList) {
                 final BrowserVersion browserVersion = webClient.getBrowserVersion();
                 int documentMode = 9;
@@ -1745,7 +1746,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                         documentMode = ((HTMLDocument) sobj).getDocumentMode();
                     }
                 }
-                CSSStyleSheet.validateSelectors(selectorList, documentMode);
+                CSSStyleSheet.validateSelectors(selectorList, documentMode, this);
 
                 for (final HtmlElement child : getHtmlElementDescendants()) {
                     for (int i = 0; i < selectorList.getLength(); i++) {
@@ -1801,11 +1802,13 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
      * Helper for a common call sequence.
      * @param feature the feature to check
      * @return <code>true</code> if the currently emulated browser has this feature.
      */
-    protected boolean hasFeature(final BrowserVersionFeatures feature) {
+    public boolean hasFeature(final BrowserVersionFeatures feature) {
         return getPage().getWebClient().getBrowserVersion().hasFeature(feature);
     }
 

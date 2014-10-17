@@ -1100,7 +1100,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "id1", },
+    @Alerts(DEFAULT = { "2", "id1", "id3", },
             IE8 = "exception")
     public void enabled() throws Exception {
         final String html = "<html><head><title>First</title>\n"
@@ -1111,14 +1111,15 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "    try {\n"
             + "      found = document.querySelectorAll('input:enabled');\n"
             + "      alert(found.length);\n"
-            + "      alert(found[0].id);\n"
+            + "      for (i=0; i<found.length; i++) { alert(found[i].id); }\n"
             + "    } catch(e) {alert('exception')}\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <input id='id1' >\n"
+            + "  <input id='id1'>\n"
             + "  <input id='id2' disabled='disabled'>\n"
+            + "  <input id='id3' type'hidden'>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
@@ -1139,7 +1140,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "    try {\n"
             + "      found = document.querySelectorAll('input:disabled');\n"
             + "      alert(found.length);\n"
-            + "      alert(found[0].id);\n"
+            + "      for (i=0; i<found.length; i++) { alert(found[i].id); }\n"
             + "    } catch(e) {alert('exception')}\n"
             + "  }\n"
             + "}\n"
@@ -1147,6 +1148,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "  <input id='id1' >\n"
             + "  <input id='id2' disabled='disabled'>\n"
+            + "  <input id='id3' type'hidden'>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
@@ -1291,7 +1293,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Alerts("exception")
     public void invalidSelectors() throws Exception {
         final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>Invalid Selectors</title><script>\n"
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>Invalid Selectors</title><script>\n"
             + "function test() {\n"
             + "  if (document.querySelectorAll) {\n"
             + "    try {\n"
@@ -1306,6 +1309,231 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <li id='li1'></li>\n"
             + "  <li id='li2'></li>\n"
             + "</ul>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "null", "null" })
+    public void activeEmptyDetached() throws Exception {
+        emptyAndDetached("*:active");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "null" },
+            IE8 = { "exception", "exception" },
+            IE11 = { "null", "exception" })
+    public void checkedEmptyDetached() throws Exception {
+        emptyAndDetached("*:checked");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "null" },
+            IE8 = { "exception", "exception" },
+            IE11 = { "null", "exception" })
+    public void disabledEmptyDetached() throws Exception {
+        emptyAndDetached("*:disabled");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "null" },
+            IE8 = { "exception", "exception" },
+            IE11 = { "null", "exception" })
+    public void emptyEmptyDetached() throws Exception {
+        emptyAndDetached("*:empty");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "null" },
+            IE8 = { "exception", "exception" },
+            IE11 = { "null", "exception" })
+    public void enabledEmptyDetached() throws Exception {
+        emptyAndDetached("*:enabled");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "null" },
+            IE8 = { "[object HTMLUnknownElement]", "null" })
+    @NotYetImplemented(IE8)
+    public void firstchildEmptyDetached() throws Exception {
+        emptyAndDetached("*:first-child");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "null" },
+            IE8 = { "exception", "exception" },
+            IE11 = { "null", "exception" })
+    public void firstoftypeEmptyDetached() throws Exception {
+        emptyAndDetached("*:first-of-type");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "null", "null" })
+    public void focusEmptyDetached() throws Exception {
+        emptyAndDetached("*:focus");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "null", "null" })
+    public void hoverEmptyDetached() throws Exception {
+        emptyAndDetached("*:hover");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "null" },
+            IE8 = { "exception", "exception" },
+            IE11 = { "null", "exception" })
+    public void lastchildEmptyDetached() throws Exception {
+        emptyAndDetached("*:last-child");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "null" },
+            IE8 = { "exception", "exception" },
+            IE11 = { "null", "exception" })
+    public void lastoftypeEmptyDetached() throws Exception {
+        emptyAndDetached("*:last-of-type");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "null", "null" })
+    public void linkEmptyDetached() throws Exception {
+        emptyAndDetached("*:link");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "null" },
+            IE8 = { "exception", "exception" },
+            IE11 = { "null", "exception" })
+    public void notEmptyDetached() throws Exception {
+        emptyAndDetached("*:not(p)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "null" },
+            IE8 = { "exception", "exception" },
+            IE11 = { "null", "exception" })
+    public void nthchildEmptyDetached() throws Exception {
+        emptyAndDetached("*:nth-child(2n)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "null" },
+            IE8 = { "exception", "exception" },
+            IE11 = { "null", "exception" })
+    public void nthlastchildEmptyDetached() throws Exception {
+        emptyAndDetached("*:nth-last-child(2n)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "null" },
+            IE8 = { "exception", "exception" },
+            IE11 = { "null", "exception" })
+    public void nthoftypeEmptyDetached() throws Exception {
+        emptyAndDetached("*:nth-of-type(2n)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "null" },
+            IE8 = { "exception", "exception" },
+            IE11 = { "null", "exception" })
+    public void onlychildEmptyDetached() throws Exception {
+        emptyAndDetached("*:only-child");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "null" },
+            IE8 = { "exception", "exception" },
+            IE11 = { "null", "exception" })
+    public void onlyoftypeEmptyDetached() throws Exception {
+        emptyAndDetached("*:only-of-type");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "null", "null" })
+    public void visitedEmptyDetached() throws Exception {
+        emptyAndDetached("*:visited");
+    }
+
+    private void emptyAndDetached(final String selector) throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var div = document.getElementById('myDiv');\n"
+            + "  if (!div.querySelector) { alert('querySelector not available'); return; }\n"
+            + "  try {\n"
+            + "    found = div.querySelector('" + selector + "');\n"
+            + "    alert(found);\n"
+            + "  } catch(e) {alert('exception')}\n"
+
+            + "  div = document.createElement('div');\n"
+            + "  try {\n"
+            + "    found = div.querySelector('" + selector + "');\n"
+            + "    alert(found);\n"
+            + "  } catch(e) {alert('exception')}\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'></myDiv>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
