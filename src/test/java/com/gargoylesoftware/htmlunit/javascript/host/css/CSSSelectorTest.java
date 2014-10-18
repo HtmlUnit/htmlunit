@@ -1285,6 +1285,32 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = { "1", "[object HTMLHtmlElement]" },
+            IE8 = "exception")
+    public void root() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    try {\n"
+            + "      var list = document.querySelectorAll(':root');\n"
+            + "      alert(list.length);\n"
+            + "      alert(list[0]);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = { "first", "second" },
             IE8 = { "exception", "exception" })
     public void escapedAttributeValue() throws Exception {
@@ -1544,6 +1570,17 @@ public class CSSSelectorTest extends WebDriverTestCase {
             IE11 = { "null", "exception" })
     public void onlyoftypeEmptyDetached() throws Exception {
         emptyAndDetached("*:only-of-type");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "null" },
+            IE8 = { "exception", "exception" },
+            IE11 = { "null", "exception" })
+    public void rootEmptyDetached() throws Exception {
+        emptyAndDetached("*:root");
     }
 
     /**
