@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="Java 7, FF31, Bugfixes">
+            <action type="fix" dev="rbri" >
+                CSS pseudo selector ':checked' selects also selected options.
+            </action>
             <action type="fix" dev="rbri" issue="1647" due-to="Carsten Steul">
                 JavaScript: Support event parameter for event handlers created implicit by setAttribute.
             </action>

@@ -87,6 +87,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlHtml;
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
+import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
@@ -621,7 +622,8 @@ public class CSSStyleSheet extends SimpleScriptable {
         }
         else if ("checked".equals(value)) {
             return (element instanceof HtmlCheckBoxInput && ((HtmlCheckBoxInput) element).isChecked())
-                || (element instanceof HtmlRadioButtonInput && ((HtmlRadioButtonInput) element).isChecked());
+                || (element instanceof HtmlRadioButtonInput && ((HtmlRadioButtonInput) element).isChecked()
+                || (element instanceof HtmlOption && ((HtmlOption) element).isSelected()));
         }
         else if ("first-child".equals(value)) {
             for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {

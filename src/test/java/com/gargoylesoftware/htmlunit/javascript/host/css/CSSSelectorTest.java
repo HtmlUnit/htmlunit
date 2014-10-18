@@ -1100,6 +1100,48 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = { "5", "cb1", "rd1", "sl1", "ml1", "ml3" },
+            IE8 = "exception")
+    public void checked() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    try {\n"
+            + "      found = document.querySelectorAll(':checked');\n"
+            + "      alert(found.length);\n"
+            + "      for (i=0; i<found.length; i++) { alert(found[i].id); }\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='id1'>\n"
+            + "  <input id='id2' disabled='disabled'>\n"
+            + "  <input id='id3' type'hidden'>\n"
+            + "  <input type='checkbox' name='checkboxes' id='cb1' checked='checked' value='On' />\n"
+            + "  <input type='checkbox' name='checkboxes' id='cb2' value='Off' />\n"
+            + "  <input type='radio' name='radiobuttons' id='rd1' checked='checked' value='On' />\n"
+            + "  <input type='radio' name='radiobuttons' id='rd2' value='Off' />\n"
+            + "  <select name='sl'>\n"
+            + "    <option value='sl1' id='sl1' selected='selected'>SL One</option>\n"
+            + "    <option value='sl2' id='sl2' >SL Two</option>\n"
+            + "  </select>\n"
+            + "  <select name='ml'  multiple=multiple'>\n"
+            + "    <option value='ml1' id='ml1' selected='selected'>ML One</option>\n"
+            + "    <option value='ml2' id='ml2' >ML Two</option>\n"
+            + "    <option value='ml3' id='ml3' selected='selected'>ML Three</option>\n"
+            + "  </select>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = { "2", "id1", "id3", },
             IE8 = "exception")
     public void enabled() throws Exception {
