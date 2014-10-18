@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static org.junit.Assert.fail;
@@ -2305,7 +2306,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, IE11 })
     public void event__Delegated_events_in_SVG___10791_() throws Exception {
         runTest("event: Delegated events in SVG (#10791)");
     }
@@ -2756,7 +2757,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 35, 35")
-    @NotYetImplemented
     public void selector___jQuery_only__attributes___jQuery_attr() throws Exception {
         runTest("selector - jQuery only: attributes - jQuery.attr");
     }
@@ -2767,7 +2767,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented
     public void selector___jQuery_only__Sizzle_cache_collides_with_multiple_Sizzles_on_a_page() throws Exception {
         runTest("selector - jQuery only: Sizzle cache collides with multiple Sizzles on a page");
     }
@@ -6370,7 +6369,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 80, 80")
-    @NotYetImplemented
+    @NotYetImplemented(IE)
     public void offset__static() throws Exception {
         runTest("offset: static");
     }
@@ -6381,7 +6380,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 30, 30")
-    @NotYetImplemented
     public void offset__fixed() throws Exception {
         runTest("offset: fixed");
     }
@@ -6414,7 +6412,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented
+    @NotYetImplemented(IE)
     public void offset__body() throws Exception {
         runTest("offset: body");
     }
@@ -6636,7 +6634,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented
     public void dimensions__window_vs__large_document() throws Exception {
         runTest("dimensions: window vs. large document");
     }

@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="2.16" date="???" description="Java 7, FF31, Bugfixes">
+        <release version="2.16" date="???" description="Java 7, FF31, IE11 progress, CHROME progress, Bugfixes">
+            <action type="fix" dev="rbri" issue="1648" due-to="Carsten Steul">
+                Wrong activeElement for iFrames and their parents.
+            </action>
             <action type="fix" dev="rbri" >
                 CSS pseudo selector ':checked' selects also selected options.
             </action>
@@ -23,7 +26,7 @@
                 Method isDisplayed() now works correct for HtmlImage, HtmlMap and HtmlArea.
             </action>
             <action type="fix" dev="rbri" >
-                WebClient.closeAllWindows() now kills the thread, if join does not succeed. this might happen,
+                WebClient.closeAllWindows() now kills the thread, if join does not succeed. This might happen,
                 if one of the javascript jobs runs in an endless loop.
             </action>
             <action type="fix" dev="rbri" issue="1638" >

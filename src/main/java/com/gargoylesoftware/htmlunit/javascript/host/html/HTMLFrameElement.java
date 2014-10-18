@@ -47,6 +47,15 @@ public class HTMLFrameElement extends HTMLElement {
     }
 
     /**
+     * Sets the value of the source of the contained frame.
+     * @param src the new value
+     */
+    @JsxSetter
+    public void setSrc(final String src) {
+        getFrame().setSrcAttribute(src);
+    }
+
+    /**
      * Returns the document the frame contains, if any.
      * @return <code>null</code> if no document is contained
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_frame_ref4.html">Gecko DOM Reference</a>
@@ -65,15 +74,6 @@ public class HTMLFrameElement extends HTMLElement {
     @JsxGetter
     public WindowProxy getContentWindow() {
         return Window.getProxy(getFrame().getEnclosedWindow());
-    }
-
-    /**
-     * Sets the value of the source of the contained frame.
-     * @param src the new value
-     */
-    @JsxSetter
-    public void setSrc(final String src) {
-        getFrame().setSrcAttribute(src);
     }
 
     /**

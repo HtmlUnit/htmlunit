@@ -22,6 +22,7 @@ import java.net.URL;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
@@ -635,5 +636,53 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
         assertEquals(1, getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "[object Window]", "topbody", "framebody", "[object Window]", "topbody", "frameinput" },
+            IE8 = { "[object]", "topbody", "framebody", "[object]", "topbody", "frameinput" })
+    public void contentWindowAndActiveElement() throws Exception {
+        final String firstContent
+            = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function check() {"
+            + "      alert(document.getElementById('frame').contentWindow);\n"
+            + "      alert(document.activeElement.id);\n"
+            + "      alert(window.frame.window.document.activeElement.id);\n"
+            + "    }"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body id='topbody'>\n"
+            + "<iframe id='frame' name='frame' src='" + URL_SECOND + "'></iframe>\n"
+            + "</body></html>";
+
+        final String frameContent
+            = "<html>\n"
+            + "<body id='framebody'>\n"
+                + "  <input id='frameinput'>\n"
+            + "</body></html>";
+
+        final MockWebConnection webConnection = getMockWebConnection();
+
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, frameContent);
+
+        final WebDriver driver = loadPage2(firstContent);
+        final JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+
+        jsExecutor.executeScript("check();");
+        jsExecutor.executeScript("Object(document.getElementById('frame').contentWindow);");
+
+        driver.switchTo().frame("frame");
+        driver.findElement(By.id("frameinput")).click();
+
+        driver.switchTo().defaultContent();
+        jsExecutor.executeScript("check();");
+
+        verifyAlerts(DEFAULT_WAIT_TIME, getExpectedAlerts(), driver);
     }
 }

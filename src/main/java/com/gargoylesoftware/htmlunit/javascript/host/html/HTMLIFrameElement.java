@@ -23,6 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.WindowProxy;
 
 /**
  * A JavaScript object for {@link HtmlInlineFrame}.
@@ -46,34 +47,33 @@ public class HTMLIFrameElement extends HTMLElement {
     }
 
     /**
-     * Returns the document the frame contains, if any.
-     * @return <code>null</code> if no document is contained
-     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_frame_ref4.html">Gecko DOM Reference</a>
-     */
-    @JsxGetter
-    public DocumentProxy getContentDocument() {
-        return getContentWindow().getDocument_js();
-    }
-
-    /**
-     * Returns the window the frame contains, if any.
-     * @return the window
-     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_frame_ref5.html">
-     * Gecko DOM Reference</a>
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533692.aspx">MSDN documentation</a>
-     */
-    @JsxGetter
-    public Window getContentWindow() {
-        return (Window) getFrame().getEnclosedWindow().getScriptObject();
-    }
-
-    /**
      * Sets the value of the source of the contained frame.
      * @param src the new value
      */
     @JsxSetter
     public void setSrc(final String src) {
         getFrame().setSrcAttribute(src);
+    }
+
+    /**
+     * Returns the document the frame contains, if any.
+     * @return <code>null</code> if no document is contained
+     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_frame_ref4.html">Gecko DOM Reference</a>
+     */
+    @JsxGetter
+    public DocumentProxy getContentDocument() {
+        return ((Window) getFrame().getEnclosedWindow().getScriptObject()).getDocument_js();
+    }
+
+    /**
+     * Returns the window the frame contains, if any.
+     * @return the window
+     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_frame_ref5.html">Gecko DOM Reference</a>
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533692.aspx">MSDN documentation</a>
+     */
+    @JsxGetter
+    public WindowProxy getContentWindow() {
+        return Window.getProxy(getFrame().getEnclosedWindow());
     }
 
     /**
