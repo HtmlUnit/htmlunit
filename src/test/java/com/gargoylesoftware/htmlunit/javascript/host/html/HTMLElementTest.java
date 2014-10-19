@@ -1731,13 +1731,17 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "body.isHomePage = undefined", "exception" },
+    @Alerts(DEFAULT = { "body.isHomePage = undefined", "!addBehavior", "!removeBehavior", "exception" },
             IE8 = { "body.isHomePage = undefined", "body.isHomePage = false", "body.isHomePage = undefined" })
     public void removeBehavior() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
             + "  var body = document.body;\n"
             + "  alert('body.isHomePage = ' + body.isHomePage);\n"
+
+            + "  if(!body.addBehavior) { alert('!addBehavior'); };\n"
+            + "  if(!body.removeBehavior) { alert('!removeBehavior'); };\n"
+
             + "  var id = body.addBehavior('#default#homePage');\n"
             + "  alert('body.isHomePage = ' + body.isHomePage('not the home page'));\n"
             + "  body.removeBehavior(id);\n"

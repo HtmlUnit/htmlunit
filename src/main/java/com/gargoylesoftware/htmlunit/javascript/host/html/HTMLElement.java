@@ -1389,7 +1389,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Removes the behavior corresponding to the specified identifier from this element.
      * @param id the identifier for the behavior to remove
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
     public void removeBehavior(final int id) {
         switch (id) {
             case BEHAVIOR_ID_CLIENT_CAPS:
