@@ -143,6 +143,11 @@ public final class ProxyAutoConfig {
      * @return true if the IP address of the host matches the specified IP address pattern.
      */
     public static boolean isInNet(final String host, final String pattern, final String mask) {
+        final String dnsResolve = dnsResolve(host);
+        if (null == dnsResolve) {
+            return false;
+        }
+
         final String[] hostTokens = DOT_SPLIT_PATTERN.split(dnsResolve(host));
         final String[] patternTokens = DOT_SPLIT_PATTERN.split(pattern);
         final String[] maskTokens = DOT_SPLIT_PATTERN.split(mask);

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="Java 7, FF31, IE11 progress, CHROME progress, Bugfixes">
+            <action type="fix" dev="rbri" issue="1649">
+                Possible NullPointerException in ProxyAutoConfig.isInNet fixed.
+            </action>
             <action type="fix" dev="rbri" issue="1648" due-to="Carsten Steul">
                 Wrong activeElement for iFrames and their parents.
             </action>
