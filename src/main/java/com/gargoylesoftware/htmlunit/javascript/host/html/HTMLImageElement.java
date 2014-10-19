@@ -28,7 +28,7 @@ import java.util.Map;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
-import org.apache.xalan.xsltc.runtime.AttributeList;
+import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -82,7 +82,7 @@ public class HTMLImageElement extends HTMLElement {
         instantiatedViaJavaScript_ = true;
         final SgmlPage page = (SgmlPage) getWindow().getWebWindow().getEnclosedPage();
         final DomElement fake =
-                HTMLParser.getFactory(HtmlImage.TAG_NAME).createElement(page, HtmlImage.TAG_NAME, new AttributeList());
+                HTMLParser.getFactory(HtmlImage.TAG_NAME).createElement(page, HtmlImage.TAG_NAME, new AttributesImpl());
         setDomNode(fake);
     }
 
