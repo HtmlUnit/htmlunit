@@ -25,18 +25,18 @@
                 This handler is called before an applet code download. By implementing this handler you
                 can restrict the download per applet (like the confirm dialog in the browser).
             </action>
-            <action type="fix" dev="rbri" >
+            <action type="fix" dev="rbri">
                 Method isDisplayed() now works correct for HtmlImage, HtmlMap and HtmlArea.
             </action>
-            <action type="fix" dev="rbri" >
+            <action type="fix" dev="rbri">
                 WebClient.closeAllWindows() now kills the thread, if join does not succeed. This might happen,
                 if one of the javascript jobs runs in an endless loop.
             </action>
-            <action type="fix" dev="rbri" issue="1638" >
+            <action type="fix" dev="rbri" issue="1638">
                 WebClient.closeAllWindows() now stops the JS thread also of some onunload handler opens new windows or
                 refreshes iframes.
             </action>
-            <action type="fix" dev="rbri" issue="1643" >
+            <action type="fix" dev="rbri" issue="1643">
                 JavaScript: DOMTokenList#remove method remains tail-whitespace when the last token was removed.
             </action>
             <action type="update" dev="asashour">
@@ -283,7 +283,7 @@
             <action type="fix" dev="rbri" issue="1585" due-to="Jakub Kotasek">
                 File upload content type shouldn't contain charset.
             </action>
-            <action type="fix" dev="rbri" issue="1584" >
+            <action type="fix" dev="rbri" issue="1584">
                 JavaScript: setting outerHTML now works also for detached elements.
             </action>
             <action type="add" dev="rbri">
