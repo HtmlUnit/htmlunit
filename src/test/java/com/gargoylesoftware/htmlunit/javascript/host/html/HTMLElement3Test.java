@@ -62,8 +62,6 @@ public class HTMLElement3Test extends SimpleWebTestCase {
             IE8 = { "isHomePage = false", "isHomePage = true", "isHomePage = true",
                     "isHomePage = false", "http://localhost:12345/second/" })
     public void addBehaviorDefaultHomePage() throws Exception {
-        final URL url1 = URL_FIRST;
-        final URL url2 = URL_SECOND;
         final String html1 =
             "<html>\n"
             + "  <head>\n"
@@ -77,7 +75,7 @@ public class HTMLElement3Test extends SimpleWebTestCase {
             + "       // used to test must be part of the SAME domain as this\n"
             + "       // document, otherwise isHomePage() always returns false.\n"
             + "       body.addBehavior('#default#homePage');\n"
-            + "       var url = '" + url1 + "';\n"
+            + "       var url = '" + URL_FIRST + "';\n"
             + "       alert('isHomePage = ' + body.isHomePage(url));\n"
             + "       body.setHomePage(url);\n"
             + "       alert('isHomePage = ' + body.isHomePage(url));\n"
@@ -87,7 +85,7 @@ public class HTMLElement3Test extends SimpleWebTestCase {
             + "       // Make sure that (as mentioned above) isHomePage() always\n"
             + "       // returns false when the url specified is the actual\n"
             + "       // homepage, but the document checking is on a DIFFERENT domain.\n"
-            + "       hp.setHomePage('" + url2 + "');\n"
+            + "       hp.setHomePage('" + URL_SECOND + "');\n"
             + "       alert('isHomePage = ' + hp.isHomePage(url));\n"
             + "       // Test navigation to homepage.\n"
             + "       body.navigateHomePage();\n"
@@ -101,12 +99,12 @@ public class HTMLElement3Test extends SimpleWebTestCase {
         final String html2 = "<html></html>";
 
         final MockWebConnection webConnection = getMockWebConnection();
-        webConnection.setResponse(url1, html1);
-        webConnection.setResponse(url2, html2);
+        webConnection.setResponse(URL_FIRST, html1);
+        webConnection.setResponse(URL_SECOND, html2);
 
         final String[] alerts = getExpectedAlerts();
         setExpectedAlerts(ArrayUtils.subarray(alerts, 0, alerts.length - 1));
-        final HtmlPage page = loadPageWithAlerts(html1, url1, 1000);
+        final HtmlPage page = loadPageWithAlerts(html1, URL_FIRST, 1000);
 
         assertEquals(alerts[alerts.length - 1], page.getUrl().toExternalForm());
     }
@@ -342,79 +340,6 @@ public class HTMLElement3Test extends SimpleWebTestCase {
     }
 
     /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = { "clicked", "fireEvent not available" },
-            IE8 = { "clicked", "clicked" })
-    public void fireEvent_WithoutTemplate() throws Exception {
-        final String html =
-            "<html>\n"
-            + "  <head>\n"
-            + "    <title>Test</title>\n"
-            + "    <script>\n"
-            + "    function doTest() {\n"
-            + "      var elem = document.getElementById('a');\n"
-            + "      if (!elem.fireEvent) { alert('fireEvent not available'); return }\n"
-            + "      elem.fireEvent('onclick');\n"
-            + "    }\n"
-            + "    </script>\n"
-            + "  </head>\n"
-            + "<body>\n"
-            + "  <div id='a' onclick='alert(\"clicked\")'>foo</div>\n"
-            + "  <div id='b' onmouseover='doTest()'>bar</div>\n"
-            + "</body></html>";
-
-        final List<String> actual = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), html, actual);
-        page.getHtmlElementById("a").click();
-        page.getHtmlElementById("b").mouseOver();
-        assertEquals(getExpectedAlerts(), actual);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = { "click", "fireEvent not available", "fireEvent not available" },
-            IE8 = { "click", "click", "click" })
-    public void fireEvent_WithTemplate() throws Exception {
-        final String html =
-            "<html>\n"
-            + "  <head>\n"
-            + "    <title>Test</title>\n"
-            + "    <script>\n"
-            + "    function doAlert(e) {\n"
-            + "      alert(e.type);\n"
-            + "    }\n"
-            + "    function doTest() {\n"
-            + "      var elem = document.getElementById('a');\n"
-            + "      if (!elem.fireEvent) { alert('fireEvent not available'); return }\n"
-            + "      elem.fireEvent('onclick');\n"
-            + "    }\n"
-            + "    function doTest2() {\n"
-            + "      var elem = document.getElementById('a');\n"
-            + "      if (!elem.fireEvent) { alert('fireEvent not available'); return }\n"
-            + "      var template = document.createEventObject();\n"
-            + "      elem.fireEvent('onclick', template);\n"
-            + "    }\n"
-            + "    </script>\n"
-            + "  </head>\n"
-            + "<body>\n"
-            + "<div id='a' onclick='doAlert(event)'>foo</div>\n"
-            + "<div id='b' onmouseover='doTest()'>bar</div>\n"
-            + "<div id='c' onmouseover='doTest2()'>baz</div>\n"
-            + "</body></html>";
-
-        final List<String> actual = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), html, actual);
-        page.getHtmlElementById("a").click();
-        page.getHtmlElementById("b").mouseOver();
-        page.getHtmlElementById("c").mouseOver();
-        assertEquals(getExpectedAlerts(), actual);
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -557,22 +482,5 @@ public class HTMLElement3Test extends SimpleWebTestCase {
         webClient.setCurrentWindow(firstPage.getEnclosingWindow());
         webClient.setCurrentWindow(secondPage.getEnclosingWindow());
         assertEquals(getExpectedAlerts(), collectedAlerts);
-    }
-
-    /**
-     * Document.write after setting innerHTML.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void setInnerHTMLDocumentWrite() throws Exception {
-        final String html = "<html><head><title>test</title></head>\n"
-            + "<body>\n"
-            + "<script>\n"
-            + "     var a = document.createElement('a');\n"
-            + "     a.innerHTML = 'break';\n"
-            + "     document.write('hello');\n"
-            + "</script></body></html>";
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertEquals("test" + LINE_SEPARATOR + "hello", page.asText());
     }
 }

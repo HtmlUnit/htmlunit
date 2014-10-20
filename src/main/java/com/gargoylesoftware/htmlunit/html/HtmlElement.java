@@ -812,7 +812,7 @@ public abstract class HtmlElement extends DomElement {
      * Returns <tt>true</tt> if this element has any JavaScript functions that need to be executed when the
      * specified event occurs.
      * @param eventName the name of the event, such as "onclick" or "onblur", etc
-     * @return a Rhino JavaScript function, or <tt>null</tt> if no event handler has been defined
+     * @return true if an event handler has been defined otherwise false
      */
     public final boolean hasEventHandlers(final String eventName) {
         final HTMLElement jsObj = (HTMLElement) getScriptObject();

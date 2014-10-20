@@ -23,6 +23,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -1155,5 +1156,107 @@ public class HTMLElement2Test extends WebDriverTestCase {
                 + "</html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "clicked", "fireEvent not available" },
+            IE8 = { "clicked", "clicked" })
+    public void fireEvent_WithoutTemplate() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <title>Test</title>\n"
+            + "    <script>\n"
+            + "    function doTest() {\n"
+            + "      var elem = document.getElementById('a');\n"
+            + "      if (!elem.fireEvent) { alert('fireEvent not available'); return }\n"
+            + "      elem.fireEvent('onclick');\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "<body>\n"
+            + "  <div id='a' onclick='alert(\"clicked\")'>foo</div>\n"
+            + "  <div id='b' onmouseover='doTest()'>bar</div>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("a")).click();
+
+        final Actions actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(By.id("b")));
+        actions.perform();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "click", "fireEvent not available", "fireEvent not available", "fireEvent not available" },
+            IE8 = { "click", "click", "click", "click" })
+    public void fireEvent_WithTemplate() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <title>Test</title>\n"
+            + "    <script>\n"
+
+            + "    function doAlert(e) {\n"
+            + "      alert(e.type);\n"
+            + "    }\n"
+
+            + "    function doTest() {\n"
+            + "      var elem = document.getElementById('a');\n"
+            + "      if (!elem.fireEvent) { alert('fireEvent not available'); return }\n"
+            + "      elem.fireEvent('onclick');\n"
+            + "    }\n"
+
+            + "    function doTest2() {\n"
+            + "      var elem = document.getElementById('a');\n"
+            + "      if (!elem.fireEvent) { alert('fireEvent not available'); return }\n"
+            + "      var template = document.createEventObject();\n"
+            + "      elem.fireEvent('onclick', template);\n"
+            + "    }\n"
+
+            + "    </script>\n"
+            + "  </head>\n"
+            + "<body>\n"
+            + "  <div id='a' onclick='doAlert(event)'>foo</div>\n"
+            + "  <div id='b' onmouseover='doTest()'>bar</div>\n"
+            + "  <div id='c' onmouseover='doTest2()'>baz</div>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("a")).click();
+
+        final Actions actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(By.id("b")));
+        actions.moveToElement(driver.findElement(By.id("c")));
+        actions.perform();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * Document.write after setting innerHTML.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("hello")
+    public void setInnerHTMLDocumentWrite() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>test</title></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "     var a = document.createElement('a');\n"
+            + "     a.innerHTML = 'break';\n"
+            + "     document.write('hello');\n"
+            + "</script></body></html>";
+        final WebDriver driver = loadPage2(html);
+        assertEquals(getExpectedAlerts()[0], driver.findElement(By.tagName("body")).getText());
     }
 }
