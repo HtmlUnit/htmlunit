@@ -7,14 +7,14 @@
     </properties>
 
     <body>
-        <release version="2.16" date="???" description="Java 7, FF31, IE11 progress, CHROME progress, Bugfixes">
+        <release version="2.16" date="???" description="FF31, IE11 progress, Chrome progress, Bugfixes">
             <action type="fix" dev="rbri" issue="1649">
                 Possible NullPointerException in ProxyAutoConfig.isInNet fixed.
             </action>
             <action type="fix" dev="rbri" issue="1648" due-to="Carsten Steul">
                 Wrong activeElement for iFrames and their parents.
             </action>
-            <action type="fix" dev="rbri" >
+            <action type="fix" dev="rbri">
                 CSS pseudo selector ':checked' selects also selected options.
             </action>
             <action type="fix" dev="rbri" issue="1647" due-to="Carsten Steul">
