@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static org.junit.Assert.assertSame;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -73,28 +71,6 @@ public class HTMLAnchorElementTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1689798&group_id=47038.
-     * In href, "this" should be the window and not the link.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void thisInJavascriptHref() throws Exception {
-        final String html
-            = "<html>\n"
-            + "<body>\n"
-            + "<a href='javascript:alert(this == window)'>link 1</a>\n"
-            + "</body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final String[] expectedAlerts = {"true"};
-        final HtmlPage page1 = loadPage(getBrowserVersion(), html, collectedAlerts);
-        final Page page2 = page1.getAnchors().get(0).click();
-
-        assertEquals(expectedAlerts, collectedAlerts);
-        assertSame(page1, page2);
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -104,7 +80,7 @@ public class HTMLAnchorElementTest extends SimpleWebTestCase {
             + "<body onload=\"document.links[0].target += 'K';\">\n"
             + "<a href='#' target='O'>link 1</a>\n"
             + "</body></html>";
-        final HtmlPage page1 = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page1 = loadPage(html);
         final HtmlAnchor link = page1.getAnchors().get(0);
         assertEquals("OK", link.getTargetAttribute());
     }
@@ -129,8 +105,12 @@ public class HTMLAnchorElementTest extends SimpleWebTestCase {
      */
     @Test
     public void readAnchorHash() throws Exception {
-        final String html = "<html><body><a id='a' href='http://blah.com/abc.html#arg'>foo</a>"
-            + "<script>alert(document.getElementById('a').hash);</script></body></html>";
+        final String html
+            = "<html>\n"
+            + "<body>\n"
+            + "  <a id='a' href='http://blah.com/abc.html#arg'>foo</a>\n"
+            + "  <script>alert(document.getElementById('a').hash);</script>\n"
+            + "</body></html>";
         final List<String> actual = new ArrayList<String>();
         loadPage(getBrowserVersion(), html, actual);
         final String[] expected = {"#arg"};
@@ -145,9 +125,9 @@ public class HTMLAnchorElementTest extends SimpleWebTestCase {
         final String html
             = "<html>\n"
             + "<body onload=\"document.links[0].hash += 'K';\">\n"
-            + "<a href='foo.html#O'>link 1</a>\n"
+            + "  <a href='foo.html#O'>link 1</a>\n"
             + "</body></html>";
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(html);
         final HtmlAnchor link = page.getAnchors().get(0);
         assertEquals(getDefaultUrl() + "foo.html#OK", link.getHrefAttribute());
     }
@@ -161,8 +141,8 @@ public class HTMLAnchorElementTest extends SimpleWebTestCase {
             = "<html>\n"
             + "<body onload=\"document.links[0].port += '80';\n"
             + "    document.links[1].port += '80'; \">\n"
-            + "<a href='foo.html#O'>link 1</a>\n"
-            + "<a href='http://www.gargoylesoftware.com:80/foo.html#O'>link 1</a>\n"
+            + "  <a href='foo.html#O'>link 1</a>\n"
+            + "  <a href='http://www.gargoylesoftware.com:80/foo.html#O'>link 1</a>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(getBrowserVersion(), html, null, URL_GARGOYLE);
         HtmlAnchor link = page.getAnchors().get(0);
@@ -179,7 +159,7 @@ public class HTMLAnchorElementTest extends SimpleWebTestCase {
         final String html
             = "<html>\n"
             + "<body onload=\"document.links[0].pathname = '/bar' + document.links[0].pathname;\">\n"
-            + "<a href='foo.html#B'>link 1</a>\n"
+            + "  <a href='foo.html#B'>link 1</a>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(getBrowserVersion(), html, null, URL_GARGOYLE);
         final HtmlAnchor link = page.getAnchors().get(0);
@@ -194,7 +174,7 @@ public class HTMLAnchorElementTest extends SimpleWebTestCase {
         final String html
             = "<html>\n"
             + "<body onload=\"document.links[0].protocol = document.links[0].protocol.substring(0,4) + 's:';\">\n"
-            + "<a href='foo.html#B'>link 1</a>\n"
+            + "  <a href='foo.html#B'>link 1</a>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(getBrowserVersion(), html, null, URL_GARGOYLE);
         final HtmlAnchor link = page.getAnchors().get(0);
@@ -212,10 +192,10 @@ public class HTMLAnchorElementTest extends SimpleWebTestCase {
             + "    document.links[1].host += 'motion';\n"
             + "    document.links[2].host += '80';\n"
             + "    document.links[3].host = 'www.gargoylesoftware.com'; \">\n"
-            + "<a href='foo.html#O'>link 0</a>\n"
-            + "<a href='foo.html#O'>link 1</a>\n"
-            + "<a href='http://www.gargoylesoftware.com:80/foo.html#O'>link 2</a>\n"
-            + "<a href='http://www.gargoylesoftware.com:80/foo.html#O'>link 3</a>\n"
+            + "  <a href='foo.html#O'>link 0</a>\n"
+            + "  <a href='foo.html#O'>link 1</a>\n"
+            + "  <a href='http://www.gargoylesoftware.com:80/foo.html#O'>link 2</a>\n"
+            + "  <a href='http://www.gargoylesoftware.com:80/foo.html#O'>link 3</a>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(getBrowserVersion(), html, null, URL_GARGOYLE);
         HtmlAnchor link = page.getAnchors().get(0);
@@ -236,7 +216,7 @@ public class HTMLAnchorElementTest extends SimpleWebTestCase {
         final String html
             = "<html>\n"
             + "<body onload=\"document.links[0].hostname += 'motion';\">\n"
-            + "<a href='foo.html#O'>link 1</a>\n"
+            + "  <a href='foo.html#O'>link 1</a>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(getBrowserVersion(), html, null, URL_GARGOYLE);
         final HtmlAnchor link = page.getAnchors().get(0);

@@ -502,4 +502,25 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
 
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
+
+    /**
+     * Regression test for https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1689798&group_id=47038.
+     * In href, "this" should be the window and not the link.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void thisInJavascriptHref() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<body>\n"
+            + "  <a href='javascript:alert(this === window)'>link 1</a>\n"
+            + "</body></html>";
+
+        System.out.println(html);
+        final WebDriver driver = loadPage2(html);
+        System.out.println(driver.getPageSource());
+        driver.findElement(By.tagName("a")).click();
+        assertEquals(1, getMockWebConnection().getRequestCount());
+    }
 }
