@@ -311,7 +311,8 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "pass", "fail:66", "fail:undefined" })
+    @Alerts(DEFAULT = { "pass", "fail:66", "fail:undefined" },
+            CHROME = { "pass", "fail:66", "fail:0" })
     public void testEventOnKeyDown() throws Exception {
         final String html
             = "<html><head></head>\n"
@@ -487,8 +488,8 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "true", "SPAN" },
-            IE11 = { "false", "false", "SPAN" },
+    @Alerts(DEFAULT = { "false", "false", "SPAN" },
+            FF = { "false", "true", "SPAN" },
             IE8 = { "true", "false", "SPAN" })
     public void testEventTransmission() throws Exception {
         final String html =
@@ -614,9 +615,9 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "window capturing", "div capturing", "span capturing", "div", "window capturing" },
-            IE11 = { "window capturing", "div capturing", "span capturing", "div", "window capturing",
+    @Alerts(DEFAULT = { "window capturing", "div capturing", "span capturing", "div", "window capturing",
                 "div capturing", "span capturing" },
+            FF = { "window capturing", "div capturing", "span capturing", "div", "window capturing" },
             IE8 = { "div", "div" })
     public void stopPropagationCancelBubble() throws Exception {
         stopPropagation("cancelBubble=true");

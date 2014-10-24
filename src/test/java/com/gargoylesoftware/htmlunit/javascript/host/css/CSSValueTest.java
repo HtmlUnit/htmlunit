@@ -38,6 +38,7 @@ public class CSSValueTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "function CSSValue() {\n    [native code]\n}", "0123" },
+            CHROME = { "function CSSValue() { [native code] }", "0123" },
             IE = { "exception" })
     @NotYetImplemented(FF)
     public void test() throws Exception {

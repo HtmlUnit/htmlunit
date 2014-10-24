@@ -37,7 +37,7 @@ public class CSSCharsetRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "1", "[object CSSCharsetRule]", "UTF-8" },
+    @Alerts(DEFAULT = { "1", "[object CSSCharsetRule]", "UTF-8" },
             IE = { "0", "undefined" })
     @NotYetImplemented(IE) // TODO: check which IE versions support what
     public void simple() throws Exception {

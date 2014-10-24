@@ -42,9 +42,9 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "DOM3: [object KeyboardEvent]", "vendor: [object KeyboardEvent]" },
-            IE = { "DOM3: exception", "vendor: exception" },
-            IE11 = { "DOM3: [object KeyboardEvent]", "vendor: exception" })
+    @Alerts(DEFAULT = { "DOM3: [object KeyboardEvent]", "vendor: exception" },
+            FF = { "DOM3: [object KeyboardEvent]", "vendor: [object KeyboardEvent]" },
+            IE8 = { "DOM3: exception", "vendor: exception" })
     public void createEvent() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -92,11 +92,11 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "keydown, true, true, true, true, true, true, 65, 0",
+    @Alerts(IE = { "exception", "exception" },
+            FF = { "keydown, true, true, true, true, true, true, 65, 0",
                 "keyup, false, false, false, false, false, false, 32, 0",
                 "keydown, true, true, true, true, true, true, 65, 0",
-                "keyup, false, false, false, false, false, false, 32, 0" },
-            IE = { "exception", "exception" })
+                "keyup, false, false, false, false, false, false, 32, 0" })
     public void initKeyEvent() throws Exception {
         final String html = "<html><head><script>\n"
             + "  var properties = ['type', 'bubbles', 'cancelable', /*'view',*/ 'ctrlKey', 'altKey',\n"

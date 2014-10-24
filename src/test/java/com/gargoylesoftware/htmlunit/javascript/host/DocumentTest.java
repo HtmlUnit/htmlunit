@@ -1090,8 +1090,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = { "a", "b", "a", "b", "0" },
-            FF = "exception",
+    @Alerts(DEFAULT = "exception",
             IE = { "a", "b", "a", "b", "0" })
     public void all_tags() throws Exception {
         final String html

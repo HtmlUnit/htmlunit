@@ -41,7 +41,8 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "H1", "", "10px, ", "red" },
-            IE = { "[object]", "H1", "", "10px, ", "red" },
+            CHROME = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1", "", "10px", "", "red" },
+            IE8 = { "[object]", "H1", "", "10px, ", "red" },
             IE11 = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1", "", "10px, ", "red" })
     @NotYetImplemented(FF)
     public void test() throws Exception {
@@ -86,8 +87,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = { "4px", "4px", "4px", "4px" },
-            IE = { "4px", "4px", "4px", "4px" })
+    @Alerts({ "4px", "4px", "4px", "4px" })
     public void testStyleSheet() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
@@ -149,9 +149,10 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = { "BoDY", "H1", "A.foo", ".foo", ".foo .foo2", "#byId" },
-            IE = { "BODY", "H1", "A.foo", ".foo", ".foo .foo2", "#byId" },
-            IE11 = { "body", "h1", "a.foo", ".foo", ".foo .foo2", "#byId" })
+    @Alerts(DEFAULT = { "body", "h1", "a.foo", ".foo", ".foo .foo2", "#byId" },
+            CHROME = { "body", "h1", "a.foo", ".foo", ".foo .foo2", "#byid" },
+            FF = { "BoDY", "H1", "A.foo", ".foo", ".foo .foo2", "#byId" },
+            IE8 = { "BODY", "H1", "A.foo", ".foo", ".foo .foo2", "#byId" })
     @NotYetImplemented(FF)
     public void selectorText() throws Exception {
         final String html = "<html><head><title>First</title>\n"

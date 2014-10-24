@@ -396,7 +396,6 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "3", "3", "3", "3", "3", "3", "3", "3" },
-            CHROME = { "3", "3", "3", "3", "3", "3", "3", "undefined" },
             IE8 = { "undefined", "not supported" })
     @NotYetImplemented({ CHROME, FF, IE11 })
     public void testNodePrototype() throws Exception {

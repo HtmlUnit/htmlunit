@@ -37,7 +37,9 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "[object CSSFontFaceRule]", "5",
             "@font-face {\n  font-family: \"Delicious\";\n  src: url(\"Delicious-Bold.otf\");\n}" },
-            IE = { "exception" },
+            CHROME = { "[object CSSFontFaceRule]", "5",
+            "@font-face { font-family: Delicious; src: url(http://localhost:12345/Delicious-Bold.otf); }" },
+            IE8 = { "exception" },
             IE11 = { "[object CSSFontFaceRule]", "5",
             "@font-face {\r\n\tfont-family: Delicious;\r\n\tsrc: url(Delicious-Bold.otf);\r\n}\r\n" })
     public void simple() throws Exception {

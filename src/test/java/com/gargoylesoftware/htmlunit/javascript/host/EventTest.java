@@ -931,8 +931,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "from theField", "from document", "from document", "from window" },
-            CHROME = { "from theField", "from theForm", "from document", "from window" })
+    @Alerts({ "from theField", "from document", "from document", "from window" })
     public void eventHandlersParentScopeChain_span() throws Exception {
         eventHandlersParentScopeChain("<span", "</span>");
     }

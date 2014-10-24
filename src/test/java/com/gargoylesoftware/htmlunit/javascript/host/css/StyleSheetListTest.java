@@ -99,9 +99,9 @@ public class StyleSheetListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "0", "undefined", "undefined", "exception for -2" },
-            FF31 = { "0", "undefined", "undefined", "undefined" },
-            IE = { "0", "exception for 0", "exception for 46", "exception for -2" },
+    @Alerts(DEFAULT = { "0", "undefined", "undefined", "undefined" },
+            FF24 = { "0", "undefined", "undefined", "exception for -2" },
+            IE8 = { "0", "exception for 0", "exception for 46", "exception for -2" },
             IE11 = { "0", "undefined", "undefined", "undefined" })
     public void arrayIndexOutOfBoundAccess() throws Exception {
         final String html =
@@ -239,7 +239,8 @@ public class StyleSheetListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "2" })
+    @Alerts(DEFAULT = { "1", "2" },
+            CHROME = { "1", "1" })
     public void dynamicAddedStyleSheet() throws Exception {
         final String html =
               "<html>\n"
