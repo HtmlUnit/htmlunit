@@ -229,7 +229,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "<foo/>", "<foo/>" },
+    @Alerts(DEFAULT = { "<foo/>", "<foo/>" },
             IE8 = "createDocument not available",
             IE11 = { "<foo />", "<foo />" })
     public void document() throws Exception {
@@ -250,7 +250,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "<img/>", "<img xmlns=\"http://www.w3.org/1999/xhtml\" />", "<?myTarget myData?>" },
+    @Alerts(DEFAULT = { "<img/>", "<img xmlns=\"http://www.w3.org/1999/xhtml\" />", "<?myTarget myData?>" },
             IE8 = "XMLSerializer not defined",
             IE11 = { "<img />", "", "<?myTarget myData?>" })
     public void xml() throws Exception {
@@ -280,7 +280,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "<root><my:parent xmlns:my=\"myUri\"><my:child/><another_child/></my:parent></root>",
+    @Alerts(DEFAULT = "<root><my:parent xmlns:my=\"myUri\"><my:child/><another_child/></my:parent></root>",
             IE = "<root><my:parent xmlns:my=\"myUri\"><my:child/><another_child/></my:parent></root>\r\n",
             IE11 = "<root><my:parent xmlns:my=\"myUri\"><my:child /><another_child /></my:parent></root>")
     public void namespace() throws Exception {
@@ -310,7 +310,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>",
+    @Alerts(DEFAULT = "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>",
             IE8 = "XMLSerializer not defined",
             IE11 = "<textarea xmlns=\"http://www.w3.org/1999/xhtml\" />")
     public void mixedCase() throws Exception {
@@ -406,7 +406,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>",
+    @Alerts(DEFAULT = { "<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>",
                     "<h1 xmlns=\"http://www.w3.org/1999/xhtml\"></h1>",
                     "<p xmlns=\"http://www.w3.org/1999/xhtml\"></p>",
                     "<li xmlns=\"http://www.w3.org/1999/xhtml\"></li>",

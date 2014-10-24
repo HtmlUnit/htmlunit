@@ -191,7 +191,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "5", "pass", "pass", "pass", "pass" },
-            IE = { "3", "exception", "exception", "pass", "pass" },
+            CHROME = { "4", "pass", "pass", "pass", "pass" },
+            IE8 = { "3", "exception", "exception", "pass", "pass" },
             IE11 = { "1", "exception", "exception", "pass", "pass" })
     @NotYetImplemented(IE11)
     // real IE11 invokes just one request and returns the other two responses from it's cache
@@ -536,6 +537,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Event]#[object XMLHttpRequest]",
+            CHROME = "[object XMLHttpRequestProgressEvent]#[object XMLHttpRequest]",
             IE8 = "no param")
     public void testOnreadystatechangeSyncWithParam() throws Exception {
         final String html =
@@ -578,6 +580,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Event]#[object XMLHttpRequest]",
+            CHROME = "[object XMLHttpRequestProgressEvent]#[object XMLHttpRequest]",
             IE8 = "no param")
     public void testOnreadystatechangeAsyncWithParam() throws Exception {
         final String html =

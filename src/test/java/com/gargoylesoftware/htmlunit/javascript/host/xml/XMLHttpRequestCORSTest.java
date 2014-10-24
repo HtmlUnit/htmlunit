@@ -565,7 +565,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "0", "4", "0" },
-            CHROME = { "1", "ex: status not available", "4", "0" },
             IE8 = { "1", "ex: status not available", "4", "200" },
             IE11 = { "1", "0", "4", "200" })
     public void withCredentials() throws Exception {
@@ -577,7 +576,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "0", "4", "200" },
-            CHROME = { "1", "ex: status not available", "4", "200" },
             IE8 = { "1", "ex: status not available", "4", "200" })
     public void withCredentialsServer() throws Exception {
         testWithCredentials("http://localhost:" + PORT, "true");
@@ -588,7 +586,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "0", "4", "0" },
-            CHROME = { "1", "ex: status not available", "4", "0" },
             IE8 = { "1", "ex: status not available", "4", "200" },
             IE11 = { "1", "0", "4", "200" })
     public void withCredentialsServerSlashAtEnd() throws Exception {
@@ -600,7 +597,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "0", "4", "0" },
-            CHROME = { "1", "ex: status not available", "4", "0" },
             IE8 = { "1", "ex: status not available", "4", "200" },
             IE11 = { "1", "0", "4", "200" })
     public void withCredentials_no_header() throws Exception {
@@ -612,7 +608,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "0", "4", "0" },
-            CHROME = { "1", "ex: status not available", "4", "0" },
             IE8 = { "1", "ex: status not available", "4", "200" },
             IE11 = { "1", "0", "4", "200" })
     public void withCredentials_no_header_Server() throws Exception {
@@ -624,7 +619,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "0", "4", "0" },
-            CHROME = { "1", "ex: status not available", "4", "0" },
             IE8 = { "1", "ex: status not available", "4", "200" },
             IE11 = { "1", "0", "4", "200" })
     public void withCredentials_no_header_ServerSlashAtEnd() throws Exception {

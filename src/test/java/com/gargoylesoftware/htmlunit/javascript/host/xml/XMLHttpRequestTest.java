@@ -514,6 +514,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "someAttr", "someValue", "someAttr=\"someValue\"" },
+            CHROME = { "1", "someAttr", "undefined", "undefined" },
             IE11 = { "1", "someAttr", "undefined", "undefined" })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     @NotYetImplemented(FF)
