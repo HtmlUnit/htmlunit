@@ -36,8 +36,8 @@ public class HTMLBaseElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "http://www.foo.com/images/", "", "", "_blank" },
-            FF = { "http://www.foo.com/images/", "§§URL§§", "", "_blank" })
+    @Alerts(DEFAULT = { "http://www.foo.com/images/", "§§URL§§", "", "_blank" },
+            IE = { "http://www.foo.com/images/", "", "", "_blank" })
     @NotYetImplemented(FF)
     public void hrefAndTarget() throws Exception {
         final String html =

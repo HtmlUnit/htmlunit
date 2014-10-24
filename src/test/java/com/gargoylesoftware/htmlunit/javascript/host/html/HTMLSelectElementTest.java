@@ -131,7 +131,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "-1", "2", "-1", "-1" },
+    @Alerts(DEFAULT = { "-1", "2", "-1", "-1" },
             IE = { "-1", "2", "-1", "-1" })
     public void setSelectedIndexInvalidValue() throws Exception {
         final String html
@@ -735,7 +735,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "exception",
+    @Alerts(DEFAULT = "exception",
             IE = { "2-2", "1-1", "2-2", "0-0", "2-2", "1-1" })
     public void optionsDelegateToSelect() throws Exception {
         final String html
@@ -1148,8 +1148,8 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "two", "two" },
-            IE = { "two", "" })
+    @Alerts(DEFAULT = { "two", "" },
+            FF = { "two", "two" })
     public void value() throws Exception {
         final String html =
             "<html><head>\n"
@@ -1199,8 +1199,8 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "two", "two" },
-            IE = { "two", "" })
+    @Alerts(DEFAULT = { "two", "" },
+            FF = { "two", "two" })
     public void valueByValueCase() throws Exception {
         final String html =
             "<html><head>\n"
@@ -1225,7 +1225,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "two", "One" },
+    @Alerts(DEFAULT = { "two", "One" },
             IE = { "two", "" })
     public void valueByText() throws Exception {
         final String html =
@@ -1251,7 +1251,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "two", "One" },
+    @Alerts(DEFAULT = { "two", "One" },
             IE = { "two", "" })
     public void valueByTextTrim() throws Exception {
         final String html =
@@ -1277,8 +1277,8 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "two", "two" },
-            IE = { "two", "" })
+    @Alerts(DEFAULT = { "two", "" },
+            FF = { "two", "two" })
     public void valueNull() throws Exception {
         final String html =
             "<html><head>\n"

@@ -765,9 +765,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "undefined",
+    @Alerts(DEFAULT = "[object HTMLAllCollection]",
             FF = "[object HTML document.all class]",
-            IE = "[object HTMLAllCollection]",
             IE8 = "[object HTMLCollection]")
     @NotYetImplemented({ CHROME, FF, IE11 })
     public void all_scriptableToString() throws Exception {

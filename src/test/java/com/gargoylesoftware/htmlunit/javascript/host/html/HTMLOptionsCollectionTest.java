@@ -145,8 +145,8 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "", "4", "One", "1", "", "1" },
-            IE = { "1", "", "4", "One", "1", "", "0" })
+    @Alerts(DEFAULT = { "1", "", "4", "One", "1", "", "0" },
+            FF = { "1", "", "4", "One", "1", "", "1" })
     public void setLength_increase() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

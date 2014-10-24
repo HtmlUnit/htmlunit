@@ -183,6 +183,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "1", "2", "1", "5", "1", "1" },
+            CHROME = { "1", "2", "1", "5", "-3", "1" },
             IE = { "1", "2", "1", "error", "error", "5", "2", "1" })
     public void span() throws Exception {
         final String html
@@ -225,7 +226,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "top", "baseline", "3", "middle", "8", "BOTtom" },
+    @Alerts(DEFAULT = { "top", "baseline", "3", "middle", "8", "BOTtom" },
             IE = { "top", "baseline", "top", "error", "middle", "baseline", "bottom" })
     @NotYetImplemented(FF)
     public void vAlign() throws Exception {
@@ -269,7 +270,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "50", "75%", "foo", "-7", "20.2", "", "80", "40", "abc", "-10", "30%", "33.3" },
+    @Alerts(DEFAULT = { "50", "75%", "foo", "-7", "20.2", "", "80", "40", "abc", "-10", "30%", "33.3" },
             IE = { "50", "75%", "", "", "20", "", "error", "error", "80", "40", "", "", "30%", "33" })
     public void width() throws Exception {
         final String html
@@ -328,8 +329,8 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "128",
-            FF = "128px")
+    @Alerts(DEFAULT = "128px",
+            IE = "128")
     public void width_px() throws Exception {
         final String html
             = "<html><head>"
@@ -352,8 +353,8 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "", "string" },
-            FF = { "null", "string" })
+    @Alerts(DEFAULT = { "null", "string" },
+            IE = { "", "string" })
     @NotYetImplemented(FF)
     public void width_null() throws Exception {
         final String html

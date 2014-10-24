@@ -65,8 +65,9 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLHtmlElement]", "[object HTMLHtmlElement]" },
-            FF = { "[object HTMLHtmlElement]", "function HTMLHtmlElement() {\n    [native code]\n}" },
+    @Alerts(DEFAULT = { "[object HTMLHtmlElement]", "function HTMLHtmlElement() {\n    [native code]\n}" },
+            CHROME = { "[object HTMLHtmlElement]", "function HTMLHtmlElement() { [native code] }" },
+            IE11 = { "[object HTMLHtmlElement]", "[object HTMLHtmlElement]" },
             IE8 = { "[object]", "exception" })
     @NotYetImplemented(FF)
     public void HTMLHtmlElement_toString() throws Exception {

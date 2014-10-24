@@ -97,8 +97,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "4", "exception", "4" },
-            IE = { "4", "3" })
+    @Alerts(DEFAULT = { "4", "3" },
+            FF = { "4", "exception", "4" })
     public void deleteCell_noArg() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -126,7 +126,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "left", "right", "3", "center", "8", "foo" },
+    @Alerts(DEFAULT = { "left", "right", "3", "center", "8", "foo" },
             IE = { "left", "right", "", "error", "error", "center", "right", "" })
     public void align() throws Exception {
         final String html
@@ -226,7 +226,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "top", "baseline", "3", "middle", "8", "BOTtom" },
+    @Alerts(DEFAULT = { "top", "baseline", "3", "middle", "8", "BOTtom" },
             IE = { "top", "baseline", "top", "error", "middle", "baseline", "bottom" })
     @NotYetImplemented(FF)
     public void vAlign() throws Exception {
@@ -265,7 +265,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "", "#0000aa", "x" },
+    @Alerts(DEFAULT = { "", "#0000aa", "x" },
             IE = { "", "#0000aa", "#000000" },
             IE11 = { "", "#0000aa", "#0" })
     public void bgColor() throws Exception {
@@ -295,6 +295,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0", "0", "3", "1", "-1", "true", "false" },
+            CHROME = { "0", "0", "3", "1", "-1", "false", "false" },
             IE8 = { "0", "0", "3", "1", "-1", "false", "true" })
     public void rowIndex_sectionRowIndex() throws Exception {
         final String html

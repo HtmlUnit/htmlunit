@@ -41,6 +41,8 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "bottom", "texttop", "wrong", "" },
+            CHROME = { "left", "right", "bottom", "middle", "top",
+                    "absbottom", "absmiddle", "baseline", "texttop", "wrong", "" },
             IE = { "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
                 "undefined", "undefined", "undefined", "undefined", "undefined" })
     @NotYetImplemented
@@ -74,6 +76,8 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "bottom", "texttop" },
+            CHROME = { "CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
+                    "absbottom", "absmiddle", "baseline", "texttop" },
             IE8 = { "center", "error", "center", "error", "center", "left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "baseline", "texttop" },
             IE11 = { "CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",

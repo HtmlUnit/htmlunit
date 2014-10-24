@@ -460,7 +460,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "undefined", "#0000aa", "x" },
+    @Alerts(DEFAULT = { "undefined", "#0000aa", "x" },
             IE = { "", "#0000aa", "#000000" },
             IE11 = { "", "#0000aa", "#0" })
     public void bgColorFooter() throws Exception {
@@ -489,7 +489,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "undefined", "#0000aa", "x" },
+    @Alerts(DEFAULT = { "undefined", "#0000aa", "x" },
             IE = { "", "#0000aa", "#000000" },
             IE11 = { "", "#0000aa", "#0" })
     public void bgColorHeader() throws Exception {

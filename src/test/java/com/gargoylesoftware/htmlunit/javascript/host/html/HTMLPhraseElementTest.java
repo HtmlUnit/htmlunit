@@ -35,7 +35,7 @@ public class HTMLPhraseElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"[object HTMLElement] undefined", "[object HTMLElement] undefined" },
+    @Alerts(DEFAULT = {"[object HTMLElement] undefined", "[object HTMLElement] undefined" },
             IE = {"[object] ", "[object] " },
             IE11 = {"[object HTMLPhraseElement] ", "[object HTMLPhraseElement] " })
     public void cite() throws Exception {

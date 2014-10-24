@@ -70,7 +70,6 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "submit", "button", "submit" },
-            CHROME = { "submit", "submit", "submit" },
             IE8 = { "button", "exception", "button", "button" })
     public void type() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

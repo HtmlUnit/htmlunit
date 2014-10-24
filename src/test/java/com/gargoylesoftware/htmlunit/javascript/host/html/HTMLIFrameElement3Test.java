@@ -452,8 +452,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "[object Window]", "[object HTMLIFrameElement]", "undefined", "" },
-            FF = { "[object HTMLIFrameElement]", "[object HTMLIFrameElement]", "", "" },
+    @Alerts(DEFAULT = { "[object HTMLIFrameElement]", "[object HTMLIFrameElement]", "", "" },
+            IE11 = { "[object Window]", "[object HTMLIFrameElement]", "undefined", "" },
             IE8 = { "[object]", "[object]", "undefined", "" })
     @NotYetImplemented(IE)
     public void idByName() throws Exception {

@@ -63,7 +63,7 @@ public class HTMLParagraphElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"", "hello", "left", "hi", "right" },
+    @Alerts(DEFAULT = {"", "hello", "left", "hi", "right" },
             IE = {"", "error", "", "left", "error", "left", "right" })
     public void align() throws Exception {
         final String html =

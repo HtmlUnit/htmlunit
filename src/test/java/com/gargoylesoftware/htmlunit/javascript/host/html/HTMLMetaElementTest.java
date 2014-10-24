@@ -36,7 +36,7 @@ public class HTMLMetaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "undefined", "text/html; charset=utf-8", "Content-Type", "", "", "undefined" },
+    @Alerts(DEFAULT = { "undefined", "text/html; charset=utf-8", "Content-Type", "", "", "undefined" },
             IE = { "", "text/html; charset=utf-8", "Content-Type", "", "", "" })
     public void name() throws Exception {
         final String html =

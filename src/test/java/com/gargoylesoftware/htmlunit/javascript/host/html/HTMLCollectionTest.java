@@ -106,6 +106,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
     @Alerts(FF24 = { "string 0", "string item", "string iterator", "string length",
                         "string myForm", "string namedItem" },
             FF31 = { "string 0", "string @@iterator", "string item", "string length", "string namedItem" },
+            CHROME = { "string 0", "string item", "string length", "string myForm", "string namedItem" },
             IE = { "string length", "string myForm" },
             IE11 = { "string item", "string length", "string myForm", "string namedItem" })
     @NotYetImplemented({ FF, IE11 })

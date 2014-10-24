@@ -780,7 +780,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "1", "2", "3" },
+    @Alerts(DEFAULT = { "1", "2", "3" },
             IE = "1")
     public void scriptType() throws Exception {
         final String html
