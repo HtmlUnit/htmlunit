@@ -725,15 +725,14 @@ public abstract class WebDriverTestCase extends WebTestCase {
     @SuppressWarnings("unchecked")
     protected List<String> getCollectedAlerts(final WebDriver driver) throws Exception {
         final List<String> collectedAlerts = new ArrayList<String>();
-
         final JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+
         final Object result = jsExecutor.executeScript("return top.__huCatchedAlerts");
 
         if (result != null) {
             if (driver instanceof HtmlUnitDriver) {
                 return (List<String>) result;
             }
-
             for (final Object alert : (List<Object>) result) {
                 collectedAlerts.add(Context.toString(alert));
             }
