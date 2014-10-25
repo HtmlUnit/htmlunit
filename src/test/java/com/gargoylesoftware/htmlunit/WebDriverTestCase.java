@@ -35,7 +35,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -46,8 +45,6 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerWrapper;
 import org.eclipse.jetty.util.security.Constraint;
 import org.eclipse.jetty.webapp.WebAppContext;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.openqa.selenium.Dimension;
@@ -120,7 +117,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static Server STATIC_SERVER3_;
     private static ChromeDriverService CHROME_SERVICE_;
 
-    private static String JSON_;
     private boolean useRealBrowser_;
     private static Boolean LAST_TEST_MockWebConnection_;
 
@@ -729,64 +725,20 @@ public abstract class WebDriverTestCase extends WebTestCase {
     @SuppressWarnings("unchecked")
     protected List<String> getCollectedAlerts(final WebDriver driver) throws Exception {
         final List<String> collectedAlerts = new ArrayList<String>();
+
         final JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        if (driver instanceof HtmlUnitDriver) {
-            final Object result = jsExecutor.executeScript("return top.__huCatchedAlerts");
-            if (result != null) {
+        final Object result = jsExecutor.executeScript("return top.__huCatchedAlerts");
+
+        if (result != null) {
+            if (driver instanceof HtmlUnitDriver) {
                 return (List<String>) result;
             }
-        }
-        else if (driver instanceof InternetExplorerDriver) {
-            final String jsonResult = (String) jsExecutor
-                .executeScript(getJSON() + ";return JSON.stringify(top.__huCatchedAlerts)");
-            if (jsonResult != null) {
-                final JSONArray array = new JSONArray(jsonResult);
-                for (int i = 0; i < array.length(); i++) {
-                    collectedAlerts.add(Context.toString(array.get(i)));
-                }
-            }
-        }
-        else {
-            final Object object = jsExecutor.executeScript("return top.__huCatchedAlerts");
 
-            if (object != null) {
-                if (object instanceof JSONObject) {
-                    final JSONObject jsonObject = (JSONObject) object;
-                    for (int i = 0; i < jsonObject.length(); i++) {
-                        collectedAlerts.add(Context.toString(jsonObject.get(String.valueOf(i))));
-                    }
-                }
-                else if (object instanceof JSONArray) {
-                    final JSONArray array = (JSONArray) object;
-                    for (int i = 0; i < array.length(); i++) {
-                        collectedAlerts.add(Context.toString(array.get(i)));
-                    }
-                }
-                else {
-                    for (final Object alert : (List<Object>) object) {
-                        collectedAlerts.add(Context.toString(alert));
-                    }
-                }
+            for (final Object alert : (List<Object>) result) {
+                collectedAlerts.add(Context.toString(alert));
             }
         }
         return collectedAlerts;
-    }
-
-    private String getJSON() {
-        if (JSON_ == null) {
-            try {
-                final StringBuilder builder = new StringBuilder();
-                final File file = new File(getClass().getClassLoader().getResource("json2.js").toURI());
-                for (final Object line : FileUtils.readLines(file)) {
-                    builder.append(line).append('\n');
-                }
-                JSON_ = builder.toString();
-            }
-            catch (final Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
-        return JSON_;
     }
 
     /**
