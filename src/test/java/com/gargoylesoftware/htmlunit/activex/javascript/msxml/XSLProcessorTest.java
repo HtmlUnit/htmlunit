@@ -43,7 +43,7 @@ public class XSLProcessorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "97", FF = "no ActiveX")
+    @Alerts(DEFAULT = "no ActiveX", IE = "97")
     public void transform() throws Exception {
         final URL urlThird = new URL(URL_FIRST + "third/");
 

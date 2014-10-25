@@ -124,7 +124,7 @@ public class XMLDOMNamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception-getNull", FF = "no ActiveX")
+    @Alerts(DEFAULT = "no ActiveX", IE = "exception-getNull")
     public void getNamedItem_null() throws Exception {
         final String test = ""
             + "try {\n"
