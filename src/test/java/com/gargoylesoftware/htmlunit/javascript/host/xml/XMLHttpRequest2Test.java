@@ -191,7 +191,6 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "5", "pass", "pass", "pass", "pass" },
-            CHROME = { "4", "pass", "pass", "pass", "pass" },
             IE8 = { "3", "exception", "exception", "pass", "pass" },
             IE11 = { "1", "exception", "exception", "pass", "pass" })
     @NotYetImplemented(IE11)
