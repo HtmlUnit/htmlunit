@@ -1207,16 +1207,18 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "bar",
-                        "application/javascript",
-                        "null",
-                        "null",
-                        "exception-unopened",
-                        "exception-setNameNull",
-                        "exception-setNameEmpty",
-                        "exception-setValueNull" },
-            FF = { "null", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-                    "null", "null", "no ActiveX" })
+    @Alerts(DEFAULT = { "null", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                        "null", "null", "no ActiveX" },
+            CHROME = { "null", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+                        "null", "null", "no ActiveX" },
+            IE = { "bar",
+                   "application/javascript",
+                   "null",
+                   "null",
+                   "exception-unopened",
+                   "exception-setNameNull",
+                   "exception-setNameEmpty",
+                   "exception-setValueNull" })
     public void setRequestHeader() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
         setExpectedAlerts(
@@ -1274,7 +1276,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "", "null", "null", "4" }, FF = { "no ActiveX", "null", "null", "null" })
+    @Alerts(DEFAULT = { "no ActiveX", "null", "null", "null" }, IE = { "", "null", "null", "4" })
     public void setRequestHeader_contentLength() throws Exception {
         final String[] expectedHeaders = getExpectedAlerts();
         setExpectedAlerts(getExpectedAlerts()[0]);

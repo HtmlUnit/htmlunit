@@ -51,10 +51,10 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "",
-                    "<note>13109<to>Tove</to>13109<from>Jani</from>13109<body>Do32not32forget32me32this32weekend!</body>"
-                    + "13109<outer>131099<inner>Some32Value</inner></outer>1310</note>1310" },
-            FF = { "no ActiveX", "" })
+    @Alerts(DEFAULT = { "no ActiveX", "" },
+            IE = { "",
+                   "<note>13109<to>Tove</to>13109<from>Jani</from>13109<body>Do32not32forget32me32this32weekend!</body>"
+                   + "13109<outer>131099<inner>Some32Value</inner></outer>1310</note>1310" })
     public void test() throws Exception {
         final String expectedString = getExpectedAlerts()[1];
         setExpectedAlerts(getExpectedAlerts()[0]);
@@ -77,8 +77,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "", "<a><!--32abc32--></a>1310" },
-            FF = { "no ActiveX", "" })
+    @Alerts(DEFAULT = { "no ActiveX", "" },
+            IE = { "", "<a><!--32abc32--></a>1310" })
     public void comment() throws Exception {
         final String expectedString = getExpectedAlerts()[1];
         setExpectedAlerts(getExpectedAlerts()[0]);
@@ -93,7 +93,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "", "<a>&lt;&gt;&amp;</a>1310" }, FF = { "no ActiveX", "" })
+    @Alerts(DEFAULT = { "no ActiveX", "" },
+            IE = { "", "<a>&lt;&gt;&amp;</a>1310" })
     public void xmlEntities() throws Exception {
         final String expectedString = getExpectedAlerts()[1];
         setExpectedAlerts(getExpectedAlerts()[0]);
@@ -107,11 +108,11 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "",
+    @Alerts(DEFAULT = { "no ActiveX", "" },
+            IE = { "",
                     "<?xml32version=\"1.0\"?>1310<xsl:stylesheet32version=\"1.0\"32"
                     + "xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">13109<xsl:template32match=\"/\">131099<html>"
-                    + "1310999<body>1310999</body>131099</html>13109</xsl:template>1310</xsl:stylesheet>1310" },
-            FF = { "no ActiveX", "" })
+                    + "1310999<body>1310999</body>131099</html>13109</xsl:template>1310</xsl:stylesheet>1310" })
     @NotYetImplemented(IE)
     // so far we are not able to add the XML header
     public void nameSpaces() throws Exception {
@@ -137,9 +138,9 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "", "<document32attrib=\"attribValue\"><outer32attrib=\"attribValue\">"
-                    + "<inner32attrib=\"attribValue\"/><meta32attrib=\"attribValue\"/></outer></document>1310" },
-            FF = { "no ActiveX", "" })
+    @Alerts(DEFAULT = { "no ActiveX", "" },
+            IE = { "", "<document32attrib=\"attribValue\"><outer32attrib=\"attribValue\">"
+                    + "<inner32attrib=\"attribValue\"/><meta32attrib=\"attribValue\"/></outer></document>1310" })
     public void attributes() throws Exception {
         final String expectedString = getExpectedAlerts()[1];
         setExpectedAlerts(getExpectedAlerts()[0]);
@@ -158,14 +159,14 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"",
+    @Alerts(DEFAULT = { "no ActiveX", "" },
+            IE = {"",
                     "<?xml32version=\"1.0\"?>1310<html32xmlns=\"http://www.w3.org/1999/xhtml\">"
                     + "<head><title>html</title></head>"
                     + "<body32id=\"bodyId\">"
                     + "<span32class=\"spanClass\">foo</span>"
                     + "</body>"
-                    + "</html>1310" },
-           FF = { "no ActiveX", "" })
+                    + "</html>1310" })
     @NotYetImplemented(IE)
     // so far we are not able to add the XML header
     public void htmlAttributes() throws Exception {
@@ -220,7 +221,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "<foo/>\r\n", "<foo/>" }, FF = "no ActiveX")
+    @Alerts(DEFAULT = "no ActiveX", IE = { "<foo/>\r\n", "<foo/>" })
     public void document() throws Exception {
         final String html = "  function test() {\n"
             + ACTIVEX_CHECK
@@ -240,7 +241,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "<img/>", "<?myTarget myData?>" }, FF = "no ActiveX")
+    @Alerts(DEFAULT = "no ActiveX", IE = { "<img/>", "<?myTarget myData?>" })
     public void xml() throws Exception {
         final String html = "  function test() {\n"
             + ACTIVEX_CHECK
@@ -266,8 +267,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<root><my:parent xmlns:my=\"myUri\"><my:child/><another_child/></my:parent></root>\r\n",
-            FF = "no ActiveX")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "<root><my:parent xmlns:my=\"myUri\"><my:child/><another_child/></my:parent></root>\r\n")
     public void namespace() throws Exception {
         final String html = "  function test() {\n"
             + ACTIVEX_CHECK
@@ -295,7 +296,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<teXtaREa/>", FF = "no ActiveX")
+    @Alerts(DEFAULT = "no ActiveX", IE = "<teXtaREa/>")
     public void mixedCase() throws Exception {
         final String html = "  function test() {\n"
             + ACTIVEX_CHECK
@@ -314,7 +315,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<img href=\"mypage.htm\"/>", FF = "no ActiveX")
+    @Alerts(DEFAULT = "no ActiveX", IE = "<img href=\"mypage.htm\"/>")
     public void noClosingTagWithAttribute() throws Exception {
         final String html = "  function test() {\n"
             + ACTIVEX_CHECK
