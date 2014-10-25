@@ -604,7 +604,8 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "window capturing", "div capturing", "span capturing", "div", "window capturing" },
+    @Alerts(DEFAULT = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, true" },
+            CHROME = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, false" },
             IE8 = { "div", "div" })
     public void stopPropagation() throws Exception {
         stopPropagation("stopPropagation()");
@@ -615,9 +616,11 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "window capturing", "div capturing", "span capturing", "div", "window capturing",
-                "div capturing", "span capturing" },
-            FF = { "window capturing", "div capturing", "span capturing", "div", "window capturing" },
+    @Alerts(DEFAULT = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, true" },
+            CHROME = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, true",
+                        "div capturing, true, true", "span capturing, true, true" },
+            IE11 = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, false",
+                        "div capturing, false, false", "span capturing, false, true" },
             IE8 = { "div", "div" })
     public void stopPropagationCancelBubble() throws Exception {
         stopPropagation("cancelBubble=true");
@@ -629,7 +632,14 @@ public class Event2Test extends WebDriverTestCase {
             + "<script>\n"
             + "  var counter = 0;\n"
             + "  function t(_s) {\n"
-            + "    return function(e) { alert(_s); counter++; if (counter >= 4) e." + cancelMethod + "; };\n"
+            + "    return function(e) {\n"
+            + "      alert(_s); counter++;\n"
+            + "      if (counter >= 4) {\n"
+            + "        alert(e.cancelBubble);\n"
+            + "        e." + cancelMethod + ";\n"
+            + "        alert(e.cancelBubble);\n"
+            + "      };\n"
+            + "    };\n"
             + "  }\n"
             + "  function init() {\n"
             + "    if (window.addEventListener) {\n"
