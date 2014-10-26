@@ -152,6 +152,7 @@ public class JQuery182Test extends WebDriverTestCase {
     public static void zzz_stopServer() throws Exception {
         SERVER_.stop();
     }
+
     /**
      * Test {1=[CHROME, FF24, FF31, IE11, IE8]}.
      * @throws Exception if an error occurs
