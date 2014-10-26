@@ -41,7 +41,8 @@ public class ScreenTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "768", "768" }, IE8 = { "768", "set exception" })
+    @Alerts(DEFAULT = { "768", "768" },
+            IE8 = { "768", "set exception" })
     public void availHeight() throws Exception {
         testNumericProperty("availHeight");
     }

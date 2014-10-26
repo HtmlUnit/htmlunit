@@ -42,6 +42,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            CHROME = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
             IE = "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*",
             IE11 = "Accept: text/html, application/xhtml+xml, */*")
     public void acceptHeaderGetUrl() throws Exception {
@@ -56,6 +57,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" },
+            CHROME = { "2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" },
             IE = { "2", "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*" },
             IE11 = { "2", "Accept: text/html, application/xhtml+xml, */*" })
     public void acceptHeaderWindowOpen() throws Exception {
@@ -78,6 +80,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" },
+            CHROME = {"2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" },
             IE = {"2", "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*" },
             IE11 = {"2", "Accept: text/html, application/xhtml+xml, */*" })
     public void acceptHeaderAnchorClick() throws Exception {
@@ -100,6 +103,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            CHROME = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
             IE = "Accept: image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*",
             IE11 = "Accept: text/html, application/xhtml+xml, */*")
     public void acceptHeaderAnchorClickWithType() throws Exception {
@@ -178,7 +182,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     public void acceptHeaderJavascript() throws Exception {
         final String html
             = "<html><head>\n"
-            + "  <script src='test.js' type='text/javascript'>\n"
+            + "  <script src='test.js' type='text/javascript'></script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
@@ -197,7 +201,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     public void acceptHeaderJavascriptWithoutType() throws Exception {
         final String html
             = "<html><head>\n"
-            + "  <script src='test.js'>\n"
+            + "  <script src='test.js'></script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
@@ -263,8 +267,8 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            IE = "Accept: */*")
+    @Alerts(DEFAULT = "Accept: */*",
+            FF = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
     public void acceptHeaderXMLHttpRequest() throws Exception {
         final String html =
               "<html>\n"

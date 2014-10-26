@@ -322,7 +322,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = { "s-x", "z" },
+    @Alerts(DEFAULT = { "s-x", "z" },
             IE11 = { "s-x", "x", "z" },
             IE8 = "s-x")
     public void addEventListener_load() throws Exception {

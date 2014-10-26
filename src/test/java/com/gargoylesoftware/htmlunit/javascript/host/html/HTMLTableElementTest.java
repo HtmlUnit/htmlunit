@@ -44,6 +44,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "caption1", "caption2", "null", "caption3", "exception", "caption3", "caption4" },
+            CHROME = { "caption1", "caption2", "null", "caption3", "exception" },
             IE8 = { "caption1", "caption2", "null", "caption3", "exception", "caption3", "exception", "caption3" })
     public void tableCaptions() throws Exception {
         final String html
@@ -79,6 +80,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "thead1", "thead2", "null", "thead3", "exception", "thead3", "thead4" },
+            CHROME = { "thead1", "thead2", "null", "thead3", "exception" },
             IE8 = { "thead1", "thead2", "null", "thead3", "exception", "thead3", "exception", "thead3" })
     public void tableHeaders() throws Exception {
         final String html
@@ -267,6 +269,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "tfoot1", "tfoot2", "null", "tfoot3", "exception", "tfoot3", "tfoot4" },
+            CHROME = { "tfoot1", "tfoot2", "null", "tfoot3", "exception" },
             IE8 = { "tfoot1", "tfoot2", "null", "tfoot3", "exception", "tfoot3", "exception", "tfoot3" })
     public void tableFooters() throws Exception {
         final String html

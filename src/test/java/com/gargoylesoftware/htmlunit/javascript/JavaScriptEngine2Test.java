@@ -18,6 +18,8 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -127,8 +129,8 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = {"in goo", "in hoo", "foo error" },
-            IE = {"in goo", "in hoo", "in foo" })
+    @Alerts(DEFAULT = {"in goo", "in hoo", "in foo" },
+            FF = {"in goo", "in hoo", "foo error" })
     public void functionDeclaredForwardInBlock() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
@@ -154,8 +156,8 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "undefined", "foo error" },
-            IE = { "function foo() {}", "function foo() {}" })
+    @Alerts(DEFAULT = { "function foo() {}", "function foo() {}" },
+            FF = { "undefined", "foo error" })
     @NotYetImplemented(IE)
     public void variableNotDefined() throws Exception {
         final String html = "<html><head></head><body>\n"
@@ -181,6 +183,9 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object Window]", "[object Window]", "true",
                 "[object HTMLDocument]", "[object HTMLDocument]", "true", "function" },
+            CHROME = { "function Window() { [native code] }", "function Window() { [native code] }", "true",
+                "function HTMLDocument() { [native code] }", "function HTMLDocument() { [native code] }",
+                "true", "function" },
             FF = { "[object Window]", "[object Window]", "true",
                 "function HTMLDocument() {\n    [native code]\n}",
                 "function HTMLDocument() {\n    [native code]\n}", "true", "function" },
@@ -401,7 +406,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      */
     @Test
     @NotYetImplemented(IE)
-    @Alerts(FF = { "0", "false", "0" },
+    @Alerts(DEFAULT = { "0", "false", "0" },
             IE = { "1", "true", "1" })
     public void nativeFunction_toStringValue() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

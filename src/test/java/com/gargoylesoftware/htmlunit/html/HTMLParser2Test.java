@@ -106,8 +106,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = "Hi!",
-            IE11 = "Hi!")
+    @Alerts(DEFAULT = "Hi!", IE8 = { })
     @NotYetImplemented
     public void unclosedCommentsInScript() throws Exception {
         final String html = "<html><body>\n"
@@ -904,6 +903,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "1", "1", "1", "1", "1" },
+            CHROME = { "3", "2", "2", "3", "2", "2" },
             FF31 = { "1", "0", "1", "1", "0", "1" },
             IE11 = { "1", "0", "1", "1", "0", "1" })
     @NotYetImplemented({ FF, IE11 })

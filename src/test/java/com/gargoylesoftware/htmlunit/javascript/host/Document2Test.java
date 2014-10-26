@@ -375,16 +375,16 @@ public class Document2Test extends WebDriverTestCase {
                         "<div id=\"div\">&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</div>",
                         "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
                         "undefined" },
-            IE = { "<p>a & b</p> &amp; \u0162 \" '",
-                "<p>a & b</p> &amp; \u0162 \" '",
-                "<DIV id=div>&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</DIV>",
-                "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
-                "<p>a & b</p> &amp; \u0162 \" '" },
+            IE8 = { "<p>a & b</p> &amp; \u0162 \" '",
+                        "<p>a & b</p> &amp; \u0162 \" '",
+                        "<DIV id=div>&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</DIV>",
+                        "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
+                        "<p>a & b</p> &amp; \u0162 \" '" },
             IE11 = { "<p>a & b</p> &amp; \u0162 \" '",
-                "<p>a & b</p> &amp; \u0162 \" '",
-                "<div id=\"div\">&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</div>",
-                "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
-                "<p>a & b</p> &amp; \u0162 \" '" })
+                        "<p>a & b</p> &amp; \u0162 \" '",
+                        "<div id=\"div\">&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</div>",
+                        "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
+                        "<p>a & b</p> &amp; \u0162 \" '" })
     public void createTextNodeWithHtml_FF() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test() {\n"

@@ -18,6 +18,8 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -47,8 +49,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "black", "pink", "color: pink;" },
-            CHROME = { "black", "rgb(255, 192, 203)", "color: rgb(255, 192, 203);" })
+    @Alerts(DEFAULT = { "black", "pink", "color: pink;", "color: pink;" },
+            CHROME = { "black", "rgb(255, 192, 203)", "color: rgb(255, 192, 203);", "color: rgb(255, 192, 203);" })
     public void style_OneCssAttribute() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -62,17 +64,22 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "}\n</script></head>\n"
             + "<body onload='doTest()'><div id='div1' style='color: black'>foo</div></body></html>";
 
+        final String style = getExpectedAlerts()[getExpectedAlerts().length - 1];
+
+        setExpectedAlerts(Arrays.copyOf(getExpectedAlerts(), getExpectedAlerts().length - 1));
         final WebDriver driver = loadPageWithAlerts2(html);
-        assertEquals("color: pink;", driver.findElement(By.id("div1")).getAttribute("style"));
+
+        assertEquals(style, driver.findElement(By.id("div1")).getAttribute("style"));
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "color: pink; background: blue; foo: bar;",
-            FF = "color: pink; background: none repeat scroll 0% 0% blue;",
-            IE11 = "background: blue; color: pink; foo: bar;")
+    @Alerts(IE8 = { "black", "pink", "color: pink; background: blue; foo: bar;" },
+            FF = { "black", "pink", "color: pink; background: none repeat scroll 0% 0% blue;" },
+            CHROME = { "black", "rgb(255, 192, 203)", "color: rgb(255, 192, 203); background: blue;" },
+            IE11 = { "black", "pink", "background: blue; color: pink; foo: bar;" })
     @NotYetImplemented({ FF, IE11 })
     public void style_MultipleCssAttributes() throws Exception {
         final String html
@@ -86,19 +93,20 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "<body onload='doTest()'>\n"
             + "<div id='div1' style='color: black;background:blue;foo:bar'>foo</div></body></html>";
 
-        // final WebDriver driver = loadPageWithAlerts2(html);
-        final WebDriver driver = loadPage2(html, URL_FIRST);
-        verifyAlerts(DEFAULT_WAIT_TIME, new String[] {"black", "pink"}, driver);
+        final String style = getExpectedAlerts()[getExpectedAlerts().length - 1];
 
-        assertEquals(getExpectedAlerts()[0], driver.findElement(By.id("div1")).getAttribute("style"));
+        setExpectedAlerts(Arrays.copyOf(getExpectedAlerts(), getExpectedAlerts().length - 1));
+        final WebDriver driver = loadPageWithAlerts2(html);
+
+        assertEquals(style, driver.findElement(By.id("div1")).getAttribute("style"));
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "null", "", "pink" },
-            CHROME = { "null", "", "rgb(255, 192, 203)" })
+    @Alerts(DEFAULT = { "null", "", "pink", "color: pink;" },
+            CHROME = { "null", "", "rgb(255, 192, 203)", "color: rgb(255, 192, 203);" })
     public void style_OneUndefinedCssAttribute() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -111,8 +119,12 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "}\n</script></head>\n"
             + "<body onload='doTest()'><div id='div1'>foo</div></body></html>";
 
+        final String style = getExpectedAlerts()[getExpectedAlerts().length - 1];
+
+        setExpectedAlerts(Arrays.copyOf(getExpectedAlerts(), getExpectedAlerts().length - 1));
         final WebDriver driver = loadPageWithAlerts2(html);
-        assertEquals("color: pink;", driver.findElement(By.id("div1")).getAttribute("style"));
+
+        assertEquals(style, driver.findElement(By.id("div1")).getAttribute("style"));
     }
 
     /**
@@ -900,7 +912,10 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "none", IE11 = "inline", IE8 = "ignored")
+    @Alerts(DEFAULT = "none",
+            CHROME = "",
+            IE11 = "inline",
+            IE8 = "ignored")
     @NotYetImplemented(IE11)
     public void displayDefaultOverwritesNone() throws Exception {
         final String html = "<html>\n"
@@ -1299,9 +1314,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "BLACK", "pink", "color: pink;" },
-            CHROME = { "black", "rgb(255, 192, 203)", "color: rgb(255, 192, 203);" },
-            IE11 = { "black", "pink", "color: pink;" })
+    @Alerts(DEFAULT = { "BLACK", "pink", "color: pink;", "color: pink;" },
+            CHROME = { "black", "rgb(255, 192, 203)", "color: rgb(255, 192, 203);", "color: rgb(255, 192, 203);" },
+            IE11 = { "black", "pink", "color: pink;", "color: pink;" })
     @NotYetImplemented(IE11)
     public void caseInsensitive() throws Exception {
         final String html
@@ -1316,8 +1331,11 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "}\n</script></head>\n"
             + "<body onload='doTest()'><div id='div1' style='COLOR: BLACK'>foo</div></body></html>";
 
+        final String style = getExpectedAlerts()[getExpectedAlerts().length - 1];
+
+        setExpectedAlerts(Arrays.copyOf(getExpectedAlerts(), getExpectedAlerts().length - 1));
         final WebDriver driver = loadPageWithAlerts2(html);
-        assertEquals("color: pink;", driver.findElement(By.id("div1")).getAttribute("style"));
+        assertEquals(style, driver.findElement(By.id("div1")).getAttribute("style"));
     }
 
     /**

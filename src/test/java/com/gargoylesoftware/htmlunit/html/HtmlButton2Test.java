@@ -275,9 +275,8 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "initial-undefined", "newValue-undefined", "newValue-Cancel" },
-            IE8 = { "initial-OK", "newValue-OK", "newValue-Cancel" },
-            IE11 = { "initial-OK", "newValue-OK", "newValue-Cancel" })
+    @Alerts(DEFAULT = { "initial-OK", "newValue-OK", "newValue-Cancel" },
+            FF = { "initial-undefined", "newValue-undefined", "newValue-Cancel" })
     public void innerText() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"

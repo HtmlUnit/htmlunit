@@ -696,7 +696,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "block", "none", "inline", "block", "block", "block", "inline" },
-            CHROME = { "block", "inline", "inline", "block", "inline", "inline", "inline" },
+            CHROME = { "block", "inline", "inline", "block", "block", "block", "inline" },
             IE8 = { "inline", "inline", "inline", "block", "inline", "inline", "inline" },
             IE11 = { "block", "none", "inline", "block", "inline", "inline", "inline" })
     public void defaultDisplayValues_NO() throws Exception {

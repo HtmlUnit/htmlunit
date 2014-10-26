@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -42,8 +40,9 @@ public class Sarissa0993Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "", "", "", "", "", "", "++++F+++" },
-            IE11 = { "+++++++++++F++++++", "", "", "", "FFF", "FF", "FFFFFFFF" })
+    @Alerts(DEFAULT = { "++++++++++++++++++", "+", "+", "+", "+++", "++", "++++F+++" },
+            CHROME = { "+++++++++++FF+++++", "+", "+", "+", "F++", "++", "++++F+++" },
+            IE11 = { "+++++++++++F++++++", "+", "+", "+", "FFF", "FF", "FFFFFFFF" })
     // TODO [IE11]XML sarissa 0.9.9.3 is not compatible with IE11's new XML stuff
     public void sarissa() throws Exception {
         startWebServer("src/test/resources/libraries/sarissa/0.9.9.3", null, null);
@@ -73,24 +72,11 @@ public class Sarissa0993Test extends WebDriverTestCase {
      * for failing tests (see the results in a real browser)
      */
     private void verify(final WebDriver driver, final String testName, final String expectedResult) throws Exception {
-        if ("".equals(expectedResult)) {
-            verify(driver, testName);
-        }
-        else {
-            final WebElement div =
-                driver.findElement(By.xpath("//div[@class='placeholder' and a[@name='#" + testName + "']]"));
+        final WebElement div =
+            driver.findElement(By.xpath("//div[@class='placeholder' and a[@name='#" + testName + "']]"));
 
-            String text = div.getText();
-            text = text.substring(0, text.indexOf(String.valueOf(expectedResult.length()))).trim();
-            assertEquals(testName + " Results\n" + expectedResult, text);
-        }
-    }
-
-    private void verify(final WebDriver driver, final String testName) throws Exception {
-        final List<WebElement> divList =
-            driver.findElements(By.xpath("//div[@class='placeholder']/a[@name='#" + testName + "']/../div[last()]"));
-        assertEquals(1, divList.size());
-        final WebElement div = divList.get(0);
-        assertEquals("OK!", div.getText());
+        String text = div.getText();
+        text = text.substring(0, text.indexOf(String.valueOf(expectedResult.length()))).trim();
+        assertEquals(testName + " Results\n" + expectedResult, text);
     }
 }

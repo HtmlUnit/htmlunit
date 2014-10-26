@@ -1508,7 +1508,6 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object HTMLDocument]", "[object HTMLBodyElement]",
                 "true", "true", "true", "false", "true", "false" },
-            CHROME = "null",
             IE8 = { "[object]", "[object]", "true", "true", "true", "true", "true", "true" })
     @NotYetImplemented(IE8)
     public void documentCloneNode() throws Exception {
@@ -1784,8 +1783,8 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "0", "1", "1" },
-            IE11 = { "0", "0", "0" },
+    @Alerts(DEFAULT = { "0", "0", "0" },
+            FF = { "0", "1", "1" },
             IE8 = { "undefined", "undefined", "undefined" })
     @BuggyWebDriver(FF)
     public void designMode_createsSelectionRange() throws Exception {
@@ -1840,7 +1839,9 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLHeadingElement]", IE = "not available")
+    @Alerts(DEFAULT = "[object HTMLHeadingElement]",
+            CHROME = "null",
+            IE = "not available")
     public void evaluate_caseInsensitiveAttribute() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

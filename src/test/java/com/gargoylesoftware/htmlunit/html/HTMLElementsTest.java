@@ -679,7 +679,7 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("0")
+    @Alerts(DEFAULT = "0", CHROME = "1")
     public void elementClosesItself_isindex() throws Exception {
         loadPageWithAlerts2(elementClosesItself("isindex"));
     }
@@ -707,6 +707,7 @@ public class HTMLElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
+            CHROME = "0",
             IE8 = "0",
             FF31 = "2")
     @NotYetImplemented({ IE8, FF31 })

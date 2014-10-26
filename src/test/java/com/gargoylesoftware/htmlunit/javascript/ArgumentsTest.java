@@ -143,7 +143,7 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false", IE = "true")
+    @Alerts(DEFAULT = "true", FF = "false")
     public void argumentsEqualsFnArguments() throws Exception {
         final String html = "<html><body><script>\n"
             + "function test1() {\n"

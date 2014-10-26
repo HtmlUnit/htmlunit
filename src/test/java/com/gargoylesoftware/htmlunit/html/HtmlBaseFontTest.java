@@ -38,6 +38,7 @@ public class HtmlBaseFontTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLSpanElement]",
+            CHROME = "[object HTMLElement]",
             IE11 = "[object HTMLBaseFontElement]",
             IE8 = "[object]")
     public void simpleScriptable() throws Exception {

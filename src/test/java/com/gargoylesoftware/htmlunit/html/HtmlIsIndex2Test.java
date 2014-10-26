@@ -45,6 +45,7 @@ public class HtmlIsIndex2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
+            CHROME = "[object HTMLUnknownElement]",
             IE8 = "[object]")
     @NotYetImplemented({ FF, IE11 })
     public void simpleScriptable() throws Exception {

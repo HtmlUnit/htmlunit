@@ -40,9 +40,9 @@ public class DocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = { "[object DocumentType]", "true", "html,10,null,null,null,null",
+    @Alerts(CHROME = { "[object DocumentType]", "true", "html,10,null,undefined,null,null",
             "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
-            + "null,null,null" },
+            + "undefined,undefined,undefined" },
             FF = { "[object DocumentType]", "true", "html,10,null,null,null,null",
             "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
             + "null,undefined,undefined" },
@@ -84,8 +84,8 @@ public class DocumentTypeTest extends WebDriverTestCase {
     @Test
     @Alerts(
         CHROME = {
-            "[object DocumentType]", "greeting,10,null,null,null,null",
-            "greeting,MyIdentifier,hello.dtd,null,null,null" },
+            "[object DocumentType]", "greeting,10,null,undefined,null,null",
+            "greeting,MyIdentifier,hello.dtd,undefined,undefined,undefined" },
         FF = {
             "[object DocumentType]", "greeting,10,null,null,null,null",
             "greeting,MyIdentifier,hello.dtd,null,undefined,undefined" },

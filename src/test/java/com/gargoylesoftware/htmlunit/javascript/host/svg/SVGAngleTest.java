@@ -40,6 +40,7 @@ public class SVGAngleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object SVGAngle]", "0", "1", "2", "3", "4" },
             FF = { "function SVGAngle() {\n    [native code]\n}", "0", "1", "2", "3", "4" },
+            CHROME = { "function SVGAngle() { [native code] }", "0", "1", "2", "3", "4" },
             IE8 = "undefined")
     @NotYetImplemented(FF)
     public void simpleScriptable() throws Exception {

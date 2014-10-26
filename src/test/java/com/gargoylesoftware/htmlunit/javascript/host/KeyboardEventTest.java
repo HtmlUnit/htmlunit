@@ -65,6 +65,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "0-0", "0-0", "undefined-undefined" },
+            CHROME = { "exception", "0-0", "0-0" },
             IE = { "exception", "exception", "exception" },
             IE11 = { "exception", "0-0", "undefined-undefined" })
     public void keyCode() throws Exception {
@@ -92,7 +93,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "exception", "exception" },
+    @Alerts(DEFAULT = { "exception", "exception" },
             FF = { "keydown, true, true, true, true, true, true, 65, 0",
                 "keyup, false, false, false, false, false, false, 32, 0",
                 "keydown, true, true, true, true, true, true, 65, 0",
