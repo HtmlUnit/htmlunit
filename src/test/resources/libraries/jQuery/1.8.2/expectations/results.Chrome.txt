@@ -387,7 +387,7 @@
 387. css: marginRight computed style (bug #3333) (0, 1, 1)
 388. css: box model properties incorrectly returning % instead of px, see #10639 and #12088 (0, 2, 2)
 389. css: jQuery.cssProps behavior, (bug #8402) (0, 2, 2)
-390. css: widows & orphans #8936 (0, 4, 4)
+390. css: widows & orphans #8936 (2, 2, 4)
 391. css: can't get css for disconnected in IE<9, see #10254 and #8388 (0, 2, 2)
 392. css: can't get background-position in IE<9, see #10796 (0, 8, 8)
 393. css: percentage properties for bottom and right in IE<9 should not be incorrectly transformed to pixels, see #11311 (0, 1, 1)
