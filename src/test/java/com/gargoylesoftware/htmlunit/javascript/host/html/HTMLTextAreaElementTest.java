@@ -151,8 +151,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0,0", "0,0", "3,3", "3,10", "0,0" },
-            FF = { "0,0", "11,11", "3,11", "3,10", "7,7" },
+    @Alerts(DEFAULT = { "0,0", "11,11", "3,11", "3,10", "7,7" },
+            IE11 = { "0,0", "0,0", "3,3", "3,10", "0,0" },
             IE8 = { "undefined,undefined", "undefined,undefined", "3,undefined", "3,10", "3,10" })
     @NotYetImplemented(CHROME)
     public void selection() throws Exception {
@@ -163,8 +163,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0,0", "0,0", "0,0", "0,11", "0,0" },
-            FF = { "0,0", "11,11", "0,11", "0,11", "7,7" },
+    @Alerts(DEFAULT = { "0,0", "11,11", "0,11", "0,11", "7,7" },
+            IE11 = { "0,0", "0,0", "0,0", "0,11", "0,0" },
             IE8 = { "undefined,undefined", "undefined,undefined", "-3,undefined", "-3,15", "-3,15" })
     @NotYetImplemented(CHROME)
     public void selection_outOfBounds() throws Exception {
@@ -175,8 +175,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0,0", "0,0", "10,10", "5,5", "0,0" },
-            FF = { "0,0", "11,11", "10,11", "5,5", "7,7" },
+    @Alerts(DEFAULT = { "0,0", "11,11", "10,11", "5,5", "7,7" },
             IE8 = { "undefined,undefined", "undefined,undefined", "10,undefined", "10,5", "10,5" },
             IE11 = { "0,0", "0,0", "10,10", "5,5", "7,7" })
     @NotYetImplemented({ CHROME, IE11 })

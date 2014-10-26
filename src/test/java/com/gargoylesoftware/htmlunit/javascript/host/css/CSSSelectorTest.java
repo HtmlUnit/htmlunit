@@ -1059,8 +1059,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "0", "undefined", "1", "[object HTMLInputElement]", "id2" },
-            CHROME = { "0", "undefined", "0", "undefined", "exception" },
+    @Alerts(DEFAULT = { "0", "undefined", "1", "[object HTMLInputElement]", "id2" },
             IE8 = { "1", "[object HTMLHtmlElement]", "1", "[object HTMLInputElement]", "id2" },
             IE11 = { "1", "[object HTMLBodyElement]", "1", "[object HTMLInputElement]", "id2" })
     @BuggyWebDriver(Browser.FF)
