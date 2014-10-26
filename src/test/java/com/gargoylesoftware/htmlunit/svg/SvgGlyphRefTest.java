@@ -40,6 +40,7 @@ public class SvgGlyphRefTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object SVGElement]",
+            CHROME = "[object SVGGlyphRefElement]",
             IE8 = "[object HTMLGenericElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

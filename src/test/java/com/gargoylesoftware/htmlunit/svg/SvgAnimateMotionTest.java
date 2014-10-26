@@ -40,7 +40,7 @@ public class SvgAnimateMotionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object SVGAnimateMotionElement]",
+    @Alerts(DEFAULT = "[object SVGAnimateMotionElement]",
             IE = "[object HTMLGenericElement]",
             IE11 = "[object SVGElement]")
     public void simpleScriptable() throws Exception {

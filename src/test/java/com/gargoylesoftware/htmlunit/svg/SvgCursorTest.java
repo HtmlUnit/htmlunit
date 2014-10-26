@@ -40,6 +40,7 @@ public class SvgCursorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object SVGElement]",
+            CHROME = "[object SVGCursorElement]",
             IE8 = "[object HTMLGenericElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

@@ -40,8 +40,8 @@ public class SvgAnimateTransformTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object SVGAnimateTransformElement]",
-            IE = "[object HTMLGenericElement]",
+    @Alerts(DEFAULT = "[object SVGAnimateTransformElement]",
+            IE8 = "[object HTMLGenericElement]",
             IE11 = "[object SVGElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

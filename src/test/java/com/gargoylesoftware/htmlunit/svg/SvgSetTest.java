@@ -40,7 +40,7 @@ public class SvgSetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object SVGSetElement]",
+    @Alerts(DEFAULT = "[object SVGSetElement]",
             IE = "[object HTMLGenericElement]",
             IE11 = "[object SVGElement]")
     public void simpleScriptable() throws Exception {
