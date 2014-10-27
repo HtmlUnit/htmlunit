@@ -175,9 +175,6 @@ public class WebClient implements Serializable {
     /** URL for "about:blank". */
     public static final URL URL_ABOUT_BLANK = UrlUtils.toUrlSafe(ABOUT_BLANK);
 
-    /** Singleton {@link WebResponse} for "about:blank". */
-    private static final WebResponse WEB_RESPONSE_FOR_ABOUT_BLANK = new StringWebResponse("", URL_ABOUT_BLANK);
-
     private ScriptPreProcessor scriptPreProcessor_;
 
     private Map<String, String> activeXObjectMap_ = Collections.emptyMap();
@@ -1092,7 +1089,7 @@ public class WebClient implements Serializable {
         if (!"blank".equalsIgnoreCase(StringUtils.substringAfter(urlWithoutQuery, "about:"))) {
             throw new IllegalArgumentException(url + " is not supported, only about:blank is supported now.");
         }
-        return WEB_RESPONSE_FOR_ABOUT_BLANK;
+        return new StringWebResponse("", URL_ABOUT_BLANK);
     }
 
     /**
@@ -1122,7 +1119,8 @@ public class WebClient implements Serializable {
             compiledHeaders.add(new NameValuePair("Content-Type", "text/html"));
             final WebResponseData responseData =
                 new WebResponseData(
-                    TextUtil.stringToByteArray("File: " + file.getAbsolutePath()), 404, "Not Found", compiledHeaders);
+                    TextUtil.stringToByteArray("File: " + file.getAbsolutePath(), "UTF-8"),
+                    404, "Not Found", compiledHeaders);
             return new WebResponse(responseData, webRequest, 0);
         }
 

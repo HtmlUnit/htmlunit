@@ -37,20 +37,6 @@ public class StringWebResponse extends WebResponse {
     private boolean fromJavascript_;
 
     /**
-     * Helper method for constructors. Converts the specified string into {@link WebResponseData}
-     * with other defaults specified.
-     *
-     * @param contentString the string to be converted to a <tt>WebResponseData</tt>
-     * @return a simple <tt>WebResponseData</tt> with defaults specified
-     */
-    private static WebResponseData getWebResponseData(final String contentString, final String charset) {
-        final byte[] content = TextUtil.stringToByteArray(contentString, charset);
-        final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>();
-        compiledHeaders.add(new NameValuePair("Content-Type", "text/html"));
-        return new WebResponseData(content, HttpStatus.SC_OK, "OK", compiledHeaders);
-    }
-
-    /**
      * Creates an instance associated with the specified originating URL.
      * @param content the content to return
      * @param originatingURL the URL that this should be associated with
@@ -68,6 +54,20 @@ public class StringWebResponse extends WebResponse {
      */
     public StringWebResponse(final String content, final String charset, final URL originatingURL) {
         super(getWebResponseData(content, charset), buildWebRequest(originatingURL, charset), 0);
+    }
+
+    /**
+     * Helper method for constructors. Converts the specified string into {@link WebResponseData}
+     * with other defaults specified.
+     *
+     * @param contentString the string to be converted to a <tt>WebResponseData</tt>
+     * @return a simple <tt>WebResponseData</tt> with defaults specified
+     */
+    private static WebResponseData getWebResponseData(final String contentString, final String charset) {
+        final byte[] content = TextUtil.stringToByteArray(contentString, charset);
+        final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>();
+        compiledHeaders.add(new NameValuePair("Content-Type", "text/html"));
+        return new WebResponseData(content, HttpStatus.SC_OK, "OK", compiledHeaders);
     }
 
     private static WebRequest buildWebRequest(final URL originatingURL, final String charset) {

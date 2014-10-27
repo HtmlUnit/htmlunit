@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -74,6 +75,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Daniel Gredler
  * @author Sudhan Moghe
  * @author Ronald Brill
+ * @author Carsten Steul
  */
 @RunWith(BrowserRunner.class)
 public class WebClientTest extends SimpleWebTestCase {
@@ -2177,5 +2179,26 @@ public class WebClientTest extends SimpleWebTestCase {
         webClient.getOptions().setThrowExceptionOnScriptError(false);
 
         loadPage(html);
+    }
+
+    /**
+     * Testcase for issue #1652.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void aboutBlankSharedRequest() throws Exception {
+        final WebClient webClient = getWebClient();
+
+        final WebWindow firstWindow = webClient.openWindow(WebClient.URL_ABOUT_BLANK, "Window 1");
+        Assert.assertNotNull(firstWindow);
+
+        final WebRequest firstRequest1 = firstWindow.getEnclosedPage().getWebResponse().getWebRequest();
+        assertEquals("about:blank", firstRequest1.getUrl().toExternalForm());
+        firstRequest1.setUrl(UrlUtils.toUrlSafe(WebClient.ABOUT_BLANK + "#anchor"));
+
+        final WebWindow secondWindow = webClient.openWindow(WebClient.URL_ABOUT_BLANK, "Window 2");
+        Assert.assertNotNull(secondWindow);
+        final WebRequest secondRequest = secondWindow.getEnclosedPage().getWebResponse().getWebRequest();
+        assertEquals("about:blank", secondRequest.getUrl().toExternalForm());
     }
 }
