@@ -40,11 +40,16 @@ public class TextTest extends WebDriverTestCase {
             IE8 = "null")
     public void simpleScriptable() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
-            + "function test() {\n"
-            + "  alert(document.body.firstChild);\n"
-            + "}\n"
-            + "</script></head><body onload='test()'> </body></html>";
+            = "<html>\n"
+            + "<head>\n"
+            + "  <title>foo</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.body.firstChild);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'> </body></html>";
 
         loadPageWithAlerts2(html);
     }

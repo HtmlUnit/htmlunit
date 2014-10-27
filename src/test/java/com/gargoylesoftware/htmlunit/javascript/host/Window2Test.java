@@ -255,6 +255,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "function Node() {\n    [native code]\n}", "function Element() {\n    [native code]\n}" },
+            CHROME = { "function Node() { [native code] }", "function Element() { [native code] }" },
             IE8 = { "undefined", "undefined" },
             IE11 = { "[object Node]", "[object Element]" })
     @NotYetImplemented(FF)
@@ -625,23 +626,21 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF24 = { "true", "true", "true", "false", "false", "true", "true", "true", "false" },
-            FF31 = { "true", "true", "false", "true", "false", "true", "true", "true", "false" },
-            IE8 = { "false", "false", "false", "false", "false", "false", "false", "false", "false" },
-            IE11 = { "true", "true", "false", "false", "true", "true", "true", "false", "true" })
+    @Alerts(CHROME = { "true", "true", "89", "true", "true", "16" },
+            FF24 = { "true", "true", "115", "true", "true", "14" },
+            FF31 = { "true", "true", "94", "true", "true", "14" },
+            IE8 = { "false", "false", "NaN", "false", "false", "NaN" },
+            IE11 = { "true", "true", "63", "true", "true", "16" })
     public void heightsAndWidths() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
             + "function test() {\n"
             + "  alert(window.innerHeight > 0);\n"
             + "  alert(window.innerHeight == document.body.clientHeight);\n"
-            + "  alert(window.outerHeight == window.innerHeight + 115);\n" // FF24
-            + "  alert(window.outerHeight == window.innerHeight + 94);\n" // FF32
-            + "  alert(window.outerHeight == window.innerHeight + 63);\n" // IE11
+            + "  alert(window.outerHeight - window.innerHeight);\n"
             + "  alert(window.innerWidth > 0);\n"
             + "  alert(window.innerWidth == document.body.clientWidth);\n"
-            + "  alert(window.outerWidth == window.innerWidth + 14);\n" // FF
-            + "  alert(window.outerWidth == window.innerWidth + 16);\n" // IE11
+            + "  alert(window.outerWidth - window.innerWidth);\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>";
@@ -653,10 +652,11 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "605", "1256", "705", "1256" },
+    @Alerts(CHROME = { "679", "1256", "662", "1239" },
             FF24 = { "653", "1258", "636", "1241" },
             FF31 = { "674", "1258", "657", "1241" },
-            IE11 = { "705", "1256", "688", "1239" })
+            IE11 = { "705", "1256", "688", "1239" },
+            IE8 = { "605", "1256", "705", "1256" })
     @NotYetImplemented({ FF, IE11 })
     // TODO width and height calculation needs to be reworked in HtmlUnit
     // but as the calculation might be effected by e.g. current windows style it is not that simple

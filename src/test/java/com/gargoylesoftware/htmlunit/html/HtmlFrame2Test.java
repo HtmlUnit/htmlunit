@@ -101,8 +101,10 @@ public class HtmlFrame2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "second [object HTMLFormElement]", "third [object HTMLFormElement]",
-            "parent [object HTMLFormElement]" },
-            IE8 = { "second [object]", "third [object]", "parent [object]" })
+                        "parent [object HTMLFormElement]" },
+            CHROME = { "second undefined", "third [object HTMLFormElement]",
+                        "parent [object HTMLFormElement]" },
+                        IE8 = { "second [object]", "third [object]", "parent [object]" })
     // real FF sometimes alerts 'third' before 'second'
     public void postponeLoading() throws Exception {
         final String html = "<FRAMESET rows='50%,*' "

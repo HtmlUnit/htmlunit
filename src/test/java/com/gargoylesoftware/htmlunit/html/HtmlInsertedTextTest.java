@@ -34,14 +34,18 @@ public class HtmlInsertedTextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("abcdef")
+    @Alerts(DEFAULT = { "abcdef", "abcdef" },
+            FF = { "abcdef", "undefined" },
+            IE8 = { "undefined", "abcdef" })
     public void simple() throws Exception {
-        final String html = "<html><body>\n"
-            + "<a href='foo' id='it'>ab<ins>cd</ins>ef</a>\n"
-            + "<script>\n"
-            + "var e = document.getElementById('it');\n"
-            + "alert(e.textContent || e.innerText);\n"
-            + "</script>\n"
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <a href='foo' id='it'>ab<ins>cd</ins>ef</a>\n"
+            + "  <script>\n"
+            + "    var e = document.getElementById('it');\n"
+            + "    alert(e.textContent);\n"
+            + "    alert(e.innerText);\n"
+            + "  </script>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
