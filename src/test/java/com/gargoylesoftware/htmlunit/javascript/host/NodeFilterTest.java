@@ -63,7 +63,6 @@ public class NodeFilterTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "4294967295",
-            CHROME = "-1",
             IE8 = "exception")
     @NotYetImplemented(CHROME)
     public void constants_SHOW_ALL() throws Exception {

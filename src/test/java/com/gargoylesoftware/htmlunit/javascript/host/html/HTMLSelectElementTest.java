@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static org.junit.Assert.assertSame;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -833,18 +835,28 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "0", "true", "false", "false", "0",
+                        "0", "false", "false", "false", "-1" },
+            CHROME = { "1", "true", "false", "false", "0",
+                        "1", "false", "false", "false", "-1" })
     public void defaultSelectedValue_SizeNegativeOne() throws Exception {
-        defaultSelectedValue("-1", false, new String[] {"0", "true", "false", "false", "0"});
-        defaultSelectedValue("-1", true, new String[] {"0", "false", "false", "false", "-1"});
+        final String[] expected = getExpectedAlerts();
+        defaultSelectedValue("-1", false, Arrays.copyOf(expected, 5));
+        defaultSelectedValue("-1", true, Arrays.copyOfRange(expected, 5, 10));
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts (DEFAULT = { "0", "true", "false", "false", "0",
+                         "0", "false", "false", "false", "-1" },
+             CHROME = { "1", "true", "false", "false", "0",
+                        "1", "false", "false", "false", "-1" })
     public void defaultSelectedValue_SizeZero() throws Exception {
-        defaultSelectedValue("0", false, new String[] {"0", "true", "false", "false", "0"});
-        defaultSelectedValue("0", true, new String[] {"0", "false", "false", "false", "-1"});
+        final String[] expected = getExpectedAlerts();
+        defaultSelectedValue("0", false, Arrays.copyOf(expected, 5));
+        defaultSelectedValue("0", true, Arrays.copyOfRange(expected, 5, 10));
     }
 
     /**
@@ -869,9 +881,14 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "0", "true", "false", "false", "0",
+                        "0", "false", "false", "false", "-1" },
+            CHROME = { "1", "true", "false", "false", "0",
+                        "1", "false", "false", "false", "-1" })
     public void defaultSelectedValue_SizeInvalid() throws Exception {
-        defaultSelectedValue("x", false, "0", "true", "false", "false", "0");
-        defaultSelectedValue("x", true, "0", "false", "false", "false", "-1");
+        final String[] expected = getExpectedAlerts();
+        defaultSelectedValue("x", false, Arrays.copyOf(expected, 5));
+        defaultSelectedValue("x", true, Arrays.copyOfRange(expected, 5, 10));
     }
 
     /**

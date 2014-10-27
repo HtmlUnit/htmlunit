@@ -58,6 +58,7 @@ public class MessageEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no initMessageEvent",
+            CHROME = { "message", "true", "true", "hello", "http://localhost:", "2", "[object Window]" },
             FF24 = { "message", "true", "true", "hello", "http://localhost:", "2", "[object Window]" },
             IE11 = { "message", "true", "true", "hello", "http://localhost:", "undefined", "[object Window]" },
             IE8 = "no createEvent")

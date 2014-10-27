@@ -303,6 +303,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "exception", "4", "0" },
+            CHROME = { "exception", "4", "200" },
             IE = { "4", "200" })
     public void preflight_incorrect_headers() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
