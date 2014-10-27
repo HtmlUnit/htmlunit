@@ -104,13 +104,15 @@ public final class TextUtil {
      * @return the String as a byte[]; if the specified encoding is not supported an empty byte[] will be returned
      */
     public static byte[] stringToByteArray(final String content, final String charset) {
-        byte[] contentBytes;
+        if (content ==  null || content.isEmpty()) {
+            return new byte[0];
+        }
+
         try {
-            contentBytes = content.getBytes(charset);
+            return content.getBytes(charset);
         }
         catch (final UnsupportedEncodingException e) {
-            contentBytes = new byte[0];
+            return new byte[0];
         }
-        return contentBytes;
     }
 }

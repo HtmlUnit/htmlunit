@@ -66,4 +66,24 @@ public final class TextUtilTest extends SimpleWebTestCase {
             Assert.assertEquals(expectedResult, actualResult);
         }
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void stringToByteArray() throws Exception {
+        byte[] result = TextUtil.stringToByteArray(null, "UTF-8");
+        Assert.assertEquals(0, result.length);
+
+        result = TextUtil.stringToByteArray("", "UTF-8");
+        Assert.assertEquals(0, result.length);
+
+        result = TextUtil.stringToByteArray("htmlunit", "UTF-8");
+        Assert.assertEquals(8, result.length);
+        Assert.assertEquals(104, result[0]);
+
+        result = TextUtil.stringToByteArray("htmlunit", "Klingon");
+        Assert.assertEquals(0, result.length);
+    }
+
 }
