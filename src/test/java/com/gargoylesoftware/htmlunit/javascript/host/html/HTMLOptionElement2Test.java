@@ -49,7 +49,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("SELECT;")
+    @Alerts(DEFAULT = { }, IE = "SELECT;")
+    @NotYetImplemented(FF)
     public void clickSelect() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
