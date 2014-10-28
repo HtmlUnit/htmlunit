@@ -1196,8 +1196,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "click", "fireEvent not available", "fireEvent not available", "fireEvent not available" },
-            IE8 = { "click", "click", "click", "click" })
+    @Alerts(DEFAULT = { "click", "fireEvent not available", "fireEvent not available" },
+            IE8 = { "click", "click", "click" })
     public void fireEvent_WithTemplate() throws Exception {
         final String html =
             "<html>\n"
@@ -1226,17 +1226,14 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "  </head>\n"
             + "<body>\n"
             + "  <div id='a' onclick='doAlert(event)'>foo</div>\n"
-            + "  <div id='b' onmouseover='doTest()'>bar</div>\n"
-            + "  <div id='c' onmouseover='doTest2()'>baz</div>\n"
+            + "  <div id='b' onclick='doTest()'>bar</div>\n"
+            + "  <div id='c' onclick='doTest2()'>baz</div>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("a")).click();
-
-        final Actions actions = new Actions(driver);
-        actions.moveToElement(driver.findElement(By.id("b")));
-        actions.moveToElement(driver.findElement(By.id("c")));
-        actions.perform();
+        driver.findElement(By.id("b")).click();
+        driver.findElement(By.id("c")).click();
 
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
