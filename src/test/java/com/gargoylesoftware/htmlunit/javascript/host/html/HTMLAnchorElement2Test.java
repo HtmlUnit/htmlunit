@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -408,7 +410,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("inner")
     public void javascriptTargetNone() throws Exception {
-        javascriptTarget("", 0);
+        javascriptTarget("", 0, getExpectedAlerts());
     }
 
     /**
@@ -417,16 +419,19 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("inner")
     public void javascriptTargetEmpty() throws Exception {
-        javascriptTarget("target=''", 0);
+        javascriptTarget("target=''", 0, getExpectedAlerts());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts()
+    @Alerts(DEFAULT = "1", CHROME = { "0", "inner" })
     public void javascriptTargetWhitespace() throws Exception {
-        javascriptTarget("target='  '", 1);
+        final String[] alerts = getExpectedAlerts();
+        javascriptTarget("target='  '",
+                            Integer.parseInt(alerts[0]),
+                            Arrays.copyOfRange(alerts, 1, alerts.length));
     }
 
     /**
@@ -435,46 +440,53 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts("inner")
     public void javascriptTargetSelf() throws Exception {
-        javascriptTarget("target='_self'", 0);
+        javascriptTarget("target='_self'", 0, getExpectedAlerts());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts()
+    @Alerts(DEFAULT = "1", CHROME = { "0", "inner" })
     public void javascriptTargetBlank() throws Exception {
-        javascriptTarget("target='_blank'", 1);
+        final String[] alerts = getExpectedAlerts();
+        javascriptTarget("target='_blank'",
+                            Integer.parseInt(alerts[0]),
+                            Arrays.copyOfRange(alerts, 1, alerts.length));
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("main")
+    @Alerts(DEFAULT = "main", CHROME = "inner")
     public void javascriptTargetTop() throws Exception {
-        javascriptTarget("target='_top'", 0);
+        javascriptTarget("target='_top'", 0, getExpectedAlerts());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("main")
+    @Alerts(DEFAULT = "main", CHROME = "inner")
     public void javascriptTargetParent() throws Exception {
-        javascriptTarget("target='_parent'", 0);
+        javascriptTarget("target='_parent'", 0, getExpectedAlerts());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts()
+    @Alerts(DEFAULT = "1", CHROME = { "0", "inner" })
     public void javascriptTargetUnknown() throws Exception {
-        javascriptTarget("target='unknown'", 1);
+        final String[] alerts = getExpectedAlerts();
+        javascriptTarget("target='unknown'",
+                            Integer.parseInt(alerts[0]),
+                            Arrays.copyOfRange(alerts, 1, alerts.length));
     }
 
-    private void javascriptTarget(final String target, final int newWindows) throws Exception {
+    private void javascriptTarget(final String target, final int newWindows,
+                    final String[] expectedAlerts) throws Exception {
         final String html
             = "<html>\n"
             + "<head><title>main</title></head>\n"
@@ -493,6 +505,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, secondHtml);
 
+        setExpectedAlerts(expectedAlerts);
         final WebDriver driver = loadPage2(html);
 
         driver.switchTo().frame("testFrame");
