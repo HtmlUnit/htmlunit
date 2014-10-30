@@ -1440,10 +1440,10 @@ public enum BrowserVersionFeatures {
     JS_SELECTOR_TEXT_UPPERCASE,
 
     /** Indicates if calling HTMLSelectElement.add the second parameter
-     * is treated as index like IE does.
+     * is only treated as index like IE does.
      */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_SELECT_ADD_SECOND_PARAM_IS_INDEX,
+    JS_SELECT_ADD_SECOND_PARAM_IS_INDEX_ONLY,
 
     /** Indicates if calling HTMLSelectElement.item with a negative value should throw. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
@@ -1792,7 +1792,7 @@ public enum BrowserVersionFeatures {
      * Indicates that all options of a select are deselected,
      * if the select state is changed for an unknown option.
      */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
     SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN,
 
     /**

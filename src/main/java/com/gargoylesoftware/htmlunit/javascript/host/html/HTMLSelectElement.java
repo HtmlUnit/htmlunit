@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_ADD_SECOND_PARAM_IS_INDEX;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_ADD_SECOND_PARAM_IS_INDEX_ONLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_ITEM_THROWS_IF_NEGATIVE;
 
 import java.util.List;
@@ -79,11 +79,11 @@ public class HTMLSelectElement extends FormField {
      */
     @JsxFunction
     public void add(final HTMLOptionElement newOptionObject, final Object arg2) {
-        if (getBrowserVersion().hasFeature(JS_SELECT_ADD_SECOND_PARAM_IS_INDEX)) {
-            add_IE(newOptionObject, arg2);
+        if (getBrowserVersion().hasFeature(JS_SELECT_ADD_SECOND_PARAM_IS_INDEX_ONLY)) {
+            addIndexOnly(newOptionObject, arg2);
         }
         else {
-            add_FF(newOptionObject, arg2);
+            addIndexOrOption(newOptionObject, arg2);
         }
         ensureSelectedIndex();
     }
@@ -135,7 +135,7 @@ public class HTMLSelectElement extends FormField {
      * @param newOptionObject the DomNode to insert
      * @param index (optional) the index where the node should be inserted
      */
-    protected void add_IE(final HTMLOptionElement newOptionObject, final Object index) {
+    protected void addIndexOnly(final HTMLOptionElement newOptionObject, final Object index) {
         final HtmlOption beforeOption;
         if (index == null) {
             throw new EvaluatorException("Null not supported as index.");
@@ -148,6 +148,9 @@ public class HTMLSelectElement extends FormField {
             final HtmlSelect select = getHtmlSelect();
             final int intIndex = ((Integer) Context.jsToJava(index, Integer.class)).intValue();
             if (intIndex >= select.getOptionSize()) {
+                beforeOption = null;
+            }
+            else if (intIndex < 0) {
                 beforeOption = null;
             }
             else {
@@ -163,7 +166,7 @@ public class HTMLSelectElement extends FormField {
      * @param newOptionObject the DomNode to insert
      * @param beforeOptionObject the DomNode to insert the previous element before (null if at end)
      */
-    protected void add_FF(final HTMLOptionElement newOptionObject, final Object beforeOptionObject) {
+    protected void addIndexOrOption(final HTMLOptionElement newOptionObject, final Object beforeOptionObject) {
         final HtmlOption beforeOption;
         if (beforeOptionObject == null) {
             beforeOption = null;
@@ -177,12 +180,18 @@ public class HTMLSelectElement extends FormField {
             if (intIndex >= select.getOptionSize()) {
                 beforeOption = null;
             }
+            else if (intIndex < 0) {
+                beforeOption = null;
+            }
             else {
                 beforeOption = select.getOption(intIndex);
             }
         }
         else {
             beforeOption = (HtmlOption) ((HTMLOptionElement) beforeOptionObject).getDomNodeOrDie();
+            if (beforeOption.getParentNode() != getHtmlSelect()) {
+                throw new EvaluatorException("Unknown option.");
+            }
         }
         addBefore(newOptionObject, beforeOption);
     }
@@ -415,7 +424,7 @@ public class HTMLSelectElement extends FormField {
         if (select.getOptionSize() == 0) {
             setSelectedIndex(-1);
         }
-        else if (getSelectedIndex() == -1) {
+        else if (getSelectedIndex() == -1 && !select.isMultipleSelectEnabled()) {
             setSelectedIndex(0);
         }
     }
