@@ -1449,14 +1449,15 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_SELECT_ITEM_THROWS_IF_NEGATIVE,
 
+    /** Indicates that select.options.add does not support an option as second
+     * parameter instead of an index. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_SELECT_OPTIONS_ADD_INDEX_ONLY,
+
     /** When expanding the collection by setting the length don't add
      * a empty text node. */
     @BrowserFeature(@WebBrowser(IE))
     JS_SELECT_OPTIONS_DONT_ADD_EMPTY_TEXT_CHILD_WHEN_EXPANDING,
-
-    /** Indicates that select.options throws an exception if the requested index is neagtive (IE8). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_SELECT_OPTIONS_EXCEPTION_FOR_NEGATIVE,
 
     /** Indicates that select.options.childNodes is a valid property (IE). */
     @BrowserFeature(@WebBrowser(IE))
@@ -1466,13 +1467,29 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_SELECT_OPTIONS_HAS_SELECT_CLASS_NAME,
 
-    /** Ignore negative value when setting the length (FF24). */
+    /** Ignore negative value when setting the length (FF). */
     @BrowserFeature(@WebBrowser(FF))
     JS_SELECT_OPTIONS_IGNORE_NEGATIVE_LENGTH,
 
     /** Indicates that select.options returns null if requested index is outside (IE). */
     @BrowserFeature(@WebBrowser(IE))
     JS_SELECT_OPTIONS_NULL_FOR_OUTSIDE,
+
+    /** Indicates that select.options.remove ignores the call if index is too large. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_SELECT_OPTIONS_REMOVE_IGNORE_IF_INDEX_NEGATIVE,
+
+    /** Indicates that select.options.remove ignores the call if index is too large. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    JS_SELECT_OPTIONS_REMOVE_IGNORE_IF_INDEX_TOO_LARGE,
+
+    /** Indicates that select.options[i] throws an exception if the requested index is neagtive. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_SELECT_OPTIONS_REMOVE_THROWS_IF_NEGATIV,
+
+    /** Indicates that select.options.remove ignores the call if index is too large. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_SELECT_REMOVE_IGNORE_IF_INDEX_OUTSISE,
 
     /** Indicates that select.value = 'val' only checks the value attribute and
      * not the option text. */

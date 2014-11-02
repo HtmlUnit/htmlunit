@@ -1015,6 +1015,371 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "0", "0", "-1" },
+            IE = { "0", "exception" })
+    public void removeOptionMethodIndexMinusOneEmptySelect() throws Exception {
+        removeOptionMethod("-1", true, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "0", "0", "-1" },
+            IE = { "0", "exception" })
+    public void removeOptionMethodIndexMinusOneEmptySelectMulti() throws Exception {
+        removeOptionMethod("-1", true, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "0", "0", "-1" })
+    public void removeOptionMethodIndexZeroEmptySelect() throws Exception {
+        removeOptionMethod("0", true, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "0", "0", "-1" })
+    public void removeOptionMethodIndexZeroEmptySelectMulti() throws Exception {
+        removeOptionMethod("0", true, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "0", "0", "-1" })
+    public void removeOptionMethodIndexOneEmptySelect() throws Exception {
+        removeOptionMethod("1", true, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "0", "0", "-1" })
+    public void removeOptionMethodIndexOneEmptySelectMulti() throws Exception {
+        removeOptionMethod("1", true, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "0", "0", "-1" })
+    public void removeOptionMethodIndexFourEmptySelect() throws Exception {
+        removeOptionMethod("4", true, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "0", "0", "-1" })
+    public void removeOptionMethodIndexFourEmptySelectMulti() throws Exception {
+        removeOptionMethod("4", true, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "3", "3", "1", "One", "Two*", "Three" },
+            IE = { "3", "exception" })
+    public void removeOptionMethodIndexMinusOne() throws Exception {
+        removeOptionMethod("-1", false, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "3", "3", "1", "One", "Two*", "Three*" },
+            IE = { "3", "exception" })
+    public void removeOptionMethodIndexMinusOneMulti() throws Exception {
+        removeOptionMethod("-1", false, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "3", "2", "0", "Two*", "Three" })
+    public void removeOptionMethodIndexZero() throws Exception {
+        removeOptionMethod("0", false, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "3", "2", "0", "Two*", "Three*" })
+    public void removeOptionMethodIndexZeroMulti() throws Exception {
+        removeOptionMethod("0", false, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "3", "2", "0", "One*", "Three" })
+    public void removeOptionMethodIndexOne() throws Exception {
+        removeOptionMethod("1", false, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "3", "2", "1", "One", "Three*" })
+    public void removeOptionMethodIndexOneMulti() throws Exception {
+        removeOptionMethod("1", false, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "3", "2", "1", "One", "Two*" })
+    public void removeOptionMethodhIndexTwo() throws Exception {
+        removeOptionMethod("2", false, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "3", "2", "1", "One", "Two*" })
+    public void removeOptionMethodhIndexTwoMulti() throws Exception {
+        removeOptionMethod("2", false, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "3", "3", "1", "One", "Two*", "Three" })
+    public void removeOptionMethodIndexThree() throws Exception {
+        removeOptionMethod("3", false, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "3", "3", "1", "One", "Two*", "Three*" })
+    public void removeOptionMethodIndexThreeMulti() throws Exception {
+        removeOptionMethod("3", false, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "3", "3", "1", "One", "Two*", "Three" })
+    public void removeOptionMethodIndexFour() throws Exception {
+        removeOptionMethod("4", false, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "3", "3", "1", "One", "Two*", "Three*" })
+    public void removeOptionMethodIndexFourMulti() throws Exception {
+        removeOptionMethod("4", false, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "0", "0", "-1" })
+    public void removeOptionMethodOptionNullEmptySelect() throws Exception {
+        removeOptionMethod("null", true, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "0", "0", "-1" })
+    public void removeOptionMethodOptionNullEmptySelectMulti() throws Exception {
+        removeOptionMethod("null", true, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "0", "0", "-1" })
+    public void removeOptionMethodNewOptionEmptySelect() throws Exception {
+        removeOptionMethod("new Option('foo', '123')", true, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "0", "0", "-1" })
+    public void removeOptionMethodNewOptionEmptySelectMulti() throws Exception {
+        removeOptionMethod("new Option('foo', '123')", true, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "3", "2", "0", "Two*", "Three" })
+    public void removeOptionMethodOptionNull() throws Exception {
+        removeOptionMethod("null", false, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "3", "2", "0", "Two*", "Three*" })
+    public void removeOptionMethodOptionNullMulti() throws Exception {
+        removeOptionMethod("null", false, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "3", "2", "0", "Two*", "Three" })
+    public void removeOptionMethodNewOption() throws Exception {
+        removeOptionMethod("new Option('foo', '123')", false, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "3", "2", "0", "Two*", "Three*" })
+    public void removeOptionMethodNewOptionMulti() throws Exception {
+        removeOptionMethod("new Option('foo', '123')", false, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "3", "2", "0", "Two*", "Three" })
+    public void removeOptionMethodOptionFirst() throws Exception {
+        removeOptionMethod("oSelect.options[0]", false, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "3", "2", "0", "Two*", "Three*" })
+    public void removeOptionMethodOptionFirstMulti() throws Exception {
+        removeOptionMethod("oSelect.options[0]", false, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "3", "2", "0", "Two*", "Three" })
+    public void removeOptionMethodOptionSecond() throws Exception {
+        removeOptionMethod("oSelect.options[1]", false, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "3", "2", "0", "Two*", "Three*" })
+    public void removeOptionMethodOptionSecondMulti() throws Exception {
+        removeOptionMethod("oSelect.options[1]", false, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "3", "2", "0", "Two*", "Three" })
+    public void removeOptionMethodOptionThird() throws Exception {
+        removeOptionMethod("oSelect.options[2]", false, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "3", "2", "0", "Two*", "Three*" })
+    public void removeOptionMethodOptionThirdMulti() throws Exception {
+        removeOptionMethod("oSelect.options[2]", false, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "3", "2", "0", "Two*", "Three" })
+    public void removeOptionMethodOptionLast() throws Exception {
+        removeOptionMethod("oSelect.options[3]", false, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "3", "2", "0", "Two*", "Three*" })
+    public void removeOptionMethodOptionLastMulti() throws Exception {
+        removeOptionMethod("oSelect.options[3]", false, true);
+    }
+
+    private void removeOptionMethod(final String param, final boolean empty, final boolean multi) throws Exception {
+        String html
+            = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function doTest(){\n"
+            + "      try {\n"
+            + "        var oSelect = document.forms.testForm.select1;\n"
+            + "        alert(oSelect.length);\n"
+            + "        oSelect.remove(" + param + ");\n"
+
+            + "        alert(oSelect.length);\n"
+            + "        alert(oSelect.selectedIndex);\n"
+            + "        for (i=0; i<oSelect.options.length; i++) {\n"
+            + "          alert(oSelect.options[i].text + (oSelect.options[i].selected ? '*' : ''));\n"
+            + "        }\n"
+            + "      } catch (e) { alert('exception'); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <form name='testForm'>\n"
+            + "    <select name='select1' " + (multi ? "multiple" : "") + ">\n";
+        if (!empty) {
+            html = html
+                    + "      <option name='option1' value='value1'>One</option>\n"
+                    + "      <option name='option2' value='value2' selected>Two</option>\n"
+                    + "      <option name='option3' value='value3'" + (multi ? "selected" : "") + ">Three</option>\n";
+        }
+        html = html
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({ "2", "Three", "value3" })
     public void removeOption() throws Exception {
         final String html

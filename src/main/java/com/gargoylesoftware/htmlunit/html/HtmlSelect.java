@@ -192,6 +192,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
             if (element instanceof HtmlOption) {
                 if (i == index) {
                     element.remove();
+                    ensureSelectedIndex();
                     return;
                 }
                 i++;
@@ -211,6 +212,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
             if (element instanceof HtmlOption) {
                 if (i == index) {
                     element.replace(newOption);
+                    ensureSelectedIndex();
                     return;
                 }
                 i++;
@@ -228,6 +230,8 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      */
     public void appendOption(final HtmlOption newOption) {
         appendChild(newOption);
+
+        ensureSelectedIndex();
     }
 
     /**
@@ -653,5 +657,52 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
             return DisplayStyle.INLINE;
         }
         return DisplayStyle.INLINE_BLOCK;
+    }
+
+    /**
+     * Returns the value of the "selectedIndex" property.
+     * @return the selectedIndex property
+     */
+    public int getSelectedIndex() {
+        final List<HtmlOption> selectedOptions = getSelectedOptions();
+        if (selectedOptions.isEmpty()) {
+            return -1;
+        }
+        final List<HtmlOption> allOptions = getOptions();
+        return allOptions.indexOf(selectedOptions.get(0));
+    }
+
+    /**
+     * Sets the value of the "selectedIndex" property.
+     * @param index the new value
+     */
+    public void setSelectedIndex(final int index) {
+        for (final HtmlOption itemToUnSelect : getSelectedOptions()) {
+            setSelectedAttribute(itemToUnSelect, false);
+        }
+        if (index < 0) {
+            return;
+        }
+
+        final List<HtmlOption> allOptions = getOptions();
+
+        if (index < allOptions.size()) {
+            final HtmlOption itemToSelect = allOptions.get(index);
+            setSelectedAttribute(itemToSelect, true, false);
+        }
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Resets the selectedIndex if needed.
+     */
+    public void ensureSelectedIndex() {
+        if (getOptionSize() == 0) {
+            setSelectedIndex(-1);
+        }
+        else if (getSelectedIndex() == -1 && !isMultipleSelectEnabled()) {
+            setSelectedIndex(0);
+        }
     }
 }

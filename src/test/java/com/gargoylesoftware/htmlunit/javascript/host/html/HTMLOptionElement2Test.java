@@ -510,7 +510,9 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             IE8 = { "null", "exception" })
     public void optionIndexOutOfBound() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
             + "function doTest() {\n"
             + "  var options = document.getElementById('testSelect').options;\n"
             + "  alert(options[55]);\n"
@@ -518,12 +520,14 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             + "    alert(options[-55]);\n"
             + "  } catch (e) { alert('exception'); }\n"
             + "}\n"
-            + "</script></head><body onload='doTest()'>\n"
-            + "<form name='form1'>\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <form name='form1'>\n"
             + "    <select name='select1' id='testSelect'>\n"
             + "        <option value='option1' name='option1'>One</option>\n"
             + "    </select>\n"
-            + "</form>\n"
+            + "  </form>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

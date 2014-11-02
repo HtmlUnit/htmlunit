@@ -14,18 +14,22 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_ITEM_THROWS_IF_NEGATIVE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_ADD_INDEX_ONLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_DONT_ADD_EMPTY_TEXT_CHILD_WHEN_EXPANDING;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_EXCEPTION_FOR_NEGATIVE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_HAS_CHILDNODES_PROPERTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_HAS_SELECT_CLASS_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_IGNORE_NEGATIVE_LENGTH;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_NULL_FOR_OUTSIDE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_REMOVE_IGNORE_IF_INDEX_NEGATIVE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_REMOVE_IGNORE_IF_INDEX_TOO_LARGE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_REMOVE_THROWS_IF_NEGATIV;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
@@ -37,7 +41,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * This is the array returned by the "options" property of Select.
@@ -49,6 +52,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Daniel Gredler
  * @author Bruce Faulkner
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass
 public class HTMLOptionsCollection extends SimpleScriptable implements ScriptableWithFallbackGetter {
@@ -102,8 +106,8 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
     @Override
     public Object get(final int index, final Scriptable start) {
         if (index < 0) {
-            if (getBrowserVersion().hasFeature(JS_SELECT_OPTIONS_EXCEPTION_FOR_NEGATIVE)) {
-                throw Context.reportRuntimeError("Index is negative");
+            if (index < 0 && getBrowserVersion().hasFeature(JS_SELECT_ITEM_THROWS_IF_NEGATIVE)) {
+                throw Context.reportRuntimeError("Invalid index for option collection: " + index);
             }
             return Context.getUndefinedValue();
         }
@@ -194,6 +198,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
             final HTMLOptionElement option = (HTMLOptionElement) newValue;
             final HtmlOption htmlOption = option.getDomNodeOrNull();
             if (index >= getLength()) {
+                setLength(index);
                 // Add a new option at the end.
                 htmlSelect_.appendOption(htmlOption);
             }
@@ -201,9 +206,6 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
                 // Replace the indexed option.
                 htmlSelect_.replaceOption(index, htmlOption);
             }
-        }
-        if (getLength() == 1 && !htmlSelect_.isMultipleSelectEnabled()) {
-            ((HTMLSelectElement) htmlSelect_.getScriptObject()).setSelectedIndex(0);
         }
     }
 
@@ -279,40 +281,76 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * </p>
      *
      * @param newOptionObject the DomNode to insert in the collection
-     * @param newIndex An optional parameter which specifies the index position in the
+     * @param beforeOptionObject An optional parameter which specifies the index position in the
      * collection where the element is placed. If no value is given, the method places
      * the element at the end of the collection.
      *
      * @see #put(int, Scriptable, Object)
      */
     @JsxFunction
-    public void add(final Object newOptionObject, final Object newIndex) {
+    public void add(final Object newOptionObject, final Object beforeOptionObject) {
         // If newIndex is undefined, then the item will be appended to the end of
         // the list
         int index = getLength();
 
+        final HtmlOption htmlOption = ((HTMLOptionElement) newOptionObject).getDomNodeOrNull();
+
+        HtmlOption beforeOption = null;
         // If newIndex was specified, then use it
-        if (newIndex instanceof Number) {
-            index = ((Number) newIndex).intValue();
+        if (beforeOptionObject instanceof Number) {
+            index = ((Integer) Context.jsToJava(beforeOptionObject, Integer.class)).intValue();
+            if (index < 0 || index >= getLength()) {
+                // Add a new option at the end.
+                htmlSelect_.appendOption(htmlOption);
+                return;
+            }
+
+            beforeOption = (HtmlOption) ((HTMLOptionElement) item(index)).getDomNodeOrDie();
+        }
+        else if (getBrowserVersion().hasFeature(JS_SELECT_OPTIONS_ADD_INDEX_ONLY)) {
+            if (index > 0) {
+                beforeOption = (HtmlOption) ((HTMLOptionElement) item(0)).getDomNodeOrDie();
+            }
+        }
+        else if (beforeOptionObject instanceof HTMLOptionElement) {
+            beforeOption = (HtmlOption) ((HTMLOptionElement) beforeOptionObject).getDomNodeOrDie();
+            if (beforeOption.getParentNode() != htmlSelect_) {
+                throw new EvaluatorException("Unknown option.");
+            }
         }
 
-        // The put method either appends or replaces an object in the list,
-        // depending on the value of index
-        put(index, null, newOptionObject);
+        if (null == beforeOption) {
+            htmlSelect_.appendOption(htmlOption);
+            return;
+        }
+
+        beforeOption.insertBefore(htmlOption);
     }
 
     /**
      * Removes the option at the specified index.
      * @param index the option index
      */
-    @JsxFunction({ @WebBrowser(IE), @WebBrowser(FF) })
+    @JsxFunction()
     public void remove(final int index) {
-        if (index < 0) {
-            Context.reportRuntimeError("Invalid index: " + index);
+        int idx = index;
+        final BrowserVersion browser = getBrowserVersion();
+        if (idx < 0) {
+            if (browser.hasFeature(JS_SELECT_OPTIONS_REMOVE_IGNORE_IF_INDEX_NEGATIVE)) {
+                return;
+            }
+            if (index < 0 && getBrowserVersion().hasFeature(JS_SELECT_OPTIONS_REMOVE_THROWS_IF_NEGATIV)) {
+                throw Context.reportRuntimeError("Invalid index for option collection: " + index);
+            }
         }
 
-        if (index < getLength()) {
-            htmlSelect_.removeOption(index);
+        idx = Math.max(idx, 0);
+        if (idx >= getLength()) {
+            if (browser.hasFeature(JS_SELECT_OPTIONS_REMOVE_IGNORE_IF_INDEX_TOO_LARGE)) {
+                return;
+            }
+            idx = 0;
         }
+        htmlSelect_.removeOption(idx);
     }
 }
