@@ -418,6 +418,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
     /**
      * @throws Exception if the test fails
      */
