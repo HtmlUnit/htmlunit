@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="FF31, IE11 progress, Chrome progress, Bugfixes">
+            <action type="fix" dev="rbri" issue="1653">
+                Many fixes for the select option javascript functions and the OptionsCollection.
+            </action>
             <action type="fix" dev="rbri" issue="1652">
                 WebResponse used for 'about:blank' was shared between different windows. Because the object
                 is not immutable this produces strange side effects.
