@@ -46,6 +46,9 @@ class NativeFunctionToStringFunction extends FunctionWrapper {
 
         if (thisObj instanceof IdFunctionObject && s.contains("() { [native code for ")) {
             final String functionName = ((IdFunctionObject) thisObj).getFunctionName();
+            if (separator_ == null) {
+                return "function " + functionName + "() {\n    [native code]\n}";
+            }
             return separator_ + "function " + functionName + "() {\n    [native code]\n}" + separator_;
         }
         return s.trim();
@@ -59,12 +62,9 @@ class NativeFunctionToStringFunction extends FunctionWrapper {
     static void installFix(final Scriptable window, final BrowserVersion browserVersion) {
         final ScriptableObject fnPrototype = (ScriptableObject) ScriptableObject.getClassPrototype(window, "Function");
         final Function originalToString = (Function) ScriptableObject.getProperty(fnPrototype, "toString");
-        final String separator;
+        String separator = null;
         if (browserVersion.hasFeature(JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE)) {
             separator = "\n";
-        }
-        else {
-            separator = "";
         }
         final Function newToString = new NativeFunctionToStringFunction(originalToString, separator);
         ScriptableObject.putProperty(fnPrototype, "toString", newToString);
