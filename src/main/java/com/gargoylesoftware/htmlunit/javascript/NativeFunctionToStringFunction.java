@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NATIVE_FUNCTION_TOSTRING_COMPACT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -30,11 +31,12 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
  * @author Marc Guillemot
  */
 class NativeFunctionToStringFunction extends FunctionWrapper {
-    private final boolean separator_;
+    private enum Format { FF, IE, CHROME };
+    private final Format format_;
 
-    NativeFunctionToStringFunction(final Function wrapped, final boolean separator) {
+    NativeFunctionToStringFunction(final Function wrapped, final Format format) {
         super(wrapped);
-        separator_ = separator;
+        format_ = format;
     }
 
     /**
@@ -46,10 +48,14 @@ class NativeFunctionToStringFunction extends FunctionWrapper {
 
         if (thisObj instanceof IdFunctionObject && s.contains("() { [native code for ")) {
             final String functionName = ((IdFunctionObject) thisObj).getFunctionName();
-            if (separator_) {
-                return "\nfunction " + functionName + "() {\n    [native code]\n}\n";
+            switch (format_) {
+                case IE:
+                    return "\nfunction " + functionName + "() {\n    [native code]\n}\n";
+                case CHROME:
+                    return "function " + functionName + "() { [native code] }";
+                default:
+                    return "function " + functionName + "() {\n    [native code]\n}";
             }
-            return "function " + functionName + "() {\n    [native code]\n}";
         }
         return s.trim();
     }
@@ -62,8 +68,17 @@ class NativeFunctionToStringFunction extends FunctionWrapper {
     static void installFix(final Scriptable window, final BrowserVersion browserVersion) {
         final ScriptableObject fnPrototype = (ScriptableObject) ScriptableObject.getClassPrototype(window, "Function");
         final Function originalToString = (Function) ScriptableObject.getProperty(fnPrototype, "toString");
-        final Function newToString = new NativeFunctionToStringFunction(originalToString,
-                                                browserVersion.hasFeature(JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE));
+
+        final Function newToString;
+        if (browserVersion.hasFeature(JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE)) {
+            newToString = new NativeFunctionToStringFunction(originalToString, Format.IE);
+        }
+        else if (browserVersion.hasFeature(JS_NATIVE_FUNCTION_TOSTRING_COMPACT)) {
+            newToString = new NativeFunctionToStringFunction(originalToString, Format.CHROME);
+        }
+        else {
+            newToString = new NativeFunctionToStringFunction(originalToString, Format.FF);
+        }
         ScriptableObject.putProperty(fnPrototype, "toString", newToString);
     }
 }

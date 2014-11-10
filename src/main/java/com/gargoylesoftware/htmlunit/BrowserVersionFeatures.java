@@ -1277,6 +1277,12 @@ public enum BrowserVersionFeatures {
     JS_MERGE_ATTRIBUTES_ALL,
 
     /**
+     * Indicates if the String representation of a native function is without newline.
+     */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_NATIVE_FUNCTION_TOSTRING_COMPACT,
+
+    /**
      * Indicates if the String representation of a native function begins and ends with a \n.
      */
     @BrowserFeature(@WebBrowser(IE))
