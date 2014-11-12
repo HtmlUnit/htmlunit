@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class ArrayBufferTest extends WebDriverTestCase {
@@ -59,7 +60,7 @@ public class ArrayBufferTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1234", "1234", "6789", "1234" },
-            IE = "exception")
+            IE8 = "exception")
     public void slice() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

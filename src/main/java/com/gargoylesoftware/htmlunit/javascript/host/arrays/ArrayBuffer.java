@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(CHROME),
         @WebBrowser(value = IE, minVersion = 11) })
@@ -64,7 +65,7 @@ public class ArrayBuffer extends SimpleScriptable {
      * @param end (optional) byte index to end slicing
      * @return the newly created ArrayBuffer
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public ArrayBuffer slice(final int begin, Object end) {
         if (end == Undefined.instance) {
             end = getByteLength();
