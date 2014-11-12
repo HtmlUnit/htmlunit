@@ -405,7 +405,6 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(IE)
     @Alerts(DEFAULT = { "0", "false", "0" },
             IE = { "1", "true", "1" })
     public void nativeFunction_toStringValue() throws Exception {

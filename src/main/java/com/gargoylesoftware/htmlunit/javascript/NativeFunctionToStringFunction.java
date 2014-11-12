@@ -16,9 +16,9 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NATIVE_FUNCTION_TOSTRING_COMPACT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE;
+import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.IdFunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
@@ -46,8 +46,8 @@ class NativeFunctionToStringFunction extends FunctionWrapper {
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
         final String s = (String) super.call(cx, scope, thisObj, args);
 
-        if (thisObj instanceof IdFunctionObject && s.contains("() { [native code for ")) {
-            final String functionName = ((IdFunctionObject) thisObj).getFunctionName();
+        if (thisObj instanceof BaseFunction && s.indexOf("[native code") > -1) {
+            final String functionName = ((BaseFunction) thisObj).getFunctionName();
             switch (format_) {
                 case IE:
                     return "\nfunction " + functionName + "() {\n    [native code]\n}\n";
