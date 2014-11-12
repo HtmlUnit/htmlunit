@@ -22,12 +22,12 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYST
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYSTATECANGE_SYNC_REQUESTS_NOT_TRIGGERED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYSTATECHANGE_WITH_EVENT_PARAM;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLOW_EMTPY_URL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_WITHCREDENTIALS_TRUE_IN_SYNC_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ORIGIN_HEADER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_RESPONSE_XML_IS_ACTIVEXOBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_STATUS_THROWS_EXCEPTION_WHEN_UNSET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_TRIGGER_ONLOAD_ON_COMPLETED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_NOT_WRITEABLE_BEFORE_OPEN_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -491,9 +491,11 @@ public class XMLHttpRequest extends SimpleScriptable {
             async = ScriptRuntime.toBoolean(asyncParam);
         }
 
-        if (!async && getWithCredentials()) {
+        if (!async
+                && getWithCredentials()
+                && getBrowserVersion().hasFeature(XHR_OPEN_WITHCREDENTIALS_TRUE_IN_SYNC_EXCEPTION)) {
             throw Context.reportRuntimeError(
-                    "open() in sync mode is not possible because 'withCredentials' is set to true");
+                            "open() in sync mode is not possible because 'withCredentials' is set to true");
         }
 
         final String url = Context.toString(urlParam);
@@ -894,7 +896,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Returns the "withCredentials" property.
      * @return the "withCredentials" property
      */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF) })
+    @JsxGetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
     public boolean getWithCredentials() {
         return withCredentials_;
     }
@@ -903,16 +905,12 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Sets the "withCredentials" property.
      * @param withCredentials the "withCredentials" property.
      */
-    @JsxSetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF) })
+    @JsxSetter({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
     public void setWithCredentials(final boolean withCredentials) {
         if (!async_ && state_ != STATE_UNSENT) {
             if (getBrowserVersion().hasFeature(XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION)) {
                 throw Context.reportRuntimeError("Property 'withCredentials' not writable in sync mode.");
             }
-        }
-        if (state_ == STATE_UNSENT
-            && getBrowserVersion().hasFeature(XHR_WITHCREDENTIALS_NOT_WRITEABLE_BEFORE_OPEN_EXCEPTION)) {
-            throw Context.reportRuntimeError("Property 'withCredentials' not writable before calling open().");
         }
         withCredentials_ = withCredentials;
     }

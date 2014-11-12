@@ -1946,6 +1946,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     XHR_OPEN_ALLOW_EMTPY_URL,
 
+    /** Indicates that open() throws an exception in sync mode if 'withCredentials' is set to true. */
+    @BrowserFeature(@WebBrowser(FF))
+    XHR_OPEN_WITHCREDENTIALS_TRUE_IN_SYNC_EXCEPTION,
+
     /** Indicates if a "Origin" header should be sent. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     XHR_ORIGIN_HEADER,
@@ -1966,13 +1970,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that the "*" pattern is allowed when withCredential is enabled. */
     @BrowserFeature(@WebBrowser(IE))
     XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL,
-
-    /**
-     * Indicates that the property <code>withCredentials</code> is not writable before calling <code>open()</code>.
-     * Setting the property throws an exception.
-     */
-    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
-    XHR_WITHCREDENTIALS_NOT_WRITEABLE_BEFORE_OPEN_EXCEPTION,
 
     /**
      * Indicates that the property <code>withCredentials</code> is not writable for sync requests.

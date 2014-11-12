@@ -408,8 +408,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "false", "true", "false", "ex: open", "true" },
             CHROME = { "false", "true", "false", "true" },
             IE8 = { "undefined", "true", "false", "true" },
-            IE11 = { "false", "ex: withCredentials=true", "ex: withCredentials=false",
-                "ex: withCredentials=true", "false" })
+            IE11 = { "false", "true", "false", "true" })
     public void withCredentials_setBeforeOpenSync() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -450,10 +449,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false", "true", "false", "true" },
-            CHROME = { "false", "true", "false", "true" },
-            IE8 = { "undefined", "true", "false", "true" },
-            IE11 = { "false", "ex: withCredentials=true", "ex: withCredentials=false",
-                "ex: withCredentials=true", "false" })
+            IE8 = { "undefined", "true", "false", "true" })
     public void withCredentials_setBeforeOpenAsync() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
