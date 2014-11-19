@@ -53,10 +53,7 @@ public class MooTools121Test extends WebDriverTestCase {
                     "should return the function bound to an object with multiple arguments" },
             FF = { "364", "2", "0",
                     "should return true if the string constains the string and separator otherwise false",
-                    "should return the function bound to an object with multiple arguments" },
-            IE11 = { "364", "2", "0",
-                    "should return the function bound to an object with multiple arguments",
-                    "should return a CSS string representing the Element's styles" })
+                    "should return the function bound to an object with multiple arguments" })
     @Test
     public void mooTools() throws Exception {
         final String resource = "libraries/mootools/1.2.1/Specs/index.html";
@@ -83,5 +80,26 @@ public class MooTools121Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], driver.findElement(By.id("total_examples")).getText());
         assertEquals(getExpectedAlerts()[1], driver.findElement(By.id("total_failures")).getText());
         assertEquals(getExpectedAlerts()[2], driver.findElement(By.id("total_errors")).getText());
+    }
+
+    /**
+     * Some tests for the browser detection.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "no", "yes" }, IE8 = { "yes", "yes" })
+    public void browserDetection() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(window.ActiveXObject ? 'yes' : 'no');\n"
+            + "    alert(window.XMLHttpRequest ? 'yes' : 'no');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
     }
 }
