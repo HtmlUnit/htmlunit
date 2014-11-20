@@ -37,6 +37,32 @@ public class ActiveXObject2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "undefined", "undefined", "NaN", "false", "No", "No" },
+            IE11 = {"undefined", "\nfunction ActiveXObject() {\n    [native code]\n}\n", "NaN", "false", "No", "No" },
+            IE8 = {"function", "\nfunction ActiveXObject() {\n    [native code]\n}\n", "NaN", "true", "Yes", "Yes" })
+    public void browserDetection() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(typeof window.ActiveXObject);\n"
+            + "    alert(String(window.ActiveXObject));\n"
+            + "    alert(Number(window.ActiveXObject));\n"
+            + "    alert(Boolean(window.ActiveXObject));\n"
+            + "    alert(window.ActiveXObject ? 'Yes' : 'No');\n"
+            + "    if (window.ActiveXObject) { alert('Yes') } else { alert('No') }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "exception", IE = "object")
     public void xmlDocument() throws Exception {
         final String html = "<html>\n"

@@ -23,6 +23,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ECMA5_FUNC
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_BIND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_TOSOURCE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_HAS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ACTIVEXOBJECT_HIDDEN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_CONTAINS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_TRIM;
@@ -63,6 +64,7 @@ import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptF
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptExecutor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
+import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 import com.gargoylesoftware.htmlunit.javascript.host.DateCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.StringCustom;
@@ -284,6 +286,17 @@ public class JavaScriptEngine {
                     }
                 }
             }
+        }
+
+        // IE11 ActiveXObject simulation
+        // see http://msdn.microsoft.com/en-us/library/ie/dn423948%28v=vs.85%29.aspx
+        // DEV Note: this is at the moment the only usage of HiddenFunctionObject
+        //           if we need more in the future, we have to enhance our JSX annotations
+        if (browserVersion.hasFeature(JS_WINDOW_ACTIVEXOBJECT_HIDDEN)) {
+            final Method jsConstructor = ActiveXObject.class.getDeclaredMethod("jsConstructor", Context.class, Object[].class, Function.class, boolean.class);
+            final ScriptableObject prototype = prototypesPerJSName.get("ActiveXObject");
+            final FunctionObject functionObject = new HiddenFunctionObject("ActiveXObject", jsConstructor, window);
+            functionObject.addAsConstructor(window, prototype);
         }
 
         // Rhino defines too much methods for us, particularly since implementation of ECMAScript5

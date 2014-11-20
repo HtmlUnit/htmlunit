@@ -9,6 +9,9 @@
     <body>
         <release version="2.16" date="???" description="FF31, IE11 progress, Chrome progress, Bugfixes">
             <action type="fix" dev="rbri">
+                Correct results when accessing window.ActiveXObject in IE11.
+            </action>
+            <action type="fix" dev="rbri">
                 Boolean(document.all) fixed for FF and IE11 (core-js fix).
             </action>
             <action type="fix" dev="rbri" issue="1653">

@@ -1655,6 +1655,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES,
 
+    /**
+     * The window.ActiveXObject is special in IE11
+     * http://msdn.microsoft.com/en-us/library/ie/dn423948%28v=vs.85%29.aspx.
+     */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_WINDOW_ACTIVEXOBJECT_HIDDEN,
+
     /** Changing the opener of a window to something not null is not valid. */
     @BrowserFeature(@WebBrowser(CHROME))
     JS_WINDOW_CHANGE_OPENER_NOT_ALLOWED,
