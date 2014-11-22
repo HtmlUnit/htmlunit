@@ -1100,8 +1100,7 @@ public enum BrowserVersionFeatures {
     JS_FRAME_BODY_NULL_IF_NOT_LOADED,
 
     /** Indicates if Function.bind is available. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME),
-        @WebBrowser(value = IE, minVersion = 11) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_FUNCTION_BIND,
 
     /**

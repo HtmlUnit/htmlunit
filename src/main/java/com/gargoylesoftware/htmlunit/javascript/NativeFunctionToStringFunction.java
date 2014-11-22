@@ -29,14 +29,34 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
  * allowing to produce the desired formatting.
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 class NativeFunctionToStringFunction extends FunctionWrapper {
-    private enum Format { FF, IE, CHROME };
-    private final Format format_;
 
-    NativeFunctionToStringFunction(final Function wrapped, final Format format) {
+    /**
+     * Install the wrapper in place of the native toString function on Function's prototype.
+     * @param window the scope
+     * @param browserVersion the simulated browser
+     */
+    static void installFix(final Scriptable window, final BrowserVersion browserVersion) {
+        if (browserVersion.hasFeature(JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE)) {
+            final ScriptableObject fnPrototype =
+                    (ScriptableObject) ScriptableObject.getClassPrototype(window, "Function");
+            final Function originalToString = (Function) ScriptableObject.getProperty(fnPrototype, "toString");
+            final Function newToString = new NativeFunctionToStringFunction(originalToString);
+            ScriptableObject.putProperty(fnPrototype, "toString", newToString);
+        }
+        else if (browserVersion.hasFeature(JS_NATIVE_FUNCTION_TOSTRING_COMPACT)) {
+            final ScriptableObject fnPrototype =
+                    (ScriptableObject) ScriptableObject.getClassPrototype(window, "Function");
+            final Function originalToString = (Function) ScriptableObject.getProperty(fnPrototype, "toString");
+            final Function newToString = new NativeFunctionToStringFunctionChrome(originalToString);
+            ScriptableObject.putProperty(fnPrototype, "toString", newToString);
+        }
+    }
+
+    NativeFunctionToStringFunction(final Function wrapped) {
         super(wrapped);
-        format_ = format;
     }
 
     /**
@@ -46,39 +66,31 @@ class NativeFunctionToStringFunction extends FunctionWrapper {
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
         final String s = (String) super.call(cx, scope, thisObj, args);
 
-        if (thisObj instanceof BaseFunction && s.indexOf("[native code") > -1) {
+        if (thisObj instanceof BaseFunction && s.indexOf("[native code]") > -1) {
             final String functionName = ((BaseFunction) thisObj).getFunctionName();
-            switch (format_) {
-                case IE:
-                    return "\nfunction " + functionName + "() {\n    [native code]\n}\n";
-                case CHROME:
-                    return "function " + functionName + "() { [native code] }";
-                default:
-                    return "function " + functionName + "() {\n    [native code]\n}";
-            }
+            return "\nfunction " + functionName + "() {\n    [native code]\n}\n";
         }
-        return s.trim();
+        return s;
     }
 
-    /**
-     * Install the wrapper in place of the native toString function on Function's prototype.
-     * @param window the scope
-     * @param browserVersion the simulated browser
-     */
-    static void installFix(final Scriptable window, final BrowserVersion browserVersion) {
-        final ScriptableObject fnPrototype = (ScriptableObject) ScriptableObject.getClassPrototype(window, "Function");
-        final Function originalToString = (Function) ScriptableObject.getProperty(fnPrototype, "toString");
+    static class NativeFunctionToStringFunctionChrome extends FunctionWrapper {
 
-        final Function newToString;
-        if (browserVersion.hasFeature(JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE)) {
-            newToString = new NativeFunctionToStringFunction(originalToString, Format.IE);
+        NativeFunctionToStringFunctionChrome(final Function wrapped) {
+            super(wrapped);
         }
-        else if (browserVersion.hasFeature(JS_NATIVE_FUNCTION_TOSTRING_COMPACT)) {
-            newToString = new NativeFunctionToStringFunction(originalToString, Format.CHROME);
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
+            final String s = (String) super.call(cx, scope, thisObj, args);
+
+            if (thisObj instanceof BaseFunction && s.indexOf("[native code]") > -1) {
+                final String functionName = ((BaseFunction) thisObj).getFunctionName();
+                return "function " + functionName + "() { [native code] }";
+            }
+            return s;
         }
-        else {
-            newToString = new NativeFunctionToStringFunction(originalToString, Format.FF);
-        }
-        ScriptableObject.putProperty(fnPrototype, "toString", newToString);
     }
 }
