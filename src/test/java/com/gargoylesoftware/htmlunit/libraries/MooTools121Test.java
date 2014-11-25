@@ -14,16 +14,18 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import static org.junit.Assert.assertNotNull;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import java.io.File;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.eclipse.jetty.server.Server;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -32,7 +34,9 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.WebServerTestCase;
 
 /**
  * Tests for compatibility with version 1.2.1 of the <a href="http://mootools.net/">MooTools JavaScript library</a>.
@@ -41,9 +45,28 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class MooTools121Test extends WebDriverTestCase {
+
+    private static Server SERVER_;
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @BeforeClass
+    public static void aaa_startSesrver() throws Exception {
+        SERVER_ = WebServerTestCase.createWebServer("src/test/resources/libraries/mootools/1.2.1", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @AfterClass
+    public static void zzz_stopServer() throws Exception {
+        SERVER_.stop();
+    }
 
     /**
      * @throws Exception if an error occurs
@@ -51,17 +74,17 @@ public class MooTools121Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "364", "0", "0" },
             CHROME = { "364", "1", "0",
                     "should return the function bound to an object with multiple arguments" },
+            IE11 = { "364", "2", "0",
+                    "should return the function bound to an object with multiple arguments",
+                    "should return a CSS string representing the Element's styles" },
             FF = { "364", "2", "0",
                     "should return true if the string constains the string and separator otherwise false",
                     "should return the function bound to an object with multiple arguments" })
     @Test
+    @NotYetImplemented(IE11)
     public void mooTools() throws Exception {
-        final String resource = "libraries/mootools/1.2.1/Specs/index.html";
-        final URL url = getClass().getClassLoader().getResource(resource);
-        assertNotNull(url);
-
         final WebDriver driver = getWebDriver();
-        driver.get(url.toExternalForm());
+        driver.get("http://localhost:" + PORT + "/Specs/index.html");
 
         driver.manage().timeouts().implicitlyWait(60 * DEFAULT_WAIT_TIME_FACTOR, TimeUnit.SECONDS);
         driver.findElement(By.xpath("id('progress')[text() = '100']"));
@@ -80,26 +103,5 @@ public class MooTools121Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], driver.findElement(By.id("total_examples")).getText());
         assertEquals(getExpectedAlerts()[1], driver.findElement(By.id("total_failures")).getText());
         assertEquals(getExpectedAlerts()[2], driver.findElement(By.id("total_errors")).getText());
-    }
-
-    /**
-     * Some tests for the browser detection.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = { "no", "yes" }, IE8 = { "yes", "yes" })
-    public void browserDetection() throws Exception {
-        final String html = "<html>\n"
-            + "<head><title>foo</title>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    alert(window.ActiveXObject ? 'yes' : 'no');\n"
-            + "    alert(window.XMLHttpRequest ? 'yes' : 'no');\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "</body></html>";
-        loadPageWithAlerts2(html);
     }
 }
