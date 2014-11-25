@@ -213,4 +213,75 @@ public class NativeFunctionTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "t: [object Window]", "0", "t: ", "1", "a0: x",
+                            "t: ab", "2", "a0: x", "a1: y" },
+            IE8 = "bind not supported")
+    public void bind() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "  function bindTest() {\n"
+            + "    alert('t: ' + this);\n"
+            + "    alert(arguments.length);\n"
+            + "    for (var i in arguments) {\n"
+            + "      alert('a' + i + ': ' + arguments[i]);\n"
+            + "    }\n"
+            + "  }\n"
+
+            + "  function test() {\n"
+            + "    if (!Function.prototype.bind) { alert('bind not supported'); return }"
+
+            + "    var foo = bindTest.bind(null);\n"
+            + "    foo();\n"
+
+            + "    foo = bindTest.bind('', 'x');\n"
+            + "    foo();\n"
+
+            + "    foo = bindTest.bind('ab', 'x', 'y');\n"
+            + "    foo();\n"
+            + "  }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "t: ab", "1", "a0: x,y" },
+            IE8 = "bind not supported")
+    public void bindArrayParam() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "  function bindTest() {\n"
+            + "    alert('t: ' + this);\n"
+            + "    alert(arguments.length);\n"
+            + "    for (var i in arguments) {\n"
+            + "      alert('a' + i + ': ' + arguments[i]);\n"
+            + "    }\n"
+            + "  }\n"
+
+            + "  function test() {\n"
+            + "    if (!Function.prototype.bind) { alert('bind not supported'); return }"
+
+            + "    var foo = bindTest.bind('ab', ['x', 'y']);\n"
+            + "    foo();\n"
+            + "  }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
