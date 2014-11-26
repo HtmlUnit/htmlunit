@@ -864,13 +864,17 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ActiveXObject not available",
-            IE = "0")
-    public void caseSensitivity() throws Exception {
+            IE = { "0", "0" })
+    public void caseInsensitivityActiveXConstructor() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
-            + "  if (!window.ActiveXObject) { alert('ActiveXObject not available'); return }\n"
-            + "  var req = new ActiveXObject('MSXML2.XmlHttp');\n"
-            + "  alert(req.readyState);\n"
+            + "  try {\n"
+            + "    var req = new ActiveXObject('MSXML2.XmlHttp');\n"
+            + "    alert(req.readyState);\n"
+
+            + "    var req = new ActiveXObject('msxml2.xMLhTTp');\n"
+            + "    alert(req.readyState);\n"
+            + "  } catch (e) { alert('ActiveXObject not available'); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
@@ -1186,13 +1190,15 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ActiveXObject not available",
-            IE = "0")
+            IE = { "0", "0" })
     public void caseSensitivity_activeX() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
-            + "  if (!window.ActiveXObject) { alert('ActiveXObject not available'); return }\n"
-            + "  var req = new ActiveXObject('MSXML2.XmlHttp');\n"
-            + "  alert(req.reAdYsTaTe);\n"
+            + "  try {\n"
+            + "    var req = new ActiveXObject('MSXML2.XmlHttp');\n"
+            + "    alert(req.readyState);\n"
+            + "    alert(req.reAdYsTaTe);\n"
+            + "  } catch (e) { alert('ActiveXObject not available'); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
@@ -1203,14 +1209,15 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("undefined")
+    @Alerts({ "0", "undefined" })
     public void caseSensitivity_XMLHttpRequest() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
-            + "try {\n"
-            + "  var req = new XMLHttpRequest();\n"
-            + "  alert(req.reAdYsTaTe);\n"
-            + "} catch (e) { alert('exception'); }\n"
+            + "  try {\n"
+            + "    var req = new XMLHttpRequest();\n"
+            + "    alert(req.readyState);\n"
+            + "    alert(req.reAdYsTaTe);\n"
+            + "  } catch (e) { alert('exception'); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
