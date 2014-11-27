@@ -155,6 +155,7 @@ public class YuiTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "test_regex", "test_createlink" },
+            CHROME = { "test_regex", "test_createlink", "test_selected_element", "test_dom_path" },
             IE8 = "test_createlink",
             IE11 = { "test_bold", "test_createlink" })
     @NotYetImplemented

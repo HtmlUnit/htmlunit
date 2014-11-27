@@ -1,4 +1,4 @@
-95 tests, 900 assertions, 5 failures, 0 errors
+95 tests, 902 assertions, 3 failures, 0 errors
 Status Test Message
 testDollarFunction passed 9 assertions, 0 failures, 0 errors
 testGetElementsByClassName passed 0 assertions, 0 failures, 0 errors
@@ -80,11 +80,7 @@ testHasClassName passed 6 assertions, 0 failures, 0 errors
 testAddClassName passed 3 assertions, 0 failures, 0 errors
 testRemoveClassName passed 3 assertions, 0 failures, 0 errors
 testToggleClassName passed 4 assertions, 0 failures, 0 errors
-testElementScrollTo failed 0 assertions, 2 failures, 0 errors
-Failure: assertEqual
-expected: <-1971>, actual: <0>
-Failure: assertEqual
-expected: <-1971>, actual: <0>
+testElementScrollTo passed 2 assertions, 0 failures, 0 errors
 testCustomElementMethods passed 4 assertions, 0 failures, 0 errors
 testSpecificCustomElementMethods passed 14 assertions, 0 failures, 0 errors
 testScriptFragment passed 4 assertions, 0 failures, 0 errors
@@ -96,9 +92,9 @@ testAbsolutize passed 3 assertions, 0 failures, 0 errors
 testRelativize passed 1 assertions, 0 failures, 0 errors
 testViewportDimensions failed 0 assertions, 2 failures, 0 errors
 Failure: NOTE: YOU MUST ALLOW JAVASCRIPT TO RESIZE YOUR WINDOW FOR THIS TEST TO PASS
-expected: <970>, actual: <920>
+expected: <1289>, actual: <1239>
 Failure: NOTE: YOU MUST ALLOW JAVASCRIPT TO RESIZE YOUR WINDOW FOR THIS TEST TO PASS
-expected: <992>, actual: <942>
+expected: <729>, actual: <679>
 testElementToViewportDimensionsDoesNotAffectDocumentProperties passed 38 assertions, 0 failures, 0 errors
 testViewportScrollOffsets failed 2 assertions, 1 failures, 0 errors
 Failure: NOTE: YOU MUST ALLOW JAVASCRIPT TO RESIZE YOUR WINDOW FOR THESE TESTS TO PASS

@@ -1720,8 +1720,6 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "0", "true", "false", "false", "0",
                         "0", "false", "false", "false", "-1" },
-            CHROME = { "1", "true", "false", "false", "0",
-                        "1", "false", "false", "false", "-1" },
             IE8 = { "0", "true", "false", "false", "0",
                     "0", "true", "false", "false", "0" })
     @NotYetImplemented(IE8)
@@ -1737,8 +1735,6 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
     @Test
     @Alerts (DEFAULT = { "0", "true", "false", "false", "0",
                          "0", "false", "false", "false", "-1" },
-             CHROME = { "1", "true", "false", "false", "0",
-                        "1", "false", "false", "false", "-1" },
             IE8 = { "0", "true", "false", "false", "0",
                     "0", "true", "false", "false", "0" })
     @NotYetImplemented(IE8)
@@ -1778,8 +1774,6 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "0", "true", "false", "false", "0",
                         "0", "false", "false", "false", "-1" },
-            CHROME = { "1", "true", "false", "false", "0",
-                        "1", "false", "false", "false", "-1" },
             IE8 = { "0", "true", "false", "false", "0",
                     "0", "true", "false", "false", "0" })
     @NotYetImplemented(IE8)

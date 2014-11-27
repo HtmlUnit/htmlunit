@@ -536,7 +536,6 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Event]#[object XMLHttpRequest]",
-            CHROME = "[object XMLHttpRequestProgressEvent]#[object XMLHttpRequest]",
             IE8 = "no param")
     public void testOnreadystatechangeSyncWithParam() throws Exception {
         final String html =
@@ -579,7 +578,6 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Event]#[object XMLHttpRequest]",
-            CHROME = "[object XMLHttpRequestProgressEvent]#[object XMLHttpRequest]",
             IE8 = "no param")
     public void testOnreadystatechangeAsyncWithParam() throws Exception {
         final String html =

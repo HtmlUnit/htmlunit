@@ -583,7 +583,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "<body>\n"
             + "  <form name='test' action='foo'>\n"
             + "    <input name='field1' onchange='submit()'>\n"
-            + "    <img src=''>\n"
+            + "    <img src='unknown.gif'>\n"
             + "  </form>\n"
             + "</body></html>";
 

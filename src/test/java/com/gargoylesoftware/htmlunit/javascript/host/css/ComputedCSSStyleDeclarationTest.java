@@ -250,7 +250,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "inline", "inline", "inline", "block", /* "inline-block", */ "none", "block", "block", "none" },
-            CHROME = { "inline", "inline", "inline", "block", /* "inline-block", */ "none", "block",
+            CHROME = { "inline", "inline", "inline", "block", /* "inline-block", */ "inline", "block",
                             "block", "inline" },
             IE8 = { "inline", "inline", "inline", "block", /* "none", */ "inline", "inline", "inline", "inline" },
             IE11 = { "inline", "inline", "inline", "block", /* "inline-block", */ "inline", "block", "block", "none" })

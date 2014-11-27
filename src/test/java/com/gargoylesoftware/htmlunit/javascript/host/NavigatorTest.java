@@ -74,7 +74,8 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     public void appVersion() throws Exception {
         attribute("appVersion", getBrowserVersion().getApplicationVersion(),
-                "WOW64; ", "SLCC2; ", ".NET CLR 2.0.50727; ", ".NET CLR 3.5.30729; ", ".NET CLR 3.0.30729; ",
+                "WOW64; ", "; WOW64", "SLCC2; ",
+                ".NET CLR 2.0.50727; ", ".NET CLR 3.5.30729; ", ".NET CLR 3.0.30729; ",
                 "Media Center PC 6.0; ", ".NET4.0C; ", ".NET4.0E; ");
     }
 
@@ -153,7 +154,8 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     public void userAgent() throws Exception {
         attribute("userAgent", getBrowserVersion().getUserAgent(),
-                "WOW64; ", "SLCC2; ", ".NET CLR 2.0.50727; ", ".NET CLR 3.5.30729; ", ".NET CLR 3.0.30729; ",
+                "WOW64; ", "; WOW64", "SLCC2; ",
+                ".NET CLR 2.0.50727; ", ".NET CLR 3.5.30729; ", ".NET CLR 3.0.30729; ",
                 "Media Center PC 6.0; ", ".NET4.0C; ", ".NET4.0E; ");
     }
 

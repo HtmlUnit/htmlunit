@@ -387,6 +387,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "imported: [object HTMLScriptElement]", "replaced" },
+            CHROME = { "imported: [object HTMLScriptElement]", "o", "replaced" },
             IE8 = "exception")
     public void importNode_script() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -418,6 +419,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "imported: [object HTMLDivElement]", "replaced" },
+            CHROME = { "imported: [object HTMLDivElement]", "o", "replaced" },
             IE8 = "exception")
     public void importNode_scriptChild() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -1239,7 +1241,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "32 commands supported", "not supported: foo, 123" })
+    @Alerts(DEFAULT = { "32 commands supported", "not supported: foo, 123" },
+            CHROME = { "29 commands supported", "not supported: Copy, Cut, Paste, foo, 123" })
     public void queryCommandSupported_common() throws Exception {
         final String[] commands = {"BackColor", "Bold",
             "Copy", "CreateLink", "Cut", "Delete",
@@ -1258,8 +1261,17 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0 commands supported" },
-            IE = { "46 commands supported" })
+    @Alerts(DEFAULT = "0 commands supported",
+            CHROME = "3 commands supported, not supported: 2D-Position, AbsolutePosition, "
+                    + "BlockDirLTR, BlockDirRTL, BrowseMode, ClearAuthenticationCache, CreateBookmark, "
+                    + "DirLTR, DirRTL, EditMode, InlineDirLTR, InlineDirRTL, InsertButton, InsertFieldset, "
+                    + "InsertIFrame, InsertInputButton, InsertInputCheckbox, InsertInputFileUpload, "
+                    + "InsertInputHidden, InsertInputImage, InsertInputPassword, InsertInputRadio, "
+                    + "InsertInputReset, InsertInputSubmit, InsertInputText, InsertMarquee, InsertSelectDropdown, "
+                    + "InsertSelectListbox, InsertTextArea, LiveResize, MultipleSelection, "
+                    + "Open, OverWrite, PlayImage, Refresh, RemoveParaFormat, SaveAs, SizeToControl, "
+                    + "SizeToControlHeight, SizeToControlWidth, Stop, StopImage, UnBookmark",
+            IE = "46 commands supported")
     public void queryCommandSupported_disctinct() throws Exception {
         final String[] commands = {"2D-Position", "AbsolutePosition",
             "BlockDirLTR", "BlockDirRTL", "BrowseMode",

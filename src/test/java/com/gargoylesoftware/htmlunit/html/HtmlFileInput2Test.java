@@ -40,6 +40,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
@@ -74,7 +75,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
         final WebDriver driver = getWebDriver();
         driver.get("http://localhost:" + PORT + "/upload1");
         String path = getClass().getClassLoader().getResource("realm.properties").toExternalForm();
-        if (driver instanceof InternetExplorerDriver) {
+        if (driver instanceof InternetExplorerDriver || driver instanceof ChromeDriver) {
             path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
         }
         driver.findElement(By.name("myInput")).sendKeys(path);
@@ -177,7 +178,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
         final WebDriver driver = getWebDriver();
         driver.get("http://localhost:" + PORT + "/upload1");
         String path = getClass().getClassLoader().getResource("realm.properties").toExternalForm();
-        if (driver instanceof InternetExplorerDriver) {
+        if (driver instanceof InternetExplorerDriver || driver instanceof ChromeDriver) {
             path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
         }
         driver.findElement(By.name("myInput")).sendKeys(path);
@@ -249,7 +250,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
         final WebDriver driver = getWebDriver();
         driver.get("http://localhost:" + PORT + "/upload1");
         String path = getClass().getClassLoader().getResource("realm.properties").toExternalForm();
-        if (driver instanceof InternetExplorerDriver) {
+        if (driver instanceof InternetExplorerDriver || driver instanceof ChromeDriver) {
             path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
         }
         driver.findElement(By.name("myInput")).sendKeys(path);
