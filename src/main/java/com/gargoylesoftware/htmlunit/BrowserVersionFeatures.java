@@ -1494,7 +1494,7 @@ public enum BrowserVersionFeatures {
 
     /** Indicates that select.options.remove ignores the call if index is too large. */
     @BrowserFeature(@WebBrowser(FF))
-    JS_SELECT_REMOVE_IGNORE_IF_INDEX_OUTSISE,
+    JS_SELECT_REMOVE_IGNORE_IF_INDEX_OUTSIDE,
 
     /** Indicates that select.value = 'val' only checks the value attribute and
      * not the option text. */

@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_ADD_SECOND_PARAM_IS_INDEX_ONLY;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_REMOVE_IGNORE_IF_INDEX_OUTSISE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_REMOVE_IGNORE_IF_INDEX_OUTSIDE;
 
 import java.util.List;
 
@@ -67,11 +67,11 @@ public class HTMLSelectElement extends FormField {
      */
     @JsxFunction
     public void remove(final int index) {
-        if (index < 0 && getBrowserVersion().hasFeature(JS_SELECT_REMOVE_IGNORE_IF_INDEX_OUTSISE)) {
+        if (index < 0 && getBrowserVersion().hasFeature(JS_SELECT_REMOVE_IGNORE_IF_INDEX_OUTSIDE)) {
             return;
         }
         final HTMLOptionsCollection options = getOptions();
-        if (index >= options.getLength() && getBrowserVersion().hasFeature(JS_SELECT_REMOVE_IGNORE_IF_INDEX_OUTSISE)) {
+        if (index >= options.getLength() && getBrowserVersion().hasFeature(JS_SELECT_REMOVE_IGNORE_IF_INDEX_OUTSIDE)) {
             return;
         }
 
