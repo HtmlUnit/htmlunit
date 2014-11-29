@@ -249,7 +249,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns <tt>false</tt> always as data tainting support is not enabled in HtmlUnit.
      * @return false
      */
-    @JsxFunction
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(IE) })
     public boolean taintEnabled() {
         return false;
     }

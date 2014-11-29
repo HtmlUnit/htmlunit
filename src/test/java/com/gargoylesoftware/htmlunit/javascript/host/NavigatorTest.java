@@ -204,8 +204,24 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
+    @Alerts(DEFAULT = "false", CHROME = "exception")
     public void taintEnabled() throws Exception {
-        attribute("taintEnabled()", "false");
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "    <title>test</title>\n"
+                + "    <script>\n"
+                + "    function doTest(){\n"
+                + "      try {\n"
+                + "        alert(window.navigator.taintEnabled());\n"
+                + "      } catch(e) { alert('exception'); }\n"
+                + "    }\n"
+                + "    </script>\n"
+                + "</head>\n"
+                + "<body onload='doTest()'>\n"
+                + "</body>\n"
+                + "</html>";
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -220,7 +236,7 @@ public class NavigatorTest extends WebDriverTestCase {
                 + "    <title>test</title>\n"
                 + "    <script>\n"
                 + "    function doTest(){\n"
-                + "       alert(window.navigator." + name + ");\n"
+                + "      alert(window.navigator." + name + ");\n"
                 + "    }\n"
                 + "    </script>\n"
                 + "</head>\n"
