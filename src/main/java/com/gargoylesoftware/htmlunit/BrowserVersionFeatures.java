@@ -1454,11 +1454,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_SELECT_ITEM_THROWS_IF_NEGATIVE,
 
-    /** Indicates that select.options.add does not support an option as second
-     * parameter instead of an index. */
-    @BrowserFeature(@WebBrowser(CHROME))
-    JS_SELECT_OPTIONS_ADD_INDEX_ONLY,
-
     /** When expanding the collection by setting the length don't add
      * a empty text node. */
     @BrowserFeature(@WebBrowser(IE))

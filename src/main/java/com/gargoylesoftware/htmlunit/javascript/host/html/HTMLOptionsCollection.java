@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_ITEM_THROWS_IF_NEGATIVE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_ADD_INDEX_ONLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_DONT_ADD_EMPTY_TEXT_CHILD_WHEN_EXPANDING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_HAS_CHILDNODES_PROPERTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_HAS_SELECT_CLASS_NAME;
@@ -306,11 +305,6 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
             }
 
             beforeOption = (HtmlOption) ((HTMLOptionElement) item(index)).getDomNodeOrDie();
-        }
-        else if (getBrowserVersion().hasFeature(JS_SELECT_OPTIONS_ADD_INDEX_ONLY)) {
-            if (index > 0) {
-                beforeOption = (HtmlOption) ((HTMLOptionElement) item(0)).getDomNodeOrDie();
-            }
         }
         else if (beforeOptionObject instanceof HTMLOptionElement) {
             beforeOption = (HtmlOption) ((HTMLOptionElement) beforeOptionObject).getDomNodeOrDie();
