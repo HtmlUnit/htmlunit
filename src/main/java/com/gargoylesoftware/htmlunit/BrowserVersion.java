@@ -232,6 +232,10 @@ public class BrowserVersion implements Serializable, Cloneable {
         CHROME.setBrowserLanguage("en-US");
         CHROME.setHeaderNamesOrdered(new String[] {
             "Host", "Connection", "Accept", "User-Agent", "Referer", "Accept-Encoding", "Accept-Language", "Cookie" });
+        CHROME.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+        CHROME.setImgAcceptHeader("image/webp,*/*;q=0.8");
+        CHROME.setCssAcceptHeader("text/css,*/*;q=0.1");
+        CHROME.setScriptAcceptHeader("*/*");
         // there are other issues with Chrome; a different productSub, etc.
     }
 
