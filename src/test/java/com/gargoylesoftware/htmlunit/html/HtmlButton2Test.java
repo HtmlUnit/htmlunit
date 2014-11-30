@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -372,7 +373,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2", IE8 = "1")
-    @NotYetImplemented({ IE11, FF })
+    @NotYetImplemented({ IE11, FF, CHROME })
     public void typeUnknown() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
@@ -484,7 +485,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2", IE = "1")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, CHROME })
     public void typeUnknownExternal() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
@@ -515,7 +516,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2", IE = "1")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, CHROME })
     public void typeSubmitExternal() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
@@ -576,7 +577,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      */
     @Alerts(DEFAULT = "2", IE = "1")
     @Test
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, CHROME })
     public void submitWithoutTypeExternal() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
