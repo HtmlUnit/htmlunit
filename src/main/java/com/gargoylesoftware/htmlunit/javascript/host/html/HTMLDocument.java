@@ -44,7 +44,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_F
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FRAME_BODY_NULL_IF_NOT_LOADED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENTS_BY_NAME_EMPTY_RETURNS_NOTHING;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENTS_BY_NAME_NULL_RETURNS_NOTHING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME_IN_QUICKS_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE;
@@ -204,6 +203,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     private static final Set<String> EXECUTE_CMDS_IE = new HashSet<String>();
     /** https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla#Executing_Commands */
     private static final Set<String> EXECUTE_CMDS_FF = new HashSet<String>();
+    private static final Set<String> EXECUTE_CMDS_CHROME = new HashSet<String>();
 
     /**
      * Static counter for {@link #uniqueID_}.
@@ -260,25 +260,45 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
         // commands
         List<String> cmds = Arrays.asList(
-            "2D-Position", "AbsolutePosition", "BackColor", "BackgroundImageCache" /* Undocumented */,
-            "BlockDirLTR", "BlockDirRTL", "Bold", "BrowseMode", "ClearAuthenticationCache", "Copy", "CreateBookmark",
-            "CreateLink", "Cut", "Delete", "DirLTR", "DirRTL",
-            "EditMode", "FontName", "FontSize", "ForeColor", "FormatBlock",
-            "Indent", "InlineDirLTR", "InlineDirRTL", "InsertButton", "InsertFieldset",
-            "InsertHorizontalRule", "InsertIFrame", "InsertImage", "InsertInputButton", "InsertInputCheckbox",
+            "2D-Position", "AbsolutePosition",
+            "BlockDirLTR", "BlockDirRTL", "BrowseMode",
+            "ClearAuthenticationCache", "CreateBookmark", "Copy", "Cut",
+            "DirLTR", "DirRTL",
+            "EditMode",
+            "InlineDirLTR", "InlineDirRTL", "InsertButton", "InsertFieldset",
+            "InsertIFrame", "InsertInputButton", "InsertInputCheckbox",
             "InsertInputFileUpload", "InsertInputHidden", "InsertInputImage", "InsertInputPassword", "InsertInputRadio",
-            "InsertInputReset", "InsertInputSubmit", "InsertInputText", "InsertMarquee", "InsertOrderedList",
-            "InsertParagraph", "InsertSelectDropdown", "InsertSelectListbox", "InsertTextArea", "InsertUnorderedList",
-            "Italic", "JustifyCenter", "JustifyFull", "JustifyLeft", "JustifyNone",
-            "JustifyRight", "LiveResize", "MultipleSelection", "Open", "Outdent",
-            "OverWrite", "Paste", "PlayImage", "Print", "Redo",
-            "Refresh", "RemoveFormat", "RemoveParaFormat", "SaveAs", "SelectAll",
+            "InsertInputReset", "InsertInputSubmit", "InsertInputText", "InsertMarquee",
+            "InsertSelectDropdown", "InsertSelectListbox", "InsertTextArea",
+            "LiveResize", "MultipleSelection", "Open",
+            "OverWrite", "PlayImage",
+            "Refresh", "RemoveParaFormat", "SaveAs",
             "SizeToControl", "SizeToControlHeight", "SizeToControlWidth", "Stop", "StopImage",
-            "StrikeThrough", "Subscript", "Superscript", "UnBookmark", "Underline",
-            "Undo", "Unlink", "Unselect"
+            "UnBookmark",
+            "Paste"
         );
         for (String cmd : cmds) {
             EXECUTE_CMDS_IE.add(cmd.toLowerCase(Locale.ENGLISH));
+        }
+
+        cmds = Arrays.asList(
+            "BackColor", "BackgroundImageCache" /* Undocumented */,
+            "Bold",
+            "CreateLink", "Delete",
+            "FontName", "FontSize", "ForeColor", "FormatBlock",
+            "Indent", "InsertHorizontalRule", "InsertImage",
+            "InsertOrderedList", "InsertParagraph", "InsertUnorderedList",
+            "Italic", "JustifyCenter", "JustifyFull", "JustifyLeft", "JustifyNone",
+            "JustifyRight",
+            "Outdent",
+            "Print",
+            "Redo", "RemoveFormat",
+            "SelectAll", "StrikeThrough", "Subscript", "Superscript",
+            "Underline", "Undo", "Unlink", "Unselect"
+        );
+        for (String cmd : cmds) {
+            EXECUTE_CMDS_IE.add(cmd.toLowerCase(Locale.ENGLISH));
+            EXECUTE_CMDS_CHROME.add(cmd.toLowerCase(Locale.ENGLISH));
         }
 
         cmds = Arrays.asList(
@@ -1365,7 +1385,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return all the descendant elements with the specified class name
      * @see <a href="https://developer.mozilla.org/en/DOM/document.getElementsByClassName">Mozilla doc</a>
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
     public HTMLCollection getElementsByClassName(final String className) {
         return ((HTMLElement) getDocumentElement()).getElementsByClassName(className);
     }
@@ -1384,8 +1404,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         implicitCloseIfNecessary();
         if (getBrowserVersion().hasFeature(JS_GET_ELEMENTS_BY_NAME_EMPTY_RETURNS_NOTHING)
                 && StringUtils.isEmpty(elementName)
-                || getBrowserVersion().hasFeature(JS_GET_ELEMENTS_BY_NAME_NULL_RETURNS_NOTHING)
-                && "null".equals(elementName)) {
+                || "null".equals(elementName)) {
             return HTMLCollection.emptyCollection(getWindow());
         }
         // Null must me changed to '' for proper collection initialization.
@@ -1524,7 +1543,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns this document's <tt>head</tt> element.
      * @return this document's <tt>head</tt> element
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
     public HTMLElement getHead() {
         final HtmlElement head = getHtmlPage().getHead();
         if (head != null) {
@@ -2033,6 +2052,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         final String cmdLC = cmd.toLowerCase(Locale.ENGLISH);
         if (getBrowserVersion().isIE()) {
             return EXECUTE_CMDS_IE.contains(cmdLC);
+        }
+        if (getBrowserVersion().isChrome()) {
+            return EXECUTE_CMDS_CHROME.contains(cmdLC);
         }
         return EXECUTE_CMDS_FF.contains(cmdLC);
     }

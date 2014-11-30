@@ -415,7 +415,7 @@ public enum BrowserVersionFeatures {
     HTMLDOCUMENT_COLOR,
 
     /** Calls to <code>document.XYZ</code> also looks at frames. */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(CHROME) })
     HTMLDOCUMENT_GET_ALSO_FRAMES,
 
     /** Calls to <code>document.XYZ</code> looks at children with the specified ID and/or name. */
@@ -1131,10 +1131,6 @@ public enum BrowserVersionFeatures {
     /** Javascript function getElementsByName returns an empty collection if called with empty string. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_GET_ELEMENTS_BY_NAME_EMPTY_RETURNS_NOTHING,
-
-    /** Javascript function getElementsByName returns an empty collection if called with null. */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF) })
-    JS_GET_ELEMENTS_BY_NAME_NULL_RETURNS_NOTHING,
 
     /** Javascript function getElementsByTagName does not support namespaces. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))

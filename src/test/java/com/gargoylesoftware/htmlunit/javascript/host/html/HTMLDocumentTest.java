@@ -703,10 +703,9 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @BuggyWebDriver(IE) // tested with FF8, FF18 works with ff24
-    @Alerts(CHROME = { "0", "exception" },
+    @Alerts(DEFAULT = { "0", "exception" },
             FF = { "1", "[object HTMLBodyElement]" },
-            IE = "exception",
-            IE11 = { "0", "exception" })
+            IE8 = "exception")
     // TODO [IE11]MODALPANEL real IE11 opens a modal panel which webdriver cannot handle
     public void designMode_selectionRange_empty() throws Exception {
         designMode_selectionRange("");
@@ -719,10 +718,9 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @BuggyWebDriver(IE) // tested with FF8, works with ff24
-    @Alerts(CHROME = { "0", "exception" },
+    @Alerts(DEFAULT = { "0", "exception" },
             FF = { "1", "[object Text]" },
-            IE = "exception",
-            IE11 = { "0", "exception" })
+            IE8 = "exception")
     // TODO [IE11]MODALPANEL real IE11 opens a modal panel which webdriver cannot handle
     public void designMode_selectionRange_text() throws Exception {
         designMode_selectionRange("hello");
@@ -824,8 +822,9 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  alert(document.foo);\n"
             + "  alert(window.frames[0] == document.foo);\n"
             + "}\n"
-            + "</script></head><body onload='test()'>\n"
-            + "<iframe src='about:blank' name='foo'></iframe>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <iframe src='about:blank' name='foo'></iframe>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
