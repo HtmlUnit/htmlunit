@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -122,7 +121,7 @@ public class TreeWalker extends SimpleScriptable {
      *
      * @return the value of the expandEntityReferences flag
      */
-    @JsxGetter({@WebBrowser(value = FF, maxVersion = 20), @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public boolean getExpandEntityReferences() {
         return expandEntityReferences_;
     }

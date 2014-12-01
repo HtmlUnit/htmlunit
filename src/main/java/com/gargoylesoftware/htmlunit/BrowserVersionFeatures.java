@@ -1627,7 +1627,7 @@ public enum BrowserVersionFeatures {
     JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION,
 
     /** Indicates that <code>TreeWalker.expandEntityReferences</code> is always <code>false</code>. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE,
 
     /**
