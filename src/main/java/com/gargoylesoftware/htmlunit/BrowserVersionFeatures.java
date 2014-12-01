@@ -1571,7 +1571,7 @@ public enum BrowserVersionFeatures {
     JS_TABLE_COLUMN_WIDTH_NO_NEGATIVE_VALUES,
 
     /** Calling deleteCell without an index throws an exeption. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature(@WebBrowser(FF))
     JS_TABLE_ROW_DELETE_CELL_REQUIRES_INDEX,
 
     /** Value of attribute 'sectionRowIndex' is a big int if the row is not attached to a table. */
