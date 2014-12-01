@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
@@ -34,7 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Chuck Dumont
  * @author Ronald Brill
  */
-@JsxClass(browsers = @WebBrowser(FF))
+@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
 public class XPathEvaluator extends SimpleScriptable {
 
     /**
@@ -52,7 +53,7 @@ public class XPathEvaluator extends SimpleScriptable {
      * @return an XPathNSResolver which resolves namespaces with respect to the definitions
      *         in scope for a specified node
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction
     public XPathNSResolver createNSResolver(final Node nodeResolver) {
         final XPathNSResolver resolver = new XPathNSResolver();
         resolver.setElement(nodeResolver);
@@ -71,7 +72,7 @@ public class XPathEvaluator extends SimpleScriptable {
      * @param result the result object which may be reused and returned by this method
      * @return the result of the evaluation of the XPath expression
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction
     public XPathResult evaluate(final String expression, final Object contextNodeObj,
             final Object resolver, final int type, final Object result) {
         XPathResult xPathResult = (XPathResult) result;
