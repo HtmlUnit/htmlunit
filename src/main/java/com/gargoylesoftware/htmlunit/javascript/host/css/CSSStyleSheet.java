@@ -911,7 +911,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * For Firefox.
      * @return the owner
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
     public HTMLElement getOwnerNode() {
         return ownerNode_;
     }
@@ -1017,7 +1017,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @param position the position of the rule to be deleted
      * @see <a href="http://www.w3.org/TR/DOM-Level-2-Style/css.html#CSS-CSSStyleSheet">DOM level 2</a>
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
     public void deleteRule(final int position) {
         try {
             wrapped_.deleteRule(position);
@@ -1034,7 +1034,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @param rule the rule
      * @return always return -1 as of MSDN documentation
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public int addRule(final String selector, final String rule) {
         final String completeRule = selector + " {" + rule + "}";
         try {
@@ -1051,7 +1051,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @param position the position of the rule to be deleted
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms531195(v=VS.85).aspx">MSDN</a>
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public void removeRule(final int position) {
         try {
             wrapped_.deleteRule(position);
