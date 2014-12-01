@@ -680,6 +680,7 @@ public class HTMLElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0", CHROME = "1")
+    @NotYetImplemented(CHROME)
     public void elementClosesItself_isindex() throws Exception {
         loadPageWithAlerts2(elementClosesItself("isindex"));
     }
@@ -710,7 +711,7 @@ public class HTMLElementsTest extends WebDriverTestCase {
             CHROME = "0",
             IE8 = "0",
             FF31 = "2")
-    @NotYetImplemented({ IE8, FF31 })
+    @NotYetImplemented({ IE8, FF31, CHROME })
     public void elementClosesItself_keygen() throws Exception {
         loadPageWithAlerts2(elementClosesItself("keygen"));
     }
