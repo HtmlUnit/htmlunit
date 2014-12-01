@@ -46,6 +46,13 @@ class BrowserConfiguration {
         return browserConfiguration;
     }
 
+    public static BrowserConfiguration chrome(final String defaultValue) {
+        final BrowserConfiguration browserConfiguration = new BrowserConfiguration();
+        browserConfiguration.browserFamily_ = "Chrome";
+        browserConfiguration.defaultValue_ = defaultValue;
+        return browserConfiguration;
+    }
+
     public static BrowserConfiguration ffBelow24(final String defaultValue) {
         return ff(defaultValue).upTo(23);
     }
