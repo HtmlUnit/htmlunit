@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTIO
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_ITEM_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_LIST_ENUMERATE_FUNCTIONS;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.ArrayList;
@@ -303,7 +302,7 @@ public class HTMLCollection extends NodeList {
      * @return all the elements in this element array that have the specified tag name
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536776.aspx">MSDN doc</a>
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction(@WebBrowser(IE))
     public Object tags(final String tagName) {
         final HTMLCollection collection = new HTMLSubCollection(this, ".tags('" + tagName + "')") {
             @Override

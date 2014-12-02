@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -109,7 +110,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             CHROME = { "string 0", "string item", "string length", "string myForm", "string namedItem" },
             IE = { "string length", "string myForm" },
             IE11 = { "string item", "string length", "string myForm", "string namedItem" })
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented({ FF, IE11, CHROME })
     public void testFor_in() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -149,7 +150,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             IE11 = { "string 1", "string action", "string first_submit", "string item",
                 "string length", "string namedItem", "string second_submit", "string val1",
                 "string val2" })
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented({ FF, IE11, CHROME })
     public void testFor_in2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -203,7 +204,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, CHROME })
     @Alerts(DEFAULT = { "null", "null", "undefined", "exception" },
             IE = { "null", "null", "undefined", "null" },
             IE11 = { "null", "null", "undefined", "undefined" })
