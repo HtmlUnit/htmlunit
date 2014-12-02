@@ -154,7 +154,6 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "0,0", "11,11", "3,11", "3,10", "7,7" },
             IE11 = { "0,0", "0,0", "3,3", "3,10", "0,0" },
             IE8 = { "undefined,undefined", "undefined,undefined", "3,undefined", "3,10", "3,10" })
-    @NotYetImplemented(CHROME)
     public void selection() throws Exception {
         selection(3, 10);
     }
@@ -166,7 +165,6 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "0,0", "11,11", "0,11", "0,11", "7,7" },
             IE11 = { "0,0", "0,0", "0,0", "0,11", "0,0" },
             IE8 = { "undefined,undefined", "undefined,undefined", "-3,undefined", "-3,15", "-3,15" })
-    @NotYetImplemented(CHROME)
     public void selection_outOfBounds() throws Exception {
         selection(-3, 15);
     }
@@ -178,7 +176,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "0,0", "11,11", "10,11", "5,5", "7,7" },
             IE8 = { "undefined,undefined", "undefined,undefined", "10,undefined", "10,5", "10,5" },
             IE11 = { "0,0", "0,0", "10,10", "5,5", "7,7" })
-    @NotYetImplemented({ CHROME, IE11 })
+    @NotYetImplemented(IE11)
     public void selection_reverseOrder() throws Exception {
         selection(10, 5);
     }
