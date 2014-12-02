@@ -175,7 +175,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
     @JsxClass(domClass = HtmlNoBreak.class, browsers = { @WebBrowser(FF) }),
     @JsxClass(domClass = HtmlNoEmbed.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(domClass = HtmlNoFrames.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(domClass = HtmlNoScript.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+    @JsxClass(domClass = HtmlNoScript.class,
+                browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) }),
     @JsxClass(domClass = HtmlSection.class),
     @JsxClass(domClass = HtmlWordBreak.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 })
