@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 
 import org.junit.Test;
@@ -107,7 +108,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "top", "baseline", "3", "middle", "8", "BOTtom" },
             IE = { "top", "baseline", "top", "error", "middle", "baseline", "bottom" })
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, CHROME })
     public void vAlign_thead() throws Exception {
         vAlign("th");
     }
@@ -118,7 +119,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "top", "baseline", "3", "middle", "8", "BOTtom" },
             IE = { "top", "baseline", "top", "error", "middle", "baseline", "bottom" })
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, CHROME })
     public void vAlign_tbody() throws Exception {
         vAlign("tb");
     }
@@ -129,7 +130,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "top", "baseline", "3", "middle", "8", "BOTtom" },
             IE = { "top", "baseline", "top", "error", "middle", "baseline", "bottom" })
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, CHROME })
     public void vAlign_tfoot() throws Exception {
         vAlign("tf");
     }
