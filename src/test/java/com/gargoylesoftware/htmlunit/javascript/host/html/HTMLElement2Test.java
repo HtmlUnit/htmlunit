@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -646,16 +647,13 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "something", "0" },
-            IE = { "something", "null" })
-    public void innerText_null() throws Exception {
+            IE8 = { "something", "something" })
+    public void textContent_emptyString() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    checkChildren();\n"
-            + "    if (myTestDiv.innerText)\n"
-            + "      myTestDiv.innerText = null;\n"
-            + "    else\n"
-            + "      myTestDiv.textContent = null;\n"
+            + "    myTestDiv.textContent = '';\n"
             + "    checkChildren();\n"
             + "  }\n"
             + "  function checkChildren() {\n"
@@ -677,17 +675,53 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "something", "0" })
+    @Alerts(DEFAULT = { "something", "0" },
+            FF = { "something", "innerText not supported" },
+            IE = { "something", "null" })
+    public void innerText_null() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    checkChildren();\n"
+            + "    if (myTestDiv.innerText) {\n"
+            + "      myTestDiv.innerText = null;\n"
+            + "      checkChildren();\n"
+            + "    } else {\n"
+            + "      alert('innerText not supported');\n"
+            + "    }\n"
+            + "  }\n"
+            + "  function checkChildren() {\n"
+            + "    if (myTestDiv.childNodes.length == 0)\n"
+            + "      alert('0');\n"
+            + "    else\n"
+            + "      alert(myTestDiv.childNodes.item(0).data);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myTestDiv'>something</div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "something", "0" },
+            FF = { "something", "innerText not supported" })
     public void innerText_emptyString() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    checkChildren();\n"
-            + "    if (myTestDiv.innerText)\n"
+            + "    if (myTestDiv.innerText) {\n"
             + "      myTestDiv.innerText = '';\n"
-            + "    else\n"
-            + "      myTestDiv.textContent = '';\n"
-            + "    checkChildren();\n"
+            + "      checkChildren();\n"
+            + "    } else {\n"
+            + "      alert('innerText not supported');\n"
+            + "    }\n"
             + "  }\n"
             + "  function checkChildren() {\n"
             + "    if (myTestDiv.childNodes.length == 0)\n"
@@ -1131,7 +1165,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, CHROME })
     public void offsetLeft_PositionFixed() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
