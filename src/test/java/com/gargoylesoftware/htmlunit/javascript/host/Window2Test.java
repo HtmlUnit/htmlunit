@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -258,7 +259,7 @@ public class Window2Test extends WebDriverTestCase {
             CHROME = { "function Node() { [native code] }", "function Element() { [native code] }" },
             IE8 = { "undefined", "undefined" },
             IE11 = { "[object Node]", "[object Element]" })
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, CHROME })
     public void windowProperties() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -657,7 +658,7 @@ public class Window2Test extends WebDriverTestCase {
             FF31 = { "674", "1258", "657", "1241" },
             IE11 = { "705", "1256", "688", "1239" },
             IE8 = { "605", "1256", "705", "1256" })
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented({ FF, IE11, CHROME })
     // TODO width and height calculation needs to be reworked in HtmlUnit
     // but as the calculation might be effected by e.g. current windows style it is not that simple
     public void changeHeightsAndWidths() throws Exception {
@@ -761,7 +762,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0", "0", "0", "0" },
-            IE = { "undefined", "undefined", "undefined", "undefined" },
+            IE8 = { "undefined", "undefined", "undefined", "undefined" },
             IE11 = { "0", "0", "undefined", "undefined" })
     public void pageXOffset() throws Exception {
         final String html

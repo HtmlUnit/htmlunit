@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_UNDEFINED_THROWS_ERROR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SET_INTERVAL_ZERO_TIMEOUT_FORCES_SET_TIMEOUT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_NOT_ALLOWED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID;
@@ -827,15 +826,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param newValue the new value
      */
     @JsxSetter
-    public void setOpener(Object newValue) {
-        if (getBrowserVersion().hasFeature(JS_WINDOW_CHANGE_OPENER_NOT_ALLOWED) && newValue != opener_) {
-            if (opener_ == null || newValue == null || newValue == Context.getUndefinedValue()) {
-                newValue = null;
-            }
-            else {
-                throw Context.reportRuntimeError("Can't set opener!");
-            }
-        }
+    public void setOpener(final Object newValue) {
         if (getBrowserVersion().hasFeature(JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT)
             && newValue != null && newValue != Context.getUndefinedValue() && !(newValue instanceof Window)) {
             throw Context.reportRuntimeError("Can't set opener to something other than a window!");
@@ -2009,7 +2000,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the value of "pageXOffset" property.
      * @return the value of "pageXOffset" property
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
     public int getPageXOffset() {
         return 0;
     }
@@ -2018,7 +2009,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the value of "pageYOffset" property.
      * @return the value of "pageYOffset" property
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
     public int getPageYOffset() {
         return 0;
     }
@@ -2027,7 +2018,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the value of "scrollX" property.
      * @return the value of "scrollX" property
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public int getScrollX() {
         return 0;
     }
@@ -2036,7 +2027,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the value of "scrollY" property.
      * @return the value of "scrollY" property
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public int getScrollY() {
         return 0;
     }

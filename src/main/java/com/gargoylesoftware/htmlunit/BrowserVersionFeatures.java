@@ -1652,10 +1652,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_WINDOW_ACTIVEXOBJECT_HIDDEN,
 
-    /** Changing the opener of a window to something not null is not valid. */
-    @BrowserFeature(@WebBrowser(CHROME))
-    JS_WINDOW_CHANGE_OPENER_NOT_ALLOWED,
-
     /** Changing the opener of a window to something not null and not a window is not valid. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT,
@@ -1678,7 +1674,8 @@ public enum BrowserVersionFeatures {
 
     /** <code>Window.onerror</code> gets the column number as as 4th
      * and the error as 5th argument. */
-    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(value = FF, minVersion = 31) })
+    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(value = FF, minVersion = 31),
+                        @WebBrowser(CHROME) })
     JS_WINDOW_ONERROR_COLUMN_ERROR_ARGUMENT,
 
     /**
@@ -1686,6 +1683,12 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature(@WebBrowser(IE))
     JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_63,
+
+    /**
+     * Difference of window.outer/inner height is 63.
+     */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_89,
 
     /**
      * Difference of window.outer/inner height is 94.
@@ -1943,7 +1946,7 @@ public enum BrowserVersionFeatures {
     XHR_ONREADYSTATECANGE_SYNC_REQUESTS_NOT_TRIGGERED,
 
     /** Indicates that the onreadystatechange handler is triggered with an event parameter (FF). */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
     XHR_ONREADYSTATECHANGE_WITH_EVENT_PARAM,
 
     /** Indicates if an empty url is allowed as url param for the open method. */

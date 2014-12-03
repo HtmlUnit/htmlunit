@@ -200,9 +200,8 @@ public class HtmlOptionTest extends SimpleWebTestCase {
             + "</form></body></html>";
 
         final HtmlPage page = loadPageWithAlerts(html);
-        final boolean disabled = getBrowserVersion().isFirefox();
+        final boolean disabled = !getBrowserVersion().isIE();
         assertEquals(disabled, ((HtmlOption) page.getElementById("o1")).isDisabled());
         assertFalse(((HtmlOption) page.getElementById("o2")).isDisabled());
     }
-
 }
