@@ -585,7 +585,7 @@ public enum BrowserVersionFeatures {
      * instead of 2000 (Two digits years are interpreted as 20xx
      * if before 1970 and as 19xx otherwise).
      */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, maxVersion = 8) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(CHROME) })
     HTTP_COOKIE_START_DATE_1970,
 
     /** Indicates that "host" HTTP header should be the first. */

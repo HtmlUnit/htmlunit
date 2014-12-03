@@ -148,7 +148,8 @@ public class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
                     datePatterns = EXTENDED_DATE_PATTERNS;
                 }
 
-                cookie.setExpiryDate(DateUtils.parseDate(value, datePatterns, startDate));
+                final Date date = DateUtils.parseDate(value, datePatterns, startDate);
+                cookie.setExpiryDate(date);
             }
 
             public boolean match(final Cookie cookie, final CookieOrigin origin) {
