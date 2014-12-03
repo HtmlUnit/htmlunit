@@ -1882,10 +1882,17 @@ public enum BrowserVersionFeatures {
     TREATS_POSITION_FIXED_LIKE_POSITION_STATIC,
 
     /**
+     * Indicates, that the pathname for the url 'blank' is empty;
+     * instead of 'blank'.
+     */
+    @BrowserFeature(@WebBrowser(CHROME))
+    URL_ABOUT_BLANK_HAS_BLANK_PATH,
+
+    /**
      * Indicates, that the pathname for the url 'about:blank' is empty;
      * instead of '/blank'.
      */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature(@WebBrowser(FF))
     URL_ABOUT_BLANK_HAS_EMPTY_PATH,
 
     /**
