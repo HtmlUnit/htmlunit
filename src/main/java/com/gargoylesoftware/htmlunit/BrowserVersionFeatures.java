@@ -59,7 +59,7 @@ public enum BrowserVersionFeatures {
     CSS_DEFAULT_ELEMENT_HEIGHT_15,
 
     /** Indicates that the default value for height of elements is 18 instead of 20. */
-    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
     CSS_DEFAULT_ELEMENT_HEIGHT_18,
 
     /** Indicates that the default value for height of elements is used instead
