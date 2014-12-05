@@ -1168,7 +1168,7 @@ public enum BrowserVersionFeatures {
      * The complete property returns also true, if the image download was failing
      * or if there was no src at all.
      */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST,
     /**
      * Getting the width and height of an image tag without a source returns 18x20;

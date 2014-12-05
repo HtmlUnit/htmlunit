@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -419,7 +419,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             CHROME = { "number: 300", "number: 200", "number: 0", "number: 0", "number: 0", "number: 0" },
             IE11 = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 28", "number: 30" },
             IE8 = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 1", "number: 1" })
-    @NotYetImplemented(IE)
+    @NotYetImplemented(IE8)
     public void testWidthHeightEmptySource() throws Exception {
         getMockWebConnection().setDefaultResponse("");
 
@@ -463,7 +463,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             CHROME = { "number: 300", "number: 200", "number: 0", "number: 0", "number: 0", "number: 0" },
             IE11 = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 28", "number: 30" },
             IE8 = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 1", "number: 1" })
-    @NotYetImplemented(IE)
+    @NotYetImplemented(IE8)
     public void testWidthHeightBlankSource() throws Exception {
         getMockWebConnection().setDefaultResponse("");
 
@@ -505,7 +505,8 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "number: 300", "number: 200", "number: 24", "number: 24", "number: 24", "number: 24" },
             CHROME = { "number: 300", "number: 200", "number: 18", "number: 20", "number: 18", "number: 20" },
-            IE = { "number: 300", "number: 200", "number: 1", "number: 1", "number: 1", "number: 1" })
+            IE8 = { "number: 300", "number: 200", "number: 1", "number: 1", "number: 1", "number: 1" },
+            IE11 = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 28", "number: 30" })
     public void testWidthHeightInvalidSource() throws Exception {
         getMockWebConnection().setDefaultResponse("");
 
