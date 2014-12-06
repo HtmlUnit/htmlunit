@@ -299,7 +299,7 @@ public class HTMLInputElement extends FormField {
      * @param start the index of the first character to select
      * @param end the index of the character after the selection
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public void setSelectionRange(final int start, final int end) {
         setSelectionStart(start);
         setSelectionEnd(end);

@@ -946,4 +946,31 @@ public class HTMLInputElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "0", "0", "2", "7" },
+            IE8 = { "undefined", "undefined", "input.setSelectionRange not available" })
+    public void selectionRange() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "    var input = document.getElementById('myInput');\n"
+            + "    alert(input.selectionStart);"
+            + "    alert(input.selectionEnd);"
+
+            + "    if (!input.setSelectionRange) { alert('input.setSelectionRange not available'); return };\n"
+            + "    input.setSelectionRange(2, 7);\n"
+            + "    alert(input.selectionStart);"
+            + "    alert(input.selectionEnd);"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='myInput' value='some test'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
