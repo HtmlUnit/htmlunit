@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_COMMENT_IS_ELEMENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_ITEM_NOT_FOUND;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_LIST_ENUMERATE_FUNCTIONS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -240,23 +240,6 @@ public class HTMLCollection extends NodeList {
     }
 
     /**
-     * Returns the specified object, unless it is the <tt>NOT_FOUND</tt> constant, in which case <tt>null</tt>
-     * is returned for IE.
-     * @param object the object to return
-     * @return the specified object, unless it is the <tt>NOT_FOUND</tt> constant, in which case <tt>null</tt>
-     *         is returned for IE.
-     */
-    private Object nullIfNotFound(final Object object) {
-        if (object == NOT_FOUND) {
-            if (getBrowserVersion().hasFeature(HTMLCOLLECTION_NULL_IF_ITEM_NOT_FOUND)) {
-                return null;
-            }
-            return Context.getUndefinedValue();
-        }
-        return object;
-    }
-
-    /**
      * Retrieves the item or items corresponding to the specified name (checks ids, and if
      * that does not work, then names).
      * @param name the name or id the element or elements to return
@@ -265,7 +248,14 @@ public class HTMLCollection extends NodeList {
      */
     @JsxFunction
     public final Object namedItem(final String name) {
-        return nullIfNotFound(getIt(name));
+        final Object object = getIt(name);
+        if (object == NOT_FOUND) {
+            if (getBrowserVersion().hasFeature(HTMLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND)) {
+                return null;
+            }
+            return Context.getUndefinedValue();
+        }
+        return object;
     }
 
     /**

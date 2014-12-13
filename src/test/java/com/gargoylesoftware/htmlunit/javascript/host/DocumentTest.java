@@ -1065,21 +1065,41 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "form1", "form2", "2" },
-            IE11 = { "form1", "form2", "0" })
+    @Alerts(DEFAULT = { "coll 0", "form2<->", "coll 2", "3_1<->form3",
+                        "3_2<->form3", "coll 2", "form4<->name-form4", "<->form4" },
+            CHROME = { "coll 0", "form2<->", "coll 2", "3_1<->form3", "3_2<->form3",
+                        "coll 2", "form4<->name-form4", "<->form4" },
+            IE8 = { "coll 0", "form2<->", "3_1<->form3", "form4<->name-form4" },
+            IE11 = { "coll 0", "form2<->", "3_1<->form3", "form4<->name-form4" })
+    @NotYetImplemented
     public void all_NamedItem() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
-            + "function doTest() {\n"
-            + "    alert(document.all.namedItem('form1').name);\n"
-            + "    alert(document.all.namedItem('form2').id);\n"
-            + "    alert(document.all.namedItem('form3').length);\n"
-            + "}\n"
-            + "</script></head><body onload='doTest()'>\n"
-            + "<form name='form1'></form>\n"
-            + "<form id='form2'></form>\n"
-            + "<form name='form3'></form>\n"
-            + "<form name='form3'></form>\n"
+            + "  function report(result) {\n"
+            + "    if (result.id) {\n"
+            + "      alert(result.id + '<->' + result.name);\n"
+            + "    } else {\n"
+            + "      alert('coll ' + result.length);\n"
+            + "      for(i=0; i < result.length; i++) {\n"
+            + "        alert(result.item(i).id + '<->' + result.item(i).name);\n"
+            + "      }\n"
+            + "    }\n"
+            + "   }\n"
+
+            + "  function doTest() {\n"
+            + "    report(document.all.namedItem('form1'));\n"
+            + "    report(document.all.namedItem('form2'));\n"
+            + "    report(document.all.namedItem('form3'));\n"
+            + "    report(document.all.namedItem('form4'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <form name='form1'></form>\n"
+            + "  <form id='form2'></form>\n"
+            + "  <form id='3_1' name='form3'></form>\n"
+            + "  <form id='3_2' name='form3'></form>\n"
+            + "  <form id='form4' name='name-form4'></form>\n"
+            + "  <form name='form4'></form>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
@@ -1158,14 +1178,16 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined" },
-            IE = { "null", "null" },
-            IE11 = { "undefined", "null" })
+    @Alerts(DEFAULT = { "undefined", "undefined", "undefined" },
+            CHROME = { "undefined", "undefined", "null" },
+            IE8 = { "null", "null", "null" },
+            IE11 = { "undefined", "null", "undefined" })
     public void all_NotExisting() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.all('notExisting'));\n"
             + "    alert(document.all.item('notExisting'));\n"
+            + "    alert(document.all.namedItem('notExisting'));\n"
             + "}\n"
             + "</script><body onload='doTest()'>\n"
             + "</body></html>";
