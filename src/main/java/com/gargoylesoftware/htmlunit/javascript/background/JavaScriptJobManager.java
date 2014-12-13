@@ -100,4 +100,13 @@ public interface JavaScriptJobManager extends Serializable {
      * @return returns true if the job was run.
      */
     boolean runSingleJob(final JavaScriptJob job);
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Utility method to report the current job status.
+     * Might help some tools.
+     * @return the job status report as string
+     */
+    String jobStatusDump();
 }
