@@ -119,6 +119,10 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
                 // Empty
                 return false;
             }
+            @Override
+            public String jobStatusDump() {
+                return null;
+            }
         };
 
         final WebWindowListener listener = new WebWindowListener() {
