@@ -1065,14 +1065,64 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "coll 0", "form2<->", "coll 2", "3_1<->form3",
-                        "3_2<->form3", "coll 2", "form4<->name-form4", "<->form4" },
-            CHROME = { "coll 0", "form2<->", "coll 2", "3_1<->form3", "3_2<->form3",
-                        "coll 2", "form4<->name-form4", "<->form4" },
-            IE8 = { "coll 0", "form2<->", "3_1<->form3", "form4<->name-form4" },
-            IE11 = { "coll 0", "form2<->", "3_1<->form3", "form4<->name-form4" })
-    @NotYetImplemented
-    public void all_NamedItem() throws Exception {
+    @Alerts("form1<->")
+    public void all_NamedItem_ById() throws Exception {
+        namedItem("form1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("coll 0")
+    public void all_NamedItem_ByName_formWithoutId() throws Exception {
+        namedItem("form2");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("f3<->form3")
+    public void all_NamedItem_ByName() throws Exception {
+        namedItem("form3");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "coll 2", "f4<->form4_1", "f4<->form4_2" },
+            IE = "f4<->form4_1")
+    @NotYetImplemented(IE8)
+    public void all_NamedItem_DuplicateId() throws Exception {
+        namedItem("f4");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "coll 2", "f5_1<->form5", "f5_2<->form5" },
+            IE = "f5_1<->form5")
+    @NotYetImplemented(IE8)
+    public void all_NamedItem_DuplicateName() throws Exception {
+        namedItem("form5");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "coll 2", "f6<->form6", "form6<->form6_2" },
+            CHROME = { "coll 2", "form6<->form6_2", "f6<->form6" },
+            IE = "f6<->form6")
+    @NotYetImplemented({ FF, IE8 })
+    public void all_NamedItem_DuplicateIdName() throws Exception {
+        namedItem("form6");
+    }
+
+    private void namedItem(final String name) throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "  function report(result) {\n"
@@ -1087,19 +1137,19 @@ public class DocumentTest extends WebDriverTestCase {
             + "   }\n"
 
             + "  function doTest() {\n"
-            + "    report(document.all.namedItem('form1'));\n"
-            + "    report(document.all.namedItem('form2'));\n"
-            + "    report(document.all.namedItem('form3'));\n"
-            + "    report(document.all.namedItem('form4'));\n"
+            + "    report(document.all.namedItem('" + name + "'));\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
-            + "  <form name='form1'></form>\n"
-            + "  <form id='form2'></form>\n"
-            + "  <form id='3_1' name='form3'></form>\n"
-            + "  <form id='3_2' name='form3'></form>\n"
-            + "  <form id='form4' name='name-form4'></form>\n"
-            + "  <form name='form4'></form>\n"
+            + "  <form id='form1'></form>\n"
+            + "  <form name='form2'></form>\n"
+            + "  <form id='f3' name='form3'></form>\n"
+            + "  <form id='f4' name='form4_1'></form>\n"
+            + "  <form id='f4' name='form4_2'></form>\n"
+            + "  <form id='f5_1' name='form5'></form>\n"
+            + "  <form id='f5_2' name='form5'></form>\n"
+            + "  <form id='f6' name='form6'></form>\n"
+            + "  <form id='form6' name='form6_2'></form>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
