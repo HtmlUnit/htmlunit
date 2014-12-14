@@ -1143,7 +1143,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxGetter
     public HTMLCollection getAll() {
         if (all_ == null) {
-            all_ = new HTMLCollectionTags(getDomNodeOrDie(), "HTMLDocument.all") {
+            all_ = new HTMLCollection(getDomNodeOrDie(), false, "HTMLDocument.all") {
                 @Override
                 protected boolean isMatching(final DomNode node) {
                     return true;

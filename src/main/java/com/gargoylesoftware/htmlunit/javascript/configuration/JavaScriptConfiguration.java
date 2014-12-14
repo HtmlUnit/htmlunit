@@ -129,7 +129,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLButtonElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollectionTags;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDListElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDataListElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDefinitionDescriptionElement;
@@ -305,7 +304,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLBRElement.class, HTMLBaseElement.class, HTMLBaseFontElement.class,
         HTMLBlockElement.class,
         HTMLBlockQuoteElement.class, HTMLBodyElement.class, HTMLButtonElement.class, HTMLCanvasElement.class,
-        HTMLCollection.class, HTMLCollectionTags.class,
+        HTMLCollection.class,
         HTMLDataListElement.class,
         HTMLDefinitionDescriptionElement.class, HTMLDefinitionTermElement.class,
         HTMLDListElement.class,
