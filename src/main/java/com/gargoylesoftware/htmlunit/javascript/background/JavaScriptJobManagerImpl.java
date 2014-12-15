@@ -270,7 +270,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      */
-    public String jobStatusDump() {
+    public synchronized String jobStatusDump() {
         final String lf = System.getProperty("line.separator");
         final StringBuilder status = new StringBuilder();
         status.append("------ JavaScript job status -----");
