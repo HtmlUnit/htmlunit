@@ -382,6 +382,11 @@ public enum BrowserVersionFeatures {
     /** Indicates that comment nodes should be treated similar to elements, e.g. getElementsByTagName(). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     HTMLCOLLECTION_COMMENT_IS_ELEMENT,
+
+    /** HtmlCollection returns the first hit instead of a collection if many elements found. */
+    @BrowserFeature(@WebBrowser(IE))
+    HTMLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS,
+
     /** HtmlCollection.item returns null instead of undefined if an element was not found. */
     @BrowserFeature(@WebBrowser(IE))
     HTMLCOLLECTION_NULL_IF_ITEM_NOT_FOUND,

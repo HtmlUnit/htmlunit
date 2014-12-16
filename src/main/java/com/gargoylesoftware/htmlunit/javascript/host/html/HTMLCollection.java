@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_COMMENT_IS_ELEMENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_LIST_ENUMERATE_FUNCTIONS;
@@ -114,22 +115,6 @@ public class HTMLCollection extends NodeList {
                 return list;
             }
         };
-    }
-
-    /**
-     * Private helper that retrieves the item or items corresponding to the specified
-     * index or key.
-     * @param o the index or key corresponding to the element or elements to return
-     * @return the element or elements corresponding to the specified index or key
-     */
-    private Object getIt(final Object o) {
-        if (o instanceof Number) {
-            final Number n = (Number) o;
-            final int i = n.intValue();
-            return get(i, this);
-        }
-        final String key = String.valueOf(o);
-        return get(key, this);
     }
 
     /**
@@ -248,14 +233,46 @@ public class HTMLCollection extends NodeList {
      */
     @JsxFunction
     public final Object namedItem(final String name) {
-        final Object object = getIt(name);
-        if (object == NOT_FOUND) {
+        final List<Object> elements = getElements();
+
+        // See if there is an element in the element array with the specified id.
+        final List<DomElement> matchingByName = new ArrayList<DomElement>();
+        final List<DomElement> matchingById = new ArrayList<DomElement>();
+
+        for (final Object next : elements) {
+            if (next instanceof DomElement) {
+                final DomElement elem = (DomElement) next;
+                final String nodeName = elem.getAttribute("name");
+                if (name.equals(nodeName)) {
+                    matchingByName.add(elem);
+                }
+                else {
+                    final String id = elem.getAttribute("id");
+                    if (name.equals(id)) {
+                        matchingById.add(elem);
+                    }
+                }
+            }
+        }
+        matchingByName.addAll(matchingById);
+
+        if (matchingByName.size() == 1
+                || (matchingByName.size() > 1
+                        && getBrowserVersion().hasFeature(HTMLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS))) {
+            return getScriptableForElement(matchingByName.get(0));
+        }
+        if (matchingByName.isEmpty()) {
             if (getBrowserVersion().hasFeature(HTMLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND)) {
                 return null;
             }
             return Context.getUndefinedValue();
         }
-        return object;
+
+        // many elements => build a sub collection
+        final DomNode domNode = getDomNodeOrNull();
+        final HTMLCollection collection = new HTMLCollection(domNode, matchingByName);
+        collection.setAvoidObjectDetection(!getBrowserVersion().hasFeature(HTMLCOLLECTION_OBJECT_DETECTION));
+        return collection;
     }
 
     /**

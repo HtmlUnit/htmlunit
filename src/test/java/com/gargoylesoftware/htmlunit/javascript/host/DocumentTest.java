@@ -1094,7 +1094,6 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "coll 2", "f4<->form4_1", "f4<->form4_2" },
             IE = "f4<->form4_1")
-    @NotYetImplemented(IE8)
     public void all_NamedItem_DuplicateId() throws Exception {
         namedItem("f4");
     }
@@ -1105,7 +1104,6 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "coll 2", "f5_1<->form5", "f5_2<->form5" },
             IE = "f5_1<->form5")
-    @NotYetImplemented(IE8)
     public void all_NamedItem_DuplicateName() throws Exception {
         namedItem("form5");
     }
@@ -1117,14 +1115,14 @@ public class DocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "coll 2", "f6<->form6", "form6<->form6_2" },
             CHROME = { "coll 2", "form6<->form6_2", "f6<->form6" },
             IE = "f6<->form6")
-    @NotYetImplemented({ FF, IE8 })
     public void all_NamedItem_DuplicateIdName() throws Exception {
         namedItem("form6");
     }
 
     private void namedItem(final String name) throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<!doctype html>\n"
+            + "<html><head><title>First</title><script>\n"
             + "  function report(result) {\n"
             + "    if (result.id) {\n"
             + "      alert(result.id + '<->' + result.name);\n"
