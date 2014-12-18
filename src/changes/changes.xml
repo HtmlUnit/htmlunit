@@ -9,6 +9,9 @@
     <body>
         <release version="2.16" date="???" description="FF31, IE11 progress, Chrome progress, Bugfixes">
             <action type="fix" dev="rbri">
+                Result of document.all.namedItem('name') for many hits fixed when simulating IE.
+            </action>
+            <action type="fix" dev="rbri">
                 Correct results when accessing window.ActiveXObject in IE11.
             </action>
             <action type="fix" dev="rbri">
