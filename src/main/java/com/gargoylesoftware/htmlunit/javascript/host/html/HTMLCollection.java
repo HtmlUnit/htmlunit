@@ -15,8 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_COMMENT_IS_ELEMENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_LIST_ENUMERATE_FUNCTIONS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -25,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
@@ -232,47 +229,23 @@ public class HTMLCollection extends NodeList {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536634.aspx">MSDN doc</a>
      */
     @JsxFunction
-    public final Object namedItem(final String name) {
+    public Object namedItem(final String name) {
         final List<Object> elements = getElements();
-
-        // See if there is an element in the element array with the specified id.
-        final List<DomElement> matchingByName = new ArrayList<DomElement>();
-        final List<DomElement> matchingById = new ArrayList<DomElement>();
-
         for (final Object next : elements) {
             if (next instanceof DomElement) {
                 final DomElement elem = (DomElement) next;
                 final String nodeName = elem.getAttribute("name");
                 if (name.equals(nodeName)) {
-                    matchingByName.add(elem);
+                    return getScriptableForElement(elem);
                 }
-                else {
-                    final String id = elem.getAttribute("id");
-                    if (name.equals(id)) {
-                        matchingById.add(elem);
-                    }
+
+                final String id = elem.getAttribute("id");
+                if (name.equals(id)) {
+                    return getScriptableForElement(elem);
                 }
             }
         }
-        matchingByName.addAll(matchingById);
-
-        if (matchingByName.size() == 1
-                || (matchingByName.size() > 1
-                        && getBrowserVersion().hasFeature(HTMLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS))) {
-            return getScriptableForElement(matchingByName.get(0));
-        }
-        if (matchingByName.isEmpty()) {
-            if (getBrowserVersion().hasFeature(HTMLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND)) {
-                return null;
-            }
-            return Context.getUndefinedValue();
-        }
-
-        // many elements => build a sub collection
-        final DomNode domNode = getDomNodeOrNull();
-        final HTMLCollection collection = new HTMLCollection(domNode, matchingByName);
-        collection.setAvoidObjectDetection(!getBrowserVersion().hasFeature(HTMLCOLLECTION_OBJECT_DETECTION));
-        return collection;
+        return null;
     }
 
     /**

@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLCollectionTest extends WebDriverTestCase {
@@ -357,6 +358,107 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "<form name='myForm'></form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void all_NamedItem_Unknown() throws Exception {
+        namedItem("foo");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("button1<->")
+    public void all_NamedItem_ById() throws Exception {
+        namedItem("button1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<->button2")
+    public void all_NamedItem_ByName_formWithoutId() throws Exception {
+        namedItem("button2");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("b3<->button3")
+    public void all_NamedItem_ByName() throws Exception {
+        namedItem("button3");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("b4<->button4_1")
+    public void all_NamedItem_DuplicateId() throws Exception {
+        namedItem("b4");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("b5_1<->button5")
+    public void all_NamedItem_DuplicateName() throws Exception {
+        namedItem("button5");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "b6<->button6",
+            CHROME = "button6<->button6_2")
+    public void all_NamedItem_DuplicateIdName() throws Exception {
+        namedItem("button6");
+    }
+
+    private void namedItem(final String name) throws Exception {
+        final String html
+            = "<!doctype html>\n"
+            + "<html><head><title>First</title><script>\n"
+            + "  function report(result) {\n"
+            + "    if (result == null) {\n"
+            + "      alert(result);\n"
+            + "    } else if (result.id || result.name) {\n"
+            + "      alert(result.id + '<->' + result.name);\n"
+            + "    } else {\n"
+            + "      alert('coll ' + result.length);\n"
+            + "      for(i=0; i < result.length; i++) {\n"
+            + "        alert(result.item(i).id + '<->' + result.item(i).name);\n"
+            + "      }\n"
+            + "    }\n"
+            + "   }\n"
+
+            + "  function doTest() {\n"
+            + "    var col = document.getElementsByTagName('button');\n"
+            + "    report(col.namedItem('" + name + "'));\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <button id='button1'></button>\n"
+            + "  <button name='button2'></button>\n"
+            + "  <button id='b3' name='button3'></button>\n"
+            + "  <button id='b4' name='button4_1'></button>\n"
+            + "  <button id='b4' name='button4_2'></button>\n"
+            + "  <button id='b5_1' name='button5'></button>\n"
+            + "  <button id='b5_2' name='button5'></button>\n"
+            + "  <button id='b6' name='button6'></button>\n"
+            + "  <button id='button6' name='button6_2'></button>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

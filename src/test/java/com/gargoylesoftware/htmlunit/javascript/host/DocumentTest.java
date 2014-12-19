@@ -1065,6 +1065,17 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "undefined",
+            IE8 = "null",
+            CHROME = "null")
+    public void all_NamedItem_Unknown() throws Exception {
+        namedItem("foo");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("form1<->")
     public void all_NamedItem_ById() throws Exception {
         namedItem("form1");
@@ -1074,7 +1085,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("coll 0")
+    @Alerts("<->form2")
     public void all_NamedItem_ByName_formWithoutId() throws Exception {
         namedItem("form2");
     }
@@ -1124,7 +1135,9 @@ public class DocumentTest extends WebDriverTestCase {
             = "<!doctype html>\n"
             + "<html><head><title>First</title><script>\n"
             + "  function report(result) {\n"
-            + "    if (result.id) {\n"
+            + "    if (result == null) {\n"
+            + "      alert(result);\n"
+            + "    } else if (result.id || result.name) {\n"
             + "      alert(result.id + '<->' + result.name);\n"
             + "    } else {\n"
             + "      alert('coll ' + result.length);\n"
