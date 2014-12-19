@@ -540,7 +540,7 @@ public class Document extends EventNode {
      *                  which matches all elements.
      * @return a live NodeList of found elements in the order they appear in the tree
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
     public Object getElementsByTagNameNS(final Object namespaceURI, final String localName) {
         final String description = "Document.getElementsByTagNameNS('" + namespaceURI + "', '" + localName + "')";
 
