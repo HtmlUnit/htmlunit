@@ -803,7 +803,7 @@
         <dependency>
             <groupId>net.sourceforge.cssparser</groupId>
             <artifactId>cssparser</artifactId>
-            <version>0.9.14</version>
+            <version>0.9.15-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
@@ -818,7 +818,7 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-websocket</artifactId>
-            <version>8.1.15.v20140411</version>
+            <version>8.1.16.v20140903</version>
         </dependency>
         <!-- Test dependencies. -->
         <dependency>
@@ -851,12 +851,6 @@
             <version>1.3.1</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.mortbay.jetty</groupId>
-            <artifactId>jetty-maven-plugin</artifactId>
-            <version>8.1.15.v20140411</version>
-            <scope>test</scope>
-        </dependency>
         <!-- The presence of slf4j on the classpath during the unit tests triggers correct logging in Jetty. -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -875,6 +869,17 @@
             <artifactId>jfreechart</artifactId>
             <version>1.0.17</version>
             <scope>test</scope>
+        </dependency>
+        <!-- Jetty -->
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>8.1.16.v20140903</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-webapp</artifactId>
+            <version>8.1.16.v20140903</version>
         </dependency>
         <!-- WebDriver -->
         <dependency>
