@@ -6,6 +6,7 @@
 
 <suppressions>
     <suppress checks="AvoidStarImport" files="XMLSerializer.java"/>
+    <suppress checks="FileLength" files="BrowserVersionFeatures.java"/>
     <suppress checks="FileLength" files="CSSStyleDeclaration.java"/>
     <suppress checks="FileLength" files="DocumentTest.java"/>
     <suppress checks="FileLength" files="JQuery182Test.java"/>
