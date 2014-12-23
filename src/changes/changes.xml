@@ -8,9 +8,6 @@
 
     <body>
         <release version="2.16" date="???" description="FF31, IE11 progress, Chrome progress, Bugfixes">
-            <action type="update" dev="asashour" issue="1656" due-to="David Ostrovsky">
-                Upgrade Jetty to 9.2.6.v20141205.
-            </action>
             <action type="fix" dev="rbri">
                 Result of document.all.namedItem('name') for many hits fixed when simulating IE.
             </action>

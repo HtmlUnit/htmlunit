@@ -18,13 +18,10 @@ import java.io.IOException;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-import org.eclipse.jetty.websocket.api.Session;
-import org.eclipse.jetty.websocket.api.WebSocketAdapter;
-import org.eclipse.jetty.websocket.server.WebSocketHandler;
-import org.eclipse.jetty.websocket.servlet.ServletUpgradeRequest;
-import org.eclipse.jetty.websocket.servlet.ServletUpgradeResponse;
-import org.eclipse.jetty.websocket.servlet.WebSocketCreator;
-import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
+import javax.servlet.http.HttpServletRequest;
+
+import org.eclipse.jetty.websocket.WebSocket;
+import org.eclipse.jetty.websocket.WebSocketHandler;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -84,41 +81,31 @@ public class WebSocketTest extends WebDriverTestCase {
 
         private final Set<ChatWebSocket> webSockets_ = new CopyOnWriteArraySet<ChatWebSocket>();
 
-        @Override
-        public void configure(final WebSocketServletFactory factory) {
-            factory.register(ChatWebSocket.class);
-            factory.setCreator(new WebSocketCreator() {
-                @Override
-                public Object createWebSocket(final ServletUpgradeRequest servletUpgradeRequest,
-                        final ServletUpgradeResponse servletUpgradeResponse) {
-                    return new ChatWebSocket();
-                }
-            });
+        public WebSocket doWebSocketConnect(final HttpServletRequest request, final String protocol) {
+            return new ChatWebSocket();
         }
 
-        private class ChatWebSocket extends WebSocketAdapter {
-            private Session session_;
+        private class ChatWebSocket implements WebSocket.OnTextMessage {
 
-            @Override
-            public void onWebSocketConnect(final Session session) {
-                this.session_ = session;
+            private Connection connection_;
+
+            public void onOpen(final Connection connection) {
+                this.connection_ = connection;
                 webSockets_.add(this);
             }
 
-            @Override
-            public void onWebSocketText(final String data) {
+            public void onMessage(final String data) {
                 try {
                     for (final ChatWebSocket webSocket : webSockets_) {
-                        webSocket.session_.getRemote().sendString(data);
+                        webSocket.connection_.sendMessage(data);
                     }
                 }
                 catch (final IOException x) {
-                    session_.close();
+                    this.connection_.close();
                 }
             }
 
-            @Override
-            public void onWebSocketClose(final int closeCode, final String message) {
+            public void onClose(final int closeCode, final String message) {
                 webSockets_.remove(this);
             }
         }

@@ -25,9 +25,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.eclipse.jetty.websocket.api.Session;
-import org.eclipse.jetty.websocket.api.WebSocketAdapter;
-import org.eclipse.jetty.websocket.client.WebSocketClient;
+import org.eclipse.jetty.websocket.WebSocketClient;
+import org.eclipse.jetty.websocket.WebSocketClientFactory;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
@@ -73,8 +72,8 @@ public class WebSocket extends SimpleScriptable {
     private int readyState_ = CLOSED;
 
     private HtmlPage containingPage_;
-    private Session incomingSession_;
-    private Session outgoingSession_;
+    private org.eclipse.jetty.websocket.WebSocket.Connection incomingConnection_;
+    private org.eclipse.jetty.websocket.WebSocket.Connection outgoingConnection_;
 
     /**
      * Creates a new instance. JavaScript objects must have a default constructor.
@@ -89,10 +88,11 @@ public class WebSocket extends SimpleScriptable {
      * @param window the top level window
      */
     private WebSocket(final String url, final Object protocols, final Window window) {
+        final WebSocketClientFactory factory = new WebSocketClientFactory();
         try {
-            final WebSocketClient client = new WebSocketClient();
-            client.start();
-            incomingSession_ = client.connect(new WebSocketImpl(), new URI(url)).get();
+            factory.start();
+            final WebSocketClient client = factory.newWebSocketClient();
+            incomingConnection_ = client.open(new URI(url), new WebSocketImpl()).get();
             containingPage_ = (HtmlPage) window.getWebWindow().getEnclosedPage();
         }
         catch (final Exception e) {
@@ -221,11 +221,11 @@ public class WebSocket extends SimpleScriptable {
      */
     @JsxFunction
     public void close(final Object code, final Object reason) {
-        if (incomingSession_ != null) {
-            incomingSession_.close();
+        if (incomingConnection_ != null) {
+            incomingConnection_.close();
         }
-        if (outgoingSession_ != null) {
-            outgoingSession_.close();
+        if (outgoingConnection_ != null) {
+            outgoingConnection_.close();
         }
     }
 
@@ -237,7 +237,7 @@ public class WebSocket extends SimpleScriptable {
     public void send(final Object content) {
         try {
             if (content instanceof String) {
-                outgoingSession_.getRemote().sendString(content.toString());
+                outgoingConnection_.sendMessage(content.toString());
             }
             else {
                 throw new IllegalStateException(
@@ -259,14 +259,14 @@ public class WebSocket extends SimpleScriptable {
                 ArrayUtils.EMPTY_OBJECT_ARRAY);
     }
 
-    private class WebSocketImpl extends WebSocketAdapter {
-        @Override
-        public void onWebSocketConnect(final Session session) {
-            outgoingSession_ = session;
+    private class WebSocketImpl implements org.eclipse.jetty.websocket.WebSocket.OnBinaryMessage,
+        org.eclipse.jetty.websocket.WebSocket.OnTextMessage {
+
+        public void onOpen(final Connection connection) {
+            outgoingConnection_ = connection;
         }
 
-        @Override
-        public void onWebSocketClose(final int closeCode, final String message) {
+        public void onClose(final int closeCode, final String message) {
             if (closeHandler_ == null) {
                 return;
             }
@@ -276,8 +276,7 @@ public class WebSocket extends SimpleScriptable {
                     new Object[] {closeCode, message});
         }
 
-        @Override
-        public void onWebSocketText(final String data) {
+        public void onMessage(final String data) {
             if (messageHandler_ == null) {
                 return;
             }
@@ -289,8 +288,7 @@ public class WebSocket extends SimpleScriptable {
             jsEngine.callFunction(containingPage_, messageHandler_, scope, WebSocket.this, new Object[] {event});
         }
 
-        @Override
-        public void onWebSocketBinary(final byte[] data, final int offset, final int length) {
+        public void onMessage(final byte[] data, final int offset, final int length) {
             if (messageHandler_ == null) {
                 return;
             }
