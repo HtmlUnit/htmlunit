@@ -15,6 +15,9 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_COMMENT_IS_ELEMENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_EXCEPTION_FOR_NEGATIVE_INDEX;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_DOUBLE_INDEX_ALSO;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_LIST_ENUMERATE_FUNCTIONS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -23,6 +26,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
@@ -208,6 +213,15 @@ public class HTMLCollection extends NodeList {
         }
 
         if (matchingElements.isEmpty()) {
+            if (getBrowserVersion().hasFeature(HTMLCOLLECTION_ITEM_SUPPORTS_DOUBLE_INDEX_ALSO)) {
+                final Double doubleValue = Context.toNumber(name);
+                if (ScriptRuntime.NaN != doubleValue && !doubleValue.isNaN()) {
+                    final Object object = get(doubleValue.intValue(), this);
+                    if (object != NOT_FOUND) {
+                        return object;
+                    }
+                }
+            }
             return NOT_FOUND;
         }
         else if (matchingElements.size() == 1) {
@@ -219,6 +233,37 @@ public class HTMLCollection extends NodeList {
         final HTMLCollection collection = new HTMLCollection(domNode, matchingElements);
         collection.setAvoidObjectDetection(!getBrowserVersion().hasFeature(HTMLCOLLECTION_OBJECT_DETECTION));
         return collection;
+    }
+
+    /**
+     * Returns the item or items corresponding to the specified index or key.
+     * @param index the index or key corresponding to the element or elements to return
+     * @return the element or elements corresponding to the specified index or key
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536460.aspx">MSDN doc</a>
+     */
+    @JsxFunction
+    public Object item(final Object index) {
+        if (index instanceof String && getBrowserVersion().hasFeature(HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO)) {
+            final String name = (String) index;
+            final Object result = namedItem(name);
+            return result;
+        }
+
+        int idx = 0;
+        final Double doubleValue = Context.toNumber(index);
+        if (ScriptRuntime.NaN != doubleValue && !doubleValue.isNaN()) {
+            idx = doubleValue.intValue();
+        }
+
+        if (idx < 0 && getBrowserVersion().hasFeature(HTMLCOLLECTION_EXCEPTION_FOR_NEGATIVE_INDEX)) {
+            throw Context.reportRuntimeError("Invalid index.");
+        }
+
+        final Object object = get(idx, this);
+        if (object == NOT_FOUND) {
+            return null;
+        }
+        return object;
     }
 
     /**

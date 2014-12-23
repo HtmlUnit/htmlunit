@@ -363,11 +363,23 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTMLABBREVIATED,
 
+    /** HtmlAllCollection.item des not check the name, ony the id. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    HTMLALLCOLLECTION_DO_NOT_CHECK_NAME,
+
+    /** HtmlAllCollection.item returns null instead of undefined if an element was not found. */
+    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 11) })
+    HTMLALLCOLLECTION_ITEM_DO_NOT_CONVERT_STRINGS_TO_NUMBER,
+
     /** HtmlCollection returns the first hit instead of a collection if many elements found. */
     @BrowserFeature(@WebBrowser(IE))
     HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS,
 
     /** HtmlAllCollection.item returns null instead of undefined if an element was not found. */
+    @BrowserFeature(@WebBrowser(IE))
+    HTMLALLCOLLECTION_NULL_IF_ITEM_NOT_FOUND,
+
+    /** HtmlAllCollection.namedItem returns null instead of undefined if an element was not found. */
     @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(CHROME) })
     HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND,
 
@@ -390,6 +402,18 @@ public enum BrowserVersionFeatures {
     /** Indicates that comment nodes should be treated similar to elements, e.g. getElementsByTagName(). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     HTMLCOLLECTION_COMMENT_IS_ELEMENT,
+
+    /** HtmlCollection returns the first hit instead of a collection if many elements found. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    HTMLCOLLECTION_EXCEPTION_FOR_NEGATIVE_INDEX,
+
+    /** HtmlCollection.item[] supports also doubles as index. */
+    @BrowserFeature(@WebBrowser(IE))
+    HTMLCOLLECTION_ITEM_SUPPORTS_DOUBLE_INDEX_ALSO,
+
+    /** HtmlCollection.item searches by id also. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO,
 
     /** HtmlCollection.item returns null instead of undefined if an element was not found. */
     @BrowserFeature(@WebBrowser(IE))

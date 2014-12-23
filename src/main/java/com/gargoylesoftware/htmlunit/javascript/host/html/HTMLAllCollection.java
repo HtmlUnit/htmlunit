@@ -14,15 +14,24 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_DO_NOT_CHECK_NAME;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.
+                                                HTMLALLCOLLECTION_ITEM_DO_NOT_CONVERT_STRINGS_TO_NUMBER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NULL_IF_ITEM_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_EXCEPTION_FOR_NEGATIVE_INDEX;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_DOUBLE_INDEX_ALSO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -55,6 +64,61 @@ public class HTMLAllCollection extends HTMLCollection {
         super(parentScope, false, description);
     }
 
+    /**
+     * Returns the item or items corresponding to the specified index or key.
+     * @param index the index or key corresponding to the element or elements to return
+     * @return the element or elements corresponding to the specified index or key
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536460.aspx">MSDN doc</a>
+     */
+    @JsxFunction
+    public Object item(final Object index) {
+        Double numb;
+
+        BrowserVersion browser;
+        if (index instanceof String) {
+            final String name = (String) index;
+            final Object result = namedItem(name);
+            if (null != result && Undefined.instance != result) {
+                return result;
+            }
+            numb = Double.NaN;
+
+            browser = getBrowserVersion();
+            if (!browser.hasFeature(HTMLALLCOLLECTION_ITEM_DO_NOT_CONVERT_STRINGS_TO_NUMBER)) {
+                numb = ScriptRuntime.toNumber(index);
+            }
+            if (ScriptRuntime.NaN == numb || numb.isNaN()) {
+                return itemNotFound(browser);
+            }
+        }
+        else {
+            numb = ScriptRuntime.toNumber(index);
+            browser = getBrowserVersion();
+        }
+
+        if (!browser.hasFeature(HTMLCOLLECTION_ITEM_SUPPORTS_DOUBLE_INDEX_ALSO)
+                && (Double.isInfinite(numb) || numb != Math.floor(numb))) {
+            return itemNotFound(browser);
+        }
+
+        if (numb < 0 && browser.hasFeature(HTMLCOLLECTION_EXCEPTION_FOR_NEGATIVE_INDEX)) {
+            throw Context.reportRuntimeError("Invalid index.");
+        }
+
+        final Object object = get(numb.intValue(), this);
+        if (object == NOT_FOUND) {
+            return itemNotFound(browser);
+        }
+        return object;
+    }
+
+    private Object itemNotFound(final BrowserVersion browser) {
+        if (browser.hasFeature(HTMLALLCOLLECTION_NULL_IF_ITEM_NOT_FOUND)) {
+            return null;
+        }
+        return Undefined.instance;
+    }
+
     @JsxFunction
     @Override
     public final Object namedItem(final String name) {
@@ -64,11 +128,13 @@ public class HTMLAllCollection extends HTMLCollection {
         final List<DomElement> matchingByName = new ArrayList<DomElement>();
         final List<DomElement> matchingById = new ArrayList<DomElement>();
 
+        final BrowserVersion browser = getBrowserVersion();
+        final boolean byName = !browser.hasFeature(HTMLALLCOLLECTION_DO_NOT_CHECK_NAME);
         for (final Object next : elements) {
             if (next instanceof DomElement) {
                 final DomElement elem = (DomElement) next;
                 final String nodeName = elem.getAttribute("name");
-                if (name.equals(nodeName)) {
+                if (byName && name.equals(nodeName)) {
                     matchingByName.add(elem);
                 }
                 else {
@@ -83,20 +149,20 @@ public class HTMLAllCollection extends HTMLCollection {
 
         if (matchingByName.size() == 1
                 || (matchingByName.size() > 1
-                        && getBrowserVersion().hasFeature(HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS))) {
+                        && browser.hasFeature(HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS))) {
             return getScriptableForElement(matchingByName.get(0));
         }
         if (matchingByName.isEmpty()) {
-            if (getBrowserVersion().hasFeature(HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND)) {
+            if (browser.hasFeature(HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND)) {
                 return null;
             }
-            return Context.getUndefinedValue();
+            return Undefined.instance;
         }
 
         // many elements => build a sub collection
         final DomNode domNode = getDomNodeOrNull();
         final HTMLCollection collection = new HTMLCollection(domNode, matchingByName);
-        collection.setAvoidObjectDetection(!getBrowserVersion().hasFeature(HTMLCOLLECTION_OBJECT_DETECTION));
+        collection.setAvoidObjectDetection(!browser.hasFeature(HTMLCOLLECTION_OBJECT_DETECTION));
         return collection;
     }
 }

@@ -378,7 +378,7 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536460.aspx">MSDN doc</a>
      */
     @JsxFunction
-    public final Object item(final Object index) {
+    public Object item(final Object index) {
         final Object object = getIt(index);
         if (object == NOT_FOUND) {
             if (getBrowserVersion().hasFeature(HTMLCOLLECTION_NULL_IF_ITEM_NOT_FOUND)) {
