@@ -733,6 +733,9 @@
         <contributor>
             <name>Jake Cobb</name>
         </contributor>
+        <contributor>
+            <name>David Ostrovsky</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
@@ -816,9 +819,9 @@
             <version>1.2</version>
         </dependency>
         <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-websocket</artifactId>
-            <version>8.1.16.v20140903</version>
+            <groupId>org.eclipse.jetty.websocket</groupId>
+            <artifactId>websocket-client</artifactId>
+            <version>9.2.6.v20141205</version>
         </dependency>
         <!-- Test dependencies. -->
         <dependency>
@@ -874,12 +877,20 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-server</artifactId>
-            <version>8.1.16.v20140903</version>
+            <version>9.2.6.v20141205</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-webapp</artifactId>
-            <version>8.1.16.v20140903</version>
+            <version>9.2.6.v20141205</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty.websocket</groupId>
+            <artifactId>websocket-server</artifactId>
+            <version>9.2.6.v20141205</version>
+            <scope>test</scope>
         </dependency>
         <!-- WebDriver -->
         <dependency>
