@@ -259,6 +259,32 @@
             </build>
         </profile>
         <profile>
+            <id>without-socks-tests</id>
+            <activation>
+                <property>
+                    <name>withoutSocks</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.17</version>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/SocksProxyTest.java</exclude>
+                            </excludes>
+                            <argLine>-Xmx512m -Xms128m</argLine>
+                            <systemPropertyVariables>
+                                <htmlunit.maven>maven</htmlunit.maven>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
             <id>without-library-tests</id>
             <activation>
                 <property>
