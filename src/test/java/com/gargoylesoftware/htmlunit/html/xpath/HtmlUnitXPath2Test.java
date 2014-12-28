@@ -59,32 +59,4 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(content);
     }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = { "102", "111", "111", "160", "97", "110", "100", "160", "102", "111", "111" },
-            IE = "error")
-    public void issue1657() throws Exception {
-        final String content = "<html>\n"
-            + "<head>\n"
-            + "<title>foo</title>\n"
-            + "</head>\n"
-            + "<body>\n"
-
-            + "<table name='uvw'>\n"
-            + "  <caption><a href='somewhere.html'><img id='first' src='test.gif' title='abc' /></a></caption>\n"
-            + "</table>\n"
-
-            + "<table name='xyz'>\n"
-            + "  <caption><a href='somewhere.html'><img id='second' src='test.gif' title='abc' /></a></caption>\n"
-            + "</table>\n"
-            + "</body></html>";
-
-        WebDriver driver = loadPage2(content);
-        WebElement elem = driver.findElement(By.xpath("//table[@name='xyz']/caption/a/img[@title = 'abc']"));
-        assertEquals("img", elem.getTagName());
-        assertEquals("second", elem.getAttribute("id"));
-    }
 }
