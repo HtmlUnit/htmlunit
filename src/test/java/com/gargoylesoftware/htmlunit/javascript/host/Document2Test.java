@@ -314,8 +314,7 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object HTMLBodyElement]", "http://localhost:12345/#", "http://localhost:12345/#" },
             IE11 = { "null", "http://localhost:12345/#", "http://localhost:12345/#" },
-            IE8 = { "[object]", "http://localhost:12345/#", "http://localhost:12345/#" },
-            CHROME = { "[object HTMLBodyElement]", "[object HTMLBodyElement]", "[object HTMLBodyElement]" })
+            IE8 = { "[object]", "http://localhost:12345/#", "http://localhost:12345/#" })
     public void activeElement_iframe() throws Exception {
         final String html =
                 "<html>\n"
