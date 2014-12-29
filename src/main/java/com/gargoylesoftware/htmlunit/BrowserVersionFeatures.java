@@ -111,6 +111,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     CSS_SCRIPT_DISPLAY_INLINE,
 
+    /** Indicates that the id^="" selector produces hits. */
+    @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 8) })
+    CSS_SELECTOR_EMPTY_STRING_HITS_AS_SUBSTRING,
+
     /** Indicates that the :lang(..) selector is supported. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     CSS_SELECTOR_LANG,

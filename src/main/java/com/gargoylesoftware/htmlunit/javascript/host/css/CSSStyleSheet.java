@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SELECTOR_EMPTY_STRING_HITS_AS_SUBSTRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SELECTOR_LANG;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.
@@ -469,16 +470,28 @@ public class CSSStyleSheet extends SimpleScriptable {
         if (condition instanceof PrefixAttributeConditionImpl) {
             final AttributeCondition ac = (AttributeCondition) condition;
             final String value = ac.getValue();
+            if (browserVersion.hasFeature(CSS_SELECTOR_EMPTY_STRING_HITS_AS_SUBSTRING)) {
+                final String attrib = element.getAttribute(ac.getLocalName());
+                return attrib != DomElement.ATTRIBUTE_NOT_DEFINED && attrib.startsWith(value);
+            }
             return !"".equals(value) && element.getAttribute(ac.getLocalName()).startsWith(value);
         }
         if (condition instanceof SuffixAttributeConditionImpl) {
             final AttributeCondition ac = (AttributeCondition) condition;
             final String value = ac.getValue();
+            if (browserVersion.hasFeature(CSS_SELECTOR_EMPTY_STRING_HITS_AS_SUBSTRING)) {
+                final String attrib = element.getAttribute(ac.getLocalName());
+                return attrib != DomElement.ATTRIBUTE_NOT_DEFINED && attrib.endsWith(value);
+            }
             return !"".equals(value) && element.getAttribute(ac.getLocalName()).endsWith(value);
         }
         if (condition instanceof SubstringAttributeConditionImpl) {
             final AttributeCondition ac = (AttributeCondition) condition;
             final String value = ac.getValue();
+            if (browserVersion.hasFeature(CSS_SELECTOR_EMPTY_STRING_HITS_AS_SUBSTRING)) {
+                final String attrib = element.getAttribute(ac.getLocalName());
+                return attrib != DomElement.ATTRIBUTE_NOT_DEFINED && attrib.contains(value);
+            }
             return !"".equals(value) && element.getAttribute(ac.getLocalName()).contains(value);
         }
         switch (condition.getConditionType()) {

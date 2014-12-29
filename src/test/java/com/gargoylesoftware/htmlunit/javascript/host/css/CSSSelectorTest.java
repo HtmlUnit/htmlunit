@@ -346,7 +346,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0")
+    @Alerts(DEFAULT = "0",
+            IE8 = { "2", "<UL id=something></UL>", "<UL id=thing1></UL>" })
     public void prefixAttributeEmpty() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -355,6 +356,9 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  if (document.querySelectorAll) {\n"
             + "    var list = document.querySelectorAll('[id^=\"\"]');\n"
             + "    alert(list.length);\n"
+            + "    for (var i = 0 ; i < list.length; i++) {\n"
+            + "      alert(list[i].outerHTML.replace(/^\\s+|\\s+$/g, ''));\n"
+            + "    }\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
@@ -399,7 +403,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0")
+    @Alerts(DEFAULT = "0",
+            IE8 = { "2", "<UL id=something></UL>", "<UL id=thing2></UL>" })
     public void suffixAttributeEmpty() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -408,6 +413,9 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  if (document.querySelectorAll) {\n"
             + "    var list = document.querySelectorAll('[id$=\"\"]');\n"
             + "    alert(list.length);\n"
+            + "    for (var i = 0 ; i < list.length; i++) {\n"
+            + "      alert(list[i].outerHTML.replace(/^\\s+|\\s+$/g, ''));\n"
+            + "    }\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
@@ -453,7 +461,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0")
+    @Alerts(DEFAULT = "0",
+            IE8 = { "2", "<UL id=something></UL>", "<UL id=thing2></UL>" })
     public void substringAttributeEmpty() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -462,6 +471,9 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  if (document.querySelectorAll) {\n"
             + "    var list = document.querySelectorAll('[id*=\"\"]');\n"
             + "    alert(list.length);\n"
+            + "    for (var i = 0 ; i < list.length; i++) {\n"
+            + "      alert(list[i].outerHTML.replace(/^\\s+|\\s+$/g, ''));\n"
+            + "    }\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
