@@ -1819,6 +1819,7 @@ public enum BrowserVersionFeatures {
     /** Supports 'data' protocol. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     PROTOCOL_DATA,
+
     /** Indicates <code>.querySelectorAll()</code> and <code>.querySelector()</code> is not supported in quirks mode. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 8))
     QUERYSELECTORALL_NOT_IN_QUIRKS,
@@ -1838,10 +1839,6 @@ public enum BrowserVersionFeatures {
     /** Set the default value attribute of a reset input to 'undefined' if declared as 'Reset'. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     RESETINPUT_DEFAULT_VALUE_UNDEFINED,
-
-    /** Indicates that escaping in attribute selectors is supported. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
-    SELECTOR_ATTRIBUTE_ESCAPING,
 
     /**
      * Indicates that all options of a select are deselected,

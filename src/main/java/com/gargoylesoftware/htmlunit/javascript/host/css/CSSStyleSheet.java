@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SELECTOR_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.
                 BrowserVersionFeatures.QUERYSELECTOR_CSS3_PSEUDO_SELECTORS_REQUIRE_ATTACHED_NODE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SELECTOR_ATTRIBUTE_ESCAPING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EMPTY_IS_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EXPANDURL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_STYLE_EMPTY;
@@ -503,9 +502,6 @@ public class CSSStyleSheet extends SimpleScriptable {
                 if (ac1.getSpecified()) {
                     String value = ac1.getValue();
                     if (value.indexOf('\\') > -1) {
-                        if (!browserVersion.hasFeature(SELECTOR_ATTRIBUTE_ESCAPING)) {
-                            throw new CSSException("Invalid selectors: '" + value + "'");
-                        }
                         value = UNESCAPE_SELECTOR.matcher(value).replaceAll("$1");
                     }
                     return element.getAttribute(ac1.getLocalName()).equals(value);

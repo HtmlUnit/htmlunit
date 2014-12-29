@@ -1312,8 +1312,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "first", "second" },
-            IE8 = { "exception", "exception" })
+    @Alerts(DEFAULT = { "first", "second" })
     public void escapedAttributeValue() throws Exception {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -1323,10 +1322,10 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "<script>\n"
             + "try {\n"
             + "  alert(document.querySelectorAll('input[name=foo\\\\[bar\\\\]]')[0].id);\n"
-            + "} catch(e) {alert('exception')}\n"
+            + "} catch(e) {alert(e)}\n"
             + "try {\n"
             + "  alert(document.querySelectorAll('input[name=foo\\\\.bar]')[0].id);\n"
-            + "} catch(e) {alert('exception')}\n"
+            + "} catch(e) {alert(e)}\n"
             + "</script></body></html>";
 
         loadPageWithAlerts2(html);
