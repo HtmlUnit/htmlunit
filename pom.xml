@@ -259,12 +259,7 @@
             </build>
         </profile>
         <profile>
-            <id>without-socks-tests</id>
-            <activation>
-                <property>
-                    <name>withoutSocks</name>
-                </property>
-            </activation>
+            <id>cloudbees</id>
             <build>
                 <plugins>
                     <plugin>
