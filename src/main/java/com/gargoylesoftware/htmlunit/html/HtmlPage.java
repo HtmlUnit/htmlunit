@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_DOM_CON
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONBEFOREUNLOAD_USES_EVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FOCUS_BODY_ELEMENT_AT_START;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FOCUS_HTML_ELEMENT_AT_START;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFERRED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MISSING_SLASHES;
@@ -242,10 +241,7 @@ public class HtmlPage extends SgmlPage {
         // don't set the ready state if we really load the blank page into the window
         // see Node.initInlineFrameIfNeeded()
         if (!isAboutBlank) {
-            if (browserVersion.hasFeature(FOCUS_HTML_ELEMENT_AT_START)) {
-                elementWithFocus_ = getDocumentElement();
-            }
-            else if (browserVersion.hasFeature(FOCUS_BODY_ELEMENT_AT_START)) {
+            if (browserVersion.hasFeature(FOCUS_BODY_ELEMENT_AT_START)) {
                 elementWithFocus_ = getBody();
             }
             setReadyState(READY_STATE_COMPLETE);

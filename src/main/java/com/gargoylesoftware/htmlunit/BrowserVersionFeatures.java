@@ -304,12 +304,8 @@ public enum BrowserVersionFeatures {
     FILEINPUT_EMPTY_DEFAULT_VALUE,
 
     /** For new pages the focus points to the body node. */
-    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    @BrowserFeature(@WebBrowser(IE))
     FOCUS_BODY_ELEMENT_AT_START,
-
-    /** For new pages the focus points to the html root node. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    FOCUS_HTML_ELEMENT_AT_START,
 
     /** Indicates if a form field is directly reachable by its new name once this has been changed. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
