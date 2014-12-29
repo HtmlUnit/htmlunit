@@ -16,9 +16,6 @@ package com.gargoylesoftware.htmlunit.html.xpath;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
