@@ -36,6 +36,7 @@ import org.apache.http.cookie.SetCookie;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.impl.cookie.BasicPathHandler;
 import org.apache.http.impl.cookie.BrowserCompatSpec;
+import org.apache.http.message.BasicHeader;
 
 /**
  * Customized BrowserCompatSpec for HtmlUnit.
@@ -55,6 +56,10 @@ import org.apache.http.impl.cookie.BrowserCompatSpec;
  * @author John J Murdoch
  */
 public class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
+
+    /** The cookie name used for cookies with no name (HttpClient doesn't like empty names). */
+    public static final String EMPTY_COOKIE_NAME = "HTMLUNIT_EMPTY_COOKIE";
+
     /**
      * Comparator for sending cookies in right order.
      * See specification:
@@ -178,7 +183,11 @@ public class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
      * {@inheritDoc}
      */
     @Override
-    public List<Cookie> parse(final Header header, final CookieOrigin origin) throws MalformedCookieException {
+    public List<Cookie> parse(Header header, final CookieOrigin origin) throws MalformedCookieException {
+        if (header.getValue().startsWith("=")) {
+            header = new BasicHeader(header.getName(), EMPTY_COOKIE_NAME + header.getValue());
+        }
+
         final List<Cookie> cookies = super.parse(header, origin);
         for (final Cookie c : cookies) {
             // re-add quotes around value if parsing as incorrectly trimmed them

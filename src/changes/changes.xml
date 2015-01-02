@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="FF31, IE11 progress, Chrome progress, Bugfixes">
+            <action type="fix" dev="asashour">
+                Fix handling nameless cookie.
+            </action>
             <action type="fix" dev="rbri">
                 Results for css selectors startsWith/endsWith/contains fixed for IE8 when searching with an empty string.
             </action>

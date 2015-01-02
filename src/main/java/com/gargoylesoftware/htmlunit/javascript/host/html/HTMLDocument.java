@@ -94,6 +94,7 @@ import org.w3c.dom.DocumentType;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CookieManager;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.HtmlUnitBrowserCompatCookieSpec;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.TextUtil;
@@ -175,9 +176,6 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
 public class HTMLDocument extends Document implements ScriptableWithFallbackGetter {
 
     private static final Log LOG = LogFactory.getLog(HTMLDocument.class);
-
-    /** The cookie name used for cookies with no name (HttpClient doesn't like empty names). */
-    public static final String EMPTY_COOKIE_NAME = "HTMLUNIT_EMPTY_COOKIE";
 
     /** The format to use for the <tt>lastModified</tt> attribute. */
     private static final String LAST_MODIFIED_DATE_FORMAT = "MM/dd/yyyy HH:mm:ss";
@@ -841,7 +839,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             if (buffer.length() != 0) {
                 buffer.append("; ");
             }
-            if (!EMPTY_COOKIE_NAME.equals(cookie.getName())) {
+            if (!HtmlUnitBrowserCompatCookieSpec.EMPTY_COOKIE_NAME.equals(cookie.getName())) {
                 buffer.append(cookie.getName());
                 buffer.append("=");
             }
@@ -991,7 +989,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             value = StringUtils.substringAfter(nameAndValue, "=").trim();
         }
         else {
-            name = EMPTY_COOKIE_NAME;
+            name = HtmlUnitBrowserCompatCookieSpec.EMPTY_COOKIE_NAME;
             value = newCookie;
         }
 

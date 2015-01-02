@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument.EMPTY_COOKIE_NAME;
+import static com.gargoylesoftware.htmlunit.HtmlUnitBrowserCompatCookieSpec.EMPTY_COOKIE_NAME;
 import static com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate;
 
 import java.util.Date;
