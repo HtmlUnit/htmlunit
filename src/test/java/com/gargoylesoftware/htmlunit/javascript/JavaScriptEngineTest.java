@@ -1356,7 +1356,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         assertEquals(getExpectedAlerts(), collectedAlerts);
 
         webClient.closeAllWindows();
-        Thread.sleep(100);
+        Thread.sleep(400);
         assertEquals(0, getJavaScriptThreads().size());
     }
 
