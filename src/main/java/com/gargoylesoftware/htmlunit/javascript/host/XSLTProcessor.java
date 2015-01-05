@@ -308,9 +308,8 @@ public class XSLTProcessor extends SimpleScriptable {
             }
             else {
                 //remove trailing "\r\n"
-                final String serializedString =
-                    serializer.serializeToString((Node) child.getScriptObject());
-                output.append(serializedString.substring(0, serializedString.length() - 2));
+                final String serializedString = serializer.serializeToString((Node) child.getScriptObject());
+                output.append(serializedString, 0, serializedString.length() - 2);
             }
         }
         output_ = output.toString();

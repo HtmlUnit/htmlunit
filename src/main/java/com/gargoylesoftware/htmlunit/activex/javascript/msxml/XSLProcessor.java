@@ -169,7 +169,7 @@ public class XSLProcessor extends MSXMLScriptable {
                 //remove trailing "\r\n"
                 final String serializedString =
                     serializer.serializeToString((XMLDOMNode) child.getScriptObject());
-                output.append(serializedString.substring(0, serializedString.length() - 2));
+                output.append(serializedString, 0, serializedString.length() - 2);
             }
         }
         output_ = output.toString();

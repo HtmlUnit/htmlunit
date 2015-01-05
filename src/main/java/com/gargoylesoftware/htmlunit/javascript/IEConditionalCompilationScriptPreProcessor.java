@@ -78,7 +78,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
 
         final StringBuilder sb = new StringBuilder();
         if (startPos > 0) {
-            sb.append(sourceCode.substring(0, startPos));
+            sb.append(sourceCode, 0, startPos);
         }
         final BrowserVersion browserVersion = htmlPage.getWebClient().getBrowserVersion();
         final String body = sourceCode.substring(startPos + 8, endPos);
@@ -89,7 +89,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
             int nextEnd = remaining.indexOf("@*/", nextStart + 3);
             // handle other /*@ @*/ blocks
             while (nextStart >= 0 && nextEnd > 0) {
-                sb.append(remaining.substring(0, nextStart));
+                sb.append(remaining, 0, nextStart);
                 final String nextBody = remaining.substring(nextStart + 3, nextEnd);
                 sb.append(processConditionalCompilation(nextBody, browserVersion));
                 remaining = remaining.substring(nextEnd + 3);

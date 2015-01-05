@@ -134,12 +134,12 @@ public final class DOMTokenList extends SimpleScriptable {
 
             final StringBuilder result = new StringBuilder();
             if (from > 0) {
-                result.append(value.substring(0, from));
+                result.append(value, 0, from);
                 if (to < value.length()) {
                     result.append(" ");
                 }
             }
-            result.append(value.substring(to));
+            result.append(value, to, value.length());
 
             value = result.toString();
             updateAttribute(value);
