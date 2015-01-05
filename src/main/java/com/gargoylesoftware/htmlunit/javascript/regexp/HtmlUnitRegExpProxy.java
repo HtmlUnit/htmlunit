@@ -172,10 +172,10 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
     private String doReplacement(final String originalString, final String replacement, final Matcher matcher,
         final boolean replaceAll) {
 
-        final StringBuffer sb = new StringBuffer();
+        final StringBuilder sb = new StringBuilder();
         int previousIndex = 0;
         while (matcher.find()) {
-            sb.append(originalString.substring(previousIndex, matcher.start()));
+            sb.append(originalString, previousIndex, matcher.start());
             String localReplacement = replacement;
             if (replacement.contains("$")) {
                 localReplacement = computeReplacementValue(replacement, originalString, matcher);
@@ -188,7 +188,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
                 break;
             }
         }
-        sb.append(originalString.substring(previousIndex));
+        sb.append(originalString, previousIndex, originalString.length());
         return sb.toString();
     }
 
@@ -200,7 +200,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         int i;
         while ((i = replacement.indexOf('$', lastIndex)) > -1) {
             if (i > 0) {
-                result.append(replacement.substring(lastIndex, i));
+                result.append(replacement, lastIndex, i);
             }
             String ss = null;
             if (i < replacement.length() - 1 && (i == lastIndex || replacement.charAt(i - 1) != '$')) {
@@ -259,7 +259,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             }
         }
 
-        result.append(replacement.substring(lastIndex));
+        result.append(replacement, lastIndex, replacement.length());
 
         return result.toString();
     }
@@ -292,11 +292,12 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         }
 
         // parens
-        final int count = Math.min(9, matcher.groupCount());
-        if (count == 0) {
+        final int groupCount = matcher.groupCount();
+        if (groupCount == 0) {
             parens = null;
         }
         else {
+            final int count = Math.min(9, groupCount);
             parens = new SubString[count];
             for (int i = 0; i < count; i++) {
                 final String group = matcher.group(i + 1);
@@ -310,12 +311,12 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         }
 
         // lastParen
-        if (matcher.groupCount() > 0) {
-            if (matcher.groupCount() > 9 && browserVersion_.hasFeature(JS_REGEXP_EMPTY_LASTPAREN_IF_TOO_MANY_GROUPS)) {
+        if (groupCount > 0) {
+            if (groupCount > 9 && browserVersion_.hasFeature(JS_REGEXP_EMPTY_LASTPAREN_IF_TOO_MANY_GROUPS)) {
                 lastParen = new SubString();
             }
             else {
-                final String last = matcher.group(matcher.groupCount());
+                final String last = matcher.group(groupCount);
                 if (last == null) {
                     lastParen = new SubString();
                 }
