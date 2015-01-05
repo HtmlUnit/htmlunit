@@ -61,6 +61,15 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("§§URL§§page2.html")
+    public void redirectAbsolute301() throws Exception {
+        redirect(301, new URL(URL_FIRST, "/page2.html").toExternalForm());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts("§§URL§§page2.html?test=foo")
     public void redirect301WithQuery() throws Exception {
         redirect(301, "/page2.html?test=foo");
@@ -82,6 +91,15 @@ public class WebClient3Test extends WebDriverTestCase {
     @Alerts("§§URL§§page2.html?test=foo#hash")
     public void redirect301WithQueryAndHash() throws Exception {
         redirect(301, "/page2.html?test=foo#hash");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("§§URL§§page2.html?test=foo#hash")
+    public void redirectAbsolute301WithQueryAndHash() throws Exception {
+        redirect(301, new URL(URL_FIRST, "/page2.html?test=foo#hash").toExternalForm());
     }
 
     /**
