@@ -43,9 +43,46 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class WebClient3Test extends WebDriverTestCase {
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("§§URL§§page2.html")
+    public void redirect301() throws Exception {
+        redirect(301, "/page2.html");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("§§URL§§page2.html?test=foo")
+    public void redirect301WithQuery() throws Exception {
+        redirect(301, "/page2.html?test=foo");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("§§URL§§page2.html#hash")
+    public void redirect301WithHash() throws Exception {
+        redirect(301, "/page2.html#hash");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("§§URL§§page2.html?test=foo#hash")
+    public void redirect301WithQueryAndHash() throws Exception {
+        redirect(301, "/page2.html?test=foo#hash");
+    }
 
     /**
      * Regression test for bug 2822048: a 302 redirect without Location header.
@@ -60,6 +97,50 @@ public class WebClient3Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.tagName("a")).click();
         assertEquals(getDefaultUrl() + "page2", driver.getCurrentUrl());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("§§URL§§page2.html?test=foo")
+    public void redirect302WithQuery() throws Exception {
+        redirect(302, "/page2.html?test=foo");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("§§URL§§page2.html#hash")
+    public void redirect302WithHash() throws Exception {
+        redirect(302, "/page2.html#hash");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("§§URL§§page2.html?test=foo#hash")
+    public void redirect302WithQueryAndHash() throws Exception {
+        redirect(302, "/page2.html?test=foo#hash");
+    }
+
+    private void redirect(final int code, final String redirectUrl) throws Exception {
+        final String html = "<html><body><a href='redirect.html'>redirect</a></body></html>";
+
+        final URL url = new URL(getDefaultUrl(), "page2.html");
+        getMockWebConnection().setResponse(url, html);
+
+        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        headers.add(new NameValuePair("Location", redirectUrl));
+        getMockWebConnection().setDefaultResponse("", code, "Found", null, headers);
+
+        expandExpectedAlertsVariables(getDefaultUrl());
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.tagName("a")).click();
+
+        assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
     }
 
     /**
