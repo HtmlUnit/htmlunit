@@ -293,10 +293,12 @@ public class JavaScriptEngine {
         // DEV Note: this is at the moment the only usage of HiddenFunctionObject
         //           if we need more in the future, we have to enhance our JSX annotations
         if (browserVersion.hasFeature(JS_WINDOW_ACTIVEXOBJECT_HIDDEN)) {
-            final Method jsConstructor = ActiveXObject.class.getDeclaredMethod("jsConstructor", Context.class, Object[].class, Function.class, boolean.class);
             final ScriptableObject prototype = prototypesPerJSName.get("ActiveXObject");
-            final FunctionObject functionObject = new HiddenFunctionObject("ActiveXObject", jsConstructor, window);
-            functionObject.addAsConstructor(window, prototype);
+            if (null != prototype) {
+                final Method jsConstructor = ActiveXObject.class.getDeclaredMethod("jsConstructor", Context.class, Object[].class, Function.class, boolean.class);
+                final FunctionObject functionObject = new HiddenFunctionObject("ActiveXObject", jsConstructor, window);
+                functionObject.addAsConstructor(window, prototype);
+            }
         }
 
         // Rhino defines too much methods for us, particularly since implementation of ECMAScript5

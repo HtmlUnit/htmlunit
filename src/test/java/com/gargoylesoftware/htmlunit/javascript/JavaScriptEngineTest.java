@@ -40,6 +40,8 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -1309,6 +1311,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         engine.addPostponedAction(new PostponedAction(page) {
             @Override
             public void execute() throws Exception {
+                // empty
             }
         });
         assertEquals(1, getPostponedActions(engine).get().size());
@@ -1381,5 +1384,27 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         getWebClient().closeAllWindows();
         assertEquals(0, getJavaScriptThreads().size());
+    }
+
+    /**
+     * Test for issue #1658.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void nonStandardBrowserVersion() throws Exception {
+        final BrowserVersion browser = new BrowserVersion("Mozilla", "5.0", "Mozilla/5.0", 11) {
+            @Override
+            public boolean hasFeature(final BrowserVersionFeatures feature) {
+                return BrowserVersion.INTERNET_EXPLORER_11.hasFeature(feature);
+            }
+        };
+
+        final WebClient client = new WebClient(browser);
+        try {
+            client.openWindow(WebClient.URL_ABOUT_BLANK, "TestWindow");
+        }
+        finally {
+            client.closeAllWindows();
+        }
     }
 }
