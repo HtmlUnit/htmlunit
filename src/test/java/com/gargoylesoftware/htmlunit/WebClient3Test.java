@@ -97,9 +97,32 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = "§§URL§§page2.html?from=pwr&#x26;nai=1&#x26;search_submit=Get%20Resumes&#x26;mne=4",
+            IE = "§§URL§§page2.html?from=pwr&#x26;nai=1&x26;search_submit=Get%20Resumes&x26;mne=4")
+    @NotYetImplemented
+    public void redirect301WithQueryAndHashSpecialChars() throws Exception {
+        redirect(301, "/page2.html?from=pwr&#x26;nai=1&#x26;search_submit=Get%20Resumes&#x26;mne=4");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts("§§URL§§page2.html?test=foo#hash")
     public void redirectAbsolute301WithQueryAndHash() throws Exception {
         redirect(301, new URL(URL_FIRST, "/page2.html?test=foo#hash").toExternalForm());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "§§URL§§page2.html?from=pwr&#x26;nai=1&#x26;search_submit=Get%20Resumes&#x26;mne=4",
+            IE = "§§URL§§page2.html?from=pwr&#x26;nai=1&x26;search_submit=Get%20Resumes&x26;mne=4")
+    @NotYetImplemented
+    public void redirectAbsolute301WithQueryAndHashSpecialChars() throws Exception {
+        redirect(301, new URL(URL_FIRST,
+                "/page2.html?from=pwr&#x26;nai=1&#x26;search_submit=Get%20Resumes&#x26;mne=4").toExternalForm());
     }
 
     /**
@@ -142,6 +165,17 @@ public class WebClient3Test extends WebDriverTestCase {
     @Alerts("§§URL§§page2.html?test=foo#hash")
     public void redirect302WithQueryAndHash() throws Exception {
         redirect(302, "/page2.html?test=foo#hash");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "§§URL§§page2.html?from=pwr&#x26;nai=1&#x26;search_submit=Get%20Resumes&#x26;mne=4",
+            IE = "§§URL§§page2.html?from=pwr&#x26;nai=1&x26;search_submit=Get%20Resumes&x26;mne=4")
+    @NotYetImplemented
+    public void redirect302WithQueryAndHashSpecialChars() throws Exception {
+        redirect(302, "/page2.html?from=pwr&#x26;nai=1&#x26;search_submit=Get%20Resumes&#x26;mne=4");
     }
 
     private void redirect(final int code, final String redirectUrl) throws Exception {
