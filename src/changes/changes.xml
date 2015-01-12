@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="FF31, IE11 progress, Chrome progress, Bugfixes">
+            <action type="fix" dev="rbri" issue="1660" due-to="Carsten Steul">
+                Wrong encoding used by StringWebReponse if charset placed in content.
+            </action>
             <action type="fix" dev="asashour">
                 Fix handling nameless cookie.
             </action>

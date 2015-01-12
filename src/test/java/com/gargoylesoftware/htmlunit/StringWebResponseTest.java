@@ -21,6 +21,7 @@ import org.junit.Test;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Carsten Steul
  */
 public class StringWebResponseTest extends SimpleWebTestCase {
 
@@ -31,5 +32,19 @@ public class StringWebResponseTest extends SimpleWebTestCase {
     public void charset() {
         final StringWebResponse webResponse = new StringWebResponse("hello", "UTF-8", getDefaultUrl());
         assertEquals("UTF-8", webResponse.getContentCharset());
+    }
+
+    /**
+     * Regression test for bug #1660.
+     */
+    @Test
+    public void charsetInContent() {
+        final String content = "<html><head>"
+                + "<meta http-equiv='Content-Type' content='text/html; charset=windows-1250' />"
+                + "</head><body>\u010C\u00CDSLO</body></html>";
+        final StringWebResponse webResponse = new StringWebResponse(content, "UTF-8", getDefaultUrl());
+
+        assertEquals("UTF-8", webResponse.getContentCharset());
+        assertEquals(content, webResponse.getContentAsString());
     }
 }
