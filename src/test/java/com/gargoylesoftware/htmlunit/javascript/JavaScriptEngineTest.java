@@ -35,6 +35,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -75,6 +76,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
+@Ignore
 @RunWith(BrowserRunner.class)
 public class JavaScriptEngineTest extends SimpleWebTestCase {
 

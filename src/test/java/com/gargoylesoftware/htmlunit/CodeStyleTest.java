@@ -366,6 +366,9 @@ public class CodeStyleTest {
                 if (line.contains("@Test")) {
                     browserNone = false;
                 }
+                if (relativePath.contains("JavaScriptEngineTest") && line.contains("nonStandardBrowserVersion")) {
+                    browserNone = true;
+                }
                 if (runWith) {
                     if (!browserNone && line.contains("new WebClient(") && !line.contains("getBrowserVersion()")) {
                         addFailure("Test " + relativePath + " line " + index
