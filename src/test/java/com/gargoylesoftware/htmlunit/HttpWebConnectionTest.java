@@ -430,7 +430,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
             response.setContentType("text/html");
             final Writer writer = response.getWriter();
-            if (request.getCookies().length == 0) {
+            if (request.getCookies() == null || request.getCookies().length == 0) {
                 writer.write("No Cookies");
             }
             else {
