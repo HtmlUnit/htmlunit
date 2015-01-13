@@ -24,8 +24,8 @@
                 <version>3.1</version>
                 <configuration>
                     <!-- Update the links reference in javadoc, PDM and clover plugins when this changes -->
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                     <testExcludes>
                         <exclude>**/CodeChecker.java</exclude>
                     </testExcludes>
@@ -375,7 +375,7 @@
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>3.2</version>
                 <configuration>
-                    <targetJdk>1.6</targetJdk>
+                    <targetJdk>1.7</targetJdk>
                 </configuration>
             </plugin>
             <plugin>
@@ -754,6 +754,9 @@
         <contributor>
             <name>Jake Cobb</name>
         </contributor>
+        <contributor>
+            <name>David Ostrovsky</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
@@ -837,9 +840,9 @@
             <version>1.2</version>
         </dependency>
         <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-websocket</artifactId>
-            <version>8.1.16.v20140903</version>
+            <groupId>org.eclipse.jetty.websocket</groupId>
+            <artifactId>websocket-client</artifactId>
+            <version>9.2.6.v20141205</version>
         </dependency>
         <!-- Test dependencies. -->
         <dependency>
@@ -895,12 +898,19 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-server</artifactId>
-            <version>8.1.16.v20140903</version>
+            <version>9.2.6.v20141205</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-webapp</artifactId>
-            <version>8.1.16.v20140903</version>
+            <version>9.2.6.v20141205</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty.websocket</groupId>
+            <artifactId>websocket-server</artifactId>
+            <version>9.2.6.v20141205</version>
+            <scope>test</scope>
         </dependency>
         <!-- WebDriver -->
         <dependency>
