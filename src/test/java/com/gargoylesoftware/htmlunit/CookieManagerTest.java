@@ -358,7 +358,7 @@ public class CookieManagerTest extends WebDriverTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, 2000);
+        loadPageWithAlerts2(html, 4000);
     }
 
     /**
