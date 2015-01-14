@@ -628,7 +628,8 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             // send
             + "xhr.send();\n"
             + "try {\n"
-            + "  alert(xhr.getAllResponseHeaders().replace(/Jetty\\(.*\\)/, 'Jetty(XXX)').replace(/Date.*GMT/, 'Date XYZ GMT'));\n"
+            + "  alert(xhr.getAllResponseHeaders().replace(/Jetty\\(.*\\)/, 'Jetty(XXX)')"
+            + ".replace(/Date.*GMT/, 'Date XYZ GMT'));\n"
             + "} catch(e) { alert('exception-sent'); }\n";
 
         tester(test, "<root/>");
