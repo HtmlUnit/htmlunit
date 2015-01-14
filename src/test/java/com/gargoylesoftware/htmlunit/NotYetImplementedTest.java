@@ -268,7 +268,7 @@ public class NotYetImplementedTest {
 
         builder.insert(overviewPos, overview);
 
-        FileUtils.writeStringToFile(new File(PropertiesTest.getArtifactsDirectory(), "notYetImplemented.html"),
+        FileUtils.writeStringToFile(new File(PropertiesTest.getTargetDirectory(), "notYetImplemented.html"),
                 builder.toString());
     }
 

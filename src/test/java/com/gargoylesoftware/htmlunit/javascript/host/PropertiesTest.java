@@ -105,7 +105,7 @@ public class PropertiesTest extends SimpleWebTestCase {
      */
     @Parameters(name = "{index}: {0} - {1}")
     public static Collection<Object[]> data() throws Exception {
-        for (final File file : new File(getArtifactsDirectory()).listFiles()) {
+        for (final File file : new File(getTargetDirectory()).listFiles()) {
             final String name = file.getName();
             if (name.startsWith("properties-") && (name.endsWith(".html") || name.endsWith(".png"))) {
                 file.delete();
@@ -249,7 +249,7 @@ public class PropertiesTest extends SimpleWebTestCase {
         if (dataset.getColumnCount() == IE8_.size()) {
             saveChart(dataset);
 
-            FileUtils.writeStringToFile(new File(getArtifactsDirectory()
+            FileUtils.writeStringToFile(new File(getTargetDirectory()
                     + "/properties-" + browserVersion_.getNickname() + ".html"),
                     htmlHeader()
                         .append(overview(actualPropertyCount.intValue(), remainingPropertyCount.intValue()))
@@ -405,15 +405,15 @@ public class PropertiesTest extends SimpleWebTestCase {
         renderer.setSeriesPaint(1, new GradientPaint(0, 0, Color.blue, 0, 0, new Color(0, 0, 64)));
         renderer.setSeriesPaint(2, new GradientPaint(0, 0, Color.red, 0, 0, new Color(64, 0, 0)));
         ImageIO.write(chart.createBufferedImage(1200, 2400), "png",
-            new File(getArtifactsDirectory() + "/properties-" + browserVersion_.getNickname() + ".png"));
+            new File(getTargetDirectory() + "/properties-" + browserVersion_.getNickname() + ".png"));
     }
 
     /**
-     * Returns the 'artifacts' directory.
-     * @return the 'artifacts' directory
+     * Returns the 'target' directory.
+     * @return the 'target' directory
      */
-    public static String getArtifactsDirectory() {
-        final String dirName = "./artifacts";
+    public static String getTargetDirectory() {
+        final String dirName = "./target";
         final File dir = new File(dirName);
         if (!dir.exists()) {
             if (!dir.mkdir()) {
