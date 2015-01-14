@@ -72,21 +72,21 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * "test.properties" in the HtmlUnit root directory.
  * Sample:
  * <pre>
-   browsers=hu,ff24,ie9
+   browsers=hu,ff31,ie11
    ie.bin=C:\\path\\to\\32bit\\IEDriverServer.exe       [Windows]
-   ff24.bin=/usr/bin/firefox                            [Unix-like]
+   ff31.bin=/usr/bin/firefox                            [Unix-like]
    chrome.bin=/path/to/chromedriver                     [Unix-like]
  * </pre>
  * The file should contain four properties: "browsers", "ie.bin", "ff24.bin", and "chrome.bin".
  * <ul>
  *   <li>browsers: is a comma separated list contains any combination of "hu" (for HtmlUnit with all browser versions),
- *   "hu-ie8", "hu-ff24",
- *   "ff24", "ie8", "ie11", "chrome", which will be used to driver real browsers,
+ *   "hu-ie8", "hu-ff31",
+ *   "ff31", "ie8", "ie11", "chrome", which will be used to driver real browsers,
  *   note that you can't define more than one IE as there is no standard way
  *   to have multiple IEs on the same machine</li>
- *   <li>ie.bin: is the location of the IEDriverServer binary (see
+ *   <li>ie.bin (optional if exist in the <i>path</i>): is the location of the IEDriverServer binary (see
  *   <a href="http://selenium-release.storage.googleapis.com/index.html">IEDriverServer downloads</a></li>
- *   <li>ff24.bin: is the location of the FF24 binary, in Windows use double back-slashes</li>
+ *   <li>ff31.bin (optional): is the location of the FF24 binary, in Windows use double back-slashes</li>
  *   <li>chrome.bin: is the location of the ChromeDriver binary (see
  *   <a href="http://chromedriver.storage.googleapis.com/index.html">Chrome Driver downloads</a></li>
  * </ul>
