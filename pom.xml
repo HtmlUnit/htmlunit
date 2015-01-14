@@ -407,8 +407,8 @@
         <url>https://sourceforge.net/p/htmlunit/code</url>
     </scm>
     <ciManagement>
-        <system>Cruise Control</system>
-        <url>http://build.canoo.com/htmlunit</url>
+        <system>TeamCity</system>
+        <url>https://ci.canoo.com/teamcity/viewLog.html?buildTypeId=Htmlunit_CheckInBuild&amp;buildId=lastSuccessful&amp;tab=artifacts</url>
     </ciManagement>
     <mailingLists>
         <mailingList>
