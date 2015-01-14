@@ -906,7 +906,7 @@ public class Node extends SimpleScriptable {
      * @return the namespace prefix
      */
     @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
-    public String getPrefix() {
+    public Object getPrefix() {
         final DomNode domNode = getDomNodeOrDie();
         final String prefix = domNode.getPrefix();
         if (getBrowserVersion().hasFeature(JS_PREFIX_RETURNS_EMPTY_WHEN_UNDEFINED)

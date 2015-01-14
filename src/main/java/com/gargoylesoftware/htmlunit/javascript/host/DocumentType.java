@@ -14,13 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOCTYPE_PREFIX_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_ENTITIES_EMPTY_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_ENTITIES_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_NOTATIONS_EMPTY_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_NOTATIONS_NULL;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.NamedNodeMap;
@@ -63,7 +66,7 @@ public class DocumentType extends Node {
      * Returns the publicId.
      * @return the publicId
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public String getPublicId() {
         return ((DomDocumentType) getDomNodeOrDie()).getPublicId();
     }
@@ -72,7 +75,7 @@ public class DocumentType extends Node {
      * Returns the systemId.
      * @return the systemId
      */
-    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public String getSystemId() {
         return ((DomDocumentType) getDomNodeOrDie()).getSystemId();
     }
@@ -129,5 +132,16 @@ public class DocumentType extends Node {
             return "";
         }
         return Context.getUndefinedValue();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getPrefix() {
+        if (getBrowserVersion().hasFeature(DOCTYPE_PREFIX_UNDEFINED)) {
+            return Undefined.instance;
+        }
+        return super.getPrefix();
     }
 }

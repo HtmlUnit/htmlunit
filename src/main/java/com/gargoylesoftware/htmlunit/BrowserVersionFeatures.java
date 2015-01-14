@@ -170,6 +170,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     DOCTYPE_IS_COMMENT,
 
+    /** DOCTYPE has undefined value for 'prefix'. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    DOCTYPE_PREFIX_UNDEFINED,
+
     /** IE removes all child text nodes, but FF preserves the first. */
     @BrowserFeature(@WebBrowser(IE))
     DOM_NORMALIZE_REMOVE_CHILDREN,
