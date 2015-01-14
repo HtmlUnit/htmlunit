@@ -264,7 +264,7 @@ public abstract class SimpleWebTestCase extends WebTestCase {
         createTestPageForRealBrowserIfNeeded(html, getExpectedAlerts());
 
         final WebClient client = getWebClientWithMockWebConnection();
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = getMockWebConnection();
@@ -304,7 +304,7 @@ public abstract class SimpleWebTestCase extends WebTestCase {
         // caution: the threads may terminate after the threads have been returned by getJavaScriptThreads()
         // and before stack traces are retrieved
         if (jsThreads.size() > nbJSThreadsBeforeTest_) {
-            final Map<String, StackTraceElement[]> stackTraces = new HashMap<String, StackTraceElement[]>();
+            final Map<String, StackTraceElement[]> stackTraces = new HashMap<>();
             for (final Thread t : jsThreads) {
                 final StackTraceElement elts[] = t.getStackTrace();
                 if (elts != null) {
@@ -333,7 +333,7 @@ public abstract class SimpleWebTestCase extends WebTestCase {
     protected List<Thread> getJavaScriptThreads() {
         final Thread[] threads = new Thread[Thread.activeCount() + 10];
         Thread.enumerate(threads);
-        final List<Thread> jsThreads = new ArrayList<Thread>();
+        final List<Thread> jsThreads = new ArrayList<>();
         for (final Thread t : threads) {
             if (t != null && t.getName().startsWith("JS executor for")) {
                 jsThreads.add(t);

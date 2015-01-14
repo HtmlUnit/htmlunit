@@ -97,7 +97,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
         final URL url = getClass().getResource("/applets/simpleAppletDoIt.html");
 
         final WebClient webClient = getWebClient();
-        final List<String> collectedStatus = new ArrayList<String>();
+        final List<String> collectedStatus = new ArrayList<>();
         final StatusHandler statusHandler = new StatusHandler() {
             public void statusMessageChanged(final Page page, final String message) {
                 collectedStatus.add(message);
@@ -131,7 +131,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
         final URL url = getClass().getResource("/applets/codebaseApplet.html");
 
         final WebClient webClient = getWebClient();
-        final List<String> collectedStatus = new ArrayList<String>();
+        final List<String> collectedStatus = new ArrayList<>();
         final StatusHandler statusHandler = new StatusHandler() {
             public void statusMessageChanged(final Page page, final String message) {
                 collectedStatus.add(message);
@@ -165,7 +165,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
         final URL url = getClass().getResource("/applets/subdir/codebaseApplet.html");
 
         final WebClient webClient = getWebClient();
-        final List<String> collectedStatus = new ArrayList<String>();
+        final List<String> collectedStatus = new ArrayList<>();
         final StatusHandler statusHandler = new StatusHandler() {
             public void statusMessageChanged(final Page page, final String message) {
                 collectedStatus.add(message);
@@ -199,7 +199,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
         final URL url = getClass().getResource("/applets/subdir/archiveRelativeApplet.html");
 
         final WebClient webClient = getWebClient();
-        final List<String> collectedStatus = new ArrayList<String>();
+        final List<String> collectedStatus = new ArrayList<>();
         final StatusHandler statusHandler = new StatusHandler() {
             public void statusMessageChanged(final Page page, final String message) {
                 collectedStatus.add(message);
@@ -233,7 +233,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
         final URL url = getClass().getResource("/applets/simpleAppletDoIt.html");
 
         final WebClient webClient = getWebClient();
-        final List<String> collectedStatus = new ArrayList<String>();
+        final List<String> collectedStatus = new ArrayList<>();
         final StatusHandler statusHandler = new StatusHandler() {
             public void statusMessageChanged(final Page page, final String message) {
                 collectedStatus.add(message);
@@ -269,7 +269,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
         final URL url = getClass().getResource("/applets/subdir/codebaseParamApplet.html");
 
         final WebClient webClient = getWebClient();
-        final List<String> collectedStatus = new ArrayList<String>();
+        final List<String> collectedStatus = new ArrayList<>();
         final StatusHandler statusHandler = new StatusHandler() {
             public void statusMessageChanged(final Page page, final String message) {
                 collectedStatus.add(message);
@@ -305,7 +305,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
         final URL url = getClass().getResource("/applets/unknownArchiveApplet.html");
 
         final WebClient webClient = getWebClient();
-        final List<String> collectedStatus = new ArrayList<String>();
+        final List<String> collectedStatus = new ArrayList<>();
         final StatusHandler statusHandler = new StatusHandler() {
             public void statusMessageChanged(final Page page, final String message) {
                 collectedStatus.add(message);
@@ -337,7 +337,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
         final URL url = getClass().getResource("/applets/ignoreUnknownArchiveApplet.html");
 
         final WebClient webClient = getWebClient();
-        final List<String> collectedStatus = new ArrayList<String>();
+        final List<String> collectedStatus = new ArrayList<>();
         final StatusHandler statusHandler = new StatusHandler() {
             public void statusMessageChanged(final Page page, final String message) {
                 collectedStatus.add(message);
@@ -362,7 +362,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
         final URL url = getClass().getResource("/applets/simpleAppletDoIt.html");
 
         final WebClient webClient = getWebClient();
-        final List<String> collectedStatus = new ArrayList<String>();
+        final List<String> collectedStatus = new ArrayList<>();
         final StatusHandler statusHandler = new StatusHandler() {
             public void statusMessageChanged(final Page page, final String message) {
                 collectedStatus.add(message);
@@ -395,7 +395,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
         final URL url = getClass().getResource("/applets/simpleAppletDoIt.html");
 
         final WebClient webClient = getWebClient();
-        final List<String> collectedStatus = new ArrayList<String>();
+        final List<String> collectedStatus = new ArrayList<>();
         final StatusHandler statusHandler = new StatusHandler() {
             public void statusMessageChanged(final Page page, final String message) {
                 collectedStatus.add(message);

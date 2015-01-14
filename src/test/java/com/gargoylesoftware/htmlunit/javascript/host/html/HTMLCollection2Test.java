@@ -58,7 +58,7 @@ public class HTMLCollection2Test extends SimpleWebTestCase {
 
         final String secondContent = "<title>Immortality</title>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();

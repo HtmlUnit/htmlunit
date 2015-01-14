@@ -87,7 +87,7 @@ public class CSSRuleList extends SimpleScriptable {
      */
     @Override
     public Object[] getIds() {
-        final List<String> idList = new ArrayList<String>();
+        final List<String> idList = new ArrayList<>();
 
         final int length = getLength();
         if (getBrowserVersion().hasFeature(JS_CSSRULELIST_DONT_ENUM_ITEM)) {

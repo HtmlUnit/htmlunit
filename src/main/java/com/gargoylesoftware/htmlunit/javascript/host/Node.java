@@ -553,7 +553,7 @@ public class Node extends SimpleScriptable {
             childNodes_ = new NodeList(node, false, "Node.childNodes") {
                 @Override
                 protected List<Object> computeElements() {
-                    final List<Object> response = new ArrayList<Object>();
+                    final List<Object> response = new ArrayList<>();
                     for (final DomNode child : node.getChildren()) {
                         //IE: XmlPage ignores all empty text nodes
                         if (ignoreEmptyTextNode && child instanceof DomText
@@ -774,7 +774,7 @@ public class Node extends SimpleScriptable {
             if (event.isPropagationStopped()) {
                 return result;
             }
-            final List<DomNode> parents = new ArrayList<DomNode>();
+            final List<DomNode> parents = new ArrayList<>();
             DomNode node = scriptable.getDomNodeOrDie();
             while (node != null) {
                 parents.add(node);

@@ -127,7 +127,7 @@ public class DocumentFragment extends Node {
     @JsxFunction
     public StaticNodeList querySelectorAll(final String selectors) {
         try {
-            final List<Node> nodes = new ArrayList<Node>();
+            final List<Node> nodes = new ArrayList<>();
             for (final DomNode domNode : getDomNodeOrDie().querySelectorAll(selectors)) {
                 nodes.add((Node) domNode.getScriptObject());
             }

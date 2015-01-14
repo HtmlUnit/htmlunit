@@ -52,8 +52,8 @@ public class EventListenersContainer implements Serializable {
     private static final Log LOG = LogFactory.getLog(EventListenersContainer.class);
 
     static class Handlers implements Serializable {
-        private final List<Scriptable> capturingHandlers_ = new ArrayList<Scriptable>();
-        private final List<Scriptable> bubblingHandlers_ = new ArrayList<Scriptable>();
+        private final List<Scriptable> capturingHandlers_ = new ArrayList<>();
+        private final List<Scriptable> bubblingHandlers_ = new ArrayList<>();
         private Object handler_;
         List<Scriptable> getHandlers(final boolean useCapture) {
             if (useCapture) {
@@ -71,7 +71,7 @@ public class EventListenersContainer implements Serializable {
         }
     }
 
-    private final Map<String, Handlers> eventHandlers_ = new HashMap<String, Handlers>();
+    private final Map<String, Handlers> eventHandlers_ = new HashMap<>();
     private final SimpleScriptable jsNode_;
 
     EventListenersContainer(final SimpleScriptable jsNode) {
@@ -177,7 +177,7 @@ public class EventListenersContainer implements Serializable {
             event.setCurrentTarget(jsNode_);
             final HtmlPage page = (HtmlPage) node.getPage();
             // make a copy of the list as execution of an handler may (de-)register handlers
-            final List<Scriptable> handlersToExecute = new ArrayList<Scriptable>(handlers);
+            final List<Scriptable> handlersToExecute = new ArrayList<>(handlers);
             for (final Scriptable listener : handlersToExecute) {
                 Function function = null;
                 Scriptable thisObject = null;

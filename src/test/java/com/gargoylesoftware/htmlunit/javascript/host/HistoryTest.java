@@ -170,7 +170,7 @@ public class HistoryTest extends WebServerTestCase {
     @Alerts({ "1", "2", "3" })
     public void length() throws Exception {
         final WebClient client = getWebClient();
-        final List<String> alerts = new ArrayList<String>();
+        final List<String> alerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(alerts));
 
         HtmlPage page = client.getPage("http://localhost:" + PORT + "/HistoryTest_a.html");
@@ -192,7 +192,7 @@ public class HistoryTest extends WebServerTestCase {
     @Alerts(FF = "error", IE = "undefined")
     public void previous() throws Exception {
         final WebClient client = getWebClient();
-        final List<String> alerts = new ArrayList<String>();
+        final List<String> alerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(alerts));
         final HtmlPage page = client.getPage("http://localhost:" + PORT + "/HistoryTest_a.html");
         page.getAnchorByName("previous").click();
@@ -206,7 +206,7 @@ public class HistoryTest extends WebServerTestCase {
     @Alerts(FF = "error", IE = "undefined")
     public void current() throws Exception {
         final WebClient client = getWebClient();
-        final List<String> alerts = new ArrayList<String>();
+        final List<String> alerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(alerts));
         final HtmlPage page = client.getPage("http://localhost:" + PORT + "/HistoryTest_a.html");
         page.getAnchorByName("current").click();
@@ -220,7 +220,7 @@ public class HistoryTest extends WebServerTestCase {
     @Alerts(FF = "error", IE = "undefined")
     public void next() throws Exception {
         final WebClient client = getWebClient();
-        final List<String> alerts = new ArrayList<String>();
+        final List<String> alerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(alerts));
         final HtmlPage page = client.getPage("http://localhost:" + PORT + "/HistoryTest_a.html");
         page.getAnchorByName("next").click();
@@ -234,7 +234,7 @@ public class HistoryTest extends WebServerTestCase {
     @Alerts(FF = "error")
     public void item() throws Exception {
         final WebClient client = getWebClient();
-        final List<String> alerts = new ArrayList<String>();
+        final List<String> alerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(alerts));
         final HtmlPage page = client.getPage("http://localhost:" + PORT + "/HistoryTest_a.html");
         page.getAnchorByName("itemZero").click();
@@ -249,7 +249,7 @@ public class HistoryTest extends WebServerTestCase {
             IE = { "false", "false", "false", "false", "false", "false" })
     public void byIndex() throws Exception {
         final WebClient client = getWebClient();
-        final List<String> alerts = new ArrayList<String>();
+        final List<String> alerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(alerts));
         final HtmlPage page = client.getPage("http://localhost:" + PORT + "/HistoryTest_a.html");
         page.getAnchorByName("hasNegativeOne").click();

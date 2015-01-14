@@ -94,7 +94,7 @@ public class HtmlUnitXPathTest extends SimpleWebTestCase {
         final List<?> list = page.getByXPath("//*");
 
         final String[] expected = {"html", "head", "title", "script", "body"};
-        final List<String> actualNames = new ArrayList<String>();
+        final List<String> actualNames = new ArrayList<>();
         for (final DomNode node : (List<DomNode>) list) {
             actualNames.add(node.getNodeName());
         }
@@ -153,18 +153,18 @@ public class HtmlUnitXPathTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(content);
 
         final List<?> nameList = page.getByXPath("//img/@src");
-        final List<?> valueList = new ArrayList<Object>(nameList);
+        final List<?> valueList = new ArrayList<>(nameList);
 
         final String[] expectedNames = {"src", "src", "src"};
 
-        final List<String> collectedNames = new ArrayList<String>();
+        final List<String> collectedNames = new ArrayList<>();
         for (final DomNode node : (List<DomNode>) nameList) {
             collectedNames.add(node.getNodeName());
         }
         assertEquals(expectedNames, collectedNames);
 
         final String[] expectedValues = {"1.png", "2.png", "3.png"};
-        final List<String> collectedValues = new ArrayList<String>();
+        final List<String> collectedValues = new ArrayList<>();
         for (final DomNode node : (List<DomNode>) valueList) {
             collectedValues.add(node.getNodeValue());
         }

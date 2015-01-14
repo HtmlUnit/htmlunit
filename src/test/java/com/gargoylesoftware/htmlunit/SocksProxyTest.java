@@ -62,7 +62,7 @@ public class SocksProxyTest extends WebServerTestCase {
     }
 
     private void doHttpTest(final WebClient client) throws Exception, IOException, MalformedURLException {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", SocksProxyTestServlet.class);
         startWebServer("./", new String[0], servlets);
 

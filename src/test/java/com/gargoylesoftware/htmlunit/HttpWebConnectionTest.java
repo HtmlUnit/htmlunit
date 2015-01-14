@@ -307,14 +307,14 @@ public class HttpWebConnectionTest extends WebServerTestCase {
      */
     @Test
     public void emptyPut() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", EmptyPutServlet.class);
         startWebServer("./", null, servlets);
 
         final String[] expectedAlerts = {"1"};
         final WebClient client = getWebClient();
         client.setAjaxController(new NicelyResynchronizingAjaxController());
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         assertEquals(0, client.getCookieManager().getCookies().size());
@@ -385,7 +385,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
      */
     @Test
     public void cookiesEnabledAfterDisable() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test1", Cookie1Servlet.class);
         servlets.put("/test2", Cookie2Servlet.class);
         startWebServer("./", null, servlets);
@@ -447,7 +447,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
      */
     @Test
     public void remotePort() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", RemotePortServlet.class);
         startWebServer("./", null, servlets);
 
@@ -485,7 +485,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
      */
     @Test
     public void contentLengthSmallerThanContent() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/contentLengthSmallerThanContent", ContentLengthSmallerThanContentServlet.class);
         startWebServer("./", null, servlets);
 
@@ -522,7 +522,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
      */
     @Test
     public void contentLengthSmallerThanContentLargeContent() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/contentLengthSmallerThanContent", ContentLengthSmallerThanContentLargeContentServlet.class);
         startWebServer("./", null, servlets);
 
@@ -562,7 +562,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
      */
     @Test
     public void contentLengthLargerThanContent() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/contentLengthLargerThanContent", ContentLengthLargerThanContentServlet.class);
         startWebServer("./", null, servlets);
 
@@ -598,7 +598,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
      */
     @Test
     public void contentLengthLargerThanContentLargeContent() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/contentLengthLargerThanContent", ContentLengthLargerThanContentServlet.class);
         startWebServer("./", null, servlets);
 

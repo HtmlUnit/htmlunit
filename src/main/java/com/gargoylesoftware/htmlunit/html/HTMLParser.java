@@ -103,7 +103,7 @@ public final class HTMLParser {
 
     /** SVG namespace. */
     public static final String SVG_NAMESPACE = "http://www.w3.org/2000/svg";
-    private static final Map<String, ElementFactory> ELEMENT_FACTORIES = new HashMap<String, ElementFactory>();
+    private static final Map<String, ElementFactory> ELEMENT_FACTORIES = new HashMap<>();
 
     private static final ElementFactory SVG_FACTORY = new SvgElementFactory();
 
@@ -153,7 +153,7 @@ public final class HTMLParser {
         domBuilder.setFeature("http://cyberneko.org/html/features/balance-tags/document-fragment", true);
         // build fragment context stack
         DomNode node = context;
-        final List<QName> ancestors = new ArrayList<QName>();
+        final List<QName> ancestors = new ArrayList<>();
         while (node != null && node.getNodeType() != Node.DOCUMENT_NODE) {
             ancestors.add(0, new QName(null, node.getNodeName(), null, null));
             node = node.getParentNode();

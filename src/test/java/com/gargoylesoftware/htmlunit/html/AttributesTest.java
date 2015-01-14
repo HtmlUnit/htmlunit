@@ -52,7 +52,7 @@ public class AttributesTest extends TestCase {
     private final HtmlPage page_;
     private final String attributeName_;
 
-    private static final List<String> EXCLUDED_METHODS = new ArrayList<String>();
+    private static final List<String> EXCLUDED_METHODS = new ArrayList<>();
     static {
         EXCLUDED_METHODS.add("getHtmlElementsByAttribute");
         EXCLUDED_METHODS.add("getOneHtmlElementByAttribute");

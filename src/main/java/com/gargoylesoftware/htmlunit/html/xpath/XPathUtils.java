@@ -69,7 +69,7 @@ public final class XPathUtils {
         }
 
         PROCESS_XPATH_.set(Boolean.TRUE);
-        final List<Object> list = new ArrayList<Object>();
+        final List<Object> list = new ArrayList<>();
         try {
             final XObject result = evaluateXPath(node, xpathExpr, resolver);
 

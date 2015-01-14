@@ -445,7 +445,7 @@ public class DomNodeTest extends SimpleWebTestCase {
     }
 
     static class DomChangeListenerTestImpl implements DomChangeListener {
-        private final List<String> collectedValues_ = new ArrayList<String>();
+        private final List<String> collectedValues_ = new ArrayList<>();
         public void nodeAdded(final DomChangeEvent event) {
             collectedValues_.add("nodeAdded: " + event.getParentNode().getNodeName() + ','
                     + event.getChangedNode().getNodeName());
@@ -578,7 +578,7 @@ public class DomNodeTest extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final List<String> l = new ArrayList<String>();
+        final List<String> l = new ArrayList<>();
         final DomChangeListener listener2 = new DomChangeListenerTestImpl() {
             @Override
             public void nodeAdded(final DomChangeEvent event) {
@@ -651,7 +651,7 @@ public class DomNodeTest extends SimpleWebTestCase {
 
         final String[] expectedAlerts = {"true", "true", "true"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }

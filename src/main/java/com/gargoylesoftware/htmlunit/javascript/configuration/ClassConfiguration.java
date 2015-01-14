@@ -34,9 +34,9 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Ronald Brill
  */
 public final class ClassConfiguration {
-    private Map<String, PropertyInfo> propertyMap_ = new HashMap<String, PropertyInfo>();
-    private Map<String, Method> functionMap_ = new HashMap<String, Method>();
-    private List<String> constants_ = new ArrayList<String>();
+    private Map<String, PropertyInfo> propertyMap_ = new HashMap<>();
+    private Map<String, Method> functionMap_ = new HashMap<>();
+    private List<String> constants_ = new ArrayList<>();
     private String extendedClassName_;
     private final Class<? extends SimpleScriptable> hostClass_;
     /**

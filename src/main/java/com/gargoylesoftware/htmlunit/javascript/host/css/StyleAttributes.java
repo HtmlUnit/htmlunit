@@ -38,7 +38,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
  * @author Frank Danek
  */
 final class StyleAttributes {
-    private static final Map<String, Definition> styles_ = new HashMap<String, Definition>();
+    private static final Map<String, Definition> styles_ = new HashMap<>();
 
     static {
         // force loading of Definition to fill the styles_ map
@@ -74,7 +74,7 @@ final class StyleAttributes {
      * @return the list
      */
     public static List<Definition> getDefinitions(final BrowserVersion browserVersion) {
-        final List<Definition> list = new ArrayList<Definition>();
+        final List<Definition> list = new ArrayList<>();
         for (final Definition definition : Definition.values()) {
             if (definition.isAvailable(browserVersion)) {
                 list.add(definition);

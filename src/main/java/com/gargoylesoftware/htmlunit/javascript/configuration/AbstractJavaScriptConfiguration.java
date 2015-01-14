@@ -44,7 +44,7 @@ public abstract class AbstractJavaScriptConfiguration {
 
     private static final Log LOG = LogFactory.getLog(AbstractJavaScriptConfiguration.class);
 
-    private static final Map<String, String> CLASS_NAME_MAP_ = new HashMap<String, String>();
+    private static final Map<String, String> CLASS_NAME_MAP_ = new HashMap<>();
 
     private Map<Class<?>, Class<? extends SimpleScriptable>> domJavaScriptMap_;
 
@@ -72,8 +72,7 @@ public abstract class AbstractJavaScriptConfiguration {
     }
 
     private Map<String, ClassConfiguration> buildUsageMap(final BrowserVersion browser) {
-        final Map<String, ClassConfiguration> classMap =
-                new HashMap<String, ClassConfiguration>(getClasses().length);
+        final Map<String, ClassConfiguration> classMap = new HashMap<>(getClasses().length);
 
         for (final Class<? extends SimpleScriptable> klass : getClasses()) {
             final ClassConfiguration config = processClass(klass, browser);
@@ -159,8 +158,8 @@ public abstract class AbstractJavaScriptConfiguration {
 //                + hostClassName + "'.");
 //        }
         CLASS_NAME_MAP_.put(hostClassName, simpleClassName);
-        final Map<String, Method> allGetters = new HashMap<String, Method>();
-        final Map<String, Method> allSetters = new HashMap<String, Method>();
+        final Map<String, Method> allGetters = new HashMap<>();
+        final Map<String, Method> allSetters = new HashMap<>();
         for (final Method method : classConfiguration.getHostClass().getDeclaredMethods()) {
             for (final Annotation annotation : method.getAnnotations()) {
                 if (annotation instanceof JsxGetter) {
@@ -268,8 +267,7 @@ public abstract class AbstractJavaScriptConfiguration {
             return domJavaScriptMap_;
         }
 
-        final Map<Class<?>, Class<? extends SimpleScriptable>> map = new HashMap<Class<?>,
-            Class<? extends SimpleScriptable>>();
+        final Map<Class<?>, Class<? extends SimpleScriptable>> map = new HashMap<>();
 
         for (String hostClassName : configuration_.keySet()) {
             ClassConfiguration classConfig = getClassConfiguration(hostClassName);

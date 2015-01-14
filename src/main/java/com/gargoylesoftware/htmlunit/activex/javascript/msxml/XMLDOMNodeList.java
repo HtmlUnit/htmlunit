@@ -116,7 +116,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
      */
     protected XMLDOMNodeList(final DomNode parentScope, final List<DomNode> initialElements) {
         this(parentScope.getScriptObject());
-        cachedElements_ = new ArrayList<DomNode>(initialElements);
+        cachedElements_ = new ArrayList<>(initialElements);
     }
 
     /**
@@ -259,7 +259,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
      * @return the elements whose associated host objects are available through this collection
      */
     protected List<DomNode> computeElements() {
-        final List<DomNode> response = new ArrayList<DomNode>();
+        final List<DomNode> response = new ArrayList<>();
         final DomNode domNode = getDomNodeOrNull();
         if (domNode == null) {
             return response;
@@ -311,7 +311,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
         final List<DomNode> elements = getElements();
 
         // See if there is an element in the element array with the specified id.
-        final List<DomNode> matchingElements = new ArrayList<DomNode>();
+        final List<DomNode> matchingElements = new ArrayList<>();
 
         for (final DomNode next : elements) {
             if (next instanceof DomElement) {
@@ -440,7 +440,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
             return super.getIds();
         }
 
-        final List<String> idList = new ArrayList<String>();
+        final List<String> idList = new ArrayList<>();
 
         final List<DomNode> elements = getElements();
 

@@ -52,7 +52,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
         @WebBrowser(CHROME) })
 public class Console extends SimpleScriptable {
 
-    private static final Map<String, Long> TIMERS = new HashMap<String, Long>();
+    private static final Map<String, Long> TIMERS = new HashMap<>();
     private static Formatter FORMATTER_ = new ConsoleFormatter();
 
     private WebWindow webWindow_;

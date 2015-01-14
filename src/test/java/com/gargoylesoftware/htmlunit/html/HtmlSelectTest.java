@@ -203,7 +203,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlSelect select = form.getSelectsByName("select1").get(0);
-        final List<HtmlOption> expected = new ArrayList<HtmlOption>();
+        final List<HtmlOption> expected = new ArrayList<>();
         expected.add(select.getOptionByValue("option1"));
         expected.add(select.getOptionByValue("option3"));
 
@@ -231,7 +231,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlSelect select = form.getSelectsByName("select1").get(0);
-        final List<HtmlOption> expected = new ArrayList<HtmlOption>();
+        final List<HtmlOption> expected = new ArrayList<>();
         expected.add(select.getOptionByValue("option3"));
 
         assertEquals(expected, select.getSelectedOptions());
@@ -258,7 +258,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlSelect select = form.getSelectsByName("select1").get(0);
-        final List<HtmlOption> expected = new ArrayList<HtmlOption>();
+        final List<HtmlOption> expected = new ArrayList<>();
         expected.add(select.getOptionByValue("option1"));
 
         assertEquals(expected, select.getSelectedOptions());
@@ -331,7 +331,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
 
         final HtmlSelect select = form.getSelectsByName("select1").get(0);
 
-        final List<HtmlOption> expectedOptions = new ArrayList<HtmlOption>();
+        final List<HtmlOption> expectedOptions = new ArrayList<>();
         expectedOptions.add(select.getOptionByValue("option1"));
         expectedOptions.add(select.getOptionByValue("option2"));
         expectedOptions.add(select.getOptionByValue("option3"));
@@ -398,7 +398,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
             + "</select>\n"
             + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
         final HtmlForm form = page.getHtmlElementById("form1");
@@ -423,7 +423,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
             + "<option id='option2'>222</option>\n"
             + "</select>\n"
             + "</form></body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
         final HtmlOption option = page.getHtmlElementById("option2");
@@ -671,7 +671,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
             + "<input type='submit' name='button' value='foo'/>\n"
             + "</form></body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals(Collections.emptyList(), collectedAlerts);
 

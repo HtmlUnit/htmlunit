@@ -72,7 +72,7 @@ public class HtmlForm extends HtmlElement {
 
     private static final Pattern SUBMIT_CHARSET_PATTERN = Pattern.compile("[ ,].*");
 
-    private final List<HtmlElement> lostChildren_ = new ArrayList<HtmlElement>();
+    private final List<HtmlElement> lostChildren_ = new ArrayList<>();
 
     private boolean isPreventDefault_;
 
@@ -249,7 +249,7 @@ public class HtmlForm extends HtmlElement {
     private List<NameValuePair> getParameterListForSubmit(final SubmittableElement submitElement) {
         final Collection<SubmittableElement> submittableElements = getSubmittableElements(submitElement);
 
-        final List<NameValuePair> parameterList = new ArrayList<NameValuePair>(submittableElements.size());
+        final List<NameValuePair> parameterList = new ArrayList<>(submittableElements.size());
         for (final SubmittableElement element : submittableElements) {
             for (final NameValuePair pair : element.getSubmitKeyValuePairs()) {
                 parameterList.add(pair);
@@ -291,7 +291,7 @@ public class HtmlForm extends HtmlElement {
      * @return a collection of elements that represent all the "submittable" elements in this form
      */
     Collection<SubmittableElement> getSubmittableElements(final SubmittableElement submitElement) {
-        final List<SubmittableElement> submittableElements = new ArrayList<SubmittableElement>();
+        final List<SubmittableElement> submittableElements = new ArrayList<>();
 
         for (final HtmlElement element : getFormHtmlElementDescendants()) {
             if (isSubmittable(element, submitElement)) {
@@ -402,7 +402,7 @@ public class HtmlForm extends HtmlElement {
             final String attributeName,
             final String attributeValue) {
 
-        final List<E> list = new ArrayList<E>();
+        final List<E> list = new ArrayList<>();
         final String lowerCaseTagName = elementName.toLowerCase(Locale.ENGLISH);
 
         for (final HtmlElement next : getFormHtmlElementDescendants()) {
@@ -574,7 +574,7 @@ public class HtmlForm extends HtmlElement {
     public List<HtmlRadioButtonInput> getRadioButtonsByName(final String name) {
         WebAssert.notNull("name", name);
 
-        final List<HtmlRadioButtonInput> results = new ArrayList<HtmlRadioButtonInput>();
+        final List<HtmlRadioButtonInput> results = new ArrayList<>();
 
         for (final HtmlElement element : getInputsByName(name)) {
             if (element instanceof HtmlRadioButtonInput) {

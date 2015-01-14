@@ -76,7 +76,7 @@ public class Event3Test extends SimpleWebTestCase {
             + "  </script>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
         page.getHtmlElementById("clickId").type('A', shiftKey, ctrlKey, altKey);
         assertEquals(expectedAlerts, collectedAlerts);
@@ -109,7 +109,7 @@ public class Event3Test extends SimpleWebTestCase {
             + "document.getElementById('button').onclick = handler;\n"
             + "</script>\n"
             + "</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(getBrowserVersion(), htmlContent, collectedAlerts);
         final HtmlButton button = page.getHtmlElementById("button");
 
@@ -133,7 +133,7 @@ public class Event3Test extends SimpleWebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
         page.getHtmlElementById("textField").focus();
         page.getHtmlElementById("otherField").focus();
@@ -168,7 +168,7 @@ public class Event3Test extends SimpleWebTestCase {
             + "</div>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
         page.getHtmlElementById("theSpan").click();
 
@@ -225,7 +225,7 @@ public class Event3Test extends SimpleWebTestCase {
         final String html2 = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();

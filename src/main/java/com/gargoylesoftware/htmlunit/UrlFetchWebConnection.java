@@ -124,7 +124,7 @@ public class UrlFetchWebConnection implements WebConnection {
                 LOG.trace("fetched URL " + url);
             }
 
-            final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+            final List<NameValuePair> headers = new ArrayList<>();
             for (final Map.Entry<String, List<String>> headerEntry : connection.getHeaderFields().entrySet()) {
                 final String headerKey = headerEntry.getKey();
                 if (headerKey != null) { // map contains entry like (null: "HTTP/1.1 200 OK")

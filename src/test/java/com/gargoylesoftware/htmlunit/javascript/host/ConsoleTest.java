@@ -71,7 +71,7 @@ public class ConsoleTest {
             IE8 = "")
         public void log() throws Exception {
             final WebConsole console = getWebClient().getWebConsole();
-            final List<String> messages = new ArrayList<String>();
+            final List<String> messages = new ArrayList<>();
             console.setLogger(new Logger() {
 
                 @Override

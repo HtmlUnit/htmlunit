@@ -61,10 +61,10 @@ public class AttachmentTest extends SimpleWebTestCase {
         final String content2 = "download file contents";
 
         final WebClient client = getWebClient();
-        final List<Attachment> attachments = new ArrayList<Attachment>();
+        final List<Attachment> attachments = new ArrayList<>();
         client.setAttachmentHandler(new CollectingAttachmentHandler(attachments));
 
-        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Content-Disposition", "attachment"));
 
         final MockWebConnection conn = new MockWebConnection();
@@ -101,10 +101,10 @@ public class AttachmentTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
         client.setWebConnection(conn);
-        final List<Attachment> attachments = new ArrayList<Attachment>();
+        final List<Attachment> attachments = new ArrayList<>();
         client.setAttachmentHandler(new CollectingAttachmentHandler(attachments));
 
-        final List<NameValuePair> headers1 = new ArrayList<NameValuePair>();
+        final List<NameValuePair> headers1 = new ArrayList<>();
         headers1.add(new NameValuePair("Content-Disposition", "attachment;filename=\"hello.html\""));
         conn.setResponse(URL_FIRST, content, 200, "OK", "text/html", headers1);
         client.getPage(URL_FIRST);
@@ -112,7 +112,7 @@ public class AttachmentTest extends SimpleWebTestCase {
         assertEquals(result.getSuggestedFilename(), "hello.html");
         attachments.clear();
 
-        final List<NameValuePair> headers2 = new ArrayList<NameValuePair>();
+        final List<NameValuePair> headers2 = new ArrayList<>();
         headers2.add(new NameValuePair("Content-Disposition", "attachment; filename=hello2.html; something=else"));
         conn.setResponse(URL_SECOND, content, 200, "OK", "text/plain", headers2);
         client.getPage(URL_SECOND);
@@ -121,7 +121,7 @@ public class AttachmentTest extends SimpleWebTestCase {
         assertEquals(content, ((TextPage) result2.getPage()).getContent());
         attachments.clear();
 
-        final List<NameValuePair> headers3 = new ArrayList<NameValuePair>();
+        final List<NameValuePair> headers3 = new ArrayList<>();
         headers3.add(new NameValuePair("Content-Disposition", "attachment"));
         final byte[] contentb = new byte[] {(byte) 0xCA, (byte) 0xFE, (byte) 0xBA, (byte) 0xBE};
         conn.setResponse(URL_THIRD, contentb, 200, "OK", "application/x-rubbish", headers3);
@@ -149,10 +149,10 @@ public class AttachmentTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final WebClient client = getWebClient();
-        final List<Attachment> attachments = new ArrayList<Attachment>();
+        final List<Attachment> attachments = new ArrayList<>();
         client.setAttachmentHandler(new CollectingAttachmentHandler(attachments));
 
-        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Content-Disposition", "attachment"));
 
         final MockWebConnection conn = getMockWebConnection();

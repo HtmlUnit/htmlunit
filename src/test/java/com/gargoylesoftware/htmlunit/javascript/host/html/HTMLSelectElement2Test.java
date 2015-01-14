@@ -65,7 +65,7 @@ public class HTMLSelectElement2Test extends SimpleWebTestCase {
             + "</form>\n"
             + "</body>\n"
             + "</html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
         final HtmlSelect selectA = page.getFormByName("myForm").getSelectByName("a");
         final HtmlOption optionA2 = selectA.getOption(1);

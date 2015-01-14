@@ -86,7 +86,7 @@ public class WebClient4Test extends WebServerTestCase {
      */
     @Test
     public void redirectInfinite303And307() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put(RedirectServlet307.URL, RedirectServlet307.class);
         servlets.put(RedirectServlet303.URL, RedirectServlet303.class);
         startWebServer("./", new String[0], servlets);
@@ -157,7 +157,7 @@ public class WebClient4Test extends WebServerTestCase {
      */
     @Test
     public void bodyDowloadTime() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/*", ServeBodySlowlyServlet.class);
         startWebServer("./", new String[0], servlets);
 
@@ -200,7 +200,7 @@ public class WebClient4Test extends WebServerTestCase {
      */
     @Test
     public void testUseProxy() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", UseProxyHeaderServlet.class);
         startWebServer("./", null, servlets);
 
@@ -234,7 +234,7 @@ public class WebClient4Test extends WebServerTestCase {
      */
     @Test
     public void testNoContent() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test1", NoContentServlet1.class);
         servlets.put("/test2", NoContentServlet2.class);
         startWebServer("./", null, servlets);
@@ -283,7 +283,7 @@ public class WebClient4Test extends WebServerTestCase {
      */
     @Test
     public void testNotModified() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", NotModifiedServlet.class);
         startWebServer("./", null, servlets);
         final WebClient client = getWebClient();
@@ -322,7 +322,7 @@ public class WebClient4Test extends WebServerTestCase {
      */
     @Test
     public void testTimeout() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/*", DelayDeliverServlet.class);
         startWebServer("./", null, servlets);
 

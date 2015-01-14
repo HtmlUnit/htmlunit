@@ -59,7 +59,7 @@ public class WebResponseDataTest extends WebServerTestCase {
         final InputStream stream = getClass().getClassLoader().getResourceAsStream(GZIPPED_FILE);
         final byte[] zippedContent = IOUtils.toByteArray(stream);
 
-        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Content-Encoding", "gzip"));
 
         final WebResponseData data = new WebResponseData(zippedContent, HttpStatus.SC_OK, "OK", headers);
@@ -96,7 +96,7 @@ public class WebResponseDataTest extends WebServerTestCase {
 
     private void testEmptyGZippedContent(final int statusCode, final int contentLength,
                 final String contentType) throws Exception {
-        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Content-Encoding", "gzip"));
 
         if (contentLength != -1) {
@@ -117,7 +117,7 @@ public class WebResponseDataTest extends WebServerTestCase {
      */
     @Test
     public void testBrokenGZippedContent() throws Exception {
-        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Content-Encoding", "gzip"));
 
         final WebResponseData data = new WebResponseData("Plain Content".getBytes(), HttpStatus.SC_OK, "OK", headers);
@@ -137,7 +137,7 @@ public class WebResponseDataTest extends WebServerTestCase {
     @Test
     public void testNullBody() throws Exception {
         final DownloadedContent downloadedContent = new DownloadedContent.InMemory(new byte[] {});
-        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        final List<NameValuePair> headers = new ArrayList<>();
         final WebResponseData data = new WebResponseData(downloadedContent, 304, "NOT_MODIFIED", headers);
         assertEquals(0, data.getBody().length);
     }
@@ -161,7 +161,7 @@ public class WebResponseDataTest extends WebServerTestCase {
      */
     @Test
     public void redirection() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/folder1/page1", RedirectionServlet.class);
         servlets.put("/folder2/page2", RedirectionServlet.class);
         startWebServer("./", null, servlets);

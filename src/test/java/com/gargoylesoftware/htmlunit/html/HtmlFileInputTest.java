@@ -359,7 +359,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
         final File file = new File(new URI(path));
         assertTrue(file.exists());
 
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/upload2", Upload2Servlet.class);
 
         startWebServer("./", null, servlets);
@@ -396,7 +396,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
      */
     @Test
     public void testUploadFileWithNonASCIIName() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/upload1", Upload1Servlet.class);
         servlets.put("/upload2", Upload2Servlet.class);
         startWebServer("./", null, servlets);
@@ -490,7 +490,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
      */
     @Test
     public void mutiple() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/upload1", Multiple1Servlet.class);
         servlets.put("/upload2", HtmlFileInput2Test.PrintRequestServlet.class);
         startWebServer("./", null, servlets);

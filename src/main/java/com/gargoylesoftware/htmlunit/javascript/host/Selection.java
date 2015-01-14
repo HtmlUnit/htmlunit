@@ -298,7 +298,7 @@ public class Selection extends SimpleScriptable {
      */
     private Range getFirstRange() {
         // avoid concurrent modification exception
-        final List<Range> ranges = new ArrayList<Range>(getRanges());
+        final List<Range> ranges = new ArrayList<>(getRanges());
 
         Range first = null;
         for (final Range range : ranges) {
@@ -322,7 +322,7 @@ public class Selection extends SimpleScriptable {
      */
     private Range getLastRange() {
         // avoid concurrent modification exception
-        final List<Range> ranges = new ArrayList<Range>(getRanges());
+        final List<Range> ranges = new ArrayList<>(getRanges());
 
         Range last = null;
         for (final Range range : ranges) {

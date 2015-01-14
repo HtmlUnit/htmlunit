@@ -194,7 +194,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
         final String css = "";
 
         getMockWebConnection().setDefaultResponse(css, "text/css");
-        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Content-Length", "0"));
         headers.add(new NameValuePair("Content-Encoding", "gzip"));
         getMockWebConnection().setDefaultResponse(css, 200, "OK", "text/css", headers);
@@ -228,7 +228,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
         final String css = "div {color:red}";
 
         getMockWebConnection().setDefaultResponse(css, "text/css");
-        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Content-Encoding", "gzip"));
         getMockWebConnection().setDefaultResponse(css, 200, "OK", "text/css", headers);
 

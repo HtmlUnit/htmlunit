@@ -114,7 +114,7 @@ public class WindowTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
@@ -169,7 +169,7 @@ public class WindowTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
@@ -215,7 +215,7 @@ public class WindowTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
@@ -495,7 +495,7 @@ public class WindowTest extends SimpleWebTestCase {
             + "<div id='d' onclick='alert(w)'>test</div>\n"
             + "</body></html>";
 
-        final List<String> actual = new ArrayList<String>();
+        final List<String> actual = new ArrayList<>();
         final WebClient client = getWebClient();
         client.getOptions().setPopupBlockerEnabled(true);
         client.setAlertHandler(new CollectingAlertHandler(actual));
@@ -551,7 +551,7 @@ public class WindowTest extends SimpleWebTestCase {
             + "<body><a id='clickme' onClick='doAlert()'>foo</a></body></html>";
 
         final WebClient webClient = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -583,8 +583,8 @@ public class WindowTest extends SimpleWebTestCase {
     public void confirm() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final List<String> collectedConfirms = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
+        final List<String> collectedConfirms = new ArrayList<>();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         webClient.setConfirmHandler(new ConfirmHandler() {
@@ -617,7 +617,7 @@ public class WindowTest extends SimpleWebTestCase {
             = "<html><head><title>First</title><script>function doTest(){alert(confirm('foo'))}</script>\n"
             + "</head><body onload='doTest()'></body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         loadPage(html, collectedAlerts);
 
         assertEquals(new String[] {"true"}, collectedAlerts);
@@ -630,8 +630,8 @@ public class WindowTest extends SimpleWebTestCase {
     public void prompt() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final List<String> collectedPrompts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
+        final List<String> collectedPrompts = new ArrayList<>();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         webClient.setPromptHandler(new PromptHandler() {
@@ -662,8 +662,8 @@ public class WindowTest extends SimpleWebTestCase {
     public void prompt_noPromptHandler() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final List<String> collectedPrompts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
+        final List<String> collectedPrompts = new ArrayList<>();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -732,7 +732,7 @@ public class WindowTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String firstContent
@@ -799,10 +799,10 @@ public class WindowTest extends SimpleWebTestCase {
         webConnection.setResponse(url, firstContent);
         webClient.setWebConnection(webConnection);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final List<String> collectedStatus = new ArrayList<String>();
+        final List<String> collectedStatus = new ArrayList<>();
         webClient.setStatusHandler(new StatusHandler() {
             public void statusMessageChanged(final Page page, final String message) {
                 collectedStatus.add(message);
@@ -1099,7 +1099,7 @@ public class WindowTest extends SimpleWebTestCase {
             + "<body>foo</body></html>";
 
         final WebClient client = getWebClient();
-        final List<String> actual = new ArrayList<String>();
+        final List<String> actual = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(actual));
 
         final MockWebConnection conn = new MockWebConnection();
@@ -1150,7 +1150,7 @@ public class WindowTest extends SimpleWebTestCase {
             + "</html>";
 
         final WebClient client = getWebClient();
-        final List<String> actual = new ArrayList<String>();
+        final List<String> actual = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(actual));
 
         final MockWebConnection conn = new MockWebConnection();
@@ -1199,7 +1199,7 @@ public class WindowTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final WebClient client = getWebClient();
-        final List<String> actual = new ArrayList<String>();
+        final List<String> actual = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(actual));
 
         final MockWebConnection conn = new MockWebConnection();
@@ -1332,7 +1332,7 @@ public class WindowTest extends SimpleWebTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 

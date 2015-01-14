@@ -42,7 +42,7 @@ public class ScriptableWrapper extends ScriptableObject {
     private static final Class<?>[] METHOD_PARAMS_INT = new Class[] {Integer.TYPE};
     private static final Class<?>[] METHOD_PARAMS_STRING = new Class[] {String.class};
 
-    private final Map<String, Method> properties_ = new HashMap<String, Method>();
+    private final Map<String, Method> properties_ = new HashMap<>();
 
     private Method getByIndexMethod_;
     private final Object javaObject_;

@@ -55,7 +55,7 @@ public class HtmlCheckBoxInputTest extends SimpleWebTestCase {
             + "onClick='alert(\"foo\");alert(event.type);'>Check me</input>\n"
             + "</form></body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(html, collectedAlerts);
         final HtmlCheckBoxInput checkBox = page.getHtmlElementById("checkbox");
         final HtmlPage secondPage = checkBox.click();

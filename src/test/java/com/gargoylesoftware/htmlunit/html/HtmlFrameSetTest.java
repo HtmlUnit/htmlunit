@@ -211,7 +211,7 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection();
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final String[] expectedAlerts = {"Success"};
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -285,7 +285,7 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
         client.setWebConnection(webConnection);
 
         final String[] expectedAlerts = {"2"};
-        final ArrayList<String> collectedAlerts = new ArrayList<String>();
+        final ArrayList<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         client.getPage(URL_FIRST);
@@ -343,7 +343,7 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final WebClient client = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -385,7 +385,7 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
             + "</html>";
 
         final WebClient webClient = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         webClient.setWebConnection(conn);

@@ -162,7 +162,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         final String[] expectedAlerts = {"foo", "foo", "foo"};
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         client.getPage(URL_FIRST);
 
@@ -200,7 +200,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         final String[] expectedAlerts = {"foo"};
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final HtmlPage page = client.getPage(URL_FIRST);
         final HtmlElement div = page.getHtmlElementById("testdiv");
@@ -269,7 +269,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         client.setWebConnection(webConnection);
 
         final String[] expectedAlerts = {"got here", "got here 2"};
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = client.getPage(URL_FIRST);
@@ -390,7 +390,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         client.setWebConnection(webConnection);
 
         final String[] expectedAlerts = {"\u8868"};
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         /*
@@ -427,7 +427,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         gzipper.write(jsContent.getBytes("ASCII"));
         gzipper.close();
 
-        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Content-Encoding", "gzip"));
         webConnection.setResponse(new URL(getDefaultUrl(), "foo.js"),
                 bytes.toByteArray(), 200, "OK", "text/javascript", headers);
@@ -456,7 +456,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         bytes.write(jsContent.getBytes("ASCII"));
         bytes.close();
 
-        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Content-Length", "0"));
         headers.add(new NameValuePair("Content-Encoding", "gzip"));
         webConnection.setResponse(new URL(getDefaultUrl(), "foo.js"),
@@ -485,7 +485,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         bytes.write(jsContent.getBytes("ASCII"));
         bytes.close();
 
-        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Content-Encoding", "gzip"));
         webConnection.setResponse(new URL(getDefaultUrl(), "foo.js"),
                 bytes.toByteArray(), 200, "OK", "text/javascript", headers);
@@ -577,7 +577,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
              + "<form name='form1'><input type='submit' name='button1' onClick='foo(this.name)'></form>\n"
              + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(getBrowserVersion(), htmlContent, collectedAlerts);
         assertEquals("First", page.getTitleText());
 
@@ -614,7 +614,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             jsContent, "text/javascript");
         client.setWebConnection(webConnection);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = client.getPage("http://first/index.html");
@@ -647,7 +647,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         webConnection.setDefaultResponse(jsContent, 200, "OK", "text/javascript");
         client.setWebConnection(webConnection);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         client.getPage(URL_FIRST);
@@ -671,7 +671,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             + "<input name='button1' type='button' onclick='showFoo(document.form1.text1.value);'>\n"
             + "</form></body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
 
         final HtmlPage page = loadPage(getBrowserVersion(), htmlContent, collectedAlerts);
         assertEquals("First", page.getTitleText());
@@ -697,7 +697,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final String content
@@ -795,7 +795,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             return;
         }
 
-        final Map<String, String> activexToJavaMapping = new HashMap<String, String>();
+        final Map<String, String> activexToJavaMapping = new HashMap<>();
         activexToJavaMapping.put(
                 "MockActiveXObject",
                 "com.gargoylesoftware.htmlunit.javascript.MockActiveXObject");
@@ -808,7 +808,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final MockWebConnection webConnection = new MockWebConnection();
         client.setWebConnection(webConnection);
         client.setActiveXObjectMap(activexToJavaMapping);
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         webConnection.setDefaultResponse(getJavaScriptContent("new ActiveXObject('UnknownObject')"));
@@ -893,7 +893,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(content);
         client.setWebConnection(webConnection);
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         // first test with script exceptions thrown
@@ -958,7 +958,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         webConnection.setResponse(URL_FIRST, content1);
         client.setWebConnection(webConnection);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         client.getPage(URL_FIRST);
@@ -1131,7 +1131,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         connection.setResponse(URL_FIRST, content1);
         connection.setResponse(new URL(URL_FIRST, "page2.html"), content2);
 
-        final List<NameValuePair> headersAllowingCache = new ArrayList<NameValuePair>();
+        final List<NameValuePair> headersAllowingCache = new ArrayList<>();
         headersAllowingCache.add(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
         connection.setResponse(new URL(URL_FIRST, "script.js"), script,
                 200, "ok", "text/javascript", headersAllowingCache);
@@ -1139,7 +1139,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final CountingJavaScriptEngine countingJavaScriptEngine = new CountingJavaScriptEngine(client);
         client.setJavaScriptEngine(countingJavaScriptEngine);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final HtmlPage page1 = client.getPage(URL_FIRST);
         assertEquals(new String[] {"foo"}, collectedAlerts);
@@ -1172,7 +1172,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             + "<body>\n"
             + "<p>hello world</p>\n"
             + "</body></html>";
-        final List<String> collectedScripts = new ArrayList<String>();
+        final List<String> collectedScripts = new ArrayList<>();
         loadPageAndCollectScripts(content, collectedScripts);
 
         // NO MORE: The last expected is the dummy stub that is needed to initialize the JavaScript engine
@@ -1238,7 +1238,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     @Test
     public void catchBackgroundJSErrors() throws Exception {
         final WebClient webClient = getWebClient();
-        final List<ScriptException> jsExceptions = new ArrayList<ScriptException>();
+        final List<ScriptException> jsExceptions = new ArrayList<>();
         final JavaScriptEngine myEngine = new JavaScriptEngine(webClient) {
             @Override
             protected void handleJavaScriptException(final ScriptException scriptException,
@@ -1288,7 +1288,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
 
         Thread.sleep(20);
@@ -1353,7 +1353,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
                 + "</body></html>";
 
         final WebClient webClient = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         loadPage(html);

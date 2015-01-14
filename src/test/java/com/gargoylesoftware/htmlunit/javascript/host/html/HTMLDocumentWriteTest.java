@@ -96,7 +96,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
         final String script = "document.getElementById('iframe').src = '" + URL_SECOND + "';\n";
         webConnection.setResponse(new URL("http://script/"), script, JAVASCRIPT_MIME_TYPE);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage mainPage = webClient.getPage("http://main");
@@ -326,7 +326,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
         webConnection.setDefaultResponse(html);
         webConnection.setResponse(scriptUrl, "alert('foo');\n", JAVASCRIPT_MIME_TYPE);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         client.getPage(URL_FIRST);
 

@@ -279,7 +279,7 @@ public class Selection2Test extends SimpleWebTestCase {
         conn.setDefaultResponse(html);
         client.setWebConnection(conn);
 
-        final List<String> actual = new ArrayList<String>();
+        final List<String> actual = new ArrayList<>();
         final AlertHandler alertHandler = new CollectingAlertHandler(actual);
         client.setAlertHandler(alertHandler);
 

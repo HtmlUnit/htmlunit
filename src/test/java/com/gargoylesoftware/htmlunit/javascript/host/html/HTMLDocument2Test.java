@@ -124,7 +124,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         loadPage(getWebClient(), html, collectedAlerts, new URL("http://localhost"));
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
@@ -190,7 +190,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         loadPage(getWebClient(), html, collectedAlerts, new URL("http://d4.d3.d2.d1.gargoylesoftware.com"));
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
@@ -211,7 +211,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         loadPage(getWebClient(), html, collectedAlerts, new URL("http://localhost"));
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
@@ -231,7 +231,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         try {
             loadPage(getWebClient(), html, collectedAlerts);
         }
@@ -297,7 +297,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
         mgr.addCookie(new Cookie(url.getHost(), "one", "two", "/", null, false));
         mgr.addCookie(new Cookie(url.getHost(), "three", "four", "/", null, false));
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage firstPage = webClient.getPage(url);
@@ -331,7 +331,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
     public void cookieInLocalFile() throws Exception {
         final WebClient client = getWebClient();
 
-        final List<String> actual = new ArrayList<String>();
+        final List<String> actual = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(actual));
 
         final URL url = getClass().getResource("HTMLDocumentTest_cookieInLocalFile.html");

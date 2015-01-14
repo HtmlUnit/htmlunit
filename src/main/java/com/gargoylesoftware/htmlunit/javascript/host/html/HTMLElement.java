@@ -185,7 +185,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     private static final Class<?>[] METHOD_PARAMS_OBJECT = new Class[] {Object.class};
     private static final Pattern PERCENT_VALUE = Pattern.compile("\\d+%");
     /* http://msdn.microsoft.com/en-us/library/ie/aa358802.aspx */
-    private static final Map<String, String> COLORS_MAP_IE = new HashMap<String, String>();
+    private static final Map<String, String> COLORS_MAP_IE = new HashMap<>();
 
     private static final Log LOG = LogFactory.getLog(HTMLElement.class);
 
@@ -600,7 +600,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final HtmlElement node = getDomNodeOrDie();
 
         // Remove custom attributes defined directly in HTML.
-        final List<String> removals = new ArrayList<String>();
+        final List<String> removals = new ArrayList<>();
         for (final String attributeName : node.getAttributesMap().keySet()) {
             // Quick hack to figure out what's a "custom" attribute, and what isn't.
             // May not be 100% correct.
@@ -2077,7 +2077,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     @JsxFunction
     public StaticNodeList querySelectorAll(final String selectors) {
         try {
-            final List<Node> nodes = new ArrayList<Node>();
+            final List<Node> nodes = new ArrayList<>();
             for (final DomNode domNode : getDomNodeOrDie().querySelectorAll(selectors)) {
                 nodes.add((Node) domNode.getScriptObject());
             }

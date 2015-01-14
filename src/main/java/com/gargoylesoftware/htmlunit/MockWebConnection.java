@@ -72,7 +72,7 @@ public class MockWebConnection implements WebConnection {
         }
 
         private List<NameValuePair> compileHeaders(final List<NameValuePair> headers, final String contentType) {
-            final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>();
+            final List<NameValuePair> compiledHeaders = new ArrayList<>();
             if (headers != null) {
                 compiledHeaders.addAll(headers);
             }
@@ -145,7 +145,7 @@ public class MockWebConnection implements WebConnection {
         }
     }
 
-    private final Map<String, RawResponseData> responseMap_ = new HashMap<String, RawResponseData>(10);
+    private final Map<String, RawResponseData> responseMap_ = new HashMap<>(10);
     private RawResponseData defaultResponse_;
     private WebRequest lastRequest_;
     private int requestCount_ = 0;
@@ -195,7 +195,7 @@ public class MockWebConnection implements WebConnection {
      */
     public List<String> getRequestedUrls(final URL relativeTo) {
         final String baseUrl = relativeTo.toString();
-        final List<String> response = new ArrayList<String>();
+        final List<String> response = new ArrayList<>();
         for (final URL url : requestedUrls_) {
             String s = url.toString();
             if (s.startsWith(baseUrl)) {

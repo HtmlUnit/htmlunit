@@ -139,7 +139,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
 
         try {
             final String decompileScript = (String) factory.call(action);
-            final List<NameValuePair> responseHeaders = new ArrayList<NameValuePair>(response.getResponseHeaders());
+            final List<NameValuePair> responseHeaders = new ArrayList<>(response.getResponseHeaders());
             for (int i = responseHeaders.size() - 1; i >= 0; i--) {
                 if ("content-encoding".equalsIgnoreCase(responseHeaders.get(i).getName())) {
                     responseHeaders.remove(i);

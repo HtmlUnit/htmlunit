@@ -32,7 +32,7 @@ public class ProxyConfig implements Serializable {
     private String proxyHost_;
     private int proxyPort_;
     private boolean isSocksProxy_;
-    private final Map<String, Pattern> proxyBypassHosts_ = new HashMap<String, Pattern>();
+    private final Map<String, Pattern> proxyBypassHosts_ = new HashMap<>();
     private String proxyAutoConfigUrl_;
     private String proxyAutoConfigContent_;
 

@@ -50,7 +50,7 @@ public abstract class WebWindowImpl implements WebWindow {
     private Page enclosedPage_;
     private Object scriptObject_;
     private JavaScriptJobManager jobManager_;
-    private final List<WebWindowImpl> childWindows_ = new ArrayList<WebWindowImpl>();
+    private final List<WebWindowImpl> childWindows_ = new ArrayList<>();
     private String name_ = "";
     private final History history_ = new History(this);
     private boolean closed_;

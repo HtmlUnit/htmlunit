@@ -90,7 +90,7 @@ public class Node2Test extends SimpleWebTestCase {
             + "  <a href='" + URL_SECOND + "' id='myAnchor'>Click me</a>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
         final HtmlPage page2 = page.getHtmlElementById("myAnchor").click();
         //IE doesn't have specific order
@@ -129,7 +129,7 @@ public class Node2Test extends SimpleWebTestCase {
             + "  <a href='" + URL_SECOND + "' id='myAnchor'>Click me</a>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
         final HtmlPage page2 = page.getHtmlElementById("myAnchor").click();
         //IE doesn't have specific order
@@ -180,7 +180,7 @@ public class Node2Test extends SimpleWebTestCase {
 
         expandExpectedAlertsVariables(URL_FIRST);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
         final HtmlPage page2 = page.getHtmlElementById("myAnchor").click();
         //IE doesn't have specific order

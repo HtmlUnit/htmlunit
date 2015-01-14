@@ -53,7 +53,7 @@ public class WebRequest implements Serializable {
     private boolean isSocksProxy_;
     private HttpMethod httpMethod_ = HttpMethod.GET;
     private FormEncodingType encodingType_ = FormEncodingType.URL_ENCODED;
-    private Map<String, String> additionalHeaders_ = new HashMap<String, String>();
+    private Map<String, String> additionalHeaders_ = new HashMap<>();
     private Credentials urlCredentials_;
     private Credentials credentials_;
     private String charset_ = TextUtil.DEFAULT_CHARSET;

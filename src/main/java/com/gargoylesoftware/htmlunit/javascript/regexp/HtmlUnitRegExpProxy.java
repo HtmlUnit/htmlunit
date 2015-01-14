@@ -138,7 +138,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
                 return null;
             }
             final int index = matcher.start(0);
-            final List<Object> groups = new ArrayList<Object>();
+            final List<Object> groups = new ArrayList<>();
             if (reData.hasFlag('g')) { // has flag g
                 groups.add(matcher.group(0));
                 setProperties(matcher, thisString, matcher.start(0), matcher.end(0));

@@ -133,7 +133,7 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
             + "<label for='twoItems'>2</label>\n"
             + "</form></body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlRadioButtonInput oneItem = page.getHtmlElementById("oneItem");
@@ -202,7 +202,7 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
         final HtmlRadioButtonInput radio1 = page.getHtmlElementById("radio1");

@@ -678,7 +678,7 @@ public class HttpWebConnection implements WebConnection {
             statusMessage = "Unknown status message";
         }
         final int statusCode = httpResponse.getStatusLine().getStatusCode();
-        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        final List<NameValuePair> headers = new ArrayList<>();
         for (final Header header : httpResponse.getAllHeaders()) {
             headers.add(new NameValuePair(header.getName(), header.getValue()));
         }
@@ -776,7 +776,7 @@ public class HttpWebConnection implements WebConnection {
     }
 
     private List<HttpRequestInterceptor> getHttpRequestInterceptors(final WebRequest webRequest) throws IOException {
-        final List<HttpRequestInterceptor> list = new ArrayList<HttpRequestInterceptor>();
+        final List<HttpRequestInterceptor> list = new ArrayList<>();
         final Map<String, String> requestHeaders = webRequest.getAdditionalHeaders();
         final int port = webRequest.getUrl().getPort();
         final StringBuilder host = new StringBuilder(webRequest.getUrl().getHost());
@@ -831,7 +831,7 @@ public class HttpWebConnection implements WebConnection {
         }
 
         synchronized (requestHeaders) {
-            list.add(new MultiHttpRequestInterceptor(new HashMap<String, String>(requestHeaders)));
+            list.add(new MultiHttpRequestInterceptor(new HashMap<>(requestHeaders)));
         }
         return list;
     }

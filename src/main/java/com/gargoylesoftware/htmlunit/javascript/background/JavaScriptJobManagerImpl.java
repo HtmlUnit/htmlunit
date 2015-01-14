@@ -56,9 +56,9 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
      * Queue of jobs that are scheduled to run. This is a priority queue, sorted
      * by closest target execution time.
      */
-    private transient PriorityQueue<JavaScriptJob> scheduledJobsQ_ = new PriorityQueue<JavaScriptJob>();
+    private transient PriorityQueue<JavaScriptJob> scheduledJobsQ_ = new PriorityQueue<>();
 
-    private transient ArrayList<Integer> cancelledJobs_ = new ArrayList<Integer>();
+    private transient ArrayList<Integer> cancelledJobs_ = new ArrayList<>();
 
     private transient JavaScriptJob currentlyRunningJob_ = null;
 
@@ -401,8 +401,8 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         in.defaultReadObject();
 
         // we do not store the jobs (at the moment)
-        scheduledJobsQ_ = new PriorityQueue<JavaScriptJob>();
-        cancelledJobs_ = new ArrayList<Integer>();
+        scheduledJobsQ_ = new PriorityQueue<>();
+        cancelledJobs_ = new ArrayList<>();
         currentlyRunningJob_ = null;
     }
 }

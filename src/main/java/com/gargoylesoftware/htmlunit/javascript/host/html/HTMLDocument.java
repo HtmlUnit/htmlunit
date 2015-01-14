@@ -232,14 +232,14 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
     /** Initializes the supported event type map. */
     static {
-        final Map<String, Class<? extends Event>> dom2EventMap = new HashMap<String, Class<? extends Event>>();
+        final Map<String, Class<? extends Event>> dom2EventMap = new HashMap<>();
         dom2EventMap.put("HTMLEvents", Event.class);
         dom2EventMap.put("MouseEvents", MouseEvent.class);
         dom2EventMap.put("MutationEvents", MutationEvent.class);
         dom2EventMap.put("UIEvents", UIEvent.class);
         SUPPORTED_DOM2_EVENT_TYPE_MAP = Collections.unmodifiableMap(dom2EventMap);
 
-        final Map<String, Class<? extends Event>> dom3EventMap = new HashMap<String, Class<? extends Event>>();
+        final Map<String, Class<? extends Event>> dom3EventMap = new HashMap<>();
         dom3EventMap.put("Event", Event.class);
         dom3EventMap.put("KeyboardEvent", KeyboardEvent.class);
         dom3EventMap.put("MouseEvent", MouseEvent.class);
@@ -248,7 +248,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         dom3EventMap.put("UIEvent", UIEvent.class);
         SUPPORTED_DOM3_EVENT_TYPE_MAP = Collections.unmodifiableMap(dom3EventMap);
 
-        final Map<String, Class<? extends Event>> additionalEventMap = new HashMap<String, Class<? extends Event>>();
+        final Map<String, Class<? extends Event>> additionalEventMap = new HashMap<>();
         additionalEventMap.put("BeforeUnloadEvent", BeforeUnloadEvent.class);
         additionalEventMap.put("Events", Event.class);
         additionalEventMap.put("HashChangeEvent", HashChangeEvent.class);
@@ -994,7 +994,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
 
         // Default attribute values (note: HttpClient doesn't like null paths).
-        final Map<String, Object> atts = new HashMap<String, Object>();
+        final Map<String, Object> atts = new HashMap<>();
         atts.put("domain", currentURL.getHost());
         atts.put("path", getDefaultCookiePath(currentURL));
 
@@ -1458,7 +1458,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                 else {
                     elements = page.getElementsByName(name);
                 }
-                final List<Object> matchingElements = new ArrayList<Object>();
+                final List<Object> matchingElements = new ArrayList<>();
                 for (final DomElement elt : elements) {
                     if (elt instanceof HtmlForm || elt instanceof HtmlImage || elt instanceof HtmlApplet
                             || (alsoFrames && elt instanceof BaseFrameElement)) {
@@ -2150,7 +2150,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxFunction
     public StaticNodeList querySelectorAll(final String selectors) {
         try {
-            final List<Node> nodes = new ArrayList<Node>();
+            final List<Node> nodes = new ArrayList<>();
             for (final DomNode domNode : getDomNodeOrDie().querySelectorAll(selectors)) {
                 nodes.add((Node) domNode.getScriptObject());
             }

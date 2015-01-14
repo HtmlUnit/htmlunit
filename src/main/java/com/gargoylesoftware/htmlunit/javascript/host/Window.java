@@ -177,8 +177,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     private Event currentEvent_;
     private String status_ = "";
     private HTMLCollection frames_; // has to be a member to have equality (==) working
-    private Map<Class<? extends SimpleScriptable>, Scriptable> prototypes_ =
-        new HashMap<Class<? extends SimpleScriptable>, Scriptable>();
+    private Map<Class<? extends SimpleScriptable>, Scriptable> prototypes_ = new HashMap<>();
     private EventListenersContainer eventListenersContainer_;
     private Object controllers_;
     private Object opener_;
@@ -192,7 +191,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     private transient WeakHashMap<Node, ComputedCSSStyleDeclaration> computedStyles_ =
         new WeakHashMap<Node, ComputedCSSStyleDeclaration>();
 
-    private final Map<Type, Storage> storages_ = new HashMap<Type, Storage>();
+    private final Map<Type, Storage> storages_ = new HashMap<>();
 
     /**
      * Restores the transient {@link #computedStyles_} map during deserialization.

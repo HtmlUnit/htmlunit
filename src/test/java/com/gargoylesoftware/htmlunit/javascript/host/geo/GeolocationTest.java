@@ -73,7 +73,7 @@ public class GeolocationTest extends WebServerTestCase {
     }
 
     private void getCurrentPosition(final boolean geolocationEnabled) throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", GetCurrentPositionTestServlet.class);
         servlets.put("/browserLocation", BrowserLocationServlet.class);
         startWebServer("./", new String[0], servlets);
@@ -83,7 +83,7 @@ public class GeolocationTest extends WebServerTestCase {
         if (geolocationEnabled) {
             client.getOptions().setGeolocationEnabled(true);
         }
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         client.getPage("http://localhost:" + PORT + "/test");
         client.waitForBackgroundJavaScript(2000);

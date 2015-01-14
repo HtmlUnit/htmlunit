@@ -764,19 +764,19 @@ public class WebClient implements Serializable {
     }
 
     private void fireWindowContentChanged(final WebWindowEvent event) {
-        for (final WebWindowListener listener : new ArrayList<WebWindowListener>(webWindowListeners_)) {
+        for (final WebWindowListener listener : new ArrayList<>(webWindowListeners_)) {
             listener.webWindowContentChanged(event);
         }
     }
 
     private void fireWindowOpened(final WebWindowEvent event) {
-        for (final WebWindowListener listener : new ArrayList<WebWindowListener>(webWindowListeners_)) {
+        for (final WebWindowListener listener : new ArrayList<>(webWindowListeners_)) {
             listener.webWindowOpened(event);
         }
     }
 
     private void fireWindowClosed(final WebWindowEvent event) {
-        for (final WebWindowListener listener : new ArrayList<WebWindowListener>(webWindowListeners_)) {
+        for (final WebWindowListener listener : new ArrayList<>(webWindowListeners_)) {
             listener.webWindowClosed(event);
         }
     }
@@ -1068,7 +1068,7 @@ public class WebClient implements Serializable {
 
     private WebResponse makeWebResponseForDataUrl(final WebRequest webRequest) throws IOException {
         final URL url = webRequest.getUrl();
-        final List<NameValuePair> responseHeaders = new ArrayList<NameValuePair>();
+        final List<NameValuePair> responseHeaders = new ArrayList<>();
         DataUrlDecoder decoder;
         try {
             decoder = DataUrlDecoder.decode(url);
@@ -1115,7 +1115,7 @@ public class WebClient implements Serializable {
         final File file = new File(cleanUrl.toExternalForm().substring(5));
         if (!file.exists()) {
             // construct 404
-            final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>();
+            final List<NameValuePair> compiledHeaders = new ArrayList<>();
             compiledHeaders.add(new NameValuePair("Content-Type", "text/html"));
             final WebResponseData responseData =
                 new WebResponseData(
@@ -1127,7 +1127,7 @@ public class WebClient implements Serializable {
         final String contentType = guessContentType(file);
 
         final DownloadedContent content = new DownloadedContent.OnFile(file, false);
-        final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>();
+        final List<NameValuePair> compiledHeaders = new ArrayList<>();
         compiledHeaders.add(new NameValuePair("Content-Type", contentType));
         final WebResponseData responseData = new WebResponseData(content, 200, "OK", compiledHeaders);
         return new WebResponse(responseData, webRequest, 0);
@@ -1394,7 +1394,7 @@ public class WebClient implements Serializable {
      * @see #getTopLevelWindows()
      */
     public List<WebWindow> getWebWindows() {
-        return Collections.unmodifiableList(new ArrayList<WebWindow>(windows_));
+        return Collections.unmodifiableList(new ArrayList<>(windows_));
     }
 
     /**
@@ -1420,7 +1420,7 @@ public class WebClient implements Serializable {
      * @see #getWebWindows()
      */
     public List<TopLevelWindow> getTopLevelWindows() {
-        return Collections.unmodifiableList(new ArrayList<TopLevelWindow>(topLevelWindows_));
+        return Collections.unmodifiableList(new ArrayList<>(topLevelWindows_));
     }
 
     /**
@@ -1752,7 +1752,7 @@ public class WebClient implements Serializable {
     public void closeAllWindows() {
         // NB: this implementation is too simple as a new TopLevelWindow may be opened by
         // some JS script while we are closing the others
-        final List<TopLevelWindow> topWindows = new ArrayList<TopLevelWindow>(topLevelWindows_);
+        final List<TopLevelWindow> topWindows = new ArrayList<>(topLevelWindows_);
         for (final TopLevelWindow topWindow : topWindows) {
             if (topLevelWindows_.contains(topWindow)) {
                 topWindow.close();
@@ -1967,7 +1967,7 @@ public class WebClient implements Serializable {
         }
     }
 
-    private final List<LoadJob> loadQueue_ = new ArrayList<LoadJob>();
+    private final List<LoadJob> loadQueue_ = new ArrayList<>();
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
@@ -2057,7 +2057,7 @@ public class WebClient implements Serializable {
             if (loadQueue_.isEmpty()) {
                 return;
             }
-            queue = new ArrayList<LoadJob>(loadQueue_);
+            queue = new ArrayList<>(loadQueue_);
             loadQueue_.clear();
         }
 
@@ -2157,7 +2157,7 @@ public class WebClient implements Serializable {
 
         final org.apache.http.cookie.Cookie[] all = Cookie.toHttpClient(cookieManager.getCookies());
         final CookieOrigin cookieOrigin = new CookieOrigin(host, port, path, secure);
-        final List<org.apache.http.cookie.Cookie> matches = new ArrayList<org.apache.http.cookie.Cookie>();
+        final List<org.apache.http.cookie.Cookie> matches = new ArrayList<>();
         for (final org.apache.http.cookie.Cookie cookie : all) {
             if (new HtmlUnitBrowserCompatCookieSpec(getBrowserVersion()).match(cookie, cookieOrigin)) {
                 matches.add(cookie);

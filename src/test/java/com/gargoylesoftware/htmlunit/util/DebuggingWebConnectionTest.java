@@ -53,7 +53,7 @@ public class DebuggingWebConnectionTest extends SimpleWebTestCase {
         list = Collections.singletonList(new NameValuePair("na me", "value"));
         assertEquals("{'na me': 'value'}", DebuggingWebConnection.nameValueListToJsMap(list));
 
-        list = new ArrayList<NameValuePair>();
+        list = new ArrayList<>();
         list.add(new NameValuePair("na me", "value1"));
         list.add(new NameValuePair("key", "value 2"));
         list.add(new NameValuePair("key 2", "value 3"));

@@ -312,7 +312,7 @@ public class HtmlTableTest extends SimpleWebTestCase {
 
         final HtmlTable table = page.getHtmlElementById("table1");
 
-        final List<HtmlTableRow> expectedRows = new ArrayList<HtmlTableRow>();
+        final List<HtmlTableRow> expectedRows = new ArrayList<>();
         expectedRows.add(table.getRowById("row1"));
         expectedRows.add(table.getRowById("row2"));
         expectedRows.add(table.getRowById("row3"));
@@ -349,7 +349,7 @@ public class HtmlTableTest extends SimpleWebTestCase {
 
         final HtmlTable table = page.getHtmlElementById("table1");
 
-        final List<HtmlTableRow> expectedRows = new ArrayList<HtmlTableRow>();
+        final List<HtmlTableRow> expectedRows = new ArrayList<>();
         expectedRows.add(table.getRowById("row1"));
         expectedRows.add(table.getRowById("row2"));
         expectedRows.add(table.getRowById("row3"));
@@ -494,7 +494,7 @@ public class HtmlTableTest extends SimpleWebTestCase {
         final String[] expectedAlerts = {"foo", "BODY"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         loadPage(content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);

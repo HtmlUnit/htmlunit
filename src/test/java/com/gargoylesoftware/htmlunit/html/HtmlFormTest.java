@@ -193,7 +193,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -226,7 +226,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -277,7 +277,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final WebClient client = getWebClientWithMockWebConnection();
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         getMockWebConnection().setResponse(getDefaultUrl(), firstHtml);
@@ -334,7 +334,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         client.getOptions().setJavaScriptEnabled(false);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -367,7 +367,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -399,7 +399,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -431,7 +431,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -464,7 +464,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         client.getOptions().setJavaScriptEnabled(false);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -514,7 +514,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
             + "<input name='button' type='reset' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
 
         final HtmlPage firstPage = loadPage(html, collectedAlerts);
         final HtmlResetInput button = (HtmlResetInput) firstPage.getHtmlElementById("button");
@@ -549,7 +549,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -798,7 +798,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
 
         final HtmlForm form = page.getHtmlElementById("form1");
 
-        final List<String> actualInputs = new ArrayList<String>();
+        final List<String> actualInputs = new ArrayList<>();
         for (final HtmlInput input : form.getInputsByValue("foo")) {
             actualInputs.add(input.getNameAttribute());
         }
@@ -1230,7 +1230,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"number", "false"};
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
@@ -1259,7 +1259,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
 
         final String secondHtml = "<html><head><title>second</title></head></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
@@ -1403,7 +1403,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final WebClient client = getWebClientWithMockWebConnection();
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final URL url = getDefaultUrl();

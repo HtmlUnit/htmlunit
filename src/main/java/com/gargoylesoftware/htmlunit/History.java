@@ -38,7 +38,7 @@ public class History implements Serializable {
      * The URLs of the pages in this navigation history; stored as Strings instead of java.net.URLs
      * because "about:blank" URLs don't serialize correctly.
      */
-    private final List<String> urls_ = new ArrayList<String>();
+    private final List<String> urls_ = new ArrayList<>();
 
     /**
      * Whether or not to ignore calls to {@link #addPage(Page)}; this is a bit hackish (we should probably be using

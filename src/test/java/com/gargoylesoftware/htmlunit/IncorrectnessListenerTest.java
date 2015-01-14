@@ -40,7 +40,7 @@ public final class IncorrectnessListenerTest extends SimpleWebTestCase {
                 + "</html>";
 
         final WebClient webClient = getWebClient();
-        final List<String> collectedIncorrectness = new ArrayList<String>();
+        final List<String> collectedIncorrectness = new ArrayList<>();
         final IncorrectnessListener listener = new IncorrectnessListener() {
             public void notify(final String message, final Object origin) {
                 collectedIncorrectness.add(message);

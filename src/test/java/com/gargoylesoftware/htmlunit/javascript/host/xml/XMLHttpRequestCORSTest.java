@@ -98,7 +98,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "<body onload='test()'></body></html>";
 
         SimpleServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "*";
-        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/simple2", SimpleServerServlet.class);
         startWebServer2(".", null, servlets2);
 
@@ -158,7 +158,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "<body onload='test()'></body></html>";
 
         SimpleServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = header;
-        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/simple2", SimpleServerServlet.class);
         startWebServer2(".", null, servlets2);
 
@@ -239,7 +239,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "http://localhost:" + PORT;
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_METHODS_ = allowedMethods;
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_HEADERS_ = "X-PINGOTHER";
-        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/preflight2", PreflightServerServlet.class);
         startWebServer2(".", null, servlets2);
 
@@ -328,7 +328,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "http://localhost:" + PORT;
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_METHODS_ = "POST, GET, OPTIONS";
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_HEADERS_ = null;
-        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/preflight2", PreflightServerServlet.class);
         startWebServer2(".", null, servlets2);
 
@@ -368,7 +368,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "http://localhost:" + PORT;
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_METHODS_ = "POST, GET, OPTIONS";
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_HEADERS_ = "X-PING, X-PONG";
-        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/preflight2", PreflightServerServlet.class);
         startWebServer2(".", null, servlets2);
 
@@ -656,7 +656,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
 
         WithCredentialsServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = accessControlAllowOrigin;
         WithCredentialsServerServlet.ACCESS_CONTROL_ALLOW_CREDENTIALS_ = accessControlAllowCredentials;
-        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<>();
         servlets2.put("/withCredentials2", WithCredentialsServerServlet.class);
         startWebServer2(".", null, servlets2);
 

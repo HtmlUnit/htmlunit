@@ -52,7 +52,7 @@ public abstract class TableRowGroup extends HtmlElement {
      * @return a list of table rows
      */
     public final List<HtmlTableRow> getRows() {
-        final List<HtmlTableRow> resultList = new ArrayList<HtmlTableRow>();
+        final List<HtmlTableRow> resultList = new ArrayList<>();
 
         for (final DomElement element : getChildElements()) {
             if (element instanceof HtmlTableRow) {

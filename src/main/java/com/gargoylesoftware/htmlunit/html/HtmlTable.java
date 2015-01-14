@@ -115,7 +115,7 @@ public class HtmlTable extends HtmlElement {
      * @see #getRowIterator
      */
     public List<HtmlTableRow> getRows() {
-        final List<HtmlTableRow> result = new ArrayList<HtmlTableRow>();
+        final List<HtmlTableRow> result = new ArrayList<>();
         for (final HtmlTableRow row : getRowIterator()) {
             result.add(row);
         }
@@ -218,7 +218,7 @@ public class HtmlTable extends HtmlElement {
      * @return a list of {@link HtmlTableBody} objects
      */
     public List<HtmlTableBody> getBodies() {
-        final List<HtmlTableBody> bodies = new ArrayList<HtmlTableBody>();
+        final List<HtmlTableBody> bodies = new ArrayList<>();
         for (final DomElement element : getChildElements()) {
             if (element instanceof HtmlTableBody) {
                 bodies.add((HtmlTableBody) element);

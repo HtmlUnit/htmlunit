@@ -88,7 +88,7 @@ public final class EncodingSniffer {
     /** <a href="http://encoding.spec.whatwg.org/#encodings">Reference</a> */
     private static final Map<String, String> ENCODING_FROM_LABEL;
     static {
-        ENCODING_FROM_LABEL = new HashMap<String, String>();
+        ENCODING_FROM_LABEL = new HashMap<>();
 
         // The Encoding
         // ------------

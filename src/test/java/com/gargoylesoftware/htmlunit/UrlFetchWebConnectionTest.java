@@ -131,7 +131,7 @@ public class UrlFetchWebConnectionTest extends WebServerTestCase {
     @Test
     @Alerts("my_key=Hello")
     public void cookie() throws Exception {
-        final List<NameValuePair> responseHeader = new ArrayList<NameValuePair>();
+        final List<NameValuePair> responseHeader = new ArrayList<>();
         responseHeader.add(new NameValuePair("Set-Cookie", "my_key=Hello"));
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE,
                 200, "OK", "text/html", responseHeader);

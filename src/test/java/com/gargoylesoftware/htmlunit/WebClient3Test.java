@@ -184,7 +184,7 @@ public class WebClient3Test extends WebDriverTestCase {
         final URL url = new URL(getDefaultUrl(), "page2.html");
         getMockWebConnection().setResponse(url, html);
 
-        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Location", redirectUrl));
         getMockWebConnection().setDefaultResponse("", code, "Found", null, headers);
 
@@ -206,7 +206,7 @@ public class WebClient3Test extends WebDriverTestCase {
         final URL url = new URL(getDefaultUrl(), "page2.html");
         getMockWebConnection().setResponse(url, html);
 
-        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Location", "/page2.html"));
         getMockWebConnection().setDefaultResponse("", 302, "Found", null, headers);
 
@@ -227,7 +227,7 @@ public class WebClient3Test extends WebDriverTestCase {
         final URL url = new URL(getDefaultUrl(), "page2.html");
         getMockWebConnection().setResponse(url, html);
 
-        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Location", "/page2.html?param=http%3A//somwhere.org"));
         getMockWebConnection().setDefaultResponse("", 302, "Found", null, headers);
 
@@ -626,7 +626,7 @@ public class WebClient3Test extends WebDriverTestCase {
         final byte[] content = new byte[compressedDataLength];
         System.arraycopy(buffer, 0, content, 0, compressedDataLength);
 
-        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Content-Encoding", "deflate"));
         headers.add(new NameValuePair("Content-Length", String.valueOf(compressedDataLength)));
 

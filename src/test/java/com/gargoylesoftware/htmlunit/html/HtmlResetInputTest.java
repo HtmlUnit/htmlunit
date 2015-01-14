@@ -128,7 +128,7 @@ public class HtmlResetInputTest extends SimpleWebTestCase {
             + "    <button type='reset' name='button' id='button' "
             + "onClick='alert(\"foo\")'>Push me</button>\n"
             + "</form></body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlButton button = page.getHtmlElementById("button");
 
@@ -152,7 +152,7 @@ public class HtmlResetInputTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"1"};
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(html, collectedAlerts);
         final HtmlResetInput input = page.getHtmlElementById("myInput");
         input.click();

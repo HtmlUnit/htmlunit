@@ -87,7 +87,7 @@ public class ClickableElementTest extends SimpleWebTestCase {
         webConnection.setDefaultResponse(htmlContent);
         client.getOptions().setThrowExceptionOnScriptError(exceptionOnError);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final CollectingAlertHandler alertHandler = new CollectingAlertHandler(collectedAlerts);
         client.setAlertHandler(alertHandler);
 

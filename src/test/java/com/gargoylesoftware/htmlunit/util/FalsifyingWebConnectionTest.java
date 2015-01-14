@@ -60,7 +60,7 @@ public class FalsifyingWebConnectionTest extends SimpleWebTestCase {
         mockConnection.setResponse(new URL(URL_FIRST.toExternalForm() + "myJs.js"), "alert('hello');");
         webClient.setWebConnection(mockConnection);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         // create a WebConnection that filters google-analytics scripts
@@ -100,7 +100,7 @@ public class FalsifyingWebConnectionTest extends SimpleWebTestCase {
         mockConnection.setResponse(new URL(URL_FIRST.toExternalForm() + "myJs.js"), "alert('hello');");
         webClient.setWebConnection(mockConnection);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         // first test this "site" when everything is ok

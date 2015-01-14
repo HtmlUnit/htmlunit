@@ -61,7 +61,7 @@ public class XSLProcessor extends MSXMLScriptable {
     private XMLDOMNode style_;
     private XMLDOMNode input_;
     private Object output_;
-    private Map<String, Object> parameters_ = new HashMap<String, Object>();
+    private Map<String, Object> parameters_ = new HashMap<>();
 
     /**
      * Creates an instance. JavaScript objects must have a default constructor.

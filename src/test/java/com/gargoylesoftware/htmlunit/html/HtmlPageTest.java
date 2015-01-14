@@ -109,7 +109,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final HtmlSubmitInput button = form.getInputByName("submitInput1");
         final HtmlPage secondPage = (HtmlPage) button.click();
 
-        final List<NameValuePair> expectedParameters = new ArrayList<NameValuePair>();
+        final List<NameValuePair> expectedParameters = new ArrayList<>();
         expectedParameters.add(new NameValuePair("textInput1", "foo"));
         expectedParameters.add(new NameValuePair("textInput2", "textInput2"));
         expectedParameters.add(new NameValuePair("hidden1", "hidden1"));
@@ -220,7 +220,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final List<HtmlElement> expectedElements = new ArrayList<HtmlElement>();
+        final List<HtmlElement> expectedElements = new ArrayList<>();
         expectedElements.add(page.getHtmlElementById("bar"));
 
         assertEquals(expectedElements, page.getTabbableElements());
@@ -419,7 +419,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final WebClient webClient = getWebClient();
-        final List<String> collectedIncorrectness = new ArrayList<String>();
+        final List<String> collectedIncorrectness = new ArrayList<>();
         final IncorrectnessListener listener = new IncorrectnessListener() {
             public void notify(final String message, final Object origin) {
                 collectedIncorrectness.add(message);
@@ -452,7 +452,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final WebClient webClient = getWebClient();
-        final List<String> collectedIncorrectness = new ArrayList<String>();
+        final List<String> collectedIncorrectness = new ArrayList<>();
         final IncorrectnessListener listener = new IncorrectnessListener() {
             public void notify(final String message, final Object origin) {
                 collectedIncorrectness.add(message);
@@ -482,7 +482,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final String htmlContent = "<html><head><title>foo</title>\n"
             + "</head><body onLoad='alert(\"foo\")'>\n"
             + "</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
@@ -499,7 +499,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final String htmlContent = "<html><head><title>foo</title>\n"
             + "</head><body onLoad='alert(\"foo\");alert(\"bar\")'>\n"
             + "</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
@@ -517,7 +517,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "<script type='text/javascript'>\n"
             + "window.onload=function(){alert('foo')}</script>\n"
             + "</head><body></body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
@@ -535,7 +535,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "<body onLoad='foo=4711'>\n"
             + "<a name='alert' href='javascript:alert(foo)'/>\n"
             + "</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
@@ -556,7 +556,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "load=function(){alert('foo')};\n"
             + "onload=load\n"
             + "</script></head><body></body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
@@ -579,7 +579,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "</form>\n"
             + "</td></tr></table>\n"
             + "</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
 
         // This used to blow up on page load
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
@@ -682,7 +682,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "</head><body></body></html>";
 
         final WebClient client = getWebClient();
-        final List<Object> collectedItems = new ArrayList<Object>();
+        final List<Object> collectedItems = new ArrayList<>();
         client.setRefreshHandler(new LoggingRefreshHandler(collectedItems));
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -798,7 +798,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final String secondContent = "<html><head><title>second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
-        final List<Object> collectedItems = new ArrayList<Object>();
+        final List<Object> collectedItems = new ArrayList<>();
         client.setRefreshHandler(new LoggingRefreshHandler(collectedItems));
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -1170,7 +1170,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final String[] expectedAlerts = {"webm=none"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
 
@@ -1201,7 +1201,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final String[] expectedAlerts = {"cl2", "cl1"};
         createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         loadPage(content, collectedAlerts);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1510,7 +1510,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
 
-        final List<String> collector = new ArrayList<String>();
+        final List<String> collector = new ArrayList<>();
         final HtmlAttributeChangeListener listener2 = new HtmlAttributeChangeListenerTestImpl() {
             @Override
             public void attributeReplaced(final HtmlAttributeChangeEvent event) {
@@ -1551,7 +1551,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "alert(s.length);\n"
             + "</script></body></html>";
         final String[] expectedAlerts = {"0"};
-        final List<String> actualAlerts = new ArrayList<String>();
+        final List<String> actualAlerts = new ArrayList<>();
         loadPage(html, actualAlerts);
         assertEquals(expectedAlerts, actualAlerts);
     }
@@ -1568,7 +1568,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "alert(s);\n"
             + "</script></body></html>";
         final String[] expectedAlerts = {"fontSize"};
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -1605,7 +1605,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         loadPage(content, collectedAlerts);
         assertFalse("null".equals(collectedAlerts.get(0)));
     }
@@ -1625,7 +1625,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         loadPage(content, collectedAlerts);
         assertTrue("null".equals(collectedAlerts.get(0)));
     }
@@ -1640,7 +1640,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"foo", "bar"};
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
@@ -1677,7 +1677,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
     private void testOnbeforeunloadHandler(final boolean handlerOk, final String expectedPageTitle) throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
-        final List<String> collectedConfirms = new ArrayList<String>();
+        final List<String> collectedConfirms = new ArrayList<>();
 
         webClient.setOnbeforeunloadHandler(new OnbeforeunloadHandler() {
             public boolean handleEvent(final Page page, final String message) {

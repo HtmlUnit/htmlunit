@@ -49,7 +49,7 @@ import org.tmatesoft.svn.core.wc.SVNWCUtil;
 public class CodeStyleTest {
 
     private static final Pattern leadingWhitespace = Pattern.compile("^\\s+");
-    private List<String> failures_ = new ArrayList<String>();
+    private List<String> failures_ = new ArrayList<>();
     private SVNWCClient svnWCClient_;
 
     /**
@@ -425,7 +425,7 @@ public class CodeStyleTest {
      * @param index the index to start searching from, must be a 'javadoc' line.
      */
     private List<String> getAnnotations(final List<String> lines, int index) {
-        final List<String> annotations = new ArrayList<String>();
+        final List<String> annotations = new ArrayList<>();
         while (!lines.get(index++).trim().endsWith("*/")) {
             //empty;
         }

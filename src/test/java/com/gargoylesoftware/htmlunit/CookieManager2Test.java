@@ -78,7 +78,7 @@ public class CookieManager2Test extends SimpleWebTestCase {
             + "</form></body></html>";
 
         final String[] expectedAlerts = {"cookie:button1", "cookie:button2"};
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(html, collectedAlerts);
         page.getHtmlElementById("button1").click();
         page.getHtmlElementById("button2").click();
@@ -100,7 +100,7 @@ public class CookieManager2Test extends SimpleWebTestCase {
         final CookieManager mgr = webClient.getCookieManager();
         mgr.addCookie(new Cookie(URL_FIRST.getHost(), "my_key", null, "/", null, false));
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         webClient.getPage(URL_FIRST);

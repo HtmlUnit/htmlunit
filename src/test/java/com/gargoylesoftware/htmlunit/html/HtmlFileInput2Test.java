@@ -67,7 +67,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
             IE = { "CONTENT_TYPE:text/plain", "charset" })
     @NotYetImplemented(IE)
     public void contentType() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/upload1", Upload1Servlet.class);
         servlets.put("/upload2", ContentTypeUpload2Servlet.class);
         startWebServer("./", new String[0], servlets);
@@ -170,7 +170,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      */
     @Test
     public void contentTypeHeader() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/upload1", Upload1Servlet.class);
         servlets.put("/upload2", ContentTypeHeaderUpload2Servlet.class);
         startWebServer("./", new String[0], servlets);
@@ -213,7 +213,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
     @Test
     @Alerts("Content-Disposition: form-data; name=\"myInput\"; filename=\"\"")
     public void empty() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/upload1", Upload1Servlet.class);
         servlets.put("/upload2", PrintRequestServlet.class);
         startWebServer("./", new String[0], servlets);
@@ -242,7 +242,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
             IE = "Content-Disposition: form-data; name=\"myInput\";"
                         + " filename=\".*test-classes[\\\\/]realm\\.properties\"")
     public void realFile() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/upload1", Upload1Servlet.class);
         servlets.put("/upload2", PrintRequestServlet.class);
         startWebServer("./", new String[0], servlets);
@@ -273,7 +273,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      */
     @Test
     public void chunked() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/upload1", Upload1Servlet.class);
         servlets.put("/upload2", ChunkedUpload2Servlet.class);
         startWebServer("./", new String[0], servlets);

@@ -111,7 +111,7 @@ public class WebResponseTest extends WebServerTestCase {
             + "  </book>\n"
             + "</books>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
@@ -134,7 +134,7 @@ public class WebResponseTest extends WebServerTestCase {
 
     private void illegalCharset(final String cntTypeHeader, final String expectedCharset) throws Exception {
         final MockWebConnection conn = new MockWebConnection();
-        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Content-Type", cntTypeHeader));
         conn.setDefaultResponse("<html/>", 200, "OK", "text/html", headers);
         final WebClient webClient = getWebClient();
@@ -151,7 +151,7 @@ public class WebResponseTest extends WebServerTestCase {
      */
     @Test
     public void responseHeaders() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", ResponseHeadersServlet.class);
         startWebServer("./", null, servlets);
         final WebClient client = getWebClient();
@@ -182,7 +182,7 @@ public class WebResponseTest extends WebServerTestCase {
     @Test
     public void getContentAsStringIllegalCharset() throws Exception {
         final MockWebConnection conn = new MockWebConnection();
-        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        final List<NameValuePair> headers = new ArrayList<>();
         conn.setDefaultResponse("<html/>", 200, "OK", "text/html", headers);
         final WebClient webClient = getWebClient();
         webClient.setWebConnection(conn);

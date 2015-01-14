@@ -64,7 +64,7 @@ public class HtmlIsIndexTest extends SimpleWebTestCase {
             isInput.setValue("Flintstone");
             final Page secondPage = page.getHtmlElementById("clickMe").click();
 
-            final List<NameValuePair> expectedParameters = new ArrayList<NameValuePair>();
+            final List<NameValuePair> expectedParameters = new ArrayList<>();
             expectedParameters.add(new NameValuePair("enterSomeText", "Flintstone"));
 
             assertEquals("url", getDefaultUrl(), secondPage.getUrl());

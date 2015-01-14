@@ -82,7 +82,7 @@ public class HTMLInputElement2Test extends SimpleWebTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, frame);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(html, collectedAlerts);
         final HtmlPage framePage = (HtmlPage) page.getFrames().get(0).getEnclosedPage();
 

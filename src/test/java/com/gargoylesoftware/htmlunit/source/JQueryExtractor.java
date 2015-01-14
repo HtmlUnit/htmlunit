@@ -123,7 +123,7 @@ public final class JQueryExtractor {
     public static void generateTestCases(final File dir) throws Exception {
         final Browser[] browsers = Browser.values();
         // main browsers regardless of version e.g. "FF"
-        final List<String> mainNames = new ArrayList<String>();
+        final List<String> mainNames = new ArrayList<>();
         for (final Browser b : browsers) {
             final String name = b.name();
             if (!"NONE".equals(name) && Character.isLetter(name.charAt(name.length() - 1))) {
@@ -131,21 +131,21 @@ public final class JQueryExtractor {
             }
         }
 
-        final Map<String, List<String>> browserVersions = new HashMap<String, List<String>>();
+        final Map<String, List<String>> browserVersions = new HashMap<>();
         for (final Browser b : browsers) {
             final String name = b.name();
             for (final String mainName : mainNames) {
                 if (!name.equals(mainName) && name.startsWith(mainName)) {
                     List<String> list = browserVersions.get(mainName);
                     if (list == null) {
-                        list = new ArrayList<String>();
+                        list = new ArrayList<>();
                         browserVersions.put(mainName, list);
                     }
                     list.add(name);
                 }
             }
         }
-        final Map<String, Expectations> browserExpectations = new HashMap<String, Expectations>();
+        final Map<String, Expectations> browserExpectations = new HashMap<>();
         for (final File file : dir.listFiles()) {
             if (file.isFile() && file.getName().endsWith(".txt")) {
                 for (final Browser b : browsers) {
@@ -169,7 +169,7 @@ public final class JQueryExtractor {
                 if (expectation != null) {
                     List<String> browsersForLine = lineToBrowser.get(expectation.getLine());
                     if (browsersForLine == null) {
-                        browsersForLine = new ArrayList<String>();
+                        browsersForLine = new ArrayList<>();
                         lineToBrowser.put(expectation.getLine(), browsersForLine);
                     }
                     browsersForLine.add(browserName);
@@ -219,7 +219,7 @@ public final class JQueryExtractor {
                 if (null != notYetImplemented) {
                     final Browser[] notYetImplementedBrowsers = notYetImplemented.value();
                     if (notYetImplementedBrowsers.length > 0) {
-                        final List<String> browserNames = new ArrayList<String>(notYetImplementedBrowsers.length);
+                        final List<String> browserNames = new ArrayList<>(notYetImplementedBrowsers.length);
                         for (Browser browser : notYetImplementedBrowsers) {
                             browserNames.add(browser.name());
                         }
@@ -257,7 +257,7 @@ public final class JQueryExtractor {
     }
 
     private static List<Test> computeTestsList(final Map<String, Expectations> browserExpectations) {
-        final Map<String, Test> map = new HashMap<String, Test>();
+        final Map<String, Test> map = new HashMap<>();
         for (final Expectations expectations : browserExpectations.values()) {
             for (final Expectation expectation : expectations) {
                 final String testName = expectation.getTestName();
@@ -270,7 +270,7 @@ public final class JQueryExtractor {
             }
         }
 
-        final List<Test> tests = new ArrayList<Test>(map.values());
+        final List<Test> tests = new ArrayList<>(map.values());
         Collections.sort(tests);
 
         return tests;
@@ -287,7 +287,7 @@ public final class JQueryExtractor {
             return expectations;
         }
 
-        private final Map<String, Expectation> expectations_ = new HashMap<String, Expectation>();
+        private final Map<String, Expectation> expectations_ = new HashMap<>();
 
         public Expectation getExpectation(final Test test) {
             return expectations_.get(test.getName());
@@ -339,7 +339,7 @@ public final class JQueryExtractor {
     }
 
     static class Test implements Comparable<Test> {
-        private final List<Integer> lines_ = new ArrayList<Integer>();
+        private final List<Integer> lines_ = new ArrayList<>();
         private final String name_;
 
         public Test(final String name) {

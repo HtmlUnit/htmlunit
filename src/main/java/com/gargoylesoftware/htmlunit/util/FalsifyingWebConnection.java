@@ -108,7 +108,7 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
      */
     protected WebResponse createWebResponse(final WebRequest wr, final String content,
             final String contentType, final int responseCode, final String responseMessage) throws IOException {
-        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        final List<NameValuePair> headers = new ArrayList<>();
         final String encoding = "UTF-8";
         headers.add(new NameValuePair("content-type", contentType + "; charset=" + encoding));
         final byte[] body = content.getBytes(encoding);

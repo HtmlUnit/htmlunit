@@ -123,7 +123,7 @@ public class CookieManager implements Serializable {
 
         final org.apache.http.cookie.Cookie[] all = Cookie.toHttpClient(cookies_);
         final CookieOrigin cookieOrigin = new CookieOrigin(host, port, path, secure);
-        final List<org.apache.http.cookie.Cookie> matches = new ArrayList<org.apache.http.cookie.Cookie>();
+        final List<org.apache.http.cookie.Cookie> matches = new ArrayList<>();
         for (final org.apache.http.cookie.Cookie cookie : all) {
             if (cookieSpec_.match(cookie, cookieOrigin)) {
                 matches.add(cookie);

@@ -470,7 +470,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "}\n"
             + "</script></head><body onload='test()'></body></html>";
 
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test2", PostServlet2.class);
 
         loadPageWithAlerts2(html, servlets);
@@ -636,7 +636,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        final List<NameValuePair> responseHeaders = new ArrayList<NameValuePair>();
+        final List<NameValuePair> responseHeaders = new ArrayList<>();
         responseHeaders.add(new NameValuePair("access-control-allow-origin", "*"));
         getMockWebConnection().setResponse(URL_CROSS_ORIGIN,
                                            "<empty/>",
@@ -681,7 +681,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                         + "  </body>\n"
                         + "</html>";
 
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/protected/token", BasicAuthenticationServlet.class);
 
         loadPageWithAlerts2(html, servlets);

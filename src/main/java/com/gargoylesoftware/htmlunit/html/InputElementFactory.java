@@ -79,7 +79,7 @@ public final class InputElementFactory implements ElementFactory {
 
         Map<String, DomAttr> attributeMap = DefaultElementFactory.setAttributes(page, attributes);
         if (attributeMap == null) {
-            attributeMap = new HashMap<String, DomAttr>();
+            attributeMap = new HashMap<>();
         }
 
         String type = null;

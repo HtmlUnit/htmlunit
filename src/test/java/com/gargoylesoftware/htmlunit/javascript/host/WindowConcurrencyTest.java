@@ -351,7 +351,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
 
         final String[] expectedAlerts = {"started", "finished"};
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(client_, html, collectedAlerts);
         final Function mySpecialFunction = new BaseFunction() {
             @Override
@@ -386,7 +386,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client_.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -416,7 +416,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
             + "</body></html>";
         final String html2 = "<html></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client_.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection conn = new MockWebConnection();
@@ -450,7 +450,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
             + "<iframe src='about:blank'></iframe>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client_.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection conn = new MockWebConnection();

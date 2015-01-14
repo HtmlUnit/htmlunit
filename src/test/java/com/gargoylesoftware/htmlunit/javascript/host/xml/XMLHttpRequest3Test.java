@@ -383,7 +383,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
     @Test
     @NotYetImplemented
     public void streaming() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", StreamingServlet.class);
 
         final String resourceBase = "./src/test/resources/com/gargoylesoftware/htmlunit/javascript/host";

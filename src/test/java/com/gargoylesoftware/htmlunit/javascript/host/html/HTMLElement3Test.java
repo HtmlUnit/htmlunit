@@ -293,7 +293,7 @@ public class HTMLElement3Test extends SimpleWebTestCase {
             + "<div id='myDiv'><br/><div><span>test</span></div></div>\n"
             + "</body>\n"
             + "</html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final String[] expectedAlerts = {"success"};
         final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
         final HtmlElement div = page.getHtmlElementById("myDiv");
@@ -318,7 +318,7 @@ public class HTMLElement3Test extends SimpleWebTestCase {
             + "</html>";
         final String[] expectedAlerts = {"test hash"};
         // first use direct load
-        final List<String> loadCollectedAlerts = new ArrayList<String>();
+        final List<String> loadCollectedAlerts = new ArrayList<>();
         final HtmlPage loadPage = loadPage(getBrowserVersion(), html, loadCollectedAlerts);
         final HtmlAnchor loadHashAnchor = loadPage.getAnchorByName("hash");
         loadHashAnchor.click();
@@ -348,7 +348,7 @@ public class HTMLElement3Test extends SimpleWebTestCase {
     public void setActiveAndFocus() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -406,7 +406,7 @@ public class HTMLElement3Test extends SimpleWebTestCase {
     public void onFocusOnWindowFocusGain() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -449,7 +449,7 @@ public class HTMLElement3Test extends SimpleWebTestCase {
     public void onBlurOnWindowFocusChange() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
 
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 

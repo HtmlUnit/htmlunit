@@ -40,7 +40,7 @@ public class StaticNodeList extends SimpleScriptable {
      * Default constructor.
      */
     public StaticNodeList() {
-        elements_ = new ArrayList<Node>();
+        elements_ = new ArrayList<>();
     }
 
     /**

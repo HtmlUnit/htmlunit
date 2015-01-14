@@ -40,8 +40,7 @@ import org.apache.http.client.CredentialsProvider;
  */
 public class DefaultCredentialsProvider implements CredentialsProvider, Serializable {
 
-    private final HashMap<AuthScopeProxy, CredentialsFactory> credentialsMap_
-        = new HashMap<AuthScopeProxy, CredentialsFactory>();
+    private final HashMap<AuthScopeProxy, CredentialsFactory> credentialsMap_ = new HashMap<>();
 
     /**
      * Adds credentials for the specified username/password for any host/port/realm combination.

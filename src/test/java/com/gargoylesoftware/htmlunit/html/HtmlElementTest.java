@@ -484,7 +484,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
     }
 
     static class HtmlAttributeChangeListenerTestImpl implements HtmlAttributeChangeListener {
-        private final List<String> collectedValues_ = new ArrayList<String>();
+        private final List<String> collectedValues_ = new ArrayList<>();
         @Test
         public void attributeAdded(final HtmlAttributeChangeEvent event) {
             collectedValues_.add("attributeAdded: " + event.getHtmlElement().getTagName() + ','
@@ -896,7 +896,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = {"Hello Cruel World"};
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(html, collectedAlerts);
         final HtmlTextInput input = page.getHtmlElementById("myInput");
         input.type("Hello Cruel World");
@@ -917,7 +917,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
             + "</form>\n"
             + "</body></html>";
         final String[] expectedAlerts = {"1"};
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
         page.getHtmlElementById("textfield1").type('a');

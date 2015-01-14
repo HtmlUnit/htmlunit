@@ -54,7 +54,7 @@ public class HtmlButtonTest extends SimpleWebTestCase {
             + "onClick='alert(\"foo\")'>Push me</button>\n"
             + "</form></body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlButton button = page.getHtmlElementById("button");
 
@@ -77,7 +77,7 @@ public class HtmlButtonTest extends SimpleWebTestCase {
             + "    <button type='submit' name='button' id='button' "
             + "onClick='alert(\"foo\")'>Push me</button>\n"
             + "</form></body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlButton button = page.getHtmlElementById("button");
 
@@ -100,7 +100,7 @@ public class HtmlButtonTest extends SimpleWebTestCase {
             + "    <button type='submit' name='button' id='button' value='foo'"
             + "    >Push me</button>\n"
             + "</form></body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlButton button = page.getHtmlElementById("button");
 

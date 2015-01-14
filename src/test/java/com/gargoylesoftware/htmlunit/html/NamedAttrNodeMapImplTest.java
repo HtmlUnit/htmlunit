@@ -57,7 +57,7 @@ public class NamedAttrNodeMapImplTest {
         NamedAttrNodeMapImpl map = new NamedAttrNodeMapImpl(dom, true);
         Assert.assertTrue(map.isEmpty());
 
-        final Map<String, DomAttr> attribs = new HashMap<String, DomAttr>();
+        final Map<String, DomAttr> attribs = new HashMap<>();
         map = new NamedAttrNodeMapImpl(dom, true, attribs);
         Assert.assertTrue(map.isEmpty());
     }
@@ -78,7 +78,7 @@ public class NamedAttrNodeMapImplTest {
         Assert.assertNotNull(map.get("Key"));
         Assert.assertNull(map.get("key"));
 
-        final Map<String, DomAttr> attribs = new HashMap<String, DomAttr>();
+        final Map<String, DomAttr> attribs = new HashMap<>();
         attribs.put("Key", new DomAttr(null, "", "", null, false));
 
         map = new NamedAttrNodeMapImpl(dom, true, attribs);
@@ -104,7 +104,7 @@ public class NamedAttrNodeMapImplTest {
         Assert.assertNotNull(map.get("Key"));
         Assert.assertNotNull(map.get("key"));
 
-        final Map<String, DomAttr> attribs = new HashMap<String, DomAttr>();
+        final Map<String, DomAttr> attribs = new HashMap<>();
         attribs.put("Key", new DomAttr(null, "", "", null, false));
 
         map = new NamedAttrNodeMapImpl(dom, false, attribs);

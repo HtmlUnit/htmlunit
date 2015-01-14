@@ -57,7 +57,7 @@ import org.junit.runners.model.Statement;
  */
 public class BrowserRunner extends Suite {
 
-    private final ArrayList<Runner> runners_ = new ArrayList<Runner>();
+    private final ArrayList<Runner> runners_ = new ArrayList<>();
 
     /**
      * Constructor.

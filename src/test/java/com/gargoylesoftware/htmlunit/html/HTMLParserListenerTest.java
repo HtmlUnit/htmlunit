@@ -138,7 +138,7 @@ public class HTMLParserListenerTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         assertNull(webClient.getHTMLParserListener());
 
-        final List<MessageInfo> messages = new ArrayList<MessageInfo>();
+        final List<MessageInfo> messages = new ArrayList<>();
         final HTMLParserListener collecter = new HTMLParserListener() {
 
             public void error(final String message, final URL url, final String html,
@@ -192,7 +192,7 @@ public class HTMLParserListenerTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         assertNull(webClient.getHTMLParserListener());
 
-        final List<MessageInfo> messages = new ArrayList<MessageInfo>();
+        final List<MessageInfo> messages = new ArrayList<>();
         final HTMLParserListener collecter = new HTMLParserListener() {
 
             public void error(final String message, final URL url, final String html,

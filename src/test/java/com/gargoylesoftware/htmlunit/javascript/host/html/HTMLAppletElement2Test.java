@@ -47,7 +47,7 @@ public class HTMLAppletElement2Test extends SimpleWebTestCase {
         final URL url = getClass().getResource("/applets/simpleAppletDoIt.html");
 
         final WebClient webClient = getWebClient();
-        final List<String> collectedStatus = new ArrayList<String>();
+        final List<String> collectedStatus = new ArrayList<>();
         final StatusHandler statusHandler = new StatusHandler() {
             public void statusMessageChanged(final Page page, final String message) {
                 collectedStatus.add(message);

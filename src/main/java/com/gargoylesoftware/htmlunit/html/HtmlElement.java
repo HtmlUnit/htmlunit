@@ -269,7 +269,7 @@ public abstract class HtmlElement extends DomElement {
      * @return the HTML elements that are descendants of this element and that have one of the specified tag name
      */
     public final List<HtmlElement> getHtmlElementsByTagNames(final List<String> tagNames) {
-        final List<HtmlElement> list = new ArrayList<HtmlElement>();
+        final List<HtmlElement> list = new ArrayList<>();
         for (final String tagName : tagNames) {
             list.addAll(getHtmlElementsByTagName(tagName));
         }
@@ -284,7 +284,7 @@ public abstract class HtmlElement extends DomElement {
      */
     @SuppressWarnings("unchecked")
     public final <E extends HtmlElement> List<E> getHtmlElementsByTagName(final String tagName) {
-        final List<E> list = new ArrayList<E>();
+        final List<E> list = new ArrayList<>();
         final String lowerCaseTagName = tagName.toLowerCase(Locale.ENGLISH);
         final Iterable<HtmlElement> iterable = getHtmlElementDescendants();
         for (final HtmlElement element : iterable) {
@@ -757,7 +757,7 @@ public abstract class HtmlElement extends DomElement {
             final String attributeName,
             final String attributeValue) {
 
-        final List<E> list = new ArrayList<E>();
+        final List<E> list = new ArrayList<>();
         final String lowerCaseTagName = elementName.toLowerCase(Locale.ENGLISH);
 
         for (final HtmlElement next : getHtmlElementDescendants()) {

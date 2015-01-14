@@ -81,7 +81,7 @@ public class HTMLParser3Test extends WebServerTestCase {
     }
 
     private void headerVsMetaTagContentType(final boolean utf8Encoded) throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test", HeaderVsMetaTagContentTypeServlet.class);
         startWebServer("./", null, servlets);
 

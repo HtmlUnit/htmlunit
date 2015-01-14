@@ -90,7 +90,7 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final String[] expectedAlerts = {"javaScript"};
 
         final HtmlPage page1 = loadPage(getBrowserVersion(), html, collectedAlerts);
@@ -114,7 +114,7 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final String[] expectedAlerts = {"javaScript"};
 
         final HtmlPage page1 = loadPage(getBrowserVersion(), html, collectedAlerts);
@@ -138,7 +138,7 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final String[] expectedAlerts = {"javaScript"};
 
         final HtmlPage page1 = loadPage(getBrowserVersion(), html, collectedAlerts);
@@ -264,7 +264,7 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         final HtmlSubmitInput button = page.getHtmlElementById("clickMe");
         button.click();
@@ -288,7 +288,7 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(content, collectedAlerts);
         final HtmlSubmitInput button = page.getHtmlElementById("clickMe");
         button.click();
@@ -327,7 +327,7 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
 
         webConnection.setResponse(URL_FIRST, html);
         client.setWebConnection(webConnection);
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = client.getPage(URL_FIRST);
@@ -350,7 +350,7 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final String[] expectedAlerts = {"true"};
         final HtmlPage page1 = loadPage(getBrowserVersion(), content, collectedAlerts);
         final Page page2 = page1.getHtmlElementById("theButton").click();
@@ -372,7 +372,7 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
             + "</html>";
 
         final String[] expectedAlerts = {"dummy.txt"};
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
         final HtmlFileInput fileInput = page.getHtmlElementById("myFile");
         fileInput.focus();

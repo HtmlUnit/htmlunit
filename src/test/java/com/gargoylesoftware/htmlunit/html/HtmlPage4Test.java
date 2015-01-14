@@ -58,7 +58,7 @@ public class HtmlPage4Test extends WebServerTestCase {
      */
     @Test
     public void refresh() throws Exception {
-        final Map<String, Class<? extends Servlet>> map = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> map = new HashMap<>();
         map.put("/one.html", RefreshServlet.class);
         map.put("/two.html", RefreshServlet.class);
         startWebServer(".", null, map);
@@ -147,7 +147,7 @@ public class HtmlPage4Test extends WebServerTestCase {
         BigJavaScriptServlet3.CONTENT_ = css.toString();
 
         final int initialTempFiles = getTempFiles();
-        final Map<String, Class<? extends Servlet>> map = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> map = new HashMap<>();
         map.put("/one.html", BigJavaScriptServlet1.class);
         map.put("/two.js", BigJavaScriptServlet2.class);
         map.put("/three.css", BigJavaScriptServlet3.class);

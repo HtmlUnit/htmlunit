@@ -76,7 +76,7 @@ public class XMLDOMDocument extends XMLDOMNode {
     private boolean preserveWhiteSpace_;
     private boolean preserveWhiteSpaceDuringLoad_ = true;
     private XMLDOMParseError parseError_;
-    private Map<String, String> properties_ = new HashMap<String, String>();
+    private Map<String, String> properties_ = new HashMap<>();
     private String url_ = "";
 
     /**

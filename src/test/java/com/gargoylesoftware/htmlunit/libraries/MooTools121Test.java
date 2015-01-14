@@ -93,7 +93,7 @@ public class MooTools121Test extends WebDriverTestCase {
         // functionality is running
 
         final List<WebElement> failed = driver.findElements(By.xpath("//li[@class = 'exception']/h4"));
-        final List<String> failures = new ArrayList<String>();
+        final List<String> failures = new ArrayList<>();
         for (final WebElement elt : failed) {
             failures.add(elt.getText());
         }

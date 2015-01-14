@@ -143,7 +143,7 @@ class XmlSerializer {
 
         Map<String, DomAttr> attributes = node.getAttributesMap();
         if (node instanceof HtmlOption) {
-            attributes = new HashMap<String, DomAttr>(attributes);
+            attributes = new HashMap<>(attributes);
             final HtmlOption option = (HtmlOption) node;
             if (option.isSelected()) {
                 if (!attributes.containsKey("selected")) {
@@ -244,7 +244,7 @@ class XmlSerializer {
     }
 
     private Map<String, DomAttr> createAttributesCopyWithClonedAttribute(final HtmlElement elt, final String attrName) {
-        final Map<String, DomAttr> newMap = new HashMap<String, DomAttr>(elt.getAttributesMap());
+        final Map<String, DomAttr> newMap = new HashMap<>(elt.getAttributesMap());
 
         // clone the specified element, if possible
         final DomAttr attr = newMap.get(attrName);

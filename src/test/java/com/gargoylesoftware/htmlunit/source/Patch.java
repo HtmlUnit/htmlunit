@@ -42,7 +42,7 @@ public final class Patch {
      */
     public static void checkAuthor(final String baseDir, final String patchPath, final String authorName)
         throws IOException {
-        final List<String> errors = new ArrayList<String>();
+        final List<String> errors = new ArrayList<>();
         final List<String> lines = FileUtils.readLines(new File(patchPath));
         for (final String line : lines) {
             if (line.startsWith("+++")) {

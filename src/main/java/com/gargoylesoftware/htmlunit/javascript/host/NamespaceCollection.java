@@ -51,7 +51,7 @@ public class NamespaceCollection extends SimpleScriptable implements Function {
     /** Default constructor required by Rhino. */
     public NamespaceCollection() {
         doc_ = null;
-        namespaces_ = new ArrayList<Namespace>();
+        namespaces_ = new ArrayList<>();
     }
 
     /**
@@ -60,7 +60,7 @@ public class NamespaceCollection extends SimpleScriptable implements Function {
      */
     public NamespaceCollection(final HTMLDocument doc) {
         doc_ = doc;
-        namespaces_ = new ArrayList<Namespace>();
+        namespaces_ = new ArrayList<>();
 
         setParentScope(doc);
         setPrototype(getPrototype(getClass()));

@@ -36,7 +36,7 @@ public class PrimitiveWebServer {
     private final int port_;
     private final byte[] defaultResponse_;
     private ServerSocket server_;
-    private List<String> requests_ = new ArrayList<String>();
+    private List<String> requests_ = new ArrayList<>();
 
     /**
      * Constructs a new SimpleWebServer.

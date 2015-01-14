@@ -50,7 +50,7 @@ public class CacheTest extends SimpleWebTestCase {
     @Test
     public void isDynamicContent() throws Exception {
         final Cache cache = new Cache();
-        final Map<String, String> headers = new HashMap<String, String>();
+        final Map<String, String> headers = new HashMap<>();
         final WebResponse response = new DummyWebResponse() {
             @Override
             public String getResponseHeaderValue(final String headerName) {
@@ -112,12 +112,12 @@ public class CacheTest extends SimpleWebTestCase {
         final URL urlPage2 = new URL(URL_FIRST, "page2.html");
         connection.setResponse(urlPage2, content2);
 
-        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
         connection.setResponse(new URL(URL_FIRST, "foo1.js"), script1, 200, "ok", JAVASCRIPT_MIME_TYPE, headers);
         connection.setResponse(new URL(URL_FIRST, "foo2.js"), script2, 200, "ok", JAVASCRIPT_MIME_TYPE, headers);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page1 = webClient.getPage(urlPage1);
@@ -166,7 +166,7 @@ public class CacheTest extends SimpleWebTestCase {
         final URL urlPage2 = new URL(URL_FIRST, "page2.html");
         getMockWebConnection().setResponse(urlPage2, content2);
 
-        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
         getMockWebConnection().setResponse(new URL(URL_FIRST, "foo1.js"), script1,
                 200, "ok", JAVASCRIPT_MIME_TYPE, headers);
@@ -174,7 +174,7 @@ public class CacheTest extends SimpleWebTestCase {
 
         final WebClient webClient = getWebClientWithMockWebConnection();
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page1 = webClient.getPage(urlPage1);
@@ -234,7 +234,7 @@ public class CacheTest extends SimpleWebTestCase {
         final URL urlPage2 = new URL(URL_FIRST, "page2.html");
         getMockWebConnection().setResponse(urlPage2, content2);
 
-        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
         getMockWebConnection().setResponse(new URL(URL_FIRST, "foo1.js"), "",
                 200, "ok", "text/css", headers);
@@ -242,7 +242,7 @@ public class CacheTest extends SimpleWebTestCase {
 
         final WebClient webClient = getWebClientWithMockWebConnection();
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page1 = webClient.getPage(urlPage1);

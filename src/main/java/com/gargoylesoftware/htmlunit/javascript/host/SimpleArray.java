@@ -34,11 +34,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
  *
  * @see <a href="http://www.xulplanet.com/references/objref/MimeTypeArray.html">XUL Planet</a>
  */
-@JsxClasses(
-        isJSObject = false
-)
+@JsxClasses(isJSObject = false)
 public class SimpleArray extends SimpleScriptable implements ScriptableWithFallbackGetter {
-    private final List<Object> elements_ = new ArrayList<Object>();
+    private final List<Object> elements_ = new ArrayList<>();
 
     /**
      * Creates an instance. JavaScript objects must have a default constructor.

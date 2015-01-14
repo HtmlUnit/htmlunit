@@ -61,12 +61,12 @@ public class HTMLObjectElementTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final WebClient client = getWebClient();
-        final Map<String, String> activeXObjectMap = new HashMap<String, String>();
+        final Map<String, String> activeXObjectMap = new HashMap<>();
         activeXObjectMap.put(clsid,
                 "com.gargoylesoftware.htmlunit.javascript.MockActiveXObject");
         client.setActiveXObjectMap(activeXObjectMap);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();

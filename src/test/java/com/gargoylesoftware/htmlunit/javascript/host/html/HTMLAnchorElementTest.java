@@ -111,7 +111,7 @@ public class HTMLAnchorElementTest extends SimpleWebTestCase {
             + "  <a id='a' href='http://blah.com/abc.html#arg'>foo</a>\n"
             + "  <script>alert(document.getElementById('a').hash);</script>\n"
             + "</body></html>";
-        final List<String> actual = new ArrayList<String>();
+        final List<String> actual = new ArrayList<>();
         loadPage(getBrowserVersion(), html, actual);
         final String[] expected = {"#arg"};
         assertEquals(expected, actual);

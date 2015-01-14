@@ -45,7 +45,7 @@ public class WebClient2Test extends SimpleWebTestCase {
     public void encodeURL() throws Exception {
         final String html = "<body onload='alert(window.location.href)'></body>";
         final WebClient webClient = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();

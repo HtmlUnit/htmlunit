@@ -126,7 +126,7 @@ public class PropertiesTest extends SimpleWebTestCase {
         Assert.assertEquals(IE8_SIMULATED_.size(), IE11_SIMULATED_.size());
         Assert.assertEquals(IE8_SIMULATED_.size(), FF24_SIMULATED_.size());
         Assert.assertEquals(IE8_SIMULATED_.size(), FF31_SIMULATED_.size());
-        final Collection<Object[]> list = new ArrayList<Object[]>();
+        final Collection<Object[]> list = new ArrayList<>();
         for (final String line : IE8_) {
             final String name = line.substring(0, line.indexOf(':'));
             list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_8});
@@ -213,19 +213,19 @@ public class PropertiesTest extends SimpleWebTestCase {
         List<String> realProperties = Arrays.asList(getValueOf(realList, name_).split(","));
         List<String> simulatedProperties = Arrays.asList(getValueOf(simulatedList, name_).split(","));
         if (realProperties.size() == 1 && realProperties.get(0).isEmpty()) {
-            realProperties = new ArrayList<String>();
+            realProperties = new ArrayList<>();
         }
         if (simulatedProperties.size() == 1 && simulatedProperties.get(0).isEmpty()) {
-            simulatedProperties = new ArrayList<String>();
+            simulatedProperties = new ArrayList<>();
         }
-        final List<String> originalRealProperties = new ArrayList<String>(realProperties);
+        final List<String> originalRealProperties = new ArrayList<>(realProperties);
         removeParentheses(realProperties);
         removeParentheses(simulatedProperties);
 
-        final List<String> erroredProperties = new ArrayList<String>(simulatedProperties);
+        final List<String> erroredProperties = new ArrayList<>(simulatedProperties);
         erroredProperties.removeAll(realProperties);
 
-        final List<String> implementedProperties = new ArrayList<String>(simulatedProperties);
+        final List<String> implementedProperties = new ArrayList<>(simulatedProperties);
         implementedProperties.retainAll(realProperties);
 
         dataset.addValue(implementedProperties.size(), "Implemented", name_);
@@ -233,7 +233,7 @@ public class PropertiesTest extends SimpleWebTestCase {
             browserVersion_.getNickname().replace("FF", "Firefox ").replace("IE", "Internet Explorer "), name_);
         dataset.addValue(erroredProperties.size(), "Should not be implemented", name_);
 
-        final List<String> remainingProperties = new ArrayList<String>(realProperties);
+        final List<String> remainingProperties = new ArrayList<>(realProperties);
         remainingProperties.removeAll(implementedProperties);
 
         actualPropertyCount.add(realProperties.size());

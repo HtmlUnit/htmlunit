@@ -133,7 +133,7 @@ public class ScriptPreProcessorTest extends WebServerTestCase {
                 return sourceCode;
             }
         });
-        final List<String> alerts = new ArrayList<String>();
+        final List<String> alerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(alerts));
         client.getPage("http://page");
 
@@ -161,7 +161,7 @@ public class ScriptPreProcessorTest extends WebServerTestCase {
             }
         });
 
-        final List<String> alerts = new ArrayList<String>();
+        final List<String> alerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(alerts));
         client.getPage(URL_FIRST);
 

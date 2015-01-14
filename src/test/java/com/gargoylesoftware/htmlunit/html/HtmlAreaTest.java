@@ -84,7 +84,7 @@ public class HtmlAreaTest extends SimpleWebTestCase {
     @Test
     public void testClick_onclickReturnsFalse() throws Exception {
         final WebClient client = createWebClient("alert('foo');return false;");
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = client.getPage(URL_FIRST);
@@ -101,7 +101,7 @@ public class HtmlAreaTest extends SimpleWebTestCase {
     @Test
     public void testClick_onclickReturnsTrue() throws Exception {
         final WebClient client = createWebClient("alert('foo');return true;");
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = client.getPage(URL_FIRST);
@@ -121,7 +121,7 @@ public class HtmlAreaTest extends SimpleWebTestCase {
             = "<html><head><title>foo</title></head><body><map>\n"
             + "<area href='javascript:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>\n"
             + "</map></body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
         final HtmlArea area = page.getHtmlElementById("a2");
@@ -143,7 +143,7 @@ public class HtmlAreaTest extends SimpleWebTestCase {
             = "<html><head><title>foo</title></head><body><map>\n"
             + "<area href='javasCRIpT:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>\n"
             + "</map></body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
         final HtmlArea area = page.getHtmlElementById("a2");
@@ -165,7 +165,7 @@ public class HtmlAreaTest extends SimpleWebTestCase {
             = "<html><head><title>foo</title></head><body><map>\n"
             + "<area href='     javascript:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>\n"
             + "</map></body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
         final HtmlArea area = page.getHtmlElementById("a2");
@@ -190,7 +190,7 @@ public class HtmlAreaTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         client.getOptions().setJavaScriptEnabled(false);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -218,7 +218,7 @@ public class HtmlAreaTest extends SimpleWebTestCase {
             = "<html><head><title>foo</title></head><body><map>\n"
             + "<area href='javascript:alert(this == window)' id='a2' coords='0,0,10,10'/>\n"
             + "</map></body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final String[] expectedAlerts = {"true"};
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final Page page2 = page.getHtmlElementById("a2").click();

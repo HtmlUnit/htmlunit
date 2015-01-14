@@ -133,7 +133,7 @@ public class ThreadTest extends TestCase {
                 + "</form>\n"
                 + "</body></html>";
 
-            final List<String> collectedAlerts = new ArrayList<String>();
+            final List<String> collectedAlerts = new ArrayList<>();
 
             final WebClient webClient = new WebClient();
             webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));

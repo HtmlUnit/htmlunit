@@ -56,7 +56,7 @@ public class GWT250Test extends WebServerTestCase {
      */
     @Test
     public void hello() throws Exception {
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadGWTPage("Hello", collectedAlerts, "//button");
         final HtmlButton button = page.getFirstByXPath("//button");
         final DomText buttonLabel = (DomText) button.getChildren().iterator().next();
@@ -237,7 +237,7 @@ public class GWT250Test extends WebServerTestCase {
      */
     @Test
     public void showcase() throws Exception {
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadGWTPage("Showcase", collectedAlerts, "id('gwt-debug-cwCheckBox-Monday-label')");
         assertEquals("Monday",
             page.getHtmlElementById("gwt-debug-cwCheckBox-Monday-label").getFirstChild().getNodeValue());

@@ -103,7 +103,7 @@ public class GAELoadPageTest {
             + "</xml2>";
 
         final WebClient client = new WebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(FIRST_URL, html);
@@ -140,7 +140,7 @@ public class GAELoadPageTest {
             + "  </body>\n"
             + "</html>";
         final WebClient client = new WebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setDefaultResponse(html);
@@ -187,7 +187,7 @@ public class GAELoadPageTest {
             + "  </body>\n"
             + "</html>";
         final WebClient client = new WebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setDefaultResponse(html);
@@ -224,7 +224,7 @@ public class GAELoadPageTest {
         final String frame = "<html><body><script>alert('in frame');</script></body></html>";
 
         final WebClient client = new WebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection conn = new GAEMockWebConnection(client);

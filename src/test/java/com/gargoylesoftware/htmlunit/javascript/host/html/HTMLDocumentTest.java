@@ -614,7 +614,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "string", "Fri, 16 Oct 2009 13:59:47 GMT" },
             IE8 = { "string", "Fri, 16 Oct 2009 13:59:47 UTC" })
     public void lastModified() throws Exception {
-        final List<NameValuePair> responseHeaders = new ArrayList<NameValuePair>();
+        final List<NameValuePair> responseHeaders = new ArrayList<>();
         // TODO When ran with the IEDriver the IE11 is in a mysterious state after this test and cannot be restored
         // to normal in an automatic way.
         // All following tests will break until you restart your PC.

@@ -144,7 +144,7 @@ public class CSSStyleSheet extends SimpleScriptable {
     private com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList cssRules_;
 
     /** The CSS import rules and their corresponding stylesheets. */
-    private final Map<CSSImportRule, CSSStyleSheet> imports_ = new HashMap<CSSImportRule, CSSStyleSheet>();
+    private final Map<CSSImportRule, CSSStyleSheet> imports_ = new HashMap<>();
 
     /** This stylesheet's URI (used to resolved contained @import rules). */
     private String uri_;

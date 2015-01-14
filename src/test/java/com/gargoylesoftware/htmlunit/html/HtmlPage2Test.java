@@ -102,7 +102,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         webConnection.setResponse(new URL(URL_FIRST, "js.js"), js);
         webClient.setWebConnection(webConnection);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         webClient.getPage(URL_FIRST);
@@ -155,7 +155,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         webConnection.setResponse(URL_SECOND, js);
         webClient.setWebConnection(webConnection);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         webClient.getPage(URL_FIRST);
@@ -215,7 +215,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         webConnection.setResponse(URL_SECOND, js);
         webClient.setWebConnection(webConnection);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = webClient.getPage(URL_FIRST);

@@ -173,7 +173,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
         conn.setResponse(URL_SECOND, js, JAVASCRIPT_MIME_TYPE);
         client.setWebConnection(conn);
 
-        final List<String> actual = new ArrayList<String>();
+        final List<String> actual = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(actual));
 
         final HtmlPage page = client.getPage(URL_FIRST);
@@ -202,7 +202,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
         webConnection.setResponse(URL_SECOND, js);
         client.setWebConnection(webConnection);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         client.getPage(URL_FIRST);
@@ -242,7 +242,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
-        final ArrayList<NameValuePair> headers = new ArrayList<NameValuePair>();
+        final ArrayList<NameValuePair> headers = new ArrayList<>();
         conn.setResponse(URL_SECOND, (String) null, HttpStatus.SC_NO_CONTENT, "No Content", JAVASCRIPT_MIME_TYPE,
                 headers);
         client.setWebConnection(conn);
@@ -315,7 +315,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
         conn.setResponse(URL_THIRD, "varrrr foo;", JAVASCRIPT_MIME_TYPE);
         conn.setResponse(fourOhFour, "", 404, "Missing", JAVASCRIPT_MIME_TYPE, new ArrayList<NameValuePair>());
         client.setWebConnection(conn);
-        final List<String> actual = new ArrayList<String>();
+        final List<String> actual = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(actual));
         client.getOptions().setThrowExceptionOnScriptError(false);
         client.getPage(URL_FIRST);

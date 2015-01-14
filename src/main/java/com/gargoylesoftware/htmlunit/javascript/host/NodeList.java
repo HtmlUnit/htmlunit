@@ -125,7 +125,7 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
      */
     protected NodeList(final DomNode parentScope, final List<?> initialElements) {
         this(parentScope.getScriptObject());
-        cachedElements_ = new ArrayList<Object>(initialElements);
+        cachedElements_ = new ArrayList<>(initialElements);
     }
 
     /**
@@ -263,7 +263,7 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
      * @return the elements whose associated host objects are available through this collection
      */
     protected List<Object> computeElements() {
-        final List<Object> response = new ArrayList<Object>();
+        final List<Object> response = new ArrayList<>();
         final DomNode domNode = getDomNodeOrNull();
         if (domNode == null) {
             return response;
@@ -318,7 +318,7 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
         final List<Object> elements = getElements();
 
         // See if there is an element in the element array with the specified id.
-        final List<Object> matchingElements = new ArrayList<Object>();
+        final List<Object> matchingElements = new ArrayList<>();
 
         for (final Object next : elements) {
             if (next instanceof DomElement) {
@@ -467,7 +467,7 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
             return super.getIds();
         }
 
-        final List<String> idList = new ArrayList<String>();
+        final List<String> idList = new ArrayList<>();
         final List<Object> elements = getElements();
 
         if (getBrowserVersion().hasFeature(JS_NODE_LIST_ENUMERATE_FUNCTIONS)) {

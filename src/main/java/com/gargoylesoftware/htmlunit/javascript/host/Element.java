@@ -210,7 +210,7 @@ public class Element extends EventNode {
         final String tagNameLC = tagName.toLowerCase(Locale.ENGLISH);
 
         if (elementsByTagName_ == null) {
-            elementsByTagName_ = new HashMap<String, HTMLCollection>();
+            elementsByTagName_ = new HashMap<>();
         }
 
         HTMLCollection collection = elementsByTagName_.get(tagNameLC);

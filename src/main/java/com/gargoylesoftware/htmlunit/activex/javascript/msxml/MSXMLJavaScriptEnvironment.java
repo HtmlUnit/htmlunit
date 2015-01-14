@@ -53,9 +53,8 @@ public class MSXMLJavaScriptEnvironment {
     public MSXMLJavaScriptEnvironment(final BrowserVersion browserVersion) throws Exception {
         config_ = MSXMLConfiguration.getInstance(browserVersion);
 
-        final Map<String, ScriptableObject> prototypesPerJSName = new HashMap<String, ScriptableObject>();
-        final Map<Class<? extends MSXMLScriptable>, Scriptable> prototypes =
-                new HashMap<Class<? extends MSXMLScriptable>, Scriptable>();
+        final Map<String, ScriptableObject> prototypesPerJSName = new HashMap<>();
+        final Map<Class<? extends MSXMLScriptable>, Scriptable> prototypes = new HashMap<>();
 
         // put custom object to be called as very last prototype to call the fallback getter (if any)
         final Scriptable fallbackCaller = new FallbackCaller();

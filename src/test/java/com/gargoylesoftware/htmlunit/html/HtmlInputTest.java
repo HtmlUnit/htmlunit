@@ -133,7 +133,7 @@ public final class HtmlInputTest extends SimpleWebTestCase {
             + "<form id='form1'>\n"
             + "<input type='text' name='text1' onchange='alert(\"changed\")')>\n"
             + "</form></body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
         final HtmlForm form = page.getHtmlElementById("form1");
@@ -215,7 +215,7 @@ public final class HtmlInputTest extends SimpleWebTestCase {
             + "<form id='form1'>\n"
             + "<input type='file' name='text1' onchange='alert(\"changed\")')>\n"
             + "</form></body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         loadPage(htmlContent, collectedAlerts);
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
     }
@@ -234,7 +234,7 @@ public final class HtmlInputTest extends SimpleWebTestCase {
         final String[] expectedAlerts = {"text"};
         createTestPageForRealBrowserIfNeeded(htmlContent, expectedAlerts);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         loadPage(htmlContent, collectedAlerts);
     }
 

@@ -125,7 +125,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
      */
     public static class InMemoryAppender extends AppenderSkeleton {
 
-        private List<String> messages_ = new ArrayList<String>();
+        private List<String> messages_ = new ArrayList<>();
 
         /**
          * {@inheritDoc}

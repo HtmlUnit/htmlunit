@@ -66,7 +66,7 @@ public class LocationTest extends SimpleWebTestCase {
         webConnection.setResponse(new URL("http://myHostName/"), content);
         webClient.setWebConnection(webConnection);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         webClient.getPage("http://myHostName");
@@ -127,7 +127,7 @@ public class LocationTest extends SimpleWebTestCase {
         webConnection.setDefaultResponse(content);
         client.setWebConnection(webConnection);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         // Try page with only a server name
@@ -287,7 +287,7 @@ public class LocationTest extends SimpleWebTestCase {
         conn.setResponse(URL_FIRST, html);
         webClient.setWebConnection(conn);
 
-        final List<String> actual = new ArrayList<String>();
+        final List<String> actual = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(actual));
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
@@ -373,7 +373,7 @@ public class LocationTest extends SimpleWebTestCase {
     @Alerts("c")
     public void testLocationWithTarget() throws Exception {
         final WebClient client = getWebClient();
-        final List<String> alerts = new ArrayList<String>();
+        final List<String> alerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(alerts));
 
         final URL url = getClass().getResource("LocationTest_locationWithTarget_a.html");
@@ -394,7 +394,7 @@ public class LocationTest extends SimpleWebTestCase {
         assertNotNull(url);
 
         final WebClient client = getWebClient();
-        final List<String> alerts = new ArrayList<String>();
+        final List<String> alerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(alerts));
         client.getPage(url);
 

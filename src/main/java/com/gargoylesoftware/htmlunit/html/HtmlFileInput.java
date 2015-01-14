@@ -79,7 +79,7 @@ public class HtmlFileInput extends HtmlInput {
             final Map<String, DomAttr> attributes) {
 
         // we need a copy here because we have to check attributes later again
-        final Map<String, DomAttr> result = new HashMap<String, DomAttr>(attributes);
+        final Map<String, DomAttr> result = new HashMap<>(attributes);
         final DomAttr newAttr = new DomAttr(page, null, "value", "", true);
         result.put("value", newAttr);
 
@@ -119,7 +119,7 @@ public class HtmlFileInput extends HtmlInput {
             return new NameValuePair[] {new KeyDataPair(getNameAttribute(), new File(""), null, null)};
         }
 
-        final List<NameValuePair> list = new ArrayList<NameValuePair>();
+        final List<NameValuePair> list = new ArrayList<>();
         for (String value : valueAttribute.split("§")) {
             File file = null;
             // to tolerate file://

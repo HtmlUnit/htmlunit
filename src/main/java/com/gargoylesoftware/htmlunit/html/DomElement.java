@@ -56,7 +56,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
     private NamedAttrNodeMapImpl attributes_ = new NamedAttrNodeMapImpl(this, isAttributeCaseSensitive());
 
     /** The map holding the namespaces, keyed by URI. */
-    private Map<String, String> namespaces_ = new HashMap<String, String>();
+    private Map<String, String> namespaces_ = new HashMap<>();
 
     /**
      * Creates an instance of a DOM element that can have a namespace.
@@ -599,7 +599,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     public static final NamedAttrNodeMapImpl EMPTY_MAP = new NamedAttrNodeMapImpl();
 
     private final Map<String, DomAttr> map_;
-    private final List<String> attrPositions_ = new ArrayList<String>();
+    private final List<String> attrPositions_ = new ArrayList<>();
     private final DomElement domNode_;
     private final boolean caseSensitive_;
 

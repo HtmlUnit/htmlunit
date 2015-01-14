@@ -190,9 +190,8 @@ public class JavaScriptEngine {
     private void init(final WebWindow webWindow, final Context context) throws Exception {
         final WebClient webClient = webWindow.getWebClient();
         final BrowserVersion browserVersion = webClient.getBrowserVersion();
-        final Map<Class<? extends SimpleScriptable>, Scriptable> prototypes =
-            new HashMap<Class<? extends SimpleScriptable>, Scriptable>();
-        final Map<String, ScriptableObject> prototypesPerJSName = new HashMap<String, ScriptableObject>();
+        final Map<Class<? extends SimpleScriptable>, Scriptable> prototypes = new HashMap<>();
+        final Map<String, ScriptableObject> prototypesPerJSName = new HashMap<>();
         final Window window = new Window();
         context.initStandardObjects(window);
         if (browserVersion.hasFeature(JS_CONSTRUCTOR)) {
@@ -779,7 +778,7 @@ public class JavaScriptEngine {
     public void addPostponedAction(final PostponedAction action) {
         List<PostponedAction> actions = postponedActions_.get();
         if (actions == null) {
-            actions = new ArrayList<PostponedAction>();
+            actions = new ArrayList<>();
             postponedActions_.set(actions);
         }
         actions.add(action);

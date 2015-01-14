@@ -314,7 +314,7 @@ public class Range extends SimpleScriptable {
      * @return the ancestors of the specified node
      */
     private List<Node> getAncestorsAndSelf(final Node node) {
-        final List<Node> ancestors = new ArrayList<Node>();
+        final List<Node> ancestors = new ArrayList<>();
         Node ancestor = node;
         while (ancestor != null) {
             ancestors.add(ancestor);

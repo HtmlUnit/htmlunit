@@ -237,7 +237,7 @@ public class Geolocation extends SimpleScriptable {
     }
 
     private List<String> runCommand(final String command) throws IOException {
-        final List<String> list = new ArrayList<String>();
+        final List<String> list = new ArrayList<>();
         final Process p = Runtime.getRuntime().exec(command);
         final BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
         String line;

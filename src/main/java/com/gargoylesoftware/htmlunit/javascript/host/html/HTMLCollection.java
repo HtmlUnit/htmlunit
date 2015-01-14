@@ -125,7 +125,7 @@ public class HTMLCollection extends NodeList {
      */
     @Override
     protected List<Object> computeElements() {
-        final List<Object> response = new ArrayList<Object>();
+        final List<Object> response = new ArrayList<>();
         final DomNode domNode = getDomNodeOrNull();
         if (domNode == null) {
             return response;
@@ -181,7 +181,7 @@ public class HTMLCollection extends NodeList {
         final List<Object> elements = getElements();
 
         // See if there is an element in the element array with the specified id.
-        final List<Object> matchingElements = new ArrayList<Object>();
+        final List<Object> matchingElements = new ArrayList<>();
 
         for (final Object next : elements) {
             if (next instanceof DomElement) {
@@ -372,7 +372,7 @@ public class HTMLCollection extends NodeList {
             return super.getIds();
         }
 
-        final List<String> idList = new ArrayList<String>();
+        final List<String> idList = new ArrayList<>();
         final List<Object> elements = getElements();
 
         if (getBrowserVersion().hasFeature(JS_NODE_LIST_ENUMERATE_FUNCTIONS)) {
@@ -458,7 +458,7 @@ class HTMLSubCollection extends HTMLCollection {
 
     @Override
     protected List<Object> computeElements() {
-        final List<Object> list = new ArrayList<Object>();
+        final List<Object> list = new ArrayList<>();
         for (final Object o : mainCollection_.getElements()) {
             if (isMatching((DomNode) o)) {
                 list.add(o);

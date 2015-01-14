@@ -29,7 +29,7 @@ import java.util.Map;
 public class MemoryLeakDetector {
 
     /** Weak references to the objects being tracked by the detector. */
-    private Map<String , WeakReference<Object>> map_ = new HashMap<String , WeakReference<Object>>();
+    private Map<String , WeakReference<Object>> map_ = new HashMap<>();
 
     /**
      * Registers the specified object with the memory leak detector. Once an object has been registered

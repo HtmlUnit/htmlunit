@@ -87,7 +87,7 @@ public class ObjectsTest extends SimpleWebTestCase {
         Assert.assertEquals(IE8_SIMULATED_.size(), FF24_SIMULATED_.size());
         Assert.assertEquals(IE8_SIMULATED_.size(), FF31_SIMULATED_.size());
         Assert.assertEquals(IE8_SIMULATED_.size(), CHROME_SIMULATED_.size());
-        final Collection<Object[]> list = new ArrayList<Object[]>();
+        final Collection<Object[]> list = new ArrayList<>();
         for (final String line : IE8_) {
             final String name = line.substring(0, line.indexOf(':'));
 //            list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_8});

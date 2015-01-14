@@ -279,7 +279,7 @@ public class DomTextTest extends SimpleWebTestCase {
             + "  <div id='myDiv'></div>\n"
             + "</body></html>";
         final String[] expectedAlerts = {"3", "4", "456"};
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }

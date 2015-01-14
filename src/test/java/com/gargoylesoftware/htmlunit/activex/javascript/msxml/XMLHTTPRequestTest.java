@@ -870,7 +870,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "  }\n"
             + CREATE_XMLHTTPREQUEST_FUNCTION;
 
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/protected/token", BasicAuthenticationServlet.class);
 
         loadPageWithAlerts2(createTestHTML(html), servlets);
@@ -1425,7 +1425,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "  }\n"
             + CREATE_XMLHTTPREQUEST_FUNCTION;
 
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/bounce", BounceServlet.class);
 
         loadPageWithAlerts2(createTestHTML(html), servlets);

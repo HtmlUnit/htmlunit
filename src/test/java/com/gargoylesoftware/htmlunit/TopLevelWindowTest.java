@@ -262,7 +262,7 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
     @Test
     public void onBeforeUnloadCalledOnClose() throws Exception {
         final String html = "<html><body onbeforeunload='alert(7)'>abc</body></html>";
-        final List<String> alerts = new ArrayList<String>();
+        final List<String> alerts = new ArrayList<>();
         final HtmlPage page = loadPage(html, alerts);
         assertTrue(alerts.isEmpty());
         final TopLevelWindow w = (TopLevelWindow) page.getEnclosingWindow();
@@ -291,7 +291,7 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
             + "  attachEvent('onunload', f);\n"
             + "</script></head>\n"
             + "<body></body></html>";
-        final List<String> alerts = new ArrayList<String>();
+        final List<String> alerts = new ArrayList<>();
         final HtmlPage page = loadPage(html, alerts);
         assertTrue(alerts.isEmpty());
         final TopLevelWindow w = (TopLevelWindow) page.getEnclosingWindow();

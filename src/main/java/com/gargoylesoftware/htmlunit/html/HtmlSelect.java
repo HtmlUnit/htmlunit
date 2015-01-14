@@ -116,7 +116,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
         List<HtmlOption> result;
         if (isMultipleSelectEnabled()) {
             // Multiple selections possible.
-            result = new ArrayList<HtmlOption>();
+            result = new ArrayList<>();
             for (final HtmlElement element : getHtmlElementDescendants()) {
                 if (element instanceof HtmlOption && ((HtmlOption) element).isSelected()) {
                     result.add((HtmlOption) element);
@@ -125,7 +125,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
         }
         else {
             // Only a single selection is possible.
-            result = new ArrayList<HtmlOption>(1);
+            result = new ArrayList<>(1);
             HtmlOption lastSelected = null;
             for (final HtmlElement element : getHtmlElementDescendants()) {
                 if (element instanceof HtmlOption) {

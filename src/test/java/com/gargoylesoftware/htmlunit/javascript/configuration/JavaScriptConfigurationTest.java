@@ -114,7 +114,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
     public void jsxClasses() {
         String javaScriptPackageName = JavaScriptConfiguration.class.getPackage().getName();
         javaScriptPackageName = javaScriptPackageName.substring(0, javaScriptPackageName.lastIndexOf('.'));
-        final List<String> foundJsxClasses = new ArrayList<String>();
+        final List<String> foundJsxClasses = new ArrayList<>();
         for (final String className : getClassesForPackage(javaScriptPackageName)) {
             if (!className.contains("$")) {
                 Class<?> klass = null;
@@ -132,7 +132,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
                 }
             }
         }
-        final List<String> definedClasses = new ArrayList<String>();
+        final List<String> definedClasses = new ArrayList<>();
         for (final Class<?> klass : JavaScriptConfiguration.CLASSES_) {
             definedClasses.add(klass.getName());
         }
@@ -148,7 +148,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
      * @return a list of class names
      */
     public static List<String> getClassesForPackage(final String packageName) {
-        final List<String> list = new ArrayList<String>();
+        final List<String> list = new ArrayList<>();
 
         File directory = null;
         final String relPath = packageName.replace('.', '/') + '/' + JavaScriptEngine.class.getSimpleName() + ".class";

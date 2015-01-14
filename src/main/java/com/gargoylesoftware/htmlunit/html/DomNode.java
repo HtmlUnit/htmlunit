@@ -550,7 +550,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @return a list of the ancestors with the root at the first position
      */
     protected List<Node> getAncestors(final boolean includeSelf) {
-        final List<Node> list = new ArrayList<Node>();
+        final List<Node> list = new ArrayList<>();
         if (includeSelf) {
             list.add(this);
         }
@@ -1480,7 +1480,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @return map of prefix/namespace value pairs
      */
     private static Map<String, String> parseSelectionNamespaces(final String selectionNS) {
-        final Map<String, String> result = new HashMap<String, String>();
+        final Map<String, String> result = new HashMap<>();
         final String[] toks = selectionNS.split("\\s");
         for (final String tok : toks) {
             if (tok.startsWith("xmlns=")) {
@@ -1699,7 +1699,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     private List<DomChangeListener> safeGetDomListeners() {
         synchronized (domListeners_lock_) {
             if (domListeners_ != null) {
-                return new ArrayList<DomChangeListener>(domListeners_);
+                return new ArrayList<>(domListeners_);
             }
             return null;
         }
@@ -1712,7 +1712,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @return list of all found nodes
      */
     public DomNodeList<DomNode> querySelectorAll(final String selectors) {
-        final List<DomNode> elements = new ArrayList<DomNode>();
+        final List<DomNode> elements = new ArrayList<>();
         try {
             final WebClient webClient = getPage().getWebClient();
             final AtomicBoolean errorOccured = new AtomicBoolean(false);

@@ -125,8 +125,8 @@ public class HTMLAllCollection extends HTMLCollection {
         final List<Object> elements = getElements();
 
         // See if there is an element in the element array with the specified id.
-        final List<DomElement> matchingByName = new ArrayList<DomElement>();
-        final List<DomElement> matchingById = new ArrayList<DomElement>();
+        final List<DomElement> matchingByName = new ArrayList<>();
+        final List<DomElement> matchingById = new ArrayList<>();
 
         final BrowserVersion browser = getBrowserVersion();
         final boolean byName = !browser.hasFeature(HTMLALLCOLLECTION_DO_NOT_CHECK_NAME);

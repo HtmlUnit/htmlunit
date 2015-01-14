@@ -156,8 +156,8 @@ public class HtmlPage extends SgmlPage {
     private int inlineSnippetParserCount_;
     private Collection<HtmlAttributeChangeListener> attributeListeners_;
     private final Object lock_ = new String(); // used for synchronization
-    private final List<Range> selectionRanges_ = new ArrayList<Range>(3);
-    private final List<PostponedAction> afterLoadActions_ = new ArrayList<PostponedAction>();
+    private final List<Range> selectionRanges_ = new ArrayList<>(3);
+    private final List<PostponedAction> afterLoadActions_ = new ArrayList<>();
     private boolean cleaning_;
     private HtmlBase base_;
     private URL baseUrl_;
@@ -286,7 +286,7 @@ public class HtmlPage extends SgmlPage {
             executeEventHandlersIfNeeded(Event.TYPE_LOAD);
         }
 
-        final List<PostponedAction> actions = new ArrayList<PostponedAction>(afterLoadActions_);
+        final List<PostponedAction> actions = new ArrayList<>(afterLoadActions_);
         afterLoadActions_.clear();
         try {
             for (final PostponedAction action : actions) {
@@ -772,7 +772,7 @@ public class HtmlPage extends SgmlPage {
      * @return the list of id's
      */
     public List<String> getTabbableElementIds() {
-        final List<String> list = new ArrayList<String>();
+        final List<String> list = new ArrayList<>();
 
         for (final HtmlElement element : getTabbableElements()) {
             list.add(element.getAttribute("id"));
@@ -811,7 +811,7 @@ public class HtmlPage extends SgmlPage {
     public List<HtmlElement> getTabbableElements() {
         final List<String> tags = Arrays
             .asList(new String[] {"a", "area", "button", "input", "object", "select", "textarea"});
-        final List<HtmlElement> tabbableElements = new ArrayList<HtmlElement>();
+        final List<HtmlElement> tabbableElements = new ArrayList<>();
         for (final HtmlElement element : getHtmlElementDescendants()) {
             final String tagName = element.getTagName();
             if (tags.contains(tagName)) {
@@ -907,7 +907,7 @@ public class HtmlPage extends SgmlPage {
      * @return the elements that are assigned to the specified accesskey
      */
     public List<HtmlElement> getHtmlElementsByAccessKey(final char accessKey) {
-        final List<HtmlElement> elements = new ArrayList<HtmlElement>();
+        final List<HtmlElement> elements = new ArrayList<>();
 
         final String searchString = Character.toString(accessKey).toLowerCase(Locale.ENGLISH);
         final List<String> acceptableTagNames = Arrays.asList(
@@ -1098,7 +1098,7 @@ public class HtmlPage extends SgmlPage {
         final Cache cache = client.getCache();
 
         final WebRequest request = new WebRequest(url, getWebClient().getBrowserVersion().getScriptAcceptHeader());
-        request.setAdditionalHeaders(new HashMap<String, String>(referringRequest.getAdditionalHeaders()));
+        request.setAdditionalHeaders(new HashMap<>(referringRequest.getAdditionalHeaders()));
         request.setAdditionalHeader("Referer", referringRequest.getUrl().toString());
         request.setAdditionalHeader("Accept", client.getBrowserVersion().getScriptAcceptHeader());
 
@@ -1512,7 +1512,7 @@ public class HtmlPage extends SgmlPage {
      * @return a list of {@link FrameWindow}
      */
     public List<FrameWindow> getFrames() {
-        final List<FrameWindow> list = new ArrayList<FrameWindow>(frameElements_.size());
+        final List<FrameWindow> list = new ArrayList<>(frameElements_.size());
         for (final BaseFrameElement frameElement : frameElements_) {
             list.add(frameElement.getEnclosedWindow());
         }
@@ -1754,7 +1754,7 @@ public class HtmlPage extends SgmlPage {
     public List<DomElement> getElementsByName(final String name) {
         final SortedSet<DomElement> elements = nameMap_.get(name);
         if (elements != null) {
-            return new ArrayList<DomElement>(elements);
+            return new ArrayList<>(elements);
         }
         return Collections.emptyList();
     }
@@ -1769,7 +1769,7 @@ public class HtmlPage extends SgmlPage {
     public List<DomElement> getElementsByIdAndOrName(final String idAndOrName) {
         final Collection<DomElement> list1 = idMap_.get(idAndOrName);
         final Collection<DomElement> list2 = nameMap_.get(idAndOrName);
-        final List<DomElement> list = new ArrayList<DomElement>();
+        final List<DomElement> list = new ArrayList<>();
         if (list1 != null) {
             list.addAll(list1);
         }
@@ -2118,8 +2118,8 @@ public class HtmlPage extends SgmlPage {
     protected HtmlPage clone() {
         final HtmlPage result = (HtmlPage) super.clone();
         result.elementWithFocus_ = null;
-        result.idMap_ = new HashMap<String, SortedSet<DomElement>>();
-        result.nameMap_ = new HashMap<String, SortedSet<DomElement>>();
+        result.idMap_ = new HashMap<>();
+        result.nameMap_ = new HashMap<>();
         return result;
     }
 
@@ -2219,7 +2219,7 @@ public class HtmlPage extends SgmlPage {
     private List<HtmlAttributeChangeListener> safeGetAttributeListeners() {
         synchronized (lock_) {
             if (attributeListeners_ != null) {
-                return new ArrayList<HtmlAttributeChangeListener>(attributeListeners_);
+                return new ArrayList<>(attributeListeners_);
             }
             return null;
         }
@@ -2393,7 +2393,7 @@ public class HtmlPage extends SgmlPage {
      */
     public Map<String, String> getNamespaces() {
         final org.w3c.dom.NamedNodeMap attributes = getDocumentElement().getAttributes();
-        final Map<String, String> namespaces = new HashMap<String, String>();
+        final Map<String, String> namespaces = new HashMap<>();
         for (int i = 0; i < attributes.getLength(); i++) {
             final Attr attr = (Attr) attributes.item(i);
             String name = attr.getName();

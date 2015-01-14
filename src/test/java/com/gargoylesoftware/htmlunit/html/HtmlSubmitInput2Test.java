@@ -100,7 +100,7 @@ public class HtmlSubmitInput2Test extends SimpleWebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
         page.getHtmlElementById("myInput").type('\n');
 

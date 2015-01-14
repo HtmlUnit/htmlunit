@@ -313,7 +313,7 @@ public class XMLDOMElement extends XMLDOMNode {
         final String tagNameTrimmed = tagName.trim();
 
         if (elementsByTagName_ == null) {
-            elementsByTagName_ = new HashMap<String, XMLDOMNodeList>();
+            elementsByTagName_ = new HashMap<>();
         }
 
         XMLDOMNodeList collection = elementsByTagName_.get(tagNameTrimmed);
@@ -335,7 +335,7 @@ public class XMLDOMElement extends XMLDOMNode {
             collection = new XMLDOMNodeList(node, false, description) {
                 @Override
                 protected List<DomNode> computeElements() {
-                    final List<DomNode> response = new ArrayList<DomNode>();
+                    final List<DomNode> response = new ArrayList<>();
                     final DomNode domNode = getDomNodeOrNull();
                     if (domNode == null) {
                         return response;

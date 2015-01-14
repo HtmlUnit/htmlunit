@@ -60,7 +60,7 @@ public class HtmlImageInputTest extends SimpleWebTestCase {
         final HtmlPage secondPage = (HtmlPage) imageInput.click(100, 200);
         assertNotNull(secondPage);
 
-        final List<NameValuePair> expectedPairs = new ArrayList<NameValuePair>();
+        final List<NameValuePair> expectedPairs = new ArrayList<>();
         expectedPairs.add(new NameValuePair("button.x", "100"));
         expectedPairs.add(new NameValuePair("button.y", "200"));
 

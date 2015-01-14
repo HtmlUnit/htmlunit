@@ -109,7 +109,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static String CHROME_BIN_;
 
     /** The driver cache. */
-    protected static final Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<BrowserVersion, WebDriver>();
+    protected static final Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<>();
     private static Server STATIC_SERVER_;
     // second server for cross-origin tests.
     private static Server STATIC_SERVER2_;
@@ -449,7 +449,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
 
             // copy parameters
-            final List<NameValuePair> requestParameters = new ArrayList<NameValuePair>();
+            final List<NameValuePair> requestParameters = new ArrayList<>();
             try {
                 for (final Enumeration<String> paramNames = request.getParameterNames();
                         paramNames.hasMoreElements();) {
@@ -724,7 +724,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     @SuppressWarnings("unchecked")
     protected List<String> getCollectedAlerts(final WebDriver driver) throws Exception {
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
 
         final Object result = jsExecutor.executeScript("return top.__huCatchedAlerts");

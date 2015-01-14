@@ -55,7 +55,7 @@ public class XHtmlPageTest extends SimpleWebTestCase {
             + "</html>";
 
         final WebClient client = getWebClient();
-        final List<String> actual = new ArrayList<String>();
+        final List<String> actual = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(actual));
 
         final MockWebConnection conn = new MockWebConnection();

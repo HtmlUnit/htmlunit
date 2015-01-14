@@ -260,7 +260,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         Pattern.compile("(top|bottom|center)\\s*(\\d+\\s*(%|px|cm|mm|in|pt|pc|em|ex)|left|right|center)");
 
     private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
-    private static final Map<String, String> CSSColors_ = new HashMap<String, String>();
+    private static final Map<String, String> CSSColors_ = new HashMap<>();
 
     // use plain old hashtable because this is synchronized and does not introduce one more
     // indirection layer (hope this is a bit faster)
@@ -2455,7 +2455,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
 
     @Override
     public Object[] getIds() {
-        final List<Object> ids = new ArrayList<Object>();
+        final List<Object> ids = new ArrayList<>();
         for (final Definition styleAttribute : StyleAttributes.getDefinitions(getBrowserVersion())) {
             ids.add(styleAttribute.getPropertyName());
         }

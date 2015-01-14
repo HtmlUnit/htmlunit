@@ -214,7 +214,7 @@ public class HtmlApplet extends HtmlElement {
      */
     @SuppressWarnings("unchecked")
     private synchronized void setupAppletIfNeeded() throws IOException {
-        final HashMap<String, String> params = new HashMap<String, String>();
+        final HashMap<String, String> params = new HashMap<>();
         params.put("name", getNameAttribute());
 
         params.put("object", getObjectAttribute());

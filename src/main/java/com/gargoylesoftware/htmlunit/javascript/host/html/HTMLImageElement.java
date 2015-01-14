@@ -59,7 +59,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLImageElement extends HTMLElement {
     private static final Map<String, String> NORMALIZED_ALIGN_VALUES;
     static {
-        NORMALIZED_ALIGN_VALUES = new HashMap<String, String>();
+        NORMALIZED_ALIGN_VALUES = new HashMap<>();
         NORMALIZED_ALIGN_VALUES.put("center", "center");
         NORMALIZED_ALIGN_VALUES.put("left", "left");
         NORMALIZED_ALIGN_VALUES.put("right", "right");

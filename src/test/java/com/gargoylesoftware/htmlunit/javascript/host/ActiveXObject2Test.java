@@ -130,7 +130,7 @@ public class ActiveXObject2Test extends WebDriverTestCase {
 //
 //        final WebClient client = getWebClient();
 //        client.getOptions().setActiveXNative(true);
-//        final List<String> collectedAlerts = new ArrayList<String>();
+//        final List<String> collectedAlerts = new ArrayList<>();
 //        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 //
 //        final MockWebConnection webConnection = new MockWebConnection();
@@ -193,7 +193,7 @@ public class ActiveXObject2Test extends WebDriverTestCase {
 //
 //        final WebClient client = getWebClient();
 //        client.getOptions().setActiveXNative(true);
-//        final List<String> collectedAlerts = new ArrayList<String>();
+//        final List<String> collectedAlerts = new ArrayList<>();
 //        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 //
 //        final MockWebConnection webConnection = new MockWebConnection();
@@ -233,7 +233,7 @@ public class ActiveXObject2Test extends WebDriverTestCase {
 //
 //        final WebClient client = getWebClient();
 //        client.getOptions().setActiveXNative(true);
-//        final List<String> collectedAlerts = new ArrayList<String>();
+//        final List<String> collectedAlerts = new ArrayList<>();
 //        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 //
 //        final MockWebConnection webConnection = new MockWebConnection();

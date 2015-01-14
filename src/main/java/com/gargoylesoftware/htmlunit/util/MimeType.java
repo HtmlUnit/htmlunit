@@ -27,7 +27,7 @@ public final class MimeType {
     private static final Map<String, String> type2extension = buildMap();
 
     private static Map<String, String> buildMap() {
-        final Map<String, String> map = new HashMap<String, String>();
+        final Map<String, String> map = new HashMap<>();
         map.put("application/pdf", "pdf");
         map.put("application/x-javascript", "js");
         map.put("image/gif", "gif");

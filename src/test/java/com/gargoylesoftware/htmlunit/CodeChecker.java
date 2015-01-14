@@ -34,7 +34,7 @@ package com.gargoylesoftware.htmlunit;
 public class CodeChecker {
 
     /*
-    private List<String> errors_ = new ArrayList<String>();
+    private List<String> errors_ = new ArrayList<>();
     private ASTParser parser_ = ASTParser.newParser(AST.JLS3);
 
     @After

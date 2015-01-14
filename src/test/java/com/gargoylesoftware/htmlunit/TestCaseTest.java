@@ -63,7 +63,7 @@ public final class TestCaseTest {
     }
 
     private void generateTestForHtmlElements(final String relativePath, final String line, final List<String> lines) {
-        final List<String> allExpectedLines = new ArrayList<String>();
+        final List<String> allExpectedLines = new ArrayList<>();
         for (final String tag : HtmlPageTest.HTML_TAGS_) {
             allExpectedLines.add(line.replace("xmp", tag));
         }

@@ -63,7 +63,7 @@ public class HtmlTableRow extends HtmlElement {
      * @see #getCellIterator
      */
     public List<HtmlTableCell> getCells() {
-        final List<HtmlTableCell> result = new ArrayList<HtmlTableCell>();
+        final List<HtmlTableCell> result = new ArrayList<>();
         for (final HtmlTableCell cell : getCellIterator()) {
             result.add(cell);
         }

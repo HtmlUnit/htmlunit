@@ -69,7 +69,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
             = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -103,7 +103,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -137,7 +137,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         client.getOptions().setJavaScriptEnabled(false);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -171,7 +171,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
             + "<a href='javascript:alert(\"clicked\")' id='a2'>link to foo2</a>\n"
             + "<a href='http://www.foo3.com' id='a3'>link to foo3</a>\n"
             + "</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
         final HtmlAnchor anchor = page.getHtmlElementById("a2");
@@ -193,7 +193,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
             = "<html><head><title>foo</title></head><body>\n"
             + "<a href='JAVAscrIpt:alert(\"clicked\")' id='a2'>link to foo2</a>\n"
             + "</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
         final HtmlAnchor anchor = page.getHtmlElementById("a2");
@@ -215,7 +215,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
             = "<html><head><title>foo</title></head><body>\n"
             + "<a href='  javascript:alert(\"clicked\")' id='a2'>link to foo2</a>\n"
             + "</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
 
         final HtmlAnchor anchor = page.getHtmlElementById("a2");
@@ -242,7 +242,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         client.getOptions().setJavaScriptEnabled(false);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
@@ -329,7 +329,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
             + "<a href='javascript:hello%28%29' id='a3'>a3</a>\n"
             + "</body></html>";
 
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
 
@@ -411,7 +411,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final WebClient client = getWebClientWithMockWebConnection();
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = loadPage(html);
@@ -438,7 +438,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
         final String htmlPopup = "<html><head><title>Popup</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
+        final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
