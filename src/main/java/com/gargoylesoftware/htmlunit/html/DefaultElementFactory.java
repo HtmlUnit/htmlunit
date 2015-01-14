@@ -148,18 +148,6 @@ class DefaultElementFactory implements ElementFactory {
             tagName = qualifiedName.substring(colonIndex + 1).toLowerCase(Locale.ENGLISH);
         }
 
-//        final Class<? extends HtmlElement> klass = JavaScriptConfiguration.getHtmlTagNameMapping().get(tagName);
-//        if (klass != null) {
-//            String jsClassName = JavaScriptConfiguration.getHtmlJavaScriptMapping().get(klass).getName();
-//            jsClassName = jsClassName.substring(jsClassName.lastIndexOf('.') + 1);
-//            final ClassConfiguration config =
-//                JavaScriptConfiguration.getInstance(page.getWebClient().getBrowserVersion())
-//                    .getClassConfiguration(jsClassName);
-//            if (config == null) {
-//                return UnknownElementFactory.instance.createElementNS(
-//                        page, namespaceURI, qualifiedName, attributes);
-//            }
-//        }
         switch (tagName) {
             case HtmlAbbreviated.TAG_NAME:
                 element = new HtmlAbbreviated(qualifiedName, page, attributeMap);
