@@ -49,7 +49,6 @@ import org.apache.http.message.BasicStatusLine;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -279,7 +278,6 @@ public class HttpWebConnectionTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     public void buildFilePart() throws Exception {
         final String encoding = "ISO8859-1";
         final KeyDataPair pair = new KeyDataPair("myFile", new File("this/doesnt_exist.txt"), "text/plain", encoding);
@@ -287,9 +285,15 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         new HttpWebConnection(getWebClient()).buildFilePart(pair, builder);
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         builder.build().writeTo(baos);
-        //FIMXE Last changes does not make it a very useful test...
-        final String expected = "";
-        Assert.assertEquals(expected, baos.toString(encoding));
+        final String part = baos.toString(encoding);
+
+        final String expected = ("--(.*)\r\n"
+                + "Content-Disposition: form-data; name=\"myFile\"; filename=\"doesnt_exist.txt\"\r\n"
+                + "Content-Type: text/plain\r\n"
+                + "\r\n"
+                + "\r\n"
+                + "--\\1--\r\n");
+        Assert.assertTrue(part, part.matches(expected));
     }
 
     /**
