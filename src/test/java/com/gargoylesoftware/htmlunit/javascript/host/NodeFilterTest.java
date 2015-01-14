@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -64,7 +61,6 @@ public class NodeFilterTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "4294967295",
             IE8 = "exception")
-    @NotYetImplemented(CHROME)
     public void constants_SHOW_ALL() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
