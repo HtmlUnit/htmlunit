@@ -35,7 +35,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -76,7 +75,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@Ignore
 @RunWith(BrowserRunner.class)
 public class JavaScriptEngineTest extends SimpleWebTestCase {
 
@@ -375,7 +373,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         webConnection.setResponse(
             new URL(getDefaultUrl(), "foo.js"),
-        // make SJIS bytes as responsebody
+            // make SJIS bytes as responsebody
             new String(jsContent.getBytes("SJIS"), "8859_1"), "text/javascript");
 
         /*
