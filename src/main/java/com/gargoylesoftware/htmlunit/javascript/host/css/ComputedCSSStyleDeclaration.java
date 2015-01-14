@@ -131,7 +131,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * Local modifications maintained here rather than in the element. We use a sorted
      * map so that results are deterministic and thus easily testable.
      */
-    private final SortedMap<String, StyleElement> localModifications_ = new TreeMap<String, StyleElement>();
+    private final SortedMap<String, StyleElement> localModifications_ = new TreeMap<>();
 
     /** The computed, cached width of the element to which this computed style belongs (no padding, borders, etc). */
     private Integer width_;

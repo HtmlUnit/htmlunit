@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.PropertiesTest;
  */
 public class NotYetImplementedTest {
 
-    private Set<String> entries_ = new TreeSet<String>();
+    private Set<String> entries_ = new TreeSet<>();
 
     /**
      * @throws Exception if the test fails

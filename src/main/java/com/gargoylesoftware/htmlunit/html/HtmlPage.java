@@ -149,7 +149,7 @@ public class HtmlPage extends SgmlPage {
     private Map<String, SortedSet<DomElement>> idMap_ = new Hashtable<String, SortedSet<DomElement>>();
     private Map<String, SortedSet<DomElement>> nameMap_ = new Hashtable<String, SortedSet<DomElement>>();
 
-    private SortedSet<BaseFrameElement> frameElements_ = new TreeSet<BaseFrameElement>(documentPositionComparator);
+    private SortedSet<BaseFrameElement> frameElements_ = new TreeSet<>(documentPositionComparator);
     private HtmlElement elementWithFocus_;
     private int parserCount_;
     private int snippetParserCount_;
@@ -1874,7 +1874,7 @@ public class HtmlPage extends SgmlPage {
         if (DomElement.ATTRIBUTE_NOT_DEFINED != value) {
             SortedSet<DomElement> elements = map.get(value);
             if (elements == null) {
-                elements = new TreeSet<DomElement>(documentPositionComparator);
+                elements = new TreeSet<>(documentPositionComparator);
                 elements.add(element);
                 map.put(value, elements);
             }

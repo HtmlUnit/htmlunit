@@ -160,10 +160,10 @@ public final class JQueryExtractor {
         // gather all the tests (some tests don't get executed for all browsers)
         final List<Test> allTests = computeTestsList(browserExpectations);
 
-        final Collection<String> availableBrowserNames = new TreeSet<String>(browserExpectations.keySet());
+        final Collection<String> availableBrowserNames = new TreeSet<>(browserExpectations.keySet());
         for (final Test test : allTests) {
-            final Map<String, String> testExpectation = new TreeMap<String, String>();
-            final Map<Integer, List<String>> lineToBrowser = new TreeMap<Integer, List<String>>();
+            final Map<String, String> testExpectation = new TreeMap<>();
+            final Map<Integer, List<String>> lineToBrowser = new TreeMap<>();
             for (final String browserName : availableBrowserNames) {
                 final Expectation expectation = browserExpectations.get(browserName).getExpectation(test);
                 if (expectation != null) {

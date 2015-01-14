@@ -161,7 +161,7 @@ public class UrlFetchWebConnectionTest extends WebServerTestCase {
 
         final StringBuilder sb = new StringBuilder();
         // ensure ordering for comparison
-        final Map<String, String> headers = new TreeMap<String, String>(request.getAdditionalHeaders());
+        final Map<String, String> headers = new TreeMap<>(request.getAdditionalHeaders());
         for (final Entry<String, String> headerEntry : headers.entrySet()) {
             sb.append(headerEntry.getKey());
             sb.append(": ");

@@ -94,7 +94,7 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         final List<String> caseInsensitiveHeaders = Arrays.asList("connection");
 
         // ensure ordering for comparison
-        final Map<String, String> headers = new TreeMap<String, String>(request.getAdditionalHeaders());
+        final Map<String, String> headers = new TreeMap<>(request.getAdditionalHeaders());
 
         final StringBuilder sb = new StringBuilder();
         for (final Entry<String, String> headerEntry : headers.entrySet()) {

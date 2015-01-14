@@ -642,7 +642,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
 
     private void writeToElement(final Map<String, StyleElement> styleMap) {
         final StringBuilder buffer = new StringBuilder();
-        final SortedSet<StyleElement> sortedValues = new TreeSet<StyleElement>(styleMap.values());
+        final SortedSet<StyleElement> sortedValues = new TreeSet<>(styleMap.values());
         for (final StyleElement e : sortedValues) {
             if (buffer.length() > 0) {
                 buffer.append(" ");
