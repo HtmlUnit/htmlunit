@@ -26,7 +26,6 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.ComparisonFailure;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -4481,8 +4480,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2, 0, 2")
-    @Ignore
+    @Alerts("0, 2, 2")
     public void ajax__jQuery_ajax___HEAD_requests() throws Exception {
         runTest("ajax: jQuery.ajax - HEAD requests");
     }
