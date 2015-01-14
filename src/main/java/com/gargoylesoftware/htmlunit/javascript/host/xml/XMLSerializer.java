@@ -60,7 +60,7 @@ public class XMLSerializer extends SimpleScriptable {
 
     // this is a bit strange but it is the way FF works
     // output of empty tags are not allowed for these HTML tags
-    private static final Set<String> NON_EMPTY_TAGS = new HashSet<String>(Arrays.asList(
+    private static final Set<String> NON_EMPTY_TAGS = new HashSet<>(Arrays.asList(
             HtmlAbbreviated.TAG_NAME, HtmlAcronym.TAG_NAME,
             HtmlAnchor.TAG_NAME, HtmlApplet.TAG_NAME, HtmlAddress.TAG_NAME, HtmlAudio.TAG_NAME,
             HtmlBackgroundSound.TAG_NAME,

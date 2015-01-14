@@ -181,7 +181,7 @@ public class HtmlTextInputTest extends SimpleWebTestCase {
             + "<input id='myButton' type='button' value='Test' onclick='test()'>\n"
             + "</body></html>";
 
-        final List<String> alerts = new LinkedList<String>();
+        final List<String> alerts = new LinkedList<>();
 
         final HtmlPage page = loadPage(getBrowserVersion(), html, alerts);
         final HtmlTextInput input = page.getHtmlElementById("myInput");

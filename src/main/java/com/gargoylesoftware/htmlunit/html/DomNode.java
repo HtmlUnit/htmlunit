@@ -711,7 +711,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
         final HtmlPage htmlPage = getHtmlPageOrNull();
         if (htmlPage != null && htmlPage.getEnclosingWindow().getWebClient().getOptions().isCssEnabled()) {
-            final LinkedList<CSSStyleDeclaration> styles = new LinkedList<CSSStyleDeclaration>();
+            final LinkedList<CSSStyleDeclaration> styles = new LinkedList<>();
 
             // display: iterate top to bottom, because if a parent is display:none,
             // there's nothing that a child can do to override it
@@ -1630,7 +1630,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         WebAssert.notNull("listener", listener);
         synchronized (domListeners_lock_) {
             if (domListeners_ == null) {
-                domListeners_ = new LinkedHashSet<DomChangeListener>();
+                domListeners_ = new LinkedHashSet<>();
             }
             domListeners_.add(listener);
         }

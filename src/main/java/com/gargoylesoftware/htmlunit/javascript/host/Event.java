@@ -427,7 +427,7 @@ public class Event extends SimpleScriptable {
         final Context context = Context.getCurrentContext();
         LinkedList<Event> events = (LinkedList<Event>) context.getThreadLocal(KEY_CURRENT_EVENT);
         if (events == null) {
-            events = new LinkedList<Event>();
+            events = new LinkedList<>();
             context.putThreadLocal(KEY_CURRENT_EVENT, events);
         }
         events.add(this);

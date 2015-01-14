@@ -204,7 +204,7 @@ public class WebConsole {
         }
 
         final StringBuffer sb = new StringBuffer();
-        final LinkedList<Object> args = new LinkedList<Object>(Arrays.asList(objs));
+        final LinkedList<Object> args = new LinkedList<>(Arrays.asList(objs));
 
         final Formatter formatter = getFormatter();
 

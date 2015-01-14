@@ -162,7 +162,7 @@ public abstract class HtmlElement extends DomElement {
     protected HtmlElement(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(HTMLParser.XHTML_NAMESPACE, qualifiedName, page, attributes);
-        attributeListeners_ = new LinkedHashSet<HtmlAttributeChangeListener>();
+        attributeListeners_ = new LinkedHashSet<>();
     }
 
     /**

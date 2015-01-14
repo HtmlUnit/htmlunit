@@ -598,21 +598,19 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
 class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serializable {
     public static final NamedAttrNodeMapImpl EMPTY_MAP = new NamedAttrNodeMapImpl();
 
-    private final Map<String, DomAttr> map_;
+    private final Map<String, DomAttr> map_ = new LinkedHashMap<>();
     private final List<String> attrPositions_ = new ArrayList<>();
     private final DomElement domNode_;
     private final boolean caseSensitive_;
 
     private NamedAttrNodeMapImpl() {
         super();
-        map_ = new LinkedHashMap<String, DomAttr>();
         domNode_ = null;
         caseSensitive_ = true;
     }
 
     NamedAttrNodeMapImpl(final DomElement domNode, final boolean caseSensitive) {
         super();
-        map_ = new LinkedHashMap<String, DomAttr>();
         if (domNode == null) {
             throw new IllegalArgumentException("Provided domNode can't be null.");
         }

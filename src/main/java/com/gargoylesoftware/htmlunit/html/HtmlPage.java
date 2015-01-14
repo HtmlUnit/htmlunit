@@ -2154,7 +2154,7 @@ public class HtmlPage extends SgmlPage {
         WebAssert.notNull("listener", listener);
         synchronized (lock_) {
             if (attributeListeners_ == null) {
-                attributeListeners_ = new LinkedHashSet<HtmlAttributeChangeListener>();
+                attributeListeners_ = new LinkedHashSet<>();
             }
             attributeListeners_.add(listener);
         }

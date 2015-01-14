@@ -53,7 +53,7 @@ abstract class JavaScriptExecutionJob extends BasicJavaScriptJob {
         final WebWindow window) {
         super(initialDelay, period);
         label_ = label;
-        window_ = new WeakReference<WebWindow>(window);
+        window_ = new WeakReference<>(window);
     }
 
     /** {@inheritDoc} */

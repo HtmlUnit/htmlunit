@@ -61,7 +61,7 @@ public class StorageHolder implements Serializable {
         synchronized (storage) {
             Map<String, String> map = storage.get(key);
             if (map == null) {
-                map = new LinkedHashMap<String, String>();
+                map = new LinkedHashMap<>();
                 storage.put(key, map);
             }
             return map;

@@ -265,7 +265,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     // use plain old hashtable because this is synchronized and does not introduce one more
     // indirection layer (hope this is a bit faster)
     // we only need the get/set api so there is no difference at all
-    private static final Hashtable<String, String> CamelizeCache_ = new Hashtable<String, String>();
+    private static final Hashtable<String, String> CamelizeCache_ = new Hashtable<>();
 
     /** The different types of shorthand values. */
     private enum Shorthand {
@@ -611,7 +611,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             return styleMap_;
         }
 
-        final Map<String, StyleElement> styleMap = new LinkedHashMap<String, StyleElement>();
+        final Map<String, StyleElement> styleMap = new LinkedHashMap<>();
         if (DomElement.ATTRIBUTE_NOT_DEFINED == styleAttribute || DomElement.ATTRIBUTE_VALUE_EMPTY == styleAttribute) {
             styleMap_ = styleMap;
             styleString_ = styleAttribute;

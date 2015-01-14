@@ -39,7 +39,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
     // TODO: is there utility in not having these as transient?
     private final transient WeakReference<WebClient> webClient_;
 
-    private final transient List<WeakReference<JavaScriptJobManager>> jobManagerList_;
+    private final transient List<WeakReference<JavaScriptJobManager>> jobManagerList_ = new LinkedList<>();
 
     private volatile boolean shutdown_ = false;
 
@@ -53,8 +53,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
      * @param webClient the provided webClient
      */
     public DefaultJavaScriptExecutor(final WebClient webClient) {
-        jobManagerList_ = new LinkedList<WeakReference<JavaScriptJobManager>>();
-        webClient_ = new WeakReference<WebClient>(webClient);
+        webClient_ = new WeakReference<>(webClient);
     }
 
     /**
@@ -198,7 +197,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
     public synchronized void addWindow(final WebWindow newWindow) {
         final JavaScriptJobManager jobManager = newWindow.getJobManager();
         if (jobManager != null && !contains(jobManager)) {
-            jobManagerList_.add(new WeakReference<JavaScriptJobManager>(jobManager));
+            jobManagerList_.add(new WeakReference<>(jobManager));
             startThreadIfNeeded();
         }
     }

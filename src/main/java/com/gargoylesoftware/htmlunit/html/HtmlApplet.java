@@ -272,7 +272,7 @@ public class HtmlApplet extends HtmlElement {
             }
 
             // check archive
-            archiveUrls_ = new LinkedList<URL>();
+            archiveUrls_ = new LinkedList<>();
             final String[] archives = StringUtils.split(params.get(ARCHIVE), ',');
             if (null != archives) {
                 for (int i = 0; i < archives.length; i++) {

@@ -488,7 +488,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
         private DomHtmlAttributeChangeListenerImpl(final XMLDOMNodeList nodeList) {
             super();
 
-            nodeList_ = new WeakReference<XMLDOMNodeList>(nodeList);
+            nodeList_ = new WeakReference<>(nodeList);
         }
 
         /**

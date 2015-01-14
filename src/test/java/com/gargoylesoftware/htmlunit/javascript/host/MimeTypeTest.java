@@ -79,8 +79,7 @@ public class MimeTypeTest extends SimpleWebTestCase {
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<>();
-        final Set<PluginConfiguration> plugins =
-            new HashSet<PluginConfiguration>(BrowserVersion.FIREFOX_24.getPlugins());
+        final Set<PluginConfiguration> plugins = new HashSet<>(BrowserVersion.FIREFOX_24.getPlugins());
         BrowserVersion.FIREFOX_24.getPlugins().clear();
         try {
             loadPage(BrowserVersion.FIREFOX_24, html, collectedAlerts);

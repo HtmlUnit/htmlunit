@@ -233,7 +233,7 @@ public final class XmlUtil {
             final ElementFactory factory = HTMLParser.getFactory(localName);
             return factory.createElementNS(page, ns, localName, namedNodeMapToSaxAttributes(source.getAttributes()));
         }
-        final Map<String, DomAttr> attributes = new LinkedHashMap<String, DomAttr>();
+        final Map<String, DomAttr> attributes = new LinkedHashMap<>();
         final NamedNodeMap nodeAttributes = source.getAttributes();
         for (int i = 0; i < nodeAttributes.getLength(); i++) {
             final Attr attribute = (Attr) nodeAttributes.item(i);

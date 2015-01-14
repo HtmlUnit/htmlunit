@@ -84,7 +84,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     private static final int PIXELS_PER_CHAR = 10;
 
     /** The set of 'inheritable' attributes. */
-    private static final Set<String> INHERITABLE_ATTRIBUTES = new HashSet<String>(Arrays.asList(
+    private static final Set<String> INHERITABLE_ATTRIBUTES = new HashSet<>(Arrays.asList(
         "azimuth",
         "border-collapse",
         "border-spacing",
@@ -1363,7 +1363,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         ComputedCSSStyleDeclaration lastFlowing = null;
-        final Set<ComputedCSSStyleDeclaration> styles = new HashSet<ComputedCSSStyleDeclaration>();
+        final Set<ComputedCSSStyleDeclaration> styles = new HashSet<>();
         for (final DomNode child : node.getChildren()) {
             if (child.mayBeDisplayed()) {
                 final ScriptableObject scriptObj = child.getScriptObject();

@@ -90,7 +90,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("s")).click();
 
-        final List<String> alerts = new LinkedList<String>();
+        final List<String> alerts = new LinkedList<>();
         final WebElement log = driver.findElement(By.id("log_"));
         alerts.add(log.getAttribute("value").trim());
         assertEquals(getExpectedAlerts(), alerts);
@@ -144,7 +144,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
         driver.findElement(By.id("s")).click();
         driver.findElement(By.id("opt-b")).click();
 
-        final List<String> alerts = new LinkedList<String>();
+        final List<String> alerts = new LinkedList<>();
         final WebElement log = driver.findElement(By.id("log_"));
         alerts.add(log.getAttribute("value").trim());
         assertEquals(getExpectedAlerts(), alerts);
@@ -183,7 +183,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
 
         driver.findElement(By.id("clickId")).click();
 
-        final List<String> alerts = new LinkedList<String>();
+        final List<String> alerts = new LinkedList<>();
         final WebElement log = driver.findElement(By.id("log_"));
         alerts.add(log.getAttribute("value").trim());
         assertEquals(getExpectedAlerts(), alerts);
@@ -244,7 +244,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
 
         driver.findElement(By.id("clickId")).click();
 
-        final List<String> alerts = new LinkedList<String>();
+        final List<String> alerts = new LinkedList<>();
         final WebElement log = driver.findElement(By.id("log_"));
         alerts.add(log.getAttribute("value").trim());
         assertEquals(getExpectedAlerts(), alerts);
@@ -307,7 +307,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
 
         driver.findElement(By.id("clickId")).click();
 
-        final List<String> alerts = new LinkedList<String>();
+        final List<String> alerts = new LinkedList<>();
         final WebElement log = driver.findElement(By.id("log_"));
         alerts.add(log.getAttribute("value").trim());
         assertEquals(getExpectedAlerts(), alerts);

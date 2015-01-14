@@ -98,7 +98,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     private String userAgent_;
     private String userLanguage_ = LANGUAGE_ENGLISH_US;
     private float browserVersionNumeric_;
-    private final Set<PluginConfiguration> plugins_ = new HashSet<PluginConfiguration>();
+    private final Set<PluginConfiguration> plugins_ = new HashSet<>();
     private final Set<BrowserVersionFeatures> features_ = EnumSet.noneOf(BrowserVersionFeatures.class);
     private final String nickname_;
     private String htmlAcceptHeader_;

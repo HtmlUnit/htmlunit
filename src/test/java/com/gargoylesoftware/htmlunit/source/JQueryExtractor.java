@@ -186,7 +186,7 @@ public final class JQueryExtractor {
             System.out.print("    @Alerts(");
 
             final boolean allSame = testExpectation.size() == availableBrowserNames.size()
-                    && new HashSet<String>(testExpectation.values()).size() == 1;
+                    && new HashSet<>(testExpectation.values()).size() == 1;
             if (allSame) {
                 final String first = testExpectation.keySet().iterator().next();
                 String expectation = testExpectation.get(first);

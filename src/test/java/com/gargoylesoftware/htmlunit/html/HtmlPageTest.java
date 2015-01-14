@@ -1304,7 +1304,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
 
         // waiting for the alerts creates some more js objects associated with the page
         // this tests 3103703
-        final List<String> expectedAlerts = new LinkedList<String>();
+        final List<String> expectedAlerts = new LinkedList<>();
         expectedAlerts.add("foo");
 
         final HtmlPage page1 = loadPage(content, expectedAlerts);

@@ -149,11 +149,11 @@ public class CSSStyleSheet extends SimpleScriptable {
     /** This stylesheet's URI (used to resolved contained @import rules). */
     private String uri_;
 
-    private static final Set<String> CSS2_PSEUDO_CLASSES = new HashSet<String>(Arrays.asList(
+    private static final Set<String> CSS2_PSEUDO_CLASSES = new HashSet<>(Arrays.asList(
             "link", "visited", "hover", "active",
             "focus", "lang", "first-child"));
 
-    private static final Set<String> CSS3_PSEUDO_CLASSES = new HashSet<String>(Arrays.asList(
+    private static final Set<String> CSS3_PSEUDO_CLASSES = new HashSet<>(Arrays.asList(
             "checked", "disabled", "enabled", "indeterminated", "root", "target", "not()",
             "nth-child()", "nth-last-child()", "nth-of-type()", "nth-last-of-type()",
             "last-child", "first-of-type", "last-of-type", "only-child", "only-of-type", "empty"));

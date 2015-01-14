@@ -372,7 +372,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
 
     /** Cache of browser versions and their corresponding JavaScript configurations. */
     private static final Map<BrowserVersion, JavaScriptConfiguration> CONFIGURATION_MAP_ =
-        new WeakHashMap<BrowserVersion, JavaScriptConfiguration>();
+        new WeakHashMap<>();
 
     /**
      * Constructor is only called from {@link #getInstance(BrowserVersion)} which is synchronized.

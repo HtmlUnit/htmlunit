@@ -149,8 +149,8 @@ public class WebClient implements Serializable {
     private BrowserVersion browserVersion_;
     private PageCreator pageCreator_ = new DefaultPageCreator();
 
-    private final Set<WebWindowListener> webWindowListeners_ = new HashSet<WebWindowListener>(5);
-    private final Stack<TopLevelWindow> topLevelWindows_ = new Stack<TopLevelWindow>(); // top-level windows
+    private final Set<WebWindowListener> webWindowListeners_ = new HashSet<>(5);
+    private final Stack<TopLevelWindow> topLevelWindows_ = new Stack<>(); // top-level windows
     private final List<WebWindow> windows_ = Collections.synchronizedList(new ArrayList<WebWindow>()); // all windows
     private transient List<WeakReference<JavaScriptJobManager>> jobManagers_ =
             Collections.synchronizedList(new ArrayList<WeakReference<JavaScriptJobManager>>());
@@ -1032,7 +1032,7 @@ public class WebClient implements Serializable {
         WebAssert.notNull("webWindow", webWindow);
         windows_.add(webWindow);
         // register JobManager here but don't deregister in deregisterWebWindow as it can live longer
-        jobManagers_.add(new WeakReference<JavaScriptJobManager>(webWindow.getJobManager()));
+        jobManagers_.add(new WeakReference<>(webWindow.getJobManager()));
     }
 
     /**
@@ -1939,7 +1939,7 @@ public class WebClient implements Serializable {
             target_ = target;
             response_ = response;
             urlWithOnlyHashChange_ = null;
-            originalPage_ = new WeakReference<Page>(requestingWindow.getEnclosedPage());
+            originalPage_ = new WeakReference<>(requestingWindow.getEnclosedPage());
         }
 
         LoadJob(final WebRequest request, final WebWindow requestingWindow, final String target,
@@ -1949,7 +1949,7 @@ public class WebClient implements Serializable {
             target_ = target;
             response_ = null;
             urlWithOnlyHashChange_ = urlWithOnlyHashChange;
-            originalPage_ = new WeakReference<Page>(requestingWindow.getEnclosedPage());
+            originalPage_ = new WeakReference<>(requestingWindow.getEnclosedPage());
         }
 
         public boolean isOutdated() {
@@ -2061,7 +2061,7 @@ public class WebClient implements Serializable {
             loadQueue_.clear();
         }
 
-        final HashSet<WebWindow> updatedWindows = new HashSet<WebWindow>();
+        final HashSet<WebWindow> updatedWindows = new HashSet<>();
         for (int i = queue.size() - 1; i >= 0; --i) {
             final LoadJob downloadedResponse = queue.get(i);
             if (downloadedResponse.isOutdated()) {
@@ -2164,7 +2164,7 @@ public class WebClient implements Serializable {
             }
         }
 
-        final Set<Cookie> cookies = new LinkedHashSet<Cookie>();
+        final Set<Cookie> cookies = new LinkedHashSet<>();
         cookies.addAll(Cookie.fromHttpClient(matches));
         return Collections.unmodifiableSet(cookies);
     }

@@ -317,7 +317,7 @@ public class SvgElementFactory implements ElementFactory {
     private Map<String, DomAttr> toMap(final SgmlPage page, final Attributes attributes) {
         Map<String, DomAttr> attributeMap = null;
         if (attributes != null) {
-            attributeMap = new LinkedHashMap<String, DomAttr>(attributes.getLength());
+            attributeMap = new LinkedHashMap<>(attributes.getLength());
             for (int i = 0; i < attributes.getLength(); i++) {
                 final String qName = attributes.getQName(i);
                 // browsers consider only first attribute (ex: <div id='foo' id='something'>...</div>)

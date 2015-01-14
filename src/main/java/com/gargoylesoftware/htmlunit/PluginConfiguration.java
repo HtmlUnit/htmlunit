@@ -31,7 +31,7 @@ public class PluginConfiguration implements Serializable, Cloneable {
     private final String description_;
     private final String filename_;
     private final String name_;
-    private final Set<PluginConfiguration.MimeType> mimeTypes_ = new HashSet<PluginConfiguration.MimeType>();
+    private final Set<PluginConfiguration.MimeType> mimeTypes_ = new HashSet<>();
 
     /**
      * Creates a new instance.

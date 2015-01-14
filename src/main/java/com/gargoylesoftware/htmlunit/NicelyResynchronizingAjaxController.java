@@ -50,7 +50,7 @@ public class NicelyResynchronizingAjaxController extends AjaxController {
      * Initializes this instance.
      */
     private void init() {
-        originatedThread_ = new WeakReference<Thread>(Thread.currentThread());
+        originatedThread_ = new WeakReference<>(Thread.currentThread());
     }
 
     /**

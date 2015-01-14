@@ -59,7 +59,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
     private static final String CC_VARIABLE_PREFIX = "htmlunit_cc_variable_";
     private enum PARSING_STATUS { NORMAL, IN_MULTI_LINE_COMMENT, IN_SINGLE_LINE_COMMENT, IN_STRING, IN_REG_EXP }
 
-    private final Set<String> setVariables_ = new HashSet<String>();
+    private final Set<String> setVariables_ = new HashSet<>();
 
     /**
      * {@inheritDoc}

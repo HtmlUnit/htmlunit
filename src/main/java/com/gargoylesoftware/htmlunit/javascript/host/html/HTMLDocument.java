@@ -198,10 +198,10 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     private static final Map<String, Class<? extends Event>> SUPPORTED_VENDOR_EVENT_TYPE_MAP;
 
     // all as lowercase for performance
-    private static final Set<String> EXECUTE_CMDS_IE = new HashSet<String>();
+    private static final Set<String> EXECUTE_CMDS_IE = new HashSet<>();
     /** https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla#Executing_Commands */
-    private static final Set<String> EXECUTE_CMDS_FF = new HashSet<String>();
-    private static final Set<String> EXECUTE_CMDS_CHROME = new HashSet<String>();
+    private static final Set<String> EXECUTE_CMDS_FF = new HashSet<>();
+    private static final Set<String> EXECUTE_CMDS_CHROME = new HashSet<>();
 
     /**
      * Static counter for {@link #uniqueID_}.

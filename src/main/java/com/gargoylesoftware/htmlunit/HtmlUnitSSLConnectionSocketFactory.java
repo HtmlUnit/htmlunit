@@ -224,7 +224,7 @@ final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocketFactor
  * @author Marc Guillemot
  */
 class InsecureTrustManager2 implements X509TrustManager {
-    private final Set<X509Certificate> acceptedIssuers_ = new HashSet<X509Certificate>();
+    private final Set<X509Certificate> acceptedIssuers_ = new HashSet<>();
 
     /**
      * {@inheritDoc}

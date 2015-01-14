@@ -528,7 +528,7 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
         private DomHtmlAttributeChangeListenerImpl(final NodeList nodeList) {
             super();
 
-            nodeList_ = new WeakReference<NodeList>(nodeList);
+            nodeList_ = new WeakReference<>(nodeList);
         }
 
         /**

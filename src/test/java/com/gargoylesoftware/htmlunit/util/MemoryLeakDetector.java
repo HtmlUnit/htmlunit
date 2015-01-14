@@ -43,7 +43,7 @@ public class MemoryLeakDetector {
         if (map_.containsKey(id)) {
             throw new IllegalArgumentException("There is already an object registered with ID '" + id + "': " + o);
         }
-        map_.put(id, new WeakReference<Object>(o));
+        map_.put(id, new WeakReference<>(o));
     }
 
     /**

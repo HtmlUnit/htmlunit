@@ -215,7 +215,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     private static int UniqueID_Counter_ = 1;
 
-    private final Set<String> behaviors_ = new HashSet<String>();
+    private final Set<String> behaviors_ = new HashSet<>();
     private BoxObject boxObject_; // lazy init
     private HTMLCollection all_; // has to be a member to have equality (==) working
     private int scrollLeft_;

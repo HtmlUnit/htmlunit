@@ -459,7 +459,7 @@ public class Element extends EventNode {
         final HTMLCollection collection = new HTMLCollection(node, false, "Element.children") {
             @Override
             protected List<Object> computeElements() {
-                final List<Object> children = new LinkedList<Object>();
+                final List<Object> children = new LinkedList<>();
                 for (DomNode domNode : node.getChildNodes()) {
                     if (domNode instanceof DomElement) {
                         children.add(domNode);

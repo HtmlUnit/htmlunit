@@ -42,8 +42,7 @@ public final class MSXMLConfiguration extends AbstractJavaScriptConfiguration {
     };
 
     /** Cache of browser versions and their corresponding JavaScript configurations. */
-    private static final Map<BrowserVersion, MSXMLConfiguration> CONFIGURATION_MAP_ =
-        new WeakHashMap<BrowserVersion, MSXMLConfiguration>();
+    private static final Map<BrowserVersion, MSXMLConfiguration> CONFIGURATION_MAP_ = new WeakHashMap<>();
 
     /**
      * Constructor is only called from {@link #getInstance(BrowserVersion)} which is synchronized.

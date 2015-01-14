@@ -49,7 +49,7 @@ public class CookieManager implements Serializable {
     private boolean cookiesEnabled_;
 
     /** The cookies added to this cookie manager. */
-    private final Set<Cookie> cookies_ = new LinkedHashSet<Cookie>();
+    private final Set<Cookie> cookies_ = new LinkedHashSet<>();
 
     private final transient CookieSpec cookieSpec_ = new BrowserCompatSpecFactory().create(null);
 
@@ -86,7 +86,7 @@ public class CookieManager implements Serializable {
             return Collections.<Cookie>emptySet();
         }
 
-        final Set<Cookie> copy = new LinkedHashSet<Cookie>();
+        final Set<Cookie> copy = new LinkedHashSet<>();
         copy.addAll(cookies_);
         return Collections.unmodifiableSet(copy);
     }
@@ -130,7 +130,7 @@ public class CookieManager implements Serializable {
             }
         }
 
-        final Set<Cookie> cookies = new LinkedHashSet<Cookie>();
+        final Set<Cookie> cookies = new LinkedHashSet<>();
         cookies.addAll(Cookie.fromHttpClient(matches));
         return Collections.unmodifiableSet(cookies);
     }

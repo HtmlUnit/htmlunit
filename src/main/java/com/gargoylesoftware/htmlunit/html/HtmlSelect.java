@@ -623,7 +623,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
         if ("name".equals(qualifiedName)) {
             if (newNames_.isEmpty()) {
-                newNames_ = new HashSet<String>();
+                newNames_ = new HashSet<>();
             }
             newNames_.add(attributeValue);
         }

@@ -127,7 +127,7 @@ public class AttributesTest extends TestCase {
             "HtmlWordBreak", "HtmlExample"
         };
 
-        final HashSet<String> supportedTags = new HashSet<String>(DefaultElementFactory.SUPPORTED_TAGS_);
+        final HashSet<String> supportedTags = new HashSet<>(DefaultElementFactory.SUPPORTED_TAGS_);
 
         for (final String testClass : classesToTest) {
             final Class<?> clazz = Class.forName("com.gargoylesoftware.htmlunit.html." + testClass);

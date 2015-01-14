@@ -83,7 +83,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
         page.getWebClient().waitForBackgroundJavaScript(500);
 
-        final List<String> actual = new LinkedList<String>();
+        final List<String> actual = new LinkedList<>();
         actual.add(page.<HtmlTextArea>getHtmlElementById("myTextarea").getText());
 
         assertEquals(getExpectedAlerts(), actual);

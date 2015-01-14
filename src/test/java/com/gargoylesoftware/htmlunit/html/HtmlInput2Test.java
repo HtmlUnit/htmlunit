@@ -198,7 +198,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
 
                 + "</body></html>";
 
-        final List<String> alerts = new LinkedList<String>();
+        final List<String> alerts = new LinkedList<>();
 
         final WebDriver driver = loadPage2(html);
         final WebElement log = driver.findElement(By.id("log_"));

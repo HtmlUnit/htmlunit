@@ -34,7 +34,7 @@ public abstract class PostponedAction {
      * @param owningPage the page that initiates this action
      */
     public PostponedAction(final Page owningPage) {
-        owningPageRef_ = new WeakReference<Page>(owningPage);
+        owningPageRef_ = new WeakReference<>(owningPage);
     }
 
     /**

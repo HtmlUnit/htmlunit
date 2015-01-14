@@ -217,7 +217,7 @@ public class UrlFetchWebConnection implements WebConnection {
      * @return The parsed cookies
      */
     static Set<Cookie> parseCookies(final String domain, final String cookieHeaderString) {
-        final Set<Cookie> cookies = new HashSet<Cookie>();
+        final Set<Cookie> cookies = new HashSet<>();
         final String[] cookieStrings = cookieHeaderString.split(",");
         for (int i = 0; i < cookieStrings.length; i++) {
             final String[] nameAndValue = cookieStrings[i].split(";")[0].split("=");

@@ -96,7 +96,7 @@ public class GAETestRunner extends BlockJUnit4ClassRunner {
     private static Set<String> getAdditionalWhitelist() {
         final String additionalClasses[] = {"java.awt.image.RenderedImage",
             "java.awt.geom.Rectangle2D", "java.awt.geom.Ellipse2D", "java.applet.AppletStub"};
-        final Set<String> classesAsSet = new HashSet<String>();
+        final Set<String> classesAsSet = new HashSet<>();
         for (String additionalClass : additionalClasses) {
             classesAsSet.add(additionalClass);
         }
@@ -121,7 +121,7 @@ public class GAETestRunner extends BlockJUnit4ClassRunner {
             IOUtils.closeQuietly(is);
         }
 
-        return new HashSet<String>(lines);
+        return new HashSet<>(lines);
     }
 
     @Override

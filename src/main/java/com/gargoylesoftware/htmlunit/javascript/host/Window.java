@@ -188,8 +188,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * We use a weak hash map because we don't want this cache to be the only reason
      * nodes are kept around in the JVM, if all other references to them are gone.
      */
-    private transient WeakHashMap<Node, ComputedCSSStyleDeclaration> computedStyles_ =
-        new WeakHashMap<Node, ComputedCSSStyleDeclaration>();
+    private transient WeakHashMap<Node, ComputedCSSStyleDeclaration> computedStyles_ = new WeakHashMap<>();
 
     private final Map<Type, Storage> storages_ = new HashMap<>();
 
@@ -201,7 +200,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     private void readObject(final ObjectInputStream stream) throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        computedStyles_ = new WeakHashMap<Node, ComputedCSSStyleDeclaration>();
+        computedStyles_ = new WeakHashMap<>();
     }
 
     /**
@@ -1828,7 +1827,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /** Definition of special cases for the smart DomHtmlAttributeChangeListenerImpl */
-    private static final Set<String> ATTRIBUTES_AFFECTING_PARENT = new HashSet<String>(Arrays.asList(
+    private static final Set<String> ATTRIBUTES_AFFECTING_PARENT = new HashSet<>(Arrays.asList(
             "style",
             "class",
             "height",
