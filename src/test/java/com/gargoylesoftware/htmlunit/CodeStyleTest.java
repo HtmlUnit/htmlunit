@@ -262,7 +262,6 @@ public class CodeStyleTest {
     @Test
     public void xmlStyle() throws Exception {
         processXML(new File("."), false);
-        processXML(new File("cruise"), false);
         processXML(new File("src/main/resources"), true);
         processXML(new File("src/assembly"), true);
         processXML(new File("src/changes"), true);
