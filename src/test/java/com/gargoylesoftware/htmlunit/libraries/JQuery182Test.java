@@ -26,6 +26,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.ComparisonFailure;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -42,7 +43,7 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
  * Tests for compatibility with web server loading of
  * version 1.8.2 of the <a href="http://jquery.com/">jQuery</a> JavaScript library.
  *
- * All test method inside this class are generated based. Please have a look
+ * All test method inside this class are generated. Please have a look
  * at {@link com.gargoylesoftware.htmlunit.source.JQueryExtractor}.
  *
  * @version $Revision$
@@ -4481,6 +4482,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("2, 0, 2")
+    @Ignore
     public void ajax__jQuery_ajax___HEAD_requests() throws Exception {
         runTest("ajax: jQuery.ajax - HEAD requests");
     }
