@@ -489,30 +489,35 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
             + "setInterval(forceStyleComputationInParent, 10);\n"
             + "</script></head></body></html>";
 
-        client_ = new WebClient(BrowserVersion.FIREFOX_24);
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, html);
-        webConnection.setDefaultResponse(html2);
-        client_.setWebConnection(webConnection);
+        final WebClient client = new WebClient(BrowserVersion.FIREFOX_31);
+        try {
+            final MockWebConnection webConnection = new MockWebConnection();
+            webConnection.setResponse(URL_FIRST, html);
+            webConnection.setDefaultResponse(html2);
+            client.setWebConnection(webConnection);
 
-        final HtmlPage page1 = client_.getPage(URL_FIRST);
+            final HtmlPage page1 = client.getPage(URL_FIRST);
 
-        // Recreating what can occur with two threads requires
-        // to know a bit about the style invalidation used in Window.DomHtmlAttributeChangeListenerImpl
-        final HtmlElement elt = new HtmlDivision("div", page1, new HashMap<String, DomAttr>()) {
-            @Override
-            public DomNode getParentNode() {
-                // this gets called by CSS invalidation logic
-                try {
-                    Thread.sleep(1000); // enough to let setInterval run
+            // Recreating what can occur with two threads requires
+            // to know a bit about the style invalidation used in Window.DomHtmlAttributeChangeListenerImpl
+            final HtmlElement elt = new HtmlDivision("div", page1, new HashMap<String, DomAttr>()) {
+                @Override
+                public DomNode getParentNode() {
+                    // this gets called by CSS invalidation logic
+                    try {
+                        Thread.sleep(1000); // enough to let setInterval run
+                    }
+                    catch (final InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    return super.getParentNode();
                 }
-                catch (final InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                return super.getParentNode();
-            }
-        };
-        page1.getBody().appendChild(elt);
+            };
+            page1.getBody().appendChild(elt);
+        }
+        finally {
+            client.closeAllWindows();
+        }
     }
 
     /**
