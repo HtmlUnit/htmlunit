@@ -48,7 +48,12 @@ public class GAESupportTest {
      */
     @Test
     public void instantiation() throws Exception {
-        new WebClient();
-        assertEquals("http://gaeHack_about/blank", WebClient.URL_ABOUT_BLANK.toString());
+        final WebClient client = new WebClient();
+        try {
+            assertEquals("http://gaeHack_about/blank", WebClient.URL_ABOUT_BLANK.toString());
+        }
+        finally {
+            client.closeAllWindows();
+        }
     }
 }

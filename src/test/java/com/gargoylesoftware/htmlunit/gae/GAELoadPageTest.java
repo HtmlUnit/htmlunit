@@ -103,24 +103,29 @@ public class GAELoadPageTest {
             + "</xml2>";
 
         final WebClient client = new WebClient();
-        final List<String> collectedAlerts = new ArrayList<>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(FIRST_URL, html);
-        conn.setResponse(secondUrl, xml, "text/xml");
-        client.setWebConnection(conn);
+        try {
+            final List<String> collectedAlerts = new ArrayList<>();
+            client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+            final MockWebConnection conn = new MockWebConnection();
+            conn.setResponse(FIRST_URL, html);
+            conn.setResponse(secondUrl, xml, "text/xml");
+            client.setWebConnection(conn);
 
-        client.getPage(FIRST_URL);
+            client.getPage(FIRST_URL);
 
-        final int executedJobs = client.getJavaScriptEngine().pumpEventLoop(1000);
-        final String[] alerts = {String.valueOf(XMLHttpRequest.STATE_UNSENT),
-            String.valueOf(XMLHttpRequest.STATE_OPENED),
-            String.valueOf(XMLHttpRequest.STATE_OPENED),
-            String.valueOf(XMLHttpRequest.STATE_HEADERS_RECEIVED),
-            String.valueOf(XMLHttpRequest.STATE_LOADING),
-            String.valueOf(XMLHttpRequest.STATE_DONE), xml};
-        assertEquals(Arrays.asList(alerts).toString(), collectedAlerts.toString());
-        assertEquals(1, executedJobs);
+            final int executedJobs = client.getJavaScriptEngine().pumpEventLoop(1000);
+            final String[] alerts = {String.valueOf(XMLHttpRequest.STATE_UNSENT),
+                String.valueOf(XMLHttpRequest.STATE_OPENED),
+                String.valueOf(XMLHttpRequest.STATE_OPENED),
+                String.valueOf(XMLHttpRequest.STATE_HEADERS_RECEIVED),
+                String.valueOf(XMLHttpRequest.STATE_LOADING),
+                String.valueOf(XMLHttpRequest.STATE_DONE), xml};
+            assertEquals(Arrays.asList(alerts).toString(), collectedAlerts.toString());
+            assertEquals(1, executedJobs);
+        }
+        finally {
+            client.closeAllWindows();
+        }
     }
 
     /**
@@ -140,34 +145,39 @@ public class GAELoadPageTest {
             + "  </body>\n"
             + "</html>";
         final WebClient client = new WebClient();
-        final List<String> collectedAlerts = new ArrayList<>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setDefaultResponse(html);
-        client.setWebConnection(conn);
+        try {
+            final List<String> collectedAlerts = new ArrayList<>();
+            client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+            final MockWebConnection conn = new MockWebConnection();
+            conn.setDefaultResponse(html);
+            client.setWebConnection(conn);
 
-        client.getPage(FIRST_URL);
-        final long startTime = System.currentTimeMillis();
+            client.getPage(FIRST_URL);
+            final long startTime = System.currentTimeMillis();
 
-        assertEquals(0, collectedAlerts.size());
+            assertEquals(0, collectedAlerts.size());
 
-        // pump but not long enough
-        int executedJobs = client.getJavaScriptEngine().pumpEventLoop(timeout / 2);
-        assertEquals(0, collectedAlerts.size());
+            // pump but not long enough
+            int executedJobs = client.getJavaScriptEngine().pumpEventLoop(timeout / 2);
+            assertEquals(0, collectedAlerts.size());
 
-        // pump a bit more
-        executedJobs = client.getJavaScriptEngine().pumpEventLoop(timeout + 1);
-        long count = (System.currentTimeMillis() - startTime) / timeout;
-        count = Math.max(1, count);
-        assertEquals(count, collectedAlerts.size());
-        assertEquals(count, executedJobs);
+            // pump a bit more
+            executedJobs = client.getJavaScriptEngine().pumpEventLoop(timeout + 1);
+            long count = (System.currentTimeMillis() - startTime) / timeout;
+            count = Math.max(1, count);
+            assertEquals(count, collectedAlerts.size());
+            assertEquals(count, executedJobs);
 
-        // pump even more
-        executedJobs += client.getJavaScriptEngine().pumpEventLoop(timeout + 1);
-        count = (System.currentTimeMillis() - startTime) / timeout;
-        count = Math.max(2, count);
-        assertEquals(count , collectedAlerts.size());
-        assertEquals(count, executedJobs);
+            // pump even more
+            executedJobs += client.getJavaScriptEngine().pumpEventLoop(timeout + 1);
+            count = (System.currentTimeMillis() - startTime) / timeout;
+            count = Math.max(2, count);
+            assertEquals(count , collectedAlerts.size());
+            assertEquals(count, executedJobs);
+        }
+        finally {
+            client.closeAllWindows();
+        }
     }
 
     /**
@@ -187,28 +197,33 @@ public class GAELoadPageTest {
             + "  </body>\n"
             + "</html>";
         final WebClient client = new WebClient();
-        final List<String> collectedAlerts = new ArrayList<>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setDefaultResponse(html);
-        client.setWebConnection(conn);
-        client.getPage(FIRST_URL);
+        try {
+            final List<String> collectedAlerts = new ArrayList<>();
+            client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+            final MockWebConnection conn = new MockWebConnection();
+            conn.setDefaultResponse(html);
+            client.setWebConnection(conn);
+            client.getPage(FIRST_URL);
 
-        int executedJobs = client.getJavaScriptEngine().pumpEventLoop(20);
-        assertEquals(Arrays.asList("hello"), collectedAlerts);
-        assertEquals(1, executedJobs);
-
-        executedJobs = client.getJavaScriptEngine().pumpEventLoop(20);
-        assertEquals(Arrays.asList("hello"), collectedAlerts);
-        assertEquals(0, executedJobs);
-
-        while (executedJobs < 1) {
+            int executedJobs = client.getJavaScriptEngine().pumpEventLoop(20);
             assertEquals(Arrays.asList("hello"), collectedAlerts);
-            executedJobs = client.getJavaScriptEngine().pumpEventLoop(timeout / 10);
-        }
+            assertEquals(1, executedJobs);
 
-        assertEquals(Arrays.asList("hello", "hello again"), collectedAlerts);
-        assertEquals(1, executedJobs);
+            executedJobs = client.getJavaScriptEngine().pumpEventLoop(20);
+            assertEquals(Arrays.asList("hello"), collectedAlerts);
+            assertEquals(0, executedJobs);
+
+            while (executedJobs < 1) {
+                assertEquals(Arrays.asList("hello"), collectedAlerts);
+                executedJobs = client.getJavaScriptEngine().pumpEventLoop(timeout / 10);
+            }
+
+            assertEquals(Arrays.asList("hello", "hello again"), collectedAlerts);
+            assertEquals(1, executedJobs);
+        }
+        finally {
+            client.closeAllWindows();
+        }
     }
 
     /**
@@ -224,16 +239,21 @@ public class GAELoadPageTest {
         final String frame = "<html><body><script>alert('in frame');</script></body></html>";
 
         final WebClient client = new WebClient();
-        final List<String> collectedAlerts = new ArrayList<>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        try {
+            final List<String> collectedAlerts = new ArrayList<>();
+            client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection conn = new GAEMockWebConnection(client);
-        conn.setResponse(FIRST_URL, html);
-        conn.setResponse(FIRST_SECOND, frame);
-        client.setWebConnection(conn);
-        client.getPage(FIRST_URL);
+            final MockWebConnection conn = new GAEMockWebConnection(client);
+            conn.setResponse(FIRST_URL, html);
+            conn.setResponse(FIRST_SECOND, frame);
+            client.setWebConnection(conn);
+            client.getPage(FIRST_URL);
 
-        assertEquals(Arrays.asList("in frame"), collectedAlerts);
+            assertEquals(Arrays.asList("in frame"), collectedAlerts);
+        }
+        finally {
+            client.closeAllWindows();
+        }
     }
 
     /**
