@@ -35,7 +35,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -83,7 +82,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     public void setJavascriptEnabled_false() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -109,7 +107,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     public void setInputValue() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
@@ -135,7 +132,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     public void scopeOfNewFunctionCalledFormOtherWindow() throws Exception {
         final String firstContent
             = "<html><head>\n"
@@ -181,7 +177,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     public void scopeInInactivePage() throws Exception {
         final String firstContent
             = "<html><head>\n"
@@ -223,7 +218,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     @Alerts("got here")
     public void externalScript() throws Exception {
         final String html
@@ -255,7 +249,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     public void externalScriptWithApostrophesInComment() throws Exception {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
@@ -289,7 +282,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     public void scriptErrorContainsPageUrl() throws Exception {
         // embedded script
         final String content1
@@ -332,7 +324,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     public void externalScriptEncoding() throws Exception {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
@@ -424,7 +415,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     @Alerts("gZip")
     public void externalScriptGZipEncoded() throws Exception {
         final MockWebConnection webConnection = getMockWebConnection();
@@ -455,7 +445,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Ignore
     @Alerts("done")
     public void externalScriptEmptyGZipEncoded() throws Exception {
         final MockWebConnection webConnection = getMockWebConnection();
@@ -486,7 +475,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Ignore
     public void externalScriptBrokenGZipEncoded() throws Exception {
         final MockWebConnection webConnection = getMockWebConnection();
 
@@ -520,7 +508,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     public void referencingVariablesFromOneScriptToAnother_Regression() throws Exception {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
@@ -551,7 +538,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     public void javaScriptUrl() throws Exception {
         final String htmlContent
             = "<html><head><script language='javascript'>\n"
@@ -583,7 +569,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     public void thisDotInOnClick() throws Exception {
         final String htmlContent
             = "<html><head><title>First</title><script>function foo(message){alert(message);}</script><body>\n"
@@ -604,7 +589,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     public void functionDefinedInExternalFile_CalledFromInlineScript() throws Exception {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
@@ -641,7 +625,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     public void externalScriptWithNewLineBeforeClosingScriptTag() throws Exception {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
@@ -674,7 +657,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     public void functionDefinedInSameFile() throws Exception {
         final String htmlContent
             = "<html><head><title>First</title><script>\n"
@@ -709,7 +691,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     public void javaScriptEngineCallsForVariableAccess() throws Exception {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
@@ -759,7 +740,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     public void activeXObjectNoMap() throws Exception {
         try {
             loadPage(getBrowserVersion(), getJavaScriptContent("new ActiveXObject()"), null);
@@ -808,7 +788,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     public void activeXObjectWithMap() throws Exception {
         if (!getBrowserVersion().hasFeature(JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
             return;
@@ -893,7 +872,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    @Ignore
     public void scriptErrorIsolated() throws Exception {
         final String content
             = "<html>\n"
@@ -942,7 +920,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    @Ignore
     public void prototypeScope() throws Exception {
         prototypeScope("String", "'some string'");
         prototypeScope("Number", "9");
@@ -990,7 +967,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     public void timeout() throws Exception {
         final WebClient client = getWebClient();
         final long timeout = 2000;
@@ -1105,7 +1081,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     @Alerts(IE = "2")
     public void commentNoDoubleSlash() throws Exception {
         final String html =
@@ -1134,7 +1109,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     public void compiledScriptCached() throws Exception {
         final String content1
             = "<html><head><title>foo</title>\n"
@@ -1184,7 +1158,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    @Ignore
     public void scriptTags_AllLocalContent() throws Exception {
         final String content
             = "<html>\n"
@@ -1244,7 +1217,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * WebClient instances concurrently within a single JVM. See bug 2089599.
      */
     @Test
-    @Ignore
     public void noGlobalContextFactoryUsed() {
         final WebClient client1 = getWebClient();
         final WebClient client2 = createNewWebClient();
@@ -1262,7 +1234,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     public void catchBackgroundJSErrors() throws Exception {
         final WebClient webClient = getWebClient();
         final List<ScriptException> jsExceptions = new ArrayList<>();
@@ -1308,7 +1279,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     public void daemonExecutorThread() throws Exception {
         final String html = "<html><body><script>\n"
             + "function f() { alert('foo'); }\n"
@@ -1331,7 +1301,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     public void shutdown() throws Exception {
         final String html = "<html></html>";
         final HtmlPage page = loadPage(html);
@@ -1367,7 +1336,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     @Alerts("starting")
     public void shutdownShouldKill() throws Exception {
         final String html = "<html>\n"
@@ -1399,7 +1367,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     @Alerts("unload")
     public void shutdownOnUnload() throws Exception {
         final String html = "<html>\n"
@@ -1424,7 +1391,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Ignore
     public void nonStandardBrowserVersion() throws Exception {
         final BrowserVersion browser = new BrowserVersion("Mozilla", "5.0", "Mozilla/5.0", 11) {
             @Override
