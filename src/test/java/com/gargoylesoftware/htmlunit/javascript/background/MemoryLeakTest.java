@@ -65,18 +65,23 @@ public class MemoryLeakTest extends SimpleWebTestCase {
         final MemoryLeakDetector detector = new MemoryLeakDetector();
 
         WebClient client = new WebClient();
-        detector.register("w", client.getCurrentWindow());
+        try {
+            detector.register("w", client.getCurrentWindow());
 
-        MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, "<html><body><script>setInterval('alert(1)',5000)</script></body></html>");
-        client.setWebConnection(conn);
+            MockWebConnection conn = new MockWebConnection();
+            conn.setResponse(URL_FIRST, "<html><body><script>setInterval('alert(1)',5000)</script></body></html>");
+            client.setWebConnection(conn);
 
-        client.getPage(URL_FIRST);
+            client.getPage(URL_FIRST);
 
-        client = null;
-        conn = null;
+            client = null;
+            conn = null;
 
-        assertTrue("Window can't be garbage collected.", detector.canBeGCed("w"));
+            assertTrue("Window can't be garbage collected.", detector.canBeGCed("w"));
+        }
+        finally {
+            client.closeAllWindows();
+        }
     }
 
 }

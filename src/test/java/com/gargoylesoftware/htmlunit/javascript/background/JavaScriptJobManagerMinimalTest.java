@@ -69,6 +69,9 @@ public class JavaScriptJobManagerMinimalTest {
     @After
     public void after() {
         eventLoop_.shutdown();
+        if (client_ != null) {
+            client_.closeAllWindows();
+        }
     }
 
     /**
