@@ -406,17 +406,9 @@ public abstract class WebServerTestCase extends WebTestCase {
      */
     protected final WebClient getWebClient() {
         if (webClient_ == null) {
-            webClient_ = createNewWebClient();
+            webClient_ = new WebClient(getBrowserVersion());
         }
         return webClient_;
-    }
-
-    /**
-     * Returns the WebClient instance for the current test with the current {@link BrowserVersion}.
-     * @return a WebClient with the current {@link BrowserVersion}
-     */
-    protected WebClient createNewWebClient() {
-        return new WebClient(getBrowserVersion());
     }
 
     /**
