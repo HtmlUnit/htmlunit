@@ -107,13 +107,16 @@ public class WebClient5Test extends WebTestCase {
      */
     @Test
     public void addRequestHeader_Cookie() throws Exception {
-        final WebClient client = new WebClient();
+        final WebClient wc = new WebClient();
         try {
-            client.addRequestHeader("Cookie", "some_value");
+            wc.addRequestHeader("Cookie", "some_value");
             fail("Should have thrown an exception ");
         }
         catch (final IllegalArgumentException e) {
             //success
+        }
+        finally {
+            wc.closeAllWindows();
         }
     }
 
@@ -133,7 +136,12 @@ public class WebClient5Test extends WebTestCase {
             }
         };
 
-        wc.getPage(getDefaultUrl().toExternalForm());
-        assertEquals(getDefaultUrl(), calledUrls[0]);
+        try {
+            wc.getPage(getDefaultUrl().toExternalForm());
+            assertEquals(getDefaultUrl(), calledUrls[0]);
+        }
+        finally {
+            wc.closeAllWindows();
+        }
     }
 }

@@ -136,11 +136,12 @@ public class ThreadTest extends TestCase {
             final List<String> collectedAlerts = new ArrayList<>();
 
             final WebClient webClient = new WebClient();
-            webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-            final MockWebConnection connection = new MockWebConnection();
-            connection.setDefaultResponse(html);
-            webClient.setWebConnection(connection);
             try {
+                webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+                final MockWebConnection connection = new MockWebConnection();
+                connection.setDefaultResponse(html);
+                webClient.setWebConnection(connection);
+
                 final HtmlPage page = webClient.getPage(SimpleWebTestCase.URL_FIRST);
 
                 assertEquals("foo", page.getTitleText());

@@ -68,86 +68,91 @@ public class AttributesTest extends TestCase {
      */
     public static Test suite() throws Exception {
         final WebClient webClient = new WebClient();
-        final MockWebConnection connection = new MockWebConnection();
-        connection.setDefaultResponse("<html><head><title>foo</title></head><body></body></html>");
-        webClient.setWebConnection(connection);
-        final HtmlPage page = webClient.getPage(SimpleWebTestCase.URL_FIRST);
+        try {
+            final MockWebConnection connection = new MockWebConnection();
+            connection.setDefaultResponse("<html><head><title>foo</title></head><body></body></html>");
+            webClient.setWebConnection(connection);
+            final HtmlPage page = webClient.getPage(SimpleWebTestCase.URL_FIRST);
 
-        final TestSuite suite = new TestSuite();
-        final String[] classesToTest = {
-            "HtmlAbbreviated", "HtmlAcronym",
-            "HtmlAnchor", "HtmlAddress", "HtmlApplet", "HtmlArea",
-            "HtmlArticle", "HtmlAside", "HtmlAudio",
-            "HtmlBackgroundSound", "HtmlBase", "HtmlBaseFont",
-            "HtmlBidirectionalOverride", "HtmlBig", "HtmlBlink",
-            "HtmlBlockQuote", "HtmlBody", "HtmlBold",
-            "HtmlBreak", "HtmlButton", "HtmlCanvas", "HtmlCaption",
-            "HtmlCenter", "HtmlCitation", "HtmlCode",
-            "HtmlDataList",
-            "HtmlDefinition", "HtmlDefinitionDescription",
-            "HtmlDeletedText", "HtmlDirectory",
-            "HtmlDivision", "HtmlDefinitionList",
-            "HtmlDefinitionTerm", "HtmlEmbed",
-            "HtmlEmphasis",
-            "HtmlFieldSet", "HtmlFigureCaption", "HtmlFigure",
-            "HtmlFont", "HtmlForm", "HtmlFooter",
-            "HtmlFrame", "HtmlFrameSet",
-            "HtmlHead", "HtmlHeader",
-            "HtmlHeading1", "HtmlHeading2", "HtmlHeading3",
-            "HtmlHeading4", "HtmlHeading5", "HtmlHeading6",
-            "HtmlHorizontalRule", "HtmlHtml", "HtmlInlineFrame",
-            "HtmlInlineQuotation",
-            "HtmlImage", "HtmlImage", "HtmlInsertedText", "HtmlIsIndex",
-            "HtmlItalic", "HtmlKeyboard", "HtmlLabel",
-            "HtmlLegend", "HtmlListing", "HtmlListItem",
-            "HtmlLink",
-            "HtmlKeygen",
-            "HtmlMap", "HtmlMark", "HtmlMarquee",
-            "HtmlMenu", "HtmlMeta", "HtmlMeter", "HtmlMultiColumn",
-            "HtmlNav", "HtmlNextId",
-            "HtmlNoBreak", "HtmlNoEmbed", "HtmlNoFrames",
-            "HtmlNoScript", "HtmlObject", "HtmlOrderedList",
-            "HtmlOptionGroup", "HtmlOption", "HtmlOutput",
-            "HtmlParagraph",
-            "HtmlParameter", "HtmlPlainText", "HtmlPreformattedText",
-            "HtmlProgress",
-            "HtmlRp", "HtmlRt", "HtmlRuby",
-            "HtmlS", "HtmlSample",
-            "HtmlScript", "HtmlSection", "HtmlSelect", "HtmlSmall",
-            "HtmlSource", "HtmlSpan",
-            "HtmlStrike", "HtmlStrong", "HtmlStyle",
-            "HtmlSubscript", "HtmlSuperscript",
-            "HtmlTable", "HtmlTableColumn", "HtmlTableColumnGroup",
-            "HtmlTableBody", "HtmlTableDataCell", "HtmlTableHeaderCell",
-            "HtmlTableRow", "HtmlTextArea", "HtmlTableFooter",
-            "HtmlTableHeader", "HtmlTeletype",
-            "HtmlTime", "HtmlTitle",
-            "HtmlUnderlined", "HtmlUnorderedList",
-            "HtmlVariable", "HtmlVideo",
-            "HtmlWordBreak", "HtmlExample"
-        };
+            final TestSuite suite = new TestSuite();
+            final String[] classesToTest = {
+                "HtmlAbbreviated", "HtmlAcronym",
+                "HtmlAnchor", "HtmlAddress", "HtmlApplet", "HtmlArea",
+                "HtmlArticle", "HtmlAside", "HtmlAudio",
+                "HtmlBackgroundSound", "HtmlBase", "HtmlBaseFont",
+                "HtmlBidirectionalOverride", "HtmlBig", "HtmlBlink",
+                "HtmlBlockQuote", "HtmlBody", "HtmlBold",
+                "HtmlBreak", "HtmlButton", "HtmlCanvas", "HtmlCaption",
+                "HtmlCenter", "HtmlCitation", "HtmlCode",
+                "HtmlDataList",
+                "HtmlDefinition", "HtmlDefinitionDescription",
+                "HtmlDeletedText", "HtmlDirectory",
+                "HtmlDivision", "HtmlDefinitionList",
+                "HtmlDefinitionTerm", "HtmlEmbed",
+                "HtmlEmphasis",
+                "HtmlFieldSet", "HtmlFigureCaption", "HtmlFigure",
+                "HtmlFont", "HtmlForm", "HtmlFooter",
+                "HtmlFrame", "HtmlFrameSet",
+                "HtmlHead", "HtmlHeader",
+                "HtmlHeading1", "HtmlHeading2", "HtmlHeading3",
+                "HtmlHeading4", "HtmlHeading5", "HtmlHeading6",
+                "HtmlHorizontalRule", "HtmlHtml", "HtmlInlineFrame",
+                "HtmlInlineQuotation",
+                "HtmlImage", "HtmlImage", "HtmlInsertedText", "HtmlIsIndex",
+                "HtmlItalic", "HtmlKeyboard", "HtmlLabel",
+                "HtmlLegend", "HtmlListing", "HtmlListItem",
+                "HtmlLink",
+                "HtmlKeygen",
+                "HtmlMap", "HtmlMark", "HtmlMarquee",
+                "HtmlMenu", "HtmlMeta", "HtmlMeter", "HtmlMultiColumn",
+                "HtmlNav", "HtmlNextId",
+                "HtmlNoBreak", "HtmlNoEmbed", "HtmlNoFrames",
+                "HtmlNoScript", "HtmlObject", "HtmlOrderedList",
+                "HtmlOptionGroup", "HtmlOption", "HtmlOutput",
+                "HtmlParagraph",
+                "HtmlParameter", "HtmlPlainText", "HtmlPreformattedText",
+                "HtmlProgress",
+                "HtmlRp", "HtmlRt", "HtmlRuby",
+                "HtmlS", "HtmlSample",
+                "HtmlScript", "HtmlSection", "HtmlSelect", "HtmlSmall",
+                "HtmlSource", "HtmlSpan",
+                "HtmlStrike", "HtmlStrong", "HtmlStyle",
+                "HtmlSubscript", "HtmlSuperscript",
+                "HtmlTable", "HtmlTableColumn", "HtmlTableColumnGroup",
+                "HtmlTableBody", "HtmlTableDataCell", "HtmlTableHeaderCell",
+                "HtmlTableRow", "HtmlTextArea", "HtmlTableFooter",
+                "HtmlTableHeader", "HtmlTeletype",
+                "HtmlTime", "HtmlTitle",
+                "HtmlUnderlined", "HtmlUnorderedList",
+                "HtmlVariable", "HtmlVideo",
+                "HtmlWordBreak", "HtmlExample"
+            };
 
-        final HashSet<String> supportedTags = new HashSet<>(DefaultElementFactory.SUPPORTED_TAGS_);
+            final HashSet<String> supportedTags = new HashSet<>(DefaultElementFactory.SUPPORTED_TAGS_);
 
-        for (final String testClass : classesToTest) {
-            final Class<?> clazz = Class.forName("com.gargoylesoftware.htmlunit.html." + testClass);
-            addTestsForClass(clazz, page, suite);
+            for (final String testClass : classesToTest) {
+                final Class<?> clazz = Class.forName("com.gargoylesoftware.htmlunit.html." + testClass);
+                addTestsForClass(clazz, page, suite);
 
-            String tag = (String) clazz.getField("TAG_NAME").get(null);
-            supportedTags.remove(tag);
-            try {
-                tag = (String) clazz.getField("TAG_NAME2").get(null);
+                String tag = (String) clazz.getField("TAG_NAME").get(null);
                 supportedTags.remove(tag);
+                try {
+                    tag = (String) clazz.getField("TAG_NAME2").get(null);
+                    supportedTags.remove(tag);
+                }
+                catch (final NoSuchFieldException e) {
+                    // ignore
+                }
             }
-            catch (final NoSuchFieldException e) {
-                // ignore
-            }
-        }
 
-        if (!supportedTags.isEmpty()) {
-            throw new RuntimeException("Missing tag class(es) " + supportedTags.toString());
+            if (!supportedTags.isEmpty()) {
+                throw new RuntimeException("Missing tag class(es) " + supportedTags.toString());
+            }
+            return suite;
         }
-        return suite;
+        finally {
+            webClient.closeAllWindows();
+        }
     }
 
     /**
