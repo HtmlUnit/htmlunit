@@ -1367,6 +1367,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Ignore
     @Alerts("starting")
     public void shutdownShouldKill() throws Exception {
         final String html = "<html>\n"
