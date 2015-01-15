@@ -29,6 +29,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
@@ -694,5 +695,22 @@ public abstract class WebTestCase {
         // fall back: expectations for all browsers
         final String resource = resourcePrefix + resourceSuffix;
         return referenceClass.getResource(resource);
+    }
+
+    /**
+     * Gets the active JavaScript threads.
+     * @return the threads
+     */
+    protected List<Thread> getJavaScriptThreads() {
+        final Thread[] threads = new Thread[Thread.activeCount() + 10];
+        Thread.enumerate(threads);
+        final List<Thread> jsThreads = new ArrayList<>();
+        for (final Thread t : threads) {
+            if (t != null && t.getName().startsWith("JS executor for")) {
+                jsThreads.add(t);
+            }
+        }
+
+        return jsThreads;
     }
 }

@@ -47,6 +47,8 @@ import org.eclipse.jetty.util.security.Constraint;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.Before;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -758,6 +760,15 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
+     * Reads the number of JS threads remaining from unit tests run before.
+     * This should be always 0.
+     */
+    @Before
+    public void before() {
+        Assert.assertEquals(0,  getJavaScriptThreads().size());
+    }
+
+    /**
      * Release resources but DON'T close the browser if we are running with a real browser.
      * Note that HtmlUnitDriver instances are not cached.
      */
@@ -788,6 +799,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
             // in the remaining window, load a blank page
             driver.get("about:blank");
+        }
+        else {
+            Assert.assertEquals(0,  getJavaScriptThreads().size());
         }
     }
 

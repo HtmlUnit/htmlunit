@@ -14,16 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.net.ConnectException;
-import java.net.SocketException;
 import java.net.URL;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -48,8 +46,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public abstract class SimpleWebTestCase extends WebTestCase {
 
     private WebClient webClient_;
-
-    private int nbJSThreadsBeforeTest_;
 
     /**
      * Load a page with the specified HTML using the default browser version.
@@ -88,36 +84,6 @@ public abstract class SimpleWebTestCase extends WebTestCase {
     public final HtmlPage loadPage(final String html, final List<String> collectedAlerts) throws Exception {
         generateTest_browserVersion_.set(FLAG_ALL_BROWSERS);
         return loadPage(getBrowserVersion(), html, collectedAlerts, getDefaultUrl());
-    }
-
-    /**
-     * Loads an external URL, accounting for the fact that the remote server may be down or the
-     * machine running the tests may not be connected to the internet.
-     * @param url the URL to load
-     * @return the loaded page, or <tt>null</tt> if there were connectivity issues
-     * @throws Exception if an error occurs
-     */
-    protected static final HtmlPage loadUrl(final String url) throws Exception {
-        try {
-            final WebClient client = new WebClient();
-            client.getOptions().setUseInsecureSSL(true);
-            return client.getPage(url);
-        }
-        catch (final ConnectException e) {
-            // The remote server is probably down.
-            System.out.println("Connection could not be made to " + url);
-            return null;
-        }
-        catch (final SocketException e) {
-            // The local machine may not be online.
-            System.out.println("Connection could not be made to " + url);
-            return null;
-        }
-        catch (final UnknownHostException e) {
-            // The local machine may not be online.
-            System.out.println("Connection could not be made to " + url);
-            return null;
-        }
     }
 
     /**
@@ -279,12 +245,12 @@ public abstract class SimpleWebTestCase extends WebTestCase {
     }
 
     /**
-     * Reads the number of JS threads remaining from unit tests run before the current one.
-     * Ideally it should be always 0.
+     * Reads the number of JS threads remaining from unit tests run before.
+     * This should be always 0.
      */
     @Before
-    public void readJSThreadsBeforeTest() {
-        nbJSThreadsBeforeTest_ = getJavaScriptThreads().size();
+    public void before() {
+        Assert.assertEquals(0,  getJavaScriptThreads().size());
     }
 
     /**
@@ -300,10 +266,12 @@ public abstract class SimpleWebTestCase extends WebTestCase {
         webClient_ = null;
 
         final List<Thread> jsThreads = getJavaScriptThreads();
+        Assert.assertEquals(0,  jsThreads.size());
+
         // collect stack traces
         // caution: the threads may terminate after the threads have been returned by getJavaScriptThreads()
         // and before stack traces are retrieved
-        if (jsThreads.size() > nbJSThreadsBeforeTest_) {
+        if (jsThreads.size() > 0) {
             final Map<String, StackTraceElement[]> stackTraces = new HashMap<>();
             for (final Thread t : jsThreads) {
                 final StackTraceElement elts[] = t.getStackTrace();
@@ -324,22 +292,5 @@ public abstract class SimpleWebTestCase extends WebTestCase {
                 throw new RuntimeException("JS threads are still running: " + jsThreads.size());
             }
         }
-    }
-
-    /**
-     * Gets the active JavaScript threads.
-     * @return the threads
-     */
-    protected List<Thread> getJavaScriptThreads() {
-        final Thread[] threads = new Thread[Thread.activeCount() + 10];
-        Thread.enumerate(threads);
-        final List<Thread> jsThreads = new ArrayList<>();
-        for (final Thread t : threads) {
-            if (t != null && t.getName().startsWith("JS executor for")) {
-                jsThreads.add(t);
-            }
-        }
-
-        return jsThreads;
     }
 }
