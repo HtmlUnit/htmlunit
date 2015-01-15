@@ -9,7 +9,7 @@
     <body>
         <release version="2.16" date="???" description="Java 7, FF31, IE11 progress, Chrome progress, Bugfixes">
             <action type="fix" dev="asashour">
-                JavaScript: DocumentType: support 'publicId' and 'systemId', while 'prefix' is undefined in Chrome. 
+                JavaScript: DocumentType: support 'publicId' and 'systemId', while 'prefix' is undefined in Chrome.
             </action>
             <action type="update" dev="asashour">
                 Mandate Java 7 as a minimum requirement.
