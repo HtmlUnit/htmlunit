@@ -20,6 +20,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 
+import org.junit.Ignore;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -45,6 +47,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @author Ronald Brill
  * @author Frank Danek
  */
+@Ignore
 public class AttributesTest extends TestCase {
 
     private final Class<?> classUnderTest_;
