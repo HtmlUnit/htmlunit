@@ -21,7 +21,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static org.junit.Assert.fail;
 
 import org.eclipse.jetty.server.Server;
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -62,17 +61,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     protected static String getVersion() {
         return "1.8.2";
-    }
-
-    /**
-     * Overridden so it doesn't check for background threads.
-     *
-     * {@inheritDoc}
-     */
-    @After
-    @Override
-    public void releaseResources() {
-        // nothing
     }
 
     /**
