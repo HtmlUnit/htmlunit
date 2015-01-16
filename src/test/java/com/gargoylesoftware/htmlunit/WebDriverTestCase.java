@@ -47,6 +47,7 @@ import org.eclipse.jetty.util.security.Constraint;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -764,7 +765,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     @Before
     public void before() {
-        // Assert.assertEquals(0,  getJavaScriptThreads().size());
+        Assert.assertEquals(0,  getJavaScriptThreads().size());
     }
 
     /**
@@ -780,6 +781,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             webClient_.getCookieManager().clearCookies();
         }
         webClient_ = null;
+        Assert.assertEquals(0,  getJavaScriptThreads().size());
 
         if (useRealBrowser_) {
             final WebDriver driver = getWebDriver();
@@ -798,9 +800,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
             // in the remaining window, load a blank page
             driver.get("about:blank");
-        }
-        else {
-            // Assert.assertEquals(0,  getJavaScriptThreads().size());
         }
     }
 
