@@ -216,9 +216,10 @@ public class WebResponse implements Serializable {
                 Charset.forName(encoding);
             }
             catch (final Exception e) {
+                final String cs = getContentCharset();
                 LOG.warn("Attempted to use unsupported encoding '"
-                        + encoding + "'; using default system encoding.");
-                return IOUtils.toString(in);
+                        + encoding + "'; using default content charset ('" + cs + "').");
+                return IOUtils.toString(in, cs);
             }
 
             return IOUtils.toString(in, encoding);
