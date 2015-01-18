@@ -46,6 +46,8 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     private static final long serialVersionUID = -4681836475956316533L;
 
+    private static final String LINE_SEPARARATOR = System.getProperty("line.separator");
+
     /**
      * The window to which this job manager belongs (weakly referenced, so as not
      * to leak memory).
@@ -259,7 +261,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                 LOG.debug("      job to string: " + job.toString());
                 LOG.debug("      job id: " + job.getId());
                 if (job.isPeriodic()) {
-                    LOG.debug("      period: " + job.getPeriod().longValue());
+                    LOG.debug("      period: " + job.getPeriod().intValue());
                 }
                 count++;
             }
@@ -271,19 +273,18 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      */
     public synchronized String jobStatusDump() {
-        final String lf = System.getProperty("line.separator");
         final StringBuilder status = new StringBuilder();
         status.append("------ JavaScript job status -----");
-        status.append(lf);
+        status.append(LINE_SEPARARATOR);
         if (null != currentlyRunningJob_) {
             status.append("  current running job: ").append(currentlyRunningJob_.toString());
             status.append("      job id: " + currentlyRunningJob_.getId());
-            status.append(lf);
-            status.append(lf);
-            status.append(lf);
+            status.append(LINE_SEPARARATOR);
+            status.append(LINE_SEPARARATOR);
+            status.append(LINE_SEPARARATOR);
         }
         status.append("  number of jobs on the queue: " + scheduledJobsQ_.size());
-        status.append(lf);
+        status.append(LINE_SEPARARATOR);
         int count = 1;
         for (final JavaScriptJob job : scheduledJobsQ_) {
             final long now = System.currentTimeMillis();
@@ -291,19 +292,19 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             status.append("  " + count);
             status.append(")  Job target execution time: " + execTime);
             status.append(" (should start in " + ((execTime - now) / 1000d) + "s)");
-            status.append(lf);
+            status.append(LINE_SEPARARATOR);
             status.append("      job to string: ").append(job.toString());
-            status.append(lf);
+            status.append(LINE_SEPARARATOR);
             status.append("      job id: " + job.getId());
-            status.append(lf);
+            status.append(LINE_SEPARARATOR);
             if (job.isPeriodic()) {
-                status.append("      period: " + job.getPeriod().longValue());
-                status.append(lf);
+                status.append("      period: " + job.getPeriod().intValue());
+                status.append(LINE_SEPARARATOR);
             }
             count++;
         }
         status.append("------------------------------------------");
-        status.append(lf);
+        status.append(LINE_SEPARARATOR);
 
         return status.toString();
     }
