@@ -141,7 +141,7 @@ public class XMLHttpRequest extends SimpleScriptable {
     private Function errorHandler_;
     private WebRequest webRequest_;
     private boolean async_;
-    private int threadID_;
+    private int jobID_;
     private WebResponse webResponse_;
     private String overriddenMimeType_;
     private HtmlPage containingPage_;
@@ -426,7 +426,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      */
     @JsxFunction
     public void abort() {
-        getWindow().getWebWindow().getJobManager().stopJob(threadID_);
+        getWindow().getWebWindow().getJobManager().stopJob(jobID_);
     }
 
     /**
@@ -631,7 +631,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Starting XMLHttpRequest thread for asynchronous request");
             }
-            threadID_ = getWindow().getWebWindow().getJobManager().addJob(job, page);
+            jobID_ = getWindow().getWebWindow().getJobManager().addJob(job, page);
         }
     }
 

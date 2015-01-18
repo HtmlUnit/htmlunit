@@ -114,7 +114,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
     private Function stateChangeHandler_;
     private WebRequest webRequest_;
     private boolean async_;
-    private int threadID_;
+    private int jobID_;
     private WebResponse webResponse_;
     private HtmlPage containingPage_;
     private boolean openedMultipleTimes_;
@@ -301,7 +301,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
      */
     @JsxFunction
     public void abort() {
-        getWindow().getWebWindow().getJobManager().stopJob(threadID_);
+        getWindow().getWebWindow().getJobManager().stopJob(jobID_);
         setState(STATE_UNSENT, Context.getCurrentContext());
     }
 
@@ -494,7 +494,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Starting XMLHTTPRequest thread for asynchronous request");
             }
-            threadID_ = getWindow().getWebWindow().getJobManager().addJob(job, page);
+            jobID_ = getWindow().getWebWindow().getJobManager().addJob(job, page);
         }
     }
 
