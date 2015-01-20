@@ -85,6 +85,24 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     }
 
     /** {@inheritDoc} */
+    public synchronized int getJobCount(final JavaScriptJobFilter filter) {
+        if (filter == null) {
+            return scheduledJobsQ_.size() + (currentlyRunningJob_ != null ? 1 : 0);
+        }
+
+        int count = 0;
+        if (currentlyRunningJob_ != null && filter.passes(currentlyRunningJob_)) {
+            count++;
+        }
+        for (JavaScriptJob job : scheduledJobsQ_) {
+            if (filter.passes(job)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /** {@inheritDoc} */
     public int addJob(final JavaScriptJob job, final Page page) {
         final WebWindow w = getWindow();
         if (w == null) {
@@ -193,6 +211,11 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     /** {@inheritDoc} */
     public int waitForJobsStartingBefore(final long delayMillis) {
+        return waitForJobsStartingBefore(delayMillis, null);
+    }
+
+    /** {@inheritDoc} */
+    public int waitForJobsStartingBefore(final long delayMillis, final JavaScriptJobFilter filter) {
         final boolean debug = LOG.isDebugEnabled();
 
         final long latestExecutionTime = System.currentTimeMillis() + delayMillis;
@@ -203,12 +226,16 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
         final long interval = Math.max(40, delayMillis);
         synchronized (this) {
-            JavaScriptJob earliestJob = getEarliestJob();
-            boolean waitingJob = earliestJob != null && earliestJob.getTargetExecutionTime() < latestExecutionTime;
-            boolean currentJob = currentlyRunningJob_ != null
-                    && currentlyRunningJob_.getTargetExecutionTime() < latestExecutionTime;
+            JavaScriptJob earliestJob = getEarliestJob(filter);
+            boolean pending = earliestJob != null && earliestJob.getTargetExecutionTime() < latestExecutionTime;
+            pending = pending
+                    || (
+                            currentlyRunningJob_ != null
+                            && (filter == null || filter.passes(currentlyRunningJob_))
+                            && currentlyRunningJob_.getTargetExecutionTime() < latestExecutionTime
+                       );
 
-            while (currentJob || waitingJob) {
+            while (pending) {
                 try {
                     wait(interval);
                 }
@@ -216,14 +243,18 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                     LOG.error("InterruptedException while in waitForJobsStartingBefore", e);
                 }
 
-                earliestJob = getEarliestJob();
-                waitingJob = earliestJob != null && earliestJob.getTargetExecutionTime() < latestExecutionTime;
-                currentJob = currentlyRunningJob_ != null
-                        && currentlyRunningJob_.getTargetExecutionTime() < latestExecutionTime;
+                earliestJob = getEarliestJob(filter);
+                pending = earliestJob != null && earliestJob.getTargetExecutionTime() < latestExecutionTime;
+                pending = pending
+                        || (
+                                currentlyRunningJob_ != null
+                                && (filter == null || filter.passes(currentlyRunningJob_))
+                                && currentlyRunningJob_.getTargetExecutionTime() < latestExecutionTime
+                           );
             }
         }
 
-        final int jobs = getJobCount();
+        final int jobs = getJobCount(filter);
         if (debug) {
             LOG.debug("Finished waiting for all jobs that have target execution time earlier than "
                 + latestExecutionTime + ", final job count is " + jobs);
@@ -272,11 +303,11 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      */
-    public synchronized String jobStatusDump() {
+    public synchronized String jobStatusDump(final JavaScriptJobFilter filter) {
         final StringBuilder status = new StringBuilder();
         status.append("------ JavaScript job status -----");
         status.append(LINE_SEPARARATOR);
-        if (null != currentlyRunningJob_) {
+        if (null != currentlyRunningJob_ && (filter == null || filter.passes(currentlyRunningJob_))) {
             status.append("  current running job: ").append(currentlyRunningJob_.toString());
             status.append("      job id: " + currentlyRunningJob_.getId());
             status.append(LINE_SEPARARATOR);
@@ -287,21 +318,23 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         status.append(LINE_SEPARARATOR);
         int count = 1;
         for (final JavaScriptJob job : scheduledJobsQ_) {
-            final long now = System.currentTimeMillis();
-            final long execTime = job.getTargetExecutionTime();
-            status.append("  " + count);
-            status.append(")  Job target execution time: " + execTime);
-            status.append(" (should start in " + ((execTime - now) / 1000d) + "s)");
-            status.append(LINE_SEPARARATOR);
-            status.append("      job to string: ").append(job.toString());
-            status.append(LINE_SEPARARATOR);
-            status.append("      job id: " + job.getId());
-            status.append(LINE_SEPARARATOR);
-            if (job.isPeriodic()) {
-                status.append("      period: " + job.getPeriod().intValue());
+            if (filter == null || filter.passes(job)) {
+                final long now = System.currentTimeMillis();
+                final long execTime = job.getTargetExecutionTime();
+                status.append("  " + count);
+                status.append(")  Job target execution time: " + execTime);
+                status.append(" (should start in " + ((execTime - now) / 1000d) + "s)");
                 status.append(LINE_SEPARARATOR);
+                status.append("      job to string: ").append(job.toString());
+                status.append(LINE_SEPARARATOR);
+                status.append("      job id: " + job.getId());
+                status.append(LINE_SEPARARATOR);
+                if (job.isPeriodic()) {
+                    status.append("      period: " + job.getPeriod().intValue());
+                    status.append(LINE_SEPARARATOR);
+                }
+                count++;
             }
-            count++;
         }
         status.append("------------------------------------------");
         status.append(LINE_SEPARARATOR);
@@ -314,6 +347,20 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
      */
     public JavaScriptJob getEarliestJob() {
         return scheduledJobsQ_.peek();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public synchronized JavaScriptJob getEarliestJob(final JavaScriptJobFilter filter) {
+        if (filter == null) { return scheduledJobsQ_.peek(); }
+
+        for (JavaScriptJob job : scheduledJobsQ_) {
+            if (filter.passes(job)) {
+                return job;
+            }
+        }
+        return null;
     }
 
     /**

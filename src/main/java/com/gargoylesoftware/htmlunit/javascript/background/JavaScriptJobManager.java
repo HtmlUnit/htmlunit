@@ -23,8 +23,23 @@ import com.gargoylesoftware.htmlunit.Page;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public interface JavaScriptJobManager extends Serializable {
+
+    /**
+     * Simple filter interface. The caller can use this to filter
+     * the jobs of interest in the job list.
+     */
+    public interface JavaScriptJobFilter {
+
+        /**
+         * Check if the job passes the filter.
+         * @param job the job to check
+         * @return true if the job passes the filter
+         */
+        boolean passes(JavaScriptJob job);
+    }
 
     /**
      * Returns the number of active jobs, including jobs that are currently executing and jobs that are
@@ -32,6 +47,14 @@ public interface JavaScriptJobManager extends Serializable {
      * @return the number of active jobs
      */
     int getJobCount();
+
+    /**
+     * Returns the number of active jobs, including jobs that are currently executing and jobs that are
+     * waiting to execute. Only jobs passing the filter are counted.
+     * @param filter the JavaScriptJobFilter
+     * @return the number of active jobs
+     */
+    int getJobCount(JavaScriptJobFilter filter);
 
     /**
      * Adds the specified job to this job manager, assigning it an ID. If the specified page is not currently
@@ -84,6 +107,19 @@ public interface JavaScriptJobManager extends Serializable {
     int waitForJobsStartingBefore(final long delayMillis);
 
     /**
+     * Blocks until all jobs scheduled to start executing before <tt>(now + delayMillis)</tt> have finished executing.
+     * If there is no background JavaScript task currently executing, and there is no background JavaScript task
+     * scheduled to start executing within the specified time, this method returns immediately -- even if there are
+     * tasks scheduled to be executed after <tt>(now + delayMillis)</tt>.
+     * @param delayMillis the delay which determines the background tasks to wait for (in milliseconds);
+     *        may be negative, as it is relative to the current time
+     * @param filter the JavaScriptJobFilter
+     * @return the number of background JavaScript jobs still executing or waiting to be executed when this
+     *         method returns; will be <tt>0</tt> if there are no jobs left to execute
+     */
+    int waitForJobsStartingBefore(final long delayMillis, JavaScriptJobFilter filter);
+
+    /**
      * Shuts down this job manager and stops all of its jobs.
      */
     void shutdown();
@@ -93,6 +129,13 @@ public interface JavaScriptJobManager extends Serializable {
      * @return <code>null</code> if none
      */
     JavaScriptJob getEarliestJob();
+
+    /**
+     * Gets the earliest job for this manager.
+     * @param filter the JavaScriptJobFilter
+     * @return <code>null</code> if none
+     */
+    JavaScriptJob getEarliestJob(JavaScriptJobFilter filter);
 
     /**
      * Runs the provided job if it is the right time for it.
@@ -106,7 +149,8 @@ public interface JavaScriptJobManager extends Serializable {
      *
      * Utility method to report the current job status.
      * Might help some tools.
+     * @param filter the JavaScriptJobFilter
      * @return the job status report as string
      */
-    String jobStatusDump();
+    String jobStatusDump(JavaScriptJobFilter filter);
 }

@@ -8,6 +8,13 @@
 
     <body>
         <release version="2.16" date="???" description="Java 7, FF31, IE11 progress, Chrome progress, Bugfixes">
+            <action type="add" dev="rbri">
+                JavaScriptJobManager interface enhanced to support filtered access to the jobs. This helps to filter
+                out heartbeat jobs while waiting for the background jobs to finish.
+            </action>
+            <action type="add" dev="rbri">
+                Mock implementation of element.setCapture() and document.releaseCapture() added.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: DocumentType: support 'publicId' and 'systemId', while 'prefix' is undefined in Chrome.
             </action>

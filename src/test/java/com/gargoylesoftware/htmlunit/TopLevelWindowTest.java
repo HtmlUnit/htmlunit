@@ -82,6 +82,10 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
                 return jobCount.intValue();
             }
             /** {@inheritDoc} */
+            public int waitForJobsStartingBefore(final long delayMillis, final JavaScriptJobFilter filter) {
+                return jobCount.intValue();
+            }
+            /** {@inheritDoc} */
             public int waitForJobs(final long timeoutMillis) {
                 return jobCount.intValue();
             }
@@ -106,6 +110,10 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
                 return jobCount.intValue();
             }
             /** {@inheritDoc} */
+            public int getJobCount(final JavaScriptJobFilter filter) {
+                return jobCount.intValue();
+            }
+            /** {@inheritDoc} */
             public int addJob(final JavaScriptJob job, final Page page) {
                 jobCount.increment();
                 return jobCount.intValue();
@@ -115,12 +123,16 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
                 return null;
             }
             /** {@inheritDoc} */
+            public JavaScriptJob getEarliestJob(final JavaScriptJobFilter filter) {
+                return null;
+            }
+            /** {@inheritDoc} */
             public boolean runSingleJob(final JavaScriptJob job) {
                 // Empty
                 return false;
             }
             @Override
-            public String jobStatusDump() {
+            public String jobStatusDump(final JavaScriptJobFilter filter) {
                 return null;
             }
         };
