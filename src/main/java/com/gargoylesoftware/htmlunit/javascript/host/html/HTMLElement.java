@@ -2962,4 +2962,14 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final HtmlElement htmlElt = getDomNodeOrDie();
         return htmlElt.getDefaultStyleDisplay().value();
     }
+
+    /**
+     * Mock for the moment.
+     * @param retargetToElement if true, all events are targeted directly to this element;
+     * if false, events can also fire at descendants of this element
+     */
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(IE) })
+    public void setCapture(final boolean retargetToElement) {
+        // empty
+    }
 }

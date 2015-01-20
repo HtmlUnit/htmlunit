@@ -2246,4 +2246,13 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public Selection getSelection() {
         return getWindow().getSelectionImpl();
     }
+
+    /**
+     * Mock for the moment.
+     * @return true for success
+     */
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(IE) })
+    public boolean releaseCapture() {
+        return true;
+    }
 }

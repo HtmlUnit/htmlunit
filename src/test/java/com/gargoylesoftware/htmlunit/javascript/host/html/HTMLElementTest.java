@@ -5529,4 +5529,32 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Simple test that calls setCapture.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "setCapture available",
+            CHROME = "exception")
+    public void setCapture() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var div = document.getElementById('myDiv');\n"
+            + "    try {\n"
+            + "      div.setCapture();\n"
+            + "      div.setCapture(true);\n"
+            + "      div.setCapture(false);\n"
+            + "      alert('setCapture available');\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }
