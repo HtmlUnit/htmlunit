@@ -13,7 +13,7 @@
                 out heartbeat jobs while waiting for the background jobs to finish.
             </action>
             <action type="add" dev="rbri">
-                Mock implementation of element.setCapture() and document.releaseCapture() added.
+                Mock implementation of element.setCapture(), element.releaseCapture() and document.releaseCapture() added.
             </action>
             <action type="fix" dev="asashour">
                 JavaScript: DocumentType: support 'publicId' and 'systemId', while 'prefix' is undefined in Chrome.

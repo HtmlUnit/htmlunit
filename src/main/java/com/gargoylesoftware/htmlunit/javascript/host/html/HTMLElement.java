@@ -2972,4 +2972,13 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public void setCapture(final boolean retargetToElement) {
         // empty
     }
+
+    /**
+     * Mock for the moment.
+     * @return true for success
+     */
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(IE) })
+    public boolean releaseCapture() {
+        return true;
+    }
 }
