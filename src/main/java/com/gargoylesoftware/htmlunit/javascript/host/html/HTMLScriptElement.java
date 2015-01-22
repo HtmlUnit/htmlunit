@@ -49,7 +49,8 @@ public class HTMLScriptElement extends HTMLElement {
      */
     @JsxGetter
     public String getSrc() {
-        return getDomNodeOrDie().getAttribute("src");
+        final HtmlScript tmpScript = (HtmlScript) getDomNodeOrDie();
+        return tmpScript.getSrcAttribute();
     }
 
     /**

@@ -376,4 +376,22 @@ public class HtmlScript2Test extends WebDriverTestCase {
     public void testInvalidJQuerySrcAttribute() throws Exception {
         loadPage2("<html><body><script src='//:'></script></body></html>");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "loaded", "§§URL§§abcd" })
+    public void testLineBreaksInUrl() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "  <script id='myScript' src='" + URL_SECOND + "a\rb\nc\r\nd'></script>\n"
+            + "</head>\n"
+            + "<body onload='alert(document.getElementById(\"myScript\").src);'>Test</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setResponse(new URL(URL_SECOND, "abcd"), "alert('loaded')");
+        expandExpectedAlertsVariables(URL_SECOND);
+        loadPageWithAlerts2(html);
+    }
 }

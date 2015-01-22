@@ -146,7 +146,15 @@ public class HtmlScript extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getSrcAttribute() {
-        return getAttribute("src");
+        // at the moment StringUtils.replaceChars returns the org string
+        // if nothing to replace was found but the doc implies, that we
+        // can't trust on this in the future
+        final String attrib = getAttribute("src");
+        if (ATTRIBUTE_NOT_DEFINED == attrib) {
+            return attrib;
+        }
+
+        return StringUtils.replaceChars(attrib, "\r\n", "");
     }
 
     /**
@@ -199,37 +207,40 @@ public class HtmlScript extends HtmlElement {
      */
     @Override
     public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
+        // special additional processing for the 'src'
+        if (namespaceURI != null || !"src".equals(qualifiedName)) {
+            super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
+            return;
+        }
+
         final String oldValue = getAttributeNS(namespaceURI, qualifiedName);
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
 
-        // special additional processing for the 'src'
-        if (namespaceURI == null && "src".equals(qualifiedName)) {
-            if (isDirectlyAttachedToPage()) {
-                final boolean alwaysReexecute = hasFeature(JS_SCRIPT_ALWAYS_REEXECUTE_ON_SRC_CHANGE);
-                // always execute if IE;
-                if (alwaysReexecute) {
-                    resetExecuted();
-                    final PostponedAction action = new PostponedAction(getPage()) {
-                        @Override
-                        public void execute() {
-                            executeScriptIfNeeded();
-                        }
-                    };
-                    final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
-                    engine.addPostponedAction(action);
-                }
-                // if FF, only execute if the "src" attribute
-                // was undefined and there was no inline code.
-                else if (oldValue.isEmpty() && getFirstChild() == null) {
-                    final PostponedAction action = new PostponedAction(getPage()) {
-                        @Override
-                        public void execute() {
-                            executeScriptIfNeeded();
-                        }
-                    };
-                    final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
-                    engine.addPostponedAction(action);
-                }
+        if (isDirectlyAttachedToPage()) {
+            final boolean alwaysReexecute = hasFeature(JS_SCRIPT_ALWAYS_REEXECUTE_ON_SRC_CHANGE);
+            // always execute if IE;
+            if (alwaysReexecute) {
+                resetExecuted();
+                final PostponedAction action = new PostponedAction(getPage()) {
+                    @Override
+                    public void execute() {
+                        executeScriptIfNeeded();
+                    }
+                };
+                final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
+                engine.addPostponedAction(action);
+            }
+            // if FF, only execute if the "src" attribute
+            // was undefined and there was no inline code.
+            else if (oldValue.isEmpty() && getFirstChild() == null) {
+                final PostponedAction action = new PostponedAction(getPage()) {
+                    @Override
+                    public void execute() {
+                        executeScriptIfNeeded();
+                    }
+                };
+                final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
+                engine.addPostponedAction(action);
             }
         }
     }

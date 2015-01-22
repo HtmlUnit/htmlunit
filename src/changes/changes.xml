@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="Java 7, FF31, IE11 progress, Chrome progress, Bugfixes">
+            <action type="fix" dev="rbri" issue="1663">
+                Browsers are ignoring line breaks inside the script src attribute.
+            </action>
             <action type="add" dev="rbri">
                 JavaScriptJobManager interface enhanced to support filtered access to the jobs. This helps to filter
                 out heartbeat jobs while waiting for the background jobs to finish.
