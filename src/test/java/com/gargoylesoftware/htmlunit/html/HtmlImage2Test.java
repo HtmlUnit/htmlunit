@@ -172,4 +172,38 @@ public class HtmlImage2Test extends WebDriverTestCase {
         final boolean displayed = driver.findElement(By.id("myImg")).isDisplayed();
         assertEquals(Boolean.parseBoolean(getExpectedAlerts()[0]), displayed);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "1", "§§URL§§abcd/img.gif" })
+    public void testLineBreaksInUrl() throws Exception {
+        final InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img");
+        final byte[] directBytes = IOUtils.toByteArray(is);
+        is.close();
+
+        final URL urlImage = new URL(URL_SECOND, "abcd/img.gif");
+        final List<NameValuePair> emptyList = Collections.emptyList();
+        getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/gif", emptyList);
+
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var img = document.getElementById('myImg');\n"
+            + "    img.width;\n" // this forces image loading in htmlunit
+            + "    alert(img.width);\n"
+            + "    alert(img.src);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <img id='myImg' src='" + URL_SECOND + "a\rb\nc\r\nd/img.gif' onError='alert(\"broken\");'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        expandExpectedAlertsVariables(URL_SECOND);
+        loadPageWithAlerts2(html);
+    }
 }
