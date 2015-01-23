@@ -17,6 +17,12 @@ package com.gargoylesoftware.htmlunit.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Collections;
+import java.util.List;
+
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -25,6 +31,7 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -323,5 +330,37 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
         webDriver.findElement(By.id("myInput")).click();
 
         assertEquals(getExpectedAlerts(), getCollectedAlerts(webDriver));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("§§URL§§abcd/img.gif")
+    public void testLineBreaksInUrl() throws Exception {
+        final InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img");
+        final byte[] directBytes = IOUtils.toByteArray(is);
+        is.close();
+
+        final URL urlImage = new URL(URL_SECOND, "abcd/img.gif");
+        final List<NameValuePair> emptyList = Collections.emptyList();
+        getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/gif", emptyList);
+
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var input = document.getElementById('myInput');\n"
+            + "    alert(input.src);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='myInput' type='image' src='" + URL_SECOND + "a\rb\nc\r\nd/img.gif'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        expandExpectedAlertsVariables(URL_SECOND);
+        loadPageWithAlerts2(html);
     }
 }

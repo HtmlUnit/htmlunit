@@ -146,15 +146,7 @@ public class HtmlScript extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getSrcAttribute() {
-        // at the moment StringUtils.replaceChars returns the org string
-        // if nothing to replace was found but the doc implies, that we
-        // can't trust on this in the future
-        final String attrib = getAttribute("src");
-        if (ATTRIBUTE_NOT_DEFINED == attrib) {
-            return attrib;
-        }
-
-        return StringUtils.replaceChars(attrib, "\r\n", "");
+        return getSrcAttributeNormalized();
     }
 
     /**

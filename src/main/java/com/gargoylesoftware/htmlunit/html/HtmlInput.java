@@ -226,7 +226,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * or an empty string if that attribute isn't defined.
      */
     public final String getSrcAttribute() {
-        return getAttribute("src");
+        return getSrcAttributeNormalized();
     }
 
     /**

@@ -28,6 +28,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
+import com.gargoylesoftware.htmlunit.html.HtmlImageInput;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
@@ -360,6 +361,16 @@ public class HTMLInputElement extends FormField {
     public void setAlign(final String align) {
         final boolean ignoreIfNoError = getBrowserVersion().hasFeature(JS_ALIGN_FOR_INPUT_IGNORES_VALUES);
         setAlign(align, ignoreIfNoError);
+    }
+
+    /**
+     * Returns the value of the <tt>src</tt> attribute.
+     * @return the value of the <tt>src</tt> attribute
+     */
+    @JsxGetter
+    public String getSrc() {
+        final HtmlImageInput input = (HtmlImageInput) getDomNodeOrDie();
+        return input.getSrcAttribute();
     }
 
     /**

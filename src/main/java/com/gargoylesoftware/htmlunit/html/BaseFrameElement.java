@@ -250,7 +250,7 @@ public abstract class BaseFrameElement extends HtmlElement {
      * @return the value of the attribute "src" or an empty string if that attribute isn't defined
      */
     public final String getSrcAttribute() {
-        return getAttribute("src");
+        return getSrcAttributeNormalized();
     }
 
     /**

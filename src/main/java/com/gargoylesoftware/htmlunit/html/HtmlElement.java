@@ -36,6 +36,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Attr;
@@ -1663,5 +1664,23 @@ public abstract class HtmlElement extends DomElement {
      */
     public DisplayStyle getDefaultStyleDisplay() {
         return DisplayStyle.BLOCK;
+    }
+
+    /**
+     * Helper for src retrieval and normalization.
+     *
+     * @return the value of the attribute "src" with all line breaks removed
+     * or an empty string if that attribute isn't defined.
+     */
+    protected final String getSrcAttributeNormalized() {
+        // at the moment StringUtils.replaceChars returns the org string
+        // if nothing to replace was found but the doc implies, that we
+        // can't trust on this in the future
+        final String attrib = getAttribute("src");
+        if (ATTRIBUTE_NOT_DEFINED == attrib) {
+            return attrib;
+        }
+
+        return StringUtils.replaceChars(attrib, "\r\n", "");
     }
 }

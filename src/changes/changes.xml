@@ -9,7 +9,7 @@
     <body>
         <release version="2.16" date="???" description="Java 7, FF31, IE11 progress, Chrome progress, Bugfixes">
             <action type="fix" dev="rbri" issue="1663">
-                Browsers are ignoring line breaks inside the src attribute of script/image tags.
+                Browsers are ignoring line breaks inside the src attribute of script/image/frames tags.
             </action>
             <action type="add" dev="rbri">
                 JavaScriptJobManager interface enhanced to support filtered access to the jobs. This helps to filter

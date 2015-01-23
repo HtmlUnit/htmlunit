@@ -276,4 +276,55 @@ public class HtmlFrame2Test extends WebDriverTestCase {
 
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("loaded")
+    public void testLineBreaksInUrl() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "</head>\n"
+            + "<body onload='alert(\"loaded\");'>Test</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setResponse(new URL(URL_SECOND, "abcd"), html);
+        expandExpectedAlertsVariables(URL_SECOND);
+
+        final String frame
+            = "<html>\n"
+            + "  <frameset cols='100%'>\n"
+            + "    <frame src='" + URL_SECOND + "a\rb\nc\r\nd' id='myFrame'>\n"
+            + "  </frameset></html>";
+
+        expandExpectedAlertsVariables(URL_SECOND);
+        loadPageWithAlerts2(frame);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("loaded")
+    public void testLineBreaksInUrlIFrame() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "</head>\n"
+            + "<body onload='alert(\"loaded\");'>Test</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setResponse(new URL(URL_SECOND, "abcd"), html);
+        expandExpectedAlertsVariables(URL_SECOND);
+
+        final String frame
+            = "<html>\n"
+            + "  <body>\n"
+            + "    <iframe src='" + URL_SECOND + "a\rb\nc\r\nd' id='myFrame'></iframe>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        expandExpectedAlertsVariables(URL_SECOND);
+        loadPageWithAlerts2(frame);
+    }
 }
