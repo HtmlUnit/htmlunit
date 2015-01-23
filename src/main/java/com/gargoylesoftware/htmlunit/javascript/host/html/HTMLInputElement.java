@@ -28,7 +28,6 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
-import com.gargoylesoftware.htmlunit.html.HtmlImageInput;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
@@ -369,7 +368,7 @@ public class HTMLInputElement extends FormField {
      */
     @JsxGetter
     public String getSrc() {
-        final HtmlImageInput input = (HtmlImageInput) getDomNodeOrDie();
+        final HtmlInput input = (HtmlInput) getDomNodeOrDie();
         return input.getSrcAttribute();
     }
 
