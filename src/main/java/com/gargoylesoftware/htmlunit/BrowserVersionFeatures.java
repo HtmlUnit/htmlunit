@@ -1328,7 +1328,7 @@ public enum BrowserVersionFeatures {
     JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG,
 
     /** The reference argument of <code>Node.insertBefore(..)</code> is optional. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 11) })
     JS_NODE_INSERT_BEFORE_REF_OPTIONAL,
 
     /** Should throw exception if extra argument is passed to node.insertBefore(). */
