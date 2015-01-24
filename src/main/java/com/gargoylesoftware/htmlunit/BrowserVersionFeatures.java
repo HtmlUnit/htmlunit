@@ -852,6 +852,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED,
 
+    /** If setting the document.location inside onclick() of anchor element should be triggered */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_DOCUMENT_SET_LOCATION_EXECUTED_IN_EVENT_FROM_ANCHOR,
+
     /** Javascript property document.domain doesn't allow to set domain of about:blank. */
     @BrowserFeature(@WebBrowser(IE))
     JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK,
