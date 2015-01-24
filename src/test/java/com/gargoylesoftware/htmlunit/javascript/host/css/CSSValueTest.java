@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -40,7 +37,6 @@ public class CSSValueTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "function CSSValue() {\n    [native code]\n}", "0123" },
             CHROME = { "function CSSValue() { [native code] }", "0123" },
             IE = { "exception" })
-    @NotYetImplemented(FF)
     public void test() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<script>\n"

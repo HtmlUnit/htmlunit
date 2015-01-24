@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
@@ -234,6 +235,14 @@ public class CSSPrimitiveValue extends CSSValue {
         setPrototype(getPrototype(getClass()));
         setDomNode(element.getDomNodeOrNull(), false);
         wrappedCssPrimitiveValue_ = cssValue;
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
+        // Empty.
     }
 
     /**

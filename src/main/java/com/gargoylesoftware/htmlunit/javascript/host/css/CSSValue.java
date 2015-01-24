@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
@@ -73,6 +74,14 @@ public class CSSValue extends SimpleScriptable {
      * Creates an instance. JavaScript objects must have a default constructor to instantiate prototype.
      */
     public CSSValue() {
+        // Empty.
+    }
+
+    /**
+     * JavaScript constructor.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
         // Empty.
     }
 
