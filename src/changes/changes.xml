@@ -9,6 +9,9 @@
     <body>
         <release version="2.16" date="???" description="Java 7, FF31, IE11 progress, Chrome progress, Bugfixes">
             <action type="fix" dev="asashour">
+                JavaScript: constants should not be overwritten or deleted.
+            </action>
+            <action type="fix" dev="asashour">
                 JavaScript: Node.insertBefore() throw exception for Chrome when second parameter is missing.
             </action>
             <action type="fix" dev="asashour">

@@ -465,7 +465,7 @@ public class JavaScriptEngine {
         for (final String constant : config.constants()) {
             try {
                 final Object value = linkedClass.getField(constant).get(null);
-                scriptable.defineProperty(constant, value, ScriptableObject.EMPTY);
+                scriptable.defineProperty(constant, value, ScriptableObject.READONLY | ScriptableObject.PERMANENT);
             }
             catch (final Exception e) {
                 throw Context.reportRuntimeError("Cannot get field '" + constant + "' for type: "
