@@ -18,7 +18,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_C
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_CAPITAL_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_INHERIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_ONLY_FOR_FRAMES;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SET_LOCATION_EXECUTED_IN_EVENT_FROM_ANCHOR;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.
+                                                JS_DOCUMENT_SET_LOCATION_EXECUTED_IN_EVENT_FROM_ANCHOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENTS_BY_TAG_NAME_NOT_SUPPORTS_NAMESPACES;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -121,7 +122,7 @@ public class Document extends EventNode {
      */
     @JsxSetter
     public void setLocation(final String location) throws IOException {
-        Object event = getWindow().getEvent();
+        final Object event = getWindow().getEvent();
         if (getBrowserVersion().hasFeature(JS_DOCUMENT_SET_LOCATION_EXECUTED_IN_EVENT_FROM_ANCHOR)
                 || !(event instanceof UIEvent) || !(((UIEvent) event).getTarget() instanceof HTMLAnchorElement)) {
             window_.setLocation(location);
