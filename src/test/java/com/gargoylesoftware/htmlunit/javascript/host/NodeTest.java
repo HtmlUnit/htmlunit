@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION;
@@ -30,7 +29,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -555,7 +553,6 @@ public class NodeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "0", "20", "20", "4", "10", "10", "2", "20", "exception" },
             CHROME = { "0", "20", "20", "4", "10", "10", "2", "20", "1" },
             IE8 = "compareDocumentPosition not available")
-    @NotYetImplemented(CHROME)
     public void compareDocumentPosition() throws Exception {
         final String html
             = "<html><head>\n"
