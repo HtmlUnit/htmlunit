@@ -62,10 +62,10 @@ public class Element extends EventNode {
     private CSSStyleDeclaration style_;
 
     /**
-     * JavaScript constructor.
+     * Default constructor.
      */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
-    public void jsConstructor() {
+    public Element() {
         // Empty.
     }
 

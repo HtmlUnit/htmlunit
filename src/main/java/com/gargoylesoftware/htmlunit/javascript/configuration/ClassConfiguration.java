@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
+import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,7 +43,7 @@ public final class ClassConfiguration {
     /**
      * The constructor method in the {@link #hostClass_}
      */
-    private Method jsConstructor_;
+    private Member jsConstructor_;
     private final Class<?>[] domClasses_;
     private final boolean jsObject_;
 
@@ -67,7 +68,7 @@ public final class ClassConfiguration {
         domClasses_ = domClasses;
     }
 
-    void setJSConstructor(final Method jsConstructor) {
+    void setJSConstructor(final Member jsConstructor) {
         if (jsConstructor_ != null) {
             throw new IllegalStateException("Can not have two constructors.");
         }
@@ -152,7 +153,7 @@ public final class ClassConfiguration {
      * Gets the JavaScript constructor method in {@link #getHostClass()}.
      * @return the JavaScript constructor method in {@link #getHostClass()}
      */
-    public Method getJsConstructor() {
+    public Member getJsConstructor() {
         return jsConstructor_;
     }
 

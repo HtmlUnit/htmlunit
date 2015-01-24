@@ -73,15 +73,8 @@ public class CSSValue extends SimpleScriptable {
     /**
      * Creates an instance. JavaScript objects must have a default constructor to instantiate prototype.
      */
-    public CSSValue() {
-        // Empty.
-    }
-
-    /**
-     * JavaScript constructor.
-     */
     @JsxConstructor
-    public void jsConstructor() {
+    public CSSValue() {
         // Empty.
     }
 

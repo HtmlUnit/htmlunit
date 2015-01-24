@@ -44,10 +44,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
 public class DOMParser extends SimpleScriptable {
 
     /**
-     * JavaScript constructor.
+     * The constructor.
      */
     @JsxConstructor
-    public void jsConstructor() {
+    public DOMParser() {
         // Empty.
     }
 

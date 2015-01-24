@@ -221,6 +221,7 @@ public class CSSPrimitiveValue extends CSSValue {
     /**
      * Creates an instance. JavaScript objects must have a default constructor to instantiate prototype.
      */
+    @JsxConstructor
     public CSSPrimitiveValue() {
         // Empty.
     }
@@ -235,14 +236,6 @@ public class CSSPrimitiveValue extends CSSValue {
         setPrototype(getPrototype(getClass()));
         setDomNode(element.getDomNodeOrNull(), false);
         wrappedCssPrimitiveValue_ = cssValue;
-    }
-
-    /**
-     * JavaScript constructor.
-     */
-    @JsxConstructor
-    public void jsConstructor() {
-        // Empty.
     }
 
     /**

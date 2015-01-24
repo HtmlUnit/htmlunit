@@ -151,6 +151,7 @@ public class XMLHttpRequest extends SimpleScriptable {
     /**
      * Creates a new instance. JavaScript objects must have a default constructor.
      */
+    @JsxConstructor
     public XMLHttpRequest() {
         this(true);
     }
@@ -162,14 +163,6 @@ public class XMLHttpRequest extends SimpleScriptable {
     public XMLHttpRequest(final boolean caseSensitiveProperties) {
         caseSensitiveProperties_ = caseSensitiveProperties;
         state_ = STATE_UNSENT;
-    }
-
-    /**
-     * JavaScript constructor.
-     */
-    @JsxConstructor
-    public void jsConstructor() {
-        // Empty.
     }
 
     /**

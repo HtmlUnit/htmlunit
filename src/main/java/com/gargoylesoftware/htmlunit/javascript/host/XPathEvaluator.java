@@ -39,10 +39,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 public class XPathEvaluator extends SimpleScriptable {
 
     /**
-     * JavaScript constructor.
+     * Default constructor.
      */
     @JsxConstructor
-    public void jsConstructor() {
+    public XPathEvaluator() {
         // Empty
     }
 

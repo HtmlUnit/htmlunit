@@ -165,15 +165,8 @@ public class Node extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    public Node() {
-        // Empty.
-    }
-
-    /**
-     * JavaScript constructor.
-     */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
-    public void jsConstructor() {
+    public Node() {
         // Empty.
     }
 

@@ -123,16 +123,9 @@ public class XMLHTTPRequest extends MSXMLScriptable {
     /**
      * Creates an instance. JavaScript objects must have a default constructor.
      */
+    @JsxConstructor
     public XMLHTTPRequest() {
         state_ = STATE_UNSENT;
-    }
-
-    /**
-     * JavaScript constructor.
-     */
-    @JsxConstructor
-    public void jsConstructor() {
-        // Empty.
     }
 
     /**

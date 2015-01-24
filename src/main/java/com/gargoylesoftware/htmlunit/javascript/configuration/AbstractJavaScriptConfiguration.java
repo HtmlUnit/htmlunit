@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Collections;
@@ -160,6 +161,16 @@ public abstract class AbstractJavaScriptConfiguration {
         CLASS_NAME_MAP_.put(hostClassName, simpleClassName);
         final Map<String, Method> allGetters = new HashMap<>();
         final Map<String, Method> allSetters = new HashMap<>();
+        for (final Constructor<?> constructor : classConfiguration.getHostClass().getDeclaredConstructors()) {
+            for (final Annotation annotation : constructor.getAnnotations()) {
+                if (annotation instanceof JsxConstructor) {
+                    if (isSupported(((JsxConstructor) annotation).value(),
+                            expectedBrowserName, browserVersionNumeric)) {
+                        classConfiguration.setJSConstructor(constructor);
+                    }
+                }
+            }
+        }
         for (final Method method : classConfiguration.getHostClass().getDeclaredMethods()) {
             for (final Annotation annotation : method.getAnnotations()) {
                 if (annotation instanceof JsxGetter) {

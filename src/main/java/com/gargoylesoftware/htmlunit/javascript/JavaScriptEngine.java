@@ -31,6 +31,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_TRIM_L
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -264,7 +265,7 @@ public class JavaScriptEngine {
         }
 
         for (final ClassConfiguration config : jsConfig_.getAll()) {
-            final Method jsConstructor = config.getJsConstructor();
+            final Member jsConstructor = config.getJsConstructor();
             final String jsClassName = config.getHostClass().getSimpleName();
             final ScriptableObject prototype = prototypesPerJSName.get(jsClassName);
             if (prototype != null) {

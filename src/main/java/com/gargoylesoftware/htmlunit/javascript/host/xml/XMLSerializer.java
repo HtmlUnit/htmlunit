@@ -103,10 +103,10 @@ public class XMLSerializer extends SimpleScriptable {
     ));
 
     /**
-     * JavaScript constructor.
+     * Default constructor.
      */
     @JsxConstructor
-    public void jsConstructor() {
+    public XMLSerializer() {
         // Empty.
     }
 
