@@ -1409,4 +1409,112 @@ public class Window2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "true", "true", "true" })
+    public void location() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  alert(location === window.location);\n"
+            + "  alert(location === document.location);\n"
+            + "  alert(window.location === document.location);\n"
+            + "</script></head>\n"
+            + "<body></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setLocation() throws Exception {
+        final String firstContent
+            = "<html>\n"
+            + "<head><title>First</title></head>\n"
+            + "<body>\n"
+            + "<form name='form1'>\n"
+            + "    <a id='link' onClick='location=\"" + URL_SECOND + "\";'>Click me</a>\n"
+            + "</form>\n"
+            + "</body></html>";
+        final String secondContent
+            = "<html><head><title>Second</title></head><body></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(firstContent);
+        assertEquals("First", driver.getTitle());
+        assertEquals(1, driver.getWindowHandles().size());
+
+        driver.findElement(By.id("link")).click();
+        assertEquals("Second", driver.getTitle());
+
+        assertEquals(1, driver.getWindowHandles().size());
+        assertEquals(new String[] {"", "second/"}, getMockWebConnection().getRequestedUrls(getDefaultUrl()));
+        assertEquals(URL_SECOND.toString(), driver.getCurrentUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setWindowLocation() throws Exception {
+        final String firstContent
+            = "<html>\n"
+            + "<head><title>First</title></head>\n"
+            + "<body>\n"
+            + "<form name='form1'>\n"
+            + "    <a id='link' onClick='window.location=\"" + URL_SECOND + "\";'>Click me</a>\n"
+            + "</form>\n"
+            + "</body></html>";
+        final String secondContent
+            = "<html><head><title>Second</title></head><body></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(firstContent);
+        assertEquals("First", driver.getTitle());
+        assertEquals(1, driver.getWindowHandles().size());
+
+        driver.findElement(By.id("link")).click();
+        assertEquals("Second", driver.getTitle());
+
+        assertEquals(1, driver.getWindowHandles().size());
+        assertEquals(new String[] {"", "second/"}, getMockWebConnection().getRequestedUrls(getDefaultUrl()));
+        assertEquals(URL_SECOND.toString(), driver.getCurrentUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setDocumentLocation() throws Exception {
+        final String firstContent
+            = "<html>\n"
+            + "<head><title>First</title></head>\n"
+            + "<body>\n"
+            + "<form name='form1'>\n"
+            + "    <a id='link' onClick='document.location=\"" + URL_SECOND + "\";'>Click me</a>\n"
+            + "</form>\n"
+            + "</body></html>";
+        final String secondContent
+            = "<html><head><title>Second</title></head><body></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(firstContent);
+        assertEquals("First", driver.getTitle());
+        assertEquals(1, driver.getWindowHandles().size());
+
+        driver.findElement(By.id("link")).click();
+        assertEquals("Second", driver.getTitle());
+
+        assertEquals(1, driver.getWindowHandles().size());
+        assertEquals(new String[] {"", "second/"}, getMockWebConnection().getRequestedUrls(getDefaultUrl()));
+        assertEquals(URL_SECOND.toString(), driver.getCurrentUrl());
+    }
 }

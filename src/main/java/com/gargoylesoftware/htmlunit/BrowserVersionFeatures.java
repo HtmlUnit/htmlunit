@@ -856,10 +856,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK,
 
-    /** If setting the document.location inside onclick() of anchor element should be triggered */
-    @BrowserFeature(@WebBrowser(IE))
-    JS_DOCUMENT_SET_LOCATION_EXECUTED_IN_EVENT_FROM_ANCHOR,
-
     /** If document.implementation.hasFeature() supports 'Core 1.0'. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_DOMIMPLEMENTATION_FEATURE_CORE_1,

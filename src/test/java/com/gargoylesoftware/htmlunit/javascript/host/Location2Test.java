@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import java.net.URL;
@@ -27,6 +29,7 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -567,11 +570,12 @@ public class Location2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"", "foo3.html", "foo2.html" },
             CHROME = {"", "foo2.html" },
             FF = {"", "foo2.html" })
-    public void onlick_set_location() throws Exception {
+    @NotYetImplemented({ CHROME, FF })
+    public void onlick_set_location_WithHref() throws Exception {
         final String html =
             "<html><head></head>\n"
             + "<body>\n"
-            + "<a href='foo2.html' onclick='document.location = \"foo3.html\"'>click me</a>\n"
+            + "  <a href='foo2.html' onclick='document.location = \"foo3.html\"'>click me</a>\n"
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("");
@@ -579,8 +583,27 @@ public class Location2Test extends WebDriverTestCase {
         driver.findElement(By.tagName("a")).click();
 
         assertEquals(getExpectedAlerts(), getMockWebConnection().getRequestedUrls(getDefaultUrl()));
-
         assertEquals(new URL(getDefaultUrl(), "foo2.html").toString(), driver.getCurrentUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", "foo3.html" })
+    public void onlick_set_location_WithoutHref() throws Exception {
+        final String html =
+            "<html><head></head>\n"
+            + "<body>\n"
+            + "  <a onclick='document.location = \"foo3.html\"'>click me</a>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.tagName("a")).click();
+
+        assertEquals(getExpectedAlerts(), getMockWebConnection().getRequestedUrls(getDefaultUrl()));
+        assertEquals(new URL(getDefaultUrl(), "foo3.html").toString(), driver.getCurrentUrl());
     }
 
     /**

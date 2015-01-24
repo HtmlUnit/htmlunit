@@ -79,37 +79,6 @@ public class WindowTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void setLocation() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
-
-        final String firstContent
-            = "<html><head><title>First</title></head><body>\n"
-            + "<form name='form1'>\n"
-            + "    <a id='link' onClick='location=\"" + URL_SECOND + "\"; return false;'>Click me</a>\n"
-            + "</form>\n"
-            + "</body></html>";
-        final String secondContent
-            = "<html><head><title>Second</title></head><body></body></html>";
-
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
-        webClient.setWebConnection(webConnection);
-
-        final HtmlPage firstPage = webClient.getPage(URL_FIRST);
-        assertEquals("First", firstPage.getTitleText());
-
-        final HtmlAnchor anchor = firstPage.getHtmlElementById("link");
-        final HtmlPage secondPage = anchor.click();
-        assertNotNull("secondPage", secondPage);
-        assertEquals("Second", secondPage.getTitleText());
-        assertSame(webClient.getCurrentWindow(), secondPage.getEnclosingWindow());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     public void openWindow() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();

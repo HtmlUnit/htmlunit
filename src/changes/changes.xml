@@ -9,9 +9,6 @@
     <body>
         <release version="2.16" date="???" description="Java 7, FF31, IE11 progress, Chrome progress, Bugfixes">
             <action type="fix" dev="asashour">
-                JavaScript: do not set the window.location when triggered by anchor onclick (Chrome and FF).
-            </action>
-            <action type="fix" dev="asashour">
                 JavaScript: Node.compareDocumentPosition() to handle argument which is not Node (Chrome).
             </action>
             <action type="fix" dev="asashour">

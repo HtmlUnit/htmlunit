@@ -18,8 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_C
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_CAPITAL_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_INHERIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_ONLY_FOR_FRAMES;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.
-                                                JS_DOCUMENT_SET_LOCATION_EXECUTED_IN_EVENT_FROM_ANCHOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENTS_BY_TAG_NAME_NOT_SUPPORTS_NAMESPACES;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -59,7 +57,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMImplementation;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAnchorElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.xml.XmlUtil;
@@ -122,11 +119,7 @@ public class Document extends EventNode {
      */
     @JsxSetter
     public void setLocation(final String location) throws IOException {
-        final Object event = getWindow().getEvent();
-        if (getBrowserVersion().hasFeature(JS_DOCUMENT_SET_LOCATION_EXECUTED_IN_EVENT_FROM_ANCHOR)
-                || !(event instanceof UIEvent) || !(((UIEvent) event).getTarget() instanceof HTMLAnchorElement)) {
-            window_.setLocation(location);
-        }
+        window_.setLocation(location);
     }
 
     /**
