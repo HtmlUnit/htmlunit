@@ -259,7 +259,6 @@ public class Window2Test extends WebDriverTestCase {
             CHROME = { "function Node() { [native code] }", "function Element() { [native code] }" },
             IE8 = { "undefined", "undefined" },
             IE11 = { "[object Node]", "[object Element]" })
-    @NotYetImplemented({ FF, CHROME })
     public void windowProperties() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
