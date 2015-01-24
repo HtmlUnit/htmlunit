@@ -852,13 +852,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED,
 
-    /** If setting the document.location inside onclick() of anchor element should be triggered */
-    @BrowserFeature(@WebBrowser(IE))
-    JS_DOCUMENT_SET_LOCATION_EXECUTED_IN_EVENT_FROM_ANCHOR,
-
     /** Javascript property document.domain doesn't allow to set domain of about:blank. */
     @BrowserFeature(@WebBrowser(IE))
     JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK,
+
+    /** If setting the document.location inside onclick() of anchor element should be triggered */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_DOCUMENT_SET_LOCATION_EXECUTED_IN_EVENT_FROM_ANCHOR,
 
     /** If document.implementation.hasFeature() supports 'Core 1.0'. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
@@ -1327,13 +1327,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_NODE_CHILDNODES_IGNORE_EMPTY_TEXT_NODES,
 
-    /** <code>Node.contains</code> returns false instead of throwing an exception. */
-    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
-    JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG,
-
     /** <code>Node.compareDocumentPosition</code> doesn't throw an exception, if the argument is not node. */
     @BrowserFeature(@WebBrowser(CHROME))
     JS_NODE_COMPARE_DOCUMENT_POSITION_ALLOW_INVALID,
+
+    /** <code>Node.contains</code> returns false instead of throwing an exception. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG,
 
     /** The reference argument of <code>Node.insertBefore(..)</code> is optional. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))

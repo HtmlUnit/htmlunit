@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 
 import org.junit.Test;
@@ -761,20 +762,20 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "prototype found", "" },
-            CHROME = { "prototype found", "ALLOW_KEYBOARD_INPUTtoString"
-                    + "ELEMENT_NODEATTRIBUTE_NODETEXT_NODECDATA_SECTION_NODEENTITY_REFERENCE_NODE"
-                    + "ENTITY_NODEPROCESSING_INSTRUCTION_NODECOMMENT_NODEDOCUMENT_NODEDOCUMENT_TYPE_NODE"
-                    + "DOCUMENT_FRAGMENT_NODENOTATION_NODEDOCUMENT_POSITION_DISCONNECTEDDOCUMENT_POSITION_PRECEDING"
-                    + "DOCUMENT_POSITION_FOLLOWINGDOCUMENT_POSITION_CONTAINSDOCUMENT_POSITION_CONTAINED_BY"
-                    + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC" },
+            CHROME = { "prototype found", "ALLOW_KEYBOARD_INPUT, toString, "
+                    + "ELEMENT_NODE, ATTRIBUTE_NODE, TEXT_NODE, CDATA_SECTION_NODE, ENTITY_REFERENCE_NODE, "
+                    + "ENTITY_NODE, PROCESSING_INSTRUCTION_NODE, COMMENT_NODE, DOCUMENT_NODE, DOCUMENT_TYPE_NODE, "
+                    + "DOCUMENT_FRAGMENT_NODE, NOTATION_NODE, DOCUMENT_POSITION_DISCONNECTED, DOCUMENT_POSITION_PRECEDING, "
+                    + "DOCUMENT_POSITION_FOLLOWING, DOCUMENT_POSITION_CONTAINS, DOCUMENT_POSITION_CONTAINED_BY, "
+                    + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC, " },
             FF = { "prototype found", ""
-                    + "ELEMENT_NODEATTRIBUTE_NODETEXT_NODECDATA_SECTION_NODEENTITY_REFERENCE_NODE"
-                    + "ENTITY_NODEPROCESSING_INSTRUCTION_NODECOMMENT_NODEDOCUMENT_NODEDOCUMENT_TYPE_NODE"
-                    + "DOCUMENT_FRAGMENT_NODENOTATION_NODEDOCUMENT_POSITION_DISCONNECTEDDOCUMENT_POSITION_PRECEDING"
-                    + "DOCUMENT_POSITION_FOLLOWINGDOCUMENT_POSITION_CONTAINSDOCUMENT_POSITION_CONTAINED_BY"
-                    + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC" },
+                    + "ELEMENT_NODE, ATTRIBUTE_NODE, TEXT_NODE, CDATA_SECTION_NODE, ENTITY_REFERENCE_NODE, "
+                    + "ENTITY_NODE, PROCESSING_INSTRUCTION_NODE, COMMENT_NODE, DOCUMENT_NODE, DOCUMENT_TYPE_NODE, "
+                    + "DOCUMENT_FRAGMENT_NODE, NOTATION_NODE, DOCUMENT_POSITION_DISCONNECTED, DOCUMENT_POSITION_PRECEDING, "
+                    + "DOCUMENT_POSITION_FOLLOWING, DOCUMENT_POSITION_CONTAINS, DOCUMENT_POSITION_CONTAINED_BY, "
+                    + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC, " },
             IE8 = "exception occured")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, CHROME })
     public void enumeratedProperties() throws Exception {
         final String html
             = "<html><head>\n"
@@ -785,7 +786,7 @@ public class ElementTest extends WebDriverTestCase {
             + "      alert(Element.prototype ? 'prototype found' : 'prototype not found');\n"
             + "      var str = '';\n"
             + "      for (var i in Element)\n"
-            + "        str += i;\n"
+            + "        str += i + ', ';\n"
             + "      alert(str);\n"
             + "    } catch (e) { alert('exception occured')}\n"
             + "  }\n"
