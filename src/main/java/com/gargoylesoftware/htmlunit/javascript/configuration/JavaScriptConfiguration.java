@@ -248,7 +248,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGMarkerElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGMaskElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGMatrix;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGMetadataElement;
-import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGMpathElement2;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGMPathElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPathElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPatternElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPolygonElement;
@@ -356,7 +356,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         SVGFEPointLightElement.class, SVGFESpecularLightingElement.class, SVGFESpotLightElement.class,
         SVGFETileElement.class, SVGFETurbulenceElement.class, SVGFilterElement.class, SVGForeignObjectElement.class,
         SVGGElement.class, SVGImageElement.class, SVGLineElement.class, SVGLinearGradientElement.class,
-        SVGMarkerElement.class, SVGMaskElement.class, SVGMatrix.class, SVGMetadataElement.class, SVGMpathElement2.class,
+        SVGMarkerElement.class, SVGMaskElement.class, SVGMatrix.class, SVGMetadataElement.class, SVGMPathElement.class,
         SVGPathElement.class, SVGPatternElement.class, SVGPolygonElement.class, SVGPolylineElement.class,
         SVGRadialGradientElement.class,
         SVGRect.class, SVGRectElement.class,

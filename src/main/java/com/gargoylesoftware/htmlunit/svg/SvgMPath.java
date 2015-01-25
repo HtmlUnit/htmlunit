@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.html.DomAttr;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class SvgMpath2 extends SvgElement {
+public class SvgMPath extends SvgElement {
 
     /** The tag represented by this element. */
     public static final String TAG_NAME = "mpath";
@@ -38,7 +38,7 @@ public class SvgMpath2 extends SvgElement {
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    SvgMpath2(final String namespaceURI, final String qualifiedName, final SgmlPage page,
+    SvgMPath(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.svg;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -23,21 +21,20 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 
 /**
- * Tests for {@link SvgMpath2}.
+ * Tests for {@link SvgMPath}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
-public class SvgMpathTest2 extends WebDriverTestCase {
+public class SvgMPathTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -46,7 +43,6 @@ public class SvgMpathTest2 extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object SVGMPathElement]",
             IE = "[object HTMLGenericElement]",
             IE11 = "[object SVGElement]")
-    @NotYetImplemented(FF)
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -64,8 +60,8 @@ public class SvgMpathTest2 extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            if ("[object SVGMpathElement]".equals(getExpectedAlerts()[0])) {
-                assertTrue(SvgMpath2.class.isInstance(page.getElementById("myId")));
+            if ("[object SVGMPathElement]".equals(getExpectedAlerts()[0])) {
+                assertTrue(SvgMPath.class.isInstance(page.getElementById("myId")));
             }
             else if ("[object SVGElement]".equals(getExpectedAlerts()[0])) {
                 assertTrue(SvgElement.class.isInstance(page.getElementById("myId")));

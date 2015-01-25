@@ -20,7 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.svg.SvgMpath2;
+import com.gargoylesoftware.htmlunit.svg.SvgMPath;
 
 /**
  * A JavaScript object for SVGMPathElement.
@@ -29,14 +29,14 @@ import com.gargoylesoftware.htmlunit.svg.SvgMpath2;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClass(domClass = SvgMpath2.class,
+@JsxClass(domClass = SvgMPath.class,
     browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
-public class SVGMpathElement2 extends SVGElement {
+public class SVGMPathElement extends SVGElement {
 
     /**
      * Creates an instance.
      */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
-    public SVGMpathElement2() {
+    public SVGMPathElement() {
     }
 }
