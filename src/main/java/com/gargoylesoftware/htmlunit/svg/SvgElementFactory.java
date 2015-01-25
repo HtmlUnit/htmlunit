@@ -237,8 +237,8 @@ public class SvgElementFactory implements ElementFactory {
         else if (tagName.equalsIgnoreCase(SvgMissingGlyph.TAG_NAME)) {
             element = new SvgMissingGlyph(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equalsIgnoreCase(SvgMpath.TAG_NAME)) {
-            element = new SvgMpath(namespaceURI, qualifiedName, page, attributeMap);
+        else if (tagName.equalsIgnoreCase(SvgMpath2.TAG_NAME)) {
+            element = new SvgMpath2(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equalsIgnoreCase(SvgPath.TAG_NAME)) {
             element = new SvgPath(namespaceURI, qualifiedName, page, attributeMap);

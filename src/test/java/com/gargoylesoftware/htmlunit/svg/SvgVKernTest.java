@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
  *
  * @version $Revision$
  * @author Frank Danek
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class SvgVKernTest extends WebDriverTestCase {
@@ -40,7 +41,6 @@ public class SvgVKernTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object SVGElement]",
-            CHROME = "[object SVGVKernElement]",
             IE8 = "[object HTMLGenericElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

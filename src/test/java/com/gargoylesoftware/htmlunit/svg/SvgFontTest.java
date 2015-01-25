@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  *
  * @version $Revision$
  * @author Frank Danek
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class SvgFontTest extends WebDriverTestCase {
@@ -40,7 +41,6 @@ public class SvgFontTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object SVGElement]",
-            CHROME = "[object SVGFontElement]",
             IE8 = "[object HTMLFontElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

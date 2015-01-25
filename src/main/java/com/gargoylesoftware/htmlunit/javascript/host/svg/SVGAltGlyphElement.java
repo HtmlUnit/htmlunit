@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgAltGlyph;
 
@@ -29,12 +30,13 @@ import com.gargoylesoftware.htmlunit.svg.SvgAltGlyph;
  * @author Frank Danek
  */
 @JsxClass(domClass = SvgAltGlyph.class,
-    browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
+    browsers = @WebBrowser(FF))
 public class SVGAltGlyphElement extends SVGElement {
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor.
+     * Creates an instance.
      */
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public SVGAltGlyphElement() {
     }
 }

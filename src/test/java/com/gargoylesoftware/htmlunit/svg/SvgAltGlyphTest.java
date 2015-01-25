@@ -41,6 +41,7 @@ public class SvgAltGlyphTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object SVGAltGlyphElement]",
+            CHROME = "[object SVGElement]",
             IE = "[object HTMLGenericElement]",
             IE11 = "[object SVGElement]")
     public void simpleScriptable() throws Exception {

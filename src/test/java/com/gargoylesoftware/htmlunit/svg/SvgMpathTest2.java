@@ -30,14 +30,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 
 /**
- * Tests for {@link SvgMpath}.
+ * Tests for {@link SvgMpath2}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
-public class SvgMpathTest extends WebDriverTestCase {
+public class SvgMpathTest2 extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -65,7 +65,7 @@ public class SvgMpathTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             if ("[object SVGMpathElement]".equals(getExpectedAlerts()[0])) {
-                assertTrue(SvgMpath.class.isInstance(page.getElementById("myId")));
+                assertTrue(SvgMpath2.class.isInstance(page.getElementById("myId")));
             }
             else if ("[object SVGElement]".equals(getExpectedAlerts()[0])) {
                 assertTrue(SvgElement.class.isInstance(page.getElementById("myId")));
