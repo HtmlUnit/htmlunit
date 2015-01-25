@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.svg;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -43,7 +40,6 @@ public class SvgMatrixTest extends WebDriverTestCase {
             CHROME = "function SVGMatrix() { [native code] }",
             IE11 = "[object SVGMatrix]",
             IE8 = "undefined")
-    @NotYetImplemented(FF)
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body>\n"

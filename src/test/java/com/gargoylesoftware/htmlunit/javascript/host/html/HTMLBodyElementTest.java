@@ -282,4 +282,46 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
             + "</html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "[object HTMLBodyElement]", "" },
+        CHROME = { "function HTMLBodyElement() { [native code] }", "toString, ALLOW_KEYBOARD_INPUT, "
+            + "ELEMENT_NODE, ATTRIBUTE_NODE, TEXT_NODE, CDATA_SECTION_NODE, ENTITY_REFERENCE_NODE, "
+            + "ENTITY_NODE, PROCESSING_INSTRUCTION_NODE, COMMENT_NODE, DOCUMENT_NODE, DOCUMENT_TYPE_NODE, "
+            + "DOCUMENT_FRAGMENT_NODE, NOTATION_NODE, DOCUMENT_POSITION_DISCONNECTED, "
+            + "DOCUMENT_POSITION_PRECEDING, "
+            + "DOCUMENT_POSITION_FOLLOWING, DOCUMENT_POSITION_CONTAINS, DOCUMENT_POSITION_CONTAINED_BY, "
+            + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC, " },
+            FF = { "function HTMLBodyElement() {\n    [native code]\n}", ""
+            + "ELEMENT_NODE, ATTRIBUTE_NODE, TEXT_NODE, CDATA_SECTION_NODE, ENTITY_REFERENCE_NODE, "
+            + "ENTITY_NODE, PROCESSING_INSTRUCTION_NODE, COMMENT_NODE, DOCUMENT_NODE, DOCUMENT_TYPE_NODE, "
+            + "DOCUMENT_FRAGMENT_NODE, NOTATION_NODE, DOCUMENT_POSITION_DISCONNECTED, "
+            + "DOCUMENT_POSITION_PRECEDING, "
+            + "DOCUMENT_POSITION_FOLLOWING, DOCUMENT_POSITION_CONTAINS, DOCUMENT_POSITION_CONTAINED_BY, "
+            + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC, " },
+            IE8 = "exception")
+    public void enumeratedProperties() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var str = '';\n"
+            + "    try {\n"
+            + "      alert(HTMLBodyElement);\n"
+            + "      var str = '';\n"
+            + "      for (var i in HTMLBodyElement)\n"
+            + "        str += i + ', ';\n"
+            + "      alert(str);\n"
+            + "    } catch (e) { alert('exception')}\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

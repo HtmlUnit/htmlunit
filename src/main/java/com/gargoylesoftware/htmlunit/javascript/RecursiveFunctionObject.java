@@ -17,8 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_TOSTRING_ENUMERATED;
 
 import java.lang.reflect.Member;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -73,7 +73,7 @@ public class RecursiveFunctionObject extends FunctionObject {
      */
     @Override
     public Object[] getIds() {
-        final List<Object> objects = new ArrayList<>();
+        final Set<Object> objects = new LinkedHashSet<>();
         for (final Object o : super.getIds()) {
             objects.add(o);
         }
@@ -85,9 +85,7 @@ public class RecursiveFunctionObject extends FunctionObject {
             final Object scripatble = getParentScope().get(c.getSimpleName(), this);
             if (scripatble instanceof Scriptable) {
                 for (Object id : ((Scriptable) scripatble).getIds()) {
-                    if (!"toString".equals(id)) {
-                        objects.add(id);
-                    }
+                    objects.add(id);
                 }
             }
         }
