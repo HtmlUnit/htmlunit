@@ -1517,4 +1517,37 @@ public class Window2Test extends WebDriverTestCase {
         assertEquals(new String[] {"", "second/"}, getMockWebConnection().getRequestedUrls(getDefaultUrl()));
         assertEquals(URL_SECOND.toString(), driver.getCurrentUrl());
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "[object Window]", "[object Window]", "" },
+            CHROME = { "[object Window]", "function Window() { [native code] }",
+            "toString, TEMPORARY, PERSISTENT, " },
+            FF = { "[object Window]", "function Window() {\n    [native code]\n}", "" },
+            IE8 = { "[object]", "exception" })
+    @NotYetImplemented({ CHROME, FF })
+    public void enumeratedProperties() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var str = '';\n"
+            + "    try {\n"
+            + "      alert(window);\n"
+            + "      alert(Window);\n"
+            + "      var str = '';\n"
+            + "      for (var i in Window)\n"
+            + "        str += i + ', ';\n"
+            + "      alert(str);\n"
+            + "    } catch (e) { alert('exception')}\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

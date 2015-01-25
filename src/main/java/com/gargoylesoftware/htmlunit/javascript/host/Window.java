@@ -115,6 +115,7 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
 import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnlyStatus;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -156,6 +157,14 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     private static final Log LOG = LogFactory.getLog(Window.class);
 
+    /** To be documented. */
+    @JsxConstant(@WebBrowser(CHROME))
+    public static final short TEMPORARAY = 0;
+
+    /** To be documented. */
+    @JsxConstant(@WebBrowser(CHROME))
+    public static final short PERSISTENT = 1;
+
     /**
      * The minimum delay that can be used with setInterval() or setTimeout(). Browser minimums are
      * usually in the 10ms to 15ms range, but there's really no reason for us to waste that much time.
@@ -193,6 +202,12 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     private final Map<Type, Storage> storages_ = new HashMap<>();
 
     /**
+     * Creates an instance.
+     */
+    public Window() {
+    }
+
+    /**
      * Restores the transient {@link #computedStyles_} map during deserialization.
      * @param stream the stream to read the object from
      * @throws IOException if an IO error occurs
@@ -201,12 +216,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     private void readObject(final ObjectInputStream stream) throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         computedStyles_ = new WeakHashMap<>();
-    }
-
-    /**
-     * Creates an instance.
-     */
-    public Window() {
     }
 
     /**

@@ -61,324 +61,248 @@ public class SvgElementFactory implements ElementFactory {
             final Attributes attributes, final boolean checkBrowserCompatibility) {
 
         final Map<String, DomAttr> attributeMap = toMap(page, attributes);
-        final String tagName = qualifiedName.toLowerCase();
+        final String tagName = qualifiedName;
         DomElement element = null;
-        switch (tagName) {
-            case SvgAltGlyph.TAG_NAME:
-                element = new SvgAltGlyph(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgAltGlyphDef.TAG_NAME:
-                element = new SvgAltGlyphDef(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgAltGlyphItem.TAG_NAME:
-                element = new SvgAltGlyphItem(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgAnchor.TAG_NAME:
-                element = new SvgAnchor(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgAnimate.TAG_NAME:
-                element = new SvgAnimate(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgAnimateColor.TAG_NAME:
-                element = new SvgAnimateColor(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgAnimateMotion.TAG_NAME:
-                element = new SvgAnimateMotion(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgAnimateTransform.TAG_NAME:
-                element = new SvgAnimateTransform(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgCircle.TAG_NAME:
-                element = new SvgCircle(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgClipPath.TAG_NAME:
-                element = new SvgClipPath(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgColorProfile.TAG_NAME:
-                element = new SvgColorProfile(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgCursor.TAG_NAME:
-                element = new SvgCursor(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgDefs.TAG_NAME:
-                element = new SvgDefs(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgDesc.TAG_NAME:
-                element = new SvgDesc(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgEllipse.TAG_NAME:
-                element = new SvgEllipse(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFeBlend.TAG_NAME:
-                element = new SvgFeBlend(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFeColorMatrix.TAG_NAME:
-                element = new SvgFeColorMatrix(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFeComposite.TAG_NAME:
-                element = new SvgFeComposite(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFeConvolveMatrix.TAG_NAME:
-                element = new SvgFeConvolveMatrix(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFeDiffuseLighting.TAG_NAME:
-                element = new SvgFeDiffuseLighting(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFeDisplacementMap.TAG_NAME:
-                element = new SvgFeDisplacementMap(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFeDistantLight.TAG_NAME:
-                element = new SvgFeDistantLight(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFeFlood.TAG_NAME:
-                element = new SvgFeFlood(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFeFuncA.TAG_NAME:
-                element = new SvgFeFuncA(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFeFuncB.TAG_NAME:
-                element = new SvgFeFuncB(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFeFuncG.TAG_NAME:
-                element = new SvgFeFuncG(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFeFuncR.TAG_NAME:
-                element = new SvgFeFuncR(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFeGaussianBlur.TAG_NAME:
-                element = new SvgFeGaussianBlur(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFeImage.TAG_NAME:
-                element = new SvgFeImage(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFeMerge.TAG_NAME:
-                element = new SvgFeMerge(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFeMergeNode.TAG_NAME:
-                element = new SvgFeMergeNode(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFeOffset.TAG_NAME:
-                element = new SvgFeOffset(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFePointLight.TAG_NAME:
-                element = new SvgFePointLight(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFeSpecularLighting.TAG_NAME:
-                element = new SvgFeSpecularLighting(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFeSpotLight.TAG_NAME:
-                element = new SvgFeSpotLight(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFeTile.TAG_NAME:
-                element = new SvgFeTile(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFeTurbulence.TAG_NAME:
-                element = new SvgFeTurbulence(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFilter.TAG_NAME:
-                element = new SvgFilter(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFont.TAG_NAME:
-                element = new SvgFont(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFontFace.TAG_NAME:
-                element = new SvgFontFace(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFontFaceFormat.TAG_NAME:
-                element = new SvgFontFaceFormat(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFontFaceName.TAG_NAME:
-                element = new SvgFontFaceName(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFontFaceSrc.TAG_NAME:
-                element = new SvgFontFaceSrc(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgFontFaceURI.TAG_NAME:
-                element = new SvgFontFaceURI(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgForeignObject.TAG_NAME:
-                element = new SvgForeignObject(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgGlyph.TAG_NAME:
-                element = new SvgGlyph(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgGlyphRef.TAG_NAME:
-                element = new SvgGlyphRef(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgGroup.TAG_NAME:
-                element = new SvgGroup(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgHKern.TAG_NAME:
-                element = new SvgHKern(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgImage.TAG_NAME:
-                element = new SvgImage(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgLine.TAG_NAME:
-                element = new SvgLine(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgLinearGradient.TAG_NAME:
-                element = new SvgLinearGradient(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgMarker.TAG_NAME:
-                element = new SvgMarker(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgMask.TAG_NAME:
-                element = new SvgMask(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgMetadata.TAG_NAME:
-                element = new SvgMetadata(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgMissingGlyph.TAG_NAME:
-                element = new SvgMissingGlyph(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgMPath.TAG_NAME:
-                element = new SvgMPath(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgPath.TAG_NAME:
-                element = new SvgPath(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgPattern.TAG_NAME:
-                element = new SvgPattern(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgPolygon.TAG_NAME:
-                element = new SvgPolygon(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgPolyline.TAG_NAME:
-                element = new SvgPolyline(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgRadialGradient.TAG_NAME:
-                element = new SvgRadialGradient(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgRect.TAG_NAME:
-                element = new SvgRect(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgScript.TAG_NAME:
-                element = new SvgScript(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgSet.TAG_NAME:
-                element = new SvgSet(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgStop.TAG_NAME:
-                element = new SvgStop(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgStyle.TAG_NAME:
-                element = new SvgStyle(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgSvg.TAG_NAME:
-                element = new SvgSvg(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgSwitch.TAG_NAME:
-                element = new SvgSwitch(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgSymbol.TAG_NAME:
-                element = new SvgSymbol(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgText.TAG_NAME:
-                element = new SvgText(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgTextPath.TAG_NAME:
-                element = new SvgTextPath(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgTitle.TAG_NAME:
-                element = new SvgTitle(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgTRef.TAG_NAME:
-                element = new SvgTRef(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgTSpan.TAG_NAME:
-                element = new SvgTSpan(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgUse.TAG_NAME:
-                element = new SvgUse(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgView.TAG_NAME:
-                element = new SvgView(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            case SvgVKern.TAG_NAME:
-                element = new SvgVKern(namespaceURI, qualifiedName, page, attributeMap);
-                break;
-
-            default:
+        if (tagName.equalsIgnoreCase(SvgAltGlyph.TAG_NAME)) {
+            element = new SvgAltGlyph(namespaceURI, qualifiedName, page, attributeMap);
         }
-
+        else if (tagName.equalsIgnoreCase(SvgAltGlyphDef.TAG_NAME)) {
+            element = new SvgAltGlyphDef(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgAltGlyphItem.TAG_NAME)) {
+            element = new SvgAltGlyphItem(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgAnchor.TAG_NAME)) {
+            element = new SvgAnchor(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgAnimate.TAG_NAME)) {
+            element = new SvgAnimate(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgAnimateColor.TAG_NAME)) {
+            element = new SvgAnimateColor(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgAnimateMotion.TAG_NAME)) {
+            element = new SvgAnimateMotion(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgAnimateTransform.TAG_NAME)) {
+            element = new SvgAnimateTransform(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgCircle.TAG_NAME)) {
+            element = new SvgCircle(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgClipPath.TAG_NAME)) {
+            element = new SvgClipPath(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgColorProfile.TAG_NAME)) {
+            element = new SvgColorProfile(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgCursor.TAG_NAME)) {
+            element = new SvgCursor(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgDefs.TAG_NAME)) {
+            element = new SvgDefs(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgDesc.TAG_NAME)) {
+            element = new SvgDesc(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgEllipse.TAG_NAME)) {
+            element = new SvgEllipse(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeBlend.TAG_NAME)) {
+            element = new SvgFeBlend(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeColorMatrix.TAG_NAME)) {
+            element = new SvgFeColorMatrix(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeComponentTransfer.TAG_NAME)) {
+            element = new SvgFeComponentTransfer(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeComposite.TAG_NAME)) {
+            element = new SvgFeComposite(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeConvolveMatrix.TAG_NAME)) {
+            element = new SvgFeConvolveMatrix(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeDiffuseLighting.TAG_NAME)) {
+            element = new SvgFeDiffuseLighting(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeDisplacementMap.TAG_NAME)) {
+            element = new SvgFeDisplacementMap(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeDistantLight.TAG_NAME)) {
+            element = new SvgFeDistantLight(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeFlood.TAG_NAME)) {
+            element = new SvgFeFlood(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeFuncA.TAG_NAME)) {
+            element = new SvgFeFuncA(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeFuncB.TAG_NAME)) {
+            element = new SvgFeFuncB(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeFuncG.TAG_NAME)) {
+            element = new SvgFeFuncG(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeFuncR.TAG_NAME)) {
+            element = new SvgFeFuncR(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeGaussianBlur.TAG_NAME)) {
+            element = new SvgFeGaussianBlur(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeImage.TAG_NAME)) {
+            element = new SvgFeImage(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeMerge.TAG_NAME)) {
+            element = new SvgFeMerge(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeMergeNode.TAG_NAME)) {
+            element = new SvgFeMergeNode(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeMorphology.TAG_NAME)) {
+            element = new SvgFeMorphology(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeOffset.TAG_NAME)) {
+            element = new SvgFeOffset(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFePointLight.TAG_NAME)) {
+            element = new SvgFePointLight(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeSpecularLighting.TAG_NAME)) {
+            element = new SvgFeSpecularLighting(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeSpotLight.TAG_NAME)) {
+            element = new SvgFeSpotLight(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeTile.TAG_NAME)) {
+            element = new SvgFeTile(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeTurbulence.TAG_NAME)) {
+            element = new SvgFeTurbulence(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFilter.TAG_NAME)) {
+            element = new SvgFilter(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFont.TAG_NAME)) {
+            element = new SvgFont(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFontFace.TAG_NAME)) {
+            element = new SvgFontFace(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFontFaceFormat.TAG_NAME)) {
+            element = new SvgFontFaceFormat(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFontFaceName.TAG_NAME)) {
+            element = new SvgFontFaceName(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFontFaceSrc.TAG_NAME)) {
+            element = new SvgFontFaceSrc(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFontFaceURI.TAG_NAME)) {
+            element = new SvgFontFaceURI(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgForeignObject.TAG_NAME)) {
+            element = new SvgForeignObject(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgGlyph.TAG_NAME)) {
+            element = new SvgGlyph(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgGlyphRef.TAG_NAME)) {
+            element = new SvgGlyphRef(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgGroup.TAG_NAME)) {
+            element = new SvgGroup(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgHKern.TAG_NAME)) {
+            element = new SvgHKern(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgImage.TAG_NAME)) {
+            element = new SvgImage(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgLine.TAG_NAME)) {
+            element = new SvgLine(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgLinearGradient.TAG_NAME)) {
+            element = new SvgLinearGradient(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgMarker.TAG_NAME)) {
+            element = new SvgMarker(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgMask.TAG_NAME)) {
+            element = new SvgMask(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgMetadata.TAG_NAME)) {
+            element = new SvgMetadata(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgMissingGlyph.TAG_NAME)) {
+            element = new SvgMissingGlyph(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgMPath.TAG_NAME)) {
+            element = new SvgMPath(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgPath.TAG_NAME)) {
+            element = new SvgPath(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgPattern.TAG_NAME)) {
+            element = new SvgPattern(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgPolygon.TAG_NAME)) {
+            element = new SvgPolygon(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgPolyline.TAG_NAME)) {
+            element = new SvgPolyline(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgRadialGradient.TAG_NAME)) {
+            element = new SvgRadialGradient(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgRect.TAG_NAME)) {
+            element = new SvgRect(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgScript.TAG_NAME)) {
+            element = new SvgScript(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgSet.TAG_NAME)) {
+            element = new SvgSet(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgStop.TAG_NAME)) {
+            element = new SvgStop(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgStyle.TAG_NAME)) {
+            element = new SvgStyle(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgSvg.TAG_NAME)) {
+            element = new SvgSvg(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgSwitch.TAG_NAME)) {
+            element = new SvgSwitch(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgSymbol.TAG_NAME)) {
+            element = new SvgSymbol(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgText.TAG_NAME)) {
+            element = new SvgText(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgTextPath.TAG_NAME)) {
+            element = new SvgTextPath(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgTitle.TAG_NAME)) {
+            element = new SvgTitle(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgTRef.TAG_NAME)) {
+            element = new SvgTRef(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgTSpan.TAG_NAME)) {
+            element = new SvgTSpan(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgUse.TAG_NAME)) {
+            element = new SvgUse(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgView.TAG_NAME)) {
+            element = new SvgView(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgVKern.TAG_NAME)) {
+            element = new SvgVKern(namespaceURI, qualifiedName, page, attributeMap);
+        }
         if (element == null) {
             if (page.getWebClient().getBrowserVersion().hasFeature(SVG_UNKNOWN_ARE_DOM)) {
                 element = new DomElement(namespaceURI, qualifiedName, page, attributeMap);
