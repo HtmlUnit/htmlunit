@@ -1160,6 +1160,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     JS_FUNCTION_TOSOURCE,
 
+    /** Indicates if the method 'toString' is enumerated. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_FUNCTION_TOSTRING_ENUMERATED,
+
     /** Indicates that the getAttribute method supports IE style flags, only in quirks mode . */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_GET_ATTRIBUTE_SUPPORTS_FLAGS_IN_QUIRKS_MODE,

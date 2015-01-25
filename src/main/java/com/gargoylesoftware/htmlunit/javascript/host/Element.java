@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -56,6 +57,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
  */
 @JsxClass(domClass = DomElement.class)
 public class Element extends EventNode {
+
+    /** To be documented. */
+    @JsxConstant(@WebBrowser(CHROME))
+    public static final short ALLOW_KEYBOARD_INPUT = 1;
 
     private NamedNodeMap attributes_;
     private Map<String, HTMLCollection> elementsByTagName_; // for performance and for equality (==)

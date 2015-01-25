@@ -14,15 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest;
@@ -777,7 +773,6 @@ public class ElementTest extends WebDriverTestCase {
                     + "DOCUMENT_POSITION_FOLLOWING, DOCUMENT_POSITION_CONTAINS, DOCUMENT_POSITION_CONTAINED_BY, "
                     + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC, " },
             IE8 = "exception occured")
-    @NotYetImplemented({ FF, CHROME })
     public void enumeratedProperties() throws Exception {
         final String html
             = "<html><head>\n"
@@ -795,7 +790,6 @@ public class ElementTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <input id='foo' type='button' value='someValue'>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
@@ -1142,6 +1136,52 @@ public class ElementTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "  <div id='tester'></div>\n"
             + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "undefined", "undefined" }, CHROME = { "1", "number" },
+        IE8 = "exception")
+    public void allowKeyboardInput() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      try {\n"
+            + "        alert(Element.ALLOW_KEYBOARD_INPUT);\n"
+            + "        alert(typeof Element.ALLOW_KEYBOARD_INPUT);\n"
+            + "      } catch (e) {alert('exception')}\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("")
+    public void enumeratedPropertiesForNativeFunction() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var str = '';\n"
+            + "    for (var i in test)\n"
+            + "      str += i + ', ';\n"
+            + "    alert(str);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
         loadPageWithAlerts2(html);
     }
 }

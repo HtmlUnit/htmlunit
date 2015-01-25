@@ -503,4 +503,5 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
         }
         super.setParentScope(m);
     }
+
 }

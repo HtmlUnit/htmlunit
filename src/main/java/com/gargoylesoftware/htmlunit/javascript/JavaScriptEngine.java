@@ -222,7 +222,7 @@ public class JavaScriptEngine {
             else {
                 final ScriptableObject prototype = configureClass(config, window);
                 if (config.isJsObject()) {
-                    // for FF, place object with prototype property in Window scope
+                    // Place object with prototype property in Window scope
                     if (putPrototypeInWindowScope) {
                         final SimpleScriptable obj = config.getHostClass().newInstance();
                         prototype.defineProperty("__proto__", prototype, ScriptableObject.DONTENUM);
@@ -270,7 +270,7 @@ public class JavaScriptEngine {
             final ScriptableObject prototype = prototypesPerJSName.get(jsClassName);
             if (prototype != null) {
                 if (jsConstructor != null) {
-                    final FunctionObject functionObject = new FunctionObject(jsClassName, jsConstructor, window);
+                    final FunctionObject functionObject = new RecursiveFunctionObject(jsClassName, jsConstructor, window);
                     functionObject.addAsConstructor(window, prototype);
                     configureConstants(config, functionObject);
                 }
