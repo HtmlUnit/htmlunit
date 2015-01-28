@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -631,6 +632,118 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             + "    <select name='select1' id='testSelect'>\n"
             + "        <option name='option1'>One</option>\n"
             + "        <option>Two</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false null null", "false null null", "true *selected selected",
+                        "true null null", "false null null", "false *selected selected",
+                        "false null null", "true null null", "false *selected selected",
+                        "true null null", "false null null", "false *selected selected" },
+            IE8 = { "false *false false", "false *false false", "true *true true",
+                    "true *true true", "false *false false", "false *false false",
+                    "false *false false", "true *true true", "false *false false",
+                    "false *false false", "true *true true", "false *false false" })
+    @NotYetImplemented
+    public void selectedAttribute() throws Exception {
+        final String html
+            = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function info(opt) {\n"
+            + "    var attrNode = opt.getAttributeNode('selected');\n"
+            + "    if (attrNode) { attrNode = '*' + attrNode.value; }\n"
+            + "    alert(opt.selected + ' ' + attrNode + ' ' + opt.getAttribute('selected'));\n"
+            + "  }\n"
+
+            + "  function doTest() {\n"
+            + "    var s = document.getElementById('testSelect');\n"
+
+            + "    var o1 = s.options[0];\n"
+            + "    var o2 = s.options[1];\n"
+            + "    var o3 = s.options[2];\n"
+
+            + "    info(o1);info(o2);info(o3);\n"
+
+            + "    o1.selected = true;\n"
+            + "    info(o1);info(o2);info(o3);\n"
+
+            + "    o2.selected = true;\n"
+            + "    info(o1);info(o2);info(o3);\n"
+
+            + "    o2.selected = false;\n"
+            + "    info(o1);info(o2);info(o3);\n"
+
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<form name='form1'>\n"
+            + "    <select name='select1' id='testSelect'>\n"
+            + "        <option>One</option>\n"
+            + "        <option>Two</option>\n"
+            + "        <option selected='selected'>Three</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false null null", "false null null", "true *selected selected",
+                        "true null null", "false null null", "true *selected selected",
+                        "true null null", "true null null", "true *selected selected",
+                        "true null null", "false null null", "true *selected selected" },
+            IE8 = { "false *false false", "false *false false", "true *true true",
+                    "true *true true", "false *false false", "true *true true",
+                    "true *true true", "true *true true", "true *true true",
+                    "true *true true", "false *false false", "true *true true" })
+    @NotYetImplemented(IE8)
+    public void selectedAttributeMultiple() throws Exception {
+        final String html
+            = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function info(opt) {\n"
+            + "    var attrNode = opt.getAttributeNode('selected');\n"
+            + "    if (attrNode) { attrNode = '*' + attrNode.value; }\n"
+            + "    alert(opt.selected + ' ' + attrNode + ' ' + opt.getAttribute('selected'));\n"
+            + "  }\n"
+
+            + "  function doTest() {\n"
+            + "    var s = document.getElementById('testSelect');\n"
+
+            + "    var o1 = s.options[0];\n"
+            + "    var o2 = s.options[1];\n"
+            + "    var o3 = s.options[2];\n"
+
+            + "    info(o1);info(o2);info(o3);\n"
+
+            + "    o1.selected = true;\n"
+            + "    info(o1);info(o2);info(o3);\n"
+
+            + "    o2.selected = true;\n"
+            + "    info(o1);info(o2);info(o3);\n"
+
+            + "    o2.selected = false;\n"
+            + "    info(o1);info(o2);info(o3);\n"
+
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<form name='form1'>\n"
+            + "    <select name='select1' id='testSelect' multiple>\n"
+            + "        <option>One</option>\n"
+            + "        <option>Two</option>\n"
+            + "        <option selected='selected'>Three</option>\n"
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
