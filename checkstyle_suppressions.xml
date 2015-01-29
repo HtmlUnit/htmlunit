@@ -58,6 +58,7 @@
     <suppress checks="LineLength" files="XMLSerializerTest.java"/>
     <suppress checks="LineLength" files="XSLProcessorTest.java"/>
 
+    <suppress checks="MethodLength" files="JavaScriptEngine.java"/>
     <suppress checks="MethodLength" files="CSSStyleDeclaration2Test.java"/>
     <suppress checks="MethodLength" files="DefaultElementFactory.java"/>
     <suppress checks="MethodLength" files="Dojo102Test.java"/>

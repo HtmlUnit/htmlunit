@@ -121,6 +121,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
 import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnlyStatus;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -311,6 +312,13 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         for (String cmd : cmds) {
             EXECUTE_CMDS_FF.add(cmd.toLowerCase(Locale.ENGLISH));
         }
+    }
+
+    /**
+     * The constructor.
+     */
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public HTMLDocument() {
     }
 
     /**

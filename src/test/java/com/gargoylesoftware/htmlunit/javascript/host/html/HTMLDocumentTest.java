@@ -2268,4 +2268,31 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "[object HTMLDocument]", "[object HTMLDocument]" },
+            IE8 = { "[object]", "exception" },
+            CHROME = { "[object HTMLDocument]", "function HTMLDocument() { [native code] }" },
+            FF = { "[object HTMLDocument]", "function HTMLDocument() {\n    [native code]\n}" })
+    public void type() throws Exception {
+        final String html = ""
+            + "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      alert(document);\n"
+            + "      alert(HTMLDocument);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

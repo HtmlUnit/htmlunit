@@ -160,7 +160,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     /** To be documented. */
     @JsxConstant(@WebBrowser(CHROME))
-    public static final short TEMPORARAY = 0;
+    public static final short TEMPORARY = 0;
 
     /** To be documented. */
     @JsxConstant(@WebBrowser(CHROME))
