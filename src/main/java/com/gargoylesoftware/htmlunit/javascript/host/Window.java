@@ -116,6 +116,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
 import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnlyStatus;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -204,6 +205,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     /**
      * Creates an instance.
      */
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public Window() {
     }
 
@@ -2276,5 +2278,4 @@ class HTMLCollectionFrames extends HTMLCollection {
             }
         }
     }
-
 }

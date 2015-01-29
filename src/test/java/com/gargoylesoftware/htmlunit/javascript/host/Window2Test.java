@@ -1527,7 +1527,6 @@ public class Window2Test extends WebDriverTestCase {
             "toString, TEMPORARY, PERSISTENT, " },
             FF = { "[object Window]", "function Window() {\n    [native code]\n}", "" },
             IE8 = { "[object]", "exception" })
-    @NotYetImplemented({ CHROME, FF })
     public void enumeratedProperties() throws Exception {
         final String html
             = "<html><head>\n"

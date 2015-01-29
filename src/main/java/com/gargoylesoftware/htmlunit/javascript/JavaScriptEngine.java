@@ -218,6 +218,9 @@ public class JavaScriptEngine {
             final boolean isWindow = Window.class.getName().equals(config.getHostClass().getName());
             if (isWindow) {
                 configureConstantsPropertiesAndFunctions(config, window);
+
+                final ScriptableObject prototype = configureClass(config, window);
+                prototypesPerJSName.put(config.getHostClass().getSimpleName(), prototype);
             }
             else {
                 final ScriptableObject prototype = configureClass(config, window);

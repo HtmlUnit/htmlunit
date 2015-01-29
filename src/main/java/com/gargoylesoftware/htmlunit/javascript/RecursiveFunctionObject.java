@@ -74,11 +74,11 @@ public class RecursiveFunctionObject extends FunctionObject {
     @Override
     public Object[] getIds() {
         final Set<Object> objects = new LinkedHashSet<>();
-        for (final Object o : super.getIds()) {
-            objects.add(o);
-        }
         if (((Window) getParentScope()).getBrowserVersion().hasFeature(JS_FUNCTION_TOSTRING_ENUMERATED)) {
             objects.add("toString");
+        }
+        for (final Object o : super.getIds()) {
+            objects.add(o);
         }
         for (Class<?> c = getMethodOrConstructor().getDeclaringClass().getSuperclass();
                 c != null; c = c.getSuperclass()) {
