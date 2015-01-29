@@ -651,7 +651,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
                     "true *true true", "false *false false", "false *false false",
                     "false *false false", "true *true true", "false *false false",
                     "false *false false", "true *true true", "false *false false" })
-    @NotYetImplemented
+    @NotYetImplemented(IE8)
     public void selectedAttribute() throws Exception {
         final String html
             = "<html><head><title>foo</title>\n"

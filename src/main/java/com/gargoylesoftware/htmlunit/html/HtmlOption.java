@@ -50,8 +50,6 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "option";
 
-    private final boolean initialSelectedState_;
-
     private boolean selected_;
 
     /**
@@ -64,7 +62,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
     HtmlOption(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
-        initialSelectedState_ = hasAttribute("selected");
+        reset();
     }
 
     /**
@@ -72,7 +70,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * @return <tt>true</tt> if this option is currently selected
      */
     public boolean isSelected() {
-        return hasAttribute("selected") || selected_;
+        return selected_;
     }
 
     /**
@@ -140,7 +138,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * Resets the option to its original selected state.
      */
     public void reset() {
-        setSelectedInternal(initialSelectedState_);
+        setSelectedInternal(hasAttribute("selected"));
     }
 
     /**
@@ -163,7 +161,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * @return whether the option is selected by default
      */
     public final boolean isDefaultSelected() {
-        return initialSelectedState_;
+        return hasAttribute("selected");
     }
 
     /**
@@ -350,9 +348,6 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      */
     void setSelectedInternal(final boolean selected) {
         selected_ = selected;
-        if (!selected) {
-            removeAttribute("selected");
-        }
     }
 
     /**

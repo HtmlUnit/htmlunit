@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlOptionTest extends SimpleWebTestCase {
@@ -39,14 +40,17 @@ public class HtmlOptionTest extends SimpleWebTestCase {
     @Test
     public void testSelect() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
-            + "<form id='form1'><select name='select1' id='select1'>\n"
-            + "<option value='option1' id='option1'>Option1</option>\n"
-            + "<option value='option2' id='option2' selected='selected'>Option2</option>\n"
-            + "<option value='option3' id='option3'>Option3</option>\n"
-            + "</select>\n"
-            + "<input type='submit' name='button' value='foo'/>\n"
-            + "</form></body></html>";
+            = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "  <form id='form1'>\n"
+            + "    <select name='select1' id='select1'>\n"
+            + "      <option value='option1' id='option1'>Option1</option>\n"
+            + "      <option value='option2' id='option2' selected='selected'>Option2</option>\n"
+            + "      <option value='option3' id='option3'>Option3</option>\n"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
         final HtmlOption option1 = page.getHtmlElementById("option1");
@@ -76,13 +80,16 @@ public class HtmlOptionTest extends SimpleWebTestCase {
     @Test
     public void testGetValue() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
-            + "<form id='form1'><select name='select1' id='select1'>\n"
-            + "<option value='option1' id='option1'>Option1</option>\n"
-            + "<option id='option2' selected>Number Two</option>\n"
-            + "</select>\n"
-            + "<input type='submit' name='button' value='foo'/>\n"
-            + "</form></body></html>";
+            = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "  <form id='form1'>\n"
+            + "    <select name='select1' id='select1'>\n"
+            + "      <option value='option1' id='option1'>Option1</option>\n"
+            + "      <option id='option2' selected>Number Two</option>\n"
+            + "  </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
 
@@ -99,15 +106,17 @@ public class HtmlOptionTest extends SimpleWebTestCase {
     @Test
     public void testGetValue_ContentsIsValue() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
-            + "<form id='form1'>\n"
-            + "<select name='select1' id='select1'>\n"
-            + "     <option id='option1'>Option1</option>\n"
-            + "     <option id='option2' selected>Number Two</option>\n"
-            + "     <option id='option3'>\n  Number 3 with blanks </option>\n"
-            + "</select>\n"
-            + "<input type='submit' name='button' value='foo'/>\n"
-            + "</form></body></html>";
+            = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "  <form id='form1'>\n"
+            + "    <select name='select1' id='select1'>\n"
+            + "      <option id='option1'>Option1</option>\n"
+            + "      <option id='option2' selected>Number Two</option>\n"
+            + "      <option id='option3'>\n  Number 3 with blanks </option>\n"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
 
@@ -128,12 +137,11 @@ public class HtmlOptionTest extends SimpleWebTestCase {
     public void testClick() throws Exception {
         final String htmlContent
             = "<html><body>\n"
-            + "<form id='form1'>\n"
-            + "<select name='select1' id='select1'>\n"
-            + "     <option id='option1'>Option1</option>\n"
-            + "     <option id='option2' selected>Number Two</option>\n"
-            + "</select>\n"
-            + "<input type='submit' name='button' value='foo'/>\n"
+            + "  <form id='form1'>\n"
+            + "    <select name='select1' id='select1'>\n"
+            + "      <option id='option1'>Option1</option>\n"
+            + "      <option id='option2' selected>Number Two</option>\n"
+            + "    </select>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -150,14 +158,19 @@ public class HtmlOptionTest extends SimpleWebTestCase {
      */
     @Test
     public void asText() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
-            + "<form><select>\n"
-            + "<option id='option1'>option1</option>\n"
-            + "<option id='option2' label='Number Two'/>\n"
-            + "<option id='option3' label='overridden'>Number Three</option>\n"
-            + "<option id='option4'>Number&nbsp;4</option>\n"
-            + "</select>\n"
-            + "</form></body></html>";
+        final String htmlContent
+            = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "  <form>\n"
+            + "    <select>\n"
+            + "      <option id='option1'>option1</option>\n"
+            + "      <option id='option2' label='Number Two'/>\n"
+            + "      <option id='option3' label='overridden'>Number Three</option>\n"
+            + "      <option id='option4'>Number&nbsp;4</option>\n"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
 
