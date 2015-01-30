@@ -65,6 +65,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
  */
 @JsxClass
 public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.NodeList {
+
     /**
      * Cache effect of some changes.
      */
@@ -623,5 +624,4 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
         }
         return getScriptableFor(object);
     }
-
 }

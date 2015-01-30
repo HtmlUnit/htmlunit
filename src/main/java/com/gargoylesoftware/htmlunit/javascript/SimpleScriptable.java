@@ -112,7 +112,12 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
      */
     @Override
     public String getClassName() {
-        return getClass().getSimpleName();
+        String className = getClass().getSimpleName();
+        if (className.isEmpty()) {
+            // for anonymous class
+            className = getClass().getSuperclass().getSimpleName();
+        }
+        return className;
     }
 
     /**
