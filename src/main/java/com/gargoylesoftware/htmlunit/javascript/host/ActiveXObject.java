@@ -191,13 +191,4 @@ public class ActiveXObject extends SimpleScriptable {
         }
         return foundMethod;
     }
-
-    /**
-     * Gets the name of the host object class.
-     * @return the JavaScript class name
-     */
-    @Override
-    public String getClassName() {
-        return "ActiveXObject";
-    }
 }

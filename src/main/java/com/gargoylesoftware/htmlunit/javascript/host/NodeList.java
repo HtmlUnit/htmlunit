@@ -624,11 +624,4 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
         return getScriptableFor(object);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getClassName() {
-        return "NodeList";
-    }
 }

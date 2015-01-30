@@ -87,14 +87,6 @@ public class ArrayBuffer extends SimpleScriptable {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getClassName() {
-        return "ArrayBuffer";
-    }
-
     byte[] getBytes() {
         return bytes_;
     }

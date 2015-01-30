@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -29,6 +31,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Ronald Brill
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class HTMLAllCollectionTest extends WebDriverTestCase {
@@ -470,6 +473,34 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
             + "<body onload='doTest()'>\n"
             + "  <button id='b1' name='button1'></button>\n"
             + "  <button id='b2' name='button2'></button>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "[object HTMLAllCollection]", "[object HTMLAllCollection]" },
+            IE8 = { "[object]", "exception" },
+            CHROME = { "[object HTMLAllCollection]", "function HTMLAllCollection() { [native code] }" },
+            FF = { "[object HTML document.all class]", "exception" })
+    @NotYetImplemented({ CHROME, FF })
+    public void type() throws Exception {
+        final String html = ""
+            + "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      alert(document.all);\n"
+            + "      alert(HTMLAllCollection);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'></div>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

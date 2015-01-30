@@ -112,13 +112,7 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
      */
     @Override
     public String getClassName() {
-        final String javaClassName = getClass().getName();
-        final int index = javaClassName.lastIndexOf(".");
-        if (index == -1) {
-            throw new IllegalStateException("No dot in classname: " + javaClassName);
-        }
-
-        return javaClassName.substring(index + 1);
+        return getClass().getSimpleName();
     }
 
     /**
