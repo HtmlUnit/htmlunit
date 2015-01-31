@@ -42,10 +42,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A special {@link HTMLCollection}for document.all.
+ * A special {@link HTMLCollection} for <code>document.all</code>.
  *
  * @version $Revision$
  * @author Ronald Brill
+ * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
 public class HTMLAllCollection extends HTMLCollection {

@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -26,8 +29,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
@@ -46,6 +51,13 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  */
 @JsxClass(domClass = HtmlAnchor.class)
 public class HTMLAnchorElement extends HTMLElement {
+
+    /**
+     * The constructor
+     */
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public HTMLAnchorElement() {
+    }
 
     /**
      * Sets the <tt>href</tt> property.

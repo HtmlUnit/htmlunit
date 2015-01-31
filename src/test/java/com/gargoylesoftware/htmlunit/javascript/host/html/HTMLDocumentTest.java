@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -768,7 +766,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object HTMLAllCollection]",
             FF = "[object HTML document.all class]",
             IE8 = "[object HTMLCollection]")
-    @NotYetImplemented({ CHROME, FF, IE11 })
     public void all_scriptableToString() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

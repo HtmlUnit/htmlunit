@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -23,6 +25,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
@@ -427,6 +430,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1", CHROME = { "0", "inner" })
+    @NotYetImplemented(CHROME)
     public void javascriptTargetWhitespace() throws Exception {
         final String[] alerts = getExpectedAlerts();
         javascriptTarget("target='  '",
@@ -448,6 +452,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1", CHROME = { "0", "inner" })
+    @NotYetImplemented(CHROME)
     public void javascriptTargetBlank() throws Exception {
         final String[] alerts = getExpectedAlerts();
         javascriptTarget("target='_blank'",
@@ -460,6 +465,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "main", CHROME = "inner")
+    @NotYetImplemented(CHROME)
     public void javascriptTargetTop() throws Exception {
         javascriptTarget("target='_top'", 0, getExpectedAlerts());
     }
@@ -469,6 +475,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "main", CHROME = "inner")
+    @NotYetImplemented(CHROME)
     public void javascriptTargetParent() throws Exception {
         javascriptTarget("target='_parent'", 0, getExpectedAlerts());
     }
@@ -478,6 +485,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1", CHROME = { "0", "inner" })
+    @NotYetImplemented(CHROME)
     public void javascriptTargetUnknown() throws Exception {
         final String[] alerts = getExpectedAlerts();
         javascriptTarget("target='unknown'",
@@ -530,10 +538,36 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "  <a href='javascript:alert(this === window)'>link 1</a>\n"
             + "</body></html>";
 
-        System.out.println(html);
         final WebDriver driver = loadPage2(html);
-        System.out.println(driver.getPageSource());
         driver.findElement(By.tagName("a")).click();
         assertEquals(1, getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "§§URL§§second/", "HTMLAnchorElement", "[object HTMLAnchorElement]" },
+            IE8 = { "§§URL§§second/", "object", "exception" },
+            CHROME = { "§§URL§§second/", "object", "function HTMLAnchorElement() { [native code] }" },
+            FF = { "§§URL§§second/", "object", "function HTMLAnchorElement() {\n    [native code]\n}" })
+    public void type() throws Exception {
+        final String html = ""
+            + "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      alert(document.links[0]);\n"
+            + "      alert(typeof document.links[0]);\n"
+            + "      alert(HTMLAnchorElement);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <a id='link' href='" + URL_SECOND + "'>link</a>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
     }
 }
