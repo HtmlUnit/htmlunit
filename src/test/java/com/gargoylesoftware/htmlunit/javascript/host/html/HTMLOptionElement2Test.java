@@ -925,9 +925,111 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             IE8 = "[object]")
     public void form() throws Exception {
         final String html
-            = "<html><body><form><select id='s'><option>a</option></select></form><script>\n"
-            + "alert(document.getElementById('s').options[0].form);\n"
-            + "</script></body></html>";
+            = "<html>\n"
+            + "<body>\n"
+            + "  <form>\n"
+            + "    <select id='s'>\n"
+            + "      <option>a</option>\n"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + "    alert(document.getElementById('s').options[0].form);\n"
+            + "  </script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"o2", "1", "0", "o2" },
+            IE8 = { "evaluate not supported", "1", "1", "evaluate not supported" },
+            IE11 = { "evaluate not supported", "1", "0", "evaluate not supported" })
+    public void xpathSelected() throws Exception {
+        final String selectionChangeCode = "    sel.options[1].selected = false;\n";
+
+        xpathSelected(selectionChangeCode, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"o2", "1", "1", "o2" },
+            IE = { "evaluate not supported", "1", "1", "evaluate not supported" })
+    public void xpathSelectedSetAttribute() throws Exception {
+        final String selectionChangeCode = "    sel.options[1].setAttribute('selected', false);\n";
+
+        xpathSelected(selectionChangeCode, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"o2", "1", "-1", "o2" },
+            IE = { "evaluate not supported", "1", "-1", "evaluate not supported" })
+    public void xpathSelectedMultiple() throws Exception {
+        final String selectionChangeCode = "    sel.options[1].selected = false;\n";
+
+        xpathSelected(selectionChangeCode, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"o2", "1", "1", "o2" },
+            IE = { "evaluate not supported", "1", "1", "evaluate not supported" })
+    public void xpathSelectedSetAttributeMultiple() throws Exception {
+        final String selectionChangeCode = "    sel.options[1].setAttribute('selected', false);\n";
+
+        xpathSelected(selectionChangeCode, false);
+    }
+
+    private void xpathSelected(final String selectionChangeCode, final boolean multiple) throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    xpath();\n"
+            + "    var sel = document.getElementById('s1');\n"
+            + "    alert(sel.selectedIndex);\n"
+            + selectionChangeCode
+            + "    alert(sel.selectedIndex);\n"
+            + "    xpath();\n"
+            + "  }\n"
+
+            + "  function xpath() {\n"
+            + "    if (document.evaluate && XPathResult) {\n"
+            + "      try {\n"
+            + "        var result = document.evaluate('" + "//option[@selected]" + "', document.documentElement, "
+                                            + "null, XPathResult.ANY_TYPE, null);\n"
+
+            + "        var thisNode = result.iterateNext();\n"
+            + "        while (thisNode) {\n"
+            + "          alert(thisNode.getAttribute('id'));\n"
+            + "          thisNode = result.iterateNext();\n"
+            + "        }\n"
+            + "      } catch (e) { alert(e); }\n"
+            + "    } else {\n"
+            + "      alert('evaluate not supported');\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form id='form1'>\n"
+            + "    <select id='s1' name='select1' " + (multiple ? "multiple='multiple'" : "") + ">\n"
+            + "      <option id='o1' value='option1'>Option1</option>\n"
+            + "      <option id='o2' value='option2' selected='selected'>Option2</option>\n"
+            + "      <option id='o3'value='option3'>Option3</option>\n"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
         loadPageWithAlerts2(html);
     }
 }
