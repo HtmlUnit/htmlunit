@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class HTMLAreaElementTest extends WebDriverTestCase {
@@ -57,4 +58,31 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "", "[object HTMLAreaElement]" },
+            IE8 = { "", "exception" },
+            CHROME = { "", "function HTMLAreaElement() { [native code] }" },
+            FF = { "", "function HTMLAreaElement() {\n    [native code]\n}" })
+    public void type() throws Exception {
+        final String html = ""
+            + "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "  var elem = document.getElementById('a1');\n"
+            + "    try {\n"
+            + "      alert(elem);\n"
+            + "      alert(HTMLAreaElement);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <map><area id='a1'/><area id='a2' accesskey='A'/></map>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

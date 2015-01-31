@@ -53,7 +53,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
 public class HTMLAnchorElement extends HTMLElement {
 
     /**
-     * The constructor
+     * The constructor.
      */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public HTMLAnchorElement() {

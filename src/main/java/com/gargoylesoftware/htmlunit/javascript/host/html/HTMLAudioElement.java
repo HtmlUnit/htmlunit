@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.html.HtmlAudio;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -33,5 +34,12 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(domClass = HtmlAudio.class, browsers = { @WebBrowser(FF),
         @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
 public class HTMLAudioElement extends HTMLMediaElement {
-    // empty at the moment
+
+    /**
+     * The constructor.
+     */
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public HTMLAudioElement() {
+    }
+
 }

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 
 import org.junit.Test;
@@ -26,8 +27,10 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link HTMLBaseElement}.
+ *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class HTMLBaseElementTest extends WebDriverTestCase {
@@ -38,7 +41,7 @@ public class HTMLBaseElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "http://www.foo.com/images/", "§§URL§§", "", "_blank" },
             IE = { "http://www.foo.com/images/", "", "", "_blank" })
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, CHROME })
     public void hrefAndTarget() throws Exception {
         final String html =
             "<html>\n"
@@ -59,4 +62,31 @@ public class HTMLBaseElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "[object HTMLBaseElement]", "[object HTMLBaseElement]" },
+            IE8 = { "[object]", "exception" },
+            CHROME = { "[object HTMLBaseElement]", "function HTMLBaseElement() { [native code] }" },
+            FF = { "[object HTMLBaseElement]", "function HTMLBaseElement() {\n    [native code]\n}" })
+    public void type() throws Exception {
+        final String html = ""
+            + "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "  var elem = document.getElementById('b1');\n"
+            + "    try {\n"
+            + "      alert(elem);\n"
+            + "      alert(HTMLBaseElement);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "    <base id='b1' href='http://somehost/images/' />\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

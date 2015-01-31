@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -30,6 +31,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class HTMLBaseFontElementTest extends WebDriverTestCase {
@@ -42,6 +44,7 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
             CHROME = { "[object HTMLElement]", "undefined", "undefined", "undefined" },
             IE = { "[object]", "", "3", "" },
             IE11 = { "[object HTMLBaseFontElement]", "", "3", "" })
+    @NotYetImplemented(CHROME)
     public void defaults() throws Exception {
         final String html =
             "<html>\n"
@@ -68,7 +71,7 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "42" },
             IE = { "4", "42" })
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, CHROME })
     public void size() throws Exception {
         final String html =
             "<html>\n"
@@ -98,7 +101,7 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "helvetica" },
             IE = { "swiss", "helvetica" })
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, CHROME })
     public void face() throws Exception {
         final String html =
             "<html>\n"
@@ -129,7 +132,7 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "undefined", "blue" },
             IE = { "#ff0000", "#0000ff" },
             IE11 = { "red", "blue" })
-    @NotYetImplemented({ FF, IE8 })
+    @NotYetImplemented({ FF, IE8, CHROME })
     public void color() throws Exception {
         final String html =
             "<html>\n"
@@ -150,6 +153,35 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
             + "  </head>\n"
             + "  <body onload='test()'>foo</body>\n"
             + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "[object HTMLBaseFontElement]", "[object HTMLBaseFontElement]" },
+            IE8 = { "[object]", "exception" },
+            CHROME = { "[object HTMLElement]", "exception" },
+            FF = { "[object HTMLSpanElement]", "exception" })
+    @NotYetImplemented(CHROME)
+    public void type() throws Exception {
+        final String html = ""
+            + "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "  var elem = document.getElementById('b1');\n"
+            + "    try {\n"
+            + "      alert(elem);\n"
+            + "      alert(HTMLBaseFontElement);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "    <basefont id='b1' color='red' face='swiss' size='4' />\n"
+            + "</body></html>";
+
         loadPageWithAlerts2(html);
     }
 }

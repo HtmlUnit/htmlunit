@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -109,15 +108,14 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
 
     /**
      * Test the host class names match the Firefox (w3c names).
-     * @see <a
-     *   href="http://java.sun.com/j2se/1.5.0/docs/guide/plugin/dom/org/w3c/dom/html/package-summary.html">DOM API</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API">Web API Interfaces</a>
      * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLAnchorElement]",
             CHROME = "function HTMLAnchorElement() { [native code] }",
-            FF = "function HTMLAnchorElement() {\n    [native code]\n}")
-    @NotYetImplemented({ CHROME, FF, IE8 })
+            FF = "function HTMLAnchorElement() {\n    [native code]\n}",
+            IE8 = "exception")
     public void hostClassNames() throws Exception {
         testHostClassNames("HTMLAnchorElement");
     }
@@ -126,7 +124,9 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    alert(" + className + ");\n"
+            + "    try {\n"
+            + "      alert(" + className + ");\n"
+            + "    } catch(e) {alert('exception')}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

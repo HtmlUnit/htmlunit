@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class HTMLAppletElementTest extends WebDriverTestCase {
@@ -94,6 +95,34 @@ public class HTMLAppletElementTest extends WebDriverTestCase {
             + "  setAlign(elem, 'top');\n"
             + "</script>\n"
             + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "[object HTMLAppletElement]", "[object HTMLAppletElement]" },
+            IE8 = { "[object]", "exception" },
+            CHROME = { "[object HTMLAppletElement]", "function HTMLAppletElement() { [native code] }" },
+            FF = { "[object HTMLAppletElement]", "function HTMLAppletElement() {\n    [native code]\n}" })
+    public void type() throws Exception {
+        final String html = ""
+            + "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "  var elem = document.getElementById('a1');\n"
+            + "    try {\n"
+            + "      alert(elem);\n"
+            + "      alert(HTMLAppletElement);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <applet id='a1' align='left' ></applet>\n"
+            + "</body></html>";
+
         loadPageWithAlerts2(html);
     }
 }
