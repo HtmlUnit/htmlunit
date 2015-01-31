@@ -14,15 +14,17 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_DEFAULT_DESCRIPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_DO_NOT_CHECK_NAME;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.
-                                                HTMLALLCOLLECTION_ITEM_DO_NOT_CONVERT_STRINGS_TO_NUMBER;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_DO_NOT_CONVERT_STRINGS_TO_NUMBER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NULL_IF_ITEM_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_EXCEPTION_FOR_NEGATIVE_INDEX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_DOUBLE_INDEX_ALSO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +37,9 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A special {@link HTMLCollection}for document.all.
@@ -43,14 +47,15 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
  * @version $Revision$
  * @author Ronald Brill
  */
-@JsxClass
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
 public class HTMLAllCollection extends HTMLCollection {
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor.
+     * Creates an instance.
      * Don't call.
      */
     @Deprecated
+    @JsxConstructor(@WebBrowser(CHROME))
     public HTMLAllCollection() {
         // Empty.
     }
@@ -84,7 +89,7 @@ public class HTMLAllCollection extends HTMLCollection {
             numb = Double.NaN;
 
             browser = getBrowserVersion();
-            if (!browser.hasFeature(HTMLALLCOLLECTION_ITEM_DO_NOT_CONVERT_STRINGS_TO_NUMBER)) {
+            if (!browser.hasFeature(HTMLALLCOLLECTION_DO_NOT_CONVERT_STRINGS_TO_NUMBER)) {
                 numb = ScriptRuntime.toNumber(index);
             }
             if (ScriptRuntime.NaN == numb || numb.isNaN()) {
@@ -164,5 +169,17 @@ public class HTMLAllCollection extends HTMLCollection {
         final HTMLCollection collection = new HTMLCollection(domNode, matchingByName);
         collection.setAvoidObjectDetection(!browser.hasFeature(HTMLCOLLECTION_OBJECT_DETECTION));
         return collection;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getDefaultValue(final Class<?> hint) {
+        if ((String.class.equals(hint) || hint == null)
+                && getBrowserVersion().hasFeature(HTMLALLCOLLECTION_DEFAULT_DESCRIPTION)) {
+            return "[object HTML document.all class]";
+        }
+        return super.getDefaultValue(hint);
     }
 }

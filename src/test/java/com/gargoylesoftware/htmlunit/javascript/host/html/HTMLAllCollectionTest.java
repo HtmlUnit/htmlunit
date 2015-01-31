@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -146,6 +145,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             IE = "null",
             CHROME = "null")
+    @NotYetImplemented(CHROME)
     public void namedItem_InvalidIndex() throws Exception {
         item("200");
     }
@@ -297,6 +297,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             IE = "null",
             CHROME = "null")
+    @NotYetImplemented(CHROME)
     public void item_InvalidIndex() throws Exception {
         item("200");
     }
@@ -381,6 +382,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "b2-button2",
             CHROME = "undefined")
+    @NotYetImplemented(CHROME)
     public void arrayIndex_ByName() throws Exception {
         arrayIndex("'button2'");
     }
@@ -486,7 +488,6 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
             IE8 = { "[object]", "exception" },
             CHROME = { "[object HTMLAllCollection]", "function HTMLAllCollection() { [native code] }" },
             FF = { "[object HTML document.all class]", "exception" })
-    @NotYetImplemented({ CHROME, FF })
     public void type() throws Exception {
         final String html = ""
             + "<html><head><title>foo</title>\n"
@@ -500,7 +501,6 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <div id='myDiv'></div>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

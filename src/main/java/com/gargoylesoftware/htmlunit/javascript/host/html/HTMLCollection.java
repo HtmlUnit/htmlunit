@@ -438,14 +438,6 @@ public class HTMLCollection extends NodeList {
         }
         return getScriptableFor(object);
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getClassName() {
-        return "HTMLCollection";
-    }
 }
 
 class HTMLSubCollection extends HTMLCollection {

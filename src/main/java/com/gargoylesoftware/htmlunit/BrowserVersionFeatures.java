@@ -367,13 +367,17 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTMLABBREVIATED,
 
-    /** HtmlAllCollection.item des not check the name, ony the id. */
+    /** HtmlAllCollection default value is [object HTML document.all class]. */
+    @BrowserFeature(@WebBrowser(FF))
+    HTMLALLCOLLECTION_DEFAULT_DESCRIPTION,
+
+    /** HtmlAllCollection.item does not check the name, only the id. */
     @BrowserFeature(@WebBrowser(CHROME))
     HTMLALLCOLLECTION_DO_NOT_CHECK_NAME,
 
     /** HtmlAllCollection.item returns null instead of undefined if an element was not found. */
     @BrowserFeature({ @WebBrowser(value = IE, minVersion = 11) })
-    HTMLALLCOLLECTION_ITEM_DO_NOT_CONVERT_STRINGS_TO_NUMBER,
+    HTMLALLCOLLECTION_DO_NOT_CONVERT_STRINGS_TO_NUMBER,
 
     /** HtmlCollection returns the first hit instead of a collection if many elements found. */
     @BrowserFeature(@WebBrowser(IE))
