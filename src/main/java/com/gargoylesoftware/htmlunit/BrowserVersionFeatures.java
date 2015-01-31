@@ -367,6 +367,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTMLABBREVIATED,
 
+    /** Is HtmlAllCollection supported. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    HTMLALLCOLLECTION,
+
     /** HtmlAllCollection default value is [object HTML document.all class]. */
     @BrowserFeature(@WebBrowser(FF))
     HTMLALLCOLLECTION_DEFAULT_DESCRIPTION,
