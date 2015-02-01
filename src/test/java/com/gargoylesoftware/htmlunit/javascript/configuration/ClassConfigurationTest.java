@@ -21,7 +21,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
- * Tests for {@link JavaScriptConfiguration}.
+ * Tests for {@link ClassConfiguration}.
  *
  * @version $Revision$
  * @author Chris Erskine

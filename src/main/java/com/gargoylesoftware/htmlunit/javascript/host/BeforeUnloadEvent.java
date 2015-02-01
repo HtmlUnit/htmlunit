@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_BEFOREU
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -41,10 +42,17 @@ public class BeforeUnloadEvent extends Event {
     /**
      * Creates a new event instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public BeforeUnloadEvent() {
         setEventType("");
         setReturnValue("");
+    }
+
+    /**
+     * The JavaScript constructor. It seems it is not possible to do it from JavaScript code.
+     */
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public void jConstructor() {
+        Context.throwAsScriptRuntimeEx(new IllegalArgumentException("Illegal Constructor"));
     }
 
     /**
