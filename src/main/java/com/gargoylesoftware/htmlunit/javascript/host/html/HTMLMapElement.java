@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +24,9 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlArea;
 import com.gargoylesoftware.htmlunit.html.HtmlMap;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * The JavaScript object "HTMLMapElement".
@@ -32,7 +37,15 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
  */
 @JsxClass(domClass = HtmlMap.class)
 public class HTMLMapElement extends HTMLElement {
+
     private HTMLCollection areas_;
+
+    /**
+     * Creates an instance.
+     */
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public HTMLMapElement() {
+    }
 
     /**
      * Returns the value of the JavaScript attribute "areas".

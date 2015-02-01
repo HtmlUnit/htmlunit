@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -72,8 +73,9 @@ public class XMLDocument extends Document {
     private boolean async_ = true;
 
     /**
-     * Creates a new instance. JavaScript objects must have a default constructor.
+     * Creates a new instance.
      */
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public XMLDocument() {
         this(null);
     }

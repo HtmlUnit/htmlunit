@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.html.HtmlMeter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -28,9 +29,17 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ronald Brill
+ * @author Ahmed Ashour
  */
 @JsxClass(domClass = HtmlMeter.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
 public class HTMLMeterElement extends HTMLElement {
+
+    /**
+     * Creates an instance.
+     */
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public HTMLMeterElement() {
+    }
 
     /**
      * The getter for the "value" property.

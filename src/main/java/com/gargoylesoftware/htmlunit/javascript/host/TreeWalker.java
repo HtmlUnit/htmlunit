@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -22,6 +23,7 @@ import org.w3c.dom.DOMException;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -35,6 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
  * @author Frank Danek
+ * @author Ahmed Ashour
  */
 @JsxClass
 public class TreeWalker extends SimpleScriptable {
@@ -48,6 +51,7 @@ public class TreeWalker extends SimpleScriptable {
     /**
      * Creates an instance.
      */
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public TreeWalker() {
     }
 

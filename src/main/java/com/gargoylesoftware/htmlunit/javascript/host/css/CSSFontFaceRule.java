@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONTFACERULE_CSSTEXT_CRLF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -23,6 +24,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -33,6 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Marc Guillemot
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Ahmed Ashour
  */
 @JsxClass
 public class CSSFontFaceRule extends CSSRule {
@@ -41,11 +44,10 @@ public class CSSFontFaceRule extends CSSRule {
     private static final Pattern REPLACEMENT_2 = Pattern.compile("src: url\\(([^;]*)\\);");
 
     /**
-     * Creates a new instance. JavaScript objects must have a default constructor.
+     * Creates a new instance.
      */
-    @Deprecated
+    @JsxConstructor(@WebBrowser(CHROME))
     public CSSFontFaceRule() {
-        // Empty.
     }
 
     /**

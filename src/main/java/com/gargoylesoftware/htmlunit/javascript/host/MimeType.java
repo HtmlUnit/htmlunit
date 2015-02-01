@@ -14,10 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -26,10 +28,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  *
  * @see <a href="http://www.xulplanet.com/references/objref/MimeType.html">XUL Planet</a>
  */
-@JsxClass(browsers = @WebBrowser(FF))
+@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
 public final class MimeType extends SimpleScriptable {
     private String description_;
     private String suffixes_;
@@ -37,10 +40,10 @@ public final class MimeType extends SimpleScriptable {
     private Plugin enabledPlugin_;
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor.
+     * Creates an instance.
      */
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public MimeType() {
-        // nothing
     }
 
     /**

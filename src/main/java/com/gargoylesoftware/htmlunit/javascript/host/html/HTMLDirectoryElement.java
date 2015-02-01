@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.html.HtmlDirectory;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -34,4 +35,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
             @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
 public class HTMLDirectoryElement extends HTMLListElement {
 
+    /**
+     * Creates an instance.
+     */
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public HTMLDirectoryElement() {
+    }
 }

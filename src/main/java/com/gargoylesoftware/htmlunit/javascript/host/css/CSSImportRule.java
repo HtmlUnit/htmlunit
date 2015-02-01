@@ -14,8 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.MediaList;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
@@ -24,6 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 @JsxClass
 public class CSSImportRule extends CSSRule {
@@ -32,11 +37,10 @@ public class CSSImportRule extends CSSRule {
     private CSSStyleSheet importedStylesheet_;
 
     /**
-     * Creates a new instance. JavaScript objects must have a default constructor.
+     * Creates a new instance.
      */
-    @Deprecated
+    @JsxConstructor(@WebBrowser(CHROME))
     public CSSImportRule() {
-        // Empty.
     }
 
     /**

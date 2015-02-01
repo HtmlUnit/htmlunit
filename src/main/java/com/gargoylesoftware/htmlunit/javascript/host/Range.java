@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,8 +33,10 @@ import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 
 /**
@@ -48,8 +53,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
  */
 @JsxClass
 public class Range extends SimpleScriptable {
-    private Node startContainer_, endContainer_;
-    private int startOffset_, endOffset_;
 
     /** Comparison mode for compareBoundaryPoints. */
     @JsxConstant
@@ -67,11 +70,14 @@ public class Range extends SimpleScriptable {
     @JsxConstant
     public static final short END_TO_START = 3;
 
+    private Node startContainer_, endContainer_;
+    private int startOffset_, endOffset_;
+
     /**
-     * Creates a new instance.
+     * Creates an instance.
      */
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public Range() {
-        // Empty.
     }
 
     /**

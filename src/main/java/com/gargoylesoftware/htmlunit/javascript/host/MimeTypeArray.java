@@ -14,12 +14,18 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for a document.navigator.plugins.
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  *
  * @see <a href="http://www.xulplanet.com/references/objref/MimeTypeArray.html">XUL Planet</a>
  */
@@ -27,10 +33,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 public class MimeTypeArray extends SimpleArray {
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor.
+     * Creates an instance.
      */
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public MimeTypeArray() {
-        // nothing
     }
 
     /**

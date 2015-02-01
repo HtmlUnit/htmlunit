@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
@@ -47,9 +48,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 public class Attr extends Node {
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor.
+     * Creates an instance.
      */
-    public Attr() { }
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public Attr() {
+    }
 
     /**
      * Detaches this attribute from the parent HTML element after caching the attribute value.

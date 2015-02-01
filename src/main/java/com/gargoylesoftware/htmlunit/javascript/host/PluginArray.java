@@ -14,23 +14,31 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for a document.navigator.plugins.
+ *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  *
  * @see <a href="http://www.xulplanet.com/references/objref/PluginArray.html">XUL Planet</a>
  */
 @JsxClass
 public class PluginArray extends SimpleArray {
+
     /**
-     * Creates an instance. JavaScript objects must have a default constructor.
+     * Creates an instance.
      */
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public PluginArray() {
-        // nothing
     }
 
     /**

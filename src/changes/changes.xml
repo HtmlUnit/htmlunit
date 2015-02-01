@@ -9,10 +9,10 @@
     <body>
         <release version="2.16" date="???" description="Java 7, FF31, IE11 progress, Chrome progress, Bugfixes">
             <action type="fix" dev="asashour">
-                INCOMPATIBLE CHANGE: SVG: Rename SvgMpath to SvgMPath.
+                JavaScript: most elements prototype should be functions (Chrome and FF).
             </action>
             <action type="fix" dev="asashour">
-                JavaScript: SVG elements should be functions by default, and some Chrome corrections.
+                INCOMPATIBLE CHANGE: SVG: Rename SvgMpath to SvgMPath.
             </action>
             <action type="fix" dev="asashour">
                 JavaScript: FunctionObject to also enumerate IDs of the parent objects.

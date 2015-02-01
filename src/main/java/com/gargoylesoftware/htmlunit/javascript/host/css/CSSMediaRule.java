@@ -14,8 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.MediaList;
 
 /**
@@ -23,6 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.MediaList;
  *
  * @version $Revision$
  * @author Ronald Brill
+ * @author Ahmed Ashour
  */
 @JsxClass
 public class CSSMediaRule extends CSSRule {
@@ -30,11 +35,10 @@ public class CSSMediaRule extends CSSRule {
     private MediaList media_;
 
     /**
-     * Creates a new instance. JavaScript objects must have a default constructor.
+     * Creates a new instance.
      */
-    @Deprecated
+    @JsxConstructor(@WebBrowser(CHROME))
     public CSSMediaRule() {
-        // Empty.
     }
 
     /**

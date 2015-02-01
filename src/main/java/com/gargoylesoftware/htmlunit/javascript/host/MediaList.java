@@ -16,11 +16,15 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MEDIA_LIST_ALL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MEDIA_LIST_EMPTY_STRING;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 
 /**
@@ -29,6 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Ronald Brill
+ * @author Ahmed Ashour
  */
 @JsxClass
 public class MediaList extends SimpleScriptable {
@@ -36,9 +41,9 @@ public class MediaList extends SimpleScriptable {
     private final org.w3c.dom.stylesheets.MediaList wrappedList_;
 
     /**
-     * Creates a new instance. JavaScript objects must have a default constructor.
+     * Creates a new instance.
      */
-    @Deprecated
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public MediaList() {
         wrappedList_ = null;
     }

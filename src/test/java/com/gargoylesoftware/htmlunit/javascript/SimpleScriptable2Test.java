@@ -107,34 +107,6 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
     }
 
     /**
-     * Test the host class names match the Firefox (w3c names).
-     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API">Web API Interfaces</a>
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "[object HTMLAnchorElement]",
-            CHROME = "function HTMLAnchorElement() { [native code] }",
-            FF = "function HTMLAnchorElement() {\n    [native code]\n}",
-            IE8 = "exception")
-    public void hostClassNames() throws Exception {
-        testHostClassNames("HTMLAnchorElement");
-    }
-
-    private void testHostClassNames(final String className) throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    try {\n"
-            + "      alert(" + className + ");\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
      * Blocked by Rhino bug 419090 (https://bugzilla.mozilla.org/show_bug.cgi?id=419090).
      * @throws Exception if the test fails
      */

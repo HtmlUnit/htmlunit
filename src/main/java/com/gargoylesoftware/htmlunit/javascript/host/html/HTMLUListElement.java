@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlDirectory;
@@ -21,6 +23,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlMenu;
 import com.gargoylesoftware.htmlunit.html.HtmlUnorderedList;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
@@ -37,6 +40,13 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
         @JsxClass(domClass = HtmlUnorderedList.class),
         @JsxClass(domClass = HtmlMenu.class, browsers = { @WebBrowser(value = IE, maxVersion = 8) }) })
 public class HTMLUListElement extends HTMLListElement {
+
+    /**
+     * Creates an instance.
+     */
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public HTMLUListElement() {
+    }
 
     /**
      * Returns the value of the <tt>type</tt> attribute.

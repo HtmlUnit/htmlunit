@@ -14,17 +14,24 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A NodeFilter.
  *
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Traversal-Range/traversal.html">
  * DOM-Level-2-Traversal-Range</a>
+ *
  * @version $Revision$
  * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
+ * @author Ahmed Ashour
  */
 @JsxClass
 public class NodeFilter extends SimpleScriptable {
@@ -91,6 +98,13 @@ public class NodeFilter extends SimpleScriptable {
      */
     @JsxConstant
     public static final int SHOW_NOTATION = 0x00000800;
+
+    /**
+     * Creates an instance.
+     */
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public NodeFilter() {
+    }
 
     /**
      * Test whether a specified node is visible in the logical view of a

@@ -70,7 +70,8 @@ public final class ClassConfiguration {
 
     void setJSConstructor(final Member jsConstructor) {
         if (jsConstructor_ != null) {
-            throw new IllegalStateException("Can not have two constructors.");
+            throw new IllegalStateException("Can not have two constructors for "
+                    + jsConstructor_.getDeclaringClass().getName());
         }
         jsConstructor_ = jsConstructor;
     }

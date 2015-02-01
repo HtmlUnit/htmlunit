@@ -69,9 +69,8 @@ public class CSSRule extends SimpleScriptable {
     private final org.w3c.dom.css.CSSRule rule_;
 
     /**
-     * Creates a new instance. JavaScript objects must have a default constructor.
+     * Creates a new instance.
      */
-    @Deprecated
     public CSSRule() {
         stylesheet_ = null;
         rule_ = null;

@@ -28,6 +28,7 @@ import org.w3c.css.sac.InputSource;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
@@ -46,6 +47,13 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 public class HTMLStyleElement extends HTMLElement {
 
     private CSSStyleSheet sheet_;
+
+    /**
+     * Creates an instance.
+     */
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public HTMLStyleElement() {
+    }
 
     /**
      * Gets the associated sheet.

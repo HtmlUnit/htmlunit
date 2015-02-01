@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STORAGE_GET_FROM_ITEMS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STORAGE_PRESERVED_INCLUDED;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,8 +27,10 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * The JavaScript object that represents a Storage.
@@ -46,9 +49,9 @@ public class Storage extends SimpleScriptable {
     private final Map<String, String> store_;
 
     /**
-     * Public no-arg constructor only for the prototype.
+     * Public default constructor only for the prototype.
      */
-    @Deprecated
+    @JsxConstructor(@WebBrowser(CHROME))
     public Storage() {
         store_ = null;
     }

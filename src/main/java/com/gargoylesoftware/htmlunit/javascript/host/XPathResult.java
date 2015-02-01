@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
@@ -117,6 +118,13 @@ public class XPathResult extends SimpleScriptable {
      * The index of the next result.
      */
     private int iteratorIndex_;
+
+    /**
+     * Creates an instance.
+     */
+    @JsxConstructor(@WebBrowser(CHROME))
+    public XPathResult() {
+    }
 
     /**
      * @param result the evaluation result
