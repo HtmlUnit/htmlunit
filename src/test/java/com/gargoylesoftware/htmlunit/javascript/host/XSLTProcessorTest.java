@@ -125,4 +125,44 @@ public class XSLTProcessorTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "function", "function", "function", "function", "function",
+            "undefined", "undefined", "undefined", "undefined" },
+            IE = { "undefined", "undefined", "undefined", "undefined", "undefined",
+            "object", "undefined", "function", "function", "exception" })
+    public void methods() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    if (window.ActiveXObject) {\n"
+            + "      var xslt = new ActiveXObject('Msxml2.XSLTemplate.3.0');\n"
+            + "      var xslProc = xslt.createProcessor();\n"
+            + "      alertMethods(xslProc);\n"
+            + "    }\n"
+            + "    try {\n"
+            + "      if (XSLTProcessor) {\n"
+            + "        var processor = new XSLTProcessor();\n"
+            + "        alertMethods(processor);\n"
+            + "      }\n"
+            + "    } catch (e) {alert('exception')}\n"
+            + "  }\n"
+            + "  function alertMethods(processor) {\n"
+            + "    alert(typeof processor.importStylesheet);\n"
+            + "    alert(typeof processor.transformToDocument);\n"
+            + "    alert(typeof processor.transformToFragment);\n"
+            + "    alert(typeof processor.setParameter);\n"
+            + "    alert(typeof processor.getParameter);\n"
+            + "    alert(typeof processor.input);\n"
+            + "    alert(typeof processor.ouput);\n"
+            + "    alert(typeof processor.addParameter);\n"
+            + "    alert(typeof processor.transform);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

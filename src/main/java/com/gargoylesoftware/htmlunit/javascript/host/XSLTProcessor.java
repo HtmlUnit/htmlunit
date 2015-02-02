@@ -69,7 +69,7 @@ public class XSLTProcessor extends SimpleScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor(@WebBrowser(CHROME))
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public XSLTProcessor() {
     }
 
@@ -81,7 +81,7 @@ public class XSLTProcessor extends SimpleScriptable {
      *
      * @param style the root-node of an XSLT stylesheet (may be a document node or an element node)
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public void importStylesheet(final Node style) {
         style_ = style;
     }
@@ -93,7 +93,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @param source the node to be transformed
      * @return the result of the transformation
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public XMLDocument transformToDocument(final Node source) {
         final XMLDocument doc = new XMLDocument();
         doc.setPrototype(getPrototype(doc.getClass()));
@@ -157,7 +157,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @param output This document is used to generate the output
      * @return the result of the transformation
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public DocumentFragment transformToFragment(final Node source, final Object output) {
         final SgmlPage page = ((Document) output).getDomNodeOrDie();
 
@@ -193,7 +193,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @param localName the local name of the XSLT parameter
      * @param value the new value of the XSLT parameter
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public void setParameter(final String namespaceURI, final String localName, final Object value) {
         parameters_.put(getQualifiedName(namespaceURI, localName), value);
     }
@@ -204,7 +204,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @param localName the local name of the XSLT parameter
      * @return the value of the XSLT parameter
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public Object getParameter(final String namespaceURI, final String localName) {
         return parameters_.get(getQualifiedName(namespaceURI, localName));
     }
