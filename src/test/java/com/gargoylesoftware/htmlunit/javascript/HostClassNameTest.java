@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  *
  * @version $Revision: 9935 $
  * @author Ahmed Ashour
+ * @author Ronald Brill
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API">Web API Interfaces</a>
  */
 @RunWith(BrowserRunner.class)
