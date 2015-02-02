@@ -30,9 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClasses(
-        isJSObject = false
-)
+@JsxClasses
 public class CSSRule extends SimpleScriptable {
 
     /**

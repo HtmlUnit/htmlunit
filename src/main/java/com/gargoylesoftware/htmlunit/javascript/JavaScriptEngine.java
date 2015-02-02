@@ -271,7 +271,7 @@ public class JavaScriptEngine {
             final Member jsConstructor = config.getJsConstructor();
             final String jsClassName = config.getHostClass().getSimpleName();
             final ScriptableObject prototype = prototypesPerJSName.get(jsClassName);
-            if (prototype != null) {
+            if (prototype != null && config.isJsObject()) {
                 if (jsConstructor != null) {
                     final FunctionObject functionObject = new RecursiveFunctionObject(jsClassName, jsConstructor, window);
                     functionObject.addAsConstructor(window, prototype);

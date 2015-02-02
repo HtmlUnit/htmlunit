@@ -77,7 +77,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented({ FF, IE11 })
     public void arrayBufferView() throws Exception {
         testHostClassName("ArrayBufferView");
     }
@@ -89,7 +88,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented({ FF, IE11 })
     public void arrayBufferViewBase() throws Exception {
         testHostClassName("ArrayBufferViewBase");
     }
@@ -665,7 +663,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented({ FF, IE11 })
     public void formChild() throws Exception {
         testHostClassName("FormChild");
     }
@@ -677,7 +674,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented({ FF, IE11 })
     public void formField() throws Exception {
         testHostClassName("FormField");
     }
@@ -1324,7 +1320,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented({ FF, IE11 })
     public void htmlListElement() throws Exception {
         testHostClassName("HTMLListElement");
     }
@@ -1729,7 +1724,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented({ FF, IE11 })
     public void htmlTableComponent() throws Exception {
         testHostClassName("HTMLTableComponent");
     }
@@ -3252,7 +3246,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented({ FF, IE11 })
     public void simpleArray() throws Exception {
         testHostClassName("SimpleArray");
     }
