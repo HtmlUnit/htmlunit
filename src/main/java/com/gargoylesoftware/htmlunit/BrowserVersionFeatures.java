@@ -1768,6 +1768,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     JS_WINDOW_SELECTION_NULL_IF_INVISIBLE,
 
+    /** If <code>alert(XSLTProcessor)</code> returns an object, not function. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_XSLTPROCESSOR_OBJECT,
+
     /** Supports XML. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_XML,

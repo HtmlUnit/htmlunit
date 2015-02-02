@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_TOSTRING_ENUMERATED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XSLTPROCESSOR_OBJECT;
 
 import java.lang.reflect.Member;
 import java.util.LinkedHashSet;
@@ -23,6 +24,7 @@ import java.util.Set;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
@@ -52,8 +54,7 @@ public class RecursiveFunctionObject extends FunctionObject {
         if (super.has(name, start)) {
             return true;
         }
-        if ("toString".equals(name)
-                && ((Window) getParentScope()).getBrowserVersion().hasFeature(JS_FUNCTION_TOSTRING_ENUMERATED)) {
+        if ("toString".equals(name) && getBrowserVersion().hasFeature(JS_FUNCTION_TOSTRING_ENUMERATED)) {
             return true;
         }
         for (Class<?> c = getMethodOrConstructor().getDeclaringClass().getSuperclass();
@@ -74,7 +75,7 @@ public class RecursiveFunctionObject extends FunctionObject {
     @Override
     public Object[] getIds() {
         final Set<Object> objects = new LinkedHashSet<>();
-        if (((Window) getParentScope()).getBrowserVersion().hasFeature(JS_FUNCTION_TOSTRING_ENUMERATED)) {
+        if (getBrowserVersion().hasFeature(JS_FUNCTION_TOSTRING_ENUMERATED)) {
             objects.add("toString");
         }
         for (final Object o : super.getIds()) {
@@ -90,5 +91,24 @@ public class RecursiveFunctionObject extends FunctionObject {
             }
         }
         return objects.toArray(new Object[objects.size()]);
+    }
+
+    /**
+     * Gets the browser version currently used.
+     * @return the browser version
+     */
+    public BrowserVersion getBrowserVersion() {
+        return ((Window) getParentScope()).getBrowserVersion();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getDefaultValue(final Class<?> typeHint) {
+        if ("XSLTProcessor".equals(getFunctionName()) && getBrowserVersion().hasFeature(JS_XSLTPROCESSOR_OBJECT)) {
+            return "[object " + getFunctionName() + ']';
+        }
+        return super.getDefaultValue(typeHint);
     }
 }

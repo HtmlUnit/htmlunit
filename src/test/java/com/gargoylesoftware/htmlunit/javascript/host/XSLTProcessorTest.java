@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 
 import java.net.URL;
 
@@ -177,7 +176,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
             CHROME = { "function", "function XSLTProcessor() { [native code] }",
                 "[object XSLTProcessor]" },
             IE = { "undefined", "exception" })
-    @NotYetImplemented({ FF, CHROME })
+    @NotYetImplemented(CHROME)
     public void type() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
