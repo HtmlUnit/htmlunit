@@ -1768,10 +1768,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     JS_WINDOW_SELECTION_NULL_IF_INVISIBLE,
 
-    /** If <code>alert(XSLTProcessor)</code> returns an object, not function. */
-    @BrowserFeature(@WebBrowser(FF))
-    JS_XSLTPROCESSOR_OBJECT,
-
     /** Supports XML. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_XML,
@@ -1816,6 +1812,10 @@ public enum BrowserVersionFeatures {
     /** Indicates that the browser uses the ActiveXObject for implementing XML support (IE). */
     @BrowserFeature(@WebBrowser(IE))
     JS_XML_SUPPORT_VIA_ACTIVEXOBJECT,
+
+    /** If <code>alert(XSLTProcessor)</code> returns an object, not function. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_XSLTPROCESSOR_OBJECT,
 
     /** With special keys [in .type(int)], should we trigger onkeypress event or not. */
     @BrowserFeature(@WebBrowser(FF))
