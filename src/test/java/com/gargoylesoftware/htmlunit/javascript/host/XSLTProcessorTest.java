@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import java.net.URL;
 
 import org.junit.Test;
@@ -159,6 +162,30 @@ public class XSLTProcessorTest extends WebDriverTestCase {
             + "    alert(typeof processor.ouput);\n"
             + "    alert(typeof processor.addParameter);\n"
             + "    alert(typeof processor.transform);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "function", "[object XSLTProcessor]", "[object XSLTProcessor]" },
+            CHROME = { "function", "function XSLTProcessor() { [native code] }",
+                "[object XSLTProcessor]" },
+            IE = { "undefined", "exception" })
+    @NotYetImplemented({ FF, CHROME })
+    public void type() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      alert(typeof XSLTProcessor);"
+            + "      alert(XSLTProcessor);"
+            + "      alert(new XSLTProcessor());"
+            + "    } catch (e) {alert('exception')}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
