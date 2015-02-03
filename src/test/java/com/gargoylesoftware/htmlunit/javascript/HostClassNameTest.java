@@ -100,8 +100,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object Attr]",
             CHROME = "function Attr() { [native code] }",
-            FF = "function Attr() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function Attr() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void attr() throws Exception {
         testHostClassName("Attr");
     }
@@ -113,8 +113,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE11 = "\nfunction ActiveXObject() {\n    [native code]\n}\n")
-    @NotYetImplemented(IE8)
+            IE = "\nfunction ActiveXObject() {\n    [native code]\n}\n")
     public void activeXObject() throws Exception {
         testHostClassName("ActiveXObject");
     }
@@ -275,8 +274,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object CSSRuleList]",
-            CHROME = "function CSSRuleList() { [native code] }",
-            IE8 = "exception")
+            CHROME = "function CSSRuleList() { [native code] }")
+    @NotYetImplemented(IE8)
     public void cssRuleList() throws Exception {
         testHostClassName("CSSRuleList");
     }
@@ -289,9 +288,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object CSSStyleDeclaration]",
             CHROME = "function CSSStyleDeclaration() { [native code] }",
-            FF = "function CSSStyleDeclaration() {\n    [native code]\n}",
-            IE8 = "exception")
-    @NotYetImplemented(IE11)
+            FF = "function CSSStyleDeclaration() {\n    [native code]\n}")
+    @NotYetImplemented(IE)
     public void cssStyleDeclaration() throws Exception {
         testHostClassName("CSSStyleDeclaration");
     }
@@ -303,8 +301,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object CSSStyleRule]",
-            CHROME = "function CSSStyleRule() { [native code] }",
-            IE8 = "exception")
+            CHROME = "function CSSStyleRule() { [native code] }")
+    @NotYetImplemented(IE8)
     public void cssStyleRule() throws Exception {
         testHostClassName("CSSStyleRule");
     }
@@ -317,8 +315,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object CSSStyleSheet]",
             CHROME = "function CSSStyleSheet() { [native code] }",
-            FF = "function CSSStyleSheet() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function CSSStyleSheet() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void cssStyleSheet() throws Exception {
         testHostClassName("CSSStyleSheet");
     }
@@ -471,8 +469,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object DOMImplementation]",
             CHROME = "function DOMImplementation() { [native code] }",
-            FF = "function DOMImplementation() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function DOMImplementation() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void domImplementation() throws Exception {
         testHostClassName("DOMImplementation");
     }
@@ -570,8 +568,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object Element]",
             CHROME = "function Element() { [native code] }",
-            FF = "function Element() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function Element() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void element() throws Exception {
         testHostClassName("Element");
     }
@@ -583,8 +581,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE11 = "\nfunction Enumerator() {\n    [native code]\n}\n")
-    @NotYetImplemented(IE8)
+            IE = "\nfunction Enumerator() {\n    [native code]\n}\n")
     public void enumerator() throws Exception {
         testHostClassName("Enumerator");
     }
@@ -597,8 +594,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object Event]",
             CHROME = "function Event() { [native code] }",
-            FF = "function Event() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function Event() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void event() throws Exception {
         testHostClassName("Event");
     }
@@ -714,9 +711,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object History]",
             CHROME = "function History() { [native code] }",
-            FF31 = "function History() {\n    [native code]\n}",
-            IE8 = "exception")
-    @NotYetImplemented(FF24)
+            FF31 = "function History() {\n    [native code]\n}")
+    @NotYetImplemented({ FF24, IE8 })
     public void history() throws Exception {
         testHostClassName("History");
     }
@@ -729,8 +725,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLAnchorElement]",
             CHROME = "function HTMLAnchorElement() { [native code] }",
-            FF = "function HTMLAnchorElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLAnchorElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlAnchorElement() throws Exception {
         testHostClassName("HTMLAnchorElement");
     }
@@ -757,8 +753,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLAreaElement]",
             CHROME = "function HTMLAreaElement() { [native code] }",
-            FF = "function HTMLAreaElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLAreaElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlAreaElement() throws Exception {
         testHostClassName("HTMLAreaElement");
     }
@@ -785,9 +781,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLBGSoundElement]",
             CHROME = "exception",
-            FF = "exception",
-            IE8 = "exception")
-    @NotYetImplemented({ FF, CHROME })
+            FF = "exception")
+    @NotYetImplemented({ FF, CHROME, IE8 })
     public void htmlBGSoundElement() throws Exception {
         testHostClassName("HTMLBGSoundElement");
     }
@@ -800,8 +795,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLBRElement]",
             CHROME = "function HTMLBRElement() { [native code] }",
-            FF = "function HTMLBRElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLBRElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlBRElement() throws Exception {
         testHostClassName("HTMLBRElement");
     }
@@ -814,8 +809,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLBaseElement]",
             CHROME = "function HTMLBaseElement() { [native code] }",
-            FF = "function HTMLBaseElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLBaseElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlBaseElement() throws Exception {
         testHostClassName("HTMLBaseElement");
     }
@@ -828,8 +823,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLBaseFontElement]",
             CHROME = "exception",
-            FF = "exception",
-            IE8 = "exception")
+            FF = "exception")
+    @NotYetImplemented(IE8)
     public void htmlBaseFontElement() throws Exception {
         testHostClassName("HTMLBaseFontElement");
     }
@@ -842,9 +837,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLBlockElement]",
             CHROME = "exception",
-            FF = "exception",
-            IE8 = "exception")
-    @NotYetImplemented({ FF, CHROME })
+            FF = "exception")
+    @NotYetImplemented({ FF, CHROME, IE8 })
     public void htmlBlockElement() throws Exception {
         testHostClassName("HTMLBlockElement");
     }
@@ -868,8 +862,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLBodyElement]",
             CHROME = "function HTMLBodyElement() { [native code] }",
-            FF = "function HTMLBodyElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLBodyElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlBodyElement() throws Exception {
         testHostClassName("HTMLBodyElement");
     }
@@ -882,8 +876,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLButtonElement]",
             CHROME = "function HTMLButtonElement() { [native code] }",
-            FF = "function HTMLButtonElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLButtonElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlButtonElement() throws Exception {
         testHostClassName("HTMLButtonElement");
     }
@@ -910,8 +904,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLCollection]",
             CHROME = "function HTMLCollection() { [native code] }",
-            FF = "function HTMLCollection() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLCollection() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlCollection() throws Exception {
         testHostClassName("HTMLCollection");
     }
@@ -974,8 +968,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLDListElement]",
             CHROME = "function HTMLDListElement() { [native code] }",
-            FF = "function HTMLDListElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLDListElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlDListElement() throws Exception {
         testHostClassName("HTMLDListElement");
     }
@@ -1002,8 +996,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLDivElement]",
             CHROME = "function HTMLDivElement() { [native code] }",
-            FF = "function HTMLDivElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLDivElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlDivElement() throws Exception {
         testHostClassName("HTMLDivElement");
     }
@@ -1016,8 +1010,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLDocument]",
             CHROME = "function HTMLDocument() { [native code] }",
-            FF = "function HTMLDocument() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLDocument() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlDocument() throws Exception {
         testHostClassName("HTMLDocument");
     }
@@ -1044,8 +1038,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLEmbedElement]",
             CHROME = "function HTMLEmbedElement() { [native code] }",
-            FF = "function HTMLEmbedElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLEmbedElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlEmbedElement() throws Exception {
         testHostClassName("HTMLEmbedElement");
     }
@@ -1058,8 +1052,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLFieldSetElement]",
             CHROME = "function HTMLFieldSetElement() { [native code] }",
-            FF = "function HTMLFieldSetElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLFieldSetElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlFieldSetElement() throws Exception {
         testHostClassName("HTMLFieldSetElement");
     }
@@ -1072,8 +1066,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLFontElement]",
             CHROME = "function HTMLFontElement() { [native code] }",
-            FF = "function HTMLFontElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLFontElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlFontElement() throws Exception {
         testHostClassName("HTMLFontElement");
     }
@@ -1086,8 +1080,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLFormElement]",
             CHROME = "function HTMLFormElement() { [native code] }",
-            FF = "function HTMLFormElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLFormElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlFormElement() throws Exception {
         testHostClassName("HTMLFormElement");
     }
@@ -1100,8 +1094,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLFrameElement]",
             CHROME = "function HTMLFrameElement() { [native code] }",
-            FF = "function HTMLFrameElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLFrameElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlFrameElement() throws Exception {
         testHostClassName("HTMLFrameElement");
     }
@@ -1114,8 +1108,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLFrameSetElement]",
             CHROME = "function HTMLFrameSetElement() { [native code] }",
-            FF = "function HTMLFrameSetElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLFrameSetElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlFrameSetElement() throws Exception {
         testHostClassName("HTMLFrameSetElement");
     }
@@ -1128,8 +1122,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLHRElement]",
             CHROME = "function HTMLHRElement() { [native code] }",
-            FF = "function HTMLHRElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLHRElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlHRElement() throws Exception {
         testHostClassName("HTMLHRElement");
     }
@@ -1142,8 +1136,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLHeadElement]",
             CHROME = "function HTMLHeadElement() { [native code] }",
-            FF = "function HTMLHeadElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLHeadElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlHeadElement() throws Exception {
         testHostClassName("HTMLHeadElement");
     }
@@ -1156,8 +1150,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLHeadingElement]",
             CHROME = "function HTMLHeadingElement() { [native code] }",
-            FF = "function HTMLHeadingElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLHeadingElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlHeadingElement() throws Exception {
         testHostClassName("HTMLHeadingElement");
     }
@@ -1170,8 +1164,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLHtmlElement]",
             CHROME = "function HTMLHtmlElement() { [native code] }",
-            FF = "function HTMLHtmlElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLHtmlElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlHtmlElement() throws Exception {
         testHostClassName("HTMLHtmlElement");
     }
@@ -1184,8 +1178,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLIFrameElement]",
             CHROME = "function HTMLIFrameElement() { [native code] }",
-            FF = "function HTMLIFrameElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLIFrameElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlIFrameElement() throws Exception {
         testHostClassName("HTMLIFrameElement");
     }
@@ -1198,8 +1192,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLImageElement]",
             CHROME = "function HTMLImageElement() { [native code] }",
-            FF = "function HTMLImageElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLImageElement() {\n    [native code]\n}")
     @NotYetImplemented(IE)
     public void htmlImageElement() throws Exception {
         testHostClassName("HTMLImageElement");
@@ -1224,8 +1217,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLInputElement]",
             CHROME = "function HTMLInputElement() { [native code] }",
-            FF = "function HTMLInputElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLInputElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlInputElement() throws Exception {
         testHostClassName("HTMLInputElement");
     }
@@ -1238,8 +1231,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLIsIndexElement]",
             CHROME = "exception",
-            FF = "exception",
-            IE8 = "exception")
+            FF = "exception")
+    @NotYetImplemented(IE8)
     public void htmlIsIndexElement() throws Exception {
         testHostClassName("HTMLIsIndexElement");
     }
@@ -1265,8 +1258,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLLIElement]",
             CHROME = "function HTMLLIElement() { [native code] }",
-            FF = "function HTMLLIElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLLIElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlLIElement() throws Exception {
         testHostClassName("HTMLLIElement");
     }
@@ -1279,8 +1272,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLLabelElement]",
             CHROME = "function HTMLLabelElement() { [native code] }",
-            FF = "function HTMLLabelElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLLabelElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlLabelElement() throws Exception {
         testHostClassName("HTMLLabelElement");
     }
@@ -1293,8 +1286,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLLegendElement]",
             CHROME = "function HTMLLegendElement() { [native code] }",
-            FF = "function HTMLLegendElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLLegendElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlLegendElement() throws Exception {
         testHostClassName("HTMLLegendElement");
     }
@@ -1307,8 +1300,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLLinkElement]",
             CHROME = "function HTMLLinkElement() { [native code] }",
-            FF = "function HTMLLinkElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLLinkElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlLinkElement() throws Exception {
         testHostClassName("HTMLLinkElement");
     }
@@ -1332,8 +1325,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLMapElement]",
             CHROME = "function HTMLMapElement() { [native code] }",
-            FF = "function HTMLMapElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLMapElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlMapElement() throws Exception {
         testHostClassName("HTMLMapElement");
     }
@@ -1346,9 +1339,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLMarqueeElement]",
             CHROME = "function HTMLMarqueeElement() { [native code] }",
-            FF = "exception",
-            IE8 = "exception")
-    @NotYetImplemented(CHROME)
+            FF = "exception")
+    @NotYetImplemented({ CHROME, IE8 })
     public void htmlMarqueeElement() throws Exception {
         testHostClassName("HTMLMarqueeElement");
     }
@@ -1390,8 +1382,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLMetaElement]",
             CHROME = "function HTMLMetaElement() { [native code] }",
-            FF = "function HTMLMetaElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLMetaElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlMetaElement() throws Exception {
         testHostClassName("HTMLMetaElement");
     }
@@ -1429,8 +1421,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
-    @NotYetImplemented({ FF, CHROME, IE11 })
+    @Alerts(DEFAULT = "exception",
+            IE8 = "[object HTMLNoShowElement]")
+    @NotYetImplemented({ FF, CHROME, IE })
     public void htmlNoShowElement() throws Exception {
         testHostClassName("HTMLNoShowElement");
     }
@@ -1443,8 +1436,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLNextIdElement]",
             CHROME = "exception",
-            FF = "exception",
-            IE8 = "exception")
+            FF = "exception")
+    @NotYetImplemented(IE8)
     public void htmlNextIdElement() throws Exception {
         testHostClassName("HTMLNextIdElement");
     }
@@ -1457,8 +1450,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLOListElement]",
             CHROME = "function HTMLOListElement() { [native code] }",
-            FF = "function HTMLOListElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLOListElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlOListElement() throws Exception {
         testHostClassName("HTMLOListElement");
     }
@@ -1471,8 +1464,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLObjectElement]",
             CHROME = "function HTMLObjectElement() { [native code] }",
-            FF = "function HTMLObjectElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLObjectElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlObjectElement() throws Exception {
         testHostClassName("HTMLObjectElement");
     }
@@ -1499,8 +1492,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLOptionElement]",
             CHROME = "function HTMLOptionElement() { [native code] }",
-            FF = "function HTMLOptionElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLOptionElement() {\n    [native code]\n}")
     @NotYetImplemented(IE)
     public void htmlOptionElement() throws Exception {
         testHostClassName("HTMLOptionElement");
@@ -1541,8 +1533,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLParagraphElement]",
             CHROME = "function HTMLParagraphElement() { [native code] }",
-            FF = "function HTMLParagraphElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLParagraphElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlParagraphElement() throws Exception {
         testHostClassName("HTMLParagraphElement");
     }
@@ -1555,8 +1547,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLParamElement]",
             CHROME = "function HTMLParamElement() { [native code] }",
-            FF = "function HTMLParamElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLParamElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlParamElement() throws Exception {
         testHostClassName("HTMLParamElement");
     }
@@ -1569,9 +1561,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLPhraseElement]",
             CHROME = "exception",
-            FF = "exception",
-            IE8 = "exception")
-    @NotYetImplemented({ FF, CHROME })
+            FF = "exception")
+    @NotYetImplemented({ FF, CHROME, IE8 })
     public void htmlPhraseElement() throws Exception {
         testHostClassName("HTMLPhraseElement");
     }
@@ -1612,8 +1603,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLScriptElement]",
             CHROME = "function HTMLScriptElement() { [native code] }",
-            FF = "function HTMLScriptElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLScriptElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlScriptElement() throws Exception {
         testHostClassName("HTMLScriptElement");
     }
@@ -1626,8 +1617,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLSelectElement]",
             CHROME = "function HTMLSelectElement() { [native code] }",
-            FF = "function HTMLSelectElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLSelectElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlSelectElement() throws Exception {
         testHostClassName("HTMLSelectElement");
     }
@@ -1654,9 +1645,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLSpanElement]",
             CHROME = "function HTMLSpanElement() { [native code] }",
-            FF = "function HTMLSpanElement() {\n    [native code]\n}",
-            IE8 = "exception")
-    @NotYetImplemented(FF)
+            FF = "function HTMLSpanElement() {\n    [native code]\n}")
+    @NotYetImplemented({ FF, IE8 })
     public void htmlSpanElement() throws Exception {
         testHostClassName("HTMLSpanElement");
     }
@@ -1669,8 +1659,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLStyleElement]",
             CHROME = "function HTMLStyleElement() { [native code] }",
-            FF = "function HTMLStyleElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLStyleElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlStyleElement() throws Exception {
         testHostClassName("HTMLStyleElement");
     }
@@ -1683,8 +1673,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLTableCaptionElement]",
             CHROME = "function HTMLTableCaptionElement() { [native code] }",
-            FF = "function HTMLTableCaptionElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLTableCaptionElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlTableCaptionElement() throws Exception {
         testHostClassName("HTMLTableCaptionElement");
     }
@@ -1697,8 +1687,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLTableCellElement]",
             CHROME = "function HTMLTableCellElement() { [native code] }",
-            FF = "function HTMLTableCellElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLTableCellElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlTableCellElement() throws Exception {
         testHostClassName("HTMLTableCellElement");
     }
@@ -1711,8 +1701,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLTableColElement]",
             CHROME = "function HTMLTableColElement() { [native code] }",
-            FF = "function HTMLTableColElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLTableColElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlTableColElement() throws Exception {
         testHostClassName("HTMLTableColElement");
     }
@@ -1750,8 +1740,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLTableElement]",
             CHROME = "function HTMLTableElement() { [native code] }",
-            FF = "function HTMLTableElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLTableElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlTableElement() throws Exception {
         testHostClassName("HTMLTableElement");
     }
@@ -1778,8 +1768,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLTableRowElement]",
             CHROME = "function HTMLTableRowElement() { [native code] }",
-            FF = "function HTMLTableRowElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLTableRowElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlTableRowElement() throws Exception {
         testHostClassName("HTMLTableRowElement");
     }
@@ -1792,8 +1782,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLTableSectionElement]",
             CHROME = "function HTMLTableSectionElement() { [native code] }",
-            FF = "function HTMLTableSectionElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLTableSectionElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlTableSectionElement() throws Exception {
         testHostClassName("HTMLTableSectionElement");
     }
@@ -1804,7 +1794,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            IE8 = "[object HTMLTextElement]")
+    @NotYetImplemented(IE8)
     public void htmlTextElement() throws Exception {
         testHostClassName("HTMLTextElement");
     }
@@ -1817,8 +1809,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLTextAreaElement]",
             CHROME = "function HTMLTextAreaElement() { [native code] }",
-            FF = "function HTMLTextAreaElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLTextAreaElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlTextAreaElement() throws Exception {
         testHostClassName("HTMLTextAreaElement");
     }
@@ -1844,8 +1836,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLTitleElement]",
             CHROME = "function HTMLTitleElement() { [native code] }",
-            FF = "function HTMLTitleElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLTitleElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlTitleElement() throws Exception {
         testHostClassName("HTMLTitleElement");
     }
@@ -1858,8 +1850,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLUListElement]",
             CHROME = "function HTMLUListElement() { [native code] }",
-            FF = "function HTMLUListElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function HTMLUListElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlUListElement() throws Exception {
         testHostClassName("HTMLUListElement");
     }
@@ -1872,9 +1864,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             CHROME = "function HTMLUnknownElement() { [native code] }",
-            FF = "function HTMLUnknownElement() {\n    [native code]\n}",
-            IE8 = "exception")
-    @NotYetImplemented(IE11)
+            FF = "function HTMLUnknownElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE)
     public void htmlUnknownElement() throws Exception {
         testHostClassName("HTMLUnknownElement");
     }
@@ -1968,9 +1959,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Location]",
-            CHROME = "function Location() { [native code] }",
-            IE8 = "exception")
-    @NotYetImplemented({ FF, IE11 })
+            CHROME = "function Location() { [native code] }")
+    @NotYetImplemented({ FF, IE })
     public void location() throws Exception {
         testHostClassName("Location");
     }
@@ -2070,9 +2060,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object NamedNodeMap]",
             CHROME = "function NamedNodeMap() { [native code] }",
-            FF = "exception",
-            IE8 = "exception")
-    @NotYetImplemented(FF)
+            FF = "exception")
+    @NotYetImplemented({ FF, IE8 })
     public void namedNodeMap() throws Exception {
         testHostClassName("NamedNodeMap");
     }
@@ -2108,9 +2097,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object Navigator]",
             CHROME = "function Navigator() { [native code] }",
-            FF31 = "function Navigator() {\n    [native code]\n}",
-            IE8 = "exception")
-    @NotYetImplemented(FF24)
+            FF31 = "function Navigator() {\n    [native code]\n}")
+    @NotYetImplemented({ FF24, IE8 })
     public void navigator() throws Exception {
         testHostClassName("Navigator");
     }
@@ -2151,8 +2139,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object NodeList]",
             CHROME = "function NodeList() { [native code] }",
-            FF = "function NodeList() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function NodeList() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void nodeList() throws Exception {
         testHostClassName("NodeList");
     }
@@ -3218,8 +3206,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object Screen]",
             CHROME = "function Screen() { [native code] }",
-            FF = "function Screen() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function Screen() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void screen() throws Exception {
         testHostClassName("Screen");
     }
@@ -3232,9 +3220,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object Selection]",
             CHROME = "function Selection() { [native code] }",
-            FF31 = "function Selection() {\n    [native code]\n}",
-            IE8 = "exception")
-    @NotYetImplemented({ FF24, IE11 })
+            FF31 = "function Selection() {\n    [native code]\n}")
+    @NotYetImplemented({ FF24, IE })
     public void selection() throws Exception {
         testHostClassName("Selection");
     }
@@ -3256,8 +3243,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
-    @NotYetImplemented({ FF, CHROME, IE11 })
+    @Alerts(DEFAULT = "exception",
+            IE8 = "[object StaticNodeList]")
+    @NotYetImplemented({ FF, CHROME, IE })
     public void staticNodeList() throws Exception {
         testHostClassName("StaticNodeList");
     }
@@ -3269,8 +3257,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Storage]",
-            CHROME = "function Storage() { [native code] }",
-            IE8 = "exception")
+            CHROME = "function Storage() { [native code] }")
+    @NotYetImplemented(IE8)
     public void storage() throws Exception {
         testHostClassName("Storage");
     }
@@ -3283,9 +3271,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object StyleSheetList]",
             CHROME = "function StyleSheetList() { [native code] }",
-            FF31 = "function StyleSheetList() {\n    [native code]\n}",
-            IE8 = "exception")
-    @NotYetImplemented(FF24)
+            FF31 = "function StyleSheetList() {\n    [native code]\n}")
+    @NotYetImplemented({ FF24, IE8 })
     public void styleSheetList() throws Exception {
         testHostClassName("StyleSheetList");
     }
@@ -3298,8 +3285,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object Text]",
             CHROME = "function Text() { [native code] }",
-            FF = "function Text() {\n    [native code]\n}",
-            IE8 = "exception")
+            FF = "function Text() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void text() throws Exception {
         testHostClassName("Text");
     }
@@ -3312,8 +3299,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object TextRange]",
             CHROME = "exception",
-            FF = "exception",
-            IE8 = "exception")
+            FF = "exception")
+    @NotYetImplemented(IE8)
     public void textRange() throws Exception {
         testHostClassName("TextRange");
     }
@@ -3424,9 +3411,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Window]",
-            CHROME = "function Window() { [native code] }",
-            IE8 = "exception")
-    @NotYetImplemented(FF)
+            CHROME = "function Window() { [native code] }")
+    @NotYetImplemented({ FF, IE8 })
     public void window() throws Exception {
         testHostClassName("Window");
     }
@@ -3454,7 +3440,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function XMLHttpRequest() {\n    [native code]\n}",
             CHROME = "function XMLHttpRequest() { [native code] }",
             IE11 = "\nfunction XMLHttpRequest() {\n    [native code]\n}\n",
-            IE8 = "exception")
+            IE8 = "[object XMLHttpRequest]")
     @NotYetImplemented(IE8)
     public void xmlHttpRequest() throws Exception {
         testHostClassName("XMLHttpRequest");
