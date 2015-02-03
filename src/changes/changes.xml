@@ -9,7 +9,7 @@
     <body>
         <release version="2.16" date="???" description="Java 7, FF31, IE11 progress, Chrome progress, Bugfixes">
             <action type="fix" dev="asashour">
-                JavaScriptEngine: consider false jsObject. 
+                JavaScriptEngine: consider false jsObject.
             </action>
             <action type="add" dev="asashour">
                 JavaScript: XSLTProcessor supported methods (Chrome).
