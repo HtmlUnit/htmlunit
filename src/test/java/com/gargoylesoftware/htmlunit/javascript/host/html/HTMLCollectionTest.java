@@ -329,7 +329,8 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT =  { "function", "function", "function", "function" },
-            IE8 = { "undefined", "undefined", "function", "function" })
+            IE8 = { "undefined", "undefined", "undefined", "undefined" })
+    @NotYetImplemented(IE8)
     public void array_prototype_standards() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
             + "<script>\n"

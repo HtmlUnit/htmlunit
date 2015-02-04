@@ -16,12 +16,14 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -347,7 +349,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<tr><td>world</td></tr>",
-            IE8 = { "exception", "<tr><td>hello</td></tr>" })
+            IE8 = { "exception", "<tr>\r\n<td>hello</td></tr>" })
+    @NotYetImplemented(IE8)
     public void TBODY_innerHTML() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

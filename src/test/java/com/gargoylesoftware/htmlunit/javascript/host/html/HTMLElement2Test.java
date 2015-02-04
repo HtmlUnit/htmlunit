@@ -451,7 +451,9 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "30px", "46", "55px", "71", "71", "0", "0", "0", "0" })
+    @Alerts(DEFAULT = { "30px", "46", "55px", "71", "71", "0", "0", "0", "0" },
+            IE8 = { "30px", "44", "55px", "55", "55", "0", "0", "0", "0" })
+    @NotYetImplemented(IE8)
     public void offsetWidthAndHeight() throws Exception {
         final String html =
               "<html><head>\n"
@@ -508,7 +510,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "0", "18" },
             FF = { "0", "20" },
-            IE8 = { "15", "15" })
+            IE8 = { "19", "19" })
+    @NotYetImplemented(IE8)
     public void offsetHeight_explicitHeightZero() throws Exception {
         final String html
             = "<html><body>\n"
@@ -526,7 +529,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "75", "2", "5", "20", "50", "50", "18" },
             FF = { "77", "2", "5", "20", "50", "50", "20" },
-            IE8 = { "100", "15", "20", "20", "50", "50", "15" })
+            IE8 = { "108", "19", "20", "20", "50", "50", "19" })
+    @NotYetImplemented(IE8)
     public void offsetHeight_calculatedBasedOnChildren() throws Exception {
         final String html
             = "<html>\n"
@@ -1164,8 +1168,9 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented({ FF, CHROME })
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    @NotYetImplemented({ FF, CHROME, IE8 })
     public void offsetLeft_PositionFixed() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

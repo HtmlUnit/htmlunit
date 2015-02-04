@@ -414,7 +414,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "84,30", "84,30", "84,30", "82,30", "82,30", "82,30" },
-            IE8 = { "84,34", "84,34", "84,34", "83,34", "82,34", "83,34" })
+            IE8 = { "84,30", "84,30", "84,30", "83,30", "82,30", "83,30" })
+    @NotYetImplemented(IE8)
     public void cellWidthHeightWithBorderCollapse() throws Exception {
         final String html
             = "<html><body><table id='t'><tr>\n"
@@ -511,7 +512,8 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "undefined", "#667788", "unknown", "undefined", "undefined", "undefined" },
-            IE = { "", "#667788", "#000000", "red", "#123456", "#000000" })
+            IE11 = { "", "#667788", "#000000", "red", "#123456", "#000000" },
+            IE8 = { "", "#667788", "#000000", "#ff0000", "#123456", "#000000" })
     @NotYetImplemented(IE)
     public void borderColor() throws Exception {
         final String html

@@ -159,9 +159,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Second",
-            IE8 = "First")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "Second")
     public void javaScriptAnchorClick() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"

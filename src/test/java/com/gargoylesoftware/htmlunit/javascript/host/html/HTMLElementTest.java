@@ -233,6 +233,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "text", "i", "i", "[object CSS2Properties]", "function", "undefined", "undefined" },
             IE11 = { "text", "i", "i", "[object MSStyleCSSProperties]", "function", "undefined", "undefined" },
+            IE8 = { "text", "i", "i", "[object]", "function", "undefined", "undefined" },
             CHROME = { "text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined" })
     @NotYetImplemented
     public void attributesAccess() throws Exception {
@@ -724,7 +725,9 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "8", "3" })
+    @Alerts(DEFAULT = { "8", "3" },
+            IE8 = { "9", "3" })
+    @NotYetImplemented(IE8)
     public void getElementsByTagNameAsterisk() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test() {\n"
@@ -832,7 +835,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<div id=\"i\" foo=\"\" name=\"\"></div>",
-            IE8 = "<DIV id=i foo=\"\" name=\"\"></DIV>")
+            IE8 = "<DIV id=i name=\"\" foo=\"\"></DIV>")
+    @NotYetImplemented(IE8)
     public void getInnerHTML_EmptyAttributes() throws Exception {
         final String html = "<body onload='alert(document.body.innerHTML)'><div id='i' foo='' name=''></div></body>";
         loadPageWithAlerts2(html);
@@ -1014,7 +1018,8 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "<div id=\"div\"><ul></ul></div>", "<ul></ul>", "" },
             FF = { "<div id=\"div\"><ul></ul></div>", "<ul></ul>", "undefined" },
-            IE8 = { "<DIV id=div><UL></UL></DIV>", "<UL></UL>", "" })
+            IE8 = { "\r\n<DIV id=div><UL></UL></DIV>", "<UL></UL>", "" })
+    @NotYetImplemented(IE8)
     public void getSetInnerHtmlEmptyTag_FF() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test() {\n"
@@ -1036,7 +1041,8 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "<div id=\"div\"><span class=\"a b\"></span></div>", "<span class=\"a b\"></span>", "" },
             FF = { "<div id=\"div\"><span class=\"a b\"></span></div>", "<span class=\"a b\"></span>", "undefined" },
-            IE8 = { "<DIV id=div><SPAN class=\"a b\"></SPAN></DIV>", "<SPAN class=\"a b\"></SPAN>", "" })
+            IE8 = { "\r\n<DIV id=div><SPAN class=\"a b\"></SPAN></DIV>", "<SPAN class=\"a b\"></SPAN>", "" })
+    @NotYetImplemented(IE8)
     public void getSetInnerHtmlAttributeWithWhitespace_FF() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test() {\n"
@@ -1093,7 +1099,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "Outer = <div id=\"myNode\">New  cell value</div>" },
-            IE8 = { "Outer = <DIV id=myNode>New cell value</DIV>" })
+            IE8 = { "Outer = \r\n<DIV id=myNode>New cell value</DIV>" })
+    @NotYetImplemented(IE8)
     public void getOuterHTMLFromBlock() throws Exception {
         final String html = createPageForGetOuterHTML("div", "New  cell value", false);
         loadPageWithAlerts2(html);
@@ -1130,9 +1137,9 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "Outer = <p id=\"myNode\">New  cell value\n\n</p>" },
-            IE8 = { "Outer = <P id=myNode>New cell value\n</P>" },
+            IE8 = { "Outer = \r\n<P id=myNode>New cell value " },
             IE11 = { "Outer = <p id=\"myNode\">New  cell value\n\n" })
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented({ FF, IE })
     public void getOuterHTMLFromUnclosedParagraph() throws Exception {
         final String html = createPageForGetOuterHTML("p", "New  cell value", true);
         loadPageWithAlerts2(html);
@@ -1404,7 +1411,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <div><div></div></div>", "Childs: 1" },
-            IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <DIV></DIV><DIV></DIV>", "Childs: 1" })
+            IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <DIV>\r\n<DIV></DIV></DIV>", "Childs: 1" })
     @NotYetImplemented({ FF, IE8, IE11 })
     public void setOuterHTMLAddMultipleSelfClosingBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div/><div>");
@@ -2424,8 +2431,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "0" },
-            IE8 = { "2", "2" })
+    @Alerts(DEFAULT = { "0", "0" })
+    @NotYetImplemented(IE8)
     public void clientLeftTop_documentElement() throws Exception {
         final String html =
               "<!DOCTYPE HTML "
@@ -2931,7 +2938,9 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "true", "true", "true", "false", "false", "false", "false", "true", "true", "false", "false" },
             IE11 = { "true", "true", "true", "false", "false", "false", "false", "true", "false", "false",
-                        "exception" })
+                        "exception" },
+            IE8 = { "true", "true", "true", "false", "false", "false", "false", "true", "exception" })
+    @NotYetImplemented(IE8)
     public void contains() throws Exception {
         final String html
             = "<html><head>\n"
@@ -3193,9 +3202,9 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "false,false,false,false,false,true,false", "clearAttributes not available" },
-            IE = { "false,false,false,false,false,false,false", "false,false,false,false,false,true,true" },
+            IE8 = { "false,false,false,false,false,false,false", "false,false,false,false,false,false,false" },
             IE11 = { "false,false,false,false,false,true,false", "false,false,false,false,false,true,false" })
-    @NotYetImplemented
+    @NotYetImplemented({FF, IE11, CHROME })
     public void clearAttributes() throws Exception {
         final String html
             = "<html><head>\n"
@@ -3785,7 +3794,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<button></button>",
-            IE8 = "<BUTTON></BUTTON>")
+            IE8 = "<BUTTON type=submit></BUTTON>")
+    @NotYetImplemented(IE8)
     public void outerHTML_button() throws Exception {
         loadPageWithAlerts2(outerHTML("button"));
     }
@@ -4854,7 +4864,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "DIV", "SECTION", "<div></div>", "<section></section>" },
-            IE8 = { "DIV", "section", "<DIV></DIV>", "<section></section>" })
+            IE8 = { "DIV", "section", "\r\n<DIV></DIV>", "<:section></:section>" })
     @NotYetImplemented(IE8)
     public void nodeNameVsOuterElement() throws Exception {
         final String html = "<html>\n"
@@ -5341,7 +5351,10 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "outside", "1", "middle", "2", "3", "4",
                 "before-begin after-begin inside before-end after-end" },
+            IE8 = { "outside", "1", "middle", "2", "3", "4",
+                "before-begin after-begininside before-end after-end" },
             FF = "insertAdjacentElement not available")
+    @NotYetImplemented(IE8)
     public void insertAdjacentElement() throws Exception {
         insertAdjacentElement("beforeend", "afterend", "beforebegin", "afterbegin");
         insertAdjacentElement("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");

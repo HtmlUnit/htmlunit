@@ -78,11 +78,11 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
                     "absbottom", "absmiddle", "bottom", "texttop" },
             CHROME = { "CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "baseline", "texttop" },
-            IE8 = { "center", "error", "center", "error", "center", "left", "right", "bottom", "middle", "top",
+            IE8 = { "CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "baseline", "texttop" },
             IE11 = { "CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "baseline", "texttop" })
-    @NotYetImplemented({ IE8, FF })
+    @NotYetImplemented(FF)
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"
