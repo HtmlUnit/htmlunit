@@ -48,6 +48,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "", "", "",  "§§URL§§test.css", "stylesheet", "stylesheet1" },
             IE8 = { "", "", "",  "test.css", "stylesheet", "stylesheet1" })
+    @NotYetImplemented(IE8)
     public void attributes() throws Exception {
         final String html =
               "<html>\n"
