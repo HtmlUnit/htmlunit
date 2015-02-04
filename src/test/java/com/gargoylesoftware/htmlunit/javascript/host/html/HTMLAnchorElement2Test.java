@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.util.Arrays;
 
@@ -45,7 +46,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "", "", "",  "§§URL§§test.css", "stylesheet", "stylesheet1" })
+    @Alerts(DEFAULT = { "", "", "",  "§§URL§§test.css", "stylesheet", "stylesheet1" },
+            IE8 = { "", "", "",  "test.css", "stylesheet", "stylesheet1" })
     public void attributes() throws Exception {
         final String html =
               "<html>\n"
@@ -156,7 +158,9 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("Second") // in fact not alerts here, but it makes config easier
+    @Alerts(DEFAULT = "Second",
+            IE8 = "First")
+    @NotYetImplemented(IE8)
     public void javaScriptAnchorClick() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -190,8 +194,11 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "§§URL§§testsite1.html", "testsite1.html", "§§URL§§testsite2.html", "testsite2.html",
-        "13", "testanchor", "mailto:" })
+    @Alerts(DEFAULT = { "§§URL§§testsite1.html", "testsite1.html", "§§URL§§testsite2.html",
+                "testsite2.html", "13", "testanchor", "mailto:" },
+            IE8 = { "§§URL§§testsite1.html", "§§URL§§testsite1.html", "testsite2.html",
+                "testsite2.html", "13", "testanchor", "mailto:" })
+    @NotYetImplemented(IE8)
     public void getAttribute_and_href() throws Exception {
         final String html
             = "<html><head><title>AnchorTest</title>\n"

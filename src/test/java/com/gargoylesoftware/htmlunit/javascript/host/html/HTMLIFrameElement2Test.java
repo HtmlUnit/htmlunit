@@ -580,7 +580,9 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "fragment append done", "loaded" })
+    @Alerts(DEFAULT = { "fragment append done", "loaded" },
+            IE8 = { "fragment append done" })
+    @NotYetImplemented(IE8)
     public void documentDocumentFragmentCreateElement_onLoad_noSrc() throws Exception {
         final String html =
               "<html>\n"
@@ -647,7 +649,9 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "createIFrame", "fragment append done", "loaded" })
+    @Alerts(DEFAULT = { "createIFrame", "fragment append done", "loaded" },
+            IE8 = { "createIFrame", "fragment append done" })
+    @NotYetImplemented(IE8)
     public void documentDocumentFragmentCreateElement_onLoad2_noSrc() throws Exception {
         final String html =
               "<html>\n"
@@ -715,7 +719,9 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "createIFrame", "fragment append done", "loaded" })
+    @Alerts(DEFAULT = { "createIFrame", "fragment append done", "loaded" },
+            IE8 = { "createIFrame", "fragment append done" })
+    @NotYetImplemented(IE8)
     public void documentDocumentFragmentCreateElement_onLoad3_noSrc() throws Exception {
         final String html =
               "<html>\n"

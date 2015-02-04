@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -161,7 +164,8 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "hello", "><" },
-            IE8 = { "hello", "><" })//IE9 = { "hello", ">endif<" }
+            IE8 = { "hello", ">endif<" })
+    @NotYetImplemented(IE8)
     public void nested() throws Exception {
         final String html = "<html><body>\n"
             + "<script>alert('hello')</script>\n"
