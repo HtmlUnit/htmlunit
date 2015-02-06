@@ -24,7 +24,6 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 
-import org.apache.http.localserver.LocalTestServer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -64,7 +63,6 @@ public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends Simpl
         serverSSLContext.init(keyManagers, trustManagers, null);
 
         localServer_ = new LocalTestServer(serverSSLContext);
-        localServer_.registerDefaultHandlers();
 
         localServer_.start();
     }
@@ -95,7 +93,7 @@ public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends Simpl
     @After
     public void tearDown() throws Exception {
         if (localServer_ != null) {
-            localServer_.stop();
+            localServer_.shutDown();
         }
         localServer_ = null;
     }
@@ -109,8 +107,8 @@ public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends Simpl
         webClient.getOptions().setSSLClientCertificate(getClass().getClassLoader().getResource("insecureSSL.keystore"),
                 "nopassword", "jks");
         webClient.getOptions().setUseInsecureSSL(true);
-        webClient.getPage("https://" + localServer_.getServiceAddress().getHostName()
-                + ':' + localServer_.getServiceAddress().getPort()
+        webClient.getPage("https://" + localServer_.getServer().getInetAddress().getHostName()
+                + ':' + localServer_.getServer().getLocalPort()
                 + "/random/100");
     }
 }

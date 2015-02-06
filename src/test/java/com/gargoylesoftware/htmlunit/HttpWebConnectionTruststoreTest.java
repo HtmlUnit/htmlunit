@@ -25,7 +25,6 @@ import javax.net.ssl.SSLHandshakeException;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 
-import org.apache.http.localserver.LocalTestServer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -65,7 +64,6 @@ public class HttpWebConnectionTruststoreTest extends SimpleWebTestCase {
         serverSSLContext.init(keyManagers, trustManagers, null);
 
         localServer_ = new LocalTestServer(serverSSLContext);
-        localServer_.registerDefaultHandlers();
 
         localServer_.start();
     }
@@ -96,7 +94,7 @@ public class HttpWebConnectionTruststoreTest extends SimpleWebTestCase {
     @After
     public void tearDown() throws Exception {
         if (localServer_ != null) {
-            localServer_.stop();
+            localServer_.shutDown();
         }
         localServer_ = null;
     }
@@ -111,7 +109,7 @@ public class HttpWebConnectionTruststoreTest extends SimpleWebTestCase {
                 getClass().getClassLoader().getResource("self-signed-cert.keystore"),
                 "nopassword", "jks");
         webClient.getPage("https://" + "localhost"
-                + ':' + localServer_.getServiceAddress().getPort()
+                + ':' + localServer_.getServer().getLocalPort()
                 + "/random/100");
     }
 
@@ -122,7 +120,7 @@ public class HttpWebConnectionTruststoreTest extends SimpleWebTestCase {
     public void selfSignedCertNotInTruststore() throws Exception {
         final WebClient webClient = getWebClient();
         webClient.getPage("https://" + "localhost"
-                + ':' + localServer_.getServiceAddress().getPort()
+                + ':' + localServer_.getServer().getLocalPort()
                 + "/random/100");
     }
 }

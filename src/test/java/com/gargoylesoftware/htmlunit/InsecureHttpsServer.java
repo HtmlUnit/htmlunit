@@ -30,7 +30,6 @@ import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.localserver.LocalTestServer;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.protocol.HttpRequestHandler;
 
@@ -103,7 +102,6 @@ public class InsecureHttpsServer {
         serverSSLContext.init(keyManagers, trustManagers, null);
 
         localServer_ = new LocalTestServer(serverSSLContext);
-        localServer_.registerDefaultHandlers();
 
         if (html_ != null) {
             final HttpRequestHandler handler = new HttpRequestHandler() {
@@ -124,7 +122,7 @@ public class InsecureHttpsServer {
      * @throws Exception in case of exception
      */
     public void stop() throws Exception {
-        localServer_.stop();
+        localServer_.shutDown();
     }
 
     /**
@@ -132,7 +130,7 @@ public class InsecureHttpsServer {
      * @return the host name
      */
     public String getHostName() {
-        return localServer_.getServiceAddress().getHostName();
+        return localServer_.getServer().getInetAddress().getHostName();
     }
 
     /**
@@ -140,6 +138,6 @@ public class InsecureHttpsServer {
      * @return the host port
      */
     public int getPort() {
-        return localServer_.getServiceAddress().getPort();
+        return localServer_.getServer().getLocalPort();
     }
 }
