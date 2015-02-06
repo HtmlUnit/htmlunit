@@ -57,7 +57,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
     private static final Pattern IF4_PATTERN = Pattern.compile("(/\\*)?@end");
 
     private static final String CC_VARIABLE_PREFIX = "htmlunit_cc_variable_";
-    private enum PARSING_STATUS { NORMAL, IN_MULTI_LINE_COMMENT, IN_SINGLE_LINE_COMMENT, IN_STRING, IN_REG_EXP }
+    private static enum ParsingStatus { NORMAL, IN_MULTI_LINE_COMMENT, IN_SINGLE_LINE_COMMENT, IN_STRING, IN_REG_EXP }
 
     private final Set<String> setVariables_ = new HashSet<>();
 
@@ -230,11 +230,11 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
      * @return the index
      */
     private static int indexOf(final String sourceCode, final String str, final int fromIndex) {
-        PARSING_STATUS parsingStatus = PARSING_STATUS.NORMAL;
+        ParsingStatus parsingStatus = ParsingStatus.NORMAL;
         char stringChar = 0;
         final int sourceCodeLength = sourceCode.length();
         for (int i = 0; i < sourceCodeLength; i++) {
-            if ((parsingStatus == PARSING_STATUS.NORMAL || parsingStatus == PARSING_STATUS.IN_MULTI_LINE_COMMENT)
+            if ((parsingStatus == ParsingStatus.NORMAL || parsingStatus == ParsingStatus.IN_MULTI_LINE_COMMENT)
                     && i >= fromIndex && i + str.length() <= sourceCodeLength
                     && sourceCode.substring(i, i + str.length()).equals(str)) {
                 return i;
@@ -242,54 +242,54 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
             final char ch = sourceCode.charAt(i);
             switch (ch) {
                 case '/':
-                    if (parsingStatus == PARSING_STATUS.NORMAL && (i + 1 < sourceCodeLength)) {
+                    if (parsingStatus == ParsingStatus.NORMAL && (i + 1 < sourceCodeLength)) {
                         final char nextCh = sourceCode.charAt(i + 1);
                         if (nextCh == '/') {
-                            parsingStatus = PARSING_STATUS.IN_SINGLE_LINE_COMMENT;
+                            parsingStatus = ParsingStatus.IN_SINGLE_LINE_COMMENT;
                         }
                         else if (nextCh == '*') {
-                            parsingStatus = PARSING_STATUS.IN_MULTI_LINE_COMMENT;
+                            parsingStatus = ParsingStatus.IN_MULTI_LINE_COMMENT;
                         }
                         else {
                             stringChar = ch;
-                            parsingStatus = PARSING_STATUS.IN_REG_EXP;
+                            parsingStatus = ParsingStatus.IN_REG_EXP;
                         }
                     }
-                    else if (parsingStatus == PARSING_STATUS.IN_REG_EXP && ch == stringChar) {
+                    else if (parsingStatus == ParsingStatus.IN_REG_EXP && ch == stringChar) {
                         stringChar = 0;
-                        parsingStatus = PARSING_STATUS.NORMAL;
+                        parsingStatus = ParsingStatus.NORMAL;
                     }
                     break;
 
                 case '*':
-                    if (parsingStatus == PARSING_STATUS.IN_MULTI_LINE_COMMENT && i + 1 < sourceCodeLength) {
+                    if (parsingStatus == ParsingStatus.IN_MULTI_LINE_COMMENT && i + 1 < sourceCodeLength) {
                         final char nextCh = sourceCode.charAt(i + 1);
                         if (nextCh == '/') {
-                            parsingStatus = PARSING_STATUS.NORMAL;
+                            parsingStatus = ParsingStatus.NORMAL;
                         }
                     }
                     break;
 
                 case '\n':
-                    if (parsingStatus == PARSING_STATUS.IN_SINGLE_LINE_COMMENT) {
-                        parsingStatus = PARSING_STATUS.NORMAL;
+                    if (parsingStatus == ParsingStatus.IN_SINGLE_LINE_COMMENT) {
+                        parsingStatus = ParsingStatus.NORMAL;
                     }
                     break;
 
                 case '\'':
                 case '"':
-                    if (parsingStatus == PARSING_STATUS.NORMAL) {
+                    if (parsingStatus == ParsingStatus.NORMAL) {
                         stringChar = ch;
-                        parsingStatus = PARSING_STATUS.IN_STRING;
+                        parsingStatus = ParsingStatus.IN_STRING;
                     }
-                    else if (parsingStatus == PARSING_STATUS.IN_STRING && ch == stringChar) {
+                    else if (parsingStatus == ParsingStatus.IN_STRING && ch == stringChar) {
                         stringChar = 0;
-                        parsingStatus = PARSING_STATUS.NORMAL;
+                        parsingStatus = ParsingStatus.NORMAL;
                     }
                     break;
 
                 case '\\':
-                    if (parsingStatus == PARSING_STATUS.IN_STRING) {
+                    if (parsingStatus == ParsingStatus.IN_STRING) {
                         if (i + 3 < sourceCodeLength && sourceCode.charAt(i + 1) == 'x') {
                             final char ch1 = Character.toUpperCase(sourceCode.charAt(i + 2));
                             final char ch2 = Character.toUpperCase(sourceCode.charAt(i + 3));

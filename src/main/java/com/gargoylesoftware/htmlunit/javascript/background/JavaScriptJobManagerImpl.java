@@ -353,7 +353,9 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
      * {@inheritDoc}
      */
     public synchronized JavaScriptJob getEarliestJob(final JavaScriptJobFilter filter) {
-        if (filter == null) { return scheduledJobsQ_.peek(); }
+        if (filter == null) {
+            return scheduledJobsQ_.peek();
+        }
 
         for (JavaScriptJob job : scheduledJobsQ_) {
             if (filter.passes(job)) {

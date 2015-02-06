@@ -209,6 +209,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     private static int UniqueID_Counter_ = 1;
 
+    private static enum ParsingStatus { OUTSIDE, START, IN_NAME, INSIDE, IN_STRING }
+
     private HTMLCollection all_; // has to be a member to have equality (==) working
     private HTMLCollection forms_; // has to be a member to have equality (==) working
     private HTMLCollection links_; // has to be a member to have equality (==) working
@@ -699,8 +701,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
     }
 
-    private enum PARSING_STATUS { OUTSIDE, START, IN_NAME, INSIDE, IN_STRING }
-
     /**
      * Indicates if the content is a well formed HTML snippet that can already be parsed to be added to the DOM.
      *
@@ -710,7 +710,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     static boolean canAlreadyBeParsed(final String content) {
         // all <script> must have their </script> because the parser doesn't close automatically this tag
         // All tags must be complete, that is from '<' to '>'.
-        PARSING_STATUS tagState = PARSING_STATUS.OUTSIDE;
+        ParsingStatus tagState = ParsingStatus.OUTSIDE;
         int tagNameBeginIndex = 0;
         int scriptTagCount = 0;
         boolean tagIsOpen = true;
@@ -722,11 +722,11 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             switch (tagState) {
                 case OUTSIDE:
                     if (currentChar == '<') {
-                        tagState = PARSING_STATUS.START;
+                        tagState = ParsingStatus.START;
                         tagIsOpen = true;
                     }
                     else if (scriptTagCount > 0 && (currentChar == '\'' || currentChar == '"')) {
-                        tagState = PARSING_STATUS.IN_STRING;
+                        tagState = ParsingStatus.IN_STRING;
                         stringBoundary = currentChar;
                         stringSkipNextChar = false;
                     }
@@ -739,7 +739,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                     else {
                         tagNameBeginIndex = index;
                     }
-                    tagState = PARSING_STATUS.IN_NAME;
+                    tagState = ParsingStatus.IN_NAME;
                     break;
                 case IN_NAME:
                     if (Character.isWhitespace(currentChar) || currentChar == '>') {
@@ -754,14 +754,14 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                             }
                         }
                         if (currentChar == '>') {
-                            tagState = PARSING_STATUS.OUTSIDE;
+                            tagState = ParsingStatus.OUTSIDE;
                         }
                         else {
-                            tagState = PARSING_STATUS.INSIDE;
+                            tagState = ParsingStatus.INSIDE;
                         }
                     }
                     else if (!Character.isLetter(currentChar)) {
-                        tagState = PARSING_STATUS.OUTSIDE;
+                        tagState = ParsingStatus.OUTSIDE;
                     }
                     break;
                 case INSIDE:
@@ -773,7 +773,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                             openingQuote = currentChar;
                         }
                         else if (currentChar == '>' && openingQuote == 0) {
-                            tagState = PARSING_STATUS.OUTSIDE;
+                            tagState = ParsingStatus.OUTSIDE;
                         }
                     }
                     break;
@@ -783,7 +783,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                     }
                     else {
                         if (currentChar == stringBoundary) {
-                            tagState = PARSING_STATUS.OUTSIDE;
+                            tagState = ParsingStatus.OUTSIDE;
                         }
                         else if (currentChar == '\\') {
                             stringSkipNextChar = true;
@@ -795,7 +795,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             }
             index++;
         }
-        if (scriptTagCount > 0 || tagState != PARSING_STATUS.OUTSIDE) {
+        if (scriptTagCount > 0 || tagState != ParsingStatus.OUTSIDE) {
             if (LOG.isDebugEnabled()) {
                 final StringBuffer message = new StringBuffer();
                 message.append("canAlreadyBeParsed() retruns false for content: '");
