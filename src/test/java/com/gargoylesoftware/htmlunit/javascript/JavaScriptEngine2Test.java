@@ -187,25 +187,27 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
             FF = { "[object Window]", "[object Window]", "true",
                 "function HTMLDocument() {\n    [native code]\n}",
                 "function HTMLDocument() {\n    [native code]\n}", "true", "function" },
-            IE8 = { "undefined", "exception", "undefined", "exception", "function" })
+            IE8 = { "ex window", "undefined", "ex win const", "ex doc",
+                    "undefined", "exception doc const", "function" })
     public void constructor() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
-            + "alert(window.constructor);\n"
-            + "try {\n"
-            + "  alert(Window);\n"
-            + "  alert(window.constructor === Window);\n"
-            + "} catch (e) {\n"
-            + "  alert('exception');\n"
-            + "}\n"
-            + "alert(document.constructor);\n"
-            + "try {\n"
-            + "  alert(HTMLDocument);\n"
-            + "  alert(document.constructor === HTMLDocument);\n"
-            + "} catch (e) {\n"
-            + "  alert('exception');\n"
-            + "}\n"
-            + "alert(typeof new Object().constructor);\n"
+            + "  try { alert(Window); } catch (e) { alert('ex window'); }\n"
+            + "  alert(window.constructor);\n"
+            + "  try {\n"
+            + "    alert(window.constructor === Window);\n"
+            + "  } catch (e) {\n"
+            + "    alert('ex win const');\n"
+            + "  }\n"
+
+            + "  try { alert(HTMLDocument); } catch (e) { alert('ex doc'); }\n"
+            + "  alert(document.constructor);\n"
+            + "  try {\n"
+            + "    alert(document.constructor === HTMLDocument);\n"
+            + "  } catch (e) {\n"
+            + "    alert('exception doc const');\n"
+            + "  }\n"
+            + "  alert(typeof new Object().constructor);\n"
             + "</script>\n"
             + "</body></html>";
 
