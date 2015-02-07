@@ -195,8 +195,18 @@ public class JavaScriptEngine {
         final Map<String, ScriptableObject> prototypesPerJSName = new HashMap<>();
         final Window window = new Window();
         context.initStandardObjects(window);
+
         if (browserVersion.hasFeature(JS_CONSTRUCTOR)) {
-            defineConstructor(window, window, new Window());
+            final ClassConfiguration windowConfig = jsConfig_.getClassConfiguration("Window");
+            if (windowConfig.getJsConstructor() != null) {
+                final FunctionObject functionObject = new RecursiveFunctionObject("Window",
+                        windowConfig.getJsConstructor(), window);
+                ScriptableObject.defineProperty(window, "constructor", functionObject,
+                        ScriptableObject.DONTENUM  | ScriptableObject.PERMANENT | ScriptableObject.READONLY);
+            }
+            else {
+                defineConstructor(window, window, new Window());
+            }
         }
         else {
             deleteProperties(window, "constructor");
@@ -273,14 +283,25 @@ public class JavaScriptEngine {
             final ScriptableObject prototype = prototypesPerJSName.get(jsClassName);
             if (prototype != null && config.isJsObject()) {
                 if (jsConstructor != null) {
-                    final FunctionObject functionObject = new RecursiveFunctionObject(jsClassName, jsConstructor, window);
+                    final FunctionObject functionObject;
+                    if ("Window".equals(jsClassName)) {
+                        functionObject = (FunctionObject) ScriptableObject.getProperty(window, "constructor");
+                    }
+                    else {
+                        functionObject = new RecursiveFunctionObject(jsClassName, jsConstructor, window);
+                    }
                     functionObject.addAsConstructor(window, prototype);
                     configureConstants(config, functionObject);
                 }
                 else {
                     if (browserVersion.hasFeature(JS_CONSTRUCTOR)) {
-                        final Class<?> jsHostClass = config.getHostClass();
-                        final ScriptableObject constructor = (ScriptableObject) jsHostClass.newInstance();
+                        final ScriptableObject constructor;
+                        if ("Window".equals(jsClassName)) {
+                            constructor = (ScriptableObject) ScriptableObject.getProperty(window, "constructor");
+                        }
+                        else {
+                            constructor = (ScriptableObject) config.getHostClass().newInstance();
+                        }
                         defineConstructor(window, prototype, constructor);
                         configureConstants(config, constructor);
                     }

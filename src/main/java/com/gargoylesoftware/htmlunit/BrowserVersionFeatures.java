@@ -756,7 +756,7 @@ public enum BrowserVersionFeatures {
     JS_CLONE_NODE_COPIES_EVENT_LISTENERS,
 
     /** Indicates that "constructor" property is defined, e.g. <tt>document.constructor</tt>. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_CONSTRUCTOR,
 
     /** item is not a enumerable property of CSSRuleList. */

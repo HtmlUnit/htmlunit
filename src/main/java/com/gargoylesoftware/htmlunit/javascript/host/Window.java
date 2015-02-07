@@ -205,7 +205,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxConstructor(@WebBrowser(CHROME))
     public Window() {
     }
 

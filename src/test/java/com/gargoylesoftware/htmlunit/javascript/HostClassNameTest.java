@@ -3412,7 +3412,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object Window]",
             CHROME = "function Window() { [native code] }")
-    @NotYetImplemented({ FF, IE8 })
+    @NotYetImplemented(IE8)
     public void window() throws Exception {
         testHostClassName("Window");
     }

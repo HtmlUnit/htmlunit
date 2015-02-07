@@ -1525,7 +1525,6 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "[object Window]", "[object Window]", "" },
             CHROME = { "[object Window]", "function Window() { [native code] }",
             "toString, TEMPORARY, PERSISTENT, " },
-            FF = { "[object Window]", "function Window() {\n    [native code]\n}", "" },
             IE8 = { "[object]", "exception" })
     public void enumeratedProperties() throws Exception {
         final String html

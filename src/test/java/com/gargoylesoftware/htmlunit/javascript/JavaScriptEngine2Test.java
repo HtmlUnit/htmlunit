@@ -188,7 +188,6 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
                 "function HTMLDocument() {\n    [native code]\n}",
                 "function HTMLDocument() {\n    [native code]\n}", "true", "function" },
             IE8 = { "undefined", "exception", "undefined", "exception", "function" })
-    @NotYetImplemented(FF)
     public void constructor() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
