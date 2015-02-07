@@ -1196,10 +1196,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE,
 
-    /** Indicates that objects with prototype property available in window scope; Firefox does this. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
-    JS_HAS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE,
-
     /** History entries are enumerated as properties. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_HISTORY_ENUMS_ENTRIES,
@@ -1366,6 +1362,10 @@ public enum BrowserVersionFeatures {
     /** "[object]" in quirks mode. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_OBJECT_IN_QUIRKS_MODE,
+
+    /** Indicates that objects with prototype property available in window scope. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    JS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE,
 
     /** Indicates that someObj.offsetParent returns null, it someObj has fixed style.
      */
@@ -1723,6 +1723,10 @@ public enum BrowserVersionFeatures {
     /** <code>window..frames['id']</code> returns the frame window instead of the frame element. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW,
+
+    /** Window is defined in only Standards mode. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    JS_WINDOW_IN_STANDARDS_MODE,
 
     /** Window property usable as function. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))

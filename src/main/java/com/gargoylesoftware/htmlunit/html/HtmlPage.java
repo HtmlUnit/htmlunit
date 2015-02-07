@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONBEFOR
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FOCUS_BODY_ELEMENT_AT_START;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFERRED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_IN_STANDARDS_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MISSING_SLASHES;
 
@@ -67,7 +68,6 @@ import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
 import org.w3c.dom.ranges.Range;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
@@ -236,19 +236,17 @@ public class HtmlPage extends SgmlPage {
         }
         loadFrames();
 
-        final BrowserVersion browserVersion = getWebClient().getBrowserVersion();
-
         // don't set the ready state if we really load the blank page into the window
         // see Node.initInlineFrameIfNeeded()
         if (!isAboutBlank) {
-            if (browserVersion.hasFeature(FOCUS_BODY_ELEMENT_AT_START)) {
+            if (hasFeature(FOCUS_BODY_ELEMENT_AT_START)) {
                 elementWithFocus_ = getBody();
             }
             setReadyState(READY_STATE_COMPLETE);
             getDocumentElement().setReadyState(READY_STATE_COMPLETE);
         }
 
-        if (browserVersion.hasFeature(EVENT_DOM_CONTENT_LOADED)) {
+        if (hasFeature(EVENT_DOM_CONTENT_LOADED)) {
             executeEventHandlersIfNeeded(Event.TYPE_DOM_DOCUMENT_LOADED);
         }
         executeDeferredScriptsIfNeeded();
@@ -731,7 +729,7 @@ public class HtmlPage extends SgmlPage {
         }
 
         // to handle http: and http:/ in FF (Bug 1714767)
-        if (getWebClient().getBrowserVersion().hasFeature(URL_MISSING_SLASHES)) {
+        if (hasFeature(URL_MISSING_SLASHES)) {
             boolean incorrectnessNotified = false;
             while (relativeUrl.startsWith("http:") && !relativeUrl.startsWith("http://")) {
                 if (!incorrectnessNotified) {
@@ -1285,7 +1283,7 @@ public class HtmlPage extends SgmlPage {
             }
             final Event event;
             if (eventType.equals(Event.TYPE_BEFORE_UNLOAD)
-                && !getWebClient().getBrowserVersion().hasFeature(EVENT_ONBEFOREUNLOAD_USES_EVENT)) {
+                && !hasFeature(EVENT_ONBEFOREUNLOAD_USES_EVENT)) {
                 event = new BeforeUnloadEvent(element, eventType);
             }
             else {
@@ -1301,7 +1299,7 @@ public class HtmlPage extends SgmlPage {
         if (window instanceof FrameWindow) {
             if (Event.TYPE_LOAD.equals(eventType)) {
                 // FF always triggers this event for frame windows
-                if (!getWebClient().getBrowserVersion().hasFeature(EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT)) {
+                if (!hasFeature(EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT)) {
                     final BaseFrameElement frame = ((FrameWindow) window).getFrameElement();
                     // IE triggers this event only in some cases
                     if (frame.wasCreatedByJavascript()) {
@@ -1325,7 +1323,7 @@ public class HtmlPage extends SgmlPage {
                 }
                 final Event event;
                 if (eventType.equals(Event.TYPE_BEFORE_UNLOAD)
-                    && !getWebClient().getBrowserVersion().hasFeature(EVENT_ONBEFOREUNLOAD_USES_EVENT)) {
+                    && !hasFeature(EVENT_ONBEFOREUNLOAD_USES_EVENT)) {
                     event = new BeforeUnloadEvent(frame, eventType);
                 }
                 else {
@@ -2063,8 +2061,8 @@ public class HtmlPage extends SgmlPage {
 
         elementWithFocus_ = newElement;
 
-        if (elementWithFocus_ instanceof SelectableTextInput && getWebClient().getBrowserVersion()
-                .hasFeature(PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT)) {
+        if (elementWithFocus_ instanceof SelectableTextInput
+                && hasFeature(PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT)) {
             final SelectableTextInput sti = (SelectableTextInput) elementWithFocus_;
             setSelectionRange(new SimpleRange(sti, sti.getSelectionStart(), sti, sti.getSelectionEnd()));
         }
@@ -2415,6 +2413,22 @@ public class HtmlPage extends SgmlPage {
     @Override
     protected void setDocumentType(final DomDocumentType type) {
         super.setDocumentType(type);
+
+        //probably not the best place to add what JavaScriptEngine usually does
+        if (hasFeature(JS_WINDOW_IN_STANDARDS_MODE) && !isQuirksMode()) {
+            final Window window = ((HTMLDocument) getScriptObject()).getWindow();
+            defineConstructor(window, window, new Window());
+        }
+    }
+
+    private void defineConstructor(final Window window, final Scriptable prototype,
+            final ScriptableObject constructor) {
+        constructor.setParentScope(window);
+        ScriptableObject.defineProperty(prototype, "constructor", constructor,
+                ScriptableObject.DONTENUM  | ScriptableObject.PERMANENT | ScriptableObject.READONLY);
+        ScriptableObject.defineProperty(constructor, "prototype", prototype,
+                ScriptableObject.DONTENUM  | ScriptableObject.PERMANENT | ScriptableObject.READONLY);
+        window.defineProperty(constructor.getClassName(), constructor, ScriptableObject.DONTENUM);
     }
 
     /**
