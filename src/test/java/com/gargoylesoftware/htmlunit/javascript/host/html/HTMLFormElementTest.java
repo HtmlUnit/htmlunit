@@ -961,7 +961,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            IE11 = "3")
+            IE = "3")
     public void submit_twice() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
