@@ -511,7 +511,6 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "0", "18" },
             FF = { "0", "20" },
             IE8 = { "19", "19" })
-    @NotYetImplemented(IE8)
     public void offsetHeight_explicitHeightZero() throws Exception {
         final String html
             = "<html><body>\n"
@@ -530,7 +529,6 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "75", "2", "5", "20", "50", "50", "18" },
             FF = { "77", "2", "5", "20", "50", "50", "20" },
             IE8 = { "108", "19", "20", "20", "50", "50", "19" })
-    @NotYetImplemented(IE8)
     public void offsetHeight_calculatedBasedOnChildren() throws Exception {
         final String html
             = "<html>\n"
