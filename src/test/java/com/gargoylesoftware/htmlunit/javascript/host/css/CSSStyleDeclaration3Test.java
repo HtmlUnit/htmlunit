@@ -62,7 +62,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "rgb(20, 40, 60)", "none", "repeat", "0% 0%", "scroll" },
-            CHROME = { "rgb(20, 40, 60)", "initial", "initial", "", "initial" })
+            CHROME = { "rgb(20, 40, 60)", "initial", "initial", "", "initial" },
+            IE8 = { "rgb(20,40,60)", "none", "repeat", "0% 0%", "scroll" })
+    @NotYetImplemented(IE8)
     public void backgroundColorRgb() throws Exception {
         background("rgb(20, 40, 60)");
     }
@@ -231,7 +233,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "transparent", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll" },
             CHROME = { "rgba(0, 0, 0, 0)", "url(http://localhost:12345/myImage.png)", "repeat", "0% 0%", "scroll" },
-            IE8 = { "transparent", "url(\"http://localhost:12346/myImage.png\")", "repeat", "undefined", "scroll" })
+            IE8 = { "transparent", "url(\"http://localhost:12345/myImage.png\")", "repeat", "undefined", "scroll" })
     @NotYetImplemented
     public void backgroundCssImage() throws Exception {
         backgroundCss("url(myImage.png)");
@@ -327,7 +329,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "rgb(255, 0, 0)", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll" },
             CHROME = { "rgb(255, 0, 0)", "url(http://localhost:12345/myImage.png)", "repeat", "0% 0%", "scroll" },
-            IE8 = { "red", "url(\"http://localhost:12346/myImage.png\")", "repeat", "undefined", "scroll" })
+            IE8 = { "red", "url(\"http://localhost:12345/myImage.png\")", "repeat", "undefined", "scroll" })
     @NotYetImplemented
     public void backgroundCssMixed() throws Exception {
         backgroundCss("red url(\"myImage.png\")");
