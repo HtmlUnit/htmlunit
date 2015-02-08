@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_15;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_19;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_18;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_MARKS_MIN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_WIDTH_AUTO;
@@ -1317,8 +1317,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 defaultHeight = 0;
             }
         }
-        else if (getBrowserVersion().hasFeature(CSS_DEFAULT_ELEMENT_HEIGHT_15)) {
-            defaultHeight = 15;
+        else if (getBrowserVersion().hasFeature(CSS_DEFAULT_ELEMENT_HEIGHT_19)) {
+            defaultHeight = 19;
         }
         else if (getBrowserVersion().hasFeature(CSS_DEFAULT_ELEMENT_HEIGHT_18)) {
             defaultHeight = 18;
