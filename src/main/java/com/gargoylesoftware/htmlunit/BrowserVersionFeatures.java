@@ -1319,6 +1319,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_MERGE_ATTRIBUTES_ALL,
 
+    /** Javascript event.keyCode returns 0 instead of undefined for mouse events. */
+    @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(CHROME) })
+    JS_MOUSE_EVENT_KEY_CODE_ZERO,
+
     /**
      * Indicates if the String representation of a native function is without newline.
      */

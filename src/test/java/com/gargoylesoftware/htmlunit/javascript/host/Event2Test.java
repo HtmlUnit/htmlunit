@@ -312,7 +312,8 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "pass", "fail:66", "fail:undefined" },
-            CHROME = { "pass", "fail:66", "fail:0" })
+            CHROME = { "pass", "fail:66", "fail:0" },
+            IE8 = { "pass", "fail:66", "fail:0" })
     public void testEventOnKeyDown() throws Exception {
         final String html
             = "<html><head></head>\n"

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_MOUSERVENT_BUTTON_CODE_IE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MOUSE_EVENT_KEY_CODE_ZERO;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -390,7 +391,11 @@ public class MouseEvent extends UIEvent {
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
+    @JsxGetter({ @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(CHROME) })
     public Object getKeyCode() {
+        if (getBrowserVersion().hasFeature(JS_MOUSE_EVENT_KEY_CODE_ZERO)) {
+            return 0;
+        }
         return Undefined.instance;
     }
 }
