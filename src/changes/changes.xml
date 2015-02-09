@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.16" date="???" description="Java 7, FF31, IE11 progress, Chrome progress, Bugfixes">
+            <action type="fix" dev="rbri">
+                Event.metaKey is available in CHROME also.
+            </action>
+            <action type="fix" dev="rbri">
+                MouseEvent.keyCode fixed for IE8 and CHROME.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: Window is defined in Standards Mode (IE8).
             </action>
