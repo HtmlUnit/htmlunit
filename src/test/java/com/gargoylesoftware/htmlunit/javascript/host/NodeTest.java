@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.CREATE_XML_DOCUMENT_FUNCTION;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION;
@@ -29,6 +30,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -259,7 +261,8 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE8 = { "in foo1", "in foo2" })
+            IE8 = { "in foo2", "in foo1" })
+    @NotYetImplemented(IE8)
     public void testAttachEvent() throws Exception {
         final String html = "<html><head>\n"
             + "<title>First</title>\n"
@@ -342,7 +345,8 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "exception", "1", "exception", "1", "exception", "1" },
-            IE8 = { "1", "1", "1", "exception", "1" })
+            IE8 = { "1", "1", "1", "0" })
+    @NotYetImplemented(IE8)
     public void append_insert_html_node() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -980,7 +984,7 @@ public class NodeTest extends WebDriverTestCase {
             + "        var clone = node.cloneNode(true);\n"
             + "        clone.id = 'bar';\n"
             + "        node.appendChild(clone);\n"
-            + "        alert(clone.attributes[0].nodeName + '=' + clone.attributes[0].nodeValue);\n"
+            + "        alert(clone.attributes['id'].nodeName + '=' + clone.attributes['id'].nodeValue);\n"
             + "    }\n"
             + "  </script>\n"
             + "  </head>\n"

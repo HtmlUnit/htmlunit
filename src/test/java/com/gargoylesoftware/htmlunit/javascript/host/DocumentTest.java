@@ -1419,7 +1419,9 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "loading", "complete" })
+    @Alerts(DEFAULT = { "loading", "complete" },
+            IE8 = { "interactive", "complete" })
+    @NotYetImplemented(IE8)
     public void readyState() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

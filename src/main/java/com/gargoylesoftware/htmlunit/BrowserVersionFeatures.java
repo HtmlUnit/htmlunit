@@ -1285,7 +1285,7 @@ public enum BrowserVersionFeatures {
      * for url 'http://localhost/something/#%C3%BC'.<br>
      * IE evaluates to #%C3%BC.
      */
-    @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(FF) })
+    @BrowserFeature(@WebBrowser(FF))
     JS_LOCATION_HASH_IS_DECODED,
 
     /**
@@ -1294,7 +1294,7 @@ public enum BrowserVersionFeatures {
      * for url 'http://localhost/something/#&uuml;'.<br>
      * IE evaluates to #&uuml;.
      */
-    @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(FF) })
+    @BrowserFeature(@WebBrowser(FF))
     JS_LOCATION_HASH_IS_ENCODED,
 
     /**

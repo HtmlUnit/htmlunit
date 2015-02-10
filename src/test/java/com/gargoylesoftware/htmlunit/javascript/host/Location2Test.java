@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.net.URL;
 import java.util.Map;
@@ -27,6 +28,7 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -146,8 +148,6 @@ public class Location2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "#a b", "§§URL§§#a b", "#a%20b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
                     "#%25%20%5E%5B%5D%7C%22%3C%3E%7B%7D%5C" },
             FF = { "#a b", "§§URL§§#a%20b", "#a b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
-                    "#% ^[]|\"<>{}\\" },
-            IE8 = { "#a b", "§§URL§§#a%20b", "#a b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
                     "#% ^[]|\"<>{}\\" })
     public void hashEncoding() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
@@ -174,8 +174,7 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "#myDataTable=foo%3Dojkoj", "§§URL§§#myDataTable=foo%3Dojkoj" },
-            FF = { "#myDataTable=foo=ojkoj", "§§URL§§#myDataTable=foo%3Dojkoj" },
-            IE8 = { "#myDataTable=foo=ojkoj", "§§URL§§#myDataTable=foo%3Dojkoj" })
+            FF = { "#myDataTable=foo=ojkoj", "§§URL§§#myDataTable=foo%3Dojkoj" })
     public void hashEncoding2() throws Exception {
         final String html = "<html><body><script>\n"
             + "window.location.hash = 'myDataTable=foo%3Dojkoj';\n"
@@ -191,8 +190,7 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "#üöä", "§§URL§§#üöä" },
-            FF = { "#üöä", "§§URL§§#%C3%BC%C3%B6%C3%A4" },
-            IE8 = { "#üöä", "§§URL§§#%C3%BC%C3%B6%C3%A4" })
+            FF = { "#üöä", "§§URL§§#%C3%BC%C3%B6%C3%A4" })
     public void hashEncoding3() throws Exception {
         final String html = "<html><body><script>\n"
             + "window.location.hash = 'üöä';\n"
@@ -208,6 +206,7 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("#<a>foobar</a>")
+    @NotYetImplemented(IE8)
     public void hash() throws Exception {
         checkHash(getDefaultUrl().toExternalForm() + "?#<a>foobar</a>");
     }
