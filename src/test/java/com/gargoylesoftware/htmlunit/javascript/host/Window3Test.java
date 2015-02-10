@@ -833,7 +833,8 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2-2", "3-3" })
+    @Alerts(DEFAULT = { "2-2", "3-3" },
+            IE8 = { "2-2", "2-2" })
     @NotYetImplemented
     public void elementsByName_changedAfterGet_nyi() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1214,18 +1215,18 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE8 = "")
+            IE8 = "exception")
     @NotYetImplemented(IE8)
     public void evalScopeOtherWindow() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body>\n"
-            + "<iframe src='iframe.html'></iframe>\n"
+            + "  <iframe src='iframe.html'></iframe>\n"
             + "</body></html>";
         final String iframe = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body>\n"
             + "<script>\n"
-            + "window.parent.eval('var foo = 1');\n"
-            + "alert(window.parent.foo)\n"
+            + "  try { window.parent.eval('var foo = 1'); } catch(e) { alert('exception'); }\n"
+            + "  alert(window.parent.foo)\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -1306,7 +1307,6 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "123", "captured" },
             IE8 = { "exception", "123" })
-    @BuggyWebDriver(IE8)
     @NotYetImplemented(IE8)
     public void captureEvents() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
