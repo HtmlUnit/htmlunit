@@ -73,7 +73,8 @@ public class NamedNodeMapTest extends WebDriverTestCase {
                     "aria-controls=", "onresizestart=null", "aria-flowto=", "ondatasetcomplete=null",
                     "aria-required=", "aria-describedby=", "onbeforecut=null", "aria-activedescendant=",
                     "aria-multiselectable=", "accept-charset=UNKNOWN", "encType=application/x-www-form-urlencoded",
-                    "onsubmit=null", "method=get", "onreset=null", "name=f", "action=", "target=", "baz=blah", "foo=bar" },
+                    "onsubmit=null", "method=get", "onreset=null",
+                    "name=f", "action=", "target=", "baz=blah", "foo=bar" },
             IE11 = { "name=f", "id=f", "baz=blah", "foo=bar" })
     public void testAttributes() throws Exception {
         final String html =
