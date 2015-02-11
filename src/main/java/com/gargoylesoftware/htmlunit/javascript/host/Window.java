@@ -628,8 +628,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the console property.
      * @return the console property
      */
-    @JsxGetter({ @WebBrowser(value = FF, minVersion = 4), @WebBrowser(value = IE, minVersion = 11),
-            @WebBrowser(CHROME) })
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
     public ScriptableObject getConsole() {
         return console_;
     }
@@ -638,8 +637,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Sets the console.
      * @param console the console
      */
-    @JsxSetter({ @WebBrowser(value = FF, minVersion = 4), @WebBrowser(value = IE, minVersion = 11),
-        @WebBrowser(CHROME) })
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
     public void setConsole(final ScriptableObject console) {
         console_ = console;
     }
