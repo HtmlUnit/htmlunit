@@ -35,6 +35,7 @@ import org.apache.commons.logging.LogFactory;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public final class EncodingSniffer {
 
@@ -409,6 +410,8 @@ public final class EncodingSniffer {
         ENCODING_FROM_LABEL.put("x-user-defined", "x-user-defined");
     }
 
+    private static final byte[] XML_DECLARATION_PREFIX = "<?xml ".getBytes();
+
     /**
      * The number of HTML bytes to sniff for encoding info embedded in <tt>meta</tt> tags;
      * relatively large because we don't have a fallback.
@@ -642,19 +645,31 @@ public final class EncodingSniffer {
      *         could not be determined
      */
     static String sniffEncodingFromUnicodeBom(final byte[] bytes) {
+        if (bytes == null) {
+            return null;
+        }
+
         String encoding = null;
-        final byte[] markerUTF8 = {(byte) 0xef, (byte) 0xbb, (byte) 0xbf};
-        final byte[] markerUTF16BE = {(byte) 0xfe, (byte) 0xff};
-        final byte[] markerUTF16LE = {(byte) 0xff, (byte) 0xfe};
-        if (bytes != null && ArrayUtils.isEquals(markerUTF8, ArrayUtils.subarray(bytes, 0, 3))) {
+        // 0xef, 0xbb, 0xbf
+        if (bytes.length > 2
+                && ((byte) 0xef) == bytes[0]
+                && ((byte) 0xbb) == bytes[1]
+                && ((byte) 0xbf) == bytes[2]) {
             encoding = UTF8;
         }
-        else if (bytes != null && ArrayUtils.isEquals(markerUTF16BE, ArrayUtils.subarray(bytes, 0, 2))) {
+        // 0xfe, 0xff
+        else if (bytes.length > 2
+                && ((byte) 0xfe) == bytes[0]
+                && ((byte) 0xff) == bytes[1]) {
             encoding = UTF16_BE;
         }
-        else if (bytes != null && ArrayUtils.isEquals(markerUTF16LE, ArrayUtils.subarray(bytes, 0, 2))) {
+        // 0xff, 0xfe
+        else if (bytes.length > 2
+                && ((byte) 0xff) == bytes[0]
+                && ((byte) 0xfe) == bytes[1]) {
             encoding = UTF16_LE;
         }
+
         if (encoding != null && LOG.isDebugEnabled()) {
             LOG.debug("Encoding found in Unicode Byte Order Mark: '" + encoding + "'.");
         }
@@ -922,8 +937,13 @@ public final class EncodingSniffer {
      */
     static String sniffEncodingFromXmlDeclaration(final byte[] bytes) {
         String encoding = null;
-        final byte[] declarationPrefix = "<?xml ".getBytes();
-        if (ArrayUtils.isEquals(declarationPrefix, ArrayUtils.subarray(bytes, 0, declarationPrefix.length))) {
+        if (bytes.length > 5
+                && XML_DECLARATION_PREFIX[0] == bytes[0]
+                && XML_DECLARATION_PREFIX[1] == bytes[1]
+                && XML_DECLARATION_PREFIX[2] == bytes[2]
+                && XML_DECLARATION_PREFIX[3] == bytes[3]
+                && XML_DECLARATION_PREFIX[4] == bytes[4]
+                && XML_DECLARATION_PREFIX[5] == bytes[5]) {
             final int index = ArrayUtils.indexOf(bytes, (byte) '?', 2);
             if (index + 1 < bytes.length && bytes[index + 1] == '>') {
                 final String declaration = new String(bytes, 0, index + 2);
