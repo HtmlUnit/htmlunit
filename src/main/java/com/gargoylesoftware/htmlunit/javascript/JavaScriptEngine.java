@@ -301,7 +301,7 @@ public class JavaScriptEngine {
                             constructor = (ScriptableObject) ScriptableObject.getProperty(window, "constructor");
                         }
                         else {
-                            constructor = (ScriptableObject) config.getHostClass().newInstance();
+                            constructor = config.getHostClass().newInstance();
                         }
                         defineConstructor(window, prototype, constructor);
                         configureConstants(config, constructor);
