@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.util.List;
 
@@ -64,13 +65,17 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "true", "true", "true" })
+    @Alerts(DEFAULT = { "global: true", "local: true", "session: true" },
+            IE8 = { "global: true", "exception", "exception" })
+    @NotYetImplemented(IE8)
     public void storageEquals() throws Exception {
         final String html
             = "<html><body><script>\n"
-            + "alert(window.globalStorage === window.globalStorage);\n"
-            + "alert(window.localStorage === window.localStorage);\n"
-            + "alert(window.sessionStorage === window.sessionStorage);\n"
+            + "  alert('global: ' + (window.globalStorage === window.globalStorage));\n"
+            + "  try { alert('local: ' + (window.localStorage === window.localStorage)); }"
+                        + " catch(e) { alert('exception'); }\n"
+            + "  try { alert('session: ' + (window.sessionStorage === window.sessionStorage)); }"
+                        + " catch(e) { alert('exception'); }\n"
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
@@ -233,7 +238,9 @@ public class StorageTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "function", "null", "function", "value", "1" },
-            IE = { "function", "null", "string", "value", "1" })
+            IE11 = { "function", "null", "string", "value", "1" },
+            IE8 = { "undefined", "null", "string", "value", "1" })
+    @NotYetImplemented(IE8)
     public void prototypePropertiesAreVisible() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -254,7 +261,9 @@ public class StorageTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "function", "null", "string", "value", "1" },
-            CHROME = { "function", "null", "string", "null", "0" })
+            CHROME = { "function", "null", "string", "null", "0" },
+            IE8 = { "undefined", "null", "string", "value", "1" })
+    @NotYetImplemented(IE8)
     public void writeToPrototypeProperty() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
