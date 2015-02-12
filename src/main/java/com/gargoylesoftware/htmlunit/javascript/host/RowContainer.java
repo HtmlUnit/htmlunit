@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-@JsxClass
+@JsxClass(isJSObject = false, isDefinedInStandardsMode = false)
 public class RowContainer extends HTMLElement {
 
     private HTMLCollection rows_; // has to be a member to have equality (==) working

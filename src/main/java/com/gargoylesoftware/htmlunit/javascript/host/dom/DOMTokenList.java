@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLI
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_EDIT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.Arrays;
 import java.util.List;
@@ -43,7 +44,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Node;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public final class DOMTokenList extends SimpleScriptable {
 
     private static final String WHITESPACE_CHARS = " \t\r\n\u000C";

@@ -70,6 +70,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.DateCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.StringCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 
 /**
  * A wrapper for the <a href="http://www.mozilla.org/rhino">Rhino JavaScript engine</a>
@@ -254,8 +255,8 @@ public class JavaScriptEngine {
                             }
                         }
                     }
-                    prototypes.put(config.getHostClass(), prototype);
                 }
+                prototypes.put(config.getHostClass(), prototype);
                 prototypesPerJSName.put(config.getHostClass().getSimpleName(), prototype);
             }
         }
@@ -307,6 +308,12 @@ public class JavaScriptEngine {
                         configureConstants(config, constructor);
                     }
                     else {
+                        if (!"Window".equals(jsClassName)) {
+                            final ScriptableObject constructor = config.getHostClass().newInstance();
+                            constructor.setParentScope(window);
+                            window.defineProperty(constructor.getClassName(), constructor, ScriptableObject.DONTENUM);
+                        }
+
                         deleteProperties(prototype, "constructor");
                     }
                 }
@@ -417,6 +424,33 @@ public class JavaScriptEngine {
     }
 
     /**
+     * Define properties in Standards Mode.
+     *
+     * @param page the page
+     */
+    public void definePropertiesInStandardsMode(final HtmlPage page) {
+        final Window window = ((HTMLDocument) page.getScriptObject()).getWindow();
+        for (final ClassConfiguration config : jsConfig_.getAll()) {
+            final String jsClassName = config.getHostClass().getSimpleName();
+            if (config.isDefinedInStandardsMode()) {
+                if ("Window".equals(jsClassName)) {
+                    defineConstructor(window, window, new Window());
+                }
+                else if (!config.isJsObject()) {
+                    try {
+                        final ScriptableObject constructor = config.getHostClass().newInstance();
+                        constructor.setParentScope(window);
+                        window.defineProperty(constructor.getClassName(), constructor, ScriptableObject.DONTENUM);
+                    }
+                    catch (final Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
      * Removes prototype properties.
      * @param scope the scope
      * @param className the class for which properties should be removed
@@ -441,8 +475,7 @@ public class JavaScriptEngine {
     private ScriptableObject configureClass(final ClassConfiguration config, final Scriptable window)
         throws InstantiationException, IllegalAccessException {
 
-        final Class<?> jsHostClass = config.getHostClass();
-        final ScriptableObject prototype = (ScriptableObject) jsHostClass.newInstance();
+        final ScriptableObject prototype = config.getHostClass().newInstance();
         prototype.setParentScope(window);
 
         configureConstantsPropertiesAndFunctions(config, prototype);

@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -33,7 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
  * @author Ahmed Ashour
  */
-@JsxClass
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class NodeFilter extends SimpleScriptable {
     // Constants returned by acceptNode
     /**

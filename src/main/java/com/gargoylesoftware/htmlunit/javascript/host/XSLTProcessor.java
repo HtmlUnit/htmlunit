@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class XSLTProcessor extends SimpleScriptable {
 
     private Node style_;

@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -55,7 +56,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClass(domClass = DomElement.class)
+@JsxClasses({
+    @JsxClass(domClass = DomElement.class,
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+    @JsxClass(isJSObject = false, isDefinedInStandardsMode = true, domClass = DomElement.class,
+        browsers = { @WebBrowser(value = IE, maxVersion = 8) })
+})
 public class Element extends EventNode {
 
     /** To be documented. */
