@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for Iterator.
  *
- * @version $Revision: $
+ * @version $Revision$
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
