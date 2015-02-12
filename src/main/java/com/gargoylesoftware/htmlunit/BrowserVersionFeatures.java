@@ -1275,6 +1275,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START,
 
+    /** Supports Iterator and StopIteration. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_Iterator,
+
     /** Javascript function returning a length (e.g. getWidth) without 'px' at the end. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_LENGTH_WITHOUT_PX,

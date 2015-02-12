@@ -22,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DONT_ENUM_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ECMA5_FUNCTIONS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_BIND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_TOSOURCE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_Iterator;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ACTIVEXOBJECT_HIDDEN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML;
@@ -217,6 +218,10 @@ public class JavaScriptEngine {
                 "JavaAdapter", "JavaImporter", "Continuation", "Packages", "getClass");
         if (!browserVersion.hasFeature(JS_XML)) {
             deleteProperties(window, "XML", "XMLList", "Namespace", "QName");
+        }
+
+        if (!browserVersion.hasFeature(JS_Iterator)) {
+            deleteProperties(window, "Iterator", "StopIteration");
         }
 
         // put custom object to be called as very last prototype to call the fallback getter (if any)
