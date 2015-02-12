@@ -101,35 +101,28 @@ public abstract class AbstractJavaScriptConfiguration {
 
             final String hostClassName = klass.getName();
             final JsxClasses jsxClasses = klass.getAnnotation(JsxClasses.class);
-            if (jsxClasses != null) {
+            if (jsxClasses != null
+                    && isSupported(jsxClasses.browsers(), expectedBrowserName, browserVersionNumeric)) {
                 if (klass.getAnnotation(JsxClass.class) != null) {
                     throw new RuntimeException("Invalid JsxClasses/JsxClass annotation; class '"
                         + hostClassName + "' has both.");
                 }
+                final boolean isJsObject = jsxClasses.isJSObject();
                 final JsxClass[] jsxClassValues = jsxClasses.value();
 
                 final Set<Class<?>> domClasses = new HashSet<Class<?>>();
 
-                boolean isJsObject = false;
-                boolean isDefinedInStandardsMode = false;
                 for (int i = 0; i < jsxClassValues.length; i++) {
                     final JsxClass jsxClass = jsxClassValues[i];
 
                     if (jsxClass != null
                             && isSupported(jsxClass.browsers(), expectedBrowserName, browserVersionNumeric)) {
                         domClasses.add(jsxClass.domClass());
-                        if (jsxClass.isJSObject()) {
-                            isJsObject = true;
-                        }
-                        if (jsxClass.isDefinedInStandardsMode()) {
-                            isDefinedInStandardsMode = true;
-                        }
                     }
                 }
 
                 final ClassConfiguration classConfiguration =
-                        new ClassConfiguration(klass, domClasses.toArray(new Class<?>[0]), isJsObject,
-                                isDefinedInStandardsMode);
+                        new ClassConfiguration(klass, domClasses.toArray(new Class<?>[0]), isJsObject);
 
                 process(classConfiguration, hostClassName, expectedBrowserName,
                         browserVersionNumeric);
@@ -146,8 +139,7 @@ public abstract class AbstractJavaScriptConfiguration {
                 }
 
                 final ClassConfiguration classConfiguration
-                    = new ClassConfiguration(klass, domClasses.toArray(new Class<?>[0]), jsxClass.isJSObject(),
-                            jsxClass.isDefinedInStandardsMode());
+                    = new ClassConfiguration(klass, domClasses.toArray(new Class<?>[0]), true);
 
                 process(classConfiguration, hostClassName, expectedBrowserName,
                         browserVersionNumeric);
@@ -162,6 +154,10 @@ public abstract class AbstractJavaScriptConfiguration {
             final float browserVersionNumeric) {
         final String simpleClassName = hostClassName.substring(hostClassName.lastIndexOf('.') + 1);
 
+//        if (ClassnameMap_.containsKey(hostClassName)) {
+//            throw new RuntimeException("Invalid JsxClasses/JsxClass configuration; two mappings for class '"
+//                + hostClassName + "'.");
+//        }
         CLASS_NAME_MAP_.put(hostClassName, simpleClassName);
         final Map<String, Method> allGetters = new HashMap<>();
         final Map<String, Method> allSetters = new HashMap<>();
@@ -284,12 +280,16 @@ public abstract class AbstractJavaScriptConfiguration {
 
         final Map<Class<?>, Class<? extends SimpleScriptable>> map = new HashMap<>();
 
-        for (final String hostClassName : configuration_.keySet()) {
-            final ClassConfiguration classConfig = getClassConfiguration(hostClassName);
+        for (String hostClassName : configuration_.keySet()) {
+            ClassConfiguration classConfig = getClassConfiguration(hostClassName);
             for (final Class<?> domClass : classConfig.getDomClasses()) {
                 // preload and validate that the class exists
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("Mapping " + domClass.getName() + " to " + hostClassName);
+                }
+                while (!classConfig.isJsObject()) {
+                    hostClassName = classConfig.getExtendedClassName();
+                    classConfig = getClassConfiguration(hostClassName);
                 }
                 map.put(domClass, classConfig.getHostClass());
             }

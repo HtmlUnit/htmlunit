@@ -14,7 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for a ClipboardData.
@@ -22,6 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@JsxClass(browsers = @WebBrowser(IE))
 public final class ClipboardData extends SimpleScriptable {
 
     /**

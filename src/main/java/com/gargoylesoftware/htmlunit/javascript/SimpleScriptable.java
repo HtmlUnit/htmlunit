@@ -412,11 +412,8 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
         if (getPrototype() == null) {
             // to handle cases like "x instanceof HTMLElement",
             // but HTMLElement is not in the prototype chain of any element
-            final Object prototype = get("prototype", this);
-            if (!(prototype instanceof ScriptableObject)) {
-                Context.throwAsScriptRuntimeEx(new Exception("Null prototype"));
-            }
-            return ((ScriptableObject) prototype).hasInstance(instance);
+            final ScriptableObject p = (ScriptableObject) get("prototype", this);
+            return p.hasInstance(instance);
         }
 
         return super.hasInstance(instance);

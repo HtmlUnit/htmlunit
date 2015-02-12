@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Frank Danek
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535854.aspx">MSDN documentation</a>
  */
-@JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = @WebBrowser(IE))
+@JsxClass(browsers = @WebBrowser(value = IE, maxVersion = 8))
 public class Namespace extends SimpleScriptable {
 
     private String name_;

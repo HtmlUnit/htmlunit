@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.geo;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -40,7 +38,6 @@ import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptF
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for Geolocation.
@@ -48,7 +45,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 11) })
+@JsxClass
 public class Geolocation extends SimpleScriptable {
 
     private static final Log LOG = LogFactory.getLog(Geolocation.class);

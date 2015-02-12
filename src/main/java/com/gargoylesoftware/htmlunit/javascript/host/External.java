@@ -14,12 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -30,10 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Peter Faller
  * @author Ronald Brill
  */
-@JsxClasses({
-    @JsxClass(browsers = { @WebBrowser(value = FF, minVersion = 31) }),
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = false)
-})
+@JsxClass
 public class External extends SimpleScriptable {
 
     /**

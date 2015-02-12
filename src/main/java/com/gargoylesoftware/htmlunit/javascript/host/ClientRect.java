@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -33,12 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms535906.aspx">MSDN Documentation</a>
  */
-@JsxClasses({
-    @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24),
-        @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
-        browsers = { @WebBrowser(value = IE, maxVersion = 8) })
-})
+@JsxClass
 public class ClientRect extends SimpleScriptable {
 
     private int bottom_;

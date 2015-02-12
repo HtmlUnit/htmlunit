@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MEDIA_LIST
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MEDIA_LIST_EMPTY_STRING;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -36,7 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+@JsxClass
 public class MediaList extends SimpleScriptable {
 
     private final org.w3c.dom.stylesheets.MediaList wrappedList_;

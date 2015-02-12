@@ -1862,7 +1862,7 @@ public enum BrowserVersionFeatures {
 
     /** IE11 throws a syntax error if a css3 pseudo selector is used on an detached node. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
-    QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE,
+    QUERYSELECTOR_CSS3_PSEUDO_SELECTORS_REQUIRE_ATTACHED_NODE,
 
     /** Document mode is always 5 in quirks mode ignoring the browser version. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))

@@ -25,7 +25,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_REMOVE_THROWS_IF_NEGATIV;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -40,7 +39,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -59,10 +57,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClasses({
-    @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = @WebBrowser(IE))
-})
+@JsxClass
 public class HTMLOptionsCollection extends SimpleScriptable implements ScriptableWithFallbackGetter {
 
     private HtmlSelect htmlSelect_;

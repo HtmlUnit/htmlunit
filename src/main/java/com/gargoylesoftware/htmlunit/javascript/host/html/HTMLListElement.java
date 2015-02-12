@@ -18,7 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLLIST_LIMI
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TYPE_ACCEPTS_ARBITRARY_VALUES;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
@@ -30,7 +30,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@JsxClass(isJSObject = false, isDefinedInStandardsMode = false)
+@JsxClasses(
+        isJSObject = false
+)
 public class HTMLListElement extends HTMLElement {
 
     /**

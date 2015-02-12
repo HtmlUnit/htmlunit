@@ -38,7 +38,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+@JsxClass
 public class CanvasRenderingContext2D extends SimpleScriptable {
 
     /**

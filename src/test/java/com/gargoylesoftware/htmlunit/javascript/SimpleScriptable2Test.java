@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -22,6 +26,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -182,6 +187,8 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("CSSStyleDeclaration>ComputedCSSStyleDeclaration: exception")
+    @NotYetImplemented({ CHROME, FF, IE11 })
+    // TODO Class ComputedCSSStyleDeclaration is unknown in all real browsers
     public void isParentOf_CSSStyleDeclaration_ComputedCSSStyleDeclaration() throws Exception {
         isParentOf("CSSStyleDeclaration", "ComputedCSSStyleDeclaration");
     }

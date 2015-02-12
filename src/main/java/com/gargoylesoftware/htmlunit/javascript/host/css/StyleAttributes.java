@@ -16,8 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff24up;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff31up;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffBelow31;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff31up;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ie11up;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ie8up;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ieBelow11;

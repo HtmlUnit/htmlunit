@@ -28,7 +28,6 @@ import org.w3c.css.sac.CSSException;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
@@ -44,12 +43,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-core.html#ID-B63ED1A3">
  * W3C Dom Level 1</a>
  */
-@JsxClasses({
-    @JsxClass(domClass = DomDocumentFragment.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, domClass = DomDocumentFragment.class,
-        browsers = @WebBrowser(value = IE, maxVersion = 8))
-})
+@JsxClass(domClass = DomDocumentFragment.class)
 public class DocumentFragment extends Node {
 
     //TODO: seems that in IE, DocumentFragment extends HTMLDocument

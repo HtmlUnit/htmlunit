@@ -17,7 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SELECTOR_EMPTY_STRING_HITS_AS_SUBSTRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SELECTOR_LANG;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE;
+import static com.gargoylesoftware.htmlunit.
+                BrowserVersionFeatures.QUERYSELECTOR_CSS3_PSEUDO_SELECTORS_REQUIRE_ATTACHED_NODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EMPTY_IS_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EXPANDURL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_STYLE_EMPTY;
@@ -1189,7 +1190,7 @@ public class CSSStyleSheet extends SimpleScriptable {
                 }
 
                 if (!CSS2_PSEUDO_CLASSES.contains(value)
-                        && domNode.hasFeature(QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE)
+                        && domNode.hasFeature(QUERYSELECTOR_CSS3_PSEUDO_SELECTORS_REQUIRE_ATTACHED_NODE)
                         && !domNode.isDirectlyAttachedToPage()) {
                     throw new CSSException("Syntax Error");
                 }

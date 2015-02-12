@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Frank Danek
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+@JsxClass
 public class TreeWalker extends SimpleScriptable {
 
     private Node root_;

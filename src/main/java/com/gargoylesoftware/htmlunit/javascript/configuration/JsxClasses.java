@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -24,7 +28,6 @@ import java.lang.annotation.Target;
  *
  * @version $Revision$
  * @author Ronald Brill
- * @author Ahmed Ashour
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
@@ -32,4 +35,14 @@ public @interface JsxClasses {
 
     /** The different classes. */
     JsxClass[] value() default { };
+
+    /** Is JavaScript Object. */
+    boolean isJSObject() default true;
+
+    /** The {@link WebBrowser}s supported by this constant. */
+    WebBrowser[] browsers() default {
+        @WebBrowser(IE),
+        @WebBrowser(FF),
+        @WebBrowser(CHROME)
+    };
 }

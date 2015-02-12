@@ -30,7 +30,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlApplet;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -44,12 +43,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Marc Guillemot
  * @author Daniel Gredler
  */
-@JsxClasses({
-    @JsxClass(domClass = HtmlApplet.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, domClass = HtmlApplet.class,
-        browsers = @WebBrowser(value = IE, maxVersion = 8))
-})
+@JsxClass(domClass = HtmlApplet.class)
 public class HTMLAppletElement extends HTMLElement {
 
     /**

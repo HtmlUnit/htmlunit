@@ -14,12 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.geo;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
-
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for Coordinates.
@@ -27,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 11) })
+@JsxClass
 public class Coordinates extends SimpleScriptable {
 
     private double latitude_;

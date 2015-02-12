@@ -20,7 +20,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.HtmlBaseFont;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
@@ -31,11 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClasses({
-    @JsxClass(domClass = HtmlBaseFont.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = true, domClass = HtmlBaseFont.class,
-        browsers = { @WebBrowser(value = IE, maxVersion = 8) })
-})
+@JsxClass(domClass = HtmlBaseFont.class, browsers = @WebBrowser(IE))
 public class HTMLBaseFontElement extends HTMLElement {
 
     /**
