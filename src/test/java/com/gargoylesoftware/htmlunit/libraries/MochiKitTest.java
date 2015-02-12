@@ -15,7 +15,8 @@
 package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.concurrent.TimeUnit;
@@ -103,6 +104,7 @@ public class MochiKitTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented(IE8)
     public void iter() throws Exception {
         doTest("Iter");
     }
@@ -143,7 +145,7 @@ public class MochiKitTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented({ FF, IE })
     public void style() throws Exception {
         doTest("Style");
     }
