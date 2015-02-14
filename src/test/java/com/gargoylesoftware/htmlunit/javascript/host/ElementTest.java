@@ -14,11 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest;
@@ -773,6 +777,7 @@ public class ElementTest extends WebDriverTestCase {
                     + "DOCUMENT_POSITION_FOLLOWING, DOCUMENT_POSITION_CONTAINS, DOCUMENT_POSITION_CONTAINED_BY, "
                     + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC, " },
             IE8 = "exception occured")
+    @NotYetImplemented(CHROME)
     public void enumeratedProperties() throws Exception {
         final String html
             = "<html><head>\n"
@@ -943,6 +948,7 @@ public class ElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "§§URL§§", "§§URL§§" },
             CHROME = { "", "§§URL§§" },
             IE = { "undefined", "undefined" })
+    @NotYetImplemented(CHROME)
     public void baseURI() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -1005,6 +1011,7 @@ public class ElementTest extends WebDriverTestCase {
             FF = { "null", "a b c" },
             IE = { "undefined", "undefined" },
             IE11 = { "undefined", "a b c" })
+    @NotYetImplemented(CHROME)
     public void classList() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -1184,4 +1191,73 @@ public class ElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "function Element() {\n    [native code]\n}",
+            "[object ElementPrototype]", "function Element() {\n    [native code]\n}" },
+            CHROME = { "function Element() { [native code] }", "[object Object]",
+            "function Element() { [native code] }" },
+            IE8 = "exception")
+    @NotYetImplemented({ FF, CHROME })
+    public void prototypConstructor() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      process(Element);\n"
+            + "      process(Element.prototype);\n"
+            + "      process(Element.prototype.constructor);\n"
+            + "    } catch (e) {alert('exception')}\n"
+            + "  }\n"
+            + "  function process(obj) {\n"
+            + "    try {\n"
+            + "      alert(obj);\n"
+            + "    } catch (e) {alert('exception')}\n"
+            +"   }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "function Element() {\n    [native code]\n}",
+            "[object ElementPrototype]", "function Element() {\n    [native code]\n}" },
+            CHROME = { "function Element() { [native code] }", "[object Object]",
+            "function Element() { [native code] }" },
+            IE8 = "exception")
+    @NotYetImplemented({ FF, CHROME })
+    public void prototypConstructorStandards() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      process(Element);\n"
+            + "      process(Element.prototype);\n"
+            + "      process(Element.prototype.constructor);\n"
+            + "    } catch (e) {alert('exception')}\n"
+            + "  }\n"
+            + "  function process(obj) {\n"
+            + "    try {\n"
+            + "      alert(obj);\n"
+            + "    } catch (e) {alert('exception')}\n"
+            +"   }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }
