@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -71,9 +71,10 @@ public class MooTools121Test extends WebDriverTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    @Alerts(DEFAULT = { "364", "0", "0" },
-            CHROME = { "364", "1", "0",
+    @Alerts(CHROME = { "364", "1", "0",
                     "should return the function bound to an object with multiple arguments" },
+            IE8 = { "364", "0", "1",
+                    "should return a CSS string representing the Element's styles" },
             IE11 = { "364", "2", "0",
                     "should return the function bound to an object with multiple arguments",
                     "should return a CSS string representing the Element's styles" },
@@ -81,7 +82,7 @@ public class MooTools121Test extends WebDriverTestCase {
                     "should return true if the string constains the string and separator otherwise false",
                     "should return the function bound to an object with multiple arguments" })
     @Test
-    @NotYetImplemented(IE11)
+    @NotYetImplemented(IE)
     public void mooTools() throws Exception {
         final WebDriver driver = getWebDriver();
         driver.get("http://localhost:" + PORT + "/Specs/index.html");
