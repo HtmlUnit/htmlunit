@@ -29,7 +29,7 @@ import org.junit.Test;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
 /**
- * Tests that {@link HostClassNameTest} contains all host classes defined.
+ * Tests that {@link HostClassNameStandardsTest} and {@link HostClassNameTest} contain all host classes defined.
  *
  * @version $Revision: 9935 $
  * @author Ahmed Ashour
@@ -40,7 +40,44 @@ public class HostClassNameCompleteTest {
      * @throws Exception if an error occurs.
      */
     @Test
-    public void test() throws Exception {
+    public void hostClassNameStandardsTest() throws Exception {
+        final File file = new File(
+                "./src/test/java/com/gargoylesoftware/htmlunit/javascript/HostClassNameStandardsTest.java");
+        assertTrue(file.exists());
+        try (final Reader reader = new FileReader(file)) {
+            final List<String> lines = IOUtils.readLines(reader);
+
+            final Field field = JavaScriptConfiguration.class.getDeclaredField("CLASSES_");
+            field.setAccessible(true);
+
+            final StringBuilder notFoundList = new StringBuilder();
+            for (final Class<?> c : (Class<?>[]) field.get(null)) {
+                final String name = c.getSimpleName();
+                boolean found = false;
+                for (final String line : lines) {
+                    if (line.contains("\"" + name + "\"")) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    if (notFoundList.length() != 0) {
+                        notFoundList.append(", ");
+                    }
+                    notFoundList.append(name);
+                }
+            }
+            if (notFoundList.length() != 0) {
+                fail("HostClassNameStandardsTest: Could not find test case for " + notFoundList);
+            }
+        }
+    }
+
+    /**
+     * @throws Exception if an error occurs.
+     */
+    @Test
+    public void hostClassNameTest() throws Exception {
         final File file = new File("./src/test/java/com/gargoylesoftware/htmlunit/javascript/HostClassNameTest.java");
         assertTrue(file.exists());
         try (final Reader reader = new FileReader(file)) {
@@ -67,7 +104,7 @@ public class HostClassNameCompleteTest {
                 }
             }
             if (notFoundList.length() != 0) {
-                fail("Could not find test case for " + notFoundList);
+                fail("HostClassNameTest: Could not find test case for " + notFoundList);
             }
         }
     }

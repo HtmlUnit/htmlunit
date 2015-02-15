@@ -29,23 +29,24 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
- * Tests the host class names match the Firefox (w3c names).
+ * Tests the host class names match the Firefox (w3c names), in Standards Mode.
  *
  * @version $Revision: 9935 $
  * @author Ahmed Ashour
  * @author Ronald Brill
  *
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API">Web API Interfaces</a>
- * @see HostClassNameStandardsTest
+ * @see HostClassNameTest
  */
 @RunWith(BrowserRunner.class)
-public class HostClassNameTest extends WebDriverTestCase {
+public class HostClassNameStandardsTest extends WebDriverTestCase {
 
     private void testHostClassName(final String className) throws Exception {
-        final String html =
-            "<html><head><title>foo</title><script>\n"
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
             + "      alert(" + className + ");\n"
@@ -3412,8 +3413,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Window]",
-            CHROME = "function Window() { [native code] }",
-            IE8 = "exception")
+            CHROME = "function Window() { [native code] }")
     public void window() throws Exception {
         testHostClassName("Window");
     }
