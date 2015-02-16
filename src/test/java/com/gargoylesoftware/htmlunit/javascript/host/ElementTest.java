@@ -24,6 +24,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -616,12 +617,13 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLDivElement]", "div",
                 "[object HTMLUnknownElement]", "dIv"
                 },
-            IE8 = {"[object]", "dIv",
-                "[object]", "html",
-                "[object]", "div",
-                "[object]", "dIv"
+            IE8 = {"[object Error]", "dIv",
+                "[object Error]", "html",
+                "[object Error]", "div",
+                "[object Error]", "dIv"
                 })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    @NotYetImplemented(Browser.IE8)
     public void xml_nodeName() throws Exception {
         xml("nodeName");
     }
@@ -635,12 +637,13 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLDivElement]", "div",
                 "[object HTMLUnknownElement]", "dIv"
                 },
-            IE8 = {"[object]", "dIv",
-                "[object]", "html",
-                "[object]", "div",
-                "[object]", "dIv"
+            IE8 = {"[object Error]", "dIv",
+                "[object Error]", "html",
+                "[object Error]", "div",
+                "[object Error]", "dIv"
                 })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    @NotYetImplemented(Browser.IE8)
     public void xml_tagName() throws Exception {
         xml("tagName");
     }
@@ -654,12 +657,13 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLDivElement]", "null",
                 "[object HTMLUnknownElement]", "null"
                 },
-            IE8 = {"[object]", "",
-                "[object]", "",
-                "[object]", "",
-                "[object]", ""
+            IE8 = {"[object Error]", "",
+                "[object Error]", "",
+                "[object Error]", "",
+                "[object Error]", ""
                 })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    @NotYetImplemented(Browser.IE8)
     public void xml_prefix() throws Exception {
         xml("prefix");
     }
@@ -673,12 +677,13 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLDivElement]", "div",
                 "[object HTMLUnknownElement]", "dIv"
                 },
-            IE8 = {"[object]", "undefined",
-                "[object]", "undefined",
-                "[object]", "undefined",
-                "[object]", "undefined"
+            IE8 = {"[object Error]", "undefined",
+                "[object Error]", "undefined",
+                "[object Error]", "undefined",
+                "[object Error]", "undefined"
                 })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    @NotYetImplemented(Browser.IE8)
     public void xml_localName() throws Exception {
         xml("localName");
     }
@@ -692,12 +697,13 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLDivElement]", "undefined",
                 "[object HTMLUnknownElement]", "undefined"
                 },
-            IE8 = {"[object]", "dIv",
-                "[object]", "html",
-                "[object]", "div",
-                "[object]", "dIv"
+            IE8 = {"[object Error]", "dIv",
+                "[object Error]", "html",
+                "[object Error]", "div",
+                "[object Error]", "dIv"
                 })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    @NotYetImplemented(Browser.IE8)
     public void xml_baseName() throws Exception {
         xml("baseName");
     }
@@ -711,12 +717,13 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLDivElement]", "http://www.w3.org/1999/xhtml",
                 "[object HTMLUnknownElement]", "http://www.w3.org/1999/xhtml"
                 },
-            IE8 = {"[object]", "",
-                "[object]", "http://www.w3.org/1999/xhtml",
-                "[object]", "http://www.w3.org/1999/xhtml",
-                "[object]", "http://www.w3.org/1999/xhtml"
+            IE8 = {"[object Error]", "",
+                "[object Error]", "http://www.w3.org/1999/xhtml",
+                "[object Error]", "http://www.w3.org/1999/xhtml",
+                "[object Error]", "http://www.w3.org/1999/xhtml"
                 })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
+    @NotYetImplemented(Browser.IE8)
     public void xml_namespaceURI() throws Exception {
         xml("namespaceURI");
     }
