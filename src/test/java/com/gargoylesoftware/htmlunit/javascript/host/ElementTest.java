@@ -1237,7 +1237,7 @@ public class ElementTest extends WebDriverTestCase {
             "[object ElementPrototype]", "function Element() {\n    [native code]\n}" },
             CHROME = { "function Element() { [native code] }", "[object Object]",
             "function Element() { [native code] }" },
-            IE8 = { "[object Element]", "[Interface prototype object]", "null"},
+            IE8 = { "[object Element]", "[Interface prototype object]", "null" },
             IE11 = { "[object Element]", "[object ElementPrototype]", "[object Element]" })
     @NotYetImplemented({ FF, CHROME, IE })
     public void prototypConstructorStandards() throws Exception {
