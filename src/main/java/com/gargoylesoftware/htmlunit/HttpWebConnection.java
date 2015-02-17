@@ -90,6 +90,7 @@ import org.apache.http.conn.socket.LayeredConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContexts;
 import org.apache.http.conn.ssl.X509HostnameVerifier;
+import org.apache.http.cookie.ClientCookie;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.cookie.CookieSpec;
 import org.apache.http.cookie.CookieSpecProvider;
@@ -980,7 +981,7 @@ class HtmlUnitCookieStore implements CookieStore, Serializable {
      * {@inheritDoc}
      */
     public synchronized void addCookie(final Cookie cookie) {
-        manager_.addCookie(new com.gargoylesoftware.htmlunit.util.Cookie(cookie));
+        manager_.addCookie(new com.gargoylesoftware.htmlunit.util.Cookie((ClientCookie) cookie));
     }
 
     /**

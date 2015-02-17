@@ -53,6 +53,7 @@ import org.apache.http.HttpStatus;
 import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.cookie.CookieOrigin;
+import org.apache.http.cookie.CookieSpec;
 import org.w3c.css.sac.ErrorHandler;
 
 import com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLActiveXObjectFactory;
@@ -2156,11 +2157,15 @@ public class WebClient implements Serializable {
         cookieManager.clearExpired(new Date());
 
         final org.apache.http.cookie.Cookie[] all = Cookie.toHttpClient(cookieManager.getCookies());
-        final CookieOrigin cookieOrigin = new CookieOrigin(host, port, path, secure);
         final List<org.apache.http.cookie.Cookie> matches = new ArrayList<>();
-        for (final org.apache.http.cookie.Cookie cookie : all) {
-            if (new HtmlUnitBrowserCompatCookieSpec(getBrowserVersion()).match(cookie, cookieOrigin)) {
-                matches.add(cookie);
+
+        if (all.length > 0) {
+            final CookieOrigin cookieOrigin = new CookieOrigin(host, port, path, secure);
+            final CookieSpec cookieSpec = new HtmlUnitBrowserCompatCookieSpec(getBrowserVersion());
+            for (final org.apache.http.cookie.Cookie cookie : all) {
+                if (cookieSpec.match(cookie, cookieOrigin)) {
+                    matches.add(cookie);
+                }
             }
         }
 

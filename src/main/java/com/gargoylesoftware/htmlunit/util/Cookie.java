@@ -18,8 +18,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -32,6 +34,7 @@ import org.apache.http.cookie.ClientCookie;
  * @author Daniel Gredler
  * @author Nicolas Belisle
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class Cookie implements Serializable {
 
@@ -55,6 +58,22 @@ public class Cookie implements Serializable {
 
     /** Whether or not this cookie is HTTP only (i.e. not available from JS). */
     private final boolean httponly_;
+
+    /** Cookie attributes from HttpClient */
+    private Map<String, String> attribs_;
+
+    private static final String[] HTTPCLIENT_COOKIE_ATTRIBUTES = new String[] {
+        ClientCookie.VERSION_ATTR,
+        ClientCookie.PATH_ATTR,
+        ClientCookie.DOMAIN_ATTR,
+        ClientCookie.MAX_AGE_ATTR,
+        ClientCookie.SECURE_ATTR,
+        ClientCookie.COMMENT_ATTR,
+        ClientCookie.EXPIRES_ATTR,
+        ClientCookie.PORT_ATTR,
+        ClientCookie.COMMENTURL_ATTR,
+        ClientCookie.DISCARD_ATTR
+    };
 
     /**
      * Creates a new cookie with the specified name and value which applies to the specified domain.
@@ -111,9 +130,16 @@ public class Cookie implements Serializable {
      * Creates a new HtmlUnit cookie from the HttpClient cookie provided.
      * @param c the HttpClient cookie
      */
-    public Cookie(final org.apache.http.cookie.Cookie c) {
+    public Cookie(final ClientCookie c) {
         this(c.getDomain(), c.getName(), c.getValue(), c.getPath(), c.getExpiryDate(),
-                c.isSecure(), ((ClientCookie) c).getAttribute("httponly") != null);
+                c.isSecure(), c.getAttribute("httponly") != null);
+
+        attribs_ = new HashMap<String, String>();
+        for (String attribName : HTTPCLIENT_COOKIE_ATTRIBUTES) {
+            if (c.containsAttribute(attribName)) {
+                attribs_.put(attribName, c.getAttribute(attribName));
+            }
+        }
     }
 
     /**
@@ -256,6 +282,16 @@ public class Cookie implements Serializable {
         if (httponly_) {
             cookie.setAttribute("httponly", "true");
         }
+
+        // if we have some more attribs
+        if (null != attribs_) {
+            for (String attribName : HTTPCLIENT_COOKIE_ATTRIBUTES) {
+                if (attribs_.containsKey(attribName)) {
+                    cookie.setAttribute(attribName, attribs_.get(attribName));
+                }
+            }
+        }
+
         return cookie;
     }
 
@@ -281,7 +317,7 @@ public class Cookie implements Serializable {
     public static List<Cookie> fromHttpClient(final List<org.apache.http.cookie.Cookie> cookies) {
         final List<Cookie> list = new ArrayList<>(cookies.size());
         for (org.apache.http.cookie.Cookie c : cookies) {
-            list.add(new Cookie(c));
+            list.add(new Cookie((ClientCookie) c));
         }
         return list;
     }
