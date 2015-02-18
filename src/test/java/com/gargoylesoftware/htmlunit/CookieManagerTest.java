@@ -525,10 +525,13 @@ public class CookieManagerTest extends WebDriverTestCase {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1"));
 
-        final String html = "<head><body><script>\n"
-            + "document.cookie = 'first=new';\n"
-            + "location.replace('/a/b/-');\n"
-            + "</script></body></html>";
+        final String html = "<html>\n"
+            + "<head></head>\n"
+            + "<body><script>\n"
+            + "  document.cookie = 'first=new';\n"
+            + "  location.replace('/a/b/-');\n"
+            + "</script></body>\n"
+            + "</html>";
 
         getMockWebConnection().setDefaultResponse(HTML_ALERT_COOKIE);
         final URL firstUrl = new URL(getDefaultUrl(), "/a/b");
@@ -547,10 +550,13 @@ public class CookieManagerTest extends WebDriverTestCase {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; path=/c"));
 
-        final String html = "<head><body><script>\n"
-            + "document.cookie = 'first=new';\n"
-            + "location.replace('/c/test.html');\n"
-            + "</script></body></html>";
+        final String html = "<html>\n"
+            + "<head></head>\n"
+            + "<body><script>\n"
+            + "  document.cookie = 'first=new';\n"
+            + "  location.replace('/c/test.html');\n"
+            + "</script></body>\n"
+            + "</html>";
 
         getMockWebConnection().setDefaultResponse(HTML_ALERT_COOKIE);
         final URL firstUrl = new URL(getDefaultUrl(), "/a/b");
