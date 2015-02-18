@@ -63,4 +63,29 @@ public class CookieManager4Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(firstUrl);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "cross-domain=1")
+    public void differentHostsSameDomainCookieFromMeta() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <meta http-equiv='Set-Cookie', content='cross-domain=1; Domain=.htmlunit.org; Path=/'>"
+            + "</head>\n"
+            + "<body>\n"
+            + "<p>Cookie Domain Test</p>\n"
+            + "<script>\n"
+            + "  location.replace('http://host2.htmlunit.org:" + PORT + "/" + "');\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE);
+        final URL firstUrl = new URL("http://host1.htmlunit.org:" + PORT + "/");
+        getMockWebConnection().setResponse(firstUrl, html);
+
+        loadPageWithAlerts2(firstUrl);
+    }
 }

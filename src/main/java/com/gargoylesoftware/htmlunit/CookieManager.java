@@ -112,17 +112,11 @@ public class CookieManager implements Serializable {
             return Collections.emptySet();
         }
 
-        final String path = url.getPath();
-        final String protocol = url.getProtocol();
-        final boolean secure = "https".equals(protocol);
-
-        final int port = getPort(url);
-
         // discard expired cookies
         clearExpired(new Date());
 
         final org.apache.http.cookie.Cookie[] all = Cookie.toHttpClient(cookies_);
-        final CookieOrigin cookieOrigin = new CookieOrigin(host, port, path, secure);
+        final CookieOrigin cookieOrigin = buildCookieOrigin(url);
         final List<org.apache.http.cookie.Cookie> matches = new ArrayList<>();
         for (final org.apache.http.cookie.Cookie cookie : all) {
             if (cookieSpec_.match(cookie, cookieOrigin)) {
@@ -133,6 +127,15 @@ public class CookieManager implements Serializable {
         final Set<Cookie> cookies = new LinkedHashSet<>();
         cookies.addAll(Cookie.fromHttpClient(matches));
         return Collections.unmodifiableSet(cookies);
+    }
+
+    /**
+     * Helper that builds a CookieOrigin.
+     * @param url the url to be used
+     * @return the new CookieOrigin
+     */
+    public CookieOrigin buildCookieOrigin(final URL url) {
+        return new CookieOrigin(url.getHost(), getPort(url), url.getPath(), "https".equals(url.getProtocol()));
     }
 
     /**

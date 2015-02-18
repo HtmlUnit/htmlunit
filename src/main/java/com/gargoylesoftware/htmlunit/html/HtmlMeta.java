@@ -15,14 +15,20 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.net.URL;
-import java.util.Date;
-import java.util.Locale;
+import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.http.cookie.ClientCookie;
+import org.apache.http.cookie.CookieSpec;
+import org.apache.http.cookie.MalformedCookieException;
+import org.apache.http.message.BufferedHeader;
+import org.apache.http.util.CharArrayBuffer;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.CookieManager;
+import com.gargoylesoftware.htmlunit.HtmlUnitBrowserCompatCookieSpec;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 
 /**
@@ -33,9 +39,9 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class HtmlMeta extends HtmlElement {
-    private static final Pattern COOKIES_SPLIT_PATTERN = Pattern.compile("\\s*;\\s*");
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "meta";
@@ -61,29 +67,31 @@ public class HtmlMeta extends HtmlElement {
      * like <tt>&lt;meta http-equiv='set-cookie' content='webm=none; path=/;'&gt;</tt>.
      */
     protected void performSetCookie() {
-        final String[] parts = COOKIES_SPLIT_PATTERN.split(getContentAttribute(), 0);
-        final String name = StringUtils.substringBefore(parts[0], "=");
-        final String value = StringUtils.substringAfter(parts[0], "=");
-        final URL url = getPage().getUrl();
-        final String host = url.getHost();
-        final boolean secure = "https".equals(url.getProtocol());
-        String path = null;
-        Date expires = null;
-        for (int i = 1; i < parts.length; i++) {
-            final String partName = StringUtils.substringBefore(parts[i], "=").trim().toLowerCase(Locale.ENGLISH);
-            final String partValue = StringUtils.substringAfter(parts[i], "=").trim();
-            if ("path".equals(partName)) {
-                path = partValue;
-            }
-            else if ("expires".equals(partName)) {
-                expires = com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate(partValue);
-            }
-            else {
-                notifyIncorrectness("set-cookie http-equiv meta tag: unknown attribute '" + partName + "'.");
+        final String content = getContentAttribute();
+        final CharArrayBuffer buffer = new CharArrayBuffer(content.length() + 12);
+        buffer.append("Set-Cookie: ");
+        buffer.append(content);
+
+        final SgmlPage page = getPage();
+        final WebClient client = page.getWebClient();
+        final BrowserVersion browserVersion = client.getBrowserVersion();
+        final URL url = page.getUrl();
+        final CookieManager cookieManager = client.getCookieManager();
+        final CookieSpec cookieSpec = new HtmlUnitBrowserCompatCookieSpec(browserVersion);
+
+        try {
+            final List<org.apache.http.cookie.Cookie> cookies =
+                    cookieSpec.parse(new BufferedHeader(buffer), cookieManager.buildCookieOrigin(url));
+
+            for (org.apache.http.cookie.Cookie cookie : cookies) {
+                final Cookie htmlUnitCookie = new Cookie((ClientCookie) cookie);
+                cookieManager.addCookie(htmlUnitCookie);
             }
         }
-        final Cookie cookie = new Cookie(host, name, value, path, expires, secure);
-        getPage().getWebClient().getCookieManager().addCookie(cookie);
+        catch (final MalformedCookieException e) {
+            notifyIncorrectness("set-cookie http-equiv meta tag: invalid cookie '"
+                    + content + "'; reason: '" + e.getMessage() + "'.");
+        }
     }
 
     /**

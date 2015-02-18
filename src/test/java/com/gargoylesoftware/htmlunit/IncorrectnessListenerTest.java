@@ -34,7 +34,7 @@ public final class IncorrectnessListenerTest extends SimpleWebTestCase {
     @Test
     public void testNotification() throws Exception {
         final String html = "<html><head>\n"
-                + "<meta http-equiv='set-cookie' content='webm=none; path=/; a=b;'>\n"
+                + "<meta http-equiv='set-cookie' content=''>\n"
                 + "</head>\n"
                 + "<body></body>\n"
                 + "</html>";
@@ -54,7 +54,7 @@ public final class IncorrectnessListenerTest extends SimpleWebTestCase {
         webClient.getPage(URL_FIRST);
 
         final String[] expectedIncorrectness = {
-            "set-cookie http-equiv meta tag: unknown attribute 'a'."
+            "set-cookie http-equiv meta tag: invalid cookie ''; reason: 'Cookie name may not be empty'."
         };
         assertEquals(expectedIncorrectness, collectedIncorrectness);
     }
