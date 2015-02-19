@@ -15,21 +15,10 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.net.URL;
-import java.util.List;
 import java.util.Map;
 
-import org.apache.http.cookie.ClientCookie;
-import org.apache.http.cookie.CookieSpec;
-import org.apache.http.cookie.MalformedCookieException;
-import org.apache.http.message.BufferedHeader;
-import org.apache.http.util.CharArrayBuffer;
-
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.CookieManager;
-import com.gargoylesoftware.htmlunit.HtmlUnitBrowserCompatCookieSpec;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.util.Cookie;
 
 /**
  * Wrapper for the HTML element "meta".
@@ -67,31 +56,10 @@ public class HtmlMeta extends HtmlElement {
      * like <tt>&lt;meta http-equiv='set-cookie' content='webm=none; path=/;'&gt;</tt>.
      */
     protected void performSetCookie() {
-        final String content = getContentAttribute();
-        final CharArrayBuffer buffer = new CharArrayBuffer(content.length() + 12);
-        buffer.append("Set-Cookie: ");
-        buffer.append(content);
-
         final SgmlPage page = getPage();
         final WebClient client = page.getWebClient();
-        final BrowserVersion browserVersion = client.getBrowserVersion();
         final URL url = page.getUrl();
-        final CookieManager cookieManager = client.getCookieManager();
-        final CookieSpec cookieSpec = new HtmlUnitBrowserCompatCookieSpec(browserVersion);
-
-        try {
-            final List<org.apache.http.cookie.Cookie> cookies =
-                    cookieSpec.parse(new BufferedHeader(buffer), cookieManager.buildCookieOrigin(url));
-
-            for (org.apache.http.cookie.Cookie cookie : cookies) {
-                final Cookie htmlUnitCookie = new Cookie((ClientCookie) cookie);
-                cookieManager.addCookie(htmlUnitCookie);
-            }
-        }
-        catch (final MalformedCookieException e) {
-            notifyIncorrectness("set-cookie http-equiv meta tag: invalid cookie '"
-                    + content + "'; reason: '" + e.getMessage() + "'.");
-        }
+        client.addCookie(getContentAttribute(), url, this);
     }
 
     /**

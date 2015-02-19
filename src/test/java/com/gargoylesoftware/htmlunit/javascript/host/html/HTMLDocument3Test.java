@@ -14,15 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.HtmlUnitBrowserCompatCookieSpec.EMPTY_COOKIE_NAME;
-import static com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate;
-
-import java.util.Date;
-
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.util.Cookie;
 
 /**
  * Tests for {@link HTMLDocument}.
@@ -55,44 +49,5 @@ public class HTMLDocument3Test extends WebTestCase {
 
         // check quoting only inside script tags
         assertTrue(HTMLDocument.canAlreadyBeParsed("<script>var test ='abc';</script><p>it's fun</p>"));
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void buildCookie() throws Exception {
-        final String domain = URL_FIRST.getHost();
-        checkCookie(HTMLDocument.buildCookie("", URL_FIRST), EMPTY_COOKIE_NAME, "", "/", domain, false, null);
-        checkCookie(HTMLDocument.buildCookie("toto", URL_FIRST), EMPTY_COOKIE_NAME, "toto", "/", domain, false, null);
-        checkCookie(HTMLDocument.buildCookie("toto=", URL_FIRST), "toto", "", "/", domain, false, null);
-        checkCookie(HTMLDocument.buildCookie("toto=foo", URL_FIRST), "toto", "foo", "/", domain, false, null);
-        checkCookie(HTMLDocument.buildCookie("toto=foo;secure", URL_FIRST), "toto", "foo", "/", domain, true, null);
-        checkCookie(HTMLDocument.buildCookie("toto=foo;path=/myPath;secure", URL_FIRST),
-                "toto", "foo", "/myPath", domain, true, null);
-
-        // Check that leading and trailing whitespaces are ignored
-        checkCookie(HTMLDocument.buildCookie("   toto=foo;  path=/myPath  ; secure  ", URL_FIRST),
-                "toto", "foo", "/myPath", domain, true, null);
-
-        // Check that we accept reserved attribute names (e.g expires, domain) in any case
-        checkCookie(HTMLDocument.buildCookie("toto=foo; PATH=/myPath; SeCURE", URL_FIRST),
-                "toto", "foo", "/myPath", domain, true, null);
-
-        // Check that we are able to parse and set the expiration date correctly
-        final String dateString = "Fri, 21 Jul 2006 20:47:11 UTC";
-        final Date date = parseHttpDate(dateString);
-        checkCookie(HTMLDocument.buildCookie("toto=foo; expires=" + dateString, URL_FIRST),
-                "toto", "foo", "/", domain, false, date);
-    }
-
-    private void checkCookie(final Cookie cookie, final String name, final String value,
-            final String path, final String domain, final boolean secure, final Date date) {
-        assertEquals(name, cookie.getName());
-        assertEquals(value, cookie.getValue());
-        assertEquals(path, cookie.getPath());
-        assertEquals(domain, cookie.getDomain());
-        assertEquals(secure, cookie.isSecure());
-        assertEquals(date, cookie.getExpires());
     }
 }

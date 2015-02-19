@@ -70,7 +70,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -92,7 +91,6 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.DocumentType;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.CookieManager;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.HtmlUnitBrowserCompatCookieSpec;
 import com.gargoylesoftware.htmlunit.ScriptResult;
@@ -944,19 +942,12 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxSetter
     public void setCookie(final String newCookie) {
-        final CookieManager cookieManager = getHtmlPage().getWebClient().getCookieManager();
-        if (cookieManager.isCookiesEnabled()) {
-            URL url = getHtmlPage().getUrl();
-            url = replaceForCookieIfNecessary(url);
-            final Cookie cookie = buildCookie(newCookie, url);
-            cookieManager.addCookie(cookie);
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Added cookie: " + cookie);
-            }
-        }
-        else if (LOG.isDebugEnabled()) {
-            LOG.debug("Skipped adding cookie: " + newCookie);
-        }
+        final HtmlPage page = getHtmlPage();
+        final WebClient client = page.getWebClient();
+        URL url = getHtmlPage().getUrl();
+        url = replaceForCookieIfNecessary(url);
+
+        client.addCookie(newCookie, url, this);
     }
 
     /**
@@ -979,74 +970,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             }
         }
         return url;
-    }
-
-    /**
-     * Builds a cookie object from the string representation allowed in JS.
-     * @param newCookie in the format "name=value[;expires=date][;domain=domainname][;path=path][;secure]
-     * @param currentURL the URL of the current page
-     * @return the cookie
-     */
-    public static Cookie buildCookie(final String newCookie, final URL currentURL) {
-        // Pull out the cookie name and value.
-        String name, value;
-        final StringTokenizer st = new StringTokenizer(newCookie, ";");
-        if (newCookie.contains("=")) {
-            final String nameAndValue = st.nextToken();
-            name = StringUtils.substringBefore(nameAndValue, "=").trim();
-            value = StringUtils.substringAfter(nameAndValue, "=").trim();
-        }
-        else {
-            name = HtmlUnitBrowserCompatCookieSpec.EMPTY_COOKIE_NAME;
-            value = newCookie;
-        }
-
-        // Default attribute values (note: HttpClient doesn't like null paths).
-        final Map<String, Object> atts = new HashMap<>();
-        atts.put("domain", currentURL.getHost());
-        atts.put("path", getDefaultCookiePath(currentURL));
-
-        // Custom attribute values.
-        while (st.hasMoreTokens()) {
-            final String token = st.nextToken();
-            final int indexEqual = token.indexOf('=');
-            if (indexEqual > -1) {
-                atts.put(token.substring(0, indexEqual).trim().toLowerCase(Locale.ENGLISH),
-                        token.substring(indexEqual + 1).trim());
-            }
-            else {
-                atts.put(token.trim().toLowerCase(Locale.ENGLISH), Boolean.TRUE);
-            }
-        }
-
-        // Try to parse the <expires> value as a date if specified.
-        final String date = (String) atts.get("expires");
-        final Date expires = parseHttpDate(date);
-
-        // Build the cookie.
-        final String domain = (String) atts.get("domain");
-        final String path = (String) atts.get("path");
-        final boolean secure = (atts.get("secure") != null);
-        final Cookie cookie = new Cookie(domain, name, value, path, expires, secure);
-
-        return cookie;
-    }
-
-    /**
-     * Same logic than in CookieSpecBase#getDefaultPath which is protected.
-     */
-    private static String getDefaultCookiePath(final URL url) {
-        String path = url.getPath();
-        final int lastSlashIndex = path.lastIndexOf('/');
-        if (lastSlashIndex >= 0) {
-            if (lastSlashIndex == 0) {
-                path = "/";
-            }
-            else {
-                path = path.substring(0, lastSlashIndex);
-            }
-        }
-        return path;
     }
 
     /**

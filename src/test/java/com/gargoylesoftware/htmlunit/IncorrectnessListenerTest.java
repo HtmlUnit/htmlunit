@@ -25,6 +25,7 @@ import org.junit.runner.RunWith;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public final class IncorrectnessListenerTest extends SimpleWebTestCase {
@@ -34,12 +35,14 @@ public final class IncorrectnessListenerTest extends SimpleWebTestCase {
     @Test
     public void testNotification() throws Exception {
         final String html = "<html><head>\n"
-                + "<meta http-equiv='set-cookie' content=''>\n"
+                + "  <script src='script.js'></script>\n"
                 + "</head>\n"
-                + "<body></body>\n"
+                + "<body>\n"
+                + "</body>\n"
                 + "</html>";
 
         final WebClient webClient = getWebClient();
+
         final List<String> collectedIncorrectness = new ArrayList<>();
         final IncorrectnessListener listener = new IncorrectnessListener() {
             public void notify(final String message, final Object origin) {
@@ -50,11 +53,12 @@ public final class IncorrectnessListenerTest extends SimpleWebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection();
         webClient.setWebConnection(webConnection);
-        webConnection.setDefaultResponse(html);
+        webConnection.setResponse(URL_FIRST, html);
+        webConnection.setDefaultResponse("alert('Hello');", "application/x-javascript");
         webClient.getPage(URL_FIRST);
 
         final String[] expectedIncorrectness = {
-            "set-cookie http-equiv meta tag: invalid cookie ''; reason: 'Cookie name may not be empty'."
+            "Obsolete content type encountered: 'application/x-javascript'."
         };
         assertEquals(expectedIncorrectness, collectedIncorrectness);
     }

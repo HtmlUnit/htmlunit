@@ -14,19 +14,23 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.HtmlUnitBrowserCompatCookieSpec.EMPTY_COOKIE_NAME;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.SerializationUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.util.Cookie;
 
 /**
  * Tests for {@link WebClient} that run with BrowserRunner.
@@ -279,4 +283,48 @@ public class WebClient2Test extends SimpleWebTestCase {
         assertEquals("undefined", result2.getJavaScriptResult());
     }
 
+  /**
+   * @throws Exception if the test fails
+   */
+    @Test
+    public void buildCookie() throws Exception {
+        checkCookie("", EMPTY_COOKIE_NAME, "", "/", false, null);
+        checkCookie("toto", EMPTY_COOKIE_NAME, "toto", "/", false, null);
+        checkCookie("toto=", "toto", "", "/", false, null);
+        checkCookie("toto=foo", "toto", "foo", "/", false, null);
+        checkCookie("toto=foo;secure", "toto", "foo", "/", true, null);
+        checkCookie("toto=foo;path=/myPath;secure", "toto", "foo", "/myPath", true, null);
+
+        // Check that leading and trailing whitespaces are ignored
+        checkCookie("  toto", EMPTY_COOKIE_NAME, "toto", "/", false, null);
+        checkCookie("  = toto", EMPTY_COOKIE_NAME, "toto", "/", false, null);
+        checkCookie("   toto=foo;  path=/myPath  ; secure  ",
+              "toto", "foo", "/myPath", true, null);
+
+        // Check that we accept reserved attribute names (e.g expires, domain) in any case
+        checkCookie("toto=foo; PATH=/myPath; SeCURE",
+              "toto", "foo", "/myPath", true, null);
+
+        // Check that we are able to parse and set the expiration date correctly
+        final String dateString = "Fri, 21 Jul 2017 20:47:11 UTC";
+        final Date date = DateUtils.parseDate(dateString, "EEE, dd MMM yyyy HH:mm:ss z");
+        checkCookie("toto=foo; expires=" + dateString, "toto", "foo", "/", false, date);
+    }
+
+    private void checkCookie(final String cookieString, final String name, final String value,
+            final String path, final boolean secure, final Date date) {
+
+        final String domain = URL_FIRST.getHost();
+
+        getWebClient().getCookieManager().clearCookies();
+        getWebClient().addCookie(cookieString, URL_FIRST, this);
+        final Cookie cookie = getWebClient().getCookieManager().getCookies().iterator().next();
+
+        assertEquals(name, cookie.getName());
+        assertEquals(value, cookie.getValue());
+        assertEquals(path, cookie.getPath());
+        assertEquals(domain, cookie.getDomain());
+        assertEquals(secure, cookie.isSecure());
+        assertEquals(date, cookie.getExpires());
+    }
 }

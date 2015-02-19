@@ -1589,13 +1589,36 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "    <head>\n"
             + "        <script>\n"
             + "            alert(document.cookie);\n"
-            + "            document.cookie = 'a';\n"
+            + "            document.cookie='a';\n"
             + "            alert(document.cookie);\n"
-            + "            document.cookie = '';\n"
+            + "            document.cookie='';\n"
             + "            alert(document.cookie);\n"
-            + "            document.cookie = 'b';\n"
+            + "            document.cookie='b';\n"
             + "            alert(document.cookie);\n"
-            + "            document.cookie = '';\n"
+            + "            document.cookie='';\n"
+            + "            alert(document.cookie);\n"
+            + "        </script>\n"
+            + "    </head>\n"
+            + "    <body>abc</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "", "a", "b" })
+    public void cookie_write_valueOnly() throws Exception {
+        final String html =
+              "<html>\n"
+            + "    <head>\n"
+            + "        <script>\n"
+            + "            alert(document.cookie);\n"
+            + "            document.cookie='a';\n"
+            + "            alert(document.cookie);\n"
+            + "            document.cookie='=b';\n"
             + "            alert(document.cookie);\n"
             + "        </script>\n"
             + "    </head>\n"

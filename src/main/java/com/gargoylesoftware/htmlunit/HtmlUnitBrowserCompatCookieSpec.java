@@ -24,6 +24,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Header;
 import org.apache.http.client.utils.DateUtils;
 import org.apache.http.cookie.ClientCookie;
@@ -184,7 +185,25 @@ public class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
      */
     @Override
     public List<Cookie> parse(Header header, final CookieOrigin origin) throws MalformedCookieException {
-        if (header.getValue().startsWith("=")) {
+        // first a hack to support empty headers
+        final String text = header.getValue();
+        int endPos = text.indexOf(';');
+        if (endPos < 0) {
+            endPos = text.indexOf('=');
+        }
+        else {
+            final int pos = text.indexOf('=');
+            if (pos > endPos) {
+                endPos = -1;
+            }
+            else {
+                endPos = pos;
+            }
+        }
+        if (endPos < 0) {
+            header = new BasicHeader(header.getName(), EMPTY_COOKIE_NAME + "=" + header.getValue());
+        }
+        else if (endPos == 0 || StringUtils.isBlank(text.substring(0, endPos))) {
             header = new BasicHeader(header.getName(), EMPTY_COOKIE_NAME + header.getValue());
         }
 

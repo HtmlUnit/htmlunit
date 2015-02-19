@@ -52,8 +52,12 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpStatus;
 import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.CredentialsProvider;
+import org.apache.http.cookie.ClientCookie;
 import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.cookie.CookieSpec;
+import org.apache.http.cookie.MalformedCookieException;
+import org.apache.http.message.BufferedHeader;
+import org.apache.http.util.CharArrayBuffer;
 import org.w3c.css.sac.ErrorHandler;
 
 import com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLActiveXObjectFactory;
@@ -2172,5 +2176,44 @@ public class WebClient implements Serializable {
         final Set<Cookie> cookies = new LinkedHashSet<>();
         cookies.addAll(Cookie.fromHttpClient(matches));
         return Collections.unmodifiableSet(cookies);
+    }
+
+    /**
+     * Parses the given cookie and adds this to our cookie store.
+     * @param cookieString the string to parse
+     * @param pageUrl the url of the page that likes to set the cookie
+     * @param origin the requester
+     */
+    public void addCookie(final String cookieString, final URL pageUrl, final Object origin) {
+        final CookieManager cookieManager = getCookieManager();
+        if (cookieManager.isCookiesEnabled()) {
+            final CharArrayBuffer buffer = new CharArrayBuffer(cookieString.length() + 22);
+            buffer.append("Set-Cookie: ");
+            buffer.append(cookieString);
+
+            final BrowserVersion browserVersion = getBrowserVersion();
+            final CookieSpec cookieSpec = new HtmlUnitBrowserCompatCookieSpec(browserVersion);
+
+            try {
+                final List<org.apache.http.cookie.Cookie> cookies =
+                        cookieSpec.parse(new BufferedHeader(buffer), cookieManager.buildCookieOrigin(pageUrl));
+
+                for (org.apache.http.cookie.Cookie cookie : cookies) {
+                    final Cookie htmlUnitCookie = new Cookie((ClientCookie) cookie);
+                    cookieManager.addCookie(htmlUnitCookie);
+
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("Added cookie: '" + cookieString + "'");
+                    }
+                }
+            }
+            catch (final MalformedCookieException e) {
+                getIncorrectnessListener().notify("set-cookie http-equiv meta tag: invalid cookie '"
+                        + cookieString + "'; reason: '" + e.getMessage() + "'.", origin);
+            }
+        }
+        else if (LOG.isDebugEnabled()) {
+            LOG.debug("Skipped adding cookie: '" + cookieString + "'");
+        }
     }
 }
