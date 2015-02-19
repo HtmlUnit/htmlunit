@@ -9,6 +9,9 @@
     <body>
         <release version="2.16" date="???" description="Java 7, FF31, IE11 progress, Chrome progress, Bugfixes">
             <action type="fix" dev="rbri">
+                Use the same parser for cookies when set from javascript as we use for cookies in the http header.
+            </action>
+            <action type="fix" dev="rbri">
                 Use the same parser for cookies when set via meta tag as we use for cookies in the http header.
                 This fixes the missing support for various cookie attributes when set by meta tag (e.g. domain).
             </action>
