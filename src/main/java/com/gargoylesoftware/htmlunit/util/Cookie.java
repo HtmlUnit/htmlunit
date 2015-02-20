@@ -18,14 +18,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.http.cookie.ClientCookie;
+import org.apache.http.impl.cookie.BasicClientCookie;
 
 /**
  * A cookie. This class is immutable.
@@ -38,42 +37,7 @@ import org.apache.http.cookie.ClientCookie;
  */
 public class Cookie implements Serializable {
 
-    /** The cookie name. */
-    private final String name_;
-
-    /** The cookie value. */
-    private final String value_;
-
-    /** The domain to which this cookie applies. */
-    private final String domain_;
-
-    /** The path to which this cookie applies (<tt>null</tt> for all paths). */
-    private final String path_;
-
-    /** The date on which this cookie expires (<tt>null</tt> if it never expires). */
-    private final Date expires_;
-
-    /** Whether or not this cookie is secure (i.e. HTTPS vs HTTP). */
-    private final boolean secure_;
-
-    /** Whether or not this cookie is HTTP only (i.e. not available from JS). */
-    private final boolean httponly_;
-
-    /** Cookie attributes from HttpClient */
-    private Map<String, String> attribs_;
-
-    private static final String[] HTTPCLIENT_COOKIE_ATTRIBUTES = new String[] {
-        ClientCookie.VERSION_ATTR,
-        ClientCookie.PATH_ATTR,
-        ClientCookie.DOMAIN_ATTR,
-        ClientCookie.MAX_AGE_ATTR,
-        ClientCookie.SECURE_ATTR,
-        ClientCookie.COMMENT_ATTR,
-        ClientCookie.EXPIRES_ATTR,
-        ClientCookie.PORT_ATTR,
-        ClientCookie.COMMENTURL_ATTR,
-        ClientCookie.DISCARD_ATTR
-    };
+    private ClientCookie httpClientCookie_;
 
     /**
      * Creates a new cookie with the specified name and value which applies to the specified domain.
@@ -117,29 +81,24 @@ public class Cookie implements Serializable {
         if (domain == null) {
             throw new IllegalArgumentException("Cookie domain must be specified");
         }
-        domain_ = domain;
-        name_ = name;
-        value_ = (value != null ? value : ""); // HttpClient 3.1 doesn't like null cookie values
-        path_ = path;
-        expires_ = expires;
-        secure_ = secure;
-        httponly_ = httpOnly;
+
+        final BasicClientCookie cookie = new BasicClientCookie(name, (value != null ? value : ""));
+        cookie.setDomain(domain);
+        cookie.setPath(path);
+        cookie.setExpiryDate(expires);
+        cookie.setSecure(secure);
+        if (httpOnly) {
+            cookie.setAttribute("httponly", "true");
+        }
+        httpClientCookie_ = cookie;
     }
 
     /**
      * Creates a new HtmlUnit cookie from the HttpClient cookie provided.
-     * @param c the HttpClient cookie
+     * @param clientCookie the HttpClient cookie
      */
-    public Cookie(final ClientCookie c) {
-        this(c.getDomain(), c.getName(), c.getValue(), c.getPath(), c.getExpiryDate(),
-                c.isSecure(), c.getAttribute("httponly") != null);
-
-        attribs_ = new HashMap<String, String>();
-        for (String attribName : HTTPCLIENT_COOKIE_ATTRIBUTES) {
-            if (c.containsAttribute(attribName)) {
-                attribs_.put(attribName, c.getAttribute(attribName));
-            }
-        }
+    public Cookie(final ClientCookie clientCookie) {
+        httpClientCookie_ = clientCookie;
     }
 
     /**
@@ -156,22 +115,19 @@ public class Cookie implements Serializable {
     public Cookie(final String domain, final String name, final String value, final String path, final int maxAge,
         final boolean secure) {
 
-        domain_ = domain;
-        name_ = name;
-        value_ = (value != null ? value : ""); // HttpClient 3.1 doesn't like null cookie values
-        path_ = path;
-        secure_ = secure;
-        httponly_ = false;
+        final BasicClientCookie cookie = new BasicClientCookie(name, (value != null ? value : ""));
+        cookie.setDomain(domain);
+        cookie.setPath(path);
+        cookie.setSecure(secure);
 
         if (maxAge < -1) {
             throw new IllegalArgumentException("invalid max age:  " + maxAge);
         }
-        else if (maxAge >= 0) {
-            expires_ = new Date(System.currentTimeMillis() + (maxAge * 1000L));
+        if (maxAge >= 0) {
+            cookie.setExpiryDate(new Date(System.currentTimeMillis() + (maxAge * 1000L)));
         }
-        else {
-            expires_ = null;
-        }
+
+        httpClientCookie_ = cookie;
     }
 
     /**
@@ -179,7 +135,7 @@ public class Cookie implements Serializable {
      * @return the cookie name
      */
     public String getName() {
-        return name_;
+        return httpClientCookie_.getName();
     }
 
     /**
@@ -187,7 +143,7 @@ public class Cookie implements Serializable {
      * @return the cookie value
      */
     public String getValue() {
-        return value_;
+        return httpClientCookie_.getValue();
     }
 
     /**
@@ -195,7 +151,7 @@ public class Cookie implements Serializable {
      * @return the domain to which this cookie applies (<tt>null</tt> for all domains)
      */
     public String getDomain() {
-        return domain_;
+        return httpClientCookie_.getDomain();
     }
 
     /**
@@ -203,7 +159,7 @@ public class Cookie implements Serializable {
      * @return the path to which this cookie applies (<tt>null</tt> for all paths)
      */
     public String getPath() {
-        return path_;
+        return httpClientCookie_.getPath();
     }
 
     /**
@@ -211,7 +167,7 @@ public class Cookie implements Serializable {
      * @return the date on which this cookie expires (<tt>null</tt> if it never expires)
      */
     public Date getExpires() {
-        return expires_;
+        return httpClientCookie_.getExpiryDate();
     }
 
     /**
@@ -219,7 +175,7 @@ public class Cookie implements Serializable {
      * @return whether or not this cookie is secure (i.e. HTTPS vs HTTP)
      */
     public boolean isSecure() {
-        return secure_;
+        return httpClientCookie_.isSecure();
     }
 
     /**
@@ -228,7 +184,7 @@ public class Cookie implements Serializable {
      * @return whether or not this cookie is HttpOnly (i.e. not available in JS).
      */
     public boolean isHttpOnly() {
-        return httponly_;
+        return httpClientCookie_.getAttribute("httponly") != null;
     }
 
     /**
@@ -236,12 +192,12 @@ public class Cookie implements Serializable {
      */
     @Override
     public String toString() {
-        return name_ + "=" + value_
-            + (domain_ != null ? ";domain=" + domain_ : "")
-            + (path_ != null ? ";path=" + path_ : "")
-            + (expires_ != null ? ";expires=" + expires_ : "")
-            + (secure_ ? ";secure" : "")
-            + (httponly_ ? ";httpOnly" : "");
+        return getName() + "=" + getValue()
+            + (getDomain() != null ? ";domain=" + getDomain() : "")
+            + (getPath() != null ? ";path=" + getPath() : "")
+            + (getExpires() != null ? ";expires=" + getExpires() : "")
+            + (isSecure() ? ";secure" : "")
+            + (isHttpOnly() ? ";httpOnly" : "");
     }
 
     /**
@@ -253,10 +209,10 @@ public class Cookie implements Serializable {
             return false;
         }
         final Cookie other = (Cookie) o;
-        final String path = path_ == null ? "/" : path_;
-        final String otherPath = other.path_ == null ? "/" : other.path_;
-        return new EqualsBuilder().append(name_, other.name_).append(domain_, other.domain_).append(path, otherPath)
-            .isEquals();
+        final String path = getPath() == null ? "/" : getPath();
+        final String otherPath = other.getPath() == null ? "/" : other.getPath();
+        return new EqualsBuilder().append(getName(), other.getName()).append(getDomain(), other.getDomain())
+                .append(path, otherPath).isEquals();
     }
 
     /**
@@ -264,8 +220,8 @@ public class Cookie implements Serializable {
      */
     @Override
     public int hashCode() {
-        final String path = path_ == null ? "/" : path_;
-        return new HashCodeBuilder().append(name_).append(domain_).append(path).toHashCode();
+        final String path = getPath() == null ? "/" : getPath();
+        return new HashCodeBuilder().append(getName()).append(getDomain()).append(path).toHashCode();
     }
 
     /**
@@ -273,26 +229,7 @@ public class Cookie implements Serializable {
      * @return an HttpClient version of this cookie
      */
     public org.apache.http.cookie.Cookie toHttpClient() {
-        final org.apache.http.impl.cookie.BasicClientCookie cookie =
-            new org.apache.http.impl.cookie.BasicClientCookie(name_, value_);
-        cookie.setDomain(domain_);
-        cookie.setPath(path_);
-        cookie.setExpiryDate(expires_);
-        cookie.setSecure(secure_);
-        if (httponly_) {
-            cookie.setAttribute("httponly", "true");
-        }
-
-        // if we have some more attribs
-        if (null != attribs_) {
-            for (String attribName : HTTPCLIENT_COOKIE_ATTRIBUTES) {
-                if (attribs_.containsKey(attribName)) {
-                    cookie.setAttribute(attribName, attribs_.get(attribName));
-                }
-            }
-        }
-
-        return cookie;
+        return httpClientCookie_;
     }
 
     /**
