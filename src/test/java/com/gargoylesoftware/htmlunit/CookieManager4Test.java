@@ -46,6 +46,24 @@ public class CookieManager4Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "c1=1; c2=2")
+    public void domain() throws Exception {
+        final List<NameValuePair> responseHeader = new ArrayList<>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=.htmlunit.org; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=htmlunit.org; Path=/"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "c3=3; Domain=.htmlunit.org:" + PORT + "; Path=/"));
+        getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "Ok",
+                "text/html", responseHeader);
+
+        final URL firstUrl = new URL(HOST1 + "/");
+
+        loadPageWithAlerts2(firstUrl);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "cross-domain=1")
     public void differentHostsSameDomain() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
