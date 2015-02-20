@@ -103,10 +103,10 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.impl.cookie.BestMatchSpecFactory;
 import org.apache.http.impl.cookie.BrowserCompatSpecFactory;
-import org.apache.http.impl.cookie.IgnoreSpecFactory;
-import org.apache.http.impl.cookie.NetscapeDraftSpecFactory;
-import org.apache.http.impl.cookie.RFC2109SpecFactory;
-import org.apache.http.impl.cookie.RFC2965SpecFactory;
+import org.apache.http.impl.cookie.IgnoreSpecProvider;
+import org.apache.http.impl.cookie.NetscapeDraftSpecProvider;
+import org.apache.http.impl.cookie.RFC2109SpecProvider;
+import org.apache.http.impl.cookie.RFC2965SpecProvider;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.protocol.HttpProcessorBuilder;
 import org.apache.http.protocol.RequestContent;
@@ -509,12 +509,12 @@ public class HttpWebConnection implements WebConnection {
             final RegistryBuilder<CookieSpecProvider> registeryBuilder
                 = RegistryBuilder.<CookieSpecProvider>create()
                     .register(CookieSpecs.BEST_MATCH, new BestMatchSpecFactory())
-                    .register(CookieSpecs.STANDARD, new RFC2965SpecFactory())
+                    .register(CookieSpecs.STANDARD, new RFC2965SpecProvider())
                     .register(CookieSpecs.BROWSER_COMPATIBILITY, new BrowserCompatSpecFactory())
-                    .register(CookieSpecs.NETSCAPE, new NetscapeDraftSpecFactory())
-                    .register(CookieSpecs.IGNORE_COOKIES, new IgnoreSpecFactory())
-                    .register("rfc2109", new RFC2109SpecFactory())
-                    .register("rfc2965", new RFC2965SpecFactory());
+                    .register(CookieSpecs.NETSCAPE, new NetscapeDraftSpecProvider())
+                    .register(CookieSpecs.IGNORE_COOKIES, new IgnoreSpecProvider())
+                    .register("rfc2109", new RFC2109SpecProvider())
+                    .register("rfc2965", new RFC2965SpecProvider());
 
             registeryBuilder.register(HACKED_COOKIE_POLICY, htmlUnitCookieSpecProvider_);
             httpClientBuilder_.setDefaultCookieSpecRegistry(registeryBuilder.build());
