@@ -90,6 +90,7 @@ public class CookieManager4Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(firstUrl);
     }
+
     /**
      * @throws Exception if the test fails
      */

@@ -2144,18 +2144,20 @@ public class WebClient implements Serializable {
             return Collections.<Cookie>emptySet();
         }
 
-        final String host = url.getHost();
+        final URL normalizedUrl = cookieManager.replaceForCookieIfNecessary(url);
+
+        final String host = normalizedUrl.getHost();
         // URLs like "about:blank" don't have cookies and we need to catch these
         // cases here before HttpClient complains
         if (host.isEmpty()) {
             return Collections.emptySet();
         }
 
-        final String path = url.getPath();
-        final String protocol = url.getProtocol();
+        final String path = normalizedUrl.getPath();
+        final String protocol = normalizedUrl.getProtocol();
         final boolean secure = "https".equals(protocol);
 
-        final int port = cookieManager.getPort(url);
+        final int port = cookieManager.getPort(normalizedUrl);
 
         // discard expired cookies
         cookieManager.clearExpired(new Date());

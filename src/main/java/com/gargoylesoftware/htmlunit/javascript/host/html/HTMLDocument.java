@@ -57,7 +57,6 @@ import static com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -146,7 +145,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
-import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * A JavaScript object for a Document.
@@ -833,8 +831,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public String getCookie() {
         final HtmlPage page = getHtmlPage();
 
-        URL url = page.getUrl();
-        url = replaceForCookieIfNecessary(url);
+        final URL url = page.getUrl();
 
         final StringBuilder buffer = new StringBuilder();
         final Set<Cookie> cookies = page.getWebClient().getCookies(url);
@@ -944,32 +941,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public void setCookie(final String newCookie) {
         final HtmlPage page = getHtmlPage();
         final WebClient client = page.getWebClient();
-        URL url = getHtmlPage().getUrl();
-        url = replaceForCookieIfNecessary(url);
 
-        client.addCookie(newCookie, url, this);
-    }
-
-    /**
-     * {@link org.apache.commons.httpclient.cookie.CookieSpec#match(String, int, String, boolean, Cookie[])} doesn't
-     * like empty hosts and negative ports, but these things happen if we're dealing with a local file. This method
-     * allows us to work around this limitation in HttpClient by feeding it a bogus host and port.
-     *
-     * @param url the URL to replace if necessary
-     * @return the replacement URL, or the original URL if no replacement was necessary
-     */
-    private static URL replaceForCookieIfNecessary(URL url) {
-        final String protocol = url.getProtocol();
-        final boolean file = "file".equals(protocol);
-        if (file) {
-            try {
-                url = UrlUtils.getUrlWithNewHostAndPort(url, "LOCAL_FILESYSTEM", 0);
-            }
-            catch (final MalformedURLException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        return url;
+        client.addCookie(newCookie, getHtmlPage().getUrl(), this);
     }
 
     /**

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,6 +31,7 @@ import org.apache.http.cookie.CookieSpec;
 import org.apache.http.impl.cookie.BrowserCompatSpecFactory;
 
 import com.gargoylesoftware.htmlunit.util.Cookie;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * Manages cookies for a {@link WebClient}. This class is thread-safe.
@@ -135,7 +137,13 @@ public class CookieManager implements Serializable {
      * @return the new CookieOrigin
      */
     public CookieOrigin buildCookieOrigin(final URL url) {
-        return new CookieOrigin(url.getHost(), getPort(url), url.getPath(), "https".equals(url.getProtocol()));
+        final URL normalizedUrl = replaceForCookieIfNecessary(url);
+
+        return new CookieOrigin(
+                normalizedUrl.getHost(),
+                getPort(normalizedUrl),
+                normalizedUrl.getPath(),
+                "https".equals(normalizedUrl.getProtocol()));
     }
 
     /**
@@ -177,6 +185,29 @@ public class CookieManager implements Serializable {
             return url.getPort();
         }
         return url.getDefaultPort();
+    }
+
+    /**
+     * {@link org.apache.commons.httpclient.cookie.CookieSpec#match(String, int, String, boolean, Cookie[])} doesn't
+     * like empty hosts and negative ports, but these things happen if we're dealing with a local file. This method
+     * allows us to work around this limitation in HttpClient by feeding it a bogus host and port.
+     *
+     * @param url the URL to replace if necessary
+     * @return the replacement URL, or the original URL if no replacement was necessary
+     */
+    public URL replaceForCookieIfNecessary(URL url) {
+        final String protocol = url.getProtocol();
+        final boolean file = "file".equals(protocol);
+        if (file) {
+            try {
+                url = UrlUtils.getUrlWithNewHostAndPort(url,
+                        HtmlUnitBrowserCompatCookieSpec.LOCAL_FILESYSTEM_DOMAIN, 0);
+            }
+            catch (final MalformedURLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return url;
     }
 
     /**

@@ -62,6 +62,9 @@ public class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
     /** The cookie name used for cookies with no name (HttpClient doesn't like empty names). */
     public static final String EMPTY_COOKIE_NAME = "HTMLUNIT_EMPTY_COOKIE";
 
+    /** Workaround for domain of local files. */
+    public static final String LOCAL_FILESYSTEM_DOMAIN = "LOCAL_FILESYSTEM";
+
     /**
      * Comparator for sending cookies in right order.
      * See specification:
@@ -116,7 +119,9 @@ public class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
                 if (domain == null) {
                     return false;
                 }
-                if (!"localhost".equalsIgnoreCase(domain) && domain.lastIndexOf('.') < 1) {
+                if (!"localhost".equalsIgnoreCase(domain)
+                        && !LOCAL_FILESYSTEM_DOMAIN.equalsIgnoreCase(domain)
+                        && domain.lastIndexOf('.') < 1) {
                     return false;
                 }
 
