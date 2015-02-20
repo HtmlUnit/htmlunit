@@ -41,6 +41,7 @@ public class CookieManager4Test extends WebDriverTestCase {
     private static final String DOMAIN = "htmlunit.org";
     private static final String HOST1 = "http://host1." + DOMAIN + ":" + PORT;
     private static final String HOST2 = "http://host2." + DOMAIN + ":" + PORT;
+    private static final String HOST3 = "http://" + DOMAIN + ":" + PORT;
 
     /**
      * @throws Exception if the test fails
@@ -56,6 +57,65 @@ public class CookieManager4Test extends WebDriverTestCase {
                 "text/html", responseHeader);
 
         final URL firstUrl = new URL(HOST1 + "/");
+
+        loadPageWithAlerts2(firstUrl);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "c4=4")
+    public void domain2() throws Exception {
+        final List<NameValuePair> responseHeader1 = new ArrayList<>();
+        responseHeader1.add(new NameValuePair("Set-Cookie", "c1=1; Path=/"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "c2=2; Domain=host1.htmlunit.org; Path=/"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "c3=3; Domain=host2.htmlunit.org; Path=/"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "c4=4; Domain=htmlunit.org; Path=/"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "c5=5; Domain=.org; Path=/"));
+
+        final String html = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<p>Cookie Domain Test</p>\n"
+            + "<script>\n"
+            + "  location.replace('" + HOST3 + "/');\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE);
+        final URL firstUrl = new URL(HOST1 + "/");
+        getMockWebConnection().setResponse(firstUrl, html, 200, "Ok", "text/html", responseHeader1);
+
+        loadPageWithAlerts2(firstUrl);
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "c1=1; c4=4")
+    public void domain3() throws Exception {
+        final List<NameValuePair> responseHeader1 = new ArrayList<>();
+        responseHeader1.add(new NameValuePair("Set-Cookie", "c1=1; Path=/"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "c2=2; Domain=host1.htmlunit.org; Path=/"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "c3=3; Domain=host2.htmlunit.org; Path=/"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "c4=4; Domain=htmlunit.org; Path=/"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "c5=5; Domain=.org; Path=/"));
+
+        final String html = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<p>Cookie Domain Test</p>\n"
+            + "<script>\n"
+            + "  location.replace('" + HOST3 + "/test.html');\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE);
+        final URL firstUrl = new URL(HOST3 + "/");
+        getMockWebConnection().setResponse(firstUrl, html, 200, "Ok", "text/html", responseHeader1);
 
         loadPageWithAlerts2(firstUrl);
     }

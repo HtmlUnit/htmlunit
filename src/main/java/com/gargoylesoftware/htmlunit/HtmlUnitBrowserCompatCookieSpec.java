@@ -35,6 +35,7 @@ import org.apache.http.cookie.CookiePathComparator;
 import org.apache.http.cookie.MalformedCookieException;
 import org.apache.http.cookie.SetCookie;
 import org.apache.http.impl.cookie.BasicClientCookie;
+import org.apache.http.impl.cookie.BasicDomainHandler;
 import org.apache.http.impl.cookie.BasicPathHandler;
 import org.apache.http.impl.cookie.BrowserCompatSpec;
 import org.apache.http.message.BasicHeader;
@@ -107,6 +108,23 @@ public class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
      */
     public HtmlUnitBrowserCompatCookieSpec(final BrowserVersion browserVersion) {
         super();
+
+        final BasicDomainHandler domainHandler = new BasicDomainHandler() {
+            @Override
+            public boolean match(final Cookie cookie, final CookieOrigin origin) {
+                final String domain = cookie.getDomain();
+                if (domain == null) {
+                    return false;
+                }
+                if (!"localhost".equalsIgnoreCase(domain) && domain.lastIndexOf('.') < 1) {
+                    return false;
+                }
+
+                return super.match(cookie, origin);
+            }
+        };
+        registerAttribHandler(ClientCookie.DISCARD_ATTR, domainHandler);
+
         final BasicPathHandler pathHandler = new BasicPathHandler() {
             @Override
             public void validate(final Cookie cookie, final CookieOrigin origin) throws MalformedCookieException {
