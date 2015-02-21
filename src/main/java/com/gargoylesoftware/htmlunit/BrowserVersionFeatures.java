@@ -767,10 +767,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     JS_CSSSTYLEDECLARATION_CSS2PROPERTIES,
 
-    /** css style object is named MSStyleCSSProperties. */
-    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
-    JS_CSSSTYLEDECLARATION_MSSTYLECSSPROPERTIES,
-
     /** <code>Date.toLocaleDateString()</code> returns a short form (d.M.yyyy). */
     @BrowserFeature(@WebBrowser(CHROME))
     JS_DATE_LOCALE_DATE_SHORT,
@@ -1866,7 +1862,7 @@ public enum BrowserVersionFeatures {
 
     /** IE11 throws a syntax error if a css3 pseudo selector is used on an detached node. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
-    QUERYSELECTOR_CSS3_PSEUDO_SELECTORS_REQUIRE_ATTACHED_NODE,
+    QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE,
 
     /** Document mode is always 5 in quirks mode ignoring the browser version. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))

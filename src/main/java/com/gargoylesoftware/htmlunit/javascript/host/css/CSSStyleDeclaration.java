@@ -23,7 +23,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TY
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_UNDEFINED_FORCES_RESET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_UNDEFINED_OR_NULL_THROWS_ERROR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CSSSTYLEDECLARATION_CSS2PROPERTIES;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CSSSTYLEDECLARATION_MSSTYLECSSPROPERTIES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPACITY_ACCEPTS_ARBITRARY_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_GET_ATTRIBUTE_SUPPORTS_FLAGS;
@@ -72,6 +71,7 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -100,7 +100,10 @@ import com.steadystate.css.parser.SACParserCSS3;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClass
+@JsxClasses({
+    @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+    @JsxClass(isJSObject = false, isDefinedInStandardsMode = true, browsers = @WebBrowser(value = IE, maxVersion = 8))
+})
 public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableWithFallbackGetter {
     /** Css important property constant. */
     protected static final String PRIORITY_IMPORTANT = "important";
@@ -4678,9 +4681,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         if (getWindow().getWebWindow() != null) {
             if (getBrowserVersion().hasFeature(JS_CSSSTYLEDECLARATION_CSS2PROPERTIES)) {
                 return "CSS2Properties";
-            }
-            if (getBrowserVersion().hasFeature(JS_CSSSTYLEDECLARATION_MSSTYLECSSPROPERTIES)) {
-                return "MSStyleCSSProperties";
             }
         }
         return super.getClassName();

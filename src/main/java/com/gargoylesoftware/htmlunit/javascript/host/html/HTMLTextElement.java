@@ -30,7 +30,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ronald Brill
  */
-@JsxClass(domClass = HtmlWordBreak.class, browsers = @WebBrowser(value = IE, maxVersion = 8))
+@JsxClass(isJSObject = false, isDefinedInStandardsMode = true,
+    domClass = HtmlWordBreak.class, browsers = @WebBrowser(value = IE, maxVersion = 8))
 public class HTMLTextElement extends HTMLElement {
     private boolean endTagForbidden_;
 

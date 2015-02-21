@@ -37,7 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Frank Danek
  * @author Ahmed Ashour
  */
-@JsxClass
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class CSSFontFaceRule extends CSSRule {
 
     private static final Pattern REPLACEMENT_1 = Pattern.compile("font-family: ([^;]*);");

@@ -156,7 +156,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF24 = "[object BoxObject]")
-    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void boxObject() throws Exception {
         testHostClassName("BoxObject");
     }
@@ -182,7 +181,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented(IE11)
     public void clipboardData() throws Exception {
         testHostClassName("ClipboardData");
     }
@@ -196,7 +194,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object CSSCharsetRule]",
             CHROME = "function CSSCharsetRule() { [native code] }",
             IE = "exception")
-    @NotYetImplemented(IE11)
     public void cssCharsetRule() throws Exception {
         testHostClassName("CSSCharsetRule");
     }
@@ -291,7 +288,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function CSSStyleDeclaration() { [native code] }",
             FF = "function CSSStyleDeclaration() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented(IE11)
     public void cssStyleDeclaration() throws Exception {
         testHostClassName("CSSStyleDeclaration");
     }
@@ -357,7 +353,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented({ FF, CHROME, IE11 })
     public void characterDataImpl() throws Exception {
         testHostClassName("CharacterDataImpl");
     }
@@ -373,7 +368,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             FF24 = "function ClientRect() {\n    [native code]\n}",
             FF31 = "exception",
             IE8 = "exception")
-    @NotYetImplemented(FF)
+    @NotYetImplemented(FF24)
     public void clientRect() throws Exception {
         testHostClassName("ClientRect");
     }
@@ -399,7 +394,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented({ FF, IE11, CHROME })
     public void computedCSSStyleDeclaration() throws Exception {
         testHostClassName("ComputedCSSStyleDeclaration");
     }
@@ -429,7 +423,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "exception",
             FF = "exception",
             IE8 = "exception")
-    @NotYetImplemented({ FF, CHROME })
     public void coordinates() throws Exception {
         testHostClassName("Coordinates");
     }
@@ -609,7 +602,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented({ FF, CHROME, IE11 })
     public void eventNode() throws Exception {
         testHostClassName("EventNode");
     }
@@ -622,7 +614,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "function External() {\n    [native code]\n}")
-    @NotYetImplemented({ FF, CHROME, IE11 })
+    @NotYetImplemented(FF31)
     public void external() throws Exception {
         testHostClassName("External");
     }
@@ -687,7 +679,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "exception",
             FF = "exception",
             IE8 = "exception")
-    @NotYetImplemented({ FF, CHROME })
     public void geolocation() throws Exception {
         testHostClassName("Geolocation");
     }
@@ -786,7 +777,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "exception",
             FF = "exception",
             IE8 = "exception")
-    @NotYetImplemented({ FF, CHROME })
     public void htmlBGSoundElement() throws Exception {
         testHostClassName("HTMLBGSoundElement");
     }
@@ -843,7 +833,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "exception",
             FF = "exception",
             IE8 = "exception")
-    @NotYetImplemented({ FF, CHROME })
+    @NotYetImplemented({ IE8, FF, CHROME })
     public void htmlBlockElement() throws Exception {
         testHostClassName("HTMLBlockElement");
     }
@@ -1003,6 +993,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function HTMLDivElement() { [native code] }",
             FF = "function HTMLDivElement() {\n    [native code]\n}",
             IE8 = "exception")
+    @NotYetImplemented(IE8)
     public void htmlDivElement() throws Exception {
         testHostClassName("HTMLDivElement");
     }
@@ -1157,6 +1148,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function HTMLHeadingElement() { [native code] }",
             FF = "function HTMLHeadingElement() {\n    [native code]\n}",
             IE8 = "exception")
+    @NotYetImplemented(IE8)
     public void htmlHeadingElement() throws Exception {
         testHostClassName("HTMLHeadingElement");
     }
@@ -1347,6 +1339,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function HTMLMarqueeElement() { [native code] }",
             FF = "exception",
             IE8 = "exception")
+    @NotYetImplemented(CHROME)
     public void htmlMarqueeElement() throws Exception {
         testHostClassName("HTMLMarqueeElement");
     }
@@ -1429,7 +1422,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE8 = "exception")
-    @NotYetImplemented({ FF, CHROME, IE11 })
     public void htmlNoShowElement() throws Exception {
         testHostClassName("HTMLNoShowElement");
     }
@@ -1514,7 +1506,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function HTMLOptionsCollection() { [native code] }",
             FF = "function HTMLOptionsCollection() {\n    [native code]\n}")
-    @NotYetImplemented(IE11)
     public void htmlOptionsCollection() throws Exception {
         testHostClassName("HTMLOptionsCollection");
     }
@@ -1570,7 +1561,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "exception",
             FF = "exception",
             IE8 = "exception")
-    @NotYetImplemented({ FF, CHROME })
+    @NotYetImplemented({ FF, CHROME, IE8 })
     public void htmlPhraseElement() throws Exception {
         testHostClassName("HTMLPhraseElement");
     }
@@ -1655,7 +1646,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function HTMLSpanElement() { [native code] }",
             FF = "function HTMLSpanElement() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, IE8 })
     public void htmlSpanElement() throws Exception {
         testHostClassName("HTMLSpanElement");
     }
@@ -1859,6 +1850,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function HTMLUListElement() { [native code] }",
             FF = "function HTMLUListElement() {\n    [native code]\n}",
             IE8 = "exception")
+    @NotYetImplemented(IE8)
     public void htmlUListElement() throws Exception {
         testHostClassName("HTMLUListElement");
     }
@@ -1969,7 +1961,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object Location]",
             CHROME = "function Location() { [native code] }",
             IE8 = "exception")
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented({ FF, IE })
     public void location() throws Exception {
         testHostClassName("Location");
     }
@@ -2062,7 +2054,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link null}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.NamedNodeMap}.
      *
      * @throws Exception if an error occurs
      */
@@ -2094,7 +2086,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented(IE11)
     public void namespaceCollection() throws Exception {
         testHostClassName("NamespaceCollection");
     }
@@ -2221,7 +2212,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "exception",
             FF = "exception",
             IE8 = "exception")
-    @NotYetImplemented({ FF, CHROME })
     public void position() throws Exception {
         testHostClassName("Position");
     }
@@ -2262,7 +2252,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented({ FF, CHROME, IE11 })
     public void rowContainer() throws Exception {
         testHostClassName("RowContainer");
     }
@@ -3532,7 +3521,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented(IE11)
     public void xsltemplate() throws Exception {
         testHostClassName("XSLTemplate");
     }

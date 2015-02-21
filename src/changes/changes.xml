@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="Java 7, FF31, IE11 progress, Chrome progress, Bugfixes">
+            <action type="fix" dev="asashour">
+                JavaScript: fix many host class names.
+            </action>
             <action type="fix" dev="rbri">
                 Use the same parser for cookies when set from javascript as we use for cookies in the http header.
             </action>

@@ -96,6 +96,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlAside;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
 import com.gargoylesoftware.htmlunit.html.HtmlFigure;
 import com.gargoylesoftware.htmlunit.html.HtmlFigureCaption;
 import com.gargoylesoftware.htmlunit.html.HtmlFooter;
@@ -113,7 +114,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 import com.gargoylesoftware.htmlunit.html.HtmlWordBreak;
 import com.gargoylesoftware.htmlunit.html.SubmittableElement;
-import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
@@ -164,21 +164,22 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
  * @author Frank Danek
  */
 @JsxClasses({
-    @JsxClass(domClass = HtmlArticle.class),
-    @JsxClass(domClass = HtmlAside.class),
-    @JsxClass(domClass = HtmlElement.class),
-    @JsxClass(domClass = HtmlFigure.class),
-    @JsxClass(domClass = HtmlFigureCaption.class),
-    @JsxClass(domClass = HtmlFooter.class),
-    @JsxClass(domClass = HtmlHeader.class),
-    @JsxClass(domClass = HtmlMark.class),
-    @JsxClass(domClass = HtmlNav.class),
+    @JsxClass(domClass = HtmlArticle.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+    @JsxClass(domClass = HtmlAside.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+    @JsxClass(domClass = HtmlElement.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+    @JsxClass(domClass = HtmlFigure.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+    @JsxClass(domClass = HtmlFigureCaption.class,
+        browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+    @JsxClass(domClass = HtmlFooter.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+    @JsxClass(domClass = HtmlHeader.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+    @JsxClass(domClass = HtmlMark.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+    @JsxClass(domClass = HtmlNav.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(domClass = HtmlNoBreak.class, browsers = { @WebBrowser(FF) }),
     @JsxClass(domClass = HtmlNoEmbed.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(domClass = HtmlNoFrames.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(domClass = HtmlNoScript.class,
                 browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) }),
-    @JsxClass(domClass = HtmlSection.class),
+    @JsxClass(domClass = HtmlSection.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(domClass = HtmlWordBreak.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 })
 public class HTMLElement extends Element implements ScriptableWithFallbackGetter {

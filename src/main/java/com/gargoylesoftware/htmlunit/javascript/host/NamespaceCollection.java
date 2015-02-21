@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
  * @version $Revision$
  * @author Daniel Gredler
  */
-@JsxClass(browsers = @WebBrowser(IE))
+@JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = @WebBrowser(IE))
 public class NamespaceCollection extends SimpleScriptable implements Function {
 
     /** The HTML document to which this namespace collection belongs. */

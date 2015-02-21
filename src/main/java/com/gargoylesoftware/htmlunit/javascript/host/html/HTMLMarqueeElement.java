@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.html.HtmlMarquee;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -29,7 +30,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlMarquee.class, browsers = @WebBrowser(IE))
+@JsxClasses({
+    @JsxClass(domClass = HtmlMarquee.class, browsers = { @WebBrowser(value = IE, minVersion = 11) }),
+    @JsxClass(domClass = HtmlMarquee.class, isJSObject = false, isDefinedInStandardsMode = true,
+        browsers = @WebBrowser(value = IE, maxVersion = 8))
+})
 public class HTMLMarqueeElement extends HTMLElement {
 
     /**

@@ -24,6 +24,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -226,7 +227,7 @@ public class AttributesTest extends TestCase {
      */
     @Override
     protected void runTest() throws Exception {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = new WebClient(BrowserVersion.INTERNET_EXPLORER_11);
         try {
             final MockWebConnection connection = new MockWebConnection();
             connection.setDefaultResponse("<html><head><title>foo</title></head><body></body></html>");

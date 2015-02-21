@@ -36,6 +36,12 @@ public @interface JsxClass {
     /** The DOM class (if any). */
     Class<?> domClass() default Object.class;
 
+    /** Is JavaScript Object. */
+    boolean isJSObject() default true;
+
+    /** Should be defined in only Standards Mode. */
+    boolean isDefinedInStandardsMode() default true;
+
     /** The {@link WebBrowser}s supported by this constant. */
     WebBrowser[] browsers() default {
         @WebBrowser(IE),

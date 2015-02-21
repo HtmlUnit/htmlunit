@@ -2414,21 +2414,10 @@ public class HtmlPage extends SgmlPage {
     protected void setDocumentType(final DomDocumentType type) {
         super.setDocumentType(type);
 
-        //probably not the best place to add what JavaScriptEngine usually does
         if (hasFeature(JS_WINDOW_IN_STANDARDS_MODE) && !isQuirksMode()) {
-            final Window window = ((HTMLDocument) getScriptObject()).getWindow();
-            defineConstructor(window, window, new Window());
+            final JavaScriptEngine jsEngine = getWebClient().getJavaScriptEngine();
+            jsEngine.definePropertiesInStandardsMode(this);
         }
-    }
-
-    private void defineConstructor(final Window window, final Scriptable prototype,
-            final ScriptableObject constructor) {
-        constructor.setParentScope(window);
-        ScriptableObject.defineProperty(prototype, "constructor", constructor,
-                ScriptableObject.DONTENUM  | ScriptableObject.PERMANENT | ScriptableObject.READONLY);
-        ScriptableObject.defineProperty(constructor, "prototype", prototype,
-                ScriptableObject.DONTENUM  | ScriptableObject.PERMANENT | ScriptableObject.READONLY);
-        window.defineProperty(constructor.getClassName(), constructor, ScriptableObject.DONTENUM);
     }
 
     /**

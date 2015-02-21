@@ -36,7 +36,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClass
+@JsxClass(isJSObject = false, isDefinedInStandardsMode = false)
 public class EventNode extends Node {
 
     /**

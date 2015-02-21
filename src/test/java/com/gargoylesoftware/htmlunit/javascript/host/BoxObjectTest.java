@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class BoxObjectTest extends WebDriverTestCase {
