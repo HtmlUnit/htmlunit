@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.httpclient;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_EXTENDED_DATE_PATTERNS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_EXTRACT_PATH_FROM_LOCATION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_START_DATE_1970;
 
 import java.util.Calendar;
@@ -35,8 +34,6 @@ import org.apache.http.cookie.CookiePathComparator;
 import org.apache.http.cookie.MalformedCookieException;
 import org.apache.http.cookie.SetCookie;
 import org.apache.http.impl.cookie.BasicClientCookie;
-import org.apache.http.impl.cookie.BasicDomainHandler;
-import org.apache.http.impl.cookie.BasicPathHandler;
 import org.apache.http.impl.cookie.BrowserCompatSpec;
 import org.apache.http.message.BasicHeader;
 
@@ -114,47 +111,8 @@ public class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
     public HtmlUnitBrowserCompatCookieSpec(final BrowserVersion browserVersion) {
         super();
 
-        final BasicDomainHandler domainHandler = new BasicDomainHandler() {
-            @Override
-            public boolean match(final Cookie cookie, final CookieOrigin origin) {
-                final String domain = cookie.getDomain();
-                if (domain == null) {
-                    return false;
-                }
-                if (!"localhost".equalsIgnoreCase(domain)
-                        && !LOCAL_FILESYSTEM_DOMAIN.equalsIgnoreCase(domain)
-                        && domain.lastIndexOf('.') < 1) {
-                    return false;
-                }
-
-                return super.match(cookie, origin);
-            }
-        };
-        registerAttribHandler(ClientCookie.DISCARD_ATTR, domainHandler);
-
-        final BasicPathHandler pathHandler = new BasicPathHandler() {
-            @Override
-            public void validate(final Cookie cookie, final CookieOrigin origin) throws MalformedCookieException {
-                // nothing, browsers seem not to perform any validation
-            }
-
-            @Override
-            public boolean match(final Cookie cookie, final CookieOrigin origin) {
-                String targetpath = origin.getPath();
-                if (browserVersion.hasFeature(HTTP_COOKIE_EXTRACT_PATH_FROM_LOCATION) && targetpath.length() > 0) {
-                    final int lastSlashPos = targetpath.lastIndexOf('/');
-                    if (lastSlashPos > 1 && lastSlashPos < targetpath.length()) {
-                        targetpath = targetpath.substring(0, lastSlashPos);
-                    }
-                }
-
-                final CookieOrigin newOrigin = new CookieOrigin(origin.getHost(),
-                            origin.getPort(), targetpath, origin.isSecure());
-
-                return super.match(cookie, newOrigin);
-            }
-        };
-        registerAttribHandler(ClientCookie.PATH_ATTR, pathHandler);
+        registerAttribHandler(ClientCookie.DISCARD_ATTR, new HtmlUnitDomainHandler());
+        registerAttribHandler(ClientCookie.PATH_ATTR, new HtmlUnitPathHandler(browserVersion));
 
         final CookieAttributeHandler originalExpiresHandler = getAttribHandler(ClientCookie.EXPIRES_ATTR);
         final CookieAttributeHandler wrapperExpiresHandler = new CookieAttributeHandler() {

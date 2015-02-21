@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="Java 7, FF31, IE11 progress, Chrome progress, Bugfixes">
+            <action type="add" dev="rbri">
+                Package 'httpclient' added for our customizations of HttpClient.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: fix many host class names.
             </action>
