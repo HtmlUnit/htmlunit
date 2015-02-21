@@ -88,9 +88,6 @@ final class HtmlUnitExpiresHandler extends BasicExpiresHandler {
         }
 
         final Date expiry = DateUtils.parseDate(value, datePatterns, startDate);
-        if (expiry == null) {
-            throw new MalformedCookieException("Invalid 'expires' attribute: '" + value + "'");
-        }
         cookie.setExpiryDate(expiry);
     }
 }
