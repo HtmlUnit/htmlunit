@@ -66,7 +66,7 @@ final class HtmlUnitExpiresHandler extends BasicExpiresHandler {
     private final BrowserVersion browserVersion_;
 
     HtmlUnitExpiresHandler(final BrowserVersion browserVersion) {
-        super(null);
+        super(DEFAULT_DATE_PATTERNS);
         browserVersion_ = browserVersion;
     }
 
