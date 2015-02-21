@@ -25,6 +25,7 @@ import org.apache.http.impl.cookie.BasicDomainHandler;
  * @author Ronald Brill
  */
 final class HtmlUnitDomainHandler extends BasicDomainHandler {
+
     @Override
     public boolean match(final Cookie cookie, final CookieOrigin origin) {
         final String domain = cookie.getDomain();
