@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.httpclient;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_EXTENDED_DATE_PATTERNS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_START_DATE_1970;
-
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -28,11 +25,9 @@ import org.apache.http.Header;
 import org.apache.http.client.utils.DateUtils;
 import org.apache.http.cookie.ClientCookie;
 import org.apache.http.cookie.Cookie;
-import org.apache.http.cookie.CookieAttributeHandler;
 import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.cookie.CookiePathComparator;
 import org.apache.http.cookie.MalformedCookieException;
-import org.apache.http.cookie.SetCookie;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.impl.cookie.BrowserCompatSpec;
 import org.apache.http.message.BasicHeader;
@@ -72,7 +67,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
      */
     private static final Comparator<Cookie> COOKIE_COMPARATOR = new CookiePathComparator();
 
-    private static final Date DATE_1_1_1970;
+    static final Date DATE_1_1_1970;
 
     static {
         final Calendar calendar = Calendar.getInstance();
@@ -81,27 +76,6 @@ public class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
         calendar.set(Calendar.MILLISECOND, 0);
         DATE_1_1_1970 = calendar.getTime();
     }
-
-    // simplified patterns from BrowserCompatSpec, with yy patterns before similar yyyy patterns
-    private static final String[] DEFAULT_DATE_PATTERNS = new String[] {
-        "EEE dd MMM yy HH mm ss zzz",
-        "EEE dd MMM yyyy HH mm ss zzz",
-        "EEE MMM d HH mm ss yyyy",
-        "EEE dd MMM yy HH mm ss z ",
-        "EEE dd MMM yyyy HH mm ss z ",
-        "EEE dd MM yy HH mm ss z ",
-        "EEE dd MM yyyy HH mm ss z ",
-    };
-    private static final String[] EXTENDED_DATE_PATTERNS = new String[] {
-        "EEE dd MMM yy HH mm ss zzz",
-        "EEE dd MMM yyyy HH mm ss zzz",
-        "EEE MMM d HH mm ss yyyy",
-        "EEE dd MMM yy HH mm ss z ",
-        "EEE dd MMM yyyy HH mm ss z ",
-        "EEE dd MM yy HH mm ss z ",
-        "EEE dd MM yyyy HH mm ss z ",
-        "d/M/yyyy",
-    };
 
     /**
      * Constructor.
@@ -113,40 +87,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
 
         registerAttribHandler(ClientCookie.DISCARD_ATTR, new HtmlUnitDomainHandler());
         registerAttribHandler(ClientCookie.PATH_ATTR, new HtmlUnitPathHandler(browserVersion));
-
-        final CookieAttributeHandler originalExpiresHandler = getAttribHandler(ClientCookie.EXPIRES_ATTR);
-        final CookieAttributeHandler wrapperExpiresHandler = new CookieAttributeHandler() {
-
-            public void validate(final Cookie cookie, final CookieOrigin origin) throws MalformedCookieException {
-                originalExpiresHandler.validate(cookie, origin);
-            }
-
-            public void parse(final SetCookie cookie, String value) throws MalformedCookieException {
-                if (value.startsWith("\"") && value.endsWith("\"")) {
-                    value = value.substring(1, value.length() - 1);
-                }
-                value = value.replaceAll("[ ,:-]+", " ");
-
-                Date startDate = null;
-                if (browserVersion.hasFeature(HTTP_COOKIE_START_DATE_1970)) {
-                    startDate = DATE_1_1_1970;
-                }
-
-                String[] datePatterns = DEFAULT_DATE_PATTERNS;
-                if (browserVersion.hasFeature(HTTP_COOKIE_EXTENDED_DATE_PATTERNS)) {
-                    datePatterns = EXTENDED_DATE_PATTERNS;
-                }
-
-                final Date date = DateUtils.parseDate(value, datePatterns, startDate);
-                cookie.setExpiryDate(date);
-            }
-
-            public boolean match(final Cookie cookie, final CookieOrigin origin) {
-                return originalExpiresHandler.match(cookie, origin);
-            }
-        };
-        registerAttribHandler(ClientCookie.EXPIRES_ATTR, wrapperExpiresHandler);
-
+        registerAttribHandler(ClientCookie.EXPIRES_ATTR, new HtmlUnitExpiresHandler(browserVersion));
         registerAttribHandler("httponly", new HtmlUnitHttpOnlyHandler());
     }
 
