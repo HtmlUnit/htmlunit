@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit;
+package com.gargoylesoftware.htmlunit.httpclient;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_EXTENDED_DATE_PATTERNS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_EXTRACT_PATH_FROM_LOCATION;
@@ -39,6 +39,8 @@ import org.apache.http.impl.cookie.BasicDomainHandler;
 import org.apache.http.impl.cookie.BasicPathHandler;
 import org.apache.http.impl.cookie.BrowserCompatSpec;
 import org.apache.http.message.BasicHeader;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 
 /**
  * Customized BrowserCompatSpec for HtmlUnit.

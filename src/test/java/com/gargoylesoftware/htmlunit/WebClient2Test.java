@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.HtmlUnitBrowserCompatCookieSpec.EMPTY_COOKIE_NAME;
+import static com.gargoylesoftware.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec.EMPTY_COOKIE_NAME;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
