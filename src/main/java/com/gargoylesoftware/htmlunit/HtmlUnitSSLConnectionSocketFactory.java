@@ -43,7 +43,7 @@ import org.apache.http.HttpHost;
 import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContexts;
-import org.apache.http.conn.ssl.X509HostnameVerifier;
+import javax.net.ssl.HostnameVerifier;
 import org.apache.http.protocol.HttpContext;
 
 /**
@@ -107,7 +107,7 @@ final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocketFactor
     }
 
     private HtmlUnitSSLConnectionSocketFactory(final SSLContext sslContext,
-            final X509HostnameVerifier hostnameVerifier, final boolean useInsecureSSL,
+            final HostnameVerifier hostnameVerifier, final boolean useInsecureSSL,
             final String[] supportedProtocols, final String[] supportedCipherSuites) {
         super(sslContext, supportedProtocols, supportedCipherSuites, hostnameVerifier);
         this.useInsecureSSL_ = useInsecureSSL;

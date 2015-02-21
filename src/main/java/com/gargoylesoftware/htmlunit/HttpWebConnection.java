@@ -89,7 +89,7 @@ import org.apache.http.conn.socket.ConnectionSocketFactory;
 import org.apache.http.conn.socket.LayeredConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContexts;
-import org.apache.http.conn.ssl.X509HostnameVerifier;
+import javax.net.ssl.HostnameVerifier;
 import org.apache.http.cookie.ClientCookie;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.cookie.CookieSpec;
@@ -902,7 +902,7 @@ public class HttpWebConnection implements WebConnection {
             final boolean systemProperties = (Boolean) FieldUtils.readDeclaredField(builder, "systemProperties", true);
             final int maxConnTotal = (Integer) FieldUtils.readDeclaredField(builder, "maxConnTotal", true);
             final int maxConnPerRoute = (Integer) FieldUtils.readDeclaredField(builder, "maxConnPerRoute", true);
-            X509HostnameVerifier hostnameVerifier = (X509HostnameVerifier)
+            HostnameVerifier hostnameVerifier = (HostnameVerifier)
                         FieldUtils.readDeclaredField(builder, "hostnameVerifier", true);
             final SSLContext sslcontext = (SSLContext) FieldUtils.readDeclaredField(builder, "sslcontext", true);
 
