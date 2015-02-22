@@ -138,9 +138,12 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 final File file = new File("test.properties");
                 if (file.exists()) {
                     properties.load(new FileInputStream(file));
+                    String browsersValue = properties.getProperty("browsers");
+                    if (browsersValue == null) {
+                        browsersValue = "hu";
+                    }
                     BROWSERS_PROPERTIES_
-                        = Arrays.asList(properties.getProperty("browsers", "hu")
-                            .replaceAll(" ", "").toLowerCase().split(","));
+                        = Arrays.asList(browsersValue.replaceAll(" ", "").toLowerCase().split(","));
                     IE_BIN_ = properties.getProperty("ie.bin");
                     FF24_BIN_ = properties.getProperty("ff24.bin");
                     FF31_BIN_ = properties.getProperty("ff31.bin");
