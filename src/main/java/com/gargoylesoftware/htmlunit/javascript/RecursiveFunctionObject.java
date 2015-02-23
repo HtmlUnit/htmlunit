@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_TOSTRING_ENUMERATED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XMLHTTPREQUEST_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XSLTPROCESSOR_OBJECT;
 
 import java.lang.reflect.Member;
@@ -109,6 +110,17 @@ public class RecursiveFunctionObject extends FunctionObject {
         if ("XSLTProcessor".equals(getFunctionName()) && getBrowserVersion().hasFeature(JS_XSLTPROCESSOR_OBJECT)) {
             return "[object " + getFunctionName() + ']';
         }
+        if ("XMLHttpRequest".equals(getFunctionName()) && getBrowserVersion().hasFeature(JS_XMLHTTPREQUEST_OBJECT)) {
+            return "[object " + getFunctionName() + ']';
+        }
         return super.getDefaultValue(typeHint);
+    }
+
+    @Override
+    public String getTypeOf() {
+        if ("XMLHttpRequest".equals(getFunctionName()) && getBrowserVersion().hasFeature(JS_XMLHTTPREQUEST_OBJECT)) {
+            return "object";
+        }
+        return super.getTypeOf();
     }
 }

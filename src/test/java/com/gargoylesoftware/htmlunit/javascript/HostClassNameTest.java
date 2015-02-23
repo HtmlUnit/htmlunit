@@ -45,7 +45,7 @@ public class HostClassNameTest extends WebDriverTestCase {
 
     private void testHostClassName(final String className) throws Exception {
         final String html =
-            "<html><head><title>foo</title><script>\n"
+            "<html><head><script>\n"
             + "  function test() {\n"
             + "    try {\n"
             + "      alert(" + className + ");\n"
@@ -3442,7 +3442,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function XMLHttpRequest() { [native code] }",
             IE11 = "\nfunction XMLHttpRequest() {\n    [native code]\n}\n",
             IE8 = "[object XMLHttpRequest]")
-    @NotYetImplemented(IE8)
     public void xmlHttpRequest() throws Exception {
         testHostClassName("XMLHttpRequest");
     }

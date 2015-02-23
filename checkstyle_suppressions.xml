@@ -12,6 +12,7 @@
     <suppress checks="FileLength" files="JQuery182Test.java"/>
     <suppress checks="FileLength" files="HostClassNameTest.java"/>
     <suppress checks="FileLength" files="HostClassNameStandardsTest.java"/>
+    <suppress checks="FileLength" files="HostTypeOfTest.java"/>
     <suppress checks="FileLength" files="HTMLDocument.java"/>
     <suppress checks="FileLength" files="HTMLElement.java"/>
     <suppress checks="FileLength" files="HTMLElementTest.java"/>

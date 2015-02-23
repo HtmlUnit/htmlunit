@@ -1821,6 +1821,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_XML_SUPPORT_VIA_ACTIVEXOBJECT,
 
+    /** If <code>alert(XMLHttpRequest)</code> returns an object, not function. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    JS_XMLHTTPREQUEST_OBJECT,
+
     /** If <code>alert(XSLTProcessor)</code> returns an object, not function. */
     @BrowserFeature(@WebBrowser(FF))
     JS_XSLTPROCESSOR_OBJECT,

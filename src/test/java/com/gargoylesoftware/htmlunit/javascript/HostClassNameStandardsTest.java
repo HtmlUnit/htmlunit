@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,7 +45,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
 
     private void testHostClassName(final String className) throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    try {\n"
             + "      alert(" + className + ");\n"
@@ -3367,7 +3366,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function XMLHttpRequest() { [native code] }",
             IE11 = "\nfunction XMLHttpRequest() {\n    [native code]\n}\n",
             IE8 = "[object XMLHttpRequest]")
-    @NotYetImplemented(IE8)
     public void xmlHttpRequest() throws Exception {
         testHostClassName("XMLHttpRequest");
     }
