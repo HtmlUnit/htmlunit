@@ -1780,6 +1780,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_XML,
 
+    /** If <code>alert(XMLHttpRequest)</code> returns an object, not function. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    JS_XMLHTTPREQUEST_OBJECT,
+
     /** XMLDocument: .getElementById() to return any element, not HTML specifically. */
     @BrowserFeature(@WebBrowser(CHROME))
     JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT,
@@ -1820,10 +1824,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that the browser uses the ActiveXObject for implementing XML support (IE). */
     @BrowserFeature(@WebBrowser(IE))
     JS_XML_SUPPORT_VIA_ACTIVEXOBJECT,
-
-    /** If <code>alert(XMLHttpRequest)</code> returns an object, not function. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    JS_XMLHTTPREQUEST_OBJECT,
 
     /** If <code>alert(XSLTProcessor)</code> returns an object, not function. */
     @BrowserFeature(@WebBrowser(FF))
