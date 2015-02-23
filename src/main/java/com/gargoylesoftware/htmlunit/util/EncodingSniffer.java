@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.io.Charsets;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -410,7 +411,7 @@ public final class EncodingSniffer {
         ENCODING_FROM_LABEL.put("x-user-defined", "x-user-defined");
     }
 
-    private static final byte[] XML_DECLARATION_PREFIX = "<?xml ".getBytes();
+    private static final byte[] XML_DECLARATION_PREFIX = "<?xml ".getBytes(Charsets.US_ASCII);
 
     /**
      * The number of HTML bytes to sniff for encoding info embedded in <tt>meta</tt> tags;
@@ -868,7 +869,7 @@ public final class EncodingSniffer {
         if (s == null) {
             return null;
         }
-        final byte[] bytes = s.getBytes();
+        final byte[] bytes = s.getBytes(Charsets.US_ASCII);
         int i;
         for (i = 0; i < bytes.length; i++) {
             if (matches(bytes, i, CHARSET_START)) {
@@ -906,7 +907,7 @@ public final class EncodingSniffer {
             if (index == -1) {
                 return null;
             }
-            final String charset = new String(ArrayUtils.subarray(bytes, i + 1, index));
+            final String charset = new String(ArrayUtils.subarray(bytes, i + 1, index), Charsets.US_ASCII);
             return isSupportedCharset(charset) ? charset : null;
         }
         if (bytes[i] == '\'') {
@@ -917,14 +918,14 @@ public final class EncodingSniffer {
             if (index == -1) {
                 return null;
             }
-            final String charset = new String(ArrayUtils.subarray(bytes, i + 1, index));
+            final String charset = new String(ArrayUtils.subarray(bytes, i + 1, index), Charsets.US_ASCII);
             return isSupportedCharset(charset) ? charset : null;
         }
         int end = skipToAnyOf(bytes, i, new byte[] {0x09, 0x0A, 0x0C, 0x0D, 0x20, 0x3B});
         if (end == -1) {
             end = bytes.length;
         }
-        final String charset = new String(ArrayUtils.subarray(bytes, i, end));
+        final String charset = new String(ArrayUtils.subarray(bytes, i, end), Charsets.US_ASCII);
         return isSupportedCharset(charset) ? charset : null;
     }
 
@@ -946,7 +947,7 @@ public final class EncodingSniffer {
                 && XML_DECLARATION_PREFIX[5] == bytes[5]) {
             final int index = ArrayUtils.indexOf(bytes, (byte) '?', 2);
             if (index + 1 < bytes.length && bytes[index + 1] == '>') {
-                final String declaration = new String(bytes, 0, index + 2);
+                final String declaration = new String(bytes, 0, index + 2, Charsets.US_ASCII);
                 int start = declaration.indexOf("encoding");
                 if (start != -1) {
                     start += 8;
