@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
 /**
  * Tests for various test cases.
@@ -31,6 +33,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * @author Ahmed Ashour
  */
 public final class TestCaseTest {
+
+    private List<String> allClasses;
 
     /**
      * Tests that all test cases with the pattern used by
@@ -41,6 +45,7 @@ public final class TestCaseTest {
      */
     @Test
     public void generateTestForHtmlElements() throws Exception {
+        allClasses = getAllClasses();
         generateTestForHtmlElements(new File("src/test/java"));
     }
 
@@ -55,17 +60,35 @@ public final class TestCaseTest {
                     if (line.contains("(\"xmp\")")) {
                         final String relativePath = file.getAbsolutePath().substring(
                                 new File(".").getAbsolutePath().length() - 1);
-                        generateTestForHtmlElements(relativePath, line, lines);
+                        checkLines(relativePath, line, lines, "xmp", HtmlPageTest.HTML_TAGS_);
+                    }
+                    else if (line.contains("(\"ClientRect\")")) {
+                        final String relativePath = file.getAbsolutePath().substring(
+                                new File(".").getAbsolutePath().length() - 1);
+                        checkLines(relativePath, line, lines, "ClientRect", allClasses);
                     }
                 }
             }
         }
     }
 
-    private void generateTestForHtmlElements(final String relativePath, final String line, final List<String> lines) {
+    private List<String> getAllClasses() throws Exception {
+        final Field field = JavaScriptConfiguration.class.getDeclaredField("CLASSES_");
+        field.setAccessible(true);
+
+        List<String> list = new ArrayList<>();
+        for (final Class<?> c : (Class<?>[]) field.get(null)) {
+            final String name = c.getSimpleName();
+            list.add(name);
+        }
+        return list;
+    }
+
+    private void checkLines(final String relativePath, final String line, final List<String> lines, String elementName,
+            final List<String> allElements) {
         final List<String> allExpectedLines = new ArrayList<>();
-        for (final String tag : HtmlPageTest.HTML_TAGS_) {
-            allExpectedLines.add(line.replace("xmp", tag));
+        for (final String element : allElements) {
+            allExpectedLines.add(line.replace(elementName, element));
         }
         allExpectedLines.removeAll(lines);
         if (!allExpectedLines.isEmpty()) {
