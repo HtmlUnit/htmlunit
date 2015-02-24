@@ -928,6 +928,19 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDefinitionDescriptionElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE11 = "object")
+    @NotYetImplemented
+    public void htmlDDElement() throws Exception {
+        testHostClassName("HTMLDDElement");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDefinitionTermElement}.
      *
      * @throws Exception if an error occurs
