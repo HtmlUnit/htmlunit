@@ -83,7 +83,7 @@
                 Mandate Java 7 as a minimum requirement.
             </action>
             <action type="update" dev="asashour" issue="1656" due-to="David Ostrovsky">
-                Upgrade Jetty to 9.2.6.v20141205.
+                Upgrade Jetty to 9.2.8.v20150217.
             </action>
             <action type="fix" dev="rbri" issue="1660" due-to="Carsten Steul">
                 Wrong encoding used by StringWebReponse if charset placed in content.
