@@ -45,6 +45,9 @@ public class HtmlDefinitionDescription extends HtmlElement {
         super(qualifiedName, page, attributes);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected boolean isEmptyXmlTagExpanded() {
         return true;

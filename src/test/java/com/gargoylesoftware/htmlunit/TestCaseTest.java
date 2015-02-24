@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
  */
 public final class TestCaseTest {
 
-    private List<String> allClasses;
+    private List<String> allClassNames_;
 
     /**
      * Tests that all test cases with the pattern used by
@@ -45,7 +45,7 @@ public final class TestCaseTest {
      */
     @Test
     public void generateTestForHtmlElements() throws Exception {
-        allClasses = getAllClasses();
+        allClassNames_ = getAllClasses();
         generateTestForHtmlElements(new File("src/test/java"));
     }
 
@@ -65,7 +65,7 @@ public final class TestCaseTest {
                     else if (line.contains("(\"ClientRect\")")) {
                         final String relativePath = file.getAbsolutePath().substring(
                                 new File(".").getAbsolutePath().length() - 1);
-                        checkLines(relativePath, line, lines, "ClientRect", allClasses);
+                        checkLines(relativePath, line, lines, "ClientRect", allClassNames_);
                     }
                 }
             }
@@ -76,7 +76,7 @@ public final class TestCaseTest {
         final Field field = JavaScriptConfiguration.class.getDeclaredField("CLASSES_");
         field.setAccessible(true);
 
-        List<String> list = new ArrayList<>();
+        final List<String> list = new ArrayList<>();
         for (final Class<?> c : (Class<?>[]) field.get(null)) {
             final String name = c.getSimpleName();
             list.add(name);
@@ -84,8 +84,8 @@ public final class TestCaseTest {
         return list;
     }
 
-    private void checkLines(final String relativePath, final String line, final List<String> lines, String elementName,
-            final List<String> allElements) {
+    private void checkLines(final String relativePath, final String line, final List<String> lines,
+            final String elementName, final List<String> allElements) {
         final List<String> allExpectedLines = new ArrayList<>();
         for (final String element : allElements) {
             allExpectedLines.add(line.replace(elementName, element));

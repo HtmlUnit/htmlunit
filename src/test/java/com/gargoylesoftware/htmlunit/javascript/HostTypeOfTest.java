@@ -917,7 +917,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDefinitionDescriptionElement}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDDElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -928,14 +928,13 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDefinitionDescriptionElement}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDDElement}.
      *
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts(DEFAULT = "undefined",
             IE11 = "object")
-    @NotYetImplemented
     public void htmlDDElement() throws Exception {
         testHostClassName("HTMLDDElement");
     }
