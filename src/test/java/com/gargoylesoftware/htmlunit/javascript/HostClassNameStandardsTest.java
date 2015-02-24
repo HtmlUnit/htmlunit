@@ -931,13 +931,14 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = "[object HTMLDDElement]")
+    @Alerts(DEFAULT = "exception",
+            IE = "[object HTMLDDElement]")
     public void htmlDDElement() throws Exception {
         testHostClassName("HTMLDDElement");
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDefinitionTermElement}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDTElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -945,6 +946,18 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts("exception")
     public void htmlDefinitionTermElement() throws Exception {
         testHostClassName("HTMLDefinitionTermElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDTElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "[object HTMLDTElement]")
+    public void htmlDTElement() throws Exception {
+        testHostClassName("HTMLDTElement");
     }
 
     /**

@@ -791,11 +791,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_DEFINE_GETTER,
 
-    /** Indicates that HTMLDefinition...Elements returning 'HTMLElement'
-     * as class name. */
-    @BrowserFeature(@WebBrowser(FF))
-    JS_DEFINITION_COMMON_CLASS_NAME,
-
     /** Javascript doctyp.entities returns an empty string (IE). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_DOCTYPE_ENTITIES_EMPTY_STRING,
