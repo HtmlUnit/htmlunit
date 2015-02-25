@@ -333,5 +333,4 @@ public class ApplicationCache extends SimpleScriptable {
     public void update() {
         // TODO: implement
     }
-
 }

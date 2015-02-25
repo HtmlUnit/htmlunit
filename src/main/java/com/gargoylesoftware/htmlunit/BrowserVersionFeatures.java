@@ -662,10 +662,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_ANCHORS_REQUIRES_NAME_OR_ID,
 
-    /** Indicates that the <code>ApplicationCache</code> is named <code>OfflineResourceList</code> instead. */
-    @BrowserFeature(@WebBrowser(FF))
-    JS_APPCACHE_NAME_OFFLINERESOURCELIST,
-
     /** Indicates that the appendChild call create a DocumentFragment to be
      * the parentNode's parentNode if this was null. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))

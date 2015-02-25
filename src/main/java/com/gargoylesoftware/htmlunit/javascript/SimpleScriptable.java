@@ -116,6 +116,9 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
         if (className_ != null) {
             return className_;
         }
+        if (getPrototype() != null) {
+            return getPrototype().getClassName();
+        }
         String className = getClass().getSimpleName();
         if (className.isEmpty()) {
             // for anonymous class
