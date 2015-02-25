@@ -1000,7 +1000,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF = "function",
             IE8 = "undefined")
-    @NotYetImplemented(IE8)
     public void htmlDivElement() throws Exception {
         testHostClassName("HTMLDivElement");
     }

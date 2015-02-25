@@ -1017,7 +1017,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function HTMLDivElement() { [native code] }",
             FF = "function HTMLDivElement() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented(IE8)
     public void htmlDivElement() throws Exception {
         testHostClassName("HTMLDivElement");
     }
