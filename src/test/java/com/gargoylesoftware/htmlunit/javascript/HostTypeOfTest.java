@@ -127,6 +127,19 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ApplicationCache}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    @NotYetImplemented(FF)
+    public void offlineResourceList() throws Exception {
+        testHostClassName("OfflineResourceList");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.BeforeUnloadEvent}.
      *
      * @throws Exception if an error occurs
@@ -285,6 +298,19 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    @NotYetImplemented(FF)
+    public void css2Properties() throws Exception {
+        testHostClassName("CSS2Properties");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleRule}.
      *
      * @throws Exception if an error occurs
@@ -377,6 +403,17 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     public void comment() throws Exception {
         testHostClassName("Comment");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Comment}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("undefined")
+    public void htmlCommentElement() throws Exception {
+        testHostClassName("HTMLCommentElement");
     }
 
     /**
@@ -822,7 +859,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBlockQuoteElement}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLQuoteElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -833,7 +870,20 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBlockQuoteElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+        IE11 = "object")
+    @NotYetImplemented({ CHROME, FF, IE8 })
+    public void htmlQuoteElement() throws Exception {
+        testHostClassName("HTMLQuoteElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBlockQuoteElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -1873,6 +1923,17 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     public void htmlUnknownElement() throws Exception {
         testHostClassName("HTMLUnknownElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("undefined")
+    public void htmlGenericElement() throws Exception {
+        testHostClassName("HTMLGenericElement");
     }
 
     /**

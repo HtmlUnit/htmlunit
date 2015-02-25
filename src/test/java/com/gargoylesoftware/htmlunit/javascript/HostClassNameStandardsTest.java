@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -131,6 +132,19 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @NotYetImplemented({ FF, CHROME })
     public void applicationCache() throws Exception {
         testHostClassName("ApplicationCache");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ApplicationCache}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+        FF = "function OfflineResourceList() {\n    [native code]\n}")
+    @NotYetImplemented(FF)
+    public void offlineResourceList() throws Exception {
+        testHostClassName("OfflineResourceList");
     }
 
     /**
@@ -290,6 +304,19 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF = "function CSS2Properties() {\n    [native code]\n}")
+    @NotYetImplemented(FF)
+    public void css2Properties() throws Exception {
+        testHostClassName("CSS2Properties");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleRule}.
      *
      * @throws Exception if an error occurs
@@ -380,6 +407,17 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE8 = "exception")
     public void comment() throws Exception {
         testHostClassName("Comment");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Comment}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("exception")
+    public void htmlCommentElement() throws Exception {
+        testHostClassName("HTMLCommentElement");
     }
 
     /**
@@ -831,6 +869,20 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts("exception")
     public void htmlBlockQuoteElement() throws Exception {
         testHostClassName("HTMLBlockQuoteElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBlockQuoteElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "function HTMLQuoteElement() { [native code] }",
+            FF = "function HTMLQuoteElement() {\n    [native code]\n}",
+            IE = "[object HTMLQuoteElement]")
+    @NotYetImplemented({ IE8, FF, CHROME })
+    public void htmlQuoteElement() throws Exception {
+        testHostClassName("HTMLQuoteElement");
     }
 
     /**
@@ -1826,6 +1878,18 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void htmlUnknownElement() throws Exception {
         testHostClassName("HTMLUnknownElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("exception")
+    @NotYetImplemented(IE8)
+    public void htmlGenericElement() throws Exception {
+        testHostClassName("HTMLGenericElement");
     }
 
     /**
