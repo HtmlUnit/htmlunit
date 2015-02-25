@@ -77,7 +77,8 @@ public class HTMLUnknownElement extends HTMLElement {
             if (getBrowserVersion().hasFeature(JS_HTML_GENERIC_ELEMENT_CLASS_NAME)) {
                 return "HTMLGenericElement";
             }
-            if (getTagName().indexOf('-') != -1
+            final HtmlElement element = getDomNodeOrNull();
+            if (element != null && element.getNodeName().indexOf('-') != -1
                     && getBrowserVersion().hasFeature(JS_HTML_HYPHEN_ELEMENT_CLASS_NAME)) {
                 return "HTMLElement";
             }
