@@ -50,6 +50,8 @@ public class HtmlBackgroundSoundTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPageWithAlerts(html);
-        assertTrue(HtmlBackgroundSound.class.isInstance(page.getHtmlElementById("myId")));
+        if (getExpectedAlerts()[0].contains("Sound")) {
+            assertTrue(HtmlBackgroundSound.class.isInstance(page.getHtmlElementById("myId")));
+        }
     }
 }

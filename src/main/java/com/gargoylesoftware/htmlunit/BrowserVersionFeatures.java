@@ -607,10 +607,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTML_COLOR_TO_LOWER,
 
-    /** HTMLCommentElement instead of Comment. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    HTML_COMMENT_ELEMENT,
-
     /** Supports &lt;object&gt; classid attribute. */
     @BrowserFeature(@WebBrowser(IE))
     HTML_OBJECT_CLASSID,
@@ -692,10 +688,6 @@ public enum BrowserVersionFeatures {
     /** firstChild and lastChild returns null for Attr (like IE does). */
     @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(FF) })
     JS_ATTR_FIRST_LAST_CHILD_RETURNS_NULL,
-
-    /** HTMLBGSoundElement reported as HTMLUnknownElement. */
-    @BrowserFeature(@WebBrowser(FF))
-    JS_BGSOUND_AS_UNKNOWN,
 
     /** Indicates that HTMLBlockElements returning 'HTMLElement'
      * as class name. */

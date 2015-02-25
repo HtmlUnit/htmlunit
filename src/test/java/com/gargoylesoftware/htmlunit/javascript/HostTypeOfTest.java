@@ -791,10 +791,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "object",
-            CHROME = "undefined",
-            FF = "undefined",
-            IE8 = "undefined")
+    @Alerts(DEFAULT = "undefined",
+            IE11 = "object")
     public void htmlBGSoundElement() throws Exception {
         test("HTMLBGSoundElement");
     }

@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COMMENT_ELEMENT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -43,7 +42,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClasses({
     @JsxClass(domClass = DomComment.class,
             browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, domClass = DomComment.class,
+    @JsxClass(domClass = DomComment.class, isJSObject = false, isDefinedInStandardsMode = false,
+        className = "HTMLCommentElement",
         browsers = @WebBrowser(value = IE, maxVersion = 8))
 })
 public final class Comment extends CharacterDataImpl {
@@ -139,17 +139,5 @@ public final class Comment extends CharacterDataImpl {
     @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
     public void setInnerText(final String value) {
         // nothing
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getClassName() {
-        if (getWindow().getWebWindow() != null
-                && getBrowserVersion().hasFeature(HTML_COMMENT_ELEMENT)) {
-            return "HTMLCommentElement";
-        }
-        return super.getClassName();
     }
 }

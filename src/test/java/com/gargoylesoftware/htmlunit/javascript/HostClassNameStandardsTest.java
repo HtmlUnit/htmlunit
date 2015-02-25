@@ -800,9 +800,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLBGSoundElement]",
-            CHROME = "exception",
-            FF = "exception")
+    @Alerts(DEFAULT = "exception",
+            IE = "[object HTMLBGSoundElement]")
     public void htmlBGSoundElement() throws Exception {
         test("HTMLBGSoundElement");
     }
