@@ -197,6 +197,7 @@ public class JavaScriptEngine {
         final BrowserVersion browserVersion = webClient.getBrowserVersion();
         final Map<Class<? extends SimpleScriptable>, Scriptable> prototypes = new HashMap<>();
         final Window window = new Window();
+        ((SimpleScriptable) window).setClassName("Window");
         context.initStandardObjects(window);
 
         if (browserVersion.hasFeature(JS_CONSTRUCTOR)) {
