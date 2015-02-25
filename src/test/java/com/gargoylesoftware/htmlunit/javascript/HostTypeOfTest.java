@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 @RunWith(BrowserRunner.class)
 public class HostTypeOfTest extends WebDriverTestCase {
 
-    private void testHostClassName(final String className) throws Exception {
+    private void test(final String className) throws Exception {
         final String html =
             "<html><head><script>\n"
             + "  function test() {\n"
@@ -60,7 +60,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function",
             IE8 = "undefined")
     public void arrayBuffer() throws Exception {
-        testHostClassName("ArrayBuffer");
+        test("ArrayBuffer");
     }
 
     /**
@@ -71,7 +71,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void arrayBufferView() throws Exception {
-        testHostClassName("ArrayBufferView");
+        test("ArrayBufferView");
     }
 
     /**
@@ -82,7 +82,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void arrayBufferViewBase() throws Exception {
-        testHostClassName("ArrayBufferViewBase");
+        test("ArrayBufferViewBase");
     }
 
     /**
@@ -96,7 +96,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void attr() throws Exception {
-        testHostClassName("Attr");
+        test("Attr");
     }
 
     /**
@@ -108,7 +108,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             IE8 = "function")
     public void activeXObject() throws Exception {
-        testHostClassName("ActiveXObject");
+        test("ActiveXObject");
     }
 
     /**
@@ -123,7 +123,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     @NotYetImplemented({ FF, CHROME })
     public void applicationCache() throws Exception {
-        testHostClassName("ApplicationCache");
+        test("ApplicationCache");
     }
 
     /**
@@ -136,7 +136,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function")
     @NotYetImplemented(FF)
     public void offlineResourceList() throws Exception {
-        testHostClassName("OfflineResourceList");
+        test("OfflineResourceList");
     }
 
     /**
@@ -150,7 +150,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void beforeUnloadEvent() throws Exception {
-        testHostClassName("BeforeUnloadEvent");
+        test("BeforeUnloadEvent");
     }
 
     /**
@@ -162,7 +162,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             FF24 = "object")
     public void boxObject() throws Exception {
-        testHostClassName("BoxObject");
+        test("BoxObject");
     }
 
     /**
@@ -176,7 +176,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void cdataSection() throws Exception {
-        testHostClassName("CDATASection");
+        test("CDATASection");
     }
 
     /**
@@ -187,7 +187,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void clipboardData() throws Exception {
-        testHostClassName("ClipboardData");
+        test("ClipboardData");
     }
 
     /**
@@ -200,7 +200,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             IE = "undefined")
     public void cssCharsetRule() throws Exception {
-        testHostClassName("CSSCharsetRule");
+        test("CSSCharsetRule");
     }
 
     /**
@@ -213,7 +213,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             IE8 = "undefined")
     public void cssFontFaceRule() throws Exception {
-        testHostClassName("CSSFontFaceRule");
+        test("CSSFontFaceRule");
     }
 
     /**
@@ -226,7 +226,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             IE8 = "undefined")
     public void cssImportRule() throws Exception {
-        testHostClassName("CSSImportRule");
+        test("CSSImportRule");
     }
 
     /**
@@ -239,7 +239,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             IE8 = "undefined")
     public void cssMediaRule() throws Exception {
-        testHostClassName("CSSMediaRule");
+        test("CSSMediaRule");
     }
 
     /**
@@ -253,7 +253,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "undefined")
     @NotYetImplemented(CHROME)
     public void cssPrimitiveValue() throws Exception {
-        testHostClassName("CSSPrimitiveValue");
+        test("CSSPrimitiveValue");
     }
 
     /**
@@ -267,7 +267,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     @NotYetImplemented(CHROME)
     public void cssRule() throws Exception {
-        testHostClassName("CSSRule");
+        test("CSSRule");
     }
 
     /**
@@ -280,7 +280,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             IE8 = "undefined")
     public void cssRuleList() throws Exception {
-        testHostClassName("CSSRuleList");
+        test("CSSRuleList");
     }
 
     /**
@@ -294,7 +294,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void cssStyleDeclaration() throws Exception {
-        testHostClassName("CSSStyleDeclaration");
+        test("CSSStyleDeclaration");
     }
 
     /**
@@ -307,7 +307,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function")
     @NotYetImplemented(FF)
     public void css2Properties() throws Exception {
-        testHostClassName("CSS2Properties");
+        test("CSS2Properties");
     }
 
     /**
@@ -320,7 +320,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             IE8 = "undefined")
     public void cssStyleRule() throws Exception {
-        testHostClassName("CSSStyleRule");
+        test("CSSStyleRule");
     }
 
     /**
@@ -334,7 +334,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void cssStyleSheet() throws Exception {
-        testHostClassName("CSSStyleSheet");
+        test("CSSStyleSheet");
     }
 
     /**
@@ -347,7 +347,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function")
     @NotYetImplemented(CHROME)
     public void cssValue() throws Exception {
-        testHostClassName("CSSValue");
+        test("CSSValue");
     }
 
     /**
@@ -361,7 +361,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void canvasRenderingContext2D() throws Exception {
-        testHostClassName("CanvasRenderingContext2D");
+        test("CanvasRenderingContext2D");
     }
 
     /**
@@ -372,7 +372,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void characterDataImpl() throws Exception {
-        testHostClassName("CharacterDataImpl");
+        test("CharacterDataImpl");
     }
 
     /**
@@ -388,7 +388,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     @NotYetImplemented(FF24)
     public void clientRect() throws Exception {
-        testHostClassName("ClientRect");
+        test("ClientRect");
     }
 
     /**
@@ -402,7 +402,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void comment() throws Exception {
-        testHostClassName("Comment");
+        test("Comment");
     }
 
     /**
@@ -413,7 +413,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void htmlCommentElement() throws Exception {
-        testHostClassName("HTMLCommentElement");
+        test("HTMLCommentElement");
     }
 
     /**
@@ -424,7 +424,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void computedCSSStyleDeclaration() throws Exception {
-        testHostClassName("ComputedCSSStyleDeclaration");
+        test("ComputedCSSStyleDeclaration");
     }
 
     /**
@@ -439,7 +439,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     @NotYetImplemented({ FF, CHROME })
     public void console() throws Exception {
-        testHostClassName("Console");
+        test("Console");
     }
 
     /**
@@ -453,7 +453,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "undefined",
             IE8 = "undefined")
     public void coordinates() throws Exception {
-        testHostClassName("Coordinates");
+        test("Coordinates");
     }
 
     /**
@@ -465,7 +465,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function",
             IE8 = "undefined")
     public void dataView() throws Exception {
-        testHostClassName("DataView");
+        test("DataView");
     }
 
     /**
@@ -480,7 +480,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     @NotYetImplemented(FF24)
     public void domException() throws Exception {
-        testHostClassName("DOMException");
+        test("DOMException");
     }
 
     /**
@@ -494,7 +494,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void domImplementation() throws Exception {
-        testHostClassName("DOMImplementation");
+        test("DOMImplementation");
     }
 
     /**
@@ -506,7 +506,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function",
             IE8 = "undefined")
     public void domParser() throws Exception {
-        testHostClassName("DOMParser");
+        test("DOMParser");
     }
 
     /**
@@ -520,7 +520,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void domStringMap() throws Exception {
-        testHostClassName("DOMStringMap");
+        test("DOMStringMap");
     }
 
     /**
@@ -534,7 +534,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void domTokenList() throws Exception {
-        testHostClassName("DOMTokenList");
+        test("DOMTokenList");
     }
 
     /**
@@ -548,7 +548,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void document() throws Exception {
-        testHostClassName("Document");
+        test("Document");
     }
 
     /**
@@ -562,7 +562,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void documentFragment() throws Exception {
-        testHostClassName("DocumentFragment");
+        test("DocumentFragment");
     }
 
     /**
@@ -576,7 +576,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void documentType() throws Exception {
-        testHostClassName("DocumentType");
+        test("DocumentType");
     }
 
     /**
@@ -590,7 +590,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void element() throws Exception {
-        testHostClassName("Element");
+        test("Element");
     }
 
     /**
@@ -602,7 +602,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             IE = "function")
     public void enumerator() throws Exception {
-        testHostClassName("Enumerator");
+        test("Enumerator");
     }
 
     /**
@@ -616,7 +616,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void event() throws Exception {
-        testHostClassName("Event");
+        test("Event");
     }
 
     /**
@@ -627,7 +627,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void eventNode() throws Exception {
-        testHostClassName("EventNode");
+        test("EventNode");
     }
 
     /**
@@ -640,7 +640,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF31 = "function")
     @NotYetImplemented(FF31)
     public void external() throws Exception {
-        testHostClassName("External");
+        test("External");
     }
 
     /**
@@ -652,7 +652,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function",
             IE8 = "undefined")
     public void float32Array() throws Exception {
-        testHostClassName("Float32Array");
+        test("Float32Array");
     }
 
     /**
@@ -664,7 +664,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function",
             IE8 = "undefined")
     public void float64Array() throws Exception {
-        testHostClassName("Float64Array");
+        test("Float64Array");
     }
 
     /**
@@ -675,7 +675,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void formChild() throws Exception {
-        testHostClassName("FormChild");
+        test("FormChild");
     }
 
     /**
@@ -686,7 +686,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void formField() throws Exception {
-        testHostClassName("FormField");
+        test("FormField");
     }
 
     /**
@@ -700,7 +700,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "undefined",
             IE8 = "undefined")
     public void geolocation() throws Exception {
-        testHostClassName("Geolocation");
+        test("Geolocation");
     }
 
     /**
@@ -713,7 +713,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF = "function")
     public void hashChangeEvent() throws Exception {
-        testHostClassName("HashChangeEvent");
+        test("HashChangeEvent");
     }
 
     /**
@@ -728,7 +728,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     @NotYetImplemented(FF24)
     public void history() throws Exception {
-        testHostClassName("History");
+        test("History");
     }
 
     /**
@@ -742,7 +742,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlAnchorElement() throws Exception {
-        testHostClassName("HTMLAnchorElement");
+        test("HTMLAnchorElement");
     }
 
     /**
@@ -756,7 +756,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlAppletElement() throws Exception {
-        testHostClassName("HTMLAppletElement");
+        test("HTMLAppletElement");
     }
 
     /**
@@ -770,7 +770,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlAreaElement() throws Exception {
-        testHostClassName("HTMLAreaElement");
+        test("HTMLAreaElement");
     }
 
     /**
@@ -784,7 +784,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlAudioElement() throws Exception {
-        testHostClassName("HTMLAudioElement");
+        test("HTMLAudioElement");
     }
 
     /**
@@ -798,7 +798,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "undefined",
             IE8 = "undefined")
     public void htmlBGSoundElement() throws Exception {
-        testHostClassName("HTMLBGSoundElement");
+        test("HTMLBGSoundElement");
     }
 
     /**
@@ -812,7 +812,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlBRElement() throws Exception {
-        testHostClassName("HTMLBRElement");
+        test("HTMLBRElement");
     }
 
     /**
@@ -826,7 +826,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlBaseElement() throws Exception {
-        testHostClassName("HTMLBaseElement");
+        test("HTMLBaseElement");
     }
 
     /**
@@ -840,7 +840,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "undefined",
             IE8 = "undefined")
     public void htmlBaseFontElement() throws Exception {
-        testHostClassName("HTMLBaseFontElement");
+        test("HTMLBaseFontElement");
     }
 
     /**
@@ -855,7 +855,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     @NotYetImplemented({ IE8, FF, CHROME })
     public void htmlBlockElement() throws Exception {
-        testHostClassName("HTMLBlockElement");
+        test("HTMLBlockElement");
     }
 
     /**
@@ -866,7 +866,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void htmlBlockQuoteElement() throws Exception {
-        testHostClassName("HTMLBlockQuoteElement");
+        test("HTMLBlockQuoteElement");
     }
 
     /**
@@ -879,7 +879,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
         IE11 = "object")
     @NotYetImplemented({ CHROME, FF, IE8 })
     public void htmlQuoteElement() throws Exception {
-        testHostClassName("HTMLQuoteElement");
+        test("HTMLQuoteElement");
     }
 
     /**
@@ -893,7 +893,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlBodyElement() throws Exception {
-        testHostClassName("HTMLBodyElement");
+        test("HTMLBodyElement");
     }
 
     /**
@@ -907,7 +907,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlButtonElement() throws Exception {
-        testHostClassName("HTMLButtonElement");
+        test("HTMLButtonElement");
     }
 
     /**
@@ -921,7 +921,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlCanvasElement() throws Exception {
-        testHostClassName("HTMLCanvasElement");
+        test("HTMLCanvasElement");
     }
 
     /**
@@ -935,7 +935,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlCollection() throws Exception {
-        testHostClassName("HTMLCollection");
+        test("HTMLCollection");
     }
 
     /**
@@ -949,7 +949,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "undefined",
             IE8 = "undefined")
     public void htmlAllCollection() throws Exception {
-        testHostClassName("HTMLAllCollection");
+        test("HTMLAllCollection");
     }
 
     /**
@@ -963,7 +963,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlDataListElement() throws Exception {
-        testHostClassName("HTMLDataListElement");
+        test("HTMLDataListElement");
     }
 
     /**
@@ -974,7 +974,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void htmlDefinitionDescriptionElement() throws Exception {
-        testHostClassName("HTMLDefinitionDescriptionElement");
+        test("HTMLDefinitionDescriptionElement");
     }
 
     /**
@@ -986,7 +986,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             IE11 = "object")
     public void htmlDDElement() throws Exception {
-        testHostClassName("HTMLDDElement");
+        test("HTMLDDElement");
     }
 
     /**
@@ -997,7 +997,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void htmlDefinitionTermElement() throws Exception {
-        testHostClassName("HTMLDefinitionTermElement");
+        test("HTMLDefinitionTermElement");
     }
 
     /**
@@ -1009,7 +1009,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             IE11 = "object")
     public void htmlDTElement() throws Exception {
-        testHostClassName("HTMLDTElement");
+        test("HTMLDTElement");
     }
 
     /**
@@ -1023,7 +1023,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlDListElement() throws Exception {
-        testHostClassName("HTMLDListElement");
+        test("HTMLDListElement");
     }
 
     /**
@@ -1037,7 +1037,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlDirectoryElement() throws Exception {
-        testHostClassName("HTMLDirectoryElement");
+        test("HTMLDirectoryElement");
     }
 
     /**
@@ -1051,7 +1051,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlDivElement() throws Exception {
-        testHostClassName("HTMLDivElement");
+        test("HTMLDivElement");
     }
 
     /**
@@ -1065,7 +1065,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlDocument() throws Exception {
-        testHostClassName("HTMLDocument");
+        test("HTMLDocument");
     }
 
     /**
@@ -1079,7 +1079,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlElement() throws Exception {
-        testHostClassName("HTMLElement");
+        test("HTMLElement");
     }
 
     /**
@@ -1093,7 +1093,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlEmbedElement() throws Exception {
-        testHostClassName("HTMLEmbedElement");
+        test("HTMLEmbedElement");
     }
 
     /**
@@ -1107,7 +1107,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlFieldSetElement() throws Exception {
-        testHostClassName("HTMLFieldSetElement");
+        test("HTMLFieldSetElement");
     }
 
     /**
@@ -1121,7 +1121,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlFontElement() throws Exception {
-        testHostClassName("HTMLFontElement");
+        test("HTMLFontElement");
     }
 
     /**
@@ -1135,7 +1135,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlFormElement() throws Exception {
-        testHostClassName("HTMLFormElement");
+        test("HTMLFormElement");
     }
 
     /**
@@ -1149,7 +1149,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlFrameElement() throws Exception {
-        testHostClassName("HTMLFrameElement");
+        test("HTMLFrameElement");
     }
 
     /**
@@ -1163,7 +1163,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlFrameSetElement() throws Exception {
-        testHostClassName("HTMLFrameSetElement");
+        test("HTMLFrameSetElement");
     }
 
     /**
@@ -1177,7 +1177,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlHRElement() throws Exception {
-        testHostClassName("HTMLHRElement");
+        test("HTMLHRElement");
     }
 
     /**
@@ -1191,7 +1191,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlHeadElement() throws Exception {
-        testHostClassName("HTMLHeadElement");
+        test("HTMLHeadElement");
     }
 
     /**
@@ -1206,7 +1206,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     @NotYetImplemented(IE8)
     public void htmlHeadingElement() throws Exception {
-        testHostClassName("HTMLHeadingElement");
+        test("HTMLHeadingElement");
     }
 
     /**
@@ -1220,7 +1220,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlHtmlElement() throws Exception {
-        testHostClassName("HTMLHtmlElement");
+        test("HTMLHtmlElement");
     }
 
     /**
@@ -1234,7 +1234,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlIFrameElement() throws Exception {
-        testHostClassName("HTMLIFrameElement");
+        test("HTMLIFrameElement");
     }
 
     /**
@@ -1249,7 +1249,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     @NotYetImplemented(IE)
     public void htmlImageElement() throws Exception {
-        testHostClassName("HTMLImageElement");
+        test("HTMLImageElement");
     }
 
     /**
@@ -1260,7 +1260,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void htmlInlineQuotationElement() throws Exception {
-        testHostClassName("HTMLInlineQuotationElement");
+        test("HTMLInlineQuotationElement");
     }
 
     /**
@@ -1274,7 +1274,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlInputElement() throws Exception {
-        testHostClassName("HTMLInputElement");
+        test("HTMLInputElement");
     }
 
     /**
@@ -1288,7 +1288,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "undefined",
             IE8 = "undefined")
     public void htmlIsIndexElement() throws Exception {
-        testHostClassName("HTMLIsIndexElement");
+        test("HTMLIsIndexElement");
     }
 
     /**
@@ -1301,7 +1301,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function")
     @NotYetImplemented(CHROME)
     public void htmlKeygenElement() throws Exception {
-        testHostClassName("HTMLKeygenElement");
+        test("HTMLKeygenElement");
     }
 
     /**
@@ -1315,7 +1315,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlLIElement() throws Exception {
-        testHostClassName("HTMLLIElement");
+        test("HTMLLIElement");
     }
 
     /**
@@ -1329,7 +1329,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlLabelElement() throws Exception {
-        testHostClassName("HTMLLabelElement");
+        test("HTMLLabelElement");
     }
 
     /**
@@ -1343,7 +1343,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlLegendElement() throws Exception {
-        testHostClassName("HTMLLegendElement");
+        test("HTMLLegendElement");
     }
 
     /**
@@ -1357,7 +1357,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlLinkElement() throws Exception {
-        testHostClassName("HTMLLinkElement");
+        test("HTMLLinkElement");
     }
 
     /**
@@ -1368,7 +1368,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void htmlListElement() throws Exception {
-        testHostClassName("HTMLListElement");
+        test("HTMLListElement");
     }
 
     /**
@@ -1382,7 +1382,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlMapElement() throws Exception {
-        testHostClassName("HTMLMapElement");
+        test("HTMLMapElement");
     }
 
     /**
@@ -1397,7 +1397,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     @NotYetImplemented(CHROME)
     public void htmlMarqueeElement() throws Exception {
-        testHostClassName("HTMLMarqueeElement");
+        test("HTMLMarqueeElement");
     }
 
     /**
@@ -1411,7 +1411,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlMediaElement() throws Exception {
-        testHostClassName("HTMLMediaElement");
+        test("HTMLMediaElement");
     }
 
     /**
@@ -1426,7 +1426,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     @NotYetImplemented(CHROME)
     public void htmlMenuElement() throws Exception {
-        testHostClassName("HTMLMenuElement");
+        test("HTMLMenuElement");
     }
 
     /**
@@ -1440,7 +1440,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlMetaElement() throws Exception {
-        testHostClassName("HTMLMetaElement");
+        test("HTMLMetaElement");
     }
 
     /**
@@ -1453,7 +1453,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF = "function")
     public void htmlMeterElement() throws Exception {
-        testHostClassName("HTMLMeterElement");
+        test("HTMLMeterElement");
     }
 
     /**
@@ -1467,7 +1467,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlModElement() throws Exception {
-        testHostClassName("HTMLModElement");
+        test("HTMLModElement");
     }
 
     /**
@@ -1479,7 +1479,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             IE8 = "undefined")
     public void htmlNoShowElement() throws Exception {
-        testHostClassName("HTMLNoShowElement");
+        test("HTMLNoShowElement");
     }
 
     /**
@@ -1493,7 +1493,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "undefined",
             IE8 = "undefined")
     public void htmlNextIdElement() throws Exception {
-        testHostClassName("HTMLNextIdElement");
+        test("HTMLNextIdElement");
     }
 
     /**
@@ -1507,7 +1507,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlOListElement() throws Exception {
-        testHostClassName("HTMLOListElement");
+        test("HTMLOListElement");
     }
 
     /**
@@ -1521,7 +1521,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlObjectElement() throws Exception {
-        testHostClassName("HTMLObjectElement");
+        test("HTMLObjectElement");
     }
 
     /**
@@ -1535,7 +1535,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlOptGroupElement() throws Exception {
-        testHostClassName("HTMLOptGroupElement");
+        test("HTMLOptGroupElement");
     }
 
     /**
@@ -1550,7 +1550,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     @NotYetImplemented(IE)
     public void htmlOptionElement() throws Exception {
-        testHostClassName("HTMLOptionElement");
+        test("HTMLOptionElement");
     }
 
     /**
@@ -1563,7 +1563,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF = "function")
     public void htmlOptionsCollection() throws Exception {
-        testHostClassName("HTMLOptionsCollection");
+        test("HTMLOptionsCollection");
     }
 
     /**
@@ -1576,7 +1576,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF = "function")
     public void htmlOutputElement() throws Exception {
-        testHostClassName("HTMLOutputElement");
+        test("HTMLOutputElement");
     }
 
     /**
@@ -1590,7 +1590,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlParagraphElement() throws Exception {
-        testHostClassName("HTMLParagraphElement");
+        test("HTMLParagraphElement");
     }
 
     /**
@@ -1604,7 +1604,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlParamElement() throws Exception {
-        testHostClassName("HTMLParamElement");
+        test("HTMLParamElement");
     }
 
     /**
@@ -1619,7 +1619,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     @NotYetImplemented({ FF, CHROME, IE8 })
     public void htmlPhraseElement() throws Exception {
-        testHostClassName("HTMLPhraseElement");
+        test("HTMLPhraseElement");
     }
 
     /**
@@ -1633,7 +1633,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlPreElement() throws Exception {
-        testHostClassName("HTMLPreElement");
+        test("HTMLPreElement");
     }
 
     /**
@@ -1647,7 +1647,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlProgressElement() throws Exception {
-        testHostClassName("HTMLProgressElement");
+        test("HTMLProgressElement");
     }
 
     /**
@@ -1661,7 +1661,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlScriptElement() throws Exception {
-        testHostClassName("HTMLScriptElement");
+        test("HTMLScriptElement");
     }
 
     /**
@@ -1675,7 +1675,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlSelectElement() throws Exception {
-        testHostClassName("HTMLSelectElement");
+        test("HTMLSelectElement");
     }
 
     /**
@@ -1689,7 +1689,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlSourceElement() throws Exception {
-        testHostClassName("HTMLSourceElement");
+        test("HTMLSourceElement");
     }
 
     /**
@@ -1704,7 +1704,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     @NotYetImplemented({ FF, IE8 })
     public void htmlSpanElement() throws Exception {
-        testHostClassName("HTMLSpanElement");
+        test("HTMLSpanElement");
     }
 
     /**
@@ -1718,7 +1718,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlStyleElement() throws Exception {
-        testHostClassName("HTMLStyleElement");
+        test("HTMLStyleElement");
     }
 
     /**
@@ -1732,7 +1732,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlTableCaptionElement() throws Exception {
-        testHostClassName("HTMLTableCaptionElement");
+        test("HTMLTableCaptionElement");
     }
 
     /**
@@ -1746,7 +1746,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlTableCellElement() throws Exception {
-        testHostClassName("HTMLTableCellElement");
+        test("HTMLTableCellElement");
     }
 
     /**
@@ -1760,7 +1760,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlTableColElement() throws Exception {
-        testHostClassName("HTMLTableColElement");
+        test("HTMLTableColElement");
     }
 
     /**
@@ -1771,7 +1771,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void htmlTableComponent() throws Exception {
-        testHostClassName("HTMLTableComponent");
+        test("HTMLTableComponent");
     }
 
     /**
@@ -1785,7 +1785,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "undefined",
             IE8 = "undefined")
     public void htmlTableDataCellElement() throws Exception {
-        testHostClassName("HTMLTableDataCellElement");
+        test("HTMLTableDataCellElement");
     }
 
     /**
@@ -1799,7 +1799,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlTableElement() throws Exception {
-        testHostClassName("HTMLTableElement");
+        test("HTMLTableElement");
     }
 
     /**
@@ -1813,7 +1813,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "undefined",
             IE8 = "undefined")
     public void htmlTableHeaderCellElement() throws Exception {
-        testHostClassName("HTMLTableHeaderCellElement");
+        test("HTMLTableHeaderCellElement");
     }
 
     /**
@@ -1827,7 +1827,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlTableRowElement() throws Exception {
-        testHostClassName("HTMLTableRowElement");
+        test("HTMLTableRowElement");
     }
 
     /**
@@ -1841,7 +1841,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlTableSectionElement() throws Exception {
-        testHostClassName("HTMLTableSectionElement");
+        test("HTMLTableSectionElement");
     }
 
     /**
@@ -1852,7 +1852,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined")
     public void htmlTextElement() throws Exception {
-        testHostClassName("HTMLTextElement");
+        test("HTMLTextElement");
     }
 
     /**
@@ -1866,7 +1866,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlTextAreaElement() throws Exception {
-        testHostClassName("HTMLTextAreaElement");
+        test("HTMLTextAreaElement");
     }
 
     /**
@@ -1879,7 +1879,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function")
     @NotYetImplemented(FF)
     public void htmlTimeElement() throws Exception {
-        testHostClassName("HTMLTimeElement");
+        test("HTMLTimeElement");
     }
 
     /**
@@ -1893,7 +1893,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlTitleElement() throws Exception {
-        testHostClassName("HTMLTitleElement");
+        test("HTMLTitleElement");
     }
 
     /**
@@ -1908,7 +1908,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     @NotYetImplemented(IE8)
     public void htmlUListElement() throws Exception {
-        testHostClassName("HTMLUListElement");
+        test("HTMLUListElement");
     }
 
     /**
@@ -1922,7 +1922,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlUnknownElement() throws Exception {
-        testHostClassName("HTMLUnknownElement");
+        test("HTMLUnknownElement");
     }
 
     /**
@@ -1933,7 +1933,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void htmlGenericElement() throws Exception {
-        testHostClassName("HTMLGenericElement");
+        test("HTMLGenericElement");
     }
 
     /**
@@ -1945,7 +1945,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts("undefined")
     @NotYetImplemented(CHROME)
     public void htmlWBRElement() throws Exception {
-        testHostClassName("HTMLWBRElement");
+        test("HTMLWBRElement");
     }
 
     /**
@@ -1959,7 +1959,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void htmlVideoElement() throws Exception {
-        testHostClassName("HTMLVideoElement");
+        test("HTMLVideoElement");
     }
 
     /**
@@ -1971,7 +1971,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function",
             IE8 = "undefined")
     public void int16Array() throws Exception {
-        testHostClassName("Int16Array");
+        test("Int16Array");
     }
 
     /**
@@ -1983,7 +1983,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function",
             IE8 = "undefined")
     public void int32Array() throws Exception {
-        testHostClassName("Int32Array");
+        test("Int32Array");
     }
 
     /**
@@ -1995,7 +1995,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function",
             IE8 = "undefined")
     public void int8Array() throws Exception {
-        testHostClassName("Int8Array");
+        test("Int8Array");
     }
 
     /**
@@ -2009,7 +2009,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void keyboardEvent() throws Exception {
-        testHostClassName("KeyboardEvent");
+        test("KeyboardEvent");
     }
 
     /**
@@ -2023,7 +2023,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     @NotYetImplemented(IE8)
     public void location() throws Exception {
-        testHostClassName("Location");
+        test("Location");
     }
 
     /**
@@ -2038,7 +2038,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     @NotYetImplemented(FF24)
     public void mediaList() throws Exception {
-        testHostClassName("MediaList");
+        test("MediaList");
     }
 
     /**
@@ -2052,7 +2052,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void messageEvent() throws Exception {
-        testHostClassName("MessageEvent");
+        test("MessageEvent");
     }
 
     /**
@@ -2067,7 +2067,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     @NotYetImplemented({ FF24, IE11 })
     public void mimeType() throws Exception {
-        testHostClassName("MimeType");
+        test("MimeType");
     }
 
     /**
@@ -2082,7 +2082,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     @NotYetImplemented(FF24)
     public void mimeTypeArray() throws Exception {
-        testHostClassName("MimeTypeArray");
+        test("MimeTypeArray");
     }
 
     /**
@@ -2096,7 +2096,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void mouseEvent() throws Exception {
-        testHostClassName("MouseEvent");
+        test("MouseEvent");
     }
 
     /**
@@ -2110,7 +2110,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void mutationEvent() throws Exception {
-        testHostClassName("MutationEvent");
+        test("MutationEvent");
     }
 
     /**
@@ -2125,7 +2125,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     @NotYetImplemented(FF)
     public void namedNodeMap() throws Exception {
-        testHostClassName("NamedNodeMap");
+        test("NamedNodeMap");
     }
 
     /**
@@ -2136,7 +2136,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void namespace() throws Exception {
-        testHostClassName("Namespace");
+        test("Namespace");
     }
 
     /**
@@ -2147,7 +2147,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void namespaceCollection() throws Exception {
-        testHostClassName("NamespaceCollection");
+        test("NamespaceCollection");
     }
 
     /**
@@ -2162,7 +2162,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     @NotYetImplemented(FF24)
     public void navigator() throws Exception {
-        testHostClassName("Navigator");
+        test("Navigator");
     }
 
     /**
@@ -2176,7 +2176,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void node() throws Exception {
-        testHostClassName("Node");
+        test("Node");
     }
 
     /**
@@ -2190,7 +2190,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void nodeFilter() throws Exception {
-        testHostClassName("NodeFilter");
+        test("NodeFilter");
     }
 
     /**
@@ -2204,7 +2204,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void nodeList() throws Exception {
-        testHostClassName("NodeList");
+        test("NodeList");
     }
 
     /**
@@ -2219,7 +2219,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     @NotYetImplemented({ FF24, IE11 })
     public void plugin() throws Exception {
-        testHostClassName("Plugin");
+        test("Plugin");
     }
 
     /**
@@ -2234,7 +2234,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     @NotYetImplemented(FF24)
     public void pluginArray() throws Exception {
-        testHostClassName("PluginArray");
+        test("PluginArray");
     }
 
     /**
@@ -2248,7 +2248,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "undefined",
             IE8 = "undefined")
     public void pointerEvent() throws Exception {
-        testHostClassName("PointerEvent");
+        test("PointerEvent");
     }
 
     /**
@@ -2259,7 +2259,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void popup() throws Exception {
-        testHostClassName("Popup");
+        test("Popup");
     }
 
     /**
@@ -2273,7 +2273,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "undefined",
             IE8 = "undefined")
     public void position() throws Exception {
-        testHostClassName("Position");
+        test("Position");
     }
 
     /**
@@ -2287,7 +2287,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void processingInstruction() throws Exception {
-        testHostClassName("ProcessingInstruction");
+        test("ProcessingInstruction");
     }
 
     /**
@@ -2301,7 +2301,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void range() throws Exception {
-        testHostClassName("Range");
+        test("Range");
     }
 
     /**
@@ -2312,7 +2312,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void rowContainer() throws Exception {
-        testHostClassName("RowContainer");
+        test("RowContainer");
     }
 
     /**
@@ -2326,7 +2326,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgAElement() throws Exception {
-        testHostClassName("SVGAElement");
+        test("SVGAElement");
     }
 
     /**
@@ -2338,7 +2338,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             FF = "function")
     public void svgAltGlyphElement() throws Exception {
-        testHostClassName("SVGAltGlyphElement");
+        test("SVGAltGlyphElement");
     }
 
     /**
@@ -2352,7 +2352,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgAngle() throws Exception {
-        testHostClassName("SVGAngle");
+        test("SVGAngle");
     }
 
     /**
@@ -2365,7 +2365,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF = "function")
     public void svgAnimateElement() throws Exception {
-        testHostClassName("SVGAnimateElement");
+        test("SVGAnimateElement");
     }
 
     /**
@@ -2378,7 +2378,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF = "function")
     public void svgAnimateMotionElement() throws Exception {
-        testHostClassName("SVGAnimateMotionElement");
+        test("SVGAnimateMotionElement");
     }
 
     /**
@@ -2391,7 +2391,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF = "function")
     public void svgAnimateTransformElement() throws Exception {
-        testHostClassName("SVGAnimateTransformElement");
+        test("SVGAnimateTransformElement");
     }
 
     /**
@@ -2405,7 +2405,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgCircleElement() throws Exception {
-        testHostClassName("SVGCircleElement");
+        test("SVGCircleElement");
     }
 
     /**
@@ -2419,7 +2419,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgClipPathElement() throws Exception {
-        testHostClassName("SVGClipPathElement");
+        test("SVGClipPathElement");
     }
 
     /**
@@ -2431,7 +2431,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
     public void svgCursorElement() throws Exception {
-        testHostClassName("SVGCursorElement");
+        test("SVGCursorElement");
     }
 
     /**
@@ -2445,7 +2445,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgDefsElement() throws Exception {
-        testHostClassName("SVGDefsElement");
+        test("SVGDefsElement");
     }
 
     /**
@@ -2459,7 +2459,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgDescElement() throws Exception {
-        testHostClassName("SVGDescElement");
+        test("SVGDescElement");
     }
 
     /**
@@ -2473,7 +2473,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgElement() throws Exception {
-        testHostClassName("SVGElement");
+        test("SVGElement");
     }
 
     /**
@@ -2487,7 +2487,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgEllipseElement() throws Exception {
-        testHostClassName("SVGEllipseElement");
+        test("SVGEllipseElement");
     }
 
     /**
@@ -2501,7 +2501,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgFEBlendElement() throws Exception {
-        testHostClassName("SVGFEBlendElement");
+        test("SVGFEBlendElement");
     }
 
     /**
@@ -2515,7 +2515,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgFEColorMatrixElement() throws Exception {
-        testHostClassName("SVGFEColorMatrixElement");
+        test("SVGFEColorMatrixElement");
     }
 
     /**
@@ -2529,7 +2529,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgFEComponentTransferElement() throws Exception {
-        testHostClassName("SVGFEComponentTransferElement");
+        test("SVGFEComponentTransferElement");
     }
 
     /**
@@ -2543,7 +2543,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgFECompositeElement() throws Exception {
-        testHostClassName("SVGFECompositeElement");
+        test("SVGFECompositeElement");
     }
 
     /**
@@ -2557,7 +2557,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgFEConvolveMatrixElement() throws Exception {
-        testHostClassName("SVGFEConvolveMatrixElement");
+        test("SVGFEConvolveMatrixElement");
     }
 
     /**
@@ -2571,7 +2571,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgFEDiffuseLightingElement() throws Exception {
-        testHostClassName("SVGFEDiffuseLightingElement");
+        test("SVGFEDiffuseLightingElement");
     }
 
     /**
@@ -2585,7 +2585,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgFEDisplacementMapElement() throws Exception {
-        testHostClassName("SVGFEDisplacementMapElement");
+        test("SVGFEDisplacementMapElement");
     }
 
     /**
@@ -2599,7 +2599,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgFEDistantLightElement() throws Exception {
-        testHostClassName("SVGFEDistantLightElement");
+        test("SVGFEDistantLightElement");
     }
 
     /**
@@ -2613,7 +2613,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgFEFloodElement() throws Exception {
-        testHostClassName("SVGFEFloodElement");
+        test("SVGFEFloodElement");
     }
 
     /**
@@ -2627,7 +2627,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgFEFuncAElement() throws Exception {
-        testHostClassName("SVGFEFuncAElement");
+        test("SVGFEFuncAElement");
     }
 
     /**
@@ -2641,7 +2641,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgFEFuncBElement() throws Exception {
-        testHostClassName("SVGFEFuncBElement");
+        test("SVGFEFuncBElement");
     }
 
     /**
@@ -2655,7 +2655,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgFEFuncGElement() throws Exception {
-        testHostClassName("SVGFEFuncGElement");
+        test("SVGFEFuncGElement");
     }
 
     /**
@@ -2669,7 +2669,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgFEFuncRElement() throws Exception {
-        testHostClassName("SVGFEFuncRElement");
+        test("SVGFEFuncRElement");
     }
 
     /**
@@ -2683,7 +2683,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgFEGaussianBlurElement() throws Exception {
-        testHostClassName("SVGFEGaussianBlurElement");
+        test("SVGFEGaussianBlurElement");
     }
 
     /**
@@ -2697,7 +2697,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgFEImageElement() throws Exception {
-        testHostClassName("SVGFEImageElement");
+        test("SVGFEImageElement");
     }
 
     /**
@@ -2711,7 +2711,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgFEMergeElement() throws Exception {
-        testHostClassName("SVGFEMergeElement");
+        test("SVGFEMergeElement");
     }
 
     /**
@@ -2725,7 +2725,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgFEMergeNodeElement() throws Exception {
-        testHostClassName("SVGFEMergeNodeElement");
+        test("SVGFEMergeNodeElement");
     }
 
     /**
@@ -2739,7 +2739,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgFEMorphologyElement() throws Exception {
-        testHostClassName("SVGFEMorphologyElement");
+        test("SVGFEMorphologyElement");
     }
 
     /**
@@ -2753,7 +2753,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgFEOffsetElement() throws Exception {
-        testHostClassName("SVGFEOffsetElement");
+        test("SVGFEOffsetElement");
     }
 
     /**
@@ -2767,7 +2767,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgFEPointLightElement() throws Exception {
-        testHostClassName("SVGFEPointLightElement");
+        test("SVGFEPointLightElement");
     }
 
     /**
@@ -2781,7 +2781,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgFESpecularLightingElement() throws Exception {
-        testHostClassName("SVGFESpecularLightingElement");
+        test("SVGFESpecularLightingElement");
     }
 
     /**
@@ -2795,7 +2795,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgFESpotLightElement() throws Exception {
-        testHostClassName("SVGFESpotLightElement");
+        test("SVGFESpotLightElement");
     }
 
     /**
@@ -2809,7 +2809,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgFETileElement() throws Exception {
-        testHostClassName("SVGFETileElement");
+        test("SVGFETileElement");
     }
 
     /**
@@ -2823,7 +2823,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgFETurbulenceElement() throws Exception {
-        testHostClassName("SVGFETurbulenceElement");
+        test("SVGFETurbulenceElement");
     }
 
     /**
@@ -2837,7 +2837,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgFilterElement() throws Exception {
-        testHostClassName("SVGFilterElement");
+        test("SVGFilterElement");
     }
 
     /**
@@ -2850,7 +2850,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF = "function")
     public void svgForeignObjectElement() throws Exception {
-        testHostClassName("SVGForeignObjectElement");
+        test("SVGForeignObjectElement");
     }
 
     /**
@@ -2864,7 +2864,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgGElement() throws Exception {
-        testHostClassName("SVGGElement");
+        test("SVGGElement");
     }
 
     /**
@@ -2878,7 +2878,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgImageElement() throws Exception {
-        testHostClassName("SVGImageElement");
+        test("SVGImageElement");
     }
 
     /**
@@ -2892,7 +2892,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgLineElement() throws Exception {
-        testHostClassName("SVGLineElement");
+        test("SVGLineElement");
     }
 
     /**
@@ -2906,7 +2906,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgLinearGradientElement() throws Exception {
-        testHostClassName("SVGLinearGradientElement");
+        test("SVGLinearGradientElement");
     }
 
     /**
@@ -2920,7 +2920,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgMarkerElement() throws Exception {
-        testHostClassName("SVGMarkerElement");
+        test("SVGMarkerElement");
     }
 
     /**
@@ -2934,7 +2934,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgMaskElement() throws Exception {
-        testHostClassName("SVGMaskElement");
+        test("SVGMaskElement");
     }
 
     /**
@@ -2948,7 +2948,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgMatrix() throws Exception {
-        testHostClassName("SVGMatrix");
+        test("SVGMatrix");
     }
 
     /**
@@ -2962,7 +2962,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgMetadataElement() throws Exception {
-        testHostClassName("SVGMetadataElement");
+        test("SVGMetadataElement");
     }
 
     /**
@@ -2975,7 +2975,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF = "function")
     public void svgMPathElement() throws Exception {
-        testHostClassName("SVGMPathElement");
+        test("SVGMPathElement");
     }
 
     /**
@@ -2989,7 +2989,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgPathElement() throws Exception {
-        testHostClassName("SVGPathElement");
+        test("SVGPathElement");
     }
 
     /**
@@ -3003,7 +3003,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgPatternElement() throws Exception {
-        testHostClassName("SVGPatternElement");
+        test("SVGPatternElement");
     }
 
     /**
@@ -3017,7 +3017,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgPolygonElement() throws Exception {
-        testHostClassName("SVGPolygonElement");
+        test("SVGPolygonElement");
     }
 
     /**
@@ -3031,7 +3031,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgPolylineElement() throws Exception {
-        testHostClassName("SVGPolylineElement");
+        test("SVGPolylineElement");
     }
 
     /**
@@ -3045,7 +3045,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgRadialGradientElement() throws Exception {
-        testHostClassName("SVGRadialGradientElement");
+        test("SVGRadialGradientElement");
     }
 
     /**
@@ -3059,7 +3059,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgRect() throws Exception {
-        testHostClassName("SVGRect");
+        test("SVGRect");
     }
 
     /**
@@ -3073,7 +3073,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgRectElement() throws Exception {
-        testHostClassName("SVGRectElement");
+        test("SVGRectElement");
     }
 
     /**
@@ -3087,7 +3087,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgSVGElement() throws Exception {
-        testHostClassName("SVGSVGElement");
+        test("SVGSVGElement");
     }
 
     /**
@@ -3101,7 +3101,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgScriptElement() throws Exception {
-        testHostClassName("SVGScriptElement");
+        test("SVGScriptElement");
     }
 
     /**
@@ -3114,7 +3114,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF = "function")
     public void svgSetElement() throws Exception {
-        testHostClassName("SVGSetElement");
+        test("SVGSetElement");
     }
 
     /**
@@ -3128,7 +3128,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgStopElement() throws Exception {
-        testHostClassName("SVGStopElement");
+        test("SVGStopElement");
     }
 
     /**
@@ -3142,7 +3142,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgStyleElement() throws Exception {
-        testHostClassName("SVGStyleElement");
+        test("SVGStyleElement");
     }
 
     /**
@@ -3156,7 +3156,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgSwitchElement() throws Exception {
-        testHostClassName("SVGSwitchElement");
+        test("SVGSwitchElement");
     }
 
     /**
@@ -3170,7 +3170,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgSymbolElement() throws Exception {
-        testHostClassName("SVGSymbolElement");
+        test("SVGSymbolElement");
     }
 
     /**
@@ -3184,7 +3184,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgTSpanElement() throws Exception {
-        testHostClassName("SVGTSpanElement");
+        test("SVGTSpanElement");
     }
 
     /**
@@ -3198,7 +3198,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgTextElement() throws Exception {
-        testHostClassName("SVGTextElement");
+        test("SVGTextElement");
     }
 
     /**
@@ -3212,7 +3212,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgTextPathElement() throws Exception {
-        testHostClassName("SVGTextPathElement");
+        test("SVGTextPathElement");
     }
 
     /**
@@ -3226,7 +3226,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgTitleElement() throws Exception {
-        testHostClassName("SVGTitleElement");
+        test("SVGTitleElement");
     }
 
     /**
@@ -3240,7 +3240,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgUseElement() throws Exception {
-        testHostClassName("SVGUseElement");
+        test("SVGUseElement");
     }
 
     /**
@@ -3254,7 +3254,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void svgViewElement() throws Exception {
-        testHostClassName("SVGViewElement");
+        test("SVGViewElement");
     }
 
     /**
@@ -3268,7 +3268,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void screen() throws Exception {
-        testHostClassName("Screen");
+        test("Screen");
     }
 
     /**
@@ -3283,7 +3283,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     @NotYetImplemented(FF24)
     public void selection() throws Exception {
-        testHostClassName("Selection");
+        test("Selection");
     }
 
     /**
@@ -3294,7 +3294,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void simpleArray() throws Exception {
-        testHostClassName("SimpleArray");
+        test("SimpleArray");
     }
 
     /**
@@ -3306,7 +3306,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined")
     @NotYetImplemented({ FF, CHROME, IE11 })
     public void staticNodeList() throws Exception {
-        testHostClassName("StaticNodeList");
+        test("StaticNodeList");
     }
 
     /**
@@ -3319,7 +3319,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             IE8 = "undefined")
     public void storage() throws Exception {
-        testHostClassName("Storage");
+        test("Storage");
     }
 
     /**
@@ -3334,7 +3334,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     @NotYetImplemented(FF24)
     public void styleSheetList() throws Exception {
-        testHostClassName("StyleSheetList");
+        test("StyleSheetList");
     }
 
     /**
@@ -3348,7 +3348,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void text() throws Exception {
-        testHostClassName("Text");
+        test("Text");
     }
 
     /**
@@ -3362,7 +3362,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "undefined",
             IE8 = "undefined")
     public void textRange() throws Exception {
-        testHostClassName("TextRange");
+        test("TextRange");
     }
 
     /**
@@ -3376,7 +3376,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void treeWalker() throws Exception {
-        testHostClassName("TreeWalker");
+        test("TreeWalker");
     }
 
     /**
@@ -3390,7 +3390,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void uIEvent() throws Exception {
-        testHostClassName("UIEvent");
+        test("UIEvent");
     }
 
     /**
@@ -3402,7 +3402,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function",
             IE8 = "undefined")
     public void uint16Array() throws Exception {
-        testHostClassName("Uint16Array");
+        test("Uint16Array");
     }
 
     /**
@@ -3414,7 +3414,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function",
             IE8 = "undefined")
     public void uint32Array() throws Exception {
-        testHostClassName("Uint32Array");
+        test("Uint32Array");
     }
 
     /**
@@ -3426,7 +3426,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function",
             IE8 = "undefined")
     public void uint8Array() throws Exception {
-        testHostClassName("Uint8Array");
+        test("Uint8Array");
     }
 
     /**
@@ -3438,7 +3438,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function",
             IE8 = "undefined")
     public void uint8ClampedArray() throws Exception {
-        testHostClassName("Uint8ClampedArray");
+        test("Uint8ClampedArray");
     }
 
     /**
@@ -3451,7 +3451,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE8 = "undefined")
     @NotYetImplemented(IE11)
     public void webSocket() throws Exception {
-        testHostClassName("WebSocket");
+        test("WebSocket");
     }
 
     /**
@@ -3464,7 +3464,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             IE8 = "undefined")
     public void window() throws Exception {
-        testHostClassName("Window");
+        test("Window");
     }
 
     /**
@@ -3478,7 +3478,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function",
             IE8 = "undefined")
     public void xmlDocument() throws Exception {
-        testHostClassName("XMLDocument");
+        test("XMLDocument");
     }
 
     /**
@@ -3490,7 +3490,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function",
             IE8 = "object")
     public void xmlHttpRequest() throws Exception {
-        testHostClassName("XMLHttpRequest");
+        test("XMLHttpRequest");
     }
 
     /**
@@ -3502,7 +3502,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function",
             IE8 = "undefined")
     public void xmlSerializer() throws Exception {
-        testHostClassName("XMLSerializer");
+        test("XMLSerializer");
     }
 
     /**
@@ -3515,7 +3515,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF = "function")
     public void xPathEvaluator() throws Exception {
-        testHostClassName("XPathEvaluator");
+        test("XPathEvaluator");
     }
 
     /**
@@ -3528,7 +3528,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "object")
     @NotYetImplemented(CHROME)
     public void xPathNSResolver() throws Exception {
-        testHostClassName("XPathNSResolver");
+        test("XPathNSResolver");
     }
 
     /**
@@ -3541,7 +3541,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             IE = "undefined")
     public void xPathResult() throws Exception {
-        testHostClassName("XPathResult");
+        test("XPathResult");
     }
 
     /**
@@ -3554,7 +3554,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "undefined")
     @NotYetImplemented(IE11)
     public void xsltProcessor() throws Exception {
-        testHostClassName("XSLTProcessor");
+        test("XSLTProcessor");
     }
 
     /**
@@ -3565,6 +3565,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void xsltemplate() throws Exception {
-        testHostClassName("XSLTemplate");
+        test("XSLTemplate");
     }
 }

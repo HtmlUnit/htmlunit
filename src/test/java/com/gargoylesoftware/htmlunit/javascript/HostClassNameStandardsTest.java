@@ -44,7 +44,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 @RunWith(BrowserRunner.class)
 public class HostClassNameStandardsTest extends WebDriverTestCase {
 
-    private void testHostClassName(final String className) throws Exception {
+    private void test(final String className) throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
             + "  function test() {\n"
@@ -69,7 +69,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE11 = "\nfunction ArrayBuffer() {\n    [native code]\n}\n",
             IE8 = "exception")
     public void arrayBuffer() throws Exception {
-        testHostClassName("ArrayBuffer");
+        test("ArrayBuffer");
     }
 
     /**
@@ -80,7 +80,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void arrayBufferView() throws Exception {
-        testHostClassName("ArrayBufferView");
+        test("ArrayBufferView");
     }
 
     /**
@@ -91,7 +91,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void arrayBufferViewBase() throws Exception {
-        testHostClassName("ArrayBufferViewBase");
+        test("ArrayBufferViewBase");
     }
 
     /**
@@ -104,7 +104,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function Attr() { [native code] }",
             FF = "function Attr() {\n    [native code]\n}")
     public void attr() throws Exception {
-        testHostClassName("Attr");
+        test("Attr");
     }
 
     /**
@@ -116,7 +116,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE = "\nfunction ActiveXObject() {\n    [native code]\n}\n")
     public void activeXObject() throws Exception {
-        testHostClassName("ActiveXObject");
+        test("ActiveXObject");
     }
 
     /**
@@ -131,7 +131,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE8 = "exception")
     @NotYetImplemented({ FF, CHROME })
     public void applicationCache() throws Exception {
-        testHostClassName("ApplicationCache");
+        test("ApplicationCache");
     }
 
     /**
@@ -144,7 +144,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
         FF = "function OfflineResourceList() {\n    [native code]\n}")
     @NotYetImplemented(FF)
     public void offlineResourceList() throws Exception {
-        testHostClassName("OfflineResourceList");
+        test("OfflineResourceList");
     }
 
     /**
@@ -158,7 +158,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function BeforeUnloadEvent() {\n    [native code]\n}",
             IE8 = "exception")
     public void beforeUnloadEvent() throws Exception {
-        testHostClassName("BeforeUnloadEvent");
+        test("BeforeUnloadEvent");
     }
 
     /**
@@ -170,7 +170,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             FF24 = "[object BoxObject]")
     public void boxObject() throws Exception {
-        testHostClassName("BoxObject");
+        test("BoxObject");
     }
 
     /**
@@ -184,7 +184,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function CDATASection() {\n    [native code]\n}",
             IE8 = "exception")
     public void cdataSection() throws Exception {
-        testHostClassName("CDATASection");
+        test("CDATASection");
     }
 
     /**
@@ -195,7 +195,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void clipboardData() throws Exception {
-        testHostClassName("ClipboardData");
+        test("ClipboardData");
     }
 
     /**
@@ -208,7 +208,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function CSSCharsetRule() { [native code] }",
             IE = "exception")
     public void cssCharsetRule() throws Exception {
-        testHostClassName("CSSCharsetRule");
+        test("CSSCharsetRule");
     }
 
     /**
@@ -221,7 +221,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function CSSFontFaceRule() { [native code] }",
             IE8 = "exception")
     public void cssFontFaceRule() throws Exception {
-        testHostClassName("CSSFontFaceRule");
+        test("CSSFontFaceRule");
     }
 
     /**
@@ -234,7 +234,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function CSSImportRule() { [native code] }",
             IE8 = "exception")
     public void cssImportRule() throws Exception {
-        testHostClassName("CSSImportRule");
+        test("CSSImportRule");
     }
 
     /**
@@ -247,7 +247,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function CSSMediaRule() { [native code] }",
             IE8 = "exception")
     public void cssMediaRule() throws Exception {
-        testHostClassName("CSSMediaRule");
+        test("CSSMediaRule");
     }
 
     /**
@@ -261,7 +261,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE = "exception")
     @NotYetImplemented(CHROME)
     public void cssPrimitiveValue() throws Exception {
-        testHostClassName("CSSPrimitiveValue");
+        test("CSSPrimitiveValue");
     }
 
     /**
@@ -275,7 +275,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE8 = "exception")
     @NotYetImplemented(CHROME)
     public void cssRule() throws Exception {
-        testHostClassName("CSSRule");
+        test("CSSRule");
     }
 
     /**
@@ -287,7 +287,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object CSSRuleList]",
             CHROME = "function CSSRuleList() { [native code] }")
     public void cssRuleList() throws Exception {
-        testHostClassName("CSSRuleList");
+        test("CSSRuleList");
     }
 
     /**
@@ -300,7 +300,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function CSSStyleDeclaration() { [native code] }",
             FF = "function CSSStyleDeclaration() {\n    [native code]\n}")
     public void cssStyleDeclaration() throws Exception {
-        testHostClassName("CSSStyleDeclaration");
+        test("CSSStyleDeclaration");
     }
 
     /**
@@ -313,7 +313,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function CSS2Properties() {\n    [native code]\n}")
     @NotYetImplemented(FF)
     public void css2Properties() throws Exception {
-        testHostClassName("CSS2Properties");
+        test("CSS2Properties");
     }
 
     /**
@@ -325,7 +325,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object CSSStyleRule]",
             CHROME = "function CSSStyleRule() { [native code] }")
     public void cssStyleRule() throws Exception {
-        testHostClassName("CSSStyleRule");
+        test("CSSStyleRule");
     }
 
     /**
@@ -338,7 +338,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function CSSStyleSheet() { [native code] }",
             FF = "function CSSStyleSheet() {\n    [native code]\n}")
     public void cssStyleSheet() throws Exception {
-        testHostClassName("CSSStyleSheet");
+        test("CSSStyleSheet");
     }
 
     /**
@@ -351,7 +351,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function CSSValue() {\n    [native code]\n}")
     @NotYetImplemented(CHROME)
     public void cssValue() throws Exception {
-        testHostClassName("CSSValue");
+        test("CSSValue");
     }
 
     /**
@@ -365,7 +365,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function CanvasRenderingContext2D() {\n    [native code]\n}",
             IE8 = "exception")
     public void canvasRenderingContext2D() throws Exception {
-        testHostClassName("CanvasRenderingContext2D");
+        test("CanvasRenderingContext2D");
     }
 
     /**
@@ -376,7 +376,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void characterDataImpl() throws Exception {
-        testHostClassName("CharacterDataImpl");
+        test("CharacterDataImpl");
     }
 
     /**
@@ -392,7 +392,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE8 = "exception")
     @NotYetImplemented(FF24)
     public void clientRect() throws Exception {
-        testHostClassName("ClientRect");
+        test("ClientRect");
     }
 
     /**
@@ -406,7 +406,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function Comment() {\n    [native code]\n}",
             IE8 = "exception")
     public void comment() throws Exception {
-        testHostClassName("Comment");
+        test("Comment");
     }
 
     /**
@@ -417,7 +417,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void htmlCommentElement() throws Exception {
-        testHostClassName("HTMLCommentElement");
+        test("HTMLCommentElement");
     }
 
     /**
@@ -428,7 +428,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void computedCSSStyleDeclaration() throws Exception {
-        testHostClassName("ComputedCSSStyleDeclaration");
+        test("ComputedCSSStyleDeclaration");
     }
 
     /**
@@ -443,7 +443,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE8 = "exception")
     @NotYetImplemented({ FF, CHROME })
     public void console() throws Exception {
-        testHostClassName("Console");
+        test("Console");
     }
 
     /**
@@ -457,7 +457,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "exception",
             IE8 = "exception")
     public void coordinates() throws Exception {
-        testHostClassName("Coordinates");
+        test("Coordinates");
     }
 
     /**
@@ -471,7 +471,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE11 = "\nfunction DataView() {\n    [native code]\n}\n",
             IE8 = "exception")
     public void dataView() throws Exception {
-        testHostClassName("DataView");
+        test("DataView");
     }
 
     /**
@@ -486,7 +486,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE8 = "exception")
     @NotYetImplemented(FF24)
     public void domException() throws Exception {
-        testHostClassName("DOMException");
+        test("DOMException");
     }
 
     /**
@@ -499,7 +499,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function DOMImplementation() { [native code] }",
             FF = "function DOMImplementation() {\n    [native code]\n}")
     public void domImplementation() throws Exception {
-        testHostClassName("DOMImplementation");
+        test("DOMImplementation");
     }
 
     /**
@@ -513,7 +513,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE11 = "\nfunction DOMParser() {\n    [native code]\n}\n",
             IE8 = "exception")
     public void domParser() throws Exception {
-        testHostClassName("DOMParser");
+        test("DOMParser");
     }
 
     /**
@@ -527,7 +527,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function DOMStringMap() {\n    [native code]\n}",
             IE8 = "exception")
     public void domStringMap() throws Exception {
-        testHostClassName("DOMStringMap");
+        test("DOMStringMap");
     }
 
     /**
@@ -542,7 +542,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE8 = "exception")
     @NotYetImplemented(IE11)
     public void domTokenList() throws Exception {
-        testHostClassName("DOMTokenList");
+        test("DOMTokenList");
     }
 
     /**
@@ -556,7 +556,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function Document() {\n    [native code]\n}",
             IE8 = "exception")
     public void document() throws Exception {
-        testHostClassName("Document");
+        test("Document");
     }
 
     /**
@@ -570,7 +570,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function DocumentFragment() {\n    [native code]\n}",
             IE8 = "exception")
     public void documentFragment() throws Exception {
-        testHostClassName("DocumentFragment");
+        test("DocumentFragment");
     }
 
     /**
@@ -584,7 +584,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function DocumentType() {\n    [native code]\n}",
             IE8 = "exception")
     public void documentType() throws Exception {
-        testHostClassName("DocumentType");
+        test("DocumentType");
     }
 
     /**
@@ -597,7 +597,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function Element() { [native code] }",
             FF = "function Element() {\n    [native code]\n}")
     public void element() throws Exception {
-        testHostClassName("Element");
+        test("Element");
     }
 
     /**
@@ -609,7 +609,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE = "\nfunction Enumerator() {\n    [native code]\n}\n")
     public void enumerator() throws Exception {
-        testHostClassName("Enumerator");
+        test("Enumerator");
     }
 
     /**
@@ -622,7 +622,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function Event() { [native code] }",
             FF = "function Event() {\n    [native code]\n}")
     public void event() throws Exception {
-        testHostClassName("Event");
+        test("Event");
     }
 
     /**
@@ -633,7 +633,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void eventNode() throws Exception {
-        testHostClassName("EventNode");
+        test("EventNode");
     }
 
     /**
@@ -646,7 +646,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF31 = "function External() {\n    [native code]\n}")
     @NotYetImplemented(FF31)
     public void external() throws Exception {
-        testHostClassName("External");
+        test("External");
     }
 
     /**
@@ -660,7 +660,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE11 = "\nfunction Float32Array() {\n    [native code]\n}\n",
             IE8 = "exception")
     public void float32Array() throws Exception {
-        testHostClassName("Float32Array");
+        test("Float32Array");
     }
 
     /**
@@ -674,7 +674,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE11 = "\nfunction Float64Array() {\n    [native code]\n}\n",
             IE8 = "exception")
     public void float64Array() throws Exception {
-        testHostClassName("Float64Array");
+        test("Float64Array");
     }
 
     /**
@@ -685,7 +685,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void formChild() throws Exception {
-        testHostClassName("FormChild");
+        test("FormChild");
     }
 
     /**
@@ -696,7 +696,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void formField() throws Exception {
-        testHostClassName("FormField");
+        test("FormField");
     }
 
     /**
@@ -710,7 +710,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "exception",
             IE8 = "exception")
     public void geolocation() throws Exception {
-        testHostClassName("Geolocation");
+        test("Geolocation");
     }
 
     /**
@@ -723,7 +723,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HashChangeEvent() { [native code] }",
             FF = "function HashChangeEvent() {\n    [native code]\n}")
     public void hashChangeEvent() throws Exception {
-        testHostClassName("HashChangeEvent");
+        test("HashChangeEvent");
     }
 
     /**
@@ -737,7 +737,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF31 = "function History() {\n    [native code]\n}")
     @NotYetImplemented(FF24)
     public void history() throws Exception {
-        testHostClassName("History");
+        test("History");
     }
 
     /**
@@ -750,7 +750,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLAnchorElement() { [native code] }",
             FF = "function HTMLAnchorElement() {\n    [native code]\n}")
     public void htmlAnchorElement() throws Exception {
-        testHostClassName("HTMLAnchorElement");
+        test("HTMLAnchorElement");
     }
 
     /**
@@ -764,7 +764,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function HTMLAppletElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void htmlAppletElement() throws Exception {
-        testHostClassName("HTMLAppletElement");
+        test("HTMLAppletElement");
     }
 
     /**
@@ -777,7 +777,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLAreaElement() { [native code] }",
             FF = "function HTMLAreaElement() {\n    [native code]\n}")
     public void htmlAreaElement() throws Exception {
-        testHostClassName("HTMLAreaElement");
+        test("HTMLAreaElement");
     }
 
     /**
@@ -791,7 +791,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function HTMLAudioElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void htmlAudioElement() throws Exception {
-        testHostClassName("HTMLAudioElement");
+        test("HTMLAudioElement");
     }
 
     /**
@@ -804,7 +804,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "exception",
             FF = "exception")
     public void htmlBGSoundElement() throws Exception {
-        testHostClassName("HTMLBGSoundElement");
+        test("HTMLBGSoundElement");
     }
 
     /**
@@ -817,7 +817,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLBRElement() { [native code] }",
             FF = "function HTMLBRElement() {\n    [native code]\n}")
     public void htmlBRElement() throws Exception {
-        testHostClassName("HTMLBRElement");
+        test("HTMLBRElement");
     }
 
     /**
@@ -830,7 +830,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLBaseElement() { [native code] }",
             FF = "function HTMLBaseElement() {\n    [native code]\n}")
     public void htmlBaseElement() throws Exception {
-        testHostClassName("HTMLBaseElement");
+        test("HTMLBaseElement");
     }
 
     /**
@@ -843,7 +843,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "exception",
             FF = "exception")
     public void htmlBaseFontElement() throws Exception {
-        testHostClassName("HTMLBaseFontElement");
+        test("HTMLBaseFontElement");
     }
 
     /**
@@ -857,7 +857,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "exception")
     @NotYetImplemented({ FF, CHROME })
     public void htmlBlockElement() throws Exception {
-        testHostClassName("HTMLBlockElement");
+        test("HTMLBlockElement");
     }
 
     /**
@@ -868,7 +868,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void htmlBlockQuoteElement() throws Exception {
-        testHostClassName("HTMLBlockQuoteElement");
+        test("HTMLBlockQuoteElement");
     }
 
     /**
@@ -882,7 +882,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE = "[object HTMLQuoteElement]")
     @NotYetImplemented({ IE8, FF, CHROME })
     public void htmlQuoteElement() throws Exception {
-        testHostClassName("HTMLQuoteElement");
+        test("HTMLQuoteElement");
     }
 
     /**
@@ -895,7 +895,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLBodyElement() { [native code] }",
             FF = "function HTMLBodyElement() {\n    [native code]\n}")
     public void htmlBodyElement() throws Exception {
-        testHostClassName("HTMLBodyElement");
+        test("HTMLBodyElement");
     }
 
     /**
@@ -908,7 +908,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLButtonElement() { [native code] }",
             FF = "function HTMLButtonElement() {\n    [native code]\n}")
     public void htmlButtonElement() throws Exception {
-        testHostClassName("HTMLButtonElement");
+        test("HTMLButtonElement");
     }
 
     /**
@@ -922,7 +922,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function HTMLCanvasElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void htmlCanvasElement() throws Exception {
-        testHostClassName("HTMLCanvasElement");
+        test("HTMLCanvasElement");
     }
 
     /**
@@ -935,7 +935,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLCollection() { [native code] }",
             FF = "function HTMLCollection() {\n    [native code]\n}")
     public void htmlCollection() throws Exception {
-        testHostClassName("HTMLCollection");
+        test("HTMLCollection");
     }
 
     /**
@@ -949,7 +949,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "exception",
             IE8 = "exception")
     public void htmlAllCollection() throws Exception {
-        testHostClassName("HTMLAllCollection");
+        test("HTMLAllCollection");
     }
 
     /**
@@ -963,7 +963,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function HTMLDataListElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void htmlDataListElement() throws Exception {
-        testHostClassName("HTMLDataListElement");
+        test("HTMLDataListElement");
     }
 
     /**
@@ -974,7 +974,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void htmlDefinitionDescriptionElement() throws Exception {
-        testHostClassName("HTMLDefinitionDescriptionElement");
+        test("HTMLDefinitionDescriptionElement");
     }
 
     /**
@@ -986,7 +986,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE = "[object HTMLDDElement]")
     public void htmlDDElement() throws Exception {
-        testHostClassName("HTMLDDElement");
+        test("HTMLDDElement");
     }
 
     /**
@@ -997,7 +997,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void htmlDefinitionTermElement() throws Exception {
-        testHostClassName("HTMLDefinitionTermElement");
+        test("HTMLDefinitionTermElement");
     }
 
     /**
@@ -1009,7 +1009,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE = "[object HTMLDTElement]")
     public void htmlDTElement() throws Exception {
-        testHostClassName("HTMLDTElement");
+        test("HTMLDTElement");
     }
 
     /**
@@ -1022,7 +1022,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLDListElement() { [native code] }",
             FF = "function HTMLDListElement() {\n    [native code]\n}")
     public void htmlDListElement() throws Exception {
-        testHostClassName("HTMLDListElement");
+        test("HTMLDListElement");
     }
 
     /**
@@ -1036,7 +1036,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function HTMLDirectoryElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void htmlDirectoryElement() throws Exception {
-        testHostClassName("HTMLDirectoryElement");
+        test("HTMLDirectoryElement");
     }
 
     /**
@@ -1049,7 +1049,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLDivElement() { [native code] }",
             FF = "function HTMLDivElement() {\n    [native code]\n}")
     public void htmlDivElement() throws Exception {
-        testHostClassName("HTMLDivElement");
+        test("HTMLDivElement");
     }
 
     /**
@@ -1062,7 +1062,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLDocument() { [native code] }",
             FF = "function HTMLDocument() {\n    [native code]\n}")
     public void htmlDocument() throws Exception {
-        testHostClassName("HTMLDocument");
+        test("HTMLDocument");
     }
 
     /**
@@ -1076,7 +1076,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function HTMLElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void htmlElement() throws Exception {
-        testHostClassName("HTMLElement");
+        test("HTMLElement");
     }
 
     /**
@@ -1089,7 +1089,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLEmbedElement() { [native code] }",
             FF = "function HTMLEmbedElement() {\n    [native code]\n}")
     public void htmlEmbedElement() throws Exception {
-        testHostClassName("HTMLEmbedElement");
+        test("HTMLEmbedElement");
     }
 
     /**
@@ -1102,7 +1102,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLFieldSetElement() { [native code] }",
             FF = "function HTMLFieldSetElement() {\n    [native code]\n}")
     public void htmlFieldSetElement() throws Exception {
-        testHostClassName("HTMLFieldSetElement");
+        test("HTMLFieldSetElement");
     }
 
     /**
@@ -1115,7 +1115,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLFontElement() { [native code] }",
             FF = "function HTMLFontElement() {\n    [native code]\n}")
     public void htmlFontElement() throws Exception {
-        testHostClassName("HTMLFontElement");
+        test("HTMLFontElement");
     }
 
     /**
@@ -1128,7 +1128,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLFormElement() { [native code] }",
             FF = "function HTMLFormElement() {\n    [native code]\n}")
     public void htmlFormElement() throws Exception {
-        testHostClassName("HTMLFormElement");
+        test("HTMLFormElement");
     }
 
     /**
@@ -1141,7 +1141,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLFrameElement() { [native code] }",
             FF = "function HTMLFrameElement() {\n    [native code]\n}")
     public void htmlFrameElement() throws Exception {
-        testHostClassName("HTMLFrameElement");
+        test("HTMLFrameElement");
     }
 
     /**
@@ -1154,7 +1154,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLFrameSetElement() { [native code] }",
             FF = "function HTMLFrameSetElement() {\n    [native code]\n}")
     public void htmlFrameSetElement() throws Exception {
-        testHostClassName("HTMLFrameSetElement");
+        test("HTMLFrameSetElement");
     }
 
     /**
@@ -1167,7 +1167,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLHRElement() { [native code] }",
             FF = "function HTMLHRElement() {\n    [native code]\n}")
     public void htmlHRElement() throws Exception {
-        testHostClassName("HTMLHRElement");
+        test("HTMLHRElement");
     }
 
     /**
@@ -1180,7 +1180,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLHeadElement() { [native code] }",
             FF = "function HTMLHeadElement() {\n    [native code]\n}")
     public void htmlHeadElement() throws Exception {
-        testHostClassName("HTMLHeadElement");
+        test("HTMLHeadElement");
     }
 
     /**
@@ -1193,7 +1193,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLHeadingElement() { [native code] }",
             FF = "function HTMLHeadingElement() {\n    [native code]\n}")
     public void htmlHeadingElement() throws Exception {
-        testHostClassName("HTMLHeadingElement");
+        test("HTMLHeadingElement");
     }
 
     /**
@@ -1206,7 +1206,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLHtmlElement() { [native code] }",
             FF = "function HTMLHtmlElement() {\n    [native code]\n}")
     public void htmlHtmlElement() throws Exception {
-        testHostClassName("HTMLHtmlElement");
+        test("HTMLHtmlElement");
     }
 
     /**
@@ -1219,7 +1219,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLIFrameElement() { [native code] }",
             FF = "function HTMLIFrameElement() {\n    [native code]\n}")
     public void htmlIFrameElement() throws Exception {
-        testHostClassName("HTMLIFrameElement");
+        test("HTMLIFrameElement");
     }
 
     /**
@@ -1233,7 +1233,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function HTMLImageElement() {\n    [native code]\n}")
     @NotYetImplemented(IE)
     public void htmlImageElement() throws Exception {
-        testHostClassName("HTMLImageElement");
+        test("HTMLImageElement");
     }
 
     /**
@@ -1244,7 +1244,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void htmlInlineQuotationElement() throws Exception {
-        testHostClassName("HTMLInlineQuotationElement");
+        test("HTMLInlineQuotationElement");
     }
 
     /**
@@ -1257,7 +1257,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLInputElement() { [native code] }",
             FF = "function HTMLInputElement() {\n    [native code]\n}")
     public void htmlInputElement() throws Exception {
-        testHostClassName("HTMLInputElement");
+        test("HTMLInputElement");
     }
 
     /**
@@ -1270,7 +1270,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "exception",
             FF = "exception")
     public void htmlIsIndexElement() throws Exception {
-        testHostClassName("HTMLIsIndexElement");
+        test("HTMLIsIndexElement");
     }
 
     /**
@@ -1283,7 +1283,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLKeygenElement() { [native code] }")
     @NotYetImplemented(CHROME)
     public void htmlKeygenElement() throws Exception {
-        testHostClassName("HTMLKeygenElement");
+        test("HTMLKeygenElement");
     }
 
     /**
@@ -1296,7 +1296,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLLIElement() { [native code] }",
             FF = "function HTMLLIElement() {\n    [native code]\n}")
     public void htmlLIElement() throws Exception {
-        testHostClassName("HTMLLIElement");
+        test("HTMLLIElement");
     }
 
     /**
@@ -1309,7 +1309,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLLabelElement() { [native code] }",
             FF = "function HTMLLabelElement() {\n    [native code]\n}")
     public void htmlLabelElement() throws Exception {
-        testHostClassName("HTMLLabelElement");
+        test("HTMLLabelElement");
     }
 
     /**
@@ -1322,7 +1322,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLLegendElement() { [native code] }",
             FF = "function HTMLLegendElement() {\n    [native code]\n}")
     public void htmlLegendElement() throws Exception {
-        testHostClassName("HTMLLegendElement");
+        test("HTMLLegendElement");
     }
 
     /**
@@ -1335,7 +1335,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLLinkElement() { [native code] }",
             FF = "function HTMLLinkElement() {\n    [native code]\n}")
     public void htmlLinkElement() throws Exception {
-        testHostClassName("HTMLLinkElement");
+        test("HTMLLinkElement");
     }
 
     /**
@@ -1346,7 +1346,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void htmlListElement() throws Exception {
-        testHostClassName("HTMLListElement");
+        test("HTMLListElement");
     }
 
     /**
@@ -1359,7 +1359,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLMapElement() { [native code] }",
             FF = "function HTMLMapElement() {\n    [native code]\n}")
     public void htmlMapElement() throws Exception {
-        testHostClassName("HTMLMapElement");
+        test("HTMLMapElement");
     }
 
     /**
@@ -1373,7 +1373,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "exception")
     @NotYetImplemented(CHROME)
     public void htmlMarqueeElement() throws Exception {
-        testHostClassName("HTMLMarqueeElement");
+        test("HTMLMarqueeElement");
     }
 
     /**
@@ -1387,7 +1387,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function HTMLMediaElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void htmlMediaElement() throws Exception {
-        testHostClassName("HTMLMediaElement");
+        test("HTMLMediaElement");
     }
 
     /**
@@ -1402,7 +1402,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE8 = "exception")
     @NotYetImplemented(CHROME)
     public void htmlMenuElement() throws Exception {
-        testHostClassName("HTMLMenuElement");
+        test("HTMLMenuElement");
     }
 
     /**
@@ -1415,7 +1415,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLMetaElement() { [native code] }",
             FF = "function HTMLMetaElement() {\n    [native code]\n}")
     public void htmlMetaElement() throws Exception {
-        testHostClassName("HTMLMetaElement");
+        test("HTMLMetaElement");
     }
 
     /**
@@ -1428,7 +1428,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLMeterElement() { [native code] }",
             FF = "function HTMLMeterElement() {\n    [native code]\n}")
     public void htmlMeterElement() throws Exception {
-        testHostClassName("HTMLMeterElement");
+        test("HTMLMeterElement");
     }
 
     /**
@@ -1442,7 +1442,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function HTMLModElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void htmlModElement() throws Exception {
-        testHostClassName("HTMLModElement");
+        test("HTMLModElement");
     }
 
     /**
@@ -1454,7 +1454,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE8 = "[object HTMLNoShowElement]")
     public void htmlNoShowElement() throws Exception {
-        testHostClassName("HTMLNoShowElement");
+        test("HTMLNoShowElement");
     }
 
     /**
@@ -1467,7 +1467,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "exception",
             FF = "exception")
     public void htmlNextIdElement() throws Exception {
-        testHostClassName("HTMLNextIdElement");
+        test("HTMLNextIdElement");
     }
 
     /**
@@ -1480,7 +1480,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLOListElement() { [native code] }",
             FF = "function HTMLOListElement() {\n    [native code]\n}")
     public void htmlOListElement() throws Exception {
-        testHostClassName("HTMLOListElement");
+        test("HTMLOListElement");
     }
 
     /**
@@ -1493,7 +1493,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLObjectElement() { [native code] }",
             FF = "function HTMLObjectElement() {\n    [native code]\n}")
     public void htmlObjectElement() throws Exception {
-        testHostClassName("HTMLObjectElement");
+        test("HTMLObjectElement");
     }
 
     /**
@@ -1507,7 +1507,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function HTMLOptGroupElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void htmlOptGroupElement() throws Exception {
-        testHostClassName("HTMLOptGroupElement");
+        test("HTMLOptGroupElement");
     }
 
     /**
@@ -1521,7 +1521,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function HTMLOptionElement() {\n    [native code]\n}")
     @NotYetImplemented(IE)
     public void htmlOptionElement() throws Exception {
-        testHostClassName("HTMLOptionElement");
+        test("HTMLOptionElement");
     }
 
     /**
@@ -1534,7 +1534,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLOptionsCollection() { [native code] }",
             FF = "function HTMLOptionsCollection() {\n    [native code]\n}")
     public void htmlOptionsCollection() throws Exception {
-        testHostClassName("HTMLOptionsCollection");
+        test("HTMLOptionsCollection");
     }
 
     /**
@@ -1547,7 +1547,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLOutputElement() { [native code] }",
             FF = "function HTMLOutputElement() {\n    [native code]\n}")
     public void htmlOutputElement() throws Exception {
-        testHostClassName("HTMLOutputElement");
+        test("HTMLOutputElement");
     }
 
     /**
@@ -1560,7 +1560,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLParagraphElement() { [native code] }",
             FF = "function HTMLParagraphElement() {\n    [native code]\n}")
     public void htmlParagraphElement() throws Exception {
-        testHostClassName("HTMLParagraphElement");
+        test("HTMLParagraphElement");
     }
 
     /**
@@ -1573,7 +1573,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLParamElement() { [native code] }",
             FF = "function HTMLParamElement() {\n    [native code]\n}")
     public void htmlParamElement() throws Exception {
-        testHostClassName("HTMLParamElement");
+        test("HTMLParamElement");
     }
 
     /**
@@ -1587,7 +1587,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "exception")
     @NotYetImplemented({ FF, CHROME })
     public void htmlPhraseElement() throws Exception {
-        testHostClassName("HTMLPhraseElement");
+        test("HTMLPhraseElement");
     }
 
     /**
@@ -1601,7 +1601,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function HTMLPreElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void htmlPreElement() throws Exception {
-        testHostClassName("HTMLPreElement");
+        test("HTMLPreElement");
     }
 
     /**
@@ -1615,7 +1615,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function HTMLProgressElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void htmlProgressElement() throws Exception {
-        testHostClassName("HTMLProgressElement");
+        test("HTMLProgressElement");
     }
 
     /**
@@ -1628,7 +1628,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLScriptElement() { [native code] }",
             FF = "function HTMLScriptElement() {\n    [native code]\n}")
     public void htmlScriptElement() throws Exception {
-        testHostClassName("HTMLScriptElement");
+        test("HTMLScriptElement");
     }
 
     /**
@@ -1641,7 +1641,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLSelectElement() { [native code] }",
             FF = "function HTMLSelectElement() {\n    [native code]\n}")
     public void htmlSelectElement() throws Exception {
-        testHostClassName("HTMLSelectElement");
+        test("HTMLSelectElement");
     }
 
     /**
@@ -1655,7 +1655,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function HTMLSourceElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void htmlSourceElement() throws Exception {
-        testHostClassName("HTMLSourceElement");
+        test("HTMLSourceElement");
     }
 
     /**
@@ -1669,7 +1669,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function HTMLSpanElement() {\n    [native code]\n}")
     @NotYetImplemented(FF)
     public void htmlSpanElement() throws Exception {
-        testHostClassName("HTMLSpanElement");
+        test("HTMLSpanElement");
     }
 
     /**
@@ -1682,7 +1682,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLStyleElement() { [native code] }",
             FF = "function HTMLStyleElement() {\n    [native code]\n}")
     public void htmlStyleElement() throws Exception {
-        testHostClassName("HTMLStyleElement");
+        test("HTMLStyleElement");
     }
 
     /**
@@ -1695,7 +1695,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLTableCaptionElement() { [native code] }",
             FF = "function HTMLTableCaptionElement() {\n    [native code]\n}")
     public void htmlTableCaptionElement() throws Exception {
-        testHostClassName("HTMLTableCaptionElement");
+        test("HTMLTableCaptionElement");
     }
 
     /**
@@ -1708,7 +1708,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLTableCellElement() { [native code] }",
             FF = "function HTMLTableCellElement() {\n    [native code]\n}")
     public void htmlTableCellElement() throws Exception {
-        testHostClassName("HTMLTableCellElement");
+        test("HTMLTableCellElement");
     }
 
     /**
@@ -1721,7 +1721,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLTableColElement() { [native code] }",
             FF = "function HTMLTableColElement() {\n    [native code]\n}")
     public void htmlTableColElement() throws Exception {
-        testHostClassName("HTMLTableColElement");
+        test("HTMLTableColElement");
     }
 
     /**
@@ -1732,7 +1732,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void htmlTableComponent() throws Exception {
-        testHostClassName("HTMLTableComponent");
+        test("HTMLTableComponent");
     }
 
     /**
@@ -1746,7 +1746,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "exception",
             IE8 = "exception")
     public void htmlTableDataCellElement() throws Exception {
-        testHostClassName("HTMLTableDataCellElement");
+        test("HTMLTableDataCellElement");
     }
 
     /**
@@ -1759,7 +1759,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLTableElement() { [native code] }",
             FF = "function HTMLTableElement() {\n    [native code]\n}")
     public void htmlTableElement() throws Exception {
-        testHostClassName("HTMLTableElement");
+        test("HTMLTableElement");
     }
 
     /**
@@ -1773,7 +1773,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "exception",
             IE8 = "exception")
     public void htmlTableHeaderCellElement() throws Exception {
-        testHostClassName("HTMLTableHeaderCellElement");
+        test("HTMLTableHeaderCellElement");
     }
 
     /**
@@ -1786,7 +1786,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLTableRowElement() { [native code] }",
             FF = "function HTMLTableRowElement() {\n    [native code]\n}")
     public void htmlTableRowElement() throws Exception {
-        testHostClassName("HTMLTableRowElement");
+        test("HTMLTableRowElement");
     }
 
     /**
@@ -1799,7 +1799,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLTableSectionElement() { [native code] }",
             FF = "function HTMLTableSectionElement() {\n    [native code]\n}")
     public void htmlTableSectionElement() throws Exception {
-        testHostClassName("HTMLTableSectionElement");
+        test("HTMLTableSectionElement");
     }
 
     /**
@@ -1811,7 +1811,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE8 = "[object HTMLTextElement]")
     public void htmlTextElement() throws Exception {
-        testHostClassName("HTMLTextElement");
+        test("HTMLTextElement");
     }
 
     /**
@@ -1824,7 +1824,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLTextAreaElement() { [native code] }",
             FF = "function HTMLTextAreaElement() {\n    [native code]\n}")
     public void htmlTextAreaElement() throws Exception {
-        testHostClassName("HTMLTextAreaElement");
+        test("HTMLTextAreaElement");
     }
 
     /**
@@ -1837,7 +1837,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function HTMLTimeElement() {\n    [native code]\n}")
     @NotYetImplemented(FF)
     public void htmlTimeElement() throws Exception {
-        testHostClassName("HTMLTimeElement");
+        test("HTMLTimeElement");
     }
 
     /**
@@ -1850,7 +1850,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLTitleElement() { [native code] }",
             FF = "function HTMLTitleElement() {\n    [native code]\n}")
     public void htmlTitleElement() throws Exception {
-        testHostClassName("HTMLTitleElement");
+        test("HTMLTitleElement");
     }
 
     /**
@@ -1863,7 +1863,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function HTMLUListElement() { [native code] }",
             FF = "function HTMLUListElement() {\n    [native code]\n}")
     public void htmlUListElement() throws Exception {
-        testHostClassName("HTMLUListElement");
+        test("HTMLUListElement");
     }
 
     /**
@@ -1877,7 +1877,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function HTMLUnknownElement() {\n    [native code]\n}")
     @NotYetImplemented(IE)
     public void htmlUnknownElement() throws Exception {
-        testHostClassName("HTMLUnknownElement");
+        test("HTMLUnknownElement");
     }
 
     /**
@@ -1889,7 +1889,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts("exception")
     @NotYetImplemented(IE8)
     public void htmlGenericElement() throws Exception {
-        testHostClassName("HTMLGenericElement");
+        test("HTMLGenericElement");
     }
 
     /**
@@ -1901,7 +1901,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts("exception")
     @NotYetImplemented(CHROME)
     public void htmlWBRElement() throws Exception {
-        testHostClassName("HTMLWBRElement");
+        test("HTMLWBRElement");
     }
 
     /**
@@ -1915,7 +1915,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function HTMLVideoElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void htmlVideoElement() throws Exception {
-        testHostClassName("HTMLVideoElement");
+        test("HTMLVideoElement");
     }
 
     /**
@@ -1929,7 +1929,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE11 = "\nfunction Int16Array() {\n    [native code]\n}\n",
             IE8 = "exception")
     public void int16Array() throws Exception {
-        testHostClassName("Int16Array");
+        test("Int16Array");
     }
 
     /**
@@ -1943,7 +1943,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE11 = "\nfunction Int32Array() {\n    [native code]\n}\n",
             IE8 = "exception")
     public void int32Array() throws Exception {
-        testHostClassName("Int32Array");
+        test("Int32Array");
     }
 
     /**
@@ -1957,7 +1957,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE11 = "\nfunction Int8Array() {\n    [native code]\n}\n",
             IE8 = "exception")
     public void int8Array() throws Exception {
-        testHostClassName("Int8Array");
+        test("Int8Array");
     }
 
     /**
@@ -1971,7 +1971,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function KeyboardEvent() {\n    [native code]\n}",
             IE8 = "exception")
     public void keyboardEvent() throws Exception {
-        testHostClassName("KeyboardEvent");
+        test("KeyboardEvent");
     }
 
     /**
@@ -1984,7 +1984,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function Location() { [native code] }")
     @NotYetImplemented({ FF, IE })
     public void location() throws Exception {
-        testHostClassName("Location");
+        test("Location");
     }
 
     /**
@@ -1999,7 +1999,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE8 = "exception")
     @NotYetImplemented({ FF24, IE11 })
     public void mediaList() throws Exception {
-        testHostClassName("MediaList");
+        test("MediaList");
     }
 
     /**
@@ -2013,7 +2013,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function MessageEvent() {\n    [native code]\n}",
             IE8 = "exception")
     public void messageEvent() throws Exception {
-        testHostClassName("MessageEvent");
+        test("MessageEvent");
     }
 
     /**
@@ -2028,7 +2028,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE8 = "exception")
     @NotYetImplemented({ FF24, IE11 })
     public void mimeType() throws Exception {
-        testHostClassName("MimeType");
+        test("MimeType");
     }
 
     /**
@@ -2043,7 +2043,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE8 = "exception")
     @NotYetImplemented(FF24)
     public void mimeTypeArray() throws Exception {
-        testHostClassName("MimeTypeArray");
+        test("MimeTypeArray");
     }
 
     /**
@@ -2057,7 +2057,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function MouseEvent() {\n    [native code]\n}",
             IE8 = "exception")
     public void mouseEvent() throws Exception {
-        testHostClassName("MouseEvent");
+        test("MouseEvent");
     }
 
     /**
@@ -2071,7 +2071,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function MutationEvent() {\n    [native code]\n}",
             IE8 = "exception")
     public void mutationEvent() throws Exception {
-        testHostClassName("MutationEvent");
+        test("MutationEvent");
     }
 
     /**
@@ -2085,7 +2085,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "exception")
     @NotYetImplemented(FF)
     public void namedNodeMap() throws Exception {
-        testHostClassName("NamedNodeMap");
+        test("NamedNodeMap");
     }
 
     /**
@@ -2096,7 +2096,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void namespace() throws Exception {
-        testHostClassName("Namespace");
+        test("Namespace");
     }
 
     /**
@@ -2107,7 +2107,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void namespaceCollection() throws Exception {
-        testHostClassName("NamespaceCollection");
+        test("NamespaceCollection");
     }
 
     /**
@@ -2121,7 +2121,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF31 = "function Navigator() {\n    [native code]\n}")
     @NotYetImplemented(FF24)
     public void navigator() throws Exception {
-        testHostClassName("Navigator");
+        test("Navigator");
     }
 
     /**
@@ -2135,7 +2135,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function Node() {\n    [native code]\n}",
             IE8 = "exception")
     public void node() throws Exception {
-        testHostClassName("Node");
+        test("Node");
     }
 
     /**
@@ -2149,7 +2149,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function NodeFilter() {\n    [native code]\n}",
             IE8 = "exception")
     public void nodeFilter() throws Exception {
-        testHostClassName("NodeFilter");
+        test("NodeFilter");
     }
 
     /**
@@ -2162,7 +2162,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function NodeList() { [native code] }",
             FF = "function NodeList() {\n    [native code]\n}")
     public void nodeList() throws Exception {
-        testHostClassName("NodeList");
+        test("NodeList");
     }
 
     /**
@@ -2177,7 +2177,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE8 = "exception")
     @NotYetImplemented({ FF24, IE11 })
     public void plugin() throws Exception {
-        testHostClassName("Plugin");
+        test("Plugin");
     }
 
     /**
@@ -2192,7 +2192,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE8 = "exception")
     @NotYetImplemented(FF24)
     public void pluginArray() throws Exception {
-        testHostClassName("PluginArray");
+        test("PluginArray");
     }
 
     /**
@@ -2206,7 +2206,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "exception",
             IE8 = "exception")
     public void pointerEvent() throws Exception {
-        testHostClassName("PointerEvent");
+        test("PointerEvent");
     }
 
     /**
@@ -2217,7 +2217,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void popup() throws Exception {
-        testHostClassName("Popup");
+        test("Popup");
     }
 
     /**
@@ -2231,7 +2231,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "exception",
             IE8 = "exception")
     public void position() throws Exception {
-        testHostClassName("Position");
+        test("Position");
     }
 
     /**
@@ -2245,7 +2245,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function ProcessingInstruction() {\n    [native code]\n}",
             IE8 = "exception")
     public void processingInstruction() throws Exception {
-        testHostClassName("ProcessingInstruction");
+        test("ProcessingInstruction");
     }
 
     /**
@@ -2260,7 +2260,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE8 = "exception")
     @NotYetImplemented(IE11)
     public void range() throws Exception {
-        testHostClassName("Range");
+        test("Range");
     }
 
     /**
@@ -2271,7 +2271,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void rowContainer() throws Exception {
-        testHostClassName("RowContainer");
+        test("RowContainer");
     }
 
     /**
@@ -2285,7 +2285,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGAElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgAElement() throws Exception {
-        testHostClassName("SVGAElement");
+        test("SVGAElement");
     }
 
     /**
@@ -2297,7 +2297,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             FF = "function SVGAltGlyphElement() {\n    [native code]\n}")
     public void svgAltGlyphElement() throws Exception {
-        testHostClassName("SVGAltGlyphElement");
+        test("SVGAltGlyphElement");
     }
 
     /**
@@ -2311,7 +2311,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGAngle() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgAngle() throws Exception {
-        testHostClassName("SVGAngle");
+        test("SVGAngle");
     }
 
     /**
@@ -2324,7 +2324,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function SVGAnimateElement() { [native code] }",
             FF = "function SVGAnimateElement() {\n    [native code]\n}")
     public void svgAnimateElement() throws Exception {
-        testHostClassName("SVGAnimateElement");
+        test("SVGAnimateElement");
     }
 
     /**
@@ -2337,7 +2337,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function SVGAnimateMotionElement() { [native code] }",
             FF = "function SVGAnimateMotionElement() {\n    [native code]\n}")
     public void svgAnimateMotionElement() throws Exception {
-        testHostClassName("SVGAnimateMotionElement");
+        test("SVGAnimateMotionElement");
     }
 
     /**
@@ -2350,7 +2350,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function SVGAnimateTransformElement() { [native code] }",
             FF = "function SVGAnimateTransformElement() {\n    [native code]\n}")
     public void svgAnimateTransformElement() throws Exception {
-        testHostClassName("SVGAnimateTransformElement");
+        test("SVGAnimateTransformElement");
     }
 
     /**
@@ -2364,7 +2364,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGCircleElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgCircleElement() throws Exception {
-        testHostClassName("SVGCircleElement");
+        test("SVGCircleElement");
     }
 
     /**
@@ -2378,7 +2378,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGClipPathElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgClipPathElement() throws Exception {
-        testHostClassName("SVGClipPathElement");
+        test("SVGClipPathElement");
     }
 
     /**
@@ -2390,7 +2390,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function SVGCursorElement() { [native code] }")
     public void svgCursorElement() throws Exception {
-        testHostClassName("SVGCursorElement");
+        test("SVGCursorElement");
     }
 
     /**
@@ -2404,7 +2404,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGDefsElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgDefsElement() throws Exception {
-        testHostClassName("SVGDefsElement");
+        test("SVGDefsElement");
     }
 
     /**
@@ -2418,7 +2418,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGDescElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgDescElement() throws Exception {
-        testHostClassName("SVGDescElement");
+        test("SVGDescElement");
     }
 
     /**
@@ -2432,7 +2432,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgElement() throws Exception {
-        testHostClassName("SVGElement");
+        test("SVGElement");
     }
 
     /**
@@ -2446,7 +2446,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGEllipseElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgEllipseElement() throws Exception {
-        testHostClassName("SVGEllipseElement");
+        test("SVGEllipseElement");
     }
 
     /**
@@ -2460,7 +2460,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGFEBlendElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEBlendElement() throws Exception {
-        testHostClassName("SVGFEBlendElement");
+        test("SVGFEBlendElement");
     }
 
     /**
@@ -2474,7 +2474,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGFEColorMatrixElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEColorMatrixElement() throws Exception {
-        testHostClassName("SVGFEColorMatrixElement");
+        test("SVGFEColorMatrixElement");
     }
 
     /**
@@ -2488,7 +2488,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGFEComponentTransferElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEComponentTransferElement() throws Exception {
-        testHostClassName("SVGFEComponentTransferElement");
+        test("SVGFEComponentTransferElement");
     }
 
     /**
@@ -2502,7 +2502,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGFECompositeElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFECompositeElement() throws Exception {
-        testHostClassName("SVGFECompositeElement");
+        test("SVGFECompositeElement");
     }
 
     /**
@@ -2516,7 +2516,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGFEConvolveMatrixElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEConvolveMatrixElement() throws Exception {
-        testHostClassName("SVGFEConvolveMatrixElement");
+        test("SVGFEConvolveMatrixElement");
     }
 
     /**
@@ -2530,7 +2530,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGFEDiffuseLightingElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEDiffuseLightingElement() throws Exception {
-        testHostClassName("SVGFEDiffuseLightingElement");
+        test("SVGFEDiffuseLightingElement");
     }
 
     /**
@@ -2544,7 +2544,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGFEDisplacementMapElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEDisplacementMapElement() throws Exception {
-        testHostClassName("SVGFEDisplacementMapElement");
+        test("SVGFEDisplacementMapElement");
     }
 
     /**
@@ -2558,7 +2558,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGFEDistantLightElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEDistantLightElement() throws Exception {
-        testHostClassName("SVGFEDistantLightElement");
+        test("SVGFEDistantLightElement");
     }
 
     /**
@@ -2572,7 +2572,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGFEFloodElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEFloodElement() throws Exception {
-        testHostClassName("SVGFEFloodElement");
+        test("SVGFEFloodElement");
     }
 
     /**
@@ -2586,7 +2586,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGFEFuncAElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEFuncAElement() throws Exception {
-        testHostClassName("SVGFEFuncAElement");
+        test("SVGFEFuncAElement");
     }
 
     /**
@@ -2600,7 +2600,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGFEFuncBElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEFuncBElement() throws Exception {
-        testHostClassName("SVGFEFuncBElement");
+        test("SVGFEFuncBElement");
     }
 
     /**
@@ -2614,7 +2614,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGFEFuncGElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEFuncGElement() throws Exception {
-        testHostClassName("SVGFEFuncGElement");
+        test("SVGFEFuncGElement");
     }
 
     /**
@@ -2628,7 +2628,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGFEFuncRElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEFuncRElement() throws Exception {
-        testHostClassName("SVGFEFuncRElement");
+        test("SVGFEFuncRElement");
     }
 
     /**
@@ -2642,7 +2642,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGFEGaussianBlurElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEGaussianBlurElement() throws Exception {
-        testHostClassName("SVGFEGaussianBlurElement");
+        test("SVGFEGaussianBlurElement");
     }
 
     /**
@@ -2656,7 +2656,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGFEImageElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEImageElement() throws Exception {
-        testHostClassName("SVGFEImageElement");
+        test("SVGFEImageElement");
     }
 
     /**
@@ -2670,7 +2670,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGFEMergeElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEMergeElement() throws Exception {
-        testHostClassName("SVGFEMergeElement");
+        test("SVGFEMergeElement");
     }
 
     /**
@@ -2684,7 +2684,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGFEMergeNodeElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEMergeNodeElement() throws Exception {
-        testHostClassName("SVGFEMergeNodeElement");
+        test("SVGFEMergeNodeElement");
     }
 
     /**
@@ -2698,7 +2698,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGFEMorphologyElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEMorphologyElement() throws Exception {
-        testHostClassName("SVGFEMorphologyElement");
+        test("SVGFEMorphologyElement");
     }
 
     /**
@@ -2712,7 +2712,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGFEOffsetElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEOffsetElement() throws Exception {
-        testHostClassName("SVGFEOffsetElement");
+        test("SVGFEOffsetElement");
     }
 
     /**
@@ -2726,7 +2726,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGFEPointLightElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFEPointLightElement() throws Exception {
-        testHostClassName("SVGFEPointLightElement");
+        test("SVGFEPointLightElement");
     }
 
     /**
@@ -2740,7 +2740,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGFESpecularLightingElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFESpecularLightingElement() throws Exception {
-        testHostClassName("SVGFESpecularLightingElement");
+        test("SVGFESpecularLightingElement");
     }
 
     /**
@@ -2754,7 +2754,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGFESpotLightElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFESpotLightElement() throws Exception {
-        testHostClassName("SVGFESpotLightElement");
+        test("SVGFESpotLightElement");
     }
 
     /**
@@ -2768,7 +2768,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGFETileElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFETileElement() throws Exception {
-        testHostClassName("SVGFETileElement");
+        test("SVGFETileElement");
     }
 
     /**
@@ -2782,7 +2782,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGFETurbulenceElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFETurbulenceElement() throws Exception {
-        testHostClassName("SVGFETurbulenceElement");
+        test("SVGFETurbulenceElement");
     }
 
     /**
@@ -2796,7 +2796,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGFilterElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgFilterElement() throws Exception {
-        testHostClassName("SVGFilterElement");
+        test("SVGFilterElement");
     }
 
     /**
@@ -2809,7 +2809,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function SVGForeignObjectElement() { [native code] }",
             FF = "function SVGForeignObjectElement() {\n    [native code]\n}")
     public void svgForeignObjectElement() throws Exception {
-        testHostClassName("SVGForeignObjectElement");
+        test("SVGForeignObjectElement");
     }
 
     /**
@@ -2823,7 +2823,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGGElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgGElement() throws Exception {
-        testHostClassName("SVGGElement");
+        test("SVGGElement");
     }
 
     /**
@@ -2837,7 +2837,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGImageElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgImageElement() throws Exception {
-        testHostClassName("SVGImageElement");
+        test("SVGImageElement");
     }
 
     /**
@@ -2851,7 +2851,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGLineElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgLineElement() throws Exception {
-        testHostClassName("SVGLineElement");
+        test("SVGLineElement");
     }
 
     /**
@@ -2865,7 +2865,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGLinearGradientElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgLinearGradientElement() throws Exception {
-        testHostClassName("SVGLinearGradientElement");
+        test("SVGLinearGradientElement");
     }
 
     /**
@@ -2879,7 +2879,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGMarkerElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgMarkerElement() throws Exception {
-        testHostClassName("SVGMarkerElement");
+        test("SVGMarkerElement");
     }
 
     /**
@@ -2893,7 +2893,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGMaskElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgMaskElement() throws Exception {
-        testHostClassName("SVGMaskElement");
+        test("SVGMaskElement");
     }
 
     /**
@@ -2907,7 +2907,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGMatrix() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgMatrix() throws Exception {
-        testHostClassName("SVGMatrix");
+        test("SVGMatrix");
     }
 
     /**
@@ -2921,7 +2921,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGMetadataElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgMetadataElement() throws Exception {
-        testHostClassName("SVGMetadataElement");
+        test("SVGMetadataElement");
     }
 
     /**
@@ -2934,7 +2934,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function SVGMPathElement() { [native code] }",
             FF = "function SVGMPathElement() {\n    [native code]\n}")
     public void svgMPathElement() throws Exception {
-        testHostClassName("SVGMPathElement");
+        test("SVGMPathElement");
     }
 
     /**
@@ -2948,7 +2948,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGPathElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgPathElement() throws Exception {
-        testHostClassName("SVGPathElement");
+        test("SVGPathElement");
     }
 
     /**
@@ -2962,7 +2962,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGPatternElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgPatternElement() throws Exception {
-        testHostClassName("SVGPatternElement");
+        test("SVGPatternElement");
     }
 
     /**
@@ -2976,7 +2976,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGPolygonElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgPolygonElement() throws Exception {
-        testHostClassName("SVGPolygonElement");
+        test("SVGPolygonElement");
     }
 
     /**
@@ -2990,7 +2990,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGPolylineElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgPolylineElement() throws Exception {
-        testHostClassName("SVGPolylineElement");
+        test("SVGPolylineElement");
     }
 
     /**
@@ -3004,7 +3004,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGRadialGradientElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgRadialGradientElement() throws Exception {
-        testHostClassName("SVGRadialGradientElement");
+        test("SVGRadialGradientElement");
     }
 
     /**
@@ -3018,7 +3018,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGRect() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgRect() throws Exception {
-        testHostClassName("SVGRect");
+        test("SVGRect");
     }
 
     /**
@@ -3032,7 +3032,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGRectElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgRectElement() throws Exception {
-        testHostClassName("SVGRectElement");
+        test("SVGRectElement");
     }
 
     /**
@@ -3046,7 +3046,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGSVGElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgSVGElement() throws Exception {
-        testHostClassName("SVGSVGElement");
+        test("SVGSVGElement");
     }
 
     /**
@@ -3060,7 +3060,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGScriptElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgScriptElement() throws Exception {
-        testHostClassName("SVGScriptElement");
+        test("SVGScriptElement");
     }
 
     /**
@@ -3073,7 +3073,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function SVGSetElement() { [native code] }",
             FF = "function SVGSetElement() {\n    [native code]\n}")
     public void svgSetElement() throws Exception {
-        testHostClassName("SVGSetElement");
+        test("SVGSetElement");
     }
 
     /**
@@ -3087,7 +3087,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGStopElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgStopElement() throws Exception {
-        testHostClassName("SVGStopElement");
+        test("SVGStopElement");
     }
 
     /**
@@ -3101,7 +3101,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGStyleElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgStyleElement() throws Exception {
-        testHostClassName("SVGStyleElement");
+        test("SVGStyleElement");
     }
 
     /**
@@ -3115,7 +3115,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGSwitchElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgSwitchElement() throws Exception {
-        testHostClassName("SVGSwitchElement");
+        test("SVGSwitchElement");
     }
 
     /**
@@ -3129,7 +3129,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGSymbolElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgSymbolElement() throws Exception {
-        testHostClassName("SVGSymbolElement");
+        test("SVGSymbolElement");
     }
 
     /**
@@ -3143,7 +3143,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGTSpanElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgTSpanElement() throws Exception {
-        testHostClassName("SVGTSpanElement");
+        test("SVGTSpanElement");
     }
 
     /**
@@ -3157,7 +3157,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGTextElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgTextElement() throws Exception {
-        testHostClassName("SVGTextElement");
+        test("SVGTextElement");
     }
 
     /**
@@ -3171,7 +3171,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGTextPathElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgTextPathElement() throws Exception {
-        testHostClassName("SVGTextPathElement");
+        test("SVGTextPathElement");
     }
 
     /**
@@ -3185,7 +3185,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGTitleElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgTitleElement() throws Exception {
-        testHostClassName("SVGTitleElement");
+        test("SVGTitleElement");
     }
 
     /**
@@ -3199,7 +3199,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGUseElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgUseElement() throws Exception {
-        testHostClassName("SVGUseElement");
+        test("SVGUseElement");
     }
 
     /**
@@ -3213,7 +3213,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SVGViewElement() {\n    [native code]\n}",
             IE8 = "exception")
     public void svgViewElement() throws Exception {
-        testHostClassName("SVGViewElement");
+        test("SVGViewElement");
     }
 
     /**
@@ -3226,7 +3226,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function Screen() { [native code] }",
             FF = "function Screen() {\n    [native code]\n}")
     public void screen() throws Exception {
-        testHostClassName("Screen");
+        test("Screen");
     }
 
     /**
@@ -3240,7 +3240,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF31 = "function Selection() {\n    [native code]\n}")
     @NotYetImplemented({ FF24, IE11 })
     public void selection() throws Exception {
-        testHostClassName("Selection");
+        test("Selection");
     }
 
     /**
@@ -3251,7 +3251,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void simpleArray() throws Exception {
-        testHostClassName("SimpleArray");
+        test("SimpleArray");
     }
 
     /**
@@ -3264,7 +3264,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE8 = "[object StaticNodeList]")
     @NotYetImplemented({ FF, IE11, CHROME })
     public void staticNodeList() throws Exception {
-        testHostClassName("StaticNodeList");
+        test("StaticNodeList");
     }
 
     /**
@@ -3276,7 +3276,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object Storage]",
             CHROME = "function Storage() { [native code] }")
     public void storage() throws Exception {
-        testHostClassName("Storage");
+        test("Storage");
     }
 
     /**
@@ -3290,7 +3290,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF31 = "function StyleSheetList() {\n    [native code]\n}")
     @NotYetImplemented(FF24)
     public void styleSheetList() throws Exception {
-        testHostClassName("StyleSheetList");
+        test("StyleSheetList");
     }
 
     /**
@@ -3303,7 +3303,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function Text() { [native code] }",
             FF = "function Text() {\n    [native code]\n}")
     public void text() throws Exception {
-        testHostClassName("Text");
+        test("Text");
     }
 
     /**
@@ -3316,7 +3316,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "exception",
             FF = "exception")
     public void textRange() throws Exception {
-        testHostClassName("TextRange");
+        test("TextRange");
     }
 
     /**
@@ -3330,7 +3330,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function TreeWalker() {\n    [native code]\n}",
             IE8 = "exception")
     public void treeWalker() throws Exception {
-        testHostClassName("TreeWalker");
+        test("TreeWalker");
     }
 
     /**
@@ -3344,7 +3344,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function UIEvent() {\n    [native code]\n}",
             IE8 = "exception")
     public void uIEvent() throws Exception {
-        testHostClassName("UIEvent");
+        test("UIEvent");
     }
 
     /**
@@ -3358,7 +3358,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE11 = "\nfunction Uint16Array() {\n    [native code]\n}\n",
             IE8 = "exception")
     public void uint16Array() throws Exception {
-        testHostClassName("Uint16Array");
+        test("Uint16Array");
     }
 
     /**
@@ -3372,7 +3372,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE11 = "\nfunction Uint32Array() {\n    [native code]\n}\n",
             IE8 = "exception")
     public void uint32Array() throws Exception {
-        testHostClassName("Uint32Array");
+        test("Uint32Array");
     }
 
     /**
@@ -3386,7 +3386,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE11 = "\nfunction Uint8Array() {\n    [native code]\n}\n",
             IE8 = "exception")
     public void uint8Array() throws Exception {
-        testHostClassName("Uint8Array");
+        test("Uint8Array");
     }
 
     /**
@@ -3400,7 +3400,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE11 = "\nfunction Uint8ClampedArray() {\n    [native code]\n}\n",
             IE8 = "exception")
     public void uint8ClampedArray() throws Exception {
-        testHostClassName("Uint8ClampedArray");
+        test("Uint8ClampedArray");
     }
 
     /**
@@ -3415,7 +3415,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE8 = "exception")
     @NotYetImplemented(IE11)
     public void webSocket() throws Exception {
-        testHostClassName("WebSocket");
+        test("WebSocket");
     }
 
     /**
@@ -3427,7 +3427,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object Window]",
             CHROME = "function Window() { [native code] }")
     public void window() throws Exception {
-        testHostClassName("Window");
+        test("Window");
     }
 
     /**
@@ -3441,7 +3441,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function XMLDocument() {\n    [native code]\n}",
             IE8 = "exception")
     public void xmlDocument() throws Exception {
-        testHostClassName("XMLDocument");
+        test("XMLDocument");
     }
 
     /**
@@ -3455,7 +3455,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE11 = "\nfunction XMLHttpRequest() {\n    [native code]\n}\n",
             IE8 = "[object XMLHttpRequest]")
     public void xmlHttpRequest() throws Exception {
-        testHostClassName("XMLHttpRequest");
+        test("XMLHttpRequest");
     }
 
     /**
@@ -3469,7 +3469,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE11 = "\nfunction XMLSerializer() {\n    [native code]\n}\n",
             IE8 = "exception")
     public void xmlSerializer() throws Exception {
-        testHostClassName("XMLSerializer");
+        test("XMLSerializer");
     }
 
     /**
@@ -3482,7 +3482,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function XPathEvaluator() { [native code] }",
             FF = "function XPathEvaluator() {\n    [native code]\n}")
     public void xPathEvaluator() throws Exception {
-        testHostClassName("XPathEvaluator");
+        test("XPathEvaluator");
     }
 
     /**
@@ -3495,7 +3495,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "[object XPathNSResolver]")
     @NotYetImplemented(CHROME)
     public void xPathNSResolver() throws Exception {
-        testHostClassName("XPathNSResolver");
+        test("XPathNSResolver");
     }
 
     /**
@@ -3508,7 +3508,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function XPathResult() { [native code] }",
             IE = "exception")
     public void xPathResult() throws Exception {
-        testHostClassName("XPathResult");
+        test("XPathResult");
     }
 
     /**
@@ -3522,7 +3522,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE = "exception")
     @NotYetImplemented(IE11)
     public void xsltProcessor() throws Exception {
-        testHostClassName("XSLTProcessor");
+        test("XSLTProcessor");
     }
 
     /**
@@ -3533,6 +3533,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void xsltemplate() throws Exception {
-        testHostClassName("XSLTemplate");
+        test("XSLTemplate");
     }
 }
