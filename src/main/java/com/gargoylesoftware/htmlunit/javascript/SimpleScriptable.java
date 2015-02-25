@@ -60,6 +60,7 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
 
     private DomNode domNode_;
     private boolean caseSensitive_ = true;
+    private String className_;
 
     /**
      * Gets a named property from the object.
@@ -112,12 +113,23 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
      */
     @Override
     public String getClassName() {
+        if (className_ != null) {
+            return className_;
+        }
         String className = getClass().getSimpleName();
         if (className.isEmpty()) {
             // for anonymous class
             className = getClass().getSuperclass().getSimpleName();
         }
         return className;
+    }
+
+    /**
+     * Sets the class name.
+     * @param className the class name.
+     */
+    void setClassName(final String className) {
+        this.className_ = className;
     }
 
     /**

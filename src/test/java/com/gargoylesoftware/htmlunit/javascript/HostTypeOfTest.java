@@ -121,7 +121,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF = "undefined",
             IE8 = "undefined")
-    @NotYetImplemented({ FF, CHROME })
     public void applicationCache() throws Exception {
         test("ApplicationCache");
     }
@@ -134,7 +133,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function")
-    @NotYetImplemented(FF)
     public void offlineResourceList() throws Exception {
         test("OfflineResourceList");
     }
@@ -859,7 +857,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLQuoteElement}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBlockQuoteElement}.
      *
      * @throws Exception if an error occurs
      */

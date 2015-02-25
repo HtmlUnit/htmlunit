@@ -238,7 +238,7 @@ public class JavaScriptEngine {
                 configureConstantsPropertiesAndFunctions(config, window);
 
                 final ScriptableObject prototype = configureClass(config, window);
-                prototypesPerJSName_.put(config.getHostClass().getSimpleName(), prototype);
+                prototypesPerJSName_.put(config.getClassName(), prototype);
             }
             else {
                 final ScriptableObject prototype = configureClass(config, window);
@@ -249,6 +249,7 @@ public class JavaScriptEngine {
                         prototype.defineProperty("__proto__", prototype, ScriptableObject.DONTENUM);
                         obj.defineProperty("prototype", prototype, ScriptableObject.DONTENUM); // but not setPrototype!
                         obj.setParentScope(window);
+                        obj.setClassName(config.getClassName());
                         ScriptableObject.defineProperty(window, obj.getClassName(), obj, ScriptableObject.DONTENUM);
                         // this obj won't have prototype, constants need to be configured on it again
                         configureConstants(config, obj);
@@ -263,7 +264,7 @@ public class JavaScriptEngine {
                     }
                 }
                 prototypes.put(config.getHostClass(), prototype);
-                prototypesPerJSName_.put(config.getHostClass().getSimpleName(), prototype);
+                prototypesPerJSName_.put(config.getClassName(), prototype);
             }
         }
 
@@ -287,7 +288,7 @@ public class JavaScriptEngine {
 
         for (final ClassConfiguration config : jsConfig_.getAll()) {
             final Member jsConstructor = config.getJsConstructor();
-            final String jsClassName = config.getHostClass().getSimpleName();
+            final String jsClassName = config.getClassName();
             final ScriptableObject prototype = prototypesPerJSName_.get(jsClassName);
             if (prototype != null && config.isJsObject()) {
                 if (jsConstructor != null) {
@@ -309,6 +310,7 @@ public class JavaScriptEngine {
                         }
                         else {
                             constructor = config.getHostClass().newInstance();
+                            ((SimpleScriptable) constructor).setClassName(config.getClassName());
                         }
                         defineConstructor(browserVersion, window, prototype, constructor);
                         configureConstants(config, constructor);
@@ -439,7 +441,7 @@ public class JavaScriptEngine {
         final Window window = ((HTMLDocument) page.getScriptObject()).getWindow();
         final BrowserVersion browserVersion = window.getWebWindow().getWebClient().getBrowserVersion();
         for (final ClassConfiguration config : jsConfig_.getAll()) {
-            final String jsClassName = config.getHostClass().getSimpleName();
+            final String jsClassName = config.getClassName();
             if (config.isDefinedInStandardsMode()) {
                 final ScriptableObject prototype = prototypesPerJSName_.get(jsClassName);
                 if ("Window".equals(jsClassName)) {
@@ -480,11 +482,12 @@ public class JavaScriptEngine {
      * @throws IllegalAccessException if we don't have access to create the new instance
      * @return the created prototype
      */
-    private ScriptableObject configureClass(final ClassConfiguration config, final Scriptable window)
+    private SimpleScriptable configureClass(final ClassConfiguration config, final Scriptable window)
         throws InstantiationException, IllegalAccessException {
 
-        final ScriptableObject prototype = config.getHostClass().newInstance();
+        final SimpleScriptable prototype = config.getHostClass().newInstance();
         prototype.setParentScope(window);
+        prototype.setClassName(config.getClassName());
 
         configureConstantsPropertiesAndFunctions(config, prototype);
 

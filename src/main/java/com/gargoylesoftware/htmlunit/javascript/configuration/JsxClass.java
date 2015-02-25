@@ -42,6 +42,9 @@ public @interface JsxClass {
     /** Should be defined in only Standards Mode. */
     boolean isDefinedInStandardsMode() default true;
 
+    /** The class name. */
+    String className() default "";
+
     /** The {@link WebBrowser}s supported by this constant. */
     WebBrowser[] browsers() default {
         @WebBrowser(IE),

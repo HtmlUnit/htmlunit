@@ -78,7 +78,7 @@ public abstract class AbstractJavaScriptConfiguration {
         for (final Class<? extends SimpleScriptable> klass : getClasses()) {
             final ClassConfiguration config = processClass(klass, browser);
             if (config != null) {
-                classMap.put(config.getHostClass().getSimpleName(), config);
+                classMap.put(config.getClassName(), config);
             }
         }
         return Collections.unmodifiableMap(classMap);
@@ -112,6 +112,7 @@ public abstract class AbstractJavaScriptConfiguration {
 
                 boolean isJsObject = false;
                 boolean isDefinedInStandardsMode = false;
+                String className = null;
                 for (int i = 0; i < jsxClassValues.length; i++) {
                     final JsxClass jsxClass = jsxClassValues[i];
 
@@ -124,12 +125,15 @@ public abstract class AbstractJavaScriptConfiguration {
                         if (jsxClass.isDefinedInStandardsMode()) {
                             isDefinedInStandardsMode = true;
                         }
+                        if (!jsxClass.className().isEmpty()) {
+                            className = jsxClass.className();
+                        }
                     }
                 }
 
                 final ClassConfiguration classConfiguration =
                         new ClassConfiguration(klass, domClasses.toArray(new Class<?>[0]), isJsObject,
-                                isDefinedInStandardsMode);
+                                isDefinedInStandardsMode, className);
 
                 process(classConfiguration, hostClassName, expectedBrowserName,
                         browserVersionNumeric);
@@ -145,9 +149,13 @@ public abstract class AbstractJavaScriptConfiguration {
                     domClasses.add(domClass);
                 }
 
+                String className = jsxClass.className();
+                if (className.isEmpty()) {
+                    className = null;
+                }
                 final ClassConfiguration classConfiguration
                     = new ClassConfiguration(klass, domClasses.toArray(new Class<?>[0]), jsxClass.isJSObject(),
-                            jsxClass.isDefinedInStandardsMode());
+                            jsxClass.isDefinedInStandardsMode(), className);
 
                 process(classConfiguration, hostClassName, expectedBrowserName,
                         browserVersionNumeric);

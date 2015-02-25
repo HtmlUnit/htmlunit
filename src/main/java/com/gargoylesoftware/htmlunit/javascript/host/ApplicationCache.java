@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_APPCACHE_NAME_OFFLINERESOURCELIST;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -23,6 +22,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -42,7 +43,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @see <a href="https://developer.mozilla.org/en/offline_resources_in_firefox">Offline Resources in Firefox</a>
  * @see <a href="https://developer.mozilla.org/en/nsIDOMOfflineResourceList">Mozilla Documentation</a>
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+@JsxClasses({
+    @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) }),
+    @JsxClass(className = "OfflineResourceList", browsers = @WebBrowser(FF))
+})
 public class ApplicationCache extends SimpleScriptable {
 
     /** The object isn't associated with an application cache. */
@@ -62,16 +66,10 @@ public class ApplicationCache extends SimpleScriptable {
     private EventListenersContainer eventListenersContainer_;
 
     /**
-     * {@inheritDoc}
+     * The constructor.
      */
-    @Override
-    public String getClassName() {
-        if (getWindow().getWebWindow() != null) {
-            if (getBrowserVersion().hasFeature(JS_APPCACHE_NAME_OFFLINERESOURCELIST)) {
-                return "OfflineResourceList";
-            }
-        }
-        return super.getClassName();
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public ApplicationCache() {
     }
 
     /**

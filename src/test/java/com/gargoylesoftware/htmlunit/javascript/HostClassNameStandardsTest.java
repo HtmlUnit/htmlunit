@@ -129,7 +129,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function ApplicationCache() { [native code] }",
             FF = "exception",
             IE8 = "exception")
-    @NotYetImplemented({ FF, CHROME })
     public void applicationCache() throws Exception {
         test("ApplicationCache");
     }
@@ -142,7 +141,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
         FF = "function OfflineResourceList() {\n    [native code]\n}")
-    @NotYetImplemented(FF)
     public void offlineResourceList() throws Exception {
         test("OfflineResourceList");
     }
