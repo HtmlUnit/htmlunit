@@ -860,8 +860,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Sets the class attribute for this element.
      * @param className the new class name
      */
-    @JsxSetter
-    public void setClassName(final String className) {
+    @JsxSetter(propertyName = "className")
+    public void setClassName_js(final String className) {
         getDomNodeOrDie().setAttribute("class", className);
     }
 
