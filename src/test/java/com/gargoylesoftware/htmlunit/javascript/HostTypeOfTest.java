@@ -876,8 +876,9 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
+        IE8 = "undefined",
         IE11 = "object")
-    @NotYetImplemented({ CHROME, FF, IE8 })
+    @NotYetImplemented({ CHROME, FF })
     public void htmlQuoteElement() throws Exception {
         test("HTMLQuoteElement");
     }

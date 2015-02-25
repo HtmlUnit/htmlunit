@@ -415,7 +415,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+    	IE8 = "[object HTMLCommentElement]")
+    @NotYetImplemented(IE8)
     public void htmlCommentElement() throws Exception {
         test("HTMLCommentElement");
     }
@@ -879,8 +881,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "function HTMLQuoteElement() { [native code] }",
             FF = "function HTMLQuoteElement() {\n    [native code]\n}",
-            IE = "[object HTMLQuoteElement]")
-    @NotYetImplemented({ IE8, FF, CHROME })
+            IE = "[object HTMLQuoteElement]",
+            IE8 = "exception")
+    @NotYetImplemented({ FF, CHROME })
     public void htmlQuoteElement() throws Exception {
         test("HTMLQuoteElement");
     }
@@ -1886,8 +1889,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "exception",
+    		IE8 = "[object HTMLGenericElement]")
     public void htmlGenericElement() throws Exception {
         test("HTMLGenericElement");
     }
