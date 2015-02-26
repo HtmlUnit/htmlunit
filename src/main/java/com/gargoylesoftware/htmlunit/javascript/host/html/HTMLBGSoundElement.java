@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BGSOUND_AS_UNKNOWN;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlBackgroundSound;
@@ -32,8 +34,23 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
             browsers = { @WebBrowser(value = IE, maxVersion = 8) }),
     @JsxClass(domClass = HtmlBackgroundSound.class,
             browsers = { @WebBrowser(value = IE, minVersion = 11) }),
+    @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, domClass = HtmlBackgroundSound.class,
+            browsers = @WebBrowser(FF))
 })
 public class HTMLBGSoundElement extends HTMLElement {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getClassName() {
+        if (getWindow().getWebWindow() != null) {
+            if (getBrowserVersion().hasFeature(JS_BGSOUND_AS_UNKNOWN)) {
+                return "HTMLUnknownElement";
+            }
+        }
+        return super.getClassName();
+    }
 
     /**
      * {@inheritDoc}

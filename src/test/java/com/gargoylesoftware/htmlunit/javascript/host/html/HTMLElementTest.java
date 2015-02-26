@@ -30,6 +30,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -201,7 +202,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "null", "bla", "true" },
             IE11 = { "", "bla", "true" },
             IE8 = "exception")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, CHROME })
     public void getSetAttributeNS() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -440,6 +441,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "null", "inform('newHandler')", "null" },
             IE11 = { "null", "inform('newHandler')", "" },
             IE8 = { "null", "inform('newHandler')", "null" })
+    @NotYetImplemented(IE11)
     public void setAttribute_eventHandlerNull() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -548,6 +550,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "focus", "click", "blur" },
             IE8 = { })
+    @BuggyWebDriver(IE11)
     public void setAttribute_eventHandlerEventArgument() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1139,7 +1142,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "Outer = <p id=\"myNode\">New  cell value\n\n</p>" },
             IE8 = { "Outer = \r\n<P id=myNode>New cell value " },
             IE11 = { "Outer = <p id=\"myNode\">New  cell value\n\n" })
-    @NotYetImplemented({ FF, IE })
+    @NotYetImplemented
     public void getOuterHTMLFromUnclosedParagraph() throws Exception {
         final String html = createPageForGetOuterHTML("p", "New  cell value", true);
         loadPageWithAlerts2(html);
@@ -1412,7 +1415,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <div><div></div></div>", "Childs: 1" },
             IE8 = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <DIV>\r\n<DIV></DIV></DIV>", "Childs: 1" })
-    @NotYetImplemented({ FF, IE8, IE11 })
+    @NotYetImplemented
     public void setOuterHTMLAddMultipleSelfClosingBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div/><div>");
         loadPageWithAlerts2(html);
@@ -1809,7 +1812,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "2", "exception" },
             IE = { "2", "BR" })
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, CHROME })
     public void childrenFunctionAccess() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='myDiv'><br/><div>\n"
@@ -1830,6 +1833,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(CHROME = { "Old = Old\ninnerText", "New = New cell value" },
             FF = { "Old = undefined", "New = New cell value" },
             IE = { "Old = Old \r\ninnerText", "New = New cell value" })
+    @NotYetImplemented(CHROME)
     public void getSetInnerTextSimple() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -2188,6 +2192,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             "f1", "body", "h1", "i1", "td", "body", "td", "body", "body" },
             IE8 = { "null", "body", "body", "body", "body", "body",
             "body", "body", "h1", "i1", "td", "td", "td", "body", "body" })
+    @NotYetImplemented(CHROME)
     public void offsetParent_WithCSS() throws Exception {
         final String html = "<html>\n"
             + "  <body id='body' onload='test()'>\n"
@@ -2389,6 +2394,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             IE11 = { "[object MSStyleCSSProperties]", "" },
             IE8 = { "[object]", "" })
+    @NotYetImplemented(IE11)
     public void runtimeStyle() throws Exception {
         style("runtimeStyle");
     }
@@ -2416,6 +2422,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "0", "0" })
+    @NotYetImplemented(CHROME)
     public void clientLeftTop() throws Exception {
         final String html = "<html><body>"
             + "<div id='div1'>hello</div><script>\n"
@@ -2432,7 +2439,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0", "0" })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, CHROME })
     public void clientLeftTop_documentElement() throws Exception {
         final String html =
               "<!DOCTYPE HTML "
@@ -2453,6 +2460,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "4", "4" },
             IE8 = { "0", "0" })
+    @NotYetImplemented(CHROME)
     public void clientLeftTopWithBorder() throws Exception {
         final String html = "<html><body>"
             + "<div id='div1' style='border: 4px solid black;'>hello</div><script>\n"
@@ -2985,6 +2993,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE11 = "false",
             CHROME = "false")
+    @NotYetImplemented(CHROME)
     public void contains_invalid_argument() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -3320,6 +3329,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "exception call", "exception set" },
             CHROME = { "undefined", "true" })
+    @NotYetImplemented(CHROME)
     public void prototype_innerHTML() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
@@ -3397,7 +3407,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "button", "null", "false", "true" },
             IE11 = { "button", "", "false", "true" },
             IE8 = { "button", "getAttributeNS() not supported" })
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, CHROME })
     public void attributeNS() throws Exception {
         final String html
             = "<html><head>\n"
@@ -4947,6 +4957,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "<svg id=\"svgElem2\"></svg>",
             IE = "undefined",
             IE11 = "<svg xmlns=\"http://www.w3.org/2000/svg\" id=\"svgElem2\" />")
+    @NotYetImplemented(IE11)
     public void innerHTML_svg() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
