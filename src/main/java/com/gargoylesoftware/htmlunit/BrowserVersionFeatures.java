@@ -199,6 +199,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     EVENT_DOM_LEVEL_3,
 
+    /** Event false result. */
+    @BrowserFeature(@WebBrowser(IE))
+    EVENT_FALSE_RESULT,
+
     /** Is setting 'focus' and 'blur' events of 'document', triggers the event for the descendants elements. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     EVENT_FOCUS_DOCUMENT_DESCENDANTS,
@@ -327,30 +331,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     FORM_SUBMISSION_URL_WITHOUT_HASH,
 
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    GENERATED_112,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_150,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_40,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    GENERATED_51,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_53,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_63,
-
     /** */
     @BrowserFeature(@WebBrowser(IE))
     HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH,
@@ -458,6 +438,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTMLDOCUMENT_COLOR,
 
+    /** We can used function in detached documents. */
+    @BrowserFeature(@WebBrowser(IE))
+    HTMLDOCUMENT_FUNCTION_DETACHED,
+
     /** Calls to <code>document.XYZ</code> also looks at frames. */
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(CHROME) })
     HTMLDOCUMENT_GET_ALSO_FRAMES,
@@ -476,6 +460,10 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS,
+
+    /** Can stored the document methods as variable. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    HTMLDOCUMENT_METHOD_AS_VARIABLE,
 
     /** Allows invalid 'align' values. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
@@ -611,6 +599,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTML_OBJECT_CLASSID,
 
+    /** In HTMLUnknownElement, use "localName" for the "nodeName". */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    HTML_UNKNOWN_LOCAL_NAME,
+
     /** Additionally support dates in format "d/M/yyyy". */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, maxVersion = 8) })
     HTTP_COOKIE_EXTENDED_DATE_PATTERNS,
@@ -627,10 +619,6 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(CHROME) })
     HTTP_COOKIE_START_DATE_1970,
-
-    /** Indicates that "host" HTTP header should be the first. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    HTTP_HEADER_HOST_FIRST,
 
     /** Indicates that the browser should ignore contents of inner head elements. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
@@ -1968,6 +1956,10 @@ public enum BrowserVersionFeatures {
     /** */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     URL_MISSING_SLASHES,
+
+    /** Execute window events. */
+    @BrowserFeature(@WebBrowser(IE))
+    WINDOW_EXECUTE_EVENTS,
 
     /** XMLHttpRequest does not trigger the error handler. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))

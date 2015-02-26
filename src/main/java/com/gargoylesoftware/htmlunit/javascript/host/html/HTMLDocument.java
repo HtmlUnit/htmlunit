@@ -23,8 +23,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_HA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_KEY_EVENTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_POINTEREVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EXECCOMMAND_THROWS_ON_WRONG_COMMAND;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_51;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_53;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_METHOD_AS_VARIABLE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_FUNCTION_DETACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_CHARSET_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_CHARSET_NORMALIZED;
@@ -369,7 +369,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         N node = null;
         // don't use getBrowserVersion() here because this is called
         // from getBrowserVersion() and will endless loop
-        final boolean ie = getWindow().getWebWindow().getWebClient().getBrowserVersion().hasFeature(GENERATED_51);
+        final boolean ie = getWindow().getWebWindow().getWebClient().getBrowserVersion().hasFeature(HTMLDOCUMENT_METHOD_AS_VARIABLE);
         if (ie) {
             final Scriptable scope = getParentScope();
             if (scope instanceof Window) {
@@ -619,8 +619,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
 
         final Window window = getWindow(thisObj);
-        final BrowserVersion browser = window.getWebWindow().getWebClient().getBrowserVersion();
-        if (browser.hasFeature(GENERATED_53)) {
+        if (window.getBrowserVersion().hasFeature(HTMLDOCUMENT_FUNCTION_DETACHED)) {
             return (HTMLDocument) window.getDocument();
         }
         throw Context.reportRuntimeError("Function can't be used detached from document");

@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DIALOGWINDOW_REFERER;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_150;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.WINDOW_EXECUTE_EVENTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PROTOCOL_DATA;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MINIMAL_QUERY_ENCODING;
@@ -467,7 +467,7 @@ public class WebClient implements Serializable {
             oldPage.cleanUp();
         }
         Page newPage = null;
-        if (windows_.contains(webWindow) || getBrowserVersion().hasFeature(GENERATED_150)) {
+        if (windows_.contains(webWindow) || getBrowserVersion().hasFeature(WINDOW_EXECUTE_EVENTS)) {
             newPage = pageCreator_.createPage(webResponse, webWindow);
 
             if (windows_.contains(webWindow)) {

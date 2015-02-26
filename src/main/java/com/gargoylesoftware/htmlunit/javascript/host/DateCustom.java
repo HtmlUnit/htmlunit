@@ -59,8 +59,7 @@ public final class DateCustom {
     public static String toLocaleDateString(
             final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
         final String formatString;
-        final BrowserVersion browserVersion =
-                ((Window) thisObj.getParentScope()).getWebWindow().getWebClient().getBrowserVersion();
+        final BrowserVersion browserVersion = ((Window) thisObj.getParentScope()).getBrowserVersion();
 
         if (browserVersion.hasFeature(JS_DATE_LOCALE_DATE_SHORT_WITH_SPECIAL_CHARS)) {
             // [U+200E] -> Unicode Character 'LEFT-TO-RIGHT MARK'
@@ -129,8 +128,7 @@ public final class DateCustom {
     }
 
     private static Locale getLocale(final Scriptable thisObj) {
-        final BrowserVersion broserVersion = ((Window) thisObj.getParentScope())
-                .getWebWindow().getWebClient().getBrowserVersion();
+        final BrowserVersion broserVersion = ((Window) thisObj.getParentScope()).getBrowserVersion();
         return new Locale(broserVersion.getSystemLanguage());
     }
 }

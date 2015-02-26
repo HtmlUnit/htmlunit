@@ -17,10 +17,15 @@ package com.gargoylesoftware.htmlunit;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.BrowserFeature;
@@ -109,5 +114,45 @@ public class BrowserVersionFeaturesTest  {
         }
 
         return "CHROME";
+    }
+
+    /**
+     * Test of usage in the Java files.
+     * 
+     * @throws Exception in case of problems
+     */
+    @Test
+    public void unusedFeaturesInCode() throws Exception {
+        final List<String> unusedFeatures = new ArrayList<>(BrowserVersionFeatures.values().length);
+        for (final BrowserVersionFeatures feature : BrowserVersionFeatures.values()) {
+            unusedFeatures.add(feature.name());
+        }
+        unusedCheck(new File("src/main/java"), unusedFeatures);
+        if (!unusedFeatures.isEmpty()) {
+            fail("The following " + BrowserVersionFeatures.class.getSimpleName() + " "
+                    + (unusedFeatures.size() == 1 ? "is" : "are") + " not used: "
+                    + StringUtils.join(unusedFeatures, ", "));
+        }
+    }
+
+    private void unusedCheck(final File dir, final List<String> unusedFeatures) throws IOException {
+        for (final File file : dir.listFiles()) {
+            if (file.isDirectory() && !".svn".equals(file.getName())) {
+                unusedCheck(file, unusedFeatures);
+            }
+            else if (file.getName().endsWith(".java")) {
+                final List<String> lines = FileUtils.readLines(file);
+                final String browserVersionFeatures = BrowserVersionFeatures.class.getSimpleName(); 
+                for (final String line : lines) {
+                    for (int i = 0; i < unusedFeatures.size(); i++) {
+                        final String featureName = unusedFeatures.get(i);
+                        if (line.contains(browserVersionFeatures + '.' + featureName)) {
+                            unusedFeatures.remove(i);
+                            i--;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

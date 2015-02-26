@@ -140,14 +140,14 @@ public class StyleSheetList extends SimpleScriptable {
     @JsxFunction
     public Object item(final int index) {
         if (index < 0) {
-            if (getWindow().getWebWindow().getWebClient().getBrowserVersion().hasFeature(
+            if (getWindow().getBrowserVersion().hasFeature(
                     JS_STYLESHEETLIST_EXCEPTION_FOR_NEGATIVE_INDEX)) {
                 throw Context.reportRuntimeError("Invalid negative index: " + index);
             }
             return Context.getUndefinedValue();
         }
         else if (index >= nodes_.getLength()) {
-            if (getWindow().getWebWindow().getWebClient().getBrowserVersion().hasFeature(
+            if (getWindow().getBrowserVersion().hasFeature(
                     JS_STYLESHEETLIST_EXCEPTION_FOR_TOO_HIGH_INDEX)) {
                 throw Context.reportRuntimeError("Invalid index: " + index);
             }

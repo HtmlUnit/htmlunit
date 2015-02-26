@@ -440,7 +440,7 @@ public class JavaScriptEngine {
      */
     public void definePropertiesInStandardsMode(final HtmlPage page) {
         final Window window = ((HTMLDocument) page.getScriptObject()).getWindow();
-        final BrowserVersion browserVersion = window.getWebWindow().getWebClient().getBrowserVersion();
+        final BrowserVersion browserVersion = window.getBrowserVersion();
         for (final ClassConfiguration config : jsConfig_.getAll()) {
             final String jsClassName = config.getClassName();
             if (config.isDefinedInStandardsMode()) {

@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_40;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FALSE_RESULT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_HANDLER_UNDEFINED_AS_NULL;
 
 import java.io.Serializable;
@@ -139,7 +139,7 @@ public class EventListenersContainer implements Serializable {
      */
     public void setEventHandlerProp(final String eventName, final Object value) {
         Object handler = value;
-        if (jsNode_.getWindow().getWebWindow().getWebClient().getBrowserVersion()
+        if (jsNode_.getWindow().getBrowserVersion()
             .hasFeature(JS_EVENT_HANDLER_UNDEFINED_AS_NULL)
             && Undefined.instance == value) {
             handler = null;
@@ -171,9 +171,6 @@ public class EventListenersContainer implements Serializable {
         ScriptResult allResult = null;
         final List<Scriptable> handlers = getHandlers(event.getType(), useCapture);
         if (handlers != null && !handlers.isEmpty()) {
-            final boolean ie = jsNode_.getWindow().getWebWindow().getWebClient()
-                    .getBrowserVersion().hasFeature(GENERATED_40);
-
             event.setCurrentTarget(jsNode_);
             final HtmlPage page = (HtmlPage) node.getPage();
             // make a copy of the list as execution of an handler may (de-)register handlers
@@ -198,7 +195,7 @@ public class EventListenersContainer implements Serializable {
                     if (event.isPropagationStopped()) {
                         allResult = result;
                     }
-                    if (ie) {
+                    if (jsNode_.getBrowserVersion().hasFeature(EVENT_FALSE_RESULT)) {
                         if (ScriptResult.isFalse(result)) {
                             allResult = result;
                         }
