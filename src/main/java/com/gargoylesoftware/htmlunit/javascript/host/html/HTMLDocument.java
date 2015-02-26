@@ -367,10 +367,10 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     private <N extends DomNode> N getDomNodeOrNullFromRealDocument() {
         N node = null;
-        // don't use getBrowserVersion() here because this is called
-        // from getBrowserVersion() and will endless loop
-        final boolean ie = getWindow().getWebWindow().getWebClient().getBrowserVersion().hasFeature(HTMLDOCUMENT_METHOD_AS_VARIABLE);
-        if (ie) {
+        // don't use getWindow().getBrowserVersion() here because this is called
+        // from getBrowserVersion() and results in endless loop
+        if (getWindow().getWebWindow().getWebClient().getBrowserVersion()
+                .hasFeature(HTMLDOCUMENT_METHOD_AS_VARIABLE)) {
             final Scriptable scope = getParentScope();
             if (scope instanceof Window) {
                 final Window w = (Window) scope;

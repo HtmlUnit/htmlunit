@@ -118,7 +118,7 @@ public class BrowserVersionFeaturesTest  {
 
     /**
      * Test of usage in the Java files.
-     * 
+     *
      * @throws Exception in case of problems
      */
     @Test
@@ -142,7 +142,7 @@ public class BrowserVersionFeaturesTest  {
             }
             else if (file.getName().endsWith(".java")) {
                 final List<String> lines = FileUtils.readLines(file);
-                final String browserVersionFeatures = BrowserVersionFeatures.class.getSimpleName(); 
+                final String browserVersionFeatures = BrowserVersionFeatures.class.getSimpleName();
                 for (final String line : lines) {
                     for (int i = 0; i < unusedFeatures.size(); i++) {
                         final String featureName = unusedFeatures.get(i);
