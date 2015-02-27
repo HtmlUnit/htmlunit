@@ -579,4 +579,24 @@ public class CodeStyleTest {
             }
         }
     }
+
+    /**
+     * Log the folder, for checking SVN.
+     */
+    @Test
+    public void printFolders() {
+        final File directory = new File(new File(".").getAbsolutePath());
+        debug(directory, 1);
+    }
+
+    private void debug(final File dir, final int depth) {
+        if (depth > 3 || dir == null) {
+            return;
+        }
+        System.out.println("Directory: " + dir.getAbsolutePath());
+        for (File f : dir.listFiles()) {
+            System.out.println(f.getName() + " is " + (f.isDirectory() ? "directory" : "file"));
+        }
+        debug(dir.getParentFile(), depth + 1);
+    }
 }
