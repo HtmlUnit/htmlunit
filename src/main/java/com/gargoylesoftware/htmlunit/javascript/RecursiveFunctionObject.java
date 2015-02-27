@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 /**
  * A FunctionObject that returns IDs of this object and all its parent classes.
  *
- * @version $Revision: 9837 $
+ * @version $Revision$
  * @author Ahmed Ashour
  */
 public class RecursiveFunctionObject extends FunctionObject {

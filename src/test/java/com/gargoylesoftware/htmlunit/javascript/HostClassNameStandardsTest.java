@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 /**
  * Tests the host class names match the Firefox (w3c names), in Standards Mode.
  *
- * @version $Revision: 9935 $
+ * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  *

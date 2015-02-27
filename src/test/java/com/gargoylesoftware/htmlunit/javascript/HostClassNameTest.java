@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests the host class names match the Firefox (w3c names).
  *
- * @version $Revision: 9935 $
+ * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  *

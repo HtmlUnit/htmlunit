@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link HTMLAudioElement}.
  *
- * @version $Revision: 9843 $
+ * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
