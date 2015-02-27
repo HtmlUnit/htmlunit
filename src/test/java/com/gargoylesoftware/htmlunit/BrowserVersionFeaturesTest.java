@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -144,11 +145,9 @@ public class BrowserVersionFeaturesTest  {
                 final List<String> lines = FileUtils.readLines(file);
                 final String browserVersionFeatures = BrowserVersionFeatures.class.getSimpleName();
                 for (final String line : lines) {
-                    for (int i = 0; i < unusedFeatures.size(); i++) {
-                        final String featureName = unusedFeatures.get(i);
-                        if (line.contains(browserVersionFeatures + '.' + featureName)) {
-                            unusedFeatures.remove(i);
-                            i--;
+                    for (final Iterator<String> it = unusedFeatures.iterator(); it.hasNext();) {
+                        if (line.contains(browserVersionFeatures + '.' + it.next())) {
+                            it.remove();
                         }
                     }
                 }

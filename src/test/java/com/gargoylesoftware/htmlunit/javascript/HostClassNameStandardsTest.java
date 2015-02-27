@@ -3535,4 +3535,116 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     public void xsltemplate() throws Exception {
         test("XSLTemplate");
     }
+
+    /**
+     * Test {@link net.sourceforge.htmlunit.corejs.javascript.NativeIterator.StopIteration}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF = "[object StopIteration]")
+    public void stopIteration() throws Exception {
+        test("StopIteration");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ClientRect}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF = "function DOMRect() {\n    [native code]\n}")
+    @NotYetImplemented(FF)
+    public void domRect() throws Exception {
+        test("DOMRect");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object MSStyleCSSProperties]")
+    @NotYetImplemented(IE11)
+    public void msStyleCSSProperties() throws Exception {
+        test("MSStyleCSSProperties");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object MSCurrentStyleCSSProperties]")
+    @NotYetImplemented(IE11)
+    public void msCurrentStyleCSSProperties() throws Exception {
+        test("MSCurrentStyleCSSProperties");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function Error() { [native code] }",
+            FF = "function Error() {\n    [native code]\n}",
+            IE8 = "undefined",
+            IE11 = "\nfunction Error() {\n    [native code]\n}\n")
+    @NotYetImplemented(IE8)
+    public void error() throws Exception {
+        test("Error");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object ClientRectList]",
+            CHROME = "function ClientRectList() { [native code] }")
+    @NotYetImplemented({ CHROME, IE11 })
+    public void clientRectList() throws Exception {
+        test("ClientRectList");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF = "function SVGDocument() {\n    [native code]\n}")
+    @NotYetImplemented(FF)
+    public void svgDocument() throws Exception {
+        test("SVGDocument");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function Object() { [native code] }",
+            FF = "function Object() {\n    [native code]\n}",
+            IE8 = "exception",
+            IE11 = "\nfunction Object() {\n    [native code]\n}\n")
+    @NotYetImplemented(IE8)
+    public void object() throws Exception {
+        test("Object");
+    }
+
+    /**
+     * Test {@link net.sourceforge.htmlunit.corejs.javascript.Arguments}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("[object Arguments]")
+    @NotYetImplemented(IE8)
+    public void arguments() throws Exception {
+        test("arguments");
+    }
 }

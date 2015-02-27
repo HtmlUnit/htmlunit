@@ -3564,4 +3564,111 @@ public class HostTypeOfTest extends WebDriverTestCase {
     public void xsltemplate() throws Exception {
         test("XSLTemplate");
     }
+
+    /**
+     * Test {@link net.sourceforge.htmlunit.corejs.javascript.NativeIterator.StopIteration}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "object")
+    public void stopIteration() throws Exception {
+        test("StopIteration");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ClientRect}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    @NotYetImplemented(FF)
+    public void domRect() throws Exception {
+        test("DOMRect");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE11 = "object")
+    @NotYetImplemented(IE11)
+    public void msStyleCSSProperties() throws Exception {
+        test("MSStyleCSSProperties");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    @NotYetImplemented(IE)
+    public void msCurrentStyleCSSProperties() throws Exception {
+        test("MSCurrentStyleCSSProperties");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined")
+    @NotYetImplemented(IE8)
+    public void error() throws Exception {
+        test("Error");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE11 = "object",
+            CHROME = "function")
+    @NotYetImplemented({ CHROME, IE11 })
+    public void clientRectList() throws Exception {
+        test("ClientRectList");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    @NotYetImplemented(FF)
+    public void svgDocument() throws Exception {
+        test("SVGDocument");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined")
+    @NotYetImplemented(IE8)
+    public void object() throws Exception {
+        test("Object");
+    }
+
+    /**
+     * Test {@link net.sourceforge.htmlunit.corejs.javascript.Arguments}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("object")
+    public void arguments() throws Exception {
+        test("arguments");
+    }
 }
