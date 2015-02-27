@@ -576,4 +576,25 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "http:", "mailto:", "tel:", "foo:" })
+    public void protocol() throws Exception {
+        final String html = "<html><body>\n"
+            + "<a href='foo.html'>foo.html</a>\n"
+            + "<a href='mailto:foo@foo.com'>foo@foo.com</a>\n"
+            + "<a href='tel:123456'>tel:123456</a>\n"
+            + "<a href='foo:blabla'>foo:blabla</a>\n"
+            + "<script>\n"
+            + "var links = document.getElementsByTagName('a');\n"
+            + "for (var i=0; i<links.length; ++i) {\n"
+            + "    alert(links[i].protocol);\n"
+            + "}\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

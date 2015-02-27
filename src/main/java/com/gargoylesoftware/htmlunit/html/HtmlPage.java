@@ -1030,8 +1030,19 @@ public class HtmlPage extends SgmlPage {
         final URL scriptURL;
         try {
             scriptURL = getFullyQualifiedUrl(srcAttribute);
-            if ("javascript".equals(scriptURL.getProtocol())) {
+            final String protocol = scriptURL.getProtocol();
+            if ("javascript".equals(protocol)) {
                 LOG.info("Ignoring script src [" + srcAttribute + "]");
+                return JavaScriptLoadResult.NOOP;
+            }
+            else if (!"http".equals(protocol) && !"https".equals(protocol)
+                    && !"data".equals(protocol) && !"file".equals(protocol)) {
+                LOG.error("Unable to build URL for script src tag [" + srcAttribute + "] (protocol: " + protocol + ")");
+                final JavaScriptErrorListener javaScriptErrorListener = client.getJavaScriptErrorListener();
+                if (javaScriptErrorListener != null) {
+                    javaScriptErrorListener.malformedScriptURL(this, srcAttribute,
+                        new MalformedURLException("unknown protocol: " + protocol));
+                }
                 return JavaScriptLoadResult.NOOP;
             }
         }

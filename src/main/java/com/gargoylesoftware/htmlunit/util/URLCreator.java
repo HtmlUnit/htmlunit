@@ -22,6 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.gae.GAEUtils;
+import com.gargoylesoftware.htmlunit.protocol.AnyHandler;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 
 /**
@@ -31,6 +32,7 @@ import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection
  */
 abstract class URLCreator {
     abstract URL toUrlUnsafeClassic(final String url) throws MalformedURLException;
+    abstract String getProtocol(URL url);
 
     protected URL toNormalUrl(final String url) throws MalformedURLException {
         final URL response = new URL(url);
@@ -63,11 +65,15 @@ abstract class URLCreator {
 
         @Override
         URL toUrlUnsafeClassic(final String url) throws MalformedURLException {
-            if (org.apache.commons.lang3.StringUtils.startsWithIgnoreCase(url,
-                    JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
+            final String protocol = org.apache.commons.lang3.StringUtils.substringBefore(url, ":").toLowerCase();
+
+            if (protocol.isEmpty() || UrlUtils.isNormalUrlProtocol(protocol)) {
+                return toNormalUrl(url);
+            }
+            else if (JavaScriptURLConnection.JAVASCRIPT_PREFIX.equals(protocol + ":")) {
                 return new URL(null, url, JS_HANDLER);
             }
-            else if (org.apache.commons.lang3.StringUtils.startsWithIgnoreCase(url, "about:")) {
+            else if ("about".equals(protocol)) {
                 if (WebClient.URL_ABOUT_BLANK != null
                         && org.apache.commons.lang3.StringUtils.equalsIgnoreCase(
                                 WebClient.URL_ABOUT_BLANK.toExternalForm(), url)) {
@@ -75,12 +81,17 @@ abstract class URLCreator {
                 }
                 return new URL(null, url, ABOUT_HANDLER);
             }
-            else if (org.apache.commons.lang3.StringUtils.startsWithIgnoreCase(url, "data:")) {
+            else if ("data".equals(protocol)) {
                 return new URL(null, url, DATA_HANDLER);
             }
-            else {
-                return toNormalUrl(url);
+            else  {
+                return new URL(null, url, AnyHandler.INSTANCE);
             }
+        }
+
+        @Override
+        String getProtocol(final URL url) {
+            return url.getProtocol();
         }
     }
 
@@ -88,6 +99,7 @@ abstract class URLCreator {
      * For working on GoogleAppEngine. The URL hack will require special handling from a dedicated WebConnection.
      */
     static class URLCreatorGAE extends URLCreator {
+        private static final String PREFIX = "http://gaeHack_";
 
         @Override
         URL toUrlUnsafeClassic(final String url) throws MalformedURLException {
@@ -98,16 +110,29 @@ abstract class URLCreator {
             }
             else if (org.apache.commons.lang3.StringUtils.startsWithIgnoreCase(url,
                     JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
-                return new URL("http://gaeHack_" + url.replaceFirst(":", "/"));
+                return new URL(PREFIX + url.replaceFirst(":", "/"));
             }
             else if (org.apache.commons.lang3.StringUtils.startsWithIgnoreCase(url, "about:")) {
-                return new URL("http://gaeHack_" + url.replaceFirst(":", "/"));
+                return new URL(PREFIX + url.replaceFirst(":", "/"));
             }
             else if (org.apache.commons.lang3.StringUtils.startsWithIgnoreCase(url, "data:")) {
-                return new URL("http://gaeHack_" + url.replaceFirst(":", "/"));
+                return new URL(PREFIX + url.replaceFirst(":", "/"));
             }
             else {
                 return toNormalUrl(url);
+            }
+        }
+
+        @Override
+        String getProtocol(final URL url) {
+            final String stringUrl = url.toString();
+            if (stringUrl.startsWith(PREFIX)) {
+                final int begin = PREFIX.length();
+                final int end = stringUrl.indexOf("/", begin);
+                return stringUrl.substring(begin, end);
+            }
+            else {
+                return url.getProtocol();
             }
         }
     }

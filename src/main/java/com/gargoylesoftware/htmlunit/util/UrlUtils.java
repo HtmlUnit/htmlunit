@@ -206,11 +206,10 @@ public final class UrlUtils {
      * @return the encoded URL
      */
     public static URL encodeUrl(final URL url, final boolean minimalQueryEncoding, final String charset) {
-        final String p = url.getProtocol();
-        if ("javascript".equalsIgnoreCase(p) || "about".equalsIgnoreCase(p) || "data".equalsIgnoreCase(p)) {
-            // Special exception.
-            return url;
+        if (!isNormalUrlProtocol(URL_CREATOR.getProtocol(url))) {
+            return url; // javascript:, about:, data: and anything not supported like foo:
         }
+
         try {
             String path = url.getPath();
             if (path != null) {
@@ -947,5 +946,12 @@ public final class UrlUtils {
             }
             return sb.toString();
         }
+    }
+
+    static boolean isNormalUrlProtocol(final String protocol) {
+        if ("http".equals(protocol) || "https".equals(protocol) || "file".equals(protocol)) {
+            return true;
+        }
+        return false;
     }
 }

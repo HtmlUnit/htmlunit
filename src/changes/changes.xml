@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="Java 7, FF31, IE11 progress, Chrome progress, Bugfixes">
+            <action type="fix" dev="mguillem">
+                Avoid exception when handling URLs with unknown protocols.
+            </action>
             <action type="add" dev="mguillem">
                 JavaScript: added basic support for Notification.
             </action>

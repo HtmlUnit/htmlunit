@@ -108,7 +108,9 @@ public class WebRequest implements Serializable {
         if (url != null) {
             final String path = url.getPath();
             if (path.isEmpty()) {
-                url = buildUrlWithNewFile(url, "/" + url.getFile());
+                if (!url.getFile().isEmpty() || url.getProtocol().startsWith("http")) {
+                    url = buildUrlWithNewFile(url, "/" + url.getFile());
+                }
             }
             else if (path.contains("/.")) {
                 final String query = (url.getQuery() != null) ? "?" + url.getQuery() : "";
