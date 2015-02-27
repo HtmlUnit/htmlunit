@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -84,7 +87,7 @@ public class NotificationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function", IE = "exception")
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME })
     public void requestPermission() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"

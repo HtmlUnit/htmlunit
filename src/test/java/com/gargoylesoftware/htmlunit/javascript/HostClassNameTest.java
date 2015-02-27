@@ -3714,4 +3714,18 @@ public class HostClassNameTest extends WebDriverTestCase {
     public void arguments() throws Exception {
         test("arguments");
     }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Notification}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function Notification() { [native code] }",
+              FF = "function Notification() {\n    [native code]\n}",
+            IE = "exception")
+    public void notification() throws Exception {
+        test("Notification");
+    }
+
 }
