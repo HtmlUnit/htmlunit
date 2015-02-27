@@ -57,6 +57,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Navigator;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.NodeFilter;
 import com.gargoylesoftware.htmlunit.javascript.host.NodeList;
+import com.gargoylesoftware.htmlunit.javascript.host.Notification;
 import com.gargoylesoftware.htmlunit.javascript.host.Plugin;
 import com.gargoylesoftware.htmlunit.javascript.host.PluginArray;
 import com.gargoylesoftware.htmlunit.javascript.host.PointerEvent;
@@ -341,7 +342,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         KeyboardEvent.class,
         Location.class, MediaList.class, MessageEvent.class, MimeType.class, MimeTypeArray.class, MouseEvent.class,
         MutationEvent.class, NamedNodeMap.class, Namespace.class, NamespaceCollection.class, Navigator.class,
-        Node.class, NodeFilter.class, NodeList.class,
+        Node.class, NodeFilter.class, NodeList.class, Notification.class,
         Plugin.class, PluginArray.class, PointerEvent.class, Popup.class, Position.class, ProcessingInstruction.class,
         Range.class, RowContainer.class,
         SVGAElement.class, SVGAltGlyphElement.class, SVGAngle.class, SVGAnimateElement.class,
