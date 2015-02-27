@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @see <a href="https://developer.mozilla.org/en/docs/Web/API/notification">
  * MDN - Notification</a>
- * @version $Revision: 8931 $
+ * @version $Revision$
  * @author Marc Guillemot
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF) })

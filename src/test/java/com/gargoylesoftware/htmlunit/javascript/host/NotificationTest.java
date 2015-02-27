@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link Notification}.
  *
- * @version $Revision: 8931 $
+ * @version $Revision$
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
