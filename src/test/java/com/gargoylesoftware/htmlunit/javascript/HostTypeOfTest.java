@@ -3610,8 +3610,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            IE = "object")
-    @NotYetImplemented(IE)
+            IE11 = "object")
+    @NotYetImplemented(IE11)
     public void msCurrentStyleCSSProperties() throws Exception {
         test("MSCurrentStyleCSSProperties");
     }
@@ -3620,9 +3620,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            IE8 = "undefined")
-    @NotYetImplemented(IE8)
+    @Alerts("function")
     public void error() throws Exception {
         test("Error");
     }
@@ -3654,9 +3652,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            IE8 = "undefined")
-    @NotYetImplemented(IE8)
+    @Alerts("function")
     public void object() throws Exception {
         test("Object");
     }

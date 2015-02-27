@@ -3664,9 +3664,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function Error() { [native code] }",
             FF = "function Error() {\n    [native code]\n}",
-            IE8 = "undefined",
-            IE11 = "\nfunction Error() {\n    [native code]\n}\n")
-    @NotYetImplemented(IE8)
+            IE = "\nfunction Error() {\n    [native code]\n}\n")
     public void error() throws Exception {
         test("Error");
     }
@@ -3700,9 +3698,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function Object() { [native code] }",
             FF = "function Object() {\n    [native code]\n}",
-            IE8 = "exception",
-            IE11 = "\nfunction Object() {\n    [native code]\n}\n")
-    @NotYetImplemented(IE8)
+            IE = "\nfunction Object() {\n    [native code]\n}\n")
     public void object() throws Exception {
         test("Object");
     }
@@ -3713,8 +3709,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("[object Arguments]")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "[object Arguments]",
+            IE8 = "[object Object]")
     public void arguments() throws Exception {
         test("arguments");
     }
