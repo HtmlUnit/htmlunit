@@ -255,7 +255,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF ="function CSSPrimitiveValue() {\n    [native code]\n}")
+            FF = "function CSSPrimitiveValue() {\n    [native code]\n}")
     public void cssPrimitiveValue() throws Exception {
         test("CSSPrimitiveValue");
     }
