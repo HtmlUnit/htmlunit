@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -387,6 +388,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "imported: [object HTMLScriptElement]", "replaced" },
             CHROME = { "imported: [object HTMLScriptElement]", "o", "replaced" },
             IE8 = "exception")
+    @NotYetImplemented(CHROME)
     public void importNode_script() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -419,6 +421,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "imported: [object HTMLDivElement]", "replaced" },
             CHROME = { "imported: [object HTMLDivElement]", "o", "replaced" },
             IE8 = "exception")
+    @NotYetImplemented(CHROME)
     public void importNode_scriptChild() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -557,6 +560,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "[object HTMLCollection]", "4", "red" },
             IE8 = { "[object]", "4", "red" },
             CHROME = { "[object NodeList]", "4", "red" })
+    @NotYetImplemented(CHROME)
     public void identicalIDs() throws Exception {
         final String html =
             "<html>\n"
@@ -705,6 +709,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             FF = { "1", "[object HTMLBodyElement]" },
             IE8 = "exception")
     // TODO [IE11]MODALPANEL real IE11 opens a modal panel which webdriver cannot handle
+    @NotYetImplemented(CHROME)
     public void designMode_selectionRange_empty() throws Exception {
         designMode_selectionRange("");
     }
@@ -720,6 +725,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             FF = { "1", "[object Text]" },
             IE8 = "exception")
     // TODO [IE11]MODALPANEL real IE11 opens a modal panel which webdriver cannot handle
+    @NotYetImplemented(CHROME)
     public void designMode_selectionRange_text() throws Exception {
         designMode_selectionRange("hello");
     }
@@ -1583,6 +1589,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "", "a", "", "b", "" },
             CHROME = { "", "a", "a", "b", "b" })
+    @NotYetImplemented(CHROME)
     public void cookie_write2() throws Exception {
         final String html =
               "<html>\n"

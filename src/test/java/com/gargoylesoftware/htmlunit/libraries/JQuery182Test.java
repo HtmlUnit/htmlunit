@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
@@ -537,6 +538,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
+    @NotYetImplemented(CHROME)
     public void core__jQuery_parseXML() throws Exception {
         runTest("core: jQuery.parseXML");
     }
@@ -2296,7 +2298,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented({ FF, IE11, CHROME })
     public void event__Delegated_events_in_SVG___10791_() throws Exception {
         runTest("event: Delegated events in SVG (#10791)");
     }
@@ -2317,6 +2319,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
+    @NotYetImplemented(CHROME)
     public void event__Submit_event_can_be_stopped___11049_() throws Exception {
         runTest("event: Submit event can be stopped (#11049)");
     }
@@ -3896,6 +3899,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 22, 22")
+    @NotYetImplemented(CHROME)
     public void css__css_String__Object_() throws Exception {
         runTest("css: css(String, Object)");
     }
@@ -3980,7 +3984,7 @@ public class JQuery182Test extends WebDriverTestCase {
         FF31 = "0, 7, 7",
         IE11 = "0, 7, 7",
         IE8 = "2, 1, 3")
-    @NotYetImplemented({ FF, IE11, IE8 })
+    @NotYetImplemented
     public void css__show___resolves_correct_default_display__8099() throws Exception {
         runTest("css: show() resolves correct default display #8099");
     }
@@ -4097,6 +4101,7 @@ public class JQuery182Test extends WebDriverTestCase {
         FF31 = "0, 4, 4",
         IE11 = "0, 4, 4",
         IE8 = "0, 4, 4")
+    @NotYetImplemented(CHROME)
     public void css__widows___orphans__8936() throws Exception {
         runTest("css: widows & orphans #8936");
     }
@@ -4148,6 +4153,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
+    @NotYetImplemented(CHROME)
     public void css__Do_not_append_px_to__fill_opacity___9548() throws Exception {
         runTest("css: Do not append px to 'fill-opacity' #9548");
     }
@@ -4739,6 +4745,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 24, 24")
+    @NotYetImplemented(CHROME)
     public void ajax__jQuery_ajax_____JSONP__Cross_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP, Cross Domain");
     }
@@ -5222,7 +5229,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, CHROME })
     public void effects__animate_block_as_inline_width_height() throws Exception {
         runTest("effects: animate block as inline width/height");
     }
@@ -5233,7 +5240,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, CHROME })
     public void effects__animate_native_inline_width_height() throws Exception {
         runTest("effects: animate native inline width/height");
     }
@@ -6150,6 +6157,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
+    @NotYetImplemented(CHROME)
     public void effects__Do_not_append_px_to__fill_opacity___9548() throws Exception {
         runTest("effects: Do not append px to 'fill-opacity' #9548");
     }
@@ -6275,6 +6283,7 @@ public class JQuery182Test extends WebDriverTestCase {
         FF31 = "0, 1, 1",
         IE11 = "0, 1, 1",
         IE8 = "0, 2, 2")
+    @NotYetImplemented(CHROME)
     public void effects__non_px_animation_handles_non_numeric_start___11971_() throws Exception {
         runTest("effects: non-px animation handles non-numeric start (#11971)");
     }

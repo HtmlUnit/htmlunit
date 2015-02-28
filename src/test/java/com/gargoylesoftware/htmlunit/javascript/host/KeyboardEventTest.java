@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -24,6 +26,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -68,6 +71,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
             CHROME = { "exception", "0-0", "0-0" },
             IE = { "exception", "exception", "exception" },
             IE11 = { "exception", "0-0", "undefined-undefined" })
+    @NotYetImplemented(CHROME)
     public void keyCode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -340,6 +344,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
                     "keyup:13,0,13" })
     // WebDriver with real IE11 does not get the '\r' but real IE11 does
     // TODO [IE11] HtmlUnit (or WebDriver?) does not fire an own event for the shift key (down + up)
+    @NotYetImplemented(CHROME)
     public void which() throws Exception {
         final String html
             = "<html><head></head><body>\n"

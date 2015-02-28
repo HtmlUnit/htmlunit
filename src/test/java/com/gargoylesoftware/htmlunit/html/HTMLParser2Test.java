@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -58,7 +59,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "beforeafter", "undefined" },
             IE8 = { "before", "after", "TABLE" })
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented({ FF, IE11, CHROME })
     public void testHtmlTableTextAroundTD() throws Exception {
         final String html = "<html><head><title>test_Table</title>\n"
             + "<script>\n"
@@ -427,7 +428,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
             IE8 = { "1", "1", "1", "2", "2", "1" })
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented({ FF, IE11, CHROME })
     public void childNodes_basefont() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("basefont"));
     }
@@ -478,7 +479,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "1", "1", "1", "1", "1", "1" },
             IE8 = { "0", "0", "0", "1", "1", "1" })
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented({ FF, IE11, CHROME })
     public void childNodes_body() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("body"));
     }
@@ -872,7 +873,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
             IE8 = { "3", "3", "2", "4", "4", "3" })
-    @NotYetImplemented({ IE8, IE11, FF })
+    @NotYetImplemented
     public void childNodes_image() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("image"));
     }
@@ -1430,7 +1431,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "3", "2" },
             IE8 = { "1", "1", "1", "1", "1", "1" })
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented({ FF, IE11, CHROME })
     public void childNodes_table() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("table"));
     }
@@ -1561,7 +1562,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
             IE8 = { "0", "0", "0", "0", "0", "0" })
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented({ FF, IE11, CHROME })
     public void childNodes_title() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("title"));
     }

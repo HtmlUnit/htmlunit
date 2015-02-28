@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
@@ -1388,7 +1389,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, CHROME })
     public void encoding() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title>\n"

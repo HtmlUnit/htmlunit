@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -63,6 +66,7 @@ public class SelectionTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "0", "0", "0", "cdefg" },
             CHROME = { "0", "1", "1", "cdefg" },
             IE8 = { })
+    @NotYetImplemented(CHROME)
     public void inputSelectionsAreIndependent() throws Exception {
         final String html = "<html><body onload='test()'>\n"
             + "<input id='i' value='abcdefghi'/>\n"
@@ -95,6 +99,7 @@ public class SelectionTest extends WebDriverTestCase {
                         "1:null/0/null/0/true/None/0/",
                         "2:[object Text]/0/[object Text]/3/false/Range/1/xyz/xyz" },
             IE8 = { })
+    @NotYetImplemented(CHROME)
     public void selectAllChildren() throws Exception {
         final String jsSnippet = ""
             + "    alertSelection(selection);\n"
@@ -121,6 +126,7 @@ public class SelectionTest extends WebDriverTestCase {
             IE8 = { },
             IE11 = { "1:s2/0/s2/1/false/undefined/1/xyz/xyz",
                         "selection.extend not available" })
+    @NotYetImplemented(CHROME)
     public void extend() throws Exception {
         final String jsSnippet = ""
             + "    selection.selectAllChildren(s2);\n"
@@ -148,6 +154,7 @@ public class SelectionTest extends WebDriverTestCase {
                         "1:[object Text]/0/[object Text]/3/false/Range/1/xyz/xyz",
                         "2:[object Text]/3/[object Text]/3/true/Caret/1//" },
             IE8 = { })
+    @NotYetImplemented(CHROME)
     public void collapseToStart() throws Exception {
         final String jsSnippet = ""
             + "    selection.selectAllChildren(s2);\n"
@@ -169,6 +176,7 @@ public class SelectionTest extends WebDriverTestCase {
                         "1:[object Text]/0/[object Text]/3/false/Range/1/xyz/xyz",
                         "2:[object Text]/3/[object Text]/3/true/Caret/1//" },
             IE8 = { })
+    @NotYetImplemented(CHROME)
     public void collapseToEnd() throws Exception {
         final String jsSnippet = ""
             + "    selection.selectAllChildren(s2);\n"
@@ -194,6 +202,7 @@ public class SelectionTest extends WebDriverTestCase {
                     "3:[object Text]/0/[object Text]/3/false/Range/1/foo/foo",
                     "4:null/0/null/0/true/None/0/" },
             IE8 = { })
+    @NotYetImplemented(CHROME)
     public void range() throws Exception {
         final String jsSnippet = ""
             + "    alertSelection(selection);\n"
@@ -223,6 +232,7 @@ public class SelectionTest extends WebDriverTestCase {
                     "1:[object Text]/1/[object Text]/2/false/Range/1/yzfo/yzfo",
                     "exception" },
             IE8 = { })
+    @NotYetImplemented(CHROME)
     public void aLittleBitOfEverything_removeRange() throws Exception {
         final String jsSnippet = ""
             + "    var range = document.createRange();\n"

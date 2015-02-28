@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.fail;
 
@@ -52,7 +53,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(IE)
+    @NotYetImplemented({ IE, CHROME })
     @Alerts(FF = { "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-" })
     public void readyState() throws Exception {
         final String html = "<html>\n"
@@ -158,6 +159,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
     @Test
     @Alerts(FF = { "www.gargoylesoftware.com", "gargoylesoftware.com" },
             IE = { "www.gargoylesoftware.com", "GaRgOyLeSoFtWaRe.CoM" })
+    @NotYetImplemented(CHROME)
     public void domainMixedCase() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -247,6 +249,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
     @Test
     @Alerts(FF = { "www.gargoylesoftware.com", "www.gargoylesoftware.com" },
             IE = { "www.gargoylesoftware.com", "www.gargoylesoftware.com", "exception" })
+    @NotYetImplemented(CHROME)
     public void domain_set_for_about_blank() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"

@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -44,6 +46,7 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLMenuElement]",
             IE8 = "[object]")
+    @NotYetImplemented(CHROME)
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -70,6 +73,7 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
                    "true", "false", "true", "false", "", "null", "", "null" },
             IE8 = { "false", "true", "true", "true", "false", "true", "true", "true",
                    "true", "false", "true", "false", "true", "false", "true", "false" })
+    @NotYetImplemented(CHROME)
     public void compact() throws Exception {
         final String html =
                 "<html>\n"

@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URL;
@@ -30,6 +32,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -53,6 +56,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "error",
             IE8 = { })
+    @NotYetImplemented(CHROME)
     public void noCorsHeaderCallsErrorHandler() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -182,6 +186,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother" },
             CHROME = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother, content-type" },
             IE = { "4", "200", "null", "null", "null", "null" })
+    @NotYetImplemented(CHROME)
     public void preflight() throws Exception {
         doPreflightTestAllowedMethods("POST, GET, OPTIONS", "text/plain");
     }
@@ -193,6 +198,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother" },
             CHROME = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother, content-type" },
             IE = { "4", "200", "null", "null", "null", "null" })
+    @NotYetImplemented(CHROME)
     public void preflight_contentTypeWithCharset() throws Exception {
         doPreflightTestAllowedMethods("POST, GET, OPTIONS", "text/plain;charset=utf-8");
     }
@@ -206,6 +212,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother" },
             CHROME = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother, content-type" },
             IE = { "4", "200", "null", "null", "null", "null" })
+    @NotYetImplemented(CHROME)
     public void preflight_incorrect_methods() throws Exception {
         doPreflightTestAllowedMethods(null, "text/plain");
     }
@@ -305,6 +312,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "exception", "4", "0" },
             CHROME = { "exception", "4", "200" },
             IE = { "4", "200" })
+    @NotYetImplemented(CHROME)
     public void preflight_incorrect_headers() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
@@ -342,6 +350,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "4", "200", "options_headers", "x-ping,x-pong" },
             CHROME = { "4", "200", "options_headers", "x-ping, x-pong" },
             IE = { "4", "200", "options_headers", "null" })
+    @NotYetImplemented(CHROME)
     public void preflight_many_header_values() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 

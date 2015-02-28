@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
@@ -51,7 +52,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { }, IE = "SELECT;")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, CHROME })
     public void clickSelect() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -159,7 +160,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "onchange-select; onclick-select;",
             FF = "onchange-select; onclick-option; onclick-select;")
-    @BuggyWebDriver(FF)
+    @BuggyWebDriver({ FF, CHROME })
     public void clickOptionEventSequence1() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -198,7 +199,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "change-SELECT; click-SELECT;",
             FF = "change-SELECT; click-OPTION; click-OPTION;")
-    @BuggyWebDriver(FF)
+    @BuggyWebDriver({ FF, CHROME })
     public void clickOptionEventSequence2() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -259,7 +260,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "onchange-select; change-SELECT; onclick-select; click-SELECT;",
             FF = "onchange-select; change-SELECT; onclick-option; click-OPTION; onclick-select; click-OPTION;")
-    @BuggyWebDriver(FF)
+    @BuggyWebDriver({ FF, CHROME })
     public void clickOptionEventSequence3() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -819,6 +820,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             CHROME = { "null", "[object Text]", "[object Text]" },
             IE8 = { "null", "[object]", "null" },
             IE11 = { "null", "[object Text]", "null" })
+    @NotYetImplemented(CHROME)
     public void text() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

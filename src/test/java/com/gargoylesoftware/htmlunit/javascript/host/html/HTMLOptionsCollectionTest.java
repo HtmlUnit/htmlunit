@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -270,6 +273,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "4", "One", "Two*", "Three", "foo" },
             CHROME = { "3", "4", "foo", "One", "Two*", "Three" })
+    @NotYetImplemented(CHROME)
     public void addBeforeNull() throws Exception {
         add(", null", false, false);
     }
@@ -280,6 +284,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "4", "One", "Two*", "Three*", "foo" },
             CHROME = { "3", "4", "foo", "One", "Two*", "Three*" })
+    @NotYetImplemented(CHROME)
     public void addBeforeNullMulti() throws Exception {
         add(", null", false, true);
     }
@@ -290,6 +295,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "0", "exception" },
             CHROME = { "0", "1", "foo*" })
+    @NotYetImplemented(CHROME)
     public void addBeforeUnknownEmpty() throws Exception {
         add(", new Option('foo', '123')", true, false);
     }
@@ -300,6 +306,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "0", "exception" },
             CHROME = { "0", "1", "foo" })
+    @NotYetImplemented(CHROME)
     public void addBeforeUnknownEmptyMulti() throws Exception {
         add(", new Option('foo', '123')", true, true);
     }
@@ -310,6 +317,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "exception" },
             CHROME = { "3", "4", "foo", "One", "Two*", "Three" })
+    @NotYetImplemented(CHROME)
     public void addBeforeUnknown() throws Exception {
         add(", new Option('foo', '123')", false, false);
     }
@@ -320,6 +328,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "exception" },
             CHROME = { "3", "4", "foo", "One", "Two*", "Three*" })
+    @NotYetImplemented(CHROME)
     public void addBeforeUnknownMulti() throws Exception {
         add(", new Option('foo', '123')", false, true);
     }
@@ -348,6 +357,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "4", "One", "foo", "Two*", "Three" },
             CHROME = { "3", "4", "foo", "One", "Two*", "Three" })
+    @NotYetImplemented(CHROME)
     public void addBeforeSecond() throws Exception {
         add(", oSelect.options[1]", false, false);
     }
@@ -358,6 +368,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "4", "One", "foo", "Two*", "Three*" },
             CHROME = { "3", "4", "foo", "One", "Two*", "Three*" })
+    @NotYetImplemented(CHROME)
     public void addBeforeSecondMulti() throws Exception {
         add(", oSelect.options[1]", false, true);
     }
@@ -368,6 +379,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "4", "One", "Two*", "foo", "Three" },
             CHROME = { "3", "4", "foo", "One", "Two*", "Three" })
+    @NotYetImplemented(CHROME)
     public void addBeforeLast() throws Exception {
         add(", oSelect.options[2]", false, false);
     }
@@ -378,6 +390,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "4", "One", "Two*", "foo", "Three*" },
             CHROME = { "3", "4", "foo", "One", "Two*", "Three*" })
+    @NotYetImplemented(CHROME)
     public void addBeforeLastMulti() throws Exception {
         add(", oSelect.options[2]", false, true);
     }
@@ -1078,6 +1091,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "1", "", "4", "One", "1", "", "0" },
             FF = { "1", "", "4", "One", "1", "", "1" })
+    @NotYetImplemented(CHROME)
     public void setLength_increase() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

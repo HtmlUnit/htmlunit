@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.protocol.data;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.protocol.data.DataUrlDecoder.decodeDataURL;
 
 import org.junit.Test;
@@ -21,6 +22,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
@@ -62,6 +64,7 @@ public class DataURLDecoderTest extends SimpleWebTestCase {
     @Test
     @Alerts(FF = { "one", "two", "three", "four", "five's" },
             IE = { "undefined", "undefined", "undefined", "undefined", "undefined" })
+    @NotYetImplemented(CHROME)
     public void testDataProtocol() throws Exception {
         final String html = "<html><head><title>foo</title>"
             + "<script>"

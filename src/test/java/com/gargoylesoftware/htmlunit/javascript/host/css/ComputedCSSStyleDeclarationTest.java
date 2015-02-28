@@ -47,6 +47,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "none",
             IE8 = "undefined")
+    @NotYetImplemented(CHROME)
     public void cssFloat() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -70,6 +71,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented(CHROME)
     public void stringProperties() throws Exception {
         final String html
             = "<html><head><body>\n"
@@ -254,6 +256,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
                             "block", "inline" },
             IE8 = { "inline", "inline", "inline", "block", /* "none", */ "inline", "inline", "inline", "inline" },
             IE11 = { "inline", "inline", "inline", "block", /* "inline-block", */ "inline", "block", "block", "none" })
+    @NotYetImplemented(CHROME)
     public void defaultDisplayValues_A() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p id='p'>\n"
@@ -391,6 +394,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "none", "block", "inline", "inline", "inline", "inline", "block", "block", "block", "block" },
             CHROME = { "none", "block", "inline", "block", "inline", "none", "block", "block", "block", "block" },
             IE8 = { "inline", "block", "inline", "inline", "inline", "inline", "block", "block", "block", "block" })
+    @NotYetImplemented(CHROME)
     public void defaultDisplayValues_D() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <datalist id='datalist'></datalist>\n"
@@ -471,6 +475,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "block", "block", "block", "inline", "block", "block" },
             IE8 = { "block", "inline", "inline", "inline", "inline", "block" })
+    @NotYetImplemented(CHROME)
     public void defaultDisplayValues_F() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <form id='form'>\n"
@@ -514,6 +519,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "block", "block", "block", "block", "block", "block", "block", "block" },
             IE8 = { "block", "block", "block", "block", "block", "block", "inline", "block" })
+    @NotYetImplemented(CHROME)
     public void defaultDisplayValues_H() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <h1 id='h1'></h1>\n"
@@ -557,6 +563,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
                     "inline-block", "inline-block", "inline-block", "inline-block", "inline" },
             FF = { "inline", "inline", "inline", "inline", "inline", "inline",
                     "inline", "inline", "inline", "inline" })
+    @NotYetImplemented(CHROME)
     public void defaultDisplayValues_I() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p id='p'>\n"
@@ -609,6 +616,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "inline", "inline-block", "inline", "block", "list-item" },
             IE = { "inline", "inline", "inline", "inline", "list-item" })
+    @NotYetImplemented(CHROME)
     public void defaultDisplayValues_KL() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p id='p'>\n"
@@ -654,6 +662,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "inline", "inline", "block", "inline-block" },
             IE = { "inline", "inline", "block", "inline" })
+    @NotYetImplemented(CHROME)
     public void defaultDisplayValues_M() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <img usemap='#imgmap'>\n"
@@ -699,6 +708,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             CHROME = { "block", "inline", "inline", "block", "block", "block", "inline" },
             IE8 = { "inline", "inline", "inline", "block", "inline", "inline", "inline" },
             IE11 = { "block", "none", "inline", "block", "inline", "inline", "inline" })
+    @NotYetImplemented(CHROME)
     public void defaultDisplayValues_NO() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <nav id='nav'>\n"
@@ -790,6 +800,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "inline", "inline", "inline" },
             CHROME = { "inline", "block", "none" },
             IE = { "ruby", "ruby-text", "inline" })
+    @NotYetImplemented(CHROME)
     public void defaultDisplayValues_R() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <ruby id='ruby'>\n"
@@ -825,6 +836,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
                         "inline", "inline", "inline", "inline", "inline", "block", "inline" },
             IE8 = { "inline", "inline", "inline", "inline", "inline-block", "inline",
                         "inline", "inline", "inline", "inline", "inline", "inline", "inline" })
+    @NotYetImplemented(CHROME)
     public void defaultDisplayValues_S() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p>\n"
@@ -888,6 +900,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
                     "table-cell", "table-header-group", "inline", "table-row", "inline", "inline" },
             IE = { "table", "table-row-group", "table-cell", "inline-block", "table-footer-group",
                         "table-cell", "table-header-group", "inline", "table-row", "inline", "inline" })
+    @NotYetImplemented(CHROME)
     public void defaultDisplayValues_T() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <table id='table'>\n"
@@ -979,6 +992,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "transparent", "rgb(255, 0, 0)", "rgb(255, 255, 255)" },
             CHROME = { "rgba(0, 0, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 255, 255)" },
             IE8 = { "transparent", "red", "white" })
+    @NotYetImplemented(CHROME)
     public void backgroundColor() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='d0'>div 0</div>\n"
@@ -1032,7 +1046,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "1240px", "auto" },
             FF = { "1248px", "auto" },
             IE8 = { "auto", "auto" })
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented({ FF, IE11, CHROME })
     public void computedWidthOfHiddenElements() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1234,6 +1248,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "auto", "auto" },
             CHROME = { "", "" },
             IE8 = { "-", "-" })
+    @NotYetImplemented(CHROME)
     public void widthAndHeightDisconnected() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

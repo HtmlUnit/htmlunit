@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +25,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebConsole;
 import com.gargoylesoftware.htmlunit.WebConsole.Logger;
@@ -69,6 +72,7 @@ public class ConsoleTest {
         @Test
         @Alerts(DEFAULT = { "info: [\"one\", \"two\", \"three\", ({})]", "info: hello" },
             IE8 = "")
+        @NotYetImplemented(CHROME)
         public void log() throws Exception {
             final WebConsole console = getWebClient().getWebConsole();
             final List<String> messages = new ArrayList<>();

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -46,6 +47,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "caption1", "caption2", "null", "caption3", "exception", "caption3", "caption4" },
             CHROME = { "caption1", "caption2", "null", "caption3", "exception" },
             IE8 = { "caption1", "caption2", "null", "caption3", "exception", "caption3", "exception", "caption3" })
+    @NotYetImplemented(CHROME)
     public void tableCaptions() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -82,6 +84,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "thead1", "thead2", "null", "thead3", "exception", "thead3", "thead4" },
             CHROME = { "thead1", "thead2", "null", "thead3", "exception" },
             IE8 = { "thead1", "thead2", "null", "thead3", "exception", "thead3", "exception", "thead3" })
+    @NotYetImplemented(CHROME)
     public void tableHeaders() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -271,6 +274,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "tfoot1", "tfoot2", "null", "tfoot3", "exception", "tfoot3", "tfoot4" },
             CHROME = { "tfoot1", "tfoot2", "null", "tfoot3", "exception" },
             IE8 = { "tfoot1", "tfoot2", "null", "tfoot3", "exception", "tfoot3", "exception", "tfoot3" })
+    @NotYetImplemented(CHROME)
     public void tableFooters() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -713,6 +717,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             CHROME = {"cell1", "[object Text]", "ex", "cell1", "[object Text]", "ex", "cell1" },
             IE8 = { "cell1", "[object]", "abc", "[object]", "" },
             IE11 = { "cell1", "[object Text]", "abc", "[object Text]", "" })
+    @NotYetImplemented(CHROME)
     public void innerText() throws Exception {
         final String html
             = "<html><body>\n"
@@ -740,6 +745,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "\n    cell1\n  ", "[object Text]", "abc", "[object Text]", "" },
             IE8 = { "undefined", "[object]", "abc", "[object]", "" })
+    @NotYetImplemented(CHROME)
     public void textContent() throws Exception {
         final String html
             = "<html><body>\n"

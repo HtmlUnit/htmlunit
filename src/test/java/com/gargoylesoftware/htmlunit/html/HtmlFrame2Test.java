@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.net.URL;
@@ -106,6 +107,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
                         "parent [object HTMLFormElement]" },
                         IE8 = { "second [object]", "third [object]", "parent [object]" })
     // real FF sometimes alerts 'third' before 'second'
+    @NotYetImplemented(CHROME)
     public void postponeLoading() throws Exception {
         final String html = "<FRAMESET rows='50%,*' "
                 + "onload=\"alert('parent ' + window.parent.frames['third'].document.frm)\">\n"

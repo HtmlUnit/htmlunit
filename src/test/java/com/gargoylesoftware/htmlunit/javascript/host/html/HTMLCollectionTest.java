@@ -670,6 +670,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "b6-button6",
             CHROME = "button6-button6_2")
+    @NotYetImplemented(CHROME)
     public void namedItem_DuplicateIdName() throws Exception {
         namedItem("button6");
     }

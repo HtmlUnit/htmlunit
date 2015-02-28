@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
@@ -45,7 +46,7 @@ public class DocumentFragmentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object CSSStyleDeclaration]",
             FF = "[object CSS2Properties]",
             IE8 = "exception")
-    @NotYetImplemented(IE11)
+    @NotYetImplemented({ IE11, CHROME })
     public void getComputedStyleOnChild() throws Exception {
         final String html = "<html><head><style>\n"
             + "  body > div { background-color: green#FF0000; }\n"

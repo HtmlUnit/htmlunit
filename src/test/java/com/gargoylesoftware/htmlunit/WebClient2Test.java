@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec.EMPTY_COOKIE_NAME;
 import static org.junit.Assert.assertNotNull;
 
@@ -46,6 +47,7 @@ public class WebClient2Test extends SimpleWebTestCase {
      */
     @Test
     @Alerts(IE = "http://first/?param=\u00A3", FF = "http://first/?param=%A3")
+    @NotYetImplemented(CHROME)
     public void encodeURL() throws Exception {
         final String html = "<body onload='alert(window.location.href)'></body>";
         final WebClient webClient = getWebClient();

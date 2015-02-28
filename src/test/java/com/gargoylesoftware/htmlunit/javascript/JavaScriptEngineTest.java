@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
@@ -40,6 +41,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -1082,6 +1084,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts(IE = "2")
+    @NotYetImplemented(CHROME)
     public void commentNoDoubleSlash() throws Exception {
         final String html =
             "<html><head>\n"

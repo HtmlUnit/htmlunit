@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static org.junit.Assert.assertSame;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
@@ -305,6 +307,7 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
     @Alerts(FF = { "srcElement null: true", "srcElement==form: false", "target null: false", "target==form: true" },
             IE = { "srcElement null: false", "srcElement==form: true", "target null: true", "target==form: false" },
             IE11 = { "srcElement null: false", "srcElement==form: true", "target null: false", "target==form: true" })
+    @NotYetImplemented(CHROME)
     public void onSubmitEvent() throws Exception {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = getMockWebConnection();

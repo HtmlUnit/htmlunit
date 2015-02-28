@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -185,6 +186,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
     @Alerts(FF = { "1", "2", "1", "5", "1", "1" },
             CHROME = { "1", "2", "1", "5", "-3", "1" },
             IE = { "1", "2", "1", "error", "error", "5", "2", "1" })
+    @NotYetImplemented(CHROME)
     public void span() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -228,7 +230,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "top", "baseline", "3", "middle", "8", "BOTtom" },
             IE = { "top", "baseline", "top", "error", "middle", "baseline", "bottom" })
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, CHROME })
     public void vAlign() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -355,7 +357,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "null", "string" },
             IE = { "", "string" })
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, CHROME })
     public void width_null() throws Exception {
         final String html
             = "<html><head>"

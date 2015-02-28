@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -130,6 +131,7 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "", "second" },
             CHROME = { "§§URL§§", "second" })
+    @NotYetImplemented(CHROME)
     public void formArray() throws Exception {
         final String firstHtml
             = "<html><head><SCRIPT lang='JavaScript'>\n"
@@ -1086,6 +1088,7 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("<->form2")
+    @NotYetImplemented(CHROME)
     public void all_NamedItem_ByName_formWithoutId() throws Exception {
         namedItem("form2");
     }
@@ -1095,6 +1098,7 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("f3<->form3")
+    @NotYetImplemented(CHROME)
     public void all_NamedItem_ByName() throws Exception {
         namedItem("form3");
     }
@@ -1115,6 +1119,7 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "coll 2", "f5_1<->form5", "f5_2<->form5" },
             IE = "f5_1<->form5")
+    @NotYetImplemented(CHROME)
     public void all_NamedItem_DuplicateName() throws Exception {
         namedItem("form5");
     }
@@ -1126,6 +1131,7 @@ public class DocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "coll 2", "f6<->form6", "form6<->form6_2" },
             CHROME = { "coll 2", "form6<->form6_2", "f6<->form6" },
             IE = "f6<->form6")
+    @NotYetImplemented(CHROME)
     public void all_NamedItem_DuplicateIdName() throws Exception {
         namedItem("form6");
     }
@@ -1818,6 +1824,7 @@ public class DocumentTest extends WebDriverTestCase {
             FF = { "off", "off", "on", "on", "on", "off", "off", "off", "off" },
             IE = { "Inherit", "!", "Inherit", "Off", "Off", "!", "Off", "Off", "Off", "Off", "Off" },
             IE11 = { "inherit", "!", "inherit", "on", "on", "!", "on", "off", "off", "inherit", "inherit" })
+    @NotYetImplemented(CHROME)
     public void designMode_root() throws Exception {
         designMode("document");
     }
@@ -1831,6 +1838,7 @@ public class DocumentTest extends WebDriverTestCase {
             FF = { "off", "off", "on", "on", "on", "off", "off", "off", "off" },
             IE = { "Inherit", "!", "Inherit", "On", "On", "!", "On", "Off", "Off", "Inherit", "Inherit" },
             IE11 = { "inherit", "!", "inherit", "on", "on", "!", "on", "off", "off", "inherit", "inherit" })
+    @NotYetImplemented(CHROME)
     public void designMode_iframe() throws Exception {
         designMode("window.frames['f'].document");
     }
@@ -1870,6 +1878,7 @@ public class DocumentTest extends WebDriverTestCase {
             FF = { "0", "1", "1" },
             IE8 = { "undefined", "undefined", "undefined" })
     @BuggyWebDriver(FF)
+    @NotYetImplemented(CHROME)
     public void designMode_createsSelectionRange() throws Exception {
         final String html1 = "<html><body><iframe id='i' src='" + URL_SECOND + "'></iframe></body></html>";
         final String html2 = "<html><body onload='test()'>\n"
@@ -1899,6 +1908,7 @@ public class DocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "true", "false" },
             CHROME = { "false", "false" },
             IE8 = { "true", "command foo not supported" })
+    @NotYetImplemented(CHROME)
     public void execCommand() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1925,6 +1935,7 @@ public class DocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object HTMLHeadingElement]",
             CHROME = "null",
             IE = "not available")
+    @NotYetImplemented(CHROME)
     public void evaluate_caseInsensitiveAttribute() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

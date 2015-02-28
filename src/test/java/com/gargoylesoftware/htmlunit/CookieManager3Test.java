@@ -23,7 +23,7 @@ import java.util.List;
 
 import org.apache.http.Header;
 import org.apache.http.cookie.CookieOrigin;
-import org.apache.http.impl.cookie.BrowserCompatSpec;
+import org.apache.http.impl.cookie.DefaultCookieSpec;
 import org.apache.http.message.BasicHeader;
 import org.junit.Test;
 
@@ -108,7 +108,7 @@ public class CookieManager3Test {
     @Test
     public void httpClientParsesCookiesQuotedValuesCorrectly() throws Exception {
         final Header header = new BasicHeader("Set-Cookie", "first=\"hello world\"");
-        final BrowserCompatSpec spec = new BrowserCompatSpec();
+        final DefaultCookieSpec spec = new DefaultCookieSpec();
         final CookieOrigin origin = new CookieOrigin("localhost", 80, "/", false);
         final List<org.apache.http.cookie.Cookie> list = spec.parse(header, origin);
         assertEquals(1, list.size());

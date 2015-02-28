@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -53,6 +55,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.DefaultCredentialsProvider2Test.InMemoryAppender;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
@@ -362,6 +365,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"Host", "User-Agent" }, IE = { })
+    @NotYetImplemented(CHROME)
     public void hostHeaderFirst() throws Exception {
         final Logger logger = Logger.getLogger("org.apache.http.headers");
         final Level oldLevel = logger.getLevel();

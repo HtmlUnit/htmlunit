@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.util.Iterator;
@@ -64,7 +65,7 @@ public class Dojo102Test extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(IE)
+    @NotYetImplemented({ IE, CHROME })
     public void dojo() throws Exception {
         client_ = getWebClient();
         final String url = "http://localhost:" + PORT + "/util/doh/runner.html";

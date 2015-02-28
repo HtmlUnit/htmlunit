@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -162,6 +165,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
      */
     @Test
     @Alerts(FF = "SecRet")
+    @NotYetImplemented(CHROME)
     public void basicAuthenticationUserFromUrl() throws Exception {
         final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
         getMockWebConnection().setDefaultResponse(html);
@@ -212,6 +216,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
      */
     @Test
     @Alerts(FF = "SecRet")
+    @NotYetImplemented(CHROME)
     public void basicAuthenticationUserFromUrlUsedForNextSteps() throws Exception {
         final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
         getMockWebConnection().setDefaultResponse(html);
@@ -278,6 +283,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
      */
     @Test
     @Alerts(FF = "SecRet")
+    @NotYetImplemented(CHROME)
     public void basicAuthenticationUserFromUrlOverwrite() throws Exception {
         final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
         getMockWebConnection().setDefaultResponse(html);
@@ -374,6 +380,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
      */
     @Test
     @Alerts(FF = "SecRet")
+    @NotYetImplemented(CHROME)
     public void basicAuthenticationUserFromUrlOverwriteWrongDefaultCredentials() throws Exception {
         final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
         getMockWebConnection().setDefaultResponse(html);

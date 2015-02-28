@@ -521,6 +521,7 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "capturing", "at target", "bubbling" },
             IE8 = "unknown")
+    @NotYetImplemented(CHROME)
     public void testEventPhase() throws Exception {
         final String html =
               "<html>\n"
@@ -608,6 +609,7 @@ public class Event2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, true" },
             CHROME = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, false" },
             IE8 = { "div", "div" })
+    @NotYetImplemented(CHROME)
     public void stopPropagation() throws Exception {
         stopPropagation("stopPropagation()");
     }
@@ -623,6 +625,7 @@ public class Event2Test extends WebDriverTestCase {
             IE11 = { "window capturing", "div capturing", "span capturing", "div", "window capturing, false, false",
                         "div capturing, false, false", "span capturing, false, true" },
             IE8 = { "div", "div" })
+    @NotYetImplemented(CHROME)
     public void stopPropagationCancelBubble() throws Exception {
         stopPropagation("cancelBubble=true");
     }
@@ -676,6 +679,7 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "w", "w 2", "d", "d 2", "s", "s 2", "w", "w 2" },
             IE8 = { })
+    @NotYetImplemented(CHROME)
     public void stopPropagation_WithMultipleEventHandlers() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title>\n"

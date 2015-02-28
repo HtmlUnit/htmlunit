@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -43,6 +45,7 @@ public class HtmlImageInputTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented(CHROME)
     public void testClick_WithPosition() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"

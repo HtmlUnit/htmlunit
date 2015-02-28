@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 
@@ -52,6 +53,7 @@ public class Event3Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented(CHROME)
     public void testEventOnKeyDown_Shift_Ctrl_Alt() throws Exception {
         testEventOnKeyDown_Shift_Ctrl_Alt(false, false, false, new String[] {"false,false,false"});
         testEventOnKeyDown_Shift_Ctrl_Alt(true,  false, false, new String[] {"true,false,false"});
@@ -200,6 +202,7 @@ public class Event3Test extends SimpleWebTestCase {
      */
     @Test
     @Alerts(FF = "false", IE = "true") // here not alerts! ;-)
+    @NotYetImplemented(CHROME)
     public void testEventBubblingReturns_2() throws Exception {
         final boolean changesPage = Boolean.parseBoolean(getExpectedAlerts()[0]);
         testEventBubblingReturns("return true; ", "return false;", "return true; ", changesPage);

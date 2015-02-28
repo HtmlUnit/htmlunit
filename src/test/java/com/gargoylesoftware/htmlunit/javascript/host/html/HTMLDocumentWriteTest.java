@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static org.junit.Assert.assertNotNull;
 
 import java.net.URL;
@@ -25,6 +26,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
@@ -140,6 +142,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts(IE = "", FF = "exception occurred")
+    @NotYetImplemented(CHROME)
     public void write_AssignedToVar() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

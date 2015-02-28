@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static org.junit.Assert.assertSame;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
@@ -774,6 +776,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
     @Alerts(DEFAULT = "mousedown-3-mouseup-3-contextmenu-3-",
             IE11 = "mousedown-2-mouseup-2-contextmenu-2-",
             IE8 = "mousedown-2-mouseup-2-contextmenu-0-")
+    @NotYetImplemented(CHROME)
     public void testRightClick() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -811,6 +814,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts(DEFAULT = "mousedown-1-mouseup-1-", IE11 = "mousedown-0-mouseup-0-")
+    @NotYetImplemented(CHROME)
     public void testMouse_Down_Up() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -969,6 +973,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception on test failure
      */
     @Test
+    @NotYetImplemented(CHROME)
     public void asTextVisibilityCollapse() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

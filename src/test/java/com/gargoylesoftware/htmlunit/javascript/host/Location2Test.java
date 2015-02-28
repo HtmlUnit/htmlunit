@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -206,7 +207,7 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("#<a>foobar</a>")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, CHROME })
     public void hash() throws Exception {
         checkHash(getDefaultUrl().toExternalForm() + "?#<a>foobar</a>");
     }

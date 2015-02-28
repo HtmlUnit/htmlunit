@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -298,6 +299,7 @@ public class AttrTest extends WebDriverTestCase {
             CHROME = { "[object Attr]", "null" },
             IE = { "[object]", "undefined" },
             IE11 = { "[object Attr]", "undefined" })
+    @NotYetImplemented(CHROME)
     public void html_baseURI() throws Exception {
         html("baseURI");
     }
@@ -371,6 +373,7 @@ public class AttrTest extends WebDriverTestCase {
             CHROME = { "[object Attr]", "null" },
             IE = { "[object]", "undefined" },
             IE11 = { "[object Attr]", "undefined" })
+    @NotYetImplemented(CHROME)
     public void xml_baseURI() throws Exception {
         xml("baseURI");
     }

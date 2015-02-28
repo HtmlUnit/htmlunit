@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
@@ -127,7 +128,7 @@ public class YuiTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, CHROME })
     public void dom() throws Exception {
         doTest("dom.html", Arrays.asList(getExpectedAlerts()));
     }

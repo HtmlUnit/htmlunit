@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
@@ -27,6 +28,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -254,6 +256,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts(FF = "f")
+    @NotYetImplemented(CHROME)
     public void addEventListener_error_clientThrows() throws Exception {
         addEventListener_error(true);
     }
@@ -263,6 +266,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts(FF = "f")
+    @NotYetImplemented(CHROME)
     public void addEventListener_error_clientDoesNotThrow() throws Exception {
         addEventListener_error(false);
     }

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
@@ -121,7 +122,7 @@ public class HTMLDListElementTest extends WebDriverTestCase {
                         "null", "", "blah", "A", "1", "a", "A", "i", "I", "u" },
             IE8 = { "undefined", "", "blah", "A",
                     "null", "", "blah", "A", "1", "a", "A", "i", "I", "u" })
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented({ FF, IE11, CHROME })
     public void type() throws Exception {
         final String html =
                 "<html>\n"

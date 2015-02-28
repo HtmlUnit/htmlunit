@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
@@ -426,6 +427,7 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "frame1",
             CHROME = "")
+    @NotYetImplemented(CHROME)
     public void thisInEventHandler() throws Exception {
         final String html
             = "<html><head></head>\n"
@@ -677,6 +679,7 @@ public class EventTest extends WebDriverTestCase {
                  "e-25", "e-26", "e-27", "e-28", "4000", "e-30", "e-31", "e-32",
                  "e-33" },
             IE8 = "no Event")
+    @NotYetImplemented(CHROME)
     public void constants() throws Exception {
         final String html =
               "<html><body>\n"

@@ -14,12 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for elements inside {@link HtmlNoFrames}.
@@ -51,6 +54,7 @@ public class HtmlNoFramesTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented(CHROME)
     public void asText() throws Exception {
         final String html
             = "<html>\n"

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
@@ -1042,6 +1043,7 @@ public class WindowTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts({ "undefined", "Jane", "Smith", "sdg", "finished" })
+    @NotYetImplemented(CHROME)
     public void showModalDialog() throws Exception {
         final String html1
             = "<html><head><script>\n"

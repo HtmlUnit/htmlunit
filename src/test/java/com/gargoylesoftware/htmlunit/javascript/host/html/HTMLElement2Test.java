@@ -217,6 +217,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "12", "12" },
             CHROME = { "15", "15" },
             IE11 = { "15", "15" })
+    @NotYetImplemented(CHROME)
     public void offsetTopAndLeft_Borders() throws Exception {
         final String html =
               "<html>\n"
@@ -680,6 +681,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "something", "0" },
             FF = { "something", "innerText not supported" },
             IE = { "something", "null" })
+    @NotYetImplemented(CHROME)
     public void innerText_null() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

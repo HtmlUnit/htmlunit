@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static org.junit.Assert.assertSame;
 
 import java.net.URL;
@@ -26,6 +27,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -135,6 +137,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "page2.html",
             CHROME = "", IE11 = "")
+    @NotYetImplemented(CHROME)
     public void clickNestedCheckboxElement() throws Exception {
         final String html =
               "<html>\n"
@@ -271,6 +274,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "page2.html",
             CHROME = "", IE11 = "")
+    @NotYetImplemented(CHROME)
     public void clickNestedRadioElement() throws Exception {
         final String html =
               "<html>\n"

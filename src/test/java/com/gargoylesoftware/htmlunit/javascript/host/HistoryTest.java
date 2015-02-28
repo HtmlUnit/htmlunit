@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +25,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.History;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
@@ -190,6 +193,7 @@ public class HistoryTest extends WebServerTestCase {
      */
     @Test
     @Alerts(FF = "error", IE = "undefined")
+    @NotYetImplemented(CHROME)
     public void previous() throws Exception {
         final WebClient client = getWebClient();
         final List<String> alerts = new ArrayList<>();
@@ -204,6 +208,7 @@ public class HistoryTest extends WebServerTestCase {
      */
     @Test
     @Alerts(FF = "error", IE = "undefined")
+    @NotYetImplemented(CHROME)
     public void current() throws Exception {
         final WebClient client = getWebClient();
         final List<String> alerts = new ArrayList<>();
@@ -218,6 +223,7 @@ public class HistoryTest extends WebServerTestCase {
      */
     @Test
     @Alerts(FF = "error", IE = "undefined")
+    @NotYetImplemented(CHROME)
     public void next() throws Exception {
         final WebClient client = getWebClient();
         final List<String> alerts = new ArrayList<>();
@@ -247,6 +253,7 @@ public class HistoryTest extends WebServerTestCase {
     @Test
     @Alerts(FF = { "false", "false", "true", "true", "false", "false" },
             IE = { "false", "false", "false", "false", "false", "false" })
+    @NotYetImplemented(CHROME)
     public void byIndex() throws Exception {
         final WebClient client = getWebClient();
         final List<String> alerts = new ArrayList<>();

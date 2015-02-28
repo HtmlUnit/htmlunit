@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link HtmlDefinitionDescription}.
@@ -32,6 +35,7 @@ public class HtmlDefinitionDescriptionTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented(CHROME)
     public void asXml_emptyTag() throws Exception {
         final String html = "<html><body>\n"
             + "<dd id='foo'></dd>\n"

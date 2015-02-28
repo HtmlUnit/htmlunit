@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -22,6 +24,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -192,6 +195,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Image>HTMLImageElement: true",
             CHROME = "Image>HTMLImageElement: false")
+    @NotYetImplemented(CHROME)
     public void isParentOf_Image_HTMLImageElement() throws Exception {
         //although Image != HTMLImageElement, they seem to be synonyms!!!
         isParentOf("Image", "HTMLImageElement");
@@ -429,6 +433,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
             CHROME = { "undefined", "false", "undefined", "exception" },
             IE11 = { "function", "true", "\nfunction length() {\n    [native code]\n}\n", "0", "0" },
             IE8 = "exception")
+    @NotYetImplemented(CHROME)
     public void lookupGetter() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
