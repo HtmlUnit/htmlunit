@@ -160,7 +160,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "onchange-select; onclick-select;",
             FF = "onchange-select; onclick-option; onclick-select;")
-    @BuggyWebDriver({ FF, CHROME })
+    @BuggyWebDriver(FF)
+    @NotYetImplemented(CHROME)
     public void clickOptionEventSequence1() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -199,7 +200,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "change-SELECT; click-SELECT;",
             FF = "change-SELECT; click-OPTION; click-OPTION;")
-    @BuggyWebDriver({ FF, CHROME })
+    @BuggyWebDriver(FF)
+    @NotYetImplemented(CHROME)
     public void clickOptionEventSequence2() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -260,7 +262,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "onchange-select; change-SELECT; onclick-select; click-SELECT;",
             FF = "onchange-select; change-SELECT; onclick-option; click-OPTION; onclick-select; click-OPTION;")
-    @BuggyWebDriver({ FF, CHROME })
+    @BuggyWebDriver(FF)
+    @NotYetImplemented(CHROME)
     public void clickOptionEventSequence3() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
