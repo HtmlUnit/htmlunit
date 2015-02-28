@@ -34,9 +34,8 @@ public class CSSValueTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "function CSSValue() {\n    [native code]\n}", "0123" },
-            CHROME = { "function CSSValue() { [native code] }", "0123" },
-            IE = { "exception" })
+    @Alerts(DEFAULT = "exception",
+            FF = { "function CSSValue() {\n    [native code]\n}", "0123" })
     public void test() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<script>\n"

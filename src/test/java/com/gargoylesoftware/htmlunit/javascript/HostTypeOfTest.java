@@ -340,7 +340,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function")
-    @NotYetImplemented(CHROME)
     public void cssValue() throws Exception {
         test("CSSValue");
     }

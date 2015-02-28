@@ -344,7 +344,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF = "function CSSValue() {\n    [native code]\n}")
-    @NotYetImplemented(CHROME)
     public void cssValue() throws Exception {
         test("CSSValue");
     }
