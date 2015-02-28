@@ -254,10 +254,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function CSSPrimitiveValue() {\n    [native code]\n}",
-            CHROME = "exception",
-            IE = "exception")
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = "exception",
+            FF ="function CSSPrimitiveValue() {\n    [native code]\n}")
     public void cssPrimitiveValue() throws Exception {
         test("CSSPrimitiveValue");
     }
@@ -271,7 +269,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object CSSRule]",
             CHROME = "function CSSRule() { [native code] }",
             IE8 = "exception")
-    @NotYetImplemented(CHROME)
     public void cssRule() throws Exception {
         test("CSSRule");
     }

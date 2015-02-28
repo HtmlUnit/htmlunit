@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -51,6 +52,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "black", "pink", "color: pink;", "color: pink;" },
             CHROME = { "black", "rgb(255, 192, 203)", "color: rgb(255, 192, 203);", "color: rgb(255, 192, 203);" })
+    @NotYetImplemented(CHROME)
     public void style_OneCssAttribute() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -80,7 +82,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             FF = { "black", "pink", "color: pink; background: none repeat scroll 0% 0% blue;" },
             CHROME = { "black", "rgb(255, 192, 203)", "color: rgb(255, 192, 203); background: blue;" },
             IE11 = { "black", "pink", "background: blue; color: pink; foo: bar;" })
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented({ FF, IE11, CHROME })
     public void style_MultipleCssAttributes() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -107,6 +109,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "null", "", "pink", "color: pink;" },
             CHROME = { "null", "", "rgb(255, 192, 203)", "color: rgb(255, 192, 203);" })
+    @NotYetImplemented(CHROME)
     public void style_OneUndefinedCssAttribute() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -299,6 +302,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "** string", "blue" },
             CHROME = { "*null* object", "blue" },
             IE8 = { })
+    @NotYetImplemented(CHROME)
     public void removePropertyUndefined() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -322,6 +326,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "30px", "", "30px", "arial", "", "arial" },
             CHROME = { "30px", "null", "30px", "arial", "null", "arial" },
             IE8 = { "30px", "exception", "exception", "arial", "exception", "exception" })
+    @NotYetImplemented(CHROME)
     public void getPropertyValue_WithDash() throws Exception {
         final String html =
             "<html><body onload='test()'><script>\n"
@@ -355,7 +360,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "", "" },
             IE8 = { "", "alpha(opacity=50)" })
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented({ FF, IE11, CHROME })
     public void styleFilter() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test(){\n"
@@ -916,7 +921,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             CHROME = "",
             IE11 = "inline",
             IE8 = "ignored")
-    @NotYetImplemented(IE11)
+    @NotYetImplemented({ IE11, CHROME })
     public void displayDefaultOverwritesNone() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1317,7 +1322,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "BLACK", "pink", "color: pink;", "color: pink;" },
             CHROME = { "black", "rgb(255, 192, 203)", "color: rgb(255, 192, 203);", "color: rgb(255, 192, 203);" },
             IE11 = { "black", "pink", "color: pink;", "color: pink;" })
-    @NotYetImplemented(IE11)
+    @NotYetImplemented({ IE11, CHROME })
     public void caseInsensitive() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -1455,7 +1460,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "undefined", "none" },
             IE = "exception",
             IE11 = { "function", "before", "none", "after", "none" })
-    @NotYetImplemented({ FF, IE11 })
+    @NotYetImplemented({ FF, IE11, CHROME })
     public void interceptSetter() throws Exception {
         final String html = "<html><body><div id='d'>foo</div><script>\n"
             + "try {\n"

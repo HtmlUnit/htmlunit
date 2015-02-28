@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 
 import org.apache.commons.lang3.StringUtils;
@@ -247,6 +248,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented(CHROME)
     public void properties() throws Exception {
         final String expected = loadExpectation("CSSStyleDeclaration2Test.properties", ".txt");
 
@@ -283,6 +285,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented(CHROME)
     public void properties2() throws Exception {
         final String expected = loadExpectation("CSSStyleDeclaration2Test.properties2", ".txt");
 

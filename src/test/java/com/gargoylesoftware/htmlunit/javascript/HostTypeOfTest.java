@@ -246,10 +246,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            CHROME = "undefined",
-            IE = "undefined")
-    @NotYetImplemented(CHROME)
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
     public void cssPrimitiveValue() throws Exception {
         test("CSSPrimitiveValue");
     }
@@ -263,7 +261,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "object",
             CHROME = "function",
             IE8 = "undefined")
-    @NotYetImplemented(CHROME)
     public void cssRule() throws Exception {
         test("CSSRule");
     }

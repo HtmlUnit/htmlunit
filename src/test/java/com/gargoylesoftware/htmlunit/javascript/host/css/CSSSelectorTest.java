@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -1214,6 +1215,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "1", "id2" },
             CHROME = { "0", "exception" },
             IE8 = "exception")
+    @NotYetImplemented(CHROME)
     public void target() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"

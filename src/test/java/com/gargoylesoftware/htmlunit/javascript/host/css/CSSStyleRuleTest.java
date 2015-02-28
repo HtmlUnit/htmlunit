@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -44,7 +45,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
             CHROME = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1", "", "10px", "", "red" },
             IE8 = { "[object]", "H1", "", "10px, ", "red" },
             IE11 = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1", "", "10px, ", "red" })
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, CHROME })
     public void test() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
@@ -118,7 +119,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = "false",
             IE11 = "")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, CHROME })
     public void testReadOnly() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
@@ -153,7 +154,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
             CHROME = { "body", "h1", "a.foo", ".foo", ".foo .foo2", "#byid" },
             FF = { "BoDY", "H1", "A.foo", ".foo", ".foo .foo2", "#byId" },
             IE8 = { "BODY", "H1", "A.foo", ".foo", ".foo .foo2", "#byId" })
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, CHROME })
     public void selectorText() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
@@ -183,7 +184,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "" },
             IE8 = { "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='rightCorner.gif',sizingMethod='crop')" })
-    @NotYetImplemented({ IE8 })
+    @NotYetImplemented({ IE8, CHROME })
     public void colon() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"

@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+
 import java.io.StringReader;
 
 import org.junit.Test;
@@ -24,6 +26,7 @@ import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -182,6 +185,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @NotYetImplemented(CHROME)
     public void selects_pseudoClass_lang() throws Exception {
         if (getBrowserVersion().isFirefox() || getBrowserVersion().isIE()
                 && getBrowserVersion().getBrowserVersionNumeric() >= 10) {

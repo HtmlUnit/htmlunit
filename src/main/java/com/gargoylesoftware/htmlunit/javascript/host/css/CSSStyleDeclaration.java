@@ -4036,7 +4036,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param name the name of the property to retrieve
      * @return the value
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction(@WebBrowser(FF))
     public CSSValue getPropertyCSSValue(final String name) {
         LOG.info("getPropertyCSSValue(" + name + "): getPropertyCSSValue support is experimental");
         // following is a hack, just to have basic support for getPropertyCSSValue
