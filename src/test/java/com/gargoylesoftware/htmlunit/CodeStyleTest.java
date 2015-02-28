@@ -107,7 +107,7 @@ public class CodeStyleTest {
                 methodFirstLine(lines, relativePath);
                 methodLastLine(lines, relativePath);
                 lineBetweenMethods(lines, relativePath);
-//                svnProperties(file, relativePath);
+                svnProperties(file, relativePath);
                 runWith(lines, relativePath);
                 vs85aspx(lines, relativePath);
                 deprecated(lines, relativePath);
