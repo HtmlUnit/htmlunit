@@ -1856,7 +1856,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function")
-    @NotYetImplemented(FF)
     public void htmlTimeElement() throws Exception {
         test("HTMLTimeElement");
     }
@@ -1922,7 +1921,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("undefined")
-    @NotYetImplemented(CHROME)
     public void htmlWBRElement() throws Exception {
         test("HTMLWBRElement");
     }

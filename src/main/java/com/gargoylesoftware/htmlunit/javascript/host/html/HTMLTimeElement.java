@@ -20,6 +20,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlTime;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
@@ -29,10 +30,18 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @version $Revision$
  * @author Ronald Brill
+ * @author Ahmed Ashour
  */
 @JsxClass(domClass = HtmlTime.class, browsers = @WebBrowser(FF))
 public class HTMLTimeElement extends HTMLElement {
 
+    /**
+     * Creates an instance.
+     */
+    @JsxConstructor
+    public HTMLTimeElement() {
+        
+    }
     /**
      * Returns the <tt>text</tt> attribute.
      * @return the <tt>text</tt> attribute

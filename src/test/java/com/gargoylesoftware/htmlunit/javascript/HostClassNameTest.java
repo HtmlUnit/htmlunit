@@ -1876,7 +1876,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF = "function HTMLTimeElement() {\n    [native code]\n}")
-    @NotYetImplemented(FF)
     public void htmlTimeElement() throws Exception {
         test("HTMLTimeElement");
     }
@@ -1942,7 +1941,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented(CHROME)
     public void htmlWBRElement() throws Exception {
         test("HTMLWBRElement");
     }
