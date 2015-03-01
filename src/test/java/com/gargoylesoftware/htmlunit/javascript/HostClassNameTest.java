@@ -3608,7 +3608,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = "function DOMRect() {\n    [native code]\n}")
+            FF31 = "function DOMRect() {\n    [native code]\n}")
     @NotYetImplemented(FF)
     public void domRect() throws Exception {
         test("DOMRect");
@@ -3657,8 +3657,9 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE11 = "[object ClientRectList]",
+            FF24 = "function ClientRectList() {\n    [native code]\n}",
             CHROME = "function ClientRectList() { [native code] }")
-    @NotYetImplemented({ CHROME, IE11 })
+    @NotYetImplemented({ CHROME, IE11, FF24 })
     public void clientRectList() throws Exception {
         test("ClientRectList");
     }
