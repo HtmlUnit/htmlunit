@@ -1149,7 +1149,7 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1")
+    @Alerts("1")
     public void elementClosesItself_sub() throws Exception {
         loadPageWithAlerts2(elementClosesItself("sub"));
     }

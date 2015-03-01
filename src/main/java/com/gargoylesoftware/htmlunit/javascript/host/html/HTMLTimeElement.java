@@ -40,8 +40,8 @@ public class HTMLTimeElement extends HTMLElement {
      */
     @JsxConstructor
     public HTMLTimeElement() {
-        
     }
+
     /**
      * Returns the <tt>text</tt> attribute.
      * @return the <tt>text</tt> attribute

@@ -1849,7 +1849,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception")
+    @Alerts("exception")
     public void htmlTextElement() throws Exception {
         test("HTMLTextElement");
     }
@@ -3306,7 +3306,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception")
+    @Alerts("exception")
     @NotYetImplemented({ FF, CHROME, IE11 })
     public void staticNodeList() throws Exception {
         test("StaticNodeList");

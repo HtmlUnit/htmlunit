@@ -177,7 +177,7 @@ public class YuiTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "test_page_modules")
+    @Alerts("test_page_modules")
     public void yuiLoaderConfig() throws Exception {
         // The "test_page_modules" test fails in FF, too, so it's OK.
         doTest("yuiloader_config.html", Arrays.asList(getExpectedAlerts()));

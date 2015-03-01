@@ -229,7 +229,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "42px")
+    @Alerts("42px")
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void importedStylesheetsLoadedAccordingToMediaType() throws Exception {
         final String html

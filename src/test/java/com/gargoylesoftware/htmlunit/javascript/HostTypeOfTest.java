@@ -1829,7 +1829,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "undefined")
+    @Alerts("undefined")
     public void htmlTextElement() throws Exception {
         test("HTMLTextElement");
     }
@@ -3279,7 +3279,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "undefined")
+    @Alerts("undefined")
     @NotYetImplemented({ FF, CHROME, IE11 })
     public void staticNodeList() throws Exception {
         test("StaticNodeList");

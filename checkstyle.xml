@@ -59,6 +59,11 @@
         <property name="message" value="Two empty contiguous lines"/>
     </module>
 
+    <module name="RegexpSingleline">
+        <property name="format" value="Alerts\(DEFAULT = \&quot;\w+\&quot;\)"/>
+        <property name="message" value="No need to specify &quot;DEFAULT&quot;"/>
+    </module>
+
     <!--
         at the moment there is a problem with disabling this check for some files
         without disabling all RegexpMultiline checks; for this reason this is not active

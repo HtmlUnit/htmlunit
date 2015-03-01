@@ -1219,7 +1219,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception")
+    @Alerts("exception")
     public void getBoxObjectFor() throws Exception {
         final String html = "<html><head><title>Test</title><script>\n"
             + "function doTest() {\n"
