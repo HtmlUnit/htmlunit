@@ -380,7 +380,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF24 = "function",
             FF31 = "undefined",
             IE8 = "undefined")
-    @NotYetImplemented(FF24)
     public void clientRect() throws Exception {
         test("ClientRect");
     }
@@ -427,11 +426,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "object",
-            CHROME = "undefined",
-            FF = "undefined",
-            IE8 = "undefined")
-    @NotYetImplemented({ FF, CHROME })
+    @Alerts(DEFAULT = "undefined",
+            IE11 = "object")
     public void console() throws Exception {
         test("Console");
     }

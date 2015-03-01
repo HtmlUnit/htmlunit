@@ -39,6 +39,7 @@ import com.gargoylesoftware.htmlunit.WebConsole.Formatter;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -48,8 +49,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Andrea Martino
  */
-@JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11),
-        @WebBrowser(CHROME) })
+@JsxClasses({
+    @JsxClass(isJSObject = false, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) }),
+    @JsxClass(browsers = @WebBrowser(value = IE, minVersion = 11))
+})
 public class Console extends SimpleScriptable {
 
     private static final Map<String, Long> TIMERS = new HashMap<>();

@@ -49,7 +49,7 @@ public class ClientRect extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor(@WebBrowser(CHROME))
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24) })
     public ClientRect() {
     }
 

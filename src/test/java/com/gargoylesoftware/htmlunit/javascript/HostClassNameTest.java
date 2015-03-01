@@ -388,7 +388,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             FF24 = "function ClientRect() {\n    [native code]\n}",
             FF31 = "exception",
             IE8 = "exception")
-    @NotYetImplemented(FF24)
     public void clientRect() throws Exception {
         test("ClientRect");
     }
@@ -435,11 +434,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Console]",
-            CHROME = "exception",
-            FF = "exception",
-            IE8 = "exception")
-    @NotYetImplemented({ FF, CHROME })
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object Console]")
     public void console() throws Exception {
         test("Console");
     }
