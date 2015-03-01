@@ -166,6 +166,7 @@ public class NotYetImplementedTest {
         int countIE11 = 0;
         int countFF24 = 0;
         int countFF31 = 0;
+        int countChrome = 0;
         for (final String entry : entries_) {
             final String[] values = entry.split(";");
             final String file = values[0];
@@ -227,11 +228,15 @@ public class NotYetImplementedTest {
                 countFF24++;
                 countFF31++;
             }
+            if (browser.contains("CHROME")) {
+                countChrome++;
+            }
             if (browser.contains("All")) {
                 countIE8++;
                 countIE11++;
                 countFF24++;
                 countFF31++;
+                countChrome++;
             }
 
         }
@@ -262,6 +267,11 @@ public class NotYetImplementedTest {
         overview.append("  <tr>\n");
         overview.append("    <td class='numeric'>").append(Integer.toString(countFF31)).append("</td>\n");
         overview.append("    <td>for FF31</td>\n");
+        overview.append("  </tr>\n");
+
+        overview.append("  <tr>\n");
+        overview.append("    <td class='numeric'>").append(Integer.toString(countChrome)).append("</td>\n");
+        overview.append("    <td>for Chrome</td>\n");
         overview.append("  </tr>\n");
 
         overview.append("</table>\n");
