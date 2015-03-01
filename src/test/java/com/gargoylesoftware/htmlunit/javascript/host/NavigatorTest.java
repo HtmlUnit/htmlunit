@@ -336,7 +336,7 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF24 = "20140609182057",
+            FF24 = "20140923194127",
             FF31 = "20140717132905")
     public void buildID() throws Exception {
         final String html
