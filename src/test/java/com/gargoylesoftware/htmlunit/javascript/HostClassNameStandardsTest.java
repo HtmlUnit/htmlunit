@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -3538,8 +3539,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = "function DOMRect() {\n    [native code]\n}")
-    @NotYetImplemented(FF)
+            FF31 = "function DOMRect() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
     public void domRect() throws Exception {
         test("DOMRect");
     }
@@ -3587,8 +3588,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE11 = "[object ClientRectList]",
+            FF24 = "function ClientRectList() {\n    [native code]\n}",
             CHROME = "function ClientRectList() { [native code] }")
-    @NotYetImplemented({ CHROME, IE11 })
+    @NotYetImplemented({ CHROME, IE11, FF24 })
     public void clientRectList() throws Exception {
         test("ClientRectList");
     }
