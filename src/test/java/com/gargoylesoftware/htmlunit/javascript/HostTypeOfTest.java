@@ -1229,6 +1229,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF = "function",
             IE8 = "undefined")
+    @NotYetImplemented(IE8)
     public void htmlImageElement() throws Exception {
         test("HTMLImageElement");
     }
@@ -1526,6 +1527,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF = "function",
             IE8 = "undefined")
+    @NotYetImplemented(IE8)
     public void htmlOptionElement() throws Exception {
         test("HTMLOptionElement");
     }

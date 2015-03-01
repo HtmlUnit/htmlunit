@@ -662,7 +662,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "inline", "inline", "block", "inline-block" },
             IE = { "inline", "inline", "block", "inline" })
-    @NotYetImplemented(CHROME)
     public void defaultDisplayValues_M() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <img usemap='#imgmap'>\n"

@@ -17,9 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_UNSELECT_SELECTS_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_CONSTRUCTOR_IGNORES_LABEL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_USE_TEXT_AS_VALUE_IF_NOT_DEFINED;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -30,11 +27,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
 
 /**
@@ -49,12 +44,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClasses({
-    @JsxClass(domClass = HtmlOption.class,
-        browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11)}),
-    @JsxClass(domClass = HtmlOption.class, isJSObject = false,
-        browsers = @WebBrowser(value = IE, maxVersion = 8)),
-})
+@JsxClass(domClass = HtmlOption.class)
 public class HTMLOptionElement extends FormChild {
 
     /**
@@ -64,7 +54,7 @@ public class HTMLOptionElement extends FormChild {
      * @param defaultSelected Whether the option is initially selected
      * @param selected the current selection state of the option
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxConstructor
     public void jsConstructor(final String newText, final String newValue,
             final boolean defaultSelected, final boolean selected) {
         final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();

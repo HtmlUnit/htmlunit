@@ -1218,6 +1218,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object HTMLImageElement]",
             CHROME = "function HTMLImageElement() { [native code] }",
             FF = "function HTMLImageElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlImageElement() throws Exception {
         test("HTMLImageElement");
     }
@@ -1502,6 +1503,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object HTMLOptionElement]",
             CHROME = "function HTMLOptionElement() { [native code] }",
             FF = "function HTMLOptionElement() {\n    [native code]\n}")
+    @NotYetImplemented(IE8)
     public void htmlOptionElement() throws Exception {
         test("HTMLOptionElement");
     }

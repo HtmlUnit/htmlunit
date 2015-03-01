@@ -215,7 +215,6 @@ webkitAnimationPlayState
 webkitAnimationTimingFunction
 webkitAppRegion
 webkitAppearance
-webkitAspectRatio
 webkitBackfaceVisibility
 webkitBackgroundClip
 webkitBackgroundComposite
@@ -233,7 +232,6 @@ webkitBorderEnd
 webkitBorderEndColor
 webkitBorderEndStyle
 webkitBorderEndWidth
-webkitBorderFit
 webkitBorderHorizontalSpacing
 webkitBorderImage
 webkitBorderRadius
