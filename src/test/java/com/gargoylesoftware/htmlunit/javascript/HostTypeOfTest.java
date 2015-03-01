@@ -1998,7 +1998,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "object",
             CHROME = "function",
             IE8 = "undefined")
-    @NotYetImplemented(IE8)
     public void location() throws Exception {
         test("Location");
     }
