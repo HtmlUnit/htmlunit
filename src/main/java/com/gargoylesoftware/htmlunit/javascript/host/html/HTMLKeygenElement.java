@@ -15,8 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlKeygen;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -24,14 +22,14 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLSpanElement".
+ * The JavaScript object "HTMLKeygenElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Ronald Brill
  */
-@JsxClass(domClass = HtmlKeygen.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+@JsxClass(domClass = HtmlKeygen.class, browsers = @WebBrowser(CHROME))
 public class HTMLKeygenElement extends HTMLElement {
 
     /**
@@ -39,14 +37,6 @@ public class HTMLKeygenElement extends HTMLElement {
      */
     @JsxConstructor(@WebBrowser(CHROME))
     public HTMLKeygenElement() {
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getClassName() {
-        return "HTMLSpanElement";
     }
 
     /**

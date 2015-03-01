@@ -17,8 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -714,7 +712,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE8 = "undefined")
-    @NotYetImplemented(FF24)
     public void history() throws Exception {
         test("History");
     }
@@ -835,10 +832,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "object",
-            CHROME = "undefined",
-            FF = "undefined",
-            IE8 = "undefined")
+    @Alerts(DEFAULT = "undefined",
+            IE11 = "object")
     @NotYetImplemented({ IE8, FF, CHROME })
     public void htmlBlockElement() throws Exception {
         test("HTMLBlockElement");
@@ -1234,7 +1229,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF = "function",
             IE8 = "undefined")
-    @NotYetImplemented(IE)
     public void htmlImageElement() throws Exception {
         test("HTMLImageElement");
     }
@@ -1286,7 +1280,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
-    @NotYetImplemented(CHROME)
     public void htmlKeygenElement() throws Exception {
         test("HTMLKeygenElement");
     }
@@ -1382,7 +1375,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF = "undefined",
             IE8 = "undefined")
-    @NotYetImplemented(CHROME)
     public void htmlMarqueeElement() throws Exception {
         test("HTMLMarqueeElement");
     }
@@ -1411,7 +1403,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF = "function",
             IE8 = "undefined")
-    @NotYetImplemented(CHROME)
     public void htmlMenuElement() throws Exception {
         test("HTMLMenuElement");
     }
@@ -1535,7 +1526,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF = "function",
             IE8 = "undefined")
-    @NotYetImplemented(IE)
     public void htmlOptionElement() throws Exception {
         test("HTMLOptionElement");
     }
@@ -1689,7 +1679,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF = "function",
             IE8 = "undefined")
-    @NotYetImplemented({ FF, IE8 })
+    @NotYetImplemented(IE8)
     public void htmlSpanElement() throws Exception {
         test("HTMLSpanElement");
     }

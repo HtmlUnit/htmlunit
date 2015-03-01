@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -731,7 +730,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function History() { [native code] }",
             FF31 = "function History() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented(FF24)
     public void history() throws Exception {
         test("History");
     }
@@ -852,10 +850,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLBlockElement]",
-            CHROME = "exception",
-            FF = "exception",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object HTMLBlockElement]")
     @NotYetImplemented({ IE8, FF, CHROME })
     public void htmlBlockElement() throws Exception {
         test("HTMLBlockElement");
@@ -1253,7 +1249,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function HTMLImageElement() { [native code] }",
             FF = "function HTMLImageElement() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented(IE)
     public void htmlImageElement() throws Exception {
         test("HTMLImageElement");
     }
@@ -1305,7 +1300,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function HTMLKeygenElement() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void htmlKeygenElement() throws Exception {
         test("HTMLKeygenElement");
     }
@@ -1401,7 +1395,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function HTMLMarqueeElement() { [native code] }",
             FF = "exception",
             IE8 = "exception")
-    @NotYetImplemented(CHROME)
     public void htmlMarqueeElement() throws Exception {
         test("HTMLMarqueeElement");
     }
@@ -1430,7 +1423,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function HTMLMenuElement() { [native code] }",
             FF = "function HTMLMenuElement() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented(CHROME)
     public void htmlMenuElement() throws Exception {
         test("HTMLMenuElement");
     }
@@ -1554,7 +1546,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function HTMLOptionElement() { [native code] }",
             FF = "function HTMLOptionElement() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented(IE)
     public void htmlOptionElement() throws Exception {
         test("HTMLOptionElement");
     }
@@ -1708,7 +1699,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function HTMLSpanElement() { [native code] }",
             FF = "function HTMLSpanElement() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented({ FF, IE8 })
+    @NotYetImplemented(IE8)
     public void htmlSpanElement() throws Exception {
         test("HTMLSpanElement");
     }
