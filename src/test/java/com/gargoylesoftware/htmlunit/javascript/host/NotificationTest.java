@@ -71,7 +71,7 @@ public class NotificationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {}, IE = "exception")
+    @Alerts(DEFAULT = { }, IE = "exception")
     public void minimalUsage() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
