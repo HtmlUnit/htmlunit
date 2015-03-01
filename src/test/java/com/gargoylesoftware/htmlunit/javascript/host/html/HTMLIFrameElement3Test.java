@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import java.net.URL;
 
@@ -224,6 +225,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "123", "undefined" },
             IE11 = { "123" })
+    @NotYetImplemented(IE11)
     public void iFrameReinitialized() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -382,7 +384,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "uninitialized", "complete" },
             CHROME = { "complete", "complete" },
             IE = { "loading", "complete" })
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, CHROME })
     public void readyState_IFrame() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -647,7 +649,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             CHROME = { "[object Window]", "topbody", "framebody", "[object Window]", "frame", "frameinput" },
             IE11 = { "[object Window]", "topbody", "framebody", "[object Window]", "frame", "frameinput" },
             IE8 = { "[object]", "topbody", "framebody", "[object]", "topbody", "frameinput" })
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void contentWindowAndActiveElement() throws Exception {
         final String firstContent
             = "<html>\n"

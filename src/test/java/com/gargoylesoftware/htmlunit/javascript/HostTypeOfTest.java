@@ -468,7 +468,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE8 = "undefined")
-    @NotYetImplemented(FF24)
     public void domException() throws Exception {
         test("DOMException");
     }
@@ -628,7 +627,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF31 = "function")
-    @NotYetImplemented(FF31)
     public void external() throws Exception {
         test("External");
     }

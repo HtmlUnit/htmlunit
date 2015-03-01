@@ -478,7 +478,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function DOMException() { [native code] }",
             FF31 = "function DOMException() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented(FF24)
     public void domException() throws Exception {
         test("DOMException");
     }
@@ -641,7 +640,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "function External() {\n    [native code]\n}")
-    @NotYetImplemented(FF31)
     public void external() throws Exception {
         test("External");
     }
@@ -1929,7 +1927,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function HTMLUnknownElement() { [native code] }",
             FF = "function HTMLUnknownElement() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented(IE11)
     public void htmlUnknownElement() throws Exception {
         test("HTMLUnknownElement");
     }
