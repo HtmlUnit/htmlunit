@@ -15,10 +15,10 @@
 package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DIALOGWINDOW_REFERER;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.WINDOW_EXECUTE_EVENTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PROTOCOL_DATA;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MINIMAL_QUERY_ENCODING;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.WINDOW_EXECUTE_EVENTS;
 
 import java.io.BufferedInputStream;
 import java.io.File;
