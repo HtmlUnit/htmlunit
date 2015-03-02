@@ -22,6 +22,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -153,37 +154,45 @@ public class HtmlArea2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({ "false", "false", "false", "false", "false", "true" })
     public void isDisplayedEmptyArea() throws Exception {
         final String html = "<html><head><title>Page A</title></head>\n"
                 + "<body>"
                 + "  <img id='myImg' usemap='#imgmap'"
                         + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
                         + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='>\n"
-                + "  <map id='myMap' name='imgmap' style='display: none'>\n"
+                + "  <map id='myMap' name='imgmap'>\n"
                 + "    <area id='myArea1' shape='rect' coords='0,0,0,1'>\n"
                 + "    <area id='myArea2' shape='rect' coords='0,0,1,0'>\n"
                 + "    <area id='myArea3' shape='rect' coords='0,0,0,0'>\n"
                 + "    <area id='myArea4' shape='rect' >\n"
                 + "    <area id='myArea5' >\n"
+                + "    <area id='myArea6' shape='rect' coords='0,0,1,1'>\n"
                 + "  </map>\n"
                 + "</body></html>";
 
+        final String[] expected = getExpectedAlerts();
+
+        setExpectedAlerts(new String[] {});
         final WebDriver driver = loadPageWithAlerts2(html);
 
         boolean displayed = driver.findElement(By.id("myArea1")).isDisplayed();
-        assertTrue(displayed);
+        assertEquals(Boolean.parseBoolean(expected[0]), displayed);
 
         displayed = driver.findElement(By.id("myArea2")).isDisplayed();
-        assertTrue(displayed);
+        assertEquals(Boolean.parseBoolean(expected[1]), displayed);
 
         displayed = driver.findElement(By.id("myArea3")).isDisplayed();
-        assertTrue(displayed);
+        assertEquals(Boolean.parseBoolean(expected[2]), displayed);
 
         displayed = driver.findElement(By.id("myArea4")).isDisplayed();
-        assertTrue(displayed);
+        assertEquals(Boolean.parseBoolean(expected[3]), displayed);
 
         displayed = driver.findElement(By.id("myArea5")).isDisplayed();
-        assertTrue(displayed);
+        assertEquals(Boolean.parseBoolean(expected[4]), displayed);
+
+        displayed = driver.findElement(By.id("myArea6")).isDisplayed();
+        assertEquals(Boolean.parseBoolean(expected[5]), displayed);
     }
 
     /**
