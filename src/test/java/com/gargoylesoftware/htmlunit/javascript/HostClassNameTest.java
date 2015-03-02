@@ -1264,7 +1264,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(CHROME = "function HTMLImageElement() { [native code] }",
             FF = "function Image() {\n    [native code]\n}",
             IE8 = "[object HTMLImageElement]",
-            IE11 = "\nfunction ArrayBuffer() {\n    [native code]\n}\n")
+            IE11 = "\nfunction Image() {\n    [native code]\n}\n")
     @NotYetImplemented({ FF, IE })
     public void image() throws Exception {
         test("Image");
