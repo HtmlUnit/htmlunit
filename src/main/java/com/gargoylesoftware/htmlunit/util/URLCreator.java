@@ -131,9 +131,8 @@ abstract class URLCreator {
                 final int end = stringUrl.indexOf("/", begin);
                 return stringUrl.substring(begin, end);
             }
-            else {
-                return url.getProtocol();
-            }
+
+            return url.getProtocol();
         }
     }
 }
