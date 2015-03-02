@@ -201,6 +201,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTitleElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUListElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLVideoElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.Image;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAltGlyphElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAngle;
@@ -336,6 +337,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLTextElement.class, HTMLTextAreaElement.class, HTMLTimeElement.class, HTMLTitleElement.class,
         HTMLUListElement.class, HTMLUnknownElement.class,
         HTMLVideoElement.class,
+        Image.class,
         Int16Array.class, Int32Array.class, Int8Array.class,
         KeyboardEvent.class,
         Location.class, MediaList.class, MessageEvent.class, MimeType.class, MimeTypeArray.class, MouseEvent.class,

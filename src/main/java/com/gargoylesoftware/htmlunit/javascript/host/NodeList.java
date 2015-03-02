@@ -71,7 +71,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClasses({
     @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = true, browsers = @WebBrowser(value = IE, maxVersion = 8))
+    @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
 })
 public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.NodeList {
 

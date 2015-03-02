@@ -1189,6 +1189,13 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST,
+
+    /**
+     * Is class name of {@link Image} the same as {@link HTMLImageElement}.
+     */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8) })
+    JS_IMAGE_HTML_IMAGE_ELEMENT,
+
     /**
      * Getting the width and height of an image tag without a source returns 18x20;
      * for invalid values returns 1.

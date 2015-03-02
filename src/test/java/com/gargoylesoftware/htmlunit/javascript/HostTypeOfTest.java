@@ -1229,7 +1229,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function",
             IE8 = "undefined",
             IE11 = "object")
-    @NotYetImplemented(IE)
     public void htmlImageElement() throws Exception {
         test("HTMLImageElement");
     }
@@ -1242,7 +1241,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function",
             IE8 = "object")
-    @NotYetImplemented
     public void image() throws Exception {
         test("Image");
     }

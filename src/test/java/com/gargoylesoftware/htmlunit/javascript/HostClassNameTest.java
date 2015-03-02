@@ -1250,7 +1250,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             FF = "function HTMLImageElement() {\n    [native code]\n}",
             IE8 = "exception",
             IE11 = "[object HTMLImageElement]")
-    @NotYetImplemented(IE)
     public void htmlImageElement() throws Exception {
         test("HTMLImageElement");
     }
@@ -1265,7 +1264,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             FF = "function Image() {\n    [native code]\n}",
             IE8 = "[object HTMLImageElement]",
             IE11 = "\nfunction Image() {\n    [native code]\n}\n")
-    @NotYetImplemented({ FF, IE })
     public void image() throws Exception {
         test("Image");
     }
