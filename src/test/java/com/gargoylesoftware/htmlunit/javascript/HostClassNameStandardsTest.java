@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -1218,9 +1219,24 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object HTMLImageElement]",
             CHROME = "function HTMLImageElement() { [native code] }",
             FF = "function HTMLImageElement() {\n    [native code]\n}")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented(IE)
     public void htmlImageElement() throws Exception {
         test("HTMLImageElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "[object HTMLImageElement]",
+            CHROME = "function HTMLImageElement() { [native code] }",
+            FF = "function Image() {\n    [native code]\n}",
+            IE11 = "\nfunction Image() {\n    [native code]\n}\n")
+    @NotYetImplemented({ FF, IE })
+    public void image() throws Exception {
+        test("Image");
     }
 
     /**
@@ -1503,9 +1519,24 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object HTMLOptionElement]",
             CHROME = "function HTMLOptionElement() { [native code] }",
             FF = "function HTMLOptionElement() {\n    [native code]\n}")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented(IE)
     public void htmlOptionElement() throws Exception {
         test("HTMLOptionElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "[object HTMLOptionElement]",
+            CHROME = "function HTMLOptionElement() { [native code] }",
+            FF = "function Option() {\n    [native code]\n}",
+            IE11 = "\nfunction Option() {\n    [native code]\n}\n")
+    @NotYetImplemented({ FF, IE })
+    public void option() throws Exception {
+        test("Option");
     }
 
     /**
