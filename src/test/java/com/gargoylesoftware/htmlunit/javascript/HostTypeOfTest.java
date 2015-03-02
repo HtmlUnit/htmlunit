@@ -1534,10 +1534,9 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "object",
-            CHROME = "function",
-            FF = "function",
-            IE8 = "undefined")
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined",
+            IE11 = "object")
     @NotYetImplemented(IE)
     public void htmlOptionElement() throws Exception {
         test("HTMLOptionElement");

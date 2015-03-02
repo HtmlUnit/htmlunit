@@ -1557,10 +1557,10 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLOptionElement]",
-            CHROME = "function HTMLOptionElement() { [native code] }",
+    @Alerts(CHROME = "function HTMLOptionElement() { [native code] }",
             FF = "function HTMLOptionElement() {\n    [native code]\n}",
-            IE8 = "exception")
+            IE8 = "exception",
+            IE11 = "[object HTMLOptionElement]")
     @NotYetImplemented(IE)
     public void htmlOptionElement() throws Exception {
         test("HTMLOptionElement");
@@ -1572,9 +1572,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLOptionElement]",
-            CHROME = "function HTMLOptionElement() { [native code] }",
+    @Alerts(CHROME = "function HTMLOptionElement() { [native code] }",
             FF = "function Option() {\n    [native code]\n}",
+            IE8 = "[object HTMLOptionElement]",
             IE11 = "\nfunction Option() {\n    [native code]\n}\n")
     @NotYetImplemented({ FF, IE })
     public void option() throws Exception {
