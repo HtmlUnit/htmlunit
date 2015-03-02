@@ -290,13 +290,14 @@ public abstract class AbstractJavaScriptConfiguration {
             return domJavaScriptMap_;
         }
 
-        final Map<Class<?>, Class<? extends SimpleScriptable>> map = new HashMap<>();
+        final Map<Class<?>, Class<? extends SimpleScriptable>> map = new HashMap<>(configuration_.size());
 
+        final boolean debug = LOG.isDebugEnabled();
         for (final String hostClassName : configuration_.keySet()) {
             final ClassConfiguration classConfig = getClassConfiguration(hostClassName);
             for (final Class<?> domClass : classConfig.getDomClasses()) {
                 // preload and validate that the class exists
-                if (LOG.isDebugEnabled()) {
+                if (debug) {
                     LOG.debug("Mapping " + domClass.getName() + " to " + hostClassName);
                 }
                 map.put(domClass, classConfig.getHostClass());
