@@ -2095,7 +2095,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function MimeType() { [native code] }",
             FF31 = "function MimeType() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented({ FF24, IE11 })
     public void mimeType() throws Exception {
         test("MimeType");
     }
@@ -2110,7 +2109,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function MimeTypeArray() { [native code] }",
             FF31 = "function MimeTypeArray() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented(FF24)
     public void mimeTypeArray() throws Exception {
         test("MimeTypeArray");
     }
