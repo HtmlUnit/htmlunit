@@ -864,11 +864,6 @@
         <!-- Jetty -->
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-server</artifactId>
-            <version>9.2.8.v20150217</version>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-webapp</artifactId>
             <version>9.2.8.v20150217</version>
             <scope>test</scope>
