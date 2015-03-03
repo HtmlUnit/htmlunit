@@ -171,10 +171,8 @@ import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
  * W3C DOM Level 1</a>
  */
 @JsxClasses({
-    @JsxClass(isJSObject = true,
-        browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = true,
-        browsers = { @WebBrowser(value = IE, maxVersion = 8) })
+    @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+    @JsxClass(isJSObject = false, browsers = { @WebBrowser(value = IE, maxVersion = 8) })
 })
 public class HTMLDocument extends Document implements ScriptableWithFallbackGetter {
 

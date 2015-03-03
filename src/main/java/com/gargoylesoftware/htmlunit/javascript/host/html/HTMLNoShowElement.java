@@ -30,12 +30,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  */
 @JsxClasses({
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = true,
-            domClass = HtmlNoEmbed.class, browsers = @WebBrowser(value = IE, maxVersion = 8)),
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = true,
-            domClass = HtmlNoFrames.class, browsers = @WebBrowser(value = IE, maxVersion = 8)),
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = true,
-            domClass = HtmlNoScript.class, browsers = @WebBrowser(value = IE, maxVersion = 8))
+    @JsxClass(domClass = HtmlNoEmbed.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
+    @JsxClass(domClass = HtmlNoFrames.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
+    @JsxClass(domClass = HtmlNoScript.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
 })
 public class HTMLNoShowElement extends HTMLElement {
     // nothing so far
