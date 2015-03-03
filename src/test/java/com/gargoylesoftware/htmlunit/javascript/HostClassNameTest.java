@@ -3313,7 +3313,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function Selection() { [native code] }",
             FF31 = "function Selection() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented({ FF24, IE11 })
     public void selection() throws Exception {
         test("Selection");
     }

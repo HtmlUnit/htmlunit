@@ -57,7 +57,7 @@ public class Selection extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 31) })
     public Selection() {
     }
 
@@ -66,10 +66,11 @@ public class Selection extends SimpleScriptable {
      */
     @Override
     public Object getDefaultValue(final Class<?> hint) {
-        final boolean returnSelectionContent = getBrowserVersion().hasFeature(JS_SELECTION_CONTENT_IS_DEFAULT_VALUE);
+        final boolean returnSelectionContent =
+                getPrototype() != null && getBrowserVersion().hasFeature(JS_SELECTION_CONTENT_IS_DEFAULT_VALUE);
         if (returnSelectionContent && (String.class.equals(hint) || hint == null)) {
             final StringBuilder sb = new StringBuilder();
-            for (Range r : getRanges()) {
+            for (final Range r : getRanges()) {
                 sb.append(r.toString());
             }
             return sb.toString();

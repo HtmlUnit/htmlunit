@@ -3247,7 +3247,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object Selection]",
             CHROME = "function Selection() { [native code] }",
             FF31 = "function Selection() {\n    [native code]\n}")
-    @NotYetImplemented({ FF24, IE11 })
     public void selection() throws Exception {
         test("Selection");
     }
