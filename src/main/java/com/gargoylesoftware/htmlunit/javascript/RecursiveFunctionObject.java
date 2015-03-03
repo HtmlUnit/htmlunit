@@ -109,14 +109,15 @@ public class RecursiveFunctionObject extends FunctionObject {
      */
     @Override
     public Object getDefaultValue(final Class<?> typeHint) {
-        if ("HTMLImageElement".equals(getFunctionName()) && getBrowserVersion().hasFeature(JS_IMAGE_OBJECT)) {
-            return "[object " + getFunctionName() + ']';
+        final String functionName = getFunctionName();
+        if ("HTMLImageElement".equals(functionName) && getBrowserVersion().hasFeature(JS_IMAGE_OBJECT)) {
+            return "[object " + functionName + ']';
         }
-        if ("XSLTProcessor".equals(getFunctionName()) && getBrowserVersion().hasFeature(JS_XSLTPROCESSOR_OBJECT)) {
-            return "[object " + getFunctionName() + ']';
+        if ("XSLTProcessor".equals(functionName) && getBrowserVersion().hasFeature(JS_XSLTPROCESSOR_OBJECT)) {
+            return "[object " + functionName + ']';
         }
-        if ("XMLHttpRequest".equals(getFunctionName()) && getBrowserVersion().hasFeature(JS_XMLHTTPREQUEST_OBJECT)) {
-            return "[object " + getFunctionName() + ']';
+        if ("XMLHttpRequest".equals(functionName) && getBrowserVersion().hasFeature(JS_XMLHTTPREQUEST_OBJECT)) {
+            return "[object " + functionName + ']';
         }
         return super.getDefaultValue(typeHint);
     }
@@ -126,10 +127,11 @@ public class RecursiveFunctionObject extends FunctionObject {
      */
     @Override
     public String getTypeOf() {
-        if ("HTMLImageElement".equals(getFunctionName()) && getBrowserVersion().hasFeature(JS_IMAGE_OBJECT)) {
+        final String functionName = getFunctionName();
+        if ("HTMLImageElement".equals(functionName) && getBrowserVersion().hasFeature(JS_IMAGE_OBJECT)) {
             return "object";
         }
-        if ("XMLHttpRequest".equals(getFunctionName()) && getBrowserVersion().hasFeature(JS_XMLHTTPREQUEST_OBJECT)) {
+        if ("XMLHttpRequest".equals(functionName) && getBrowserVersion().hasFeature(JS_XMLHTTPREQUEST_OBJECT)) {
             return "object";
         }
         return super.getTypeOf();
