@@ -1196,6 +1196,16 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8) })
     JS_IMAGE_HTML_IMAGE_ELEMENT,
 
+    /** If <code>alert(Image)</code> returns an object, not function. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    JS_IMAGE_OBJECT,
+
+    /**
+     * Is the prototype of {@link Image} the same as {@link HTMLImageElement}.
+     */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
+    JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE,
+
     /**
      * Getting the width and height of an image tag without a source returns 18x20;
      * for invalid values returns 1.

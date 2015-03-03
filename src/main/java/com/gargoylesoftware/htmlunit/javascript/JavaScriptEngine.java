@@ -22,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DONT_ENUM_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ECMA5_FUNCTIONS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_BIND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_TOSOURCE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_Iterator;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ACTIVEXOBJECT_HIDDEN;
@@ -48,6 +49,7 @@ import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.UniqueTag;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -293,7 +295,11 @@ public class JavaScriptEngine {
         for (final ClassConfiguration config : jsConfig_.getAll()) {
             final Member jsConstructor = config.getJsConstructor();
             final String jsClassName = config.getClassName();
-            final ScriptableObject prototype = prototypesPerJSName_.get(jsClassName);
+            ScriptableObject prototype = prototypesPerJSName_.get(jsClassName);
+            if ("Image".equals(config.getHostClass().getSimpleName())
+                    && browserVersion.hasFeature(JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE)) {
+                prototype = prototypesPerJSName_.get("HTMLImageElement");
+            }
             if (prototype != null && config.isJsObject()) {
                 if (jsConstructor != null) {
                     final FunctionObject functionObject;
@@ -303,7 +309,21 @@ public class JavaScriptEngine {
                     else {
                         functionObject = new RecursiveFunctionObject(jsClassName, jsConstructor, window);
                     }
-                    functionObject.addAsConstructor(window, prototype);
+                    if (!"Image".equals(config.getHostClass().getSimpleName())) {
+                        functionObject.addAsConstructor(window, prototype);
+                    }
+                    else {
+                        final boolean prototypeWasDefined
+                            = ScriptableObject.getProperty(window, prototype.getClassName()) != UniqueTag.NOT_FOUND;
+
+                        functionObject.addAsConstructor(window, prototype);
+
+                        ScriptableObject.defineProperty(window, "Image", functionObject, ScriptableObject.DONTENUM);
+                        // if necessary, delete the prototype, as it is a side effect of functionObject.addAsConstructor
+                        if (!prototypeWasDefined) {
+                            ScriptableObject.deleteProperty(window, prototype.getClassName());
+                        }
+                    }
                     configureConstants(config, functionObject);
                 }
                 else {

@@ -195,7 +195,6 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Image>HTMLImageElement: true",
             CHROME = "Image>HTMLImageElement: false")
-    @NotYetImplemented(CHROME)
     public void isParentOf_Image_HTMLImageElement() throws Exception {
         //although Image != HTMLImageElement, they seem to be synonyms!!!
         isParentOf("Image", "HTMLImageElement");
@@ -211,13 +210,13 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
         isParentOf("HTMLImageElement", "Image");
     }
 
-    private void isParentOf(final String object1, final String object2) throws Exception {
+    private void isParentOf(final String parent, final String child) throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert('" + object1 + ">" + object2 + ": ' + isParentOf(" + object1 + ", " + object2 + "));\n"
-            + "    } catch(e) { alert('" + object1 + ">" + object2 + ": exception'); }\n"
+            + "      alert('" + parent + ">" + child + ": ' + isParentOf(" + parent + ", " + child + "));\n"
+            + "    } catch(e) { alert('" + parent + ">" + child + ": exception'); }\n"
             + "  }\n"
 
             + "  /**\n"

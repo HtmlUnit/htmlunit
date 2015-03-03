@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_TOSTRING_ENUMERATED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_HTML_IMAGE_ELEMENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XMLHTTPREQUEST_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XSLTPROCESSOR_OBJECT;
 
@@ -108,6 +109,9 @@ public class RecursiveFunctionObject extends FunctionObject {
      */
     @Override
     public Object getDefaultValue(final Class<?> typeHint) {
+        if ("HTMLImageElement".equals(getFunctionName()) && getBrowserVersion().hasFeature(JS_IMAGE_OBJECT)) {
+            return "[object " + getFunctionName() + ']';
+        }
         if ("XSLTProcessor".equals(getFunctionName()) && getBrowserVersion().hasFeature(JS_XSLTPROCESSOR_OBJECT)) {
             return "[object " + getFunctionName() + ']';
         }
