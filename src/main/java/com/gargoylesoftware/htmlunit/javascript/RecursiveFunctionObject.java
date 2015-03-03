@@ -126,6 +126,9 @@ public class RecursiveFunctionObject extends FunctionObject {
      */
     @Override
     public String getTypeOf() {
+        if ("HTMLImageElement".equals(getFunctionName()) && getBrowserVersion().hasFeature(JS_IMAGE_OBJECT)) {
+            return "object";
+        }
         if ("XMLHttpRequest".equals(getFunctionName()) && getBrowserVersion().hasFeature(JS_XMLHTTPREQUEST_OBJECT)) {
             return "object";
         }
