@@ -811,6 +811,6 @@ public class Dojo102Test extends WebServerTestCase {
     @Override
     public void tearDown() throws Exception {
         super.tearDown();
-        client_.closeAllWindows();
+        client_.close();
     }
 }

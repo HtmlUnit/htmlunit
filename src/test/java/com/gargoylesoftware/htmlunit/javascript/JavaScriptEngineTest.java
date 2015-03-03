@@ -1318,7 +1318,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             }
         });
         assertEquals(1, getPostponedActions(engine).get().size());
-        webClient.closeAllWindows();
+        webClient.close();
 
         assertNull(getPostponedActions(engine).get());
     }
@@ -1361,7 +1361,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         Thread.sleep(100);
         assertEquals(getExpectedAlerts(), collectedAlerts);
 
-        webClient.closeAllWindows();
+        webClient.close();
         Thread.sleep(400);
         assertEquals(0, getJavaScriptThreads().size());
     }
@@ -1385,7 +1385,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         loadPage(html);
 
-        getWebClient().closeAllWindows();
+        getWebClient().close();
         assertEquals(0, getJavaScriptThreads().size());
     }
 
@@ -1402,12 +1402,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             }
         };
 
-        final WebClient client = new WebClient(browser);
-        try {
+        try (final WebClient client = new WebClient(browser)) {
             client.openWindow(WebClient.URL_ABOUT_BLANK, "TestWindow");
-        }
-        finally {
-            client.closeAllWindows();
         }
     }
 }

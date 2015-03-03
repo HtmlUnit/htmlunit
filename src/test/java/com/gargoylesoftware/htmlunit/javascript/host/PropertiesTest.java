@@ -145,14 +145,10 @@ public class PropertiesTest extends SimpleWebTestCase {
 
     private static List<String> getSimulatedProperties(final BrowserVersion browserVersion) throws Exception {
         final URL url = PropertiesTest.class.getClassLoader().getResource("objects/properties.html");
-        final WebClient webClient = new WebClient(browserVersion);
-        try {
+        try (final WebClient webClient = new WebClient(browserVersion)) {
             final HtmlPage page = webClient.getPage(url);
             final HtmlTextArea textarea = page.getHtmlElementById("myTextarea");
             return Arrays.asList(textarea.getText().split("\r\n|\n"));
-        }
-        finally {
-            webClient.closeAllWindows();
         }
     }
 

@@ -128,7 +128,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Ronald Brill
  * @author Frank Danek
  */
-public class WebClient implements Serializable {
+public class WebClient implements Serializable, AutoCloseable {
 
     /** Logging support. */
     private static final Log LOG = LogFactory.getLog(WebClient.class);
@@ -1754,8 +1754,21 @@ public class WebClient implements Serializable {
 
     /**
      * Closes all opened windows, stopping all background JavaScript processing.
+     * @deprecated as of 2.16, please use {@link #close()}, or {@code try}-with-resources statement
      */
+    @Deprecated
+    // Do not remove before March 2016
     public void closeAllWindows() {
+        close();
+    }
+
+    /**
+     * Closes all opened windows, stopping all background JavaScript processing.
+     *
+     * {@inheritDoc}
+     */
+    @Override
+    public void close() {
         // NB: this implementation is too simple as a new TopLevelWindow may be opened by
         // some JS script while we are closing the others
         final List<TopLevelWindow> topWindows = new ArrayList<>(topLevelWindows_);

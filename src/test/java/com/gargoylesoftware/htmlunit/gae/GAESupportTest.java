@@ -43,17 +43,13 @@ public class GAESupportTest {
 
     /**
      * Simulates GAE white list restrictions. Fails as of HtmlUnit-2.7 due to
-     * usage of java.net.URLStreamHandler (and problably other classes).
+     * usage of java.net.URLStreamHandler (and probably other classes).
      * @throws Exception if the test fails
      */
     @Test
     public void instantiation() throws Exception {
-        final WebClient client = new WebClient();
-        try {
+        try (final WebClient client = new WebClient()) {
             assertEquals("http://gaeHack_about/blank", WebClient.URL_ABOUT_BLANK.toString());
-        }
-        finally {
-            client.closeAllWindows();
         }
     }
 }

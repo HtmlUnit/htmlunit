@@ -86,13 +86,13 @@ public class HtmlPage4Test extends WebServerTestCase {
             final Writer writer = resp.getWriter();
             resp.setContentType("text/html");
             final String response = "<html>\n"
-                + "<body>\n"
-                + "  <form action='two.html' method='post'>\n"
-                + "  <input type='hidden' name='some_name' value='some_value'>\n"
-                + "  <input id='myButton' type='submit'>\n"
-                + "  </form>\n"
-                + "</body>\n"
-                + "</html>";
+                    + "<body>\n"
+                    + "  <form action='two.html' method='post'>\n"
+                    + "  <input type='hidden' name='some_name' value='some_value'>\n"
+                    + "  <input id='myButton' type='submit'>\n"
+                    + "  </form>\n"
+                    + "</body>\n"
+                    + "</html>";
             writer.write(response);
             writer.close();
         }
@@ -122,11 +122,11 @@ public class HtmlPage4Test extends WebServerTestCase {
     @Alerts("hello")
     public void bigJavaScript() throws Exception {
         final StringBuilder html
-            = new StringBuilder("<html><head>\n"
-                    + "<script src='two.js'></script>\n"
-                    + "<link rel='stylesheet' type='text/css' href='three.css'/>\n"
-                    + "</head>\n"
-                    + "<body onload='test()'></body></html>");
+        = new StringBuilder("<html><head>\n"
+                + "<script src='two.js'></script>\n"
+                + "<link rel='stylesheet' type='text/css' href='three.css'/>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>");
 
         final StringBuilder javaScript = new StringBuilder("function test() {\n"
                 + "alert('hello');\n"
@@ -152,15 +152,15 @@ public class HtmlPage4Test extends WebServerTestCase {
         map.put("/two.js", BigJavaScriptServlet2.class);
         map.put("/three.css", BigJavaScriptServlet3.class);
         startWebServer(".", null, map);
-        final WebClient client = getWebClient();
-        final CollectingAlertHandler alertHandler = new CollectingAlertHandler();
-        client.setAlertHandler(alertHandler);
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/one.html");
-        ((HTMLBodyElement) page.getBody().getScriptObject()).getCurrentStyle();
+        try (final WebClient client = getWebClient()) {
+            final CollectingAlertHandler alertHandler = new CollectingAlertHandler();
+            client.setAlertHandler(alertHandler);
+            final HtmlPage page = client.getPage("http://localhost:" + PORT + "/one.html");
+            ((HTMLBodyElement) page.getBody().getScriptObject()).getCurrentStyle();
 
-        assertEquals(getExpectedAlerts(), alertHandler.getCollectedAlerts());
-        assertEquals(initialTempFiles + 1, getTempFiles());
-        client.closeAllWindows();
+            assertEquals(getExpectedAlerts(), alertHandler.getCollectedAlerts());
+            assertEquals(initialTempFiles + 1, getTempFiles());
+        }
         assertEquals(initialTempFiles, getTempFiles());
     }
 

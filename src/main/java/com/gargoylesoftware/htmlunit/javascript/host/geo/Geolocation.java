@@ -149,8 +149,7 @@ public class Geolocation extends SimpleScriptable {
                 LOG.info("Invoking URL: " + url);
             }
 
-            final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_24);
-            try {
+            try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_24)) {
                 final Page page = webClient.getPage(url);
                 final String content = page.getWebResponse().getContentAsString();
                 if (LOG.isDebugEnabled()) {
@@ -172,9 +171,6 @@ public class Geolocation extends SimpleScriptable {
             }
             catch (final Exception e) {
                 LOG.error("", e);
-            }
-            finally {
-                webClient.closeAllWindows();
             }
         }
         else {

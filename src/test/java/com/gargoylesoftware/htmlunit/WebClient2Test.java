@@ -160,15 +160,16 @@ public class WebClient2Test extends SimpleWebTestCase {
     @Test
     public void serialization_pageLoad() throws Exception {
         final String page1Content = "<html><body>hello 1</body></html>";
-        final WebClient client = getWebClient();
-        final HtmlPage page1 = loadPage(client, page1Content, null, URL_FIRST);
-        assertEquals("hello 1", page1.asText());
+        try (final WebClient client = getWebClient()) {
+            final HtmlPage page1 = loadPage(client, page1Content, null, URL_FIRST);
+            assertEquals("hello 1", page1.asText());
 
-        final String page2Content = "<html><body>hello 2</body></html>";
-        final WebClient copy = clone(client);
-        final HtmlPage page2 = loadPage(copy, page2Content, null, URL_SECOND);
-        assertEquals("hello 2", page2.asText());
-        copy.closeAllWindows();
+            final String page2Content = "<html><body>hello 2</body></html>";
+            try (final WebClient copy = clone(client)) {
+                final HtmlPage page2 = loadPage(copy, page2Content, null, URL_SECOND);
+                assertEquals("hello 2", page2.asText());
+            }
+        }
     }
 
     /**
@@ -224,7 +225,7 @@ public class WebClient2Test extends SimpleWebTestCase {
         assertEquals(1, page.getEnclosingWindow().getJobManager().getJobCount());
 
         final byte[] bytes = SerializationUtils.serialize(page);
-        page.getWebClient().closeAllWindows();
+        page.getWebClient().close();
 
         // deserialize page and verify that 1 background job exists
         final HtmlPage clonedPage = (HtmlPage) SerializationUtils.deserialize(bytes);

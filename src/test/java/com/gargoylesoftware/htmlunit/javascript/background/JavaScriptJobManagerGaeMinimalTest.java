@@ -73,7 +73,7 @@ public class JavaScriptJobManagerGaeMinimalTest {
             eventLoop_.shutdown();
         }
         if (client_ != null) {
-            client_.closeAllWindows();
+            client_.close();
         }
     }
 

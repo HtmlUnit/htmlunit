@@ -70,7 +70,7 @@ public class JavaScriptJobManagerMinimalTest {
     public void after() {
         eventLoop_.shutdown();
         if (client_ != null) {
-            client_.closeAllWindows();
+            client_.close();
         }
     }
 

@@ -110,14 +110,10 @@ public class ObjectsTest extends SimpleWebTestCase {
 
     private static List<String> getSimulatedObjects(final BrowserVersion browserVersion) throws Exception {
         final URL url = ObjectsTest.class.getClassLoader().getResource("objects/objects.html");
-        final WebClient webClient = new WebClient(browserVersion);
-        try {
+        try (final WebClient webClient = new WebClient(browserVersion)) {
             final HtmlPage page = webClient.getPage(url);
             final HtmlTextArea textarea = page.getHtmlElementById("myTextarea");
             return Arrays.asList(textarea.getText().split("\r\n|\n"));
-        }
-        finally {
-            webClient.closeAllWindows();
         }
     }
 

@@ -50,33 +50,33 @@ public class WebClient4Test extends WebServerTestCase {
     public void serialization_afterUse() throws Exception {
         startWebServer("./");
 
-        final WebClient client = getWebClient();
-        TextPage textPage = client.getPage("http://localhost:" + PORT + "/LICENSE.txt");
-        assertTrue(textPage.getContent().contains("Gargoyle Software"));
+        try (final WebClient client = getWebClient()) {
+            TextPage textPage = client.getPage("http://localhost:" + PORT + "/LICENSE.txt");
+            assertTrue(textPage.getContent().contains("Gargoyle Software"));
 
-        final WebClient copy = clone(client);
-        assertNotNull(copy);
+            try (final WebClient copy = clone(client)) {
+                assertNotNull(copy);
 
-        final WebWindow window = copy.getCurrentWindow();
-        assertNotNull(window);
+                final WebWindow window = copy.getCurrentWindow();
+                assertNotNull(window);
 
-        final WebWindow topWindow = window.getTopWindow();
-        assertNotNull(topWindow);
+                final WebWindow topWindow = window.getTopWindow();
+                assertNotNull(topWindow);
 
-        final Page page = topWindow.getEnclosedPage();
-        assertNotNull(page);
+                final Page page = topWindow.getEnclosedPage();
+                assertNotNull(page);
 
-        final WebResponse response = page.getWebResponse();
-        assertNotNull(response);
+                final WebResponse response = page.getWebResponse();
+                assertNotNull(response);
 
-        final String content = response.getContentAsString();
-        assertNotNull(content);
-        assertTrue(content.contains("Gargoyle Software"));
+                final String content = response.getContentAsString();
+                assertNotNull(content);
+                assertTrue(content.contains("Gargoyle Software"));
 
-        textPage = copy.getPage("http://localhost:" + PORT + "/LICENSE.txt");
-        assertTrue(textPage.getContent().contains("Gargoyle Software"));
-
-        copy.closeAllWindows();
+                textPage = copy.getPage("http://localhost:" + PORT + "/LICENSE.txt");
+                assertTrue(textPage.getContent().contains("Gargoyle Software"));
+            }
+        }
     }
 
     /**
@@ -164,7 +164,7 @@ public class WebClient4Test extends WebServerTestCase {
         final Page page = getWebClient().getPage(getDefaultUrl());
         final long loadTime = page.getWebResponse().getLoadTime();
         assertTrue("Load time: " + loadTime + ", last request time: " + ServeBodySlowlyServlet.LastRequestTime_,
-            loadTime >= ServeBodySlowlyServlet.LastRequestTime_);
+                loadTime >= ServeBodySlowlyServlet.LastRequestTime_);
     }
 
     /**
@@ -256,8 +256,8 @@ public class WebClient4Test extends WebServerTestCase {
             res.setContentType("text/html");
             final Writer writer = res.getWriter();
             writer.write("<html><body><form action='test2'>"
-                + "<input id='submit' type='submit' value='submit'></input>"
-                + "</form></body></html>");
+                    + "<input id='submit' type='submit' value='submit'></input>"
+                    + "</form></body></html>");
             writer.close();
         }
     }

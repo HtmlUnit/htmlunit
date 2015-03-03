@@ -177,8 +177,9 @@ INFO: Redirect requested but followRedirects is disabled
 			<answer>
 				<p>
 					Make sure (a) that you are using the latest version of HtmlUnit, and
-					(b) that you are calling WebClient.closeAllWindows() when you are
-					finished with your WebClient instance.
+					(b) that you are calling WebClient.close()
+					(or use <a href="http://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html">try-with-resources</a>)
+					when you are finished with your WebClient instance.
 				</p>
 			</answer>
 		</faq>

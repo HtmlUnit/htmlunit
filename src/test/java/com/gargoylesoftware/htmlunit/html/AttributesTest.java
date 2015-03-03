@@ -227,8 +227,7 @@ public class AttributesTest extends TestCase {
      */
     @Override
     protected void runTest() throws Exception {
-        final WebClient webClient = new WebClient(BrowserVersion.INTERNET_EXPLORER_11);
-        try {
+        try (final WebClient webClient = new WebClient(BrowserVersion.INTERNET_EXPLORER_11)) {
             final MockWebConnection connection = new MockWebConnection();
             connection.setDefaultResponse("<html><head><title>foo</title></head><body></body></html>");
             webClient.setWebConnection(connection);
@@ -242,9 +241,6 @@ public class AttributesTest extends TestCase {
             final Object noObjects[] = new Object[0];
             final Object result = method_.invoke(objectToTest, noObjects);
             assertSame(value, result);
-        }
-        finally {
-            webClient.closeAllWindows();
         }
     }
 

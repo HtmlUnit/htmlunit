@@ -102,8 +102,7 @@ public class GAELoadPageTest {
             + "<content2>sdgxsdgx2</content2>\n"
             + "</xml2>";
 
-        final WebClient client = new WebClient();
-        try {
+        try (final WebClient client = new WebClient()) {
             final List<String> collectedAlerts = new ArrayList<>();
             client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
             final MockWebConnection conn = new MockWebConnection();
@@ -123,9 +122,6 @@ public class GAELoadPageTest {
             assertEquals(Arrays.asList(alerts).toString(), collectedAlerts.toString());
             assertEquals(1, executedJobs);
         }
-        finally {
-            client.closeAllWindows();
-        }
     }
 
     /**
@@ -144,8 +140,7 @@ public class GAELoadPageTest {
             + "    </script>\n"
             + "  </body>\n"
             + "</html>";
-        final WebClient client = new WebClient();
-        try {
+        try (final WebClient client = new WebClient()) {
             final List<String> collectedAlerts = new ArrayList<>();
             client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
             final MockWebConnection conn = new MockWebConnection();
@@ -175,9 +170,6 @@ public class GAELoadPageTest {
             assertEquals(count , collectedAlerts.size());
             assertEquals(count, executedJobs);
         }
-        finally {
-            client.closeAllWindows();
-        }
     }
 
     /**
@@ -196,8 +188,7 @@ public class GAELoadPageTest {
             + "    </script>\n"
             + "  </body>\n"
             + "</html>";
-        final WebClient client = new WebClient();
-        try {
+        try (final WebClient client = new WebClient()) {
             final List<String> collectedAlerts = new ArrayList<>();
             client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
             final MockWebConnection conn = new MockWebConnection();
@@ -221,9 +212,6 @@ public class GAELoadPageTest {
             assertEquals(Arrays.asList("hello", "hello again"), collectedAlerts);
             assertEquals(1, executedJobs);
         }
-        finally {
-            client.closeAllWindows();
-        }
     }
 
     /**
@@ -238,8 +226,7 @@ public class GAELoadPageTest {
 
         final String frame = "<html><body><script>alert('in frame');</script></body></html>";
 
-        final WebClient client = new WebClient();
-        try {
+        try (final WebClient client = new WebClient()) {
             final List<String> collectedAlerts = new ArrayList<>();
             client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
@@ -250,9 +237,6 @@ public class GAELoadPageTest {
             client.getPage(FIRST_URL);
 
             assertEquals(Arrays.asList("in frame"), collectedAlerts);
-        }
-        finally {
-            client.closeAllWindows();
         }
     }
 

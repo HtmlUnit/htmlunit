@@ -107,16 +107,12 @@ public class WebClient5Test extends WebTestCase {
      */
     @Test
     public void addRequestHeader_Cookie() throws Exception {
-        final WebClient wc = new WebClient();
-        try {
+        try (final WebClient wc = new WebClient()) {
             wc.addRequestHeader("Cookie", "some_value");
             fail("Should have thrown an exception ");
         }
         catch (final IllegalArgumentException e) {
             //success
-        }
-        finally {
-            wc.closeAllWindows();
         }
     }
 
@@ -127,21 +123,16 @@ public class WebClient5Test extends WebTestCase {
     @Test
     public void testGetPageWithStringArg() throws Exception {
         final URL[] calledUrls = {null};
-        final WebClient wc = new WebClient() {
+        try (final WebClient wc = new WebClient() {
             @Override
             @SuppressWarnings("unchecked")
             public Page getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
                 calledUrls[0] = url;
                 return null;
             }
-        };
-
-        try {
+        }) {
             wc.getPage(getDefaultUrl().toExternalForm());
             assertEquals(getDefaultUrl(), calledUrls[0]);
-        }
-        finally {
-            wc.closeAllWindows();
-        }
+        };
     }
 }

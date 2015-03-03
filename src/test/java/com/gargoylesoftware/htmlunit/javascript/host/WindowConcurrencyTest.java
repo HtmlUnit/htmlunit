@@ -90,7 +90,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
      */
     @After
     public void after() {
-        client_.closeAllWindows();
+        client_.close();
     }
 
     /**
@@ -375,7 +375,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void verifyCloseAllWindowsStopsJavaScript() throws Exception {
+    public void verifyCloseStopsJavaScript() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function f() {\n"
             + "    alert('Oh no!');\n"
@@ -394,7 +394,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
         client_.setWebConnection(webConnection);
 
         client_.getPage(URL_FIRST);
-        client_.closeAllWindows();
+        client_.close();
         client_.waitForBackgroundJavaScript(5000);
         assertEquals(0, collectedAlerts.size());
     }
@@ -489,8 +489,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
             + "setInterval(forceStyleComputationInParent, 10);\n"
             + "</script></head></body></html>";
 
-        final WebClient client = new WebClient(BrowserVersion.FIREFOX_31);
-        try {
+        try (final WebClient client = new WebClient(BrowserVersion.FIREFOX_31)) {
             final MockWebConnection webConnection = new MockWebConnection();
             webConnection.setResponse(URL_FIRST, html);
             webConnection.setDefaultResponse(html2);
@@ -514,9 +513,6 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
                 }
             };
             page1.getBody().appendChild(elt);
-        }
-        finally {
-            client.closeAllWindows();
         }
     }
 

@@ -64,7 +64,7 @@ public class DebugFrameImplTest extends SimpleWebTestCase {
     @After
     public void tearDown() throws Exception {
         client_.getJavaScriptEngine().getContextFactory().setDebugger(null);
-        client_.closeAllWindows();
+        client_.close();
         loggerDebugFrameImpl_.setLevel(originalLogLevel_);
     }
 

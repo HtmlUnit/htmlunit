@@ -779,7 +779,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     public void releaseResources() {
         super.releaseResources();
         if (webClient_ != null) {
-            webClient_.closeAllWindows();
+            webClient_.close();
             webClient_.getCookieManager().clearCookies();
         }
         webClient_ = null;

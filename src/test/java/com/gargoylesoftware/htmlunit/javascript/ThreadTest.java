@@ -135,8 +135,7 @@ public class ThreadTest extends TestCase {
 
             final List<String> collectedAlerts = new ArrayList<>();
 
-            final WebClient webClient = new WebClient();
-            try {
+            try (final WebClient webClient = new WebClient()) {
                 webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
                 final MockWebConnection connection = new MockWebConnection();
                 connection.setDefaultResponse(html);
@@ -150,9 +149,6 @@ public class ThreadTest extends TestCase {
                              page.getFocusedElement());
                 final List<String> expectedAlerts = Collections.singletonList("past focus");
                 assertEquals(expectedAlerts, collectedAlerts);
-            }
-            finally {
-                webClient.closeAllWindows();
             }
         }
     }
