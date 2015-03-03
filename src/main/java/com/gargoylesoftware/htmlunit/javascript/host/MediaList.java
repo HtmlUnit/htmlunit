@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -44,7 +45,7 @@ public class MediaList extends SimpleScriptable {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 31) })
     public MediaList() {
         wrappedList_ = null;
     }
@@ -94,11 +95,14 @@ public class MediaList extends SimpleScriptable {
 
     @Override
     public Object getDefaultValue(final Class<?> hint) {
-        if (getBrowserVersion().hasFeature(JS_MEDIA_LIST_EMPTY_STRING)) {
-            return "";
-        }
-        if (getBrowserVersion().hasFeature(JS_MEDIA_LIST_ALL)) {
-            return "all";
+        if (getPrototype() != null) {
+            final BrowserVersion browserVersion = getBrowserVersion();
+            if (browserVersion.hasFeature(JS_MEDIA_LIST_EMPTY_STRING)) {
+                return "";
+            }
+            if (browserVersion.hasFeature(JS_MEDIA_LIST_ALL)) {
+                return "all";
+            }
         }
         return super.getDefaultValue(hint);
     }

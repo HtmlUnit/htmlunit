@@ -2035,7 +2035,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE8 = "undefined")
-    @NotYetImplemented(FF24)
     public void mediaList() throws Exception {
         test("MediaList");
     }

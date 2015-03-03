@@ -2067,7 +2067,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function MediaList() { [native code] }",
             FF31 = "function MediaList() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented({ FF24, IE11 })
     public void mediaList() throws Exception {
         test("MediaList");
     }
