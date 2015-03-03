@@ -121,8 +121,7 @@ public class HtmlPage4Test extends WebServerTestCase {
     @Test
     @Alerts("hello")
     public void bigJavaScript() throws Exception {
-        final StringBuilder html
-        = new StringBuilder("<html><head>\n"
+        final StringBuilder html = new StringBuilder("<html><head>\n"
                 + "<script src='two.js'></script>\n"
                 + "<link rel='stylesheet' type='text/css' href='three.css'/>\n"
                 + "</head>\n"

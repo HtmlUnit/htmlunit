@@ -87,8 +87,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void testCredentialProvider_NoCredentials() throws Exception {
-        final String htmlContent
-        = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
                 + "No access</body></html>";
         final WebClient client = getWebClient();
         client.getOptions().setPrintContentOnFailingStatusCode(false);
@@ -113,8 +112,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void testHtmlWindowEvents_changed() throws Exception {
-        final String htmlContent
-        = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
                 + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>\n"
                 + "</body></html>";
         final WebClient client = getWebClient();
@@ -129,8 +127,7 @@ public class WebClientTest extends SimpleWebTestCase {
         final HtmlAnchor anchor = firstPage.getHtmlElementById("a2");
 
         final List<WebWindowEvent> firstExpectedEvents = Arrays.asList(new WebWindowEvent[] {
-                new WebWindowEvent(
-                        client.getCurrentWindow(), WebWindowEvent.CHANGE, null, firstPage),
+            new WebWindowEvent(client.getCurrentWindow(), WebWindowEvent.CHANGE, null, firstPage)
         });
         assertEquals(firstExpectedEvents, eventCatcher.getEvents());
 
@@ -138,8 +135,7 @@ public class WebClientTest extends SimpleWebTestCase {
         final HtmlPage secondPage = anchor.click();
 
         final List<WebWindowEvent> secondExpectedEvents = Arrays.asList(new WebWindowEvent[] {
-                new WebWindowEvent(
-                        client.getCurrentWindow(), WebWindowEvent.CHANGE, firstPage, secondPage),
+            new WebWindowEvent(client.getCurrentWindow(), WebWindowEvent.CHANGE, firstPage, secondPage)
         });
         assertEquals(secondExpectedEvents, eventCatcher.getEvents());
     }
@@ -151,8 +147,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void testHtmlWindowEvents_opened() throws Exception {
-        final String page1Content
-        = "<html><head><title>foo</title>\n"
+        final String page1Content = "<html><head><title>foo</title>\n"
                 + "<script>window.open('" + URL_SECOND + "', 'myNewWindow')</script>\n"
                 + "</head><body>\n"
                 + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>\n"
@@ -174,12 +169,12 @@ public class WebClientTest extends SimpleWebTestCase {
         final WebWindow firstWindow = client.getCurrentWindow();
         final WebWindow secondWindow = client.getWebWindowByName("myNewWindow");
         final List<WebWindowEvent> expectedEvents = Arrays.asList(new WebWindowEvent[] {
-                new WebWindowEvent(
-                        secondWindow, WebWindowEvent.OPEN, null, null),
-                        new WebWindowEvent(
-                                secondWindow, WebWindowEvent.CHANGE, null, secondWindow.getEnclosedPage()),
-                                new WebWindowEvent(
-                                        firstWindow, WebWindowEvent.CHANGE, null, firstPage),
+            new WebWindowEvent(
+                secondWindow, WebWindowEvent.OPEN, null, null),
+            new WebWindowEvent(
+                secondWindow, WebWindowEvent.CHANGE, null, secondWindow.getEnclosedPage()),
+            new WebWindowEvent(
+                firstWindow, WebWindowEvent.CHANGE, null, firstPage),
         });
         assertEquals(expectedEvents, eventCatcher.getEvents());
     }
@@ -191,8 +186,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void testHtmlWindowEvents_closedFromFrame() throws Exception {
-        final String firstContent
-        = "<html><head><title>first</title></head><body>\n"
+        final String firstContent = "<html><head><title>first</title></head><body>\n"
                 + "<iframe src='" + URL_THIRD + "' id='frame1'></iframe>\n"
                 + "<a href='" + URL_SECOND + "' id='a2'>link to foo2</a>\n"
                 + "</body></html>";
@@ -223,10 +217,10 @@ public class WebClientTest extends SimpleWebTestCase {
 
         final WebWindow firstWindow = client.getCurrentWindow();
         final List<WebWindowEvent> expectedEvents = Arrays.asList(new WebWindowEvent[] {
-                new WebWindowEvent(
-                        frame.getEnclosedWindow(), WebWindowEvent.CLOSE, thirdPage, null),
-                        new WebWindowEvent(
-                                firstWindow, WebWindowEvent.CHANGE, firstPage, secondPage),
+            new WebWindowEvent(
+                frame.getEnclosedWindow(), WebWindowEvent.CLOSE, thirdPage, null),
+            new WebWindowEvent(
+                firstWindow, WebWindowEvent.CHANGE, firstPage, secondPage),
         });
         assertEquals(expectedEvents.get(0), eventCatcher.getEvents().get(0));
         assertEquals(expectedEvents, eventCatcher.getEvents());
@@ -421,7 +415,7 @@ public class WebClientTest extends SimpleWebTestCase {
             final int statusCode,
             final HttpMethod initialRequestMethod,
             final HttpMethod expectedRedirectedRequestMethod)
-                    throws Exception {
+        throws Exception {
 
         doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod,
                 URL_SECOND.toExternalForm());
@@ -442,7 +436,7 @@ public class WebClientTest extends SimpleWebTestCase {
             final HttpMethod initialRequestMethod,
             final HttpMethod expectedRedirectedRequestMethod,
             final String newLocation)
-                    throws Exception {
+        throws Exception {
 
         doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod, newLocation, false);
         doTestRedirection(statusCode, initialRequestMethod, expectedRedirectedRequestMethod, newLocation, true);
@@ -547,7 +541,7 @@ public class WebClientTest extends SimpleWebTestCase {
             final HttpMethod expectedRedirectedRequestMethod,
             final String newLocation,
             final boolean useProxy)
-                    throws Exception {
+        throws Exception {
 
         final String firstContent = "<html><head><title>First</title></head><body></body></html>";
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
@@ -636,8 +630,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void testSetPageCreator() throws Exception {
-        final String page1Content
-        = "<html><head><title>foo</title>\n"
+        final String page1Content = "<html><head><title>foo</title>\n"
                 + "</head><body>\n"
                 + "<a href='http://www.foo2.com' id='a2'>link to foo2</a>\n"
                 + "</body></html>";
@@ -690,8 +683,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void testLoadPage_PostWithParameters() throws Exception {
-        final String htmlContent
-        = "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent = "<html><head><title>foo</title></head><body>\n"
                 + "</body></html>";
         final WebClient client = getWebClient();
 
@@ -712,8 +704,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void testLoadPage_SlashesInQueryString() throws Exception {
-        final String htmlContent
-        = "<html><head><title>foo</title></head>\n"
+        final String htmlContent = "<html><head><title>foo</title></head>\n"
                 + "<body><a href='foo.html?id=UYIUYTY//YTYUY..F'>to page 2</a>\n"
                 + "</body></html>";
 
@@ -996,8 +987,8 @@ public class WebClientTest extends SimpleWebTestCase {
             final WebClient webClient, final String[] tabIndexValues) throws Exception {
 
         final StringBuilder buffer = new StringBuilder();
-        buffer.append(
-                "<html><head><title>First</title></head><body><form name='form1' method='post' onsubmit='return false;'>");
+        buffer.append("<html><head><title>First</title></head><body>")
+                .append("<form name='form1' method='post' onsubmit='return false;'>");
 
         for (int i = 0; i < tabIndexValues.length; i++) {
             buffer.append("<input type='submit' name='submit");
@@ -1254,8 +1245,7 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void testBadCharset() throws Exception {
-        final String page1Content
-        = "<html><head><title>foo</title>\n"
+        final String page1Content = "<html><head><title>foo</title>\n"
                 + "</head><body></body></html>";
         final WebClient client = getWebClient();
 

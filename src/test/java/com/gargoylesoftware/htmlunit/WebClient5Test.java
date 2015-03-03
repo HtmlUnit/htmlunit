@@ -133,6 +133,6 @@ public class WebClient5Test extends WebTestCase {
         }) {
             wc.getPage(getDefaultUrl().toExternalForm());
             assertEquals(getDefaultUrl(), calledUrls[0]);
-        };
+        }
     }
 }
