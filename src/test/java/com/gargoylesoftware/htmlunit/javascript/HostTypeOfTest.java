@@ -2119,7 +2119,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF = "undefined",
             IE8 = "undefined")
-    @NotYetImplemented(FF)
     public void namedNodeMap() throws Exception {
         test("NamedNodeMap");
     }
@@ -2156,7 +2155,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE8 = "undefined")
-    @NotYetImplemented(FF24)
     public void navigator() throws Exception {
         test("Navigator");
     }
@@ -2213,7 +2211,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE8 = "undefined")
-    @NotYetImplemented({ FF24, IE11 })
     public void plugin() throws Exception {
         test("Plugin");
     }
@@ -2228,7 +2225,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE8 = "undefined")
-    @NotYetImplemented(FF24)
     public void pluginArray() throws Exception {
         test("PluginArray");
     }

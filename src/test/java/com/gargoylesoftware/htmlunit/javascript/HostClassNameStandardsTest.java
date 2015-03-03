@@ -2089,7 +2089,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object NamedNodeMap]",
             CHROME = "function NamedNodeMap() { [native code] }",
             FF = "exception")
-    @NotYetImplemented(FF)
     public void namedNodeMap() throws Exception {
         test("NamedNodeMap");
     }
@@ -2125,7 +2124,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object Navigator]",
             CHROME = "function Navigator() { [native code] }",
             FF31 = "function Navigator() {\n    [native code]\n}")
-    @NotYetImplemented(FF24)
     public void navigator() throws Exception {
         test("Navigator");
     }
@@ -2181,7 +2179,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function Plugin() { [native code] }",
             FF31 = "function Plugin() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented({ FF24, IE11 })
     public void plugin() throws Exception {
         test("Plugin");
     }
@@ -2196,7 +2193,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function PluginArray() { [native code] }",
             FF31 = "function PluginArray() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented(FF24)
     public void pluginArray() throws Exception {
         test("PluginArray");
     }

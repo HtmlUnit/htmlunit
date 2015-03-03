@@ -2151,7 +2151,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function NamedNodeMap() { [native code] }",
             FF = "exception",
             IE8 = "exception")
-    @NotYetImplemented(FF)
     public void namedNodeMap() throws Exception {
         test("NamedNodeMap");
     }
@@ -2188,7 +2187,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function Navigator() { [native code] }",
             FF31 = "function Navigator() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented(FF24)
     public void navigator() throws Exception {
         test("Navigator");
     }
