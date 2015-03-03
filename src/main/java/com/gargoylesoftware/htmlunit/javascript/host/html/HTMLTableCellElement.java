@@ -56,7 +56,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclara
     @JsxClass(domClass = HtmlTableCell.class,
             browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(domClass = HtmlTableCell.class,
-        isJSObject = false, isDefinedInStandardsMode = true, browsers = @WebBrowser(value = IE, maxVersion = 8))
+        isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
 })
 public class HTMLTableCellElement extends HTMLTableComponent {
 

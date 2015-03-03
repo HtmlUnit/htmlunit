@@ -53,7 +53,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormField;
     @JsxClass(domClass = HtmlTextArea.class,
             browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(domClass = HtmlTextArea.class,
-        isJSObject = false, isDefinedInStandardsMode = true, browsers = @WebBrowser(value = IE, maxVersion = 8))
+        isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
 })
 public class HTMLTextAreaElement extends FormField {
 

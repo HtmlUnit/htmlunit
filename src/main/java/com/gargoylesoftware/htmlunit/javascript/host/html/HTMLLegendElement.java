@@ -36,7 +36,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
     @JsxClass(domClass = HtmlLegend.class,
             browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(domClass = HtmlLegend.class,
-        isJSObject = false, isDefinedInStandardsMode = true, browsers = @WebBrowser(value = IE, maxVersion = 8))
+        isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
 })
 public class HTMLLegendElement extends FormChild {
 

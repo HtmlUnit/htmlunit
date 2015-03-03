@@ -53,7 +53,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormField;
     @JsxClass(domClass = HtmlSelect.class,
             browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(domClass = HtmlSelect.class,
-        isJSObject = false, isDefinedInStandardsMode = true, browsers = @WebBrowser(value = IE, maxVersion = 8))
+        isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
 })
 public class HTMLSelectElement extends FormField {
 

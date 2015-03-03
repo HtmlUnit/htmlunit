@@ -54,7 +54,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
 @JsxClasses({
     @JsxClass(domClass = HtmlAnchor.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF),
         @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = true, domClass = HtmlAnchor.class,
+    @JsxClass(isJSObject = false, domClass = HtmlAnchor.class,
         browsers = { @WebBrowser(value = IE, maxVersion = 8) })
 })
 public class HTMLAnchorElement extends HTMLElement {

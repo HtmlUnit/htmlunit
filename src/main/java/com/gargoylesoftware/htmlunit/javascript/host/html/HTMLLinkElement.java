@@ -40,7 +40,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
     @JsxClass(domClass = HtmlLink.class,
             browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(domClass = HtmlLink.class,
-        isJSObject = false, isDefinedInStandardsMode = true, browsers = @WebBrowser(value = IE, maxVersion = 8))
+        isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
 })
 public class HTMLLinkElement extends HTMLElement {
 

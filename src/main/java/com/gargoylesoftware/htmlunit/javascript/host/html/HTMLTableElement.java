@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.RowContainer;
     @JsxClass(domClass = HtmlTable.class,
             browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(domClass = HtmlTable.class,
-        isJSObject = false, isDefinedInStandardsMode = true, browsers = @WebBrowser(value = IE, maxVersion = 8))
+        isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
 })
 public class HTMLTableElement extends RowContainer {
 
