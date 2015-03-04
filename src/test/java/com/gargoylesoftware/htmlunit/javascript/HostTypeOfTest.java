@@ -192,9 +192,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "object",
-            CHROME = "function",
-            IE = "undefined")
+    @Alerts(DEFAULT = "undefined",
+            FF = "object")
     public void cssCharsetRule() throws Exception {
         test("CSSCharsetRule");
     }

@@ -201,9 +201,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object CSSCharsetRule]",
-            CHROME = "function CSSCharsetRule() { [native code] }",
-            IE = "exception")
+    @Alerts(DEFAULT = "exception",
+            FF = "[object CSSCharsetRule]")
     public void cssCharsetRule() throws Exception {
         test("CSSCharsetRule");
     }
