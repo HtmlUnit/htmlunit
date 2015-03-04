@@ -210,6 +210,27 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
         isParentOf("HTMLImageElement", "Image");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Option>HTMLOptionElement: true",
+            CHROME = "Option>HTMLOptionElement: false")
+    public void isParentOf_Option_HTMLOptionElement() throws Exception {
+        //although Option != HTMLOptionElement, they seem to be synonyms!!!
+        isParentOf("Option", "HTMLOptionElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("HTMLOptionElement>Option: true")
+    public void isParentOf_HTMLOptionElement_Option() throws Exception {
+        //although Option != HTMLOptionElement, they seem to be synonyms!!!
+        isParentOf("HTMLOptionElement", "Option");
+    }
+
     private void isParentOf(final String parent, final String child) throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

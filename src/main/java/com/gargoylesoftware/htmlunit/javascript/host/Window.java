@@ -1395,17 +1395,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         return frames.item(Integer.valueOf(index));
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object get(String name, final Scriptable start) {
-        if ("Option".equals(name)) {
-            name = "HTMLOptionElement";
-        }
-        return super.get(name, start);
-    }
-
     private static Object getFrameWindowByName(final HtmlPage page, final String name) {
         try {
             return page.getFrameByName(name).getScriptObject();

@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -1561,7 +1560,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             FF = "function HTMLOptionElement() {\n    [native code]\n}",
             IE8 = "exception",
             IE11 = "[object HTMLOptionElement]")
-    @NotYetImplemented(IE)
     public void htmlOptionElement() throws Exception {
         test("HTMLOptionElement");
     }
@@ -1576,7 +1574,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             FF = "function Option() {\n    [native code]\n}",
             IE8 = "[object HTMLOptionElement]",
             IE11 = "\nfunction Option() {\n    [native code]\n}\n")
-    @NotYetImplemented({ FF, IE })
     public void option() throws Exception {
         test("Option");
     }
@@ -2243,7 +2240,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function Plugin() { [native code] }",
             FF31 = "function Plugin() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented({ FF24, IE11 })
+    @NotYetImplemented(FF24)
     public void plugin() throws Exception {
         test("Plugin");
     }

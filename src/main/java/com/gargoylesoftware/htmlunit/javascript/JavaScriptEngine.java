@@ -25,6 +25,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_T
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_Iterator;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_PROTOTYPE_SAME_AS_HTML_OPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ACTIVEXOBJECT_HIDDEN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_CONTAINS;
@@ -296,9 +297,14 @@ public class JavaScriptEngine {
             final Member jsConstructor = config.getJsConstructor();
             final String jsClassName = config.getClassName();
             ScriptableObject prototype = prototypesPerJSName_.get(jsClassName);
-            if ("Image".equals(config.getHostClass().getSimpleName())
+            final String hostClassSimpleName = config.getHostClass().getSimpleName();
+            if ("Image".equals(hostClassSimpleName)
                     && browserVersion.hasFeature(JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE)) {
                 prototype = prototypesPerJSName_.get("HTMLImageElement");
+            }
+            if ("Option".equals(hostClassSimpleName)
+                    && browserVersion.hasFeature(JS_OPTION_PROTOTYPE_SAME_AS_HTML_OPTION)) {
+                prototype = prototypesPerJSName_.get("HTMLOptionElement");
             }
             if (prototype != null && config.isJsObject()) {
                 if (jsConstructor != null) {
@@ -309,21 +315,30 @@ public class JavaScriptEngine {
                     else {
                         functionObject = new RecursiveFunctionObject(jsClassName, jsConstructor, window);
                     }
-                    if (!"Image".equals(config.getHostClass().getSimpleName())) {
-                        functionObject.addAsConstructor(window, prototype);
-                    }
-                    else {
-                        final boolean prototypeWasDefined
-                            = ScriptableObject.getProperty(window, prototype.getClassName()) != UniqueTag.NOT_FOUND;
+
+                    if ("Image".equals(hostClassSimpleName) || "Option".equals(hostClassSimpleName)) {
+                        final Object prototypeProperty = ScriptableObject.getProperty(window, prototype.getClassName());
 
                         functionObject.addAsConstructor(window, prototype);
 
-                        ScriptableObject.defineProperty(window, "Image", functionObject, ScriptableObject.DONTENUM);
-                        // if necessary, delete the prototype, as it is a side effect of functionObject.addAsConstructor
-                        if (!prototypeWasDefined) {
-                            ScriptableObject.deleteProperty(window, prototype.getClassName());
+                        ScriptableObject.defineProperty(window, hostClassSimpleName, functionObject, ScriptableObject.DONTENUM);
+
+                        // the prototype class name is set as a side effect of functionObject.addAsConstructor
+                        // so we restore its value
+                        if (!hostClassSimpleName.equals(prototype.getClassName())) {
+                            if (prototypeProperty == UniqueTag.NOT_FOUND) {
+                                ScriptableObject.deleteProperty(window, prototype.getClassName());
+                            }
+                            else {
+                                ScriptableObject.defineProperty(window, prototype.getClassName(),
+                                        prototypeProperty, ScriptableObject.DONTENUM);
+                            }
                         }
                     }
+                    else {
+                        functionObject.addAsConstructor(window, prototype);
+                    }
+
                     configureConstants(config, functionObject);
                 }
                 else {

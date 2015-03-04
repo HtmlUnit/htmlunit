@@ -1388,6 +1388,22 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_OPTION_CONSTRUCTOR_IGNORES_LABEL,
 
+    /**
+     * Is class name of {@link Option} the same as {@link HTMLOptionElement}.
+     */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8) })
+    JS_OPTION_HTML_OPTION_ELEMENT,
+
+    /** If <code>alert(Option)</code> returns an object, not function. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    JS_OPTION_OBJECT,
+
+    /**
+     * Is the prototype of {@link Option} the same as {@link HTMLOptionElement}.
+     */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
+    JS_OPTION_PROTOTYPE_SAME_AS_HTML_OPTION,
+
     /** Was originally .isFirefox(). */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_OPTION_USE_TEXT_AS_VALUE_IF_NOT_DEFINED,
