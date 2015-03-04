@@ -271,9 +271,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "4", "One", "Two*", "Three", "foo" },
-            CHROME = { "3", "4", "foo", "One", "Two*", "Three" })
-    @NotYetImplemented(CHROME)
+    @Alerts({ "3", "4", "One", "Two*", "Three", "foo" })
     public void addBeforeNull() throws Exception {
         add(", null", false, false);
     }
@@ -282,9 +280,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "4", "One", "Two*", "Three*", "foo" },
-            CHROME = { "3", "4", "foo", "One", "Two*", "Three*" })
-    @NotYetImplemented(CHROME)
+    @Alerts({ "3", "4", "One", "Two*", "Three*", "foo" })
     public void addBeforeNullMulti() throws Exception {
         add(", null", false, true);
     }
@@ -293,9 +289,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "exception" },
-            CHROME = { "0", "1", "foo*" })
-    @NotYetImplemented(CHROME)
+    @Alerts({ "0", "exception" })
     public void addBeforeUnknownEmpty() throws Exception {
         add(", new Option('foo', '123')", true, false);
     }
@@ -304,9 +298,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "exception" },
-            CHROME = { "0", "1", "foo" })
-    @NotYetImplemented(CHROME)
+    @Alerts({ "0", "exception" })
     public void addBeforeUnknownEmptyMulti() throws Exception {
         add(", new Option('foo', '123')", true, true);
     }
@@ -315,9 +307,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "exception" },
-            CHROME = { "3", "4", "foo", "One", "Two*", "Three" })
-    @NotYetImplemented(CHROME)
+    @Alerts({ "3", "exception" })
     public void addBeforeUnknown() throws Exception {
         add(", new Option('foo', '123')", false, false);
     }
@@ -326,9 +316,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "exception" },
-            CHROME = { "3", "4", "foo", "One", "Two*", "Three*" })
-    @NotYetImplemented(CHROME)
+    @Alerts({ "3", "exception" })
     public void addBeforeUnknownMulti() throws Exception {
         add(", new Option('foo', '123')", false, true);
     }
@@ -355,9 +343,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "4", "One", "foo", "Two*", "Three" },
-            CHROME = { "3", "4", "foo", "One", "Two*", "Three" })
-    @NotYetImplemented(CHROME)
+    @Alerts({ "3", "4", "One", "foo", "Two*", "Three" })
     public void addBeforeSecond() throws Exception {
         add(", oSelect.options[1]", false, false);
     }
@@ -366,9 +352,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "4", "One", "foo", "Two*", "Three*" },
-            CHROME = { "3", "4", "foo", "One", "Two*", "Three*" })
-    @NotYetImplemented(CHROME)
+    @Alerts({ "3", "4", "One", "foo", "Two*", "Three*" })
     public void addBeforeSecondMulti() throws Exception {
         add(", oSelect.options[1]", false, true);
     }
@@ -377,9 +361,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "4", "One", "Two*", "foo", "Three" },
-            CHROME = { "3", "4", "foo", "One", "Two*", "Three" })
-    @NotYetImplemented(CHROME)
+    @Alerts({ "3", "4", "One", "Two*", "foo", "Three" })
     public void addBeforeLast() throws Exception {
         add(", oSelect.options[2]", false, false);
     }
@@ -388,9 +370,7 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "3", "4", "One", "Two*", "foo", "Three*" },
-            CHROME = { "3", "4", "foo", "One", "Two*", "Three*" })
-    @NotYetImplemented(CHROME)
+    @Alerts({ "3", "4", "One", "Two*", "foo", "Three*" })
     public void addBeforeLastMulti() throws Exception {
         add(", oSelect.options[2]", false, true);
     }
@@ -436,7 +416,8 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined", IE8 = "exception")
+    @Alerts(DEFAULT = "undefined",
+            IE8 = "exception")
     public void getMinusOneEmpty() throws Exception {
         get("-1", true);
     }
@@ -445,7 +426,8 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined", IE8 = "exception")
+    @Alerts(DEFAULT = "undefined",
+            IE8 = "exception")
     public void getMinusOne() throws Exception {
         get("-1", false);
     }
@@ -481,7 +463,8 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined" }, IE = "null")
+    @Alerts(DEFAULT = "undefined",
+            IE = "null")
     public void getThree() throws Exception {
         get("3", false);
     }
@@ -490,7 +473,8 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined" }, IE = "null")
+    @Alerts(DEFAULT = "undefined",
+            IE = "null")
     public void getTenEmpty() throws Exception {
         get("10", true);
     }
@@ -499,7 +483,8 @@ public class HTMLOptionsCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined" }, IE = "null")
+    @Alerts(DEFAULT = "undefined",
+            IE = "null")
     public void getTen() throws Exception {
         get("10", false);
     }

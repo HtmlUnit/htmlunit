@@ -1926,7 +1926,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = { "ISO-8859-1", "ISO-8859-1", "ISO-8859-1", "ISO-8859-1" },
+    @Alerts(CHROME = { "windows-1252", "windows-1252", "windows-1252", "windows-1252" },
             FF = { "windows-1252", "windows-1252", "undefined", "undefined" },
             IE = { "undefined", "undefined", "iso-8859-1", "windows-1252" },
             IE11 = { "ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252" })
@@ -1951,7 +1951,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = { "ISO-8859-1", "ISO-8859-1", "ISO-8859-1", "ISO-8859-1" },
+    @Alerts(CHROME = { "windows-1252", "windows-1252", "windows-1252", "windows-1252" },
             FF = { "windows-1252", "windows-1252", "undefined", "undefined" },
             IE = { "undefined", "undefined", "iso-8859-1", "windows-1252" },
             IE11 = { "ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252" })
@@ -1977,7 +1977,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = { "ISO-8859-1", "ISO-8859-1", "ISO-8859-1", "ISO-8859-1" },
+    @Alerts(CHROME = { "windows-1252", "windows-1252", "windows-1252", "windows-1252" },
             FF = { "windows-1252", "windows-1252", "undefined", "undefined" },
             IE = { "undefined", "undefined", "iso-8859-1", "windows-1252" },
             IE11 = { "ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252" })
@@ -2005,7 +2005,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = { "UTF-8", "UTF-8", "UTF-8", "ISO-8859-1" },
+    @Alerts(CHROME = { "UTF-8", "UTF-8", "UTF-8", "windows-1252" },
             FF = { "UTF-8", "UTF-8", "undefined", "undefined" },
             IE = { "undefined", "undefined", "utf-8", "windows-1252" },
             IE11 = { "UTF-8", "utf-8", "utf-8", "windows-1252" })
@@ -2033,7 +2033,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = { "UTF-8", "UTF-8", "UTF-8", "ISO-8859-1" },
+    @Alerts(CHROME = { "UTF-8", "UTF-8", "UTF-8", "windows-1252" },
             FF = { "UTF-8", "UTF-8", "undefined", "undefined" },
             IE = { "undefined", "undefined", "utf-8", "windows-1252" },
             IE11 = { "UTF-8", "utf-8", "utf-8", "windows-1252" })
@@ -2061,7 +2061,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = { "UTF-8", "UTF-8", "UTF-8", "ISO-8859-1" },
+    @Alerts(CHROME = { "UTF-8", "UTF-8", "UTF-8", "windows-1252" },
             FF = { "UTF-8", "UTF-8", "undefined", "undefined" },
             IE = { "undefined", "undefined", "utf-8", "windows-1252" },
             IE11 = { "UTF-8", "utf-8", "utf-8", "windows-1252" })

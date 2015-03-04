@@ -183,10 +183,8 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "1", "2", "1", "5", "1", "1" },
-            CHROME = { "1", "2", "1", "5", "-3", "1" },
+    @Alerts(DEFAULT = { "1", "2", "1", "5", "1", "1" },
             IE = { "1", "2", "1", "error", "error", "5", "2", "1" })
-    @NotYetImplemented(CHROME)
     public void span() throws Exception {
         final String html
             = "<html><body><table>\n"

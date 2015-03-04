@@ -93,7 +93,6 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -1001,6 +1000,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public String getCharset() {
         String charset = getHtmlPage().getPageEncoding();
+        if (charset != null && getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_NORMALIZED)) {
+            return EncodingSniffer.translateEncodingLabel(charset);
+        }
         if (getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
             charset = charset.toLowerCase(Locale.ENGLISH);
         }
@@ -1013,10 +1015,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public String getDefaultCharset() {
-        if (getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
-            return "windows-1252";
-        }
-        return TextUtil.DEFAULT_CHARSET;
+        return "windows-1252";
     }
 
     /**

@@ -771,7 +771,7 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "prototype found", "" },
-            CHROME = { "prototype found", "ALLOW_KEYBOARD_INPUT, toString, "
+            CHROME = { "prototype found", "toString, "
                     + "ELEMENT_NODE, ATTRIBUTE_NODE, TEXT_NODE, CDATA_SECTION_NODE, ENTITY_REFERENCE_NODE, "
                     + "ENTITY_NODE, PROCESSING_INSTRUCTION_NODE, COMMENT_NODE, DOCUMENT_NODE, DOCUMENT_TYPE_NODE, "
                     + "DOCUMENT_FRAGMENT_NODE, NOTATION_NODE, DOCUMENT_POSITION_DISCONNECTED, "
@@ -786,7 +786,6 @@ public class ElementTest extends WebDriverTestCase {
                     + "DOCUMENT_POSITION_FOLLOWING, DOCUMENT_POSITION_CONTAINS, DOCUMENT_POSITION_CONTAINED_BY, "
                     + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC, " },
             IE8 = "exception occured")
-    @NotYetImplemented(CHROME)
     public void enumeratedProperties() throws Exception {
         final String html
             = "<html><head>\n"
@@ -1159,8 +1158,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined" }, CHROME = { "1", "number" },
-        IE8 = "exception")
+    @Alerts(DEFAULT = { "undefined", "undefined" },
+            IE8 = "exception")
     public void allowKeyboardInput() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
