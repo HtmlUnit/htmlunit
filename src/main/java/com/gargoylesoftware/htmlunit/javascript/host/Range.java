@@ -105,6 +105,9 @@ public class Range extends SimpleScriptable {
      */
     @Override
     public Object getDefaultValue(final Class<?> hint) {
+        if (getPrototype() == null) {
+            return super.getDefaultValue(hint);
+        }
         return toW3C().toString();
     }
 

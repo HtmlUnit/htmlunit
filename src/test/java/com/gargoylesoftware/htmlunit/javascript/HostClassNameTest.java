@@ -532,7 +532,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function DOMTokenList() { [native code] }",
             FF = "function DOMTokenList() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented(IE11)
     public void domTokenList() throws Exception {
         test("DOMTokenList");
     }
@@ -2239,7 +2238,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function Plugin() { [native code] }",
             FF31 = "function Plugin() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented(FF24)
     public void plugin() throws Exception {
         test("Plugin");
     }
@@ -2254,7 +2252,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function PluginArray() { [native code] }",
             FF31 = "function PluginArray() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented(FF24)
     public void pluginArray() throws Exception {
         test("PluginArray");
     }
@@ -2322,7 +2319,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function Range() { [native code] }",
             FF = "function Range() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented(IE11)
     public void range() throws Exception {
         test("Range");
     }
@@ -3354,7 +3350,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function StyleSheetList() { [native code] }",
             FF31 = "function StyleSheetList() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented(FF24)
     public void styleSheetList() throws Exception {
         test("StyleSheetList");
     }
@@ -3481,7 +3476,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function WebSocket() { [native code] }",
             IE11 = "\nfunction WebSocket() {\n    [native code]\n}\n",
             IE8 = "exception")
-    @NotYetImplemented(IE11)
     public void webSocket() throws Exception {
         test("WebSocket");
     }
@@ -3562,7 +3556,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF = "[object XPathNSResolver]")
-    @NotYetImplemented(CHROME)
     public void xPathNSResolver() throws Exception {
         test("XPathNSResolver");
     }

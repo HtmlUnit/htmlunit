@@ -86,6 +86,9 @@ public final class DOMTokenList extends SimpleScriptable {
      */
     @Override
     public String getDefaultValue(final Class<?> hint) {
+        if (getPrototype() == null) {
+            return (String) super.getDefaultValue(hint);
+        }
         final DomAttr attr = (DomAttr) getDomNodeOrDie().getAttributes().getNamedItem(attributeName_);
         if (attr != null) {
             String value = attr.getValue();
