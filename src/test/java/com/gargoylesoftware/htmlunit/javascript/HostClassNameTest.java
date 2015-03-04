@@ -1204,7 +1204,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function HTMLHeadingElement() { [native code] }",
             FF = "function HTMLHeadingElement() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented(IE8)
     public void htmlHeadingElement() throws Exception {
         test("HTMLHeadingElement");
     }

@@ -1184,7 +1184,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF = "function",
             IE8 = "undefined")
-    @NotYetImplemented(IE8)
     public void htmlHeadingElement() throws Exception {
         test("HTMLHeadingElement");
     }
