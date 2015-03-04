@@ -40,7 +40,7 @@ public class CSSCharsetRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "0", "undefined" },
             FF = { "1", "[object CSSCharsetRule]", "UTF-8" })
-    @NotYetImplemented({ IE, CHROME }) // TODO: check which IE versions support what
+    @NotYetImplemented({ IE, CHROME })
     public void simple() throws Exception {
         final String html
             = "<html><body>\n"
