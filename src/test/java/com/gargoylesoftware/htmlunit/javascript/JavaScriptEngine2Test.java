@@ -341,7 +341,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE8 = { "1", "2" })
-    @BuggyWebDriver({ IE11, FF })
+    @BuggyWebDriver({ IE11, FF, CHROME })
     public void function_object_method() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
                 + "  try {\n"

@@ -103,7 +103,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = { "ISO-8859-1", "ISO-8859-1", "ISO-8859-1", "ISO-8859-1" },
+    @Alerts(CHROME = { "windows-1252", "windows-1252", "windows-1252", "windows-1252" },
             FF = { "windows-1252", "windows-1252", "undefined", "undefined" },
             IE = { "undefined", "undefined", "iso-8859-1", "windows-1252" },
             IE11 = { "ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252" })

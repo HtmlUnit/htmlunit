@@ -33,6 +33,12 @@ public class CSSCharsetRule extends CSSRule {
 
     /**
      * Creates a new instance.
+     */
+    public CSSCharsetRule() {
+    }
+
+    /**
+     * Creates a new instance.
      * @param stylesheet the Stylesheet of this rule.
      * @param rule the wrapped rule
      */

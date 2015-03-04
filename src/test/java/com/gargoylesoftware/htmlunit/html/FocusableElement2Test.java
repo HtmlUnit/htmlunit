@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
@@ -195,8 +194,9 @@ public class FocusableElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "done\nfocus",
+            CHROME = "done",
             IE8 = "done")
-    @NotYetImplemented({ FF, IE11, CHROME })
+    @NotYetImplemented({ FF, IE11 })
     public void focusOnNonFocusableElementShouldNotTriggerDocumentFocus() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"

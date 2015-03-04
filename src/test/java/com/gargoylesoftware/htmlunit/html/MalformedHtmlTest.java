@@ -539,7 +539,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    // correct FF assertion is
+    // correct FF/CHROME assertion is
     // @Alerts({ "3", "1a", "1b", "", "0", "DIV" })
     // this test is NOT marked as NYI because we like to ensure
     // to get notified if something changes
@@ -742,7 +742,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    // correct FF assertion is
+    // correct FF/CHROME assertion is
     // @Alerts({ "3", "1b", "1a", "1c", "0", "TABLE" })
     // this test is NOT marked as NYI because we like to ensure
     // to get notified if something changes

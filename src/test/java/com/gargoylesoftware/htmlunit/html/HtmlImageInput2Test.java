@@ -51,7 +51,7 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "§§URL§§?button.x=0&button.y=0",
-            CHROME = "§§URL§§?button.x=11&button.y=9&button=foo",
+            CHROME = "§§URL§§?button.x=9&button.y=7&button=foo",
             IE8 = "§§URL§§?button.x=15&button.y=16",
             IE11 = "§§URL§§?button.x=14&button.y=15")
     @NotYetImplemented({ CHROME, IE })
@@ -75,7 +75,7 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "§§URL§§?button.x=0&button.y=0",
-            CHROME = "§§URL§§?button.x=24&button.y=9",
+            CHROME = "§§URL§§?button.x=20&button.y=7",
             IE8 = "§§URL§§?button.x=15&button.y=16",
             IE11 = "§§URL§§?button.x=14&button.y=15")
     @NotYetImplemented({ CHROME, IE })
