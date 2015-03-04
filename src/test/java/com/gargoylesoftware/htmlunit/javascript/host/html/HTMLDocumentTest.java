@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -1348,6 +1349,25 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  <div id='div2' class='red'>Second</div>\n"
             + "  <div id='div3' class='green'>Third</div>\n"
             + "  <div id='div4' class='blue'>Fourth</div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "[object NodeList]",
+            IE8 = "[object StaticNodeList]")
+    @NotYetImplemented({ CHROME, FF, IE11 })
+    public void querySelectorAllType() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>Test</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  alert(document.querySelectorAll('html'))\n;"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
