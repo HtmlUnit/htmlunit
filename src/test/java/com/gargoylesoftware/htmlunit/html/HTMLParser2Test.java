@@ -655,7 +655,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
             IE8 = { "3", "3", "2", "4", "4", "3" })
-    @NotYetImplemented
+    @NotYetImplemented(IE8)
     public void childNodes_embed() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("embed"));
     }

@@ -296,7 +296,6 @@ public class HTMLElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void elementClosesItself_button() throws Exception {
         loadPageWithAlerts2(elementClosesItself("button"));
     }
@@ -429,7 +428,6 @@ public class HTMLElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void elementClosesItself_embed() throws Exception {
         loadPageWithAlerts2(elementClosesItself("embed"));
     }
@@ -837,7 +835,6 @@ public class HTMLElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented
     public void elementClosesItself_nobr() throws Exception {
         loadPageWithAlerts2(elementClosesItself("nobr"));
     }
