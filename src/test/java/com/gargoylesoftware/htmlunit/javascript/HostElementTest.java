@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 /**
  * Tests the result of <code>document.createElement()</code>.
  *
- * @version $Revision: 10096 $
+ * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
