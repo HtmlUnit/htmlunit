@@ -152,6 +152,35 @@ public class HTMLParser2Test extends WebDriverTestCase {
 
     /**
      * This tests for an bug in NekoHTML.
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({ "P", "LABEL", "OBJECT" })
+    @NotYetImplemented
+    public void objectInsideLabel() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "try {\n"
+            + "  var tmp = document.getElementById('myP');\n"
+            + "  alert(tmp.tagName)\n"
+            + "  tmp = tmp.firstChild;\n"
+            + "  alert(tmp.tagName)\n"
+            + "  tmp = tmp.firstChild.tagName;\n"
+            + "  alert(tmp)\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<p id='myP'><label><object></object></label></p>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * This tests for an bug in NekoHTML.
      * Without setting a property NekoHTML closes all inline tags
      * when a table start tag is detected. This is ok from the spec
      * but different with real browsers.
