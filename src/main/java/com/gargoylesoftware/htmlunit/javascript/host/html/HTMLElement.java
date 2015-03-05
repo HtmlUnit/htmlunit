@@ -105,6 +105,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlFigureCaption;
 import com.gargoylesoftware.htmlunit.html.HtmlFooter;
 import com.gargoylesoftware.htmlunit.html.HtmlFrameSet;
 import com.gargoylesoftware.htmlunit.html.HtmlHeader;
+import com.gargoylesoftware.htmlunit.html.HtmlMain;
 import com.gargoylesoftware.htmlunit.html.HtmlMark;
 import com.gargoylesoftware.htmlunit.html.HtmlNav;
 import com.gargoylesoftware.htmlunit.html.HtmlNoBreak;
@@ -113,6 +114,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlNoFrames;
 import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSection;
+import com.gargoylesoftware.htmlunit.html.HtmlSummary;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 import com.gargoylesoftware.htmlunit.html.HtmlWordBreak;
@@ -188,7 +190,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
     @JsxClass(domClass = HtmlWordBreak.class,
         browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(domClass = HtmlBackgroundSound.class, isJSObject = false, isDefinedInStandardsMode = false,
-        browsers = @WebBrowser(CHROME))
+        browsers = @WebBrowser(CHROME)),
+    @JsxClass(domClass = HtmlMain.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
+    @JsxClass(domClass = HtmlSummary.class, browsers = @WebBrowser(CHROME))
 })
 public class HTMLElement extends Element implements ScriptableWithFallbackGetter {
 
