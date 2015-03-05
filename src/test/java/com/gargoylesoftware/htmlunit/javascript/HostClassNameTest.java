@@ -3719,4 +3719,30 @@ public class HostClassNameTest extends WebDriverTestCase {
         test("Notification");
     }
 
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDetailsElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function HTMLDetailsElement() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void htmlDetailsElement() throws Exception {
+        test("HTMLDetailsElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDialogElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function HTMLDialogElement() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void htmlDialogElement() throws Exception {
+        test("HTMLDialogElement");
+    }
+
 }

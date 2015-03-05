@@ -3665,4 +3665,30 @@ public class HostTypeOfTest extends WebDriverTestCase {
         test("Notification");
     }
 
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDetailsElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    @NotYetImplemented(CHROME)
+    public void htmlDetailsElement() throws Exception {
+        test("HTMLDetailsElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDialogElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    @NotYetImplemented(CHROME)
+    public void htmlDialogElement() throws Exception {
+        test("HTMLDialogElement");
+    }
+
 }
