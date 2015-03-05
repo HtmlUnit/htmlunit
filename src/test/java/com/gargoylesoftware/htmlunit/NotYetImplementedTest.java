@@ -238,7 +238,6 @@ public class NotYetImplementedTest {
                 countFF31++;
                 countChrome++;
             }
-
         }
         builder.append("</table>\n").append("</body></html>");
 
