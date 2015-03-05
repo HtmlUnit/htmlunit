@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -717,7 +718,10 @@ public class HostElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("[object HTMLImageElement]")
+    @Alerts(DEFAULT = "[object HTMLImageElement]",
+            CHROME = "[object HTMLUnknownElement]",
+            FF = "[object HTMLElement]")
+    @NotYetImplemented({ CHROME, FF })
     public void image() throws Exception {
         test("image");
     }
