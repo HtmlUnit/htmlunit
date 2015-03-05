@@ -235,7 +235,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             IE11 = { "text", "i", "i", "[object MSStyleCSSProperties]", "function", "undefined", "undefined" },
             IE8 = { "text", "i", "i", "[object]", "function", "a", "undefined" },
             CHROME = { "text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined" })
-    @NotYetImplemented
+    @NotYetImplemented({ FF, CHROME })
     public void attributesAccess() throws Exception {
         final String html
             = "<html><head>\n"
@@ -4801,7 +4801,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "<track>",
             CHROME = "<track></track>",
             IE8 = "<track></track>")
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @NotYetImplemented({ FF, IE11 })
     public void outerHTML_track() throws Exception {
         loadPageWithAlerts2(outerHTML("track"));
     }
