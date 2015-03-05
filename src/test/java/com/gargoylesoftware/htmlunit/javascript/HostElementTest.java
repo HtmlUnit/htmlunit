@@ -526,8 +526,9 @@ public class HostElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("[object HTMLElement]")
-    @NotYetImplemented({ IE8, CHROME })
+    @Alerts(DEFAULT = "[object HTMLElement]",
+            IE8 = "[object HTMLGenericElement]")
+    @NotYetImplemented(CHROME)
     public void figcaption() throws Exception {
         test("figcaption");
     }
