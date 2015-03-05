@@ -438,7 +438,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
-            IE8 = { "1", "1", "1", "2", "2", "1" })
+            IE8 = { "2", "2", "2", "4", "4", "3" })
     @NotYetImplemented(IE8)
     public void childNodes_bdi() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("bdi"));
@@ -625,7 +625,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
-            IE8 = { "1", "1", "1", "2", "2", "1" })
+            IE8 = { "2", "2", "2", "4", "4", "3" })
     @NotYetImplemented
     public void childNodes_details() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("details"));
@@ -636,7 +636,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
-            IE8 = { "1", "1", "1", "2", "2", "1" })
+            IE8 = { "2", "2", "2", "4", "4", "3" })
     @NotYetImplemented(IE8)
     public void childNodes_dialog() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("dialog"));
@@ -1034,7 +1034,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
             IE11 = { "3", "2", "2", "3", "2", "2" },
-            IE8 = { "1", "1", "1", "2", "2", "1" })
+            IE8 = { "2", "2", "2", "4", "4", "3" })
     @NotYetImplemented({FF, CHROME, IE8 })
     public void childNodes_main() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("main"));
@@ -1086,7 +1086,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
-            IE8 = { "0", "0", "0", "0", "0", "0" })
+            IE8 = { "2", "2", "2", "4", "4", "3" })
     @NotYetImplemented(IE8)
     public void childNodes_menuitem() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("menuitem"));
@@ -1476,7 +1476,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
-            IE8 = { "1", "1", "1", "2", "2", "1" })
+            IE8 = { "2", "2", "2", "4", "4", "3" })
     @NotYetImplemented
     public void childNodes_summary() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("summary"));
@@ -1574,7 +1574,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
-            IE8 = { "2", "2", "1", "2", "2", "1" })
+            IE8 = { "2", "2", "2", "4", "4", "3" })
     @NotYetImplemented
     public void childNodes_track() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("track"));

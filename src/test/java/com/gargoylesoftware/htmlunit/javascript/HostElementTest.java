@@ -208,7 +208,8 @@ public class HostElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLElement]")
+            CHROME = "[object HTMLElement]",
+            IE8 = "[object HTMLGenericElement]")
     @NotYetImplemented(CHROME)
     public void bdi() throws Exception {
         test("bdi");
@@ -904,6 +905,7 @@ public class HostElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
+            IE8 = "[object HTMLGenericElement]",
             IE11 = "[object HTMLUnknownElement]")
     public void main() throws Exception {
         test("main");
@@ -966,7 +968,7 @@ public class HostElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             FF = "[object HTMLMenuItemElement]",
-            IE8 = "[object HTMLUListElement]")
+            IE8 = "[object HTMLGenericElement]")
     public void menuitem() throws Exception {
         test("menuitem");
     }
@@ -1400,7 +1402,8 @@ public class HostElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLElement]")
+            CHROME = "[object HTMLElement]",
+            IE8 = "[object HTMLGenericElement]")
     public void summary() throws Exception {
         test("summary");
     }
@@ -1525,7 +1528,8 @@ public class HostElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("[object HTMLTrackElement]")
+    @Alerts(DEFAULT = "[object HTMLTrackElement]",
+            IE8 = "[object HTMLGenericElement]")
     public void track() throws Exception {
         test("track");
     }

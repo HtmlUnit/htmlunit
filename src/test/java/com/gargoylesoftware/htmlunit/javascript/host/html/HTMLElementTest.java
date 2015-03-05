@@ -234,7 +234,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "text", "i", "i", "[object CSS2Properties]", "function", "undefined", "undefined" },
             IE11 = { "text", "i", "i", "[object MSStyleCSSProperties]", "function", "undefined", "undefined" },
-            IE8 = { "text", "i", "i", "[object]", "function", "undefined", "undefined" },
+            IE8 = { "text", "i", "i", "[object]", "function", "a", "undefined" },
             CHROME = { "text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined" })
     @NotYetImplemented
     public void attributesAccess() throws Exception {
@@ -3733,9 +3733,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<bdi></bdi>",
-            IE8 = "<BDI></BDI>")
-    @NotYetImplemented(IE8)
+    @Alerts("<bdi></bdi>")
     public void outerHTML_bdi() throws Exception {
         loadPageWithAlerts2(outerHTML("bdi"));
     }
@@ -3933,9 +3931,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<details></details>",
-            IE8 = "<DETAILS></DETAILS>")
-    @NotYetImplemented(IE8)
+    @Alerts("<details></details>")
     public void outerHTML_details() throws Exception {
         loadPageWithAlerts2(outerHTML("details"));
     }
@@ -3944,9 +3940,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<dialog></dialog>",
-            IE8 = "<DIALOG></DIOLOG>")
-    @NotYetImplemented(IE8)
+    @Alerts("<dialog></dialog>")
     public void outerHTML_dialog() throws Exception {
         loadPageWithAlerts2(outerHTML("dialog"));
     }
@@ -4366,9 +4360,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<main></main>",
-            IE8 = "<MAIN></MAIN>")
-    @NotYetImplemented(IE8)
+    @Alerts("<main></main>")
     public void outerHTML_main() throws Exception {
         loadPageWithAlerts2(outerHTML("main"));
     }
@@ -4416,9 +4408,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<menuitem></menuitem>",
-            IE8 = "<MENUITEM></MENUITEM>")
-    @NotYetImplemented(IE8)
+    @Alerts("<menuitem></menuitem>")
     public void outerHTML_menuitem() throws Exception {
         loadPageWithAlerts2(outerHTML("menuitem"));
     }
@@ -4741,9 +4731,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<summary></summary>",
-            IE8 = "<SUMMARY></SUMMARY>")
-    @NotYetImplemented(IE8)
+    @Alerts("<summary></summary>")
     public void outerHTML_summary() throws Exception {
         loadPageWithAlerts2(outerHTML("summary"));
     }
@@ -4814,8 +4802,8 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<track>",
             CHROME = "<track></track>",
-            IE8 = "<TRACK>")
-    @NotYetImplemented
+            IE8 = "<track></track>")
+    @NotYetImplemented({ CHROME, FF, IE11 })
     public void outerHTML_track() throws Exception {
         loadPageWithAlerts2(outerHTML("track"));
     }
