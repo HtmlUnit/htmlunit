@@ -740,10 +740,10 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            CHROME = "0",
-            IE8 = "0",
-            FF31 = "2")
+    @Alerts(DEFAULT = "0",
+            FF24 = "1",
+            FF31 = "2",
+            IE11 = "1")
     @NotYetImplemented({ IE8, FF31, CHROME })
     public void elementClosesItself_keygen() throws Exception {
         loadPageWithAlerts2(elementClosesItself("keygen"));
