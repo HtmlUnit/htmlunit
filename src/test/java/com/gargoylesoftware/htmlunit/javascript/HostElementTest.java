@@ -133,7 +133,6 @@ public class HostElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE8 = "[object HTMLGenericElement]")
-    @NotYetImplemented(CHROME)
     public void article() throws Exception {
         test("article");
     }
@@ -146,7 +145,6 @@ public class HostElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE8 = "[object HTMLGenericElement]")
-    @NotYetImplemented(CHROME)
     public void aside() throws Exception {
         test("aside");
     }
@@ -171,7 +169,6 @@ public class HostElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             IE = "[object HTMLBGSoundElement]")
-    @NotYetImplemented(CHROME)
     public void bgsound() throws Exception {
         test("bgsound");
     }
@@ -210,7 +207,6 @@ public class HostElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             CHROME = "[object HTMLElement]",
             IE8 = "[object HTMLGenericElement]")
-    @NotYetImplemented(CHROME)
     public void bdi() throws Exception {
         test("bdi");
     }
@@ -223,7 +219,6 @@ public class HostElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
-    @NotYetImplemented(CHROME)
     public void bdo() throws Exception {
         test("bdo");
     }
@@ -406,7 +401,6 @@ public class HostElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLDDElement]")
-    @NotYetImplemented(CHROME)
     public void dd() throws Exception {
         test("dd");
     }
@@ -430,7 +424,6 @@ public class HostElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLDTElement]")
-    @NotYetImplemented(CHROME)
     public void dt() throws Exception {
         test("dt");
     }
@@ -529,7 +522,6 @@ public class HostElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE8 = "[object HTMLGenericElement]")
-    @NotYetImplemented(CHROME)
     public void figure() throws Exception {
         test("figure");
     }
@@ -542,7 +534,6 @@ public class HostElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE8 = "[object HTMLGenericElement]")
-    @NotYetImplemented(CHROME)
     public void figcaption() throws Exception {
         test("figcaption");
     }
@@ -566,7 +557,6 @@ public class HostElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE8 = "[object HTMLGenericElement]")
-    @NotYetImplemented(CHROME)
     public void footer() throws Exception {
         test("footer");
     }
@@ -623,7 +613,6 @@ public class HostElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE8 = "[object HTMLGenericElement]")
-    @NotYetImplemented(CHROME)
     public void header() throws Exception {
         test("header");
     }
@@ -930,7 +919,6 @@ public class HostElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE8 = "[object HTMLGenericElement]")
-    @NotYetImplemented(CHROME)
     public void mark() throws Exception {
         test("mark");
     }
@@ -943,7 +931,6 @@ public class HostElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLMarqueeElement]",
             FF = "[object HTMLDivElement]")
-    @NotYetImplemented(CHROME)
     public void marquee() throws Exception {
         test("marquee");
     }
@@ -1005,7 +992,6 @@ public class HostElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             IE8 = "[object HTMLGenericElement]")
-    @NotYetImplemented(CHROME)
     public void multicol() throws Exception {
         test("multicol");
     }
@@ -1018,7 +1004,6 @@ public class HostElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE8 = "[object HTMLGenericElement]")
-    @NotYetImplemented(CHROME)
     public void nav() throws Exception {
         test("nav");
     }

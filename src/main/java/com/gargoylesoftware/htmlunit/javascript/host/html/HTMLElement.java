@@ -93,13 +93,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlArea;
 import com.gargoylesoftware.htmlunit.html.HtmlArticle;
 import com.gargoylesoftware.htmlunit.html.HtmlAside;
-import com.gargoylesoftware.htmlunit.html.HtmlBackgroundSound;
+import com.gargoylesoftware.htmlunit.html.HtmlBidirectionalIsolation;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlDefinitionDescription;
 import com.gargoylesoftware.htmlunit.html.HtmlDefinitionTerm;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
+import com.gargoylesoftware.htmlunit.html.HtmlBidirectionalOverride;
 import com.gargoylesoftware.htmlunit.html.HtmlFigure;
 import com.gargoylesoftware.htmlunit.html.HtmlFigureCaption;
 import com.gargoylesoftware.htmlunit.html.HtmlFooter;
@@ -169,18 +170,27 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
  * @author Frank Danek
  */
 @JsxClasses({
-    @JsxClass(domClass = HtmlArticle.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(domClass = HtmlAside.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(domClass = HtmlDefinitionDescription.class, browsers = @WebBrowser(FF)),
-    @JsxClass(domClass = HtmlDefinitionTerm.class, browsers = @WebBrowser(FF)),
+    @JsxClass(domClass = HtmlArticle.class,
+        browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+    @JsxClass(domClass = HtmlAside.class,
+        browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+    @JsxClass(domClass = HtmlBidirectionalIsolation.class, browsers = @WebBrowser(CHROME)),
+    @JsxClass(domClass = HtmlBidirectionalOverride.class, browsers = @WebBrowser(CHROME)),
+    @JsxClass(domClass = HtmlDefinitionDescription.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
+    @JsxClass(domClass = HtmlDefinitionTerm.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
     @JsxClass(domClass = HtmlElement.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(domClass = HtmlFigure.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+    @JsxClass(domClass = HtmlFigure.class,
+        browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(domClass = HtmlFigureCaption.class,
-        browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(domClass = HtmlFooter.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(domClass = HtmlHeader.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(domClass = HtmlMark.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(domClass = HtmlNav.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+        browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+    @JsxClass(domClass = HtmlFooter.class,
+        browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+    @JsxClass(domClass = HtmlHeader.class,
+        browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+    @JsxClass(domClass = HtmlMark.class,
+        browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+    @JsxClass(domClass = HtmlNav.class,
+        browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(domClass = HtmlNoBreak.class, browsers = { @WebBrowser(FF) }),
     @JsxClass(domClass = HtmlNoEmbed.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(domClass = HtmlNoFrames.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
@@ -189,8 +199,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
     @JsxClass(domClass = HtmlSection.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(domClass = HtmlWordBreak.class,
         browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(domClass = HtmlBackgroundSound.class, isJSObject = false, isDefinedInStandardsMode = false,
-        browsers = @WebBrowser(CHROME)),
     @JsxClass(domClass = HtmlMain.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
     @JsxClass(domClass = HtmlSummary.class, browsers = @WebBrowser(CHROME))
 })

@@ -41,4 +41,11 @@ public class HtmlBidirectionalIsolation extends HtmlElement {
         super(qualifiedName, page, attributes);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        return DisplayStyle.INLINE;
+    }
 }

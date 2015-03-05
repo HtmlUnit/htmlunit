@@ -40,7 +40,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
             browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(isJSObject = false, domClass = HtmlDivision.class,
             browsers = { @WebBrowser(value = IE, maxVersion = 8) }),
-    @JsxClass(domClass = HtmlMarquee.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) }),
+    @JsxClass(domClass = HtmlMarquee.class, browsers = @WebBrowser(FF))
 })
 public class HTMLDivElement extends HTMLElement {
 

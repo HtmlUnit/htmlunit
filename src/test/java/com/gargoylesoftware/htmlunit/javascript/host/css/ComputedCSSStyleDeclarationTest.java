@@ -47,7 +47,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "none",
             IE8 = "undefined")
-    @NotYetImplemented(CHROME)
     public void cssFloat() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -475,7 +474,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "block", "block", "block", "inline", "block", "block" },
             IE8 = { "block", "inline", "inline", "inline", "inline", "block" })
-    @NotYetImplemented(CHROME)
     public void defaultDisplayValues_F() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <form id='form'>\n"
@@ -519,7 +517,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "block", "block", "block", "block", "block", "block", "block", "block" },
             IE8 = { "block", "block", "block", "block", "block", "block", "inline", "block" })
-    @NotYetImplemented(CHROME)
     public void defaultDisplayValues_H() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <h1 id='h1'></h1>\n"
