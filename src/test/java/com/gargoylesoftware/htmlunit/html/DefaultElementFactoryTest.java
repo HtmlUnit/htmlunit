@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  */
 @RunWith(BrowserRunner.class)
 public class DefaultElementFactoryTest extends SimpleWebTestCase {
+
     /**
      * Test that the attribute order is the same as the provided one.
      * @throws Exception if the test fails

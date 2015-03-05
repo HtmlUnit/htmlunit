@@ -50,6 +50,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 @RunWith(BrowserRunner.class)
 public class HtmlPage2Test extends SimpleWebTestCase {
+
     /**
      * Utility for temporary folders.
      * Has to be public due to JUnit's constraints for @Rule.

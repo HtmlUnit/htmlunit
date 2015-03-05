@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 @RunWith(BrowserRunner.class)
 public class PopupTest extends SimpleWebTestCase {
+
     /**
      * Test that the opened window becomes the current one.
      * @throws Exception if the test fails

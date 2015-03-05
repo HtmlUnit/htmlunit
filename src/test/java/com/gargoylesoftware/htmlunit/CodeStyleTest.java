@@ -206,6 +206,9 @@ public class CodeStyleTest {
             if ("    }".equals(line) && !nextLine.isEmpty() && !"}".equals(nextLine)) {
                 addFailure("Non-empty line in " + relativePath + ", line: " + (index + 1));
             }
+            if ("    /**".equals(nextLine) && !line.isEmpty()) {
+                addFailure("Non-empty line in " + relativePath + ", line: " + (index + 2));
+            }
         }
     }
 

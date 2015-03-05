@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  */
 public interface ScriptPreProcessor {
+
     /**
      * Pre process the specified source code in the context of the given page.
      * @param htmlPage the page

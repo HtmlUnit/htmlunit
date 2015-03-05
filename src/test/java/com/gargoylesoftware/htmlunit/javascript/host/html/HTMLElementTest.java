@@ -997,9 +997,9 @@ public class HTMLElementTest extends WebDriverTestCase {
      * Verifies outerHTML, innerHTML and innerText for newly created div.
      * @throws Exception if the test fails
      */
+    @Test
     @Alerts(DEFAULT = { "true", "true", "true" },
             FF = { "true", "true", "false" })
-    @Test
     public void outerHTMLinNewDiv() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test() {\n"
@@ -3733,6 +3733,17 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "<bdi></bdi>",
+            IE8 = "<BDI></BDI>")
+    @NotYetImplemented(IE8)
+    public void outerHTML_bdi() throws Exception {
+        loadPageWithAlerts2(outerHTML("bdi"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "<bdo></bdo>",
             IE8 = "<BDO></BDO>")
     public void outerHTML_bdo() throws Exception {
@@ -3916,6 +3927,28 @@ public class HTMLElementTest extends WebDriverTestCase {
             IE8 = "<DEL></DEL>")
     public void outerHTML_del() throws Exception {
         loadPageWithAlerts2(outerHTML("del"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<details></details>",
+            IE8 = "<DETAILS></DETAILS>")
+    @NotYetImplemented(IE8)
+    public void outerHTML_details() throws Exception {
+        loadPageWithAlerts2(outerHTML("details"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<dialog></dialog>",
+            IE8 = "<DIALOG></DIOLOG>")
+    @NotYetImplemented(IE8)
+    public void outerHTML_dialog() throws Exception {
+        loadPageWithAlerts2(outerHTML("dialog"));
     }
 
     /**
@@ -4333,6 +4366,17 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "<main></main>",
+            IE8 = "<MAIN></MAIN>")
+    @NotYetImplemented(IE8)
+    public void outerHTML_main() throws Exception {
+        loadPageWithAlerts2(outerHTML("main"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "<map></map>",
             IE8 = "<MAP></MAP>")
     public void outerHTML_map() throws Exception {
@@ -4366,6 +4410,17 @@ public class HTMLElementTest extends WebDriverTestCase {
             IE8 = "<MENU></MENU>")
     public void outerHTML_menu() throws Exception {
         loadPageWithAlerts2(outerHTML("menu"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<menuitem></menuitem>",
+            IE8 = "<MENUITEM></MENUITEM>")
+    @NotYetImplemented(IE8)
+    public void outerHTML_menuitem() throws Exception {
+        loadPageWithAlerts2(outerHTML("menuitem"));
     }
 
     /**
@@ -4686,6 +4741,17 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "<summary></summary>",
+            IE8 = "<SUMMARY></SUMMARY>")
+    @NotYetImplemented(IE8)
+    public void outerHTML_summary() throws Exception {
+        loadPageWithAlerts2(outerHTML("summary"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "<sup></sup>",
             IE8 = "<SUP></SUP>")
     public void outerHTML_sup() throws Exception {
@@ -4740,6 +4806,18 @@ public class HTMLElementTest extends WebDriverTestCase {
             IE8 = "<TR></TR>")
     public void outerHTML_tr() throws Exception {
         loadPageWithAlerts2(outerHTML("tr"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<track>",
+            CHROME = "<track></track>",
+            IE8 = "<TRACK>")
+    @NotYetImplemented
+    public void outerHTML_track() throws Exception {
+        loadPageWithAlerts2(outerHTML("track"));
     }
 
     /**

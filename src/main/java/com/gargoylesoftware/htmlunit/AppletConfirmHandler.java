@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlApplet;
  * @author Ronald Brill
  */
 public interface AppletConfirmHandler {
+
     /**
      * Handles a confirm for the specified page.
      * @param applet the applet the browser likes to start

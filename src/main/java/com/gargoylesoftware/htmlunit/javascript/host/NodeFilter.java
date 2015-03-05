@@ -36,18 +36,22 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class NodeFilter extends SimpleScriptable {
+
     // Constants returned by acceptNode
+
     /**
      * Accept the node. TreeWalker navigation will return this node.
      */
     @JsxConstant
     public static final short FILTER_ACCEPT = 1;
+
     /**
      * Reject the node. TreeWalker navigation will not return this node or
      * any of it's children.
      */
     @JsxConstant
     public static final short FILTER_REJECT = 2;
+
     /**
      * Skip the node. TreeWalker navigation will not return this node, but WILL
      * still consider the children of this node.
@@ -93,6 +97,7 @@ public class NodeFilter extends SimpleScriptable {
     /** Show DocumentFragment nodes. */
     @JsxConstant
     public static final int SHOW_DOCUMENT_FRAGMENT = 0x00000400;
+
     /**
      * Show Notation nodes. Only useful when creating a TreeWalker with a
      * Notation node as its root.

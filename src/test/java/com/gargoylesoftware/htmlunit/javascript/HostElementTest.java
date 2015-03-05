@@ -202,6 +202,19 @@ public class HostElementTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlBidirectionalIsolation}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
+            CHROME = "[object HTMLElement]")
+    @NotYetImplemented(CHROME)
+    public void bdi() throws Exception {
+        test("bdi");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.html.HtmlBidirectionalOverride}.
      *
      * @throws Exception if an error occurs
@@ -885,6 +898,18 @@ public class HostElementTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlMain}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "[object HTMLElement]",
+            IE11 = "[object HTMLUnknownElement]")
+    public void main() throws Exception {
+        test("main");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.html.HtmlMap}.
      *
      * @throws Exception if an error occurs
@@ -931,6 +956,19 @@ public class HostElementTest extends WebDriverTestCase {
             IE8 = "[object HTMLUListElement]")
     public void menu() throws Exception {
         test("menu");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlMenuItem}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
+            FF = "[object HTMLMenuItemElement]",
+            IE8 = "[object HTMLUListElement]")
+    public void menuitem() throws Exception {
+        test("menuitem");
     }
 
     /**
@@ -1356,6 +1394,18 @@ public class HostElementTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSummary}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
+            CHROME = "[object HTMLElement]")
+    public void summary() throws Exception {
+        test("summary");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSuperscript}.
      *
      * @throws Exception if an error occurs
@@ -1467,6 +1517,17 @@ public class HostElementTest extends WebDriverTestCase {
     @Alerts("[object HTMLTableRowElement]")
     public void tr() throws Exception {
         test("tr");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTrack}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("[object HTMLTrackElement]")
+    public void track() throws Exception {
+        test("track");
     }
 
     /**
@@ -1694,6 +1755,8 @@ public class HostElementTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlDetails}.
+     *
      * @throws Exception if an error occurs
      */
     @Test
@@ -1706,6 +1769,8 @@ public class HostElementTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlDialog}.
+     *
      * @throws Exception if an error occurs
      */
     @Test

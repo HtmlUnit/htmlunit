@@ -232,6 +232,15 @@ public class HTMLElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
+    public void elementClosesItself_bdi() throws Exception {
+        loadPageWithAlerts2(elementClosesItself("bdi"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
     public void elementClosesItself_bdo() throws Exception {
         loadPageWithAlerts2(elementClosesItself("bdo"));
     }
@@ -365,6 +374,15 @@ public class HTMLElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
+    public void elementClosesItself_details() throws Exception {
+        loadPageWithAlerts2(elementClosesItself("details"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
     public void elementClosesItself_dfn() throws Exception {
         loadPageWithAlerts2(elementClosesItself("dfn"));
     }
@@ -385,6 +403,15 @@ public class HTMLElementsTest extends WebDriverTestCase {
     @Alerts("1")
     public void elementClosesItself_del() throws Exception {
         loadPageWithAlerts2(elementClosesItself("del"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    public void elementClosesItself_dialog() throws Exception {
+        loadPageWithAlerts2(elementClosesItself("dialog"));
     }
 
     /**
@@ -766,6 +793,15 @@ public class HTMLElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
+    public void elementClosesItself_main() throws Exception {
+        loadPageWithAlerts2(elementClosesItself("main"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
     public void elementClosesItself_map() throws Exception {
         loadPageWithAlerts2(elementClosesItself("map"));
     }
@@ -797,6 +833,15 @@ public class HTMLElementsTest extends WebDriverTestCase {
     @Alerts("1")
     public void elementClosesItself_menu() throws Exception {
         loadPageWithAlerts2(elementClosesItself("menu"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    public void elementClosesItself_menuitem() throws Exception {
+        loadPageWithAlerts2(elementClosesItself("menuitem"));
     }
 
     /**
@@ -1156,6 +1201,15 @@ public class HTMLElementsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
+    public void elementClosesItself_summary() throws Exception {
+        loadPageWithAlerts2(elementClosesItself("summary"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
     public void elementClosesItself_sup() throws Exception {
         loadPageWithAlerts2(elementClosesItself("sup"));
     }
@@ -1235,6 +1289,16 @@ public class HTMLElementsTest extends WebDriverTestCase {
     @NotYetImplemented(IE8)
     public void elementClosesItself_tr() throws Exception {
         loadPageWithAlerts2(elementClosesItself("tr"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented
+    public void elementClosesItself_track() throws Exception {
+        loadPageWithAlerts2(elementClosesItself("track"));
     }
 
     /**

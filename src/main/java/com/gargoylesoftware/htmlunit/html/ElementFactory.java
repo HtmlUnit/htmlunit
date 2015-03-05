@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Ahmed Ashour
  */
 public interface ElementFactory {
+
     /**
      * Creates an element according to this factory's specification. Note that even though this method
      * takes a page parameter, the element is <em>not</em> automatically added to the page's DOM tree.

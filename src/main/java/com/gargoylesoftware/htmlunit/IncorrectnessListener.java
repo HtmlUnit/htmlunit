@@ -23,6 +23,7 @@ package com.gargoylesoftware.htmlunit;
  * @author Marc Guillemot
  */
 public interface IncorrectnessListener {
+
     /**
      * Called to notify an incorrectness.
      * @param message the explanation of the incorrectness

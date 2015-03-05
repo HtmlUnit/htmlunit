@@ -26,6 +26,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Marc Guillemot
  */
 public interface ScriptableWithFallbackGetter extends Scriptable {
+
     /**
      * Fallback called when no configured property is found with the given name
      * on the {@link Scriptable} object.

@@ -12,23 +12,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit;
+package com.gargoylesoftware.htmlunit.html;
+
+import java.util.Map;
+
+import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
- * Thrown if an object could not be instantiated for some reason.
+ * Wrapper for the HTML element "summary".
  *
  * @version $Revision$
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
  */
-public class ObjectInstantiationException extends RuntimeException {
+public class HtmlSummary extends HtmlElement {
+
+    /** The HTML tag represented by this element. */
+    public static final String TAG_NAME = "summary";
 
     /**
      * Creates a new instance.
-     * @param message a message explaining the failure
-     * @param cause the exception that was thrown
+     *
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the HtmlPage that contains this element
+     * @param attributes the initial attributes
      */
-    public ObjectInstantiationException(final String message, final Throwable cause) {
-        super(message, cause);
+    HtmlSummary(final String qualifiedName, final SgmlPage page,
+            final Map<String, DomAttr> attributes) {
+        super(qualifiedName, page, attributes);
     }
+
 }

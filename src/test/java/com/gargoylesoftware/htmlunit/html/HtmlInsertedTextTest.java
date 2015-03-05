@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  */
 @RunWith(BrowserRunner.class)
 public class HtmlInsertedTextTest extends WebDriverTestCase {
+
     /**
      * Regression test for 3033189: &lt;ins&gt; elements are inline elements.
      * @throws Exception if the test fails

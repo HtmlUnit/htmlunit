@@ -12,23 +12,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit;
+package com.gargoylesoftware.htmlunit.javascript.host.html;
+
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+
+import com.gargoylesoftware.htmlunit.html.HtmlMenuItem;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * Thrown if an object could not be instantiated for some reason.
+ * The JavaScript object "HTMLMenuItemElement".
  *
  * @version $Revision$
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
  */
-public class ObjectInstantiationException extends RuntimeException {
+@JsxClass(domClass = HtmlMenuItem.class, browsers = @WebBrowser(FF))
+public class HTMLMenuItemElement extends HTMLElement {
 
     /**
      * Creates a new instance.
-     * @param message a message explaining the failure
-     * @param cause the exception that was thrown
      */
-    public ObjectInstantiationException(final String message, final Throwable cause) {
-        super(message, cause);
+    @JsxConstructor
+    public HTMLMenuItemElement() {
     }
 }

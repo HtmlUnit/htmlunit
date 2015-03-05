@@ -35,6 +35,7 @@ import org.w3c.css.sac.SiblingSelector;
  */
 class SelectorSpecificity implements Comparable<SelectorSpecificity>, Serializable {
     private static final Log LOG = LogFactory.getLog(SelectorSpecificity.class);
+
     /**
      * The specificity for declarations made in the style attributes of an element.
      */

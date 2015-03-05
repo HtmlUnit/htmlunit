@@ -25,6 +25,7 @@ import java.net.URLStreamHandler;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class Handler extends URLStreamHandler {
+
     /**
      * Returns a new URLConnection for this URL.
      * @param url the JavaScript URL

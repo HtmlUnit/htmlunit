@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.16" date="???" description="Java 7, WebClient.close(), FF31, IE11 progress, Chrome progress, Bugfixes">
+            <action type="add" dev="asashour">
+                Initial support for HtmlBidirectionalIsolation, HtmlDetails, HtmlDialog, HtmlMain, HtmlMenuItem,
+                HtmlSummary and HtmlTrack elements.
+            </action>
             <action type="update" dev="asashour">
                 WebClient: deprecate .closeAllWindows(), use .close() or try-with-resources statement.
             </action>

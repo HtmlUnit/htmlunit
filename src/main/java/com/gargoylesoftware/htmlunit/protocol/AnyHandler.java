@@ -25,6 +25,7 @@ import java.net.URLStreamHandler;
  * @author Marc Guillemot
  */
 public class AnyHandler extends URLStreamHandler {
+
     /**
      * Shared instance.
      */

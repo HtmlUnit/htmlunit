@@ -135,6 +135,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDDElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDListElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDTElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDataListElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDetailsElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDialogElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDirectoryElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDivElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
@@ -164,6 +166,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMapElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMarqueeElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMediaElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMenuElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMenuItemElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMetaElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMeterElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLModElement;
@@ -198,6 +201,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTimeElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTitleElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTrackElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUListElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLVideoElement;
@@ -310,7 +314,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLBlockQuoteElement.class, HTMLBodyElement.class, HTMLButtonElement.class, HTMLCanvasElement.class,
         HTMLCollection.class, HTMLAllCollection.class,
         HTMLDataListElement.class,
-        HTMLDDElement.class, HTMLDTElement.class,
+        HTMLDDElement.class, HTMLDetailsElement.class, HTMLDialogElement.class, HTMLDTElement.class,
         HTMLDListElement.class,
         HTMLDirectoryElement.class,
         HTMLDivElement.class, HTMLDocument.class, HTMLElement.class, HTMLEmbedElement.class, HTMLFieldSetElement.class,
@@ -322,9 +326,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLLIElement.class, HTMLLabelElement.class,
         HTMLLegendElement.class, HTMLLinkElement.class, HTMLListElement.class, HTMLMapElement.class,
         HTMLMarqueeElement.class,
-        HTMLMediaElement.class, HTMLMenuElement.class, HTMLMetaElement.class, HTMLMeterElement.class,
-        HTMLModElement.class,
-        HTMLNoShowElement.class,
+        HTMLMediaElement.class, HTMLMenuElement.class, HTMLMenuItemElement.class, HTMLMetaElement.class,
+        HTMLMeterElement.class, HTMLModElement.class, HTMLNoShowElement.class,
         HTMLNextIdElement.class,
         HTMLOListElement.class, HTMLObjectElement.class, HTMLOptGroupElement.class,
         HTMLOptionElement.class, HTMLOptionsCollection.class, HTMLOutputElement.class,
@@ -336,7 +339,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLTableComponent.class, HTMLTableDataCellElement.class, HTMLTableElement.class,
         HTMLTableHeaderCellElement.class, HTMLTableRowElement.class, HTMLTableSectionElement.class,
         HTMLTextElement.class, HTMLTextAreaElement.class, HTMLTimeElement.class, HTMLTitleElement.class,
-        HTMLUListElement.class, HTMLUnknownElement.class,
+        HTMLTrackElement.class, HTMLUListElement.class, HTMLUnknownElement.class,
         HTMLVideoElement.class,
         Image.class,
         Int16Array.class, Int32Array.class, Int8Array.class,

@@ -27,6 +27,7 @@ import java.io.IOException;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  */
 public interface PageCreator {
+
     /**
      * Create a Page object for the specified web response.
      *

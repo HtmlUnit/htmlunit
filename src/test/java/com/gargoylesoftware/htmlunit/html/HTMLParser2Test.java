@@ -439,6 +439,17 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
             IE8 = { "1", "1", "1", "2", "2", "1" })
+    @NotYetImplemented(IE8)
+    public void childNodes_bdi() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("bdi"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_bdo() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("bdo"));
     }
@@ -607,6 +618,28 @@ public class HTMLParser2Test extends WebDriverTestCase {
             IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_del() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("del"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
+    @NotYetImplemented
+    public void childNodes_details() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("details"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
+    @NotYetImplemented(IE8)
+    public void childNodes_dialog() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("dialog"));
     }
 
     /**
@@ -999,6 +1032,18 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE11 = { "3", "2", "2", "3", "2", "2" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
+    @NotYetImplemented({FF, CHROME, IE8 })
+    public void childNodes_main() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("main"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
             IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_map() throws Exception {
@@ -1034,6 +1079,17 @@ public class HTMLParser2Test extends WebDriverTestCase {
             IE8 = { "0", "0", "0", "0", "0", "0" })
     public void childNodes_menu() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("menu"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
+    @NotYetImplemented(IE8)
+    public void childNodes_menuitem() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("menuitem"));
     }
 
     /**
@@ -1419,6 +1475,17 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "1", "0", "1", "1", "0", "1" },
+            IE8 = { "1", "1", "1", "2", "2", "1" })
+    @NotYetImplemented
+    public void childNodes_summary() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("summary"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
             IE8 = { "1", "1", "1", "2", "2", "1" })
     public void childNodes_sup() throws Exception {
@@ -1500,6 +1567,17 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @NotYetImplemented(IE8)
     public void childNodes_tr() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("tr"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
+            IE8 = { "2", "2", "1", "2", "2", "1" })
+    @NotYetImplemented
+    public void childNodes_track() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("track"));
     }
 
     /**

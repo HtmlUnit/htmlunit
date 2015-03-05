@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 */
 @RunWith(BrowserRunner.class)
 public class HTMLOptionElementTest extends SimpleWebTestCase {
+
     /**
      * @throws Exception if the test fails
      */

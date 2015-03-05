@@ -3727,7 +3727,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function HTMLDetailsElement() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void htmlDetailsElement() throws Exception {
         test("HTMLDetailsElement");
     }
@@ -3740,9 +3739,34 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function HTMLDialogElement() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void htmlDialogElement() throws Exception {
         test("HTMLDialogElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTrackElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "function HTMLTrackElement() { [native code] }",
+            FF = "function HTMLTrackElement() {\n    [native code]\n}",
+            IE11 = "[object HTMLTrackElement]",
+            IE8 = "exception")
+    public void htmlTrackElement() throws Exception {
+        test("HTMLTrackElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMenuItemElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF = "function HTMLMenuItemElement() {\n    [native code]\n}")
+    public void htmlMenuItemElement() throws Exception {
+        test("HTMLMenuItemElement");
     }
 
 }

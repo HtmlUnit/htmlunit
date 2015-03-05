@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.util.URLCreator.URLCreatorGAE;
  * @author Marc Guillemot
  */
 public class UrlCreatorTest {
+
     /**
      * @throws Exception if the test fails
      */

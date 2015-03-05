@@ -33,6 +33,7 @@ import org.apache.commons.lang3.ArrayUtils;
  * @author Ronald Brill
  */
 public interface DownloadedContent extends Serializable {
+
     /**
      * Implementation keeping content in memory.
      */

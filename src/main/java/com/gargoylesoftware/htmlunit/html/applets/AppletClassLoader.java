@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  * @author Ronald Brill
  */
 public class AppletClassLoader extends URLClassLoader {
+
     /**
      * The constructor.
      */

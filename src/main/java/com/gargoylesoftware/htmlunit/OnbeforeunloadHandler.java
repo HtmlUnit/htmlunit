@@ -21,6 +21,7 @@ package com.gargoylesoftware.htmlunit;
  * @author Ahmed Ashour
  */
 public interface OnbeforeunloadHandler {
+
     /**
      * Handles an <tt>onbeforeunload</tt> event for the specified page.
      * @param page the page on which the event occurred

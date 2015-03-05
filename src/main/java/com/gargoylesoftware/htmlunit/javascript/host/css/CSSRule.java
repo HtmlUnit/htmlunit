@@ -39,26 +39,32 @@ public class CSSRule extends SimpleScriptable {
      * The rule is a <code>CSSUnknownRule</code>.
      */
     public static final short UNKNOWN_RULE              = org.w3c.dom.css.CSSRule.UNKNOWN_RULE;
+
     /**
      * The rule is a <code>CSSStyleRule</code>.
      */
     public static final short STYLE_RULE                = org.w3c.dom.css.CSSRule.STYLE_RULE;
+
     /**
      * The rule is a <code>CSSCharsetRule</code>.
      */
     public static final short CHARSET_RULE              = org.w3c.dom.css.CSSRule.CHARSET_RULE;
+
     /**
      * The rule is a <code>CSSImportRule</code>.
      */
     public static final short IMPORT_RULE               = org.w3c.dom.css.CSSRule.IMPORT_RULE;
+
     /**
      * The rule is a <code>CSSMediaRule</code>.
      */
     public static final short MEDIA_RULE                = org.w3c.dom.css.CSSRule.MEDIA_RULE;
+
     /**
      * The rule is a <code>CSSFontFaceRule</code>.
      */
     public static final short FONT_FACE_RULE            = org.w3c.dom.css.CSSRule.FONT_FACE_RULE;
+
     /**
      * The rule is a <code>CSSPageRule</code>.
      */

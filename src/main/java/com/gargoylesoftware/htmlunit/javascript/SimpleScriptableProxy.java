@@ -27,8 +27,9 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Marc Guillemot
  * @author Daniel Gredler
  */
-public abstract class SimpleScriptableProxy<T extends SimpleScriptable> extends Delegator implements
-    ScriptableWithFallbackGetter, Serializable {
+public abstract class SimpleScriptableProxy<T extends SimpleScriptable> extends Delegator
+        implements ScriptableWithFallbackGetter, Serializable {
+
     /**
      * {@inheritDoc}
      */

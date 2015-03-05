@@ -54,6 +54,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClass(browsers = @WebBrowser(IE))
 public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c.dom.NodeList {
+
     /**
      * Cache effect of some changes.
      */

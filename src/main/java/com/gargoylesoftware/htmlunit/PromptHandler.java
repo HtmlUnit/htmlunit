@@ -22,6 +22,7 @@ package com.gargoylesoftware.htmlunit;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public interface PromptHandler {
+
     /**
      * Handle a call to Window.prompt() for the given page.
      * @param page the page on which the prompt occurred

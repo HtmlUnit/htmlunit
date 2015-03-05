@@ -22,6 +22,7 @@ package com.gargoylesoftware.htmlunit;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public interface ConfirmHandler {
+
     /**
      * Handles a confirm for the specified page.
      * @param page the page on which the confirm occurred

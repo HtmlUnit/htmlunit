@@ -35,6 +35,7 @@ import java.util.Collection;
  * @author Ronald Brill
  */
 public interface FormFieldWithNameHistory {
+
     /**
      * Gets the first value of the <code>name</code> attribute of this field before any change.
      * @return the original name (which is the same as the current one when no change has been made)

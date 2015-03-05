@@ -40,6 +40,7 @@ public final class ClassConfiguration {
     private List<String> constants_ = new ArrayList<>();
     private String extendedClassName_;
     private final Class<? extends SimpleScriptable> hostClass_;
+
     /**
      * The constructor method in the {@link #hostClass_}
      */

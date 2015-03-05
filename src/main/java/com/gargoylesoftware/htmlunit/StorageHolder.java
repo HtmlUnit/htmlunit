@@ -30,6 +30,7 @@ import java.util.Map;
  * @author Marc Guillemot
  */
 public class StorageHolder implements Serializable {
+
     /**
      * Type for Storage.
      */

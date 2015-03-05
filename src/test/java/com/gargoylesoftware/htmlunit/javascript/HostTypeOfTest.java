@@ -3673,7 +3673,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
-    @NotYetImplemented(CHROME)
     public void htmlDetailsElement() throws Exception {
         test("HTMLDetailsElement");
     }
@@ -3686,9 +3685,33 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
-    @NotYetImplemented(CHROME)
     public void htmlDialogElement() throws Exception {
         test("HTMLDialogElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTrackElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE11 = "object",
+            IE8 = "undefined")
+    public void htmlTrackElement() throws Exception {
+        test("HTMLTrackElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMenuItemElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void htmlMenuItemElement() throws Exception {
+        test("HTMLMenuItemElement");
     }
 
 }

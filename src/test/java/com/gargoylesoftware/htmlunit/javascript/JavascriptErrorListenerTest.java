@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 @RunWith(BrowserRunner.class)
 
 public class JavascriptErrorListenerTest extends WebServerTestCase {
+
     /**
      * Test for running without a JavaScript error listener.
      *

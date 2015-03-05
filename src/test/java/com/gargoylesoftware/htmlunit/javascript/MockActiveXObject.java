@@ -21,6 +21,7 @@ package com.gargoylesoftware.htmlunit.javascript;
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  */
 public class MockActiveXObject {
+
     /**
      * Test property.
      */

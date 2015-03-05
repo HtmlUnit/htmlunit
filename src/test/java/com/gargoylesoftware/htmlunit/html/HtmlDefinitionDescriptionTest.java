@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  */
 @RunWith(BrowserRunner.class)
 public class HtmlDefinitionDescriptionTest extends SimpleWebTestCase {
+
     /**
      * @throws Exception if the test fails
      */

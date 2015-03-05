@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  */
 @RunWith(BrowserRunner.class)
 public class HTMLTitleElementTest extends WebDriverTestCase {
+
     /**
      * @throws Exception if the test fails
      */

@@ -21,6 +21,7 @@ package com.gargoylesoftware.htmlunit;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public interface WebWindowListener {
+
     /**
      * A web window has been opened.
      *

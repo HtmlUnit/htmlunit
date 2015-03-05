@@ -40,6 +40,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  */
 @RunWith(Enclosed.class)
 public class ConsoleTest {
+
     /**
      * The tests running through WebDriver.
      */

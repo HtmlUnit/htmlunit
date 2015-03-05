@@ -57,13 +57,13 @@ class DefaultElementFactory implements ElementFactory {
             HtmlAnchor.TAG_NAME, HtmlAddress.TAG_NAME, HtmlApplet.TAG_NAME, HtmlArea.TAG_NAME,
             HtmlArticle.TAG_NAME, HtmlAside.TAG_NAME, HtmlAudio.TAG_NAME,
             HtmlBackgroundSound.TAG_NAME, HtmlBase.TAG_NAME, HtmlBaseFont.TAG_NAME,
-            HtmlBidirectionalOverride.TAG_NAME, HtmlBig.TAG_NAME, HtmlBlink.TAG_NAME,
-            HtmlBlockQuote.TAG_NAME, HtmlBody.TAG_NAME, HtmlBold.TAG_NAME,
+            HtmlBidirectionalIsolation.TAG_NAME, HtmlBidirectionalOverride.TAG_NAME, HtmlBig.TAG_NAME,
+            HtmlBlink.TAG_NAME, HtmlBlockQuote.TAG_NAME, HtmlBody.TAG_NAME, HtmlBold.TAG_NAME,
             HtmlBreak.TAG_NAME, HtmlButton.TAG_NAME, HtmlCanvas.TAG_NAME, HtmlCaption.TAG_NAME,
             HtmlCenter.TAG_NAME, HtmlCitation.TAG_NAME, HtmlCode.TAG_NAME,
             HtmlDataList.TAG_NAME,
             HtmlDefinition.TAG_NAME, HtmlDefinitionDescription.TAG_NAME,
-            HtmlDeletedText.TAG_NAME, HtmlDirectory.TAG_NAME,
+            HtmlDeletedText.TAG_NAME, HtmlDetails.TAG_NAME, HtmlDialog.TAG_NAME, HtmlDirectory.TAG_NAME,
             HtmlDivision.TAG_NAME, HtmlDefinitionList.TAG_NAME,
             HtmlDefinitionTerm.TAG_NAME, HtmlEmbed.TAG_NAME,
             HtmlEmphasis.TAG_NAME,
@@ -80,8 +80,8 @@ class DefaultElementFactory implements ElementFactory {
             HtmlKeyboard.TAG_NAME, HtmlKeygen.TAG_NAME,
             HtmlLabel.TAG_NAME,
             HtmlLegend.TAG_NAME, HtmlListing.TAG_NAME, HtmlListItem.TAG_NAME,
-            HtmlLink.TAG_NAME, HtmlMap.TAG_NAME, HtmlMark.TAG_NAME, HtmlMarquee.TAG_NAME,
-            HtmlMenu.TAG_NAME, HtmlMeta.TAG_NAME, HtmlMeter.TAG_NAME, HtmlMultiColumn.TAG_NAME,
+            HtmlLink.TAG_NAME, HtmlMain.TAG_NAME, HtmlMap.TAG_NAME, HtmlMark.TAG_NAME, HtmlMarquee.TAG_NAME,
+            HtmlMenu.TAG_NAME, HtmlMenuItem.TAG_NAME, HtmlMeta.TAG_NAME, HtmlMeter.TAG_NAME, HtmlMultiColumn.TAG_NAME,
             HtmlNav.TAG_NAME, HtmlNextId.TAG_NAME,
             HtmlNoBreak.TAG_NAME, HtmlNoEmbed.TAG_NAME, HtmlNoFrames.TAG_NAME,
             HtmlNoScript.TAG_NAME, HtmlObject.TAG_NAME, HtmlOrderedList.TAG_NAME,
@@ -94,11 +94,11 @@ class DefaultElementFactory implements ElementFactory {
             HtmlScript.TAG_NAME, HtmlSection.TAG_NAME, HtmlSelect.TAG_NAME, HtmlSmall.TAG_NAME,
             HtmlSource.TAG_NAME, HtmlSpan.TAG_NAME,
             HtmlStrike.TAG_NAME, HtmlStrong.TAG_NAME, HtmlStyle.TAG_NAME,
-            HtmlSubscript.TAG_NAME, HtmlSuperscript.TAG_NAME,
+            HtmlSubscript.TAG_NAME, HtmlSummary.TAG_NAME, HtmlSuperscript.TAG_NAME,
             HtmlTable.TAG_NAME, HtmlTableColumn.TAG_NAME, HtmlTableColumnGroup.TAG_NAME,
             HtmlTableBody.TAG_NAME, HtmlTableDataCell.TAG_NAME, HtmlTableHeaderCell.TAG_NAME,
             HtmlTableRow.TAG_NAME, HtmlTextArea.TAG_NAME, HtmlTableFooter.TAG_NAME,
-            HtmlTableHeader.TAG_NAME, HtmlTeletype.TAG_NAME, HtmlTime.TAG_NAME, HtmlTitle.TAG_NAME,
+            HtmlTableHeader.TAG_NAME, HtmlTeletype.TAG_NAME, HtmlTime.TAG_NAME, HtmlTitle.TAG_NAME, HtmlTrack.TAG_NAME,
             HtmlUnderlined.TAG_NAME, HtmlUnorderedList.TAG_NAME,
             HtmlVariable.TAG_NAME, HtmlVideo.TAG_NAME,
             HtmlWordBreak.TAG_NAME, HtmlExample.TAG_NAME
@@ -214,6 +214,10 @@ class DefaultElementFactory implements ElementFactory {
                 }
                 break;
 
+            case HtmlBidirectionalIsolation.TAG_NAME:
+                element = new HtmlBidirectionalIsolation(qualifiedName, page, attributeMap);
+                break;
+
             case HtmlBidirectionalOverride.TAG_NAME:
                 element = new HtmlBidirectionalOverride(qualifiedName, page, attributeMap);
                 break;
@@ -296,6 +300,14 @@ class DefaultElementFactory implements ElementFactory {
 
             case HtmlDeletedText.TAG_NAME:
                 element = new HtmlDeletedText(qualifiedName, page, attributeMap);
+                break;
+
+            case HtmlDetails.TAG_NAME:
+                element = new HtmlDetails(qualifiedName, page, attributeMap);
+                break;
+
+            case HtmlDialog.TAG_NAME:
+                element = new HtmlDialog(qualifiedName, page, attributeMap);
                 break;
 
             case HtmlDirectory.TAG_NAME:
@@ -475,6 +487,10 @@ class DefaultElementFactory implements ElementFactory {
                 element = new HtmlListItem(qualifiedName, page, attributeMap);
                 break;
 
+            case HtmlMain.TAG_NAME:
+                element = new HtmlMain(qualifiedName, page, attributeMap);
+                break;
+
             case HtmlMap.TAG_NAME:
                 element = new HtmlMap(qualifiedName, page, attributeMap);
                 break;
@@ -493,6 +509,10 @@ class DefaultElementFactory implements ElementFactory {
 
             case HtmlMenu.TAG_NAME:
                 element = new HtmlMenu(qualifiedName, page, attributeMap);
+                break;
+
+            case HtmlMenuItem.TAG_NAME:
+                element = new HtmlMenuItem(qualifiedName, page, attributeMap);
                 break;
 
             case HtmlMeta.TAG_NAME:
@@ -663,6 +683,10 @@ class DefaultElementFactory implements ElementFactory {
                 element = new HtmlSubscript(qualifiedName, page, attributeMap);
                 break;
 
+            case HtmlSummary.TAG_NAME:
+                element = new HtmlSummary(qualifiedName, page, attributeMap);
+                break;
+
             case HtmlSuperscript.TAG_NAME:
                 element = new HtmlSuperscript(qualifiedName, page, attributeMap);
                 break;
@@ -711,16 +735,20 @@ class DefaultElementFactory implements ElementFactory {
                 element = new HtmlTextArea(qualifiedName, page, attributeMap);
                 break;
 
-            case HtmlTitle.TAG_NAME:
-                element = new HtmlTitle(qualifiedName, page, attributeMap);
-                break;
-
             case HtmlTime.TAG_NAME:
                 if (!page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
                     return UnknownElementFactory.instance.createElementNS(
                             page, namespaceURI, qualifiedName, attributes);
                 }
                 element = new HtmlTime(qualifiedName, page, attributeMap);
+                break;
+
+            case HtmlTitle.TAG_NAME:
+                element = new HtmlTitle(qualifiedName, page, attributeMap);
+                break;
+
+            case HtmlTrack.TAG_NAME:
+                element = new HtmlTrack(qualifiedName, page, attributeMap);
                 break;
 
             case HtmlUnderlined.TAG_NAME:

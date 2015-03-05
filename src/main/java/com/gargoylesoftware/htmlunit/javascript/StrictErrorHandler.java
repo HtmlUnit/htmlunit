@@ -24,6 +24,7 @@ import org.xml.sax.SAXParseException;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 public class StrictErrorHandler implements ErrorHandler {
+
     /**
      * A warning occurred.
      *

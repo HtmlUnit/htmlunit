@@ -25,6 +25,7 @@ import java.net.URLStreamHandler;
  * @author Marc Guillemot
  */
 public class Handler extends URLStreamHandler {
+
     /**
      * Returns a new URLConnection for this URL.
      * @param url the JavaScript URL

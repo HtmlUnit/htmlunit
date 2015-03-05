@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  */
 @RunWith(BrowserRunner.class)
 public class HtmlParagraphTest extends SimpleWebTestCase {
+
     /**
      * @throws Exception if the test fails
      */
