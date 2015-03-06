@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CANVAS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML5_RUBY_TAGS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML5_TAGS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLBASEFONT_SUPPORTED;
 
@@ -604,26 +603,14 @@ class DefaultElementFactory implements ElementFactory {
                 break;
 
             case HtmlRp.TAG_NAME:
-                if (!page.getWebClient().getBrowserVersion().hasFeature(HTML5_RUBY_TAGS)) {
-                    return UnknownElementFactory.instance.createElementNS(
-                            page, namespaceURI, qualifiedName, attributes);
-                }
                 element = new HtmlRp(qualifiedName, page, attributeMap);
                 break;
 
             case HtmlRt.TAG_NAME:
-                if (!page.getWebClient().getBrowserVersion().hasFeature(HTML5_RUBY_TAGS)) {
-                    return UnknownElementFactory.instance.createElementNS(
-                            page, namespaceURI, qualifiedName, attributes);
-                }
                 element = new HtmlRt(qualifiedName, page, attributeMap);
                 break;
 
             case HtmlRuby.TAG_NAME:
-                if (!page.getWebClient().getBrowserVersion().hasFeature(HTML5_RUBY_TAGS)) {
-                    return UnknownElementFactory.instance.createElementNS(
-                            page, namespaceURI, qualifiedName, attributes);
-                }
                 element = new HtmlRuby(qualifiedName, page, attributeMap);
                 break;
 

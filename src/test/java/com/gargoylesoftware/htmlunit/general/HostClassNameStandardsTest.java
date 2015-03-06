@@ -1590,10 +1590,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLPhraseElement]",
-            CHROME = "exception",
-            FF = "exception")
-    @NotYetImplemented({ FF, CHROME })
+    @Alerts(DEFAULT = "exception",
+            IE = "[object HTMLPhraseElement]")
     public void htmlPhraseElement() throws Exception {
         test("HTMLPhraseElement");
     }

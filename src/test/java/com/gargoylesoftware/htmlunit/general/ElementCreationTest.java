@@ -59,7 +59,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
-    @NotYetImplemented(CHROME)
     public void abbr() throws Exception {
         test("abbr");
     }
@@ -72,7 +71,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
-    @NotYetImplemented(CHROME)
     public void acronym() throws Exception {
         test("acronym");
     }
@@ -230,7 +228,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
-    @NotYetImplemented(CHROME)
     public void big() throws Exception {
         test("big");
     }
@@ -278,7 +275,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
-    @NotYetImplemented(CHROME)
     public void b() throws Exception {
         test("b");
     }
@@ -349,7 +345,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
-    @NotYetImplemented(CHROME)
     public void cite() throws Exception {
         test("cite");
     }
@@ -362,7 +357,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
-    @NotYetImplemented(CHROME)
     public void code() throws Exception {
         test("code");
     }
@@ -387,7 +381,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
-    @NotYetImplemented(CHROME)
     public void dfn() throws Exception {
         test("dfn");
     }
@@ -483,7 +476,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
-    @NotYetImplemented(CHROME)
     public void em() throws Exception {
         test("em");
     }
@@ -795,7 +787,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
-    @NotYetImplemented(CHROME)
     public void i() throws Exception {
         test("i");
     }
@@ -808,7 +799,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
-    @NotYetImplemented(CHROME)
     public void kbd() throws Exception {
         test("kbd");
     }
@@ -1027,7 +1017,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
-    @NotYetImplemented(CHROME)
     public void nobr() throws Exception {
         test("nobr");
     }
@@ -1199,7 +1188,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             CHROME = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
-    @NotYetImplemented(CHROME)
     public void rp() throws Exception {
         test("rp");
     }
@@ -1213,7 +1201,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             CHROME = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
-    @NotYetImplemented(CHROME)
     public void rt() throws Exception {
         test("rt");
     }
@@ -1227,7 +1214,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             CHROME = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
-    @NotYetImplemented(CHROME)
     public void ruby() throws Exception {
         test("ruby");
     }
@@ -1240,7 +1226,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
-    @NotYetImplemented(CHROME)
     public void s() throws Exception {
         test("s");
     }
@@ -1253,7 +1238,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
-    @NotYetImplemented(CHROME)
     public void samp() throws Exception {
         test("samp");
     }
@@ -1301,7 +1285,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
-    @NotYetImplemented(CHROME)
     public void small() throws Exception {
         test("small");
     }
@@ -1337,7 +1320,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
-    @NotYetImplemented(CHROME)
     public void strike() throws Exception {
         test("strike");
     }
@@ -1350,7 +1332,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
-    @NotYetImplemented(CHROME)
     public void strong() throws Exception {
         test("strong");
     }
@@ -1374,7 +1355,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
-    @NotYetImplemented(CHROME)
     public void sub() throws Exception {
         test("sub");
     }
@@ -1400,7 +1380,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
-    @NotYetImplemented(CHROME)
     public void sup() throws Exception {
         test("sup");
     }
@@ -1526,7 +1505,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
-    @NotYetImplemented(CHROME)
     public void tt() throws Exception {
         test("tt");
     }
@@ -1576,7 +1554,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
-    @NotYetImplemented(CHROME)
     public void u() throws Exception {
         test("u");
     }
@@ -1600,7 +1577,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLPhraseElement]")
-    @NotYetImplemented(CHROME)
     public void var() throws Exception {
         test("var");
     }

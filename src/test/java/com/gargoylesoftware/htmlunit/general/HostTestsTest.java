@@ -30,9 +30,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 /**
- * Tests the host tests have all JavaScript objects names defined in all the other tests.
+ * Tests the general host tests have all JavaScript objects names defined in all the other tests.
+ *
  * This classes parses all the test code, searching for [object some_name], and ensures that
- * {@link HostClassNameTest}, {@link HostClassNameStandardsTest} and {@link HostTypeOfTest} include ti.
+ * {@link HostClassNameTest}, {@link HostClassNameStandardsTest} and {@link HostTypeOfTest} include those objects.
  *
  * @version $Revision$
  * @author Ahmed Ashour
