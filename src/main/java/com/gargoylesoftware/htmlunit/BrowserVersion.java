@@ -172,7 +172,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         + " (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36",
         "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36"
         + " (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36",
-        38, "Chrome", null);
+        41, "Chrome", null);
 
     /** The default browser version. */
     private static BrowserVersion DefaultBrowserVersion_ = INTERNET_EXPLORER_8;
