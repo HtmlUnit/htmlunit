@@ -16,10 +16,13 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link HtmlBackgroundSound}.
@@ -29,15 +32,14 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HtmlBackgroundSoundTest extends SimpleWebTestCase {
+public class HtmlBackgroundSoundTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "[object HTMLBGSoundElement]",
-            FF = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLElement]")
+    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
+            IE = "[object HTMLBGSoundElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ +  "<html><head>\n"
             + "<script>\n"
@@ -49,9 +51,9 @@ public class HtmlBackgroundSoundTest extends SimpleWebTestCase {
             + "  <bgsound id='myId'/>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPageWithAlerts(html);
-        if (getExpectedAlerts()[0].contains("Sound")) {
-            assertTrue(HtmlBackgroundSound.class.isInstance(page.getHtmlElementById("myId")));
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver && getExpectedAlerts()[0].contains("Sound")) {
+            assertTrue(HtmlBackgroundSound.class.isInstance(toHtmlElement(driver.findElement(By.id("myId")))));
         }
     }
 }

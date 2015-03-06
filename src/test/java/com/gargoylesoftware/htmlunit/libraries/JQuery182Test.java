@@ -3899,7 +3899,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 22, 22")
-    @NotYetImplemented(CHROME)
     public void css__css_String__Object_() throws Exception {
         runTest("css: css(String, Object)");
     }
@@ -5229,7 +5228,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented(IE8)
     public void effects__animate_block_as_inline_width_height() throws Exception {
         runTest("effects: animate block as inline width/height");
     }
@@ -5240,7 +5239,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented(IE8)
     public void effects__animate_native_inline_width_height() throws Exception {
         runTest("effects: animate native inline width/height");
     }
