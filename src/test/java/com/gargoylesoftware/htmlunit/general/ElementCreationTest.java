@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript;
+package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
@@ -35,7 +35,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HostElementTest extends WebDriverTestCase {
+public class ElementCreationTest extends WebDriverTestCase {
 
     private void test(final String tagName) throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

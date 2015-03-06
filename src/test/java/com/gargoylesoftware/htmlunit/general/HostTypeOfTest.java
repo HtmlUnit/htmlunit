@@ -12,12 +12,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript;
+package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -28,28 +26,21 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
- * Tests the host class names match the Firefox (w3c names), in Standards Mode.
+ * Tests that <code>typeof</code> host class is correct.
  *
  * @version $Revision$
  * @author Ahmed Ashour
- * @author Ronald Brill
- *
- * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API">Web API Interfaces</a>
- * @see HostClassNameTest
  */
 @RunWith(BrowserRunner.class)
-public class HostClassNameStandardsTest extends WebDriverTestCase {
+public class HostTypeOfTest extends WebDriverTestCase {
 
     private void test(final String className) throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><script>\n"
+        final String html =
+            "<html><head><script>\n"
             + "  function test() {\n"
-            + "    try {\n"
-            + "      alert(" + className + ");\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "    alert(typeof " + className + ");\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -63,10 +54,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function ArrayBuffer() {\n    [native code]\n}",
-            CHROME = "function ArrayBuffer() { [native code] }",
-            IE11 = "\nfunction ArrayBuffer() {\n    [native code]\n}\n",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined")
     public void arrayBuffer() throws Exception {
         test("ArrayBuffer");
     }
@@ -77,7 +66,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("undefined")
     public void arrayBufferView() throws Exception {
         test("ArrayBufferView");
     }
@@ -88,7 +77,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("undefined")
     public void arrayBufferViewBase() throws Exception {
         test("ArrayBufferViewBase");
     }
@@ -99,9 +88,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Attr]",
-            CHROME = "function Attr() { [native code] }",
-            FF = "function Attr() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void attr() throws Exception {
         test("Attr");
     }
@@ -112,8 +102,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "\nfunction ActiveXObject() {\n    [native code]\n}\n")
+    @Alerts(DEFAULT = "undefined",
+            IE8 = "function")
     public void activeXObject() throws Exception {
         test("ActiveXObject");
     }
@@ -124,10 +114,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object ApplicationCache]",
-            CHROME = "function ApplicationCache() { [native code] }",
-            FF = "exception",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "undefined",
+            IE8 = "undefined")
     public void applicationCache() throws Exception {
         test("ApplicationCache");
     }
@@ -138,8 +128,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-        FF = "function OfflineResourceList() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
     public void offlineResourceList() throws Exception {
         test("OfflineResourceList");
     }
@@ -150,10 +140,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object BeforeUnloadEvent]",
-            CHROME = "function BeforeUnloadEvent() { [native code] }",
-            FF = "function BeforeUnloadEvent() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void beforeUnloadEvent() throws Exception {
         test("BeforeUnloadEvent");
     }
@@ -164,8 +154,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF24 = "[object BoxObject]")
+    @Alerts(DEFAULT = "undefined",
+            FF24 = "object")
     public void boxObject() throws Exception {
         test("BoxObject");
     }
@@ -176,10 +166,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object CDATASection]",
-            CHROME = "function CDATASection() { [native code] }",
-            FF = "function CDATASection() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void cdataSection() throws Exception {
         test("CDATASection");
     }
@@ -190,7 +180,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("undefined")
     public void clipboardData() throws Exception {
         test("ClipboardData");
     }
@@ -201,8 +191,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = "[object CSSCharsetRule]")
+    @Alerts(DEFAULT = "undefined",
+            FF = "object")
     public void cssCharsetRule() throws Exception {
         test("CSSCharsetRule");
     }
@@ -213,9 +203,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object CSSFontFaceRule]",
-            CHROME = "function CSSFontFaceRule() { [native code] }",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            IE8 = "undefined")
     public void cssFontFaceRule() throws Exception {
         test("CSSFontFaceRule");
     }
@@ -226,9 +216,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object CSSImportRule]",
-            CHROME = "function CSSImportRule() { [native code] }",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            IE8 = "undefined")
     public void cssImportRule() throws Exception {
         test("CSSImportRule");
     }
@@ -239,9 +229,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object CSSMediaRule]",
-            CHROME = "function CSSMediaRule() { [native code] }",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            IE8 = "undefined")
     public void cssMediaRule() throws Exception {
         test("CSSMediaRule");
     }
@@ -252,8 +242,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = "function CSSPrimitiveValue() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
     public void cssPrimitiveValue() throws Exception {
         test("CSSPrimitiveValue");
     }
@@ -264,9 +254,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object CSSRule]",
-            CHROME = "function CSSRule() { [native code] }",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            IE8 = "undefined")
     public void cssRule() throws Exception {
         test("CSSRule");
     }
@@ -277,8 +267,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object CSSRuleList]",
-            CHROME = "function CSSRuleList() { [native code] }")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            IE8 = "undefined")
     public void cssRuleList() throws Exception {
         test("CSSRuleList");
     }
@@ -289,9 +280,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object CSSStyleDeclaration]",
-            CHROME = "function CSSStyleDeclaration() { [native code] }",
-            FF = "function CSSStyleDeclaration() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void cssStyleDeclaration() throws Exception {
         test("CSSStyleDeclaration");
     }
@@ -302,8 +294,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = "function CSS2Properties() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
     @NotYetImplemented(FF)
     public void css2Properties() throws Exception {
         test("CSS2Properties");
@@ -315,8 +307,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object CSSStyleRule]",
-            CHROME = "function CSSStyleRule() { [native code] }")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            IE8 = "undefined")
     public void cssStyleRule() throws Exception {
         test("CSSStyleRule");
     }
@@ -327,9 +320,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object CSSStyleSheet]",
-            CHROME = "function CSSStyleSheet() { [native code] }",
-            FF = "function CSSStyleSheet() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void cssStyleSheet() throws Exception {
         test("CSSStyleSheet");
     }
@@ -340,8 +334,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = "function CSSValue() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
     public void cssValue() throws Exception {
         test("CSSValue");
     }
@@ -352,10 +346,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object CanvasRenderingContext2D]",
-            CHROME = "function CanvasRenderingContext2D() { [native code] }",
-            FF = "function CanvasRenderingContext2D() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void canvasRenderingContext2D() throws Exception {
         test("CanvasRenderingContext2D");
     }
@@ -366,7 +360,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("undefined")
     public void characterDataImpl() throws Exception {
         test("CharacterDataImpl");
     }
@@ -377,11 +371,11 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object ClientRect]",
-            CHROME = "function ClientRect() { [native code] }",
-            FF24 = "function ClientRect() {\n    [native code]\n}",
-            FF31 = "exception",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF24 = "function",
+            FF31 = "undefined",
+            IE8 = "undefined")
     public void clientRect() throws Exception {
         test("ClientRect");
     }
@@ -392,10 +386,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Comment]",
-            CHROME = "function Comment() { [native code] }",
-            FF = "function Comment() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void comment() throws Exception {
         test("Comment");
     }
@@ -406,9 +400,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-        IE8 = "[object HTMLCommentElement]")
-    @NotYetImplemented(IE8)
+    @Alerts("undefined")
     public void htmlCommentElement() throws Exception {
         test("HTMLCommentElement");
     }
@@ -419,7 +411,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("undefined")
     public void computedCSSStyleDeclaration() throws Exception {
         test("ComputedCSSStyleDeclaration");
     }
@@ -430,8 +422,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE11 = "[object Console]")
+    @Alerts(DEFAULT = "undefined",
+            IE11 = "object")
     public void console() throws Exception {
         test("Console");
     }
@@ -442,10 +434,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Coordinates]",
-            CHROME = "exception",
-            FF = "exception",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "undefined",
+            FF = "undefined",
+            IE8 = "undefined")
     public void coordinates() throws Exception {
         test("Coordinates");
     }
@@ -456,10 +448,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function DataView() {\n    [native code]\n}",
-            CHROME = "function DataView() { [native code] }",
-            IE11 = "\nfunction DataView() {\n    [native code]\n}\n",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined")
     public void dataView() throws Exception {
         test("DataView");
     }
@@ -470,10 +460,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object DOMException]",
-            CHROME = "function DOMException() { [native code] }",
-            FF31 = "function DOMException() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF31 = "function",
+            IE8 = "undefined")
     public void domException() throws Exception {
         test("DOMException");
     }
@@ -484,9 +474,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object DOMImplementation]",
-            CHROME = "function DOMImplementation() { [native code] }",
-            FF = "function DOMImplementation() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void domImplementation() throws Exception {
         test("DOMImplementation");
     }
@@ -497,10 +488,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function DOMParser() {\n    [native code]\n}",
-            CHROME = "function DOMParser() { [native code] }",
-            IE11 = "\nfunction DOMParser() {\n    [native code]\n}\n",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined")
     public void domParser() throws Exception {
         test("DOMParser");
     }
@@ -511,10 +500,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object DOMStringMap]",
-            CHROME = "function DOMStringMap() { [native code] }",
-            FF = "function DOMStringMap() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void domStringMap() throws Exception {
         test("DOMStringMap");
     }
@@ -525,10 +514,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object DOMTokenList]",
-            CHROME = "function DOMTokenList() { [native code] }",
-            FF = "function DOMTokenList() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void domTokenList() throws Exception {
         test("DOMTokenList");
     }
@@ -539,10 +528,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Document]",
-            CHROME = "function Document() { [native code] }",
-            FF = "function Document() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void document() throws Exception {
         test("Document");
     }
@@ -553,10 +542,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object DocumentFragment]",
-            CHROME = "function DocumentFragment() { [native code] }",
-            FF = "function DocumentFragment() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void documentFragment() throws Exception {
         test("DocumentFragment");
     }
@@ -567,10 +556,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object DocumentType]",
-            CHROME = "function DocumentType() { [native code] }",
-            FF = "function DocumentType() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void documentType() throws Exception {
         test("DocumentType");
     }
@@ -581,9 +570,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Element]",
-            CHROME = "function Element() { [native code] }",
-            FF = "function Element() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void element() throws Exception {
         test("Element");
     }
@@ -594,8 +584,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "\nfunction Enumerator() {\n    [native code]\n}\n")
+    @Alerts(DEFAULT = "undefined",
+            IE = "function")
     public void enumerator() throws Exception {
         test("Enumerator");
     }
@@ -606,9 +596,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Event]",
-            CHROME = "function Event() { [native code] }",
-            FF = "function Event() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void event() throws Exception {
         test("Event");
     }
@@ -619,7 +610,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("undefined")
     public void eventNode() throws Exception {
         test("EventNode");
     }
@@ -630,8 +621,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF31 = "function External() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
     public void external() throws Exception {
         test("External");
     }
@@ -642,10 +633,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function Float32Array() {\n    [native code]\n}",
-            CHROME = "function Float32Array() { [native code] }",
-            IE11 = "\nfunction Float32Array() {\n    [native code]\n}\n",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined")
     public void float32Array() throws Exception {
         test("Float32Array");
     }
@@ -656,10 +645,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function Float64Array() {\n    [native code]\n}",
-            CHROME = "function Float64Array() { [native code] }",
-            IE11 = "\nfunction Float64Array() {\n    [native code]\n}\n",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined")
     public void float64Array() throws Exception {
         test("Float64Array");
     }
@@ -670,7 +657,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("undefined")
     public void formChild() throws Exception {
         test("FormChild");
     }
@@ -681,7 +668,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("undefined")
     public void formField() throws Exception {
         test("FormField");
     }
@@ -692,10 +679,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Geolocation]",
-            CHROME = "exception",
-            FF = "exception",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "undefined",
+            FF = "undefined",
+            IE8 = "undefined")
     public void geolocation() throws Exception {
         test("Geolocation");
     }
@@ -706,9 +693,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function HashChangeEvent() { [native code] }",
-            FF = "function HashChangeEvent() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function")
     public void hashChangeEvent() throws Exception {
         test("HashChangeEvent");
     }
@@ -719,9 +706,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object History]",
-            CHROME = "function History() { [native code] }",
-            FF31 = "function History() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF31 = "function",
+            IE8 = "undefined")
     public void history() throws Exception {
         test("History");
     }
@@ -732,9 +720,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLAnchorElement]",
-            CHROME = "function HTMLAnchorElement() { [native code] }",
-            FF = "function HTMLAnchorElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlAnchorElement() throws Exception {
         test("HTMLAnchorElement");
     }
@@ -745,10 +734,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLAppletElement]",
-            CHROME = "function HTMLAppletElement() { [native code] }",
-            FF = "function HTMLAppletElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlAppletElement() throws Exception {
         test("HTMLAppletElement");
     }
@@ -759,9 +748,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLAreaElement]",
-            CHROME = "function HTMLAreaElement() { [native code] }",
-            FF = "function HTMLAreaElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlAreaElement() throws Exception {
         test("HTMLAreaElement");
     }
@@ -772,10 +762,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLAudioElement]",
-            CHROME = "function HTMLAudioElement() { [native code] }",
-            FF = "function HTMLAudioElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlAudioElement() throws Exception {
         test("HTMLAudioElement");
     }
@@ -786,8 +776,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "[object HTMLBGSoundElement]")
+    @Alerts(DEFAULT = "undefined",
+            IE11 = "object")
     public void htmlBGSoundElement() throws Exception {
         test("HTMLBGSoundElement");
     }
@@ -798,9 +788,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLBRElement]",
-            CHROME = "function HTMLBRElement() { [native code] }",
-            FF = "function HTMLBRElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlBRElement() throws Exception {
         test("HTMLBRElement");
     }
@@ -811,9 +802,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLBaseElement]",
-            CHROME = "function HTMLBaseElement() { [native code] }",
-            FF = "function HTMLBaseElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlBaseElement() throws Exception {
         test("HTMLBaseElement");
     }
@@ -824,9 +816,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLBaseFontElement]",
-            CHROME = "exception",
-            FF = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "undefined",
+            FF = "undefined",
+            IE8 = "undefined")
     public void htmlBaseFontElement() throws Exception {
         test("HTMLBaseFontElement");
     }
@@ -837,9 +830,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "[object HTMLBlockElement]")
-    @NotYetImplemented({ FF, CHROME })
+    @Alerts(DEFAULT = "undefined",
+            IE11 = "object")
+    @NotYetImplemented({ IE8, FF, CHROME })
     public void htmlBlockElement() throws Exception {
         test("HTMLBlockElement");
     }
@@ -850,7 +843,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("undefined")
     public void htmlBlockQuoteElement() throws Exception {
         test("HTMLBlockQuoteElement");
     }
@@ -861,24 +854,24 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "function HTMLQuoteElement() { [native code] }",
-            FF = "function HTMLQuoteElement() {\n    [native code]\n}",
-            IE = "[object HTMLQuoteElement]",
-            IE8 = "exception")
-    @NotYetImplemented({ FF, CHROME })
+    @Alerts(DEFAULT = "function",
+        IE8 = "undefined",
+        IE11 = "object")
+    @NotYetImplemented({ CHROME, FF })
     public void htmlQuoteElement() throws Exception {
         test("HTMLQuoteElement");
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBlockQuoteElement}.
      *
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLBodyElement]",
-            CHROME = "function HTMLBodyElement() { [native code] }",
-            FF = "function HTMLBodyElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlBodyElement() throws Exception {
         test("HTMLBodyElement");
     }
@@ -889,9 +882,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLButtonElement]",
-            CHROME = "function HTMLButtonElement() { [native code] }",
-            FF = "function HTMLButtonElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlButtonElement() throws Exception {
         test("HTMLButtonElement");
     }
@@ -902,10 +896,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLCanvasElement]",
-            CHROME = "function HTMLCanvasElement() { [native code] }",
-            FF = "function HTMLCanvasElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlCanvasElement() throws Exception {
         test("HTMLCanvasElement");
     }
@@ -916,9 +910,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLCollection]",
-            CHROME = "function HTMLCollection() { [native code] }",
-            FF = "function HTMLCollection() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlCollection() throws Exception {
         test("HTMLCollection");
     }
@@ -929,10 +924,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLAllCollection]",
-            CHROME = "function HTMLAllCollection() { [native code] }",
-            FF = "exception",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "undefined",
+            IE8 = "undefined")
     public void htmlAllCollection() throws Exception {
         test("HTMLAllCollection");
     }
@@ -943,10 +938,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLDataListElement]",
-            CHROME = "function HTMLDataListElement() { [native code] }",
-            FF = "function HTMLDataListElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlDataListElement() throws Exception {
         test("HTMLDataListElement");
     }
@@ -957,7 +952,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("undefined")
     public void htmlDefinitionDescriptionElement() throws Exception {
         test("HTMLDefinitionDescriptionElement");
     }
@@ -968,8 +963,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "[object HTMLDDElement]")
+    @Alerts(DEFAULT = "undefined",
+            IE11 = "object")
     public void htmlDDElement() throws Exception {
         test("HTMLDDElement");
     }
@@ -980,7 +975,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("undefined")
     public void htmlDefinitionTermElement() throws Exception {
         test("HTMLDefinitionTermElement");
     }
@@ -991,8 +986,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "[object HTMLDTElement]")
+    @Alerts(DEFAULT = "undefined",
+            IE11 = "object")
     public void htmlDTElement() throws Exception {
         test("HTMLDTElement");
     }
@@ -1003,9 +998,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLDListElement]",
-            CHROME = "function HTMLDListElement() { [native code] }",
-            FF = "function HTMLDListElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlDListElement() throws Exception {
         test("HTMLDListElement");
     }
@@ -1016,10 +1012,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLDirectoryElement]",
-            CHROME = "function HTMLDirectoryElement() { [native code] }",
-            FF = "function HTMLDirectoryElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlDirectoryElement() throws Exception {
         test("HTMLDirectoryElement");
     }
@@ -1030,9 +1026,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLDivElement]",
-            CHROME = "function HTMLDivElement() { [native code] }",
-            FF = "function HTMLDivElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlDivElement() throws Exception {
         test("HTMLDivElement");
     }
@@ -1043,9 +1040,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLDocument]",
-            CHROME = "function HTMLDocument() { [native code] }",
-            FF = "function HTMLDocument() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlDocument() throws Exception {
         test("HTMLDocument");
     }
@@ -1056,10 +1054,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            CHROME = "function HTMLElement() { [native code] }",
-            FF = "function HTMLElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlElement() throws Exception {
         test("HTMLElement");
     }
@@ -1070,9 +1068,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLEmbedElement]",
-            CHROME = "function HTMLEmbedElement() { [native code] }",
-            FF = "function HTMLEmbedElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlEmbedElement() throws Exception {
         test("HTMLEmbedElement");
     }
@@ -1083,9 +1082,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLFieldSetElement]",
-            CHROME = "function HTMLFieldSetElement() { [native code] }",
-            FF = "function HTMLFieldSetElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlFieldSetElement() throws Exception {
         test("HTMLFieldSetElement");
     }
@@ -1096,9 +1096,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLFontElement]",
-            CHROME = "function HTMLFontElement() { [native code] }",
-            FF = "function HTMLFontElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlFontElement() throws Exception {
         test("HTMLFontElement");
     }
@@ -1109,9 +1110,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLFormElement]",
-            CHROME = "function HTMLFormElement() { [native code] }",
-            FF = "function HTMLFormElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlFormElement() throws Exception {
         test("HTMLFormElement");
     }
@@ -1122,9 +1124,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLFrameElement]",
-            CHROME = "function HTMLFrameElement() { [native code] }",
-            FF = "function HTMLFrameElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlFrameElement() throws Exception {
         test("HTMLFrameElement");
     }
@@ -1135,9 +1138,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLFrameSetElement]",
-            CHROME = "function HTMLFrameSetElement() { [native code] }",
-            FF = "function HTMLFrameSetElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlFrameSetElement() throws Exception {
         test("HTMLFrameSetElement");
     }
@@ -1148,9 +1152,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLHRElement]",
-            CHROME = "function HTMLHRElement() { [native code] }",
-            FF = "function HTMLHRElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlHRElement() throws Exception {
         test("HTMLHRElement");
     }
@@ -1161,9 +1166,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLHeadElement]",
-            CHROME = "function HTMLHeadElement() { [native code] }",
-            FF = "function HTMLHeadElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlHeadElement() throws Exception {
         test("HTMLHeadElement");
     }
@@ -1174,9 +1180,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLHeadingElement]",
-            CHROME = "function HTMLHeadingElement() { [native code] }",
-            FF = "function HTMLHeadingElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlHeadingElement() throws Exception {
         test("HTMLHeadingElement");
     }
@@ -1187,9 +1194,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLHtmlElement]",
-            CHROME = "function HTMLHtmlElement() { [native code] }",
-            FF = "function HTMLHtmlElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlHtmlElement() throws Exception {
         test("HTMLHtmlElement");
     }
@@ -1200,9 +1208,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLIFrameElement]",
-            CHROME = "function HTMLIFrameElement() { [native code] }",
-            FF = "function HTMLIFrameElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlIFrameElement() throws Exception {
         test("HTMLIFrameElement");
     }
@@ -1213,9 +1222,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "function HTMLImageElement() { [native code] }",
-            FF = "function HTMLImageElement() {\n    [native code]\n}",
-            IE = "[object HTMLImageElement]")
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined",
+            IE11 = "object")
     public void htmlImageElement() throws Exception {
         test("HTMLImageElement");
     }
@@ -1226,10 +1235,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "function HTMLImageElement() { [native code] }",
-            FF = "function Image() {\n    [native code]\n}",
-            IE8 = "[object HTMLImageElement]",
-            IE11 = "\nfunction Image() {\n    [native code]\n}\n")
+    @Alerts(DEFAULT = "function",
+            IE8 = "object")
     public void image() throws Exception {
         test("Image");
     }
@@ -1240,7 +1247,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("undefined")
     public void htmlInlineQuotationElement() throws Exception {
         test("HTMLInlineQuotationElement");
     }
@@ -1251,9 +1258,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLInputElement]",
-            CHROME = "function HTMLInputElement() { [native code] }",
-            FF = "function HTMLInputElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlInputElement() throws Exception {
         test("HTMLInputElement");
     }
@@ -1264,9 +1272,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLIsIndexElement]",
-            CHROME = "exception",
-            FF = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "undefined",
+            FF = "undefined",
+            IE8 = "undefined")
     public void htmlIsIndexElement() throws Exception {
         test("HTMLIsIndexElement");
     }
@@ -1277,8 +1286,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function HTMLKeygenElement() { [native code] }")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
     public void htmlKeygenElement() throws Exception {
         test("HTMLKeygenElement");
     }
@@ -1289,9 +1298,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLLIElement]",
-            CHROME = "function HTMLLIElement() { [native code] }",
-            FF = "function HTMLLIElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlLIElement() throws Exception {
         test("HTMLLIElement");
     }
@@ -1302,9 +1312,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLLabelElement]",
-            CHROME = "function HTMLLabelElement() { [native code] }",
-            FF = "function HTMLLabelElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlLabelElement() throws Exception {
         test("HTMLLabelElement");
     }
@@ -1315,9 +1326,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLLegendElement]",
-            CHROME = "function HTMLLegendElement() { [native code] }",
-            FF = "function HTMLLegendElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlLegendElement() throws Exception {
         test("HTMLLegendElement");
     }
@@ -1328,9 +1340,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLLinkElement]",
-            CHROME = "function HTMLLinkElement() { [native code] }",
-            FF = "function HTMLLinkElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlLinkElement() throws Exception {
         test("HTMLLinkElement");
     }
@@ -1341,7 +1354,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("undefined")
     public void htmlListElement() throws Exception {
         test("HTMLListElement");
     }
@@ -1352,9 +1365,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLMapElement]",
-            CHROME = "function HTMLMapElement() { [native code] }",
-            FF = "function HTMLMapElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlMapElement() throws Exception {
         test("HTMLMapElement");
     }
@@ -1365,9 +1379,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLMarqueeElement]",
-            CHROME = "function HTMLMarqueeElement() { [native code] }",
-            FF = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "undefined",
+            IE8 = "undefined")
     public void htmlMarqueeElement() throws Exception {
         test("HTMLMarqueeElement");
     }
@@ -1378,10 +1393,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLMediaElement]",
-            CHROME = "function HTMLMediaElement() { [native code] }",
-            FF = "function HTMLMediaElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlMediaElement() throws Exception {
         test("HTMLMediaElement");
     }
@@ -1392,10 +1407,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLMenuElement]",
-            CHROME = "function HTMLMenuElement() { [native code] }",
-            FF = "function HTMLMenuElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlMenuElement() throws Exception {
         test("HTMLMenuElement");
     }
@@ -1406,9 +1421,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLMetaElement]",
-            CHROME = "function HTMLMetaElement() { [native code] }",
-            FF = "function HTMLMetaElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlMetaElement() throws Exception {
         test("HTMLMetaElement");
     }
@@ -1419,9 +1435,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function HTMLMeterElement() { [native code] }",
-            FF = "function HTMLMeterElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function")
     public void htmlMeterElement() throws Exception {
         test("HTMLMeterElement");
     }
@@ -1432,10 +1448,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLModElement]",
-            CHROME = "function HTMLModElement() { [native code] }",
-            FF = "function HTMLModElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlModElement() throws Exception {
         test("HTMLModElement");
     }
@@ -1446,8 +1462,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = "[object HTMLNoShowElement]")
+    @Alerts(DEFAULT = "undefined",
+            IE8 = "undefined")
     public void htmlNoShowElement() throws Exception {
         test("HTMLNoShowElement");
     }
@@ -1458,9 +1474,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLNextIdElement]",
-            CHROME = "exception",
-            FF = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "undefined",
+            FF = "undefined",
+            IE8 = "undefined")
     public void htmlNextIdElement() throws Exception {
         test("HTMLNextIdElement");
     }
@@ -1471,9 +1488,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLOListElement]",
-            CHROME = "function HTMLOListElement() { [native code] }",
-            FF = "function HTMLOListElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlOListElement() throws Exception {
         test("HTMLOListElement");
     }
@@ -1484,9 +1502,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLObjectElement]",
-            CHROME = "function HTMLObjectElement() { [native code] }",
-            FF = "function HTMLObjectElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlObjectElement() throws Exception {
         test("HTMLObjectElement");
     }
@@ -1497,10 +1516,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLOptGroupElement]",
-            CHROME = "function HTMLOptGroupElement() { [native code] }",
-            FF = "function HTMLOptGroupElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlOptGroupElement() throws Exception {
         test("HTMLOptGroupElement");
     }
@@ -1511,9 +1530,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "function HTMLOptionElement() { [native code] }",
-            FF = "function HTMLOptionElement() {\n    [native code]\n}",
-            IE = "[object HTMLOptionElement]")
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined",
+            IE11 = "object")
     public void htmlOptionElement() throws Exception {
         test("HTMLOptionElement");
     }
@@ -1524,10 +1543,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "function HTMLOptionElement() { [native code] }",
-            FF = "function Option() {\n    [native code]\n}",
-            IE8 = "[object HTMLOptionElement]",
-            IE11 = "\nfunction Option() {\n    [native code]\n}\n")
+    @Alerts(DEFAULT = "function",
+            IE8 = "object")
     public void option() throws Exception {
         test("Option");
     }
@@ -1538,9 +1555,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function HTMLOptionsCollection() { [native code] }",
-            FF = "function HTMLOptionsCollection() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function")
     public void htmlOptionsCollection() throws Exception {
         test("HTMLOptionsCollection");
     }
@@ -1551,9 +1568,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function HTMLOutputElement() { [native code] }",
-            FF = "function HTMLOutputElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function")
     public void htmlOutputElement() throws Exception {
         test("HTMLOutputElement");
     }
@@ -1564,9 +1581,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLParagraphElement]",
-            CHROME = "function HTMLParagraphElement() { [native code] }",
-            FF = "function HTMLParagraphElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlParagraphElement() throws Exception {
         test("HTMLParagraphElement");
     }
@@ -1577,9 +1595,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLParamElement]",
-            CHROME = "function HTMLParamElement() { [native code] }",
-            FF = "function HTMLParamElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlParamElement() throws Exception {
         test("HTMLParamElement");
     }
@@ -1590,10 +1609,11 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLPhraseElement]",
-            CHROME = "exception",
-            FF = "exception")
-    @NotYetImplemented({ FF, CHROME })
+    @Alerts(DEFAULT = "object",
+            CHROME = "undefined",
+            FF = "undefined",
+            IE8 = "undefined")
+    @NotYetImplemented({ FF, CHROME, IE8 })
     public void htmlPhraseElement() throws Exception {
         test("HTMLPhraseElement");
     }
@@ -1604,10 +1624,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLPreElement]",
-            CHROME = "function HTMLPreElement() { [native code] }",
-            FF = "function HTMLPreElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlPreElement() throws Exception {
         test("HTMLPreElement");
     }
@@ -1618,10 +1638,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLProgressElement]",
-            CHROME = "function HTMLProgressElement() { [native code] }",
-            FF = "function HTMLProgressElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlProgressElement() throws Exception {
         test("HTMLProgressElement");
     }
@@ -1632,9 +1652,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLScriptElement]",
-            CHROME = "function HTMLScriptElement() { [native code] }",
-            FF = "function HTMLScriptElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlScriptElement() throws Exception {
         test("HTMLScriptElement");
     }
@@ -1645,9 +1666,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLSelectElement]",
-            CHROME = "function HTMLSelectElement() { [native code] }",
-            FF = "function HTMLSelectElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlSelectElement() throws Exception {
         test("HTMLSelectElement");
     }
@@ -1658,10 +1680,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLSourceElement]",
-            CHROME = "function HTMLSourceElement() { [native code] }",
-            FF = "function HTMLSourceElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlSourceElement() throws Exception {
         test("HTMLSourceElement");
     }
@@ -1672,9 +1694,11 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLSpanElement]",
-            CHROME = "function HTMLSpanElement() { [native code] }",
-            FF = "function HTMLSpanElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
+    @NotYetImplemented(IE8)
     public void htmlSpanElement() throws Exception {
         test("HTMLSpanElement");
     }
@@ -1685,9 +1709,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLStyleElement]",
-            CHROME = "function HTMLStyleElement() { [native code] }",
-            FF = "function HTMLStyleElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlStyleElement() throws Exception {
         test("HTMLStyleElement");
     }
@@ -1698,9 +1723,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLTableCaptionElement]",
-            CHROME = "function HTMLTableCaptionElement() { [native code] }",
-            FF = "function HTMLTableCaptionElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlTableCaptionElement() throws Exception {
         test("HTMLTableCaptionElement");
     }
@@ -1711,9 +1737,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLTableCellElement]",
-            CHROME = "function HTMLTableCellElement() { [native code] }",
-            FF = "function HTMLTableCellElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlTableCellElement() throws Exception {
         test("HTMLTableCellElement");
     }
@@ -1724,9 +1751,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLTableColElement]",
-            CHROME = "function HTMLTableColElement() { [native code] }",
-            FF = "function HTMLTableColElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlTableColElement() throws Exception {
         test("HTMLTableColElement");
     }
@@ -1737,7 +1765,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("undefined")
     public void htmlTableComponent() throws Exception {
         test("HTMLTableComponent");
     }
@@ -1748,10 +1776,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLTableDataCellElement]",
-            CHROME = "exception",
-            FF = "exception",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "undefined",
+            FF = "undefined",
+            IE8 = "undefined")
     public void htmlTableDataCellElement() throws Exception {
         test("HTMLTableDataCellElement");
     }
@@ -1762,9 +1790,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLTableElement]",
-            CHROME = "function HTMLTableElement() { [native code] }",
-            FF = "function HTMLTableElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlTableElement() throws Exception {
         test("HTMLTableElement");
     }
@@ -1775,10 +1804,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLTableHeaderCellElement]",
-            CHROME = "exception",
-            FF = "exception",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "undefined",
+            FF = "undefined",
+            IE8 = "undefined")
     public void htmlTableHeaderCellElement() throws Exception {
         test("HTMLTableHeaderCellElement");
     }
@@ -1789,9 +1818,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLTableRowElement]",
-            CHROME = "function HTMLTableRowElement() { [native code] }",
-            FF = "function HTMLTableRowElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlTableRowElement() throws Exception {
         test("HTMLTableRowElement");
     }
@@ -1802,9 +1832,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLTableSectionElement]",
-            CHROME = "function HTMLTableSectionElement() { [native code] }",
-            FF = "function HTMLTableSectionElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlTableSectionElement() throws Exception {
         test("HTMLTableSectionElement");
     }
@@ -1815,8 +1846,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = "[object HTMLTextElement]")
+    @Alerts("undefined")
     public void htmlTextElement() throws Exception {
         test("HTMLTextElement");
     }
@@ -1827,9 +1857,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLTextAreaElement]",
-            CHROME = "function HTMLTextAreaElement() { [native code] }",
-            FF = "function HTMLTextAreaElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlTextAreaElement() throws Exception {
         test("HTMLTextAreaElement");
     }
@@ -1840,8 +1871,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = "function HTMLTimeElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
     public void htmlTimeElement() throws Exception {
         test("HTMLTimeElement");
     }
@@ -1852,9 +1883,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLTitleElement]",
-            CHROME = "function HTMLTitleElement() { [native code] }",
-            FF = "function HTMLTitleElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlTitleElement() throws Exception {
         test("HTMLTitleElement");
     }
@@ -1865,9 +1897,11 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUListElement]",
-            CHROME = "function HTMLUListElement() { [native code] }",
-            FF = "function HTMLUListElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
+    @NotYetImplemented(IE8)
     public void htmlUListElement() throws Exception {
         test("HTMLUListElement");
     }
@@ -1878,10 +1912,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "function HTMLUnknownElement() { [native code] }",
-            FF = "function HTMLUnknownElement() {\n    [native code]\n}")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlUnknownElement() throws Exception {
         test("HTMLUnknownElement");
     }
@@ -1892,8 +1926,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = "[object HTMLGenericElement]")
+    @Alerts("undefined")
     public void htmlGenericElement() throws Exception {
         test("HTMLGenericElement");
     }
@@ -1904,7 +1937,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("undefined")
     public void htmlWBRElement() throws Exception {
         test("HTMLWBRElement");
     }
@@ -1915,10 +1948,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLVideoElement]",
-            CHROME = "function HTMLVideoElement() { [native code] }",
-            FF = "function HTMLVideoElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void htmlVideoElement() throws Exception {
         test("HTMLVideoElement");
     }
@@ -1929,10 +1962,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function Int16Array() {\n    [native code]\n}",
-            CHROME = "function Int16Array() { [native code] }",
-            IE11 = "\nfunction Int16Array() {\n    [native code]\n}\n",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined")
     public void int16Array() throws Exception {
         test("Int16Array");
     }
@@ -1943,10 +1974,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function Int32Array() {\n    [native code]\n}",
-            CHROME = "function Int32Array() { [native code] }",
-            IE11 = "\nfunction Int32Array() {\n    [native code]\n}\n",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined")
     public void int32Array() throws Exception {
         test("Int32Array");
     }
@@ -1957,10 +1986,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function Int8Array() {\n    [native code]\n}",
-            CHROME = "function Int8Array() { [native code] }",
-            IE11 = "\nfunction Int8Array() {\n    [native code]\n}\n",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined")
     public void int8Array() throws Exception {
         test("Int8Array");
     }
@@ -1971,10 +1998,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object KeyboardEvent]",
-            CHROME = "function KeyboardEvent() { [native code] }",
-            FF = "function KeyboardEvent() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void keyboardEvent() throws Exception {
         test("KeyboardEvent");
     }
@@ -1985,8 +2012,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Location]",
-            CHROME = "function Location() { [native code] }")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            IE8 = "undefined")
     public void location() throws Exception {
         test("Location");
     }
@@ -1997,10 +2025,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object MediaList]",
-            CHROME = "function MediaList() { [native code] }",
-            FF31 = "function MediaList() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF31 = "function",
+            IE8 = "undefined")
     public void mediaList() throws Exception {
         test("MediaList");
     }
@@ -2011,10 +2039,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object MessageEvent]",
-            CHROME = "function MessageEvent() { [native code] }",
-            FF = "function MessageEvent() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void messageEvent() throws Exception {
         test("MessageEvent");
     }
@@ -2025,10 +2053,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object MimeType]",
-            CHROME = "function MimeType() { [native code] }",
-            FF31 = "function MimeType() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF31 = "function",
+            IE8 = "undefined")
     public void mimeType() throws Exception {
         test("MimeType");
     }
@@ -2039,10 +2067,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object MimeTypeArray]",
-            CHROME = "function MimeTypeArray() { [native code] }",
-            FF31 = "function MimeTypeArray() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF31 = "function",
+            IE8 = "undefined")
     public void mimeTypeArray() throws Exception {
         test("MimeTypeArray");
     }
@@ -2053,10 +2081,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object MouseEvent]",
-            CHROME = "function MouseEvent() { [native code] }",
-            FF = "function MouseEvent() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void mouseEvent() throws Exception {
         test("MouseEvent");
     }
@@ -2067,10 +2095,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object MutationEvent]",
-            CHROME = "function MutationEvent() { [native code] }",
-            FF = "function MutationEvent() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void mutationEvent() throws Exception {
         test("MutationEvent");
     }
@@ -2081,9 +2109,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object NamedNodeMap]",
-            CHROME = "function NamedNodeMap() { [native code] }",
-            FF = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "undefined",
+            IE8 = "undefined")
     public void namedNodeMap() throws Exception {
         test("NamedNodeMap");
     }
@@ -2094,7 +2123,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("undefined")
     public void namespace() throws Exception {
         test("Namespace");
     }
@@ -2105,7 +2134,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("undefined")
     public void namespaceCollection() throws Exception {
         test("NamespaceCollection");
     }
@@ -2116,9 +2145,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Navigator]",
-            CHROME = "function Navigator() { [native code] }",
-            FF31 = "function Navigator() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF31 = "function",
+            IE8 = "undefined")
     public void navigator() throws Exception {
         test("Navigator");
     }
@@ -2129,10 +2159,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Node]",
-            CHROME = "function Node() { [native code] }",
-            FF = "function Node() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void node() throws Exception {
         test("Node");
     }
@@ -2143,10 +2173,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object NodeFilter]",
-            CHROME = "function NodeFilter() { [native code] }",
-            FF = "function NodeFilter() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void nodeFilter() throws Exception {
         test("NodeFilter");
     }
@@ -2157,9 +2187,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object NodeList]",
-            CHROME = "function NodeList() { [native code] }",
-            FF = "function NodeList() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void nodeList() throws Exception {
         test("NodeList");
     }
@@ -2170,10 +2201,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Plugin]",
-            CHROME = "function Plugin() { [native code] }",
-            FF31 = "function Plugin() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF31 = "function",
+            IE8 = "undefined")
     public void plugin() throws Exception {
         test("Plugin");
     }
@@ -2184,10 +2215,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object PluginArray]",
-            CHROME = "function PluginArray() { [native code] }",
-            FF31 = "function PluginArray() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF31 = "function",
+            IE8 = "undefined")
     public void pluginArray() throws Exception {
         test("PluginArray");
     }
@@ -2198,10 +2229,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object PointerEvent]",
-            CHROME = "exception",
-            FF = "exception",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "undefined",
+            FF = "undefined",
+            IE8 = "undefined")
     public void pointerEvent() throws Exception {
         test("PointerEvent");
     }
@@ -2212,7 +2243,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("undefined")
     public void popup() throws Exception {
         test("Popup");
     }
@@ -2223,10 +2254,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Position]",
-            CHROME = "exception",
-            FF = "exception",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "undefined",
+            FF = "undefined",
+            IE8 = "undefined")
     public void position() throws Exception {
         test("Position");
     }
@@ -2237,10 +2268,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object ProcessingInstruction]",
-            CHROME = "function ProcessingInstruction() { [native code] }",
-            FF = "function ProcessingInstruction() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void processingInstruction() throws Exception {
         test("ProcessingInstruction");
     }
@@ -2251,10 +2282,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Range]",
-            CHROME = "function Range() { [native code] }",
-            FF = "function Range() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void range() throws Exception {
         test("Range");
     }
@@ -2265,7 +2296,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("undefined")
     public void rowContainer() throws Exception {
         test("RowContainer");
     }
@@ -2276,10 +2307,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGAElement]",
-            CHROME = "function SVGAElement() { [native code] }",
-            FF = "function SVGAElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgAElement() throws Exception {
         test("SVGAElement");
     }
@@ -2290,8 +2321,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = "function SVGAltGlyphElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
     public void svgAltGlyphElement() throws Exception {
         test("SVGAltGlyphElement");
     }
@@ -2302,10 +2333,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGAngle]",
-            CHROME = "function SVGAngle() { [native code] }",
-            FF = "function SVGAngle() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgAngle() throws Exception {
         test("SVGAngle");
     }
@@ -2316,9 +2347,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function SVGAnimateElement() { [native code] }",
-            FF = "function SVGAnimateElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function")
     public void svgAnimateElement() throws Exception {
         test("SVGAnimateElement");
     }
@@ -2329,9 +2360,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function SVGAnimateMotionElement() { [native code] }",
-            FF = "function SVGAnimateMotionElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function")
     public void svgAnimateMotionElement() throws Exception {
         test("SVGAnimateMotionElement");
     }
@@ -2342,9 +2373,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function SVGAnimateTransformElement() { [native code] }",
-            FF = "function SVGAnimateTransformElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function")
     public void svgAnimateTransformElement() throws Exception {
         test("SVGAnimateTransformElement");
     }
@@ -2355,10 +2386,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGCircleElement]",
-            CHROME = "function SVGCircleElement() { [native code] }",
-            FF = "function SVGCircleElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgCircleElement() throws Exception {
         test("SVGCircleElement");
     }
@@ -2369,10 +2400,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGClipPathElement]",
-            CHROME = "function SVGClipPathElement() { [native code] }",
-            FF = "function SVGClipPathElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgClipPathElement() throws Exception {
         test("SVGClipPathElement");
     }
@@ -2383,8 +2414,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function SVGCursorElement() { [native code] }")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
     public void svgCursorElement() throws Exception {
         test("SVGCursorElement");
     }
@@ -2395,10 +2426,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGDefsElement]",
-            CHROME = "function SVGDefsElement() { [native code] }",
-            FF = "function SVGDefsElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgDefsElement() throws Exception {
         test("SVGDefsElement");
     }
@@ -2409,10 +2440,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGDescElement]",
-            CHROME = "function SVGDescElement() { [native code] }",
-            FF = "function SVGDescElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgDescElement() throws Exception {
         test("SVGDescElement");
     }
@@ -2423,10 +2454,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGElement]",
-            CHROME = "function SVGElement() { [native code] }",
-            FF = "function SVGElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgElement() throws Exception {
         test("SVGElement");
     }
@@ -2437,10 +2468,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGEllipseElement]",
-            CHROME = "function SVGEllipseElement() { [native code] }",
-            FF = "function SVGEllipseElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgEllipseElement() throws Exception {
         test("SVGEllipseElement");
     }
@@ -2451,10 +2482,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEBlendElement]",
-            CHROME = "function SVGFEBlendElement() { [native code] }",
-            FF = "function SVGFEBlendElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgFEBlendElement() throws Exception {
         test("SVGFEBlendElement");
     }
@@ -2465,10 +2496,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEColorMatrixElement]",
-            CHROME = "function SVGFEColorMatrixElement() { [native code] }",
-            FF = "function SVGFEColorMatrixElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgFEColorMatrixElement() throws Exception {
         test("SVGFEColorMatrixElement");
     }
@@ -2479,10 +2510,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEComponentTransferElement]",
-            CHROME = "function SVGFEComponentTransferElement() { [native code] }",
-            FF = "function SVGFEComponentTransferElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgFEComponentTransferElement() throws Exception {
         test("SVGFEComponentTransferElement");
     }
@@ -2493,10 +2524,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFECompositeElement]",
-            CHROME = "function SVGFECompositeElement() { [native code] }",
-            FF = "function SVGFECompositeElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgFECompositeElement() throws Exception {
         test("SVGFECompositeElement");
     }
@@ -2507,10 +2538,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEConvolveMatrixElement]",
-            CHROME = "function SVGFEConvolveMatrixElement() { [native code] }",
-            FF = "function SVGFEConvolveMatrixElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgFEConvolveMatrixElement() throws Exception {
         test("SVGFEConvolveMatrixElement");
     }
@@ -2521,10 +2552,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEDiffuseLightingElement]",
-            CHROME = "function SVGFEDiffuseLightingElement() { [native code] }",
-            FF = "function SVGFEDiffuseLightingElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgFEDiffuseLightingElement() throws Exception {
         test("SVGFEDiffuseLightingElement");
     }
@@ -2535,10 +2566,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEDisplacementMapElement]",
-            CHROME = "function SVGFEDisplacementMapElement() { [native code] }",
-            FF = "function SVGFEDisplacementMapElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgFEDisplacementMapElement() throws Exception {
         test("SVGFEDisplacementMapElement");
     }
@@ -2549,10 +2580,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEDistantLightElement]",
-            CHROME = "function SVGFEDistantLightElement() { [native code] }",
-            FF = "function SVGFEDistantLightElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgFEDistantLightElement() throws Exception {
         test("SVGFEDistantLightElement");
     }
@@ -2563,10 +2594,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEFloodElement]",
-            CHROME = "function SVGFEFloodElement() { [native code] }",
-            FF = "function SVGFEFloodElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgFEFloodElement() throws Exception {
         test("SVGFEFloodElement");
     }
@@ -2577,10 +2608,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEFuncAElement]",
-            CHROME = "function SVGFEFuncAElement() { [native code] }",
-            FF = "function SVGFEFuncAElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgFEFuncAElement() throws Exception {
         test("SVGFEFuncAElement");
     }
@@ -2591,10 +2622,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEFuncBElement]",
-            CHROME = "function SVGFEFuncBElement() { [native code] }",
-            FF = "function SVGFEFuncBElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgFEFuncBElement() throws Exception {
         test("SVGFEFuncBElement");
     }
@@ -2605,10 +2636,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEFuncGElement]",
-            CHROME = "function SVGFEFuncGElement() { [native code] }",
-            FF = "function SVGFEFuncGElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgFEFuncGElement() throws Exception {
         test("SVGFEFuncGElement");
     }
@@ -2619,10 +2650,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEFuncRElement]",
-            CHROME = "function SVGFEFuncRElement() { [native code] }",
-            FF = "function SVGFEFuncRElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgFEFuncRElement() throws Exception {
         test("SVGFEFuncRElement");
     }
@@ -2633,10 +2664,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEGaussianBlurElement]",
-            CHROME = "function SVGFEGaussianBlurElement() { [native code] }",
-            FF = "function SVGFEGaussianBlurElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgFEGaussianBlurElement() throws Exception {
         test("SVGFEGaussianBlurElement");
     }
@@ -2647,10 +2678,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEImageElement]",
-            CHROME = "function SVGFEImageElement() { [native code] }",
-            FF = "function SVGFEImageElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgFEImageElement() throws Exception {
         test("SVGFEImageElement");
     }
@@ -2661,10 +2692,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEMergeElement]",
-            CHROME = "function SVGFEMergeElement() { [native code] }",
-            FF = "function SVGFEMergeElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgFEMergeElement() throws Exception {
         test("SVGFEMergeElement");
     }
@@ -2675,10 +2706,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEMergeNodeElement]",
-            CHROME = "function SVGFEMergeNodeElement() { [native code] }",
-            FF = "function SVGFEMergeNodeElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgFEMergeNodeElement() throws Exception {
         test("SVGFEMergeNodeElement");
     }
@@ -2689,10 +2720,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEMorphologyElement]",
-            CHROME = "function SVGFEMorphologyElement() { [native code] }",
-            FF = "function SVGFEMorphologyElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgFEMorphologyElement() throws Exception {
         test("SVGFEMorphologyElement");
     }
@@ -2703,10 +2734,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEOffsetElement]",
-            CHROME = "function SVGFEOffsetElement() { [native code] }",
-            FF = "function SVGFEOffsetElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgFEOffsetElement() throws Exception {
         test("SVGFEOffsetElement");
     }
@@ -2717,10 +2748,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFEPointLightElement]",
-            CHROME = "function SVGFEPointLightElement() { [native code] }",
-            FF = "function SVGFEPointLightElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgFEPointLightElement() throws Exception {
         test("SVGFEPointLightElement");
     }
@@ -2731,10 +2762,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFESpecularLightingElement]",
-            CHROME = "function SVGFESpecularLightingElement() { [native code] }",
-            FF = "function SVGFESpecularLightingElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgFESpecularLightingElement() throws Exception {
         test("SVGFESpecularLightingElement");
     }
@@ -2745,10 +2776,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFESpotLightElement]",
-            CHROME = "function SVGFESpotLightElement() { [native code] }",
-            FF = "function SVGFESpotLightElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgFESpotLightElement() throws Exception {
         test("SVGFESpotLightElement");
     }
@@ -2759,10 +2790,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFETileElement]",
-            CHROME = "function SVGFETileElement() { [native code] }",
-            FF = "function SVGFETileElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgFETileElement() throws Exception {
         test("SVGFETileElement");
     }
@@ -2773,10 +2804,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFETurbulenceElement]",
-            CHROME = "function SVGFETurbulenceElement() { [native code] }",
-            FF = "function SVGFETurbulenceElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgFETurbulenceElement() throws Exception {
         test("SVGFETurbulenceElement");
     }
@@ -2787,10 +2818,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGFilterElement]",
-            CHROME = "function SVGFilterElement() { [native code] }",
-            FF = "function SVGFilterElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgFilterElement() throws Exception {
         test("SVGFilterElement");
     }
@@ -2801,9 +2832,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function SVGForeignObjectElement() { [native code] }",
-            FF = "function SVGForeignObjectElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function")
     public void svgForeignObjectElement() throws Exception {
         test("SVGForeignObjectElement");
     }
@@ -2814,10 +2845,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGGElement]",
-            CHROME = "function SVGGElement() { [native code] }",
-            FF = "function SVGGElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgGElement() throws Exception {
         test("SVGGElement");
     }
@@ -2828,10 +2859,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGImageElement]",
-            CHROME = "function SVGImageElement() { [native code] }",
-            FF = "function SVGImageElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgImageElement() throws Exception {
         test("SVGImageElement");
     }
@@ -2842,10 +2873,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGLineElement]",
-            CHROME = "function SVGLineElement() { [native code] }",
-            FF = "function SVGLineElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgLineElement() throws Exception {
         test("SVGLineElement");
     }
@@ -2856,10 +2887,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGLinearGradientElement]",
-            CHROME = "function SVGLinearGradientElement() { [native code] }",
-            FF = "function SVGLinearGradientElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgLinearGradientElement() throws Exception {
         test("SVGLinearGradientElement");
     }
@@ -2870,10 +2901,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGMarkerElement]",
-            CHROME = "function SVGMarkerElement() { [native code] }",
-            FF = "function SVGMarkerElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgMarkerElement() throws Exception {
         test("SVGMarkerElement");
     }
@@ -2884,10 +2915,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGMaskElement]",
-            CHROME = "function SVGMaskElement() { [native code] }",
-            FF = "function SVGMaskElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgMaskElement() throws Exception {
         test("SVGMaskElement");
     }
@@ -2898,10 +2929,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGMatrix]",
-            CHROME = "function SVGMatrix() { [native code] }",
-            FF = "function SVGMatrix() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgMatrix() throws Exception {
         test("SVGMatrix");
     }
@@ -2912,10 +2943,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGMetadataElement]",
-            CHROME = "function SVGMetadataElement() { [native code] }",
-            FF = "function SVGMetadataElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgMetadataElement() throws Exception {
         test("SVGMetadataElement");
     }
@@ -2926,9 +2957,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function SVGMPathElement() { [native code] }",
-            FF = "function SVGMPathElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function")
     public void svgMPathElement() throws Exception {
         test("SVGMPathElement");
     }
@@ -2939,10 +2970,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGPathElement]",
-            CHROME = "function SVGPathElement() { [native code] }",
-            FF = "function SVGPathElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgPathElement() throws Exception {
         test("SVGPathElement");
     }
@@ -2953,10 +2984,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGPatternElement]",
-            CHROME = "function SVGPatternElement() { [native code] }",
-            FF = "function SVGPatternElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgPatternElement() throws Exception {
         test("SVGPatternElement");
     }
@@ -2967,10 +2998,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGPolygonElement]",
-            CHROME = "function SVGPolygonElement() { [native code] }",
-            FF = "function SVGPolygonElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgPolygonElement() throws Exception {
         test("SVGPolygonElement");
     }
@@ -2981,10 +3012,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGPolylineElement]",
-            CHROME = "function SVGPolylineElement() { [native code] }",
-            FF = "function SVGPolylineElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgPolylineElement() throws Exception {
         test("SVGPolylineElement");
     }
@@ -2995,10 +3026,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGRadialGradientElement]",
-            CHROME = "function SVGRadialGradientElement() { [native code] }",
-            FF = "function SVGRadialGradientElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgRadialGradientElement() throws Exception {
         test("SVGRadialGradientElement");
     }
@@ -3009,10 +3040,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGRect]",
-            CHROME = "function SVGRect() { [native code] }",
-            FF = "function SVGRect() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgRect() throws Exception {
         test("SVGRect");
     }
@@ -3023,10 +3054,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGRectElement]",
-            CHROME = "function SVGRectElement() { [native code] }",
-            FF = "function SVGRectElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgRectElement() throws Exception {
         test("SVGRectElement");
     }
@@ -3037,10 +3068,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGSVGElement]",
-            CHROME = "function SVGSVGElement() { [native code] }",
-            FF = "function SVGSVGElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgSVGElement() throws Exception {
         test("SVGSVGElement");
     }
@@ -3051,10 +3082,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGScriptElement]",
-            CHROME = "function SVGScriptElement() { [native code] }",
-            FF = "function SVGScriptElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgScriptElement() throws Exception {
         test("SVGScriptElement");
     }
@@ -3065,9 +3096,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function SVGSetElement() { [native code] }",
-            FF = "function SVGSetElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function")
     public void svgSetElement() throws Exception {
         test("SVGSetElement");
     }
@@ -3078,10 +3109,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGStopElement]",
-            CHROME = "function SVGStopElement() { [native code] }",
-            FF = "function SVGStopElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgStopElement() throws Exception {
         test("SVGStopElement");
     }
@@ -3092,10 +3123,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGStyleElement]",
-            CHROME = "function SVGStyleElement() { [native code] }",
-            FF = "function SVGStyleElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgStyleElement() throws Exception {
         test("SVGStyleElement");
     }
@@ -3106,10 +3137,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGSwitchElement]",
-            CHROME = "function SVGSwitchElement() { [native code] }",
-            FF = "function SVGSwitchElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgSwitchElement() throws Exception {
         test("SVGSwitchElement");
     }
@@ -3120,10 +3151,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGSymbolElement]",
-            CHROME = "function SVGSymbolElement() { [native code] }",
-            FF = "function SVGSymbolElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgSymbolElement() throws Exception {
         test("SVGSymbolElement");
     }
@@ -3134,10 +3165,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGTSpanElement]",
-            CHROME = "function SVGTSpanElement() { [native code] }",
-            FF = "function SVGTSpanElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgTSpanElement() throws Exception {
         test("SVGTSpanElement");
     }
@@ -3148,10 +3179,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGTextElement]",
-            CHROME = "function SVGTextElement() { [native code] }",
-            FF = "function SVGTextElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgTextElement() throws Exception {
         test("SVGTextElement");
     }
@@ -3162,10 +3193,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGTextPathElement]",
-            CHROME = "function SVGTextPathElement() { [native code] }",
-            FF = "function SVGTextPathElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgTextPathElement() throws Exception {
         test("SVGTextPathElement");
     }
@@ -3176,10 +3207,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGTitleElement]",
-            CHROME = "function SVGTitleElement() { [native code] }",
-            FF = "function SVGTitleElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgTitleElement() throws Exception {
         test("SVGTitleElement");
     }
@@ -3190,10 +3221,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGUseElement]",
-            CHROME = "function SVGUseElement() { [native code] }",
-            FF = "function SVGUseElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgUseElement() throws Exception {
         test("SVGUseElement");
     }
@@ -3204,10 +3235,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object SVGViewElement]",
-            CHROME = "function SVGViewElement() { [native code] }",
-            FF = "function SVGViewElement() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void svgViewElement() throws Exception {
         test("SVGViewElement");
     }
@@ -3218,9 +3249,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Screen]",
-            CHROME = "function Screen() { [native code] }",
-            FF = "function Screen() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void screen() throws Exception {
         test("Screen");
     }
@@ -3231,9 +3263,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Selection]",
-            CHROME = "function Selection() { [native code] }",
-            FF31 = "function Selection() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF31 = "function",
+            IE8 = "undefined")
     public void selection() throws Exception {
         test("Selection");
     }
@@ -3244,7 +3277,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("undefined")
     public void simpleArray() throws Exception {
         test("SimpleArray");
     }
@@ -3255,9 +3288,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = "[object StaticNodeList]")
-    @NotYetImplemented({ FF, IE11, CHROME })
+    @Alerts("undefined")
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void staticNodeList() throws Exception {
         test("StaticNodeList");
     }
@@ -3268,8 +3300,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Storage]",
-            CHROME = "function Storage() { [native code] }")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            IE8 = "undefined")
     public void storage() throws Exception {
         test("Storage");
     }
@@ -3280,9 +3313,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object StyleSheetList]",
-            CHROME = "function StyleSheetList() { [native code] }",
-            FF31 = "function StyleSheetList() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF31 = "function",
+            IE8 = "undefined")
     public void styleSheetList() throws Exception {
         test("StyleSheetList");
     }
@@ -3293,9 +3327,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Text]",
-            CHROME = "function Text() { [native code] }",
-            FF = "function Text() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void text() throws Exception {
         test("Text");
     }
@@ -3306,9 +3341,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object TextRange]",
-            CHROME = "exception",
-            FF = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "undefined",
+            FF = "undefined",
+            IE8 = "undefined")
     public void textRange() throws Exception {
         test("TextRange");
     }
@@ -3319,10 +3355,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object TreeWalker]",
-            CHROME = "function TreeWalker() { [native code] }",
-            FF = "function TreeWalker() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void treeWalker() throws Exception {
         test("TreeWalker");
     }
@@ -3333,10 +3369,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object UIEvent]",
-            CHROME = "function UIEvent() { [native code] }",
-            FF = "function UIEvent() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void uIEvent() throws Exception {
         test("UIEvent");
     }
@@ -3347,10 +3383,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function Uint16Array() {\n    [native code]\n}",
-            CHROME = "function Uint16Array() { [native code] }",
-            IE11 = "\nfunction Uint16Array() {\n    [native code]\n}\n",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined")
     public void uint16Array() throws Exception {
         test("Uint16Array");
     }
@@ -3361,10 +3395,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function Uint32Array() {\n    [native code]\n}",
-            CHROME = "function Uint32Array() { [native code] }",
-            IE11 = "\nfunction Uint32Array() {\n    [native code]\n}\n",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined")
     public void uint32Array() throws Exception {
         test("Uint32Array");
     }
@@ -3375,10 +3407,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function Uint8Array() {\n    [native code]\n}",
-            CHROME = "function Uint8Array() { [native code] }",
-            IE11 = "\nfunction Uint8Array() {\n    [native code]\n}\n",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined")
     public void uint8Array() throws Exception {
         test("Uint8Array");
     }
@@ -3389,10 +3419,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function Uint8ClampedArray() {\n    [native code]\n}",
-            CHROME = "function Uint8ClampedArray() { [native code] }",
-            IE11 = "\nfunction Uint8ClampedArray() {\n    [native code]\n}\n",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined")
     public void uint8ClampedArray() throws Exception {
         test("Uint8ClampedArray");
     }
@@ -3403,10 +3431,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function WebSocket() {\n    [native code]\n}",
-            CHROME = "function WebSocket() { [native code] }",
-            IE11 = "\nfunction WebSocket() {\n    [native code]\n}\n",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined")
     public void webSocket() throws Exception {
         test("WebSocket");
     }
@@ -3417,8 +3443,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Window]",
-            CHROME = "function Window() { [native code] }")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            IE8 = "undefined")
     public void window() throws Exception {
         test("Window");
     }
@@ -3429,10 +3456,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object XMLDocument]",
-            CHROME = "function XMLDocument() { [native code] }",
-            FF = "function XMLDocument() {\n    [native code]\n}",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "function",
+            IE8 = "undefined")
     public void xmlDocument() throws Exception {
         test("XMLDocument");
     }
@@ -3443,10 +3470,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function XMLHttpRequest() {\n    [native code]\n}",
-            CHROME = "function XMLHttpRequest() { [native code] }",
-            IE11 = "\nfunction XMLHttpRequest() {\n    [native code]\n}\n",
-            IE8 = "[object XMLHttpRequest]")
+    @Alerts(DEFAULT = "function",
+            IE8 = "object")
     public void xmlHttpRequest() throws Exception {
         test("XMLHttpRequest");
     }
@@ -3457,10 +3482,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function XMLSerializer() {\n    [native code]\n}",
-            CHROME = "function XMLSerializer() { [native code] }",
-            IE11 = "\nfunction XMLSerializer() {\n    [native code]\n}\n",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined")
     public void xmlSerializer() throws Exception {
         test("XMLSerializer");
     }
@@ -3471,9 +3494,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function XPathEvaluator() { [native code] }",
-            FF = "function XPathEvaluator() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function")
     public void xPathEvaluator() throws Exception {
         test("XPathEvaluator");
     }
@@ -3484,8 +3507,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = "[object XPathNSResolver]")
+    @Alerts(DEFAULT = "undefined",
+            FF = "object")
     public void xPathNSResolver() throws Exception {
         test("XPathNSResolver");
     }
@@ -3496,9 +3519,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object XPathResult]",
-            CHROME = "function XPathResult() { [native code] }",
-            IE = "exception")
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            IE = "undefined")
     public void xPathResult() throws Exception {
         test("XPathResult");
     }
@@ -3509,9 +3532,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object XSLTProcessor]",
-            CHROME = "function XSLTProcessor() { [native code] }",
-            IE = "exception")
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
     @NotYetImplemented(IE11)
     public void xsltProcessor() throws Exception {
         test("XSLTProcessor");
@@ -3523,7 +3545,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("undefined")
     public void xsltemplate() throws Exception {
         test("XSLTemplate");
     }
@@ -3534,8 +3556,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = "[object StopIteration]")
+    @Alerts(DEFAULT = "undefined",
+            FF = "object")
     public void stopIteration() throws Exception {
         test("StopIteration");
     }
@@ -3546,9 +3568,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF31 = "function DOMRect() {\n    [native code]\n}")
-    @NotYetImplemented(FF31)
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    @NotYetImplemented(FF)
     public void domRect() throws Exception {
         test("DOMRect");
     }
@@ -3559,8 +3581,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE11 = "[object MSStyleCSSProperties]")
+    @Alerts(DEFAULT = "undefined",
+            IE11 = "object")
     @NotYetImplemented(IE11)
     public void msStyleCSSProperties() throws Exception {
         test("MSStyleCSSProperties");
@@ -3572,8 +3594,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE11 = "[object MSCurrentStyleCSSProperties]")
+    @Alerts(DEFAULT = "undefined",
+            IE11 = "object")
     @NotYetImplemented(IE11)
     public void msCurrentStyleCSSProperties() throws Exception {
         test("MSCurrentStyleCSSProperties");
@@ -3583,9 +3605,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function Error() { [native code] }",
-            FF = "function Error() {\n    [native code]\n}",
-            IE = "\nfunction Error() {\n    [native code]\n}\n")
+    @Alerts("function")
     public void error() throws Exception {
         test("Error");
     }
@@ -3594,11 +3614,10 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE11 = "[object ClientRectList]",
-            FF24 = "function ClientRectList() {\n    [native code]\n}",
-            CHROME = "function ClientRectList() { [native code] }")
-    @NotYetImplemented({ CHROME, IE11, FF24 })
+    @Alerts(DEFAULT = "undefined",
+            IE11 = "object",
+            CHROME = "function")
+    @NotYetImplemented({ CHROME, IE11 })
     public void clientRectList() throws Exception {
         test("ClientRectList");
     }
@@ -3607,8 +3626,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = "function SVGDocument() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
     @NotYetImplemented(FF)
     public void svgDocument() throws Exception {
         test("SVGDocument");
@@ -3618,9 +3637,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function Object() { [native code] }",
-            FF = "function Object() {\n    [native code]\n}",
-            IE = "\nfunction Object() {\n    [native code]\n}\n")
+    @Alerts("function")
     public void object() throws Exception {
         test("Object");
     }
@@ -3631,8 +3648,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Arguments]",
-            IE8 = "[object Object]")
+    @Alerts("object")
     public void arguments() throws Exception {
         test("arguments");
     }
@@ -3643,9 +3659,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function Notification() { [native code] }",
-              FF = "function Notification() {\n    [native code]\n}",
-            IE = "exception")
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
     public void notification() throws Exception {
         test("Notification");
     }
@@ -3656,8 +3671,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function HTMLDetailsElement() { [native code] }")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
     public void htmlDetailsElement() throws Exception {
         test("HTMLDetailsElement");
     }
@@ -3668,8 +3683,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function HTMLDialogElement() { [native code] }")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
     public void htmlDialogElement() throws Exception {
         test("HTMLDialogElement");
     }
@@ -3680,10 +3695,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "function HTMLTrackElement() { [native code] }",
-            FF = "function HTMLTrackElement() {\n    [native code]\n}",
-            IE11 = "[object HTMLTrackElement]",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "function",
+            IE11 = "object",
+            IE8 = "undefined")
     public void htmlTrackElement() throws Exception {
         test("HTMLTrackElement");
     }
@@ -3694,8 +3708,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = "function HTMLMenuItemElement() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
     public void htmlMenuItemElement() throws Exception {
         test("HTMLMenuItemElement");
     }
