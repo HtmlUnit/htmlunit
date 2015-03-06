@@ -109,7 +109,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLAppletElement]",
             IE8 = "[object]")
-    @NotYetImplemented(IE8)
     public void applet() throws Exception {
         test("applet");
     }

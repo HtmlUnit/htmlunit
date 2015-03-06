@@ -656,6 +656,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NODE,
 
+    /** Applet is an "[object]" even in standards mode. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    JS_APPLET_OBJECT,
+
     /** Indicates that the class name of "arguments" object is "Object". */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_ARGUMENTS_IS_OBJECT,
