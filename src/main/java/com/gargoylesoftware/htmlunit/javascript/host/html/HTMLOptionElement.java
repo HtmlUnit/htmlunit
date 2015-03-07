@@ -113,7 +113,9 @@ public class HTMLOptionElement extends FormChild {
      */
     @JsxSetter
     public void setValue(final String newValue) {
-        ((HtmlOption) getDomNodeOrNull()).setValueAttribute(newValue);
+        if (getDomNodeOrNull() instanceof HtmlOption) {
+            ((HtmlOption) getDomNodeOrNull()).setValueAttribute(newValue);
+        }
     }
 
     /**
@@ -123,7 +125,10 @@ public class HTMLOptionElement extends FormChild {
     @Override
     @JsxGetter
     public String getText() {
-        return ((HtmlOption) getDomNodeOrNull()).getText();
+        if (getDomNodeOrNull() instanceof HtmlOption) {
+            return ((HtmlOption) getDomNodeOrNull()).getText();
+        }
+        return null;
     }
 
     /**
@@ -132,7 +137,9 @@ public class HTMLOptionElement extends FormChild {
      */
     @JsxSetter
     public void setText(final String newText) {
-        ((HtmlOption) getDomNodeOrNull()).setText(newText);
+        if (getDomNodeOrNull() instanceof HtmlOption) {
+            ((HtmlOption) getDomNodeOrNull()).setText(newText);
+        }
     }
 
     /**
@@ -141,7 +148,10 @@ public class HTMLOptionElement extends FormChild {
      */
     @JsxGetter
     public boolean getSelected() {
-        return ((HtmlOption) getDomNodeOrNull()).isSelected();
+        if (getDomNodeOrNull() instanceof HtmlOption) {
+            return ((HtmlOption) getDomNodeOrNull()).isSelected();
+        }
+        return false;
     }
 
     /**
@@ -171,7 +181,10 @@ public class HTMLOptionElement extends FormChild {
      */
     @JsxGetter
     public boolean getDefaultSelected() {
-        return ((HtmlOption) getDomNodeOrNull()).isDefaultSelected();
+        if (getDomNodeOrNull() instanceof HtmlOption) {
+            return ((HtmlOption) getDomNodeOrNull()).isDefaultSelected();
+        }
+        return false;
     }
 
     /**
@@ -180,7 +193,10 @@ public class HTMLOptionElement extends FormChild {
      */
     @JsxGetter
     public String getLabel() {
-        return ((HtmlOption) getDomNodeOrNull()).getLabelAttribute();
+        if (getDomNodeOrNull() instanceof HtmlOption) {
+            return ((HtmlOption) getDomNodeOrNull()).getLabelAttribute();
+        }
+        return null;
     }
 
     /**
@@ -189,7 +205,9 @@ public class HTMLOptionElement extends FormChild {
      */
     @JsxSetter
     public void setLabel(final String label) {
-        ((HtmlOption) getDomNodeOrNull()).setLabelAttribute(label);
+        if (getDomNodeOrNull() instanceof HtmlOption) {
+            ((HtmlOption) getDomNodeOrNull()).setLabelAttribute(label);
+        }
     }
 
     /**

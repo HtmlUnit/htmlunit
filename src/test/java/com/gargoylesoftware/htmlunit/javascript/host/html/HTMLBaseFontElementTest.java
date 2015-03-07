@@ -44,7 +44,6 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
             CHROME = { "[object HTMLElement]", "undefined", "undefined", "undefined" },
             IE = { "[object]", "", "3", "" },
             IE11 = { "[object HTMLBaseFontElement]", "", "3", "" })
-    @NotYetImplemented(CHROME)
     public void defaults() throws Exception {
         final String html =
             "<html>\n"
@@ -164,7 +163,6 @@ public class HTMLBaseFontElementTest extends WebDriverTestCase {
             IE8 = { "[object]", "exception" },
             CHROME = { "[object HTMLElement]", "exception" },
             FF = { "[object HTMLSpanElement]", "exception" })
-    @NotYetImplemented(CHROME)
     public void type() throws Exception {
         final String html = ""
             + "<html><head><title>foo</title>\n"
