@@ -850,7 +850,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE11 = "[object HTMLBlockElement]")
-    @NotYetImplemented({ IE8, FF, CHROME })
     public void htmlBlockElement() throws Exception {
         test("HTMLBlockElement");
     }

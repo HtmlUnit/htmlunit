@@ -91,6 +91,7 @@ import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlAbbreviated;
 import com.gargoylesoftware.htmlunit.html.HtmlAcronym;
+import com.gargoylesoftware.htmlunit.html.HtmlAddress;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlArea;
 import com.gargoylesoftware.htmlunit.html.HtmlArticle;
@@ -100,6 +101,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlBidirectionalOverride;
 import com.gargoylesoftware.htmlunit.html.HtmlBig;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlBold;
+import com.gargoylesoftware.htmlunit.html.HtmlCenter;
 import com.gargoylesoftware.htmlunit.html.HtmlCitation;
 import com.gargoylesoftware.htmlunit.html.HtmlCode;
 import com.gargoylesoftware.htmlunit.html.HtmlDefinition;
@@ -109,6 +111,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
 import com.gargoylesoftware.htmlunit.html.HtmlEmphasis;
+import com.gargoylesoftware.htmlunit.html.HtmlExample;
 import com.gargoylesoftware.htmlunit.html.HtmlFigure;
 import com.gargoylesoftware.htmlunit.html.HtmlFigureCaption;
 import com.gargoylesoftware.htmlunit.html.HtmlFooter;
@@ -116,6 +119,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlFrameSet;
 import com.gargoylesoftware.htmlunit.html.HtmlHeader;
 import com.gargoylesoftware.htmlunit.html.HtmlItalic;
 import com.gargoylesoftware.htmlunit.html.HtmlKeyboard;
+import com.gargoylesoftware.htmlunit.html.HtmlListing;
 import com.gargoylesoftware.htmlunit.html.HtmlMain;
 import com.gargoylesoftware.htmlunit.html.HtmlMark;
 import com.gargoylesoftware.htmlunit.html.HtmlNav;
@@ -124,6 +128,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlNoEmbed;
 import com.gargoylesoftware.htmlunit.html.HtmlNoFrames;
 import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlPlainText;
 import com.gargoylesoftware.htmlunit.html.HtmlRp;
 import com.gargoylesoftware.htmlunit.html.HtmlRt;
 import com.gargoylesoftware.htmlunit.html.HtmlRuby;
@@ -195,6 +200,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 @JsxClasses({
     @JsxClass(domClass = HtmlAbbreviated.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
     @JsxClass(domClass = HtmlAcronym.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
+    @JsxClass(domClass = HtmlAddress.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
     @JsxClass(domClass = HtmlArticle.class,
         browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(domClass = HtmlAside.class,
@@ -203,6 +209,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
     @JsxClass(domClass = HtmlBidirectionalOverride.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
     @JsxClass(domClass = HtmlBig.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
     @JsxClass(domClass = HtmlBold.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
+    @JsxClass(domClass = HtmlCenter.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
     @JsxClass(domClass = HtmlCitation.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
     @JsxClass(domClass = HtmlCode.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
     @JsxClass(domClass = HtmlDefinition.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
@@ -210,6 +217,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
     @JsxClass(domClass = HtmlDefinitionTerm.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
     @JsxClass(domClass = HtmlElement.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(domClass = HtmlEmphasis.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
+    @JsxClass(domClass = HtmlExample.class, browsers = @WebBrowser(FF)),
     @JsxClass(domClass = HtmlFigure.class,
         browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(domClass = HtmlFigureCaption.class,
@@ -220,6 +228,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
         browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(domClass = HtmlItalic.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
     @JsxClass(domClass = HtmlKeyboard.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
+    @JsxClass(domClass = HtmlListing.class, browsers = @WebBrowser(FF)),
     @JsxClass(domClass = HtmlMark.class,
         browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(domClass = HtmlNav.class,
@@ -229,6 +238,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
     @JsxClass(domClass = HtmlNoFrames.class, browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(domClass = HtmlNoScript.class,
         browsers = { @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) }),
+    @JsxClass(domClass = HtmlPlainText.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
     @JsxClass(domClass = HtmlRuby.class, browsers = @WebBrowser(CHROME)),
     @JsxClass(domClass = HtmlRp.class, browsers = @WebBrowser(CHROME)),
     @JsxClass(domClass = HtmlRt.class, browsers = @WebBrowser(CHROME)),

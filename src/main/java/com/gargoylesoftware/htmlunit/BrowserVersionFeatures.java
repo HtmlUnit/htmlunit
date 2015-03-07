@@ -681,11 +681,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     JS_BGSOUND_AS_UNKNOWN,
 
-    /** Indicates that HTMLBlockElements returning 'HTMLElement'
-     * as class name. */
-    @BrowserFeature(@WebBrowser(FF))
-    JS_BLOCK_COMMON_CLASS_NAME,
-
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_BODY_MARGINS_IE11,

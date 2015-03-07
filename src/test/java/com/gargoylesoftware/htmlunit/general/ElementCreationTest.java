@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -83,7 +82,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLBlockElement]")
-    @NotYetImplemented(CHROME)
     public void address() throws Exception {
         test("address");
     }
@@ -332,7 +330,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLBlockElement]")
-    @NotYetImplemented(CHROME)
     public void center() throws Exception {
         test("center");
     }
@@ -489,7 +486,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object HTMLElement]",
             CHROME = "[object HTMLPreElement]",
             IE = "[object HTMLBlockElement]")
-    @NotYetImplemented(CHROME)
     public void xmp() throws Exception {
         test("xmp");
     }
@@ -813,7 +809,6 @@ public class ElementCreationTest extends WebDriverTestCase {
             CHROME = "[object HTMLKeygenElement]",
             IE8 = "[object HTMLGenericElement]",
             IE11 = "[object HTMLBlockElement]")
-    @NotYetImplemented(IE11)
     public void keygen() throws Exception {
         test("keygen");
     }
@@ -860,7 +855,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object HTMLElement]",
             CHROME = "[object HTMLPreElement]",
             IE = "[object HTMLBlockElement]")
-    @NotYetImplemented(CHROME)
     public void listing() throws Exception {
         test("listing");
     }
@@ -1150,7 +1144,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE = "[object HTMLBlockElement]")
-    @NotYetImplemented(CHROME)
     public void plaintext() throws Exception {
         test("plaintext");
     }

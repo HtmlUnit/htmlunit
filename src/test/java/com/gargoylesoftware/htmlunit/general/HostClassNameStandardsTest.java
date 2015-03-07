@@ -839,7 +839,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = "[object HTMLBlockElement]")
-    @NotYetImplemented({ FF, CHROME })
     public void htmlBlockElement() throws Exception {
         test("HTMLBlockElement");
     }

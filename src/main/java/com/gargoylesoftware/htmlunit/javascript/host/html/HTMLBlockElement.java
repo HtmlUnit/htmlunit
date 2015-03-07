@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BLOCK_COMMON_CLASS_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -23,6 +22,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlAddress;
 import com.gargoylesoftware.htmlunit.html.HtmlBlockQuote;
 import com.gargoylesoftware.htmlunit.html.HtmlCenter;
 import com.gargoylesoftware.htmlunit.html.HtmlExample;
+import com.gargoylesoftware.htmlunit.html.HtmlKeygen;
 import com.gargoylesoftware.htmlunit.html.HtmlListing;
 import com.gargoylesoftware.htmlunit.html.HtmlPlainText;
 import com.gargoylesoftware.htmlunit.html.HtmlPreformattedText;
@@ -36,15 +36,24 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
  *
  * @version $Revision$
  * @author Ronald Brill
+ * @author Ahmed Ashour
  */
 @JsxClasses({
-    @JsxClass(domClass = HtmlAddress.class),
-    @JsxClass(domClass = HtmlBlockQuote.class, browsers = @WebBrowser(IE)),
-    @JsxClass(domClass = HtmlCenter.class),
-    @JsxClass(domClass = HtmlExample.class),
-    @JsxClass(domClass = HtmlListing.class),
-    @JsxClass(domClass = HtmlPlainText.class),
-    @JsxClass(domClass = HtmlPreformattedText.class, browsers = @WebBrowser(value = IE, maxVersion = 8))
+    @JsxClass(domClass = HtmlAddress.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
+    @JsxClass(domClass = HtmlAddress.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
+    @JsxClass(domClass = HtmlBlockQuote.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
+    @JsxClass(domClass = HtmlBlockQuote.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
+    @JsxClass(domClass = HtmlCenter.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
+    @JsxClass(domClass = HtmlCenter.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
+    @JsxClass(domClass = HtmlExample.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
+    @JsxClass(domClass = HtmlExample.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
+    @JsxClass(domClass = HtmlKeygen.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
+    @JsxClass(domClass = HtmlListing.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
+    @JsxClass(domClass = HtmlListing.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
+    @JsxClass(domClass = HtmlPlainText.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
+    @JsxClass(domClass = HtmlPlainText.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
+    @JsxClass(domClass = HtmlPreformattedText.class,
+        isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
 })
 public class HTMLBlockElement extends HTMLElement {
 
@@ -102,16 +111,5 @@ public class HTMLBlockElement extends HTMLElement {
      */
     protected boolean isEndTagForbidden() {
         return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getClassName() {
-        if (getWindow().getWebWindow() != null && getBrowserVersion().hasFeature(JS_BLOCK_COMMON_CLASS_NAME)) {
-            return "HTMLElement";
-        }
-        return super.getClassName();
     }
 }
