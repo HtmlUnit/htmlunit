@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_OBJECT_CLASSID;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_OBJECT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -26,7 +27,9 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Wrapper;
 
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlObject;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
@@ -188,5 +191,19 @@ public class HTMLObjectElement extends FormChild implements Wrapper {
             return ((Wrapper) wrappedActiveX_).unwrap();
         }
         return wrappedActiveX_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getDefaultValue(final Class<?> hint) {
+        if ((String.class.equals(hint) || hint == null) && getBrowserVersion().hasFeature(JS_OBJECT_OBJECT)) {
+            final HtmlElement htmlElement = getDomNodeOrNull();
+            if (htmlElement != null && !((HtmlPage) htmlElement.getPage()).isQuirksMode()) {
+                return "[object]";
+            }
+        }
+        return super.getDefaultValue(hint);
     }
 }

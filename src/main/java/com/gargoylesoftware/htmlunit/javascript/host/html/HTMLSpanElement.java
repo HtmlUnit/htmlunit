@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlBaseFont;
 import com.gargoylesoftware.htmlunit.html.HtmlKeygen;
 import com.gargoylesoftware.htmlunit.html.HtmlMultiColumn;
 import com.gargoylesoftware.htmlunit.html.HtmlSpan;
@@ -38,7 +39,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClasses({
     @JsxClass(domClass = HtmlSpan.class),
-    @JsxClass(domClass = HtmlKeygen.class, browsers = @WebBrowser(FF))
+    @JsxClass(domClass = HtmlKeygen.class, browsers = @WebBrowser(FF)),
+    @JsxClass(domClass = HtmlBaseFont.class, browsers = @WebBrowser(FF)),
 })
 public class HTMLSpanElement extends HTMLElement {
 

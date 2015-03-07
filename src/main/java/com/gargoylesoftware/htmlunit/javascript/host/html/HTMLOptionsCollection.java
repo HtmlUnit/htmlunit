@@ -204,7 +204,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
         }
         else {
             final HTMLOptionElement option = (HTMLOptionElement) newValue;
-            final HtmlOption htmlOption = option.getDomNodeOrNull();
+            final HtmlOption htmlOption = (HtmlOption) option.getDomNodeOrNull();
             if (index >= getLength()) {
                 setLength(index);
                 // Add a new option at the end.
@@ -301,7 +301,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
         // the list
         int index = getLength();
 
-        final HtmlOption htmlOption = ((HTMLOptionElement) newOptionObject).getDomNodeOrNull();
+        final HtmlOption htmlOption = (HtmlOption) ((HTMLOptionElement) newOptionObject).getDomNodeOrNull();
 
         HtmlOption beforeOption = null;
         // If newIndex was specified, then use it

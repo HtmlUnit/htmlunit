@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
+import com.gargoylesoftware.htmlunit.html.HtmlOptionGroup;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -53,6 +54,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
     @JsxClass(domClass = HtmlOption.class,
             browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(domClass = HtmlOption.class, isJSObject = false,
+            browsers = @WebBrowser(value = IE, maxVersion = 8)),
+    @JsxClass(domClass = HtmlOptionGroup.class, isJSObject = false,
             browsers = @WebBrowser(value = IE, maxVersion = 8))
 })
 public class HTMLOptionElement extends FormChild {
@@ -99,7 +102,7 @@ public class HTMLOptionElement extends FormChild {
         String value = getDomNodeOrNull().getAttribute("value");
         if (value == DomElement.ATTRIBUTE_NOT_DEFINED
                 && getBrowserVersion().hasFeature(JS_OPTION_USE_TEXT_AS_VALUE_IF_NOT_DEFINED)) {
-            value = getDomNodeOrNull().getText();
+            value = ((HtmlOption) getDomNodeOrNull()).getText();
         }
         return value;
     }
@@ -110,7 +113,7 @@ public class HTMLOptionElement extends FormChild {
      */
     @JsxSetter
     public void setValue(final String newValue) {
-        getDomNodeOrNull().setValueAttribute(newValue);
+        ((HtmlOption) getDomNodeOrNull()).setValueAttribute(newValue);
     }
 
     /**
@@ -120,15 +123,7 @@ public class HTMLOptionElement extends FormChild {
     @Override
     @JsxGetter
     public String getText() {
-        return getDomNodeOrNull().getText();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public HtmlOption getDomNodeOrNull() {
-        return (HtmlOption) super.getDomNodeOrNull();
+        return ((HtmlOption) getDomNodeOrNull()).getText();
     }
 
     /**
@@ -137,7 +132,7 @@ public class HTMLOptionElement extends FormChild {
      */
     @JsxSetter
     public void setText(final String newText) {
-        getDomNodeOrNull().setText(newText);
+        ((HtmlOption) getDomNodeOrNull()).setText(newText);
     }
 
     /**
@@ -146,7 +141,7 @@ public class HTMLOptionElement extends FormChild {
      */
     @JsxGetter
     public boolean getSelected() {
-        return getDomNodeOrNull().isSelected();
+        return ((HtmlOption) getDomNodeOrNull()).isSelected();
     }
 
     /**
@@ -155,7 +150,7 @@ public class HTMLOptionElement extends FormChild {
      */
     @JsxSetter
     public void setSelected(final boolean selected) {
-        final HtmlOption optionNode = getDomNodeOrNull();
+        final HtmlOption optionNode = (HtmlOption) getDomNodeOrNull();
         final HtmlSelect enclosingSelect = optionNode.getEnclosingSelect();
         if (!selected && optionNode.isSelected()
                 && enclosingSelect != null && !enclosingSelect.isMultipleSelectEnabled()) {
@@ -176,7 +171,7 @@ public class HTMLOptionElement extends FormChild {
      */
     @JsxGetter
     public boolean getDefaultSelected() {
-        return getDomNodeOrNull().isDefaultSelected();
+        return ((HtmlOption) getDomNodeOrNull()).isDefaultSelected();
     }
 
     /**
@@ -185,7 +180,7 @@ public class HTMLOptionElement extends FormChild {
      */
     @JsxGetter
     public String getLabel() {
-        return getDomNodeOrNull().getLabelAttribute();
+        return ((HtmlOption) getDomNodeOrNull()).getLabelAttribute();
     }
 
     /**
@@ -194,7 +189,7 @@ public class HTMLOptionElement extends FormChild {
      */
     @JsxSetter
     public void setLabel(final String label) {
-        getDomNodeOrNull().setLabelAttribute(label);
+        ((HtmlOption) getDomNodeOrNull()).setLabelAttribute(label);
     }
 
     /**

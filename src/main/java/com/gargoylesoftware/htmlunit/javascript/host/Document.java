@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_COMMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_CAPITAL_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_INHERIT;
@@ -475,12 +476,18 @@ public class Document extends EventNode {
             }
 
             final SgmlPage page = getPage();
-            final org.w3c.dom.Element element = page.createElement(tagName);
-            if (element instanceof BaseFrameElement) {
-                ((BaseFrameElement) element).markAsCreatedByJavascript();
+            final org.w3c.dom.Node element;
+            if ("comment".equalsIgnoreCase(tagName) && browserVersion.hasFeature(JS_DOCUMENT_CREATE_ELEMENT_COMMENT)) {
+                element = new DomComment(page, "");
             }
-            else if (element instanceof HtmlInput) {
-                ((HtmlInput) element).markAsCreatedByJavascript();
+            else {
+                element = page.createElement(tagName);
+                if (element instanceof BaseFrameElement) {
+                    ((BaseFrameElement) element).markAsCreatedByJavascript();
+                }
+                else if (element instanceof HtmlInput) {
+                    ((HtmlInput) element).markAsCreatedByJavascript();
+                }
             }
             final Object jsElement = getScriptableFor(element);
 

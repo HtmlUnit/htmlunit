@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CANVAS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML5_TAGS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLBASEFONT_SUPPORTED;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -60,7 +59,7 @@ class DefaultElementFactory implements ElementFactory {
             HtmlBlink.TAG_NAME, HtmlBlockQuote.TAG_NAME, HtmlBody.TAG_NAME, HtmlBold.TAG_NAME,
             HtmlBreak.TAG_NAME, HtmlButton.TAG_NAME, HtmlCanvas.TAG_NAME, HtmlCaption.TAG_NAME,
             HtmlCenter.TAG_NAME, HtmlCitation.TAG_NAME, HtmlCode.TAG_NAME,
-            HtmlDataList.TAG_NAME,
+            HtmlCommand.TAG_NAME, HtmlDataList.TAG_NAME,
             HtmlDefinition.TAG_NAME, HtmlDefinitionDescription.TAG_NAME,
             HtmlDeletedText.TAG_NAME, HtmlDetails.TAG_NAME, HtmlDialog.TAG_NAME, HtmlDirectory.TAG_NAME,
             HtmlDivision.TAG_NAME, HtmlDefinitionList.TAG_NAME,
@@ -77,12 +76,13 @@ class DefaultElementFactory implements ElementFactory {
             HtmlImage.TAG_NAME, HtmlImage.TAG_NAME2, HtmlInsertedText.TAG_NAME, HtmlIsIndex.TAG_NAME,
             HtmlItalic.TAG_NAME,
             HtmlKeyboard.TAG_NAME, HtmlKeygen.TAG_NAME,
-            HtmlLabel.TAG_NAME,
+            HtmlLabel.TAG_NAME, HtmlLayer.TAG_NAME,
             HtmlLegend.TAG_NAME, HtmlListing.TAG_NAME, HtmlListItem.TAG_NAME,
             HtmlLink.TAG_NAME, HtmlMain.TAG_NAME, HtmlMap.TAG_NAME, HtmlMark.TAG_NAME, HtmlMarquee.TAG_NAME,
             HtmlMenu.TAG_NAME, HtmlMenuItem.TAG_NAME, HtmlMeta.TAG_NAME, HtmlMeter.TAG_NAME, HtmlMultiColumn.TAG_NAME,
             HtmlNav.TAG_NAME, HtmlNextId.TAG_NAME,
             HtmlNoBreak.TAG_NAME, HtmlNoEmbed.TAG_NAME, HtmlNoFrames.TAG_NAME,
+            HtmlNoLayer.TAG_NAME,
             HtmlNoScript.TAG_NAME, HtmlObject.TAG_NAME, HtmlOrderedList.TAG_NAME,
             HtmlOptionGroup.TAG_NAME, HtmlOption.TAG_NAME, HtmlOutput.TAG_NAME,
             HtmlParagraph.TAG_NAME,
@@ -205,12 +205,7 @@ class DefaultElementFactory implements ElementFactory {
                 break;
 
             case HtmlBaseFont.TAG_NAME:
-                if (page.getWebClient().getBrowserVersion().hasFeature(HTMLBASEFONT_SUPPORTED)) {
-                    element = new HtmlBaseFont(qualifiedName, page, attributeMap);
-                }
-                else {
-                    element = new HtmlSpan(qualifiedName, page, attributeMap);
-                }
+                element = new HtmlBaseFont(qualifiedName, page, attributeMap);
                 break;
 
             case HtmlBidirectionalIsolation.TAG_NAME:
@@ -271,6 +266,10 @@ class DefaultElementFactory implements ElementFactory {
 
             case HtmlCode.TAG_NAME:
                 element = new HtmlCode(qualifiedName, page, attributeMap);
+                break;
+
+            case HtmlCommand.TAG_NAME:
+                element = new HtmlCommand(qualifiedName, page, attributeMap);
                 break;
 
             case HtmlDataList.TAG_NAME:
@@ -470,6 +469,10 @@ class DefaultElementFactory implements ElementFactory {
                 element = new HtmlLabel(qualifiedName, page, attributeMap);
                 break;
 
+            case HtmlLayer.TAG_NAME:
+                element = new HtmlLayer(qualifiedName, page, attributeMap);
+                break;
+
             case HtmlLegend.TAG_NAME:
                 element = new HtmlLegend(qualifiedName, page, attributeMap);
                 break;
@@ -552,6 +555,10 @@ class DefaultElementFactory implements ElementFactory {
 
             case HtmlNoFrames.TAG_NAME:
                 element = new HtmlNoFrames(qualifiedName, page, attributeMap);
+                break;
+
+            case HtmlNoLayer.TAG_NAME:
+                element = new HtmlNoLayer(qualifiedName, page, attributeMap);
                 break;
 
             case HtmlNoScript.TAG_NAME:

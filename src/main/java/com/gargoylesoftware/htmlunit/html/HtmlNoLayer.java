@@ -12,28 +12,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.html;
+package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import java.util.Map;
 
-import com.gargoylesoftware.htmlunit.html.HtmlDialog;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
- * The JavaScript object "HTMLDialogElement".
+ * Wrapper for the HTML element "nolayer".
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlDialog.class, browsers = @WebBrowser(CHROME))
-public class HTMLDialogElement extends HTMLElement {
+public class HtmlNoLayer extends HtmlElement {
+
+    /** The HTML tag represented by this element. */
+    public static final String TAG_NAME = "nolayer";
 
     /**
      * Creates a new instance.
+     *
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param page the HtmlPage that contains this element
+     * @param attributes the initial attributes
      */
-    @JsxConstructor
-    public HTMLDialogElement() {
+    HtmlNoLayer(final String qualifiedName, final SgmlPage page,
+            final Map<String, DomAttr> attributes) {
+        super(qualifiedName, page, attributes);
     }
+
 }

@@ -375,10 +375,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLBASEFONT_END_TAG_FORBIDDEN,
 
-    /** Supports basefont. */
-    @BrowserFeature(@WebBrowser(IE))
-    HTMLBASEFONT_SUPPORTED,
-
     /** Set this checked state to false when added to page (IE). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     HTMLCHECKEDINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE,
@@ -786,6 +782,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_DOCUMENT_APPEND_CHILD_SUPPORTED,
 
+    /** Javascript function document.createElement can create DomComment. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    JS_DOCUMENT_CREATE_ELEMENT_COMMENT,
+
     /** Javascript function document.createElement can process html code.
      * e.g. document.createElement("<INPUT TYPE='RADIO' NAME='RADIOTEST' VALUE='First Choice'>")
      * @see "http://msdn.microsoft.com/en-us/library/ms536389%28v=VS.85%29.aspx"
@@ -1044,6 +1044,10 @@ public enum BrowserVersionFeatures {
     /** Element.removeAttirbute emoves the named property also. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_ELEMENT_REMOVE_ATTRIBUTE_REMOVES_PROPERTY,
+
+    /** HTMLEmbedElement is an "[object]" even in standards mode. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    JS_EMBED_OBJECT,
 
     /** The Enumerator constructor throws an exception if called with HtmlCollections
      * as parameter. */
@@ -1353,6 +1357,10 @@ public enum BrowserVersionFeatures {
     /** "[object]" in quirks mode. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     JS_OBJECT_IN_QUIRKS_MODE,
+
+    /** HTMLObjectElement is an "[object]" even in standards mode. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    JS_OBJECT_OBJECT,
 
     /** Indicates that objects with prototype property available in window scope. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })

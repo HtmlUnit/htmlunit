@@ -12,8 +12,8 @@
                 BrowserVersion: deprecate FIREFOX_24 and remove deprecation of INTERNET_EXPLORER_8.
             </action>
             <action type="add" dev="asashour">
-                Initial support for HtmlBidirectionalIsolation, HtmlDetails, HtmlDialog, HtmlMain, HtmlMenuItem,
-                HtmlSummary and HtmlTrack elements.
+                Initial support for HtmlBidirectionalIsolation, HtmlCommand, HtmlDetails, HtmlDialog,
+                HtmlLayer, HtmlMain, HtmlMenuItem, HtmlNoLayer, HtmlSummary and HtmlTrack elements.
             </action>
             <action type="update" dev="asashour">
                 WebClient: deprecate .closeAllWindows(), use .close() or try-with-resources statement.

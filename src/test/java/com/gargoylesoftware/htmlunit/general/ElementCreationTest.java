@@ -188,7 +188,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object HTMLSpanElement]",
             CHROME = "[object HTMLElement]",
             IE = "[object HTMLBaseFontElement]")
-    @NotYetImplemented(CHROME)
     public void basefont() throws Exception {
         test("basefont");
     }
@@ -460,7 +459,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLEmbedElement]",
             IE8 = "[object]")
-    @NotYetImplemented(IE8)
     public void embed() throws Exception {
         test("embed");
     }
@@ -1023,7 +1021,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE8 = "[object HTMLNoShowElement]")
-    @NotYetImplemented(CHROME)
     public void noembed() throws Exception {
         test("noembed");
     }
@@ -1036,7 +1033,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE8 = "[object HTMLNoShowElement]")
-    @NotYetImplemented(CHROME)
     public void noframes() throws Exception {
         test("noframes");
     }
@@ -1061,7 +1057,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLObjectElement]",
             IE8 = "[object]")
-    @NotYetImplemented(IE8)
     public void object() throws Exception {
         test("object");
     }
@@ -1085,7 +1080,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLOptGroupElement]",
             IE8 = "[object HTMLOptionElement]")
-    @NotYetImplemented(IE8)
     public void optgroup() throws Exception {
         test("optgroup");
     }
@@ -1254,7 +1248,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
             IE8 = "[object HTMLGenericElement]")
-    @NotYetImplemented(CHROME)
     public void section() throws Exception {
         test("section");
     }
@@ -1534,7 +1527,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLTitleElement]",
             IE8 = "[object HTMLTextElement]")
-    @NotYetImplemented(IE8)
     public void title() throws Exception {
         test("title");
     }
@@ -1635,7 +1627,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             CHROME = "[object HTMLElement]",
             IE8 = "[object HTMLGenericElement]")
-    @NotYetImplemented(CHROME)
     public void command() throws Exception {
         test("command");
     }
@@ -1646,7 +1637,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             IE8 = "[object HTMLCommentElement]")
-    @NotYetImplemented(IE8)
     public void comment() throws Exception {
         test("comment");
     }
@@ -1720,7 +1710,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             CHROME = "[object HTMLDetailsElement]",
             IE8 = "[object HTMLGenericElement]")
-    @NotYetImplemented(CHROME)
     public void details() throws Exception {
         test("details");
     }
@@ -1734,7 +1723,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             CHROME = "[object HTMLDialogElement]",
             IE8 = "[object HTMLGenericElement]")
-    @NotYetImplemented(CHROME)
     public void dialog() throws Exception {
         test("dialog");
     }
@@ -1849,7 +1837,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             CHROME = "[object HTMLElement]",
             IE8 = "[object HTMLGenericElement]")
-    @NotYetImplemented(CHROME)
     public void layer() throws Exception {
         test("layer");
     }
@@ -1901,9 +1888,8 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
             CHROME = "[object HTMLElement]",
             IE8 = "[object HTMLGenericElement]")
-    @NotYetImplemented(CHROME)
     public void noLayer() throws Exception {
-        test("noLayer");
+        test("nolayer");
     }
 
     /**

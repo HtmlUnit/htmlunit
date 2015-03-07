@@ -408,7 +408,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
         IE8 = "[object HTMLCommentElement]")
-    @NotYetImplemented(IE8)
     public void htmlCommentElement() throws Exception {
         test("HTMLCommentElement");
     }

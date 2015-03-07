@@ -364,6 +364,15 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("1")
+    public void elementClosesItself_command() throws Exception {
+        loadPageWithAlerts2(elementClosesItself("command"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "1",
             IE8 = "0")
     @NotYetImplemented(IE8)
@@ -762,6 +771,15 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("1")
+    public void elementClosesItself_layer() throws Exception {
+        loadPageWithAlerts2(elementClosesItself("layer"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "1",
             IE8 = "0")
     @NotYetImplemented(IE8)
@@ -938,6 +956,15 @@ public class HTMLElementsTest extends WebDriverTestCase {
     @NotYetImplemented(IE8)
     public void elementClosesItself_noframes() throws Exception {
         loadPageWithAlerts2(elementClosesItself("noframes"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    public void elementClosesItself_nolayer() throws Exception {
+        loadPageWithAlerts2(elementClosesItself("nolayer"));
     }
 
     /**

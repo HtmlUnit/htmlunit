@@ -235,7 +235,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             IE11 = { "text", "i", "i", "[object MSStyleCSSProperties]", "function", "undefined", "undefined" },
             IE8 = { "text", "i", "i", "[object]", "function", "a", "undefined" },
             CHROME = { "text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined" })
-    @NotYetImplemented({ FF, CHROME })
+    @NotYetImplemented({ FF, CHROME, IE11 })
     public void attributesAccess() throws Exception {
         final String html
             = "<html><head>\n"
@@ -3723,6 +3723,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "<basefont>",
             IE = "<BASEFONT></BASEFONT>",
             IE11 = "<basefont></basefont>")
+    @NotYetImplemented(CHROME)
     public void outerHTML_basefont() throws Exception {
         loadPageWithAlerts2(outerHTML("basefont"));
     }
@@ -3884,6 +3885,18 @@ public class HTMLElementTest extends WebDriverTestCase {
             IE8 = "<COLGROUP></COLGROUP>")
     public void outerHTML_colgroup() throws Exception {
         loadPageWithAlerts2(outerHTML("colgroup"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<command></command>",
+            FF = "<command>",
+            IE8 = "<COMMAND></COMMAND>")
+    @NotYetImplemented({ FF, IE8 })
+    public void outerHTML_command() throws Exception {
+        loadPageWithAlerts2(outerHTML("command"));
     }
 
     /**
@@ -4300,6 +4313,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "<keygen>",
             IE8 = "<keygen></keygen>",
             CHROME = "<keygen></keygen>")
+    @NotYetImplemented(IE11)
     public void outerHTML_keygen() throws Exception {
         loadPageWithAlerts2(outerHTML("keygen"));
     }
@@ -4312,6 +4326,17 @@ public class HTMLElementTest extends WebDriverTestCase {
             IE8 = "<LABEL></LABEL>")
     public void outerHTML_label() throws Exception {
         loadPageWithAlerts2(outerHTML("label"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<layer></layer>",
+            IE8 = "<LAYER></LAYER>")
+    @NotYetImplemented(IE8)
+    public void outerHTML_layer() throws Exception {
+        loadPageWithAlerts2(outerHTML("layer"));
     }
 
     /**
@@ -4497,6 +4522,17 @@ public class HTMLElementTest extends WebDriverTestCase {
             IE8 = "<NOSCRIPT></NOSCRIPT>")
     public void outerHTML_noscript() throws Exception {
         loadPageWithAlerts2(outerHTML("noscript"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<nolayer></nolayer>",
+            IE8 = "<NOLAYER></NOLAYER>")
+    @NotYetImplemented(IE8)
+    public void outerHTML_nolayer() throws Exception {
+        loadPageWithAlerts2(outerHTML("nolayer"));
     }
 
     /**
