@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -23,7 +21,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -44,7 +41,6 @@ public class HtmlBaseFontTest extends WebDriverTestCase {
             CHROME = "[object HTMLElement]",
             IE11 = "[object HTMLBaseFontElement]",
             IE8 = "[object]")
-    @NotYetImplemented(CHROME)
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -59,12 +55,7 @@ public class HtmlBaseFontTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            if (getBrowserVersion().isIE()) {
-                assertTrue(HtmlBaseFont.class.isInstance(page.getHtmlElementById("myId")));
-            }
-            if (getBrowserVersion().isFirefox()) {
-                assertTrue(HtmlSpan.class.isInstance(page.getHtmlElementById("myId")));
-            }
+            assertTrue(HtmlBaseFont.class.isInstance(page.getHtmlElementById("myId")));
         }
     }
 }

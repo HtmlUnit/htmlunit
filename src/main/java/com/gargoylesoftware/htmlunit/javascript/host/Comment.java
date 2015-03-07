@@ -42,7 +42,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClasses({
     @JsxClass(domClass = DomComment.class,
         browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(domClass = DomComment.class, isJSObject = false, isDefinedInStandardsMode = false,
+    @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
         browsers = @WebBrowser(value = IE, maxVersion = 8))
 })
 public class Comment extends CharacterDataImpl {

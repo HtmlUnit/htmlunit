@@ -77,7 +77,7 @@ public class AttributesTest extends TestCase {
             "HtmlBidirectionalOverride", "HtmlBig", "HtmlBlink",
             "HtmlBlockQuote", "HtmlBody", "HtmlBold",
             "HtmlBreak", "HtmlButton", "HtmlCanvas", "HtmlCaption",
-            "HtmlCenter", "HtmlCitation", "HtmlCode",
+            "HtmlCenter", "HtmlCitation", "HtmlCode", "HtmlCommand", "DomComment",
             "HtmlDataList",
             "HtmlDefinition", "HtmlDefinitionDescription",
             "HtmlDeletedText", "HtmlDetails", "HtmlDialog", "HtmlDirectory",
@@ -93,14 +93,14 @@ public class AttributesTest extends TestCase {
             "HtmlHorizontalRule", "HtmlHtml", "HtmlInlineFrame",
             "HtmlInlineQuotation",
             "HtmlImage", "HtmlImage", "HtmlInsertedText", "HtmlIsIndex",
-            "HtmlItalic", "HtmlKeyboard", "HtmlLabel",
+            "HtmlItalic", "HtmlKeyboard", "HtmlLabel", "HtmlLayer",
             "HtmlLegend", "HtmlListing", "HtmlListItem",
             "HtmlLink",
             "HtmlKeygen",
             "HtmlMap", "HtmlMain", "HtmlMark", "HtmlMarquee",
             "HtmlMenu", "HtmlMenuItem", "HtmlMeta", "HtmlMeter", "HtmlMultiColumn",
             "HtmlNav", "HtmlNextId",
-            "HtmlNoBreak", "HtmlNoEmbed", "HtmlNoFrames",
+            "HtmlNoBreak", "HtmlNoEmbed", "HtmlNoFrames", "HtmlNoLayer",
             "HtmlNoScript", "HtmlObject", "HtmlOrderedList",
             "HtmlOptionGroup", "HtmlOption", "HtmlOutput",
             "HtmlParagraph",
@@ -128,7 +128,13 @@ public class AttributesTest extends TestCase {
             final Class<?> clazz = Class.forName("com.gargoylesoftware.htmlunit.html." + testClass);
             addTestsForClass(clazz, suite);
 
-            String tag = (String) clazz.getField("TAG_NAME").get(null);
+            String tag;
+            if (DomComment.class == clazz) {
+                tag = "comment";
+            }
+            else {
+                tag = (String) clazz.getField("TAG_NAME").get(null);
+            }
             supportedTags.remove(tag);
             try {
                 tag = (String) clazz.getField("TAG_NAME2").get(null);
