@@ -19,26 +19,26 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.html.HtmlBlockQuote;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HtmlBlockQuote".
+ * The JavaScript object "HTMLQuoteElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
 @JsxClass(domClass = HtmlBlockQuote.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
-public class HTMLBlockQuoteElement extends HTMLElement {
+public class HTMLQuoteElement extends HTMLElement {
 
     /**
-     * {@inheritDoc}
+     * Creates an instance.
      */
-    @Override
-    public String getClassName() {
-        return "HTMLQuoteElement";
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public HTMLQuoteElement() {
     }
 
     /**

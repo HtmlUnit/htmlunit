@@ -843,7 +843,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBlockQuoteElement}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLQuoteElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -854,7 +854,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBlockQuoteElement}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLQuoteElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -863,7 +863,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function HTMLQuoteElement() {\n    [native code]\n}",
             IE = "[object HTMLQuoteElement]",
             IE8 = "exception")
-    @NotYetImplemented({ FF, CHROME })
     public void htmlQuoteElement() throws Exception {
         test("HTMLQuoteElement");
     }

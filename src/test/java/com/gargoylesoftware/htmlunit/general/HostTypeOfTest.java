@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.general;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -837,7 +836,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBlockQuoteElement}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLQuoteElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -848,7 +847,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBlockQuoteElement}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLQuoteElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -856,13 +855,12 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function",
         IE8 = "undefined",
         IE11 = "object")
-    @NotYetImplemented({ CHROME, FF })
     public void htmlQuoteElement() throws Exception {
         test("HTMLQuoteElement");
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBlockQuoteElement}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLQuoteElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -1694,7 +1692,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF = "function",
             IE8 = "undefined")
-    @NotYetImplemented(IE8)
     public void htmlSpanElement() throws Exception {
         test("HTMLSpanElement");
     }
@@ -1897,7 +1894,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF = "function",
             IE8 = "undefined")
-    @NotYetImplemented(IE8)
     public void htmlUListElement() throws Exception {
         test("HTMLUListElement");
     }

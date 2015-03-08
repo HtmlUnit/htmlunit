@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -855,7 +854,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBlockQuoteElement}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLQuoteElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -866,7 +865,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBlockQuoteElement}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLQuoteElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -876,7 +875,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             FF = "function HTMLQuoteElement() {\n    [native code]\n}",
             IE11 = "[object HTMLQuoteElement]"
             )
-    @NotYetImplemented({ FF, CHROME })
     public void htmlQuoteElement() throws Exception {
         test("HTMLQuoteElement");
     }
@@ -1720,7 +1718,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function HTMLSpanElement() { [native code] }",
             FF = "function HTMLSpanElement() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented(IE8)
     public void htmlSpanElement() throws Exception {
         test("HTMLSpanElement");
     }
@@ -1923,7 +1920,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function HTMLUListElement() { [native code] }",
             FF = "function HTMLUListElement() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented(IE8)
     public void htmlUListElement() throws Exception {
         test("HTMLUListElement");
     }
