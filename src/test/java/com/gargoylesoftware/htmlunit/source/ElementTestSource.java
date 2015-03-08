@@ -17,14 +17,14 @@ package com.gargoylesoftware.htmlunit.source;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
- * Use to generate test cases.
+ * Use to generate test cases similar to the ones in the 'general' package.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public final class TestSource {
+public final class ElementTestSource {
 
-    private TestSource() { }
+    private ElementTestSource() { }
 
     /**
      * Generate test case for each one HTML elements.
@@ -32,8 +32,11 @@ public final class TestSource {
      * @param htmlGeneratorMethod the method name which is called to generate the HTML, it expects a tag name parameter
      * @param defaultAlerts default string inside the parenthesis of <tt>@Alerts()</tt>, can be null
      */
-    public static void generateTestForHtmlElements(final String testNamePrefix, final String htmlGeneratorMethod,
+    public static void generateTestForHtmlElements(String testNamePrefix, final String htmlGeneratorMethod,
             final String defaultAlerts) {
+        if (testNamePrefix != null && !testNamePrefix.isEmpty()) {
+            testNamePrefix += '_';
+        }
         for (final String tag : HtmlPageTest.HTML_TAGS_) {
             System.out.println();
             System.out.println("    /**");
@@ -45,7 +48,7 @@ public final class TestSource {
                 System.out.print(defaultAlerts);
             }
             System.out.println(")");
-            System.out.println("    public void " + testNamePrefix + '_' + tag + "() throws Exception {");
+            System.out.println("    public void " + testNamePrefix + tag + "() throws Exception {");
             System.out.println("        loadPageWithAlerts2(" + htmlGeneratorMethod + "(\"" + tag + "\"));");
             System.out.println("    }");
         }
