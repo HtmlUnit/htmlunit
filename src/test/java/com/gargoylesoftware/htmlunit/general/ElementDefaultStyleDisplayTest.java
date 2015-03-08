@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.general;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -43,14 +42,14 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             + "<html><head><script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      var e = document.getElementById('myId');\n"
+            + "      var e = document.createElement('" + tagName + "');\n"
+            + "      document.body.appendChild(e);\n"
             + "      var cs = window.getComputedStyle ? window.getComputedStyle(e, null) : e.currentStyle;\n"
             + "      var disp = cs ? cs.display : null;\n"
             + "      alert(disp);\n"
             + "    } catch (e) {alert('exception')}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
-            + "  <" + tagName + " id='myId'></" + tagName + ">\n"
             + "</body></html>";
     }
 
@@ -148,7 +147,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("inline")
-    @NotYetImplemented({ FF, IE })
     public void bgsound() throws Exception {
         loadPageWithAlerts2(test("bgsound"));
     }
@@ -269,8 +267,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @Alerts("table-caption")
     public void caption() throws Exception {
         loadPageWithAlerts2(test("caption"));
     }
@@ -484,8 +481,9 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
-    @NotYetImplemented
+    @Alerts(DEFAULT = "block",
+            FF = "inline")
+    @NotYetImplemented(FF)
     public void frame() throws Exception {
         loadPageWithAlerts2(test("frame"));
     }
@@ -494,8 +492,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
-    @NotYetImplemented
+    @Alerts("block")
     public void frameset() throws Exception {
         loadPageWithAlerts2(test("frameset"));
     }
@@ -504,8 +501,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @Alerts("none")
+    @NotYetImplemented({ CHROME, FF, IE })
     public void head() throws Exception {
         loadPageWithAlerts2(test("head"));
     }
@@ -643,7 +640,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("inline")
-    @NotYetImplemented(IE)
     public void isindex() throws Exception {
         loadPageWithAlerts2(test("isindex"));
     }
@@ -670,8 +666,9 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("inline-block")
-    @NotYetImplemented({ IE, CHROME })
+    @Alerts(DEFAULT = "inline-block",
+            FF = "inline")
+    @NotYetImplemented
     public void keygen() throws Exception {
         loadPageWithAlerts2(test("keygen"));
     }
@@ -786,7 +783,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("inline")
-    @NotYetImplemented(FF)
     public void menuitem() throws Exception {
         loadPageWithAlerts2(test("menuitem"));
     }
@@ -837,7 +833,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("inline")
-    @NotYetImplemented(IE)
     public void nextid() throws Exception {
         loadPageWithAlerts2(test("nextid"));
     }
@@ -877,7 +872,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("inline")
-    @NotYetImplemented(CHROME)
     public void nolayer() throws Exception {
         loadPageWithAlerts2(test("nolayer"));
     }
@@ -916,7 +910,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("block")
-    @NotYetImplemented
+    @NotYetImplemented(IE)
     public void optgroup() throws Exception {
         loadPageWithAlerts2(test("optgroup"));
     }
@@ -926,7 +920,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("block")
-    @NotYetImplemented
+    @NotYetImplemented(IE)
     public void option() throws Exception {
         loadPageWithAlerts2(test("option"));
     }
@@ -1161,8 +1155,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @Alerts("table-column")
     public void col() throws Exception {
         loadPageWithAlerts2(test("col"));
     }
@@ -1171,8 +1164,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @Alerts("table-column-group")
     public void colgroup() throws Exception {
         loadPageWithAlerts2(test("colgroup"));
     }
@@ -1181,8 +1173,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @Alerts("table-row-group")
     public void tbody() throws Exception {
         loadPageWithAlerts2(test("tbody"));
     }
@@ -1191,8 +1182,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @Alerts("table-cell")
     public void td() throws Exception {
         loadPageWithAlerts2(test("td"));
     }
@@ -1201,8 +1191,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @Alerts("table-cell")
     public void th() throws Exception {
         loadPageWithAlerts2(test("th"));
     }
@@ -1211,8 +1200,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @Alerts("table-row")
     public void tr() throws Exception {
         loadPageWithAlerts2(test("tr"));
     }
@@ -1232,8 +1220,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @Alerts("table-footer-group")
     public void tfoot() throws Exception {
         loadPageWithAlerts2(test("tfoot"));
     }
@@ -1242,8 +1229,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @Alerts("table-header-group")
     public void thead() throws Exception {
         loadPageWithAlerts2(test("thead"));
     }

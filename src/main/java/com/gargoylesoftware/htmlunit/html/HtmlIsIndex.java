@@ -134,4 +134,12 @@ public class HtmlIsIndex extends HtmlElement implements SubmittableElement {
     public final String getPromptAttribute() {
         return getAttribute("prompt");
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        return DisplayStyle.INLINE;
+    }
 }
