@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -163,7 +160,6 @@ public class DocumentTypeTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object DocumentType]",  "[object HTMLHtmlElement]" },
             IE8 = { "[object HTMLCommentElement]", "[object HTMLHtmlElement]" })
-    @NotYetImplemented(IE8)
     public void document_children() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html>\n"
             + "<head>\n"
