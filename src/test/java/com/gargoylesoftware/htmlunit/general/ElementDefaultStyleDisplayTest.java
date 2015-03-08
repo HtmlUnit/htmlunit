@@ -14,7 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.general;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.*;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -48,7 +53,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             + "  <" + tagName + " id='myId'></" + tagName + ">\n"
             + "</body></html>";
     }
-
 
     /**
      * @throws Exception if the test fails

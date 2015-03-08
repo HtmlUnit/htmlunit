@@ -39,7 +39,7 @@ public final class TestCaseTest {
 
     /**
      * Tests that all test cases with the pattern used by
-     * {@link com.gargoylesoftware.htmlunit.source.ElementTestSource#generateTestForHtmlElements(String, String, String)}
+     * {@link com.gargoylesoftware.htmlunit.source.ElementTestSource#generateTestForHtmlElements}
      * are up to date.
      *
      * @throws Exception if the test fails
