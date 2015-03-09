@@ -24,6 +24,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
@@ -193,10 +194,11 @@ public class HTMLOptionElement extends FormChild {
      */
     @JsxGetter
     public String getLabel() {
-        if (getDomNodeOrNull() instanceof HtmlOption) {
-            return ((HtmlOption) getDomNodeOrNull()).getLabelAttribute();
+        final DomNode domNode = getDomNodeOrNull();
+        if (domNode instanceof HtmlOption) {
+            return ((HtmlOption) domNode).getLabelAttribute();
         }
-        return null;
+        return ((HtmlOptionGroup) domNode).getLabelAttribute();
     }
 
     /**
@@ -205,9 +207,11 @@ public class HTMLOptionElement extends FormChild {
      */
     @JsxSetter
     public void setLabel(final String label) {
-        if (getDomNodeOrNull() instanceof HtmlOption) {
-            ((HtmlOption) getDomNodeOrNull()).setLabelAttribute(label);
+        final DomNode domNode = getDomNodeOrNull();
+        if (domNode instanceof HtmlOption) {
+            ((HtmlOption) domNode).setLabelAttribute(label);
         }
+        ((HtmlOptionGroup) domNode).setLabelAttribute(label);
     }
 
     /**

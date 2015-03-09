@@ -85,6 +85,17 @@ public class HtmlOptionGroup extends HtmlElement implements DisabledElement {
     }
 
     /**
+     * Sets the value of the attribute "label". Refer to the
+     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * documentation for details on the use of this attribute.
+     *
+     * @param newLabel the value of the attribute "label"
+     */
+    public final void setLabelAttribute(final String newLabel) {
+        setAttribute("label", newLabel);
+    }
+
+    /**
      * Gets the enclosing select of this HtmlOptionGroup.
      * @return <code>null</code> if no select is found (for instance malformed html)
      */
