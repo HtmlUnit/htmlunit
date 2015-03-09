@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.general;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -1041,8 +1042,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "none",
-            IE8 = "inline")
-    @NotYetImplemented
+            IE8 = "block")
+    @NotYetImplemented({ CHROME, FF, IE11 })
     public void noframes() throws Exception {
         loadPageWithAlerts2(test("noframes"));
     }
