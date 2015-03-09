@@ -103,8 +103,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "inline-block",
-            CHROME = "inline")
+    @Alerts(DEFAULT = "inline",
+            FF = "inline-block")
     @NotYetImplemented
     public void applet() throws Exception {
         loadPageWithAlerts2(test("applet"));
@@ -116,9 +116,9 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "none",
-            CHROME = "inline")
-    @NotYetImplemented({ IE, CHROME })
+    @Alerts(DEFAULT = "inline",
+            FF = "none")
+    @NotYetImplemented(CHROME)
     public void area() throws Exception {
         loadPageWithAlerts2(test("area"));
     }
@@ -177,8 +177,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "none",
-            CHROME = "inline")
+    @Alerts(DEFAULT = "inline",
+            FF = "none")
     @NotYetImplemented
     public void base() throws Exception {
         loadPageWithAlerts2(test("base"));
@@ -190,8 +190,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "none",
-            CHROME = "inline")
+    @Alerts(DEFAULT = "inline",
+            FF = "none")
     @NotYetImplemented
     public void basefont() throws Exception {
         loadPageWithAlerts2(test("basefont"));
@@ -798,9 +798,9 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "inline-block",
-            FF = "inline")
-    @NotYetImplemented
+    @Alerts(DEFAULT = "inline",
+            CHROME = "inline-block")
+    @NotYetImplemented({ CHROME, FF })
     public void keygen() throws Exception {
         loadPageWithAlerts2(test("keygen"));
     }
@@ -834,8 +834,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("block")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "block",
+            IE = "inline")
     public void legend() throws Exception {
         loadPageWithAlerts2(test("legend"));
     }
@@ -869,7 +869,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("none")
+    @Alerts(DEFAULT = "none",
+            IE = "inline")
     @NotYetImplemented
     public void link() throws Exception {
         loadPageWithAlerts2(test("link"));
@@ -881,8 +882,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("block")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "block",
+            IE = "inline")
     public void main() throws Exception {
         loadPageWithAlerts2(test("main"));
     }
@@ -915,8 +916,9 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("inline-block")
-    @NotYetImplemented
+    @Alerts(DEFAULT = "inline-block",
+            IE = "block")
+    @NotYetImplemented({ CHROME, FF })
     public void marquee() throws Exception {
         loadPageWithAlerts2(test("marquee"));
     }
@@ -961,8 +963,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("inline-block")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "inline-block",
+            IE = "inline")
     public void meter() throws Exception {
         loadPageWithAlerts2(test("meter"));
     }
@@ -973,9 +975,9 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "block",
-            CHROME = "inline")
-    @NotYetImplemented({ IE, FF })
+    @Alerts(DEFAULT = "inline",
+            FF = "block")
+    @NotYetImplemented(FF)
     public void multicol() throws Exception {
         loadPageWithAlerts2(test("multicol"));
     }
@@ -1091,8 +1093,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("block")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "block",
+            IE = "inline")
     public void optgroup() throws Exception {
         loadPageWithAlerts2(test("optgroup"));
     }
@@ -1103,8 +1105,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("block")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "block",
+            IE = "inline")
     public void option() throws Exception {
         loadPageWithAlerts2(test("option"));
     }
@@ -1137,8 +1139,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("none")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "none",
+            IE = "inline")
     public void param() throws Exception {
         loadPageWithAlerts2(test("param"));
     }
@@ -1172,8 +1174,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("inline-block")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "inline-block",
+            IE = "inline")
     public void progress() throws Exception {
         loadPageWithAlerts2(test("progress"));
     }
@@ -1195,8 +1197,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("inline")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "inline",
+            IE = "ruby-text")
     public void rt() throws Exception {
         loadPageWithAlerts2(test("rt"));
     }
@@ -1207,8 +1209,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("inline")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = "inline",
+            IE = "ruby")
     public void ruby() throws Exception {
         loadPageWithAlerts2(test("ruby"));
     }
@@ -1455,9 +1457,9 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "inline",
-            CHROME = "inline-block")
-    @NotYetImplemented({ IE, CHROME })
+    @Alerts(DEFAULT = "inline-block",
+            FF = "inline")
+    @NotYetImplemented(CHROME)
     public void textarea() throws Exception {
         loadPageWithAlerts2(test("textarea"));
     }

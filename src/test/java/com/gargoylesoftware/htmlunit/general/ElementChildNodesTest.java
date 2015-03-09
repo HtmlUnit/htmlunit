@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -391,8 +392,9 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
             CHROME = { "3", "2", "2", "3", "2", "3" },
+            IE11 = { "3", "2", "2", "3", "2", "3" },
             IE8 = { "1", "1", "1", "2", "2", "1" })
-    @NotYetImplemented({ CHROME, IE8 })
+    @NotYetImplemented({ CHROME, IE })
     public void command() throws Exception {
         loadPageWithAlerts2(test("command"));
     }

@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.general;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -418,7 +419,9 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE11 = "0")
+    @NotYetImplemented(IE11)
     public void command() throws Exception {
         loadPageWithAlerts2(test("command"));
     }
@@ -883,9 +886,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF24 = "1",
-            FF31 = "2",
-            IE11 = "1")
-    @NotYetImplemented({ IE8, FF31, CHROME })
+            FF31 = "2")
+    @NotYetImplemented({ IE, FF31, CHROME })
     public void keygen() throws Exception {
         loadPageWithAlerts2(test("keygen"));
     }
