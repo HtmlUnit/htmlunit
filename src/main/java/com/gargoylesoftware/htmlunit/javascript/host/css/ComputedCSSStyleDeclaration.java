@@ -25,6 +25,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_TEXT_SHAD
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LENGTH_WITHOUT_PX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.TREATS_POSITION_FIXED_LIKE_POSITION_STATIC;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static org.apache.commons.lang3.StringUtils.defaultIfEmpty;
 
 import java.util.Arrays;
@@ -60,6 +61,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Text;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition;
@@ -78,6 +81,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  * @author Ronald Brill
  * @author Frank Danek
  */
+@JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = @WebBrowser(FF))
 public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     /** The number of (horizontal) pixels to assume that each character occupies. */
