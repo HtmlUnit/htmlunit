@@ -96,7 +96,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
                 LOG.warn("Event loop thread will be stopped");
             }
 
-            // Und bist du nicht willig
+            // Stop the thread
             eventLoopThread_.stop();
         }
     }
