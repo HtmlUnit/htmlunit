@@ -393,7 +393,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
             CHROME = { "3", "2", "2", "3", "2", "3" },
             IE11 = { "3", "2", "2", "3", "2", "3" },
-            IE8 = { "1", "1", "1", "2", "2", "1" })
+            IE8 = { "2", "2", "2", "4", "4", "3" })
     @NotYetImplemented({ CHROME, IE })
     public void command() throws Exception {
         loadPageWithAlerts2(test("command"));
@@ -891,7 +891,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
-            IE8 = { "1", "1", "1", "2", "2", "1" })
+            IE8 = { "2", "2", "2", "4", "4", "3" })
     @NotYetImplemented(IE8)
     public void layer() throws Exception {
         loadPageWithAlerts2(test("layer"));
@@ -1131,7 +1131,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
-            IE8 = { "1", "1", "1", "2", "2", "1" })
+            IE8 = { "2", "2", "2", "4", "4", "3" })
     @NotYetImplemented(IE8)
     public void nolayer() throws Exception {
         loadPageWithAlerts2(test("nolayer"));

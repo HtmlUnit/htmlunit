@@ -420,8 +420,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            IE11 = "0")
-    @NotYetImplemented(IE11)
+            IE = "0")
+    @NotYetImplemented(IE)
     public void command() throws Exception {
         loadPageWithAlerts2(test("command"));
     }
@@ -909,7 +909,9 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
     public void layer() throws Exception {
         loadPageWithAlerts2(test("layer"));
     }
@@ -1138,7 +1140,9 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
     public void nolayer() throws Exception {
         loadPageWithAlerts2(test("nolayer"));
     }

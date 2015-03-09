@@ -339,9 +339,8 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<command></command>",
-            FF = "<command>",
-            IE8 = "<COMMAND></COMMAND>")
-    @NotYetImplemented({ FF, IE8 })
+            FF = "<command>")
+    @NotYetImplemented(FF)
     public void command() throws Exception {
         loadPageWithAlerts2(test("command"));
     }
@@ -779,9 +778,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<layer></layer>",
-            IE8 = "<LAYER></LAYER>")
-    @NotYetImplemented(IE8)
+    @Alerts("<layer></layer>")
     public void layer() throws Exception {
         loadPageWithAlerts2(test("layer"));
     }
@@ -975,9 +972,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<nolayer></nolayer>",
-            IE8 = "<NOLAYER></NOLAYER>")
-    @NotYetImplemented(IE8)
+    @Alerts("<nolayer></nolayer>")
     public void nolayer() throws Exception {
         loadPageWithAlerts2(test("nolayer"));
     }

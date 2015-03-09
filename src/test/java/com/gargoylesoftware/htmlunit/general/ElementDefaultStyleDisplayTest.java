@@ -129,8 +129,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("block")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "block",
+            IE8 = "inline")
     public void article() throws Exception {
         loadPageWithAlerts2(test("article"));
     }
@@ -141,8 +141,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("block")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "block",
+            IE8 = "inline")
     public void aside() throws Exception {
         loadPageWithAlerts2(test("aside"));
     }
@@ -154,8 +154,9 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "none",
-            CHROME = "inline")
-    @NotYetImplemented({ IE8, CHROME })
+            CHROME = "inline",
+            IE8 = "inline")
+    @NotYetImplemented(CHROME)
     public void audio() throws Exception {
         loadPageWithAlerts2(test("audio"));
     }
@@ -368,8 +369,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("none")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "none",
+            IE8 = "inline")
     public void datalist() throws Exception {
         loadPageWithAlerts2(test("datalist"));
     }
@@ -515,8 +516,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("block")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "block",
+            IE8 = "inline")
     public void figcaption() throws Exception {
         loadPageWithAlerts2(test("figcaption"));
     }
@@ -527,8 +528,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("block")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "block",
+            IE8 = "inline")
     public void figure() throws Exception {
         loadPageWithAlerts2(test("figure"));
     }
@@ -561,8 +562,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("block")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "block",
+            IE8 = "inline")
     public void footer() throws Exception {
         loadPageWithAlerts2(test("footer"));
     }
@@ -586,7 +587,9 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("block")
+    @Alerts(DEFAULT = "block",
+            IE8 = "inline")
+    @NotYetImplemented(IE8)
     public void frameset() throws Exception {
         loadPageWithAlerts2(test("frameset"));
     }
@@ -609,8 +612,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("block")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "block",
+            IE8 = "inline")
     public void header() throws Exception {
         loadPageWithAlerts2(test("header"));
     }
@@ -951,7 +954,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("none")
+    @Alerts(DEFAULT = "none",
+            IE8 = "inline")
     @NotYetImplemented
     public void meta() throws Exception {
         loadPageWithAlerts2(test("meta"));
@@ -988,8 +992,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("block")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "block",
+            IE8 = "inline")
     public void nav() throws Exception {
         loadPageWithAlerts2(test("nav"));
     }
@@ -1023,7 +1027,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "none",
-            CHROME = "inline")
+            CHROME = "inline",
+            IE8 = "inline")
     @NotYetImplemented
     public void noembed() throws Exception {
         loadPageWithAlerts2(test("noembed"));
@@ -1035,7 +1040,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("none")
+    @Alerts(DEFAULT = "none",
+            IE8 = "inline")
     @NotYetImplemented
     public void noframes() throws Exception {
         loadPageWithAlerts2(test("noframes"));
@@ -1059,8 +1065,9 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "none",
-            CHROME = "inline")
-    @NotYetImplemented({ IE8, CHROME })
+            CHROME = "inline",
+            IE8 = "inline")
+    @NotYetImplemented(CHROME)
     public void noscript() throws Exception {
         loadPageWithAlerts2(test("noscript"));
     }
@@ -1243,8 +1250,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("none")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "none",
+            IE8 = "inline")
     public void script() throws Exception {
         loadPageWithAlerts2(test("script"));
     }
@@ -1255,8 +1262,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("block")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "block",
+            IE8 = "inline")
     public void section() throws Exception {
         loadPageWithAlerts2(test("section"));
     }
@@ -1334,7 +1341,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("none")
+    @Alerts(DEFAULT = "none",
+            IE8 = "inline")
     @NotYetImplemented
     public void style() throws Exception {
         loadPageWithAlerts2(test("style"));
@@ -1514,7 +1522,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("none")
+    @Alerts(DEFAULT = "none",
+            IE8 = "inline")
     @NotYetImplemented
     public void title() throws Exception {
         loadPageWithAlerts2(test("title"));
