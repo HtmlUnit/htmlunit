@@ -295,7 +295,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function")
-    @NotYetImplemented(FF)
     public void css2Properties() throws Exception {
         test("CSS2Properties");
     }

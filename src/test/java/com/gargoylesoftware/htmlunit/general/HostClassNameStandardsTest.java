@@ -304,7 +304,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF = "function CSS2Properties() {\n    [native code]\n}")
-    @NotYetImplemented(FF)
     public void css2Properties() throws Exception {
         test("CSS2Properties");
     }

@@ -95,6 +95,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint32Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8ClampedArray;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSCharsetRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSFontFaceRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSImportRule;
@@ -297,6 +298,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         ArrayBuffer.class, ArrayBufferView.class, ArrayBufferViewBase.class,
         Attr.class, ActiveXObject.class, ApplicationCache.class,
         BeforeUnloadEvent.class, BoxObject.class, CDATASection.class, ClipboardData.class,
+        CSS2Properties.class,
         CSSCharsetRule.class, CSSFontFaceRule.class, CSSImportRule.class, CSSMediaRule.class, CSSPrimitiveValue.class,
         CSSRule.class,
         CSSRuleList.class, CSSStyleDeclaration.class, CSSStyleRule.class, CSSStyleSheet.class, CSSValue.class,

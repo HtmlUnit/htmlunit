@@ -171,6 +171,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     /**
+     * Creates an instance.
+     *
      * @param style the original Style
      */
     public ComputedCSSStyleDeclaration(final CSSStyleDeclaration style) {

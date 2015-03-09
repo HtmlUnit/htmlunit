@@ -59,7 +59,7 @@ public class HostParentOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE8 = "exception")
-    public void _Node_Element() throws Exception {
+    public void test_Node_Element() throws Exception {
         isParentOf("Node", "Element");
     }
 
@@ -69,7 +69,7 @@ public class HostParentOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE8 = "exception")
-    public void _Document_XMLDocument() throws Exception {
+    public void test_Document_XMLDocument() throws Exception {
         isParentOf("Document", "XMLDocument");
     }
 
@@ -79,7 +79,7 @@ public class HostParentOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "false",
             IE = "exception")
-    public void _Node_XPathResult() throws Exception {
+    public void test_Node_XPathResult() throws Exception {
         isParentOf("Node", "XPathResult");
     }
 
@@ -89,7 +89,7 @@ public class HostParentOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE8 = "exception")
-    public void _Element_HTMLElement() throws Exception {
+    public void test_Element_HTMLElement() throws Exception {
         isParentOf("Element", "HTMLElement");
     }
 
@@ -99,7 +99,7 @@ public class HostParentOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE8 = "exception")
-    public void _HTMLElement_HTMLHtmlElement() throws Exception {
+    public void test_HTMLElement_HTMLHtmlElement() throws Exception {
         isParentOf("HTMLElement", "HTMLHtmlElement");
     }
 
@@ -108,7 +108,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    public void _CSSStyleDeclaration_ComputedCSSStyleDeclaration() throws Exception {
+    public void test_CSSStyleDeclaration_ComputedCSSStyleDeclaration() throws Exception {
         isParentOf("CSSStyleDeclaration", "ComputedCSSStyleDeclaration");
     }
 
@@ -118,7 +118,7 @@ public class HostParentOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false")
-    public void _Image_HTMLImageElement() throws Exception {
+    public void test_Image_HTMLImageElement() throws Exception {
         //although Image != HTMLImageElement, they seem to be synonyms!!!
         isParentOf("Image", "HTMLImageElement");
     }
@@ -128,7 +128,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    public void _HTMLImageElement_Image() throws Exception {
+    public void test_HTMLImageElement_Image() throws Exception {
         //although Image != HTMLImageElement, they seem to be synonyms!!!
         isParentOf("HTMLImageElement", "Image");
     }
@@ -139,7 +139,7 @@ public class HostParentOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false")
-    public void _Option_HTMLOptionElement() throws Exception {
+    public void test_Option_HTMLOptionElement() throws Exception {
         //although Option != HTMLOptionElement, they seem to be synonyms!!!
         isParentOf("Option", "HTMLOptionElement");
     }
@@ -149,8 +149,28 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    public void _HTMLOptionElement_Option() throws Exception {
+    public void test_HTMLOptionElement_Option() throws Exception {
         //although Option != HTMLOptionElement, they seem to be synonyms!!!
         isParentOf("HTMLOptionElement", "Option");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF = "true")
+    public void test_CSSStyleDeclaration_CSS2Properties() throws Exception {
+        isParentOf("CSSStyleDeclaration", "CSS2Properties");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF = "false")
+    public void test_CSS2Properties_CSSStyleDeclaration() throws Exception {
+        isParentOf("CSS2Properties", "CSSStyleDeclaration");
     }
 }

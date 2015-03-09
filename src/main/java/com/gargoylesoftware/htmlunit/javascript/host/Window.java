@@ -121,9 +121,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
-import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.html.DocumentProxy;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
@@ -198,7 +198,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * We use a weak hash map because we don't want this cache to be the only reason
      * nodes are kept around in the JVM, if all other references to them are gone.
      */
-    private transient WeakHashMap<Node, ComputedCSSStyleDeclaration> computedStyles_ = new WeakHashMap<>();
+    private transient WeakHashMap<Node, CSS2Properties> computedStyles_ = new WeakHashMap<>();
 
     private final Map<Type, Storage> storages_ = new HashMap<>();
 
@@ -1660,8 +1660,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the computed style
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
-    public ComputedCSSStyleDeclaration getComputedStyle(final Element element, final String pseudo) {
-        ComputedCSSStyleDeclaration style;
+    public CSS2Properties getComputedStyle(final Element element, final String pseudo) {
+        CSS2Properties style;
 
         synchronized (computedStyles_) {
             style = computedStyles_.get(element);
@@ -1671,7 +1671,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         }
 
         final CSSStyleDeclaration original = element.getStyle();
-        style = new ComputedCSSStyleDeclaration(original);
+        style = new CSS2Properties(original);
 
         final StyleSheetList sheets = ((HTMLDocument) document_).getStyleSheets();
         final boolean trace = LOG.isTraceEnabled();
@@ -1918,9 +1918,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             // Apparently it wasn't a stylesheet that changed; be semi-smart about what we evict and when.
             synchronized (computedStyles_) {
                 final boolean clearParents = ATTRIBUTES_AFFECTING_PARENT.contains(attribName);
-                final Iterator<Map.Entry<Node, ComputedCSSStyleDeclaration>> i = computedStyles_.entrySet().iterator();
+                final Iterator<Map.Entry<Node, CSS2Properties>> i = computedStyles_.entrySet().iterator();
                 while (i.hasNext()) {
-                    final Map.Entry<Node, ComputedCSSStyleDeclaration> entry = i.next();
+                    final Map.Entry<Node, CSS2Properties> entry = i.next();
                     final DomNode node = entry.getKey().getDomNodeOrDie();
                     if (changed == node
                         || changed.getParentNode() == node.getParentNode()

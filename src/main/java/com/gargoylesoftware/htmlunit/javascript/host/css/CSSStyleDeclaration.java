@@ -22,7 +22,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TY
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TYPE_NUMBER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_UNDEFINED_FORCES_RESET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_UNDEFINED_OR_NULL_THROWS_ERROR;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CSSSTYLEDECLARATION_CSS2PROPERTIES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPACITY_ACCEPTS_ARBITRARY_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_GET_ATTRIBUTE_SUPPORTS_FLAGS;
@@ -4671,18 +4670,5 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             //ignore
         }
         setStyleAttribute(name, value);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getClassName() {
-        if (getWindow().getWebWindow() != null) {
-            if (getBrowserVersion().hasFeature(JS_CSSSTYLEDECLARATION_CSS2PROPERTIES)) {
-                return "CSS2Properties";
-            }
-        }
-        return super.getClassName();
     }
 }
