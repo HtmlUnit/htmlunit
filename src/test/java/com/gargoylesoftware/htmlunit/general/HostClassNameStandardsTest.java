@@ -3505,7 +3505,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object XSLTProcessor]",
             CHROME = "function XSLTProcessor() { [native code] }",
             IE = "exception")
-    @NotYetImplemented(IE11)
     public void xsltProcessor() throws Exception {
         test("XSLTProcessor");
     }

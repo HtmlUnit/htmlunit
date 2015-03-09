@@ -188,4 +188,39 @@ public class XSLTProcessorTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "[object XSLTProcessor]", "NaN", "true", "Yes", "Yes" },
+            CHROME = {"function XSLTProcessor() { [native code] }", "NaN", "true", "Yes", "Yes" },
+            IE = {"exception str", "exception numb", "exception bool", "exception ?", "exception if" })
+    public void browserDetection() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      alert(String(XSLTProcessor));\n"
+            + "    } catch(e) { alert('exception str'); }\n"
+            + "    try {\n"
+            + "      alert(Number(XSLTProcessor));\n"
+            + "    } catch(e) { alert('exception numb'); }\n"
+            + "    try {\n"
+            + "      alert(Boolean(XSLTProcessor));\n"
+            + "    } catch(e) { alert('exception bool'); }\n"
+            + "    try {\n"
+            + "      alert(XSLTProcessor ? 'Yes' : 'No');\n"
+            + "    } catch(e) { alert('exception ?'); }\n"
+            + "    try {\n"
+            + "      if (XSLTProcessor) { alert('Yes') } else { alert('No') }\n"
+            + "    } catch(e) { alert('exception if'); }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

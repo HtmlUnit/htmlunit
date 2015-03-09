@@ -3526,7 +3526,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function",
             IE = "undefined")
-    @NotYetImplemented(IE11)
     public void xsltProcessor() throws Exception {
         test("XSLTProcessor");
     }
