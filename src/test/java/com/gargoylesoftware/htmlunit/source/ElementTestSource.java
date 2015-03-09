@@ -14,7 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.source;
 
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigurationTest;
 
 /**
  * Use to generate test cases similar to the ones in the 'general' package.
@@ -28,18 +34,36 @@ public final class ElementTestSource {
 
     /**
      * Generate test case for each one HTML elements.
-     * @param testNamePrefix the prefix of the test name
      * @param htmlGeneratorMethod the method name which is called to generate the HTML, it expects a tag name parameter
      * @param defaultAlerts default string inside the parenthesis of <tt>@Alerts()</tt>, can be null
      */
-    public static void generateTestForHtmlElements(String testNamePrefix, final String htmlGeneratorMethod,
+    public static void generateTestForHtmlElements(final String htmlGeneratorMethod,
             final String defaultAlerts) {
-        if (testNamePrefix != null && !testNamePrefix.isEmpty()) {
-            testNamePrefix += '_';
+        final Map<String, String> namesMap = new HashMap<>();
+        for (final String className : JavaScriptConfigurationTest.getClassesForPackage(HtmlPage.class)) {
+            try {
+                final Class<?> c = Class.forName(className);
+                final Field field = c.getDeclaredField("TAG_NAME");
+                namesMap.put(field.get(null).toString(), c.getName());
+                try {
+                    final Field field2 = c.getDeclaredField("TAG_NAME2");
+                    namesMap.put(field2.get(null).toString(), c.getName());
+                }
+                catch (final Exception e) {
+                    //ignore
+                }
+            }
+            catch (final Exception e) {
+                //ignore
+            }
         }
         for (final String tag : HtmlPageTest.HTML_TAGS_) {
             System.out.println();
             System.out.println("    /**");
+            if (namesMap.containsKey(tag)) {
+                System.out.println("     * Test {@link " + namesMap.get(tag) + "}.");
+                System.out.println("     *");
+            }
             System.out.println("     * @throws Exception if the test fails");
             System.out.println("     */");
             System.out.println("    @Test");
@@ -48,7 +72,7 @@ public final class ElementTestSource {
                 System.out.print(defaultAlerts);
             }
             System.out.println(")");
-            System.out.println("    public void " + testNamePrefix + tag + "() throws Exception {");
+            System.out.println("    public void " + tag + "() throws Exception {");
             System.out.println("        loadPageWithAlerts2(" + htmlGeneratorMethod + "(\"" + tag + "\"));");
             System.out.println("    }");
         }

@@ -112,10 +112,8 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
      */
     @Test
     public void jsxClasses() {
-        String javaScriptPackageName = JavaScriptConfiguration.class.getPackage().getName();
-        javaScriptPackageName = javaScriptPackageName.substring(0, javaScriptPackageName.lastIndexOf('.'));
         final List<String> foundJsxClasses = new ArrayList<>();
-        for (final String className : getClassesForPackage(javaScriptPackageName)) {
+        for (final String className : getClassesForPackage(JavaScriptEngine.class)) {
             if (!className.contains("$")) {
                 Class<?> klass = null;
                 try {
@@ -144,14 +142,14 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
 
     /**
      * Return the classes inside the specified package and its sub-packages.
-     * @param packageName the package name
+     * @param klass a class inside that package
      * @return a list of class names
      */
-    public static List<String> getClassesForPackage(final String packageName) {
+    public static List<String> getClassesForPackage(final Class<?> klass) {
         final List<String> list = new ArrayList<>();
 
         File directory = null;
-        final String relPath = packageName.replace('.', '/') + '/' + JavaScriptEngine.class.getSimpleName() + ".class";
+        final String relPath = klass.getName().replace('.', '/') + ".class";
 
         final URL resource = JavaScriptConfiguration.class.getClassLoader().getResource(relPath);
 
@@ -164,14 +162,14 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
             directory = new File(resource.toURI()).getParentFile();
         }
         catch (final URISyntaxException e) {
-            throw new RuntimeException(packageName + " (" + resource + ") does not appear to be a valid URL", e);
+            throw new RuntimeException(klass.getName() + " (" + resource + ") does not appear to be a valid URL", e);
         }
         catch (final IllegalArgumentException e) {
             directory = null;
         }
 
         if (directory != null && directory.exists()) {
-            addClasses(directory, packageName, list);
+            addClasses(directory, klass.getPackage().getName(), list);
         }
         else {
             try {
@@ -189,7 +187,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
                 jarFile.close();
             }
             catch (final IOException e) {
-                throw new RuntimeException(packageName + " does not appear to be a valid package", e);
+                throw new RuntimeException(klass.getPackage().getName() + " does not appear to be a valid package", e);
             }
         }
         return list;

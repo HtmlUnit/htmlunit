@@ -112,6 +112,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlAbbreviated}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -121,6 +123,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlAcronym}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -130,6 +134,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlAnchor}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -139,6 +145,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlAddress}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -148,6 +156,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlApplet}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -159,6 +169,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlArea}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -168,6 +180,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlArticle}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -179,6 +193,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlAside}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -190,6 +206,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlAudio}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -201,6 +219,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlBackgroundSound}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -210,6 +230,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlBase}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -219,6 +241,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlBaseFont}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -228,6 +252,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlBidirectionalIsolation}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -239,6 +265,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlBidirectionalOverride}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -248,6 +276,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlBig}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -257,6 +287,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlBlink}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -266,6 +298,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlBlockQuote}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -275,6 +309,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlBody}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -285,6 +321,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlBold}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -294,6 +332,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlBreak}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -303,6 +343,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlButton}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -312,6 +354,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlCanvas}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -323,6 +367,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlCaption}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -334,6 +380,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlCenter}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -343,6 +391,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlCitation}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -352,6 +402,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlCode}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -361,6 +413,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlCommand}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -370,6 +424,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlDataList}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -381,6 +437,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlDetails}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -392,6 +450,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlDefinition}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -401,6 +461,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlDefinitionDescription}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -410,6 +472,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlDeletedText}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -419,6 +483,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlDialog}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -430,6 +496,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlDirectory}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -439,6 +507,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlDivision}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -448,6 +518,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlDefinitionList}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -457,6 +529,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlDefinitionTerm}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -466,6 +540,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlEmbed}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -475,6 +551,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlEmphasis}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -484,6 +562,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlFieldSet}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -493,6 +573,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlFigureCaption}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -504,6 +586,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlFigure}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -515,6 +599,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlFont}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -524,6 +610,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlFooter}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -535,6 +623,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlForm}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -545,6 +635,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlFrame}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -554,6 +646,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlFrameSet}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -564,6 +658,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlHeading1}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -575,6 +671,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlHeading2}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -586,6 +684,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlHeading3}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -597,6 +697,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlHeading4}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -608,6 +710,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlHeading5}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -619,6 +723,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlHeading6}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -630,6 +736,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlHead}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -639,6 +747,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlHeader}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -650,6 +760,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlHorizontalRule}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -659,6 +771,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlHtml}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -670,6 +784,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlInlineFrame}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -681,6 +797,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlInlineQuotation}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -690,6 +808,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlImage}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -700,6 +820,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlImage}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -709,6 +831,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlInsertedText}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -718,6 +842,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlIsIndex}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -728,6 +854,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlItalic}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -737,6 +865,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlKeyboard}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -746,6 +876,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlKeygen}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -759,6 +891,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlLabel}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -768,6 +902,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlLayer}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -777,6 +913,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlLegend}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -788,6 +926,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlListing}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -797,6 +937,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlListItem}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -806,6 +948,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlLink}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -815,6 +959,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlMain}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -826,6 +972,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlMap}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -835,6 +983,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlMarquee}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -844,6 +994,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlMark}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -855,6 +1007,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlMenu}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -864,6 +1018,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlMenuItem}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -875,6 +1031,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlMeta}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -884,6 +1042,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlMeter}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -895,6 +1055,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlMultiColumn}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -906,6 +1068,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlNoBreak}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -915,6 +1079,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlNav}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -926,6 +1092,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlNextId}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -937,6 +1105,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlNoEmbed}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -948,6 +1118,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlNoFrames}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -959,6 +1131,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlNoLayer}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -968,6 +1142,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlNoScript}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -978,6 +1154,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlObject}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -989,6 +1167,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlOrderedList}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -998,6 +1178,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlOptionGroup}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1009,6 +1191,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlOption}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1019,6 +1203,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlOutput}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1030,6 +1216,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlParagraph}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1039,6 +1227,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlParameter}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1048,6 +1238,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlPlainText}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1057,6 +1249,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlPreformattedText}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1066,6 +1260,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlProgress}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1077,6 +1273,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlRuby}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1088,6 +1286,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlRp}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1099,6 +1299,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlRt}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1110,6 +1312,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlS}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1119,6 +1323,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSample}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1128,6 +1334,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlScript}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1139,6 +1347,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSection}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1150,6 +1360,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSelect}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1159,6 +1371,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSmall}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1168,6 +1382,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSource}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1189,6 +1405,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSpan}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1198,6 +1416,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlStrike}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1207,6 +1427,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlStrong}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1216,6 +1438,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlStyle}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1227,6 +1451,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSubscript}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1236,6 +1462,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSummary}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1247,6 +1475,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSuperscript}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1256,6 +1486,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTable}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1267,6 +1499,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTableColumn}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1278,6 +1512,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTableColumnGroup}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1289,6 +1525,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTableBody}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1300,6 +1538,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTableDataCell}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1311,6 +1551,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTableHeaderCell}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1322,6 +1564,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTableRow}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1333,6 +1577,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTrack}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1343,6 +1589,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTextArea}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1352,6 +1600,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTableFooter}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1363,6 +1613,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTableHeader}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1374,6 +1626,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTeletype}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1383,6 +1637,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTime}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1394,6 +1650,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTitle}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1405,6 +1663,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlUnderlined}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1414,6 +1674,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlUnorderedList}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1423,6 +1685,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlVariable}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1432,6 +1696,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlVideo}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1443,6 +1709,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlWordBreak}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -1452,6 +1720,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlExample}.
+     *
      * @throws Exception if the test fails
      */
     @Test
