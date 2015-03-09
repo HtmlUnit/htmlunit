@@ -25,9 +25,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_TEXT_SHAD
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LENGTH_WITHOUT_PX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.TREATS_POSITION_FIXED_LIKE_POSITION_STATIC;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 import static org.apache.commons.lang3.StringUtils.defaultIfEmpty;
 
 import java.util.Arrays;
@@ -63,8 +60,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Text;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition;
@@ -73,7 +68,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 /**
- * A JavaScript object for a ComputedCSSStyleDeclaration.
+ * An object for a CSSStyleDeclaration, which is computed.
+ *
+ * @see com.gargoylesoftware.htmlunit.javascript.host.Window#getComputedStyle(Element, String)
  *
  * @version $Revision$
  * @author Ahmed Ashour
@@ -81,8 +78,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClass(isJSObject = false,
-    browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     /** The number of (horizontal) pixels to assume that each character occupies. */
