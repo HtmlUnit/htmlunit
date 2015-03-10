@@ -37,6 +37,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -105,6 +106,43 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    alert(document.getElementById('myId1').tagName);\n"
             + "    alert(document.getElementById('myId2').tagName);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <img id='myId1'>\n"
+            + "  <image id='myId2'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG", "", "",
+                "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG", "", ""},
+            CHROME = { "[object HTMLImageElement]", "[object HTMLUnknownElement]", "IMG", "IMAGE", "", "undefined",
+                "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG", "", ""},
+            FF = { "[object HTMLImageElement]", "[object HTMLElement]", "IMG", "IMAGE", "", "undefined",
+                 "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG", "", "" })
+    @NotYetImplemented
+    public void image() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.createElement('img'));\n"
+            + "    alert(document.createElement('image'));\n"
+            + "    alert(document.createElement('img').nodeName);\n"
+            + "    alert(document.createElement('image').nodeName);\n"
+            + "    alert(document.createElement('img').src);\n"
+            + "    alert(document.createElement('image').src);\n"
+            + "    alert(document.getElementById('myId1'));\n"
+            + "    alert(document.getElementById('myId2'));\n"
+            + "    alert(document.getElementById('myId1').nodeName);\n"
+            + "    alert(document.getElementById('myId2').nodeName);\n"
+            + "    alert(document.getElementById('myId1').src);\n"
+            + "    alert(document.getElementById('myId2').src);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
