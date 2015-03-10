@@ -83,14 +83,12 @@ public class HTMLImageElement extends HTMLElement {
     }
 
     private boolean endTagForbidden_ = true;
-    private boolean instantiatedViaJavaScript_ = false;
 
     /**
      * JavaScript constructor.
      */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public void jsConstructor() {
-        instantiatedViaJavaScript_ = true;
         final SgmlPage page = (SgmlPage) getWindow().getWebWindow().getEnclosedPage();
         final DomElement fake =
                 HTMLParser.getFactory(HtmlImage.TAG_NAME).createElement(page, HtmlImage.TAG_NAME, new AttributesImpl());
@@ -126,7 +124,7 @@ public class HTMLImageElement extends HTMLElement {
     public String getSrc() {
         final HtmlImage img = (HtmlImage) getDomNodeOrDie();
         final String src = img.getSrcAttribute();
-        if (instantiatedViaJavaScript_ && "".equals(src)) {
+        if ("".equals(src)) {
             return src;
         }
         try {

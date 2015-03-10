@@ -155,9 +155,8 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "", "undefined", "", ""},
             IE = { "", "","", "" })
-    @NotYetImplemented
     public void src() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    alert(document.createElement('img').src);\n"
