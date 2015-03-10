@@ -92,4 +92,15 @@ public class HTMLUnknownElement extends HTMLElement {
     protected boolean isLowerCaseInOuterHtml() {
         return true;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isEndTagForbidden() {
+        if ("IMAGE".equals(getNodeName())) {
+            return true;
+        }
+        return super.isEndTagForbidden();
+    }
 }

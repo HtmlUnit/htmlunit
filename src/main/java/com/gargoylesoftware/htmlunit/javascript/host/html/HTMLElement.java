@@ -473,7 +473,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     private String chOff_ = "";
 
-    private boolean endTagForbidden_ = false;
+    private boolean endTagForbidden_;
 
     /**
      * Creates an instance.

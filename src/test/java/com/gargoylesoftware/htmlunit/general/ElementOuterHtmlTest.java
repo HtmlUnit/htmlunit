@@ -696,7 +696,6 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
             CHROME = "<image>",
             IE8 = "<IMG>",
             IE11 = "<img>")
-    @NotYetImplemented({ CHROME, FF })
     public void image() throws Exception {
         loadPageWithAlerts2(test("image"));
     }
