@@ -199,7 +199,7 @@ public class GWT250Test extends WebServerTestCase {
             client.waitForBackgroundJavaScriptStartingBefore(2000);
         }
         else {
-            final long endTime = System.currentTimeMillis() + 30000L;
+            final long endTime = System.currentTimeMillis() + 30_000;
             while (null == page.getFirstByXPath(elementXPath) && System.currentTimeMillis() < endTime) {
                 client.waitForBackgroundJavaScriptStartingBefore(1000);
             }

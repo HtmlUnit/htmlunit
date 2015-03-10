@@ -132,7 +132,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
         assertEquals(3, jobManager.getJobCount());
 
         startTimedTest();
-        assertEquals(0, page.getWebClient().waitForBackgroundJavaScriptStartingBefore(20000));
+        assertEquals(0, page.getWebClient().waitForBackgroundJavaScriptStartingBefore(20_000));
         assertMaxTestRunTime(400);
         assertEquals(0, jobManager.getJobCount());
 
@@ -197,7 +197,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
 
         startTimedTest();
         threadSynchronizer.setState("just before waitForBackgroundJavaScriptStartingBefore");
-        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(20000));
+        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(20_000));
         assertMaxTestRunTime(600);
         assertEquals(0, jobManager.getJobCount());
 
@@ -240,7 +240,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
         assertEquals(1, jobManager.getJobCount());
 
         startTimedTest();
-        assertEquals(0, page.getWebClient().waitForBackgroundJavaScriptStartingBefore(20000));
+        assertEquals(0, page.getWebClient().waitForBackgroundJavaScriptStartingBefore(20_000));
         assertMaxTestRunTime(1000);
         assertEquals(0, jobManager.getJobCount());
 
@@ -298,7 +298,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
         assertEquals(0, jobManager.getJobCount());
 
         startTimedTest();
-        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(20000));
+        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(20_000));
         assertMaxTestRunTime(300);
         assertEquals(0, jobManager.getJobCount());
 
@@ -369,7 +369,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
 
         startTimedTest();
         threadSynchronizer.setState("just before waitForBackgroundJavaScriptStartingBefore");
-        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(20000));
+        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(20_000));
         assertMaxTestRunTime(1000);
         assertEquals(0, jobManager.getJobCount());
 

@@ -82,7 +82,7 @@ public class CookieManager3Test {
         final Cookie cookie2 = new Cookie("a", "b", "c", "d", new Date(System.currentTimeMillis() + 5000), false);
         mgr.addCookie(cookie2);
         assertEquals(0, mgr.getCookies().size());
-        assertFalse(mgr.clearExpired(new Date(System.currentTimeMillis() + 10000)));
+        assertFalse(mgr.clearExpired(new Date(System.currentTimeMillis() + 10_000)));
 
         // Enable cookies again.
         mgr.setCookiesEnabled(true);
@@ -90,12 +90,12 @@ public class CookieManager3Test {
         assertEquals(1, mgr.getCookies().size());
 
         // Clear expired cookies
-        assertFalse(mgr.clearExpired(new Date(System.currentTimeMillis() + 10000)));
+        assertFalse(mgr.clearExpired(new Date(System.currentTimeMillis() + 10_000)));
         assertEquals(1, mgr.getCookies().size());
 
         mgr.addCookie(cookie2);
         assertEquals(2, mgr.getCookies().size());
-        assertTrue(mgr.clearExpired(new Date(System.currentTimeMillis() + 10000)));
+        assertTrue(mgr.clearExpired(new Date(System.currentTimeMillis() + 10_000)));
         assertEquals(1, mgr.getCookies().size());
     }
 

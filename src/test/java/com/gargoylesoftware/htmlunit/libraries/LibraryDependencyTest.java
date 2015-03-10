@@ -76,7 +76,7 @@ public class LibraryDependencyTest extends WebDriverTestCase {
         webConnection.setResponse(URL_SECOND, secondHtml);
         webConnection.setResponse(URL_THIRD, prototype, "application/javascript");
 
-        loadPageWithAlerts2(URL_FIRST, 10000);
+        loadPageWithAlerts2(URL_FIRST, 10_000);
     }
 
     private String getContent(final String resourceName) throws IOException {

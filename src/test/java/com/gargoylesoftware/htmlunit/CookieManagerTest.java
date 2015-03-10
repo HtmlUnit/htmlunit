@@ -483,7 +483,7 @@ public class CookieManagerTest extends WebDriverTestCase {
         final URL firstUrl = new URL(getDefaultUrl(), "/foo/test.html");
         getMockWebConnection().setResponse(firstUrl, "", 302, "Moved", "text/html", responseHeader1);
 
-        loadPageWithAlerts2(firstUrl, 25000);
+        loadPageWithAlerts2(firstUrl, 25_000);
     }
 
     /**

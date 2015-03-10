@@ -109,7 +109,7 @@ public class SocksProxyTest extends WebServerTestCase {
 
     private WebClient getWebClientWithSocksProxy() {
         final WebClient client = getWebClient();
-        client.getOptions().setTimeout(10000);
+        client.getOptions().setTimeout(10_000);
         client.getOptions().setProxyConfig(new ProxyConfig(SOCKS_PROXY_HOST, SOCKS_PROXY_PORT, true));
         return client;
     }

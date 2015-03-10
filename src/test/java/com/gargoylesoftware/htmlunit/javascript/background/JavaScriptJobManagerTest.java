@@ -93,7 +93,7 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
         jobManager.waitForJobs(7000);
         assertEquals(0, jobManager.getJobCount());
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
-        assertMaxTestRunTime(10000);
+        assertMaxTestRunTime(10_000);
     }
 
     /**

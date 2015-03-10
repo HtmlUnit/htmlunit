@@ -81,7 +81,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
         }
         try {
             eventLoopThread_.interrupt();
-            eventLoopThread_.join(10000);
+            eventLoopThread_.join(10_000);
         }
         catch (final InterruptedException e) {
             LOG.warn("InterruptedException while waiting for the eventLoop thread to join ", e);

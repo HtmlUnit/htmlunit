@@ -90,7 +90,7 @@ public class JavaScriptJobManagerGaeMinimalTest {
         };
         manager_.addJob(job, page_);
         assertEquals(1, manager_.getJobCount());
-        final int executedJobs = eventLoop_.pumpEventLoop(10000);
+        final int executedJobs = eventLoop_.pumpEventLoop(10_000);
         Assert.assertEquals(1, executedJobs);
         Assert.assertEquals(1, count.intValue());
         assertEquals(0, manager_.getJobCount());

@@ -54,7 +54,7 @@ import com.gargoylesoftware.htmlunit.javascript.regexp.HtmlUnitRegExpProxy;
  */
 public class HtmlUnitContextFactory extends ContextFactory {
 
-    private static final int INSTRUCTION_COUNT_THRESHOLD = 10000;
+    private static final int INSTRUCTION_COUNT_THRESHOLD = 10_000;
 
     private final BrowserVersion browserVersion_;
     private final WebClient webClient_;
@@ -268,7 +268,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
         // register custom RegExp processing
         ScriptRuntime.setRegExpProxy(cx, new HtmlUnitRegExpProxy(ScriptRuntime.getRegExpProxy(cx), browserVersion_));
 
-        cx.setMaximumInterpreterStackDepth(10000);
+        cx.setMaximumInterpreterStackDepth(10_000);
 
         return cx;
     }

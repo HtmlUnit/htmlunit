@@ -87,8 +87,8 @@ public class HtmlUnitCookieStoreTest {
                 new Date(System.currentTimeMillis() + 10000), false);
         mgr_.addCookie(cookie);
 
-        assertTrue(store_.clearExpired(new Date(System.currentTimeMillis() + 20000)));
-        assertFalse(store_.clearExpired(new Date(System.currentTimeMillis() + 20000)));
+        assertTrue(store_.clearExpired(new Date(System.currentTimeMillis() + 20_000)));
+        assertFalse(store_.clearExpired(new Date(System.currentTimeMillis() + 20_000)));
 
         final List<org.apache.http.cookie.Cookie> cookies = store_.getCookies();
         assertEquals(1, cookies.size());

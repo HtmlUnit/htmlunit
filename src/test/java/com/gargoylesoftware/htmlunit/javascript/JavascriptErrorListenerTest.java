@@ -185,7 +185,7 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
      * Configured with a timeout as the build server seemed to have problem with this test from time to time.
      * @throws Exception if the test fails
      */
-    @Test(timeout = 10000)
+    @Test(timeout = 10_000)
     public void listenForTimeoutError() throws Exception {
         final WebClient webClient = getWebClient();
         webClient.getOptions().setThrowExceptionOnScriptError(false);

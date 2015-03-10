@@ -45,7 +45,7 @@ public class WebClientOptions implements Serializable {
     private boolean activeXNative_;
     private String homePage_ = "http://htmlunit.sf.net/";
     private ProxyConfig proxyConfig_;
-    private int timeout_ = 90000; // like Firefox 16 default's value for network.http.connection-timeout
+    private int timeout_ = 90_000; // like Firefox 16 default's value for network.http.connection-timeout
 
     private boolean useInsecureSSL_; // default is secure SSL
     private String sslInsecureProtocol_;
