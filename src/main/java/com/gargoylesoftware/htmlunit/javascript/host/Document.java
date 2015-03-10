@@ -493,7 +493,15 @@ public class Document extends EventNode {
                     ((HtmlImage) element).markAsCreatedByJavascript();
                 }
             }
-            final Object jsElement = getScriptableFor(element);
+            final Object jsElement;
+            if ("event".equalsIgnoreCase(tagName) && browserVersion.hasFeature(JS_DOCUMENT_CREATE_ELEMENT_COMMENT)) {
+                jsElement = new SimpleScriptable();
+                ((SimpleScriptable) jsElement).setClassName("Object");
+                ((SimpleScriptable) jsElement).setParentScope(window_);
+            }
+            else {
+                jsElement = getScriptableFor(element);
+            }
 
             if (jsElement == NOT_FOUND) {
                 if (LOG.isDebugEnabled()) {
