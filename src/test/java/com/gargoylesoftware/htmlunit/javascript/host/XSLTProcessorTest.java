@@ -140,6 +140,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
             + "    if (window.ActiveXObject) {\n"
             + "      var xslt = new ActiveXObject('Msxml2.XSLTemplate.3.0');\n"
             + "      var xslProc = xslt.createProcessor();\n"
+            + "    alert(xslProc);\n"
             + "      alertMethods(xslProc);\n"
             + "    }\n"
             + "    try {\n"

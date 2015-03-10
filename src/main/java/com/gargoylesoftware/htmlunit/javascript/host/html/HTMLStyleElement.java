@@ -104,7 +104,7 @@ public class HTMLStyleElement extends HTMLElement {
      * Returns the type of this style.
      * @return the type
      */
-    @JsxGetter()
+    @JsxGetter
     public String getType() {
         final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
         return style.getTypeAttribute();
@@ -114,7 +114,7 @@ public class HTMLStyleElement extends HTMLElement {
      * Sets the type of this style.
      * @param type the new type
      */
-    @JsxSetter()
+    @JsxSetter
     public void setType(final String type) {
         final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
         style.setTypeAttribute(type);
@@ -124,7 +124,7 @@ public class HTMLStyleElement extends HTMLElement {
      * Returns the media of this style.
      * @return the media
      */
-    @JsxGetter()
+    @JsxGetter
     public String getMedia() {
         final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
         return style.getAttribute("media");
@@ -134,8 +134,8 @@ public class HTMLStyleElement extends HTMLElement {
      * Overwritten to throw an exception in IE8/9.
      * @param value the new value for the contents of this node
      */
-    @JsxSetter
     @Override
+    @JsxSetter
     public void setInnerHTML(final Object value) {
         if (getBrowserVersion().hasFeature(JS_INNER_HTML_READONLY_FOR_SOME_TAGS)) {
             throw Context.reportRuntimeError("innerHTML is read-only for tag 'style'");

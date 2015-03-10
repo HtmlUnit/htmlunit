@@ -56,7 +56,7 @@ public class External extends SimpleScriptable {
     /**
      * Empty implementation.
      */
-    @JsxFunction()
+    @JsxFunction
     public void AddSearchProvider() {
         // dummy
     }

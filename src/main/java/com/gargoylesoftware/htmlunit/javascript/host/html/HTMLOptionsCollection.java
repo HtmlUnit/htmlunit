@@ -334,7 +334,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * Removes the option at the specified index.
      * @param index the option index
      */
-    @JsxFunction()
+    @JsxFunction
     public void remove(final int index) {
         int idx = index;
         final BrowserVersion browser = getBrowserVersion();

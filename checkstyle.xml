@@ -64,6 +64,11 @@
         <property name="message" value="No need to specify &quot;DEFAULT&quot;"/>
     </module>
 
+    <module name="RegexpSingleline">
+        <property name="format" value="@JsxFunction\(\)|@JsxGetter\(\)|@JsxSetter\(\)|@JsxConstructor\(\)"/>
+        <property name="message" value="No need to specify parentheses"/>
+    </module>
+
     <!--
         at the moment there is a problem with disabling this check for some files
         without disabling all RegexpMultiline checks; for this reason this is not active

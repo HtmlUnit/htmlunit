@@ -73,7 +73,7 @@ public class XSLProcessor extends MSXMLScriptable {
      * Specifies which XML input tree to transform.
      * @param input the input tree
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter
     public void setInput(final XMLDOMNode input) {
         input_ = input;
     }
@@ -82,7 +82,7 @@ public class XSLProcessor extends MSXMLScriptable {
      * Returns which XML input tree to transform.
      * @return which XML input tree to transform
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter
     public XMLDOMNode getInput() {
         return input_;
     }
@@ -91,7 +91,7 @@ public class XSLProcessor extends MSXMLScriptable {
      * Sets the object to which to write the output of the transformation.
      * @param output the object to which to write the output of the transformation
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter
     public void setOutput(final Object output) {
         output_ = output;
     }
@@ -100,7 +100,7 @@ public class XSLProcessor extends MSXMLScriptable {
      * Gets a custom output to write the result of the transformation.
      * @return the output of the transformation
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter
     public Object getOutput() {
         return output_;
     }
@@ -113,7 +113,7 @@ public class XSLProcessor extends MSXMLScriptable {
      *        To remove a parameter previously added to the processor, provide a value of Empty or Null instead.
      * @param namespaceURI an optional namespace
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction
     public void addParameter(final String baseName, final Object parameter, final Object namespaceURI) {
         final String nsString;
         if (namespaceURI instanceof String) {
@@ -139,7 +139,7 @@ public class XSLProcessor extends MSXMLScriptable {
     /**
      * Starts the transformation process or resumes a previously failed transformation.
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction
     public void transform() {
         final XMLDOMNode input = input_;
         final SgmlPage page = input.getDomNodeOrDie().getPage();

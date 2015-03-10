@@ -63,7 +63,7 @@ public class XSLTProcessor extends SimpleScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor()
+    @JsxConstructor
     public XSLTProcessor() {
     }
 
@@ -75,7 +75,7 @@ public class XSLTProcessor extends SimpleScriptable {
      *
      * @param style the root-node of an XSLT stylesheet (may be a document node or an element node)
      */
-    @JsxFunction()
+    @JsxFunction
     public void importStylesheet(final Node style) {
         style_ = style;
     }
@@ -87,7 +87,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @param source the node to be transformed
      * @return the result of the transformation
      */
-    @JsxFunction()
+    @JsxFunction
     public XMLDocument transformToDocument(final Node source) {
         final XMLDocument doc = new XMLDocument();
         doc.setPrototype(getPrototype(doc.getClass()));
@@ -151,7 +151,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @param output This document is used to generate the output
      * @return the result of the transformation
      */
-    @JsxFunction()
+    @JsxFunction
     public DocumentFragment transformToFragment(final Node source, final Object output) {
         final SgmlPage page = ((Document) output).getDomNodeOrDie();
 
@@ -187,7 +187,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @param localName the local name of the XSLT parameter
      * @param value the new value of the XSLT parameter
      */
-    @JsxFunction()
+    @JsxFunction
     public void setParameter(final String namespaceURI, final String localName, final Object value) {
         parameters_.put(getQualifiedName(namespaceURI, localName), value);
     }
@@ -198,7 +198,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @param localName the local name of the XSLT parameter
      * @return the value of the XSLT parameter
      */
-    @JsxFunction()
+    @JsxFunction
     public Object getParameter(final String namespaceURI, final String localName) {
         return parameters_.get(getQualifiedName(namespaceURI, localName));
     }
