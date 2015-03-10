@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLTRACK_END_TAG_FORBIDDEN;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -38,5 +39,16 @@ public class HTMLTrackElement extends HTMLElement {
      */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public HTMLTrackElement() {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isEndTagForbidden() {
+        if (getBrowserVersion().hasFeature(HTMLTRACK_END_TAG_FORBIDDEN)) {
+            return true;
+        }
+        return super.isEndTagForbidden();
     }
 }

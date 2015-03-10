@@ -372,7 +372,7 @@ public enum BrowserVersionFeatures {
     HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND,
 
     /** Should {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseFontElement#isEndTagForbidden}. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature(@WebBrowser(FF))
     HTMLBASEFONT_END_TAG_FORBIDDEN,
 
     /** Set this checked state to false when added to page (IE). */
@@ -410,6 +410,10 @@ public enum BrowserVersionFeatures {
     /** Allow detection of object type for collection elements. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     HTMLCOLLECTION_OBJECT_DETECTION,
+
+    /** Should the HTMLElement of {@link com.gargoylesoftware.htmlunit.html.HtmlCommand} have no end tag. */
+    @BrowserFeature(@WebBrowser(FF))
+    HTMLCOMMAND_END_TAG_FORBIDDEN,
 
     /**
      * Supports Conditional Comments.
@@ -516,6 +520,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
     HTMLINPUT_SET_VALUE_UPDATES_DEFAULT_VALUE,
 
+    /** Should the HTMLElement of {@link com.gargoylesoftware.htmlunit.html.HtmlKeygen} have no end tag. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    HTMLKEYGEN_END_TAG_FORBIDDEN,
+
     /** Attribute 'compact' may only be a boolean value. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     HTMLLIST_LIMIT_COMPACT_TO_BOOLEAN,
@@ -561,6 +569,10 @@ public enum BrowserVersionFeatures {
     /** Setting defaultValue updates the value also. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLTEXTAREA_SET_DEFAULT_VALUE_UPDATES_VALUE,
+
+    /** Should {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTrackElement#isEndTagForbidden}. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    HTMLTRACK_END_TAG_FORBIDDEN,
 
     /** HTML attributes are always lower case. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8) })

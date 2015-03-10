@@ -523,6 +523,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         if ("wbr".equalsIgnoreCase(domNode.getLocalName())) {
             endTagForbidden_ = true;
         }
+        else if ("basefont".equalsIgnoreCase(domNode.getLocalName())) {
+            endTagForbidden_ = true;
+        }
     }
 
     /**

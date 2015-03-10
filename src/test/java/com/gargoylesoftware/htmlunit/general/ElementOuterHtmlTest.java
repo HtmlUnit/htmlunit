@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.general;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -170,7 +167,6 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "<basefont>",
             IE = "<BASEFONT></BASEFONT>",
             IE11 = "<basefont></basefont>")
-    @NotYetImplemented(CHROME)
     public void basefont() throws Exception {
         loadPageWithAlerts2(test("basefont"));
     }
@@ -340,7 +336,6 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<command></command>",
             FF = "<command>")
-    @NotYetImplemented(FF)
     public void command() throws Exception {
         loadPageWithAlerts2(test("command"));
     }
@@ -758,7 +753,6 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "<keygen>",
             IE8 = "<keygen></keygen>",
             CHROME = "<keygen></keygen>")
-    @NotYetImplemented(IE11)
     public void keygen() throws Exception {
         loadPageWithAlerts2(test("keygen"));
     }
@@ -1278,7 +1272,6 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "<track>",
             CHROME = "<track></track>",
             IE8 = "<track></track>")
-    @NotYetImplemented({ FF, IE11 })
     public void track() throws Exception {
         loadPageWithAlerts2(test("track"));
     }
