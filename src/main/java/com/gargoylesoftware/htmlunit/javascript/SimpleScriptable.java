@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLELEMENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLUNKNOWNELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_IN_QUIRKS_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SET_READONLY_PROPERTIES;
 
@@ -36,11 +38,13 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
 
 /**
  * Base class for Rhino host objects in HtmlUnit.
@@ -222,8 +226,19 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
         // Get the JS class name for the specified DOM node.
         // Walk up the inheritance chain if necessary.
         Class<? extends SimpleScriptable> javaScriptClass = null;
-        for (Class<?> c = domNode.getClass(); javaScriptClass == null && c != null; c = c.getSuperclass()) {
-            javaScriptClass = getWindow().getWebWindow().getWebClient().getJavaScriptEngine().getJavaScriptClass(c);
+        if (domNode instanceof HtmlImage && "image".equals(((HtmlImage) domNode).getOriginalQualifiedName())
+                && ((HtmlImage) domNode).wasCreatedByJavascript()) {
+            if (domNode.hasFeature(HTMLIMAGE_HTMLELEMENT)) {
+                javaScriptClass = HTMLElement.class;
+            }
+            else if (domNode.hasFeature(HTMLIMAGE_HTMLUNKNOWNELEMENT)) {
+                javaScriptClass = HTMLUnknownElement.class;
+            }
+        }
+        if (javaScriptClass == null) {
+            for (Class<?> c = domNode.getClass(); javaScriptClass == null && c != null; c = c.getSuperclass()) {
+                javaScriptClass = getWindow().getWebWindow().getWebClient().getJavaScriptEngine().getJavaScriptClass(c);
+            }
         }
 
         final SimpleScriptable scriptable;

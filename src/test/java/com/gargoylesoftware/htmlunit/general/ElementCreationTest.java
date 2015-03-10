@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.general;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -710,7 +708,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object HTMLImageElement]",
             CHROME = "[object HTMLUnknownElement]",
             FF = "[object HTMLElement]")
-    @NotYetImplemented({ CHROME, FF })
     public void image() throws Exception {
         test("image");
     }

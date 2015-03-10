@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
+import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
@@ -487,6 +488,9 @@ public class Document extends EventNode {
                 }
                 else if (element instanceof HtmlInput) {
                     ((HtmlInput) element).markAsCreatedByJavascript();
+                }
+                else if (element instanceof HtmlImage) {
+                    ((HtmlImage) element).markAsCreatedByJavascript();
                 }
             }
             final Object jsElement = getScriptableFor(element);

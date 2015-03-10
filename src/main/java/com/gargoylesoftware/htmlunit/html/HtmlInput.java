@@ -55,7 +55,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     private String defaultValue_;
     private String originalName_;
     private Collection<String> newNames_ = Collections.emptySet();
-    private boolean createdByJavascript_ = false;
+    private boolean createdByJavascript_;
     private Object valueAtFocus_;
 
     /**
@@ -548,16 +548,6 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     public void markAsCreatedByJavascript() {
         createdByJavascript_ = true;
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     *
-     * Unmarks this frame as created by javascript. This is needed to handle
-     * some special IE behavior.
-     */
-    public void unmarkAsCreatedByJavascript() {
-        createdByJavascript_ = false;
     }
 
     /**

@@ -488,6 +488,14 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(CHROME) })
     HTMLIMAGE_BLANK_SRC_AS_EMPTY,
 
+    /** Is document.cretaeElement('image') an HTMLElement. */
+    @BrowserFeature(@WebBrowser(FF))
+    HTMLIMAGE_HTMLELEMENT,
+
+    /** Is document.cretaeElement('image') an HTMLUnknownElement. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    HTMLIMAGE_HTMLUNKNOWNELEMENT,
+
     /** Mark the image as invisible if no src attribute defined. */
     @BrowserFeature({ @WebBrowser(value = FF, minVersion = 31), @WebBrowser(CHROME) })
     HTMLIMAGE_INVISIBLE_NO_SRC,

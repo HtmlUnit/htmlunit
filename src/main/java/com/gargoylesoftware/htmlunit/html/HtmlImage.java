@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_BLANK_SRC_AS_EMPTY;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLELEMENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLUNKNOWNELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_INVISIBLE_NO_SRC;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST;
 
@@ -64,12 +66,15 @@ public class HtmlImage extends HtmlElement {
     /** Another HTML tag represented by this element. */
     public static final String TAG_NAME2 = "image";
 
+    private final String originalQualifiedName_;
+
     private int lastClickX_;
     private int lastClickY_;
     private WebResponse imageWebResponse_;
     private ImageData imageData_;
     private boolean downloaded_;
     private boolean onloadInvoked_;
+    private boolean createdByJavascript_;
 
     /**
      * Creates a new instance.
@@ -81,6 +86,7 @@ public class HtmlImage extends HtmlElement {
     HtmlImage(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(unifyLocalName(qualifiedName), page, attributes);
+        originalQualifiedName_ = qualifiedName;
     }
 
     private static String unifyLocalName(final String qualifiedName) {
@@ -591,5 +597,46 @@ public class HtmlImage extends HtmlElement {
             return false;
         }
         return super.isDisplayed();
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Marks this frame as created by javascript. This is needed to handle
+     * some special IE behavior.
+     */
+    public void markAsCreatedByJavascript() {
+        createdByJavascript_ = true;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Returns true if this frame was created by javascript. This is needed to handle
+     * some special IE behavior.
+     * @return true or false
+     */
+    public boolean wasCreatedByJavascript() {
+        return createdByJavascript_;
+    }
+
+    /**
+     * Returns the original element qualified name, this is needed to differentiate between <tt>img</tt> and <tt>image</tt>.
+     * @return the original element qualified name
+     */
+    public String getOriginalQualifiedName() {
+        return originalQualifiedName_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getLocalName() {
+        if (wasCreatedByJavascript()
+                && (hasFeature(HTMLIMAGE_HTMLELEMENT) || hasFeature(HTMLIMAGE_HTMLUNKNOWNELEMENT))) {
+            return originalQualifiedName_;
+        }
+        return super.getLocalName();
     }
 }

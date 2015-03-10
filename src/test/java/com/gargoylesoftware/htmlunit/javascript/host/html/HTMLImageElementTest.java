@@ -48,6 +48,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Marc Guillemot
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class HTMLImageElementTest extends WebDriverTestCase {
@@ -120,13 +121,12 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG", "", "",
-                "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG", "", ""},
-            CHROME = { "[object HTMLImageElement]", "[object HTMLUnknownElement]", "IMG", "IMAGE", "", "undefined",
-                "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG", "", ""},
-            FF = { "[object HTMLImageElement]", "[object HTMLElement]", "IMG", "IMAGE", "", "undefined",
-                 "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG", "", "" })
-    @NotYetImplemented
+    @Alerts(DEFAULT = { "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG",
+                "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG" },
+            CHROME = { "[object HTMLImageElement]", "[object HTMLUnknownElement]", "IMG", "IMAGE",
+                "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG" },
+            FF = { "[object HTMLImageElement]", "[object HTMLElement]", "IMG", "IMAGE",
+                 "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG" })
     public void image() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
             + "<script>\n"
@@ -135,12 +135,33 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "    alert(document.createElement('image'));\n"
             + "    alert(document.createElement('img').nodeName);\n"
             + "    alert(document.createElement('image').nodeName);\n"
-            + "    alert(document.createElement('img').src);\n"
-            + "    alert(document.createElement('image').src);\n"
             + "    alert(document.getElementById('myId1'));\n"
             + "    alert(document.getElementById('myId2'));\n"
             + "    alert(document.getElementById('myId1').nodeName);\n"
             + "    alert(document.getElementById('myId2').nodeName);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <img id='myId1'>\n"
+            + "  <image id='myId2'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "", "undefined", "", ""},
+            IE = { "", "","", "" })
+    @NotYetImplemented
+    public void src() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.createElement('img').src);\n"
+            + "    alert(document.createElement('image').src);\n"
             + "    alert(document.getElementById('myId1').src);\n"
             + "    alert(document.getElementById('myId2').src);\n"
             + "  }\n"
@@ -217,7 +238,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * <code>var newImage = new Image(); newImage.src = 'foo.gif';</code>.
      * When <code>new Image()</code> is called, HtmlUnit creates a new JavaScript
      * Image object. However, no corresponding DOM node is created, which is
-     * just as well, since browers don't create one either.
+     * just as well, since browsers don't create one either.
      * This test verifies that the above JavaScript code can be invoked without
      * throwing an "IllegalStateException: DomNode has not been set for this
      * SimpleScriptable."
