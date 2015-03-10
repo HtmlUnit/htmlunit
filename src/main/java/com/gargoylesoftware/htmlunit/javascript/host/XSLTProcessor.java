@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.io.StringWriter;
 import java.util.HashMap;
@@ -33,7 +32,6 @@ import javax.xml.transform.stream.StreamResult;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
-import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -44,11 +42,8 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
-import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLSerializer;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 
@@ -57,19 +52,18 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF) })
 public class XSLTProcessor extends SimpleScriptable {
 
     private Node style_;
-    private Node input_;
-    private Object output_;
     private Map<String, Object> parameters_ = new HashMap<>();
 
     /**
      * Default constructor.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @JsxConstructor()
     public XSLTProcessor() {
     }
 
@@ -81,7 +75,7 @@ public class XSLTProcessor extends SimpleScriptable {
      *
      * @param style the root-node of an XSLT stylesheet (may be a document node or an element node)
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction()
     public void importStylesheet(final Node style) {
         style_ = style;
     }
@@ -93,7 +87,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @param source the node to be transformed
      * @return the result of the transformation
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction()
     public XMLDocument transformToDocument(final Node source) {
         final XMLDocument doc = new XMLDocument();
         doc.setPrototype(getPrototype(doc.getClass()));
@@ -157,7 +151,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @param output This document is used to generate the output
      * @return the result of the transformation
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction()
     public DocumentFragment transformToFragment(final Node source, final Object output) {
         final SgmlPage page = ((Document) output).getDomNodeOrDie();
 
@@ -193,7 +187,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @param localName the local name of the XSLT parameter
      * @param value the new value of the XSLT parameter
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction()
     public void setParameter(final String namespaceURI, final String localName, final Object value) {
         parameters_.put(getQualifiedName(namespaceURI, localName), value);
     }
@@ -204,7 +198,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @param localName the local name of the XSLT parameter
      * @return the value of the XSLT parameter
      */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxFunction()
     public Object getParameter(final String namespaceURI, final String localName) {
         return parameters_.get(getQualifiedName(namespaceURI, localName));
     }
@@ -218,100 +212,5 @@ public class XSLTProcessor extends SimpleScriptable {
             qualifiedName = localName;
         }
         return qualifiedName;
-    }
-
-    /**
-     * Specifies which XML input tree to transform.
-     * @param input the input tree
-     */
-    @JsxSetter(@WebBrowser(IE))
-    public void setInput(final Node input) {
-        input_ = input;
-    }
-
-    /**
-     * Returns which XML input tree to transform.
-     * @return which XML input tree to transform
-     */
-    @JsxGetter(@WebBrowser(IE))
-    public Node getInput() {
-        return input_;
-    }
-
-    /**
-     * Sets the object to which to write the output of the transformation.
-     * @param output the object to which to write the output of the transformation
-     */
-    @JsxSetter(@WebBrowser(IE))
-    public void setOutput(final Object output) {
-        output_ = output;
-    }
-
-    /**
-     * Gets a custom output to write the result of the transformation.
-     * @return the output of the transformation
-     */
-    @JsxGetter(@WebBrowser(IE))
-    public Object getOutput() {
-        return output_;
-    }
-
-    /**
-     * Adds parameters into an XSL Transformations (XSLT) style sheet.
-     *
-     * @param baseName the name that will be used inside the style sheet to identify the parameter context
-     * @param parameter the parameter value
-     *        To remove a parameter previously added to the processor, provide a value of Empty or Null instead.
-     * @param namespaceURI an optional namespace
-     */
-    @JsxFunction(@WebBrowser(IE))
-    public void addParameter(final String baseName, final Object parameter, final Object namespaceURI) {
-        final String nsString;
-        if (namespaceURI instanceof String) {
-            nsString = (String) namespaceURI;
-        }
-        else {
-            nsString = null;
-        }
-        setParameter(nsString, baseName, parameter);
-    }
-
-    /**
-     * Starts the transformation process or resumes a previously failed transformation.
-     */
-    @JsxFunction(@WebBrowser(IE))
-    public void transform() {
-        final Node input = input_;
-        final SgmlPage page = input.getDomNodeOrDie().getPage();
-
-        if (output_ == null || !(output_ instanceof Node)) {
-            final DomDocumentFragment fragment = page.createDomDocumentFragment();
-            final DocumentFragment node = new DocumentFragment();
-            node.setParentScope(getParentScope());
-            node.setPrototype(getPrototype(node.getClass()));
-            node.setDomNode(fragment);
-            output_ = fragment.getScriptObject();
-        }
-
-        transform(input_, ((Node) output_).getDomNodeOrDie());
-        final XMLSerializer serializer = new XMLSerializer();
-        serializer.setParentScope(getParentScope());
-        final StringBuilder output = new StringBuilder();
-        for (final DomNode child : ((Node) output_).getDomNodeOrDie().getChildren()) {
-            if (child instanceof DomText) {
-                //IE: XmlPage ignores all empty text nodes (if 'xml:space' is 'default')
-                //Maybe this should be changed for 'xml:space' = preserve
-                //See XMLDocumentTest.testLoadXML_XMLSpaceAttribute()
-                if (StringUtils.isNotBlank(((DomText) child).getData())) {
-                    output.append(((DomText) child).getData());
-                }
-            }
-            else {
-                //remove trailing "\r\n"
-                final String serializedString = serializer.serializeToString((Node) child.getScriptObject());
-                output.append(serializedString, 0, serializedString.length() - 2);
-            }
-        }
-        output_ = output.toString();
     }
 }
