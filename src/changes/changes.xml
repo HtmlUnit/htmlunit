@@ -9,6 +9,9 @@
     <body>
         <release version="2.16" date="???" description="Java 7, WebClient.close(), FF31, IE11 progress, Chrome progress, Bugfixes">
             <action type="fix" dev="asashour">
+                HtmlButton: 'type' attribute defaults to 'button' in quirks mode only (IE8).
+            </action>
+            <action type="fix" dev="asashour">
                 JavaScript: fix HTMLImageElement.src attribute.
             </action>
             <action type="fix" dev="rbri">

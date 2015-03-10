@@ -153,8 +153,8 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "", "undefined", "", ""},
-            IE = { "", "","", "" })
+    @Alerts(DEFAULT = { "", "undefined", "", "" },
+            IE = { "", "", "", "" })
     public void src() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

@@ -63,6 +63,11 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
         originalName_ = getNameAttribute();
+        if ((attributes == null || !attributes.containsKey("type"))
+                && hasFeature(BUTTON_EMPTY_TYPE_BUTTON)
+                && page instanceof HtmlPage && !((HtmlPage) page).isQuirksMode()) {
+            setAttribute("type", "submit");
+        }
     }
 
     /**

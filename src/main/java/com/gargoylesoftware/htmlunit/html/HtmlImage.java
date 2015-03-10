@@ -621,7 +621,8 @@ public class HtmlImage extends HtmlElement {
     }
 
     /**
-     * Returns the original element qualified name, this is needed to differentiate between <tt>img</tt> and <tt>image</tt>.
+     * Returns the original element qualified name,
+     * this is needed to differentiate between <tt>img</tt> and <tt>image</tt>.
      * @return the original element qualified name
      */
     public String getOriginalQualifiedName() {

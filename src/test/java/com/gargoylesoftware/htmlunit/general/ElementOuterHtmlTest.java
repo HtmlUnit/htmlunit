@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.general;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -256,7 +253,6 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<button></button>",
             IE8 = "<BUTTON type=submit></BUTTON>")
-    @NotYetImplemented(IE8)
     public void button() throws Exception {
         loadPageWithAlerts2(test("button"));
     }
