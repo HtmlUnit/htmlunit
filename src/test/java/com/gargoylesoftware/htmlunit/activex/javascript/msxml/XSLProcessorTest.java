@@ -50,7 +50,6 @@ public class XSLProcessorTest extends WebDriverTestCase {
             "undefined", "undefined", "unknown", "unknown" })
     @NotYetImplemented(IE)
     public void methods() throws Exception {
-
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
             + ACTIVEX_CHECK
