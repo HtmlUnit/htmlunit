@@ -21,6 +21,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -134,6 +135,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
             "undefined", "undefined", "undefined", "undefined" },
             IE = { "undefined", "undefined", "undefined", "undefined", "undefined",
             "object", "undefined", "function", "function", "exception" })
+    @NotYetImplemented(Browser.IE8)
     public void methods() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
