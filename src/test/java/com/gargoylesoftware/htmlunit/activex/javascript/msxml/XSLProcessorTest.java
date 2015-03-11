@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.ACTIVEX_CHECK;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestUtil.callLoadXMLDOMDocumentFromURL;
@@ -26,6 +27,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -38,6 +40,55 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  */
 @RunWith(BrowserRunner.class)
 public class XSLProcessorTest extends WebDriverTestCase {
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "undefined", "undefined", "undefined", "undefined", "undefined",
+            "undefined", "undefined", "unknown", "unknown" })
+    @NotYetImplemented(IE)
+    public void methods() throws Exception {
+
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + ACTIVEX_CHECK
+            // document must be free threaded
+            + "    var xslDoc = new ActiveXObject('Msxml2.FreeThreadedDOMDocument.3.0');\n"
+            + "    xslDoc.async = false;\n"
+            + "    xslDoc.load('" + URL_SECOND + "');\n"
+            + "    \n"
+            + "    var xslt = new ActiveXObject('Msxml2.XSLTemplate.3.0');\n"
+            + "    xslt.stylesheet = xslDoc;\n"
+            + "    var xslProc = xslt.createProcessor();\n"
+            + "    try {\n"
+            + "      alert(typeof xslProc.importStylesheet);\n"
+            + "      alert(typeof xslProc.transformToDocument);\n"
+            + "      alert(typeof xslProc.transformToFragment);\n"
+            + "      alert(typeof xslProc.setParameter);\n"
+            + "      alert(typeof xslProc.getParameter);\n"
+            + "      alert(typeof xslProc.input);\n"
+            + "      alert(typeof xslProc.ouput);\n"
+            + "      alert(typeof xslProc.addParameter);\n"
+            + "      alert(typeof xslProc.transform);\n"
+            + "    } catch (e) {alert(e)}\n"
+            + "  }\n"
+            + LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String xsl
+            = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n"
+            + "<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\n"
+            + "  <xsl:template match=\"/\">\n"
+            + "  </xsl:template>\n"
+            + "</xsl:stylesheet>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xsl, "text/xml");
+
+        loadPageWithAlerts2(html);
+    }
 
     /**
      * @throws Exception if the test fails

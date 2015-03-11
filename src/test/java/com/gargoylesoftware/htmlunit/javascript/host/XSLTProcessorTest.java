@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import java.net.URL;
 
 import org.junit.Test;
@@ -21,7 +23,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -41,51 +42,37 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "97", "[object Element]" },
-            IE = { "<html><body><h2>My CD Collection</h2><ul></ul></body></html>",
-                    "<?xml version=\"1.0\" encoding=\"UTF-16\"?>My CD Collection ()" })
-    @NotYetImplemented
+            IE8 = { "createDocument not available", "exception" },
+            IE11 = "exception",
+            CHROME = "exception")
+    @NotYetImplemented(FF)
     public void test() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var xmlDoc = createXmlDocument();\n"
-            + "    xmlDoc.async = false;\n"
-            + "    xmlDoc.load('" + URL_SECOND + "2');\n"
+            + "    try {\n"
+            + "      var xmlDoc = createXmlDocument();\n"
+            + "      xmlDoc.async = false;\n"
+            + "      xmlDoc.load('" + URL_SECOND + "2');\n"
 
-            + "    var xslDoc;\n"
-            + "    if (window.ActiveXObject)\n"
-            + "      xslDoc = new ActiveXObject('Msxml2.FreeThreadedDOMDocument.3.0');\n"
-            + "    else\n"
+            + "      var xslDoc;\n"
             + "      xslDoc = createXmlDocument();\n"
-            + "    xslDoc.async = false;\n"
-            + "    xslDoc.load('" + URL_SECOND + "2');\n"
-            + "    \n"
-            + "    if (window.ActiveXObject) {\n"
-            + "      var xslt = new ActiveXObject('Msxml2.XSLTemplate.3.0');\n"
-            + "      xslt.stylesheet = xslDoc;\n"
-            + "      var xslProc = xslt.createProcessor();\n"
-            + "      xslProc.input = xmlDoc;\n"
-            + "      xslProc.transform();\n"
-            + "      var s = xslProc.output.replace(/\\r?\\n/g, '');\n"
-            + "      alert(s);\n"
-            + "      xslProc.input = xmlDoc.documentElement;\n"
-            + "      xslProc.transform();\n"
-            + "      var s = xslProc.output.replace(/\\r?\\n/g, '');\n"
-            + "      s = s.replace(/\\s+/g, ' ');\n"
-            + "      alert(s);\n"
-            + "    } else {\n"
+            + "      xslDoc.async = false;\n"
+            + "      xslDoc.load('" + URL_SECOND + "2');\n"
+
             + "      var processor = new XSLTProcessor();\n"
             + "      processor.importStylesheet(xslDoc);\n"
             + "      var newDocument = processor.transformToDocument(xmlDoc);\n"
             + "      alert(new XMLSerializer().serializeToString(newDocument.documentElement).length);\n"
             + "      newDocument = processor.transformToDocument(xmlDoc.documentElement);\n"
             + "      alert(newDocument.documentElement);\n"
-            + "    }\n"
+            + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
+
             + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "    if (document.implementation && document.implementation.createDocument) {\n"
             + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "    }\n"
+            + "    alert('createDocument not available');\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -133,35 +120,26 @@ public class XSLTProcessorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "function", "function", "function", "function", "function",
             "undefined", "undefined", "undefined", "undefined" },
-            IE = { "undefined", "undefined", "undefined", "undefined", "undefined",
-            "object", "undefined", "function", "function", "exception" })
-    @NotYetImplemented(Browser.IE8)
+            IE = "exception")
     public void methods() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
-            + "    if (window.ActiveXObject) {\n"
-            + "      var xslt = new ActiveXObject('Msxml2.XSLTemplate.3.0');\n"
-            + "      var xslProc = xslt.createProcessor();\n"
-            + "    alert(xslProc);\n"
-            + "      alertMethods(xslProc);\n"
-            + "    }\n"
             + "    try {\n"
             + "      if (XSLTProcessor) {\n"
             + "        var processor = new XSLTProcessor();\n"
-            + "        alertMethods(processor);\n"
+            + "        alert(typeof processor.importStylesheet);\n"
+            + "        alert(typeof processor.transformToDocument);\n"
+            + "        alert(typeof processor.transformToFragment);\n"
+            + "        alert(typeof processor.setParameter);\n"
+            + "        alert(typeof processor.getParameter);\n"
+            + "        alert(typeof processor.input);\n"
+            + "        alert(typeof processor.ouput);\n"
+            + "        alert(typeof processor.addParameter);\n"
+            + "        alert(typeof processor.transform);\n"
+            + "      } else {\n"
+            + "        alert('XSLTProcessor not available');\n"
             + "      }\n"
-            + "    } catch (e) {alert('exception')}\n"
-            + "  }\n"
-            + "  function alertMethods(processor) {\n"
-            + "    alert(typeof processor.importStylesheet);\n"
-            + "    alert(typeof processor.transformToDocument);\n"
-            + "    alert(typeof processor.transformToFragment);\n"
-            + "    alert(typeof processor.setParameter);\n"
-            + "    alert(typeof processor.getParameter);\n"
-            + "    alert(typeof processor.input);\n"
-            + "    alert(typeof processor.ouput);\n"
-            + "    alert(typeof processor.addParameter);\n"
-            + "    alert(typeof processor.transform);\n"
+            + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
