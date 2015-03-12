@@ -180,7 +180,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     }
 
     /**
-     * This tests for an bug in NekoHTML.
+     * This tests for a bug in NekoHTML.
      * Without setting a property NekoHTML closes all inline tags
      * when a table start tag is detected. This is ok from the spec
      * but different with real browsers.
@@ -188,7 +188,6 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts
     public void tableClosesInlineTags() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
