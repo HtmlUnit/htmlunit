@@ -50,7 +50,8 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "true")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "true")
     public void async() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -133,7 +134,8 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "false")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "false")
     public void preserveWhiteSpace() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -151,7 +153,8 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "")
     public void setProperty() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -170,7 +173,8 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "1", "books" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "1", "books" })
     public void selectNodes() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -200,7 +204,8 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "0", "1" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "0", "1" })
     public void selectNodes_caseSensitive() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -229,7 +234,8 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "2", "1" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "2", "1" })
     public void selectNodes_namespace() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -300,7 +306,8 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "book", "0", "1" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "book", "0", "1" })
     public void selectNodes_fromRoot() throws Exception {
         final String html = ""
                 + "  function test() {\n"
@@ -354,7 +361,8 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "someprefix:test")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "someprefix:test")
     public void loadXML_Namespace() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -379,7 +387,8 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "7")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "7")
     public void loadXML_XMLSpaceAttribute() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -447,7 +456,8 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "1", "0", "1", "0" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "1", "0", "1", "0" })
     public void getElementsByTagName() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -479,7 +489,8 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "0", "1", "0", "1" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "0", "1", "0", "1" })
     public void getElementsByTagNameWithNamespace() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -511,7 +522,8 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "1")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "1")
     public void xpathWithNamespaces() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -544,7 +556,8 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "1")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "1")
     public void selectionNamespaces() throws Exception {
         final String html = ""
             + "  var selectionNamespaces = 'xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" "
@@ -582,7 +595,8 @@ public class XMLDOMDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "null")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "null")
     public void nodeFromID() throws Exception {
         final String html = ""
             + "  function test() {\n"

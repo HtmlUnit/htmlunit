@@ -654,7 +654,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2", IE8 = "0")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void frameset() throws Exception {
         loadPageWithAlerts2(test("frameset"));
@@ -850,7 +851,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0", CHROME = "1")
+    @Alerts(DEFAULT = "0",
+            CHROME = "1")
     @NotYetImplemented(CHROME)
     public void isindex() throws Exception {
         loadPageWithAlerts2(test("isindex"));

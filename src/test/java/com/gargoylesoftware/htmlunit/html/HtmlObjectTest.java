@@ -44,7 +44,8 @@ public class HtmlObjectTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "false", FF = "undefined")
+    @Alerts(IE = "false",
+            FF = "undefined")
     @NotYetImplemented(CHROME)
     public void classid() throws Exception {
         if (getBrowserVersion().isIE() && !ActiveXObjectTest.isJacobInstalled()) {

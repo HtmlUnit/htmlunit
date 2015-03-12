@@ -77,7 +77,8 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "createNode not available")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "createNode not available")
     public void createNode() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -98,7 +99,8 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "createNode not available")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "createNode not available")
     public void createNode_element() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -120,7 +122,8 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "a", "null", "b" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "a", "null", "b" })
     public void documentElementCaching() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -143,7 +146,8 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "a:b")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "a:b")
     public void createElement_namespace() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -162,7 +166,8 @@ public class XMLDOMDocument3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "content", "content" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "content", "content" })
     public void text() throws Exception {
         final String html = ""
             + "  function test() {\n"

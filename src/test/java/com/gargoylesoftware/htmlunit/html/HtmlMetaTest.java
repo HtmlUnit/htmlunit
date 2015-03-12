@@ -39,7 +39,8 @@ public class HtmlMetaTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLMetaElement]", IE8 = "[object]")
+    @Alerts(DEFAULT = "[object HTMLMetaElement]",
+            IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<meta id='m' http-equiv='content-type' content='text/html'>\n"

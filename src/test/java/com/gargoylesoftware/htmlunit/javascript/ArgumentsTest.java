@@ -146,7 +146,8 @@ public class ArgumentsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true", FF = "false")
+    @Alerts(DEFAULT = "true",
+            FF = "false")
     @NotYetImplemented(CHROME)
     public void argumentsEqualsFnArguments() throws Exception {
         final String html = "<html><body><script>\n"

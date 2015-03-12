@@ -456,7 +456,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"cookies: first=1", "cookies: " })
+    @Alerts({"cookies: first=1", "cookies: " })
     public void setCookieTimeout() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         final String expires = DateUtils.formatDate(new Date(System.currentTimeMillis() + 1000));
@@ -551,7 +551,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "first=1")
+    @Alerts("first=1")
     public void cookieSetFromJSWithoutPathUsesCurrentLocation2() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; path=/c"));

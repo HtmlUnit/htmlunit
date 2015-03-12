@@ -44,7 +44,8 @@ public class XMLDOMParseErrorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "[object Object]")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "[object Object]")
     public void scriptableToString() throws Exception {
         final String html = ""
             + "  function test() {\n"

@@ -221,7 +221,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "<foo/>\r\n", "<foo/>" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "<foo/>\r\n", "<foo/>" })
     public void document() throws Exception {
         final String html = "  function test() {\n"
             + ACTIVEX_CHECK
@@ -241,7 +242,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "<img/>", "<?myTarget myData?>" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "<img/>", "<?myTarget myData?>" })
     public void xml() throws Exception {
         final String html = "  function test() {\n"
             + ACTIVEX_CHECK
@@ -296,7 +298,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "<teXtaREa/>")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "<teXtaREa/>")
     public void mixedCase() throws Exception {
         final String html = "  function test() {\n"
             + ACTIVEX_CHECK
@@ -315,7 +318,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "<img href=\"mypage.htm\"/>")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "<img href=\"mypage.htm\"/>")
     public void noClosingTagWithAttribute() throws Exception {
         final String html = "  function test() {\n"
             + ACTIVEX_CHECK

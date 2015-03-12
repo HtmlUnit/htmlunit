@@ -47,7 +47,7 @@ public class CookieManager4Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "c1=1; c2=2")
+    @Alerts("c1=1; c2=2")
     public void domain() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<>();
         responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=.htmlunit.org; Path=/"));
@@ -65,7 +65,7 @@ public class CookieManager4Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "c4=4")
+    @Alerts("c4=4")
     public void domain2() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "c1=1; Path=/"));
@@ -95,7 +95,7 @@ public class CookieManager4Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "c1=1; c4=4")
+    @Alerts("c1=1; c4=4")
     public void domain3() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "c1=1; Path=/"));
@@ -125,7 +125,7 @@ public class CookieManager4Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "cross-domain=1")
+    @Alerts("cross-domain=1")
     public void differentHostsSameDomain() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "cross-domain=1; Domain=.htmlunit.org; Path=/"));
@@ -151,7 +151,7 @@ public class CookieManager4Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "cross-domain=1")
+    @Alerts("cross-domain=1")
     public void differentHostsSameDomainCookieFromJS() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -176,7 +176,7 @@ public class CookieManager4Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "cross-domain=1")
+    @Alerts("cross-domain=1")
     public void differentHostsSameDomainCookieFromMeta() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

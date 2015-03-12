@@ -372,7 +372,8 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2", IE8 = "1")
+    @Alerts(DEFAULT = "2",
+            IE8 = "1")
     @NotYetImplemented({ IE11, FF, CHROME })
     public void typeUnknown() throws Exception {
         final String html
@@ -454,7 +455,8 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2", IE8 = "1")
+    @Alerts(DEFAULT = "2",
+            IE8 = "1")
     public void submitWithoutType() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
@@ -484,7 +486,8 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2", IE = "1")
+    @Alerts(DEFAULT = "2",
+            IE = "1")
     @NotYetImplemented({ FF, CHROME })
     public void typeUnknownExternal() throws Exception {
         final String html
@@ -515,7 +518,8 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2", IE = "1")
+    @Alerts(DEFAULT = "2",
+            IE = "1")
     @NotYetImplemented({ FF, CHROME })
     public void typeSubmitExternal() throws Exception {
         final String html
@@ -575,8 +579,9 @@ public class HtmlButton2Test extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(DEFAULT = "2", IE = "1")
     @Test
+    @Alerts(DEFAULT = "2",
+            IE = "1")
     @NotYetImplemented({ FF, CHROME })
     public void submitWithoutTypeExternal() throws Exception {
         final String html

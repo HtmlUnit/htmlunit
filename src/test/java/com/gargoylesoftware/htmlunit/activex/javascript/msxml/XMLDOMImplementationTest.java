@@ -42,7 +42,8 @@ public class XMLDOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "[object Object]")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "[object Object]")
     public void scriptableToString() throws Exception {
         final String html =  "  function test() {\n"
             + ACTIVEX_CHECK
@@ -58,7 +59,8 @@ public class XMLDOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "exception")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "exception")
     public void hasFeature_featureNull() throws Exception {
         final String html = "  function test() {\n"
             + ACTIVEX_CHECK
@@ -76,7 +78,8 @@ public class XMLDOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = " 1.0: false")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = " 1.0: false")
     public void hasFeature_featureEmpty() throws Exception {
         hasFeature("", "['1.0']");
     }
@@ -85,7 +88,8 @@ public class XMLDOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "exception")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "exception")
     public void hasFeature_versionNull() throws Exception {
         final String html = "  function test() {\n"
             + ACTIVEX_CHECK
@@ -103,7 +107,8 @@ public class XMLDOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "MS-DOM : false")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "MS-DOM : false")
     public void hasFeature_versionEmpty() throws Exception {
         hasFeature("MS-DOM", "['']");
     }

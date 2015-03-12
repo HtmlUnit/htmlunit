@@ -42,7 +42,8 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "[object Object]")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "[object Object]")
     public void scriptableToString() throws Exception {
         tester("alert(Object.prototype.toString.call(doctype));\n");
     }
@@ -51,7 +52,8 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "0")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "0")
     public void attributes() throws Exception {
         tester("alert(doctype.attributes.length);\n");
     }
@@ -60,7 +62,8 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "a")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "a")
     public void baseName() throws Exception {
         property("baseName");
     }
@@ -69,7 +72,8 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "0")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "0")
     public void childNodes() throws Exception {
         tester("alert(doctype.childNodes.length);\n");
     }
@@ -78,7 +82,8 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "null")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "null")
     public void dataType() throws Exception {
         property("dataType");
     }
@@ -87,7 +92,8 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "null")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "null")
     public void definition() throws Exception {
         property("definition");
     }
@@ -96,7 +102,8 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "0")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "0")
     public void entities() throws Exception {
         tester("alert(doctype.entities.length);\n");
     }
@@ -105,7 +112,8 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "null")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "null")
     public void firstChild() throws Exception {
         property("firstChild");
     }
@@ -114,7 +122,8 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "null")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "null")
     public void lastChild() throws Exception {
         property("lastChild");
     }
@@ -123,7 +132,8 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "a")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "a")
     public void name() throws Exception {
         property("name");
     }
@@ -132,7 +142,8 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "")
     public void namespaceURI() throws Exception {
         property("namespaceURI");
     }
@@ -141,7 +152,8 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "a")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "a")
     public void nodeName() throws Exception {
         property("nodeName");
     }
@@ -150,7 +162,8 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "10")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "10")
     public void nodeType() throws Exception {
         property("nodeType");
     }
@@ -184,7 +197,8 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "0")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "0")
     public void notations() throws Exception {
         tester("alert(doctype.notations.length);\n");
     }
@@ -193,7 +207,8 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "true")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "true")
     public void ownerDocument() throws Exception {
         tester("alert(doctype.ownerDocument === doc);\n");
     }
@@ -202,7 +217,8 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "true")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "true")
     public void parentNode() throws Exception {
         tester("alert(doctype.parentNode === doc);\n");
     }
@@ -211,7 +227,8 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "")
     public void prefix() throws Exception {
         property("prefix");
     }
@@ -220,7 +237,8 @@ public class XMLDOMDocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "")
     public void text() throws Exception {
         property("text");
     }

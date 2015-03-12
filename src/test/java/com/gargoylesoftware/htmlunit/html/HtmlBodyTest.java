@@ -37,7 +37,8 @@ public class HtmlBodyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLBodyElement]", IE8 = "[object]")
+    @Alerts(DEFAULT = "[object HTMLBodyElement]",
+            IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

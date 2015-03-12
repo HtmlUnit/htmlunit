@@ -39,7 +39,8 @@ public class HtmlSubmitInput2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "Submit Query", FF = "")
+    @Alerts(IE = "Submit Query",
+            FF = "")
     public void testDefaultValue() throws Exception {
         final String html =
             "<html><head>\n"

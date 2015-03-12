@@ -263,7 +263,8 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "3", IE8 = "exception")
+    @Alerts(DEFAULT = "3",
+            IE8 = "exception")
     public void setTextMultipleTextNodes() throws Exception {
         final String html
             = "<html><body>\n"

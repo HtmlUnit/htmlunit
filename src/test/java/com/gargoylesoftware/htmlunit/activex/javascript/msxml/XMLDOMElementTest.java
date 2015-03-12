@@ -44,7 +44,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "[object Object]")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "[object Object]")
     public void scriptableToString() throws Exception {
         tester("alert(Object.prototype.toString.call(root));\n", "<root/>");
     }
@@ -53,7 +54,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "true", "0", "1" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "true", "0", "1" })
     public void attributes() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -76,7 +78,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "div", "dIv", "div", "div" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "div", "dIv", "div", "div" })
     public void baseName() throws Exception {
         xml("baseName");
     }
@@ -85,7 +88,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "div", "dIv", "div", "dIv" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "div", "dIv", "div", "dIv" })
     public void baseName_namespace() throws Exception {
         namespace("baseName");
     }
@@ -94,7 +98,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "div", "dIv" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "div", "dIv" })
     public void baseName_created() throws Exception {
         created("baseName");
     }
@@ -132,7 +137,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "2", "child-element=null", "child-element=null" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "2", "child-element=null", "child-element=null" })
     public void childNodes_lineBreak() throws Exception {
         final String test = ""
             + "alert(root.childNodes.length);\n"
@@ -152,7 +158,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "0")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "0")
     public void childNodes_none() throws Exception {
         tester("alert(root.childNodes.length);\n", "<root/>");
     }
@@ -161,7 +168,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "null", "null", "null", "null" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "null", "null", "null", "null" })
     public void dataType() throws Exception {
         xml("dataType");
     }
@@ -170,7 +178,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "null", "null", "null", "null" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "null", "null", "null", "null" })
     public void dataType_namespace() throws Exception {
         namespace("dataType");
     }
@@ -179,7 +188,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "null", "null" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "null", "null" })
     public void dataType_created() throws Exception {
         created("dataType");
     }
@@ -188,7 +198,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "null", "null", "null", "null" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "null", "null", "null", "null" })
     public void definition() throws Exception {
         xml("definition");
     }
@@ -197,7 +208,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "null", "null", "null", "null" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "null", "null", "null", "null" })
     public void definition_namespace() throws Exception {
         namespace("definition");
     }
@@ -206,7 +218,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "null", "null" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "null", "null" })
     public void definition_created() throws Exception {
         created("definition");
     }
@@ -215,7 +228,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "#cdata-section=child-cdata")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "#cdata-section=child-cdata")
     public void firstChild() throws Exception {
         final String xml = ""
             + "<root child-attribute='test'>"
@@ -232,7 +246,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "null")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "null")
     public void firstChild_none() throws Exception {
         tester("debug(root.firstChild);\n", "<root/>");
     }
@@ -241,7 +256,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "#text=child-text")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "#text=child-text")
     public void lastChild() throws Exception {
         final String xml = ""
             + "<root child-attribute='test'>"
@@ -258,7 +274,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "null")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "null")
     public void lastChild_none() throws Exception {
         tester("debug(root.lastChild);\n", "<root/>");
     }
@@ -267,7 +284,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "", "", "", "" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "", "", "", "" })
     public void namespaceURI() throws Exception {
         xml("namespaceURI");
     }
@@ -289,7 +307,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "", "" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "", "" })
     public void namespaceURI_created() throws Exception {
         created("namespaceURI");
     }
@@ -298,7 +317,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "div", "dIv", "div", "div" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "div", "dIv", "div", "div" })
     public void nodeName() throws Exception {
         xml("nodeName");
     }
@@ -307,7 +327,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "div", "dIv", "app:div", "app:dIv" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "div", "dIv", "app:div", "app:dIv" })
     public void nodeName_namespace() throws Exception {
         namespace("nodeName");
     }
@@ -316,7 +337,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "div", "dIv" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "div", "dIv" })
     public void nodeName_created() throws Exception {
         created("nodeName");
     }
@@ -325,7 +347,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "1", "1", "1", "1" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "1", "1", "1", "1" })
     public void nodeType() throws Exception {
         xml("nodeType");
     }
@@ -334,7 +357,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "1", "1", "1", "1" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "1", "1", "1", "1" })
     public void nodeType_namespace() throws Exception {
         namespace("nodeType");
     }
@@ -343,7 +367,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "1", "1" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "1", "1" })
     public void nodeType_created() throws Exception {
         created("nodeType");
     }
@@ -352,7 +377,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "null", "exception-setNull", "exception-setEmpty", "exception-set" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "null", "exception-setNull", "exception-setEmpty", "exception-set" })
     public void nodeValue() throws Exception {
         final String test = ""
             + "alert(root.nodeValue);\n"
@@ -381,7 +407,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "true")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "true")
     public void ownerDocument() throws Exception {
         tester("alert(root.ownerDocument === doc);\n", "<root/>");
     }
@@ -390,7 +417,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "true")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "true")
     public void ownerDocument_created() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -410,7 +438,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "#document=null", "true" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "#document=null", "true" })
     public void parentNode() throws Exception {
         final String test = ""
             + "debug(root.parentNode);\n"
@@ -428,7 +457,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "true")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "true")
     public void parentNode_created() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -448,7 +478,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "", "", "", "" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "", "", "", "" })
     public void prefix() throws Exception {
         xml("prefix");
     }
@@ -457,7 +488,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "", "", "app", "app" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "", "", "app", "app" })
     public void prefix_namespace() throws Exception {
         namespace("prefix");
     }
@@ -466,7 +498,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "", "" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "", "" })
     public void prefix_created() throws Exception {
         created("prefix");
     }
@@ -475,7 +508,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "div", "dIv", "div", "div" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "div", "dIv", "div", "div" })
     public void tagName() throws Exception {
         xml("tagName");
     }
@@ -484,7 +518,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "div", "dIv", "app:div", "app:dIv" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "div", "dIv", "app:div", "app:dIv" })
     public void tagName_namespace() throws Exception {
         namespace("tagName");
     }
@@ -493,7 +528,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "div", "dIv" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "div", "dIv" })
     public void tagName_created() throws Exception {
         created("tagName");
     }
@@ -502,7 +538,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "child-cdatagrand-child-textchild-text")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "child-cdatagrand-child-textchild-text")
     public void text() throws Exception {
         final String xml = ""
             + "<root child-attribute='test'>"
@@ -576,7 +613,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "")
     public void text_created() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -641,7 +679,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = "<something/>")
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = "<something/>")
     public void xml_created() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -693,7 +732,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "test", "null", "null", "test" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "test", "null", "null", "test" })
     public void getAttribute_namespace() throws Exception {
         final String test = ""
             + "var element = root.childNodes[0];\n"
@@ -752,7 +792,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "attr=test", "null", "null", "tst:attr=test" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "attr=test", "null", "null", "tst:attr=test" })
     public void getAttributeNode_namespace() throws Exception {
         final String test = ""
             + "var element = root.childNodes[0];\n"
@@ -919,7 +960,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "0", "0", "0" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "0", "0", "0" })
     public void getElementsByTagName_none() throws Exception {
         final String test = ""
             + "var elements = root.getElementsByTagName('unknown');\n"
@@ -936,7 +978,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "3", "1", "#text=Hello World!" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "3", "1", "#text=Hello World!" })
     public void normalize_textOnly() throws Exception {
         final String test = ""
             + "root.appendChild(doc.createTextNode('Hello '));\n"
@@ -954,7 +997,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "3", "3", "3", "1", "#text=Hello World!" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "3", "3", "3", "1", "#text=Hello World!" })
     public void normalize_recursive() throws Exception {
         final String test = ""
             + "var element = doc.createElement('element');\n"
@@ -978,7 +1022,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "7", "7" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "7", "7" })
     public void normalize_mixed() throws Exception {
         final String test = ""
             + "alert(root.childNodes.length);\n"
@@ -1039,7 +1084,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "1", "1", "0", "1", "1", "0" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "1", "1", "0", "1", "1", "0" })
     public void removeAttribute_namespace() throws Exception {
         final String test = ""
             + "var element = root.childNodes[0];\n"
@@ -1072,7 +1118,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "1", "0", "true", "exception-removeNull" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "1", "0", "true", "exception-removeNull" })
     public void removeAttributeNode() throws Exception {
         final String test = ""
             + "var element = root.childNodes[0];\n"
@@ -1142,7 +1189,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "0", "1", "test1", "2", "test2" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "0", "1", "test1", "2", "test2" })
     public void setAttribute_namespace() throws Exception {
         final String test = ""
             + "var element = root.childNodes[0];\n"
@@ -1243,7 +1291,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "undefined", "undefined" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "undefined", "undefined" })
     public void not_baseURI() throws Exception {
         created("baseURI");
     }
@@ -1252,7 +1301,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "undefined", "undefined" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "undefined", "undefined" })
     public void not_innerText() throws Exception {
         created("innerText");
     }
@@ -1261,7 +1311,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "undefined", "undefined" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "undefined", "undefined" })
     public void not_localName() throws Exception {
         created("localName");
     }
@@ -1349,7 +1400,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "2", "1" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "2", "1" })
     public void removeChild() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -1372,7 +1424,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "book", "0", "1" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "book", "0", "1" })
     public void selectNode_root() throws Exception {
         final String html = ""
             + "  function test() {\n"
@@ -1397,7 +1450,8 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX", IE = { "1", "title" })
+    @Alerts(DEFAULT = "no ActiveX",
+            IE = { "1", "title" })
     public void selectNodes() throws Exception {
         final String html = ""
             + "  function test() {\n"

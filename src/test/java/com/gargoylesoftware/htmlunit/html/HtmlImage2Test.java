@@ -61,7 +61,9 @@ public class HtmlImage2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2", IE = "1", CHROME = "1")
+    @Alerts(DEFAULT = "2",
+            IE = "1",
+            CHROME = "1")
     public void loadImageBlankSource() throws Exception {
         loadImage("src=' '");
     }
@@ -121,7 +123,9 @@ public class HtmlImage2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "true", FF31 = "false", CHROME = "false")
+    @Alerts(DEFAULT = "true",
+            FF31 = "false",
+            CHROME = "false")
     public void isDisplayedNoSource() throws Exception {
         isDisplayed("");
     }
@@ -130,7 +134,8 @@ public class HtmlImage2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "true", CHROME = "false")
+    @Alerts(DEFAULT = "true",
+            CHROME = "false")
     public void isDisplayedEmptySource() throws Exception {
         isDisplayed("src=''");
     }
@@ -139,7 +144,8 @@ public class HtmlImage2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "true", CHROME = "false")
+    @Alerts(DEFAULT = "true",
+            CHROME = "false")
     public void isDisplayedBlankSource() throws Exception {
         isDisplayed("src=' '");
     }

@@ -38,7 +38,8 @@ public class HtmlOrderedList2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLOListElement]", IE8 = "[object]")
+    @Alerts(DEFAULT = "[object HTMLOListElement]",
+            IE8 = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

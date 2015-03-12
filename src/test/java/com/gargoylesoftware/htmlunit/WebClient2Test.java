@@ -46,7 +46,8 @@ public class WebClient2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = "http://first/?param=\u00A3", FF = "http://first/?param=%A3")
+    @Alerts(IE = "http://first/?param=\u00A3",
+            FF = "http://first/?param=%A3")
     @NotYetImplemented(CHROME)
     public void encodeURL() throws Exception {
         final String html = "<body onload='alert(window.location.href)'></body>";

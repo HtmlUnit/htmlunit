@@ -48,7 +48,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "null", "error", "handler", "null", "error" })
+    @Alerts({ "null", "error", "handler", "null", "error" })
     public void onchangeDirectCall() throws Exception {
         final String html =
             "<html><head>\n"

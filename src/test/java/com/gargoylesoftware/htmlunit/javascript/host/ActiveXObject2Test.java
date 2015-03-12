@@ -67,7 +67,8 @@ public class ActiveXObject2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = "object")
+    @Alerts(DEFAULT = "exception",
+            IE = "object")
     public void xmlDocument() throws Exception {
         final String html = "<html>\n"
             + " <head><title>foo</title><script>\n"

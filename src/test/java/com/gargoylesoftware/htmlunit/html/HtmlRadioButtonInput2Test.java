@@ -210,7 +210,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true-false", "true-false", "true-false", "true-false", "true-false" })
+    @Alerts({ "true", "true-false", "true-false", "true-false", "true-false", "true-false" })
     public void checked_appendChild() throws Exception {
         performTest(true, true, false, false, false);
     }
@@ -229,7 +229,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true-false", "true-false", "true-false", "true-false", "true-false" })
+    @Alerts({ "true", "true-false", "true-false", "true-false", "true-false", "true-false" })
     public void checked_insertBefore() throws Exception {
         performTest(true, false, false, false, false);
     }
@@ -331,7 +331,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true-false", "true-false", "true-false", "true-false", "true-false" })
+    @Alerts({ "true", "true-false", "true-false", "true-false", "true-false", "true-false" })
     public void checked_appendChild_fromHtml_cloneNode() throws Exception {
         performTest(true, true, true, false, true);
     }
@@ -460,7 +460,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true-true", "false-false", "true-true", "false-false", "false-false", "false-false" })
+    @Alerts({ "true-true", "false-false", "true-true", "false-false", "false-false", "false-false" })
     public void defaultChecked() throws Exception {
         final String html =
             "<!DOCTYPE HTML>\n<html>\n"
@@ -495,7 +495,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false-false", "false-false", "true-true", "false-false", "false-false", "false-false" })
+    @Alerts({ "false-false", "false-false", "true-true", "false-false", "false-false", "false-false" })
     public void defaultChecked_notchecked() throws Exception {
         final String html =
             "<!DOCTYPE HTML>\n<html>\n"

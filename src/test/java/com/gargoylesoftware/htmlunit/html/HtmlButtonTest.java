@@ -124,7 +124,8 @@ public class HtmlButtonTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "submit", IE8 = "button")
+    @Alerts(DEFAULT = "submit",
+            IE8 = "button")
     public void defaultButtonType_StandardsCompliantBrowser() throws Exception {
         final String html
             = "<html><head><title>First</title></head><body>\n"
