@@ -176,7 +176,6 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts()
     public void submitClick() throws Exception {
         final String firstSnippet = "       <input type='submit' name='clickMe' id='clickMe' size='2'\n";
         final String secondSnippet = ">\n";

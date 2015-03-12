@@ -65,8 +65,13 @@
     </module>
 
     <module name="RegexpSingleline">
-        <property name="format" value="@JsxFunction\(\)|@JsxGetter\(\)|@JsxSetter\(\)|@JsxConstructor\(\)"/>
+        <property name="format" value="@JsxFunction\(\)|@JsxGetter\(\)|@JsxSetter\(\)|@JsxConstructor\(\)|@Alerts\(\)"/>
         <property name="message" value="No need to specify parentheses"/>
+    </module>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="@Alerts$"/>
+        <property name="message" value="No need to specify empty @Alerts"/>
     </module>
 
     <!--

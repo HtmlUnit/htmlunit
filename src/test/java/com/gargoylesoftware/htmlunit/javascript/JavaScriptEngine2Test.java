@@ -426,7 +426,6 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts()
     @NotYetImplemented
     public void onloadJavascriptFunction() throws Exception {
         final String html

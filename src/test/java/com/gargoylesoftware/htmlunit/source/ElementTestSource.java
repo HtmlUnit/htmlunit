@@ -35,7 +35,7 @@ public final class ElementTestSource {
     /**
      * Generate test case for each one HTML elements.
      * @param htmlGeneratorMethod the method name which is called to generate the HTML, it expects a tag name parameter
-     * @param defaultAlerts default string inside the parenthesis of <tt>@Alerts()</tt>, can be null
+     * @param defaultAlerts default string inside the parenthesis of <tt>@Alerts</tt>, can be null
      */
     public static void generateTestForHtmlElements(final String htmlGeneratorMethod,
             final String defaultAlerts) {
