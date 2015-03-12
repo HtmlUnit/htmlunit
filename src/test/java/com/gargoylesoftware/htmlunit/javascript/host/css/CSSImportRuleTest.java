@@ -178,7 +178,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true", "true" })
+    @Alerts({ "true", "true", "true" })
     // TODO [IE11]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void circularImportedStylesheetsComplexCase() throws Exception {
         final String html = "<html><head>\n"

@@ -72,7 +72,7 @@ public class HTMLSpanElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLSpanElement] undefined" ,
+    @Alerts(DEFAULT = "[object HTMLSpanElement] undefined",
             IE8 = "[object] undefined")
     public void cite() throws Exception {
         final String html =

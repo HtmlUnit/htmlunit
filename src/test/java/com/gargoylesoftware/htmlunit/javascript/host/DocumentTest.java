@@ -1957,7 +1957,8 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLHtmlElement]", IE = "not available")
+    @Alerts(DEFAULT = "[object HTMLHtmlElement]",
+            IE = "not available")
     public void evaluate_caseInsensitiveTagName() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

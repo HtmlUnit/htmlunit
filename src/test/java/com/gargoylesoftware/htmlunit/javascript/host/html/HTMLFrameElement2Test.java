@@ -595,10 +595,10 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "OnloadTest", "header -> content -> frameSet",
-                        "content\nClick for new frame content with onload",
-                        "header -> content -> frameSet -> onloadFrame",
-                        "onloadFrame\nNew content loaded..." })
+    @Alerts({ "OnloadTest", "header -> content -> frameSet",
+                "content\nClick for new frame content with onload",
+                "header -> content -> frameSet -> onloadFrame",
+                "onloadFrame\nNew content loaded..." })
     @NotYetImplemented
     public void windowLocationSetOnload() throws Exception {
         final String html = "<html><head><title>OnloadTest</title></head>\n"

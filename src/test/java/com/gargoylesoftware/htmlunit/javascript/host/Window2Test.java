@@ -51,8 +51,8 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "found", "true" },
-            DEFAULT = { "not found", "true" })
+    @Alerts(DEFAULT = { "not found", "true" },
+            FF = { "found", "true" })
     public void FF_controllers() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -688,9 +688,9 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF31 = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1238" },
-            FF24 = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1196" },
-            DEFAULT = { "0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()" })
+    @Alerts(DEFAULT = { "0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()" },
+            FF31 = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1238" },
+            FF24 = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1196" })
     @NotYetImplemented(FF)
     public void scrolling1() throws Exception {
         scrolling(true);
@@ -701,8 +701,8 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "0,0", "0,0", "0,0", "0,0", "0,0", "0,0", "0,0" },
-            DEFAULT = { "0,0", "0,0", "0,0", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()" })
+    @Alerts(DEFAULT = { "0,0", "0,0", "0,0", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()" },
+            FF = { "0,0", "0,0", "0,0", "0,0", "0,0", "0,0", "0,0" })
     public void scrolling2() throws Exception {
         scrolling(false);
     }

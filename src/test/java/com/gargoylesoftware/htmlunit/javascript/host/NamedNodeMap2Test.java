@@ -38,7 +38,7 @@ public class NamedNodeMap2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "myAttr", "myAttr" })
+    @Alerts({ "myAttr", "myAttr" })
     public void setNamedItem() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

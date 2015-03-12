@@ -455,7 +455,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "60", CHROME = "auto")
+    @Alerts(DEFAULT = "60",
+            CHROME = "auto")
     @NotYetImplemented(CHROME)
     public void rulePriority_specificity() throws Exception {
         final String html = "<html><head>\n"
@@ -481,7 +482,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "60", CHROME = "auto")
+    @Alerts(DEFAULT = "60",
+        CHROME = "auto")
     @NotYetImplemented(CHROME)
     public void rulePriority_specificity2() throws Exception {
         final String html = "<html><head>\n"
@@ -511,7 +513,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "10", "10" }, CHROME = { "auto", "auto" })
+    @Alerts(DEFAULT = { "10", "10" },
+            CHROME = { "auto", "auto" })
     @NotYetImplemented(CHROME)
     public void rulePriority_position() throws Exception {
         final String html = "<html><head>\n"
@@ -653,7 +656,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "block", "1" }, CHROME = { "block", "0" })
+    @Alerts(DEFAULT = { "block", "1" },
+            CHROME = { "block", "0" })
     @NotYetImplemented(CHROME)
     public void mediaOnLinkTag_notScreen() throws Exception {
         mediaOnLinkTag("print");
@@ -672,7 +676,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "block", "1" }, CHROME = { "block", "0" })
+    @Alerts(DEFAULT = { "block", "1" },
+            CHROME = { "block", "0" })
     @NotYetImplemented(CHROME)
     public void mediaOnLinkTag_multipleWithoutScreen() throws Exception {
         mediaOnLinkTag("print, projection, tv");

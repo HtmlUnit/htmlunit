@@ -73,7 +73,8 @@ public class NativeObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "toSource: function", DEFAULT = "toSource: undefined")
+    @Alerts(DEFAULT = "toSource: undefined",
+            FF = "toSource: function")
     public void methods_toSource() throws Exception {
         final String[] methods = {"toSource"};
         final String html = NativeDateTest.createHTMLTestMethods("new Object()", methods);

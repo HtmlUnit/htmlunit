@@ -369,7 +369,12 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "<p>a & b</p> &amp; \u0162 \" '",
+    @Alerts(DEFAULT = { "<p>a & b</p> &amp; \u0162 \" '",
+                        "<p>a & b</p> &amp; \u0162 \" '",
+                        "<div id=\"div\">&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</div>",
+                        "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
+                        "<p>a & b</p> &amp; \u0162 \" '" },
+            FF = { "<p>a & b</p> &amp; \u0162 \" '",
                         "<p>a & b</p> &amp; \u0162 \" '",
                         "<div id=\"div\">&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</div>",
                         "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
@@ -377,11 +382,6 @@ public class Document2Test extends WebDriverTestCase {
             IE8 = { "<p>a & b</p> &amp; \u0162 \" '",
                         "<p>a & b</p> &amp; \u0162 \" '",
                         "<DIV id=div>&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</DIV>",
-                        "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
-                        "<p>a & b</p> &amp; \u0162 \" '" },
-            DEFAULT = { "<p>a & b</p> &amp; \u0162 \" '",
-                        "<p>a & b</p> &amp; \u0162 \" '",
-                        "<div id=\"div\">&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</div>",
                         "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
                         "<p>a & b</p> &amp; \u0162 \" '" })
     public void createTextNodeWithHtml() throws Exception {

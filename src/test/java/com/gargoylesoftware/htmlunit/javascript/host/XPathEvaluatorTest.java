@@ -65,7 +65,8 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = "window.XPathEvaluator undefined")
+    @Alerts(DEFAULT = "exception",
+            IE = "window.XPathEvaluator undefined")
     public void namespacesWithNodeInArray() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

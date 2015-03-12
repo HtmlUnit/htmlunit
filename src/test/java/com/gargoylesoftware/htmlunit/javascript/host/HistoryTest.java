@@ -192,7 +192,8 @@ public class HistoryTest extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = "error", IE = "undefined")
+    @Alerts(FF = "error",
+            IE = "undefined")
     @NotYetImplemented(CHROME)
     public void previous() throws Exception {
         final WebClient client = getWebClient();
@@ -207,7 +208,8 @@ public class HistoryTest extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = "error", IE = "undefined")
+    @Alerts(FF = "error",
+            IE = "undefined")
     @NotYetImplemented(CHROME)
     public void current() throws Exception {
         final WebClient client = getWebClient();
@@ -222,7 +224,8 @@ public class HistoryTest extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = "error", IE = "undefined")
+    @Alerts(FF = "error",
+            IE = "undefined")
     @NotYetImplemented(CHROME)
     public void next() throws Exception {
         final WebClient client = getWebClient();

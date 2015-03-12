@@ -128,7 +128,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null", IE8 = "[object]")
+    @Alerts(DEFAULT = "null",
+            IE8 = "[object]")
     public void getAttribute_styleAttribute() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -2435,7 +2436,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "0", "0" })
+    @Alerts({ "0", "0" })
     @NotYetImplemented({ IE8, CHROME })
     public void clientLeftTop_documentElement() throws Exception {
         final String html =

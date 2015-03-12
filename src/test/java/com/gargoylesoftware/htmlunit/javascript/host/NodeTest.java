@@ -695,7 +695,8 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = { "3", "H2" })
+    @Alerts(DEFAULT = "exception",
+            IE = { "3", "H2" })
     public void insertBefore_noSecondArg() throws Exception {
         test_insertBefore("aNode.insertBefore(nodeToInsert);");
     }
@@ -779,7 +780,8 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = { })
+    @Alerts(DEFAULT = "exception",
+            IE = { })
     public void insertBefore_newElement() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
                 + "<script>\n"

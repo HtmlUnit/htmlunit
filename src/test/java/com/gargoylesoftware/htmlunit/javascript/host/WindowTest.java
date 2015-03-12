@@ -1141,7 +1141,8 @@ public class WindowTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "", IE8 = { "[object]", "a" },
+    @Alerts(DEFAULT = "",
+            IE8 = { "[object]", "a" },
             IE11 = { "[object Window]", "a" })
     public void showModelessDialog() throws Exception {
         final String html1

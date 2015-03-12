@@ -71,7 +71,8 @@ public class NotificationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { }, IE = "exception")
+    @Alerts(DEFAULT = { },
+            IE = "exception")
     public void minimalUsage() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
@@ -86,7 +87,8 @@ public class NotificationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function", IE = "exception")
+    @Alerts(DEFAULT = "function",
+            IE = "exception")
     @NotYetImplemented({ FF, CHROME })
     public void requestPermission() throws Exception {
         final String html = "<html><body><script>\n"

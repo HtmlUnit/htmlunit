@@ -642,7 +642,8 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2", IE = "1")
+    @Alerts(DEFAULT = "2",
+            IE = "1")
     @NotYetImplemented
     public void internalDifferentFrom() throws Exception {
         final String html

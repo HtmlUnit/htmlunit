@@ -197,7 +197,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "start", "end" })
+    @Alerts({ "start", "end" })
     public void createElementWithSetText() throws Exception {
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
@@ -218,7 +218,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "start", "middle", "executed", "end" })
+    @Alerts({ "start", "middle", "executed", "end" })
     public void createElementWithSetTextAndAppend() throws Exception {
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
@@ -240,7 +240,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "start", "end" })
+    @Alerts({ "start", "end" })
     public void createElementWithSetSrc() throws Exception {
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
@@ -442,7 +442,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "start", "executed", "end" })
+    @Alerts({ "start", "executed", "end" })
     public void replaceWithSetTextEmpty() throws Exception {
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
@@ -585,7 +585,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "executed", "start", "end" })
+    @Alerts({ "executed", "start", "end" })
     public void moveWithAppend() throws Exception {
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
@@ -608,7 +608,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "executed", "start", "end" })
+    @Alerts({ "executed", "start", "end" })
     public void moveWithInsert() throws Exception {
         final String html =
                 "<html><head><title>foo</title></head><body>\n"

@@ -93,7 +93,7 @@ public class DocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "DIV", "DIV" })
+    @Alerts({ "1", "DIV", "DIV" })
     public void querySelector() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"

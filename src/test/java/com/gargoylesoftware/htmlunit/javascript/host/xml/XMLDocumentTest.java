@@ -615,7 +615,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "http://myNS", IE = { })
+    @Alerts(DEFAULT = "http://myNS",
+            IE = { })
     public void createNSResolver() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -669,7 +670,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true", IE8 = "exception")
+    @Alerts(DEFAULT = "true",
+            IE8 = "exception")
     public void instanceOf() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -696,7 +698,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "button", IE = { })
+    @Alerts(DEFAULT = "button",
+            IE = { })
     public void evaluate() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -965,7 +968,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { }, IE = "1")
+    @Alerts(DEFAULT = { },
+            IE = "1")
     public void selectionNamespaces() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  var selectionNamespaces = 'xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" "

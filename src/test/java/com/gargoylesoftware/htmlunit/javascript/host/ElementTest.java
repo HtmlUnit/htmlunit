@@ -46,7 +46,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "attrName attrValue", "attrValue", "null", "anotherValue",
+    @Alerts({ "1", "attrName attrValue", "attrValue", "null", "anotherValue",
                     "1", "4", "<span id='label'>changed</span>" })
     public void attributes() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -252,7 +252,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false", IE8 = "hasAttribute not available")
+    @Alerts(DEFAULT = "false",
+            IE8 = "hasAttribute not available")
     public void hasAttribute() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1135,7 +1136,8 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined" }, IE = { "available", "null" })
+    @Alerts(DEFAULT = { "undefined", "undefined" },
+            IE = { "available", "null" })
     public void currentStyle() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

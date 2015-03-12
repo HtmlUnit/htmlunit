@@ -77,7 +77,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "attachEvent not available", "href" }, IE8 = "onclick")
+    @Alerts(DEFAULT = { "attachEvent not available", "href" },
+            IE8 = "onclick")
     public void javaScriptPreventDefaultIE() throws Exception {
         final String html
             = "<html><head><title>Test</title>\n"
@@ -435,7 +436,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1", CHROME = { "0", "inner" })
+    @Alerts(DEFAULT = "1",
+            CHROME = { "0", "inner" })
     @NotYetImplemented(CHROME)
     public void javascriptTargetWhitespace() throws Exception {
         final String[] alerts = getExpectedAlerts();
@@ -457,7 +459,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1", CHROME = { "0", "inner" })
+    @Alerts(DEFAULT = "1",
+            CHROME = { "0", "inner" })
     @NotYetImplemented(CHROME)
     public void javascriptTargetBlank() throws Exception {
         final String[] alerts = getExpectedAlerts();
@@ -470,7 +473,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "main", CHROME = "inner")
+    @Alerts(DEFAULT = "main",
+            CHROME = "inner")
     @NotYetImplemented(CHROME)
     public void javascriptTargetTop() throws Exception {
         javascriptTarget("target='_top'", 0, getExpectedAlerts());
@@ -480,7 +484,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "main", CHROME = "inner")
+    @Alerts(DEFAULT = "main",
+            CHROME = "inner")
     @NotYetImplemented(CHROME)
     public void javascriptTargetParent() throws Exception {
         javascriptTarget("target='_parent'", 0, getExpectedAlerts());
@@ -490,7 +495,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1", CHROME = { "0", "inner" })
+    @Alerts(DEFAULT = "1",
+            CHROME = { "0", "inner" })
     @NotYetImplemented(CHROME)
     public void javascriptTargetUnknown() throws Exception {
         final String[] alerts = getExpectedAlerts();

@@ -84,7 +84,9 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "undefined", IE11 = "en-US", IE8 = "en-us")
+    @Alerts(DEFAULT = "undefined",
+            IE11 = "en-US",
+            IE8 = "en-us")
     public void browserLanguage_IE() throws Exception {
         attribute("browserLanguage", getExpectedAlerts()[0]);
     }
@@ -204,7 +206,8 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "false", CHROME = "exception")
+    @Alerts(DEFAULT = "false",
+            CHROME = "exception")
     public void taintEnabled() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

@@ -465,7 +465,7 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "form1", "form1", "2", "2" })
+    @Alerts({ "form1", "form1", "2", "2" })
     public void formByName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

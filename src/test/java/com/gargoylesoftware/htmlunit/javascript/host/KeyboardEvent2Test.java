@@ -43,7 +43,8 @@ public class KeyboardEvent2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "keydown:65 keypress:97 keyup:65", FF = "keydown:65,0,65 keypress:0,97,97 keyup:65,0,65")
+    @Alerts(IE = "keydown:65 keypress:97 keyup:65",
+            FF = "keydown:65,0,65 keypress:0,97,97 keyup:65,0,65")
     @NotYetImplemented(CHROME)
     public void a() throws Exception {
         final HtmlPage page = getHtmlPage();
@@ -98,7 +99,8 @@ public class KeyboardEvent2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "keydown:113 keyup:113", FF = "keydown:113,0,113 keypress:113,0,0 keyup:113,0,113")
+    @Alerts(IE = "keydown:113 keyup:113",
+            FF = "keydown:113,0,113 keypress:113,0,0 keyup:113,0,113")
     @NotYetImplemented(CHROME)
     public void dom_vk_f2() throws Exception {
         final HtmlPage page = getHtmlPage();
@@ -112,7 +114,8 @@ public class KeyboardEvent2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "keydown:39 keyup:39", FF = "keydown:39,0,39 keypress:39,0,0 keyup:39,0,39")
+    @Alerts(IE = "keydown:39 keyup:39",
+            FF = "keydown:39,0,39 keypress:39,0,0 keyup:39,0,39")
     @NotYetImplemented(CHROME)
     public void dom_vk_right() throws Exception {
         final HtmlPage page = getHtmlPage();

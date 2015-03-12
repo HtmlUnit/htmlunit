@@ -41,7 +41,8 @@ public class EventNodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "fireEvent not available", IE8 = "true")
+    @Alerts(DEFAULT = "fireEvent not available",
+            IE8 = "true")
     public void fireEvent() throws Exception {
         final String html
             = "<html><head>\n"
@@ -63,7 +64,8 @@ public class EventNodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "createEventObject not available", IE8 = "hello")
+    @Alerts(DEFAULT = "createEventObject not available",
+            IE8 = "hello")
     public void fireEvent_initFromTemplate() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

@@ -34,7 +34,8 @@ public class EventListenersContainerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "someName", "myevent", "[object Window]" }, IE = "exception")
+    @Alerts(DEFAULT = { "someName", "myevent", "[object Window]" },
+            IE = "exception")
     public void addEventListener() throws Exception {
         final String html
             = "<html><head>\n"
@@ -71,7 +72,8 @@ public class EventListenersContainerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "someName", "myevent", "[object HTMLBodyElement]" }, IE = "exception")
+    @Alerts(DEFAULT = { "someName", "myevent", "[object HTMLBodyElement]" },
+            IE = "exception")
     public void addEventListener_node() throws Exception {
         final String html
             = "<html><head>\n"
@@ -108,7 +110,8 @@ public class EventListenersContainerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "", IE = "exception")
+    @Alerts(DEFAULT = "",
+            IE = "exception")
     public void addEventListener_no_handleEvent() throws Exception {
         final String html
             = "<html><head>\n"

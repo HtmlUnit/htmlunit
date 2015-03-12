@@ -201,7 +201,8 @@ public class Event3Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = "false", IE = "true") // here not alerts! ;-)
+    @Alerts(FF = "false",
+            IE = "true") // here not alerts! ;-)
     @NotYetImplemented(CHROME)
     public void testEventBubblingReturns_2() throws Exception {
         final boolean changesPage = Boolean.parseBoolean(getExpectedAlerts()[0]);

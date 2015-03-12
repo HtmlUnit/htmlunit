@@ -682,7 +682,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "27035", IE8 = "exception", IE11 = "111")
+    @Alerts(DEFAULT = "27035",
+            IE8 = "exception",
+            IE11 = "111")
     @NotYetImplemented(IE11)
     public void overrideMimeType_charset() throws Exception {
         final String html = "<html><head>\n"
@@ -708,7 +710,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "27035", IE8 = "exception", IE11 = "111")
+    @Alerts(DEFAULT = "27035",
+            IE8 = "exception",
+            IE11 = "111")
     @NotYetImplemented(IE11)
     public void overrideMimeType_charset_upper_case() throws Exception {
         final String html = "<html><head>\n"
@@ -734,7 +738,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "40644", IE8 = "exception", IE11 = "111")
+    @Alerts(DEFAULT = "40644",
+            IE8 = "exception",
+            IE11 = "111")
     @NotYetImplemented(IE11)
     public void overrideMimeType_charset_empty() throws Exception {
         final String html = "<html><head>\n"
@@ -760,7 +766,10 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "40644", CHROME = "233", IE8 = "exception", IE11 = "NaN")
+    @Alerts(DEFAULT = "40644",
+            CHROME = "233",
+            IE8 = "exception",
+            IE11 = "NaN")
     @NotYetImplemented({ IE11, CHROME })
     public void overrideMimeType_charset_wrong() throws Exception {
         final String html = "<html><head>\n"
@@ -1253,7 +1262,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "39", "27035", "65533", "39" }, IE8 = "exception", IE11 = { "39", "27035", "63" })
+    @Alerts(DEFAULT = { "39", "27035", "65533", "39" },
+            IE8 = "exception",
+            IE11 = { "39", "27035", "63" })
     @NotYetImplemented({ CHROME, FF, IE11 })
     public void overrideMimeType_charset_all() throws Exception {
         final String html = "<html><head>\n"

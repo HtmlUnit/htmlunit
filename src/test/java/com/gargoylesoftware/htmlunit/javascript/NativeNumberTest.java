@@ -50,7 +50,8 @@ public class NativeNumberTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "toSource: function", DEFAULT = "toSource: undefined")
+    @Alerts(DEFAULT = "toSource: undefined",
+            FF = "toSource: function")
     public void methods_different() throws Exception {
         final String html = NativeDateTest.createHTMLTestMethods("new Number()", "toSource");
         loadPageWithAlerts2(html);

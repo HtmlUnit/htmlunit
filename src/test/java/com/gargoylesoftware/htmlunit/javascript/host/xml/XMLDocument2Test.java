@@ -207,7 +207,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = { "content", "content" })
+    @Alerts(DEFAULT = "exception",
+            IE = { "content", "content" })
     public void text() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
@@ -261,7 +262,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = { "foo", "foo" })
+    @Alerts(DEFAULT = "exception",
+            IE = { "foo", "foo" })
     public void firstChild_element_activeX() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -323,7 +325,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = { "xml", "foo" })
+    @Alerts(DEFAULT = "exception",
+            IE = { "xml", "foo" })
     @NotYetImplemented(IE)
     // Xerces does not offer any way to access the XML declaration
     public void firstChild_xmlDeclaration_activeX() throws Exception {
@@ -385,7 +388,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = { "apache", "foo" })
+    @Alerts(DEFAULT = "exception",
+            IE = { "apache", "foo" })
     public void firstChild_processingInstruction_activeX() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -442,7 +446,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = { "dtd", "a" })
+    @Alerts(DEFAULT = "exception",
+            IE = { "dtd", "a" })
     public void firstChild_documentType_activeX() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -499,7 +504,8 @@ public class XMLDocument2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = { "#comment", "foo" })
+    @Alerts(DEFAULT = "exception",
+            IE = { "#comment", "foo" })
     public void firstChild_comment_activeX() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

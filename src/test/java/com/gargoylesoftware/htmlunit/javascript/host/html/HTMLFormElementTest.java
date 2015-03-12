@@ -515,7 +515,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "§§URL§§foo.html", IE8 = "foo.html")
+    @Alerts(DEFAULT = "§§URL§§foo.html",
+            IE8 = "foo.html")
     public void getFormFromFormsById() throws Exception {
         final String html =
             "<html>\n"

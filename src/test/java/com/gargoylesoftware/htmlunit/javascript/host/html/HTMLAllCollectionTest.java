@@ -371,7 +371,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "b2-button2")
+    @Alerts("b2-button2")
     public void arrayIndex_ById() throws Exception {
         arrayIndex("'b2'");
     }

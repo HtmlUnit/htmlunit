@@ -335,7 +335,8 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object XMLDocument]", IE8 = { })
+    @Alerts(DEFAULT = "[object XMLDocument]",
+            IE8 = { })
     public void createDocument() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

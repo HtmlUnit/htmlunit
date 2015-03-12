@@ -1325,7 +1325,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "first", "second" })
+    @Alerts({ "first", "second" })
     public void escapedAttributeValue() throws Exception {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
