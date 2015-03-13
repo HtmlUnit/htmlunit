@@ -1590,7 +1590,8 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "First", IE = "Second")
+    @Alerts(DEFAULT = "First",
+            IE = "Second")
     public void navigate() throws Exception {
         final String firstContent
             = "<html><head><title>First</title><script>\n"

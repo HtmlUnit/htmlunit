@@ -117,6 +117,7 @@ public class CodeStyleTest {
                 loggingEnabled(lines, relativePath);
                 browserVersion_isIE(lines, relativePath);
                 versionBeforeAuthor(lines, relativePath);
+                alerts(lines, relativePath);
             }
         }
     }
@@ -582,4 +583,173 @@ public class CodeStyleTest {
             }
         }
     }
+
+    /**
+     * Verifies that \@Alerts is correctly defined.
+     */
+    private void alerts(final List<String> lines, final String relativePath) {
+        for (int i = 0; i < lines.size(); i++) {
+            if (lines.get(i).startsWith("    @Alerts(")) {
+                final StringBuilder alerts = new StringBuilder();
+                for (int x = i;; x++) {
+                    final String line = lines.get(x);
+                    if (alerts.length() != 0) {
+                        alerts.append('\n');
+                    }
+                    if (line.startsWith("    @Alerts(")) {
+                        alerts.append(line.substring("    @Alerts(".length()));
+                    }
+                    else {
+                        alerts.append(line);
+                    }
+                    if (line.endsWith(")")) {
+                        alerts.deleteCharAt(alerts.length() - 1);
+                        break;
+                    }
+                }
+                alertVerify(alerts.toString(), relativePath, i);
+            }
+        }
+    }
+
+    /**
+     * Verifies a specific \@Alerts definition.
+     */
+    private void alertVerify(final String string, final String relativePath, final int lineIndex) {
+        final List<String> alerts = alertsToList(string);
+        if (alerts.size() == 1) {
+            if (alerts.get(0).contains("DEFAULT")) {
+                addFailure("No need for \"DEFAULT\" in "
+                        + relativePath + ", line: " + (lineIndex + 1));
+            }
+        }
+        else {
+            final List<String> names = new ArrayList<>();
+            for (String alert : alerts) {
+                if (alert.charAt(0) == ',') {
+                    if (alert.charAt(1) != '\n') {
+                        addFailure("Expectation must be in a separate line in "
+                                + relativePath + ", line: " + (lineIndex + 1));
+                    }
+                    alert = alert.substring(1).trim();
+                }
+
+                final int quoteIndex = alert.indexOf('"');
+                final int equalsIndex = alert.indexOf('=');
+                if (equalsIndex != -1 && equalsIndex < quoteIndex) {
+                    final String name = alert.substring(0, equalsIndex - 1);
+                    alertVerifyOrder(name, names, relativePath, lineIndex);
+                    names.add(name);
+                }
+            }
+        }
+    }
+
+    /**
+     * Converts the given alerts definition to an array of expressions.
+     */
+    private List<String> alertsToList(final String string) {
+        final List<String> list = new ArrayList<>();
+        if ("\"\"".equals(string)) {
+            list.add(string);
+        }
+        else {
+            final StringBuilder currentToken = new StringBuilder();
+
+            boolean insideString = true;
+            boolean startsWithBraces = false;
+            for (final String token : string.split("(?<!\\\\)\"")) {
+                insideString = !insideString;
+                if (currentToken.length() != 0) {
+                    currentToken.append('"');
+                }
+                else {
+                    startsWithBraces = token.toString().contains("{");
+                }
+
+                if (!insideString && token.startsWith(",") && !startsWithBraces) {
+                    list.add(currentToken.toString());
+                    currentToken.setLength(0);
+                    startsWithBraces = token.toString().contains("{");
+                }
+
+                if (!insideString && token.contains("}")) {
+                    final int curlyIndex = token.indexOf('}') + 1;
+                    currentToken.append(token.substring(0, curlyIndex));
+                    list.add(currentToken.toString());
+                    currentToken.setLength(0);
+                    currentToken.append(token.substring(curlyIndex));
+                }
+                else {
+                    if (!insideString && token.contains(",") && !startsWithBraces) {
+                        final String[] expressions = token.split(",");
+                        currentToken.append(expressions[0]);
+                        if (currentToken.length() != 0) {
+                            list.add(currentToken.toString());
+                        }
+                        for (int i = 1; i < expressions.length - 1; i++) {
+                            list.add(',' + expressions[i]);
+                        }
+                        currentToken.setLength(0);
+                        currentToken.append(',' + expressions[expressions.length - 1]);
+                    }
+                    else {
+                        currentToken.append(token);
+                    }
+                }
+            }
+            if (currentToken.length() != 0) {
+                if (!currentToken.toString().contains("\"")) {
+                    currentToken.insert(0, '"');
+                }
+                int totalQuotes = 0;
+                for (int i = 0; i < currentToken.length(); i++) {
+                    if (currentToken.charAt(i) == '"' && (i == 0 || currentToken.charAt(i - 1) != '\\')) {
+                        totalQuotes++;
+                    }
+                }
+                if (totalQuotes % 2 != 0) {
+                    currentToken.append('"');
+                }
+
+                list.add(currentToken.toString());
+            }
+        }
+        return list;
+    }
+
+    /**
+     * Verifies \@Alerts specific order.
+     *
+     * @param browserName the browser name
+     * @param previousList the previously defined browser names
+     */
+    private void alertVerifyOrder(final String browserName, final List<String> previousList,
+            final String relativePath, final int lineIndex) {
+        switch (browserName) {
+            case "DEFAULT":
+                if (!previousList.isEmpty()) {
+                    addFailure("DEFAULT must be first in "
+                            + relativePath + ", line: " + (lineIndex + 1));
+                }
+                break;
+
+            case "IE":
+                if (previousList.contains("IE8") || previousList.contains("IE11")) {
+                    addFailure("IE must be before specifc IE version in "
+                            + relativePath + ", line: " + (lineIndex + 1));
+                }
+                break;
+
+            case "FF":
+                if (previousList.contains("FF24") || previousList.contains("FF31")) {
+                    addFailure("FF must be before specifc FF version in "
+                            + relativePath + ", line: " + (lineIndex + 1));
+                }
+                break;
+
+            default:
+        }
+    }
+
 }

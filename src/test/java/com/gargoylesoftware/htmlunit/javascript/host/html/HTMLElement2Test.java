@@ -123,7 +123,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "attachEvent not available", IE8 = { "30", "30", "30" })
+    @Alerts(DEFAULT = "attachEvent not available",
+            IE8 = { "30", "30", "30" })
     public void offsetWidth_withEvent() throws Exception {
         final String html =
               "<html>\n"
