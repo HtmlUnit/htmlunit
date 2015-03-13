@@ -65,7 +65,7 @@ public class RangeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "[object HTMLDocument]", "[object HTMLDocument]", "0", "[object HTMLDocument]", "0" },
-        IE8 = { })
+            IE8 = { })
     public void emptyRange() throws Exception {
         loadPageWithAlerts2(contentStart + "alertRange(r);" + contentEnd);
     }
@@ -98,7 +98,8 @@ public class RangeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<div id=\"myDiv2\"></div><div>harhar</div><div id=\"myDiv3\"></div>", IE8 = { })
+    @Alerts(DEFAULT = "<div id=\"myDiv2\"></div><div>harhar</div><div id=\"myDiv3\"></div>",
+            IE8 = { })
     public void createContextualFragment() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

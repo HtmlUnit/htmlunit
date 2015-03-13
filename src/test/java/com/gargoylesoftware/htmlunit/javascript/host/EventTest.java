@@ -234,7 +234,8 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "defined", IE8 = "undefined")
+    @Alerts(DEFAULT = "defined",
+            IE8 = "undefined")
     public void testEventArgDefined() throws Exception {
         final String content
             = "<html><head></head>\n"
@@ -252,7 +253,8 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "pass", IE8 = "no event param")
+    @Alerts(DEFAULT = "pass",
+            IE8 = "no event param")
     public void testEventTargetSameAsThis() throws Exception {
         final String content
             = "<html><head></head>\n"
@@ -297,7 +299,8 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "pass", IE8 = "no event param")
+    @Alerts(DEFAULT = "pass",
+            IE8 = "no event param")
     public void testEventCurrentTargetSameAsThis() throws Exception {
         final String content
             = "<html><head></head>\n"
@@ -708,7 +711,8 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception", FF24 = "40000000")
+    @Alerts(DEFAULT = "exception",
+            FF24 = "40000000")
     public void text() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"

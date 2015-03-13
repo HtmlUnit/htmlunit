@@ -43,7 +43,8 @@ public class HTMLObjectElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined", IE = { "ActiveX is working!", "Javascript called this method!" })
+    @Alerts(DEFAULT = "undefined",
+            IE = { "ActiveX is working!", "Javascript called this method!" })
     public void classid() throws Exception {
         final String clsid = "clsid:TESTING-CLASS-ID";
         final String html = "<html><head>\n"

@@ -49,7 +49,8 @@ public class SelectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "true", IE8 = "exception")
+    @Alerts(DEFAULT = "true",
+            IE8 = "exception")
     public void equality_getSelection() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"

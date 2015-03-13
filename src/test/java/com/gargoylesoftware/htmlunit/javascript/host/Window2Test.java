@@ -795,8 +795,8 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "11", "91", "0" },
-            DEFAULT = { "undefined", "undefined", "undefined" })
+    @Alerts(DEFAULT = { "undefined", "undefined", "undefined" },
+            FF = { "11", "91", "0" })
     public void mozInnerScreenX() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"

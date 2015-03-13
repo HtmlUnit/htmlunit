@@ -282,8 +282,8 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0,0", "11,11", "10,11", "5,5" },
-            IE11 = { "0,0", "0,0", "10,10", "5,5" },
-            IE = { "undefined,undefined", "undefined,undefined", "10,undefined", "10,5" })
+            IE = { "undefined,undefined", "undefined,undefined", "10,undefined", "10,5" },
+            IE11 = { "0,0", "0,0", "10,10", "5,5" })
     public void selection2_3() throws Exception {
         selection2(10, 5);
     }
