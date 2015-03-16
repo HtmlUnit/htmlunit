@@ -99,6 +99,9 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         return new String[] {};
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected Object createTest() throws Exception {
         final Object test = super.createTest();
@@ -116,9 +119,9 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
      */
     @Override
     public void filter(final Filter filter) throws NoTestsRemainException {
-        computeTestMethods();
+        final List<FrameworkMethod> testMethods = computeTestMethods();
 
-        for (final ListIterator<FrameworkMethod> iter = testMethods_.listIterator(); iter.hasNext();) {
+        for (final ListIterator<FrameworkMethod> iter = testMethods.listIterator(); iter.hasNext();) {
             final FrameworkMethod method = iter.next();
             // compute 2 descriptions to verify if it is the intended test:
             // - one "normal", this is what Eclipse's filter awaits when typing Ctrl+X T
@@ -328,12 +331,12 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         return testRules.isEmpty() ? statement : new RunRules(statement, testRules, describeChild(method));
     }
 
-    private boolean isNotYetImplemented(final FrameworkMethod method) {
+    protected boolean isNotYetImplemented(final FrameworkMethod method) {
         final NotYetImplemented notYetImplementedBrowsers = method.getAnnotation(NotYetImplemented.class);
         return notYetImplementedBrowsers != null && isDefinedIn(notYetImplementedBrowsers.value());
     }
 
-    private boolean isBuggyWebDriver(final FrameworkMethod method) {
+    protected boolean isBuggyWebDriver(final FrameworkMethod method) {
         final BuggyWebDriver buggyWebDriver = method.getAnnotation(BuggyWebDriver.class);
         return buggyWebDriver != null && isDefinedIn(buggyWebDriver.value());
     }
@@ -341,5 +344,21 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
     private int getTries(final FrameworkMethod method) {
         final Tries tries = method.getAnnotation(Tries.class);
         return tries != null ? tries.value() : 1;
+    }
+
+    /**
+     * Returns the browser version.
+     * @return the browser version
+     */
+    protected BrowserVersion getBrowserVersion() {
+        return browserVersion_;
+    }
+
+    /**
+     * Is real browser.
+     * @return whether we are using real browser or not
+     */
+    protected boolean isRealBrowser() {
+        return realBrowser_;
     }
 }
