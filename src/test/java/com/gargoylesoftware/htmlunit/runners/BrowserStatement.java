@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit;
+package com.gargoylesoftware.htmlunit.runners;
 
 import java.lang.reflect.Method;
 
@@ -53,7 +53,8 @@ class BrowserStatement extends Statement {
                     throw t;
                 }
                 System.out.println("Failed test "
-                        + method_.getDeclaringClass().getName() + '.' + method_.getName() + " #" + (i + 1));
+                        + method_.getDeclaringClass().getName() + '.' + method_.getName()
+                        + (tries_ != 1 ? " #" + (i + 1) : ""));
                 if (i == tries_ - 1) {
                     throw t;
                 }

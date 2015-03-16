@@ -493,7 +493,11 @@ public abstract class WebTestCase {
             && Modifier.isPublic(method.getModifiers());
     }
 
-    void setBrowserVersion(final BrowserVersion browserVersion) {
+    /**
+     * Sets the browser version.
+     * @param browserVersion the browser version
+     */
+    public void setBrowserVersion(final BrowserVersion browserVersion) {
         browserVersion_ = browserVersion;
     }
 
@@ -512,7 +516,7 @@ public abstract class WebTestCase {
      * Sets the expected alerts.
      * @param expectedAlerts the expected alerts
      */
-    protected void setExpectedAlerts(final String... expectedAlerts) {
+    public void setExpectedAlerts(final String... expectedAlerts) {
         expectedAlerts_ = expectedAlerts;
     }
 

@@ -12,13 +12,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit;
+package com.gargoylesoftware.htmlunit.runners;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.Parameterized.Parameter;
@@ -28,8 +31,12 @@ import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 import org.junit.runners.parameterized.TestWithParameters;
 
+import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner.Default;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebTestCase;
+
 /**
- * A runner.
+ * A {@link BrowserVersionClassRunner} which is also parameterized.
  *
  * @version $Revision$
  * @author Ahmed Ashour
@@ -68,22 +75,37 @@ public class BrowserVersionClassRunnerWithParameters extends BrowserVersionClass
         if (tests_ == null) {
             return originalMethod;
         }
+        final Set<String> nativeMethodNames = new HashSet<>();
         final List<FrameworkMethod> methods = new ArrayList<>();
+        FrameworkMethod defualtMethod = null;
         for (final FrameworkMethod m : originalMethod) {
-            final BrowserFrameworkMethod newMethod = new BrowserFrameworkMethod(m.getMethod());
+            final List<Object> parameters;
+            if (m.getAnnotation(Default.class) != null) {
+                defualtMethod = m;
+                parameters = tests_.get(0).getParameters();
+            }
+            else {
+                parameters = Collections.emptyList();
+                nativeMethodNames.add(m.getName());
+            }
+            final FrameworkMethodWithParameters newMethod = new FrameworkMethodWithParameters(
+                    getTestClass(), m.getMethod(), parameters);
             methods.add(newMethod);
         }
 
-        FrameworkMethod defualtMethod = null;
-        for (final FrameworkMethod m : methods) {
-            if ("defaultTest".equals(m.getName())) {
-                defualtMethod = m;
-                break;
+        for (int i = 0; i < tests_.size() - 1; i++) {
+            final FrameworkMethodWithParameters method = new FrameworkMethodWithParameters(
+                    getTestClass(), defualtMethod.getMethod(), tests_.get(i + 1).getParameters());
+            methods.add(method);
+        }
+
+        for (final Iterator<FrameworkMethod> it = methods.iterator(); it.hasNext();) {
+            final FrameworkMethodWithParameters method = (FrameworkMethodWithParameters) it.next();
+            if (method.getAnnotation(Default.class) != null && nativeMethodNames.contains(method.getMethodName())) {
+                it.remove();
             }
         }
-        for (int i = 0; i < tests_.size() - 1; i++) {
-            methods.add(defualtMethod);
-        }
+
         final Comparator<FrameworkMethod> comparator = new Comparator<FrameworkMethod>() {
             public int compare(final FrameworkMethod fm1, final FrameworkMethod fm2) {
                 return fm1.getName().compareTo(fm2.getName());
@@ -94,27 +116,11 @@ public class BrowserVersionClassRunnerWithParameters extends BrowserVersionClass
         return testMethods_;
     }
 
-    private int testIndex_ = 0;
-
-    /**
-     * {@inheritDoc}
-     */
-    protected void runChild(final FrameworkMethod method, final RunNotifier notifier) {
-        if ("defaultTest".equals(method.getName())) {
-            final BrowserFrameworkMethod newMethod = (BrowserFrameworkMethod) method;
-            newMethod.setParameters(tests_.get(testIndex_++).getParameters());
-        }
-        super.runChild(method, notifier);
-    }
-
     /**
      * {@inheritDoc}
      */
     @Override
     protected String testName(final FrameworkMethod method) {
-        System.out.println("Test name " + method);
-        String className = method.getMethod().getDeclaringClass().getName();
-        className = className.substring(className.lastIndexOf('.') + 1);
         String prefix = "";
         if (isNotYetImplemented(method) && !isRealBrowser()) {
             prefix = "(NYI) ";
@@ -127,13 +133,17 @@ public class BrowserVersionClassRunnerWithParameters extends BrowserVersionClass
         if (isRealBrowser()) {
             browserString = "Real " + browserString;
         }
+
         String methodName = method.getName();
-        if (method instanceof BrowserFrameworkMethod) {
-            methodName = ((BrowserFrameworkMethod) method).getParametersAsString();
+        if (method instanceof FrameworkMethodWithParameters && method.getAnnotation(Default.class) != null) {
+            methodName = ((FrameworkMethodWithParameters) method).getMethodName();
         }
+
         if (!maven_) {
             return String.format("%s [%s]", methodName, browserString);
         }
+        String className = method.getMethod().getDeclaringClass().getName();
+        className = className.substring(className.lastIndexOf('.') + 1);
         return String.format("%s%s [%s]", prefix, className + '.' + methodName, browserString);
     }
 

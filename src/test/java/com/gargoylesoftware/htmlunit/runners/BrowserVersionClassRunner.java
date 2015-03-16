@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit;
+package com.gargoylesoftware.htmlunit.runners;
 
 import static org.junit.Assert.assertTrue;
 
@@ -36,6 +36,10 @@ import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
@@ -43,18 +47,25 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 
 /**
- * The runner for test methods that run with a specific browser ({@link BrowserRunner.Browser})
+ * The runner for test methods that run with a specific browser ({@link BrowserRunner.Browser}).
  *
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
+public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
     private final BrowserVersion browserVersion_;
     private final boolean realBrowser_;
     static final boolean maven_ = System.getProperty("htmlunit.maven") != null;
 
+    /**
+     * Constructs a new instance.
+     * @param klass the class
+     * @param browserVersion the browser version
+     * @param realBrowser use real browser or not
+     * @throws InitializationError if an error occurs
+     */
     public BrowserVersionClassRunner(final Class<WebTestCase> klass,
         final BrowserVersion browserVersion, final boolean realBrowser) throws InitializationError {
         super(klass);
@@ -150,8 +161,6 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
     @Override
     protected String testName(final FrameworkMethod method) {
-        String className = method.getMethod().getDeclaringClass().getName();
-        className = className.substring(className.lastIndexOf('.') + 1);
         String prefix = "";
         if (isNotYetImplemented(method) && !realBrowser_) {
             prefix = "(NYI) ";
@@ -167,6 +176,8 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         if (!maven_) {
             return String.format("%s [%s]", method.getName(), browserString);
         }
+        String className = method.getMethod().getDeclaringClass().getName();
+        className = className.substring(className.lastIndexOf('.') + 1);
         return String.format("%s%s [%s]", prefix, className + '.' + method.getName(), browserString);
     }
 
@@ -188,7 +199,13 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         return testMethods_;
     }
 
-    static boolean containsTestMethods(final Class<WebTestCase> klass) {
+    /**
+     * Does the test class contains test methods.
+     *
+     * @param klass the class
+     * @return whether it contains test methods or not
+     */
+    public static boolean containsTestMethods(final Class<WebTestCase> klass) {
         for (final Method method : klass.getMethods()) {
             if (method.getAnnotation(Test.class) != null) {
                 return true;
@@ -331,11 +348,21 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         return testRules.isEmpty() ? statement : new RunRules(statement, testRules, describeChild(method));
     }
 
+    /**
+     * Returns if not yet implemented.
+     * @param method the method
+     * @return if not yet implemented
+     */
     protected boolean isNotYetImplemented(final FrameworkMethod method) {
         final NotYetImplemented notYetImplementedBrowsers = method.getAnnotation(NotYetImplemented.class);
         return notYetImplementedBrowsers != null && isDefinedIn(notYetImplementedBrowsers.value());
     }
 
+    /**
+     * Is buggy web driver.
+     * @param method the method
+     * @return is buggy web driver
+     */
     protected boolean isBuggyWebDriver(final FrameworkMethod method) {
         final BuggyWebDriver buggyWebDriver = method.getAnnotation(BuggyWebDriver.class);
         return buggyWebDriver != null && isDefinedIn(buggyWebDriver.value());

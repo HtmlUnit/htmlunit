@@ -46,7 +46,7 @@ public final class TestCaseTest {
      */
     @Test
     public void generateTestForHtmlElements() throws Exception {
-        allClassNames_ = getAllClasses();
+        allClassNames_ = getAllClassNames();
         generateTestForHtmlElements(new File("src/test/java"));
     }
 
@@ -73,7 +73,7 @@ public final class TestCaseTest {
         }
     }
 
-    private List<String> getAllClasses() throws Exception {
+    private List<String> getAllClassNames() throws Exception {
         final Field field = JavaScriptConfiguration.class.getDeclaredField("CLASSES_");
         field.setAccessible(true);
 

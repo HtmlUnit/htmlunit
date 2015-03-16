@@ -215,8 +215,12 @@ public abstract class WebDriverTestCase extends WebTestCase {
         STATIC_SERVER3_ = null;
     }
 
-    void setUseRealBrowser(final boolean useWebDriver) {
-        useRealBrowser_ = useWebDriver;
+    /**
+     * Sets whether to use real browser or not.
+     * @param useRealBrowser whether to use real browser or not
+     */
+    public void setUseRealBrowser(final boolean useRealBrowser) {
+        useRealBrowser_ = useRealBrowser;
     }
 
     /**

@@ -34,6 +34,8 @@ import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.Suite;
 import org.junit.runners.model.Statement;
 
+import com.gargoylesoftware.htmlunit.runners.BrowserVersionClassRunner;
+
 /**
  * The custom runner <code>BrowserRunner</code> implements browser parameterized
  * tests. When running a test class, instances are created for the
@@ -45,9 +47,8 @@ import org.junit.runners.model.Statement;
  * public class SomeTest extends WebTestCase {
  *
  *    &#064;Test
- *    &#064;Browsers({ Browser.FF24 })
  *    public void test() {
- *       //your test case that succeeds with only Firefox 24
+ *      getBrowserVersion();// returns the currently used BrowserVersion
  *    }
  * }
  * </pre>
@@ -141,7 +142,10 @@ public class BrowserRunner extends Suite {
         return runners_;
     }
 
-    static final String EMPTY_DEFAULT = "~InTerNal_To_BrowSeRRunNer#@$";
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     */
+    public static final String EMPTY_DEFAULT = "~InTerNal_To_BrowSeRRunNer#@$";
 
     /**
      * Browser.

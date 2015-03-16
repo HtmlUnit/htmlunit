@@ -25,13 +25,74 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.runner.Runner;
+import org.junit.runners.Parameterized.Parameters;
 import org.junit.runners.Suite;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.TestClass;
 import org.junit.runners.parameterized.TestWithParameters;
 
+import com.gargoylesoftware.htmlunit.runners.BrowserVersionClassRunner;
+import com.gargoylesoftware.htmlunit.runners.BrowserVersionClassRunnerWithParameters;
+
 /**
- * Browser Parameterized Runner.
+ * The custom runner <code>BrowserParameterizedRunner</code> combines the behavior of both
+ * {@link com.gargoylesoftware.htmlunit.BrowserRunner} and {@link org.junit.runners.Parameterized}.
+ *
+ * It uses {@link org.junit.runners.Parameterized.Parameter} for field injection.
+ *
+ * You must define a single {@link Default} method, which has global
+ * {@link com.gargoylesoftware.htmlunit.BrowserRunner.Alerts}.
+ * You can add other specific tests, which will not be parameterized, and they can have other
+ * {@link com.gargoylesoftware.htmlunit.BrowserRunner.Alerts} or
+ * {@link com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented}.
+ *
+ * The method name will start with underscore '_' and have the parameters joined by an underscore.
+ * If the method of a data entry already exists, then it will not be considered, as the actual method will override it.
+ *
+ * For example, you can have:
+ * <pre>
+ * &#064;RunWith(BrowserParameterizedRunner.class)
+ * public class SomeTest extends WebDriverTestCase {
+ *
+ *    &#064;Parameters
+ *    public static Iterable&lt;Object[]&gt; data() {
+ *        return Arrays.asList(new Object[][] { { 0, 0 }, { 1, 1 }, { 2, 1 },
+ *                 /&#042 will be overridden, see below &#042/ { 3, 2 },
+ *                 { 4, 3 }, { 5, 5 }, { 6, 8 } });
+ *    }
+ *
+ *    &#064;Parameter
+ *    public int param1;
+ *
+ *    &#064;Parameter(1)
+ *    public int param2;
+ *
+ *    &#064;Test
+ *    &#064;Alerts("some alert")
+ *    &#064;Default
+ *    public void test() {
+ *       loadPageWithAlerts2("some HTML with " + param1 + " " + param2);
+ *    }
+ *
+ *
+ *    /&#042&#042
+ *     &#042 This method will override the <tt>{ 3, 2 }</tt> entry.
+ *     &#042/
+ *    &#064;Test
+ *    &#064;Alerts("another alert")
+ *    &#064;NotYetImplemented
+ *    public void _3_2() {
+ *       loadPageWithAlerts2("some HTML without the parameters, since it is not the &#064;Default");
+ *    }
+ *
+ *    &#064;Test
+ *    &#064;Alerts("another alert")
+ *    &#064;NotYetImplemented
+ *    public void anotherTest() {
+ *       loadPageWithAlerts2("some HTML without the parameters, since it is not the &#064;Default");
+ *    }
+ * }
+ * </pre>
  *
  * @version $Revision$
  * @author Ahmed Ashour
@@ -39,49 +100,11 @@ import org.junit.runners.parameterized.TestWithParameters;
 public class BrowserParameterizedRunner extends Suite {
 
     /**
-     * Annotation for a method which provides parameters to be injected into the
-     * test class constructor by <code>Parameterized</code>. The method has to
-     * be public and static.
+     * Annotation for a methods which is the default one to be executed for all parameters.
      */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)
-    public static @interface Parameters {
-        /**
-         * Optional pattern to derive the test's name from the parameters. Use
-         * numbers in braces to refer to the parameters or the additional data
-         * as follows:
-         * <pre>
-         * {index} - the current parameter index
-         * {0} - the first parameter value
-         * {1} - the second parameter value
-         * etc...
-         * </pre>
-         * <p>
-         * Default value is "{index}" for compatibility with previous JUnit
-         * versions.
-         *
-         * @see MessageFormat
-         */
-        String name() default "{index}";
-    }
-
-    /**
-     * Annotation for fields of the test class which will be initialized by the
-     * method annotated by <code>Parameters</code>.
-     * By using directly this annotation, the test class constructor isn't needed.
-     * Index range must start at 0.
-     * Default value is 0.
-     */
-    @Retention(RetentionPolicy.RUNTIME)
-    @Target(ElementType.FIELD)
-    public static @interface Parameter {
-        /**
-         * Method that returns the index of the parameter in the array
-         * returned by the method annotated by <code>Parameters</code>.
-         * Index range must start at 0.
-         * Default value is 0.
-         */
-        int value() default 0;
+    public static @interface Default {
     }
 
     private final ArrayList<Runner> runners_ = new ArrayList<>();
@@ -93,6 +116,9 @@ public class BrowserParameterizedRunner extends Suite {
      */
     public BrowserParameterizedRunner(final Class<WebTestCase> klass) throws Throwable {
         super(klass, Collections.<Runner>emptyList());
+
+        verifyDefaultMEthod();
+
         final Parameters parameters = getParametersMethod().getAnnotation(
                 Parameters.class);
 
@@ -220,4 +246,13 @@ public class BrowserParameterizedRunner extends Suite {
         return new TestWithParameters("[" + name + "]", testClass,
                 Arrays.asList(parameters));
     }
+
+    private void verifyDefaultMEthod() throws Exception {
+        final List<FrameworkMethod> methods = getTestClass().getAnnotatedMethods(Default.class);
+        if (methods.size() != 1) {
+            throw new Exception("A single method with @Default must exist in class "
+                + getTestClass().getName());
+        }
+    }
+
 }
