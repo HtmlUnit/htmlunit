@@ -2499,7 +2499,7 @@ public class HostParentOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "false",
             IE8 = "true")
-    @NotYetImplemented({ CHROME, FF, IE11})
+    @NotYetImplemented({ CHROME, FF, IE11 })
     public void _StaticNodeList_StaticNodeList() throws Exception {
         isParentOf("StaticNodeList", "StaticNodeList");
     }
