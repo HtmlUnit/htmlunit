@@ -234,44 +234,41 @@ public class JavaScriptEngine {
         final Scriptable fallbackCaller = new FallbackCaller();
         ScriptableObject.getObjectPrototype(window).setPrototype(fallbackCaller);
 
-        // synchronize write access to prototypesPerJSName_
-        synchronized (prototypesPerJSName_) {
-            for (final ClassConfiguration config : jsConfig_.getAll()) {
-                final ScriptableObject prototype = configureClass(config, window);
-                prototypesPerJSName_.put(config.getClassName(), prototype);
-            }
-        }
-
         final boolean putPrototypeInWindowScope =
                 browserVersion.hasFeature(JS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE);
         for (final ClassConfiguration config : jsConfig_.getAll()) {
-            final ScriptableObject prototype = prototypesPerJSName_.get(config.getClassName());
-
             final boolean isWindow = Window.class.getName().equals(config.getHostClass().getName());
             if (isWindow) {
                 configureConstantsPropertiesAndFunctions(config, window);
+
+                final ScriptableObject prototype = configureClass(config, window);
+                prototypesPerJSName_.put(config.getClassName(), prototype);
             }
             else {
-                // Place object with prototype property in Window scope
-                if (putPrototypeInWindowScope && config.isJsObject()) {
-                    final SimpleScriptable obj = config.getHostClass().newInstance();
-                    prototype.defineProperty("__proto__", prototype, ScriptableObject.DONTENUM);
-                    obj.defineProperty("prototype", prototype, ScriptableObject.DONTENUM); // but not setPrototype!
-                    obj.setParentScope(window);
-                    obj.setClassName(config.getClassName());
-                    ScriptableObject.defineProperty(window, obj.getClassName(), obj, ScriptableObject.DONTENUM);
-                    // this obj won't have prototype, constants need to be configured on it again
-                    configureConstants(config, obj);
+                final ScriptableObject prototype = configureClass(config, window);
+                if (config.isJsObject()) {
+                    // Place object with prototype property in Window scope
+                    if (putPrototypeInWindowScope) {
+                        final SimpleScriptable obj = config.getHostClass().newInstance();
+                        prototype.defineProperty("__proto__", prototype, ScriptableObject.DONTENUM);
+                        obj.defineProperty("prototype", prototype, ScriptableObject.DONTENUM); // but not setPrototype!
+                        obj.setParentScope(window);
+                        obj.setClassName(config.getClassName());
+                        ScriptableObject.defineProperty(window, obj.getClassName(), obj, ScriptableObject.DONTENUM);
+                        // this obj won't have prototype, constants need to be configured on it again
+                        configureConstants(config, obj);
 
-                    if (obj.getClass() == Element.class) {
-                        final Page page = webWindow.getEnclosedPage();
-                        if (page != null && page.isHtmlPage()) {
-                            final DomNode domNode = new HtmlDivision("", (HtmlPage) page, null);
-                            obj.setDomNode(domNode);
+                        if (obj.getClass() == Element.class) {
+                            final Page page = webWindow.getEnclosedPage();
+                            if (page != null && page.isHtmlPage()) {
+                                final DomNode domNode = new HtmlDivision("", (HtmlPage) page, null);
+                                obj.setDomNode(domNode);
+                            }
                         }
                     }
                 }
                 prototypes.put(config.getHostClass(), prototype);
+                prototypesPerJSName_.put(config.getClassName(), prototype);
             }
         }
 
