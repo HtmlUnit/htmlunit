@@ -215,8 +215,9 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented({ FF, IE8 })
+    @Alerts(DEFAULT = "true",
+            FF = "false")
+    @NotYetImplemented(IE8)
     public void _ApplicationCache_ApplicationCache() throws Exception {
         isParentOf("ApplicationCache", "ApplicationCache");
     }
@@ -263,8 +264,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "false",
+            FF = "true")
     public void _CSS2Properties_CSS2Properties() throws Exception {
         isParentOf("CSS2Properties", "CSS2Properties");
     }
@@ -273,8 +274,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "false",
+            FF = "true")
     public void _CSSCharsetRule_CSSCharsetRule() throws Exception {
         isParentOf("CSSCharsetRule", "CSSCharsetRule");
     }
@@ -313,8 +314,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "false",
+            FF = "true")
     public void _CSSPrimitiveValue_CSSPrimitiveValue() throws Exception {
         isParentOf("CSSPrimitiveValue", "CSSPrimitiveValue");
     }
@@ -369,8 +370,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "false",
+            FF = "true")
     public void _CSSValue_CSSValue() throws Exception {
         isParentOf("CSSValue", "CSSValue");
     }
@@ -398,8 +399,9 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented({ FF, IE8 })
+    @Alerts(DEFAULT = "true",
+            FF = "false")
+    @NotYetImplemented(IE8)
     public void _ClientRect_ClientRect() throws Exception {
         isParentOf("ClientRect", "ClientRect");
     }
@@ -574,8 +576,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "false",
+            FF = "true")
     public void _External_External() throws Exception {
         isParentOf("External", "External");
     }
@@ -652,8 +654,9 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented({ FF, IE8 })
+    @Alerts(DEFAULT = "true",
+            FF = "false")
+    @NotYetImplemented(IE8)
     public void _HTMLAllCollection_HTMLAllCollection() throws Exception {
         isParentOf("HTMLAllCollection", "HTMLAllCollection");
     }
@@ -829,9 +832,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE11 = "false")
-    @NotYetImplemented({ FF, IE8 })
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _HTMLDetailsElement_HTMLDetailsElement() throws Exception {
         isParentOf("HTMLDetailsElement", "HTMLDetailsElement");
     }
@@ -840,9 +842,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE11 = "false")
-    @NotYetImplemented({ FF, IE8 })
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _HTMLDialogElement_HTMLDialogElement() throws Exception {
         isParentOf("HTMLDialogElement", "HTMLDialogElement");
     }
@@ -1046,9 +1047,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE11 = "false")
-    @NotYetImplemented({ FF, IE8 })
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _HTMLKeygenElement_HTMLKeygenElement() throws Exception {
         isParentOf("HTMLKeygenElement", "HTMLKeygenElement");
     }
@@ -1111,8 +1111,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "true",
+            FF = "false")
     public void _HTMLMarqueeElement_HTMLMarqueeElement() throws Exception {
         isParentOf("HTMLMarqueeElement", "HTMLMarqueeElement");
     }
@@ -1141,8 +1141,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "false",
+            FF = "true")
     public void _HTMLMenuItemElement_HTMLMenuItemElement() throws Exception {
         isParentOf("HTMLMenuItemElement", "HTMLMenuItemElement");
     }
@@ -1458,8 +1458,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "false",
+            FF = "true")
     public void _HTMLTimeElement_HTMLTimeElement() throws Exception {
         isParentOf("HTMLTimeElement", "HTMLTimeElement");
     }
@@ -1565,7 +1565,9 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts(DEFAULT = "true",
+            FF = "false")
+    @NotYetImplemented(FF)
     public void _Location_Location() throws Exception {
         isParentOf("Location", "Location");
     }
@@ -1634,8 +1636,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "true",
+            FF = "false")
     public void _NamedNodeMap_NamedNodeMap() throws Exception {
         isParentOf("NamedNodeMap", "NamedNodeMap");
     }
@@ -1681,9 +1683,9 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE11 = "false")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    @NotYetImplemented(FF)
     public void _NodeFilter_NodeFilter() throws Exception {
         isParentOf("NodeFilter", "NodeFilter");
     }
@@ -1809,8 +1811,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "false",
+            FF = "true")
     public void _SVGAltGlyphElement_SVGAltGlyphElement() throws Exception {
         isParentOf("SVGAltGlyphElement", "SVGAltGlyphElement");
     }
@@ -1882,9 +1884,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE11 = "false")
-    @NotYetImplemented({ FF, IE8 })
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _SVGCursorElement_SVGCursorElement() throws Exception {
         isParentOf("SVGCursorElement", "SVGCursorElement");
     }
@@ -2680,8 +2681,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "false",
+            FF = "true")
     public void _XPathNSResolver_XPathNSResolver() throws Exception {
         isParentOf("XPathNSResolver", "XPathNSResolver");
     }
@@ -2901,9 +2902,9 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    @NotYetImplemented(FF)
-    public void _CSSRule_CSSCharsetRule() throws Exception {
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+   public void _CSSRule_CSSCharsetRule() throws Exception {
         isParentOf("CSSRule", "CSSCharsetRule");
     }
 
@@ -2970,8 +2971,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "false",
+            FF = "true")
     public void _CSSValue_CSSPrimitiveValue() throws Exception {
         isParentOf("CSSValue", "CSSPrimitiveValue");
     }
@@ -3202,9 +3203,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE11 = "false")
-    @NotYetImplemented({ FF, IE8 })
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _Element_HTMLDetailsElement() throws Exception {
         isParentOf("Element", "HTMLDetailsElement");
     }
@@ -3213,9 +3213,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE11 = "false")
-    @NotYetImplemented({ FF, IE8 })
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _Element_HTMLDialogElement() throws Exception {
         isParentOf("Element", "HTMLDialogElement");
     }
@@ -3410,9 +3409,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE11 = "false")
-    @NotYetImplemented({ FF, IE8 })
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _Element_HTMLKeygenElement() throws Exception {
         isParentOf("Element", "HTMLKeygenElement");
     }
@@ -3475,8 +3473,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "true",
+            FF = "false")
     public void _Element_HTMLMarqueeElement() throws Exception {
         isParentOf("Element", "HTMLMarqueeElement");
     }
@@ -3505,8 +3503,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "false",
+            FF = "true")
     public void _Element_HTMLMenuItemElement() throws Exception {
         isParentOf("Element", "HTMLMenuItemElement");
     }
@@ -3811,8 +3809,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "false",
+            FF = "true")
     public void _Element_HTMLTimeElement() throws Exception {
         isParentOf("Element", "HTMLTimeElement");
     }
@@ -3906,8 +3904,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "false",
+            FF = "true")
     public void _Element_SVGAltGlyphElement() throws Exception {
         isParentOf("Element", "SVGAltGlyphElement");
     }
@@ -3969,9 +3967,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE11 = "false")
-    @NotYetImplemented({ FF, IE8 })
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _Element_SVGCursorElement() throws Exception {
         isParentOf("Element", "SVGCursorElement");
     }
@@ -4795,9 +4792,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE11 = "false")
-    @NotYetImplemented({ FF, IE8 })
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _HTMLElement_HTMLDetailsElement() throws Exception {
         isParentOf("HTMLElement", "HTMLDetailsElement");
     }
@@ -4806,9 +4802,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE11 = "false")
-    @NotYetImplemented({ FF, IE8 })
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _HTMLElement_HTMLDialogElement() throws Exception {
         isParentOf("HTMLElement", "HTMLDialogElement");
     }
@@ -5006,9 +5001,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE11 = "false")
-    @NotYetImplemented({ FF, IE8 })
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _HTMLElement_HTMLKeygenElement() throws Exception {
         isParentOf("HTMLElement", "HTMLKeygenElement");
     }
@@ -5076,8 +5070,9 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented({ FF, IE8 })
+    @Alerts(DEFAULT = "true",
+            FF = "false")
+    @NotYetImplemented(IE8)
     public void _HTMLElement_HTMLMarqueeElement() throws Exception {
         isParentOf("HTMLElement", "HTMLMarqueeElement");
     }
@@ -5106,8 +5101,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "false",
+            FF = "true")
     public void _HTMLElement_HTMLMenuItemElement() throws Exception {
         isParentOf("HTMLElement", "HTMLMenuItemElement");
     }
@@ -5425,8 +5420,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "false",
+            FF = "true")
     public void _HTMLElement_HTMLTimeElement() throws Exception {
         isParentOf("HTMLElement", "HTMLTimeElement");
     }
@@ -5901,9 +5896,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE11 = "false")
-    @NotYetImplemented({ FF, IE8 })
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _Node_HTMLDetailsElement() throws Exception {
         isParentOf("Node", "HTMLDetailsElement");
     }
@@ -5912,9 +5906,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE11 = "false")
-    @NotYetImplemented({ FF, IE8 })
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _Node_HTMLDialogElement() throws Exception {
         isParentOf("Node", "HTMLDialogElement");
     }
@@ -6132,9 +6125,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE11 = "false")
-    @NotYetImplemented({ FF, IE8 })
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _Node_HTMLKeygenElement() throws Exception {
         isParentOf("Node", "HTMLKeygenElement");
     }
@@ -6202,8 +6194,9 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented({ FF, IE8 })
+    @Alerts(DEFAULT = "true",
+            FF = "false")
+    @NotYetImplemented(IE8)
     public void _Node_HTMLMarqueeElement() throws Exception {
         isParentOf("Node", "HTMLMarqueeElement");
     }
@@ -6232,8 +6225,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "false",
+            FF = "true")
     public void _Node_HTMLMenuItemElement() throws Exception {
         isParentOf("Node", "HTMLMenuItemElement");
     }
@@ -6551,8 +6544,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "false",
+            FF = "true")
     public void _Node_HTMLTimeElement() throws Exception {
         isParentOf("Node", "HTMLTimeElement");
     }
@@ -6660,8 +6653,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "false",
+            FF = "true")
     public void _Node_SVGAltGlyphElement() throws Exception {
         isParentOf("Node", "SVGAltGlyphElement");
     }
@@ -6723,9 +6716,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE11 = "false")
-    @NotYetImplemented({ FF, IE8 })
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _Node_SVGCursorElement() throws Exception {
         isParentOf("Node", "SVGCursorElement");
     }
@@ -7375,8 +7367,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "false",
+            FF = "true")
     public void _SVGElement_SVGAltGlyphElement() throws Exception {
         isParentOf("SVGElement", "SVGAltGlyphElement");
     }
@@ -7438,9 +7430,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE11 = "false")
-    @NotYetImplemented({ FF, IE8 })
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _SVGElement_SVGCursorElement() throws Exception {
         isParentOf("SVGElement", "SVGCursorElement");
     }
