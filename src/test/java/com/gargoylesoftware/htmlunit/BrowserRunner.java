@@ -28,9 +28,9 @@ import java.util.List;
 
 import org.junit.runner.Runner;
 import org.junit.runner.manipulation.Filter;
+import org.junit.runner.manipulation.Filterable;
 import org.junit.runner.manipulation.NoTestsRemainException;
 import org.junit.runner.notification.RunNotifier;
-import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.Suite;
 import org.junit.runners.model.Statement;
 
@@ -119,10 +119,11 @@ public class BrowserRunner extends Suite {
     public void filter(final Filter filter) throws NoTestsRemainException {
         boolean atLeastOne = false;
         for (final Runner runner : getChildren()) {
-            final BlockJUnit4ClassRunner junit4Runner = (BlockJUnit4ClassRunner) runner;
             try {
-                junit4Runner.filter(filter);
-                atLeastOne = true;
+                if (runner instanceof Filterable) {
+                    ((Filterable) runner).filter(filter);
+                    atLeastOne = true;
+                }
             }
             catch (final NoTestsRemainException e) {
                 // nothing

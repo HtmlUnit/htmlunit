@@ -25,6 +25,9 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.runner.Runner;
+import org.junit.runner.manipulation.Filter;
+import org.junit.runner.manipulation.Filterable;
+import org.junit.runner.manipulation.NoTestsRemainException;
 import org.junit.runners.Parameterized.Parameters;
 import org.junit.runners.Suite;
 import org.junit.runners.model.FrameworkMethod;
@@ -255,4 +258,26 @@ public class BrowserParameterizedRunner extends Suite {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void filter(final Filter filter) throws NoTestsRemainException {
+        boolean atLeastOne = false;
+        for (final Runner runner : getChildren()) {
+            try {
+                if (runner instanceof Filterable) {
+                    ((Filterable) runner).filter(filter);
+                    atLeastOne = true;
+                }
+            }
+            catch (final NoTestsRemainException e) {
+                // nothing
+            }
+        }
+
+        if (!atLeastOne) {
+            throw new NoTestsRemainException();
+        }
+    }
 }
