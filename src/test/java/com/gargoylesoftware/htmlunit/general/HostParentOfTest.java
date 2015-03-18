@@ -797,6 +797,17 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "true",
+            IE11 = "false")
+    @NotYetImplemented({ CHROME, FF, IE8 })
+    public void _HTMLCollection_HTMLOptionsCollection() throws Exception {
+        isParentOf("HTMLCollection", "HTMLOptionsCollection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "false",
             IE8 = "true")
     public void _HTMLCommentElement_HTMLCommentElement() throws Exception {
@@ -3375,7 +3386,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE8 = "true")
+            IE = "true")
     public void _Element_HTMLIsIndexElement() throws Exception {
         isParentOf("Element", "HTMLIsIndexElement");
     }
