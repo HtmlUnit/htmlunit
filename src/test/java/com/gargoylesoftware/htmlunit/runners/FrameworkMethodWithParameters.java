@@ -87,10 +87,13 @@ public class FrameworkMethodWithParameters extends FrameworkMethod {
     }
 
     /**
-     * Returns the method name to be used.
-     * @return the method name
+     * {@inheritDoc}
      */
-    public String getMethodName() {
-        return '_' + StringUtils.join(parameters_, '_');
+    @Override
+    public String getName() {
+        if (!parameters_.isEmpty()) {
+            return '_' + StringUtils.join(parameters_, '_');
+        }
+        return super.getName();
     }
 }

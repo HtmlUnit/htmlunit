@@ -23,6 +23,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.runner.Description;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.model.FrameworkField;
@@ -100,8 +101,8 @@ public class BrowserVersionClassRunnerWithParameters extends BrowserVersionClass
         }
 
         for (final Iterator<FrameworkMethod> it = methods.iterator(); it.hasNext();) {
-            final FrameworkMethodWithParameters method = (FrameworkMethodWithParameters) it.next();
-            if (method.getAnnotation(Default.class) != null && nativeMethodNames.contains(method.getMethodName())) {
+            final FrameworkMethod method = it.next();
+            if (method.getAnnotation(Default.class) != null && nativeMethodNames.contains(method.getName())) {
                 it.remove();
             }
         }
@@ -134,10 +135,7 @@ public class BrowserVersionClassRunnerWithParameters extends BrowserVersionClass
             browserString = "Real " + browserString;
         }
 
-        String methodName = method.getName();
-        if (method instanceof FrameworkMethodWithParameters && method.getAnnotation(Default.class) != null) {
-            methodName = ((FrameworkMethodWithParameters) method).getMethodName();
-        }
+        final String methodName = method.getName();
 
         if (!maven_) {
             return String.format("%s [%s]", methodName, browserString);
@@ -217,5 +215,17 @@ public class BrowserVersionClassRunnerWithParameters extends BrowserVersionClass
 
     private boolean fieldsAreAnnotated() {
         return !getAnnotatedFieldsByParameter().isEmpty();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected Description describeChild(final FrameworkMethod method) {
+        if (method.getAnnotation(Default.class) != null) {
+            return Description.createTestDescription(getTestClass().getJavaClass(),
+                    testName(method), method.getAnnotations());
+        }
+        return super.describeChild(method);
     }
 }
