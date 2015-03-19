@@ -14,8 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.runners;
 
-import java.lang.reflect.Method;
-
+import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
 
 /**
@@ -28,11 +27,11 @@ class BrowserStatement extends Statement {
 
     private Statement next_;
     private final boolean notYetImplemented_;
-    private final Method method_;
+    private final FrameworkMethod method_;
     private final String browserVersionString_;
     private final int tries_;
 
-    BrowserStatement(final Statement next, final Method method,
+    BrowserStatement(final Statement next, final FrameworkMethod method,
             final boolean notYetImplemented, final int tries, final String browserVersionString) {
         next_ = next;
         method_ = method;
