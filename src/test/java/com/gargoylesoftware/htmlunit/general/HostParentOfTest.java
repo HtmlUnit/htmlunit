@@ -1185,8 +1185,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE8 = "false")
-    @NotYetImplemented(IE8)
+            IE8 = "true")
     public void _HTMLNoShowElement_HTMLNoShowElement() throws Exception {
         isParentOf("HTMLNoShowElement", "HTMLNoShowElement");
     }
@@ -1440,8 +1439,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            IE8 = "false")
-    @NotYetImplemented(IE8)
+            IE8 = "true")
     public void _HTMLTextElement_HTMLTextElement() throws Exception {
         isParentOf("HTMLTextElement", "HTMLTextElement");
     }
@@ -3229,8 +3227,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _Element_HTMLDirectoryElement() throws Exception {
         isParentOf("Element", "HTMLDirectoryElement");
     }
@@ -3623,8 +3621,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _Element_HTMLPreElement() throws Exception {
         isParentOf("Element", "HTMLPreElement");
     }
@@ -4857,8 +4855,9 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    @NotYetImplemented({ CHROME, FF, IE11 })
     public void _HTMLElement_HTMLFormElement() throws Exception {
         isParentOf("HTMLElement", "HTMLFormElement");
     }
@@ -5245,8 +5244,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _HTMLElement_HTMLSelectElement() throws Exception {
         isParentOf("HTMLElement", "HTMLSelectElement");
     }
@@ -6566,8 +6565,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _Node_HTMLVideoElement() throws Exception {
         isParentOf("Node", "HTMLVideoElement");
     }
@@ -7323,8 +7322,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGAElement() throws Exception {
         isParentOf("SVGElement", "SVGAElement");
     }
@@ -7344,8 +7343,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE11 = "false")
-    @NotYetImplemented(IE8)
+            IE = "false")
     public void _SVGElement_SVGAnimateElement() throws Exception {
         isParentOf("SVGElement", "SVGAnimateElement");
     }
@@ -7355,8 +7353,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE11 = "false")
-    @NotYetImplemented(IE8)
+            IE = "false")
     public void _SVGElement_SVGAnimateMotionElement() throws Exception {
         isParentOf("SVGElement", "SVGAnimateMotionElement");
     }
@@ -7366,8 +7363,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE11 = "false")
-    @NotYetImplemented(IE8)
+            IE = "false")
     public void _SVGElement_SVGAnimateTransformElement() throws Exception {
         isParentOf("SVGElement", "SVGAnimateTransformElement");
     }
@@ -7376,8 +7372,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGCircleElement() throws Exception {
         isParentOf("SVGElement", "SVGCircleElement");
     }
@@ -7386,8 +7382,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGClipPathElement() throws Exception {
         isParentOf("SVGElement", "SVGClipPathElement");
     }
@@ -7406,8 +7402,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGDefsElement() throws Exception {
         isParentOf("SVGElement", "SVGDefsElement");
     }
@@ -7416,8 +7412,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGDescElement() throws Exception {
         isParentOf("SVGElement", "SVGDescElement");
     }
@@ -7426,8 +7422,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGEllipseElement() throws Exception {
         isParentOf("SVGElement", "SVGEllipseElement");
     }
@@ -7436,8 +7432,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGFEBlendElement() throws Exception {
         isParentOf("SVGElement", "SVGFEBlendElement");
     }
@@ -7446,8 +7442,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGFEColorMatrixElement() throws Exception {
         isParentOf("SVGElement", "SVGFEColorMatrixElement");
     }
@@ -7456,8 +7452,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGFEComponentTransferElement() throws Exception {
         isParentOf("SVGElement", "SVGFEComponentTransferElement");
     }
@@ -7466,8 +7462,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGFECompositeElement() throws Exception {
         isParentOf("SVGElement", "SVGFECompositeElement");
     }
@@ -7476,8 +7472,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGFEConvolveMatrixElement() throws Exception {
         isParentOf("SVGElement", "SVGFEConvolveMatrixElement");
     }
@@ -7486,8 +7482,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGFEDiffuseLightingElement() throws Exception {
         isParentOf("SVGElement", "SVGFEDiffuseLightingElement");
     }
@@ -7496,8 +7492,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGFEDisplacementMapElement() throws Exception {
         isParentOf("SVGElement", "SVGFEDisplacementMapElement");
     }
@@ -7506,8 +7502,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGFEDistantLightElement() throws Exception {
         isParentOf("SVGElement", "SVGFEDistantLightElement");
     }
@@ -7516,8 +7512,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGFEFloodElement() throws Exception {
         isParentOf("SVGElement", "SVGFEFloodElement");
     }
@@ -7526,8 +7522,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGFEFuncAElement() throws Exception {
         isParentOf("SVGElement", "SVGFEFuncAElement");
     }
@@ -7536,8 +7532,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGFEFuncBElement() throws Exception {
         isParentOf("SVGElement", "SVGFEFuncBElement");
     }
@@ -7546,8 +7542,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGFEFuncGElement() throws Exception {
         isParentOf("SVGElement", "SVGFEFuncGElement");
     }
@@ -7556,8 +7552,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGFEFuncRElement() throws Exception {
         isParentOf("SVGElement", "SVGFEFuncRElement");
     }
@@ -7566,8 +7562,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGFEGaussianBlurElement() throws Exception {
         isParentOf("SVGElement", "SVGFEGaussianBlurElement");
     }
@@ -7576,8 +7572,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGFEImageElement() throws Exception {
         isParentOf("SVGElement", "SVGFEImageElement");
     }
@@ -7586,8 +7582,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGFEMergeElement() throws Exception {
         isParentOf("SVGElement", "SVGFEMergeElement");
     }
@@ -7596,8 +7592,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGFEMergeNodeElement() throws Exception {
         isParentOf("SVGElement", "SVGFEMergeNodeElement");
     }
@@ -7606,8 +7602,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGFEMorphologyElement() throws Exception {
         isParentOf("SVGElement", "SVGFEMorphologyElement");
     }
@@ -7616,8 +7612,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGFEOffsetElement() throws Exception {
         isParentOf("SVGElement", "SVGFEOffsetElement");
     }
@@ -7626,8 +7622,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGFEPointLightElement() throws Exception {
         isParentOf("SVGElement", "SVGFEPointLightElement");
     }
@@ -7636,8 +7632,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGFESpecularLightingElement() throws Exception {
         isParentOf("SVGElement", "SVGFESpecularLightingElement");
     }
@@ -7646,8 +7642,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGFESpotLightElement() throws Exception {
         isParentOf("SVGElement", "SVGFESpotLightElement");
     }
@@ -7656,8 +7652,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGFETileElement() throws Exception {
         isParentOf("SVGElement", "SVGFETileElement");
     }
@@ -7666,8 +7662,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGFETurbulenceElement() throws Exception {
         isParentOf("SVGElement", "SVGFETurbulenceElement");
     }
@@ -7676,8 +7672,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGFilterElement() throws Exception {
         isParentOf("SVGElement", "SVGFilterElement");
     }
@@ -7687,8 +7683,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE11 = "false")
-    @NotYetImplemented(IE8)
+            IE = "false")
     public void _SVGElement_SVGForeignObjectElement() throws Exception {
         isParentOf("SVGElement", "SVGForeignObjectElement");
     }
@@ -7697,8 +7692,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGGElement() throws Exception {
         isParentOf("SVGElement", "SVGGElement");
     }
@@ -7707,8 +7702,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGImageElement() throws Exception {
         isParentOf("SVGElement", "SVGImageElement");
     }
@@ -7717,8 +7712,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGLineElement() throws Exception {
         isParentOf("SVGElement", "SVGLineElement");
     }
@@ -7727,8 +7722,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGLinearGradientElement() throws Exception {
         isParentOf("SVGElement", "SVGLinearGradientElement");
     }
@@ -7737,8 +7732,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGMarkerElement() throws Exception {
         isParentOf("SVGElement", "SVGMarkerElement");
     }
@@ -7747,8 +7742,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGMaskElement() throws Exception {
         isParentOf("SVGElement", "SVGMaskElement");
     }
@@ -7757,8 +7752,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGMetadataElement() throws Exception {
         isParentOf("SVGElement", "SVGMetadataElement");
     }
@@ -7768,8 +7763,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE11 = "false")
-    @NotYetImplemented(IE8)
+            IE = "false")
     public void _SVGElement_SVGMPathElement() throws Exception {
         isParentOf("SVGElement", "SVGMPathElement");
     }
@@ -7778,8 +7772,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGPathElement() throws Exception {
         isParentOf("SVGElement", "SVGPathElement");
     }
@@ -7788,8 +7782,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGPatternElement() throws Exception {
         isParentOf("SVGElement", "SVGPatternElement");
     }
@@ -7798,8 +7792,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGPolygonElement() throws Exception {
         isParentOf("SVGElement", "SVGPolygonElement");
     }
@@ -7808,8 +7802,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGPolylineElement() throws Exception {
         isParentOf("SVGElement", "SVGPolylineElement");
     }
@@ -7818,8 +7812,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGRadialGradientElement() throws Exception {
         isParentOf("SVGElement", "SVGRadialGradientElement");
     }
@@ -7828,8 +7822,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGRectElement() throws Exception {
         isParentOf("SVGElement", "SVGRectElement");
     }
@@ -7838,8 +7832,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGSVGElement() throws Exception {
         isParentOf("SVGElement", "SVGSVGElement");
     }
@@ -7848,8 +7842,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGScriptElement() throws Exception {
         isParentOf("SVGElement", "SVGScriptElement");
     }
@@ -7859,8 +7853,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE11 = "false")
-    @NotYetImplemented(IE8)
+            IE = "false")
     public void _SVGElement_SVGSetElement() throws Exception {
         isParentOf("SVGElement", "SVGSetElement");
     }
@@ -7869,8 +7862,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGStopElement() throws Exception {
         isParentOf("SVGElement", "SVGStopElement");
     }
@@ -7879,8 +7872,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGStyleElement() throws Exception {
         isParentOf("SVGElement", "SVGStyleElement");
     }
@@ -7889,8 +7882,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGSwitchElement() throws Exception {
         isParentOf("SVGElement", "SVGSwitchElement");
     }
@@ -7899,8 +7892,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGSymbolElement() throws Exception {
         isParentOf("SVGElement", "SVGSymbolElement");
     }
@@ -7909,8 +7902,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGTSpanElement() throws Exception {
         isParentOf("SVGElement", "SVGTSpanElement");
     }
@@ -7919,8 +7912,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGTextElement() throws Exception {
         isParentOf("SVGElement", "SVGTextElement");
     }
@@ -7929,8 +7922,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGTextPathElement() throws Exception {
         isParentOf("SVGElement", "SVGTextPathElement");
     }
@@ -7939,8 +7932,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGTitleElement() throws Exception {
         isParentOf("SVGElement", "SVGTitleElement");
     }
@@ -7949,8 +7942,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGUseElement() throws Exception {
         isParentOf("SVGElement", "SVGUseElement");
     }
@@ -7959,8 +7952,8 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    @NotYetImplemented(IE8)
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _SVGElement_SVGViewElement() throws Exception {
         isParentOf("SVGElement", "SVGViewElement");
     }
