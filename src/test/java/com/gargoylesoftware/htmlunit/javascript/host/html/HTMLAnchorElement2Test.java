@@ -587,17 +587,22 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "http:", "mailto:", "tel:", "foo:" })
-    public void protocol() throws Exception {
+    @Alerts({ "http:||||||/", "mailto:||||||", "tel:||||||", "foo:||||||", "p:||||||", "p:||||||" })
+    public void propertiesNonStandardHref() throws Exception {
         final String html = "<html><body>\n"
-            + "<a href='foo.html'>foo.html</a>\n"
+            + "<a href='http://'>http://</a>\n"
             + "<a href='mailto:foo@foo.com'>foo@foo.com</a>\n"
             + "<a href='tel:123456'>tel:123456</a>\n"
             + "<a href='foo:blabla'>foo:blabla</a>\n"
+            + "<a href='p://'>p://</a>\n"
+            + "<a href='p:/'>p:/</a>\n"
             + "<script>\n"
             + "var links = document.getElementsByTagName('a');\n"
             + "for (var i=0; i<links.length; ++i) {\n"
-            + "    alert(links[i].protocol);\n"
+            + "    var link = links[i];\n"
+            + "    var props = [link.protocol, link.host, link.hostname, \n"
+            + "           link.search, link.hash, link.port, link.pathname];\n"
+            + "    alert(props.join('|'));\n"
             + "}\n"
             + "</script></body></html>";
 

@@ -195,11 +195,16 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter
     public String getSearch() throws Exception {
-        final String query = getUrl().getQuery();
-        if (query == null) {
+        try {
+            final String query = getUrl().getQuery();
+            if (query == null) {
+                return "";
+            }
+            return "?" + query;
+        }
+        catch (final MalformedURLException e) {
             return "";
         }
-        return "?" + query;
     }
 
     /**
@@ -233,11 +238,16 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter
     public String getHash() throws Exception {
-        final String hash = getUrl().getRef();
-        if (hash == null) {
+        try {
+            final String hash = getUrl().getRef();
+            if (hash == null) {
+                return "";
+            }
+            return "#" + hash;
+        }
+        catch (final MalformedURLException e) {
             return "";
         }
-        return "#" + hash;
     }
 
     /**
@@ -259,14 +269,19 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter
     public String getHost() throws Exception {
-        final URL url = getUrl();
-        final int port = url.getPort();
-        final String host = url.getHost();
+        try {
+            final URL url = getUrl();
+            final int port = url.getPort();
+            final String host = url.getHost();
 
-        if (port == -1) {
-            return host;
+            if (port == -1) {
+                return host;
+            }
+            return host + ":" + port;
         }
-        return host + ":" + port;
+        catch (final MalformedURLException e) {
+            return "";
+        }
     }
 
     /**
@@ -300,7 +315,12 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter
     public String getHostname() throws Exception {
-        return getUrl().getHost();
+        try {
+            return getUrl().getHost();
+        }
+        catch (final MalformedURLException e) {
+            return "";
+        }
     }
 
     /**
@@ -322,7 +342,20 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter
     public String getPathname() throws Exception {
-        return getUrl().getPath();
+        try {
+            final URL url = getUrl();
+            if (url.getProtocol().startsWith("http")) {
+                return url.getPath();
+            }
+            return "";
+        }
+        catch (final MalformedURLException e) {
+            final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
+            if (anchor.getHrefAttribute().startsWith("http")) {
+                return "/";
+            }
+            return "";
+        }
     }
 
     /**
@@ -344,11 +377,16 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter
     public String getPort() throws Exception {
-        final int port = getUrl().getPort();
-        if (port == -1) {
+        try {
+            final int port = getUrl().getPort();
+            if (port == -1) {
+                return "";
+            }
+            return Integer.toString(port);
+        }
+        catch (final MalformedURLException e) {
             return "";
         }
-        return Integer.toString(port);
     }
 
     /**
@@ -370,7 +408,14 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter
     public String getProtocol() throws Exception {
-        return getUrl().getProtocol() + ":";
+        try {
+            return getUrl().getProtocol() + ":";
+        }
+        catch (final MalformedURLException e) {
+            // fallback
+            final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
+            return StringUtils.substringBefore(anchor.getHrefAttribute(), "/");
+        }
     }
 
     /**
