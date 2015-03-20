@@ -653,7 +653,7 @@ public enum BrowserVersionFeatures {
 
     /**
      * Javascript property anchors includes all anchors with a name or an id property.
-     * If not set name property is required
+     * If not set name property is required.
      */
     @BrowserFeature(@WebBrowser(IE))
     JS_ANCHORS_REQUIRES_NAME_OR_ID,
