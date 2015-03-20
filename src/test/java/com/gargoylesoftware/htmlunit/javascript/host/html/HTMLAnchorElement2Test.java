@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.util.Arrays;
@@ -587,24 +588,34 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "http:||||||/", "mailto:||||||", "tel:||||||", "foo:||||||", "p:||||||", "p:||||||" })
+    @Alerts(DEFAULT = { "http:||||||/", "mailto:||||||", "tel:||||||", "foo:||||||", "p:||||||", "p:||||||" },
+            IE8 = { "http:||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
+                        "foo:||||||blabla", "file:||||||p://", "file:||||||p:/" },
+            IE11 = { "http:||||||/", "mailto:||||||foo@foo.com", "tel:||||||123456",
+                        "foo:||||||blabla", "file:||||||/p://", "file:||||||/p:/" },
+            CHROME = { ":||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
+                        "foo:||||||blabla", "file:||||||/P://", "file:||||||/P:/" })
+    @NotYetImplemented({ CHROME, IE })
     public void propertiesNonStandardHref() throws Exception {
-        final String html = "<html><body>\n"
-            + "<a href='http://'>http://</a>\n"
-            + "<a href='mailto:foo@foo.com'>foo@foo.com</a>\n"
-            + "<a href='tel:123456'>tel:123456</a>\n"
-            + "<a href='foo:blabla'>foo:blabla</a>\n"
-            + "<a href='p://'>p://</a>\n"
-            + "<a href='p:/'>p:/</a>\n"
-            + "<script>\n"
-            + "var links = document.getElementsByTagName('a');\n"
-            + "for (var i=0; i<links.length; ++i) {\n"
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <a href='http://'>http://</a>\n"
+            + "  <a href='mailto:foo@foo.com'>foo@foo.com</a>\n"
+            + "  <a href='tel:123456'>tel:123456</a>\n"
+            + "  <a href='foo:blabla'>foo:blabla</a>\n"
+            + "  <a href='p://'>p://</a>\n"
+            + "  <a href='p:/'>p:/</a>\n"
+
+            + "  <script>\n"
+            + "  var links = document.getElementsByTagName('a');\n"
+            + "  for (var i=0; i<links.length; ++i) {\n"
             + "    var link = links[i];\n"
             + "    var props = [link.protocol, link.host, link.hostname, \n"
             + "           link.search, link.hash, link.port, link.pathname];\n"
             + "    alert(props.join('|'));\n"
-            + "}\n"
-            + "</script></body></html>";
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
 
         loadPageWithAlerts2(html);
     }
