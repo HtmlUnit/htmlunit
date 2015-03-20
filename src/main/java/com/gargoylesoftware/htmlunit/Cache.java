@@ -204,7 +204,7 @@ public class Cache implements Serializable {
     }
 
     /**
-     * Returns the cached resonse corresponding to the specified request. If there is
+     * Returns the cached response corresponding to the specified request. If there is
      * no corresponding cached object, this method returns <tt>null</tt>.
      *
      * @param request the request whose corresponding response is sought
