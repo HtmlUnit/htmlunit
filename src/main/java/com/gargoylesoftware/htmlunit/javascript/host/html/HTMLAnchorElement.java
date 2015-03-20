@@ -14,12 +14,19 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_NONE_FOR_BROKEN_URL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_NONE_FOR_NONE_HTTP_URL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_PREFIX_WIN_DRIVES_URL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_FOR_BROKEN_URL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -344,17 +351,32 @@ public class HTMLAnchorElement extends HTMLElement {
     public String getPathname() throws Exception {
         try {
             final URL url = getUrl();
-            if (url.getProtocol().startsWith("http")) {
-                return url.getPath();
+            if (!url.getProtocol().startsWith("http")
+                    && getBrowserVersion().hasFeature(JS_ANCHOR_PATHNAME_NONE_FOR_NONE_HTTP_URL)) {
+                return "";
             }
-            return "";
+            if (getBrowserVersion().hasFeature(JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL)) {
+                final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
+                String href = anchor.getHrefAttribute();
+                if (href.length() > 1 && Character.isLetter(href.charAt(0)) && ':' == href.charAt(1)) {
+                    if (getBrowserVersion().hasFeature(JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS)) {
+                        href = StringUtils.capitalize(href);
+                    }
+                    if (getBrowserVersion().hasFeature(JS_ANCHOR_PATHNAME_PREFIX_WIN_DRIVES_URL)) {
+                        href = "/" + href;
+                    }
+                    return href;
+                }
+            }
+            return url.getPath();
         }
         catch (final MalformedURLException e) {
             final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
-            if (anchor.getHrefAttribute().startsWith("http")) {
-                return "/";
+            if (anchor.getHrefAttribute().startsWith("http")
+                    && getBrowserVersion().hasFeature(JS_ANCHOR_PATHNAME_NONE_FOR_BROKEN_URL)) {
+                return "";
             }
-            return "";
+            return "/";
         }
     }
 
@@ -409,11 +431,22 @@ public class HTMLAnchorElement extends HTMLElement {
     @JsxGetter
     public String getProtocol() throws Exception {
         try {
+            if (getBrowserVersion().hasFeature(JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL)) {
+                final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
+                final String href = anchor.getHrefAttribute().toLowerCase(Locale.ROOT);
+                if (href.length() > 1 && Character.isLetter(href.charAt(0)) && ':' == href.charAt(1)) {
+                    return "file:";
+                }
+            }
+
             return getUrl().getProtocol() + ":";
         }
         catch (final MalformedURLException e) {
-            // fallback
             final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
+            if (anchor.getHrefAttribute().startsWith("http")
+                    && getBrowserVersion().hasFeature(JS_ANCHOR_PROTOCOL_COLON_FOR_BROKEN_URL)) {
+                return ":";
+            }
             return StringUtils.substringBefore(anchor.getHrefAttribute(), "/");
         }
     }

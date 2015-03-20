@@ -658,6 +658,30 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_ANCHORS_REQUIRES_NAME_OR_ID,
 
+    /** The anchor pathname detects url's starting with one letter as file url's. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(IE) })
+    JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL,
+
+    /** The anchor pathname property returns nothing for broken http(s) url's. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8) })
+    JS_ANCHOR_PATHNAME_NONE_FOR_BROKEN_URL,
+
+    /** The anchor pathname property returns nothing for none http(s) url's. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_ANCHOR_PATHNAME_NONE_FOR_NONE_HTTP_URL,
+
+    /** The anchor pathname prefixes file url's with '/'. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    JS_ANCHOR_PATHNAME_PREFIX_WIN_DRIVES_URL,
+
+    /** The anchor protocol property returns ':' for broken http(s) url's. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_ANCHOR_PROTOCOL_COLON_FOR_BROKEN_URL,
+
+    /** The anchor protocol property converts drive letters to uppercase. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS,
+
     /** Indicates that the appendChild call create a DocumentFragment to be
      * the parentNode's parentNode if this was null. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))

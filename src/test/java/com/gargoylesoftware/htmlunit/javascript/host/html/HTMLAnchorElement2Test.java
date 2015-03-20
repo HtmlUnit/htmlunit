@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.util.Arrays;
@@ -588,23 +587,25 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "http:||||||/", "mailto:||||||", "tel:||||||", "foo:||||||", "p:||||||", "p:||||||" },
-            IE8 = { "http:||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
-                        "foo:||||||blabla", "file:||||||p://", "file:||||||p:/" },
-            IE11 = { "http:||||||/", "mailto:||||||foo@foo.com", "tel:||||||123456",
-                        "foo:||||||blabla", "file:||||||/p://", "file:||||||/p:/" },
-            CHROME = { ":||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
-                        "foo:||||||blabla", "file:||||||/P://", "file:||||||/P:/" })
-    @NotYetImplemented({ CHROME, IE })
+    @Alerts(DEFAULT = { "http:||||||/", "https:||||||/", "mailto:||||||", "tel:||||||",
+                        "foo:||||||", "p:||||||", "p:||||||", "p:||||||" },
+            IE8 = { "http:||||||", "https:||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
+                        "foo:||||||blabla", "file:||||||p://", "file:||||||p:/", "file:||||||p:/TeMp" },
+            IE11 = { "http:||||||/", "https:||||||/", "mailto:||||||foo@foo.com", "tel:||||||123456",
+                        "foo:||||||blabla", "file:||||||/p://", "file:||||||/p:/", "file:||||||/p:/TeMp" },
+            CHROME = { ":||||||", ":||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
+                        "foo:||||||blabla", "file:||||||/P://", "file:||||||/P:/", "file:||||||/P:/TeMp" })
     public void propertiesNonStandardHref() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <a href='http://'>http://</a>\n"
+            + "  <a href='https://'>https://</a>\n"
             + "  <a href='mailto:foo@foo.com'>foo@foo.com</a>\n"
             + "  <a href='tel:123456'>tel:123456</a>\n"
             + "  <a href='foo:blabla'>foo:blabla</a>\n"
             + "  <a href='p://'>p://</a>\n"
             + "  <a href='p:/'>p:/</a>\n"
+            + "  <a href='p:/TeMp'>p:/TeMp</a>\n"
 
             + "  <script>\n"
             + "  var links = document.getElementsByTagName('a');\n"
