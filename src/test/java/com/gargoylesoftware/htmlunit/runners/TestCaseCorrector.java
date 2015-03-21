@@ -27,13 +27,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.ComparisonFailure;
 import org.junit.runners.model.FrameworkMethod;
 
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CodeStyleTest;
 
 /**
  * This is meant to automatically correct the test case to put either the real browser expectations,
- * or the {@link NotYetImplemented} annotation for HtmlUnit.
+ * or the {@link com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented} annotation for HtmlUnit.
  *
  * <p>For the time being, {@link #correct} needs to be manually called from {@link BrowserStatement#evaluate()},
  * as the first statement inside the {@code catch}, you could use
@@ -44,7 +43,7 @@ import com.gargoylesoftware.htmlunit.CodeStyleTest;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-class TestCaseCorrector {
+final class TestCaseCorrector {
 
     private TestCaseCorrector() {
     }
@@ -93,12 +92,12 @@ class TestCaseCorrector {
 
     private static int addExpectation(final List<String> lines, int i,
             final String browserString, final ComparisonFailure comparisonFailure) {
-        for (; !lines.get(i).startsWith("    @Alerts"); i--) {
-            ;
+        while (!lines.get(i).startsWith("    @Alerts")) {
+            i--;
         }
         final List<String> alerts = CodeStyleTest.alertsToList(lines, i);
         for (final Iterator<String> it = alerts.iterator(); it.hasNext();) {
-            if (it.next().trim().startsWith(browserString + " = ")) {
+            if (it.next().startsWith(browserString + " = ")) {
                 it.remove();
             }
         }
@@ -133,7 +132,7 @@ class TestCaseCorrector {
     }
 
     private static void removeNotYetImplemented(final List<String> lines,
-            int i, final String browserString) {
+            final int i, final String browserString) {
         final String previous = lines.get(i - 1);
         if (previous.contains("@NotYetImplemented")) {
             if (previous.indexOf('(') != -1) {
@@ -152,7 +151,7 @@ class TestCaseCorrector {
                     lines.set(i - 1, "    @NotYetImplemented(" + browserSet.iterator().next() + ")");
                 }
                 else if (browserSet.size() > 1) {
-                    lines.set(i - 1, "    @NotYetImplemented({ " + StringUtils.join(browsers, ", " ) + " })");
+                    lines.set(i - 1, "    @NotYetImplemented({ " + StringUtils.join(browsers, ", ") + " })");
                 }
                 else {
                     lines.remove(i - 1);
@@ -196,7 +195,7 @@ class TestCaseCorrector {
         }
     }
 
-    private static void addNotYetImplemented(final List<String> lines, int i, final String browserString) {
+    private static void addNotYetImplemented(final List<String> lines, final int i, final String browserString) {
         final String previous = lines.get(i - 1);
         if (previous.contains("@NotYetImplemented")) {
             if (previous.indexOf('(') != -1 && !previous.contains(browserString)) {

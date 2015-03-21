@@ -590,7 +590,7 @@ public class CodeStyleTest {
     private void alerts(final List<String> lines, final String relativePath) {
         for (int i = 0; i < lines.size(); i++) {
             if (lines.get(i).startsWith("    @Alerts(")) {
-                final List<String> alerts = alertsToList(lines, i, false);
+                final List<String> alerts = alertsToList(lines, i, true);
                 alertVerify(alerts, relativePath, i);
             }
         }
@@ -598,16 +598,17 @@ public class CodeStyleTest {
 
     /**
      * Returns array of String of the alerts which are in the specified index.
-     * 
+     *
      * @param lines the list of strings
      * @param alertsIndex the index in which the \@Alerts is defined
-     * @return array of alert strings 
+     * @return array of alert strings
      */
-    public static List<String> alertsToList(final List<String> lines, int alertsIndex) {
-        return alertsToList(lines, alertsIndex, true);
+    public static List<String> alertsToList(final List<String> lines, final int alertsIndex) {
+        return alertsToList(lines, alertsIndex, false);
     }
 
-    private static List<String> alertsToList(final List<String> lines, int alertsIndex, boolean removeCommas) {
+    private static List<String> alertsToList(final List<String> lines, final int alertsIndex,
+            final boolean preserveCommas) {
         if (!lines.get(alertsIndex).startsWith("    @Alerts(")) {
             throw new IllegalArgumentException("No @Alerts found in " + (alertsIndex + 1));
         }
@@ -629,11 +630,11 @@ public class CodeStyleTest {
             }
         }
         final List<String> list = alertsToList(alerts.toString());
-        if (removeCommas) {
+        if (!preserveCommas) {
             for (int i = 0; i < list.size(); i++) {
                 String value = list.get(i);
                 if (value.startsWith(",")) {
-                    value = value.substring(2);
+                    value = value.substring(1).trim();
                 }
                 list.set(i, value);
             }
