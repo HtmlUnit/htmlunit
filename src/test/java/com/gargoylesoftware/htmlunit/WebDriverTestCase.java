@@ -174,8 +174,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
             catch (final IOException e) {
                 throw new RuntimeException(e);
             }
-            // cache driver instances for real browsers but not for HtmlUnit
-            if (!(driver instanceof HtmlUnitDriver)) {
+
+            if (isWebClientCached() || !(driver instanceof HtmlUnitDriver)) {
                 WEB_DRIVERS_.put(browserVersion, driver);
             }
         }
@@ -776,18 +776,21 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     /**
      * Release resources but DON'T close the browser if we are running with a real browser.
-     * Note that HtmlUnitDriver instances are not cached.
+     * Note that HtmlUnitDriver is not cached by default, but that can be configured by {@link #isWebClientCached()}.
      */
     @After
     @Override
     public void releaseResources() {
         super.releaseResources();
-        if (webClient_ != null) {
-            webClient_.close();
-            webClient_.getCookieManager().clearCookies();
+
+        if (!isWebClientCached()) {
+            if (webClient_ != null) {
+                webClient_.close();
+                webClient_.getCookieManager().clearCookies();
+            }
+            webClient_ = null;
+            assertEquals(0,  getJavaScriptThreads().size());
         }
-        webClient_ = null;
-        assertEquals(0,  getJavaScriptThreads().size());
 
         if (useRealBrowser_) {
             final WebDriver driver = getWebDriver();
@@ -823,6 +826,17 @@ public abstract class WebDriverTestCase extends WebTestCase {
         final Field field = HtmlUnitDriver.class.getDeclaredField("currentWindow");
         field.setAccessible(true);
         return (WebWindow) field.get(driver);
+    }
+
+    /**
+     * Whether {@link WebClient} is cached or not, defaults to {@code false}.
+     *
+     * <p>This is needed to be {@code true} for huge test class, as we could run out of sockets.
+     *
+     * @return whether {@link WebClient} is cached or not
+     */
+    protected boolean isWebClientCached() {
+        return false;
     }
 }
 
