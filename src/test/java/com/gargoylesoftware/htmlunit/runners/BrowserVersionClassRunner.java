@@ -311,8 +311,8 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
             tries = getTries(method);
         }
         setAlerts(testCase, method.getMethod());
-        statement = new BrowserStatement(statement, method,
-                notYetImplemented, tries, browserVersion_.getNickname());
+        statement = new BrowserStatement(statement, method, realBrowser_, 
+                notYetImplemented, tries, browserVersion_);
         return statement;
     }
 

@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.runners;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+
 /**
  * The Browser Statement.
  *
@@ -28,16 +30,19 @@ class BrowserStatement extends Statement {
     private Statement next_;
     private final boolean notYetImplemented_;
     private final FrameworkMethod method_;
-    private final String browserVersionString_;
+    @SuppressWarnings("unused")
+    private final boolean realBrowser_;
+    private final BrowserVersion browserVersion_;
     private final int tries_;
 
-    BrowserStatement(final Statement next, final FrameworkMethod method,
-            final boolean notYetImplemented, final int tries, final String browserVersionString) {
+    BrowserStatement(final Statement next, final FrameworkMethod method, final boolean realBrowser,
+            final boolean notYetImplemented, final int tries, final BrowserVersion browserVersion) {
         next_ = next;
         method_ = method;
+        realBrowser_ = realBrowser;
         notYetImplemented_ = notYetImplemented;
         tries_ = tries;
-        browserVersionString_ = browserVersionString;
+        browserVersion_ = browserVersion;
     }
 
     @Override
@@ -51,9 +56,11 @@ class BrowserStatement extends Statement {
                 if (notYetImplemented_) {
                     throw t;
                 }
-                System.out.println("Failed test "
-                        + method_.getDeclaringClass().getName() + '.' + method_.getName()
-                        + (tries_ != 1 ? " #" + (i + 1) : ""));
+                if (BrowserVersionClassRunner.maven_) {
+                    System.out.println("Failed test "
+                            + method_.getDeclaringClass().getName() + '.' + method_.getName()
+                            + (tries_ != 1 ? " #" + (i + 1) : ""));
+                }
                 if (i == tries_ - 1) {
                     throw t;
                 }
@@ -67,12 +74,12 @@ class BrowserStatement extends Statement {
             next_.evaluate();
             if (notYetImplemented_) {
                 final String errorMessage;
-                if (browserVersionString_ == null) {
+                if (browserVersion_.getNickname() == null) {
                     errorMessage = method_.getName() + " is marked as not implemented but already works";
                 }
                 else {
                     errorMessage = method_.getName() + " is marked as not implemented with "
-                        + browserVersionString_ + " but already works";
+                        + browserVersion_.getNickname() + " but already works";
                 }
                 toBeThrown = new Exception(errorMessage);
             }

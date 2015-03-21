@@ -590,33 +590,47 @@ public class CodeStyleTest {
     private void alerts(final List<String> lines, final String relativePath) {
         for (int i = 0; i < lines.size(); i++) {
             if (lines.get(i).startsWith("    @Alerts(")) {
-                final StringBuilder alerts = new StringBuilder();
-                for (int x = i;; x++) {
-                    final String line = lines.get(x);
-                    if (alerts.length() != 0) {
-                        alerts.append('\n');
-                    }
-                    if (line.startsWith("    @Alerts(")) {
-                        alerts.append(line.substring("    @Alerts(".length()));
-                    }
-                    else {
-                        alerts.append(line);
-                    }
-                    if (line.endsWith(")")) {
-                        alerts.deleteCharAt(alerts.length() - 1);
-                        break;
-                    }
-                }
-                alertVerify(alerts.toString(), relativePath, i);
+                final List<String> alerts = alertsToList(lines, i);
+                alertVerify(alerts, relativePath, i);
             }
         }
     }
 
     /**
+     * Returns array of String of the alerts which are in the specified index.
+     * 
+     * @param lines the list of strings
+     * @param alertsIndex the index in which the \@Alerts is defined
+     * @return array of alert strings 
+     */
+    public static List<String> alertsToList(final List<String> lines, int alertsIndex) {
+        if (!lines.get(alertsIndex).startsWith("    @Alerts(")) {
+            throw new IllegalArgumentException("No @Alerts found in " + (alertsIndex + 1));
+        }
+        final StringBuilder alerts = new StringBuilder();
+        for (int i = alertsIndex;; i++) {
+            final String line = lines.get(i);
+            if (alerts.length() != 0) {
+                alerts.append('\n');
+            }
+            if (line.startsWith("    @Alerts(")) {
+                alerts.append(line.substring("    @Alerts(".length()));
+            }
+            else {
+                alerts.append(line);
+            }
+            if (line.endsWith(")")) {
+                alerts.deleteCharAt(alerts.length() - 1);
+                break;
+            }
+        }
+        return alertsToList(alerts.toString());
+    }
+
+    /**
      * Verifies a specific \@Alerts definition.
      */
-    private void alertVerify(final String string, final String relativePath, final int lineIndex) {
-        final List<String> alerts = alertsToList(string);
+    private void alertVerify(final List<String> alerts, final String relativePath, final int lineIndex) {
         if (alerts.size() == 1) {
             if (alerts.get(0).contains("DEFAULT")) {
                 addFailure("No need for \"DEFAULT\" in "
@@ -648,7 +662,7 @@ public class CodeStyleTest {
     /**
      * Converts the given alerts definition to an array of expressions.
      */
-    private List<String> alertsToList(final String string) {
+    private static List<String> alertsToList(final String string) {
         final List<String> list = new ArrayList<>();
         if ("\"\"".equals(string)) {
             list.add(string);
