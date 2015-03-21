@@ -98,11 +98,11 @@ class TestCaseCorrector {
         }
         final List<String> alerts = CodeStyleTest.alertsToList(lines, i);
         for (final Iterator<String> it = alerts.iterator(); it.hasNext();) {
-            if (it.next().startsWith(browserString + " = ")) {
+            if (it.next().trim().startsWith(browserString + " = ")) {
                 it.remove();
             }
         }
-        alerts.add(browserString + " = " + getFailureAsExpected(comparisonFailure));
+        alerts.add(browserString + " = " + getActualString(comparisonFailure));
         lines.remove(i);
         while (lines.get(i).startsWith("        ")) {
             lines.remove(i);
@@ -126,8 +126,10 @@ class TestCaseCorrector {
         return i;
     }
 
-    private static String getFailureAsExpected(final ComparisonFailure failure) {
-        return "\"" + failure.getExpected() + "\"";
+    private static String getActualString(final ComparisonFailure failure) {
+        String actual = failure.getActual();
+        actual = actual.substring(1, actual.length() - 1);
+        return "\"" + actual + "\"";
     }
 
     private static void removeNotYetImplemented(final List<String> lines,
@@ -229,7 +231,7 @@ class TestCaseCorrector {
         lines.add(i++, "    @Test");
         // value should come from the \@Default method
         lines.add(i++, "    @Alerts(DEFAULT = \"1\",");
-        lines.add(i++, "            " + browserString + " = " + getFailureAsExpected(comparisonFailure) + ")");
+        lines.add(i++, "            " + browserString + " = " + getActualString(comparisonFailure) + ")");
         lines.add(i++, "    public void _" + parent + "_" + child + "() throws Exception {");
         lines.add(i++, "        test(\"" + parent + "\", \"" + child + "\");");
         lines.add(i++, "    }");

@@ -590,7 +590,7 @@ public class CodeStyleTest {
     private void alerts(final List<String> lines, final String relativePath) {
         for (int i = 0; i < lines.size(); i++) {
             if (lines.get(i).startsWith("    @Alerts(")) {
-                final List<String> alerts = alertsToList(lines, i);
+                final List<String> alerts = alertsToList(lines, i, false);
                 alertVerify(alerts, relativePath, i);
             }
         }
@@ -604,6 +604,10 @@ public class CodeStyleTest {
      * @return array of alert strings 
      */
     public static List<String> alertsToList(final List<String> lines, int alertsIndex) {
+        return alertsToList(lines, alertsIndex, true);
+    }
+
+    private static List<String> alertsToList(final List<String> lines, int alertsIndex, boolean removeCommas) {
         if (!lines.get(alertsIndex).startsWith("    @Alerts(")) {
             throw new IllegalArgumentException("No @Alerts found in " + (alertsIndex + 1));
         }
@@ -624,7 +628,17 @@ public class CodeStyleTest {
                 break;
             }
         }
-        return alertsToList(alerts.toString());
+        final List<String> list = alertsToList(alerts.toString());
+        if (removeCommas) {
+            for (int i = 0; i < list.size(); i++) {
+                String value = list.get(i);
+                if (value.startsWith(",")) {
+                    value = value.substring(2);
+                }
+                list.set(i, value);
+            }
+        }
+        return list;
     }
 
     /**
