@@ -767,11 +767,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     /**
      * Reads the number of JS threads remaining from unit tests run before.
-     * This should be always 0.
+     * This should be always 0, if {@link #isWebClientCached()} is {@code false}.
      */
     @Before
     public void before() {
-        assertEquals(0,  getJavaScriptThreads().size());
+        if (!isWebClientCached()) {
+            assertEquals(0,  getJavaScriptThreads().size());
+        }
     }
 
     /**
