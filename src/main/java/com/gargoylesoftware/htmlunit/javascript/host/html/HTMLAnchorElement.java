@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PAT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_PREFIX_WIN_DRIVES_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_FOR_BROKEN_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_TYPE_HTMLANCHORELEMENT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -519,5 +520,16 @@ public class HTMLAnchorElement extends HTMLElement {
     public void setText(final String text) {
         final DomNode htmlElement = getDomNodeOrDie();
         htmlElement.setTextContent(text);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getTypeOf() {
+        if (getPrototype() != null && getBrowserVersion().hasFeature(JS_ANCHOR_TYPE_HTMLANCHORELEMENT)) {
+            return "HTMLAnchorElement";
+        }
+        return super.getTypeOf();
     }
 }

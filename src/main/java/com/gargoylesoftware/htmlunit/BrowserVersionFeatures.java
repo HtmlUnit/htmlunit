@@ -682,6 +682,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(CHROME))
     JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS,
 
+    /** The typeof element (not prototype) is "HTMLAnchorElement". */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_ANCHOR_TYPE_HTMLANCHORELEMENT,
+
     /** Indicates that the appendChild call create a DocumentFragment to be
      * the parentNode's parentNode if this was null. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
@@ -1230,7 +1234,8 @@ public enum BrowserVersionFeatures {
     JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST,
 
     /**
-     * Is class name of {@link Image} the same as {@link HTMLImageElement}.
+     * Is class name of {@link com.gargoylesoftware.htmlunit.javascript.host.html.Image} the same as
+     * {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement}.
      */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8) })
     JS_IMAGE_HTML_IMAGE_ELEMENT,
@@ -1240,7 +1245,8 @@ public enum BrowserVersionFeatures {
     JS_IMAGE_OBJECT,
 
     /**
-     * Is the prototype of {@link Image} the same as {@link HTMLImageElement}.
+     * Is the prototype of {@link com.gargoylesoftware.htmlunit.javascript.host.html.Image} the same as
+     * {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement}.
      */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
     JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE,
@@ -1432,7 +1438,8 @@ public enum BrowserVersionFeatures {
     JS_OPTION_CONSTRUCTOR_IGNORES_LABEL,
 
     /**
-     * Is class name of {@link Option} the same as {@link HTMLOptionElement}.
+     * Is class name of {@link com.gargoylesoftware.htmlunit.javascript.host.html.Option} the same as
+     * {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionElement}.
      */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8) })
     JS_OPTION_HTML_OPTION_ELEMENT,
@@ -1442,7 +1449,8 @@ public enum BrowserVersionFeatures {
     JS_OPTION_OBJECT,
 
     /**
-     * Is the prototype of {@link Option} the same as {@link HTMLOptionElement}.
+     * Is the prototype of {@link com.gargoylesoftware.htmlunit.javascript.host.html.Option} the same as
+     * {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionElement}.
      */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(IE) })
     JS_OPTION_PROTOTYPE_SAME_AS_HTML_OPTION,
