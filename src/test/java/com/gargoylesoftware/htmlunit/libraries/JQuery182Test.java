@@ -3618,6 +3618,7 @@ public class JQuery182Test extends WebDriverTestCase {
         FF31 = "0, 5, 5",
         IE11 = "1, 4, 5",
         IE8 = "0, 5, 5")
+    @NotYetImplemented(IE11)
     public void manipulation__clone_form_element___Bug__3879___6655_() throws Exception {
         runTest("manipulation: clone(form element) (Bug #3879, #6655)");
     }
@@ -4744,7 +4745,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 24, 24")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void ajax__jQuery_ajax_____JSONP__Cross_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP, Cross Domain");
     }
@@ -6282,7 +6283,7 @@ public class JQuery182Test extends WebDriverTestCase {
         FF31 = "0, 1, 1",
         IE11 = "0, 1, 1",
         IE8 = "0, 2, 2")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void effects__non_px_animation_handles_non_numeric_start___11971_() throws Exception {
         runTest("effects: non-px animation handles non-numeric start (#11971)");
     }

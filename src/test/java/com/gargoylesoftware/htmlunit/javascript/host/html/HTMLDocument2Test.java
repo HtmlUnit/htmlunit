@@ -28,6 +28,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.CookieManager;
@@ -136,6 +137,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
     @Test
     @Alerts(DEFAULT = { "www.gargoylesoftware.com", "gargoylesoftware.com" },
             IE8 = { "WWW.GARGOYLESOFTWARE.COM", "GaRgOyLeSoFtWaRe.CoM" })
+    @NotYetImplemented(Browser.IE11)
     public void domainMixedCaseNetscape() throws Exception {
         final URL urlGargoyleUpperCase = new URL("http://WWW.GARGOYLESOFTWARE.COM/");
 

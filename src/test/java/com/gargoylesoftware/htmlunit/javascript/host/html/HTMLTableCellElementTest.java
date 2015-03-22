@@ -416,7 +416,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "84,30", "84,30", "84,30", "82,30", "82,30", "82,30" },
             IE8 = { "84,30", "84,30", "84,30", "83,30", "82,30", "83,30" })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented(IE)
     public void cellWidthHeightWithBorderCollapse() throws Exception {
         final String html
             = "<html><body><table id='t'><tr>\n"

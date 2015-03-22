@@ -207,7 +207,7 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("#<a>foobar</a>")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, IE11, CHROME })
     public void hash() throws Exception {
         checkHash(getDefaultUrl().toExternalForm() + "?#<a>foobar</a>");
     }
