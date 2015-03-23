@@ -80,7 +80,7 @@ public class BrowserRunner extends Suite {
             if (browsers.contains("hu") || browsers.contains("hu-ie8")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, false));
             }
-            if (/*browsers.contains("hu") ||*/ browsers.contains("hu-ie11")) {
+            if (browsers.contains("hu") || browsers.contains("hu-ie11")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_11, false));
             }
             if (browsers.contains("hu") || browsers.contains("hu-chrome")) {
