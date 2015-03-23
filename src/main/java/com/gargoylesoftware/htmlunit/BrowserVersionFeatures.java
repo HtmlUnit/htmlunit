@@ -77,9 +77,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     CSS_DEFAULT_WIDTH_AUTO,
 
-    /** Was originally .isFirefox(). */
+    /** Is display style 'block'. */
+    @BrowserFeature(@WebBrowser(FF))
+    CSS_DISPLAY_BLOCK,
+
+    /** Is display style 'block'. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    CSS_DISPLAY_DEFAULT,
+    CSS_DISPLAY_BLOCK2,
 
     /** <code>CSSFontFaceRule.cssText</code> uses \r\n to break lines. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))

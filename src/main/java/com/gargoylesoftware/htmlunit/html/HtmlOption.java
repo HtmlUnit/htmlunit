@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_BLOCK2;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_FOR_SELECT_ONLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEDOWN_NOT_FOR_SELECT_OPTION;
@@ -400,7 +400,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        if (hasFeature(CSS_DISPLAY_DEFAULT)) {
+        if (hasFeature(CSS_DISPLAY_BLOCK2)) {
             return DisplayStyle.BLOCK;
         }
         return DisplayStyle.INLINE;

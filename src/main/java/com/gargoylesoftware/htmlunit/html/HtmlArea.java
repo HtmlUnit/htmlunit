@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_BLOCK;
 
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.GeneralPath;
@@ -246,7 +246,7 @@ public class HtmlArea extends HtmlElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        if (hasFeature(CSS_DISPLAY_DEFAULT)) {
+        if (hasFeature(CSS_DISPLAY_BLOCK)) {
             return DisplayStyle.NONE;
         }
         return DisplayStyle.INLINE;

@@ -118,7 +118,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "inline",
             FF = "none")
-    @NotYetImplemented(CHROME)
     public void area() throws Exception {
         loadPageWithAlerts2(test("area"));
     }
@@ -1467,7 +1466,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "inline-block",
             FF = "inline")
-    @NotYetImplemented(CHROME)
     public void textarea() throws Exception {
         loadPageWithAlerts2(test("textarea"));
     }
@@ -1602,7 +1600,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("block")
-    @NotYetImplemented
     public void xmp() throws Exception {
         loadPageWithAlerts2(test("xmp"));
     }

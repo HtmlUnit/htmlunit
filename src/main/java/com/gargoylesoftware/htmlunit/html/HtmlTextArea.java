@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_BLOCK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLTEXTAREA_SET_DEFAULT_VALUE_UPDATES_VALUE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START;
 
@@ -509,7 +509,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        if (hasFeature(CSS_DISPLAY_DEFAULT)) {
+        if (hasFeature(CSS_DISPLAY_BLOCK)) {
             return DisplayStyle.INLINE;
         }
         return DisplayStyle.INLINE_BLOCK;

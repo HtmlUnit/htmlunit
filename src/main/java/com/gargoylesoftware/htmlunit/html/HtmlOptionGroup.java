@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_BLOCK2;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTIONGROUP_NO_DISABLED;
 
 import java.util.Map;
@@ -112,7 +112,7 @@ public class HtmlOptionGroup extends HtmlElement implements DisabledElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        if (hasFeature(CSS_DISPLAY_DEFAULT)) {
+        if (hasFeature(CSS_DISPLAY_BLOCK2)) {
             return DisplayStyle.BLOCK;
         }
         return DisplayStyle.INLINE;

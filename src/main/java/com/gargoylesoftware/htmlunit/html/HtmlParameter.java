@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_BLOCK2;
 
 import java.util.Map;
 
@@ -116,7 +116,7 @@ public class HtmlParameter extends HtmlElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        if (hasFeature(CSS_DISPLAY_DEFAULT)) {
+        if (hasFeature(CSS_DISPLAY_BLOCK2)) {
             return DisplayStyle.NONE;
         }
         return DisplayStyle.INLINE;
