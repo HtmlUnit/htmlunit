@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.apache.commons.lang3.StringUtils;
@@ -218,7 +219,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "12", "12" },
             CHROME = { "15", "15" },
             IE11 = { "15", "15" })
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void offsetTopAndLeft_Borders() throws Exception {
         final String html =
               "<html>\n"
@@ -310,6 +311,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
                 "5 fixed_length 0", "6 fixed_inherit 0", "7 relative_auto 0", "8 relative_length 50",
                 "9 relative_inherit 0", "10 static_auto 0", "11 static_length 0", "12 static_inherit 0",
                 "13 inherit_auto 0", "14 inherit_length 0", "15 inherit_inherit 0" })
+    @NotYetImplemented(IE11)
     public void offsetLeft_PositionLeft_DifferentCombinations() throws Exception {
         final String html = "<html><body onload='test()'><script language='javascript'>\n"
             + "String.prototype.trim = function() {\n"

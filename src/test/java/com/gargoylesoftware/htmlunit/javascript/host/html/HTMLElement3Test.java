@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
@@ -345,6 +348,7 @@ public class HTMLElement3Test extends SimpleWebTestCase {
     @Test
     @Alerts(DEFAULT = { "body1", "body1", "body1", "setActive not available" },
             IE = {"body1", "button1", "text1", "[object]", "onfocus text2", "text2", "onfocus text1", "onfocus text2" })
+    @NotYetImplemented(IE11)
     public void setActiveAndFocus() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
