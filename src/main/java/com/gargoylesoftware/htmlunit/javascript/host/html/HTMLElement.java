@@ -2770,7 +2770,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the offset parent or <code>null</code>
      */
     private HTMLElement getOffsetParent() {
-        final Object offsetParent = getOffsetParent_js();
+        final Object offsetParent = getOffsetParentInternal(false);
         if (offsetParent instanceof HTMLElement) {
             return (HTMLElement) offsetParent;
         }
@@ -2873,6 +2873,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @JsxGetter(propertyName = "offsetParent")
     public Object getOffsetParent_js() {
+        return getOffsetParentInternal(getBrowserVersion().hasFeature(JS_OFFSET_PARENT_NULL_IF_FIXED));
+    }
+
+    private Object getOffsetParentInternal(final boolean returnNullIfFixed) {
         DomNode currentElement = getDomNodeOrDie();
 
         if (currentElement.getParentNode() == null) {
@@ -2884,8 +2888,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         Object offsetParent = null;
         final HTMLElement htmlElement = (HTMLElement) currentElement.getScriptObject();
-        if (getBrowserVersion().hasFeature(JS_OFFSET_PARENT_NULL_IF_FIXED)
-                && "fixed".equals(htmlElement.getStyle().getPosition())) {
+        if (returnNullIfFixed && "fixed".equals(htmlElement.getStyle().getPosition())) {
             return null;
         }
 
@@ -2937,7 +2940,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         int top = getPosY();
 
         // account for any scrolled ancestors
-        Object parentNode = getOffsetParent_js();
+        Object parentNode = getOffsetParentInternal(false);
         while (parentNode != null
                 && (parentNode instanceof HTMLElement)
                 && !(parentNode instanceof HTMLBodyElement)) {
