@@ -1691,7 +1691,7 @@ public class HostParentOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF, IE11 })
     public void _NodeFilter_NodeFilter() throws Exception {
         test("NodeFilter", "NodeFilter");
     }
@@ -4613,7 +4613,7 @@ public class HostParentOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "false",
             IE11 = "true")
-    @NotYetImplemented({ CHROME, IE11 })
+    @NotYetImplemented(CHROME)
     public void _HTMLCollection_HTMLAllCollection() throws Exception {
         test("HTMLCollection", "HTMLAllCollection");
     }
@@ -8037,7 +8037,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _ArrayBuffer_HTMLDocument() throws Exception {
         test("ArrayBuffer", "HTMLDocument");
     }
@@ -8047,7 +8047,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _ArrayBuffer_HTMLFormElement() throws Exception {
         test("ArrayBuffer", "HTMLFormElement");
     }
@@ -8067,7 +8067,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Attr_HTMLDocument() throws Exception {
         test("Attr", "HTMLDocument");
     }
@@ -8077,7 +8077,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _Attr_HTMLFormElement() throws Exception {
         test("Attr", "HTMLFormElement");
     }
@@ -8097,7 +8097,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _BeforeUnloadEvent_HTMLDocument() throws Exception {
         test("BeforeUnloadEvent", "HTMLDocument");
     }
@@ -8107,7 +8107,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _BeforeUnloadEvent_HTMLFormElement() throws Exception {
         test("BeforeUnloadEvent", "HTMLFormElement");
     }
@@ -8127,7 +8127,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _CDATASection_HTMLDocument() throws Exception {
         test("CDATASection", "HTMLDocument");
     }
@@ -8137,7 +8137,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _CDATASection_HTMLFormElement() throws Exception {
         test("CDATASection", "HTMLFormElement");
     }
@@ -8217,7 +8217,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _CSSFontFaceRule_HTMLDocument() throws Exception {
         test("CSSFontFaceRule", "HTMLDocument");
     }
@@ -8227,7 +8227,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _CSSFontFaceRule_HTMLFormElement() throws Exception {
         test("CSSFontFaceRule", "HTMLFormElement");
     }
@@ -8247,7 +8247,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _CSSImportRule_HTMLDocument() throws Exception {
         test("CSSImportRule", "HTMLDocument");
     }
@@ -8257,7 +8257,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _CSSImportRule_HTMLFormElement() throws Exception {
         test("CSSImportRule", "HTMLFormElement");
     }
@@ -8277,7 +8277,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _CSSMediaRule_HTMLDocument() throws Exception {
         test("CSSMediaRule", "HTMLDocument");
     }
@@ -8287,7 +8287,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _CSSMediaRule_HTMLFormElement() throws Exception {
         test("CSSMediaRule", "HTMLFormElement");
     }
@@ -8337,7 +8337,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _CSSRuleList_HTMLDocument() throws Exception {
         test("CSSRuleList", "HTMLDocument");
     }
@@ -8347,7 +8347,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _CSSRuleList_HTMLFormElement() throws Exception {
         test("CSSRuleList", "HTMLFormElement");
     }
@@ -8367,7 +8367,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _CSSRule_HTMLDocument() throws Exception {
         test("CSSRule", "HTMLDocument");
     }
@@ -8377,7 +8377,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _CSSRule_HTMLFormElement() throws Exception {
         test("CSSRule", "HTMLFormElement");
     }
@@ -8397,7 +8397,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _CSSStyleDeclaration_HTMLDocument() throws Exception {
         test("CSSStyleDeclaration", "HTMLDocument");
     }
@@ -8407,7 +8407,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _CSSStyleDeclaration_HTMLFormElement() throws Exception {
         test("CSSStyleDeclaration", "HTMLFormElement");
     }
@@ -8427,7 +8427,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _CSSStyleRule_HTMLDocument() throws Exception {
         test("CSSStyleRule", "HTMLDocument");
     }
@@ -8437,7 +8437,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _CSSStyleRule_HTMLFormElement() throws Exception {
         test("CSSStyleRule", "HTMLFormElement");
     }
@@ -8457,7 +8457,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _CSSStyleSheet_HTMLDocument() throws Exception {
         test("CSSStyleSheet", "HTMLDocument");
     }
@@ -8467,7 +8467,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _CSSStyleSheet_HTMLFormElement() throws Exception {
         test("CSSStyleSheet", "HTMLFormElement");
     }
@@ -8517,7 +8517,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _CanvasRenderingContext2D_HTMLDocument() throws Exception {
         test("CanvasRenderingContext2D", "HTMLDocument");
     }
@@ -8527,7 +8527,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _CanvasRenderingContext2D_HTMLFormElement() throws Exception {
         test("CanvasRenderingContext2D", "HTMLFormElement");
     }
@@ -8547,7 +8547,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Comment_HTMLDocument() throws Exception {
         test("Comment", "HTMLDocument");
     }
@@ -8557,7 +8557,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Comment_HTMLFormElement() throws Exception {
         test("Comment", "HTMLFormElement");
     }
@@ -8577,7 +8577,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _DOMException_HTMLDocument() throws Exception {
         test("DOMException", "HTMLDocument");
     }
@@ -8587,7 +8587,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _DOMException_HTMLFormElement() throws Exception {
         test("DOMException", "HTMLFormElement");
     }
@@ -8607,7 +8607,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _DOMImplementation_HTMLDocument() throws Exception {
         test("DOMImplementation", "HTMLDocument");
     }
@@ -8617,7 +8617,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _DOMImplementation_HTMLFormElement() throws Exception {
         test("DOMImplementation", "HTMLFormElement");
     }
@@ -8637,7 +8637,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _DOMParser_HTMLDocument() throws Exception {
         test("DOMParser", "HTMLDocument");
     }
@@ -8647,7 +8647,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _DOMParser_HTMLFormElement() throws Exception {
         test("DOMParser", "HTMLFormElement");
     }
@@ -10787,7 +10787,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _DOMTokenList_HTMLDocument() throws Exception {
         test("DOMTokenList", "HTMLDocument");
     }
@@ -10797,7 +10797,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _DOMTokenList_HTMLFormElement() throws Exception {
         test("DOMTokenList", "HTMLFormElement");
     }
@@ -10817,7 +10817,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _DataView_HTMLDocument() throws Exception {
         test("DataView", "HTMLDocument");
     }
@@ -10827,7 +10827,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _DataView_HTMLFormElement() throws Exception {
         test("DataView", "HTMLFormElement");
     }
@@ -10847,7 +10847,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _DocumentFragment_HTMLDocument() throws Exception {
         test("DocumentFragment", "HTMLDocument");
     }
@@ -10857,7 +10857,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _DocumentFragment_HTMLFormElement() throws Exception {
         test("DocumentFragment", "HTMLFormElement");
     }
@@ -10877,7 +10877,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _DocumentType_HTMLDocument() throws Exception {
         test("DocumentType", "HTMLDocument");
     }
@@ -10887,7 +10887,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _DocumentType_HTMLFormElement() throws Exception {
         test("DocumentType", "HTMLFormElement");
     }
@@ -10907,7 +10907,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Document_HTMLFormElement() throws Exception {
         test("Document", "HTMLFormElement");
     }
@@ -10927,7 +10927,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Element_HTMLDocument() throws Exception {
         test("Element", "HTMLDocument");
     }
@@ -10947,7 +10947,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Event_HTMLDocument() throws Exception {
         test("Event", "HTMLDocument");
     }
@@ -10957,7 +10957,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _Event_HTMLFormElement() throws Exception {
         test("Event", "HTMLFormElement");
     }
@@ -11007,7 +11007,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Float32Array_HTMLDocument() throws Exception {
         test("Float32Array", "HTMLDocument");
     }
@@ -11017,7 +11017,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Float32Array_HTMLFormElement() throws Exception {
         test("Float32Array", "HTMLFormElement");
     }
@@ -11037,7 +11037,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Float64Array_HTMLDocument() throws Exception {
         test("Float64Array", "HTMLDocument");
     }
@@ -11047,7 +11047,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Float64Array_HTMLFormElement() throws Exception {
         test("Float64Array", "HTMLFormElement");
     }
@@ -11067,7 +11067,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLAnchorElement_HTMLDocument() throws Exception {
         test("HTMLAnchorElement", "HTMLDocument");
     }
@@ -11077,7 +11077,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLAnchorElement_HTMLFormElement() throws Exception {
         test("HTMLAnchorElement", "HTMLFormElement");
     }
@@ -11097,7 +11097,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLAppletElement_HTMLDocument() throws Exception {
         test("HTMLAppletElement", "HTMLDocument");
     }
@@ -11107,7 +11107,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLAppletElement_HTMLFormElement() throws Exception {
         test("HTMLAppletElement", "HTMLFormElement");
     }
@@ -11127,7 +11127,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLAreaElement_HTMLDocument() throws Exception {
         test("HTMLAreaElement", "HTMLDocument");
     }
@@ -11137,7 +11137,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLAreaElement_HTMLFormElement() throws Exception {
         test("HTMLAreaElement", "HTMLFormElement");
     }
@@ -11157,7 +11157,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLAudioElement_HTMLDocument() throws Exception {
         test("HTMLAudioElement", "HTMLDocument");
     }
@@ -11167,7 +11167,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLAudioElement_HTMLFormElement() throws Exception {
         test("HTMLAudioElement", "HTMLFormElement");
     }
@@ -11187,7 +11187,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLBRElement_HTMLDocument() throws Exception {
         test("HTMLBRElement", "HTMLDocument");
     }
@@ -11197,7 +11197,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLBRElement_HTMLFormElement() throws Exception {
         test("HTMLBRElement", "HTMLFormElement");
     }
@@ -11217,7 +11217,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLBaseElement_HTMLDocument() throws Exception {
         test("HTMLBaseElement", "HTMLDocument");
     }
@@ -11227,7 +11227,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLBaseElement_HTMLFormElement() throws Exception {
         test("HTMLBaseElement", "HTMLFormElement");
     }
@@ -11247,7 +11247,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLBodyElement_HTMLDocument() throws Exception {
         test("HTMLBodyElement", "HTMLDocument");
     }
@@ -11257,7 +11257,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLBodyElement_HTMLFormElement() throws Exception {
         test("HTMLBodyElement", "HTMLFormElement");
     }
@@ -11277,7 +11277,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLButtonElement_HTMLDocument() throws Exception {
         test("HTMLButtonElement", "HTMLDocument");
     }
@@ -11287,7 +11287,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLButtonElement_HTMLFormElement() throws Exception {
         test("HTMLButtonElement", "HTMLFormElement");
     }
@@ -11307,7 +11307,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLCanvasElement_HTMLDocument() throws Exception {
         test("HTMLCanvasElement", "HTMLDocument");
     }
@@ -11317,7 +11317,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLCanvasElement_HTMLFormElement() throws Exception {
         test("HTMLCanvasElement", "HTMLFormElement");
     }
@@ -11337,7 +11337,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLCollection_HTMLDocument() throws Exception {
         test("HTMLCollection", "HTMLDocument");
     }
@@ -11347,7 +11347,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLCollection_HTMLFormElement() throws Exception {
         test("HTMLCollection", "HTMLFormElement");
     }
@@ -11357,7 +11357,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLDListElement_HTMLDocument() throws Exception {
         test("HTMLDListElement", "HTMLDocument");
     }
@@ -11367,7 +11367,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLDListElement_HTMLFormElement() throws Exception {
         test("HTMLDListElement", "HTMLFormElement");
     }
@@ -11387,7 +11387,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLDataListElement_HTMLDocument() throws Exception {
         test("HTMLDataListElement", "HTMLDocument");
     }
@@ -11397,7 +11397,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLDataListElement_HTMLFormElement() throws Exception {
         test("HTMLDataListElement", "HTMLFormElement");
     }
@@ -11417,7 +11417,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLDirectoryElement_HTMLDocument() throws Exception {
         test("HTMLDirectoryElement", "HTMLDocument");
     }
@@ -11427,7 +11427,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLDirectoryElement_HTMLFormElement() throws Exception {
         test("HTMLDirectoryElement", "HTMLFormElement");
     }
@@ -11447,7 +11447,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLDivElement_HTMLDocument() throws Exception {
         test("HTMLDivElement", "HTMLDocument");
     }
@@ -11457,7 +11457,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLDivElement_HTMLFormElement() throws Exception {
         test("HTMLDivElement", "HTMLFormElement");
     }
@@ -11477,7 +11477,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLDocument_HTMLFormElement() throws Exception {
         test("HTMLDocument", "HTMLFormElement");
     }
@@ -11497,7 +11497,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLElement_HTMLDocument() throws Exception {
         test("HTMLElement", "HTMLDocument");
     }
@@ -11517,7 +11517,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLEmbedElement_HTMLDocument() throws Exception {
         test("HTMLEmbedElement", "HTMLDocument");
     }
@@ -11527,7 +11527,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLEmbedElement_HTMLFormElement() throws Exception {
         test("HTMLEmbedElement", "HTMLFormElement");
     }
@@ -11547,7 +11547,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLFieldSetElement_HTMLDocument() throws Exception {
         test("HTMLFieldSetElement", "HTMLDocument");
     }
@@ -11557,7 +11557,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLFieldSetElement_HTMLFormElement() throws Exception {
         test("HTMLFieldSetElement", "HTMLFormElement");
     }
@@ -11577,7 +11577,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLFontElement_HTMLDocument() throws Exception {
         test("HTMLFontElement", "HTMLDocument");
     }
@@ -11587,7 +11587,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLFontElement_HTMLFormElement() throws Exception {
         test("HTMLFontElement", "HTMLFormElement");
     }
@@ -11607,7 +11607,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLFormElement_HTMLDocument() throws Exception {
         test("HTMLFormElement", "HTMLDocument");
     }
@@ -11627,7 +11627,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLFrameElement_HTMLDocument() throws Exception {
         test("HTMLFrameElement", "HTMLDocument");
     }
@@ -11637,7 +11637,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLFrameElement_HTMLFormElement() throws Exception {
         test("HTMLFrameElement", "HTMLFormElement");
     }
@@ -11657,7 +11657,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLFrameSetElement_HTMLDocument() throws Exception {
         test("HTMLFrameSetElement", "HTMLDocument");
     }
@@ -11667,7 +11667,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLFrameSetElement_HTMLFormElement() throws Exception {
         test("HTMLFrameSetElement", "HTMLFormElement");
     }
@@ -11687,7 +11687,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLHRElement_HTMLDocument() throws Exception {
         test("HTMLHRElement", "HTMLDocument");
     }
@@ -11697,7 +11697,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLHRElement_HTMLFormElement() throws Exception {
         test("HTMLHRElement", "HTMLFormElement");
     }
@@ -11717,7 +11717,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLHeadElement_HTMLDocument() throws Exception {
         test("HTMLHeadElement", "HTMLDocument");
     }
@@ -11727,7 +11727,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLHeadElement_HTMLFormElement() throws Exception {
         test("HTMLHeadElement", "HTMLFormElement");
     }
@@ -11747,7 +11747,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLHeadingElement_HTMLDocument() throws Exception {
         test("HTMLHeadingElement", "HTMLDocument");
     }
@@ -11757,7 +11757,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLHeadingElement_HTMLFormElement() throws Exception {
         test("HTMLHeadingElement", "HTMLFormElement");
     }
@@ -11777,7 +11777,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLHtmlElement_HTMLDocument() throws Exception {
         test("HTMLHtmlElement", "HTMLDocument");
     }
@@ -11787,7 +11787,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLHtmlElement_HTMLFormElement() throws Exception {
         test("HTMLHtmlElement", "HTMLFormElement");
     }
@@ -11807,7 +11807,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLIFrameElement_HTMLDocument() throws Exception {
         test("HTMLIFrameElement", "HTMLDocument");
     }
@@ -11817,7 +11817,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLIFrameElement_HTMLFormElement() throws Exception {
         test("HTMLIFrameElement", "HTMLFormElement");
     }
@@ -11837,7 +11837,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLImageElement_HTMLDocument() throws Exception {
         test("HTMLImageElement", "HTMLDocument");
     }
@@ -11847,7 +11847,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLImageElement_HTMLFormElement() throws Exception {
         test("HTMLImageElement", "HTMLFormElement");
     }
@@ -11867,7 +11867,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLInputElement_HTMLDocument() throws Exception {
         test("HTMLInputElement", "HTMLDocument");
     }
@@ -11877,7 +11877,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLInputElement_HTMLFormElement() throws Exception {
         test("HTMLInputElement", "HTMLFormElement");
     }
@@ -11897,7 +11897,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLLIElement_HTMLDocument() throws Exception {
         test("HTMLLIElement", "HTMLDocument");
     }
@@ -11907,7 +11907,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLLIElement_HTMLFormElement() throws Exception {
         test("HTMLLIElement", "HTMLFormElement");
     }
@@ -11927,7 +11927,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLLabelElement_HTMLDocument() throws Exception {
         test("HTMLLabelElement", "HTMLDocument");
     }
@@ -11937,7 +11937,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLLabelElement_HTMLFormElement() throws Exception {
         test("HTMLLabelElement", "HTMLFormElement");
     }
@@ -11957,7 +11957,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLLegendElement_HTMLDocument() throws Exception {
         test("HTMLLegendElement", "HTMLDocument");
     }
@@ -11967,7 +11967,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLLegendElement_HTMLFormElement() throws Exception {
         test("HTMLLegendElement", "HTMLFormElement");
     }
@@ -11987,7 +11987,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLLinkElement_HTMLDocument() throws Exception {
         test("HTMLLinkElement", "HTMLDocument");
     }
@@ -11997,7 +11997,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLLinkElement_HTMLFormElement() throws Exception {
         test("HTMLLinkElement", "HTMLFormElement");
     }
@@ -12017,7 +12017,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLMapElement_HTMLDocument() throws Exception {
         test("HTMLMapElement", "HTMLDocument");
     }
@@ -12027,7 +12027,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLMapElement_HTMLFormElement() throws Exception {
         test("HTMLMapElement", "HTMLFormElement");
     }
@@ -12047,7 +12047,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLMediaElement_HTMLDocument() throws Exception {
         test("HTMLMediaElement", "HTMLDocument");
     }
@@ -12057,7 +12057,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLMediaElement_HTMLFormElement() throws Exception {
         test("HTMLMediaElement", "HTMLFormElement");
     }
@@ -12077,7 +12077,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLMenuElement_HTMLDocument() throws Exception {
         test("HTMLMenuElement", "HTMLDocument");
     }
@@ -12087,7 +12087,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLMenuElement_HTMLFormElement() throws Exception {
         test("HTMLMenuElement", "HTMLFormElement");
     }
@@ -12137,7 +12137,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLMetaElement_HTMLDocument() throws Exception {
         test("HTMLMetaElement", "HTMLDocument");
     }
@@ -12147,7 +12147,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLMetaElement_HTMLFormElement() throws Exception {
         test("HTMLMetaElement", "HTMLFormElement");
     }
@@ -12197,7 +12197,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLModElement_HTMLDocument() throws Exception {
         test("HTMLModElement", "HTMLDocument");
     }
@@ -12207,7 +12207,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLModElement_HTMLFormElement() throws Exception {
         test("HTMLModElement", "HTMLFormElement");
     }
@@ -12227,7 +12227,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLOListElement_HTMLDocument() throws Exception {
         test("HTMLOListElement", "HTMLDocument");
     }
@@ -12237,7 +12237,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLOListElement_HTMLFormElement() throws Exception {
         test("HTMLOListElement", "HTMLFormElement");
     }
@@ -12257,7 +12257,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLObjectElement_HTMLDocument() throws Exception {
         test("HTMLObjectElement", "HTMLDocument");
     }
@@ -12267,7 +12267,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLObjectElement_HTMLFormElement() throws Exception {
         test("HTMLObjectElement", "HTMLFormElement");
     }
@@ -12287,7 +12287,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLOptGroupElement_HTMLDocument() throws Exception {
         test("HTMLOptGroupElement", "HTMLDocument");
     }
@@ -12297,7 +12297,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLOptGroupElement_HTMLFormElement() throws Exception {
         test("HTMLOptGroupElement", "HTMLFormElement");
     }
@@ -12317,7 +12317,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLOptionElement_HTMLDocument() throws Exception {
         test("HTMLOptionElement", "HTMLDocument");
     }
@@ -12327,7 +12327,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLOptionElement_HTMLFormElement() throws Exception {
         test("HTMLOptionElement", "HTMLFormElement");
     }
@@ -12397,7 +12397,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLParagraphElement_HTMLDocument() throws Exception {
         test("HTMLParagraphElement", "HTMLDocument");
     }
@@ -12407,7 +12407,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLParagraphElement_HTMLFormElement() throws Exception {
         test("HTMLParagraphElement", "HTMLFormElement");
     }
@@ -12427,7 +12427,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLParamElement_HTMLDocument() throws Exception {
         test("HTMLParamElement", "HTMLDocument");
     }
@@ -12437,7 +12437,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLParamElement_HTMLFormElement() throws Exception {
         test("HTMLParamElement", "HTMLFormElement");
     }
@@ -12457,7 +12457,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLPreElement_HTMLDocument() throws Exception {
         test("HTMLPreElement", "HTMLDocument");
     }
@@ -12467,7 +12467,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLPreElement_HTMLFormElement() throws Exception {
         test("HTMLPreElement", "HTMLFormElement");
     }
@@ -12487,7 +12487,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLProgressElement_HTMLDocument() throws Exception {
         test("HTMLProgressElement", "HTMLDocument");
     }
@@ -12497,7 +12497,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLProgressElement_HTMLFormElement() throws Exception {
         test("HTMLProgressElement", "HTMLFormElement");
     }
@@ -12517,7 +12517,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLQuoteElement_HTMLDocument() throws Exception {
         test("HTMLQuoteElement", "HTMLDocument");
     }
@@ -12527,7 +12527,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLQuoteElement_HTMLFormElement() throws Exception {
         test("HTMLQuoteElement", "HTMLFormElement");
     }
@@ -12547,7 +12547,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLScriptElement_HTMLDocument() throws Exception {
         test("HTMLScriptElement", "HTMLDocument");
     }
@@ -12557,7 +12557,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLScriptElement_HTMLFormElement() throws Exception {
         test("HTMLScriptElement", "HTMLFormElement");
     }
@@ -12577,7 +12577,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLSelectElement_HTMLDocument() throws Exception {
         test("HTMLSelectElement", "HTMLDocument");
     }
@@ -12587,7 +12587,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLSelectElement_HTMLFormElement() throws Exception {
         test("HTMLSelectElement", "HTMLFormElement");
     }
@@ -12607,7 +12607,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLSourceElement_HTMLDocument() throws Exception {
         test("HTMLSourceElement", "HTMLDocument");
     }
@@ -12617,7 +12617,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLSourceElement_HTMLFormElement() throws Exception {
         test("HTMLSourceElement", "HTMLFormElement");
     }
@@ -12637,7 +12637,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLSpanElement_HTMLDocument() throws Exception {
         test("HTMLSpanElement", "HTMLDocument");
     }
@@ -12647,7 +12647,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLSpanElement_HTMLFormElement() throws Exception {
         test("HTMLSpanElement", "HTMLFormElement");
     }
@@ -12667,7 +12667,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLStyleElement_HTMLDocument() throws Exception {
         test("HTMLStyleElement", "HTMLDocument");
     }
@@ -12677,7 +12677,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLStyleElement_HTMLFormElement() throws Exception {
         test("HTMLStyleElement", "HTMLFormElement");
     }
@@ -12697,7 +12697,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLTableCaptionElement_HTMLDocument() throws Exception {
         test("HTMLTableCaptionElement", "HTMLDocument");
     }
@@ -12707,7 +12707,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLTableCaptionElement_HTMLFormElement() throws Exception {
         test("HTMLTableCaptionElement", "HTMLFormElement");
     }
@@ -12727,7 +12727,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLTableCellElement_HTMLDocument() throws Exception {
         test("HTMLTableCellElement", "HTMLDocument");
     }
@@ -12737,7 +12737,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLTableCellElement_HTMLFormElement() throws Exception {
         test("HTMLTableCellElement", "HTMLFormElement");
     }
@@ -12757,7 +12757,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLTableColElement_HTMLDocument() throws Exception {
         test("HTMLTableColElement", "HTMLDocument");
     }
@@ -12767,7 +12767,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLTableColElement_HTMLFormElement() throws Exception {
         test("HTMLTableColElement", "HTMLFormElement");
     }
@@ -12787,7 +12787,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLTableElement_HTMLDocument() throws Exception {
         test("HTMLTableElement", "HTMLDocument");
     }
@@ -12797,7 +12797,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLTableElement_HTMLFormElement() throws Exception {
         test("HTMLTableElement", "HTMLFormElement");
     }
@@ -12817,7 +12817,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLTableRowElement_HTMLDocument() throws Exception {
         test("HTMLTableRowElement", "HTMLDocument");
     }
@@ -12827,7 +12827,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLTableRowElement_HTMLFormElement() throws Exception {
         test("HTMLTableRowElement", "HTMLFormElement");
     }
@@ -12847,7 +12847,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLTableSectionElement_HTMLDocument() throws Exception {
         test("HTMLTableSectionElement", "HTMLDocument");
     }
@@ -12857,7 +12857,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLTableSectionElement_HTMLFormElement() throws Exception {
         test("HTMLTableSectionElement", "HTMLFormElement");
     }
@@ -12877,7 +12877,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLTextAreaElement_HTMLDocument() throws Exception {
         test("HTMLTextAreaElement", "HTMLDocument");
     }
@@ -12887,7 +12887,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLTextAreaElement_HTMLFormElement() throws Exception {
         test("HTMLTextAreaElement", "HTMLFormElement");
     }
@@ -12937,7 +12937,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLTitleElement_HTMLDocument() throws Exception {
         test("HTMLTitleElement", "HTMLDocument");
     }
@@ -12947,7 +12947,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLTitleElement_HTMLFormElement() throws Exception {
         test("HTMLTitleElement", "HTMLFormElement");
     }
@@ -12967,7 +12967,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLTrackElement_HTMLDocument() throws Exception {
         test("HTMLTrackElement", "HTMLDocument");
     }
@@ -12977,7 +12977,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLTrackElement_HTMLFormElement() throws Exception {
         test("HTMLTrackElement", "HTMLFormElement");
     }
@@ -12997,7 +12997,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLUListElement_HTMLDocument() throws Exception {
         test("HTMLUListElement", "HTMLDocument");
     }
@@ -13007,7 +13007,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _HTMLUListElement_HTMLFormElement() throws Exception {
         test("HTMLUListElement", "HTMLFormElement");
     }
@@ -13027,7 +13027,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLUnknownElement_HTMLDocument() throws Exception {
         test("HTMLUnknownElement", "HTMLDocument");
     }
@@ -13037,7 +13037,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLUnknownElement_HTMLFormElement() throws Exception {
         test("HTMLUnknownElement", "HTMLFormElement");
     }
@@ -13057,7 +13057,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLVideoElement_HTMLDocument() throws Exception {
         test("HTMLVideoElement", "HTMLDocument");
     }
@@ -13067,7 +13067,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _HTMLVideoElement_HTMLFormElement() throws Exception {
         test("HTMLVideoElement", "HTMLFormElement");
     }
@@ -13117,7 +13117,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _History_HTMLDocument() throws Exception {
         test("History", "HTMLDocument");
     }
@@ -13127,7 +13127,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _History_HTMLFormElement() throws Exception {
         test("History", "HTMLFormElement");
     }
@@ -13147,7 +13147,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Image_HTMLDocument() throws Exception {
         test("Image", "HTMLDocument");
     }
@@ -13157,7 +13157,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _Image_HTMLFormElement() throws Exception {
         test("Image", "HTMLFormElement");
     }
@@ -13177,7 +13177,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Int16Array_HTMLDocument() throws Exception {
         test("Int16Array", "HTMLDocument");
     }
@@ -13187,7 +13187,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Int16Array_HTMLFormElement() throws Exception {
         test("Int16Array", "HTMLFormElement");
     }
@@ -13207,7 +13207,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Int32Array_HTMLDocument() throws Exception {
         test("Int32Array", "HTMLDocument");
     }
@@ -13217,7 +13217,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Int32Array_HTMLFormElement() throws Exception {
         test("Int32Array", "HTMLFormElement");
     }
@@ -13237,7 +13237,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Int8Array_HTMLDocument() throws Exception {
         test("Int8Array", "HTMLDocument");
     }
@@ -13247,7 +13247,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Int8Array_HTMLFormElement() throws Exception {
         test("Int8Array", "HTMLFormElement");
     }
@@ -13267,7 +13267,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _KeyboardEvent_HTMLDocument() throws Exception {
         test("KeyboardEvent", "HTMLDocument");
     }
@@ -13277,7 +13277,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _KeyboardEvent_HTMLFormElement() throws Exception {
         test("KeyboardEvent", "HTMLFormElement");
     }
@@ -13297,7 +13297,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Location_HTMLDocument() throws Exception {
         test("Location", "HTMLDocument");
     }
@@ -13307,7 +13307,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _Location_HTMLFormElement() throws Exception {
         test("Location", "HTMLFormElement");
     }
@@ -13327,7 +13327,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _MediaList_HTMLDocument() throws Exception {
         test("MediaList", "HTMLDocument");
     }
@@ -13337,7 +13337,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _MediaList_HTMLFormElement() throws Exception {
         test("MediaList", "HTMLFormElement");
     }
@@ -13357,7 +13357,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _MessageEvent_HTMLDocument() throws Exception {
         test("MessageEvent", "HTMLDocument");
     }
@@ -13367,7 +13367,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _MessageEvent_HTMLFormElement() throws Exception {
         test("MessageEvent", "HTMLFormElement");
     }
@@ -13387,7 +13387,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _MimeTypeArray_HTMLDocument() throws Exception {
         test("MimeTypeArray", "HTMLDocument");
     }
@@ -13397,7 +13397,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _MimeTypeArray_HTMLFormElement() throws Exception {
         test("MimeTypeArray", "HTMLFormElement");
     }
@@ -13417,7 +13417,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _MimeType_HTMLDocument() throws Exception {
         test("MimeType", "HTMLDocument");
     }
@@ -13427,7 +13427,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _MimeType_HTMLFormElement() throws Exception {
         test("MimeType", "HTMLFormElement");
     }
@@ -13447,7 +13447,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _MouseEvent_HTMLDocument() throws Exception {
         test("MouseEvent", "HTMLDocument");
     }
@@ -13457,7 +13457,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _MouseEvent_HTMLFormElement() throws Exception {
         test("MouseEvent", "HTMLFormElement");
     }
@@ -13477,7 +13477,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _MutationEvent_HTMLDocument() throws Exception {
         test("MutationEvent", "HTMLDocument");
     }
@@ -13487,7 +13487,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _MutationEvent_HTMLFormElement() throws Exception {
         test("MutationEvent", "HTMLFormElement");
     }
@@ -13507,7 +13507,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Navigator_HTMLDocument() throws Exception {
         test("Navigator", "HTMLDocument");
     }
@@ -13517,7 +13517,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _Navigator_HTMLFormElement() throws Exception {
         test("Navigator", "HTMLFormElement");
     }
@@ -13537,7 +13537,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _NodeFilter_HTMLDocument() throws Exception {
         test("NodeFilter", "HTMLDocument");
     }
@@ -13547,7 +13547,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _NodeFilter_HTMLFormElement() throws Exception {
         test("NodeFilter", "HTMLFormElement");
     }
@@ -13567,7 +13567,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _NodeList_HTMLDocument() throws Exception {
         test("NodeList", "HTMLDocument");
     }
@@ -13577,7 +13577,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _NodeList_HTMLFormElement() throws Exception {
         test("NodeList", "HTMLFormElement");
     }
@@ -13637,7 +13637,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Option_HTMLDocument() throws Exception {
         test("Option", "HTMLDocument");
     }
@@ -13647,7 +13647,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _Option_HTMLFormElement() throws Exception {
         test("Option", "HTMLFormElement");
     }
@@ -13667,7 +13667,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _PluginArray_HTMLDocument() throws Exception {
         test("PluginArray", "HTMLDocument");
     }
@@ -13677,7 +13677,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _PluginArray_HTMLFormElement() throws Exception {
         test("PluginArray", "HTMLFormElement");
     }
@@ -13697,7 +13697,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Plugin_HTMLDocument() throws Exception {
         test("Plugin", "HTMLDocument");
     }
@@ -13707,7 +13707,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Plugin_HTMLFormElement() throws Exception {
         test("Plugin", "HTMLFormElement");
     }
@@ -13727,7 +13727,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _ProcessingInstruction_HTMLDocument() throws Exception {
         test("ProcessingInstruction", "HTMLDocument");
     }
@@ -13737,7 +13737,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _ProcessingInstruction_HTMLFormElement() throws Exception {
         test("ProcessingInstruction", "HTMLFormElement");
     }
@@ -13757,7 +13757,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Range_HTMLDocument() throws Exception {
         test("Range", "HTMLDocument");
     }
@@ -13767,7 +13767,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Range_HTMLFormElement() throws Exception {
         test("Range", "HTMLFormElement");
     }
@@ -13787,7 +13787,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGAElement_HTMLDocument() throws Exception {
         test("SVGAElement", "HTMLDocument");
     }
@@ -13797,7 +13797,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGAElement_HTMLFormElement() throws Exception {
         test("SVGAElement", "HTMLFormElement");
     }
@@ -13847,7 +13847,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGAngle_HTMLDocument() throws Exception {
         test("SVGAngle", "HTMLDocument");
     }
@@ -13857,7 +13857,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGAngle_HTMLFormElement() throws Exception {
         test("SVGAngle", "HTMLFormElement");
     }
@@ -13967,7 +13967,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGCircleElement_HTMLDocument() throws Exception {
         test("SVGCircleElement", "HTMLDocument");
     }
@@ -13977,7 +13977,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGCircleElement_HTMLFormElement() throws Exception {
         test("SVGCircleElement", "HTMLFormElement");
     }
@@ -13997,7 +13997,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGClipPathElement_HTMLDocument() throws Exception {
         test("SVGClipPathElement", "HTMLDocument");
     }
@@ -14007,7 +14007,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGClipPathElement_HTMLFormElement() throws Exception {
         test("SVGClipPathElement", "HTMLFormElement");
     }
@@ -14027,7 +14027,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGDefsElement_HTMLDocument() throws Exception {
         test("SVGDefsElement", "HTMLDocument");
     }
@@ -14037,7 +14037,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGDefsElement_HTMLFormElement() throws Exception {
         test("SVGDefsElement", "HTMLFormElement");
     }
@@ -14057,7 +14057,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGDescElement_HTMLDocument() throws Exception {
         test("SVGDescElement", "HTMLDocument");
     }
@@ -14067,7 +14067,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGDescElement_HTMLFormElement() throws Exception {
         test("SVGDescElement", "HTMLFormElement");
     }
@@ -14087,7 +14087,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGElement_HTMLDocument() throws Exception {
         test("SVGElement", "HTMLDocument");
     }
@@ -14097,7 +14097,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGElement_HTMLFormElement() throws Exception {
         test("SVGElement", "HTMLFormElement");
     }
@@ -14117,7 +14117,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGEllipseElement_HTMLDocument() throws Exception {
         test("SVGEllipseElement", "HTMLDocument");
     }
@@ -14127,7 +14127,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGEllipseElement_HTMLFormElement() throws Exception {
         test("SVGEllipseElement", "HTMLFormElement");
     }
@@ -14147,7 +14147,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEBlendElement_HTMLDocument() throws Exception {
         test("SVGFEBlendElement", "HTMLDocument");
     }
@@ -14157,7 +14157,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEBlendElement_HTMLFormElement() throws Exception {
         test("SVGFEBlendElement", "HTMLFormElement");
     }
@@ -14177,7 +14177,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEColorMatrixElement_HTMLDocument() throws Exception {
         test("SVGFEColorMatrixElement", "HTMLDocument");
     }
@@ -14187,7 +14187,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEColorMatrixElement_HTMLFormElement() throws Exception {
         test("SVGFEColorMatrixElement", "HTMLFormElement");
     }
@@ -14207,7 +14207,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEComponentTransferElement_HTMLDocument() throws Exception {
         test("SVGFEComponentTransferElement", "HTMLDocument");
     }
@@ -14217,7 +14217,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEComponentTransferElement_HTMLFormElement() throws Exception {
         test("SVGFEComponentTransferElement", "HTMLFormElement");
     }
@@ -14237,7 +14237,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFECompositeElement_HTMLDocument() throws Exception {
         test("SVGFECompositeElement", "HTMLDocument");
     }
@@ -14247,7 +14247,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFECompositeElement_HTMLFormElement() throws Exception {
         test("SVGFECompositeElement", "HTMLFormElement");
     }
@@ -14267,7 +14267,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEConvolveMatrixElement_HTMLDocument() throws Exception {
         test("SVGFEConvolveMatrixElement", "HTMLDocument");
     }
@@ -14277,7 +14277,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEConvolveMatrixElement_HTMLFormElement() throws Exception {
         test("SVGFEConvolveMatrixElement", "HTMLFormElement");
     }
@@ -14297,7 +14297,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEDiffuseLightingElement_HTMLDocument() throws Exception {
         test("SVGFEDiffuseLightingElement", "HTMLDocument");
     }
@@ -14307,7 +14307,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEDiffuseLightingElement_HTMLFormElement() throws Exception {
         test("SVGFEDiffuseLightingElement", "HTMLFormElement");
     }
@@ -14327,7 +14327,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEDisplacementMapElement_HTMLDocument() throws Exception {
         test("SVGFEDisplacementMapElement", "HTMLDocument");
     }
@@ -14337,7 +14337,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEDisplacementMapElement_HTMLFormElement() throws Exception {
         test("SVGFEDisplacementMapElement", "HTMLFormElement");
     }
@@ -14357,7 +14357,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEDistantLightElement_HTMLDocument() throws Exception {
         test("SVGFEDistantLightElement", "HTMLDocument");
     }
@@ -14367,7 +14367,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEDistantLightElement_HTMLFormElement() throws Exception {
         test("SVGFEDistantLightElement", "HTMLFormElement");
     }
@@ -14387,7 +14387,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEFloodElement_HTMLDocument() throws Exception {
         test("SVGFEFloodElement", "HTMLDocument");
     }
@@ -14397,7 +14397,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEFloodElement_HTMLFormElement() throws Exception {
         test("SVGFEFloodElement", "HTMLFormElement");
     }
@@ -14417,7 +14417,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEFuncAElement_HTMLDocument() throws Exception {
         test("SVGFEFuncAElement", "HTMLDocument");
     }
@@ -14427,7 +14427,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEFuncAElement_HTMLFormElement() throws Exception {
         test("SVGFEFuncAElement", "HTMLFormElement");
     }
@@ -14447,7 +14447,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEFuncBElement_HTMLDocument() throws Exception {
         test("SVGFEFuncBElement", "HTMLDocument");
     }
@@ -14457,7 +14457,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEFuncBElement_HTMLFormElement() throws Exception {
         test("SVGFEFuncBElement", "HTMLFormElement");
     }
@@ -14477,7 +14477,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEFuncGElement_HTMLDocument() throws Exception {
         test("SVGFEFuncGElement", "HTMLDocument");
     }
@@ -14487,7 +14487,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEFuncGElement_HTMLFormElement() throws Exception {
         test("SVGFEFuncGElement", "HTMLFormElement");
     }
@@ -14507,7 +14507,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEFuncRElement_HTMLDocument() throws Exception {
         test("SVGFEFuncRElement", "HTMLDocument");
     }
@@ -14517,7 +14517,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEFuncRElement_HTMLFormElement() throws Exception {
         test("SVGFEFuncRElement", "HTMLFormElement");
     }
@@ -14537,7 +14537,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEGaussianBlurElement_HTMLDocument() throws Exception {
         test("SVGFEGaussianBlurElement", "HTMLDocument");
     }
@@ -14547,7 +14547,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEGaussianBlurElement_HTMLFormElement() throws Exception {
         test("SVGFEGaussianBlurElement", "HTMLFormElement");
     }
@@ -14567,7 +14567,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEImageElement_HTMLDocument() throws Exception {
         test("SVGFEImageElement", "HTMLDocument");
     }
@@ -14577,7 +14577,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEImageElement_HTMLFormElement() throws Exception {
         test("SVGFEImageElement", "HTMLFormElement");
     }
@@ -14597,7 +14597,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEMergeElement_HTMLDocument() throws Exception {
         test("SVGFEMergeElement", "HTMLDocument");
     }
@@ -14607,7 +14607,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEMergeElement_HTMLFormElement() throws Exception {
         test("SVGFEMergeElement", "HTMLFormElement");
     }
@@ -14627,7 +14627,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEMergeNodeElement_HTMLDocument() throws Exception {
         test("SVGFEMergeNodeElement", "HTMLDocument");
     }
@@ -14637,7 +14637,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEMergeNodeElement_HTMLFormElement() throws Exception {
         test("SVGFEMergeNodeElement", "HTMLFormElement");
     }
@@ -14657,7 +14657,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEMorphologyElement_HTMLDocument() throws Exception {
         test("SVGFEMorphologyElement", "HTMLDocument");
     }
@@ -14667,7 +14667,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEMorphologyElement_HTMLFormElement() throws Exception {
         test("SVGFEMorphologyElement", "HTMLFormElement");
     }
@@ -14687,7 +14687,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEOffsetElement_HTMLDocument() throws Exception {
         test("SVGFEOffsetElement", "HTMLDocument");
     }
@@ -14697,7 +14697,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEOffsetElement_HTMLFormElement() throws Exception {
         test("SVGFEOffsetElement", "HTMLFormElement");
     }
@@ -14717,7 +14717,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEPointLightElement_HTMLDocument() throws Exception {
         test("SVGFEPointLightElement", "HTMLDocument");
     }
@@ -14727,7 +14727,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFEPointLightElement_HTMLFormElement() throws Exception {
         test("SVGFEPointLightElement", "HTMLFormElement");
     }
@@ -14747,7 +14747,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFESpecularLightingElement_HTMLDocument() throws Exception {
         test("SVGFESpecularLightingElement", "HTMLDocument");
     }
@@ -14757,7 +14757,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFESpecularLightingElement_HTMLFormElement() throws Exception {
         test("SVGFESpecularLightingElement", "HTMLFormElement");
     }
@@ -14777,7 +14777,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFESpotLightElement_HTMLDocument() throws Exception {
         test("SVGFESpotLightElement", "HTMLDocument");
     }
@@ -14787,7 +14787,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFESpotLightElement_HTMLFormElement() throws Exception {
         test("SVGFESpotLightElement", "HTMLFormElement");
     }
@@ -14807,7 +14807,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFETileElement_HTMLDocument() throws Exception {
         test("SVGFETileElement", "HTMLDocument");
     }
@@ -14817,7 +14817,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFETileElement_HTMLFormElement() throws Exception {
         test("SVGFETileElement", "HTMLFormElement");
     }
@@ -14837,7 +14837,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFETurbulenceElement_HTMLDocument() throws Exception {
         test("SVGFETurbulenceElement", "HTMLDocument");
     }
@@ -14847,7 +14847,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFETurbulenceElement_HTMLFormElement() throws Exception {
         test("SVGFETurbulenceElement", "HTMLFormElement");
     }
@@ -14867,7 +14867,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFilterElement_HTMLDocument() throws Exception {
         test("SVGFilterElement", "HTMLDocument");
     }
@@ -14877,7 +14877,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGFilterElement_HTMLFormElement() throws Exception {
         test("SVGFilterElement", "HTMLFormElement");
     }
@@ -14927,7 +14927,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGGElement_HTMLDocument() throws Exception {
         test("SVGGElement", "HTMLDocument");
     }
@@ -14937,7 +14937,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGGElement_HTMLFormElement() throws Exception {
         test("SVGGElement", "HTMLFormElement");
     }
@@ -14957,7 +14957,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGImageElement_HTMLDocument() throws Exception {
         test("SVGImageElement", "HTMLDocument");
     }
@@ -14967,7 +14967,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGImageElement_HTMLFormElement() throws Exception {
         test("SVGImageElement", "HTMLFormElement");
     }
@@ -14987,7 +14987,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGLineElement_HTMLDocument() throws Exception {
         test("SVGLineElement", "HTMLDocument");
     }
@@ -14997,7 +14997,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGLineElement_HTMLFormElement() throws Exception {
         test("SVGLineElement", "HTMLFormElement");
     }
@@ -15017,7 +15017,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGLinearGradientElement_HTMLDocument() throws Exception {
         test("SVGLinearGradientElement", "HTMLDocument");
     }
@@ -15027,7 +15027,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGLinearGradientElement_HTMLFormElement() throws Exception {
         test("SVGLinearGradientElement", "HTMLFormElement");
     }
@@ -15077,7 +15077,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGMarkerElement_HTMLDocument() throws Exception {
         test("SVGMarkerElement", "HTMLDocument");
     }
@@ -15087,7 +15087,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGMarkerElement_HTMLFormElement() throws Exception {
         test("SVGMarkerElement", "HTMLFormElement");
     }
@@ -15107,7 +15107,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGMaskElement_HTMLDocument() throws Exception {
         test("SVGMaskElement", "HTMLDocument");
     }
@@ -15117,7 +15117,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGMaskElement_HTMLFormElement() throws Exception {
         test("SVGMaskElement", "HTMLFormElement");
     }
@@ -15137,7 +15137,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGMatrix_HTMLDocument() throws Exception {
         test("SVGMatrix", "HTMLDocument");
     }
@@ -15147,7 +15147,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGMatrix_HTMLFormElement() throws Exception {
         test("SVGMatrix", "HTMLFormElement");
     }
@@ -15167,7 +15167,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGMetadataElement_HTMLDocument() throws Exception {
         test("SVGMetadataElement", "HTMLDocument");
     }
@@ -15177,7 +15177,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGMetadataElement_HTMLFormElement() throws Exception {
         test("SVGMetadataElement", "HTMLFormElement");
     }
@@ -15197,7 +15197,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGPathElement_HTMLDocument() throws Exception {
         test("SVGPathElement", "HTMLDocument");
     }
@@ -15207,7 +15207,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGPathElement_HTMLFormElement() throws Exception {
         test("SVGPathElement", "HTMLFormElement");
     }
@@ -15227,7 +15227,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGPatternElement_HTMLDocument() throws Exception {
         test("SVGPatternElement", "HTMLDocument");
     }
@@ -15237,7 +15237,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGPatternElement_HTMLFormElement() throws Exception {
         test("SVGPatternElement", "HTMLFormElement");
     }
@@ -15257,7 +15257,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGPolygonElement_HTMLDocument() throws Exception {
         test("SVGPolygonElement", "HTMLDocument");
     }
@@ -15267,7 +15267,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGPolygonElement_HTMLFormElement() throws Exception {
         test("SVGPolygonElement", "HTMLFormElement");
     }
@@ -15287,7 +15287,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGPolylineElement_HTMLDocument() throws Exception {
         test("SVGPolylineElement", "HTMLDocument");
     }
@@ -15297,7 +15297,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGPolylineElement_HTMLFormElement() throws Exception {
         test("SVGPolylineElement", "HTMLFormElement");
     }
@@ -15317,7 +15317,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGRadialGradientElement_HTMLDocument() throws Exception {
         test("SVGRadialGradientElement", "HTMLDocument");
     }
@@ -15327,7 +15327,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGRadialGradientElement_HTMLFormElement() throws Exception {
         test("SVGRadialGradientElement", "HTMLFormElement");
     }
@@ -15347,7 +15347,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGRectElement_HTMLDocument() throws Exception {
         test("SVGRectElement", "HTMLDocument");
     }
@@ -15357,7 +15357,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGRectElement_HTMLFormElement() throws Exception {
         test("SVGRectElement", "HTMLFormElement");
     }
@@ -15377,7 +15377,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGRect_HTMLDocument() throws Exception {
         test("SVGRect", "HTMLDocument");
     }
@@ -15387,7 +15387,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGRect_HTMLFormElement() throws Exception {
         test("SVGRect", "HTMLFormElement");
     }
@@ -15407,7 +15407,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGSVGElement_HTMLDocument() throws Exception {
         test("SVGSVGElement", "HTMLDocument");
     }
@@ -15417,7 +15417,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGSVGElement_HTMLFormElement() throws Exception {
         test("SVGSVGElement", "HTMLFormElement");
     }
@@ -15437,7 +15437,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGScriptElement_HTMLDocument() throws Exception {
         test("SVGScriptElement", "HTMLDocument");
     }
@@ -15447,7 +15447,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGScriptElement_HTMLFormElement() throws Exception {
         test("SVGScriptElement", "HTMLFormElement");
     }
@@ -15497,7 +15497,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGStopElement_HTMLDocument() throws Exception {
         test("SVGStopElement", "HTMLDocument");
     }
@@ -15507,7 +15507,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGStopElement_HTMLFormElement() throws Exception {
         test("SVGStopElement", "HTMLFormElement");
     }
@@ -15527,7 +15527,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGStyleElement_HTMLDocument() throws Exception {
         test("SVGStyleElement", "HTMLDocument");
     }
@@ -15537,7 +15537,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGStyleElement_HTMLFormElement() throws Exception {
         test("SVGStyleElement", "HTMLFormElement");
     }
@@ -15557,7 +15557,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGSwitchElement_HTMLDocument() throws Exception {
         test("SVGSwitchElement", "HTMLDocument");
     }
@@ -15567,7 +15567,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGSwitchElement_HTMLFormElement() throws Exception {
         test("SVGSwitchElement", "HTMLFormElement");
     }
@@ -15587,7 +15587,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGSymbolElement_HTMLDocument() throws Exception {
         test("SVGSymbolElement", "HTMLDocument");
     }
@@ -15597,7 +15597,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGSymbolElement_HTMLFormElement() throws Exception {
         test("SVGSymbolElement", "HTMLFormElement");
     }
@@ -15617,7 +15617,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGTSpanElement_HTMLDocument() throws Exception {
         test("SVGTSpanElement", "HTMLDocument");
     }
@@ -15627,7 +15627,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGTSpanElement_HTMLFormElement() throws Exception {
         test("SVGTSpanElement", "HTMLFormElement");
     }
@@ -15647,7 +15647,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGTextElement_HTMLDocument() throws Exception {
         test("SVGTextElement", "HTMLDocument");
     }
@@ -15657,7 +15657,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGTextElement_HTMLFormElement() throws Exception {
         test("SVGTextElement", "HTMLFormElement");
     }
@@ -15677,7 +15677,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGTextPathElement_HTMLDocument() throws Exception {
         test("SVGTextPathElement", "HTMLDocument");
     }
@@ -15687,7 +15687,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGTextPathElement_HTMLFormElement() throws Exception {
         test("SVGTextPathElement", "HTMLFormElement");
     }
@@ -15707,7 +15707,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGTitleElement_HTMLDocument() throws Exception {
         test("SVGTitleElement", "HTMLDocument");
     }
@@ -15717,7 +15717,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGTitleElement_HTMLFormElement() throws Exception {
         test("SVGTitleElement", "HTMLFormElement");
     }
@@ -15737,7 +15737,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGUseElement_HTMLDocument() throws Exception {
         test("SVGUseElement", "HTMLDocument");
     }
@@ -15747,7 +15747,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGUseElement_HTMLFormElement() throws Exception {
         test("SVGUseElement", "HTMLFormElement");
     }
@@ -15767,7 +15767,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGViewElement_HTMLDocument() throws Exception {
         test("SVGViewElement", "HTMLDocument");
     }
@@ -15777,7 +15777,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _SVGViewElement_HTMLFormElement() throws Exception {
         test("SVGViewElement", "HTMLFormElement");
     }
@@ -15797,7 +15797,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Screen_HTMLDocument() throws Exception {
         test("Screen", "HTMLDocument");
     }
@@ -15807,7 +15807,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _Screen_HTMLFormElement() throws Exception {
         test("Screen", "HTMLFormElement");
     }
@@ -15827,7 +15827,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Selection_HTMLDocument() throws Exception {
         test("Selection", "HTMLDocument");
     }
@@ -15837,7 +15837,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _Selection_HTMLFormElement() throws Exception {
         test("Selection", "HTMLFormElement");
     }
@@ -15857,7 +15857,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _StaticNodeList_HTMLDocument() throws Exception {
         test("StaticNodeList", "HTMLDocument");
     }
@@ -15867,7 +15867,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _StaticNodeList_HTMLFormElement() throws Exception {
         test("StaticNodeList", "HTMLFormElement");
     }
@@ -15887,7 +15887,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Storage_HTMLDocument() throws Exception {
         test("Storage", "HTMLDocument");
     }
@@ -15897,7 +15897,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _Storage_HTMLFormElement() throws Exception {
         test("Storage", "HTMLFormElement");
     }
@@ -15917,7 +15917,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _StyleSheetList_HTMLDocument() throws Exception {
         test("StyleSheetList", "HTMLDocument");
     }
@@ -15927,7 +15927,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _StyleSheetList_HTMLFormElement() throws Exception {
         test("StyleSheetList", "HTMLFormElement");
     }
@@ -15947,7 +15947,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Text_HTMLDocument() throws Exception {
         test("Text", "HTMLDocument");
     }
@@ -15957,7 +15957,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _Text_HTMLFormElement() throws Exception {
         test("Text", "HTMLFormElement");
     }
@@ -15977,7 +15977,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _TreeWalker_HTMLDocument() throws Exception {
         test("TreeWalker", "HTMLDocument");
     }
@@ -15987,7 +15987,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _TreeWalker_HTMLFormElement() throws Exception {
         test("TreeWalker", "HTMLFormElement");
     }
@@ -16007,7 +16007,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _UIEvent_HTMLDocument() throws Exception {
         test("UIEvent", "HTMLDocument");
     }
@@ -16017,7 +16017,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _UIEvent_HTMLFormElement() throws Exception {
         test("UIEvent", "HTMLFormElement");
     }
@@ -16037,7 +16037,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Uint16Array_HTMLDocument() throws Exception {
         test("Uint16Array", "HTMLDocument");
     }
@@ -16047,7 +16047,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Uint16Array_HTMLFormElement() throws Exception {
         test("Uint16Array", "HTMLFormElement");
     }
@@ -16067,7 +16067,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Uint32Array_HTMLDocument() throws Exception {
         test("Uint32Array", "HTMLDocument");
     }
@@ -16077,7 +16077,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Uint32Array_HTMLFormElement() throws Exception {
         test("Uint32Array", "HTMLFormElement");
     }
@@ -16097,7 +16097,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Uint8Array_HTMLDocument() throws Exception {
         test("Uint8Array", "HTMLDocument");
     }
@@ -16107,7 +16107,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Uint8Array_HTMLFormElement() throws Exception {
         test("Uint8Array", "HTMLFormElement");
     }
@@ -16127,7 +16127,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Uint8ClampedArray_HTMLDocument() throws Exception {
         test("Uint8ClampedArray", "HTMLDocument");
     }
@@ -16137,7 +16137,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Uint8ClampedArray_HTMLFormElement() throws Exception {
         test("Uint8ClampedArray", "HTMLFormElement");
     }
@@ -16157,7 +16157,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _WebSocket_HTMLDocument() throws Exception {
         test("WebSocket", "HTMLDocument");
     }
@@ -16167,7 +16167,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _WebSocket_HTMLFormElement() throws Exception {
         test("WebSocket", "HTMLFormElement");
     }
@@ -16187,7 +16187,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _Window_HTMLDocument() throws Exception {
         test("Window", "HTMLDocument");
     }
@@ -16197,7 +16197,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _Window_HTMLFormElement() throws Exception {
         test("Window", "HTMLFormElement");
     }
@@ -16217,7 +16217,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _XMLDocument_HTMLDocument() throws Exception {
         test("XMLDocument", "HTMLDocument");
     }
@@ -16227,7 +16227,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _XMLDocument_HTMLFormElement() throws Exception {
         test("XMLDocument", "HTMLFormElement");
     }
@@ -16247,7 +16247,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _XMLHttpRequest_HTMLDocument() throws Exception {
         test("XMLHttpRequest", "HTMLDocument");
     }
@@ -16257,7 +16257,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, IE8, CHROME, IE11 })
     public void _XMLHttpRequest_HTMLFormElement() throws Exception {
         test("XMLHttpRequest", "HTMLFormElement");
     }
@@ -16277,7 +16277,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _XMLSerializer_HTMLDocument() throws Exception {
         test("XMLSerializer", "HTMLDocument");
     }
@@ -16287,7 +16287,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, CHROME, IE11 })
     public void _XMLSerializer_HTMLFormElement() throws Exception {
         test("XMLSerializer", "HTMLFormElement");
     }
@@ -16427,7 +16427,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void _ActiveXObject_HTMLFormElement() throws Exception {
         test("ActiveXObject", "HTMLFormElement");
     }
@@ -16437,7 +16437,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void _ActiveXObject_NamedNodeMap() throws Exception {
         test("ActiveXObject", "NamedNodeMap");
     }
@@ -16447,7 +16447,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _Attr_NamedNodeMap() throws Exception {
         test("Attr", "NamedNodeMap");
     }
@@ -16457,7 +16457,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _CSSRuleList_NamedNodeMap() throws Exception {
         test("CSSRuleList", "NamedNodeMap");
     }
@@ -16467,7 +16467,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _CSSStyleDeclaration_NamedNodeMap() throws Exception {
         test("CSSStyleDeclaration", "NamedNodeMap");
     }
@@ -16477,7 +16477,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _CSSStyleRule_NamedNodeMap() throws Exception {
         test("CSSStyleRule", "NamedNodeMap");
     }
@@ -16487,7 +16487,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _CSSStyleSheet_NamedNodeMap() throws Exception {
         test("CSSStyleSheet", "NamedNodeMap");
     }
@@ -16497,7 +16497,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _DOMImplementation_NamedNodeMap() throws Exception {
         test("DOMImplementation", "NamedNodeMap");
     }
@@ -16507,7 +16507,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _Element_NamedNodeMap() throws Exception {
         test("Element", "NamedNodeMap");
     }
@@ -16517,7 +16517,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void _Enumerator_HTMLFormElement() throws Exception {
         test("Enumerator", "HTMLFormElement");
     }
@@ -16527,7 +16527,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void _Enumerator_NamedNodeMap() throws Exception {
         test("Enumerator", "NamedNodeMap");
     }
@@ -16537,7 +16537,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _Event_NamedNodeMap() throws Exception {
         test("Event", "NamedNodeMap");
     }
@@ -16547,7 +16547,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLAnchorElement_NamedNodeMap() throws Exception {
         test("HTMLAnchorElement", "NamedNodeMap");
     }
@@ -16557,7 +16557,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLAreaElement_NamedNodeMap() throws Exception {
         test("HTMLAreaElement", "NamedNodeMap");
     }
@@ -16567,7 +16567,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void _HTMLBGSoundElement_HTMLFormElement() throws Exception {
         test("HTMLBGSoundElement", "HTMLFormElement");
     }
@@ -16577,7 +16577,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void _HTMLBGSoundElement_NamedNodeMap() throws Exception {
         test("HTMLBGSoundElement", "NamedNodeMap");
     }
@@ -16587,7 +16587,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLBRElement_NamedNodeMap() throws Exception {
         test("HTMLBRElement", "NamedNodeMap");
     }
@@ -16597,7 +16597,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLBaseElement_NamedNodeMap() throws Exception {
         test("HTMLBaseElement", "NamedNodeMap");
     }
@@ -16607,7 +16607,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void _HTMLBaseFontElement_HTMLFormElement() throws Exception {
         test("HTMLBaseFontElement", "HTMLFormElement");
     }
@@ -16617,7 +16617,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void _HTMLBaseFontElement_NamedNodeMap() throws Exception {
         test("HTMLBaseFontElement", "NamedNodeMap");
     }
@@ -16627,7 +16627,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void _HTMLBlockElement_HTMLFormElement() throws Exception {
         test("HTMLBlockElement", "HTMLFormElement");
     }
@@ -16637,7 +16637,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void _HTMLBlockElement_NamedNodeMap() throws Exception {
         test("HTMLBlockElement", "NamedNodeMap");
     }
@@ -16647,7 +16647,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLBodyElement_NamedNodeMap() throws Exception {
         test("HTMLBodyElement", "NamedNodeMap");
     }
@@ -16657,7 +16657,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLButtonElement_NamedNodeMap() throws Exception {
         test("HTMLButtonElement", "NamedNodeMap");
     }
@@ -16667,7 +16667,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLCollection_NamedNodeMap() throws Exception {
         test("HTMLCollection", "NamedNodeMap");
     }
@@ -16697,7 +16697,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void _HTMLDDElement_HTMLFormElement() throws Exception {
         test("HTMLDDElement", "HTMLFormElement");
     }
@@ -16707,7 +16707,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void _HTMLDDElement_NamedNodeMap() throws Exception {
         test("HTMLDDElement", "NamedNodeMap");
     }
@@ -16717,7 +16717,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLDListElement_NamedNodeMap() throws Exception {
         test("HTMLDListElement", "NamedNodeMap");
     }
@@ -16727,7 +16727,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void _HTMLDTElement_HTMLFormElement() throws Exception {
         test("HTMLDTElement", "HTMLFormElement");
     }
@@ -16737,7 +16737,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void _HTMLDTElement_NamedNodeMap() throws Exception {
         test("HTMLDTElement", "NamedNodeMap");
     }
@@ -16747,7 +16747,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLDivElement_NamedNodeMap() throws Exception {
         test("HTMLDivElement", "NamedNodeMap");
     }
@@ -16757,7 +16757,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLDocument_NamedNodeMap() throws Exception {
         test("HTMLDocument", "NamedNodeMap");
     }
@@ -16767,7 +16767,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLEmbedElement_NamedNodeMap() throws Exception {
         test("HTMLEmbedElement", "NamedNodeMap");
     }
@@ -16777,7 +16777,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLFieldSetElement_NamedNodeMap() throws Exception {
         test("HTMLFieldSetElement", "NamedNodeMap");
     }
@@ -16787,7 +16787,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLFontElement_NamedNodeMap() throws Exception {
         test("HTMLFontElement", "NamedNodeMap");
     }
@@ -16797,7 +16797,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLFormElement_NamedNodeMap() throws Exception {
         test("HTMLFormElement", "NamedNodeMap");
     }
@@ -16807,7 +16807,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLFrameElement_NamedNodeMap() throws Exception {
         test("HTMLFrameElement", "NamedNodeMap");
     }
@@ -16817,7 +16817,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLFrameSetElement_NamedNodeMap() throws Exception {
         test("HTMLFrameSetElement", "NamedNodeMap");
     }
@@ -16827,7 +16827,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLHRElement_NamedNodeMap() throws Exception {
         test("HTMLHRElement", "NamedNodeMap");
     }
@@ -16837,7 +16837,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLHeadElement_NamedNodeMap() throws Exception {
         test("HTMLHeadElement", "NamedNodeMap");
     }
@@ -16847,7 +16847,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLHeadingElement_NamedNodeMap() throws Exception {
         test("HTMLHeadingElement", "NamedNodeMap");
     }
@@ -16857,7 +16857,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLHtmlElement_NamedNodeMap() throws Exception {
         test("HTMLHtmlElement", "NamedNodeMap");
     }
@@ -16867,7 +16867,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLIFrameElement_NamedNodeMap() throws Exception {
         test("HTMLIFrameElement", "NamedNodeMap");
     }
@@ -16877,7 +16877,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLImageElement_NamedNodeMap() throws Exception {
         test("HTMLImageElement", "NamedNodeMap");
     }
@@ -16887,7 +16887,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLInputElement_NamedNodeMap() throws Exception {
         test("HTMLInputElement", "NamedNodeMap");
     }
@@ -16897,7 +16897,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void _HTMLIsIndexElement_HTMLFormElement() throws Exception {
         test("HTMLIsIndexElement", "HTMLFormElement");
     }
@@ -16907,7 +16907,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void _HTMLIsIndexElement_NamedNodeMap() throws Exception {
         test("HTMLIsIndexElement", "NamedNodeMap");
     }
@@ -16917,7 +16917,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLLIElement_NamedNodeMap() throws Exception {
         test("HTMLLIElement", "NamedNodeMap");
     }
@@ -16927,7 +16927,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLLabelElement_NamedNodeMap() throws Exception {
         test("HTMLLabelElement", "NamedNodeMap");
     }
@@ -16937,7 +16937,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLLegendElement_NamedNodeMap() throws Exception {
         test("HTMLLegendElement", "NamedNodeMap");
     }
@@ -16947,7 +16947,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLLinkElement_NamedNodeMap() throws Exception {
         test("HTMLLinkElement", "NamedNodeMap");
     }
@@ -16957,7 +16957,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLMapElement_NamedNodeMap() throws Exception {
         test("HTMLMapElement", "NamedNodeMap");
     }
@@ -16967,7 +16967,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLMarqueeElement_HTMLFormElement() throws Exception {
         test("HTMLMarqueeElement", "HTMLFormElement");
     }
@@ -16977,7 +16977,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLMarqueeElement_NamedNodeMap() throws Exception {
         test("HTMLMarqueeElement", "NamedNodeMap");
     }
@@ -16987,7 +16987,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLMetaElement_NamedNodeMap() throws Exception {
         test("HTMLMetaElement", "NamedNodeMap");
     }
@@ -16997,7 +16997,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void _HTMLNextIdElement_HTMLFormElement() throws Exception {
         test("HTMLNextIdElement", "HTMLFormElement");
     }
@@ -17007,7 +17007,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void _HTMLNextIdElement_NamedNodeMap() throws Exception {
         test("HTMLNextIdElement", "NamedNodeMap");
     }
@@ -17037,7 +17037,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLOListElement_NamedNodeMap() throws Exception {
         test("HTMLOListElement", "NamedNodeMap");
     }
@@ -17047,7 +17047,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLObjectElement_NamedNodeMap() throws Exception {
         test("HTMLObjectElement", "NamedNodeMap");
     }
@@ -17057,7 +17057,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLOptionElement_NamedNodeMap() throws Exception {
         test("HTMLOptionElement", "NamedNodeMap");
     }
@@ -17067,7 +17067,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLParagraphElement_NamedNodeMap() throws Exception {
         test("HTMLParagraphElement", "NamedNodeMap");
     }
@@ -17077,7 +17077,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLParamElement_NamedNodeMap() throws Exception {
         test("HTMLParamElement", "NamedNodeMap");
     }
@@ -17087,7 +17087,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void _HTMLPhraseElement_HTMLFormElement() throws Exception {
         test("HTMLPhraseElement", "HTMLFormElement");
     }
@@ -17097,7 +17097,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void _HTMLPhraseElement_NamedNodeMap() throws Exception {
         test("HTMLPhraseElement", "NamedNodeMap");
     }
@@ -17107,7 +17107,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLScriptElement_NamedNodeMap() throws Exception {
         test("HTMLScriptElement", "NamedNodeMap");
     }
@@ -17117,7 +17117,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLSelectElement_NamedNodeMap() throws Exception {
         test("HTMLSelectElement", "NamedNodeMap");
     }
@@ -17127,7 +17127,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLSpanElement_NamedNodeMap() throws Exception {
         test("HTMLSpanElement", "NamedNodeMap");
     }
@@ -17137,7 +17137,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLStyleElement_NamedNodeMap() throws Exception {
         test("HTMLStyleElement", "NamedNodeMap");
     }
@@ -17147,7 +17147,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLTableCaptionElement_NamedNodeMap() throws Exception {
         test("HTMLTableCaptionElement", "NamedNodeMap");
     }
@@ -17157,7 +17157,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLTableCellElement_NamedNodeMap() throws Exception {
         test("HTMLTableCellElement", "NamedNodeMap");
     }
@@ -17167,7 +17167,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLTableColElement_NamedNodeMap() throws Exception {
         test("HTMLTableColElement", "NamedNodeMap");
     }
@@ -17177,7 +17177,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLTableElement_NamedNodeMap() throws Exception {
         test("HTMLTableElement", "NamedNodeMap");
     }
@@ -17187,7 +17187,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLTableRowElement_NamedNodeMap() throws Exception {
         test("HTMLTableRowElement", "NamedNodeMap");
     }
@@ -17197,7 +17197,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLTableSectionElement_NamedNodeMap() throws Exception {
         test("HTMLTableSectionElement", "NamedNodeMap");
     }
@@ -17207,7 +17207,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLTextAreaElement_NamedNodeMap() throws Exception {
         test("HTMLTextAreaElement", "NamedNodeMap");
     }
@@ -17237,7 +17237,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLTitleElement_NamedNodeMap() throws Exception {
         test("HTMLTitleElement", "NamedNodeMap");
     }
@@ -17247,7 +17247,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _HTMLUListElement_NamedNodeMap() throws Exception {
         test("HTMLUListElement", "NamedNodeMap");
     }
@@ -17257,7 +17257,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _History_NamedNodeMap() throws Exception {
         test("History", "NamedNodeMap");
     }
@@ -17267,7 +17267,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _Image_NamedNodeMap() throws Exception {
         test("Image", "NamedNodeMap");
     }
@@ -17277,7 +17277,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _Location_NamedNodeMap() throws Exception {
         test("Location", "NamedNodeMap");
     }
@@ -17287,7 +17287,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _NamedNodeMap_HTMLFormElement() throws Exception {
         test("NamedNodeMap", "HTMLFormElement");
     }
@@ -17297,7 +17297,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _Navigator_NamedNodeMap() throws Exception {
         test("Navigator", "NamedNodeMap");
     }
@@ -17307,7 +17307,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _NodeList_NamedNodeMap() throws Exception {
         test("NodeList", "NamedNodeMap");
     }
@@ -17317,7 +17317,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _Option_NamedNodeMap() throws Exception {
         test("Option", "NamedNodeMap");
     }
@@ -17327,7 +17327,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _Screen_NamedNodeMap() throws Exception {
         test("Screen", "NamedNodeMap");
     }
@@ -17337,7 +17337,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _Selection_NamedNodeMap() throws Exception {
         test("Selection", "NamedNodeMap");
     }
@@ -17347,7 +17347,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _StaticNodeList_NamedNodeMap() throws Exception {
         test("StaticNodeList", "NamedNodeMap");
     }
@@ -17357,7 +17357,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _Storage_NamedNodeMap() throws Exception {
         test("Storage", "NamedNodeMap");
     }
@@ -17367,7 +17367,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _StyleSheetList_NamedNodeMap() throws Exception {
         test("StyleSheetList", "NamedNodeMap");
     }
@@ -17377,7 +17377,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void _TextRange_HTMLFormElement() throws Exception {
         test("TextRange", "HTMLFormElement");
     }
@@ -17387,7 +17387,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ IE8, IE11 })
     public void _TextRange_NamedNodeMap() throws Exception {
         test("TextRange", "NamedNodeMap");
     }
@@ -17397,7 +17397,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _Text_NamedNodeMap() throws Exception {
         test("Text", "NamedNodeMap");
     }
@@ -17407,7 +17407,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _Window_NamedNodeMap() throws Exception {
         test("Window", "NamedNodeMap");
     }
@@ -17417,7 +17417,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ IE8, CHROME })
+    @NotYetImplemented({ IE8, CHROME, IE11 })
     public void _XMLHttpRequest_NamedNodeMap() throws Exception {
         test("XMLHttpRequest", "NamedNodeMap");
     }
@@ -17427,7 +17427,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _ApplicationCache_HTMLDocument() throws Exception {
         test("ApplicationCache", "HTMLDocument");
     }
@@ -17437,7 +17437,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _ApplicationCache_HTMLFormElement() throws Exception {
         test("ApplicationCache", "HTMLFormElement");
     }
@@ -17457,7 +17457,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _ApplicationCache_NamedNodeMap() throws Exception {
         test("ApplicationCache", "NamedNodeMap");
     }
@@ -17467,7 +17467,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _ArrayBuffer_NamedNodeMap() throws Exception {
         test("ArrayBuffer", "NamedNodeMap");
     }
@@ -17477,7 +17477,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _BeforeUnloadEvent_NamedNodeMap() throws Exception {
         test("BeforeUnloadEvent", "NamedNodeMap");
     }
@@ -17487,7 +17487,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _CDATASection_NamedNodeMap() throws Exception {
         test("CDATASection", "NamedNodeMap");
     }
@@ -17497,7 +17497,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _CSSFontFaceRule_NamedNodeMap() throws Exception {
         test("CSSFontFaceRule", "NamedNodeMap");
     }
@@ -17507,7 +17507,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _CSSImportRule_NamedNodeMap() throws Exception {
         test("CSSImportRule", "NamedNodeMap");
     }
@@ -17517,7 +17517,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _CSSMediaRule_NamedNodeMap() throws Exception {
         test("CSSMediaRule", "NamedNodeMap");
     }
@@ -17527,7 +17527,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _CSSRule_NamedNodeMap() throws Exception {
         test("CSSRule", "NamedNodeMap");
     }
@@ -17537,7 +17537,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _CanvasRenderingContext2D_NamedNodeMap() throws Exception {
         test("CanvasRenderingContext2D", "NamedNodeMap");
     }
@@ -17547,7 +17547,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _ClientRect_HTMLDocument() throws Exception {
         test("ClientRect", "HTMLDocument");
     }
@@ -17557,7 +17557,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _ClientRect_HTMLFormElement() throws Exception {
         test("ClientRect", "HTMLFormElement");
     }
@@ -17577,7 +17577,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _ClientRect_NamedNodeMap() throws Exception {
         test("ClientRect", "NamedNodeMap");
     }
@@ -17587,7 +17587,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _Comment_NamedNodeMap() throws Exception {
         test("Comment", "NamedNodeMap");
     }
@@ -17597,7 +17597,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _DOMException_NamedNodeMap() throws Exception {
         test("DOMException", "NamedNodeMap");
     }
@@ -17607,7 +17607,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _DOMParser_NamedNodeMap() throws Exception {
         test("DOMParser", "NamedNodeMap");
     }
@@ -17707,7 +17707,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _DOMTokenList_NamedNodeMap() throws Exception {
         test("DOMTokenList", "NamedNodeMap");
     }
@@ -17717,7 +17717,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _DataView_NamedNodeMap() throws Exception {
         test("DataView", "NamedNodeMap");
     }
@@ -17727,7 +17727,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _DocumentFragment_NamedNodeMap() throws Exception {
         test("DocumentFragment", "NamedNodeMap");
     }
@@ -17737,7 +17737,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _DocumentType_NamedNodeMap() throws Exception {
         test("DocumentType", "NamedNodeMap");
     }
@@ -17747,7 +17747,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _Document_NamedNodeMap() throws Exception {
         test("Document", "NamedNodeMap");
     }
@@ -17757,7 +17757,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _Float32Array_NamedNodeMap() throws Exception {
         test("Float32Array", "NamedNodeMap");
     }
@@ -17767,7 +17767,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _Float64Array_NamedNodeMap() throws Exception {
         test("Float64Array", "NamedNodeMap");
     }
@@ -17777,7 +17777,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _HTMLAllCollection_HTMLDocument() throws Exception {
         test("HTMLAllCollection", "HTMLDocument");
     }
@@ -17787,7 +17787,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _HTMLAllCollection_HTMLFormElement() throws Exception {
         test("HTMLAllCollection", "HTMLFormElement");
     }
@@ -17807,7 +17807,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _HTMLAllCollection_NamedNodeMap() throws Exception {
         test("HTMLAllCollection", "NamedNodeMap");
     }
@@ -17817,7 +17817,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _HTMLAppletElement_NamedNodeMap() throws Exception {
         test("HTMLAppletElement", "NamedNodeMap");
     }
@@ -17827,7 +17827,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _HTMLAudioElement_NamedNodeMap() throws Exception {
         test("HTMLAudioElement", "NamedNodeMap");
     }
@@ -17837,7 +17837,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _HTMLCanvasElement_NamedNodeMap() throws Exception {
         test("HTMLCanvasElement", "NamedNodeMap");
     }
@@ -17847,7 +17847,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _HTMLDataListElement_NamedNodeMap() throws Exception {
         test("HTMLDataListElement", "NamedNodeMap");
     }
@@ -17937,7 +17937,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _HTMLDirectoryElement_NamedNodeMap() throws Exception {
         test("HTMLDirectoryElement", "NamedNodeMap");
     }
@@ -17947,7 +17947,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _HTMLElement_NamedNodeMap() throws Exception {
         test("HTMLElement", "NamedNodeMap");
     }
@@ -17997,7 +17997,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _HTMLMarqueeElement_HTMLDocument() throws Exception {
         test("HTMLMarqueeElement", "HTMLDocument");
     }
@@ -18017,7 +18017,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _HTMLMediaElement_NamedNodeMap() throws Exception {
         test("HTMLMediaElement", "NamedNodeMap");
     }
@@ -18027,7 +18027,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _HTMLMenuElement_NamedNodeMap() throws Exception {
         test("HTMLMenuElement", "NamedNodeMap");
     }
@@ -18047,7 +18047,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _HTMLModElement_NamedNodeMap() throws Exception {
         test("HTMLModElement", "NamedNodeMap");
     }
@@ -18057,7 +18057,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _HTMLOptGroupElement_NamedNodeMap() throws Exception {
         test("HTMLOptGroupElement", "NamedNodeMap");
     }
@@ -18087,7 +18087,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _HTMLPreElement_NamedNodeMap() throws Exception {
         test("HTMLPreElement", "NamedNodeMap");
     }
@@ -18097,7 +18097,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _HTMLProgressElement_NamedNodeMap() throws Exception {
         test("HTMLProgressElement", "NamedNodeMap");
     }
@@ -18107,7 +18107,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _HTMLQuoteElement_NamedNodeMap() throws Exception {
         test("HTMLQuoteElement", "NamedNodeMap");
     }
@@ -18117,7 +18117,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _HTMLSourceElement_NamedNodeMap() throws Exception {
         test("HTMLSourceElement", "NamedNodeMap");
     }
@@ -18127,7 +18127,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _HTMLTrackElement_NamedNodeMap() throws Exception {
         test("HTMLTrackElement", "NamedNodeMap");
     }
@@ -18137,7 +18137,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _HTMLUnknownElement_NamedNodeMap() throws Exception {
         test("HTMLUnknownElement", "NamedNodeMap");
     }
@@ -18147,7 +18147,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _HTMLVideoElement_NamedNodeMap() throws Exception {
         test("HTMLVideoElement", "NamedNodeMap");
     }
@@ -18167,7 +18167,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _Int16Array_NamedNodeMap() throws Exception {
         test("Int16Array", "NamedNodeMap");
     }
@@ -18177,7 +18177,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _Int32Array_NamedNodeMap() throws Exception {
         test("Int32Array", "NamedNodeMap");
     }
@@ -18187,7 +18187,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _Int8Array_NamedNodeMap() throws Exception {
         test("Int8Array", "NamedNodeMap");
     }
@@ -18197,7 +18197,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _KeyboardEvent_NamedNodeMap() throws Exception {
         test("KeyboardEvent", "NamedNodeMap");
     }
@@ -18207,7 +18207,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _MediaList_NamedNodeMap() throws Exception {
         test("MediaList", "NamedNodeMap");
     }
@@ -18217,7 +18217,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _MessageEvent_NamedNodeMap() throws Exception {
         test("MessageEvent", "NamedNodeMap");
     }
@@ -18227,7 +18227,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _MimeTypeArray_NamedNodeMap() throws Exception {
         test("MimeTypeArray", "NamedNodeMap");
     }
@@ -18237,7 +18237,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _MimeType_NamedNodeMap() throws Exception {
         test("MimeType", "NamedNodeMap");
     }
@@ -18247,7 +18247,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _MouseEvent_NamedNodeMap() throws Exception {
         test("MouseEvent", "NamedNodeMap");
     }
@@ -18257,7 +18257,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _MutationEvent_NamedNodeMap() throws Exception {
         test("MutationEvent", "NamedNodeMap");
     }
@@ -18267,7 +18267,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _NamedNodeMap_HTMLDocument() throws Exception {
         test("NamedNodeMap", "HTMLDocument");
     }
@@ -18287,7 +18287,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _NodeFilter_NamedNodeMap() throws Exception {
         test("NodeFilter", "NamedNodeMap");
     }
@@ -18297,7 +18297,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _Node_NamedNodeMap() throws Exception {
         test("Node", "NamedNodeMap");
     }
@@ -18317,7 +18317,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _PluginArray_NamedNodeMap() throws Exception {
         test("PluginArray", "NamedNodeMap");
     }
@@ -18327,7 +18327,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _Plugin_NamedNodeMap() throws Exception {
         test("Plugin", "NamedNodeMap");
     }
@@ -18337,7 +18337,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _ProcessingInstruction_NamedNodeMap() throws Exception {
         test("ProcessingInstruction", "NamedNodeMap");
     }
@@ -18347,7 +18347,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _Range_NamedNodeMap() throws Exception {
         test("Range", "NamedNodeMap");
     }
@@ -18357,7 +18357,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGAElement_NamedNodeMap() throws Exception {
         test("SVGAElement", "NamedNodeMap");
     }
@@ -18367,7 +18367,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGAngle_NamedNodeMap() throws Exception {
         test("SVGAngle", "NamedNodeMap");
     }
@@ -18407,7 +18407,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGCircleElement_NamedNodeMap() throws Exception {
         test("SVGCircleElement", "NamedNodeMap");
     }
@@ -18417,7 +18417,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGClipPathElement_NamedNodeMap() throws Exception {
         test("SVGClipPathElement", "NamedNodeMap");
     }
@@ -18467,7 +18467,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGDefsElement_NamedNodeMap() throws Exception {
         test("SVGDefsElement", "NamedNodeMap");
     }
@@ -18477,7 +18477,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGDescElement_NamedNodeMap() throws Exception {
         test("SVGDescElement", "NamedNodeMap");
     }
@@ -18487,7 +18487,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGElement_NamedNodeMap() throws Exception {
         test("SVGElement", "NamedNodeMap");
     }
@@ -18497,7 +18497,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGEllipseElement_NamedNodeMap() throws Exception {
         test("SVGEllipseElement", "NamedNodeMap");
     }
@@ -18507,7 +18507,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGFEBlendElement_NamedNodeMap() throws Exception {
         test("SVGFEBlendElement", "NamedNodeMap");
     }
@@ -18517,7 +18517,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGFEColorMatrixElement_NamedNodeMap() throws Exception {
         test("SVGFEColorMatrixElement", "NamedNodeMap");
     }
@@ -18527,7 +18527,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGFEComponentTransferElement_NamedNodeMap() throws Exception {
         test("SVGFEComponentTransferElement", "NamedNodeMap");
     }
@@ -18537,7 +18537,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGFECompositeElement_NamedNodeMap() throws Exception {
         test("SVGFECompositeElement", "NamedNodeMap");
     }
@@ -18547,7 +18547,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGFEConvolveMatrixElement_NamedNodeMap() throws Exception {
         test("SVGFEConvolveMatrixElement", "NamedNodeMap");
     }
@@ -18557,7 +18557,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGFEDiffuseLightingElement_NamedNodeMap() throws Exception {
         test("SVGFEDiffuseLightingElement", "NamedNodeMap");
     }
@@ -18567,7 +18567,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGFEDisplacementMapElement_NamedNodeMap() throws Exception {
         test("SVGFEDisplacementMapElement", "NamedNodeMap");
     }
@@ -18577,7 +18577,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGFEDistantLightElement_NamedNodeMap() throws Exception {
         test("SVGFEDistantLightElement", "NamedNodeMap");
     }
@@ -18587,7 +18587,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGFEFloodElement_NamedNodeMap() throws Exception {
         test("SVGFEFloodElement", "NamedNodeMap");
     }
@@ -18597,7 +18597,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGFEFuncAElement_NamedNodeMap() throws Exception {
         test("SVGFEFuncAElement", "NamedNodeMap");
     }
@@ -18607,7 +18607,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGFEFuncBElement_NamedNodeMap() throws Exception {
         test("SVGFEFuncBElement", "NamedNodeMap");
     }
@@ -18617,7 +18617,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGFEFuncGElement_NamedNodeMap() throws Exception {
         test("SVGFEFuncGElement", "NamedNodeMap");
     }
@@ -18627,7 +18627,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGFEFuncRElement_NamedNodeMap() throws Exception {
         test("SVGFEFuncRElement", "NamedNodeMap");
     }
@@ -18637,7 +18637,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGFEGaussianBlurElement_NamedNodeMap() throws Exception {
         test("SVGFEGaussianBlurElement", "NamedNodeMap");
     }
@@ -18647,7 +18647,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGFEImageElement_NamedNodeMap() throws Exception {
         test("SVGFEImageElement", "NamedNodeMap");
     }
@@ -18657,7 +18657,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGFEMergeElement_NamedNodeMap() throws Exception {
         test("SVGFEMergeElement", "NamedNodeMap");
     }
@@ -18667,7 +18667,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGFEMergeNodeElement_NamedNodeMap() throws Exception {
         test("SVGFEMergeNodeElement", "NamedNodeMap");
     }
@@ -18677,7 +18677,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGFEMorphologyElement_NamedNodeMap() throws Exception {
         test("SVGFEMorphologyElement", "NamedNodeMap");
     }
@@ -18687,7 +18687,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGFEOffsetElement_NamedNodeMap() throws Exception {
         test("SVGFEOffsetElement", "NamedNodeMap");
     }
@@ -18697,7 +18697,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGFEPointLightElement_NamedNodeMap() throws Exception {
         test("SVGFEPointLightElement", "NamedNodeMap");
     }
@@ -18707,7 +18707,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGFESpecularLightingElement_NamedNodeMap() throws Exception {
         test("SVGFESpecularLightingElement", "NamedNodeMap");
     }
@@ -18717,7 +18717,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGFESpotLightElement_NamedNodeMap() throws Exception {
         test("SVGFESpotLightElement", "NamedNodeMap");
     }
@@ -18727,7 +18727,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGFETileElement_NamedNodeMap() throws Exception {
         test("SVGFETileElement", "NamedNodeMap");
     }
@@ -18737,7 +18737,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGFETurbulenceElement_NamedNodeMap() throws Exception {
         test("SVGFETurbulenceElement", "NamedNodeMap");
     }
@@ -18747,7 +18747,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGFilterElement_NamedNodeMap() throws Exception {
         test("SVGFilterElement", "NamedNodeMap");
     }
@@ -18767,7 +18767,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGGElement_NamedNodeMap() throws Exception {
         test("SVGGElement", "NamedNodeMap");
     }
@@ -18777,7 +18777,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGImageElement_NamedNodeMap() throws Exception {
         test("SVGImageElement", "NamedNodeMap");
     }
@@ -18787,7 +18787,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGLineElement_NamedNodeMap() throws Exception {
         test("SVGLineElement", "NamedNodeMap");
     }
@@ -18797,7 +18797,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGLinearGradientElement_NamedNodeMap() throws Exception {
         test("SVGLinearGradientElement", "NamedNodeMap");
     }
@@ -18817,7 +18817,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGMarkerElement_NamedNodeMap() throws Exception {
         test("SVGMarkerElement", "NamedNodeMap");
     }
@@ -18827,7 +18827,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGMaskElement_NamedNodeMap() throws Exception {
         test("SVGMaskElement", "NamedNodeMap");
     }
@@ -18837,7 +18837,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGMatrix_NamedNodeMap() throws Exception {
         test("SVGMatrix", "NamedNodeMap");
     }
@@ -18847,7 +18847,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGMetadataElement_NamedNodeMap() throws Exception {
         test("SVGMetadataElement", "NamedNodeMap");
     }
@@ -18857,7 +18857,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGPathElement_NamedNodeMap() throws Exception {
         test("SVGPathElement", "NamedNodeMap");
     }
@@ -18867,7 +18867,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGPatternElement_NamedNodeMap() throws Exception {
         test("SVGPatternElement", "NamedNodeMap");
     }
@@ -18877,7 +18877,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGPolygonElement_NamedNodeMap() throws Exception {
         test("SVGPolygonElement", "NamedNodeMap");
     }
@@ -18887,7 +18887,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGPolylineElement_NamedNodeMap() throws Exception {
         test("SVGPolylineElement", "NamedNodeMap");
     }
@@ -18897,7 +18897,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGRadialGradientElement_NamedNodeMap() throws Exception {
         test("SVGRadialGradientElement", "NamedNodeMap");
     }
@@ -18907,7 +18907,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGRectElement_NamedNodeMap() throws Exception {
         test("SVGRectElement", "NamedNodeMap");
     }
@@ -18917,7 +18917,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGRect_NamedNodeMap() throws Exception {
         test("SVGRect", "NamedNodeMap");
     }
@@ -18927,7 +18927,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGSVGElement_NamedNodeMap() throws Exception {
         test("SVGSVGElement", "NamedNodeMap");
     }
@@ -18937,7 +18937,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGScriptElement_NamedNodeMap() throws Exception {
         test("SVGScriptElement", "NamedNodeMap");
     }
@@ -18957,7 +18957,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGStopElement_NamedNodeMap() throws Exception {
         test("SVGStopElement", "NamedNodeMap");
     }
@@ -18967,7 +18967,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGStyleElement_NamedNodeMap() throws Exception {
         test("SVGStyleElement", "NamedNodeMap");
     }
@@ -18977,7 +18977,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGSwitchElement_NamedNodeMap() throws Exception {
         test("SVGSwitchElement", "NamedNodeMap");
     }
@@ -18987,7 +18987,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGSymbolElement_NamedNodeMap() throws Exception {
         test("SVGSymbolElement", "NamedNodeMap");
     }
@@ -18997,7 +18997,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGTSpanElement_NamedNodeMap() throws Exception {
         test("SVGTSpanElement", "NamedNodeMap");
     }
@@ -19007,7 +19007,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGTextElement_NamedNodeMap() throws Exception {
         test("SVGTextElement", "NamedNodeMap");
     }
@@ -19017,7 +19017,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGTextPathElement_NamedNodeMap() throws Exception {
         test("SVGTextPathElement", "NamedNodeMap");
     }
@@ -19027,7 +19027,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGTitleElement_NamedNodeMap() throws Exception {
         test("SVGTitleElement", "NamedNodeMap");
     }
@@ -19037,7 +19037,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGUseElement_NamedNodeMap() throws Exception {
         test("SVGUseElement", "NamedNodeMap");
     }
@@ -19047,7 +19047,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _SVGViewElement_NamedNodeMap() throws Exception {
         test("SVGViewElement", "NamedNodeMap");
     }
@@ -19057,7 +19057,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _TreeWalker_NamedNodeMap() throws Exception {
         test("TreeWalker", "NamedNodeMap");
     }
@@ -19067,7 +19067,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _UIEvent_NamedNodeMap() throws Exception {
         test("UIEvent", "NamedNodeMap");
     }
@@ -19077,7 +19077,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _Uint16Array_NamedNodeMap() throws Exception {
         test("Uint16Array", "NamedNodeMap");
     }
@@ -19087,7 +19087,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _Uint32Array_NamedNodeMap() throws Exception {
         test("Uint32Array", "NamedNodeMap");
     }
@@ -19097,7 +19097,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _Uint8Array_NamedNodeMap() throws Exception {
         test("Uint8Array", "NamedNodeMap");
     }
@@ -19107,7 +19107,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _Uint8ClampedArray_NamedNodeMap() throws Exception {
         test("Uint8ClampedArray", "NamedNodeMap");
     }
@@ -19117,7 +19117,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _WebSocket_NamedNodeMap() throws Exception {
         test("WebSocket", "NamedNodeMap");
     }
@@ -19127,7 +19127,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _XMLDocument_NamedNodeMap() throws Exception {
         test("XMLDocument", "NamedNodeMap");
     }
@@ -19137,7 +19137,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({ CHROME, IE11 })
     public void _XMLSerializer_NamedNodeMap() throws Exception {
         test("XMLSerializer", "NamedNodeMap");
     }
@@ -19170,5 +19170,325 @@ public class HostParentOfTest extends WebDriverTestCase {
     @NotYetImplemented(CHROME)
     public void _XSLTProcessor_NamedNodeMap() throws Exception {
         test("XSLTProcessor", "NamedNodeMap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _ActiveXObject_HTMLDocument() throws Exception {
+        test("ActiveXObject", "HTMLDocument");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _Console_HTMLDocument() throws Exception {
+        test("Console", "HTMLDocument");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _Console_HTMLFormElement() throws Exception {
+        test("Console", "HTMLFormElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _Console_NamedNodeMap() throws Exception {
+        test("Console", "NamedNodeMap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _Coordinates_HTMLDocument() throws Exception {
+        test("Coordinates", "HTMLDocument");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _Coordinates_HTMLFormElement() throws Exception {
+        test("Coordinates", "HTMLFormElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _Coordinates_NamedNodeMap() throws Exception {
+        test("Coordinates", "NamedNodeMap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _Enumerator_HTMLDocument() throws Exception {
+        test("Enumerator", "HTMLDocument");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _Geolocation_HTMLDocument() throws Exception {
+        test("Geolocation", "HTMLDocument");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _Geolocation_HTMLFormElement() throws Exception {
+        test("Geolocation", "HTMLFormElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _Geolocation_NamedNodeMap() throws Exception {
+        test("Geolocation", "NamedNodeMap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _HTMLBGSoundElement_HTMLDocument() throws Exception {
+        test("HTMLBGSoundElement", "HTMLDocument");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _HTMLBaseFontElement_HTMLDocument() throws Exception {
+        test("HTMLBaseFontElement", "HTMLDocument");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _HTMLBlockElement_HTMLDocument() throws Exception {
+        test("HTMLBlockElement", "HTMLDocument");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _HTMLDDElement_HTMLDocument() throws Exception {
+        test("HTMLDDElement", "HTMLDocument");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _HTMLDTElement_HTMLDocument() throws Exception {
+        test("HTMLDTElement", "HTMLDocument");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _HTMLIsIndexElement_HTMLDocument() throws Exception {
+        test("HTMLIsIndexElement", "HTMLDocument");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _HTMLNextIdElement_HTMLDocument() throws Exception {
+        test("HTMLNextIdElement", "HTMLDocument");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _HTMLPhraseElement_HTMLDocument() throws Exception {
+        test("HTMLPhraseElement", "HTMLDocument");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _HTMLTableDataCellElement_HTMLDocument() throws Exception {
+        test("HTMLTableDataCellElement", "HTMLDocument");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _HTMLTableDataCellElement_HTMLFormElement() throws Exception {
+        test("HTMLTableDataCellElement", "HTMLFormElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _HTMLTableDataCellElement_NamedNodeMap() throws Exception {
+        test("HTMLTableDataCellElement", "NamedNodeMap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _HTMLTableHeaderCellElement_HTMLDocument() throws Exception {
+        test("HTMLTableHeaderCellElement", "HTMLDocument");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _HTMLTableHeaderCellElement_HTMLFormElement() throws Exception {
+        test("HTMLTableHeaderCellElement", "HTMLFormElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _HTMLTableHeaderCellElement_NamedNodeMap() throws Exception {
+        test("HTMLTableHeaderCellElement", "NamedNodeMap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _PointerEvent_HTMLDocument() throws Exception {
+        test("PointerEvent", "HTMLDocument");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _PointerEvent_HTMLFormElement() throws Exception {
+        test("PointerEvent", "HTMLFormElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _PointerEvent_NamedNodeMap() throws Exception {
+        test("PointerEvent", "NamedNodeMap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _Position_HTMLDocument() throws Exception {
+        test("Position", "HTMLDocument");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _Position_HTMLFormElement() throws Exception {
+        test("Position", "HTMLFormElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _Position_NamedNodeMap() throws Exception {
+        test("Position", "NamedNodeMap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented(IE11)
+    public void _TextRange_HTMLDocument() throws Exception {
+        test("TextRange", "HTMLDocument");
     }
 }
