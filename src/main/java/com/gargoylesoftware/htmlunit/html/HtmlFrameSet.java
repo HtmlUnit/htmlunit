@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FRAMESET_INLINE;
+
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -90,5 +92,16 @@ public class HtmlFrameSet extends HtmlElement {
      */
     public final String getOnUnloadAttribute() {
         return getAttribute("onunload");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        if (hasFeature(CSS_FRAMESET_INLINE)) {
+            return DisplayStyle.INLINE;
+        }
+        return super.getDefaultStyleDisplay();
     }
 }

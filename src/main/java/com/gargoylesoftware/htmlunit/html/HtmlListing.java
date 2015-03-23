@@ -52,6 +52,6 @@ public class HtmlListing extends HtmlElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        return DisplayStyle.INLINE;
+        return DisplayStyle.BLOCK;
     }
 }

@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_BLOCK2;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -179,5 +181,20 @@ public class HtmlLink extends HtmlElement {
         final WebRequest request = new WebRequest(url);
         request.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
         return request;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Returns the default display style.
+     *
+     * @return the default display style.
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        if (hasFeature(CSS_DISPLAY_BLOCK2)) {
+            return DisplayStyle.NONE;
+        }
+        return DisplayStyle.INLINE;
     }
 }

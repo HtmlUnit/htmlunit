@@ -63,4 +63,11 @@ public class HtmlHead extends HtmlElement {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        return DisplayStyle.NONE;
+    }
 }

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.AUDIO_INLINE;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -43,14 +44,13 @@ public class HtmlAudio extends HtmlMedia {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     *
-     * Returns the default display style.
-     *
-     * @return the default display style.
+     * {@inheritDoc}
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
+        if (hasFeature(AUDIO_INLINE)) {
+            return DisplayStyle.INLINE;
+        }
         return DisplayStyle.NONE;
     }
 }

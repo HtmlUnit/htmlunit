@@ -48,6 +48,12 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     APPLET_INLINE_BLOCK,
 
+    /**
+     * Is the default display style of Audio is 'inline'.
+     */
+    @BrowserFeature(@WebBrowser(CHROME))
+    AUDIO_INLINE,
+
     /** If the "type" attribute of HtmlButton should be evaluated to 'button' if not specified. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     BUTTON_EMPTY_TYPE_BUTTON,
@@ -77,6 +83,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     CSS_DEFAULT_WIDTH_AUTO,
 
+    /** Is display style of HtmlDialog is 'none'. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    CSS_DIALOG_NONE,
+
     /** Is display style 'block'. */
     @BrowserFeature(@WebBrowser(FF))
     CSS_DISPLAY_BLOCK,
@@ -97,12 +107,16 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     CSS_FONT_STRECH_DEFAULT_NORMAL,
 
+    /** Is display style of HtmlFrameSet is 'inline'. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    CSS_FRAMESET_INLINE,
+
     /** Indicates that the browser can surrounds image url's with quotes. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     CSS_IMAGE_URL_QUOTED,
 
     /** The default value of the display property for the 'keygen' tag is 'inline-block' instead of the default one. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature(@WebBrowser(CHROME))
     CSS_KEYGEN_DISPLAY_INLINE_BLOCK,
 
     /** The default value of the display property for the 'noscript' tag is 'inline' instead of the default one. */

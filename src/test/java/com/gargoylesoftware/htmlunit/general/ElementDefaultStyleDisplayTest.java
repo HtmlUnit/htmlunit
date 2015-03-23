@@ -16,9 +16,7 @@ package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -155,7 +153,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "none",
             CHROME = "inline",
             IE8 = "inline")
-    @NotYetImplemented(CHROME)
     public void audio() throws Exception {
         loadPageWithAlerts2(test("audio"));
     }
@@ -179,7 +176,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "inline",
             FF = "none")
-    @NotYetImplemented
     public void base() throws Exception {
         loadPageWithAlerts2(test("base"));
     }
@@ -192,7 +188,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "inline",
             FF = "none")
-    @NotYetImplemented
     public void basefont() throws Exception {
         loadPageWithAlerts2(test("basefont"));
     }
@@ -427,7 +422,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "inline",
             CHROME = "none")
-    @NotYetImplemented(CHROME)
     public void dialog() throws Exception {
         loadPageWithAlerts2(test("dialog"));
     }
@@ -575,7 +569,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "block",
             FF = "inline")
-    @NotYetImplemented(FF)
     public void frame() throws Exception {
         loadPageWithAlerts2(test("frame"));
     }
@@ -588,7 +581,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "block",
             IE8 = "inline")
-    @NotYetImplemented(IE8)
     public void frameset() throws Exception {
         loadPageWithAlerts2(test("frameset"));
     }
@@ -600,7 +592,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("none")
-    @NotYetImplemented({ CHROME, FF, IE })
     public void head() throws Exception {
         loadPageWithAlerts2(test("head"));
     }
@@ -802,7 +793,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "inline",
             CHROME = "inline-block")
-    @NotYetImplemented({ CHROME, FF })
     public void keygen() throws Exception {
         loadPageWithAlerts2(test("keygen"));
     }
@@ -849,7 +839,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("block")
-    @NotYetImplemented
     public void listing() throws Exception {
         loadPageWithAlerts2(test("listing"));
     }
@@ -873,7 +862,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "none",
             IE = "inline")
-    @NotYetImplemented
     public void link() throws Exception {
         loadPageWithAlerts2(test("link"));
     }
@@ -920,7 +908,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "inline-block",
             IE = "block")
-    @NotYetImplemented({ CHROME, FF })
     public void marquee() throws Exception {
         loadPageWithAlerts2(test("marquee"));
     }
