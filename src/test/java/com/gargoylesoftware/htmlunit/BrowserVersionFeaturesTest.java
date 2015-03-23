@@ -91,7 +91,7 @@ public class BrowserVersionFeaturesTest  {
                 for (final WebBrowser annotatedBrowser : browserFeature.value()) {
                     boolean inUse = false;
                     for (BrowserVersion supportedBrowser : browsers) {
-                        if (expectedBrowserName(supportedBrowser).equals(annotatedBrowser.value().name())
+                        if (supportedBrowser.getNickname().toUpperCase().equals(annotatedBrowser.value().name())
                                 && annotatedBrowser.minVersion() <= supportedBrowser.getBrowserVersionNumeric()
                                 && annotatedBrowser.maxVersion() >= supportedBrowser.getBrowserVersionNumeric()) {
                             inUse = true;
@@ -104,17 +104,6 @@ public class BrowserVersionFeaturesTest  {
                 }
             }
         }
-    }
-
-    private String expectedBrowserName(final BrowserVersion browser) {
-        if (browser.isIE()) {
-            return "IE";
-        }
-        if (browser.isFirefox()) {
-            return "FF";
-        }
-
-        return "CHROME";
     }
 
     /**
