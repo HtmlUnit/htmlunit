@@ -257,7 +257,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
                             "block", "inline" },
             IE8 = { "inline", "inline", "inline", "block", /* "none", */ "inline", "inline", "inline", "inline" },
             IE11 = { "inline", "inline", "inline", "block", /* "inline-block", */ "inline", "block", "block", "none" })
-    @NotYetImplemented(CHROME)
     public void defaultDisplayValues_A() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p id='p'>\n"
@@ -395,7 +394,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "none", "block", "inline", "inline", "inline", "inline", "block", "block", "block", "block" },
             CHROME = { "none", "block", "inline", "block", "inline", "none", "block", "block", "block", "block" },
             IE8 = { "inline", "block", "inline", "inline", "inline", "inline", "block", "block", "block", "block" })
-    @NotYetImplemented(CHROME)
     public void defaultDisplayValues_D() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <datalist id='datalist'></datalist>\n"

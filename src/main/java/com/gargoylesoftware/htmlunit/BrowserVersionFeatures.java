@@ -116,7 +116,7 @@ public enum BrowserVersionFeatures {
     CSS_IMAGE_URL_QUOTED,
 
     /** The default value of the display property for the 'keygen' tag is 'inline-block' instead of the default one. */
-    @BrowserFeature(@WebBrowser(CHROME))
+    @BrowserFeature(@WebBrowser(FF))
     CSS_KEYGEN_DISPLAY_INLINE_BLOCK,
 
     /** The default value of the display property for the 'noscript' tag is 'inline' instead of the default one. */
