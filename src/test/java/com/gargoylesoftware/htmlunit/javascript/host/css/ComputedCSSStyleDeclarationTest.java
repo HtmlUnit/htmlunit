@@ -562,7 +562,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
                     "inline-block", "inline-block", "inline-block", "inline-block", "inline" },
             FF = { "inline", "inline", "inline", "inline", "inline", "inline",
                     "inline", "inline", "inline", "inline" })
-    @NotYetImplemented(CHROME)
     public void defaultDisplayValues_I() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p id='p'>\n"
@@ -898,7 +897,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
                     "table-cell", "table-header-group", "inline", "table-row", "inline", "inline" },
             IE = { "table", "table-row-group", "table-cell", "inline-block", "table-footer-group",
                         "table-cell", "table-header-group", "inline", "table-row", "inline", "inline" })
-    @NotYetImplemented(CHROME)
     public void defaultDisplayValues_T() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <table id='table'>\n"
