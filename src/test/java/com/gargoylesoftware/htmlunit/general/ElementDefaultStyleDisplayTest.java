@@ -106,7 +106,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "inline",
             FF = "inline-block")
-    @NotYetImplemented
     public void applet() throws Exception {
         loadPageWithAlerts2(test("applet"));
     }

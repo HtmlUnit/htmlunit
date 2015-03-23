@@ -42,6 +42,12 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     ANCHOR_EMPTY_HREF_NO_FILENAME,
 
+    /**
+     * Is the default display style of Applet is 'inline-block'.
+     */
+    @BrowserFeature(@WebBrowser(FF))
+    APPLET_INLINE_BLOCK,
+
     /** If the "type" attribute of HtmlButton should be evaluated to 'button' if not specified. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     BUTTON_EMPTY_TYPE_BUTTON,

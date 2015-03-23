@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.APPLET_INLINE_BLOCK;
+
 import java.applet.Applet;
 import java.io.IOException;
 import java.net.URL;
@@ -330,5 +332,16 @@ public class HtmlApplet extends HtmlElement {
      */
     public List<URL> getArchiveUrls() {
         return archiveUrls_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        if (getPage().getWebClient().getBrowserVersion().hasFeature(APPLET_INLINE_BLOCK)) {
+            return DisplayStyle.INLINE_BLOCK;
+        }
+        return DisplayStyle.INLINE;
     }
 }

@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.runners;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -151,14 +152,14 @@ final class TestCaseCorrector {
                     lines.set(i - 1, "    @NotYetImplemented(" + browserSet.iterator().next() + ")");
                 }
                 else if (browserSet.size() > 1) {
-                    lines.set(i - 1, "    @NotYetImplemented({ " + StringUtils.join(browsers, ", ") + " })");
+                    lines.set(i - 1, "    @NotYetImplemented({ " + StringUtils.join(browserSet, ", ") + " })");
                 }
                 else {
                     lines.remove(i - 1);
                 }
             }
             else {
-                final List<String> allBrowsers = Arrays.asList("CHROME", "IE8", "IE11", "FF24", "FF31");
+                final List<String> allBrowsers = new ArrayList<>(Arrays.asList("CHROME", "IE8", "IE11", "FF24", "FF31"));
                 for (final Iterator<String> it = allBrowsers.iterator(); it.hasNext();) {
                     if (it.next().equals(browserString)) {
                         it.remove();
