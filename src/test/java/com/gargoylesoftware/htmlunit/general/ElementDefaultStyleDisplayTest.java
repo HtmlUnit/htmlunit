@@ -592,7 +592,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("none")
-    @NotYetImplemented
     public void head() throws Exception {
         loadPageWithAlerts2(test("head"));
     }

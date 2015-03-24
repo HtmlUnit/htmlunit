@@ -399,7 +399,7 @@ class HtmlSerializer {
 
     private void appendText(final DomText domText) {
         final DomNode parent = domText.getParentNode();
-        if (parent == null || isVisible(parent)) {
+        if (parent == null || parent instanceof HtmlTitle || isVisible(parent)) {
             append(domText.getData());
         }
     }

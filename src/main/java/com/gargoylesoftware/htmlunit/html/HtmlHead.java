@@ -62,4 +62,12 @@ public class HtmlHead extends HtmlElement {
     public boolean mayBeDisplayed() {
         return false;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        return DisplayStyle.NONE;
+    }
 }
