@@ -609,6 +609,9 @@ public class CodeStyleTest {
 
     private static List<String> alertsToList(final List<String> lines, final int alertsIndex,
             final boolean preserveCommas) {
+        if ("    @Alerts".equals(lines.get(alertsIndex))) {
+            lines.set(alertsIndex, "    @Alerts()");
+        }
         if (!lines.get(alertsIndex).startsWith("    @Alerts(")) {
             throw new IllegalArgumentException("No @Alerts found in " + (alertsIndex + 1));
         }
