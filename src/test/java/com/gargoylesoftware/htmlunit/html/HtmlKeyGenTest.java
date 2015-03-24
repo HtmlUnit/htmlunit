@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,8 +40,9 @@ public class HtmlKeyGenTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = ", inline-block, inline-block",
             FF = "block, inline, inline-block",
-            IE11 = "inline, inline, inline")
-    @NotYetImplemented({ FF, IE8, CHROME })
+            IE11 = "inline, inline, inline",
+            IE8 = "null, inline, inline")
+    @NotYetImplemented({ CHROME, FF })
     public void defaultStyle() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
