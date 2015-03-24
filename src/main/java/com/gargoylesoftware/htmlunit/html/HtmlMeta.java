@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FRAMESET_INLINE;
+
 import java.net.URL;
 import java.util.Map;
 
@@ -116,5 +118,16 @@ public class HtmlMeta extends HtmlElement {
      */
     public final String getSchemeAttribute() {
         return getAttribute("scheme");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        if (hasFeature(CSS_FRAMESET_INLINE)) {
+            return DisplayStyle.INLINE;
+        }
+        return DisplayStyle.NONE;
     }
 }

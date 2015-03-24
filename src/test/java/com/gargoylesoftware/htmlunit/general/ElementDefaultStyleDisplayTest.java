@@ -943,7 +943,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "none",
             IE8 = "inline")
-    @NotYetImplemented
     public void meta() throws Exception {
         loadPageWithAlerts2(test("meta"));
     }
@@ -1330,7 +1329,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "none",
             IE8 = "inline")
-    @NotYetImplemented
     public void style() throws Exception {
         loadPageWithAlerts2(test("style"));
     }
