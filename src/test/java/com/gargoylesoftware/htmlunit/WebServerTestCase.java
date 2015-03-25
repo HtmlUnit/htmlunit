@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.StringReader;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +38,10 @@ import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.util.security.Constraint;
 import org.eclipse.jetty.webapp.WebAppClassLoader;
 import org.eclipse.jetty.webapp.WebAppContext;
+import org.eclipse.jetty.webapp.WebDescriptor;
+import org.eclipse.jetty.xml.XmlParser;
 import org.junit.After;
+import org.xml.sax.InputSource;
 
 import com.gargoylesoftware.htmlunit.WebDriverTestCase.MockWebConnectionServlet;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -136,6 +141,9 @@ public abstract class WebServerTestCase extends WebTestCase {
      */
     public static Server createWebServer(final int port, final String resourceBase, final String[] classpath,
             final Map<String, Class<? extends Servlet>> servlets, final HandlerWrapper handler) throws Exception {
+
+        disableEntityResolution();
+
         final Server server = new Server(port);
 
         final WebAppContext context = new WebAppContext();
@@ -172,6 +180,26 @@ public abstract class WebServerTestCase extends WebTestCase {
         }
         server.start();
         return server;
+    }
+
+    /**
+     * Disabled external entity resolution.
+     *
+     * <p>This happens if there is no internet connection or we are behing a proxy server, and the web.xml contains
+     * <pre>&lt;!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+     *  "http://java.sun.com/dtd/web-app_2_3.dtd"&gt;</pre>
+     *
+     * @throws Exception if an error occurs
+     */
+    private static void disableEntityResolution() throws Exception {
+        final Field field = WebDescriptor.class.getDeclaredField("_parserSingleton");
+        field.setAccessible(true);
+        field.set(null, new XmlParser(false) {
+            @Override
+            protected InputSource resolveEntity(String pid, String sid) {
+                return new InputSource(new StringReader(""));
+            }
+        });
     }
 
     /**
