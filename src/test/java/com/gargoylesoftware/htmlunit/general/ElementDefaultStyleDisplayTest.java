@@ -793,7 +793,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "inline",
             CHROME = "inline-block")
-    @NotYetImplemented({ CHROME, FF })
     public void keygen() throws Exception {
         loadPageWithAlerts2(test("keygen"));
     }

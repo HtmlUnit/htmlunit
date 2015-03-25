@@ -14,15 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -42,7 +38,6 @@ public class HtmlKeyGenTest extends WebDriverTestCase {
             FF = "block, inline, inline-block",
             IE11 = "inline, inline, inline",
             IE8 = "null, inline, inline")
-    @NotYetImplemented({ CHROME, FF })
     public void defaultStyle() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

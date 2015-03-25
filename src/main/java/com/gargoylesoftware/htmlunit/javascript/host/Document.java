@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
+import com.gargoylesoftware.htmlunit.html.HtmlKeygen;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -491,6 +492,9 @@ public class Document extends EventNode {
                 }
                 else if (element instanceof HtmlImage) {
                     ((HtmlImage) element).markAsCreatedByJavascript();
+                }
+                else if (element instanceof HtmlKeygen) {
+                    ((HtmlKeygen) element).markAsCreatedByJavascript();
                 }
             }
             final Object jsElement;

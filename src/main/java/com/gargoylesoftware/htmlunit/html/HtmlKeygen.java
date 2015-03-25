@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_KEYGEN_DISPLAY_INLINE_BLOCK;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.*;
 
 import java.util.Map;
 
@@ -25,11 +25,14 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  *
  * @version $Revision$
  * @author Ronald Brill
+ * @author Ahmed Ashour
  */
 public class HtmlKeygen extends HtmlElement {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "keygen";
+
+    private boolean createdByJavascript_;
 
     /**
      * Creates a new instance.
@@ -44,13 +47,45 @@ public class HtmlKeygen extends HtmlElement {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Marks this frame as created by javascript. This is needed to handle
+     * some special IE behavior.
+     */
+    public void markAsCreatedByJavascript() {
+        createdByJavascript_ = true;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Returns true if this frame was created by javascript. This is needed to handle
+     * some special IE behavior.
+     * @return true or false
+     */
+    public boolean wasCreatedByJavascript() {
+        return createdByJavascript_;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        if (hasFeature(CSS_KEYGEN_DISPLAY_INLINE_BLOCK)) {
-            return DisplayStyle.INLINE_BLOCK;
+        if (hasFeature(CSS_KEYGEN_DISPLAY_INLINE_ALWAYS)) {
+            return DisplayStyle.INLINE;
         }
-        return DisplayStyle.INLINE;
+        if (wasCreatedByJavascript()) {
+            if (getParentNode() == null) {
+                if (hasFeature(CSS_KEYGEN_DISPLAY_INLINE_JS)) {
+                    return DisplayStyle.BLOCK;
+                }
+                return DisplayStyle.EMPTY;
+            }
+            if (hasFeature(CSS_KEYGEN_DISPLAY_INLINE_JS)) {
+                return DisplayStyle.INLINE;
+            }
+        }
+        return DisplayStyle.INLINE_BLOCK;
     }
 }

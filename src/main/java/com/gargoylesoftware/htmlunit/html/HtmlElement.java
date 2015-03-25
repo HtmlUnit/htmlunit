@@ -89,6 +89,8 @@ public abstract class HtmlElement extends DomElement {
      * Enum for the different display styles.
      */
     public enum DisplayStyle {
+        /** Empty string. */
+        EMPTY(""),
         /** none. */
         NONE("none"),
         /** block. */
