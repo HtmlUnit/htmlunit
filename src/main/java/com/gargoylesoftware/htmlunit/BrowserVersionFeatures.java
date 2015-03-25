@@ -124,8 +124,12 @@ public enum BrowserVersionFeatures {
     CSS_KEYGEN_DISPLAY_INLINE_JS,
 
     /** The default value of the display property for the 'noscript' tag is 'inline' instead of the default one. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8) })
     CSS_NOSCRIPT_DISPLAY_INLINE,
+
+    /** Is display style of HtmlNoEmbed is 'inline'. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8)})
+    CSS_NOEMBED_INLINE,
 
     /** Indicates that only integers are allowed for pixel value. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))

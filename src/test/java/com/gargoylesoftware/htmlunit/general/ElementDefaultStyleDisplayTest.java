@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -1014,7 +1013,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "none",
             CHROME = "inline",
             IE8 = "inline")
-    @NotYetImplemented
     public void noembed() throws Exception {
         loadPageWithAlerts2(test("noembed"));
     }
@@ -1027,7 +1025,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "none",
             IE8 = "block")
-    @NotYetImplemented({ CHROME, FF, IE11 })
     public void noframes() throws Exception {
         loadPageWithAlerts2(test("noframes"));
     }
@@ -1052,7 +1049,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "none",
             CHROME = "inline",
             IE8 = "inline")
-    @NotYetImplemented(CHROME)
     public void noscript() throws Exception {
         loadPageWithAlerts2(test("noscript"));
     }

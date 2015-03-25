@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.*;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_KEYGEN_DISPLAY_INLINE_ALWAYS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_KEYGEN_DISPLAY_INLINE_JS;
 
 import java.util.Map;
 
