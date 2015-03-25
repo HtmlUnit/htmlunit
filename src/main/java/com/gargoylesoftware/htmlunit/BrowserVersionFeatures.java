@@ -140,7 +140,7 @@ public enum BrowserVersionFeatures {
     CSS_PROGRESS_DISPLAY_INLINE,
 
     /** The default value of the display property for the 'rt' tag is always 'ruby-text'. */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS,
 
     /** The default value of the display property for the 'script' tag is 'inline' instead of the default one. */
