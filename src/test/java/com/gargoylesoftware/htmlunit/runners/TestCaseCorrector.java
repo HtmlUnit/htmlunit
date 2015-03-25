@@ -57,25 +57,34 @@ final class TestCaseCorrector {
         final List<String> lines = FileUtils.readLines(file);
         final String methodLine = "    public void " + method.getName() + "()";
         if (realBrowser) {
+            String defaultExpectation = null;
             for (int i = 0; i < lines.size(); i++) {
+                if ("    @Default".equals(lines.get(i))) {
+                    defaultExpectation = getDefaultExpectation(lines, i);
+                }
                 if (lines.get(i).startsWith(methodLine)) {
                     i = addExpectation(lines, i, browserString, (ComparisonFailure) t);
                     break;
                 }
                 if (i == lines.size() - 2) {
-                    addMethodWithExpectation(lines, i, browserString, method.getName(), (ComparisonFailure) t);
+                    addMethodWithExpectation(lines, i, browserString, method.getName(), (ComparisonFailure) t,
+                            defaultExpectation);
                     break;
                 }
             }
         }
         else if (!notYetImplemented) {
+            String defaultExpectation = null;
             for (int i = 0; i < lines.size(); i++) {
+                if ("    @Default".equals(lines.get(i))) {
+                    defaultExpectation = getDefaultExpectation(lines, i);
+                }
                 if (lines.get(i).startsWith(methodLine)) {
                     addNotYetImplemented(lines, i, browserString);
                     break;
                 }
                 if (i == lines.size() - 2) {
-                    addNotYetImplementedMethod(lines, i, browserString, method.getName());
+                    addNotYetImplementedMethod(lines, i, browserString, method.getName(), defaultExpectation);
                     break;
                 }
             }
@@ -89,6 +98,18 @@ final class TestCaseCorrector {
             }
         }
         FileUtils.writeLines(file, lines);
+    }
+
+    private static String getDefaultExpectation(final List<String> lines, final int defaultIndex) {
+        int index = defaultIndex;
+        while (index >= 0 && !lines.get(index).contains("Alerts")) {
+            index--;
+        }
+        if (index >= 0) {
+            final String line = lines.get(index);
+            return line.substring(line.indexOf('"') + 1, line.lastIndexOf('"'));
+        }
+        return null;
     }
 
     private static int addExpectation(final List<String> lines, int i,
@@ -172,7 +193,7 @@ final class TestCaseCorrector {
     }
 
     private static void addNotYetImplementedMethod(final List<String> lines,
-            int i, final String browserString, final String methodName) {
+            int i, final String browserString, final String methodName, final String defaultExpectations) {
         String parent = methodName;
         final String child = parent.substring(parent.lastIndexOf('_') + 1);
         parent = parent.substring(1, parent.indexOf('_', 1));
@@ -185,8 +206,7 @@ final class TestCaseCorrector {
         lines.add(i++, "     * @throws Exception if the test fails");
         lines.add(i++, "     */");
         lines.add(i++, "    @Test");
-        // alert value should come from the \@Default method
-        lines.add(i++, "    @Alerts(\"false\")");
+        lines.add(i++, "    @Alerts(\"" + defaultExpectations + "\")");
         lines.add(i++, "    @NotYetImplemented(" + browserString + ")");
         lines.add(i++, "    public void _" + parent + "_" + child + "() throws Exception {");
         lines.add(i++, "        test(\"" + parent + "\", \"" + child + "\");");
@@ -217,7 +237,8 @@ final class TestCaseCorrector {
     }
 
     private static void addMethodWithExpectation(final List<String> lines,
-            int i, final String browserString, final String methodName, final ComparisonFailure comparisonFailure) {
+            int i, final String browserString, final String methodName, final ComparisonFailure comparisonFailure,
+            final String defaultExpectations) {
         String parent = methodName;
         final String child = parent.substring(parent.lastIndexOf('_') + 1);
         parent = parent.substring(1, parent.indexOf('_', 1));
@@ -230,8 +251,7 @@ final class TestCaseCorrector {
         lines.add(i++, "     * @throws Exception if the test fails");
         lines.add(i++, "     */");
         lines.add(i++, "    @Test");
-        // value should come from the \@Default method
-        lines.add(i++, "    @Alerts(DEFAULT = \"1\",");
+        lines.add(i++, "    @Alerts(DEFAULT = \"" + defaultExpectations + "\",");
         lines.add(i++, "            " + browserString + " = " + getActualString(comparisonFailure) + ")");
         lines.add(i++, "    public void _" + parent + "_" + child + "() throws Exception {");
         lines.add(i++, "        test(\"" + parent + "\", \"" + child + "\");");
@@ -241,5 +261,4 @@ final class TestCaseCorrector {
             lines.remove(i);
         }
     }
-
 }

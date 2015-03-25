@@ -196,7 +196,7 @@ public abstract class WebServerTestCase extends WebTestCase {
         field.setAccessible(true);
         field.set(null, new XmlParser(false) {
             @Override
-            protected InputSource resolveEntity(String pid, String sid) {
+            protected InputSource resolveEntity(final String pid, final String sid) {
                 return new InputSource(new StringReader(""));
             }
         });
