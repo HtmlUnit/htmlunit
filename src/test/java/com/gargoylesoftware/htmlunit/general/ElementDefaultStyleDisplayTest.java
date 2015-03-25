@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.general;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 
 import org.junit.Test;
@@ -1140,7 +1139,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("block")
-    @NotYetImplemented
     public void plaintext() throws Exception {
         loadPageWithAlerts2(test("plaintext"));
     }
@@ -1256,7 +1254,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("inline-block")
-    @NotYetImplemented(CHROME)
     public void select() throws Exception {
         loadPageWithAlerts2(test("select"));
     }

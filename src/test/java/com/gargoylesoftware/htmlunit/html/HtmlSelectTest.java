@@ -47,6 +47,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  */
 @RunWith(BrowserRunner.class)
 public class HtmlSelectTest extends SimpleWebTestCase {
+
     /** JUnit rule must be public fields :-(. */
     @Rule
     public TemporaryFolder tmpFolderProvider_ = new TemporaryFolder();

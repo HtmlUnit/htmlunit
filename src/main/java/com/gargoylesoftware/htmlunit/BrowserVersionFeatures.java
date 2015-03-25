@@ -151,10 +151,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     CSS_SELECTOR_LANG,
 
-    /** The default value of the display property for the 'select' tag is 'inline' instead of the default one. */
-    @BrowserFeature(@WebBrowser(CHROME))
-    CSS_SELECT_DISPLAY_INLINE,
-
     /** Throws exception on setting a CSS style value to null. */
     @BrowserFeature(@WebBrowser(IE))
     CSS_SET_NULL_THROWS,

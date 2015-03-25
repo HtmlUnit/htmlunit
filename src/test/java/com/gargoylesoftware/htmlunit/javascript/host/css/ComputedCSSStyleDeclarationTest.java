@@ -702,7 +702,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             CHROME = { "block", "inline", "inline", "block", "block", "block", "inline" },
             IE8 = { "inline", "inline", "inline", "block", "inline", "inline", "inline" },
             IE11 = { "block", "none", "inline", "block", "inline", "inline", "inline" })
-    @NotYetImplemented(CHROME)
     public void defaultDisplayValues_NO() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <nav id='nav'>\n"
@@ -830,7 +829,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
                         "inline", "inline", "inline", "inline", "inline", "block", "inline" },
             IE8 = { "inline", "inline", "inline", "inline", "inline-block", "inline",
                         "inline", "inline", "inline", "inline", "inline", "inline", "inline" })
-    @NotYetImplemented(CHROME)
     public void defaultDisplayValues_S() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p>\n"
