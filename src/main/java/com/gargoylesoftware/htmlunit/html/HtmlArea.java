@@ -248,6 +248,9 @@ public class HtmlArea extends HtmlElement {
         return DisplayStyle.INLINE;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isDisplayed() {
         final DomNode parent = getParentNode();

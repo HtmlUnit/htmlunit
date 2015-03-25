@@ -1662,7 +1662,7 @@ public abstract class HtmlElement extends DomElement {
      *
      * Returns the default display style.
      *
-     * @return the default display style.
+     * @return the default display style
      */
     public DisplayStyle getDefaultStyleDisplay() {
         return DisplayStyle.BLOCK;

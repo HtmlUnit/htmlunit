@@ -3063,8 +3063,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     * {@inheritDoc}
+     * Returns the default display style.
+     *
+     * @return the default display style
      */
     public String getDefaultStyleDisplay() {
         final HtmlElement htmlElt = getDomNodeOrDie();

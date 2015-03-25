@@ -119,11 +119,7 @@ public class HtmlTableColumnGroup extends HtmlElement {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     *
-     * Returns the default display style.
-     *
-     * @return the default display style.
+     * {@inheritDoc}
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
