@@ -53,6 +53,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlKeygen;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlRp;
+import com.gargoylesoftware.htmlunit.html.HtmlRt;
+import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -495,6 +498,15 @@ public class Document extends EventNode {
                 }
                 else if (element instanceof HtmlKeygen) {
                     ((HtmlKeygen) element).markAsCreatedByJavascript();
+                }
+                else if (element instanceof HtmlRp) {
+                    ((HtmlRp) element).markAsCreatedByJavascript();
+                }
+                else if (element instanceof HtmlRt) {
+                    ((HtmlRt) element).markAsCreatedByJavascript();
+                }
+                else if (element instanceof HtmlUnknownElement) {
+                    ((HtmlUnknownElement) element).markAsCreatedByJavascript();
                 }
             }
             final Object jsElement;

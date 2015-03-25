@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS;
+
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -24,11 +26,13 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @version $Revision$
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Ahmed Ashour
  */
 public class HtmlRp extends HtmlElement {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "rp";
+    private boolean createdByJavascript_;
 
     /**
      * Creates a new instance.
@@ -43,10 +47,42 @@ public class HtmlRp extends HtmlElement {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Marks this frame as created by javascript. This is needed to handle
+     * some special IE behavior.
+     */
+    public void markAsCreatedByJavascript() {
+        createdByJavascript_ = true;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Returns true if this frame was created by javascript. This is needed to handle
+     * some special IE behavior.
+     * @return true or false
+     */
+    public boolean wasCreatedByJavascript() {
+        return createdByJavascript_;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
+        if (hasFeature(CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS)) {
+            return DisplayStyle.INLINE;
+        }
+        if (wasCreatedByJavascript()) {
+            if (getParentNode() == null) {
+                return DisplayStyle.EMPTY;
+            }
+        }
+        else {
+            return DisplayStyle.NONE;
+        }
         return DisplayStyle.INLINE;
     }
 }

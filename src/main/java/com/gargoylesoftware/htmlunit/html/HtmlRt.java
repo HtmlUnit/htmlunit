@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_BLOCK2;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS;
 
 import java.util.Map;
 
@@ -26,11 +26,13 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @version $Revision$
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Ahmed Ashour
  */
 public class HtmlRt extends HtmlElement {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "rt";
+    private boolean createdByJavascript_;
 
     /**
      * Creates a new instance.
@@ -45,13 +47,42 @@ public class HtmlRt extends HtmlElement {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Marks this frame as created by javascript. This is needed to handle
+     * some special IE behavior.
+     */
+    public void markAsCreatedByJavascript() {
+        createdByJavascript_ = true;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Returns true if this frame was created by javascript. This is needed to handle
+     * some special IE behavior.
+     * @return true or false
+     */
+    public boolean wasCreatedByJavascript() {
+        return createdByJavascript_;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        if (hasFeature(CSS_DISPLAY_BLOCK2)) {
-            return DisplayStyle.INLINE;
+        if (hasFeature(CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS)) {
+            return DisplayStyle.RUBY_TEXT;
         }
-        return DisplayStyle.RUBY_TEXT;
+        if (wasCreatedByJavascript()) {
+            if (getParentNode() == null) {
+                return DisplayStyle.EMPTY;
+            }
+        }
+        else {
+            return DisplayStyle.BLOCK;
+        }
+        return DisplayStyle.INLINE;
     }
 }

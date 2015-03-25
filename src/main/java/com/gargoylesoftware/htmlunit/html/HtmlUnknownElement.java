@@ -32,6 +32,8 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlUnknownElement extends HtmlElement {
 
+    private boolean createdByJavascript_;
+
     /**
      * Creates an instance.
      *
@@ -52,10 +54,41 @@ public class HtmlUnknownElement extends HtmlElement {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Marks this frame as created by javascript. This is needed to handle
+     * some special IE behavior.
+     */
+    public void markAsCreatedByJavascript() {
+        createdByJavascript_ = true;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Returns true if this frame was created by javascript. This is needed to handle
+     * some special IE behavior.
+     * @return true or false
+     */
+    public boolean wasCreatedByJavascript() {
+        return createdByJavascript_;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
+        switch (getTagName()) {
+            case HtmlRp.TAG_NAME:
+            case HtmlRt.TAG_NAME:
+                if (wasCreatedByJavascript() && getParentNode() == null) {
+                    return DisplayStyle.BLOCK;
+                }
+                break;
+
+            default:
+        }
         return DisplayStyle.INLINE;
     }
 }
