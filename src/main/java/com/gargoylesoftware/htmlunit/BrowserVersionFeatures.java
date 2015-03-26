@@ -124,7 +124,7 @@ public enum BrowserVersionFeatures {
     CSS_KEYGEN_DISPLAY_INLINE_JS,
 
     /** Is display style of HtmlNoEmbed is 'inline'. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8)})
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = IE, maxVersion = 8) })
     CSS_NOEMBED_INLINE,
 
     /** The default value of the display property for the 'noscript' tag is 'inline' instead of the default one. */
