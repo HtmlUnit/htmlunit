@@ -80,10 +80,16 @@ public class HtmlRt extends HtmlElement {
             if (getParentNode() == null) {
                 return DisplayStyle.EMPTY;
             }
+            else if (hasFeature(CSS_SCRIPT_DISPLAY_INLINE) && !getHtmlPageOrNull().isQuirksMode()) {
+                return DisplayStyle.RUBY_TEXT;
+            }
         }
         else {
             if (!hasFeature(CSS_SCRIPT_DISPLAY_INLINE)) {
                 return DisplayStyle.BLOCK;
+            }
+            else if (!getHtmlPageOrNull().isQuirksMode()) {
+                return DisplayStyle.RUBY_TEXT;
             }
         }
         return DisplayStyle.INLINE;

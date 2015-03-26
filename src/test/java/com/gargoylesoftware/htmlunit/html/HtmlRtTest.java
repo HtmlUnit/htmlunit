@@ -63,4 +63,39 @@ public class HtmlRtTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = ", inline, block",
+            FF = "block, inline, inline",
+            IE8 = "null, ruby-text, ruby-text",
+            IE11 = "ruby-text, ruby-text, ruby-text")
+    public void defaultStyleStandards() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var e = document.createElement('rt');\n"
+            + "    check(e);\n"
+            + "    document.body.appendChild(e);\n"
+            + "    check(e);\n"
+            + "    check(document.getElementById('myId'));\n"
+            + "  }\n"
+
+            + "  function check(e) {\n"
+            + "    var cs = window.getComputedStyle ? window.getComputedStyle(e, null) : e.currentStyle;\n"
+            + "    var disp = cs ? cs.display : null;\n"
+            + "    alert(disp);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<ruby>\n"
+            + "  <rt id='myId'></rt>\n"
+            + "</ruby>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
