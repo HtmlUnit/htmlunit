@@ -150,7 +150,24 @@ final class TestCaseCorrector {
     private static String getActualString(final ComparisonFailure failure) {
         String actual = failure.getActual();
         actual = actual.substring(1, actual.length() - 1);
-        return "\"" + actual + "\"";
+        if (actual.length() > 96) {
+            final StringBuilder builder = new StringBuilder();
+            while (!actual.isEmpty()) {
+                int length = actual.lastIndexOf(',', 96) + 1;
+                if (length == 0 && !actual.isEmpty()) {
+                    length = Math.min(96, actual.length());
+                }
+                if (builder.length() != 0) {
+                    builder.append(System.lineSeparator()).append("                + ");
+                }
+                builder.append('"').append(actual.substring(0, length)).append('"');
+                actual = actual.substring(length);
+            }
+            return builder.toString();
+        }
+        else {
+            return "\"" + actual + "\"";
+        }
     }
 
     private static void removeNotYetImplemented(final List<String> lines,
