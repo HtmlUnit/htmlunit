@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlInlineQuotation;
@@ -30,9 +28,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Carsten Steul
  */
-@JsxClass(domClass = HtmlInlineQuotation.class,
-    browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
+@JsxClass(domClass = HtmlInlineQuotation.class, browsers = { @WebBrowser(value = IE, minVersion = 11) })
 public class HTMLInlineQuotationElement extends HTMLElement {
 
     /**

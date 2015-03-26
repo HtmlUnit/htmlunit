@@ -18,7 +18,9 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import com.gargoylesoftware.htmlunit.html.HtmlBlockQuote;
+import com.gargoylesoftware.htmlunit.html.HtmlInlineQuotation;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -30,8 +32,12 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Carsten Steul
  */
-@JsxClass(domClass = HtmlBlockQuote.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
+@JsxClasses({
+    @JsxClass(domClass = HtmlInlineQuotation.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) }),
+    @JsxClass(domClass = HtmlBlockQuote.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
+})
 public class HTMLQuoteElement extends HTMLElement {
 
     /**
