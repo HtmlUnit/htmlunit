@@ -11,6 +11,7 @@
     <suppress checks="FileLength" files="DocumentTest.java"/>
     <suppress checks="FileLength" files="ElementClosesElementTest.java"/>
     <suppress checks="FileLength" files="ElementCreationTest.java"/>
+    <suppress checks="FileLength" files="ElementPropertiesTest.java"/>
     <suppress checks="FileLength" files="JQuery182Test.java"/>
     <suppress checks="FileLength" files="HostClassNameTest.java"/>
     <suppress checks="FileLength" files="HostClassNameStandardsTest.java"/>
