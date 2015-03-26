@@ -60,11 +60,6 @@
     </module>
 
     <module name="RegexpSingleline">
-        <property name="format" value="Alerts\(DEFAULT = \&quot;\w+\&quot;\)"/>
-        <property name="message" value="No need to specify &quot;DEFAULT&quot;"/>
-    </module>
-
-    <module name="RegexpSingleline">
         <property name="format" value="@JsxFunction\(\)|@JsxGetter\(\)|@JsxSetter\(\)|@JsxConstructor\(\)|@Alerts\(\)$"/>
         <property name="message" value="No need to specify parentheses"/>
     </module>

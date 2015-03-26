@@ -21,12 +21,36 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
+import java.awt.Color;
+import java.awt.GradientPaint;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import javax.imageio.ImageIO;
+
+import org.apache.commons.io.FileUtils;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.LayeredBarRenderer;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.util.SortOrder;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.ComparisonFailure;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -37,6 +61,12 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  */
 @RunWith(BrowserRunner.class)
 public class ElementPropertiesTest extends WebDriverTestCase {
+
+    private static DefaultCategoryDataset DATASET_;
+    private static StringBuilder HTML_ = new StringBuilder();
+    private static BrowserVersion BROWSER_VERSION_;
+    private static int IMPLEMENTED_COUNT_;
+    private static int TOTAL_COUNT_;
 
     private void test(final String tagName) throws Exception {
         testString("document.createElement('" + tagName + "'), unknown");
@@ -144,7 +174,231 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "</script></head><body onload='test(event)'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        if (BROWSER_VERSION_ == null) {
+            BROWSER_VERSION_ = getBrowserVersion();
+        }
+        final String expected = getExpectedAlerts().length == 0 ? "" : getExpectedAlerts()[0];
+        String actual;
+
+        ComparisonFailure failure = null;
+        try {
+            loadPageWithAlerts2(html);
+            actual = expected;
+        }
+        catch (final ComparisonFailure c) {
+            failure = c;
+            actual = c.getActual();
+            actual = actual.substring(1, actual.length() - 1);
+        }
+
+        final List<String> realProperties = stringAsArray(expected);
+        final List<String> simulatedProperties = stringAsArray(actual);
+
+        final List<String> erroredProperties = new ArrayList<>(simulatedProperties);
+        erroredProperties.removeAll(realProperties);
+
+        final List<String> implementedProperties = new ArrayList<>(simulatedProperties);
+        implementedProperties.retainAll(realProperties);
+
+        IMPLEMENTED_COUNT_ += implementedProperties.size();
+        TOTAL_COUNT_ += realProperties.size();
+
+        String methodName = null;
+        for (final StackTraceElement e : new Exception().getStackTrace()) {
+            if (e.getClassName().equals(getClass().getName())) {
+                methodName = e.getMethodName();
+            }
+            else {
+                break;
+            }
+        }
+
+        htmlDetails(methodName, HTML_, realProperties, implementedProperties, erroredProperties);
+
+        DATASET_.addValue(implementedProperties.size(), "Implemented", methodName);
+        DATASET_.addValue(realProperties.size(),
+            getBrowserVersion().getNickname().replace("FF", "Firefox ").replace("IE", "Internet Explorer "),
+            methodName);
+        DATASET_.addValue(erroredProperties.size(), "Should not be implemented", methodName);
+
+        if (failure != null) {
+            throw failure;
+        }
+    }
+
+    private static List<String> stringAsArray(final String string) {
+        if (string.isEmpty()) {
+            return Collections.emptyList();
+        }
+        return Arrays.asList(string.split(","));
+    }
+
+    /**
+     * Resets browser-specific values.
+     */
+    @BeforeClass
+    public static void beforeClass() {
+        DATASET_ = new DefaultCategoryDataset();
+        HTML_.setLength(0);
+        BROWSER_VERSION_ = null;
+        IMPLEMENTED_COUNT_ = 0;
+        TOTAL_COUNT_ = 0;
+    }
+
+    /**
+     * Saves HTML and PNG files.
+     *
+     * @throws IOException if an error occurs
+     */
+    @AfterClass
+    public static void saveAll() throws IOException {
+        saveChart();
+
+        FileUtils.writeStringToFile(new File(getTargetDirectory()
+                + "/properties-" + BROWSER_VERSION_.getNickname() + ".html"),
+                htmlHeader()
+                    .append(overview())
+                    .append(htmlDetailsHeader())
+                    .append(HTML_)
+                    .append(htmlDetailsFooter())
+                    .append(htmlFooter()).toString());
+    }
+
+    private static void saveChart() throws IOException {
+        final JFreeChart chart = ChartFactory.createBarChart(
+            "HtmlUnit implemented properties and methods for " + BROWSER_VERSION_.getNickname(), "Objects",
+            "Count", DATASET_, PlotOrientation.HORIZONTAL, true, true, false);
+        final CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        final NumberAxis axis = (NumberAxis) plot.getRangeAxis();
+        axis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+        final LayeredBarRenderer renderer = new LayeredBarRenderer();
+        plot.setRenderer(renderer);
+        plot.setRowRenderingOrder(SortOrder.DESCENDING);
+        renderer.setSeriesPaint(0, new GradientPaint(0, 0, Color.green, 0, 0, new Color(0, 64, 0)));
+        renderer.setSeriesPaint(1, new GradientPaint(0, 0, Color.blue, 0, 0, new Color(0, 0, 64)));
+        renderer.setSeriesPaint(2, new GradientPaint(0, 0, Color.red, 0, 0, new Color(64, 0, 0)));
+        ImageIO.write(chart.createBufferedImage(1200, 2400), "png",
+            new File(getTargetDirectory() + "/properties-" + BROWSER_VERSION_.getNickname() + ".png"));
+    }
+
+    /**
+     * Returns the 'target' directory.
+     * @return the 'target' directory
+     */
+    public static String getTargetDirectory() {
+        final String dirName = "./target";
+        final File dir = new File(dirName);
+        if (!dir.exists()) {
+            if (!dir.mkdir()) {
+                throw new RuntimeException("Could not create artifacts directory");
+            }
+        }
+        return dirName;
+    }
+
+    private static StringBuilder htmlHeader() {
+        final StringBuilder html = new StringBuilder();
+        html.append("<html><head>\n");
+        html.append("<style type=\"text/css\">\n");
+        html.append("table.bottomBorder { border-collapse:collapse; }\n");
+        html.append("table.bottomBorder td, table.bottomBorder th { "
+                            + "border-bottom:1px dotted black;padding:5px; }\n");
+        html.append("table.bottomBorder td.numeric { text-align:right; }\n");
+        html.append("</style>\n");
+        html.append("</head><body>\n");
+
+        html.append("<div align='center'>").append("<h2>")
+        .append("HtmlUnit implemented properties and methods for " + BROWSER_VERSION_.getNickname())
+        .append("</h2>").append("</div>\n");
+        return html;
+    }
+
+    private static StringBuilder overview() {
+        final StringBuilder html = new StringBuilder();
+        html.append("<table class='bottomBorder'>");
+        html.append("<tr>\n");
+
+        html.append("<th>Total Implemented:</th>\n");
+        html.append("<td>" + IMPLEMENTED_COUNT_)
+            .append(" / " + TOTAL_COUNT_).append("</td>\n");
+
+        html.append("</tr>\n");
+        html.append("</table>\n");
+
+        html.append("<p><br></p>\n");
+
+        return html;
+    }
+
+    private static StringBuilder htmlFooter() {
+        final StringBuilder html = new StringBuilder();
+
+        html.append("<br>").append("Legend:").append("<br>")
+        .append("<span style='color: blue'>").append("To be implemented").append("</span>").append("<br>")
+        .append("<span style='color: green'>").append("Implemented").append("</span>").append("<br>")
+        .append("<span style='color: red'>").append("Should not be implemented").append("</span>");
+        html.append("\n");
+
+        html.append("</body>\n");
+        html.append("</html>\n");
+        return html;
+    }
+
+    private static StringBuilder htmlDetailsHeader() {
+        final StringBuilder html = new StringBuilder();
+
+        html.append("<table class='bottomBorder' width='100%'>");
+        html.append("<tr>\n");
+        html.append("<th>Class</th><th>Methods/Properties</th><th>Counts</th>\n");
+        html.append("</tr>");
+        return html;
+    }
+
+    private static StringBuilder htmlDetails(final String name, final StringBuilder html,
+            final List<String> realProperties,
+            final List<String> implementedProperties, final List<String> erroredProperties) {
+        html.append("<tr>").append('\n').append("<td rowspan='2'>").append("<a name='" + name + "'>").append(name)
+            .append("</a>").append("</td>").append('\n').append("<td>");
+        int implementedCount = 0;
+        for (int i = 0; i < realProperties.size(); i++) {
+            final String color;
+            if (implementedProperties.contains(realProperties.get(i))) {
+                color = "green";
+                implementedCount++;
+            }
+            else {
+                color = "blue";
+            }
+            html.append("<span style='color: " + color + "'>").append(realProperties.get(i)).append("</span>");
+            if (i < realProperties.size() - 1) {
+                html.append(',').append(' ');
+            }
+        }
+        if (realProperties.isEmpty()) {
+            html.append("&nbsp;");
+        }
+        html.append("</td>").append("<td>").append(implementedCount).append('/')
+            .append(realProperties.size()).append("</td>").append("</tr>").append('\n');
+        html.append("<tr>").append("<td>");
+        for (int i = 0; i < erroredProperties.size(); i++) {
+            html.append("<span style='color: red'>").append(erroredProperties.get(i)).append("</span>");
+            if (i < erroredProperties.size() - 1) {
+                html.append(',').append(' ');
+            }
+        }
+        if (erroredProperties.isEmpty()) {
+            html.append("&nbsp;");
+        }
+        html.append("</td>")
+            .append("<td>").append(erroredProperties.size()).append("</td>").append("</tr>\n");
+
+        return html;
+    }
+
+    private static StringBuilder htmlDetailsFooter() {
+        final StringBuilder html = new StringBuilder();
+        html.append("</table>");
+        return html;
     }
 
     /**
@@ -412,7 +666,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
         testString("window, null");
     }
 
-
     /**
      * Test {@link com.gargoylesoftware.htmlunit.html.HtmlAbbreviated}.
      *
@@ -580,7 +833,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "href,target")
+    @Alerts("href,target")
     public void base() throws Exception {
         test("base");
     }
@@ -837,7 +1090,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "cite,dateTime")
+    @Alerts("cite,dateTime")
     @NotYetImplemented(IE8)
     public void del() throws Exception {
         test("del");
@@ -902,7 +1155,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "compact")
+    @Alerts("compact")
     public void dl() throws Exception {
         test("dl");
     }
@@ -990,7 +1243,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "color,face,size")
+    @Alerts("color,face,size")
     public void font() throws Exception {
         test("font");
     }
@@ -1187,7 +1440,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "align,color,noShade,size,width")
+    @Alerts("align,color,noShade,size,width")
     @NotYetImplemented
     public void hr() throws Exception {
         test("hr");
@@ -1199,7 +1452,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "version")
+    @Alerts("version")
     @NotYetImplemented
     public void html() throws Exception {
         test("html");
@@ -1211,8 +1464,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "align,allowFullscreen,contentDocument,contentWindow,frameBorder,getSVGDocument(),height,longDesc,"
-                + "marginHeight,marginWidth,name,sandbox,scrolling,src,srcdoc,"
+    @Alerts(DEFAULT = "align,allowFullscreen,contentDocument,contentWindow,frameBorder,getSVGDocument(),height,"
+                + "longDesc,marginHeight,marginWidth,name,sandbox,scrolling,src,srcdoc,"
                 + "width",
             IE11 = "align,border,contentDocument,contentWindow,frameBorder,frameSpacing,getSVGDocument(),height,"
                 + "hspace,longDesc,marginHeight,marginWidth,name,noResize,sandbox,scrolling,security,src,vspace,"
@@ -1291,7 +1544,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "cite,dateTime")
+    @Alerts("cite,dateTime")
     @NotYetImplemented(IE8)
     public void ins() throws Exception {
         test("ins");
@@ -1406,7 +1659,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "type,value")
+    @Alerts("type,value")
     @NotYetImplemented
     public void li() throws Exception {
         test("li");
@@ -1443,7 +1696,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "areas,name")
+    @Alerts("areas,name")
     @NotYetImplemented
     public void map() throws Exception {
         test("map");
@@ -1722,7 +1975,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "name,type,value,valueType")
+    @Alerts("name,type,value,valueType")
     @NotYetImplemented
     public void param() throws Exception {
         test("param");
@@ -1990,9 +2243,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "align,bgColor,border,caption,cellPadding,cellSpacing,createCaption(),createTBody(),createTFoot(),"
-                + "createTHead(),deleteCaption(),deleteRow(),deleteTFoot(),deleteTHead(),frame,insertRow(),rows,"
-                + "rules,summary,tBodies,tFoot,tHead,"
+    @Alerts(DEFAULT = "align,bgColor,border,caption,cellPadding,cellSpacing,createCaption(),createTBody(),"
+                + "createTFoot(),createTHead(),deleteCaption(),deleteRow(),deleteTFoot(),deleteTHead(),frame,"
+                + "insertRow(),rows,rules,summary,tBodies,tFoot,tHead,"
                 + "width",
             IE11 = "align,background,bgColor,border,borderColor,borderColorDark,borderColorLight,caption,cellPadding,"
                 + "cells,cellSpacing,cols,createCaption(),createTBody(),createTFoot(),createTHead(),deleteCaption(),"
@@ -2016,7 +2269,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "align,ch,chOff,span,vAlign,width")
+    @Alerts("align,ch,chOff,span,vAlign,width")
     public void col() throws Exception {
         test("col");
     }
@@ -2027,7 +2280,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "align,ch,chOff,span,vAlign,width")
+    @Alerts("align,ch,chOff,span,vAlign,width")
     public void colgroup() throws Exception {
         test("colgroup");
     }
@@ -2207,7 +2460,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "compact,type")
+    @Alerts("compact,type")
     public void ul() throws Exception {
         test("ul");
     }

@@ -23,7 +23,7 @@ import java.util.TreeSet;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.javascript.host.PropertiesTest;
+import com.gargoylesoftware.htmlunit.general.ElementPropertiesTest;
 
 /**
  * Generates HTML file with all <tt>NotYetImplemented</tt> methods.
@@ -277,7 +277,7 @@ public class NotYetImplementedTest {
 
         builder.insert(overviewPos, overview);
 
-        FileUtils.writeStringToFile(new File(PropertiesTest.getTargetDirectory(), "notYetImplemented.html"),
+        FileUtils.writeStringToFile(new File(ElementPropertiesTest.getTargetDirectory(), "notYetImplemented.html"),
                 builder.toString());
     }
 
