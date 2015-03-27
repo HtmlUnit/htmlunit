@@ -34,30 +34,52 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class HTMLMediaElement extends HTMLElement {
 
+    /**
+     * No information is available about the media resource.
+     */
     @JsxConstant
     public static final short HAVE_NOTHING = 0;
 
+    /**
+     * Enough of the media resource has been retrieved that the metadata attributes are initialized.
+     * Seeking will no longer raise an exception.
+     */
     @JsxConstant
     public static final short HAVE_METADATA = 1;
 
+    /**
+     * Data is available for the current playback position, but not enough to actually play more than one frame.
+     */
     @JsxConstant
     public static final short HAVE_CURRENT_DATA = 2;
 
+    /**
+     * Data for the current playback position as well as for at least a little bit of time
+     * into the future is available (in other words, at least two frames of video, for example).
+     */
     @JsxConstant
     public static final short HAVE_FUTURE_DATA = 3;
 
+    /**
+     * Enough data is available—and the download rate is high enough—that the media
+     * can be played through to the end without interruption.
+     */
     @JsxConstant
     public static final short HAVE_ENOUGH_DATA = 4;
 
+    /** There is no data yet.  The {@link #getReadyState} is also {@link #HAVE_NOTHING}. */
     @JsxConstant
     public static final short NETWORK_EMPTY = 0;
 
+    /** Network is idle. */
     @JsxConstant
     public static final short NETWORK_IDLE = 1;
 
+    /** The media is loading. */
     @JsxConstant
     public static final short NETWORK_LOADING = 2;
 
+    /** There is no source. */
     @JsxConstant
     public static final short NETWORK_NO_SOURCE = 3;
 

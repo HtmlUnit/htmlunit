@@ -129,12 +129,14 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * @return the attribute node, <code>null</code> if the attribute is not defined
      */
     public Object getNamedItemWithoutSytheticClassAttr(final String name) {
-        final DomNode attr = (DomNode) attributes_.getNamedItem(name);
-        if (attr != null) {
-            return attr.getScriptObject();
-        }
-        if (!"className".equals(name) && useRecursiveAttributeForIE() && isRecursiveAttribute(name)) {
-            return getUnspecifiedAttributeNode(name);
+        if (attributes_ != null) {
+            final DomNode attr = (DomNode) attributes_.getNamedItem(name);
+            if (attr != null) {
+                return attr.getScriptObject();
+            }
+            if (!"className".equals(name) && useRecursiveAttributeForIE() && isRecursiveAttribute(name)) {
+                return getUnspecifiedAttributeNode(name);
+            }
         }
 
         return null;
