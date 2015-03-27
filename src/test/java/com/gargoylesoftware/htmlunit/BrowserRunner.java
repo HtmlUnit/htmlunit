@@ -25,6 +25,7 @@ import java.lang.annotation.Target;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.runner.Runner;
 import org.junit.runner.manipulation.Filter;
@@ -70,20 +71,20 @@ public class BrowserRunner extends Suite {
         super(klass, Collections.<Runner>emptyList());
 
         if (BrowserVersionClassRunner.containsTestMethods(klass)) {
-            final List<String> browsers = WebDriverTestCase.getBrowsersProperties();
-            if (/*browsers.contains("hu") ||*/ browsers.contains("hu-ff24")) {
+            final Set<String> browsers = WebDriverTestCase.getBrowsersProperties();
+            if (browsers.contains("hu-ff24")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_24, false));
             }
-            if (browsers.contains("hu") || browsers.contains("hu-ff31")) {
+            if (browsers.contains("hu-ff31")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_31, false));
             }
-            if (browsers.contains("hu") || browsers.contains("hu-ie8")) {
+            if (browsers.contains("hu-ie8")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, false));
             }
-            if (browsers.contains("hu") || browsers.contains("hu-ie11")) {
+            if (browsers.contains("hu-ie11")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_11, false));
             }
-            if (browsers.contains("hu") || browsers.contains("hu-chrome")) {
+            if (browsers.contains("hu-chrome")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.CHROME, false));
             }
 

@@ -23,9 +23,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
@@ -103,7 +105,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
 
-    private static List<String> BROWSERS_PROPERTIES_;
+    private static Set<String> BROWSERS_PROPERTIES_;
     private static String IE_BIN_;
     private static String FF24_BIN_;
     private static String FF31_BIN_;
@@ -131,7 +133,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         return false;
     }
 
-    static List<String> getBrowsersProperties() {
+    static Set<String> getBrowsersProperties() {
         if (BROWSERS_PROPERTIES_ == null) {
             try {
                 final Properties properties = new Properties();
@@ -143,7 +145,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                         browsersValue = "hu";
                     }
                     BROWSERS_PROPERTIES_
-                        = Arrays.asList(browsersValue.replaceAll(" ", "").toLowerCase().split(","));
+                        = new HashSet<>(Arrays.asList(browsersValue.replaceAll(" ", "").toLowerCase().split(",")));
                     IE_BIN_ = properties.getProperty("ie.bin");
                     FF24_BIN_ = properties.getProperty("ff24.bin");
                     FF31_BIN_ = properties.getProperty("ff31.bin");
@@ -154,7 +156,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 LOG.error("Error reading htmlunit.properties. Ignoring!", e);
             }
             if (BROWSERS_PROPERTIES_ == null) {
-                BROWSERS_PROPERTIES_ = Arrays.asList("hu");
+                BROWSERS_PROPERTIES_ = new HashSet<>(Arrays.asList("hu"));
+            }
+            if (BROWSERS_PROPERTIES_.contains("hu")) {
+                BROWSERS_PROPERTIES_.add("hu-ff31");
+                BROWSERS_PROPERTIES_.add("hu-ie8");
+                BROWSERS_PROPERTIES_.add("hu-ie11");
+                BROWSERS_PROPERTIES_.add("hu-chrome");
             }
         }
         return BROWSERS_PROPERTIES_;
