@@ -80,7 +80,9 @@ public final class DOMStringMap extends SimpleScriptable {
         }
         else {
             final HtmlElement e = getDomNodeOrNull();
-            e.setAttribute("data-" + decamelize(name), Context.toString(value));
+            if (e != null) {
+                e.setAttribute("data-" + decamelize(name), Context.toString(value));
+            }
         }
     }
 

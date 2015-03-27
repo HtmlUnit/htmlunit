@@ -142,7 +142,7 @@ public class BrowserParameterizedRunner extends Suite {
                 runners_.add(new BrowserVersionClassRunnerWithParameters(
                         klass, BrowserVersion.INTERNET_EXPLORER_8, false, tests));
             }
-            if (/*browsers.contains("hu") ||*/ browsers.contains("hu-ie11")) {
+            if (browsers.contains("hu") || browsers.contains("hu-ie11")) {
                 runners_.add(new BrowserVersionClassRunnerWithParameters(
                         klass, BrowserVersion.INTERNET_EXPLORER_11, false, tests));
             }

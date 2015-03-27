@@ -397,6 +397,9 @@ public class HTMLFormElement extends HTMLElement implements Function {
      */
     @Override
     protected Object getWithPreemption(final String name) {
+        if (getDomNodeOrNull() == null) {
+            return NOT_FOUND;
+        }
         final List<HtmlElement> elements = findElements(name);
 
         if (elements.isEmpty()) {

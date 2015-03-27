@@ -109,8 +109,10 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
      * @param parentScope parent scope
      */
     private NodeList(final ScriptableObject parentScope) {
-        setParentScope(parentScope);
-        setPrototype(getPrototype(getClass()));
+        if (parentScope != null) {
+            setParentScope(parentScope);
+            setPrototype(getPrototype(getClass()));
+        }
     }
 
     /**
@@ -121,8 +123,10 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
      * @param description a text useful for debugging
      */
     public NodeList(final DomNode parentScope, final boolean attributeChangeSensitive, final String description) {
-        this(parentScope.getScriptObject());
-        setDomNode(parentScope, false);
+        this(parentScope == null ? null : parentScope.getScriptObject());
+        if (parentScope != null) {
+            setDomNode(parentScope, false);
+        }
         description_ = description;
         attributeChangeSensitive_ = attributeChangeSensitive;
     }
@@ -242,7 +246,12 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
         List<Object> cachedElements = cachedElements_;
 
         if (cachedElements == null) {
-            cachedElements = computeElements();
+            if (getParentScope() == null) {
+                cachedElements = new ArrayList<>();
+            }
+            else {
+                cachedElements = computeElements();
+            }
             cachedElements_ = cachedElements;
             if (!listenerRegistered_) {
                 final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl(this);
