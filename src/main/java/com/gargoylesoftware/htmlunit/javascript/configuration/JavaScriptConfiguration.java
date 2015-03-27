@@ -74,6 +74,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Text;
 import com.gargoylesoftware.htmlunit.javascript.host.TextRange;
 import com.gargoylesoftware.htmlunit.javascript.host.TreeWalker;
 import com.gargoylesoftware.htmlunit.javascript.host.UIEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.URLSearchParams;
 import com.gargoylesoftware.htmlunit.javascript.host.WebSocket;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.XPathEvaluator;
@@ -376,6 +377,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         Screen.class, Selection.class, SimpleArray.class,
         StaticNodeList.class, Storage.class, StyleSheetList.class, Text.class, TextRange.class, TreeWalker.class,
         UIEvent.class, Uint16Array.class, Uint32Array.class, Uint8Array.class, Uint8ClampedArray.class,
+        URLSearchParams.class,
         WebSocket.class, Window.class, XMLDocument.class,
         XMLHttpRequest.class, XMLSerializer.class, XPathEvaluator.class, XPathNSResolver.class, XPathResult.class,
         XSLTProcessor.class, XSLTemplate.class};

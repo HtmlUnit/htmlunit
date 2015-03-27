@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.HtmlArea;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -26,6 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 
 /**
  * The JavaScript object "HTMLAreaElement".
@@ -70,8 +72,7 @@ public class HTMLAreaElement extends HTMLElement {
      */
     @JsxGetter
     public String getAlt() {
-        final String alt = getDomNodeOrDie().getAttribute("alt");
-        return alt;
+        return getDomNodeOrDie().getAttribute("alt");
     }
 
     /**
@@ -89,5 +90,14 @@ public class HTMLAreaElement extends HTMLElement {
     @Override
     protected boolean isEndTagForbidden() {
         return true;
+    }
+
+    /**
+     * Returns the {@code relList} attribute.
+     * @return the {@code relList} attribute
+     */
+    @JsxGetter(@WebBrowser(FF))
+    public DOMTokenList getRelList() {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
 }

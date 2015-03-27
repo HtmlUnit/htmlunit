@@ -706,7 +706,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE8 = "charset,coords,dataFld,dataFormatAs,dataSrc,hash,host,hostname,href,hreflang,Methods,mimeType,"
                 + "name,nameProp,pathname,port,protocol,protocolLong,rel,rev,search,shape,target,type,"
                 + "urn")
-    @NotYetImplemented
+    @NotYetImplemented(IE)
     public void a() throws Exception {
         test("a");
     }

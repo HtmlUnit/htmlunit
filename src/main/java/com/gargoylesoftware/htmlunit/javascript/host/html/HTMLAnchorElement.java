@@ -29,6 +29,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Locale;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -43,6 +45,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.URLSearchParams;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
@@ -532,4 +536,203 @@ public class HTMLAnchorElement extends HTMLElement {
         }
         return super.getTypeOf();
     }
+
+    /**
+     * Returns the {@code charset} attribute.
+     * @return the {@code charset} attribute
+     */
+    @JsxGetter
+    public String getCharset() {
+        return getDomNodeOrDie().getAttribute("charset");
+    }
+
+    /**
+     * Sets the {@code charset} attribute.
+     * @param charset the {@code charset} attribute
+     */
+    @JsxSetter
+    public void setCharset(final String charset) {
+        getDomNodeOrDie().setAttribute("charset", charset);
+    }
+
+    /**
+     * Returns the {@code coords} attribute.
+     * @return the {@code coords} attribute
+     */
+    @JsxGetter
+    public String getCoords() {
+        return getDomNodeOrDie().getAttribute("coords");
+    }
+
+    /**
+     * Sets the {@code coords} attribute.
+     * @param coords {@code coords} attribute
+     */
+    @JsxSetter
+    public void setCoords(final String coords) {
+        getDomNodeOrDie().setAttribute("coords", coords);
+    }
+
+    /**
+     * Returns the {@code hreflang} attribute.
+     * @return the {@code hreflang} attribute
+     */
+    @JsxGetter
+    public String getHreflang() {
+        return getDomNodeOrDie().getAttribute("hreflang");
+    }
+
+    /**
+     * Sets the {@code hreflang} attribute.
+     * @param hreflang {@code hreflang} attribute
+     */
+    @JsxSetter
+    public void setHreflang(final String hreflang) {
+        getDomNodeOrDie().setAttribute("hreflang", hreflang);
+    }
+
+    /**
+     * Returns the {@code origin} attribute.
+     * @return the {@code origin} attribute
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public String getOrigin() {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Returns the {@code username} attribute.
+     * @return the {@code username} attribute
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public String getUsername() {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Sets the {@code username} attribute.
+     * @param username {@code username} attribute
+     */
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public void setUsername(final String username) {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Returns the {@code password} attribute.
+     * @return the {@code password} attribute
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public String getPassword() {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Sets the {@code password} attribute.
+     * @param password {@code password} attribute
+     */
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public void setPassword(final String password) {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Returns the {@code download} attribute.
+     * @return the {@code download} attribute
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public String getDownload() {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Sets the {@code download} attribute.
+     * @param download {@code download} attribute
+     */
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public void setDownload(final String download) {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Returns the {@code ping} attribute.
+     * @return the {@code ping} attribute
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public String getPing() {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Sets the {@code ping} attribute.
+     * @param ping {@code ping} attribute
+     */
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public void setPing(final String ping) {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Returns the {@code shape} attribute.
+     * @return the {@code shape} attribute
+     */
+    @JsxGetter
+    public String getShape() {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Sets the {@code shape} attribute.
+     * @param shape {@code shape} attribute
+     */
+    @JsxSetter
+    public void setShape(final String shape) {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Returns the {@code type} attribute.
+     * @return the {@code type} attribute
+     */
+    @JsxGetter
+    public String getType() {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Sets the {@code type} attribute.
+     * @param type {@code type} attribute
+     */
+    @JsxSetter
+    public void setType(final String type) {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Returns the {@code relList} attribute.
+     * @return the {@code relList} attribute
+     */
+    @JsxGetter(@WebBrowser(FF))
+    public DOMTokenList getRelList() {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Returns the {@code searchParams} attribute.
+     * @return the {@code searchParams} attribute
+     */
+    @JsxGetter(@WebBrowser(FF))
+    public String getSearchParams() {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Sets the {@code searchParams} attribute.
+     * @param searchParams {@code searchParams} attribute
+     */
+    @JsxSetter(@WebBrowser(FF))
+    public void setSearchParams(final URLSearchParams searchParams) {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
 }

@@ -20,6 +20,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import java.net.MalformedURLException;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -29,6 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 
 /**
  * The JavaScript object "HTMLLinkElement".
@@ -157,5 +160,14 @@ public class HTMLLinkElement extends HTMLElement {
     @Override
     protected boolean isEndTagForbidden() {
         return true;
+    }
+
+    /**
+     * Returns the {@code relList} attribute.
+     * @return the {@code relList} attribute
+     */
+    @JsxGetter(@WebBrowser(FF))
+    public DOMTokenList getRelList() {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
 }

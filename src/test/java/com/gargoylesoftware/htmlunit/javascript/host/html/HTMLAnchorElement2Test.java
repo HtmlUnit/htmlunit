@@ -620,4 +620,60 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(", hi")
+    public void charset() throws Exception {
+        attribute("charset", "hi");
+    }
+
+    private void attribute(final String attribute, final String value) throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <body onload='test()'>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "         var a = document.createElement('a');\n"
+            + "         alert(a." + attribute + ");\n"
+            + "         a." + attribute + " = '" + value + "';\n"
+            + "         alert(a." + attribute + ");\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(", 0,0")
+    public void coords() throws Exception {
+        attribute("coords", "0,0");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(", en")
+    public void hreflang() throws Exception {
+        attribute("hreflang", "en");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(", ")
+    @NotYetImplemented
+    public void origin() throws Exception {
+        attribute("origin", "something");
+    }
+
 }

@@ -3705,4 +3705,16 @@ public class HostTypeOfTest extends WebDriverTestCase {
         test("HTMLMenuItemElement");
     }
 
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.URLSearchParams}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void urlSearchParams() throws Exception {
+        test("URLSearchParams");
+    }
+
 }

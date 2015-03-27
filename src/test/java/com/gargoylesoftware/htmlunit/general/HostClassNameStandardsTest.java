@@ -3691,4 +3691,16 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
         test("HTMLMenuItemElement");
     }
 
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.URLSearchParams}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF = "function URLSearchParams() {\n    [native code]\n}")
+    public void urlSearchParams() throws Exception {
+        test("URLSearchParams");
+    }
+
 }
