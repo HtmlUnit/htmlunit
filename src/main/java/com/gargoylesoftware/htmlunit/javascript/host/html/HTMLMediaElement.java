@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.html.HtmlMedia;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
@@ -32,6 +33,33 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class HTMLMediaElement extends HTMLElement {
+
+    @JsxConstant
+    public static final short HAVE_NOTHING = 0;
+
+    @JsxConstant
+    public static final short HAVE_METADATA = 1;
+
+    @JsxConstant
+    public static final short HAVE_CURRENT_DATA = 2;
+
+    @JsxConstant
+    public static final short HAVE_FUTURE_DATA = 3;
+
+    @JsxConstant
+    public static final short HAVE_ENOUGH_DATA = 4;
+
+    @JsxConstant
+    public static final short NETWORK_EMPTY = 0;
+
+    @JsxConstant
+    public static final short NETWORK_IDLE = 1;
+
+    @JsxConstant
+    public static final short NETWORK_LOADING = 2;
+
+    @JsxConstant
+    public static final short NETWORK_NO_SOURCE = 3;
 
     /**
      * Creates an instance.

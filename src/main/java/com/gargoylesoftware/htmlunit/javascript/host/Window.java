@@ -534,7 +534,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the JavaScript property "clientInformation".
      * @return the client information
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public Navigator getClientInformation() {
         return navigator_;
     }
