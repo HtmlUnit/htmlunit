@@ -180,4 +180,78 @@ public class HTMLAppletElement extends HTMLElement {
         }
         return super.getDefaultValue(hint);
     }
+
+    /**
+     * Returns the {@code dataFld} attribute.
+     * @return the {@code dataFld} attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
+    public String getDataFld() {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Sets the {@code dataFld} attribute.
+     * @param dataFld {@code dataFld} attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
+    public void setDataFld(final String dataFld) {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Returns the {@code dataFormatAs} attribute.
+     * @return the {@code dataFormatAs} attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
+    public String getDataFormatAs() {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Sets the {@code dataFormatAs} attribute.
+     * @param dataFormatAs {@code dataFormatAs} attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
+    public void setDataFormatAs(final String dataFormatAs) {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Returns the {@code dataSrc} attribute.
+     * @return the {@code dataSrc} attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
+    public String getDataSrc() {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Sets the {@code dataSrc} attribute.
+     * @param dataSrc {@code dataSrc} attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
+    public void setDataSrc(final String dataSrc) {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Gets the "classid" attribute.
+     * @return the "classid" attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 11))
+    public String getClassid() {
+        final String classid = getDomNodeOrDie().getAttribute("classid");
+        return classid;
+    }
+
+    /**
+     * Sets the "classid" attribute.
+     * @param classid the "classid" attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, minVersion = 11))
+    public void setClassid(final String classid) {
+        getDomNodeOrDie().setAttribute("classid", classid);
+        // see HTMLObjectElement.setClassid
+    }
 }

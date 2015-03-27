@@ -706,7 +706,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE8 = "charset,coords,dataFld,dataFormatAs,dataSrc,hash,host,hostname,href,hreflang,Methods,mimeType,"
                 + "name,nameProp,pathname,port,protocol,protocolLong,rel,rev,search,shape,target,type,"
                 + "urn")
-    @NotYetImplemented(IE)
     public void a() throws Exception {
         test("a");
     }
@@ -1610,7 +1609,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "control,form,htmlFor",
             IE11 = "form,htmlFor",
             IE8 = "dataFld,dataFormatAs,dataSrc,form,htmlFor")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, CHROME })
     public void label() throws Exception {
         test("label");
     }
@@ -2163,7 +2162,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE8 = "dataFld,dataFormatAs,dataSrc")
-    @NotYetImplemented(IE8)
     public void span() throws Exception {
         test("span");
     }

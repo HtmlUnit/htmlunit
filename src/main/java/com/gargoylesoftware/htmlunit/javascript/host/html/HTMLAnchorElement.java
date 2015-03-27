@@ -735,4 +735,129 @@ public class HTMLAnchorElement extends HTMLElement {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
 
+    /**
+     * Returns the {@code protocolLong} attribute.
+     * @return the {@code protocolLong} attribute
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public String getProtocolLong() {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Returns the {@code Methods} attribute.
+     * @return the {@code Methods} attribute
+     */
+    @JsxGetter(propertyName = "Methods", value = @WebBrowser(IE))
+    public String getMethods() {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Sets the {@code Methods} attribute.
+     * @param methods {@code Methods} attribute
+     */
+    @JsxSetter(propertyName = "Methods", value = @WebBrowser(IE))
+    public void setMethods(final String methods) {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Returns the {@code mimeType} attribute.
+     * @return the {@code mimeType} attribute
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public String getMimeType() {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Sets the {@code mimeType} attribute.
+     * @param mimeType {@code mimeType} attribute
+     */
+    @JsxSetter(@WebBrowser(IE))
+    public void setMimeType(final String mimeType) {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Returns the {@code nameProp} attribute.
+     * @return the {@code nameProp} attribute
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public String getNameProp() {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Returns the {@code urn} attribute.
+     * @return the {@code urn} attribute
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public String getUrn() {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Sets the {@code urn} attribute.
+     * @param urn {@code urn} attribute
+     */
+    @JsxSetter(@WebBrowser(IE))
+    public void setUrn(final String urn) {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Returns the {@code dataFld} attribute.
+     * @return the {@code dataFld} attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
+    public String getDataFld() {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Sets the {@code dataFld} attribute.
+     * @param dataFld {@code dataFld} attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
+    public void setDataFld(final String dataFld) {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Returns the {@code dataFormatAs} attribute.
+     * @return the {@code dataFormatAs} attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
+    public String getDataFormatAs() {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Sets the {@code dataFormatAs} attribute.
+     * @param dataFormatAs {@code dataFormatAs} attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
+    public void setDataFormatAs(final String dataFormatAs) {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Returns the {@code dataSrc} attribute.
+     * @return the {@code dataSrc} attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, maxVersion = 8))
+    public String getDataSrc() {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Sets the {@code dataSrc} attribute.
+     * @param dataSrc {@code dataSrc} attribute
+     */
+    @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
+    public void setDataSrc(final String dataSrc) {
+        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
 }
