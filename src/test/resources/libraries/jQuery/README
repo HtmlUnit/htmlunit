@@ -2,7 +2,7 @@ This directory contains the resources necessary to run the jQuery JavaScript lib
 Each subdirectory corresponds to a specific version of the jQuery library.
 
 -------------------------
-For 2.1.0
+For 2.1.3
 
 Get jQuery sources from https://github.com/jquery/jquery
 
