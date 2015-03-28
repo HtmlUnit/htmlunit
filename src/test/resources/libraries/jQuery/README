@@ -26,3 +26,4 @@ src/sizzle from https://github.com/jquery/sizzle
         - In jquery/test/unit/ajax.js:
         - Change URL: "data/jsonp.php/??" to "data/jsonp.php"
         - Change URL: "data/jsonp.php/???json=1" to "data/jsonp.php?json=1"
+        - No need to change: "callback=??"
