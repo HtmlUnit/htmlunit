@@ -112,7 +112,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
                 return response;
             }
         }
-        if (useRecursiveAttributeForIE() && isRecursiveAttribute(name)) {
+        if (getDomNodeOrNull() != null && useRecursiveAttributeForIE() && isRecursiveAttribute(name)) {
             return getUnspecifiedAttributeNode(name);
         }
 
