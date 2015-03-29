@@ -32,6 +32,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -589,6 +590,17 @@ public class Element extends EventNode {
         final DomAttr newDomAttr = newAtt.getDomNodeOrDie();
         getDomNodeOrDie().setAttributeNode(newDomAttr);
         return replacedAtt;
+    }
+
+    /**
+     * Remove focus from this element.
+     */
+    @JsxFunction(@WebBrowser(CHROME))
+    public void blur() {
+        final DomNode domNode = getDomNodeOrDie();
+        if (domNode instanceof HtmlElement) {
+            ((HtmlElement) domNode).blur();
+        }
     }
 
 }

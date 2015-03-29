@@ -2126,9 +2126,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     /**
      * Remove focus from this element.
      */
-    @JsxFunction
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(IE) })
     public void blur() {
-        getDomNodeOrDie().blur();
+        super.blur();
     }
 
     /**
