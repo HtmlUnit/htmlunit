@@ -2110,7 +2110,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * {@inheritDoc}
      */
     @Override
-    public final HtmlElement getDomNodeOrDie() {
+    public HtmlElement getDomNodeOrDie() {
         return (HtmlElement) super.getDomNodeOrDie();
     }
 

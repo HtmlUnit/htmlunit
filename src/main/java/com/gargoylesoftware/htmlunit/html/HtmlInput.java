@@ -30,6 +30,8 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -598,5 +600,28 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
             return DisplayStyle.INLINE;
         }
         return DisplayStyle.INLINE_BLOCK;
+    }
+
+    /**
+     * Returns the {@code required} attribute.
+     * @return the {@code required} attribute
+     */
+    @JsxGetter
+    public boolean isRequired() {
+        return hasAttribute("required");
+    }
+
+    /**
+     * Returns the {@code required} attribute.
+     * @return the {@code required} attribute
+     */
+    @JsxSetter
+    public void setRequired(final boolean required) {
+        if (required) {
+            setAttribute("required", "required");
+        }
+        else {
+            removeAttribute("required");
+        }
     }
 }

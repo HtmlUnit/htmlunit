@@ -689,6 +689,6 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
         driver.switchTo().defaultContent();
         jsExecutor.executeScript("check();");
 
-        verifyAlerts(DEFAULT_WAIT_TIME, getExpectedAlerts(), driver);
+        verifyAlerts(driver, getExpectedAlerts());
     }
 }

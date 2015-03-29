@@ -430,7 +430,7 @@ public class HTMLElementTest extends WebDriverTestCase {
         webDriver.findElement(new ById("login")).click();
         webDriver.findElement(new ById("password")).click();
 
-        verifyAlerts(DEFAULT_WAIT_TIME, getExpectedAlerts(), webDriver);
+        verifyAlerts(webDriver, getExpectedAlerts());
     }
 
     /**
@@ -468,7 +468,7 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         webDriver.findElement(new ById("login")).click();
 
-        verifyAlerts(DEFAULT_WAIT_TIME, getExpectedAlerts(), webDriver);
+        verifyAlerts(webDriver, getExpectedAlerts());
     }
 
     /**
@@ -504,7 +504,7 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         webDriver.findElement(new ById("login")).click();
 
-        verifyAlerts(DEFAULT_WAIT_TIME, getExpectedAlerts(), webDriver);
+        verifyAlerts(webDriver, getExpectedAlerts());
     }
 
     /**
@@ -540,7 +540,7 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         webDriver.findElement(new ById("login")).click();
 
-        verifyAlerts(DEFAULT_WAIT_TIME, getExpectedAlerts(), webDriver);
+        verifyAlerts(webDriver, getExpectedAlerts());
     }
 
     /**
@@ -572,7 +572,7 @@ public class HTMLElementTest extends WebDriverTestCase {
         webDriver.findElement(new ById("login")).click();
         webDriver.findElement(new ById("password")).click();
 
-        verifyAlerts(DEFAULT_WAIT_TIME, getExpectedAlerts(), webDriver);
+        verifyAlerts(webDriver, getExpectedAlerts());
     }
 
     /**
@@ -605,7 +605,7 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         webDriver.findElement(new ById("login")).click();
 
-        verifyAlerts(DEFAULT_WAIT_TIME, getExpectedAlerts(), webDriver);
+        verifyAlerts(webDriver, getExpectedAlerts());
     }
 
     /**

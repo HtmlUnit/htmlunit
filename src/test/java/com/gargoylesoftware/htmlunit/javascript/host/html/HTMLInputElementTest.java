@@ -974,4 +974,82 @@ public class HTMLInputElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void submitNonRequired() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function submitMe() {\n"
+            + "    alert('onsubmit');\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body>\n"
+            + "  <form onsubmit='submitMe()'>\n"
+            + "    <input id='myInput' name='myName' value=''>\n"
+            + "    <input id='mySubmit' type='submit'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("mySubmit")).click();
+        assertTrue(driver.getCurrentUrl().contains("myName"));
+        // because we have a new page
+        assertTrue(getCollectedAlerts(driver).isEmpty());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    public void submitRequired() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function submitMe() {\n"
+            + "    alert('onsubmit');\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body>\n"
+            + "  <form onsubmit='submitMe()'>\n"
+            + "    <input id='myInput' name='myName' value='' required>\n"
+            + "    <input id='mySubmit' type='submit'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("mySubmit")).click();
+        assertFalse(driver.getCurrentUrl().contains("myName"));
+        assertTrue(getCollectedAlerts(driver).isEmpty());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    public void checkValidity() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function checkStatus() {\n"
+            + "    alert(document.getElementById('myInput').checkValidity());\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body>\n"
+            + "  <form onsubmit='submitMe()'>\n"
+            + "    <input id='myInput' name='myName' required>\n"
+            + "    <input id='mySubmit' type='submit'>\n"
+            + "  </form>\n"
+            + "  <button id='myButton' onclick='checkStatus()'>Check Status</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myButton")).click();
+        verifyAlerts(driver, "false");
+        driver.findElement(By.id("myInput")).sendKeys("something");
+        driver.findElement(By.id("myButton")).click();
+        verifyAlerts(driver, "false, true");
+    }
 }

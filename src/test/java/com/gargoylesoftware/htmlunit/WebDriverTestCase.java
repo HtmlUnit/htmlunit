@@ -636,18 +636,29 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         final WebDriver driver = loadPage2(html, url);
 
-        verifyAlerts(maxWaitTime, expectedAlerts, driver);
+        verifyAlerts(maxWaitTime, driver, expectedAlerts);
         return driver;
     }
 
     /**
      * Verifies the captured alerts.
-     * @param maxWaitTime the maximum time to wait for the expected alert to be found
-     * @param expectedAlerts the expected alerts
      * @param driver the driver instance
+     * @param expectedAlerts the expected alerts
      * @throws Exception in case of failure
      */
-    protected void verifyAlerts(final long maxWaitTime, final String[] expectedAlerts, final WebDriver driver)
+    protected void verifyAlerts(final WebDriver driver, final String... expectedAlerts)
+            throws Exception {
+        verifyAlerts(DEFAULT_WAIT_TIME, driver, expectedAlerts);
+    }
+
+    /**
+     * Verifies the captured alerts.
+     * @param maxWaitTime the maximum time to wait for the expected alert to be found
+     * @param driver the driver instance
+     * @param expectedAlerts the expected alerts
+     * @throws Exception in case of failure
+     */
+    protected void verifyAlerts(final long maxWaitTime, final WebDriver driver, final String... expectedAlerts)
         throws Exception {
         // gets the collected alerts, waiting a bit if necessary
         List<String> actualAlerts = getCollectedAlerts(driver);
@@ -696,7 +707,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         final WebDriver driver = getWebDriver();
         driver.get(url.toExternalForm());
 
-        verifyAlerts(maxWaitTime, expectedAlerts, driver);
+        verifyAlerts(maxWaitTime, driver, expectedAlerts);
         return driver;
     }
 
@@ -727,7 +738,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         final WebDriver driver = getWebDriver();
         driver.get(url.toExternalForm());
 
-        verifyAlerts(maxWaitTime, expectedAlerts, driver);
+        verifyAlerts(maxWaitTime, driver, expectedAlerts);
         return driver;
     }
 

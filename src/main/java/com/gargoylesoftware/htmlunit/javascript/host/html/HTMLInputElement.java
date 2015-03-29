@@ -80,7 +80,7 @@ public class HTMLInputElement extends FormField {
      */
     @JsxSetter
     public void setType(final String newType) {
-        HtmlInput input = getHtmlInputOrDie();
+        HtmlInput input = getDomNodeOrDie();
 
         if (!input.getTypeAttribute().equalsIgnoreCase(newType)) {
             final AttributesImpl attributes = readAttributes(input);
@@ -119,15 +119,14 @@ public class HTMLInputElement extends FormField {
      */
     @JsxSetter
     public void setChecked(final boolean checked) {
-        ((HtmlInput) getDomNodeOrDie()).setChecked(checked);
+        getDomNodeOrDie().setChecked(checked);
     }
 
     /**
-     * Commodity for <code>(HtmlInput) getDomNodeOrDie()</code>.
-     * @return the bound HTML input
+     * {@inheritDoc}
      */
-    protected HtmlInput getHtmlInputOrDie() {
-        return (HtmlInput) getDomNodeOrDie();
+    public HtmlInput getDomNodeOrDie() {
+        return (HtmlInput) super.getDomNodeOrDie();
     }
 
     /**
@@ -140,7 +139,7 @@ public class HTMLInputElement extends FormField {
      */
     @JsxGetter
     public boolean getChecked() {
-        return ((HtmlInput) getDomNodeOrDie()).isChecked();
+        return getDomNodeOrDie().isChecked();
     }
 
     /**
@@ -148,9 +147,9 @@ public class HTMLInputElement extends FormField {
      */
     @JsxFunction
     public void select() {
-        final HtmlInput input = getHtmlInputOrDie();
+        final HtmlInput input = getDomNodeOrDie();
         if (input instanceof HtmlTextInput) {
-            ((HtmlTextInput) getDomNodeOrDie()).select();
+            ((HtmlTextInput) input).select();
         }
         // currently nothing for other input types
     }
@@ -177,7 +176,7 @@ public class HTMLInputElement extends FormField {
      */
     @JsxGetter
     public String getDefaultValue() {
-        return ((HtmlInput) getDomNodeOrDie()).getDefaultValue();
+        return getDomNodeOrDie().getDefaultValue();
     }
 
     /**
@@ -187,7 +186,7 @@ public class HTMLInputElement extends FormField {
      */
     @JsxSetter
     public void setDefaultValue(final String defaultValue) {
-        ((HtmlInput) getDomNodeOrDie()).setDefaultValue(defaultValue);
+        getDomNodeOrDie().setDefaultValue(defaultValue);
     }
 
     /**
@@ -197,7 +196,7 @@ public class HTMLInputElement extends FormField {
      */
     @JsxGetter
     public boolean getDefaultChecked() {
-        return ((HtmlInput) getDomNodeOrDie()).isDefaultChecked();
+        return getDomNodeOrDie().isDefaultChecked();
     }
 
     /**
@@ -207,7 +206,7 @@ public class HTMLInputElement extends FormField {
      */
     @JsxSetter
     public void setDefaultChecked(final boolean defaultChecked) {
-        ((HtmlInput) getDomNodeOrDie()).setDefaultChecked(defaultChecked);
+        getDomNodeOrDie().setDefaultChecked(defaultChecked);
     }
 
     /**
@@ -296,7 +295,7 @@ public class HTMLInputElement extends FormField {
      */
     @JsxGetter
     public boolean getReadOnly() {
-        return ((HtmlInput) getDomNodeOrDie()).isReadOnly();
+        return getDomNodeOrDie().isReadOnly();
     }
 
     /**
@@ -305,7 +304,7 @@ public class HTMLInputElement extends FormField {
      */
     @JsxSetter
     public void setReadOnly(final boolean readOnly) {
-        ((HtmlInput) getDomNodeOrDie()).setReadOnly(readOnly);
+        getDomNodeOrDie().setReadOnly(readOnly);
     }
 
     /**
@@ -325,8 +324,7 @@ public class HTMLInputElement extends FormField {
      */
     @JsxGetter
     public String getAlt() {
-        final String alt = getDomNodeOrDie().getAttribute("alt");
-        return alt;
+        return getDomNodeOrDie().getAttribute("alt");
     }
 
     /**
@@ -344,8 +342,7 @@ public class HTMLInputElement extends FormField {
      */
     @JsxGetter(@WebBrowser(IE))
     public String getBorder() {
-        final String border = getDomNodeOrDie().getAttribute("border");
-        return border;
+        return getDomNodeOrDie().getAttribute("border");
     }
 
     /**
@@ -382,8 +379,7 @@ public class HTMLInputElement extends FormField {
      */
     @JsxGetter
     public String getSrc() {
-        final HtmlInput input = (HtmlInput) getDomNodeOrDie();
-        return input.getSrcAttribute();
+        return getDomNodeOrDie().getSrcAttribute();
     }
 
     /**
@@ -392,7 +388,7 @@ public class HTMLInputElement extends FormField {
     @Override
     @JsxFunction(@WebBrowser(FF))
     public void click() throws IOException {
-        final HtmlInput domNode = (HtmlInput) getDomNodeOrDie();
+        final HtmlInput domNode = getDomNodeOrDie();
         final boolean originalState = domNode.isChecked();
         final Event event;
         if (getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
@@ -430,5 +426,23 @@ public class HTMLInputElement extends FormField {
     @Override
     protected boolean isEndTagForbidden() {
         return true;
+    }
+
+    /**
+     * Returns the {@code required} attribute.
+     * @return the {@code required} attribute
+     */
+    @JsxGetter
+    public boolean isRequired() {
+        return getDomNodeOrDie().isRequired();
+    }
+
+    /**
+     * Returns the {@code required} attribute.
+     * @return the {@code required} attribute
+     */
+    @JsxSetter
+    public void setRequired(final boolean required) {
+        getDomNodeOrDie().setRequired(required);
     }
 }

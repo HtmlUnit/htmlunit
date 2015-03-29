@@ -2018,7 +2018,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
         final String[] expectedAlerts = getExpectedAlerts();
         final WebDriver driver = loadPage2(html, URL_FIRST, "text/html", "ISO-8859-1");
-        verifyAlerts(DEFAULT_WAIT_TIME, expectedAlerts, driver);
+        verifyAlerts(driver, expectedAlerts);
     }
 
     /**
@@ -2046,7 +2046,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
         final String[] expectedAlerts = getExpectedAlerts();
         final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", "ISO-8859-1");
-        verifyAlerts(DEFAULT_WAIT_TIME, expectedAlerts, driver);
+        verifyAlerts(driver, expectedAlerts);
     }
 
     /**
@@ -2074,7 +2074,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
         final String[] expectedAlerts = getExpectedAlerts();
         final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=utf-8", "ISO-8859-1");
-        verifyAlerts(DEFAULT_WAIT_TIME, expectedAlerts, driver);
+        verifyAlerts(driver, expectedAlerts);
     }
 
     /**
@@ -2103,7 +2103,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
         final String[] expectedAlerts = getExpectedAlerts();
         final WebDriver driver = loadPage2(html, URL_FIRST, "text/html", "UTF-8");
-        verifyAlerts(DEFAULT_WAIT_TIME, expectedAlerts, driver);
+        verifyAlerts(driver, expectedAlerts);
     }
 
     /**
