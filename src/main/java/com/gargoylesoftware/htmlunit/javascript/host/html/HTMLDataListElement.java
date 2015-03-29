@@ -18,9 +18,12 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlDataList;
+import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -32,14 +35,32 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClass(domClass = HtmlDataList.class,
     browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
-
 public class HTMLDataListElement extends HTMLElement {
+
+    private HTMLCollection options_;
 
     /**
      * Creates an instance.
      */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public HTMLDataListElement() {
+    }
+
+    /**
+     * Returns the {@code options} attribute.
+     * @return the {@code options} attribute
+     */
+    @JsxGetter
+    public Object getOptions() {
+        if (options_ == null) {
+            options_ = new HTMLCollection(getDomNodeOrDie(), false, "options") {
+                @Override
+                protected boolean isMatching(final DomNode node) {
+                    return node instanceof HtmlOption;
+                }
+            };
+        }
+        return options_;
     }
 
 }

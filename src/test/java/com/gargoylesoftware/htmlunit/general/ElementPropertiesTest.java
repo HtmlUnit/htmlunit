@@ -1055,7 +1055,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "options",
             IE8 = "")
-    @NotYetImplemented({ CHROME, IE11, FF24, FF31 })
     public void datalist() throws Exception {
         test("datalist");
     }
