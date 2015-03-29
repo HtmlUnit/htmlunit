@@ -612,8 +612,8 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * Returns the {@code required} attribute.
-     * @return the {@code required} attribute
+     * Sets the {@code required} attribute.
+     * @param required the new attribute value
      */
     @JsxSetter
     public void setRequired(final boolean required) {

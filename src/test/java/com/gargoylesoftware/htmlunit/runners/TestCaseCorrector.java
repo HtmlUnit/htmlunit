@@ -165,9 +165,7 @@ final class TestCaseCorrector {
             }
             return builder.toString();
         }
-        else {
-            return "\"" + actual + "\"";
-        }
+        return "\"" + actual + "\"";
     }
 
     private static void removeNotYetImplemented(final List<String> lines,

@@ -646,8 +646,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @param expectedAlerts the expected alerts
      * @throws Exception in case of failure
      */
-    protected void verifyAlerts(final WebDriver driver, final String... expectedAlerts)
-            throws Exception {
+    protected void verifyAlerts(final WebDriver driver, final String... expectedAlerts) throws Exception {
         verifyAlerts(DEFAULT_WAIT_TIME, driver, expectedAlerts);
     }
 
