@@ -1581,4 +1581,16 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     public void xmp() throws Exception {
         loadPageWithAlerts2(test("xmp"));
     }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlInput}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "inline-block",
+            FF31 = "inline")
+    public void input() throws Exception {
+        loadPageWithAlerts2(test("input"));
+    }
 }

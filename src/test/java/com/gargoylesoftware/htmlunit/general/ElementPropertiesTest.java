@@ -2536,4 +2536,42 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     public void xmp() throws Exception {
         test("xmp");
     }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlInput}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE8 = "accept,align,alt,border,checked,complete,createTextRange(),dataFld,dataFormatAs,dataSrc,"
+                + "defaultChecked,dynsrc,form,height,hspace,indeterminate,loop,lowsrc,maxLength,name,onabort,"
+                + "onchange,onerror,onload,onselect,readOnly,select(),size,src,start,start(),status,type,useMap,"
+                + "value,vrml,vspace,"
+                + "width",
+            FF31 = "accept,align,alt,autocomplete,autofocus,checked,checkValidity(),defaultChecked,defaultValue,"
+                + "disabled,files,form,formAction,formEnctype,formMethod,formNoValidate,formTarget,height,"
+                + "indeterminate,list,max,maxLength,min,mozIsTextField(),multiple,name,pattern,placeholder,readOnly,"
+                + "required,select(),selectionDirection,selectionEnd,selectionStart,setCustomValidity(),"
+                + "setRangeText(),setSelectionRange(),size,src,step,stepDown(),stepUp(),textLength,type,useMap,"
+                + "validationMessage,validity,value,valueAsNumber,width,"
+                + "willValidate",
+            IE11 = "accept,align,alt,autocomplete,autofocus,border,checked,checkValidity(),complete,"
+                + "createTextRange(),defaultChecked,defaultValue,dynsrc,files,form,formAction,formEnctype,"
+                + "formMethod,formNoValidate,formTarget,height,hspace,indeterminate,list,loop,lowsrc,max,maxLength,"
+                + "min,multiple,name,pattern,placeholder,readOnly,required,select(),selectionEnd,selectionStart,"
+                + "setCustomValidity(),setSelectionRange(),size,src,start,status,step,stepDown(),stepUp(),type,"
+                + "useMap,validationMessage,validity,value,valueAsNumber,vrml,vspace,width,"
+                + "willValidate",
+            CHROME = "accept,align,alt,autocomplete,autofocus,checked,checkValidity(),defaultChecked,defaultValue,"
+                + "dirName,disabled,files,form,formAction,formEnctype,formMethod,formNoValidate,formTarget,height,"
+                + "incremental,indeterminate,labels,list,max,maxLength,min,minLength,multiple,name,pattern,"
+                + "placeholder,readOnly,reportValidity(),required,select(),selectionDirection,selectionEnd,"
+                + "selectionStart,setCustomValidity(),setRangeText(),setSelectionRange(),size,src,step,stepDown(),"
+                + "stepUp(),type,useMap,validationMessage,validity,value,valueAsDate,valueAsNumber,webkitdirectory,"
+                + "webkitEntries,width,"
+                + "willValidate")
+    @NotYetImplemented
+    public void input() throws Exception {
+        test("input");
+    }
 }

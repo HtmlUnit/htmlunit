@@ -1765,4 +1765,17 @@ public class ElementChildNodesTest extends WebDriverTestCase {
         loadPageWithAlerts2(test("xmp"));
     }
 
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlInput}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
+            IE8 = { "0", "0", "0", "0", "0", "0" })
+    @NotYetImplemented(IE8)
+    public void input() throws Exception {
+        loadPageWithAlerts2(test("input"));
+    }
+
 }

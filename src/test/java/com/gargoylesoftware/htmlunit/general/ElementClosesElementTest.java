@@ -137220,4 +137220,2563 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     public void _var_tr() throws Exception {
         test("var", "tr");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _a_input() throws Exception {
+        test("a", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _abbr_input() throws Exception {
+        test("abbr", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _acronym_input() throws Exception {
+        test("acronym", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _address_input() throws Exception {
+        test("address", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _applet_input() throws Exception {
+        test("applet", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _area_input() throws Exception {
+        test("area", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _article_input() throws Exception {
+        test("article", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _aside_input() throws Exception {
+        test("aside", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _audio_input() throws Exception {
+        test("audio", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _b_input() throws Exception {
+        test("b", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _base_input() throws Exception {
+        test("base", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "0",
+            IE8 = "2")
+    @NotYetImplemented({ CHROME, IE11, FF31 })
+    public void _basefont_input() throws Exception {
+        test("basefont", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _bdi_input() throws Exception {
+        test("bdi", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _bdo_input() throws Exception {
+        test("bdo", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _bgsound_input() throws Exception {
+        test("bgsound", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _big_input() throws Exception {
+        test("big", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _blink_input() throws Exception {
+        test("blink", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _blockquote_input() throws Exception {
+        test("blockquote", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            FF31 = "3",
+            IE11 = "3",
+            CHROME = "3",
+            IE8 = "2")
+    public void _body_input() throws Exception {
+        test("body", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _br_input() throws Exception {
+        test("br", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            FF31 = "2",
+            IE11 = "2",
+            CHROME = "2")
+    @NotYetImplemented(IE8)
+    public void _button_input() throws Exception {
+        test("button", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _canvas_input() throws Exception {
+        test("canvas", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _caption_input() throws Exception {
+        test("caption", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _center_input() throws Exception {
+        test("center", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _cite_input() throws Exception {
+        test("cite", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _code_input() throws Exception {
+        test("code", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _col_input() throws Exception {
+        test("col", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _colgroup_input() throws Exception {
+        test("colgroup", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            FF31 = "2",
+            IE11 = "0",
+            CHROME = "0",
+            IE8 = "0")
+    @NotYetImplemented({ IE11, CHROME, IE8 })
+    public void _command_input() throws Exception {
+        test("command", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _datalist_input() throws Exception {
+        test("datalist", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _dd_input() throws Exception {
+        test("dd", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _del_input() throws Exception {
+        test("del", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _details_input() throws Exception {
+        test("details", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _dfn_input() throws Exception {
+        test("dfn", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _dialog_input() throws Exception {
+        test("dialog", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _dir_input() throws Exception {
+        test("dir", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _div_input() throws Exception {
+        test("div", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _dl_input() throws Exception {
+        test("dl", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _dt_input() throws Exception {
+        test("dt", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _em_input() throws Exception {
+        test("em", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _embed_input() throws Exception {
+        test("embed", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _fieldset_input() throws Exception {
+        test("fieldset", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _figcaption_input() throws Exception {
+        test("figcaption", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _figure_input() throws Exception {
+        test("figure", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _font_input() throws Exception {
+        test("font", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _footer_input() throws Exception {
+        test("footer", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _form_input() throws Exception {
+        test("form", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
+    @NotYetImplemented({ CHROME, IE11, FF31 })
+    public void _frame_input() throws Exception {
+        test("frame", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
+    @NotYetImplemented({ CHROME, IE11, FF31 })
+    public void _frameset_input() throws Exception {
+        test("frameset", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _h1_input() throws Exception {
+        test("h1", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _h2_input() throws Exception {
+        test("h2", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _h3_input() throws Exception {
+        test("h3", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _h4_input() throws Exception {
+        test("h4", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _h5_input() throws Exception {
+        test("h5", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _h6_input() throws Exception {
+        test("h6", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _head_input() throws Exception {
+        test("head", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _header_input() throws Exception {
+        test("header", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _hr_input() throws Exception {
+        test("hr", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            FF31 = "2",
+            IE11 = "2",
+            CHROME = "2",
+            IE8 = "null")
+    @NotYetImplemented({ CHROME, IE11, FF31 })
+    public void _html_input() throws Exception {
+        test("html", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _i_input() throws Exception {
+        test("i", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented
+    public void _image_input() throws Exception {
+        test("image", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _img_input() throws Exception {
+        test("img", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_a() throws Exception {
+        test("input", "a");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_abbr() throws Exception {
+        test("input", "abbr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_acronym() throws Exception {
+        test("input", "acronym");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_address() throws Exception {
+        test("input", "address");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_applet() throws Exception {
+        test("input", "applet");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_area() throws Exception {
+        test("input", "area");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_article() throws Exception {
+        test("input", "article");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_aside() throws Exception {
+        test("input", "aside");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_audio() throws Exception {
+        test("input", "audio");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_b() throws Exception {
+        test("input", "b");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_base() throws Exception {
+        test("input", "base");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_basefont() throws Exception {
+        test("input", "basefont");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_bdi() throws Exception {
+        test("input", "bdi");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_bdo() throws Exception {
+        test("input", "bdo");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_bgsound() throws Exception {
+        test("input", "bgsound");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_big() throws Exception {
+        test("input", "big");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_blink() throws Exception {
+        test("input", "blink");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_blockquote() throws Exception {
+        test("input", "blockquote");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_body() throws Exception {
+        test("input", "body");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_br() throws Exception {
+        test("input", "br");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_button() throws Exception {
+        test("input", "button");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_canvas() throws Exception {
+        test("input", "canvas");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_caption() throws Exception {
+        test("input", "caption");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_center() throws Exception {
+        test("input", "center");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_cite() throws Exception {
+        test("input", "cite");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_code() throws Exception {
+        test("input", "code");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_col() throws Exception {
+        test("input", "col");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_colgroup() throws Exception {
+        test("input", "colgroup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_command() throws Exception {
+        test("input", "command");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_datalist() throws Exception {
+        test("input", "datalist");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_dd() throws Exception {
+        test("input", "dd");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_del() throws Exception {
+        test("input", "del");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_details() throws Exception {
+        test("input", "details");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_dfn() throws Exception {
+        test("input", "dfn");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_dialog() throws Exception {
+        test("input", "dialog");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_dir() throws Exception {
+        test("input", "dir");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_div() throws Exception {
+        test("input", "div");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_dl() throws Exception {
+        test("input", "dl");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_dt() throws Exception {
+        test("input", "dt");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_em() throws Exception {
+        test("input", "em");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_embed() throws Exception {
+        test("input", "embed");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_fieldset() throws Exception {
+        test("input", "fieldset");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_figcaption() throws Exception {
+        test("input", "figcaption");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_figure() throws Exception {
+        test("input", "figure");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_font() throws Exception {
+        test("input", "font");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_footer() throws Exception {
+        test("input", "footer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_form() throws Exception {
+        test("input", "form");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_frame() throws Exception {
+        test("input", "frame");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_frameset() throws Exception {
+        test("input", "frameset");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_h1() throws Exception {
+        test("input", "h1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_h2() throws Exception {
+        test("input", "h2");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_h3() throws Exception {
+        test("input", "h3");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_h4() throws Exception {
+        test("input", "h4");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_h5() throws Exception {
+        test("input", "h5");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_h6() throws Exception {
+        test("input", "h6");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_head() throws Exception {
+        test("input", "head");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_header() throws Exception {
+        test("input", "header");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_hr() throws Exception {
+        test("input", "hr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_html() throws Exception {
+        test("input", "html");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_i() throws Exception {
+        test("input", "i");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_iframe() throws Exception {
+        test("input", "iframe");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_image() throws Exception {
+        test("input", "image");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_img() throws Exception {
+        test("input", "img");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_input() throws Exception {
+        test("input", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_ins() throws Exception {
+        test("input", "ins");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_isindex() throws Exception {
+        test("input", "isindex");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_kbd() throws Exception {
+        test("input", "kbd");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_keygen() throws Exception {
+        test("input", "keygen");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_label() throws Exception {
+        test("input", "label");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_layer() throws Exception {
+        test("input", "layer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_legend() throws Exception {
+        test("input", "legend");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_li() throws Exception {
+        test("input", "li");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_link() throws Exception {
+        test("input", "link");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_listing() throws Exception {
+        test("input", "listing");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_main() throws Exception {
+        test("input", "main");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_map() throws Exception {
+        test("input", "map");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_mark() throws Exception {
+        test("input", "mark");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_marquee() throws Exception {
+        test("input", "marquee");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_menu() throws Exception {
+        test("input", "menu");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_menuitem() throws Exception {
+        test("input", "menuitem");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_meta() throws Exception {
+        test("input", "meta");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_meter() throws Exception {
+        test("input", "meter");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_multicol() throws Exception {
+        test("input", "multicol");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_nav() throws Exception {
+        test("input", "nav");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_nextid() throws Exception {
+        test("input", "nextid");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_nobr() throws Exception {
+        test("input", "nobr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_noembed() throws Exception {
+        test("input", "noembed");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_noframes() throws Exception {
+        test("input", "noframes");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_nolayer() throws Exception {
+        test("input", "nolayer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_noscript() throws Exception {
+        test("input", "noscript");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_object() throws Exception {
+        test("input", "object");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_ol() throws Exception {
+        test("input", "ol");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_optgroup() throws Exception {
+        test("input", "optgroup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_option() throws Exception {
+        test("input", "option");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_output() throws Exception {
+        test("input", "output");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_p() throws Exception {
+        test("input", "p");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_param() throws Exception {
+        test("input", "param");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_plaintext() throws Exception {
+        test("input", "plaintext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_pre() throws Exception {
+        test("input", "pre");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_progress() throws Exception {
+        test("input", "progress");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_q() throws Exception {
+        test("input", "q");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_rp() throws Exception {
+        test("input", "rp");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_rt() throws Exception {
+        test("input", "rt");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_ruby() throws Exception {
+        test("input", "ruby");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_s() throws Exception {
+        test("input", "s");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_samp() throws Exception {
+        test("input", "samp");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented
+    public void _input_script() throws Exception {
+        test("input", "script");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_section() throws Exception {
+        test("input", "section");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_select() throws Exception {
+        test("input", "select");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_small() throws Exception {
+        test("input", "small");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_source() throws Exception {
+        test("input", "source");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_span() throws Exception {
+        test("input", "span");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_strike() throws Exception {
+        test("input", "strike");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_strong() throws Exception {
+        test("input", "strong");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_style() throws Exception {
+        test("input", "style");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_sub() throws Exception {
+        test("input", "sub");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_summary() throws Exception {
+        test("input", "summary");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_sup() throws Exception {
+        test("input", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_table() throws Exception {
+        test("input", "table");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_tbody() throws Exception {
+        test("input", "tbody");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_td() throws Exception {
+        test("input", "td");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_textarea() throws Exception {
+        test("input", "textarea");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_tfoot() throws Exception {
+        test("input", "tfoot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_th() throws Exception {
+        test("input", "th");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_thead() throws Exception {
+        test("input", "thead");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_time() throws Exception {
+        test("input", "time");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_title() throws Exception {
+        test("input", "title");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_tr() throws Exception {
+        test("input", "tr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_track() throws Exception {
+        test("input", "track");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_tt() throws Exception {
+        test("input", "tt");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_u() throws Exception {
+        test("input", "u");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_ul() throws Exception {
+        test("input", "ul");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_var() throws Exception {
+        test("input", "var");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_video() throws Exception {
+        test("input", "video");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_wbr() throws Exception {
+        test("input", "wbr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_xmp() throws Exception {
+        test("input", "xmp");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _ins_input() throws Exception {
+        test("ins", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            FF31 = "0",
+            IE11 = "0",
+            CHROME = "2",
+            IE8 = "0")
+    @NotYetImplemented({ FF31, IE11, IE8 })
+    public void _isindex_input() throws Exception {
+        test("isindex", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _kbd_input() throws Exception {
+        test("kbd", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            FF31 = "2",
+            IE11 = "0",
+            CHROME = "0",
+            IE8 = "0")
+    @NotYetImplemented({ IE11, CHROME, IE8 })
+    public void _keygen_input() throws Exception {
+        test("keygen", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _label_input() throws Exception {
+        test("label", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _layer_input() throws Exception {
+        test("layer", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _legend_input() throws Exception {
+        test("legend", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _li_input() throws Exception {
+        test("li", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _link_input() throws Exception {
+        test("link", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _listing_input() throws Exception {
+        test("listing", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _main_input() throws Exception {
+        test("main", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _map_input() throws Exception {
+        test("map", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _mark_input() throws Exception {
+        test("mark", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            FF31 = "2",
+            IE11 = "2",
+            CHROME = "2")
+    @NotYetImplemented(IE8)
+    public void _marquee_input() throws Exception {
+        test("marquee", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _menu_input() throws Exception {
+        test("menu", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _menuitem_input() throws Exception {
+        test("menuitem", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _meta_input() throws Exception {
+        test("meta", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _meter_input() throws Exception {
+        test("meter", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _multicol_input() throws Exception {
+        test("multicol", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _nav_input() throws Exception {
+        test("nav", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented({ CHROME, IE11, FF31 })
+    public void _nextid_input() throws Exception {
+        test("nextid", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _nobr_input() throws Exception {
+        test("nobr", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _nolayer_input() throws Exception {
+        test("nolayer", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            FF31 = "2",
+            IE11 = "2",
+            CHROME = "2",
+            IE8 = "null")
+    @NotYetImplemented(IE8)
+    public void _object_input() throws Exception {
+        test("object", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _ol_input() throws Exception {
+        test("ol", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented
+    public void _optgroup_input() throws Exception {
+        test("optgroup", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented
+    public void _option_input() throws Exception {
+        test("option", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _output_input() throws Exception {
+        test("output", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _p_input() throws Exception {
+        test("p", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _param_input() throws Exception {
+        test("param", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _pre_input() throws Exception {
+        test("pre", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _progress_input() throws Exception {
+        test("progress", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _q_input() throws Exception {
+        test("q", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _rp_input() throws Exception {
+        test("rp", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _rt_input() throws Exception {
+        test("rt", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _ruby_input() throws Exception {
+        test("ruby", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _s_input() throws Exception {
+        test("s", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _samp_input() throws Exception {
+        test("samp", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _section_input() throws Exception {
+        test("section", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented
+    public void _select_input() throws Exception {
+        test("select", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _small_input() throws Exception {
+        test("small", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented
+    public void _source_input() throws Exception {
+        test("source", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _span_input() throws Exception {
+        test("span", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _strike_input() throws Exception {
+        test("strike", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _strong_input() throws Exception {
+        test("strong", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _sub_input() throws Exception {
+        test("sub", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _summary_input() throws Exception {
+        test("summary", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _sup_input() throws Exception {
+        test("sup", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _tbody_input() throws Exception {
+        test("tbody", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _td_input() throws Exception {
+        test("td", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _tfoot_input() throws Exception {
+        test("tfoot", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _th_input() throws Exception {
+        test("th", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _thead_input() throws Exception {
+        test("thead", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _time_input() throws Exception {
+        test("time", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _tr_input() throws Exception {
+        test("tr", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented
+    public void _track_input() throws Exception {
+        test("track", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _tt_input() throws Exception {
+        test("tt", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _u_input() throws Exception {
+        test("u", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _ul_input() throws Exception {
+        test("ul", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _var_input() throws Exception {
+        test("var", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _video_input() throws Exception {
+        test("video", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _wbr_input() throws Exception {
+        test("wbr", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    @NotYetImplemented
+    public void _noembed_input() throws Exception {
+        test("noembed", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    @NotYetImplemented
+    public void _script_input() throws Exception {
+        test("script", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "2")
+    @NotYetImplemented({ CHROME, IE11, FF31 })
+    public void _table_input() throws Exception {
+        test("table", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    @NotYetImplemented
+    public void _title_input() throws Exception {
+        test("title", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _iframe_input() throws Exception {
+        test("iframe", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _noframes_input() throws Exception {
+        test("noframes", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _noscript_input() throws Exception {
+        test("noscript", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void _style_input() throws Exception {
+        test("style", "input");
+    }
 }
