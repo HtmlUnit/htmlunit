@@ -1772,7 +1772,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
-            IE8 = { "0", "0", "0", "0", "0", "0" })
+            IE8 = { "3", "3", "2", "4", "4", "3" })
     @NotYetImplemented(IE8)
     public void input() throws Exception {
         loadPageWithAlerts2(test("input"));

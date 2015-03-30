@@ -1405,7 +1405,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<input>",
-            IE8 = "<input>")
+            IE8 = "<INPUT>")
     @NotYetImplemented
     public void input() throws Exception {
         loadPageWithAlerts2(test("input"));
