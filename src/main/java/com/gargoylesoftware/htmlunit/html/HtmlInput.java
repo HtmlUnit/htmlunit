@@ -646,9 +646,9 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     /**
      * Sets the {@code maxLength} attribute.
      *
-     * @param size the {@code maxLength} attribute
+     * @param maxLength the {@code maxLength} attribute
      */
-    public void setMaxLength(int maxLength) {
+    public void setMaxLength(final int maxLength) {
         setAttribute("maxLength", String.valueOf(maxLength));
     }
 }
