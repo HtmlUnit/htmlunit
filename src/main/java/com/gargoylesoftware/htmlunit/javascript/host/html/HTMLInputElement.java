@@ -286,7 +286,7 @@ public class HTMLInputElement extends FormField {
      */
     @JsxSetter
     public void setMaxLength(final int length) {
-        getDomNodeOrDie().setAttribute("maxLength", Integer.toString(length));
+        getDomNodeOrDie().setMaxLength(length);
     }
 
     /**
@@ -444,5 +444,23 @@ public class HTMLInputElement extends FormField {
     @JsxSetter
     public void setRequired(final boolean required) {
         getDomNodeOrDie().setRequired(required);
+    }
+
+    /**
+     * Returns the {@code size} attribute.
+     * @return the {@code size} attribute
+     */
+    @JsxGetter
+    public String getSize() {
+        return getDomNodeOrDie().getSize();
+    }
+
+    /**
+     * Sets the {@code size} attribute.
+     * @param size the new {@code size} value
+     */
+    @JsxSetter
+    public void setSize(final String size) {
+        getDomNodeOrDie().setSize(size);
     }
 }

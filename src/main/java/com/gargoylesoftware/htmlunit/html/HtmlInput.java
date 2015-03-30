@@ -198,7 +198,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * or an empty string if that attribute isn't defined.
      */
     public final String getMaxLengthAttribute() {
-        return getAttribute("maxlength");
+        return getAttribute("maxLength");
     }
 
     /**
@@ -623,5 +623,32 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         else {
             removeAttribute("required");
         }
+    }
+
+    /**
+     * Returns the value of the {@code size} attribute.
+     *
+     * @return the value of the {@code size} attribute
+     */
+    public String getSize() {
+        return getAttribute("size");
+    }
+
+    /**
+     * Sets the {@code size} attribute.
+     *
+     * @param size the {@code size} attribute
+     */
+    public void setSize(final String size) {
+        setAttribute("size", size);
+    }
+
+    /**
+     * Sets the {@code maxLength} attribute.
+     *
+     * @param size the {@code maxLength} attribute
+     */
+    public void setMaxLength(int maxLength) {
+        setAttribute("maxLength", String.valueOf(maxLength));
     }
 }

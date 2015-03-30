@@ -1029,6 +1029,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("false, true")
     @NotYetImplemented
     public void checkValidity() throws Exception {
         final String html
@@ -1038,7 +1039,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "}\n"
             + "</script></head>\n"
             + "<body>\n"
-            + "  <form onsubmit='submitMe()'>\n"
+            + "  <form>\n"
             + "    <input id='myInput' name='myName' required>\n"
             + "    <input id='mySubmit' type='submit'>\n"
             + "  </form>\n"
@@ -1047,9 +1048,56 @@ public class HTMLInputElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myButton")).click();
-        verifyAlerts(driver, "false");
         driver.findElement(By.id("myInput")).sendKeys("something");
         driver.findElement(By.id("myButton")).click();
-        verifyAlerts(driver, "false, true");
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void maxLengthJavaScript() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function updateValue() {\n"
+            + "    document.getElementById('myInput').value = 'abcdefg';\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body>\n"
+            + "  <form>\n"
+            + "    <input id='myInput' name='myName' maxlength='2'>\n"
+            + "    <input id='mySubmit' type='submit'>\n"
+            + "  </form>\n"
+            + "  <button id='myButton' onclick='updateValue()'>Update Value</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myButton")).click();
+        assertEquals("abcdefg", driver.findElement(By.id("myInput")).getAttribute("value"));
+        driver.findElement(By.id("mySubmit")).click();
+        assertEquals(URL_FIRST + "?myName=abcdefg", driver.getCurrentUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void maxLength2() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "</script></head>\n"
+            + "<body>\n"
+            + "  <form>\n"
+            + "    <input id='myInput' name='myName' maxlength='2'>\n"
+            + "    <input id='mySubmit' type='submit'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myInput")).sendKeys("abcdefg");
+        assertEquals("ab", driver.findElement(By.id("myInput")).getAttribute("value"));
+        driver.findElement(By.id("mySubmit")).click();
+        assertEquals(URL_FIRST + "?myName=ab", driver.getCurrentUrl());
     }
 }
