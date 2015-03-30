@@ -63,6 +63,7 @@ svn co http://svn.code.sf.net/p/htmlunit/code/trunk/htmlunit/ .]]></source>
         <section name="Compiling the code">
             <p>
                 The preferred way to build HtmlUnit is with <a href="http://maven.apache.org">maven 3</a>.
+                <br/>At least for running the complete test suite a 64 bit JDK is required.
             </p>
             <source>mvn compile</source>
             <p>
