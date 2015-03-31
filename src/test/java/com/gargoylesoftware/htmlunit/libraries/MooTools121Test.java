@@ -86,7 +86,7 @@ public class MooTools121Test extends WebDriverTestCase {
         final WebDriver driver = getWebDriver();
         driver.get("http://localhost:" + PORT + "/Specs/index.html");
 
-        driver.manage().timeouts().implicitlyWait(60 * DEFAULT_WAIT_TIME_FACTOR, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         driver.findElement(By.xpath("id('progress')[text() = '100']"));
         // usually this need 40s but sometimes our build machine is slower
         // this is not an performance test, we only like to ensure that all
