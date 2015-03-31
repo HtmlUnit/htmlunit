@@ -432,7 +432,7 @@ public class HTMLInputElement extends FormField {
      * Returns the {@code required} attribute.
      * @return the {@code required} attribute
      */
-    @JsxGetter
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public boolean isRequired() {
         return getDomNodeOrDie().isRequired();
     }
@@ -441,7 +441,7 @@ public class HTMLInputElement extends FormField {
      * Sets the {@code required} attribute.
      * @param required the new attribute value
      */
-    @JsxSetter
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public void setRequired(final boolean required) {
         getDomNodeOrDie().setRequired(required);
     }
@@ -462,5 +462,41 @@ public class HTMLInputElement extends FormField {
     @JsxSetter
     public void setSize(final String size) {
         getDomNodeOrDie().setSize(size);
+    }
+
+    /**
+     * Returns the {@code accept} attribute.
+     * @return the {@code accept} attribute
+     */
+    @JsxGetter
+    public String getAccept() {
+        return getDomNodeOrDie().getAccept();
+    }
+
+    /**
+     * Sets the {@code accept} attribute.
+     * @param accept the new {@code accept} value
+     */
+    @JsxSetter
+    public void setAccept(final String accept) {
+        getDomNodeOrDie().setAccept(accept);
+    }
+
+    /**
+     * Returns the {@code autocomplete} attribute.
+     * @return the {@code autocomplete} attribute
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public String getAutocomplete() {
+        return getDomNodeOrDie().getAutocomplete();
+    }
+
+    /**
+     * Sets the {@code autocomplete} attribute.
+     * @param autocomplete the new {@code autocomplete} value
+     */
+    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public void setAutocomplete(final String autocomplete) {
+        getDomNodeOrDie().setAutocomplete(autocomplete);
     }
 }

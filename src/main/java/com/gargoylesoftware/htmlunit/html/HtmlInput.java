@@ -651,4 +651,40 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     public void setMaxLength(final int maxLength) {
         setAttribute("maxLength", String.valueOf(maxLength));
     }
+
+    /**
+     * Returns the value of the {@code accept} attribute.
+     *
+     * @return the value of the {@code accept} attribute
+     */
+    public String getAccept() {
+        return getAttribute("accept");
+    }
+
+    /**
+     * Sets the {@code accept} attribute.
+     *
+     * @param accept the {@code accept} attribute
+     */
+    public void setAccept(final String accept) {
+        setAttribute("accept", accept);
+    }
+
+    /**
+     * Returns the value of the {@code autocomplete} attribute.
+     *
+     * @return the value of the {@code autocomplete} attribute
+     */
+    public String getAutocomplete() {
+        return getAttribute("autocomplete");
+    }
+
+    /**
+     * Sets the {@code autocomplete} attribute.
+     *
+     * @param autocomplete the {@code autocomplete} attribute
+     */
+    public void setAutocomplete(final String autocomplete) {
+        setAttribute("autocomplete", autocomplete);
+    }
 }

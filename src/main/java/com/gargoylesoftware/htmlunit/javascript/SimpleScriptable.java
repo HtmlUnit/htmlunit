@@ -501,7 +501,8 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
             if (jsxGetter != null) {
                 String methodProperty;
                 if (jsxGetter.propertyName().isEmpty()) {
-                    methodProperty = m.getName().substring(3);
+                    final int prefix = m.getName().startsWith("is") ? 2 : 3;
+                    methodProperty = m.getName().substring(prefix);
                     methodProperty = Character.toLowerCase(methodProperty.charAt(0)) + methodProperty.substring(1);
                 }
                 else {

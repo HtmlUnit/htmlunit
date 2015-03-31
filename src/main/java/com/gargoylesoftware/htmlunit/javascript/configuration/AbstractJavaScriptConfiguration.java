@@ -190,7 +190,8 @@ public abstract class AbstractJavaScriptConfiguration {
                     if (isSupported(jsxGetter.value(), expectedBrowserName, browserVersionNumeric)) {
                         String property;
                         if (jsxGetter.propertyName().isEmpty()) {
-                            property = method.getName().substring(3);
+                            final int prefix = method.getName().startsWith("is") ? 2 : 3;
+                            property = method.getName().substring(prefix);
                             property = Character.toLowerCase(property.charAt(0)) + property.substring(1);
                         }
                         else {
