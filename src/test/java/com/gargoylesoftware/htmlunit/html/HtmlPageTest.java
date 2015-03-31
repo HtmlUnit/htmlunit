@@ -1761,7 +1761,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(firstContent);
 
-        final NodeList inputs = page.getElementsByTagName("input");
+        NodeList inputs = page.getElementsByTagName("input");
         assertEquals(1, inputs.getLength());
         assertEquals("button", inputs.item(0).getAttributes().getNamedItem("type").getNodeValue());
 
@@ -1771,6 +1771,18 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final HtmlDivision newDiv = new HtmlDivision(HtmlDivision.TAG_NAME, page, null);
         page.getBody().appendChild(newDiv);
         assertEquals(4, divs.getLength());
+
+        // case sensitive
+        inputs = page.getElementsByTagName("inPUT");
+        assertEquals(0, inputs.getLength());
+
+        // empty
+        inputs = page.getElementsByTagName("");
+        assertEquals(0, inputs.getLength());
+
+        // null
+        inputs = page.getElementsByTagName(null);
+        assertEquals(0, inputs.getLength());
     }
 
     /**

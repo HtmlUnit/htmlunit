@@ -863,33 +863,6 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testGetElementsByTagName() throws Exception {
-        final String html
-            = "<html><head><title>First</title></head>\n"
-            + "<body>\n"
-            + "<form><input type='button' name='button1' value='pushme'></form>\n"
-            + "<div>a</div> <div>b</div> <div>c</div>\n"
-            + "</body></html>";
-
-        final HtmlPage page = loadPage(html);
-        final HtmlElement body = page.getBody();
-
-        final NodeList inputs = body.getElementsByTagName("input");
-        assertEquals(1, inputs.getLength());
-        assertEquals("button", inputs.item(0).getAttributes().getNamedItem("type").getNodeValue());
-
-        final NodeList divs = body.getElementsByTagName("div");
-        assertEquals(3, divs.getLength());
-
-        final HtmlDivision newDiv = new HtmlDivision(HtmlDivision.TAG_NAME, page, null);
-        body.appendChild(newDiv);
-        assertEquals(4, divs.getLength());
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
     public void type() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
@@ -1047,6 +1020,45 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlPage page = loadPageWithAlerts(html);
         assertEquals(1, page.getElementById("myForm").getElementsByTagName("input").getLength());
         assertEquals(2, page.getBody().getElementsByTagName("input").getLength());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void getElementsByTagName2() throws Exception {
+        final String html
+            = "<html><head><title>First</title></head>\n"
+            + "<body>\n"
+            + "<form><input type='button' name='button1' value='pushme'></form>\n"
+            + "<div>a</div> <div>b</div> <div>c</div>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlElement body = page.getBody();
+
+        NodeList inputs = body.getElementsByTagName("input");
+        assertEquals(1, inputs.getLength());
+        assertEquals("button", inputs.item(0).getAttributes().getNamedItem("type").getNodeValue());
+
+        final NodeList divs = body.getElementsByTagName("div");
+        assertEquals(3, divs.getLength());
+
+        final HtmlDivision newDiv = new HtmlDivision(HtmlDivision.TAG_NAME, page, null);
+        body.appendChild(newDiv);
+        assertEquals(4, divs.getLength());
+
+        // case sensitive
+        inputs = page.getElementsByTagName("inPUT");
+        assertEquals(0, inputs.getLength());
+
+        // empty
+        inputs = page.getElementsByTagName("");
+        assertEquals(0, inputs.getLength());
+
+        // null
+        inputs = page.getElementsByTagName(null);
+        assertEquals(0, inputs.getLength());
     }
 
     /**

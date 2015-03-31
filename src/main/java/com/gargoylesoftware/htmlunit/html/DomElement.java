@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -363,7 +364,18 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * {@inheritDoc}
      */
     public DomNodeList<HtmlElement> getElementsByTagName(final String tagName) {
-        return new XPathDomNodeList<HtmlElement>(this, ".//*[local-name()='" + tagName + "']");
+        return new AbstractDomNodeList<HtmlElement>(this) {
+            @Override
+            protected List<HtmlElement> provideElements() {
+                final List<HtmlElement> res = new LinkedList<HtmlElement>();
+                for (HtmlElement elem : getDomNode().getHtmlElementDescendants()) {
+                    if (elem.getLocalName().equals(tagName)) {
+                        res.add(elem);
+                    }
+                }
+                return res;
+            }
+        };
     }
 
     /**

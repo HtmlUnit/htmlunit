@@ -37,6 +37,7 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -581,7 +582,18 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      */
     public DomNodeList<DomElement> getElementsByTagName(final String tagName) {
-        return new XPathDomNodeList<DomElement>(this, "//*[local-name()='" + tagName + "']");
+        return new AbstractDomNodeList<DomElement>(this) {
+            @Override
+            protected List<DomElement> provideElements() {
+                final List<DomElement> res = new LinkedList<DomElement>();
+                for (HtmlElement elem : getDomNode().getHtmlElementDescendants()) {
+                    if (elem.getLocalName().equals(tagName)) {
+                        res.add(elem);
+                    }
+                }
+                return res;
+            }
+        };
     }
 
     /**
