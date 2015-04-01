@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="Java 7, WebClient.close(), FF31, IE11 progress, Chrome progress, Bugfixes">
+            <action type="update" dev="rbri">
+                Upgrade Apache HttpComponents to 4.4.1
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: initial support for <tt>Intl</tt> namespace.
             </action>
@@ -68,7 +71,7 @@
                 JavaScript: Window is defined in Standards Mode (IE8).
             </action>
             <action type="update" dev="asashour">
-                Upgrade Apache HttpComponents to 4.4.
+                Upgrade Apache HttpComponents to 4.4
             </action>
             <action type="fix" dev="asashour">
                 JavaScriptEngine: consider false jsObject.
