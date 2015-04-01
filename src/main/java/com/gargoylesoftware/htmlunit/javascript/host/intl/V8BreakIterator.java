@@ -24,6 +24,4 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class V8BreakIterator extends SimpleScriptable {
 
-    public V8BreakIterator() {
-    }
 }

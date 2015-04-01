@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.source;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
@@ -27,7 +29,21 @@ import org.apache.commons.io.FileUtils;
  */
 public final class SVN {
 
+    /**
+     * List of extensions for files which should have SVN eol-style property with {@code native} value.
+     */
+    private static List<String> EOL_EXTENSIONS_
+        = Arrays.asList(".html", ".htm", ".js", ".css", ".xml", ".txt", ".properties", "*.php");
+
     private SVN() { }
+
+    /**
+     * List of extensions for files which should have SVN eol-style property with {@code native} value.
+     * @return the extensions list
+     */
+    public static List<String> getEolExtenstions() {
+        return EOL_EXTENSIONS_;
+    }
 
     /**
      * Recursively deletes any '.svn' folder which contains Subversion information.
@@ -60,7 +76,13 @@ public final class SVN {
                 }
             }
             else {
-                FileUtils.writeLines(f, FileUtils.readLines(f));
+                final String fileName = f.getName().toLowerCase();
+                for (final String extension : EOL_EXTENSIONS_) {
+                    if (fileName.endsWith(extension)) {
+                        FileUtils.writeLines(f, FileUtils.readLines(f));
+                        break;
+                    }
+                }
             }
         }
     }

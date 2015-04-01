@@ -24,6 +24,4 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class NumberFormat extends SimpleScriptable {
 
-    public NumberFormat() {
-    }
 }

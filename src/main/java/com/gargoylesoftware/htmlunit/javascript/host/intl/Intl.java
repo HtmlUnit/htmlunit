@@ -52,16 +52,16 @@ public class Intl extends SimpleScriptable {
 
     private void define(final Class<? extends SimpleScriptable> c) {
         try {
-            final FunctionObject functionObject = new RecursiveFunctionObject(c.getSimpleName(), c.getConstructor(), this);
+            final FunctionObject functionObject =
+                    new RecursiveFunctionObject(c.getSimpleName(), c.getConstructor(), this);
             final SimpleScriptable scriptable = c.newInstance();
             if (c == V8BreakIterator.class) {
                 scriptable.setClassName("v8BreakIterator");
             }
             functionObject.addAsConstructor(this, scriptable);
         }
-        catch(final Exception e) {
+        catch (final Exception e) {
             throw Context.throwAsScriptRuntimeEx(e);
         }
     }
-    
 }

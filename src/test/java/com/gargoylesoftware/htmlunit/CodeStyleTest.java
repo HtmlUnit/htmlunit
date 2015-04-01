@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,6 +39,8 @@ import org.tmatesoft.svn.core.wc.SVNPropertyData;
 import org.tmatesoft.svn.core.wc.SVNRevision;
 import org.tmatesoft.svn.core.wc.SVNWCClient;
 import org.tmatesoft.svn.core.wc.SVNWCUtil;
+
+import com.gargoylesoftware.htmlunit.source.SVN;
 
 /**
  * Test of coding style for things that cannot be detected by Checkstyle.
@@ -86,8 +88,8 @@ public class CodeStyleTest {
         final ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
         final ISVNAuthenticationManager authManager = SVNWCUtil.createDefaultAuthenticationManager();
         svnWCClient_ = new SVNWCClient(authManager, options);
-        process(new File("src/main/java"));
-        process(new File("src/test/java"));
+        process(new File("src/main"));
+        process(new File("src/test"));
         licenseYear();
         versionYear();
     }
@@ -97,27 +99,29 @@ public class CodeStyleTest {
             if (file.isDirectory() && !".svn".equals(file.getName())) {
                 process(file);
             }
-            else if (file.getName().endsWith(".java")) {
-                final List<String> lines = FileUtils.readLines(file);
+            else {
                 final String relativePath = file.getAbsolutePath().substring(
-                                new File(".").getAbsolutePath().length() - 1);
-                openingCurlyBracket(lines, relativePath);
-                year(lines, relativePath);
-                javaDocFirstLine(lines, relativePath);
-                methodFirstLine(lines, relativePath);
-                methodLastLine(lines, relativePath);
-                lineBetweenMethods(lines, relativePath);
+                        new File(".").getAbsolutePath().length() - 1);
                 svnProperties(file, relativePath);
-                runWith(lines, relativePath);
-                vs85aspx(lines, relativePath);
-                deprecated(lines, relativePath);
-                staticJSMethod(lines, relativePath);
-                singleAlert(lines, relativePath);
-                staticLoggers(lines, relativePath);
-                loggingEnabled(lines, relativePath);
-                browserVersion_isIE(lines, relativePath);
-                versionBeforeAuthor(lines, relativePath);
-                alerts(lines, relativePath);
+                if (file.getName().endsWith(".java")) {
+                    final List<String> lines = FileUtils.readLines(file);
+                    openingCurlyBracket(lines, relativePath);
+                    year(lines, relativePath);
+                    javaDocFirstLine(lines, relativePath);
+                    methodFirstLine(lines, relativePath);
+                    methodLastLine(lines, relativePath);
+                    lineBetweenMethods(lines, relativePath);
+                    runWith(lines, relativePath);
+                    vs85aspx(lines, relativePath);
+                    deprecated(lines, relativePath);
+                    staticJSMethod(lines, relativePath);
+                    singleAlert(lines, relativePath);
+                    staticLoggers(lines, relativePath);
+                    loggingEnabled(lines, relativePath);
+                    browserVersion_isIE(lines, relativePath);
+                    versionBeforeAuthor(lines, relativePath);
+                    alerts(lines, relativePath);
+                }
             }
         }
     }
@@ -218,13 +222,19 @@ public class CodeStyleTest {
      */
     private void svnProperties(final File file, final String relativePath) {
         if (!isSvnPropertiesDefined(file)) {
-            addFailure("'svn:eol-style' and 'svn:keywords' properties are not defined for " + relativePath);
+            if (file.getName().endsWith(".java")) {
+                addFailure("'svn:eol-style' and 'svn:keywords' properties are not defined for " + relativePath);
+            }
+            else {
+                addFailure("'svn:eol-style' property is not defined for " + relativePath);
+            }
         }
     }
 
     private boolean isSvnPropertiesDefined(final File file) {
         try {
-            final AtomicInteger i = new AtomicInteger();
+            final AtomicBoolean keywords = new AtomicBoolean();
+            final AtomicBoolean eol = new AtomicBoolean();
             svnWCClient_.doGetProperty(file, null, SVNRevision.WORKING, SVNRevision.WORKING, SVNDepth.EMPTY,
                     new ISVNPropertyHandler() {
 
@@ -243,16 +253,26 @@ public class CodeStyleTest {
                         final String name = property.getName();
                         final String value = property.getValue().getString();
                         if ("svn:eol-style".equals(name) && "native".equals(value)) {
-                            i.set(i.get() + 1);
+                            eol.set(true);
                         }
                         else if ("svn:keywords".equals(name) && "Author Date Id Revision".equals(value)) {
-                            i.set(i.get() + 2);
+                            keywords.set(true);
                         }
                     }
                 }, null);
-            if (i.get() == 3) {
-                return true;
+
+            final String fileName = file.getName().toLowerCase();
+            if (fileName.endsWith(".java")) {
+                return eol.get() && keywords.get();
             }
+            else {
+                for (final String extension : SVN.getEolExtenstions()) {
+                    if (fileName.endsWith(extension)) {
+                        return eol.get();
+                    }
+                }
+            }
+            return true;
         }
         catch (final Exception e) {
             //nothing

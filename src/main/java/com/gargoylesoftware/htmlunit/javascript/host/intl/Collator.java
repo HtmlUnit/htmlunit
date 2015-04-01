@@ -24,7 +24,4 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class Collator extends SimpleScriptable {
 
-    public Collator() {
-    }
-
 }
