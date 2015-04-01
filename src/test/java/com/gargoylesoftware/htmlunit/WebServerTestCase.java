@@ -185,7 +185,7 @@ public abstract class WebServerTestCase extends WebTestCase {
     /**
      * Disabled external entity resolution.
      *
-     * <p>This happens if there is no internet connection or we are behing a proxy server, and the web.xml contains
+     * <p>This happens if there is no internet connection or we are behind a proxy server, and the web.xml contains
      * <pre>&lt;!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
      *  "http://java.sun.com/dtd/web-app_2_3.dtd"&gt;</pre>
      *

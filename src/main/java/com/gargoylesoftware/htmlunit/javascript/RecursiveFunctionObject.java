@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_TOSTRING_ENUMERATED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.*;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_HTML_IMAGE_ELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_HTML_OPTION_ELEMENT;
@@ -103,7 +103,11 @@ public class RecursiveFunctionObject extends FunctionObject {
      * @return the browser version
      */
     public BrowserVersion getBrowserVersion() {
-        return ((Window) getParentScope()).getBrowserVersion();
+        Scriptable parent = this.getParentScope();
+        while (!(parent instanceof Window)) {
+            parent = parent.getParentScope();
+        }
+        return ((Window) parent).getBrowserVersion();
     }
 
     /**
@@ -151,11 +155,27 @@ public class RecursiveFunctionObject extends FunctionObject {
     @Override
     public String getFunctionName() {
         final String functionName = super.getFunctionName();
-        if ("Image".equals(functionName) && getBrowserVersion().hasFeature(JS_IMAGE_HTML_IMAGE_ELEMENT)) {
-            return "HTMLImageElement";
-        }
-        if ("Option".equals(functionName) && getBrowserVersion().hasFeature(JS_OPTION_HTML_OPTION_ELEMENT)) {
-            return "HTMLOptionElement";
+        switch (functionName) {
+            case "Image":
+                if (getBrowserVersion().hasFeature(JS_IMAGE_HTML_IMAGE_ELEMENT)) {
+                    return "HTMLImageElement";
+                }
+                break;
+
+            case "Option":
+                if (getBrowserVersion().hasFeature(JS_OPTION_HTML_OPTION_ELEMENT)) {
+                    return "HTMLOptionElement";
+                }
+                break;
+
+            case "Collator":
+            case "DateTimeFormat":
+            case "NumberFormat":
+            case "V8BreakIterator":
+                if (getBrowserVersion().hasFeature(JS_INTL_V8_BREAK_ITERATOR)) {
+                    return "";
+                }
+                break;
         }
         return functionName;
     }

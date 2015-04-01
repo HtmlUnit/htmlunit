@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -33,9 +32,9 @@ import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner.Default;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.TestCaseTest;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
 /**
  * Tests two Host classes, if one prototype is parent of another.
@@ -54,23 +53,11 @@ public class HostParentOfTest extends WebDriverTestCase {
     @Parameters
     public static Collection<Object[]> data() throws Exception {
         final List<Object[]> list = new ArrayList<>();
-        final List<String> strings = getAllClassNames();
+        final List<String> strings = TestCaseTest.getAllClassNames();
         for (final String parent : strings) {
             for (final String child : strings) {
                 list.add(new Object[] {parent, child});
             }
-        }
-        return list;
-    }
-
-    private static List<String> getAllClassNames() throws Exception {
-        final Field field = JavaScriptConfiguration.class.getDeclaredField("CLASSES_");
-        field.setAccessible(true);
-
-        final List<String> list = new ArrayList<>();
-        for (final Class<?> c : (Class<?>[]) field.get(null)) {
-            final String name = c.getSimpleName();
-            list.add(name);
         }
         return list;
     }

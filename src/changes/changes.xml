@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="Java 7, WebClient.close(), FF31, IE11 progress, Chrome progress, Bugfixes">
+            <action type="add" dev="asashour">
+                JavaScript: initial support for <tt>Intl</tt> namespace.
+            </action>
             <action type="update" dev="rbri">
                 CSS: cssparser updated to 0.9.15.
             </action>

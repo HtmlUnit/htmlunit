@@ -26,6 +26,7 @@ import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
+import com.gargoylesoftware.htmlunit.javascript.host.intl.Intl;
 
 /**
  * Tests for various test cases.
@@ -73,7 +74,12 @@ public final class TestCaseTest {
         }
     }
 
-    private List<String> getAllClassNames() throws Exception {
+    /**
+     * Returns list of all host classes defined.
+     * @return the list
+     * @throws Exception if an error occurs.
+     */
+    public static List<String> getAllClassNames() throws Exception {
         final Field field = JavaScriptConfiguration.class.getDeclaredField("CLASSES_");
         field.setAccessible(true);
 
@@ -82,6 +88,7 @@ public final class TestCaseTest {
             final String name = c.getSimpleName();
             list.add(name);
         }
+        list.add(Intl.class.getSimpleName());
         return list;
     }
 

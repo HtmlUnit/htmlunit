@@ -23,6 +23,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ECMA5_FUNC
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_BIND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_TOSOURCE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INTL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_Iterator;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_PROTOTYPE_SAME_AS_HTML_OPTION;
@@ -75,6 +76,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.StringCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
+import com.gargoylesoftware.htmlunit.javascript.host.intl.Intl;
 
 /**
  * A wrapper for the <a href="http://www.mozilla.org/rhino">Rhino JavaScript engine</a>
@@ -228,6 +230,13 @@ public class JavaScriptEngine {
 
         if (!browserVersion.hasFeature(JS_Iterator)) {
             deleteProperties(window, "Iterator", "StopIteration");
+        }
+
+        if (browserVersion.hasFeature(JS_INTL)) {
+            final Intl intl = new Intl();
+            intl.setParentScope(window);
+            window.defineProperty(intl.getClassName(), intl, ScriptableObject.DONTENUM);
+            intl.defineProperties(browserVersion);
         }
 
         // put custom object to be called as very last prototype to call the fallback getter (if any)

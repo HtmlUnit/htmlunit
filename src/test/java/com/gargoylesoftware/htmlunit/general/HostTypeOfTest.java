@@ -3717,4 +3717,16 @@ public class HostTypeOfTest extends WebDriverTestCase {
         test("URLSearchParams");
     }
 
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.intl.Intl}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "object",
+            IE8 = "undefined")
+    public void intl() throws Exception {
+        test("Intl");
+    }
+
 }
