@@ -18,6 +18,10 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import java.text.BreakIterator;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -32,6 +36,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class V8BreakIterator extends SimpleScriptable {
 
+    private BreakIterator breakIterator_ = BreakIterator.getWordInstance();
+    private String text_;
+
     /**
      * {@inheritDoc}
      */
@@ -41,12 +48,22 @@ public class V8BreakIterator extends SimpleScriptable {
     }
 
     /**
+     * Returns the resolved options.
+     * @return the options
+     */
+    @JsxFunction
+    public Object resolvedOptions() {
+        return Context.getCurrentContext().evaluateString(getParentScope(),
+                "var x = {locale: 'en-US'}; x", "", -1, null);
+    }
+
+    /**
      * Returns the index of the first break and moves pointer to it.
      * @return the index of the first break
      */
     @JsxFunction
     public int first() {
-        return -1;
+        return breakIterator_.first();
     }
 
     /**
@@ -55,7 +72,7 @@ public class V8BreakIterator extends SimpleScriptable {
      */
     @JsxFunction
     public int next() {
-        return -1;
+        return breakIterator_.next();
     }
 
     /**
@@ -64,7 +81,7 @@ public class V8BreakIterator extends SimpleScriptable {
      */
     @JsxFunction
     public int current() {
-        return -1;
+        return breakIterator_.current();
     }
 
     /**
@@ -73,6 +90,8 @@ public class V8BreakIterator extends SimpleScriptable {
      */
     @JsxFunction
     public void adoptText(final String text) {
+        text_ = text;
+        breakIterator_.setText(text);
     }
 
     /**
@@ -81,6 +100,23 @@ public class V8BreakIterator extends SimpleScriptable {
      */
     @JsxFunction
     public String breakType() {
+        final int current = current();
+        final int previous = breakIterator_.previous();
+        if (previous == BreakIterator.DONE) {
+            first();
+        }
+        else {
+            next();
+        }
+        if (current != BreakIterator.DONE && previous != BreakIterator.DONE) {
+            final String token = text_.substring(previous, current);
+            if (token.matches(".*[a-zA-Z]+.*")) {
+                return "letter";
+            }
+            if (token.matches("[0-9]+")) {
+                return "number";
+            }
+        }
         return "none";
     }
 
