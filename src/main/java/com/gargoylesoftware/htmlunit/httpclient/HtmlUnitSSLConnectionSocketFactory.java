@@ -123,7 +123,7 @@ public final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocke
             final HostnameVerifier hostnameVerifier, final boolean useInsecureSSL,
             final String[] supportedProtocols, final String[] supportedCipherSuites) {
         super(sslContext, supportedProtocols, supportedCipherSuites, hostnameVerifier);
-        this.useInsecureSSL_ = useInsecureSSL;
+        useInsecureSSL_ = useInsecureSSL;
     }
 
     private HtmlUnitSSLConnectionSocketFactory(final KeyStore keystore, final char[] keystorePassword,
@@ -131,11 +131,10 @@ public final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocke
             final String[] supportedProtocols, final String[] supportedCipherSuites)
         throws NoSuchAlgorithmException, KeyManagementException, KeyStoreException, UnrecoverableKeyException {
         super(SSLContexts.custom()
-                .loadKeyMaterial(keystore, keystorePassword)
-                .loadTrustMaterial(truststore)
-                .build(), supportedProtocols, supportedCipherSuites,
+                .loadKeyMaterial(keystore, keystorePassword).loadTrustMaterial(truststore).build(),
+                supportedProtocols, supportedCipherSuites,
                 BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
-        this.useInsecureSSL_ = useInsecureSSL;
+        useInsecureSSL_ = useInsecureSSL;
     }
 
     private void configureSocket(final SSLSocket sslSocket, final HttpContext context) {
