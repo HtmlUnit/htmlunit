@@ -14,7 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.intl;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for {@code Intl.v8BreakIterator}.
@@ -22,6 +29,59 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class V8BreakIterator extends SimpleScriptable {
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getDefaultValue(final Class<?> hint) {
+        return getClassName();
+    }
+
+    /**
+     * Returns the index of the first break and moves pointer to it.
+     * @return the index of the first break
+     */
+    @JsxFunction
+    public int first() {
+        return -1;
+    }
+
+    /**
+     * Returns the index of the next break and moves pointer to it.
+     * @return the index of the next break
+     */
+    @JsxFunction
+    public int next() {
+        return -1;
+    }
+
+    /**
+     * Returns the index of the current break.
+     * @return the index of the current break
+     */
+    @JsxFunction
+    public int current() {
+        return -1;
+    }
+
+    /**
+     * Assigns text to be segmented to the iterator.
+     * @param text the text
+     */
+    @JsxFunction
+    public void adoptText(final String text) {
+    }
+
+    /**
+     * Returns the type of the break.
+     * @return {@code none}, {@code number}, {@code letter}, {@code kana}, {@code ideo} or {@code unknown}
+     */
+    @JsxFunction
+    public String breakType() {
+        return "none";
+    }
 
 }

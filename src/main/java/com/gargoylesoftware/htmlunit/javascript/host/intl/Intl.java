@@ -19,8 +19,11 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.RecursiveFunctionObject;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
+import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 
 /**
  * A JavaScript object for Intl.
@@ -36,23 +39,24 @@ public class Intl extends SimpleScriptable {
      */
     public void defineProperties(final BrowserVersion browserVersion) {
         setClassName("Object");
-        define(Collator.class);
-        define(DateTimeFormat.class);
-        define(NumberFormat.class);
+        define(Collator.class, browserVersion);
+        define(DateTimeFormat.class, browserVersion);
+        define(NumberFormat.class, browserVersion);
         if (browserVersion.hasFeature(JS_INTL_V8_BREAK_ITERATOR)) {
-            define(V8BreakIterator.class);
+            define(V8BreakIterator.class, browserVersion);
         }
     }
 
-    private void define(final Class<? extends SimpleScriptable> c) {
+    private void define(final Class<? extends SimpleScriptable> c, final BrowserVersion browserVersion) {
         try {
+            final ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(c, browserVersion);
+            final SimpleScriptable prototype = JavaScriptEngine.configureClass(config, this, browserVersion);
             final FunctionObject functionObject =
                     new RecursiveFunctionObject(c.getSimpleName(), c.getConstructor(), this);
-            final SimpleScriptable scriptable = c.newInstance();
             if (c == V8BreakIterator.class) {
-                scriptable.setClassName("v8BreakIterator");
+                prototype.setClassName("v8BreakIterator");
             }
-            functionObject.addAsConstructor(this, scriptable);
+            functionObject.addAsConstructor(this, prototype);
         }
         catch (final Exception e) {
             throw Context.throwAsScriptRuntimeEx(e);

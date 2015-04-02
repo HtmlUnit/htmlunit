@@ -122,6 +122,9 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
                 catch (final Throwable t) {
                     continue;
                 }
+                if ("com.gargoylesoftware.htmlunit.javascript.host.intl".equals(klass.getPackage().getName())) {
+                    continue;
+                }
                 if (klass.getAnnotation(JsxClasses.class) != null) {
                     foundJsxClasses.add(className);
                 }

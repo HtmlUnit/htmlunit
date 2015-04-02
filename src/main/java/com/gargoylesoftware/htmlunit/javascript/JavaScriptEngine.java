@@ -248,13 +248,13 @@ public class JavaScriptEngine {
         for (final ClassConfiguration config : jsConfig_.getAll()) {
             final boolean isWindow = Window.class.getName().equals(config.getHostClass().getName());
             if (isWindow) {
-                configureConstantsPropertiesAndFunctions(config, window);
+                configureConstantsPropertiesAndFunctions(config, window, browserVersion);
 
-                final ScriptableObject prototype = configureClass(config, window);
+                final ScriptableObject prototype = configureClass(config, window, browserVersion);
                 prototypesPerJSName_.put(config.getClassName(), prototype);
             }
             else {
-                final ScriptableObject prototype = configureClass(config, window);
+                final ScriptableObject prototype = configureClass(config, window, browserVersion);
                 if (config.isJsObject()) {
                     // Place object with prototype property in Window scope
                     if (putPrototypeInWindowScope) {
@@ -523,18 +523,20 @@ public class JavaScriptEngine {
      * Configures the specified class for access via JavaScript.
      * @param config the configuration settings for the class to be configured
      * @param window the scope within which to configure the class
+     * @param browserVersion the browser version
      * @throws InstantiationException if the new class cannot be instantiated
      * @throws IllegalAccessException if we don't have access to create the new instance
      * @return the created prototype
      */
-    private SimpleScriptable configureClass(final ClassConfiguration config, final Scriptable window)
+    public static SimpleScriptable configureClass(final ClassConfiguration config, final Scriptable window,
+            final BrowserVersion browserVersion)
         throws InstantiationException, IllegalAccessException {
 
         final SimpleScriptable prototype = config.getHostClass().newInstance();
         prototype.setParentScope(window);
         prototype.setClassName(config.getClassName());
 
-        configureConstantsPropertiesAndFunctions(config, prototype);
+        configureConstantsPropertiesAndFunctions(config, prototype, browserVersion);
 
         return prototype;
     }
@@ -544,8 +546,8 @@ public class JavaScriptEngine {
      * @param config the configuration for the object
      * @param scriptable the object to configure
      */
-    private void configureConstantsPropertiesAndFunctions(final ClassConfiguration config,
-            final ScriptableObject scriptable) {
+    private static void configureConstantsPropertiesAndFunctions(final ClassConfiguration config,
+            final ScriptableObject scriptable, final BrowserVersion browserVersion) {
 
         // the constants
         configureConstants(config, scriptable);
@@ -559,7 +561,7 @@ public class JavaScriptEngine {
         }
 
         int attributes;
-        if (webClient_.getBrowserVersion().hasFeature(JS_DONT_ENUM_FUNCTIONS)) {
+        if (browserVersion.hasFeature(JS_DONT_ENUM_FUNCTIONS)) {
             attributes = ScriptableObject.DONTENUM;
         }
         else {
@@ -574,7 +576,7 @@ public class JavaScriptEngine {
         }
     }
 
-    private void configureConstants(final ClassConfiguration config,
+    private static void configureConstants(final ClassConfiguration config,
             final ScriptableObject scriptable) {
         final Class<?> linkedClass = config.getHostClass();
         for (final String constant : config.constants()) {

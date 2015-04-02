@@ -76,7 +76,7 @@ public abstract class AbstractJavaScriptConfiguration {
         final Map<String, ClassConfiguration> classMap = new HashMap<>(getClasses().length);
 
         for (final Class<? extends SimpleScriptable> klass : getClasses()) {
-            final ClassConfiguration config = processClass(klass, browser);
+            final ClassConfiguration config = getClassConfiguration(klass, browser);
             if (config != null) {
                 classMap.put(config.getClassName(), config);
             }
@@ -84,7 +84,14 @@ public abstract class AbstractJavaScriptConfiguration {
         return Collections.unmodifiableMap(classMap);
     }
 
-    private ClassConfiguration processClass(final Class<? extends SimpleScriptable> klass,
+    /**
+     * Returns the class configuration of the given {@code klass}.
+     *
+     * @param klass the class
+     * @param browser the browser version
+     * @return the class configuration
+     */
+    public static ClassConfiguration getClassConfiguration(final Class<? extends SimpleScriptable> klass,
         final BrowserVersion browser) {
         if (browser != null) {
             final String expectedBrowserName;
@@ -165,7 +172,7 @@ public abstract class AbstractJavaScriptConfiguration {
         return null;
     }
 
-    private void process(final ClassConfiguration classConfiguration,
+    private static void process(final ClassConfiguration classConfiguration,
             final String hostClassName, final String expectedBrowserName,
             final float browserVersionNumeric) {
         final String simpleClassName = hostClassName.substring(hostClassName.lastIndexOf('.') + 1);
