@@ -265,11 +265,10 @@ public class CodeStyleTest {
             if (fileName.endsWith(".java")) {
                 return eol.get() && keywords.get();
             }
-            else {
-                for (final String extension : SVN.getEolExtenstions()) {
-                    if (fileName.endsWith(extension)) {
-                        return eol.get();
-                    }
+
+            for (final String extension : SVN.getEolExtenstions()) {
+                if (fileName.endsWith(extension)) {
+                    return eol.get();
                 }
             }
             return true;
