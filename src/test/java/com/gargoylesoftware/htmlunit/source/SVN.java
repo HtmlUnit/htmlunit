@@ -33,7 +33,8 @@ public final class SVN {
      * List of extensions for files which should have SVN eol-style property with {@code native} value.
      */
     private static List<String> EOL_EXTENSIONS_
-        = Arrays.asList(".html", ".htm", ".js", ".css", ".xml", ".txt", ".properties", "*.php");
+        = Arrays.asList(".html", ".htm", ".js", ".css", ".xml", ".txt", ".properties", "*.php",
+                "*.ini", "*.sh", "*.bat", "*.log");
 
     private SVN() { }
 

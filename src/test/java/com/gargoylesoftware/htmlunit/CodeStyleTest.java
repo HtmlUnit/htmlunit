@@ -277,7 +277,10 @@ public class CodeStyleTest {
         catch (final Exception e) {
             //nothing
         }
-        return false;
+        final String path = file.getAbsolutePath();
+        // automatically generated and is outside SVN control
+        return (path.contains("jQuery") && path.contains("WEB-INF") && path.contains("cgi"))
+                || (path.contains("jQuery") && path.contains("csp.log"));
     }
 
     /**
