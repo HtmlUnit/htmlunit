@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class V8BreakIterator extends SimpleScriptable {
 
-    private BreakIterator breakIterator_;
+    private transient BreakIterator breakIterator_;
     private String text_;
     private boolean typeAlwaysNone_;
 
