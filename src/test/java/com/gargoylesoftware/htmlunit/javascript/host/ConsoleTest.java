@@ -37,6 +37,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(Enclosed.class)
 public class ConsoleTest {
@@ -50,13 +51,47 @@ public class ConsoleTest {
          * @throws Exception if the test fails
          */
         @Test
-        @Alerts(DEFAULT = "false",
-            IE8 = "true")
-        public void undefined() throws Exception {
+        @Alerts(DEFAULT = { "false", "object", "true", "true" },
+                FF24 = { "false", "object", "true", "false" },
+                CHROME = { "false", "object", "true", "false" },
+                IE8 = { "true", "undefined", "false", "false" })
+        public void prototype() throws Exception {
             final String html
-                = "<html><body><script>\n"
-                + "alert(window.console == undefined)\n"
-                + "</script></body></html>";
+                = "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + "  try {\n"
+                + "    alert(window.console == undefined);\n"
+                + "    alert(typeof window.console);\n"
+                + "    alert('console' in window);\n"
+                + "    alert('Console' in window);\n"
+                + "  } catch(e) { alert('exception');}\n"
+                + "</script>\n"
+                + "</body></html>";
+
+            loadPageWithAlerts2(html);
+        }
+
+        /**
+         * @throws Exception if the test fails
+         */
+        @Test
+        @Alerts(DEFAULT = { "function", "function", "function", "function", "function" },
+                IE8 = "window.console not available")
+        public void methods() throws Exception {
+            final String html
+                = "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + "  if (window.console) {\n"
+                + "    alert(typeof console.log);\n"
+                + "    alert(typeof console.info);\n"
+                + "    alert(typeof console.warn);\n"
+                + "    alert(typeof console.error);\n"
+                + "    alert(typeof console.debug);\n"
+                + "  } else { alert('window.console not available');}\n"
+                + "</script>\n"
+                + "</body></html>";
 
             loadPageWithAlerts2(html);
         }
