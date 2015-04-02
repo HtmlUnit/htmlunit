@@ -47,14 +47,15 @@ public class ConsoleTest {
      */
     @RunWith(BrowserRunner.class)
     public static class WebdriverBasedTests extends WebDriverTestCase {
+
         /**
          * @throws Exception if the test fails
          */
         @Test
-        @Alerts(DEFAULT = { "false", "object", "true", "true" },
-                FF24 = { "false", "object", "true", "false" },
-                CHROME = { "false", "object", "true", "false" },
-                IE8 = { "true", "undefined", "false", "false" })
+        @Alerts(DEFAULT = { "false", "object", "true" },
+                FF24 = { "false", "object", "true" },
+                CHROME = { "false", "object", "true" },
+                IE8 = { "true", "undefined", "false" })
         public void prototype() throws Exception {
             final String html
                 = "<html>\n"
@@ -64,6 +65,27 @@ public class ConsoleTest {
                 + "    alert(window.console == undefined);\n"
                 + "    alert(typeof window.console);\n"
                 + "    alert('console' in window);\n"
+                + "  } catch(e) { alert('exception');}\n"
+                + "</script>\n"
+                + "</body></html>";
+
+            loadPageWithAlerts2(html);
+        }
+
+        /**
+         * @throws Exception if the test fails
+         */
+        @Test
+        @Alerts(DEFAULT = { "true", "undefined", "false" },
+                IE11 = { "false", "object", "true" })
+        public void prototypeUppercase() throws Exception {
+            final String html
+                = "<html>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + "  try {\n"
+                + "    alert(window.Console == undefined);\n"
+                + "    alert(typeof window.Console);\n"
                 + "    alert('Console' in window);\n"
                 + "  } catch(e) { alert('exception');}\n"
                 + "</script>\n"

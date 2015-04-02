@@ -8,9 +8,6 @@
 
     <body>
         <release version="2.16" date="???" description="Java 7, WebClient.close(), FF31, IE11 progress, Chrome progress, Bugfixes">
-            <action type="fix" dev="rbri">
-                JavaScript: fix availability of window.console for FF31.
-            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache HttpComponents to 4.4.1
             </action>

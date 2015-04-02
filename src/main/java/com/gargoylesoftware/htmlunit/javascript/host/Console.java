@@ -48,11 +48,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @version $Revision$
  * @author Andrea Martino
- * @author Ronald Brill
  */
 @JsxClasses({
-    @JsxClass(isJSObject = false, browsers = { @WebBrowser(value = FF, maxVersion = 24), @WebBrowser(CHROME) }),
-    @JsxClass(browsers = { @WebBrowser(value = FF, minVersion = 31), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxClass(isJSObject = false, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) }),
+    @JsxClass(browsers = @WebBrowser(value = IE, minVersion = 11))
 })
 public class Console extends SimpleScriptable {
 
