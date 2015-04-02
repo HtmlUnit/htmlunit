@@ -52,7 +52,7 @@ public class Intl extends SimpleScriptable {
             final ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(c, browserVersion);
             final SimpleScriptable prototype = JavaScriptEngine.configureClass(config, this, browserVersion);
             final FunctionObject functionObject =
-                    new RecursiveFunctionObject(c.getSimpleName(), c.getConstructor(), this);
+                    new RecursiveFunctionObject(c.getSimpleName(), config.getJsConstructor(), this);
             if (c == V8BreakIterator.class) {
                 prototype.setClassName("v8BreakIterator");
             }

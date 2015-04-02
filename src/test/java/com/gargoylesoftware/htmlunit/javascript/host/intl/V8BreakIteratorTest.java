@@ -32,6 +32,10 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 @RunWith(BrowserRunner.class)
 public class V8BreakIteratorTest extends WebDriverTestCase {
 
+    private static final String LINE_ = "line";
+    private static final String CHARACTER_ = "character";
+    private static final String SENTENCE_ = "sentence";
+
     /**
      * @throws Exception if the test fails
      */
@@ -39,16 +43,51 @@ public class V8BreakIteratorTest extends WebDriverTestCase {
     @Alerts(CHROME = "0, none, 0, none, 0, none, 4, letter, 5, none, 8, letter, 9, none, 13, letter, 14, none, "
             + "15, none, 19, letter, 20, none, 24, letter, 25, none, 29, letter, 30, none, 30, none")
     public void sample() throws Exception {
-        test("Jack and Jill, went over hill!");
+        test("en", null, "Jack and Jill, went over hill!");
     }
 
-    private void test(final String text) throws Exception {
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "0, none, 0, none, 0, none, 5, none, 9, none, 15, none, 20, none, 25, none, 30, none, 30, none")
+    public void sampleLine() throws Exception {
+        test("en", LINE_, "Jack and Jill, went over hill!");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "0, none, 0, none, 0, none, 1, none, 2, none, 3, none, 4, none, 5, none, 6, none, 7, none, "
+            + "8, none, 9, none, 10, none, 11, none, 12, none, 13, none, 14, none, 15, none, 16, none, 17, none, "
+            + "18, none, 19, none, 20, none, 21, none, 22, none, 23, none, 24, none, 25, none, 26, none, 27, none, "
+            + "28, none, 29, none, 30, none, 30, none")
+    public void sampleCharacter() throws Exception {
+        test("en", CHARACTER_, "Jack and Jill, went over hill!");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "0, none, 0, none, 0, none, 30, none, 30, none")
+    public void sampleSentence() throws Exception {
+        test("en", SENTENCE_, "Jack and Jill, went over hill!");
+    }
+
+    /**
+     * @param type can be null
+     */
+    private void test(final String language, final String type, final String text) throws Exception {
         final String html = ""
             + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    if (window.Intl && window.Intl.v8BreakIterator) {\n"
-            + "      var iterator = new Intl.v8BreakIterator(['en']);\n"
+            + "      var iterator = new Intl.v8BreakIterator('" + language + "'"
+            + (type == null ? "" : ", {type: '" + type + "'}")
+            + ");\n"
             + "      log(iterator);\n"
             + "      var text = '" + text.replace("'", "\\'") + "';\n"
             + "      iterator.adoptText(text);\n"
@@ -108,7 +147,7 @@ public class V8BreakIteratorTest extends WebDriverTestCase {
             + "15, none, 19, letter, 20, none, 24, letter, 25, none, 29, letter, 30, none, 31, none, 34, letter, "
             + "35, none, 38, letter, 39, none, 43, letter, 44, none, 45, none, 50, letter, 51, none, 51, none")
     public void enBreak() throws Exception {
-        test("Jack and Jill, went over hill, and got lost. Alert!");
+        test("en", null, "Jack and Jill, went over hill, and got lost. Alert!");
     }
 
     /**
@@ -118,7 +157,7 @@ public class V8BreakIteratorTest extends WebDriverTestCase {
     @Alerts(CHROME = "0, none, 0, none, 0, none, 1, none, 2, none, 3, none, 4, none, 5, none, 6, none, 7, none, "
             + "8, none, 9, none, 10, none, 11, none, 12, none, 13, none, 14, none, 15, none, 15, none")
     public void zh() throws Exception {
-        test("\u56FD\u52A1\u9662\u5173\u4E8E\u300A\u571F\u5730\u623F\u5C4B\u7BA1\u7406\u6761\u4F8B\u300B");
+        test("zh", null, "\u56FD\u52A1\u9662\u5173\u4E8E\u300A\u571F\u5730\u623F\u5C4B\u7BA1\u7406\u6761\u4F8B\u300B");
     }
 
 }

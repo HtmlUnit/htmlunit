@@ -19,11 +19,16 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.text.BreakIterator;
+import java.util.Locale;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
+import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -36,8 +41,56 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class V8BreakIterator extends SimpleScriptable {
 
-    private BreakIterator breakIterator_ = BreakIterator.getWordInstance();
+    private BreakIterator breakIterator_;
     private String text_;
+    private boolean typeAlwaysNone_;
+
+    /**
+     * The default constructor.
+     */
+    public V8BreakIterator() {
+    }
+
+    /**
+     * The JavaScript constructor, with optional parameters.
+     * @param locales the locales
+     * @param types the types, can be {@code character}, {@code word}, {@code sentence} or {@code line},
+     *        default is {@code word}
+     */
+    @JsxConstructor
+    public V8BreakIterator(final Object locales, final Object types) {
+        Locale locale = new Locale("en", "US");
+        if (locales instanceof NativeArray) {
+            if (((NativeArray) locales).getLength() != 0) {
+                locale = new Locale(((NativeArray) locales).get(0).toString());
+            }
+        }
+        else if (locales instanceof String) {
+            locale = new Locale(locales.toString());
+        }
+        else if (locales != Undefined.instance) {
+            throw Context.throwAsScriptRuntimeEx(new Exception("Unknown type " + locales.getClass().getName()));
+        }
+
+        if (types instanceof NativeObject) {
+            final Object obj = ((NativeObject) types).get("type", (NativeObject) types);
+            if ("character".equals(obj)) {
+                breakIterator_ = BreakIterator.getCharacterInstance(locale);
+                typeAlwaysNone_ = true;
+            }
+            else if ("line".equals(obj)) {
+                breakIterator_ = BreakIterator.getLineInstance(locale);
+                typeAlwaysNone_ = true;
+            }
+            else if ("sentence".equals(obj)) {
+                breakIterator_ = BreakIterator.getSentenceInstance(locale);
+                typeAlwaysNone_ = true;
+            }
+        }
+        if (breakIterator_ == null) {
+            breakIterator_ = BreakIterator.getWordInstance(locale);
+        }
+    }
 
     /**
      * {@inheritDoc}
@@ -100,21 +153,23 @@ public class V8BreakIterator extends SimpleScriptable {
      */
     @JsxFunction
     public String breakType() {
-        final int current = current();
-        final int previous = breakIterator_.previous();
-        if (previous == BreakIterator.DONE) {
-            first();
-        }
-        else {
-            next();
-        }
-        if (current != BreakIterator.DONE && previous != BreakIterator.DONE) {
-            final String token = text_.substring(previous, current);
-            if (token.matches(".*[a-zA-Z]+.*")) {
-                return "letter";
+        if (!typeAlwaysNone_) {
+            final int current = current();
+            final int previous = breakIterator_.previous();
+            if (previous == BreakIterator.DONE) {
+                first();
             }
-            if (token.matches("[0-9]+")) {
-                return "number";
+            else {
+                next();
+            }
+            if (current != BreakIterator.DONE && previous != BreakIterator.DONE) {
+                final String token = text_.substring(previous, current);
+                if (token.matches(".*[a-zA-Z]+.*")) {
+                    return "letter";
+                }
+                if (token.matches("[0-9]+")) {
+                    return "number";
+                }
             }
         }
         return "none";
