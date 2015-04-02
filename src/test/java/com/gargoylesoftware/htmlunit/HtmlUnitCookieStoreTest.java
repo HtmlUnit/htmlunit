@@ -26,6 +26,7 @@ import org.apache.http.impl.cookie.BasicClientCookie;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitCookieStore;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 
 /**

@@ -24,15 +24,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,7 +56,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.ProtocolException;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.Credentials;
-import org.apache.http.client.CookieStore;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpDelete;
@@ -88,8 +84,6 @@ import org.apache.http.config.SocketConfig;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
 import org.apache.http.conn.socket.LayeredConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.cookie.ClientCookie;
-import org.apache.http.cookie.Cookie;
 import org.apache.http.cookie.CookieSpec;
 import org.apache.http.cookie.CookieSpecProvider;
 import org.apache.http.entity.ContentType;
@@ -106,6 +100,9 @@ import org.apache.http.protocol.RequestTargetHost;
 import org.apache.http.ssl.SSLContexts;
 
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
+import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitCookieStore;
+import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitSSLConnectionSocketFactory;
+import com.gargoylesoftware.htmlunit.httpclient.SocksConnectionSocketFactory;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
@@ -948,49 +945,5 @@ public class HttpWebConnection implements WebConnection {
         catch (final IllegalAccessException e) {
             throw new RuntimeException(e);
         }
-    }
-}
-
-/**
- * Implementation of {@link CookieStore} like {@link org.apache.http.impl.client.BasicCookieStore}
- * BUT storing cookies in the order of addition.
- * @author Marc Guillemot
- */
-class HtmlUnitCookieStore implements CookieStore, Serializable {
-    private CookieManager manager_;
-
-    HtmlUnitCookieStore(final CookieManager manager) {
-        manager_ = manager;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public synchronized void addCookie(final Cookie cookie) {
-        manager_.addCookie(new com.gargoylesoftware.htmlunit.util.Cookie((ClientCookie) cookie));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public synchronized List<Cookie> getCookies() {
-        if (manager_.isCookiesEnabled()) {
-            return Arrays.asList(com.gargoylesoftware.htmlunit.util.Cookie.toHttpClient(manager_.getCookies()));
-        }
-        return Collections.<Cookie>emptyList();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public synchronized boolean clearExpired(final Date date) {
-        return manager_.clearExpired(date);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public synchronized void clear() {
-        manager_.clearCookies();
     }
 }

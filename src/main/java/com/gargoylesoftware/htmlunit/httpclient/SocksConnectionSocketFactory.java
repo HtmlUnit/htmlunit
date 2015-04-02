@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit;
+package com.gargoylesoftware.htmlunit.httpclient;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -31,10 +31,15 @@ import org.apache.http.protocol.HttpContext;
  * @author Ronald Brill
  * @author Marc Guillemot
  */
-class SocksConnectionSocketFactory extends PlainConnectionSocketFactory {
+public class SocksConnectionSocketFactory extends PlainConnectionSocketFactory {
     private static final String SOCKS_PROXY = "htmlunit.socksproxy";
 
-    static void setSocksProxy(final HttpContext context, final HttpHost socksProxy) {
+    /**
+     * Enables the socks proxy.
+     * @param context the HttpContext
+     * @param socksProxy the HttpHost
+     */
+    public static void setSocksProxy(final HttpContext context, final HttpHost socksProxy) {
         context.setAttribute(SOCKS_PROXY, socksProxy);
     }
 

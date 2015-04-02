@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit;
+package com.gargoylesoftware.htmlunit.httpclient;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -47,6 +47,8 @@ import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContexts;
 import org.apache.http.protocol.HttpContext;
 
+import com.gargoylesoftware.htmlunit.WebClientOptions;
+
 /**
  * Socket factory offering facilities for insecure SSL and for SOCKS proxy support.
  * This looks rather like a hack than like clean code but at the time of the writing it seems to
@@ -59,19 +61,29 @@ import org.apache.http.protocol.HttpContext;
  * @author Marc Guillemot
  * @author Ronald Brill
  */
-final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocketFactory {
+public final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocketFactory {
     private static final String SSL3ONLY = "htmlunit.SSL3Only";
 
     private final boolean useInsecureSSL_;
 
-    static void setUseSSL3Only(final HttpContext parameters, final boolean ssl3Only) {
-        parameters.setAttribute(SSL3ONLY, ssl3Only);
+    /**
+     * Enables/Disables the exclusive usage of SSL3.
+     * @param httpContext the http context
+     * @param ssl3Only true or false
+     */
+    public static void setUseSSL3Only(final HttpContext httpContext, final boolean ssl3Only) {
+        httpContext.setAttribute(SSL3ONLY, ssl3Only);
     }
 
     static boolean isUseSSL3Only(final HttpContext context) {
         return "TRUE".equalsIgnoreCase((String) context.getAttribute(SSL3ONLY));
     }
 
+    /**
+     * Factory method that builds a new SSLConnectionSocketFactory.
+     * @param options the current WebClientOptions
+     * @return the SSLConnectionSocketFactory
+     */
     public static SSLConnectionSocketFactory buildSSLSocketFactory(final WebClientOptions options) {
         try {
             final String[] sslClientProtocols = options.getSSLClientProtocols();
@@ -132,6 +144,17 @@ final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocketFactor
         }
     }
 
+    /**
+     * Connect via socket.
+     * @param connectTimeout the timeout
+     * @param socket the socket
+     * @param host the host
+     * @param remoteAddress the remote address
+     * @param localAddress the local address
+     * @param context the context
+     * @return the created/connected socket
+     * @throws IOException in case of problems
+     */
     public Socket connectSocket(
             final int connectTimeout,
             final Socket socket,

@@ -107,14 +107,22 @@ public class WebClientOptions implements Serializable {
     }
 
     void setSSLClientCertificateStore(final KeyStore keyStore) {
-        this.sslClientCertificateStore_ = keyStore;
+        sslClientCertificateStore_ = keyStore;
     }
 
-    KeyStore getSSLClientCertificateStore() {
+    /**
+     * Gets the SSLClientCertificateStore.
+     * @return the KeyStore for use on SSL connections
+     */
+    public KeyStore getSSLClientCertificateStore() {
         return sslClientCertificateStore_;
     }
 
-    char[] getSSLClientCertificatePassword() {
+    /**
+     * Gets the SSLClientCertificatePassword.
+     * @return the password
+     */
+    public char[] getSSLClientCertificatePassword() {
         return sslClientCertificatePassword_;
     }
 
@@ -136,7 +144,7 @@ public class WebClientOptions implements Serializable {
      * @see #getSSLClientProtocols()
      */
     public void setSSLClientProtocols(final String[] sslClientProtocols) {
-        this.sslClientProtocols_ = sslClientProtocols;
+        sslClientProtocols_ = sslClientProtocols;
     }
 
     /**
@@ -157,7 +165,7 @@ public class WebClientOptions implements Serializable {
      * @see #getSSLClientCipherSuites()
      */
     public void setSSLClientCipherSuites(final String[] sslClientCipherSuites) {
-        this.sslClientCipherSuites_ = sslClientCipherSuites;
+        sslClientCipherSuites_ = sslClientCipherSuites;
     }
 
     /**
@@ -414,7 +422,7 @@ public class WebClientOptions implements Serializable {
      *      <code>null</code> to use for default value
      */
     public void setSSLInsecureProtocol(final String sslInsecureProtocol) {
-        this.sslInsecureProtocol_ = sslInsecureProtocol;
+        sslInsecureProtocol_ = sslInsecureProtocol;
     }
 
     /**
@@ -437,14 +445,18 @@ public class WebClientOptions implements Serializable {
      */
     public void setSSLTrustStore(final URL sslTrustStoreUrl, final String sslTrustStorePassword,
             final String sslTrustStoreType) {
-        this.sslTrustStore_ = getKeyStore(sslTrustStoreUrl, sslTrustStorePassword, sslTrustStoreType);
+        sslTrustStore_ = getKeyStore(sslTrustStoreUrl, sslTrustStorePassword, sslTrustStoreType);
     }
 
     void setSSLTrustStore(final KeyStore keyStore) {
-        this.sslTrustStore_ = keyStore;
+        sslTrustStore_ = keyStore;
     }
 
-    KeyStore getSSLTrustStore() {
+    /**
+     * Gets the SSL TrustStore.
+     * @return the SSL TrustStore for insecure SSL connections
+     */
+    public KeyStore getSSLTrustStore() {
         return sslTrustStore_;
     }
 
@@ -478,6 +490,6 @@ public class WebClientOptions implements Serializable {
      * @param maxInMemory maximum bytes in memory
      */
     public void setMaxInMemory(final int maxInMemory) {
-        this.maxInMemory_ = maxInMemory;
+        maxInMemory_ = maxInMemory;
     }
 }
