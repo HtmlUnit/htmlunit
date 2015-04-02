@@ -42,6 +42,7 @@ import javax.net.ssl.X509TrustManager;
 
 import org.apache.http.HttpHost;
 import org.apache.http.conn.ConnectTimeoutException;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContexts;
 import org.apache.http.protocol.HttpContext;
@@ -97,7 +98,7 @@ final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocketFactor
             sslContext.init(getKeyManagers(options), new TrustManager[]{new InsecureTrustManager2()}, null);
 
             final SSLConnectionSocketFactory factory = new HtmlUnitSSLConnectionSocketFactory(sslContext,
-                SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER,
+                NoopHostnameVerifier.INSTANCE,
                 useInsecureSSL, sslClientProtocols, sslClientCipherSuites);
             return factory;
         }
