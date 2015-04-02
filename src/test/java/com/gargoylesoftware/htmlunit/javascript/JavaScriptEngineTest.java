@@ -20,6 +20,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ArrayList;
@@ -45,12 +46,14 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
@@ -76,6 +79,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author David K. Taylor
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Carsten Steul
  */
 @RunWith(BrowserRunner.class)
 public class JavaScriptEngineTest extends SimpleWebTestCase {
@@ -1404,6 +1408,70 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         try (final WebClient client = new WebClient(browser)) {
             client.openWindow(WebClient.URL_ABOUT_BLANK, "TestWindow");
+        }
+    }
+
+    /**
+     * Test case for issue #1668.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void initRaceCondition() throws Exception {
+        final String html = "<html>\n"
+                + "<head><title>Test page</title><\n"
+                + "<script>\n"
+                + "  var d = document.visibilityState;\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "</body></html>";
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setDefaultResponse(html);
+        try (final WebClient webClient = getWebClient()) {
+            webClient.setWebConnection(webConnection);
+
+            final WebWindow window1 = webClient.getCurrentWindow();
+            final WebWindow window2 = webClient.openWindow(null, "window2", window1);
+
+            final int runs = 100;
+
+            final Thread t1 = new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                    try {
+                        for (int i = 0; i < runs; ++i) {
+                            webClient.getPage(window1, new WebRequest(URL_FIRST));
+                        }
+                    }
+                    catch (final FailingHttpStatusCodeException | IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+
+            final Thread t2 = new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                    try {
+                        for (int i = 0; i < runs; ++i) {
+                            webClient.getPage(window2, new WebRequest(URL_FIRST));
+                        }
+                    }
+                    catch (final FailingHttpStatusCodeException | IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+
+            t1.start();
+            t2.start();
+
+            t1.join();
+            t2.join();
         }
     }
 }

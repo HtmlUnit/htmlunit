@@ -129,8 +129,6 @@ public class JavaScriptEngine {
      */
     public static final String KEY_STARTING_PAGE = "startingPage";
 
-    private transient Map<String, ScriptableObject> prototypesPerJSName_ = new HashMap<>();
-
     /**
      * Creates an instance for the specified {@link WebClient}.
      *
@@ -201,6 +199,8 @@ public class JavaScriptEngine {
         final WebClient webClient = webWindow.getWebClient();
         final BrowserVersion browserVersion = webClient.getBrowserVersion();
         final Map<Class<? extends SimpleScriptable>, Scriptable> prototypes = new HashMap<>();
+        final Map<String, Scriptable> prototypesPerJSName = new HashMap<>();
+
         final Window window = new Window();
         ((SimpleScriptable) window).setClassName("Window");
         context.initStandardObjects(window);
@@ -251,7 +251,7 @@ public class JavaScriptEngine {
                 configureConstantsPropertiesAndFunctions(config, window, browserVersion);
 
                 final ScriptableObject prototype = configureClass(config, window, browserVersion);
-                prototypesPerJSName_.put(config.getClassName(), prototype);
+                prototypesPerJSName.put(config.getClassName(), prototype);
             }
             else {
                 final ScriptableObject prototype = configureClass(config, window, browserVersion);
@@ -277,13 +277,13 @@ public class JavaScriptEngine {
                     }
                 }
                 prototypes.put(config.getHostClass(), prototype);
-                prototypesPerJSName_.put(config.getClassName(), prototype);
+                prototypesPerJSName.put(config.getClassName(), prototype);
             }
         }
 
         // once all prototypes have been build, it's possible to configure the chains
         final Scriptable objectPrototype = ScriptableObject.getObjectPrototype(window);
-        for (final Map.Entry<String, ScriptableObject> entry : prototypesPerJSName_.entrySet()) {
+        for (final Map.Entry<String, Scriptable> entry : prototypesPerJSName.entrySet()) {
             final String name = entry.getKey();
             final ClassConfiguration config = jsConfig_.getClassConfiguration(name);
             Scriptable prototype = entry.getValue();
@@ -291,7 +291,7 @@ public class JavaScriptEngine {
                 prototype = prototype.getPrototype(); // "double prototype" hack for FF
             }
             if (!StringUtils.isEmpty(config.getExtendedClassName())) {
-                final Scriptable parentPrototype = prototypesPerJSName_.get(config.getExtendedClassName());
+                final Scriptable parentPrototype = prototypesPerJSName.get(config.getExtendedClassName());
                 prototype.setPrototype(parentPrototype);
             }
             else {
@@ -302,15 +302,15 @@ public class JavaScriptEngine {
         for (final ClassConfiguration config : jsConfig_.getAll()) {
             final Member jsConstructor = config.getJsConstructor();
             final String jsClassName = config.getClassName();
-            ScriptableObject prototype = prototypesPerJSName_.get(jsClassName);
+            Scriptable prototype = prototypesPerJSName.get(jsClassName);
             final String hostClassSimpleName = config.getHostClass().getSimpleName();
             if ("Image".equals(hostClassSimpleName)
                     && browserVersion.hasFeature(JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE)) {
-                prototype = prototypesPerJSName_.get("HTMLImageElement");
+                prototype = prototypesPerJSName.get("HTMLImageElement");
             }
             if ("Option".equals(hostClassSimpleName)
                     && browserVersion.hasFeature(JS_OPTION_PROTOTYPE_SAME_AS_HTML_OPTION)) {
-                prototype = prototypesPerJSName_.get("HTMLOptionElement");
+                prototype = prototypesPerJSName.get("HTMLOptionElement");
             }
             if (prototype != null && config.isJsObject()) {
                 if (jsConstructor != null) {
@@ -378,7 +378,7 @@ public class JavaScriptEngine {
         // DEV Note: this is at the moment the only usage of HiddenFunctionObject
         //           if we need more in the future, we have to enhance our JSX annotations
         if (browserVersion.hasFeature(JS_WINDOW_ACTIVEXOBJECT_HIDDEN)) {
-            final ScriptableObject prototype = prototypesPerJSName_.get("ActiveXObject");
+            final Scriptable prototype = prototypesPerJSName.get("ActiveXObject");
             if (null != prototype) {
                 final Method jsConstructor = ActiveXObject.class.getDeclaredMethod("jsConstructor", Context.class, Object[].class, Function.class, boolean.class);
                 final FunctionObject functionObject = new HiddenFunctionObject("ActiveXObject", jsConstructor, window);
@@ -443,7 +443,7 @@ public class JavaScriptEngine {
                     DateCustom.class, ScriptableObject.DONTENUM);
         }
 
-        window.setPrototypes(prototypes);
+        window.setPrototypes(prototypes, prototypesPerJSName);
         window.initialize(webWindow);
     }
 
@@ -471,7 +471,7 @@ public class JavaScriptEngine {
      * @param scope the scope from which properties have to be removed
      * @param propertiesToDelete the list of property names
      */
-    private void deleteProperties(final ScriptableObject scope, final String... propertiesToDelete) {
+    private void deleteProperties(final Scriptable scope, final String... propertiesToDelete) {
         for (final String property : propertiesToDelete) {
             scope.delete(property);
         }
@@ -488,7 +488,7 @@ public class JavaScriptEngine {
         for (final ClassConfiguration config : jsConfig_.getAll()) {
             final String jsClassName = config.getClassName();
             if (config.isDefinedInStandardsMode()) {
-                final ScriptableObject prototype = prototypesPerJSName_.get(jsClassName);
+                final Scriptable prototype = window.getPrototype(jsClassName);
                 if ("Window".equals(jsClassName)) {
                     defineConstructor(browserVersion, window, window, new Window());
                 }
@@ -595,7 +595,7 @@ public class JavaScriptEngine {
      * Register WebWindow with the JavaScriptExecutor.
      * @param webWindow the WebWindow to be registered.
      */
-    public void registerWindowAndMaybeStartEventLoop(final WebWindow webWindow) {
+    public synchronized void registerWindowAndMaybeStartEventLoop(final WebWindow webWindow) {
         if (javaScriptExecutor_ == null) {
             javaScriptExecutor_ = BackgroundJavaScriptFactory.theFactory().createJavaScriptExecutor(webClient_);
         }
