@@ -78,13 +78,16 @@ final class HtmlUnitExpiresHandler extends BasicExpiresHandler {
         value = value.replaceAll("[ ,:-]+", " ");
 
         Date startDate = null;
-        if (browserVersion_.hasFeature(HTTP_COOKIE_START_DATE_1970)) {
-            startDate = HtmlUnitBrowserCompatCookieSpec.DATE_1_1_1970;
-        }
-
         String[] datePatterns = DEFAULT_DATE_PATTERNS;
-        if (browserVersion_.hasFeature(HTTP_COOKIE_EXTENDED_DATE_PATTERNS)) {
-            datePatterns = EXTENDED_DATE_PATTERNS;
+
+        if (null != browserVersion_) {
+            if (browserVersion_.hasFeature(HTTP_COOKIE_START_DATE_1970)) {
+                startDate = HtmlUnitBrowserCompatCookieSpec.DATE_1_1_1970;
+            }
+
+            if (browserVersion_.hasFeature(HTTP_COOKIE_EXTENDED_DATE_PATTERNS)) {
+                datePatterns = EXTENDED_DATE_PATTERNS;
+            }
         }
 
         final Date expiry = DateUtils.parseDate(value, datePatterns, startDate);

@@ -52,7 +52,8 @@ final class HtmlUnitPathHandler extends BasicPathHandler {
     @Override
     public boolean match(final Cookie cookie, final CookieOrigin origin) {
         String targetpath = origin.getPath();
-        if (browserVersion_.hasFeature(HTTP_COOKIE_EXTRACT_PATH_FROM_LOCATION) && targetpath.length() > 0) {
+        if (browserVersion_ != null
+                && browserVersion_.hasFeature(HTTP_COOKIE_EXTRACT_PATH_FROM_LOCATION) && targetpath.length() > 0) {
             final int lastSlashPos = targetpath.lastIndexOf('/');
             if (lastSlashPos > 1 && lastSlashPos < targetpath.length()) {
                 targetpath = targetpath.substring(0, lastSlashPos);

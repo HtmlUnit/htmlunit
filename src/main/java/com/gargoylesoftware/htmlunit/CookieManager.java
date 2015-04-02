@@ -28,7 +28,6 @@ import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.cookie.CookieSpec;
-import org.apache.http.impl.cookie.BrowserCompatSpecFactory;
 
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
 import com.gargoylesoftware.htmlunit.util.Cookie;
@@ -54,7 +53,7 @@ public class CookieManager implements Serializable {
     /** The cookies added to this cookie manager. */
     private final Set<Cookie> cookies_ = new LinkedHashSet<>();
 
-    private final transient CookieSpec cookieSpec_ = new BrowserCompatSpecFactory().create(null);
+    private final transient CookieSpec cookieSpec_ = new HtmlUnitBrowserCompatCookieSpec(null);
 
     /**
      * Creates a new instance.

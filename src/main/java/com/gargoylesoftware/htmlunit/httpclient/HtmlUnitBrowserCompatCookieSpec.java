@@ -14,23 +14,38 @@
  */
 package com.gargoylesoftware.htmlunit.httpclient;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.FormattedHeader;
 import org.apache.http.Header;
+import org.apache.http.HeaderElement;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.DateUtils;
-import org.apache.http.cookie.ClientCookie;
 import org.apache.http.cookie.Cookie;
+import org.apache.http.cookie.CookieAttributeHandler;
 import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.cookie.CookiePathComparator;
 import org.apache.http.cookie.MalformedCookieException;
+import org.apache.http.cookie.SM;
 import org.apache.http.impl.cookie.BasicClientCookie;
-import org.apache.http.impl.cookie.BrowserCompatSpec;
+import org.apache.http.impl.cookie.BasicCommentHandler;
+import org.apache.http.impl.cookie.BasicMaxAgeHandler;
+import org.apache.http.impl.cookie.BasicSecureHandler;
+import org.apache.http.impl.cookie.CookieSpecBase;
+import org.apache.http.impl.cookie.NetscapeDraftHeaderParser;
 import org.apache.http.message.BasicHeader;
+import org.apache.http.message.BasicHeaderElement;
+import org.apache.http.message.BasicHeaderValueFormatter;
+import org.apache.http.message.BufferedHeader;
+import org.apache.http.message.ParserCursor;
+import org.apache.http.util.CharArrayBuffer;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 
@@ -51,7 +66,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
  * @author Ronald Brill
  * @author John J Murdoch
  */
-public class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
+public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
 
     /** The cookie name used for cookies with no name (HttpClient doesn't like empty names). */
     public static final String EMPTY_COOKIE_NAME = "HTMLUNIT_EMPTY_COOKIE";
@@ -83,12 +98,14 @@ public class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
      * @param browserVersion the {@link BrowserVersion} to simulate
      */
     public HtmlUnitBrowserCompatCookieSpec(final BrowserVersion browserVersion) {
-        super();
-
-        registerAttribHandler(ClientCookie.DISCARD_ATTR, new HtmlUnitDomainHandler());
-        registerAttribHandler(ClientCookie.PATH_ATTR, new HtmlUnitPathHandler(browserVersion));
-        registerAttribHandler(ClientCookie.EXPIRES_ATTR, new HtmlUnitExpiresHandler(browserVersion));
-        registerAttribHandler("httponly", new HtmlUnitHttpOnlyHandler());
+        super(new HtmlUnitVersionAttributeHandler(),
+                new HtmlUnitDomainHandler(),
+                new HtmlUnitPathHandler(browserVersion),
+                new BasicMaxAgeHandler(),
+                new BasicSecureHandler(),
+                new BasicCommentHandler(),
+                new HtmlUnitExpiresHandler(browserVersion),
+                new HtmlUnitHttpOnlyHandler());
     }
 
     /**
@@ -118,7 +135,75 @@ public class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
             header = new BasicHeader(header.getName(), EMPTY_COOKIE_NAME + header.getValue());
         }
 
-        final List<Cookie> cookies = super.parse(header, origin);
+        final List<Cookie> cookies;
+
+        final String headername = header.getName();
+        if (!headername.equalsIgnoreCase(SM.SET_COOKIE)) {
+            throw new MalformedCookieException("Unrecognized cookie header '" + header.toString() + "'");
+        }
+        final HeaderElement[] helems = header.getElements();
+        boolean versioned = false;
+        boolean netscape = false;
+        for (final HeaderElement helem: helems) {
+            if (helem.getParameterByName("version") != null) {
+                versioned = true;
+            }
+            if (helem.getParameterByName("expires") != null) {
+                netscape = true;
+            }
+        }
+        if (netscape || !versioned) {
+            // Need to parse the header again, because Netscape style cookies do not correctly
+            // support multiple header elements (comma cannot be treated as an element separator)
+            final NetscapeDraftHeaderParser parser = NetscapeDraftHeaderParser.DEFAULT;
+            final CharArrayBuffer buffer;
+            final ParserCursor cursor;
+            if (header instanceof FormattedHeader) {
+                buffer = ((FormattedHeader) header).getBuffer();
+                cursor = new ParserCursor(
+                        ((FormattedHeader) header).getValuePos(),
+                        buffer.length());
+            }
+            else {
+                final String s = header.getValue();
+                if (s == null) {
+                    throw new MalformedCookieException("Header value is null");
+                }
+                buffer = new CharArrayBuffer(s.length());
+                buffer.append(s);
+                cursor = new ParserCursor(0, buffer.length());
+            }
+            final HeaderElement elem = parser.parseHeader(buffer, cursor);
+            final String name = elem.getName();
+            final String value = elem.getValue();
+            if (name == null || name.isEmpty()) {
+                throw new MalformedCookieException("Cookie name may not be empty");
+            }
+            final BasicClientCookie cookie = new BasicClientCookie(name, value);
+            cookie.setPath(getDefaultPath(origin));
+            cookie.setDomain(getDefaultDomain(origin));
+
+            // cycle through the parameters
+            final NameValuePair[] attribs = elem.getParameters();
+            for (int j = attribs.length - 1; j >= 0; j--) {
+                final NameValuePair attrib = attribs[j];
+                final String s = attrib.getName().toLowerCase(Locale.ROOT);
+                cookie.setAttribute(s, attrib.getValue());
+                final CookieAttributeHandler handler = findAttribHandler(s);
+                if (handler != null) {
+                    handler.parse(cookie, attrib.getValue());
+                }
+            }
+            // Override version for Netscape style cookies
+            if (netscape) {
+                cookie.setVersion(0);
+            }
+            cookies = Collections.<Cookie>singletonList(cookie);
+        }
+        else {
+            cookies = parse(helems, origin);
+        }
+
         for (final Cookie c : cookies) {
             // re-add quotes around value if parsing as incorrectly trimmed them
             if (header.getValue().contains(c.getName() + "=\"" + c.getValue())) {
@@ -132,6 +217,54 @@ public class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
     public List<Header> formatCookies(final List<Cookie> cookies) {
         Collections.sort(cookies, COOKIE_COMPARATOR);
 
-        return super.formatCookies(cookies);
+        final CharArrayBuffer buffer = new CharArrayBuffer(20 * cookies.size());
+        buffer.append(SM.COOKIE);
+        buffer.append(": ");
+        for (int i = 0; i < cookies.size(); i++) {
+            final Cookie cookie = cookies.get(i);
+            if (i > 0) {
+                buffer.append("; ");
+            }
+            final String cookieName = cookie.getName();
+            final String cookieValue = cookie.getValue();
+            if (cookie.getVersion() > 0 && !isQuoteEnclosed(cookieValue)) {
+                BasicHeaderValueFormatter.INSTANCE.formatHeaderElement(
+                        buffer,
+                        new BasicHeaderElement(cookieName, cookieValue),
+                        false);
+            }
+            else {
+                // Netscape style cookies do not support quoted values
+                buffer.append(cookieName);
+                buffer.append("=");
+                if (cookieValue != null) {
+                    buffer.append(cookieValue);
+                }
+            }
+        }
+        final List<Header> headers = new ArrayList<Header>(1);
+        headers.add(new BufferedHeader(buffer));
+        return headers;
+    }
+
+    private static boolean isQuoteEnclosed(final String s) {
+        return s != null
+                && '\"' == s.charAt(0)
+                && '\"' == s.charAt(s.length() - 1);
+    }
+
+    @Override
+    public int getVersion() {
+        return 0;
+    }
+
+    @Override
+    public Header getVersionHeader() {
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return "compatibility";
     }
 }

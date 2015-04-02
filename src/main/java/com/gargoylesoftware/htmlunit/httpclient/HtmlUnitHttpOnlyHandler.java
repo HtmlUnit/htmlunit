@@ -28,15 +28,16 @@ package com.gargoylesoftware.htmlunit.httpclient;
  * @author Ronald Brill
  * @author John J Murdoch
  */
+import org.apache.http.cookie.CommonCookieAttributeHandler;
 import org.apache.http.cookie.Cookie;
-import org.apache.http.cookie.CookieAttributeHandler;
 import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.cookie.MalformedCookieException;
 import org.apache.http.cookie.SetCookie;
 import org.apache.http.impl.cookie.BasicClientCookie;
 
-final class HtmlUnitHttpOnlyHandler implements
-        CookieAttributeHandler {
+final class HtmlUnitHttpOnlyHandler implements CommonCookieAttributeHandler {
+
+    private static final String HTTPONLY_ATTR = "httponly";
 
     @Override
     public void validate(final Cookie cookie, final CookieOrigin origin) throws MalformedCookieException {
@@ -45,11 +46,16 @@ final class HtmlUnitHttpOnlyHandler implements
 
     @Override
     public void parse(final SetCookie cookie, final String value) throws MalformedCookieException {
-        ((BasicClientCookie) cookie).setAttribute("httponly", "true");
+        ((BasicClientCookie) cookie).setAttribute(HTTPONLY_ATTR, "true");
     }
 
     @Override
     public boolean match(final Cookie cookie, final CookieOrigin origin) {
         return true;
+    }
+
+    @Override
+    public String getAttributeName() {
+        return HTTPONLY_ATTR;
     }
 }
