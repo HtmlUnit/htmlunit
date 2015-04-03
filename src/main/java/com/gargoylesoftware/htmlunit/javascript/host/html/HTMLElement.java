@@ -2975,7 +2975,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(IE) })
+    @JsxFunction
     public boolean hasAttribute(final String name) {
         return super.hasAttribute(name);
     }
@@ -2993,7 +2993,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME) })
+    @JsxGetter
     public Element getParentElement() {
         return super.getParentElement();
     }

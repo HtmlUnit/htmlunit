@@ -4745,7 +4745,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 24, 24")
-    @NotYetImplemented({ CHROME, IE11 })
+    @NotYetImplemented(IE11)
     public void ajax__jQuery_ajax_____JSONP__Cross_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP, Cross Domain");
     }

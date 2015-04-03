@@ -341,7 +341,7 @@ public class Element extends EventNode {
      * @param name the name of the attribute to look for
      * @return true if an attribute with the given name is specified on this element or has a default value
      */
-    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(IE) })
+    @JsxFunction
     public boolean hasAttribute(final String name) {
         return getDomNodeOrDie().hasAttribute(name);
     }
