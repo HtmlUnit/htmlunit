@@ -720,4 +720,39 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void patch() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var xhr = " + XHRInstantiation_ + ";\n"
+            + "  xhr.open('PATCH', '/test2', false);\n"
+            + "  xhr.send('');\n"
+            + "  alert(xhr.responseText);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'></body></html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test2", PatchServlet2.class);
+
+        loadPageWithAlerts2(html, servlets);
+    }
+
+    /**
+     * Servlet for {@link #patch()}.
+     */
+    public static class PatchServlet2 extends HttpServlet {
+
+        @Override
+        protected void doPost(final HttpServletRequest req, final HttpServletResponse resp)
+            throws ServletException, IOException {
+            final Writer writer = resp.getWriter();
+            writer.write(req.getMethod());
+            writer.close();
+        }
+    }
+
 }

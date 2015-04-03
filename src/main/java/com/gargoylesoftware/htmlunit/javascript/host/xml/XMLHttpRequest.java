@@ -516,7 +516,13 @@ public class XMLHttpRequest extends SimpleScriptable {
                 request.setAdditionalHeader(HEADER_ORIGIN, origin.toString());
             }
 
-            request.setHttpMethod(HttpMethod.valueOf(method.toUpperCase(Locale.ENGLISH)));
+            try {
+                request.setHttpMethod(HttpMethod.valueOf(method.toUpperCase(Locale.ENGLISH)));
+            }
+            catch (final IllegalArgumentException e) {
+                LOG.info("Incorrect HTTP Method '" + method + "'");
+                return;
+            }
 
             // password is ignored if no user defined
             final boolean userIsNull = null == user || Undefined.instance == user;
@@ -579,6 +585,9 @@ public class XMLHttpRequest extends SimpleScriptable {
      */
     @JsxFunction
     public void send(final Object content) {
+        if (webRequest_ == null) {
+            return;
+        }
         prepareRequest(content);
 
         final WebClient client = getWindow().getWebWindow().getWebClient();
