@@ -888,30 +888,27 @@ public class HTMLElement2Test extends WebDriverTestCase {
     }
 
     /**
-     * Regression test for bug 2954288.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "true", "button", "true", "button", "false" },
-            IE8 = { "true", "button", "error" })
+    @Alerts({ "true", "center", "true", "center", "false" })
     public void removeAttributeNode() throws Exception {
         final String html
-            = "<html><head><script>\n"
+            = "<!DOCTYPE html>\n"
+            + "<html><head><script>\n"
             + "  function test() {\n"
             + "    var e = document.getElementById('foo');\n"
             + "    alert(e.removeAttributeNode != null);\n"
-            + "    alert(e.getAttribute('type'));\n"
-            + "    try {\n"
-            + "      alert(e.hasAttribute('type'));\n"
-            + "      var attr = e.getAttributeNode('type');\n"
-            + "      alert(attr.value);\n"
-            + "      e.removeAttributeNode(attr);\n"
-            + "      alert(e.hasAttribute('type'));\n"
-            + "    } catch (e) {alert('error')}\n"
+            + "    alert(e.getAttribute('align'));\n"
+            + "    alert(e.hasAttribute('align'));\n"
+            + "    var attr = e.getAttributeNode('align');\n"
+            + "    alert(attr.value);\n"
+            + "    e.removeAttributeNode(attr);\n"
+            + "    alert(e.hasAttribute('align'));\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <input id='foo' type='button' value='someValue'>\n"
+            + "  <div id='foo' align='center' />\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }

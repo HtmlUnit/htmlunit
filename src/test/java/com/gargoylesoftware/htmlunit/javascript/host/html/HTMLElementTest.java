@@ -2791,20 +2791,74 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true", "false" },
-            IE8 = "exception")
+    @Alerts({ "true", "true", "false" })
     public void hasAttribute() throws Exception {
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var elt = document.body;\n"
+            + "      alert(elt.hasAttribute('onload'));\n"
+            + "      alert(elt.hasAttribute('onLoad'));\n"
+            + "      alert(elt.hasAttribute('foo'));\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE8 = "object")
+    @NotYetImplemented(IE8)
+    public void hasAttributeTypeOf() throws Exception {
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var elt = document.body;\n"
+            + "      alert(typeof elt.hasAttribute);\n"
+            + "    } catch(e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "function", "true", "true", "false" },
+            IE8 = { "undefined", "exception" })
+    @NotYetImplemented(IE8)
+    public void hasAttributeQuirksMode() throws Exception {
         final String html =
               "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "try {\n"
-            + "    var elt = document.body;\n"
-            + "    alert(elt.hasAttribute('onload'));\n"
-            + "    alert(elt.hasAttribute('onLoad'));\n"
-            + "    alert(elt.hasAttribute('foo'));\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "    try {\n"
+            + "      var elt = document.body;\n"
+            + "      alert(typeof elt.hasAttribute);\n"
+            + "      alert(elt.hasAttribute('onload'));\n"
+            + "      alert(elt.hasAttribute('onLoad'));\n"
+            + "      alert(elt.hasAttribute('foo'));\n"
+            + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
