@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -48,7 +47,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1 2 3 4 onload ",
             IE8 = "1 2 3 b=loading 4 b=loaded ")
-    @NotYetImplemented(CHROME)
     public void onReadyStateChangeHandler() throws Exception {
         final String html = "<html>\n"
             + "  <head>\n"
