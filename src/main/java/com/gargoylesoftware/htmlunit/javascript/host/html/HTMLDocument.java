@@ -1088,6 +1088,11 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             LOG.warn("Function open() called when document is already open.");
         }
         writeInCurrentDocument_ = false;
+        if (getWindow().getWebWindow() instanceof FrameWindow
+                && WebClient.URL_ABOUT_BLANK.equals(getPage().getUrl())) {
+            final URL enclosingUrl = ((FrameWindow) getWindow().getWebWindow()).getEnclosingPage().getUrl();
+            getPage().getWebResponse().getWebRequest().setUrl(enclosingUrl);
+        }
         return null;
     }
 

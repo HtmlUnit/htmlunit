@@ -839,4 +839,32 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
 
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "about:blank", "§§URL§§" })
+    public void location() throws Exception {
+        final String html =
+                "<html>\n"
+              + "<head><script>\n"
+              + "  function test() {\n"
+              + "    var myFrame = document.createElement('iframe');\n"
+              + "    document.body.appendChild(myFrame);\n"
+              + "    var win = myFrame.contentWindow;\n"
+              + "    var doc = win.document;\n"
+              + "    alert(win.location);\n"
+              + "    doc.open();\n"
+              + "    alert(win.location);\n"
+              + "    doc.write('');\n"
+              + "    doc.close();\n"
+              + "  }\n"
+              + "</script></head>\n"
+              + "  <body onload='test()'>\n"
+              + "  </body>\n"
+              + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
 }
