@@ -165,7 +165,7 @@ public abstract class BaseFrameElement extends HtmlElement {
      */
     private void loadInnerPageIfPossible(final String src) throws FailingHttpStatusCodeException {
         setContentLoaded();
-        if (!src.isEmpty()) {
+        if (!src.isEmpty() && !WebClient.ABOUT_BLANK.equals(src)) {
             final URL url;
             try {
                 url = ((HtmlPage) getPage()).getFullyQualifiedUrl(src);
