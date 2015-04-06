@@ -165,7 +165,7 @@ public abstract class BaseFrameElement extends HtmlElement {
      */
     private void loadInnerPageIfPossible(final String src) throws FailingHttpStatusCodeException {
         setContentLoaded();
-        if (!src.isEmpty() && !WebClient.ABOUT_BLANK.equals(src)) {
+        if (!src.isEmpty()) {
             final URL url;
             try {
                 url = ((HtmlPage) getPage()).getFullyQualifiedUrl(src);
@@ -406,7 +406,7 @@ public abstract class BaseFrameElement extends HtmlElement {
             final PostponedAction action = new PostponedAction(getPage()) {
                 @Override
                 public void execute() throws Exception {
-                    if (getSrcAttribute().equals(src)) {
+                    if (!src.isEmpty() && getSrcAttribute().equals(src)) {
                         loadInnerPage();
                     }
                 }

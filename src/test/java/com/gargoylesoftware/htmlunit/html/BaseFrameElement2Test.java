@@ -36,7 +36,7 @@ public class BaseFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "called",
             IE8 = "")
-    //TODO: verify IE8
+    //TODO: verify IE
     public void windowEventListenersContainer() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -45,19 +45,15 @@ public class BaseFrameElement2Test extends WebDriverTestCase {
             + "    iframe.src = '';\n"
             + "    document.documentElement.appendChild(iframe);\n"
             + "    var win = iframe.contentWindow;\n"
-            + "    var doc = win.document;\n"
-            + "    doc.open();\n"
-            + "    doc.write('');\n"
-            + "    doc.close();\n"
-            + "    a = function() {\n"
-            + "      alert('called');\n"
-            + "    };\n"
             + "    if (win.addEventListener) {\n"
-            + "      win.addEventListener('message', a);\n"
+            + "      win.addEventListener('message', handler);\n"
             + "    } else {\n"
-            + "      win.attachEvent('message', a);\n"
+            + "      win.attachEvent('message', handler);\n"
             + "    }\n"
             + "    win.postMessage('hello', '*');\n"
+            + "  }\n"
+            + "  function handler() {\n"
+            + "      alert('called');\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
