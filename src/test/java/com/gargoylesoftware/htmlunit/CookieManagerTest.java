@@ -452,17 +452,12 @@ public class CookieManagerTest extends WebDriverTestCase {
     }
 
     /**
-     * Test for document.cookie for cookies expiered after the page was loaded.
+     * Test for document.cookie for cookies expired after the page was loaded.
      * @throws Exception if the test fails
      */
     @Test
     @Alerts({"cookies: first=1", "cookies: " })
     public void setCookieTimeout() throws Exception {
-        final List<NameValuePair> responseHeader1 = new ArrayList<>();
-        final String expires = DateUtils.formatDate(new Date(System.currentTimeMillis() + 1000));
-        responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; expires=" + expires + "; path=/foo"));
-        responseHeader1.add(new NameValuePair("Location", "/foo/content.html"));
-
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
@@ -474,13 +469,18 @@ public class CookieManagerTest extends WebDriverTestCase {
                 + "<body>\n"
                 + "<script>\n"
                 + "  alertCookies();\n"
-                + "  window.setTimeout(alertCookies, 1100);\n"
+                + "  window.setTimeout(alertCookies, 3100);\n"
                 + "</script>"
                 + "</body>\n"
                 + "</html>";
 
         getMockWebConnection().setDefaultResponse(html);
         final URL firstUrl = new URL(getDefaultUrl(), "/foo/test.html");
+
+        final List<NameValuePair> responseHeader1 = new ArrayList<>();
+        final String expires = DateUtils.formatDate(new Date(System.currentTimeMillis() + 3000));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; expires=" + expires + "; path=/foo"));
+        responseHeader1.add(new NameValuePair("Location", "/foo/content.html"));
         getMockWebConnection().setResponse(firstUrl, "", 302, "Moved", "text/html", responseHeader1);
 
         loadPageWithAlerts2(firstUrl, 25_000);
