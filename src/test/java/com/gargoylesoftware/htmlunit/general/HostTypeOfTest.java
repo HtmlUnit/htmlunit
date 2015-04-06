@@ -3729,7 +3729,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
         test("Intl");
     }
 
-
     /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.xml.FormData}.
      *
