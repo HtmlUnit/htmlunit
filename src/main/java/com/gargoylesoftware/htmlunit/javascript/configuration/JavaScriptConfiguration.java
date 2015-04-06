@@ -46,7 +46,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.History;
 import com.gargoylesoftware.htmlunit.javascript.host.KeyboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.MediaList;
+import com.gargoylesoftware.htmlunit.javascript.host.MessageChannel;
 import com.gargoylesoftware.htmlunit.javascript.host.MessageEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.MessagePort;
 import com.gargoylesoftware.htmlunit.javascript.host.MimeType;
 import com.gargoylesoftware.htmlunit.javascript.host.MimeTypeArray;
 import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
@@ -63,10 +65,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.PluginArray;
 import com.gargoylesoftware.htmlunit.javascript.host.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.Popup;
 import com.gargoylesoftware.htmlunit.javascript.host.ProcessingInstruction;
+import com.gargoylesoftware.htmlunit.javascript.host.Promise;
 import com.gargoylesoftware.htmlunit.javascript.host.Range;
 import com.gargoylesoftware.htmlunit.javascript.host.RowContainer;
 import com.gargoylesoftware.htmlunit.javascript.host.Screen;
 import com.gargoylesoftware.htmlunit.javascript.host.Selection;
+import com.gargoylesoftware.htmlunit.javascript.host.SharedWorker;
 import com.gargoylesoftware.htmlunit.javascript.host.SimpleArray;
 import com.gargoylesoftware.htmlunit.javascript.host.StaticNodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.Storage;
@@ -77,6 +81,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.UIEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.URLSearchParams;
 import com.gargoylesoftware.htmlunit.javascript.host.WebSocket;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.Worker;
 import com.gargoylesoftware.htmlunit.javascript.host.XPathEvaluator;
 import com.gargoylesoftware.htmlunit.javascript.host.XPathNSResolver;
 import com.gargoylesoftware.htmlunit.javascript.host.XPathResult;
@@ -278,6 +283,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTextPathElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTitleElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGUseElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGViewElement;
+import com.gargoylesoftware.htmlunit.javascript.host.xml.FormData;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLSerializer;
@@ -309,7 +315,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         DOMTokenList.class, Document.class, DocumentFragment.class,
         DocumentType.class, Element.class, Enumerator.class, Event.class, EventNode.class, External.class,
         Float32Array.class, Float64Array.class,
-        FormChild.class, FormField.class, Geolocation.class,
+        FormChild.class, FormData.class, FormField.class, Geolocation.class,
         HashChangeEvent.class, History.class,
         HTMLAllCollection.class,
         HTMLAnchorElement.class, HTMLAppletElement.class, HTMLAreaElement.class, HTMLAudioElement.class,
@@ -349,11 +355,13 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         Image.class,
         Int16Array.class, Int32Array.class, Int8Array.class,
         KeyboardEvent.class,
-        Location.class, MediaList.class, MessageEvent.class, MimeType.class, MimeTypeArray.class, MouseEvent.class,
+        Location.class, MediaList.class, MessageChannel.class,
+        MessageEvent.class, MessagePort.class, MimeType.class, MimeTypeArray.class, MouseEvent.class,
         MutationEvent.class, NamedNodeMap.class, Namespace.class, NamespaceCollection.class, Navigator.class,
         Node.class, NodeFilter.class, NodeList.class, Notification.class, Option.class,
         Plugin.class, PluginArray.class, PointerEvent.class, Popup.class, Position.class, ProcessingInstruction.class,
-        Range.class, RowContainer.class,
+        Promise.class, Range.class, RowContainer.class,
+        SharedWorker.class,
         SVGAElement.class, SVGAltGlyphElement.class, SVGAngle.class, SVGAnimateElement.class,
         SVGAnimateMotionElement.class, SVGAnimateTransformElement.class, SVGCircleElement.class,
         SVGClipPathElement.class, SVGCursorElement.class, SVGDefsElement.class, SVGDescElement.class, SVGElement.class,
@@ -378,7 +386,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         StaticNodeList.class, Storage.class, StyleSheetList.class, Text.class, TextRange.class, TreeWalker.class,
         UIEvent.class, Uint16Array.class, Uint32Array.class, Uint8Array.class, Uint8ClampedArray.class,
         URLSearchParams.class,
-        WebSocket.class, Window.class, XMLDocument.class,
+        WebSocket.class, Window.class, Worker.class, XMLDocument.class,
         XMLHttpRequest.class, XMLSerializer.class, XPathEvaluator.class, XPathNSResolver.class, XPathResult.class,
         XSLTProcessor.class, XSLTemplate.class};
 

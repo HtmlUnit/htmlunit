@@ -3729,4 +3729,77 @@ public class HostTypeOfTest extends WebDriverTestCase {
         test("Intl");
     }
 
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.xml.FormData}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined")
+    public void formData() throws Exception {
+        test("FormData");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.MessageChannel}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            IE11 = "function")
+    public void messageChannel() throws Exception {
+        test("MessageChannel");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.MessagePort}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined")
+    public void messagePort() throws Exception {
+        test("MessagePort");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Promise}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined")
+    public void promise() throws Exception {
+        test("Promise");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Worker}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined")
+    public void worker() throws Exception {
+        test("Worker");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.SharedWorker}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined")
+    public void sharedWorker() throws Exception {
+        test("SharedWorker");
+    }
 }

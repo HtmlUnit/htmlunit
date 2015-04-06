@@ -3781,4 +3781,86 @@ public class HostClassNameTest extends WebDriverTestCase {
         test("Intl");
     }
 
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.xml.FormData}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "function FormData() { [native code] }",
+            FF = "function FormData() {\n    [native code]\n}",
+            IE11 = "\nfunction FormData() {\n    [native code]\n}\n",
+            IE8 = "exception")
+    public void formData() throws Exception {
+        test("FormData");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.MessageChannel}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MessageChannel() { [native code] }",
+            IE11 = "\nfunction MessageChannel() {\n    [native code]\n}\n")
+    public void messageChannel() throws Exception {
+        test("MessageChannel");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.MessagePort}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "function MessagePort() { [native code] }",
+            FF = "function MessagePort() {\n    [native code]\n}",
+            IE11 = "\nfunction MessagePort() {\n    [native code]\n}\n",
+            IE8 = "exception")
+    public void messagePort() throws Exception {
+        test("MessagePort");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Promise}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "function Promise() { [native code] }",
+            FF = "function Promise() {\n    [native code]\n}",
+            IE11 = "\nfunction Promise() {\n    [native code]\n}\n",
+            IE8 = "exception")
+    public void promise() throws Exception {
+        test("Promise");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Worker}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "function Worker() { [native code] }",
+            FF = "function Worker() {\n    [native code]\n}",
+            IE11 = "\nfunction Worker() {\n    [native code]\n}\n",
+            IE8 = "exception")
+    public void worker() throws Exception {
+        test("Worker");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.SharedWorker}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "function SharedWorker() { [native code] }",
+            FF = "function SharedWorker() {\n    [native code]\n}",
+            IE11 = "\nfunction SharedWorker() {\n    [native code]\n}\n",
+            IE8 = "exception")
+    public void sharedWorker() throws Exception {
+        test("SharedWorker");
+    }
 }

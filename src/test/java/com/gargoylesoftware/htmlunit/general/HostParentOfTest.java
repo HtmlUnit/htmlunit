@@ -8024,4 +8024,65 @@ public class HostParentOfTest extends WebDriverTestCase {
     public void _URLSearchParams_URLSearchParams() throws Exception {
         test("URLSearchParams", "URLSearchParams");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _FormData_FormData() throws Exception {
+        test("FormData", "FormData");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF = "false",
+            IE8 = "false")
+    public void _MessageChannel_MessageChannel() throws Exception {
+        test("MessageChannel", "MessageChannel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _MessagePort_MessagePort() throws Exception {
+        test("MessagePort", "MessagePort");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _Promise_Promise() throws Exception {
+        test("Promise", "Promise");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SharedWorker_SharedWorker() throws Exception {
+        test("SharedWorker", "SharedWorker");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _Worker_Worker() throws Exception {
+        test("Worker", "Worker");
+    }
 }
