@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class BaseFrameElement2Test extends WebDriverTestCase {
@@ -34,11 +35,12 @@ public class BaseFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "called",
-            IE8 = "")
-    //TODO: verify IE
+    @Alerts(DEFAULT = { "posted", "called" },
+            IE8 = "posted")
     public void windowEventListenersContainer() throws Exception {
-        final String html = "<html><head>\n"
+        final String html
+            = "<html>\n"
+            + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var iframe = document.createElement('iframe');\n"
@@ -51,12 +53,14 @@ public class BaseFrameElement2Test extends WebDriverTestCase {
             + "      win.attachEvent('message', handler);\n"
             + "    }\n"
             + "    win.postMessage('hello', '*');\n"
+            + "    alert('posted');\n"
             + "  }\n"
             + "  function handler() {\n"
             + "      alert('called');\n"
             + "  }\n"
             + "</script>\n"
-            + "</head><body onload='test()'>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
