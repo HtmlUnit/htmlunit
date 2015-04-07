@@ -131,6 +131,9 @@ final class TestCaseCorrector {
         for (int x = 0; x < alerts.size(); x++) {
             String line = alerts.get(x);
             if (x == 0) {
+                if (!line.contains(" = ")) {
+                    line = "DEFAULT = " + line;
+                }
                 line = "    @Alerts(" + line;
             }
             else {
@@ -149,7 +152,7 @@ final class TestCaseCorrector {
 
     private static String getActualString(final ComparisonFailure failure) {
         String actual = failure.getActual();
-        actual = actual.substring(1, actual.length() - 1);
+        actual = actual.substring(1, actual.length() - 1).replace("\r", "\\r").replace("\n", "\\n");
         if (actual.length() > 96) {
             final StringBuilder builder = new StringBuilder();
             while (!actual.isEmpty()) {

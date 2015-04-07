@@ -35,7 +35,7 @@ public class MessagePort extends SimpleScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public MessagePort() {
     }
 }

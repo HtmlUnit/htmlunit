@@ -3816,7 +3816,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "function MessagePort() { [native code] }",
             FF = "function MessagePort() {\n    [native code]\n}",
-            IE11 = "\nfunction MessagePort() {\n    [native code]\n}\n",
+            IE = "[object MessagePort]",
             IE8 = "exception")
     public void messagePort() throws Exception {
         test("MessagePort");
@@ -3830,8 +3830,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "function Promise() { [native code] }",
             FF = "function Promise() {\n    [native code]\n}",
-            IE11 = "\nfunction Promise() {\n    [native code]\n}\n",
-            IE8 = "exception")
+            IE = "exception")
     public void promise() throws Exception {
         test("Promise");
     }
@@ -3858,9 +3857,1050 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "function SharedWorker() { [native code] }",
             FF = "function SharedWorker() {\n    [native code]\n}",
-            IE11 = "\nfunction SharedWorker() {\n    [native code]\n}\n",
-            IE8 = "exception")
+            IE = "exception")
     public void sharedWorker() throws Exception {
         test("SharedWorker");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGAnimatedLengthList() { [native code] }",
+            FF31 = "function SVGAnimatedLengthList() {\n    [native code]\n}",
+            IE11 = "[object SVGAnimatedLengthList]")
+    public void svgAnimatedLengthList() throws Exception {
+        test("SVGAnimatedLengthList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("[object Math]")
+    public void math() throws Exception {
+        test("Math");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PageTransitionEvent() { [native code] }",
+            FF31 = "function PageTransitionEvent() {\n    [native code]\n}",
+            IE11 = "[object PageTransitionEvent]")
+    public void pageTransitionEvent() throws Exception {
+        test("PageTransitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGAnimatedNumber() { [native code] }",
+            FF31 = "function SVGAnimatedNumber() {\n    [native code]\n}",
+            IE11 = "[object SVGAnimatedNumber]")
+    public void svgAnimatedNumber() throws Exception {
+        test("SVGAnimatedNumber");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CSSPageRule() { [native code] }",
+            FF31 = "[object CSSPageRule]",
+            IE11 = "[object CSSPageRule]")
+    public void cssPageRule() throws Exception {
+        test("CSSPageRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGTextPositioningElement() { [native code] }",
+            FF31 = "function SVGTextPositioningElement() {\n    [native code]\n}",
+            IE11 = "[object SVGTextPositioningElement]")
+    public void svgTextPositioningElement() throws Exception {
+        test("SVGTextPositioningElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ValidityState() { [native code] }",
+            FF31 = "function ValidityState() {\n    [native code]\n}",
+            IE11 = "[object ValidityState]")
+    public void validityState() throws Exception {
+        test("ValidityState");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "[object MozSmsSegmentInfo]")
+    public void mozSmsSegmentInfo() throws Exception {
+        test("MozSmsSegmentInfo");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CloseEvent() { [native code] }",
+            FF31 = "function CloseEvent() {\n    [native code]\n}",
+            IE11 = "[object CloseEvent]")
+    public void closeEvent() throws Exception {
+        test("CloseEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "[object MozMobileMessageThread]")
+    public void mozMobileMessageThread() throws Exception {
+        test("MozMobileMessageThread");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGAnimatedRect() { [native code] }",
+            FF31 = "function SVGAnimatedRect() {\n    [native code]\n}",
+            IE11 = "[object SVGAnimatedRect]")
+    public void svgAnimatedRect() throws Exception {
+        test("SVGAnimatedRect");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ProgressEvent() { [native code] }",
+            FF31 = "function ProgressEvent() {\n    [native code]\n}",
+            IE11 = "[object ProgressEvent]")
+    public void progressEvent() throws Exception {
+        test("ProgressEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGAnimatedString() { [native code] }",
+            FF31 = "function SVGAnimatedString() {\n    [native code]\n}",
+            IE11 = "[object SVGAnimatedString]")
+    public void svgAnimatedString() throws Exception {
+        test("SVGAnimatedString");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBDatabase() { [native code] }",
+            FF31 = "function IDBDatabase() {\n    [native code]\n}",
+            IE11 = "[object IDBDatabase]")
+    public void idbDatabase() throws Exception {
+        test("IDBDatabase");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGAnimatedEnumeration() { [native code] }",
+            FF31 = "function SVGAnimatedEnumeration() {\n    [native code]\n}",
+            IE11 = "[object SVGAnimatedEnumeration]")
+    public void svgAnimatedEnumeration() throws Exception {
+        test("SVGAnimatedEnumeration");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function TextMetrics() { [native code] }",
+            FF31 = "function TextMetrics() {\n    [native code]\n}",
+            IE11 = "[object TextMetrics]")
+    public void textMetrics() throws Exception {
+        test("TextMetrics");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBIndex() { [native code] }",
+            FF31 = "function IDBIndex() {\n    [native code]\n}",
+            IE11 = "[object IDBIndex]")
+    public void idbIndex() throws Exception {
+        test("IDBIndex");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object MouseWheelEvent]")
+    public void mouseWheelEvent() throws Exception {
+        test("MouseWheelEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WheelEvent() { [native code] }",
+            FF31 = "function WheelEvent() {\n    [native code]\n}",
+            IE11 = "[object WheelEvent]")
+    public void wheelEvent() throws Exception {
+        test("WheelEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object PositionError]")
+    public void positionError() throws Exception {
+        test("PositionError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGAnimatedNumberList() { [native code] }",
+            FF31 = "function SVGAnimatedNumberList() {\n    [native code]\n}",
+            IE11 = "[object SVGAnimatedNumberList]")
+    public void svgAnimatedNumberList() throws Exception {
+        test("SVGAnimatedNumberList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object CSSNamespaceRule]")
+    public void cssNamespaceRule() throws Exception {
+        test("CSSNamespaceRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBFactory() { [native code] }",
+            FF31 = "function IDBFactory() {\n    [native code]\n}",
+            IE11 = "[object IDBFactory]")
+    public void idbFactory() throws Exception {
+        test("IDBFactory");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGNumberList() { [native code] }",
+            FF31 = "function SVGNumberList() {\n    [native code]\n}",
+            IE11 = "[object SVGNumberList]")
+    public void svgNumberList() throws Exception {
+        test("SVGNumberList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CustomEvent() { [native code] }",
+            FF31 = "function CustomEvent() {\n    [native code]\n}",
+            IE11 = "[object CustomEvent]")
+    public void customEvent() throws Exception {
+        test("CustomEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ErrorEvent() { [native code] }",
+            FF31 = "function ErrorEvent() {\n    [native code]\n}",
+            IE11 = "[object ErrorEvent]")
+    public void errorEvent() throws Exception {
+        test("ErrorEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function AnimationEvent() {\n    [native code]\n}",
+            IE11 = "[object AnimationEvent]")
+    public void animationEvent() throws Exception {
+        test("AnimationEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGAnimatedBoolean() { [native code] }",
+            FF31 = "function SVGAnimatedBoolean() {\n    [native code]\n}",
+            IE11 = "[object SVGAnimatedBoolean]")
+    public void svgAnimatedBoolean() throws Exception {
+        test("SVGAnimatedBoolean");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGAnimatedPreserveAspectRatio() { [native code] }",
+            FF31 = "function SVGAnimatedPreserveAspectRatio() {\n    [native code]\n}",
+            IE11 = "[object SVGAnimatedPreserveAspectRatio]")
+    public void svgAnimatedPreserveAspectRatio() throws Exception {
+        test("SVGAnimatedPreserveAspectRatio");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "[object MozMmsMessage]")
+    public void mozMmsMessage() throws Exception {
+        test("MozMmsMessage");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "[object MozSmsFilter]")
+    public void mozSmsFilter() throws Exception {
+        test("MozSmsFilter");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaQueryList() { [native code] }",
+            FF31 = "function MediaQueryList() {\n    [native code]\n}",
+            IE11 = "[object MediaQueryList]")
+    public void mediaQueryList() throws Exception {
+        test("MediaQueryList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function TransitionEvent() { [native code] }",
+            FF31 = "function TransitionEvent() {\n    [native code]\n}",
+            IE11 = "[object TransitionEvent]")
+    public void transitionEvent() throws Exception {
+        test("TransitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE8 = "[object XDomainRequest]")
+    public void xDomainRequest() throws Exception {
+        test("XDomainRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function StyleSheet() { [native code] }",
+            FF31 = "function StyleSheet() {\n    [native code]\n}",
+            IE11 = "[object StyleSheet]")
+    public void styleSheet() throws Exception {
+        test("StyleSheet");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGPreserveAspectRatio() { [native code] }",
+            FF31 = "function SVGPreserveAspectRatio() {\n    [native code]\n}",
+            IE11 = "[object SVGPreserveAspectRatio]")
+    public void svgPreserveAspectRatio() throws Exception {
+        test("SVGPreserveAspectRatio");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CharacterData() { [native code] }",
+            FF31 = "function CharacterData() {\n    [native code]\n}",
+            IE11 = "[object CharacterData]")
+    public void characterData() throws Exception {
+        test("CharacterData");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGNumber() { [native code] }",
+            FF31 = "[object SVGNumber]",
+            IE11 = "[object SVGNumber]")
+    public void svgNumber() throws Exception {
+        test("SVGNumber");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CanvasGradient() { [native code] }",
+            FF31 = "function CanvasGradient() {\n    [native code]\n}",
+            IE11 = "[object CanvasGradient]")
+    public void canvasGradient() throws Exception {
+        test("CanvasGradient");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function NodeIterator() { [native code] }",
+            FF31 = "function NodeIterator() {\n    [native code]\n}",
+            IE11 = "[object NodeIterator]")
+    public void nodeIterator() throws Exception {
+        test("NodeIterator");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function TimeRanges() { [native code] }",
+            FF31 = "function TimeRanges() {\n    [native code]\n}",
+            IE11 = "[object TimeRanges]")
+    public void timeRanges() throws Exception {
+        test("TimeRanges");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object XMLHttpRequestEventTarget]")
+    public void xMLHttpRequestEventTarget() throws Exception {
+        test("XMLHttpRequestEventTarget");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Performance() { [native code] }",
+            FF31 = "function Performance() {\n    [native code]\n}",
+            IE11 = "[object Performance]")
+    public void performance() throws Exception {
+        test("Performance");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CompositionEvent() { [native code] }",
+            FF31 = "function CompositionEvent() {\n    [native code]\n}",
+            IE11 = "[object CompositionEvent]")
+    public void compositionEvent() throws Exception {
+        test("CompositionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGAnimatedLength() { [native code] }",
+            FF31 = "function SVGAnimatedLength() {\n    [native code]\n}",
+            IE11 = "[object SVGAnimatedLength]")
+    public void svgAnimatedLength() throws Exception {
+        test("SVGAnimatedLength");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CSSSupportsRule() { [native code] }",
+            FF31 = "[object CSSSupportsRule]")
+    public void cssSupportsRule() throws Exception {
+        test("CSSSupportsRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBKeyRange() { [native code] }",
+            FF31 = "function IDBKeyRange() {\n    [native code]\n}",
+            IE11 = "[object IDBKeyRange]")
+    public void idbKeyRange() throws Exception {
+        test("IDBKeyRange");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGStringList() { [native code] }",
+            FF31 = "function SVGStringList() {\n    [native code]\n}",
+            IE11 = "[object SVGStringList]")
+    public void svgStringList() throws Exception {
+        test("SVGStringList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function DOMError() { [native code] }",
+            FF31 = "function DOMError() {\n    [native code]\n}",
+            IE11 = "[object DOMError]")
+    public void domError() throws Exception {
+        test("DOMError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGAnimatedInteger() { [native code] }",
+            FF31 = "function SVGAnimatedInteger() {\n    [native code]\n}",
+            IE11 = "[object SVGAnimatedInteger]")
+    public void svgAnimatedInteger() throws Exception {
+        test("SVGAnimatedInteger");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WebGLRenderingContext() { [native code] }",
+            FF31 = "function WebGLRenderingContext() {\n    [native code]\n}",
+            IE11 = "[object WebGLRenderingContext]")
+    public void webGLRenderingContext() throws Exception {
+        test("WebGLRenderingContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Blob() { [native code] }",
+            FF31 = "[object Blob]",
+            IE11 = "\nfunction Blob() {\n    [native code]\n}\n")
+    public void blob() throws Exception {
+        test("Blob");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGAnimatedTransformList() { [native code] }",
+            FF31 = "function SVGAnimatedTransformList() {\n    [native code]\n}",
+            IE11 = "[object SVGAnimatedTransformList]")
+    public void svgAnimatedTransformList() throws Exception {
+        test("SVGAnimatedTransformList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PerformanceNavigation() { [native code] }",
+            FF31 = "function PerformanceNavigation() {\n    [native code]\n}",
+            IE11 = "[object PerformanceNavigation]")
+    public void performanceNavigation() throws Exception {
+        test("PerformanceNavigation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PerformanceTiming() { [native code] }",
+            FF31 = "function PerformanceTiming() {\n    [native code]\n}",
+            IE11 = "[object PerformanceTiming]")
+    public void performanceTiming() throws Exception {
+        test("PerformanceTiming");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBObjectStore() { [native code] }",
+            FF31 = "function IDBObjectStore() {\n    [native code]\n}",
+            IE11 = "[object IDBObjectStore]")
+    public void idbObjectStore() throws Exception {
+        test("IDBObjectStore");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function URL() { [native code] }",
+            FF31 = "function URL() {\n    [native code]\n}",
+            IE11 = "[object URL]")
+    public void url() throws Exception {
+        test("URL");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBTransaction() { [native code] }",
+            FF31 = "function IDBTransaction() {\n    [native code]\n}",
+            IE11 = "[object IDBTransaction]")
+    public void idbTransaction() throws Exception {
+        test("IDBTransaction");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "[object JSON]",
+            FF31 = "[object JSON]",
+            IE11 = "[object JSON]")
+    public void json() throws Exception {
+        test("JSON");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBRequest() { [native code] }",
+            FF31 = "function IDBRequest() {\n    [native code]\n}",
+            IE11 = "[object IDBRequest]")
+    public void idbRequest() throws Exception {
+        test("IDBRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CSSKeyframeRule() { [native code] }",
+            IE11 = "[object CSSKeyframeRule]")
+    public void cssKeyframeRule() throws Exception {
+        test("CSSKeyframeRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBCursorWithValue() { [native code] }",
+            FF31 = "function IDBCursorWithValue() {\n    [native code]\n}",
+            IE11 = "[object IDBCursorWithValue]")
+    public void idbCursorWithValue() throws Exception {
+        test("IDBCursorWithValue");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function FocusEvent() { [native code] }",
+            FF31 = "function FocusEvent() {\n    [native code]\n}",
+            IE11 = "[object FocusEvent]")
+    public void focusEvent() throws Exception {
+        test("FocusEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function DOMStringList() { [native code] }",
+            FF31 = "function DOMStringList() {\n    [native code]\n}",
+            IE11 = "[object DOMStringList]")
+    public void domStringList() throws Exception {
+        test("DOMStringList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "[object CSSConditionRule]")
+    public void cssConditionRule() throws Exception {
+        test("CSSConditionRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGLengthList() { [native code] }",
+            FF31 = "function SVGLengthList() {\n    [native code]\n}",
+            IE11 = "[object SVGLengthList]")
+    public void svgLengthList() throws Exception {
+        test("SVGLengthList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGGradientElement() { [native code] }",
+            FF31 = "function SVGGradientElement() {\n    [native code]\n}",
+            IE11 = "[object SVGGradientElement]")
+    public void svgGradientElement() throws Exception {
+        test("SVGGradientElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGLength() { [native code] }",
+            FF31 = "function SVGLength() {\n    [native code]\n}",
+            IE11 = "[object SVGLength]")
+    public void svgLength() throws Exception {
+        test("SVGLength");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function StorageEvent() { [native code] }",
+            FF31 = "function StorageEvent() {\n    [native code]\n}",
+            IE11 = "[object StorageEvent]")
+    public void storageEvent() throws Exception {
+        test("StorageEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBCursor() { [native code] }",
+            FF31 = "function IDBCursor() {\n    [native code]\n}",
+            IE11 = "[object IDBCursor]")
+    public void idbCursor() throws Exception {
+        test("IDBCursor");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function Crypto() {\n    [native code]\n}",
+            IE11 = "[object Crypto]")
+    public void crypto() throws Exception {
+        test("Crypto");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBOpenDBRequest() { [native code] }",
+            FF31 = "function IDBOpenDBRequest() {\n    [native code]\n}",
+            IE11 = "[object IDBOpenDBRequest]")
+    public void idbOpenDBRequest() throws Exception {
+        test("IDBOpenDBRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "[object CSSGroupingRule]")
+    public void cssGroupingRule() throws Exception {
+        test("CSSGroupingRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGPoint() { [native code] }",
+            FF31 = "function SVGPoint() {\n    [native code]\n}",
+            IE11 = "[object SVGPoint]")
+    public void svgPoint() throws Exception {
+        test("SVGPoint");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "[object CSS]",
+            FF31 = "function CSS() {\n    [native code]\n}")
+    public void css() throws Exception {
+        test("CSS");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function DataTransfer() { [native code] }",
+            FF31 = "function DataTransfer() {\n    [native code]\n}",
+            IE11 = "[object DataTransfer]")
+    public void dataTransfer() throws Exception {
+        test("DataTransfer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGTransformList() { [native code] }",
+            FF31 = "function SVGTransformList() {\n    [native code]\n}",
+            IE11 = "[object SVGTransformList]")
+    public void svgTransformList() throws Exception {
+        test("SVGTransformList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ImageData() { [native code] }",
+            FF31 = "function ImageData() {\n    [native code]\n}",
+            IE11 = "[object ImageData]")
+    public void imageData() throws Exception {
+        test("ImageData");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBVersionChangeEvent() { [native code] }",
+            FF31 = "function IDBVersionChangeEvent() {\n    [native code]\n}",
+            IE11 = "[object IDBVersionChangeEvent]")
+    public void idbVersionChangeEvent() throws Exception {
+        test("IDBVersionChangeEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PopStateEvent() { [native code] }",
+            FF31 = "function PopStateEvent() {\n    [native code]\n}",
+            IE11 = "[object PopStateEvent]")
+    public void popStateEvent() throws Exception {
+        test("PopStateEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGAnimatedAngle() { [native code] }",
+            FF31 = "function SVGAnimatedAngle() {\n    [native code]\n}",
+            IE11 = "[object SVGAnimatedAngle]")
+    public void svgAnimatedAngle() throws Exception {
+        test("SVGAnimatedAngle");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "[object MozMobileMessageManager]")
+    public void mozMobileMessageManager() throws Exception {
+        test("MozMobileMessageManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function FileList() { [native code] }",
+            FF31 = "function FileList() {\n    [native code]\n}",
+            IE11 = "[object FileList]")
+    public void fileList() throws Exception {
+        test("FileList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CSSKeyframesRule() { [native code] }",
+            IE11 = "[object CSSKeyframesRule]")
+    public void cssKeyframesRule() throws Exception {
+        test("CSSKeyframesRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function File() { [native code] }",
+            FF31 = "[object File]",
+            IE11 = "[object File]")
+    public void file() throws Exception {
+        test("File");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object SubtleCrypto]")
+    public void subtleCrypto() throws Exception {
+        test("SubtleCrypto");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "[object MozSmsMessage]")
+    public void mozSmsMessage() throws Exception {
+        test("MozSmsMessage");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CanvasPattern() { [native code] }",
+            FF31 = "function CanvasPattern() {\n    [native code]\n}",
+            IE11 = "[object CanvasPattern]")
+    public void canvasPattern() throws Exception {
+        test("CanvasPattern");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function DragEvent() {\n    [native code]\n}",
+            IE11 = "[object DragEvent]")
+    public void dragEvent() throws Exception {
+        test("DragEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGTransform() { [native code] }",
+            FF31 = "function SVGTransform() {\n    [native code]\n}",
+            IE11 = "[object SVGTransform]")
+    public void svgTransform() throws Exception {
+        test("SVGTransform");
     }
 }

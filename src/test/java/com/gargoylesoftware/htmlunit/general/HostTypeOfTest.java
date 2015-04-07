@@ -3761,6 +3761,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
+            IE11 = "object",
             IE8 = "undefined")
     public void messagePort() throws Exception {
         test("MessagePort");
@@ -3773,7 +3774,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            IE8 = "undefined")
+            IE = "undefined")
     public void promise() throws Exception {
         test("Promise");
     }
@@ -3797,8 +3798,1050 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            IE8 = "undefined")
+            IE = "undefined")
     public void sharedWorker() throws Exception {
         test("SharedWorker");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void svgAnimatedLengthList() throws Exception {
+        test("SVGAnimatedLengthList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("object")
+    public void math() throws Exception {
+        test("Math");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void pageTransitionEvent() throws Exception {
+        test("PageTransitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void svgAnimatedNumber() throws Exception {
+        test("SVGAnimatedNumber");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "object",
+            IE11 = "object")
+    public void cssPageRule() throws Exception {
+        test("CSSPageRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void svgTextPositioningElement() throws Exception {
+        test("SVGTextPositioningElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void validityState() throws Exception {
+        test("ValidityState");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "object")
+    public void mozSmsSegmentInfo() throws Exception {
+        test("MozSmsSegmentInfo");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void closeEvent() throws Exception {
+        test("CloseEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "object")
+    public void mozMobileMessageThread() throws Exception {
+        test("MozMobileMessageThread");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void svgAnimatedRect() throws Exception {
+        test("SVGAnimatedRect");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void progressEvent() throws Exception {
+        test("ProgressEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void svgAnimatedString() throws Exception {
+        test("SVGAnimatedString");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void idbDatabase() throws Exception {
+        test("IDBDatabase");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void svgAnimatedEnumeration() throws Exception {
+        test("SVGAnimatedEnumeration");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void textMetrics() throws Exception {
+        test("TextMetrics");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void idbIndex() throws Exception {
+        test("IDBIndex");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE11 = "object")
+    public void mouseWheelEvent() throws Exception {
+        test("MouseWheelEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void wheelEvent() throws Exception {
+        test("WheelEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE11 = "object")
+    public void positionError() throws Exception {
+        test("PositionError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void svgAnimatedNumberList() throws Exception {
+        test("SVGAnimatedNumberList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE11 = "object")
+    public void cssNamespaceRule() throws Exception {
+        test("CSSNamespaceRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void idbFactory() throws Exception {
+        test("IDBFactory");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void svgNumberList() throws Exception {
+        test("SVGNumberList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void customEvent() throws Exception {
+        test("CustomEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void errorEvent() throws Exception {
+        test("ErrorEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
+            IE11 = "object")
+    public void animationEvent() throws Exception {
+        test("AnimationEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void svgAnimatedBoolean() throws Exception {
+        test("SVGAnimatedBoolean");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void svgAnimatedPreserveAspectRatio() throws Exception {
+        test("SVGAnimatedPreserveAspectRatio");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "object")
+    public void mozMmsMessage() throws Exception {
+        test("MozMmsMessage");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
+    public void mozSmsFilter() throws Exception {
+        test("MozSmsFilter");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void mediaQueryList() throws Exception {
+        test("MediaQueryList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void transitionEvent() throws Exception {
+        test("TransitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE8 = "object")
+    public void xDomainRequest() throws Exception {
+        test("XDomainRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void styleSheet() throws Exception {
+        test("StyleSheet");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void svgPreserveAspectRatio() throws Exception {
+        test("SVGPreserveAspectRatio");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void characterData() throws Exception {
+        test("CharacterData");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "object",
+            IE11 = "object")
+    public void svgNumber() throws Exception {
+        test("SVGNumber");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void canvasGradient() throws Exception {
+        test("CanvasGradient");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void nodeIterator() throws Exception {
+        test("NodeIterator");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void timeRanges() throws Exception {
+        test("TimeRanges");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE11 = "object")
+    public void xMLHttpRequestEventTarget() throws Exception {
+        test("XMLHttpRequestEventTarget");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void performance() throws Exception {
+        test("Performance");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void compositionEvent() throws Exception {
+        test("CompositionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void svgAnimatedLength() throws Exception {
+        test("SVGAnimatedLength");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "object")
+    public void cssSupportsRule() throws Exception {
+        test("CSSSupportsRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void idbKeyRange() throws Exception {
+        test("IDBKeyRange");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void svgStringList() throws Exception {
+        test("SVGStringList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void domError() throws Exception {
+        test("DOMError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void svgAnimatedInteger() throws Exception {
+        test("SVGAnimatedInteger");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void webGLRenderingContext() throws Exception {
+        test("WebGLRenderingContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "function")
+    public void blob() throws Exception {
+        test("Blob");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void svgAnimatedTransformList() throws Exception {
+        test("SVGAnimatedTransformList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void performanceNavigation() throws Exception {
+        test("PerformanceNavigation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void performanceTiming() throws Exception {
+        test("PerformanceTiming");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void idbObjectStore() throws Exception {
+        test("IDBObjectStore");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void url() throws Exception {
+        test("URL");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void idbTransaction() throws Exception {
+        test("IDBTransaction");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "object",
+            FF31 = "object",
+            IE11 = "object")
+    public void json() throws Exception {
+        test("JSON");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void idbRequest() throws Exception {
+        test("IDBRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            IE11 = "object")
+    public void cssKeyframeRule() throws Exception {
+        test("CSSKeyframeRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void idbCursorWithValue() throws Exception {
+        test("IDBCursorWithValue");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void focusEvent() throws Exception {
+        test("FocusEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void domStringList() throws Exception {
+        test("DOMStringList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "object")
+    public void cssConditionRule() throws Exception {
+        test("CSSConditionRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void svgLengthList() throws Exception {
+        test("SVGLengthList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void svgGradientElement() throws Exception {
+        test("SVGGradientElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void svgLength() throws Exception {
+        test("SVGLength");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void storageEvent() throws Exception {
+        test("StorageEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void idbCursor() throws Exception {
+        test("IDBCursor");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
+            IE11 = "object")
+    public void crypto() throws Exception {
+        test("Crypto");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void idbOpenDBRequest() throws Exception {
+        test("IDBOpenDBRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "object")
+    public void cssGroupingRule() throws Exception {
+        test("CSSGroupingRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void svgPoint() throws Exception {
+        test("SVGPoint");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "object",
+            FF31 = "function")
+    public void css() throws Exception {
+        test("CSS");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void dataTransfer() throws Exception {
+        test("DataTransfer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void svgTransformList() throws Exception {
+        test("SVGTransformList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void imageData() throws Exception {
+        test("ImageData");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void idbVersionChangeEvent() throws Exception {
+        test("IDBVersionChangeEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void popStateEvent() throws Exception {
+        test("PopStateEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void svgAnimatedAngle() throws Exception {
+        test("SVGAnimatedAngle");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "object")
+    public void mozMobileMessageManager() throws Exception {
+        test("MozMobileMessageManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void fileList() throws Exception {
+        test("FileList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            IE11 = "object")
+    public void cssKeyframesRule() throws Exception {
+        test("CSSKeyframesRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void file() throws Exception {
+        test("File");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE11 = "object")
+    public void subtleCrypto() throws Exception {
+        test("SubtleCrypto");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "object")
+    public void mozSmsMessage() throws Exception {
+        test("MozSmsMessage");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void canvasPattern() throws Exception {
+        test("CanvasPattern");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function",
+            IE11 = "object")
+    public void dragEvent() throws Exception {
+        test("DragEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void svgTransform() throws Exception {
+        test("SVGTransform");
     }
 }

@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.general;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -3635,7 +3636,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function Notification() { [native code] }",
-              FF = "function Notification() {\n    [native code]\n}",
+            FF = "function Notification() {\n    [native code]\n}",
             IE = "exception")
     public void notification() throws Exception {
         test("Notification");
@@ -3750,8 +3751,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "function MessagePort() { [native code] }",
             FF = "function MessagePort() {\n    [native code]\n}",
-            IE11 = "\nfunction MessagePort() {\n    [native code]\n}\n",
-            IE8 = "exception")
+            IE8 = "exception",
+            IE11 = "[object MessagePort]")
     public void messagePort() throws Exception {
         test("MessagePort");
     }
@@ -3764,8 +3765,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "function Promise() { [native code] }",
             FF = "function Promise() {\n    [native code]\n}",
-            IE11 = "\nfunction Promise() {\n    [native code]\n}\n",
-            IE8 = "exception")
+            IE = "exception")
     public void promise() throws Exception {
         test("Promise");
     }
@@ -3790,11 +3790,4425 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "function SharedWorker() { [native code] }",
-            FF = "function SharedWorker() {\n    [native code]\n}",
-            IE11 = "\nfunction SharedWorker() {\n    [native code]\n}\n",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SharedWorker() { [native code] }",
+            FF = "function SharedWorker() {\n    [native code]\n}")
     public void sharedWorker() throws Exception {
         test("SharedWorker");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGAnimatedLengthList() { [native code] }",
+            FF31 = "function SVGAnimatedLengthList() {\n    [native code]\n}",
+            IE11 = "[object SVGAnimatedLengthList]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void svgAnimatedLengthList() throws Exception {
+        test("SVGAnimatedLengthList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function Iterator() {\n    [native code]\n}")
+    public void iterator() throws Exception {
+        test("Iterator");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "function RegExp() { [native code] }",
+            FF = "function RegExp() {\n    [native code]\n}",
+            IE = "\nfunction RegExp() {\n    [native code]\n}\n")
+    public void regExp() throws Exception {
+        test("RegExp");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void svgMissingGlyphElement() throws Exception {
+        test("SVGMissingGlyphElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void transferable() throws Exception {
+        test("Transferable");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function AnalyserNode() { [native code] }",
+            FF31 = "function AnalyserNode() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void analyserNode() throws Exception {
+        test("AnalyserNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CSSPageRule() { [native code] }",
+            FF31 = "[object CSSPageRule]",
+            IE11 = "[object CSSPageRule]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void cssPageRule() throws Exception {
+        test("CSSPageRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void idbVersionChangeRequest() throws Exception {
+        test("IDBVersionChangeRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void svgFontFaceSrcElement() throws Exception {
+        test("SVGFontFaceSrcElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void svgTests() throws Exception {
+        test("SVGTests");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void point() throws Exception {
+        test("Point");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Path2D() { [native code] }",
+            FF31 = "function Path2D() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void path2D() throws Exception {
+        test("Path2D");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void generatorFunction() throws Exception {
+        test("GeneratorFunction");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozActivity() throws Exception {
+        test("MozActivity");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function HTMLShadowElement() { [native code] }",
+            FF31 = "function HTMLShadowElement() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void htmlShadowElement() throws Exception {
+        test("HTMLShadowElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void fileReaderSync() throws Exception {
+        test("FileReaderSync");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function DOMCursor() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void domCursor() throws Exception {
+        test("DOMCursor");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozNetworkStatsManager() throws Exception {
+        test("MozNetworkStatsManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozMobileICCInfo() throws Exception {
+        test("MozMobileICCInfo");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function LocalMediaStream() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void localMediaStream() throws Exception {
+        test("LocalMediaStream");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void typeInfo() throws Exception {
+        test("TypeInfo");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void nonDocumentTypeChildNode() throws Exception {
+        test("NonDocumentTypeChildNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void index() throws Exception {
+        test("Index");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void domApplicationsManager() throws Exception {
+        test("DOMApplicationsManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function AudioParam() { [native code] }",
+            FF31 = "function AudioParam() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void audioParam() throws Exception {
+        test("AudioParam");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void sharedWorkerGlobalScope() throws Exception {
+        test("SharedWorkerGlobalScope");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "function decodeURIComponent() { [native code] }",
+            FF = "function decodeURIComponent() {\n    [native code]\n}",
+            IE = "\nfunction decodeURIComponent() {\n    [native code]\n}\n")
+    public void decodeURIComponent() throws Exception {
+        test("decodeURIComponent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void headers() throws Exception {
+        test("Headers");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ChannelMergerNode() { [native code] }",
+            FF31 = "function ChannelMergerNode() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void channelMergerNode() throws Exception {
+        test("ChannelMergerNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void portCollection() throws Exception {
+        test("PortCollection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void idbEnvironment() throws Exception {
+        test("IDBEnvironment");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CloseEvent() { [native code] }",
+            FF31 = "function CloseEvent() {\n    [native code]\n}",
+            IE11 = "[object CloseEvent]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void closeEvent() throws Exception {
+        test("CloseEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void cameraCapabilities() throws Exception {
+        test("CameraCapabilities");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void svgHKernElement() throws Exception {
+        test("SVGHKernElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function OfflineAudioContext() { [native code] }",
+            FF31 = "function OfflineAudioContext() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void offlineAudioContext() throws Exception {
+        test("OfflineAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "[object MozMobileMessageThread]")
+    @NotYetImplemented(FF31)
+    public void mozMobileMessageThread() throws Exception {
+        test("MozMobileMessageThread");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function RTCSessionDescription() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void rtcSessionDescription() throws Exception {
+        test("RTCSessionDescription");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function MozSmsEvent() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void mozSmsEvent() throws Exception {
+        test("MozSmsEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void idbDatabaseSync() throws Exception {
+        test("IDBDatabaseSync");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void installEvent() throws Exception {
+        test("InstallEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void bluetoothDeviceEvent() throws Exception {
+        test("BluetoothDeviceEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGAnimatedRect() { [native code] }",
+            FF31 = "function SVGAnimatedRect() {\n    [native code]\n}",
+            IE11 = "[object SVGAnimatedRect]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void svgAnimatedRect() throws Exception {
+        test("SVGAnimatedRect");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void userDataHandler() throws Exception {
+        test("UserDataHandler");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void rtcIdentityEvent() throws Exception {
+        test("RTCIdentityEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void extendableEvent() throws Exception {
+        test("ExtendableEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ProgressEvent() { [native code] }",
+            FF31 = "function ProgressEvent() {\n    [native code]\n}",
+            IE11 = "[object ProgressEvent]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void progressEvent() throws Exception {
+        test("ProgressEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mediaKeySession() throws Exception {
+        test("MediaKeySession");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void l10n_language_direction() throws Exception {
+        test("L10n.language.direction");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function MediaRecorder() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void mediaRecorder() throws Exception {
+        test("MediaRecorder");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGAnimatedString() { [native code] }",
+            FF31 = "function SVGAnimatedString() {\n    [native code]\n}",
+            IE11 = "[object SVGAnimatedString]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void svgAnimatedString() throws Exception {
+        test("SVGAnimatedString");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function TimeEvent() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void timeEvent() throws Exception {
+        test("TimeEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBDatabase() { [native code] }",
+            FF31 = "function IDBDatabase() {\n    [native code]\n}",
+            IE11 = "[object IDBDatabase]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void idbDatabase() throws Exception {
+        test("IDBDatabase");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void domLocator() throws Exception {
+        test("DOMLocator");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGAnimatedEnumeration() { [native code] }",
+            FF31 = "function SVGAnimatedEnumeration() {\n    [native code]\n}",
+            IE11 = "[object SVGAnimatedEnumeration]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void svgAnimatedEnumeration() throws Exception {
+        test("SVGAnimatedEnumeration");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void response() throws Exception {
+        test("Response");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozIccManager() throws Exception {
+        test("MozIccManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBIndex() { [native code] }",
+            FF31 = "function IDBIndex() {\n    [native code]\n}",
+            IE11 = "[object IDBIndex]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void idbIndex() throws Exception {
+        test("IDBIndex");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WheelEvent() { [native code] }",
+            FF31 = "function WheelEvent() {\n    [native code]\n}",
+            IE11 = "[object WheelEvent]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void wheelEvent() throws Exception {
+        test("WheelEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void globalFetch() throws Exception {
+        test("GlobalFetch");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void videoPlaybackQuality() throws Exception {
+        test("VideoPlaybackQuality");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void fileEntry() throws Exception {
+        test("FileEntry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGAnimatedNumberList() { [native code] }",
+            FF31 = "function SVGAnimatedNumberList() {\n    [native code]\n}",
+            IE11 = "[object SVGAnimatedNumberList]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void svgAnimatedNumberList() throws Exception {
+        test("SVGAnimatedNumberList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void parallelArray() throws Exception {
+        test("ParallelArray");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function TextEncoder() { [native code] }",
+            FF31 = "function TextEncoder() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void textEncoder() throws Exception {
+        test("TextEncoder");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void l10n_formatValue() throws Exception {
+        test("L10n.formatValue");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBFactory() { [native code] }",
+            FF31 = "function IDBFactory() {\n    [native code]\n}",
+            IE11 = "[object IDBFactory]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void idbFactory() throws Exception {
+        test("IDBFactory");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void svgTransformable() throws Exception {
+        test("SVGTransformable");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void fileEntrySync() throws Exception {
+        test("FileEntrySync");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void pushManager() throws Exception {
+        test("PushManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function AnimationEvent() {\n    [native code]\n}",
+            IE11 = "[object AnimationEvent]")
+    @NotYetImplemented({ FF31, IE11 })
+    public void animationEvent() throws Exception {
+        test("AnimationEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void domErrorHandler() throws Exception {
+        test("DOMErrorHandler");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function () { [native code] }",
+            FF31 = "function DateTimeFormat() {\n    [native code]\n}",
+            IE11 = "\nfunction DateTimeFormat() {\n    [native code]\n}\n")
+    public void intl_DateTimeFormat() throws Exception {
+        test("Intl.DateTimeFormat");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void urlUtilsReadOnly() throws Exception {
+        test("URLUtilsReadOnly");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void pushSubscription() throws Exception {
+        test("PushSubscription");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void entityReference() throws Exception {
+        test("EntityReference");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function () { [native code] }",
+            FF31 = "function Collator() {\n    [native code]\n}",
+            IE11 = "\nfunction Collator() {\n    [native code]\n}\n")
+    public void intl_Collator() throws Exception {
+        test("Intl.Collator");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "[object MozSmsFilter]")
+    @NotYetImplemented(FF31)
+    public void mozSmsFilter() throws Exception {
+        test("MozSmsFilter");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MutationObserver() { [native code] }",
+            FF31 = "function MutationObserver() {\n    [native code]\n}",
+            IE11 = "\nfunction MutationObserver() {\n    [native code]\n}\n")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void mutationObserver() throws Exception {
+        test("MutationObserver");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozWifiP2pGroupOwner() throws Exception {
+        test("MozWifiP2pGroupOwner");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void pushEvent() throws Exception {
+        test("PushEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void navigatorID() throws Exception {
+        test("NavigatorID");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void domMatrixReadOnly() throws Exception {
+        test("DOMMatrixReadOnly");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void idbEnvironmentSync() throws Exception {
+        test("IDBEnvironmentSync");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mediaQueryListListener() throws Exception {
+        test("MediaQueryListListener");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "function isFinite() { [native code] }",
+            FF = "function isFinite() {\n    [native code]\n}",
+            IE = "\nfunction isFinite() {\n    [native code]\n}\n")
+    public void isFinite() throws Exception {
+        test("isFinite");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void fetchEvent() throws Exception {
+        test("FetchEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "function String() { [native code] }",
+            FF = "function String() {\n    [native code]\n}",
+            IE = "\nfunction String() {\n    [native code]\n}\n")
+    public void string() throws Exception {
+        test("String");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void rtcIdentityErrorEvent() throws Exception {
+        test("RTCIdentityErrorEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function StyleSheet() { [native code] }",
+            FF31 = "function StyleSheet() {\n    [native code]\n}",
+            IE11 = "[object StyleSheet]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void styleSheet() throws Exception {
+        test("StyleSheet");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function TouchEvent() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void touchEvent() throws Exception {
+        test("TouchEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozActivityOptions() throws Exception {
+        test("MozActivityOptions");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void fileException() throws Exception {
+        test("FileException");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGPreserveAspectRatio() { [native code] }",
+            FF31 = "function SVGPreserveAspectRatio() {\n    [native code]\n}",
+            IE11 = "[object SVGPreserveAspectRatio]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void svgPreserveAspectRatio() throws Exception {
+        test("SVGPreserveAspectRatio");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "function parseFloat() { [native code] }",
+            FF = "function parseFloat() {\n    [native code]\n}",
+            IE = "\nfunction parseFloat() {\n    [native code]\n}\n")
+    public void parseFloat() throws Exception {
+        test("parseFloat");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void domImplementationSource() throws Exception {
+        test("DOMImplementationSource");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void entity() throws Exception {
+        test("Entity");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozNFCTag() throws Exception {
+        test("MozNFCTag");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void canvasImageSource() throws Exception {
+        test("CanvasImageSource");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void bluetoothDevice() throws Exception {
+        test("BluetoothDevice");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function MozContactChangeEvent() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void mozContactChangeEvent() throws Exception {
+        test("MozContactChangeEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "function parseInt() { [native code] }",
+            FF = "function parseInt() {\n    [native code]\n}",
+            IE = "\nfunction parseInt() {\n    [native code]\n}\n")
+    public void parseInt() throws Exception {
+        test("parseInt");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function LockedFile() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void lockedFile() throws Exception {
+        test("LockedFile");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function AudioProcessingEvent() { [native code] }",
+            FF31 = "function AudioProcessingEvent() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void audioProcessingEvent() throws Exception {
+        test("AudioProcessingEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CanvasGradient() { [native code] }",
+            FF31 = "function CanvasGradient() {\n    [native code]\n}",
+            IE11 = "[object CanvasGradient]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void canvasGradient() throws Exception {
+        test("CanvasGradient");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void svgAnimatedPoints() throws Exception {
+        test("SVGAnimatedPoints");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function FileReader() { [native code] }",
+            FF31 = "function FileReader() {\n    [native code]\n}",
+            IE11 = "\nfunction FileReader() {\n    [native code]\n}\n")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void fileReader() throws Exception {
+        test("FileReader");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void byteString() throws Exception {
+        test("ByteString");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void networkInformation() throws Exception {
+        test("NetworkInformation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void callEvent() throws Exception {
+        test("CallEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function AudioNode() { [native code] }",
+            FF31 = "function AudioNode() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void audioNode() throws Exception {
+        test("AudioNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozNFC() throws Exception {
+        test("MozNFC");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function BiquadFilterNode() { [native code] }",
+            FF31 = "function BiquadFilterNode() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void biquadFilterNode() throws Exception {
+        test("BiquadFilterNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function RTCPeerConnectionIceEvent() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void rtcPeerConnectionIceEvent() throws Exception {
+        test("RTCPeerConnectionIceEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void navigatorPlugins() throws Exception {
+        test("NavigatorPlugins");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void powerManager() throws Exception {
+        test("PowerManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void l10n_readyState() throws Exception {
+        test("L10n.readyState");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function TimeRanges() { [native code] }",
+            FF31 = "function TimeRanges() {\n    [native code]\n}",
+            IE11 = "[object TimeRanges]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void timeRanges() throws Exception {
+        test("TimeRanges");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function AudioContext() { [native code] }",
+            FF31 = "function AudioContext() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void audioContext() throws Exception {
+        test("AudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void rtcConfiguration() throws Exception {
+        test("RTCConfiguration");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozWifiStatusChangeEvent() throws Exception {
+        test("MozWifiStatusChangeEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "function RangeError() { [native code] }",
+            FF = "function RangeError() {\n    [native code]\n}",
+            IE11 = "\nfunction RangeError() {\n    [native code]\n}\n",
+            IE8 = "RangeError")
+    @NotYetImplemented(IE8)
+    public void rangeError() throws Exception {
+        test("RangeError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void notation() throws Exception {
+        test("Notation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void rtcDataChannel() throws Exception {
+        test("RTCDataChannel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGAnimatedLength() { [native code] }",
+            FF31 = "function SVGAnimatedLength() {\n    [native code]\n}",
+            IE11 = "[object SVGAnimatedLength]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void svgAnimatedLength() throws Exception {
+        test("SVGAnimatedLength");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void workerLocation() throws Exception {
+        test("WorkerLocation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CSSSupportsRule() { [native code] }",
+            FF31 = "[object CSSSupportsRule]")
+    @NotYetImplemented({ FF31, CHROME })
+    public void cssSupportsRule() throws Exception {
+        test("CSSSupportsRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void parentNode() throws Exception {
+        test("ParentNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function DynamicsCompressorNode() { [native code] }",
+            FF31 = "function DynamicsCompressorNode() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void dynamicsCompressorNode() throws Exception {
+        test("DynamicsCompressorNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGStringList() { [native code] }",
+            FF31 = "function SVGStringList() {\n    [native code]\n}",
+            IE11 = "[object SVGStringList]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void svgStringList() throws Exception {
+        test("SVGStringList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function DOMError() { [native code] }",
+            FF31 = "function DOMError() {\n    [native code]\n}",
+            IE11 = "[object DOMError]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void domError() throws Exception {
+        test("DOMError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function EventTarget() { [native code] }",
+            FF31 = "function EventTarget() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void eventTarget() throws Exception {
+        test("EventTarget");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaElementAudioSourceNode() { [native code] }",
+            FF31 = "function MediaElementAudioSourceNode() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void mediaElementAudioSourceNode() throws Exception {
+        test("MediaElementAudioSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void svgFontFaceUriElement() throws Exception {
+        test("SVGFontFaceUriElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaStreamEvent() { [native code] }",
+            FF31 = "function MediaStreamEvent() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void mediaStreamEvent() throws Exception {
+        test("MediaStreamEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void workerNavigator() throws Exception {
+        test("WorkerNavigator");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function HTMLFormControlsCollection() { [native code] }",
+            FF31 = "function HTMLFormControlsCollection() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void htmlFormControlsCollection() throws Exception {
+        test("HTMLFormControlsCollection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void svgVKernElement() throws Exception {
+        test("SVGVKernElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozSocial() throws Exception {
+        test("MozSocial");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGAnimatedInteger() { [native code] }",
+            FF31 = "function SVGAnimatedInteger() {\n    [native code]\n}",
+            IE11 = "[object SVGAnimatedInteger]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void svgAnimatedInteger() throws Exception {
+        test("SVGAnimatedInteger");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mediaKeyStatusMap() throws Exception {
+        test("MediaKeyStatusMap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozContact() throws Exception {
+        test("MozContact");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void typedArray() throws Exception {
+        test("TypedArray");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void dataStoreChangeEvent() throws Exception {
+        test("DataStoreChangeEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void eventListener() throws Exception {
+        test("EventListener");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void svgFontFaceFormatElement() throws Exception {
+        test("SVGFontFaceFormatElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "function URIError() { [native code] }",
+            FF = "function URIError() {\n    [native code]\n}",
+            IE11 = "\nfunction URIError() {\n    [native code]\n}\n",
+            IE8 = "URIError")
+    @NotYetImplemented(IE8)
+    public void uriError() throws Exception {
+        test("URIError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void urlUtils() throws Exception {
+        test("URLUtils");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void entry() throws Exception {
+        test("Entry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozNetworkStats() throws Exception {
+        test("MozNetworkStats");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function HTMLPictureElement() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void htmlPictureElement() throws Exception {
+        test("HTMLPictureElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void generator() throws Exception {
+        test("Generator");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void svgEvent() throws Exception {
+        test("SVGEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mediaKeyMessageEvent() throws Exception {
+        test("MediaKeyMessageEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaStreamAudioSourceNode() { [native code] }",
+            FF31 = "function MediaStreamAudioSourceNode() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void mediaStreamAudioSourceNode() throws Exception {
+        test("MediaStreamAudioSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function AudioListener() { [native code] }",
+            FF31 = "function AudioListener() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void audioListener() throws Exception {
+        test("AudioListener");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function PannerNode() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void pannerNode() throws Exception {
+        test("PannerNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void domConfiguration() throws Exception {
+        test("DOMConfiguration");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "function decodeURI() { [native code] }",
+            FF31 = "function decodeURI() {\n    [native code]\n}",
+            IE = "\nfunction decodeURI() {\n    [native code]\n}\n")
+    public void decodeURI() throws Exception {
+        test("decodeURI");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mediaKeys() throws Exception {
+        test("MediaKeys");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PerformanceTiming() { [native code] }",
+            FF31 = "function PerformanceTiming() {\n    [native code]\n}",
+            IE11 = "[object PerformanceTiming]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void performanceTiming() throws Exception {
+        test("PerformanceTiming");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void bluetoothAdapter() throws Exception {
+        test("BluetoothAdapter");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBObjectStore() { [native code] }",
+            FF31 = "function IDBObjectStore() {\n    [native code]\n}",
+            IE11 = "[object IDBObjectStore]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void idbObjectStore() throws Exception {
+        test("IDBObjectStore");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void domImplementationRegistry() throws Exception {
+        test("DOMImplementationRegistry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void telephony() throws Exception {
+        test("Telephony");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function DeviceMotionEvent() { [native code] }",
+            FF31 = "function DeviceMotionEvent() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void deviceMotionEvent() throws Exception {
+        test("DeviceMotionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function TouchList() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void touchList() throws Exception {
+        test("TouchList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("[object JSON]")
+    public void json() throws Exception {
+        test("JSON");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBRequest() { [native code] }",
+            FF31 = "function IDBRequest() {\n    [native code]\n}",
+            IE11 = "[object IDBRequest]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void idbRequest() throws Exception {
+        test("IDBRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function TextDecoder() { [native code] }",
+            FF31 = "function TextDecoder() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void textDecoder() throws Exception {
+        test("TextDecoder");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "function SyntaxError() { [native code] }",
+            FF = "function SyntaxError() {\n    [native code]\n}",
+            IE11 = "\nfunction SyntaxError() {\n    [native code]\n}\n",
+            IE8 = "SyntaxError")
+    @NotYetImplemented(IE8)
+    public void syntaxError() throws Exception {
+        test("SyntaxError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CSSKeyframeRule() { [native code] }",
+            IE11 = "[object CSSKeyframeRule]")
+    @NotYetImplemented({ IE11, CHROME })
+    public void cssKeyframeRule() throws Exception {
+        test("CSSKeyframeRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void broadcastChannel() throws Exception {
+        test("BroadcastChannel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void directoryReaderSync() throws Exception {
+        test("DirectoryReaderSync");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void documentTouch() throws Exception {
+        test("DocumentTouch");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozVoicemailEvent() throws Exception {
+        test("MozVoicemailEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void navigatorGeolocation() throws Exception {
+        test("NavigatorGeolocation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function FocusEvent() { [native code] }",
+            FF31 = "function FocusEvent() {\n    [native code]\n}",
+            IE11 = "[object FocusEvent]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void focusEvent() throws Exception {
+        test("FocusEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function DOMStringList() { [native code] }",
+            FF31 = "function DOMStringList() {\n    [native code]\n}",
+            IE11 = "[object DOMStringList]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void domStringList() throws Exception {
+        test("DOMStringList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function MozMmsEvent() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void mozMmsEvent() throws Exception {
+        test("MozMmsEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function OfflineAudioCompletionEvent() { [native code] }",
+            FF31 = "function OfflineAudioCompletionEvent() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void offlineAudioCompletionEvent() throws Exception {
+        test("OfflineAudioCompletionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void elementTraversal() throws Exception {
+        test("ElementTraversal");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function DeviceOrientationEvent() { [native code] }",
+            FF31 = "function DeviceOrientationEvent() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void deviceOrientationEvent() throws Exception {
+        test("DeviceOrientationEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void uSVString() throws Exception {
+        test("USVString");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void domImplementationList() throws Exception {
+        test("DOMImplementationList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void localFileSystem() throws Exception {
+        test("LocalFileSystem");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void tcpServerSocket() throws Exception {
+        test("TCPServerSocket");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function uneval() {\n    [native code]\n}")
+    public void uneval() throws Exception {
+        test("uneval");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function StorageEvent() { [native code] }",
+            FF31 = "function StorageEvent() {\n    [native code]\n}",
+            IE11 = "[object StorageEvent]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void storageEvent() throws Exception {
+        test("StorageEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBOpenDBRequest() { [native code] }",
+            FF31 = "function IDBOpenDBRequest() {\n    [native code]\n}",
+            IE11 = "[object IDBOpenDBRequest]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void idbOpenDBRequest() throws Exception {
+        test("IDBOpenDBRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void dataStore() throws Exception {
+        test("DataStore");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "[object CSSGroupingRule]")
+    @NotYetImplemented(FF31)
+    public void cssGroupingRule() throws Exception {
+        test("CSSGroupingRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void body() throws Exception {
+        test("Body");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("NaN")
+    public void naN() throws Exception {
+        test("NaN");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function FileError() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void fileError() throws Exception {
+        test("FileError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function GainNode() { [native code] }",
+            FF31 = "function GainNode() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void gainNode() throws Exception {
+        test("GainNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "function Number() { [native code] }",
+            FF = "function Number() {\n    [native code]\n}",
+            IE = "\nfunction Number() {\n    [native code]\n}\n")
+    public void number() throws Exception {
+        test("Number");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Map() { [native code] }",
+            FF31 = "function Map() {\n    [native code]\n}",
+            IE11 = "\nfunction Map() {\n    [native code]\n}\n")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void map() throws Exception {
+        test("Map");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozMobileConnection() throws Exception {
+        test("MozMobileConnection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void cache() throws Exception {
+        test("Cache");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozVoicemail() throws Exception {
+        test("MozVoicemail");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGTransformList() { [native code] }",
+            FF31 = "function SVGTransformList() {\n    [native code]\n}",
+            IE11 = "[object SVGTransformList]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void svgTransformList() throws Exception {
+        test("SVGTransformList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozNFCPeer() throws Exception {
+        test("MozNFCPeer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void directoryEntrySync() throws Exception {
+        test("DirectoryEntrySync");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void linkStyle() throws Exception {
+        test("LinkStyle");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function () { [native code] }",
+            FF31 = "function NumberFormat() {\n    [native code]\n}",
+            IE11 = "\nfunction NumberFormat() {\n    [native code]\n}\n")
+    public void intl_NumberFormat() throws Exception {
+        test("Intl.NumberFormat");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function CaretPosition() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void caretPosition() throws Exception {
+        test("CaretPosition");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void directoryReader() throws Exception {
+        test("DirectoryReader");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function DeviceProximityEvent() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void deviceProximityEvent() throws Exception {
+        test("DeviceProximityEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBVersionChangeEvent() { [native code] }",
+            FF31 = "function IDBVersionChangeEvent() {\n    [native code]\n}",
+            IE11 = "[object IDBVersionChangeEvent]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void idbVersionChangeEvent() throws Exception {
+        test("IDBVersionChangeEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void l10n_setAttributes() throws Exception {
+        test("L10n.setAttributes");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void settingsManager() throws Exception {
+        test("SettingsManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void windowBase64() throws Exception {
+        test("WindowBase64");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mediaKeySystemConfiguration() throws Exception {
+        test("MediaKeySystemConfiguration");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGAnimatedAngle() { [native code] }",
+            FF31 = "function SVGAnimatedAngle() {\n    [native code]\n}",
+            IE11 = "[object SVGAnimatedAngle]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void svgAnimatedAngle() throws Exception {
+        test("SVGAnimatedAngle");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "[object MozMobileMessageManager]")
+    @NotYetImplemented(FF31)
+    public void mozMobileMessageManager() throws Exception {
+        test("MozMobileMessageManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ConvolverNode() { [native code] }",
+            FF31 = "function ConvolverNode() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void convolverNode() throws Exception {
+        test("ConvolverNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CSSKeyframesRule() { [native code] }",
+            IE11 = "[object CSSKeyframesRule]")
+    @NotYetImplemented({ IE11, CHROME })
+    public void cssKeyframesRule() throws Exception {
+        test("CSSKeyframesRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WaveShaperNode() { [native code] }",
+            FF31 = "function WaveShaperNode() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void waveShaperNode() throws Exception {
+        test("WaveShaperNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void blobBuilder() throws Exception {
+        test("BlobBuilder");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void rtcSessionDescriptionCallback() throws Exception {
+        test("RTCSessionDescriptionCallback");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object SubtleCrypto]")
+    @NotYetImplemented(IE11)
+    public void subtleCrypto() throws Exception {
+        test("SubtleCrypto");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozMobileNetworkInfo() throws Exception {
+        test("MozMobileNetworkInfo");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void domMatrix() throws Exception {
+        test("DOMMatrix");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void clients() throws Exception {
+        test("Clients");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozWifiP2pManager() throws Exception {
+        test("MozWifiP2pManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGTransform() { [native code] }",
+            FF31 = "function SVGTransform() {\n    [native code]\n}",
+            IE11 = "[object SVGTransform]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void svgTransform() throws Exception {
+        test("SVGTransform");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mediaKeySystemAccess() throws Exception {
+        test("MediaKeySystemAccess");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "function encodeURI() { [native code] }",
+            FF = "function encodeURI() {\n    [native code]\n}",
+            IE = "\nfunction encodeURI() {\n    [native code]\n}\n")
+    public void encodeURI() throws Exception {
+        test("encodeURI");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "function EvalError() { [native code] }",
+            FF = "function EvalError() {\n    [native code]\n}",
+            IE11 = "\nfunction EvalError() {\n    [native code]\n}\n",
+            IE8 = "EvalError")
+    @NotYetImplemented(IE8)
+    public void evalError() throws Exception {
+        test("EvalError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("[object Math]")
+    public void math() throws Exception {
+        test("Math");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "function Array() { [native code] }",
+            FF = "function Array() {\n    [native code]\n}",
+            IE = "\nfunction Array() {\n    [native code]\n}\n")
+    public void array() throws Exception {
+        test("Array");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void renderingContext() throws Exception {
+        test("RenderingContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PageTransitionEvent() { [native code] }",
+            FF31 = "function PageTransitionEvent() {\n    [native code]\n}",
+            IE11 = "[object PageTransitionEvent]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void pageTransitionEvent() throws Exception {
+        test("PageTransitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGAnimatedNumber() { [native code] }",
+            FF31 = "function SVGAnimatedNumber() {\n    [native code]\n}",
+            IE11 = "[object SVGAnimatedNumber]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void svgAnimatedNumber() throws Exception {
+        test("SVGAnimatedNumber");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PeriodicWave() { [native code] }",
+            FF31 = "function PeriodicWave() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void periodicWave() throws Exception {
+        test("PeriodicWave");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void idbDatabaseException() throws Exception {
+        test("IDBDatabaseException");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function DeviceLightEvent() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void deviceLightEvent() throws Exception {
+        test("DeviceLightEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void domUserData() throws Exception {
+        test("DOMUserData");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void rtcPeerConnection() throws Exception {
+        test("RTCPeerConnection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CryptoKey() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void cryptoKey() throws Exception {
+        test("CryptoKey");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGTextPositioningElement() { [native code] }",
+            FF31 = "function SVGTextPositioningElement() {\n    [native code]\n}",
+            IE11 = "[object SVGTextPositioningElement]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void svgTextPositioningElement() throws Exception {
+        test("SVGTextPositioningElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "function ReferenceError() { [native code] }",
+            FF = "function ReferenceError() {\n    [native code]\n}",
+            IE11 = "\nfunction ReferenceError() {\n    [native code]\n}\n",
+            IE8 = "ReferenceError")
+    @NotYetImplemented(IE8)
+    public void referenceError() throws Exception {
+        test("ReferenceError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void dataStoreTask() throws Exception {
+        test("DataStoreTask");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "function eval() { [native code] }",
+            FF = "function eval() {\n    [native code]\n}",
+            IE = "\nfunction eval() {\n    [native code]\n}\n")
+    public void eval() throws Exception {
+        test("eval");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ValidityState() { [native code] }",
+            FF31 = "function ValidityState() {\n    [native code]\n}",
+            IE11 = "[object ValidityState]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void validityState() throws Exception {
+        test("ValidityState");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "[object MozSmsSegmentInfo]")
+    @NotYetImplemented(FF31)
+    public void mozSmsSegmentInfo() throws Exception {
+        test("MozSmsSegmentInfo");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function FileRequest() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void fileRequest() throws Exception {
+        test("FileRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void windowEventHandlers_onbeforeprint() throws Exception {
+        test("WindowEventHandlers.onbeforeprint");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "function isNaN() { [native code] }",
+            FF = "function isNaN() {\n    [native code]\n}",
+            IE = "\nfunction isNaN() {\n    [native code]\n}\n")
+    public void isNaN() throws Exception {
+        test("isNaN");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WeakSet() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void weakSet() throws Exception {
+        test("WeakSet");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozMobileCellInfo() throws Exception {
+        test("MozMobileCellInfo");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void domTimeStamp() throws Exception {
+        test("DOMTimeStamp");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozNetworkStatsData() throws Exception {
+        test("MozNetworkStatsData");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void idbTransactionSync() throws Exception {
+        test("IDBTransactionSync");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void fileSystemSync() throws Exception {
+        test("FileSystemSync");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void idbFactorySync() throws Exception {
+        test("IDBFactorySync");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function HTMLContentElement() { [native code] }",
+            FF31 = "function HTMLContentElement() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void htmlContentElement() throws Exception {
+        test("HTMLContentElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void cssMatrix() throws Exception {
+        test("CSSMatrix");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void nameList() throws Exception {
+        test("NameList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void client() throws Exception {
+        test("Client");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function DeviceStorage() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void deviceStorage() throws Exception {
+        test("DeviceStorage");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function TextMetrics() { [native code] }",
+            FF31 = "function TextMetrics() {\n    [native code]\n}",
+            IE11 = "[object TextMetrics]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void textMetrics() throws Exception {
+        test("TextMetrics");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void domHighResTimeStamp() throws Exception {
+        test("DOMHighResTimeStamp");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "function Function() { [native code] }",
+            FF = "function Function() {\n    [native code]\n}",
+            IE = "\nfunction Function() {\n    [native code]\n}\n")
+    public void function() throws Exception {
+        test("Function");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void svgStylable() throws Exception {
+        test("SVGStylable");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaStreamAudioDestinationNode() { [native code] }",
+            FF31 = "function MediaStreamAudioDestinationNode() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void mediaStreamAudioDestinationNode() throws Exception {
+        test("MediaStreamAudioDestinationNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object MouseWheelEvent]")
+    @NotYetImplemented(IE11)
+    public void mouseWheelEvent() throws Exception {
+        test("MouseWheelEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object PositionError]")
+    @NotYetImplemented(IE11)
+    public void positionError() throws Exception {
+        test("PositionError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void bluetoothStatusChangedEvent() throws Exception {
+        test("BluetoothStatusChangedEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozWifiConnectionInfoEvent() throws Exception {
+        test("MozWifiConnectionInfoEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void idbIndexSync() throws Exception {
+        test("IDBIndexSync");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object CSSNamespaceRule]")
+    @NotYetImplemented(IE11)
+    public void cssNamespaceRule() throws Exception {
+        test("CSSNamespaceRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void deviceAcceleration() throws Exception {
+        test("DeviceAcceleration");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function DeviceStorageChangeEvent() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void deviceStorageChangeEvent() throws Exception {
+        test("DeviceStorageChangeEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function FileHandle() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void fileHandle() throws Exception {
+        test("FileHandle");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGNumberList() { [native code] }",
+            FF31 = "function SVGNumberList() {\n    [native code]\n}",
+            IE11 = "[object SVGNumberList]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void svgNumberList() throws Exception {
+        test("SVGNumberList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function GamepadEvent() { [native code] }",
+            FF31 = "function GamepadEvent() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void gamepadEvent() throws Exception {
+        test("GamepadEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function MozSettingsEvent() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void mozSettingsEvent() throws Exception {
+        test("MozSettingsEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void l10n_language_code() throws Exception {
+        test("L10n.language.code");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CustomEvent() { [native code] }",
+            FF31 = "function CustomEvent() {\n    [native code]\n}",
+            IE11 = "[object CustomEvent]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void customEvent() throws Exception {
+        test("CustomEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void deviceRotationRate() throws Exception {
+        test("DeviceRotationRate");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ErrorEvent() { [native code] }",
+            FF31 = "function ErrorEvent() {\n    [native code]\n}",
+            IE11 = "[object ErrorEvent]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void errorEvent() throws Exception {
+        test("ErrorEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGAnimatedBoolean() { [native code] }",
+            FF31 = "function SVGAnimatedBoolean() {\n    [native code]\n}",
+            IE11 = "[object SVGAnimatedBoolean]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void svgAnimatedBoolean() throws Exception {
+        test("SVGAnimatedBoolean");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Set() { [native code] }",
+            FF31 = "function Set() {\n    [native code]\n}",
+            IE11 = "\nfunction Set() {\n    [native code]\n}\n")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void set() throws Exception {
+        test("Set");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGAnimatedPreserveAspectRatio() { [native code] }",
+            FF31 = "function SVGAnimatedPreserveAspectRatio() {\n    [native code]\n}",
+            IE11 = "[object SVGAnimatedPreserveAspectRatio]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void svgAnimatedPreserveAspectRatio() throws Exception {
+        test("SVGAnimatedPreserveAspectRatio");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void idbObjectStoreSync() throws Exception {
+        test("IDBObjectStoreSync");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "[object MozMmsMessage]")
+    @NotYetImplemented(FF31)
+    public void mozMmsMessage() throws Exception {
+        test("MozMmsMessage");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function BatteryManager() { [native code] }",
+            FF31 = "function BatteryManager() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void batteryManager() throws Exception {
+        test("BatteryManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function RTCDataChannelEvent() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void rtcDataChannelEvent() throws Exception {
+        test("RTCDataChannelEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ServiceWorkerRegistration() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void serviceWorkerRegistration() throws Exception {
+        test("ServiceWorkerRegistration");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void navigatorOnLine() throws Exception {
+        test("NavigatorOnLine");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void svgTRefElement() throws Exception {
+        test("SVGTRefElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaQueryList() { [native code] }",
+            FF31 = "function MediaQueryList() {\n    [native code]\n}",
+            IE11 = "[object MediaQueryList]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void mediaQueryList() throws Exception {
+        test("MediaQueryList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function TransitionEvent() { [native code] }",
+            FF31 = "function TransitionEvent() {\n    [native code]\n}",
+            IE11 = "[object TransitionEvent]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void transitionEvent() throws Exception {
+        test("TransitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void cameraControl() throws Exception {
+        test("CameraControl");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void contactManager() throws Exception {
+        test("ContactManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE8 = "[object XDomainRequest]")
+    @NotYetImplemented(IE8)
+    public void xDomainRequest() throws Exception {
+        test("XDomainRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void svgFontFaceElement() throws Exception {
+        test("SVGFontFaceElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CharacterData() { [native code] }",
+            FF31 = "function CharacterData() {\n    [native code]\n}",
+            IE11 = "[object CharacterData]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void characterData() throws Exception {
+        test("CharacterData");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGNumber() { [native code] }",
+            FF31 = "[object SVGNumber]",
+            IE11 = "[object SVGNumber]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void svgNumber() throws Exception {
+        test("SVGNumber");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void apps_mgmt() throws Exception {
+        test("Apps.mgmt");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void positionOptions() throws Exception {
+        test("PositionOptions");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void cameraManager() throws Exception {
+        test("CameraManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void stereoPannerNode() throws Exception {
+        test("StereoPannerNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void undefined() throws Exception {
+        test("undefined");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function NodeIterator() { [native code] }",
+            FF31 = "function NodeIterator() {\n    [native code]\n}",
+            IE11 = "[object NodeIterator]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void nodeIterator() throws Exception {
+        test("NodeIterator");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object XMLHttpRequestEventTarget]")
+    @NotYetImplemented(IE11)
+    public void xMLHttpRequestEventTarget() throws Exception {
+        test("XMLHttpRequestEventTarget");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Performance() { [native code] }",
+            FF31 = "function Performance() {\n    [native code]\n}",
+            IE11 = "[object Performance]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void performance() throws Exception {
+        test("Performance");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void bluetoothManager() throws Exception {
+        test("BluetoothManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function AudioDestinationNode() { [native code] }",
+            FF31 = "function AudioDestinationNode() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void audioDestinationNode() throws Exception {
+        test("AudioDestinationNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CompositionEvent() { [native code] }",
+            FF31 = "function CompositionEvent() {\n    [native code]\n}",
+            IE11 = "[object CompositionEvent]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void compositionEvent() throws Exception {
+        test("CompositionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function RadioNodeList() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void radioNodeList() throws Exception {
+        test("RadioNodeList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void workerGlobalScope() throws Exception {
+        test("WorkerGlobalScope");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void svgFontFaceNameElement() throws Exception {
+        test("SVGFontFaceNameElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void domApplicationsRegistry() throws Exception {
+        test("DOMApplicationsRegistry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void audioChannelManager() throws Exception {
+        test("AudioChannelManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WeakMap() { [native code] }",
+            FF31 = "function WeakMap() {\n    [native code]\n}",
+            IE11 = "\nfunction WeakMap() {\n    [native code]\n}\n")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void weakMap() throws Exception {
+        test("WeakMap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaSource() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void mediaSource() throws Exception {
+        test("MediaSource");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBKeyRange() { [native code] }",
+            FF31 = "function IDBKeyRange() {\n    [native code]\n}",
+            IE11 = "[object IDBKeyRange]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void idbKeyRange() throws Exception {
+        test("IDBKeyRange");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void serviceWorkerGlobalScope() throws Exception {
+        test("ServiceWorkerGlobalScope");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void cssCounterStyleRule() throws Exception {
+        test("CSSCounterStyleRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Infinity")
+    public void infinity() throws Exception {
+        test("Infinity");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function AudioBufferSourceNode() { [native code] }",
+            FF31 = "function AudioBufferSourceNode() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void audioBufferSourceNode() throws Exception {
+        test("AudioBufferSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function DOMRequest() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void domRequest() throws Exception {
+        test("DOMRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void chromeWorker() throws Exception {
+        test("ChromeWorker");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function InputEvent() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void inputEvent() throws Exception {
+        test("InputEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Touch() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void touch() throws Exception {
+        test("Touch");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function InternalError() {\n    [native code]\n}")
+    @NotYetImplemented({ IE8, IE11, CHROME })
+    public void internalError() throws Exception {
+        test("InternalError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function EventSource() { [native code] }",
+            FF31 = "function EventSource() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void eventSource() throws Exception {
+        test("EventSource");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void animationPlayer() throws Exception {
+        test("AnimationPlayer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "function Date() { [native code] }",
+            FF31 = "function Date() {\n    [native code]\n}",
+            IE = "\nfunction Date() {\n    [native code]\n}\n")
+    public void date() throws Exception {
+        test("Date");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WebGLRenderingContext() { [native code] }",
+            FF31 = "function WebGLRenderingContext() {\n    [native code]\n}",
+            IE11 = "[object WebGLRenderingContext]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void webGLRenderingContext() throws Exception {
+        test("WebGLRenderingContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mediaDevices() throws Exception {
+        test("MediaDevices");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void svgFontElement() throws Exception {
+        test("SVGFontElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void randomSource() throws Exception {
+        test("RandomSource");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void fMRadio() throws Exception {
+        test("FMRadio");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Blob() { [native code] }",
+            FF31 = "[object Blob]",
+            IE11 = "\nfunction Blob() {\n    [native code]\n}\n")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void blob() throws Exception {
+        test("Blob");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGAnimatedTransformList() { [native code] }",
+            FF31 = "function SVGAnimatedTransformList() {\n    [native code]\n}",
+            IE11 = "[object SVGAnimatedTransformList]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void svgAnimatedTransformList() throws Exception {
+        test("SVGAnimatedTransformList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function OscillatorNode() { [native code] }",
+            FF31 = "function OscillatorNode() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void oscillatorNode() throws Exception {
+        test("OscillatorNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void reflect() throws Exception {
+        test("Reflect");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaStreamTrack() { [native code] }",
+            FF31 = "function MediaStreamTrack() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void mediaStreamTrack() throws Exception {
+        test("MediaStreamTrack");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void directoryEntry() throws Exception {
+        test("DirectoryEntry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void settingsLock() throws Exception {
+        test("SettingsLock");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void entrySync() throws Exception {
+        test("EntrySync");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PerformanceNavigation() { [native code] }",
+            FF31 = "function PerformanceNavigation() {\n    [native code]\n}",
+            IE11 = "[object PerformanceNavigation]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void performanceNavigation() throws Exception {
+        test("PerformanceNavigation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGAnimationElement() { [native code] }",
+            FF31 = "function SVGAnimationElement() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void svgAnimationElement() throws Exception {
+        test("SVGAnimationElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void notifyAudioAvailableEvent() throws Exception {
+        test("NotifyAudioAvailableEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function DelayNode() { [native code] }",
+            FF31 = "function DelayNode() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void delayNode() throws Exception {
+        test("DelayNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void request() throws Exception {
+        test("Request");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void cacheStorage() throws Exception {
+        test("CacheStorage");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void telephonyCall() throws Exception {
+        test("TelephonyCall");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "function escape() { [native code] }",
+            FF = "function escape() {\n    [native code]\n}",
+            IE = "\nfunction escape() {\n    [native code]\n}\n")
+    public void escape() throws Exception {
+        test("escape");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ClipboardEvent() { [native code] }",
+            FF31 = "function ClipboardEvent() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void clipboardEvent() throws Exception {
+        test("ClipboardEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void globalEventHandlers() throws Exception {
+        test("GlobalEventHandlers");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void l10n_ready() throws Exception {
+        test("L10n.ready");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ServiceWorkerContainer() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void serviceWorkerContainer() throws Exception {
+        test("ServiceWorkerContainer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void abstractWorker() throws Exception {
+        test("AbstractWorker");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function MediaStream() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void mediaStream() throws Exception {
+        test("MediaStream");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void windowEventHandlers() throws Exception {
+        test("WindowEventHandlers");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozSmsManager() throws Exception {
+        test("MozSmsManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function AudioBuffer() { [native code] }",
+            FF31 = "function AudioBuffer() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void audioBuffer() throws Exception {
+        test("AudioBuffer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function URL() { [native code] }",
+            FF31 = "function URL() {\n    [native code]\n}",
+            IE11 = "[object URL]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void url() throws Exception {
+        test("URL");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function GamepadButton() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void gamepadButton() throws Exception {
+        test("GamepadButton");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozMobileCFInfo() throws Exception {
+        test("MozMobileCFInfo");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBTransaction() { [native code] }",
+            FF31 = "function IDBTransaction() {\n    [native code]\n}",
+            IE11 = "[object IDBTransaction]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void idbTransaction() throws Exception {
+        test("IDBTransaction");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function HTMLDataElement() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void htmlDataElement() throws Exception {
+        test("HTMLDataElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBCursorWithValue() { [native code] }",
+            FF31 = "function IDBCursorWithValue() {\n    [native code]\n}",
+            IE11 = "[object IDBCursorWithValue]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void idbCursorWithValue() throws Exception {
+        test("IDBCursorWithValue");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozAlarmsManager() throws Exception {
+        test("MozAlarmsManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void windowClient() throws Exception {
+        test("WindowClient");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void svgAnimateColorElement() throws Exception {
+        test("SVGAnimateColorElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void wifiManager() throws Exception {
+        test("WifiManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "[object CSSConditionRule]")
+    @NotYetImplemented(FF31)
+    public void cssConditionRule() throws Exception {
+        test("CSSConditionRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGLengthList() { [native code] }",
+            FF31 = "function SVGLengthList() {\n    [native code]\n}",
+            IE11 = "[object SVGLengthList]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void svgLengthList() throws Exception {
+        test("SVGLengthList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function MouseScrollEvent() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void mouseScrollEvent() throws Exception {
+        test("MouseScrollEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozVoicemailStatus() throws Exception {
+        test("MozVoicemailStatus");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void dedicatedWorkerGlobalScope() throws Exception {
+        test("DedicatedWorkerGlobalScope");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void promiseResolver() throws Exception {
+        test("PromiseResolver");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGGradientElement() { [native code] }",
+            FF31 = "function SVGGradientElement() {\n    [native code]\n}",
+            IE11 = "[object SVGGradientElement]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void svgGradientElement() throws Exception {
+        test("SVGGradientElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void identityManager() throws Exception {
+        test("IdentityManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void l10n_get() throws Exception {
+        test("L10n.get");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGLength() { [native code] }",
+            FF31 = "function SVGLength() {\n    [native code]\n}",
+            IE11 = "[object SVGLength]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void svgLength() throws Exception {
+        test("SVGLength");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function IDBCursor() { [native code] }",
+            FF31 = "function IDBCursor() {\n    [native code]\n}",
+            IE11 = "[object IDBCursor]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void idbCursor() throws Exception {
+        test("IDBCursor");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function Crypto() {\n    [native code]\n}",
+            IE11 = "[object Crypto]")
+    @NotYetImplemented({ FF31, IE11 })
+    public void crypto() throws Exception {
+        test("Crypto");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function BlobEvent() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void blobEvent() throws Exception {
+        test("BlobEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void tcpSocket() throws Exception {
+        test("TCPSocket");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGPoint() { [native code] }",
+            FF31 = "function SVGPoint() {\n    [native code]\n}",
+            IE11 = "[object SVGPoint]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void svgPoint() throws Exception {
+        test("SVGPoint");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "[object CSS]",
+            FF31 = "function CSS() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void css() throws Exception {
+        test("CSS");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function UserProximityEvent() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void userProximityEvent() throws Exception {
+        test("UserProximityEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void fileSystem() throws Exception {
+        test("FileSystem");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void idbCursorSync() throws Exception {
+        test("IDBCursorSync");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "function DataTransfer() { [native code] }",
+            FF31 = "function DataTransfer() {\n    [native code]\n}",
+            IE = "[object DataTransfer]")
+    @NotYetImplemented
+    public void dataTransfer() throws Exception {
+        test("DataTransfer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void childNode() throws Exception {
+        test("ChildNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "function TypeError() { [native code] }",
+            FF = "function TypeError() {\n    [native code]\n}",
+            IE11 = "\nfunction TypeError() {\n    [native code]\n}\n",
+            IE8 = "TypeError")
+    @NotYetImplemented(IE8)
+    public void typeError() throws Exception {
+        test("TypeError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void dataStoreCursor() throws Exception {
+        test("DataStoreCursor");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozTimeManager() throws Exception {
+        test("MozTimeManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Symbol() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void symbol() throws Exception {
+        test("Symbol");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void svgGlyphElement() throws Exception {
+        test("SVGGlyphElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void domString() throws Exception {
+        test("DOMString");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ServiceWorker() { [native code] }")
+    @NotYetImplemented(CHROME)
+    public void serviceWorker() throws Exception {
+        test("ServiceWorker");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozActivityRequestHandler() throws Exception {
+        test("MozActivityRequestHandler");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ImageData() { [native code] }",
+            FF31 = "function ImageData() {\n    [native code]\n}",
+            IE11 = "[object ImageData]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void imageData() throws Exception {
+        test("ImageData");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void l10n_once() throws Exception {
+        test("L10n.once");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Gamepad() { [native code] }",
+            FF31 = "function Gamepad() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void gamepad() throws Exception {
+        test("Gamepad");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void connection() throws Exception {
+        test("Connection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozNDEFRecord() throws Exception {
+        test("MozNDEFRecord");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "function encodeURIComponent() { [native code] }",
+            FF = "function encodeURIComponent() {\n    [native code]\n}",
+            IE = "\nfunction encodeURIComponent() {\n    [native code]\n}\n")
+    public void encodeURIComponent() throws Exception {
+        test("encodeURIComponent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function Proxy() {\n    [native code]\n}")
+    @NotYetImplemented(FF31)
+    public void proxy() throws Exception {
+        test("Proxy");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void navigatorLanguage() throws Exception {
+        test("NavigatorLanguage");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ChannelSplitterNode() { [native code] }",
+            FF31 = "function ChannelSplitterNode() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void channelSplitterNode() throws Exception {
+        test("ChannelSplitterNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PopStateEvent() { [native code] }",
+            FF31 = "function PopStateEvent() {\n    [native code]\n}",
+            IE11 = "[object PopStateEvent]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void popStateEvent() throws Exception {
+        test("PopStateEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void localFileSystemSync() throws Exception {
+        test("LocalFileSystemSync");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function FileList() { [native code] }",
+            FF31 = "function FileList() {\n    [native code]\n}",
+            IE11 = "[object FileList]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void fileList() throws Exception {
+        test("FileList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "function unescape() { [native code] }",
+            FF = "function unescape() {\n    [native code]\n}",
+            IE = "\nfunction unescape() {\n    [native code]\n}\n")
+    public void unescape() throws Exception {
+        test("unescape");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void windowTimers() throws Exception {
+        test("WindowTimers");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function File() { [native code] }",
+            FF31 = "[object File]",
+            IE11 = "[object File]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void file() throws Exception {
+        test("File");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "[object MozSmsMessage]")
+    @NotYetImplemented(FF31)
+    public void mozSmsMessage() throws Exception {
+        test("MozSmsMessage");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function CanvasPattern() { [native code] }",
+            FF31 = "function CanvasPattern() {\n    [native code]\n}",
+            IE11 = "[object CanvasPattern]")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void canvasPattern() throws Exception {
+        test("CanvasPattern");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void domObject() throws Exception {
+        test("DOMObject");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ScriptProcessorNode() { [native code] }",
+            FF31 = "function ScriptProcessorNode() {\n    [native code]\n}")
+    @NotYetImplemented({ FF31, CHROME })
+    public void scriptProcessorNode() throws Exception {
+        test("ScriptProcessorNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void mozMobileConnectionInfo() throws Exception {
+        test("MozMobileConnectionInfo");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void permissionSettings() throws Exception {
+        test("PermissionSettings");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function DragEvent() {\n    [native code]\n}",
+            IE11 = "[object DragEvent]")
+    @NotYetImplemented({ FF31, IE11 })
+    public void dragEvent() throws Exception {
+        test("DragEvent");
     }
 }
