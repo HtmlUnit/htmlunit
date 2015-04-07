@@ -8061,7 +8061,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE8 = "false")
+            IE = "false")
     public void _Promise_Promise() throws Exception {
         test("Promise", "Promise");
     }
@@ -8071,7 +8071,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE8 = "false")
+            IE = "false")
     public void _SharedWorker_SharedWorker() throws Exception {
         test("SharedWorker", "SharedWorker");
     }
