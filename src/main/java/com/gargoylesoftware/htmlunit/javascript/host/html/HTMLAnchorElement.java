@@ -696,7 +696,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter
     public String getType() {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        return getDomNodeOrDie().getAttribute("type");
     }
 
     /**
@@ -705,7 +705,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxSetter
     public void setType(final String type) {
-        throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+        getDomNodeOrDie().setAttribute("type", type);
     }
 
     /**

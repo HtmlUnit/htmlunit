@@ -563,7 +563,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             IE8 = { "§§URL§§second/", "object", "exception" },
             CHROME = { "§§URL§§second/", "object", "function HTMLAnchorElement() { [native code] }" },
             FF = { "§§URL§§second/", "object", "function HTMLAnchorElement() {\n    [native code]\n}" })
-    public void type() throws Exception {
+    public void typeof() throws Exception {
         final String html = ""
             + "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -578,6 +578,80 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <a id='link' href='" + URL_SECOND + "'>link</a>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "", "", "text/html", "TExT/hTMl", " text/html ", "application/pdf", "unknown" })
+    public void getType() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alertType('idWithout');\n"
+            + "    alertType('idEmpty');\n"
+            + "    alertType('idText');\n"
+            + "    alertType('idCase');\n"
+            + "    alertType('idWhitespace');\n"
+            + "    alertType('idPdf');\n"
+            + "    alertType('idUnknown');\n"
+            + "  }\n"
+            + "  function alertType(id) {\n"
+            + "    var anchor = document.getElementById(id);\n"
+            + "    alert(anchor.type);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <a id='idWithout' href='" + URL_SECOND + "'>link</a>\n"
+            + "  <a id='idEmpty' href='" + URL_SECOND + "' type=''>link</a>\n"
+            + "  <a id='idText' href='" + URL_SECOND + "' type='text/html'>link</a>\n"
+            + "  <a id='idCase' href='" + URL_SECOND + "' type='TExT/hTMl'>link</a>\n"
+            + "  <a id='idWhitespace' href='" + URL_SECOND + "' type=' text/html '>link</a>\n"
+            + "  <a id='idPdf' href='" + URL_SECOND + "' type='application/pdf'>link</a>\n"
+            + "  <a id='idUnknown' href='" + URL_SECOND + "' type='unknown'>link</a>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "text/html", "", " TExT/hTMl  ", "unknown", "application/pdf" })
+    public void setType() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var anchor = document.getElementById('id');\n"
+            + "    alert(anchor.type);\n"
+
+            + "    anchor.type = '';\n"
+            + "    alert(anchor.type);\n"
+
+            + "    anchor.type = ' TExT/hTMl  ';\n"
+            + "    alert(anchor.type);\n"
+
+            + "    anchor.type = 'unknown';\n"
+            + "    alert(anchor.type);\n"
+
+            + "    anchor.type = 'application/pdf';\n"
+            + "    alert(anchor.type);\n"
+
+            + "  }\n"
+            + "  function alertType(id) {\n"
+            + "    var anchor = document.getElementById(id);\n"
+            + "    alert(anchor.type);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <a id='id' href='" + URL_SECOND + "' type='text/html'>link</a>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
@@ -675,5 +749,4 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     public void origin() throws Exception {
         attribute("origin", "something");
     }
-
 }
