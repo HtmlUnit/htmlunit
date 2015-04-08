@@ -4529,6 +4529,17 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function SVGAnimationElement() { [native code] }",
+            FF = "function SVGAnimationElement() {\n    [native code]\n}")
+    public void svgAnimationElement() throws Exception {
+        test("SVGAnimationElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
             CHROME = "function PerformanceTiming() { [native code] }",
             FF31 = "function PerformanceTiming() {\n    [native code]\n}",
             IE11 = "[object PerformanceTiming]")

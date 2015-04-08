@@ -87,9 +87,9 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  *   "ff31", "ie8", "ie11", "chrome", which will be used to driver real browsers,
  *   note that you can't define more than one IE as there is no standard way
  *   to have multiple IEs on the same machine</li>
- *   <li>ie.bin (optional if exist in the <i>path</i>): is the location of the IEDriverServer binary (see
+ *   <li>ie.bin (mandatory if it does not exist in the <i>path</i>): is the location of the IEDriverServer binary (see
  *   <a href="http://selenium-release.storage.googleapis.com/index.html">IEDriverServer downloads</a></li>
- *   <li>ff31.bin (optional): is the location of the FF24 binary, in Windows use double back-slashes</li>
+ *   <li>ff31.bin (optional): is the location of the FF31 binary, in Windows use double back-slashes</li>
  *   <li>chrome.bin: is the location of the ChromeDriver binary (see
  *   <a href="http://chromedriver.storage.googleapis.com/index.html">Chrome Driver downloads</a></li>
  * </ul>

@@ -7444,4 +7444,244 @@ public class HostParentOfTest extends WebDriverTestCase {
     public void _SVGGradientElement_SVGRadialGradientElement() throws Exception {
         test("SVGGradientElement", "SVGRadialGradientElement");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+    		IE8 = "false")
+    public void _SVGAnimatedAngle_SVGAnimatedAngle() throws Exception {
+        test("SVGAnimatedAngle", "SVGAnimatedAngle");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+    		IE8 = "false")
+    public void _SVGAnimatedBoolean_SVGAnimatedBoolean() throws Exception {
+        test("SVGAnimatedBoolean", "SVGAnimatedBoolean");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+    		IE8 = "false")
+    public void _SVGAnimatedEnumeration_SVGAnimatedEnumeration() throws Exception {
+        test("SVGAnimatedEnumeration", "SVGAnimatedEnumeration");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+    		IE8 = "false")
+    public void _SVGAnimatedInteger_SVGAnimatedInteger() throws Exception {
+        test("SVGAnimatedInteger", "SVGAnimatedInteger");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+    		IE8 = "false")
+    public void _SVGAnimatedLengthList_SVGAnimatedLengthList() throws Exception {
+        test("SVGAnimatedLengthList", "SVGAnimatedLengthList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+    		IE8 = "false")
+    public void _SVGAnimatedLength_SVGAnimatedLength() throws Exception {
+        test("SVGAnimatedLength", "SVGAnimatedLength");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+    		IE8 = "false")
+    public void _SVGAnimatedNumberList_SVGAnimatedNumberList() throws Exception {
+        test("SVGAnimatedNumberList", "SVGAnimatedNumberList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+    		IE8 = "false")
+    public void _SVGAnimatedNumber_SVGAnimatedNumber() throws Exception {
+        test("SVGAnimatedNumber", "SVGAnimatedNumber");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+    		IE8 = "false")
+    public void _SVGAnimatedPreserveAspectRatio_SVGAnimatedPreserveAspectRatio() throws Exception {
+        test("SVGAnimatedPreserveAspectRatio", "SVGAnimatedPreserveAspectRatio");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+    		IE8 = "false")
+    public void _SVGAnimatedRect_SVGAnimatedRect() throws Exception {
+        test("SVGAnimatedRect", "SVGAnimatedRect");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+    		IE8 = "false")
+    public void _SVGAnimatedString_SVGAnimatedString() throws Exception {
+        test("SVGAnimatedString", "SVGAnimatedString");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+    		IE8 = "false")
+    public void _SVGAnimatedTransformList_SVGAnimatedTransformList() throws Exception {
+        test("SVGAnimatedTransformList", "SVGAnimatedTransformList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+    		IE8 = "false")
+    public void _SVGAnimationElement_SVGAnimationElement() throws Exception {
+        test("SVGAnimationElement", "SVGAnimationElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+    		IE8 = "false")
+    public void _SVGLengthList_SVGLengthList() throws Exception {
+        test("SVGLengthList", "SVGLengthList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+    		IE8 = "false")
+    public void _SVGLength_SVGLength() throws Exception {
+        test("SVGLength", "SVGLength");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+    		IE8 = "false")
+    public void _SVGNumberList_SVGNumberList() throws Exception {
+        test("SVGNumberList", "SVGNumberList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+    		IE8 = "false")
+    public void _SVGNumber_SVGNumber() throws Exception {
+        test("SVGNumber", "SVGNumber");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+    		IE8 = "false")
+    public void _SVGPoint_SVGPoint() throws Exception {
+        test("SVGPoint", "SVGPoint");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+    		IE8 = "false")
+    public void _SVGPreserveAspectRatio_SVGPreserveAspectRatio() throws Exception {
+        test("SVGPreserveAspectRatio", "SVGPreserveAspectRatio");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+    		IE8 = "false")
+    public void _SVGStringList_SVGStringList() throws Exception {
+        test("SVGStringList", "SVGStringList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+    		IE8 = "false")
+    public void _SVGTextPositioningElement_SVGTextPositioningElement() throws Exception {
+        test("SVGTextPositioningElement", "SVGTextPositioningElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+    		IE8 = "false")
+    public void _SVGTransformList_SVGTransformList() throws Exception {
+        test("SVGTransformList", "SVGTransformList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+    		IE8 = "false")
+    public void _SVGTransform_SVGTransform() throws Exception {
+        test("SVGTransform", "SVGTransform");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+    		FF = "true")
+    public void _SVGDocument_SVGDocument() throws Exception {
+        test("SVGDocument", "SVGDocument");
+    }
 }
