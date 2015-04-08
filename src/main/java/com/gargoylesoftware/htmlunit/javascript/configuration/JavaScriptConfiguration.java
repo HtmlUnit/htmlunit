@@ -406,7 +406,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         SVGFEPointLightElement.class, SVGFESpecularLightingElement.class, SVGFESpotLightElement.class,
         SVGFETileElement.class, SVGFETurbulenceElement.class, SVGFilterElement.class, SVGForeignObjectElement.class,
         SVGGElement.class, SVGGradientElement.class,
-        SVGImageElement.class, SVGLength.class, SVGLengthList.class, SVGLineElement.class,    
+        SVGImageElement.class, SVGLength.class, SVGLengthList.class, SVGLineElement.class,
         SVGLinearGradientElement.class, SVGMarkerElement.class, SVGMaskElement.class, SVGMatrix.class,
         SVGMetadataElement.class, SVGNumber.class, SVGNumberList.class,
         SVGMPathElement.class, SVGPathElement.class, SVGPatternElement.class,
