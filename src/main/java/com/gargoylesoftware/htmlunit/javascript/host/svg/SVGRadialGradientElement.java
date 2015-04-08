@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgRadialGradient;
  */
 @JsxClass(domClass = SvgRadialGradient.class,
     browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
-public class SVGRadialGradientElement extends SVGElement {
+public class SVGRadialGradientElement extends SVGGradientElement {
 
     /**
      * Creates an instance.

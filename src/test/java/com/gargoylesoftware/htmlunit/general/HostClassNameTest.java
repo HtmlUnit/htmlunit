@@ -3668,7 +3668,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF = "function SVGDocument() {\n    [native code]\n}")
-    @NotYetImplemented(FF)
     public void svgDocument() throws Exception {
         test("SVGDocument");
     }
@@ -3872,7 +3871,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function SVGAnimatedLengthList() { [native code] }",
             FF31 = "function SVGAnimatedLengthList() {\n    [native code]\n}",
             IE11 = "[object SVGAnimatedLengthList]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgAnimatedLengthList() throws Exception {
         test("SVGAnimatedLengthList");
     }
@@ -3907,7 +3905,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function SVGAnimatedNumber() { [native code] }",
             FF31 = "function SVGAnimatedNumber() {\n    [native code]\n}",
             IE11 = "[object SVGAnimatedNumber]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgAnimatedNumber() throws Exception {
         test("SVGAnimatedNumber");
     }
@@ -3933,7 +3930,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function SVGTextPositioningElement() { [native code] }",
             FF31 = "function SVGTextPositioningElement() {\n    [native code]\n}",
             IE11 = "[object SVGTextPositioningElement]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgTextPositioningElement() throws Exception {
         test("SVGTextPositioningElement");
     }
@@ -3994,7 +3990,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function SVGAnimatedRect() { [native code] }",
             FF31 = "function SVGAnimatedRect() {\n    [native code]\n}",
             IE11 = "[object SVGAnimatedRect]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgAnimatedRect() throws Exception {
         test("SVGAnimatedRect");
     }
@@ -4020,7 +4015,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function SVGAnimatedString() { [native code] }",
             FF31 = "function SVGAnimatedString() {\n    [native code]\n}",
             IE11 = "[object SVGAnimatedString]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgAnimatedString() throws Exception {
         test("SVGAnimatedString");
     }
@@ -4046,7 +4040,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function SVGAnimatedEnumeration() { [native code] }",
             FF31 = "function SVGAnimatedEnumeration() {\n    [native code]\n}",
             IE11 = "[object SVGAnimatedEnumeration]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgAnimatedEnumeration() throws Exception {
         test("SVGAnimatedEnumeration");
     }
@@ -4120,7 +4113,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function SVGAnimatedNumberList() { [native code] }",
             FF31 = "function SVGAnimatedNumberList() {\n    [native code]\n}",
             IE11 = "[object SVGAnimatedNumberList]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgAnimatedNumberList() throws Exception {
         test("SVGAnimatedNumberList");
     }
@@ -4157,7 +4149,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function SVGNumberList() { [native code] }",
             FF31 = "function SVGNumberList() {\n    [native code]\n}",
             IE11 = "[object SVGNumberList]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgNumberList() throws Exception {
         test("SVGNumberList");
     }
@@ -4208,7 +4199,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function SVGAnimatedBoolean() { [native code] }",
             FF31 = "function SVGAnimatedBoolean() {\n    [native code]\n}",
             IE11 = "[object SVGAnimatedBoolean]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgAnimatedBoolean() throws Exception {
         test("SVGAnimatedBoolean");
     }
@@ -4221,7 +4211,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function SVGAnimatedPreserveAspectRatio() { [native code] }",
             FF31 = "function SVGAnimatedPreserveAspectRatio() {\n    [native code]\n}",
             IE11 = "[object SVGAnimatedPreserveAspectRatio]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgAnimatedPreserveAspectRatio() throws Exception {
         test("SVGAnimatedPreserveAspectRatio");
     }
@@ -4306,7 +4295,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function SVGPreserveAspectRatio() { [native code] }",
             FF31 = "function SVGPreserveAspectRatio() {\n    [native code]\n}",
             IE11 = "[object SVGPreserveAspectRatio]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgPreserveAspectRatio() throws Exception {
         test("SVGPreserveAspectRatio");
     }
@@ -4332,7 +4320,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function SVGNumber() { [native code] }",
             FF31 = "[object SVGNumber]",
             IE11 = "[object SVGNumber]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgNumber() throws Exception {
         test("SVGNumber");
     }
@@ -4421,7 +4408,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function SVGAnimatedLength() { [native code] }",
             FF31 = "function SVGAnimatedLength() {\n    [native code]\n}",
             IE11 = "[object SVGAnimatedLength]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgAnimatedLength() throws Exception {
         test("SVGAnimatedLength");
     }
@@ -4459,7 +4445,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function SVGStringList() { [native code] }",
             FF31 = "function SVGStringList() {\n    [native code]\n}",
             IE11 = "[object SVGStringList]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgStringList() throws Exception {
         test("SVGStringList");
     }
@@ -4485,7 +4470,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function SVGAnimatedInteger() { [native code] }",
             FF31 = "function SVGAnimatedInteger() {\n    [native code]\n}",
             IE11 = "[object SVGAnimatedInteger]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgAnimatedInteger() throws Exception {
         test("SVGAnimatedInteger");
     }
@@ -4498,7 +4482,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function WebGLRenderingContext() { [native code] }",
             FF31 = "function WebGLRenderingContext() {\n    [native code]\n}",
             IE11 = "[object WebGLRenderingContext]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void webGLRenderingContext() throws Exception {
         test("WebGLRenderingContext");
     }
@@ -4524,7 +4507,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function SVGAnimatedTransformList() { [native code] }",
             FF31 = "function SVGAnimatedTransformList() {\n    [native code]\n}",
             IE11 = "[object SVGAnimatedTransformList]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgAnimatedTransformList() throws Exception {
         test("SVGAnimatedTransformList");
     }
@@ -4686,7 +4668,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function SVGLengthList() { [native code] }",
             FF31 = "function SVGLengthList() {\n    [native code]\n}",
             IE11 = "[object SVGLengthList]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgLengthList() throws Exception {
         test("SVGLengthList");
     }
@@ -4699,7 +4680,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function SVGGradientElement() { [native code] }",
             FF31 = "function SVGGradientElement() {\n    [native code]\n}",
             IE11 = "[object SVGGradientElement]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgGradientElement() throws Exception {
         test("SVGGradientElement");
     }
@@ -4712,7 +4692,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function SVGLength() { [native code] }",
             FF31 = "function SVGLength() {\n    [native code]\n}",
             IE11 = "[object SVGLength]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgLength() throws Exception {
         test("SVGLength");
     }
@@ -4787,7 +4766,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function SVGPoint() { [native code] }",
             FF31 = "function SVGPoint() {\n    [native code]\n}",
             IE11 = "[object SVGPoint]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgPoint() throws Exception {
         test("SVGPoint");
     }
@@ -4825,7 +4803,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function SVGTransformList() { [native code] }",
             FF31 = "function SVGTransformList() {\n    [native code]\n}",
             IE11 = "[object SVGTransformList]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgTransformList() throws Exception {
         test("SVGTransformList");
     }
@@ -4877,7 +4854,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function SVGAnimatedAngle() { [native code] }",
             FF31 = "function SVGAnimatedAngle() {\n    [native code]\n}",
             IE11 = "[object SVGAnimatedAngle]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgAnimatedAngle() throws Exception {
         test("SVGAnimatedAngle");
     }
@@ -4986,7 +4962,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function SVGTransform() { [native code] }",
             FF31 = "function SVGTransform() {\n    [native code]\n}",
             IE11 = "[object SVGTransform]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgTransform() throws Exception {
         test("SVGTransform");
     }

@@ -18,25 +18,24 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.svg.SvgLinearGradient;
 
 /**
- * A JavaScript object for SVGLinearGradientElement.
+ * A JavaScript object for SVGAnimatedLength.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = SvgLinearGradient.class,
-    browsers = { @WebBrowser(value = IE, minVersion = 11), @WebBrowser(FF), @WebBrowser(CHROME) })
-public class SVGLinearGradientElement extends SVGGradientElement {
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+public class SVGAnimatedLength extends SimpleScriptable {
 
     /**
      * Creates an instance.
      */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
-    public SVGLinearGradientElement() {
+    public SVGAnimatedLength() {
     }
 }

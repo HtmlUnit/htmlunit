@@ -171,24 +171,6 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _ArrayBufferView_ArrayBufferView() throws Exception {
-        test("ArrayBufferView", "ArrayBufferView");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _ArrayBufferViewBase_ArrayBufferViewBase() throws Exception {
-        test("ArrayBufferViewBase", "ArrayBufferViewBase");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _Attr_Attr() throws Exception {
         test("Attr", "Attr");
@@ -229,28 +211,10 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _BoxObject_BoxObject() throws Exception {
-        test("BoxObject", "BoxObject");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE8 = "false")
     public void _CDATASection_CDATASection() throws Exception {
         test("CDATASection", "CDATASection");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _ClipboardData_ClipboardData() throws Exception {
-        test("ClipboardData", "ClipboardData");
     }
 
     /**
@@ -383,15 +347,6 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _CharacterDataImpl_CharacterDataImpl() throws Exception {
-        test("CharacterDataImpl", "CharacterDataImpl");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             FF = "false",
             IE8 = "false")
@@ -407,15 +362,6 @@ public class HostParentOfTest extends WebDriverTestCase {
             IE8 = "false")
     public void _Comment_Comment() throws Exception {
         test("Comment", "Comment");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _ComputedCSSStyleDeclaration_ComputedCSSStyleDeclaration() throws Exception {
-        test("ComputedCSSStyleDeclaration", "ComputedCSSStyleDeclaration");
     }
 
     /**
@@ -560,15 +506,6 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _EventNode_EventNode() throws Exception {
-        test("EventNode", "EventNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "false",
             FF = "true")
     public void _External_External() throws Exception {
@@ -593,24 +530,6 @@ public class HostParentOfTest extends WebDriverTestCase {
             IE8 = "false")
     public void _Float64Array_Float64Array() throws Exception {
         test("Float64Array", "Float64Array");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _FormChild_FormChild() throws Exception {
-        test("FormChild", "FormChild");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _FormField_FormField() throws Exception {
-        test("FormField", "FormField");
     }
 
     /**
@@ -1016,15 +935,6 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _HTMLInlineQuotationElement_HTMLInlineQuotationElement() throws Exception {
-        test("HTMLInlineQuotationElement", "HTMLInlineQuotationElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _HTMLInputElement_HTMLInputElement() throws Exception {
         test("HTMLInputElement", "HTMLInputElement");
@@ -1084,15 +994,6 @@ public class HostParentOfTest extends WebDriverTestCase {
     @Alerts("true")
     public void _HTMLLinkElement_HTMLLinkElement() throws Exception {
         test("HTMLLinkElement", "HTMLLinkElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _HTMLListElement_HTMLListElement() throws Exception {
-        test("HTMLListElement", "HTMLListElement");
     }
 
     /**
@@ -1375,15 +1276,6 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _HTMLTableComponent_HTMLTableComponent() throws Exception {
-        test("HTMLTableComponent", "HTMLTableComponent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "false",
             IE11 = "true")
     public void _HTMLTableDataCellElement_HTMLTableDataCellElement() throws Exception {
@@ -1638,24 +1530,6 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _Namespace_Namespace() throws Exception {
-        test("Namespace", "Namespace");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _NamespaceCollection_NamespaceCollection() throws Exception {
-        test("NamespaceCollection", "NamespaceCollection");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _Navigator_Navigator() throws Exception {
         test("Navigator", "Navigator");
@@ -1744,15 +1618,6 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _Popup_Popup() throws Exception {
-        test("Popup", "Popup");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "false",
             IE11 = "true")
     public void _Position_Position() throws Exception {
@@ -1777,15 +1642,6 @@ public class HostParentOfTest extends WebDriverTestCase {
             IE8 = "false")
     public void _Range_Range() throws Exception {
         test("Range", "Range");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _RowContainer_RowContainer() throws Exception {
-        test("RowContainer", "RowContainer");
     }
 
     /**
@@ -2490,15 +2346,6 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _SimpleArray_SimpleArray() throws Exception {
-        test("SimpleArray", "SimpleArray");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "false",
             IE8 = "true")
     @NotYetImplemented({ CHROME, FF, IE11 })
@@ -2695,195 +2542,6 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _XSLTemplate_XSLTemplate() throws Exception {
-        test("XSLTemplate", "XSLTemplate");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _ArrayBufferView_ArrayBufferViewBase() throws Exception {
-        test("ArrayBufferView", "ArrayBufferViewBase");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _ArrayBufferView_DataView() throws Exception {
-        test("ArrayBufferView", "DataView");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _ArrayBufferView_Float32Array() throws Exception {
-        test("ArrayBufferView", "Float32Array");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _ArrayBufferView_Float64Array() throws Exception {
-        test("ArrayBufferView", "Float64Array");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _ArrayBufferView_Int16Array() throws Exception {
-        test("ArrayBufferView", "Int16Array");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _ArrayBufferView_Int32Array() throws Exception {
-        test("ArrayBufferView", "Int32Array");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _ArrayBufferView_Int8Array() throws Exception {
-        test("ArrayBufferView", "Int8Array");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _ArrayBufferView_Uint16Array() throws Exception {
-        test("ArrayBufferView", "Uint16Array");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _ArrayBufferView_Uint32Array() throws Exception {
-        test("ArrayBufferView", "Uint32Array");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _ArrayBufferView_Uint8Array() throws Exception {
-        test("ArrayBufferView", "Uint8Array");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _ArrayBufferView_Uint8ClampedArray() throws Exception {
-        test("ArrayBufferView", "Uint8ClampedArray");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _ArrayBufferViewBase_Float32Array() throws Exception {
-        test("ArrayBufferViewBase", "Float32Array");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _ArrayBufferViewBase_Float64Array() throws Exception {
-        test("ArrayBufferViewBase", "Float64Array");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _ArrayBufferViewBase_Int16Array() throws Exception {
-        test("ArrayBufferViewBase", "Int16Array");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _ArrayBufferViewBase_Int32Array() throws Exception {
-        test("ArrayBufferViewBase", "Int32Array");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _ArrayBufferViewBase_Int8Array() throws Exception {
-        test("ArrayBufferViewBase", "Int8Array");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _ArrayBufferViewBase_Uint16Array() throws Exception {
-        test("ArrayBufferViewBase", "Uint16Array");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _ArrayBufferViewBase_Uint32Array() throws Exception {
-        test("ArrayBufferViewBase", "Uint32Array");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _ArrayBufferViewBase_Uint8Array() throws Exception {
-        test("ArrayBufferViewBase", "Uint8Array");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _ArrayBufferViewBase_Uint8ClampedArray() throws Exception {
-        test("ArrayBufferViewBase", "Uint8ClampedArray");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "false",
             FF = "true")
     public void _CSSRule_CSSCharsetRule() throws Exception {
@@ -2944,73 +2602,10 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _CSSStyleDeclaration_ComputedCSSStyleDeclaration() throws Exception {
-        test("CSSStyleDeclaration", "ComputedCSSStyleDeclaration");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "false",
             FF = "true")
     public void _CSSValue_CSSPrimitiveValue() throws Exception {
         test("CSSValue", "CSSPrimitiveValue");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _CharacterDataImpl_CDATASection() throws Exception {
-        test("CharacterDataImpl", "CDATASection");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _CharacterDataImpl_Comment() throws Exception {
-        test("CharacterDataImpl", "Comment");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _CharacterDataImpl_HTMLCommentElement() throws Exception {
-        test("CharacterDataImpl", "HTMLCommentElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _CharacterDataImpl_Text() throws Exception {
-        test("CharacterDataImpl", "Text");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _Comment_HTMLCommentElement() throws Exception {
-        test("Comment", "HTMLCommentElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _ComputedCSSStyleDeclaration_CSS2Properties() throws Exception {
-        test("ComputedCSSStyleDeclaration", "CSS2Properties");
     }
 
     /**
@@ -3357,15 +2952,6 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _Element_HTMLInlineQuotationElement() throws Exception {
-        test("Element", "HTMLInlineQuotationElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _Element_HTMLInputElement() throws Exception {
         test("Element", "HTMLInputElement");
@@ -3425,15 +3011,6 @@ public class HostParentOfTest extends WebDriverTestCase {
     @Alerts("true")
     public void _Element_HTMLLinkElement() throws Exception {
         test("Element", "HTMLLinkElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _Element_HTMLListElement() throws Exception {
-        test("Element", "HTMLListElement");
     }
 
     /**
@@ -3706,15 +3283,6 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _Element_HTMLTableComponent() throws Exception {
-        test("Element", "HTMLTableComponent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "false",
             IE11 = "true")
     public void _Element_HTMLTableDataCellElement() throws Exception {
@@ -3851,15 +3419,6 @@ public class HostParentOfTest extends WebDriverTestCase {
     @Alerts("true")
     public void _Element_Option() throws Exception {
         test("Element", "Option");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _Element_RowContainer() throws Exception {
-        test("Element", "RowContainer");
     }
 
     /**
@@ -4937,15 +4496,6 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _HTMLElement_HTMLInlineQuotationElement() throws Exception {
-        test("HTMLElement", "HTMLInlineQuotationElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE8 = "false")
     public void _HTMLElement_HTMLInputElement() throws Exception {
@@ -5010,15 +4560,6 @@ public class HostParentOfTest extends WebDriverTestCase {
             IE8 = "false")
     public void _HTMLElement_HTMLLinkElement() throws Exception {
         test("HTMLElement", "HTMLLinkElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _HTMLElement_HTMLListElement() throws Exception {
-        test("HTMLElement", "HTMLListElement");
     }
 
     /**
@@ -5100,15 +4641,6 @@ public class HostParentOfTest extends WebDriverTestCase {
             IE8 = "false")
     public void _HTMLElement_HTMLModElement() throws Exception {
         test("HTMLElement", "HTMLModElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _HTMLElement_HTMLNoShowElement() throws Exception {
-        test("HTMLElement", "HTMLNoShowElement");
     }
 
     /**
@@ -5305,15 +4837,6 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _HTMLElement_HTMLTableComponent() throws Exception {
-        test("HTMLElement", "HTMLTableComponent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "false",
             IE11 = "true")
     public void _HTMLElement_HTMLTableDataCellElement() throws Exception {
@@ -5358,15 +4881,6 @@ public class HostParentOfTest extends WebDriverTestCase {
             IE8 = "false")
     public void _HTMLElement_HTMLTableSectionElement() throws Exception {
         test("HTMLElement", "HTMLTableSectionElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _HTMLElement_HTMLTextElement() throws Exception {
-        test("HTMLElement", "HTMLTextElement");
     }
 
     /**
@@ -5463,60 +4977,6 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _HTMLElement_RowContainer() throws Exception {
-        test("HTMLElement", "RowContainer");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _HTMLListElement_HTMLDListElement() throws Exception {
-        test("HTMLListElement", "HTMLDListElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _HTMLListElement_HTMLDirectoryElement() throws Exception {
-        test("HTMLListElement", "HTMLDirectoryElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _HTMLListElement_HTMLMenuElement() throws Exception {
-        test("HTMLListElement", "HTMLMenuElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _HTMLListElement_HTMLOListElement() throws Exception {
-        test("HTMLListElement", "HTMLOListElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _HTMLListElement_HTMLUListElement() throws Exception {
-        test("HTMLListElement", "HTMLUListElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE8 = "false")
     public void _HTMLMediaElement_HTMLAudioElement() throws Exception {
@@ -5557,51 +5017,6 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _HTMLTableComponent_HTMLTableCellElement() throws Exception {
-        test("HTMLTableComponent", "HTMLTableCellElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _HTMLTableComponent_HTMLTableColElement() throws Exception {
-        test("HTMLTableComponent", "HTMLTableColElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _HTMLTableComponent_HTMLTableDataCellElement() throws Exception {
-        test("HTMLTableComponent", "HTMLTableDataCellElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _HTMLTableComponent_HTMLTableHeaderCellElement() throws Exception {
-        test("HTMLTableComponent", "HTMLTableHeaderCellElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _HTMLTableComponent_HTMLTableRowElement() throws Exception {
-        test("HTMLTableComponent", "HTMLTableRowElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "false",
             IE11 = "true")
     public void _MouseEvent_PointerEvent() throws Exception {
@@ -5626,15 +5041,6 @@ public class HostParentOfTest extends WebDriverTestCase {
             IE8 = "false")
     public void _Node_CDATASection() throws Exception {
         test("Node", "CDATASection");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _Node_CharacterDataImpl() throws Exception {
-        test("Node", "CharacterDataImpl");
     }
 
     /**
@@ -5685,15 +5091,6 @@ public class HostParentOfTest extends WebDriverTestCase {
             IE8 = "false")
     public void _Node_Element() throws Exception {
         test("Node", "Element");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _Node_FormField() throws Exception {
-        test("Node", "FormField");
     }
 
     /**
@@ -5824,15 +5221,6 @@ public class HostParentOfTest extends WebDriverTestCase {
             IE8 = "false")
     public void _Node_HTMLCanvasElement() throws Exception {
         test("Node", "HTMLCanvasElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _Node_HTMLCommentElement() throws Exception {
-        test("Node", "HTMLCommentElement");
     }
 
     /**
@@ -6059,15 +5447,6 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _Node_HTMLInlineQuotationElement() throws Exception {
-        test("Node", "HTMLInlineQuotationElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE8 = "false")
     public void _Node_HTMLInputElement() throws Exception {
@@ -6132,15 +5511,6 @@ public class HostParentOfTest extends WebDriverTestCase {
             IE8 = "false")
     public void _Node_HTMLLinkElement() throws Exception {
         test("Node", "HTMLLinkElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _Node_HTMLListElement() throws Exception {
-        test("Node", "HTMLListElement");
     }
 
     /**
@@ -6222,15 +5592,6 @@ public class HostParentOfTest extends WebDriverTestCase {
             IE8 = "false")
     public void _Node_HTMLModElement() throws Exception {
         test("Node", "HTMLModElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _Node_HTMLNoShowElement() throws Exception {
-        test("Node", "HTMLNoShowElement");
     }
 
     /**
@@ -6427,15 +5788,6 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _Node_HTMLTableComponent() throws Exception {
-        test("Node", "HTMLTableComponent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "false",
             IE11 = "true")
     public void _Node_HTMLTableDataCellElement() throws Exception {
@@ -6480,15 +5832,6 @@ public class HostParentOfTest extends WebDriverTestCase {
             IE8 = "false")
     public void _Node_HTMLTableSectionElement() throws Exception {
         test("Node", "HTMLTableSectionElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _Node_HTMLTextElement() throws Exception {
-        test("Node", "HTMLTextElement");
     }
 
     /**
@@ -6589,15 +5932,6 @@ public class HostParentOfTest extends WebDriverTestCase {
             IE8 = "false")
     public void _Node_ProcessingInstruction() throws Exception {
         test("Node", "ProcessingInstruction");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _Node_RowContainer() throws Exception {
-        test("Node", "RowContainer");
     }
 
     /**
@@ -7294,24 +6628,6 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _RowContainer_HTMLTableElement() throws Exception {
-        test("RowContainer", "HTMLTableElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _RowContainer_HTMLTableSectionElement() throws Exception {
-        test("RowContainer", "HTMLTableSectionElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE8 = "false")
     public void _SVGElement_SVGAElement() throws Exception {
@@ -7952,33 +7268,6 @@ public class HostParentOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _SimpleArray_MimeTypeArray() throws Exception {
-        test("SimpleArray", "MimeTypeArray");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _SimpleArray_Plugin() throws Exception {
-        test("SimpleArray", "Plugin");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _SimpleArray_PluginArray() throws Exception {
-        test("SimpleArray", "PluginArray");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE8 = "false")
     public void _Text_CDATASection() throws Exception {
@@ -8084,5 +7373,75 @@ public class HostParentOfTest extends WebDriverTestCase {
             IE8 = "false")
     public void _Worker_Worker() throws Exception {
         test("Worker", "Worker");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _WebGLRenderingContext_WebGLRenderingContext() throws Exception {
+        test("WebGLRenderingContext", "WebGLRenderingContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _Element_SVGGradientElement() throws Exception {
+        test("Element", "SVGGradientElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _Node_SVGGradientElement() throws Exception {
+        test("Node", "SVGGradientElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGElement_SVGGradientElement() throws Exception {
+        test("SVGElement", "SVGGradientElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGGradientElement_SVGGradientElement() throws Exception {
+        test("SVGGradientElement", "SVGGradientElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGGradientElement_SVGLinearGradientElement() throws Exception {
+        test("SVGGradientElement", "SVGLinearGradientElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _SVGGradientElement_SVGRadialGradientElement() throws Exception {
+        test("SVGGradientElement", "SVGRadialGradientElement");
     }
 }

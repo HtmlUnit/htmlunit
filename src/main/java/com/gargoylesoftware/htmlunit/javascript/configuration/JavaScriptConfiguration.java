@@ -101,6 +101,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint32Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8ClampedArray;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D;
+import com.gargoylesoftware.htmlunit.javascript.host.canvas.WebGLRenderingContext;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSCharsetRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSFontFaceRule;
@@ -221,11 +222,25 @@ import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAngle;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimateElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimateMotionElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimateTransformElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimatedAngle;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimatedBoolean;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimatedEnumeration;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimatedInteger;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimatedLength;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimatedLengthList;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimatedNumber;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimatedNumberList;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimatedPreserveAspectRatio;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimatedRect;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimatedString;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimatedTransformList;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimationElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGCircleElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGClipPathElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGCursorElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGDefsElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGDescElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGEllipseElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEBlendElement;
@@ -255,7 +270,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFETurbulenceElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFilterElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGForeignObjectElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGGElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGGradientElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGImageElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGLength;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGLengthList;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGLineElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGLinearGradientElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGMPathElement;
@@ -263,10 +281,14 @@ import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGMarkerElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGMaskElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGMatrix;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGMetadataElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGNumber;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGNumberList;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPathElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPatternElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPoint;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPolygonElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPolylineElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPreserveAspectRatio;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGRadialGradientElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGRect;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGRectElement;
@@ -274,13 +296,17 @@ import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSVGElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGScriptElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSetElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGStopElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGStringList;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGStyleElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSwitchElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSymbolElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTSpanElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTextElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTextPathElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTextPositioningElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTitleElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTransform;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTransformList;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGUseElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGViewElement;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.FormData;
@@ -362,9 +388,15 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         Plugin.class, PluginArray.class, PointerEvent.class, Popup.class, Position.class, ProcessingInstruction.class,
         Promise.class, Range.class, RowContainer.class,
         SharedWorker.class,
-        SVGAElement.class, SVGAltGlyphElement.class, SVGAngle.class, SVGAnimateElement.class,
-        SVGAnimateMotionElement.class, SVGAnimateTransformElement.class, SVGCircleElement.class,
-        SVGClipPathElement.class, SVGCursorElement.class, SVGDefsElement.class, SVGDescElement.class, SVGElement.class,
+        SVGAElement.class, SVGAltGlyphElement.class, SVGAngle.class, SVGAnimatedAngle.class,
+        SVGAnimatedBoolean.class, SVGAnimateElement.class, SVGAnimatedEnumeration.class, SVGAnimatedInteger.class,
+        SVGAnimatedLength.class, SVGAnimatedLengthList.class, SVGAnimatedNumber.class, SVGAnimatedNumberList.class,
+        SVGAnimatedPreserveAspectRatio.class, SVGAnimatedRect.class, SVGAnimatedString.class,
+        SVGAnimatedTransformList.class,
+        SVGAnimateMotionElement.class, SVGAnimateTransformElement.class, SVGAnimationElement.class,
+        SVGCircleElement.class,
+        SVGClipPathElement.class, SVGCursorElement.class, SVGDefsElement.class, SVGDescElement.class,
+        SVGDocument.class, SVGElement.class,
         SVGEllipseElement.class, SVGFEBlendElement.class, SVGFEColorMatrixElement.class,
         SVGFEComponentTransferElement.class, SVGFECompositeElement.class, SVGFEConvolveMatrixElement.class,
         SVGFEDiffuseLightingElement.class, SVGFEDisplacementMapElement.class, SVGFEDistantLightElement.class,
@@ -373,19 +405,23 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         SVGFEMergeNodeElement.class, SVGFEMorphologyElement.class, SVGFEOffsetElement.class,
         SVGFEPointLightElement.class, SVGFESpecularLightingElement.class, SVGFESpotLightElement.class,
         SVGFETileElement.class, SVGFETurbulenceElement.class, SVGFilterElement.class, SVGForeignObjectElement.class,
-        SVGGElement.class, SVGImageElement.class, SVGLineElement.class, SVGLinearGradientElement.class,
-        SVGMarkerElement.class, SVGMaskElement.class, SVGMatrix.class, SVGMetadataElement.class, SVGMPathElement.class,
-        SVGPathElement.class, SVGPatternElement.class, SVGPolygonElement.class, SVGPolylineElement.class,
-        SVGRadialGradientElement.class,
-        SVGRect.class, SVGRectElement.class,
+        SVGGElement.class, SVGGradientElement.class,
+        SVGImageElement.class, SVGLength.class, SVGLengthList.class, SVGLineElement.class,    
+        SVGLinearGradientElement.class, SVGMarkerElement.class, SVGMaskElement.class, SVGMatrix.class,
+        SVGMetadataElement.class, SVGNumber.class, SVGNumberList.class,
+        SVGMPathElement.class, SVGPathElement.class, SVGPatternElement.class,
+        SVGPoint.class, SVGPolygonElement.class, SVGPolylineElement.class, SVGPreserveAspectRatio.class,
+        SVGRadialGradientElement.class, SVGRect.class, SVGRectElement.class,
         SVGSVGElement.class, SVGScriptElement.class,
-        SVGSetElement.class, SVGStopElement.class, SVGStyleElement.class, SVGSwitchElement.class,
+        SVGSetElement.class, SVGStopElement.class, SVGStringList.class,
+        SVGStyleElement.class, SVGSwitchElement.class,
         SVGSymbolElement.class, SVGTSpanElement.class, SVGTextElement.class, SVGTextPathElement.class,
-        SVGTitleElement.class, SVGUseElement.class, SVGViewElement.class,
+        SVGTextPositioningElement.class, SVGTitleElement.class, SVGTransform.class, SVGTransformList.class,
+        SVGUseElement.class, SVGViewElement.class,
         Screen.class, Selection.class, SimpleArray.class,
         StaticNodeList.class, Storage.class, StyleSheetList.class, Text.class, TextRange.class, TreeWalker.class,
         UIEvent.class, Uint16Array.class, Uint32Array.class, Uint8Array.class, Uint8ClampedArray.class,
-        URLSearchParams.class,
+        URLSearchParams.class, WebGLRenderingContext.class,
         WebSocket.class, Window.class, Worker.class, XMLDocument.class,
         XMLHttpRequest.class, XMLSerializer.class, XPathEvaluator.class, XPathNSResolver.class, XPathResult.class,
         XSLTProcessor.class, XSLTemplate.class};

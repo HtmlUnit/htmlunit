@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -133,4 +135,38 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
             + "</html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "[object CanvasRenderingContext2D], [object WebGLRenderingContext], "
+            + "[object WebGLRenderingContext], null, null, null",
+            IE11 = "[object CanvasRenderingContext2D], null, "
+                    + "[object WebGLRenderingContext], null, null, null",
+            IE8 = "")
+    @NotYetImplemented({ CHROME, FF, IE11 })
+    public void getContext() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var canvas = document.createElement('canvas');\n"
+            + "        if (canvas.getContext){\n"
+            + "          alert(document.createElement('canvas').getContext('2d'));\n"
+            + "          alert(document.createElement('canvas').getContext('webgl'));\n"
+            + "          alert(document.createElement('canvas').getContext('experimental-webgl'));\n"
+            + "          alert(document.createElement('canvas').getContext('webgl2'));\n"
+            + "          alert(document.createElement('canvas').getContext('experimental-webgl2'));\n"
+            + "          alert(document.createElement('canvas').getContext('abcdefg'));\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'></body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
 }

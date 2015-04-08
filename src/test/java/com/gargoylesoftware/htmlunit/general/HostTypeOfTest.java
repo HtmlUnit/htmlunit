@@ -3621,7 +3621,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function")
-    @NotYetImplemented(FF)
     public void svgDocument() throws Exception {
         test("SVGDocument");
     }
@@ -3813,7 +3812,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgAnimatedLengthList() throws Exception {
         test("SVGAnimatedLengthList");
     }
@@ -3848,7 +3846,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgAnimatedNumber() throws Exception {
         test("SVGAnimatedNumber");
     }
@@ -3874,7 +3871,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgTextPositioningElement() throws Exception {
         test("SVGTextPositioningElement");
     }
@@ -3935,7 +3931,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgAnimatedRect() throws Exception {
         test("SVGAnimatedRect");
     }
@@ -3961,7 +3956,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgAnimatedString() throws Exception {
         test("SVGAnimatedString");
     }
@@ -3987,7 +3981,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgAnimatedEnumeration() throws Exception {
         test("SVGAnimatedEnumeration");
     }
@@ -4061,7 +4054,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgAnimatedNumberList() throws Exception {
         test("SVGAnimatedNumberList");
     }
@@ -4098,7 +4090,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgNumberList() throws Exception {
         test("SVGNumberList");
     }
@@ -4149,7 +4140,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgAnimatedBoolean() throws Exception {
         test("SVGAnimatedBoolean");
     }
@@ -4162,7 +4152,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgAnimatedPreserveAspectRatio() throws Exception {
         test("SVGAnimatedPreserveAspectRatio");
     }
@@ -4247,7 +4236,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgPreserveAspectRatio() throws Exception {
         test("SVGPreserveAspectRatio");
     }
@@ -4273,7 +4261,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "object",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgNumber() throws Exception {
         test("SVGNumber");
     }
@@ -4362,7 +4349,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgAnimatedLength() throws Exception {
         test("SVGAnimatedLength");
     }
@@ -4400,7 +4386,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgStringList() throws Exception {
         test("SVGStringList");
     }
@@ -4426,7 +4411,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgAnimatedInteger() throws Exception {
         test("SVGAnimatedInteger");
     }
@@ -4437,9 +4421,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
-            FF31 = "function",
+            FF = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void webGLRenderingContext() throws Exception {
         test("WebGLRenderingContext");
     }
@@ -4448,10 +4431,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            FF31 = "function",
-            IE11 = "function")
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined")
     @NotYetImplemented({ CHROME, FF31, IE11 })
     public void blob() throws Exception {
         test("Blob");
@@ -4465,7 +4446,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgAnimatedTransformList() throws Exception {
         test("SVGAnimatedTransformList");
     }
@@ -4627,7 +4607,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgLengthList() throws Exception {
         test("SVGLengthList");
     }
@@ -4640,7 +4619,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgGradientElement() throws Exception {
         test("SVGGradientElement");
     }
@@ -4653,7 +4631,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgLength() throws Exception {
         test("SVGLength");
     }
@@ -4728,7 +4705,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgPoint() throws Exception {
         test("SVGPoint");
     }
@@ -4766,7 +4742,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgTransformList() throws Exception {
         test("SVGTransformList");
     }
@@ -4818,7 +4793,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgAnimatedAngle() throws Exception {
         test("SVGAnimatedAngle");
     }
@@ -4927,7 +4901,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void svgTransform() throws Exception {
         test("SVGTransform");
     }
