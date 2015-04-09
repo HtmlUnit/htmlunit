@@ -4468,7 +4468,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-    		IE = "undefined")
+            IE = "undefined")
     public void svgAnimationElement() throws Exception {
         test("SVGAnimationElement");
     }

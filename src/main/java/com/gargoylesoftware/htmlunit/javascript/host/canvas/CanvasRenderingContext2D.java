@@ -282,11 +282,11 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param dx the X coordinate in the destination canvas at which to place the top-left corner of the source image
      * @param dy the Y coordinate in the destination canvas at which to place the top-left corner of the source image
      * @param dWidth the width to draw the image in the destination canvas. This allows scaling of the drawn image
-     * @param dHeight the height to draw the image in the destination canvas. This allows scaling of the drawn image 
+     * @param dHeight the height to draw the image in the destination canvas. This allows scaling of the drawn image
      */
     @JsxFunction
     @SuppressWarnings("unused")
-    public void drawImage(final Object image, int sx, int sy, final Object sWidth, final Object sHeight,
+    public void drawImage(final Object image, final int sx, final int sy, final Object sWidth, final Object sHeight,
             final Object dx, final Object dy, final Object dWidth, final Object dHeight) {
         Integer dxI;
         Integer dyI;
@@ -311,7 +311,8 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
 
         try {
             if (image instanceof HTMLImageElement) {
-                final ImageReader imageReader = ((HtmlImage) ((HTMLImageElement) image).getDomNodeOrDie()).getImageReader();
+                final ImageReader imageReader =
+                        ((HtmlImage) ((HTMLImageElement) image).getDomNodeOrDie()).getImageReader();
                 if (imageReader.getNumImages(true) != 0) {
                     final BufferedImage img = imageReader.read(0);
                     graphics2D_.drawImage(img, dxI, dyI, null);
