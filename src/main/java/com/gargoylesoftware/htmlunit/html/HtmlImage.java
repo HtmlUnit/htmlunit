@@ -584,6 +584,9 @@ public class HtmlImage extends HtmlElement {
         return imageData_ != null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isDisplayed() {
         final String src = getSrcAttribute();

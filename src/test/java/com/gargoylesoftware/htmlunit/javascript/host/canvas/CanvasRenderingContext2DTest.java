@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
@@ -163,7 +167,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "pcjFqCo5YBFYwZVUXFUG8rBtsasZcK7VcrcCsVqHT+K306rg+0QWvQSIzkfM6sZVCpeNwok2IymcS1k024dNjCQsGmbgS6k"
             + "zGkmmOIxWIkopCWAMeh2yDwDIrFPC+sQL2uKDJ0PY7Ojnac7z+Ei8d70HOwHYlEgmcoULOxvfl8lpeCZ/Ds+dNMQo9/bNYT"
             + "UfbPwd18qs91kKRhGuX7d+/9Yr/cNzIyIpumqbDv/4Vt297o6Kj7F1Q7+m7gqVhgAAAAAElFTkSuQmCC")
-    @NotYetImplemented
+    @NotYetImplemented({ CHROME, FF, IE11 })
     public void drawImage() throws Exception {
         final InputStream is = getClass().getResourceAsStream("html.png");
         final byte[] directBytes = IOUtils.toByteArray(is);
@@ -180,10 +184,12 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "    var canvas = document.createElement('canvas');\n"
             + "    canvas.width = img.width;\n"
             + "    canvas.height = img.height;\n"
-            + "    var context = canvas.getContext('2d');\n"
-            + "    alert(canvas.toDataURL());"
-            + "    context.drawImage(img, 0, 0, canvas.width, canvas.height);\n"
-            + "    alert(canvas.toDataURL());\n"
+            + "    if (canvas.getContext) {\n"
+            + "      var context = canvas.getContext('2d');\n"
+            + "      alert(canvas.toDataURL());"
+            + "      context.drawImage(img, 0, 0, canvas.width, canvas.height);\n"
+            + "      alert(canvas.toDataURL());\n"
+            + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -192,4 +198,67 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    private void drawImage(final String fileName) throws Exception {
+        final InputStream is = getClass().getResourceAsStream(fileName);
+        final byte[] directBytes = IOUtils.toByteArray(is);
+        is.close();
+
+        final List<NameValuePair> emptyList = Collections.emptyList();
+        getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
+        getMockWebConnection().setDefaultResponse("Test");
+
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var img = document.getElementById('myImage');\n"
+            + "    var canvas = document.createElement('canvas');\n"
+            + "    canvas.width = img.width;\n"
+            + "    canvas.height = img.height;\n"
+            + "    if (canvas.getContext) {\n"
+            + "      var context = canvas.getContext('2d');\n"
+            + "      context.drawImage(img, 0, 0, canvas.width, canvas.height);\n"
+            + "      alert(canvas.toDataURL());\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <img id='myImage' src='" + URL_SECOND + "'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2P8x8DwHwAFAQH/pKAYUwAAAABJRU5ErkJggg==",
+            FF31 = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWP4x8DwHwAE/AH+Y3NJ1gAAAABJRU5ErkJggg==",
+            IE11 = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAANSURBVBhX"
+                + "Y/jPwPAfAAUAAf+mXJtdAAAAAElFTkSuQmCC")
+    @NotYetImplemented({ CHROME, FF, IE11 })
+    public void drawImage_1x1_32bits() throws Exception {
+        drawImage("1x1red_32_bit_depth.png");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2P8x8DwHwAFAQH/pKAYUwAAAABJRU5ErkJggg==",
+            FF31 = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWP4x8DwHwAE/AH+Y3NJ1gAAAABJRU5ErkJggg==",
+            IE11 = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAANSURBVBhX"
+                + "Y/jPwPAfAAUAAf+mXJtdAAAAAElFTkSuQmCC")
+    @NotYetImplemented({ CHROME, FF, IE11 })
+    public void drawImage_1x1_24bits() throws Exception {
+        drawImage("1x1red_24_bit_depth.png");
+    }
+
 }

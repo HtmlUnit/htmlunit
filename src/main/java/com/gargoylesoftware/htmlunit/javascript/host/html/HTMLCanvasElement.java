@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CANVAS_DAT
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.html.HtmlCanvas;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -27,7 +28,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D;
-import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 
 /**
  * A JavaScript object for {@link HtmlCanvas}.
@@ -40,6 +40,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclara
 @JsxClass(domClass = HtmlCanvas.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME),
         @WebBrowser(value = IE, minVersion = 11) })
 public class HTMLCanvasElement extends HTMLElement {
+
+    private Object context_;
 
     /**
      * Creates an instance.
@@ -55,8 +57,11 @@ public class HTMLCanvasElement extends HTMLElement {
     @Override
     @JsxGetter
     public int getWidth() {
-        final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
-        return style.getCalculatedWidth(false, false);
+        final String value = getDomNodeOrDie().getAttribute("width");
+        if (value.isEmpty()) {
+            return 300;
+        }
+        return Integer.parseInt(value);
     }
 
     /**
@@ -64,8 +69,8 @@ public class HTMLCanvasElement extends HTMLElement {
      * @param width the "width" property
      */
     @JsxSetter
-    public void setWidth(final String width) {
-        getDomNodeOrDie().setAttribute("width", width);
+    public void setWidth(final int width) {
+        getDomNodeOrDie().setAttribute("width", Integer.toString(width));
     }
 
     /**
@@ -75,8 +80,11 @@ public class HTMLCanvasElement extends HTMLElement {
     @Override
     @JsxGetter
     public int getHeight() {
-        final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
-        return style.getCalculatedHeight(false, false);
+        final String value = getDomNodeOrDie().getAttribute("height");
+        if (value.isEmpty()) {
+            return 150;
+        }
+        return Integer.parseInt(value);
     }
 
     /**
@@ -84,8 +92,8 @@ public class HTMLCanvasElement extends HTMLElement {
      * @param height the "height" property
      */
     @JsxSetter
-    public void setHeight(final String height) {
-        getDomNodeOrDie().setAttribute("height", height);
+    public void setHeight(final int height) {
+        getDomNodeOrDie().setAttribute("height", Integer.toString(height));
     }
 
     /**
@@ -97,9 +105,10 @@ public class HTMLCanvasElement extends HTMLElement {
     @JsxFunction
     public Object getContext(final String contextId) {
         if ("2d".equals(contextId)) {
-            final CanvasRenderingContext2D context = new CanvasRenderingContext2D();
+            final CanvasRenderingContext2D context = new CanvasRenderingContext2D(this);
             context.setParentScope(getParentScope());
             context.setPrototype(getPrototype(context.getClass()));
+            context_ = context;
             return context;
         }
         return null;
@@ -112,7 +121,14 @@ public class HTMLCanvasElement extends HTMLElement {
      * @return the data URL
      */
     @JsxFunction
-    public String toDataURL(final String type) {
+    public String toDataURL(final Object type) {
+        if (context_ instanceof CanvasRenderingContext2D) {
+            String typeInUse = type.toString();
+            if (type == Undefined.instance) {
+                typeInUse = null;
+            }
+            return ((CanvasRenderingContext2D) context_).toDataURL(typeInUse);
+        }
         if (getBrowserVersion().hasFeature(JS_CANVAS_DATA_URL_IE_PNG)) {
             return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAAAAXNSR0IArs4c6QAAAARnQU1BAA"
                 + "Cxjwv8YQUAAADGSURBVHhe7cExAQAAAMKg9U9tCF8gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"

@@ -17,10 +17,21 @@ package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+
+import org.apache.commons.codec.binary.Base64;
+
+import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -28,6 +39,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement;
 
 /**
  * A JavaScript object for a CanvasRenderingContext2D.
@@ -41,11 +54,28 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class CanvasRenderingContext2D extends SimpleScriptable {
 
+    private final HTMLCanvasElement canvas_;
+    private final BufferedImage image_;
+    private final Graphics2D graphics2D_;
+
     /**
      * Default constructor.
      */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public CanvasRenderingContext2D() {
+        canvas_ = null;
+        image_ = null;
+        graphics2D_ = null;
+    }
+
+    /**
+     * Constructs in association with {@link HTMLCanvasElement}.
+     * @param canvas the {@link HTMLCanvasElement}
+     */
+    public CanvasRenderingContext2D(final HTMLCanvasElement canvas) {
+        canvas_ = canvas;
+        image_ = new BufferedImage(canvas.getWidth(), canvas.getHeight(), BufferedImage.TYPE_INT_RGB);
+        graphics2D_ = image_.createGraphics();
     }
 
     /**
@@ -241,15 +271,84 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
 
     /**
      * Draws images onto the canvas.
-     * @param context the JavaScript context
-     * @param thisObj the scriptable
-     * @param args the arguments passed into the method
-     * @param function the function
+     *
+     * @param image an element to draw into the context
+     * @param sx the X coordinate of the top left corner of the sub-rectangle of the source image
+     *        to draw into the destination context
+     * @param sy the Y coordinate of the top left corner of the sub-rectangle of the source image
+     *        to draw into the destination context
+     * @param sWidth the width of the sub-rectangle of the source image to draw into the destination context
+     * @param sHeight the height of the sub-rectangle of the source image to draw into the destination context
+     * @param dx the X coordinate in the destination canvas at which to place the top-left corner of the source image
+     * @param dy the Y coordinate in the destination canvas at which to place the top-left corner of the source image
+     * @param dWidth the width to draw the image in the destination canvas. This allows scaling of the drawn image
+     * @param dHeight the height to draw the image in the destination canvas. This allows scaling of the drawn image 
      */
     @JsxFunction
-    public static void drawImage(
-            final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
-        //empty
+    @SuppressWarnings("unused")
+    public void drawImage(final Object image, int sx, int sy, final Object sWidth, final Object sHeight,
+            final Object dx, final Object dy, final Object dWidth, final Object dHeight) {
+        Integer dxI;
+        Integer dyI;
+        Integer dWidthI = null;
+        Integer dHeightI = null;
+        Integer sWidthI = null;
+        Integer sHeightI = null;
+        if (dx != Undefined.instance) {
+            dxI = ((Number) dx).intValue();
+            dyI = ((Number) dy).intValue();
+            dWidthI = ((Number) dWidth).intValue();
+            dHeightI = ((Number) dHeight).intValue();
+        }
+        else {
+            dxI = sx;
+            dyI = sy;
+        }
+        if (sWidth != Undefined.instance) {
+            sWidthI = ((Number) sWidth).intValue();
+            sHeightI = ((Number) sHeight).intValue();
+        }
+
+        try {
+            if (image instanceof HTMLImageElement) {
+                final ImageReader imageReader = ((HtmlImage) ((HTMLImageElement) image).getDomNodeOrDie()).getImageReader();
+                if (imageReader.getNumImages(true) != 0) {
+                    final BufferedImage img = imageReader.read(0);
+                    graphics2D_.drawImage(img, dxI, dyI, null);
+                }
+            }
+        }
+        catch (final IOException ioe) {
+            throw Context.throwAsScriptRuntimeEx(ioe);
+        }
+    }
+
+    /**
+     * Returns the Data URL.
+     *
+     * @param type an optional type
+     * @return the dataURL
+     */
+    public String toDataURL(String type) {
+        try {
+            if (type == null) {
+                type = "png";
+            }
+            return "data:" + type + ";base64," + encodeToString(image_, type);
+        }
+        catch (final IOException ioe) {
+            throw Context.throwAsScriptRuntimeEx(ioe);
+        }
+    }
+
+    private static String encodeToString(final BufferedImage image, final String type) throws IOException {
+        try (final ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
+            ImageIO.write(image, type, bos);
+
+            final byte[] imageBytes = bos.toByteArray();
+
+            return new String(new Base64().encode(imageBytes));
+        }
     }
 
     /**
@@ -482,5 +581,14 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     @JsxFunction
     public void translate(final Object x, final Object y) {
       // empty
+    }
+
+    /**
+     * Returns the associated {@link HTMLCanvasElement}.
+     * @return the associated {@link HTMLCanvasElement}
+     */
+    @JsxGetter
+    public HTMLCanvasElement getCanvas() {
+        return canvas_;
     }
 }
