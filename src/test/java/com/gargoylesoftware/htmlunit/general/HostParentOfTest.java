@@ -7450,7 +7450,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-    		IE8 = "false")
+            IE8 = "false")
     public void _SVGAnimatedAngle_SVGAnimatedAngle() throws Exception {
         test("SVGAnimatedAngle", "SVGAnimatedAngle");
     }
@@ -7460,7 +7460,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-    		IE8 = "false")
+            IE8 = "false")
     public void _SVGAnimatedBoolean_SVGAnimatedBoolean() throws Exception {
         test("SVGAnimatedBoolean", "SVGAnimatedBoolean");
     }
@@ -7470,7 +7470,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-    		IE8 = "false")
+            IE8 = "false")
     public void _SVGAnimatedEnumeration_SVGAnimatedEnumeration() throws Exception {
         test("SVGAnimatedEnumeration", "SVGAnimatedEnumeration");
     }
@@ -7480,7 +7480,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-    		IE8 = "false")
+            IE8 = "false")
     public void _SVGAnimatedInteger_SVGAnimatedInteger() throws Exception {
         test("SVGAnimatedInteger", "SVGAnimatedInteger");
     }
@@ -7490,7 +7490,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-    		IE8 = "false")
+            IE8 = "false")
     public void _SVGAnimatedLengthList_SVGAnimatedLengthList() throws Exception {
         test("SVGAnimatedLengthList", "SVGAnimatedLengthList");
     }
@@ -7500,7 +7500,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-    		IE8 = "false")
+            IE8 = "false")
     public void _SVGAnimatedLength_SVGAnimatedLength() throws Exception {
         test("SVGAnimatedLength", "SVGAnimatedLength");
     }
@@ -7510,7 +7510,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-    		IE8 = "false")
+            IE8 = "false")
     public void _SVGAnimatedNumberList_SVGAnimatedNumberList() throws Exception {
         test("SVGAnimatedNumberList", "SVGAnimatedNumberList");
     }
@@ -7520,7 +7520,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-    		IE8 = "false")
+            IE8 = "false")
     public void _SVGAnimatedNumber_SVGAnimatedNumber() throws Exception {
         test("SVGAnimatedNumber", "SVGAnimatedNumber");
     }
@@ -7530,7 +7530,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-    		IE8 = "false")
+            IE8 = "false")
     public void _SVGAnimatedPreserveAspectRatio_SVGAnimatedPreserveAspectRatio() throws Exception {
         test("SVGAnimatedPreserveAspectRatio", "SVGAnimatedPreserveAspectRatio");
     }
@@ -7540,7 +7540,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-    		IE8 = "false")
+            IE8 = "false")
     public void _SVGAnimatedRect_SVGAnimatedRect() throws Exception {
         test("SVGAnimatedRect", "SVGAnimatedRect");
     }
@@ -7550,7 +7550,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-    		IE8 = "false")
+            IE8 = "false")
     public void _SVGAnimatedString_SVGAnimatedString() throws Exception {
         test("SVGAnimatedString", "SVGAnimatedString");
     }
@@ -7560,7 +7560,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-    		IE8 = "false")
+            IE8 = "false")
     public void _SVGAnimatedTransformList_SVGAnimatedTransformList() throws Exception {
         test("SVGAnimatedTransformList", "SVGAnimatedTransformList");
     }
@@ -7570,7 +7570,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-    		IE8 = "false")
+            IE = "false")
     public void _SVGAnimationElement_SVGAnimationElement() throws Exception {
         test("SVGAnimationElement", "SVGAnimationElement");
     }
@@ -7580,7 +7580,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-    		IE8 = "false")
+            IE8 = "false")
     public void _SVGLengthList_SVGLengthList() throws Exception {
         test("SVGLengthList", "SVGLengthList");
     }
@@ -7590,7 +7590,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-    		IE8 = "false")
+            IE8 = "false")
     public void _SVGLength_SVGLength() throws Exception {
         test("SVGLength", "SVGLength");
     }
@@ -7600,7 +7600,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-    		IE8 = "false")
+            IE8 = "false")
     public void _SVGNumberList_SVGNumberList() throws Exception {
         test("SVGNumberList", "SVGNumberList");
     }
@@ -7610,7 +7610,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-    		IE8 = "false")
+            IE8 = "false")
     public void _SVGNumber_SVGNumber() throws Exception {
         test("SVGNumber", "SVGNumber");
     }
@@ -7620,7 +7620,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-    		IE8 = "false")
+            IE8 = "false")
     public void _SVGPoint_SVGPoint() throws Exception {
         test("SVGPoint", "SVGPoint");
     }
@@ -7630,7 +7630,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-    		IE8 = "false")
+            IE8 = "false")
     public void _SVGPreserveAspectRatio_SVGPreserveAspectRatio() throws Exception {
         test("SVGPreserveAspectRatio", "SVGPreserveAspectRatio");
     }
@@ -7640,7 +7640,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-    		IE8 = "false")
+            IE8 = "false")
     public void _SVGStringList_SVGStringList() throws Exception {
         test("SVGStringList", "SVGStringList");
     }
@@ -7650,7 +7650,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-    		IE8 = "false")
+            IE8 = "false")
     public void _SVGTextPositioningElement_SVGTextPositioningElement() throws Exception {
         test("SVGTextPositioningElement", "SVGTextPositioningElement");
     }
@@ -7660,7 +7660,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-    		IE8 = "false")
+            IE8 = "false")
     public void _SVGTransformList_SVGTransformList() throws Exception {
         test("SVGTransformList", "SVGTransformList");
     }
@@ -7670,7 +7670,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-    		IE8 = "false")
+            IE8 = "false")
     public void _SVGTransform_SVGTransform() throws Exception {
         test("SVGTransform", "SVGTransform");
     }
@@ -7680,7 +7680,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "false",
-    		FF = "true")
+            FF = "true")
     public void _SVGDocument_SVGDocument() throws Exception {
         test("SVGDocument", "SVGDocument");
     }
