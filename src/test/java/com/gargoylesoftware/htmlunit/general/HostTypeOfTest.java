@@ -3610,7 +3610,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             IE11 = "object",
             CHROME = "function")
-    @NotYetImplemented({ CHROME, IE11 })
     public void clientRectList() throws Exception {
         test("ClientRectList");
     }
@@ -3858,7 +3857,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "object",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void cssPageRule() throws Exception {
         test("CSSPageRule");
     }
@@ -4913,5 +4911,101 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE11 = "object")
     public void svgTransform() throws Exception {
         test("SVGTransform");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.AnalyserNode}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void analyserNode() throws Exception {
+        test("AnalyserNode");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.AudioParam}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void audioParam() throws Exception {
+        test("AudioParam");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ChannelMergerNode}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void channelMergerNode() throws Exception {
+        test("ChannelMergerNode");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.DOMCursor}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
+    public void domCursor() throws Exception {
+        test("DOMCursor");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLShadowElement}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void htmlShadowElement() throws Exception {
+        test("HTMLShadowElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.LocalMediaStream}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
+    public void localMediaStream() throws Exception {
+        test("LocalMediaStream");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.canvas.Path2D}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void path2D() throws Exception {
+        test("Path2D");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.ShadowRoot}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void shadowRoot() throws Exception {
+        test("ShadowRoot");
     }
 }

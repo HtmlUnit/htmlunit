@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -31,7 +30,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
- * Tests the host class names match the Firefox (w3c names), in Standards Mode.
+ * Tests the host class names, in Standards Mode.
  *
  * @version $Revision$
  * @author Ahmed Ashour
@@ -3583,6 +3582,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ClientRectList}.
+     *
      * @throws Exception if an error occurs
      */
     @Test
@@ -3590,7 +3591,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             IE11 = "[object ClientRectList]",
             FF24 = "function ClientRectList() {\n    [native code]\n}",
             CHROME = "function ClientRectList() { [native code] }")
-    @NotYetImplemented({ CHROME, IE11, FF24 })
     public void clientRectList() throws Exception {
         test("ClientRectList");
     }
@@ -3848,18 +3848,21 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.AnalyserNode}.
+     *
      * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function AnalyserNode() { [native code] }",
             FF31 = "function AnalyserNode() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void analyserNode() throws Exception {
         test("AnalyserNode");
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSPageRule}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -3867,7 +3870,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function CSSPageRule() { [native code] }",
             FF31 = "[object CSSPageRule]",
             IE11 = "[object CSSPageRule]")
-    @NotYetImplemented({ FF31, IE11, CHROME })
     public void cssPageRule() throws Exception {
         test("CSSPageRule");
     }
@@ -3909,13 +3911,14 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.canvas.Path2D}.
+     *
      * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function Path2D() { [native code] }",
             FF31 = "function Path2D() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void path2D() throws Exception {
         test("Path2D");
     }
@@ -3939,15 +3942,28 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLShadowElement}.
+     *
      * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function HTMLShadowElement() { [native code] }",
             FF31 = "function HTMLShadowElement() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void htmlShadowElement() throws Exception {
         test("HTMLShadowElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.ShadowRoot}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ShadowRoot() { [native code] }")
+    public void shadowRoot() throws Exception {
+        test("ShadowRoot");
     }
 
     /**
@@ -3960,12 +3976,13 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.DOMCursor}.
+     *
      * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "function DOMCursor() {\n    [native code]\n}")
-    @NotYetImplemented(FF31)
     public void domCursor() throws Exception {
         test("DOMCursor");
     }
@@ -3989,12 +4006,13 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.LocalMediaStream}.
+     *
      * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "function LocalMediaStream() {\n    [native code]\n}")
-    @NotYetImplemented(FF31)
     public void localMediaStream() throws Exception {
         test("LocalMediaStream");
     }
@@ -4036,13 +4054,14 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.AudioParam}.
+     *
      * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function AudioParam() { [native code] }",
             FF31 = "function AudioParam() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void audioParam() throws Exception {
         test("AudioParam");
     }
@@ -4077,13 +4096,14 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ChannelMergerNode}.
+     *
      * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function ChannelMergerNode() { [native code] }",
             FF31 = "function ChannelMergerNode() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void channelMergerNode() throws Exception {
         test("ChannelMergerNode");
     }

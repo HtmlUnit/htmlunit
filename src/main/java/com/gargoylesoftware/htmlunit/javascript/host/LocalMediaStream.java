@@ -14,14 +14,26 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for ClipboardData.
+ * A JavaScript object for LocalMediaStream.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public final class ClipboardData extends SimpleScriptable {
+@JsxClass(browsers = @WebBrowser(FF))
+public class LocalMediaStream extends SimpleScriptable {
 
+    /**
+     * Creates a new instance.
+     */
+    @JsxConstructor
+    public LocalMediaStream() {
+    }
 }

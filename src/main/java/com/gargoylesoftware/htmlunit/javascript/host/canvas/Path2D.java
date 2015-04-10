@@ -12,16 +12,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package com.gargoylesoftware.htmlunit.javascript.host.canvas;
+
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for ClipboardData.
+ * A JavaScript object for Path2D.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public final class ClipboardData extends SimpleScriptable {
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF) })
+public class Path2D extends SimpleScriptable {
 
+    /**
+     * Creates a new instance.
+     */
+    @JsxConstructor
+    public Path2D() {
+    }
 }

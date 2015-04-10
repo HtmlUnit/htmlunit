@@ -7684,4 +7684,134 @@ public class HostParentOfTest extends WebDriverTestCase {
     public void _SVGDocument_SVGDocument() throws Exception {
         test("SVGDocument", "SVGDocument");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AnalyserNode_AnalyserNode() throws Exception {
+        test("AnalyserNode", "AnalyserNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioParam_AudioParam() throws Exception {
+        test("AudioParam", "AudioParam");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _ChannelMergerNode_ChannelMergerNode() throws Exception {
+        test("ChannelMergerNode", "ChannelMergerNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _DocumentFragment_ShadowRoot() throws Exception {
+        test("DocumentFragment", "ShadowRoot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _Element_HTMLShadowElement() throws Exception {
+        test("Element", "HTMLShadowElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _HTMLElement_HTMLShadowElement() throws Exception {
+        test("HTMLElement", "HTMLShadowElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _HTMLShadowElement_HTMLShadowElement() throws Exception {
+        test("HTMLShadowElement", "HTMLShadowElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _Node_HTMLShadowElement() throws Exception {
+        test("Node", "HTMLShadowElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Node_ShadowRoot() throws Exception {
+        test("Node", "ShadowRoot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _Path2D_Path2D() throws Exception {
+        test("Path2D", "Path2D");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _ShadowRoot_ShadowRoot() throws Exception {
+        test("ShadowRoot", "ShadowRoot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _DOMCursor_DOMCursor() throws Exception {
+        test("DOMCursor", "DOMCursor");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _LocalMediaStream_LocalMediaStream() throws Exception {
+        test("LocalMediaStream", "LocalMediaStream");
+    }
 }

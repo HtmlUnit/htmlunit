@@ -14,14 +14,27 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for ClipboardData.
+ * A JavaScript object for {@code ChannelMergerNode}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public final class ClipboardData extends SimpleScriptable {
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF) })
+public class ChannelMergerNode extends SimpleScriptable {
 
+    /**
+     * Creates an instance.
+     */
+    @JsxConstructor
+    public ChannelMergerNode() {
+    }
 }

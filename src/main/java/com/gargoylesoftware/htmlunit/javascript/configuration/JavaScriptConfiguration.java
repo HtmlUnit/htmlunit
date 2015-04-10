@@ -21,13 +21,17 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
+import com.gargoylesoftware.htmlunit.javascript.host.AnalyserNode;
 import com.gargoylesoftware.htmlunit.javascript.host.ApplicationCache;
 import com.gargoylesoftware.htmlunit.javascript.host.Attr;
+import com.gargoylesoftware.htmlunit.javascript.host.AudioParam;
 import com.gargoylesoftware.htmlunit.javascript.host.BeforeUnloadEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.BoxObject;
 import com.gargoylesoftware.htmlunit.javascript.host.CDATASection;
+import com.gargoylesoftware.htmlunit.javascript.host.ChannelMergerNode;
 import com.gargoylesoftware.htmlunit.javascript.host.CharacterDataImpl;
 import com.gargoylesoftware.htmlunit.javascript.host.ClientRect;
+import com.gargoylesoftware.htmlunit.javascript.host.ClientRectList;
 import com.gargoylesoftware.htmlunit.javascript.host.ClipboardData;
 import com.gargoylesoftware.htmlunit.javascript.host.Comment;
 import com.gargoylesoftware.htmlunit.javascript.host.Console;
@@ -44,6 +48,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormField;
 import com.gargoylesoftware.htmlunit.javascript.host.HashChangeEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.History;
 import com.gargoylesoftware.htmlunit.javascript.host.KeyboardEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.LocalMediaStream;
 import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.MediaList;
 import com.gargoylesoftware.htmlunit.javascript.host.MessageChannel;
@@ -101,12 +106,14 @@ import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint32Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8ClampedArray;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D;
+import com.gargoylesoftware.htmlunit.javascript.host.canvas.Path2D;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.WebGLRenderingContext;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSCharsetRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSFontFaceRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSImportRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSMediaRule;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSPageRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSPrimitiveValue;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList;
@@ -116,11 +123,13 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSValue;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMCursor;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMException;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMImplementation;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMParser;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMStringMap;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.ShadowRoot;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Coordinates;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Position;
@@ -194,6 +203,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLProgressElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLQuoteElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSelectElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLShadowElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSourceElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSpanElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
@@ -328,15 +338,17 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
 
     @SuppressWarnings("unchecked")
     static final Class<? extends SimpleScriptable>[] CLASSES_ = new Class[] {
+        AnalyserNode.class,
         ArrayBuffer.class, ArrayBufferView.class, ArrayBufferViewBase.class,
-        Attr.class, ActiveXObject.class, ApplicationCache.class,
-        BeforeUnloadEvent.class, BoxObject.class, CDATASection.class, ClipboardData.class,
+        Attr.class, ActiveXObject.class, ApplicationCache.class, AudioParam.class,
+        BeforeUnloadEvent.class, BoxObject.class, CDATASection.class, ChannelMergerNode.class, ClipboardData.class,
         CSS2Properties.class,
-        CSSCharsetRule.class, CSSFontFaceRule.class, CSSImportRule.class, CSSMediaRule.class, CSSPrimitiveValue.class,
-        CSSRule.class,
+        CSSCharsetRule.class, CSSFontFaceRule.class, CSSImportRule.class, CSSMediaRule.class, CSSPageRule.class,
+        CSSPrimitiveValue.class, CSSRule.class,
         CSSRuleList.class, CSSStyleDeclaration.class, CSSStyleRule.class, CSSStyleSheet.class, CSSValue.class,
-        CanvasRenderingContext2D.class, CharacterDataImpl.class, ClientRect.class, Comment.class,
-        ComputedCSSStyleDeclaration.class, Console.class, Coordinates.class, DataView.class, DOMException.class,
+        CanvasRenderingContext2D.class, CharacterDataImpl.class, ClientRect.class, ClientRectList.class, Comment.class,
+        ComputedCSSStyleDeclaration.class, Console.class, Coordinates.class, DataView.class, DOMCursor.class,
+        DOMException.class,
         DOMImplementation.class, DOMParser.class, DOMStringMap.class,
         DOMTokenList.class, Document.class, DocumentFragment.class,
         DocumentType.class, Element.class, Enumerator.class, Event.class, EventNode.class, External.class,
@@ -371,7 +383,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLParagraphElement.class, HTMLParamElement.class,
         HTMLPhraseElement.class,
         HTMLPreElement.class, HTMLProgressElement.class, HTMLScriptElement.class,
-        HTMLSelectElement.class, HTMLSourceElement.class, HTMLSpanElement.class,
+        HTMLSelectElement.class, HTMLShadowElement.class, HTMLSourceElement.class, HTMLSpanElement.class,
         HTMLStyleElement.class, HTMLTableCaptionElement.class, HTMLTableCellElement.class, HTMLTableColElement.class,
         HTMLTableComponent.class, HTMLTableDataCellElement.class, HTMLTableElement.class,
         HTMLTableHeaderCellElement.class, HTMLTableRowElement.class, HTMLTableSectionElement.class,
@@ -380,13 +392,13 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLVideoElement.class,
         Image.class,
         Int16Array.class, Int32Array.class, Int8Array.class,
-        KeyboardEvent.class,
+        KeyboardEvent.class, LocalMediaStream.class,
         Location.class, MediaList.class, MessageChannel.class,
         MessageEvent.class, MessagePort.class, MimeType.class, MimeTypeArray.class, MouseEvent.class,
         MutationEvent.class, NamedNodeMap.class, Namespace.class, NamespaceCollection.class, Navigator.class,
-        Node.class, NodeFilter.class, NodeList.class, Notification.class, Option.class,
+        Node.class, NodeFilter.class, NodeList.class, Notification.class, Option.class, Path2D.class,
         Plugin.class, PluginArray.class, PointerEvent.class, Popup.class, Position.class, ProcessingInstruction.class,
-        Promise.class, Range.class, RowContainer.class,
+        Promise.class, Range.class, RowContainer.class, ShadowRoot.class,
         SharedWorker.class,
         SVGAElement.class, SVGAltGlyphElement.class, SVGAngle.class, SVGAnimatedAngle.class,
         SVGAnimatedBoolean.class, SVGAnimateElement.class, SVGAnimatedEnumeration.class, SVGAnimatedInteger.class,

@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -30,7 +29,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests the host class names match the Firefox (w3c names).
+ * Tests the host class names.
  *
  * @version $Revision$
  * @author Ahmed Ashour
@@ -3657,7 +3656,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             IE11 = "[object ClientRectList]",
             FF24 = "function ClientRectList() {\n    [native code]\n}",
             CHROME = "function ClientRectList() { [native code] }")
-    @NotYetImplemented({ CHROME, IE11, FF24 })
     public void clientRectList() throws Exception {
         test("ClientRectList");
     }
@@ -3917,7 +3915,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function CSSPageRule() { [native code] }",
             FF31 = "[object CSSPageRule]",
             IE11 = "[object CSSPageRule]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void cssPageRule() throws Exception {
         test("CSSPageRule");
     }
@@ -4975,5 +4972,106 @@ public class HostClassNameTest extends WebDriverTestCase {
             IE11 = "[object SVGTransform]")
     public void svgTransform() throws Exception {
         test("SVGTransform");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.AnalyserNode}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function AnalyserNode() { [native code] }",
+            FF31 = "function AnalyserNode() {\n    [native code]\n}")
+    public void analyserNode() throws Exception {
+        test("AnalyserNode");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.AudioParam}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function AudioParam() { [native code] }",
+            FF31 = "function AudioParam() {\n    [native code]\n}")
+    public void audioParam() throws Exception {
+        test("AudioParam");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ChannelMergerNode}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ChannelMergerNode() { [native code] }",
+            FF31 = "function ChannelMergerNode() {\n    [native code]\n}")
+    public void channelMergerNode() throws Exception {
+        test("ChannelMergerNode");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.DOMCursor}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function DOMCursor() {\n    [native code]\n}")
+    public void domCursor() throws Exception {
+        test("DOMCursor");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLShadowElement}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function HTMLShadowElement() { [native code] }",
+            FF31 = "function HTMLShadowElement() {\n    [native code]\n}")
+    public void htmlShadowElement() throws Exception {
+        test("HTMLShadowElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.LocalMediaStream}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function LocalMediaStream() {\n    [native code]\n}")
+    public void localMediaStream() throws Exception {
+        test("LocalMediaStream");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.canvas.Path2D}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Path2D() { [native code] }",
+            FF31 = "function Path2D() {\n    [native code]\n}")
+    public void path2D() throws Exception {
+        test("Path2D");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.ShadowRoot}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ShadowRoot() { [native code] }")
+    public void shadowRoot() throws Exception {
+        test("ShadowRoot");
     }
 }

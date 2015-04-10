@@ -53,6 +53,7 @@ class BrowserStatement extends Statement {
                 break;
             }
             catch (final Throwable t) {
+                //TestCaseCorrector.correct(method_, realBrowser_, browserVersion_, notYetImplemented_, t);
                 if (notYetImplemented_) {
                     throw t;
                 }
