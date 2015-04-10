@@ -61,7 +61,6 @@ import org.w3c.css.sac.ElementSelector;
 import org.w3c.css.sac.ErrorHandler;
 import org.w3c.css.sac.InputSource;
 import org.w3c.css.sac.LangCondition;
-import org.w3c.css.sac.LexicalUnit;
 import org.w3c.css.sac.NegativeCondition;
 import org.w3c.css.sac.NegativeSelector;
 import org.w3c.css.sac.Selector;
@@ -72,7 +71,6 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.css.CSSImportRule;
 import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSRuleList;
-import org.w3c.dom.stylesheets.MediaList;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Cache;
@@ -108,13 +106,9 @@ import com.steadystate.css.dom.CSSImportRuleImpl;
 import com.steadystate.css.dom.CSSMediaRuleImpl;
 import com.steadystate.css.dom.CSSStyleRuleImpl;
 import com.steadystate.css.dom.CSSStyleSheetImpl;
-import com.steadystate.css.dom.CSSValueImpl;
-import com.steadystate.css.dom.MediaListImpl;
-import com.steadystate.css.dom.Property;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.parser.SACParserCSS3;
 import com.steadystate.css.parser.SelectorListImpl;
-import com.steadystate.css.parser.media.MediaQuery;
 import com.steadystate.css.parser.selectors.GeneralAdjacentSelectorImpl;
 import com.steadystate.css.parser.selectors.PrefixAttributeConditionImpl;
 import com.steadystate.css.parser.selectors.PseudoClassConditionImpl;
@@ -281,15 +275,8 @@ public class CSSStyleSheet extends SimpleScriptable {
             }
             else if (CSSRule.MEDIA_RULE == ruleType) {
                 final CSSMediaRuleImpl mediaRule = (CSSMediaRuleImpl) rule;
-                final MediaList media = mediaRule.getMedia();
-
-                if (media instanceof MediaListImpl) {
-                    if (isActive((MediaListImpl) media, element)) {
-                        final CSSRuleList internalRules = mediaRule.getCssRules();
-                        modifyIfNecessary(style, element, internalRules, alreadyProcessing);
-                    }
-                }
-                else if (isActive(media.getMediaText())) {
+                final String media = mediaRule.getMedia().getMediaText();
+                if (isActive(media)) {
                     final CSSRuleList internalRules = mediaRule.getCssRules();
                     modifyIfNecessary(style, element, internalRules, alreadyProcessing);
                 }
@@ -1115,32 +1102,6 @@ public class CSSStyleSheet extends SimpleScriptable {
             media = "";
         }
         return isActive(media);
-    }
-
-    private static boolean isActive(final MediaListImpl mediaList, final Element element) {
-        for (int i = 0; i < mediaList.getLength(); i++) {
-            final MediaQuery query = mediaList.mediaQuery(i);
-
-            if (!isActive(query.getMedia())) {
-                return false;
-            }
-
-            for (final Property property : query.getProperties()) {
-                final String name = property.getName();
-                final CSSValueImpl value = (CSSValueImpl) property.getValue();
-                if ("min-width".equalsIgnoreCase(name)
-                        && element.getWindow().getWebWindow().getInnerWidth()
-                            < value.getFloatValue(LexicalUnit.SAC_PIXEL)) {
-                    return false;
-                }
-                else if ("max-width".equalsIgnoreCase(name)
-                        && element.getWindow().getWebWindow().getInnerWidth()
-                            > value.getFloatValue(LexicalUnit.SAC_PIXEL)) {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 
     private static boolean isActive(final String media) {
