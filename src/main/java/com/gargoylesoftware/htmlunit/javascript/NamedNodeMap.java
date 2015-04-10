@@ -32,8 +32,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.host.Attr;
-import com.gargoylesoftware.htmlunit.javascript.host.Node;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 
 /**
  * A collection of nodes that can be accessed by name. String comparisons in this class are case-insensitive when

@@ -125,6 +125,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Element;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Selection;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContainer;
 import com.gargoylesoftware.htmlunit.javascript.host.html.DocumentProxy;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
@@ -367,7 +373,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Sets the current event.
      * @param event the current event
      */
-    void setCurrentEvent(final Event event) {
+    public void setCurrentEvent(final Event event) {
         currentEvent_ = event;
     }
 
@@ -2065,7 +2071,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param eventListenersContainer the container with the listeners
      * @return the result
      */
-    protected ScriptResult executeEvent(final Event event, final EventListenersContainer eventListenersContainer) {
+    public ScriptResult executeEvent(final Event event, final EventListenersContainer eventListenersContainer) {
         if (eventListenersContainer != null) {
             final boolean eventParam = getBrowserVersion().hasFeature(
                     JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT);

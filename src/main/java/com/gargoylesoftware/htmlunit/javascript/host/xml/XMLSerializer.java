@@ -38,11 +38,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.host.CDATASection;
-import com.gargoylesoftware.htmlunit.javascript.host.Document;
-import com.gargoylesoftware.htmlunit.javascript.host.DocumentFragment;
-import com.gargoylesoftware.htmlunit.javascript.host.Element;
-import com.gargoylesoftware.htmlunit.javascript.host.Node;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.CDATASection;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.DocumentFragment;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Element;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
 

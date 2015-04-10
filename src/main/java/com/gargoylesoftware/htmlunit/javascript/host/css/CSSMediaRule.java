@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.host.MediaList;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.MediaList;
 
 /**
  * A JavaScript object for a {@link org.w3c.dom.css.CSSMediaRule}.
