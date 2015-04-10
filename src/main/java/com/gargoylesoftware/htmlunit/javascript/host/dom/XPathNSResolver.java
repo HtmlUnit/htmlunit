@@ -45,7 +45,7 @@ public class XPathNSResolver extends SimpleScriptable implements PrefixResolver 
     /**
      * Sets the element to start lookup from.
      * @param element {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement}
-     * or {@link Element} to start lookup from
+     * or {@link com.gargoylesoftware.htmlunit.javascript.host.Element} to start lookup from
      */
     public void setElement(final Node element) {
         element_ = element;

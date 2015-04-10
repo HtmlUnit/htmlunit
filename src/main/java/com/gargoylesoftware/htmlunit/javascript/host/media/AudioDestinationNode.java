@@ -22,18 +22,18 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for AnalyserNode.
+ * A JavaScript object for {@code AudioDestinationNode}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF) })
-public class AnalyserNode extends AudioNode {
+public class AudioDestinationNode extends AudioNode {
 
     /**
      * Creates an instance.
      */
     @JsxConstructor
-    public AnalyserNode() {
+    public AudioDestinationNode() {
     }
 }

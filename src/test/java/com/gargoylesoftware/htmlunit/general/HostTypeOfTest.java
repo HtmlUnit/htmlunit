@@ -566,7 +566,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.Element}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Element}.
      *
      * @throws Exception if an error occurs
      */
@@ -592,7 +592,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.Event}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Event}.
      *
      * @throws Exception if an error occurs
      */
@@ -1987,7 +1987,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.KeyboardEvent}.
      *
      * @throws Exception if an error occurs
      */
@@ -2070,7 +2070,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.MouseEvent}.
      *
      * @throws Exception if an error occurs
      */
@@ -5007,5 +5007,115 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function")
     public void shadowRoot() throws Exception {
         test("ShadowRoot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void audioBuffer() throws Exception {
+        test("AudioBuffer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void audioBufferSourceNode() throws Exception {
+        test("AudioBufferSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void audioContext() throws Exception {
+        test("AudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void audioDestinationNode() throws Exception {
+        test("AudioDestinationNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void audioListener() throws Exception {
+        test("AudioListener");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void audioNode() throws Exception {
+        test("AudioNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void audioProcessingEvent() throws Exception {
+        test("AudioProcessingEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void biquadFilterNode() throws Exception {
+        test("BiquadFilterNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void channelSplitterNode() throws Exception {
+        test("ChannelSplitterNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void convolverNode() throws Exception {
+        test("ConvolverNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void delayNode() throws Exception {
+        test("DelayNode");
     }
 }

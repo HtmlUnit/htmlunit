@@ -7814,4 +7814,204 @@ public class HostParentOfTest extends WebDriverTestCase {
     public void _LocalMediaStream_LocalMediaStream() throws Exception {
         test("LocalMediaStream", "LocalMediaStream");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+        IE = "false")
+    public void _AudioBuffer_AudioBuffer() throws Exception {
+        test("AudioBuffer", "AudioBuffer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioBufferSourceNode_AudioBufferSourceNode() throws Exception {
+        test("AudioBufferSourceNode", "AudioBufferSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioContext_AudioContext() throws Exception {
+        test("AudioContext", "AudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioDestinationNode_AudioDestinationNode() throws Exception {
+        test("AudioDestinationNode", "AudioDestinationNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioListener_AudioListener() throws Exception {
+        test("AudioListener", "AudioListener");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioNode_AnalyserNode() throws Exception {
+        test("AudioNode", "AnalyserNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioNode_AudioBufferSourceNode() throws Exception {
+        test("AudioNode", "AudioBufferSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioNode_AudioDestinationNode() throws Exception {
+        test("AudioNode", "AudioDestinationNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioNode_AudioNode() throws Exception {
+        test("AudioNode", "AudioNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioNode_BiquadFilterNode() throws Exception {
+        test("AudioNode", "BiquadFilterNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioNode_ChannelMergerNode() throws Exception {
+        test("AudioNode", "ChannelMergerNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioNode_ChannelSplitterNode() throws Exception {
+        test("AudioNode", "ChannelSplitterNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioNode_ConvolverNode() throws Exception {
+        test("AudioNode", "ConvolverNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioNode_DelayNode() throws Exception {
+        test("AudioNode", "DelayNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioProcessingEvent_AudioProcessingEvent() throws Exception {
+        test("AudioProcessingEvent", "AudioProcessingEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _BiquadFilterNode_BiquadFilterNode() throws Exception {
+        test("BiquadFilterNode", "BiquadFilterNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _ChannelSplitterNode_ChannelSplitterNode() throws Exception {
+        test("ChannelSplitterNode", "ChannelSplitterNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _ConvolverNode_ConvolverNode() throws Exception {
+        test("ConvolverNode", "ConvolverNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _DelayNode_DelayNode() throws Exception {
+        test("DelayNode", "DelayNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _Event_AudioProcessingEvent() throws Exception {
+        test("Event", "AudioProcessingEvent");
+    }
 }

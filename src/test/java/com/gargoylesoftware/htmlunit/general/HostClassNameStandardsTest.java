@@ -573,7 +573,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.Element}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Element}.
      *
      * @throws Exception if an error occurs
      */
@@ -598,7 +598,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.Event}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Event}.
      *
      * @throws Exception if an error occurs
      */
@@ -1959,7 +1959,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.KeyboardEvent}.
      *
      * @throws Exception if an error occurs
      */
@@ -2041,7 +2041,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.MouseEvent}.
      *
      * @throws Exception if an error occurs
      */
@@ -4860,7 +4860,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function AudioProcessingEvent() { [native code] }",
             FF31 = "function AudioProcessingEvent() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void audioProcessingEvent() throws Exception {
         test("AudioProcessingEvent");
     }
@@ -4934,7 +4933,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function AudioNode() { [native code] }",
             FF31 = "function AudioNode() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void audioNode() throws Exception {
         test("AudioNode");
     }
@@ -4955,7 +4953,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function BiquadFilterNode() { [native code] }",
             FF31 = "function BiquadFilterNode() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void biquadFilterNode() throws Exception {
         test("BiquadFilterNode");
     }
@@ -5018,7 +5015,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function AudioContext() { [native code] }",
             FF31 = "function AudioContext() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void audioContext() throws Exception {
         test("AudioContext");
     }
@@ -5398,7 +5394,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function AudioListener() { [native code] }",
             FF31 = "function AudioListener() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void audioListener() throws Exception {
         test("AudioListener");
     }
@@ -6038,7 +6033,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function ConvolverNode() { [native code] }",
             FF31 = "function ConvolverNode() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void convolverNode() throws Exception {
         test("ConvolverNode");
     }
@@ -7027,7 +7021,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function AudioDestinationNode() { [native code] }",
             FF31 = "function AudioDestinationNode() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void audioDestinationNode() throws Exception {
         test("AudioDestinationNode");
     }
@@ -7163,7 +7156,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function AudioBufferSourceNode() { [native code] }",
             FF31 = "function AudioBufferSourceNode() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void audioBufferSourceNode() throws Exception {
         test("AudioBufferSourceNode");
     }
@@ -7428,7 +7420,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function DelayNode() { [native code] }",
             FF31 = "function DelayNode() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void delayNode() throws Exception {
         test("DelayNode");
     }
@@ -7557,7 +7548,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function AudioBuffer() { [native code] }",
             FF31 = "function AudioBuffer() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void audioBuffer() throws Exception {
         test("AudioBuffer");
     }
@@ -8060,7 +8050,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function ChannelSplitterNode() { [native code] }",
             FF31 = "function ChannelSplitterNode() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void channelSplitterNode() throws Exception {
         test("ChannelSplitterNode");
     }

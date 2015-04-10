@@ -27,14 +27,18 @@ import com.gargoylesoftware.htmlunit.javascript.host.ClientRect;
 import com.gargoylesoftware.htmlunit.javascript.host.ClientRectList;
 import com.gargoylesoftware.htmlunit.javascript.host.ClipboardData;
 import com.gargoylesoftware.htmlunit.javascript.host.Console;
+import com.gargoylesoftware.htmlunit.javascript.host.Element;
+import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.External;
 import com.gargoylesoftware.htmlunit.javascript.host.History;
+import com.gargoylesoftware.htmlunit.javascript.host.KeyboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.MessageChannel;
 import com.gargoylesoftware.htmlunit.javascript.host.MessageEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.MessagePort;
 import com.gargoylesoftware.htmlunit.javascript.host.MimeType;
 import com.gargoylesoftware.htmlunit.javascript.host.MimeTypeArray;
+import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.Namespace;
 import com.gargoylesoftware.htmlunit.javascript.host.NamespaceCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.Navigator;
@@ -95,7 +99,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DocumentFragment;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DocumentType;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.EventNode;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.MediaList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
@@ -113,10 +116,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.XPathEvaluator;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.XPathNSResolver;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.XPathResult;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.HashChangeEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MutationEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent;
@@ -221,8 +221,19 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.Image;
 import com.gargoylesoftware.htmlunit.javascript.host.html.Option;
 import com.gargoylesoftware.htmlunit.javascript.host.html.RowContainer;
 import com.gargoylesoftware.htmlunit.javascript.host.media.AnalyserNode;
+import com.gargoylesoftware.htmlunit.javascript.host.media.AudioBuffer;
+import com.gargoylesoftware.htmlunit.javascript.host.media.AudioBufferSourceNode;
+import com.gargoylesoftware.htmlunit.javascript.host.media.AudioContext;
+import com.gargoylesoftware.htmlunit.javascript.host.media.AudioDestinationNode;
+import com.gargoylesoftware.htmlunit.javascript.host.media.AudioListener;
+import com.gargoylesoftware.htmlunit.javascript.host.media.AudioNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.AudioParam;
+import com.gargoylesoftware.htmlunit.javascript.host.media.AudioProcessingEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.media.BiquadFilterNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.ChannelMergerNode;
+import com.gargoylesoftware.htmlunit.javascript.host.media.ChannelSplitterNode;
+import com.gargoylesoftware.htmlunit.javascript.host.media.ConvolverNode;
+import com.gargoylesoftware.htmlunit.javascript.host.media.DelayNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.LocalMediaStream;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAltGlyphElement;
@@ -340,15 +351,18 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
     static final Class<? extends SimpleScriptable>[] CLASSES_ = new Class[] {
         AnalyserNode.class,
         ArrayBuffer.class, ArrayBufferView.class, ArrayBufferViewBase.class,
-        Attr.class, ActiveXObject.class, ApplicationCache.class, AudioParam.class,
-        BeforeUnloadEvent.class, BoxObject.class, CDATASection.class, ChannelMergerNode.class, ClipboardData.class,
+        Attr.class, ActiveXObject.class, ApplicationCache.class, AudioBuffer.class,
+        AudioBufferSourceNode.class, AudioContext.class, AudioDestinationNode.class, AudioListener.class,
+        AudioNode.class, AudioParam.class, AudioProcessingEvent.class, BiquadFilterNode.class,
+        BeforeUnloadEvent.class, BoxObject.class, CDATASection.class, ChannelMergerNode.class,
+        ChannelSplitterNode.class, ClipboardData.class, ConvolverNode.class,
         CSS2Properties.class,
         CSSCharsetRule.class, CSSFontFaceRule.class, CSSImportRule.class, CSSMediaRule.class, CSSPageRule.class,
         CSSPrimitiveValue.class, CSSRule.class,
         CSSRuleList.class, CSSStyleDeclaration.class, CSSStyleRule.class, CSSStyleSheet.class, CSSValue.class,
         CanvasRenderingContext2D.class, CharacterDataImpl.class, ClientRect.class, ClientRectList.class, Comment.class,
-        ComputedCSSStyleDeclaration.class, Console.class, Coordinates.class, DataView.class, DOMCursor.class,
-        DOMException.class,
+        ComputedCSSStyleDeclaration.class, Console.class, Coordinates.class, DataView.class,
+        DelayNode.class, DOMCursor.class, DOMException.class,
         DOMImplementation.class, DOMParser.class, DOMStringMap.class,
         DOMTokenList.class, Document.class, DocumentFragment.class,
         DocumentType.class, Element.class, Enumerator.class, Event.class, EventNode.class, External.class,

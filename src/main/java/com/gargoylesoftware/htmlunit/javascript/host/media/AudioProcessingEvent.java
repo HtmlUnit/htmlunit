@@ -20,20 +20,21 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
 /**
- * A JavaScript object for AnalyserNode.
+ * A JavaScript object for {@code AudioProcessingEvent}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF) })
-public class AnalyserNode extends AudioNode {
+public class AudioProcessingEvent extends Event {
 
     /**
      * Creates an instance.
      */
     @JsxConstructor
-    public AnalyserNode() {
+    public AudioProcessingEvent() {
     }
 }

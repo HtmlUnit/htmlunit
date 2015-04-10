@@ -577,7 +577,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.Element}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Element}.
      *
      * @throws Exception if an error occurs
      */
@@ -603,7 +603,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.Event}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Event}.
      *
      * @throws Exception if an error occurs
      */
@@ -2016,7 +2016,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.KeyboardEvent}.
      *
      * @throws Exception if an error occurs
      */
@@ -2099,7 +2099,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.MouseEvent}.
      *
      * @throws Exception if an error occurs
      */
@@ -5073,5 +5073,126 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function ShadowRoot() { [native code] }")
     public void shadowRoot() throws Exception {
         test("ShadowRoot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function AudioBuffer() { [native code] }",
+            FF31 = "function AudioBuffer() {\n    [native code]\n}")
+    public void audioBuffer() throws Exception {
+        test("AudioBuffer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function AudioBufferSourceNode() { [native code] }",
+            FF31 = "function AudioBufferSourceNode() {\n    [native code]\n}")
+    public void audioBufferSourceNode() throws Exception {
+        test("AudioBufferSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function AudioContext() { [native code] }",
+            FF31 = "function AudioContext() {\n    [native code]\n}")
+    public void audioContext() throws Exception {
+        test("AudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function AudioDestinationNode() { [native code] }",
+            FF31 = "function AudioDestinationNode() {\n    [native code]\n}")
+    public void audioDestinationNode() throws Exception {
+        test("AudioDestinationNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function AudioListener() { [native code] }",
+            FF31 = "function AudioListener() {\n    [native code]\n}")
+    public void audioListener() throws Exception {
+        test("AudioListener");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function AudioNode() { [native code] }",
+            FF31 = "function AudioNode() {\n    [native code]\n}")
+    public void audioNode() throws Exception {
+        test("AudioNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function AudioProcessingEvent() { [native code] }",
+            FF31 = "function AudioProcessingEvent() {\n    [native code]\n}")
+    public void audioProcessingEvent() throws Exception {
+        test("AudioProcessingEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function BiquadFilterNode() { [native code] }",
+            FF31 = "function BiquadFilterNode() {\n    [native code]\n}")
+    public void biquadFilterNode() throws Exception {
+        test("BiquadFilterNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ChannelSplitterNode() { [native code] }",
+            FF31 = "function ChannelSplitterNode() {\n    [native code]\n}")
+    public void channelSplitterNode() throws Exception {
+        test("ChannelSplitterNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ConvolverNode() { [native code] }",
+            FF31 = "function ConvolverNode() {\n    [native code]\n}")
+    public void convolverNode() throws Exception {
+        test("ConvolverNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function DelayNode() { [native code] }",
+            FF31 = "function DelayNode() {\n    [native code]\n}")
+    public void delayNode() throws Exception {
+        test("DelayNode");
     }
 }

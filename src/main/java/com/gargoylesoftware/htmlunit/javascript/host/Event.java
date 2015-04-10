@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.event;
+package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_BUBBLES_AND_CANCELABLE_DEFAULT_FALSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_DOCUMENT_DESCENDANTS;
@@ -76,7 +76,7 @@ public class Event extends SimpleScriptable {
      * Key to place the event's target in the Context's scope during event processing
      * to compute node coordinates compatible with those of the event.
      */
-    static final String KEY_CURRENT_EVENT = "Event#current";
+    protected static final String KEY_CURRENT_EVENT = "Event#current";
 
     /** The submit event type, triggered by "onsubmit" event handlers. */
     public static final String TYPE_SUBMIT = "submit";
