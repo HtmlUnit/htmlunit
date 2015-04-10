@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24),
-        @WebBrowser(value = IE, minVersion = 11)})
+        @WebBrowser(value = IE, minVersion = 11) })
 public class ClientRectList extends SimpleScriptable {
 
     /**
