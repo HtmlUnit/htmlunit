@@ -8275,4 +8275,84 @@ public class HostParentOfTest extends WebDriverTestCase {
     public void _WaveShaperNode_WaveShaperNode() throws Exception {
         test("WaveShaperNode", "WaveShaperNode");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _Element_HTMLContentElement() throws Exception {
+        test("Element", "HTMLContentElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _HTMLContentElement_HTMLContentElement() throws Exception {
+        test("HTMLContentElement", "HTMLContentElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _HTMLElement_HTMLContentElement() throws Exception {
+        test("HTMLElement", "HTMLContentElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _Node_HTMLContentElement() throws Exception {
+        test("Node", "HTMLContentElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _Element_HTMLDataElement() throws Exception {
+        test("Element", "HTMLDataElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _HTMLDataElement_HTMLDataElement() throws Exception {
+        test("HTMLDataElement", "HTMLDataElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _HTMLElement_HTMLDataElement() throws Exception {
+        test("HTMLElement", "HTMLDataElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _Node_HTMLDataElement() throws Exception {
+        test("Node", "HTMLDataElement");
+    }
 }

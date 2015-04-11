@@ -6449,7 +6449,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function HTMLContentElement() { [native code] }",
             FF31 = "function HTMLContentElement() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void htmlContentElement() throws Exception {
         test("HTMLContentElement");
     }
@@ -7593,7 +7592,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "function HTMLDataElement() {\n    [native code]\n}")
-    @NotYetImplemented(FF31)
     public void htmlDataElement() throws Exception {
         test("HTMLDataElement");
     }

@@ -2085,4 +2085,30 @@ public class ElementCreationTest extends WebDriverTestCase {
         test("XMLHttpRequest");
     }
 
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlData}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
+            FF = "[object HTMLDataElement]",
+            IE8 = "[object HTMLGenericElement]")
+    public void data() throws Exception {
+        test("data");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlContent}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "[object HTMLContentElement]",
+            IE8 = "[object HTMLGenericElement]",
+            IE11 = "[object HTMLUnknownElement]")
+    public void content() throws Exception {
+        test("content");
+    }
+
 }

@@ -2574,4 +2574,27 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     public void input() throws Exception {
         test("input");
     }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlData}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "value")
+    public void data() throws Exception {
+        test("data");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlContent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "getDistributedNodes(),select",
+            IE = "")
+    public void content() throws Exception {
+        test("content");
+    }
 }

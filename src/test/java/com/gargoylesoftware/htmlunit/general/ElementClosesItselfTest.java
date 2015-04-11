@@ -1748,4 +1748,26 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     public void input() throws Exception {
         loadPageWithAlerts2(test("input"));
     }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlData}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    public void data() throws Exception {
+        loadPageWithAlerts2(test("data"));
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlContent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    public void content() throws Exception {
+        loadPageWithAlerts2(test("content"));
+    }
 }

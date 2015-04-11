@@ -1411,4 +1411,21 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
         loadPageWithAlerts2(test("input"));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<data></data>")
+    public void data() throws Exception {
+        loadPageWithAlerts2(test("data"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<content></content>")
+    public void content() throws Exception {
+        loadPageWithAlerts2(test("content"));
+    }
 }

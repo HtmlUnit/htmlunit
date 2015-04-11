@@ -5238,4 +5238,24 @@ public class HostTypeOfTest extends WebDriverTestCase {
     public void waveShaperNode() throws Exception {
         test("WaveShaperNode");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void htmlContentElement() throws Exception {
+        test("HTMLContentElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
+    public void htmlDataElement() throws Exception {
+        test("HTMLDataElement");
+    }
 }

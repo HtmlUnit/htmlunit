@@ -123,103 +123,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Coordinates;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Position;
-import com.gargoylesoftware.htmlunit.javascript.host.html.Enumerator;
-import com.gargoylesoftware.htmlunit.javascript.host.html.FormChild;
-import com.gargoylesoftware.htmlunit.javascript.host.html.FormField;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAllCollection;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAnchorElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAppletElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAreaElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAudioElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBGSoundElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBRElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseFontElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBlockElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLButtonElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCommentElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDDElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDListElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDTElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDataListElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDetailsElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDialogElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDirectoryElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDivElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLEmbedElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFieldSetElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFontElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFrameElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFrameSetElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHRElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHeadElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHeadingElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInlineQuotationElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIsIndexElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLKeygenElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLIElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLabelElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLegendElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLListElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMapElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMarqueeElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMediaElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMenuElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMenuItemElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMetaElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMeterElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLModElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLNextIdElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLNoShowElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOListElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLObjectElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptGroupElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionsCollection;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOutputElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLParagraphElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLParamElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLPhraseElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLPreElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLProgressElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLQuoteElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSelectElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLShadowElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSourceElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSpanElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableCaptionElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableCellElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableColElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableComponent;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableDataCellElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableHeaderCellElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableRowElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableSectionElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTimeElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTitleElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTrackElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUListElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLVideoElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.Image;
-import com.gargoylesoftware.htmlunit.javascript.host.html.Option;
-import com.gargoylesoftware.htmlunit.javascript.host.html.RowContainer;
+import com.gargoylesoftware.htmlunit.javascript.host.html.*;
 import com.gargoylesoftware.htmlunit.javascript.host.media.AnalyserNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.AudioBuffer;
 import com.gargoylesoftware.htmlunit.javascript.host.media.AudioBufferSourceNode;
@@ -388,8 +292,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLBRElement.class, HTMLBaseElement.class, HTMLBaseFontElement.class,
         HTMLBlockElement.class,
         HTMLQuoteElement.class, HTMLBodyElement.class, HTMLButtonElement.class, HTMLCanvasElement.class,
-        HTMLCollection.class, HTMLCommentElement.class,
-        HTMLDataListElement.class,
+        HTMLCollection.class, HTMLCommentElement.class, HTMLContentElement.class,
+        HTMLDataElement.class, HTMLDataListElement.class,
         HTMLDDElement.class, HTMLDetailsElement.class, HTMLDialogElement.class, HTMLDTElement.class,
         HTMLDListElement.class,
         HTMLDirectoryElement.class,

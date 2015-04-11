@@ -139779,4 +139779,1478 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     public void _style_input() throws Exception {
         test("style", "input");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _area_content() throws Exception {
+        test("area", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _area_data() throws Exception {
+        test("area", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _base_content() throws Exception {
+        test("base", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _base_data() throws Exception {
+        test("base", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented
+    public void _basefont_content() throws Exception {
+        test("basefont", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented
+    public void _basefont_data() throws Exception {
+        test("basefont", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _bgsound_content() throws Exception {
+        test("bgsound", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _bgsound_data() throws Exception {
+        test("bgsound", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _body_content() throws Exception {
+        test("body", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _body_data() throws Exception {
+        test("body", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _br_content() throws Exception {
+        test("br", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _br_data() throws Exception {
+        test("br", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _caption_content() throws Exception {
+        test("caption", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _caption_data() throws Exception {
+        test("caption", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _col_content() throws Exception {
+        test("col", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _col_data() throws Exception {
+        test("col", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _colgroup_content() throws Exception {
+        test("colgroup", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _colgroup_data() throws Exception {
+        test("colgroup", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            IE11 = "0")
+    @NotYetImplemented({ IE11, CHROME })
+    public void _command_content() throws Exception {
+        test("command", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            IE11 = "0")
+    @NotYetImplemented({ IE11, CHROME })
+    public void _command_data() throws Exception {
+        test("command", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented
+    public void _content_area() throws Exception {
+        test("content", "area");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _content_base() throws Exception {
+        test("content", "base");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented
+    public void _content_basefont() throws Exception {
+        test("content", "basefont");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _content_bgsound() throws Exception {
+        test("content", "bgsound");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _content_br() throws Exception {
+        test("content", "br");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "2",
+            IE11 = "2")
+    @NotYetImplemented({ IE11, CHROME })
+    public void _content_command() throws Exception {
+        test("content", "command");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _content_embed() throws Exception {
+        test("content", "embed");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _content_hr() throws Exception {
+        test("content", "hr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented
+    public void _content_image() throws Exception {
+        test("content", "image");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _content_img() throws Exception {
+        test("content", "img");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _content_input() throws Exception {
+        test("content", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented
+    public void _content_keygen() throws Exception {
+        test("content", "keygen");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _content_link() throws Exception {
+        test("content", "link");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _content_meta() throws Exception {
+        test("content", "meta");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented
+    public void _content_param() throws Exception {
+        test("content", "param");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented
+    public void _content_source() throws Exception {
+        test("content", "source");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented
+    public void _content_track() throws Exception {
+        test("content", "track");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _content_wbr() throws Exception {
+        test("content", "wbr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented
+    public void _data_area() throws Exception {
+        test("data", "area");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _data_base() throws Exception {
+        test("data", "base");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented
+    public void _data_basefont() throws Exception {
+        test("data", "basefont");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _data_bgsound() throws Exception {
+        test("data", "bgsound");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _data_br() throws Exception {
+        test("data", "br");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "2",
+            IE11 = "2")
+    @NotYetImplemented({ IE11, CHROME })
+    public void _data_command() throws Exception {
+        test("data", "command");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _data_embed() throws Exception {
+        test("data", "embed");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _data_hr() throws Exception {
+        test("data", "hr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented
+    public void _data_image() throws Exception {
+        test("data", "image");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _data_img() throws Exception {
+        test("data", "img");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _data_input() throws Exception {
+        test("data", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented
+    public void _data_keygen() throws Exception {
+        test("data", "keygen");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _data_link() throws Exception {
+        test("data", "link");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _data_meta() throws Exception {
+        test("data", "meta");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented
+    public void _data_param() throws Exception {
+        test("data", "param");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented
+    public void _data_source() throws Exception {
+        test("data", "source");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented
+    public void _data_track() throws Exception {
+        test("data", "track");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _data_wbr() throws Exception {
+        test("data", "wbr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _embed_content() throws Exception {
+        test("embed", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _embed_data() throws Exception {
+        test("embed", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    @NotYetImplemented
+    public void _frame_content() throws Exception {
+        test("frame", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    @NotYetImplemented
+    public void _frame_data() throws Exception {
+        test("frame", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    @NotYetImplemented
+    public void _frameset_content() throws Exception {
+        test("frameset", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    @NotYetImplemented
+    public void _frameset_data() throws Exception {
+        test("frameset", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _head_content() throws Exception {
+        test("head", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _head_data() throws Exception {
+        test("head", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _hr_content() throws Exception {
+        test("hr", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _hr_data() throws Exception {
+        test("hr", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented
+    public void _html_content() throws Exception {
+        test("html", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented
+    public void _html_data() throws Exception {
+        test("html", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented
+    public void _image_content() throws Exception {
+        test("image", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented
+    public void _image_data() throws Exception {
+        test("image", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _img_content() throws Exception {
+        test("img", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _img_data() throws Exception {
+        test("img", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_content() throws Exception {
+        test("input", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_data() throws Exception {
+        test("input", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF31 = "2",
+            IE11 = "0")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void _keygen_content() throws Exception {
+        test("keygen", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF31 = "2",
+            IE11 = "0")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void _keygen_data() throws Exception {
+        test("keygen", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _link_content() throws Exception {
+        test("link", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _link_data() throws Exception {
+        test("link", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _meta_content() throws Exception {
+        test("meta", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _meta_data() throws Exception {
+        test("meta", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _param_content() throws Exception {
+        test("param", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _param_data() throws Exception {
+        test("param", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented
+    public void _source_content() throws Exception {
+        test("source", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented
+    public void _source_data() throws Exception {
+        test("source", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _table_content() throws Exception {
+        test("table", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _table_data() throws Exception {
+        test("table", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _tbody_content() throws Exception {
+        test("tbody", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _tbody_data() throws Exception {
+        test("tbody", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _td_content() throws Exception {
+        test("td", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _td_data() throws Exception {
+        test("td", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _tfoot_content() throws Exception {
+        test("tfoot", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _tfoot_data() throws Exception {
+        test("tfoot", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _th_content() throws Exception {
+        test("th", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _th_data() throws Exception {
+        test("th", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _thead_content() throws Exception {
+        test("thead", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _thead_data() throws Exception {
+        test("thead", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _tr_content() throws Exception {
+        test("tr", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _tr_data() throws Exception {
+        test("tr", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented
+    public void _track_content() throws Exception {
+        test("track", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented
+    public void _track_data() throws Exception {
+        test("track", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _wbr_content() throws Exception {
+        test("wbr", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _wbr_data() throws Exception {
+        test("wbr", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            FF31 = "2",
+            IE11 = "2")
+    @NotYetImplemented({ FF31, IE11 })
+    public void _content_isindex() throws Exception {
+        test("content", "isindex");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            FF31 = "2",
+            IE11 = "2")
+    @NotYetImplemented({ FF31, IE11 })
+    public void _data_isindex() throws Exception {
+        test("data", "isindex");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            FF31 = "0",
+            IE11 = "0")
+    @NotYetImplemented({ FF31, IE11 })
+    public void _isindex_content() throws Exception {
+        test("isindex", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            FF31 = "0",
+            IE11 = "0")
+    @NotYetImplemented({ FF31, IE11 })
+    public void _isindex_data() throws Exception {
+        test("isindex", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void _content_nextid() throws Exception {
+        test("content", "nextid");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented
+    public void _content_script() throws Exception {
+        test("content", "script");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented
+    public void _content_title() throws Exception {
+        test("content", "title");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented({ FF31, IE11, CHROME })
+    public void _data_nextid() throws Exception {
+        test("data", "nextid");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented
+    public void _data_script() throws Exception {
+        test("data", "script");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented
+    public void _data_title() throws Exception {
+        test("data", "title");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented
+    public void _nextid_content() throws Exception {
+        test("nextid", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented
+    public void _nextid_data() throws Exception {
+        test("nextid", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented
+    public void _optgroup_content() throws Exception {
+        test("optgroup", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented
+    public void _optgroup_data() throws Exception {
+        test("optgroup", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented
+    public void _option_content() throws Exception {
+        test("option", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented
+    public void _option_data() throws Exception {
+        test("option", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented
+    public void _script_content() throws Exception {
+        test("script", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented
+    public void _script_data() throws Exception {
+        test("script", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _content_body() throws Exception {
+        test("content", "body");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _content_caption() throws Exception {
+        test("content", "caption");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _content_col() throws Exception {
+        test("content", "col");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _content_colgroup() throws Exception {
+        test("content", "colgroup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _content_head() throws Exception {
+        test("content", "head");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _content_html() throws Exception {
+        test("content", "html");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _content_optgroup() throws Exception {
+        test("content", "optgroup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _content_option() throws Exception {
+        test("content", "option");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _content_tbody() throws Exception {
+        test("content", "tbody");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _content_td() throws Exception {
+        test("content", "td");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _content_tfoot() throws Exception {
+        test("content", "tfoot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _content_th() throws Exception {
+        test("content", "th");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _content_thead() throws Exception {
+        test("content", "thead");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _content_tr() throws Exception {
+        test("content", "tr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _data_body() throws Exception {
+        test("data", "body");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _data_caption() throws Exception {
+        test("data", "caption");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _data_col() throws Exception {
+        test("data", "col");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _data_colgroup() throws Exception {
+        test("data", "colgroup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _data_head() throws Exception {
+        test("data", "head");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _data_html() throws Exception {
+        test("data", "html");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _data_optgroup() throws Exception {
+        test("data", "optgroup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _data_option() throws Exception {
+        test("data", "option");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _data_tbody() throws Exception {
+        test("data", "tbody");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _data_td() throws Exception {
+        test("data", "td");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _data_tfoot() throws Exception {
+        test("data", "tfoot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _data_th() throws Exception {
+        test("data", "th");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _data_thead() throws Exception {
+        test("data", "thead");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _data_tr() throws Exception {
+        test("data", "tr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _noscript_content() throws Exception {
+        test("noscript", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _noscript_data() throws Exception {
+        test("noscript", "data");
+    }
 }

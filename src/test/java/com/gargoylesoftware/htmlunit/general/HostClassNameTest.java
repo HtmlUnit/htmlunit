@@ -5326,4 +5326,25 @@ public class HostClassNameTest extends WebDriverTestCase {
     public void waveShaperNode() throws Exception {
         test("WaveShaperNode");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function HTMLContentElement() { [native code] }",
+            FF31 = "function HTMLContentElement() {\n    [native code]\n}")
+    public void htmlContentElement() throws Exception {
+        test("HTMLContentElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function HTMLDataElement() {\n    [native code]\n}")
+    public void htmlDataElement() throws Exception {
+        test("HTMLDataElement");
+    }
 }

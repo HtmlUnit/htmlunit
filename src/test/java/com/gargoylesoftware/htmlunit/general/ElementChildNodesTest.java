@@ -1778,4 +1778,25 @@ public class ElementChildNodesTest extends WebDriverTestCase {
         loadPageWithAlerts2(test("input"));
     }
 
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlData}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" })
+    public void data() throws Exception {
+        loadPageWithAlerts2(test("data"));
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlContent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" })
+    public void content() throws Exception {
+        loadPageWithAlerts2(test("content"));
+    }
 }

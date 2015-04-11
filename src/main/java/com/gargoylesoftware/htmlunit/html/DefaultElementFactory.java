@@ -56,7 +56,7 @@ class DefaultElementFactory implements ElementFactory {
             HtmlBlink.TAG_NAME, HtmlBlockQuote.TAG_NAME, HtmlBody.TAG_NAME, HtmlBold.TAG_NAME,
             HtmlBreak.TAG_NAME, HtmlButton.TAG_NAME, HtmlCanvas.TAG_NAME, HtmlCaption.TAG_NAME,
             HtmlCenter.TAG_NAME, HtmlCitation.TAG_NAME, HtmlCode.TAG_NAME,
-            HtmlCommand.TAG_NAME, HtmlDataList.TAG_NAME,
+            HtmlCommand.TAG_NAME, HtmlContent.TAG_NAME, HtmlData.TAG_NAME, HtmlDataList.TAG_NAME,
             HtmlDefinition.TAG_NAME, HtmlDefinitionDescription.TAG_NAME,
             HtmlDeletedText.TAG_NAME, HtmlDetails.TAG_NAME, HtmlDialog.TAG_NAME, HtmlDirectory.TAG_NAME,
             HtmlDivision.TAG_NAME, HtmlDefinitionList.TAG_NAME,
@@ -267,6 +267,14 @@ class DefaultElementFactory implements ElementFactory {
 
             case HtmlCommand.TAG_NAME:
                 element = new HtmlCommand(qualifiedName, page, attributeMap);
+                break;
+
+            case HtmlContent.TAG_NAME:
+                element = new HtmlContent(qualifiedName, page, attributeMap);
+                break;
+
+            case HtmlData.TAG_NAME:
+                element = new HtmlData(qualifiedName, page, attributeMap);
                 break;
 
             case HtmlDataList.TAG_NAME:
