@@ -18,14 +18,19 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static org.junit.Assert.assertSame;
 
 import java.io.IOException;
+import java.io.Writer;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.Servlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
@@ -43,8 +48,10 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequestTest.StreamingServlet;
 
 /**
@@ -57,6 +64,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequestTest.Stre
  * @author Stuart Begg
  * @author Sudhan Moghe
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class XMLHttpRequest3Test extends WebServerTestCase {
@@ -80,10 +88,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
             + "    <script>\n"
             + "      var request;\n"
             + "      function testAsync() {\n"
-            + "        if (window.XMLHttpRequest)\n"
-            + "          request = new XMLHttpRequest();\n"
-            + "        else if (window.ActiveXObject)\n"
-            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        request = " + XMLHttpRequest2Test.XHRInstantiation_ + ";\n"
             + "        request.onreadystatechange = onReadyStateChange;\n"
             + "        alert(request.readyState);\n"
             + "        request.open('GET', '" + URL_SECOND + "', true);\n"
@@ -136,10 +141,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
             + "<script>\n"
             + "var request;\n"
             + "function testAsync() {\n"
-            + "  if (window.XMLHttpRequest)\n"
-            + "    request = new XMLHttpRequest();\n"
-            + "  else if (window.ActiveXObject)\n"
-            + "    request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "  request = " + XMLHttpRequest2Test.XHRInstantiation_ + ";\n"
             + "  request.onreadystatechange = onReadyStateChange;\n"
             + "  request.onerror = onError;\n"
             + "  alert(request.readyState);\n"
@@ -198,27 +200,22 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
     @Test
     public void noParallelJSExecutionInPage() throws Exception {
         final String content = "<html><head><script>\n"
-            + "function getXMLHttpRequest() {\n"
-            + " if (window.XMLHttpRequest)\n"
-            + "        return new XMLHttpRequest();\n"
-            + " else if (window.ActiveXObject)\n"
-            + "        return new ActiveXObject('Microsoft.XMLHTTP');\n"
-            + "}\n"
             + "var j = 0;\n"
             + "function test() {\n"
-            + " req = getXMLHttpRequest();\n"
-            + " req.onreadystatechange = handler;\n"
-            + " req.open('post', 'foo.xml', true);\n"
-            + " req.send('');\n"
-            + " alert('before long loop');\n"
-            + " for (var i = 0; i < 5000; i++) {\n"
+            + "  req = " + XMLHttpRequest2Test.XHRInstantiation_ + ";\n"
+            + "  req.onreadystatechange = handler;\n"
+            + "  req.open('post', 'foo.xml', true);\n"
+            + "  req.send('');\n"
+            + "  alert('before long loop');\n"
+            + "  for (var i = 0; i < 5000; i++) {\n"
             + "     j = j + 1;\n"
-            + " }\n"
-            + " alert('after long loop');\n"
+            + "  }\n"
+            + "  alert('after long loop');\n"
             + "}\n"
             + "function handler() {\n"
-            + " if (req.readyState == 4)\n"
-            + "     alert('ready state handler, content loaded: j=' + j);\n"
+            + "  if (req.readyState == 4) {\n"
+            + "    alert('ready state handler, content loaded: j=' + j);\n"
+            + "  }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
@@ -266,16 +263,10 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
      */
     private void testMethod(final HttpMethod method) throws Exception {
         final String content = "<html><head><script>\n"
-            + "function getXMLHttpRequest() {\n"
-            + " if (window.XMLHttpRequest)\n"
-            + "        return new XMLHttpRequest();\n"
-            + " else if (window.ActiveXObject)\n"
-            + "        return new ActiveXObject('Microsoft.XMLHTTP');\n"
-            + "}\n"
             + "function test() {\n"
-            + " req = getXMLHttpRequest();\n"
-            + " req.open('" + method.name().toLowerCase() + "', 'foo.xml', false);\n"
-            + " req.send('');\n"
+            + "  var req = " + XMLHttpRequest2Test.XHRInstantiation_ + ";\n"
+            + "  req.open('" + method.name().toLowerCase() + "', 'foo.xml', false);\n"
+            + "  req.send('');\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
@@ -318,11 +309,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
             + "<script>\n"
             + "function test(_src, _async)\n"
             + "{\n"
-            + "  var request;\n"
-            + "  if (window.XMLHttpRequest)\n"
-            + "    request = new XMLHttpRequest();\n"
-            + "  else if (window.ActiveXObject)\n"
-            + "    request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "  var request = " + XMLHttpRequest2Test.XHRInstantiation_ + ";\n"
             + "  request.onreadystatechange = onReadyStateChange;\n"
             + "  request.open('GET', _src, _async);\n"
             + "  request.send('');\n"
@@ -412,10 +399,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
             + "    <script>\n"
             + "      var request;\n"
             + "      function testAsync() {\n"
-            + "        if (window.XMLHttpRequest)\n"
-            + "          request = new XMLHttpRequest();\n"
-            + "        else if (window.ActiveXObject)\n"
-            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        request = " + XMLHttpRequest2Test.XHRInstantiation_ + ";\n"
             + "        request.onreadystatechange = onReadyStateChange;\n"
             + "        request.open('GET', 'foo.xml', true);\n"
             + "        request.send('');\n"
@@ -446,5 +430,162 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
 
         assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
         assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
+
+    /**
+     * Test for a strange error we found: An ajax running
+     * in parallel shares the additional headers with a form
+     * submit.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @NotYetImplemented
+    public void ajaxInfluencesSubmitHeaders() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/content.html", ContentServlet.class);
+        servlets.put("/ajax_headers.html", AjaxHeaderServlet.class);
+        servlets.put("/form_headers.html", FormHeaderServlet.class);
+        startWebServer("./", null, servlets);
+
+        collectedHeaders_.clear();
+        final WebClient client = getWebClient();
+
+        final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(100));
+
+        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/content.html");
+        final DomElement elem = page.getElementById("doIt");
+        ((HtmlSubmitInput) elem).click();
+
+        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
+
+        String headers = collectedHeaders_.get(0);
+        assertTrue(headers, headers.startsWith("Form: "));
+        assertFalse(headers, headers.contains("Html-Unit=is great,;"));
+
+        headers = collectedHeaders_.get(1);
+        assertTrue(headers, headers.startsWith("Ajax: "));
+        assertTrue(headers, headers.contains("Html-Unit=is great,;"));
+    }
+
+    static final List<String> collectedHeaders_ = Collections.synchronizedList(new ArrayList<String>());
+
+    /**
+     * First servlet for {@link #testNoContent()}.
+     */
+    public static class ContentServlet extends HttpServlet {
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest req, final HttpServletResponse res) throws IOException {
+            final String html = "<html><head><script>\n"
+                    + "  function test() {\n"
+                    + "    xhr = " + XMLHttpRequest2Test.XHRInstantiation_ + ";\n"
+                    + "    xhr.open('POST', 'ajax_headers.html', true);\n"
+                    + "    xhr.setRequestHeader('Html-Unit', 'is great');\n"
+                    + "    xhr.send('');\n"
+                    + "  }\n"
+                    + "</script></head>\n"
+                    + "<body onload='test()'>\n"
+                    + "  <form action='form_headers.html' name='myForm'>\n"
+                    + "    <input name='myField' value='some value'>\n"
+                    + "    <input type='submit' id='doIt' value='Do It'>\n"
+                    + "  </form>\n"
+                    + "</body></html>";
+
+            res.setContentType("text/html");
+            final Writer writer = res.getWriter();
+            writer.write(html);
+            writer.close();
+        }
+    }
+
+    /**
+     * Servlet for {@link #setRequestHeader()}.
+     */
+    public static class AjaxHeaderServlet extends HttpServlet {
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doPost(final HttpServletRequest req, final HttpServletResponse res) throws IOException {
+            doGet(req, res);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            final String header = headers(request);
+            try {
+                // do not return before the form request is also sent
+                Thread.sleep(666);
+            }
+            catch (final InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            collectedHeaders_.add("Ajax: " + header);
+            response.setContentType("text/plain");
+            final Writer writer = response.getWriter();
+            writer.write(header);
+            writer.close();
+        }
+    }
+
+    /**
+     * Servlet for {@link #setRequestHeader()}.
+     */
+    public static class FormHeaderServlet extends HttpServlet {
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doPost(final HttpServletRequest req, final HttpServletResponse res) throws IOException {
+            doGet(req, res);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            final String header = headers(request);
+
+            final String html = "<html><head></head>\n"
+                    + "<body>\n"
+                    + "<p>Form: " + header + "</p<\n"
+                    + "</body></html>";
+
+            collectedHeaders_.add("Form: " + header);
+            response.setContentType("text/html");
+            final Writer writer = response.getWriter();
+            writer.write(html);
+            writer.close();
+        }
+    }
+
+    static String headers(final HttpServletRequest request) {
+        final StringBuilder text = new StringBuilder();
+        text.append("Headers: ");
+        final Enumeration<String> headerNames = request.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            final String name = headerNames.nextElement();
+            text.append(name);
+            text.append('=');
+            final Enumeration<String> headers = request.getHeaders(name);
+            while (headers.hasMoreElements()) {
+                final String header = headers.nextElement();
+                text.append(header);
+                text.append(',');
+            }
+            text.append(';');
+        }
+        return text.toString();
     }
 }

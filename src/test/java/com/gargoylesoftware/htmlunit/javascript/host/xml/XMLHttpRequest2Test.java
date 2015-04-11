@@ -56,7 +56,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 @RunWith(BrowserRunner.class)
 public class XMLHttpRequest2Test extends WebDriverTestCase {
-    private static String XHRInstantiation_ = "(window.XMLHttpRequest ? "
+    static String XHRInstantiation_ = "(window.XMLHttpRequest ? "
         + "new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP'))";
 
     /**
@@ -666,11 +666,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                         + "    <script>\n"
                         + "      var request;\n"
                         + "      function testBasicAuth() {\n"
-                        + "        if (window.XMLHttpRequest) {\n"
-                        + "          request = new XMLHttpRequest();\n"
-                        + "        } else if (window.ActiveXObject) {\n"
-                        + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
-                        + "        }\n"
+                        + "        var request = " + XHRInstantiation_ + ";\n"
                         + "        request.open('GET', '/protected/token', false, 'foo', 'bar');\n"
                         + "        request.send();\n"
                         + "        alert(request.responseText);\n"
@@ -701,11 +697,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                         + "    <script>\n"
                         + "      var request;\n"
                         + "      function testBasicAuth() {\n"
-                        + "        if (window.XMLHttpRequest) {\n"
-                        + "          request = new XMLHttpRequest();\n"
-                        + "        } else if (window.ActiveXObject) {\n"
-                        + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
-                        + "        }\n"
+                        + "        var request = " + XHRInstantiation_ + ";\n"
                         + "        request.open('GET', '" + URL_SECOND + "', false, null, null);\n"
                         + "        request.send();\n"
                         + "        alert(request.responseText);\n"
