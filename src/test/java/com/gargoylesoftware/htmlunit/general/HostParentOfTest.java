@@ -8355,4 +8355,64 @@ public class HostParentOfTest extends WebDriverTestCase {
     public void _Node_HTMLDataElement() throws Exception {
         test("Node", "HTMLDataElement");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _CharacterData_CDATASection() throws Exception {
+        test("CharacterData", "CDATASection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _CharacterData_CharacterData() throws Exception {
+        test("CharacterData", "CharacterData");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _CharacterData_Comment() throws Exception {
+        test("CharacterData", "Comment");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _CharacterData_ProcessingInstruction() throws Exception {
+        test("CharacterData", "ProcessingInstruction");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _CharacterData_Text() throws Exception {
+        test("CharacterData", "Text");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _Node_CharacterData() throws Exception {
+        test("Node", "CharacterData");
+    }
 }

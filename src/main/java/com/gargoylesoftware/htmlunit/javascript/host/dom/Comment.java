@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
     @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
         browsers = @WebBrowser(value = IE, maxVersion = 8))
 })
-public class Comment extends CharacterDataImpl {
+public class Comment extends CharacterData {
 
     /**
      * Creates an instance.

@@ -88,7 +88,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclara
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.CDATASection;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.CharacterDataImpl;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.CharacterData;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Comment;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMCursor;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMException;
@@ -276,7 +276,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         CSSCharsetRule.class, CSSFontFaceRule.class, CSSImportRule.class, CSSMediaRule.class, CSSPageRule.class,
         CSSPrimitiveValue.class, CSSRule.class,
         CSSRuleList.class, CSSStyleDeclaration.class, CSSStyleRule.class, CSSStyleSheet.class, CSSValue.class,
-        CanvasRenderingContext2D.class, CharacterDataImpl.class, ClientRect.class, ClientRectList.class, Comment.class,
+        CanvasRenderingContext2D.class, CharacterData.class, ClientRect.class, ClientRectList.class, Comment.class,
         ComputedCSSStyleDeclaration.class, Console.class, Coordinates.class, DataView.class,
         DelayNode.class, DOMCursor.class, DOMException.class,
         DOMImplementation.class, DOMParser.class, DOMStringMap.class,

@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClass(domClass = DomProcessingInstruction.class,
     browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
-public final class ProcessingInstruction extends Node {
+public final class ProcessingInstruction extends CharacterData {
 
     /**
      * Creates an instance.

@@ -359,7 +359,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.CharacterDataImpl}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.CharacterData}.
      *
      * @throws Exception if an error occurs
      */
@@ -6888,6 +6888,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.CharacterData}.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -6895,7 +6897,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function CharacterData() { [native code] }",
             FF31 = "function CharacterData() {\n    [native code]\n}",
             IE11 = "[object CharacterData]")
-    @NotYetImplemented({ FF31, IE11, CHROME })
     public void characterData() throws Exception {
         test("CharacterData");
     }

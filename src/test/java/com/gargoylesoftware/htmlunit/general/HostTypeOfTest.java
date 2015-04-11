@@ -356,7 +356,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.CharacterDataImpl}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.CharacterData}.
      *
      * @throws Exception if an error occurs
      */
@@ -4246,7 +4246,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void characterData() throws Exception {
         test("CharacterData");
     }

@@ -1066,10 +1066,10 @@ public class Node extends SimpleScriptable {
         }
 
         if (getBrowserVersion().hasFeature(JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG)) {
-            if (element instanceof CharacterDataImpl) {
+            if (element instanceof CharacterData) {
                 return false;
             }
-            if (this instanceof CharacterDataImpl) {
+            if (this instanceof CharacterData) {
                 throw Context.reportRuntimeError("Function 'contains' not available for text nodes.");
             }
         }

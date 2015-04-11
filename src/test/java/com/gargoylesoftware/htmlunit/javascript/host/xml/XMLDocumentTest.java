@@ -165,7 +165,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "      serializer = new XMLSerializer();\n"
             + "      return serializer.serializeToString(doc);\n"
             + "    } else {\n"
-            + "      return doc.xml;"
+            + "      return doc.xml;\n"
             + "    }\n"
             + "  }\n";
 
@@ -179,7 +179,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     /** Helper. */
     public static final String SERIALIZE_ACTIVEX_XML_DOCUMENT_TO_STRING_FUNCTION = ""
             + "  function " + SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION_NAME + "(doc) {\n"
-            + "    return doc.xml;"
+            + "    return doc.xml;\n"
             + "  }\n";
 
     /**

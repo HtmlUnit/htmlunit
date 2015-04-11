@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.16" date="???" description="Java 7, WebClient.close(), FF31, IE11 progress, Chrome progress, Bugfixes">
+            <action type="fix" dev="asashour">
+                JavaScript: rename host class CharacterDataImpl to CharacterData,
+                and ProcessingInstruction to extend CharacterData.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-lang to 3.4.
             </action>

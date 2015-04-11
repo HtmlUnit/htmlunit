@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
     @JsxClass(domClass = DomText.class,
         isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
 })
-public class Text extends CharacterDataImpl {
+public class Text extends CharacterData {
 
     /**
      * Creates an instance.

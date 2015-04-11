@@ -23,13 +23,13 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link CharacterDataImpl}.
+ * Tests for {@link CharacterData}.
  *
  * @version $Revision$
  * @author David K. Taylor
  */
 @RunWith(BrowserRunner.class)
-public class CharacterDataImplTest extends WebDriverTestCase {
+public class CharacterDataTest extends WebDriverTestCase {
 
     /**
      * Regression test for inline text nodes.
@@ -37,7 +37,7 @@ public class CharacterDataImplTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"Some Text", "9", "3", "Some Text", "#text" })
-    public void characterDataImpl_textNode() throws Exception {
+    public void textNode() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -62,7 +62,7 @@ public class CharacterDataImplTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"Some New Text", "Some New Text" })
-    public void characterDataImpl_setData() throws Exception {
+    public void setData() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -85,7 +85,7 @@ public class CharacterDataImplTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"Some New Text", "Some New Text" })
-    public void characterDataImpl_setNodeValue() throws Exception {
+    public void setNodeValue() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -108,7 +108,7 @@ public class CharacterDataImplTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("Some Text Appended")
-    public void characterDataImpl_appendData() throws Exception {
+    public void appendData() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -130,7 +130,7 @@ public class CharacterDataImplTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "Some Text", "Some", "Some", "me", "" })
-    public void characterDataImpl_deleteData() throws Exception {
+    public void deleteData() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -176,7 +176,7 @@ public class CharacterDataImplTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "", "", "", "" },
             IE = { "", "", "", "exception" })
-    public void characterDataImpl_deleteDataEmptyImput() throws Exception {
+    public void deleteDataEmptyImput() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -216,7 +216,7 @@ public class CharacterDataImplTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "exception", "exception", "exception", "exception" },
             IE = { "exception", "exception", "abcde", "exception" })
-    public void characterDataImpl_deleteDataInvalidStart() throws Exception {
+    public void deleteDataInvalidStart() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -255,7 +255,7 @@ public class CharacterDataImplTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "Some Not So New Te", "Some ", "So" },
             IE = { "exception", "exception", "exception" })
-    public void characterDataImpl_deleteDataNegativeCount() throws Exception {
+    public void deleteDataNegativeCount() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -289,7 +289,7 @@ public class CharacterDataImplTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("Some New Text")
-    public void characterDataImpl_insertData() throws Exception {
+    public void insertData() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -311,7 +311,7 @@ public class CharacterDataImplTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("Some New Text")
-    public void characterDataImpl_replaceData() throws Exception {
+    public void replaceData() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
@@ -333,7 +333,7 @@ public class CharacterDataImplTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"New", "Some New Text" })
-    public void characterDataImpl_substringData() throws Exception {
+    public void substringData() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
