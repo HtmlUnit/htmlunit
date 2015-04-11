@@ -56,6 +56,7 @@ public class HostParentOfTest extends WebDriverTestCase {
         final List<String> strings = TestCaseTest.getAllClassNames();
         for (final String parent : strings) {
             for (final String child : strings) {
+                if (parent.equals("ClientRectList") || child.equals("ClientRectList") || parent.equals("CSSPageRule") || child.equals("CSSPageRule"))
                 list.add(new Object[] {parent, child});
             }
         }
@@ -8013,5 +8014,36 @@ public class HostParentOfTest extends WebDriverTestCase {
             IE = "false")
     public void _Event_AudioProcessingEvent() throws Exception {
         test("Event", "AudioProcessingEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+        IE8 = "false")
+    public void _CSSPageRule_CSSPageRule() throws Exception {
+        test("CSSPageRule", "CSSPageRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+        IE8 = "false")
+    public void _CSSRule_CSSPageRule() throws Exception {
+        test("CSSRule", "CSSPageRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+        CHROME = "true",
+        IE11 = "true")
+    public void _ClientRectList_ClientRectList() throws Exception {
+        test("ClientRectList", "ClientRectList");
     }
 }
