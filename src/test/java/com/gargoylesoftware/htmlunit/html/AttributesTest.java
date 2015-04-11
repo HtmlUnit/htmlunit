@@ -78,7 +78,7 @@ public class AttributesTest extends TestCase {
             "HtmlBlockQuote", "HtmlBody", "HtmlBold",
             "HtmlBreak", "HtmlButton", "HtmlCanvas", "HtmlCaption",
             "HtmlCenter", "HtmlCitation", "HtmlCode", "HtmlCommand", "DomComment",
-            "HtmlDataList",
+            "HtmlContent", "HtmlData", "HtmlDataList",
             "HtmlDefinition", "HtmlDefinitionDescription",
             "HtmlDeletedText", "HtmlDetails", "HtmlDialog", "HtmlDirectory",
             "HtmlDivision", "HtmlDefinitionList",

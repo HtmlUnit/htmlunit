@@ -1784,7 +1784,8 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE8 = { "1", "1", "1", "1", "1", "1" })
     public void data() throws Exception {
         loadPageWithAlerts2(test("data"));
     }
@@ -1795,7 +1796,8 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "3", "2", "2", "3", "2", "2" })
+    @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
+            IE8 = { "1", "1", "1", "1", "1", "1" })
     public void content() throws Exception {
         loadPageWithAlerts2(test("content"));
     }
