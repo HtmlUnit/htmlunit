@@ -56,7 +56,6 @@ public class HostParentOfTest extends WebDriverTestCase {
         final List<String> strings = TestCaseTest.getAllClassNames();
         for (final String parent : strings) {
             for (final String child : strings) {
-                if (parent.equals("ClientRectList") || child.equals("ClientRectList") || parent.equals("CSSPageRule") || child.equals("CSSPageRule"))
                 list.add(new Object[] {parent, child});
             }
         }
