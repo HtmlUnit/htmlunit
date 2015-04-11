@@ -79,6 +79,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
    ie.bin=C:\\path\\to\\32bit\\IEDriverServer.exe       [Windows]
    ff31.bin=/usr/bin/firefox                            [Unix-like]
    chrome.bin=/path/to/chromedriver                     [Unix-like]
+   autofix=true
  * </pre>
  * The file should contain four properties: "browsers", "ie.bin", "ff24.bin", and "chrome.bin".
  * <ul>
@@ -92,6 +93,8 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  *   <li>ff31.bin (optional): is the location of the FF31 binary, in Windows use double back-slashes</li>
  *   <li>chrome.bin: is the location of the ChromeDriver binary (see
  *   <a href="http://chromedriver.storage.googleapis.com/index.html">Chrome Driver downloads</a></li>
+ *   <li>autofix (optional): if {@code true}, try to automatically fix the real browser expectations,
+ *   or add/remove {@code @NotYetImplemented} annotations, use with caution!</li>
  * </ul>
  * </p>
  *
@@ -102,6 +105,11 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Frank Danek
  */
 public abstract class WebDriverTestCase extends WebTestCase {
+
+    /**
+     * The system property for automatically fixing the test case expectations.
+     */
+    public static final String AUTOFIX_ = "htmlunit.autofix";
 
     private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
 
@@ -150,6 +158,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     FF24_BIN_ = properties.getProperty("ff24.bin");
                     FF31_BIN_ = properties.getProperty("ff31.bin");
                     CHROME_BIN_ = properties.getProperty("chrome.bin");
+
+                    final boolean autofix = Boolean.parseBoolean(properties.getProperty("autofix"));
+                    System.setProperty(AUTOFIX_, Boolean.toString(autofix));
                 }
             }
             catch (final Exception e) {

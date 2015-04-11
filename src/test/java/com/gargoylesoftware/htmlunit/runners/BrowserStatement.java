@@ -18,6 +18,7 @@ import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * The Browser Statement.
@@ -30,7 +31,6 @@ class BrowserStatement extends Statement {
     private Statement next_;
     private final boolean notYetImplemented_;
     private final FrameworkMethod method_;
-    @SuppressWarnings("unused")
     private final boolean realBrowser_;
     private final BrowserVersion browserVersion_;
     private final int tries_;
@@ -53,6 +53,9 @@ class BrowserStatement extends Statement {
                 break;
             }
             catch (final Throwable t) {
+                if (Boolean.parseBoolean(System.getProperty(WebDriverTestCase.AUTOFIX_))) {
+                    TestCaseCorrector.correct(method_, realBrowser_, browserVersion_, notYetImplemented_, t);
+                }
                 if (notYetImplemented_) {
                     throw t;
                 }

@@ -4164,7 +4164,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function OfflineAudioContext() { [native code] }",
             FF31 = "function OfflineAudioContext() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void offlineAudioContext() throws Exception {
         test("OfflineAudioContext");
     }
@@ -5117,7 +5116,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function DynamicsCompressorNode() { [native code] }",
             FF31 = "function DynamicsCompressorNode() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void dynamicsCompressorNode() throws Exception {
         test("DynamicsCompressorNode");
     }
@@ -5187,7 +5185,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function MediaStreamEvent() { [native code] }",
             FF31 = "function MediaStreamEvent() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void mediaStreamEvent() throws Exception {
         test("MediaStreamEvent");
     }
@@ -5382,7 +5379,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function MediaStreamAudioSourceNode() { [native code] }",
             FF31 = "function MediaStreamAudioSourceNode() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void mediaStreamAudioSourceNode() throws Exception {
         test("MediaStreamAudioSourceNode");
     }
@@ -5404,7 +5400,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "function PannerNode() {\n    [native code]\n}")
-    @NotYetImplemented(FF31)
     public void pannerNode() throws Exception {
         test("PannerNode");
     }
@@ -5662,7 +5657,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function OfflineAudioCompletionEvent() { [native code] }",
             FF31 = "function OfflineAudioCompletionEvent() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void offlineAudioCompletionEvent() throws Exception {
         test("OfflineAudioCompletionEvent");
     }
@@ -5816,7 +5810,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function GainNode() { [native code] }",
             FF31 = "function GainNode() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void gainNode() throws Exception {
         test("GainNode");
     }
@@ -6056,7 +6049,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function WaveShaperNode() { [native code] }",
             FF31 = "function WaveShaperNode() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void waveShaperNode() throws Exception {
         test("WaveShaperNode");
     }
@@ -6232,7 +6224,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function PeriodicWave() { [native code] }",
             FF31 = "function PeriodicWave() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void periodicWave() throws Exception {
         test("PeriodicWave");
     }
@@ -6550,7 +6541,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function MediaStreamAudioDestinationNode() { [native code] }",
             FF31 = "function MediaStreamAudioDestinationNode() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void mediaStreamAudioDestinationNode() throws Exception {
         test("MediaStreamAudioDestinationNode");
     }
@@ -7327,7 +7317,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function OscillatorNode() { [native code] }",
             FF31 = "function OscillatorNode() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void oscillatorNode() throws Exception {
         test("OscillatorNode");
     }
@@ -8162,7 +8151,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function ScriptProcessorNode() { [native code] }",
             FF31 = "function ScriptProcessorNode() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void scriptProcessorNode() throws Exception {
         test("ScriptProcessorNode");
     }

@@ -234,7 +234,19 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.ChannelMergerNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.ChannelSplitterNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.ConvolverNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.DelayNode;
+import com.gargoylesoftware.htmlunit.javascript.host.media.DynamicsCompressorNode;
+import com.gargoylesoftware.htmlunit.javascript.host.media.GainNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.LocalMediaStream;
+import com.gargoylesoftware.htmlunit.javascript.host.media.MediaStreamAudioDestinationNode;
+import com.gargoylesoftware.htmlunit.javascript.host.media.MediaStreamAudioSourceNode;
+import com.gargoylesoftware.htmlunit.javascript.host.media.MediaStreamEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.media.OfflineAudioCompletionEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.media.OfflineAudioContext;
+import com.gargoylesoftware.htmlunit.javascript.host.media.OscillatorNode;
+import com.gargoylesoftware.htmlunit.javascript.host.media.PannerNode;
+import com.gargoylesoftware.htmlunit.javascript.host.media.PeriodicWave;
+import com.gargoylesoftware.htmlunit.javascript.host.media.ScriptProcessorNode;
+import com.gargoylesoftware.htmlunit.javascript.host.media.WaveShaperNode;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAltGlyphElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAngle;
@@ -365,9 +377,10 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         DelayNode.class, DOMCursor.class, DOMException.class,
         DOMImplementation.class, DOMParser.class, DOMStringMap.class,
         DOMTokenList.class, Document.class, DocumentFragment.class,
-        DocumentType.class, Element.class, Enumerator.class, Event.class, EventNode.class, External.class,
+        DocumentType.class, DynamicsCompressorNode.class,
+        Element.class, Enumerator.class, Event.class, EventNode.class, External.class,
         Float32Array.class, Float64Array.class,
-        FormChild.class, FormData.class, FormField.class, Geolocation.class,
+        FormChild.class, FormData.class, FormField.class, GainNode.class, Geolocation.class,
         HashChangeEvent.class, History.class,
         HTMLAllCollection.class,
         HTMLAnchorElement.class, HTMLAppletElement.class, HTMLAreaElement.class, HTMLAudioElement.class,
@@ -407,12 +420,15 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         Image.class,
         Int16Array.class, Int32Array.class, Int8Array.class,
         KeyboardEvent.class, LocalMediaStream.class,
-        Location.class, MediaList.class, MessageChannel.class,
+        Location.class, MediaList.class, MediaStreamAudioDestinationNode.class, MediaStreamAudioSourceNode.class,
+        MediaStreamEvent.class, MessageChannel.class,
         MessageEvent.class, MessagePort.class, MimeType.class, MimeTypeArray.class, MouseEvent.class,
         MutationEvent.class, NamedNodeMap.class, Namespace.class, NamespaceCollection.class, Navigator.class,
-        Node.class, NodeFilter.class, NodeList.class, Notification.class, Option.class, Path2D.class,
-        Plugin.class, PluginArray.class, PointerEvent.class, Popup.class, Position.class, ProcessingInstruction.class,
-        Promise.class, Range.class, RowContainer.class, ShadowRoot.class,
+        Node.class, NodeFilter.class, NodeList.class, Notification.class, OfflineAudioCompletionEvent.class,
+        OfflineAudioContext.class, Option.class, OscillatorNode.class, PannerNode.class, Path2D.class,
+        PeriodicWave.class, Plugin.class, PluginArray.class, PointerEvent.class, Popup.class, Position.class,
+        ProcessingInstruction.class,
+        Promise.class, Range.class, RowContainer.class, ScriptProcessorNode.class, ShadowRoot.class,
         SharedWorker.class,
         SVGAElement.class, SVGAltGlyphElement.class, SVGAngle.class, SVGAnimatedAngle.class,
         SVGAnimatedBoolean.class, SVGAnimateElement.class, SVGAnimatedEnumeration.class, SVGAnimatedInteger.class,
@@ -447,7 +463,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         Screen.class, Selection.class, SimpleArray.class,
         StaticNodeList.class, Storage.class, StyleSheetList.class, Text.class, TextRange.class, TreeWalker.class,
         UIEvent.class, Uint16Array.class, Uint32Array.class, Uint8Array.class, Uint8ClampedArray.class,
-        URLSearchParams.class, WebGLRenderingContext.class,
+        URLSearchParams.class, WaveShaperNode.class, WebGLRenderingContext.class,
         WebSocket.class, Window.class, Worker.class, XMLDocument.class,
         XMLHttpRequest.class, XMLSerializer.class, XPathEvaluator.class, XPathNSResolver.class, XPathResult.class,
         XSLTProcessor.class, XSLTemplate.class};

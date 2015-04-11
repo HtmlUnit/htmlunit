@@ -8045,4 +8045,234 @@ public class HostParentOfTest extends WebDriverTestCase {
     public void _ClientRectList_ClientRectList() throws Exception {
         test("ClientRectList", "ClientRectList");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioContext_OfflineAudioContext() throws Exception {
+        test("AudioContext", "OfflineAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioNode_DynamicsCompressorNode() throws Exception {
+        test("AudioNode", "DynamicsCompressorNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioNode_GainNode() throws Exception {
+        test("AudioNode", "GainNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioNode_MediaStreamAudioDestinationNode() throws Exception {
+        test("AudioNode", "MediaStreamAudioDestinationNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioNode_MediaStreamAudioSourceNode() throws Exception {
+        test("AudioNode", "MediaStreamAudioSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioNode_OscillatorNode() throws Exception {
+        test("AudioNode", "OscillatorNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _AudioNode_PannerNode() throws Exception {
+        test("AudioNode", "PannerNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _PannerNode_PannerNode() throws Exception {
+        test("PannerNode", "PannerNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioNode_ScriptProcessorNode() throws Exception {
+        test("AudioNode", "ScriptProcessorNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioNode_WaveShaperNode() throws Exception {
+        test("AudioNode", "WaveShaperNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _DynamicsCompressorNode_DynamicsCompressorNode() throws Exception {
+        test("DynamicsCompressorNode", "DynamicsCompressorNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _Event_MediaStreamEvent() throws Exception {
+        test("Event", "MediaStreamEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _Event_OfflineAudioCompletionEvent() throws Exception {
+        test("Event", "OfflineAudioCompletionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _GainNode_GainNode() throws Exception {
+        test("GainNode", "GainNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _MediaStreamAudioDestinationNode_MediaStreamAudioDestinationNode() throws Exception {
+        test("MediaStreamAudioDestinationNode", "MediaStreamAudioDestinationNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _MediaStreamAudioSourceNode_MediaStreamAudioSourceNode() throws Exception {
+        test("MediaStreamAudioSourceNode", "MediaStreamAudioSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _MediaStreamEvent_MediaStreamEvent() throws Exception {
+        test("MediaStreamEvent", "MediaStreamEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _OfflineAudioCompletionEvent_OfflineAudioCompletionEvent() throws Exception {
+        test("OfflineAudioCompletionEvent", "OfflineAudioCompletionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _OfflineAudioContext_OfflineAudioContext() throws Exception {
+        test("OfflineAudioContext", "OfflineAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _OscillatorNode_OscillatorNode() throws Exception {
+        test("OscillatorNode", "OscillatorNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _PeriodicWave_PeriodicWave() throws Exception {
+        test("PeriodicWave", "PeriodicWave");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _ScriptProcessorNode_ScriptProcessorNode() throws Exception {
+        test("ScriptProcessorNode", "ScriptProcessorNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _WaveShaperNode_WaveShaperNode() throws Exception {
+        test("WaveShaperNode", "WaveShaperNode");
+    }
 }

@@ -35,12 +35,6 @@ import com.gargoylesoftware.htmlunit.CodeStyleTest;
  * This is meant to automatically correct the test case to put either the real browser expectations,
  * or the {@link com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented} annotation for HtmlUnit.
  *
- * <p>For the time being, {@link #correct} needs to be manually called from {@link BrowserStatement#evaluate()},
- * as the first statement inside the {@code catch}, you could use
- * <pre>TestCaseCorrector.correct(method_, realBrowser_, browserVersion_, notYetImplemented_, t);</pre>
- *
- * <p>The implementation is incomplete, Use With Caution!
- *
  * @version $Revision$
  * @author Ahmed Ashour
  */

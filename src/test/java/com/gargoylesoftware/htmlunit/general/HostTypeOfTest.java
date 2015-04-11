@@ -5118,4 +5118,124 @@ public class HostTypeOfTest extends WebDriverTestCase {
     public void delayNode() throws Exception {
         test("DelayNode");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void dynamicsCompressorNode() throws Exception {
+        test("DynamicsCompressorNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void gainNode() throws Exception {
+        test("GainNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void mediaStreamAudioDestinationNode() throws Exception {
+        test("MediaStreamAudioDestinationNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void mediaStreamAudioSourceNode() throws Exception {
+        test("MediaStreamAudioSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void mediaStreamEvent() throws Exception {
+        test("MediaStreamEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void offlineAudioCompletionEvent() throws Exception {
+        test("OfflineAudioCompletionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void offlineAudioContext() throws Exception {
+        test("OfflineAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void oscillatorNode() throws Exception {
+        test("OscillatorNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void pannerNode() throws Exception {
+        test("PannerNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void periodicWave() throws Exception {
+        test("PeriodicWave");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void scriptProcessorNode() throws Exception {
+        test("ScriptProcessorNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void waveShaperNode() throws Exception {
+        test("WaveShaperNode");
+    }
 }

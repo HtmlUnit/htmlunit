@@ -5195,4 +5195,135 @@ public class HostClassNameTest extends WebDriverTestCase {
     public void delayNode() throws Exception {
         test("DelayNode");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function DynamicsCompressorNode() { [native code] }",
+            FF31 = "function DynamicsCompressorNode() {\n    [native code]\n}")
+    public void dynamicsCompressorNode() throws Exception {
+        test("DynamicsCompressorNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function GainNode() { [native code] }",
+            FF31 = "function GainNode() {\n    [native code]\n}")
+    public void gainNode() throws Exception {
+        test("GainNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaStreamAudioDestinationNode() { [native code] }",
+            FF31 = "function MediaStreamAudioDestinationNode() {\n    [native code]\n}")
+    public void mediaStreamAudioDestinationNode() throws Exception {
+        test("MediaStreamAudioDestinationNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaStreamAudioSourceNode() { [native code] }",
+            FF31 = "function MediaStreamAudioSourceNode() {\n    [native code]\n}")
+    public void mediaStreamAudioSourceNode() throws Exception {
+        test("MediaStreamAudioSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaStreamEvent() { [native code] }",
+            FF31 = "function MediaStreamEvent() {\n    [native code]\n}")
+    public void mediaStreamEvent() throws Exception {
+        test("MediaStreamEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function OfflineAudioCompletionEvent() { [native code] }",
+            FF31 = "function OfflineAudioCompletionEvent() {\n    [native code]\n}")
+    public void offlineAudioCompletionEvent() throws Exception {
+        test("OfflineAudioCompletionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function OfflineAudioContext() { [native code] }",
+            FF31 = "function OfflineAudioContext() {\n    [native code]\n}")
+    public void offlineAudioContext() throws Exception {
+        test("OfflineAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function OscillatorNode() { [native code] }",
+            FF31 = "function OscillatorNode() {\n    [native code]\n}")
+    public void oscillatorNode() throws Exception {
+        test("OscillatorNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function PannerNode() {\n    [native code]\n}")
+    public void pannerNode() throws Exception {
+        test("PannerNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PeriodicWave() { [native code] }",
+            FF31 = "function PeriodicWave() {\n    [native code]\n}")
+    public void periodicWave() throws Exception {
+        test("PeriodicWave");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ScriptProcessorNode() { [native code] }",
+            FF31 = "function ScriptProcessorNode() {\n    [native code]\n}")
+    public void scriptProcessorNode() throws Exception {
+        test("ScriptProcessorNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WaveShaperNode() { [native code] }",
+            FF31 = "function WaveShaperNode() {\n    [native code]\n}")
+    public void waveShaperNode() throws Exception {
+        test("WaveShaperNode");
+    }
 }
