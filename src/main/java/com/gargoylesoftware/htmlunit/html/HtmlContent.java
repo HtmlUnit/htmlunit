@@ -23,6 +23,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlContent extends HtmlElement {
 
@@ -39,5 +40,13 @@ public class HtmlContent extends HtmlElement {
     HtmlContent(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        return DisplayStyle.INLINE;
     }
 }
