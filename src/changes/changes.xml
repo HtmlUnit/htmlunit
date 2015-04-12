@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="Java 7, WebClient.close(), FF31, IE11 progress, Chrome progress, Bugfixes">
+            <action type="fix" dev="rbri">
+                An Ajax request running in parallel to a form submit might influence the headers send by the submit.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: rename host class CharacterDataImpl to CharacterData,
                 and ProcessingInstruction to extend CharacterData.
