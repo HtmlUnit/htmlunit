@@ -23,7 +23,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for a document.navigator.plugins.
+ * A JavaScript object for {@code MimeTypeArray}.
+ *
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour

@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for Promise.
+ * A JavaScript object for {@code Promise}.
  *
  * @version $Revision$
  * @author Ahmed Ashour

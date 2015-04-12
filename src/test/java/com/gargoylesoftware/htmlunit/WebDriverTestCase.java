@@ -154,10 +154,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     }
                     BROWSERS_PROPERTIES_
                         = new HashSet<>(Arrays.asList(browsersValue.replaceAll(" ", "").toLowerCase().split(",")));
-                    IE_BIN_ = properties.getProperty("ie.bin");
+                    CHROME_BIN_ = properties.getProperty("chrome.bin");
                     FF24_BIN_ = properties.getProperty("ff24.bin");
                     FF31_BIN_ = properties.getProperty("ff31.bin");
-                    CHROME_BIN_ = properties.getProperty("chrome.bin");
+                    IE_BIN_ = properties.getProperty("ie.bin");
 
                     final boolean autofix = Boolean.parseBoolean(properties.getProperty("autofix"));
                     System.setProperty(AUTOFIX_, Boolean.toString(autofix));
@@ -170,10 +170,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 BROWSERS_PROPERTIES_ = new HashSet<>(Arrays.asList("hu"));
             }
             if (BROWSERS_PROPERTIES_.contains("hu")) {
+                BROWSERS_PROPERTIES_.add("hu-chrome");
                 BROWSERS_PROPERTIES_.add("hu-ff31");
                 BROWSERS_PROPERTIES_.add("hu-ie8");
                 BROWSERS_PROPERTIES_.add("hu-ie11");
-                BROWSERS_PROPERTIES_.add("hu-chrome");
             }
         }
         return BROWSERS_PROPERTIES_;

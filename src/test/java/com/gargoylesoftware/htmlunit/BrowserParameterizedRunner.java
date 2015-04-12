@@ -131,6 +131,10 @@ public class BrowserParameterizedRunner extends Suite {
 
         if (BrowserVersionClassRunner.containsTestMethods(klass)) {
             final Set<String> browsers = WebDriverTestCase.getBrowsersProperties();
+            if (browsers.contains("hu-chrome")) {
+                runners_.add(new BrowserVersionClassRunnerWithParameters(
+                        klass, BrowserVersion.CHROME, false, tests));
+            }
             if (browsers.contains("hu-ff24")) {
                 runners_.add(new BrowserVersionClassRunnerWithParameters(
                         klass, BrowserVersion.FIREFOX_24, false, tests));
@@ -147,12 +151,12 @@ public class BrowserParameterizedRunner extends Suite {
                 runners_.add(new BrowserVersionClassRunnerWithParameters(
                         klass, BrowserVersion.INTERNET_EXPLORER_11, false, tests));
             }
-            if (browsers.contains("hu-chrome")) {
-                runners_.add(new BrowserVersionClassRunnerWithParameters(
-                        klass, BrowserVersion.CHROME, false, tests));
-            }
 
             if (WebDriverTestCase.class.isAssignableFrom(klass)) {
+                if (browsers.contains("chrome")) {
+                    runners_.add(new BrowserVersionClassRunnerWithParameters(
+                            klass, BrowserVersion.CHROME, true, tests));
+                }
                 if (browsers.contains("ff24")) {
                     runners_.add(new BrowserVersionClassRunnerWithParameters(
                             klass, BrowserVersion.FIREFOX_24, true, tests));
@@ -168,10 +172,6 @@ public class BrowserParameterizedRunner extends Suite {
                 if (browsers.contains("ie11")) {
                     runners_.add(new BrowserVersionClassRunnerWithParameters(
                             klass, BrowserVersion.INTERNET_EXPLORER_11, true, tests));
-                }
-                if (browsers.contains("chrome")) {
-                    runners_.add(new BrowserVersionClassRunnerWithParameters(
-                            klass, BrowserVersion.CHROME, true, tests));
                 }
             }
         }
