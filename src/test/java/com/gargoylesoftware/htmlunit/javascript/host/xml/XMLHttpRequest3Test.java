@@ -440,7 +440,6 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented
     public void ajaxInfluencesSubmitHeaders() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/content.html", ContentServlet.class);
