@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
@@ -2582,6 +2583,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = "value")
+    @NotYetImplemented(FF)
     public void data() throws Exception {
         test("data");
     }
@@ -2594,6 +2596,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "getDistributedNodes(),select",
             IE = "")
+    @NotYetImplemented({ CHROME, FF })
     public void content() throws Exception {
         test("content");
     }
