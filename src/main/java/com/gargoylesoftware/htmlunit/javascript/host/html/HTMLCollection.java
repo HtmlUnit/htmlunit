@@ -389,7 +389,7 @@ public class HTMLCollection extends NodeList {
             idList.add("length");
             final JavaScriptConfiguration jsConfig = getWindow().getWebWindow().getWebClient()
                 .getJavaScriptEngine().getJavaScriptConfiguration();
-            for (final String name : jsConfig.getClassConfiguration(getClassName()).functionKeys()) {
+            for (final String name : jsConfig.getClassConfiguration(getClassName()).getFunctionKeys()) {
                 idList.add(name);
             }
         }

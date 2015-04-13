@@ -25,81 +25,139 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-class FunctionWrapper implements Function {
+public class FunctionWrapper implements Function {
     private final Function wrapped_;
 
-    FunctionWrapper(final Function wrapped) {
+    /**
+     * Constructs a new instance.
+     * @param wrapped the wrapped function
+     */
+    public FunctionWrapper(final Function wrapped) {
         wrapped_ = wrapped;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
         return wrapped_.call(cx, scope, thisObj, args);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public String getClassName() {
         return wrapped_.getClassName();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
         return wrapped_.construct(cx, scope, args);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public Object get(final String name, final Scriptable start) {
         return wrapped_.get(name, start);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public Object get(final int index, final Scriptable start) {
         return wrapped_.get(index, start);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public boolean has(final String name, final Scriptable start) {
         return wrapped_.has(name, start);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public boolean has(final int index, final Scriptable start) {
         return wrapped_.has(index, start);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void put(final String name, final Scriptable start, final Object value) {
         wrapped_.put(name, wrapped_, value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void put(final int index, final Scriptable start, final Object value) {
         wrapped_.put(index, wrapped_, value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void delete(final String name) {
         wrapped_.delete(name);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void delete(final int index) {
         wrapped_.delete(index);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public Scriptable getPrototype() {
         return wrapped_.getPrototype();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void setPrototype(final Scriptable prototype) {
         wrapped_.setPrototype(prototype);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public Scriptable getParentScope() {
         return wrapped_.getParentScope();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void setParentScope(final Scriptable parent) {
         wrapped_.setParentScope(parent);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public Object[] getIds() {
         return wrapped_.getIds();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public Object getDefaultValue(final Class<?> hint) {
         return wrapped_.getDefaultValue(hint);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public boolean hasInstance(final Scriptable instance) {
         return wrapped_.hasInstance(instance);
     }

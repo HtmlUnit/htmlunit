@@ -471,7 +471,7 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
         if (getBrowserVersion().hasFeature(JS_NODE_LIST_ENUMERATE_FUNCTIONS)) {
             final JavaScriptConfiguration jsConfig = getWindow().getWebWindow().getWebClient()
                     .getJavaScriptEngine().getJavaScriptConfiguration();
-            return jsConfig.getClassConfiguration(getClassName()).functionKeys().contains(name);
+            return jsConfig.getClassConfiguration(getClassName()).getFunctionKeys().contains(name);
         }
         return getWithPreemption(name) != NOT_FOUND;
     }
@@ -498,7 +498,7 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
             idList.add("length");
             final JavaScriptConfiguration jsConfig = getWindow().getWebWindow().getWebClient()
                     .getJavaScriptEngine().getJavaScriptConfiguration();
-            for (final String name : jsConfig.getClassConfiguration(getClassName()).functionKeys()) {
+            for (final String name : jsConfig.getClassConfiguration(getClassName()).getFunctionKeys()) {
                 idList.add(name);
             }
         }

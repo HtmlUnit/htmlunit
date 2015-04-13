@@ -121,7 +121,7 @@ public class MSXMLJavaScriptEnvironment {
         configureConstants(config, scriptable);
 
         // the properties
-        for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry : config.propertyEntries()) {
+        for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry : config.getPropertyEntries()) {
             final String propertyName = propertyEntry.getKey();
             final Method readMethod = propertyEntry.getValue().getReadMethod();
             final Method writeMethod = propertyEntry.getValue().getWriteMethod();
@@ -130,7 +130,7 @@ public class MSXMLJavaScriptEnvironment {
 
         final int attributes = ScriptableObject.DONTENUM;
         // the functions
-        for (final Entry<String, Method> functionInfo : config.functionEntries()) {
+        for (final Entry<String, Method> functionInfo : config.getFunctionEntries()) {
             final String functionName = functionInfo.getKey();
             final Method method = functionInfo.getValue();
             final FunctionObject functionObject = new FunctionObject(functionName, method, scriptable);
@@ -141,7 +141,7 @@ public class MSXMLJavaScriptEnvironment {
     private void configureConstants(final ClassConfiguration config,
             final ScriptableObject scriptable) {
         final Class<?> linkedClass = config.getHostClass();
-        for (final String constant : config.constants()) {
+        for (final String constant : config.getConstants()) {
             try {
                 final Object value = linkedClass.getField(constant).get(null);
                 scriptable.defineProperty(constant, value, ScriptableObject.READONLY | ScriptableObject.PERMANENT);

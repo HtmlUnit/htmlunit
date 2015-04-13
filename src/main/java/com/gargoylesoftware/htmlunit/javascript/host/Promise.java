@@ -16,10 +16,18 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
+import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.javascript.FunctionWrapper;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxStaticFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -31,10 +39,105 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF) })
 public class Promise extends SimpleScriptable {
 
+    private Object value_;
+
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public Promise() {
+    }
+
+    /**
+     * Constructor new promise with the given {@code object}.
+     *
+     * @param object the object
+     */
+    @JsxConstructor
+    public Promise(final Object object) {
+        if (object instanceof Promise) {
+            value_ = ((Promise) object).value_;
+        }
+        else if (object instanceof NativeObject) {
+            final NativeObject nativeObject = (NativeObject) object;
+            value_ = nativeObject.get("then", nativeObject);
+        }
+        else {
+            value_ = object;
+        }
+    }
+
+    /**
+     * Returns a {@link Promise} object that is resolved with the given value.
+     *
+     * @param context the context
+     * @param thisObj this object
+     * @param args the arguments
+     * @param function the function
+     * @return a {@link Promise}
+     */
+    @JsxStaticFunction
+    public static Promise resolve(final Context context, final Scriptable thisObj, final Object[] args,
+            final Function function) {
+        final Promise promise = new Promise(args[0]);
+        promise.setParentScope(thisObj.getParentScope());
+        promise.setPrototype(getWindow(thisObj).getPrototype(promise.getClass()));
+        return promise;
+    }
+
+    /**
+     * It takes two arguments, both are callback functions for the success and failure cases of the Promise.
+     *
+     * @param onFulfilled success function
+     * @param onRejected failure function
+     * @return {@link Promise}
+     */
+    @JsxFunction
+    public Promise then(final Function onFulfilled, final Function onRejected) {
+        Object newValue = null;
+        if (value_ instanceof Function) {
+            final WasCalledFunctionWrapper wrapper = new WasCalledFunctionWrapper(onFulfilled);
+            try {
+                ((Function) value_).call(Context.getCurrentContext(), getParentScope(), this,
+                    new Object[] {wrapper, onRejected});
+                if (wrapper.wasCalled_) {
+                    newValue = wrapper.value_;
+                }
+            }
+            catch (final JavaScriptException e) {
+                if (!wrapper.wasCalled_) {
+                    newValue = onRejected.call(Context.getCurrentContext(), getParentScope(), this,
+                            new Object[] {e.getValue()});
+                }
+            }
+        }
+        else {
+            newValue = onFulfilled.call(Context.getCurrentContext(), getParentScope(), this,
+                    new Object[] {value_});
+        }
+        final Promise promise = new Promise();
+        promise.setParentScope(this.getParentScope());
+        promise.setPrototype(getPrototype(promise.getClass()));
+        promise.value_ = newValue;
+        return promise;
+    }
+
+    private static class WasCalledFunctionWrapper extends FunctionWrapper {
+
+        private boolean wasCalled_;
+        private Object value_;
+
+        WasCalledFunctionWrapper(final Function wrapped) {
+            super(wrapped);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
+            wasCalled_ = true;
+            value_ = super.call(cx, scope, thisObj, args);
+            return value_;
+        }
     }
 }

@@ -14,15 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -38,9 +34,36 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = "function, undefined, undefined, function",
+            IE = "")
+    public void staticMethods() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (window.Promise) {\n"
+            + "        alert(typeof Promise.resolve);\n"
+            + "        alert(typeof Promise.then);\n"
+            + "        var p = Promise.resolve('something');\n"
+            + "        alert(typeof p.resolve);\n"
+            + "        alert(typeof p.then);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = "Success",
             IE = "")
-    @NotYetImplemented({ CHROME, FF31 })
     public void resolve() throws Exception {
         final String html =
             "<html>\n"
@@ -69,7 +92,6 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "")
-    @NotYetImplemented({ CHROME, FF31 })
     public void resolveArray() throws Exception {
         final String html =
             "<html>\n"
@@ -97,7 +119,6 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "")
-    @NotYetImplemented({ CHROME, FF31 })
     public void resolvePromise() throws Exception {
         final String html =
             "<html>\n"
@@ -126,7 +147,6 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true, fulfilled!, TypeError: Throwing, Resolving",
             IE = "")
-    @NotYetImplemented({ CHROME, FF31 })
     public void resolveThenables() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -182,4 +202,38 @@ public class PromiseTest extends WebDriverTestCase {
             + "</html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "1, 2",
+            IE = "")
+    public void thenChanining() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (window.Promise) {\n"
+            + "        var p = new Promise(function(resolve, reject) {\n"
+            + "          resolve(1);\n"
+            + "        });\n"
+            + "\n"
+            + "        p.then(function(value) {\n"
+            + "          alert(value);\n"
+            + "          return value + 1;\n"
+            + "        }).then(function(value) {\n"
+            + "          alert(value);\n"
+            + "        });\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
 }

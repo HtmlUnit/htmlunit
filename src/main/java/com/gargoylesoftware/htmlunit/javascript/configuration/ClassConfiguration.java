@@ -37,6 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 public final class ClassConfiguration {
     private Map<String, PropertyInfo> propertyMap_ = new HashMap<>();
     private Map<String, Method> functionMap_ = new HashMap<>();
+    private Map<String, Method> staticFunctionMap_ = new HashMap<>();
     private List<String> constants_ = new ArrayList<>();
     private String extendedClassName_;
     private final Class<? extends SimpleScriptable> hostClass_;
@@ -106,7 +107,7 @@ public final class ClassConfiguration {
      * Returns the set of entries for the defined properties.
      * @return a set
      */
-    public Set<Entry<String, PropertyInfo>> propertyEntries() {
+    public Set<Entry<String, PropertyInfo>> getPropertyEntries() {
         return propertyMap_.entrySet();
     }
 
@@ -114,15 +115,23 @@ public final class ClassConfiguration {
      * Returns the set of entries for the defined functions.
      * @return a set
      */
-    public Set<Entry<String, Method>> functionEntries() {
+    public Set<Entry<String, Method>> getFunctionEntries() {
         return functionMap_.entrySet();
+    }
+
+    /**
+     * Returns the set of entries for the defined static functions.
+     * @return a set
+     */
+    public Set<Entry<String, Method>> getStaticFunctionEntries() {
+        return staticFunctionMap_.entrySet();
     }
 
     /**
      * Returns the set of keys for the defined functions.
      * @return a set
      */
-    public Set<String> functionKeys() {
+    public Set<String> getFunctionKeys() {
         return functionMap_.keySet();
     }
 
@@ -130,7 +139,7 @@ public final class ClassConfiguration {
      * Returns the constant list.
      * @return a list
      */
-    public List<String> constants() {
+    public List<String> getConstants() {
         return constants_;
     }
 
@@ -140,6 +149,14 @@ public final class ClassConfiguration {
      */
     public void addFunction(final Method method) {
         functionMap_.put(method.getName(), method);
+    }
+
+    /**
+     * Add the static function to the configuration.
+     * @param method the method
+     */
+    public void addStaticFunction(final Method method) {
+        staticFunctionMap_.put(method.getName(), method);
     }
 
     /**

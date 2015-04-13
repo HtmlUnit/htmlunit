@@ -327,7 +327,8 @@ public class JavaScriptEngine {
 
                         functionObject.addAsConstructor(window, prototype);
 
-                        ScriptableObject.defineProperty(window, hostClassSimpleName, functionObject, ScriptableObject.DONTENUM);
+                        ScriptableObject.defineProperty(window, hostClassSimpleName, functionObject,
+                                ScriptableObject.DONTENUM);
 
                         // the prototype class name is set as a side effect of functionObject.addAsConstructor
                         // so we restore its value
@@ -346,6 +347,14 @@ public class JavaScriptEngine {
                     }
 
                     configureConstants(config, functionObject);
+
+                    for (final Entry<String, Method> staticfunctionInfo : config.getStaticFunctionEntries()) {
+                        final String functionName = staticfunctionInfo.getKey();
+                        final Method method = staticfunctionInfo.getValue();
+                        final FunctionObject staticFunctionObject = new FunctionObject(functionName, method,
+                                functionObject);
+                        functionObject.defineProperty(functionName, staticFunctionObject, ScriptableObject.EMPTY);
+                    }
                 }
                 else {
                     if (browserVersion.hasFeature(JS_CONSTRUCTOR)) {
@@ -380,7 +389,8 @@ public class JavaScriptEngine {
         if (browserVersion.hasFeature(JS_WINDOW_ACTIVEXOBJECT_HIDDEN)) {
             final Scriptable prototype = prototypesPerJSName.get("ActiveXObject");
             if (null != prototype) {
-                final Method jsConstructor = ActiveXObject.class.getDeclaredMethod("jsConstructor", Context.class, Object[].class, Function.class, boolean.class);
+                final Method jsConstructor = ActiveXObject.class.getDeclaredMethod("jsConstructor",
+                        Context.class, Object[].class, Function.class, boolean.class);
                 final FunctionObject functionObject = new HiddenFunctionObject("ActiveXObject", jsConstructor, window);
                 functionObject.addAsConstructor(window, prototype);
             }
@@ -553,7 +563,7 @@ public class JavaScriptEngine {
         configureConstants(config, scriptable);
 
         // the properties
-        for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry : config.propertyEntries()) {
+        for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry : config.getPropertyEntries()) {
             final String propertyName = propertyEntry.getKey();
             final Method readMethod = propertyEntry.getValue().getReadMethod();
             final Method writeMethod = propertyEntry.getValue().getWriteMethod();
@@ -568,7 +578,7 @@ public class JavaScriptEngine {
             attributes = ScriptableObject.EMPTY;
         }
         // the functions
-        for (final Entry<String, Method> functionInfo : config.functionEntries()) {
+        for (final Entry<String, Method> functionInfo : config.getFunctionEntries()) {
             final String functionName = functionInfo.getKey();
             final Method method = functionInfo.getValue();
             final FunctionObject functionObject = new FunctionObject(functionName, method, scriptable);
@@ -579,7 +589,7 @@ public class JavaScriptEngine {
     private static void configureConstants(final ClassConfiguration config,
             final ScriptableObject scriptable) {
         final Class<?> linkedClass = config.getHostClass();
-        for (final String constant : config.constants()) {
+        for (final String constant : config.getConstants()) {
             try {
                 final Object value = linkedClass.getField(constant).get(null);
                 scriptable.defineProperty(constant, value, ScriptableObject.READONLY | ScriptableObject.PERMANENT);

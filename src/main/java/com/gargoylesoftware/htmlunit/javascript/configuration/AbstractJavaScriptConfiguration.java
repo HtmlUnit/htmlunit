@@ -227,6 +227,12 @@ public abstract class AbstractJavaScriptConfiguration {
                         classConfiguration.addFunction(method);
                     }
                 }
+                else if (annotation instanceof JsxStaticFunction) {
+                    if (isSupported(((JsxStaticFunction) annotation).value(),
+                            expectedBrowserName, browserVersionNumeric)) {
+                        classConfiguration.addStaticFunction(method);
+                    }
+                }
                 else if (annotation instanceof JsxConstructor) {
                     if (isSupported(((JsxConstructor) annotation).value(),
                             expectedBrowserName, browserVersionNumeric)) {
