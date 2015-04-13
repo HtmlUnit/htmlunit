@@ -21,7 +21,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxStaticFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * MDN - Notification</a>
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF) })
 public class Notification extends SimpleScriptable {
@@ -53,7 +54,7 @@ public class Notification extends SimpleScriptable {
     /**
      * Asks the user for permission.
      */
-    @JsxFunction
+    @JsxStaticFunction
     public static void requestPermission() {
         // TODO
     }
