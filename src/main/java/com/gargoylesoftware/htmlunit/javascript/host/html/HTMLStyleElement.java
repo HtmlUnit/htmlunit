@@ -131,6 +131,16 @@ public class HTMLStyleElement extends HTMLElement {
     }
 
     /**
+     * Sets the media of this style.
+     * @param media the new media
+     */
+    @JsxSetter
+    public void setMedia(final String media) {
+        final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
+        style.setAttribute("media", media);
+    }
+
+    /**
      * Overwritten to throw an exception in IE8/9.
      * @param value the new value for the contents of this node
      */

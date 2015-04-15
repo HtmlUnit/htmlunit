@@ -172,6 +172,43 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "all", "", "screen:screen", "priNT", "screen, print" })
+    public void media_setter() throws Exception {
+        final String html
+            = "<html><head><title>foo</title>\n"
+
+            + "<style id='myStyle' media='all'>my { }</style>\n"
+
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  style = document.getElementById('myStyle');\n"
+
+            + "  alert(style.media);\n"
+
+            + "  style.media = '';\n"
+            + "  alert(style.media);\n"
+
+            + "  style.media = 'screen';\n"
+            + "  alert(style.media + ':' + style.attributes['media'].value);\n"
+
+            + "  style.media = 'priNT';\n"
+            + "  alert(style.media);\n"
+
+            + "  style.media = 'screen, print';\n"
+            + "  alert(style.media);\n"
+
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({ "", "text/css" })
     public void type_setter() throws Exception {
         final String html
