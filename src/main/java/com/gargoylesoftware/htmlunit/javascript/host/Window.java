@@ -2161,7 +2161,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             }
             catch (final Exception e) {
                 Context.throwAsScriptRuntimeEx(
-                        new Exception("SyntaxError: An invalid or illegal string was specified."));
+                        new Exception(
+                                "SyntaxError: Failed to execute 'postMessage' on 'Window': Invalid target origin '"
+                                + targetOrigin + "' was specified."));
             }
 
             if (!getBrowserVersion().hasFeature(JS_WINDOW_POST_MESSAGE_ALLOW_INVALID_PORT)

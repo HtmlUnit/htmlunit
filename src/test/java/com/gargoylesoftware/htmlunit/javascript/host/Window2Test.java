@@ -1348,6 +1348,15 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("posted")
+    public void postMessage_otherProtocol() throws Exception {
+        postMessage("https://localhost:" + PORT + "/");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("exception")
     public void postMessage_invalidTargetOrigin() throws Exception {
         postMessage("abcdefg");
@@ -1357,9 +1366,9 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("posted")
-    public void postMessage_otherProtocol() throws Exception {
-        postMessage("https://localhost:" + PORT + "/");
+    @Alerts("exception")
+    public void postMessage_emptyTargetOrigin() throws Exception {
+        postMessage("");
     }
 
     private void postMessage(final String url) throws Exception {
