@@ -169,4 +169,53 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("3, 3")
+    @NotYetImplemented
+    public void getWidthDot() throws Exception {
+        getWidth("3.1");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("3, 3")
+    @NotYetImplemented
+    public void getWidthDigitAlpha() throws Exception {
+        getWidth("3a1");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("300, 150")
+    @NotYetImplemented
+    public void getWidthAlpha() throws Exception {
+        getWidth("abb");
+    }
+
+    private void getWidth(final String value) throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var canvas = document.getElementById('myId');\n"
+            + "        alert(canvas.width);\n"
+            + "        alert(canvas.height);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  <canvas id='myId' width='" + value + "' height='" + value + "'></canvas>\n"
+            + "  </body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
 }
