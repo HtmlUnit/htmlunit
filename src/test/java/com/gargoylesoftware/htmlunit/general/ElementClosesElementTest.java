@@ -139820,7 +139820,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("0")
+    @Alerts(DEFAULT = "0",
+            IE8 = "1")
     @NotYetImplemented
     public void _basefont_content() throws Exception {
         test("basefont", "content");
@@ -139830,7 +139831,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("0")
+    @Alerts(DEFAULT = "0",
+            IE8 = "1")
     @NotYetImplemented
     public void _basefont_data() throws Exception {
         test("basefont", "data");
@@ -139858,7 +139860,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "1")
     @NotYetImplemented(IE8)
     public void _body_content() throws Exception {
         test("body", "content");
@@ -139868,7 +139871,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "1")
     @NotYetImplemented(IE8)
     public void _body_data() throws Exception {
         test("body", "data");
@@ -139896,7 +139900,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
     public void _caption_content() throws Exception {
         test("caption", "content");
     }
@@ -139905,7 +139910,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
     public void _caption_data() throws Exception {
         test("caption", "data");
     }
@@ -139914,7 +139920,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
     public void _col_content() throws Exception {
         test("col", "content");
     }
@@ -139923,7 +139930,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
     public void _col_data() throws Exception {
         test("col", "data");
     }
@@ -139932,7 +139940,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
     public void _colgroup_content() throws Exception {
         test("colgroup", "content");
     }
@@ -139941,7 +139950,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
     public void _colgroup_data() throws Exception {
         test("colgroup", "data");
     }
@@ -139952,7 +139962,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             CHROME = "0",
-            IE11 = "0")
+            IE11 = "0",
+            IE8 = "0")
     @NotYetImplemented({ IE11, CHROME })
     public void _command_content() throws Exception {
         test("command", "content");
@@ -139964,7 +139975,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             CHROME = "0",
-            IE11 = "0")
+            IE11 = "0",
+            IE8 = "0")
     @NotYetImplemented({ IE11, CHROME })
     public void _command_data() throws Exception {
         test("command", "data");
@@ -139974,7 +139986,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented
     public void _content_area() throws Exception {
         test("content", "area");
@@ -139984,7 +139997,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _content_base() throws Exception {
         test("content", "base");
@@ -139994,7 +140008,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented
     public void _content_basefont() throws Exception {
         test("content", "basefont");
@@ -140004,7 +140019,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _content_bgsound() throws Exception {
         test("content", "bgsound");
@@ -140014,7 +140030,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _content_br() throws Exception {
         test("content", "br");
@@ -140026,7 +140043,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             CHROME = "2",
-            IE11 = "2")
+            IE11 = "2",
+            IE8 = "0")
     @NotYetImplemented({ IE11, CHROME })
     public void _content_command() throws Exception {
         test("content", "command");
@@ -140036,7 +140054,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _content_embed() throws Exception {
         test("content", "embed");
@@ -140046,7 +140065,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _content_hr() throws Exception {
         test("content", "hr");
@@ -140056,7 +140076,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented
     public void _content_image() throws Exception {
         test("content", "image");
@@ -140066,7 +140087,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _content_img() throws Exception {
         test("content", "img");
@@ -140076,7 +140098,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     public void _content_input() throws Exception {
         test("content", "input");
     }
@@ -140085,7 +140108,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented
     public void _content_keygen() throws Exception {
         test("content", "keygen");
@@ -140095,7 +140119,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _content_link() throws Exception {
         test("content", "link");
@@ -140105,7 +140130,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _content_meta() throws Exception {
         test("content", "meta");
@@ -140115,7 +140141,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented
     public void _content_param() throws Exception {
         test("content", "param");
@@ -140125,7 +140152,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented
     public void _content_source() throws Exception {
         test("content", "source");
@@ -140135,7 +140163,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented
     public void _content_track() throws Exception {
         test("content", "track");
@@ -140145,7 +140174,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _content_wbr() throws Exception {
         test("content", "wbr");
@@ -140155,7 +140185,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented
     public void _data_area() throws Exception {
         test("data", "area");
@@ -140165,7 +140196,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _data_base() throws Exception {
         test("data", "base");
@@ -140175,7 +140207,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented
     public void _data_basefont() throws Exception {
         test("data", "basefont");
@@ -140185,7 +140218,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _data_bgsound() throws Exception {
         test("data", "bgsound");
@@ -140195,7 +140229,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _data_br() throws Exception {
         test("data", "br");
@@ -140207,7 +140242,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             CHROME = "2",
-            IE11 = "2")
+            IE11 = "2",
+            IE8 = "0")
     @NotYetImplemented({ IE11, CHROME })
     public void _data_command() throws Exception {
         test("data", "command");
@@ -140217,7 +140253,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _data_embed() throws Exception {
         test("data", "embed");
@@ -140227,7 +140264,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _data_hr() throws Exception {
         test("data", "hr");
@@ -140237,7 +140275,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented
     public void _data_image() throws Exception {
         test("data", "image");
@@ -140247,7 +140286,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _data_img() throws Exception {
         test("data", "img");
@@ -140257,7 +140297,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     public void _data_input() throws Exception {
         test("data", "input");
     }
@@ -140266,7 +140307,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented
     public void _data_keygen() throws Exception {
         test("data", "keygen");
@@ -140276,7 +140318,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _data_link() throws Exception {
         test("data", "link");
@@ -140286,7 +140329,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _data_meta() throws Exception {
         test("data", "meta");
@@ -140296,7 +140340,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented
     public void _data_param() throws Exception {
         test("data", "param");
@@ -140306,7 +140351,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented
     public void _data_source() throws Exception {
         test("data", "source");
@@ -140316,7 +140362,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented
     public void _data_track() throws Exception {
         test("data", "track");
@@ -140326,7 +140373,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _data_wbr() throws Exception {
         test("data", "wbr");
@@ -140354,7 +140402,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
     @NotYetImplemented
     public void _frame_content() throws Exception {
         test("frame", "content");
@@ -140364,7 +140413,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
     @NotYetImplemented
     public void _frame_data() throws Exception {
         test("frame", "data");
@@ -140374,7 +140424,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
     @NotYetImplemented
     public void _frameset_content() throws Exception {
         test("frameset", "content");
@@ -140384,7 +140435,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
     @NotYetImplemented
     public void _frameset_data() throws Exception {
         test("frameset", "data");
@@ -140430,7 +140482,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "null")
     @NotYetImplemented
     public void _html_content() throws Exception {
         test("html", "content");
@@ -140440,7 +140493,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE8 = "null")
     @NotYetImplemented
     public void _html_data() throws Exception {
         test("html", "data");
@@ -140509,7 +140563,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             FF31 = "2",
-            IE11 = "0")
+            IE11 = "0",
+            IE8 = "0")
     @NotYetImplemented({ FF31, IE11, CHROME })
     public void _keygen_content() throws Exception {
         test("keygen", "content");
@@ -140522,7 +140577,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             FF31 = "2",
-            IE11 = "0")
+            IE11 = "0",
+            IE8 = "0")
     @NotYetImplemented({ FF31, IE11, CHROME })
     public void _keygen_data() throws Exception {
         test("keygen", "data");
@@ -140606,7 +140662,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("0")
+    @Alerts(DEFAULT = "0",
+            IE8 = "3")
     public void _table_content() throws Exception {
         test("table", "content");
     }
@@ -140615,7 +140672,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("0")
+    @Alerts(DEFAULT = "0",
+            IE8 = "3")
     public void _table_data() throws Exception {
         test("table", "data");
     }
@@ -140624,7 +140682,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
     public void _tbody_content() throws Exception {
         test("tbody", "content");
     }
@@ -140633,7 +140692,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
     public void _tbody_data() throws Exception {
         test("tbody", "data");
     }
@@ -140642,7 +140702,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
     public void _td_content() throws Exception {
         test("td", "content");
     }
@@ -140651,7 +140712,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
     public void _td_data() throws Exception {
         test("td", "data");
     }
@@ -140660,7 +140722,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
     public void _tfoot_content() throws Exception {
         test("tfoot", "content");
     }
@@ -140669,7 +140732,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
     public void _tfoot_data() throws Exception {
         test("tfoot", "data");
     }
@@ -140678,7 +140742,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
     public void _th_content() throws Exception {
         test("th", "content");
     }
@@ -140687,7 +140752,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
     public void _th_data() throws Exception {
         test("th", "data");
     }
@@ -140696,7 +140762,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
     public void _thead_content() throws Exception {
         test("thead", "content");
     }
@@ -140705,7 +140772,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
     public void _thead_data() throws Exception {
         test("thead", "data");
     }
@@ -140714,7 +140782,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
     public void _tr_content() throws Exception {
         test("tr", "content");
     }
@@ -140723,7 +140792,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts(DEFAULT = "null",
+            IE8 = "0")
     public void _tr_data() throws Exception {
         test("tr", "data");
     }
@@ -140772,7 +140842,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             FF31 = "2",
-            IE11 = "2")
+            IE11 = "2",
+            IE8 = "0")
     @NotYetImplemented({ FF31, IE11 })
     public void _content_isindex() throws Exception {
         test("content", "isindex");
@@ -140784,7 +140855,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             FF31 = "2",
-            IE11 = "2")
+            IE11 = "2",
+            IE8 = "0")
     @NotYetImplemented({ FF31, IE11 })
     public void _data_isindex() throws Exception {
         test("data", "isindex");
@@ -140796,7 +140868,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             FF31 = "0",
-            IE11 = "0")
+            IE11 = "0",
+            IE8 = "0")
     @NotYetImplemented({ FF31, IE11 })
     public void _isindex_content() throws Exception {
         test("isindex", "content");
@@ -140808,7 +140881,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             FF31 = "0",
-            IE11 = "0")
+            IE11 = "0",
+            IE8 = "0")
     @NotYetImplemented({ FF31, IE11 })
     public void _isindex_data() throws Exception {
         test("isindex", "data");
@@ -140818,7 +140892,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented({ FF31, IE11, CHROME })
     public void _content_nextid() throws Exception {
         test("content", "nextid");
@@ -140828,7 +140903,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented
     public void _content_script() throws Exception {
         test("content", "script");
@@ -140838,7 +140914,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented
     public void _content_title() throws Exception {
         test("content", "title");
@@ -140848,7 +140925,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented({ FF31, IE11, CHROME })
     public void _data_nextid() throws Exception {
         test("data", "nextid");
@@ -140858,7 +140936,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented
     public void _data_script() throws Exception {
         test("data", "script");
@@ -140868,7 +140947,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented
     public void _data_title() throws Exception {
         test("data", "title");
@@ -140878,7 +140958,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented
     public void _nextid_content() throws Exception {
         test("nextid", "content");
@@ -140888,7 +140969,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented
     public void _nextid_data() throws Exception {
         test("nextid", "data");
@@ -140898,7 +140980,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented
     public void _optgroup_content() throws Exception {
         test("optgroup", "content");
@@ -140908,7 +140991,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented
     public void _optgroup_data() throws Exception {
         test("optgroup", "data");
@@ -140918,7 +141002,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented
     public void _option_content() throws Exception {
         test("option", "content");
@@ -140928,7 +141013,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented
     public void _option_data() throws Exception {
         test("option", "data");
@@ -140938,7 +141024,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented
     public void _script_content() throws Exception {
         test("script", "content");
@@ -140948,7 +141035,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented
     public void _script_data() throws Exception {
         test("script", "data");
@@ -140958,7 +141046,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _content_body() throws Exception {
         test("content", "body");
@@ -140968,7 +141057,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _content_caption() throws Exception {
         test("content", "caption");
@@ -140978,7 +141068,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _content_col() throws Exception {
         test("content", "col");
@@ -140988,7 +141079,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _content_colgroup() throws Exception {
         test("content", "colgroup");
@@ -140998,7 +141090,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _content_head() throws Exception {
         test("content", "head");
@@ -141008,7 +141101,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _content_html() throws Exception {
         test("content", "html");
@@ -141018,7 +141112,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _content_optgroup() throws Exception {
         test("content", "optgroup");
@@ -141028,7 +141123,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _content_option() throws Exception {
         test("content", "option");
@@ -141038,7 +141134,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _content_tbody() throws Exception {
         test("content", "tbody");
@@ -141048,7 +141145,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _content_td() throws Exception {
         test("content", "td");
@@ -141058,7 +141156,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _content_tfoot() throws Exception {
         test("content", "tfoot");
@@ -141068,7 +141167,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _content_th() throws Exception {
         test("content", "th");
@@ -141078,7 +141178,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _content_thead() throws Exception {
         test("content", "thead");
@@ -141088,7 +141189,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _content_tr() throws Exception {
         test("content", "tr");
@@ -141098,7 +141200,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _data_body() throws Exception {
         test("data", "body");
@@ -141108,7 +141211,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _data_caption() throws Exception {
         test("data", "caption");
@@ -141118,7 +141222,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _data_col() throws Exception {
         test("data", "col");
@@ -141128,7 +141233,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _data_colgroup() throws Exception {
         test("data", "colgroup");
@@ -141138,7 +141244,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _data_head() throws Exception {
         test("data", "head");
@@ -141148,7 +141255,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _data_html() throws Exception {
         test("data", "html");
@@ -141158,7 +141266,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _data_optgroup() throws Exception {
         test("data", "optgroup");
@@ -141168,7 +141277,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _data_option() throws Exception {
         test("data", "option");
@@ -141178,7 +141288,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _data_tbody() throws Exception {
         test("data", "tbody");
@@ -141188,7 +141299,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _data_td() throws Exception {
         test("data", "td");
@@ -141198,7 +141310,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _data_tfoot() throws Exception {
         test("data", "tfoot");
@@ -141208,7 +141321,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _data_th() throws Exception {
         test("data", "th");
@@ -141218,7 +141332,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _data_thead() throws Exception {
         test("data", "thead");
@@ -141228,7 +141343,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _data_tr() throws Exception {
         test("data", "tr");
@@ -141238,7 +141354,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _noscript_content() throws Exception {
         test("noscript", "content");
@@ -141248,9 +141365,2810 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
     @NotYetImplemented(IE8)
     public void _noscript_data() throws Exception {
         test("noscript", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _applet_content() throws Exception {
+        test("applet", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _applet_data() throws Exception {
+        test("applet", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _article_content() throws Exception {
+        test("article", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _article_data() throws Exception {
+        test("article", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _aside_content() throws Exception {
+        test("aside", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _aside_data() throws Exception {
+        test("aside", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _audio_content() throws Exception {
+        test("audio", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _audio_data() throws Exception {
+        test("audio", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _bdi_content() throws Exception {
+        test("bdi", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _bdi_data() throws Exception {
+        test("bdi", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _canvas_content() throws Exception {
+        test("canvas", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _canvas_data() throws Exception {
+        test("canvas", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_a() throws Exception {
+        test("content", "a");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_abbr() throws Exception {
+        test("content", "abbr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_acronym() throws Exception {
+        test("content", "acronym");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_address() throws Exception {
+        test("content", "address");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_applet() throws Exception {
+        test("content", "applet");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_article() throws Exception {
+        test("content", "article");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_aside() throws Exception {
+        test("content", "aside");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_audio() throws Exception {
+        test("content", "audio");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_b() throws Exception {
+        test("content", "b");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_bdi() throws Exception {
+        test("content", "bdi");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_bdo() throws Exception {
+        test("content", "bdo");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_big() throws Exception {
+        test("content", "big");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_blink() throws Exception {
+        test("content", "blink");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_blockquote() throws Exception {
+        test("content", "blockquote");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_button() throws Exception {
+        test("content", "button");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_canvas() throws Exception {
+        test("content", "canvas");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_center() throws Exception {
+        test("content", "center");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_cite() throws Exception {
+        test("content", "cite");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_code() throws Exception {
+        test("content", "code");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_content() throws Exception {
+        test("content", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_data() throws Exception {
+        test("content", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_datalist() throws Exception {
+        test("content", "datalist");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_dd() throws Exception {
+        test("content", "dd");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_del() throws Exception {
+        test("content", "del");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_details() throws Exception {
+        test("content", "details");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_dfn() throws Exception {
+        test("content", "dfn");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_dialog() throws Exception {
+        test("content", "dialog");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_dir() throws Exception {
+        test("content", "dir");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_div() throws Exception {
+        test("content", "div");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_dl() throws Exception {
+        test("content", "dl");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_dt() throws Exception {
+        test("content", "dt");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_em() throws Exception {
+        test("content", "em");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_fieldset() throws Exception {
+        test("content", "fieldset");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_figcaption() throws Exception {
+        test("content", "figcaption");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_figure() throws Exception {
+        test("content", "figure");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_font() throws Exception {
+        test("content", "font");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_footer() throws Exception {
+        test("content", "footer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_form() throws Exception {
+        test("content", "form");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_frame() throws Exception {
+        test("content", "frame");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_frameset() throws Exception {
+        test("content", "frameset");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_h1() throws Exception {
+        test("content", "h1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_h2() throws Exception {
+        test("content", "h2");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_h3() throws Exception {
+        test("content", "h3");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_h4() throws Exception {
+        test("content", "h4");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_h5() throws Exception {
+        test("content", "h5");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_h6() throws Exception {
+        test("content", "h6");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_header() throws Exception {
+        test("content", "header");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_i() throws Exception {
+        test("content", "i");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_iframe() throws Exception {
+        test("content", "iframe");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_ins() throws Exception {
+        test("content", "ins");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_kbd() throws Exception {
+        test("content", "kbd");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_label() throws Exception {
+        test("content", "label");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_layer() throws Exception {
+        test("content", "layer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_legend() throws Exception {
+        test("content", "legend");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_li() throws Exception {
+        test("content", "li");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_listing() throws Exception {
+        test("content", "listing");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_main() throws Exception {
+        test("content", "main");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_map() throws Exception {
+        test("content", "map");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_mark() throws Exception {
+        test("content", "mark");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_marquee() throws Exception {
+        test("content", "marquee");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_menu() throws Exception {
+        test("content", "menu");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_menuitem() throws Exception {
+        test("content", "menuitem");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_meter() throws Exception {
+        test("content", "meter");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_multicol() throws Exception {
+        test("content", "multicol");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_nav() throws Exception {
+        test("content", "nav");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_nobr() throws Exception {
+        test("content", "nobr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_noembed() throws Exception {
+        test("content", "noembed");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_noframes() throws Exception {
+        test("content", "noframes");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_nolayer() throws Exception {
+        test("content", "nolayer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_noscript() throws Exception {
+        test("content", "noscript");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_object() throws Exception {
+        test("content", "object");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_ol() throws Exception {
+        test("content", "ol");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_output() throws Exception {
+        test("content", "output");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_p() throws Exception {
+        test("content", "p");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_plaintext() throws Exception {
+        test("content", "plaintext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_pre() throws Exception {
+        test("content", "pre");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_progress() throws Exception {
+        test("content", "progress");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_q() throws Exception {
+        test("content", "q");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_rp() throws Exception {
+        test("content", "rp");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_rt() throws Exception {
+        test("content", "rt");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_ruby() throws Exception {
+        test("content", "ruby");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_s() throws Exception {
+        test("content", "s");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_samp() throws Exception {
+        test("content", "samp");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_section() throws Exception {
+        test("content", "section");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_select() throws Exception {
+        test("content", "select");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_small() throws Exception {
+        test("content", "small");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_span() throws Exception {
+        test("content", "span");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_strike() throws Exception {
+        test("content", "strike");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_strong() throws Exception {
+        test("content", "strong");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_style() throws Exception {
+        test("content", "style");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_sub() throws Exception {
+        test("content", "sub");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_summary() throws Exception {
+        test("content", "summary");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_sup() throws Exception {
+        test("content", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_table() throws Exception {
+        test("content", "table");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_textarea() throws Exception {
+        test("content", "textarea");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_time() throws Exception {
+        test("content", "time");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_tt() throws Exception {
+        test("content", "tt");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_u() throws Exception {
+        test("content", "u");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_ul() throws Exception {
+        test("content", "ul");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_var() throws Exception {
+        test("content", "var");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_video() throws Exception {
+        test("content", "video");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _content_xmp() throws Exception {
+        test("content", "xmp");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_a() throws Exception {
+        test("data", "a");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_abbr() throws Exception {
+        test("data", "abbr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_acronym() throws Exception {
+        test("data", "acronym");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_address() throws Exception {
+        test("data", "address");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_applet() throws Exception {
+        test("data", "applet");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_article() throws Exception {
+        test("data", "article");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_aside() throws Exception {
+        test("data", "aside");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_audio() throws Exception {
+        test("data", "audio");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_b() throws Exception {
+        test("data", "b");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_bdi() throws Exception {
+        test("data", "bdi");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_bdo() throws Exception {
+        test("data", "bdo");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_big() throws Exception {
+        test("data", "big");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_blink() throws Exception {
+        test("data", "blink");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_blockquote() throws Exception {
+        test("data", "blockquote");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_button() throws Exception {
+        test("data", "button");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_canvas() throws Exception {
+        test("data", "canvas");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_center() throws Exception {
+        test("data", "center");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_cite() throws Exception {
+        test("data", "cite");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_code() throws Exception {
+        test("data", "code");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_content() throws Exception {
+        test("data", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_data() throws Exception {
+        test("data", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_datalist() throws Exception {
+        test("data", "datalist");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_dd() throws Exception {
+        test("data", "dd");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_del() throws Exception {
+        test("data", "del");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_details() throws Exception {
+        test("data", "details");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_dfn() throws Exception {
+        test("data", "dfn");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_dialog() throws Exception {
+        test("data", "dialog");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_dir() throws Exception {
+        test("data", "dir");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_div() throws Exception {
+        test("data", "div");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_dl() throws Exception {
+        test("data", "dl");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_dt() throws Exception {
+        test("data", "dt");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_em() throws Exception {
+        test("data", "em");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_fieldset() throws Exception {
+        test("data", "fieldset");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_figcaption() throws Exception {
+        test("data", "figcaption");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_figure() throws Exception {
+        test("data", "figure");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_font() throws Exception {
+        test("data", "font");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_footer() throws Exception {
+        test("data", "footer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_form() throws Exception {
+        test("data", "form");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_frame() throws Exception {
+        test("data", "frame");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_frameset() throws Exception {
+        test("data", "frameset");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_h1() throws Exception {
+        test("data", "h1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_h2() throws Exception {
+        test("data", "h2");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_h3() throws Exception {
+        test("data", "h3");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_h4() throws Exception {
+        test("data", "h4");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_h5() throws Exception {
+        test("data", "h5");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_h6() throws Exception {
+        test("data", "h6");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_header() throws Exception {
+        test("data", "header");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_i() throws Exception {
+        test("data", "i");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_iframe() throws Exception {
+        test("data", "iframe");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_ins() throws Exception {
+        test("data", "ins");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_kbd() throws Exception {
+        test("data", "kbd");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_label() throws Exception {
+        test("data", "label");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_layer() throws Exception {
+        test("data", "layer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_legend() throws Exception {
+        test("data", "legend");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_li() throws Exception {
+        test("data", "li");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_listing() throws Exception {
+        test("data", "listing");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_main() throws Exception {
+        test("data", "main");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_map() throws Exception {
+        test("data", "map");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_mark() throws Exception {
+        test("data", "mark");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_marquee() throws Exception {
+        test("data", "marquee");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_menu() throws Exception {
+        test("data", "menu");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_menuitem() throws Exception {
+        test("data", "menuitem");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_meter() throws Exception {
+        test("data", "meter");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_multicol() throws Exception {
+        test("data", "multicol");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_nav() throws Exception {
+        test("data", "nav");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_nobr() throws Exception {
+        test("data", "nobr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_noembed() throws Exception {
+        test("data", "noembed");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_noframes() throws Exception {
+        test("data", "noframes");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_nolayer() throws Exception {
+        test("data", "nolayer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_noscript() throws Exception {
+        test("data", "noscript");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_object() throws Exception {
+        test("data", "object");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_ol() throws Exception {
+        test("data", "ol");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_output() throws Exception {
+        test("data", "output");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_p() throws Exception {
+        test("data", "p");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_plaintext() throws Exception {
+        test("data", "plaintext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_pre() throws Exception {
+        test("data", "pre");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_progress() throws Exception {
+        test("data", "progress");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_q() throws Exception {
+        test("data", "q");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_rp() throws Exception {
+        test("data", "rp");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_rt() throws Exception {
+        test("data", "rt");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_ruby() throws Exception {
+        test("data", "ruby");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_s() throws Exception {
+        test("data", "s");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_samp() throws Exception {
+        test("data", "samp");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_section() throws Exception {
+        test("data", "section");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_select() throws Exception {
+        test("data", "select");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_small() throws Exception {
+        test("data", "small");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_span() throws Exception {
+        test("data", "span");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_strike() throws Exception {
+        test("data", "strike");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_strong() throws Exception {
+        test("data", "strong");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_style() throws Exception {
+        test("data", "style");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_sub() throws Exception {
+        test("data", "sub");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_summary() throws Exception {
+        test("data", "summary");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_sup() throws Exception {
+        test("data", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_table() throws Exception {
+        test("data", "table");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_textarea() throws Exception {
+        test("data", "textarea");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_time() throws Exception {
+        test("data", "time");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_tt() throws Exception {
+        test("data", "tt");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_u() throws Exception {
+        test("data", "u");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_ul() throws Exception {
+        test("data", "ul");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_var() throws Exception {
+        test("data", "var");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_video() throws Exception {
+        test("data", "video");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _data_xmp() throws Exception {
+        test("data", "xmp");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _datalist_content() throws Exception {
+        test("datalist", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _datalist_data() throws Exception {
+        test("datalist", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _details_content() throws Exception {
+        test("details", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _details_data() throws Exception {
+        test("details", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _dialog_content() throws Exception {
+        test("dialog", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _dialog_data() throws Exception {
+        test("dialog", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _figcaption_content() throws Exception {
+        test("figcaption", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _figcaption_data() throws Exception {
+        test("figcaption", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _figure_content() throws Exception {
+        test("figure", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _figure_data() throws Exception {
+        test("figure", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _footer_content() throws Exception {
+        test("footer", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _footer_data() throws Exception {
+        test("footer", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _header_content() throws Exception {
+        test("header", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _header_data() throws Exception {
+        test("header", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _iframe_content() throws Exception {
+        test("iframe", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _iframe_data() throws Exception {
+        test("iframe", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _layer_content() throws Exception {
+        test("layer", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _layer_data() throws Exception {
+        test("layer", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _legend_content() throws Exception {
+        test("legend", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _legend_data() throws Exception {
+        test("legend", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "2")
+    public void _listing_content() throws Exception {
+        test("listing", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "2")
+    public void _listing_data() throws Exception {
+        test("listing", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _main_content() throws Exception {
+        test("main", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _main_data() throws Exception {
+        test("main", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _mark_content() throws Exception {
+        test("mark", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _mark_data() throws Exception {
+        test("mark", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _menuitem_content() throws Exception {
+        test("menuitem", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _menuitem_data() throws Exception {
+        test("menuitem", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _meter_content() throws Exception {
+        test("meter", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _meter_data() throws Exception {
+        test("meter", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _multicol_content() throws Exception {
+        test("multicol", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _multicol_data() throws Exception {
+        test("multicol", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _nav_content() throws Exception {
+        test("nav", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _nav_data() throws Exception {
+        test("nav", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _noembed_content() throws Exception {
+        test("noembed", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _noembed_data() throws Exception {
+        test("noembed", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _noframes_content() throws Exception {
+        test("noframes", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _noframes_data() throws Exception {
+        test("noframes", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _nolayer_content() throws Exception {
+        test("nolayer", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _nolayer_data() throws Exception {
+        test("nolayer", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "null")
+    public void _object_content() throws Exception {
+        test("object", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "null")
+    public void _object_data() throws Exception {
+        test("object", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _output_content() throws Exception {
+        test("output", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _output_data() throws Exception {
+        test("output", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "2")
+    public void _pre_content() throws Exception {
+        test("pre", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "2")
+    public void _pre_data() throws Exception {
+        test("pre", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _progress_content() throws Exception {
+        test("progress", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _progress_data() throws Exception {
+        test("progress", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _rp_content() throws Exception {
+        test("rp", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _rp_data() throws Exception {
+        test("rp", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _rt_content() throws Exception {
+        test("rt", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _rt_data() throws Exception {
+        test("rt", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _section_content() throws Exception {
+        test("section", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _section_data() throws Exception {
+        test("section", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _style_content() throws Exception {
+        test("style", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _style_data() throws Exception {
+        test("style", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _summary_content() throws Exception {
+        test("summary", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _summary_data() throws Exception {
+        test("summary", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _time_content() throws Exception {
+        test("time", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _time_data() throws Exception {
+        test("time", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _title_content() throws Exception {
+        test("title", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _title_data() throws Exception {
+        test("title", "data");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _video_content() throws Exception {
+        test("video", "content");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    public void _video_data() throws Exception {
+        test("video", "data");
     }
 }
