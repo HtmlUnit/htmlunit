@@ -5925,7 +5925,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "function DeviceProximityEvent() {\n    [native code]\n}")
-    @NotYetImplemented(FF31)
     public void deviceProximityEvent() throws Exception {
         test("DeviceProximityEvent");
     }

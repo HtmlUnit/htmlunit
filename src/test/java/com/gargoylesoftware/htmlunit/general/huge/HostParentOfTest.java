@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -54,8 +55,10 @@ public class HostParentOfTest extends WebDriverTestCase {
     public static Collection<Object[]> data() throws Exception {
         final List<Object[]> list = new ArrayList<>();
         final List<String> strings = TestCaseTest.getAllClassNames();
+        List<String> xxx = Arrays.asList("DeviceProximityEvent");
         for (final String parent : strings) {
             for (final String child : strings) {
+                if (xxx.contains(parent) || xxx.contains(child))
                 list.add(new Object[] {parent, child});
             }
         }
@@ -11215,6 +11218,26 @@ public class HostParentOfTest extends WebDriverTestCase {
             IE8 = "false")
     public void _SVGElement_SVGTextPositioningElement() throws Exception {
         test("SVGElement", "SVGTextPositioningElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _Event_DeviceProximityEvent() throws Exception {
+        test("Event", "DeviceProximityEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _DeviceProximityEvent_DeviceProximityEvent() throws Exception {
+        test("DeviceProximityEvent", "DeviceProximityEvent");
     }
 
 }

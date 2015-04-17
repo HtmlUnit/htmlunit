@@ -5406,4 +5406,14 @@ public class HostTypeOfTest extends WebDriverTestCase {
         test("UserProximityEvent");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void deviceProximityEvent() throws Exception {
+        test("DeviceProximityEvent");
+    }
+
 }
