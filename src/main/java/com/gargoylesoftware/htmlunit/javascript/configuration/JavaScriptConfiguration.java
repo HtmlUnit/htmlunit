@@ -134,6 +134,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.CustomEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.DeviceLightEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.DeviceMotionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.DeviceOrientationEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.DeviceProximityEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.DeviceStorageChangeEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.DragEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ErrorEvent;
@@ -321,7 +322,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         CSSRuleList.class, CSSStyleDeclaration.class, CSSStyleRule.class, CSSStyleSheet.class, CSSSupportsRule.class,
         CSSValue.class, CustomEvent.class, DataView.class,
         DelayNode.class, DeviceMotionEvent.class, DeviceLightEvent.class, DeviceOrientationEvent.class,
-        DeviceStorageChangeEvent.class, DOMCursor.class, DOMException.class,
+        DeviceProximityEvent.class, DeviceStorageChangeEvent.class, DOMCursor.class, DOMException.class,
         DOMImplementation.class, DOMParser.class, DOMStringMap.class,
         DOMTokenList.class, Document.class, DocumentFragment.class,
         DocumentType.class, DragEvent.class, DynamicsCompressorNode.class,
