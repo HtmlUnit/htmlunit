@@ -37,7 +37,7 @@ public class CSSGroupingRule extends CSSRule {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
+    @JsxConstructor(@WebBrowser(IE))
     public CSSGroupingRule() {
     }
 

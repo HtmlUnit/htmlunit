@@ -37,7 +37,7 @@ public class CSSConditionRule extends CSSGroupingRule {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
+    @JsxConstructor(@WebBrowser(IE))
     public CSSConditionRule() {
     }
 
