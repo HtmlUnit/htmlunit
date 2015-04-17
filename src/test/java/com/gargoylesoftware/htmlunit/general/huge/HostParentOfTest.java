@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -55,10 +54,8 @@ public class HostParentOfTest extends WebDriverTestCase {
     public static Collection<Object[]> data() throws Exception {
         final List<Object[]> list = new ArrayList<>();
         final List<String> strings = TestCaseTest.getAllClassNames();
-        List<String> xxx = Arrays.asList("DeviceProximityEvent");
         for (final String parent : strings) {
             for (final String child : strings) {
-                if (xxx.contains(parent) || xxx.contains(child))
                 list.add(new Object[] {parent, child});
             }
         }
