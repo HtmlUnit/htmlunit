@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.16" date="???" description="Java 7, WebClient.close(), FF31, IE11 progress, Chrome progress, Bugfixes">
+            <action type="add" dev="rbri" issue="1677" due-to="Carsten Steul">
+                HTMLTextAreaElement: maxLength property support added.
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: Missing setter for style.media added.
             </action>

@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Sudhan Moghe
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Carsten Steul
  */
 public enum BrowserVersionFeatures {
 
@@ -1757,6 +1758,17 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_TABLE_VALIGN_SUPPORTS_IE_VALUES,
 
+    /** Getting the property maxLength if it is not defined in the DOM returns MAX_INT (IE11).
+     * FF and Chrome return -1.
+     */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    JS_TEXT_AREA_GET_MAXLENGTH_MAX_INT,
+    /** Getting the property maxLength if it is not defined in the DOM returns undefined (IE8).
+     * FF and Chrome return -1.
+     */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    JS_TEXT_AREA_GET_MAXLENGTH_UNDEFINED,
+
     /** Setting the property cols throws an exception, if the provided value is less
      * than 0 (IE).
      * FF ignores the provided value in this case.
@@ -1770,6 +1782,13 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF) })
     JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION,
+
+    /** Setting the property maxLength throws an exception, if the provided value is less
+     * than 0 (Chrome, FF).
+     * IE sets the value in this case.
+     */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    JS_TEXT_AREA_SET_MAXLENGTH_NEGATIVE_THROWS_EXCEPTION,
 
     /** Setting the property rows throws an exception, if the provided value is less
      * than 0 (IE).

@@ -14,8 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_GET_MAXLENGTH_MAX_INT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_GET_MAXLENGTH_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_COLS_NEGATIVE_THROWS_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_MAXLENGTH_NEGATIVE_THROWS_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_ROWS_NEGATIVE_THROWS_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.TEXTAREA_CRNL;
@@ -26,7 +29,9 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import java.util.regex.Pattern;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
@@ -47,6 +52,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Daniel Gredler
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Carsten Steul
  */
 @JsxClasses({
     @JsxClass(domClass = HtmlTextArea.class,
@@ -336,5 +342,57 @@ public class HTMLTextAreaElement extends FormField {
     @JsxSetter(@WebBrowser(value = IE, maxVersion = 8))
     public void setDataSrc(final String dataSrc) {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
+    }
+
+    /**
+     * Returns the maximum number of characters in this text area.
+     * @return the maximum number of characters in this text area
+     */
+    @JsxGetter
+    public Object getMaxLength() {
+        final String maxLength = getDomNodeOrDie().getAttribute("maxLength");
+        if (DomElement.ATTRIBUTE_NOT_DEFINED == maxLength
+                && getBrowserVersion().hasFeature(JS_TEXT_AREA_GET_MAXLENGTH_UNDEFINED)) {
+            return Undefined.instance;
+        }
+
+        try {
+            return Integer.parseInt(maxLength);
+        }
+        catch (final NumberFormatException e) {
+            if (getBrowserVersion().hasFeature(JS_TEXT_AREA_GET_MAXLENGTH_MAX_INT)) {
+                return Integer.MAX_VALUE;
+            }
+            if (getBrowserVersion().hasFeature(JS_TEXT_AREA_GET_MAXLENGTH_UNDEFINED)) {
+                return maxLength;
+            }
+            return -1;
+        }
+    }
+
+    /**
+     * Sets maximum number of characters in this text area.
+     * @param maxLength maximum number of characters in this text area.
+     */
+    @JsxSetter
+    public void setMaxLength(final String maxLength) {
+        try {
+            final int i = Integer.parseInt(maxLength);
+
+            if (i < 0 && getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_MAXLENGTH_NEGATIVE_THROWS_EXCEPTION)) {
+                throw Context.throwAsScriptRuntimeEx(
+                    new NumberFormatException("New value for maxLength '" + maxLength + "' is smaller than zero."));
+            }
+            getDomNodeOrDie().setAttribute("maxLength", maxLength);
+        }
+        catch (final NumberFormatException e) {
+            if (getBrowserVersion().hasFeature(JS_TEXT_AREA_GET_MAXLENGTH_UNDEFINED)) {
+                getDomNodeOrDie().setAttribute("maxLength", maxLength);
+                return;
+            }
+
+            getDomNodeOrDie().setAttribute("maxLength", "0");
+            return;
+        }
     }
 }

@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,6 +40,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Daniel Gredler
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Carsten Steul
  */
 @RunWith(BrowserRunner.class)
 public class HTMLTextAreaElementTest extends WebDriverTestCase {
@@ -572,6 +574,109 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
             + "    <textarea id='t'>abc</textarea>\n"
             + "  </body>\n"
             + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "-1", /* "null", */ "32", "32", "-1", "ms" },
+            IE8 = { "undefined", /* "null", */ "32", "32", "ms", "ms" },
+            IE11 = { "2147483647", /* "null", */ "32", "32", "2147483647", "ms" })
+    public void getMaxLength() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "  <script>\n"
+            + "    function test(){\n"
+            + "      alert(document.form1.textarea1.maxLength);\n"
+            // + "      alert(document.form1.textarea1.getAttribute('maxLength'));\n"
+            + "      alert(document.form1.textarea2.maxLength);\n"
+            + "      alert(document.form1.textarea2.getAttribute('maxLength'));\n"
+            + "      alert(document.form1.textarea3.maxLength);\n"
+            + "      alert(document.form1.textarea3.getAttribute('maxLength'));\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form name='form1' method='post' >\n"
+            + "    <textarea name='textarea1'></textarea>\n"
+            + "    <textarea name='textarea2' maxLength='32'></textarea>\n"
+            + "    <textarea name='textarea3' maxLength='ms'></textarea>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Separated from the above testcase; can be merged back if fixed.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    @NotYetImplemented(IE8)
+    public void getMaxLength_IE8Failing() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "  <script>\n"
+            + "    function test(){\n"
+            + "      alert(document.form1.textarea1.getAttribute('maxLength'));\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form name='form1' method='post' >\n"
+            + "    <textarea name='textarea1'></textarea>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "10", "10", "error", "10", "10", "0", "0" },
+            IE11 = { "10", "10", "-1", "-1", "0", "0" },
+            IE8 = { "10", "10", "-1", "-1", "abc", "abc" })
+    public void setMaxLength() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "  <script>\n"
+            + "    function setMaxLength(length){\n"
+            + "      try {\n"
+            + "        document.form1.textarea1.maxLength = length;\n"
+            + "      } catch(e) { alert('error'); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form name='form1' method='post' >\n"
+            + "    <textarea id='textarea1'></textarea>\n"
+            + "    <script>\n"
+            + "      var a = document.getElementById('textarea1');\n"
+
+            + "      setMaxLength(10);\n"
+            + "      alert(a.maxLength);\n"
+            + "      alert(a.getAttribute('maxLength'));\n"
+
+            + "      setMaxLength(-1);\n"
+            + "      alert(a.maxLength);\n"
+            + "      alert(a.getAttribute('maxLength'));\n"
+
+            + "      setMaxLength('abc');\n"
+            + "      alert(a.maxLength);\n"
+            + "      alert(a.getAttribute('maxLength'));\n"
+
+            + "    </script>\n"
+            + "  </form>\n"
+            + "</body></html>";
 
         loadPageWithAlerts2(html);
     }
