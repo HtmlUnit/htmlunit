@@ -226,7 +226,7 @@
     </build>
     <profiles>
         <profile>
-            <id>with-library-and-general-tests</id>
+            <id>with-library-and-huge-tests</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -247,10 +247,10 @@
             </build>
         </profile>
         <profile>
-            <id>without-library-and-general-tests</id>
+            <id>without-library-and-huge-tests</id>
             <activation>
                 <property>
-                    <name>withoutLibsGeneral</name>
+                    <name>withoutLibsHuge</name>
                 </property>
             </activation>
             <build>
@@ -262,11 +262,8 @@
                         <configuration>
                             <excludes>
                                 <exclude>**/libraries/*.java</exclude>
-                                <exclude>**/general/*.java</exclude>
+                                <exclude>**/huge/*.java</exclude>
                             </excludes>
-                           <includes>
-                                <include>**/general/ElementPropertiesTest.java</include>
-                           </includes>
                             <argLine>-Xms128m -Xmx512m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
@@ -274,21 +271,13 @@
                         </configuration>
                     </plugin>
                 </plugins>
-                <testResources>
-                    <testResource>
-                        <directory>src/test/resources</directory>
-                        <excludes>
-                            <exclude>libraries/**/*.*</exclude>
-                        </excludes>
-                    </testResource>
-                </testResources>
             </build>
         </profile>
         <profile>
-            <id>only-library-and-general-tests</id>
+            <id>only-library-and-huge-tests</id>
             <activation>
                 <property>
-                    <name>onlyLibsGeneral</name>
+                    <name>onlyLibsHuge</name>
                 </property>
             </activation>
             <build>
@@ -300,11 +289,8 @@
                         <configuration>
                             <includes>
                                 <include>**/libraries/*.java</include>
-                                <include>**/general/*.java</include>
+                                <include>**/huge/*.java</include>
                             </includes>
-                           <excludes>
-                                <exclude>**/general/ElementPropertiesTest.java</exclude>
-                           </excludes>
                             <argLine>-Xms256m -Xmx512m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
@@ -312,14 +298,6 @@
                         </configuration>
                     </plugin>
                 </plugins>
-                <testResources>
-                    <testResource>
-                        <directory>src/test/resources</directory>
-                        <includes>
-                            <include>libraries/**/*.*</include>
-                        </includes>
-                    </testResource>
-                </testResources>
             </build>
         </profile>
     </profiles>
