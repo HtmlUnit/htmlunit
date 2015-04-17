@@ -66,6 +66,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContainer;
+import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLSerializer;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
@@ -91,7 +92,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
     @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
         browsers = { @WebBrowser(value = IE, maxVersion = 8) })
 })
-public class Node extends SimpleScriptable {
+public class Node extends EventTarget {
 
     /** "Live" child nodes collection; has to be a member to have equality (==) working. */
     private NodeList childNodes_;

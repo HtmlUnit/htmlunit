@@ -85,7 +85,7 @@ public class BeforeUnloadEvent extends Event {
      * Returns the return value associated with the event.
      * @return the return value associated with the event
      */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxGetter
     public Object getReturnValue() {
         return super.getReturnValue();
     }
@@ -94,7 +94,7 @@ public class BeforeUnloadEvent extends Event {
      * Sets the return value associated with the event.
      * @param returnValue the return value associated with the event
      */
-    @JsxSetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxSetter
     public void setReturnValue(final Object returnValue) {
         super.setReturnValue(returnValue);
     }

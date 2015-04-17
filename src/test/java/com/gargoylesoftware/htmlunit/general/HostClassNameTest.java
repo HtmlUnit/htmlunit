@@ -3890,7 +3890,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function PageTransitionEvent() { [native code] }",
             FF31 = "function PageTransitionEvent() {\n    [native code]\n}",
             IE11 = "[object PageTransitionEvent]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void pageTransitionEvent() throws Exception {
         test("PageTransitionEvent");
     }
@@ -3963,7 +3962,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function CloseEvent() { [native code] }",
             FF31 = "function CloseEvent() {\n    [native code]\n}",
             IE11 = "[object CloseEvent]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void closeEvent() throws Exception {
         test("CloseEvent");
     }
@@ -3999,7 +3997,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function ProgressEvent() { [native code] }",
             FF31 = "function ProgressEvent() {\n    [native code]\n}",
             IE11 = "[object ProgressEvent]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void progressEvent() throws Exception {
         test("ProgressEvent");
     }
@@ -4073,7 +4070,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE11 = "[object MouseWheelEvent]")
-    @NotYetImplemented(IE11)
     public void mouseWheelEvent() throws Exception {
         test("MouseWheelEvent");
     }
@@ -4086,7 +4082,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function WheelEvent() { [native code] }",
             FF31 = "function WheelEvent() {\n    [native code]\n}",
             IE11 = "[object WheelEvent]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void wheelEvent() throws Exception {
         test("WheelEvent");
     }
@@ -4120,7 +4115,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE11 = "[object CSSNamespaceRule]")
-    @NotYetImplemented(IE11)
     public void cssNamespaceRule() throws Exception {
         test("CSSNamespaceRule");
     }
@@ -4158,7 +4152,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function CustomEvent() { [native code] }",
             FF31 = "function CustomEvent() {\n    [native code]\n}",
             IE11 = "[object CustomEvent]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void customEvent() throws Exception {
         test("CustomEvent");
     }
@@ -4171,7 +4164,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function ErrorEvent() { [native code] }",
             FF31 = "function ErrorEvent() {\n    [native code]\n}",
             IE11 = "[object ErrorEvent]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void errorEvent() throws Exception {
         test("ErrorEvent");
     }
@@ -4183,7 +4175,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             FF31 = "function AnimationEvent() {\n    [native code]\n}",
             IE11 = "[object AnimationEvent]")
-    @NotYetImplemented({ FF31, IE11 })
     public void animationEvent() throws Exception {
         test("AnimationEvent");
     }
@@ -4255,7 +4246,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function TransitionEvent() { [native code] }",
             FF31 = "function TransitionEvent() {\n    [native code]\n}",
             IE11 = "[object TransitionEvent]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void transitionEvent() throws Exception {
         test("TransitionEvent");
     }
@@ -4328,7 +4318,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function CanvasGradient() { [native code] }",
             FF31 = "function CanvasGradient() {\n    [native code]\n}",
             IE11 = "[object CanvasGradient]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void canvasGradient() throws Exception {
         test("CanvasGradient");
     }
@@ -4391,7 +4380,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function CompositionEvent() { [native code] }",
             FF31 = "function CompositionEvent() {\n    [native code]\n}",
             IE11 = "[object CompositionEvent]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void compositionEvent() throws Exception {
         test("CompositionEvent");
     }
@@ -4415,7 +4403,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function CSSSupportsRule() { [native code] }",
             FF31 = "[object CSSSupportsRule]")
-    @NotYetImplemented({ CHROME, FF31 })
     public void cssSupportsRule() throws Exception {
         test("CSSSupportsRule");
     }
@@ -4612,7 +4599,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function CSSKeyframeRule() { [native code] }",
             IE11 = "[object CSSKeyframeRule]")
-    @NotYetImplemented({ CHROME, IE11 })
     public void cssKeyframeRule() throws Exception {
         test("CSSKeyframeRule");
     }
@@ -4638,7 +4624,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function FocusEvent() { [native code] }",
             FF31 = "function FocusEvent() {\n    [native code]\n}",
             IE11 = "[object FocusEvent]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void focusEvent() throws Exception {
         test("FocusEvent");
     }
@@ -4662,7 +4647,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "[object CSSConditionRule]")
-    @NotYetImplemented(FF31)
     public void cssConditionRule() throws Exception {
         test("CSSConditionRule");
     }
@@ -4711,7 +4695,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function StorageEvent() { [native code] }",
             FF31 = "function StorageEvent() {\n    [native code]\n}",
             IE11 = "[object StorageEvent]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void storageEvent() throws Exception {
         test("StorageEvent");
     }
@@ -4760,7 +4743,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "[object CSSGroupingRule]")
-    @NotYetImplemented(FF31)
     public void cssGroupingRule() throws Exception {
         test("CSSGroupingRule");
     }
@@ -4848,7 +4830,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function PopStateEvent() { [native code] }",
             FF31 = "function PopStateEvent() {\n    [native code]\n}",
             IE11 = "[object PopStateEvent]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void popStateEvent() throws Exception {
         test("PopStateEvent");
     }
@@ -4896,7 +4877,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function CSSKeyframesRule() { [native code] }",
             IE11 = "[object CSSKeyframesRule]")
-    @NotYetImplemented({ CHROME, IE11 })
     public void cssKeyframesRule() throws Exception {
         test("CSSKeyframesRule");
     }
@@ -4944,7 +4924,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function CanvasPattern() { [native code] }",
             FF31 = "function CanvasPattern() {\n    [native code]\n}",
             IE11 = "[object CanvasPattern]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void canvasPattern() throws Exception {
         test("CanvasPattern");
     }
@@ -4956,7 +4935,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             FF31 = "function DragEvent() {\n    [native code]\n}",
             IE11 = "[object DragEvent]")
-    @NotYetImplemented({ FF31, IE11 })
     public void dragEvent() throws Exception {
         test("DragEvent");
     }
@@ -5346,4 +5324,183 @@ public class HostClassNameTest extends WebDriverTestCase {
     public void htmlDataElement() throws Exception {
         test("HTMLDataElement");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function ClipboardEvent() { [native code] }",
+            FF31 = "function ClipboardEvent() {\n    [native code]\n}")
+    public void clipboardEvent() throws Exception {
+        test("ClipboardEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function DeviceMotionEvent() { [native code] }",
+            FF31 = "function DeviceMotionEvent() {\n    [native code]\n}")
+    public void deviceMotionEvent() throws Exception {
+        test("DeviceMotionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function DeviceLightEvent() {\n    [native code]\n}")
+    public void deviceLightEvent() throws Exception {
+        test("DeviceLightEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function DeviceOrientationEvent() { [native code] }",
+            FF31 = "function DeviceOrientationEvent() {\n    [native code]\n}")
+    public void deviceOrientationEvent() throws Exception {
+        test("DeviceOrientationEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function DeviceStorageChangeEvent() {\n    [native code]\n}")
+    public void deviceStorageChangeEvent() throws Exception {
+        test("DeviceStorageChangeEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function EventSource() { [native code] }",
+            FF31 = "function EventSource() {\n    [native code]\n}")
+    public void eventSource() throws Exception {
+        test("EventSource");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function EventTarget() { [native code] }",
+            FF31 = "function EventTarget() {\n    [native code]\n}")
+    public void eventTarget() throws Exception {
+        test("EventTarget");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function GamepadEvent() { [native code] }",
+            FF31 = "function GamepadEvent() {\n    [native code]\n}")
+    public void gamepadEvent() throws Exception {
+        test("GamepadEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaElementAudioSourceNode() { [native code] }",
+            FF31 = "function MediaElementAudioSourceNode() {\n    [native code]\n}")
+    public void mediaElementAudioSourceNode() throws Exception {
+        test("MediaElementAudioSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function MediaStream() {\n    [native code]\n}")
+    public void mediaStream() throws Exception {
+        test("MediaStream");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaStreamTrack() { [native code] }",
+            FF31 = "function MediaStreamTrack() {\n    [native code]\n}")
+    public void mediaStreamTrack() throws Exception {
+        test("MediaStreamTrack");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function MouseScrollEvent() {\n    [native code]\n}")
+    public void mouseScrollEvent() throws Exception {
+        test("MouseScrollEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function TimeEvent() {\n    [native code]\n}")
+    public void timeEvent() throws Exception {
+        test("TimeEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Touch() { [native code] }")
+    public void touch() throws Exception {
+        test("Touch");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function TouchEvent() { [native code] }")
+    public void touchEvent() throws Exception {
+        test("TouchEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function TouchList() { [native code] }")
+    public void touchList() throws Exception {
+        test("TouchList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function UserProximityEvent() {\n    [native code]\n}")
+    public void userProximityEvent() throws Exception {
+        test("UserProximityEvent");
+    }
+
 }

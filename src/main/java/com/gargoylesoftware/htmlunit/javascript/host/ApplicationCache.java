@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.ScriptResult;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -30,6 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContainer;
+import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
  * <p>A collection of offline resources as defined in the HTML5 spec.
@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContain
     @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(className = "OfflineResourceList", browsers = @WebBrowser(FF))
 })
-public class ApplicationCache extends SimpleScriptable {
+public class ApplicationCache extends EventTarget {
 
     /** The object isn't associated with an application cache. */
     public static final short STATUS_UNCACHED = 0;

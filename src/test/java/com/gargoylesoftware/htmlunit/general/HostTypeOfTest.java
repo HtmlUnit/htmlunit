@@ -3832,7 +3832,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void pageTransitionEvent() throws Exception {
         test("PageTransitionEvent");
     }
@@ -3905,7 +3904,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void closeEvent() throws Exception {
         test("CloseEvent");
     }
@@ -3941,7 +3939,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void progressEvent() throws Exception {
         test("ProgressEvent");
     }
@@ -4015,7 +4012,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE11 = "object")
-    @NotYetImplemented(IE11)
     public void mouseWheelEvent() throws Exception {
         test("MouseWheelEvent");
     }
@@ -4028,7 +4024,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void wheelEvent() throws Exception {
         test("WheelEvent");
     }
@@ -4062,7 +4057,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE11 = "object")
-    @NotYetImplemented(IE11)
     public void cssNamespaceRule() throws Exception {
         test("CSSNamespaceRule");
     }
@@ -4100,7 +4094,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void customEvent() throws Exception {
         test("CustomEvent");
     }
@@ -4113,7 +4106,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void errorEvent() throws Exception {
         test("ErrorEvent");
     }
@@ -4125,7 +4117,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ FF31, IE11 })
     public void animationEvent() throws Exception {
         test("AnimationEvent");
     }
@@ -4197,7 +4188,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void transitionEvent() throws Exception {
         test("TransitionEvent");
     }
@@ -4270,7 +4260,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void canvasGradient() throws Exception {
         test("CanvasGradient");
     }
@@ -4333,7 +4322,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void compositionEvent() throws Exception {
         test("CompositionEvent");
     }
@@ -4357,7 +4345,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
             FF31 = "object")
-    @NotYetImplemented({ CHROME, FF31 })
     public void cssSupportsRule() throws Exception {
         test("CSSSupportsRule");
     }
@@ -4551,7 +4538,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, IE11 })
     public void cssKeyframeRule() throws Exception {
         test("CSSKeyframeRule");
     }
@@ -4577,7 +4563,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void focusEvent() throws Exception {
         test("FocusEvent");
     }
@@ -4601,7 +4586,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF31 = "object")
-    @NotYetImplemented(FF31)
     public void cssConditionRule() throws Exception {
         test("CSSConditionRule");
     }
@@ -4650,7 +4634,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void storageEvent() throws Exception {
         test("StorageEvent");
     }
@@ -4699,7 +4682,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF31 = "object")
-    @NotYetImplemented(FF31)
     public void cssGroupingRule() throws Exception {
         test("CSSGroupingRule");
     }
@@ -4787,7 +4769,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void popStateEvent() throws Exception {
         test("PopStateEvent");
     }
@@ -4835,7 +4816,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, IE11 })
     public void cssKeyframesRule() throws Exception {
         test("CSSKeyframesRule");
     }
@@ -4883,7 +4863,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void canvasPattern() throws Exception {
         test("CanvasPattern");
     }
@@ -4895,7 +4874,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ FF31, IE11 })
     public void dragEvent() throws Exception {
         test("DragEvent");
     }
@@ -5257,4 +5235,175 @@ public class HostTypeOfTest extends WebDriverTestCase {
     public void htmlDataElement() throws Exception {
         test("HTMLDataElement");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void clipboardEvent() throws Exception {
+        test("ClipboardEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void deviceMotionEvent() throws Exception {
+        test("DeviceMotionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void deviceLightEvent() throws Exception {
+        test("DeviceLightEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void deviceOrientationEvent() throws Exception {
+        test("DeviceOrientationEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
+    public void deviceStorageChangeEvent() throws Exception {
+        test("DeviceStorageChangeEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void eventSource() throws Exception {
+        test("EventSource");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void eventTarget() throws Exception {
+        test("EventTarget");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void gamepadEvent() throws Exception {
+        test("GamepadEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void mediaElementAudioSourceNode() throws Exception {
+        test("MediaElementAudioSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void mediaStream() throws Exception {
+        test("MediaStream");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void mediaStreamTrack() throws Exception {
+        test("MediaStreamTrack");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void mouseScrollEvent() throws Exception {
+        test("MouseScrollEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void timeEvent() throws Exception {
+        test("TimeEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void touch() throws Exception {
+        test("Touch");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void touchEvent() throws Exception {
+        test("TouchEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void touchList() throws Exception {
+        test("TouchList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void userProximityEvent() throws Exception {
+        test("UserProximityEvent");
+    }
+
 }

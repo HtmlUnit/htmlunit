@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.MediaList;
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
-public class CSSMediaRule extends CSSRule {
+public class CSSMediaRule extends CSSConditionRule {
 
     private MediaList media_;
 

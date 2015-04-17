@@ -51,6 +51,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.Screen;
 import com.gargoylesoftware.htmlunit.javascript.host.SharedWorker;
 import com.gargoylesoftware.htmlunit.javascript.host.SimpleArray;
 import com.gargoylesoftware.htmlunit.javascript.host.Storage;
+import com.gargoylesoftware.htmlunit.javascript.host.Touch;
+import com.gargoylesoftware.htmlunit.javascript.host.TouchList;
 import com.gargoylesoftware.htmlunit.javascript.host.URLSearchParams;
 import com.gargoylesoftware.htmlunit.javascript.host.WebSocket;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -68,14 +70,22 @@ import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint16Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint32Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8ClampedArray;
+import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasGradient;
+import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasPattern;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.Path2D;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.WebGLRenderingContext;
+import com.gargoylesoftware.htmlunit.javascript.host.css.AnimationEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSCharsetRule;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSConditionRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSFontFaceRule;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSGroupingRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSImportRule;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSKeyframeRule;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSKeyframesRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSMediaRule;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSNamespaceRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSPageRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSPrimitiveValue;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSRule;
@@ -83,6 +93,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSSupportsRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSValue;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
@@ -116,10 +127,35 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.XPathEvaluator;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.XPathNSResolver;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.XPathResult;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.ClipboardEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.CloseEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.CompositionEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.CustomEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.DeviceLightEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.DeviceMotionEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.DeviceOrientationEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.DeviceStorageChangeEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.DragEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.ErrorEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.EventSource;
+import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
+import com.gargoylesoftware.htmlunit.javascript.host.event.FocusEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.GamepadEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.HashChangeEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MouseScrollEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MouseWheelEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MutationEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.PageTransitionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.PopStateEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.StorageEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.TimeEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.TouchEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.TransitionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.UserProximityEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.WheelEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Coordinates;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Position;
@@ -141,9 +177,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.DelayNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.DynamicsCompressorNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.GainNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.LocalMediaStream;
+import com.gargoylesoftware.htmlunit.javascript.host.media.MediaElementAudioSourceNode;
+import com.gargoylesoftware.htmlunit.javascript.host.media.MediaStream;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaStreamAudioDestinationNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaStreamAudioSourceNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaStreamEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.media.MediaStreamTrack;
 import com.gargoylesoftware.htmlunit.javascript.host.media.OfflineAudioCompletionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.media.OfflineAudioContext;
 import com.gargoylesoftware.htmlunit.javascript.host.media.OscillatorNode;
@@ -265,26 +304,31 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
 
     @SuppressWarnings("unchecked")
     static final Class<? extends SimpleScriptable>[] CLASSES_ = new Class[] {
-        AnalyserNode.class,
+        AnalyserNode.class, AnimationEvent.class,
         ArrayBuffer.class, ArrayBufferView.class, ArrayBufferViewBase.class,
         Attr.class, ActiveXObject.class, ApplicationCache.class, AudioBuffer.class,
         AudioBufferSourceNode.class, AudioContext.class, AudioDestinationNode.class, AudioListener.class,
         AudioNode.class, AudioParam.class, AudioProcessingEvent.class, BiquadFilterNode.class,
-        BeforeUnloadEvent.class, BoxObject.class, CDATASection.class, ChannelMergerNode.class,
-        ChannelSplitterNode.class, ClipboardData.class, ConvolverNode.class,
-        CSS2Properties.class,
-        CSSCharsetRule.class, CSSFontFaceRule.class, CSSImportRule.class, CSSMediaRule.class, CSSPageRule.class,
-        CSSPrimitiveValue.class, CSSRule.class,
-        CSSRuleList.class, CSSStyleDeclaration.class, CSSStyleRule.class, CSSStyleSheet.class, CSSValue.class,
-        CanvasRenderingContext2D.class, CharacterData.class, ClientRect.class, ClientRectList.class, Comment.class,
-        ComputedCSSStyleDeclaration.class, Console.class, Coordinates.class, DataView.class,
-        DelayNode.class, DOMCursor.class, DOMException.class,
+        BeforeUnloadEvent.class, BoxObject.class, CanvasGradient.class, CanvasPattern.class, 
+        CanvasRenderingContext2D.class, CDATASection.class,
+        ChannelMergerNode.class, ChannelSplitterNode.class, CharacterData.class, ClientRect.class, ClientRectList.class,
+        ClipboardData.class, ClipboardEvent.class,
+        CloseEvent.class, Comment.class, CompositionEvent.class, ComputedCSSStyleDeclaration.class, Console.class,
+        ConvolverNode.class, Coordinates.class, CSS2Properties.class,
+        CSSCharsetRule.class, CSSConditionRule.class, CSSGroupingRule.class, CSSFontFaceRule.class, CSSImportRule.class,
+        CSSKeyframeRule.class, CSSKeyframesRule.class,
+        CSSMediaRule.class, CSSNamespaceRule.class, CSSPageRule.class, CSSPrimitiveValue.class, CSSRule.class,
+        CSSRuleList.class, CSSStyleDeclaration.class, CSSStyleRule.class, CSSStyleSheet.class, CSSSupportsRule.class, 
+        CSSValue.class, CustomEvent.class, DataView.class,
+        DelayNode.class, DeviceMotionEvent.class, DeviceLightEvent.class, DeviceOrientationEvent.class,
+        DeviceStorageChangeEvent.class, DOMCursor.class, DOMException.class,
         DOMImplementation.class, DOMParser.class, DOMStringMap.class,
         DOMTokenList.class, Document.class, DocumentFragment.class,
-        DocumentType.class, DynamicsCompressorNode.class,
-        Element.class, Enumerator.class, Event.class, EventNode.class, External.class,
-        Float32Array.class, Float64Array.class,
-        FormChild.class, FormData.class, FormField.class, GainNode.class, Geolocation.class,
+        DocumentType.class, DragEvent.class, DynamicsCompressorNode.class,
+        Element.class, Enumerator.class, ErrorEvent.class, Event.class, EventNode.class, EventSource.class,
+        EventTarget.class, External.class,
+        Float32Array.class, Float64Array.class, FocusEvent.class,
+        FormChild.class, FormData.class, FormField.class, GainNode.class, GamepadEvent.class, Geolocation.class,
         HashChangeEvent.class, History.class,
         HTMLAllCollection.class,
         HTMLAnchorElement.class, HTMLAppletElement.class, HTMLAreaElement.class, HTMLAudioElement.class,
@@ -324,16 +368,20 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         Image.class,
         Int16Array.class, Int32Array.class, Int8Array.class,
         KeyboardEvent.class, LocalMediaStream.class,
-        Location.class, MediaList.class, MediaStreamAudioDestinationNode.class, MediaStreamAudioSourceNode.class,
-        MediaStreamEvent.class, MessageChannel.class,
+        Location.class, MediaElementAudioSourceNode.class, MediaList.class, MediaStream.class,
+        MediaStreamAudioDestinationNode.class, MediaStreamAudioSourceNode.class,
+        MediaStreamEvent.class, MediaStreamTrack.class, MessageChannel.class,
         MessageEvent.class, MessagePort.class, MimeType.class, MimeTypeArray.class, MouseEvent.class,
+        MouseScrollEvent.class, MouseWheelEvent.class,
         MutationEvent.class, NamedNodeMap.class, Namespace.class, NamespaceCollection.class, Navigator.class,
         Node.class, NodeFilter.class, NodeList.class, Notification.class, OfflineAudioCompletionEvent.class,
-        OfflineAudioContext.class, Option.class, OscillatorNode.class, PannerNode.class, Path2D.class,
-        PeriodicWave.class, Plugin.class, PluginArray.class, PointerEvent.class, Popup.class, Position.class,
-        ProcessingInstruction.class,
+        OfflineAudioContext.class, Option.class, OscillatorNode.class, PageTransitionEvent.class, PannerNode.class,
+        Path2D.class,
+        PeriodicWave.class, Plugin.class, PluginArray.class, PointerEvent.class, Popup.class, PopStateEvent.class,
+        Position.class,
+        ProcessingInstruction.class, ProgressEvent.class,
         Promise.class, Range.class, RowContainer.class, ScriptProcessorNode.class, ShadowRoot.class,
-        SharedWorker.class,
+        SharedWorker.class, StorageEvent.class,
         SVGAElement.class, SVGAltGlyphElement.class, SVGAngle.class, SVGAnimatedAngle.class,
         SVGAnimatedBoolean.class, SVGAnimateElement.class, SVGAnimatedEnumeration.class, SVGAnimatedInteger.class,
         SVGAnimatedLength.class, SVGAnimatedLengthList.class, SVGAnimatedNumber.class, SVGAnimatedNumberList.class,
@@ -365,10 +413,11 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         SVGTextPositioningElement.class, SVGTitleElement.class, SVGTransform.class, SVGTransformList.class,
         SVGUseElement.class, SVGViewElement.class,
         Screen.class, Selection.class, SimpleArray.class,
-        StaticNodeList.class, Storage.class, StyleSheetList.class, Text.class, TextRange.class, TreeWalker.class,
+        StaticNodeList.class, Storage.class, StyleSheetList.class, Text.class, TextRange.class, TimeEvent.class,
+        Touch.class, TouchEvent.class, TouchList.class, TransitionEvent.class, TreeWalker.class,
         UIEvent.class, Uint16Array.class, Uint32Array.class, Uint8Array.class, Uint8ClampedArray.class,
-        URLSearchParams.class, WaveShaperNode.class, WebGLRenderingContext.class,
-        WebSocket.class, Window.class, Worker.class, XMLDocument.class,
+        URLSearchParams.class, UserProximityEvent.class, WaveShaperNode.class, WebGLRenderingContext.class,
+        WebSocket.class, WheelEvent.class, Window.class, Worker.class, XMLDocument.class,
         XMLHttpRequest.class, XMLSerializer.class, XPathEvaluator.class, XPathNSResolver.class, XPathResult.class,
         XSLTProcessor.class, XSLTemplate.class};
 
