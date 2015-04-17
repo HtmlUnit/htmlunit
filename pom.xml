@@ -264,6 +264,9 @@
                                 <exclude>**/libraries/*.java</exclude>
                                 <exclude>**/general/*.java</exclude>
                             </excludes>
+                           <includes>
+                                <include>**/general/ElementPropertiesTest.java</include>
+                           </includes>
                             <argLine>-Xms128m -Xmx512m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
@@ -299,6 +302,9 @@
                                 <include>**/libraries/*.java</include>
                                 <include>**/general/*.java</include>
                             </includes>
+                           <excludes>
+                                <exclude>**/general/ElementPropertiesTest.java</exclude>
+                           </excludes>
                             <argLine>-Xms256m -Xmx512m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>

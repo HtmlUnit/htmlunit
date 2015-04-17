@@ -15,8 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -1265,7 +1265,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "39", "27035", "65533", "39" },
             IE8 = "exception",
             IE11 = { "39", "27035", "63" })
-    @NotYetImplemented({ CHROME, FF, IE11 })
+    @NotYetImplemented(IE11)
     public void overrideMimeType_charset_all() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1294,7 +1294,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void java_encoding() throws Exception {
         // Chrome and FF return the last apostrophe, see overrideMimeType_charset_all()
         // but Java and other tools (e.g. Notpad++) return only 3 characters, not 4
@@ -1302,13 +1301,13 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         final String string = "'\u9ec4'";
         final ByteArrayInputStream bais = new ByteArrayInputStream(string.getBytes("UTF-8"));
-        final BufferedReader reader = new BufferedReader(new InputStreamReader(bais, "GBK"));
-        final String output = reader.readLine();
-        reader.close();
-
-        assertEquals(39, output.codePointAt(0));
-        assertEquals(27035, output.codePointAt(1));
-        assertEquals(65533, output.codePointAt(2));
-        assertEquals(39, output.codePointAt(3));
+        try (final BufferedReader reader = new BufferedReader(new InputStreamReader(bais, "GBK"))) {
+            final String output = reader.readLine();
+            assertNotNull(output);
+            assertEquals(39, output.codePointAt(0));
+            assertEquals(27035, output.codePointAt(1));
+            assertEquals(65533, output.codePointAt(2));
+            assertEquals(39, output.codePointAt(3));
+        }
     }
 }
