@@ -226,7 +226,7 @@
     </build>
     <profiles>
         <profile>
-            <id>with-library-tests</id>
+            <id>with-library-and-general-tests</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -247,10 +247,10 @@
             </build>
         </profile>
         <profile>
-            <id>without-library-tests</id>
+            <id>without-library-and-general-tests</id>
             <activation>
                 <property>
-                    <name>withoutLibs</name>
+                    <name>withoutLibsGeneral</name>
                 </property>
             </activation>
             <build>
@@ -262,8 +262,9 @@
                         <configuration>
                             <excludes>
                                 <exclude>**/libraries/*.java</exclude>
+                                <exclude>**/general/*.java</exclude>
                             </excludes>
-                            <argLine>-Xmx512m -Xms128m</argLine>
+                            <argLine>-Xms128m -Xmx512m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -281,10 +282,10 @@
             </build>
         </profile>
         <profile>
-            <id>only-library-tests</id>
+            <id>only-library-and-general-tests</id>
             <activation>
                 <property>
-                    <name>onlyLibs</name>
+                    <name>onlyLibsGeneral</name>
                 </property>
             </activation>
             <build>
@@ -296,8 +297,9 @@
                         <configuration>
                             <includes>
                                 <include>**/libraries/*.java</include>
+                                <include>**/general/*.java</include>
                             </includes>
-                            <argLine>-Xmx512m -Xms128m</argLine>
+                            <argLine>-Xms256m -Xmx512m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
