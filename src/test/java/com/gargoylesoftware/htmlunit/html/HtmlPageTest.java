@@ -1818,4 +1818,57 @@ public class HtmlPageTest extends SimpleWebTestCase {
         clonedPage.getByXPath("//p");
     }
 
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    public void cloneHtmlPageWithFrame() throws Exception {
+        final String html =
+                "<html>\n"
+                + "<head></head><body>\n"
+                + "<div id='content'>"
+                + "  <iframe name='content' src='frame1.html'></iframe>"
+                + "</div>"
+                + "</body></html>";
+
+        final String frameContent =
+                "<html>\n"
+                + "<head></head>\n"
+                + "<body>"
+                + "  <p>frame1</p>"
+                + "</body></html>";
+
+        final MockWebConnection webConnection = getMockWebConnection();
+        webConnection.setResponse(new URL("http://example/index.html"), html);
+        webConnection.setResponse(new URL("http://example/frame1.html"), frameContent);
+
+        final WebClient webClient = getWebClientWithMockWebConnection();
+
+        final HtmlPage page = webClient.getPage("http://example/index.html");
+
+        // check frame on page
+        final List<FrameWindow> frames = page.getFrames();
+        assertEquals(1, frames.size());
+        assertEquals("frame1", ((HtmlPage) frames.get(0).getEnclosedPage()).asText());
+
+        // clone page with deep false
+        HtmlPage clonedPage = page.cloneNode(false);
+
+        assertEquals(1, page.getFrames().size());
+        assertEquals(1, clonedPage.getFrames().size());
+
+        // clone page with deep true
+        clonedPage = page.cloneNode(true);
+
+        // must be equals 1
+        assertEquals(1, page.getFrames().size());
+        assertEquals(1, clonedPage.getFrames().size());
+
+        // clone page with deep true
+        page.executeJavaScript("document.cloneNode(true)");
+
+        // must be equals 1
+        assertEquals(1, page.getFrames().size());
+        assertEquals(1, clonedPage.getFrames().size());
+    }
 }

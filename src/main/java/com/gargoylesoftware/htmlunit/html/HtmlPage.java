@@ -143,6 +143,8 @@ public class HtmlPage extends SgmlPage {
 
     private static final Log LOG = LogFactory.getLog(HtmlPage.class);
 
+    private static final Comparator<DomElement> documentPositionComparator = new DocumentPositionComparator();
+
     private HtmlUnitDOMBuilder builder_;
     private String originalCharset_;
 
@@ -157,12 +159,11 @@ public class HtmlPage extends SgmlPage {
     private int inlineSnippetParserCount_;
     private Collection<HtmlAttributeChangeListener> attributeListeners_;
     private final Object lock_ = new String(); // used for synchronization
-    private final List<Range> selectionRanges_ = new ArrayList<>(3);
-    private final List<PostponedAction> afterLoadActions_ = new ArrayList<>();
+    private List<Range> selectionRanges_ = new ArrayList<>(3);
+    private List<PostponedAction> afterLoadActions_ = new ArrayList<>();
     private boolean cleaning_;
     private HtmlBase base_;
     private URL baseUrl_;
-    private static final Comparator<DomElement> documentPositionComparator = new DocumentPositionComparator();
 
     static class DocumentPositionComparator implements Comparator<DomElement>, Serializable {
         @Override
@@ -2138,9 +2139,11 @@ public class HtmlPage extends SgmlPage {
     @Override
     protected HtmlPage clone() {
         final HtmlPage result = (HtmlPage) super.clone();
+
         result.elementWithFocus_ = null;
-        result.idMap_ = new HashMap<>();
-        result.nameMap_ = new HashMap<>();
+        result.idMap_ = new Hashtable<String, SortedSet<DomElement>>();
+        result.nameMap_ = new Hashtable<String, SortedSet<DomElement>>();
+
         return result;
     }
 
@@ -2155,8 +2158,13 @@ public class HtmlPage extends SgmlPage {
         final SimpleScriptable jsObjClone = ((SimpleScriptable) getScriptObject()).clone();
         jsObjClone.setDomNode(result);
 
-        // if deep, clone the kids too.
+        // if deep, clone the kids too, and re initialize parts of the clone
         if (deep) {
+            result.attributeListeners_ = null;
+            result.selectionRanges_ = new ArrayList<>(3);
+            result.afterLoadActions_ = new ArrayList<>();
+            result.frameElements_ = new TreeSet<>(documentPositionComparator);
+
             for (DomNode child = getFirstChild(); child != null; child = child.getNextSibling()) {
                 result.appendChild(child.cloneNode(true));
             }
