@@ -5513,4 +5513,14 @@ public class HostClassNameTest extends WebDriverTestCase {
         test("DeviceProximityEvent");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function InputEvent() {\n    [native code]\n}")
+    public void inputEvent() throws Exception {
+        test("InputEvent");
+    }
+
 }

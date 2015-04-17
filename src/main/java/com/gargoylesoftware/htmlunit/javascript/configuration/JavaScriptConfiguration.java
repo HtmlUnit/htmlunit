@@ -143,6 +143,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.event.FocusEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.GamepadEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.HashChangeEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.InputEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseScrollEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseWheelEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MutationEvent;
@@ -366,7 +367,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLTextElement.class, HTMLTextAreaElement.class, HTMLTimeElement.class, HTMLTitleElement.class,
         HTMLTrackElement.class, HTMLUListElement.class, HTMLUnknownElement.class,
         HTMLVideoElement.class,
-        Image.class,
+        Image.class, InputEvent.class,
         Int16Array.class, Int32Array.class, Int8Array.class,
         KeyboardEvent.class, LocalMediaStream.class,
         Location.class, MediaElementAudioSourceNode.class, MediaList.class, MediaStream.class,

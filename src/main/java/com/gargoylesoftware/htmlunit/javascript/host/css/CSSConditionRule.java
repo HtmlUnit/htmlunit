@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -37,7 +36,6 @@ public class CSSConditionRule extends CSSGroupingRule {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor(@WebBrowser(IE))
     public CSSConditionRule() {
     }
 

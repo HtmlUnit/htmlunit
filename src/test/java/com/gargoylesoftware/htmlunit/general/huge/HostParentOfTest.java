@@ -11237,4 +11237,24 @@ public class HostParentOfTest extends WebDriverTestCase {
         test("DeviceProximityEvent", "DeviceProximityEvent");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _Event_InputEvent() throws Exception {
+        test("Event", "InputEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _InputEvent_InputEvent() throws Exception {
+        test("InputEvent", "InputEvent");
+    }
+
 }

@@ -7147,7 +7147,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "function InputEvent() {\n    [native code]\n}")
-    @NotYetImplemented(FF31)
     public void inputEvent() throws Exception {
         test("InputEvent");
     }
