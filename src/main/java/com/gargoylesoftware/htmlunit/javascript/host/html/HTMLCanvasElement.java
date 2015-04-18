@@ -58,10 +58,22 @@ public class HTMLCanvasElement extends HTMLElement {
     @JsxGetter
     public int getWidth() {
         final String value = getDomNodeOrDie().getAttribute("width");
-        if (value.isEmpty()) {
-            return 300;
+        final Integer intValue = getValue(value);
+        if (intValue != null) {
+            return intValue;
         }
-        return Integer.parseInt(value);
+        return 300;
+    }
+
+    private static Integer getValue(final String value) {
+        int index = -1;
+        while (index + 1 < value.length() && Character.isDigit(value.charAt(index + 1))) {
+            index++;
+        }
+        if (index != -1) {
+            return Integer.parseInt(value.substring(0, index + 1));
+        }
+        return null;
     }
 
     /**
@@ -81,10 +93,11 @@ public class HTMLCanvasElement extends HTMLElement {
     @JsxGetter
     public int getHeight() {
         final String value = getDomNodeOrDie().getAttribute("height");
-        if (value.isEmpty()) {
-            return 150;
+        final Integer intValue = getValue(value);
+        if (intValue != null) {
+            return intValue;
         }
-        return Integer.parseInt(value);
+        return 150;
     }
 
     /**

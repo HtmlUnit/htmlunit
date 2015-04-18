@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -174,7 +175,7 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3, 3")
-    @NotYetImplemented
+    @NotYetImplemented(IE8)
     public void getWidthDot() throws Exception {
         getWidth("3.1");
     }
@@ -184,7 +185,7 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3, 3")
-    @NotYetImplemented
+    @NotYetImplemented(IE8)
     public void getWidthDigitAlpha() throws Exception {
         getWidth("3a1");
     }
@@ -194,7 +195,7 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("300, 150")
-    @NotYetImplemented
+    @NotYetImplemented(IE8)
     public void getWidthAlpha() throws Exception {
         getWidth("abb");
     }
