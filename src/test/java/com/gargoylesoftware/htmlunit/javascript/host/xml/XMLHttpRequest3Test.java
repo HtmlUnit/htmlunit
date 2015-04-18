@@ -459,6 +459,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         final DomElement elem = page.getElementById("doIt");
         ((HtmlSubmitInput) elem).click();
 
+        Thread.sleep(400); // wait a bit to be sure, both request are out
         assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
 
         String headers = collectedHeaders_.get(0);
