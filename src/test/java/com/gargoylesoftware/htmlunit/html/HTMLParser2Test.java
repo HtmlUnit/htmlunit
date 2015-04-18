@@ -156,7 +156,6 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "P", "LABEL", "OBJECT" })
-    @NotYetImplemented
     public void objectInsideLabel() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

@@ -205,7 +205,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
             IE8 = { "1", "1", "1", "2", "2", "1" })
-    @NotYetImplemented({ FF, IE11, CHROME })
+    @NotYetImplemented(IE8)
     public void basefont() throws Exception {
         loadPageWithAlerts2(test("basefont"));
     }
@@ -867,7 +867,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "3" },
             IE8 = { "2", "2", "2", "4", "4", "3" })
-    @NotYetImplemented
+    @NotYetImplemented(IE8)
     public void keygen() throws Exception {
         loadPageWithAlerts2(test("keygen"));
     }

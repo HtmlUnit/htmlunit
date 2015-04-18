@@ -353,14 +353,6 @@
                 <artifactId>jdepend-maven-plugin</artifactId>
                 <version>2.0-beta-2</version>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>2.18.1</version>
-                <configuration>
-                    <showSuccess>false</showSuccess>
-                </configuration>
-            </plugin>
         </plugins>
     </reporting>
     <issueManagement>
