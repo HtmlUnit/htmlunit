@@ -144442,6 +144442,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     public void _video_data() throws Exception {
         test("video", "data");
     }
+
     /**
      * @throws Exception if the test fails
      */
