@@ -5426,4 +5426,14 @@ public class HostTypeOfTest extends WebDriverTestCase {
         test("InputEvent");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void htmlPictureElement() throws Exception {
+        test("HTMLPictureElement");
+    }
+
 }

@@ -357,7 +357,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLNextIdElement.class,
         HTMLOListElement.class, HTMLObjectElement.class, HTMLOptGroupElement.class,
         HTMLOptionElement.class, HTMLOptionsCollection.class, HTMLOutputElement.class,
-        HTMLParagraphElement.class, HTMLParamElement.class,
+        HTMLParagraphElement.class, HTMLParamElement.class, HTMLPictureElement.class,
         HTMLPhraseElement.class,
         HTMLPreElement.class, HTMLProgressElement.class, HTMLScriptElement.class,
         HTMLSelectElement.class, HTMLShadowElement.class, HTMLSourceElement.class, HTMLSpanElement.class,

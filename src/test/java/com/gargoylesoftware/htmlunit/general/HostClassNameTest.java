@@ -5523,4 +5523,14 @@ public class HostClassNameTest extends WebDriverTestCase {
         test("InputEvent");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function HTMLPictureElement() { [native code] }")
+    public void htmlPictureElement() throws Exception {
+        test("HTMLPictureElement");
+    }
+
 }

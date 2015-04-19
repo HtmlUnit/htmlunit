@@ -2111,4 +2111,17 @@ public class ElementCreationTest extends WebDriverTestCase {
         test("content");
     }
 
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlPicture}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
+            CHROME = "[object HTMLPictureElement]",
+            IE8 = "[object HTMLGenericElement]")
+    public void picture() throws Exception {
+        test("picture");
+    }
+
 }

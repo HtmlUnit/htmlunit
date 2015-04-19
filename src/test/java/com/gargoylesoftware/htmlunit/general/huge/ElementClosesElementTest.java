@@ -144442,4 +144442,785 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     public void _video_data() throws Exception {
         test("video", "data");
     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _area_picture() throws Exception {
+        test("area", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _base_picture() throws Exception {
+        test("base", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _basefont_picture() throws Exception {
+        test("basefont", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _bgsound_picture() throws Exception {
+        test("bgsound", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _body_picture() throws Exception {
+        test("body", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _br_picture() throws Exception {
+        test("br", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "null",
+            FF31 = "null",
+            IE11 = "null")
+    @NotYetImplemented(IE8)
+    public void _caption_picture() throws Exception {
+        test("caption", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "null",
+            FF31 = "null",
+            IE11 = "null")
+    @NotYetImplemented(IE8)
+    public void _col_picture() throws Exception {
+        test("col", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "null",
+            FF31 = "null",
+            IE11 = "null")
+    @NotYetImplemented(IE8)
+    public void _colgroup_picture() throws Exception {
+        test("colgroup", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            IE11 = "0")
+    @NotYetImplemented({ CHROME, IE11 })
+    public void _command_picture() throws Exception {
+        test("command", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _embed_picture() throws Exception {
+        test("embed", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "null",
+            FF31 = "null",
+            IE11 = "null")
+    @NotYetImplemented
+    public void _frame_picture() throws Exception {
+        test("frame", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "null",
+            FF31 = "null",
+            IE11 = "null")
+    @NotYetImplemented({ CHROME, IE8, FF31, IE11 })
+    public void _frameset_picture() throws Exception {
+        test("frameset", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "null",
+            FF31 = "null",
+            IE11 = "null")
+    @NotYetImplemented(IE8)
+    public void _head_picture() throws Exception {
+        test("head", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _hr_picture() throws Exception {
+        test("hr", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented
+    public void _html_picture() throws Exception {
+        test("html", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented({ CHROME, FF31, IE8, IE11 })
+    public void _image_picture() throws Exception {
+        test("image", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _img_picture() throws Exception {
+        test("img", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_picture() throws Exception {
+        test("input", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "0",
+            FF31 = "2",
+            IE11 = "0")
+    @NotYetImplemented({ IE8, FF31 })
+    public void _keygen_picture() throws Exception {
+        test("keygen", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _link_picture() throws Exception {
+        test("link", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _meta_picture() throws Exception {
+        test("meta", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _param_picture() throws Exception {
+        test("param", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented({ CHROME, FF31, IE8, IE11 })
+    public void _picture_area() throws Exception {
+        test("picture", "area");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _picture_base() throws Exception {
+        test("picture", "base");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _picture_basefont() throws Exception {
+        test("picture", "basefont");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _picture_bgsound() throws Exception {
+        test("picture", "bgsound");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _picture_br() throws Exception {
+        test("picture", "br");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "2",
+            IE11 = "2")
+    @NotYetImplemented({ CHROME, IE11 })
+    public void _picture_command() throws Exception {
+        test("picture", "command");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _picture_embed() throws Exception {
+        test("picture", "embed");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _picture_hr() throws Exception {
+        test("picture", "hr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented({ CHROME, FF31, IE8, IE11 })
+    public void _picture_image() throws Exception {
+        test("picture", "image");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _picture_img() throws Exception {
+        test("picture", "img");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _picture_input() throws Exception {
+        test("picture", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _picture_keygen() throws Exception {
+        test("picture", "keygen");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _picture_link() throws Exception {
+        test("picture", "link");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _picture_meta() throws Exception {
+        test("picture", "meta");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented({ CHROME, FF31, IE8, IE11 })
+    public void _picture_param() throws Exception {
+        test("picture", "param");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented({ CHROME, FF31, IE8, IE11 })
+    public void _picture_source() throws Exception {
+        test("picture", "source");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented({ CHROME, FF31, IE8, IE11 })
+    public void _picture_track() throws Exception {
+        test("picture", "track");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented(IE8)
+    public void _picture_wbr() throws Exception {
+        test("picture", "wbr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented({ CHROME, FF31, IE8, IE11 })
+    public void _source_picture() throws Exception {
+        test("source", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _table_picture() throws Exception {
+        test("table", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "null",
+            FF31 = "null",
+            IE11 = "null")
+    @NotYetImplemented(IE8)
+    public void _tbody_picture() throws Exception {
+        test("tbody", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "null",
+            FF31 = "null",
+            IE11 = "null")
+    @NotYetImplemented(IE8)
+    public void _td_picture() throws Exception {
+        test("td", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "null",
+            FF31 = "null",
+            IE11 = "null")
+    @NotYetImplemented(IE8)
+    public void _tfoot_picture() throws Exception {
+        test("tfoot", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "null",
+            FF31 = "null",
+            IE11 = "null")
+    @NotYetImplemented(IE8)
+    public void _th_picture() throws Exception {
+        test("th", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "null",
+            FF31 = "null",
+            IE11 = "null")
+    @NotYetImplemented(IE8)
+    public void _thead_picture() throws Exception {
+        test("thead", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "null",
+            FF31 = "null",
+            IE11 = "null")
+    @NotYetImplemented(IE8)
+    public void _tr_picture() throws Exception {
+        test("tr", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented({ CHROME, FF31, IE8, IE11 })
+    public void _track_picture() throws Exception {
+        test("track", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _wbr_picture() throws Exception {
+        test("wbr", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented
+    public void _nextid_picture() throws Exception {
+        test("nextid", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented
+    public void _optgroup_picture() throws Exception {
+        test("optgroup", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented
+    public void _option_picture() throws Exception {
+        test("option", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented({ CHROME, FF31, IE11 })
+    public void _picture_nextid() throws Exception {
+        test("picture", "nextid");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented
+    public void _picture_script() throws Exception {
+        test("picture", "script");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented
+    public void _picture_title() throws Exception {
+        test("picture", "title");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented
+    public void _script_picture() throws Exception {
+        test("script", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _noscript_picture() throws Exception {
+        test("noscript", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _picture_body() throws Exception {
+        test("picture", "body");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _picture_caption() throws Exception {
+        test("picture", "caption");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _picture_col() throws Exception {
+        test("picture", "col");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _picture_colgroup() throws Exception {
+        test("picture", "colgroup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _picture_head() throws Exception {
+        test("picture", "head");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _picture_html() throws Exception {
+        test("picture", "html");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _picture_optgroup() throws Exception {
+        test("picture", "optgroup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _picture_option() throws Exception {
+        test("picture", "option");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _picture_tbody() throws Exception {
+        test("picture", "tbody");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _picture_td() throws Exception {
+        test("picture", "td");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _picture_tfoot() throws Exception {
+        test("picture", "tfoot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _picture_th() throws Exception {
+        test("picture", "th");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _picture_thead() throws Exception {
+        test("picture", "thead");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @NotYetImplemented(IE8)
+    public void _picture_tr() throws Exception {
+        test("picture", "tr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            FF31 = "0",
+            IE11 = "0")
+    @NotYetImplemented({ FF31, IE11 })
+    public void _isindex_picture() throws Exception {
+        test("isindex", "picture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            FF31 = "2",
+            IE11 = "2")
+    @NotYetImplemented({ FF31, IE11 })
+    public void _picture_isindex() throws Exception {
+        test("picture", "isindex");
+    }
 }

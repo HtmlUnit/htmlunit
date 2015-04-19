@@ -11257,4 +11257,53 @@ public class HostParentOfTest extends WebDriverTestCase {
         test("InputEvent", "InputEvent");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Element_HTMLPictureElement() throws Exception {
+        test("Element", "HTMLPictureElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_HTMLPictureElement() throws Exception {
+        test("EventTarget", "HTMLPictureElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _HTMLElement_HTMLPictureElement() throws Exception {
+        test("HTMLElement", "HTMLPictureElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _HTMLPictureElement_HTMLPictureElement() throws Exception {
+        test("HTMLPictureElement", "HTMLPictureElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Node_HTMLPictureElement() throws Exception {
+        test("Node", "HTMLPictureElement");
+    }
 }

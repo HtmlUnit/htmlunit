@@ -1428,4 +1428,14 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
     public void content() throws Exception {
         loadPageWithAlerts2(test("content"));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<picture></picture>")
+    public void picture() throws Exception {
+        loadPageWithAlerts2(test("picture"));
+    }
+
 }

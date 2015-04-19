@@ -1615,4 +1615,16 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     public void content() throws Exception {
         loadPageWithAlerts2(test("content"));
     }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlPicture}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("inline")
+    public void picture() throws Exception {
+        loadPageWithAlerts2(test("picture"));
+    }
+
 }

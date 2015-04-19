@@ -83,7 +83,7 @@ class DefaultElementFactory implements ElementFactory {
             HtmlNoScript.TAG_NAME, HtmlObject.TAG_NAME, HtmlOrderedList.TAG_NAME,
             HtmlOptionGroup.TAG_NAME, HtmlOption.TAG_NAME, HtmlOutput.TAG_NAME,
             HtmlParagraph.TAG_NAME,
-            HtmlParameter.TAG_NAME, HtmlPlainText.TAG_NAME, HtmlPreformattedText.TAG_NAME,
+            HtmlParameter.TAG_NAME, HtmlPicture.TAG_NAME, HtmlPlainText.TAG_NAME, HtmlPreformattedText.TAG_NAME,
             HtmlProgress.TAG_NAME,
             HtmlRp.TAG_NAME, HtmlRt.TAG_NAME, HtmlRuby.TAG_NAME,
             HtmlS.TAG_NAME, HtmlSample.TAG_NAME,
@@ -600,6 +600,10 @@ class DefaultElementFactory implements ElementFactory {
 
             case HtmlParameter.TAG_NAME:
                 element = new HtmlParameter(qualifiedName, page, attributeMap);
+                break;
+
+            case HtmlPicture.TAG_NAME:
+                element = new HtmlPicture(qualifiedName, page, attributeMap);
                 break;
 
             case HtmlPlainText.TAG_NAME:

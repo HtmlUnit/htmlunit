@@ -1774,4 +1774,18 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     public void content() throws Exception {
         loadPageWithAlerts2(test("content"));
     }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlPicture}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "0")
+    @NotYetImplemented(IE8)
+    public void picture() throws Exception {
+        loadPageWithAlerts2(test("picture"));
+    }
+
 }

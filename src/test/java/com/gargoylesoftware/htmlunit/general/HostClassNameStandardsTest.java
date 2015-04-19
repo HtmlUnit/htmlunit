@@ -5330,7 +5330,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function HTMLPictureElement() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void htmlPictureElement() throws Exception {
         test("HTMLPictureElement");
     }

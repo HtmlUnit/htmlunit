@@ -2600,4 +2600,15 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     public void content() throws Exception {
         test("content");
     }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlPicture}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void picutre() throws Exception {
+        test("picture");
+    }
+
 }
