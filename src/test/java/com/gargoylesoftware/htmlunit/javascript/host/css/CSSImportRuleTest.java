@@ -156,11 +156,12 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "<body>\n"
             + "<div id='d'>foo</div>\n"
             + "<script>\n"
-            + "var d = document.getElementById('d');\n"
-            + "var s = window.getComputedStyle ? window.getComputedStyle(d, null) : d.currentStyle;\n"
-            + "alert(s.color.indexOf('128') > 0);\n"
+            + "  var d = document.getElementById('d');\n"
+            + "  var s = window.getComputedStyle ? window.getComputedStyle(d, null) : d.currentStyle;\n"
+            + "  alert(s.color.indexOf('128') > 0);\n"
             + "</script>\n"
             + "</body></html>";
+
         final String css1 = "@import url('file2.css');";
         final String css2 = "@import url('file1.css');\n"
             + "#d { color: rgb(0, 128, 0); }";
