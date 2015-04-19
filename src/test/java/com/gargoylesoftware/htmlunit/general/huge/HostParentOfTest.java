@@ -8565,7 +8565,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false")
+            IE8 = "false")
     public void _CloseEvent_CloseEvent() throws Exception {
         test("CloseEvent", "CloseEvent");
     }
@@ -8615,7 +8615,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false")
+            IE8 = "false")
     public void _ErrorEvent_ErrorEvent() throws Exception {
         test("ErrorEvent", "ErrorEvent");
     }
@@ -10496,7 +10496,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false")
+            IE8 = "false")
     public void _Event_CompositionEvent() throws Exception {
         test("Event", "CompositionEvent");
     }
@@ -10506,7 +10506,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false")
+            IE8 = "false")
     public void _Event_CustomEvent() throws Exception {
         test("Event", "CustomEvent");
     }
@@ -10536,7 +10536,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false")
+            IE8 = "false")
     public void _Event_ErrorEvent() throws Exception {
         test("Event", "ErrorEvent");
     }
@@ -10546,7 +10546,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false")
+            IE8 = "false")
     public void _Event_FocusEvent() throws Exception {
         test("Event", "FocusEvent");
     }
@@ -10566,7 +10566,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false")
+            IE8 = "false")
     public void _Event_PageTransitionEvent() throws Exception {
         test("Event", "PageTransitionEvent");
     }
@@ -10576,7 +10576,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false")
+            IE8 = "false")
     public void _Event_PopStateEvent() throws Exception {
         test("Event", "PopStateEvent");
     }
@@ -10586,7 +10586,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false")
+            IE8 = "false")
     public void _Event_ProgressEvent() throws Exception {
         test("Event", "ProgressEvent");
     }
@@ -10596,7 +10596,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false")
+            IE8 = "false")
     public void _Event_StorageEvent() throws Exception {
         test("Event", "StorageEvent");
     }
@@ -10616,7 +10616,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false")
+            IE8 = "false")
     public void _Event_TransitionEvent() throws Exception {
         test("Event", "TransitionEvent");
     }
@@ -10626,7 +10626,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false")
+            IE8 = "false")
     public void _Event_WheelEvent() throws Exception {
         test("Event", "WheelEvent");
     }
@@ -10636,7 +10636,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false")
+            IE8 = "false")
     public void _FocusEvent_FocusEvent() throws Exception {
         test("FocusEvent", "FocusEvent");
     }
@@ -10686,7 +10686,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false")
+            IE8 = "false")
     public void _MouseEvent_WheelEvent() throws Exception {
         test("MouseEvent", "WheelEvent");
     }
@@ -10696,7 +10696,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false")
+            IE8 = "false")
     public void _PageTransitionEvent_PageTransitionEvent() throws Exception {
         test("PageTransitionEvent", "PageTransitionEvent");
     }
@@ -10706,7 +10706,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false")
+            IE8 = "false")
     public void _PopStateEvent_PopStateEvent() throws Exception {
         test("PopStateEvent", "PopStateEvent");
     }
@@ -10716,7 +10716,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false")
+            IE8 = "false")
     public void _ProgressEvent_ProgressEvent() throws Exception {
         test("ProgressEvent", "ProgressEvent");
     }
@@ -11133,6 +11133,7 @@ public class HostParentOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "false",
             IE11 = "true")
+    @NotYetImplemented(IE11)
     public void _MouseEvent_MouseWheelEvent() throws Exception {
         test("MouseEvent", "MouseWheelEvent");
     }
@@ -11192,7 +11193,7 @@ public class HostParentOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false")
+            IE8 = "false")
     public void _Node_SVGTextPositioningElement() throws Exception {
         test("Node", "SVGTextPositioningElement");
     }
