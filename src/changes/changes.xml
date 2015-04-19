@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.16" date="???" description="Java 7, WebClient.close(), FF31, IE11 progress, Chrome progress, Bugfixes">
+            <action type="fix" dev="rbri">
+                CSS selectors checking for an empty attribute (e.g. [data-section='']) are checking not the existence
+                of the attribute also.
+            </action>
             <action type="update" dev="asashour">
                 Upgrade NekoHtml to 1.9.22.
             </action>

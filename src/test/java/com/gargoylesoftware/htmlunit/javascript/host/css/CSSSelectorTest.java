@@ -546,6 +546,58 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({ "2", "id2", "id3" })
+    public void hasAttribute() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    var list = document.querySelectorAll('[title]');\n"
+            + "    alert(list.length);\n"
+            + "    for (var i = 0 ; i < list.length; i++) {\n"
+            + "      alert(list[i].id);\n"
+            + "    }\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div></div>\n"
+            + "  <ul id='id1'></ul>\n"
+            + "  <p id='id2' title='w2'></p>\n"
+            + "  <ul id='id3' title=''></ul>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "0" })
+    public void emptyAttributeValue() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    var list = document.querySelectorAll('[data-section=\"\"]');\n"
+            + "    alert(list.length);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='id1'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts({ "2", "ul2", "ul3" })
     public void generalAdjacentSelector() throws Exception {
         final String html = "<html><head><title>First</title>\n"

@@ -526,7 +526,8 @@ public class CSSStyleSheet extends SimpleScriptable {
                     if (value.indexOf('\\') > -1) {
                         value = UNESCAPE_SELECTOR.matcher(value).replaceAll("$1");
                     }
-                    return element.getAttribute(ac1.getLocalName()).equals(value);
+                    final String attrValue = element.getAttribute(ac1.getLocalName());
+                    return DomElement.ATTRIBUTE_NOT_DEFINED != attrValue && attrValue.equals(value);
                 }
                 return element.hasAttribute(ac1.getLocalName());
             case Condition.SAC_BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
