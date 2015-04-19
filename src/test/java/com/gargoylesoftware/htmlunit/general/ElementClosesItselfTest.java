@@ -889,7 +889,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "0",
             FF24 = "1",
             FF31 = "2")
-    @NotYetImplemented({ IE, FF31, CHROME })
+    @NotYetImplemented(FF31)
     public void keygen() throws Exception {
         loadPageWithAlerts2(test("keygen"));
     }
