@@ -63,6 +63,7 @@ import org.w3c.css.sac.InputSource;
 import org.w3c.css.sac.LangCondition;
 import org.w3c.css.sac.NegativeCondition;
 import org.w3c.css.sac.NegativeSelector;
+import org.w3c.css.sac.SACMediaList;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SelectorList;
 import org.w3c.css.sac.SiblingSelector;
@@ -71,6 +72,7 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.css.CSSImportRule;
 import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSRuleList;
+import org.w3c.dom.stylesheets.MediaList;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Cache;
@@ -106,7 +108,9 @@ import com.steadystate.css.dom.CSSImportRuleImpl;
 import com.steadystate.css.dom.CSSMediaRuleImpl;
 import com.steadystate.css.dom.CSSStyleRuleImpl;
 import com.steadystate.css.dom.CSSStyleSheetImpl;
+import com.steadystate.css.dom.MediaListImpl;
 import com.steadystate.css.parser.CSSOMParser;
+import com.steadystate.css.parser.SACMediaListImpl;
 import com.steadystate.css.parser.SACParserCSS3;
 import com.steadystate.css.parser.SelectorListImpl;
 import com.steadystate.css.parser.selectors.GeneralAdjacentSelectorImpl;
@@ -254,8 +258,8 @@ public class CSSStyleSheet extends SimpleScriptable {
             }
             else if (CSSRule.IMPORT_RULE == ruleType) {
                 final CSSImportRuleImpl importRule = (CSSImportRuleImpl) rule;
-                final String media = importRule.getMedia().getMediaText();
-                if (isActive(media)) {
+                final MediaList mediaList = importRule.getMedia();
+                if (isActive(mediaList)) {
                     CSSStyleSheet sheet = imports_.get(importRule);
                     if (sheet == null) {
                         // TODO: surely wrong: in which case is it null and why?
@@ -275,8 +279,8 @@ public class CSSStyleSheet extends SimpleScriptable {
             }
             else if (CSSRule.MEDIA_RULE == ruleType) {
                 final CSSMediaRuleImpl mediaRule = (CSSMediaRuleImpl) rule;
-                final String media = mediaRule.getMedia().getMediaText();
-                if (isActive(media)) {
+                final MediaList mediaList = mediaRule.getMedia();
+                if (isActive(mediaList)) {
                     final CSSRuleList internalRules = mediaRule.getCssRules();
                     modifyIfNecessary(style, element, internalRules, alreadyProcessing);
                 }
@@ -890,6 +894,33 @@ public class CSSStyleSheet extends SimpleScriptable {
     }
 
     /**
+     * Parses the given media string. If anything at all goes wrong, this
+     * method returns an empty SACMediaList list.
+     *
+     * @param source the source from which to retrieve the media to be parsed
+     * @return the media parsed from the specified input source
+     */
+    private SACMediaList parseMedia(final String mediaString) {
+        try {
+            final ErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
+            final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
+            parser.setErrorHandler(errorHandler);
+
+            final InputSource source = new InputSource(new StringReader(mediaString));
+            final SACMediaList  media = parser.parseMedia(source);
+            // in case of error parseMedia returns null
+            if (null == media) {
+                return new SACMediaListImpl();
+            }
+            return media;
+        }
+        catch (final Exception e) {
+            LOG.error("Error parsing CSS media from '" + mediaString + "': " + e.getMessage(), e);
+        }
+        return new SACMediaListImpl();
+    }
+
+    /**
      * Returns the contents of the specified input source, ignoring any {@link IOException}s.
      * @param source the input source from which to read
      * @return the contents of the specified input source, or an empty string if an {@link IOException} occurs
@@ -1099,17 +1130,24 @@ public class CSSStyleSheet extends SimpleScriptable {
             media = link.getMediaAttribute();
         }
         else {
-            media = "";
+            return true;
         }
-        return isActive(media);
-    }
 
-    private static boolean isActive(final String media) {
         if (StringUtils.isBlank(media)) {
             return true;
         }
-        for (final String s : StringUtils.split(media, ',')) {
-            final String mediaType = s.trim();
+
+        final SACMediaList mediaList = parseMedia(media);
+        return isActive(new MediaListImpl(mediaList));
+    }
+
+    private boolean isActive(final MediaList mediaList) {
+        if (mediaList.getLength() == 0) {
+            return true;
+        }
+
+        for (int i = 0; i < mediaList.getLength(); i++) {
+            final String mediaType = mediaList.item(i);
             if ("screen".equals(mediaType) || "all".equals(mediaType)) {
                 return true;
             }
