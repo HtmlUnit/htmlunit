@@ -20,7 +20,7 @@
 
         <section name="Latest build">
             <p>
-            You can download the latest build from our <a href="https://ci.canoo.com/teamcity/viewLog.html?buildTypeId=Htmlunit_CheckInBuild&buildId=lastSuccessful&tab=artifacts">Build server</a> 
+            You can download the latest build from our <a href="https://ci.canoo.com/teamcity/viewLog.html?buildTypeId=HtmlUnit_QuickBuild&amp;buildId=lastSuccessful&amp;tab=artifacts">Build server</a> 
             kindly hosted by <a href="http://www.canoo.com">Canoo AG</a>.
             </p>
         </section>
