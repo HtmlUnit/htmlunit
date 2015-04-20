@@ -575,20 +575,26 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0")
+    @Alerts({ "1", "id3" })
     public void emptyAttributeValue() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  if (document.querySelectorAll) {\n"
-            + "    var list = document.querySelectorAll('[data-section=\"\"]');\n"
+            + "    var list = document.querySelectorAll('[title=\"\"]');\n"
             + "    alert(list.length);\n"
+            + "    for (var i = 0 ; i < list.length; i++) {\n"
+            + "      alert(list[i].id);\n"
+            + "    }\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <div id='id1'></div>\n"
+            + "  <div></div>\n"
+            + "  <ul id='id1' title='w1'></ul>\n"
+            + "  <p id='id2' title=' '></p>\n"
+            + "  <ul id='id3' title=''></ul>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
