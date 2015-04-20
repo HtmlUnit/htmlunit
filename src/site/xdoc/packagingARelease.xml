@@ -32,23 +32,8 @@
         <password>your-sourceforge-pwd</password>
       -->
     </server>
-    <!-- For mvn scm:tag -->
     <server>
-      <id>svn.code.sf.net</id>
-      <username>mguillem</username>
-      <!-- optional element:
-        <password>your-sourceforge-pwd</password>
-      -->
-    </server>
-    <server>
-      <id>sonatype-nexus-snapshots</id>
-      <username>your-jira-id</username>
-      <!-- optional element:
-        <password>your-jira-pwd</password>
-      -->
-    </server>
-    <server>
-      <id>sonatype-nexus-staging</id>
+      <id>ossrh</id>
       <username>your-jira-id</username>
       <!-- optional element:
         <password>your-jira-pwd</password>
@@ -130,13 +115,13 @@ mvn scm:tag
                         Ensure HtmlUnit-related dependencies are 'tagged' in the repository.
                     </li>
                     <li>Deploy the release to Sonatype OSS Maven repository (which is the way we have to go to deploy to the main repository).
-                    This process should be improved. Here is what has been done to deploy release 2.15:
+                    This process should be improved. Here is what has been done to deploy release 2.16:
                     mvn -up -Dmaven.test.skip=true clean site package
                     <source>
 mvn javadoc:jar
-mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=sonatype-nexus-staging -DpomFile=pom.xml -Dfile=target/htmlunit-2.15.jar
-mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=sonatype-nexus-staging -DpomFile=pom.xml -Dfile=target/htmlunit-2.15-sources.jar -Dclassifier=sources
-mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=sonatype-nexus-staging -DpomFile=pom.xml -Dfile=target/htmlunit-2.15-javadoc.jar -Dclassifier=javadoc
+mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-2.16.jar
+mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-2.16-sources.jar -Dclassifier=sources
+mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-2.16-javadoc.jar -Dclassifier=javadoc
 </source>
 					and then go to <a href="https://oss.sonatype.org/index.html#stagingRepositories">Sonatype OSS staging repository</a> to close and release the artifacts.
                     </li>
