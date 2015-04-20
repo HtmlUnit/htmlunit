@@ -16,7 +16,8 @@
     <suppress checks="FileLength" files="JQuery182Test.java"/>
     <suppress checks="FileLength" files="HostClassNameTest.java"/>
     <suppress checks="FileLength" files="HostClassNameStandardsTest.java"/>
-    <suppress checks="FileLength" files="HostParentOfTest.java"/>
+    <suppress checks="FileLength" files="HostParentOfATest.java"/>
+    <suppress checks="FileLength" files="HostParentOfITest.java"/>
     <suppress checks="FileLength" files="HostTypeOfTest.java"/>
     <suppress checks="FileLength" files="HTMLDocument.java"/>
     <suppress checks="FileLength" files="HTMLElement.java"/>
@@ -74,7 +75,11 @@
     <suppress checks="MethodLength" files="SvgElementFactory.java"/>
 
     <suppress checks="MethodName" files="ElementClosesElementTest.java"/>
-    <suppress checks="MethodName" files="HostParentOfTest.java"/>
+    <suppress checks="MethodName" files="HostParentOfATest.java"/>
+    <suppress checks="MethodName" files="HostParentOfHTest.java"/>
+    <suppress checks="MethodName" files="HostParentOfITest.java"/>
+    <suppress checks="MethodName" files="HostParentOfSTest.java"/>
+    <suppress checks="MethodName" files="HostParentOfTTest.java"/>
 
     <suppress checks="ParameterNumber" files="CanvasRenderingContext2D.java"/>
     <suppress checks="ParameterNumber" files="HtmlUnitRegExpProxy.java"/>
@@ -84,6 +89,7 @@
 
     <!-- JUnit Rules require the rules field to have public visibility. -->
     <!-- See http://checkstyle.sourceforge.net/config_design.html#VisibilityModifier -->
-    <suppress files=".*(?:Test|TestBase)\.java$" checks="VisibilityModifier"/>
-    <suppress files="WebTestCase.java" checks="VisibilityModifier"/>
+    <suppress checks="VisibilityModifier" files=".*(?:Test|TestBase)\.java$"/>
+    <suppress checks="VisibilityModifier" files="HostParentOf.java"/>
+    <suppress checks="VisibilityModifier" files="WebTestCase.java"/>
 </suppressions>

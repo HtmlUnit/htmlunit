@@ -139261,7 +139261,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             IE8 = "1")
-    @NotYetImplemented({ IE8, FF })
+    @NotYetImplemented(IE8)
     public void _basefont_content() throws Exception {
         test("basefont", "content");
     }
@@ -139272,7 +139272,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             IE8 = "1")
-    @NotYetImplemented({ IE8, FF })
+    @NotYetImplemented(IE8)
     public void _basefont_data() throws Exception {
         test("basefont", "data");
     }
