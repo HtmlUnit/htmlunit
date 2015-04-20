@@ -38,10 +38,10 @@
                 JavaScript: type property for anchor elements implemented.
             </action>
             <action type="fix" dev="asashour" issue="1655">
-                Window: fix how events are handled in when a child <tt>iframe</tt> <tt>src</tt> is empty.
+                Window: fix how events are handled in when a child iframe 'src' is empty.
             </action>
             <action type="fix" dev="asashour" issue="1655">
-                HTMLIFrameElement: once the document is <tt>open()</tt>ed,
+                HTMLIFrameElement: once the document is open()ed,
                 then the location should be the same as the enclosing page.
             </action>
             <action type="fix" dev="rbri">
@@ -60,7 +60,7 @@
                 Upgrade Apache HttpComponents to 4.4.1
             </action>
             <action type="add" dev="asashour">
-                JavaScript: initial support for <tt>Intl</tt> namespace.
+                JavaScript: initial support for "Intl" namespace.
             </action>
             <action type="update" dev="rbri">
                 CSS: cssparser updated to 0.9.15.
