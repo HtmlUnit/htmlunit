@@ -215,7 +215,7 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>2.18.1</version>
                         <configuration>
-                            <argLine>-Xms256m -Xmx512m</argLine>
+                            <argLine>-Xms256m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -269,7 +269,7 @@
                                 <include>**/libraries/*.java</include>
                                 <include>**/huge/*.java</include>
                             </includes>
-                            <argLine>-Xms256m -Xmx512m</argLine>
+                            <argLine>-Xms256m -Xmx1024m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
