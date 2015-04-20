@@ -166,9 +166,6 @@
             <action type="fix" dev="asashour">
                 JavaScript: DocumentType: support 'publicId' and 'systemId', while 'prefix' is undefined in Chrome.
             </action>
-            <action type="update" dev="asashour">
-                Mandate Java 7 as a minimum requirement.
-            </action>
             <action type="update" dev="asashour" issue="1656" due-to="David Ostrovsky">
                 Upgrade Jetty to 9.2.10.v20150310.
             </action>
