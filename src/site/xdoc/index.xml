@@ -59,10 +59,10 @@
                         <a href="https://ci.canoo.com/teamcity/viewLog.html?buildTypeId=HtmlUnit_QuickBuild&buildId=lastSuccessful&tab=artifacts">Build server (Log in as 'guest')</a> 
                     </dd>
                     
-                    <dt>Latest release <date>Jun 2, 2014</date></dt>
+                    <dt>Latest release <date>Apr 20, 2015</date></dt>
                     <dd>
-                        <a href="http://sourceforge.net/projects/htmlunit/files/htmlunit/2.15/">
-                            version 2.15
+                        <a href="http://sourceforge.net/projects/htmlunit/files/htmlunit/2.16/">
+                            version 2.16
                         </a>
                     </dd>
                 </dl>
