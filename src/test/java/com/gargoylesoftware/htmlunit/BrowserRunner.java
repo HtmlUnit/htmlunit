@@ -72,22 +72,6 @@ public class BrowserRunner extends Suite {
 
         if (BrowserVersionClassRunner.containsTestMethods(klass)) {
             final Set<String> browsers = WebDriverTestCase.getBrowsersProperties();
-            if (browsers.contains("hu-chrome")) {
-                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.CHROME, false));
-            }
-            if (browsers.contains("hu-ff24")) {
-                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_24, false));
-            }
-            if (browsers.contains("hu-ff31")) {
-                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_31, false));
-            }
-            if (browsers.contains("hu-ie8")) {
-                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, false));
-            }
-            if (browsers.contains("hu-ie11")) {
-                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_11, false));
-            }
-
             if (WebDriverTestCase.class.isAssignableFrom(klass)) {
                 if (browsers.contains("chrome")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.CHROME, true));
@@ -104,6 +88,22 @@ public class BrowserRunner extends Suite {
                 if (browsers.contains("ie11")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_11, true));
                 }
+            }
+
+            if (browsers.contains("hu-chrome")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.CHROME, false));
+            }
+            if (browsers.contains("hu-ff24")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_24, false));
+            }
+            if (browsers.contains("hu-ff31")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_31, false));
+            }
+            if (browsers.contains("hu-ie8")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, false));
+            }
+            if (browsers.contains("hu-ie11")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_11, false));
             }
         }
     }
