@@ -4021,7 +4021,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function IDBDatabase() { [native code] }",
             FF31 = "function IDBDatabase() {\n    [native code]\n}",
             IE11 = "[object IDBDatabase]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void idbDatabase() throws Exception {
         test("IDBDatabase");
     }
@@ -4059,7 +4058,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function IDBIndex() { [native code] }",
             FF31 = "function IDBIndex() {\n    [native code]\n}",
             IE11 = "[object IDBIndex]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void idbIndex() throws Exception {
         test("IDBIndex");
     }
@@ -4415,7 +4413,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function IDBKeyRange() { [native code] }",
             FF31 = "function IDBKeyRange() {\n    [native code]\n}",
             IE11 = "[object IDBKeyRange]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void idbKeyRange() throws Exception {
         test("IDBKeyRange");
     }
@@ -4539,7 +4536,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function IDBObjectStore() { [native code] }",
             FF31 = "function IDBObjectStore() {\n    [native code]\n}",
             IE11 = "[object IDBObjectStore]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void idbObjectStore() throws Exception {
         test("IDBObjectStore");
     }
@@ -4565,7 +4561,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function IDBTransaction() { [native code] }",
             FF31 = "function IDBTransaction() {\n    [native code]\n}",
             IE11 = "[object IDBTransaction]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void idbTransaction() throws Exception {
         test("IDBTransaction");
     }
@@ -4587,7 +4582,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function IDBRequest() { [native code] }",
             FF31 = "function IDBRequest() {\n    [native code]\n}",
             IE11 = "[object IDBRequest]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void idbRequest() throws Exception {
         test("IDBRequest");
     }
@@ -4611,7 +4605,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function IDBCursorWithValue() { [native code] }",
             FF31 = "function IDBCursorWithValue() {\n    [native code]\n}",
             IE11 = "[object IDBCursorWithValue]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void idbCursorWithValue() throws Exception {
         test("IDBCursorWithValue");
     }
@@ -4707,7 +4700,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function IDBCursor() { [native code] }",
             FF31 = "function IDBCursor() {\n    [native code]\n}",
             IE11 = "[object IDBCursor]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void idbCursor() throws Exception {
         test("IDBCursor");
     }
@@ -4732,7 +4724,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function IDBOpenDBRequest() { [native code] }",
             FF31 = "function IDBOpenDBRequest() {\n    [native code]\n}",
             IE11 = "[object IDBOpenDBRequest]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void idbOpenDBRequest() throws Exception {
         test("IDBOpenDBRequest");
     }
@@ -4817,7 +4808,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function IDBVersionChangeEvent() { [native code] }",
             FF31 = "function IDBVersionChangeEvent() {\n    [native code]\n}",
             IE11 = "[object IDBVersionChangeEvent]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void idbVersionChangeEvent() throws Exception {
         test("IDBVersionChangeEvent");
     }

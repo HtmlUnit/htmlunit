@@ -2290,4 +2290,134 @@ public class HostParentOfITest extends HostParentOf {
     public void _Node_HTMLPictureElement() throws Exception {
         test("Node", "HTMLPictureElement");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _IDBCursorWithValue_IDBCursorWithValue() throws Exception {
+        test("IDBCursorWithValue", "IDBCursorWithValue");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _IDBCursor_IDBCursor() throws Exception {
+        test("IDBCursor", "IDBCursor");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _IDBCursor_IDBCursorWithValue() throws Exception {
+        test("IDBCursor", "IDBCursorWithValue");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _IDBDatabase_IDBDatabase() throws Exception {
+        test("IDBDatabase", "IDBDatabase");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _IDBFactory_IDBFactory() throws Exception {
+        test("IDBFactory", "IDBFactory");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _IDBIndex_IDBIndex() throws Exception {
+        test("IDBIndex", "IDBIndex");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _IDBKeyRange_IDBKeyRange() throws Exception {
+        test("IDBKeyRange", "IDBKeyRange");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _IDBObjectStore_IDBObjectStore() throws Exception {
+        test("IDBObjectStore", "IDBObjectStore");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _IDBOpenDBRequest_IDBOpenDBRequest() throws Exception {
+        test("IDBOpenDBRequest", "IDBOpenDBRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _IDBRequest_IDBOpenDBRequest() throws Exception {
+        test("IDBRequest", "IDBOpenDBRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _IDBRequest_IDBRequest() throws Exception {
+        test("IDBRequest", "IDBRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _IDBTransaction_IDBTransaction() throws Exception {
+        test("IDBTransaction", "IDBTransaction");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _IDBVersionChangeEvent_IDBVersionChangeEvent() throws Exception {
+        test("IDBVersionChangeEvent", "IDBVersionChangeEvent");
+    }
 }

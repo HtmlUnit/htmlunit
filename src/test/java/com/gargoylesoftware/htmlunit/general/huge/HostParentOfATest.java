@@ -5105,4 +5105,55 @@ public class HostParentOfATest extends HostParentOf {
     public void _EventTarget_HTMLPictureElement() throws Exception {
         test("EventTarget", "HTMLPictureElement");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _EventTarget_IDBDatabase() throws Exception {
+        test("EventTarget", "IDBDatabase");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _EventTarget_IDBOpenDBRequest() throws Exception {
+        test("EventTarget", "IDBOpenDBRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _EventTarget_IDBRequest() throws Exception {
+        test("EventTarget", "IDBRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _EventTarget_IDBTransaction() throws Exception {
+        test("EventTarget", "IDBTransaction");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _Event_IDBVersionChangeEvent() throws Exception {
+        test("Event", "IDBVersionChangeEvent");
+    }
+
 }

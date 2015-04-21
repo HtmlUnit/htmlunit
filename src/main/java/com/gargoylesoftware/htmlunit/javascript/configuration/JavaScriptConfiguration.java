@@ -162,6 +162,17 @@ import com.gargoylesoftware.htmlunit.javascript.host.geo.Coordinates;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Position;
 import com.gargoylesoftware.htmlunit.javascript.host.html.*;
+import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBCursor;
+import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBCursorWithValue;
+import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBDatabase;
+import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBFactory;
+import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBKeyRange;
+import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBIndex;
+import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBRequest;
+import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBOpenDBRequest;
+import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBObjectStore;
+import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBTransaction;
+import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBVersionChangeEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.media.AnalyserNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.AudioBuffer;
 import com.gargoylesoftware.htmlunit.javascript.host.media.AudioBufferSourceNode;
@@ -367,6 +378,9 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLTextElement.class, HTMLTextAreaElement.class, HTMLTimeElement.class, HTMLTitleElement.class,
         HTMLTrackElement.class, HTMLUListElement.class, HTMLUnknownElement.class,
         HTMLVideoElement.class,
+        IDBCursor.class, IDBCursorWithValue.class, IDBDatabase.class, IDBFactory.class, IDBIndex.class,
+        IDBKeyRange.class, IDBObjectStore.class, IDBOpenDBRequest.class, IDBRequest.class, IDBTransaction.class,
+        IDBVersionChangeEvent.class,
         Image.class, InputEvent.class,
         Int16Array.class, Int32Array.class, Int8Array.class,
         KeyboardEvent.class, LocalMediaStream.class,
