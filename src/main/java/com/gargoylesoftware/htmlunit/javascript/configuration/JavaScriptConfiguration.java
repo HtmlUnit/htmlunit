@@ -216,6 +216,14 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.PannerNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.PeriodicWave;
 import com.gargoylesoftware.htmlunit.javascript.host.media.ScriptProcessorNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.WaveShaperNode;
+import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.RTCDataChannelEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.RTCIceCandidate;
+import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.RTCPeerConnectionIceEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.RTCSessionDescription;
+import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.mozRTCIceCandidate;
+import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.mozRTCPeerConnection;
+import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.mozRTCSessionDescription;
+import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.webkitRTCPeerConnection;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAltGlyphElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAngle;
@@ -402,6 +410,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         MediaStreamEvent.class, MediaStreamTrack.class, MessageChannel.class,
         MessageEvent.class, MessagePort.class, MimeType.class, MimeTypeArray.class, MouseEvent.class,
         MouseScrollEvent.class, MouseWheelEvent.class,
+        mozRTCIceCandidate.class, mozRTCPeerConnection.class, mozRTCSessionDescription.class,
         MutationEvent.class, NamedNodeMap.class, Namespace.class, NamespaceCollection.class, Navigator.class,
         Node.class, NodeFilter.class, NodeList.class, Notification.class, OfflineAudioCompletionEvent.class,
         OfflineAudioContext.class, Option.class, OscillatorNode.class, PageTransitionEvent.class, PannerNode.class,
@@ -409,7 +418,9 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         PeriodicWave.class, Plugin.class, PluginArray.class, PointerEvent.class, Popup.class, PopStateEvent.class,
         Position.class,
         ProcessingInstruction.class, ProgressEvent.class,
-        Promise.class, Range.class, RowContainer.class, ScriptProcessorNode.class, Set.class, ShadowRoot.class,
+        Promise.class, Range.class, RowContainer.class, RTCDataChannelEvent.class, RTCIceCandidate.class,
+        RTCPeerConnectionIceEvent.class, RTCSessionDescription.class,
+        ScriptProcessorNode.class, Set.class, ShadowRoot.class,
         SharedWorker.class, StorageEvent.class,
         SVGAElement.class, SVGAltGlyphElement.class, SVGAngle.class, SVGAnimatedAngle.class,
         SVGAnimatedBoolean.class, SVGAnimateElement.class, SVGAnimatedEnumeration.class, SVGAnimatedInteger.class,
@@ -449,6 +460,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         UIEvent.class, Uint16Array.class, Uint32Array.class, Uint8Array.class, Uint8ClampedArray.class, URL.class,
         URLSearchParams.class, UserProximityEvent.class, WaveShaperNode.class, WeakMap.class, WeakSet.class,
         WebGLRenderingContext.class,
+        webkitRTCPeerConnection.class,
         WebSocket.class, WheelEvent.class, Window.class, Worker.class, XMLDocument.class,
         XMLHttpRequest.class, XMLSerializer.class, XPathEvaluator.class, XPathNSResolver.class, XPathResult.class,
         XSLTProcessor.class, XSLTemplate.class};

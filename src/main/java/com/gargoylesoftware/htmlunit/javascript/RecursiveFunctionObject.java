@@ -129,6 +129,10 @@ public class RecursiveFunctionObject extends FunctionObject {
         if ("XMLHttpRequest".equals(functionName) && getBrowserVersion().hasFeature(JS_XMLHTTPREQUEST_OBJECT)) {
             return "[object " + functionName + ']';
         }
+        if ("webkitRTCPeerConnection".equals(functionName)) {
+            //return "HOHO";
+        }
+
         return super.getDefaultValue(typeHint);
     }
 
@@ -177,6 +181,9 @@ public class RecursiveFunctionObject extends FunctionObject {
                     return "";
                 }
                 break;
+
+            case "webkitRTCPeerConnection":
+                return "RTCPeerConnection";
 
             default:
         }

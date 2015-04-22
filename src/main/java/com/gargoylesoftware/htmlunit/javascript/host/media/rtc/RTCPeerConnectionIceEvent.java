@@ -12,28 +12,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.media;
+package com.gargoylesoftware.htmlunit.javascript.host.media.rtc;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
+import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
 /**
- * A JavaScript object for {@code MediaRecorder}.
+ * A JavaScript object for {@code RTCPeerConnectionIceEvent}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = @WebBrowser(FF))
-public class MediaRecorder extends EventTarget {
+public class RTCPeerConnectionIceEvent extends Event {
 
     /**
-     * Creates an instance.
+     * Creates a new instance.
      */
     @JsxConstructor
-    public MediaRecorder() {
+    public RTCPeerConnectionIceEvent() {
     }
 }

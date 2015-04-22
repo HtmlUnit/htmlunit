@@ -52,7 +52,7 @@ public class HostParentOfATest extends HostParentOf {
 
             @Override
             public boolean apply(final String input) {
-                final char ch = input.charAt(0);
+                final char ch = Character.toUpperCase(input.charAt(0));
                 return ch >= 'A' && ch <= 'G';
             }
         });
@@ -5162,6 +5162,7 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
+    @NotYetImplemented(FF)
     public void _EventTarget_MediaQueryList() throws Exception {
         test("EventTarget", "MediaQueryList");
     }
@@ -5194,6 +5195,66 @@ public class HostParentOfATest extends HostParentOf {
     @NotYetImplemented({ CHROME, FF })
     public void _CSS_CSS() throws Exception {
         test("CSS", "CSS");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_webkitRTCPeerConnection() throws Exception {
+        test("EventTarget", "webkitRTCPeerConnection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _EventTarget_mozRTCPeerConnection() throws Exception {
+        test("EventTarget", "mozRTCPeerConnection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _Event_RTCDataChannelEvent() throws Exception {
+        test("Event", "RTCDataChannelEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _Event_RTCPeerConnectionIceEvent() throws Exception {
+        test("Event", "RTCPeerConnectionIceEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _RTCDataChannelEvent_RTCDataChannelEvent() throws Exception {
+        test("RTCDataChannelEvent", "RTCDataChannelEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _RTCPeerConnectionIceEvent_RTCPeerConnectionIceEvent() throws Exception {
+        test("RTCPeerConnectionIceEvent", "RTCPeerConnectionIceEvent");
     }
 
 }

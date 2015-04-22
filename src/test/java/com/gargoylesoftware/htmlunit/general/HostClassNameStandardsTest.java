@@ -4184,7 +4184,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function RTCSessionDescription() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void rtcSessionDescription() throws Exception {
         test("RTCSessionDescription");
     }
@@ -4949,7 +4948,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "function RTCPeerConnectionIceEvent() {\n    [native code]\n}")
-    @NotYetImplemented(FF31)
     public void rtcPeerConnectionIceEvent() throws Exception {
         test("RTCPeerConnectionIceEvent");
     }
@@ -6746,7 +6744,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "function RTCDataChannelEvent() {\n    [native code]\n}")
-    @NotYetImplemented(FF31)
     public void rtcDataChannelEvent() throws Exception {
         test("RTCDataChannelEvent");
     }
@@ -8117,4 +8114,62 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
         test("DragEvent");
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function RTCPeerConnection() { [native code] }")
+    public void webkitRTCPeerConnection() throws Exception {
+        test("webkitRTCPeerConnection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function mozRTCPeerConnection() {\n    [native code]\n}")
+    public void mozRTCPeerConnection() throws Exception {
+        test("mozRTCPeerConnection");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function RTCIceCandidate() { [native code] }")
+    public void rtcIceCandidate() throws Exception {
+        test("RTCIceCandidate");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function mozRTCIceCandidate() {\n    [native code]\n}")
+    public void mozRTCIceCandidate() throws Exception {
+        test("mozRTCIceCandidate");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function mozRTCSessionDescription() {\n    [native code]\n}")
+    public void mozRTCSessionDescription() throws Exception {
+        test("mozRTCSessionDescription");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception")
+    public void webkitRTCSessionDescription() throws Exception {
+        test("webkitRTCSessionDescription");
+    }
 }

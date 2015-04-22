@@ -52,22 +52,25 @@ public final class TestCaseTest {
     }
 
     private void generateTestForHtmlElements(final File dir) throws Exception {
-        for (final File file : dir.listFiles()) {
-            if (file.isDirectory() && !".svn".equals(file.getName())) {
-                generateTestForHtmlElements(file);
-            }
-            else if (file.getName().endsWith(".java")) {
-                final List<String> lines = FileUtils.readLines(file);
-                for (final String line : lines) {
-                    if (line.contains("(\"xmp\")")) {
-                        final String relativePath = file.getAbsolutePath().substring(
-                                new File(".").getAbsolutePath().length() - 1);
-                        checkLines(relativePath, line, lines, "xmp", HtmlPageTest.HTML_TAGS_);
-                    }
-                    else if (line.contains("(\"ClientRect\")")) {
-                        final String relativePath = file.getAbsolutePath().substring(
-                                new File(".").getAbsolutePath().length() - 1);
-                        checkLines(relativePath, line, lines, "ClientRect", allClassNames_);
+        final File[] files = dir.listFiles();
+        if (files != null) {
+            for (final File file : files) {
+                if (file.isDirectory() && !".svn".equals(file.getName())) {
+                    generateTestForHtmlElements(file);
+                }
+                else if (file.getName().endsWith(".java")) {
+                    final List<String> lines = FileUtils.readLines(file);
+                    for (final String line : lines) {
+                        if (line.contains("(\"xmp\")")) {
+                            final String relativePath = file.getAbsolutePath().substring(
+                                    new File(".").getAbsolutePath().length() - 1);
+                            checkLines(relativePath, line, lines, "xmp", HtmlPageTest.HTML_TAGS_);
+                        }
+                        else if (line.contains("(\"ClientRect\")")) {
+                            final String relativePath = file.getAbsolutePath().substring(
+                                    new File(".").getAbsolutePath().length() - 1);
+                            checkLines(relativePath, line, lines, "ClientRect", allClassNames_);
+                        }
                     }
                 }
             }

@@ -51,7 +51,7 @@ public class HostParentOfHTest extends HostParentOf {
 
             @Override
             public boolean apply(final String input) {
-                final char ch = input.charAt(0);
+                final char ch = Character.toUpperCase(input.charAt(0));
                 return ch == 'H';
             }
         });
@@ -1872,4 +1872,25 @@ public class HostParentOfHTest extends HostParentOf {
     public void _HTMLPictureElement_HTMLPictureElement() throws Exception {
         test("HTMLPictureElement", "HTMLPictureElement");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _RTCIceCandidate_RTCIceCandidate() throws Exception {
+        test("RTCIceCandidate", "RTCIceCandidate");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _RTCSessionDescription_RTCSessionDescription() throws Exception {
+        test("RTCSessionDescription", "RTCSessionDescription");
+    }
+
 }

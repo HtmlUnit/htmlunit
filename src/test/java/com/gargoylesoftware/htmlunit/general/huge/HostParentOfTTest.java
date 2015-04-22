@@ -46,7 +46,7 @@ public class HostParentOfTTest extends HostParentOf {
 
             @Override
             public boolean apply(final String input) {
-                final char ch = input.charAt(0);
+                final char ch = Character.toUpperCase(input.charAt(0));
                 return ch >= 'T' && ch <= 'Z';
             }
         });
@@ -498,6 +498,16 @@ public class HostParentOfTTest extends HostParentOf {
             CHROME = "true")
     public void _WeakSet_WeakSet() throws Exception {
         test("WeakSet", "WeakSet");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitRTCPeerConnection_webkitRTCPeerConnection() throws Exception {
+        test("webkitRTCPeerConnection", "webkitRTCPeerConnection");
     }
 
 }

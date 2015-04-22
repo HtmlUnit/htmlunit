@@ -51,7 +51,7 @@ public class HostParentOfSTest extends HostParentOf {
 
             @Override
             public boolean apply(final String input) {
-                final char ch = input.charAt(0);
+                final char ch = Character.toUpperCase(input.charAt(0));
                 return ch == 'S';
             }
         });

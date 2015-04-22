@@ -51,7 +51,7 @@ public class HostParentOfITest extends HostParentOf {
 
             @Override
             public boolean apply(final String input) {
-                final char ch = input.charAt(0);
+                final char ch = Character.toUpperCase(input.charAt(0));
                 return ch >= 'I' && ch <= 'R';
             }
         });
@@ -2469,5 +2469,25 @@ public class HostParentOfITest extends HostParentOf {
             FF31 = "true")
     public void _MediaRecorder_MediaRecorder() throws Exception {
         test("MediaRecorder", "MediaRecorder");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _mozRTCPeerConnection_mozRTCPeerConnection() throws Exception {
+        test("mozRTCPeerConnection", "mozRTCPeerConnection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _mozRTCSessionDescription_mozRTCSessionDescription() throws Exception {
+        test("mozRTCSessionDescription", "mozRTCSessionDescription");
     }
 }
