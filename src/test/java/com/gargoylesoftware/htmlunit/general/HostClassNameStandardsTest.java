@@ -8152,7 +8152,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception")
+    @Alerts("exception")
     public void webkitRTCSessionDescription() throws Exception {
         test("webkitRTCSessionDescription");
     }
