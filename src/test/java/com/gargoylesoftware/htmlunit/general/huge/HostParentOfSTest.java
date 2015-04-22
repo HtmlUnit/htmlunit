@@ -1788,8 +1788,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _StyleSheet_StyleSheet() throws Exception {
         test("StyleSheet", "StyleSheet");
     }

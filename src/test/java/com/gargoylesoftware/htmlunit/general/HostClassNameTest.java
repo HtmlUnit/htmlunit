@@ -4045,7 +4045,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function TextMetrics() { [native code] }",
             FF31 = "function TextMetrics() {\n    [native code]\n}",
             IE11 = "[object TextMetrics]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void textMetrics() throws Exception {
         test("TextMetrics");
     }
@@ -4230,7 +4229,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function MediaQueryList() { [native code] }",
             FF31 = "function MediaQueryList() {\n    [native code]\n}",
             IE11 = "[object MediaQueryList]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void mediaQueryList() throws Exception {
         test("MediaQueryList");
     }
@@ -4266,7 +4264,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function StyleSheet() { [native code] }",
             FF31 = "function StyleSheet() {\n    [native code]\n}",
             IE11 = "[object StyleSheet]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void styleSheet() throws Exception {
         test("StyleSheet");
     }
@@ -4547,7 +4544,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function URL() { [native code] }",
             FF31 = "function URL() {\n    [native code]\n}",
             IE11 = "[object URL]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void url() throws Exception {
         test("URL");
     }
@@ -4756,7 +4752,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "[object CSS]",
             FF31 = "function CSS() {\n    [native code]\n}")
-    @NotYetImplemented({ CHROME, FF31 })
     public void css() throws Exception {
         test("CSS");
     }
@@ -4794,7 +4789,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function ImageData() { [native code] }",
             FF31 = "function ImageData() {\n    [native code]\n}",
             IE11 = "[object ImageData]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void imageData() throws Exception {
         test("ImageData");
     }

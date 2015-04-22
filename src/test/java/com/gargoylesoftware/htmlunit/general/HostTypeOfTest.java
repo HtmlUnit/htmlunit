@@ -3987,7 +3987,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void textMetrics() throws Exception {
         test("TextMetrics");
     }
@@ -4172,7 +4171,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void mediaQueryList() throws Exception {
         test("MediaQueryList");
     }
@@ -4208,7 +4206,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void styleSheet() throws Exception {
         test("StyleSheet");
     }
@@ -4486,7 +4483,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void url() throws Exception {
         test("URL");
     }
@@ -4695,7 +4691,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             CHROME = "object",
             FF31 = "function")
-    @NotYetImplemented({ CHROME, FF31 })
     public void css() throws Exception {
         test("CSS");
     }
@@ -4733,7 +4728,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void imageData() throws Exception {
         test("ImageData");
     }
@@ -5459,7 +5453,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "functionexception",
+    @Alerts(DEFAULT = "function",
             IE8 = "undefined")
     public void set() throws Exception {
         test("Set");
