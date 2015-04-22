@@ -43,8 +43,8 @@ public class CSS extends SimpleScriptable {
      * {@inheritDoc}
      */
     @Override
-    public Object get(String name, Scriptable start) {
-        if (name.equals("prototype")) {
+    public Object get(final String name, final Scriptable start) {
+        if ("prototype".equals(name)) {
             return NOT_FOUND;
         }
         return super.get(name, start);
