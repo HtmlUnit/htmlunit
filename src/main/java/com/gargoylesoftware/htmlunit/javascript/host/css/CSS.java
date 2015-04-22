@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -36,5 +37,16 @@ public class CSS extends SimpleScriptable {
      */
     @JsxConstructor(@WebBrowser(FF))
     public CSS() {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object get(String name, Scriptable start) {
+        if (name.equals("prototype")) {
+            return NOT_FOUND;
+        }
+        return super.get(name, start);
     }
 }

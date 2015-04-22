@@ -189,4 +189,15 @@ public class RecursiveFunctionObject extends FunctionObject {
         }
         return functionName;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object get(final String name, final Scriptable start) {
+        if ("prototype".equals(name) && "CSS".equals(super.getFunctionName())) {
+            return NOT_FOUND;
+        }
+        return super.get(name, start);
+    }
 }

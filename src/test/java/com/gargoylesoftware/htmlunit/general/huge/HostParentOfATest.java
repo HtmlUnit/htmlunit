@@ -5192,7 +5192,6 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented({ CHROME, FF })
     public void _CSS_CSS() throws Exception {
         test("CSS", "CSS");
     }
