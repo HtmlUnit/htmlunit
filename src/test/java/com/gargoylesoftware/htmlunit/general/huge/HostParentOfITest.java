@@ -2490,4 +2490,55 @@ public class HostParentOfITest extends HostParentOf {
     public void _mozRTCSessionDescription_mozRTCSessionDescription() throws Exception {
         test("mozRTCSessionDescription", "mozRTCSessionDescription");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _RTCIceCandidate_RTCIceCandidate() throws Exception {
+        test("RTCIceCandidate", "RTCIceCandidate");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _RTCSessionDescription_RTCSessionDescription() throws Exception {
+        test("RTCSessionDescription", "RTCSessionDescription");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _RTCDataChannelEvent_RTCDataChannelEvent() throws Exception {
+        test("RTCDataChannelEvent", "RTCDataChannelEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _RTCPeerConnectionIceEvent_RTCPeerConnectionIceEvent() throws Exception {
+        test("RTCPeerConnectionIceEvent", "RTCPeerConnectionIceEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _mozRTCIceCandidate_mozRTCIceCandidate() throws Exception {
+        test("mozRTCIceCandidate", "mozRTCIceCandidate");
+    }
+
 }

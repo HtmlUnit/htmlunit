@@ -1873,24 +1873,4 @@ public class HostParentOfHTest extends HostParentOf {
         test("HTMLPictureElement", "HTMLPictureElement");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _RTCIceCandidate_RTCIceCandidate() throws Exception {
-        test("RTCIceCandidate", "RTCIceCandidate");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _RTCSessionDescription_RTCSessionDescription() throws Exception {
-        test("RTCSessionDescription", "RTCSessionDescription");
-    }
-
 }

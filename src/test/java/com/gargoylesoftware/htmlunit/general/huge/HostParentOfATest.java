@@ -5236,24 +5236,4 @@ public class HostParentOfATest extends HostParentOf {
         test("Event", "RTCPeerConnectionIceEvent");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true")
-    public void _RTCDataChannelEvent_RTCDataChannelEvent() throws Exception {
-        test("RTCDataChannelEvent", "RTCDataChannelEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true")
-    public void _RTCPeerConnectionIceEvent_RTCPeerConnectionIceEvent() throws Exception {
-        test("RTCPeerConnectionIceEvent", "RTCPeerConnectionIceEvent");
-    }
-
 }
