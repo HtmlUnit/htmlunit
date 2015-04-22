@@ -5425,4 +5425,84 @@ public class HostTypeOfTest extends WebDriverTestCase {
         test("HTMLPictureElement");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined")
+    public void map() throws Exception {
+        test("Map");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
+    public void mediaRecorder() throws Exception {
+        test("MediaRecorder");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void mediaSource() throws Exception {
+        test("MediaSource");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "functionexception",
+            IE8 = "undefined")
+    public void set() throws Exception {
+        test("Set");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void textDecoder() throws Exception {
+        test("TextDecoder");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void textEncoder() throws Exception {
+        test("TextEncoder");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined")
+    public void weakMap() throws Exception {
+        test("WeakMap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void weakSet() throws Exception {
+        test("WeakSet");
+    }
+
 }

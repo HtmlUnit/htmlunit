@@ -5156,4 +5156,34 @@ public class HostParentOfATest extends HostParentOf {
         test("Event", "IDBVersionChangeEvent");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_MediaQueryList() throws Exception {
+        test("EventTarget", "MediaQueryList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_MediaSource() throws Exception {
+        test("EventTarget", "MediaSource");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _EventTarget_MediaRecorder() throws Exception {
+        test("EventTarget", "MediaRecorder");
+    }
+
 }

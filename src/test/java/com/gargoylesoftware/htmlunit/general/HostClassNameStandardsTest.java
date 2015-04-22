@@ -4302,7 +4302,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "function MediaRecorder() {\n    [native code]\n}")
-    @NotYetImplemented(FF31)
     public void mediaRecorder() throws Exception {
         test("MediaRecorder");
     }
@@ -4459,7 +4458,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function TextEncoder() { [native code] }",
             FF31 = "function TextEncoder() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void textEncoder() throws Exception {
         test("TextEncoder");
     }
@@ -4709,7 +4707,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function StyleSheet() { [native code] }",
             FF31 = "function StyleSheet() {\n    [native code]\n}",
             IE11 = "[object StyleSheet]")
-    @NotYetImplemented({ FF31, IE11, CHROME })
     public void styleSheet() throws Exception {
         test("StyleSheet");
     }
@@ -5520,7 +5517,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function TextDecoder() { [native code] }",
             FF31 = "function TextDecoder() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void textDecoder() throws Exception {
         test("TextDecoder");
     }
@@ -5809,7 +5805,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function Map() { [native code] }",
             FF31 = "function Map() {\n    [native code]\n}",
             IE11 = "\nfunction Map() {\n    [native code]\n}\n")
-    @NotYetImplemented({ FF31, IE11, CHROME })
     public void map() throws Exception {
         test("Map");
     }
@@ -6354,7 +6349,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function WeakSet() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void weakSet() throws Exception {
         test("WeakSet");
     }
@@ -6470,7 +6464,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function TextMetrics() { [native code] }",
             FF31 = "function TextMetrics() {\n    [native code]\n}",
             IE11 = "[object TextMetrics]")
-    @NotYetImplemented({ FF31, IE11, CHROME })
     public void textMetrics() throws Exception {
         test("TextMetrics");
     }
@@ -6699,7 +6692,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function Set() { [native code] }",
             FF31 = "function Set() {\n    [native code]\n}",
             IE11 = "\nfunction Set() {\n    [native code]\n}\n")
-    @NotYetImplemented({ FF31, IE11, CHROME })
     public void set() throws Exception {
         test("Set");
     }
@@ -6796,7 +6788,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function MediaQueryList() { [native code] }",
             FF31 = "function MediaQueryList() {\n    [native code]\n}",
             IE11 = "[object MediaQueryList]")
-    @NotYetImplemented({ FF31, IE11, CHROME })
     public void mediaQueryList() throws Exception {
         test("MediaQueryList");
     }
@@ -7046,7 +7037,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function WeakMap() { [native code] }",
             FF31 = "function WeakMap() {\n    [native code]\n}",
             IE11 = "\nfunction WeakMap() {\n    [native code]\n}\n")
-    @NotYetImplemented({ FF31, IE11, CHROME })
     public void weakMap() throws Exception {
         test("WeakMap");
     }
@@ -7057,7 +7047,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MediaSource() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void mediaSource() throws Exception {
         test("MediaSource");
     }
@@ -7505,7 +7494,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function URL() { [native code] }",
             FF31 = "function URL() {\n    [native code]\n}",
             IE11 = "[object URL]")
-    @NotYetImplemented({ FF31, IE11, CHROME })
     public void url() throws Exception {
         test("URL");
     }
@@ -7764,7 +7752,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "[object CSS]",
             FF31 = "function CSS() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void css() throws Exception {
         test("CSS");
     }
@@ -7906,7 +7893,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function ImageData() { [native code] }",
             FF31 = "function ImageData() {\n    [native code]\n}",
             IE11 = "[object ImageData]")
-    @NotYetImplemented({ FF31, IE11, CHROME })
     public void imageData() throws Exception {
         test("ImageData");
     }

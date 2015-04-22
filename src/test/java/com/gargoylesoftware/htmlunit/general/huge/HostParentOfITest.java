@@ -2420,4 +2420,54 @@ public class HostParentOfITest extends HostParentOf {
     public void _IDBVersionChangeEvent_IDBVersionChangeEvent() throws Exception {
         test("IDBVersionChangeEvent", "IDBVersionChangeEvent");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _ImageData_ImageData() throws Exception {
+        test("ImageData", "ImageData");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _Map_Map() throws Exception {
+        test("Map", "Map");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _MediaQueryList_MediaQueryList() throws Exception {
+        test("MediaQueryList", "MediaQueryList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MediaSource_MediaSource() throws Exception {
+        test("MediaSource", "MediaSource");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _MediaRecorder_MediaRecorder() throws Exception {
+        test("MediaRecorder", "MediaRecorder");
+    }
 }

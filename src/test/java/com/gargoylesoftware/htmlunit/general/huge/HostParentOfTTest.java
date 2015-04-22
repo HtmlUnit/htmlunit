@@ -439,4 +439,65 @@ public class HostParentOfTTest extends HostParentOf {
     public void _UIEvent_MouseWheelEvent() throws Exception {
         test("UIEvent", "MouseWheelEvent");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _TextDecoder_TextDecoder() throws Exception {
+        test("TextDecoder", "TextDecoder");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _TextEncoder_TextEncoder() throws Exception {
+        test("TextEncoder", "TextEncoder");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _TextMetrics_TextMetrics() throws Exception {
+        test("TextMetrics", "TextMetrics");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _URL_URL() throws Exception {
+        test("URL", "URL");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _WeakMap_WeakMap() throws Exception {
+        test("WeakMap", "WeakMap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _WeakSet_WeakSet() throws Exception {
+        test("WeakSet", "WeakSet");
+    }
+
 }

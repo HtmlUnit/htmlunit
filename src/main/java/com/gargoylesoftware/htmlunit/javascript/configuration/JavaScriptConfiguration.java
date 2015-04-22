@@ -48,12 +48,18 @@ import com.gargoylesoftware.htmlunit.javascript.host.PluginArray;
 import com.gargoylesoftware.htmlunit.javascript.host.Popup;
 import com.gargoylesoftware.htmlunit.javascript.host.Promise;
 import com.gargoylesoftware.htmlunit.javascript.host.Screen;
+import com.gargoylesoftware.htmlunit.javascript.host.Set;
 import com.gargoylesoftware.htmlunit.javascript.host.SharedWorker;
 import com.gargoylesoftware.htmlunit.javascript.host.SimpleArray;
 import com.gargoylesoftware.htmlunit.javascript.host.Storage;
+import com.gargoylesoftware.htmlunit.javascript.host.TextDecoder;
+import com.gargoylesoftware.htmlunit.javascript.host.TextEncoder;
 import com.gargoylesoftware.htmlunit.javascript.host.Touch;
 import com.gargoylesoftware.htmlunit.javascript.host.TouchList;
+import com.gargoylesoftware.htmlunit.javascript.host.URL;
 import com.gargoylesoftware.htmlunit.javascript.host.URLSearchParams;
+import com.gargoylesoftware.htmlunit.javascript.host.WeakMap;
+import com.gargoylesoftware.htmlunit.javascript.host.WeakSet;
 import com.gargoylesoftware.htmlunit.javascript.host.WebSocket;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.Worker;
@@ -73,9 +79,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8ClampedArray;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasGradient;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasPattern;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D;
+import com.gargoylesoftware.htmlunit.javascript.host.canvas.ImageData;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.Path2D;
+import com.gargoylesoftware.htmlunit.javascript.host.canvas.TextMetrics;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.WebGLRenderingContext;
 import com.gargoylesoftware.htmlunit.javascript.host.css.AnimationEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSS;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSCharsetRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSConditionRule;
@@ -96,6 +105,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSSupportsRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSValue;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
+import com.gargoylesoftware.htmlunit.javascript.host.css.MediaQueryList;
+import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.CDATASection;
@@ -166,11 +177,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBCursor;
 import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBCursorWithValue;
 import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBDatabase;
 import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBFactory;
-import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBKeyRange;
 import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBIndex;
-import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBRequest;
-import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBOpenDBRequest;
+import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBKeyRange;
 import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBObjectStore;
+import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBOpenDBRequest;
+import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBRequest;
 import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBTransaction;
 import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBVersionChangeEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.media.AnalyserNode;
@@ -191,6 +202,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.DynamicsCompressorNod
 import com.gargoylesoftware.htmlunit.javascript.host.media.GainNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.LocalMediaStream;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaElementAudioSourceNode;
+import com.gargoylesoftware.htmlunit.javascript.host.media.MediaRecorder;
+import com.gargoylesoftware.htmlunit.javascript.host.media.MediaSource;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaStream;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaStreamAudioDestinationNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaStreamAudioSourceNode;
@@ -327,7 +340,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         ChannelMergerNode.class, ChannelSplitterNode.class, CharacterData.class, ClientRect.class, ClientRectList.class,
         ClipboardData.class, ClipboardEvent.class,
         CloseEvent.class, Comment.class, CompositionEvent.class, ComputedCSSStyleDeclaration.class, Console.class,
-        ConvolverNode.class, Coordinates.class, CSS2Properties.class,
+        ConvolverNode.class, Coordinates.class, CSS.class, CSS2Properties.class,
         CSSCharsetRule.class, CSSConditionRule.class, CSSGroupingRule.class, CSSFontFaceRule.class, CSSImportRule.class,
         CSSKeyframeRule.class, CSSKeyframesRule.class,
         CSSMediaRule.class, CSSNamespaceRule.class, CSSPageRule.class, CSSPrimitiveValue.class, CSSRule.class,
@@ -380,12 +393,12 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLVideoElement.class,
         IDBCursor.class, IDBCursorWithValue.class, IDBDatabase.class, IDBFactory.class, IDBIndex.class,
         IDBKeyRange.class, IDBObjectStore.class, IDBOpenDBRequest.class, IDBRequest.class, IDBTransaction.class,
-        IDBVersionChangeEvent.class,
-        Image.class, InputEvent.class,
+        IDBVersionChangeEvent.class, Image.class, ImageData.class, InputEvent.class,
         Int16Array.class, Int32Array.class, Int8Array.class,
         KeyboardEvent.class, LocalMediaStream.class,
-        Location.class, MediaElementAudioSourceNode.class, MediaList.class, MediaStream.class,
-        MediaStreamAudioDestinationNode.class, MediaStreamAudioSourceNode.class,
+        Location.class, com.gargoylesoftware.htmlunit.javascript.host.Map.class,
+        MediaElementAudioSourceNode.class, MediaList.class, MediaQueryList.class, MediaRecorder.class,
+        MediaStream.class, MediaSource.class, MediaStreamAudioDestinationNode.class, MediaStreamAudioSourceNode.class,
         MediaStreamEvent.class, MediaStreamTrack.class, MessageChannel.class,
         MessageEvent.class, MessagePort.class, MimeType.class, MimeTypeArray.class, MouseEvent.class,
         MouseScrollEvent.class, MouseWheelEvent.class,
@@ -396,7 +409,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         PeriodicWave.class, Plugin.class, PluginArray.class, PointerEvent.class, Popup.class, PopStateEvent.class,
         Position.class,
         ProcessingInstruction.class, ProgressEvent.class,
-        Promise.class, Range.class, RowContainer.class, ScriptProcessorNode.class, ShadowRoot.class,
+        Promise.class, Range.class, RowContainer.class, ScriptProcessorNode.class, Set.class, ShadowRoot.class,
         SharedWorker.class, StorageEvent.class,
         SVGAElement.class, SVGAltGlyphElement.class, SVGAngle.class, SVGAnimatedAngle.class,
         SVGAnimatedBoolean.class, SVGAnimateElement.class, SVGAnimatedEnumeration.class, SVGAnimatedInteger.class,
@@ -429,10 +442,13 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         SVGTextPositioningElement.class, SVGTitleElement.class, SVGTransform.class, SVGTransformList.class,
         SVGUseElement.class, SVGViewElement.class,
         Screen.class, Selection.class, SimpleArray.class,
-        StaticNodeList.class, Storage.class, StyleSheetList.class, Text.class, TextRange.class, TimeEvent.class,
+        StaticNodeList.class, Storage.class, StyleSheet.class, StyleSheetList.class, Text.class, TextDecoder.class,
+        TextEncoder.class,
+        TextMetrics.class, TextRange.class, TimeEvent.class,
         Touch.class, TouchEvent.class, TouchList.class, TransitionEvent.class, TreeWalker.class,
-        UIEvent.class, Uint16Array.class, Uint32Array.class, Uint8Array.class, Uint8ClampedArray.class,
-        URLSearchParams.class, UserProximityEvent.class, WaveShaperNode.class, WebGLRenderingContext.class,
+        UIEvent.class, Uint16Array.class, Uint32Array.class, Uint8Array.class, Uint8ClampedArray.class, URL.class,
+        URLSearchParams.class, UserProximityEvent.class, WaveShaperNode.class, WeakMap.class, WeakSet.class,
+        WebGLRenderingContext.class,
         WebSocket.class, WheelEvent.class, Window.class, Worker.class, XMLDocument.class,
         XMLHttpRequest.class, XMLSerializer.class, XPathEvaluator.class, XPathNSResolver.class, XPathResult.class,
         XSLTProcessor.class, XSLTemplate.class};

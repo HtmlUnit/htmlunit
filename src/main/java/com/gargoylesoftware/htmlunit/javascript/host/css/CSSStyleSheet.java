@@ -92,7 +92,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -120,7 +119,7 @@ import com.steadystate.css.parser.selectors.SubstringAttributeConditionImpl;
 import com.steadystate.css.parser.selectors.SuffixAttributeConditionImpl;
 
 /**
- * A JavaScript object for a Stylesheet.
+ * A JavaScript object for {@code CSSStyleSheet}.
  *
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms535871.aspx">MSDN doc</a>
  * @version $Revision$
@@ -135,7 +134,7 @@ import com.steadystate.css.parser.selectors.SuffixAttributeConditionImpl;
     @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
 })
-public class CSSStyleSheet extends SimpleScriptable {
+public class CSSStyleSheet extends StyleSheet {
 
     private static final Log LOG = LogFactory.getLog(CSSStyleSheet.class);
     private static final Pattern NTH_NUMERIC = Pattern.compile("\\d+");

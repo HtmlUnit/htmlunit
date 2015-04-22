@@ -4125,7 +4125,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function IDBFactory() { [native code] }",
             FF31 = "function IDBFactory() {\n    [native code]\n}",
             IE11 = "[object IDBFactory]")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void idbFactory() throws Exception {
         test("IDBFactory");
     }
@@ -5521,6 +5520,94 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function HTMLPictureElement() { [native code] }")
     public void htmlPictureElement() throws Exception {
         test("HTMLPictureElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Map() { [native code] }",
+            FF31 = "function Map() {\n    [native code]\n}",
+            IE11 = "\nfunction Map() {\n    [native code]\n}\n")
+    public void map() throws Exception {
+        test("Map");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function MediaRecorder() {\n    [native code]\n}")
+    public void mediaRecorder() throws Exception {
+        test("MediaRecorder");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaSource() { [native code] }")
+    public void mediaSource() throws Exception {
+        test("MediaSource");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Set() { [native code] }",
+            FF31 = "function Set() {\n    [native code]\n}",
+            IE11 = "\nfunction Set() {\n    [native code]\n}\n")
+    public void set() throws Exception {
+        test("Set");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function TextDecoder() { [native code] }",
+            FF31 = "function TextDecoder() {\n    [native code]\n}")
+    public void textDecoder() throws Exception {
+        test("TextDecoder");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function TextEncoder() { [native code] }",
+            FF31 = "function TextEncoder() {\n    [native code]\n}")
+    public void textEncoder() throws Exception {
+        test("TextEncoder");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WeakMap() { [native code] }",
+            FF31 = "function WeakMap() {\n    [native code]\n}",
+            IE11 = "\nfunction WeakMap() {\n    [native code]\n}\n")
+    public void weakMap() throws Exception {
+        test("WeakMap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function WeakSet() { [native code] }")
+    public void weakSet() throws Exception {
+        test("WeakSet");
     }
 
 }

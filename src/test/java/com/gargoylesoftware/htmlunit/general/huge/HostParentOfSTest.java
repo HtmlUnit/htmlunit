@@ -1763,4 +1763,35 @@ public class HostParentOfSTest extends HostParentOf {
     public void _SVGElement_SVGTextPositioningElement() throws Exception {
         test("SVGElement", "SVGTextPositioningElement");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _Set_Set() throws Exception {
+        test("Set", "Set");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _StyleSheet_CSSStyleSheet() throws Exception {
+        test("StyleSheet", "CSSStyleSheet");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _StyleSheet_StyleSheet() throws Exception {
+        test("StyleSheet", "StyleSheet");
+    }
+
 }
