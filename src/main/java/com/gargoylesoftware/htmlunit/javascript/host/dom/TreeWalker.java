@@ -121,7 +121,7 @@ public class TreeWalker extends SimpleScriptable {
     }
 
     /**
-     * Gets the flag specifying wherether or not to reject EntityReference nodes.
+     * Gets the flag specifying whether or not to reject EntityReference nodes.
      *
      * @return the value of the expandEntityReferences flag
      */
@@ -312,7 +312,7 @@ public class TreeWalker extends SimpleScriptable {
             }
         }
 
-        // If this node is rejected or has no decendants that will work, go
+        // If this node is rejected or has no descendants that will work, go
         // to its sibling.
         return getSibling(n, lookLeft);
     }

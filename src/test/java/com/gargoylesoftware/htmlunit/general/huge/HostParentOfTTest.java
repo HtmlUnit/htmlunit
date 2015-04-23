@@ -514,8 +514,8 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _TimeRanges_TimeRanges() throws Exception {
         test("TimeRanges", "TimeRanges");
     }
@@ -524,8 +524,8 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _URIError_URIError() throws Exception {
         test("URIError", "URIError");
     }
@@ -534,8 +534,8 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _ValidityState_ValidityState() throws Exception {
         test("ValidityState", "ValidityState");
     }
