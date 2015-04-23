@@ -60,7 +60,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClass(isJSObject = false)
+@JsxClass(isJSObject = false, isDefinedInStandardsMode = false)
 public class AbstractList extends SimpleScriptable implements Function {
 
     /**

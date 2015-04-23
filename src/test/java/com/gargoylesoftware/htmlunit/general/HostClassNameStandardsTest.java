@@ -7408,6 +7408,15 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("exception")
+    public void abstractList() throws Exception {
+        test("AbstractList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "function MediaStream() {\n    [native code]\n}")
     public void mediaStream() throws Exception {

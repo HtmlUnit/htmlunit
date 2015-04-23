@@ -442,10 +442,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Coordinates]",
-            CHROME = "exception",
-            FF = "exception",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object Coordinates]")
     public void coordinates() throws Exception {
         test("Coordinates");
     }
@@ -695,10 +693,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Geolocation]",
-            CHROME = "exception",
-            FF = "exception",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object Geolocation]")
     public void geolocation() throws Exception {
         test("Geolocation");
     }
@@ -832,10 +828,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLBaseFontElement]",
-            CHROME = "exception",
-            FF = "exception",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object HTMLBaseFontElement]")
     public void htmlBaseFontElement() throws Exception {
         test("HTMLBaseFontElement");
     }
@@ -1291,10 +1285,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLIsIndexElement]",
-            CHROME = "exception",
-            FF = "exception",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object HTMLIsIndexElement]")
     public void htmlIsIndexElement() throws Exception {
         test("HTMLIsIndexElement");
     }
@@ -1481,8 +1473,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE8 = "exception")
+    @Alerts("exception")
     public void htmlNoShowElement() throws Exception {
         test("HTMLNoShowElement");
     }
@@ -1493,10 +1484,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLNextIdElement]",
-            CHROME = "exception",
-            FF = "exception",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object HTMLNextIdElement]")
     public void htmlNextIdElement() throws Exception {
         test("HTMLNextIdElement");
     }
@@ -1794,10 +1783,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLTableDataCellElement]",
-            CHROME = "exception",
-            FF = "exception",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object HTMLTableDataCellElement]")
     public void htmlTableDataCellElement() throws Exception {
         test("HTMLTableDataCellElement");
     }
@@ -1822,10 +1809,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLTableHeaderCellElement]",
-            CHROME = "exception",
-            FF = "exception",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object HTMLTableHeaderCellElement]")
     public void htmlTableHeaderCellElement() throws Exception {
         test("HTMLTableHeaderCellElement");
     }
@@ -2252,10 +2237,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object PointerEvent]",
-            CHROME = "exception",
-            FF = "exception",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object PointerEvent]")
     public void pointerEvent() throws Exception {
         test("PointerEvent");
     }
@@ -2277,10 +2260,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object Position]",
-            CHROME = "exception",
-            FF = "exception",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object Position]")
     public void position() throws Exception {
         test("Position");
     }
@@ -3364,10 +3345,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object TextRange]",
-            CHROME = "exception",
-            FF = "exception",
-            IE8 = "exception")
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object TextRange]")
     public void textRange() throws Exception {
         test("TextRange");
     }
@@ -5857,6 +5836,15 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function ServiceWorkerContainer() { [native code] }")
     public void serviceWorkerContainer() throws Exception {
         test("ServiceWorkerContainer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void abstractList() throws Exception {
+        test("AbstractList");
     }
 
 }

@@ -5748,4 +5748,13 @@ public class HostTypeOfTest extends WebDriverTestCase {
         test("ServiceWorkerContainer");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void abstractList() throws Exception {
+        test("AbstractList");
+    }
+
 }
