@@ -1933,7 +1933,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented
+    @NotYetImplemented({ CHROME, FF})
     public void _NodeList_HTMLFormControlsCollection() throws Exception {
         test("NodeList", "HTMLFormControlsCollection");
     }
