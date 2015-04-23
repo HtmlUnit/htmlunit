@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.general.huge;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
@@ -1916,36 +1915,6 @@ public class HostParentOfITest extends HostParentOf {
             IE8 = "false")
     public void _Node_XMLDocument() throws Exception {
         test("Node", "XMLDocument");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    @NotYetImplemented({ CHROME, IE11 })
-    public void _NodeList_HTMLAllCollection() throws Exception {
-        test("NodeList", "HTMLAllCollection");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    @NotYetImplemented({ CHROME, FF})
-    public void _NodeList_HTMLFormControlsCollection() throws Exception {
-        test("NodeList", "HTMLFormControlsCollection");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    @NotYetImplemented
-    public void _NodeList_HTMLCollection() throws Exception {
-        test("NodeList", "HTMLCollection");
     }
 
     /**

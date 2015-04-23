@@ -44,7 +44,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
 
 /**
  * An array of elements. Used for the element arrays returned by <tt>document.all</tt>,
@@ -66,7 +66,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
     @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
     @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
 })
-public class HTMLCollection extends NodeList {
+public class HTMLCollection extends AbstractList {
 
     /**
      * IE provides a way of enumerating through some element collections; this counter supports that functionality.

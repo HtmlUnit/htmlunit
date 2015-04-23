@@ -5338,8 +5338,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _EventTarget_ServiceWorker() throws Exception {
         test("EventTarget", "ServiceWorker");
     }
@@ -5348,8 +5348,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _EventTarget_ServiceWorkerContainer() throws Exception {
         test("EventTarget", "ServiceWorkerContainer");
     }
@@ -5358,8 +5358,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _EventTarget_ServiceWorkerRegistration() throws Exception {
         test("EventTarget", "ServiceWorkerRegistration");
     }

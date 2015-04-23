@@ -16,10 +16,10 @@ package com.gargoylesoftware.htmlunit.javascript.host.file;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
  * A JavaScript object for {@code LockedFile}.
@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = @WebBrowser(FF))
-public class LockedFile extends SimpleScriptable {
+public class LockedFile extends EventTarget {
 
     /**
      * Creates an instance.
