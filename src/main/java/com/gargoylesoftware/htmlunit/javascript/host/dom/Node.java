@@ -555,12 +555,9 @@ public class Node extends EventTarget {
     public NodeList getChildNodes() {
         if (childNodes_ == null) {
             final DomNode node = getDomNodeOrDie();
-            final boolean isXmlPage = node.getOwnerDocument() instanceof XmlPage;
-            final boolean shouldIgnoreEmptyTextNodes =
-                    getBrowserVersion().hasFeature(JS_NODE_CHILDNODES_IGNORE_EMPTY_TEXT_NODES);
-            final Boolean xmlSpaceDefault = isXMLSpaceDefault(node);
-            final boolean ignoreEmptyTextNode =
-                    shouldIgnoreEmptyTextNodes && isXmlPage && !Boolean.FALSE.equals(xmlSpaceDefault);
+            final boolean ignoreEmptyTextNode = node.getOwnerDocument() instanceof XmlPage
+                    && getBrowserVersion().hasFeature(JS_NODE_CHILDNODES_IGNORE_EMPTY_TEXT_NODES)
+                    && isXMLSpaceDefault(node);
 
             childNodes_ = new NodeList(node, false, "Node.childNodes") {
                 @Override
@@ -585,20 +582,19 @@ public class Node extends EventTarget {
     /**
      * Recursively checks whether "xml:space" attribute is set to "default".
      * @param node node to start checking from
-     * @return {@link Boolean#TRUE} if "default" is set, {@link Boolean#FALSE} for other value,
-     *         or null if nothing is set.
+     * @return whether "xml:space" attribute is set to "default"
      */
-    private static Boolean isXMLSpaceDefault(DomNode node) {
+    private static boolean isXMLSpaceDefault(DomNode node) {
         for ( ; node instanceof DomElement; node = node.getParentNode()) {
             final String value = ((DomElement) node).getAttribute("xml:space");
             if (!value.isEmpty()) {
                 if ("default".equals(value)) {
-                    return Boolean.TRUE;
+                    return true;
                 }
-                return Boolean.FALSE;
+                return false;
             }
         }
-        return null;
+        return false;
     }
 
     /**

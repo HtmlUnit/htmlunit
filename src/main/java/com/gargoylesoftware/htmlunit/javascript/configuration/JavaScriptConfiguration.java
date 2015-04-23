@@ -455,7 +455,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         RTCIceCandidate.class, RTCPeerConnectionIceEvent.class, RTCSessionDescription.class,
         Screen.class, ScriptProcessorNode.class, Selection.class, ServiceWorker.class, ServiceWorkerContainer.class,
         ServiceWorkerRegistration.class, Set.class, ShadowRoot.class, SharedWorker.class, SimpleArray.class,
-        StaticNodeList.class, Storage.class, StorageEvent.class, StyleSheet.class, StyleSheetList.class, 
+        StaticNodeList.class, Storage.class, StorageEvent.class, StyleSheet.class, StyleSheetList.class,
         SubtleCrypto.class,
         SVGAElement.class, SVGAltGlyphElement.class, SVGAngle.class, SVGAnimatedAngle.class,
         SVGAnimatedBoolean.class, SVGAnimateElement.class, SVGAnimatedEnumeration.class, SVGAnimatedInteger.class,

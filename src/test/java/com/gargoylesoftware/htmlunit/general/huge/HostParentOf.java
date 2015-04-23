@@ -113,4 +113,5 @@ public abstract class HostParentOf extends WebDriverTestCase {
     protected boolean isWebClientCached() {
         return true;
     }
+
 }

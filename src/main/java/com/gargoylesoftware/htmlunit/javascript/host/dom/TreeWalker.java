@@ -471,12 +471,14 @@ public class TreeWalker extends SimpleScriptable {
         }
 
         Node follow = left;
-        while (follow.hasChildNodes()) {
-            final Node toFollow = getEquivalentLogical(follow.getLastChild(), true);
-            if (toFollow == null) {
-                break;
+        if (follow != null) {
+            while (follow.hasChildNodes()) {
+                final Node toFollow = getEquivalentLogical(follow.getLastChild(), true);
+                if (toFollow == null) {
+                    break;
+                }
+                follow = toFollow;
             }
-            follow = toFollow;
         }
         return follow;
     }

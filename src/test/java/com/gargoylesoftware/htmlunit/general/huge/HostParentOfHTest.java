@@ -1877,9 +1877,8 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF31 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _HTMLCollection_HTMLFormControlsCollection() throws Exception {
         test("HTMLCollection", "HTMLFormControlsCollection");
     }
@@ -1888,9 +1887,8 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF31 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _HTMLFormControlsCollection_HTMLFormControlsCollection() throws Exception {
         test("HTMLFormControlsCollection", "HTMLFormControlsCollection");
     }

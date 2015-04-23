@@ -432,7 +432,11 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the StyleElement or null if not found
      */
     protected StyleElement getStyleElement(final String name) {
-        return getStyleMap().get(name);
+        final Map<String, StyleElement> map = getStyleMap();
+        if (map != null) {
+            return map.get(name);
+        }
+        return null;
     }
 
     /**
@@ -490,13 +494,13 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             final StyleElement element1 = getStyleElement(name1);
             final StyleElement element2 = getStyleElement(name2);
 
-            if (element1 == null && element2 == null) {
-                return "";
-            }
-            if (element1 != null && element2 == null) {
+            if (element2 == null) {
+                if (element1 == null) {
+                    return "";
+                }
                 return element1.getValue();
             }
-            if (element1 == null && element2 != null) {
+            if (element1 == null) {
                 value = element2.getValue();
             }
             else if (element1.getIndex() > element2.getIndex()) {
@@ -610,7 +614,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     private Map<String, StyleElement> getStyleMap() {
         final String styleAttribute = jsElement_.getDomNodeOrDie().getAttribute("style");
-        if (styleString_ == styleAttribute) {
+        if (styleString_.equals(styleAttribute)) {
             return styleMap_;
         }
 

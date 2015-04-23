@@ -1934,6 +1934,16 @@ public class HostParentOfITest extends HostParentOf {
     @Test
     @Alerts("false")
     @NotYetImplemented
+    public void _NodeList_HTMLFormControlsCollection() throws Exception {
+        test("NodeList", "HTMLFormControlsCollection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    @NotYetImplemented
     public void _NodeList_HTMLCollection() throws Exception {
         test("NodeList", "HTMLCollection");
     }
@@ -2545,8 +2555,8 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _MutationObserver_MutationObserver() throws Exception {
         test("MutationObserver", "MutationObserver");
     }
@@ -2556,7 +2566,17 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            FF = "true")
+    public void _LockedFile_LockedFile() throws Exception {
+        test("LockedFile", "LockedFile");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _NodeIterator_NodeIterator() throws Exception {
         test("NodeIterator", "NodeIterator");
     }
@@ -2575,8 +2595,8 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _PerformanceNavigation_PerformanceNavigation() throws Exception {
         test("PerformanceNavigation", "PerformanceNavigation");
     }
@@ -2585,8 +2605,8 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _PerformanceTiming_PerformanceTiming() throws Exception {
         test("PerformanceTiming", "PerformanceTiming");
     }
@@ -2595,8 +2615,8 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
     public void _Performance_Performance() throws Exception {
         test("Performance", "Performance");
     }
