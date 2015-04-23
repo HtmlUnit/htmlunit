@@ -2541,4 +2541,74 @@ public class HostParentOfITest extends HostParentOf {
         test("mozRTCIceCandidate", "mozRTCIceCandidate");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MutationObserver_MutationObserver() throws Exception {
+        test("MutationObserver", "MutationObserver");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _NodeIterator_NodeIterator() throws Exception {
+        test("NodeIterator", "NodeIterator");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _NodeList_RadioNodeList() throws Exception {
+        test("NodeList", "RadioNodeList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _PerformanceNavigation_PerformanceNavigation() throws Exception {
+        test("PerformanceNavigation", "PerformanceNavigation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _PerformanceTiming_PerformanceTiming() throws Exception {
+        test("PerformanceTiming", "PerformanceTiming");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Performance_Performance() throws Exception {
+        test("Performance", "Performance");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _RadioNodeList_RadioNodeList() throws Exception {
+        test("RadioNodeList", "RadioNodeList");
+    }
+
 }

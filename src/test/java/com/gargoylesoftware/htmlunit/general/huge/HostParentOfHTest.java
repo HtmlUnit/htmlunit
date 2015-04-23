@@ -1873,4 +1873,26 @@ public class HostParentOfHTest extends HostParentOf {
         test("HTMLPictureElement", "HTMLPictureElement");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true",
+            FF31 = "true")
+    public void _HTMLCollection_HTMLFormControlsCollection() throws Exception {
+        test("HTMLCollection", "HTMLFormControlsCollection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true",
+            FF31 = "true")
+    public void _HTMLFormControlsCollection_HTMLFormControlsCollection() throws Exception {
+        test("HTMLFormControlsCollection", "HTMLFormControlsCollection");
+    }
+
 }

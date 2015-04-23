@@ -3754,7 +3754,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Worker}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.worker.Worker}.
      *
      * @throws Exception if an error occurs
      */
@@ -4583,7 +4583,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function MutationObserver() { [native code] }",
             FF31 = "function MutationObserver() {\n    [native code]\n}",
             IE11 = "\nfunction MutationObserver() {\n    [native code]\n}\n")
-    @NotYetImplemented({ FF31, IE11, CHROME })
     public void mutationObserver() throws Exception {
         test("MutationObserver");
     }
@@ -4818,7 +4817,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "function LockedFile() {\n    [native code]\n}")
-    @NotYetImplemented(FF31)
     public void lockedFile() throws Exception {
         test("LockedFile");
     }
@@ -4863,7 +4861,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function FileReader() { [native code] }",
             FF31 = "function FileReader() {\n    [native code]\n}",
             IE11 = "\nfunction FileReader() {\n    [native code]\n}\n")
-    @NotYetImplemented({ FF31, IE11, CHROME })
     public void fileReader() throws Exception {
         test("FileReader");
     }
@@ -4971,7 +4968,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function TimeRanges() { [native code] }",
             FF31 = "function TimeRanges() {\n    [native code]\n}",
             IE11 = "[object TimeRanges]")
-    @NotYetImplemented({ FF31, IE11, CHROME })
     public void timeRanges() throws Exception {
         test("TimeRanges");
     }
@@ -5108,7 +5104,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function DOMError() { [native code] }",
             FF31 = "function DOMError() {\n    [native code]\n}",
             IE11 = "[object DOMError]")
-    @NotYetImplemented({ FF31, IE11, CHROME })
     public void domError() throws Exception {
         test("DOMError");
     }
@@ -5171,7 +5166,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function HTMLFormControlsCollection() { [native code] }",
             FF31 = "function HTMLFormControlsCollection() {\n    [native code]\n}")
-    @NotYetImplemented({ FF31, CHROME })
     public void htmlFormControlsCollection() throws Exception {
         test("HTMLFormControlsCollection");
     }
@@ -5406,7 +5400,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function PerformanceTiming() { [native code] }",
             FF31 = "function PerformanceTiming() {\n    [native code]\n}",
             IE11 = "[object PerformanceTiming]")
-    @NotYetImplemented({ FF31, IE11, CHROME })
     public void performanceTiming() throws Exception {
         test("PerformanceTiming");
     }
@@ -5592,7 +5585,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function DOMStringList() { [native code] }",
             FF31 = "function DOMStringList() {\n    [native code]\n}",
             IE11 = "[object DOMStringList]")
-    @NotYetImplemented({ FF31, IE11, CHROME })
     public void domStringList() throws Exception {
         test("DOMStringList");
     }
@@ -5752,7 +5744,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function FileError() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void fileError() throws Exception {
         test("FileError");
     }
@@ -5875,7 +5866,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "function CaretPosition() {\n    [native code]\n}")
-    @NotYetImplemented(FF31)
     public void caretPosition() throws Exception {
         test("CaretPosition");
     }
@@ -6027,7 +6017,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE11 = "[object SubtleCrypto]")
-    @NotYetImplemented(IE11)
     public void subtleCrypto() throws Exception {
         test("SubtleCrypto");
     }
@@ -6220,7 +6209,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function CryptoKey() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void cryptoKey() throws Exception {
         test("CryptoKey");
     }
@@ -6278,7 +6266,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function ValidityState() { [native code] }",
             FF31 = "function ValidityState() {\n    [native code]\n}",
             IE11 = "[object ValidityState]")
-    @NotYetImplemented({ FF31, IE11, CHROME })
     public void validityState() throws Exception {
         test("ValidityState");
     }
@@ -6300,7 +6287,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "function FileRequest() {\n    [native code]\n}")
-    @NotYetImplemented(FF31)
     public void fileRequest() throws Exception {
         test("FileRequest");
     }
@@ -6433,7 +6419,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "function DeviceStorage() {\n    [native code]\n}")
-    @NotYetImplemented(FF31)
     public void deviceStorage() throws Exception {
         test("DeviceStorage");
     }
@@ -6573,7 +6558,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "function FileHandle() {\n    [native code]\n}")
-    @NotYetImplemented(FF31)
     public void fileHandle() throws Exception {
         test("FileHandle");
     }
@@ -6738,7 +6722,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function ServiceWorkerRegistration() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void serviceWorkerRegistration() throws Exception {
         test("ServiceWorkerRegistration");
     }
@@ -6902,7 +6885,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function NodeIterator() { [native code] }",
             FF31 = "function NodeIterator() {\n    [native code]\n}",
             IE11 = "[object NodeIterator]")
-    @NotYetImplemented({ FF31, IE11, CHROME })
     public void nodeIterator() throws Exception {
         test("NodeIterator");
     }
@@ -6926,7 +6908,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function Performance() { [native code] }",
             FF31 = "function Performance() {\n    [native code]\n}",
             IE11 = "[object Performance]")
-    @NotYetImplemented({ FF31, IE11, CHROME })
     public void performance() throws Exception {
         test("Performance");
     }
@@ -6969,7 +6950,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function RadioNodeList() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void radioNodeList() throws Exception {
         test("RadioNodeList");
     }
@@ -7088,7 +7068,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "function DOMRequest() {\n    [native code]\n}")
-    @NotYetImplemented(FF31)
     public void domRequest() throws Exception {
         test("DOMRequest");
     }
@@ -7222,7 +7201,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function Blob() { [native code] }",
             FF31 = "[object Blob]",
             IE11 = "\nfunction Blob() {\n    [native code]\n}\n")
-    @NotYetImplemented({ FF31, IE11, CHROME })
     public void blob() throws Exception {
         test("Blob");
     }
@@ -7305,7 +7283,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function PerformanceNavigation() { [native code] }",
             FF31 = "function PerformanceNavigation() {\n    [native code]\n}",
             IE11 = "[object PerformanceNavigation]")
-    @NotYetImplemented({ FF31, IE11, CHROME })
     public void performanceNavigation() throws Exception {
         test("PerformanceNavigation");
     }
@@ -7414,7 +7391,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function ServiceWorkerContainer() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void serviceWorkerContainer() throws Exception {
         test("ServiceWorkerContainer");
     }
@@ -7687,9 +7663,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function Crypto() { [native code] }",
             FF31 = "function Crypto() {\n    [native code]\n}",
             IE11 = "[object Crypto]")
-    @NotYetImplemented({ FF31, IE11 })
     public void crypto() throws Exception {
         test("Crypto");
     }
@@ -7700,7 +7676,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "function BlobEvent() {\n    [native code]\n}")
-    @NotYetImplemented(FF31)
     public void blobEvent() throws Exception {
         test("BlobEvent");
     }
@@ -7772,7 +7747,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(CHROME = "function DataTransfer() { [native code] }",
             FF31 = "function DataTransfer() {\n    [native code]\n}",
             IE = "[object DataTransfer]")
-    @NotYetImplemented
     public void dataTransfer() throws Exception {
         test("DataTransfer");
     }
@@ -7823,7 +7797,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function Symbol() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void symbol() throws Exception {
         test("Symbol");
     }
@@ -7852,7 +7825,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function ServiceWorker() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void serviceWorker() throws Exception {
         test("ServiceWorker");
     }
@@ -7988,7 +7960,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function FileList() { [native code] }",
             FF31 = "function FileList() {\n    [native code]\n}",
             IE11 = "[object FileList]")
-    @NotYetImplemented({ FF31, IE11, CHROME })
     public void fileList() throws Exception {
         test("FileList");
     }
@@ -8021,7 +7992,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function File() { [native code] }",
             FF31 = "[object File]",
             IE11 = "[object File]")
-    @NotYetImplemented({ FF31, IE11, CHROME })
     public void file() throws Exception {
         test("File");
     }

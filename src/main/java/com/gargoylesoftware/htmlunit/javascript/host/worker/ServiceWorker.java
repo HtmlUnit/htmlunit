@@ -12,27 +12,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.dom;
+package com.gargoylesoftware.htmlunit.javascript.host.worker;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
- * A JavaScript object for {@code DOMCursor}.
+ * A JavaScript object for {@code ServiceWorker}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = @WebBrowser(FF))
-public class DOMCursor extends DOMRequest {
+@JsxClass(browsers = @WebBrowser(CHROME))
+public class ServiceWorker extends EventTarget {
 
     /**
-     * Creates a new instance.
+     * Creates an instance.
      */
     @JsxConstructor
-    public DOMCursor() {
+    public ServiceWorker() {
     }
+
 }

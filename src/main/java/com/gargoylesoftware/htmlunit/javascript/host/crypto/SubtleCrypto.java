@@ -12,27 +12,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.dom;
+package com.gargoylesoftware.htmlunit.javascript.host.crypto;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for {@code DOMCursor}.
+ * A JavaScript object for {@code SubtleCrypto}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = @WebBrowser(FF))
-public class DOMCursor extends DOMRequest {
+@JsxClass(browsers = @WebBrowser(value = IE, minVersion = 11))
+public class SubtleCrypto extends SimpleScriptable {
 
-    /**
-     * Creates a new instance.
-     */
-    @JsxConstructor
-    public DOMCursor() {
-    }
 }

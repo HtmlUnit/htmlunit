@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @see <a href="http://www.xulplanet.com/references/objref/MimeType.html">XUL Planet</a>
  */
 @JsxClass(browsers = { @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
-public final class MimeType extends SimpleScriptable {
+public class MimeType extends SimpleScriptable {
     private String description_;
     private String suffixes_;
     private String type_;

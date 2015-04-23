@@ -444,8 +444,8 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _TextDecoder_TextDecoder() throws Exception {
         test("TextDecoder", "TextDecoder");
     }
@@ -454,8 +454,8 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _TextEncoder_TextEncoder() throws Exception {
         test("TextEncoder", "TextEncoder");
     }
@@ -508,6 +508,36 @@ public class HostParentOfTTest extends HostParentOf {
             CHROME = "true")
     public void _webkitRTCPeerConnection_webkitRTCPeerConnection() throws Exception {
         test("webkitRTCPeerConnection", "webkitRTCPeerConnection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _TimeRanges_TimeRanges() throws Exception {
+        test("TimeRanges", "TimeRanges");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _URIError_URIError() throws Exception {
+        test("URIError", "URIError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _ValidityState_ValidityState() throws Exception {
+        test("ValidityState", "ValidityState");
     }
 
 }

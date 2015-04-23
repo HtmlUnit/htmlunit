@@ -5160,9 +5160,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _EventTarget_MediaQueryList() throws Exception {
         test("EventTarget", "MediaQueryList");
     }
@@ -5234,6 +5233,325 @@ public class HostParentOfATest extends HostParentOf {
             FF31 = "true")
     public void _Event_RTCPeerConnectionIceEvent() throws Exception {
         test("Event", "RTCPeerConnectionIceEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _Blob_Blob() throws Exception {
+        test("Blob", "Blob");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _Blob_File() throws Exception {
+        test("Blob", "File");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _CryptoKey_CryptoKey() throws Exception {
+        test("CryptoKey", "CryptoKey");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _Crypto_Crypto() throws Exception {
+        test("Crypto", "Crypto");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _DOMError_DOMError() throws Exception {
+        test("DOMError", "DOMError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _DOMError_FileError() throws Exception {
+        test("DOMError", "FileError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _DOMStringList_DOMStringList() throws Exception {
+        test("DOMStringList", "DOMStringList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _DataTransfer_DataTransfer() throws Exception {
+        test("DataTransfer", "DataTransfer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _EventTarget_FileReader() throws Exception {
+        test("EventTarget", "FileReader");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _EventTarget_Performance() throws Exception {
+        test("EventTarget", "Performance");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _EventTarget_ServiceWorker() throws Exception {
+        test("EventTarget", "ServiceWorker");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _EventTarget_ServiceWorkerContainer() throws Exception {
+        test("EventTarget", "ServiceWorkerContainer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _EventTarget_ServiceWorkerRegistration() throws Exception {
+        test("EventTarget", "ServiceWorkerRegistration");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _FileError_FileError() throws Exception {
+        test("FileError", "FileError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _FileList_FileList() throws Exception {
+        test("FileList", "FileList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _FileReader_FileReader() throws Exception {
+        test("FileReader", "FileReader");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _File_File() throws Exception {
+        test("File", "File");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _BlobEvent_BlobEvent() throws Exception {
+        test("BlobEvent", "BlobEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _CaretPosition_CaretPosition() throws Exception {
+        test("CaretPosition", "CaretPosition");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _DOMRequest_DOMCursor() throws Exception {
+        test("DOMRequest", "DOMCursor");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _DOMRequest_DOMRequest() throws Exception {
+        test("DOMRequest", "DOMRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _DOMRequest_FileRequest() throws Exception {
+        test("DOMRequest", "FileRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _DeviceStorage_DeviceStorage() throws Exception {
+        test("DeviceStorage", "DeviceStorage");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _EventTarget_DOMCursor() throws Exception {
+        test("EventTarget", "DOMCursor");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _EventTarget_DOMRequest() throws Exception {
+        test("EventTarget", "DOMRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _EventTarget_DeviceStorage() throws Exception {
+        test("EventTarget", "DeviceStorage");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _EventTarget_FileHandle() throws Exception {
+        test("EventTarget", "FileHandle");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _EventTarget_FileRequest() throws Exception {
+        test("EventTarget", "FileRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _EventTarget_LockedFile() throws Exception {
+        test("EventTarget", "LockedFile");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _Event_BlobEvent() throws Exception {
+        test("Event", "BlobEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _FileHandle_FileHandle() throws Exception {
+        test("FileHandle", "FileHandle");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _FileRequest_FileRequest() throws Exception {
+        test("FileRequest", "FileRequest");
     }
 
 }

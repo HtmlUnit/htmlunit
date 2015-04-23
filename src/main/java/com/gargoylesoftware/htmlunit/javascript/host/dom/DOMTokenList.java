@@ -44,7 +44,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
-public final class DOMTokenList extends SimpleScriptable {
+public class DOMTokenList extends SimpleScriptable {
 
     private static final String WHITESPACE_CHARS = " \t\r\n\u000C";
     private static final String WHITESPACE_CHARS_IE_11 = WHITESPACE_CHARS + "\u000B";

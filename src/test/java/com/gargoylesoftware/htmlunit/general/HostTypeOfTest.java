@@ -3780,7 +3780,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Worker}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.worker.Worker}.
      *
      * @throws Exception if an error occurs
      */
@@ -3880,7 +3880,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void validityState() throws Exception {
         test("ValidityState");
     }
@@ -4266,7 +4265,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void nodeIterator() throws Exception {
         test("NodeIterator");
     }
@@ -4279,7 +4277,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void timeRanges() throws Exception {
         test("TimeRanges");
     }
@@ -4303,7 +4300,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void performance() throws Exception {
         test("Performance");
     }
@@ -4375,7 +4371,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void domError() throws Exception {
         test("DOMError");
     }
@@ -4410,7 +4405,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function",
             IE8 = "undefined")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
+    @NotYetImplemented(FF)
     public void blob() throws Exception {
         test("Blob");
     }
@@ -4435,7 +4430,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void performanceNavigation() throws Exception {
         test("PerformanceNavigation");
     }
@@ -4458,7 +4452,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void performanceTiming() throws Exception {
         test("PerformanceTiming");
     }
@@ -4563,7 +4556,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void domStringList() throws Exception {
         test("DOMStringList");
     }
@@ -4643,9 +4635,9 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ FF31, IE11 })
     public void crypto() throws Exception {
         test("Crypto");
     }
@@ -4703,7 +4695,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void dataTransfer() throws Exception {
         test("DataTransfer");
     }
@@ -4787,7 +4778,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
     public void fileList() throws Exception {
         test("FileList");
     }
@@ -4811,7 +4801,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function",
             FF31 = "function",
             IE11 = "object")
-    @NotYetImplemented({ CHROME, FF31, IE11 })
+    @NotYetImplemented(FF)
     public void file() throws Exception {
         test("File");
     }
@@ -4822,7 +4812,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE11 = "object")
-    @NotYetImplemented(IE11)
     public void subtleCrypto() throws Exception {
         test("SubtleCrypto");
     }
@@ -5577,6 +5566,186 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function")
     public void weakSet() throws Exception {
         test("WeakSet");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
+    public void blobEvent() throws Exception {
+        test("BlobEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
+    public void caretPosition() throws Exception {
+        test("CaretPosition");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void cryptoKey() throws Exception {
+        test("CryptoKey");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
+    public void deviceStorage() throws Exception {
+        test("DeviceStorage");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
+    public void domRequest() throws Exception {
+        test("DOMRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void fileError() throws Exception {
+        test("FileError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
+    public void fileHandle() throws Exception {
+        test("FileHandle");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined")
+    public void fileReader() throws Exception {
+        test("FileReader");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void htmlFormControlsCollection() throws Exception {
+        test("HTMLFormControlsCollection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
+    public void lockedFile() throws Exception {
+        test("LockedFile");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE8 = "undefined")
+    public void mutationObserver() throws Exception {
+        test("MutationObserver");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void radioNodeList() throws Exception {
+        test("RadioNodeList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void serviceWorker() throws Exception {
+        test("ServiceWorker");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void serviceWorkerRegistration() throws Exception {
+        test("ServiceWorkerRegistration");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void symbol() throws Exception {
+        test("Symbol");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE8 = "object")
+    public void uriError() throws Exception {
+        test("URIError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
+    public void fileRequest() throws Exception {
+        test("FileRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void serviceWorkerContainer() throws Exception {
+        test("ServiceWorkerContainer");
     }
 
 }

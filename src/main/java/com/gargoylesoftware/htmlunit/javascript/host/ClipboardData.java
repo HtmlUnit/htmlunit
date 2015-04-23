@@ -22,6 +22,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public final class ClipboardData extends SimpleScriptable {
+public class ClipboardData extends SimpleScriptable {
 
 }

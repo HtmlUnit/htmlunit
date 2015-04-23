@@ -19,20 +19,22 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
- * A JavaScript object for {@code DOMCursor}.
+ * A JavaScript object for {@code DOMRequest}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = @WebBrowser(FF))
-public class DOMCursor extends DOMRequest {
+public class DOMRequest extends EventTarget {
 
     /**
-     * Creates a new instance.
+     * Creates an instance.
      */
     @JsxConstructor
-    public DOMCursor() {
+    public DOMRequest() {
     }
+
 }

@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  */
 @JsxClass(domClass = DomCDataSection.class,
     browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
-public final class CDATASection extends Text {
+public class CDATASection extends Text {
 
     /**
      * Creates an instance.

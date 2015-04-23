@@ -12,27 +12,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.dom;
+package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for {@code DOMCursor}.
+ * A JavaScript object for {@code DataTransfer}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = @WebBrowser(FF))
-public class DOMCursor extends DOMRequest {
+@JsxClasses({
+    @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+    @JsxClass(isJSObject = false, isDefinedInStandardsMode = true, browsers = @WebBrowser(value = IE, maxVersion = 8))
+})
+public class DataTransfer extends SimpleScriptable {
 
     /**
-     * Creates a new instance.
+     * Creates an instance.
      */
-    @JsxConstructor
-    public DOMCursor() {
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public DataTransfer() {
     }
+
 }

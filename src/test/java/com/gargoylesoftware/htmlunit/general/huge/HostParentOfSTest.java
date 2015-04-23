@@ -1794,4 +1794,54 @@ public class HostParentOfSTest extends HostParentOf {
         test("StyleSheet", "StyleSheet");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _ServiceWorkerContainer_ServiceWorkerContainer() throws Exception {
+        test("ServiceWorkerContainer", "ServiceWorkerContainer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _ServiceWorkerRegistration_ServiceWorkerRegistration() throws Exception {
+        test("ServiceWorkerRegistration", "ServiceWorkerRegistration");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _ServiceWorker_ServiceWorker() throws Exception {
+        test("ServiceWorker", "ServiceWorker");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _SubtleCrypto_SubtleCrypto() throws Exception {
+        test("SubtleCrypto", "SubtleCrypto");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Symbol_Symbol() throws Exception {
+        test("Symbol", "Symbol");
+    }
+
 }

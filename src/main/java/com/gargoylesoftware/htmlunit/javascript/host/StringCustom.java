@@ -26,7 +26,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-public final class StringCustom {
+public class StringCustom {
 
     private StringCustom() { }
 

@@ -40,7 +40,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
  * @author Ronald Brill
  * @author Frank Danek
  */
-public final class DateCustom {
+public class DateCustom {
 
     private static final TimeZone UTC_TIME_ZONE = TimeZone.getTimeZone("UTC");
 

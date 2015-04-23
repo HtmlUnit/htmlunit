@@ -40,7 +40,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Comment;
  * @author Frank Danek
  */
 @JsxClass(domClass = DomComment.class, isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-public final class HTMLCommentElement extends Comment {
+public class HTMLCommentElement extends Comment {
 
     /**
      * Creates an instance.

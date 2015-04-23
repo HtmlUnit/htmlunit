@@ -12,30 +12,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package com.gargoylesoftware.htmlunit.javascript.host.crypto;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
- * A JavaScript object for Worker.
+ * A JavaScript object for {@code Crypto}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
-public class Worker extends EventTarget {
+public class Crypto extends SimpleScriptable {
 
     /**
-     * Default constructor.
+     * Creates an instance.
      */
-    @JsxConstructor
-    public Worker() {
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    public Crypto() {
     }
+
 }
