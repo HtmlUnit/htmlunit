@@ -106,7 +106,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlArea;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
-import com.gargoylesoftware.htmlunit.html.HtmlHead;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
@@ -1227,7 +1226,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
         final HTMLCollection heads = getElementsByTagName("head");
         if (heads.getLength() > 0) {
-            final HtmlHead head = (HtmlHead) heads.item(0);
+            final DomNode head = ((SimpleScriptable) heads.item(0)).getDomNodeOrDie();
 
             int stylesheetPos = -1;
             for (DomNode domNode : head.getChildNodes()) {
