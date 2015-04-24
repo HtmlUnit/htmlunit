@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A NodeFilter.
+ * A JavaScript object for {@code NodeFilter}.
  *
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Traversal-Range/traversal.html">
  * DOM-Level-2-Traversal-Range</a>
@@ -37,73 +37,79 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class NodeFilter extends SimpleScriptable {
 
-    // Constants returned by acceptNode
-
     /**
-     * Accept the node. TreeWalker navigation will return this node.
+     * Accept the node.
      */
     @JsxConstant
     public static final short FILTER_ACCEPT = 1;
 
     /**
-     * Reject the node. TreeWalker navigation will not return this node or
-     * any of it's children.
+     * Reject the node.
      */
     @JsxConstant
     public static final short FILTER_REJECT = 2;
 
     /**
-     * Skip the node. TreeWalker navigation will not return this node, but WILL
-     * still consider the children of this node.
+     * Skip the node.
      */
     @JsxConstant
     public static final short FILTER_SKIP = 3;
 
-    // Constants for whatToShow
     /** Show all nodes. */
     @JsxConstant
-    public static final long SHOW_ALL = 4294967295L;
+    public static final long SHOW_ALL = 0xFFFFFFFFL;
+
     /** Show Element nodes. */
     @JsxConstant
-    public static final int SHOW_ELEMENT = 0x00000001;
+    public static final int SHOW_ELEMENT = 0x1;
+
     /** Show Attr nodes. Only useful when creating a TreeWalker with an
      * attribute node as its root. */
     @JsxConstant
-    public static final int SHOW_ATTRIBUTE = 0x00000002;
+    public static final int SHOW_ATTRIBUTE = 0x2;
+
     /** Show Text nodes. */
     @JsxConstant
-    public static final int SHOW_TEXT = 0x00000004;
+    public static final int SHOW_TEXT = 0x4;
+
     /** Show CDATASection nodes. */
     @JsxConstant
-    public static final int SHOW_CDATA_SECTION = 0x00000008;
+    public static final int SHOW_CDATA_SECTION = 0x8;
+
     /** Show EntityReference nodes. */
     @JsxConstant
-    public static final int SHOW_ENTITY_REFERENCE = 0x00000010;
+    public static final int SHOW_ENTITY_REFERENCE = 0x10;
+
     /** Show Entity nodes. */
     @JsxConstant
-    public static final int SHOW_ENTITY = 0x00000020;
+    public static final int SHOW_ENTITY = 0x20;
+
     /** Show ProcessingInstruction nodes. */
     @JsxConstant
-    public static final int SHOW_PROCESSING_INSTRUCTION = 0x00000040;
+    public static final int SHOW_PROCESSING_INSTRUCTION = 0x40;
+
     /** Show Comment nodes. */
     @JsxConstant
-    public static final int SHOW_COMMENT = 0x00000080;
+    public static final int SHOW_COMMENT = 0x80;
+
     /** Show Document nodes. */
     @JsxConstant
-    public static final int SHOW_DOCUMENT = 0x00000100;
+    public static final int SHOW_DOCUMENT = 0x100;
+
     /** Show DocumentType nodes. */
     @JsxConstant
-    public static final int SHOW_DOCUMENT_TYPE = 0x00000200;
+    public static final int SHOW_DOCUMENT_TYPE = 0x200;
+
     /** Show DocumentFragment nodes. */
     @JsxConstant
-    public static final int SHOW_DOCUMENT_FRAGMENT = 0x00000400;
+    public static final int SHOW_DOCUMENT_FRAGMENT = 0x400;
 
     /**
      * Show Notation nodes. Only useful when creating a TreeWalker with a
      * Notation node as its root.
      */
     @JsxConstant
-    public static final int SHOW_NOTATION = 0x00000800;
+    public static final int SHOW_NOTATION = 0x800;
 
     /**
      * Creates an instance.
