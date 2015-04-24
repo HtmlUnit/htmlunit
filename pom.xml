@@ -293,7 +293,6 @@
                         <link>http://commons.apache.org/codec/apidocs/</link>
                         <link>http://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/</link>
                     </links>
-                    <stylesheet>maven</stylesheet>
                 </configuration>
             </plugin>
             <plugin>
