@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -39,4 +40,12 @@ public class MutationObserver extends SimpleScriptable {
     public MutationObserver() {
     }
 
+    /**
+     * Registers the {@link MutationObserver} instance to receive notifications of DOM mutations on the specified node.
+     * @param node the node
+     * @param options the options
+     */
+    @JsxFunction
+    public void observe(final Node node, final Object options) {
+    }
 }
