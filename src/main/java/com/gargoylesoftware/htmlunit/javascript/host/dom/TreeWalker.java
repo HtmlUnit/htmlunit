@@ -158,14 +158,13 @@ public class TreeWalker extends SimpleScriptable {
     }
 
     /**
-     * Given a node type, as defined in {@link Node}, return the appropriate
-     * constant for whatToShow.
+     * Given a {@link Node}, return the appropriate constant for whatToShow.
      *
-     * @param type The node type to lookup.
-     * @return the whatToShow constant for this node type.
+     * @param node the node
+     * @return the whatToShow constant for the type of specified node
      */
-    private static int getFlagForNodeType(final short type) {
-        switch (type) {
+    static int getFlagForNode(final Node node) {
+        switch (node.getNodeType()) {
             case Node.ELEMENT_NODE:
                 return NodeFilter.SHOW_ELEMENT;
             case Node.ATTRIBUTE_NODE:
@@ -204,8 +203,7 @@ public class TreeWalker extends SimpleScriptable {
      *          or skipped.
      */
     private short acceptNode(final Node n) {
-        final short type = n.getNodeType();
-        final int flag = getFlagForNodeType(type);
+        final int flag = getFlagForNode(n);
 
         if ((whatToShow_ & flag) != 0) {
             return NodeFilter.FILTER_ACCEPT;

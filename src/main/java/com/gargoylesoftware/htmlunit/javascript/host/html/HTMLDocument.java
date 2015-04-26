@@ -133,6 +133,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeFilter;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeIterator;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Range;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Selection;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.StaticNodeList;
@@ -2156,5 +2157,22 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(IE) })
     public boolean releaseCapture() {
         return true;
+    }
+
+    /**
+     * Returns a new NodeIterator object.
+     *
+     * @param root The root node at which to begin the NodeIterator's traversal.
+     * @param whatToShow an optional long representing a bitmask created by combining
+     * the constant properties of {@link NodeFilter}
+     * @param filter an object implementing the {@link NodeFilter} interface
+     * @return a new NodeIterator object
+     */
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public NodeIterator createNodeIterator(final Node root, final double whatToShow, final Scriptable filter) {
+        final NodeIterator iterator = new NodeIterator(root, whatToShow, filter);
+        iterator.setParentScope(getParentScope());
+        iterator.setPrototype(getPrototype(iterator.getClass()));
+        return iterator;
     }
 }
