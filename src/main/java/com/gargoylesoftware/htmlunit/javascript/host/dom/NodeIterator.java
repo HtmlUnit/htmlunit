@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -37,7 +39,7 @@ public class NodeIterator extends SimpleScriptable {
 
     private Node root_;
     private long whatToShow_;
-    private Object filter_;
+    private Scriptable filter_;
     private Node referenceNode_;
     private boolean pointerBeforeReferenceNode_;
 
@@ -69,7 +71,7 @@ public class NodeIterator extends SimpleScriptable {
      * Returns the filter.
      * @return the filter
      */
-    public Object getFilter() {
+    public Scriptable getFilter() {
         return filter_;
     }
 
@@ -109,7 +111,7 @@ public class NodeIterator extends SimpleScriptable {
      * This operation is a no-op.
      */
     @JsxFunction
-    void detach() {
+    public void detach() {
     }
 
     /**
@@ -133,52 +135,54 @@ public class NodeIterator extends SimpleScriptable {
     private Node traverse(final boolean next) {
         Node node = referenceNode_;
         boolean beforeNode = pointerBeforeReferenceNode_;
-        if (next) {
-            if (beforeNode) {
-                beforeNode = false;
-            }
-            else {
-                final Node leftChild = getEquivalentLogical(node.getFirstChild(), false);
-                if (leftChild != null) {
-                    node = leftChild;
+        do {
+            if (next) {
+                if (beforeNode) {
+                    beforeNode = false;
                 }
                 else {
-                    final Node rightSibling = getEquivalentLogical(node.getNextSibling(), false);
-                    if (rightSibling != null) {
-                        node = rightSibling;
+                    final Node leftChild = getChild(node, true);
+                    if (leftChild != null) {
+                        node = leftChild;
                     }
                     else {
-                        node = getFirstUncleNode(node);
+                        final Node rightSibling = getSibling(node, false);
+                        if (rightSibling != null) {
+                            node = rightSibling;
+                        }
+                        else {
+                            node = getFirstUncleNode(node);
+                        }
                     }
                 }
-            }
-        }
-        else {
-            if (!beforeNode) {
-                beforeNode = true;
             }
             else {
-                final Node left = getEquivalentLogical(node.getPreviousSibling(), true);
-                if (left == null) {
-                    final Node parent = node.getParent();
-                    if (parent == null) {
-                        node = null;
-                    }
+                if (!beforeNode) {
+                    beforeNode = true;
                 }
-
-                Node follow = left;
-                if (follow != null) {
-                    while (follow.hasChildNodes()) {
-                        final Node toFollow = getEquivalentLogical(follow.getLastChild(), true);
-                        if (toFollow == null) {
-                            break;
+                else {
+                    final Node left = getSibling(node, true);
+                    if (left == null) {
+                        final Node parent = node.getParent();
+                        if (parent == null) {
+                            node = null;
                         }
-                        follow = toFollow;
                     }
+
+                    Node follow = left;
+                    if (follow != null) {
+                        while (follow.hasChildNodes()) {
+                            final Node toFollow = getChild(follow, false);
+                            if (toFollow == null) {
+                                break;
+                            }
+                            follow = toFollow;
+                        }
+                    }
+                    node = follow;
                 }
-                node = follow;
             }
-        }
+        } while (node != null && (!(isNodeVisible(node)) || !isAccepted(node)));
 
         //apply filter here and loop
 
@@ -187,30 +191,28 @@ public class NodeIterator extends SimpleScriptable {
         return node;
     }
 
-    /**
-     * Recursively find the logical node occupying the same position as this
-     * _actual_ node. It could be the same node, a different node, or null
-     * depending on filtering.
-     *
-     * @param node The actual node we are trying to find the "equivalent" of
-     * @param lookLeft If true, traverse the tree in the left direction. If
-     *          false, traverse the tree to the right.
-     * @return the logical node in the same position as n
-     */
-    private Node getEquivalentLogical(final Node node, final boolean lookLeft) {
-        if (node == null) {
-            return null;
-        }
-
-        if (isNodeVisible(node)) {
-            return node;
-        }
-
-        return getSibling(node, lookLeft);
-    }
-
     private boolean isNodeVisible(final Node node) {
         return (whatToShow_ & TreeWalker.getFlagForNode(node)) != 0;
+    }
+
+    private boolean isAccepted(final Node node) {
+        if (filter_ == null) {
+            return true;
+        }
+        Function function = null;
+        if (filter_ instanceof Function) {
+            function = ((Function) filter_);
+        }
+        Object acceptNode = filter_.get("acceptNode", filter_);
+        if (acceptNode instanceof Function) {
+            function = (Function) acceptNode;
+        }
+        if (function != null) {
+            final double value = Context.toNumber(function.call(Context.getCurrentContext(), getParentScope(),
+                    this, new Object[] { node }));
+            return value == NodeFilter.FILTER_ACCEPT;
+        }
+        return true;
     }
 
     /**
@@ -227,7 +229,7 @@ public class NodeIterator extends SimpleScriptable {
             return null;
         }
 
-        final Node uncle = getEquivalentLogical(parent.getNextSibling(), false);
+        final Node uncle = getSibling(parent, false);
         if (uncle != null) {
             return uncle;
         }
@@ -235,12 +237,24 @@ public class NodeIterator extends SimpleScriptable {
         return getFirstUncleNode(parent);
     }
 
-    private Node getSibling(final Node node, final boolean lookLeft) {
+    private Node getChild(final Node node, final boolean lookLeft) {
         if (node == null) {
             return null;
         }
 
-        if (isNodeVisible(node)) {
+        final Node child;
+        if (lookLeft) {
+            child = node.getFirstChild();
+        }
+        else {
+            child = node.getLastChild();
+        }
+
+        return child;
+    }
+
+    private Node getSibling(final Node node, final boolean lookLeft) {
+        if (node == null) {
             return null;
         }
 
@@ -252,14 +266,6 @@ public class NodeIterator extends SimpleScriptable {
             sibling = node.getNextSibling();
         }
 
-        if (sibling == null) {
-            // If this node has no logical siblings at or below it's "level", it might have one above
-            if (node == root_) {
-                return null;
-            }
-            return getSibling(node.getParent(), lookLeft);
-
-        }
-        return getEquivalentLogical(sibling, lookLeft);
+        return sibling;
     }
 }

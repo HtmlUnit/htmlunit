@@ -37,7 +37,7 @@ public class NodeIteratorTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object HTMLDivElement], [object HTMLSpanElement], [object HTMLSpanElement],"
                 + " [object HTMLSpanElement]",
             IE8 = "")
-    public void nullFilter() throws Exception {
+    public void filterNull() throws Exception {
         final String html
             = "<html>\n"
             + "<head>\n"
@@ -60,6 +60,81 @@ public class NodeIteratorTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'>"
             + "<div id='myId'><span>a</span><span>b</span><span>c</span></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "[object HTMLParagraphElement]",
+            IE8 = "")
+    public void filterFunction() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (document.createNodeIterator) {\n"
+            + "        var nodeIterator = document.createNodeIterator(\n"
+            + "          document.getElementById('myId'),\n"
+            + "          NodeFilter.SHOW_ELEMENT,\n"
+            + "          function(node) {\n"
+            + "            return node.nodeName.toLowerCase() === 'p' ? NodeFilter.FILTER_ACCEPT"
+            + " : NodeFilter.FILTER_REJECT;\n"
+            + "          }\n"
+            + "        );\n"
+
+            + "        var currentNode;\n"
+            + "        while (currentNode = nodeIterator.nextNode()) {\n"
+            + "          alert(currentNode);\n"
+            + "        }\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>"
+            + "<div id='myId'><span>a</span><p>b</p><span>c</span></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "def",
+            IE8 = "")
+    public void filterObject() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (document.createNodeIterator) {\n"
+            + "        var nodeIterator = document.createNodeIterator(\n"
+            + "          document.getElementById('myId'),\n"
+            + "          NodeFilter.SHOW_TEXT,\n"
+            + "          { acceptNode: function(node) {\n"
+            + "            if (node.data.indexOf('e') != -1) {\n"
+            + "              return NodeFilter.FILTER_ACCEPT;\n"
+            + "            }\n"
+            + "          } }\n"
+            + "        );\n"
+
+            + "        var currentNode;\n"
+            + "        while (currentNode = nodeIterator.nextNode()) {\n"
+            + "          alert(currentNode.data);\n"
+            + "        }\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>"
+            + "<div id='myId'><span>abc</span><p>def</p><span>ghi</span></div>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
