@@ -203,13 +203,13 @@ public class NodeIterator extends SimpleScriptable {
         if (filter_ instanceof Function) {
             function = ((Function) filter_);
         }
-        Object acceptNode = filter_.get("acceptNode", filter_);
+        final Object acceptNode = filter_.get("acceptNode", filter_);
         if (acceptNode instanceof Function) {
             function = (Function) acceptNode;
         }
         if (function != null) {
             final double value = Context.toNumber(function.call(Context.getCurrentContext(), getParentScope(),
-                    this, new Object[] { node }));
+                    this, new Object[] {node}));
             return value == NodeFilter.FILTER_ACCEPT;
         }
         return true;
