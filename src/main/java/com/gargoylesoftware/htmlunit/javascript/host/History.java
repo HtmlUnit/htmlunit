@@ -191,4 +191,23 @@ public class History extends SimpleScriptable {
         throw Context.reportRuntimeError("Permission denied to call method History.item");
     }
 
+    /**
+     * Replaces a state.
+     * @param object the state object
+     * @param title the title
+     * @param url an optional URL
+     */
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public void replaceState(final Object object, final String title, final String url) {
+    }
+
+    /**
+     * Pushes a state.
+     * @param object the state object
+     * @param title the title
+     * @param url an optional URL
+     */
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public void pushState(final Object object, final String title, final String url) {
+    }
 }
