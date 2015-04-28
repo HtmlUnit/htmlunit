@@ -5683,6 +5683,18 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF31 = "function",
+            IE11 = "object")
+    public void mutationRecord() throws Exception {
+        test("MutationRecord");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
             CHROME = "function")
     public void radioNodeList() throws Exception {
         test("RadioNodeList");

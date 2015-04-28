@@ -4591,6 +4591,18 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MutationRecord() { [native code] }",
+            FF31 = "function MutationRecord() {\n    [native code]\n}",
+            IE11 = "[object MutationRecord]")
+    public void mutationRecord() throws Exception {
+        test("MutationRecord");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("exception")
     public void mozWifiP2pGroupOwner() throws Exception {
         test("MozWifiP2pGroupOwner");

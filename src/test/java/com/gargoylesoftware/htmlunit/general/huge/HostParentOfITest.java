@@ -2534,6 +2534,16 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "true",
+            IE8 = "false")
+    public void _MutationRecord_MutationRecord() throws Exception {
+        test("MutationRecord", "MutationRecord");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "false",
             FF = "true")
     public void _LockedFile_LockedFile() throws Exception {

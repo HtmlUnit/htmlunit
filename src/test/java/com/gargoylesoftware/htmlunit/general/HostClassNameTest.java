@@ -5770,6 +5770,18 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function MutationRecord() { [native code] }",
+            FF31 = "function MutationRecord() {\n    [native code]\n}",
+            IE11 = "[object MutationRecord]")
+    public void mutationRecord() throws Exception {
+        test("MutationRecord");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
             CHROME = "function RadioNodeList() { [native code] }")
     public void radioNodeList() throws Exception {
         test("RadioNodeList");

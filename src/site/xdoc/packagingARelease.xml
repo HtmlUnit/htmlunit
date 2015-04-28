@@ -33,6 +33,13 @@
       -->
     </server>
     <server>
+      <id>sonatype-nexus-snapshots</id>
+      <username>your-jira-id</username>
+      <!-- optional element:
+        <password>your-jira-pwd</password>
+      -->
+    </server>
+    <server>
       <id>ossrh</id>
       <username>your-jira-id</username>
       <!-- optional element:

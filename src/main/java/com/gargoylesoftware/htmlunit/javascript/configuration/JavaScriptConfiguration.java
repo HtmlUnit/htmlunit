@@ -134,6 +134,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DocumentType;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.EventNode;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.MediaList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.MutationObserver;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.MutationRecord;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeFilter;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeIterator;
@@ -443,8 +444,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         MessageEvent.class, MessagePort.class, MimeType.class, MimeTypeArray.class, MouseEvent.class,
         MouseScrollEvent.class, MouseWheelEvent.class,
         mozRTCIceCandidate.class, mozRTCPeerConnection.class, mozRTCSessionDescription.class,
-        MutationEvent.class, MutationObserver.class, NamedNodeMap.class, Namespace.class, NamespaceCollection.class,
-        Navigator.class,
+        MutationEvent.class, MutationObserver.class, MutationRecord.class, NamedNodeMap.class, Namespace.class,
+        NamespaceCollection.class, Navigator.class,
         Node.class, NodeFilter.class, NodeIterator.class, NodeList.class, Notification.class,
         OfflineAudioCompletionEvent.class,
         OfflineAudioContext.class, Option.class, OscillatorNode.class, PageTransitionEvent.class, PannerNode.class,
