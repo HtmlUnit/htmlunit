@@ -92,6 +92,7 @@ public final class TestCaseTest {
             list.add(name);
         }
         list.add(Intl.class.getSimpleName());
+        list.add("Error");
         return list;
     }
 

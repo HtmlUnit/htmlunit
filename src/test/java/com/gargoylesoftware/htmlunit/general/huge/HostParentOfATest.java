@@ -5643,4 +5643,24 @@ public class HostParentOfATest extends HostParentOf {
     public void _Gamepad_Gamepad() throws Exception {
         test("Gamepad", "Gamepad");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    @NotYetImplemented(CHROME)
+    public void _Error_DOMException() throws Exception {
+        test("Error", "DOMException");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _Error_Error() throws Exception {
+        test("Error", "Error");
+    }
 }
