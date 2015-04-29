@@ -5816,7 +5816,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             FF = "function URIError() {\n    [native code]\n}",
             IE11 = "\nfunction URIError() {\n    [native code]\n}\n",
             IE8 = "URIError")
-    @NotYetImplemented(IE8)
     public void uriError() throws Exception {
         test("URIError");
     }
