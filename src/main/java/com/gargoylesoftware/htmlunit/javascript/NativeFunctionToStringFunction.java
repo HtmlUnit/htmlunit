@@ -14,22 +14,27 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NATIVE_FUNCTION_TOSTRING_COMPACT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE;
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.IdFunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
  * Replacement (in fact a wrapper) for Rhino's native toString function on Function prototype
  * allowing to produce the desired formatting.
+ *
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ronald Brill
+ * @author Ahmed Ashour
  */
 class NativeFunctionToStringFunction extends FunctionWrapper {
 
@@ -68,6 +73,11 @@ class NativeFunctionToStringFunction extends FunctionWrapper {
 
         if (thisObj instanceof BaseFunction && s.indexOf("[native code]") > -1) {
             final String functionName = ((BaseFunction) thisObj).getFunctionName();
+            if (thisObj instanceof IdFunctionObject && functionName.length() > 5 &&
+                    functionName.endsWith("Error")
+                    && ((Window) scope).getWebWindow().getWebClient().getBrowserVersion().hasFeature(JS_ERROR)) {
+                return functionName;
+            }
             return "\nfunction " + functionName + "() {\n    [native code]\n}\n";
         }
         return s;

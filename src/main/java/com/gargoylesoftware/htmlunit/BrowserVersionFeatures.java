@@ -1136,6 +1136,10 @@ public enum BrowserVersionFeatures {
         @WebBrowser(value = IE, minVersion = 11) })
     JS_ENUM_NUMBERS_FIRST,
 
+    /** Indicates that the default value of subclasses of {@code Error} are not functions. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    JS_ERROR,
+
     /** Indicates that 'exception' (technically NativeError) exposes "stack" property. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     JS_ERROR_STACK,

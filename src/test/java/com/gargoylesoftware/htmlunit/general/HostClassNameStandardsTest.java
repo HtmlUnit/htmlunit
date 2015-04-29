@@ -5017,7 +5017,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function RangeError() {\n    [native code]\n}",
             IE11 = "\nfunction RangeError() {\n    [native code]\n}\n",
             IE8 = "RangeError")
-    @NotYetImplemented(IE8)
     public void rangeError() throws Exception {
         test("RangeError");
     }
@@ -5270,7 +5269,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function URIError() {\n    [native code]\n}",
             IE11 = "\nfunction URIError() {\n    [native code]\n}\n",
             IE8 = "URIError")
-    @NotYetImplemented(IE8)
     public void uriError() throws Exception {
         test("URIError");
     }
@@ -5512,7 +5510,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function SyntaxError() {\n    [native code]\n}",
             IE11 = "\nfunction SyntaxError() {\n    [native code]\n}\n",
             IE8 = "SyntaxError")
-    @NotYetImplemented(IE8)
     public void syntaxError() throws Exception {
         test("SyntaxError");
     }
@@ -6103,7 +6100,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function EvalError() {\n    [native code]\n}",
             IE11 = "\nfunction EvalError() {\n    [native code]\n}\n",
             IE8 = "EvalError")
-    @NotYetImplemented(IE8)
     public void evalError() throws Exception {
         test("EvalError");
     }
@@ -6239,7 +6235,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function ReferenceError() {\n    [native code]\n}",
             IE11 = "\nfunction ReferenceError() {\n    [native code]\n}\n",
             IE8 = "ReferenceError")
-    @NotYetImplemented(IE8)
     public void referenceError() throws Exception {
         test("ReferenceError");
     }
@@ -7775,7 +7770,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF = "function TypeError() {\n    [native code]\n}",
             IE11 = "\nfunction TypeError() {\n    [native code]\n}\n",
             IE8 = "TypeError")
-    @NotYetImplemented(IE8)
     public void typeError() throws Exception {
         test("TypeError");
     }

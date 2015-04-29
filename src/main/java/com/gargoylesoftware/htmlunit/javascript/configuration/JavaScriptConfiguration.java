@@ -62,7 +62,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.TextDecoder;
 import com.gargoylesoftware.htmlunit.javascript.host.TextEncoder;
 import com.gargoylesoftware.htmlunit.javascript.host.Touch;
 import com.gargoylesoftware.htmlunit.javascript.host.TouchList;
-import com.gargoylesoftware.htmlunit.javascript.host.URIError;
 import com.gargoylesoftware.htmlunit.javascript.host.URL;
 import com.gargoylesoftware.htmlunit.javascript.host.URLSearchParams;
 import com.gargoylesoftware.htmlunit.javascript.host.WeakMap;
@@ -515,7 +514,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         TextEncoder.class,
         TextMetrics.class, TextRange.class, TimeEvent.class, TimeRanges.class,
         Touch.class, TouchEvent.class, TouchList.class, TransitionEvent.class, TreeWalker.class,
-        UIEvent.class, Uint16Array.class, Uint32Array.class, Uint8Array.class, Uint8ClampedArray.class, URIError.class,
+        UIEvent.class, Uint16Array.class, Uint32Array.class, Uint8Array.class, Uint8ClampedArray.class,
         URL.class,
         URLSearchParams.class, UserProximityEvent.class, ValidityState.class, WaveShaperNode.class, WeakMap.class,
         WeakSet.class, WebGLRenderingContext.class, webkitRTCPeerConnection.class,
