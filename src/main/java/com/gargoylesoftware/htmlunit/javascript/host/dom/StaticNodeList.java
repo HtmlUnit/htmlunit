@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for a static NodeList.
+ * A JavaScript object for {@code StaticNodeList}.
  *
  * @version $Revision$
  * @author Ahmed Ashour

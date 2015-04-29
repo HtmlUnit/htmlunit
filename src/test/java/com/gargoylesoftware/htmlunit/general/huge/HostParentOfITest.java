@@ -2610,4 +2610,114 @@ public class HostParentOfITest extends HostParentOf {
         test("RadioNodeList", "RadioNodeList");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _MozContactChangeEvent_MozContactChangeEvent() throws Exception {
+        test("MozContactChangeEvent", "MozContactChangeEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _MozMmsEvent_MozMmsEvent() throws Exception {
+        test("MozMmsEvent", "MozMmsEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _MozMmsMessage_MozMmsMessage() throws Exception {
+        test("MozMmsMessage", "MozMmsMessage");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _MozMobileMessageManager_MozMobileMessageManager() throws Exception {
+        test("MozMobileMessageManager", "MozMobileMessageManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _MozMobileMessageThread_MozMobileMessageThread() throws Exception {
+        test("MozMobileMessageThread", "MozMobileMessageThread");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _MozSettingsEvent_MozSettingsEvent() throws Exception {
+        test("MozSettingsEvent", "MozSettingsEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _MozSmsEvent_MozSmsEvent() throws Exception {
+        test("MozSmsEvent", "MozSmsEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _MozSmsFilter_MozSmsFilter() throws Exception {
+        test("MozSmsFilter", "MozSmsFilter");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _MozSmsMessage_MozSmsMessage() throws Exception {
+        test("MozSmsMessage", "MozSmsMessage");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _MozSmsSegmentInfo_MozSmsSegmentInfo() throws Exception {
+        test("MozSmsSegmentInfo", "MozSmsSegmentInfo");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE11 = "true")
+    public void _PositionError_PositionError() throws Exception {
+        test("PositionError", "PositionError");
+    }
+
 }

@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
@@ -3927,7 +3926,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "[object MozSmsSegmentInfo]")
-    @NotYetImplemented(FF31)
     public void mozSmsSegmentInfo() throws Exception {
         test("MozSmsSegmentInfo");
     }
@@ -3950,7 +3948,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "[object MozMobileMessageThread]")
-    @NotYetImplemented(FF31)
     public void mozMobileMessageThread() throws Exception {
         test("MozMobileMessageThread");
     }
@@ -4067,7 +4064,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE11 = "[object PositionError]")
-    @NotYetImplemented(IE11)
     public void positionError() throws Exception {
         test("PositionError");
     }
@@ -4183,7 +4179,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "[object MozMmsMessage]")
-    @NotYetImplemented(FF31)
     public void mozMmsMessage() throws Exception {
         test("MozMmsMessage");
     }
@@ -4194,7 +4189,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "[object MozSmsFilter]")
-    @NotYetImplemented(FF31)
     public void mozSmsFilter() throws Exception {
         test("MozSmsFilter");
     }
@@ -4324,7 +4318,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE11 = "[object XMLHttpRequestEventTarget]")
-    @NotYetImplemented(IE11)
     public void xMLHttpRequestEventTarget() throws Exception {
         test("XMLHttpRequestEventTarget");
     }
@@ -4804,7 +4797,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "[object MozMobileMessageManager]")
-    @NotYetImplemented(FF31)
     public void mozMobileMessageManager() throws Exception {
         test("MozMobileMessageManager");
     }
@@ -4860,7 +4852,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF31 = "[object MozSmsMessage]")
-    @NotYetImplemented(FF31)
     public void mozSmsMessage() throws Exception {
         test("MozSmsMessage");
     }
@@ -5857,6 +5848,88 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts("exception")
     public void abstractList() throws Exception {
         test("AbstractList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function BatteryManager() { [native code] }",
+            FF31 = "function BatteryManager() {\n    [native code]\n}")
+    public void batteryManager() throws Exception {
+        test("BatteryManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function GamepadButton() {\n    [native code]\n}")
+    public void gamepadButton() throws Exception {
+        test("GamepadButton");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Gamepad() { [native code] }",
+            FF31 = "function Gamepad() {\n    [native code]\n}")
+    public void gamepad() throws Exception {
+        test("Gamepad");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function MozContactChangeEvent() {\n    [native code]\n}")
+    public void mozContactChangeEvent() throws Exception {
+        test("MozContactChangeEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function MozSmsEvent() {\n    [native code]\n}")
+    public void mozSmsEvent() throws Exception {
+        test("MozSmsEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function MozMmsEvent() {\n    [native code]\n}")
+    public void mozMmsEvent() throws Exception {
+        test("MozMmsEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function MozSettingsEvent() {\n    [native code]\n}")
+    public void mozSettingsEvent() throws Exception {
+        test("MozSettingsEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF31 = "function Proxy() {\n    [native code]\n}")
+    public void proxy() throws Exception {
+        test("Proxy");
     }
 
 }

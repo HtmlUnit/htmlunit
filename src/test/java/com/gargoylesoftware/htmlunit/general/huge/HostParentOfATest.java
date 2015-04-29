@@ -5554,4 +5554,93 @@ public class HostParentOfATest extends HostParentOf {
         test("FileRequest", "FileRequest");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _EventTarget_MozMobileMessageManager() throws Exception {
+        test("EventTarget", "MozMobileMessageManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _Event_MozContactChangeEvent() throws Exception {
+        test("Event", "MozContactChangeEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _Event_MozMmsEvent() throws Exception {
+        test("Event", "MozMmsEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _Event_MozSettingsEvent() throws Exception {
+        test("Event", "MozSettingsEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _Event_MozSmsEvent() throws Exception {
+        test("Event", "MozSmsEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF31 = "true")
+    public void _GamepadButton_GamepadButton() throws Exception {
+        test("GamepadButton", "GamepadButton");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _BatteryManager_BatteryManager() throws Exception {
+        test("BatteryManager", "BatteryManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _EventTarget_BatteryManager() throws Exception {
+        test("EventTarget", "BatteryManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _Gamepad_Gamepad() throws Exception {
+        test("Gamepad", "Gamepad");
+    }
 }

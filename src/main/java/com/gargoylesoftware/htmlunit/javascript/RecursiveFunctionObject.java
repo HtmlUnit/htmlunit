@@ -195,8 +195,14 @@ public class RecursiveFunctionObject extends FunctionObject {
      */
     @Override
     public Object get(final String name, final Scriptable start) {
-        if ("prototype".equals(name) && "CSS".equals(super.getFunctionName())) {
-            return NOT_FOUND;
+        if ("prototype".equals(name)) {
+            switch(super.getFunctionName()) {
+                case "CSS":
+                case "Proxy":
+                    return NOT_FOUND;
+
+                default:
+            }
         }
         return super.get(name, start);
     }

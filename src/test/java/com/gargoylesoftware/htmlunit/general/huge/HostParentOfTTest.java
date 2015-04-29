@@ -540,4 +540,14 @@ public class HostParentOfTTest extends HostParentOf {
         test("ValidityState", "ValidityState");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE11 = "true")
+    public void _XMLHttpRequestEventTarget_XMLHttpRequestEventTarget() throws Exception {
+        test("XMLHttpRequestEventTarget", "XMLHttpRequestEventTarget");
+    }
+
 }

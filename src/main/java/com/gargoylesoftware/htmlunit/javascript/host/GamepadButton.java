@@ -12,9 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.media;
+package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -23,18 +22,19 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for {@code AudioParam}.
+ * A JavaScript object for {@code GamepadButton}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF) })
-public class AudioParam extends SimpleScriptable {
+@JsxClass(browsers = @WebBrowser(FF))
+public class GamepadButton extends SimpleScriptable {
 
     /**
-     * Creates a new instance.
+     * Creates an instance.
      */
     @JsxConstructor
-    public AudioParam() {
+    public GamepadButton() {
     }
+
 }

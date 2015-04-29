@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -3890,7 +3889,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF31 = "object")
-    @NotYetImplemented(FF31)
     public void mozSmsSegmentInfo() throws Exception {
         test("MozSmsSegmentInfo");
     }
@@ -3913,7 +3911,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF31 = "object")
-    @NotYetImplemented(FF31)
     public void mozMobileMessageThread() throws Exception {
         test("MozMobileMessageThread");
     }
@@ -4030,7 +4027,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE11 = "object")
-    @NotYetImplemented(IE11)
     public void positionError() throws Exception {
         test("PositionError");
     }
@@ -4146,7 +4142,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF31 = "object")
-    @NotYetImplemented(FF31)
     public void mozMmsMessage() throws Exception {
         test("MozMmsMessage");
     }
@@ -4192,7 +4187,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE8 = "object")
-    @NotYetImplemented(IE8)
     public void xDomainRequest() throws Exception {
         test("XDomainRequest");
     }
@@ -4287,7 +4281,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             IE11 = "object")
-    @NotYetImplemented(IE11)
     public void xMLHttpRequestEventTarget() throws Exception {
         test("XMLHttpRequestEventTarget");
     }
@@ -4765,7 +4758,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF31 = "object")
-    @NotYetImplemented(FF31)
     public void mozMobileMessageManager() throws Exception {
         test("MozMobileMessageManager");
     }
@@ -4822,7 +4814,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF31 = "object")
-    @NotYetImplemented(FF31)
     public void mozSmsMessage() throws Exception {
         test("MozSmsMessage");
     }
@@ -5767,6 +5758,86 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts("undefined")
     public void abstractList() throws Exception {
         test("AbstractList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void batteryManager() throws Exception {
+        test("BatteryManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
+    public void gamepadButton() throws Exception {
+        test("GamepadButton");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void gamepad() throws Exception {
+        test("Gamepad");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
+    public void mozContactChangeEvent() throws Exception {
+        test("MozContactChangeEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
+    public void mozSmsEvent() throws Exception {
+        test("MozSmsEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
+    public void mozMmsEvent() throws Exception {
+        test("MozMmsEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
+    public void mozSettingsEvent() throws Exception {
+        test("MozSettingsEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF31 = "function")
+    public void proxy() throws Exception {
+        test("Proxy");
     }
 
 }

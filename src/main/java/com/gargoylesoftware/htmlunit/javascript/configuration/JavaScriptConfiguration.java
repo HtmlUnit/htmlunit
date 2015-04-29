@@ -22,6 +22,7 @@ import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 import com.gargoylesoftware.htmlunit.javascript.host.ApplicationCache;
+import com.gargoylesoftware.htmlunit.javascript.host.BatteryManager;
 import com.gargoylesoftware.htmlunit.javascript.host.BoxObject;
 import com.gargoylesoftware.htmlunit.javascript.host.ClientRect;
 import com.gargoylesoftware.htmlunit.javascript.host.ClientRectList;
@@ -31,6 +32,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.DeviceStorage;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.External;
+import com.gargoylesoftware.htmlunit.javascript.host.Gamepad;
+import com.gargoylesoftware.htmlunit.javascript.host.GamepadButton;
 import com.gargoylesoftware.htmlunit.javascript.host.History;
 import com.gargoylesoftware.htmlunit.javascript.host.KeyboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.Location;
@@ -48,6 +51,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Plugin;
 import com.gargoylesoftware.htmlunit.javascript.host.PluginArray;
 import com.gargoylesoftware.htmlunit.javascript.host.Popup;
 import com.gargoylesoftware.htmlunit.javascript.host.Promise;
+import com.gargoylesoftware.htmlunit.javascript.host.Proxy;
 import com.gargoylesoftware.htmlunit.javascript.host.Screen;
 import com.gargoylesoftware.htmlunit.javascript.host.Set;
 import com.gargoylesoftware.htmlunit.javascript.host.SharedWorker;
@@ -195,6 +199,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.file.LockedFile;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Coordinates;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Position;
+import com.gargoylesoftware.htmlunit.javascript.host.geo.PositionError;
 import com.gargoylesoftware.htmlunit.javascript.host.html.*;
 import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBCursor;
 import com.gargoylesoftware.htmlunit.javascript.host.idb.IDBCursorWithValue;
@@ -248,6 +253,16 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.mozRTCIceCandidat
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.mozRTCPeerConnection;
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.mozRTCSessionDescription;
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.webkitRTCPeerConnection;
+import com.gargoylesoftware.htmlunit.javascript.host.moz.MozContactChangeEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.moz.MozMmsEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.moz.MozMmsMessage;
+import com.gargoylesoftware.htmlunit.javascript.host.moz.MozMobileMessageManager;
+import com.gargoylesoftware.htmlunit.javascript.host.moz.MozMobileMessageThread;
+import com.gargoylesoftware.htmlunit.javascript.host.moz.MozSettingsEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.moz.MozSmsEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.moz.MozSmsFilter;
+import com.gargoylesoftware.htmlunit.javascript.host.moz.MozSmsMessage;
+import com.gargoylesoftware.htmlunit.javascript.host.moz.MozSmsSegmentInfo;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.Performance;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.PerformanceNavigation;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.PerformanceTiming;
@@ -349,8 +364,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.worker.ServiceWorkerContain
 import com.gargoylesoftware.htmlunit.javascript.host.worker.ServiceWorkerRegistration;
 import com.gargoylesoftware.htmlunit.javascript.host.worker.Worker;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.FormData;
+import com.gargoylesoftware.htmlunit.javascript.host.xml.XDomainRequest;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest;
+import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequestEventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLSerializer;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XSLTProcessor;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XSLTemplate;
@@ -373,7 +390,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         ArrayBuffer.class, ArrayBufferView.class, ArrayBufferViewBase.class,
         Attr.class, ActiveXObject.class, ApplicationCache.class, AudioBuffer.class,
         AudioBufferSourceNode.class, AudioContext.class, AudioDestinationNode.class, AudioListener.class,
-        AudioNode.class, AudioParam.class, AudioProcessingEvent.class, BiquadFilterNode.class,
+        AudioNode.class, AudioParam.class, AudioProcessingEvent.class, BatteryManager.class, BiquadFilterNode.class,
         BeforeUnloadEvent.class, Blob.class, BlobEvent.class, BoxObject.class, CanvasGradient.class,
         CanvasPattern.class, CanvasRenderingContext2D.class, CaretPosition.class, CDATASection.class,
         ChannelMergerNode.class, ChannelSplitterNode.class, CharacterData.class, ClientRect.class, ClientRectList.class,
@@ -394,8 +411,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         Element.class, Enumerator.class, ErrorEvent.class, Event.class, EventNode.class, EventSource.class,
         EventTarget.class, External.class, File.class, FileError.class, FileHandle.class, FileList.class,
         FileReader.class, FileRequest.class, Float32Array.class, Float64Array.class, FocusEvent.class,
-        FormChild.class, FormData.class, FormField.class, GainNode.class, GamepadEvent.class, Geolocation.class,
-        HashChangeEvent.class, History.class,
+        FormChild.class, FormData.class, FormField.class, GainNode.class, Gamepad.class, GamepadButton.class,
+        GamepadEvent.class, Geolocation.class, HashChangeEvent.class, History.class,
         HTMLAllCollection.class,
         HTMLAnchorElement.class, HTMLAppletElement.class, HTMLAreaElement.class, HTMLAudioElement.class,
         HTMLBGSoundElement.class,
@@ -443,7 +460,11 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         MediaStreamEvent.class, MediaStreamTrack.class, MessageChannel.class,
         MessageEvent.class, MessagePort.class, MimeType.class, MimeTypeArray.class, MouseEvent.class,
         MouseScrollEvent.class, MouseWheelEvent.class,
-        mozRTCIceCandidate.class, mozRTCPeerConnection.class, mozRTCSessionDescription.class,
+        MozContactChangeEvent.class,
+        MozMobileMessageManager.class, MozMobileMessageThread.class,
+        MozSmsEvent.class, MozSmsFilter.class, MozSmsMessage.class, MozSmsSegmentInfo.class,
+        MozMmsEvent.class, MozMmsMessage.class,
+        mozRTCIceCandidate.class, MozSettingsEvent.class, mozRTCPeerConnection.class, mozRTCSessionDescription.class,
         MutationEvent.class, MutationObserver.class, MutationRecord.class, NamedNodeMap.class, Namespace.class,
         NamespaceCollection.class, Navigator.class,
         Node.class, NodeFilter.class, NodeIterator.class, NodeList.class, Notification.class,
@@ -451,9 +472,9 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         OfflineAudioContext.class, Option.class, OscillatorNode.class, PageTransitionEvent.class, PannerNode.class,
         Path2D.class, PeriodicWave.class, Performance.class, PerformanceNavigation.class, PerformanceTiming.class,
         Plugin.class, PluginArray.class, PointerEvent.class, Popup.class, PopStateEvent.class,
-        Position.class,
+        Position.class, PositionError.class,
         ProcessingInstruction.class, ProgressEvent.class,
-        Promise.class, RadioNodeList.class, Range.class, RowContainer.class, RTCDataChannelEvent.class,
+        Promise.class, Proxy.class, RadioNodeList.class, Range.class, RowContainer.class, RTCDataChannelEvent.class,
         RTCIceCandidate.class, RTCPeerConnectionIceEvent.class, RTCSessionDescription.class,
         Screen.class, ScriptProcessorNode.class, Selection.class, ServiceWorker.class, ServiceWorkerContainer.class,
         ServiceWorkerRegistration.class, Set.class, ShadowRoot.class, SharedWorker.class, SimpleArray.class,
@@ -498,9 +519,9 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         URL.class,
         URLSearchParams.class, UserProximityEvent.class, ValidityState.class, WaveShaperNode.class, WeakMap.class,
         WeakSet.class, WebGLRenderingContext.class, webkitRTCPeerConnection.class,
-        WebSocket.class, WheelEvent.class, Window.class, Worker.class, XMLDocument.class,
-        XMLHttpRequest.class, XMLSerializer.class, XPathEvaluator.class, XPathNSResolver.class, XPathResult.class,
-        XSLTProcessor.class, XSLTemplate.class};
+        WebSocket.class, WheelEvent.class, Window.class, Worker.class, XMLDocument.class, XDomainRequest.class,
+        XMLHttpRequest.class, XMLHttpRequestEventTarget.class, XMLSerializer.class, XPathEvaluator.class,
+        XPathNSResolver.class, XPathResult.class, XSLTProcessor.class, XSLTemplate.class};
 
     /** Cache of browser versions and their corresponding JavaScript configurations. */
     private static final Map<BrowserVersion, JavaScriptConfiguration> CONFIGURATION_MAP_ =
