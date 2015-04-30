@@ -73,8 +73,8 @@ class NativeFunctionToStringFunction extends FunctionWrapper {
 
         if (thisObj instanceof BaseFunction && s.indexOf("[native code]") > -1) {
             final String functionName = ((BaseFunction) thisObj).getFunctionName();
-            if (thisObj instanceof IdFunctionObject && functionName.length() > 5 &&
-                    functionName.endsWith("Error")
+            if (thisObj instanceof IdFunctionObject && functionName.length() > 5
+                    && functionName.endsWith("Error")
                     && ((Window) scope).getWebWindow().getWebClient().getBrowserVersion().hasFeature(JS_ERROR)) {
                 return functionName;
             }

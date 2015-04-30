@@ -524,8 +524,7 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE8 = "false")
+    @Alerts("true")
     public void _URIError_URIError() throws Exception {
         test("URIError", "URIError");
     }
