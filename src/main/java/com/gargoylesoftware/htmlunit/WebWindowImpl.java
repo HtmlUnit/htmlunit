@@ -61,14 +61,6 @@ public abstract class WebWindowImpl implements WebWindow {
     private int outerWidth_;
 
     /**
-     * Never call this, used for Serialization.
-     */
-    @Deprecated
-    protected WebWindowImpl() {
-        // Empty.
-    }
-
-    /**
      * Creates a window and associates it with the client.
      *
      * @param webClient the web client that "owns" this window

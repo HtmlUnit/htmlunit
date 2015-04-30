@@ -626,15 +626,6 @@ public class JavaScriptEngine {
     }
 
     /**
-     * Shutdown JavaScriptExecutor.
-     * @deprecated as of 2.15, please use {@link #shutdown()} instead
-     */
-    @Deprecated
-    public void shutdownJavaScriptExecutor() {
-        shutdown();
-    }
-
-    /**
      * Shutdown the JavaScriptEngine.
      */
     public void shutdown() {

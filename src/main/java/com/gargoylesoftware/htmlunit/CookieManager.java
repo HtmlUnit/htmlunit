@@ -17,17 +17,14 @@ package com.gargoylesoftware.htmlunit;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.cookie.CookieOrigin;
-import org.apache.http.cookie.CookieSpec;
 
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
 import com.gargoylesoftware.htmlunit.util.Cookie;
@@ -52,8 +49,6 @@ public class CookieManager implements Serializable {
 
     /** The cookies added to this cookie manager. */
     private final Set<Cookie> cookies_ = new LinkedHashSet<>();
-
-    private final transient CookieSpec cookieSpec_ = new HtmlUnitBrowserCompatCookieSpec(null);
 
     /**
      * Creates a new instance.
@@ -91,44 +86,6 @@ public class CookieManager implements Serializable {
         final Set<Cookie> copy = new LinkedHashSet<>();
         copy.addAll(cookies_);
         return Collections.unmodifiableSet(copy);
-    }
-
-    /**
-     * Returns the currently configured cookies applicable to the specified URL, in an unmodifiable set.
-     * If disabled, this returns an empty set.
-     * @param url the URL on which to filter the returned cookies
-     * @return the currently configured cookies applicable to the specified URL, in an unmodifiable set
-     *
-     * @deprecated as of 2.15 use {@link WebClient#getCookies(URL)}
-     */
-    @Deprecated
-    public synchronized Set<Cookie> getCookies(final URL url) {
-        if (!isCookiesEnabled()) {
-            return Collections.<Cookie>emptySet();
-        }
-
-        final String host = url.getHost();
-        // URLs like "about:blank" don't have cookies and we need to catch these
-        // cases here before HttpClient complains
-        if (host.isEmpty()) {
-            return Collections.emptySet();
-        }
-
-        // discard expired cookies
-        clearExpired(new Date());
-
-        final org.apache.http.cookie.Cookie[] all = Cookie.toHttpClient(cookies_);
-        final CookieOrigin cookieOrigin = buildCookieOrigin(url);
-        final List<org.apache.http.cookie.Cookie> matches = new ArrayList<>();
-        for (final org.apache.http.cookie.Cookie cookie : all) {
-            if (cookieSpec_.match(cookie, cookieOrigin)) {
-                matches.add(cookie);
-            }
-        }
-
-        final Set<Cookie> cookies = new LinkedHashSet<>();
-        cookies.addAll(Cookie.fromHttpClient(matches));
-        return Collections.unmodifiableSet(cookies);
     }
 
     /**

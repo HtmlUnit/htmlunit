@@ -38,10 +38,8 @@ public class Namespace extends SimpleScriptable {
     private String urn_;
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor.
-     * Don't call.
+     * Creates an instance.
      */
-    @Deprecated
     public Namespace() {
         // Empty.
     }

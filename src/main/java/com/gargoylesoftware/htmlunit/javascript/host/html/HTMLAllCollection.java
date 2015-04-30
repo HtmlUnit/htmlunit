@@ -54,12 +54,9 @@ public class HTMLAllCollection extends HTMLCollection {
 
     /**
      * Creates an instance.
-     * Don't call.
      */
-    @Deprecated
     @JsxConstructor(@WebBrowser(CHROME))
     public HTMLAllCollection() {
-        // Empty.
     }
 
     /**

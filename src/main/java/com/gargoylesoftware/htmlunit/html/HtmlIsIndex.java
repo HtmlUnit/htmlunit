@@ -21,8 +21,7 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
- * Wrapper for the HTML element "isindex". Note that this element has been
- * deprecated in the HTML spec.
+ * Wrapper for the HTML element "isindex". Note that this element has been deprecated in the HTML spec.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

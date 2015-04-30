@@ -176,14 +176,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     private final Object domListeners_lock_ = new Serializable() { };
 
     /**
-     * Never call this, used for Serialization.
-     */
-    @Deprecated
-    protected DomNode() {
-        this(null);
-    }
-
-    /**
      * Creates a new instance.
      * @param page the page which contains this node
      */
