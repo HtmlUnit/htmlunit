@@ -1154,6 +1154,8 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            IE8 = "true")
     public void isDisplayed() throws Exception {
         final String html = "<html><head>\n"
             + "</head>\n"
@@ -1165,6 +1167,6 @@ public class HtmlElementTest extends SimpleWebTestCase {
         getWebClient().getOptions().setJavaScriptEnabled(false);
         final HtmlPage page = loadPage(html);
         assertTrue(page.getElementById("d1").isDisplayed());
-        assertFalse(page.getElementById("d2").isDisplayed());
+        assertEquals(Boolean.parseBoolean(getExpectedAlerts()[0]), page.getElementById("d2").isDisplayed());
     }
 }
