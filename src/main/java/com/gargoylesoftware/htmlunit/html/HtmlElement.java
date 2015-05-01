@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.BUTTON_EMPTY_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_INPUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_USES_POINTEREVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_PROPERTY_CHANGE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ATTRIBUTE_HIDDEN_IGNORED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.KEYBOARD_EVENT_SPECIAL_KEYPRESS;
 
 import java.io.IOException;
@@ -1655,6 +1656,19 @@ public abstract class HtmlElement extends DomElement {
     @Override
     public DomNode querySelector(final String selectors) {
         return super.querySelector(selectors);
+    }
+
+    /**
+     * {@inheritDoc}
+     * Overwritten to support the hidden attribute (html5).
+     */
+    @Override
+    public boolean isDisplayed() {
+        if (!hasFeature(HTMLELEMENT_ATTRIBUTE_HIDDEN_IGNORED)
+                && DomElement.ATTRIBUTE_NOT_DEFINED != getAttribute("hidden")) {
+            return false;
+        }
+        return super.isDisplayed();
     }
 
     /**

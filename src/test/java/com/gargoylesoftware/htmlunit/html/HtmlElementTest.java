@@ -1150,4 +1150,21 @@ public class HtmlElementTest extends SimpleWebTestCase {
         assertEquals(htmlDiv2XML, page.getElementById("div2").asXml());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void isDisplayed() throws Exception {
+        final String html = "<html><head>\n"
+            + "</head>\n"
+            + "</body>\n"
+            + "<div id='d1'>hello</div>\n"
+            + "<div id='d2' hidden>world</div>\n"
+            + "</body></html>";
+
+        getWebClient().getOptions().setJavaScriptEnabled(false);
+        final HtmlPage page = loadPage(html);
+        assertTrue(page.getElementById("d1").isDisplayed());
+        assertFalse(page.getElementById("d2").isDisplayed());
+    }
 }

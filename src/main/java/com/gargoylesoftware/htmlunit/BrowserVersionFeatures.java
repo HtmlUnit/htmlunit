@@ -505,6 +505,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     HTMLELEMENT_ATTRIBUTE_FIX_IN_QUIRKS_MODE,
 
+    /** The html5 hidden attribute is not supported. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    HTMLELEMENT_ATTRIBUTE_HIDDEN_IGNORED,
+
     /** Indicates that element.innerHTML/outerHTML the tag name is in upper case or not. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     HTMLELEMENT_OUTER_HTML_UPPER_CASE,
