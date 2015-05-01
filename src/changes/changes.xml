@@ -23,7 +23,7 @@
         </release>
         <release version="2.16" date="Apr 20, 2015" description="Java 7, WebClient.close(), FF31, IE11 progress, Chrome progress, Bugfixes">
             <action type="fix" dev="rbri">
-                CSS selectors checking for an empty attribute (e.g. [data-section='']) are checking not the existence
+                CSS selectors checking for an empty attribute (e.g. [data-section='']) are checking now the existence
                 of the attribute also.
             </action>
             <action type="update" dev="asashour">
