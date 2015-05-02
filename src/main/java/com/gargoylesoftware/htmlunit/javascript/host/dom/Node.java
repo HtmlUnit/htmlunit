@@ -763,8 +763,7 @@ public class Node extends EventTarget {
      * @return the result
      */
     public static ScriptResult fireEvent(final SimpleScriptable scriptable, final Event event) {
-        final HtmlPage page = (HtmlPage) scriptable.getDomNodeOrDie().getPage();
-        final Window window = (Window) page.getEnclosingWindow().getScriptObject();
+        final Window window = (Window) scriptable.getWindow();
         final Object[] args = new Object[] {event};
 
         event.startFire();
@@ -783,7 +782,7 @@ public class Node extends EventTarget {
                 return result;
             }
             final List<DomNode> parents = new ArrayList<>();
-            DomNode node = scriptable.getDomNodeOrDie();
+            DomNode node = scriptable.getDomNodeOrNull();
             while (node != null) {
                 parents.add(node);
                 node = node.getParentNode();
@@ -814,7 +813,7 @@ public class Node extends EventTarget {
 
             // bubbling phase
             event.setEventPhase(Event.AT_TARGET);
-            node = scriptable.getDomNodeOrDie();
+            node = scriptable.getDomNodeOrNull();
             while (node != null) {
                 final Node jsNode = (Node) node.getScriptObject();
                 final EventListenersContainer elc = jsNode.eventListenersContainer_;
