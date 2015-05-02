@@ -16,9 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NODE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CALL_RESULT_IS_LAST_RETURN_VALUE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLONE_NODE_COPIES_EVENT_LISTENERS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_CHILDNODES_IGNORE_EMPTY_TEXT_NODES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_COMPARE_DOCUMENT_POSITION_ALLOW_INVALID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG;
@@ -32,7 +30,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -42,18 +39,14 @@ import net.sourceforge.htmlunit.corejs.javascript.RhinoException;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
@@ -63,9 +56,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
-import com.gargoylesoftware.htmlunit.javascript.host.Event;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContainer;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLSerializer;
@@ -96,8 +86,6 @@ public class Node extends EventTarget {
 
     /** "Live" child nodes collection; has to be a member to have equality (==) working. */
     private NodeList childNodes_;
-
-    private EventListenersContainer eventListenersContainer_;
 
     /** @see org.w3c.dom.Node#ELEMENT_NODE */
     @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
@@ -685,30 +673,6 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Allows the registration of event listeners on the event target.
-     * @param type the event type to listen for (like "click")
-     * @param listener the event listener
-     * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture
-     * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener">Mozilla documentation</a>
-     * @see #attachEvent(String, Function)
-     */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
-    public void addEventListener(final String type, final Scriptable listener, final boolean useCapture) {
-        getEventListenersContainer().addEventListener(type, listener, useCapture);
-    }
-
-    /**
-     * Gets the container for event listeners.
-     * @return the container (newly created if needed)
-     */
-    private EventListenersContainer getEventListenersContainer() {
-        if (eventListenersContainer_ == null) {
-            eventListenersContainer_ = new EventListenersContainer(this);
-        }
-        return eventListenersContainer_;
-    }
-
-    /**
      * Allows the removal of event listeners on the event target.
      * @param type the event type to listen for (like "onclick")
      * @param listener the event listener
@@ -717,182 +681,6 @@ public class Node extends EventTarget {
     @JsxFunction(@WebBrowser(IE))
     public void detachEvent(final String type, final Function listener) {
         removeEventListener(StringUtils.substring(type, 2), listener, false);
-    }
-
-    /**
-     * Allows the removal of event listeners on the event target.
-     * @param type the event type to listen for (like "click")
-     * @param listener the event listener
-     * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
-     * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.removeEventListener">Mozilla
-     * documentation</a>
-     */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
-    public void removeEventListener(final String type, final Function listener, final boolean useCapture) {
-        getEventListenersContainer().removeEventListener(type, listener, useCapture);
-    }
-
-    /**
-     * Executes the event on this object only (needed for instance for onload on (i)frame tags).
-     * @param event the event
-     * @return the result
-     */
-    public ScriptResult executeEvent(final Event event) {
-        if (eventListenersContainer_ != null) {
-            final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
-            final Window window = (Window) page.getEnclosingWindow().getScriptObject();
-            return window.executeEvent(event, eventListenersContainer_);
-        }
-
-        return null;
-    }
-
-    /**
-     * Fires the event on the node with capturing and bubbling phase.
-     * @param event the event
-     * @return the result
-     */
-    public ScriptResult fireEvent(final Event event) {
-        return fireEvent(this, event);
-    }
-
-    /**
-     * Fires the event on the node with capturing and bubbling phase.
-     * @param scriptable the scriptable to fire the event
-     * @param event the event
-     * @return the result
-     */
-    public static ScriptResult fireEvent(final SimpleScriptable scriptable, final Event event) {
-        final Window window = (Window) scriptable.getWindow();
-        final Object[] args = new Object[] {event};
-
-        event.startFire();
-        ScriptResult result = null;
-        final Event previousEvent = window.getCurrentEvent();
-        window.setCurrentEvent(event);
-
-        try {
-            // window's listeners
-            final EventListenersContainer windowsListeners = scriptable.getWindow().getEventListenersContainer();
-
-            // capturing phase
-            event.setEventPhase(Event.CAPTURING_PHASE);
-            result = windowsListeners.executeCapturingListeners(event, args);
-            if (event.isPropagationStopped()) {
-                return result;
-            }
-            final List<DomNode> parents = new ArrayList<>();
-            DomNode node = scriptable.getDomNodeOrNull();
-            while (node != null) {
-                parents.add(node);
-                node = node.getParentNode();
-            }
-
-            final boolean ie = scriptable.getBrowserVersion().hasFeature(JS_CALL_RESULT_IS_LAST_RETURN_VALUE);
-            for (int i = parents.size() - 1; i >= 0; i--) {
-                final DomNode curNode = parents.get(i);
-                final Node jsNode = (Node) curNode.getScriptObject();
-                final EventListenersContainer elc = jsNode.eventListenersContainer_;
-                if (elc != null) {
-                    final ScriptResult r = elc.executeCapturingListeners(event, args);
-                    result = ScriptResult.combine(r, result, ie);
-                    if (event.isPropagationStopped()) {
-                        return result;
-                    }
-                }
-            }
-
-            // handlers declared as property on a node don't receive the event as argument for IE
-            final Object[] propHandlerArgs;
-            if (scriptable.getBrowserVersion().hasFeature(JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT)) {
-                propHandlerArgs = ArrayUtils.EMPTY_OBJECT_ARRAY;
-            }
-            else {
-                propHandlerArgs = args;
-            }
-
-            // bubbling phase
-            event.setEventPhase(Event.AT_TARGET);
-            node = scriptable.getDomNodeOrNull();
-            while (node != null) {
-                final Node jsNode = (Node) node.getScriptObject();
-                final EventListenersContainer elc = jsNode.eventListenersContainer_;
-                if (elc != null) {
-                    final ScriptResult r = elc.executeBubblingListeners(event, args, propHandlerArgs);
-                    result = ScriptResult.combine(r, result, ie);
-                    if (event.isPropagationStopped()) {
-                        return result;
-                    }
-                }
-                node = node.getParentNode();
-                event.setEventPhase(Event.BUBBLING_PHASE);
-            }
-
-            final ScriptResult r = windowsListeners.executeBubblingListeners(event, args, propHandlerArgs);
-            result = ScriptResult.combine(r, result, ie);
-        }
-        finally {
-            event.endFire();
-            window.setCurrentEvent(previousEvent); // reset event
-        }
-
-        return result;
-    }
-
-    /**
-     * Returns the specified event handler.
-     * @param eventName the event name (e.g. "onclick")
-     * @return the handler function, or <tt>null</tt> if the property is null or not a function
-     */
-    public Function getEventHandler(final String eventName) {
-        if (eventListenersContainer_ == null) {
-            return null;
-        }
-        return eventListenersContainer_.getEventHandler(StringUtils.substring(eventName, 2));
-    }
-
-    /**
-     * Returns <tt>true</tt> if there are any event handlers for the specified event.
-     * @param eventName the event name (e.g. "onclick")
-     * @return <tt>true</tt> if there are any event handlers for the specified event, <tt>false</tt> otherwise
-     */
-    public boolean hasEventHandlers(final String eventName) {
-        if (eventListenersContainer_ == null) {
-            return false;
-        }
-        return eventListenersContainer_.hasEventHandlers(StringUtils.substring(eventName, 2));
-    }
-
-    /**
-     * Defines an event handler.
-     * @param eventName the event name (e.g. "onclick")
-     * @param eventHandler the handler (<code>null</code> to reset it)
-     */
-    public void setEventHandler(final String eventName, final Function eventHandler) {
-        setEventHandlerProp(eventName, eventHandler);
-    }
-
-    /**
-     * Defines an event handler (or maybe any other object).
-     * @param eventName the event name (e.g. "onclick")
-     * @param value the property (<code>null</code> to reset it)
-     */
-    protected void setEventHandlerProp(final String eventName, final Object value) {
-        getEventListenersContainer().setEventHandlerProp(StringUtils.substring(eventName.toLowerCase(), 2), value);
-    }
-
-    /**
-     * Gets the property defined as event handler (not necessary a Function if something else has been set).
-     * @param eventName the event name (e.g. "onclick")
-     * @return the property
-     */
-    protected Object getEventHandlerProp(final String eventName) {
-        if (eventListenersContainer_ == null) {
-            return null;
-        }
-
-        final String name = StringUtils.substring(eventName.toLowerCase(Locale.ENGLISH), 2);
-        return eventListenersContainer_.getEventHandlerProp(name);
     }
 
     /**

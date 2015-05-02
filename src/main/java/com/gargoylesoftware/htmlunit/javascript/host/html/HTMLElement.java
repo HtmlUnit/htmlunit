@@ -78,7 +78,6 @@ import org.w3c.css.sac.CSSException;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
-import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
@@ -166,7 +165,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.BoxObject;
 import com.gargoylesoftware.htmlunit.javascript.host.ClientRect;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
-import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
@@ -2076,34 +2074,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             uniqueID_ = "ms__id" + UniqueID_Counter_++;
         }
         return uniqueID_;
-    }
-
-    /**
-     * Dispatches an event into the event system (standards-conformant browsers only). See
-     * <a href="https://developer.mozilla.org/en-US/docs/DOM/element.dispatchEvent">the Gecko
-     * DOM reference</a> for more information.
-     *
-     * @param event the event to be dispatched
-     * @return <tt>false</tt> if at least one of the event handlers which handled the event
-     *         called <tt>preventDefault</tt>; <tt>true</tt> otherwise
-     */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
-    public boolean dispatchEvent(final Event event) {
-        event.setTarget(this);
-        final HtmlElement element = getDomNodeOrDie();
-        ScriptResult result = null;
-        if (event.getType().equals(MouseEvent.TYPE_CLICK)) {
-            try {
-                element.click(event);
-            }
-            catch (final IOException e) {
-                throw Context.reportRuntimeError("Error calling click(): " + e.getMessage());
-            }
-        }
-        else {
-            result = fireEvent(event);
-        }
-        return !event.isAborted(result);
     }
 
     /**
