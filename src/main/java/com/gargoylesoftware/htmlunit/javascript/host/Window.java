@@ -1278,6 +1278,24 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
+     * Returns the value of the window's {@code onmessage} property.
+     * @return the value of the window's {@code onmessage} property
+     */
+    @JsxGetter
+    public Object getOnmessage() {
+        return getHandlerForJavaScript(Event.TYPE_MESSAGE);
+    }
+
+    /**
+     * Sets the value of the window's {@code onmessage} property.
+     * @param onmessage the value of the window's {@code onmessage} property
+     */
+    @JsxSetter
+    public void setOnmessage(final Object onmessage) {
+        setHandlerForJavaScript(Event.TYPE_MESSAGE, onmessage);
+    }
+
+    /**
      * Triggers the <tt>onerror</tt> handler, if one has been set.
      * @param e the error that needs to be reported
      */
@@ -2149,10 +2167,11 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Posts a message.
      * @param message the object passed to the window
      * @param targetOrigin the origin this window must be for the event to be dispatched
+     * @param transfer an optional sequence of Transferable objects
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.postMessage">MDN documentation</a>
      */
     @JsxFunction
-    public void postMessage(final String message, final String targetOrigin) {
+    public void postMessage(final String message, final String targetOrigin, final Object transfer) {
         final URL currentURL = getWebWindow().getEnclosedPage().getUrl();
         if (!"*".equals(targetOrigin)) {
             URL targetURL = null;
@@ -2180,7 +2199,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         final MessageEvent event = new MessageEvent();
         final String origin = currentURL.getProtocol() + "://" + currentURL.getHost() + ':' + currentURL.getPort();
         final boolean cancelable = getBrowserVersion().hasFeature(JS_WINDOW_POST_MESSAGE_CANCELABLE);
-        event.initMessageEvent(Event.TYPE_MESSAGE, false, cancelable, message, origin, "", this);
+        event.initMessageEvent(Event.TYPE_MESSAGE, false, cancelable, message, origin, "", this, transfer);
         event.setParentScope(this);
         event.setPrototype(getPrototype(event.getClass()));
 

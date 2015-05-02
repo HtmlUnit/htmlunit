@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -31,10 +32,41 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
 public class MessageChannel extends SimpleScriptable {
 
+    private MessagePort port1_;
+    private MessagePort port2_;
+
     /**
      * Default constructor.
      */
     @JsxConstructor
     public MessageChannel() {
+    }
+
+    /**
+     * Returns {@code port1} property.
+     * @return {@code port1} property.
+     */
+    @JsxGetter
+    public MessagePort getPort1() {
+        if (port1_ == null) {
+            port1_ = new MessagePort();
+            port1_.setParentScope(getParentScope());
+            port1_.setPrototype(getPrototype(port1_.getClass()));
+        }
+        return port1_;
+    }
+
+    /**
+     * Returns {@code port2} property.
+     * @return {@code port2} property.
+     */
+    @JsxGetter
+    public MessagePort getPort2() {
+        if (port2_ == null) {
+            port2_ = new MessagePort();
+            port2_.setParentScope(getParentScope());
+            port2_.setPrototype(getPrototype(port2_.getClass()));
+        }
+        return port2_;
     }
 }

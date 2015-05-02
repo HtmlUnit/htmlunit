@@ -69,7 +69,7 @@ public class MessageChannelTest extends WebDriverTestCase {
                 + "  }\n"
                 + "</script></html>";
 
-        final String html2 = "<html><body>"
+        final String html2 = "<html><body>\n"
                 + "  <p>iFrame body</p>\n"
                 + "</body>\n"
                 + "<script>\n"

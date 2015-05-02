@@ -48,6 +48,7 @@ public class MessageEvent extends Event {
     private String origin_;
     private String lastEventId_;
     private Window source_;
+    private Object ports_;
 
     /**
      * Default constructor used to build the prototype.
@@ -74,6 +75,7 @@ public class MessageEvent extends Event {
      * @param origin the scheme, hostname and port of the document that caused the event
      * @param lastEventId the identifier of the last event
      * @param source the window object that contains the document that caused the event
+     * @param ports the message ports
      */
     @JsxFunction({ @WebBrowser(value = FF, maxVersion = 24), @WebBrowser(CHROME),
         @WebBrowser(value = IE, minVersion = 11) })
@@ -84,12 +86,14 @@ public class MessageEvent extends Event {
             final String data,
             final String origin,
             final String lastEventId,
-            final Window source) {
+            final Window source,
+            final Object ports) {
         initEvent(type, canBubble, cancelable);
         data_ = data;
         origin_ = origin;
         lastEventId_ = lastEventId;
         source_ = source;
+        ports_ = ports;
     }
 
     /**
@@ -126,5 +130,14 @@ public class MessageEvent extends Event {
     @JsxGetter
     public Window getSource() {
         return source_;
+    }
+
+    /**
+     * Returns the {@code ports} property.
+     * @return the {@code ports} property
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    public Object getPorts() {
+        return ports_;
     }
 }
