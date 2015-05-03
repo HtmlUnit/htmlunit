@@ -129,6 +129,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Selection;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContainer;
+import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.html.DocumentProxy;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
@@ -158,7 +159,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535873.aspx">MSDN documentation</a>
  */
 @JsxClass
-public class Window extends SimpleScriptable implements ScriptableWithFallbackGetter, Function {
+public class Window extends EventTarget implements ScriptableWithFallbackGetter, Function {
 
     private static final Log LOG = LogFactory.getLog(Window.class);
 
