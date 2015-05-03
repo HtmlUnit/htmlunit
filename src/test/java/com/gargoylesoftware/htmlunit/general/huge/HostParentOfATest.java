@@ -4587,7 +4587,6 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented({ CHROME, FF })
     public void _EventTarget_Window() throws Exception {
         test("EventTarget", "Window");
     }

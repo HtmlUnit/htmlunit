@@ -194,7 +194,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     private HTMLCollection frames_; // has to be a member to have equality (==) working
     private Map<Class<? extends SimpleScriptable>, Scriptable> prototypes_ = new HashMap<>();
     private Map<String, Scriptable> prototypesPerJSName_ = new HashMap<>();
-    private EventListenersContainer eventListenersContainer_;
     private Object controllers_;
     private Object opener_;
     private Object top_ = NOT_FOUND; // top can be set from JS to any value!
@@ -786,7 +785,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
             // variable to be the page. If this isn't set then SimpleScriptable.get()
             // won't work properly
             setDomNode(htmlPage);
-            eventListenersContainer_ = null;
+            clearEventListenersContainer();
 
             WebAssert.notNull("document_", document_);
             document_.setDomNode(htmlPage);
@@ -1166,17 +1165,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Gets the container for event listeners.
-     * @return the container (newly created if needed)
-     */
-    public EventListenersContainer getEventListenersContainer() {
-        if (eventListenersContainer_ == null) {
-            eventListenersContainer_ = new EventListenersContainer(this);
-        }
-        return eventListenersContainer_;
-    }
-
-    /**
      * Allows the registration of event listeners on the event target.
      * @param type the event type to listen for (like "load")
      * @param listener the event listener
@@ -1189,18 +1177,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     }
 
     /**
-     * Allows the registration of event listeners on the event target.
-     * @param type the event type to listen for (like "onload")
-     * @param listener the event listener
-     * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
-     * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener">Mozilla documentation</a>
-     */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
-    public void addEventListener(final String type, final Scriptable listener, final boolean useCapture) {
-        getEventListenersContainer().addEventListener(type, listener, useCapture);
-    }
-
-    /**
      * Allows the removal of event listeners on the event target.
      * @param type the event type to listen for (like "onload")
      * @param listener the event listener
@@ -1209,19 +1185,6 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     @JsxFunction(@WebBrowser(value = IE, maxVersion = 8))
     public void detachEvent(final String type, final Function listener) {
         getEventListenersContainer().removeEventListener(StringUtils.substring(type, 2), listener, false);
-    }
-
-    /**
-     * Allows the removal of event listeners on the event target.
-     * @param type the event type to listen for (like "load")
-     * @param listener the event listener
-     * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
-     * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.removeEventListener">Mozilla
-     * documentation</a>
-     */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
-    public void removeEventListener(final String type, final Scriptable listener, final boolean useCapture) {
-        getEventListenersContainer().removeEventListener(type, listener, useCapture);
     }
 
     /**
@@ -2076,7 +2039,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @return the result
      */
     public ScriptResult executeEvent(final Event event) {
-        return executeEvent(event, eventListenersContainer_);
+        return executeEvent(event, getEventListenersContainer());
     }
 
     /**

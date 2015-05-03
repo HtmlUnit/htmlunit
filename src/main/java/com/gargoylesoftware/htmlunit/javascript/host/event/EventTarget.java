@@ -85,7 +85,7 @@ public class EventTarget extends SimpleScriptable {
      * Gets the container for event listeners.
      * @return the container (newly created if needed)
      */
-    protected EventListenersContainer getEventListenersContainer() {
+    public EventListenersContainer getEventListenersContainer() {
         if (eventListenersContainer_ == null) {
             eventListenersContainer_ = new EventListenersContainer(this);
         }
@@ -296,4 +296,10 @@ public class EventTarget extends SimpleScriptable {
         setEventHandlerProp(eventName, eventHandler);
     }
 
+    /**
+     * Clears the event listener container.
+     */
+    protected void clearEventListenersContainer() {
+        eventListenersContainer_ = null;
+    }
 }

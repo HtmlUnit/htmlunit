@@ -381,6 +381,7 @@ public class JavaScriptEngine {
                 }
             }
         }
+        window.setPrototype(prototypesPerJSName.get(Window.class.getSimpleName()));
 
         // IE11 ActiveXObject simulation
         // see http://msdn.microsoft.com/en-us/library/ie/dn423948%28v=vs.85%29.aspx
