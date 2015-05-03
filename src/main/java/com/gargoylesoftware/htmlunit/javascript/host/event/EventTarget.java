@@ -114,7 +114,7 @@ public class EventTarget extends SimpleScriptable {
      * @return the result
      */
     public static ScriptResult fireEvent(final SimpleScriptable scriptable, final Event event) {
-        final Window window = (Window) scriptable.getWindow();
+        final Window window = scriptable.getWindow();
         final Object[] args = new Object[] {event};
 
         event.startFire();
