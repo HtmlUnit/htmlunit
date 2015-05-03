@@ -27,7 +27,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 
-import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -36,8 +35,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
-import com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContainer;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
@@ -48,8 +45,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class MessagePort extends EventTarget {
-
-    private EventListenersContainer eventListenersContainer_;
 
     /**
      * Default constructor.
@@ -88,17 +83,6 @@ public class MessagePort extends EventTarget {
     }
 
     /**
-     * Gets the container for event listeners.
-     * @return the container (newly created if needed)
-     */
-    public EventListenersContainer getEventListenersContainer() {
-        if (eventListenersContainer_ == null) {
-            eventListenersContainer_ = new EventListenersContainer(this);
-        }
-        return eventListenersContainer_;
-    }
-
-    /**
      * Posts a message.
      * @param message the object passed to the window
      * @param transfer an optional sequence of Transferable objects
@@ -134,22 +118,6 @@ public class MessagePort extends EventTarget {
             }
         };
         jsEngine.addPostponedAction(action);
-    }
-
-    /**
-     * Dispatches an event into the event system (standards-conformant browsers only). See
-     * <a href="https://developer.mozilla.org/en-US/docs/DOM/window.dispatchEvent">the Gecko
-     * DOM reference</a> for more information.
-     *
-     * @param event the event to be dispatched
-     * @return <tt>false</tt> if at least one of the event handlers which handled the event
-     *         called <tt>preventDefault</tt>; <tt>true</tt> otherwise
-     */
-    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
-    public boolean dispatchEvent(final Event event) {
-        event.setTarget(this);
-        final ScriptResult result = Node.fireEvent(this, event);
-        return !event.isAborted(result);
     }
 
 }

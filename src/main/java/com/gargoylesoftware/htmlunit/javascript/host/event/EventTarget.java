@@ -249,7 +249,7 @@ public class EventTarget extends SimpleScriptable {
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public boolean dispatchEvent(final Event event) {
         event.setTarget(this);
-        final HtmlElement element = getDomNodeOrDie();
+        final HtmlElement element = getDomNodeOrNull();
         ScriptResult result = null;
         if (event.getType().equals(MouseEvent.TYPE_CLICK)) {
             try {
