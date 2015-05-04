@@ -113,7 +113,7 @@ public class EventTarget extends SimpleScriptable {
      * @param event the event
      * @return the result
      */
-    public static ScriptResult fireEvent(final SimpleScriptable scriptable, final Event event) {
+    public static ScriptResult fireEvent(final EventTarget scriptable, final Event event) {
         final Window window = scriptable.getWindow();
         final Object[] args = new Object[] {event};
 
@@ -132,17 +132,20 @@ public class EventTarget extends SimpleScriptable {
             if (event.isPropagationStopped()) {
                 return result;
             }
-            final List<DomNode> parents = new ArrayList<>();
-            DomNode node = scriptable.getDomNodeOrNull();
-            while (node != null) {
-                parents.add(node);
-                node = node.getParentNode();
+            final List<EventTarget> eventTargetList = new ArrayList<>();
+            EventTarget eventTarget = scriptable;
+            while (eventTarget != null) {
+                eventTargetList.add(eventTarget);
+                DomNode domNode = eventTarget.getDomNodeOrNull();
+                eventTarget = null;
+                if (domNode != null && domNode.getParentNode() != null) {
+                    eventTarget = (EventTarget) domNode.getParentNode().getScriptObject();
+                }
             }
 
             final boolean ie = scriptable.getBrowserVersion().hasFeature(JS_CALL_RESULT_IS_LAST_RETURN_VALUE);
-            for (int i = parents.size() - 1; i >= 0; i--) {
-                final DomNode curNode = parents.get(i);
-                final EventTarget jsNode = (EventTarget) curNode.getScriptObject();
+            for (int i = eventTargetList.size() - 1; i >= 0; i--) {
+                final EventTarget jsNode = eventTargetList.get(i);
                 final EventListenersContainer elc = jsNode.eventListenersContainer_;
                 if (elc != null) {
                     final ScriptResult r = elc.executeCapturingListeners(event, args);
@@ -164,9 +167,9 @@ public class EventTarget extends SimpleScriptable {
 
             // bubbling phase
             event.setEventPhase(Event.AT_TARGET);
-            node = scriptable.getDomNodeOrNull();
-            while (node != null) {
-                final EventTarget jsNode = (EventTarget) node.getScriptObject();
+            eventTarget = scriptable;
+            while (eventTarget != null) {
+                final EventTarget jsNode = eventTarget;
                 final EventListenersContainer elc = jsNode.eventListenersContainer_;
                 if (elc != null) {
                     final ScriptResult r = elc.executeBubblingListeners(event, args, propHandlerArgs);
@@ -175,7 +178,11 @@ public class EventTarget extends SimpleScriptable {
                         return result;
                     }
                 }
-                node = node.getParentNode();
+                DomNode domNode = eventTarget.getDomNodeOrNull();
+                eventTarget = null;
+                if (domNode != null && domNode.getParentNode() != null) {
+                    eventTarget = (EventTarget) domNode.getParentNode().getScriptObject();
+                }
                 event.setEventPhase(Event.BUBBLING_PHASE);
             }
 

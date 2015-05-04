@@ -171,7 +171,7 @@ public class EventListenersContainer implements Serializable {
     private ScriptResult executeEventListeners(final boolean useCapture, final Event event, final Object[] args) {
         final DomNode node = jsNode_.getDomNodeOrNull();
         // some event don't apply on all kind of nodes, for instance "blur"
-        if (node == null || !event.applies(node)) {
+        if (!event.applies(node)) {
             return null;
         }
         ScriptResult allResult = null;
@@ -221,13 +221,13 @@ public class EventListenersContainer implements Serializable {
     private ScriptResult executeEventHandler(final Event event, final Object[] propHandlerArgs) {
         final DomNode node = jsNode_.getDomNodeOrNull();
         // some event don't apply on all kind of nodes, for instance "blur"
-        if (node == null || !event.applies(node)) {
+        if (!event.applies(node)) {
             return null;
         }
         final Function handler = getEventHandler(event.getType());
         if (handler != null) {
             event.setCurrentTarget(jsNode_);
-            final HtmlPage page = (HtmlPage) node.getPage();
+            final HtmlPage page = (HtmlPage) jsNode_.getWindow().getWebWindow().getEnclosedPage();
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Executing " + event.getType() + " handler for " + node);
             }
@@ -249,7 +249,7 @@ public class EventListenersContainer implements Serializable {
         ScriptResult result = null;
 
         // the handler declared as property if any (not on body, as handler declared on body goes to the window)
-        final DomNode domNode = jsNode_.getDomNodeOrDie();
+        final DomNode domNode = jsNode_.getDomNodeOrNull();
         if (!(domNode instanceof HtmlBody)) {
             result = executeEventHandler(event, propHandlerArgs);
             if (event.isPropagationStopped()) {

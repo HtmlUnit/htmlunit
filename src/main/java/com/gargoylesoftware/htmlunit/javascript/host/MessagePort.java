@@ -46,11 +46,21 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class MessagePort extends EventTarget {
 
+    private MessagePort port1_;
+
     /**
      * Default constructor.
      */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public MessagePort() {
+    }
+
+    /**
+     * Constructors {@code port2} with the specified {@code port1}.
+     * @param port1 the port1
+     */
+    public MessagePort(final MessagePort port1) {
+        port1_ = port1;
     }
 
     /**
@@ -90,34 +100,36 @@ public class MessagePort extends EventTarget {
      */
     @JsxFunction
     public void postMessage(final String message, final Object transfer) {
-        final URL currentURL = getWindow().getWebWindow().getEnclosedPage().getUrl();
-        final MessageEvent event = new MessageEvent();
-        final String origin = currentURL.getProtocol() + "://" + currentURL.getHost() + ':' + currentURL.getPort();
-        final boolean cancelable = getBrowserVersion().hasFeature(JS_WINDOW_POST_MESSAGE_CANCELABLE);
-        event.initMessageEvent(Event.TYPE_MESSAGE, false, cancelable, message, origin, "", getWindow(), transfer);
-        event.setParentScope(this);
-        event.setPrototype(getPrototype(event.getClass()));
+        if (port1_ != null) {
+            final URL currentURL = getWindow().getWebWindow().getEnclosedPage().getUrl();
+            final MessageEvent event = new MessageEvent();
+            final String origin = currentURL.getProtocol() + "://" + currentURL.getHost() + ':' + currentURL.getPort();
+            final boolean cancelable = getBrowserVersion().hasFeature(JS_WINDOW_POST_MESSAGE_CANCELABLE);
+            event.initMessageEvent(Event.TYPE_MESSAGE, false, cancelable, message, origin, "", getWindow(), transfer);
+            event.setParentScope(port1_);
+            event.setPrototype(getPrototype(event.getClass()));
 
-        if (getBrowserVersion().hasFeature(JS_WINDOW_POST_MESSAGE_SYNCHRONOUS)) {
-            dispatchEvent(event);
-            return;
-        }
-
-        final JavaScriptEngine jsEngine = getWindow().getWebWindow().getWebClient().getJavaScriptEngine();
-        final PostponedAction action = new PostponedAction(getWindow().getWebWindow().getEnclosedPage()) {
-            @Override
-            public void execute() throws Exception {
-                final ContextAction action = new ContextAction() {
-                    public Object run(final Context cx) {
-                        return dispatchEvent(event);
-                    }
-                };
-
-                final ContextFactory cf = jsEngine.getContextFactory();
-                cf.call(action);
+            if (getBrowserVersion().hasFeature(JS_WINDOW_POST_MESSAGE_SYNCHRONOUS)) {
+                port1_.dispatchEvent(event);
+                return;
             }
-        };
-        jsEngine.addPostponedAction(action);
+
+            final JavaScriptEngine jsEngine = getWindow().getWebWindow().getWebClient().getJavaScriptEngine();
+            final PostponedAction action = new PostponedAction(getWindow().getWebWindow().getEnclosedPage()) {
+                @Override
+                public void execute() throws Exception {
+                    final ContextAction action = new ContextAction() {
+                        public Object run(final Context cx) {
+                            return port1_.dispatchEvent(event);
+                        }
+                    };
+
+                    final ContextFactory cf = jsEngine.getContextFactory();
+                    cf.call(action);
+                }
+            };
+            jsEngine.addPostponedAction(action);
+        }
     }
 
 }

@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +24,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -46,7 +42,6 @@ public class MessageChannelTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "Message back from the IFrame, Hello from the main page!",
             IE8 = "My body, iFrame body",
             FF = "My body, iFrame body")
-    @NotYetImplemented({ CHROME, IE11 })
     public void test() throws Exception {
         final String html = "<html><body>\n"
                 + "<p>My body</p>\n"
@@ -58,14 +53,14 @@ public class MessageChannelTest extends WebDriverTestCase {
                 + "    var para = document.querySelector('p');\n"
                 + "    var ifr = document.querySelector('iframe');\n"
                 + "    var otherWindow = ifr.contentWindow;\n"
-                + "    ifr.addEventListener('load', iframeLoaded, false);\n"
                 + "    function iframeLoaded() {\n"
                 + "      otherWindow.postMessage('Hello from the main page!', '*', [channel.port2]);\n"
                 + "    }\n"
-                + "    channel.port1.onmessage = handleMessage;\n"
+                + "    ifr.addEventListener('load', iframeLoaded, false);\n"
                 + "    function handleMessage(e) {\n"
                 + "      para.innerHTML = e.data;\n"
                 + "    }\n"
+                + "    channel.port1.onmessage = handleMessage;\n"
                 + "  }\n"
                 + "</script></html>";
 

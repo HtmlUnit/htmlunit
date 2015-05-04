@@ -63,7 +63,7 @@ public class MessageChannel extends SimpleScriptable {
     @JsxGetter
     public MessagePort getPort2() {
         if (port2_ == null) {
-            port2_ = new MessagePort();
+            port2_ = new MessagePort(getPort1());
             port2_.setParentScope(getParentScope());
             port2_.setPrototype(getPrototype(port2_.getClass()));
         }
