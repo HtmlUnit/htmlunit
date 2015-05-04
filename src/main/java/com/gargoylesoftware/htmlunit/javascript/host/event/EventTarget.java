@@ -171,7 +171,7 @@ public class EventTarget extends SimpleScriptable {
             while (eventTarget != null) {
                 final EventTarget jsNode = eventTarget;
                 final EventListenersContainer elc = jsNode.eventListenersContainer_;
-                if (elc != null) {
+                if (elc != null && !(jsNode instanceof Window)) {
                     final ScriptResult r = elc.executeBubblingListeners(event, args, propHandlerArgs);
                     result = ScriptResult.combine(r, result, ie);
                     if (event.isPropagationStopped()) {
