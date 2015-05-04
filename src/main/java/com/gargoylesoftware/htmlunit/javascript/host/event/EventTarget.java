@@ -136,7 +136,7 @@ public class EventTarget extends SimpleScriptable {
             EventTarget eventTarget = scriptable;
             while (eventTarget != null) {
                 eventTargetList.add(eventTarget);
-                DomNode domNode = eventTarget.getDomNodeOrNull();
+                final DomNode domNode = eventTarget.getDomNodeOrNull();
                 eventTarget = null;
                 if (domNode != null && domNode.getParentNode() != null) {
                     eventTarget = (EventTarget) domNode.getParentNode().getScriptObject();
@@ -178,7 +178,7 @@ public class EventTarget extends SimpleScriptable {
                         return result;
                     }
                 }
-                DomNode domNode = eventTarget.getDomNodeOrNull();
+                final DomNode domNode = eventTarget.getDomNodeOrNull();
                 eventTarget = null;
                 if (domNode != null && domNode.getParentNode() != null) {
                     eventTarget = (EventTarget) domNode.getParentNode().getScriptObject();
