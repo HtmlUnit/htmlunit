@@ -1829,6 +1829,7 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true",
             IE11 = "true")
     public void _SubtleCrypto_SubtleCrypto() throws Exception {
         test("SubtleCrypto", "SubtleCrypto");

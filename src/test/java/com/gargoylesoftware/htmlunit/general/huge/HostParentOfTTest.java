@@ -544,6 +544,7 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true",
             IE11 = "true")
     public void _XMLHttpRequestEventTarget_XMLHttpRequestEventTarget() throws Exception {
         test("XMLHttpRequestEventTarget", "XMLHttpRequestEventTarget");

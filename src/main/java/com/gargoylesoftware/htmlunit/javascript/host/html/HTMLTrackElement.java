@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.html.HtmlTrack;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -33,6 +34,22 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(domClass = HtmlTrack.class,
     browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class HTMLTrackElement extends HTMLElement {
+
+    /** Constant. */
+    @JsxConstant
+    public static final int NONE = 0;
+
+    /** Constant. */
+    @JsxConstant
+    public static final int LOADING = 1;
+
+    /** Constant. */
+    @JsxConstant
+    public static final int LOADED = 2;
+
+    /** Constant. */
+    @JsxConstant
+    public static final int ERROR = 3;
 
     /**
      * Creates a new instance.

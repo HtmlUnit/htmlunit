@@ -139,19 +139,19 @@ public class Event extends SimpleScriptable {
     public static final String TYPE_MESSAGE = "message";
 
     /** No event phase. */
-    @JsxConstant(@WebBrowser(FF))
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public static final short NONE = 0;
 
     /** The first event phase: the capturing phase. */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public static final short CAPTURING_PHASE = 1;
 
     /** The second event phase: at the event target. */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public static final short AT_TARGET = 2;
 
     /** The third (and final) event phase: the bubbling phase. */
-    @JsxConstant({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
     public static final short BUBBLING_PHASE = 3;
 
     /** Constant. */
@@ -163,23 +163,23 @@ public class Event extends SimpleScriptable {
     public static final int BACK = 0x20000000;
 
     /** Constant. */
-    @JsxConstant(@WebBrowser(value = FF, maxVersion = 24))
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24) })
     public static final int BLUR = 0x2000;
 
     /** Constant. */
-    @JsxConstant(@WebBrowser(value = FF, maxVersion = 24))
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24) })
     public static final int CHANGE = 0x8000;
 
     /** Constant. */
-    @JsxConstant(@WebBrowser(value = FF, maxVersion = 24))
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24) })
     public static final int CLICK = 0x40;
 
     /** Constant. */
-    @JsxConstant(@WebBrowser(value = FF, maxVersion = 24))
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24) })
     public static final int DBLCLICK = 0x80;
 
     /** Constant. */
-    @JsxConstant(@WebBrowser(value = FF, maxVersion = 24))
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24) })
     public static final int DRAGDROP = 0x800;
 
     /** Constant. */
@@ -187,7 +187,7 @@ public class Event extends SimpleScriptable {
     public static final int ERROR = 0x800000;
 
     /** Constant. */
-    @JsxConstant(@WebBrowser(value = FF, maxVersion = 24))
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24) })
     public static final int FOCUS = 0x1000;
 
     /** Constant. */
@@ -199,15 +199,15 @@ public class Event extends SimpleScriptable {
     public static final int HELP = 0x10000000;
 
     /** Constant. */
-    @JsxConstant(@WebBrowser(value = FF, maxVersion = 24))
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24) })
     public static final int KEYDOWN = 0x100;
 
     /** Constant. */
-    @JsxConstant(@WebBrowser(value = FF, maxVersion = 24))
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24) })
     public static final int KEYPRESS = 0x400;
 
     /** Constant. */
-    @JsxConstant(@WebBrowser(value = FF, maxVersion = 24))
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24) })
     public static final int KEYUP = 0x200;
 
     /** Constant. */
@@ -219,31 +219,31 @@ public class Event extends SimpleScriptable {
     public static final int LOCATE = 0x1000000;
 
     /** Constant. */
-    @JsxConstant(@WebBrowser(value = FF, maxVersion = 24))
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24) })
     public static final int MOUSEDOWN = 0x1;
 
     /** Constant. */
-    @JsxConstant(@WebBrowser(value = FF, maxVersion = 24))
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24) })
     public static final int MOUSEDRAG = 0x20;
 
     /** Constant. */
-    @JsxConstant(@WebBrowser(value = FF, maxVersion = 24))
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24) })
     public static final int MOUSEMOVE = 0x10;
 
     /** Constant. */
-    @JsxConstant(@WebBrowser(value = FF, maxVersion = 24))
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24) })
     public static final int MOUSEOUT = 0x8;
 
     /** Constant. */
-    @JsxConstant(@WebBrowser(value = FF, maxVersion = 24))
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24) })
     public static final int MOUSEOVER = 0x4;
 
     /** Constant. */
-    @JsxConstant(@WebBrowser(value = FF, maxVersion = 24))
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24) })
     public static final int MOUSEUP = 0x2;
 
     /** Constant. */
-    @JsxConstant(@WebBrowser(value = FF, maxVersion = 24))
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24) })
     public static final int MOVE = 0x2000000;
 
     /** Constant. */
@@ -259,7 +259,7 @@ public class Event extends SimpleScriptable {
     public static final int SCROLL = 0x40000;
 
     /** Constant. */
-    @JsxConstant(@WebBrowser(value = FF, maxVersion = 24))
+    @JsxConstant({ @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24) })
     public static final int SELECT = 0x4000;
 
     /** Constant. */

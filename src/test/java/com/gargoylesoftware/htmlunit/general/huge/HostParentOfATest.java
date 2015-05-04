@@ -5607,8 +5607,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF31 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _GamepadButton_GamepadButton() throws Exception {
         test("GamepadButton", "GamepadButton");
     }
