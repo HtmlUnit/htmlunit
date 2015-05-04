@@ -29,8 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for a Screen. Combines properties from both Mozilla's DOM
- * and IE's DOM.
+ * A JavaScript object for a Screen. Combines properties from both Mozilla's DOM and IE's DOM.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

@@ -4076,7 +4076,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function Headers() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void headers() throws Exception {
         test("Headers");
     }
@@ -4267,7 +4266,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MediaKeySession() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void mediaKeySession() throws Exception {
         test("MediaKeySession");
     }
@@ -4352,7 +4350,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function Response() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void response() throws Exception {
         test("Response");
     }
@@ -4494,7 +4491,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function PushManager() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void pushManager() throws Exception {
         test("PushManager");
     }
@@ -4546,7 +4542,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function PushSubscription() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void pushSubscription() throws Exception {
         test("PushSubscription");
     }
@@ -5223,7 +5218,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MediaKeyStatusMap() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void mediaKeyStatusMap() throws Exception {
         test("MediaKeyStatusMap");
     }
@@ -5346,7 +5340,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MediaKeyMessageEvent() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void mediaKeyMessageEvent() throws Exception {
         test("MediaKeyMessageEvent");
     }
@@ -5409,7 +5402,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MediaKeys() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void mediaKeys() throws Exception {
         test("MediaKeys");
     }
@@ -6095,7 +6087,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MediaKeySystemAccess() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void mediaKeySystemAccess() throws Exception {
         test("MediaKeySystemAccess");
     }
@@ -7338,7 +7329,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function Request() { [native code] }")
-    @NotYetImplemented(CHROME)
     public void request() throws Exception {
         test("Request");
     }

@@ -1893,4 +1893,14 @@ public class HostParentOfHTest extends HostParentOf {
         test("HTMLFormControlsCollection", "HTMLFormControlsCollection");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Headers_Headers() throws Exception {
+        test("Headers", "Headers");
+    }
+
 }

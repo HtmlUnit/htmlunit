@@ -5662,4 +5662,25 @@ public class HostParentOfATest extends HostParentOf {
     public void _Error_Error() throws Exception {
         test("Error", "Error");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_MediaKeySession() throws Exception {
+        test("EventTarget", "MediaKeySession");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Event_MediaKeyMessageEvent() throws Exception {
+        test("Event", "MediaKeyMessageEvent");
+    }
+
 }

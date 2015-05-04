@@ -4281,8 +4281,9 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
             IE11 = "object")
-    public void xMLHttpRequestEventTarget() throws Exception {
+    public void xmlHttpRequestEventTarget() throws Exception {
         test("XMLHttpRequestEventTarget");
     }
 
@@ -4804,6 +4805,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
             IE11 = "object")
     public void subtleCrypto() throws Exception {
         test("SubtleCrypto");
@@ -5776,8 +5778,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF31 = "function")
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
     public void gamepadButton() throws Exception {
         test("GamepadButton");
     }
@@ -5840,6 +5842,106 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF31 = "function")
     public void proxy() throws Exception {
         test("Proxy");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void headers() throws Exception {
+        test("Headers");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void mediaKeyMessageEvent() throws Exception {
+        test("MediaKeyMessageEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void mediaKeys() throws Exception {
+        test("MediaKeys");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void mediaKeySession() throws Exception {
+        test("MediaKeySession");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void mediaKeyStatusMap() throws Exception {
+        test("MediaKeyStatusMap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void mediaKeySystemAccess() throws Exception {
+        test("MediaKeySystemAccess");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void pushManager() throws Exception {
+        test("PushManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void pushSubscription() throws Exception {
+        test("PushSubscription");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void request() throws Exception {
+        test("Request");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void response() throws Exception {
+        test("Response");
     }
 
 }

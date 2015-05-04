@@ -4317,8 +4317,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function XMLHttpRequestEventTarget() { [native code] }",
             IE11 = "[object XMLHttpRequestEventTarget]")
-    public void xMLHttpRequestEventTarget() throws Exception {
+    public void xmlHttpRequestEventTarget() throws Exception {
         test("XMLHttpRequestEventTarget");
     }
 
@@ -4841,6 +4842,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function SubtleCrypto() { [native code] }",
             IE11 = "[object SubtleCrypto]")
     public void subtleCrypto() throws Exception {
         test("SubtleCrypto");
@@ -5865,6 +5867,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function GamepadButton() { [native code] }",
             FF31 = "function GamepadButton() {\n    [native code]\n}")
     public void gamepadButton() throws Exception {
         test("GamepadButton");
@@ -5929,6 +5932,106 @@ public class HostClassNameTest extends WebDriverTestCase {
             FF31 = "function Proxy() {\n    [native code]\n}")
     public void proxy() throws Exception {
         test("Proxy");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Headers() { [native code] }")
+    public void headers() throws Exception {
+        test("Headers");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaKeyMessageEvent() { [native code] }")
+    public void mediaKeyMessageEvent() throws Exception {
+        test("MediaKeyMessageEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaKeys() { [native code] }")
+    public void mediaKeys() throws Exception {
+        test("MediaKeys");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaKeySession() { [native code] }")
+    public void mediaKeySession() throws Exception {
+        test("MediaKeySession");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaKeyStatusMap() { [native code] }")
+    public void mediaKeyStatusMap() throws Exception {
+        test("MediaKeyStatusMap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaKeySystemAccess() { [native code] }")
+    public void mediaKeySystemAccess() throws Exception {
+        test("MediaKeySystemAccess");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PushManager() { [native code] }")
+    public void pushManager() throws Exception {
+        test("PushManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PushSubscription() { [native code] }")
+    public void pushSubscription() throws Exception {
+        test("PushSubscription");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Request() { [native code] }")
+    public void request() throws Exception {
+        test("Request");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Response() { [native code] }")
+    public void response() throws Exception {
+        test("Response");
     }
 
 }

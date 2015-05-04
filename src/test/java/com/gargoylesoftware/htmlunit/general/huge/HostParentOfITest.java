@@ -2720,4 +2720,94 @@ public class HostParentOfITest extends HostParentOf {
         test("PositionError", "PositionError");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MediaKeyMessageEvent_MediaKeyMessageEvent() throws Exception {
+        test("MediaKeyMessageEvent", "MediaKeyMessageEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MediaKeySession_MediaKeySession() throws Exception {
+        test("MediaKeySession", "MediaKeySession");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MediaKeyStatusMap_MediaKeyStatusMap() throws Exception {
+        test("MediaKeyStatusMap", "MediaKeyStatusMap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MediaKeySystemAccess_MediaKeySystemAccess() throws Exception {
+        test("MediaKeySystemAccess", "MediaKeySystemAccess");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MediaKeys_MediaKeys() throws Exception {
+        test("MediaKeys", "MediaKeys");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _PushManager_PushManager() throws Exception {
+        test("PushManager", "PushManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _PushSubscription_PushSubscription() throws Exception {
+        test("PushSubscription", "PushSubscription");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Request_Request() throws Exception {
+        test("Request", "Request");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Response_Response() throws Exception {
+        test("Response", "Response");
+    }
+
 }

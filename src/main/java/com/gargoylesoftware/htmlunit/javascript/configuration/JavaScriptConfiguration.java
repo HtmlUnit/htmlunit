@@ -52,6 +52,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.PluginArray;
 import com.gargoylesoftware.htmlunit.javascript.host.Popup;
 import com.gargoylesoftware.htmlunit.javascript.host.Promise;
 import com.gargoylesoftware.htmlunit.javascript.host.Proxy;
+import com.gargoylesoftware.htmlunit.javascript.host.PushManager;
+import com.gargoylesoftware.htmlunit.javascript.host.PushSubscription;
 import com.gargoylesoftware.htmlunit.javascript.host.Screen;
 import com.gargoylesoftware.htmlunit.javascript.host.Set;
 import com.gargoylesoftware.htmlunit.javascript.host.SharedWorker;
@@ -186,6 +188,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.TransitionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.UserProximityEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.WheelEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.fetch.Headers;
+import com.gargoylesoftware.htmlunit.javascript.host.fetch.Request;
+import com.gargoylesoftware.htmlunit.javascript.host.fetch.Response;
 import com.gargoylesoftware.htmlunit.javascript.host.file.Blob;
 import com.gargoylesoftware.htmlunit.javascript.host.file.BlobEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.file.File;
@@ -229,6 +234,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.DynamicsCompressorNod
 import com.gargoylesoftware.htmlunit.javascript.host.media.GainNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.LocalMediaStream;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaElementAudioSourceNode;
+import com.gargoylesoftware.htmlunit.javascript.host.media.MediaKeyMessageEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.media.MediaKeySession;
+import com.gargoylesoftware.htmlunit.javascript.host.media.MediaKeyStatusMap;
+import com.gargoylesoftware.htmlunit.javascript.host.media.MediaKeySystemAccess;
+import com.gargoylesoftware.htmlunit.javascript.host.media.MediaKeys;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaRecorder;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaSource;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaStream;
@@ -411,7 +421,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         EventTarget.class, External.class, File.class, FileError.class, FileHandle.class, FileList.class,
         FileReader.class, FileRequest.class, Float32Array.class, Float64Array.class, FocusEvent.class,
         FormChild.class, FormData.class, FormField.class, GainNode.class, Gamepad.class, GamepadButton.class,
-        GamepadEvent.class, Geolocation.class, HashChangeEvent.class, History.class,
+        GamepadEvent.class, Geolocation.class, HashChangeEvent.class, Headers.class, History.class,
         HTMLAllCollection.class,
         HTMLAnchorElement.class, HTMLAppletElement.class, HTMLAreaElement.class, HTMLAudioElement.class,
         HTMLBGSoundElement.class,
@@ -454,7 +464,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         Int16Array.class, Int32Array.class, Int8Array.class,
         KeyboardEvent.class, LocalMediaStream.class,
         Location.class, LockedFile.class, com.gargoylesoftware.htmlunit.javascript.host.Map.class,
-        MediaElementAudioSourceNode.class, MediaList.class, MediaQueryList.class, MediaRecorder.class,
+        MediaElementAudioSourceNode.class, MediaKeyMessageEvent.class, MediaKeys.class, MediaKeySession.class,
+        MediaKeyStatusMap.class, MediaKeySystemAccess.class, MediaList.class, MediaQueryList.class, MediaRecorder.class,
         MediaStream.class, MediaSource.class, MediaStreamAudioDestinationNode.class, MediaStreamAudioSourceNode.class,
         MediaStreamEvent.class, MediaStreamTrack.class, MessageChannel.class,
         MessageEvent.class, MessagePort.class, MimeType.class, MimeTypeArray.class, MouseEvent.class,
@@ -473,8 +484,9 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         Plugin.class, PluginArray.class, PointerEvent.class, Popup.class, PopStateEvent.class,
         Position.class, PositionError.class,
         ProcessingInstruction.class, ProgressEvent.class,
-        Promise.class, Proxy.class, RadioNodeList.class, Range.class, RowContainer.class, RTCDataChannelEvent.class,
-        RTCIceCandidate.class, RTCPeerConnectionIceEvent.class, RTCSessionDescription.class,
+        Promise.class, Proxy.class, PushManager.class, PushSubscription.class, RadioNodeList.class, Range.class,
+        Request.class, Response.class, RowContainer.class,
+        RTCDataChannelEvent.class, RTCIceCandidate.class, RTCPeerConnectionIceEvent.class, RTCSessionDescription.class,
         Screen.class, ScriptProcessorNode.class, Selection.class, ServiceWorker.class, ServiceWorkerContainer.class,
         ServiceWorkerRegistration.class, Set.class, ShadowRoot.class, SharedWorker.class, SimpleArray.class,
         StaticNodeList.class, Storage.class, StorageEvent.class, StyleSheet.class, StyleSheetList.class,
