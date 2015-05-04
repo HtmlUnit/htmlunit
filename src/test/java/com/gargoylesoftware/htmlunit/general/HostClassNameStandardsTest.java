@@ -4074,7 +4074,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Headers() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void headers() throws Exception {
         test("Headers");
     }
@@ -4263,7 +4265,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaKeySession() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void mediaKeySession() throws Exception {
         test("MediaKeySession");
     }
@@ -4346,7 +4350,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Response() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void response() throws Exception {
         test("Response");
     }
@@ -4486,7 +4492,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PushManager() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void pushManager() throws Exception {
         test("PushManager");
     }
@@ -4536,7 +4544,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PushSubscription() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void pushSubscription() throws Exception {
         test("PushSubscription");
     }
@@ -5211,7 +5221,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaKeyStatusMap() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void mediaKeyStatusMap() throws Exception {
         test("MediaKeyStatusMap");
     }
@@ -5332,7 +5344,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaKeyMessageEvent() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void mediaKeyMessageEvent() throws Exception {
         test("MediaKeyMessageEvent");
     }
@@ -5393,7 +5407,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaKeys() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void mediaKeys() throws Exception {
         test("MediaKeys");
     }
@@ -6019,6 +6035,7 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function SubtleCrypto() { [native code] }",
             IE11 = "[object SubtleCrypto]")
     public void subtleCrypto() throws Exception {
         test("SubtleCrypto");
@@ -6076,7 +6093,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function MediaKeySystemAccess() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void mediaKeySystemAccess() throws Exception {
         test("MediaKeySystemAccess");
     }
@@ -6889,8 +6908,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function XMLHttpRequestEventTarget() { [native code] }",
             IE11 = "[object XMLHttpRequestEventTarget]")
-    public void xMLHttpRequestEventTarget() throws Exception {
+    public void xmlHttpRequestEventTarget() throws Exception {
         test("XMLHttpRequestEventTarget");
     }
 
@@ -7316,7 +7336,9 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Request() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void request() throws Exception {
         test("Request");
     }
@@ -7459,10 +7481,13 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     }
 
     /**
+     * Tests {@link com.gargoylesoftware.htmlunit.javascript.host.GamepadButton}.
+     *
      * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function GamepadButton() { [native code] }",
             FF31 = "function GamepadButton() {\n    [native code]\n}")
     public void gamepadButton() throws Exception {
         test("GamepadButton");
