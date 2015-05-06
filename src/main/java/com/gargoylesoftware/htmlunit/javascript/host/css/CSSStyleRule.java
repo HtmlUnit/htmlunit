@@ -39,9 +39,9 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
  * @author Marc Guillemot
  */
 @JsxClasses({
-    @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-})
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+        @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+    })
 public class CSSStyleRule extends CSSRule {
     private static final Pattern SELECTOR_PARTS_PATTERN = Pattern.compile("[\\.#]?[a-zA-Z]+");
     private static final Pattern SELECTOR_REPLACE_PATTERN = Pattern.compile("\\*([\\.#])");

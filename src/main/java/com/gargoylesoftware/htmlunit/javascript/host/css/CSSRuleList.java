@@ -39,9 +39,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClasses({
-    @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-})
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+        @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+    })
 public class CSSRuleList extends SimpleScriptable {
 
     private final CSSStyleSheet stylesheet_;
