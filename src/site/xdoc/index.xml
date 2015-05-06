@@ -18,7 +18,7 @@
             </p>
             <p>
                 It has fairly good JavaScript support (which is constantly improving) and is able to work even with quite complex AJAX libraries,
-                simulating either Firefox or Internet Explorer depending on the configuration you want to use.
+                simulating Chrome, Firefox or Internet Explorer depending on the configuration used.
             </p> 
             <p>
                 It is typically used for testing purposes or to retrieve information from web sites.
