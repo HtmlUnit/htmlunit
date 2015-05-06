@@ -45,11 +45,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
  * W3C Dom Level 1</a>
  */
 @JsxClasses({
-    @JsxClass(domClass = DomDocumentFragment.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, domClass = DomDocumentFragment.class,
-        browsers = @WebBrowser(value = IE, maxVersion = 8))
-})
+        @JsxClass(domClass = DomDocumentFragment.class,
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, domClass = DomDocumentFragment.class,
+            browsers = @WebBrowser(value = IE, maxVersion = 8))
+    })
 public class DocumentFragment extends Node {
 
     //TODO: seems that in IE, DocumentFragment extends HTMLDocument

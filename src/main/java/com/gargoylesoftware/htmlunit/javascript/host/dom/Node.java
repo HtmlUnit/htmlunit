@@ -78,10 +78,10 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Frank Danek
  */
 @JsxClasses({
-    @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
-        browsers = { @WebBrowser(value = IE, maxVersion = 8) })
-})
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
+            browsers = { @WebBrowser(value = IE, maxVersion = 8) })
+    })
 public class Node extends EventTarget {
 
     /** "Live" child nodes collection; has to be a member to have equality (==) working. */

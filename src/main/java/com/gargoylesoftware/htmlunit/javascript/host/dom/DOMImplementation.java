@@ -81,9 +81,9 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * W3C Dom Level 1</a>
  */
 @JsxClasses({
-    @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-})
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+        @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+    })
 public class DOMImplementation extends SimpleScriptable {
 
     /**

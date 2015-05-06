@@ -35,9 +35,9 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
  * @author Chuck Dumont
  */
 @JsxClasses({
-    @JsxClass(browsers = @WebBrowser(FF)),
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = @WebBrowser(CHROME))
-})
+        @JsxClass(browsers = @WebBrowser(FF)),
+        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = @WebBrowser(CHROME))
+    })
 public class XPathNSResolver extends SimpleScriptable implements PrefixResolver {
 
     private Object element_;
