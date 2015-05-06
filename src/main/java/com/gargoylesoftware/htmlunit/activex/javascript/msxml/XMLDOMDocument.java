@@ -414,7 +414,7 @@ public class XMLDOMDocument extends XMLDOMNode {
      */
     @JsxFunction
     public Object createNode(final Object type, final String name, final Object namespaceURI) {
-        switch((short) Context.toNumber(type)) {
+        switch ((short) Context.toNumber(type)) {
             case Node.ELEMENT_NODE:
                 return createElementNS((String) namespaceURI, name);
             case Node.ATTRIBUTE_NODE:

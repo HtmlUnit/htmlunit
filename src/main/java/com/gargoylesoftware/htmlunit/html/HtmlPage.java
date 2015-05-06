@@ -699,9 +699,9 @@ public class HtmlPage extends SgmlPage {
         if (base_ == null) {
             baseUrl = getUrl();
             final WebWindow window = getEnclosingWindow();
-            final boolean frame = (window != window.getTopWindow());
+            final boolean frame = window != window.getTopWindow();
             if (frame) {
-                final boolean frameSrcIsNotSet = (baseUrl == WebClient.URL_ABOUT_BLANK);
+                final boolean frameSrcIsNotSet = baseUrl == WebClient.URL_ABOUT_BLANK;
                 final boolean frameSrcIsJs = "javascript".equals(baseUrl.getProtocol());
                 if (frameSrcIsNotSet || frameSrcIsJs) {
                     baseUrl = ((HtmlPage) window.getTopWindow().getEnclosedPage()).getWebResponse()
@@ -1140,8 +1140,8 @@ public class HtmlPage extends SgmlPage {
         client.throwFailingHttpStatusCodeExceptionIfNecessary(response);
 
         final int statusCode = response.getStatusCode();
-        final boolean successful = (statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES);
-        final boolean noContent = (statusCode == HttpStatus.SC_NO_CONTENT);
+        final boolean successful = statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES;
+        final boolean noContent = statusCode == HttpStatus.SC_NO_CONTENT;
         if (!successful || noContent) {
             throw new IOException("Unable to download JavaScript from '" + url + "' (status " + statusCode + ").");
         }
@@ -1410,7 +1410,7 @@ public class HtmlPage extends SgmlPage {
         final URL url;
 
         int index = StringUtils.indexOfAnyBut(refreshString, "0123456789");
-        final boolean timeOnly = (index == -1);
+        final boolean timeOnly = index == -1;
 
         if (timeOnly) {
             // Format: <meta http-equiv='refresh' content='10'>

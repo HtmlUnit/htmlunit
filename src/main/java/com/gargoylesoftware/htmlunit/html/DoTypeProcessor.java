@@ -52,7 +52,7 @@ abstract class DoTypeProcessor implements Serializable {
      * @return <code>true</code> if it is accepted
      */
     protected boolean acceptChar(final char c) {
-        return (c == ' ' || !Character.isWhitespace(c));
+        return c == ' ' || !Character.isWhitespace(c);
     }
 
     abstract void typeDone(final String newValue, final int newCursorPosition);

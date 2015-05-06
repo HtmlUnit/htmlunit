@@ -506,7 +506,7 @@ public class WebClient implements Serializable, AutoCloseable {
     public void printContentIfNecessary(final WebResponse webResponse) {
         final String contentType = webResponse.getContentType();
         final int statusCode = webResponse.getStatusCode();
-        final boolean successful = (statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES);
+        final boolean successful = statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES;
         if (getOptions().getPrintContentOnFailingStatusCode() && !successful) {
             LOG.info("statusCode=[" + statusCode + "] contentType=[" + contentType + "]");
             LOG.info(webResponse.getContentAsString());
@@ -1715,7 +1715,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 use = true;
             }
             else if (window instanceof TopLevelWindow) {
-                use = (event.getOldPage() == null);
+                use = event.getOldPage() == null;
             }
             else if (window instanceof FrameWindow) {
                 final FrameWindow fw = (FrameWindow) window;

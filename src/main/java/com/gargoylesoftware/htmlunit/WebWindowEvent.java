@@ -54,7 +54,7 @@ public final class WebWindowEvent extends EventObject {
         oldPage_ = oldPage;
         newPage_ = newPage;
 
-        switch(type) {
+        switch (type) {
             case OPEN:
             case CLOSE:
             case CHANGE:
@@ -147,7 +147,7 @@ public final class WebWindowEvent extends EventObject {
         buffer.append("WebWindowEvent(source=[");
         buffer.append(getSource());
         buffer.append("] type=[");
-        switch(type_) {
+        switch (type_) {
             case OPEN:
                 buffer.append("OPEN");
                 break;

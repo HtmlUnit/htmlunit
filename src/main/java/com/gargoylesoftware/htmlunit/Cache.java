@@ -168,8 +168,8 @@ public class Cache implements Serializable {
         final long delay = 10 * org.apache.commons.lang3.time.DateUtils.MILLIS_PER_MINUTE;
         final long now = getCurrentTimestamp();
 
-        final boolean cacheableContent = (expires != null && (expires.getTime() - now > delay)
-                || (expires == null && lastModified != null && (now - lastModified.getTime() > delay)));
+        final boolean cacheableContent = expires != null && (expires.getTime() - now > delay)
+                || (expires == null && lastModified != null && (now - lastModified.getTime() > delay));
 
         return !cacheableContent;
     }

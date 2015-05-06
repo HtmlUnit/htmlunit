@@ -156,7 +156,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
     @Override
     protected boolean doClickStateUpdate() throws IOException {
         final HtmlForm form = getEnclosingForm();
-        final boolean changed = isChecked() != true;
+        final boolean changed = !isChecked();
 
         final Page page = getPage();
         if (form != null) {
