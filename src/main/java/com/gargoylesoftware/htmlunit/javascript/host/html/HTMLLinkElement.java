@@ -40,11 +40,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
  * @author Ahmed Ashour
  */
 @JsxClasses({
-    @JsxClass(domClass = HtmlLink.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(domClass = HtmlLink.class,
-        isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-})
+        @JsxClass(domClass = HtmlLink.class,
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+        @JsxClass(domClass = HtmlLink.class,
+            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+    })
 public class HTMLLinkElement extends HTMLElement {
 
     /**

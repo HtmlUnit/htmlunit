@@ -40,11 +40,11 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Ronald Brill
  */
 @JsxClasses({
-    @JsxClass(domClass = HtmlUnknownElement.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(domClass = HtmlUnknownElement.class,
-        isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-})
+        @JsxClass(domClass = HtmlUnknownElement.class,
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+        @JsxClass(domClass = HtmlUnknownElement.class,
+            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+    })
 public class HTMLUnknownElement extends HTMLElement {
 
     /**

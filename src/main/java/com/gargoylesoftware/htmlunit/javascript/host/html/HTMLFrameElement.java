@@ -40,11 +40,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.WindowProxy;
  * @author Frank Danek
  */
 @JsxClasses({
-    @JsxClass(domClass = HtmlFrame.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(domClass = HtmlFrame.class,
-        isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-})
+        @JsxClass(domClass = HtmlFrame.class,
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+        @JsxClass(domClass = HtmlFrame.class,
+            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+    })
 public class HTMLFrameElement extends HTMLElement {
 
     /**

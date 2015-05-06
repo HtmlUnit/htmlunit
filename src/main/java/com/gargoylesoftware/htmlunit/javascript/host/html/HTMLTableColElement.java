@@ -39,15 +39,15 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  */
 @JsxClasses({
-    @JsxClass(domClass = HtmlTableColumn.class,
+        @JsxClass(domClass = HtmlTableColumn.class,
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+        @JsxClass(domClass = HtmlTableColumn.class,
+            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
+        @JsxClass(domClass = HtmlTableColumnGroup.class,
             browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(domClass = HtmlTableColumn.class,
-        isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
-    @JsxClass(domClass = HtmlTableColumnGroup.class,
-        browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(domClass = HtmlTableColumnGroup.class,
-        isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-})
+        @JsxClass(domClass = HtmlTableColumnGroup.class,
+            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+    })
 public class HTMLTableColElement extends HTMLTableComponent {
 
     /**

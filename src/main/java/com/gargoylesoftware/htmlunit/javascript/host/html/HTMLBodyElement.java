@@ -44,11 +44,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclara
  * @author Daniel Gredler
  */
 @JsxClasses({
-    @JsxClass(domClass = HtmlBody.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF),
-        @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(isJSObject = false, domClass = HtmlBody.class,
-        browsers = { @WebBrowser(value = IE, maxVersion = 8) })
-})
+        @JsxClass(domClass = HtmlBody.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF),
+            @WebBrowser(value = IE, minVersion = 11) }),
+        @JsxClass(isJSObject = false, domClass = HtmlBody.class,
+            browsers = { @WebBrowser(value = IE, maxVersion = 8) })
+    })
 public class HTMLBodyElement extends HTMLElement {
 
     /**

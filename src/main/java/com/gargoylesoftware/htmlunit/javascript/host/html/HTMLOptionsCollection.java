@@ -60,9 +60,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  */
 @JsxClasses({
-    @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = @WebBrowser(IE))
-})
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
+        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = @WebBrowser(IE))
+    })
 public class HTMLOptionsCollection extends SimpleScriptable implements ScriptableWithFallbackGetter {
 
     private HtmlSelect htmlSelect_;

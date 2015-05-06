@@ -42,13 +42,13 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  */
 @JsxClasses({
-    @JsxClass(domClass = HtmlSpan.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(domClass = HtmlSpan.class,
-        isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
-    @JsxClass(domClass = HtmlKeygen.class, browsers = @WebBrowser(FF)),
-    @JsxClass(domClass = HtmlBaseFont.class, browsers = @WebBrowser(FF))
-})
+        @JsxClass(domClass = HtmlSpan.class,
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+        @JsxClass(domClass = HtmlSpan.class,
+            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
+        @JsxClass(domClass = HtmlKeygen.class, browsers = @WebBrowser(FF)),
+        @JsxClass(domClass = HtmlBaseFont.class, browsers = @WebBrowser(FF))
+    })
 public class HTMLSpanElement extends HTMLElement {
 
     private boolean endTagForbidden_;

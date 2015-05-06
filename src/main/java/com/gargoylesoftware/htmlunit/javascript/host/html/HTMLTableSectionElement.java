@@ -42,19 +42,19 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  */
 @JsxClasses({
-    @JsxClass(domClass = HtmlTableBody.class,
+        @JsxClass(domClass = HtmlTableBody.class,
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+        @JsxClass(domClass = HtmlTableBody.class,
+            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
+        @JsxClass(domClass = HtmlTableHeader.class,
             browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(domClass = HtmlTableBody.class,
-        isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
-    @JsxClass(domClass = HtmlTableHeader.class,
-        browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(domClass = HtmlTableHeader.class,
-        isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
+        @JsxClass(domClass = HtmlTableHeader.class,
+            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
+            @JsxClass(domClass = HtmlTableFooter.class,
+            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
         @JsxClass(domClass = HtmlTableFooter.class,
-        browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(domClass = HtmlTableFooter.class,
-        isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-})
+            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+    })
 public class HTMLTableSectionElement extends RowContainer {
 
     /** The valid "vAlign" values for this element, when emulating IE. */

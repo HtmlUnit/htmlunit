@@ -37,11 +37,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
  * @author Ronald Brill
 */
 @JsxClasses({
-    @JsxClass(domClass = HtmlArea.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(isJSObject = false, domClass = HtmlArea.class,
-        browsers = @WebBrowser(value = IE, maxVersion = 8))
-})
+        @JsxClass(domClass = HtmlArea.class,
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+        @JsxClass(isJSObject = false, domClass = HtmlArea.class,
+            browsers = @WebBrowser(value = IE, maxVersion = 8))
+    })
 public class HTMLAreaElement extends HTMLElement {
 
     /**

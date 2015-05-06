@@ -52,13 +52,13 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Frank Danek
  */
 @JsxClasses({
-    @JsxClass(domClass = HtmlOption.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(domClass = HtmlOption.class, isJSObject = false,
-            browsers = @WebBrowser(value = IE, maxVersion = 8)),
-    @JsxClass(domClass = HtmlOptionGroup.class, isJSObject = false,
-            browsers = @WebBrowser(value = IE, maxVersion = 8))
-})
+        @JsxClass(domClass = HtmlOption.class,
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+        @JsxClass(domClass = HtmlOption.class, isJSObject = false,
+                browsers = @WebBrowser(value = IE, maxVersion = 8)),
+        @JsxClass(domClass = HtmlOptionGroup.class, isJSObject = false,
+                browsers = @WebBrowser(value = IE, maxVersion = 8))
+    })
 public class HTMLOptionElement extends FormChild {
 
     /**

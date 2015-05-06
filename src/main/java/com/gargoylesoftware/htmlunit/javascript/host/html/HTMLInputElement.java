@@ -58,11 +58,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
  * @author Frank Danek
  */
 @JsxClasses({
-    @JsxClass(domClass = HtmlInput.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(domClass = HtmlInput.class,
-        isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-})
+        @JsxClass(domClass = HtmlInput.class,
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+        @JsxClass(domClass = HtmlInput.class,
+            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+    })
 public class HTMLInputElement extends FormField {
 
     /**

@@ -64,11 +64,11 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Ronald Brill
  */
 @JsxClasses({
-    @JsxClass(domClass = HtmlAnchor.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF),
-        @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(isJSObject = false, domClass = HtmlAnchor.class,
-        browsers = { @WebBrowser(value = IE, maxVersion = 8) })
-})
+        @JsxClass(domClass = HtmlAnchor.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF),
+            @WebBrowser(value = IE, minVersion = 11) }),
+        @JsxClass(isJSObject = false, domClass = HtmlAnchor.class,
+            browsers = { @WebBrowser(value = IE, maxVersion = 8) })
+    })
 public class HTMLAnchorElement extends HTMLElement {
 
     /**

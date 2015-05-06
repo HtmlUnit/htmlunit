@@ -80,11 +80,11 @@ import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535249.aspx">MSDN documentation</a>
  */
 @JsxClasses({
-    @JsxClass(domClass = HtmlForm.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(domClass = HtmlForm.class,
-        isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-})
+        @JsxClass(domClass = HtmlForm.class,
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+        @JsxClass(domClass = HtmlForm.class,
+            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+    })
 public class HTMLFormElement extends HTMLElement implements Function {
 
     private HTMLCollection elements_; // has to be a member to have equality (==) working

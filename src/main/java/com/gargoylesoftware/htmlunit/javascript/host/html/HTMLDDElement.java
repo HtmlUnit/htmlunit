@@ -29,10 +29,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClasses({
-    @JsxClass(domClass = HtmlDefinitionDescription.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
-    @JsxClass(domClass = HtmlDefinitionDescription.class, isJSObject = false,
-        browsers = @WebBrowser(value = IE, maxVersion = 8))
-})
+        @JsxClass(domClass = HtmlDefinitionDescription.class, browsers = @WebBrowser(value = IE, minVersion = 11)),
+        @JsxClass(domClass = HtmlDefinitionDescription.class, isJSObject = false,
+            browsers = @WebBrowser(value = IE, maxVersion = 8))
+    })
 public class HTMLDDElement extends HTMLElement {
 
 }

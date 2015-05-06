@@ -47,11 +47,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObjectImpl;
  * @author Ronald Brill
  */
 @JsxClasses({
-    @JsxClass(domClass = HtmlObject.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(domClass = HtmlObject.class,
-        isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-})
+        @JsxClass(domClass = HtmlObject.class,
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+        @JsxClass(domClass = HtmlObject.class,
+            isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+    })
 public class HTMLObjectElement extends FormChild implements Wrapper {
 
     private Scriptable wrappedActiveX_;
