@@ -94,7 +94,7 @@ public class GAETestRunner extends BlockJUnit4ClassRunner {
      * @return the list of additional classes.
      */
     private static Set<String> getAdditionalWhitelist() {
-        final String additionalClasses[] = {"java.awt.image.RenderedImage",
+        final String[] additionalClasses = {"java.awt.image.RenderedImage",
             "java.awt.geom.Rectangle2D", "java.awt.geom.Ellipse2D", "java.applet.AppletStub"};
         final Set<String> classesAsSet = new HashSet<>();
         for (String additionalClass : additionalClasses) {

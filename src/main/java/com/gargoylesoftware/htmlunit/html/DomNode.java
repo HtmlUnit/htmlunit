@@ -1479,7 +1479,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 result.put("", tok.substring(7, tok.length() - 7));
             }
             else if (tok.startsWith("xmlns:")) {
-                final String prefix[] = tok.substring(6).split("=");
+                final String[] prefix = tok.substring(6).split("=");
                 result.put(prefix[0], prefix[1].substring(1, prefix[1].length() - 1));
             }
         }

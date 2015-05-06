@@ -72,7 +72,7 @@ public final class ProxyAutoConfig {
 
             cx.evaluateString(scope, "var ProxyConfig = function() {}; ProxyConfig.bindings = {}", "<init>", 1, null);
             cx.evaluateString(scope, content, "<Proxy Auto-Config>", 1, null);
-            final Object functionArgs[] = {url.toExternalForm(), url.getHost()};
+            final Object[] functionArgs = {url.toExternalForm(), url.getHost()};
             final Object fObj = scope.get("FindProxyForURL", scope);
 
             final NativeFunction f = (NativeFunction) fObj;

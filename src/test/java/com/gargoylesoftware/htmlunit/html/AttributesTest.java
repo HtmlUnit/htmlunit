@@ -244,7 +244,7 @@ public class AttributesTest extends TestCase {
             final DomElement objectToTest = getNewInstanceForClassUnderTest(page);
             objectToTest.setAttribute(attributeName_, value);
 
-            final Object noObjects[] = new Object[0];
+            final Object[] noObjects = new Object[0];
             final Object result = method_.invoke(objectToTest, noObjects);
             assertSame(value, result);
         }

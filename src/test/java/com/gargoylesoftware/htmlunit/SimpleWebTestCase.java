@@ -275,7 +275,7 @@ public abstract class SimpleWebTestCase extends WebTestCase {
         if (jsThreads.size() > 0) {
             final Map<String, StackTraceElement[]> stackTraces = new HashMap<>();
             for (final Thread t : jsThreads) {
-                final StackTraceElement elts[] = t.getStackTrace();
+                final StackTraceElement[] elts = t.getStackTrace();
                 if (elts != null) {
                     stackTraces.put(t.getName(), elts);
                 }
@@ -285,7 +285,7 @@ public abstract class SimpleWebTestCase extends WebTestCase {
                 System.err.println("JS threads still running:");
                 for (final Map.Entry<String, StackTraceElement[]> entry : stackTraces.entrySet()) {
                     System.err.println("Thread: " + entry.getKey());
-                    final StackTraceElement elts[] = entry.getValue();
+                    final StackTraceElement[] elts = entry.getValue();
                     for (final StackTraceElement elt : elts) {
                         System.err.println(elt);
                     }
