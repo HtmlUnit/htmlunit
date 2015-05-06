@@ -90,7 +90,7 @@ public class RowContainer extends HTMLElement {
         if (rowIndex == -1) {
             rowIndex = rowCount - 1;
         }
-        final boolean rowIndexValid = (rowIndex >= 0 && rowIndex < rowCount);
+        final boolean rowIndexValid = rowIndex >= 0 && rowIndex < rowCount;
         if (rowIndexValid) {
             final SimpleScriptable row = (SimpleScriptable) rows.item(Integer.valueOf(rowIndex));
             row.getDomNodeOrDie().remove();
@@ -170,8 +170,8 @@ public class RowContainer extends HTMLElement {
     public Object moveRow(final int sourceIndex, final int targetIndex) {
         final HTMLCollection rows = (HTMLCollection) getRows();
         final int rowCount = rows.getLength();
-        final boolean sourceIndexValid = (sourceIndex >= 0 && sourceIndex < rowCount);
-        final boolean targetIndexValid = (targetIndex >= 0 && targetIndex < rowCount);
+        final boolean sourceIndexValid = sourceIndex >= 0 && sourceIndex < rowCount;
+        final boolean targetIndexValid = targetIndex >= 0 && targetIndex < rowCount;
         if (sourceIndexValid && targetIndexValid) {
             final SimpleScriptable sourceRow = (SimpleScriptable) rows.item(Integer.valueOf(sourceIndex));
             final SimpleScriptable targetRow = (SimpleScriptable) rows.item(Integer.valueOf(targetIndex));

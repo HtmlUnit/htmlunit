@@ -82,7 +82,7 @@ public class Cookie implements Serializable {
             throw new IllegalArgumentException("Cookie domain must be specified");
         }
 
-        final BasicClientCookie cookie = new BasicClientCookie(name, (value != null ? value : ""));
+        final BasicClientCookie cookie = new BasicClientCookie(name, value != null ? value : "");
         cookie.setDomain(domain);
         cookie.setPath(path);
         cookie.setExpiryDate(expires);
@@ -115,7 +115,7 @@ public class Cookie implements Serializable {
     public Cookie(final String domain, final String name, final String value, final String path, final int maxAge,
         final boolean secure) {
 
-        final BasicClientCookie cookie = new BasicClientCookie(name, (value != null ? value : ""));
+        final BasicClientCookie cookie = new BasicClientCookie(name, value != null ? value : "");
         cookie.setDomain(domain);
         cookie.setPath(path);
         cookie.setSecure(secure);

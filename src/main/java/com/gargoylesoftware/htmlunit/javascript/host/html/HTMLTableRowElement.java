@@ -167,7 +167,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
         }
         final HtmlTableRow htmlRow = (HtmlTableRow) getDomNodeOrDie();
 
-        final boolean indexValid = (position >= -1 && position <= htmlRow.getCells().size());
+        final boolean indexValid = position >= -1 && position <= htmlRow.getCells().size();
         if (indexValid) {
             final DomElement newCell = ((HtmlPage) htmlRow.getPage()).createElement("td");
             if (position == -1 || position == htmlRow.getCells().size()) {
@@ -203,7 +203,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
         if (position == -1) {
             position = htmlRow.getCells().size() - 1;
         }
-        final boolean indexValid = (position >= -1 && position <= htmlRow.getCells().size());
+        final boolean indexValid = position >= -1 && position <= htmlRow.getCells().size();
         if (!indexValid) {
             throw Context.reportRuntimeError("Index or size is negative or greater than the allowed amount");
         }

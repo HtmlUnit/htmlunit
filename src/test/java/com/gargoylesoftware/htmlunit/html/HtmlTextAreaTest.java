@@ -253,7 +253,7 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts(DEFAULT = " foo \n bar <p>html snippet</p>",
-    FF = "foo bar <p>html snippet</p>")
+            FF = "foo bar <p>html snippet</p>")
     public void testParentAsText() throws Exception {
         final String content
             = "<html><head><title>foo</title></head><body>\n"

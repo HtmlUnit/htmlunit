@@ -1200,7 +1200,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             @Override
             public Object callFunction(
                     final HtmlPage htmlPage, final Function javaScriptFunction,
-                    final Scriptable thisObject, final Object [] args,
+                    final Scriptable thisObject, final Object[] args,
                     final DomNode htmlElement) {
                 return null;
             }

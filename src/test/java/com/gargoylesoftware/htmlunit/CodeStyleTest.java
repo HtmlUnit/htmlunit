@@ -574,7 +574,7 @@ public class CodeStyleTest {
                 && !relativePath.contains("HTMLDocument")) {
             int index = 1;
             for (final String line : lines) {
-                if ((line.contains(".isIE()") || line.contains(".isFirefox()"))) {
+                if (line.contains(".isIE()") || line.contains(".isFirefox()")) {
                     addFailure(".isIE() and .isFirefox() should not be used, please use .hasFeature(): "
                             + relativePath + ", line: " + index);
                 }

@@ -719,7 +719,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "on-", "on-", "on-", "on-", })
+    @Alerts({ "on-", "on-", "on-", "on-" })
     public void defaultValues() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

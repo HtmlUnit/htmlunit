@@ -223,7 +223,7 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
      */
     private boolean isDefinedIn(final Browser[] browsers) {
         for (final Browser browser : browsers) {
-            switch(browser) {
+            switch (browser) {
                 case IE:
                     if (browserVersion_.isIE()) {
                         return true;

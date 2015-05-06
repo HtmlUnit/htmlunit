@@ -91,12 +91,12 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
             response.setContentType(request.getParameter("type"));
             final Writer writer = response.getWriter();
-            final boolean doctype = (request.getParameter("doctype") != null);
+            final boolean doctype = request.getParameter("doctype") != null;
             if (doctype) {
                 writer.write(XHTML_DOCTYPE);
             }
             writer.write("<html");
-            final boolean ns = (request.getParameter("ns") != null);
+            final boolean ns = request.getParameter("ns") != null;
             if (ns) {
                 writer.write(" xmlns='http://www.w3.org/1999/xhtml'");
             }

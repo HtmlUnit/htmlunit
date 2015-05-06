@@ -454,7 +454,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @return <code>true</code> if this element matches the conditions
      */
     private boolean isAccessibleByIdOrName(final HtmlElement element, final String name) {
-        if ((element instanceof FormFieldWithNameHistory && !(element instanceof HtmlImageInput))) {
+        if (element instanceof FormFieldWithNameHistory && !(element instanceof HtmlImageInput)) {
             if (element.getEnclosingForm() != getHtmlForm()) {
                 return false; // nested forms
             }

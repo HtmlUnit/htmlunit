@@ -225,7 +225,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
         final String cmd = "document.getElementById('cell').a='original';document.getElementById('cell')";
         final Object object = page_.executeJavaScript(cmd).getJavaScriptResult();
 
-        final HTMLElement jselement = ((HTMLElement) object);
+        final HTMLElement jselement = (HTMLElement) object;
         assertEquals("original", ScriptableObject.getProperty(jselement, "a"));
 
         assertSame(jselement, cell_.getScriptObject());

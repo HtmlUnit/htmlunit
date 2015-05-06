@@ -67,7 +67,7 @@ public class MemoryLeakDetector {
     private void gc() {
         final Runtime rt = Runtime.getRuntime();
         for (int i = 0; i < 3; i++) {
-            allocateMemory((int) (2e6));
+            allocateMemory((int) 2e6);
             for (int j = 0; j < 3; j++) {
                 rt.gc();
             }

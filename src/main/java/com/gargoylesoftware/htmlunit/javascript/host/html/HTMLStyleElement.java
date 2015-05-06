@@ -78,7 +78,7 @@ public class HTMLStyleElement extends HTMLElement {
         final Cache cache = getWindow().getWebWindow().getWebClient().getCache();
         final org.w3c.dom.css.CSSStyleSheet cached = cache.getCachedStyleSheet(css);
         final String uri = getDomNodeOrDie().getPage().getWebResponse().getWebRequest()
-        .getUrl().toExternalForm();
+                .getUrl().toExternalForm();
         if (cached != null) {
             sheet_ = new CSSStyleSheet(this, cached, uri);
         }

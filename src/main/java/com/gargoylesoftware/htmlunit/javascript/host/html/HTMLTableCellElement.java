@@ -112,10 +112,10 @@ public class HTMLTableCellElement extends HTMLTableComponent {
                 final HtmlElement thiz = getDomNodeOrDie();
                 final List<HtmlTableCell> cells = row.getCells();
                 final boolean ie = getBrowserVersion().hasFeature(JS_TABLE_CELL_OFFSET_INCLUDES_BORDER);
-                final boolean leftmost = (cells.indexOf(thiz) == 0);
-                final boolean rightmost = (cells.indexOf(thiz) == cells.size() - 1);
-                w -= ((ie && leftmost ? 0 : 0.5) * style.getBorderLeftValue());
-                w -= ((ie && rightmost ? 0 : 0.5) * style.getBorderRightValue());
+                final boolean leftmost = cells.indexOf(thiz) == 0;
+                final boolean rightmost = cells.indexOf(thiz) == cells.size() - 1;
+                w -= (ie && leftmost ? 0 : 0.5) * style.getBorderLeftValue();
+                w -= (ie && rightmost ? 0 : 0.5) * style.getBorderRightValue();
             }
         }
 
@@ -291,7 +291,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     @JsxSetter
     public void setNoWrap(final boolean noWrap) {
         if (noWrap) {
-            final String value = (getBrowserVersion().hasFeature(JS_TABLE_CELL_NOWRAP_VALUE_TRUE_IF_SET) ? "true" : "");
+            final String value = getBrowserVersion().hasFeature(JS_TABLE_CELL_NOWRAP_VALUE_TRUE_IF_SET) ? "true" : "";
             getDomNodeOrDie().setAttribute("noWrap", value);
         }
         else {

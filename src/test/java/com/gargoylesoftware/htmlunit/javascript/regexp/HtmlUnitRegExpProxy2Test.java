@@ -90,7 +90,7 @@ public class HtmlUnitRegExpProxy2Test extends SimpleWebTestCase {
     public void fixedInHtmlUnit() throws Exception {
         final String html = "<html></html>";
         final HtmlPage page = loadPage(html);
-        final Window topScope = ((Window) page.getEnclosingWindow().getScriptObject());
+        final Window topScope = (Window) page.getEnclosingWindow().getScriptObject();
         topScope.put("str", topScope, str_);
         topScope.put("text", topScope, text_);
         topScope.put("expected", topScope, expected_);

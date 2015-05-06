@@ -204,7 +204,7 @@ public class AlphanumericTest extends WebDriverTestCase {
 
             setExpectedAlerts(expected);
 
-            final String s = "sd" + input + String.valueOf(((i + 10) * (i + 10) - 2 * (i + 10)));
+            final String s = "sd" + input + String.valueOf((i + 10) * (i + 10) - 2 * (i + 10));
             test("'" + s + "'.match(new RegExp('\\\\W'))", false);
         }
     }

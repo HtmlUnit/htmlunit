@@ -816,7 +816,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
 
         // avoid using equals() on URL because it takes to much time (due to ip resolution)
         assertEquals("first", collectedItems.get(0));
-        assertEquals(URL_SECOND, ((URL) collectedItems.get(1)));
+        assertEquals(URL_SECOND, (URL) collectedItems.get(1));
         assertEquals(Integer.valueOf(3), collectedItems.get(2));
     }
 

@@ -537,7 +537,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final BaseFunction eventHandler = new EventHandler(htmlElt, eventName, attrValue);
         setEventHandler(eventName, eventHandler);
         // forward onload, onclick, ondblclick, ... to window
-        if ((htmlElt instanceof HtmlBody || htmlElt instanceof HtmlFrameSet)) {
+        if (htmlElt instanceof HtmlBody || htmlElt instanceof HtmlFrameSet) {
             getWindow().getEventListenersContainer()
                 .setEventHandlerProp(eventName.substring(2), eventHandler);
         }
@@ -1779,8 +1779,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             final String home = getDomNodeOrDie().getPage().getEnclosingWindow()
                     .getWebClient().getOptions().getHomePage();
             final boolean sameDomains = newUrl.getHost().equalsIgnoreCase(currentUrl.getHost());
-            final boolean isHomePage = (home != null && home.equals(url));
-            return (sameDomains && isHomePage);
+            final boolean isHomePage = home != null && home.equals(url);
+            return sameDomains && isHomePage;
         }
         catch (final MalformedURLException e) {
             return false;
@@ -2868,7 +2868,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final boolean staticPos = "static".equals(position);
 
         final boolean fixedPos = "fixed".equals(position);
-        final boolean useTables = ((useTablesIfFixed && (staticPos || fixedPos)) || (!useTablesIfFixed && staticPos));
+        final boolean useTables = (useTablesIfFixed && (staticPos || fixedPos)) || (!useTablesIfFixed && staticPos);
 
         while (currentElement != null) {
 

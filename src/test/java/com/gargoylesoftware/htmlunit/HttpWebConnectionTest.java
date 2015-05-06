@@ -290,12 +290,12 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         builder.build().writeTo(baos);
         final String part = baos.toString(encoding);
 
-        final String expected = ("--(.*)\r\n"
+        final String expected = "--(.*)\r\n"
                 + "Content-Disposition: form-data; name=\"myFile\"; filename=\"doesnt_exist.txt\"\r\n"
                 + "Content-Type: text/plain\r\n"
                 + "\r\n"
                 + "\r\n"
-                + "--\\1--\r\n");
+                + "--\\1--\r\n";
         Assert.assertTrue(part, part.matches(expected));
     }
 

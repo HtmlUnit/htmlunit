@@ -1308,7 +1308,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
             IE8 = { "2", "2", "2", "4", "4", "3" })
-    @NotYetImplemented()
+    @NotYetImplemented
     public void rt() throws Exception {
         loadPageWithAlerts2(test("rt"));
     }
@@ -1321,7 +1321,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "3", "2", "2", "3", "2", "2" },
             IE8 = { "2", "2", "2", "4", "4", "3" })
-    @NotYetImplemented()
+    @NotYetImplemented
     public void rp() throws Exception {
         loadPageWithAlerts2(test("rp"));
     }

@@ -297,8 +297,8 @@ public class EventListenersContainer implements Serializable {
      */
     public boolean hasEventHandlers(final String eventName) {
         final Handlers h = eventHandlers_.get(eventName);
-        return (h != null
-            && (h.handler_ instanceof Function || !h.bubblingHandlers_.isEmpty() || !h.capturingHandlers_.isEmpty()));
+        return h != null
+            && (h.handler_ instanceof Function || !h.bubblingHandlers_.isEmpty() || !h.capturingHandlers_.isEmpty());
     }
 
     /**
