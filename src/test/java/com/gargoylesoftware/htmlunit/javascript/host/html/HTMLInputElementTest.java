@@ -495,7 +495,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             "radio: true, true, function, function, , on",
             "text: false, false, function, function, , ",
             "password: false, false, function, function, , "
-    })
+        })
     public void defaultValues() throws Exception {
         final String html
             = "<html><head></head><body>\n"

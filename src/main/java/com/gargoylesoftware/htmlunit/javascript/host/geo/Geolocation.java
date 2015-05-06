@@ -52,10 +52,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClasses({
-    @JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
-    browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
-})
+        @JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 11) }),
+        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
+        browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
+    })
 public class Geolocation extends SimpleScriptable {
 
     private static final Log LOG = LogFactory.getLog(Geolocation.class);

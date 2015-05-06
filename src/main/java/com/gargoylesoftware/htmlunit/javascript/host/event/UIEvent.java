@@ -39,9 +39,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
  * @author Frank Danek
  */
 @JsxClasses({
-    @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-})
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
+            browsers = @WebBrowser(value = IE, maxVersion = 8))
+    })
 public class UIEvent extends Event {
 
     /** Specifies some detail information about the event. */

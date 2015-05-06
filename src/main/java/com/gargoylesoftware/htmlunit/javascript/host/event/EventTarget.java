@@ -53,10 +53,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Ahmed Ashour
  */
 @JsxClasses({
-    @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
-        browsers = @WebBrowser(IE))
-})
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
+        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
+            browsers = @WebBrowser(IE))
+    })
 public class EventTarget extends SimpleScriptable {
 
     private EventListenersContainer eventListenersContainer_;
