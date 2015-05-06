@@ -50,10 +50,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms763824.aspx">IXMLDOMNamedNodeMap</a>
  */
 @JsxClasses({
-    @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = @WebBrowser(FF)),
-    @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-})
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) }),
+        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = @WebBrowser(FF)),
+        @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+    })
 public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFallbackGetter {
 
     private final org.w3c.dom.NamedNodeMap attributes_;

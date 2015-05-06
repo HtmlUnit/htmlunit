@@ -42,9 +42,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation;
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535867.aspx">MSDN documentation</a>
  */
 @JsxClasses({
-    @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
-})
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+        @JsxClass(isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8))
+    })
 public class Navigator extends SimpleScriptable {
 
     private PluginArray plugins_;

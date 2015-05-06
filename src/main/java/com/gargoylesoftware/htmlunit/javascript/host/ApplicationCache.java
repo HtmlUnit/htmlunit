@@ -46,9 +46,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  * @see <a href="https://developer.mozilla.org/en/nsIDOMOfflineResourceList">Mozilla Documentation</a>
  */
 @JsxClasses({
-    @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(className = "OfflineResourceList", browsers = @WebBrowser(FF))
-})
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) }),
+        @JsxClass(className = "OfflineResourceList", browsers = @WebBrowser(FF))
+    })
 public class ApplicationCache extends EventTarget {
 
     /** The object isn't associated with an application cache. */

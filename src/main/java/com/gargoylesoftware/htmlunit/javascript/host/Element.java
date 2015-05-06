@@ -60,11 +60,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
  * @author Frank Danek
  */
 @JsxClasses({
-    @JsxClass(domClass = DomElement.class,
-            browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(isJSObject = false, domClass = DomElement.class,
-        browsers = { @WebBrowser(value = IE, maxVersion = 8) })
-})
+        @JsxClass(domClass = DomElement.class,
+                browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) }),
+        @JsxClass(isJSObject = false, domClass = DomElement.class,
+            browsers = { @WebBrowser(value = IE, maxVersion = 8) })
+    })
 public class Element extends EventNode {
 
     private NamedNodeMap attributes_;

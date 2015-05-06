@@ -50,9 +50,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Andrea Martino
  */
 @JsxClasses({
-    @JsxClass(isJSObject = false, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) }),
-    @JsxClass(browsers = @WebBrowser(value = IE, minVersion = 11))
-})
+        @JsxClass(isJSObject = false, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) }),
+        @JsxClass(browsers = @WebBrowser(value = IE, minVersion = 11))
+    })
 public class Console extends SimpleScriptable {
 
     private static final Map<String, Long> TIMERS = new HashMap<>();

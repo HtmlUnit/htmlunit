@@ -33,9 +33,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClasses({
-    @JsxClass(browsers = { @WebBrowser(value = FF, minVersion = 31) }),
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = false)
-})
+        @JsxClass(browsers = { @WebBrowser(value = FF, minVersion = 31) }),
+        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false)
+    })
 public class External extends SimpleScriptable {
 
     /**

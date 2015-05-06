@@ -34,13 +34,13 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms535906.aspx">MSDN Documentation</a>
  */
 @JsxClasses({
-    @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24),
-        @WebBrowser(value = IE, minVersion = 11) }),
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
-        browsers = { @WebBrowser(value = IE, maxVersion = 8) }),
-    @JsxClass(className = "DOMRect",
-        browsers = { @WebBrowser(value = FF, minVersion = 31) })
-})
+        @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 24),
+            @WebBrowser(value = IE, minVersion = 11) }),
+        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false,
+            browsers = { @WebBrowser(value = IE, maxVersion = 8) }),
+        @JsxClass(className = "DOMRect",
+            browsers = { @WebBrowser(value = FF, minVersion = 31) })
+    })
 public class ClientRect extends SimpleScriptable {
 
     private int bottom_;
