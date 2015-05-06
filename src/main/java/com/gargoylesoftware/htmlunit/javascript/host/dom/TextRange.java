@@ -317,7 +317,7 @@ public class TextRange extends SimpleScriptable {
             moveBy -= to;
         }
         else if (to >= textLength) {
-            moveBy -= (to - textLength);
+            moveBy -= to - textLength;
         }
         return moveBy;
     }

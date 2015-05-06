@@ -1152,7 +1152,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                         }
                     });
                 }
-                width -= (getBorderHorizontal() + getPaddingHorizontal());
+                width -= getBorderHorizontal() + getPaddingHorizontal();
             }
             else if (node instanceof HtmlSubmitInput || node instanceof HtmlResetInput
                         || node instanceof HtmlButtonInput || node instanceof HtmlButton

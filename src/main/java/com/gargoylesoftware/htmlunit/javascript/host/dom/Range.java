@@ -92,11 +92,11 @@ public class Range extends SimpleScriptable {
 
     Range(final org.w3c.dom.ranges.Range w3cRange) {
         final DomNode domNodeStartContainer = (DomNode) w3cRange.getStartContainer();
-        startContainer_ = (Node) (domNodeStartContainer).getScriptObject();
+        startContainer_ = (Node) domNodeStartContainer.getScriptObject();
         startOffset_ = w3cRange.getStartOffset();
 
         final DomNode domNodeEndContainer = (DomNode) w3cRange.getEndContainer();
-        endContainer_ = (Node) (domNodeEndContainer).getScriptObject();
+        endContainer_ = (Node) domNodeEndContainer.getScriptObject();
         endOffset_ = w3cRange.getEndOffset();
     }
 
@@ -209,7 +209,7 @@ public class Range extends SimpleScriptable {
      */
     @JsxGetter
     public boolean getCollapsed() {
-        return (startContainer_ == endContainer_ && startOffset_ == endOffset_);
+        return startContainer_ == endContainer_ && startOffset_ == endOffset_;
     }
 
     /**

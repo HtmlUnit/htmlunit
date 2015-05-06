@@ -626,12 +626,12 @@ public class CSSStyleSheet extends StyleSheet {
             return element == element.getPage().getDocumentElement();
         }
         else if ("enabled".equals(value)) {
-            return (element instanceof DisabledElement && !((DisabledElement) element).isDisabled());
+            return element instanceof DisabledElement && !((DisabledElement) element).isDisabled();
         }
-        else if ("disabled".equals(value)) {
-            return (element instanceof DisabledElement && ((DisabledElement) element).isDisabled());
+        if ("disabled".equals(value)) {
+            return element instanceof DisabledElement && ((DisabledElement) element).isDisabled();
         }
-        else if ("focus".equals(value)) {
+        if ("focus".equals(value)) {
             final HtmlPage htmlPage = element.getHtmlPageOrNull();
             if (htmlPage != null) {
                 final HtmlElement focus = htmlPage.getFocusedElement();

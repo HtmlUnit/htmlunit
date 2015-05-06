@@ -201,7 +201,7 @@ public class NodeIterator extends SimpleScriptable {
         }
         Function function = null;
         if (filter_ instanceof Function) {
-            function = ((Function) filter_);
+            function = (Function) filter_;
         }
         final Object acceptNode = filter_.get("acceptNode", filter_);
         if (acceptNode instanceof Function) {

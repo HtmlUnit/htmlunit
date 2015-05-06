@@ -245,7 +245,7 @@ public class TreeWalker extends SimpleScriptable {
 
     /* Returns whether the node is skipped by the TreeWalker. */
     private boolean isNodeSkipped(final Node n) {
-        return (!isNodeVisible(n) && !isNodeRejected(n));
+        return !isNodeVisible(n) && !isNodeRejected(n);
     }
 
     /**

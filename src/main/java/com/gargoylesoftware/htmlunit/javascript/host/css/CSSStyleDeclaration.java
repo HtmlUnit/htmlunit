@@ -3987,13 +3987,13 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         if (zIndex instanceof Number) {
             final Number number = (Number) zIndex;
             if (number.doubleValue() % 1 == 0) {
-                setStyleAttribute(Z_INDEX, (Integer.toString(number.intValue())));
+                setStyleAttribute(Z_INDEX, Integer.toString(number.intValue()));
             }
             return;
         }
         try {
             final int i = Integer.parseInt(zIndex.toString());
-            setStyleAttribute(Z_INDEX, (Integer.toString(i)));
+            setStyleAttribute(Z_INDEX, Integer.toString(i));
         }
         catch (final NumberFormatException e) {
             // ignore
@@ -4046,7 +4046,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         // TODO: rework the whole CSS processing here! we should *always* parse the style!
         if (styleDeclaration_ == null) {
             final String uri = getDomNodeOrDie().getPage().getWebResponse().getWebRequest()
-            .getUrl().toExternalForm();
+                    .getUrl().toExternalForm();
             final String styleAttribute = jsElement_.getDomNodeOrDie().getAttribute("style");
             final InputSource source = new InputSource(new StringReader(styleAttribute));
             source.setURI(uri);

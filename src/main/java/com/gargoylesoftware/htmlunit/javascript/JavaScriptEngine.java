@@ -738,7 +738,7 @@ public class JavaScriptEngine {
             final HtmlPage htmlPage,
             final Function javaScriptFunction,
             final Scriptable thisObject,
-            final Object [] args,
+            final Object[] args,
             final DomNode htmlElement) {
 
         final Scriptable scope = getScope(htmlPage, htmlElement);

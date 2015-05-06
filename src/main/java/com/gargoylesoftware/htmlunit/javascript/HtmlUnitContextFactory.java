@@ -163,7 +163,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
 
             // this method gets called by Context.compileString and by ScriptRuntime.evalSpecial
             // which is used for window.eval. We have to take care in which case we are.
-            final boolean isWindowEval = (compiler != null);
+            final boolean isWindowEval = compiler != null;
 
             // Remove HTML comments around the source if needed
             if (!isWindowEval) {

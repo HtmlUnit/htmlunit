@@ -137,7 +137,7 @@ public class Selection extends SimpleScriptable {
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public boolean getIsCollapsed() {
         final List<Range> ranges = getRanges();
-        return (ranges.isEmpty() || (ranges.size() == 1 && ranges.get(0).getCollapsed()));
+        return ranges.isEmpty() || (ranges.size() == 1 && ranges.get(0).getCollapsed());
     }
 
     /**
