@@ -136,6 +136,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
+import com.gargoylesoftware.htmlunit.javascript.host.performance.Performance;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -2263,5 +2264,17 @@ class HTMLCollectionFrames extends HTMLCollection {
                 idList.add(windowName);
             }
         }
+    }
+
+    /**
+     * Returns the {@code performance} property.
+     * @return the {@code performance} property
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public Performance getPerformance() {
+        final Performance performance = new Performance();
+        performance.setParentScope(getParentScope());
+        performance.setPrototype(getPrototype(performance.getClass()));
+        return performance;
     }
 }
