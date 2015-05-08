@@ -2202,6 +2202,18 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         }
         return port;
     }
+
+    /**
+     * Returns the {@code performance} property.
+     * @return the {@code performance} property
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public Performance getPerformance() {
+        final Performance performance = new Performance();
+        performance.setParentScope(getParentScope());
+        performance.setPrototype(getPrototype(performance.getClass()));
+        return performance;
+    }
 }
 
 class HTMLCollectionFrames extends HTMLCollection {
@@ -2264,17 +2276,5 @@ class HTMLCollectionFrames extends HTMLCollection {
                 idList.add(windowName);
             }
         }
-    }
-
-    /**
-     * Returns the {@code performance} property.
-     * @return the {@code performance} property
-     */
-    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
-    public Performance getPerformance() {
-        final Performance performance = new Performance();
-        performance.setParentScope(getParentScope());
-        performance.setPrototype(getPrototype(performance.getClass()));
-        return performance;
     }
 }

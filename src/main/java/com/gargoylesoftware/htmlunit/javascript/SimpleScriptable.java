@@ -317,7 +317,7 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
     @Override
     public Object getDefaultValue(final Class<?> hint) {
         if (String.class.equals(hint) || hint == null) {
-            if (getBrowserVersion().hasFeature(JS_OBJECT_IN_QUIRKS_MODE)) {
+            if (getParentScope() != null && getBrowserVersion().hasFeature(JS_OBJECT_IN_QUIRKS_MODE)) {
                 final Page page = getWindow().getWebWindow().getEnclosedPage();
                 if (page != null && page.isHtmlPage() && ((HtmlPage) page).isQuirksMode()) {
                     return "[object]";
