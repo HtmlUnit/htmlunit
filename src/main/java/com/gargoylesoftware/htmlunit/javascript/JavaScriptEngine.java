@@ -402,11 +402,9 @@ public class JavaScriptEngine {
         if (!browserVersion.hasFeature(STRING_TRIM)) {
             removePrototypeProperties(window, "String", "trim");
         }
-        if (browserVersion.hasFeature(STRING_TRIM_LEFT_RIGHT)) {
-            final ScriptableObject stringPrototype =
-                (ScriptableObject) ScriptableObject.getClassPrototype(window, "String");
-            stringPrototype.defineFunctionProperties(new String[] {"trimLeft", "trimRight"},
-                StringCustom.class, ScriptableObject.EMPTY);
+        if (!browserVersion.hasFeature(STRING_TRIM_LEFT_RIGHT)) {
+            removePrototypeProperties(window, "String", "trimLeft");
+            removePrototypeProperties(window, "String", "trimRight");
         }
         if (browserVersion.hasFeature(STRING_CONTAINS)) {
             final ScriptableObject stringPrototype =
