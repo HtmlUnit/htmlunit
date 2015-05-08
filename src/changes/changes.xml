@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.17" date="???" description="Bugfixes">
+            <action type="update" dev="asashour">
+                Update htmlunit-core-js to Rhino head of 07.05.2015 + custom patches.
+            </action>
             <action type="add" dev="asashour" issue="1680">
                 JavaScript: implement MessageChannel.
             </action>
