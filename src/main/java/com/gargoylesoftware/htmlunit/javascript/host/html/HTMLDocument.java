@@ -2106,7 +2106,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             && ("querySelectorAll".equals(name) || "querySelector".equals(name))
             && getBrowserVersion().hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
             Document document = null;
-            final HtmlPage page = getHtmlPageOrNull();
+            final HtmlPage page = ((HTMLDocument) start).getHtmlPageOrNull();
             if (page != null) {
                 document = (Document) page.getScriptObject();
             }
