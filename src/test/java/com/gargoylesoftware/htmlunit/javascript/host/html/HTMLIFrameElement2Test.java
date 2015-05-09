@@ -24,7 +24,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -34,6 +33,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
 public class HTMLIFrameElement2Test extends WebDriverTestCase {
@@ -517,8 +517,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "createIFrame", "loaded" })
-    @NotYetImplemented(Browser.IE8)
+    @Alerts(DEFAULT = { "createIFrame", "loaded" },
+            IE8 = "createIFrame")
     public void documentCreateElement_onLoad_srcAboutBlank() throws Exception {
         documentCreateElement_onLoad_srcX("about:blank");
     }
@@ -527,8 +527,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "createIFrame", "loaded" })
-    @NotYetImplemented(Browser.IE8)
+    @Alerts(DEFAULT = { "createIFrame", "loaded" },
+            IE8 = "createIFrame")
     public void documentCreateElement_onLoad_srcSomePage() throws Exception {
         documentCreateElement_onLoad_srcX("foo.html");
     }
