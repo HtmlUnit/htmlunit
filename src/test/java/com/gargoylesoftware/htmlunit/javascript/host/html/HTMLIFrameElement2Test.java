@@ -24,6 +24,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -510,6 +511,49 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, html2);
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "createIFrame", "loaded" })
+    @NotYetImplemented(Browser.IE8)
+    public void documentCreateElement_onLoad_srcAboutBlank() throws Exception {
+        documentCreateElement_onLoad_srcX("about:blank");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "createIFrame", "loaded" })
+    @NotYetImplemented(Browser.IE8)
+    public void documentCreateElement_onLoad_srcSomePage() throws Exception {
+        documentCreateElement_onLoad_srcX("foo.html");
+    }
+
+    private void documentCreateElement_onLoad_srcX(final String iframeSrc) throws Exception {
+        final String html = "<html><body><script>\n"
+            + "function createIFrame() {\n"
+            + "  alert('createIFrame');\n"
+            + "  var myFrame = document.createElement('iframe');\n"
+            + "  myFrame.onload = handleFrameLoad;\n"
+            + "  myFrame.src = '" + iframeSrc + "';\n"
+            + "  document.body.appendChild(myFrame);\n"
+            + "}\n"
+            + "function handleFrameLoad() {\n"
+            + "  alert('loaded');\n"
+            + "}\n"
+            + "</script>\n"
+            + "<button id='it' onclick='createIFrame()'>click me</button>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("it")).click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 
     /**

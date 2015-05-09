@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.17" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem">
+                JavaScript: execute onload handlers for dynamically created iframe as well when src is set to about:blank.
+            </action>
             <action type="update" dev="asashour">
                 Update htmlunit-core-js to Rhino head of 07.05.2015 + custom patches.
             </action>
