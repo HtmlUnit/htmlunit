@@ -403,12 +403,19 @@ public abstract class BaseFrameElement extends HtmlElement {
             loadInnerPageIfPossible(src);
         }
         else {
+            final Page pageInFrame = getEnclosedPage();
             final PostponedAction action = new PostponedAction(getPage()) {
                 @Override
                 public void execute() throws Exception {
                     if (!src.isEmpty() && getSrcAttribute().equals(src)) {
                         loadInnerPage();
                     }
+                }
+
+                @Override
+                public boolean isStillAlive() {
+                    // skip if page in frame has already been changed
+                    return super.isStillAlive() && pageInFrame == getEnclosedPage();
                 }
             };
             jsEngine.addPostponedAction(action);

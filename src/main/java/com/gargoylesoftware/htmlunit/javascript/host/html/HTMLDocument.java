@@ -687,6 +687,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         if (!closePostponedAction_) {
             closePostponedAction_ = true;
             final HtmlPage page = getDomNodeOrDie();
+            final WebWindow enclosingWindow = page.getEnclosingWindow();
             page.getWebClient().getJavaScriptEngine().addPostponedAction(new PostponedAction(page) {
                 @Override
                 public void execute() throws Exception {
@@ -694,6 +695,11 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                         close();
                     }
                     closePostponedAction_ = false;
+                }
+
+                @Override
+                public boolean isStillAlive() {
+                    return !enclosingWindow.isClosed();
                 }
             });
         }
@@ -2106,13 +2112,15 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             && ("querySelectorAll".equals(name) || "querySelector".equals(name))
             && getBrowserVersion().hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
             Document document = null;
-            final HtmlPage page = ((HTMLDocument) start).getHtmlPageOrNull();
-            if (page != null) {
-                document = (Document) page.getScriptObject();
-            }
-            else if (start instanceof DocumentProxy) {
+            if (start instanceof DocumentProxy) {
                 // if in prototype no domNode is set -> use start
                 document = ((DocumentProxy) start).getDelegee();
+            }
+            else {
+                final HtmlPage page = ((HTMLDocument) start).getHtmlPageOrNull();
+                if (page != null) {
+                    document = (Document) page.getScriptObject();
+                }
             }
             if (document != null && document instanceof HTMLDocument
                 && ((HTMLDocument) document).getDocumentMode() < 8) {

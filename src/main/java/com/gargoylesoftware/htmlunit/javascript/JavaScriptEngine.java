@@ -760,9 +760,9 @@ public class JavaScriptEngine {
         final ContextAction action = new HtmlUnitContextAction(scope, htmlPage) {
             @Override
             public Object doRun(final Context cx) {
-            	if (ScriptRuntime.hasTopCall(cx)) {
-            		return function.call(cx, scope, thisObject, args);
-            	}
+                if (ScriptRuntime.hasTopCall(cx)) {
+                    return function.call(cx, scope, thisObject, args);
+                }
                 return ScriptRuntime.doTopCall(function, cx, scope, thisObject, args);
             }
             @Override
@@ -880,9 +880,12 @@ public class JavaScriptEngine {
             postponedActions_.set(null);
             try {
                 for (final PostponedAction action : actions) {
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("Processing PostponedAction " + action);
+                    }
+
                     // verify that the page that registered this PostponedAction is still alive
-                    final Page owningPage = action.getOwningPage();
-                    if (owningPage != null && owningPage == owningPage.getEnclosingWindow().getEnclosedPage()) {
+                    if (action.isStillAlive()) {
                         action.execute();
                     }
                 }

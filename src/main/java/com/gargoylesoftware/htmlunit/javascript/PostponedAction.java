@@ -41,7 +41,7 @@ public abstract class PostponedAction {
      * Gets the owning page.
      * @return the page that initiated this action or <code>null</code> if it has already been GCed
      */
-    Page getOwningPage() {
+    protected Page getOwningPage() {
         return owningPageRef_.get();
     }
 
@@ -50,4 +50,13 @@ public abstract class PostponedAction {
      * @throws Exception if it fails
      */
     public abstract void execute() throws Exception;
+
+    /**
+     * Indicates if the action still needs to be executed.
+     * @return <code>true</code> if the action needs to be executed
+     */
+    public boolean isStillAlive() {
+        final Page owningPage = getOwningPage();
+        return (owningPage != null) && (owningPage == owningPage.getEnclosingWindow().getEnclosedPage());
+    }
 }
