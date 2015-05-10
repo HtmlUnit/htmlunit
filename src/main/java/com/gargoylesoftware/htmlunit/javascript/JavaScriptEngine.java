@@ -760,6 +760,9 @@ public class JavaScriptEngine {
         final ContextAction action = new HtmlUnitContextAction(scope, htmlPage) {
             @Override
             public Object doRun(final Context cx) {
+            	if (ScriptRuntime.hasTopCall(cx)) {
+            		return function.call(cx, scope, thisObject, args);
+            	}
                 return ScriptRuntime.doTopCall(function, cx, scope, thisObject, args);
             }
             @Override
