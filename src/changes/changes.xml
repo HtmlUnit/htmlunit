@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.17" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                JavaScript: handle events with functions bound to null.
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: execute onload handlers for dynamically created iframe as well when src is set to about:blank.
             </action>

@@ -681,4 +681,34 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "[object Window]",
+            IE8 = "")
+    public void boundFunction() throws Exception {
+        final String html = "<html><head><script>\n"
+                + "  function test() {\n"
+                + "    if (focusMe.bind) {\n"
+                + "      var boundFunction = focusMe.bind(null);\n"
+                + "      document.getElementById('myId').addEventListener('focus', boundFunction, true);\n"
+                + "    }\n"
+                + "  }\n"
+                + "  function focusMe() {\n"
+                + "    alert(this);\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "  <button id='myId'>Click me</button>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String[] expectedAlerts = getExpectedAlerts();
+
+        driver.findElement(By.id("myId")).click();
+        verifyAlerts(driver, expectedAlerts);
+    }
+
 }

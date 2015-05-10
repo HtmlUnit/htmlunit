@@ -49,6 +49,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.Script;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.UniqueTag;
@@ -759,7 +760,7 @@ public class JavaScriptEngine {
         final ContextAction action = new HtmlUnitContextAction(scope, htmlPage) {
             @Override
             public Object doRun(final Context cx) {
-                return function.call(cx, scope, thisObject, args);
+                return ScriptRuntime.doTopCall(function, cx, scope, thisObject, args);
             }
             @Override
             protected String getSourceCode(final Context cx) {
