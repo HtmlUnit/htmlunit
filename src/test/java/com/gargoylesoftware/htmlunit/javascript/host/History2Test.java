@@ -58,12 +58,12 @@ public class History2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object PopStateEvent]", "null" },
-    		IE8 = { })
+            IE8 = { })
     @NotYetImplemented({ CHROME, FF, IE11 })
     public void pushState() throws Exception {
         final String html = "<html><head><script>\n"
                 + "  function test() {\n"
-        		+ "    if (window.history.pushState) {\n"
+                + "    if (window.history.pushState) {\n"
                 + "      var stateObj = { hi: 'there' };\n"
                 + "      window.history.pushState(stateObj, 'page 2', 'bar.html');\n"
                 + "    }\n"
@@ -81,9 +81,9 @@ public class History2Test extends WebDriverTestCase {
         final String[] expectedAlerts = getExpectedAlerts();
         final WebDriver driver = loadPage2(html);
         if (expectedAlerts.length != 0) {
-        	driver.findElement(By.id("myId")).click();
-        	assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
-        	driver.navigate().back();
+            driver.findElement(By.id("myId")).click();
+            assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
+            driver.navigate().back();
         }
         verifyAlerts(driver, expectedAlerts);
     }
