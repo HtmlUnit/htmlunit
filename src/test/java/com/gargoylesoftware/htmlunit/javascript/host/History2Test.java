@@ -32,10 +32,26 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Tests for {@link History}.
  *
  * @version $Revision$
+ * @author Marc Guillemot
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class History2Test extends WebDriverTestCase {
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("here")
+    public void goShouldIgnoreOutOfBoundIndex() throws Exception {
+        final String html = "<html><body><script>"
+                + "history.go(1);\n"
+                + "alert('here');\n"
+                + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+        assertEquals(1, getMockWebConnection().getRequestCount());
+    }
 
     /**
      * @throws Exception if an error occurs
