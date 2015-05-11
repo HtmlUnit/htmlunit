@@ -14,18 +14,25 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link History}.
  *
  * @version $Revision$
- * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class History2Test extends WebDriverTestCase {
@@ -34,15 +41,35 @@ public class History2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("here")
-    public void goShouldIgnoreOutOfBoundIndex() throws Exception {
-        final String html = "<html><body><script>"
-                + "history.go(1);\n"
-                + "alert('here');\n"
-                + "</script></body></html>";
+    @Alerts(DEFAULT = { "[object PopStateEvent]", "null" },
+    		IE8 = { })
+    @NotYetImplemented({ CHROME, FF, IE11 })
+    public void pushState() throws Exception {
+        final String html = "<html><head><script>\n"
+                + "  function test() {\n"
+        		+ "    if (window.history.pushState) {\n"
+                + "      var stateObj = { hi: 'there' };\n"
+                + "      window.history.pushState(stateObj, 'page 2', 'bar.html');\n"
+                + "    }\n"
+                + "  }\n"
+                + "\n"
+                + "  function popMe(event) {\n"
+                + "    var e = event ? event : window.event;\n"
+                + "    alert(e);\n"
+                + "    alert(e.state);\n"
+                + "  }\n"
+                + "</script></head><body onpopstate='popMe(event)'>\n"
+                + "  <button id=myId onclick='test()'>Click me</button>\n"
+                + "</body></html>";
 
-        loadPageWithAlerts2(html);
-        assertEquals(1, getMockWebConnection().getRequestCount());
+        final String[] expectedAlerts = getExpectedAlerts();
+        final WebDriver driver = loadPage2(html);
+        if (expectedAlerts.length != 0) {
+        	driver.findElement(By.id("myId")).click();
+        	assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
+        	driver.navigate().back();
+        }
+        verifyAlerts(driver, expectedAlerts);
     }
 
 }
