@@ -159,7 +159,7 @@ public class BrowserVersion implements Serializable, Cloneable {
      */
     public static final BrowserVersion FIREFOX_38 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows)",
-        "Mozilla/5.0 (Windows NT 6.1; rv:31.0) Gecko/20100101 Firefox/31.0",
+        "Mozilla/5.0 (Windows NT 6.1; rv:38.0) Gecko/20100101 Firefox/38.0",
         (float) 38.0, "FF38", null);
 
     /**

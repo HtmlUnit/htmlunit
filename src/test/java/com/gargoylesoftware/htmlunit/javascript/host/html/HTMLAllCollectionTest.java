@@ -41,6 +41,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "null",
+            FF38 = "null",
             IE8 = "null")
     public void namedItem_Unknown() throws Exception {
         namedItem("'foo'");
@@ -132,6 +133,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF38 = "myHead-undefined",
             IE11 = "myHead-undefined",
             IE8 = "myHtml-undefined")
     public void namedItem_DoubleIndex() throws Exception {
@@ -143,6 +145,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF38 = "null",
             IE = "null",
             CHROME = "null")
     @NotYetImplemented(CHROME)
@@ -155,6 +158,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "myHead-undefined",
+            FF38 = "null",
             IE11 = "null",
             IE8 = "myHtml-undefined")
     public void namedItem_IndexAsString() throws Exception {
@@ -166,6 +170,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF38 = "null",
             IE11 = "null",
             IE8 = "myHtml-undefined")
     public void namedItem_IndexDoubleAsString() throws Exception {
@@ -218,6 +223,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF38 = "null",
             IE11 = "null",
             IE8 = "[object HTMLCommentElement]")
     @NotYetImplemented(IE8)
@@ -253,6 +259,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF38 = "null",
             IE11 = "null",
             IE8 = "exception")
     public void item_NegativIndex() throws Exception {
@@ -284,6 +291,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF38 = "myHead-undefined",
             IE11 = "myHead-undefined",
             IE8 = "myHtml-undefined")
     public void item_DoubleIndex() throws Exception {
@@ -295,6 +303,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF38 = "null",
             IE = "null",
             CHROME = "null")
     @NotYetImplemented(CHROME)
@@ -307,6 +316,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "myHead-undefined",
+            FF38 = "null",
             IE11 = "null",
             IE8 = "myHtml-undefined")
     public void item_IndexAsString() throws Exception {
@@ -318,6 +328,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF38 = "null",
             IE11 = "null",
             IE8 = "myHtml-undefined")
     public void item_IndexDoubleAsString() throws Exception {
@@ -487,7 +498,9 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
     @Alerts(IE = { "[object HTMLAllCollection]", "[object HTMLAllCollection]" },
             IE8 = { "[object]", "exception" },
             CHROME = { "[object HTMLAllCollection]", "function HTMLAllCollection() { [native code] }" },
-            FF = { "[object HTML document.all class]", "exception" })
+            FF24 = { "[object HTML document.all class]", "exception" },
+            FF31 = { "[object HTML document.all class]", "exception" },
+            FF38 = { "[object HTMLAllCollection]", "function HTMLAllCollection() {\n    [native code]\n}" })
     public void type() throws Exception {
         final String html = ""
             + "<html><head><title>foo</title>\n"

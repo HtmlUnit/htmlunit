@@ -125,6 +125,7 @@ public class HtmlImage2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             FF31 = "false",
+            FF38 = "false",
             CHROME = "false")
     public void isDisplayedNoSource() throws Exception {
         isDisplayed("");

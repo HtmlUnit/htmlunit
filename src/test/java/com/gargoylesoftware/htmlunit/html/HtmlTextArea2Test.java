@@ -284,7 +284,8 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = " foo \n bar\n test\n a <p>html snippet</p>",
-            FF = "foo bar test a <p>html snippet</p>")
+            FF24 = "foo bar test a <p>html snippet</p>",
+            FF31 = "foo bar test a <p>html snippet</p>")
     public void asText() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"

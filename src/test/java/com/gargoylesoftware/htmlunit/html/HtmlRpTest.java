@@ -35,7 +35,9 @@ public class HtmlRpTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = ", inline, none",
-            FF = "block, inline, inline",
+            FF24 = "block, inline, inline",
+            FF31 = "block, inline, inline",
+            FF38 = "none, none, none",
             IE8 = "null, inline, inline",
             IE11 = "inline, inline, inline")
     public void defaultStyle() throws Exception {

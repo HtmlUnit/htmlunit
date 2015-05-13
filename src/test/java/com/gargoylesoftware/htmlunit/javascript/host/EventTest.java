@@ -513,7 +513,8 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "[object Event]", "load", "false", "false" },
-            FF = { "[object Event]", "load", "false", "true" },
+            FF24 = { "[object Event]", "load", "false", "true" },
+            FF31 = { "[object Event]", "load", "false", "true" },
             IE8 = { "[object]", "load", "undefined", "undefined" })
     public void onload() throws Exception {
         final String html =
@@ -670,6 +671,12 @@ public class EventTest extends WebDriverTestCase {
                      "2000000", "10000", "4000000", "40000", "4000", "4", "20000", "100000",
                      "200000" },
             FF31 = { "e-0", "1", "e-2", "e-3", "e-4", "e-5",
+                     "2", "e-7", "e-8", "e-9", "e-10", "e-11",
+                     "e-12", "e-13", "e-14", "e-15", "e-16", "e-17", "8",
+                     "e-19", "e-20", "e-21", "e-22", "e-23", "e-24",
+                     "e-25", "e-26", "e-27", "e-28", "e-29", "4", "e-31", "e-32",
+                     "e-33" },
+            FF38 = { "e-0", "1", "e-2", "e-3", "e-4", "e-5",
                      "2", "e-7", "e-8", "e-9", "e-10", "e-11",
                      "e-12", "e-13", "e-14", "e-15", "e-16", "e-17", "8",
                      "e-19", "e-20", "e-21", "e-22", "e-23", "e-24",
@@ -910,9 +917,10 @@ public class EventTest extends WebDriverTestCase {
         eventHandlersParentScopeChain("<input type='text'", "");
         eventHandlersParentScopeChain("<input type='password'", "");
         // IE11 cannot click on hidden fields
-        // FF31 cannot click on hidden fields
+        // FF31/FF38 cannot click on hidden fields
         if (getBrowserVersion() != BrowserVersion.INTERNET_EXPLORER_11
                 && getBrowserVersion() != BrowserVersion.FIREFOX_31
+                && getBrowserVersion() != BrowserVersion.FIREFOX_38
                 && getBrowserVersion() != BrowserVersion.CHROME) {
             eventHandlersParentScopeChain("<input type='hidden'", "");
         }
