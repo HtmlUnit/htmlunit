@@ -6065,4 +6065,14 @@ public class HostTypeOfTest extends WebDriverTestCase {
         test("Response");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF38 = "object")
+    public void cssCounterStyleRule() throws Exception {
+        test("CSSCounterStyleRule");
+    }
+
 }

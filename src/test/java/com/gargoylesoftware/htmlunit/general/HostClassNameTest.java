@@ -6213,4 +6213,14 @@ public class HostClassNameTest extends WebDriverTestCase {
         test("Response");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF38 = "[object CSSCounterStyleRule]")
+    public void cssCounterStyleRule() throws Exception {
+        test("CSSCounterStyleRule");
+    }
+
 }
