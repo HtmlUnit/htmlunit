@@ -6069,7 +6069,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
+    @Alerts(DEFAULT = "undefined",
             FF38 = "object")
     public void cssCounterStyleRule() throws Exception {
         test("CSSCounterStyleRule");

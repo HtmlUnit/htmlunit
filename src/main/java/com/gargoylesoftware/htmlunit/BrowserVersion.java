@@ -193,6 +193,7 @@ public class BrowserVersion implements Serializable, Cloneable {
 
         FIREFOX_24.initDefaultFeatures();
         FIREFOX_31.initDefaultFeatures();
+        FIREFOX_38.initDefaultFeatures();
 
         FIREFOX_24.setBrowserLanguage("en-US");
         FIREFOX_24.setVendor("");

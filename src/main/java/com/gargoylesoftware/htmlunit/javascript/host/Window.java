@@ -211,7 +211,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     /**
      * Creates an instance.
      */
-    @JsxConstructor(@WebBrowser(CHROME))
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38) })
     public Window() {
     }
 
