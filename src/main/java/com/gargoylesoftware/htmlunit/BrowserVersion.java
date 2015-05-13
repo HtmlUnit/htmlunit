@@ -154,6 +154,15 @@ public class BrowserVersion implements Serializable, Cloneable {
         (float) 31.0, "FF31", null);
 
     /**
+     * Firefox 38 ESR.
+     * @since 2.17
+     */
+    public static final BrowserVersion FIREFOX_38 = new BrowserVersion(
+        NETSCAPE, "5.0 (Windows)",
+        "Mozilla/5.0 (Windows NT 6.1; rv:31.0) Gecko/20100101 Firefox/31.0",
+        (float) 38.0, "FF38", null);
+
+    /**
      * Internet Explorer 8.
      * It exists as Internet Explorer 11 has Enterprise Mode, which behaves as Internet Explorer 8.
      */
@@ -204,6 +213,16 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_31.setXmlHttpRequestAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_31.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
         FIREFOX_31.setCssAcceptHeader("text/css,*/*;q=0.1");
+
+        FIREFOX_38.setBrowserLanguage("en-US");
+        FIREFOX_38.setVendor("");
+        FIREFOX_38.buildId_ = "20140717132905";
+        FIREFOX_38.setHeaderNamesOrdered(new String[] {
+            "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection" });
+        FIREFOX_38.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+        FIREFOX_38.setXmlHttpRequestAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+        FIREFOX_38.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
+        FIREFOX_38.setCssAcceptHeader("text/css,*/*;q=0.1");
 
         INTERNET_EXPLORER_8.setHtmlAcceptHeader("image/gif, image/jpeg, image/pjpeg, image/pjpeg, */*");
 

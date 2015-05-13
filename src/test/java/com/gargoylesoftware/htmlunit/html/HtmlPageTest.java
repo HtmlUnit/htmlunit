@@ -1871,4 +1871,27 @@ public class HtmlPageTest extends SimpleWebTestCase {
         assertEquals(1, page.getFrames().size());
         assertEquals(1, clonedPage.getFrames().size());
     }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    public void invalidDoctype() throws Exception {
+        final String html =
+             "<?doctype html>\n"
+             + "<html>\n"
+             + "  <head>\n"
+             + "    <title>foo</title>\n"
+             + "  </head>\n"
+             + "  <body>\n"
+             + "    <p>HtmlUnit</p>\n"
+             + "    <form></form>\n"
+             + "  </body>\n"
+             + "</html>\n";
+
+        final HtmlPage page = loadPage(html);
+        assertEquals(1, page.getHead().getChildElementCount());
+        assertEquals(2, page.getBody().getChildElementCount());
+        assertEquals(1, page.getForms().size());
+    }
 }

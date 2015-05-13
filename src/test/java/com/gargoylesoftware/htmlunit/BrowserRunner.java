@@ -82,6 +82,9 @@ public class BrowserRunner extends Suite {
                 if (browsers.contains("ff31")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_31, true));
                 }
+                if (browsers.contains("ff38")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_38, true));
+                }
                 if (browsers.contains("ie8")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, true));
                 }
@@ -98,6 +101,9 @@ public class BrowserRunner extends Suite {
             }
             if (browsers.contains("hu-ff31")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_31, false));
+            }
+            if (browsers.contains("hu-ff38")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_38, false));
             }
             if (browsers.contains("hu-ie8")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, false));
@@ -174,6 +180,9 @@ public class BrowserRunner extends Suite {
 
         /** Firefox 31. */
         FF31,
+
+        /** Firefox 38. */
+        FF38,
     }
 
     /**
@@ -209,6 +218,9 @@ public class BrowserRunner extends Suite {
 
         /** Alerts for Firefox 31. If not defined, {@link #FF()} is used. */
         String[] FF31() default { EMPTY_DEFAULT };
+
+        /** Alerts for Firefox 38. If not defined, {@link #FF()} is used. */
+        String[] FF38() default { EMPTY_DEFAULT };
 
         /** Alerts for latest Chrome. */
         String[] CHROME() default { EMPTY_DEFAULT };

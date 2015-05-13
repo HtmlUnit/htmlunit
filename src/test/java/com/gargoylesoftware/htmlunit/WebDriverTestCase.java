@@ -117,6 +117,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static String IE_BIN_;
     private static String FF24_BIN_;
     private static String FF31_BIN_;
+    private static String FF38_BIN_;
     private static String CHROME_BIN_;
 
     /** The driver cache. */
@@ -157,6 +158,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     CHROME_BIN_ = properties.getProperty("chrome.bin");
                     FF24_BIN_ = properties.getProperty("ff24.bin");
                     FF31_BIN_ = properties.getProperty("ff31.bin");
+                    FF38_BIN_ = properties.getProperty("ff38.bin");
                     IE_BIN_ = properties.getProperty("ie.bin");
 
                     final boolean autofix = Boolean.parseBoolean(properties.getProperty("autofix"));
@@ -278,6 +280,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
             if (BrowserVersion.FIREFOX_31 == getBrowserVersion()) {
                 ffBinary = FF31_BIN_;
+            }
+            if (BrowserVersion.FIREFOX_38 == getBrowserVersion()) {
+                ffBinary = FF38_BIN_;
             }
             if (ffBinary != null) {
                 return new FirefoxDriver(new FirefoxBinary(new File(ffBinary)), new FirefoxProfile());
