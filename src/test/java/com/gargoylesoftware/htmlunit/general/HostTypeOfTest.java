@@ -2117,7 +2117,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "object",
             CHROME = "function",
             FF24 = "undefined",
-            FF31 = "undeined",
+            FF31 = "undefined",
             FF38 = "function",
             IE8 = "undefined")
     public void namedNodeMap() throws Exception {
