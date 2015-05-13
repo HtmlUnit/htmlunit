@@ -59,7 +59,7 @@ public class Map extends SimpleScriptable {
     public Map(final Object iterable) {
         if (iterable != null) {
             final Window window = (Window) ScriptRuntime.getTopCallScope(Context.getCurrentContext());
-            if(window.getBrowserVersion().hasFeature(JS_MAP_CONSTRUCTOR_ARGUMENT)) {
+            if (window.getBrowserVersion().hasFeature(JS_MAP_CONSTRUCTOR_ARGUMENT)) {
                 if (iterable instanceof NativeArray) {
                     final NativeArray array = (NativeArray) iterable;
                     for (int i = 0; i < array.getLength(); i++) {
