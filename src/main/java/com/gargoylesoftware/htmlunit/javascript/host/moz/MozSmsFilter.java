@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = @WebBrowser(FF))
+@JsxClass(browsers = @WebBrowser(value = FF, maxVersion = 31))
 public class MozSmsFilter extends SimpleScriptable {
 
 }

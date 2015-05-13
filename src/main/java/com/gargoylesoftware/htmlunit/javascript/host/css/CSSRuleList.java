@@ -50,7 +50,7 @@ public class CSSRuleList extends SimpleScriptable {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor(@WebBrowser(CHROME))
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38) })
     public CSSRuleList() {
         stylesheet_ = null;
         rules_ = null;

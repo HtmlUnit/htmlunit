@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPicture;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -27,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlPicture.class, browsers = @WebBrowser(CHROME))
+@JsxClass(domClass = HtmlPicture.class, browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38)  })
 public class HTMLPictureElement extends HTMLElement {
 
     /**

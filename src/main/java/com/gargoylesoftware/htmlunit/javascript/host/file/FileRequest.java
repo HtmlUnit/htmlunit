@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMRequest;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = @WebBrowser(FF))
+@JsxClass(browsers = @WebBrowser(value = FF, maxVersion = 31))
 public class FileRequest extends DOMRequest {
 
     /**
