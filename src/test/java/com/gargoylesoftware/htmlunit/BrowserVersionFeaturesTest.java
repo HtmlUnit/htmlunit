@@ -67,6 +67,7 @@ public class BrowserVersionFeaturesTest  {
         final List<BrowserVersion> browsers = new LinkedList<>();
         browsers.add(BrowserVersion.FIREFOX_24);
         browsers.add(BrowserVersion.FIREFOX_31);
+        browsers.add(BrowserVersion.FIREFOX_38);
         browsers.add(BrowserVersion.INTERNET_EXPLORER_8);
         browsers.add(BrowserVersion.INTERNET_EXPLORER_11);
         browsers.add(BrowserVersion.CHROME);
