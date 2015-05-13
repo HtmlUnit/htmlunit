@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(browsers = @WebBrowser(CHROME))
 public class WeakSet extends SimpleScriptable {
 
-    private java.util.Set<Object> set_ = Collections.newSetFromMap(new WeakHashMap<Object, Boolean>());
+    private transient java.util.Set<Object> set_ = Collections.newSetFromMap(new WeakHashMap<Object, Boolean>());
 
     /**
      * Creates an instance.

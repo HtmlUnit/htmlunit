@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class WeakMap extends SimpleScriptable {
 
-    private java.util.Map<Object, Object> map_ = new WeakHashMap<>();
+    private transient java.util.Map<Object, Object> map_ = new WeakHashMap<>();
 
     /**
      * Creates an instance.
