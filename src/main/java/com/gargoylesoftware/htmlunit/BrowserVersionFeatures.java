@@ -1390,6 +1390,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_LOCATION_HASH_RETURNS_HASH_FOR_EMPTY_DEFINED,
 
+    /** Map supports the argument constructor. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    JS_MAP_CONSTRUCTOR_ARGUMENT,
+
     /** Indicates that an empty media list is represented by thse string 'all'. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     JS_MEDIA_LIST_ALL,
@@ -1826,6 +1830,10 @@ public enum BrowserVersionFeatures {
     /** Setting the property align to arbitrary values is allowed. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_TYPE_ACCEPTS_ARBITRARY_VALUES,
+
+    /** WeakMap supports the argument constructor. */
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38) })
+    JS_WEAKMAP_CONSTRUCTOR_ARGUMENT,
 
     /** Setting the property width/heigth to arbitrary values is allowed. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })

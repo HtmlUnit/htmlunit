@@ -14,13 +14,23 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MAP_CONSTRUCTOR_ARGUMENT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import java.util.HashSet;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Delegator;
+import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -32,10 +42,85 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class Set extends SimpleScriptable {
 
+    private java.util.Set<Object> set_ = new HashSet<>();
+
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public Set() {
     }
+
+    /**
+     * Creates an instance.
+     * @param iterable an Array or other iterable object
+     */
+    @JsxConstructor
+    public Set(final Object iterable) {
+        if (iterable != null) {
+            final Window window = (Window) ScriptRuntime.getTopCallScope(Context.getCurrentContext());
+            if(window.getBrowserVersion().hasFeature(JS_MAP_CONSTRUCTOR_ARGUMENT)) {
+                if (iterable instanceof NativeArray) {
+                    final NativeArray array = (NativeArray) iterable;
+                    for (int i = 0; i < array.getLength(); i++) {
+                        add(array.get(i));
+                    }
+                }
+                else {
+                    throw Context.reportRuntimeError("TypeError: object is not iterable");
+                }
+            }
+        }
+    }
+
+    /**
+     * Returns the size.
+     * @return the size
+     */
+    @JsxGetter
+    public int getSize() {
+        return set_.size();
+    }
+
+    /**
+     * Adds the specified value.
+     * @param value the value
+     * @return the Set object.
+     */
+    @JsxFunction
+    public Set add(Object value) {
+        if (value instanceof Delegator) {
+            value = ((Delegator) value).getDelegee();
+        }
+        set_.add(value);
+        return this;
+    }
+
+    /**
+     * Removes all elements.
+     */
+    @JsxFunction
+    public void clear() {
+        set_.clear();
+    }
+
+    /**
+     * Removed the specified element.
+     * @param key the key
+     * @return whether the element has been successfully removed
+     */
+    @JsxFunction
+    public boolean delete(final Object key) {
+        return set_.remove(key);
+    }
+
+    /**
+     * Returns whether the specified element exists or not.
+     * @param value the value
+     * @return whether the element exists or not
+     */
+    @JsxFunction
+    public boolean has(final Object value) {
+        return set_.contains(value);
+    }
+
 }

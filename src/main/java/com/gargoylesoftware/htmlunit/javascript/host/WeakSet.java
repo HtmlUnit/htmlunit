@@ -16,9 +16,18 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 
+import java.util.Collections;
+import java.util.WeakHashMap;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Delegator;
+import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
@@ -30,10 +39,76 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(browsers = @WebBrowser(CHROME))
 public class WeakSet extends SimpleScriptable {
 
+    private java.util.Set<Object> set_ = Collections.newSetFromMap(new WeakHashMap<Object, Boolean>());
+
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public WeakSet() {
     }
+
+    /**
+     * Creates an instance.
+     * @param iterable an Array or other iterable object
+     */
+    @JsxConstructor
+    public WeakSet(final Object iterable) {
+        if (iterable != null) {
+            if (iterable instanceof NativeArray) {
+                final NativeArray array = (NativeArray) iterable;
+                for (int i = 0; i < array.getLength(); i++) {
+                    add(array.get(i));
+                }
+            }
+            else {
+                throw Context.reportRuntimeError("TypeError: object is not iterable");
+            }
+        }
+    }
+
+    /**
+     * Adds the specified value.
+     * @param value the value
+     * @return the Set object.
+     */
+    @JsxFunction
+    public WeakSet add(Object value) {
+        if (value instanceof Delegator) {
+            value = ((Delegator) value).getDelegee();
+        }
+        if (!(value instanceof ScriptableObject)) {
+            throw Context.reportRuntimeError("TypeError: key is not an object");
+        }
+        set_.add(value);
+        return this;
+    }
+
+    /**
+     * Removes all elements.
+     */
+    @JsxFunction
+    public void clear() {
+        set_.clear();
+    }
+
+    /**
+     * Removed the specified element.
+     * @param key the key
+     * @return whether the element has been successfully removed
+     */
+    @JsxFunction
+    public boolean delete(final Object key) {
+        return set_.remove(key);
+    }
+
+    /**
+     * Returns whether the specified element exists or not.
+     * @param value the value
+     * @return whether the element exists or not
+     */
+    @JsxFunction
+    public boolean has(final Object value) {
+        return set_.contains(value);
+    }
+
 }

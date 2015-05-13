@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.17" date="???" description="Bugfixes">
+            <action type="add" dev="asashour">
+                JavaScript: implement Map, Set, WeakMap and WeakSet.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: handle events with functions bound to null.
             </action>
