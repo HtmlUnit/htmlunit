@@ -1832,7 +1832,7 @@ public enum BrowserVersionFeatures {
     JS_TYPE_ACCEPTS_ARBITRARY_VALUES,
 
     /** WeakMap supports the argument constructor. */
-    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38) })
+    @BrowserFeature(@WebBrowser(CHROME))
     JS_WEAKMAP_CONSTRUCTOR_ARGUMENT,
 
     /** Setting the property width/heigth to arbitrary values is allowed. */
