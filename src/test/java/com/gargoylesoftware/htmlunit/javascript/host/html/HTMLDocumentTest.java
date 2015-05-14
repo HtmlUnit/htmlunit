@@ -167,6 +167,16 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("BackCompat")
+    @NotYetImplemented
+    public void compatMode_question() throws Exception {
+        compatMode("<?DOCTYPE html>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("BackCompat")
     public void compatMode_html_transitional_40_noUrl() throws Exception {
         compatMode("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">");
     }
