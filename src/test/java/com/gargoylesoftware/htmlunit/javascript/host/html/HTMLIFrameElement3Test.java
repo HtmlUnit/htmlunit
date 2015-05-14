@@ -647,6 +647,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "[object Window]", "topbody", "framebody", "[object Window]", "topbody", "frameinput" },
             CHROME = { "[object Window]", "topbody", "framebody", "[object Window]", "frame", "frameinput" },
+            FF38 = { "[object Window]", "topbody", "framebody", "[object Window]", "frame", "frameinput" },
             IE11 = { "[object Window]", "topbody", "framebody", "[object Window]", "frame", "frameinput" },
             IE8 = { "[object]", "topbody", "framebody", "[object]", "topbody", "frameinput" })
     @NotYetImplemented({ CHROME, IE11 })

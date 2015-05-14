@@ -15,7 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION;
@@ -1068,6 +1069,7 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF38 = "null",
             IE8 = "null",
             CHROME = "null")
     public void all_NamedItem_Unknown() throws Exception {
@@ -1247,6 +1249,7 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "undefined", "undefined", "undefined" },
             CHROME = { "undefined", "undefined", "null" },
+            FF38 = { "null", "null", "null" },
             IE8 = { "null", "null", "null" },
             IE11 = { "undefined", "null", "undefined" })
     public void all_NotExisting() throws Exception {
@@ -1877,7 +1880,7 @@ public class DocumentTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "0", "0", "0" },
             FF = { "0", "1", "1" },
             IE8 = { "undefined", "undefined", "undefined" })
-    @BuggyWebDriver(FF)
+    @BuggyWebDriver({ FF24, FF31 })
     @NotYetImplemented(CHROME)
     public void designMode_createsSelectionRange() throws Exception {
         final String html1 = "<html><body><iframe id='i' src='" + URL_SECOND + "'></iframe></body></html>";

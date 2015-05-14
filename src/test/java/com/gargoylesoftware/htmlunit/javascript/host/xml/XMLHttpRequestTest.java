@@ -932,6 +932,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "null", "myID", "blah", "span", "[object XMLDocument]" },
             CHROME = { "[object Element]", "myID", "blah", "span", "[object XMLDocument]" },
+            FF38 = { "[object Element]", "myID", "blah", "span", "[object XMLDocument]" },
             IE8 = "responseXML.getElementById not available")
     public void responseXML_getElementById_FF() throws Exception {
         final String html =

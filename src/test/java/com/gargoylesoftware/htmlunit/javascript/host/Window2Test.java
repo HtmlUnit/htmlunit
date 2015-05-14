@@ -629,6 +629,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(CHROME = { "true", "true", "89", "true", "true", "16" },
             FF24 = { "true", "true", "115", "true", "true", "14" },
             FF31 = { "true", "true", "94", "true", "true", "14" },
+            FF38 = { "true", "true", "94", "true", "true", "14" },
             IE8 = { "false", "false", "NaN", "false", "false", "NaN" },
             IE11 = { "true", "true", "63", "true", "true", "16" })
     public void heightsAndWidths() throws Exception {
@@ -655,6 +656,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(CHROME = { "679", "1256", "662", "1239" },
             FF24 = { "653", "1258", "636", "1241" },
             FF31 = { "674", "1258", "657", "1241" },
+            FF38 = { "674", "1258", "657", "1241" },
             IE11 = { "705", "1256", "688", "1239" },
             IE8 = { "605", "1256", "705", "1256" })
     @NotYetImplemented({ FF, IE11, CHROME })
@@ -689,6 +691,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()" },
+            FF38 = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1238" },
             FF31 = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1238" },
             FF24 = { "0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1196" })
     @NotYetImplemented(FF)
@@ -1190,6 +1193,8 @@ public class Window2Test extends WebDriverTestCase {
                 "origin: ", "source: [object Window]", "lastEventId: " },
             FF31 = { "type: message", "bubbles: false", "cancelable: false", "data: hello",
                 "origin: ", "source: [object Window]", "lastEventId: " },
+            FF38 = { "type: message", "bubbles: false", "cancelable: false", "data: hello",
+                "origin: ", "source: [object Window]", "lastEventId: " },
             CHROME = { "type: message", "bubbles: false", "cancelable: false", "data: hello",
                 "origin: ", "source: [object Window]", "lastEventId: " },
             IE = { "type: message", "bubbles: undefined", "cancelable: undefined", "data: hello",
@@ -1534,6 +1539,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "[object Window]", "[object Window]", "" },
             CHROME = { "[object Window]", "function Window() { [native code] }",
             "toString, TEMPORARY, PERSISTENT, " },
+            FF38 = { "[object Window]", "function Window() {\n    [native code]\n}", "" },
             IE8 = { "[object]", "exception" })
     public void enumeratedProperties() throws Exception {
         final String html

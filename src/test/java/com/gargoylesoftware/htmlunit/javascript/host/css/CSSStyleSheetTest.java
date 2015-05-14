@@ -70,6 +70,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "4", "0", "1", "2", "3", "length", "item" },
+            FF38 = { "4", "0", "1", "2", "3", "item", "length" },
             IE8 = { "4", "length", "0", "1", "2", "3" })
     public void rules() throws Exception {
         final String html = "<html><head><title>First</title>\n"
