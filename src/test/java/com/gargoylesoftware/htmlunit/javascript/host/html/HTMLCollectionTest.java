@@ -108,6 +108,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
     @Alerts(FF24 = { "string 0", "string item", "string iterator", "string length",
                         "string myForm", "string namedItem" },
             FF31 = { "string 0", "string @@iterator", "string item", "string length", "string namedItem" },
+            FF38 = { "string 0", "string item", "string length", "string namedItem" },
             CHROME = { "string 0", "string item", "string length", "string myForm", "string namedItem" },
             IE = { "string length", "string myForm" },
             IE11 = { "string item", "string length", "string myForm", "string namedItem" })
@@ -142,6 +143,8 @@ public class HTMLCollectionTest extends WebDriverTestCase {
                 "string val1", "string val2" },
             FF31 = { "string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
                     "string @@iterator", "string item", "string length", "string namedItem" },
+            FF38 = { "string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
+                    "string item", "string length", "string namedItem" },
             CHROME = { "string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
                  "string action", "string first_submit", "string id1", "string input_disabled",
                  "string item", "string length", "string namedItem", "string second_submit",

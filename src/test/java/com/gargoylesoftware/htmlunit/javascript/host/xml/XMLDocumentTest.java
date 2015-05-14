@@ -843,6 +843,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "true", "false", "false", "false" },
             CHROME = { "false", "false", "true", "false" },
+            FF38 = { "false", "false", "true", "false" },
             IE = { "false", "false", "false", "false" },
             IE8 = "exception")
     @NotYetImplemented(FF)
@@ -880,6 +881,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "false", "false" },
             CHROME = { "true", "true" },
+            FF38 = { "true", "true" },
             IE8 = "exception")
     // XML ID handling not yet correctly implemented
     public void getElementById_html() throws Exception {

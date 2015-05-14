@@ -771,7 +771,9 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLAllCollection]",
-            FF = "[object HTML document.all class]",
+            FF24 = "[object HTML document.all class]",
+            FF31 = "[object HTML document.all class]",
+            FF38 = "[object HTMLAllCollection]",
             IE8 = "[object HTMLCollection]")
     public void all_scriptableToString() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
