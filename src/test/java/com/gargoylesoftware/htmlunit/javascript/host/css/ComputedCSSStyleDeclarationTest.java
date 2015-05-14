@@ -792,6 +792,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "inline", "inline", "inline" },
             CHROME = { "inline", "block", "none" },
+            FF38 = { "ruby", "ruby-text", "none" },
             IE = { "ruby", "ruby-text", "inline" })
     public void defaultDisplayValues_R() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
@@ -1034,7 +1035,9 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1240px", "auto" },
-            FF = { "1248px", "auto" },
+            FF24 = { "1248px", "auto" },
+            FF31 = { "1248px", "auto" },
+            FF38 = { "1242px", "auto" },
             IE8 = { "auto", "auto" })
     @NotYetImplemented({ FF, IE11, CHROME })
     public void computedWidthOfHiddenElements() throws Exception {

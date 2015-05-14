@@ -262,6 +262,7 @@ public class StorageTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "function", "null", "string", "value", "1" },
             CHROME = { "function", "null", "string", "null", "0" },
+            FF38 = { "function", "null", "function", "null", "0" },
             IE8 = { "undefined", "null", "string", "value", "1" })
     @NotYetImplemented(IE8)
     public void writeToPrototypeProperty() throws Exception {
