@@ -28,14 +28,14 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 
 /**
- * A JavaScript object for XPathNSResolver.
+ * A JavaScript object for {@code XPathNSResolver}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Chuck Dumont
  */
 @JsxClasses({
-        @JsxClass(browsers = @WebBrowser(FF)),
+        @JsxClass(browsers = @WebBrowser(value = FF, maxVersion = 31)),
         @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = @WebBrowser(CHROME))
     })
 public class XPathNSResolver extends SimpleScriptable implements PrefixResolver {

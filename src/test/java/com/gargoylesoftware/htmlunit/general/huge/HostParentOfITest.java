@@ -2810,4 +2810,14 @@ public class HostParentOfITest extends HostParentOf {
         test("Response", "Response");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF38 = "true")
+    public void _MediaDevices_MediaDevices() throws Exception {
+        test("MediaDevices", "MediaDevices");
+    }
+
 }

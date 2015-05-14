@@ -931,7 +931,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF31 = "exception",
             FF38 = "function HTMLAllCollection() {\n    [native code]\n}",
             IE8 = "exception")
-    @NotYetImplemented(FF38)
     public void htmlAllCollection() throws Exception {
         test("HTMLAllCollection");
     }
@@ -2081,7 +2080,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             FF24 = "exception",
             FF31 = "exception",
             FF38 = "function NamedNodeMap() {\n    [native code]\n}")
-    @NotYetImplemented(FF38)
     public void namedNodeMap() throws Exception {
         test("NamedNodeMap");
     }
@@ -3487,7 +3485,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             FF24 = "[object XPathNSResolver]",
             FF31 = "[object XPathNSResolver]")
-    @NotYetImplemented(FF38)
     public void xPathNSResolver() throws Exception {
         test("XPathNSResolver");
     }
@@ -4693,7 +4690,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF38 = "function DOMMatrixReadOnly() {\n    [native code]\n}")
-    @NotYetImplemented(FF38)
     public void domMatrixReadOnly() throws Exception {
         test("DOMMatrixReadOnly");
     }
@@ -5631,7 +5627,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF38 = "function BroadcastChannel() {\n    [native code]\n}")
-    @NotYetImplemented(FF38)
     public void broadcastChannel() throws Exception {
         test("BroadcastChannel");
     }
@@ -6142,7 +6137,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function SubtleCrypto() { [native code] }",
             FF38 = "function SubtleCrypto() {\n    [native code]\n}",
             IE11 = "[object SubtleCrypto]")
-    @NotYetImplemented(FF38)
     public void subtleCrypto() throws Exception {
         test("SubtleCrypto");
     }
@@ -6162,7 +6156,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF38 = "function DOMMatrix() {\n    [native code]\n}")
-    @NotYetImplemented(FF38)
     public void domMatrix() throws Exception {
         test("DOMMatrix");
     }
@@ -7013,7 +7006,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF38 = "function StereoPannerNode() {\n    [native code]\n}")
-    @NotYetImplemented(FF38)
     public void stereoPannerNode() throws Exception {
         test("StereoPannerNode");
     }
@@ -7197,7 +7189,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF38 = "[object CSSCounterStyleRule]")
-    @NotYetImplemented(FF38)
     public void cssCounterStyleRule() throws Exception {
         test("CSSCounterStyleRule");
     }
@@ -7330,7 +7321,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF38 = "function MediaDevices() {\n    [native code]\n}")
-    @NotYetImplemented(FF38)
     public void mediaDevices() throws Exception {
         test("MediaDevices");
     }

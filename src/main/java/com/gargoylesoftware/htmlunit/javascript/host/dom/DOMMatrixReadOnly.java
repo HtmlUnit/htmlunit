@@ -12,11 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.crypto;
+package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -24,20 +22,18 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for {@code SubtleCrypto}.
+ * A JavaScript object for {@code DOMMatrixReadOnly}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38),
-    @WebBrowser(value = IE, minVersion = 11) })
-public class SubtleCrypto extends SimpleScriptable {
+@JsxClass(browsers = @WebBrowser(value = FF, minVersion = 38))
+public class DOMMatrixReadOnly extends SimpleScriptable {
 
     /**
-     * Creates an instance.
+     * Creates a new instance.
      */
-    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38) })
-    public SubtleCrypto() {
+    @JsxConstructor
+    public DOMMatrixReadOnly() {
     }
-
 }

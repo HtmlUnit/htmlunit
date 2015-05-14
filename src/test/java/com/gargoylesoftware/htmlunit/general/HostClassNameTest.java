@@ -6223,4 +6223,54 @@ public class HostClassNameTest extends WebDriverTestCase {
         test("CSSCounterStyleRule");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF38 = "function BroadcastChannel() {\n    [native code]\n}")
+    public void broadcastChannel() throws Exception {
+        test("BroadcastChannel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF38 = "function DOMMatrix() {\n    [native code]\n}")
+    public void domMatrix() throws Exception {
+        test("DOMMatrix");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF38 = "function DOMMatrixReadOnly() {\n    [native code]\n}")
+    public void domMatrixReadOnly() throws Exception {
+        test("DOMMatrixReadOnly");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF38 = "function MediaDevices() {\n    [native code]\n}")
+    public void mediaDevices() throws Exception {
+        test("MediaDevices");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF38 = "function StereoPannerNode() {\n    [native code]\n}")
+    public void stereoPannerNode() throws Exception {
+        test("StereoPannerNode");
+    }
+
 }

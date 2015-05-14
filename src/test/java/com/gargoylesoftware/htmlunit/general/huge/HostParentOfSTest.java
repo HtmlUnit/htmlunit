@@ -1845,4 +1845,14 @@ public class HostParentOfSTest extends HostParentOf {
         test("Symbol", "Symbol");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF38 = "true")
+    public void _StereoPannerNode_StereoPannerNode() throws Exception {
+        test("StereoPannerNode", "StereoPannerNode");
+    }
+
 }

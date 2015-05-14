@@ -50,7 +50,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+@JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38),
+    @WebBrowser(value = IE, minVersion = 11) })
 public class HTMLAllCollection extends HTMLCollection {
 
     /**

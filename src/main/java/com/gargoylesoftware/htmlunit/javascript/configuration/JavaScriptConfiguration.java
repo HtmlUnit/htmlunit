@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 import com.gargoylesoftware.htmlunit.javascript.host.ApplicationCache;
 import com.gargoylesoftware.htmlunit.javascript.host.BatteryManager;
 import com.gargoylesoftware.htmlunit.javascript.host.BoxObject;
+import com.gargoylesoftware.htmlunit.javascript.host.BroadcastChannel;
 import com.gargoylesoftware.htmlunit.javascript.host.ClientRect;
 import com.gargoylesoftware.htmlunit.javascript.host.ClientRectList;
 import com.gargoylesoftware.htmlunit.javascript.host.ClipboardData;
@@ -98,6 +99,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSS;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSCharsetRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSConditionRule;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSCounterStyleRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSFontFaceRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSGroupingRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSImportRule;
@@ -128,6 +130,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMCursor;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMError;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMException;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMImplementation;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMMatrix;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMMatrixReadOnly;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMParser;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMRequest;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMStringList;
@@ -233,6 +237,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.DelayNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.DynamicsCompressorNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.GainNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.LocalMediaStream;
+import com.gargoylesoftware.htmlunit.javascript.host.media.MediaDevices;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaElementAudioSourceNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaKeyMessageEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaKeySession;
@@ -252,6 +257,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.OscillatorNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.PannerNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.PeriodicWave;
 import com.gargoylesoftware.htmlunit.javascript.host.media.ScriptProcessorNode;
+import com.gargoylesoftware.htmlunit.javascript.host.media.StereoPannerNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.TimeRanges;
 import com.gargoylesoftware.htmlunit.javascript.host.media.WaveShaperNode;
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.RTCDataChannelEvent;
@@ -400,22 +406,23 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         Attr.class, ActiveXObject.class, ApplicationCache.class, AudioBuffer.class,
         AudioBufferSourceNode.class, AudioContext.class, AudioDestinationNode.class, AudioListener.class,
         AudioNode.class, AudioParam.class, AudioProcessingEvent.class, BatteryManager.class, BiquadFilterNode.class,
-        BeforeUnloadEvent.class, Blob.class, BlobEvent.class, BoxObject.class, CanvasGradient.class,
+        BeforeUnloadEvent.class, Blob.class, BlobEvent.class, BoxObject.class, BroadcastChannel.class,
+        CanvasGradient.class,
         CanvasPattern.class, CanvasRenderingContext2D.class, CaretPosition.class, CDATASection.class,
         ChannelMergerNode.class, ChannelSplitterNode.class, CharacterData.class, ClientRect.class, ClientRectList.class,
         ClipboardData.class, ClipboardEvent.class,
         CloseEvent.class, Comment.class, CompositionEvent.class, ComputedCSSStyleDeclaration.class, Console.class,
         ConvolverNode.class, Coordinates.class, Crypto.class, CryptoKey.class, CSS.class, CSS2Properties.class,
-        CSSCharsetRule.class, CSSConditionRule.class, CSSGroupingRule.class, CSSFontFaceRule.class, CSSImportRule.class,
-        CSSKeyframeRule.class, CSSKeyframesRule.class,
+        CSSCharsetRule.class, CSSConditionRule.class, CSSCounterStyleRule.class, CSSGroupingRule.class,
+        CSSFontFaceRule.class, CSSImportRule.class, CSSKeyframeRule.class, CSSKeyframesRule.class,
         CSSMediaRule.class, CSSNamespaceRule.class, CSSPageRule.class, CSSPrimitiveValue.class, CSSRule.class,
         CSSRuleList.class, CSSStyleDeclaration.class, CSSStyleRule.class, CSSStyleSheet.class, CSSSupportsRule.class,
         CSSValue.class, CustomEvent.class, DataTransfer.class, DataView.class,
         DelayNode.class, DeviceLightEvent.class, DeviceMotionEvent.class, DeviceOrientationEvent.class,
         DeviceProximityEvent.class, DeviceStorage.class, DeviceStorageChangeEvent.class, DOMCursor.class,
         DOMError.class, DOMException.class,
-        DOMImplementation.class, DOMParser.class, DOMRequest.class, DOMStringList.class, DOMStringMap.class,
-        DOMTokenList.class, Document.class, DocumentFragment.class,
+        DOMImplementation.class, DOMMatrix.class, DOMMatrixReadOnly.class, DOMParser.class, DOMRequest.class,
+        DOMStringList.class, DOMStringMap.class, DOMTokenList.class, Document.class, DocumentFragment.class,
         DocumentType.class, DragEvent.class, DynamicsCompressorNode.class,
         Element.class, Enumerator.class, ErrorEvent.class, Event.class, EventNode.class, EventSource.class,
         EventTarget.class, External.class, File.class, FileError.class, FileHandle.class, FileList.class,
@@ -464,6 +471,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         Int16Array.class, Int32Array.class, Int8Array.class,
         KeyboardEvent.class, LocalMediaStream.class,
         Location.class, LockedFile.class, com.gargoylesoftware.htmlunit.javascript.host.Map.class,
+        MediaDevices.class,
         MediaElementAudioSourceNode.class, MediaKeyMessageEvent.class, MediaKeys.class, MediaKeySession.class,
         MediaKeyStatusMap.class, MediaKeySystemAccess.class, MediaList.class, MediaQueryList.class, MediaRecorder.class,
         MediaStream.class, MediaSource.class, MediaStreamAudioDestinationNode.class, MediaStreamAudioSourceNode.class,
@@ -489,8 +497,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         RTCDataChannelEvent.class, RTCIceCandidate.class, RTCPeerConnectionIceEvent.class, RTCSessionDescription.class,
         Screen.class, ScriptProcessorNode.class, Selection.class, ServiceWorker.class, ServiceWorkerContainer.class,
         ServiceWorkerRegistration.class, Set.class, ShadowRoot.class, SharedWorker.class, SimpleArray.class,
-        StaticNodeList.class, Storage.class, StorageEvent.class, StyleSheet.class, StyleSheetList.class,
-        SubtleCrypto.class,
+        StaticNodeList.class, StereoPannerNode.class, Storage.class, StorageEvent.class, StyleSheet.class,
+        StyleSheetList.class, SubtleCrypto.class,
         SVGAElement.class, SVGAltGlyphElement.class, SVGAngle.class, SVGAnimatedAngle.class,
         SVGAnimatedBoolean.class, SVGAnimateElement.class, SVGAnimatedEnumeration.class, SVGAnimatedInteger.class,
         SVGAnimatedLength.class, SVGAnimatedLengthList.class, SVGAnimatedNumber.class, SVGAnimatedNumberList.class,

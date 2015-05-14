@@ -63,7 +63,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     /**
      * We need default constructors to build the prototype instance.
      */
-    @JsxConstructor(@WebBrowser(CHROME))
+    @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38) })
     public NamedNodeMap() {
         attributes_ = null;
     }

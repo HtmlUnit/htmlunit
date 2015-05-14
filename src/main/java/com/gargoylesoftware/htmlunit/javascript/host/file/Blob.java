@@ -36,7 +36,7 @@ public class Blob extends SimpleScriptable {
      * Creates an instance.
      */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11),
-    	@WebBrowser(value = FF, minVersion = 38) })
+        @WebBrowser(value = FF, minVersion = 38) })
     public Blob() {
     }
 

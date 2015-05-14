@@ -6075,4 +6075,54 @@ public class HostTypeOfTest extends WebDriverTestCase {
         test("CSSCounterStyleRule");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF38 = "function")
+    public void broadcastChannel() throws Exception {
+        test("BroadcastChannel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF38 = "function")
+    public void domMatrix() throws Exception {
+        test("DOMMatrix");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF38 = "function")
+    public void domMatrixReadOnly() throws Exception {
+        test("DOMMatrixReadOnly");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF38 = "function")
+    public void mediaDevices() throws Exception {
+        test("MediaDevices");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF38 = "function")
+    public void stereoPannerNode() throws Exception {
+        test("StereoPannerNode");
+    }
+
 }

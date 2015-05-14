@@ -5683,4 +5683,104 @@ public class HostParentOfATest extends HostParentOf {
         test("Event", "MediaKeyMessageEvent");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF38 = "true")
+    public void _AudioNode_StereoPannerNode() throws Exception {
+        test("AudioNode", "StereoPannerNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF38 = "true")
+    public void _BroadcastChannel_BroadcastChannel() throws Exception {
+        test("BroadcastChannel", "BroadcastChannel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF38 = "true")
+    public void _DOMMatrixReadOnly_DOMMatrix() throws Exception {
+        test("DOMMatrixReadOnly", "DOMMatrix");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF38 = "true")
+    public void _DOMMatrix_DOMMatrix() throws Exception {
+        test("DOMMatrix", "DOMMatrix");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF38 = "true")
+    public void _DOMMatrixReadOnly_DOMMatrixReadOnly() throws Exception {
+        test("DOMMatrixReadOnly", "DOMMatrixReadOnly");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF38 = "true")
+    public void _EventTarget_BroadcastChannel() throws Exception {
+        test("EventTarget", "BroadcastChannel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF38 = "true")
+    public void _CSSCounterStyleRule_CSSCounterStyleRule() throws Exception {
+        test("CSSCounterStyleRule", "CSSCounterStyleRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF38 = "true")
+    public void _CSSRule_CSSCounterStyleRule() throws Exception {
+        test("CSSRule", "CSSCounterStyleRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF38 = "true")
+    public void _EventTarget_MediaDevices() throws Exception {
+        test("EventTarget", "MediaDevices");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF38 = "true")
+    public void _EventTarget_StereoPannerNode() throws Exception {
+        test("EventTarget", "StereoPannerNode");
+    }
+
 }
