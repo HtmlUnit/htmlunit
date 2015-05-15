@@ -37,7 +37,6 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 
 /**
@@ -73,14 +72,14 @@ public class EventListenersContainer implements Serializable {
     }
 
     private final Map<String, Handlers> eventHandlers_ = new HashMap<>();
-    private final SimpleScriptable jsNode_;
+    private final EventTarget jsNode_;
 
     /**
      * The constructor.
      *
      * @param jsNode the node.
      */
-    public EventListenersContainer(final SimpleScriptable jsNode) {
+    public EventListenersContainer(final EventTarget jsNode) {
         jsNode_ = jsNode;
     }
 

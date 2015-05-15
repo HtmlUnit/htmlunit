@@ -101,7 +101,7 @@ public class EventTarget extends SimpleScriptable {
         if (eventListenersContainer_ != null) {
             final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
             final Window window = (Window) page.getEnclosingWindow().getScriptObject();
-            return window.executeEvent(event, eventListenersContainer_);
+            return window.executeEvent(event, this);
         }
 
         return null;
@@ -109,12 +109,11 @@ public class EventTarget extends SimpleScriptable {
 
     /**
      * Fires the event on the node with capturing and bubbling phase.
-     * @param scriptable the scriptable to fire the event
      * @param event the event
      * @return the result
      */
-    public static ScriptResult fireEvent(final EventTarget scriptable, final Event event) {
-        final Window window = scriptable.getWindow();
+    public ScriptResult fireEvent(final Event event) {
+        final Window window = getWindow();
         final Object[] args = new Object[] {event};
 
         event.startFire();
@@ -124,7 +123,7 @@ public class EventTarget extends SimpleScriptable {
 
         try {
             // window's listeners
-            final EventListenersContainer windowsListeners = scriptable.getWindow().getEventListenersContainer();
+            final EventListenersContainer windowsListeners = window.getEventListenersContainer();
 
             // capturing phase
             event.setEventPhase(Event.CAPTURING_PHASE);
@@ -133,7 +132,7 @@ public class EventTarget extends SimpleScriptable {
                 return result;
             }
             final List<EventTarget> eventTargetList = new ArrayList<>();
-            EventTarget eventTarget = scriptable;
+            EventTarget eventTarget = this;
             while (eventTarget != null) {
                 eventTargetList.add(eventTarget);
                 final DomNode domNode = eventTarget.getDomNodeOrNull();
@@ -143,7 +142,7 @@ public class EventTarget extends SimpleScriptable {
                 }
             }
 
-            final boolean ie = scriptable.getBrowserVersion().hasFeature(JS_CALL_RESULT_IS_LAST_RETURN_VALUE);
+            final boolean ie = getBrowserVersion().hasFeature(JS_CALL_RESULT_IS_LAST_RETURN_VALUE);
             for (int i = eventTargetList.size() - 1; i >= 0; i--) {
                 final EventTarget jsNode = eventTargetList.get(i);
                 final EventListenersContainer elc = jsNode.eventListenersContainer_;
@@ -158,7 +157,7 @@ public class EventTarget extends SimpleScriptable {
 
             // handlers declared as property on a node don't receive the event as argument for IE
             final Object[] propHandlerArgs;
-            if (scriptable.getBrowserVersion().hasFeature(JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT)) {
+            if (getBrowserVersion().hasFeature(JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT)) {
                 propHandlerArgs = ArrayUtils.EMPTY_OBJECT_ARRAY;
             }
             else {
@@ -167,7 +166,7 @@ public class EventTarget extends SimpleScriptable {
 
             // bubbling phase
             event.setEventPhase(Event.AT_TARGET);
-            eventTarget = scriptable;
+            eventTarget = this;
             while (eventTarget != null) {
                 final EventTarget jsNode = eventTarget;
                 final EventListenersContainer elc = jsNode.eventListenersContainer_;
@@ -219,15 +218,6 @@ public class EventTarget extends SimpleScriptable {
             return null;
         }
         return eventListenersContainer_.getEventHandler(StringUtils.substring(eventName, 2));
-    }
-
-    /**
-     * Fires the event on the node with capturing and bubbling phase.
-     * @param event the event
-     * @return the result
-     */
-    public ScriptResult fireEvent(final Event event) {
-        return fireEvent(this, event);
     }
 
     /**

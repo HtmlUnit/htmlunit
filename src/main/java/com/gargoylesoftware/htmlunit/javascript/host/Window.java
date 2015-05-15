@@ -2040,19 +2040,20 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * @return the result
      */
     public ScriptResult executeEvent(final Event event) {
-        return executeEvent(event, getEventListenersContainer());
+        return executeEvent(event, this);
     }
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * Executes the event on this window only. Internal helper to share the impl with
-     * Node.java.
+     * Executes the event on this window only. Internal helper to share the impl with Node.java.
+     *
      * @param event the event
      * @param eventListenersContainer the container with the listeners
      * @return the result
      */
-    public ScriptResult executeEvent(final Event event, final EventListenersContainer eventListenersContainer) {
+    public ScriptResult executeEvent(final Event event, final EventTarget eventTarget) {
+        final EventListenersContainer eventListenersContainer = eventTarget.getEventListenersContainer();
         if (eventListenersContainer != null) {
             final boolean eventParam = getBrowserVersion().hasFeature(
                     JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT);
@@ -2104,7 +2105,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public boolean dispatchEvent(final Event event) {
         event.setTarget(this);
-        final ScriptResult result = Node.fireEvent(this, event);
+        final ScriptResult result = fireEvent(event);
         return !event.isAborted(result);
     }
 

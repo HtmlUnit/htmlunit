@@ -27,8 +27,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
-import com.gargoylesoftware.htmlunit.javascript.host.event.EventListenersContainer;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
@@ -65,7 +63,6 @@ public class ApplicationCache extends EventTarget {
     public static final short STATUS_OBSOLETE = 5;
 
     private short status_ = STATUS_UNCACHED;
-    private EventListenersContainer eventListenersContainer_;
 
     /**
      * The constructor.
@@ -201,17 +198,6 @@ public class ApplicationCache extends EventTarget {
     }
 
     /**
-     * Gets the container for event listeners.
-     * @return the container (newly created if needed)
-     */
-    public EventListenersContainer getEventListenersContainer() {
-        if (eventListenersContainer_ == null) {
-            eventListenersContainer_ = new EventListenersContainer(this);
-        }
-        return eventListenersContainer_;
-    }
-
-    /**
      * Allows the registration of event listeners on the event target.
      * @param type the event type to listen for (like "onload")
      * @param listener the event listener
@@ -248,7 +234,7 @@ public class ApplicationCache extends EventTarget {
     @JsxFunction
     public boolean dispatchEvent(final Event event) {
         event.setTarget(this);
-        final ScriptResult result = Node.fireEvent(this, event);
+        final ScriptResult result = fireEvent(event);
         return !event.isAborted(result);
     }
 
