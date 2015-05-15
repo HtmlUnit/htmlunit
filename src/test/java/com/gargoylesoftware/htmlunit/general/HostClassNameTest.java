@@ -6294,4 +6294,14 @@ public class HostClassNameTest extends WebDriverTestCase {
         test("SpeechSynthesisUtterance");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object StyleMedia]")
+    public void styleMedia() throws Exception {
+        test("StyleMedia");
+    }
+
 }

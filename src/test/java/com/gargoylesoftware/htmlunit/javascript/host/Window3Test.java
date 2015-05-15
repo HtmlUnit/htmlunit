@@ -1610,4 +1610,23 @@ public class Window3Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(firstContent, URL_FIRST);
         assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE8 = "undefined")
+    public void devicePixelRatio() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "      alert(window.devicePixelRatio);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+    
 }

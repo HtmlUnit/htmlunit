@@ -8377,7 +8377,8 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            IE11 = "[object StyleMedia]")
     public void styleMedia() throws Exception {
         test("StyleMedia");
     }

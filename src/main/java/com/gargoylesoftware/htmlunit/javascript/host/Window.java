@@ -124,6 +124,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
+import com.gargoylesoftware.htmlunit.javascript.host.css.StyleMedia;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
@@ -2214,6 +2215,27 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         performance.setParentScope(getParentScope());
         performance.setPrototype(getPrototype(performance.getClass()));
         return performance;
+    }
+
+    /**
+     * Returns the {@code devicePixelRatio} property.
+     * @return the {@code devicePixelRatio} property
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public int getDevicePixelRatio() {
+        return 1;
+    }
+
+    /**
+     * Returns the {@code styleMedia} property.
+     * @return the {@code styleMedia} property
+     */
+    @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    public StyleMedia getStyleMedia() {
+        final StyleMedia styleMedia = new StyleMedia();
+        styleMedia.setParentScope(getParentScope());
+        styleMedia.setPrototype(getPrototype(styleMedia.getClass()));
+        return styleMedia;
     }
 }
 

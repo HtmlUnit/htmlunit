@@ -120,6 +120,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSValue;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CaretPosition;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.MediaQueryList;
+import com.gargoylesoftware.htmlunit.javascript.host.css.StyleMedia;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
@@ -501,8 +502,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         Screen.class, ScriptProcessorNode.class, Selection.class, ServiceWorker.class, ServiceWorkerContainer.class,
         ServiceWorkerRegistration.class, Set.class, ShadowRoot.class, SharedWorker.class, SimpleArray.class,
         SpeechSynthesisUtterance.class,
-        StaticNodeList.class, StereoPannerNode.class, Storage.class, StorageEvent.class, StyleSheet.class,
-        StyleSheetList.class, SubtleCrypto.class,
+        StaticNodeList.class, StereoPannerNode.class, Storage.class, StorageEvent.class, StyleMedia.class,
+        StyleSheet.class, StyleSheetList.class, SubtleCrypto.class,
         SVGAElement.class, SVGAltGlyphElement.class, SVGAngle.class, SVGAnimatedAngle.class,
         SVGAnimatedBoolean.class, SVGAnimateElement.class, SVGAnimatedEnumeration.class, SVGAnimatedInteger.class,
         SVGAnimatedLength.class, SVGAnimatedLengthList.class, SVGAnimatedNumber.class, SVGAnimatedNumberList.class,
