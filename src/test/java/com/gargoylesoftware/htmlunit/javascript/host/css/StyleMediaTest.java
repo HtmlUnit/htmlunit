@@ -14,15 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -63,7 +59,6 @@ public class StyleMediaTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "true", "true", "true", "false" },
             FF = "",
             IE8 = "")
-    @NotYetImplemented({ CHROME, IE11 })
     public void matchMedium() throws Exception {
         final String html
             = "<html><head><script>\n"

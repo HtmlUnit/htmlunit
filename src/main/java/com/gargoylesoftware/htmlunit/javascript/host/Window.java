@@ -2233,7 +2233,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     @JsxGetter({ @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     public StyleMedia getStyleMedia() {
         final StyleMedia styleMedia = new StyleMedia();
-        styleMedia.setParentScope(getParentScope());
+        styleMedia.setParentScope(this);
         styleMedia.setPrototype(getPrototype(styleMedia.getClass()));
         return styleMedia;
     }

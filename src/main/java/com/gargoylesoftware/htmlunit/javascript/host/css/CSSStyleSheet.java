@@ -92,6 +92,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -900,9 +901,9 @@ public class CSSStyleSheet extends StyleSheet {
      * @param source the source from which to retrieve the media to be parsed
      * @return the media parsed from the specified input source
      */
-    private SACMediaList parseMedia(final String mediaString) {
+    static SACMediaList parseMedia(final SimpleScriptable scripatble, final String mediaString) {
         try {
-            final ErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
+            final ErrorHandler errorHandler = scripatble.getWindow().getWebWindow().getWebClient().getCssErrorHandler();
             final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
             parser.setErrorHandler(errorHandler);
 
@@ -1135,18 +1136,23 @@ public class CSSStyleSheet extends StyleSheet {
             return true;
         }
 
-        final SACMediaList mediaList = parseMedia(media);
+        final SACMediaList mediaList = parseMedia(this, media);
         return isActive(new MediaListImpl(mediaList));
     }
 
-    private boolean isActive(final MediaList mediaList) {
+    /**
+     * Returns whether the specified {@link MediaList} is active or not.
+     * @param mediaList the media list
+     * @return whether the specified {@link MediaList} is active or not
+     */
+    static boolean isActive(final MediaList mediaList) {
         if (mediaList.getLength() == 0) {
             return true;
         }
 
         for (int i = 0; i < mediaList.getLength(); i++) {
             final String mediaType = mediaList.item(i);
-            if ("screen".equals(mediaType) || "all".equals(mediaType)) {
+            if ("screen".equalsIgnoreCase(mediaType) || "all".equalsIgnoreCase(mediaType)) {
                 return true;
             }
         }
