@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
         @JsxClass(domClass = HtmlSpan.class,
             isJSObject = false, browsers = @WebBrowser(value = IE, maxVersion = 8)),
         @JsxClass(domClass = HtmlKeygen.class, browsers = @WebBrowser(FF)),
-        @JsxClass(domClass = HtmlBaseFont.class, browsers = @WebBrowser(FF))
+        @JsxClass(domClass = HtmlBaseFont.class, browsers = @WebBrowser(value = FF, maxVersion = 31))
     })
 public class HTMLSpanElement extends HTMLElement {
 
