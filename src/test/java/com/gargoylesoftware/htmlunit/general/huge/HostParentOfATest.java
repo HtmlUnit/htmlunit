@@ -5787,8 +5787,8 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _BarProp_BarProp() throws Exception {
         test("BarProp", "BarProp");
     }
