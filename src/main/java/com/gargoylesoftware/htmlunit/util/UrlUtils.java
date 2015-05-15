@@ -308,7 +308,7 @@ public final class UrlUtils {
         int state = -0;
         int offset = 0;
         for (int i = 0; i < input.length; i++) {
-            final byte  b = input[i];
+            final byte b = input[i];
             if (b == '%') {
                 state = 1;
             }

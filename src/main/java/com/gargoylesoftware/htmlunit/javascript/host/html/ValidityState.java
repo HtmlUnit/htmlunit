@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
-public  class ValidityState extends SimpleScriptable {
+public class ValidityState extends SimpleScriptable {
 
     /**
      * Creates an instance.

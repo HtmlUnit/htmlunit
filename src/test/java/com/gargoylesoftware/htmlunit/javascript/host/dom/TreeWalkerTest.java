@@ -51,7 +51,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
         + "\n}\n</script></head>\n"
         + "<body onload='test()'>\n"
         + "<div id='theDiv'>Hello, <span id='theSpan'>this is a test for"
-        + "<a  id='theA' href='http://htmlunit.sf.net'>HtmlUnit</a> support"
+        + "<a id='theA' href='http://htmlunit.sf.net'>HtmlUnit</a> support"
         + "</div>\n"
         + "<p id='theP'>for TreeWalker's</p>\n"
         + "</body></html>";
@@ -73,7 +73,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
         + "\n}\n</script></head>\n"
         + "<body onload='test()'>\n"
         + "<div id='theDiv'>Hello, <span id='theSpan'>this is a test for"
-        + "<a  id='theA' href='http://htmlunit.sf.net'>HtmlUnit</a> support"
+        + "<a id='theA' href='http://htmlunit.sf.net'>HtmlUnit</a> support"
         + "</div>\n"
         + "<p id='theP'>for <br/>TreeWalkers<span>something</span>that is <a>important to me</a></p>\n"
         + "<span>something <code>codey</code>goes <pre>  here</pre></span>"

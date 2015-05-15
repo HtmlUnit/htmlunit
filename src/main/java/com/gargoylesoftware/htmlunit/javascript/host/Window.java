@@ -249,7 +249,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
     /**
      * Sets the prototypes for HtmlUnit host classes.
      * @param map a Map of ({@link Class}, {@link Scriptable})
-     * @param prototypesPerJSName  map of {@link String} and {@link Scriptable}
+     * @param prototypesPerJSName map of {@link String} and {@link Scriptable}
      */
     public void setPrototypes(final Map<Class<? extends SimpleScriptable>, Scriptable> map,
             final Map<String, Scriptable> prototypesPerJSName) {

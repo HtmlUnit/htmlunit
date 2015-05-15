@@ -585,7 +585,7 @@ public class WebClient implements Serializable, AutoCloseable {
     /**
      * This method is intended for testing only - use at your own risk.
      *
-     * @param engine  the new script engine to use
+     * @param engine the new script engine to use
      */
     public void setJavaScriptEngine(final JavaScriptEngine engine) {
         if (engine == null) {

@@ -114,7 +114,7 @@ public class HTMLInputElement extends FormField {
      * implementation does nothing. The implementations in Checkbox and Radio
      * actually do the work.
      *
-     * @param checked  True if this input should have the "checked" attribute set
+     * @param checked True if this input should have the "checked" attribute set
      */
     @JsxSetter
     public void setChecked(final boolean checked) {

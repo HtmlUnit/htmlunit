@@ -66,7 +66,7 @@ public class FormField extends FormChild {
     /**
      * Sets the value of the JavaScript attribute "value".
      *
-     * @param newValue  the new value
+     * @param newValue the new value
      */
     @JsxSetter
     public void setValue(final String newValue) {
@@ -86,7 +86,7 @@ public class FormField extends FormChild {
     /**
      * Sets the value of the JavaScript attribute "name".
      *
-     * @param newName  the new name
+     * @param newName the new name
      */
     @JsxSetter
     public void setName(final String newName) {

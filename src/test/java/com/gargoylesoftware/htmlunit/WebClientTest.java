@@ -1741,7 +1741,7 @@ public class WebClientTest extends SimpleWebTestCase {
         conn.setResponse(URL_FIRST, html1);
 
         final String html2 = "<html><head><title>Second</title></head>\n"
-                + "<body  onload='doTest()'>\n"
+                + "<body onload='doTest()'>\n"
                 + "<script>\n"
                 + "     function doTest() {\n"
                 + "         window.close();\n"

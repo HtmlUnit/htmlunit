@@ -504,7 +504,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        getMockWebConnection().setDefaultResponse("<svg  xmlns=\"http://www.w3.org/2000/svg\"/>", "image/svg+xml");
+        getMockWebConnection().setDefaultResponse("<svg xmlns=\"http://www.w3.org/2000/svg\"/>", "image/svg+xml");
         loadPageWithAlerts2(html);
     }
 

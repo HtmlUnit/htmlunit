@@ -145,7 +145,7 @@ public class DOMException extends SimpleScriptable {
     }
 
     /**
-     * Gets the name of the in  which the exception occurred.
+     * Gets the name of the in which the exception occurred.
      * @return the name of the source file
      */
     @JsxGetter(@WebBrowser(FF))

@@ -907,12 +907,10 @@ public class CSSStyleSheet extends StyleSheet {
             parser.setErrorHandler(errorHandler);
 
             final InputSource source = new InputSource(new StringReader(mediaString));
-            final SACMediaList  media = parser.parseMedia(source);
-            // in case of error parseMedia returns null
-            if (null == media) {
-                return new SACMediaListImpl();
+            final SACMediaList media = parser.parseMedia(source);
+            if (media != null) {
+                return media;
             }
-            return media;
         }
         catch (final Exception e) {
             LOG.error("Error parsing CSS media from '" + mediaString + "': " + e.getMessage(), e);

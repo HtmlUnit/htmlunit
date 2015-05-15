@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 38) })
-public  class Symbol extends SimpleScriptable {
+public class Symbol extends SimpleScriptable {
 
     /**
      * Creates an instance.

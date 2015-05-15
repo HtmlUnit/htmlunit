@@ -55,7 +55,7 @@ public class RangeTest extends WebDriverTestCase {
     private static final String contentEnd = "\n}\n</script></head>\n"
         + "<body onload='test()'>\n"
         + "<div id='theDiv'>Hello, <span id='theSpan'>this is a test for"
-        + "<a  id='theA' href='http://htmlunit.sf.net'>HtmlUnit</a> support"
+        + "<a id='theA' href='http://htmlunit.sf.net'>HtmlUnit</a> support"
         + "</div>\n"
         + "<p id='theP'>for Range</p>\n"
         + "</body></html>";
