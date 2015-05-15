@@ -1011,14 +1011,17 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "HTML", "HEAD", "TITLE", "SCRIPT", "BODY" })
+    @Alerts(DEFAULT = { "HTML", "HEAD", "TITLE", "SCRIPT", "BODY" },
+            FF38 = { "error", "error", "error", "error", "error" })
     public void all_WithParentheses() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    var length = document.all.length;\n"
             + "    for(i=0; i< length; i++ ) {\n"
+            + "      try {\n"
             + "        alert(document.all(i).tagName);\n"
+            + "      } catch(e) { alert('error'); }\n"
             + "    }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
