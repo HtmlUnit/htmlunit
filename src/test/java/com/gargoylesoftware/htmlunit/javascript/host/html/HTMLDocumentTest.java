@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -715,7 +716,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @BuggyWebDriver(IE) // tested with FF8, FF18 works with ff24
+    @BuggyWebDriver({ IE, FF38 }) // tested with FF8, works with ff24, fails with FF38
     @Alerts(DEFAULT = { "0", "exception" },
             FF = { "1", "[object HTMLBodyElement]" },
             IE8 = "exception")
@@ -731,7 +732,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @BuggyWebDriver(IE) // tested with FF8, works with ff24
+    @BuggyWebDriver({ IE, FF38 }) // tested with FF8, works with ff24, fails with FF38
     @Alerts(DEFAULT = { "0", "exception" },
             FF = { "1", "[object Text]" },
             IE8 = "exception")
@@ -742,7 +743,9 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     }
 
     private void designMode_selectionRange(final String bodyContent) throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
             + "function doTest(){\n"
             + "  try {\n"
             + "    document.designMode = 'on';\n"
