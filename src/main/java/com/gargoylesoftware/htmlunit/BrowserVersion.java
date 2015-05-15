@@ -53,7 +53,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *     pre.innerHTML = pre.innerHTML.replace('USERAGENT', navigator.userAgent);
  *     var isMicrosoft = navigator.appVersion.indexOf('Trident/') > 0;
  *     var isChrome = navigator.appVersion.indexOf('Chrome') != -1;
- *     var numeric = 31;
+ *     var numeric = 38;
  *     if (isMicrosoft) {
  *         numeric = 11;
  *     }
