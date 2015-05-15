@@ -18,10 +18,14 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import org.w3c.css.sac.SACMediaList;
+
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
+import com.steadystate.css.dom.MediaListImpl;
 
 /**
  * A JavaScript object for {@code MediaQueryList}.
@@ -32,10 +36,40 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 @JsxClass(browsers = { @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
 public class MediaQueryList extends EventTarget {
 
+    private String media_;
+
     /**
      * Default constructor.
      */
     @JsxConstructor({ @WebBrowser(CHROME), @WebBrowser(FF) })
     public MediaQueryList() {
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param mediaQueryString the media query string
+     */
+    public MediaQueryList(final String mediaQueryString) {
+        media_ = mediaQueryString;
+    }
+
+    /**
+     * Returns the {@code media} property.
+     * @return the {@code media} property
+     */
+    @JsxGetter
+    public String getMedia() {
+        return media_;
+    }
+
+    /**
+     * Returns whether the document currently matches the media query list or not.
+     * @return whether the document currently matches the media query list or not
+     */
+    @JsxGetter
+    public boolean getMatches() {
+        final SACMediaList mediaList = CSSStyleSheet.parseMedia(this, media_);
+        return CSSStyleSheet.isActive(new MediaListImpl(mediaList));
     }
 }

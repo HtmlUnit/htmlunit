@@ -1628,5 +1628,5 @@ public class Window3Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
-    
+
 }

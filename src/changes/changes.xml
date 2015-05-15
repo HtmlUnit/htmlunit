@@ -9,6 +9,9 @@
     <body>
         <release version="2.17" date="???" description="Bugfixes">
             <action type="add" dev="asashour">
+                JavaScript: implement window.matchMedia() and .styleMedia.
+            </action>
+            <action type="add" dev="asashour">
                 JavaScript: implement Map, Set, WeakMap and WeakSet.
             </action>
             <action type="fix" dev="asashour">

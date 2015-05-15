@@ -124,6 +124,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
+import com.gargoylesoftware.htmlunit.javascript.host.css.MediaQueryList;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleMedia;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
@@ -2236,6 +2237,18 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         styleMedia.setParentScope(this);
         styleMedia.setPrototype(getPrototype(styleMedia.getClass()));
         return styleMedia;
+    }
+
+    /**
+     * Returns a new MediaQueryList object representing the parsed results of the specified media query string.
+     * @return a new MediaQueryList object
+     */
+    @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })
+    public MediaQueryList matchMedia(final String mediaQueryString) {
+        final MediaQueryList mediaQueryList = new MediaQueryList(mediaQueryString);
+        mediaQueryList.setParentScope(this);
+        mediaQueryList.setPrototype(getPrototype(mediaQueryList.getClass()));
+        return mediaQueryList;
     }
 }
 
