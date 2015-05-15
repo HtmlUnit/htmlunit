@@ -71,6 +71,7 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("§§URL§§page2.html?test=foo")
+    // FF38 succeeds only when running alone
     public void redirect301WithQuery() throws Exception {
         redirect(301, "/page2.html?test=foo");
     }
@@ -80,6 +81,7 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("§§URL§§page2.html#hash")
+    // FF38 succeeds only when running alone
     public void redirect301WithHash() throws Exception {
         redirect(301, "/page2.html#hash");
     }
@@ -89,6 +91,7 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("§§URL§§page2.html?test=foo#hash")
+    // FF38 succeeds only when running alone
     public void redirect301WithQueryAndHash() throws Exception {
         redirect(301, "/page2.html?test=foo#hash");
     }
@@ -100,6 +103,7 @@ public class WebClient3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "§§URL§§page2.html?from=pwr&#x26;nai=1&#x26;search_submit=Get%20Resumes&#x26;mne=4",
             IE = "§§URL§§page2.html?from=pwr&#x26;nai=1&x26;search_submit=Get%20Resumes&x26;mne=4")
     @NotYetImplemented
+    // FF38 succeeds only when running alone
     public void redirect301WithQueryAndHashSpecialChars() throws Exception {
         redirect(301, "/page2.html?from=pwr&#x26;nai=1&#x26;search_submit=Get%20Resumes&#x26;mne=4");
     }
@@ -109,6 +113,7 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("§§URL§§page2.html?test=foo#hash")
+    // FF38 succeeds only when running alone
     public void redirectAbsolute301WithQueryAndHash() throws Exception {
         redirect(301, new URL(URL_FIRST, "/page2.html?test=foo#hash").toExternalForm());
     }
@@ -120,6 +125,7 @@ public class WebClient3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "§§URL§§page2.html?from=pwr&#x26;nai=1&#x26;search_submit=Get%20Resumes&#x26;mne=4",
             IE = "§§URL§§page2.html?from=pwr&#x26;nai=1&x26;search_submit=Get%20Resumes&x26;mne=4")
     @NotYetImplemented
+    // FF38 succeeds only when running alone
     public void redirectAbsolute301WithQueryAndHashSpecialChars() throws Exception {
         redirect(301, new URL(URL_FIRST,
                 "/page2.html?from=pwr&#x26;nai=1&#x26;search_submit=Get%20Resumes&#x26;mne=4").toExternalForm());
@@ -145,6 +151,7 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("§§URL§§page2.html?test=foo")
+    // FF38 succeeds only when running alone
     public void redirect302WithQuery() throws Exception {
         redirect(302, "/page2.html?test=foo");
     }
@@ -154,6 +161,7 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("§§URL§§page2.html#hash")
+    // FF38 succeeds only when running alone
     public void redirect302WithHash() throws Exception {
         redirect(302, "/page2.html#hash");
     }
@@ -163,6 +171,7 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("§§URL§§page2.html?test=foo#hash")
+    // FF38 succeeds only when running alone
     public void redirect302WithQueryAndHash() throws Exception {
         redirect(302, "/page2.html?test=foo#hash");
     }
@@ -174,6 +183,7 @@ public class WebClient3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "§§URL§§page2.html?from=pwr&#x26;nai=1&#x26;search_submit=Get%20Resumes&#x26;mne=4",
             IE = "§§URL§§page2.html?from=pwr&#x26;nai=1&x26;search_submit=Get%20Resumes&x26;mne=4")
     @NotYetImplemented
+    // FF38 succeeds only when running alone
     public void redirect302WithQueryAndHashSpecialChars() throws Exception {
         redirect(302, "/page2.html?from=pwr&#x26;nai=1&#x26;search_submit=Get%20Resumes&#x26;mne=4");
     }
@@ -221,6 +231,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    // FF38 succeeds only when running alone
     public void redirect302UrlsInQuery() throws Exception {
         final String html = "<html><body><a href='redirect.html'>redirect</a></body></html>";
 
@@ -314,6 +325,7 @@ public class WebClient3Test extends WebDriverTestCase {
      */
     @Test
     @NotYetImplemented
+    // FF38 works with real browser
     public void escapeRequestQuery2a() throws Exception {
         getMockWebConnection().setDefaultResponse("");
 
