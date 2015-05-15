@@ -381,7 +381,7 @@ public enum BrowserVersionFeatures {
     HTMLALLCOLLECTION,
 
     /** HtmlAllCollection default value is [object HTML document.all class]. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 31))
     HTMLALLCOLLECTION_DEFAULT_DESCRIPTION,
 
     /** HtmlAllCollection.item does not check the name, only the id. */
@@ -389,7 +389,7 @@ public enum BrowserVersionFeatures {
     HTMLALLCOLLECTION_DO_NOT_CHECK_NAME,
 
     /** HtmlAllCollection.item returns null instead of undefined if an element was not found. */
-    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 11) })
+    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(value = FF, minVersion = 38) })
     HTMLALLCOLLECTION_DO_NOT_CONVERT_STRINGS_TO_NUMBER,
 
     /** HtmlCollection returns the first hit instead of a collection if many elements found. */
@@ -397,11 +397,12 @@ public enum BrowserVersionFeatures {
     HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS,
 
     /** HtmlAllCollection.item returns null instead of undefined if an element was not found. */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 38) })
     HTMLALLCOLLECTION_NULL_IF_ITEM_NOT_FOUND,
 
     /** HtmlAllCollection.namedItem returns null instead of undefined if an element was not found. */
-    @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 8),
+        @WebBrowser(value = FF, minVersion = 38) , @WebBrowser(CHROME) })
     HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND,
 
     /** Should {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseFontElement#isEndTagForbidden}. */
@@ -423,6 +424,10 @@ public enum BrowserVersionFeatures {
     /** HtmlCollection returns the first hit instead of a collection if many elements found. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     HTMLCOLLECTION_EXCEPTION_FOR_NEGATIVE_INDEX,
+
+    /** HtmlCollection.item() supports also doubles as index. */
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 38) })
+    HTMLCOLLECTION_ITEM_FUNCT_SUPPORTS_DOUBLE_INDEX_ALSO,
 
     /** HtmlCollection.item[] supports also doubles as index. */
     @BrowserFeature(@WebBrowser(IE))
