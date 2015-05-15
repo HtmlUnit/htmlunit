@@ -38,7 +38,8 @@ public class NamedNodeMap2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "myAttr", "myAttr" })
+    @Alerts(DEFAULT = { "myAttr", "myAttr" },
+            FF38 = { "myAttr", "not found" })
     public void setNamedItem() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -46,10 +47,15 @@ public class NamedNodeMap2Test extends WebDriverTestCase {
             + "    var node = doc.createAttribute('myAttr');\n"
             + "    doc.documentElement.attributes.setNamedItem(node);\n"
             + "    alert(doc.documentElement.attributes.getNamedItem('myAttr').nodeName);\n"
-            + "\n"
+
             + "    node = document.createAttribute('myAttr');\n"
             + "    document.body.attributes.setNamedItem(node);\n"
-            + "    alert(document.body.attributes.getNamedItem('myAttr').nodeName);\n"
+            + "    var item = document.body.attributes.getNamedItem('myAttr');"
+            + "    if (item) {\n"
+            + "      alert(item.nodeName);\n"
+            + "    } else {\n"
+            + "      alert('not found');\n"
+            + "    }\n"
             + "  }\n"
             + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
