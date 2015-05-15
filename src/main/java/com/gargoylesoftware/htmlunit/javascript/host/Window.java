@@ -2051,7 +2051,7 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
      * Executes the event on this window only. Internal helper to share the impl with Node.java.
      *
      * @param event the event
-     * @param eventListenersContainer the container with the listeners
+     * @param eventTarget the event target
      * @return the result
      */
     public ScriptResult executeEvent(final Event event, final EventTarget eventTarget) {
@@ -2241,6 +2241,8 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
 
     /**
      * Returns a new MediaQueryList object representing the parsed results of the specified media query string.
+     *
+     * @param mediaQueryString the media query
      * @return a new MediaQueryList object
      */
     @JsxFunction({ @WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11) })

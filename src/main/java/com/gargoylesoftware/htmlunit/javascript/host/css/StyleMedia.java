@@ -34,9 +34,9 @@ import com.steadystate.css.dom.MediaListImpl;
  * @author Ahmed Ashour
  */
 @JsxClasses({
-    @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = { @WebBrowser(CHROME) }),
-    @JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 11) })
-})
+        @JsxClass(isJSObject = false, isDefinedInStandardsMode = false, browsers = { @WebBrowser(CHROME) }),
+        @JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 11) })
+    })
 public class StyleMedia extends SimpleScriptable {
 
     /**
@@ -49,7 +49,7 @@ public class StyleMedia extends SimpleScriptable {
     }
 
     /**
-     * Returns whether the specified media is supported by the object that displays the document object. 
+     * Returns whether the specified media is supported by the object that displays the document object.
      * @param media the media query
      * @return whether the specified media is supported or not
      */
