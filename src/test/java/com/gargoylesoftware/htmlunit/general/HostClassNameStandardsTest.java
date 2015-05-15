@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -3513,7 +3512,6 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
             CHROME = "function XSLTProcessor() { [native code] }",
             FF38 = "function XSLTProcessor() {\n    [native code]\n}",
             IE = "exception")
-    @NotYetImplemented(FF38)
     public void xsltProcessor() throws Exception {
         test("XSLTProcessor");
     }

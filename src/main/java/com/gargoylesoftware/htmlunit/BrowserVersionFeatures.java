@@ -1960,7 +1960,7 @@ public enum BrowserVersionFeatures {
     JS_XML_SUPPORT_VIA_ACTIVEXOBJECT,
 
     /** If <code>alert(XSLTProcessor)</code> returns an object, not function. */
-    @BrowserFeature(@WebBrowser(FF))
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 31))
     JS_XSLTPROCESSOR_OBJECT,
 
     /** With special keys [in .type(int)], should we trigger onkeypress event or not. */

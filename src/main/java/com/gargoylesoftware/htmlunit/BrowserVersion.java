@@ -61,7 +61,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *         numeric = 42;
  *     }
  *     pre.innerHTML = pre.innerHTML.replace('NUMERIC', numeric);
- *     var browser = "FIREFOX_31";
+ *     var browser = "FIREFOX_38";
  *     if (isMicrosoft) {
  *         browser = "INTERNET_EXPLORER_11";
  *     }
@@ -243,6 +243,7 @@ public class BrowserVersion implements Serializable, Cloneable {
             "Shockwave Flash", "swf"));
         FIREFOX_24.getPlugins().add(flash);
         FIREFOX_31.getPlugins().add(flash);
+        FIREFOX_38.getPlugins().add(flash);
 
         CHROME.initDefaultFeatures();
         CHROME.setApplicationCodeName("Mozilla");
