@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * A JavaScript object for {@code CSS}.
+ * A JavaScript object for {@code StyleMedia}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
