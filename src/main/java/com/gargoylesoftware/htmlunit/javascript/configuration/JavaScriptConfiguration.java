@@ -22,6 +22,7 @@ import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 import com.gargoylesoftware.htmlunit.javascript.host.ApplicationCache;
+import com.gargoylesoftware.htmlunit.javascript.host.BarProp;
 import com.gargoylesoftware.htmlunit.javascript.host.BatteryManager;
 import com.gargoylesoftware.htmlunit.javascript.host.BoxObject;
 import com.gargoylesoftware.htmlunit.javascript.host.BroadcastChannel;
@@ -281,6 +282,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.moz.MozSmsSegmentInfo;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.Performance;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.PerformanceNavigation;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.PerformanceTiming;
+import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesisUtterance;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAltGlyphElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAngle;
@@ -405,7 +407,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         ArrayBuffer.class, ArrayBufferView.class, ArrayBufferViewBase.class,
         Attr.class, ActiveXObject.class, ApplicationCache.class, AudioBuffer.class,
         AudioBufferSourceNode.class, AudioContext.class, AudioDestinationNode.class, AudioListener.class,
-        AudioNode.class, AudioParam.class, AudioProcessingEvent.class, BatteryManager.class, BiquadFilterNode.class,
+        AudioNode.class, AudioParam.class, AudioProcessingEvent.class, BarProp.class, BatteryManager.class,
+        BiquadFilterNode.class,
         BeforeUnloadEvent.class, Blob.class, BlobEvent.class, BoxObject.class, BroadcastChannel.class,
         CanvasGradient.class,
         CanvasPattern.class, CanvasRenderingContext2D.class, CaretPosition.class, CDATASection.class,
@@ -497,6 +500,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         RTCDataChannelEvent.class, RTCIceCandidate.class, RTCPeerConnectionIceEvent.class, RTCSessionDescription.class,
         Screen.class, ScriptProcessorNode.class, Selection.class, ServiceWorker.class, ServiceWorkerContainer.class,
         ServiceWorkerRegistration.class, Set.class, ShadowRoot.class, SharedWorker.class, SimpleArray.class,
+        SpeechSynthesisUtterance.class,
         StaticNodeList.class, StereoPannerNode.class, Storage.class, StorageEvent.class, StyleSheet.class,
         StyleSheetList.class, SubtleCrypto.class,
         SVGAElement.class, SVGAltGlyphElement.class, SVGAngle.class, SVGAnimatedAngle.class,

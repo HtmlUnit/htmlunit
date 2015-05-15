@@ -1855,4 +1855,14 @@ public class HostParentOfSTest extends HostParentOf {
         test("StereoPannerNode", "StereoPannerNode");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _SpeechSynthesisUtterance_SpeechSynthesisUtterance() throws Exception {
+        test("SpeechSynthesisUtterance", "SpeechSynthesisUtterance");
+    }
+
 }

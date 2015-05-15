@@ -6125,4 +6125,25 @@ public class HostTypeOfTest extends WebDriverTestCase {
         test("StereoPannerNode");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "function")
+    public void barProp() throws Exception {
+        test("BarProp");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void speechSynthesisUtterance() throws Exception {
+        test("SpeechSynthesisUtterance");
+    }
+
 }

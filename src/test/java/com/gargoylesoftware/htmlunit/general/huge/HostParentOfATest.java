@@ -5783,4 +5783,24 @@ public class HostParentOfATest extends HostParentOf {
         test("EventTarget", "StereoPannerNode");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _BarProp_BarProp() throws Exception {
+        test("BarProp", "BarProp");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_SpeechSynthesisUtterance() throws Exception {
+        test("EventTarget", "SpeechSynthesisUtterance");
+    }
+
 }

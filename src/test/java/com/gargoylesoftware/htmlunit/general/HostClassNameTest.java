@@ -6273,4 +6273,25 @@ public class HostClassNameTest extends WebDriverTestCase {
         test("StereoPannerNode");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function BarProp() { [native code] }",
+            FF = "function BarProp() {\n    [native code]\n}")
+    public void barProp() throws Exception {
+        test("BarProp");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SpeechSynthesisUtterance() { [native code] }")
+    public void speechSynthesisUtterance() throws Exception {
+        test("SpeechSynthesisUtterance");
+    }
+
 }

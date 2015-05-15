@@ -8335,4 +8335,53 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
     public void webkitRTCSessionDescription() throws Exception {
         test("webkitRTCSessionDescription");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function BarProp() { [native code] }",
+            FF = "function BarProp() {\n    [native code]\n}")
+    public void barProp() throws Exception {
+        test("BarProp");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void speechSynthesis() throws Exception {
+        test("SpeechSynthesis");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SpeechSynthesisUtterance() { [native code] }")
+    public void speechSynthesisUtterance() throws Exception {
+        test("SpeechSynthesisUtterance");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void speechRecognition() throws Exception {
+        test("SpeechRecognition");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void styleMedia() throws Exception {
+        test("StyleMedia");
+    }
+
 }
