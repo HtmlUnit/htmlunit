@@ -143,7 +143,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {1=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {1=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -153,7 +153,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {2=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {2=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -163,7 +163,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {3=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {3=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -173,7 +173,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {4=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {4=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -183,7 +183,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {5=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {5=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -193,7 +193,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {6=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {6=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -203,7 +203,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {7=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {7=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -213,7 +213,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {8=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {8=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -223,7 +223,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {9=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {9=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -233,7 +233,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {10=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {10=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -243,7 +243,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {11=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {11=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -253,7 +253,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {12=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {12=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -263,7 +263,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {13=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {13=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -273,7 +273,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {14=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {14=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -283,7 +283,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {15=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {15=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -293,7 +293,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {16=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {16=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -303,7 +303,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {17=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {17=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -313,7 +313,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {18=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {18=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -323,7 +323,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {19=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {19=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -333,7 +333,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {20=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {20=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -343,7 +343,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {21=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {21=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -353,7 +353,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {22=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {22=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -363,7 +363,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {23=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {23=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -373,7 +373,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {24=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {24=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -383,7 +383,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {25=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {25=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -393,7 +393,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {26=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {26=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -403,7 +403,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {27=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {27=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -413,7 +413,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {28=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {28=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -423,7 +423,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {29=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {29=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -433,7 +433,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {30=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {30=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -443,7 +443,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {31=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {31=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -453,7 +453,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {32=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {32=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -463,7 +463,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {33=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {33=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -473,7 +473,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {34=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {34=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -483,7 +483,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {35=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {35=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -493,7 +493,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {36=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {36=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -503,7 +503,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {37=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {37=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -513,7 +513,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {38=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {38=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -523,7 +523,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {39=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {39=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -533,7 +533,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {40=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {40=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -544,7 +544,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {41=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {41=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -554,7 +554,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {42=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {42=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -564,7 +564,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {43=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {43=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -574,7 +574,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {44=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {44=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -584,7 +584,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {45=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {45=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -594,7 +594,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {46=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {46=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -604,7 +604,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {47=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {47=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -614,7 +614,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {48=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {48=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -624,7 +624,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {49=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {49=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -634,7 +634,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {50=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {50=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -644,7 +644,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {51=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {51=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -654,7 +654,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {52=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {52=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -664,7 +664,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {53=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {53=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -674,7 +674,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {54=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {54=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -684,7 +684,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {55=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {55=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -694,7 +694,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {56=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {56=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -704,7 +704,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {57=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {57=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -714,7 +714,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {58=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {58=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -724,7 +724,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {59=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {59=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -734,7 +734,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {60=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {60=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -744,7 +744,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {61=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {61=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -754,7 +754,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {62=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {62=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -764,7 +764,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {63=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {63=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -774,7 +774,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {64=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {64=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -784,7 +784,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {65=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {65=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -794,7 +794,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {66=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {66=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -804,7 +804,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {67=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {67=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -814,7 +814,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {68=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {68=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -824,7 +824,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {69=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {69=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -834,7 +834,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {70=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {70=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -844,7 +844,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {71=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {71=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -854,7 +854,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {72=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {72=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -864,7 +864,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {73=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {73=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -874,7 +874,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {74=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {74=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -884,7 +884,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {75=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {75=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -894,7 +894,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {76=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {76=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -904,7 +904,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {77=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {77=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -914,7 +914,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {78=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {78=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -924,7 +924,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {79=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {79=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -934,7 +934,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {80=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {80=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -944,7 +944,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {81=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {81=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -954,7 +954,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {82=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {82=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -964,7 +964,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {83=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {83=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -974,7 +974,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {84=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {84=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -984,7 +984,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {85=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {85=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -994,7 +994,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {86=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {86=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1004,7 +1004,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {87=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {87=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1014,7 +1014,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {88=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {88=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1024,7 +1024,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {89=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {89=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1034,7 +1034,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {90=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {90=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1044,7 +1044,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {91=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {91=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1054,7 +1054,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {92=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {92=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1064,7 +1064,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {93=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {93=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1074,7 +1074,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {94=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {94=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1084,7 +1084,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {95=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {95=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1094,7 +1094,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {96=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {96=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1104,7 +1104,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {97=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {97=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1114,7 +1114,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {98=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {98=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1124,7 +1124,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {99=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {99=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1134,7 +1134,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {100=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {100=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1144,7 +1144,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {101=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {101=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1154,7 +1154,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {102=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {102=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1164,7 +1164,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {103=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {103=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1174,7 +1174,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {104=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {104=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1184,13 +1184,14 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {105=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {105=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts(CHROME = "0, 2, 2",
         FF24 = "0, 2, 2",
         FF31 = "0, 2, 2",
+        FF38 = "0, 2, 2",
         IE11 = "0, 2, 2",
         IE8 = "9, 1, 10")
     @NotYetImplemented(IE8)
@@ -1199,7 +1200,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {106=[CHROME, FF24, FF31, IE11, IE8]}.
+     * Test {106=[CHROME, FF24, FF31, FF38, IE11, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1220,7 +1221,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {107=[CHROME, FF24, FF31, IE11], 108=[IE8]}.
+     * Test {107=[CHROME, FF24, FF31, FF38, IE11], 108=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1230,7 +1231,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {108=[CHROME, FF24, FF31, IE11], 109=[IE8]}.
+     * Test {108=[CHROME, FF24, FF31, FF38, IE11], 109=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1240,7 +1241,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {109=[CHROME, FF24, FF31, IE11], 110=[IE8]}.
+     * Test {109=[CHROME, FF24, FF31, FF38, IE11], 110=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1250,7 +1251,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {110=[CHROME, FF24, FF31, IE11], 111=[IE8]}.
+     * Test {110=[CHROME, FF24, FF31, FF38, IE11], 111=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1260,7 +1261,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {111=[CHROME, FF24, FF31, IE11], 112=[IE8]}.
+     * Test {111=[CHROME, FF24, FF31, FF38, IE11], 112=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1270,7 +1271,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {112=[CHROME, FF24, FF31, IE11], 113=[IE8]}.
+     * Test {112=[CHROME, FF24, FF31, FF38, IE11], 113=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1280,7 +1281,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {113=[CHROME, FF24, FF31, IE11], 114=[IE8]}.
+     * Test {113=[CHROME, FF24, FF31, FF38, IE11], 114=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1290,7 +1291,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {114=[CHROME, FF24, FF31, IE11], 115=[IE8]}.
+     * Test {114=[CHROME, FF24, FF31, FF38, IE11], 115=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1300,7 +1301,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {115=[CHROME, FF24, FF31, IE11], 116=[IE8]}.
+     * Test {115=[CHROME, FF24, FF31, FF38, IE11], 116=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1310,7 +1311,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {116=[CHROME, FF24, FF31, IE11], 117=[IE8]}.
+     * Test {116=[CHROME, FF24, FF31, FF38, IE11], 117=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1320,7 +1321,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {117=[CHROME, FF24, FF31, IE11], 118=[IE8]}.
+     * Test {117=[CHROME, FF24, FF31, FF38, IE11], 118=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1330,7 +1331,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {118=[CHROME, FF24, FF31, IE11], 119=[IE8]}.
+     * Test {118=[CHROME, FF24, FF31, FF38, IE11], 119=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1340,7 +1341,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {119=[CHROME, FF24, FF31, IE11], 120=[IE8]}.
+     * Test {119=[CHROME, FF24, FF31, FF38, IE11], 120=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1350,7 +1351,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {120=[CHROME, FF24, FF31, IE11], 121=[IE8]}.
+     * Test {120=[CHROME, FF24, FF31, FF38, IE11], 121=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1360,7 +1361,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {121=[CHROME, FF24, FF31, IE11], 122=[IE8]}.
+     * Test {121=[CHROME, FF24, FF31, FF38, IE11], 122=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1370,7 +1371,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {122=[CHROME, FF24, FF31, IE11], 123=[IE8]}.
+     * Test {122=[CHROME, FF24, FF31, FF38, IE11], 123=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1380,7 +1381,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {123=[CHROME, FF24, FF31, IE11], 124=[IE8]}.
+     * Test {123=[CHROME, FF24, FF31, FF38, IE11], 124=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1390,7 +1391,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {124=[CHROME, FF24, FF31, IE11], 125=[IE8]}.
+     * Test {124=[CHROME, FF24, FF31, FF38, IE11], 125=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1400,7 +1401,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {125=[CHROME, FF24, FF31, IE11], 126=[IE8]}.
+     * Test {125=[CHROME, FF24, FF31, FF38, IE11], 126=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1410,7 +1411,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {126=[CHROME, FF24, FF31, IE11], 127=[IE8]}.
+     * Test {126=[CHROME, FF24, FF31, FF38, IE11], 127=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1420,7 +1421,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {127=[CHROME, FF24, FF31, IE11], 128=[IE8]}.
+     * Test {127=[CHROME, FF24, FF31, FF38, IE11], 128=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1430,7 +1431,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {128=[CHROME, FF24, FF31, IE11], 129=[IE8]}.
+     * Test {128=[CHROME, FF24, FF31, FF38, IE11], 129=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1440,7 +1441,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {129=[CHROME, FF24, FF31, IE11], 130=[IE8]}.
+     * Test {129=[CHROME, FF24, FF31, FF38, IE11], 130=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1450,7 +1451,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {130=[CHROME, FF24, FF31, IE11], 131=[IE8]}.
+     * Test {130=[CHROME, FF24, FF31, FF38, IE11], 131=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1460,7 +1461,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {131=[CHROME, FF24, FF31, IE11], 132=[IE8]}.
+     * Test {131=[CHROME, FF24, FF31, FF38, IE11], 132=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1470,7 +1471,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {132=[CHROME, FF24, FF31, IE11], 133=[IE8]}.
+     * Test {132=[CHROME, FF24, FF31, FF38, IE11], 133=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1480,7 +1481,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {133=[CHROME, FF24, FF31, IE11], 134=[IE8]}.
+     * Test {133=[CHROME, FF24, FF31, FF38, IE11], 134=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1490,7 +1491,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {134=[CHROME, FF24, FF31, IE11], 135=[IE8]}.
+     * Test {134=[CHROME, FF24, FF31, FF38, IE11], 135=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1500,7 +1501,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {135=[CHROME, FF24, FF31, IE11], 136=[IE8]}.
+     * Test {135=[CHROME, FF24, FF31, FF38, IE11], 136=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1510,7 +1511,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {136=[CHROME, FF24, FF31, IE11], 137=[IE8]}.
+     * Test {136=[CHROME, FF24, FF31, FF38, IE11], 137=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1520,7 +1521,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {137=[CHROME, FF24, FF31, IE11], 138=[IE8]}.
+     * Test {137=[CHROME, FF24, FF31, FF38, IE11], 138=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1530,7 +1531,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {138=[CHROME, FF24, FF31, IE11], 139=[IE8]}.
+     * Test {138=[CHROME, FF24, FF31, FF38, IE11], 139=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1540,7 +1541,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {139=[CHROME, FF24, FF31, IE11], 140=[IE8]}.
+     * Test {139=[CHROME, FF24, FF31, FF38, IE11], 140=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1550,7 +1551,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {140=[CHROME, FF24, FF31, IE11], 141=[IE8]}.
+     * Test {140=[CHROME, FF24, FF31, FF38, IE11], 141=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1560,7 +1561,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {141=[CHROME, FF24, FF31, IE11], 142=[IE8]}.
+     * Test {141=[CHROME, FF24, FF31, FF38, IE11], 142=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1570,7 +1571,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {142=[CHROME, FF24, FF31, IE11], 143=[IE8]}.
+     * Test {142=[CHROME, FF24, FF31, FF38, IE11], 143=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1580,7 +1581,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {143=[CHROME, FF24, FF31, IE11], 144=[IE8]}.
+     * Test {143=[CHROME, FF24, FF31, FF38, IE11], 144=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1590,7 +1591,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {144=[CHROME, FF24, FF31, IE11], 145=[IE8]}.
+     * Test {144=[CHROME, FF24, FF31, FF38, IE11], 145=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1600,7 +1601,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {145=[CHROME, FF24, FF31, IE11], 146=[IE8]}.
+     * Test {145=[CHROME, FF24, FF31, FF38, IE11], 146=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1610,7 +1611,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {146=[CHROME, FF24, FF31, IE11], 147=[IE8]}.
+     * Test {146=[CHROME, FF24, FF31, FF38, IE11], 147=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1620,7 +1621,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {147=[CHROME, FF24, FF31, IE11], 148=[IE8]}.
+     * Test {147=[CHROME, FF24, FF31, FF38, IE11], 148=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1630,7 +1631,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {148=[CHROME, FF24, FF31, IE11], 149=[IE8]}.
+     * Test {148=[CHROME, FF24, FF31, FF38, IE11], 149=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1640,7 +1641,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {149=[CHROME, FF24, FF31, IE11], 150=[IE8]}.
+     * Test {149=[CHROME, FF24, FF31, FF38, IE11], 150=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1650,7 +1651,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {150=[CHROME, FF24, FF31, IE11], 151=[IE8]}.
+     * Test {150=[CHROME, FF24, FF31, FF38, IE11], 151=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1660,7 +1661,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {151=[CHROME, FF24, FF31, IE11], 152=[IE8]}.
+     * Test {151=[CHROME, FF24, FF31, FF38, IE11], 152=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1670,7 +1671,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {152=[CHROME, FF24, FF31, IE11], 153=[IE8]}.
+     * Test {152=[CHROME, FF24, FF31, FF38, IE11], 153=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1680,7 +1681,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {153=[CHROME, FF24, FF31, IE11], 154=[IE8]}.
+     * Test {153=[CHROME, FF24, FF31, FF38, IE11], 154=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1690,7 +1691,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {154=[CHROME, FF24, FF31, IE11], 155=[IE8]}.
+     * Test {154=[CHROME, FF24, FF31, FF38, IE11], 155=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1700,19 +1701,20 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {155=[CHROME, FF24, FF31]}.
+     * Test {155=[CHROME, FF24, FF31, FF38]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts(CHROME = "0, 4, 4",
         FF24 = "0, 4, 4",
-        FF31 = "0, 4, 4")
+        FF31 = "0, 4, 4",
+        FF38 = "0, 4, 4")
     public void attributes__val___respects_numbers_without_exception__Bug__9319_() throws Exception {
         runTest("attributes: val() respects numbers without exception (Bug #9319)");
     }
 
     /**
-     * Test {155=[IE11], 156=[CHROME, FF24, FF31, IE8]}.
+     * Test {155=[IE11], 156=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1722,7 +1724,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {156=[IE11], 157=[CHROME, FF24, FF31, IE8]}.
+     * Test {156=[IE11], 157=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1732,7 +1734,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {157=[IE11], 158=[CHROME, FF24, FF31, IE8]}.
+     * Test {157=[IE11], 158=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1742,7 +1744,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {158=[IE11], 159=[CHROME, FF24, FF31, IE8]}.
+     * Test {158=[IE11], 159=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1752,7 +1754,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {159=[IE11], 160=[CHROME, FF24, FF31, IE8]}.
+     * Test {159=[IE11], 160=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1762,7 +1764,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {160=[IE11], 161=[CHROME, FF24, FF31, IE8]}.
+     * Test {160=[IE11], 161=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1772,7 +1774,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {161=[IE11], 162=[CHROME, FF24, FF31, IE8]}.
+     * Test {161=[IE11], 162=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1782,7 +1784,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {162=[IE11], 163=[CHROME, FF24, FF31, IE8]}.
+     * Test {162=[IE11], 163=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1792,7 +1794,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {163=[IE11], 164=[CHROME, FF24, FF31, IE8]}.
+     * Test {163=[IE11], 164=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1802,7 +1804,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {164=[IE11], 165=[CHROME, FF24, FF31, IE8]}.
+     * Test {164=[IE11], 165=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1812,7 +1814,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {165=[IE11], 166=[CHROME, FF24, FF31, IE8]}.
+     * Test {165=[IE11], 166=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1822,7 +1824,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {166=[IE11], 167=[CHROME, FF24, FF31, IE8]}.
+     * Test {166=[IE11], 167=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1832,7 +1834,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {167=[IE11], 168=[CHROME, FF24, FF31, IE8]}.
+     * Test {167=[IE11], 168=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1842,7 +1844,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {168=[IE11], 169=[CHROME, FF24, FF31, IE8]}.
+     * Test {168=[IE11], 169=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1852,7 +1854,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {169=[IE11], 170=[CHROME, FF24, FF31, IE8]}.
+     * Test {169=[IE11], 170=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1862,7 +1864,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {170=[IE11], 171=[CHROME, FF24, FF31, IE8]}.
+     * Test {170=[IE11], 171=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1872,7 +1874,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {171=[IE11], 172=[CHROME, FF24, FF31, IE8]}.
+     * Test {171=[IE11], 172=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1882,7 +1884,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {172=[IE11], 173=[CHROME, FF24, FF31, IE8]}.
+     * Test {172=[IE11], 173=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1892,7 +1894,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {173=[IE11], 174=[CHROME, FF24, FF31, IE8]}.
+     * Test {173=[IE11], 174=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1902,7 +1904,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {174=[IE11], 175=[CHROME, FF24, FF31, IE8]}.
+     * Test {174=[IE11], 175=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1912,7 +1914,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {175=[IE11], 176=[CHROME, FF24, FF31, IE8]}.
+     * Test {175=[IE11], 176=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1922,7 +1924,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {176=[IE11], 177=[CHROME, FF24, FF31, IE8]}.
+     * Test {176=[IE11], 177=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1932,7 +1934,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {177=[IE11], 178=[CHROME, FF24, FF31, IE8]}.
+     * Test {177=[IE11], 178=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1942,7 +1944,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {178=[IE11], 179=[CHROME, FF24, FF31, IE8]}.
+     * Test {178=[IE11], 179=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1952,7 +1954,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {179=[IE11], 180=[CHROME, FF24, FF31, IE8]}.
+     * Test {179=[IE11], 180=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1962,7 +1964,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {180=[IE11], 181=[CHROME, FF24, FF31, IE8]}.
+     * Test {180=[IE11], 181=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1972,7 +1974,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {181=[IE11], 182=[CHROME, FF24, FF31, IE8]}.
+     * Test {181=[IE11], 182=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1982,7 +1984,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {182=[IE11], 183=[CHROME, FF24, FF31, IE8]}.
+     * Test {182=[IE11], 183=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1992,7 +1994,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {183=[IE11], 184=[CHROME, FF24, FF31, IE8]}.
+     * Test {183=[IE11], 184=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2002,7 +2004,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {184=[IE11], 185=[CHROME, FF24, FF31, IE8]}.
+     * Test {184=[IE11], 185=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2012,7 +2014,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {185=[IE11], 186=[CHROME, FF24, FF31, IE8]}.
+     * Test {185=[IE11], 186=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2022,7 +2024,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {186=[IE11], 187=[CHROME, FF24, FF31, IE8]}.
+     * Test {186=[IE11], 187=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2032,7 +2034,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {187=[IE11], 188=[CHROME, FF24, FF31, IE8]}.
+     * Test {187=[IE11], 188=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2042,7 +2044,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {188=[IE11], 189=[CHROME, FF24, FF31, IE8]}.
+     * Test {188=[IE11], 189=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2052,7 +2054,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {189=[IE11], 190=[CHROME, FF24, FF31, IE8]}.
+     * Test {189=[IE11], 190=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2062,7 +2064,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {190=[IE11], 191=[CHROME, FF24, FF31, IE8]}.
+     * Test {190=[IE11], 191=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2072,7 +2074,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {191=[IE11], 192=[CHROME, FF24, FF31, IE8]}.
+     * Test {191=[IE11], 192=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2082,7 +2084,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {192=[IE11], 193=[CHROME, FF24, FF31, IE8]}.
+     * Test {192=[IE11], 193=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2092,7 +2094,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {193=[IE11], 194=[CHROME, FF24, FF31, IE8]}.
+     * Test {193=[IE11], 194=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2102,7 +2104,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {194=[IE11], 195=[CHROME, FF24, FF31, IE8]}.
+     * Test {194=[IE11], 195=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2112,7 +2114,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {195=[IE11], 196=[CHROME, FF24, FF31, IE8]}.
+     * Test {195=[IE11], 196=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2122,7 +2124,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {196=[IE11], 197=[CHROME, FF24, FF31, IE8]}.
+     * Test {196=[IE11], 197=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2132,7 +2134,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {197=[IE11], 198=[CHROME, FF24, FF31, IE8]}.
+     * Test {197=[IE11], 198=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2142,7 +2144,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {198=[IE11], 199=[CHROME, FF24, FF31, IE8]}.
+     * Test {198=[IE11], 199=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2152,7 +2154,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {199=[IE11], 200=[CHROME, FF24, FF31, IE8]}.
+     * Test {199=[IE11], 200=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2162,7 +2164,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {200=[IE11], 201=[CHROME, FF24, FF31, IE8]}.
+     * Test {200=[IE11], 201=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2172,7 +2174,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {201=[IE11], 202=[CHROME, FF24, FF31, IE8]}.
+     * Test {201=[IE11], 202=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2182,7 +2184,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {202=[IE11], 203=[CHROME, FF24, FF31, IE8]}.
+     * Test {202=[IE11], 203=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2192,7 +2194,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {203=[IE11], 204=[CHROME, FF24, FF31, IE8]}.
+     * Test {203=[IE11], 204=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2202,7 +2204,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {204=[IE11], 205=[CHROME, FF24, FF31, IE8]}.
+     * Test {204=[IE11], 205=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2212,7 +2214,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {205=[IE11], 206=[CHROME, FF24, FF31, IE8]}.
+     * Test {205=[IE11], 206=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2222,7 +2224,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {206=[IE11], 207=[CHROME, FF24, FF31, IE8]}.
+     * Test {206=[IE11], 207=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2232,7 +2234,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {207=[IE11], 208=[CHROME, FF24, FF31, IE8]}.
+     * Test {207=[IE11], 208=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2242,7 +2244,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {208=[IE11], 209=[CHROME, FF24, FF31, IE8]}.
+     * Test {208=[IE11], 209=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2253,7 +2255,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {209=[IE11], 210=[CHROME, FF24, FF31, IE8]}.
+     * Test {209=[IE11], 210=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2263,7 +2265,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {210=[IE11], 211=[CHROME, FF24, FF31, IE8]}.
+     * Test {210=[IE11], 211=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2273,7 +2275,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {211=[IE11], 212=[CHROME, FF24, FF31, IE8]}.
+     * Test {211=[IE11], 212=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2283,7 +2285,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {212=[IE11], 213=[CHROME, FF24, FF31, IE8]}.
+     * Test {212=[IE11], 213=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2293,18 +2295,18 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {213=[IE11], 214=[CHROME, FF24, FF31, IE8]}.
+     * Test {213=[IE11], 214=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented({ FF, IE11, CHROME })
+    @NotYetImplemented({ CHROME, FF, IE11 })
     public void event__Delegated_events_in_SVG___10791_() throws Exception {
         runTest("event: Delegated events in SVG (#10791)");
     }
 
     /**
-     * Test {214=[IE11], 215=[CHROME, FF24, FF31, IE8]}.
+     * Test {214=[IE11], 215=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2314,7 +2316,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {215=[IE11], 216=[CHROME, FF24, FF31, IE8]}.
+     * Test {215=[IE11], 216=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2325,7 +2327,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {216=[IE11], 217=[CHROME, FF24, FF31, IE8]}.
+     * Test {216=[IE11], 217=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2335,7 +2337,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {217=[IE11], 218=[CHROME, FF24, FF31, IE8]}.
+     * Test {217=[IE11], 218=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2345,7 +2347,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {218=[IE11], 219=[CHROME, FF24, FF31, IE8]}.
+     * Test {218=[IE11], 219=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2355,7 +2357,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {219=[IE11], 220=[CHROME, FF24, FF31, IE8]}.
+     * Test {219=[IE11], 220=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2365,7 +2367,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {220=[IE11], 221=[CHROME, FF24, FF31, IE8]}.
+     * Test {220=[IE11], 221=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2375,7 +2377,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {221=[IE11], 222=[CHROME, FF24, FF31, IE8]}.
+     * Test {221=[IE11], 222=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2385,7 +2387,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {222=[IE11], 223=[CHROME, FF24, FF31, IE8]}.
+     * Test {222=[IE11], 223=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2395,7 +2397,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {223=[IE11], 224=[CHROME, FF24, FF31, IE8]}.
+     * Test {223=[IE11], 224=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2405,7 +2407,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {224=[IE11], 225=[CHROME, FF24, FF31, IE8]}.
+     * Test {224=[IE11], 225=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2415,7 +2417,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {225=[IE11], 226=[CHROME, FF24, FF31, IE8]}.
+     * Test {225=[IE11], 226=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2425,7 +2427,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {226=[IE11], 227=[CHROME, FF24, FF31, IE8]}.
+     * Test {226=[IE11], 227=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2435,7 +2437,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {227=[IE11], 228=[CHROME, FF24, FF31, IE8]}.
+     * Test {227=[IE11], 228=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2445,7 +2447,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {228=[IE11], 229=[CHROME, FF24, FF31, IE8]}.
+     * Test {228=[IE11], 229=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2455,7 +2457,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {229=[IE11], 230=[CHROME, FF24, FF31, IE8]}.
+     * Test {229=[IE11], 230=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2465,7 +2467,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {230=[IE11], 231=[CHROME, FF24, FF31, IE8]}.
+     * Test {230=[IE11], 231=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2475,7 +2477,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {231=[IE11], 232=[CHROME, FF24, FF31, IE8]}.
+     * Test {231=[IE11], 232=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2485,7 +2487,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {232=[IE11], 233=[CHROME, FF24, FF31, IE8]}.
+     * Test {232=[IE11], 233=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2495,7 +2497,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {233=[IE11], 234=[CHROME, FF24, FF31, IE8]}.
+     * Test {233=[IE11], 234=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2505,7 +2507,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {234=[IE11], 235=[CHROME, FF24, FF31, IE8]}.
+     * Test {234=[IE11], 235=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2515,7 +2517,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {235=[IE11], 236=[CHROME, FF24, FF31, IE8]}.
+     * Test {235=[IE11], 236=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2525,7 +2527,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {236=[IE11], 237=[CHROME, FF24, FF31, IE8]}.
+     * Test {236=[IE11], 237=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2535,7 +2537,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {237=[IE11], 238=[CHROME, FF24, FF31, IE8]}.
+     * Test {237=[IE11], 238=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2545,7 +2547,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {238=[IE11], 239=[CHROME, FF24, FF31, IE8]}.
+     * Test {238=[IE11], 239=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2555,7 +2557,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {239=[IE11], 240=[CHROME, FF24, FF31, IE8]}.
+     * Test {239=[IE11], 240=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2565,7 +2567,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {240=[IE11], 241=[CHROME, FF24, FF31, IE8]}.
+     * Test {240=[IE11], 241=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2575,7 +2577,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {241=[IE11], 242=[CHROME, FF24, FF31, IE8]}.
+     * Test {241=[IE11], 242=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2585,7 +2587,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {242=[IE11], 243=[CHROME, FF24, FF31, IE8]}.
+     * Test {242=[IE11], 243=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2595,7 +2597,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {243=[IE11], 244=[CHROME, FF24, FF31, IE8]}.
+     * Test {243=[IE11], 244=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2605,7 +2607,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {244=[IE11], 245=[CHROME, FF24, FF31, IE8]}.
+     * Test {244=[IE11], 245=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2615,7 +2617,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {245=[IE11], 246=[CHROME, FF24, FF31, IE8]}.
+     * Test {245=[IE11], 246=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2625,7 +2627,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {246=[IE11], 247=[CHROME, FF24, FF31, IE8]}.
+     * Test {246=[IE11], 247=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2635,7 +2637,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {247=[IE11], 248=[CHROME, FF24, FF31, IE8]}.
+     * Test {247=[IE11], 248=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2645,7 +2647,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {248=[IE11], 249=[CHROME, FF24, FF31, IE8]}.
+     * Test {248=[IE11], 249=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2655,7 +2657,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {249=[IE11], 250=[CHROME, FF24, FF31, IE8]}.
+     * Test {249=[IE11], 250=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2665,7 +2667,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {250=[IE11], 251=[CHROME, FF24, FF31, IE8]}.
+     * Test {250=[IE11], 251=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2675,7 +2677,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {251=[IE11], 252=[CHROME, FF24, FF31, IE8]}.
+     * Test {251=[IE11], 252=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2685,7 +2687,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {252=[IE11], 253=[CHROME, FF24, FF31, IE8]}.
+     * Test {252=[IE11], 253=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2695,7 +2697,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {253=[IE11], 254=[CHROME, FF24, FF31, IE8]}.
+     * Test {253=[IE11], 254=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2705,7 +2707,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {254=[IE11], 255=[CHROME, FF24, FF31, IE8]}.
+     * Test {254=[IE11], 255=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2715,7 +2717,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {255=[IE11], 256=[CHROME, FF24, FF31, IE8]}.
+     * Test {255=[IE11], 256=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2725,7 +2727,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {256=[IE11], 257=[CHROME, FF24, FF31, IE8]}.
+     * Test {256=[IE11], 257=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2735,7 +2737,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {257=[IE11], 258=[CHROME, FF24, FF31, IE8]}.
+     * Test {257=[IE11], 258=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2745,7 +2747,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {258=[IE11], 259=[CHROME, FF24, FF31, IE8]}.
+     * Test {258=[IE11], 259=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2755,7 +2757,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {259=[IE11], 260=[CHROME, FF24, FF31, IE8]}.
+     * Test {259=[IE11], 260=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2765,7 +2767,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {260=[IE11], 261=[CHROME, FF24, FF31, IE8]}.
+     * Test {260=[IE11], 261=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2775,7 +2777,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {261=[IE11], 262=[CHROME, FF24, FF31, IE8]}.
+     * Test {261=[IE11], 262=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2785,7 +2787,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {262=[IE11], 263=[CHROME, FF24, FF31, IE8]}.
+     * Test {262=[IE11], 263=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2795,7 +2797,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {263=[IE11], 264=[CHROME, FF24, FF31, IE8]}.
+     * Test {263=[IE11], 264=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2805,7 +2807,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {264=[IE11], 265=[CHROME, FF24, FF31, IE8]}.
+     * Test {264=[IE11], 265=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2815,7 +2817,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {265=[IE11], 266=[CHROME, FF24, FF31, IE8]}.
+     * Test {265=[IE11], 266=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2825,7 +2827,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {266=[IE11], 267=[CHROME, FF24, FF31, IE8]}.
+     * Test {266=[IE11], 267=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2835,7 +2837,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {267=[IE11], 268=[CHROME, FF24, FF31, IE8]}.
+     * Test {267=[IE11], 268=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2845,7 +2847,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {268=[IE11], 269=[CHROME, FF24, FF31, IE8]}.
+     * Test {268=[IE11], 269=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2855,7 +2857,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {269=[IE11], 270=[CHROME, FF24, FF31, IE8]}.
+     * Test {269=[IE11], 270=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2865,7 +2867,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {270=[IE11], 271=[CHROME, FF24, FF31, IE8]}.
+     * Test {270=[IE11], 271=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2875,7 +2877,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {271=[IE11], 272=[CHROME, FF24, FF31, IE8]}.
+     * Test {271=[IE11], 272=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2885,7 +2887,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {272=[IE11], 273=[CHROME, FF24, FF31, IE8]}.
+     * Test {272=[IE11], 273=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2895,7 +2897,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {273=[IE11], 274=[CHROME, FF24, FF31, IE8]}.
+     * Test {273=[IE11], 274=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2905,7 +2907,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {274=[IE11], 275=[CHROME, FF24, FF31, IE8]}.
+     * Test {274=[IE11], 275=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2915,7 +2917,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {275=[IE11], 276=[CHROME, FF24, FF31, IE8]}.
+     * Test {275=[IE11], 276=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2925,7 +2927,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {276=[IE11], 277=[CHROME, FF24, FF31, IE8]}.
+     * Test {276=[IE11], 277=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2935,7 +2937,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {277=[IE11], 278=[CHROME, FF24, FF31, IE8]}.
+     * Test {277=[IE11], 278=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2945,7 +2947,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {278=[IE11], 279=[CHROME, FF24, FF31, IE8]}.
+     * Test {278=[IE11], 279=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2955,7 +2957,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {279=[IE11], 280=[CHROME, FF24, FF31, IE8]}.
+     * Test {279=[IE11], 280=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2965,7 +2967,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {280=[IE11], 281=[CHROME, FF24, FF31, IE8]}.
+     * Test {280=[IE11], 281=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2975,7 +2977,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {281=[IE11], 282=[CHROME, FF24, FF31, IE8]}.
+     * Test {281=[IE11], 282=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2985,7 +2987,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {282=[IE11], 283=[CHROME, FF24, FF31, IE8]}.
+     * Test {282=[IE11], 283=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2995,7 +2997,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {283=[IE11], 284=[CHROME, FF24, FF31, IE8]}.
+     * Test {283=[IE11], 284=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3005,7 +3007,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {284=[IE11], 285=[CHROME, FF24, FF31, IE8]}.
+     * Test {284=[IE11], 285=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3015,7 +3017,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {285=[IE11], 286=[CHROME, FF24, FF31, IE8]}.
+     * Test {285=[IE11], 286=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3025,7 +3027,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {286=[IE11], 287=[CHROME, FF24, FF31, IE8]}.
+     * Test {286=[IE11], 287=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3035,7 +3037,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {287=[IE11], 288=[CHROME, FF24, FF31, IE8]}.
+     * Test {287=[IE11], 288=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3045,7 +3047,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {288=[IE11], 289=[CHROME, FF24, FF31, IE8]}.
+     * Test {288=[IE11], 289=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3055,7 +3057,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {289=[IE11], 290=[CHROME, FF24, FF31, IE8]}.
+     * Test {289=[IE11], 290=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3065,7 +3067,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {290=[IE11], 291=[CHROME, FF24, FF31, IE8]}.
+     * Test {290=[IE11], 291=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3075,7 +3077,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {291=[IE11], 292=[CHROME, FF24, FF31, IE8]}.
+     * Test {291=[IE11], 292=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3085,7 +3087,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {292=[IE11], 293=[CHROME, FF24, FF31, IE8]}.
+     * Test {292=[IE11], 293=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3095,7 +3097,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {293=[IE11], 294=[CHROME, FF24, FF31, IE8]}.
+     * Test {293=[IE11], 294=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3105,7 +3107,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {294=[IE11], 295=[CHROME, FF24, FF31, IE8]}.
+     * Test {294=[IE11], 295=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3115,7 +3117,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {295=[IE11], 296=[CHROME, FF24, FF31, IE8]}.
+     * Test {295=[IE11], 296=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3125,7 +3127,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {296=[IE11], 297=[CHROME, FF24, FF31, IE8]}.
+     * Test {296=[IE11], 297=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3135,7 +3137,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {297=[IE11], 298=[CHROME, FF24, FF31, IE8]}.
+     * Test {297=[IE11], 298=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3145,7 +3147,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {298=[IE11], 299=[CHROME, FF24, FF31, IE8]}.
+     * Test {298=[IE11], 299=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3155,7 +3157,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {299=[IE11], 300=[CHROME, FF24, FF31, IE8]}.
+     * Test {299=[IE11], 300=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3165,7 +3167,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {300=[IE11], 301=[CHROME, FF24, FF31, IE8]}.
+     * Test {300=[IE11], 301=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3175,7 +3177,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {301=[IE11], 302=[CHROME, FF24, FF31, IE8]}.
+     * Test {301=[IE11], 302=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3185,7 +3187,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {302=[IE11], 303=[CHROME, FF24, FF31, IE8]}.
+     * Test {302=[IE11], 303=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3195,7 +3197,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {303=[IE11], 304=[CHROME, FF24, FF31, IE8]}.
+     * Test {303=[IE11], 304=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3205,7 +3207,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {304=[IE11], 305=[CHROME, FF24, FF31, IE8]}.
+     * Test {304=[IE11], 305=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3215,7 +3217,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {305=[IE11], 306=[CHROME, FF24, FF31, IE8]}.
+     * Test {305=[IE11], 306=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3225,7 +3227,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {306=[IE11], 307=[CHROME, FF24, FF31, IE8]}.
+     * Test {306=[IE11], 307=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3235,7 +3237,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {307=[IE11], 308=[CHROME, FF24, FF31, IE8]}.
+     * Test {307=[IE11], 308=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3245,7 +3247,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {308=[IE11], 309=[CHROME, FF24, FF31, IE8]}.
+     * Test {308=[IE11], 309=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3255,7 +3257,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {309=[IE11], 310=[CHROME, FF24, FF31, IE8]}.
+     * Test {309=[IE11], 310=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3265,7 +3267,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {310=[IE11], 311=[CHROME, FF24, FF31, IE8]}.
+     * Test {310=[IE11], 311=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3275,7 +3277,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {311=[IE11], 312=[CHROME, FF24, FF31, IE8]}.
+     * Test {311=[IE11], 312=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3285,7 +3287,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {312=[IE11], 313=[CHROME, FF24, FF31, IE8]}.
+     * Test {312=[IE11], 313=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3295,7 +3297,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {313=[IE11], 314=[CHROME, FF24, FF31, IE8]}.
+     * Test {313=[IE11], 314=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3305,7 +3307,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {314=[IE11], 315=[CHROME, FF24, FF31, IE8]}.
+     * Test {314=[IE11], 315=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3315,13 +3317,14 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {315=[IE11], 316=[CHROME, FF24, FF31, IE8]}.
+     * Test {315=[IE11], 316=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts(CHROME = "0, 2, 2",
         FF24 = "0, 2, 2",
         FF31 = "0, 2, 2",
+        FF38 = "0, 2, 2",
         IE11 = "0, 2, 2",
         IE8 = "0, 3, 3")
     public void manipulation__append_the_same_fragment_with_events__Bug__6997__5566_() throws Exception {
@@ -3329,7 +3332,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {316=[IE11], 317=[CHROME, FF24, FF31, IE8]}.
+     * Test {316=[IE11], 317=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3339,7 +3342,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {317=[IE11], 318=[CHROME, FF24, FF31, IE8]}.
+     * Test {317=[IE11], 318=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3349,7 +3352,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {318=[IE11], 319=[CHROME, FF24, FF31, IE8]}.
+     * Test {318=[IE11], 319=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3359,7 +3362,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {319=[IE11], 320=[CHROME, FF24, FF31, IE8]}.
+     * Test {319=[IE11], 320=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3369,7 +3372,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {320=[IE11], 321=[CHROME, FF24, FF31, IE8]}.
+     * Test {320=[IE11], 321=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3379,7 +3382,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {321=[IE11], 322=[CHROME, FF24, FF31, IE8]}.
+     * Test {321=[IE11], 322=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3389,7 +3392,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {322=[IE11], 323=[CHROME, FF24, FF31, IE8]}.
+     * Test {322=[IE11], 323=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3399,7 +3402,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {323=[IE11], 324=[CHROME, FF24, FF31, IE8]}.
+     * Test {323=[IE11], 324=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3409,7 +3412,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {324=[IE11], 325=[CHROME, FF24, FF31, IE8]}.
+     * Test {324=[IE11], 325=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3419,7 +3422,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {325=[IE11], 326=[CHROME, FF24, FF31, IE8]}.
+     * Test {325=[IE11], 326=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3429,7 +3432,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {326=[IE11], 327=[CHROME, FF24, FF31, IE8]}.
+     * Test {326=[IE11], 327=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3439,7 +3442,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {327=[IE11], 328=[CHROME, FF24, FF31, IE8]}.
+     * Test {327=[IE11], 328=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3449,7 +3452,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {328=[IE11], 329=[CHROME, FF24, FF31, IE8]}.
+     * Test {328=[IE11], 329=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3459,7 +3462,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {329=[IE11], 330=[CHROME, FF24, FF31, IE8]}.
+     * Test {329=[IE11], 330=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3469,7 +3472,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {330=[IE11], 331=[CHROME, FF24, FF31, IE8]}.
+     * Test {330=[IE11], 331=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3479,7 +3482,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {331=[IE11], 332=[CHROME, FF24, FF31, IE8]}.
+     * Test {331=[IE11], 332=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3489,7 +3492,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {332=[IE11], 333=[CHROME, FF24, FF31, IE8]}.
+     * Test {332=[IE11], 333=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3499,7 +3502,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {333=[IE11], 334=[CHROME, FF24, FF31, IE8]}.
+     * Test {333=[IE11], 334=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3509,7 +3512,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {334=[IE11], 335=[CHROME, FF24, FF31, IE8]}.
+     * Test {334=[IE11], 335=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3519,7 +3522,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {335=[IE11], 336=[CHROME, FF24, FF31, IE8]}.
+     * Test {335=[IE11], 336=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3529,7 +3532,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {336=[IE11], 337=[CHROME, FF24, FF31, IE8]}.
+     * Test {336=[IE11], 337=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3539,7 +3542,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {337=[IE11], 338=[CHROME, FF24, FF31, IE8]}.
+     * Test {337=[IE11], 338=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3549,7 +3552,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {338=[IE11], 339=[CHROME, FF24, FF31, IE8]}.
+     * Test {338=[IE11], 339=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3559,7 +3562,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {339=[IE11], 340=[CHROME, FF24, FF31, IE8]}.
+     * Test {339=[IE11], 340=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3569,7 +3572,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {340=[IE11], 341=[CHROME, FF24, FF31, IE8]}.
+     * Test {340=[IE11], 341=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3579,7 +3582,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {341=[IE11], 342=[CHROME, FF24, FF31, IE8]}.
+     * Test {341=[IE11], 342=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3589,7 +3592,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {342=[IE11], 343=[CHROME, FF24, FF31, IE8]}.
+     * Test {342=[IE11], 343=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3599,7 +3602,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {343=[IE11], 344=[CHROME, FF24, FF31, IE8]}.
+     * Test {343=[IE11], 344=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3609,13 +3612,14 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {344=[IE11], 345=[CHROME, FF24, FF31, IE8]}.
+     * Test {344=[IE11], 345=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts(CHROME = "0, 5, 5",
         FF24 = "0, 5, 5",
         FF31 = "0, 5, 5",
+        FF38 = "0, 5, 5",
         IE11 = "1, 4, 5",
         IE8 = "0, 5, 5")
     @NotYetImplemented(IE11)
@@ -3624,7 +3628,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {345=[IE11], 346=[CHROME, FF24, FF31, IE8]}.
+     * Test {345=[IE11], 346=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3634,7 +3638,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {346=[IE11], 347=[CHROME, FF24, FF31, IE8]}.
+     * Test {346=[IE11], 347=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3644,7 +3648,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {347=[IE11], 348=[CHROME, FF24, FF31, IE8]}.
+     * Test {347=[IE11], 348=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3654,7 +3658,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {348=[IE11], 349=[CHROME, FF24, FF31, IE8]}.
+     * Test {348=[IE11], 349=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3664,7 +3668,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {349=[IE11], 350=[CHROME, FF24, FF31, IE8]}.
+     * Test {349=[IE11], 350=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3674,7 +3678,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {350=[IE11], 351=[CHROME, FF24, FF31, IE8]}.
+     * Test {350=[IE11], 351=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3684,7 +3688,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {351=[IE11], 352=[CHROME, FF24, FF31, IE8]}.
+     * Test {351=[IE11], 352=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3694,7 +3698,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {352=[IE11], 353=[CHROME, FF24, FF31, IE8]}.
+     * Test {352=[IE11], 353=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3704,7 +3708,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {353=[IE11], 354=[CHROME, FF24, FF31, IE8]}.
+     * Test {353=[IE11], 354=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3714,7 +3718,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {354=[IE11], 355=[CHROME, FF24, FF31, IE8]}.
+     * Test {354=[IE11], 355=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3724,7 +3728,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {355=[IE11], 356=[CHROME, FF24, FF31, IE8]}.
+     * Test {355=[IE11], 356=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3734,7 +3738,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {356=[IE11], 357=[CHROME, FF24, FF31, IE8]}.
+     * Test {356=[IE11], 357=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3744,7 +3748,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {357=[IE11], 358=[CHROME, FF24, FF31, IE8]}.
+     * Test {357=[IE11], 358=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3754,7 +3758,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {358=[IE11], 359=[CHROME, FF24, FF31, IE8]}.
+     * Test {358=[IE11], 359=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3764,7 +3768,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {359=[IE11], 360=[CHROME, FF24, FF31, IE8]}.
+     * Test {359=[IE11], 360=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3774,7 +3778,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {360=[IE11], 361=[CHROME, FF24, FF31, IE8]}.
+     * Test {360=[IE11], 361=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3784,7 +3788,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {361=[IE11], 362=[CHROME, FF24, FF31, IE8]}.
+     * Test {361=[IE11], 362=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3794,7 +3798,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {362=[IE11], 363=[CHROME, FF24, FF31, IE8]}.
+     * Test {362=[IE11], 363=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3804,7 +3808,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {363=[IE11], 364=[CHROME, FF24, FF31, IE8]}.
+     * Test {363=[IE11], 364=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3814,7 +3818,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {364=[IE11], 365=[CHROME, FF24, FF31, IE8]}.
+     * Test {364=[IE11], 365=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3824,7 +3828,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {365=[IE11], 366=[CHROME, FF24, FF31, IE8]}.
+     * Test {365=[IE11], 366=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3834,7 +3838,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {366=[IE11], 367=[CHROME, FF24, FF31, IE8]}.
+     * Test {366=[IE11], 367=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3844,7 +3848,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {367=[IE11], 368=[CHROME, FF24, FF31, IE8]}.
+     * Test {367=[IE11], 368=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3854,7 +3858,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {368=[IE11], 369=[CHROME, FF24, FF31, IE8]}.
+     * Test {368=[IE11], 369=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3864,7 +3868,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {369=[IE11], 370=[CHROME, FF24, FF31, IE8]}.
+     * Test {369=[IE11], 370=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3874,7 +3878,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {370=[IE11], 371=[CHROME, FF24, FF31, IE8]}.
+     * Test {370=[IE11], 371=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3885,7 +3889,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {371=[IE11], 372=[CHROME, FF24, FF31, IE8]}.
+     * Test {371=[IE11], 372=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3895,7 +3899,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {372=[IE11], 373=[CHROME, FF24, FF31, IE8]}.
+     * Test {372=[IE11], 373=[CHROME, FF24, FF31, FF38, IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3905,7 +3909,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {373=[IE11], 374=[CHROME, FF24, FF31], 376=[IE8]}.
+     * Test {373=[IE11], 374=[CHROME, FF24, FF31, FF38], 376=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3925,7 +3929,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {374=[IE11], 375=[CHROME, FF24, FF31], 377=[IE8]}.
+     * Test {374=[IE11], 375=[CHROME, FF24, FF31, FF38], 377=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3945,7 +3949,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {375=[IE11], 376=[CHROME, FF24, FF31], 378=[IE8]}.
+     * Test {375=[IE11], 376=[CHROME, FF24, FF31, FF38], 378=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3955,7 +3959,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {376=[IE11], 377=[CHROME, FF24, FF31], 379=[IE8]}.
+     * Test {376=[IE11], 377=[CHROME, FF24, FF31, FF38], 379=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3965,7 +3969,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {377=[IE11], 378=[CHROME, FF24, FF31], 380=[IE8]}.
+     * Test {377=[IE11], 378=[CHROME, FF24, FF31, FF38], 380=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3975,13 +3979,14 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {378=[IE11], 379=[CHROME, FF24, FF31], 381=[IE8]}.
+     * Test {378=[IE11], 379=[CHROME, FF24, FF31, FF38], 381=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts(CHROME = "0, 7, 7",
         FF24 = "0, 7, 7",
         FF31 = "0, 7, 7",
+        FF38 = "0, 7, 7",
         IE11 = "0, 7, 7",
         IE8 = "2, 1, 3")
     @NotYetImplemented
@@ -3990,7 +3995,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {379=[IE11], 380=[CHROME, FF24, FF31], 382=[IE8]}.
+     * Test {379=[IE11], 380=[CHROME, FF24, FF31, FF38], 382=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4000,7 +4005,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {380=[IE11], 381=[CHROME, FF24, FF31], 383=[IE8]}.
+     * Test {380=[IE11], 381=[CHROME, FF24, FF31, FF38], 383=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4010,7 +4015,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {381=[IE11], 382=[CHROME, FF24, FF31], 384=[IE8]}.
+     * Test {381=[IE11], 382=[CHROME, FF24, FF31, FF38], 384=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4020,7 +4025,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {382=[IE11], 383=[CHROME, FF24, FF31], 385=[IE8]}.
+     * Test {382=[IE11], 383=[CHROME, FF24, FF31, FF38], 385=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4030,7 +4035,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {383=[IE11], 384=[CHROME, FF24, FF31], 386=[IE8]}.
+     * Test {383=[IE11], 384=[CHROME, FF24, FF31, FF38], 386=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4040,7 +4045,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {384=[IE11], 385=[CHROME, FF24, FF31], 387=[IE8]}.
+     * Test {384=[IE11], 385=[CHROME, FF24, FF31, FF38], 387=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4051,7 +4056,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {385=[IE11], 386=[CHROME, FF24, FF31], 388=[IE8]}.
+     * Test {385=[IE11], 386=[CHROME, FF24, FF31, FF38], 388=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4061,7 +4066,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {386=[IE11], 387=[CHROME, FF24, FF31], 389=[IE8]}.
+     * Test {386=[IE11], 387=[CHROME, FF24, FF31, FF38], 389=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4071,7 +4076,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {387=[IE11], 388=[CHROME, FF24, FF31], 390=[IE8]}.
+     * Test {387=[IE11], 388=[CHROME, FF24, FF31, FF38], 390=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4082,7 +4087,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {388=[IE11], 389=[CHROME, FF24, FF31], 391=[IE8]}.
+     * Test {388=[IE11], 389=[CHROME, FF24, FF31, FF38], 391=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4092,13 +4097,14 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {389=[IE11], 390=[CHROME, FF24, FF31], 392=[IE8]}.
+     * Test {389=[IE11], 390=[CHROME, FF24, FF31, FF38], 392=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts(CHROME = "2, 2, 4",
         FF24 = "0, 4, 4",
         FF31 = "0, 4, 4",
+        FF38 = "0, 4, 4",
         IE11 = "0, 4, 4",
         IE8 = "0, 4, 4")
     @NotYetImplemented(CHROME)
@@ -4107,7 +4113,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {390=[IE11], 391=[CHROME, FF24, FF31], 393=[IE8]}.
+     * Test {390=[IE11], 391=[CHROME, FF24, FF31, FF38], 393=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4117,7 +4123,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {391=[IE11], 392=[CHROME, FF24, FF31], 394=[IE8]}.
+     * Test {391=[IE11], 392=[CHROME, FF24, FF31, FF38], 394=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4127,7 +4133,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {392=[IE11], 393=[CHROME, FF24, FF31], 395=[IE8]}.
+     * Test {392=[IE11], 393=[CHROME, FF24, FF31, FF38], 395=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4137,7 +4143,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {393=[IE11], 394=[CHROME, FF24, FF31], 396=[IE8]}.
+     * Test {393=[IE11], 394=[CHROME, FF24, FF31, FF38], 396=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4148,7 +4154,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {394=[IE11], 395=[CHROME, FF24, FF31], 397=[IE8]}.
+     * Test {394=[IE11], 395=[CHROME, FF24, FF31, FF38], 397=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4159,7 +4165,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {395=[IE11], 396=[CHROME, FF24, FF31], 398=[IE8]}.
+     * Test {395=[IE11], 396=[CHROME, FF24, FF31, FF38], 398=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4169,7 +4175,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {396=[IE11], 397=[CHROME, FF24, FF31], 399=[IE8]}.
+     * Test {396=[IE11], 397=[CHROME, FF24, FF31, FF38], 399=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4179,7 +4185,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {397=[IE11], 398=[CHROME, FF24, FF31], 400=[IE8]}.
+     * Test {397=[IE11], 398=[CHROME, FF24, FF31, FF38], 400=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4189,7 +4195,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {398=[IE11], 399=[CHROME, FF24, FF31], 401=[IE8]}.
+     * Test {398=[IE11], 399=[CHROME, FF24, FF31, FF38], 401=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4199,7 +4205,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {399=[IE11], 400=[CHROME, FF24, FF31], 402=[IE8]}.
+     * Test {399=[IE11], 400=[CHROME, FF24, FF31, FF38], 402=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4209,7 +4215,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {400=[IE11], 401=[CHROME, FF24, FF31], 403=[IE8]}.
+     * Test {400=[IE11], 401=[CHROME, FF24, FF31, FF38], 403=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4219,7 +4225,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {401=[IE11], 402=[CHROME, FF24, FF31], 404=[IE8]}.
+     * Test {401=[IE11], 402=[CHROME, FF24, FF31, FF38], 404=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4229,7 +4235,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {402=[IE11], 403=[CHROME, FF24, FF31], 405=[IE8]}.
+     * Test {402=[IE11], 403=[CHROME, FF24, FF31, FF38], 405=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4239,7 +4245,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {403=[IE11], 404=[CHROME, FF24, FF31], 406=[IE8]}.
+     * Test {403=[IE11], 404=[CHROME, FF24, FF31, FF38], 406=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4249,7 +4255,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {404=[IE11], 405=[CHROME, FF24, FF31], 407=[IE8]}.
+     * Test {404=[IE11], 405=[CHROME, FF24, FF31, FF38], 407=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4259,7 +4265,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {405=[IE11], 406=[CHROME, FF24, FF31], 408=[IE8]}.
+     * Test {405=[IE11], 406=[CHROME, FF24, FF31, FF38], 408=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4269,7 +4275,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {406=[IE11], 407=[CHROME, FF24, FF31], 409=[IE8]}.
+     * Test {406=[IE11], 407=[CHROME, FF24, FF31, FF38], 409=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4279,7 +4285,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {407=[IE11], 408=[CHROME, FF24, FF31], 410=[IE8]}.
+     * Test {407=[IE11], 408=[CHROME, FF24, FF31, FF38], 410=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4290,7 +4296,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {408=[IE11], 409=[CHROME, FF24, FF31], 411=[IE8]}.
+     * Test {408=[IE11], 409=[CHROME, FF24, FF31, FF38], 411=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4300,7 +4306,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {409=[IE11], 410=[CHROME, FF24, FF31], 412=[IE8]}.
+     * Test {409=[IE11], 410=[CHROME, FF24, FF31, FF38], 412=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4310,7 +4316,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {410=[IE11], 411=[CHROME, FF24, FF31], 413=[IE8]}.
+     * Test {410=[IE11], 411=[CHROME, FF24, FF31, FF38], 413=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4320,7 +4326,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {411=[IE11], 412=[CHROME, FF24, FF31], 414=[IE8]}.
+     * Test {411=[IE11], 412=[CHROME, FF24, FF31, FF38], 414=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4330,7 +4336,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {412=[IE11], 413=[CHROME, FF24, FF31], 415=[IE8]}.
+     * Test {412=[IE11], 413=[CHROME, FF24, FF31, FF38], 415=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4340,7 +4346,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {413=[IE11], 414=[CHROME, FF24, FF31], 416=[IE8]}.
+     * Test {413=[IE11], 414=[CHROME, FF24, FF31, FF38], 416=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4350,7 +4356,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {414=[IE11], 415=[CHROME, FF24, FF31], 417=[IE8]}.
+     * Test {414=[IE11], 415=[CHROME, FF24, FF31, FF38], 417=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4360,7 +4366,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {415=[IE11], 416=[CHROME, FF24, FF31], 418=[IE8]}.
+     * Test {415=[IE11], 416=[CHROME, FF24, FF31, FF38], 418=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4370,7 +4376,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {416=[IE11], 417=[CHROME, FF24, FF31], 419=[IE8]}.
+     * Test {416=[IE11], 417=[CHROME, FF24, FF31, FF38], 419=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4380,7 +4386,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {417=[IE11], 418=[CHROME, FF24, FF31], 420=[IE8]}.
+     * Test {417=[IE11], 418=[CHROME, FF24, FF31, FF38], 420=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4390,7 +4396,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {418=[IE11], 419=[CHROME, FF24, FF31], 421=[IE8]}.
+     * Test {418=[IE11], 419=[CHROME, FF24, FF31, FF38], 421=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4400,7 +4406,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {419=[IE11], 420=[CHROME, FF24, FF31], 422=[IE8]}.
+     * Test {419=[IE11], 420=[CHROME, FF24, FF31, FF38], 422=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4410,7 +4416,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {420=[IE11], 421=[CHROME, FF24, FF31], 423=[IE8]}.
+     * Test {420=[IE11], 421=[CHROME, FF24, FF31, FF38], 423=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4420,7 +4426,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {421=[IE11], 422=[CHROME, FF24, FF31], 424=[IE8]}.
+     * Test {421=[IE11], 422=[CHROME, FF24, FF31, FF38], 424=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4430,7 +4436,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {422=[IE11], 423=[CHROME, FF24, FF31], 425=[IE8]}.
+     * Test {422=[IE11], 423=[CHROME, FF24, FF31, FF38], 425=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4440,7 +4446,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {423=[IE11], 424=[CHROME, FF24, FF31], 426=[IE8]}.
+     * Test {423=[IE11], 424=[CHROME, FF24, FF31, FF38], 426=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4450,7 +4456,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {424=[IE11], 425=[CHROME, FF24, FF31], 427=[IE8]}.
+     * Test {424=[IE11], 425=[CHROME, FF24, FF31, FF38], 427=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4460,7 +4466,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {425=[IE11], 426=[CHROME, FF24, FF31], 428=[IE8]}.
+     * Test {425=[IE11], 426=[CHROME, FF24, FF31, FF38], 428=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4470,17 +4476,22 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {426=[IE11], 427=[CHROME, FF24, FF31], 429=[IE8]}.
+     * Test {426=[IE11], 427=[CHROME, FF24, FF31, FF38], 429=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 2, 2")
+    @Alerts(CHROME = "2, 0, 2",
+        FF24 = "2, 0, 2",
+        FF31 = "2, 0, 2",
+        FF38 = "0, 2, 2",
+        IE11 = "2, 0, 2",
+        IE8 = "2, 0, 2")
     public void ajax__jQuery_ajax___HEAD_requests() throws Exception {
         runTest("ajax: jQuery.ajax - HEAD requests");
     }
 
     /**
-     * Test {427=[IE11], 428=[CHROME, FF24, FF31], 430=[IE8]}.
+     * Test {427=[IE11], 428=[CHROME, FF24, FF31, FF38], 430=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4490,7 +4501,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {428=[IE11], 429=[CHROME, FF24, FF31], 431=[IE8]}.
+     * Test {428=[IE11], 429=[CHROME, FF24, FF31, FF38], 431=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4500,7 +4511,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {429=[IE11], 430=[CHROME, FF24, FF31], 432=[IE8]}.
+     * Test {429=[IE11], 430=[CHROME, FF24, FF31, FF38], 432=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4510,7 +4521,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {430=[IE11], 431=[CHROME, FF24, FF31], 433=[IE8]}.
+     * Test {430=[IE11], 431=[CHROME, FF24, FF31, FF38], 433=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4520,7 +4531,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {431=[IE11], 432=[CHROME, FF24, FF31], 434=[IE8]}.
+     * Test {431=[IE11], 432=[CHROME, FF24, FF31, FF38], 434=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4530,7 +4541,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {432=[IE11], 433=[CHROME, FF24, FF31], 435=[IE8]}.
+     * Test {432=[IE11], 433=[CHROME, FF24, FF31, FF38], 435=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4540,7 +4551,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {433=[IE11], 434=[CHROME, FF24, FF31], 436=[IE8]}.
+     * Test {433=[IE11], 434=[CHROME, FF24, FF31, FF38], 436=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4550,7 +4561,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {434=[IE11], 435=[CHROME, FF24, FF31], 437=[IE8]}.
+     * Test {434=[IE11], 435=[CHROME, FF24, FF31, FF38], 437=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4560,7 +4571,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {435=[IE11], 436=[CHROME, FF24, FF31], 438=[IE8]}.
+     * Test {435=[IE11], 436=[CHROME, FF24, FF31, FF38], 438=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4570,7 +4581,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {436=[IE11], 437=[CHROME, FF24, FF31], 439=[IE8]}.
+     * Test {436=[IE11], 437=[CHROME, FF24, FF31, FF38], 439=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4580,7 +4591,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {437=[IE11], 438=[CHROME, FF24, FF31], 440=[IE8]}.
+     * Test {437=[IE11], 438=[CHROME, FF24, FF31, FF38], 440=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4590,7 +4601,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {438=[IE11], 439=[CHROME, FF24, FF31], 441=[IE8]}.
+     * Test {438=[IE11], 439=[CHROME, FF24, FF31, FF38], 441=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4600,7 +4611,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {439=[IE11], 440=[CHROME, FF24, FF31], 442=[IE8]}.
+     * Test {439=[IE11], 440=[CHROME, FF24, FF31, FF38], 442=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4610,7 +4621,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {440=[IE11], 441=[CHROME, FF24, FF31], 443=[IE8]}.
+     * Test {440=[IE11], 441=[CHROME, FF24, FF31, FF38], 443=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4620,7 +4631,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {441=[IE11], 442=[CHROME, FF24, FF31], 444=[IE8]}.
+     * Test {441=[IE11], 442=[CHROME, FF24, FF31, FF38], 444=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4630,7 +4641,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {442=[IE11], 443=[CHROME, FF24, FF31], 445=[IE8]}.
+     * Test {442=[IE11], 443=[CHROME, FF24, FF31, FF38], 445=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4640,7 +4651,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {443=[IE11], 444=[CHROME, FF24, FF31], 446=[IE8]}.
+     * Test {443=[IE11], 444=[CHROME, FF24, FF31, FF38], 446=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4650,7 +4661,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {444=[IE11], 445=[CHROME, FF24, FF31], 447=[IE8]}.
+     * Test {444=[IE11], 445=[CHROME, FF24, FF31, FF38], 447=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4660,7 +4671,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {445=[IE11], 446=[CHROME, FF24, FF31], 448=[IE8]}.
+     * Test {445=[IE11], 446=[CHROME, FF24, FF31, FF38], 448=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4670,7 +4681,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {446=[IE11], 447=[CHROME, FF24, FF31], 449=[IE8]}.
+     * Test {446=[IE11], 447=[CHROME, FF24, FF31, FF38], 449=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4680,7 +4691,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {447=[IE11], 448=[CHROME, FF24, FF31], 450=[IE8]}.
+     * Test {447=[IE11], 448=[CHROME, FF24, FF31, FF38], 450=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4690,7 +4701,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {448=[IE11], 449=[CHROME, FF24, FF31], 451=[IE8]}.
+     * Test {448=[IE11], 449=[CHROME, FF24, FF31, FF38], 451=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4700,7 +4711,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {449=[IE11], 450=[CHROME, FF24, FF31], 452=[IE8]}.
+     * Test {449=[IE11], 450=[CHROME, FF24, FF31, FF38], 452=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4710,7 +4721,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {450=[IE11], 451=[CHROME, FF24, FF31], 453=[IE8]}.
+     * Test {450=[IE11], 451=[CHROME, FF24, FF31, FF38], 453=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4720,7 +4731,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {451=[IE11], 452=[CHROME, FF24, FF31], 454=[IE8]}.
+     * Test {451=[IE11], 452=[CHROME, FF24, FF31, FF38], 454=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4730,7 +4741,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {452=[IE11], 453=[CHROME, FF24, FF31], 455=[IE8]}.
+     * Test {452=[IE11], 453=[CHROME, FF24, FF31, FF38], 455=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4740,7 +4751,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {453=[IE11], 454=[CHROME, FF24, FF31], 456=[IE8]}.
+     * Test {453=[IE11], 454=[CHROME, FF24, FF31, FF38], 456=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4751,7 +4762,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {454=[IE11], 455=[CHROME, FF24, FF31], 457=[IE8]}.
+     * Test {454=[IE11], 455=[CHROME, FF24, FF31, FF38], 457=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4761,7 +4772,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {455=[IE11], 456=[CHROME, FF24, FF31], 458=[IE8]}.
+     * Test {455=[IE11], 456=[CHROME, FF24, FF31, FF38], 458=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4771,7 +4782,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {456=[IE11], 457=[CHROME, FF24, FF31], 459=[IE8]}.
+     * Test {456=[IE11], 457=[CHROME, FF24, FF31, FF38], 459=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4781,7 +4792,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {457=[IE11], 458=[CHROME, FF24, FF31], 460=[IE8]}.
+     * Test {457=[IE11], 458=[CHROME, FF24, FF31, FF38], 460=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4791,7 +4802,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {458=[IE11], 459=[CHROME, FF24, FF31], 461=[IE8]}.
+     * Test {458=[IE11], 459=[CHROME, FF24, FF31, FF38], 461=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4801,7 +4812,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {459=[IE11], 460=[CHROME, FF24, FF31], 462=[IE8]}.
+     * Test {459=[IE11], 460=[CHROME, FF24, FF31, FF38], 462=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4811,7 +4822,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {460=[IE11], 461=[CHROME, FF24, FF31], 463=[IE8]}.
+     * Test {460=[IE11], 461=[CHROME, FF24, FF31, FF38], 463=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4821,7 +4832,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {461=[IE11], 462=[CHROME, FF24, FF31], 464=[IE8]}.
+     * Test {461=[IE11], 462=[CHROME, FF24, FF31, FF38], 464=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4831,7 +4842,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {462=[IE11], 463=[CHROME, FF24, FF31], 465=[IE8]}.
+     * Test {462=[IE11], 463=[CHROME, FF24, FF31, FF38], 465=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4841,7 +4852,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {463=[IE11], 464=[CHROME, FF24, FF31], 466=[IE8]}.
+     * Test {463=[IE11], 464=[CHROME, FF24, FF31, FF38], 466=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4851,7 +4862,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {464=[IE11], 465=[CHROME, FF24, FF31], 467=[IE8]}.
+     * Test {464=[IE11], 465=[CHROME, FF24, FF31, FF38], 467=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4861,7 +4872,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {465=[IE11], 466=[CHROME, FF24, FF31], 468=[IE8]}.
+     * Test {465=[IE11], 466=[CHROME, FF24, FF31, FF38], 468=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4871,7 +4882,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {466=[IE11], 467=[CHROME, FF24, FF31], 469=[IE8]}.
+     * Test {466=[IE11], 467=[CHROME, FF24, FF31, FF38], 469=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4881,7 +4892,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {467=[IE11], 468=[CHROME, FF24, FF31], 470=[IE8]}.
+     * Test {467=[IE11], 468=[CHROME, FF24, FF31, FF38], 470=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4891,7 +4902,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {468=[IE11], 469=[CHROME, FF24, FF31], 471=[IE8]}.
+     * Test {468=[IE11], 469=[CHROME, FF24, FF31, FF38], 471=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4902,7 +4913,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {469=[IE11], 470=[CHROME, FF24, FF31], 472=[IE8]}.
+     * Test {469=[IE11], 470=[CHROME, FF24, FF31, FF38], 472=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4912,7 +4923,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {470=[IE11], 471=[CHROME, FF24, FF31], 473=[IE8]}.
+     * Test {470=[IE11], 471=[CHROME, FF24, FF31, FF38], 473=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4922,7 +4933,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {471=[IE11], 472=[CHROME, FF24, FF31], 474=[IE8]}.
+     * Test {471=[IE11], 472=[CHROME, FF24, FF31, FF38], 474=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4932,7 +4943,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {472=[IE11], 473=[CHROME, FF24, FF31], 475=[IE8]}.
+     * Test {472=[IE11], 473=[CHROME, FF24, FF31, FF38], 475=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4942,7 +4953,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {473=[IE11], 474=[CHROME, FF24, FF31], 476=[IE8]}.
+     * Test {473=[IE11], 474=[CHROME, FF24, FF31, FF38], 476=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4952,7 +4963,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {474=[IE11], 475=[CHROME, FF24, FF31], 477=[IE8]}.
+     * Test {474=[IE11], 475=[CHROME, FF24, FF31, FF38], 477=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4962,7 +4973,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {475=[IE11], 476=[CHROME, FF24, FF31], 478=[IE8]}.
+     * Test {475=[IE11], 476=[CHROME, FF24, FF31, FF38], 478=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4972,7 +4983,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {476=[IE11], 477=[CHROME, FF24, FF31], 479=[IE8]}.
+     * Test {476=[IE11], 477=[CHROME, FF24, FF31, FF38], 479=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4982,7 +4993,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {477=[IE11], 478=[CHROME, FF24, FF31], 480=[IE8]}.
+     * Test {477=[IE11], 478=[CHROME, FF24, FF31, FF38], 480=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4992,7 +5003,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {478=[IE11], 479=[CHROME, FF24, FF31], 481=[IE8]}.
+     * Test {478=[IE11], 479=[CHROME, FF24, FF31, FF38], 481=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5002,7 +5013,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {479=[IE11], 480=[CHROME, FF24, FF31], 482=[IE8]}.
+     * Test {479=[IE11], 480=[CHROME, FF24, FF31, FF38], 482=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5012,7 +5023,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {480=[IE11], 481=[CHROME, FF24, FF31], 483=[IE8]}.
+     * Test {480=[IE11], 481=[CHROME, FF24, FF31, FF38], 483=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5022,7 +5033,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {481=[IE11], 482=[CHROME, FF24, FF31], 484=[IE8]}.
+     * Test {481=[IE11], 482=[CHROME, FF24, FF31, FF38], 484=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5032,7 +5043,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {482=[IE11], 483=[CHROME, FF24, FF31], 485=[IE8]}.
+     * Test {482=[IE11], 483=[CHROME, FF24, FF31, FF38], 485=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5042,7 +5053,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {483=[IE11], 484=[CHROME, FF24, FF31], 486=[IE8]}.
+     * Test {483=[IE11], 484=[CHROME, FF24, FF31, FF38], 486=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5052,7 +5063,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {484=[IE11], 485=[CHROME, FF24, FF31], 487=[IE8]}.
+     * Test {484=[IE11], 485=[CHROME, FF24, FF31, FF38], 487=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5062,7 +5073,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {485=[IE11], 486=[CHROME, FF24, FF31], 488=[IE8]}.
+     * Test {485=[IE11], 486=[CHROME, FF24, FF31, FF38], 488=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5072,7 +5083,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {486=[IE11], 487=[CHROME, FF24, FF31], 489=[IE8]}.
+     * Test {486=[IE11], 487=[CHROME, FF24, FF31, FF38], 489=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5082,7 +5093,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {487=[IE11], 488=[CHROME, FF24, FF31], 490=[IE8]}.
+     * Test {487=[IE11], 488=[CHROME, FF24, FF31, FF38], 490=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5092,7 +5103,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {488=[IE11], 489=[CHROME, FF24, FF31], 491=[IE8]}.
+     * Test {488=[IE11], 489=[CHROME, FF24, FF31, FF38], 491=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5102,7 +5113,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {489=[IE11], 490=[CHROME, FF24, FF31], 492=[IE8]}.
+     * Test {489=[IE11], 490=[CHROME, FF24, FF31, FF38], 492=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5112,7 +5123,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {490=[IE11], 491=[CHROME, FF24, FF31], 493=[IE8]}.
+     * Test {490=[IE11], 491=[CHROME, FF24, FF31, FF38], 493=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5122,7 +5133,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {491=[IE11], 492=[CHROME, FF24, FF31], 494=[IE8]}.
+     * Test {491=[IE11], 492=[CHROME, FF24, FF31, FF38], 494=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5132,7 +5143,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {492=[IE11], 493=[CHROME, FF24, FF31], 495=[IE8]}.
+     * Test {492=[IE11], 493=[CHROME, FF24, FF31, FF38], 495=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5142,7 +5153,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {493=[IE11], 494=[CHROME, FF24, FF31], 496=[IE8]}.
+     * Test {493=[IE11], 494=[CHROME, FF24, FF31, FF38], 496=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5152,7 +5163,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {494=[IE11], 495=[CHROME, FF24, FF31], 497=[IE8]}.
+     * Test {494=[IE11], 495=[CHROME, FF24, FF31, FF38], 497=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5162,7 +5173,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {495=[IE11], 496=[CHROME, FF24, FF31], 498=[IE8]}.
+     * Test {495=[IE11], 496=[CHROME, FF24, FF31, FF38], 498=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5172,7 +5183,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {496=[IE11], 497=[CHROME, FF24, FF31], 499=[IE8]}.
+     * Test {496=[IE11], 497=[CHROME, FF24, FF31, FF38], 499=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5182,7 +5193,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {497=[IE11], 498=[CHROME, FF24, FF31], 500=[IE8]}.
+     * Test {497=[IE11], 498=[CHROME, FF24, FF31, FF38], 500=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5193,7 +5204,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {498=[IE11], 499=[CHROME, FF24, FF31], 501=[IE8]}.
+     * Test {498=[IE11], 499=[CHROME, FF24, FF31, FF38], 501=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5203,7 +5214,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {499=[IE11], 500=[CHROME, FF24, FF31], 502=[IE8]}.
+     * Test {499=[IE11], 500=[CHROME, FF24, FF31, FF38], 502=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5213,7 +5224,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {500=[IE11], 501=[CHROME, FF24, FF31], 503=[IE8]}.
+     * Test {500=[IE11], 501=[CHROME, FF24, FF31, FF38], 503=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5224,7 +5235,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {501=[IE11], 502=[CHROME, FF24, FF31], 504=[IE8]}.
+     * Test {501=[IE11], 502=[CHROME, FF24, FF31, FF38], 504=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5235,7 +5246,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {502=[IE11], 503=[CHROME, FF24, FF31], 505=[IE8]}.
+     * Test {502=[IE11], 503=[CHROME, FF24, FF31, FF38], 505=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5246,7 +5257,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {503=[IE11], 504=[CHROME, FF24, FF31], 506=[IE8]}.
+     * Test {503=[IE11], 504=[CHROME, FF24, FF31, FF38], 506=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5257,7 +5268,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {504=[IE11], 505=[CHROME, FF24, FF31], 507=[IE8]}.
+     * Test {504=[IE11], 505=[CHROME, FF24, FF31, FF38], 507=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5267,7 +5278,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {505=[IE11], 506=[CHROME, FF24, FF31], 508=[IE8]}.
+     * Test {505=[IE11], 506=[CHROME, FF24, FF31, FF38], 508=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5278,7 +5289,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {506=[IE11], 507=[CHROME, FF24, FF31], 509=[IE8]}.
+     * Test {506=[IE11], 507=[CHROME, FF24, FF31, FF38], 509=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5289,7 +5300,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {507=[IE11], 508=[CHROME, FF24, FF31], 510=[IE8]}.
+     * Test {507=[IE11], 508=[CHROME, FF24, FF31, FF38], 510=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5299,7 +5310,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {508=[IE11], 509=[CHROME, FF24, FF31], 511=[IE8]}.
+     * Test {508=[IE11], 509=[CHROME, FF24, FF31, FF38], 511=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5309,7 +5320,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {509=[IE11], 510=[CHROME, FF24, FF31], 512=[IE8]}.
+     * Test {509=[IE11], 510=[CHROME, FF24, FF31, FF38], 512=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5319,7 +5330,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {510=[IE11], 511=[CHROME, FF24, FF31], 513=[IE8]}.
+     * Test {510=[IE11], 511=[CHROME, FF24, FF31, FF38], 513=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5329,7 +5340,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {511=[IE11], 512=[CHROME, FF24, FF31], 514=[IE8]}.
+     * Test {511=[IE11], 512=[CHROME, FF24, FF31, FF38], 514=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5339,7 +5350,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {512=[IE11], 513=[CHROME, FF24, FF31], 515=[IE8]}.
+     * Test {512=[IE11], 513=[CHROME, FF24, FF31, FF38], 515=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5349,7 +5360,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {513=[IE11], 514=[CHROME, FF24, FF31], 516=[IE8]}.
+     * Test {513=[IE11], 514=[CHROME, FF24, FF31, FF38], 516=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5359,7 +5370,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {514=[IE11], 515=[CHROME, FF24, FF31], 517=[IE8]}.
+     * Test {514=[IE11], 515=[CHROME, FF24, FF31, FF38], 517=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5369,7 +5380,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {515=[IE11], 516=[CHROME, FF24, FF31], 518=[IE8]}.
+     * Test {515=[IE11], 516=[CHROME, FF24, FF31, FF38], 518=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5379,7 +5390,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {516=[IE11], 517=[CHROME, FF24, FF31], 519=[IE8]}.
+     * Test {516=[IE11], 517=[CHROME, FF24, FF31, FF38], 519=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5389,7 +5400,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {517=[IE11], 518=[CHROME, FF24, FF31], 520=[IE8]}.
+     * Test {517=[IE11], 518=[CHROME, FF24, FF31, FF38], 520=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5399,7 +5410,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {518=[IE11], 519=[CHROME, FF24, FF31], 521=[IE8]}.
+     * Test {518=[IE11], 519=[CHROME, FF24, FF31, FF38], 521=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5409,7 +5420,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {519=[IE11], 520=[CHROME, FF24, FF31], 522=[IE8]}.
+     * Test {519=[IE11], 520=[CHROME, FF24, FF31, FF38], 522=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5419,7 +5430,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {520=[IE11], 521=[CHROME, FF24, FF31], 523=[IE8]}.
+     * Test {520=[IE11], 521=[CHROME, FF24, FF31, FF38], 523=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5429,7 +5440,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {521=[IE11], 522=[CHROME, FF24, FF31], 524=[IE8]}.
+     * Test {521=[IE11], 522=[CHROME, FF24, FF31, FF38], 524=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5439,7 +5450,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {522=[IE11], 523=[CHROME, FF24, FF31], 525=[IE8]}.
+     * Test {522=[IE11], 523=[CHROME, FF24, FF31, FF38], 525=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5449,7 +5460,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {523=[IE11], 524=[CHROME, FF24, FF31], 526=[IE8]}.
+     * Test {523=[IE11], 524=[CHROME, FF24, FF31, FF38], 526=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5459,7 +5470,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {524=[IE11], 525=[CHROME, FF24, FF31], 527=[IE8]}.
+     * Test {524=[IE11], 525=[CHROME, FF24, FF31, FF38], 527=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5469,7 +5480,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {525=[IE11], 526=[CHROME, FF24, FF31], 532=[IE8]}.
+     * Test {525=[IE11], 526=[CHROME, FF24, FF31, FF38], 532=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5479,7 +5490,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {526=[IE11], 527=[CHROME, FF24, FF31], 531=[IE8]}.
+     * Test {526=[IE11], 527=[CHROME, FF24, FF31, FF38], 531=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5489,7 +5500,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {527=[IE11], 528=[CHROME, FF24, FF31], 530=[IE8]}.
+     * Test {527=[IE11], 528=[CHROME, FF24, FF31, FF38], 530=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5499,7 +5510,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {528=[IE11, IE8], 529=[CHROME, FF24, FF31]}.
+     * Test {528=[IE11, IE8], 529=[CHROME, FF24, FF31, FF38]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5510,7 +5521,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {529=[IE11, IE8], 530=[CHROME, FF24, FF31]}.
+     * Test {529=[IE11, IE8], 530=[CHROME, FF24, FF31, FF38]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5520,7 +5531,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {530=[IE11], 531=[CHROME, FF24, FF31], 537=[IE8]}.
+     * Test {530=[IE11], 531=[CHROME, FF24, FF31, FF38], 537=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5530,7 +5541,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {531=[IE11], 532=[CHROME, FF24, FF31], 536=[IE8]}.
+     * Test {531=[IE11], 532=[CHROME, FF24, FF31, FF38], 536=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5540,7 +5551,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {532=[IE11], 533=[CHROME, FF24, FF31], 535=[IE8]}.
+     * Test {532=[IE11], 533=[CHROME, FF24, FF31, FF38], 535=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5550,7 +5561,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {533=[IE11, IE8], 534=[CHROME, FF24, FF31]}.
+     * Test {533=[IE11, IE8], 534=[CHROME, FF24, FF31, FF38]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5561,7 +5572,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {534=[IE11, IE8], 535=[CHROME, FF24, FF31]}.
+     * Test {534=[IE11, IE8], 535=[CHROME, FF24, FF31, FF38]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5571,7 +5582,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {535=[IE11], 536=[CHROME, FF24, FF31], 542=[IE8]}.
+     * Test {535=[IE11], 536=[CHROME, FF24, FF31, FF38], 542=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5581,7 +5592,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {536=[IE11], 537=[CHROME, FF24, FF31], 541=[IE8]}.
+     * Test {536=[IE11], 537=[CHROME, FF24, FF31, FF38], 541=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5591,7 +5602,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {537=[IE11], 538=[CHROME, FF24, FF31], 540=[IE8]}.
+     * Test {537=[IE11], 538=[CHROME, FF24, FF31, FF38], 540=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5601,7 +5612,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {538=[IE11, IE8], 539=[CHROME, FF24, FF31]}.
+     * Test {538=[IE11, IE8], 539=[CHROME, FF24, FF31, FF38]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5611,7 +5622,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {539=[IE11, IE8], 540=[CHROME, FF24, FF31]}.
+     * Test {539=[IE11, IE8], 540=[CHROME, FF24, FF31, FF38]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5621,7 +5632,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {540=[IE11], 541=[CHROME, FF24, FF31], 547=[IE8]}.
+     * Test {540=[IE11], 541=[CHROME, FF24, FF31, FF38], 547=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5631,7 +5642,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {541=[IE11], 542=[CHROME, FF24, FF31], 546=[IE8]}.
+     * Test {541=[IE11], 542=[CHROME, FF24, FF31, FF38], 546=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5641,7 +5652,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {542=[IE11], 543=[CHROME, FF24, FF31], 545=[IE8]}.
+     * Test {542=[IE11], 543=[CHROME, FF24, FF31, FF38], 545=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5651,7 +5662,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {543=[IE11, IE8], 544=[CHROME, FF24, FF31]}.
+     * Test {543=[IE11, IE8], 544=[CHROME, FF24, FF31, FF38]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5661,7 +5672,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {544=[IE11, IE8], 545=[CHROME, FF24, FF31]}.
+     * Test {544=[IE11, IE8], 545=[CHROME, FF24, FF31, FF38]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5671,7 +5682,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {545=[IE11], 546=[CHROME, FF24, FF31], 552=[IE8]}.
+     * Test {545=[IE11], 546=[CHROME, FF24, FF31, FF38], 552=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5681,7 +5692,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {546=[IE11], 547=[CHROME, FF24, FF31], 551=[IE8]}.
+     * Test {546=[IE11], 547=[CHROME, FF24, FF31, FF38], 551=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5691,7 +5702,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {547=[IE11], 548=[CHROME, FF24, FF31], 550=[IE8]}.
+     * Test {547=[IE11], 548=[CHROME, FF24, FF31, FF38], 550=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5701,7 +5712,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {548=[IE11, IE8], 549=[CHROME, FF24, FF31]}.
+     * Test {548=[IE11, IE8], 549=[CHROME, FF24, FF31, FF38]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5711,7 +5722,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {549=[IE11, IE8], 550=[CHROME, FF24, FF31]}.
+     * Test {549=[IE11, IE8], 550=[CHROME, FF24, FF31, FF38]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5721,7 +5732,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {550=[IE11], 551=[CHROME, FF24, FF31], 557=[IE8]}.
+     * Test {550=[IE11], 551=[CHROME, FF24, FF31, FF38], 557=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5731,7 +5742,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {551=[IE11], 552=[CHROME, FF24, FF31], 556=[IE8]}.
+     * Test {551=[IE11], 552=[CHROME, FF24, FF31, FF38], 556=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5741,7 +5752,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {552=[IE11], 553=[CHROME, FF24, FF31], 555=[IE8]}.
+     * Test {552=[IE11], 553=[CHROME, FF24, FF31, FF38], 555=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5751,7 +5762,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {553=[IE11, IE8], 554=[CHROME, FF24, FF31]}.
+     * Test {553=[IE11, IE8], 554=[CHROME, FF24, FF31, FF38]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5761,7 +5772,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {554=[IE11, IE8], 555=[CHROME, FF24, FF31]}.
+     * Test {554=[IE11, IE8], 555=[CHROME, FF24, FF31, FF38]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5771,7 +5782,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {555=[IE11], 556=[CHROME, FF24, FF31], 562=[IE8]}.
+     * Test {555=[IE11], 556=[CHROME, FF24, FF31, FF38], 562=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5781,7 +5792,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {556=[IE11], 557=[CHROME, FF24, FF31], 561=[IE8]}.
+     * Test {556=[IE11], 557=[CHROME, FF24, FF31, FF38], 561=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5791,7 +5802,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {557=[IE11], 558=[CHROME, FF24, FF31], 560=[IE8]}.
+     * Test {557=[IE11], 558=[CHROME, FF24, FF31, FF38], 560=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5801,7 +5812,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {558=[IE11, IE8], 559=[CHROME, FF24, FF31]}.
+     * Test {558=[IE11, IE8], 559=[CHROME, FF24, FF31, FF38]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5811,7 +5822,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {559=[IE11, IE8], 560=[CHROME, FF24, FF31]}.
+     * Test {559=[IE11, IE8], 560=[CHROME, FF24, FF31, FF38]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5821,7 +5832,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {560=[IE11], 561=[CHROME, FF24, FF31], 567=[IE8]}.
+     * Test {560=[IE11], 561=[CHROME, FF24, FF31, FF38], 567=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5831,7 +5842,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {561=[IE11], 562=[CHROME, FF24, FF31], 566=[IE8]}.
+     * Test {561=[IE11], 562=[CHROME, FF24, FF31, FF38], 566=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5841,7 +5852,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {562=[IE11], 563=[CHROME, FF24, FF31], 565=[IE8]}.
+     * Test {562=[IE11], 563=[CHROME, FF24, FF31, FF38], 565=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5851,7 +5862,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {563=[IE11, IE8], 564=[CHROME, FF24, FF31]}.
+     * Test {563=[IE11, IE8], 564=[CHROME, FF24, FF31, FF38]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5861,7 +5872,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {564=[IE11, IE8], 565=[CHROME, FF24, FF31]}.
+     * Test {564=[IE11, IE8], 565=[CHROME, FF24, FF31, FF38]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5871,7 +5882,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {565=[IE11], 566=[CHROME, FF24, FF31], 568=[IE8]}.
+     * Test {565=[IE11], 566=[CHROME, FF24, FF31, FF38], 568=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5881,7 +5892,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {566=[IE11], 567=[CHROME, FF24, FF31], 569=[IE8]}.
+     * Test {566=[IE11], 567=[CHROME, FF24, FF31, FF38], 569=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5891,7 +5902,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {567=[IE11], 568=[CHROME, FF24, FF31], 570=[IE8]}.
+     * Test {567=[IE11], 568=[CHROME, FF24, FF31, FF38], 570=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5901,7 +5912,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {568=[IE11], 569=[CHROME, FF24, FF31], 571=[IE8]}.
+     * Test {568=[IE11], 569=[CHROME, FF24, FF31, FF38], 571=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5911,7 +5922,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {569=[IE11], 570=[CHROME, FF24, FF31], 572=[IE8]}.
+     * Test {569=[IE11], 570=[CHROME, FF24, FF31, FF38], 572=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5921,7 +5932,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {570=[IE11], 571=[CHROME, FF24, FF31], 573=[IE8]}.
+     * Test {570=[IE11], 571=[CHROME, FF24, FF31, FF38], 573=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5931,7 +5942,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {571=[IE11], 572=[CHROME, FF24, FF31], 574=[IE8]}.
+     * Test {571=[IE11], 572=[CHROME, FF24, FF31, FF38], 574=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5941,7 +5952,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {572=[IE11], 573=[CHROME, FF24, FF31], 575=[IE8]}.
+     * Test {572=[IE11], 573=[CHROME, FF24, FF31, FF38], 575=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5951,7 +5962,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {573=[IE11], 574=[CHROME, FF24, FF31], 576=[IE8]}.
+     * Test {573=[IE11], 574=[CHROME, FF24, FF31, FF38], 576=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5961,7 +5972,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {574=[IE11], 575=[CHROME, FF24, FF31], 577=[IE8]}.
+     * Test {574=[IE11], 575=[CHROME, FF24, FF31, FF38], 577=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5971,7 +5982,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {575=[IE11], 576=[CHROME, FF24, FF31], 578=[IE8]}.
+     * Test {575=[IE11], 576=[CHROME, FF24, FF31, FF38], 578=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5981,7 +5992,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {576=[IE11], 577=[CHROME, FF24, FF31], 579=[IE8]}.
+     * Test {576=[IE11], 577=[CHROME, FF24, FF31, FF38], 579=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5991,7 +6002,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {577=[IE11], 578=[CHROME, FF24, FF31], 580=[IE8]}.
+     * Test {577=[IE11], 578=[CHROME, FF24, FF31, FF38], 580=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6001,7 +6012,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {578=[IE11], 579=[CHROME, FF24, FF31], 581=[IE8]}.
+     * Test {578=[IE11], 579=[CHROME, FF24, FF31, FF38], 581=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6011,7 +6022,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {579=[IE11], 580=[CHROME, FF24, FF31], 582=[IE8]}.
+     * Test {579=[IE11], 580=[CHROME, FF24, FF31, FF38], 582=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6021,7 +6032,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {580=[IE11], 581=[CHROME, FF24, FF31], 583=[IE8]}.
+     * Test {580=[IE11], 581=[CHROME, FF24, FF31, FF38], 583=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6031,7 +6042,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {581=[IE11], 582=[CHROME, FF24, FF31], 584=[IE8]}.
+     * Test {581=[IE11], 582=[CHROME, FF24, FF31, FF38], 584=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6041,7 +6052,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {582=[IE11], 583=[CHROME, FF24, FF31], 585=[IE8]}.
+     * Test {582=[IE11], 583=[CHROME, FF24, FF31, FF38], 585=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6052,7 +6063,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {583=[IE11], 584=[CHROME, FF24, FF31], 586=[IE8]}.
+     * Test {583=[IE11], 584=[CHROME, FF24, FF31, FF38], 586=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6062,7 +6073,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {584=[IE11], 585=[CHROME, FF24, FF31], 587=[IE8]}.
+     * Test {584=[IE11], 585=[CHROME, FF24, FF31, FF38], 587=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6072,7 +6083,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {585=[IE11], 586=[CHROME, FF24, FF31], 588=[IE8]}.
+     * Test {585=[IE11], 586=[CHROME, FF24, FF31, FF38], 588=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6082,7 +6093,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {586=[IE11], 587=[CHROME, FF24, FF31], 589=[IE8]}.
+     * Test {586=[IE11], 587=[CHROME, FF24, FF31, FF38], 589=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6092,7 +6103,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {587=[IE11], 588=[CHROME, FF24, FF31], 590=[IE8]}.
+     * Test {587=[IE11], 588=[CHROME, FF24, FF31, FF38], 590=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6102,7 +6113,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {588=[IE11], 589=[CHROME, FF24, FF31], 591=[IE8]}.
+     * Test {588=[IE11], 589=[CHROME, FF24, FF31, FF38], 591=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6112,7 +6123,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {589=[IE11], 590=[CHROME, FF24, FF31], 592=[IE8]}.
+     * Test {589=[IE11], 590=[CHROME, FF24, FF31, FF38], 592=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6122,7 +6133,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {590=[IE11], 591=[CHROME, FF24, FF31], 593=[IE8]}.
+     * Test {590=[IE11], 591=[CHROME, FF24, FF31, FF38], 593=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6132,7 +6143,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {591=[IE11], 592=[CHROME, FF24, FF31], 594=[IE8]}.
+     * Test {591=[IE11], 592=[CHROME, FF24, FF31, FF38], 594=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6142,7 +6153,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {592=[IE11], 593=[CHROME, FF24, FF31], 595=[IE8]}.
+     * Test {592=[IE11], 593=[CHROME, FF24, FF31, FF38], 595=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6152,7 +6163,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {593=[IE11], 594=[CHROME, FF24, FF31], 596=[IE8]}.
+     * Test {593=[IE11], 594=[CHROME, FF24, FF31, FF38], 596=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6163,7 +6174,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {594=[IE11], 595=[CHROME, FF24, FF31], 597=[IE8]}.
+     * Test {594=[IE11], 595=[CHROME, FF24, FF31, FF38], 597=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6173,7 +6184,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {595=[IE11], 596=[CHROME, FF24, FF31], 598=[IE8]}.
+     * Test {595=[IE11], 596=[CHROME, FF24, FF31, FF38], 598=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6183,7 +6194,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {596=[IE11], 597=[CHROME, FF24, FF31], 599=[IE8]}.
+     * Test {596=[IE11], 597=[CHROME, FF24, FF31, FF38], 599=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6193,7 +6204,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {597=[IE11], 598=[CHROME, FF24, FF31], 600=[IE8]}.
+     * Test {597=[IE11], 598=[CHROME, FF24, FF31, FF38], 600=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6203,7 +6214,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {598=[IE11], 599=[CHROME, FF24, FF31], 601=[IE8]}.
+     * Test {598=[IE11], 599=[CHROME, FF24, FF31, FF38], 601=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6213,7 +6224,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {599=[IE11], 600=[CHROME, FF24, FF31], 602=[IE8]}.
+     * Test {599=[IE11], 600=[CHROME, FF24, FF31, FF38], 602=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6223,7 +6234,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {600=[IE11], 601=[CHROME, FF24, FF31], 603=[IE8]}.
+     * Test {600=[IE11], 601=[CHROME, FF24, FF31, FF38], 603=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6233,7 +6244,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {601=[IE11], 602=[CHROME, FF24, FF31], 604=[IE8]}.
+     * Test {601=[IE11], 602=[CHROME, FF24, FF31, FF38], 604=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6243,7 +6254,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {602=[IE11], 603=[CHROME, FF24, FF31], 605=[IE8]}.
+     * Test {602=[IE11], 603=[CHROME, FF24, FF31, FF38], 605=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6253,7 +6264,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {603=[IE11], 604=[CHROME, FF24, FF31], 606=[IE8]}.
+     * Test {603=[IE11], 604=[CHROME, FF24, FF31, FF38], 606=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6263,7 +6274,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {604=[IE11], 605=[CHROME, FF24, FF31], 607=[IE8]}.
+     * Test {604=[IE11], 605=[CHROME, FF24, FF31, FF38], 607=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6274,13 +6285,14 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {605=[IE11], 606=[CHROME, FF24, FF31], 608=[IE8]}.
+     * Test {605=[IE11], 606=[CHROME, FF24, FF31, FF38], 608=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts(CHROME = "0, 2, 2",
         FF24 = "0, 1, 1",
         FF31 = "0, 1, 1",
+        FF38 = "0, 1, 1",
         IE11 = "0, 1, 1",
         IE8 = "0, 2, 2")
     @NotYetImplemented({ CHROME, IE11 })
@@ -6289,7 +6301,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {606=[IE11], 607=[CHROME, FF24, FF31], 609=[IE8]}.
+     * Test {606=[IE11], 607=[CHROME, FF24, FF31, FF38], 609=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6299,7 +6311,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {607=[IE11], 608=[CHROME, FF24, FF31], 610=[IE8]}.
+     * Test {607=[IE11], 608=[CHROME, FF24, FF31, FF38], 610=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6309,7 +6321,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {608=[IE11], 609=[CHROME, FF24, FF31], 611=[IE8]}.
+     * Test {608=[IE11], 609=[CHROME, FF24, FF31, FF38], 611=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6319,7 +6331,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {609=[IE11], 610=[CHROME, FF24, FF31], 612=[IE8]}.
+     * Test {609=[IE11], 610=[CHROME, FF24, FF31, FF38], 612=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6329,7 +6341,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {610=[IE11], 611=[CHROME, FF24, FF31], 613=[IE8]}.
+     * Test {610=[IE11], 611=[CHROME, FF24, FF31, FF38], 613=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6339,7 +6351,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {611=[IE11], 612=[CHROME, FF24, FF31], 614=[IE8]}.
+     * Test {611=[IE11], 612=[CHROME, FF24, FF31, FF38], 614=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6349,7 +6361,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {613=[IE11], 614=[CHROME, FF24, FF31], 616=[IE8]}.
+     * Test {613=[IE11], 614=[CHROME, FF24, FF31, FF38], 616=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6360,7 +6372,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {614=[IE11], 615=[CHROME, FF24, FF31], 617=[IE8]}.
+     * Test {614=[IE11], 615=[CHROME, FF24, FF31, FF38], 617=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6371,7 +6383,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {615=[IE11], 616=[CHROME, FF24, FF31], 618=[IE8]}.
+     * Test {615=[IE11], 616=[CHROME, FF24, FF31, FF38], 618=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6382,7 +6394,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {616=[IE11], 617=[CHROME, FF24, FF31], 619=[IE8]}.
+     * Test {616=[IE11], 617=[CHROME, FF24, FF31, FF38], 619=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6392,7 +6404,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {617=[IE11], 618=[CHROME, FF24, FF31], 620=[IE8]}.
+     * Test {617=[IE11], 618=[CHROME, FF24, FF31, FF38], 620=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6403,7 +6415,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {618=[IE11], 619=[CHROME, FF24, FF31], 621=[IE8]}.
+     * Test {618=[IE11], 619=[CHROME, FF24, FF31, FF38], 621=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6414,7 +6426,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {619=[IE11], 620=[CHROME, FF24, FF31], 622=[IE8]}.
+     * Test {619=[IE11], 620=[CHROME, FF24, FF31, FF38], 622=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6425,7 +6437,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {620=[IE11], 621=[CHROME, FF24, FF31], 623=[IE8]}.
+     * Test {620=[IE11], 621=[CHROME, FF24, FF31, FF38], 623=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6435,7 +6447,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {621=[IE11], 622=[CHROME, FF24, FF31], 624=[IE8]}.
+     * Test {621=[IE11], 622=[CHROME, FF24, FF31, FF38], 624=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6445,7 +6457,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {622=[IE11], 623=[CHROME, FF24, FF31], 625=[IE8]}.
+     * Test {622=[IE11], 623=[CHROME, FF24, FF31, FF38], 625=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6455,7 +6467,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {623=[IE11], 624=[CHROME, FF24, FF31], 626=[IE8]}.
+     * Test {623=[IE11], 624=[CHROME, FF24, FF31, FF38], 626=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6465,7 +6477,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {624=[IE11], 625=[CHROME, FF24, FF31], 627=[IE8]}.
+     * Test {624=[IE11], 625=[CHROME, FF24, FF31, FF38], 627=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6475,7 +6487,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {625=[IE11], 626=[CHROME, FF24, FF31], 628=[IE8]}.
+     * Test {625=[IE11], 626=[CHROME, FF24, FF31, FF38], 628=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6485,7 +6497,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {626=[IE11], 627=[CHROME, FF24, FF31], 629=[IE8]}.
+     * Test {626=[IE11], 627=[CHROME, FF24, FF31, FF38], 629=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6495,7 +6507,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {627=[IE11], 628=[CHROME, FF24, FF31], 630=[IE8]}.
+     * Test {627=[IE11], 628=[CHROME, FF24, FF31, FF38], 630=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6505,7 +6517,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {628=[IE11], 629=[CHROME, FF24, FF31], 631=[IE8]}.
+     * Test {628=[IE11], 629=[CHROME, FF24, FF31, FF38], 631=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6515,7 +6527,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {629=[IE11], 630=[CHROME, FF24, FF31], 632=[IE8]}.
+     * Test {629=[IE11], 630=[CHROME, FF24, FF31, FF38], 632=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6525,7 +6537,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {630=[IE11], 631=[CHROME, FF24, FF31], 633=[IE8]}.
+     * Test {630=[IE11], 631=[CHROME, FF24, FF31, FF38], 633=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6535,7 +6547,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {631=[IE11], 632=[CHROME, FF24, FF31], 634=[IE8]}.
+     * Test {631=[IE11], 632=[CHROME, FF24, FF31, FF38], 634=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6545,7 +6557,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {632=[IE11], 633=[CHROME, FF24, FF31], 635=[IE8]}.
+     * Test {632=[IE11], 633=[CHROME, FF24, FF31, FF38], 635=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6555,7 +6567,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {633=[IE11], 634=[CHROME, FF24, FF31], 636=[IE8]}.
+     * Test {633=[IE11], 634=[CHROME, FF24, FF31, FF38], 636=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6565,7 +6577,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {634=[IE11], 635=[CHROME, FF24, FF31], 637=[IE8]}.
+     * Test {634=[IE11], 635=[CHROME, FF24, FF31, FF38], 637=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6575,7 +6587,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {635=[IE11], 636=[CHROME, FF24, FF31], 638=[IE8]}.
+     * Test {635=[IE11], 636=[CHROME, FF24, FF31, FF38], 638=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6585,7 +6597,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {636=[IE11], 637=[CHROME, FF24, FF31], 639=[IE8]}.
+     * Test {636=[IE11], 637=[CHROME, FF24, FF31, FF38], 639=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6595,7 +6607,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {637=[IE11], 638=[CHROME, FF24, FF31], 640=[IE8]}.
+     * Test {637=[IE11], 638=[CHROME, FF24, FF31, FF38], 640=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6605,7 +6617,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {638=[IE11], 639=[CHROME, FF24, FF31], 641=[IE8]}.
+     * Test {638=[IE11], 639=[CHROME, FF24, FF31, FF38], 641=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6615,7 +6627,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {639=[IE11], 640=[CHROME, FF24, FF31], 642=[IE8]}.
+     * Test {639=[IE11], 640=[CHROME, FF24, FF31, FF38], 642=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6625,7 +6637,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {640=[IE11], 641=[CHROME, FF24, FF31], 643=[IE8]}.
+     * Test {640=[IE11], 641=[CHROME, FF24, FF31, FF38], 643=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6636,7 +6648,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {641=[IE11], 642=[CHROME, FF24, FF31], 644=[IE8]}.
+     * Test {641=[IE11], 642=[CHROME, FF24, FF31, FF38], 644=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6646,7 +6658,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {642=[IE11], 643=[CHROME, FF24, FF31], 645=[IE8]}.
+     * Test {642=[IE11], 643=[CHROME, FF24, FF31, FF38], 645=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6656,7 +6668,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {643=[IE11], 644=[CHROME, FF24, FF31], 646=[IE8]}.
+     * Test {643=[IE11], 644=[CHROME, FF24, FF31, FF38], 646=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6666,7 +6678,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {644=[IE11], 645=[CHROME, FF24, FF31], 647=[IE8]}.
+     * Test {644=[IE11], 645=[CHROME, FF24, FF31, FF38], 647=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6676,7 +6688,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {645=[IE11], 646=[CHROME, FF24, FF31], 648=[IE8]}.
+     * Test {645=[IE11], 646=[CHROME, FF24, FF31, FF38], 648=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6687,7 +6699,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {646=[IE11], 647=[CHROME, FF24, FF31], 649=[IE8]}.
+     * Test {646=[IE11], 647=[CHROME, FF24, FF31, FF38], 649=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6697,7 +6709,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {647=[IE11], 648=[CHROME, FF24, FF31], 650=[IE8]}.
+     * Test {647=[IE11], 648=[CHROME, FF24, FF31, FF38], 650=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6707,7 +6719,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {648=[IE11], 649=[CHROME, FF24, FF31], 651=[IE8]}.
+     * Test {648=[IE11], 649=[CHROME, FF24, FF31, FF38], 651=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6717,7 +6729,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {649=[IE11], 650=[CHROME, FF24, FF31], 652=[IE8]}.
+     * Test {649=[IE11], 650=[CHROME, FF24, FF31, FF38], 652=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6727,7 +6739,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {650=[IE11], 651=[CHROME, FF24, FF31], 653=[IE8]}.
+     * Test {650=[IE11], 651=[CHROME, FF24, FF31, FF38], 653=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6737,7 +6749,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {651=[IE11], 652=[CHROME, FF24, FF31], 654=[IE8]}.
+     * Test {651=[IE11], 652=[CHROME, FF24, FF31, FF38], 654=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6747,7 +6759,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {652=[IE11], 653=[CHROME, FF24, FF31], 655=[IE8]}.
+     * Test {652=[IE11], 653=[CHROME, FF24, FF31, FF38], 655=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6757,7 +6769,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {653=[IE11], 654=[CHROME, FF24, FF31], 656=[IE8]}.
+     * Test {653=[IE11], 654=[CHROME, FF24, FF31, FF38], 656=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6767,7 +6779,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {654=[IE11], 655=[CHROME, FF24, FF31], 657=[IE8]}.
+     * Test {654=[IE11], 655=[CHROME, FF24, FF31, FF38], 657=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6778,7 +6790,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {655=[IE11], 656=[CHROME, FF24, FF31], 658=[IE8]}.
+     * Test {655=[IE11], 656=[CHROME, FF24, FF31, FF38], 658=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6788,7 +6800,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {656=[IE11], 657=[CHROME, FF24, FF31], 659=[IE8]}.
+     * Test {656=[IE11], 657=[CHROME, FF24, FF31, FF38], 659=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6798,7 +6810,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {657=[IE11], 658=[CHROME, FF24, FF31], 660=[IE8]}.
+     * Test {657=[IE11], 658=[CHROME, FF24, FF31, FF38], 660=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6808,7 +6820,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {658=[IE11], 659=[CHROME, FF24, FF31], 661=[IE8]}.
+     * Test {658=[IE11], 659=[CHROME, FF24, FF31, FF38], 661=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6818,7 +6830,7 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * Test {659=[IE11], 660=[CHROME, FF24, FF31], 662=[IE8]}.
+     * Test {659=[IE11], 660=[CHROME, FF24, FF31, FF38], 662=[IE8]}.
      * @throws Exception if an error occurs
      */
     @Test
