@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
@@ -650,7 +651,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             FF38 = { "[object Window]", "topbody", "framebody", "[object Window]", "frame", "frameinput" },
             IE11 = { "[object Window]", "topbody", "framebody", "[object Window]", "frame", "frameinput" },
             IE8 = { "[object]", "topbody", "framebody", "[object]", "topbody", "frameinput" })
-    @NotYetImplemented({ CHROME, IE11 })
+    @NotYetImplemented({ CHROME, IE11, FF38 })
     public void contentWindowAndActiveElement() throws Exception {
         final String firstContent
             = "<html>\n"
