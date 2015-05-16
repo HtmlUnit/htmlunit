@@ -1865,4 +1865,14 @@ public class HostParentOfSTest extends HostParentOf {
         test("SpeechSynthesisUtterance", "SpeechSynthesisUtterance");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE11 = "true")
+    public void _StyleMedia_StyleMedia() throws Exception {
+        test("StyleMedia", "StyleMedia");
+    }
+
 }
