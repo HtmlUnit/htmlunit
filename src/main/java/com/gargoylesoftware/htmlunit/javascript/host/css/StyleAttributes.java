@@ -960,7 +960,34 @@ final class StyleAttributes {
         FLOOD_OPACITY("floodOpacity", "flood-opacity", ff("1"), ie11up("1")),
 
         /** The style property font-feature-settings. */
-        FONT_FEATURE_SETTINGS("fontFeatureSettings", "font-feature-settings", ie11up("normal")),
+        FONT_FEATURE_SETTINGS("fontFeatureSettings", "font-feature-settings", ie11up("normal"), ff38up("normal")),
+
+        /** The style property font-kerning. */
+        FONT_KERNING("fontKerning", "font-kerning", ff38up("auto")),
+
+        /** The style property font-language-override. */
+        FONT_LANGUAGE_OVERRIDE("fontLanguageOverride", "font-language-override", ff38up("normal")),
+
+        /** The style property font-synthesis. */
+        FONT_SYNTHESIS("fontSynthesis", "font-synthesis", ff38up("weight style")),
+
+        /** The style property font-variant-alternates. */
+        FONT_VARIANT_ALTERNATES("fontVariantAlternates", "font-variant-alternates", ff38up("normal")),
+
+        /** The style property font-variant-caps. */
+        FONT_VARIANT_CAPS("fontVariantCaps", "font-variant-caps", ff38up("normal")),
+
+        /** The style property font-variant-east-asian. */
+        FONT_VARIANT_EAST_ASIAN("fontVariantEastAsian", "font-variant-east-asian", ff38up("normal")),
+
+        /** The style property font-variant-ligatures. */
+        FONT_VARIANT_LIGATURES("fontVariantLigatures", "font-variant-ligatures", ff38up("normal")),
+
+        /** The style property font-variant-numeric. */
+        FONT_VARIANT_NUMERIC("fontVariantNumeric", "font-variant-numeric", ff38up("normal")),
+
+        /** The style property font-variant-position. */
+        FONT_VARIANT_POSITION("fontVariantPosition", "font-variant-position", ff38up("normal")),
 
         /** The style property glyph-orientation-horizontal. */
         GLYPH_ORIENTATION_HORIZONTAL("glyphOrientationHorizontal", "glyph-orientation-horizontal", ie11up("0deg")),
@@ -976,6 +1003,9 @@ final class StyleAttributes {
 
         /** The style property ime-mode. */
         IME_MODE("imeMode", "ime-mode", ie11up("undefined")),
+
+        /** The style property isolation. */
+        FONT_VARIANT_ISOLATION("isolation", "isolation", ff38up("auto")),
 
         /** The style property ime-mode. */
         JUSTIFY_CONTENT("justifyContent", "justify-content", ff24up("flex-start"), ie11up("flex-start")),
