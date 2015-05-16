@@ -69,6 +69,14 @@ class BrowserConfiguration {
         return ff(defaultValue).startingWith(31);
     }
 
+    public static BrowserConfiguration ffBelow38(final String defaultValue) {
+        return ff(defaultValue).upTo(37);
+    }
+
+    public static BrowserConfiguration ff38up(final String defaultValue) {
+        return ff(defaultValue).startingWith(38);
+    }
+
     public static BrowserConfiguration ie8up(final String defaultValue) {
         return ie(defaultValue).startingWith(8);
     }

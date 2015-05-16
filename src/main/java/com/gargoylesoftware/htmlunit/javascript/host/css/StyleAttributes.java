@@ -18,6 +18,8 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfigura
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff24up;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff31up;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffBelow31;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff38up;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffBelow38;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ie11up;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ie8up;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ieBelow11;
@@ -138,7 +140,7 @@ final class StyleAttributes {
 
         /** The style property -moz-background-inline-policy. */
         MOZ_BACKGROUND_INLINE_POLICY("MozBackgroundInlinePolicy",
-                "-moz-background-inline-policy", ff("continuous")),
+                "-moz-background-inline-policy", ffBelow38("continuous")),
 
         /** The style property -moz-background-origin. */
         MOZ_BACKGROUND_ORIGIN("MozBackgroundOrigin", "-moz-background-origin"),
@@ -424,7 +426,11 @@ final class StyleAttributes {
         /** The style property -moz-user-select. */
         MOZ_USER_SELECT("MozUserSelect", "-moz-user-select", ff("auto")),
 
-        /** The style property -moz-window-shadow. */
+        /** The style property -moz-window-dragging. */
+        MOZ_WINDOW_DRAGGING("MozWindowDragging", "-moz-window-dragging",
+                ff38up("drag")),
+
+                /** The style property -moz-window-shadow. */
         MOZ_WINDOW_SHADOW("MozWindowShadow", "-moz-window-shadow",
                 ff("default")),
 
@@ -824,6 +830,9 @@ final class StyleAttributes {
         BORDER_TOP_RIGHT_RADIUS("borderTopRightRadius",
                 "border-top-right-radius", ff("0px"), ie11up("0px")),
 
+        /** The style property box-decoration-break. */
+        BOX_DECORATION_BREAK("boxDecorationBreak", "box-decoration-break", ff38up("slice")),
+
         /** The style property box-shadow. */
         BOX_SHADOW("boxShadow", "box-shadow", ff("none"), ie11up("none")),
 
@@ -940,6 +949,9 @@ final class StyleAttributes {
 
         /** The style property flex-wrap. */
         FLEX_WRAP("flexWrap", "flex-wrap", ff31up("nowrap"), ie11up("nowrap")),
+
+        /** The style property float. */
+        FLOAT("float", "float", ff38up("none")),
 
         /** The style property flood-color. */
         FLOOD_COLOR("floodColor", "flood-color", ff("rgb(0, 0, 0)"), ie11up("")),
@@ -1230,6 +1242,9 @@ final class StyleAttributes {
 
         /** The style property volume. */
         VOLUME("volume", "volume"),
+
+        /** The style property will-change. */
+        WILL_CHANGE("willChange", "will-change", ff38up("auto")),
 
         /** The style property widows. */
         WIDOWS("widows", "widows", ie11up("2")),
