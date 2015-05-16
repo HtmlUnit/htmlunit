@@ -442,7 +442,7 @@ public enum BrowserVersionFeatures {
     HTMLCOLLECTION_NULL_IF_ITEM_NOT_FOUND,
 
     /** HtmlCollection returns null instead of undefined if an element was not found. */
-    @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(value = FF, maxVersion = 38) })
+    @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 8), @WebBrowser(value = FF, minVersion = 38) })
     HTMLCOLLECTION_NULL_IF_NOT_FOUND,
 
     /** Allow detection of object type for collection elements. */
