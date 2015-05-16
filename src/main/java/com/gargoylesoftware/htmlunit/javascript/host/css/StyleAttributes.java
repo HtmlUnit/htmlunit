@@ -1057,6 +1057,18 @@ final class StyleAttributes {
         /** The style property mask. */
         MASK("mask", "mask", ff("none"), ie11up("none")),
 
+        /** The style property mask-type. */
+        MASK_TYPE("maskType", "mask-type", ff38up("luminance")),
+
+        /** The style property mix-blend-mode. */
+        MIX_BLEND_MODE("mixBlendMode", "mix-blend-mode", ff38up("normal")),
+
+        /** The style property object-fit. */
+        OBJECT_FIT("objectFit", "object-fit", ff38up("normal")),
+
+        /** The style property object-position. */
+        OBJECT_POSITION("objectPosition", "object-position", ff38up("50% 50%")),
+
         /** The style property order. */
         ORDER("order", "order", ff24up("0"), ie11up("0")),
 
@@ -1108,13 +1120,13 @@ final class StyleAttributes {
         RICHNESS("richness", "richness"),
 
         /** The style property ruby-align. */
-        RUBY_ALIGN("rubyAlign", "ruby-align"),
+        RUBY_ALIGN("rubyAlign", "ruby-align", ff38up("space-around")),
 
         /** The style property ruby-overhang. */
         RUBY_OVERHANG("rubyOverhang", "ruby-overhang", ie11up("auto")),
 
         /** The style property ruby-position. */
-        RUBY_POSITION("rubyPosition", "ruby-position", ie11up("above")),
+        RUBY_POSITION("rubyPosition", "ruby-position", ie11up("above"), ff38up("space-around")),
 
         /** The style property scrollbar-3dlight-color. */
         SCROLLBAR_3DLIGHT_COLOR("scrollbar3dLightColor", "scrollbar-3dlight-color", ie11up("undefined")),
@@ -1139,6 +1151,9 @@ final class StyleAttributes {
 
         /** The style property scrollbar-track-color. */
         SCROLLBAR_TRACK_COLOR("scrollbarTrackColor", "scrollbar-track-color", ie11up("undefined")),
+
+        /** The style property scroll-behavior. */
+        SCROLL_BEHAVIOR("scrollBehavior", "scroll-behavior", ff38up("auto")),
 
         /** The style property shape-rendering. */
         SHAPE_RENDERING("shapeRendering", "shape-rendering", ff("auto")),
@@ -1206,6 +1221,15 @@ final class StyleAttributes {
 
         /** The style property text-autospace. */
         TEXT_AUTOSPACE("textAutospace", "text-autospace", ie11up("undefined")),
+
+        /** The style property text-decoration-color. */
+        TEXT_DECORATION_COLOR("textDecorationColor", "text-decoration-color", ff38up("currentColor")),
+
+        /** The style property text-decoration-line. */
+        TEXT_DECORATION_LINE("textDecorationLine", "text-decoration-line", ff38up("none")),
+
+        /** The style property text-decoration-style. */
+        TEXT_DECORATION_STYLE("textDecorationStyle", "text-decoration-style", ff38up("solid")),
 
         /** The style property text-justify. */
         TEXT_JUSTIFY("textJustify", "text-justify", ie11up("auto")),
