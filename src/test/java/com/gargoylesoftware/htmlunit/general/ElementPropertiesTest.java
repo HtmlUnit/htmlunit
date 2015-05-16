@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF24;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF31;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF38;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -869,7 +870,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "seekable,seeking,src,textTracks,"
                 + "volume",
             IE8 = "")
-    @NotYetImplemented({ CHROME, IE11, FF24, FF31 })
+    @NotYetImplemented({ CHROME, IE11, FF24, FF31, FF38 })
     public void audio() throws Exception {
         test("audio");
     }
@@ -1053,7 +1054,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF38 = "getContext(),height,mozGetAsFile(),mozOpaque,mozPrintCallback,toBlob(),toDataURL(),width",
             IE11 = "getContext(),height,msToBlob(),toDataURL(),width",
             IE8 = "")
-    @NotYetImplemented({ IE11, FF31 })
+    @NotYetImplemented({ IE11, FF31, FF38 })
     public void canvas() throws Exception {
         test("canvas");
     }
@@ -1280,7 +1281,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "willValidate",
             IE11 = "align,checkValidity(),form,setCustomValidity(),validationMessage,validity,willValidate",
             IE8 = "align,form")
-    @NotYetImplemented({ CHROME, IE11, FF24, FF31 })
+    @NotYetImplemented({ CHROME, IE11, FF24, FF31, FF38 })
     public void fieldset() throws Exception {
         test("fieldset");
     }
@@ -1688,7 +1689,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "control,form,htmlFor",
             IE11 = "form,htmlFor",
             IE8 = "dataFld,dataFormatAs,dataSrc,form,htmlFor")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, FF38, CHROME })
     public void label() throws Exception {
         test("label");
     }
@@ -1823,7 +1824,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF31 = "compact,label,type",
             FF38 = "compact,label,type",
             IE = "compact,type")
-    @NotYetImplemented({ IE11, FF31 })
+    @NotYetImplemented({ IE11, FF31, FF38 })
     public void menu() throws Exception {
         test("menu");
     }
@@ -1836,7 +1837,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(FF31 = "checked,defaultChecked,disabled,icon,label,radiogroup,type",
             FF38 = "checked,defaultChecked,disabled,icon,label,radiogroup,type")
-    @NotYetImplemented(FF31)
+    @NotYetImplemented({ FF31, FF38 })
     public void menuitem() throws Exception {
         test("menuitem");
     }
@@ -2040,7 +2041,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "validity,value,"
                 + "willValidate",
             IE = "")
-    @NotYetImplemented({ FF31, CHROME })
+    @NotYetImplemented({ FF31, FF38, CHROME })
     public void output() throws Exception {
         test("output");
     }
@@ -2109,7 +2110,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF38 = "max,position,value",
             IE11 = "form,max,position,value",
             IE8 = "")
-    @NotYetImplemented({ CHROME, IE11, FF24, FF31 })
+    @NotYetImplemented({ CHROME, IE11, FF24, FF31, FF38 })
     public void progress() throws Exception {
         test("progress");
     }
@@ -2246,7 +2247,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF31 = "media,src,type",
             IE11 = "media,src,type",
             IE8 = "")
-    @NotYetImplemented({ CHROME, IE11, FF24, FF31 })
+    @NotYetImplemented({ CHROME, IE11, FF24, FF31, FF38 })
     public void source() throws Exception {
         test("source");
     }
@@ -2295,7 +2296,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF38 = "disabled,media,scoped,sheet,type",
             IE11 = "media,sheet,type",
             IE8 = "media,onerror,onload,styleSheet,type")
-    @NotYetImplemented({ FF31, IE8, CHROME })
+    @NotYetImplemented({ FF31, FF38, IE8, CHROME })
     public void style() throws Exception {
         test("style");
     }
