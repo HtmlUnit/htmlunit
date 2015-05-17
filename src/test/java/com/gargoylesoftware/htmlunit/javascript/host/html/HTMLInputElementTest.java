@@ -631,6 +631,38 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "30", "30", "30", "undefined", "40", "string", "number" },
+            CHROME = {"undefined", "30", "undefined", "30", "30", "30", "40", "50", "string", "number" })
+    public void minLength() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    var input = document.getElementById('text1');\n"
+            + "    alert(input.minlength);\n"
+            + "    alert(input.minLength);\n"
+            + "    alert(input.MinLength);\n"
+            + "    alert(input.getAttribute('minlength'));\n"
+            + "    alert(input.getAttribute('minLength'));\n"
+            + "    alert(input.getAttribute('MinLength'));\n"
+            + "    input.setAttribute('MiNlenGth', 40);\n"
+            + "    alert(input.minLength);\n"
+            + "    input.minLength = 50;\n"
+            + "    alert(input.getAttribute('minlength'));\n"
+            + "    alert(typeof input.getAttribute('minLength'));\n"
+            + "    alert(typeof input.minLength);\n"
+            + "}\n</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<form name='myForm' action='foo'>\n"
+            + "<input type='text' id='text1' minlength='30'/>\n"
+            + "</form></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void typeMaxLength() throws Exception {
         final String html
             = "<html><body>\n"

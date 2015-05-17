@@ -259,12 +259,8 @@ public class HTMLInputElement extends FormField {
     @Override
     protected boolean isAttributeName(final String name) {
         final String nameLC = name.toLowerCase(Locale.ENGLISH);
-        if ("maxlength".equals(nameLC)) {
-            return "maxLength".equals(name);
-        }
-
-        if ("readOnly".equals(nameLC)) {
-            return "readOnly".equals(name);
+        if ("maxlength".equals(nameLC) || "minlength".equals(nameLC) || "readOnly".equals(nameLC)) {
+            return false;
         }
         return super.isAttributeName(name);
     }
@@ -286,6 +282,25 @@ public class HTMLInputElement extends FormField {
     @JsxSetter
     public void setMaxLength(final int length) {
         getDomNodeOrDie().setMaxLength(length);
+    }
+
+    /**
+     * Gets the min length.
+     * @return the min length
+     */
+    @JsxGetter(@WebBrowser(CHROME))
+    public int getMinLength() {
+        final String attrValue = getDomNodeOrDie().getAttribute("minLength");
+        return NumberUtils.toInt(attrValue, -1);
+    }
+
+    /**
+     * Sets the value of "minLength" attribute.
+     * @param length the new value
+     */
+    @JsxSetter(@WebBrowser(CHROME))
+    public void setMinLength(final int length) {
+        getDomNodeOrDie().setMinLength(length);
     }
 
     /**

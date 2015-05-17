@@ -653,6 +653,15 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
+     * Sets the {@code minLength} attribute.
+     *
+     * @param minLength the {@code minLength} attribute
+     */
+    public void setMinLength(final int minLength) {
+        setAttribute("minLength", String.valueOf(minLength));
+    }
+
+    /**
      * Returns the value of the {@code accept} attribute.
      *
      * @return the value of the {@code accept} attribute
