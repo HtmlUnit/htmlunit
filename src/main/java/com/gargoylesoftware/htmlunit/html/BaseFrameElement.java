@@ -350,7 +350,7 @@ public abstract class BaseFrameElement extends HtmlElement {
      */
     @Override
     public void setAttributeNS(final String namespaceURI, final String qualifiedName, String attributeValue) {
-        if ("src".equals(qualifiedName)) {
+        if (null != attributeValue && "src".equals(qualifiedName)) {
             attributeValue = attributeValue.trim();
         }
 
