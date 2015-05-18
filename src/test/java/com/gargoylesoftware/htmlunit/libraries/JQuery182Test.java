@@ -4480,12 +4480,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "2, 0, 2",
-        FF24 = "2, 0, 2",
-        FF31 = "2, 0, 2",
-        FF38 = "0, 2, 2",
-        IE11 = "2, 0, 2",
-        IE8 = "2, 0, 2")
+    @Alerts("0, 2, 2")
     public void ajax__jQuery_ajax___HEAD_requests() throws Exception {
         runTest("ajax: jQuery.ajax - HEAD requests");
     }
