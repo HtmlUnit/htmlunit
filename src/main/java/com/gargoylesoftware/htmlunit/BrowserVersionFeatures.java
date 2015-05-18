@@ -2064,10 +2064,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     STYLESHEET_HREF_EXPANDURL,
 
-    /** Indicates that the href property for a &lt;style type="text/css"&gt; ... &lt;/style&gt; is "". */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
-    STYLESHEET_HREF_STYLE_EMPTY,
-
     /** Indicates that the href property for a &lt;style type="text/css"&gt; ... &lt;/style&gt; is null. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     STYLESHEET_HREF_STYLE_NULL,

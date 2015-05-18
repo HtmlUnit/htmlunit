@@ -20,8 +20,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTOR
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EMPTY_IS_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EXPANDURL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_STYLE_EMPTY;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_STYLE_NULL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -1025,18 +1023,10 @@ public class CSSStyleSheet extends StyleSheet {
         }
 
         // <style type="text/css"> ... </style>
-        if (version.hasFeature(STYLESHEET_HREF_STYLE_EMPTY)) {
-            return "";
-        }
-        else if (version.hasFeature(STYLESHEET_HREF_STYLE_NULL)) {
+        if (version.hasFeature(STYLESHEET_HREF_EMPTY_IS_NULL)) {
             return null;
         }
-        else {
-            final DomNode node = ownerNode_.getDomNodeOrDie();
-            final HtmlPage page = (HtmlPage) node.getPage();
-            final URL url = page.getUrl();
-            return url.toExternalForm();
-        }
+        return "";
     }
 
     /**
