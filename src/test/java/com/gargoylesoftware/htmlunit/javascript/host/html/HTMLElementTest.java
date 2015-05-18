@@ -235,7 +235,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             IE11 = { "text", "i", "i", "[object MSStyleCSSProperties]", "function", "undefined", "undefined" },
             IE8 = { "text", "i", "i", "[object]", "function", "a", "undefined" },
             CHROME = { "text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined" })
-    @NotYetImplemented({ FF, CHROME, IE11 })
+    @NotYetImplemented({ FF, IE11 })
     public void attributesAccess() throws Exception {
         final String html
             = "<html><head>\n"
@@ -3266,7 +3266,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "false,false,false,false,false,true,false", "clearAttributes not available" },
             IE8 = { "false,false,false,false,false,false,false", "false,false,false,false,false,false,false" },
             IE11 = { "false,false,false,false,false,true,false", "false,false,false,false,false,true,false" })
-    @NotYetImplemented({FF, IE11, CHROME })
     public void clearAttributes() throws Exception {
         final String html
             = "<html><head>\n"

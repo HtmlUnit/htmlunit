@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
@@ -45,7 +46,7 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
                     "absbottom", "absmiddle", "baseline", "texttop", "wrong", "" },
             IE = { "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
                 "undefined", "undefined", "undefined", "undefined", "undefined" })
-    @NotYetImplemented
+    @NotYetImplemented({ CHROME, FF, IE8 })
     public void getAlign() throws Exception {
         final String html
             = "<html><body>\n"

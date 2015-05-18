@@ -503,6 +503,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLELEMENT_ALIGN_INVALID,
 
+    /** Handle html attributes as JavaScript properties. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    HTMLELEMENT_ATTRIBUTE_AS_JS_PROPERTY,
+
     /**
      * Indicates that attribute name should be fixed for get/setAttribute(), specifically "className" and "class",
      * only in quirks mode.

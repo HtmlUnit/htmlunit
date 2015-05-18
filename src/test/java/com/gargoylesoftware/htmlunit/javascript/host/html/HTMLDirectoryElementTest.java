@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE11;
 
 import org.junit.Test;
@@ -122,7 +120,7 @@ public class HTMLDirectoryElementTest extends WebDriverTestCase {
                         "null", "", "blah", "A", "1", "a", "A", "i", "I", "u" },
             IE8 = { "", "", "", "A", "", "", "blah", "A", "1", "a", "A", "i", "I", "exception", "I" },
             IE11 = { "", "", "", "A", "null", "", "blah", "A", "1", "a", "A", "i", "I", "exception", "I" })
-    @NotYetImplemented({ FF, IE11, CHROME })
+    @NotYetImplemented(IE11)
     public void type() throws Exception {
         final String html =
                 "<html>\n"

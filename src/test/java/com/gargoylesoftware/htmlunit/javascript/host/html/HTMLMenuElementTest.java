@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -121,7 +124,7 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
             IE8 = { "false", "true", "true", "true", "false", "true", "true",
                     "true", "true", "false", "true", "false", "true", "false", "true", "false" },
             IE11 = { "", "", "", "A", "null", "", "blah", "A", "1", "a", "A", "i", "I", "exception", "I" })
-    @NotYetImplemented
+    @NotYetImplemented({ FF, IE })
     public void type() throws Exception {
         final String html =
                 "<html>\n"

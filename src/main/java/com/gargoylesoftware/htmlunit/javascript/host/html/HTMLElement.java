@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ATTRIBUTE_AS_JS_PROPERTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ATTRIBUTE_FIX_IN_QUIRKS_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_OUTER_HTML_UPPER_CASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_OUTER_INNER_HTML_QUOTE_ATTRIBUTES;
@@ -152,6 +153,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlVariable;
 import com.gargoylesoftware.htmlunit.html.HtmlWordBreak;
 import com.gargoylesoftware.htmlunit.html.SubmittableElement;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
+import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -268,7 +270,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
         @JsxClass(domClass = HtmlMain.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
         @JsxClass(domClass = HtmlVariable.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) })
     })
-public class HTMLElement extends Element {
+public class HTMLElement extends Element implements ScriptableWithFallbackGetter {
 
     private static final Class<?>[] METHOD_PARAMS_OBJECT = new Class[] {Object.class};
     private static final Pattern PERCENT_VALUE = Pattern.compile("\\d+%");
@@ -631,6 +633,31 @@ public class HTMLElement extends Element {
             return domNode.getLocalName().toLowerCase(Locale.ENGLISH);
         }
         return domNode.getLocalName();
+    }
+
+    /**
+    * Looks at attributes with the given name.
+    * {@inheritDoc}
+    */
+    public Object getWithFallback(final String name) {
+        if (getBrowserVersion().hasFeature(HTMLELEMENT_ATTRIBUTE_AS_JS_PROPERTY) && !"class".equals(name)) {
+            final HtmlElement htmlElement = getDomNodeOrNull();
+            if (htmlElement != null) {
+                final DomAttr attr = htmlElement.getAttributeNode(name);
+                if (attr != null && attr.getName().equals(name)) {
+                    final String value = attr.getValue();
+                    if (DomElement.ATTRIBUTE_NOT_DEFINED != value) {
+                        if (LOG.isDebugEnabled()) {
+                            LOG.debug("Found attribute for evaluation of property \"" + name
+                                    + "\" for of " + this);
+                        }
+                        return value;
+                    }
+                }
+            }
+        }
+
+        return NOT_FOUND;
     }
 
     /**
