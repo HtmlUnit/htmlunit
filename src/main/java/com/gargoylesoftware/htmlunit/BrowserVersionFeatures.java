@@ -93,7 +93,7 @@ public enum BrowserVersionFeatures {
     CSS_DISPLAY_BLOCK,
 
     /** Is display style 'block'. */
-    @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 38), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     CSS_DISPLAY_BLOCK2,
 
     /** <code>CSSFontFaceRule.cssText</code> uses \r\n to break lines. */
@@ -141,12 +141,12 @@ public enum BrowserVersionFeatures {
     CSS_PROGRESS_DISPLAY_INLINE,
 
     /** The default value of the display property for the 'rt' tag is always 'ruby-text'. */
-    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(value = FF, minVersion = 38) })
-    CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS,
-
-    /** The default value of the display property for the 'rt' tag is 'inline'. */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     CSS_RT_DISPLAY_INLINE,
+
+    /** The default value of the display property for the 'rt' tag is always 'ruby-text'. */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS,
 
     /** The default value of the display property for the 'script' tag is 'inline' instead of the default one. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
@@ -2067,6 +2067,10 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     STYLESHEET_HREF_EXPANDURL,
+
+    /** Indicates that the href property for a &lt;style type="text/css"&gt; ... &lt;/style&gt; is "". */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    STYLESHEET_HREF_STYLE_EMPTY,
 
     /** Indicates that the href property for a &lt;style type="text/css"&gt; ... &lt;/style&gt; is null. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
