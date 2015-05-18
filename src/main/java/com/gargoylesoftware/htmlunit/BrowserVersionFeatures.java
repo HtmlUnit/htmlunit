@@ -93,7 +93,7 @@ public enum BrowserVersionFeatures {
     CSS_DISPLAY_BLOCK,
 
     /** Is display style 'block'. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 38), @WebBrowser(CHROME) })
     CSS_DISPLAY_BLOCK2,
 
     /** <code>CSSFontFaceRule.cssText</code> uses \r\n to break lines. */
@@ -141,8 +141,12 @@ public enum BrowserVersionFeatures {
     CSS_PROGRESS_DISPLAY_INLINE,
 
     /** The default value of the display property for the 'rt' tag is always 'ruby-text'. */
-    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(value = FF, minVersion = 38) })
     CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS,
+
+    /** The default value of the display property for the 'rt' tag is 'inline'. */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
+    CSS_RT_DISPLAY_INLINE,
 
     /** The default value of the display property for the 'script' tag is 'inline' instead of the default one. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))

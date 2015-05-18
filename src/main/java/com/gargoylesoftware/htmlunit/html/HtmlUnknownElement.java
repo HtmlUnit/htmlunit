@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_BLOCK2;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS;
+
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -80,8 +83,20 @@ public class HtmlUnknownElement extends HtmlElement {
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
         switch (getTagName()) {
+            case HtmlRuby.TAG_NAME:
+                if (hasFeature(CSS_DISPLAY_BLOCK2)) {
+                    return DisplayStyle.INLINE;
+                }
+                return DisplayStyle.RUBY;
             case HtmlRp.TAG_NAME:
+                if (wasCreatedByJavascript() && getParentNode() == null) {
+                    return DisplayStyle.BLOCK;
+                }
+                break;
             case HtmlRt.TAG_NAME:
+                if (hasFeature(CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS)) {
+                    return DisplayStyle.RUBY_TEXT;
+                }
                 if (wasCreatedByJavascript() && getParentNode() == null) {
                     return DisplayStyle.BLOCK;
                 }
