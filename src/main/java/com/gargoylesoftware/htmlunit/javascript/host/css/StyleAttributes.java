@@ -741,6 +741,9 @@ final class StyleAttributes {
         /** The style property animation-name. */
         ANIMATION_NAME("animationName", "animation-name", ff("none"), ie11up("none")),
 
+        /** The style property animation-name. */
+        ANIMATION_MINUS_NAME("animation-name", "animation-name", ff38up("none")),
+
         /** The style property animation-play-state. */
         ANIMATION_PLAY_STATE("animationPlayState", "animation-play-state",
                 ff("running"), ie11up("running")),
