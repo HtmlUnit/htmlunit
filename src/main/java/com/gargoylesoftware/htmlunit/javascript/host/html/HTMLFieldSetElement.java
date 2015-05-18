@@ -65,15 +65,4 @@ public class HTMLFieldSetElement extends FormChild {
         setAlign(align, false);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getWithFallback(final String name) {
-        if ("align".equals(name)) {
-            return NOT_FOUND;
-        }
-        return super.getWithFallback(name);
-    }
-
 }

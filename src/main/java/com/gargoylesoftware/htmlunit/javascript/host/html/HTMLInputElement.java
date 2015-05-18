@@ -22,7 +22,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.io.IOException;
-import java.util.Locale;
 
 import org.apache.commons.lang3.math.NumberUtils;
 import org.xml.sax.helpers.AttributesImpl;
@@ -251,18 +250,6 @@ public class HTMLInputElement extends FormField {
     @JsxSetter({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 11), @WebBrowser(CHROME) })
     public void setSelectionEnd(final int end) {
         ((SelectableTextInput) getDomNodeOrDie()).setSelectionEnd(end);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean isAttributeName(final String name) {
-        final String nameLC = name.toLowerCase(Locale.ENGLISH);
-        if ("maxlength".equals(nameLC) || "minlength".equals(nameLC) || "readOnly".equals(nameLC)) {
-            return false;
-        }
-        return super.isAttributeName(name);
     }
 
     /**

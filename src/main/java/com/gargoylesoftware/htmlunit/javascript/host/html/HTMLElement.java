@@ -152,7 +152,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlVariable;
 import com.gargoylesoftware.htmlunit.html.HtmlWordBreak;
 import com.gargoylesoftware.htmlunit.html.SubmittableElement;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
-import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -269,7 +268,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
         @JsxClass(domClass = HtmlMain.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) }),
         @JsxClass(domClass = HtmlVariable.class, browsers = { @WebBrowser(CHROME), @WebBrowser(FF) })
     })
-public class HTMLElement extends Element implements ScriptableWithFallbackGetter {
+public class HTMLElement extends Element {
 
     private static final Class<?>[] METHOD_PARAMS_OBJECT = new Class[] {Object.class};
     private static final Pattern PERCENT_VALUE = Pattern.compile("\\d+%");
@@ -632,41 +631,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             return domNode.getLocalName().toLowerCase(Locale.ENGLISH);
         }
         return domNode.getLocalName();
-    }
-
-    /**
-     * Looks at attributes with the given name.
-     * {@inheritDoc}
-     */
-    public Object getWithFallback(final String name) {
-        if (!"class".equals(name)) {
-            final HtmlElement htmlElement = getDomNodeOrNull();
-            if (htmlElement != null && isAttributeName(name)) {
-                final String value = htmlElement.getAttribute(name);
-                if (DomElement.ATTRIBUTE_NOT_DEFINED != value) {
-                    if (LOG.isDebugEnabled()) {
-                        LOG.debug("Found attribute for evaluation of property \"" + name
-                            + "\" for of " + this);
-                    }
-                    return value;
-                }
-            }
-        }
-
-        return NOT_FOUND;
-    }
-
-    /**
-     * Indicates if this is the name of a well defined attribute that can be access as property.
-     * Ex: for HtmlInputElement maxlength => false but maxLength => true
-     * @param name the name (case sensitive!)
-     * @return <code>false</code> if no standard attribute exists with this name
-     */
-    protected boolean isAttributeName(final String name) {
-        // can name be an attribute of current element?
-        // first approximation: attribute are all lowercase
-        // this should be improved because it's wrong. For instance: tabIndex, hideFocus, acceptCharset
-        return name.toLowerCase(Locale.ENGLISH).equals(name);
     }
 
     /**
