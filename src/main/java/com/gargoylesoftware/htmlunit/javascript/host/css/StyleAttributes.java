@@ -427,8 +427,7 @@ final class StyleAttributes {
         MOZ_USER_SELECT("MozUserSelect", "-moz-user-select", ff("auto")),
 
         /** The style property -moz-window-dragging. */
-        MOZ_WINDOW_DRAGGING("MozWindowDragging", "-moz-window-dragging",
-                ff38up("drag")),
+        MOZ_WINDOW_DRAGGING("MozWindowDragging", "-moz-window-dragging", ff38up("no-drag")),
 
                 /** The style property -moz-window-shadow. */
         MOZ_WINDOW_SHADOW("MozWindowShadow", "-moz-window-shadow",
@@ -1129,7 +1128,7 @@ final class StyleAttributes {
         RUBY_OVERHANG("rubyOverhang", "ruby-overhang", ie11up("auto")),
 
         /** The style property ruby-position. */
-        RUBY_POSITION("rubyPosition", "ruby-position", ie11up("above"), ff38up("space-around")),
+        RUBY_POSITION("rubyPosition", "ruby-position", ie11up("above"), ff38up("over")),
 
         /** The style property scrollbar-3dlight-color. */
         SCROLLBAR_3DLIGHT_COLOR("scrollbar3dLightColor", "scrollbar-3dlight-color", ie11up("undefined")),
@@ -1226,7 +1225,7 @@ final class StyleAttributes {
         TEXT_AUTOSPACE("textAutospace", "text-autospace", ie11up("undefined")),
 
         /** The style property text-decoration-color. */
-        TEXT_DECORATION_COLOR("textDecorationColor", "text-decoration-color", ff38up("currentColor")),
+        TEXT_DECORATION_COLOR("textDecorationColor", "text-decoration-color", ff38up("rgb(0, 0, 0)")),
 
         /** The style property text-decoration-line. */
         TEXT_DECORATION_LINE("textDecorationLine", "text-decoration-line", ff38up("none")),
