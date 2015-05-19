@@ -116,6 +116,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
     CSS_IMAGE_URL_QUOTED,
 
+    /** The default value of the display property for the 'input' tags is 'inline-block'. */
+    @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 24), @WebBrowser(CHROME), @WebBrowser(IE) })
+    CSS_INPUT_DISPLAY_INLINE_BLOCK,
+
     /** The default value of the display property for the 'keygen' tag is always 'inline'. */
     @BrowserFeature(@WebBrowser(IE))
     CSS_KEYGEN_DISPLAY_INLINE_ALWAYS,
@@ -140,13 +144,21 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
     CSS_PROGRESS_DISPLAY_INLINE,
 
-    /** The default value of the display property for the 'rt' tag is 'inline'. */
+    /** The default value of the display property for the 'rp' tag is 'none'. */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 38))
+    CSS_RP_DISPLAY_NONE,
+
+    /** The default value of the display property for the 'rp' tag is 'inline'. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     CSS_RT_DISPLAY_INLINE,
 
     /** The default value of the display property for the 'rt' tag is always 'ruby-text'. */
-    @BrowserFeature(@WebBrowser(value = IE, minVersion = 11))
+    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 11), @WebBrowser(value = FF, minVersion = 38) })
     CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS,
+
+    /** The default value of the display property for the 'ruby' tag is 'inline'. */
+    @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 31), @WebBrowser(CHROME) })
+    CSS_RUBY_DISPLAY_INLINE,
 
     /** The default value of the display property for the 'script' tag is 'inline' instead of the default one. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))

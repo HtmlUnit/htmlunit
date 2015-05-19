@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_BLOCK;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_INPUT_DISPLAY_INLINE_BLOCK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_DOES_NOT_CLICK_SURROUNDING_ANCHOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_SET_DEFAULT_VALUE_UPDATES_VALUE;
 
@@ -596,10 +596,10 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        if (hasFeature(CSS_DISPLAY_BLOCK)) {
-            return DisplayStyle.INLINE;
+        if (hasFeature(CSS_INPUT_DISPLAY_INLINE_BLOCK)) {
+            return DisplayStyle.INLINE_BLOCK;
         }
-        return DisplayStyle.INLINE_BLOCK;
+        return DisplayStyle.INLINE;
     }
 
     /**
