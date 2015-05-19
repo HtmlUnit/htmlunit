@@ -633,7 +633,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined", "undefined", "undefined","30", "30", "30", "undefined", "40", "string", "number" },
+    @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "30", "30", "30",
+                "undefined", "40", "string", "number" },
             CHROME = {"undefined", "30", "undefined", "30", "30", "30", "40", "50", "string", "number" },
             IE8 = { "30", "undefined", "undefined", "30", "30", "30", "undefined", "30", "string", "number" })
     @NotYetImplemented(IE8)
