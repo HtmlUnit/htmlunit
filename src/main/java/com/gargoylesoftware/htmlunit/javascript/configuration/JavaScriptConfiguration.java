@@ -283,6 +283,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.moz.MozSmsSegmentInfo;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.Performance;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.PerformanceNavigation;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.PerformanceTiming;
+import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesis;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesisUtterance;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.webkitSpeechRecognition;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAElement;
@@ -502,7 +503,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         RTCDataChannelEvent.class, RTCIceCandidate.class, RTCPeerConnectionIceEvent.class, RTCSessionDescription.class,
         Screen.class, ScriptProcessorNode.class, Selection.class, ServiceWorker.class, ServiceWorkerContainer.class,
         ServiceWorkerRegistration.class, Set.class, ShadowRoot.class, SharedWorker.class, SimpleArray.class,
-        SpeechSynthesisUtterance.class,
+        SpeechSynthesis.class, SpeechSynthesisUtterance.class,
         StaticNodeList.class, StereoPannerNode.class, Storage.class, StorageEvent.class, StyleMedia.class,
         StyleSheet.class, StyleSheetList.class, SubtleCrypto.class,
         SVGAElement.class, SVGAltGlyphElement.class, SVGAngle.class, SVGAnimatedAngle.class,
