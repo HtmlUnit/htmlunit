@@ -284,6 +284,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.performance.Performance;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.PerformanceNavigation;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.PerformanceTiming;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesisUtterance;
+import com.gargoylesoftware.htmlunit.javascript.host.speech.webkitSpeechRecognition;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAltGlyphElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAngle;
@@ -542,7 +543,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         UIEvent.class, Uint16Array.class, Uint32Array.class, Uint8Array.class, Uint8ClampedArray.class,
         URL.class,
         URLSearchParams.class, UserProximityEvent.class, ValidityState.class, WaveShaperNode.class, WeakMap.class,
-        WeakSet.class, WebGLRenderingContext.class, webkitRTCPeerConnection.class,
+        WeakSet.class, WebGLRenderingContext.class, webkitRTCPeerConnection.class, webkitSpeechRecognition.class,
         WebSocket.class, WheelEvent.class, Window.class, Worker.class, XMLDocument.class, XDomainRequest.class,
         XMLHttpRequest.class, XMLHttpRequestEventTarget.class, XMLSerializer.class, XPathEvaluator.class,
         XPathNSResolver.class, XPathResult.class, XSLTProcessor.class, XSLTemplate.class};

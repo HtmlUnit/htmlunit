@@ -5803,4 +5803,14 @@ public class HostParentOfATest extends HostParentOf {
         test("EventTarget", "SpeechSynthesisUtterance");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_webkitSpeechRecognition() throws Exception {
+        test("EventTarget", "webkitSpeechRecognition");
+    }
+
 }

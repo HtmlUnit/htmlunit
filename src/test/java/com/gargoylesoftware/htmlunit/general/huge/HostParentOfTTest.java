@@ -550,4 +550,14 @@ public class HostParentOfTTest extends HostParentOf {
         test("XMLHttpRequestEventTarget", "XMLHttpRequestEventTarget");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitSpeechRecognition_webkitSpeechRecognition() throws Exception {
+        test("webkitSpeechRecognition", "webkitSpeechRecognition");
+    }
+
 }

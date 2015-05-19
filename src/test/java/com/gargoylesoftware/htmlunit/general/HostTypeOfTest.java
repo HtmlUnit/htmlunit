@@ -6156,4 +6156,14 @@ public class HostTypeOfTest extends WebDriverTestCase {
         test("StyleMedia");
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void webkitSpeechRecognition() throws Exception {
+        test("webkitSpeechRecognition");
+    }
+
 }

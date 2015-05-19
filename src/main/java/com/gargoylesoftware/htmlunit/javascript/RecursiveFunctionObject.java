@@ -129,9 +129,6 @@ public class RecursiveFunctionObject extends FunctionObject {
         if ("XMLHttpRequest".equals(functionName) && getBrowserVersion().hasFeature(JS_XMLHTTPREQUEST_OBJECT)) {
             return "[object " + functionName + ']';
         }
-        if ("webkitRTCPeerConnection".equals(functionName)) {
-            //return "HOHO";
-        }
 
         return super.getDefaultValue(typeHint);
     }
@@ -184,6 +181,9 @@ public class RecursiveFunctionObject extends FunctionObject {
 
             case "webkitRTCPeerConnection":
                 return "RTCPeerConnection";
+
+            case "webkitSpeechRecognition":
+                return "SpeechRecognition";
 
             default:
         }

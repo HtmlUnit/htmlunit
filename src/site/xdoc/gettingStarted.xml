@@ -55,7 +55,7 @@ public void homePage() throws Exception {
             <source><![CDATA[
 @Test
 public void homePage_Firefox() throws Exception {
-    try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_31)) {
+    try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_38)) {
         final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
         Assert.assertEquals("HtmlUnit - Welcome to HtmlUnit", page.getTitleText());
     }
@@ -110,7 +110,7 @@ public void xpath() throws Exception {
             <source><![CDATA[
 @Test
 public void homePage_proxy() throws Exception {
-    try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_31, "myproxyserver", myProxyPort)) {
+    try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_38, "myproxyserver", myProxyPort)) {
 
         //set proxy username and password 
         final DefaultCredentialsProvider credentialsProvider = (DefaultCredentialsProvider) webClient.getCredentialsProvider();

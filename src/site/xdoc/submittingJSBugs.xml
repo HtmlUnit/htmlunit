@@ -19,7 +19,7 @@
 				Before reporting an issue with JavaScript, it is very preferred if you 
 				isolate the root cause, but just saying 'jQuery' or a given web site is not working, doesn't help much.<br/>
 				To find the offending line, you can put <code>alert()</code> at various places,
-				compare the result of HtmlUnit to a real browser (Internet Explorer or Firefox),
+				compare the result of HtmlUnit to a real browser (Chrome, Firefox or Internet Explorer),
 				and you will mostly be able to provide a tiny failing test case which contains
 				few lines of JavaScript with or without HTML (independent of the whole JavaScript library),
 				please have a look at <a href="http://sourceforge.net/p/htmlunit/code/HEAD/tree/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/html/">some sample test cases</a>.<br/>

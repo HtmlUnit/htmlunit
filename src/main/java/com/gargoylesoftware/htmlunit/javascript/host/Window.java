@@ -139,6 +139,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.Performance;
+import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesis;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -2251,6 +2252,18 @@ public class Window extends EventTarget implements ScriptableWithFallbackGetter,
         mediaQueryList.setParentScope(this);
         mediaQueryList.setPrototype(getPrototype(mediaQueryList.getClass()));
         return mediaQueryList;
+    }
+
+    /**
+     * Returns the {@code speechSynthesis} property.
+     * @return the {@code speechSynthesis} property
+     */
+    @JsxGetter(@WebBrowser(CHROME))
+    public SpeechSynthesis getSpeechSynthesis() {
+        final SpeechSynthesis speechSynthesis = new SpeechSynthesis();
+        speechSynthesis.setParentScope(this);
+        speechSynthesis.setPrototype(getPrototype(speechSynthesis.getClass()));
+        return speechSynthesis;
     }
 }
 

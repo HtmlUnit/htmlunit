@@ -8383,4 +8383,14 @@ public class HostClassNameStandardsTest extends WebDriverTestCase {
         test("StyleMedia");
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SpeechRecognition() { [native code] }")
+    public void webkitSpeechRecognition() throws Exception {
+        test("webkitSpeechRecognition");
+    }
+
 }
